@@ -15,11 +15,19 @@ name: 🛟 PR head skip-ci guard
 # 2026-10-25 確認。同日 PR #1176 で先頭 569a88c44 の品質チェックが承認待ちのまま止まった)。
 # 品質チェックが承認待ちで完了したことを workflow_run で受け、それが open な develop→main PR の先頭なら
 # 同じく workflow_dispatch で起動し直す。workflow_run も default branch (main) の定義で動く。
+#
+# 三つ目の経路: main へのマージコミットの本文に skip 指定が入ると、main への push の run が 1 本も作られず、
+# 本番デプロイ (deploy-workers.yml) が起動しない。squash の既定の本文は取り込んだコミットの件名を並べるので、
+# develop に CI の記録コミット ([skip ci] 付き) が 1 つでもあると起きる (2026-11-13 に PR #1257 の squash bd6f1bb35 で発生)。
+# skip 指定が効くのは push と pull_request だけなので (上の Skipping workflow runs、2026-11-14 確認)、
+# PR の closed (merged) を pull_request_target で受け、マージコミットの本文に skip 指定があれば
+# deploy-workers.yml を workflow_dispatch で main に起動する。skip 指定が無いときは push のデプロイが走るので何もしない。
+# workflow_dispatch のデプロイは範囲の判定 (plan-deploy-scope.mjs) を通らず、必ずデプロイする。
 
 on:
   pull_request_target:
     branches: [main]
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened, closed]
   workflow_run:
     workflows: ["🔍 Pull Request Quality Check"]
     types: [completed]
@@ -36,7 +44,7 @@ concurrency:
 jobs:
   redispatch:
     name: Re-run quality check for a skip-ci head
-    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'develop'
+    if: github.event.action != 'closed' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'develop'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -85,3 +93,24 @@ jobs:
           fi
           echo "先頭 ${HEAD_SHA} の品質チェックが承認待ち。pr-quality-check.yml を develop で起動する (PR #${PR_NUMBER})"
           gh workflow run pr-quality-check.yml --repo "$REPO" --ref develop -f pr_number="$PR_NUMBER" -f base_sha="$BASE_SHA"
+
+  deploy-after-skip-ci-merge:
+    name: Deploy when the merge commit skips CI
+    if: github.event.action == 'closed' && github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: 🚀 Dispatch the production deploy when the merge commit skips CI
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          MERGE_SHA: ${{ github.event.pull_request.merge_commit_sha }}
+        run: |
+          MESSAGE=$(gh api "repos/$REPO/commits/$MERGE_SHA" --jq .commit.message)
+          if ! printf '%s' "$MESSAGE" | grep -qiE '\[(skip ci|ci skip|no ci|skip actions|actions skip)\]'; then
+            echo "マージコミット ${MERGE_SHA} は skip 指定を含まない。push の本番デプロイが走るので何もしない"
+            exit 0
+          fi
+          echo "マージコミット ${MERGE_SHA} が skip 指定を含み、push の run が作られない。deploy-workers.yml を main で起動する (PR #${PR_NUMBER})"
+          gh workflow run deploy-workers.yml --repo "$REPO" --ref main

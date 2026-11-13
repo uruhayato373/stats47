@@ -31,7 +31,7 @@ npm run weekly:collect   # = scripts/scheduled/weekly-saturday.sh。ログは ~/
 ## Phase 0: NSM snapshot
 
 ```bash
-node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
+node .claude/scripts/metrics/snapshot-weekly-metrics.mjs [YYYY-Www]
 ```
 
 同じ週次証拠として事業計画stateを検証・記録する。

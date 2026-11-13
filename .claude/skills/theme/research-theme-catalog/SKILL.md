@@ -52,7 +52,7 @@ npm run theme:dashboard-catalog:query -- <theme>
 cat .claude/skills/theme/research-theme-catalog/reference/notebooks.md
 
 # 対象テーマの白書に問う (引用付き回答だけ受領・PDF はコンテキストに載せない)
-node .claude/scripts/notebooklm-cross-query.mjs \
+node .claude/scripts/notebooklm/notebooklm-cross-query.mjs \
   --notebooks "<対象白書ノートブック名>" \
   "<theme> の地域差を示す統計指標に加え、政策上の問い、対象集団、供給・アクセス・参加・成果等の論点を列挙してください。各項目に引用と出典統計名を付けてください。"
 ```

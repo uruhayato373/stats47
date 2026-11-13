@@ -85,6 +85,8 @@ develop→main の PR を開く / 既に開いていると、その commit を h
 先頭の SHA に Code Quality Check が success で付いたが、PR の `statusCheckRollup` には入らず `mergeStateStatus` は BLOCKED のままだった。
 このときは dispatch で待たず、上の手順どおり後続の実コミットを push する。
 
+**マージコミットの本文に skip 指定が入ると本番デプロイが起動しない (2026-11-14〜自動の手当て)**: squash マージの既定の本文は取り込んだコミットの件名を並べるので、develop に CI の記録コミット (`[skip ci]` 付き) が 1 つでもあると、main に入る squash コミットの本文に skip 指定が入る。GitHub は push のコミットメッセージのどこにあっても skip 指定を拾い、skip 指定が効くのは `push` と `pull_request` だけである ([Skipping workflow runs](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/skip-workflow-runs)、2026-11-14 確認)。2026-11-13 に PR #1257 の squash `bd6f1bb35` で main への push の run が 1 本も作られず、`deploy-workers.yml` を手で起動して出した。`.husky/commit-msg` はローカルのコミットだけを見るので、GitHub が作る本文は止められない。記録コミットの skip 指定は develop での無駄な run を止める正当な用途なので外さず、`pr-skip-ci-head-guard.yml` の job `deploy-after-skip-ci-merge` が PR の `closed` (merged) を `pull_request_target` で受け、マージコミット (`merge_commit_sha`) の本文に skip 指定があるときだけ `deploy-workers.yml` を `workflow_dispatch` で main に起動する。skip 指定が無いマージでは push のデプロイが走るので何もせず、二重にはならない。`workflow_dispatch` のデプロイは「デプロイの要否」の範囲の判定を通らず必ずデプロイし、main への push で動くほかの workflow (`security-scan.yml` など) は起動し直さない。契約テストは `pr-skip-ci-head-guard.test.cjs` (見張り役の step を、gh の呼び出しを記録するだけのコマンドに差し替えて実際に動かす)。これも main の定義で動くので **main にマージされてから効き、実際のマージでの起動はまだ観測していない**。マージ後は `gh run list --workflow deploy-workers.yml --branch main --limit 3` でデプロイの run ができたことを確かめ、無ければ `gh workflow run deploy-workers.yml --ref main` で起動する。
+
 #### commit 件名にトークンを書かない
 
 GitHub は **commit メッセージ内のどこにあっても** skip トークン (`[skip ci]` / `[ci skip]` /

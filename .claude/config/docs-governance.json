@@ -147,11 +147,7 @@
     "scriptsRoot": {
       "directory": ".claude/scripts",
       "allowedFiles": [
-        "cleanup-browser.sh",
-        "notebooklm-cross-query.mjs",
-        "notebooklm-notebook-builder.mjs",
         "setup-memory-symlink.mjs",
-        "snapshot-weekly-metrics.mjs",
         "tsconfig.checkjs.json",
         "tsconfig.json"
       ]

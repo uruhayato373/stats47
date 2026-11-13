@@ -3,9 +3,9 @@
 `/research-theme-catalog` の Stage 1a で参照する NotebookLM ノートブックの登録簿。
 テーマの指標調査時、対象テーマに対応する白書ノートブックが**未登録なら増設し、この台帳を更新する**。
 
-> 増設: `node .claude/scripts/notebooklm-notebook-builder.mjs find-or-create "<名前>"` →
+> 増設: `node .claude/scripts/notebooklm/notebooklm-notebook-builder.mjs find-or-create "<名前>"` →
 > `add-source --notebook "<名前>" --file <白書PDF> --title "<白書名>"` → 下表に追記。
-> クエリ: `node .claude/scripts/notebooklm-cross-query.mjs --notebooks "<名前>" "<質問>"`。
+> クエリ: `node .claude/scripts/notebooklm/notebooklm-cross-query.mjs --notebooks "<名前>" "<質問>"`。
 > Codex の MCP 接続手順は `.claude/rules/local-environment.md`「Windows の NotebookLM 連携」を参照。
 > MCP では `notebook_list` → `source_list` (`status: "ready"`) → `chat_ask` の順に使う。
 

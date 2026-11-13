@@ -34,7 +34,7 @@ primary_agent: ranking-content-author
 - 詳細セットアップ: `.claude/skills/blog/notebooklm-research/SKILL.md`
 
 ### ラッパースクリプト
-- `.claude/scripts/notebooklm-cross-query.mjs` (横断クエリ、`--json` 出力)
+- `.claude/scripts/notebooklm/notebooklm-cross-query.mjs` (横断クエリ、`--json` 出力)
 - 利用可能 notebook 4 件 (SKILL.md 「利用可能ノートブック」参照、stats47 では主に「最新の白書」)
 
 ### ai_content 関連の既存資源（DBレス）
@@ -89,17 +89,17 @@ NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.sta
 
 ```bash
 # (a) 社会的背景・政策動向
-node .claude/scripts/notebooklm-cross-query.mjs --json \
+node .claude/scripts/notebooklm/notebooklm-cross-query.mjs --json \
   --notebooks "最新の白書" \
   "「{rankingName}」の社会的背景・近年の政策動向を白書記述から教えてください。具体的な事例があれば 2-3 件併記してください。"
 
 # (b) 上位県・下位県の地域特性
-node .claude/scripts/notebooklm-cross-query.mjs --json \
+node .claude/scripts/notebooklm/notebooklm-cross-query.mjs --json \
   --notebooks "最新の白書" \
   "上位 5 県 ({top5}) と下位 5 県 ({bottom5}) の地域特性 (産業/人口/地理) を白書から整理してください。"
 
 # (c) 自治体事例・取組
-node .claude/scripts/notebooklm-cross-query.mjs --json \
+node .claude/scripts/notebooklm/notebooklm-cross-query.mjs --json \
   --notebooks "最新の白書" \
   "「{rankingName}」に関連する自治体施策・取組を 2-3 件、白書から教えてください。"
 ```
@@ -235,7 +235,7 @@ R2 PUT: app/ranking/<ranking_key>/ai-content.json (last-modified YYYY-MM-DDTHH:M
 - 改善バックログ: `.claude/todo/improvements.md`
 - 効果判定ルール: `.claude/rules/evidence-based-judgment.md` (effect/* 付与前必読)
 - GSC 抽出: `.claude/scripts/gsc/extract-low-ctr-ranking-pages.mjs`
-- NotebookLM ラッパー: `.claude/scripts/notebooklm-cross-query.mjs`
+- NotebookLM ラッパー: `.claude/scripts/notebooklm/notebooklm-cross-query.mjs`
 
 ## 完了条件
 

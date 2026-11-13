@@ -41,7 +41,7 @@ import { AREA_DATABOOK_TEMPLATE, collectTemplateMetricKeys, listTemplateCharts }
 import { CATEGORIES } from '../../../packages/data-configs/src/categories';
 import { collectChartDependencies } from '../../../packages/data-configs/src/theme-catalog/chart-dependencies';
 import { BLOG_SLUG_REDIRECTS } from '../src/config/blog-redirects';
-import { GONE_BLOG_SLUGS } from '../src/config/gone-blog-slugs';
+import { GONE_BLOG_SLUGS, GONE_BLOG_TITLES } from '../src/config/gone-blog-slugs';
 import { KNOWN_TAG_KEYS } from '../src/config/known-tag-keys';
 import { KNOWN_THEME_SLUGS } from '../src/config/known-theme-slugs';
 import { UNPUBLISHED_BLOG_SLUGS } from '../src/config/unpublished-blog-slugs';
@@ -293,6 +293,7 @@ async function run() {
       previous: previousBlogLedger,
       snapshot: blogEntries,
       goneSlugs: GONE_BLOG_SLUGS,
+      goneTitles: GONE_BLOG_TITLES,
       unpublishedSlugs: UNPUBLISHED_BLOG_SLUGS,
       tagIdsOf: contentTagIds,
     });

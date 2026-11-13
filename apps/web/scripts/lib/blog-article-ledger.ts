@@ -79,16 +79,19 @@ const emptyRecord = (
  *   - 一覧にある記事は、一覧の内容で記録を作り直す。410 の一覧にある slug は状態を gone にする
  *   - 一覧から消えた記事の記録は消さない。状態を gone にし、本文の所在を外す (題・日付・指標・タグは最後の値を残す)
  *   - 410 の一覧・未公開の一覧にあって台帳に無い slug は、状態だけを持つ記録として足す
+ *   - R2 の一覧で題を見たことが無い 410 の slug は、410 の一覧に書いた題 (goneTitles) を使う。R2 の一覧で見た題は上書きしない
  * 一覧が空のときは止める (全記事を gone にしない)。
  */
 export function upsertBlogArticleLedger(input: {
   previous: BlogArticleLedger | undefined;
   snapshot: readonly BlogSnapshotArticle[];
   goneSlugs: ReadonlySet<string>;
+  goneTitles: ReadonlyMap<string, string>;
   unpublishedSlugs: ReadonlySet<string>;
   tagIdsOf: (tagKeys: string[]) => string[];
 }): BlogArticleLedger {
-  const { previous, snapshot, goneSlugs, unpublishedSlugs, tagIdsOf } = input;
+  const { previous, snapshot, goneSlugs, goneTitles, unpublishedSlugs, tagIdsOf } =
+    input;
   if (snapshot.length === 0)
     throw new Error('blog snapshot が 0 件です。記事台帳を更新しません。');
   const records = new Map<string, BlogArticleRecord>();
@@ -112,10 +115,19 @@ export function upsertBlogArticleLedger(input: {
   }
   for (const record of previous?.articles ?? []) {
     if (records.has(record.slug)) continue;
-    records.set(record.slug, { ...record, status: 'gone', r2Path: null });
+    records.set(record.slug, {
+      ...record,
+      title: record.title ?? goneTitles.get(record.slug) ?? null,
+      status: 'gone',
+      r2Path: null,
+    });
   }
   for (const slug of goneSlugs)
-    if (!records.has(slug)) records.set(slug, emptyRecord(slug, 'gone'));
+    if (!records.has(slug))
+      records.set(slug, {
+        ...emptyRecord(slug, 'gone'),
+        title: goneTitles.get(slug) ?? null,
+      });
   for (const slug of unpublishedSlugs)
     if (!records.has(slug)) records.set(slug, emptyRecord(slug, 'unpublished'));
   return { schemaVersion: 1, articles: [...records.values()].sort(bySlug) };

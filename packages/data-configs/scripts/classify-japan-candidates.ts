@@ -32,14 +32,11 @@ import { THEME_CATALOGS } from "../src/theme-catalog/index";
 import { getMetricConfig } from "../src/registry";
 
 import type { CatalogMetric } from "../src/theme-catalog/types";
-import { datasetDir } from "../../../config/datasets.mjs";
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "../../..");
-const LIVE_AUDIT_PATH = path.join(
-  REPO_ROOT,
-  `${datasetDir("themes.chart-audit")}/live-audit.json`,
-);
+const LIVE_AUDIT_PATH = path.join(REPO_ROOT, datasetPath("themes.live-audit"));
 
 interface LiveAudit {
   auditedAt: string;

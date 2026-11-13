@@ -212,12 +212,14 @@ note ランキング記事の**リライトを楽にする**ため、記事ご�
 チャート再生成・数値検算ができる。
 
 - **新規記事**: `post-note-ranking` の Step 7.5 が作業コピーに `data-provenance.json` を生成し、`note:article save` で R2 へ保存する。
-- **既存記事の backfill**: `node .claude/scripts/note/catalog/backfill-note-data-provenance.mjs`
+- **既存記事の backfill**: `node .claude/scripts/note/catalog/backfill-note-data-provenance.mjs [--limit N] [--slug a,b]`
+  - 対象は記事台帳の stats47-note。記事のファイル一覧は台帳の `body.manifest` が指す private R2 のマニフェスト
+    (`note-archive/manifests/<key>/<sha>.json`) から、`draft.md` は台帳の `body.store` のバケットから読む (R2 の認証が要る。`note:article checkout` と同じ)。
   - slug (`a-<key>`) + draft.md の `stats47.jp/ranking/<key>` リンク + values.json の rank1/47 値照合で
-    rankingKey/年を**決定的に導出** (捏造しない)。`.local/r2/note/<vertical>/<slug>/data-provenance.json` に staging。
-  - 分類: `confirmed` (rank1+47 一致) / `partial` (D 系など一部不一致・要目視) / `no-chart` / `no-r2`。
-  - **実測 (2026-07-15)**: stats47-note 187 件中 confirmed 8 / partial 4 / no-chart 16 / **no-r2 159**。
-    no-r2 159 は `recovered-*` = note.com URL 回収スタブで **R2 記事本体が無く provenance を貼れない**
-    (published index の実態。カタログ+backfill で初めて可視化)。実 backfill 対象は R2 本体を持つ生成記事。
-- **R2 反映**: backfill の staging を記事の作業コピーへ置き、`note:article save <key>` で保存する
-  (台帳のマニフェストが更新される。`diff-push-r2` で記事本文を直接書かない。旧 `manifest.json` 依存は NOTE-PROVENANCE-BACKFILL-MANIFEST-01)。
+    rankingKey/年を**決定的に導出** (捏造しない)。
+  - 分類: `confirmed` (rank1+47 一致) / `partial` (D 系など一部不一致・要目視) / `ambiguous` / `no-chart` / `no-r2` (本文を R2 に保存していない)。
+  - **実測 (2026-07-15・旧 `manifest.json` を読んでいた版)**: stats47-note 187 件中 confirmed 8 / partial 4 / no-chart 16 / **no-r2 159**。
+    no-r2 159 は `recovered-*` = note.com URL 回収スタブで **R2 記事本体が無く provenance を貼れない**。実 backfill 対象は R2 本体を持つ生成記事。
+- **R2 反映**: backfill は R2 へ書かない。`confirmed`・`partial` の記事は作業コピー (`docs/31_note記事原稿/<key>/`) に保存済みの全ファイルを取り出し、
+  `data-provenance.json` を足す。末尾に出る `npm run note:article -- save <key...>` で保存する (台帳のマニフェストが更新される。`diff-push-r2` で記事本文を直接書かない)。
+  作業コピーに未保存の変更がある記事には置かず (`local-modified`)、保存済みと同じ内容なら作業コピーを作らない (`unchanged`)。

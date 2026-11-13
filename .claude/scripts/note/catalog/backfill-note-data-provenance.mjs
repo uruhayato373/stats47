@@ -12,60 +12,33 @@
  *   - 裏取り:     app/ranking/<key>/values.json の該当年 partition の rank1/rank47 を
  *                 draft.md 記載の「1位/47位」と照合 (一致しなければ ambiguous に分類)
  *
- * 出力 (read-only 導出 + staging。R2 push はしない):
- *   .local/r2/note/<vertical>/<slug>/data-provenance.json   (staging = R2 レイアウトのミラー)
- *   /tmp/.../note-provenance-backfill.json                  (triage レポート)
+ * 入力 (読むだけ):
+ *   - 対象の記事と本文の所在: 記事台帳 data/note/articles.json (stats47-note で本文を R2 に保存済みの記事)
+ *   - 記事のファイル一覧: 台帳の body.manifest が指す private R2 のマニフェスト (note-archive/manifests/<key>/<sha>.json)
+ *   - draft.md: 台帳の body.store が指すバケット (無料は公開 R2、有料は private R2)
  *
- * R2 への反映は記事の作業コピーへ置いて `npm run note:article -- save <key>` で行う (台帳を通す。旧 push-note-provenance.yml は 2026-10-13 に廃止。移行は NOTE-PROVENANCE-BACKFILL-MANIFEST-01)。
+ * 出力 (R2 へは書かない):
+ *   docs/31_note記事原稿/<key>/data-provenance.json   (記事の作業コピー。無ければ保存済みの全ファイルを取り出してから置く)
+ *   /tmp/.../note-provenance-backfill.json            (triage レポート)
+ *
+ * R2 への反映は、置いた作業コピーを `npm run note:article -- save <key>` で保存する (衝突検査と旧版の退避を通り、台帳のマニフェストが更新される)。
+ * 作業コピーに未保存の変更がある記事には置かない (local-modified)。保存済みの復元マニフェストと同じ内容なら作業コピーを作らない (unchanged)。
  *
  * Usage:
  *   node .claude/scripts/note/catalog/backfill-note-data-provenance.mjs [--limit N] [--slug a,b]
  */
-import { readFileSync, writeFileSync, mkdirSync } from "fs";
+import { existsSync, readFileSync, writeFileSync, mkdirSync, rmSync } from "fs";
 import { resolve, join, dirname } from "path";
-import { fileURLToPath } from "url";
+import { fileURLToPath, pathToFileURL } from "url";
 import { tmpdir } from "os";
 import { R2_PUBLIC_BASE_URL } from "../../lib/site-config.cjs";
-import { datasetPath } from "../../../../config/datasets.mjs";
+import { hasStoredBody, readArticleLedger } from "../lib/article-ledger.mjs";
+import { createArticleStores, loadArticleFiles, readLocalFiles, readManifest, sha256, workingDir } from "../lib/article-store.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "../../../..");
 const R2 = R2_PUBLIC_BASE_URL;
-const STAGE = join(ROOT, ".local/r2");
-const REPORT = join(process.env.SCRATCHPAD || tmpdir(), "note-provenance-backfill.json");
-
-const argv = process.argv.slice(2);
-const LIMIT = argv.includes("--limit") ? Number(argv[argv.indexOf("--limit") + 1]) : Infinity;
-const ONLY = argv.includes("--slug") ? argv[argv.indexOf("--slug") + 1].split(",") : null;
-
-// KNOWN ranking keys
-const knownSrc = readFileSync(
-  join(ROOT, "packages/ranking/src/config/known-ranking-keys.ts"),
-  "utf8",
-);
-const KNOWN = new Set(
-  [...knownSrc.slice(knownSrc.indexOf("new Set([")).matchAll(/"([a-z0-9-]{3,})"/g)].map(
-    (m) => m[1],
-  ),
-);
-
-// 対象: stats47-note の published + draft (R2 本体を持つものだけ後段で残る)
-const pub = JSON.parse(
-  readFileSync(join(ROOT, datasetPath("note.published-urls")), "utf8"),
-).articles;
-const dft = JSON.parse(
-  readFileSync(join(ROOT, datasetPath("note.draft-index")), "utf8"),
-).drafts;
-const byKey = new Map();
-for (const [slug, v] of Object.entries(pub))
-  if (!slug.startsWith("_") && v.vertical === "stats47-note")
-    byKey.set(slug, { slug, r2Path: v.r2_path || `note/stats47-note/${slug}`, title: v.title });
-for (const [slug, v] of Object.entries(dft))
-  if (v.vertical === "stats47-note" && !byKey.has(slug))
-    byKey.set(slug, { slug, r2Path: v.r2_path || `note/stats47-note/${slug}`, title: slug });
-let targets = [...byKey.values()];
-if (ONLY) targets = targets.filter((t) => ONLY.includes(t.slug));
-targets = targets.slice(0, LIMIT);
+export const PROVENANCE_FILE = "data-provenance.json";
 
 async function fetchText(url) {
   try {
@@ -129,18 +102,57 @@ async function pool(items, n, fn) {
   return out;
 }
 
-const results = await pool(targets, 8, async (t) => {
-  const manifest = await fetchJson(`${R2}/${t.r2Path}/manifest.json`);
-  const draft = await fetchText(`${R2}/${t.r2Path}/draft.md`);
-  if (!manifest || !draft) return { ...t, status: "no-r2" };
+/**
+ * 復元マニフェストを記事の作業コピーへ置く。作業コピーが無ければ保存済みの全ファイルを取り出す
+ * (note:article save は作業コピーに無いファイルを R2 から消すので、復元マニフェストだけの作業コピーは作らない)。
+ * 作業コピーが保存済みと違う (未保存の変更がある) ときは何もせず false を返す。
+ */
+async function placeInWorkingCopy(article, manifest, bytes, stores, root) {
+  const dir = workingDir(article, root);
+  if (existsSync(join(dir, "draft.md"))) {
+    // 前回この backfill が置いた復元マニフェストだけは、保存済みと違っていてよい
+    const local = readLocalFiles(dir).filter((f) => f.name !== PROVENANCE_FILE);
+    const saved = manifest.files.filter((f) => f.name !== PROVENANCE_FILE);
+    const same = local.length === saved.length && local.every((f, i) => f.name === saved[i].name && sha256(f.bytes) === saved[i].sha256);
+    if (!same) return false;
+  } else {
+    const files = await loadArticleFiles(article, stores);
+    rmSync(dir, { recursive: true, force: true });
+    for (const f of files) {
+      const target = join(dir, ...f.name.split("/"));
+      mkdirSync(dirname(target), { recursive: true });
+      writeFileSync(target, f.bytes);
+    }
+  }
+  writeFileSync(join(dir, PROVENANCE_FILE), bytes);
+  return true;
+}
 
-  const charts = chartImages(manifest.files);
+/**
+ * 記事 1 本の復元マニフェストを導出し、作業コピーへ置く。R2 へは書かない。
+ *
+ * @param {object} article 記事台帳の 1 行
+ * @param {object} deps
+ * @param {{ body: object, archive: object }} deps.stores 本文のバケットと private R2 のマニフェスト置き場 (読むだけ)
+ * @param {Set<string>} deps.known 公開中の ranking key
+ * @param {(rankingKey: string) => Promise<object | null>} deps.fetchValues app/ranking/<key>/values.json
+ * @param {string} deps.root 作業コピーの基準になるリポジトリのルート
+ */
+export async function backfillArticle(article, { stores, known, fetchValues, root }) {
+  const t = { slug: article.key, r2Path: article.r2Path, title: article.title };
+  if (!hasStoredBody(article)) return { ...t, status: "no-r2" };
+  const manifest = await readManifest(article, stores.archive);
+  const draftBytes = await stores.body.get(`${article.r2Path}/draft.md`);
+  if (!draftBytes) return { ...t, status: "no-r2" };
+  const draft = draftBytes.toString("utf8");
+
+  const charts = chartImages(manifest.files.map((f) => f.name));
   if (!charts.length) return { ...t, status: "no-chart" };
 
   // rankingKey 候補: slug 由来 + 本文リンク
   const slugKey = t.slug.replace(/^[Aa]-/, "");
   const linkKeys = [...draft.matchAll(/stats47\.jp\/ranking\/([a-z0-9-]+)/g)].map((m) => m[1]);
-  const candidates = [slugKey, ...linkKeys].filter((k, i, a) => KNOWN.has(k) && a.indexOf(k) === i);
+  const candidates = [slugKey, ...linkKeys].filter((k, i, a) => known.has(k) && a.indexOf(k) === i);
   if (!candidates.length) return { ...t, status: "ambiguous", reason: "rankingKey 未解決", charts };
 
   const year = parseYear(t.title, draft);
@@ -149,7 +161,7 @@ const results = await pool(targets, 8, async (t) => {
   // 候補を値照合で確定 (rank1 の県名一致を優先)
   let best = null;
   for (const key of candidates) {
-    const values = await fetchJson(`${R2}/app/ranking/${key}/values.json`);
+    const values = await fetchValues(key);
     const part = partitionForYear(values, year);
     if (!part) continue;
     const byRank = Object.fromEntries((part.values || []).map((v) => [v.rank, v]));
@@ -178,44 +190,91 @@ const results = await pool(targets, 8, async (t) => {
     generatedBy: "backfill-note-data-provenance.mjs",
     note: "データ本体は stats47 R2 が SSOT。本ファイルは復元マニフェスト (コピーではない)。",
   };
-  // staging へ書き出し
-  const dir = join(STAGE, t.r2Path);
-  mkdirSync(dir, { recursive: true });
-  writeFileSync(join(dir, "data-provenance.json"), JSON.stringify(provenance, null, 2) + "\n");
+  const bytes = Buffer.from(JSON.stringify(provenance, null, 2) + "\n");
+  const saved = manifest.files.find((f) => f.name === PROVENANCE_FILE);
+  const output =
+    saved?.sha256 === sha256(bytes)
+      ? "unchanged"
+      : (await placeInWorkingCopy(article, manifest, bytes, stores, root))
+        ? "working-copy"
+        : "local-modified";
 
   return {
     ...t,
     status: confirmed ? "confirmed" : "partial",
+    output,
     rankingKey: best.key,
     year: best.year,
+    charts,
     match: `${best.match1 ? "1位✓" : "1位✗"}/${best.match47 ? "47位✓" : "47位✗"}`,
   };
-});
+}
 
-const by = (s) => results.filter((r) => r.status === s);
-const report = {
-  generatedAt: new Date().toISOString(),
-  total: results.length,
-  counts: {
-    confirmed: by("confirmed").length,
-    partial: by("partial").length,
-    ambiguous: by("ambiguous").length,
-    "no-chart": by("no-chart").length,
-    "no-r2": by("no-r2").length,
-  },
-  ambiguous: by("ambiguous").map((r) => ({ slug: r.slug, reason: r.reason })),
-  partial: by("partial").map((r) => ({ slug: r.slug, rankingKey: r.rankingKey, match: r.match })),
-  results,
-};
-mkdirSync(dirname(REPORT), { recursive: true });
-writeFileSync(REPORT, JSON.stringify(report, null, 2) + "\n");
+async function main() {
+  const { default: dotenv } = await import("dotenv");
+  dotenv.config({ path: join(ROOT, ".env.local"), quiet: true });
+  const REPORT = join(process.env.SCRATCHPAD || tmpdir(), "note-provenance-backfill.json");
 
-console.log("=== note data-provenance backfill ===");
-console.log(`対象: ${report.total} 件 (published stats47-note)`);
-console.log(`  confirmed (rank1+47 一致): ${report.counts.confirmed}`);
-console.log(`  partial   (一部一致):       ${report.counts.partial}`);
-console.log(`  ambiguous (要手当て):       ${report.counts.ambiguous}`);
-console.log(`  no-chart  (チャート無):     ${report.counts["no-chart"]}`);
-console.log(`  no-r2     (R2 未取得):      ${report.counts["no-r2"]}`);
-console.log(`\nstaging: .local/r2/note/stats47-note/<slug>/data-provenance.json`);
-console.log(`report:  ${REPORT}`);
+  const argv = process.argv.slice(2);
+  const LIMIT = argv.includes("--limit") ? Number(argv[argv.indexOf("--limit") + 1]) : Infinity;
+  const ONLY = argv.includes("--slug") ? argv[argv.indexOf("--slug") + 1].split(",") : null;
+
+  // KNOWN ranking keys
+  const knownSrc = readFileSync(join(ROOT, "packages/ranking/src/config/known-ranking-keys.ts"), "utf8");
+  const known = new Set(
+    [...knownSrc.slice(knownSrc.indexOf("new Set([")).matchAll(/"([a-z0-9-]{3,})"/g)].map((m) => m[1]),
+  );
+
+  // 対象: 記事台帳の stats47-note (本文を R2 に保存していない記事は no-r2 に数える)
+  let targets = readArticleLedger(ROOT).articles.filter((a) => a.vertical === "stats47-note");
+  if (ONLY) targets = targets.filter((a) => ONLY.includes(a.key));
+  targets = targets.slice(0, LIMIT);
+
+  const results = await pool(targets, 8, (article) =>
+    backfillArticle(article, {
+      stores: hasStoredBody(article) ? createArticleStores(article) : null,
+      known,
+      fetchValues: (key) => fetchJson(`${R2}/app/ranking/${key}/values.json`),
+      root: ROOT,
+    }),
+  );
+
+  const by = (s) => results.filter((r) => r.status === s);
+  const placed = (output) => results.filter((r) => r.output === output);
+  const report = {
+    generatedAt: new Date().toISOString(),
+    total: results.length,
+    counts: {
+      confirmed: by("confirmed").length,
+      partial: by("partial").length,
+      ambiguous: by("ambiguous").length,
+      "no-chart": by("no-chart").length,
+      "no-r2": by("no-r2").length,
+    },
+    output: {
+      "working-copy": placed("working-copy").length,
+      unchanged: placed("unchanged").length,
+      "local-modified": placed("local-modified").length,
+    },
+    ambiguous: by("ambiguous").map((r) => ({ slug: r.slug, reason: r.reason })),
+    partial: by("partial").map((r) => ({ slug: r.slug, rankingKey: r.rankingKey, match: r.match })),
+    results,
+  };
+  mkdirSync(dirname(REPORT), { recursive: true });
+  writeFileSync(REPORT, JSON.stringify(report, null, 2) + "\n");
+
+  console.log("=== note data-provenance backfill ===");
+  console.log(`対象: ${report.total} 件 (記事台帳の stats47-note)`);
+  console.log(`  confirmed (rank1+47 一致): ${report.counts.confirmed}`);
+  console.log(`  partial   (一部一致):       ${report.counts.partial}`);
+  console.log(`  ambiguous (要手当て):       ${report.counts.ambiguous}`);
+  console.log(`  no-chart  (チャート無):     ${report.counts["no-chart"]}`);
+  console.log(`  no-r2     (R2 に本文なし):  ${report.counts["no-r2"]}`);
+  console.log(`\n作業コピーへ置いた: ${report.output["working-copy"]} 件 / 保存済みと同じ: ${report.output.unchanged} 件 / 未保存の変更があり置かなかった: ${report.output["local-modified"]} 件`);
+  const keysOf = (status) => placed("working-copy").filter((r) => r.status === status).map((r) => r.slug);
+  if (keysOf("confirmed").length) console.log(`保存: npm run note:article -- save ${keysOf("confirmed").join(" ")}`);
+  if (keysOf("partial").length) console.log(`一部一致 (作業コピーを目視してから save。捨てるなら checkout --force): ${keysOf("partial").join(" ")}`);
+  console.log(`report:  ${REPORT}`);
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) await main();

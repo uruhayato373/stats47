@@ -855,7 +855,7 @@ node .claude/scripts/blog/audit-published-blog.mjs
 両 audit の結果は `select-brushup-candidates.mjs` が読み込み、違反記事を brushup 候補で優先する (GSC 改善余地を主軸に、同点時に品質問題を加味)。
 
 **title curiosity gap の検出パターン** (要素のいずれかを含むか): `なぜ`, `意外`, `唯一`, `真因`, `vs`, `逆転`, `?`, `倍`, `→`
-(`quality-gate.mjs` の NG_PATTERNS で「N位だけで終わる」等のアンチパターンも検出)
+(`quality-gate.mjs` の NG_PATTERNS で、上の要素と対比の `のに` を含まず「N位」で終わる引用符つきタイトルなどのアンチパターンも検出)
 
 ## 継続品質ループ (床を上げる × 天井を上げる)
 

@@ -516,11 +516,13 @@ test("where の値の配列はどれかに一致する行、unless は合う行�
 });
 
 test("[mutation] 投稿台帳: 指標を指す投稿の参照切れは error、warn は投稿済みの ranking の content_key だけ", () => {
-  const files = ["data/sns/posts.json"];
+  const catalogPath = datasetPath("sns.x-catalog");
+  const files = ["data/sns/posts.json", catalogPath];
   const doc = JSON.parse(readFileSync(resolve(ROOT, "data/sns/posts.json"), "utf8"));
-  const rows = DATASETS.filter((d) => d.id === "sns.posts");
+  const catalog = JSON.parse(readFileSync(resolve(ROOT, catalogPath), "utf8"));
+  const rows = DATASETS.filter((d) => d.id === "sns.posts" || d.id === "sns.x-catalog").map((d) => (d.id === "sns.x-catalog" ? { ...d, refs: [] } : d));
   const run = () =>
-    checkRefs({ datasets: rows, files, readJson: () => doc, readText: (p) => readFileSync(resolve(ROOT, p), "utf8"), registries: REGISTRIES });
+    checkRefs({ datasets: rows, files, readJson: (p) => (p === catalogPath ? catalog : doc), readText: (p) => readFileSync(resolve(ROOT, p), "utf8"), registries: REGISTRIES });
   const clean = run();
   assert.deepEqual(clean.errors, []);
   for (const w of clean.warnings) assert.match(w, /posts\[\]\.content_key=.* が registry:ranking-content-keys に無い$/);
@@ -549,6 +551,34 @@ test("[mutation] 投稿台帳: 指標を指す投稿の参照切れは error、w
   assert.equal(run().warnings.length, clean.warnings.length, "旧 slug は 301 先の指標へ届くので warn を増やさない");
   posted.content_key = before;
   assert.deepEqual(run().errors, [], "戻すと通る");
+});
+
+test("[mutation] 投稿台帳: X・Threads の投稿の template は sns.x-catalog の templates[].id に無いと error (他媒体の template と下書きは対象外)", () => {
+  const catalogPath = datasetPath("sns.x-catalog");
+  const files = ["data/sns/posts.json", catalogPath];
+  const doc = JSON.parse(readFileSync(resolve(ROOT, "data/sns/posts.json"), "utf8"));
+  const catalog = JSON.parse(readFileSync(resolve(ROOT, catalogPath), "utf8"));
+  const rows = DATASETS.filter((d) => d.id === "sns.posts" || d.id === "sns.x-catalog").map((d) => (d.id === "sns.x-catalog" ? { ...d, refs: [] } : d));
+  const run = () =>
+    checkRefs({
+      datasets: rows, files, readJson: (p) => (p === catalogPath ? catalog : doc),
+      readText: (p) => readFileSync(resolve(ROOT, p), "utf8"), registries: REGISTRIES,
+    });
+  const templateErrors = () => run().errors.filter((e) => e.includes("posts[].template="));
+  assert.deepEqual(templateErrors(), [], "現状の台帳は X・Threads の template がすべてカタログにある");
+  const x = doc.posts.find((p) => p.platform === "x" && p.template && p.status !== "draft");
+  const draft = doc.posts.find((p) => p.platform === "x" && p.status === "draft" && p.template);
+  const ig = doc.posts.find((p) => p.platform === "instagram" && p.template && !catalog.templates.some((t) => t.id === p.template));
+  assert.ok(x && ig, "fixture: X の投稿と、カタログに無い template を持つ Instagram の投稿が実台帳にある");
+  const saved = x.template;
+  x.template = "no-such-template";
+  assert.ok(templateErrors().some((e) => e.includes(`(id=${x.id}) の posts[].template=no-such-template が sns.x-catalog の templates[].id に無い`)), templateErrors().join("\n"));
+  x.template = saved;
+  const draftSaved = draft.template;
+  draft.template = "no-such-template";
+  assert.deepEqual(templateErrors(), [], "下書きの仮の template は止めない (素材の取り込みが domain 名を入れる)");
+  draft.template = draftSaved;
+  assert.deepEqual(templateErrors(), [], "戻すと通る (Instagram の ranking・area-carousel などはカタログに無くても error にしない)");
 });
 
 test("[mutation] KDP の status・kdpStatus・publicationStage の組み合わせを schema が固定する (2026-10-27)", () => {
@@ -692,4 +722,67 @@ test("git grep の出力は CRLF の行も読む (Windows の作業ツリーで�
 test("実リポジトリの問いの台帳は、文章 (dataNote) に e-Stat の表 ID を書いていない", () => {
   const issues = JSON.parse(readFileSync(resolve(ROOT, datasetPath("content.issues")), "utf8")).issues;
   assert.deepEqual(issues.filter((i) => /[0-9]{10}/.test(i.dataNote ?? "")).map((i) => i.id), []);
+});
+
+// ── 調査ポートフォリオ: 列挙と ID の実在の持ち主は Schema と refs だけ (2026-11-14 SURVEY-PORTFOLIO-VALIDATOR-DEDUPE-01) ──
+const SURVEY_STATE_IDS = ["surveys.portfolio", "surveys.experiments"];
+const SURVEY_VALIDATOR = ".claude/scripts/surveys/validate-survey-portfolio.ts";
+
+test("[mutation] 調査ポートフォリオと実験台帳の語彙外の値は Schema が、調査 ID の参照切れは refs が落とす", () => {
+  const portfolioPath = datasetPath("surveys.portfolio");
+  const experimentsPath = datasetPath("surveys.experiments");
+  const masterPath = datasetPath("surveys.master");
+  const files = [portfolioPath, experimentsPath, masterPath];
+  const store = Object.fromEntries(files.map((f) => [f, JSON.parse(readFileSync(resolve(ROOT, f), "utf8"))]));
+  const rows = DATASETS.filter((d) => [...SURVEY_STATE_IDS, "surveys.master"].includes(d.id));
+  const readJson = (p) => store[p] ?? JSON.parse(readFileSync(resolve(ROOT, p), "utf8"));
+  const schemaErrors = () => checkSchemas({ datasets: rows, files, readJson, exists: (p) => existsSync(resolve(ROOT, p)) });
+  const refErrors = () => checkRefs({ datasets: rows, files, readJson, readText: (p) => readFileSync(resolve(ROOT, p), "utf8"), registries: REGISTRIES }).errors;
+  assert.deepEqual(schemaErrors(), []);
+  assert.deepEqual(refErrors(), []);
+
+  const survey = store[portfolioPath].surveys[0];
+  const experiment = store[experimentsPath].experiments[0];
+  assert.ok(experiment, "実験台帳に 1 件以上ある (無ければこの検査は実験側を見ていない)");
+  const mutations = [
+    [survey, "lifecycleStatus", /surveys\.portfolio: .* が schema に合わない/],
+    [survey, "editorialStatus", /surveys\.portfolio: .* が schema に合わない/],
+    [survey, "linkageStatus", /surveys\.portfolio: .* が schema に合わない/],
+    [survey.metrics.gsc, "status", /surveys\.portfolio: .* が schema に合わない/],
+    [experiment, "verdict", /surveys\.experiments: .* が schema に合わない/],
+    [experiment, "changeType", /surveys\.experiments: .* が schema に合わない/],
+  ];
+  for (const [target, field, expected] of mutations) {
+    const original = target[field];
+    target[field] = "no-such-value";
+    assert.match(schemaErrors().join("\n"), expected, `${field} の語彙外の値を Schema が落とす`);
+    target[field] = original;
+  }
+  for (const [target, id] of [[survey, "surveys.portfolio"], [experiment, "surveys.experiments"]]) {
+    const original = target.surveyId;
+    target.surveyId = "no-such-survey";
+    assert.match(refErrors().join("\n"), new RegExp(`参照切れ: ${id.replace(".", "\\.")} .*surveyId=no-such-survey が surveys\\.master の`), `${id} の調査 ID の参照切れを refs が落とす`);
+    target.surveyId = original;
+  }
+  assert.deepEqual(schemaErrors(), [], "戻すと通る (赤は書き換えた値が理由)");
+  assert.deepEqual(refErrors(), []);
+});
+
+test("調査ポートフォリオの検証スクリプトは、Schema の列挙と refs の ID の実在を二重に持たない", () => {
+  // コメントを除いたコードだけを見る (判定の規律の説明に値の名前が出るのは構わない)
+  const code = readFileSync(resolve(ROOT, SURVEY_VALIDATOR), "utf8")
+    .replace(/\/\*[\s\S]*?\*\//g, "")
+    .replace(/(^|\s)\/\/.*$/gm, "$1");
+  const enums = [];
+  const walk = (node, trail) => {
+    if (Array.isArray(node)) return node.forEach((child, i) => walk(child, `${trail}[${i}]`));
+    if (!node || typeof node !== "object") return;
+    if (Array.isArray(node.enum)) enums.push({ trail, values: node.enum });
+    for (const [key, child] of Object.entries(node)) if (key !== "enum") walk(child, `${trail}.${key}`);
+  };
+  for (const id of SURVEY_STATE_IDS) walk(JSON.parse(readFileSync(resolve(ROOT, DATASETS.find((d) => d.id === id).schema), "utf8")), id);
+  assert.ok(enums.length >= 6, `Schema から列挙を ${enums.length} 個しか読めていない (lifecycle・linkage・editorial・計測の状態・verdict・changeType)`);
+  const duplicated = enums.filter(({ values }) => values.every((value) => code.includes(`"${value}"`) || code.includes(`'${value}'`)));
+  assert.deepEqual(duplicated.map((e) => e.trail), [], "Schema の列挙の全部の値を検証スクリプトが文字列で持っている (列挙は Schema だけが持つ。部分集合を使う意味の検査は構わない)");
+  assert.doesNotMatch(code, /masterIds\.has\(/, "調査 ID の実在は refs (surveys[].surveyId・experiments[].surveyId → surveys.master) だけが持つ");
 });

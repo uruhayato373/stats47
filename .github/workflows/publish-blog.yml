@@ -174,21 +174,65 @@ jobs:
 
       # contents/blog は ephemeral outbox: 本番公開時のみ、公開した slug のドラフトを R2 反映後に
       # 自動削除して commit-back する ([skip ci] で再発火防止 / pull --rebase で race 吸収)。
+      # R2 の一覧から作る git の生成物 (sitemap・タグのキー・未公開の slug・記事台帳・ページの索引・指標の逆引き) も
+      # 同じコミットで進める。書き戻す中身は blog-auto-publish.yml の同じ step と揃える
+      # (workflow-commit-back.test.cjs が 2 本を同じ fixture で実行して確かめる。片方だけ変えると落ちる)。
       - name: 🧹 Remove published draft from contents/blog (ephemeral outbox)
         if: ${{ github.event.inputs.dry_run == 'false' }}
         run: |
           SLUG="${{ github.event.inputs.slug }}"
-          [ -d "contents/blog/$SLUG" ] || { echo "ドラフトなし (削除不要)"; exit 0; }
-          git rm -r -q "contents/blog/$SLUG"
+          if [ -d "contents/blog/$SLUG" ]; then
+            git rm -r -q "contents/blog/$SLUG"
+          fi
+          # sitemap のコミット済み snapshot を公開実態に追随させる。追随しないと PR の Known Tag Keys Gate が落ちる。
+          if (cd apps/web && NODE_OPTIONS='--conditions react-server' npx tsx scripts/generate-sitemap-blog-entries.ts); then
+            git add apps/web/src/config/sitemap-blog-entries.ts || true
+          else
+            echo "::warning::sitemap-blog-entries の再生成に失敗 (公開自体は成功。次の sync-snapshots で追随する)"
+          fi
+          # 新しいタグを持つ記事を公開すると known-tag-keys も古くなる。未登録のタグのページは 410 になる。
+          if (cd apps/web && NODE_OPTIONS='--conditions react-server' npx tsx scripts/generate-known-tag-keys.ts); then
+            git add apps/web/src/config/known-tag-keys.ts || true
+          else
+            echo "::warning::known-tag-keys の再生成に失敗 (公開自体は成功。次の sync-snapshots で追随する)"
+          fi
+          # 未公開だった記事を再公開した回は、未公開の slug の一覧 (middleware が 410 を返す) からその slug を外す。
+          # 下の content:sync はこの一覧を読んで台帳の状態を決めるので、その前に作り直す。
+          if (cd apps/web && NODE_OPTIONS='--conditions react-server' npx tsx scripts/generate-unpublished-blog-slugs.ts); then
+            git add apps/web/src/config/unpublished-blog-slugs.ts || true
+          else
+            echo "::warning::unpublished-blog-slugs の再生成に失敗 (公開自体は成功。次の sync-snapshots で追随する)"
+          fi
+          # 記事台帳・ページの索引・指標の逆引き。タグの索引は known-tag-keys から、逆引きはページの索引から作るので、
+          # 上を進めたらここも進めないと develop の content:check と metrics:check が落ちる。
+          # git add は作り直しが最後まで通ったときだけ。途中で落ちた書きかけは載せない。
+          if NODE_OPTIONS='--conditions react-server' npm run content:sync -- --from-r2; then
+            git add data/blog/ledger data/content/entities.json data/content/pages
+            if npm run metrics:build-index; then
+              git add data/metrics/index
+            else
+              echo "::warning::指標の逆引き (data/metrics/index) の作り直しに失敗 (公開自体は成功。develop の metrics:check が落ちるので、上のログの原因を直して npm run metrics:build-index を流す)"
+            fi
+          else
+            echo "::warning::記事台帳とページの索引の作り直しに失敗 (公開自体は成功。タグのキーが進んだ回は develop の content:check が落ちるので、上のログの原因を直して npm run content:sync -- --from-r2 を流す)"
+          fi
+          if git diff --cached --quiet; then
+            echo "書き戻す差分なし (ドラフトの取り残しも、生成物の変化も無い)"; exit 0
+          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -q -m "chore(blog): remove published draft $SLUG from contents/blog outbox [skip ci]"
+          git commit -q -m "chore(blog): outbox 掃除 + sitemap snapshot 追随 [skip ci] - $SLUG"
+          # content:sync は書き戻しに含めない外部公開物の索引 (data/content/external.json) も書くので、
+          # 作業ツリーに残った差分で pull が止まらないよう --autostash を付ける。
+          PUSHED=false
           for i in 1 2 3; do
-            if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
-              echo "✅ outbox cleanup pushed: $SLUG"; break
+            if git pull --rebase --autostash --quiet origin develop && git push origin HEAD:develop; then
+              echo "✅ outbox cleanup pushed: $SLUG"; PUSHED=true; break
             fi
             echo "push retry $i (concurrent push?)"; sleep 3
           done
+          # 3 回とも通らなければ step を落とす。成功で終わると、R2 には公開済みなのに develop の outbox と台帳が古いまま気づけない
+          [ "$PUSHED" = true ] || { echo "::error::書き戻しの push が 3 回とも失敗した (R2 への公開は済んでいる。develop の outbox・sitemap・タグのキー・記事台帳・索引は古いまま。上のログで pull と push が落ちた理由を確かめる)"; exit 1; }
 
       - name: 📝 Summary
         run: |

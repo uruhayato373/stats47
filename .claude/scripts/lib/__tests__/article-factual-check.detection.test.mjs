@@ -345,3 +345,107 @@ describe("平均順位を県の順位として照合しない", () => {
     });
   });
 });
+
+// BLOG-TUTORIAL-GATE-GAPS-01 (2026-11-14): 手順解説記事 (cc-estat 連載・教員年収) で writer と critic が報告した
+// 誤検知 (範囲の順位) と検出漏れ (割合の値・指標を名指しした順位) の固定。
+describe("範囲を語る順位を、1 つの県の順位と取り違えない (④)", () => {
+  const RANGE_FILES = {
+    "salary.json": {
+      label: "平均年収",
+      unit: "万円",
+      year: "2023",
+      data: [
+        { rank: 1, areaName: "愛知県", pref: "愛知県", value: 885.9 },
+        { rank: 3, areaName: "秋田県", pref: "秋田県", value: 796.1 },
+        { rank: 46, areaName: "青森県", pref: "青森県", value: 330.1 },
+        { rank: 47, areaName: "愛媛県", pref: "愛媛県", value: 315.7 },
+      ],
+    },
+    "salary.source.json": { label: "平均年収", unit: "万円", year: "2023" },
+  };
+
+  it("★「秋田県の3位から青森県の46位まで」は INVERSE_RANK_MISMATCH にしない", () => {
+    withFiles(RANGE_FILES, (gt) => {
+      assert.deepEqual(checkInverseRankClaims("秋田県の3位から青森県の46位まで、順に並べました。", gt), []);
+      assert.deepEqual(checkRankClaims("秋田県の3位から青森県の46位まで、順に並べました。", gt), []);
+    });
+  });
+
+  it("★「N位から<県名>」の形でも、順位を県に結ばない", () => {
+    withFiles(RANGE_FILES, (gt) => {
+      assert.deepEqual(checkInverseRankClaims("下位の47位から愛知県の1位まで、年収は順に上がります。", gt), []);
+    });
+  });
+
+  it("★本物の取り違え (3位は秋田県なのに青森県と書く) は従来どおり検出する", () => {
+    withFiles(RANGE_FILES, (gt) => {
+      assert.equal(checkInverseRankClaims("3位の青森県は低めでした。", gt).length, 1);
+    });
+  });
+});
+
+describe("割合 (％) の値と、指標を名指しした順位の取り違えを検出する (⑦)", () => {
+  // 教員年収の記事 (school-teacher-annual-income) の形: 年収の順位と、同じ県の「統計に映る割合」の順位が別の指標として並ぶ
+  const SHARE_FILES = {
+    "income.json": {
+      label: "小中学校教員の平均年収",
+      unit: "万円",
+      year: "2023",
+      data: [
+        { rank: 1, areaName: "愛知県", pref: "愛知県", value: 885.9 },
+        { rank: 3, areaName: "北海道", pref: "北海道", value: 796.1 },
+        { rank: 44, areaName: "愛媛県", pref: "愛媛県", value: 315.7 },
+      ],
+    },
+    "income.source.json": { label: "小中学校教員の平均年収", unit: "万円", year: "2023" },
+    "coverage.json": {
+      label: "統計に映る小中学校教員の割合",
+      unit: "％",
+      year: "2023",
+      data: [
+        { rank: 5, areaName: "愛知県", pref: "愛知県", value: 1.8 },
+        { rank: 42, areaName: "北海道", pref: "北海道", value: 0.77 },
+        { rank: 41, areaName: "愛媛県", pref: "愛媛県", value: 0.81 },
+      ],
+    },
+    "coverage.source.json": { label: "統計に映る小中学校教員の割合", unit: "％", year: "2023" },
+  };
+
+  it("★全角の「％」で持つ data と半角の「%」で書いた本文を同じ単位として照合する", () => {
+    withFiles(SHARE_FILES, (gt) => {
+      assert.equal(checkValueClaims("愛媛県は3.8%で、推計60人です。", gt).length, 1);
+      assert.equal(checkValueClaims("愛媛県は3.8％で、推計60人です。", gt).length, 1);
+    });
+  });
+
+  it("正しい割合 (丸め方も含む) は止めない", () => {
+    withFiles(SHARE_FILES, (gt) => {
+      assert.deepEqual(checkValueClaims("愛媛県は0.8%で、愛知県は1.8%です。", gt), []);
+      assert.deepEqual(checkValueClaims("北海道は0.77％でした。", gt), []);
+    });
+  });
+
+  it("★「年収42位の北海道」は、割合の順位 (42位) に一致していても年収の順位と照合して止める", () => {
+    withFiles(SHARE_FILES, (gt) => {
+      assert.equal(checkInverseRankClaims("年収42位の北海道は0.8%でした。", gt).length, 1);
+      // 順位が前に出る書き方は、県名 → 指標名 → 順位の順でも同じ。指標名が「割合」のように
+      // 既知の指標名として照合できる語なら、年収の順位 (3 位) を割合の順位と取り違えない
+      assert.equal(checkRankClaims("北海道の割合は3位でした。", gt).length, 1);
+    });
+  });
+
+  it("指標を名指しした順位が、その指標の順位と合っていれば止めない", () => {
+    withFiles(SHARE_FILES, (gt) => {
+      assert.deepEqual(checkInverseRankClaims("年収3位の北海道は0.8%でした。", gt), []);
+      assert.deepEqual(checkInverseRankClaims("割合42位の北海道は年収が高めです。", gt), []);
+      assert.deepEqual(checkRankClaims("北海道の割合は42位でした。", gt), []);
+    });
+  });
+
+  it("指標の語が無い順位は、どの指標の順位とも照合する (従来どおり)", () => {
+    withFiles(SHARE_FILES, (gt) => {
+      assert.deepEqual(checkInverseRankClaims("3位の北海道は高めです。", gt), []);
+      assert.deepEqual(checkInverseRankClaims("42位の北海道は低めです。", gt), []);
+    });
+  });
+});

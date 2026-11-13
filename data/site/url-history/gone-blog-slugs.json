@@ -3,92 +3,117 @@
     {
       "slug": "annual-sunshine-duration-vs-auto-liability-insurance-amount",
       "since": "2026-11-06",
-      "reason": "読者の問いの証拠が無い 2 指標の相関記事をオーナーが撤去 (type-fit-review の判断)。本文は private R2 に退避済み"
+      "reason": "読者の問いの証拠が無い 2 指標の相関記事をオーナーが撤去 (type-fit-review の判断)。本文は private R2 に退避済み",
+      "title": "日照時間が長い県は保険金も高い?",
+      "titleSource": "git ecac9e857d^ の contents/blog/annual-sunshine-duration-vs-auto-liability-insurance-amount/article.md の frontmatter"
     },
     {
       "slug": "road-length-per-km2-vs-residential-building-starts",
       "since": "2026-11-06",
-      "reason": "読者の問いの証拠が無い 2 指標の相関記事をオーナーが撤去 (type-fit-review の判断)。本文は private R2 に退避済み"
+      "reason": "読者の問いの証拠が無い 2 指標の相関記事をオーナーが撤去 (type-fit-review の判断)。本文は private R2 に退避済み",
+      "title": "道路密度が高い県は住宅着工も多いのか",
+      "titleSource": "git ecac9e857d^ の contents/blog/road-length-per-km2-vs-residential-building-starts/article.md の frontmatter"
     },
     {
       "slug": "shumai-consumption-expenditure-vs-jr-freight-shipment",
       "since": "2026-11-06",
-      "reason": "読者の問いの証拠が無い 2 指標の相関記事をオーナーが撤去 (type-fit-review の判断)。本文は private R2 に退避済み"
+      "reason": "読者の問いの証拠が無い 2 指標の相関記事をオーナーが撤去 (type-fit-review の判断)。本文は private R2 に退避済み",
+      "title": "しゅうまいとJR貨物、なぜ神奈川が両方1位?",
+      "titleSource": "git ecac9e857d^ の contents/blog/shumai-consumption-expenditure-vs-jr-freight-shipment/article.md の frontmatter"
     },
     {
       "slug": "airport-count-vs-wind-power-plant-count-facility",
       "since": "2026-09-06",
-      "reason": "非商用KSJ原典に依存する旧記事を承認済み公開終了。再公開不可"
+      "reason": "非商用KSJ原典に依存する旧記事を承認済み公開終了。再公開不可",
+      "title": "空港が多い県はなぜ風力発電も多いのか",
+      "titleSource": "git e136755845^ の docs/21_ブログ記事原稿/airport-count-vs-wind-power-plant-count-facility/article.md の frontmatter"
     },
     {
       "slug": "dam-count-prefecture-gap",
       "since": "2026-09-06",
-      "reason": "非商用KSJ原典に依存する旧記事を承認済み公開終了。再公開不可"
+      "reason": "非商用KSJ原典に依存する旧記事を承認済み公開終了。再公開不可",
+      "title": "ダムの数はなぜ岡山県が全国上位なのか",
+      "titleSource": "git e136755845^ の docs/21_ブログ記事原稿/dam-count-prefecture-gap/article.md の frontmatter"
     },
     {
       "slug": "dam-count-vs-road-expressway-length",
       "since": "2026-09-06",
-      "reason": "非商用KSJ原典に依存する旧記事を承認済み公開終了。再公開不可"
+      "reason": "非商用KSJ原典に依存する旧記事を承認済み公開終了。再公開不可",
+      "title": "ダムの数と高速道路の長さは似ているのか",
+      "titleSource": "git e136755845^ の docs/21_ブログ記事原稿/dam-count-vs-road-expressway-length/article.md の frontmatter"
     },
     {
       "slug": "BarChartRace",
       "since": "2026-08-24",
-      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認"
+      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認",
+      "titleUnknownReason": "原稿が git の全履歴にも packages/database/seed/articles.json にも無く、記事台帳を作った時点 (2026-11-10) で R2 の一覧にも無かった (2026-11-14 に slug で検索)。slug は GSC の記録か他の記事のリンクに出てくるだけ"
     },
     {
       "slug": "cc-estat-12-industry-treemap",
       "since": "2026-08-24",
-      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認"
+      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認",
+      "titleUnknownReason": "原稿が git の全履歴にも packages/database/seed/articles.json にも無く、記事台帳を作った時点 (2026-11-10) で R2 の一覧にも無かった (2026-11-14 に slug で検索)。slug は GSC の記録か他の記事のリンクに出てくるだけ"
     },
     {
       "slug": "energy-production-regional-gap",
       "since": "2026-08-24",
-      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認"
+      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認",
+      "titleUnknownReason": "原稿が git の全履歴にも packages/database/seed/articles.json にも無く、記事台帳を作った時点 (2026-11-10) で R2 の一覧にも無かった (2026-11-14 に slug で検索)。slug は GSC の記録か他の記事のリンクに出てくるだけ"
     },
     {
       "slug": "fiscal-strength-index-gap",
       "since": "2026-08-24",
-      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認"
+      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認",
+      "titleUnknownReason": "原稿が git の全履歴にも packages/database/seed/articles.json にも無く、記事台帳を作った時点 (2026-11-10) で R2 の一覧にも無かった (2026-11-14 に slug で検索)。slug は GSC の記録か他の記事のリンクに出てくるだけ"
     },
     {
       "slug": "food-expenditure-ratio",
       "since": "2026-08-24",
-      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認"
+      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認",
+      "titleUnknownReason": "原稿が git の全履歴にも packages/database/seed/articles.json にも無く、記事台帳を作った時点 (2026-11-10) で R2 の一覧にも無かった (2026-11-14 に slug で検索)。slug は GSC の記録か他の記事のリンクに出てくるだけ"
     },
     {
       "slug": "job-salary-39-comparison",
       "since": "2026-08-24",
-      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認"
+      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認",
+      "title": "39職種の年収、住む県で変わる",
+      "titleSource": "packages/database/seed/articles.json の同じ slug の行 (published は 0 で、公開した記録は無い)"
     },
     {
       "slug": "local-allocation-tax-structure",
       "since": "2026-08-24",
-      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認"
+      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認",
+      "titleUnknownReason": "原稿が git の全履歴にも packages/database/seed/articles.json にも無く、記事台帳を作った時点 (2026-11-10) で R2 の一覧にも無かった (2026-11-14 に slug で検索)。slug は GSC の記録か他の記事のリンクに出てくるだけ"
     },
     {
       "slug": "migration-destination-ranking-factors",
       "since": "2026-08-24",
-      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認"
+      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認",
+      "titleUnknownReason": "原稿が git の全履歴にも packages/database/seed/articles.json にも無く、記事台帳を作った時点 (2026-11-10) で R2 の一覧にも無かった (2026-11-14 に slug で検索)。slug は GSC の記録か他の記事のリンクに出てくるだけ"
     },
     {
       "slug": "population-decline-regional-gap",
       "since": "2026-08-24",
-      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認"
+      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認",
+      "titleUnknownReason": "原稿が git の全履歴にも packages/database/seed/articles.json にも無く、記事台帳を作った時点 (2026-11-10) で R2 の一覧にも無かった (2026-11-14 に slug で検索)。slug は GSC の記録か他の記事のリンクに出てくるだけ"
     },
     {
       "slug": "population-density-land-use-structure",
       "since": "2026-08-24",
-      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認"
+      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認",
+      "titleUnknownReason": "原稿が git の全履歴にも packages/database/seed/articles.json にも無く、記事台帳を作った時点 (2026-11-10) で R2 の一覧にも無かった (2026-11-14 に slug で検索)。slug は GSC の記録か他の記事のリンクに出てくるだけ"
     },
     {
       "slug": "population-choropleth",
       "since": "2026-08-24",
-      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認"
+      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認",
+      "titleUnknownReason": "原稿が git の全履歴にも packages/database/seed/articles.json にも無く、記事台帳を作った時点 (2026-11-10) で R2 の一覧にも無かった (2026-11-14 に slug で検索)。slug は GSC の記録か他の記事のリンクに出てくるだけ"
     },
     {
       "slug": "wage-gap-factors-2026",
       "since": "2026-08-24",
-      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認"
+      "reason": "GSC soft-404 監査で記事実体なし + HTTP 200 not-found を確認",
+      "titleUnknownReason": "原稿が git の全履歴にも packages/database/seed/articles.json にも無く、記事台帳を作った時点 (2026-11-10) で R2 の一覧にも無かった (2026-11-14 に slug で検索)。slug は GSC の記録か他の記事のリンクに出てくるだけ"
     }
   ]
 }

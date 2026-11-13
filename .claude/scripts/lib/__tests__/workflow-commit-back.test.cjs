@@ -128,18 +128,23 @@ const BLOG_LEDGER = 'data/blog/ledger/articles.json';
 const CONTENT_INDEX = ['data/content/entities.json', 'data/content/pages/blog.json', 'data/content/pages/tag.json'];
 const METRIC_INDEX = 'data/metrics/index/linkage-000.json';
 const TAG_KEYS = 'apps/web/src/config/known-tag-keys.ts';
+const UNPUBLISHED_SLUGS = 'apps/web/src/config/unpublished-blog-slugs.ts';
 const SITEMAP_BLOG = 'apps/web/src/config/sitemap-blog-entries.ts';
 // content:sync は SNS の投稿台帳から作る外部公開物の索引も書く。書き戻しには含めないので作業ツリーに残る
 const EXTERNAL_INDEX = 'data/content/external.json';
 
 // 生成器の stub。content:sync は実物と同じ順 (台帳 → ページの索引) で書き、FAIL=content なら台帳を書いた後で落ちる。
+// 実物の content:sync は未公開の slug の一覧 (unpublished-blog-slugs.ts) を読んで台帳の状態を決めるので、
+// 一覧を作り直す前に呼ばれたら 94 で落とす。sleep は再試行の待ちを飛ばす。
 const DERIVED_GENERATOR_STUBS = `
 node() { return 0; }
+sleep() { :; }
 npx() {
   printf 'npx %s\\n' "$*" >> "$CALL_LOG"
   case "$2" in
     scripts/generate-sitemap-blog-entries.ts) echo 'sitemap を作り直した' >> src/config/sitemap-blog-entries.ts ;;
     scripts/generate-known-tag-keys.ts) echo 'タグのキーを作り直した' >> src/config/known-tag-keys.ts ;;
+    scripts/generate-unpublished-blog-slugs.ts) echo '未公開の一覧を作り直した' >> src/config/unpublished-blog-slugs.ts ;;
     *) return 98 ;;
   esac
 }
@@ -148,6 +153,7 @@ npm() {
   case "$*" in
     'run content:sync -- --from-r2')
       grep -q 'タグのキーを作り直した' ${TAG_KEYS} || return 96
+      grep -q '未公開の一覧を作り直した' ${UNPUBLISHED_SLUGS} || return 94
       echo '台帳を進めた' >> ${BLOG_LEDGER}
       if [ "$FAIL" = content ]; then return 1; fi
       for f in ${CONTENT_INDEX.join(' ')} ${EXTERNAL_INDEX}; do echo '索引を進めた' >> "$f"; done
@@ -162,20 +168,37 @@ npm() {
 }
 `;
 
-function runBlogCleanupStep(fail) {
+// 公開の書き戻しを持つ 2 本。自動公開 (blog-auto-publish.yml) は公開できた slug を PUBLISHED で受け取り、
+// 手動公開 (publish-blog.yml) は入力の slug を 1 つ受け取る。書き戻す中身は同じでなければならない。
+const BLOG_WRITEBACK_WORKFLOWS = [
+  { file: 'blog-auto-publish.yml', job: 'auto-publish' },
+  { file: 'publish-blog.yml', job: 'publish' },
+];
+const ALWAYS_PUSHED = [SITEMAP_BLOG, TAG_KEYS, UNPUBLISHED_SLUGS, 'contents/blog/ready/article.md'];
+
+function runBlogCleanupStep({ file, job }, { fail = '', rejectPush = false } = {}) {
   const fixture = makeWritebackFixture([
     'contents/blog/ready/article.md',
     TAG_KEYS,
+    UNPUBLISHED_SLUGS,
     SITEMAP_BLOG,
     BLOG_LEDGER,
     ...CONTENT_INDEX,
     EXTERNAL_INDEX,
     METRIC_INDEX,
   ]);
-  const doc = yaml.load(fs.readFileSync(path.join(WORKFLOW_DIR, 'blog-auto-publish.yml'), 'utf8'));
-  const step = doc.jobs['auto-publish'].steps.find((s) => s.name.includes('Remove published drafts'));
+  if (rejectPush) {
+    // origin が push を毎回断る (保護されたブランチや、他の workflow との競合が続く場合に当たる)
+    const hook = path.join(fixture.dir, 'origin.git/hooks/pre-receive');
+    fs.mkdirSync(path.dirname(hook), { recursive: true });
+    fs.writeFileSync(hook, '#!/bin/sh\necho "fixture: push を断る" >&2\nexit 1\n', { mode: 0o755 });
+  }
+  const doc = yaml.load(fs.readFileSync(path.join(WORKFLOW_DIR, file), 'utf8'));
+  const step = doc.jobs[job].steps.find((s) => s.name.includes('Remove published draft'));
   const before = fixture.originHead();
-  const result = spawnSync('bash', ['-e', '-c', DERIVED_GENERATOR_STUBS + step.run], {
+  const run = step.run.replaceAll('${{ github.event.inputs.slug }}', 'ready');
+  assert.doesNotMatch(run, /\$\{\{/, `${file}: 置き換えていない式が残っている`);
+  const result = spawnSync('bash', ['-e', '-c', DERIVED_GENERATOR_STUBS + run], {
     cwd: fixture.work,
     encoding: 'utf8',
     env: isolatedGitEnv({ PUBLISHED: ' ready', FAIL: fail, CALL_LOG: path.join(fixture.dir, 'calls') }),
@@ -184,50 +207,57 @@ function runBlogCleanupStep(fail) {
   return { fixture, result, before, calls, output: result.stdout + result.stderr };
 }
 
-test('blog publish: 書き戻しが記事台帳・ページの索引・指標の逆引きを同じコミットで進める', () => {
-  const { fixture, result, before, calls, output } = runBlogCleanupStep('');
-  try {
-    assert.equal(result.status, 0, output);
-    // R2 の一覧を読む経路は server 専用の module を通るので react-server の条件が要る
-    assert.match(calls, /npm run content:sync -- --from-r2 \[NODE_OPTIONS=.*--conditions react-server/, calls);
-    // 書き戻しに含めない生成物が作業ツリーに残っていても push まで届く (pull --rebase は汚れた作業ツリーで止まる)
-    assert.notEqual(fixture.originHead(), before, `書き戻しが origin に届いていない\n${output}`);
-    assert.deepEqual(
-      fixture.pushedFiles(),
-      [SITEMAP_BLOG, TAG_KEYS, 'contents/blog/ready/article.md', BLOG_LEDGER, ...CONTENT_INDEX, METRIC_INDEX].sort(),
-      output
-    );
-  } finally {
-    fs.rmSync(fixture.dir, { recursive: true, force: true });
-  }
-});
+for (const workflow of BLOG_WRITEBACK_WORKFLOWS) {
+  test(`${workflow.file}: 書き戻しが未公開の一覧・記事台帳・ページの索引・指標の逆引きを同じコミットで進める`, () => {
+    const { fixture, result, before, calls, output } = runBlogCleanupStep(workflow);
+    try {
+      assert.equal(result.status, 0, output);
+      // R2 の一覧を読む経路は server 専用の module を通るので react-server の条件が要る
+      assert.match(calls, /npm run content:sync -- --from-r2 \[NODE_OPTIONS=.*--conditions react-server/, calls);
+      // 書き戻しに含めない生成物が作業ツリーに残っていても push まで届く (pull --rebase は汚れた作業ツリーで止まる)
+      assert.notEqual(fixture.originHead(), before, `書き戻しが origin に届いていない\n${output}`);
+      assert.deepEqual(fixture.pushedFiles(), [...ALWAYS_PUSHED, BLOG_LEDGER, ...CONTENT_INDEX, METRIC_INDEX].sort(), output);
+    } finally {
+      fs.rmSync(fixture.dir, { recursive: true, force: true });
+    }
+  });
 
-test('blog publish: 索引の作り直しが途中で落ちても、書きかけの台帳を載せずに outbox の掃除は書き戻す', () => {
-  const { fixture, result, calls, output } = runBlogCleanupStep('content');
-  try {
-    assert.equal(result.status, 0, output);
-    assert.match(output, /::warning::.*索引/);
-    assert.doesNotMatch(calls, /metrics:build-index/, 'ページの索引が進んでいないのに逆引きを作り直している');
-    assert.deepEqual(fixture.pushedFiles(), [SITEMAP_BLOG, TAG_KEYS, 'contents/blog/ready/article.md'].sort(), output);
-  } finally {
-    fs.rmSync(fixture.dir, { recursive: true, force: true });
-  }
-});
+  test(`${workflow.file}: 索引の作り直しが途中で落ちても、書きかけの台帳を載せずに outbox の掃除は書き戻す`, () => {
+    const { fixture, result, calls, output } = runBlogCleanupStep(workflow, { fail: 'content' });
+    try {
+      assert.equal(result.status, 0, output);
+      assert.match(output, /::warning::.*索引/);
+      assert.doesNotMatch(calls, /metrics:build-index/, 'ページの索引が進んでいないのに逆引きを作り直している');
+      assert.deepEqual(fixture.pushedFiles(), [...ALWAYS_PUSHED].sort(), output);
+    } finally {
+      fs.rmSync(fixture.dir, { recursive: true, force: true });
+    }
+  });
 
-test('blog publish: 逆引きの作り直しだけが落ちたら、台帳と索引は書き戻して逆引きの失敗を知らせる', () => {
-  const { fixture, result, output } = runBlogCleanupStep('index');
-  try {
-    assert.equal(result.status, 0, output);
-    assert.match(output, /::warning::.*逆引き/);
-    assert.deepEqual(
-      fixture.pushedFiles(),
-      [SITEMAP_BLOG, TAG_KEYS, 'contents/blog/ready/article.md', BLOG_LEDGER, ...CONTENT_INDEX].sort(),
-      output
-    );
-  } finally {
-    fs.rmSync(fixture.dir, { recursive: true, force: true });
-  }
-});
+  test(`${workflow.file}: 逆引きの作り直しだけが落ちたら、台帳と索引は書き戻して逆引きの失敗を知らせる`, () => {
+    const { fixture, result, output } = runBlogCleanupStep(workflow, { fail: 'index' });
+    try {
+      assert.equal(result.status, 0, output);
+      assert.match(output, /::warning::.*逆引き/);
+      assert.deepEqual(fixture.pushedFiles(), [...ALWAYS_PUSHED, BLOG_LEDGER, ...CONTENT_INDEX].sort(), output);
+    } finally {
+      fs.rmSync(fixture.dir, { recursive: true, force: true });
+    }
+  });
+
+  // 再試行を使い切っても step が成功で終わると、R2 には公開済みなのに develop の outbox と台帳が古いまま、誰も気づかない
+  test(`${workflow.file}: 書き戻しの push が 3 回とも断られたら step を失敗にする`, () => {
+    const { fixture, result, before, output } = runBlogCleanupStep(workflow, { rejectPush: true });
+    try {
+      assert.equal(fixture.originHead(), before, 'push を断る fixture なのに origin が進んでいる');
+      assert.match(output, /push retry 3/, output);
+      assert.notEqual(result.status, 0, `push が 1 回も通っていないのに step が成功で終わった\n${output}`);
+      assert.match(output, /::error::/, output);
+    } finally {
+      fs.rmSync(fixture.dir, { recursive: true, force: true });
+    }
+  });
+}
 
 test('sync-snapshots: ページの索引を作り直した後に指標の逆引きも作り直し、逆引きだけの差分も develop へ書き戻す', () => {
   const doc = yaml.load(fs.readFileSync(path.join(WORKFLOW_DIR, 'sync-snapshots.yml'), 'utf8'));
@@ -244,7 +274,7 @@ test('sync-snapshots: ページの索引を作り直した後に指標の逆引�
     'packages/ranking/src/config/known-ranking-keys.ts',
     'apps/web/src/config/sitemap-ranking-keys.ts',
     TAG_KEYS,
-    'apps/web/src/config/unpublished-blog-slugs.ts',
+    UNPUBLISHED_SLUGS,
     SITEMAP_BLOG,
   ];
   const fixture = makeWritebackFixture([

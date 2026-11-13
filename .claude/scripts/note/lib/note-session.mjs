@@ -25,9 +25,9 @@ export function readAccount() {
   }
 }
 
-/** 永続プロファイルで Chrome を起動 (channel:chrome、fallback default)。既定 headless。 */
-export async function launchContext({ headless = true } = {}) {
-  const opts = { headless, viewport: { width: 1440, height: 1000 }, userAgent: UA, args: ["--disable-blink-features=AutomationControlled"] };
+/** 永続プロファイルで Chrome を起動 (channel:chrome、fallback default)。既定 headless。extraArgs は Chrome の追加の起動引数。 */
+export async function launchContext({ headless = true, extraArgs = [] } = {}) {
+  const opts = { headless, viewport: { width: 1440, height: 1000 }, userAgent: UA, args: ["--disable-blink-features=AutomationControlled", ...extraArgs] };
   try {
     return await chromium.launchPersistentContext(PROFILE, { ...opts, channel: "chrome" });
   } catch {

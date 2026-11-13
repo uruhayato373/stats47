@@ -404,6 +404,7 @@ SECRET_PATTERNS=(
 # 除外するファイルパターン（環境変数名のみを含むファイル）
 EXCLUDE_PATTERNS=(
   ".*/database/actions/restore\.ts"  # 環境変数名のみを含むファイル
+  "^\.claude/scripts/note/__tests__/cover-assets\.test\.mjs$"  # テストが書く偽の wrangler 設定 (oauth_token = "old-test-token" など) だけ
 )
 
 FOUND_SECRETS=false

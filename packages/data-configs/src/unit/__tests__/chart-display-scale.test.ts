@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { formatChartValue, resolveChartDisplayScale } from "../chart-display-scale";
 
-// Values are the latest-year maxima and minima of real rankings (data/metrics/chart-display-units.json).
+// Values are the latest-year maxima and minima of real rankings (data/metrics/display-units/ledger.json).
 describe("resolveChartDisplayScale", () => {
   it("brings large money, people and household counts into 万・億・兆 with at most five digits", () => {
     expect(resolveChartDisplayScale("千円", [1_544_976_077, 14_040_236])).toEqual({ unit: "億円", factor: 1e-5, decimals: 0, reason: "rescaled" });

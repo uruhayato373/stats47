@@ -1,6 +1,6 @@
 #!/bin/bash
 # browser-use で起動した Chrome/Python のゾンビプロセスを一括終了する
-# 使い方: bash .claude/scripts/cleanup-browser.sh [--force]
+# 使い方: bash .claude/scripts/lib/cleanup-browser.sh [--force]
 
 export PATH="$HOME/.browser-use-env/bin:$HOME/.browser-use/bin:$HOME/.local/bin:$PATH"
 

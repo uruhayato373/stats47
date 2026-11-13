@@ -379,6 +379,25 @@ function claimFacts(facts, { cityScope, averageScope }) {
   return cityScope || averageScope ? [...single, ...avg] : single;
 }
 
+/**
+ * 順位の直前に指標名を名指ししているとき (「年収42位の北海道」「北海道の年収は42位」)、その指標の系列の順位だけを返す。
+ * 同じ県に別の指標の順位 (割合は 42 位) があると、どの系列の順位にも当てはまれば一致扱いになり、年収の順位の誤りが通っていた
+ * (BLOG-TUTORIAL-GATE-GAPS-01)。
+ * 名指しの語は順位の直前の漢字・カタカナの連なり (助詞 1 字は許す)。その語を含む label の系列が一部だけあるときに限り絞る。
+ * 語が無い・どの label にも含まれない・全系列に含まれるときは絞らない (従来どおりどの系列とも照合する)。
+ *
+ * @param {object[]} facts 照合先の facts
+ * @param {string} leadText 順位の数字の直前までの文字列
+ * @returns {object[]} 順位を持つ facts (絞れたときは名指しされた指標のものだけ)
+ */
+function rankFactsForNamedMetric(facts, leadText) {
+  const ranked = facts.filter((f) => f.rank !== null);
+  const token = leadText.match(/([一-龥ァ-ヶー]{2,8})(?:が|は|で|も|の)?[ \t]*$/)?.[1];
+  if (!token) return ranked;
+  const named = ranked.filter((f) => typeof f.label === "string" && f.label.includes(token));
+  return named.length > 0 && named.length < ranked.length ? named : ranked;
+}
+
 // ============================================================================
 // Rank claim checks
 // ============================================================================
@@ -437,7 +456,8 @@ export function checkRankClaims(content, gt) {
 
     const facts = claimFacts(gt[pref] || [], { cityScope, averageScope });
     if (!facts || facts.length === 0) continue;
-    const ranks = facts.filter((f) => f.rank !== null).map((f) => f.rank);
+    const rankedFacts = rankFactsForNamedMetric(facts, beforeRank);
+    const ranks = rankedFacts.map((f) => f.rank);
     if (ranks.length === 0) continue;
     // data の年が分かっていて、本文がそれと違う年の順位を語っているなら照合しない (「1972 年は 2 位」)
     // 年ごとの値だけを持つ系列 (順位なし) の年も、その年の順位は照合できない
@@ -449,8 +469,7 @@ export function checkRankClaims(content, gt) {
     }
 
     if (!ranks.includes(claimedRank)) {
-      const actualList = facts
-        .filter((f) => f.rank !== null)
+      const actualList = rankedFacts
         .slice(0, 3)
         .map((f) => `${f.label || "?"}=${f.rank}位`)
         .join(" / ");
@@ -473,7 +492,8 @@ export function checkInverseRankClaims(content, gt) {
   const inverseRe = new RegExp(
     // 先頭に数字を含めない (?<![・、と\d]): 「45位 岩手県」を「5位 岩手県」と誤マッチしないため。
     // 二桁順位 (下位グループ 4X位/3X位) を一桁順位に切り詰める false positive を防ぐ。
-    `(?<![・、と\\d.．])(\\d+)[ \\t]*位[ \\t]*(?:は|の|に|が|を|で|まで|から)?[ \\t]{0,2}(${prefPattern})(?:都|府|県)?(?![・、])`,
+    // 「から」「まで」は範囲の言い方 (「秋田県の3位から青森県の46位まで」) で、直後の県の順位ではないので助詞に含めない。
+    `(?<![・、と\\d.．])(\\d+)[ \\t]*位[ \\t]*(?:は|の|に|が|を|で)?[ \\t]{0,2}(${prefPattern})(?:都|府|県)?(?![・、])`,
     "g"
   );
   const seenClaims = new Set();
@@ -508,7 +528,7 @@ export function checkInverseRankClaims(content, gt) {
 
     const facts = claimFacts(gt[pref] || [], { cityScope, averageScope });
     if (!facts || facts.length === 0) continue;
-    const ranks = facts.filter((f) => f.rank !== null).map((f) => f.rank);
+    const ranks = rankFactsForNamedMetric(facts, body.slice(Math.max(0, m.index - 12), m.index)).map((f) => f.rank);
     if (ranks.length === 0) continue;
 
     if (!ranks.includes(claimedRank)) {
@@ -604,7 +624,8 @@ function unitDimension(unit) {
   if (typeof unit !== "string") return null;
   const stripped = unit.replace(/[兆億万千百]/g, "").trim();
   const m = stripped.match(/(%|％|円|人|世帯|戸|床|件|台|校|時間|ha|㎡|平方|kg|kw|wh|mwh|kwh|度|℃|cm|mm|社|店)/i);
-  return m ? m[1].toLowerCase() : (stripped || null);
+  // 全角の「％」で持つ data と半角の「%」で書いた本文を別の次元と見なさない (BLOG-TUTORIAL-GATE-GAPS-01)
+  return m ? m[1].toLowerCase().replace("％", "%") : (stripped || null);
 }
 
 /** data fact の value を base スケールに正規化 (value × unit のスケール倍率) */

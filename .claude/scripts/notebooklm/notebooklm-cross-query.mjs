@@ -14,7 +14,7 @@
  * `nlm cross query --notebooks "A,B" "Q"` 呼び出しを、本スクリプトに差し替えて使用する。
  *
  * Usage:
- *   node .claude/scripts/notebooklm-cross-query.mjs \
+ *   node .claude/scripts/notebooklm/notebooklm-cross-query.mjs \
  *     --notebooks "総監標準テキスト,記述式問題の模範解答例" \
  *     "「割引率」の定義・背景・試験での問われ方をまとめてください。"
  *

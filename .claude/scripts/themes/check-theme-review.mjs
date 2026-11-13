@@ -14,7 +14,7 @@ const git = (...args) =>
 const reportPath = datasetPath("themes.ci-review");
 const experimentsPath = datasetPath("themes.experiments");
 const meaningful = text => typeof text === 'string' && text.trim() && !/^(test|todo|tbd|placeholder|sample|テスト|仮|未記入)[.!。]*$/i.test(text.trim());
-const evidenceRef = ref => typeof ref === 'string' && (/^https:\/\/[^/\s]+\/[^\s]+$/.test(ref) || /^(\.claude|\.local|apps|packages)\/[^\s]+$/.test(ref)) && !ref.split('/').includes('..');
+const evidenceRef = ref => typeof ref === 'string' && (/^https:\/\/[^/\s]+\/[^\s]+$/.test(ref) || /^(\.claude|\.local|apps|packages|data)\/[^\s]+$/.test(ref)) && !ref.split('/').includes('..');
 export function evidenceFilePath(ref) {
   return ref.replace(/(?:#[^\s]*|:[1-9]\d*(?:-[1-9]\d*)?)$/, '');
 }

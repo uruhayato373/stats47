@@ -28,13 +28,14 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { datasetDir } from "../../../config/datasets.mjs";
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const STATE_DIR = process.env.STATE_DIR || path.join(PROJECT_ROOT, datasetDir("surveys.portfolio"));
-const PORTFOLIO = path.join(STATE_DIR, "portfolio.json");
-const EXPERIMENTS = path.join(STATE_DIR, "experiments.json");
+// STATE_DIR はテストが一時ディレクトリへ向けるための上書き。既定はカタログの id で引く
+const STATE_DIR = process.env.STATE_DIR;
+const PORTFOLIO = STATE_DIR ? path.join(STATE_DIR, "portfolio.json") : path.join(PROJECT_ROOT, datasetPath("surveys.portfolio"));
+const EXPERIMENTS = STATE_DIR ? path.join(STATE_DIR, "experiments.json") : path.join(PROJECT_ROOT, datasetPath("surveys.experiments"));
 
 const VERDICTS = new Set(["effect-full", "effect-partial", "effect-none", "effect-adverse", "insufficient-data", "aborted"]);
 const CHECKPOINTS = [
