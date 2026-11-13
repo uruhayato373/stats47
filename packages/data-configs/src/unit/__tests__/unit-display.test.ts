@@ -35,6 +35,15 @@ describe("normalizeUnitsInText", () => {
     expect(normalizeUnitsInText("％の表記")).toBe("％の表記");
   });
 
+  // CONTENT-FOLLOWUP-01: 本文の「単位は％です」が数字に続かないので残り、同じ記事の「96.6%」と混在していた
+  it("単位を宣言する「単位は％」「単位：％」も、数字の後と同じ半角にする", () => {
+    expect(normalizeUnitsInText("2024年の値で、単位は％です。")).toBe("2024年の値で、単位は%です。");
+    expect(normalizeUnitsInText("単位は％ポイントです")).toBe("単位は%ポイントです");
+    expect(normalizeUnitsInText("（単位：％）")).toBe("（単位：%）");
+    // 単位の宣言でない全角の％は残す
+    expect(normalizeUnitsInText("％表示の値")).toBe("％表示の値");
+  });
+
   // 2026-11-14: AI 解説の「8,569ｈａ」が表の「8,569ha」と並び、FAQ の「46％」が表の「46%」と混在していた
   it("数字の直後の全角の英字の単位を半角にする", () => {
     expect(normalizeUnitsInText("最大値と最小値の差は8,569ｈａで、最大は")).toBe("最大値と最小値の差は8,569haで、最大は");

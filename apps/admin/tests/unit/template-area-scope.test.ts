@@ -140,6 +140,8 @@ describe('グループ棒グラフ', () => {
     const line = lineChartFromArticleData(quarterly);
     if ('skip' in line) throw Error(line.skip);
     expect(line.series[0].points.map((p) => p.x)).toEqual(quarters);
+    // 見出しの下に期間を出す (CONTENT-FOLLOWUP-01: 4 桁の年からしか期間を作らず、sme-di-national の図に期間が無かった)
+    expect(line.meta).toBe('2024年1Q–2025年1Q · 単位：ポイント');
     // 年の付かない月と四半期は周期のまま
     expect(hasCyclicAxis({ data: [{ year: '10月', value: 1 }, { year: '11月', value: 2 }] })).toBe(true);
     expect(hasCyclicAxis({ data: [{ year: '1Q', value: 1 }, { year: '2Q', value: 2 }] })).toBe(true);

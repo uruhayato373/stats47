@@ -29,6 +29,9 @@
  * - 年マッチングは runtime と同一 (同年 → 無ければ分母の最新年へフォールバック)
  * - 出力の正規化 snapshot は `RankingValuesKeySnapshotSchema` 準拠 (reader 無変更で読める)
  * - 失敗は silent にしない (想定外の空は failed 扱いで exitCode=1)
+ * - `generatedAt` は「中身が最後に変わった生成の時刻」。前回配信と中身が同じなら前回の時刻を引き継ぎ、
+ *   同じバイト列にする (stable-snapshot.ts。値の generate-ranking-values.ts と同じ)。生成時刻を毎回書くと、
+ *   push 段が R2 と照合しても全件が送り直しになる。writer が動いているかは `[normalized] 時刻を引き継いだ=…` の行で見る
  *
  * R2 書き込みは assertR2WriteAllowed で保護 (ローカルは --dry-run 推奨)。
  *
@@ -45,7 +48,12 @@ import {
   findExpectedEmpty,
 } from "@stats47/data-configs";
 import { selectUnexpectedEmpties } from "./lib/empty-values-alarm";
-import { assertR2WriteAllowed, writeR2Staging } from "@stats47/r2-storage/server";
+import {
+  assertR2WriteAllowed,
+  carryTimestamp,
+  readPublishedSnapshot,
+  writeR2Staging,
+} from "@stats47/r2-storage/server";
 import { readStatsValues } from "@stats47/stats-r2/readers";
 
 import { resolveDenominator } from "../services/normalize-core";
@@ -140,7 +148,47 @@ interface Outcome {
   status: "written" | "skipped-no-values" | "skipped-no-options" | "failed";
   normTypes?: string[];
   trendSeries?: number;
+  /**
+   * 書いたファイルの generatedAt の決まり方の件数。carried = 前回配信と中身が同じで時刻を引き継いだ (バイト列も同じ)。
+   * new = 中身が変わった、または初回。unreadable = 前回配信を読めず引き継げなかった。dry-run では数えない
+   */
+  timestamps?: TimestampCounts;
   error?: string;
+}
+
+interface TimestampCounts {
+  carried: number;
+  new: number;
+  unreadable: number;
+}
+
+/**
+ * 配信する snapshot を R2 へ書く。前回配信と中身が同じなら前回の generatedAt を引き継ぎ、同じバイト列にする
+ * (stable-snapshot.ts。CONTENT-FOLLOWUP-01)。生成時刻を毎回書くと、中身が同じでも push 段が毎回送り直す。
+ * 前回配信を読めなくても生成は止めず、今回の時刻で書く (失うのは「この 1 件を送らずに済む」ことだけ)。
+ */
+async function writeStableSnapshot<T>(
+  key: string,
+  build: (generatedAt: string) => T,
+  now: string,
+  counts: TimestampCounts,
+): Promise<void> {
+  let previous: { generatedAt?: string } | null = null;
+  let unreadable = false;
+  try {
+    previous = await readPublishedSnapshot<{ generatedAt?: string }>(key);
+  } catch {
+    unreadable = true;
+  }
+  const { value, changed } = carryTimestamp(
+    build,
+    previous ? { value: previous, timestamp: previous.generatedAt } : null,
+    now,
+  );
+  await writeR2Staging(key, JSON.stringify(value));
+  if (unreadable) counts.unreadable += 1;
+  else if (changed) counts.new += 1;
+  else counts.carried += 1;
 }
 
 interface GenerateResult {
@@ -153,7 +201,7 @@ interface GenerateResult {
   }[];
 }
 
-async function generateOne(
+export async function generateOne(
   config: MetricConfig,
   denominators: Map<string, DenominatorTable>,
   dryRun: boolean,
@@ -176,6 +224,7 @@ async function generateOne(
     }
 
     const generatedAt = new Date().toISOString();
+    const timestamps: TimestampCounts = { carried: 0, new: 0, unreadable: 0 };
     const writtenTypes: string[] = [];
     const fixtureSamples: GenerateResult["fixtureSamples"] = [];
 
@@ -205,12 +254,12 @@ async function generateOne(
       });
       if (partitions.length === 0) continue;
 
-      const snapshot: RankingValuesKeySnapshot = {
-        generatedAt,
+      const buildSnapshot = (at: string): RankingValuesKeySnapshot => ({
+        generatedAt: at,
         rankingKey: config.key,
         areaType: AREA_TYPE,
         partitions,
-      };
+      });
 
       if (collectFixtures) {
         // 最新年 (partitions[0]) を fixture 検査対象にする
@@ -223,9 +272,11 @@ async function generateOne(
       }
 
       if (!dryRun) {
-        await writeR2Staging(
+        await writeStableSnapshot(
           rankingNormalizedValuesKeyPath(config.key, normType),
-          JSON.stringify(snapshot),
+          buildSnapshot,
+          generatedAt,
+          timestamps,
         );
       }
       writtenTypes.push(normType);
@@ -251,14 +302,15 @@ async function generateOne(
       };
     }
 
-    const trend: RankingNationalTrendSnapshot = {
-      generatedAt,
+    const trendSeries = series.filter((s) => s.points.length > 0);
+    const buildTrend = (at: string): RankingNationalTrendSnapshot => ({
+      generatedAt: at,
       rankingKey: config.key,
       areaType: AREA_TYPE,
-      series: series.filter((s) => s.points.length > 0),
-    };
+      series: trendSeries,
+    });
     if (!dryRun) {
-      await writeR2Staging(rankingNationalTrendPath(config.key), JSON.stringify(trend));
+      await writeStableSnapshot(rankingNationalTrendPath(config.key), buildTrend, generatedAt, timestamps);
     }
 
     return {
@@ -266,7 +318,8 @@ async function generateOne(
         key: config.key,
         status: "written",
         normTypes: writtenTypes,
-        trendSeries: trend.series.length,
+        trendSeries: trendSeries.length,
+        ...(dryRun ? {} : { timestamps }),
       },
       fixtureSamples: collectFixtures ? fixtureSamples : undefined,
     };
@@ -397,6 +450,16 @@ async function main(): Promise<void> {
   console.log(
     `[normalized] per type: ${[...perType.entries()].map(([t, n]) => `${t}=${n}`).join(" ")} / national-trend=${written.length}`,
   );
+
+  // 「時刻を引き継いだ」ファイルは前回配信と同じバイト列なので、push 段が R2 と照合して送らない
+  const sumTimestamps = (kind: keyof TimestampCounts) =>
+    written.reduce((sum, o) => sum + (o.timestamps?.[kind] ?? 0), 0);
+  if (!args.dryRun) {
+    console.log(
+      `[normalized] 時刻を引き継いだ=${sumTimestamps("carried")} 中身が変わった・初回=${sumTimestamps("new")}` +
+        ` 前回を読めなかった=${sumTimestamps("unreadable")} (ファイル数)`,
+    );
+  }
 
   if (skippedNoValues.length > 0) {
     console.log(`[normalized] no observations: ${skippedNoValues.map((o) => o.key).join(", ")}`);

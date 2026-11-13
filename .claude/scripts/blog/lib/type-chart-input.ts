@@ -256,6 +256,28 @@ export function groupedBarChartFromArticleData(parsed: unknown): GroupedBarChart
   };
 }
 
+/** A quarter written as the article data writes it: 「24年1Q」 (two-digit year) or 「2024年1Q」. */
+const QUARTER_LABEL = /^(\d{2}|\d{4})年([1-4])Q$/;
+/** Two-digit years at or above this are of the 1900s (「98年1Q」); below it, of the 2000s. */
+const TWO_DIGIT_CENTURY_PIVOT = 50;
+
+/** The period under the title: 「2017–2024年」 from years, 「2017年1Q–2026年3Q」 from quarters, else none. */
+function periodOf(xs: string[]): string {
+  if (!xs.length) return '';
+  const quarters = xs.map((x) => QUARTER_LABEL.exec(x));
+  if (quarters.every((m) => m !== null)) {
+    const keys = quarters.map((m) => {
+      const written = Number(m![1]);
+      const year = m![1].length === 4 ? written : written + (written >= TWO_DIGIT_CENTURY_PIVOT ? 1900 : 2000);
+      return { year, quarter: Number(m![2]) };
+    }).sort((a, b) => a.year - b.year || a.quarter - b.quarter);
+    const first = keys[0], last = keys[keys.length - 1];
+    return `${first.year}年${first.quarter}Q–${last.year}年${last.quarter}Q`;
+  }
+  const years = xs.map((x) => /^\d{4}/.exec(x)?.[0]).filter(Boolean).map(Number);
+  return years.length === xs.length ? `${Math.min(...years)}–${Math.max(...years)}年` : '';
+}
+
 /** Article line json → the line type. Too many lines to tell apart stay a reason to fix the data. */
 export function lineChartFromArticleData(parsed: unknown, opts: { maxSeries?: number } = {}): LineChart | { skip: string } {
   const data = (Array.isArray(parsed) ? {} : parsed) as Record<string, unknown>;
@@ -265,13 +287,11 @@ export function lineChartFromArticleData(parsed: unknown, opts: { maxSeries?: nu
   if (series.length > (opts.maxSeries ?? 8)) return { skip: `系列が多すぎる (${series.length})` };
   const named = splitTitle(text(data.title) || '推移');
   const xs = [...new Set(series.flatMap((s) => s.points.map((p) => p.x)))];
-  const years = xs.map((x) => /^\d{4}/.exec(x)?.[0]).filter(Boolean).map(Number);
-  const period = years.length === xs.length && years.length ? `${Math.min(...years)}–${Math.max(...years)}年` : '';
   const unit = text(data.unit);
   const values = series.flatMap((s) => s.points.flatMap((p) => (p.value === null ? [] : [p.value])));
   return {
     title: named.title,
-    meta: [period, unit && `単位：${unit}`].filter(Boolean).join(' · ') || text(data.subtitle),
+    meta: [periodOf(xs), unit && `単位：${unit}`].filter(Boolean).join(' · ') || text(data.subtitle),
     note: named.condition || undefined,
     source: text(data.source),
     series, decimals: decimalsIn(values),

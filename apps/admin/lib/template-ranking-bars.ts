@@ -1,7 +1,8 @@
 import { z } from 'zod';
 import { BRAND } from '../../web/src/features/ogp/brand';
 import { SAMPLE_FRAME, escapeXml, fitTitleSize, sampleBodyTop, sampleFrame } from './template-sample-frame';
-import { RANKING_SAMPLE_METRIC, RANKING_SAMPLE_PRESENTATION, RANKING_SAMPLE_YEAR, assertRankingRows, rankingBarAxis, sampleRankingChart, type ItemBarChart, type RankingChart } from './template-ranking-data';
+import { RANKING_SAMPLE_METRIC, RANKING_SAMPLE_PRESENTATION, RANKING_SAMPLE_YEAR, assertRankingRows, isCapitalCityChart, rankingBarAxis, sampleRankingChart, type ItemBarChart, type RankingChart } from './template-ranking-data';
+import { capitalCityName } from '../../remotion/src/features/data-cards/all47-svg';
 import type { MetricPresentation } from '../../../packages/types/src/metric-presentation';
 import { scopeAttributes, type AreaChart } from './template-area-scope';
 import { resolveMetricColor } from '../../remotion/src/features/data-cards/tile-scale';
@@ -58,7 +59,13 @@ export function renderRankingBars(raw: unknown, presentation: MetricPresentation
 
 /** Upper and lower five of any complete ranking, in the metric's colour (lower five in its lighter tint). */
 export function renderRankingBarsChart(chart: RankingChart, theme: ChartTheme = LIGHT_THEME) {
-  return drawBars(chart, assertRankingRows(chart.rows), theme, { title: chart.title + 'ランキング', upper: '上位5県', lower: '下位5県' });
+  const rows = assertRankingRows(chart.rows);
+  // Capital-city values (家計調査) name the same cities as the tile map, not the prefectures.
+  if (isCapitalCityChart(chart)) {
+    const cities = rows.map((row) => ({ ...row, area_name: capitalCityName(row.area_code) }));
+    return drawBars(chart, cities, theme, { title: chart.title + 'ランキング', upper: '上位5市', lower: '下位5市' });
+  }
+  return drawBars(chart, rows, theme, { title: chart.title + 'ランキング', upper: '上位5県', lower: '下位5県' });
 }
 
 /** The same cards for a scope's areas (resolveAreaChart): one bar type, whatever the set. */

@@ -83,6 +83,32 @@ export function requiresAdTrafficBlock(baseUrl) {
 /** Service Worker が出す通信は route を通らないので、context を作るときに Service Worker を止める */
 export const AD_TRAFFIC_CONTEXT_OPTIONS = Object.freeze({ serviceWorkers: /** @type {const} */ ("block") });
 
+/** サイトの同意の帯が書く Cookie の名前 (apps/web の CookieConsentBanner.tsx の CONSENT_COOKIE_NAME) */
+export const CONSENT_COOKIE_NAME = "stats47_consent";
+/** gtag の同意が読む localStorage の名前 (CookieConsentBanner.tsx の CONSENT_LS_KEY・GoogleAnalytics.tsx) */
+export const CONSENT_STORAGE_KEY = "stats47_cookie_consent";
+
+/**
+ * 同意を断った状態で開く。ページを開く前 (context.newPage() の前) に呼ぶ。
+ * 同意の帯は Cookie を、gtag の同意は localStorage を読むので、両方に書く (CONTENT-FOLLOWUP-01。
+ * 以前は Cookie だけに書き、帯は消えるが gtag には断ったことが届いていなかった)。
+ * @param {Pick<import("playwright").BrowserContext, "addCookies" | "addInitScript">} context
+ * @param {string} baseUrl
+ */
+export async function declineCookieConsent(context, baseUrl) {
+  await context.addCookies([{ name: CONSENT_COOKIE_NAME, value: "denied", url: baseUrl }]);
+  await context.addInitScript(
+    ([key]) => {
+      try {
+        localStorage.setItem(key, "denied");
+      } catch {
+        // 読み書きできないページ (about:blank など) では何もしない
+      }
+    },
+    [CONSENT_STORAGE_KEY],
+  );
+}
+
 /**
  * @typedef {object} AdTrafficTally
  * @property {string | null} baseHost 撮る先の host (外部の host の判定に使う)
