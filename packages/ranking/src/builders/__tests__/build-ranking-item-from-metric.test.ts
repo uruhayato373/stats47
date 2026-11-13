@@ -1,7 +1,12 @@
-import { buildRecipe, getMetricConfig, type MetricConfig } from "@stats47/data-configs";
+import { buildRecipe, getMetricConfig, METRICS_REGISTRY, type MetricConfig } from "@stats47/data-configs";
 import { describe, expect, it } from "vitest";
 
-import { buildRankingItemFromMetric, yearNameOf } from "../build-ranking-item-from-metric";
+import {
+  buildRankingItemFromMetric,
+  resolveSurveyLinkage,
+  usesAllSourcesLinkageFallback,
+  yearNameOf,
+} from "../build-ranking-item-from-metric";
 
 const NOW = "2026-06-03T00:00:00.000Z";
 
@@ -246,5 +251,90 @@ describe("系列の終わり (seriesEnd) の注記", () => {
       { values: { yearCodes: ["2024"] }, now: NOW },
     );
     expect(ongoing.annotation).toBe("県庁所在市の値");
+  });
+});
+
+/** 主出典が調査マスタに無く、全原典での紐付けを残している公開中の指標 (2026-11-14 時点 17 件。減らすだけ) */
+const ALL_SOURCES_FALLBACK_KEYS: string[] = [
+  "annual-emergency-dispatches-per-1000",
+  "certified-childcare-center-count-per-100k-0-5",
+  "fire-department-dispatch-count-per-100-thousand-people",
+  "fire-department-emergency-car-count-per-100k",
+  "fire-department-member-count-per-100-thousand-people",
+  "fire-department-pump-car-count-per-100-thousand-people",
+  "fire-department-water-count-per-100-thousand-people",
+  "fire-dispatch-for-building-fire-count-per-100k",
+  "japan-health-insurance-society-enrollees-per-1000",
+  "mobile-phone-contract-count-per-1000",
+  "passport-issuance-count-per-thousand",
+  "pollution-complaints-received-per-100k",
+  "public-elementary-school-gym-installation-rate",
+  "public-elementary-school-pool-installation-rate",
+  "public-high-school-pool-installation-rate",
+  "public-junior-high-school-gym-installation-rate",
+  "public-junior-high-school-pool-installation-rate",
+];
+
+describe("resolveSurveyLinkage: 調査のページへ並べるのは主出典 (計算式の分子) の調査だけ", () => {
+  // 2026-09-25 の UI 全面点検で、国勢調査のページに他の調査の指標が並んでいた (SURVEY-PAGES-01)。
+  // 社会・人口統計体系の指標は「分子 / 人口・面積」で、分母の資料源 (国勢調査・人口推計・面積調) まで調査に数えていた。
+  it.each([
+    ["road-length-per-km2", ["road-statistics"]],
+    ["crude-birth-rate", ["vital-statistics"]],
+    // 分子の基礎項目に資料源の手当てがある指標は、人口の調査ではなく手当ての原典へ結ぶ
+    ["bank-deposit-balance-per-person", ["boj-statistics"]],
+  ])("%s は分母の調査 (国勢調査・人口推計・面積調) へ紐付けない", (key, expected) => {
+    const { surveyIds, originalSurveys } = resolveSurveyLinkage(getMetricConfig(key)!, METRICS_REGISTRY);
+    expect(surveyIds).toEqual(expected);
+    expect(originalSurveys.map((survey) => survey.id)).toEqual(expected);
+  });
+
+  it("警察費 (1 人当たり) は国勢調査へ紐付けない", () => {
+    const { surveyIds } = resolveSurveyLinkage(
+      getMetricConfig("per-capita-police-expenditure-pref-municipal")!,
+      METRICS_REGISTRY,
+    );
+    expect(surveyIds.length).toBeGreaterThan(0);
+    expect(surveyIds).not.toContain("census");
+    expect(surveyIds).not.toContain("population-estimates");
+  });
+
+  it.each([
+    // 基礎項目と、分子が国勢調査の指標は国勢調査のまま
+    ["day-time-population-ratio", ["census"]],
+    ["total-population", ["census", "population-estimates"]],
+    ["population-density-per-km2-total-area", ["census", "population-estimates"]],
+  ])("%s は国勢調査由来なので国勢調査へ紐付けたまま", (key, expected) => {
+    const { surveyIds } = resolveSurveyLinkage(getMetricConfig(key)!, METRICS_REGISTRY);
+    expect([...surveyIds].sort()).toEqual(expected);
+  });
+
+  it("出典の表記 (attribution) は分母の資料源も含めた全原典のまま", () => {
+    const item = buildRankingItemFromMetric(getMetricConfig("crude-birth-rate")!, {
+      values: { yearCodes: ["2023"] },
+      now: NOW,
+      registry: METRICS_REGISTRY,
+    });
+    expect(item.surveyIds).toEqual(["vital-statistics"]);
+    expect(item.attribution?.originalSurveys.map((survey) => survey.id).sort()).toEqual([
+      "census",
+      "population-estimates",
+      "vital-statistics",
+    ]);
+  });
+
+  it("主出典が調査マスタに無い指標だけは、全原典での紐付けを残す (一覧は減らすだけ)", () => {
+    // 原典 (消防年報・救急・救助の現況・公共施設状況調・旅券統計など) を調査マスタへ登録すると、ここから外れて
+    // 分母の調査のページにも並ばなくなる。新しい指標がここに増えたら、原典の登録か対応表の追記で解く。
+    const fallback = Object.values(METRICS_REGISTRY)
+      .filter((config) => config.isActive !== false)
+      .filter((config) => usesAllSourcesLinkageFallback(config, METRICS_REGISTRY))
+      .map((config) => config.key)
+      .sort();
+    expect(fallback).toEqual(ALL_SOURCES_FALLBACK_KEYS);
+    // 未分類にはしない (公開中の指標の調査への紐付け件数を減らさない)
+    for (const key of ALL_SOURCES_FALLBACK_KEYS) {
+      expect(resolveSurveyLinkage(getMetricConfig(key)!, METRICS_REGISTRY).surveyIds.length).toBeGreaterThan(0);
+    }
   });
 });

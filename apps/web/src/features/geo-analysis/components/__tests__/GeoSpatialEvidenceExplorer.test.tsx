@@ -45,6 +45,7 @@ vi.mock('@stats47/components/atoms/ui/select', () => ({
 }));
 
 import { manifestFixture } from '../../lib/__tests__/geo-manifest-fixture';
+import { spatialAuditRows } from '../../lib/geo-spatial-evidence';
 import { GeoSpatialEvidenceExplorer } from '../GeoSpatialEvidenceExplorer';
 
 const versionA = '2026-09-05T00:00:00.000Z';
@@ -211,8 +212,18 @@ describe('Geo表示境界の県・段階・証跡版', () => {
     const audit = screen.getByTestId('spatial-audit');
     expect(audit).toHaveTextContent('数値の確かめ方');
     expect(audit).toHaveTextContent('全47県の途中データと県別集計を照合');
-    // Audit cards come from the loaded prefecture detail (spatialAuditRows).
-    expect(audit.querySelectorAll('p.tabular-nums').length).toBeGreaterThan(0);
+    // 検算の値は読み込んだ県別データ (spatialAuditRows) から作り、共通の数値タイル (StatTile) を
+    // 数値タイルの格子 (StatTileGrid) に並べる。値を大きく見せる箱をこの部品の中で手組みしない。
+    const grid = audit.querySelector('[data-slot-kind="stat-tile-grid"]');
+    expect(grid).not.toBeNull();
+    const tiles = [...grid!.querySelectorAll('[data-slot-kind="stat-tile"]')];
+    expect(
+      tiles.map((tile) => ({
+        label: tile.querySelector('dt')?.textContent,
+        value: tile.querySelector('dd')?.textContent,
+      }))
+    ).toEqual(spatialAuditRows(detail('13', versionA)));
+    expect(audit.querySelectorAll('p.tabular-nums')).toHaveLength(0);
   });
 
   it('GETが失敗（版不一致の404や通信断）したときは地図を出さず再読み込みへ戻る', async () => {

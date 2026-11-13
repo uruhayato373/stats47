@@ -26,7 +26,10 @@ export interface ArticleMetric {
   visualization?: unknown;
   category?: string;
   display?: { conversionFactor?: number; decimalPlaces?: number };
-  source?: { kind?: string };
+  /** 'fiscal' reads 「2022年度」, 'calendar' 「2022年」 (the metric's definition, not the article's subtitle). */
+  yearFormat?: string;
+  /** The metric's source; `kind` tells the survey, `displayName` is the short name an image shows. */
+  source?: { kind?: string; displayName?: string };
 }
 type Row = { value?: unknown; areaCode?: unknown; area_code?: unknown; pref?: unknown; areaName?: unknown; label?: unknown; name?: unknown };
 
@@ -89,19 +92,21 @@ export function rankingChartFromArticleData(
     area_name: opts.prefNameOf(it.code),
     value: it.value,
   }));
-  const title = (text(data.title) || text(data.label) || opts.metric?.title || '').replace(/ランキング$/, '');
+  // 「…ランキング（2024年）」: the bar type adds 「ランキング」 itself and the line under the title carries the year.
+  const written = text(data.title) || text(data.label) || opts.metric?.title || '';
+  const title = written.replace(TITLE_YEAR, '').replace(/ランキング$/, '').trim();
   // The subtitle carries the label as shown (「2022年度」); otherwise the year is a calendar year.
   const subtitleYear = /^\d{4}年度?$/.exec(text(data.subtitle))?.[0];
   // Without a year the subtitle is the only condition the data states, and it takes the year's place.
-  const yearLabel = subtitleYear ?? (/^\d{4}$/.test(text(data.year)) ? `${text(data.year)}年` : text(data.subtitle));
+  const yearLabel = subtitleYear ?? (/^\d{4}$/.test(text(data.year)) ? `${text(data.year)}年` : TITLE_YEAR.exec(written)?.[1] ?? text(data.subtitle));
   if (!title) return { skip: '図の名前がデータに無い' };
   const subtitle = text(opts.metric?.subtitle);
   // A subtitle that already names the capital cities is enough; otherwise the scope is added in one word.
   const scope = isCapitalCityScope(opts.metric) && !subtitle.includes(CAPITAL_CITY_SCOPE) ? CAPITAL_CITY_SCOPE : '';
   return {
     title,
-    yearLabel,
-    source: text(data.source),
+    yearLabel: yearLabelOf(yearLabel, opts.metric),
+    source: text(data.source) || metricSourceName(opts.metric),
     note: [subtitle, scope].filter(Boolean).join('・') || undefined,
     presentation: presentationOf(data, opts.metric),
     rows,
@@ -125,8 +130,8 @@ export function itemBarChartFromArticleData(parsed: unknown, opts: { metric?: Ar
   const named = splitTitle((text(data.title) || text(data.label) || opts.metric?.title || '').replace(/ランキング$/, ''));
   if (!named.title) return { skip: '図の名前がデータに無い' };
   return {
-    title: named.title, note: named.condition || undefined, source: text(data.source),
-    yearLabel: /^\d{4}$/.test(text(data.year)) ? `${text(data.year)}年` : text(data.subtitle),
+    title: named.title, note: named.condition || undefined, source: text(data.source) || metricSourceName(opts.metric),
+    yearLabel: yearLabelOf(/^\d{4}$/.test(text(data.year)) ? `${text(data.year)}年` : text(data.subtitle), opts.metric),
     presentation: presentationOf(data, opts.metric), rows,
     ...chartValueLabels(text(data.unit), rows.map((row) => row.value)),
   };
@@ -148,6 +153,18 @@ export function radarChartFromArticleData(parsed: unknown, manifest: Record<stri
 }
 
 const text = (v: unknown) => (typeof v === 'string' ? v.trim() : '');
+/** A year in brackets closing a title: 「教養娯楽費割合ランキング（2024年）」. */
+const TITLE_YEAR = /[\s　]*[（(](\d{4}年度?)[)）]$/;
+const metricSourceName = (metric?: ArticleMetric) => text((metric?.source as { displayName?: unknown } | undefined)?.displayName);
+/**
+ * A bare year as the metric's definition reads it: article data written before 2026-11 says 「2021年」 for
+ * fiscal metrics. Other labels (a condition, a range) and charts without a metric stay as written.
+ */
+function yearLabelOf(label: string, metric?: ArticleMetric) {
+  const year = /^(\d{4})年度?$/.exec(label)?.[1];
+  if (!year || (metric?.yearFormat !== 'fiscal' && metric?.yearFormat !== 'calendar')) return label;
+  return metric.yearFormat === 'fiscal' ? `${year}年度` : `${year}年`;
+}
 const numberOr = (v: unknown) => (typeof v === 'number' && Number.isFinite(v) ? v : null);
 const TITLE_MAX_CHARS = 21;
 const REDUNDANT_CONDITION = /\d{4}\s*[-–〜~]\s*\d{4}|\svs\s/;

@@ -44,10 +44,20 @@ const SITE_NAV_DEDUP_PAGES = [
 const CATEGORY_INDEX_HUB_PAGES = ['src/app/ranking/page.tsx'];
 
 /**
- * 右レールを持たないページ。都道府県ページは目次を h1 下の 1 行ナビへ移し、右レールを撤去した
+ * 右レールを持たないページ。都道府県ページは目次を h1 下のリンクの並びへ移し、右レールを撤去した
  * (2026-10-28 template-audit 2 巡目)。
  */
 const NO_RIGHT_RAIL_PAGES = ['src/app/areas/[areaCode]/page.tsx'];
+
+// AREA-TOC-MOBILE-01 (2026-10-26 オーナー決定): 県の目次は節が多いので、1 行の横スクロールにせず折り返して全件を出す
+it('都道府県ページの目次は折り返すリンクの並び (LinkRowNav wrap) で全ての節を出す', () => {
+  const source = read('src/app/areas/[areaCode]/page.tsx');
+  const itemsIndex = source.indexOf('items={AREA_DATABOOK_TOC_ITEMS}');
+  expect(itemsIndex).toBeGreaterThan(-1);
+  const tocTag = source.slice(source.lastIndexOf('<', itemsIndex), source.indexOf('/>', itemsIndex));
+  expect(tocTag).toContain('<LinkRowNav');
+  expect(tocTag).toMatch(/\bwrap\b/);
+});
 
 it('右レールを持たないページは RailStack / RightRailWidgets を使わない', () => {
   for (const page of NO_RIGHT_RAIL_PAGES) {

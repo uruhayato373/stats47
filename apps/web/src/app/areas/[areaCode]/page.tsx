@@ -185,7 +185,7 @@ export default async function AreaProfilePage({ params }: PageProps) {
         }}
       />
 
-      {/* 右レールは持たない。目次は h1 の直後の 1 行のナビにし、最初の画面に「特徴」カードを出す */}
+      {/* 右レールは持たない。目次は h1 の直後に折り返すリンクの並びで全ての節を出す (AREA-TOC-MOBILE-01) */}
       <PageShell>
         <Breadcrumb className="mb-4">
           <BreadcrumbList>
@@ -209,6 +209,7 @@ export default async function AreaProfilePage({ params }: PageProps) {
           label={`${profile.areaName}の目次`}
           items={AREA_DATABOOK_TOC_ITEMS}
           className="mb-4"
+          wrap
         />
 
         <PanelGrid>

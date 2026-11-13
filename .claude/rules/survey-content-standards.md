@@ -17,7 +17,8 @@ agent (`survey-curator`) / 人間はこれに従う。2026-07-12 に旧 survey �
 
 > **実装済み SSOT**: survey 編集情報はカタログの `surveys.editorial` (JSON + Schema。読み込みは `packages/data-configs/src/survey-editorial.ts`)
 > (`summary` / `whatYouCanLearn[]` / `readerQuestions[]{question,rankingKey}` / `caveats[]` / `relatedArticleSlugs[]` /
-> `areaLabel` (ハブ冒頭の地域の表記。都市別の値を集める調査だけ書く))。
+> `areaLabel` (ハブ冒頭の地域の表記。都市別の値を集める調査だけ書く) /
+> `surveyCycle{intervalYears,anchorYear}` (毎年でない調査の実施周期。ハブ冒頭の最新年を実施年から出す。国勢調査は 5 年ごと))。
 > `readerQuestions` の rankingKey は、ハブの代表ランキングとランキングページの「同じ調査のランキング」でも最優先に並ぶ (2026-11-02)。
 > **同じ調査の別 ID は 1 つのハブにまとめる**: 指標の紐付けで ID が分かれていても (家計調査は品目別 `kakei-chousa` と社会・人口統計体系経由の
 > `household-survey`)、読者にとって 1 つの調査ならハブは 1 つにする。表は `packages/data-configs/src/content/href.ts` の `SURVEY_HUB_ALIASES`
@@ -89,7 +90,7 @@ surveys.editorial (カタログの ID)  ← survey 編集情報の SSOT
   ├─ whatYouCanLearn[]
   ├─ readerQuestions[] { question, rankingKey }
   ├─ caveats[]
-  ├─ areaLabel
+  ├─ areaLabel / surveyCycle
   └─ relatedArticleSlugs[]
 
 data/surveys/lenses/<surveyId>.json  ← 調査の切り口台帳 (下の「調査の切り口台帳」)

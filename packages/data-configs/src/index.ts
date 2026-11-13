@@ -92,6 +92,7 @@ export {
 export {
   isCapitalCityValueMetric,
   rankingHookAreaNoun,
+  resolveMetricPrimaryProvenance,
   resolveMetricProvenance,
   resolveSourceProvenance,
   resolveProvenanceByParams,

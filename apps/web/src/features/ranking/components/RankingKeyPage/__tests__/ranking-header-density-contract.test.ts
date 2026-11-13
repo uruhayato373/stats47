@@ -18,6 +18,13 @@ const PAGE_CLIENT = readFileSync(
   ),
   'utf8'
 );
+const PAGE_SHELL = readFileSync(
+  path.resolve(
+    process.cwd(),
+    'src/features/ranking/components/RankingKeyPage/RankingPageClientShell.tsx'
+  ),
+  'utf8'
+);
 const PAGE_MODEL = readFileSync(
   path.resolve(
     process.cwd(),
@@ -55,6 +62,16 @@ describe('ranking header density contract', () => {
     expect(header).toContain('metricTitle={displayInfo.title}');
     expect(header).toContain('areaType={currentAreaType}');
     expect(header).toContain('updatedAt={activeRankingItem.updatedAt}');
+  });
+
+  it('見出しの最新年は表示中の地域粒度の指標から取り、古さの基準の年はサーバーが渡す', () => {
+    const header = PAGE_CLIENT.match(/<RankingHeaderPanel\b[\s\S]*?\/>/)?.[0];
+    // 市区町村の指標は別の定義で、最新年が都道府県と同じとは限らないので、切り替え後の指標 (activeRankingItem) から取る
+    expect(header).toContain('latestYear={activeRankingItem.latestYear}');
+    expect(header).toContain('nowYear={nowYear}');
+    // クライアントで new Date() を読むと、年をまたいだ ISR キャッシュとハイドレーションで表示が食い違う
+    expect(PAGE_CLIENT).not.toContain('new Date(');
+    expect(PAGE_SHELL).toContain('nowYear={new Date().getFullYear()}');
   });
 
   it('集計条件だけを可視化直下に置き、更新日の重複を防ぐ', () => {

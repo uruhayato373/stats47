@@ -27,7 +27,7 @@ import { ChartLegend } from '@/components/charts/ChartLegend';
 import { GEO_BASEMAP_SHORELINE_ATTRIBUTION } from '@/components/charts/leaflet-basemap';
 import { PanelGrid } from '@/components/layout/PageShell';
 import { SectionHeader } from '@/components/section';
-import { SurfaceCard } from '@/components/surface';
+import { StatTile, StatTileGrid } from '@/components/surface';
 
 import {
   trackGeoMapInteraction,
@@ -391,16 +391,12 @@ function GeoSpatialEvidenceExplorerState({
       <PanelGrid data-testid="spatial-audit">
         <SectionHeader as="h3" title="数値の確かめ方" hideRule />
         {detail && !loading ? (detail.slug === 'population-landslide-exposure' ? <GeoLandslideAudit detail={detail} /> :
-          <PanelGrid className="sm:grid-cols-3">
+          <StatTileGrid>
+            {/* 検算の式は桁の多い数が続く。4 列のマスに収まらない数は途中で折り返し、枠で切れないようにする */}
             {spatialAuditRows(detail).map((row) => (
-              <SurfaceCard key={row.label}>
-                <p className="text-xs text-muted-foreground">{row.label}</p>
-                <p className="mt-2 text-base font-semibold tabular-nums">
-                  {row.value}
-                </p>
-              </SurfaceCard>
+              <StatTile key={row.label} className="wrap-anywhere" label={row.label} value={row.value} />
             ))}
-          </PanelGrid>
+          </StatTileGrid>
         ) : null}
         <p className="mt-3 text-sm text-muted-foreground">
           {landslide ? '対象46県（京都府除外）の途中データと県別集計を照合（' : '全47県の途中データと県別集計を照合（'}
