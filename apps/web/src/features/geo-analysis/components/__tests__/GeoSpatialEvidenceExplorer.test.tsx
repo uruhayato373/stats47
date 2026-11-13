@@ -5,7 +5,8 @@ import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-vi.mock('@/lib/analytics/events', () => ({
+vi.mock('@/lib/analytics/events', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('@/lib/analytics/events')>()),
   trackGeoRegionSelect: vi.fn(),
   trackGeoMapInteraction: vi.fn(),
 }));

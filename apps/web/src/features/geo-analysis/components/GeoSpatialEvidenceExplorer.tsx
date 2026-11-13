@@ -30,6 +30,7 @@ import { SectionHeader } from '@/components/section';
 import { StatTile, StatTileGrid } from '@/components/surface';
 
 import {
+  navSurfaceProps,
   trackGeoMapInteraction,
   trackGeoRegionSelect,
 } from '@/lib/analytics/events';
@@ -404,7 +405,7 @@ function GeoSpatialEvidenceExplorerState({
           /{landslide ? 46 : 47}）。表示の人数は丸めているため足し算に1人程度の差が出ることがあります。検算は丸め前の値で行います。
         </p>
       </PanelGrid>
-      <div className="mt-4 flex flex-wrap gap-4 text-sm">
+      <div className="mt-4 flex flex-wrap gap-4 text-sm" {...navSurfaceProps('geo_evidence')}>
         <Link
           href={`${hrefFor('geo', { analysisSlug: slug })}?pref=${prefCode}&stage=${view}${publicFacility ? `&group=${facilityGroup}` : ''}`}
           className="text-primary underline"

@@ -11,6 +11,8 @@ import { PanelGrid } from '@/components/layout/PageShell';
 import { SectionHeader } from '@/components/section';
 import { SurfaceCard } from '@/components/surface';
 
+import { navSurfaceProps } from '@/lib/analytics/events';
+
 import { toGeoReaderTerms, type GeoCrossAnalysisSlug } from '../lib/geo-cross-analysis';
 import { geoAnalysisPublicDataUrl } from '../lib/load-geo-analysis-evidence';
 
@@ -31,7 +33,7 @@ export function GeoContentPublicationSection({
   const detailKey = geoAnalysisPrefKey(slug, prefCode2);
 
   return (
-    <PanelGrid as="section" id="article-data" className="scroll-mt-24">
+    <PanelGrid as="section" id="article-data" className="scroll-mt-24" {...navSurfaceProps('geo_evidence')}>
       <SectionHeader
         title="再現・検証データ"
         description="結論だけでなく、入力、空間処理、県別途中データ、合計の検算を同じ分析の証拠として公開しています。"
