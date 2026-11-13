@@ -55,7 +55,7 @@ export default async function DomainPage({ params }: { params: Promise<{ id: str
             )}
           </Stack>
         </PanelCard>
-        <PanelCard title="構えと今の狙い" icon={<CompassIcon />} description="収益化戦略 §5 の領域表">
+        <PanelCard title="構えと今の狙い" icon={<CompassIcon />} description="領域と構えの台帳">
           {stance ? (
             <Stack gap="sm">
               <div><StatusBadge tone={STANCE_TONE[stance as keyof typeof STANCE_TONE] ?? "neutral"}>{stance}</StatusBadge></div>
@@ -63,7 +63,7 @@ export default async function DomainPage({ params }: { params: Promise<{ id: str
               <Link href="/strategy/lanes" className="text-xs font-medium underline-offset-4 hover:underline">領域と構えへ →</Link>
             </Stack>
           ) : (
-            <p className="text-sm text-muted-foreground">領域表に行が無い</p>
+            <p className="text-sm text-muted-foreground">領域と構えの台帳に行が無い</p>
           )}
         </PanelCard>
       </Grid>

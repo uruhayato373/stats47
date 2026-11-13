@@ -122,7 +122,7 @@ improvement 系スキル (gsc / ga4 / adsense / affiliate / cloudflare-cost / ps
 | 場所 | 内容 |
 |---|---|
 | `.claude/todo/improvements.md` | active 施策の一覧 (6列の簡易表)。pending / in-progress / effect-pending と Tier + 期日を管理し、効果判定後は行を削除する。**TODO 真実源** |
-| `.claude/skills/analytics/<metric>-improvement/reference/improvement-log.md` | agent 用詳細ログ。検証コマンド・仮説・期日・URL inspection 結果など、agent が深掘り参照する詳細 |
+| `data/improvement/<metric>-improvement/improvement-log.md` | agent 用詳細ログ。検証コマンド・仮説・期日・URL inspection 結果など、agent が深掘り参照する詳細 |
 
 人間は `.claude/todo/improvements.md` を読み、agent (*-improvement / weekly-review) は両方を読む。
 
@@ -176,7 +176,7 @@ updated: 2026-MM-DD
 - backlog のカードは tier セクション（🔴🟡🟢🟣）の中に置き、`タグ:` 行（カテゴリ/種類/実行/検証/起票/期日）を付ける。タグ無しは分類待ちとして検査が集計する。
 - 実行中のカードには完了条件を本文に付ける。外部変更や破壊的操作には停止条件・禁止・承認境界も付ける。作業中は `[進行中]` を立てる。
 - 月次・週次計画はカードのIDを参照し、タグや詳細を複製しない。
-- 領域と構え: 優先順位の正典は `docs/00_プロジェクト管理/02_収益化戦略.md` §5 の領域表。backlog の `[領域:]`・月次 `focus_domains`・週次 Must の整合は `strategy-lanes.cjs` が DG073〜078 で検査する (管理画面 `/strategy/lanes`)。
+- 領域と構え: 優先順位の正典は領域の台帳 `data/business/domain-stances.json` (構えの考え方は `docs/00_プロジェクト管理/02_収益化戦略.md` §5)。backlog の `[領域:]`・月次 `focus_domains`・週次 Must の整合は `strategy-lanes.cjs` が DG073〜078 で検査する (管理画面 `/strategy/lanes`)。
 - 完了・撤退・supersededはカードまたは行を削除し、Git履歴へ委ねる。
 
 ## 整理・削除契約

@@ -39,7 +39,7 @@ npm run dev --workspace web
 
 | 知りたいこと | 参照先 |
 |---|---|
-| プロジェクト概要・要件 | `docs/00_プロジェクト管理/01_概要/` |
+| プロジェクト概要・要件 | `docs/00_プロジェクト管理/01_プロジェクト定義.md` |
 | 技術設計・アーキテクチャ | `docs/01_技術設計/` |
 | DB 操作・スキーマ | `packages/database/README.md` |
 | CI/CD・デプロイ | `.github/workflows/README.md` |

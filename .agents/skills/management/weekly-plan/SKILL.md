@@ -284,7 +284,7 @@ continue 中の実験の measure 実行予定は Must 候補に加える。
   上位 3 枚のどれも Must に入らない週は `npm run docs:check` の DG083 が警告する。例外は損失の出ている `[種類:不具合]` を入れた週だけ。
   オーナー作業の 🔴 は Must ではなく計画末尾の「オーナー作業」節に並べ、何を決めて・何をしてほしいかを 1 行で書く
 - 未達の繰り返しタスク or 収益直結 or 期限付き
-- 各タスクに: 理由, 成功基準, 推定工数(S/M/L), 該当スキル, **動かす KPI の id**（参照する improvements 行の `[kpi:]`、backlog カードなら領域表の KPI 列）
+- 各タスクに: 理由, 成功基準, 推定工数(S/M/L), 該当スキル, **動かす KPI の id**（参照する improvements 行の `[kpi:]`、backlog カードなら領域の台帳 `data/business/domain-stances.json` の `kpis`）
 - ガードレール KPI が悪化している週は、その是正を重点より先に Must に入れる
 - 「重点領域の KPI なのに施策が 0 件」が出ている週は、その KPI を動かす施策の起票（`[kpi:]` と根拠のある `[target:]` 付き）を Must 候補にする
 

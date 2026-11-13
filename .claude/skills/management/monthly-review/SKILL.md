@@ -59,7 +59,7 @@ node .claude/scripts/management/check-review-cadence.mjs
 2. **KPI ツリーの判定**: 重点レーンの駆動 KPI について、月内の週次推移と、4 週前 (窓が重ならない週) との比較を書き、
    動いた・動かなかったを 1 文で判定する。値が `not-connected` / `missing` / `stale` / `degraded` の KPI は 0 と読まず、
    理由を書いて「課題・ブロッカー」へ入れる。NSM (週次収益) の判定不能週を 0 円と書かない。
-   領域表 (収益化戦略 §5) の「構えを変える条件」を満たした領域があれば、来月への申し送りに改訂提案として書く。
+   領域の台帳 `data/business/domain-stances.json` の「構えを変える条件」(`gate`) を満たした領域があれば、来月への申し送りに改訂提案として書く。
 3. **週次レビューの総括**: 週ごとの Must 達成比、2 週以上続いた未達、週次の申し送りがカード ID に結ばれた割合
    (`check-review-cadence.mjs --json` の `reviews.weekly[].routed`) を表にする。
 4. **施策の効果判定**: 対象月の verdict を full / partial / none / adverse / pending ごとに数え、pending は効いている

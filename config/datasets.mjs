@@ -9,7 +9,7 @@
  *   id      「取得元.データセット」。置き場を移しても変えない
  *   path    repo root からの相対パス。可変部分は SLOTS ({date} {week} {month} {ts} {hash} {name} {**})
  *   kind    KINDS のどれか
- *   domain  config/domains.json の領域 id
+ *   domain  data/business/domains.json の領域 id
  *   target  本来の置き場 (TARGETS)。path の現在地と食い違う行が、data/ への移行 (手順 2) の対象
  *   opts    schema: 形状契約 (JSON Schema) のパス。kind が master / ledger / config で path が .json の行は必須。それ以外の kind も
  *                   宣言すれば検証する (check-datasets。判断に使う記録は書き手も .claude/scripts/lib/dataset-shape.mjs で書く前に検証)
@@ -725,6 +725,13 @@ export const DATASETS = [
   }),
   d("business.experiments", "data/business/experiments.json", "ledger", "strategy", "data", "実験の台帳 (PDCA)", { schema: "config/schema/business.experiments.schema.json" }),
   d("business.pilot-board", "data/business/pilot-board.json", "ledger", "strategy", "data", "収益化 pilot の判定ボードの入力 (開始日・窓・判定に使う指標)", { schema: "config/schema/business.pilot-board.schema.json" }),
+  d("business.domain-stances", "data/business/domain-stances.json", "ledger", "strategy", "data", "領域ごとの構え・狙い・構えを変える条件・改善 Metric・KPI (優先順位の正本。月次の重点・週次 Must・backlog の領域タグが従う)", {
+    schema: "config/schema/business.domain-stances.schema.json",
+    refs: [
+      { field: "lanes[].domain", to: "admin.domains", key: "domains[].id" },
+      { field: "lanes[].kpis[]", to: "business-plan.metrics", key: "metrics[].id" },
+    ],
+  }),
   d("business.issue-map", "data/business/issue-map.json", "ledger", "strategy", "data", "事業イシューマップの入力 (主イシュー・仮説・前提・4 型 × 3 収益源の 12 マス・ストーリーライン・注記)。判定日と進み具合は写さず ID で台帳を指す", {
     schema: "config/schema/business.issue-map.schema.json",
     refs: [{ field: "rows[].contentType", to: "content.types", key: "types[].id" }],

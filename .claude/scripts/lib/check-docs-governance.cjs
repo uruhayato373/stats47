@@ -755,7 +755,7 @@ function inspectRepository({
   }
 
   // 領域と構え (収益化戦略の優先順位表) → 月次 focus_domains → 週次 Must → backlog [領域:] の配線と、計画の規律 (DG081/082)。
-  // 判定規則は strategy-lanes.cjs、領域の語彙は収益化戦略の表だけが持つ。
+  // 判定規則は strategy-lanes.cjs、領域の構えは台帳 business.domain-stances だけが持つ。
   for (const issue of strategyLanes.laneBoard(root, now).issues) {
     add(issue.level, issue.code, issue.file, issue.message);
   }
