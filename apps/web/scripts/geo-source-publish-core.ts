@@ -362,21 +362,110 @@ export type GeoSourcePlan = {
   objects: PlannedObject[];
 };
 
-/** Bound memory and R2 requests; finish in-flight work before propagating a batch failure. */
+export const GEO_SOURCE_MAX_IN_FLIGHT = 4;
+
+/** Run measurements: comparable API counts, transfer bytes and wall time per phase. */
+export type GeoSourceMetrics = {
+  api: {
+    head: number;
+    get: number;
+    put: number;
+    list: number;
+    publicGet: number;
+  };
+  bytes: { s3Get: number; s3Put: number; publicGet: number };
+  maxInFlight: number;
+  dispatched: number;
+  phases: Record<string, number>;
+};
+export function createGeoSourceMetrics(): GeoSourceMetrics {
+  return {
+    api: { head: 0, get: 0, put: 0, list: 0, publicGet: 0 },
+    bytes: { s3Get: 0, s3Put: 0, publicGet: 0 },
+    maxInFlight: 0,
+    dispatched: 0,
+    phases: {},
+  };
+}
+export function instrumentGeoSourceStore(
+  store: ImageObjectStore,
+  metrics: GeoSourceMetrics
+): ImageObjectStore {
+  return {
+    ...store,
+    get: async (key) => {
+      metrics.api.get++;
+      const object = await store.get(key);
+      metrics.bytes.s3Get += object?.body.length ?? 0;
+      return object;
+    },
+    head: async (key) => {
+      metrics.api.head++;
+      return store.head(key);
+    },
+    put: async (request) => {
+      metrics.api.put++;
+      metrics.bytes.s3Put += request.body.length;
+      return store.put(request);
+    },
+  };
+}
+/** Adds the wall time of one named phase (repeated names accumulate). */
+export async function timeGeoSourcePhase<R>(
+  metrics: GeoSourceMetrics | undefined,
+  name: string,
+  work: () => Promise<R>
+): Promise<R> {
+  const startedAt = performance.now();
+  try {
+    return await work();
+  } finally {
+    if (metrics)
+      metrics.phases[name] =
+        (metrics.phases[name] ?? 0) + Math.round(performance.now() - startedAt);
+  }
+}
+
+/**
+ * Worker pool bounded at four: a finished item frees its slot for the next one at once.
+ * After the first failure no new item is dispatched, every in-flight item is awaited,
+ * and the first failure is thrown. Results keep the input order.
+ */
 export async function mapGeoSourceBatch<T, R>(
   items: readonly T[],
-  work: (item: T) => Promise<R>
+  work: (item: T) => Promise<R>,
+  metrics?: GeoSourceMetrics
 ): Promise<R[]> {
-  const results: R[] = [];
-  for (let offset = 0; offset < items.length; offset += 4) {
-    const batch = await Promise.allSettled(
-      items.slice(offset, offset + 4).map(work)
-    );
-    const failure = batch.find((result) => result.status === 'rejected');
-    if (failure?.status === 'rejected') throw failure.reason;
-    for (const result of batch)
-      if (result.status === 'fulfilled') results.push(result.value);
-  }
+  const results = new Array<R>(items.length);
+  let next = 0;
+  let inFlight = 0;
+  let failed = false;
+  let failure: unknown;
+  const worker = async () => {
+    while (!failed && next < items.length) {
+      const index = next++;
+      inFlight++;
+      if (metrics) {
+        metrics.dispatched++;
+        metrics.maxInFlight = Math.max(metrics.maxInFlight, inFlight);
+      }
+      try {
+        results[index] = await work(items[index]);
+      } catch (error) {
+        if (!failed) failure = error;
+        failed = true;
+      } finally {
+        inFlight--;
+      }
+    }
+  };
+  await Promise.all(
+    Array.from(
+      { length: Math.min(GEO_SOURCE_MAX_IN_FLIGHT, items.length) },
+      worker
+    )
+  );
+  if (failed) throw failure;
   return results;
 }
 
@@ -384,30 +473,36 @@ export async function buildExactPlan(
   root: string,
   keys: string[],
   repairIds: string[],
-  store: ImageObjectStore
+  store: ImageObjectStore,
+  metrics?: GeoSourceMetrics
 ): Promise<GeoSourcePlan> {
   if (!keys.length || new Set(keys).size !== keys.length)
     throw Error('Empty/duplicate exact key selection');
-  const objects = await mapGeoSourceBatch(
-    keys.sort(
-      (a, b) => publicationPhase(a) - publicationPhase(b) || a.localeCompare(b)
-    ),
-    async (key): Promise<PlannedObject> => {
-      const candidate = candidateForGeoKey(root, key);
-      const before = await store.head(key);
-      if (before && !before.etag) throw Error(`Missing original ETag: ${key}`);
-      const body = decoded(candidate.body);
-      return {
-        key,
-        sha256: candidate.sha256,
-        bytes: candidate.size,
-        decodedSha256: sha256(body),
-        decodedBytes: body.length,
-        contentType: candidate.contentType,
-        contentEncoding: candidate.contentEncoding,
-        beforeEtag: before?.etag ?? null,
-      };
-    }
+  const objects = await timeGeoSourcePhase(metrics, 'plan', () =>
+    mapGeoSourceBatch(
+      keys.sort(
+        (a, b) =>
+          publicationPhase(a) - publicationPhase(b) || a.localeCompare(b)
+      ),
+      async (key): Promise<PlannedObject> => {
+        const candidate = candidateForGeoKey(root, key);
+        const before = await store.head(key);
+        if (before && !before.etag)
+          throw Error(`Missing original ETag: ${key}`);
+        const body = decoded(candidate.body);
+        return {
+          key,
+          sha256: candidate.sha256,
+          bytes: candidate.size,
+          decodedSha256: sha256(body),
+          decodedBytes: body.length,
+          contentType: candidate.contentType,
+          contentEncoding: candidate.contentEncoding,
+          beforeEtag: before?.etag ?? null,
+        };
+      },
+      metrics
+    )
   );
   return {
     schemaVersion: 1,
@@ -430,7 +525,8 @@ export async function readbackObject(
   object: PlannedObject,
   store: ImageObjectStore,
   publicBase: string,
-  canonical = false
+  canonical = false,
+  metrics?: GeoSourceMetrics
 ): Promise<Readback> {
   const stored = await store.get(object.key);
   if (
@@ -445,6 +541,10 @@ export async function readbackObject(
   if (!response.ok)
     throw Error(`Public readback HTTP ${response.status}: ${object.key}`);
   const publicBody = decoded(Buffer.from(await response.arrayBuffer()));
+  if (metrics) {
+    metrics.api.publicGet++;
+    metrics.bytes.publicGet += publicBody.length;
+  }
   if (
     sha256(publicBody) !== object.decodedSha256 ||
     publicBody.length !== object.decodedBytes
@@ -469,8 +569,9 @@ export async function executeGeoSourcePlan(options: {
   publicBase: string;
   apply: boolean;
   onVerified?: (row: Readback) => void;
+  metrics?: GeoSourceMetrics;
 }) {
-  const { root, plan, store, apply } = options;
+  const { root, plan, store, apply, metrics } = options;
   if (apply && process.env.CI !== 'true')
     throw Error('Geo source writes are CI-only');
   if (
@@ -482,23 +583,29 @@ export async function executeGeoSourcePlan(options: {
   const ids = new Set(
     parseRepairIds(plan.repairIds.length ? plan.repairIds.join(',') : 'none')
   );
-  await mapGeoSourceBatch(plan.objects, async (object) => {
-    const candidate = candidateForGeoKey(root, object.key);
-    if (
-      candidate.sha256 !== object.sha256 ||
-      candidate.size !== object.bytes ||
-      candidate.contentEncoding !== object.contentEncoding ||
-      candidate.contentType !== object.contentType ||
-      sha256(decoded(candidate.body)) !== object.decodedSha256 ||
-      decoded(candidate.body).length !== object.decodedBytes
+  await timeGeoSourcePhase(metrics, 'preflight', () =>
+    mapGeoSourceBatch(
+      plan.objects,
+      async (object) => {
+        const candidate = candidateForGeoKey(root, object.key);
+        if (
+          candidate.sha256 !== object.sha256 ||
+          candidate.size !== object.bytes ||
+          candidate.contentEncoding !== object.contentEncoding ||
+          candidate.contentType !== object.contentType ||
+          sha256(decoded(candidate.body)) !== object.decodedSha256 ||
+          decoded(candidate.body).length !== object.decodedBytes
+        )
+          throw Error(`Staging changed since plan: ${object.key}`);
+        if (object.key.startsWith('gis/') && !ids.has(object.key.split('/')[2]))
+          throw Error('Unselected repair key');
+        const remote = await store.head(object.key);
+        if ((remote?.etag ?? null) !== object.beforeEtag)
+          throw Error(`Remote changed since plan: ${object.key}`);
+      },
+      metrics
     )
-      throw Error(`Staging changed since plan: ${object.key}`);
-    if (object.key.startsWith('gis/') && !ids.has(object.key.split('/')[2]))
-      throw Error('Unselected repair key');
-    const remote = await store.head(object.key);
-    if ((remote?.etag ?? null) !== object.beforeEtag)
-      throw Error(`Remote changed since plan: ${object.key}`);
-  });
+  );
   const summary = {
     candidates: plan.objects.length,
     changed: 0,
@@ -510,34 +617,48 @@ export async function executeGeoSourcePlan(options: {
     const phaseObjects = plan.objects
       .filter((object) => publicationPhase(object.key) === phase)
       .sort((a, b) => a.key.localeCompare(b.key));
-    await mapGeoSourceBatch(phaseObjects, async (object) => {
-      const candidate = candidateForGeoKey(root, object.key);
-      // The shared writer's conditional PUT is additionally pinned to this reviewed plan's ETag.
-      const guarded: ImageObjectStore = {
-        ...store,
-        put: async (request) => {
-          if (
-            (request.ifMatch ?? null) !== object.beforeEtag ||
-            (object.beforeEtag === null && request.ifNoneMatch !== '*')
-          )
-            throw Error(`Concurrent modification before PUT: ${object.key}`);
-          return store.put(request);
+    await timeGeoSourcePhase(metrics, `publish-phase-${phase}`, () =>
+      mapGeoSourceBatch(
+        phaseObjects,
+        async (object) => {
+          const candidate = candidateForGeoKey(root, object.key);
+          // The shared writer's conditional PUT is additionally pinned to this reviewed plan's ETag.
+          const guarded: ImageObjectStore = {
+            ...store,
+            put: async (request) => {
+              if (
+                (request.ifMatch ?? null) !== object.beforeEtag ||
+                (object.beforeEtag === null && request.ifNoneMatch !== '*')
+              )
+                throw Error(
+                  `Concurrent modification before PUT: ${object.key}`
+                );
+              return store.put(request);
+            },
+          };
+          const result = await publishExactR2Assets({
+            candidates: [candidate],
+            store: guarded,
+            dryRun: !apply,
+          });
+          summary.changed += result.changed;
+          summary.uploaded += result.uploaded;
+          summary.skipped += result.skipped;
+          if (apply) {
+            const row = await readbackObject(
+              object,
+              store,
+              options.publicBase,
+              false,
+              metrics
+            );
+            options.onVerified?.(row);
+            summary.verified++;
+          }
         },
-      };
-      const result = await publishExactR2Assets({
-        candidates: [candidate],
-        store: guarded,
-        dryRun: !apply,
-      });
-      summary.changed += result.changed;
-      summary.uploaded += result.uploaded;
-      summary.skipped += result.skipped;
-      if (apply) {
-        const row = await readbackObject(object, store, options.publicBase);
-        options.onVerified?.(row);
-        summary.verified++;
-      }
-    });
+        metrics
+      )
+    );
   }
   return summary;
 }
