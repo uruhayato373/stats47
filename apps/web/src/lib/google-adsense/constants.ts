@@ -237,6 +237,19 @@ export const CITY_INARTICLE_3: AdSlotConfig = { slotId: "9836327027", format: "a
 export const CITY_INFEED: AdSlotConfig = { slotId: "1957837004", format: "infeed", layoutKey: "-fb+5w+4e-db+86" }; // stats47-city-infeed
 
 /**
+ * 一覧ページの中のインフィード広告 (2026-11-13 オーナー決定・同日作成)。カードが長く並ぶのに広告がページの最後の 1 つだけだった。
+ * 一覧が 1 列のとき (スマホ) だけ出す。テンプレートは文字だけのカードには「テキストのみ」、画像が上のブログのカードには「上部の画像」
+ */
+const LIST_INFEED_TEXT_LAYOUT_KEY = "-gw-3+1f-3d+2z";
+const LIST_INFEED_IMAGE_TOP_LAYOUT_KEY = "-6t+ed+2i-1n-4w";
+export const THEMES_INDEX_INFEED_1: AdSlotConfig = { slotId: "2956058055", format: "infeed", layoutKey: LIST_INFEED_TEXT_LAYOUT_KEY }; // stats47-themes-index-infeed-1
+export const THEMES_INDEX_INFEED_2: AdSlotConfig = { slotId: "6929982144", format: "infeed", layoutKey: LIST_INFEED_TEXT_LAYOUT_KEY }; // stats47-themes-index-infeed-2
+export const MUNICIPALITIES_INDEX_INFEED: AdSlotConfig = { slotId: "7257285208", format: "infeed", layoutKey: LIST_INFEED_TEXT_LAYOUT_KEY }; // stats47-municipalities-index-infeed
+export const SURVEY_INDEX_INFEED: AdSlotConfig = { slotId: "9691876858", format: "infeed", layoutKey: LIST_INFEED_TEXT_LAYOUT_KEY }; // stats47-survey-index-infeed
+export const BLOG_INDEX_INFEED_1: AdSlotConfig = { slotId: "6024415380", format: "infeed", layoutKey: LIST_INFEED_IMAGE_TOP_LAYOUT_KEY }; // stats47-blog-index-infeed-1
+export const BLOG_INDEX_INFEED_2: AdSlotConfig = { slotId: "4247978485", format: "infeed", layoutKey: LIST_INFEED_IMAGE_TOP_LAYOUT_KEY }; // stats47-blog-index-infeed-2
+
+/**
  * ハブ / 一覧ページ共通の記事内広告（fluid / in-article）
  * top / category / theme / blog一覧 / survey / tag のセクション区切りに 1 枠だけ配置する。
  * ADSENSE-HUB-INCONTENT-01: モバイル imp/PV（W26 実測 0.37）改善のためハブ面に in-content を新設。

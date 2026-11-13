@@ -758,6 +758,32 @@
     ],
     "themes-index": [
       {
+        "slot": "adsense-infeed",
+        "region": "body",
+        "position": "テーマのカードの 20 件目の後",
+        "source": "apps/web/src/app/themes/page.tsx",
+        "marker": "<InFeedAdSlot slot={THEMES_INDEX_INFEED_1} />",
+        "adsenseSlot": "THEMES_INDEX_INFEED_1",
+        "condition": "一覧が 1 列のとき (スマホ) だけ出る。一覧の最後には置かない。2026-11-13 オーナー決定 (カードが長く並ぶのに広告がページの最後の 1 つだけだった) テンプレートは「テキストのみ」",
+        "devices": [
+          "mobile"
+        ],
+        "knownAdjacentReason": "ソースでは一覧の繰り返しの中に書くが、描画では指定した件数のカードの後に入り、次の広告との間には一覧のカードが続く (一覧の最後には置かない)"
+      },
+      {
+        "slot": "adsense-infeed",
+        "region": "body",
+        "position": "テーマのカードの 40 件目の後",
+        "source": "apps/web/src/app/themes/page.tsx",
+        "marker": "<InFeedAdSlot slot={THEMES_INDEX_INFEED_2} />",
+        "adsenseSlot": "THEMES_INDEX_INFEED_2",
+        "condition": "一覧が 1 列のとき (スマホ) だけ出る。一覧の最後には置かない。2026-11-13 オーナー決定 (カードが長く並ぶのに広告がページの最後の 1 つだけだった) テンプレートは「テキストのみ」",
+        "devices": [
+          "mobile"
+        ],
+        "knownAdjacentReason": "ソースでは一覧の繰り返しの中に書くが、描画では指定した件数のカードの後に入り、次の広告との間には一覧のカードが続く (一覧の最後には置かない)"
+      },
+      {
         "slot": "adsense-body-responsive",
         "region": "body",
         "position": "ページの最後",
@@ -765,7 +791,8 @@
         "marker": "position=\"themes-index-row\"",
         "trackingPosition": "themes-index-row",
         "adsenseSlot": "CONTENT_FOOTER",
-        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない PR は共通の案件"
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない PR は共通の案件",
+        "knownAdjacentReason": "ソースでは一覧の繰り返しの直後に書くが、描画ではインフィード広告と一覧の最後の間にカードが続く (インフィードは一覧の途中だけに入り、最後には置かない)"
       }
     ],
     "areas-index": [
@@ -782,6 +809,19 @@
     ],
     "survey-index": [
       {
+        "slot": "adsense-infeed",
+        "region": "body",
+        "position": "調査のカードの 25 件目の後",
+        "source": "apps/web/src/app/survey/page.tsx",
+        "marker": "<InFeedAdSlot slot={SURVEY_INDEX_INFEED} />",
+        "adsenseSlot": "SURVEY_INDEX_INFEED",
+        "condition": "一覧が 1 列のとき (スマホ) だけ出る。一覧の最後には置かない。2026-11-13 オーナー決定 (カードが長く並ぶのに広告がページの最後の 1 つだけだった) テンプレートは「テキストのみ」",
+        "devices": [
+          "mobile"
+        ],
+        "knownAdjacentReason": "ソースでは一覧の繰り返しの中に書くが、描画では指定した件数のカードの後に入り、次の広告との間には一覧のカードが続く (一覧の最後には置かない)"
+      },
+      {
         "slot": "adsense-body-responsive",
         "region": "body",
         "position": "ページの最後",
@@ -789,7 +829,8 @@
         "marker": "position=\"survey-index-row\"",
         "trackingPosition": "survey-index-row",
         "adsenseSlot": "CONTENT_FOOTER",
-        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない PR は共通の案件"
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない PR は共通の案件",
+        "knownAdjacentReason": "ソースでは一覧の繰り返しの直後に書くが、描画ではインフィード広告と一覧の最後の間にカードが続く (インフィードは一覧の途中だけに入り、最後には置かない)"
       }
     ],
     "blog-index": [
@@ -801,6 +842,32 @@
         "marker": "<RailAdSlot slot={RAIL_RECT} />",
         "adsenseSlot": "RAIL_RECT",
         "condition": "2026-11-12 オーナー決定でアフィリエイトのふるさと納税のバナーから替えた。右レールが本文の横にあるとき (PC) だけ出る"
+      },
+      {
+        "slot": "adsense-infeed",
+        "region": "body",
+        "position": "記事のカードの 6 件目の後",
+        "source": "apps/web/src/app/blog/page.tsx",
+        "marker": "<InFeedAdSlot slot={BLOG_INDEX_INFEED_1} />",
+        "adsenseSlot": "BLOG_INDEX_INFEED_1",
+        "condition": "一覧が 1 列のとき (スマホ) だけ出る。一覧の最後には置かない。2026-11-13 オーナー決定 (カードが長く並ぶのに広告がページの最後の 1 つだけだった) テンプレートは「上部の画像」",
+        "devices": [
+          "mobile"
+        ],
+        "knownAdjacentReason": "ソースでは一覧の繰り返しの中に書くが、描画では指定した件数のカードの後に入り、次の広告との間には一覧のカードが続く (一覧の最後には置かない)"
+      },
+      {
+        "slot": "adsense-infeed",
+        "region": "body",
+        "position": "記事のカードの 14 件目の後",
+        "source": "apps/web/src/app/blog/page.tsx",
+        "marker": "<InFeedAdSlot slot={BLOG_INDEX_INFEED_2} />",
+        "adsenseSlot": "BLOG_INDEX_INFEED_2",
+        "condition": "一覧が 1 列のとき (スマホ) だけ出る。一覧の最後には置かない。2026-11-13 オーナー決定 (カードが長く並ぶのに広告がページの最後の 1 つだけだった) テンプレートは「上部の画像」",
+        "devices": [
+          "mobile"
+        ],
+        "knownAdjacentReason": "ソースでは一覧の繰り返しの中に書くが、描画では指定した件数のカードの後に入り、次の広告との間には一覧のカードが続く (一覧の最後には置かない)"
       },
       {
         "slot": "adsense-body-responsive",
@@ -899,6 +966,19 @@
     ],
     "municipalities-index": [
       {
+        "slot": "adsense-infeed",
+        "region": "body",
+        "position": "公開中のテーマのカードの真ん中あたり",
+        "source": "apps/web/src/app/municipalities/page.tsx",
+        "marker": "<InFeedAdSlot slot={MUNICIPALITIES_INDEX_INFEED} />",
+        "adsenseSlot": "MUNICIPALITIES_INDEX_INFEED",
+        "condition": "一覧が 1 列のとき (スマホ) だけ出る。一覧の最後には置かない。2026-11-13 オーナー決定 (カードが長く並ぶのに広告がページの最後の 1 つだけだった) テンプレートは「テキストのみ」",
+        "devices": [
+          "mobile"
+        ],
+        "knownAdjacentReason": "ソースでは一覧の繰り返しの中に書くが、描画では指定した件数のカードの後に入り、次の広告との間には一覧のカードが続く (一覧の最後には置かない)"
+      },
+      {
         "slot": "adsense-body-responsive",
         "region": "body",
         "position": "公開中のテーマの後・データ品質への取り組みの前",
@@ -906,7 +986,8 @@
         "marker": "position=\"municipalities-row-1\"",
         "trackingPosition": "municipalities-row-1",
         "adsenseSlot": "HUB_INCONTENT",
-        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない PR は共通の案件"
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。PR は出さない (2026-11-12 オーナー決定)。AdSense を止めているときは出さない PR は共通の案件",
+        "knownAdjacentReason": "ソースでは一覧の繰り返しの直後に書くが、描画ではインフィード広告と一覧の最後の間にカードが続く (インフィードは一覧の途中だけに入り、最後には置かない)"
       },
       {
         "slot": "adsense-rail-rect",
