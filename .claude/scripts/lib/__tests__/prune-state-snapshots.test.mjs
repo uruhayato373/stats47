@@ -113,6 +113,15 @@ const PERMANENT_DATED_DIRS = [
   "data/themes/audits",
   "data/surveys/reviews",
   "data/surveys/audits",
+  // カタログが「一回きりの作業の記録」(kind: evidence) と宣言している置き場。定期的に増える置き場ではないので件数では消さない。
+  // 2026-11-14 までは repo-hygiene の baseline (DATED_STATE_ARTIFACT) が寿命の宣言を兼ねていたが、
+  // 衛生検査の対象から外れて「解消済み」になった行を baseline から外したので、ここで宣言する。
+  "data/note/evidence", // note の一回きりの監査・更新・展開の記録 (note.operation-evidence)
+  "data/geo/evidence", // Geo 分析の修復・監査・公開の記録 (geo.operation-evidence)
+];
+// 同じ理由で、置き場ごとではなくファイル名の先頭で宣言するもの (同じディレクトリに state の索引が同居している)
+const PERMANENT_DATED_FILE_PREFIXES = [
+  "data/content-operations/content-release-", // コンテンツ公開の検証記録 (content.release-evidence)
 ];
 
 test("追跡中の日付名 state は必ず寿命 (policy / 恒久宣言 / baseline) を持つ", () => {
@@ -140,7 +149,7 @@ test("追跡中の日付名 state は必ず寿命 (policy / 恒久宣言 / basel
   const baseline = JSON.parse(readFileSync(join(root, ".claude/config/repo-hygiene-baseline.json"), "utf8"));
   const baselined = new Set(baseline.findings.filter((x) => x.code === "DATED_STATE_ARTIFACT").map((x) => x.file));
   const undeclared = dated.filter(
-    (f) => !inPolicy(f) && !baselined.has(f) && !PERMANENT_DATED_DIRS.some((d) => f.startsWith(`${d}/`)),
+    (f) => !inPolicy(f) && !baselined.has(f) && !PERMANENT_DATED_DIRS.some((d) => f.startsWith(`${d}/`)) && !PERMANENT_DATED_FILE_PREFIXES.some((d) => f.startsWith(d)),
   );
   assert.deepEqual(undeclared, [], `寿命未宣言の日付名 state: ${undeclared.slice(0, 10).join(", ")}`);
 });
