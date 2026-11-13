@@ -107,6 +107,7 @@
 - [blog publish cloud first](project_blog_publish_cloud_first.md) — 公開は publish-blog.yml、直列ディスパッチ
 - [blog auto publish reconcile](project_blog_auto_publish_reconcile_limits.md) — 公開の skip と停止の条件
 - [bulk blog publish isr 404](feedback_bulk_blog_publish_isr_404.md) — 一括公開で ISR 404 が残る
+- [blog revise isr stale entry](feedback_blog_revise_isr_stale_entry.md) — 改稿の公開前に本番ページを取得しない。旧版が次のデプロイまで残る
 - [blog remediation loop](project_blog_remediation_loop.md) — 品質是正の順は remediation-queue
 - [blog mass rewrite lessons](project_blog_mass_rewrite_lessons.md) — 大量リライトは 15〜20 本ずつ
 - [blog brushup risk](project_blog_brushup_risk_2026_05_25.md) — 自動 brushup は本文数値の突合が要る

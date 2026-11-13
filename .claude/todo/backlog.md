@@ -61,7 +61,7 @@ updated: 2026-11-01
 - **前提の資料**: e-Stat 家計調査 DB 126 表の分類・2025年実値の例・企画候補は `.claude/skills/estat/references/household-expenditure-survey.md`。書籍『マーケティングに使える「家計調査」』の台帳は `data/source-inventory/kakei-marketing/2015/` (利用仕様書 `docs/02_実装計画/46_その他参考文献OCR・クロップ・stats47展開実装仕様.md` §4.4)。書籍由来の論点は一次資料で再確認する。GSC の `pages.csv` と `queries.csv` は別集計なので query×page の帰属は同一期間の結合取得がある場合のみ判定する。
 - **反映待ち・未確認**: ① 切替の撤去は main マージ後に sync-snapshots (ranking-items) で 697 件の item.json を作り直して本番に出る ② 相関の除外は相関 snapshot の再計算後に出る ③ エンゲル係数がテーマのローカル表示に出ていない (data-refresh の R2 反映後に確認) ④ ハブ名の「家計調査」への変更は R2 の調査マスタの再出力後に出る ⑤ ランキングの「読み解く記事」の題は書き直した記事の公開 (blog-auto-publish) 後に新しくなる。
 - **残りの要対応 (要判断を含む)**:
-  - 題 (title / seoTitle) に 2024 年の値が残る家計調査の記事 138 本 (数値 261 件、一覧 `node .claude/scripts/blog/find-kakei-stale-title-values.mjs`)。`KAKEI-EXPANSION-02` ③ の書き直しで題・本文・図をそろえる。
+  - 題 (title / seoTitle) に 2024 年の値が残る家計調査の記事は 138 本から 4 本になった (2026-11-13。残る 4 本は 2025 年の値が別の年の値と同じ数字になっているだけ。一覧 `node .claude/scripts/blog/find-kakei-stale-title-values.mjs`)。
   - サービスと家賃の 7 指標 (単位 回・畳: 理髪料・カット代・パーマネント代・給与住宅/民営/公営家賃・畳替え) の名前を保留中 (候補: 利用回数・延べ畳数)。オーナー判断。
   - 統合したハブに 2007 年で止まった全世帯の指標が 3 件 (教養娯楽費・教育費・保健医療費)。
   - 実収入は千円・可処分所得は円で単位がそろわない (`display.displayUnit` は 71 指標が持つがランキングページもカードも使っていない)。
@@ -128,6 +128,28 @@ updated: 2026-11-01
 - **完了条件**: 12 冊の紹介文とキーワードが KDP に反映され、30 語の再測定と 4 週の注文が記録された。
 
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [BLOG-ISR-STALE-ON-REVISE-01] 改稿版を公開しても、公開前に開かれたページは旧版のまま残る
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:サイト]
+
+- **起点**: 2026-11-13 に家計調査の改稿 96 本を `blog-auto-publish.yml` で公開した。R2 の本文は全件新しい版だが、本番ページは 18 本が旧版を返す (`x-nextjs-cache: STALE`・`x-nextjs-stale-time: 300`。1 時間後も、クエリを付けてエッジを迂回しても同じ)。同日 12:24Z の本番デプロイ以降・公開より前に一度でも開かれたページで起き、開かれていない 78 本は最初のアクセスで新版になった。`apps/web/open-next.config.ts` に再生成の queue が無く、ISR のエントリが作り直されない。18 本のうち 5 本は、切り分けで未公開のページを取得して自分で作った。
+- **対象 18 本**: aichi-food-culture banana-consumption-quantity bonito-vs-oyster-fish-map earthquake-insurance-prefecture-gap garden-plants-expenditure-ranking ishikawa-food-culture iwate-food-culture kagoshima-food-culture kumamoto-food-culture mayonnaise-consumption-expenditure mie-food-culture nagano-food-culture nara-food-culture natto-production-vs-consumption sea-bream-expenditure-ranking strawberry-consumption-prefecture-gap tottori-food-culture yokan-expenditure-ranking
+- **次**: 公開 CI の CDN 消去の前に `packages/r2-storage/src/scripts/purge-isr-routes.ts --routes /blog/<slug> --apply` を足すか、OpenNext に再生成の queue を設定する。足した後は改稿 1 本で、公開前に開いたページがデプロイなしで新版になるかを確かめる。
+- **完了条件**: 改稿版の公開後、デプロイなしで本番ページの h1 と本文が新版になる。18 本は次の本番デプロイで新版になったことを確かめる。
+
+### [BLOG-GATE-RANK-CONTEXT-01] quality-gate の題の検査の抜けと、順位の照合の取り違え
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:サイト]
+
+- **起点 (2026-11-13・家計調査 96 本の審査)**: ① 題の「N位」の検査 (`quality-gate.mjs` の `NG_PATTERNS`) は `title: "…"` の形だけに掛かり、引用符なしの題は素通りする (`title: もやし消費量1位山形、沖縄の2.8倍差` など 3 本が通った)。② 順位の照合が、正しい文の「島根県は2位を大きく引き離し」「東北6県はすべて11位以内」「熊本は前年も11位」「静岡の20位から愛知の30位へ」を県の順位の誤りとして止めた (3 本で意味を変えずに言い換えて通した)。
+- **次**: 題の検査は引用符の有無に依らない形にし、公開済みの題で該当数を測ってから blocker にするかを決める。順位の照合は「N位以内」「N位を引き離し」「前年」「AのN位からBのM位へ」を対象から外し、非検出のテストで固定する。
+- **完了条件**: 上の 4 文が blocker にならず、引用符なしの題も検査に掛かる。
+
+### [BLOG-AUTO-PUBLISH-DETECT-01] 公開対象の検出が push の先頭コミット 1 つの差分しか見ない
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:サイト]
+
+- **起点**: `blog-auto-publish.yml` は `git diff HEAD~1 HEAD` で変更された article.md を公開対象にし、それが空のときだけ送り箱の総ざらい (`select-republish-slugs.mjs`) に回る。複数コミットを 1 回で push すると、最後のコミットの記事だけが公開され、手前のコミットの記事は次に記事の変更が無い push が来るまで出ない。先頭が merge コミットだと差分が空になり総ざらいになる (2026-11-13 の 3 回の公開はこの形で 96 本が出た)。
+- **次**: 検出を push の before..after の差分にするか、差分の検出に加えて常に総ざらいを足す。
+- **完了条件**: 記事を含む複数コミットの push で、全コミットの公開待ちが 1 回の run の対象になる。
 
 ### [THEME-BRIDGE-INGEST-TSIMPORT-01] 橋梁点検の取り込みが、提案なしの経路で TS の読み込みに失敗して止まる
 タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [起票:2026-11-13] [領域:データ]
@@ -3922,9 +3944,9 @@ AdSense の最適化案「レスポンシブ広告で収益を拡大」(固定�
 - **正典**: 切り口台帳 `data/surveys/lenses/kakei-chousa.json` (品目の採否は `data/estat/kakei-ledger/decisions.json`)。2025年次の都市表ID・コードの詳細は `.claude/skills/estat/references/household-expenditure-survey.md`。
 - **到達 (〜2026-11-02)**: 2025年年報の公表を確認し (trigger 充足)、上位5品目と安全に接続できる指標を2025年表 (支出額 `0004023605`・数量 `0004023606`) へ更新して R2 に反映、PR #1205 を main へ統合した。旧表に残っていた 6 指標も新表へ移し、エンゲル係数・情報通信係数も 2025 年へ伸ばした。ネクタイ・ストッキングは 2025 年改定で統合されたので 2024 年が最終と注記。3 年平均は指標にせず、記事の接地器 `.claude/scripts/blog/fetch-kakei-city-average.mjs` (52 市・N 年平均) で扱う。流入上位の記事 (餃子・豆腐・カレールウ・もち・小麦粉) を書き直し、パンの 52 市 3 年平均の新記事を足した。
 - **進み (2026-11-09)**: ① の流入上位 6 本 (チョコレート・すし・緑茶・即席麺・清酒・牛肉) は公開済み。続けて直近 4 週の GSC 表示順の上位 15 本 (京都の食卓・こんにゃく・給食費・豚肉・こんぶ・さつまいも・みそ・小麦粉・ミネラルウォーター・生うどんそば・鶏肉・アイス・福島の食卓・もも・チーズ) を書き直し中。残りは約 109 本で、同じ順で 15 本ずつ進める。書き直しで分かったこと: 本文が他の指標の順位 (外食・乾麺・醤油など) を引いている記事は、`refresh-article-data-years.mjs` が図の指標しか取り直さないので、他指標の順位も 2025 年で数え直す必要がある (福岡の家庭と外食の逆転が成り立たなくなり、醤油は g と ml を取り違えていた)。リンク先の `blog:udon-soba-food-culture-prefecture-map` は 2024 年の値のままで、リンク元の生うどんそばの記事と数値が食い違う。
-残り (2026-11-13・審査と公開の作業中): 11-10 に headless (sonnet・effort low) で書き直した 109 本のうち 13 本 (cup-noodles と 12 県の食卓) は 11-10 に公開済み (`63e744a78`)。残り 96 本は退避ブランチ `wip/kakei-stale-rewrite-2026-11-09` と develop の `contents/blog/` にあり、オーナー決定 (11-13) で「blog-critic の審査で PASS した記事だけ公開」。headless の critic が PASS にした 30 本を blog-critic で審査し直すと PASS は 9 本だけだった (差し戻しは題や結論が順位データと矛盾・題の約束に本文が答えていない)。headless の PASS を公開の根拠にしない。費用の実測: full 審査 1 本約 16 万トークン、修正と再審査 1 本約 34 万。再開は、review.md が `reviewer: blog-critic`・`verdict: PASS` の記事だけ `published: true` にして develop へ push、`verdict: REVISE` は Workflow `blog-revise-fix`、`reviewer: headless-critic` のままの記事は `blog-critic-followup` から。
+審査と公開 (2026-11-13 完了): 11-10 に headless で書き直した 109 本は全部公開した (13 本は 11-10 の `63e744a78`、96 本は 11-13 に blog-critic の審査 PASS で公開 run `43422536777`・`43428818197`・`43434762670`)。退避ブランチ `wip/kakei-stale-rewrite-2026-11-09` は削除した。96 本の blog-critic の初回審査は PASS 20・REVISE 76 で、指摘の修正と再審査 (`blog-revise-fix`) の後に全本 PASS。headless の critic が PASS にした 30 本も初回 PASS は 9 本だけだった (差し戻しは題や結論が順位データと矛盾・題の約束に本文が答えていない、が主)。headless の PASS を公開の根拠にしない。費用の実測は full 審査 1 本約 16 万トークン、修正と再審査 1 本約 34 万、合計約 4,300 万。R2 の本文は 96 本とも新しい版だが、本番ページは 18 本が旧版のまま (`BLOG-ISR-STALE-ON-REVISE-01`)。
 書き直しの道具の不足 (2026-11-09 の 15 本で実測): ① `refresh-article-data-years.mjs --apply` は `-dark.svg` を作らず gate が落ちる (`generate-article-charts.ts --slug` を続けて実行して補う) ② ランキング以外の図と派生図 (時系列・数量×価格) は「手作業」に回る ③ `build-kakei-quantity-price.mjs --base-dir` に絶対パスを渡すとリポジトリ直下の `var/` に書く ④ 本文に書く前年の値を data に置く場所が無く、quality-gate の `VALUE_MISMATCH` 警告になる。家計調査の市別の値は単年のぶれが大きい (前年比 50% 超が 846 件中 69 件) ので、単年の順位から構造を断定しない書き方を書き手に渡す。
-- **次**: ① 題に旧年の値が残る記事の流入上位の残り (チョコレート・すし・緑茶・即席麺・清酒・牛肉 など。一覧は `node .claude/scripts/blog/find-kakei-stale-title-values.mjs`) を書き直す。こんにゃくは図 1 枚が手作業 (data JSON が取得器の形でない)。② 合算6件を個別照合し、分類変更5件は新定義に合わせて採否を決める。③ 記事URLの公開判定 (PR #1206) とデプロイ後の全体スモークの失敗 10 件 (変更前と同じ) は別途是正。
+- **次**: ① 題に旧年の値が残る記事の書き直しは完了した (11-13)。次の本番デプロイの後、旧版のままだった 18 本が新版になったかを確かめる。② 合算6件を個別照合し、分類変更5件は新定義に合わせて採否を決める。③ 記事URLの公開判定 (PR #1206) とデプロイ後の全体スモークの失敗 10 件 (変更前と同じ) は別途是正。
 - **停止条件**: 未投入の2025値を公開ページへ書かない。3年平均を年次値の指標として代用しない。既存記事の年・図の更新はランキングの値が確認できてから行う。
 - **完了条件**: 既存metricの年次更新を検証し、需要確認済みの追加候補だけが小バッチの投入判断に到達する。
 
