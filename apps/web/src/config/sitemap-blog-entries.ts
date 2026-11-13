@@ -887,7 +887,6 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
 ];
 
 export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
-  { tagKey: "2024年", lastModified: "2026-06-13" },
   { tagKey: "ClaudeCode", lastModified: "2026-06-14" },
   { tagKey: "D3", lastModified: "2026-06-14" },
   { tagKey: "IT", lastModified: "2026-06-02" },
@@ -957,6 +956,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "都道府県ランキング", lastModified: "2026-11-09" },
   { tagKey: "都道府県別", lastModified: "2026-08-30" },
   { tagKey: "都道府県格差", lastModified: "2026-07-10" },
+  { tagKey: "食品消費", lastModified: "2026-11-09" },
   { tagKey: "食文化", lastModified: "2026-09-05" },
   { tagKey: "食生活", lastModified: "2026-11-09" },
   { tagKey: "食費", lastModified: "2026-11-09" },
