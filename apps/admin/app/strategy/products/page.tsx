@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { Cell, DataTable, PanelCard, Row, StatusBadge } from "@/components/admin-ui";
 import { Stack } from "@/components/layout-primitives";
 import { ErrorNote, PageHeading } from "@/components/ops/primitives";
@@ -40,7 +42,11 @@ export default function ProductLedgerPage() {
       <PageHeading title="商品の台帳" source={source}>
         <p className="max-w-4xl text-sm text-muted-foreground">
           {ledger.asOf} 時点。note の閲覧と売上は {ledger.notePeriod ? `${ledger.notePeriod.start}〜${ledger.notePeriod.end}` : "記録なし"}、KDP の売上は販売台帳の累計 (手取り)。
-          閲覧を測れない販売面は未計測と書く。
+          閲覧を測れない販売面は未計測と書く。他の販売者の出品と価格は{" "}
+          <Link href="/strategy/competitors" className="font-medium underline-offset-4 hover:underline">
+            競合の観測
+          </Link>
+          {" "}で見る。
         </p>
       </PageHeading>
       <Stack>

@@ -634,7 +634,7 @@ export const DATASETS = [
     refs: [{ field: "products[].articleKey", to: "note.articles", key: "articles[].key" },
       { field: "products[].licenseId", to: "products.licenses", key: "licenses.$keys" }],
   }),
-  d("products.competitor-scan", "data/products/competitor-scan.csv", "series", "product", "data", "販売面ごとの競合の観測 (出品・価格・関心の目安。関心の目安は販売数ではない。再調査は行を追記する)"),
+  d("products.competitor-scan", "data/products/competitor-scan.csv", "series", "product", "data", "販売面ごとの競合の観測 (出品・価格・関心の目安。関心の目安は販売数ではない。再調査は行を追記する。category は納品物の分類で stats-data=公的統計や公開データの表・データセット / map=既製の地図データ・素材・ツール / commission=依頼ごとに作る受注 / other=どれでもない。読む画面は管理画面 /strategy/competitors)"),
   d("products.price-history", "data/products/price-history.json", "ledger", "product", "data", "商品の価格実験と価格変更の履歴", { schema: "config/schema/products.price-history.schema.json" }),
   d("products.free-sample-delivery", "data/products/free-sample-delivery.json", "ledger", "product", "data", "無料見本の配布の記録", { schema: "config/schema/products.free-sample-delivery.schema.json" }),
   d("products.interviews", "data/products/admin-stat-interviews.json", "evidence", "product", "data", "行政実務向け商品の聞き取り"),
