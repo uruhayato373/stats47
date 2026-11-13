@@ -229,3 +229,14 @@ test("読み残しがあれば、機械検出も指摘も 0 件の週でも通�
   assert.equal(buildUiAlert(base), null);
   assert.match(buildUiAlert({ ...base, coverageGap: "agent が読んだ切り出しは 3 / 4 枚" }), /3 \/ 4 枚/);
 });
+
+test("週次 UI 確認のプロンプトに「データの意味」の観点 (ラベルと単位・値の食い違い、内部用語) があり、指摘止まりと明記している (DISPLAY-SEMANTICS-FOLLOWUP-01)", async () => {
+  const { readFileSync } = await import("node:fs");
+  const { fileURLToPath } = await import("node:url");
+  const path = fileURLToPath(new URL("../../../prompts/ci/page-ui-review.md", import.meta.url));
+  const prompt = readFileSync(path, "utf-8");
+  assert.match(prompt, /データの意味/);
+  assert.match(prompt, /見出し|ラベル|説明文/);
+  assert.match(prompt, /内部用語/);
+  assert.match(prompt, /指摘止まり|指摘だけ/);
+});
