@@ -259,13 +259,14 @@ jobs:
           # develop の metrics:check が古い逆引きで落ちる (BLOG-LEDGER-PUBLISH-SYNC-01)
           npm run metrics:build-index
 
-      # 新規 ranking の OGP/カード を即生成 (KNOWN 確定直後・source=known で新キーも拾う)。
+      # 新規 ranking の OGP を即生成 (KNOWN 確定直後・source=known で新キーも拾う)。
       # 未生成だと og:image が 404 になるため公開時に先回りする。欠落分のみ生成 (self-heal)。
       # 通常の新規key数に合わせて1回50件に制限する。初回manifest移行は
       # timeoutの長いgenerate-ogp-images.ymlを反復し、この短いPR jobへ持ち込まない。
-      # ranking_image_keys 指定時は検証済みキーだけを両画像typeへ渡す。snapshot自体の対象は変えない。
+      # ranking_image_keys 指定時は検証済みキーだけを ranking OGP へ渡す。snapshot自体の対象は変えない。
+      # ranking カード WebP は読み手が無いため生成を止めた (RANKING-CARD-WEBP-UNUSED-01)。
       # 生成・publish失敗はkeys PRも止め、画像なしrankingの公開を防ぐ。
-      - name: 🖼 Generate changed ranking OGP/cards
+      - name: 🖼 Generate changed ranking OGP
         env:
           RANKING_KEYS: ${{ inputs.ranking_image_keys }}
           R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
@@ -279,7 +280,7 @@ jobs:
           SC="apps/web/scripts/generate-ogp-images.ts"
           ARGS=(--source known --limit 50 --max-generate 50)
           [ -n "$RANKING_KEYS" ] && ARGS+=(--key "$RANKING_KEYS")
-          for TYPE in ranking ranking-cards; do
+          for TYPE in ranking; do
             npx tsx --tsconfig "$TSC" "$SC" --type "$TYPE" "${ARGS[@]}"
             PLAN=".local/image-generation-publish-plan-${TYPE}.json"
             test -f "$PLAN" || { echo "exact publish plan が生成されませんでした: $TYPE"; exit 1; }

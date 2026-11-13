@@ -94,7 +94,7 @@ await Promise.all(Array.from({length:8},async()=>{while(queue.length){
   else if(page.kind==='ranking'){
     const base='app/ranking/'+item.key;
     await manifest(item,base+'/ogp/generation.json',[{key:base+'/ogp/ogp.png',usage:'ogp',templateId:'ogp'}],'ranking-ogp');
-    await manifest(item,base+'/thumbnail.json',['light','dark'].map(v=>({key:base+'/thumbnail-'+v+'.webp',usage:'card',templateId:'link-card'})),'ranking-card');item.indexComplete=true;
+    item.indexComplete=true;
   }else if(page.kind==='area'){
     const base='app/areas/'+item.key;await manifest(item,base+'/ogp/generation.json',[{key:base+'/ogp/ogp.png',usage:'ogp',templateId:'ogp'}],'areas-ogp');item.indexComplete=true;
   }else if(page.kind==='product'){

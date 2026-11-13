@@ -91,28 +91,6 @@ export const IMAGE_GENERATOR_SPECS = {
       'node_modules/topojson-client/package.json',
     ],
   },
-  'ranking-cards': {
-    generator: 'ranking-card',
-    rendererSources: [
-      ...SATORI_RENDERER_SOURCES,
-      'apps/web/scripts/lib/ranking-thumbnail-render.ts',
-      'packages/ranking/package.json',
-      'packages/ranking/src/types/ranking-thumbnail.ts',
-      'packages/visualization/src/server/generate-ranking-thumbnail-map-svg.ts',
-      'packages/visualization/src/server/generate-mini-prefecture-svg.ts',
-      'packages/gis/src/map/geometry.mjs',
-      'packages/visualization/src/server/prefecture-topology.generated.json',
-      // ★配色カタログ (2026-07-31)。generate-mini-prefecture-svg が手書き 9 種の
-      //   INTERPOLATORS をやめてカタログ経由の解決に変わったため、renderer の依存に入る。
-      //   package.json だけだと**カタログを編集しても hash が変わらず**、
-      //   色を変えたのにキャッシュ済みサムネが古いままになる。実体も列挙する。
-      'packages/types/package.json',
-      'packages/types/src/color-scheme.ts',
-      'node_modules/d3-geo/package.json',
-      'node_modules/d3-scale-chromatic/package.json',
-      'node_modules/topojson-client/package.json',
-    ],
-  },
   'note-covers': {
     generator: 'note-cover',
     rendererSources: [
