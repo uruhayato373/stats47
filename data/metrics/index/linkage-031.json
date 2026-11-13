@@ -3038,11 +3038,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:mie-food-culture",
+          "pageId": "blog:miyagi-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:saitama-food-culture",
+          "pageId": "blog:nagasaki-food-culture",
           "kind": "blog"
         },
         {
@@ -3123,11 +3123,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:mie-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:saitama-food-culture",
+          "pageId": "blog:miyagi-food-culture",
           "kind": "blog"
         },
         {

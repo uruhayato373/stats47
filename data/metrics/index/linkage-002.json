@@ -2367,6 +2367,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:candy-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:biscuit-consumption-expenditure",
           "kind": "ranking"
         }
@@ -2596,6 +2600,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:akita-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:black-tea-expenditure-ranking",
           "kind": "blog"
         },
@@ -2620,7 +2628,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:kagawa-food-culture",
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {
@@ -2636,15 +2644,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:shiga-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:shimane-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:tokyo-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamagata-food-culture",
           "kind": "blog"
         },
         {
@@ -2883,6 +2887,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:akita-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:black-tea-income-gap",
           "kind": "blog"
         },
@@ -2903,7 +2911,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:kagawa-food-culture",
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {
@@ -2919,15 +2927,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:shiga-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:shimane-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:tokyo-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamagata-food-culture",
           "kind": "blog"
         },
         {
@@ -3872,10 +3876,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:ehime-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:fresh-seafood-east-west-boundary",
           "kind": "blog"
         },
@@ -3888,7 +3888,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:kagawa-food-culture",
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {
@@ -3896,11 +3896,15 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:miyagi-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:miyazaki-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:tokushima-food-culture",
+          "pageId": "blog:sea-bream-expenditure-ranking",
           "kind": "blog"
         },
         {
@@ -3945,10 +3949,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:ehime-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:fukushima-food-culture",
           "kind": "blog"
         },
@@ -3957,7 +3957,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:kagawa-food-culture",
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {
@@ -3965,11 +3965,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:miyazaki-food-culture",
+          "pageId": "blog:miyagi-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:tokushima-food-culture",
+          "pageId": "blog:miyazaki-food-culture",
           "kind": "blog"
         },
         {
@@ -4349,6 +4349,10 @@
         },
         {
           "pageId": "blog:bread-vs-rice-expenditure",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:butter-vs-margarine-expenditure",
           "kind": "blog"
         },
         {
@@ -6106,11 +6110,7 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:fukuoka-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:yamaguchi-food-culture",
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {
@@ -6155,11 +6155,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:fukuoka-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:yamaguchi-food-culture",
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {
@@ -8536,6 +8532,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:aichi-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:butter-vs-margarine-expenditure",
           "kind": "blog"
         },
@@ -8591,6 +8591,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:aichi-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kyoto-food-culture",
           "kind": "blog"
         },
@@ -8632,11 +8636,11 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:kochi-food-culture",
+          "pageId": "blog:fukuoka-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:miyazaki-food-culture",
+          "pageId": "blog:tottori-food-culture",
           "kind": "blog"
         },
         {
@@ -8869,11 +8873,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:kochi-food-culture",
+          "pageId": "blog:fukuoka-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:miyazaki-food-culture",
+          "pageId": "blog:tottori-food-culture",
           "kind": "blog"
         },
         {

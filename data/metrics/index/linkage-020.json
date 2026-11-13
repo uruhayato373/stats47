@@ -3877,6 +3877,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:aichi-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:bonito-vs-oyster-fish-map",
           "kind": "blog"
         },
@@ -3897,15 +3901,15 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kagawa-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:mie-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:miyagi-food-culture",
+          "pageId": "blog:nagano-food-culture",
           "kind": "blog"
         },
         {
@@ -3917,11 +3921,15 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:sea-bream-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:tokyo-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:tottori-food-culture",
+          "pageId": "blog:yamagata-food-culture",
           "kind": "blog"
         },
         {
@@ -4150,6 +4158,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:aichi-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:chiba-food-culture",
           "kind": "blog"
         },
@@ -4162,15 +4174,15 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kagawa-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:mie-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:miyagi-food-culture",
+          "pageId": "blog:nagano-food-culture",
           "kind": "blog"
         },
         {
@@ -4190,7 +4202,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:tottori-food-culture",
+          "pageId": "blog:yamagata-food-culture",
           "kind": "blog"
         },
         {
@@ -4810,6 +4822,14 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:ehime-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:tokyo-food-culture",
           "kind": "blog"
         },
@@ -4850,6 +4870,14 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:ehime-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
         {
           "pageId": "blog:other-bread-consumption-quantity",
           "kind": "blog"

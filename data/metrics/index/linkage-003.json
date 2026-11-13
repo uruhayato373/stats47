@@ -44,10 +44,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:yamagata-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "ranking:cheese-consumption-expenditure",
           "kind": "ranking"
         }
@@ -86,10 +82,6 @@
       "consumers": [
         {
           "pageId": "blog:hokkaido-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:yamagata-food-culture",
           "kind": "blog"
         },
         {
@@ -396,6 +388,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:yamaguchi-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:chicken-consumption-expenditure",
           "kind": "ranking"
         }
@@ -446,6 +442,10 @@
         },
         {
           "pageId": "blog:local-production-local-consumption-meat",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamaguchi-food-culture",
           "kind": "blog"
         },
         {
@@ -2802,7 +2802,11 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "blog:miyazaki-food-culture",
+          "pageId": "blog:hiroshima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kochi-food-culture",
           "kind": "blog"
         },
         {
@@ -2811,10 +2815,6 @@
         },
         {
           "pageId": "blog:tochigi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tokushima-food-culture",
           "kind": "blog"
         },
         {
@@ -3049,15 +3049,15 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "blog:miyazaki-food-culture",
+          "pageId": "blog:hiroshima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kochi-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:okayama-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tokushima-food-culture",
           "kind": "blog"
         },
         {
@@ -3527,10 +3527,6 @@
           "kind": "area"
         },
         {
-          "pageId": "blog:akita-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:chinese-noodles-consumption-expenditure-prefecture-gap",
           "kind": "blog"
         },
@@ -3539,11 +3535,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:ishikawa-food-culture",
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:iwate-food-culture",
+          "pageId": "blog:toyama-food-culture",
           "kind": "blog"
         },
         {
@@ -3584,19 +3580,15 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:akita-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:fresh-udon-soba-consumption-prefecture-gap",
           "kind": "blog"
         },
         {
-          "pageId": "blog:ishikawa-food-culture",
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:udon-soba-food-culture-prefecture-map",
+          "pageId": "blog:toyama-food-culture",
           "kind": "blog"
         },
         {
@@ -3673,6 +3665,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:candy-expenditure-ranking",
+          "kind": "blog"
+        },
         {
           "pageId": "blog:castella-expenditure-ranking",
           "kind": "blog"
@@ -3768,6 +3764,14 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kochi-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:miyagi-food-culture",
           "kind": "blog"
         },
@@ -3777,6 +3781,10 @@
         },
         {
           "pageId": "blog:okinawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamaguchi-food-culture",
           "kind": "blog"
         },
         {
@@ -3817,7 +3825,11 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:miyagi-food-culture",
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kochi-food-culture",
           "kind": "blog"
         },
         {
@@ -3826,6 +3838,10 @@
         },
         {
           "pageId": "blog:okinawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamaguchi-food-culture",
           "kind": "blog"
         },
         {
@@ -4373,10 +4389,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "blog:aichi-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:chiba-food-culture",
           "kind": "blog"
         },
@@ -4385,19 +4397,19 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:gifu-food-culture",
+          "pageId": "blog:kochi-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:kagawa-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:saitama-food-culture",
+          "pageId": "blog:shizuoka-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:tokyo-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamagata-food-culture",
           "kind": "blog"
         },
         {
@@ -4448,10 +4460,6 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:aichi-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:chiba-food-culture",
           "kind": "blog"
         },
@@ -4460,19 +4468,19 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:gifu-food-culture",
+          "pageId": "blog:kochi-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:kagawa-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:saitama-food-culture",
+          "pageId": "blog:shizuoka-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:tokyo-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamagata-food-culture",
           "kind": "blog"
         },
         {
@@ -5854,11 +5862,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:saitama-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tottori-food-culture",
+          "pageId": "blog:shiga-food-culture",
           "kind": "blog"
         },
         {
@@ -5911,11 +5915,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:saitama-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tottori-food-culture",
+          "pageId": "blog:shiga-food-culture",
           "kind": "blog"
         },
         {
@@ -6185,7 +6185,15 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:coffee-shop-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:food-consumption-prefecture-battle",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:hokkaido-food-culture",
           "kind": "blog"
         },
         {
@@ -6433,6 +6441,10 @@
         },
         {
           "pageId": "blog:coffee-consumption-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:hokkaido-food-culture",
           "kind": "blog"
         },
         {
@@ -6710,6 +6722,10 @@
         {
           "pageId": "area-theme:47000:household-food-spending",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:coffee-consumption-prefecture-gap",
+          "kind": "blog"
         },
         {
           "pageId": "blog:coffee-shop-consumption-expenditure-prefecture-gap",

@@ -3224,7 +3224,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:gifu-food-culture",
+          "pageId": "blog:hiroshima-food-culture",
           "kind": "blog"
         },
         {
@@ -3507,7 +3507,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:gifu-food-culture",
+          "pageId": "blog:hiroshima-food-culture",
           "kind": "blog"
         },
         {
@@ -10530,6 +10530,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:banana-consumption-quantity",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:fresh-fruit-consumption-quantity-prefecture-gap",
           "kind": "blog"
         },
@@ -10576,6 +10580,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:watermelon-expenditure-ranking",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:fresh-fruits-group-consumption-expenditure",
           "kind": "ranking"
@@ -10651,6 +10659,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:hiroshima-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kyoto-food-culture",
           "kind": "blog"
         },
@@ -10695,6 +10707,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:hiroshima-food-culture",
+          "kind": "blog"
+        },
         {
           "pageId": "blog:kyoto-food-culture",
           "kind": "blog"
@@ -11082,11 +11098,7 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:kochi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:yamaguchi-food-culture",
+          "pageId": "blog:miyazaki-food-culture",
           "kind": "blog"
         },
         {
@@ -11131,11 +11143,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:kochi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:yamaguchi-food-culture",
+          "pageId": "blog:miyazaki-food-culture",
           "kind": "blog"
         },
         {
@@ -11388,10 +11396,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:yamagata-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "ranking:fresh-udon-soba-consumption-expenditure",
           "kind": "ranking"
         }
@@ -11429,10 +11433,6 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:aichi-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:fresh-udon-soba-consumption-prefecture-gap",
           "kind": "blog"
         },
@@ -11454,10 +11454,6 @@
         },
         {
           "pageId": "blog:udon-soba-food-culture-prefecture-map",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:yamagata-food-culture",
           "kind": "blog"
         },
         {
@@ -12221,10 +12217,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "blog:akita-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:aomori-food-culture",
           "kind": "blog"
         },
@@ -12241,10 +12233,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:iwate-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:mie-food-culture",
           "kind": "blog"
         },
@@ -12253,7 +12241,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:tottori-food-culture",
+          "pageId": "blog:toyama-food-culture",
           "kind": "blog"
         },
         {
@@ -12304,10 +12292,6 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:akita-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:aomori-food-culture",
           "kind": "blog"
         },
@@ -12316,19 +12300,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:iwate-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:mie-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:shimane-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:tottori-food-culture",
+          "pageId": "blog:toyama-food-culture",
           "kind": "blog"
         },
         {

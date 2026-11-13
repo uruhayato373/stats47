@@ -303,10 +303,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:spinach-consumption-ranking",
-          "kind": "blog"
-        },
-        {
           "pageId": "ranking:academic-achievement-test-average-rate",
           "kind": "ranking"
         },
@@ -13561,7 +13557,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:nagasaki-food-culture",
+          "pageId": "blog:miyazaki-food-culture",
           "kind": "blog"
         },
         {
@@ -13790,6 +13786,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:banana-consumption-quantity",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
@@ -13798,7 +13798,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:nagasaki-food-culture",
+          "pageId": "blog:miyazaki-food-culture",
           "kind": "blog"
         },
         {

@@ -1190,6 +1190,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:nagasaki-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:confectionery-consumption-expenditure",
           "kind": "ranking"
         },
@@ -10799,23 +10803,19 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:ishikawa-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:mie-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:nagano-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:nara-food-culture",
+          "pageId": "blog:miyazaki-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:okinawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shizuoka-food-culture",
           "kind": "blog"
         },
         {
@@ -10824,10 +10824,6 @@
         },
         {
           "pageId": "blog:wakayama-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:yamanashi-food-culture",
           "kind": "blog"
         },
         {
@@ -10874,6 +10870,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:crab-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:fukui-food-culture",
           "kind": "blog"
         },
@@ -10886,19 +10886,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:ishikawa-food-culture",
+          "pageId": "blog:miyazaki-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:mie-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:nagano-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:nara-food-culture",
+          "pageId": "blog:shizuoka-food-culture",
           "kind": "blog"
         },
         {
@@ -10907,10 +10899,6 @@
         },
         {
           "pageId": "blog:wakayama-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:yamanashi-food-culture",
           "kind": "blog"
         },
         {
