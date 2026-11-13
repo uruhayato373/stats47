@@ -341,7 +341,7 @@
     {"key":"clam-consumption-quantity","title":"あさり消費量","unit":"g","year":"2025","count":47,"max":568,"min":0,"minNonZeroAbs":86,"chartUnit":"g","factor":1,"decimals":null,"reason":"small"},
     {"key":"cleaning-expenses-prefecture","title":"清掃費","unit":"千円","year":"2022","count":47,"max":23260319,"min":0,"minNonZeroAbs":365,"chartUnit":"億円","factor":0.00001,"decimals":1,"reason":"rescaled"},
     {"key":"cleaning-service-consumption-expenditure","title":"清掃代消費支出額","unit":"円","year":"2025","count":47,"max":14428,"min":418,"minNonZeroAbs":418,"chartUnit":"円","factor":1,"decimals":null,"reason":"small"},
-    {"key":"cleaning-shop-count-per-100k","title":"クリーニング所数","unit":"所","year":"2023","count":47,"max":115.6,"min":37.9,"minNonZeroAbs":37.9,"chartUnit":"所","factor":1,"decimals":null,"reason":"small"},
+    {"key":"cleaning-shop-count-per-100k","title":"クリーニング業数","unit":"所","year":"2023","count":47,"max":115.6,"min":37.9,"minNonZeroAbs":37.9,"chartUnit":"所","factor":1,"decimals":null,"reason":"small"},
     {"key":"cleaning-worker-annual-income","title":"清掃・廃棄物処理従事者の平均年収","unit":"万円","year":"2023","count":47,"max":509.45,"min":299.72,"minNonZeroAbs":299.72,"chartUnit":"万円","factor":1,"decimals":1,"reason":"rescaled"},
     {"key":"clothing-footwear-budget-share-kakei","title":"消費支出に占める被服及び履物の割合","unit":"％","year":"2025","count":47,"max":3.7,"min":2.3,"minNonZeroAbs":2.3,"chartUnit":"%","factor":1,"decimals":null,"reason":"not-quantity"},
     {"key":"clothing-footwear-expenditure-ratio-multi-person-households","title":"被服及び履物費割合","unit":"％","year":"2024","count":47,"max":3.9,"min":2.4,"minNonZeroAbs":2.4,"chartUnit":"%","factor":1,"decimals":null,"reason":"not-quantity"},

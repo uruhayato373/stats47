@@ -4601,7 +4601,7 @@
     {
       "metricKey": "cleaning-shop-count-per-100k",
       "pageId": "ranking:cleaning-shop-count-per-100k",
-      "title": "クリーニング所数",
+      "title": "クリーニング業数",
       "sources": [
         {
           "role": "primary",
