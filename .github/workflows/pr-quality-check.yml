@@ -1500,6 +1500,15 @@ jobs:
           kill "$(cat /tmp/pr-e2e-next.pid)" 2>/dev/null || true
           kill "$(cat /tmp/pr-e2e-r2-overlay.pid)" 2>/dev/null || true
 
+      - name: 📎 Collect server logs for the report
+        # job のログは tail だけで、流れた後は読めない。next start の例外と R2 中継の upstream error を
+        # 全文のまま artifact へ残す (E2E-FAILURE-EVIDENCE-01)。Playwright の webServer は reuseExistingServer で
+        # 使われず stdout を持たないので、サーバーの出力はこの 2 ファイルだけが正本。
+        if: always()
+        run: |
+          mkdir -p apps/web/server-logs
+          cp /tmp/pr-e2e-next.log /tmp/pr-e2e-r2-overlay.log apps/web/server-logs/ 2>/dev/null || true
+
       - name: 📊 Upload Playwright report
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
@@ -1508,6 +1517,7 @@ jobs:
           path: |
             apps/web/playwright-report/
             apps/web/test-results/
+            apps/web/server-logs/
           if-no-files-found: ignore
           retention-days: 30
 
