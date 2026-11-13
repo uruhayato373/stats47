@@ -1,10 +1,12 @@
 import { addDays, isoWeekOf, isoWeekRange, jstDateOf } from "../../../../.claude/scripts/metrics/lib/periods.mjs";
 import "server-only";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 
 import { describeChannel, weeklyProductRevenue } from "../../../../.claude/scripts/metrics/lib/product-revenue.mjs";
 import { summarizeWeeklyRevenue, weeklyRevenueNode } from "../../../../.claude/scripts/metrics/lib/weekly-revenue.mjs";
 
-import { cached, fileExists, hasError, readCsv, readJson, TTL, wrap, type Wrapped } from "./state-io";
+import { cached, fileExists, hasError, readCsv, readJson, statePath, TTL, wrap, type Wrapped } from "./state-io";
 import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 
 /**
@@ -100,6 +102,15 @@ export interface WeeklyRevenue {
 
 const optionalJson = (rel: string) => (fileExists(rel) ? readJson<object>(rel) : null);
 
+/** 収益の明細 (data/revenue/daily の全ファイル)。まだ 1 件も無ければ空 */
+function readDailyRevenue(): object[] {
+  const dir = statePath(datasetDir("revenue.daily"));
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir)
+    .filter((f) => f.endsWith(".json"))
+    .map((f) => JSON.parse(readFileSync(join(dir, f), "utf8")) as object);
+}
+
 /**
  * KPI ツリーと同じ週の週次収益 (NSM) の内訳。計算は KPI ツリー (measurement-cycle) と同じ関数で、
  * 入力の記録をその場で読むので、週次 CI の再生成を待たずに最新の記録を反映する。
@@ -119,6 +130,7 @@ export function readWeeklyRevenue(week: string): Wrapped<WeeklyRevenue> {
         authLatest: optionalJson(`${datasetDir("revenue.authenticated")}/latest.json`),
         a8Results: optionalJson(datasetPath("a8.results")),
         rakutenResults: optionalJson(datasetPath("rakuten.results")),
+        daily: readDailyRevenue(),
       });
       return { ...result, weekStart: monday, weekEnd: sunday } as WeeklyRevenue;
     }),

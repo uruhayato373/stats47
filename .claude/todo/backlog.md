@@ -129,15 +129,19 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [NSM-REVENUE-INPUTS-01] 週次収益 (KGI) を判定不能にしている note の売上と Kindle の日別観測の欠けを直す
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node --test .claude/scripts/metrics/__tests__/weekly-revenue.test.mjs] [起票:2026-11-14] [領域:管理]
+### [NSM-REVENUE-INPUTS-01] 収益を日 × 商品の明細で持ち、土曜の週次レビューをスケジュール済みタスクで自動実行する
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/metrics/__tests__/revenue-rollup.test.mjs] [起票:2026-11-14] [領域:管理] [進行中]
 
-- **事実 (2026-11-14、W44)**: 管理画面のホームと KPI ツリーの週次収益は `weekly-revenue.mjs` で計算するようになったが、合計に入る note が判定不能なので週次収益の値が出ない (判定できた分は AdSense の ¥313 だけ)。
-- **原因 1 (note)**: 認証付き計測の note は閲覧数の収集が pass でも、売上 API が `revenueStatus: verification_required` (再確認切れ) を返し、`summarize.mjs` が `revenue-history.json` へ足さない。note の最終観測は 2026-10-17 のまま。
-- **原因 2 (Kindle)**: `product-revenue.mjs` は日別の観測 7 日分を要求するが、取得は土曜の週 1 回で「昨日」の 1 日分しか入らない (`recorded-measurement-first.md` の既知の制約)。構造上 7/7 にならない。Kindle は見積りなので合計には入れないが、有料購入 (KPI) が判定不能のまま。
-- **次**: ① note の売上 API の再確認をオーナーと土曜のレビューで通し、`revenue-history.json` に 11 月の行が入ることを確かめる ② Kindle は「過去 7 日間」の取得へ切り替えるか、週 1 点で数える定義へ変えるかを決める (`MEASUREMENT-MAC-DIRECT-01` の既知の制約と同じ箇所)。
-- **停止条件**: 2 段階認証・再確認を自動化しない。欠測を 0 円で埋めない。
-- **完了条件**: 管理画面のホームで週次収益が「判定不能」でなく金額で出る週が 1 週ある。
+- **方針 (2026-11-14 オーナー決定)**: 売上は販売元のレポートの粒度のまま、日 × 商品 × 種類の明細を `data/revenue/daily/<チャネル>-<年月>.json` (台帳 `revenue.daily`・Schema 付き) に持ち、週・月・年は `revenue-rollup.mjs` の集計で作る。明細も git に置く。週次レビューはこの Mac のスケジュール済みタスク (X 返信の承認リストと同じ方式) にし、最後まで自動で進める。計画の全文は `~/.claude/plans/gentle-strolling-tide.md`。
+- **済み**: 明細の Schema・カタログの行・集計の関数。Kindle の書籍別の行を取得結果から明細へ書く経路 (`collect.mjs` → `summarize.mjs`)。週次収益の計算は、週の 7 日が明細に入っているチャネルを明細から出し、入っていないチャネルは従来の記録から出す。
+- **次**:
+  1. **Kindle の取得期間を「昨日」から直近 35 日に替える。** パーサ (`parseKdpReport`) は日付の範囲に対応済み。レポート画面でどのタブ・期間指定を選ぶと日別・書籍別の xlsx が落ちるかは、ログインした画面で確かめる (`collectKdpReport`)。それまでは週 1 回の取得で 1 日分しか明細に入らず、有料購入は判定不能のまま。
+  2. **note を明細に入れる。** ダッシュボード (`/dashboard`) に売上の日別の表と、期間を指定した記事別の売上の列がある (2026-11-14 に画面で確認)。売上管理 (`/dashboard/salesmanage`) はパスワードの再確認が要り、中身は未確認。再確認は約 30 分で切れるので、`weekly-saturday.sh` の 1 段目で「再確認 → 売上の読み取り」を続けて行う。
+  3. AdSense の日別 (API)、A8・楽天の日別を明細に入れる。入れば「月累計なので合計に入れない」の但し書きが外れる。
+  4. 集計の生成物 `data/revenue/rollup/{weekly,monthly,yearly}.json` を書くスクリプトと、管理画面 `/revenue` の週・月・年・商品別の表。`summarizePaidPurchases` を明細の集計に替え、`revenue-history.json` への依存を外す。
+  5. スケジュール済みタスク `stats47-weekly-review` を作り、1 回通す。本体は sonnet・medium、判断は `strategy-advisor` へ 1 回、収集用の agent は起動しない。`weekly-review`・`weekly-plan` の SKILL.md を無人で進める形に直す。初回のトークンを `model-usage` で記録する。
+- **停止条件**: パスワード・2 段階認証・CAPTCHA を自動で通さない。欠測を 0 円で埋めない。main へのマージと本番デプロイをタスクから行わない。
+- **完了条件**: 管理画面のホームで週次収益と有料購入が金額と件数で出る週があり、土曜のタスクがレビューと計画の保存まで 1 回通った。
 
 ### [BLOG-ISR-STALE-ON-REVISE-01] 改稿版を公開しても、公開前に開かれたページは旧版のまま残る
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:サイト]

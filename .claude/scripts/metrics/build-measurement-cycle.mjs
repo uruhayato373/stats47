@@ -131,6 +131,13 @@ function readPreviousAdminAudit(week) {
   return { previous: JSON.parse(readFileSync(join(dir, `${previousWeek}.json`), "utf8")), previousWeek };
 }
 
+
+/** 収益の明細 (data/revenue/daily の全ファイル)。まだ 1 件も無ければ空 */
+function readDailyRevenue() {
+  const dir = join(PROJECT_ROOT, datasetDir("revenue.daily"));
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir).filter((f) => f.endsWith(".json")).map((f) => JSON.parse(readFileSync(join(dir, f), "utf-8")));
+}
 function main() {
   const week = arg("--week");
   if (!/^\d{4}-W\d{2}$/.test(week ?? "")) throw new Error("--week YYYY-Www が必要");
@@ -190,6 +197,7 @@ function main() {
     authLatest: readJsonIfExists(AUTHENTICATED_LATEST),
     a8Results: readJsonIfExists(datasetPath("a8.results")),
     rakutenResults: readJsonIfExists(datasetPath("rakuten.results")),
+    daily: readDailyRevenue(),
   });
   const kpiTree = summarizeKpiTree({
     ...readKpiInputs(),

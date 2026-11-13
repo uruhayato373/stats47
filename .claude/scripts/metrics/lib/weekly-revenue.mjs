@@ -16,6 +16,7 @@
 import { adsenseEarningsOf, ADSENSE_PAUSED_SINCE_WEEK, isAdsenseLiveWeek } from "./adsense-revenue.mjs";
 import { weeklyProductRevenue } from "./product-revenue.mjs";
 import { a8Result, rakutenResult } from "../nsm-revenue-lines.mjs";
+import { summarizePeriod } from "./revenue-rollup.mjs";
 
 /**
  * @typedef {{
@@ -42,10 +43,13 @@ function adsenseChannel(history, week) {
  *   week: string, weekStart: string, weekEnd: string, asOf: Date,
  *   adsenseHistory: Array<object>|null, revenueHistory: object|null,
  *   authLatest: object|null, a8Results: object|null, rakutenResults: object|null,
+ *   daily?: Array<any>,
  * }} input
+ *   daily は収益の明細 (data/revenue/daily の全ファイル)。その週の 7 日が明細の取得範囲に入っているチャネルは、
+ *   明細の集計を使う。入っていないチャネルは従来の記録 (週の合計・月累計) から出す
  * @returns {{ week: string, status: "ok"|"partial"|"unmeasurable", totalYen: number|null, measuredYen: number, channels: RevenueChannel[], unmeasurable: string[] }}
  */
-export function summarizeWeeklyRevenue({ week, weekStart, weekEnd, asOf, adsenseHistory, revenueHistory, authLatest, a8Results, rakutenResults }) {
+export function summarizeWeeklyRevenue({ week, weekStart, weekEnd, asOf, adsenseHistory, revenueHistory, authLatest, a8Results, rakutenResults, daily = [] }) {
   const product = weeklyProductRevenue({ revenueHistory, weekStart, weekEnd });
   const note = product.channels.note;
   const kdp = product.channels.kdp;
@@ -69,6 +73,19 @@ export function summarizeWeeklyRevenue({ week, weekStart, weekEnd, asOf, adsense
       : { id: "rakuten", label: "楽天", period: "month-to-date", status: "unmeasurable", yen: null, inTotal: false, detail: rakuten.reason },
   ];
 
+  // 明細がその週を覆っているチャネルは、明細の集計で置き換える
+  const LABEL = { adsense: "AdSense", note: "note", kdp: "Kindle", a8: "A8", rakuten: "楽天" };
+  for (const [i, c] of channels.entries()) {
+    const d = summarizePeriod(daily, { channel: c.id, start: weekStart, end: weekEnd });
+    if (d.status !== "ok") continue;
+    const orders = d.orders == null ? "" : `・${d.orders} 件`;
+    const estimate = c.id === "kdp";
+    channels[i] = {
+      id: c.id, label: LABEL[c.id], period: "week", status: "ok", yen: d.revenueYen ?? 0, inTotal: !estimate,
+      detail: `日別の明細 7 日分${orders}${estimate ? " (ロイヤリティ見積りなので合計に入れない)" : d.provisional ? " (未確定を含む)" : ""}`,
+    };
+  }
+
   const summed = channels.filter((c) => c.inTotal);
   const measuredYen = summed.filter((c) => c.status === "ok").reduce((sum, c) => sum + (c.yen ?? 0), 0);
   const unmeasurable = channels.filter((c) => c.status !== "ok").map((c) => c.label);
@@ -80,7 +97,8 @@ export function summarizeWeeklyRevenue({ week, weekStart, weekEnd, asOf, adsense
 /** KPI ツリーの `weekly-revenue` の 1 行 (measurement-cycle.mjs が使う) */
 export function weeklyRevenueNode(summary) {
   const missing = summary.channels.filter((c) => c.status !== "ok").map((c) => `${c.label} 判定不能 (${c.detail})`);
-  const note = missing.length ? missing.join(" / ") : "AdSense と note の週次の合計。A8・楽天は月累計、Kindle は見積りなので別に並べる";
+  const included = summary.channels.filter((c) => c.inTotal).map((c) => c.label).join("・");
+  const note = missing.length ? missing.join(" / ") : `${included} の週の合計。月累計と見積りのチャネルは別に並べる`;
   if (summary.status === "ok") return { status: "ok", value: `${summary.totalYen}`, previous: null, note };
   if (summary.status === "partial") {
     return { status: "partial", value: null, previous: null, note: `判定できた分 ${yen(summary.measuredYen)}。${note}` };

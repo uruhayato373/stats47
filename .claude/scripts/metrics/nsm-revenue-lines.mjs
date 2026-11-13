@@ -124,7 +124,7 @@ export function rakutenResult(rakutenResults, asOf) {
  * KDP の売上を自動で取り込む経路はまだ無い。よって台帳が空でも、販売中の商品があれば ¥0 ではなく未計測。
  * 以前は台帳が空なら「¥0」と書き、記録があっても存在しない `date` / `amountYen` を読んで常に ¥0 になっていた (2026-09-25)。
  *
- * @param {{ ledger: object|null, liveProductCount: number|null, weekStart: string, weekEnd: string }} input
+ * @param {{ ledger: any, liveProductCount: number|null, weekStart: string, weekEnd: string, revenueHistory?: object|null }} input
  *   liveProductCount … 販売中と分かっている商品の数 (KDP の `kdp-weekly-publication.json` の s1Live + pilotLive)。
  *                      S1 シリーズと試行分だけなので全体の数ではなく下限。読めなければ null
  *   weekStart / weekEnd … 週の月曜・日曜 (YYYY-MM-DD)

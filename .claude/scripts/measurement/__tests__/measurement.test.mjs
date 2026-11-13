@@ -13,7 +13,7 @@ import { consumerPath, validateAttempt } from '../consumer-paths.mjs';
 import { measurementHealth } from '../health.mjs';
 import { AFFILIATE_ASP } from '../../../../config/paths.mjs';
 import ExcelJS from 'exceljs';
-import { kdpAsinMap, parseKdpReport, openKdpReports } from '../kdp-reports.mjs';
+import { kdpAsinMap, kdpDailyRows, parseKdpReport, openKdpReports } from '../kdp-reports.mjs';
 import { openCoverageReason } from '../../gsc/export-coverage-playwright.mjs';
 
 test('GSC validates ZIP contents, expected categories, row counts and site ownership', () => {
@@ -152,6 +152,23 @@ test('KDP scopes old editions by exact ASIN and never adds shared-account totals
   assert.equal(report.records.find(r=>r.kind==='kenp').dateBasis, 'UTC');
   assert.equal(consumerPath('kdp', '.local/authenticated-measurement/kdp-123/status.xlsx'), null);
   assert.equal(consumerPath('kdp', '.local/authenticated-measurement/kdp-123/status.json'), '.local/authenticated-measurement/restored/kdp.json');
+});
+test('KDP accepts a date range and turns book rows into daily revenue rows', () => {
+  // 範囲の中の日付は受け、範囲の外は止める
+  assert.equal(parseKdpReport(kdpFixture(), kdpListings, { start: '2026-09-14', end: '2026-09-20' }).period.start, '2026-09-14');
+  assert.throws(() => parseKdpReport(kdpFixture(), kdpListings, { start: '2026-09-21', end: '2026-09-27' }));
+  const report = parseKdpReport(kdpFixture(), kdpListings, '2026-09-20');
+  const rows = kdpDailyRows(report, '2026-09-21T00:00:00.000Z');
+  const paid = rows.find(r => r.kind === 'paid-orders');
+  assert.equal(paid.quantity, 2);
+  assert.equal(paid.channel, 'kdp');
+  assert.equal(paid.finality, 'provisional');
+  assert.ok(rows.every(r => r.date === '2026-09-20' && r.productId && r.marketplace));
+  // 同じ日・書籍・ストア・種類は 1 行にまとまる (明細のキーが重複しない)
+  assert.equal(new Set(rows.map(r => JSON.stringify([r.date, r.productId, r.marketplace, r.kind]))).size, rows.length);
+  // 円以外のロイヤリティは円に直さず、明細に書かない
+  const foreign = { ...report, records: report.records.map(r => r.kind === 'estimated-ebook-royalty' ? { ...r, currency: 'USD' } : r) };
+  if (report.records.some(r => r.kind === 'estimated-ebook-royalty')) assert.equal(kdpDailyRows(foreign, '2026-09-21T00:00:00.000Z'), null);
 });
 test('KDP rejects malformed, wrong-day, unmapped, duplicate and foreign observations', () => {
   for (const mutate of [

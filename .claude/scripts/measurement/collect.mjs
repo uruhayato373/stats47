@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { sourceFor, scopedState, failureCode, selectSessionBundle } from './sources.mjs';
 import { readVault, writeVault } from './vault.mjs';
 import { kdpMonthlyVaultKey } from './kdp-monthly-reports.mjs';
+import { kdpDailyRows } from './kdp-reports.mjs';
 import { kdpMonthlyObservations } from '../../../packages/product-factory/src/sales/ledger-core.mjs';
 import { authenticationPause, rejectedAuthentication } from './auth-recovery.mjs';
 import { acceptedNoteGap, noteInventoryAvailable } from './note-inventory.mjs';
@@ -193,7 +194,11 @@ try {
         ? { date: daily.period.end, royaltyYen: jpy.reduce((sum, r) => sum + (r.amount ?? 0), 0),
           paidOrders: daily.records.filter(r => r.kind === 'processed-orders').reduce((sum, r) => sum + (r.paid ?? 0), 0) }
         : null;
-      result.quality = { monthlyPeriod: monthly.period.month, monthlyRows: monthly.coverage.includedRows, monthlyComplete: true, revenue: dailyRevenue };
+      // 収益の明細 (data/revenue/daily) の入力。書籍 × 日 × 種類の行を summarize.mjs が台帳へ入れる。
+      // 円以外のロイヤリティがある・レポートが不完全なら渡さない (明細に書かない)。
+      const dailyRows = daily?.coverage?.complete === true ? kdpDailyRows(daily, now) : null;
+      result.quality = { monthlyPeriod: monthly.period.month, monthlyRows: monthly.coverage.includedRows, monthlyComplete: true, revenue: dailyRevenue,
+        daily: dailyRows ? { channel: 'kdp', start: daily.period.start, end: daily.period.end, rows: dailyRows } : null };
       if (vaultWrites) {
         const vaultKey = kdpMonthlyVaultKey(monthly.period.month);
         await writeVault(vaultKey, {

@@ -67,3 +67,25 @@ test("全チャネルがそろえば KPI ツリーの行に合計の値が入る
   assert.equal(node.status, "ok");
   assert.equal(node.value, "1013");
 });
+
+test("週の 7 日が明細に入っているチャネルは明細の集計を使い、日別になった ASP は合計に入る", () => {
+  const observedAt = "2026-11-02T00:00:00Z";
+  const doc = (channel, rows) => ({ schemaVersion: 1, channel, month: "2026-10", coverage: [{ start: "2026-10-01", end: "2026-10-31", observedAt }], rows });
+  const nov = (channel) => ({ schemaVersion: 1, channel, month: "2026-11", coverage: [{ start: "2026-11-01", end: "2026-11-01", observedAt }], rows: [] });
+  const row = (channel, kind, extra) => ({ date: "2026-10-28", channel, productId: null, kind, finality: "final", observedAt, ...extra });
+  const daily = [
+    doc("a8", [row("a8", "occurred", { productId: "s00000000001", quantity: 1, amountYen: 900 })]), nov("a8"),
+    doc("kdp", [
+      { ...row("kdp", "paid-orders", { productId: "K-S1-01", quantity: 3 }), marketplace: "Amazon.co.jp", finality: "provisional" },
+      { ...row("kdp", "royalty-estimate", { productId: "K-S1-01", amountYen: 450 }), marketplace: "Amazon.co.jp", finality: "provisional" },
+    ]), nov("kdp"),
+  ];
+  const r = summarizeWeeklyRevenue(input({ daily }));
+  const a8 = r.channels.find((c) => c.id === "a8");
+  assert.deepEqual([a8.period, a8.yen, a8.inTotal], ["week", 900, true]);
+  const kdp = r.channels.find((c) => c.id === "kdp");
+  assert.deepEqual([kdp.yen, kdp.inTotal], [450, false]);
+  assert.match(kdp.detail, /3 件/);
+  // 合計 = AdSense 313 + note 700 + A8 900 (Kindle の見積りは入れない)
+  assert.equal(r.totalYen, 1913);
+});
