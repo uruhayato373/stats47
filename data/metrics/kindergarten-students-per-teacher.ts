@@ -33,22 +33,6 @@ export const kindergartenStudentsPerTeacher: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "人/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "人/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "seoTitle": "幼稚園在園者数ランキング都道府県【2024年】｜1位愛知県（11.98人）",
   "seoDescription": "2024年の幼稚園在園者数の都道府県別ランキング。1位愛知県（11.98人）、最下位福井県（3.8人）で3.2倍の格差。地図やグラフで47都道府県を比較。",

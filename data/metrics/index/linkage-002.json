@@ -3079,10 +3079,7 @@
         "configHash": "965cf34cb8679c0f"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:park-green-space-gap",
@@ -4067,10 +4064,7 @@
         "configHash": "a29834d56390fc3e"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:book-magazine-retail-annual-sales-per-capita",
@@ -6040,10 +6034,7 @@
         "configHash": "dc40fe79ee3679a6"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:building-fire-damage-amount-per-building-fire",
@@ -6075,10 +6066,7 @@
         "configHash": "b0d95ae74ecbe6b0"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:building-fire-damage-amount-per-person",
@@ -9667,10 +9655,7 @@
         "configHash": "1f7793821a99e3c5"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:regional-transport",
@@ -12184,10 +12169,7 @@
         "configHash": "3ca425fcf6e2fd27"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:childcare-services",
@@ -12605,10 +12587,7 @@
         "configHash": "6676b3ecd2542baf"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:certified-childcare-center-education-cost-per-student",

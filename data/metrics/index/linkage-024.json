@@ -759,10 +759,7 @@
         "configHash": "5d88e18cb5abe2c7"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:psychiatric-bed-count-per-100k",
@@ -1142,10 +1139,7 @@
         "configHash": "307335350aea3c82"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:psychiatric-inpatients-per-fulltime-physician-per-day",
@@ -1177,10 +1171,7 @@
         "configHash": "276ff656597a3aa5"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:psychiatric-inpatients-per-nurse-per-day",
@@ -1212,10 +1203,7 @@
         "configHash": "15c54f442ed54757"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:psychiatric-outpatients-per-fulltime-physician-per-day",
@@ -1247,10 +1235,7 @@
         "configHash": "3ae61c5b5ee85e58"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:gasoline-consumption-quantity-vs-public-assistance",
@@ -1590,10 +1575,7 @@
         "configHash": "32be7fb61ded05cd"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:public-assistance",
@@ -1819,10 +1801,7 @@
         "configHash": "1c35cc715b9dc392"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:public-assistance-facility-residents-per-1000",
@@ -1854,10 +1833,7 @@
         "configHash": "61e92405e9d8db32"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:dual-income-household-ratio-vs-public-assistance-housing",
@@ -1893,10 +1869,7 @@
         "configHash": "c37d1218a441333b"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:dual-income-household-ratio-vs-public-assistance-medical",
@@ -1932,10 +1905,7 @@
         "configHash": "9f2fd48a6ad0dd75"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:public-assistance-nursing-beneficiaries-per-1000",
@@ -2083,10 +2053,7 @@
         "configHash": "19b26879c80d412e"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:barber-beauty-salon-regional-gap",
@@ -2853,10 +2820,7 @@
         "configHash": "3d28d10abd0ca47d"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:sports-participation",
@@ -3757,10 +3721,7 @@
         "configHash": "536f13c1e43313fa"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:public-health-nurse-count-per-100k",
@@ -4090,10 +4051,7 @@
         "configHash": "698ca420bcdb905b"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:public-multipurpose-sports-ground-count-per-million",
@@ -4336,10 +4294,7 @@
         "configHash": "b171f2eb920e8038"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:public-phone-count-per-1000-prefecture-gap",
@@ -4449,10 +4404,7 @@
         "configHash": "01b7eabd1f150042"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:public-rental-housing-rent-per-3-3m2",
@@ -4806,10 +4758,7 @@
         "configHash": "24d1c449476a2bee"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:sports-participation",

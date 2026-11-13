@@ -33,22 +33,6 @@ export const bankDepositBalancePerPerson: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "万円/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "万円/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "groupKey": "domestic-bank-deposit-balance",
   "seoTitle": "国内銀行預金残高ランキング都道府県【2024年】｜1位東京都（2,641.1万円）",

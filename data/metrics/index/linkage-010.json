@@ -3202,10 +3202,7 @@
         "configHash": "77fbba8a12d83671"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area:01000",
@@ -4844,10 +4841,7 @@
         "configHash": "1c642c255ab7054e"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "municipality-ranking:general-clinic-count-per-100km2",
@@ -6417,10 +6411,7 @@
         "configHash": "ad2759b4d615474f"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "municipality-ranking:general-hospital-count-per-100km2",
@@ -6460,9 +6451,7 @@
         "configHash": "0ed3a1b7b682dab4"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "municipality-ranking:general-hospital-per-100k",
@@ -9055,10 +9044,7 @@
         "configHash": "1089681bb2df247c"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:govt-health-insurance-visit-expense-dependents-per-person",
@@ -9090,10 +9076,7 @@
         "configHash": "858038dcd263ed47"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:govt-health-insurance-visit-expense-insured-per-person",
@@ -9295,10 +9278,7 @@
         "configHash": "c6d546bc867c9767"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:safe-driving-5-features",

@@ -716,10 +716,7 @@
         "configHash": "6fef9f2aa45fb791"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:housing-site-value-per-3-3m2",
@@ -5667,10 +5664,7 @@
         "configHash": "4a368ec209a84221"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:inpatients-per-fulltime-physician-per-day",
@@ -5702,10 +5696,7 @@
         "configHash": "145c74d98b9e4f06"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:inpatients-per-nurse-per-day",
@@ -6505,10 +6496,7 @@
         "configHash": "4a2ba13c0d876a97"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:intellectual-disability-rehabilitation-center-cases-per-100k",
@@ -6583,10 +6571,7 @@
         "configHash": "a8c52b5774bf3c74"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:disability-support",
@@ -6812,10 +6797,7 @@
         "configHash": "6f2f9589bbe34266"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:disability-support",
@@ -7084,10 +7066,7 @@
         "configHash": "5dac5050c15b8dd3"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:disability-support",
@@ -7313,10 +7292,7 @@
         "configHash": "544826e6e0a852e1"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:intellectual-disability-support-facility-staff-per-100k",
@@ -9339,10 +9315,7 @@
         "configHash": "aef473ffb7c5f550"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:japan-health-insurance-society-enrollees-per-1000",
@@ -9374,10 +9347,7 @@
         "configHash": "e161defa29d184ad"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:japan-health-insurance-society-medical-expense-dependents-per-person",
@@ -9409,10 +9379,7 @@
         "configHash": "513bac2545ba797e"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:japan-health-insurance-society-medical-expense-insured-per-person",

@@ -41,22 +41,6 @@ export const roomAirconOwnershipMultiPersonHouseholdsPer1000: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "台/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "台/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "seoTitle": "ルームエアコン所有数量ランキング都道府県【2014年】｜1位徳島県（3,849台）",
   "seoDescription": "2014年のルームエアコン所有数量の都道府県別ランキング。1位徳島県（3,849台）、最下位北海道（344台）で11.2倍の格差。地図やグラフで47都道府県を比較。",

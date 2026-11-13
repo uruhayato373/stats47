@@ -33,22 +33,6 @@ export const fireDamageHouseholdCountPer100BuildingFires: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "世帯/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "世帯/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "seoTitle": "火災り災世帯数ランキング都道府県【2023年】｜1位大阪府（110.3世帯）",
   "seoDescription": "2023年の火災り災世帯数の都道府県別ランキング。1位大阪府（110.3世帯）、最下位沖縄県（59.6世帯）で1.9倍の格差。地図やグラフで47都道府県を比較。",

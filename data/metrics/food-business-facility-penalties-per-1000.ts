@@ -34,22 +34,6 @@ export const foodBusinessFacilityPenaltiesPer1000: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "件/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "件/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "groupKey": "food-business-facility-penalties",
   "seoTitle": "食品営業施設処分件数ランキング都道府県【2020年】｜1位愛媛県（3.9件）",

@@ -253,10 +253,7 @@
         "configHash": "dbdd11ae14670325"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:junior-college-count-per-100k",
@@ -2816,10 +2813,7 @@
         "configHash": "0063849069205e6b"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:junior-high-school-count-per-100k-12-14",
@@ -3085,10 +3079,7 @@
         "configHash": "e3621c1eb58f29bd"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:cc-estat-06-income-scatter",
@@ -3730,10 +3721,7 @@
         "configHash": "4c07fb62cc5c9625"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:students-per-teacher-class-size-gap",
@@ -4182,10 +4170,7 @@
         "configHash": "eec0791b735af25c"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:juvenile-theft-offender-arrests-per-1000-14-19",
@@ -5964,10 +5949,7 @@
         "configHash": "ee48468ab035c82d"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area:01000",
@@ -6187,10 +6169,7 @@
         "configHash": "840ca1c045fc7ab3"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:kindergarten-education-cost-per-student",
@@ -6369,10 +6348,7 @@
         "configHash": "332e55c8395e89d3"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:kindergarten-students-per-teacher",
@@ -8426,10 +8402,7 @@
         "configHash": "60155d66e0d93e6d"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:agriculture-hokkaido-dominance",
@@ -9888,10 +9861,7 @@
         "configHash": "aa6414bf9e392954"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:convenience-store-density-map",

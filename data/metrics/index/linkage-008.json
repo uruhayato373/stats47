@@ -1271,10 +1271,7 @@
         "configHash": "43f988c4cb742c97"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:farm-household-expenditure-per-month",
@@ -1306,10 +1303,7 @@
         "configHash": "59579dce2989fa51"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:female-lecture-prefecture-gap",
@@ -3484,10 +3478,7 @@
         "configHash": "110479dc26111c67"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-assets-debt",
@@ -4418,10 +4409,7 @@
         "configHash": "8d8a8d34cf6783e7"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:fire-damage-casualties-per-accident",
@@ -4683,10 +4671,7 @@
         "configHash": "0100bc627dc39c69"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:fire-damage-household-count-per-100-building-fires",
@@ -4951,10 +4936,7 @@
         "configHash": "f481d7b0fd54dd43"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:fire-department-branch-count-per-100-km2",
@@ -4986,10 +4968,7 @@
         "configHash": "fdbcb9823a0088b5"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:firefighting-capacity-gap",
@@ -5025,10 +5004,7 @@
         "configHash": "b37530b85753e62b"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:fire-department-dispatch-count-per-100-thousand-people",
@@ -5060,10 +5036,7 @@
         "configHash": "ae26e71485b891af"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:safety",
@@ -5324,10 +5297,7 @@
         "configHash": "795b78a4dd85824f"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:safety",
@@ -5557,10 +5527,7 @@
         "configHash": "2bab9f992f4c134e"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:safety",
@@ -5790,10 +5757,7 @@
         "configHash": "e0197a2fe5d866ac"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:safety",
@@ -6478,10 +6442,7 @@
         "configHash": "e314bbb33a7f42f8"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:fire-related-personnel-count-per-100k",

@@ -33,22 +33,6 @@ export const welfareOfficePublicAssistanceApplicationsPer1000Households: MetricC
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "件/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "件/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "seoTitle": "福祉事務所生活保護申請件数ランキング都道府県【2023年】｜1位愛知県（199件）",
   "seoDescription": "2023年の福祉事務所生活保護申請件数の都道府県別ランキング。1位愛知県（199件）、最下位徳島県（109件）で1.8倍の格差。地図やグラフで47都道府県を比較。",

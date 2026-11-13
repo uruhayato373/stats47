@@ -2256,10 +2256,7 @@
         "configHash": "815e5e9aa4266e0d"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:municipal-intellectual-disability-consultations-per-100k",
@@ -2904,10 +2901,7 @@
         "configHash": "185d6538c4b156db"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area:01000",
@@ -4341,10 +4335,7 @@
         "configHash": "e2bf0707665073d8"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:national-health-insurance-enrollees-per-1000",
@@ -4376,10 +4367,7 @@
         "configHash": "84a6f049fd7410b2"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:tuna-consumption-medical-expense-correlation",
@@ -4802,10 +4790,7 @@
         "configHash": "44675e312ea80aae"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:national-pension-enrollees-type1-per-1000-20-59",
@@ -4837,10 +4822,7 @@
         "configHash": "4bd3f77630883fed"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:national-pension-enrollees-type3-per-1000-20-59",
@@ -8485,10 +8467,7 @@
         "configHash": "c4d8f211361e72f6"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:park-green-space-gap",

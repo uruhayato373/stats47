@@ -145,10 +145,7 @@
         "configHash": "9c59630dfcbb9b3a"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:elderly-class-lecture-count-per-million",
@@ -1315,10 +1312,7 @@
         "configHash": "59b80693900ec8f0"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:dual-income-household-ratio-vs-elderly-on-public-assistance",
@@ -2790,10 +2784,7 @@
         "configHash": "0f303460f8d3f35b"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:elementary-school-children-1-per",
@@ -3164,10 +3155,7 @@
         "configHash": "1a6e3a074dfc5cd0"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:elementary-school-count-per-100k-6-11",
@@ -3433,10 +3421,7 @@
         "configHash": "8a0a74b7068dd240"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:education-culture",

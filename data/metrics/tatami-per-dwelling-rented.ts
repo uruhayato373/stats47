@@ -51,22 +51,6 @@ export const tatamiPerDwellingRented: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "畳/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 2,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "畳/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "seoTitle": "借家住宅の居住室の畳数ランキング都道府県【2023年】｜1位奈良県（21.01畳）",
   "seoDescription": "2023年の借家住宅の居住室の畳数の都道府県別ランキング。1位奈良県（21.01畳）、最下位東京都（15.57畳）で1.3倍の格差。地図やグラフで47都道府県を比較。",

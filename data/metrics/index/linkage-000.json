@@ -2668,10 +2668,7 @@
         "configHash": "4d2760217bfec406"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:adult-class-lecture-count-per-million",
@@ -11689,10 +11686,7 @@
         "configHash": "d1b111aafa875131"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:tuna-consumption-quantity-vs-annual-new-inpatients-general",
@@ -11728,10 +11722,7 @@
         "configHash": "455d5943ed3d27f4"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:annual-new-inpatients-psychiatric-hospital-per-100k",
@@ -12538,10 +12529,7 @@
         "configHash": "30b168619017f056"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:commercial-sales-productivity-gap",
@@ -12585,10 +12573,7 @@
         "configHash": "26df453fb8c43dd8"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:commercial-sales-productivity-gap",
@@ -13448,10 +13433,7 @@
         "configHash": "0e382aa54aec3f96"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:apparel-retail-store-count-per-1000",

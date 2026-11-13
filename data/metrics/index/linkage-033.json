@@ -2962,10 +2962,7 @@
         "configHash": "8234bddf2a5e0de4"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:youth-class-lecture-count-per-million",
@@ -2997,10 +2994,7 @@
         "configHash": "efcde1aaf62a9f35"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:youth-education-facility-count-per-million",

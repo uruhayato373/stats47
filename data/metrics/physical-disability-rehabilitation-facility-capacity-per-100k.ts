@@ -34,22 +34,6 @@ export const physicalDisabilityRehabilitationFacilityCapacityPer100k: MetricConf
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "人/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "人/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "groupKey": "physical-disability-rehabilitation-facility-capacity",
   "seoTitle": "身体障害者更生援護施設定員数ランキング都道府県【2011年】｜1位高知県（94.9人）",

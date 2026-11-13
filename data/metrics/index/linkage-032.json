@@ -3853,10 +3853,7 @@
         "configHash": "04a3afb59eaed642"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:vacant-housing-vs-welfare-commissioner",
@@ -4250,10 +4247,7 @@
         "configHash": "a28639b811d5593b"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:welfare-facilities-count-per-100k-on-assistance",
@@ -4285,10 +4279,7 @@
         "configHash": "9e849c47a5d60338"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:welfare-facility-staff-per-1000-on-assistance",
@@ -4355,10 +4346,7 @@
         "configHash": "c05091f3c15987c0"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:welfare-office-intellectual-disability-consultations-per-100k",
@@ -4390,10 +4378,7 @@
         "configHash": "44d515fdde7249ba"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:welfare-office-public-assistance-applications-per-1000-households",

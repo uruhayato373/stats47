@@ -2908,10 +2908,7 @@
         "configHash": "ced57f1bd38bf80c"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:outpatients-per-fulltime-physician-per-day",
@@ -4353,10 +4350,7 @@
         "configHash": "bc283e63307b8c20"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:paid-nursing-home-capacity-per-1000-65plus",
@@ -4436,10 +4430,7 @@
         "configHash": "9b6d97bef6c269f5"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:paid-nursing-home-count-per-100k-65plus",
@@ -4519,10 +4510,7 @@
         "configHash": "02aacee05822e6e3"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:paid-nursing-home-residents-per-1000-65plus",
@@ -4770,10 +4758,7 @@
         "configHash": "5461dcaee18c0e95"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:food-self-sufficiency-rate-calorie-vs-passport-issuance",

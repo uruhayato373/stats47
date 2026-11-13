@@ -3228,10 +3228,7 @@
         "configHash": "36d29f720104fab1"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:tablet-ownership-multi-person-households-per-1000",
@@ -3522,10 +3519,7 @@
         "configHash": "aed32101664b4812"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:dual-income-household-ratio-vs-tatami-per-dwelling-owner",
@@ -3576,10 +3570,7 @@
         "configHash": "bdf28f96ad292bd5"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "municipality-ranking:tatami-per-dwelling-rented",
@@ -4888,10 +4879,7 @@
         "configHash": "beaea5c9e1b39d52"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:telephone-subscription-count-per-1000",
@@ -6097,10 +6085,7 @@
         "configHash": "06c4c10dd6255f22"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:tertiary-industry-employees-per-establishment",

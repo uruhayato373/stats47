@@ -33,22 +33,6 @@ export const buildingFireDamageAmountPerPerson: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "円/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "円/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "groupKey": "building-fire-damage-amount-per-building-fire",
   "seoTitle": "建物火災損害額ランキング都道府県【2023年】｜1位秋田県（1,946円）",

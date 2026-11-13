@@ -24,10 +24,7 @@
         "configHash": "743ec2bb8a34c794"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:high-school-students-per-teacher",
@@ -6968,10 +6965,7 @@
         "configHash": "387bb850c4cbf323"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:home-helper-count-per-100k",
@@ -8664,10 +8658,7 @@
         "configHash": "d42868634ebb25f4"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:household-head-annual-income-per-household",
@@ -13806,10 +13797,7 @@
         "configHash": "01877761977b5dfe"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:public-assistance",

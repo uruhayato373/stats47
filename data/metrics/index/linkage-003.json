@@ -593,10 +593,7 @@
         "configHash": "bec5a6e04f5387ab"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:child-consultation-center-cases-per-1000",
@@ -1589,10 +1586,7 @@
         "configHash": "7f6770a4573d7cd7"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:child-welfare-facility-count-per-100k",
@@ -1624,10 +1618,7 @@
         "configHash": "ca2c3163d4374c84"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:child-welfare-facility-staff-per-100k",
@@ -4630,10 +4621,7 @@
         "configHash": "b2ce0458ff9617eb"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area:01000",
@@ -7655,10 +7643,7 @@
         "configHash": "fb029f76245ba939"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:sports-participation",

@@ -1623,10 +1623,7 @@
         "configHash": "5c303a84ac9648f7"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:auto-liability-insurance-amount-received-per-payment",
@@ -5719,10 +5716,7 @@
         "configHash": "83995a1bf902b784"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:hospital-bed-utilization-map",
@@ -5758,10 +5752,7 @@
         "configHash": "fefa69c2308c4b49"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:avg-daily-inpatients-psychiatric-hospital-per-100k",
@@ -5793,10 +5784,7 @@
         "configHash": "dd56a82465dd90e7"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:avg-daily-outpatients-general-hospital-per-100k",
@@ -5828,10 +5816,7 @@
         "configHash": "0ebe8d1542db32ca"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:avg-daily-outpatients-psychiatric-hospital-per-100k",
@@ -7872,10 +7857,7 @@
         "configHash": "db16b8120f2333d9"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:bank-deposit-balance-shikoku-anomaly",
@@ -8458,10 +8440,7 @@
         "configHash": "90d92f5e15204601"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area:01000",
