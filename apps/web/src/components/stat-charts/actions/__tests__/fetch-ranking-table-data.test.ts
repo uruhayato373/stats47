@@ -1,3 +1,4 @@
+// @vitest-environment node
 import {
   readRankingItemByKeyFromR2,
   readLatestYearForAreaTypeFromR2,

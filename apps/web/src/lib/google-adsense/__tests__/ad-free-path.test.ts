@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it } from "vitest";
 
 import { AD_FREE_PATH_PREFIXES } from "../ad-free-paths";

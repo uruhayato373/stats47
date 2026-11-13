@@ -1,3 +1,4 @@
+// @vitest-environment node
 /**
  * Theme chart の編集責務を固定する回帰テスト。
  * 一般的な読み方を header に自動表示せず、固有注釈と指標ハブは footer に集約する。

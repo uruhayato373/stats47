@@ -1,3 +1,4 @@
+// @vitest-environment node
 /**
  * ranking キーリスト間の集合整合性テスト（★410 誤配信の再発防止）
  *

@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it } from 'vitest';
 
 import { OPERATOR_PROFILE, OPERATOR_SOCIAL_URLS } from '../operator-profile';

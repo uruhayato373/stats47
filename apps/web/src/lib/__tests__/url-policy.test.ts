@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { CATEGORY_KEYS } from "@stats47/data-configs/categories";
 import { describe, expect, test } from "vitest";
 

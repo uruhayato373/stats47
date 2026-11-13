@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { statTileGridFillers } from '@stats47/components';
 import { describe, expect, it } from 'vitest';
 

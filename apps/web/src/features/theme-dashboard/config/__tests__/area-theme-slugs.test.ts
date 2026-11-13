@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, it, expect } from "vitest";
 
 import { KNOWN_THEME_SLUGS } from "@/config/known-theme-slugs";

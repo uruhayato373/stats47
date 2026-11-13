@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it } from "vitest";
 
 import { buildMapGeoJson, buildMapKml, MAP_BOUNDARY_ATTRIBUTION } from "../build-map-download";

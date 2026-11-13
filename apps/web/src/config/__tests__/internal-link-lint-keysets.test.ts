@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { listCategories } from "@stats47/data-configs";
 import {
   KNOWN_MUNICIPALITY_RANKING_KEYS,

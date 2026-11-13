@@ -1,3 +1,4 @@
+// @vitest-environment node
 /**
  * ranking ページの native アフィリエイト解決契約。
  *

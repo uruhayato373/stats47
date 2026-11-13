@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
 import { describe, expect, it } from "vitest";
 

@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, it, expect } from "vitest";
 
 import { BLOG_SLUG_REDIRECTS } from "../blog-redirects";
