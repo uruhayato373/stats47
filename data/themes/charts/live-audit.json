@@ -1,5 +1,5 @@
 {
-  "auditedAt": "2026-11-06T21:29:03.042Z",
+  "auditedAt": "2026-11-13T21:51:42.294Z",
   "distinctExpected": 250,
   "audited": 250,
   "r2MetricExpected": 250,
@@ -9,6 +9,7 @@
   "coverageOk": true,
   "errorCount": 0,
   "warnCount": 2,
+  "trendYearsShortCount": 0,
   "areaCoverageWarningCount": 2,
   "results": [
     {
