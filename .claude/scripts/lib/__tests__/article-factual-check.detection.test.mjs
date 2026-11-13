@@ -21,7 +21,7 @@ import os from "node:os";
 import path from "node:path";
 import { describe, it } from "node:test";
 
-import { buildGroundTruth, checkRankClaims, checkValueClaims } from "../article-factual-check.mjs";
+import { buildGroundTruth, checkInverseRankClaims, checkRankClaims, checkValueClaims } from "../article-factual-check.mjs";
 
 /** flat 配列 (blog-data-schema §1 の統一 schema) で ground truth を作る。 */
 function withGroundTruth(rows, fn, sourceMeta = null) {
@@ -235,5 +235,113 @@ describe("本文が書いた精度で照合する", () => {
     assert.equal(claimTolerance("3.8"), 0.05);
     assert.equal(claimTolerance("468万"), 5000);
     assert.equal(claimTolerance("4万5,897"), 0.5);
+  });
+});
+
+// FACTUAL-CHECK-CROSS-METRIC-RANK-01 (2026-11-02): 52 市・複数年平均の都市ランキングと、差・増減・平均順位を
+// 県の単年値・県順位として照合しない。県庁所在市の単年値 (県別ランキング) と 52 市の 3 年平均は別の系列。
+function withFiles(files, fn) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "fc-series-"));
+  const dataDir = path.join(dir, "data");
+  fs.mkdirSync(dataDir);
+  for (const [name, json] of Object.entries(files)) fs.writeFileSync(path.join(dataDir, name), JSON.stringify(json));
+  try {
+    return fn(buildGroundTruth(dataDir));
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+}
+
+const PREF_2025 = {
+  title: "パン消費支出額",
+  label: "パン消費支出額",
+  unit: "円",
+  year: "2025",
+  data: [
+    { rank: 1, areaName: "埼玉県", pref: "埼玉県", value: 42199, areaCode: "11000" },
+    { rank: 2, areaName: "京都府", pref: "京都府", value: 41846, areaCode: "26000" },
+    { rank: 3, areaName: "兵庫県", pref: "兵庫県", value: 41671, areaCode: "28000" },
+  ],
+};
+const CITY_AVG = {
+  title: "パンの支出額 (2023〜2025年平均)",
+  unit: "円",
+  years: ["2023", "2024", "2025"],
+  label: "パン",
+  data: [
+    { rank: 1, areaCode: "28003", areaName: "神戸市", value: 41967, isCapital: true, byYear: { 2023: 41183, 2024: 43047, 2025: 41671 }, unit: "円" },
+    { rank: 2, areaCode: "27004", areaName: "堺市", value: 39416, isCapital: false, byYear: { 2023: 36633, 2024: 42954, 2025: 38660 }, unit: "円" },
+    { rank: 3, areaCode: "26003", areaName: "京都市", value: 39347, isCapital: true, byYear: { 2023: 38654, 2024: 37542, 2025: 41846 }, unit: "円" },
+  ],
+};
+const CITY_FILES = {
+  "bread-prefecture-rankings.json": PREF_2025,
+  "bread-prefecture-rankings.source.json": { label: "パン消費支出額", unit: "円", year: "2025" },
+  "bread-city-ranking.json": CITY_AVG,
+  "bread-city-ranking.source.json": { label: "パンの支出額 (2023〜2025年平均)", unit: "円", year: "2023-2025" },
+};
+
+describe("52 市・複数年平均の都市ランキングを県の単年値と取り違えない", () => {
+  it("★①市の 3 年平均順位 (京都市 3 位) を県庁所在市の県順位 (京都府 2 位) と照合しない", () => {
+    withFiles(CITY_FILES, (gt) => {
+      assert.equal(checkRankClaims("52市の3年平均では、京都市が3位に入る。", gt).length, 0);
+      assert.equal(checkRankClaims("京都市は52市の3年平均で3位です。", gt).length, 0);
+      assert.equal(checkInverseRankClaims("3年平均で3位の京都市は堺市に迫る。", gt).length, 0);
+    });
+  });
+
+  it("★①市の 3 年平均の値 (京都市 39,347 円) と年ごとの値を県庁所在市の 2025 年値と照合しない", () => {
+    withFiles(CITY_FILES, (gt) => {
+      assert.equal(checkValueClaims("京都市は52市の3年平均で39,347円です。", gt).length, 0);
+      assert.equal(checkValueClaims("京都市の2023年は38,654円でした。", gt).length, 0);
+    });
+  });
+
+  it("★本物の取り違えは検出する (県単位の順位・市の平均値・市の順位の誤り)", () => {
+    withFiles(CITY_FILES, (gt) => {
+      assert.ok(checkRankClaims("京都府は3位に入る。", gt).length > 0, "県単位の順位に平均の順位が混ざっている");
+      assert.ok(checkRankClaims("京都市は52市の3年平均で9位です。", gt).length > 0, "市の順位の誤りを見逃している");
+      assert.ok(checkValueClaims("京都市は9,999円でした。", gt).length > 0, "市の平均値の誤りを見逃している");
+      assert.ok(checkValueClaims("京都府の2025年は9,999円でした。", gt).length > 0, "県の単年値の誤りを見逃している");
+    });
+  });
+
+  it("★④平均を語る値は、平均の系列が data に無ければ単年値と照合しない", () => {
+    withFiles({ "bread-prefecture-rankings.json": PREF_2025 }, (gt) => {
+      assert.equal(checkValueClaims("京都府の5年平均は39,000円でした。", gt).length, 0);
+    });
+  });
+});
+
+describe("差・増減・振れ幅の数値を値として照合しない", () => {
+  const body = [
+    "京都市は、2位の堺市と69円差、4位の大阪市と149円差です。",
+    "4位の京都府とは2,415円離れています。",
+    "京都府は前年から4,304円増えており、京都府の2025年までの振れ幅は1,864円です。",
+    "京都府と埼玉県の差は353円です。",
+    "京都府は3つの年の差が560円の範囲に収まります。",
+  ].join("\n");
+
+  it("★②差・離れ・増える・振れ幅の直前直後にある数値は値の照合から外す", () => {
+    withFiles(CITY_FILES, (gt) => {
+      const w = checkValueClaims(body, gt);
+      assert.equal(w.length, 0, `差を値として照合している: ${w.join(" | ")}`);
+    });
+  });
+
+  it("差の語が無い誤った値は従来どおり検出する", () => {
+    withFiles(CITY_FILES, (gt) => {
+      assert.ok(checkValueClaims("京都府は1,864円でした。", gt).length > 0);
+    });
+  });
+});
+
+describe("平均順位を県の順位として照合しない", () => {
+  it("★③「平均4.8位」の小数と平均順位は順位の照合から外す", () => {
+    withFiles(CITY_FILES, (gt) => {
+      assert.equal(checkRankClaims("京都府の8年間の平均順位は平均4.8位だった。", gt).length, 0);
+      assert.equal(checkRankClaims("京都府は8年の順位が平均5位だった。", gt).length, 0);
+      assert.equal(checkInverseRankClaims("平均4.8位の京都府は安定している。", gt).length, 0);
+    });
   });
 });
