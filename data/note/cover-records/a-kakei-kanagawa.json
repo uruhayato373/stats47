@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-kakei-kanagawa",
+  "production": {
+    "id": "NCI-00078",
+    "policyId": "NCP-002",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "神奈川県の家計\n教育費に注目",
+      "subline": "横浜市・2024年\n二人以上の世帯",
+      "subject": "添付は神奈川県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無文字の学習用の本を小さく1点だけ。車両や家の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+      "evidence": "https://note.com/stats47/n/nd0326279977a 2026-10-23公開API本文照合。横浜市の2024年・二人以上の世帯の家計調査。教育1.51倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は神奈川県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は横浜市であり県全域の観測図ではない。人物・キャラクターなし。",
+      "dataScope": {
+        "place": "横浜市",
+        "year": "2024",
+        "households": "二人以上の世帯"
+      }
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "59353011ce0a15aceaffdc36218d0f4f4f92af3702ffd55f0c1312815d0c3c17",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-kanagawa/revisions/59353011ce0a15aceaffdc36218d0f4f4f92af3702ffd55f0c1312815d0c3c17.png"
+      },
+      "bytes": 52316,
+      "id": "59353011ce0a15aceaffdc36218d0f4f4f92af3702ffd55f0c1312815d0c3c17",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:04.861Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312771353/rectangle_large_type_2_6d9c06074e17bd29e85106e22a173bcb.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "59353011ce0a15aceaffdc36218d0f4f4f92af3702ffd55f0c1312815d0c3c17"
+      }
+    },
+    {
+      "sha256": "0bdccc9d91c732ff15241edcf55b53363f96532f3b82aa520b854dc648da82e3",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-kanagawa/revisions/0bdccc9d91c732ff15241edcf55b53363f96532f3b82aa520b854dc648da82e3.png"
+      },
+      "bytes": 123738,
+      "id": "0bdccc9d91c732ff15241edcf55b53363f96532f3b82aa520b854dc648da82e3",
+      "kind": "candidate",
+      "version": "2026-10-02-household-r1",
+      "createdAt": "2026-10-02T03:18:15.783Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "c3b32267f73cc0776d223a49de2a347a8cfebea0621eda2a92107f79e9839af5"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+        "reviewedAt": "2026-10-02T05:27:41.112Z"
+      },
+      "provenance": {
+        "renderer": "bold-note-cover",
+        "sourceUrl": "https://storage.stats47.jp/app/stats/education-expenditure-total/values.json",
+        "sourceSha256": "8fff1a0bc37d5de9718095212fd0c25c9122a0f48bacc30d3cf6da912b8c9ab9"
+      }
+    },
+    {
+      "sha256": "610578a04ad7adf18a5b9cdc2ccb2b2a235b77525f65efc9719f1884213ae506",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-kanagawa/revisions/610578a04ad7adf18a5b9cdc2ccb2b2a235b77525f65efc9719f1884213ae506.png"
+      },
+      "bytes": 98417,
+      "id": "610578a04ad7adf18a5b9cdc2ccb2b2a235b77525f65efc9719f1884213ae506",
+      "kind": "r2-archive",
+      "version": "legacy-r2-import-2026-10-02",
+      "createdAt": "2026-10-02T03:28:47.101Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Legacy R2 asset preserved; not adopted for note",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "legacy-public-r2",
+        "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-kanagawa/images/cover-1280x670.png",
+        "sourceSha256": "610578a04ad7adf18a5b9cdc2ccb2b2a235b77525f65efc9719f1884213ae506"
+      }
+    },
+    {
+      "sha256": "36c27a7aa74172e623a140d71283dfaea5c684ae4c50f942a5a94cf393fca434",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-kanagawa/revisions/36c27a7aa74172e623a140d71283dfaea5c684ae4c50f942a5a94cf393fca434.png"
+      },
+      "bytes": 80772,
+      "id": "36c27a7aa74172e623a140d71283dfaea5c684ae4c50f942a5a94cf393fca434",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T04:06:13.131Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/319910110/rectangle_large_type_2_75173aba0e66ae29d40d14af013f40a3.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "36c27a7aa74172e623a140d71283dfaea5c684ae4c50f942a5a94cf393fca434"
+      }
+    },
+    {
+      "sha256": "e41b06d67b80aea19091bbc6b203ad6a5a26768316cf4ae7115603eaf404511b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-kanagawa/revisions/e41b06d67b80aea19091bbc6b203ad6a5a26768316cf4ae7115603eaf404511b.png"
+      },
+      "bytes": 1800301,
+      "id": "e41b06d67b80aea19091bbc6b203ad6a5a26768316cf4ae7115603eaf404511b",
+      "kind": "candidate",
+      "version": "imagegen-no-character-next10-20261015",
+      "createdAt": "2026-10-15T04:13:41.907Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "fc96229b9d9e3313a0a0392a7a93f7db493ed38666295849b477383b832677e8"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "人物・キャラクターなし。原寸と320pxで指定全文・対象年・地域・世帯区分・補足の可読性・文字切れ・重なりを確認済み。制作原本と目視記録のSHAを照合。管理画面の修正前後10件を提示し、2026-10-15にユーザーが表示中10件の反映を指示。",
+        "reviewedAt": "2026-10-15T04:28:46.722Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "fc96229b9d9e3313a0a0392a7a93f7db493ed38666295849b477383b832677e8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-kanagawa/inputs/fc96229b9d9e3313a0a0392a7a93f7db493ed38666295849b477383b832677e8.json"
+          },
+          "bytes": 8872
+        },
+        "production": {
+          "id": "NCI-00078",
+          "policyId": "NCP-002",
+          "policyVersion": 2,
+          "planSha256": "e50c4149003122d389777b255419a27538698cfae6da5f71ba9e972dc9491c88"
+        }
+      }
+    },
+    {
+      "sha256": "dc113d1caab81c72279de59be150d33630cbcbea1fa15128c50a0224e75e90b1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-kanagawa/revisions/dc113d1caab81c72279de59be150d33630cbcbea1fa15128c50a0224e75e90b1.png"
+      },
+      "bytes": 1589491,
+      "id": "dc113d1caab81c72279de59be150d33630cbcbea1fa15128c50a0224e75e90b1",
+      "kind": "candidate",
+      "version": "pop-NCP-002-v3-aca6f928a6b5",
+      "createdAt": "2026-10-23T09:01:40.387Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "74d925739803ae4489d651b430da485d12a8297ec92432f3e0ce439deae564b2"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "神奈川県の主域輪郭と横浜市・2024年・二人以上の世帯、教育費と学習用の本を新旧比較。原寸と幅320pxで文字・余白・無人の題材を確認。",
+        "reviewedAt": "2026-10-23T09:04:44.513Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "74d925739803ae4489d651b430da485d12a8297ec92432f3e0ce439deae564b2",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-kanagawa/inputs/74d925739803ae4489d651b430da485d12a8297ec92432f3e0ce439deae564b2.json"
+          },
+          "bytes": 12930
+        },
+        "production": {
+          "id": "NCI-00078",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "aca6f928a6b52c6cb1ceff9e42cf69c2a18d08685196ef5408866431f53f07f0"
+        }
+      }
+    }
+  ]
+}

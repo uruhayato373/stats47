@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-dev-a31",
+  "production": {
+    "id": "NCI-00157",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "企業の数は\n東京が最多",
+      "subline": "47都道府県を比較\n経済センサスの統計",
+      "subject": "無文字の名刺入れと名刺の束、小さなビルの模型を大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n816c665cb671 本文確認2026-11-04。経済センサスの企業等数を比較。東京都が最多の423,595企業等、鳥取県が最少。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "e1242c96097d10a2ae769cc51f257d599e3d1b68b8e153a55ba69c7c223fabc3",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a31/revisions/e1242c96097d10a2ae769cc51f257d599e3d1b68b8e153a55ba69c7c223fabc3.png"
+      },
+      "bytes": 39580,
+      "id": "e1242c96097d10a2ae769cc51f257d599e3d1b68b8e153a55ba69c7c223fabc3",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:07:13.586Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e71c9820c21195aee2392be26fe2070c6391853dc40ebc14f33aeb6d5d138381"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:21.648Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "e71c9820c21195aee2392be26fe2070c6391853dc40ebc14f33aeb6d5d138381",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a31/inputs/e71c9820c21195aee2392be26fe2070c6391853dc40ebc14f33aeb6d5d138381.json"
+          },
+          "bytes": 1338
+        }
+      }
+    },
+    {
+      "sha256": "3d437d31c2919f28296e6c55ad6ea8510d59d7e3ed632fad40bdcac15f9c311b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a31/revisions/3d437d31c2919f28296e6c55ad6ea8510d59d7e3ed632fad40bdcac15f9c311b.png"
+      },
+      "bytes": 45024,
+      "id": "3d437d31c2919f28296e6c55ad6ea8510d59d7e3ed632fad40bdcac15f9c311b",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:42.008Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324064951/rectangle_large_type_2_5961f058e67190f3d78e60a3abd6cd90.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "3d437d31c2919f28296e6c55ad6ea8510d59d7e3ed632fad40bdcac15f9c311b"
+      }
+    },
+    {
+      "sha256": "736916f7053cf30d77c524768f709e318aec8d86567ae6992849ab705caa7230",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a31/revisions/736916f7053cf30d77c524768f709e318aec8d86567ae6992849ab705caa7230.png"
+      },
+      "bytes": 1901692,
+      "id": "736916f7053cf30d77c524768f709e318aec8d86567ae6992849ab705caa7230",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-f5a229d8b655",
+      "createdAt": "2026-11-04T00:56:12.437Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "eaead184938274aedff3302f0c3d2ba82c323e6553e444ad06299154c7b9fb6d"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:57:14.551Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "eaead184938274aedff3302f0c3d2ba82c323e6553e444ad06299154c7b9fb6d",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a31/inputs/eaead184938274aedff3302f0c3d2ba82c323e6553e444ad06299154c7b9fb6d.json"
+          },
+          "bytes": 8156
+        },
+        "production": {
+          "id": "NCI-00157",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "f5a229d8b65530a2dae48ce96aa0cc9283fb3d5251c81c9a6715a75648cbc3a7"
+        }
+      }
+    }
+  ]
+}

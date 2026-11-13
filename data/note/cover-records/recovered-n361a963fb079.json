@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n361a963fb079",
+  "production": {
+    "id": "NCI-00402",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "邦楽をした人\n1位は沖縄県",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無文字の三線と楽譜用の白紙を描く。人物・楽譜の文字は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n361a963fb079 2026-10-23公開API本文照合。記事題名「【2021年版】邦楽をした人が多い県は？ 1位は沖縄県｜都道府県ランキング」。本文中の「沖縄県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "986c84230acc764877bcaeb8fa1831240fbb0066ee7ec400c3bb5a769b145b20",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n361a963fb079/revisions/986c84230acc764877bcaeb8fa1831240fbb0066ee7ec400c3bb5a769b145b20.png"
+      },
+      "bytes": 48100,
+      "id": "986c84230acc764877bcaeb8fa1831240fbb0066ee7ec400c3bb5a769b145b20",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:59.599Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312773804/rectangle_large_type_2_1d0dca13743941720a711ceff16cd747.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "986c84230acc764877bcaeb8fa1831240fbb0066ee7ec400c3bb5a769b145b20"
+      }
+    },
+    {
+      "sha256": "02233a3a3128f6fbf9bf4ec89e28783eb750c48153a6d008e9ea518ae0fb9079",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n361a963fb079/revisions/02233a3a3128f6fbf9bf4ec89e28783eb750c48153a6d008e9ea518ae0fb9079.png"
+      },
+      "bytes": 111832,
+      "id": "02233a3a3128f6fbf9bf4ec89e28783eb750c48153a6d008e9ea518ae0fb9079",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:14:45.801Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "7eded7a3504f1589a38b256fa9864dfc4a037a48a7f78b54e411b99ad76e4b9e"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-japanese-music/values.json",
+        "sourceSha256": "4115032825a91b5a2d65a5cbb0ff6bbaf33d81e277e98888373706c7fa8f019c",
+        "input": {
+          "sha256": "7eded7a3504f1589a38b256fa9864dfc4a037a48a7f78b54e411b99ad76e4b9e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n361a963fb079/inputs/7eded7a3504f1589a38b256fa9864dfc4a037a48a7f78b54e411b99ad76e4b9e.json"
+          },
+          "bytes": 6516
+        }
+      }
+    },
+    {
+      "sha256": "b2a3db7d39e4d00ae2970f073dadc9727865f42b97c4ebb67e4313bfc635da6a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n361a963fb079/revisions/b2a3db7d39e4d00ae2970f073dadc9727865f42b97c4ebb67e4313bfc635da6a.png"
+      },
+      "bytes": 1890147,
+      "id": "b2a3db7d39e4d00ae2970f073dadc9727865f42b97c4ebb67e4313bfc635da6a",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-4d8784bba065",
+      "createdAt": "2026-10-23T13:07:33.046Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "0ab5b84aecf4367103042918da800ee8363c786e230f52c16ee9ebb460e2d185"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T13:09:43.673Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "0ab5b84aecf4367103042918da800ee8363c786e230f52c16ee9ebb460e2d185",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n361a963fb079/inputs/0ab5b84aecf4367103042918da800ee8363c786e230f52c16ee9ebb460e2d185.json"
+          },
+          "bytes": 8660
+        },
+        "production": {
+          "id": "NCI-00402",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "4d8784bba065dbb490be0fdda4c3047535a0d38d9a44e3d761ce6fc8411969bf"
+        }
+      }
+    }
+  ]
+}

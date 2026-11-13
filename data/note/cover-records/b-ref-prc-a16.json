@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-prc-a16",
+  "production": {
+    "id": "NCI-00199",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "水泳プールが多い県\n少ない県",
+      "subline": "数で見るか人口で割るか",
+      "subject": "水色のビート板と、水泳ゴーグル、水泳帽を大きく描く。プールに人物は描かない。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/nbe45f74f61ee 本文確認2026-11-04。人口100万人当たりの水泳プール数は北海道が最多、埼玉県が最少。数か人口当たりかで並びが変わる。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "5d3d21437cd3a87c47702cf4e25ae28cb44cb28ed45c56ad055caa9b0d675d3f",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a16/revisions/5d3d21437cd3a87c47702cf4e25ae28cb44cb28ed45c56ad055caa9b0d675d3f.png"
+      },
+      "bytes": 37545,
+      "id": "5d3d21437cd3a87c47702cf4e25ae28cb44cb28ed45c56ad055caa9b0d675d3f",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:08:14.430Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e2beb991e16d207a0c39041f0033e281ec5db242e7272631f7e6db247563f5c2"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:13:21.447Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "e2beb991e16d207a0c39041f0033e281ec5db242e7272631f7e6db247563f5c2",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a16/inputs/e2beb991e16d207a0c39041f0033e281ec5db242e7272631f7e6db247563f5c2.json"
+          },
+          "bytes": 1374
+        }
+      }
+    },
+    {
+      "sha256": "3333c4531b5d4bc1beed450f36ab78466237995346241b40148d6be7f2d158c4",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a16/revisions/3333c4531b5d4bc1beed450f36ab78466237995346241b40148d6be7f2d158c4.png"
+      },
+      "bytes": 59945,
+      "id": "3333c4531b5d4bc1beed450f36ab78466237995346241b40148d6be7f2d158c4",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:51.843Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324160281/rectangle_large_type_2_3a63b3b450812d8a1773ec9e075ecbfd.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "3333c4531b5d4bc1beed450f36ab78466237995346241b40148d6be7f2d158c4"
+      }
+    },
+    {
+      "sha256": "b8a080930b86ffb0b9ff5b4cd36adbf36cc45f85a2abf9d4a8b057ad76eabf63",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a16/revisions/b8a080930b86ffb0b9ff5b4cd36adbf36cc45f85a2abf9d4a8b057ad76eabf63.png"
+      },
+      "bytes": 2041765,
+      "id": "b8a080930b86ffb0b9ff5b4cd36adbf36cc45f85a2abf9d4a8b057ad76eabf63",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-dd6eea7f9f90",
+      "createdAt": "2026-11-04T01:53:30.727Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "8103196cf25e96c3ca6bd9985eb1412f442a0dbff3772d54b6525ef56fb59907"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:55:10.078Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "8103196cf25e96c3ca6bd9985eb1412f442a0dbff3772d54b6525ef56fb59907",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a16/inputs/8103196cf25e96c3ca6bd9985eb1412f442a0dbff3772d54b6525ef56fb59907.json"
+          },
+          "bytes": 8229
+        },
+        "production": {
+          "id": "NCI-00199",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "dd6eea7f9f90136729e68f93e7283ba6eb82d885d24f3fb79c242e35872bd58a"
+        }
+      }
+    }
+  ]
+}

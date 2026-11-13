@@ -1,0 +1,196 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-convenience-store-sales",
+  "production": {
+    "id": "NCI-00053",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "コンビニ販売額\n多い県は？",
+      "subline": "1位は東京都\n2025年のデータ",
+      "subject": "水色と明るい黄色、濃紺の極太文字を使う、暖かい手描きのポップなカバー。右側に小さな一般的なコンビニ風の店舗を一棟、大きく描く。明るい窓、ガラス扉、無地の黄色いひさし。看板は完全な無地にし、実在チェーンの特徴的な色帯・ロゴ・店名を描かない。窓内の商品は無文字の小さな色面として単純化する。左側に大きな2行の問い、下に十分大きな補足2行。店舗数や一人当たり購入額の図にはしない。人物・顔・手・動物・キャラクター・マスコット・擬人化を一切描かない。地図・グラフ・表彰台・メダル・値札・レシート文字・指定外の数字やロゴを描かない。",
+      "evidence": "https://storage.stats47.jp/note/stats47-note/a-convenience-store-sales/draft.md の公開本文と data/metrics/convenience-store-sales.ts を2026-10-23に確認。2025年のコンビニエンスストア販売額（年間販売額）の都道府県比較で1位は東京都。本文は東京都155,869百万円、鳥取県3,912百万円と記載。店舗数・利用者数・一人当たり支出ではなく、カバーには金額や倍率を加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "dc20cfe2b2f8a5ae596dd7b878f7f90de1a53dc6195bb79708053c1d556b5e31",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-convenience-store-sales/revisions/dc20cfe2b2f8a5ae596dd7b878f7f90de1a53dc6195bb79708053c1d556b5e31.png"
+      },
+      "bytes": 100301,
+      "id": "dc20cfe2b2f8a5ae596dd7b878f7f90de1a53dc6195bb79708053c1d556b5e31",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:49.015Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312770819/rectangle_large_type_2_492a3dab2237d56f125551608e6dbe09.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "dc20cfe2b2f8a5ae596dd7b878f7f90de1a53dc6195bb79708053c1d556b5e31"
+      }
+    },
+    {
+      "sha256": "cdf16ae6d36008b5a680323f1a8167406b24cd429595886ade4c4f262dd2292b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-convenience-store-sales/revisions/cdf16ae6d36008b5a680323f1a8167406b24cd429595886ade4c4f262dd2292b.png"
+      },
+      "bytes": 110935,
+      "id": "cdf16ae6d36008b5a680323f1a8167406b24cd429595886ade4c4f262dd2292b",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:19:02.670Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "0b9102a192437bc1444731cdb44e2c12a79e4a4f63458cbd27c78acbafa77353"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.842Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/convenience-store-sales/values.json",
+        "sourceSha256": "96e77f653f76039fccba106f6af94c70433801fd54cbd7abb8a2525d0a2fe2db",
+        "input": {
+          "sha256": "0b9102a192437bc1444731cdb44e2c12a79e4a4f63458cbd27c78acbafa77353",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-convenience-store-sales/inputs/0b9102a192437bc1444731cdb44e2c12a79e4a4f63458cbd27c78acbafa77353.json"
+          },
+          "bytes": 7609
+        }
+      }
+    },
+    {
+      "sha256": "b412de03f970820493dd636aaafa67fa6fd14e0de7ccdc7d6996c36843f00892",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-convenience-store-sales/revisions/b412de03f970820493dd636aaafa67fa6fd14e0de7ccdc7d6996c36843f00892.png"
+      },
+      "bytes": 80567,
+      "id": "b412de03f970820493dd636aaafa67fa6fd14e0de7ccdc7d6996c36843f00892",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T02:51:59.081Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320190566/rectangle_large_type_2_e2bd658abca14686eb07dd4b8cd3db73.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "b412de03f970820493dd636aaafa67fa6fd14e0de7ccdc7d6996c36843f00892"
+      }
+    },
+    {
+      "sha256": "df5df5bbbd223ad4e8084963f9c265dac5131fa281310c41503f4879a996e6c6",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-convenience-store-sales/revisions/df5df5bbbd223ad4e8084963f9c265dac5131fa281310c41503f4879a996e6c6.png"
+      },
+      "bytes": 1931853,
+      "id": "df5df5bbbd223ad4e8084963f9c265dac5131fa281310c41503f4879a996e6c6",
+      "kind": "candidate",
+      "version": "imagegen-no-character-ranking3-20261015",
+      "createdAt": "2026-10-15T02:52:57.481Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "b60070142431fda5b2e5165ffca060def30b47ca1e899ee2eaaaf67ef857e22b"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "人物・キャラクターなし。原寸と320pxで指定全文・年次・1位・比較対象・補足の可読性・切れ・重なりを確認済み。管理画面の前後比較を提示し、2026-10-15にユーザーが表示中3件の反映を指示。",
+        "reviewedAt": "2026-10-15T03:48:42.360Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "b60070142431fda5b2e5165ffca060def30b47ca1e899ee2eaaaf67ef857e22b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-convenience-store-sales/inputs/b60070142431fda5b2e5165ffca060def30b47ca1e899ee2eaaaf67ef857e22b.json"
+          },
+          "bytes": 8889
+        },
+        "production": {
+          "id": "NCI-00053",
+          "policyId": "NCP-003",
+          "policyVersion": 2,
+          "planSha256": "e240e2037da3e7fb264b5da28416782a61e4c84a444d0521bcd4e8db06e5c3e2"
+        }
+      }
+    },
+    {
+      "sha256": "bea55d64d255990eb549549ebee6a9a76d64dcec96f733235ccb39da312ac531",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-convenience-store-sales/revisions/bea55d64d255990eb549549ebee6a9a76d64dcec96f733235ccb39da312ac531.png"
+      },
+      "bytes": 1737795,
+      "id": "bea55d64d255990eb549549ebee6a9a76d64dcec96f733235ccb39da312ac531",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-94d1b7174356",
+      "createdAt": "2026-10-23T05:18:43.667Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "3ea39e86d1c1d25b3a1a4bcb0a87bd2f840b8596693075f4f672f1127c445cd9"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "旧版と新版を比較。2025年のコンビニ年間販売額、東京都1位の表示は本文・指標と一致。無地の店舗で実在チェーンのロゴなし。原寸と幅320pxで文字を確認。",
+        "reviewedAt": "2026-10-23T05:20:12.169Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "3ea39e86d1c1d25b3a1a4bcb0a87bd2f840b8596693075f4f672f1127c445cd9",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-convenience-store-sales/inputs/3ea39e86d1c1d25b3a1a4bcb0a87bd2f840b8596693075f4f672f1127c445cd9.json"
+          },
+          "bytes": 9291
+        },
+        "production": {
+          "id": "NCI-00053",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "94d1b717435669143672905b4155aaa05e3162c15fbcc4493d9137724b78c571"
+        }
+      }
+    }
+  ]
+}

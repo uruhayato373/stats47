@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "service-dashboard-build",
+  "production": {
+    "id": "NCI-00492",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

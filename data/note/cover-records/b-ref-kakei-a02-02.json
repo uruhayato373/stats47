@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-kakei-a02-02",
+  "production": {
+    "id": "NCI-00172",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "年収で変わる\n家計の配分",
+      "subline": "2024年・食費／仕送り／語学",
+      "subject": "食料品の買い物かごと、仕送りを象徴する無地の封筒と語学の教科書を組み合わせる。3つの支出項目の対比を描き、金額・架空の比率図や数表は入れない。人物・手・顔・キャラクターなし。",
+      "evidence": "公開本文は全国の二人以上の世帯、家計調査の年収5階級。2024年の食料費が消費支出に占める割合は第Ⅰ階級34.38％、第Ⅴ階級26.52％。国内遊学仕送り金と語学月謝の割合は高年収階級ほど高い。食料費の円額図はこの配分比率の図ではない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "f655e46faabc57b5b67a7831379ca84f30dbc1c4598a7c1d07c5c0d1b17e90df",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a02-02/revisions/f655e46faabc57b5b67a7831379ca84f30dbc1c4598a7c1d07c5c0d1b17e90df.png"
+      },
+      "bytes": 45922,
+      "id": "f655e46faabc57b5b67a7831379ca84f30dbc1c4598a7c1d07c5c0d1b17e90df",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:10:55.020Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "b8a319eb6d0edfd8e3d6da354212d50b47ba98ee2948a900673b37ac2014f592"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:42.531Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "b8a319eb6d0edfd8e3d6da354212d50b47ba98ee2948a900673b37ac2014f592",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a02-02/inputs/b8a319eb6d0edfd8e3d6da354212d50b47ba98ee2948a900673b37ac2014f592.json"
+          },
+          "bytes": 1284
+        }
+      }
+    },
+    {
+      "sha256": "f45c3b5292e65badc89cbe7f9fae86ae5c66f9b2cd238eb37fe20f7dd1cc9a62",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a02-02/revisions/f45c3b5292e65badc89cbe7f9fae86ae5c66f9b2cd238eb37fe20f7dd1cc9a62.png"
+      },
+      "bytes": 2051854,
+      "id": "f45c3b5292e65badc89cbe7f9fae86ae5c66f9b2cd238eb37fe20f7dd1cc9a62",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-999bf6dfd5db",
+      "createdAt": "2026-10-23T23:55:34.722Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "33b3d6d1e4c8bf03a310dd38789471780df7f2e65fbe3b9abfe3de1c465cc7a8"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "旧図は食料費の円額だけで、本文の食費・仕送り・語学の配分比率を表していなかった。新画像の3題材と2024年条件を原寸／320pxで確認。",
+        "reviewedAt": "2026-10-23T23:57:47.226Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "33b3d6d1e4c8bf03a310dd38789471780df7f2e65fbe3b9abfe3de1c465cc7a8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a02-02/inputs/33b3d6d1e4c8bf03a310dd38789471780df7f2e65fbe3b9abfe3de1c465cc7a8.json"
+          },
+          "bytes": 8354
+        },
+        "production": {
+          "id": "NCI-00172",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "999bf6dfd5db3912a8b93f69d3f89f93909dec05786a74a82293fa8457fe325a"
+        }
+      }
+    }
+  ]
+}

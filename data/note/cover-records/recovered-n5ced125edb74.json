@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n5ced125edb74",
+  "production": {
+    "id": "NCI-00426",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "ゴルフをした人\n1位は愛知県",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人のゴルフ練習場のティーとゴルフクラブ・白いボールを描く。人物・手は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n5ced125edb74 2026-10-23公開API本文照合。記事題名「【2021年版】ゴルフをした人が多い県は？ 1位は愛知県｜都道府県ランキング」。本文中の「愛知県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "ac4cb3c3dbba3ce5a7f8b4c72336f1e07ffc8535612f5dc48a76099f7a2fa375",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n5ced125edb74/revisions/ac4cb3c3dbba3ce5a7f8b4c72336f1e07ffc8535612f5dc48a76099f7a2fa375.png"
+      },
+      "bytes": 49944,
+      "id": "ac4cb3c3dbba3ce5a7f8b4c72336f1e07ffc8535612f5dc48a76099f7a2fa375",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:12.897Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312774180/rectangle_large_type_2_1075a66980694d20515d93d6719986e8.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "ac4cb3c3dbba3ce5a7f8b4c72336f1e07ffc8535612f5dc48a76099f7a2fa375"
+      }
+    },
+    {
+      "sha256": "458f4709a3852824797b01a0cb4b24eebba3759c3de0e116a40056813b564dd5",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n5ced125edb74/revisions/458f4709a3852824797b01a0cb4b24eebba3759c3de0e116a40056813b564dd5.png"
+      },
+      "bytes": 113913,
+      "id": "458f4709a3852824797b01a0cb4b24eebba3759c3de0e116a40056813b564dd5",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:15:51.921Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "92e949058310b8d66ef107d9c1b19e7086d6bc7f0301291578edd9aaba56ab4f"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/sports-participation-rate-golf/values.json",
+        "sourceSha256": "5e481590070a3c44502e4c60ac3a0b5da382193fbe7c5f029144d8bfa3483628",
+        "input": {
+          "sha256": "92e949058310b8d66ef107d9c1b19e7086d6bc7f0301291578edd9aaba56ab4f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n5ced125edb74/inputs/92e949058310b8d66ef107d9c1b19e7086d6bc7f0301291578edd9aaba56ab4f.json"
+          },
+          "bytes": 6490
+        }
+      }
+    },
+    {
+      "sha256": "a9f403772df3d4b97d99fe567e5c2e12d777702d67f26a6d064f358ac32ffc4b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n5ced125edb74/revisions/a9f403772df3d4b97d99fe567e5c2e12d777702d67f26a6d064f358ac32ffc4b.png"
+      },
+      "bytes": 1838412,
+      "id": "a9f403772df3d4b97d99fe567e5c2e12d777702d67f26a6d064f358ac32ffc4b",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-1ff1b1aac189",
+      "createdAt": "2026-10-23T14:37:38.973Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "22e159ebadb91f6187a57a530f824d69a1ea2506b0d3f1a2f87df4c993b1bf38"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00461は東京都と兵庫県の同率首位。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T14:39:49.665Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "22e159ebadb91f6187a57a530f824d69a1ea2506b0d3f1a2f87df4c993b1bf38",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n5ced125edb74/inputs/22e159ebadb91f6187a57a530f824d69a1ea2506b0d3f1a2f87df4c993b1bf38.json"
+          },
+          "bytes": 8770
+        },
+        "production": {
+          "id": "NCI-00426",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "1ff1b1aac189a1d7616ad5d1efaa578b70dee556e4448072f498fb10bb57e538"
+        }
+      }
+    }
+  ]
+}

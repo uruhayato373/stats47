@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "31-claude-code-how-to-ask",
+  "production": {
+    "id": "NCI-00046",
+    "policyId": "NCP-007",
+    "policyVersion": 4,
+    "brief": {
+      "headline": "Claude Codeへの\n頼み方",
+      "subline": "欲しいものを引き出すプロンプトの型",
+      "subject": "5枚の色違いの無文字カードを扇形に並べ、ノートPCを添えて大きく描く。実務カテゴリの机上の資料構図。青と明るい黄色の暖かい手描き。画面・紙・道具の表面は無文字。実在UI・製品ロゴ・グラフ・地図は描かない。人物・顔・手・動物は描かない。",
+      "evidence": "https://note.com/stats47/n/n159230eb514c 本文確認2026-11-04。役割・入力・成果物・制約・確認の5欄で頼むプロンプトの型。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "2dea9c90a0a2c56735251133196850c0e6cbfc97669f125ec0b408efebf576e1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/31-claude-code-how-to-ask/revisions/2dea9c90a0a2c56735251133196850c0e6cbfc97669f125ec0b408efebf576e1.png"
+      },
+      "bytes": 115564,
+      "id": "2dea9c90a0a2c56735251133196850c0e6cbfc97669f125ec0b408efebf576e1",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:39.345Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/292994429/rectangle_large_type_2_51c3fa19b11fc28b05210a15fd92b363.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "2dea9c90a0a2c56735251133196850c0e6cbfc97669f125ec0b408efebf576e1"
+      }
+    },
+    {
+      "sha256": "d7212baf8f31ceb99cd0b236b0a17a1870504e4a14ef6f8803f236a213580c8b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/31-claude-code-how-to-ask/revisions/d7212baf8f31ceb99cd0b236b0a17a1870504e4a14ef6f8803f236a213580c8b.png"
+      },
+      "bytes": 62575,
+      "id": "d7212baf8f31ceb99cd0b236b0a17a1870504e4a14ef6f8803f236a213580c8b",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:46:22.148Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "50d9fb56b646b334c601ea968090f11d75c48027ebee61a71b9fe7965418d4ee"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出しとシリーズ名・話数・色でシリーズが区別できる",
+        "reviewedAt": "2026-10-11T11:51:29.351Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "50d9fb56b646b334c601ea968090f11d75c48027ebee61a71b9fe7965418d4ee",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/31-claude-code-how-to-ask/inputs/50d9fb56b646b334c601ea968090f11d75c48027ebee61a71b9fe7965418d4ee.json"
+          },
+          "bytes": 1130
+        }
+      }
+    },
+    {
+      "sha256": "5cad06e91d64db85f8c0a315b228d2f22950e4e0c644fe07fc76349e886a9d03",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/31-claude-code-how-to-ask/revisions/5cad06e91d64db85f8c0a315b228d2f22950e4e0c644fe07fc76349e886a9d03.png"
+      },
+      "bytes": 69542,
+      "id": "5cad06e91d64db85f8c0a315b228d2f22950e4e0c644fe07fc76349e886a9d03",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:56:02.631Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320331810/rectangle_large_type_2_cd26967c918a186efd322b478ecc2e20.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "5cad06e91d64db85f8c0a315b228d2f22950e4e0c644fe07fc76349e886a9d03"
+      }
+    },
+    {
+      "sha256": "93505847f07ccf70b1c3da8cb4cc3d9bdbe9668d392b361fa9a90d990919f5c7",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/31-claude-code-how-to-ask/revisions/93505847f07ccf70b1c3da8cb4cc3d9bdbe9668d392b361fa9a90d990919f5c7.png"
+      },
+      "bytes": 26600,
+      "id": "93505847f07ccf70b1c3da8cb4cc3d9bdbe9668d392b361fa9a90d990919f5c7",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:11:51.343Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e9b8b947c7308d992f26e6ee19931f26145476fa13148c3ae588df6101d85ed7"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.006/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:17:48.547Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "e9b8b947c7308d992f26e6ee19931f26145476fa13148c3ae588df6101d85ed7",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/31-claude-code-how-to-ask/inputs/e9b8b947c7308d992f26e6ee19931f26145476fa13148c3ae588df6101d85ed7.json"
+          },
+          "bytes": 1130
+        }
+      }
+    },
+    {
+      "sha256": "f596a5229217a4ae345fb2f94261b6571b62537e890b4f3bde2d416bd4adbc01",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/31-claude-code-how-to-ask/revisions/f596a5229217a4ae345fb2f94261b6571b62537e890b4f3bde2d416bd4adbc01.png"
+      },
+      "bytes": 1969055,
+      "id": "f596a5229217a4ae345fb2f94261b6571b62537e890b4f3bde2d416bd4adbc01",
+      "kind": "candidate",
+      "version": "pop-NCP-007-v4-194a67e62adc",
+      "createdAt": "2026-11-04T00:55:23.213Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ccd595f7d4ad693847ca7f4a61a15bccde0c85d42b8eb2ecdd92c8ffbeafbb03"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:56:55.272Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "ccd595f7d4ad693847ca7f4a61a15bccde0c85d42b8eb2ecdd92c8ffbeafbb03",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/31-claude-code-how-to-ask/inputs/ccd595f7d4ad693847ca7f4a61a15bccde0c85d42b8eb2ecdd92c8ffbeafbb03.json"
+          },
+          "bytes": 8711
+        },
+        "production": {
+          "id": "NCI-00046",
+          "policyId": "NCP-007",
+          "policyVersion": 4,
+          "planSha256": "194a67e62adc4580597b884837e64d3176b7046fb722af493526ef05f9fc18d4"
+        }
+      }
+    }
+  ]
+}

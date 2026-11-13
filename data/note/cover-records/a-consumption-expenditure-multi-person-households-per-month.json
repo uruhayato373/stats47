@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-consumption-expenditure-multi-person-households-per-month",
+  "production": {
+    "id": "NCI-00052",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "月間消費支出\n多い県は埼玉県",
+      "subline": "2024年・二人以上世帯",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無文字の買い物かごを1点だけ。財布や現金の山は描かず、家計の豊かさ・苦しさを暗示しない。 左に太い見出し、下に補足の太い帯。文字は指定全文のみ。幅320pxでも全行が明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・表彰台・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n89f8035eb53d 2026-10-23公開API本文照合。埼玉県は357.9千円で1位。二人以上世帯が1か月に支出した商品・サービスの平均額。 カバーは数値・因果を追加せず、対象年・単位・首位県だけを示す。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "03dc46f612da5fbf3f063218a925f52240805a88161d3bfa7f05e5287fbf479e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-consumption-expenditure-multi-person-households-per-month/revisions/03dc46f612da5fbf3f063218a925f52240805a88161d3bfa7f05e5287fbf479e.png"
+      },
+      "bytes": 73259,
+      "id": "03dc46f612da5fbf3f063218a925f52240805a88161d3bfa7f05e5287fbf479e",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:09.369Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312770807/rectangle_large_type_2_05f8aa230ebf2a51eb4ead263dd633f5.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "03dc46f612da5fbf3f063218a925f52240805a88161d3bfa7f05e5287fbf479e"
+      }
+    },
+    {
+      "sha256": "1b53aaacc5c02e898f948a72d625b5381284d7be58fd3a1f8a4dde27b61a4bb6",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-consumption-expenditure-multi-person-households-per-month/revisions/1b53aaacc5c02e898f948a72d625b5381284d7be58fd3a1f8a4dde27b61a4bb6.png"
+      },
+      "bytes": 112988,
+      "id": "1b53aaacc5c02e898f948a72d625b5381284d7be58fd3a1f8a4dde27b61a4bb6",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:13:11.575Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "2558d188b288bfbf8520bfc599ea514107b094a37b64e32f0aca3c66506cb8d0"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.840Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/consumption-expenditure-multi-person-households-per-month/values.json",
+        "sourceSha256": "c91ea5b05e514ec83d474fc87f0ff543326f1bcf9a1956d06aeee60fb78161c1",
+        "input": {
+          "sha256": "2558d188b288bfbf8520bfc599ea514107b094a37b64e32f0aca3c66506cb8d0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-consumption-expenditure-multi-person-households-per-month/inputs/2558d188b288bfbf8520bfc599ea514107b094a37b64e32f0aca3c66506cb8d0.json"
+          },
+          "bytes": 7628
+        }
+      }
+    },
+    {
+      "sha256": "15a39e08b968ba4a6c79c9328ad47f5a1da8c2788ea074a7ce32f096fed6a956",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-consumption-expenditure-multi-person-households-per-month/revisions/15a39e08b968ba4a6c79c9328ad47f5a1da8c2788ea074a7ce32f096fed6a956.png"
+      },
+      "bytes": 1825709,
+      "id": "15a39e08b968ba4a6c79c9328ad47f5a1da8c2788ea074a7ce32f096fed6a956",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-a29bb6bed553",
+      "createdAt": "2026-10-23T10:42:15.672Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "98b952e888bc1664178ea1937779b4f01f4e803d69f8deb5fc468d6274ec25cd"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T10:44:14.758Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "98b952e888bc1664178ea1937779b4f01f4e803d69f8deb5fc468d6274ec25cd",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-consumption-expenditure-multi-person-households-per-month/inputs/98b952e888bc1664178ea1937779b4f01f4e803d69f8deb5fc468d6274ec25cd.json"
+          },
+          "bytes": 8536
+        },
+        "production": {
+          "id": "NCI-00052",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "a29bb6bed553c9c58cdd41403affbc589825750fc7340c5a7e9e0db718d102eb"
+        }
+      }
+    }
+  ]
+}

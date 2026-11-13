@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-kakei-saitama",
+  "production": {
+    "id": "NCI-00094",
+    "policyId": "NCP-002",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "埼玉県の家計\n教育費に注目",
+      "subline": "さいたま市・2024年\n二人以上の世帯",
+      "subject": "添付は埼玉県の主域輪郭を示す検証済みの参照画像で、編集対象ではない。1280×670相当の横長の完成カバーを新たに作る。右側に参照の県形を大きく、同じ北向き・縦横比・凹凸を忠実に維持して、濃紺または淡黄色の一枚の面と太い縁取りで主役にする。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けを一切加えない。生活の小物は輪郭と文字に重ならない右下に無地の青い通学用かばんを小さく1点だけ。車両や家の中も完全に無人。窓は均一な淡い水色で、人影・頭・顔のような黒い形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、各行とも1280px換算で文字高65px以上を目安に大きくする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。 新版は輪郭の周囲と補足欄に余白を設け、背景の筆塗りを淡くし、県形・見出し・都市名を読み取りやすく配置する。",
+      "evidence": "https://note.com/stats47/n/ne760e2866251 2026-10-15公開本文確認。さいたま市の2024年・二人以上の世帯。十大費目の教育は47市単純平均比2.12倍で最大の乖離。私立大学などの品目を本文で検討。 比較の分母は家計調査の全国平均ではなく47県庁所在市の単純平均。カバーに倍率・順位・因果は載せず、費目への着目だけを示す。地図は埼玉県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象はさいたま市であり県全域の観測図ではない。人物・キャラクターなし。 2026-10-23に公開APIの状態と都市名・対象年・世帯区分を照合。",
+      "dataScope": {
+        "place": "さいたま市",
+        "year": "2024",
+        "households": "二人以上の世帯"
+      }
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "4608dd88faf3aac2fa37bf50878e61976825513de72eaabaafecbb25f52379ea",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-saitama/revisions/4608dd88faf3aac2fa37bf50878e61976825513de72eaabaafecbb25f52379ea.png"
+      },
+      "bytes": 45921,
+      "id": "4608dd88faf3aac2fa37bf50878e61976825513de72eaabaafecbb25f52379ea",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:14.044Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312771699/rectangle_large_type_2_43a2be766f7b91285f2d6a34778438dd.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "4608dd88faf3aac2fa37bf50878e61976825513de72eaabaafecbb25f52379ea"
+      }
+    },
+    {
+      "sha256": "360d115624d6f097cb01aed941babbcbe8aaaa27a16ce4f302c7334460519be7",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-saitama/revisions/360d115624d6f097cb01aed941babbcbe8aaaa27a16ce4f302c7334460519be7.png"
+      },
+      "bytes": 100562,
+      "id": "360d115624d6f097cb01aed941babbcbe8aaaa27a16ce4f302c7334460519be7",
+      "kind": "candidate",
+      "version": "2026-10-02-household-r1",
+      "createdAt": "2026-10-02T03:18:47.239Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "be14a92dd343e93a05e20843f82a70c84e67f928ad530483ce2ecfb1637a29f7"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+        "reviewedAt": "2026-10-02T05:27:41.112Z"
+      },
+      "provenance": {
+        "renderer": "bold-note-cover",
+        "sourceUrl": "https://storage.stats47.jp/app/stats/education-expenditure-total/values.json",
+        "sourceSha256": "8fff1a0bc37d5de9718095212fd0c25c9122a0f48bacc30d3cf6da912b8c9ab9"
+      }
+    },
+    {
+      "sha256": "2b50ee80c98ae88962276f0260e2e8187aca149003ee189174e27c0c539f49a0",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-saitama/revisions/2b50ee80c98ae88962276f0260e2e8187aca149003ee189174e27c0c539f49a0.png"
+      },
+      "bytes": 102077,
+      "id": "2b50ee80c98ae88962276f0260e2e8187aca149003ee189174e27c0c539f49a0",
+      "kind": "r2-archive",
+      "version": "legacy-r2-import-2026-10-02",
+      "createdAt": "2026-10-02T03:29:23.178Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Legacy R2 asset preserved; not adopted for note",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "legacy-public-r2",
+        "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-saitama/images/cover-1280x670.png",
+        "sourceSha256": "2b50ee80c98ae88962276f0260e2e8187aca149003ee189174e27c0c539f49a0"
+      }
+    },
+    {
+      "sha256": "91fa093232c7a253263757c36410ed7fe78aad21250feb472dadaca7241c54d4",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-saitama/revisions/91fa093232c7a253263757c36410ed7fe78aad21250feb472dadaca7241c54d4.png"
+      },
+      "bytes": 61220,
+      "id": "91fa093232c7a253263757c36410ed7fe78aad21250feb472dadaca7241c54d4",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T06:11:55.305Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/319911260/rectangle_large_type_2_de8fcf2bca2daf8898a092b2a96b60b1.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "91fa093232c7a253263757c36410ed7fe78aad21250feb472dadaca7241c54d4"
+      }
+    },
+    {
+      "sha256": "6f5240ff100e5a69d155d47c9fe8a7eca44764d27ee2ff1c398a16a1c362d4a9",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-saitama/revisions/6f5240ff100e5a69d155d47c9fe8a7eca44764d27ee2ff1c398a16a1c362d4a9.png"
+      },
+      "bytes": 1519554,
+      "id": "6f5240ff100e5a69d155d47c9fe8a7eca44764d27ee2ff1c398a16a1c362d4a9",
+      "kind": "candidate",
+      "version": "imagegen-category-contract-v1-20261015",
+      "createdAt": "2026-10-15T06:21:30.129Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "f3f433f8cb67b61b5a6cdc32d4eea0b10d6a59e798d697e31a94fcd89197b8f0"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "NCI-00094: 原寸/320pxの文字・補足・人物なし・題材を個別確認済み。家計は検証済み県主域参照と対象市・2024年・二人以上の世帯を照合。2026-10-15ユーザーが今回10件の反映を指示。",
+        "reviewedAt": "2026-10-15T06:37:17.199Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "f3f433f8cb67b61b5a6cdc32d4eea0b10d6a59e798d697e31a94fcd89197b8f0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-saitama/inputs/f3f433f8cb67b61b5a6cdc32d4eea0b10d6a59e798d697e31a94fcd89197b8f0.json"
+          },
+          "bytes": 13195
+        },
+        "production": {
+          "id": "NCI-00094",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "518cc35d5434068ad664eefae2e4b634f78ae52351eba1ac275432b945d572a6"
+        }
+      }
+    },
+    {
+      "sha256": "4a373f4cf14fe2cf81e1f41b09463391a5487882422d907885ce074ae26b7340",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-saitama/revisions/4a373f4cf14fe2cf81e1f41b09463391a5487882422d907885ce074ae26b7340.png"
+      },
+      "bytes": 1530435,
+      "id": "4a373f4cf14fe2cf81e1f41b09463391a5487882422d907885ce074ae26b7340",
+      "kind": "candidate",
+      "version": "pop-NCP-002-v3-7e27cb5b669b",
+      "createdAt": "2026-10-23T08:01:49.848Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "543ce30a66b00a1608b8bf666a9becb30d0860cbbc120bca79b0e2e1c9e6069f"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "埼玉県の輪郭、さいたま市・2024年・二人以上の世帯、教育費とかばんの題材を新旧比較。原寸と幅320pxで全文字を確認。",
+        "reviewedAt": "2026-10-23T08:04:55.492Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "543ce30a66b00a1608b8bf666a9becb30d0860cbbc120bca79b0e2e1c9e6069f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-saitama/inputs/543ce30a66b00a1608b8bf666a9becb30d0860cbbc120bca79b0e2e1c9e6069f.json"
+          },
+          "bytes": 13444
+        },
+        "production": {
+          "id": "NCI-00094",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "7e27cb5b669b65e34687ce7207a0c0d767230442f13e729ae0421717065191d6"
+        }
+      }
+    }
+  ]
+}

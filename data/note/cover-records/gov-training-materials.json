@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "gov-training-materials",
+  "production": {
+    "id": "NCI-00282",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "ppt-media-report-deck",
+  "production": {
+    "id": "NCI-00355",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

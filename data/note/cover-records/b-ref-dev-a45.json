@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-dev-a45",
+  "production": {
+    "id": "NCI-00162",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "児童相談所の\n対応件数を比較",
+      "subline": "2023年度・47都道府県の統計",
+      "subject": "穏やかな朝の光の中の、無文字の書類の束と閉じたファイルを静かに大きく描く。子どもの姿・苦痛を示す絵は描かない。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/nca8939a4a9b3 本文確認2026-11-04。2023年度の児童相談所の児童虐待相談対応件数。実数比較で東京都が最多。扇情的な語を見出しに使わない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "efab895189020ff6c18bc0bdd6614312acc2c5885fd38a401e51f2e75659cb7e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a45/revisions/efab895189020ff6c18bc0bdd6614312acc2c5885fd38a401e51f2e75659cb7e.png"
+      },
+      "bytes": 39865,
+      "id": "efab895189020ff6c18bc0bdd6614312acc2c5885fd38a401e51f2e75659cb7e",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:07:31.207Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e2a562cd3b86d169a852fc8fa88ccaeb4a881a997f9341a3e42766f96f48998a"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:28.817Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "e2a562cd3b86d169a852fc8fa88ccaeb4a881a997f9341a3e42766f96f48998a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a45/inputs/e2a562cd3b86d169a852fc8fa88ccaeb4a881a997f9341a3e42766f96f48998a.json"
+          },
+          "bytes": 1325
+        }
+      }
+    },
+    {
+      "sha256": "07f2100a16d804db0a9c08e58408278d80946afdd111c0d5a9888e591548011b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a45/revisions/07f2100a16d804db0a9c08e58408278d80946afdd111c0d5a9888e591548011b.png"
+      },
+      "bytes": 92903,
+      "id": "07f2100a16d804db0a9c08e58408278d80946afdd111c0d5a9888e591548011b",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:45.202Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324071263/rectangle_large_type_2_0056b351626a8483fc2c11e0d7b4e4f1.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "07f2100a16d804db0a9c08e58408278d80946afdd111c0d5a9888e591548011b"
+      }
+    },
+    {
+      "sha256": "f9ba0eda4b9ea54e7d305f63ac362047584962b671f15c08d6d28b290b895231",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a45/revisions/f9ba0eda4b9ea54e7d305f63ac362047584962b671f15c08d6d28b290b895231.png"
+      },
+      "bytes": 1918863,
+      "id": "f9ba0eda4b9ea54e7d305f63ac362047584962b671f15c08d6d28b290b895231",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-c02fcc381dbf",
+      "createdAt": "2026-11-04T01:08:10.087Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "16ab92997b705c4f14f88ffc79a8ed973a0ebbb77f8045a4656c63e3588b920a"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:10:18.185Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "16ab92997b705c4f14f88ffc79a8ed973a0ebbb77f8045a4656c63e3588b920a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a45/inputs/16ab92997b705c4f14f88ffc79a8ed973a0ebbb77f8045a4656c63e3588b920a.json"
+          },
+          "bytes": 8337
+        },
+        "production": {
+          "id": "NCI-00162",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "c02fcc381dbfed88210dacc42183dd5c20aaceabceb50fb511fc62b2435e0018"
+        }
+      }
+    }
+  ]
+}

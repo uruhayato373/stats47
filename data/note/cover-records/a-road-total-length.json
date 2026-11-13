@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-road-total-length",
+  "production": {
+    "id": "NCI-00122",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "道路の実延長\n長い県は？",
+      "subline": "1位は北海道\n2023年・高速道路除く",
+      "subject": "右側に汎用の舗装道路が続く風景を一つの主役として大きく描く。都道府県の形や実在地点に見せない。車両・人物・キャラクター・標識の文字・地図・グラフ・指定外の数値を描かない。",
+      "evidence": "公開本文と data/metrics/road-total-length.ts を確認。2023年の道路実延長は合計（高速道路を除く）で、北海道89,987.8kmが1位、沖縄県8,210.5kmが47位。道路面積や高速道路距離ではない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "c31bff3f75ecc635505b93db705462809c13ce9931da8e956c4146ee8ba69e44",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-road-total-length/revisions/c31bff3f75ecc635505b93db705462809c13ce9931da8e956c4146ee8ba69e44.png"
+      },
+      "bytes": 83156,
+      "id": "c31bff3f75ecc635505b93db705462809c13ce9931da8e956c4146ee8ba69e44",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:52.057Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312772124/rectangle_large_type_2_0ad1e4c165ed5db88c5715acaee2e130.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "c31bff3f75ecc635505b93db705462809c13ce9931da8e956c4146ee8ba69e44"
+      }
+    },
+    {
+      "sha256": "aba93c39c6eb27267954f41593ad4e7ecec21369590eea3fa586c1d4dbcab33c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-road-total-length/revisions/aba93c39c6eb27267954f41593ad4e7ecec21369590eea3fa586c1d4dbcab33c.png"
+      },
+      "bytes": 114903,
+      "id": "aba93c39c6eb27267954f41593ad4e7ecec21369590eea3fa586c1d4dbcab33c",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:19:07.599Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "2b36b7df80cc8a9db053b1339067fba7d911bebe52cd046c8f5393a08d88b6a4"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.842Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/road-total-length/values.json",
+        "sourceSha256": "6780ebd38af61c10267ccc47b5da0c0573f3913144e1f3887fe48cfaed478dcc",
+        "input": {
+          "sha256": "2b36b7df80cc8a9db053b1339067fba7d911bebe52cd046c8f5393a08d88b6a4",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-road-total-length/inputs/2b36b7df80cc8a9db053b1339067fba7d911bebe52cd046c8f5393a08d88b6a4.json"
+          },
+          "bytes": 7549
+        }
+      }
+    },
+    {
+      "sha256": "a74bbdf2212936aaa0c035727349ebcd696ff0a28f732fa52a9d327506111a69",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-road-total-length/revisions/a74bbdf2212936aaa0c035727349ebcd696ff0a28f732fa52a9d327506111a69.png"
+      },
+      "bytes": 1810681,
+      "id": "a74bbdf2212936aaa0c035727349ebcd696ff0a28f732fa52a9d327506111a69",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-42ee4377767d",
+      "createdAt": "2026-10-23T05:44:58.355Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "9fb7d028ef2dfda6f18a27b81767424f5705403579ac1bcd2e61adcba5f3957e"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "本文の2023年・高速道路除外の道路実延長と一致。新候補は対象・1位・年を明示し、道路の題材と文字を原寸・320pxで確認。",
+        "reviewedAt": "2026-10-23T05:47:46.388Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "9fb7d028ef2dfda6f18a27b81767424f5705403579ac1bcd2e61adcba5f3957e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-road-total-length/inputs/9fb7d028ef2dfda6f18a27b81767424f5705403579ac1bcd2e61adcba5f3957e.json"
+          },
+          "bytes": 8001
+        },
+        "production": {
+          "id": "NCI-00122",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "42ee4377767d905d5df72c9a230d69a64d53357b81894dfeb7558e4afbe3785f"
+        }
+      }
+    }
+  ]
+}

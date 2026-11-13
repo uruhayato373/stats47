@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-ne3cdb7819c41",
+  "production": {
+    "id": "NCI-00474",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "国内観光旅行\n1位は東京都",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無地の旅行かばんと国内の観光地を想起させる海辺の景色を描く。出張や帰省、人物は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/ne3cdb7819c41 2026-10-23公開API本文照合。記事題名「【2021年版】国内観光旅行をした人が多い県は？ 1位は東京都｜都道府県ランキング」。本文中の「東京都」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "91192026261d9f9f0fcd1c31e8eaca38d976b469c3d7dc950fe48eef382decf2",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-ne3cdb7819c41/revisions/91192026261d9f9f0fcd1c31e8eaca38d976b469c3d7dc950fe48eef382decf2.png"
+      },
+      "bytes": 44111,
+      "id": "91192026261d9f9f0fcd1c31e8eaca38d976b469c3d7dc950fe48eef382decf2",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:38.985Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312775005/rectangle_large_type_2_96bc2cc4bde9e50cc79bebbf42ea94e4.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "91192026261d9f9f0fcd1c31e8eaca38d976b469c3d7dc950fe48eef382decf2"
+      }
+    },
+    {
+      "sha256": "d01f2a725cb2d0a7179687fa8837444ed8425492dc1ef1231e81567379071a91",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-ne3cdb7819c41/revisions/d01f2a725cb2d0a7179687fa8837444ed8425492dc1ef1231e81567379071a91.png"
+      },
+      "bytes": 117906,
+      "id": "d01f2a725cb2d0a7179687fa8837444ed8425492dc1ef1231e81567379071a91",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:17:47.709Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "33e8b9a878769999456dcf830dadbe997e4d5fbe1250a8fb26cdaa9dc2469d80"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/travel-participation-rate-domestic-tourism/values.json",
+        "sourceSha256": "39e7bce686cff42a878f89aa45feef91c07ef847a5dad9b97cd2dd7351248e8a",
+        "input": {
+          "sha256": "33e8b9a878769999456dcf830dadbe997e4d5fbe1250a8fb26cdaa9dc2469d80",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-ne3cdb7819c41/inputs/33e8b9a878769999456dcf830dadbe997e4d5fbe1250a8fb26cdaa9dc2469d80.json"
+          },
+          "bytes": 6618
+        }
+      }
+    },
+    {
+      "sha256": "87a85a7e760f09cacd2bd1b50f87b3c94420fedfca848643ab9e76b84fed88a7",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-ne3cdb7819c41/revisions/87a85a7e760f09cacd2bd1b50f87b3c94420fedfca848643ab9e76b84fed88a7.png"
+      },
+      "bytes": 1850622,
+      "id": "87a85a7e760f09cacd2bd1b50f87b3c94420fedfca848643ab9e76b84fed88a7",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-e952fa6f324b",
+      "createdAt": "2026-10-23T13:38:07.989Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "0b5ea411e124327b774c3ffb487be4a33a128cdf219ca27acd537bdf705e855c"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T13:40:30.783Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "0b5ea411e124327b774c3ffb487be4a33a128cdf219ca27acd537bdf705e855c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-ne3cdb7819c41/inputs/0b5ea411e124327b774c3ffb487be4a33a128cdf219ca27acd537bdf705e855c.json"
+          },
+          "bytes": 8710
+        },
+        "production": {
+          "id": "NCI-00474",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "e952fa6f324bf50eac9c5092be1e27508c1c7b6b1f1cdf9d725ab203ea2fee71"
+        }
+      }
+    }
+  ]
+}

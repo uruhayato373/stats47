@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-prc-a37",
+  "production": {
+    "id": "NCI-00219",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "調味料の買い方に\n地域差はある？",
+      "subline": "食塩・みそ・砂糖など4品目",
+      "subject": "無文字の塩壺、みそ樽、砂糖壺を棚に並べて大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/nf9c8f3c2d17e 本文確認2026-11-04。調味料4品目の購入量。食塩は新潟市、みそは長野市、砂糖は津市が最多。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "78c144ca274ae7eceb746b32e73f36fbc2a5acb3f801c1c371e57450d3b8699f",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a37/revisions/78c144ca274ae7eceb746b32e73f36fbc2a5acb3f801c1c371e57450d3b8699f.png"
+      },
+      "bytes": 35531,
+      "id": "78c144ca274ae7eceb746b32e73f36fbc2a5acb3f801c1c371e57450d3b8699f",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:09:33.550Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "af02396bb885d379f443800a12442c05ff6a199d4dedf00be5ff62191b2050a6"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:13:49.829Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "af02396bb885d379f443800a12442c05ff6a199d4dedf00be5ff62191b2050a6",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a37/inputs/af02396bb885d379f443800a12442c05ff6a199d4dedf00be5ff62191b2050a6.json"
+          },
+          "bytes": 1277
+        }
+      }
+    },
+    {
+      "sha256": "e32883996be0052a1f050030031aaaadc96d53a8dcedef9c217254a4d753ee52",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a37/revisions/e32883996be0052a1f050030031aaaadc96d53a8dcedef9c217254a4d753ee52.png"
+      },
+      "bytes": 57076,
+      "id": "e32883996be0052a1f050030031aaaadc96d53a8dcedef9c217254a4d753ee52",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:22:06.615Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324181590/rectangle_large_type_2_5f749bb5a45fee524273aab5e3610283.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "e32883996be0052a1f050030031aaaadc96d53a8dcedef9c217254a4d753ee52"
+      }
+    },
+    {
+      "sha256": "04dff63d12698a975e370f3cb59cc861984d878a40e677c64ee3f6942a6be397",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a37/revisions/04dff63d12698a975e370f3cb59cc861984d878a40e677c64ee3f6942a6be397.png"
+      },
+      "bytes": 1855952,
+      "id": "04dff63d12698a975e370f3cb59cc861984d878a40e677c64ee3f6942a6be397",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-0afb0447b077",
+      "createdAt": "2026-11-04T02:09:24.520Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "7f5724378b6abb331e33708a34915c9711a66ef7f9050cdea2aeb56552675cb9"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T02:10:19.738Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "7f5724378b6abb331e33708a34915c9711a66ef7f9050cdea2aeb56552675cb9",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a37/inputs/7f5724378b6abb331e33708a34915c9711a66ef7f9050cdea2aeb56552675cb9.json"
+          },
+          "bytes": 8156
+        },
+        "production": {
+          "id": "NCI-00219",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "0afb0447b077892dae946eec8dc366426fca1b930ba1a604353d468f4b442e9a"
+        }
+      }
+    }
+  ]
+}

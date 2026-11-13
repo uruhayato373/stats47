@@ -1,0 +1,215 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-kakei-winter-bargain",
+  "production": {
+    "id": "NCI-00139",
+    "policyId": "NCP-005",
+    "policyVersion": 2,
+    "brief": {
+      "headline": "冬のバーゲン\n何が動いた？",
+      "subline": "値札と購入単価を比べる\n家計調査で読み解く",
+      "subject": "緑と明るいクリーム、黄色のアクセント。右側にハンガーに掛かった無地の冬用コートを大きく一着、その脇に白紙の値札を一点。無人の衣類の静物。割引率やSALEの文字、数字、上昇下降の矢印、レシートの文字を描かない。人物・顔・人の手・動物・キャラクター・マスコット・擬人化は一切描かない。地図、架空の統計グラフ、数式、表彰台、順位図、製品ロゴ、指定外の文言を描かない。紙面・タグ・ラベルは完全な白紙。左側の大きな見出しと下の補足2行は、幅320pxでも明瞭に読める太さと大きさにし、四辺の余白を守る。",
+      "evidence": "https://note.com/stats47/n/neb44a932f9f2 2026-10-15公開本文確認。公開本文で婦人用コートのCPIと家計調査、2019/2023/2024年の購入単価・数量を対比。店頭価格と実際に支払った単価を区別する問いにし、バーゲン施策の因果効果や成功を断定しない。 人物・キャラクターは使わない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "54c8c7174883c01cd8d203f6abbd1624533e31e7fd958eee2d5412418614cae7",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-winter-bargain/revisions/54c8c7174883c01cd8d203f6abbd1624533e31e7fd958eee2d5412418614cae7.png"
+      },
+      "bytes": 33917,
+      "id": "54c8c7174883c01cd8d203f6abbd1624533e31e7fd958eee2d5412418614cae7",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:25.761Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312772442/rectangle_large_type_2_1422eeefacbcce55e93b817c03e90b22.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "54c8c7174883c01cd8d203f6abbd1624533e31e7fd958eee2d5412418614cae7"
+      }
+    },
+    {
+      "sha256": "d452d1b05cfebb1fe0db6fa5ab4a46640d68c823dda4ba038bb49ec77f5352a3",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-winter-bargain/revisions/d452d1b05cfebb1fe0db6fa5ab4a46640d68c823dda4ba038bb49ec77f5352a3.png"
+      },
+      "bytes": 91202,
+      "id": "d452d1b05cfebb1fe0db6fa5ab4a46640d68c823dda4ba038bb49ec77f5352a3",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:44:56.156Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "eda105bf8fb9fc23a8c7cc2bee7e06d3df2c653dabebc2366dfce6bc85a482eb"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で問いと記事固有の図(公開R2の記事画像)が確認できる",
+        "reviewedAt": "2026-10-11T11:50:56.879Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "eda105bf8fb9fc23a8c7cc2bee7e06d3df2c653dabebc2366dfce6bc85a482eb",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-winter-bargain/inputs/eda105bf8fb9fc23a8c7cc2bee7e06d3df2c653dabebc2366dfce6bc85a482eb.json"
+          },
+          "bytes": 1348
+        }
+      }
+    },
+    {
+      "sha256": "beb2272989dd78c1185930615295f289fd5bd6793a800eb81c9e887c0d34a091",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-winter-bargain/revisions/beb2272989dd78c1185930615295f289fd5bd6793a800eb81c9e887c0d34a091.png"
+      },
+      "bytes": 67681,
+      "id": "beb2272989dd78c1185930615295f289fd5bd6793a800eb81c9e887c0d34a091",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:55:52.017Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320302328/rectangle_large_type_2_c05c890726a3bb1b0ad3b7526d3f1070.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "beb2272989dd78c1185930615295f289fd5bd6793a800eb81c9e887c0d34a091"
+      }
+    },
+    {
+      "sha256": "c7c1b5ce5243850b7fce3eac0174909c0eb2b7464c6b10eae58e3f90a436197d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-winter-bargain/revisions/c7c1b5ce5243850b7fce3eac0174909c0eb2b7464c6b10eae58e3f90a436197d.png"
+      },
+      "bytes": 36122,
+      "id": "c7c1b5ce5243850b7fce3eac0174909c0eb2b7464c6b10eae58e3f90a436197d",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:10:52.469Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "2950975525d07b86f75bbe81dffa198a917f05bffb153129c4cce34d6e6c72b0"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.028/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:17:28.065Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "2950975525d07b86f75bbe81dffa198a917f05bffb153129c4cce34d6e6c72b0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-winter-bargain/inputs/2950975525d07b86f75bbe81dffa198a917f05bffb153129c4cce34d6e6c72b0.json"
+          },
+          "bytes": 1348
+        }
+      }
+    },
+    {
+      "sha256": "96fa8771569887c00b2e76b2004d4a6978aa58855e8589ac05e0e554e61585fc",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-winter-bargain/revisions/96fa8771569887c00b2e76b2004d4a6978aa58855e8589ac05e0e554e61585fc.png"
+      },
+      "bytes": 97887,
+      "id": "96fa8771569887c00b2e76b2004d4a6978aa58855e8589ac05e0e554e61585fc",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T04:06:20.927Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323277017/rectangle_large_type_2_d593a31facaf2f7f818fcb6dae20363d.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "96fa8771569887c00b2e76b2004d4a6978aa58855e8589ac05e0e554e61585fc"
+      }
+    },
+    {
+      "sha256": "683b5a3b5173f764bbe412697848e376d65ddc9d1dcf9fe1983cd39f7e770dbd",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-winter-bargain/revisions/683b5a3b5173f764bbe412697848e376d65ddc9d1dcf9fe1983cd39f7e770dbd.png"
+      },
+      "bytes": 2134138,
+      "id": "683b5a3b5173f764bbe412697848e376d65ddc9d1dcf9fe1983cd39f7e770dbd",
+      "kind": "candidate",
+      "version": "imagegen-no-character-next10-20261015",
+      "createdAt": "2026-10-15T04:13:50.293Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "0277d74ea3e2274f8fe8045f10644f20a31b9559a244fb7c08d8d7aefbfba7df"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "人物・キャラクターなし。原寸と320pxで指定全文・対象年・地域・世帯区分・補足の可読性・文字切れ・重なりを確認済み。制作原本と目視記録のSHAを照合。管理画面の修正前後10件を提示し、2026-10-15にユーザーが表示中10件の反映を指示。",
+        "reviewedAt": "2026-10-15T04:28:53.841Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "0277d74ea3e2274f8fe8045f10644f20a31b9559a244fb7c08d8d7aefbfba7df",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-winter-bargain/inputs/0277d74ea3e2274f8fe8045f10644f20a31b9559a244fb7c08d8d7aefbfba7df.json"
+          },
+          "bytes": 9071
+        },
+        "production": {
+          "id": "NCI-00139",
+          "policyId": "NCP-005",
+          "policyVersion": 2,
+          "planSha256": "c166420e42ee711f02203d9256296ee2b832670362c241eee60acb4429b6e86d"
+        }
+      }
+    }
+  ]
+}

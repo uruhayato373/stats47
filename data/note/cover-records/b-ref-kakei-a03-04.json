@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-kakei-a03-04",
+  "production": {
+    "id": "NCI-00180",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "腕時計の差は\n26.42倍",
+      "subline": "時計・バッグ・傘を年収で比較",
+      "subject": "腕時計と革のハンドバッグ、折りたたみ傘を大きく描く。文字盤に数字やロゴを入れない。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/nb729bb5e7612 本文確認2026-11-04。腕時計・ハンドバッグ・傘の支出を年収5階級で比較。腕時計26.42倍。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "1f804f5136d897d7e756a532b2c394860ad96be3c5ed17913f66f2817b59441f",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a03-04/revisions/1f804f5136d897d7e756a532b2c394860ad96be3c5ed17913f66f2817b59441f.png"
+      },
+      "bytes": 44859,
+      "id": "1f804f5136d897d7e756a532b2c394860ad96be3c5ed17913f66f2817b59441f",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:11:26.807Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "8e59e4b6e41b6b01dccd6cedf17f4a52e0234fb77be6ff75cc43edfc4bfb1ba1"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:53.563Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "8e59e4b6e41b6b01dccd6cedf17f4a52e0234fb77be6ff75cc43edfc4bfb1ba1",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a03-04/inputs/8e59e4b6e41b6b01dccd6cedf17f4a52e0234fb77be6ff75cc43edfc4bfb1ba1.json"
+          },
+          "bytes": 1286
+        }
+      }
+    },
+    {
+      "sha256": "d15a10752c1228c62a82e06385351c8d818a7937649f2786b76f9d1533cc834b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a03-04/revisions/d15a10752c1228c62a82e06385351c8d818a7937649f2786b76f9d1533cc834b.png"
+      },
+      "bytes": 98695,
+      "id": "d15a10752c1228c62a82e06385351c8d818a7937649f2786b76f9d1533cc834b",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:22:22.199Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324138075/rectangle_large_type_2_4404d086eedcab77c1ef1603a5cbe2e0.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "d15a10752c1228c62a82e06385351c8d818a7937649f2786b76f9d1533cc834b"
+      }
+    },
+    {
+      "sha256": "ee57c12b7ac1083eb1a23b5bd0438a95631d3782211cf8c6ab38cc97022020a7",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a03-04/revisions/ee57c12b7ac1083eb1a23b5bd0438a95631d3782211cf8c6ab38cc97022020a7.png"
+      },
+      "bytes": 1993028,
+      "id": "ee57c12b7ac1083eb1a23b5bd0438a95631d3782211cf8c6ab38cc97022020a7",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-bc7d787afe4d",
+      "createdAt": "2026-11-04T01:22:55.716Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ed46ad7576f6b1c50b2981d2345db8251c7c6e88eebbcf6500e01d2bc486edc7"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:23:51.642Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "ed46ad7576f6b1c50b2981d2345db8251c7c6e88eebbcf6500e01d2bc486edc7",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a03-04/inputs/ed46ad7576f6b1c50b2981d2345db8251c7c6e88eebbcf6500e01d2bc486edc7.json"
+          },
+          "bytes": 8134
+        },
+        "production": {
+          "id": "NCI-00180",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "bc7d787afe4d14a7203550789f2d237d7c48a05205d9ecaa5c6115f3572adfa0"
+        }
+      }
+    }
+  ]
+}

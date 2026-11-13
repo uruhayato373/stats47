@@ -1,0 +1,165 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "prefecture-population-household-pack",
+  "production": {
+    "id": "NCI-00373",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "人口・世帯データ集",
+      "subline": "47都道府県・134指標",
+      "subject": "都道府県別データをまとめた無地の資料ファイルとノートPCを大きく描く。紙や画面に文字・数字・地図・グラフは描かず、提供ファイルの見た目を再現しない。人物やロゴなし。",
+      "evidence": "P-01 v4-20261024-mac-r2 のデータ集は47都道府県134指標。実在するZIPの7ファイルとprivate R2のSHA読み戻しを確認した。PowerPointとExcelの実機表示は未確認なので画面に完成結果を描かない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "37ad8f4520e2ed9b3db7a168843909cbbad66e785cbc19160ec25abc4fc09c88",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/prefecture-population-household-pack/revisions/37ad8f4520e2ed9b3db7a168843909cbbad66e785cbc19160ec25abc4fc09c88.png"
+      },
+      "bytes": 31827,
+      "id": "37ad8f4520e2ed9b3db7a168843909cbbad66e785cbc19160ec25abc4fc09c88",
+      "kind": "candidate",
+      "version": "2026-10-12-packs",
+      "createdAt": "2026-10-12T07:10:37.486Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "f208eb55d83dbb58fa5a557bd4ab51301fbb344b1cb3cbeb71177285189bcdbe"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出し・指標数・パック実データの県別地図が読める。登録前の確認版とSHA一致",
+        "reviewedAt": "2026-10-12T07:11:32.327Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "f208eb55d83dbb58fa5a557bd4ab51301fbb344b1cb3cbeb71177285189bcdbe",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-population-household-pack/inputs/f208eb55d83dbb58fa5a557bd4ab51301fbb344b1cb3cbeb71177285189bcdbe.json"
+          },
+          "bytes": 1177
+        }
+      }
+    },
+    {
+      "sha256": "35d92eb0326f9cfb48791e994bd1d3ece70cc82e9162f556c0fff4e406bffaa9",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/prefecture-population-household-pack/revisions/35d92eb0326f9cfb48791e994bd1d3ece70cc82e9162f556c0fff4e406bffaa9.png"
+      },
+      "bytes": 31767,
+      "id": "35d92eb0326f9cfb48791e994bd1d3ece70cc82e9162f556c0fff4e406bffaa9",
+      "kind": "candidate",
+      "version": "2026-10-12-packs-r4",
+      "createdAt": "2026-10-12T07:45:58.963Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "5a5251b85844da05f6bda1bc2c3e7c49a6b03554b53b4dd1232c9f3e0a559d8e"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "r4の指標数で作り直し。320px相当で見出し・指標数・パック実データの県別地図が読める。確認版とSHA一致",
+        "reviewedAt": "2026-10-12T07:46:46.999Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "5a5251b85844da05f6bda1bc2c3e7c49a6b03554b53b4dd1232c9f3e0a559d8e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-population-household-pack/inputs/5a5251b85844da05f6bda1bc2c3e7c49a6b03554b53b4dd1232c9f3e0a559d8e.json"
+          },
+          "bytes": 1177
+        }
+      }
+    },
+    {
+      "sha256": "52beb3ad873aeed50217fb650a00dacb0dcad46a6f0721654c65c45e97601bad",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/prefecture-population-household-pack/revisions/52beb3ad873aeed50217fb650a00dacb0dcad46a6f0721654c65c45e97601bad.png"
+      },
+      "bytes": 1754267,
+      "id": "52beb3ad873aeed50217fb650a00dacb0dcad46a6f0721654c65c45e97601bad",
+      "kind": "candidate",
+      "version": "pop-NCP-006-v3-e555baa53876",
+      "createdAt": "2026-10-24T05:05:01.324Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "016442eb812b637120cc6438be5e3904202fabfda02496141ba9963cb8ba075b"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸と320pxで指定4文言・47都道府県・134指標を確認。資料とPCのみで未検証の地図結果なし。",
+        "reviewedAt": "2026-10-24T05:05:10.729Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "016442eb812b637120cc6438be5e3904202fabfda02496141ba9963cb8ba075b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-population-household-pack/inputs/016442eb812b637120cc6438be5e3904202fabfda02496141ba9963cb8ba075b.json"
+          },
+          "bytes": 6215
+        },
+        "production": {
+          "id": "NCI-00373",
+          "policyId": "NCP-006",
+          "policyVersion": 3,
+          "planSha256": "e555baa538763269ef7701418a0db8919bb5079610fe50844b339c956a2b3123"
+        }
+      }
+    },
+    {
+      "sha256": "9b72acffa9eb53af49e5c1fd7680d5f36a305c1d3ca0ef42c48695ec63d294ba",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/prefecture-population-household-pack/revisions/9b72acffa9eb53af49e5c1fd7680d5f36a305c1d3ca0ef42c48695ec63d294ba.png"
+      },
+      "bytes": 371910,
+      "id": "9b72acffa9eb53af49e5c1fd7680d5f36a305c1d3ca0ef42c48695ec63d294ba",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-24T05:12:14.384Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/327852712/rectangle_large_type_2_9808a78289ba75a9473d8416baf21fe5.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "9b72acffa9eb53af49e5c1fd7680d5f36a305c1d3ca0ef42c48695ec63d294ba"
+      }
+    }
+  ]
+}

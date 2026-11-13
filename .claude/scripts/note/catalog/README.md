@@ -13,9 +13,9 @@ note の全記事 (公開済み + 下書き) を、**記事 ID (key) の台帳 1
 | マガジン定義 (名称 / 有料無料 / 束ねる vertical / URL / 商品導線) | `data/note/magazines.json` | git の JSON + `magazines.schema.json` |
 | 本文と画像 (draft.md・SVG・PNG・chart-data.json など記事ディレクトリの全ファイル) | **無料 = 公開 R2・有料 = private R2** の `<r2Path>/` | R2 |
 | 保存の履歴 (ファイル名→SHA のマニフェスト・上書き前の旧ファイル) | private R2 `note-archive/manifests/<key>/<sha>.json`・`note-archive/blobs/<sha>` | R2 (不変) |
-| カバー画像 (候補 / 採用 / 公開の対応) | private R2 + `data/note/cover-assets.json` | 下の「公開カバー」 |
+| カバー画像 (候補 / 採用 / 公開の対応) | private R2 + `data/note/cover-assets.json` (版の記録は `data/note/cover-records/<key>.json`) | 下の「公開カバー」 |
 | カバーのカテゴリ方針・プロンプト (`NCP-*` と版) | `data/note/cover-policies.json` + Schema | git の JSON |
-| 記事の制作ID (`NCI-*`)・コピー・題材・根拠 | `data/note/cover-assets.json` の `production` | 画像台帳に統合 |
+| 記事の制作ID (`NCI-*`)・コピー・題材・根拠 | `data/note/cover-records/<key>.json` の `production` | 画像台帳に統合 (読み書きは `lib/cover-assets.mjs`) |
 | 有料記事の無料部分の文言 | `data/note/paid-landing/<key>.json` + `paid-landing.schema.json` | git の JSON |
 | 公開 URL の索引・下書き索引 | (派生) `data/note/note-published-urls.json`・`note-draft-index.json` | `generate-note-catalog.ts` が台帳から作る |
 
@@ -174,7 +174,8 @@ noteへの差し替えは下の既存公開工程を使う。候補ごとの目�
 
 ## 公開カバーの制作と差し替え
 
-画像の正本は非公開R2、台帳は `data/note/cover-assets.json`、形の契約は同ディレクトリのJSON Schema。
+画像の正本は非公開R2、台帳は `data/note/cover-assets.json` (候補・採用・公開の参照) と記事ごとの
+`data/note/cover-records/<key>.json` (制作内容と版の記録)、形の契約は同ディレクトリのJSON Schema。
 公開済み記事もドラフトも記事keyで結び、タイトルや分類は記事台帳から読む。
 管理画面の `/content/note/covers` と `/ops/image-library` は共通台帳を読む。特定PCのPNGや絶対パスに依存しない。
 

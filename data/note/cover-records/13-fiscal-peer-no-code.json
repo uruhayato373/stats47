@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "13-fiscal-peer-no-code",
+  "production": {
+    "id": "NCI-00027",
+    "policyId": "NCP-007",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "同規模の財政比較\nチャットAIで",
+      "subline": "Claude・ChatGPTを使う\nプログラミング不要",
+      "subject": "青と明るい黄色、クリーム色の暖かい手描きのオフィス静物。右側の主役は、机上に大きく置いた青いノートPC。画面は完全な白紙で、ロゴ・文字・コード・図表・データ・架空UIは描かない。添えるものは無文字の黄色い閉じたノート一つ。人物・顔・手・動物・マスコット・キャラクターは一切描かず、PCを擬人化しない。左に大きな2行見出し、その下に大きな補足2行を配置し、「プログラミング不要」も大きく読みやすくする。Claude Code版と共通の青黄のシリーズ感を保つ。指定以外の文字や装飾的スローガンを追加しない。",
+      "evidence": "https://note.com/stats47/n/n20299fc77b17 2026-10-15公開無料部分確認。e-StatからCSVを取得し、ClaudeまたはChatGPTへファイルとプロンプトを渡し、利用者がコードを書かずに同規模市との財政比較表を作る手順。AIの内部計算と利用者のプログラミング不要を混同しない。所要時間や正確性の保証は載せない。 2026-10-15ユーザー指示で人物・キャラクターを使わず、道具を主役に変更。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "89a873f51bf9f4c8f0b31a9c39013d26d2e0480c05c03ae1cadc76084f966c7d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/13-fiscal-peer-no-code/revisions/89a873f51bf9f4c8f0b31a9c39013d26d2e0480c05c03ae1cadc76084f966c7d.png"
+      },
+      "bytes": 27088,
+      "id": "89a873f51bf9f4c8f0b31a9c39013d26d2e0480c05c03ae1cadc76084f966c7d",
+      "kind": "candidate",
+      "version": "2026-10-12-fiscal",
+      "createdAt": "2026-10-12T00:12:23.246Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "3530ffb3dd9d8c49da1c93c2e4499d06541c03c0be062a3913605a8c10c8bb94"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当でシリーズ名・話数・見出しが読める。e-Stat×Claude Codeシリーズの他回と同じ型",
+        "reviewedAt": "2026-10-12T00:12:27.640Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "3530ffb3dd9d8c49da1c93c2e4499d06541c03c0be062a3913605a8c10c8bb94",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/13-fiscal-peer-no-code/inputs/3530ffb3dd9d8c49da1c93c2e4499d06541c03c0be062a3913605a8c10c8bb94.json"
+          },
+          "bytes": 1080
+        }
+      }
+    },
+    {
+      "sha256": "33d1a25f1981ead1f79f9f18c16bd7aab87385189a71ed902e505eec3be855de",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/13-fiscal-peer-no-code/revisions/33d1a25f1981ead1f79f9f18c16bd7aab87385189a71ed902e505eec3be855de.png"
+      },
+      "bytes": 68816,
+      "id": "33d1a25f1981ead1f79f9f18c16bd7aab87385189a71ed902e505eec3be855de",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T02:14:16.875Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323434779/rectangle_large_type_2_81f2cea501506c66e43408dd17efd8f8.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "33d1a25f1981ead1f79f9f18c16bd7aab87385189a71ed902e505eec3be855de"
+      }
+    },
+    {
+      "sha256": "534a52f66d36995c25712cbee4a2315c0499fa940bd9e3f22983ff5d5dda7a26",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/13-fiscal-peer-no-code/revisions/534a52f66d36995c25712cbee4a2315c0499fa940bd9e3f22983ff5d5dda7a26.png"
+      },
+      "bytes": 1853070,
+      "id": "534a52f66d36995c25712cbee4a2315c0499fa940bd9e3f22983ff5d5dda7a26",
+      "kind": "candidate",
+      "version": "imagegen-no-character-priority3-20261015",
+      "createdAt": "2026-10-15T02:22:15.584Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "90d61554d1e5408709fb14317053d621654e208aa3170c4e6ad2811e42757606"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "人物・キャラクターなしの最新版。原寸と320pxで指定全文・補足の可読性・切れ・重なりを確認済み。管理画面で修正前後を提示し、2026-10-15にユーザーが3件の反映を指示。",
+        "reviewedAt": "2026-10-15T02:36:48.821Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "90d61554d1e5408709fb14317053d621654e208aa3170c4e6ad2811e42757606",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/13-fiscal-peer-no-code/inputs/90d61554d1e5408709fb14317053d621654e208aa3170c4e6ad2811e42757606.json"
+          },
+          "bytes": 9559
+        },
+        "production": {
+          "id": "NCI-00027",
+          "policyId": "NCP-007",
+          "policyVersion": 3,
+          "planSha256": "3b4eb7cb1744517c3a761a8ab7577eebe8a459851fd738acedbfda24798ddff7"
+        }
+      }
+    }
+  ]
+}

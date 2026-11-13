@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "d-geo-geopackage-parquet-pmtiles",
+  "production": {
+    "id": "NCI-00243",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

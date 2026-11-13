@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-electricity-demand",
+  "production": {
+    "id": "NCI-00056",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "電力需要量\n多い県は？",
+      "subline": "1位は東京都\n2023年のデータ",
+      "subject": "右側に無地の電源プラグを1点だけ大きく描く。供給量・発電量や特定施設を示す絵にはしない。人物・キャラクター・地図・グラフ・発電所・会社ロゴ・架空の数値を描かない。",
+      "evidence": "公開本文を確認。2023年の電力需要量は東京都75,521,853MWhで1位、鳥取県3,416,535MWhで47位。発電電力量や人口当たりの量とは区別する。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "9deb0cc39ac0d30f30dd657c950147457910bd95853d6ee81f539b368e618bc8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-electricity-demand/revisions/9deb0cc39ac0d30f30dd657c950147457910bd95853d6ee81f539b368e618bc8.png"
+      },
+      "bytes": 66558,
+      "id": "9deb0cc39ac0d30f30dd657c950147457910bd95853d6ee81f539b368e618bc8",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:53.278Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312770884/rectangle_large_type_2_a780755e3d7100ef102685a96b59946a.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "9deb0cc39ac0d30f30dd657c950147457910bd95853d6ee81f539b368e618bc8"
+      }
+    },
+    {
+      "sha256": "4dab2f42f7d8d73d04b536eed3a644c2e5b4d78d02991f8fe7d3de8f1757ae79",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-electricity-demand/revisions/4dab2f42f7d8d73d04b536eed3a644c2e5b4d78d02991f8fe7d3de8f1757ae79.png"
+      },
+      "bytes": 111435,
+      "id": "4dab2f42f7d8d73d04b536eed3a644c2e5b4d78d02991f8fe7d3de8f1757ae79",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:19:12.133Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "f7663595688fb0fe914caf325ca68d3ea4bc1b074588fa7928c1314dce4eb7dc"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.842Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/electricity-demand/values.json",
+        "sourceSha256": "c1fa429eaa7047f68bba31c08f0b23faadc354fcc65157eed4575b1d89acfc0d",
+        "input": {
+          "sha256": "f7663595688fb0fe914caf325ca68d3ea4bc1b074588fa7928c1314dce4eb7dc",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-electricity-demand/inputs/f7663595688fb0fe914caf325ca68d3ea4bc1b074588fa7928c1314dce4eb7dc.json"
+          },
+          "bytes": 7569
+        }
+      }
+    },
+    {
+      "sha256": "f9b70eb06aada6fdc502f5c01c77f8108f665d9c9e55f14ef7bacfb90c27676f",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-electricity-demand/revisions/f9b70eb06aada6fdc502f5c01c77f8108f665d9c9e55f14ef7bacfb90c27676f.png"
+      },
+      "bytes": 1642608,
+      "id": "f9b70eb06aada6fdc502f5c01c77f8108f665d9c9e55f14ef7bacfb90c27676f",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-891b4503b385",
+      "createdAt": "2026-10-23T05:45:11.239Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "fbf3608a58556827f44506ea17a2a7678ceb15b32a37e6f7db5c1b59f322745f"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "本文の2023年の電力需要量と東京都1位に一致。新候補は供給量と混同しない電源プラグの題材。原寸・320pxの文字を確認。",
+        "reviewedAt": "2026-10-23T05:48:53.510Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "fbf3608a58556827f44506ea17a2a7678ceb15b32a37e6f7db5c1b59f322745f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-electricity-demand/inputs/fbf3608a58556827f44506ea17a2a7678ceb15b32a37e6f7db5c1b59f322745f.json"
+          },
+          "bytes": 7826
+        },
+        "production": {
+          "id": "NCI-00056",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "891b4503b385d786965d110a329c0dbcceda9d3f282209d6967f3d03da490326"
+        }
+      }
+    }
+  ]
+}

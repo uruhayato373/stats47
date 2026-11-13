@@ -1,0 +1,196 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-railway-station-count",
+  "production": {
+    "id": "NCI-00121",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "鉄道駅の数\n多い県は？",
+      "subline": "1位は東京都\n2024年・駅数で比較",
+      "subject": "右側に無人の汎用鉄道駅舎を1棟だけ大きく描く。駅名標は無文字。人物・顔・手・キャラクター・車両・路線図・地図・時計の数字・ロゴ・指定外の文字を描かない。",
+      "evidence": "公開本文を確認。2024年の鉄道駅数は東京都892駅で1位、沖縄県19駅で47位。人口当たり駅数やアクセス時間ではない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "a6db10287291afeca950e41cf1a3984ad629960e7b9d73261619120a221ff44f",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-railway-station-count/revisions/a6db10287291afeca950e41cf1a3984ad629960e7b9d73261619120a221ff44f.png"
+      },
+      "bytes": 79324,
+      "id": "a6db10287291afeca950e41cf1a3984ad629960e7b9d73261619120a221ff44f",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:51.359Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312772110/rectangle_large_type_2_d1879b56f83c949478c2022117c480ec.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "a6db10287291afeca950e41cf1a3984ad629960e7b9d73261619120a221ff44f"
+      }
+    },
+    {
+      "sha256": "ac69ad0aac02338e41c9b34d2f033a5dc804b4b50b7071b2017d3e90737e62d8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-railway-station-count/revisions/ac69ad0aac02338e41c9b34d2f033a5dc804b4b50b7071b2017d3e90737e62d8.png"
+      },
+      "bytes": 116677,
+      "id": "ac69ad0aac02338e41c9b34d2f033a5dc804b4b50b7071b2017d3e90737e62d8",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:18:58.368Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "3558f4a155d1d04c75a98f5f796f580f9d6111993c984fabe739767a96bc6154"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.842Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/railway-station-count/values.json",
+        "sourceSha256": "e44aedaa2eb030f750a6c1e00533c39ff5ef258673bd2c63d976953bf751b189",
+        "input": {
+          "sha256": "3558f4a155d1d04c75a98f5f796f580f9d6111993c984fabe739767a96bc6154",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-railway-station-count/inputs/3558f4a155d1d04c75a98f5f796f580f9d6111993c984fabe739767a96bc6154.json"
+          },
+          "bytes": 7319
+        }
+      }
+    },
+    {
+      "sha256": "b19bfa3fc2f2c198bddb81b8bcf78be19c57ea0fce42267c343b55fbcf843fcb",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-railway-station-count/revisions/b19bfa3fc2f2c198bddb81b8bcf78be19c57ea0fce42267c343b55fbcf843fcb.png"
+      },
+      "bytes": 82722,
+      "id": "b19bfa3fc2f2c198bddb81b8bcf78be19c57ea0fce42267c343b55fbcf843fcb",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T07:08:32.145Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320190911/rectangle_large_type_2_e07159ad455b0a6ea6485516ae76c0f8.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "b19bfa3fc2f2c198bddb81b8bcf78be19c57ea0fce42267c343b55fbcf843fcb"
+      }
+    },
+    {
+      "sha256": "9845fd3953d10a12532d2e5ce861082b2663bb8ad974cd3364c921b7d614554c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-railway-station-count/revisions/9845fd3953d10a12532d2e5ce861082b2663bb8ad974cd3364c921b7d614554c.png"
+      },
+      "bytes": 1774289,
+      "id": "9845fd3953d10a12532d2e5ce861082b2663bb8ad974cd3364c921b7d614554c",
+      "kind": "candidate",
+      "version": "imagegen-multicategory-pilot-20261015",
+      "createdAt": "2026-10-15T07:09:28.049Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "fd98e03b10b9c23e0af45940c49897c08f95c1e732fc022ed20b43eed1e5914a"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "NCI-00121: 6カテゴリ試作の原寸/320pxの指定全文・補足・人物なし・題材とカテゴリ固有条件を個別確認済み。ranking-question。2026-10-15ユーザーが表示中10件のnote反映を指示。候補SHA 9845fd3953d10a12532d2e5ce861082b2663bb8ad974cd3364c921b7d614554c。",
+        "reviewedAt": "2026-10-15T07:22:09.857Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "fd98e03b10b9c23e0af45940c49897c08f95c1e732fc022ed20b43eed1e5914a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-railway-station-count/inputs/fd98e03b10b9c23e0af45940c49897c08f95c1e732fc022ed20b43eed1e5914a.json"
+          },
+          "bytes": 9385
+        },
+        "production": {
+          "id": "NCI-00121",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "e28ffb8329c77f2645b5b7afbe62ea24b399ac8c1e3e0c8b3a1e3a346e9bd8fa"
+        }
+      }
+    },
+    {
+      "sha256": "5600b372733200467ddb63627285af16de92e7be1bc37a21248c58e3c07fdcdd",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-railway-station-count/revisions/5600b372733200467ddb63627285af16de92e7be1bc37a21248c58e3c07fdcdd.png"
+      },
+      "bytes": 1980372,
+      "id": "5600b372733200467ddb63627285af16de92e7be1bc37a21248c58e3c07fdcdd",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-c43767efb4c1",
+      "createdAt": "2026-10-23T05:44:50.883Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "eaacc7bb3644cbd0088e79321f142faf6b0d2cf5fc944af0bd18a21e283c04d0"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "本文の2024年の鉄道駅数、東京都1位と一致。旧版より対象と順位が明瞭。原寸・320pxで文字と無人駅舎を確認。",
+        "reviewedAt": "2026-10-23T05:48:34.194Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "eaacc7bb3644cbd0088e79321f142faf6b0d2cf5fc944af0bd18a21e283c04d0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-railway-station-count/inputs/eaacc7bb3644cbd0088e79321f142faf6b0d2cf5fc944af0bd18a21e283c04d0.json"
+          },
+          "bytes": 7803
+        },
+        "production": {
+          "id": "NCI-00121",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "c43767efb4c113561ba281ff38697c17cfd614599aa2304b421e3932a54b5bb4"
+        }
+      }
+    }
+  ]
+}

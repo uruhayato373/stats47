@@ -1,0 +1,196 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-private-rental-housing-rent-per-3-3m2",
+  "production": {
+    "id": "NCI-00120",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "民営賃貸の家賃\n高い県は？",
+      "subline": "1位は東京都\n2024年・3.3㎡当たり",
+      "subject": "右側に無人の汎用低層賃貸アパートを1棟だけ描く。特定地域・物件・不動産会社に見せない。人物・キャラクター・鍵・契約書・地図・グラフ・価格表示・ロゴ・指定外の文字を描かない。",
+      "evidence": "公開本文と指標キーを確認。2024年の民営賃貸住宅家賃は3.3㎡当たりの円額で、東京都9,736円が1位、和歌山県3,442円が47位。月額総家賃や物件単位の価格と混同しない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "b847f49b5f896d6092e537bcb78824568f8bbc50e1721eddf740a99e0bebde17",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-private-rental-housing-rent-per-3-3m2/revisions/b847f49b5f896d6092e537bcb78824568f8bbc50e1721eddf740a99e0bebde17.png"
+      },
+      "bytes": 80637,
+      "id": "b847f49b5f896d6092e537bcb78824568f8bbc50e1721eddf740a99e0bebde17",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:51.242Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312772079/rectangle_large_type_2_803c733d97ee8b558d994cdff781c569.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "b847f49b5f896d6092e537bcb78824568f8bbc50e1721eddf740a99e0bebde17"
+      }
+    },
+    {
+      "sha256": "53a4304ef8211a37b00b6e9674372b3e790bda93e62229f4003353f92f6af656",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-private-rental-housing-rent-per-3-3m2/revisions/53a4304ef8211a37b00b6e9674372b3e790bda93e62229f4003353f92f6af656.png"
+      },
+      "bytes": 115173,
+      "id": "53a4304ef8211a37b00b6e9674372b3e790bda93e62229f4003353f92f6af656",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:18:54.491Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "0dfce2abdb8d595f8c2f01f6c033162f41e6061397a7e8fb728efc26d4c6f5b7"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.842Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/private-rental-housing-rent-per-3-3m2/values.json",
+        "sourceSha256": "f14d5877326dd5a2ba683743c7fe4b670bbfac1ea7daa0660f60916d224cbc7b",
+        "input": {
+          "sha256": "0dfce2abdb8d595f8c2f01f6c033162f41e6061397a7e8fb728efc26d4c6f5b7",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-private-rental-housing-rent-per-3-3m2/inputs/0dfce2abdb8d595f8c2f01f6c033162f41e6061397a7e8fb728efc26d4c6f5b7.json"
+          },
+          "bytes": 7547
+        }
+      }
+    },
+    {
+      "sha256": "d228814e34291ee17849ddb2e326eb5b5c7f97f509122cd85f8303926e4cc8d0",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-private-rental-housing-rent-per-3-3m2/revisions/d228814e34291ee17849ddb2e326eb5b5c7f97f509122cd85f8303926e4cc8d0.png"
+      },
+      "bytes": 118362,
+      "id": "d228814e34291ee17849ddb2e326eb5b5c7f97f509122cd85f8303926e4cc8d0",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T07:08:30.745Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320190884/rectangle_large_type_2_58ccadf50cb884d68af83027f8cbfe3c.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "d228814e34291ee17849ddb2e326eb5b5c7f97f509122cd85f8303926e4cc8d0"
+      }
+    },
+    {
+      "sha256": "4cfc05a38340c7aa7c0083dd93feb78e0199722100c8285bf4d2af61cb1698f1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-private-rental-housing-rent-per-3-3m2/revisions/4cfc05a38340c7aa7c0083dd93feb78e0199722100c8285bf4d2af61cb1698f1.png"
+      },
+      "bytes": 1517764,
+      "id": "4cfc05a38340c7aa7c0083dd93feb78e0199722100c8285bf4d2af61cb1698f1",
+      "kind": "candidate",
+      "version": "imagegen-multicategory-pilot-20261015",
+      "createdAt": "2026-10-15T07:09:19.152Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e7c258019ec3ece9340be36c168afbbf48c3d208a54899125c5163f1cf34ee39"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "NCI-00120: 6カテゴリ試作の原寸/320pxの指定全文・補足・人物なし・題材とカテゴリ固有条件を個別確認済み。ranking-question。2026-10-15ユーザーが表示中10件のnote反映を指示。候補SHA 4cfc05a38340c7aa7c0083dd93feb78e0199722100c8285bf4d2af61cb1698f1。",
+        "reviewedAt": "2026-10-15T07:22:02.495Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "e7c258019ec3ece9340be36c168afbbf48c3d208a54899125c5163f1cf34ee39",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-private-rental-housing-rent-per-3-3m2/inputs/e7c258019ec3ece9340be36c168afbbf48c3d208a54899125c5163f1cf34ee39.json"
+          },
+          "bytes": 9400
+        },
+        "production": {
+          "id": "NCI-00120",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "61f885180ff8cd6068c000fa0119a65b3f90087529b72c2e17978847d666b479"
+        }
+      }
+    },
+    {
+      "sha256": "8b9b66c145c1a10b337df10a4264b6dbf91b4be3cf0212b510e8ddd3c1a3c044",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-private-rental-housing-rent-per-3-3m2/revisions/8b9b66c145c1a10b337df10a4264b6dbf91b4be3cf0212b510e8ddd3c1a3c044.png"
+      },
+      "bytes": 1897949,
+      "id": "8b9b66c145c1a10b337df10a4264b6dbf91b4be3cf0212b510e8ddd3c1a3c044",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-fad4beb4e36e",
+      "createdAt": "2026-10-23T05:44:43.045Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "c731b6d4207cfcd690edc4d91a336606f8147fcebd47441e4622ee1b89468bd3"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "本文の2024年・3.3㎡当たり家賃と一致。旧版にない東京都1位と比較単位を明示。原寸・320pxで文字と賃貸住宅の題材を確認。",
+        "reviewedAt": "2026-10-23T05:48:07.381Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "c731b6d4207cfcd690edc4d91a336606f8147fcebd47441e4622ee1b89468bd3",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-private-rental-housing-rent-per-3-3m2/inputs/c731b6d4207cfcd690edc4d91a336606f8147fcebd47441e4622ee1b89468bd3.json"
+          },
+          "bytes": 8014
+        },
+        "production": {
+          "id": "NCI-00120",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "fad4beb4e36eec4bb1cfccc89ebdbf59d9aef89dbc09613c8c97d68684c28779"
+        }
+      }
+    }
+  ]
+}

@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { emptyCoverArticle, coverSha, coverAssetKey, type CoverLedger, type CoverRevision } from '../../../../.claude/scripts/note/lib/cover-assets.mjs';
+import { emptyCoverArticle, coverSha, coverAssetKey, coverLedgerFiles, type CoverLedger, type CoverRevision } from '../../../../.claude/scripts/note/lib/cover-assets.mjs';
 
 const fixture = vi.hoisted(() => ({ root: '', bytes: Buffer.from('remote cover') }));
 const articles = vi.hoisted(() => [{ key: 'pinned-intro', title: '自己紹介', vertical: 'stats47-note', noteUrl: 'https://note.com/stats47/n/n123' }]);
@@ -23,11 +23,17 @@ function revision(kind: CoverRevision['kind']): CoverRevision {
     review: { status: kind === 'candidate' ? 'pending' : 'not-required', reason: null, reviewedAt: null },
     provenance: { renderer: null, sourceUrl: null, sourceSha256: null } };
 }
+// 台帳は正本と記事ごとの記録に分かれて保存される。書き手と同じ並びで置く
+function writeLedgerFiles(ledger: CoverLedger) {
+  for (const [relative, text] of Object.entries(coverLedgerFiles(ledger))) {
+    fs.mkdirSync(path.dirname(path.join(fixture.root, relative)), { recursive: true });
+    fs.writeFileSync(path.join(fixture.root, relative), text);
+  }
+}
 function writeLedger(change?: (ledger: CoverLedger) => void) {
   const ledger: CoverLedger = { schemaVersion: 1, account: 'stats47', updatedAt: '2026-10-02T00:00:00Z', articles: [emptyCoverArticle(articles[0])] };
   change?.(ledger);
-  fs.mkdirSync(path.join(fixture.root, 'data/note'), { recursive: true });
-  fs.writeFileSync(path.join(fixture.root, 'data/note/cover-assets.json'), JSON.stringify(ledger));
+  writeLedgerFiles(ledger);
   fs.writeFileSync(path.join(fixture.root, 'data/note/cover-policies.json'), JSON.stringify(readCoverPolicies()));
 }
 const requestImage = (sha: string, key = 'pinned-intro') => GET(new Request(`http://127.0.0.1:4747/note-cover/${key}?revision=${sha}`), { params: Promise.resolve({ key }) });

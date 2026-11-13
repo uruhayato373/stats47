@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n8df3cf170cf4",
+  "production": {
+    "id": "NCI-00442",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "ソフトボールをした人\n1位は山口県",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無地のソフトボールとグローブ、無人のグラウンドを描く。選手・手は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n8df3cf170cf4 2026-10-23公開API本文照合。記事題名「【2021年版】ソフトボールをした人が多い県は？ 1位は山口県｜都道府県ランキング」。本文中の「山口県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "2b12696c2fa8e2c34ad381bc844a43275f81aa0159b2b4a5eccfec2b7fe7433c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n8df3cf170cf4/revisions/2b12696c2fa8e2c34ad381bc844a43275f81aa0159b2b4a5eccfec2b7fe7433c.png"
+      },
+      "bytes": 75169,
+      "id": "2b12696c2fa8e2c34ad381bc844a43275f81aa0159b2b4a5eccfec2b7fe7433c",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:21.564Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312774414/rectangle_large_type_2_67d2b24c296ebeef4946e8939bfdeddd.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "2b12696c2fa8e2c34ad381bc844a43275f81aa0159b2b4a5eccfec2b7fe7433c"
+      }
+    },
+    {
+      "sha256": "93bcdf6fdb114f1806d8d7a042fbeef32dd853c540c6a6f8a074fb38cbd1850e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n8df3cf170cf4/revisions/93bcdf6fdb114f1806d8d7a042fbeef32dd853c540c6a6f8a074fb38cbd1850e.png"
+      },
+      "bytes": 113326,
+      "id": "93bcdf6fdb114f1806d8d7a042fbeef32dd853c540c6a6f8a074fb38cbd1850e",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:16:34.686Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "93c8b6898db0021eb70c969219bb96f8f0e6a09dd56936dba8222eef8ed1b92e"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/sports-participation-rate-softball/values.json",
+        "sourceSha256": "93b54a2a114975d707bb85099a65a3e85357e35a75b799f3b4b17679f34944ed",
+        "input": {
+          "sha256": "93c8b6898db0021eb70c969219bb96f8f0e6a09dd56936dba8222eef8ed1b92e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n8df3cf170cf4/inputs/93c8b6898db0021eb70c969219bb96f8f0e6a09dd56936dba8222eef8ed1b92e.json"
+          },
+          "bytes": 6529
+        }
+      }
+    },
+    {
+      "sha256": "47d9c06a8302f01297d3c5ffd8db5abf97c8d897967abee530283b204b00493a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n8df3cf170cf4/revisions/47d9c06a8302f01297d3c5ffd8db5abf97c8d897967abee530283b204b00493a.png"
+      },
+      "bytes": 1860112,
+      "id": "47d9c06a8302f01297d3c5ffd8db5abf97c8d897967abee530283b204b00493a",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-695eaf2aad05",
+      "createdAt": "2026-10-23T14:07:26.381Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "3179fb33154e805ea87f06e702f4892653a0ee2114e88de7bf02c4bd993d1bb4"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00436は2001年・15歳以上、NCI-00450は山形県と長野県の同率首位。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T14:09:25.871Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "3179fb33154e805ea87f06e702f4892653a0ee2114e88de7bf02c4bd993d1bb4",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n8df3cf170cf4/inputs/3179fb33154e805ea87f06e702f4892653a0ee2114e88de7bf02c4bd993d1bb4.json"
+          },
+          "bytes": 8782
+        },
+        "production": {
+          "id": "NCI-00442",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "695eaf2aad05cbf097f9bd59d11871aa1f57e9f1d3e496e328a7f2c9f438cfda"
+        }
+      }
+    }
+  ]
+}

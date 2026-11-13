@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "koumuin-shigoto-kouritsuka-ai",
+  "production": {
+    "id": "NCI-00291",
+    "policyId": "NCP-007",
+    "policyVersion": 4,
+    "brief": {
+      "headline": "公務員の集計業務\nAIで何が変わる？",
+      "subline": "取得・整形・確認\n人が最後に確かめる",
+      "subject": "右側には無地で暗い画面のノートPCを一点、その手前には完全な白紙のA4用紙を数枚だけ置く。紙には線、マス目、棒、円、記号、数字、文字、グラフを一切描かない。PC画面にも文字・アイコン・UIを一切描かない。業務道具だけで集計の取得・整形・確認を表す。植物など他の題材、人物・顔・手・キャラクター・地図・架空の成果数値も描かない。",
+      "evidence": "https://note.com/stats47/n/na451784fbbca 本文確認2026-10-14。本文の統計データ取得・整形・可視化・公開の分解と、人による最終確認を主題にする。特定の短縮時間や現在の運用実績をカバーで保証しない。 2026-10-23再確認。 2026-10-23再確認。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "8fa2587f2df43baf77903cfb3976d1870cbbed4b7fa42166524f5d5370d51dac",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/koumuin-shigoto-kouritsuka-ai/revisions/8fa2587f2df43baf77903cfb3976d1870cbbed4b7fa42166524f5d5370d51dac.png"
+      },
+      "bytes": 27633,
+      "id": "8fa2587f2df43baf77903cfb3976d1870cbbed4b7fa42166524f5d5370d51dac",
+      "kind": "candidate",
+      "version": "2026-10-12-drafts",
+      "createdAt": "2026-10-12T00:53:42.107Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e15f00abef152a93c16420a39d26ac5642c56e8046d22e44314f50fdb7a1be4c"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出し・記事の事実・図(または値を持たない背景地図)が読める。登録前の確認版とSHA一致",
+        "reviewedAt": "2026-10-12T00:54:39.151Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "e15f00abef152a93c16420a39d26ac5642c56e8046d22e44314f50fdb7a1be4c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/koumuin-shigoto-kouritsuka-ai/inputs/e15f00abef152a93c16420a39d26ac5642c56e8046d22e44314f50fdb7a1be4c.json"
+          },
+          "bytes": 1037
+        }
+      }
+    },
+    {
+      "sha256": "9f6a3fcf0feb3e8faccb10c585e77614c7ad7a1fb8e9ca8d2ac75d0eefaefc40",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/koumuin-shigoto-kouritsuka-ai/revisions/9f6a3fcf0feb3e8faccb10c585e77614c7ad7a1fb8e9ca8d2ac75d0eefaefc40.png"
+      },
+      "bytes": 70005,
+      "id": "9f6a3fcf0feb3e8faccb10c585e77614c7ad7a1fb8e9ca8d2ac75d0eefaefc40",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-14T01:08:36.893Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323551121/rectangle_large_type_2_23705850cf5bdac9f7a4a90f7b4216be.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "9f6a3fcf0feb3e8faccb10c585e77614c7ad7a1fb8e9ca8d2ac75d0eefaefc40"
+      }
+    },
+    {
+      "sha256": "a462b053ab62bd7444d4d9dae6c8691064476d9a93ddbd8c4179f85b7c5e1a25",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/koumuin-shigoto-kouritsuka-ai/revisions/a462b053ab62bd7444d4d9dae6c8691064476d9a93ddbd8c4179f85b7c5e1a25.png"
+      },
+      "bytes": 1900330,
+      "id": "a462b053ab62bd7444d4d9dae6c8691064476d9a93ddbd8c4179f85b7c5e1a25",
+      "kind": "candidate",
+      "version": "imagegen-pop-v2-recent-six-20261014",
+      "createdAt": "2026-10-14T01:10:35.360Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "217142281599406f712f5d24bfafdf40673252560a8e6d2551ebe7bc91be04b5"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸・幅320pxの目視と転記・文字切れ・重なりを確認済み。2026-10-14ユーザーがこの6件の公開カバー更新を指示。",
+        "reviewedAt": "2026-10-14T01:43:34.401Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "217142281599406f712f5d24bfafdf40673252560a8e6d2551ebe7bc91be04b5",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/koumuin-shigoto-kouritsuka-ai/inputs/217142281599406f712f5d24bfafdf40673252560a8e6d2551ebe7bc91be04b5.json"
+          },
+          "bytes": 8916
+        },
+        "production": {
+          "id": "NCI-00291",
+          "policyId": "NCP-007",
+          "policyVersion": 2,
+          "planSha256": "9c486bc0e1246e054aec0ee8c9e99eeae93a78b6004f72a6f6d19f6d041d5d25"
+        }
+      }
+    },
+    {
+      "sha256": "8739f86b4aac6da8fea5e8c22eb33f0b57d156e5a8830c964efab735978f3d20",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/koumuin-shigoto-kouritsuka-ai/revisions/8739f86b4aac6da8fea5e8c22eb33f0b57d156e5a8830c964efab735978f3d20.png"
+      },
+      "bytes": 1846382,
+      "id": "8739f86b4aac6da8fea5e8c22eb33f0b57d156e5a8830c964efab735978f3d20",
+      "kind": "candidate",
+      "version": "pop-NCP-007-v4-ff55a4379b37",
+      "createdAt": "2026-10-23T07:06:21.746Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "fdb7e95eba1f486d1f3cf1af47047b26318b64ea3c3699ea5fb5003ed488d71f"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "本文の集計業務とAI補助・人の最終確認に一致。新旧を管理画面で比較し、人物や架空の図表がない白紙資料とPCの候補を原寸・幅320pxで確認。",
+        "reviewedAt": "2026-10-23T07:09:53.630Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "fdb7e95eba1f486d1f3cf1af47047b26318b64ea3c3699ea5fb5003ed488d71f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/koumuin-shigoto-kouritsuka-ai/inputs/fdb7e95eba1f486d1f3cf1af47047b26318b64ea3c3699ea5fb5003ed488d71f.json"
+          },
+          "bytes": 9224
+        },
+        "production": {
+          "id": "NCI-00291",
+          "policyId": "NCP-007",
+          "policyVersion": 4,
+          "planSha256": "ff55a4379b37d1baac2341d05135b4ac631d90e56fd9f31ee44e842e2511e828"
+        }
+      }
+    }
+  ]
+}

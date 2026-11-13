@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "service-regional-report",
+  "production": {
+    "id": "NCI-00494",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

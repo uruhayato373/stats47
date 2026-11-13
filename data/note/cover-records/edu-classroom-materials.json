@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "edu-classroom-materials",
+  "production": {
+    "id": "NCI-00265",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

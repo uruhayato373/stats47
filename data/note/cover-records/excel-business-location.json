@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "excel-business-location",
+  "production": {
+    "id": "NCI-00268",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

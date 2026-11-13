@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "ppt-region-intro-deck",
+  "production": {
+    "id": "NCI-00358",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

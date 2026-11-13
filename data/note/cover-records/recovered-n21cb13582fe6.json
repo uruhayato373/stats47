@@ -1,0 +1,229 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n21cb13582fe6",
+  "production": {
+    "id": "NCI-00394",
+    "policyId": "NCP-004",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "りんごの年間支出\n1位は長野県",
+      "subline": "2023年・二人以上の世帯\n県庁所在市等の比較",
+      "subject": "1280×670相当の横長完成カバー。紫と明るい黄色。右側に同じ大きさの無地のりんご2個と無文字の買い物かごを描く。りんごの消費重量ではなく家計の年間支出額を比べる記事。地図・棒グラフ・金額・県の輪郭・人物・顔・手は描かない。2行の補足は下部の広い独立した帯に縦に積み、幅320pxでも読める大きさ。左に太い見出し。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n21cb13582fe6 2026-10-24公開API本文照合。記事題名「【2023年版】都道府県「りんご消費量」ランキング｜産地・青森を抑えて長野が1位、京都8位の意外」。本文中の 長野県、2023、二人以上、県庁所在市 を確認。主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "d8e6d1903332381e080bbf72fd6719b8ecfd2b762be9590d348f9ddfa7874f16",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n21cb13582fe6/revisions/d8e6d1903332381e080bbf72fd6719b8ecfd2b762be9590d348f9ddfa7874f16.png"
+      },
+      "bytes": 165502,
+      "id": "d8e6d1903332381e080bbf72fd6719b8ecfd2b762be9590d348f9ddfa7874f16",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:54.847Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/259741193/rectangle_large_type_2_2658d8bca08a508994faa2644a69cb7d.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "d8e6d1903332381e080bbf72fd6719b8ecfd2b762be9590d348f9ddfa7874f16"
+      }
+    },
+    {
+      "sha256": "c17162f6dd38241c57bce924483f7a65a1d2e926e200d23d8395ddf377e7b2a6",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n21cb13582fe6/revisions/c17162f6dd38241c57bce924483f7a65a1d2e926e200d23d8395ddf377e7b2a6.png"
+      },
+      "bytes": 94973,
+      "id": "c17162f6dd38241c57bce924483f7a65a1d2e926e200d23d8395ddf377e7b2a6",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:42:28.074Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "73ac48349b1e05c97c0a5b9de6cae3a86977f8a4b0e5e2a4be20c460ee9fe4ad"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で主題・年・記事題名の順位/値/格差が読める。地図は値を持たない背景",
+        "reviewedAt": "2026-10-11T11:49:51.536Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "73ac48349b1e05c97c0a5b9de6cae3a86977f8a4b0e5e2a4be20c460ee9fe4ad",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n21cb13582fe6/inputs/73ac48349b1e05c97c0a5b9de6cae3a86977f8a4b0e5e2a4be20c460ee9fe4ad.json"
+          },
+          "bytes": 1336
+        }
+      }
+    },
+    {
+      "sha256": "1e84648688bc9f0de0cb57432285be743e356f746d8b10800e52111ffb2bd6c9",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n21cb13582fe6/revisions/1e84648688bc9f0de0cb57432285be743e356f746d8b10800e52111ffb2bd6c9.png"
+      },
+      "bytes": 68990,
+      "id": "1e84648688bc9f0de0cb57432285be743e356f746d8b10800e52111ffb2bd6c9",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:55:32.306Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320256994/rectangle_large_type_2_a9cda1627548b4ff1e592b7b9855ec16.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "1e84648688bc9f0de0cb57432285be743e356f746d8b10800e52111ffb2bd6c9"
+      }
+    },
+    {
+      "sha256": "34c15dbd5145d906fbbe901557d22e008400e1e3f84742b4b93e637a515c334c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n21cb13582fe6/revisions/34c15dbd5145d906fbbe901557d22e008400e1e3f84742b4b93e637a515c334c.png"
+      },
+      "bytes": 41603,
+      "id": "34c15dbd5145d906fbbe901557d22e008400e1e3f84742b4b93e637a515c334c",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:08:13.645Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "392b4cd26115e91d6a41deb0007b8c84011578b9d07473b7e98ec0ac4fad82f9"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.008/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:16:38.816Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "392b4cd26115e91d6a41deb0007b8c84011578b9d07473b7e98ec0ac4fad82f9",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n21cb13582fe6/inputs/392b4cd26115e91d6a41deb0007b8c84011578b9d07473b7e98ec0ac4fad82f9.json"
+          },
+          "bytes": 1336
+        }
+      }
+    },
+    {
+      "sha256": "eaf97ffac05c3adcd2b7f445f8536bb5fb61f2146720e41a1b512454d48d9eca",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n21cb13582fe6/revisions/eaf97ffac05c3adcd2b7f445f8536bb5fb61f2146720e41a1b512454d48d9eca.png"
+      },
+      "bytes": 89353,
+      "id": "eaf97ffac05c3adcd2b7f445f8536bb5fb61f2146720e41a1b512454d48d9eca",
+      "kind": "candidate",
+      "version": "2026-10-11-truecolor-v3b",
+      "createdAt": "2026-10-11T12:31:29.368Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ebc2147e04a38dae8acd30b3874a26d5672c24b102746b2b6e91bd7b7fe5d22c"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "フルカラー再発行版。目視合格した確認版との平均画素差0.008/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:37:07.578Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "ebc2147e04a38dae8acd30b3874a26d5672c24b102746b2b6e91bd7b7fe5d22c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n21cb13582fe6/inputs/ebc2147e04a38dae8acd30b3874a26d5672c24b102746b2b6e91bd7b7fe5d22c.json"
+          },
+          "bytes": 1336
+        }
+      }
+    },
+    {
+      "sha256": "f2a4c638237c519cf1f24f49eabb1b21e27e9e5a14a8452d60d2d9be8681b7d7",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n21cb13582fe6/revisions/f2a4c638237c519cf1f24f49eabb1b21e27e9e5a14a8452d60d2d9be8681b7d7.png"
+      },
+      "bytes": 1794214,
+      "id": "f2a4c638237c519cf1f24f49eabb1b21e27e9e5a14a8452d60d2d9be8681b7d7",
+      "kind": "candidate",
+      "version": "pop-NCP-004-v3-e8842d03e95e",
+      "createdAt": "2026-10-23T15:08:07.886Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "475a9c76608df75bdf33e24c80d9024703cfa40e890c73c5ec3a9299f7223e93"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文はりんごの年間支出額で長野1位。数量を示さず、2023年・二人以上の世帯・県庁所在市等の範囲と掲載文字を原寸/320px、管理画面の新旧比較で確認。",
+        "reviewedAt": "2026-10-23T15:09:32.535Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "475a9c76608df75bdf33e24c80d9024703cfa40e890c73c5ec3a9299f7223e93",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n21cb13582fe6/inputs/475a9c76608df75bdf33e24c80d9024703cfa40e890c73c5ec3a9299f7223e93.json"
+          },
+          "bytes": 9410
+        },
+        "production": {
+          "id": "NCI-00394",
+          "policyId": "NCP-004",
+          "policyVersion": 3,
+          "planSha256": "e8842d03e95e86ea6f5dab45dd22aa18814fac18fd2b708f487d94baed4bbe98"
+        }
+      }
+    }
+  ]
+}

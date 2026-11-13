@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-kakei-nagasaki",
+  "production": {
+    "id": "NCI-00086",
+    "policyId": "NCP-002",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "長崎県の家計\nバス代に注目",
+      "subline": "長崎市・2024年\n二人以上の世帯",
+      "subject": "添付は長崎県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に完全に無人の小さなバスの模型を小さく1点だけ。車両や家の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+      "evidence": "https://note.com/stats47/n/nd547ff50cbe6 2026-10-23公開API本文照合。長崎市の2024年・二人以上の世帯の家計調査。本文にバス代3.03倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は長崎県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は長崎市であり県全域の観測図ではない。人物・キャラクターなし。",
+      "dataScope": {
+        "place": "長崎市",
+        "year": "2024",
+        "households": "二人以上の世帯"
+      }
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "814d1e29709ec20522e58b07f52c9b4976c4ba22da6a135bbd81dffa89db1083",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-nagasaki/revisions/814d1e29709ec20522e58b07f52c9b4976c4ba22da6a135bbd81dffa89db1083.png"
+      },
+      "bytes": 80188,
+      "id": "814d1e29709ec20522e58b07f52c9b4976c4ba22da6a135bbd81dffa89db1083",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:09.623Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312771580/rectangle_large_type_2_b2a172a99305f6d67349917a3839782d.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "814d1e29709ec20522e58b07f52c9b4976c4ba22da6a135bbd81dffa89db1083"
+      }
+    },
+    {
+      "sha256": "59783c1b77c29e000b0ff701cab4dec451d3f65787367af9e3054e67597bbed3",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-nagasaki/revisions/59783c1b77c29e000b0ff701cab4dec451d3f65787367af9e3054e67597bbed3.png"
+      },
+      "bytes": 102570,
+      "id": "59783c1b77c29e000b0ff701cab4dec451d3f65787367af9e3054e67597bbed3",
+      "kind": "candidate",
+      "version": "2026-10-02-household-r1",
+      "createdAt": "2026-10-02T03:18:31.186Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "d86d08d70ac13eefe8e0c2aebd58a81a13d6720a16b75dbb996783d29189b562"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+        "reviewedAt": "2026-10-02T05:27:41.112Z"
+      },
+      "provenance": {
+        "renderer": "bold-note-cover",
+        "sourceUrl": "https://storage.stats47.jp/app/stats/education-expenditure-total/values.json",
+        "sourceSha256": "8fff1a0bc37d5de9718095212fd0c25c9122a0f48bacc30d3cf6da912b8c9ab9"
+      }
+    },
+    {
+      "sha256": "1006a7f536d0c8a133a453a5b9eb096d91c985c1c1b835506df16349c944ee2a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-nagasaki/revisions/1006a7f536d0c8a133a453a5b9eb096d91c985c1c1b835506df16349c944ee2a.png"
+      },
+      "bytes": 96156,
+      "id": "1006a7f536d0c8a133a453a5b9eb096d91c985c1c1b835506df16349c944ee2a",
+      "kind": "r2-archive",
+      "version": "legacy-r2-import-2026-10-02",
+      "createdAt": "2026-10-02T03:29:05.408Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Legacy R2 asset preserved; not adopted for note",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "legacy-public-r2",
+        "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-nagasaki/images/cover-1280x670.png",
+        "sourceSha256": "1006a7f536d0c8a133a453a5b9eb096d91c985c1c1b835506df16349c944ee2a"
+      }
+    },
+    {
+      "sha256": "ca5bb457fbfd575e2c0aee5023e26b3e3f0e20658cd7fca111165a8fdbb96165",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-nagasaki/revisions/ca5bb457fbfd575e2c0aee5023e26b3e3f0e20658cd7fca111165a8fdbb96165.png"
+      },
+      "bytes": 1606593,
+      "id": "ca5bb457fbfd575e2c0aee5023e26b3e3f0e20658cd7fca111165a8fdbb96165",
+      "kind": "candidate",
+      "version": "pop-NCP-002-v3-a3cbec40e642",
+      "createdAt": "2026-10-23T09:03:04.867Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "7a725ca36c9e89b83f88d083d3ce770a216083030611a6a7a9f18f83bec0610c"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "長崎県の主域輪郭と長崎市・2024年・二人以上の世帯、バス代と無人のバスを新旧比較。初稿の車内人影を破棄し、修正版の原寸と幅320pxで全文字を確認。",
+        "reviewedAt": "2026-10-23T09:08:29.553Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "7a725ca36c9e89b83f88d083d3ce770a216083030611a6a7a9f18f83bec0610c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-nagasaki/inputs/7a725ca36c9e89b83f88d083d3ce770a216083030611a6a7a9f18f83bec0610c.json"
+          },
+          "bytes": 13159
+        },
+        "production": {
+          "id": "NCI-00086",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "a3cbec40e642c2b73e4c738a039d6ad851acf3161f741814528d9f092e440745"
+        }
+      }
+    }
+  ]
+}

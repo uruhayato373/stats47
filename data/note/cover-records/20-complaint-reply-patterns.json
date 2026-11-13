@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "20-complaint-reply-patterns",
+  "production": {
+    "id": "NCI-00035",
+    "policyId": "NCP-007",
+    "policyVersion": 4,
+    "brief": {
+      "headline": "苦情メールの\n返信案を5パターン",
+      "subline": "下書きを出すプロンプト",
+      "subject": "無文字の封筒を5通重ねて扇形に並べ、ノートPCを添えて大きく描く。実務カテゴリの机上の資料構図。青と明るい黄色の暖かい手描き。画面・紙・道具の表面は無文字。実在UI・製品ロゴ・グラフ・地図は描かない。人物・顔・手・動物は描かない。",
+      "evidence": "https://note.com/stats47/n/n311eeeba660b 本文確認2026-11-04。苦情メールの返信案を5パターン出すプロンプト。最終判断と送信は職員が行う。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "8cd200faaf036e939b205304fef7419d069cad5eac879023aee0cfa6c954ab88",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/20-complaint-reply-patterns/revisions/8cd200faaf036e939b205304fef7419d069cad5eac879023aee0cfa6c954ab88.png"
+      },
+      "bytes": 124100,
+      "id": "8cd200faaf036e939b205304fef7419d069cad5eac879023aee0cfa6c954ab88",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:38.646Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/293006974/rectangle_large_type_2_281129ef9c40e091c0aa945245483fc1.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "8cd200faaf036e939b205304fef7419d069cad5eac879023aee0cfa6c954ab88"
+      }
+    },
+    {
+      "sha256": "08702b453c9c2d6cd54d50ce2856db9c5ff5fbb6fde79c600489906f26456882",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/20-complaint-reply-patterns/revisions/08702b453c9c2d6cd54d50ce2856db9c5ff5fbb6fde79c600489906f26456882.png"
+      },
+      "bytes": 58917,
+      "id": "08702b453c9c2d6cd54d50ce2856db9c5ff5fbb6fde79c600489906f26456882",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:46:13.689Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "1e4ee58fe7a2c279cdf9a652605408fb8a63d24c8cc2c7e13db06adcd95ef179"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出しとシリーズ名・話数・色でシリーズが区別できる",
+        "reviewedAt": "2026-10-11T11:51:27.188Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "1e4ee58fe7a2c279cdf9a652605408fb8a63d24c8cc2c7e13db06adcd95ef179",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/20-complaint-reply-patterns/inputs/1e4ee58fe7a2c279cdf9a652605408fb8a63d24c8cc2c7e13db06adcd95ef179.json"
+          },
+          "bytes": 1076
+        }
+      }
+    },
+    {
+      "sha256": "d37491fac97ed5e43aa52e0474497f08dfdf7152abcc6e13221fe5da32a0bd10",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/20-complaint-reply-patterns/revisions/d37491fac97ed5e43aa52e0474497f08dfdf7152abcc6e13221fe5da32a0bd10.png"
+      },
+      "bytes": 78481,
+      "id": "d37491fac97ed5e43aa52e0474497f08dfdf7152abcc6e13221fe5da32a0bd10",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:56:01.353Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320331714/rectangle_large_type_2_a5d80b80b8658597d27966643c9da5a8.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "d37491fac97ed5e43aa52e0474497f08dfdf7152abcc6e13221fe5da32a0bd10"
+      }
+    },
+    {
+      "sha256": "7c6c825c6665e9be9c13a4440e6e40ebe977e43bf2bc656275576571a246c37b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/20-complaint-reply-patterns/revisions/7c6c825c6665e9be9c13a4440e6e40ebe977e43bf2bc656275576571a246c37b.png"
+      },
+      "bytes": 24184,
+      "id": "7c6c825c6665e9be9c13a4440e6e40ebe977e43bf2bc656275576571a246c37b",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:11:47.663Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "819c6314d25a62ac7b9866ec87f555d550ab9c091f67a1665a01768879ffbe0d"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.006/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:17:45.978Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "819c6314d25a62ac7b9866ec87f555d550ab9c091f67a1665a01768879ffbe0d",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/20-complaint-reply-patterns/inputs/819c6314d25a62ac7b9866ec87f555d550ab9c091f67a1665a01768879ffbe0d.json"
+          },
+          "bytes": 1076
+        }
+      }
+    },
+    {
+      "sha256": "170b339a8f15cb65cdf964716536b1b3f98d580f510fc863fe200fe21a4334a2",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/20-complaint-reply-patterns/revisions/170b339a8f15cb65cdf964716536b1b3f98d580f510fc863fe200fe21a4334a2.png"
+      },
+      "bytes": 1882538,
+      "id": "170b339a8f15cb65cdf964716536b1b3f98d580f510fc863fe200fe21a4334a2",
+      "kind": "candidate",
+      "version": "pop-NCP-007-v4-8cac4d014a38",
+      "createdAt": "2026-11-04T00:42:47.974Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "da76b5d10d9e88bbf15ba881aac90df6155185e5671010e89a36779dff550990"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:43:50.057Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "da76b5d10d9e88bbf15ba881aac90df6155185e5671010e89a36779dff550990",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/20-complaint-reply-patterns/inputs/da76b5d10d9e88bbf15ba881aac90df6155185e5671010e89a36779dff550990.json"
+          },
+          "bytes": 8705
+        },
+        "production": {
+          "id": "NCI-00035",
+          "policyId": "NCP-007",
+          "policyVersion": 4,
+          "planSha256": "8cac4d014a38e6eeeb1c90d29dca08f2b50d3398b9feb3c38628f28ece89d8cd"
+        }
+      }
+    }
+  ]
+}

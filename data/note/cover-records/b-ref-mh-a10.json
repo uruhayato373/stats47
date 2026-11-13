@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-mh-a10",
+  "production": {
+    "id": "NCI-00191",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "長寿の県は\n塩を控えている？",
+      "subline": "平均寿命と食塩・野菜の摂取量",
+      "subject": "食卓の塩入れと、かごに盛った野菜を大きく描く。瓶に文字を入れない。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n6004a486c658 本文確認2026-11-04。平均寿命と食塩・野菜の摂取量の比較。長寿の県が塩を控えているとは限らない。因果を断定しない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "b03f0dd02880553c36459ded85eaaaafaa85901e0c7d3f6f15f0f4b65520849c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-mh-a10/revisions/b03f0dd02880553c36459ded85eaaaafaa85901e0c7d3f6f15f0f4b65520849c.png"
+      },
+      "bytes": 39880,
+      "id": "b03f0dd02880553c36459ded85eaaaafaa85901e0c7d3f6f15f0f4b65520849c",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:06:08.285Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "7ced819e46b4547c0f29e5f0706ad0bf193368c073d0d052b33beeabcebbdeff"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:13:09.057Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "7ced819e46b4547c0f29e5f0706ad0bf193368c073d0d052b33beeabcebbdeff",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-mh-a10/inputs/7ced819e46b4547c0f29e5f0706ad0bf193368c073d0d052b33beeabcebbdeff.json"
+          },
+          "bytes": 1383
+        }
+      }
+    },
+    {
+      "sha256": "bd67ebf920880161d2061c7172825edc409a6fac9a692963625536a72d09d44d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-mh-a10/revisions/bd67ebf920880161d2061c7172825edc409a6fac9a692963625536a72d09d44d.png"
+      },
+      "bytes": 64001,
+      "id": "bd67ebf920880161d2061c7172825edc409a6fac9a692963625536a72d09d44d",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:32.429Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324150683/rectangle_large_type_2_3c62e7b6f7cd56a90899647fb413f265.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "bd67ebf920880161d2061c7172825edc409a6fac9a692963625536a72d09d44d"
+      }
+    },
+    {
+      "sha256": "39736e0f467247901bed3cc40965b425cf2baa77d462a92bb81e3c5a64ffb7a3",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-mh-a10/revisions/39736e0f467247901bed3cc40965b425cf2baa77d462a92bb81e3c5a64ffb7a3.png"
+      },
+      "bytes": 1892257,
+      "id": "39736e0f467247901bed3cc40965b425cf2baa77d462a92bb81e3c5a64ffb7a3",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-7232506d76d7",
+      "createdAt": "2026-11-04T01:40:09.878Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "f166d48066672bef370bd24a84bc4e900e23e597e9d3efa70112400072502b99"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:41:38.153Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "f166d48066672bef370bd24a84bc4e900e23e597e9d3efa70112400072502b99",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-mh-a10/inputs/f166d48066672bef370bd24a84bc4e900e23e597e9d3efa70112400072502b99.json"
+          },
+          "bytes": 8229
+        },
+        "production": {
+          "id": "NCI-00191",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "7232506d76d78b3f8ee3512a79aafedba42b9b6ef49c429e14f419da1351f27e"
+        }
+      }
+    }
+  ]
+}

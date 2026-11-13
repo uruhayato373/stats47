@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "c-kita-kanto-fiscal",
+  "production": {
+    "id": "NCI-00236",
+    "policyId": "NCP-004",
+    "policyVersion": 2,
+    "brief": {
+      "headline": "北関東3県\n財政の強さは？",
+      "subline": "茨城・栃木・群馬を比べる\n2022年度の財政指標",
+      "subject": "紫と明るい黄色。地域の工場群と予算資料を同じ大きさの二つの題材として右側に組み合わせる。低層工場・木々・山のある明るい北関東の街の挿絵。企業のロゴ、ランキング、数値、行政界、札束、人物を描かない。財政力と製造業の関係を連想させる題材として描く。",
+      "evidence": "https://note.com/stats47/n/n56eb35145c32 公開本文を2026-10-14確認。2022年度の茨城県、栃木県、群馬県の財政指標比較。財政力指数、地方税、交付税、地方債等が論点。カバーで製造業が唯一の原因と断定せず、優等生や順位を誇張しない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "1ebe0bfe45ae40fb6b741ce2a7e8fbcc406348fbf457989060ba9cf7a36fdec9",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/c-kita-kanto-fiscal/revisions/1ebe0bfe45ae40fb6b741ce2a7e8fbcc406348fbf457989060ba9cf7a36fdec9.png"
+      },
+      "bytes": 49328,
+      "id": "1ebe0bfe45ae40fb6b741ce2a7e8fbcc406348fbf457989060ba9cf7a36fdec9",
+      "kind": "candidate",
+      "version": "2026-10-12-drafts",
+      "createdAt": "2026-10-12T00:53:19.512Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ab6ef0ae15f6273e3fbd38953a3f9c4f7522e9f5b01dca06e529139bb7d8844a"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出し・記事の事実・図(または値を持たない背景地図)が読める。登録前の確認版とSHA一致",
+        "reviewedAt": "2026-10-12T00:54:29.369Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "ab6ef0ae15f6273e3fbd38953a3f9c4f7522e9f5b01dca06e529139bb7d8844a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/c-kita-kanto-fiscal/inputs/ab6ef0ae15f6273e3fbd38953a3f9c4f7522e9f5b01dca06e529139bb7d8844a.json"
+          },
+          "bytes": 1313
+        }
+      }
+    },
+    {
+      "sha256": "d3737153257b97a082a01034b383975355f5949415087640a9bc9402bb59146c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/c-kita-kanto-fiscal/revisions/d3737153257b97a082a01034b383975355f5949415087640a9bc9402bb59146c.png"
+      },
+      "bytes": 84394,
+      "id": "d3737153257b97a082a01034b383975355f5949415087640a9bc9402bb59146c",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-14T08:41:26.165Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323544005/rectangle_large_type_2_b688e4ce1fc9af913cab01936b64bae9.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "d3737153257b97a082a01034b383975355f5949415087640a9bc9402bb59146c"
+      }
+    },
+    {
+      "sha256": "8d3af3bbb71105f5eedc63aeae9a2ca41cd904f74c23592ca4f89dfc286d3ce5",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/c-kita-kanto-fiscal/revisions/8d3af3bbb71105f5eedc63aeae9a2ca41cd904f74c23592ca4f89dfc286d3ce5.png"
+      },
+      "bytes": 2013651,
+      "id": "8d3af3bbb71105f5eedc63aeae9a2ca41cd904f74c23592ca4f89dfc286d3ce5",
+      "kind": "candidate",
+      "version": "imagegen-pop-v2-next-six-20261014",
+      "createdAt": "2026-10-14T09:00:16.156Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "99af3f60e58daef39e909468c0ea46de5dc9eb92b34bb374d8fc24d53d9fb19e"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "2026-10-14に原寸と幅320px、管理画面の修正前後で確認済み。2026-10-15ユーザーがこの6件の公開反映を指示。",
+        "reviewedAt": "2026-10-15T00:43:58.977Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "99af3f60e58daef39e909468c0ea46de5dc9eb92b34bb374d8fc24d53d9fb19e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/c-kita-kanto-fiscal/inputs/99af3f60e58daef39e909468c0ea46de5dc9eb92b34bb374d8fc24d53d9fb19e.json"
+          },
+          "bytes": 8637
+        },
+        "production": {
+          "id": "NCI-00236",
+          "policyId": "NCP-004",
+          "policyVersion": 2,
+          "planSha256": "8b67dc6ec343d7c89f83898c9288e1e7585be1903c77881e9231853fc118f901"
+        }
+      }
+    }
+  ]
+}

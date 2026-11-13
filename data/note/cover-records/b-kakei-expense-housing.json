@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-kakei-expense-housing",
+  "production": {
+    "id": "NCI-00513",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "家賃の12.7倍は\n家賃の高さではない",
+      "subline": "持ち家の0円が入る平均を読む",
+      "subject": "一軒家とアパートの小さな模型を並べ、手前に玄関の鍵を置く。人物・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。模型や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "本文確認2026-11-05。那覇市年242,241円と津市年19,055円で12.7倍。家計調査は持ち家の世帯を0円として平均に含むため、差の大部分は家賃を払う世帯の割合の差。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "08ddb57b55ca9485c22239b302c2fe2a764fd319d1ee4e646d50cdb4be112943",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-expense-housing/revisions/08ddb57b55ca9485c22239b302c2fe2a764fd319d1ee4e646d50cdb4be112943.png"
+      },
+      "bytes": 1907202,
+      "id": "08ddb57b55ca9485c22239b302c2fe2a764fd319d1ee4e646d50cdb4be112943",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-5f3dfe8d3ca5",
+      "createdAt": "2026-11-04T23:09:06.746Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e5f508f4db0b00413aba72af6f18c7a1b0f728f348be8ee0de3ef3c2198c9194"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸と幅320pxで全文・題材を確認。誤字・追加文字・文字切れ・重なりなし、人物と架空の図なし、本文の問いに一致",
+        "reviewedAt": "2026-11-04T23:09:11.223Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "e5f508f4db0b00413aba72af6f18c7a1b0f728f348be8ee0de3ef3c2198c9194",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-housing/inputs/e5f508f4db0b00413aba72af6f18c7a1b0f728f348be8ee0de3ef3c2198c9194.json"
+          },
+          "bytes": 8593
+        },
+        "production": {
+          "id": "NCI-00513",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "5f3dfe8d3ca51446eb56c0e7882e5de1e7470078828873e422760e5bfb564ff5"
+        }
+      }
+    },
+    {
+      "sha256": "866479c6dce629c1315dc4a846b6129a3b4b5e0103bd1a1b6eff448a374c3843",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-expense-housing/revisions/866479c6dce629c1315dc4a846b6129a3b4b5e0103bd1a1b6eff448a374c3843.png"
+      },
+      "bytes": 465209,
+      "id": "866479c6dce629c1315dc4a846b6129a3b4b5e0103bd1a1b6eff448a374c3843",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-05T01:01:33.561Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/332377796/rectangle_large_type_2_440fee4e6dbc0f72ba2047d09d136704.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "866479c6dce629c1315dc4a846b6129a3b4b5e0103bd1a1b6eff448a374c3843"
+      }
+    }
+  ]
+}

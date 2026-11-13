@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n67729e8be7c4",
+  "production": {
+    "id": "NCI-00430",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "バドミントンをした人\n1位は宮城県",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバー。無人の体育館のバドミントンコートに無地のラケットとシャトルを描く。選手・人・手は描かない。左に太い見出し。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n67729e8be7c4 2026-10-24公開API本文照合。記事題名「【2021年版】バドミントンをした人が多い県は？ 1位は宮城県｜都道府県ランキング」。本文中の 宮城県、2021、10歳以上 を確認。主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "725adad1601dd07182136193fe36034d488b8f9f4ea451b952dc974fdc0b8cb0",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n67729e8be7c4/revisions/725adad1601dd07182136193fe36034d488b8f9f4ea451b952dc974fdc0b8cb0.png"
+      },
+      "bytes": 75274,
+      "id": "725adad1601dd07182136193fe36034d488b8f9f4ea451b952dc974fdc0b8cb0",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:15.182Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312774244/rectangle_large_type_2_a454cfdd7567bed37412a275929dcdb8.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "725adad1601dd07182136193fe36034d488b8f9f4ea451b952dc974fdc0b8cb0"
+      }
+    },
+    {
+      "sha256": "88f1b5e64b773d3e88e2ec97307a3cb677a8608bf1d6fe52dcdc433b85ec0b29",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n67729e8be7c4/revisions/88f1b5e64b773d3e88e2ec97307a3cb677a8608bf1d6fe52dcdc433b85ec0b29.png"
+      },
+      "bytes": 116226,
+      "id": "88f1b5e64b773d3e88e2ec97307a3cb677a8608bf1d6fe52dcdc433b85ec0b29",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:16:00.207Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "9edba423e5e4c74761d3ff1848e9c05f00e16f112498c76c1cd833f75337cf12"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/sports-participation-rate-badminton/values.json",
+        "sourceSha256": "c00905f1de77e7b784f4a02bb23f53d0cb5ed45ab732138b921e6237c6cb8fd1",
+        "input": {
+          "sha256": "9edba423e5e4c74761d3ff1848e9c05f00e16f112498c76c1cd833f75337cf12",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n67729e8be7c4/inputs/9edba423e5e4c74761d3ff1848e9c05f00e16f112498c76c1cd833f75337cf12.json"
+          },
+          "bytes": 6551
+        }
+      }
+    },
+    {
+      "sha256": "6efd72ff14714a973674d1f344d2aa2add45c79fdfb4902f5fccb1d250f0934c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n67729e8be7c4/revisions/6efd72ff14714a973674d1f344d2aa2add45c79fdfb4902f5fccb1d250f0934c.png"
+      },
+      "bytes": 1913659,
+      "id": "6efd72ff14714a973674d1f344d2aa2add45c79fdfb4902f5fccb1d250f0934c",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-ede8d32ca4c2",
+      "createdAt": "2026-10-23T15:07:47.720Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "b995629c2b835453371fb4eee48d7c5569353b8866ce5704914a69f705c76196"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の種目・2021年・10歳以上・首位県と掲載文字を原寸/320px、管理画面の新旧比較で確認。",
+        "reviewedAt": "2026-10-23T15:09:21.641Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "b995629c2b835453371fb4eee48d7c5569353b8866ce5704914a69f705c76196",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n67729e8be7c4/inputs/b995629c2b835453371fb4eee48d7c5569353b8866ce5704914a69f705c76196.json"
+          },
+          "bytes": 8544
+        },
+        "production": {
+          "id": "NCI-00430",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "ede8d32ca4c2c37f1c4ce37b6cfe34d0197b3b62c222b22d286b1547f8678315"
+        }
+      }
+    }
+  ]
+}

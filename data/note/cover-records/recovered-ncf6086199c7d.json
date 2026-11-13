@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-ncf6086199c7d",
+  "production": {
+    "id": "NCI-00466",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "趣味の料理・菓子作り\n1位は東京都",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人のキッチンで無地の泡立て器と焼き菓子を描く。日常の炊事や人物・手は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/ncf6086199c7d 2026-10-23公開API本文照合。記事題名「【2021年版】趣味としての料理・菓子作りをした人が多い県は？ 1位は東京都｜都道府県ランキング」。本文中の「東京都」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "87f351a18aec2ef1c0767a0f13c90f5e7bd4d32c6262cb456620b8b4ee2277b7",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-ncf6086199c7d/revisions/87f351a18aec2ef1c0767a0f13c90f5e7bd4d32c6262cb456620b8b4ee2277b7.png"
+      },
+      "bytes": 41595,
+      "id": "87f351a18aec2ef1c0767a0f13c90f5e7bd4d32c6262cb456620b8b4ee2277b7",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:34.016Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312774917/rectangle_large_type_2_1e605c35cd5d4056dd25376336fbb6f1.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "87f351a18aec2ef1c0767a0f13c90f5e7bd4d32c6262cb456620b8b4ee2277b7"
+      }
+    },
+    {
+      "sha256": "a22f96c700f38f238bdaa8d2e6e3b88427f42b7884d10921ecf3885d3d47765a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-ncf6086199c7d/revisions/a22f96c700f38f238bdaa8d2e6e3b88427f42b7884d10921ecf3885d3d47765a.png"
+      },
+      "bytes": 125447,
+      "id": "a22f96c700f38f238bdaa8d2e6e3b88427f42b7884d10921ecf3885d3d47765a",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:17:38.258Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "26de7728c9120b11dca6479d9d1893e97f18d613f3af2425a7b50ae897d57ae3"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-cooking/values.json",
+        "sourceSha256": "658a3a6be9ed9c933eaf665eac7839a771ed2365e3e5bb76d05fdf67900ac9c3",
+        "input": {
+          "sha256": "26de7728c9120b11dca6479d9d1893e97f18d613f3af2425a7b50ae897d57ae3",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-ncf6086199c7d/inputs/26de7728c9120b11dca6479d9d1893e97f18d613f3af2425a7b50ae897d57ae3.json"
+          },
+          "bytes": 6707
+        }
+      }
+    },
+    {
+      "sha256": "f2a75345f00fd50b815bf10f489613350521567052069510ccc104813cc844bd",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-ncf6086199c7d/revisions/f2a75345f00fd50b815bf10f489613350521567052069510ccc104813cc844bd.png"
+      },
+      "bytes": 1797429,
+      "id": "f2a75345f00fd50b815bf10f489613350521567052069510ccc104813cc844bd",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-1348ce062c7c",
+      "createdAt": "2026-10-23T13:37:43.552Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "8726f2ee40650d5591e4f207705a5f1514d8e99a2c23d70bfd50723a8c54808a"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T13:39:57.942Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "8726f2ee40650d5591e4f207705a5f1514d8e99a2c23d70bfd50723a8c54808a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-ncf6086199c7d/inputs/8726f2ee40650d5591e4f207705a5f1514d8e99a2c23d70bfd50723a8c54808a.json"
+          },
+          "bytes": 8800
+        },
+        "production": {
+          "id": "NCI-00466",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "1348ce062c7cd1fe2e293f429852b82b44a4540b8a8e5ec9152cce77a10fb96a"
+        }
+      }
+    }
+  ]
+}

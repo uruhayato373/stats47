@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-dev-a40",
+  "production": {
+    "id": "NCI-00160",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "車で通勤と読書\n47都道府県を比較",
+      "subline": "2つの暮らしの指標",
+      "subject": "小さな車の模型と、無文字の文庫本を重ねて大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n0afe52099b5e 本文確認2026-11-04。自家用車で通勤・通学する人は愛知県が最多、読書する人の割合は東京都が1位。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "f42f7a88cf53fe7839f59eaf3e9f83f231062121d29ae498adf558d97bc20868",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a40/revisions/f42f7a88cf53fe7839f59eaf3e9f83f231062121d29ae498adf558d97bc20868.png"
+      },
+      "bytes": 36061,
+      "id": "f42f7a88cf53fe7839f59eaf3e9f83f231062121d29ae498adf558d97bc20868",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:07:22.641Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "306c6e25bb7eb9e0879e7eb6554389f5667583b6b7a50c8dcbce36255a3cae3d"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:25.968Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "306c6e25bb7eb9e0879e7eb6554389f5667583b6b7a50c8dcbce36255a3cae3d",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a40/inputs/306c6e25bb7eb9e0879e7eb6554389f5667583b6b7a50c8dcbce36255a3cae3d.json"
+          },
+          "bytes": 1304
+        }
+      }
+    },
+    {
+      "sha256": "3a4e22e401f7a5dfe6cdb7cec567ac9e5c0a668bff6b28c7f6c485e3249b1e87",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a40/revisions/3a4e22e401f7a5dfe6cdb7cec567ac9e5c0a668bff6b28c7f6c485e3249b1e87.png"
+      },
+      "bytes": 45966,
+      "id": "3a4e22e401f7a5dfe6cdb7cec567ac9e5c0a668bff6b28c7f6c485e3249b1e87",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:42.862Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324068790/rectangle_large_type_2_72b8e12c66eec42b7950371e45c26b51.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "3a4e22e401f7a5dfe6cdb7cec567ac9e5c0a668bff6b28c7f6c485e3249b1e87"
+      }
+    },
+    {
+      "sha256": "de218a5ae6ddfa1027c4cd4db47dad6fe9edfe1fdb4e756597ca3954483727e3",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a40/revisions/de218a5ae6ddfa1027c4cd4db47dad6fe9edfe1fdb4e756597ca3954483727e3.png"
+      },
+      "bytes": 1915956,
+      "id": "de218a5ae6ddfa1027c4cd4db47dad6fe9edfe1fdb4e756597ca3954483727e3",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-dfb69a81845f",
+      "createdAt": "2026-11-04T00:56:42.068Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "75b43f70d68d4b63a332d939e3eaca5e513e8abeefabab16c33ba7ed4002b3c1"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:57:24.204Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "75b43f70d68d4b63a332d939e3eaca5e513e8abeefabab16c33ba7ed4002b3c1",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a40/inputs/75b43f70d68d4b63a332d939e3eaca5e513e8abeefabab16c33ba7ed4002b3c1.json"
+          },
+          "bytes": 8114
+        },
+        "production": {
+          "id": "NCI-00160",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "dfb69a81845ff273fc1c21d23a4e60182650171936d607d2cbc140c02844f12c"
+        }
+      }
+    }
+  ]
+}

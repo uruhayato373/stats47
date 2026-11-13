@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-pharmacy-density",
+  "production": {
+    "id": "NCI-00141",
+    "policyId": "NCP-005",
+    "policyVersion": 2,
+    "brief": {
+      "headline": "佐賀県の薬局\nなぜ多い？",
+      "subline": "人口10万人あたりで比較\n2023年のデータ",
+      "subject": "緑とクリームと黄色。右側に大きな親しみやすい町の薬局の建物と、薬の袋を描く。薬局は緑の屋根と白い外壁、植木がある明るい小さな街の挿絵。看板、袋、容器は完全に無文字とし、薬局名や薬名や十字の記号やロゴを描かない。人物、処方内容、用法用量、グラフ、県境地図は描かない。",
+      "evidence": "https://note.com/stats47/n/n4056bcc5457e 2026-10-15公開本文確認。2023年の佐賀県の薬局数を人口10万人あたりで比較する記事。面積あたりや薬局実数の最多を主張しない。カバーで薬の効果・医療の質・特定の因果を断定しない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "cfd82a6190e7e9cf545f21cba743effdaf4bb5298c5af37056c56bb9e05a67f5",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-pharmacy-density/revisions/cfd82a6190e7e9cf545f21cba743effdaf4bb5298c5af37056c56bb9e05a67f5.png"
+      },
+      "bytes": 45885,
+      "id": "cfd82a6190e7e9cf545f21cba743effdaf4bb5298c5af37056c56bb9e05a67f5",
+      "kind": "candidate",
+      "version": "2026-10-12-drafts",
+      "createdAt": "2026-10-12T00:53:06.819Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "5970cd9e04bbcc5fa12b6f813259e369d1fafd67ce1ddde95330f8a111c06d76"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出し・記事の事実・図(または値を持たない背景地図)が読める。登録前の確認版とSHA一致",
+        "reviewedAt": "2026-10-12T00:54:23.706Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "5970cd9e04bbcc5fa12b6f813259e369d1fafd67ce1ddde95330f8a111c06d76",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-pharmacy-density/inputs/5970cd9e04bbcc5fa12b6f813259e369d1fafd67ce1ddde95330f8a111c06d76.json"
+          },
+          "bytes": 1235
+        }
+      }
+    },
+    {
+      "sha256": "1ca6a8aad76e0a874d42a2e7edee96a006f37d5ec4169d07d1cc86b918db2313",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-pharmacy-density/revisions/1ca6a8aad76e0a874d42a2e7edee96a006f37d5ec4169d07d1cc86b918db2313.png"
+      },
+      "bytes": 68943,
+      "id": "1ca6a8aad76e0a874d42a2e7edee96a006f37d5ec4169d07d1cc86b918db2313",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T01:14:33.212Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323540147/rectangle_large_type_2_0959c4c08b2ead69f304d2a3fad53f5d.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "1ca6a8aad76e0a874d42a2e7edee96a006f37d5ec4169d07d1cc86b918db2313"
+      }
+    },
+    {
+      "sha256": "c407fe1592da102bd282fcf2ed1c42f028905def665adf90932d7b5081a9796a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-pharmacy-density/revisions/c407fe1592da102bd282fcf2ed1c42f028905def665adf90932d7b5081a9796a.png"
+      },
+      "bytes": 2039611,
+      "id": "c407fe1592da102bd282fcf2ed1c42f028905def665adf90932d7b5081a9796a",
+      "kind": "candidate",
+      "version": "imagegen-pop-v2-third-six-20261015",
+      "createdAt": "2026-10-15T01:24:46.843Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "caffcff56a7b1b355f2cb19bff17956d7f6ab6b73c4104480942b411bacafd43"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸・320pxで掲載全文と補足文の可読性、切れ・重なり・追加文字を確認済み。管理画面の修正前後比較を提示し、2026-10-15にユーザーがこの6件の反映を指示。",
+        "reviewedAt": "2026-10-15T01:44:53.874Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "caffcff56a7b1b355f2cb19bff17956d7f6ab6b73c4104480942b411bacafd43",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-pharmacy-density/inputs/caffcff56a7b1b355f2cb19bff17956d7f6ab6b73c4104480942b411bacafd43.json"
+          },
+          "bytes": 8108
+        },
+        "production": {
+          "id": "NCI-00141",
+          "policyId": "NCP-005",
+          "policyVersion": 2,
+          "planSha256": "6869135c4db7b6a87e32fe5270ad8eb3c150a47f8879684a1a8dc867f6a8c66f"
+        }
+      }
+    }
+  ]
+}

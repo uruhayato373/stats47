@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n4e1e67f70686",
+  "production": {
+    "id": "NCI-00415",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "器具トレーニング\n東京都と神奈川県",
+      "subline": "2021年・10歳以上／両県15.0％",
+      "subject": "横長1280×670相当の完成カバー。明るい青とオレンジ。右側にダンベルとトレーニングマシンの無文字シルエットを配置。特定の県の輪郭や順位表彰台は描かない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n4e1e67f70686 2026-10-24公開API本文照合。記事題名「【2021年版】器具を使ったトレーニングをした人が多い県は？ 1位は神奈川県｜都道府県ランキング」。本文中の 東京都と神奈川県、15.0％、10歳以上、1位タイ を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。"
+    },
+    "titleCorrection": {
+      "generatedTitle": "【2021年版】器具を使ったトレーニングをした人が多い県は？ 1位は神奈川県｜都道府県ランキング",
+      "publishedTitle": "【2021年版】器具を使ったトレーニングをした人が多い県は？ 1位は東京都・神奈川県（同率）｜都道府県ランキング",
+      "reason": "2021年10歳以上の本文と指標値で両県15.0％の同率首位を確認し公開題名を是正。画像の掲載文言と生成済み版は維持。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "9c35f0b90dd9f31b250ae123d0e6e5eac2e9cb56320e03a61e194cc9d89d8882",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n4e1e67f70686/revisions/9c35f0b90dd9f31b250ae123d0e6e5eac2e9cb56320e03a61e194cc9d89d8882.png"
+      },
+      "bytes": 54331,
+      "id": "9c35f0b90dd9f31b250ae123d0e6e5eac2e9cb56320e03a61e194cc9d89d8882",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:06.700Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312773998/rectangle_large_type_2_8b153c9a60db76a3f5baaeca58b8118c.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "9c35f0b90dd9f31b250ae123d0e6e5eac2e9cb56320e03a61e194cc9d89d8882"
+      }
+    },
+    {
+      "sha256": "f876b4209bdd2eeb1f033b405f7c6eed2868a0bc256a25e430973a72fc8b4a08",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n4e1e67f70686/revisions/f876b4209bdd2eeb1f033b405f7c6eed2868a0bc256a25e430973a72fc8b4a08.png"
+      },
+      "bytes": 125430,
+      "id": "f876b4209bdd2eeb1f033b405f7c6eed2868a0bc256a25e430973a72fc8b4a08",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:15:12.634Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "cbf1380ebcf5b9172c70c359f9211f0600289556c9f81333deb8b96ad04bee4d"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/sports-participation-rate-gym-training/values.json",
+        "sourceSha256": "22fb64cc4aa0590e86030d4498ab810642967d4098ba102289bd9f4568aa08bc",
+        "input": {
+          "sha256": "cbf1380ebcf5b9172c70c359f9211f0600289556c9f81333deb8b96ad04bee4d",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n4e1e67f70686/inputs/cbf1380ebcf5b9172c70c359f9211f0600289556c9f81333deb8b96ad04bee4d.json"
+          },
+          "bytes": 6759
+        }
+      }
+    },
+    {
+      "sha256": "a4a037d042f13d4cf7a89d0df387db020b07fdb35b77b91adee07dab9176aec2",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n4e1e67f70686/revisions/a4a037d042f13d4cf7a89d0df387db020b07fdb35b77b91adee07dab9176aec2.png"
+      },
+      "bytes": 1800416,
+      "id": "a4a037d042f13d4cf7a89d0df387db020b07fdb35b77b91adee07dab9176aec2",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-6d0d1b56b5ad",
+      "createdAt": "2026-10-23T18:39:53.668Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "b431ab18f2c94f94dc0d22236b243e66d629276cd0784dfeff8dd5213bf79945"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の主題・対象年・集計範囲・比較県と掲載文字を照合し、原寸/320pxを目視。管理画面で公開旧版と新候補を比較。",
+        "reviewedAt": "2026-10-23T18:40:44.836Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "b431ab18f2c94f94dc0d22236b243e66d629276cd0784dfeff8dd5213bf79945",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n4e1e67f70686/inputs/b431ab18f2c94f94dc0d22236b243e66d629276cd0784dfeff8dd5213bf79945.json"
+          },
+          "bytes": 9072
+        },
+        "production": {
+          "id": "NCI-00415",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "6d0d1b56b5ad0a3cd428d169f4ae181e63d0369099a7f8dd4e4d7b6b566642ac"
+        }
+      }
+    }
+  ]
+}

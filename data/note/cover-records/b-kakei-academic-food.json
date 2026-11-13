@@ -1,0 +1,260 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-kakei-academic-food",
+  "production": {
+    "id": "NCI-00132",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "食事と学力\n比べていいの？",
+      "subline": "調査対象と年を確かめる\n上位だけで判断しない",
+      "subject": "緑とクリーム、明るい黄色。右側に実物らしいほうれんそうのひと束と白紙の学習ノートを一点ずつ、並列の静物として描く。食べ物の顔や手足は無し。二つを矢印で結ばず、食べると賢くなる演出、成績表、得点、図表は描かない。人物・顔・人の手・動物・キャラクター・マスコット・擬人化は一切描かない。地図、架空の統計グラフ、数式、表彰台、順位図、製品ロゴ、指定外の文言を描かない。紙面・タグ・ラベル・器具の目盛りは完全な無文字。左側の見出しと補足2行を、幅320pxでも読める太さと大きさにし、四辺の余白を守る。",
+      "evidence": "https://note.com/stats47/n/n78ffa2c7da3b 2026-10-15公開本文確認。公開本文は2024年の家計調査（県庁所在市・二人以上世帯のほうれんそう購入量）と2025年度の全国学力・学習状況調査を照合。調査対象と年が異なり、食事と学力の因果は検証していないと明記。記事の確認手順を表すコピーとし、健康・学力向上の効果を示唆しない。 人物・キャラクターは使わない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "787c47fbd1dd0d0922cf29d6218c5281d4d7465df0a61057c48b72a377990b6a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-academic-food/revisions/787c47fbd1dd0d0922cf29d6218c5281d4d7465df0a61057c48b72a377990b6a.png"
+      },
+      "bytes": 45195,
+      "id": "787c47fbd1dd0d0922cf29d6218c5281d4d7465df0a61057c48b72a377990b6a",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:21.736Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312772226/rectangle_large_type_2_6a912bea608907b56978bbe81db19660.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "787c47fbd1dd0d0922cf29d6218c5281d4d7465df0a61057c48b72a377990b6a"
+      }
+    },
+    {
+      "sha256": "075c09ec1bc3efa8de1bd2a429e252e7e24ad7502374cc5eca032d739f714bb3",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-academic-food/revisions/075c09ec1bc3efa8de1bd2a429e252e7e24ad7502374cc5eca032d739f714bb3.png"
+      },
+      "bytes": 74063,
+      "id": "075c09ec1bc3efa8de1bd2a429e252e7e24ad7502374cc5eca032d739f714bb3",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:44:33.164Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "4188fac3143f9ec82143ce3f721150a32c7525fc3ac538154ffa2e8741e2683f"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で問いと記事固有の図(公開R2の記事画像)が確認できる",
+        "reviewedAt": "2026-10-11T11:50:47.120Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "4188fac3143f9ec82143ce3f721150a32c7525fc3ac538154ffa2e8741e2683f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-academic-food/inputs/4188fac3143f9ec82143ce3f721150a32c7525fc3ac538154ffa2e8741e2683f.json"
+          },
+          "bytes": 1359
+        }
+      }
+    },
+    {
+      "sha256": "bbac0b58097daa6d7cfb8ecb1eb18f088e7f83ae3ba564bf02d57fc7d5380ff3",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-academic-food/revisions/bbac0b58097daa6d7cfb8ecb1eb18f088e7f83ae3ba564bf02d57fc7d5380ff3.png"
+      },
+      "bytes": 59772,
+      "id": "bbac0b58097daa6d7cfb8ecb1eb18f088e7f83ae3ba564bf02d57fc7d5380ff3",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:55:48.846Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320302085/rectangle_large_type_2_2e6c058733e8c110c1f5cba25795cdfa.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "bbac0b58097daa6d7cfb8ecb1eb18f088e7f83ae3ba564bf02d57fc7d5380ff3"
+      }
+    },
+    {
+      "sha256": "d08afaf16157dcd78963fef05ad84ece5472ad9eeaa09cad1c7bb7f275a3b783",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-academic-food/revisions/d08afaf16157dcd78963fef05ad84ece5472ad9eeaa09cad1c7bb7f275a3b783.png"
+      },
+      "bytes": 30961,
+      "id": "d08afaf16157dcd78963fef05ad84ece5472ad9eeaa09cad1c7bb7f275a3b783",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:10:21.287Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "b77f3aaf4d32437c88c11325e4c6389c4d1a72e5744eab2902e806e8cb4e5931"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.020/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:17:19.913Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "b77f3aaf4d32437c88c11325e4c6389c4d1a72e5744eab2902e806e8cb4e5931",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-academic-food/inputs/b77f3aaf4d32437c88c11325e4c6389c4d1a72e5744eab2902e806e8cb4e5931.json"
+          },
+          "bytes": 1359
+        }
+      }
+    },
+    {
+      "sha256": "11e0dfff7f9c2ec914a9c6c7b176a2f1268efac952b7e57d8986e2b9937137f8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-academic-food/revisions/11e0dfff7f9c2ec914a9c6c7b176a2f1268efac952b7e57d8986e2b9937137f8.png"
+      },
+      "bytes": 83569,
+      "id": "11e0dfff7f9c2ec914a9c6c7b176a2f1268efac952b7e57d8986e2b9937137f8",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T05:01:19.819Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323276778/rectangle_large_type_2_f6806505988bb69f435c257556755d68.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "11e0dfff7f9c2ec914a9c6c7b176a2f1268efac952b7e57d8986e2b9937137f8"
+      }
+    },
+    {
+      "sha256": "0ab21530050dde540cb56e7ddc27db7bff3748b60a34a9c62079be33bf13f006",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-academic-food/revisions/0ab21530050dde540cb56e7ddc27db7bff3748b60a34a9c62079be33bf13f006.png"
+      },
+      "bytes": 1963055,
+      "id": "0ab21530050dde540cb56e7ddc27db7bff3748b60a34a9c62079be33bf13f006",
+      "kind": "candidate",
+      "version": "imagegen-no-character-next10-02-20261015",
+      "createdAt": "2026-10-15T05:09:51.762Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "65ea60c5299500c4b3fc1b1b51caab900b4db844ed9fda1ac672319d9b393473"
+      },
+      "review": {
+        "status": "pending",
+        "reason": null,
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "65ea60c5299500c4b3fc1b1b51caab900b4db844ed9fda1ac672319d9b393473",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-academic-food/inputs/65ea60c5299500c4b3fc1b1b51caab900b4db844ed9fda1ac672319d9b393473.json"
+          },
+          "bytes": 9175
+        },
+        "production": {
+          "id": "NCI-00132",
+          "policyId": "NCP-005",
+          "policyVersion": 2,
+          "planSha256": "a41da006829aabaeb98a9a540d180558c19253e969be02562a9815c0fdff9fee"
+        }
+      }
+    },
+    {
+      "sha256": "c85c41e806ea5973b9c6f16968c7dc02f66fc48c5a515393023318d4bf93d592",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-academic-food/revisions/c85c41e806ea5973b9c6f16968c7dc02f66fc48c5a515393023318d4bf93d592.png"
+      },
+      "bytes": 1819234,
+      "id": "c85c41e806ea5973b9c6f16968c7dc02f66fc48c5a515393023318d4bf93d592",
+      "kind": "candidate",
+      "version": "imagegen-category-contract-v1-20261015",
+      "createdAt": "2026-10-15T05:44:57.229Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "c3b5db447b246ded977cc9c01dde4f02f378d911c3fb1bf66fc1491faaa88e42"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "NCI-00132: 原寸/320pxの文字・補足・人物なし・題材を個別確認済み。家計は検証済み県主域参照と対象市・2024年・二人以上の世帯を照合。2026-10-15ユーザーが今回10件の反映を指示。",
+        "reviewedAt": "2026-10-15T05:55:07.329Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "c3b5db447b246ded977cc9c01dde4f02f378d911c3fb1bf66fc1491faaa88e42",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-academic-food/inputs/c3b5db447b246ded977cc9c01dde4f02f378d911c3fb1bf66fc1491faaa88e42.json"
+          },
+          "bytes": 10199
+        },
+        "production": {
+          "id": "NCI-00132",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "9c977a12338053b39b37fc28ffd788084a5d0ad2e1aaca869789ab23fe447eb5"
+        }
+      }
+    }
+  ]
+}

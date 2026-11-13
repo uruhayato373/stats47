@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n0b7373c9648a",
+  "production": {
+    "id": "NCI-00384",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "サッカーをした人\n1位は愛知県",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人のサッカー場と無文字のサッカーボールを描く。選手・人は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n0b7373c9648a 2026-10-23公開API本文照合。記事題名「【2021年版】サッカーをした人が多い県は？ 1位は愛知県｜都道府県ランキング」。本文中の「愛知県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "362b7fa4211fde39a7bf648136d33c7ba228af7e6e21479f2bdf03e2f96de2a3",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n0b7373c9648a/revisions/362b7fa4211fde39a7bf648136d33c7ba228af7e6e21479f2bdf03e2f96de2a3.png"
+      },
+      "bytes": 48124,
+      "id": "362b7fa4211fde39a7bf648136d33c7ba228af7e6e21479f2bdf03e2f96de2a3",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:48.436Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312773597/rectangle_large_type_2_fe9f47a31a8998e9327aace14682114f.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "362b7fa4211fde39a7bf648136d33c7ba228af7e6e21479f2bdf03e2f96de2a3"
+      }
+    },
+    {
+      "sha256": "9ed447223ef6890fdd547dc65ff8a2c6648148ad6f43ffe3eed8ceebe9430f6a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n0b7373c9648a/revisions/9ed447223ef6890fdd547dc65ff8a2c6648148ad6f43ffe3eed8ceebe9430f6a.png"
+      },
+      "bytes": 114745,
+      "id": "9ed447223ef6890fdd547dc65ff8a2c6648148ad6f43ffe3eed8ceebe9430f6a",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:14:13.069Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "209f6302a74ff0c38d48939735852b3dcdc33b17b3f5f54f24f4b5ed296ad1ee"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.840Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/sports-participation-rate-soccer/values.json",
+        "sourceSha256": "1713ddac0157f48e813eb09e1caa56c02ec54cab128cb3c598a06edfcb18046b",
+        "input": {
+          "sha256": "209f6302a74ff0c38d48939735852b3dcdc33b17b3f5f54f24f4b5ed296ad1ee",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n0b7373c9648a/inputs/209f6302a74ff0c38d48939735852b3dcdc33b17b3f5f54f24f4b5ed296ad1ee.json"
+          },
+          "bytes": 6508
+        }
+      }
+    },
+    {
+      "sha256": "31b5424de7a042be66673017cd3ec9ad00e1d55270e350c4fd92713f5a8bae27",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n0b7373c9648a/revisions/31b5424de7a042be66673017cd3ec9ad00e1d55270e350c4fd92713f5a8bae27.png"
+      },
+      "bytes": 1804424,
+      "id": "31b5424de7a042be66673017cd3ec9ad00e1d55270e350c4fd92713f5a8bae27",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-37ef97418de7",
+      "createdAt": "2026-10-23T14:07:53.571Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "82fb94ed5197622d25a836b84de9bd28890aa926d3d1f17ca6574381450b1dfa"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00436は2001年・15歳以上、NCI-00450は山形県と長野県の同率首位。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T14:09:42.676Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "82fb94ed5197622d25a836b84de9bd28890aa926d3d1f17ca6574381450b1dfa",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n0b7373c9648a/inputs/82fb94ed5197622d25a836b84de9bd28890aa926d3d1f17ca6574381450b1dfa.json"
+          },
+          "bytes": 8716
+        },
+        "production": {
+          "id": "NCI-00384",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "37ef97418de764008291163e71693ddde8ebb7d94690bf2bbf74b0dac6fb2cfe"
+        }
+      }
+    }
+  ]
+}

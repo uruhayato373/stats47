@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n04c2737daf2c",
+  "production": {
+    "id": "NCI-00380",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "ヨガをした人\n多い県は？",
+      "subline": "1位は東京都\n2021年・10歳以上",
+      "subject": "明るい水色と黄色、濃紺の大きな文字を使う温かい手描きのカバー。右側に無地のヨガマットを1点だけ大きく描く。マットは少し巻いた状態で、端が床に広がりヨガの題材と分かるようにする。左側に問いを大きく2行、下に補足を太い帯で2行。人物・顔・手・動物・キャラクター・マスコット・擬人化、架空の地図・ランキング図・棒グラフ・表彰台・メダル、指定外の文字・数字・ロゴを描かない。",
+      "evidence": "https://storage.stats47.jp/note/stats47-note/n04c2737daf2c/draft.md の公開本文を2026-10-23に確認。総務省「社会生活基本調査」の2021年、過去1年間にヨガを行った10歳以上の人の割合。本文は1位東京都8.4％、47位青森県2.7％と記載。カバーには根拠のない原因説明やスタジオ利用の断定を載せず、対象年・年齢・1位だけを示す。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "7835bb1b9f0528763f372c40d5eece947b159fa38d4beec21ad0bd8a74f0b3e4",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n04c2737daf2c/revisions/7835bb1b9f0528763f372c40d5eece947b159fa38d4beec21ad0bd8a74f0b3e4.png"
+      },
+      "bytes": 49911,
+      "id": "7835bb1b9f0528763f372c40d5eece947b159fa38d4beec21ad0bd8a74f0b3e4",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:46.133Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312773551/rectangle_large_type_2_833ca16bd06ef623589556f1f95a43f3.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "7835bb1b9f0528763f372c40d5eece947b159fa38d4beec21ad0bd8a74f0b3e4"
+      }
+    },
+    {
+      "sha256": "3fe006d155d3c465276d76e082736b5b0c84ef705dc51943ec8a7bf1baa8d1c8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n04c2737daf2c/revisions/3fe006d155d3c465276d76e082736b5b0c84ef705dc51943ec8a7bf1baa8d1c8.png"
+      },
+      "bytes": 110397,
+      "id": "3fe006d155d3c465276d76e082736b5b0c84ef705dc51943ec8a7bf1baa8d1c8",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:14:00.507Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "0652995e820dc01c43f88f3e357fce0acf8b09981dafa1b2e2ab6eccea3fc00b"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.840Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/sports-participation-rate-yoga/values.json",
+        "sourceSha256": "0a35e8723e70146f9876cfc24eb732b2ac54e6e2c76302dca6077e0cf69d26f2",
+        "input": {
+          "sha256": "0652995e820dc01c43f88f3e357fce0acf8b09981dafa1b2e2ab6eccea3fc00b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n04c2737daf2c/inputs/0652995e820dc01c43f88f3e357fce0acf8b09981dafa1b2e2ab6eccea3fc00b.json"
+          },
+          "bytes": 6469
+        }
+      }
+    },
+    {
+      "sha256": "b46f7d7fdf53cd63f814e37665b09732d82143ab66f6d3ccc0f996dfb0cca770",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n04c2737daf2c/revisions/b46f7d7fdf53cd63f814e37665b09732d82143ab66f6d3ccc0f996dfb0cca770.png"
+      },
+      "bytes": 1762415,
+      "id": "b46f7d7fdf53cd63f814e37665b09732d82143ab66f6d3ccc0f996dfb0cca770",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-be5e7ba3f997",
+      "createdAt": "2026-10-23T04:02:05.155Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "94a218dc6d8844d4ae4e37c541a348c540b989412b79dfd94886a3d1975d401d"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸と幅320pxで6行の日本語、2021年・10歳以上、1位東京都を照合。人物なし、ヨガマットが主役で、本文の対象範囲と一致。",
+        "reviewedAt": "2026-10-23T04:02:25.524Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "94a218dc6d8844d4ae4e37c541a348c540b989412b79dfd94886a3d1975d401d",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n04c2737daf2c/inputs/94a218dc6d8844d4ae4e37c541a348c540b989412b79dfd94886a3d1975d401d.json"
+          },
+          "bytes": 8823
+        },
+        "production": {
+          "id": "NCI-00380",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "be5e7ba3f9978b9c26c34640a4c6f7b8ab081833efc5562ff8b41b9ee46624c2"
+        }
+      }
+    }
+  ]
+}

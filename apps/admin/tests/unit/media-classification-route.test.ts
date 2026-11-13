@@ -14,6 +14,7 @@ import {
   imageLibrary,
   readQuality,
 } from '../../../../.claude/scripts/media/lib/workspace.mjs';
+import { COVER_RECORDS_DIR } from '../../../../.claude/scripts/note/lib/cover-assets.mjs';
 
 describe('image classification route uses the shared ledger', () => {
   beforeEach(() => {
@@ -34,6 +35,8 @@ describe('image classification route uses the shared ledger', () => {
       });
       fs.copyFileSync(path.join(ROOT, rel), path.join(fixture.root, rel));
     }
+    // カバーの台帳は正本 (cover-assets.json) と記事ごとの記録に分かれている。両方そろえて写す
+    fs.cpSync(path.join(ROOT, COVER_RECORDS_DIR), path.join(fixture.root, COVER_RECORDS_DIR), { recursive: true });
     fs.writeFileSync(
       path.join(fixture.root, FILES.quality),
       JSON.stringify({ schemaVersion: 1, reviews: {}, images: {} })

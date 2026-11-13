@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-prc-a42",
+  "production": {
+    "id": "NCI-00224",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "お菓子への支出\n1位は山形市",
+      "subline": "47市の年間支出を比較",
+      "subject": "せんべい、まんじゅう、クッキーを無地の皿に盛って大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n9fea483acaf5 本文確認2026-11-04。菓子類の年間支出は山形市が最多。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "5cb09722a52f322e748847ee425ce9784b23e491a111a367b9cfc7332d089be2",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a42/revisions/5cb09722a52f322e748847ee425ce9784b23e491a111a367b9cfc7332d089be2.png"
+      },
+      "bytes": 38981,
+      "id": "5cb09722a52f322e748847ee425ce9784b23e491a111a367b9cfc7332d089be2",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:09:46.406Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "f2b81a9c79d330da4d321380eacdfeebb9319f2a52dae179cef75d8139d770d9"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:13:55.707Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "f2b81a9c79d330da4d321380eacdfeebb9319f2a52dae179cef75d8139d770d9",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a42/inputs/f2b81a9c79d330da4d321380eacdfeebb9319f2a52dae179cef75d8139d770d9.json"
+          },
+          "bytes": 1322
+        }
+      }
+    },
+    {
+      "sha256": "9defb2862ccd39845922394b20dfbdcd5c307270128cde312f8f1cda68e6b310",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a42/revisions/9defb2862ccd39845922394b20dfbdcd5c307270128cde312f8f1cda68e6b310.png"
+      },
+      "bytes": 101630,
+      "id": "9defb2862ccd39845922394b20dfbdcd5c307270128cde312f8f1cda68e6b310",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:22:09.541Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324186028/rectangle_large_type_2_a4ba30df4c3098b8be33c1158d9ea79c.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "9defb2862ccd39845922394b20dfbdcd5c307270128cde312f8f1cda68e6b310"
+      }
+    },
+    {
+      "sha256": "b1e17927eef331da7fdc20c23a42ffa8a32612162de41dc6d1b035fd045a08d8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a42/revisions/b1e17927eef331da7fdc20c23a42ffa8a32612162de41dc6d1b035fd045a08d8.png"
+      },
+      "bytes": 1981280,
+      "id": "b1e17927eef331da7fdc20c23a42ffa8a32612162de41dc6d1b035fd045a08d8",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-2983f763e14f",
+      "createdAt": "2026-11-04T02:20:49.658Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "6e1beb2be9316c117b0c9692b0f39e9814a57b2d9340e35095c38c02cff2c0bb"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T02:23:41.734Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "6e1beb2be9316c117b0c9692b0f39e9814a57b2d9340e35095c38c02cff2c0bb",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a42/inputs/6e1beb2be9316c117b0c9692b0f39e9814a57b2d9340e35095c38c02cff2c0bb.json"
+          },
+          "bytes": 8052
+        },
+        "production": {
+          "id": "NCI-00224",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "2983f763e14f09d67ef3e46c32c856f782972372015b2a2ecc9c2eb4ade64269"
+        }
+      }
+    }
+  ]
+}

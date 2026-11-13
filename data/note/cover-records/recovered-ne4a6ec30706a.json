@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-ne4a6ec30706a",
+  "production": {
+    "id": "NCI-00475",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "マンガを読んだ人\n1位は東京都",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無文字・無絵柄のマンガ本を開いた状態で描く。ページ内のキャラクターや台詞は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/ne4a6ec30706a 2026-10-23公開API本文照合。記事題名「【2021年版】マンガを読んだ人が多い県は？ 1位は東京都｜都道府県ランキング」。本文中の「東京都」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "48759c9c26f23fed332c0e5094a1659e22936501d17f52b90926ffc5cb587b97",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-ne4a6ec30706a/revisions/48759c9c26f23fed332c0e5094a1659e22936501d17f52b90926ffc5cb587b97.png"
+      },
+      "bytes": 88956,
+      "id": "48759c9c26f23fed332c0e5094a1659e22936501d17f52b90926ffc5cb587b97",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:39.944Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312775016/rectangle_large_type_2_50317cf0eddeadcd70bebcb4ec49dd01.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "48759c9c26f23fed332c0e5094a1659e22936501d17f52b90926ffc5cb587b97"
+      }
+    },
+    {
+      "sha256": "db8ff48e121bdee654ee5230ffe385905863ac2fd71c14a48bb478152a06a9da",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-ne4a6ec30706a/revisions/db8ff48e121bdee654ee5230ffe385905863ac2fd71c14a48bb478152a06a9da.png"
+      },
+      "bytes": 114217,
+      "id": "db8ff48e121bdee654ee5230ffe385905863ac2fd71c14a48bb478152a06a9da",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:17:51.778Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "14b4102c9d2b120674059679452758e1cd474f727054fc4e534dba2041b44b2f"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-manga/values.json",
+        "sourceSha256": "7961876ac63a851f4f36e45f807e97535e4eea8c6a81df0c98981c94b99ea526",
+        "input": {
+          "sha256": "14b4102c9d2b120674059679452758e1cd474f727054fc4e534dba2041b44b2f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-ne4a6ec30706a/inputs/14b4102c9d2b120674059679452758e1cd474f727054fc4e534dba2041b44b2f.json"
+          },
+          "bytes": 6559
+        }
+      }
+    },
+    {
+      "sha256": "287f518b0e1441b8db0686d4c16819254cb68dc4ad2428d76e787086db0fd941",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-ne4a6ec30706a/revisions/287f518b0e1441b8db0686d4c16819254cb68dc4ad2428d76e787086db0fd941.png"
+      },
+      "bytes": 1569044,
+      "id": "287f518b0e1441b8db0686d4c16819254cb68dc4ad2428d76e787086db0fd941",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-ea2106fce172",
+      "createdAt": "2026-10-23T12:37:29.252Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "51169312137703725e1f762b00eedf795fe7292b723f9042f63a0630799c9bbc"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T12:40:32.332Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "51169312137703725e1f762b00eedf795fe7292b723f9042f63a0630799c9bbc",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-ne4a6ec30706a/inputs/51169312137703725e1f762b00eedf795fe7292b723f9042f63a0630799c9bbc.json"
+          },
+          "bytes": 8653
+        },
+        "production": {
+          "id": "NCI-00475",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "ea2106fce1724b4824e1e0074cd6bc8a9fa3c1a67b714ff2228eb15eb6a22b85"
+        }
+      }
+    }
+  ]
+}

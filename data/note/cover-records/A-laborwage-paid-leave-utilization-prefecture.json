@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "A-laborwage-paid-leave-utilization-prefecture",
+  "production": {
+    "id": "NCI-00109",
+    "policyId": "NCP-004",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-ne85980349fda",
+  "production": {
+    "id": "NCI-00479",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "スポーツ観覧\n1位は広島県",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人のスタジアム席と無地の入場券を描く。特定競技やチームのロゴは描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/ne85980349fda 2026-10-23公開API本文照合。記事題名「【2021年版】スポーツ観覧をした人が多い県は？ 1位は広島県｜都道府県ランキング」。本文中の「広島県」「10歳以上」「2021」を確認。カバーは主題、対象年齢、掲載順位のみ示し、因果・実績・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "187cc38f21272bcdb4677ca6261ff5169942557214109880918804286ff00400",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-ne85980349fda/revisions/187cc38f21272bcdb4677ca6261ff5169942557214109880918804286ff00400.png"
+      },
+      "bytes": 67853,
+      "id": "187cc38f21272bcdb4677ca6261ff5169942557214109880918804286ff00400",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:42.237Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312775081/rectangle_large_type_2_4af4d4f68cfebb4bb0004b92896cdecd.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "187cc38f21272bcdb4677ca6261ff5169942557214109880918804286ff00400"
+      }
+    },
+    {
+      "sha256": "abafbe5cb0eca2ce436508cc693044e973fab81bfff25c57704dcfbd48b88825",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-ne85980349fda/revisions/abafbe5cb0eca2ce436508cc693044e973fab81bfff25c57704dcfbd48b88825.png"
+      },
+      "bytes": 116141,
+      "id": "abafbe5cb0eca2ce436508cc693044e973fab81bfff25c57704dcfbd48b88825",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:18:00.092Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "48d49356bfb85fb5d9b317f3349c26be2f8ce123367ab3f05cf0c7d9fe5af7f3"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-sports-spectating/values.json",
+        "sourceSha256": "8b2ad41faa06f26e08e60bc9fef5950ad29cf44097285ac1823e505a4ad8cce5",
+        "input": {
+          "sha256": "48d49356bfb85fb5d9b317f3349c26be2f8ce123367ab3f05cf0c7d9fe5af7f3",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-ne85980349fda/inputs/48d49356bfb85fb5d9b317f3349c26be2f8ce123367ab3f05cf0c7d9fe5af7f3.json"
+          },
+          "bytes": 6626
+        }
+      }
+    },
+    {
+      "sha256": "7cd985f5289312087ad103267b0d25d0b1b6c6456e2e0498c72e21f821f70f8d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-ne85980349fda/revisions/7cd985f5289312087ad103267b0d25d0b1b6c6456e2e0498c72e21f821f70f8d.png"
+      },
+      "bytes": 1779786,
+      "id": "7cd985f5289312087ad103267b0d25d0b1b6c6456e2e0498c72e21f821f70f8d",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-2c47599c8ff1",
+      "createdAt": "2026-10-23T12:08:46.720Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "fcafc7645a1dd4025c2433dfc60ebbd46b2c5bb0e14d692763a871645541b5bf"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T12:12:26.088Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "fcafc7645a1dd4025c2433dfc60ebbd46b2c5bb0e14d692763a871645541b5bf",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-ne85980349fda/inputs/fcafc7645a1dd4025c2433dfc60ebbd46b2c5bb0e14d692763a871645541b5bf.json"
+          },
+          "bytes": 8608
+        },
+        "production": {
+          "id": "NCI-00479",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "2c47599c8ff1c698d69f1277f6e8ddd4165c9900b7195ab414ad89941cb5389a"
+        }
+      }
+    }
+  ]
+}

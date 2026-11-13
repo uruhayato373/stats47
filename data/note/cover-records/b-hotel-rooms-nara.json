@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-hotel-rooms-nara",
+  "production": {
+    "id": "NCI-00130",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "奈良のホテル\nなぜ少ない？",
+      "subline": "奈良と京都をデータで比較\n客室数から観光を考える",
+      "subject": "小さく親しみやすいホテルの建物と、五重塔の小さな模型を右側に。架空のホテル名・看板・室数・ホテルチェーンのロゴは描かない。明るい緑とクリーム、紺の太字と黄色の補足帯。人物・顔・手・動物・猫・鹿・鳥は一切描かない。",
+      "evidence": "https://note.com/stats47/n/nd4f523eab511 本文確認2026-10-14。本文は奈良県と京都府のホテル客室数・施設数・稼働率を比較。問いをカバーに使い、景観規制や日帰り観光を確定原因として描かない。記事にない現在年や順位は追加しない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "a20d77926f6aee205711fc0a024b5a7ef1e384d8911b5c41e29411d4de287eb6",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-hotel-rooms-nara/revisions/a20d77926f6aee205711fc0a024b5a7ef1e384d8911b5c41e29411d4de287eb6.png"
+      },
+      "bytes": 47005,
+      "id": "a20d77926f6aee205711fc0a024b5a7ef1e384d8911b5c41e29411d4de287eb6",
+      "kind": "candidate",
+      "version": "2026-10-12-drafts",
+      "createdAt": "2026-10-12T00:52:55.829Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "73d63b678cde325626449a26d6a8d30dcc014ac8cacc2b8cb2b0e5b392decf44"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出し・記事の事実・図(または値を持たない背景地図)が読める。登録前の確認版とSHA一致",
+        "reviewedAt": "2026-10-12T00:54:14.009Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "73d63b678cde325626449a26d6a8d30dcc014ac8cacc2b8cb2b0e5b392decf44",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-hotel-rooms-nara/inputs/73d63b678cde325626449a26d6a8d30dcc014ac8cacc2b8cb2b0e5b392decf44.json"
+          },
+          "bytes": 1209
+        }
+      }
+    },
+    {
+      "sha256": "e5171a0393e5ac4774a3e218726dda53852e7e30ebb3a0604b680caff6e24cdd",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-hotel-rooms-nara/revisions/e5171a0393e5ac4774a3e218726dda53852e7e30ebb3a0604b680caff6e24cdd.png"
+      },
+      "bytes": 71307,
+      "id": "e5171a0393e5ac4774a3e218726dda53852e7e30ebb3a0604b680caff6e24cdd",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-14T01:08:30.287Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323536965/rectangle_large_type_2_dcd726f1f8245c9ee615434256c06435.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "e5171a0393e5ac4774a3e218726dda53852e7e30ebb3a0604b680caff6e24cdd"
+      }
+    },
+    {
+      "sha256": "9412d63395d0a407e3e2e84e90cd5043e1eb2c1135400ad450718a0368984956",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-hotel-rooms-nara/revisions/9412d63395d0a407e3e2e84e90cd5043e1eb2c1135400ad450718a0368984956.png"
+      },
+      "bytes": 2035082,
+      "id": "9412d63395d0a407e3e2e84e90cd5043e1eb2c1135400ad450718a0368984956",
+      "kind": "candidate",
+      "version": "imagegen-pop-v2-recent-six-20261014",
+      "createdAt": "2026-10-14T01:10:06.422Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "6c3a89a6b042afe559c050e1763a94a26420c2c410e0acbeab2c6b608d253556"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸・幅320pxの目視と転記・文字切れ・重なりを確認済み。2026-10-14ユーザーがこの6件の公開カバー更新を指示。",
+        "reviewedAt": "2026-10-14T01:42:51.920Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "6c3a89a6b042afe559c050e1763a94a26420c2c410e0acbeab2c6b608d253556",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-hotel-rooms-nara/inputs/6c3a89a6b042afe559c050e1763a94a26420c2c410e0acbeab2c6b608d253556.json"
+          },
+          "bytes": 8019
+        },
+        "production": {
+          "id": "NCI-00130",
+          "policyId": "NCP-005",
+          "policyVersion": 2,
+          "planSha256": "8215295ca8d1a79f9ddc5122beba64944b7293eb1fa27a7490a8f4627ce9334d"
+        }
+      }
+    },
+    {
+      "sha256": "2cbf9e1b6fabd9bce1b67f27c5e20c859047caaff2a95a8219b136bfefcc3efe",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-hotel-rooms-nara/revisions/2cbf9e1b6fabd9bce1b67f27c5e20c859047caaff2a95a8219b136bfefcc3efe.png"
+      },
+      "bytes": 1984861,
+      "id": "2cbf9e1b6fabd9bce1b67f27c5e20c859047caaff2a95a8219b136bfefcc3efe",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-95928b0eb5ce",
+      "createdAt": "2026-11-04T03:54:19.979Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "bb2e3faf7343ca0a488311a7d3e1b84218f9fef37d55613d0c5953d7665c201c"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T03:54:53.069Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "bb2e3faf7343ca0a488311a7d3e1b84218f9fef37d55613d0c5953d7665c201c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-hotel-rooms-nara/inputs/bb2e3faf7343ca0a488311a7d3e1b84218f9fef37d55613d0c5953d7665c201c.json"
+          },
+          "bytes": 8497
+        },
+        "production": {
+          "id": "NCI-00130",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "95928b0eb5ce99a87673298c424610b7cc3911bcda75f4911cd91ca86def5589"
+        }
+      }
+    }
+  ]
+}

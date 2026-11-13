@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "paid-n68eafab07946",
+  "production": {
+    "id": "NCI-00315",
+    "policyId": "NCP-007",
+    "policyVersion": 4,
+    "brief": {
+      "headline": "複数案件を\n並行して調べる",
+      "subline": "Subagentsの実務手順",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無地の複数の調査ファイルと無地のノートPC。画面に架空の結果や実績を描かない。左側に太い見出し、下に補足を太い帯で配置する。文字は指定全文のみ。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n68eafab07946 2026-10-23公開API本文照合。記事題名「Subagents で「複数案件の並行調査」を回す」。Subagentsと調査を本文で確認。カバーは本文の主題のみを示し、根拠のない数値・実績・保証を追加しない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "cb711ee7db337b163dcb292af1314075e1c0fa5bba107732ed9be48fd56be35b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n68eafab07946/revisions/cb711ee7db337b163dcb292af1314075e1c0fa5bba107732ed9be48fd56be35b.png"
+      },
+      "bytes": 33873,
+      "id": "cb711ee7db337b163dcb292af1314075e1c0fa5bba107732ed9be48fd56be35b",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:24.766Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312772883/rectangle_large_type_2_e1e9386ec51c8c1cc306dfddcfed0f82.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "cb711ee7db337b163dcb292af1314075e1c0fa5bba107732ed9be48fd56be35b"
+      }
+    },
+    {
+      "sha256": "ecc70744415556799b2010d2684575cbd6e4fe27b16368e363e0e7890704ac8f",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n68eafab07946/revisions/ecc70744415556799b2010d2684575cbd6e4fe27b16368e363e0e7890704ac8f.png"
+      },
+      "bytes": 70584,
+      "id": "ecc70744415556799b2010d2684575cbd6e4fe27b16368e363e0e7890704ac8f",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:39:51.231Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "3f49294efa24d769d8195245d9c6618c64a6c5b1b52d31782f7c6c10536d0455"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出しとシリーズ名・話数・色でシリーズが区別できる",
+        "reviewedAt": "2026-10-11T11:48:58.054Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "3f49294efa24d769d8195245d9c6618c64a6c5b1b52d31782f7c6c10536d0455",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n68eafab07946/inputs/3f49294efa24d769d8195245d9c6618c64a6c5b1b52d31782f7c6c10536d0455.json"
+          },
+          "bytes": 1075
+        }
+      }
+    },
+    {
+      "sha256": "fa6ce0c748f38322460e7f7d10ad7cf93ac5e4b7c1a802deb1914747437a4ff0",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n68eafab07946/revisions/fa6ce0c748f38322460e7f7d10ad7cf93ac5e4b7c1a802deb1914747437a4ff0.png"
+      },
+      "bytes": 68994,
+      "id": "fa6ce0c748f38322460e7f7d10ad7cf93ac5e4b7c1a802deb1914747437a4ff0",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:55:10.986Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320331970/rectangle_large_type_2_ed03e6f6a621bc1346b20e0a9274bbd0.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "fa6ce0c748f38322460e7f7d10ad7cf93ac5e4b7c1a802deb1914747437a4ff0"
+      }
+    },
+    {
+      "sha256": "4f56aee43a959fd16ff6729fbc685d40acbb12bf45334afe5502e5e52d59c096",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n68eafab07946/revisions/4f56aee43a959fd16ff6729fbc685d40acbb12bf45334afe5502e5e52d59c096.png"
+      },
+      "bytes": 31203,
+      "id": "4f56aee43a959fd16ff6729fbc685d40acbb12bf45334afe5502e5e52d59c096",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:05:19.742Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "da177c58c2411bb63cc8f55378d476ca6140b951b47ad235dd1d14c4fc5378f2"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.007/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:15:44.420Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "da177c58c2411bb63cc8f55378d476ca6140b951b47ad235dd1d14c4fc5378f2",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n68eafab07946/inputs/da177c58c2411bb63cc8f55378d476ca6140b951b47ad235dd1d14c4fc5378f2.json"
+          },
+          "bytes": 1075
+        }
+      }
+    },
+    {
+      "sha256": "36a6327c3813138b11efdfaf50e0e7b0883caa255f23c639dbc24161fef5246f",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n68eafab07946/revisions/36a6327c3813138b11efdfaf50e0e7b0883caa255f23c639dbc24161fef5246f.png"
+      },
+      "bytes": 1823224,
+      "id": "36a6327c3813138b11efdfaf50e0e7b0883caa255f23c639dbc24161fef5246f",
+      "kind": "candidate",
+      "version": "pop-NCP-007-v4-437851d05be9",
+      "createdAt": "2026-10-23T11:12:39.532Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "124a37b495f7a9a2617c81bbd3c90970f285fb2607fc2ff866ba8b8952f58b03"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T11:14:52.606Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "124a37b495f7a9a2617c81bbd3c90970f285fb2607fc2ff866ba8b8952f58b03",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n68eafab07946/inputs/124a37b495f7a9a2617c81bbd3c90970f285fb2607fc2ff866ba8b8952f58b03.json"
+          },
+          "bytes": 9027
+        },
+        "production": {
+          "id": "NCI-00315",
+          "policyId": "NCP-007",
+          "policyVersion": 4,
+          "planSha256": "437851d05be9ded7f4d87093f6e33e3c472a06a8f61a24b1d6752627da01f9b6"
+        }
+      }
+    }
+  ]
+}

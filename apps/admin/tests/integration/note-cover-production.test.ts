@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { COVER_ROOT, coverSha, coverAssetKey, coverInputKey, emptyCoverArticle, readCoverLedger, type CoverLedger, type CoverRevision } from '../../../../.claude/scripts/note/lib/cover-assets.mjs';
+import { COVER_ROOT, coverSha, coverAssetKey, coverInputKey, coverLedgerFiles, emptyCoverArticle, readCoverLedger, type CoverLedger, type CoverRevision } from '../../../../.claude/scripts/note/lib/cover-assets.mjs';
 import { readCoverPolicies, seedCoverProduction, buildCoverPlan, assertCoverPlan } from '../../../../.claude/scripts/note/lib/cover-production.mjs';
 
 const fixture = vi.hoisted(() => ({ root: '' }));
@@ -16,6 +16,15 @@ import { readStoredCover } from '../../../../.claude/scripts/note/lib/cover-stor
 
 const brief = { headline: '地域の違いを知る', subline: '', subject: 'ノートと案内役', evidence: '自己紹介記事の活動内容' };
 const file = () => path.join(fixture.root, 'data/note/cover-assets.json');
+// 台帳は正本と記事ごとの記録に分かれて保存される。書き手と同じ並びで置く
+const recordFile = () => path.join(fixture.root, 'data/note/cover-records/pinned-intro.json');
+const savedLedger = () => fs.readFileSync(file(), 'utf8') + fs.readFileSync(recordFile(), 'utf8');
+function writeLedger(ledger: CoverLedger) {
+  for (const [relative, text] of Object.entries(coverLedgerFiles(ledger))) {
+    fs.mkdirSync(path.dirname(path.join(fixture.root, relative)), { recursive: true });
+    fs.writeFileSync(path.join(fixture.root, relative), text);
+  }
+}
 const view = () => noteCoverManagement().rows[0].production;
 function request(body: object, headers: Record<string, string> = {}, serverHost = '127.0.0.1:4747') {
   return PATCH(new Request(`http://${serverHost}/api/note-covers/pinned-intro/production`, {
@@ -32,7 +41,7 @@ function addCandidate() {
     provenance: { renderer: plan.renderer, sourceUrl: null, sourceSha256: null, production: assertCoverPlan(row, article, policies, plan),
       input: { sha256: input, bytes: 5, storage: { provider: 'r2-private', bucket: 'stats47-private', key: coverInputKey(row.articleKey, input) } } } };
   row.revisions.push(revision); row.candidateRevisionId = sha;
-  fs.writeFileSync(file(), JSON.stringify(ledger)); return sha;
+  writeLedger(ledger); return sha;
 }
 describe('カバー制作と確認の保存', () => {
   beforeEach(() => {
@@ -42,7 +51,7 @@ describe('カバー制作と確認の保存', () => {
     const ledger: CoverLedger = { schemaVersion: 1, account: 'stats47', updatedAt: new Date().toISOString(), articles: articles.map(emptyCoverArticle) };
     seedCoverProduction(ledger, articles.map(a => ({ ...a, category: 'intro' })), readCoverPolicies(fixture.root));
     ledger.articles[0].published = { status: 'configured', url: 'https://assets.st-note.com/old.png', observedAt: new Date().toISOString(), revisionId: null };
-    fs.writeFileSync(file(), JSON.stringify(ledger));
+    writeLedger(ledger);
   });
   afterEach(() => { fs.rmSync(fixture.root, { recursive: true, force: true }); vi.clearAllMocks(); });
   it('入力を保存し、公開画像を保ったまま生成プロンプトへ接続する', async () => {
@@ -57,20 +66,20 @@ describe('カバー制作と確認の保存', () => {
   it('古い画面からの保存・別origin・入力不足を拒否して台帳を保つ', async () => {
     const revision = view().revision;
     await request({ action: 'brief', revision, brief });
-    const saved = fs.readFileSync(file(), 'utf8');
+    const saved = savedLedger();
     expect((await request({ action: 'brief', revision, brief: { ...brief, headline: '古い入力' } })).status).toBe(409);
     expect((await request({ action: 'brief', revision: view().revision, brief }, { origin: 'https://example.com' })).status).toBe(403);
     expect((await request({ action: 'brief', revision: view().revision, brief: { ...brief, evidence: ' ' } })).status).toBe(400);
-    expect(fs.readFileSync(file(), 'utf8')).toBe(saved);
+    expect(savedLedger()).toBe(saved);
   });
   it('NextがURLをlocalhostに正規化しても、ブラウザの同一originをHostで検証する', async () => {
     const edit = () => ({ action: 'brief', revision: view().revision, brief });
     expect((await request(edit(), { host: '127.0.0.1:4747' }, 'localhost:4747')).status).toBe(200);
-    const saved = fs.readFileSync(file(), 'utf8');
+    const saved = savedLedger();
     expect((await request(edit(), { host: 'localhost:4747' }, 'localhost:4747')).status).toBe(403);
     expect((await request(edit(), { host: 'evil.example:4747', origin: 'http://evil.example:4747' }, 'localhost:4747')).status).toBe(403);
     expect((await request(edit(), { host: '127.0.0.1:4747', 'sec-fetch-site': 'cross-site' }, 'localhost:4747')).status).toBe(403);
-    expect(fs.readFileSync(file(), 'utf8')).toBe(saved);
+    expect(savedLedger()).toBe(saved);
   });
   it('現在の仕様と正確な画像版を確認して採用し、入力変更で承認を解除する', async () => {
     await request({ action: 'brief', revision: view().revision, brief });

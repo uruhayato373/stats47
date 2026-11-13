@@ -1,0 +1,262 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-kakei-tottori",
+  "production": {
+    "id": "NCI-00101",
+    "policyId": "NCP-002",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "鳥取県の家計\n住まいに注目",
+      "subline": "鳥取市・2024年\n二人以上の世帯",
+      "subject": "添付画像は編集対象ではなく、鳥取県の地理輪郭を示す検証済みの参照素材。完成画像は横長1280×670相当で新たに作る。右側に参照の県主域輪郭を大きく、縦横比・凹凸・北向きを忠実に保って描き、切り絵のような淡黄色または青緑の明快な面と濃紺の縁取りで主役にする。県形を別物に描き換えたり、回転・反転・県境・島・データ塗り分けを追加しない。生活の題材は輪郭と重ならない右下の小さな一般的な小さな家の模型一点だけ。人物・顔・手・動物・キャラクター・擬人化なし。指定外の文字や数字・ロゴ・図表は描かず、補足2行も見出しに近い太さで大きく読みやすくする。 新版は輪郭の周囲に余白を広くとり、淡いクリーム色の背景にして、県形を最も目立つ位置へ置く。 新版は輪郭の周囲に余白を広くとり、淡いクリーム色の背景にして、県形を最も目立つ位置へ置く。",
+      "evidence": "https://note.com/stats47/n/n24d6b689079d 2026-10-15公開本文確認。公開本文は鳥取市の2024年・二人以上の世帯。住居は47市単純平均比1.41倍で最大の乖離。住宅費と県全体の家賃水準・持ち家比率は別物で、本文でも説明しきれないとしている。倍率・地図・県全体の家賃の断定はカバーへ載せない。 人物・キャラクターは使わない。 新方針: 地図は鳥取県の主域（遠隔離島省略）の地域識別用。家計の観測対象は鳥取市であり、県全域の観測図ではない。 2026-10-23再確認。 2026-10-23に記事台帳と既存の本文確認記録を照合。",
+      "dataScope": {
+        "place": "鳥取市",
+        "year": "2024",
+        "households": "二人以上の世帯"
+      }
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "5a43ae8a7d230ae78c14231467417719faa433e09f6f66ddc900d5442581c08f",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-tottori/revisions/5a43ae8a7d230ae78c14231467417719faa433e09f6f66ddc900d5442581c08f.png"
+      },
+      "bytes": 48564,
+      "id": "5a43ae8a7d230ae78c14231467417719faa433e09f6f66ddc900d5442581c08f",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:18.312Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312771907/rectangle_large_type_2_7a8cecc4e8e941d2241d797b5a3c962b.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "5a43ae8a7d230ae78c14231467417719faa433e09f6f66ddc900d5442581c08f"
+      }
+    },
+    {
+      "sha256": "d6370a3caadb6ab15e1ee0d14dd81579a130509aa085dc4176bc745a8172a6b1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-tottori/revisions/d6370a3caadb6ab15e1ee0d14dd81579a130509aa085dc4176bc745a8172a6b1.png"
+      },
+      "bytes": 96915,
+      "id": "d6370a3caadb6ab15e1ee0d14dd81579a130509aa085dc4176bc745a8172a6b1",
+      "kind": "candidate",
+      "version": "2026-10-02-household-r1",
+      "createdAt": "2026-10-02T03:19:00.113Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "fc997e08209523aeb1e612449113b65cbdabf3b763a530c2bf8f552a61027d31"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+        "reviewedAt": "2026-10-02T05:27:41.112Z"
+      },
+      "provenance": {
+        "renderer": "bold-note-cover",
+        "sourceUrl": "https://storage.stats47.jp/app/stats/housing-expenditure-total/values.json",
+        "sourceSha256": "5d5e5bf90081c0d39a47f286cb71c2134fdff0c4142931100f0756859e788672"
+      }
+    },
+    {
+      "sha256": "177d8145ae8827b0ed521819aa6b96802ba3fbc43201b5e34c3c096732388a0e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-tottori/revisions/177d8145ae8827b0ed521819aa6b96802ba3fbc43201b5e34c3c096732388a0e.png"
+      },
+      "bytes": 99589,
+      "id": "177d8145ae8827b0ed521819aa6b96802ba3fbc43201b5e34c3c096732388a0e",
+      "kind": "r2-archive",
+      "version": "legacy-r2-import-2026-10-02",
+      "createdAt": "2026-10-02T03:29:40.173Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Legacy R2 asset preserved; not adopted for note",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "legacy-public-r2",
+        "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-tottori/images/cover-1280x670.png",
+        "sourceSha256": "177d8145ae8827b0ed521819aa6b96802ba3fbc43201b5e34c3c096732388a0e"
+      }
+    },
+    {
+      "sha256": "a2b2b89d1cfac6f575a3f6542c67a0d83d8c9e0497f1026dce7f728fa4e121b9",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-tottori/revisions/a2b2b89d1cfac6f575a3f6542c67a0d83d8c9e0497f1026dce7f728fa4e121b9.png"
+      },
+      "bytes": 64010,
+      "id": "a2b2b89d1cfac6f575a3f6542c67a0d83d8c9e0497f1026dce7f728fa4e121b9",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T05:01:03.960Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/319911475/rectangle_large_type_2_ca8d517e2d566ce75e8454c29a7dee8d.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "a2b2b89d1cfac6f575a3f6542c67a0d83d8c9e0497f1026dce7f728fa4e121b9"
+      }
+    },
+    {
+      "sha256": "c9dcc91d3d48b406cfe579a67f265507f9d18c6e86d01712efed8023c6e7f541",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-tottori/revisions/c9dcc91d3d48b406cfe579a67f265507f9d18c6e86d01712efed8023c6e7f541.png"
+      },
+      "bytes": 1998113,
+      "id": "c9dcc91d3d48b406cfe579a67f265507f9d18c6e86d01712efed8023c6e7f541",
+      "kind": "candidate",
+      "version": "imagegen-no-character-next10-02-20261015",
+      "createdAt": "2026-10-15T05:10:55.861Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "279e062b740f3795c2dfb06bb0be63d7ffaff6f6050f095f6918591fc5ceb139"
+      },
+      "review": {
+        "status": "pending",
+        "reason": null,
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "279e062b740f3795c2dfb06bb0be63d7ffaff6f6050f095f6918591fc5ceb139",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-tottori/inputs/279e062b740f3795c2dfb06bb0be63d7ffaff6f6050f095f6918591fc5ceb139.json"
+          },
+          "bytes": 8963
+        },
+        "production": {
+          "id": "NCI-00101",
+          "policyId": "NCP-002",
+          "policyVersion": 2,
+          "planSha256": "cda875abce6ec0dc9a64e9daa61a41dcd5d8fbaec96a0a2aa2f008ff54710bef"
+        }
+      }
+    },
+    {
+      "sha256": "1be351f229cbb1de61dd0d9a9e7705e847808fb39666450c753ea874ed8e55d1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-tottori/revisions/1be351f229cbb1de61dd0d9a9e7705e847808fb39666450c753ea874ed8e55d1.png"
+      },
+      "bytes": 1554746,
+      "id": "1be351f229cbb1de61dd0d9a9e7705e847808fb39666450c753ea874ed8e55d1",
+      "kind": "candidate",
+      "version": "imagegen-category-contract-v1-20261015",
+      "createdAt": "2026-10-15T05:46:07.559Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "d8bef991517bc7837c3908137e75c20ba67d01a1b13b54fe73bdb64efdf45aa7"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "NCI-00101: 原寸/320pxの文字・補足・人物なし・題材を個別確認済み。家計は検証済み県主域参照と対象市・2024年・二人以上の世帯を照合。2026-10-15ユーザーが今回10件の反映を指示。",
+        "reviewedAt": "2026-10-15T05:56:00.075Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "d8bef991517bc7837c3908137e75c20ba67d01a1b13b54fe73bdb64efdf45aa7",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-tottori/inputs/d8bef991517bc7837c3908137e75c20ba67d01a1b13b54fe73bdb64efdf45aa7.json"
+          },
+          "bytes": 12278
+        },
+        "production": {
+          "id": "NCI-00101",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "950e4573d8ac7fa6b1c160529dd9fd25c8cdf0b959f9afb7713dd01ceae2c890"
+        }
+      }
+    },
+    {
+      "sha256": "159e65650c5ce206ef2c1ee434adf925578fb11dcb43778728d7280b25205a60",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-tottori/revisions/159e65650c5ce206ef2c1ee434adf925578fb11dcb43778728d7280b25205a60.png"
+      },
+      "bytes": 1402674,
+      "id": "159e65650c5ce206ef2c1ee434adf925578fb11dcb43778728d7280b25205a60",
+      "kind": "candidate",
+      "version": "pop-NCP-002-v3-ce18e84e44f8",
+      "createdAt": "2026-10-23T07:07:27.838Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "754b59388e8d2f763ba92486bcbc1bba424da774a5837a5ebe28cf6a64ab8a1e"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "鳥取県主域の輪郭、鳥取市・2024年・二人以上の世帯、住まいの題材を新旧比較。原寸と幅320pxで文字を確認。",
+        "reviewedAt": "2026-10-23T07:15:20.049Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "754b59388e8d2f763ba92486bcbc1bba424da774a5837a5ebe28cf6a64ab8a1e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-tottori/inputs/754b59388e8d2f763ba92486bcbc1bba424da774a5837a5ebe28cf6a64ab8a1e.json"
+          },
+          "bytes": 12785
+        },
+        "production": {
+          "id": "NCI-00101",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "ce18e84e44f8f7c4aafc30cb5ed46740274da9fa38d87d58e3297cf4592526e4"
+        }
+      }
+    }
+  ]
+}

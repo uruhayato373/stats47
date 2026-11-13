@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-ne62fa955bcff",
+  "production": {
+    "id": "NCI-00477",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "旅行・行楽をした人\n1位は愛知県",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人の駅ホームと無地の旅行かばんを描く。人物・地図・宿泊施設は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/ne62fa955bcff 2026-10-23公開API本文照合。記事題名「【2021年版・10歳以上】旅行・行楽をした人が多い県は？ 1位は愛知県｜都道府県ランキング」。本文中の「愛知県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "8350941be72b3027613d514bf77ce828615cc7abc5ab9cafe4eefc4b77bae6a7",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-ne62fa955bcff/revisions/8350941be72b3027613d514bf77ce828615cc7abc5ab9cafe4eefc4b77bae6a7.png"
+      },
+      "bytes": 92183,
+      "id": "8350941be72b3027613d514bf77ce828615cc7abc5ab9cafe4eefc4b77bae6a7",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:40.409Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312775072/rectangle_large_type_2_fcc56047ee6b5d96e958baf282d8db11.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "8350941be72b3027613d514bf77ce828615cc7abc5ab9cafe4eefc4b77bae6a7"
+      }
+    },
+    {
+      "sha256": "19b2a3c33d425abf364ccc954048706f59b6ce56e387a84ec1f6d97ae78f3b7f",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-ne62fa955bcff/revisions/19b2a3c33d425abf364ccc954048706f59b6ce56e387a84ec1f6d97ae78f3b7f.png"
+      },
+      "bytes": 118937,
+      "id": "19b2a3c33d425abf364ccc954048706f59b6ce56e387a84ec1f6d97ae78f3b7f",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:18:04.846Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "1d31f27b0b00ca0687f951b0ca415ca02a8ac269676328f8c9080917a970e183"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/travel-leisure-annual-participation-rate-10plus/values.json",
+        "sourceSha256": "550776e986deaa46594a29321425df41fcc63b1abdd3fab61615e9d54c72f6d2",
+        "input": {
+          "sha256": "1d31f27b0b00ca0687f951b0ca415ca02a8ac269676328f8c9080917a970e183",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-ne62fa955bcff/inputs/1d31f27b0b00ca0687f951b0ca415ca02a8ac269676328f8c9080917a970e183.json"
+          },
+          "bytes": 6646
+        }
+      }
+    },
+    {
+      "sha256": "3a3e851e1534be225afa8a85afe036a7c1509ab8420ba7109aaed1863e43085e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-ne62fa955bcff/revisions/3a3e851e1534be225afa8a85afe036a7c1509ab8420ba7109aaed1863e43085e.png"
+      },
+      "bytes": 1841426,
+      "id": "3a3e851e1534be225afa8a85afe036a7c1509ab8420ba7109aaed1863e43085e",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-a349c332d2d0",
+      "createdAt": "2026-10-23T14:36:51.702Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "fc6cbd5ae69d8ed5600caf5a4293a5a16ce750eed4a059ea98e569591cd81cdb"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00461は東京都と兵庫県の同率首位。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T14:39:18.990Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "fc6cbd5ae69d8ed5600caf5a4293a5a16ce750eed4a059ea98e569591cd81cdb",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-ne62fa955bcff/inputs/fc6cbd5ae69d8ed5600caf5a4293a5a16ce750eed4a059ea98e569591cd81cdb.json"
+          },
+          "bytes": 8822
+        },
+        "production": {
+          "id": "NCI-00477",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "a349c332d2d0c15d5249a20763fbabebec654310951209481a909b0d040a2a11"
+        }
+      }
+    }
+  ]
+}

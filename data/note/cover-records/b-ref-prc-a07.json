@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-prc-a07",
+  "production": {
+    "id": "NCI-00192",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "中学の運動部\n10種目の部員数",
+      "subline": "47都道府県を比較",
+      "subject": "テニスラケット、バドミントンのシャトル、運動靴を大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/ncd2deb997656 本文確認2026-11-04。中学の運動部10種目の部員数。陸上は福島、バドミントンは富山、ソフトテニスは山口。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "a9160dc0dc23a87a5e3452073494c0131e9750d1ed6edae29e17a0ee75798b3c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a07/revisions/a9160dc0dc23a87a5e3452073494c0131e9750d1ed6edae29e17a0ee75798b3c.png"
+      },
+      "bytes": 39161,
+      "id": "a9160dc0dc23a87a5e3452073494c0131e9750d1ed6edae29e17a0ee75798b3c",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:07:45.459Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "b8737812b9f27b07d88935fd806caec055985766dfcf1f8cef2190368da1ca30"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:13:10.881Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "b8737812b9f27b07d88935fd806caec055985766dfcf1f8cef2190368da1ca30",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a07/inputs/b8737812b9f27b07d88935fd806caec055985766dfcf1f8cef2190368da1ca30.json"
+          },
+          "bytes": 1371
+        }
+      }
+    },
+    {
+      "sha256": "699283834c19a6375b66fd901256a207c48193c4187de3180ae05f0116b1eda3",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a07/revisions/699283834c19a6375b66fd901256a207c48193c4187de3180ae05f0116b1eda3.png"
+      },
+      "bytes": 104830,
+      "id": "699283834c19a6375b66fd901256a207c48193c4187de3180ae05f0116b1eda3",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:46.782Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324151915/rectangle_large_type_2_1e427bed4e42dd8dd20cfcff1009bf26.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "699283834c19a6375b66fd901256a207c48193c4187de3180ae05f0116b1eda3"
+      }
+    },
+    {
+      "sha256": "05d7993426c9af5ad9147d6ffa7fa3a0f3d48ca2449559b03779a1041cf8bc70",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a07/revisions/05d7993426c9af5ad9147d6ffa7fa3a0f3d48ca2449559b03779a1041cf8bc70.png"
+      },
+      "bytes": 1937534,
+      "id": "05d7993426c9af5ad9147d6ffa7fa3a0f3d48ca2449559b03779a1041cf8bc70",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-299eb38f83aa",
+      "createdAt": "2026-11-04T01:40:19.772Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "6f6b3bc9834595d8cc90c517036cb27976dfe74b2b6f726f305fbc89ffc86a46"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:41:41.400Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "6f6b3bc9834595d8cc90c517036cb27976dfe74b2b6f726f305fbc89ffc86a46",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a07/inputs/6f6b3bc9834595d8cc90c517036cb27976dfe74b2b6f726f305fbc89ffc86a46.json"
+          },
+          "bytes": 8138
+        },
+        "production": {
+          "id": "NCI-00192",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "299eb38f83aa26cc988dd53d10fffd29e4e1996080a9d983922e5883ed950662"
+        }
+      }
+    }
+  ]
+}

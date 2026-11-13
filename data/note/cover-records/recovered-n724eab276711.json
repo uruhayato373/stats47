@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n724eab276711",
+  "production": {
+    "id": "NCI-00433",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "学問の学習\n多い県は東京都",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無文字の歴史書と無文字の自然科学ノートを対で置く。実際の学力、大学進学、研究実績を表す絵は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n724eab276711 2026-10-23公開API本文照合。記事題名「【2021年版】人文・社会・自然科学をした人が多い県は？ 1位は東京都｜都道府県ランキング」。本文中の「東京都」「10歳以上」を確認。カバーは本文の主題と年・対象だけを示し、因果・実績・保証・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "523213eb8215f086199c6017be6c1e510c2a192332358e5dc977a43e8b792f86",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n724eab276711/revisions/523213eb8215f086199c6017be6c1e510c2a192332358e5dc977a43e8b792f86.png"
+      },
+      "bytes": 60761,
+      "id": "523213eb8215f086199c6017be6c1e510c2a192332358e5dc977a43e8b792f86",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:17.173Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312774280/rectangle_large_type_2_3622124a683c1d35489f4da3d2192bf9.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "523213eb8215f086199c6017be6c1e510c2a192332358e5dc977a43e8b792f86"
+      }
+    },
+    {
+      "sha256": "97862c59e3fad6998da4cf6023185d8ccbdfc3457202fe779a5dd369079c88cf",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n724eab276711/revisions/97862c59e3fad6998da4cf6023185d8ccbdfc3457202fe779a5dd369079c88cf.png"
+      },
+      "bytes": 120454,
+      "id": "97862c59e3fad6998da4cf6023185d8ccbdfc3457202fe779a5dd369079c88cf",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:16:05.449Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "0a5441d4b3e1272d8d9eb50c8ae4fc7d80ecddc681de154a3ea23297c53a55b5"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/study-participation-rate-academic/values.json",
+        "sourceSha256": "98ffad0f41762bc35eaa8577dd932109be9833e271238463e8f231cfac42bb0c",
+        "input": {
+          "sha256": "0a5441d4b3e1272d8d9eb50c8ae4fc7d80ecddc681de154a3ea23297c53a55b5",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n724eab276711/inputs/0a5441d4b3e1272d8d9eb50c8ae4fc7d80ecddc681de154a3ea23297c53a55b5.json"
+          },
+          "bytes": 6620
+        }
+      }
+    },
+    {
+      "sha256": "0830d6b1477200fa8c426467c946ede8354f6a95620bbc4ce1ffe56a747e86e6",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n724eab276711/revisions/0830d6b1477200fa8c426467c946ede8354f6a95620bbc4ce1ffe56a747e86e6.png"
+      },
+      "bytes": 1832929,
+      "id": "0830d6b1477200fa8c426467c946ede8354f6a95620bbc4ce1ffe56a747e86e6",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-c6cd4ede424c",
+      "createdAt": "2026-10-23T11:42:00.366Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "f621dd96225fa48e6948d1da6284dcf3024ab1a4bbe0e8c4747051e0c3df6b02"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T11:43:29.639Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "f621dd96225fa48e6948d1da6284dcf3024ab1a4bbe0e8c4747051e0c3df6b02",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n724eab276711/inputs/f621dd96225fa48e6948d1da6284dcf3024ab1a4bbe0e8c4747051e0c3df6b02.json"
+          },
+          "bytes": 8679
+        },
+        "production": {
+          "id": "NCI-00433",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "c6cd4ede424ce461aa0538cd1ff80ff9c25c7de63f08931333354d9a78d0d28f"
+        }
+      }
+    }
+  ]
+}

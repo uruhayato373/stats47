@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "gov-koho-visuals",
+  "production": {
+    "id": "NCI-00278",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

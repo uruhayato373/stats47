@@ -1,0 +1,215 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-kakei-gyoza-counting",
+  "production": {
+    "id": "NCI-00136",
+    "policyId": "NCP-005",
+    "policyVersion": 2,
+    "brief": {
+      "headline": "ぎょうざの順位\n何を比べる？",
+      "subline": "食べた量と購入額は別\n2024年・県庁所在市",
+      "subject": "緑と明るいクリーム、黄色のアクセント。右側に無地の持ち帰り容器に入ったぎょうざを一点、白紙の買い物レシートを一点。調理食品の購入という題材で、飲食店の売上や自作を表す調理風景にはしない。包装の店名・値段・文字は描かない。人物・顔・人の手・動物・キャラクター・マスコット・擬人化は一切描かない。地図、架空の統計グラフ、数式、表彰台、順位図、製品ロゴ、指定外の文言を描かない。紙面・タグ・ラベルは完全な白紙。左側の大きな見出しと下の補足2行は、幅320pxでも明瞭に読める太さと大きさにし、四辺の余白を守る。",
+      "evidence": "https://note.com/stats47/n/n2f50bb479647 2026-10-15公開本文確認。本文は2024年の県庁所在市・二人以上世帯のぎょうざ購入支出の集計範囲を確認する解説。実際に食べた量や県全体の消費と混同せず、宮崎市・宇都宮市・静岡市/浜松市の違いなどを本文で説明する。カバーに順位の断定は置かない。 人物・キャラクターは使わない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "a5850b0fc1bed4c078e340f2624513fc9f266ecd2f4288f0792e1a957ba80eaf",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-gyoza-counting/revisions/a5850b0fc1bed4c078e340f2624513fc9f266ecd2f4288f0792e1a957ba80eaf.png"
+      },
+      "bytes": 35800,
+      "id": "a5850b0fc1bed4c078e340f2624513fc9f266ecd2f4288f0792e1a957ba80eaf",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:24.135Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312772383/rectangle_large_type_2_429e0cca973cb8b2c15f96c7695fce5c.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "a5850b0fc1bed4c078e340f2624513fc9f266ecd2f4288f0792e1a957ba80eaf"
+      }
+    },
+    {
+      "sha256": "5f1c36719c76c9e9b8c68dc589a2d53393f9420822899cae984a6f692f86e8ab",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-gyoza-counting/revisions/5f1c36719c76c9e9b8c68dc589a2d53393f9420822899cae984a6f692f86e8ab.png"
+      },
+      "bytes": 101226,
+      "id": "5f1c36719c76c9e9b8c68dc589a2d53393f9420822899cae984a6f692f86e8ab",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:44:46.305Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "2742cebd6028ef8b27fe8e3ff49c69e541a5c237c0e0a585f81cb50e017fea11"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で問いと記事固有の図(公開R2の記事画像)が確認できる",
+        "reviewedAt": "2026-10-11T11:50:52.158Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "2742cebd6028ef8b27fe8e3ff49c69e541a5c237c0e0a585f81cb50e017fea11",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-gyoza-counting/inputs/2742cebd6028ef8b27fe8e3ff49c69e541a5c237c0e0a585f81cb50e017fea11.json"
+          },
+          "bytes": 1362
+        }
+      }
+    },
+    {
+      "sha256": "c7d5d589c40ca502c30a01077aee95a6735ea2070b43f8f7a4deb2aecdca4c43",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-gyoza-counting/revisions/c7d5d589c40ca502c30a01077aee95a6735ea2070b43f8f7a4deb2aecdca4c43.png"
+      },
+      "bytes": 77723,
+      "id": "c7d5d589c40ca502c30a01077aee95a6735ea2070b43f8f7a4deb2aecdca4c43",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:55:50.601Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320302263/rectangle_large_type_2_4a40568f5816bf0dc91bc9e7e3c652d7.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "c7d5d589c40ca502c30a01077aee95a6735ea2070b43f8f7a4deb2aecdca4c43"
+      }
+    },
+    {
+      "sha256": "6e27207765b2db736c3b4f83423b53e0f0a237431bad0c39fa5a0985061ac4f5",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-gyoza-counting/revisions/6e27207765b2db736c3b4f83423b53e0f0a237431bad0c39fa5a0985061ac4f5.png"
+      },
+      "bytes": 40166,
+      "id": "6e27207765b2db736c3b4f83423b53e0f0a237431bad0c39fa5a0985061ac4f5",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:10:36.558Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "3890ca93c836d251e3a867ec942e6582b98072df898c4e32c72117d907fe0771"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.045/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:17:24.703Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "3890ca93c836d251e3a867ec942e6582b98072df898c4e32c72117d907fe0771",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-gyoza-counting/inputs/3890ca93c836d251e3a867ec942e6582b98072df898c4e32c72117d907fe0771.json"
+          },
+          "bytes": 1362
+        }
+      }
+    },
+    {
+      "sha256": "5f0fd66b3a8781ac2cf05dd60205deb52978c49ea4247ddecb580d8ff13f10b5",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-gyoza-counting/revisions/5f0fd66b3a8781ac2cf05dd60205deb52978c49ea4247ddecb580d8ff13f10b5.png"
+      },
+      "bytes": 60552,
+      "id": "5f0fd66b3a8781ac2cf05dd60205deb52978c49ea4247ddecb580d8ff13f10b5",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T04:06:17.394Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323276942/rectangle_large_type_2_00abf29d85a09d4e30aab8f8daf76569.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "5f0fd66b3a8781ac2cf05dd60205deb52978c49ea4247ddecb580d8ff13f10b5"
+      }
+    },
+    {
+      "sha256": "086dce410f0dc104ea7469c23337d18ce972893b6ac05f3ad24732ee2eb12d79",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-gyoza-counting/revisions/086dce410f0dc104ea7469c23337d18ce972893b6ac05f3ad24732ee2eb12d79.png"
+      },
+      "bytes": 1876613,
+      "id": "086dce410f0dc104ea7469c23337d18ce972893b6ac05f3ad24732ee2eb12d79",
+      "kind": "candidate",
+      "version": "imagegen-no-character-next10-20261015",
+      "createdAt": "2026-10-15T04:14:15.195Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "9a96fe87653a2b76aaab720866c949588de2bd254bf340a03b38247c4f823ab2"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "人物・キャラクターなし。原寸と320pxで指定全文・対象年・地域・世帯区分・補足の可読性・文字切れ・重なりを確認済み。制作原本と目視記録のSHAを照合。管理画面の修正前後10件を提示し、2026-10-15にユーザーが表示中10件の反映を指示。",
+        "reviewedAt": "2026-10-15T04:29:14.774Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "9a96fe87653a2b76aaab720866c949588de2bd254bf340a03b38247c4f823ab2",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-gyoza-counting/inputs/9a96fe87653a2b76aaab720866c949588de2bd254bf340a03b38247c4f823ab2.json"
+          },
+          "bytes": 9167
+        },
+        "production": {
+          "id": "NCI-00136",
+          "policyId": "NCP-005",
+          "policyVersion": 2,
+          "planSha256": "a1a334f1e58003370447736f0b7b74e9b5d35e197af445794721a26687df3ed9"
+        }
+      }
+    }
+  ]
+}

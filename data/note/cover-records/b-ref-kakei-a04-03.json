@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-kakei-a04-03",
+  "production": {
+    "id": "NCI-00183",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "エンゲル係数は\n生活水準の物差し？",
+      "subline": "47市の順位と所得を比較",
+      "subject": "食卓の皿と、木の物差しを並べて大きく描く。物差しに数字を入れない。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n7687e091941c 本文確認2026-11-04。エンゲル係数の47市の順位は所得の並びとほとんど関係がない。1位は神戸市の33.4％。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "78cdb1d5db016d3068d3830de5fb100f45e04b3a3365432f6fb596c0a93dd4fe",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a04-03/revisions/78cdb1d5db016d3068d3830de5fb100f45e04b3a3365432f6fb596c0a93dd4fe.png"
+      },
+      "bytes": 39925,
+      "id": "78cdb1d5db016d3068d3830de5fb100f45e04b3a3365432f6fb596c0a93dd4fe",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:05:46.613Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "a1f73934ce9f7096cacc418eebca1f04b76ea598e07d968ec9b4c96775ec1cf1"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:56.693Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "a1f73934ce9f7096cacc418eebca1f04b76ea598e07d968ec9b4c96775ec1cf1",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a04-03/inputs/a1f73934ce9f7096cacc418eebca1f04b76ea598e07d968ec9b4c96775ec1cf1.json"
+          },
+          "bytes": 1282
+        }
+      }
+    },
+    {
+      "sha256": "2bba29a253026f97ee9260c57004bcf06a93b3ace1b97c9f24baf4eb5499ee55",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a04-03/revisions/2bba29a253026f97ee9260c57004bcf06a93b3ace1b97c9f24baf4eb5499ee55.png"
+      },
+      "bytes": 76462,
+      "id": "2bba29a253026f97ee9260c57004bcf06a93b3ace1b97c9f24baf4eb5499ee55",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:27.491Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324140288/rectangle_large_type_2_0259f241a9f91587019c58edbad0f7ba.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "2bba29a253026f97ee9260c57004bcf06a93b3ace1b97c9f24baf4eb5499ee55"
+      }
+    },
+    {
+      "sha256": "ecc1f2d91f488d8d34004b420ef8c0701ecc8ca3d8886f1ae1172a886b34a9ed",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a04-03/revisions/ecc1f2d91f488d8d34004b420ef8c0701ecc8ca3d8886f1ae1172a886b34a9ed.png"
+      },
+      "bytes": 1971794,
+      "id": "ecc1f2d91f488d8d34004b420ef8c0701ecc8ca3d8886f1ae1172a886b34a9ed",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-5d6d3f3d4275",
+      "createdAt": "2026-11-04T01:23:13.393Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "bc343838f761a852eed01e94516f794d60a2256cd264eabca7505cf06de74497"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:23:58.462Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "bc343838f761a852eed01e94516f794d60a2256cd264eabca7505cf06de74497",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a04-03/inputs/bc343838f761a852eed01e94516f794d60a2256cd264eabca7505cf06de74497.json"
+          },
+          "bytes": 8215
+        },
+        "production": {
+          "id": "NCI-00183",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "5d6d3f3d4275b1b61a6c5a85e2698a4d1a6ec97ab33f48f697809a6d53a51aec"
+        }
+      }
+    }
+  ]
+}

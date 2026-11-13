@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-prc-a36",
+  "production": {
+    "id": "NCI-00218",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "貝類の購入量\n1位は青森市",
+      "subline": "福岡市の7.00倍",
+      "subject": "あさり、しじみ、ほたての貝殻を盛った木の皿を大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n0edd260cf676 本文確認2026-11-04。貝類の購入量は青森市が最多で福岡市の7.00倍。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "45706cbadfef7f42f3b5bc633accbcdf0713f3274eda16c857dda2c8de2a1a57",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a36/revisions/45706cbadfef7f42f3b5bc633accbcdf0713f3274eda16c857dda2c8de2a1a57.png"
+      },
+      "bytes": 33685,
+      "id": "45706cbadfef7f42f3b5bc633accbcdf0713f3274eda16c857dda2c8de2a1a57",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:09:29.553Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e413909e843653d0b97fdf836aa7ae2a4892a481df2741e39833bd77ba64c76a"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:13:48.415Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "e413909e843653d0b97fdf836aa7ae2a4892a481df2741e39833bd77ba64c76a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a36/inputs/e413909e843653d0b97fdf836aa7ae2a4892a481df2741e39833bd77ba64c76a.json"
+          },
+          "bytes": 1273
+        }
+      }
+    },
+    {
+      "sha256": "c56ed29b0f033cb9ebcef17b980b3771d3d711a8552a724c1e60394f168730a0",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a36/revisions/c56ed29b0f033cb9ebcef17b980b3771d3d711a8552a724c1e60394f168730a0.png"
+      },
+      "bytes": 56915,
+      "id": "c56ed29b0f033cb9ebcef17b980b3771d3d711a8552a724c1e60394f168730a0",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:22:06.154Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324180456/rectangle_large_type_2_5de53ecb74c6e2aaf0acebc7d687eeb7.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "c56ed29b0f033cb9ebcef17b980b3771d3d711a8552a724c1e60394f168730a0"
+      }
+    },
+    {
+      "sha256": "bed75509546f286229a123095d8a4365fc67da18afd80a668ac282072d8472a8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a36/revisions/bed75509546f286229a123095d8a4365fc67da18afd80a668ac282072d8472a8.png"
+      },
+      "bytes": 2030593,
+      "id": "bed75509546f286229a123095d8a4365fc67da18afd80a668ac282072d8472a8",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-0f6e765a2ffc",
+      "createdAt": "2026-11-04T02:09:15.628Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "b212825e884de16ab79e0794ba314de7d401e055fa9d609a6e6ed281ffdb64f8"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T02:10:14.653Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "b212825e884de16ab79e0794ba314de7d401e055fa9d609a6e6ed281ffdb64f8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a36/inputs/b212825e884de16ab79e0794ba314de7d401e055fa9d609a6e6ed281ffdb64f8.json"
+          },
+          "bytes": 8001
+        },
+        "production": {
+          "id": "NCI-00218",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "0f6e765a2ffc548e953044f7b3473d08e863acbf87ee3ecb02de290153072b1d"
+        }
+      }
+    }
+  ]
+}

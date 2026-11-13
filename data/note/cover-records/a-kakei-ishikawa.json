@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-kakei-ishikawa",
+  "production": {
+    "id": "NCI-00074",
+    "policyId": "NCP-002",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "石川県の家計\n交通・通信に注目",
+      "subline": "金沢市・2024年\n二人以上の世帯",
+      "subject": "添付は石川県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に完全に無人の小さな自動車の模型を小さく1点だけ。車両や家の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+      "evidence": "https://note.com/stats47/n/ndf2afaef16c0 2026-10-23公開API本文照合。金沢市の2024年・二人以上の世帯の家計調査。交通・通信1.28倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は石川県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は金沢市であり県全域の観測図ではない。人物・キャラクターなし。",
+      "dataScope": {
+        "place": "金沢市",
+        "year": "2024",
+        "households": "二人以上の世帯"
+      }
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "26f92732fb1e57239dae107fea0597946e2e20983036d079528a1eec5d197320",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-ishikawa/revisions/26f92732fb1e57239dae107fea0597946e2e20983036d079528a1eec5d197320.png"
+      },
+      "bytes": 80503,
+      "id": "26f92732fb1e57239dae107fea0597946e2e20983036d079528a1eec5d197320",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:02.361Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312771263/rectangle_large_type_2_3099ce313bf06bd2c3c9c1f89bcdce10.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "26f92732fb1e57239dae107fea0597946e2e20983036d079528a1eec5d197320"
+      }
+    },
+    {
+      "sha256": "266a6ec25ee686aa39cb16f11bfb72f7d2357f87e4cfba55a569a0ea0a25dc7e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-ishikawa/revisions/266a6ec25ee686aa39cb16f11bfb72f7d2357f87e4cfba55a569a0ea0a25dc7e.png"
+      },
+      "bytes": 90376,
+      "id": "266a6ec25ee686aa39cb16f11bfb72f7d2357f87e4cfba55a569a0ea0a25dc7e",
+      "kind": "candidate",
+      "version": "2026-10-02-household-r1",
+      "createdAt": "2026-10-02T03:18:06.426Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "1c1b4a7685ad3ee19668ecc551e08d4ada4fa00218c39921cc6d906bbfb07979"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+        "reviewedAt": "2026-10-02T05:27:41.112Z"
+      },
+      "provenance": {
+        "renderer": "bold-note-cover",
+        "sourceUrl": "https://storage.stats47.jp/app/stats/transport-communication-expenditure-total/values.json",
+        "sourceSha256": "05bc5256a35560cef8d78d1eaa97b2a6aad48561fef8e246b00beb1ffcacc30a"
+      }
+    },
+    {
+      "sha256": "01f62cacb2a0f538b4af47691c45d629010291bc6f5772301cc1f788b7a6fb13",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-ishikawa/revisions/01f62cacb2a0f538b4af47691c45d629010291bc6f5772301cc1f788b7a6fb13.png"
+      },
+      "bytes": 100795,
+      "id": "01f62cacb2a0f538b4af47691c45d629010291bc6f5772301cc1f788b7a6fb13",
+      "kind": "r2-archive",
+      "version": "legacy-r2-import-2026-10-02",
+      "createdAt": "2026-10-02T03:28:37.748Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Legacy R2 asset preserved; not adopted for note",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "legacy-public-r2",
+        "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-ishikawa/images/cover-1280x670.png",
+        "sourceSha256": "01f62cacb2a0f538b4af47691c45d629010291bc6f5772301cc1f788b7a6fb13"
+      }
+    },
+    {
+      "sha256": "4d79072f1dccfe263f4dd25b173b6eeceedff66a1dc804e8d3554d6905b67200",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-ishikawa/revisions/4d79072f1dccfe263f4dd25b173b6eeceedff66a1dc804e8d3554d6905b67200.png"
+      },
+      "bytes": 1652953,
+      "id": "4d79072f1dccfe263f4dd25b173b6eeceedff66a1dc804e8d3554d6905b67200",
+      "kind": "candidate",
+      "version": "pop-NCP-002-v3-f9eec1b6a512",
+      "createdAt": "2026-10-23T09:31:40.006Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "6e36d3315f03db66d646b5a62f55291c385958d991d5a6ea35a30cf5045615d3"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の金沢市・2024年・二人以上の世帯と県輪郭、全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T09:47:14.958Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "6e36d3315f03db66d646b5a62f55291c385958d991d5a6ea35a30cf5045615d3",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-ishikawa/inputs/6e36d3315f03db66d646b5a62f55291c385958d991d5a6ea35a30cf5045615d3.json"
+          },
+          "bytes": 13132
+        },
+        "production": {
+          "id": "NCI-00074",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "f9eec1b6a512b7f3e0e6e1ee1ab832aa01bd97d07ac83f5a3d857422bd98e6c9"
+        }
+      }
+    }
+  ]
+}

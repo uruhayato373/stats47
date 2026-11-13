@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-dev-a21",
+  "production": {
+    "id": "NCI-00155",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "若い世代の男女比\n47都道府県を比較",
+      "subline": "20〜39歳の性比",
+      "subject": "天秤を使わず、青と黄色の無地の積み木を2つの列に積んで大きく描く。積み木に文字を入れない。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/na34537eb2b48 本文確認2026-11-04。20〜39歳の性比を比較。茨城県が最も高く、鹿児島県が最も低い。男女の優劣を示さない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "b076a2edebd5984baebbc8c65f3991bf52f4876bafe3e7d19b81e26d6af456e0",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a21/revisions/b076a2edebd5984baebbc8c65f3991bf52f4876bafe3e7d19b81e26d6af456e0.png"
+      },
+      "bytes": 33388,
+      "id": "b076a2edebd5984baebbc8c65f3991bf52f4876bafe3e7d19b81e26d6af456e0",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:07:04.789Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "89c3cacdc0f13f029aab3240ebeee7e29769b89b3ae44033a896640916ecaa7c"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:18.693Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "89c3cacdc0f13f029aab3240ebeee7e29769b89b3ae44033a896640916ecaa7c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a21/inputs/89c3cacdc0f13f029aab3240ebeee7e29769b89b3ae44033a896640916ecaa7c.json"
+          },
+          "bytes": 1271
+        }
+      }
+    },
+    {
+      "sha256": "3f23af0c677e94db025cee5963c5c73f2f6db44c64075f60cd571c1affb35b5e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a21/revisions/3f23af0c677e94db025cee5963c5c73f2f6db44c64075f60cd571c1affb35b5e.png"
+      },
+      "bytes": 52624,
+      "id": "3f23af0c677e94db025cee5963c5c73f2f6db44c64075f60cd571c1affb35b5e",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:40.126Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324062032/rectangle_large_type_2_f5159a3fa6bce50c61249048e19029c2.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "3f23af0c677e94db025cee5963c5c73f2f6db44c64075f60cd571c1affb35b5e"
+      }
+    },
+    {
+      "sha256": "11923e623ea5bfafd29167ad5590bbb5303bf0ebbf6b4dc3112ec43cf3f09169",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a21/revisions/11923e623ea5bfafd29167ad5590bbb5303bf0ebbf6b4dc3112ec43cf3f09169.png"
+      },
+      "bytes": 1792745,
+      "id": "11923e623ea5bfafd29167ad5590bbb5303bf0ebbf6b4dc3112ec43cf3f09169",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-40e5e5141724",
+      "createdAt": "2026-11-04T00:55:52.403Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e930f2fb1be38983a8d44020289e6b3ca3771785cdadf521d5448ddb316a2eae"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:57:07.917Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "e930f2fb1be38983a8d44020289e6b3ca3771785cdadf521d5448ddb316a2eae",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a21/inputs/e930f2fb1be38983a8d44020289e6b3ca3771785cdadf521d5448ddb316a2eae.json"
+          },
+          "bytes": 8248
+        },
+        "production": {
+          "id": "NCI-00155",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "40e5e51417241347f9a178f55ebb54be006554eb934540306067ad5ae269e79b"
+        }
+      }
+    }
+  ]
+}

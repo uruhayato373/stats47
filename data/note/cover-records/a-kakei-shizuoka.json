@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-kakei-shizuoka",
+  "production": {
+    "id": "NCI-00097",
+    "policyId": "NCP-002",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "静岡県の家計\n住まいに注目",
+      "subline": "静岡市・2024年\n二人以上の世帯",
+      "subject": "添付は静岡県の主域輪郭を示す検証済みの参照画像で、編集対象ではない。1280×670相当の横長の完成カバーを新たに作る。右側に参照の県形を大きく、同じ北向き・縦横比・凹凸を忠実に維持して、濃紺または淡黄色の一枚の面と太い縁取りで主役にする。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けを一切加えない。生活の小物は輪郭と文字に重ならない右下に住人のいない小さな家の模型を小さく1点だけ。車両や家の中も完全に無人。窓は均一な淡い水色で、人影・頭・顔のような黒い形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、各行とも1280px換算で文字高65px以上を目安に大きくする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。 新版は輪郭の周囲と補足欄に余白を設け、背景の筆塗りを淡くし、県形・見出し・都市名を読み取りやすく配置する。",
+      "evidence": "https://note.com/stats47/n/n35ce2a1b9248 2026-10-15公開本文確認。静岡市の2024年・二人以上の世帯。十大費目の住居は47市単純平均比1.36倍で最大の乖離。室内装飾品4.92倍などを本文で検討。 比較の分母は家計調査の全国平均ではなく47県庁所在市の単純平均。カバーに倍率・順位・因果は載せず、費目への着目だけを示す。地図は静岡県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は静岡市であり県全域の観測図ではない。人物・キャラクターなし。 2026-10-23に公開APIの状態と都市名・対象年・世帯区分を照合。",
+      "dataScope": {
+        "place": "静岡市",
+        "year": "2024",
+        "households": "二人以上の世帯"
+      }
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "38f43d4e3320c513ea154efff5c3ac32d0056866e1de548256eb78cdb287dfb2",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-shizuoka/revisions/38f43d4e3320c513ea154efff5c3ac32d0056866e1de548256eb78cdb287dfb2.png"
+      },
+      "bytes": 56041,
+      "id": "38f43d4e3320c513ea154efff5c3ac32d0056866e1de548256eb78cdb287dfb2",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:16.051Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312771739/rectangle_large_type_2_7d45899a786dfbaeffaa0abc71731328.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "38f43d4e3320c513ea154efff5c3ac32d0056866e1de548256eb78cdb287dfb2"
+      }
+    },
+    {
+      "sha256": "733f9b55a2650a0ee041316b132237d0964faa56496a4b1c568c5d4bb96b883d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-shizuoka/revisions/733f9b55a2650a0ee041316b132237d0964faa56496a4b1c568c5d4bb96b883d.png"
+      },
+      "bytes": 109233,
+      "id": "733f9b55a2650a0ee041316b132237d0964faa56496a4b1c568c5d4bb96b883d",
+      "kind": "candidate",
+      "version": "2026-10-02-household-r1",
+      "createdAt": "2026-10-02T03:18:51.565Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "fbd38555f8f9d3e4c49bbef8fe7f074ff9c0193ff411f7628c485e35ac63fefe"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+        "reviewedAt": "2026-10-02T05:27:41.112Z"
+      },
+      "provenance": {
+        "renderer": "bold-note-cover",
+        "sourceUrl": "https://storage.stats47.jp/app/stats/housing-expenditure-total/values.json",
+        "sourceSha256": "5d5e5bf90081c0d39a47f286cb71c2134fdff0c4142931100f0756859e788672"
+      }
+    },
+    {
+      "sha256": "751bdd8bcb42963e396d66e15facd3640c11c6d1aeb72e81b3eee2da8f936e7a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-shizuoka/revisions/751bdd8bcb42963e396d66e15facd3640c11c6d1aeb72e81b3eee2da8f936e7a.png"
+      },
+      "bytes": 101320,
+      "id": "751bdd8bcb42963e396d66e15facd3640c11c6d1aeb72e81b3eee2da8f936e7a",
+      "kind": "r2-archive",
+      "version": "legacy-r2-import-2026-10-02",
+      "createdAt": "2026-10-02T03:29:29.456Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Legacy R2 asset preserved; not adopted for note",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "legacy-public-r2",
+        "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-shizuoka/images/cover-1280x670.png",
+        "sourceSha256": "751bdd8bcb42963e396d66e15facd3640c11c6d1aeb72e81b3eee2da8f936e7a"
+      }
+    },
+    {
+      "sha256": "2f78704438e150479b1ae5c8d4f2797bbb48337c2630fd45b2e596eff5f433b4",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-shizuoka/revisions/2f78704438e150479b1ae5c8d4f2797bbb48337c2630fd45b2e596eff5f433b4.png"
+      },
+      "bytes": 69239,
+      "id": "2f78704438e150479b1ae5c8d4f2797bbb48337c2630fd45b2e596eff5f433b4",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T06:11:58.082Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/319911317/rectangle_large_type_2_668e7803437872bcc60459c9e9f05a0a.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "2f78704438e150479b1ae5c8d4f2797bbb48337c2630fd45b2e596eff5f433b4"
+      }
+    },
+    {
+      "sha256": "09b4417b2fa5201a63c95857a34be04653b1e7069f0836fbad29c1a8fa0e5de7",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-shizuoka/revisions/09b4417b2fa5201a63c95857a34be04653b1e7069f0836fbad29c1a8fa0e5de7.png"
+      },
+      "bytes": 1505214,
+      "id": "09b4417b2fa5201a63c95857a34be04653b1e7069f0836fbad29c1a8fa0e5de7",
+      "kind": "candidate",
+      "version": "imagegen-category-contract-v1-20261015",
+      "createdAt": "2026-10-15T06:20:55.427Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "4ff084c3d10f38d52f6a9ca952adc1f685d7ea71b1f3830b29ad2a250c34b2f1"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "NCI-00097: 原寸/320pxの文字・補足・人物なし・題材を個別確認済み。家計は検証済み県主域参照と対象市・2024年・二人以上の世帯を照合。2026-10-15ユーザーが今回10件の反映を指示。",
+        "reviewedAt": "2026-10-15T06:36:43.436Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "4ff084c3d10f38d52f6a9ca952adc1f685d7ea71b1f3830b29ad2a250c34b2f1",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-shizuoka/inputs/4ff084c3d10f38d52f6a9ca952adc1f685d7ea71b1f3830b29ad2a250c34b2f1.json"
+          },
+          "bytes": 13158
+        },
+        "production": {
+          "id": "NCI-00097",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "4badf7b56ea24a45e3050e29bad7bc23ff4d3bc023db7e8db9300f6b20e2d067"
+        }
+      }
+    },
+    {
+      "sha256": "32c6f27023be329f3705c0a7d6d9cd73b1e3bbf7e41ab483145fa139e4406dae",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-shizuoka/revisions/32c6f27023be329f3705c0a7d6d9cd73b1e3bbf7e41ab483145fa139e4406dae.png"
+      },
+      "bytes": 1556065,
+      "id": "32c6f27023be329f3705c0a7d6d9cd73b1e3bbf7e41ab483145fa139e4406dae",
+      "kind": "candidate",
+      "version": "pop-NCP-002-v3-07346e5a11c5",
+      "createdAt": "2026-10-23T08:02:20.959Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "0b40a944051169ba1dc096cd35f0bb8bbaa70ff7e554ae38a75363d23b4ab4a8"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "静岡県の輪郭、静岡市・2024年・二人以上の世帯、住まいの題材を新旧比較。輪郭誤りの初稿を破棄し、修正版の原寸と幅320pxで全文字を確認。",
+        "reviewedAt": "2026-10-23T08:05:26.986Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "0b40a944051169ba1dc096cd35f0bb8bbaa70ff7e554ae38a75363d23b4ab4a8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-shizuoka/inputs/0b40a944051169ba1dc096cd35f0bb8bbaa70ff7e554ae38a75363d23b4ab4a8.json"
+          },
+          "bytes": 13695
+        },
+        "production": {
+          "id": "NCI-00097",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "07346e5a11c561f7e939106724346354846e5a48b5a789269ad92b907ad852d9"
+        }
+      }
+    }
+  ]
+}

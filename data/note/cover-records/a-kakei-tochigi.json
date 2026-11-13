@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-kakei-tochigi",
+  "production": {
+    "id": "NCI-00098",
+    "policyId": "NCP-002",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "栃木県の家計\n交通費に注目",
+      "subline": "宇都宮市・2024年\n二人以上の世帯",
+      "subject": "添付は栃木県の主域輪郭を示す検証済みの参照画像で、編集対象ではない。1280×670相当の横長の完成カバーを新たに作る。右側に参照の県形を大きく、同じ北向き・縦横比・凹凸を忠実に維持して、濃紺または淡黄色の一枚の面と太い縁取りで主役にする。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けを一切加えない。生活の小物は輪郭と文字に重ならない右下に無人の青い乗用車のミニカーを小さく1点だけ。車両や家の中も完全に無人。窓は均一な淡い水色で、人影・頭・顔のような黒い形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、各行とも1280px換算で文字高65px以上を目安に大きくする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。 新版は輪郭の周囲と補足欄に余白を設け、背景の筆塗りを淡くし、県形・見出し・都市名を読み取りやすく配置する。",
+      "evidence": "https://note.com/stats47/n/n0fd0305a6b8c 2026-10-15公開本文確認。宇都宮市の2024年・二人以上の世帯。十大費目の交通・通信は47県庁所在市単純平均比1.40倍。自動車購入2.57倍も本文に記載。 比較の分母は家計調査の全国平均ではなく47県庁所在市の単純平均。カバーに倍率・順位・因果は載せず、費目への着目だけを示す。地図は栃木県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は宇都宮市であり県全域の観測図ではない。人物・キャラクターなし。 2026-10-23に公開APIの状態と都市名・対象年・世帯区分を照合。",
+      "dataScope": {
+        "place": "宇都宮市",
+        "year": "2024",
+        "households": "二人以上の世帯"
+      }
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "990eb83bbdff28ec8ec3d477ed2476c02d6cba5bcdd4cdc40a14b729c365fd24",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-tochigi/revisions/990eb83bbdff28ec8ec3d477ed2476c02d6cba5bcdd4cdc40a14b729c365fd24.png"
+      },
+      "bytes": 47027,
+      "id": "990eb83bbdff28ec8ec3d477ed2476c02d6cba5bcdd4cdc40a14b729c365fd24",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:16.296Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312771774/rectangle_large_type_2_551f87848c267acd4c37098e7d1b7bfd.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "990eb83bbdff28ec8ec3d477ed2476c02d6cba5bcdd4cdc40a14b729c365fd24"
+      }
+    },
+    {
+      "sha256": "6a3217e1325f8a79d1e47060884158a974cdbede7d09ddad2e37841bc3de6efa",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-tochigi/revisions/6a3217e1325f8a79d1e47060884158a974cdbede7d09ddad2e37841bc3de6efa.png"
+      },
+      "bytes": 100398,
+      "id": "6a3217e1325f8a79d1e47060884158a974cdbede7d09ddad2e37841bc3de6efa",
+      "kind": "candidate",
+      "version": "2026-10-02-household-r1",
+      "createdAt": "2026-10-02T03:18:56.111Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "13866dcedcbd79cf12dfaddd503e3eeac528e8e69bdf587ef20bd23e6bd8c7dc"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+        "reviewedAt": "2026-10-02T05:27:41.112Z"
+      },
+      "provenance": {
+        "renderer": "bold-note-cover",
+        "sourceUrl": "https://storage.stats47.jp/app/stats/transport-communication-expenditure-total/values.json",
+        "sourceSha256": "05bc5256a35560cef8d78d1eaa97b2a6aad48561fef8e246b00beb1ffcacc30a"
+      }
+    },
+    {
+      "sha256": "4b98d5db94be38d9222a4be4247cde0e877eb6f548f9cefa7a83e1eac0751583",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-tochigi/revisions/4b98d5db94be38d9222a4be4247cde0e877eb6f548f9cefa7a83e1eac0751583.png"
+      },
+      "bytes": 98864,
+      "id": "4b98d5db94be38d9222a4be4247cde0e877eb6f548f9cefa7a83e1eac0751583",
+      "kind": "r2-archive",
+      "version": "legacy-r2-import-2026-10-02",
+      "createdAt": "2026-10-02T03:29:32.080Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Legacy R2 asset preserved; not adopted for note",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "legacy-public-r2",
+        "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-tochigi/images/cover-1280x670.png",
+        "sourceSha256": "4b98d5db94be38d9222a4be4247cde0e877eb6f548f9cefa7a83e1eac0751583"
+      }
+    },
+    {
+      "sha256": "639dab369827240cef86f67c2d7ba8f09e1a37c62908ded333580230c5cdacc2",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-tochigi/revisions/639dab369827240cef86f67c2d7ba8f09e1a37c62908ded333580230c5cdacc2.png"
+      },
+      "bytes": 66282,
+      "id": "639dab369827240cef86f67c2d7ba8f09e1a37c62908ded333580230c5cdacc2",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T06:11:58.321Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/319911339/rectangle_large_type_2_50d6d714b44dc5e6eb09fdb5b7e76c08.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "639dab369827240cef86f67c2d7ba8f09e1a37c62908ded333580230c5cdacc2"
+      }
+    },
+    {
+      "sha256": "a1a4116cd59efbf641c2ecdb414f2ca58ef9536b0d5ac05caff651ab24521259",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-tochigi/revisions/a1a4116cd59efbf641c2ecdb414f2ca58ef9536b0d5ac05caff651ab24521259.png"
+      },
+      "bytes": 1573020,
+      "id": "a1a4116cd59efbf641c2ecdb414f2ca58ef9536b0d5ac05caff651ab24521259",
+      "kind": "candidate",
+      "version": "imagegen-category-contract-v1-20261015",
+      "createdAt": "2026-10-15T06:20:43.802Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "3af6a20986e7e7e73c3e7e401fa400efdc2e4c2f7df6698baedc4a5aeb4dd7c6"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "NCI-00098: 原寸/320pxの文字・補足・人物なし・題材を個別確認済み。家計は検証済み県主域参照と対象市・2024年・二人以上の世帯を照合。2026-10-15ユーザーが今回10件の反映を指示。",
+        "reviewedAt": "2026-10-15T06:36:34.585Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "3af6a20986e7e7e73c3e7e401fa400efdc2e4c2f7df6698baedc4a5aeb4dd7c6",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-tochigi/inputs/3af6a20986e7e7e73c3e7e401fa400efdc2e4c2f7df6698baedc4a5aeb4dd7c6.json"
+          },
+          "bytes": 13169
+        },
+        "production": {
+          "id": "NCI-00098",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "c1d1aa0ffdd5adbda7b1fc5f8a7af7b63a11389922851da560ea920efa51484a"
+        }
+      }
+    },
+    {
+      "sha256": "f6faa195fb3907c60d3bb144d5d7cd10a52a0bcc07aebbfd44ce00efba6795e1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-tochigi/revisions/f6faa195fb3907c60d3bb144d5d7cd10a52a0bcc07aebbfd44ce00efba6795e1.png"
+      },
+      "bytes": 1494924,
+      "id": "f6faa195fb3907c60d3bb144d5d7cd10a52a0bcc07aebbfd44ce00efba6795e1",
+      "kind": "candidate",
+      "version": "pop-NCP-002-v3-3e30d0a8fc1d",
+      "createdAt": "2026-10-23T08:02:31.799Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "564060a0785eb418ba0b273c81b582510df89e55bc706925ae0c7443c7b27841"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "栃木県の輪郭、宇都宮市・2024年・二人以上の世帯、交通費と車の題材を新旧比較。署名欠けの初稿を破棄し、修正版の原寸と幅320pxで全文字を確認。",
+        "reviewedAt": "2026-10-23T08:05:30.075Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "564060a0785eb418ba0b273c81b582510df89e55bc706925ae0c7443c7b27841",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-tochigi/inputs/564060a0785eb418ba0b273c81b582510df89e55bc706925ae0c7443c7b27841.json"
+          },
+          "bytes": 13504
+        },
+        "production": {
+          "id": "NCI-00098",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "3e30d0a8fc1d62f7b047810b4cdcfd2c55e5597e6cf59b917209c6f2710ed9d4"
+        }
+      }
+    }
+  ]
+}

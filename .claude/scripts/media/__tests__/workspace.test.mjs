@@ -11,6 +11,7 @@ import { snsImageTemplate } from '../lib/catalog.mjs';
 import { roleForTemplate } from '../lib/classification.mjs';
 import { saveImagePolicy, assessImage } from '../lib/workspace.mjs';
 import { saveImageComparison } from '../lib/workspace.mjs';
+import { COVER_RECORDS_DIR } from '../../note/lib/cover-assets.mjs';
 
 test('SNS classification uses asset evidence and excludes non-chart carousel slides',()=>{
  assert.equal(snsImageTemplate({template:'shock'},{source:'sns/ranking/a/x/stills/all47.png'}),'unclassified');
@@ -51,6 +52,8 @@ function fixture(t){
   if(rel===FILES.inventory&&!fs.existsSync(path.join(ROOT,rel))){fs.writeFileSync(path.join(root,rel),JSON.stringify({schemaVersion:1,articles:{}}));continue;}
   fs.copyFileSync(path.join(ROOT,rel),path.join(root,rel));
  }
+ // カバーの台帳は正本 (cover-assets.json) と記事ごとの記録に分かれている。両方そろえて写す
+ fs.cpSync(path.join(ROOT,COVER_RECORDS_DIR),path.join(root,COVER_RECORDS_DIR),{recursive:true});
  fs.writeFileSync(path.join(root,FILES.quality),JSON.stringify({schemaVersion:1,reviews:{},images:{}}));
  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));return root;
 }

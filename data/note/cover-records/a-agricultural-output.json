@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-agricultural-output",
+  "production": {
+    "id": "NCI-00049",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "農業産出額\n多い県は？",
+      "subline": "1位は北海道\n2023年・金額で比較",
+      "subject": "右側に無地の木箱に入った農産物を一組の主役として大きく描く。特定作物だけの産出額に見せない。人物・キャラクター・紙幣・値札・地図・グラフ・ロゴ・指定外の文字を描かない。",
+      "evidence": "公開本文を確認。2023年の農業産出額は農産物の生産量と農家庭先価格で評価した金額。北海道1,347,800百万円が1位、東京都22,000百万円が47位。生産重量や作付面積と混同しない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "1eb380713fa722770db79f0ceba4d233b6687f2676bc9d1e3f542e28d145f740",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-agricultural-output/revisions/1eb380713fa722770db79f0ceba4d233b6687f2676bc9d1e3f542e28d145f740.png"
+      },
+      "bytes": 72831,
+      "id": "1eb380713fa722770db79f0ceba4d233b6687f2676bc9d1e3f542e28d145f740",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:07.025Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312770676/rectangle_large_type_2_72886c88b442f4eca3d87befe244cd6b.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "1eb380713fa722770db79f0ceba4d233b6687f2676bc9d1e3f542e28d145f740"
+      }
+    },
+    {
+      "sha256": "a3ea6632950ada141e4af43accf04e289555ec39a52fc58b98617e79ee982c57",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-agricultural-output/revisions/a3ea6632950ada141e4af43accf04e289555ec39a52fc58b98617e79ee982c57.png"
+      },
+      "bytes": 114353,
+      "id": "a3ea6632950ada141e4af43accf04e289555ec39a52fc58b98617e79ee982c57",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:13:03.257Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "a6ad9f2cacaa948ce8fc5da6f59416ffdff15b0ab2d70f74d90d7ea8375fe0e5"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.840Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/agricultural-output/values.json",
+        "sourceSha256": "0e626f366fd47b2e15f79f1fc7084643bc9c15fe7d8d44be6489241c4e4ac377",
+        "input": {
+          "sha256": "a6ad9f2cacaa948ce8fc5da6f59416ffdff15b0ab2d70f74d90d7ea8375fe0e5",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-agricultural-output/inputs/a6ad9f2cacaa948ce8fc5da6f59416ffdff15b0ab2d70f74d90d7ea8375fe0e5.json"
+          },
+          "bytes": 7482
+        }
+      }
+    },
+    {
+      "sha256": "e46cb0757a522bd1c2de439d5241b528d3b68faa74861c8ae2ad5f0442c7f4de",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-agricultural-output/revisions/e46cb0757a522bd1c2de439d5241b528d3b68faa74861c8ae2ad5f0442c7f4de.png"
+      },
+      "bytes": 1911622,
+      "id": "e46cb0757a522bd1c2de439d5241b528d3b68faa74861c8ae2ad5f0442c7f4de",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-192de3ffbc98",
+      "createdAt": "2026-10-23T05:45:38.128Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "fa56814754f553a4e00fe649a48674dbd3bbd7f20e47bb6afeb4078d0ad61642"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "本文の2023年農業産出額と北海道1位に一致。新候補は金額での比較を明記し、生産量との混同を避ける。原寸・320pxで文字と農産物の題材を確認。",
+        "reviewedAt": "2026-10-23T05:50:13.395Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "fa56814754f553a4e00fe649a48674dbd3bbd7f20e47bb6afeb4078d0ad61642",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-agricultural-output/inputs/fa56814754f553a4e00fe649a48674dbd3bbd7f20e47bb6afeb4078d0ad61642.json"
+          },
+          "bytes": 7936
+        },
+        "production": {
+          "id": "NCI-00049",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "192de3ffbc98b1cba46ba8f8d5c5641ce66ca7564d037226a223ba86e9feb1d7"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-kakei-expense-other",
+  "production": {
+    "id": "NCI-00514",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "進学の仕送りが\n最も少ないのは大阪市",
+      "subline": "地元の大学でどこまで説明できるか",
+      "subject": "食品と日用品を詰めた無地の段ボール箱と、無地の封筒を描く。人物・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。箱や封筒に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "本文確認2026-11-05。国内遊学仕送り金の2021〜2025年5年平均は富山市年117,825円、大阪市年4,533円。大学収容力指数で説明できるのは一部で、受け入れが小さくても仕送りが少ない市がある。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "19eac5eb0c1908952e56ed8f116f2ab01371a6310e0ee0796dc80025b112effa",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-expense-other/revisions/19eac5eb0c1908952e56ed8f116f2ab01371a6310e0ee0796dc80025b112effa.png"
+      },
+      "bytes": 1863128,
+      "id": "19eac5eb0c1908952e56ed8f116f2ab01371a6310e0ee0796dc80025b112effa",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-36bfb82f52e9",
+      "createdAt": "2026-11-04T23:09:19.850Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "cfa3d7b2495c2879c2cb8c87d340447281ce13e0550e18ee0cffbcaeb20276a2"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸と幅320pxで全文・題材を確認。誤字・追加文字・文字切れ・重なりなし、人物と架空の図なし、本文の問いに一致",
+        "reviewedAt": "2026-11-04T23:09:23.463Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "cfa3d7b2495c2879c2cb8c87d340447281ce13e0550e18ee0cffbcaeb20276a2",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-other/inputs/cfa3d7b2495c2879c2cb8c87d340447281ce13e0550e18ee0cffbcaeb20276a2.json"
+          },
+          "bytes": 8687
+        },
+        "production": {
+          "id": "NCI-00514",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "36bfb82f52e98db7b01aab568d5ff88b702a46198ec4c2f3fd8c6817e3718c2f"
+        }
+      }
+    },
+    {
+      "sha256": "f115ea5d9f428a0c32ad56a39f6e6850f85cc5a1706b12daf4b042f2ff018e12",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-expense-other/revisions/f115ea5d9f428a0c32ad56a39f6e6850f85cc5a1706b12daf4b042f2ff018e12.png"
+      },
+      "bytes": 489337,
+      "id": "f115ea5d9f428a0c32ad56a39f6e6850f85cc5a1706b12daf4b042f2ff018e12",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-05T01:21:35.741Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/332384421/rectangle_large_type_2_1dca28c3810b887ac66cc873d4d6b44b.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "f115ea5d9f428a0c32ad56a39f6e6850f85cc5a1706b12daf4b042f2ff018e12"
+      }
+    }
+  ]
+}

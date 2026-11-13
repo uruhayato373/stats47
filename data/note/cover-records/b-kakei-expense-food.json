@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-kakei-expense-food",
+  "production": {
+    "id": "NCI-00510",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "香川は家で食べる\nうどんも日本一？",
+      "subline": "外食と購入を家計調査で並べる",
+      "subject": "湯気の立つうどんの丼と箸を手前に、奥に無地の袋に入った生うどんと乾麺の束を並べる。人物・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や袋に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "本文確認2026-11-05。外食の日本そば・うどんは香川(高松市)、生うどん・そばは19年連続1位、乾うどん・そばは高松市と秋田市がほぼ互角。題名の問いをそのまま見出しにした。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "00577c6911032f5dafcd016ee90fa0f90e64c30bee21676ff4a5bb9a735fd64c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-expense-food/revisions/00577c6911032f5dafcd016ee90fa0f90e64c30bee21676ff4a5bb9a735fd64c.png"
+      },
+      "bytes": 1999940,
+      "id": "00577c6911032f5dafcd016ee90fa0f90e64c30bee21676ff4a5bb9a735fd64c",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-7850649db0d7",
+      "createdAt": "2026-11-04T23:10:18.890Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "1439d3f13ebdf8ac82b43721a9965b405a6b6b9925195fd2d1363285bc8c60b2"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸と幅320pxで全文・題材を確認。誤字・追加文字・文字切れ・重なりなし、人物と架空の図なし、本文の問いに一致",
+        "reviewedAt": "2026-11-04T23:10:22.591Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "1439d3f13ebdf8ac82b43721a9965b405a6b6b9925195fd2d1363285bc8c60b2",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-food/inputs/1439d3f13ebdf8ac82b43721a9965b405a6b6b9925195fd2d1363285bc8c60b2.json"
+          },
+          "bytes": 8675
+        },
+        "production": {
+          "id": "NCI-00510",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "7850649db0d704ad208390050fca1c41525ed3720d9b2f7411aebdc03711c704"
+        }
+      }
+    },
+    {
+      "sha256": "435b462ea7d0ed9eb9e5d5235816a4a0b3bb4841d4aba52578c695de622a0099",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-expense-food/revisions/435b462ea7d0ed9eb9e5d5235816a4a0b3bb4841d4aba52578c695de622a0099.png"
+      },
+      "bytes": 510908,
+      "id": "435b462ea7d0ed9eb9e5d5235816a4a0b3bb4841d4aba52578c695de622a0099",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-04T23:59:46.640Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/332361233/rectangle_large_type_2_409adc2dcc03373f9da7296d88bdd3c2.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "435b462ea7d0ed9eb9e5d5235816a4a0b3bb4841d4aba52578c695de622a0099"
+      }
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-kakei-expense-clothing",
+  "production": {
+    "id": "NCI-00508",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "服にお金を使うのは\n寒い県なのか",
+      "subline": "コートと被服費全体で答えが変わる",
+      "subject": "ハンガーに掛けた厚手のコートと、畳んだマフラーを描く。人物・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。服やタグに文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "本文確認2026-11-05。女性用コートは年平均気温と相関-0.54だが、被服及び履物費全体は-0.02。被服費は消費支出総額と0.81で連動する。題名の問いを見出しにした。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "4d56f637f2f78342717f6059449c3826eb4248f65144c1bfa722364c36db12f1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-expense-clothing/revisions/4d56f637f2f78342717f6059449c3826eb4248f65144c1bfa722364c36db12f1.png"
+      },
+      "bytes": 1790894,
+      "id": "4d56f637f2f78342717f6059449c3826eb4248f65144c1bfa722364c36db12f1",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-de78f5e07d8b",
+      "createdAt": "2026-11-04T23:07:39.058Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "9b7e2949af4446dfdb7fa103b707560de88e729538f007afbc6ad18cb6f0de17"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸と幅320pxで全文・題材を確認。誤字・追加文字・文字切れ・重なりなし、人物と架空の図なし、本文の問いに一致",
+        "reviewedAt": "2026-11-04T23:07:43.184Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "9b7e2949af4446dfdb7fa103b707560de88e729538f007afbc6ad18cb6f0de17",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-clothing/inputs/9b7e2949af4446dfdb7fa103b707560de88e729538f007afbc6ad18cb6f0de17.json"
+          },
+          "bytes": 8587
+        },
+        "production": {
+          "id": "NCI-00508",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "de78f5e07d8b5f884a0962a03fb2b79ef221c937ebf6f2658844a0b555de81a4"
+        }
+      }
+    },
+    {
+      "sha256": "4063d9f707d5905e4c5029b9e05efcc3daa4c4c8aa99fb0632cfde33241dec0e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-expense-clothing/revisions/4063d9f707d5905e4c5029b9e05efcc3daa4c4c8aa99fb0632cfde33241dec0e.png"
+      },
+      "bytes": 479539,
+      "id": "4063d9f707d5905e4c5029b9e05efcc3daa4c4c8aa99fb0632cfde33241dec0e",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-04T23:20:10.453Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/332350727/rectangle_large_type_2_c4c8f3ff2a20b61ae5cdb634e270f51e.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "4063d9f707d5905e4c5029b9e05efcc3daa4c4c8aa99fb0632cfde33241dec0e"
+      }
+    }
+  ]
+}

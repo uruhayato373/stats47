@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-kakei-a04-02",
+  "production": {
+    "id": "NCI-00182",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "70歳以上の\nエンゲル係数33.5%",
+      "subline": "米は最も安い単価で買っていた",
+      "subject": "米袋と小さな茶碗、箸を大きく描く。米袋に文字を入れない。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n6aae3232670d 本文確認2026-11-04。世帯主の年齢別で70歳以上のエンゲル係数は33.5%で最高。米は最も安い単価で買っていた。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "6c38a5e94201527ecc5fa9118ded86a383b33e5f7a6167fa95119389e49d96c3",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a04-02/revisions/6c38a5e94201527ecc5fa9118ded86a383b33e5f7a6167fa95119389e49d96c3.png"
+      },
+      "bytes": 31718,
+      "id": "6c38a5e94201527ecc5fa9118ded86a383b33e5f7a6167fa95119389e49d96c3",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T02:57:34.387Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "cad773cda3a8733eef0fe90b390c8164e119e4935f7af4ecd1bf1c56cba7b4df"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・出典が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T02:57:55.214Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "cad773cda3a8733eef0fe90b390c8164e119e4935f7af4ecd1bf1c56cba7b4df",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a04-02/inputs/cad773cda3a8733eef0fe90b390c8164e119e4935f7af4ecd1bf1c56cba7b4df.json"
+          },
+          "bytes": 1333
+        }
+      }
+    },
+    {
+      "sha256": "344971477665d49fea52ab5afe64a102b785cf8dd38a8259015ae272e21ac867",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a04-02/revisions/344971477665d49fea52ab5afe64a102b785cf8dd38a8259015ae272e21ac867.png"
+      },
+      "bytes": 60962,
+      "id": "344971477665d49fea52ab5afe64a102b785cf8dd38a8259015ae272e21ac867",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:22:25.442Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324036466/rectangle_large_type_2_515041804722319a73a434d164d6293c.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "344971477665d49fea52ab5afe64a102b785cf8dd38a8259015ae272e21ac867"
+      }
+    },
+    {
+      "sha256": "b1ca200a0ae15219ddd5dcf983e9b21641c75a0e060b67d4a14f6178ac071052",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a04-02/revisions/b1ca200a0ae15219ddd5dcf983e9b21641c75a0e060b67d4a14f6178ac071052.png"
+      },
+      "bytes": 1983686,
+      "id": "b1ca200a0ae15219ddd5dcf983e9b21641c75a0e060b67d4a14f6178ac071052",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-a2b63f3a8c78",
+      "createdAt": "2026-11-04T01:23:04.750Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "0c7158f3fa7bbac9ad621c9c2f9961afa9de2e84445dfe7dcc399e60c0eebbf1"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:23:55.189Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "0c7158f3fa7bbac9ad621c9c2f9961afa9de2e84445dfe7dcc399e60c0eebbf1",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a04-02/inputs/0c7158f3fa7bbac9ad621c9c2f9961afa9de2e84445dfe7dcc399e60c0eebbf1.json"
+          },
+          "bytes": 8157
+        },
+        "production": {
+          "id": "NCI-00182",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "a2b63f3a8c78b4f90f7553b6247f1f1dd081fc749dd12473b8538f8ba394a1d0"
+        }
+      }
+    }
+  ]
+}

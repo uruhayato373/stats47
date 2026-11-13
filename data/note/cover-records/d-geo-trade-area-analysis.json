@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "d-geo-trade-area-analysis",
+  "production": {
+    "id": "NCI-00253",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

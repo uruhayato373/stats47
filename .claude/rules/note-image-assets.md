@@ -24,6 +24,11 @@ paths:
 - 保存実体とSHAを確認して台帳を切り替えるまで旧画像を削除しない。入力のSVG・コード・生成設定はgitで共有可。ローカルのPNGと作業用manifestは正本への保管確認後に一時ファイルとして扱う。
 
 カバーの正本は `data/note/cover-assets.json`、形の契約は `cover-assets.schema.json`。
+台帳は 2 つのデータセットに分けて保存する (2026-11-14。1 ファイルが 3.7MB になり、リポジトリの 1MB 上限を超えたため)。
+正本は記事ごとに「どの版が候補・採用・公開か」の参照と公開の観測だけを持ち、制作内容 (`production`) と版の記録 (`revisions`) は
+記事ごとの `data/note/cover-records/<articleKey>.json` (形の契約は `cover-records.schema.json`) に置く。
+読み書きは `.claude/scripts/note/lib/cover-assets.mjs` の `readCoverLedger` / `updateCoverLedger` だけが 2 つを結んで行い、
+JSON を直接読んで制作内容や版を探さない。正本に行の無い記録ファイルと、正本に `production`・`revisions` を持つ旧形式は読み込みで止まる。
 実体は `stats47-private:note/covers/<articleKey>/revisions/<sha256>.png` に不変保存する。
 制作根拠のJSONも同じprivate R2の `note/covers/<articleKey>/inputs/<sha256>.json` に不変保存し、
 台帳の `provenance.input` と `quality.evidenceSha256` を同じSHAで結ぶ。`verify` は画像と入力の両方を照合する。

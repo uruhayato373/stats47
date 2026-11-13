@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "d-geo-medical-access-analysis",
+  "production": {
+    "id": "NCI-00247",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

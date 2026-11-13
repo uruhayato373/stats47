@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n0654ddf27920",
+  "production": {
+    "id": "NCI-00382",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "カラオケをした人\n1位は東京都",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無文字のマイク1本と無人のカラオケ室を描く。画面に歌詞や人物を描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n0654ddf27920 2026-10-23公開API本文照合。記事題名「【2021年版】カラオケをした人が多い県は？ 1位は東京都｜都道府県ランキング」。本文中の「東京都」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "cdb8a7dd6f66f213f56b214f888ae706558a12cd174184b9854a4f0cf990aafa",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n0654ddf27920/revisions/cdb8a7dd6f66f213f56b214f888ae706558a12cd174184b9854a4f0cf990aafa.png"
+      },
+      "bytes": 76315,
+      "id": "cdb8a7dd6f66f213f56b214f888ae706558a12cd174184b9854a4f0cf990aafa",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:47.976Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312773560/rectangle_large_type_2_3f6c8225a46cb9895910aadd9b6cf78b.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "cdb8a7dd6f66f213f56b214f888ae706558a12cd174184b9854a4f0cf990aafa"
+      }
+    },
+    {
+      "sha256": "4ffce4228039b6055d8f33c6fe543c92c03aef43f2f46cd98bd29043d8640186",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n0654ddf27920/revisions/4ffce4228039b6055d8f33c6fe543c92c03aef43f2f46cd98bd29043d8640186.png"
+      },
+      "bytes": 115060,
+      "id": "4ffce4228039b6055d8f33c6fe543c92c03aef43f2f46cd98bd29043d8640186",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:14:04.675Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e2d79f706022def3de2bcb6baae6417c9fe59d227105ebdef59b98737d196931"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.840Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-karaoke/values.json",
+        "sourceSha256": "26890f898a197a49faaf7acd1e5a818267d4b87c9a1002877749b842a133eadf",
+        "input": {
+          "sha256": "e2d79f706022def3de2bcb6baae6417c9fe59d227105ebdef59b98737d196931",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n0654ddf27920/inputs/e2d79f706022def3de2bcb6baae6417c9fe59d227105ebdef59b98737d196931.json"
+          },
+          "bytes": 6546
+        }
+      }
+    },
+    {
+      "sha256": "bbbf335c4f1639d78e4068c8b184353fc8a6c7e0dbe8f05ac2b226c68fd37e2b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n0654ddf27920/revisions/bbbf335c4f1639d78e4068c8b184353fc8a6c7e0dbe8f05ac2b226c68fd37e2b.png"
+      },
+      "bytes": 2005333,
+      "id": "bbbf335c4f1639d78e4068c8b184353fc8a6c7e0dbe8f05ac2b226c68fd37e2b",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-3edbc8171a74",
+      "createdAt": "2026-10-23T12:37:55.040Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "8650db335cb9d2855b72e84f7eb83339a09a49d9b381e6c76aa15b0ec59ecfe2"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T12:40:50.369Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "8650db335cb9d2855b72e84f7eb83339a09a49d9b381e6c76aa15b0ec59ecfe2",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n0654ddf27920/inputs/8650db335cb9d2855b72e84f7eb83339a09a49d9b381e6c76aa15b0ec59ecfe2.json"
+          },
+          "bytes": 8613
+        },
+        "production": {
+          "id": "NCI-00382",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "3edbc8171a74ee7631d273f1487fe88ee486cf84802eeba4ee8c20674025758e"
+        }
+      }
+    }
+  ]
+}

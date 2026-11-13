@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-agricultural-employment-population",
+  "production": {
+    "id": "NCI-00048",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "農業就業人口\n多い県は？",
+      "subline": "1位は北海道\n2014年のデータ",
+      "subject": "右側に無地の鍬を1本だけ大きく描き、畑は背景として控えめにする。農業従事者の総数を扱い、高齢化や現在の人数を暗示しない。人物・顔・手・動物・キャラクター・地図・グラフ・架空の数値を描かない。",
+      "evidence": "公開本文を確認。2014年の農業就業人口は北海道96,557人で1位、東京都10,986人で47位。農業従事者の総数で、現在の人数ではない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "5ddba712cf9b09f05f5a26d50daf9112e1dcd7599bce754f688533906ab253a6",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-agricultural-employment-population/revisions/5ddba712cf9b09f05f5a26d50daf9112e1dcd7599bce754f688533906ab253a6.png"
+      },
+      "bytes": 30060,
+      "id": "5ddba712cf9b09f05f5a26d50daf9112e1dcd7599bce754f688533906ab253a6",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:07.166Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312770173/rectangle_large_type_2_eb35b30839c5fddb1204be80d3e0565a.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "5ddba712cf9b09f05f5a26d50daf9112e1dcd7599bce754f688533906ab253a6"
+      }
+    },
+    {
+      "sha256": "0327638e3729ad5cb2ca50be1d7f20a7c56eb95a1a7ea3d769df56542691dee9",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-agricultural-employment-population/revisions/0327638e3729ad5cb2ca50be1d7f20a7c56eb95a1a7ea3d769df56542691dee9.png"
+      },
+      "bytes": 114908,
+      "id": "0327638e3729ad5cb2ca50be1d7f20a7c56eb95a1a7ea3d769df56542691dee9",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:10:47.473Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "c72c945fe0f4ae8640263d847fbf9ce196cdbeeb67323a0b2e8be21a43844472"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.835Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/agricultural-employment-population/values.json",
+        "sourceSha256": "3de4aaf65db3b7f94ea7610127971fed8ad90977549e59b900bcd4e89a453e5f",
+        "input": {
+          "sha256": "c72c945fe0f4ae8640263d847fbf9ce196cdbeeb67323a0b2e8be21a43844472",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-agricultural-employment-population/inputs/c72c945fe0f4ae8640263d847fbf9ce196cdbeeb67323a0b2e8be21a43844472.json"
+          },
+          "bytes": 7530
+        }
+      }
+    },
+    {
+      "sha256": "b7a6fc7ce8c50bc580a4edb7bee8d0d28868937dbb586377a02ad9356f3d0930",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-agricultural-employment-population/revisions/b7a6fc7ce8c50bc580a4edb7bee8d0d28868937dbb586377a02ad9356f3d0930.png"
+      },
+      "bytes": 1780252,
+      "id": "b7a6fc7ce8c50bc580a4edb7bee8d0d28868937dbb586377a02ad9356f3d0930",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-8afdc2349f57",
+      "createdAt": "2026-10-23T05:45:30.193Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "1bb5aa7ebac53273a3a88de2db7c72d1f1d3cc78855a6da143a3cedd30282ade"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "本文の2014年農業就業人口と北海道1位に一致。新候補は対象年を明示。原寸・320pxで文字と農具の題材を確認。",
+        "reviewedAt": "2026-10-23T05:49:42.389Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "1bb5aa7ebac53273a3a88de2db7c72d1f1d3cc78855a6da143a3cedd30282ade",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-agricultural-employment-population/inputs/1bb5aa7ebac53273a3a88de2db7c72d1f1d3cc78855a6da143a3cedd30282ade.json"
+          },
+          "bytes": 7959
+        },
+        "production": {
+          "id": "NCI-00048",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "8afdc2349f57a98d6b379dfb5a7b9703f12e5d6894258aef46c6f5c839d58b85"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "d-engel-coefficient-income",
+  "production": {
+    "id": "NCI-00239",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "収入で変わる\n食費の割合",
+      "subline": "エンゲル係数と家計の中身\n2024年・二人以上の世帯",
+      "subject": "緑とクリームと黄色。大きな食料品の買い物かごと、家計簿のノートを右側に組み合わせる。かごにはパン、野菜、牛乳など身近な食材を少数。価格や文字はノートと容器に書かない。札束、貧富の人物対比、棒グラフを描かない。人物・顔・手・動物・猫・鹿・鳥は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n392f0f3cb374 公開本文を2026-10-14確認。2024年家計調査の年間収入五分位階級別、二人以上世帯の食料費割合と品目支出。教育56倍などの利用有無を含む倍率をカバーで強調せず、エンゲル係数を所得の単純な診断としない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "40494e0253d538b58d5e54993b9200313f10dbfed7d69c91dbaaadcf5ec51216",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-engel-coefficient-income/revisions/40494e0253d538b58d5e54993b9200313f10dbfed7d69c91dbaaadcf5ec51216.png"
+      },
+      "bytes": 42388,
+      "id": "40494e0253d538b58d5e54993b9200313f10dbfed7d69c91dbaaadcf5ec51216",
+      "kind": "candidate",
+      "version": "2026-10-12-drafts",
+      "createdAt": "2026-10-12T00:53:33.339Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "0b9e5abfd929d70e834bde02f4a25f91436323251bad0286bcd91673867f98e3"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出し・記事の事実・図(または値を持たない背景地図)が読める。登録前の確認版とSHA一致",
+        "reviewedAt": "2026-10-12T00:54:34.790Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "0b9e5abfd929d70e834bde02f4a25f91436323251bad0286bcd91673867f98e3",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-engel-coefficient-income/inputs/0b9e5abfd929d70e834bde02f4a25f91436323251bad0286bcd91673867f98e3.json"
+          },
+          "bytes": 1282
+        }
+      }
+    },
+    {
+      "sha256": "67ce2f718a3584e8e567b878afe31f6393f94f3abd92cc5ea1b9ca959136a81d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-engel-coefficient-income/revisions/67ce2f718a3584e8e567b878afe31f6393f94f3abd92cc5ea1b9ca959136a81d.png"
+      },
+      "bytes": 78756,
+      "id": "67ce2f718a3584e8e567b878afe31f6393f94f3abd92cc5ea1b9ca959136a81d",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-14T08:41:26.266Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323548229/rectangle_large_type_2_6575b78c3a2a3a1f512fd5825f319590.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "67ce2f718a3584e8e567b878afe31f6393f94f3abd92cc5ea1b9ca959136a81d"
+      }
+    },
+    {
+      "sha256": "856cd0df4b1b12378df88228297cf378562b74af434183fddc1147c7c793f6f4",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-engel-coefficient-income/revisions/856cd0df4b1b12378df88228297cf378562b74af434183fddc1147c7c793f6f4.png"
+      },
+      "bytes": 1959615,
+      "id": "856cd0df4b1b12378df88228297cf378562b74af434183fddc1147c7c793f6f4",
+      "kind": "candidate",
+      "version": "imagegen-pop-v2-next-six-20261014",
+      "createdAt": "2026-10-14T08:58:55.237Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "11d8b3dc997869d4615c3d364c0aa0529ce1d5b538e53c9d6be73e87d4c2108e"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "2026-10-14に原寸と幅320px、管理画面の修正前後で確認済み。2026-10-15ユーザーがこの6件の公開反映を指示。",
+        "reviewedAt": "2026-10-15T00:44:15.995Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "11d8b3dc997869d4615c3d364c0aa0529ce1d5b538e53c9d6be73e87d4c2108e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-engel-coefficient-income/inputs/11d8b3dc997869d4615c3d364c0aa0529ce1d5b538e53c9d6be73e87d4c2108e.json"
+          },
+          "bytes": 8106
+        },
+        "production": {
+          "id": "NCI-00239",
+          "policyId": "NCP-005",
+          "policyVersion": 2,
+          "planSha256": "c1ad052c6a4ac116c055dba6f49ce1198d759810e3b0630322170eacb2440b93"
+        }
+      }
+    },
+    {
+      "sha256": "e5c7bcaf4a123387bd710e4537986982ff1b0e0649e12571d676d4a1ab8d028d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-engel-coefficient-income/revisions/e5c7bcaf4a123387bd710e4537986982ff1b0e0649e12571d676d4a1ab8d028d.png"
+      },
+      "bytes": 1898478,
+      "id": "e5c7bcaf4a123387bd710e4537986982ff1b0e0649e12571d676d4a1ab8d028d",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-9e4b3b6b4138",
+      "createdAt": "2026-11-04T03:54:38.805Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "a2bd6e697883cea529cc297ba42da7fa9fe616c1192290cfc33e275008999aa3"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T03:54:59.449Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "a2bd6e697883cea529cc297ba42da7fa9fe616c1192290cfc33e275008999aa3",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-engel-coefficient-income/inputs/a2bd6e697883cea529cc297ba42da7fa9fe616c1192290cfc33e275008999aa3.json"
+          },
+          "bytes": 8650
+        },
+        "production": {
+          "id": "NCI-00239",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "9e4b3b6b4138d9627671a09933909455025db6e678fc56d6efb57651a42bc630"
+        }
+      }
+    }
+  ]
+}

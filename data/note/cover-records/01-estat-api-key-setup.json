@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "01-estat-api-key-setup",
+  "production": {
+    "id": "NCI-00004",
+    "policyId": "NCP-007",
+    "policyVersion": 4,
+    "brief": {
+      "headline": "e-Stat APIキーを\n取得して使う",
+      "subline": "発行・環境変数・動作確認の手順",
+      "subject": "実務カテゴリの机上の資料構図。青と明るい黄色の暖かい手描き。大きな金色の鍵と無人のノートPCの2点を大きく描く。画面は無文字で、実在UI・e-StatやClaudeのロゴ・グラフ・地図・人影は描かない。",
+      "evidence": "https://note.com/stats47/n/nc5a1358141a5 2026-11-04公開本文確認。e-Statのアカウント登録からappId発行、.env.local設定、curl動作確認、庁内プロキシ対応までの手順。タイトルの30分はカバーの時間短縮の主張に使わない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "ce131d4d853c87fd1b3974174bb7881898111f2ead43034081a8cc48a26f7b96",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/01-estat-api-key-setup/revisions/ce131d4d853c87fd1b3974174bb7881898111f2ead43034081a8cc48a26f7b96.png"
+      },
+      "bytes": 111418,
+      "id": "ce131d4d853c87fd1b3974174bb7881898111f2ead43034081a8cc48a26f7b96",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:42.131Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/293007955/rectangle_large_type_2_28d790d7bc0a97ea01d16f09e305ddc7.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "ce131d4d853c87fd1b3974174bb7881898111f2ead43034081a8cc48a26f7b96"
+      }
+    },
+    {
+      "sha256": "cc0fdde5785221ebb7e03619bc0e64ecd6e9f4baaf42af9adb82940fa60f2904",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/01-estat-api-key-setup/revisions/cc0fdde5785221ebb7e03619bc0e64ecd6e9f4baaf42af9adb82940fa60f2904.png"
+      },
+      "bytes": 60580,
+      "id": "cc0fdde5785221ebb7e03619bc0e64ecd6e9f4baaf42af9adb82940fa60f2904",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:46:41.352Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "a91e025f309883e859a3f1eb665cfe6e47c7ffc6501c501764a1b81e0786d4af"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出しとシリーズ名・話数・色でシリーズが区別できる",
+        "reviewedAt": "2026-10-11T11:51:35.246Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "a91e025f309883e859a3f1eb665cfe6e47c7ffc6501c501764a1b81e0786d4af",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/01-estat-api-key-setup/inputs/a91e025f309883e859a3f1eb665cfe6e47c7ffc6501c501764a1b81e0786d4af.json"
+          },
+          "bytes": 1081
+        }
+      }
+    },
+    {
+      "sha256": "5b9481cef11cb2ccfde42f564303fd956bea87119d497b6ceb99a27f05568967",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/01-estat-api-key-setup/revisions/5b9481cef11cb2ccfde42f564303fd956bea87119d497b6ceb99a27f05568967.png"
+      },
+      "bytes": 73071,
+      "id": "5b9481cef11cb2ccfde42f564303fd956bea87119d497b6ceb99a27f05568967",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:56:05.222Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320329039/rectangle_large_type_2_9148d4bf9eac62b66b28d360eaec4b8f.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "5b9481cef11cb2ccfde42f564303fd956bea87119d497b6ceb99a27f05568967"
+      }
+    },
+    {
+      "sha256": "614b7a9d5069ffb8dacbabf7602001bb531b2e5852d75f824be78cd06f6ab149",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/01-estat-api-key-setup/revisions/614b7a9d5069ffb8dacbabf7602001bb531b2e5852d75f824be78cd06f6ab149.png"
+      },
+      "bytes": 1956047,
+      "id": "614b7a9d5069ffb8dacbabf7602001bb531b2e5852d75f824be78cd06f6ab149",
+      "kind": "candidate",
+      "version": "pop-NCP-007-v4-5e51c393ff61",
+      "createdAt": "2026-11-03T22:53:32.581Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "1d350faa5f3f9062b7d7bb6c77d7dd0f3e763bd790e7b167331ad36421560399"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に旧版との比較画像で方向を承認。原寸・幅320pxの全文と題材を確認した版",
+        "reviewedAt": "2026-11-03T22:59:10.974Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "1d350faa5f3f9062b7d7bb6c77d7dd0f3e763bd790e7b167331ad36421560399",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/01-estat-api-key-setup/inputs/1d350faa5f3f9062b7d7bb6c77d7dd0f3e763bd790e7b167331ad36421560399.json"
+          },
+          "bytes": 8713
+        },
+        "production": {
+          "id": "NCI-00004",
+          "policyId": "NCP-007",
+          "policyVersion": 4,
+          "planSha256": "5e51c393ff61eb55e14ef12b6755b8b4c1a3852170a25bc771f0c13f8dc22b4a"
+        }
+      }
+    }
+  ]
+}

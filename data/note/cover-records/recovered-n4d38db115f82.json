@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n4d38db115f82",
+  "production": {
+    "id": "NCI-00413",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "編み物・手芸\n1位は北海道",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無地の毛糸玉と編み針、途中まで編まれた無地の布を描く。手や人は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n4d38db115f82 2026-10-23公開API本文照合。記事題名「【2021年版】編み物・手芸をした人が多い県は？ 1位は北海道｜都道府県ランキング」。本文中の「北海道」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "61d4baf86f1b08af3aee32eb4840f8d9c96550b89f14d26b463d9c7f4ee66e9e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n4d38db115f82/revisions/61d4baf86f1b08af3aee32eb4840f8d9c96550b89f14d26b463d9c7f4ee66e9e.png"
+      },
+      "bytes": 53644,
+      "id": "61d4baf86f1b08af3aee32eb4840f8d9c96550b89f14d26b463d9c7f4ee66e9e",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:04.998Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312773969/rectangle_large_type_2_4ea28ef863c6877b3aa699ddde03bc92.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "61d4baf86f1b08af3aee32eb4840f8d9c96550b89f14d26b463d9c7f4ee66e9e"
+      }
+    },
+    {
+      "sha256": "afd3f6c5476c3aecd522df52e2e77623817e502bf18e236391a2376440de3f2c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n4d38db115f82/revisions/afd3f6c5476c3aecd522df52e2e77623817e502bf18e236391a2376440de3f2c.png"
+      },
+      "bytes": 119729,
+      "id": "afd3f6c5476c3aecd522df52e2e77623817e502bf18e236391a2376440de3f2c",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:15:07.898Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "00bea7e1d49bb542d9edd87e3ac9fa5736f1024054ccfaabc839e97c2d25002b"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-knitting/values.json",
+        "sourceSha256": "12d282020f1afdc3b14d469e16d4a4d465aeb38bed0b127284b38d5fc5f0057c",
+        "input": {
+          "sha256": "00bea7e1d49bb542d9edd87e3ac9fa5736f1024054ccfaabc839e97c2d25002b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n4d38db115f82/inputs/00bea7e1d49bb542d9edd87e3ac9fa5736f1024054ccfaabc839e97c2d25002b.json"
+          },
+          "bytes": 6556
+        }
+      }
+    },
+    {
+      "sha256": "85544c6b59d1e8c731441c2a9e95650e56f61ee3078a2a4aec1489dc615f7dd8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n4d38db115f82/revisions/85544c6b59d1e8c731441c2a9e95650e56f61ee3078a2a4aec1489dc615f7dd8.png"
+      },
+      "bytes": 1818887,
+      "id": "85544c6b59d1e8c731441c2a9e95650e56f61ee3078a2a4aec1489dc615f7dd8",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-7fd9b0bf37ab",
+      "createdAt": "2026-10-23T12:37:37.444Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "6ee005bed918c8b2a366c4de27ddbf511000120468712ff91340f521a9f802e2"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T12:40:37.458Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "6ee005bed918c8b2a366c4de27ddbf511000120468712ff91340f521a9f802e2",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n4d38db115f82/inputs/6ee005bed918c8b2a366c4de27ddbf511000120468712ff91340f521a9f802e2.json"
+          },
+          "bytes": 8593
+        },
+        "production": {
+          "id": "NCI-00413",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "7fd9b0bf37abb06c68999fd1653000097adab777e7806f15fac8e07610736a1c"
+        }
+      }
+    }
+  ]
+}

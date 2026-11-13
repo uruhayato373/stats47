@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n3f65c01be9a8",
+  "production": {
+    "id": "NCI-00410",
+    "policyId": "NCP-004",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "一般粉じん発生施設\n愛知県と鳥取県",
+      "subline": "2022年・施設数の比較",
+      "subject": "横長1280×670相当の完成カバー。紫と黄色。右に同じ大きさの無文字の産業施設模型2つ。煙・粉じん・汚染・人体被害の描写を避ける。施設数から大気質や健康被害を断定しない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n3f65c01be9a8 2026-10-24公開API本文照合。記事題名「【14.7倍差】一般粉じん発生施設数ランキング！あなたの街は大丈夫？愛知がワースト1位の衝撃」。本文中の 2022年、一般粉じん発生施設数、愛知県、鳥取県 を確認。主題・対象年・集計範囲・比較県を示し、因果・効能・新しい数値を加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "6562bcf892d038db023f8062e4d7cbfce7ddf2817ffa813263cc9b07f65d9349",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n3f65c01be9a8/revisions/6562bcf892d038db023f8062e4d7cbfce7ddf2817ffa813263cc9b07f65d9349.png"
+      },
+      "bytes": 39601,
+      "id": "6562bcf892d038db023f8062e4d7cbfce7ddf2817ffa813263cc9b07f65d9349",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:04.178Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312773953/rectangle_large_type_2_57cf1bc3e0a8f006cc2eba3e38ffae13.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "6562bcf892d038db023f8062e4d7cbfce7ddf2817ffa813263cc9b07f65d9349"
+      }
+    },
+    {
+      "sha256": "dc3ab12abb74b9fd7eadde9f1527dd057f9d6a3256a46f1e2ebf29caa033d77c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n3f65c01be9a8/revisions/dc3ab12abb74b9fd7eadde9f1527dd057f9d6a3256a46f1e2ebf29caa033d77c.png"
+      },
+      "bytes": 104684,
+      "id": "dc3ab12abb74b9fd7eadde9f1527dd057f9d6a3256a46f1e2ebf29caa033d77c",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:42:56.165Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e70f1167662da7e641c3bba6dafe49177a9f37c4ca37586c6f2835bf0f0324ff"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で主題・年・記事題名の順位/値/格差が読める。地図は値を持たない背景",
+        "reviewedAt": "2026-10-11T11:49:58.914Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "e70f1167662da7e641c3bba6dafe49177a9f37c4ca37586c6f2835bf0f0324ff",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n3f65c01be9a8/inputs/e70f1167662da7e641c3bba6dafe49177a9f37c4ca37586c6f2835bf0f0324ff.json"
+          },
+          "bytes": 1345
+        }
+      }
+    },
+    {
+      "sha256": "2a0e309ff739f24f3d1c97784e80ec21bfd63893a07a051f7de70d484cfea1b3",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n3f65c01be9a8/revisions/2a0e309ff739f24f3d1c97784e80ec21bfd63893a07a051f7de70d484cfea1b3.png"
+      },
+      "bytes": 77218,
+      "id": "2a0e309ff739f24f3d1c97784e80ec21bfd63893a07a051f7de70d484cfea1b3",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:55:35.357Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320257084/rectangle_large_type_2_305aba71fc7de79c371d8ecaa07929a8.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "2a0e309ff739f24f3d1c97784e80ec21bfd63893a07a051f7de70d484cfea1b3"
+      }
+    },
+    {
+      "sha256": "7f1b70b59bb2cd2741f822e1a13653500fa5f9b45ff60228016078087039b69e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n3f65c01be9a8/revisions/7f1b70b59bb2cd2741f822e1a13653500fa5f9b45ff60228016078087039b69e.png"
+      },
+      "bytes": 1801859,
+      "id": "7f1b70b59bb2cd2741f822e1a13653500fa5f9b45ff60228016078087039b69e",
+      "kind": "candidate",
+      "version": "pop-NCP-004-v3-a426fe8ada66",
+      "createdAt": "2026-10-23T16:08:24.471Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "1b3bb345a1390f86f252a267799879c0d8f4ec2bb030c4135faa1c9b9ccea8b4"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の主題・対象範囲・比較県、全掲載文字、無人の題材、署名を原寸/320pxで目視し、管理画面で公開旧版と新候補を比較。施設数から大気質や健康被害を断定していない。",
+        "reviewedAt": "2026-10-23T16:11:14.903Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "1b3bb345a1390f86f252a267799879c0d8f4ec2bb030c4135faa1c9b9ccea8b4",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n3f65c01be9a8/inputs/1b3bb345a1390f86f252a267799879c0d8f4ec2bb030c4135faa1c9b9ccea8b4.json"
+          },
+          "bytes": 9255
+        },
+        "production": {
+          "id": "NCI-00410",
+          "policyId": "NCP-004",
+          "policyVersion": 3,
+          "planSha256": "a426fe8ada66244e50b90ec6ba195cfa0d3435011f04b5832311d2f44533beef"
+        }
+      }
+    }
+  ]
+}

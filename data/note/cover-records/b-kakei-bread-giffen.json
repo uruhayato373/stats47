@@ -1,0 +1,215 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-kakei-bread-giffen",
+  "production": {
+    "id": "NCI-00135",
+    "policyId": "NCP-005",
+    "policyVersion": 2,
+    "brief": {
+      "headline": "食パンの値上げ\n買う量はどうなる？",
+      "subline": "物価と購入量を比べる\n2000〜2024年のデータ",
+      "subject": "緑と明るいクリーム、黄色のアクセント。右側に切った断面が見える食パンを一つのまとまりとして大きく描き、白紙の値札を一点添える。顔・表情・手足を付けない。上昇下降の矢印、天秤、グラフ、数式、価格数字を描かない。人物・顔・人の手・動物・キャラクター・マスコット・擬人化は一切描かない。地図、架空の統計グラフ、数式、表彰台、順位図、製品ロゴ、指定外の文言を描かない。紙面・タグ・ラベルは完全な白紙。左側の大きな見出しと下の補足2行は、幅320pxでも明瞭に読める太さと大きさにし、四辺の余白を守る。",
+      "evidence": "https://note.com/stats47/n/nc3a7ebf40516 2026-10-15公開本文確認。本文は2000〜2024年の家計調査とCPIで、2008年前後と2021年以降の食パン価格・購入数量の違いを読む。値上がりすると必ず売れるという一般化やギッフェン財との因果認定をカバーで行わず、物価と量の問いに留める。 人物・キャラクターは使わない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "49b75229b250fb3c543c5a467c85c6dc2c6f1c88b6fa9e95b360f6e44e239df8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-bread-giffen/revisions/49b75229b250fb3c543c5a467c85c6dc2c6f1c88b6fa9e95b360f6e44e239df8.png"
+      },
+      "bytes": 39051,
+      "id": "49b75229b250fb3c543c5a467c85c6dc2c6f1c88b6fa9e95b360f6e44e239df8",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:23.533Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312772369/rectangle_large_type_2_3fe3508e637f020f8e61ad8f7bda3d74.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "49b75229b250fb3c543c5a467c85c6dc2c6f1c88b6fa9e95b360f6e44e239df8"
+      }
+    },
+    {
+      "sha256": "3c0f6ce8f8e0b04ee1c21773a42fd5ae2bb6b6844b961a4babb479174ab69c3f",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-bread-giffen/revisions/3c0f6ce8f8e0b04ee1c21773a42fd5ae2bb6b6844b961a4babb479174ab69c3f.png"
+      },
+      "bytes": 88105,
+      "id": "3c0f6ce8f8e0b04ee1c21773a42fd5ae2bb6b6844b961a4babb479174ab69c3f",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:44:43.065Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "57627f68bf6a980aeeb212c0f6c13755d4a3af2c267d9ffdedf68154338ca32f"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で問いと記事固有の図(公開R2の記事画像)が確認できる",
+        "reviewedAt": "2026-10-11T11:50:50.943Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "57627f68bf6a980aeeb212c0f6c13755d4a3af2c267d9ffdedf68154338ca32f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-bread-giffen/inputs/57627f68bf6a980aeeb212c0f6c13755d4a3af2c267d9ffdedf68154338ca32f.json"
+          },
+          "bytes": 1377
+        }
+      }
+    },
+    {
+      "sha256": "97d89ed48451b44cebb789d8b8735f3a55dd4048b14ec14f3d3af4fe46714b9d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-bread-giffen/revisions/97d89ed48451b44cebb789d8b8735f3a55dd4048b14ec14f3d3af4fe46714b9d.png"
+      },
+      "bytes": 68103,
+      "id": "97d89ed48451b44cebb789d8b8735f3a55dd4048b14ec14f3d3af4fe46714b9d",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:55:50.021Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320302190/rectangle_large_type_2_cc8ae7664cbcf706ecc2d65397bf20b7.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "97d89ed48451b44cebb789d8b8735f3a55dd4048b14ec14f3d3af4fe46714b9d"
+      }
+    },
+    {
+      "sha256": "640eae6e0560f4ceda0ee308c68966747d6d226d145ba2ed45c9fc527efe8366",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-bread-giffen/revisions/640eae6e0560f4ceda0ee308c68966747d6d226d145ba2ed45c9fc527efe8366.png"
+      },
+      "bytes": 35959,
+      "id": "640eae6e0560f4ceda0ee308c68966747d6d226d145ba2ed45c9fc527efe8366",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:10:29.388Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "68476e864c4a6f45723f7caa4a040a934110615269a01e317dfc9d7c5bb1e281"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.026/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:17:23.610Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "68476e864c4a6f45723f7caa4a040a934110615269a01e317dfc9d7c5bb1e281",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-bread-giffen/inputs/68476e864c4a6f45723f7caa4a040a934110615269a01e317dfc9d7c5bb1e281.json"
+          },
+          "bytes": 1377
+        }
+      }
+    },
+    {
+      "sha256": "156130c1468f67174ecf4750b4e945be32e3582d20dbf9c224adf576b9ec29f8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-bread-giffen/revisions/156130c1468f67174ecf4750b4e945be32e3582d20dbf9c224adf576b9ec29f8.png"
+      },
+      "bytes": 73629,
+      "id": "156130c1468f67174ecf4750b4e945be32e3582d20dbf9c224adf576b9ec29f8",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T04:06:17.169Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323276872/rectangle_large_type_2_ec97bf6e529a86e63c63e3461bd84669.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "156130c1468f67174ecf4750b4e945be32e3582d20dbf9c224adf576b9ec29f8"
+      }
+    },
+    {
+      "sha256": "c90b92ce9d4c5e070babe3c8ac8bcf0e43445274e9dfe5ad9512371dba582fa4",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-bread-giffen/revisions/c90b92ce9d4c5e070babe3c8ac8bcf0e43445274e9dfe5ad9512371dba582fa4.png"
+      },
+      "bytes": 1977186,
+      "id": "c90b92ce9d4c5e070babe3c8ac8bcf0e43445274e9dfe5ad9512371dba582fa4",
+      "kind": "candidate",
+      "version": "imagegen-no-character-next10-20261015",
+      "createdAt": "2026-10-15T04:14:23.213Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "6c8c1f6e3948c21499b454c099d31e334812838bf2a70dda034e1e1e458d64d5"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "人物・キャラクターなし。原寸と320pxで指定全文・対象年・地域・世帯区分・補足の可読性・文字切れ・重なりを確認済み。制作原本と目視記録のSHAを照合。管理画面の修正前後10件を提示し、2026-10-15にユーザーが表示中10件の反映を指示。",
+        "reviewedAt": "2026-10-15T04:29:21.094Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "6c8c1f6e3948c21499b454c099d31e334812838bf2a70dda034e1e1e458d64d5",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-bread-giffen/inputs/6c8c1f6e3948c21499b454c099d31e334812838bf2a70dda034e1e1e458d64d5.json"
+          },
+          "bytes": 9174
+        },
+        "production": {
+          "id": "NCI-00135",
+          "policyId": "NCP-005",
+          "policyVersion": 2,
+          "planSha256": "37af3c6b68536d52e7ab13d69a27eecbf723c6d7bbac5992be66415624082696"
+        }
+      }
+    }
+  ]
+}

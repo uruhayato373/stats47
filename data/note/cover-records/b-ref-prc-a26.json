@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-prc-a26",
+  "production": {
+    "id": "NCI-00208",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "小学生の通学時間\n47都道府県を比較",
+      "subline": "岩手県59分・香川県31分",
+      "subject": "黄色い通学帽とランドセルを、通学路の木の下に置いて大きく描く。子どもの姿は描かない。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n80869eb8b7e8 本文確認2026-11-04。小学生の通学時間。最長は岩手県59分、香川県31分。社会生活基本調査。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "6ed65a04e103d2da59f237b67d1cf521249ee2b9fc6ae5a978ea5ccd4124b3ca",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a26/revisions/6ed65a04e103d2da59f237b67d1cf521249ee2b9fc6ae5a978ea5ccd4124b3ca.png"
+      },
+      "bytes": 31736,
+      "id": "6ed65a04e103d2da59f237b67d1cf521249ee2b9fc6ae5a978ea5ccd4124b3ca",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:08:53.039Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "7d3a66a0333ed58fcc1723349588b5ac81cbdc601b9f6bb0f5b37ee071036133"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:13:35.095Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "7d3a66a0333ed58fcc1723349588b5ac81cbdc601b9f6bb0f5b37ee071036133",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a26/inputs/7d3a66a0333ed58fcc1723349588b5ac81cbdc601b9f6bb0f5b37ee071036133.json"
+          },
+          "bytes": 1295
+        }
+      }
+    },
+    {
+      "sha256": "401b5d6dc565cd6a52b4f8cd6c160c99df7c141c27eebedb8ae71542cc12a925",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a26/revisions/401b5d6dc565cd6a52b4f8cd6c160c99df7c141c27eebedb8ae71542cc12a925.png"
+      },
+      "bytes": 83034,
+      "id": "401b5d6dc565cd6a52b4f8cd6c160c99df7c141c27eebedb8ae71542cc12a925",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:58.912Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324169864/rectangle_large_type_2_ee44adb328c18b3a4589cbd04d7b1417.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "401b5d6dc565cd6a52b4f8cd6c160c99df7c141c27eebedb8ae71542cc12a925"
+      }
+    },
+    {
+      "sha256": "629e4aa11623ef900a4955567ffefafa224eb0bb9bba14fb191960aabba09044",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a26/revisions/629e4aa11623ef900a4955567ffefafa224eb0bb9bba14fb191960aabba09044.png"
+      },
+      "bytes": 1990246,
+      "id": "629e4aa11623ef900a4955567ffefafa224eb0bb9bba14fb191960aabba09044",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-3456c0c026a3",
+      "createdAt": "2026-11-04T01:54:48.668Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "4c20b281edc2ef520be28c57df67b14cb4164e56eac4f266484abb2fc001f3a8"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:55:42.163Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "4c20b281edc2ef520be28c57df67b14cb4164e56eac4f266484abb2fc001f3a8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a26/inputs/4c20b281edc2ef520be28c57df67b14cb4164e56eac4f266484abb2fc001f3a8.json"
+          },
+          "bytes": 8222
+        },
+        "production": {
+          "id": "NCI-00208",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "3456c0c026a3af1eaf631f8517eeab3050f32a2fe0b884de5df5adc27f2ca6f3"
+        }
+      }
+    }
+  ]
+}

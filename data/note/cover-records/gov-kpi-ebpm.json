@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "gov-kpi-ebpm",
+  "production": {
+    "id": "NCI-00279",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}
