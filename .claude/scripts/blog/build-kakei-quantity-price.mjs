@@ -214,10 +214,10 @@ async function main() {
   // カードには「他の〜」(分類残余の品目) を出さない (全品目表には残す)
   const byCat = (cat) => rows.filter((r) => r.category === cat && !/^他の/.test(r.item)).sort((a, b) => b.expenditureIndex - a.expenditureIndex);
   const categories = {
-    多く高く: { heading: "多く・高く買う（数量も価格も平均より高い）", items: byCat("多く高く") },
+    多く高く: { heading: `多く・高く買う（数量・価格とも指数${THRESHOLD}以上）`, items: byCat("多く高く") },
     高く: { heading: "高く買う（数量は平均並み以下でも単価が高い）", items: byCat("高く") },
     多く: { heading: "多く買う（単価は平均並み以下でも量が多い）", items: byCat("多く") },
-    支出額大: { heading: "支出額が大きい（数量・価格とも少し上回る）", items: byCat("支出額大") },
+    支出額大: { heading: "支出額が大きい（数量・価格とも平均を少し上回る）", items: byCat("支出額大") },
   };
   const fmt = (r) => `${r.item}（数量${Math.round(r.quantityIndex)}・価格${Math.round(r.priceIndex)}）`;
   const findings = Object.values(categories).map((c) => ({
