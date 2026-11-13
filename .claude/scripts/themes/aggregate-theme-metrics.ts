@@ -29,6 +29,7 @@ import { parse } from "csv-parse/sync";
 import { selectThemeWindows, selectLatestThemeWindow, isJapanPageReport, normalizeThemePath, summarizeThemeTraffic, summarizeThemeNavigation } from "./theme-metrics-core.mjs";
 import { readThemeQualityState } from "./theme-quality-state.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
+import { themeOfPath } from "../metrics/lib/page-type.mjs";
 import { themeStatePath } from "./theme-state-path.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -117,6 +118,27 @@ async function main() {
       ga4: summarizeThemeTraffic(select(ga428d, "pagePath"), "ga4", ga4Window28d),
       internalNav: summarizeThemeNavigation(select(nav28d, "pagePath"), navWindow28d),
     };
+    // 全ルート込み (全国版 + 県別 + 市区町村別)。テーマは /areas/<県>/<テーマ> などでも同じ内容を出し、検索から入るのは
+    // 主に県別のページなので、全国版だけの metrics では需要を読めない (2026-11-14。28 日の検索の表示は全国版 2,596 に対し
+    // 全ルート 50,274)。metrics / metrics28d は実験の baseline と比べるために全国版のまま残す。
+    const selectAll = (data: Record<string, string>[][], key: string) => data.map((rows) => rows.filter((r) => themeOfPath(r[key] ?? "")?.themeSlug === t.themeKey));
+    const gscAll28d = selectAll(gsc28d, "page");
+    const ga4All28d = selectAll(ga428d, "pagePath");
+    const byRoute = new Map<string, { route: string; pages: number; clicks: number; impressions: number; pageViews: number }>();
+    const routeRow = (route: string) => byRoute.get(route) ?? byRoute.set(route, { route, pages: 0, clicks: 0, impressions: 0, pageViews: 0 }).get(route)!;
+    for (const r of gscAll28d[0] ?? []) { const x = routeRow(themeOfPath(r.page)!.route); x.pages += 1; x.clicks += Number(r.clicks) || 0; x.impressions += Number(r.impressions) || 0; }
+    for (const r of ga4All28d[0] ?? []) routeRow(themeOfPath(r.pagePath)!.route).pageViews += Number(r.screenPageViews) || 0;
+    // 利用者数はページをまたいで足せないので、複数ページを束ねる全ルートの集計には持たせない
+    const noUsers = <T extends object>(m: T): T => { delete (m as { activeUsersLast28d?: unknown }).activeUsersLast28d; return m; };
+    t.metricsAllRoutes = {
+      gsc: summarizeThemeTraffic(selectAll(gsc, "page"), "gsc", gscWindows),
+      ga4: noUsers(summarizeThemeTraffic(selectAll(ga4, "pagePath"), "ga4", ga4Windows)),
+    };
+    t.metricsAllRoutes28d = {
+      gsc: summarizeThemeTraffic(gscAll28d, "gsc", gscWindow28d),
+      ga4: noUsers(summarizeThemeTraffic(ga4All28d, "ga4", ga4Window28d)),
+      routes: [...byRoute.values()].sort((a, b) => b.impressions - a.impressions),
+    };
     t.gscSnapshotRef = gscWindows ? `${datasetDir("gsc.snapshots")}/${gscWindows[0].week}/pages.csv` : null;
     t.ga4SnapshotRef = ga4Windows ? `${datasetDir("ga4.snapshots")}/${ga4Windows[0].week}/pages-clean.csv` : null;
 
@@ -145,6 +167,7 @@ async function main() {
     rows.push([
       t.themeKey.padEnd(22),
       `imp ${t.metrics.gsc.impressions ?? "—"}${t.metrics.gsc.status === "measured-low" ? " (low)" : ""}`,
+      `全ルート 28d imp ${t.metricsAllRoutes28d.gsc.impressions ?? "—"} click ${t.metricsAllRoutes28d.gsc.clicks ?? "—"} pv ${t.metricsAllRoutes28d.ga4.pageViews ?? "—"}`,
       `pv ${t.metrics.ga4.pageViews ?? "—"}${t.metrics.ga4.status === "measured-low" ? " (low)" : ""}`,
       `年 ${latest ?? "—"}`, t.dataQualityStatus,
       missing.length ? `欠 ${missing.length}/${keys.length}` : "",

@@ -124,6 +124,19 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [THEME-PAGE-REVIEW-01] テーマページを、全ルート込みの実績で採点し、共通の UI と指標を見直す
+タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run theme:portfolio:audit] [起票:2026-11-14] [領域:サイト] [進行中]
+
+- **方針 (2026-11-14 オーナー決定)**: 順番は 採点 → 共通の UI → 指標。UI は 4 点 (長い・最初の画面で要点が分からない・カードの並びがばらばら・テーマごとに見た目が違う) を 1 つの型で直す。指標は需要の高い順に波で見直す。計画の全文は `~/.claude/plans/gentle-strolling-tide.md`。
+- **済み**: テーマの実績を全ルート込み (全国版 + 県別 + 市区町村別) で数える項目 `metricsAllRoutes`・`metricsAllRoutes28d` をポートフォリオに足した。これまでは全国版 `/themes/<テーマ>` だけを数えており、検索の表示の 94% を占める県別 `/areas/<県>/<テーマ>` が抜けていた (28 日: 全ルート 表示 50,549・クリック 1,333・閲覧 4,115、うち全国版は表示 2,596)。
+- **次**:
+  1. 実験 (`data/themes/experiments.json`) の判定待ち 55 件は、全国版だけの数字で「標本不足」になっている。baseline と観測を全ルート込みで取り直す (`evaluate-theme-experiments.mjs` が読む項目と、過去の週の snapshot からの baseline の作り直し)。それまで判定を確定しない。
+  2. UI の重さ (見える文字数・高さ・カード数) を全 56 テーマで計測し、採点に足す。計測の対象は県別のページを主にする (検索から入るのは県別)。
+  3. 代表 3 テーマで共通の型を決め、オーナーが localhost で見てから全テーマへ広げる。`THEME-DASHBOARD-TEXT-TRIM-01`・`THEME-SINGLE-CARD-BUNDLE-01` をこの中で進める。
+  4. 表示が多いのにクリック率が低いテーマ (地域経済 0.7%・自然環境 0.8%・気候 0.9%・地方財政 0.9%) は、題と説明文を先に見る (`THEME-SEO-UNIFY-01`)。
+  5. テーマのデータ品質の監査が 2026-10-05 から記録されておらず、全 56 テーマの品質が「不明」のまま。原因を確かめる。
+- **完了条件**: 56 テーマが同じ骨組みで表示され、代表ページの見える文字と高さが半分程度になり、需要の上位のテーマで前後の実績が全ルート込みで記録されている。
+
 ### [UI-FIX-PREFECTURE-DETAIL-HOKKAIDO-20261114] UI 是正: prefecture-detail--hokkaido の週次 UI 検査の指摘 1 件を直す
 
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-HOKKAIDO-20261114.txt] [起票:2026-11-14] [領域:サイト]
