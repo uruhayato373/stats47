@@ -156,6 +156,8 @@ jobs:
       - name: Metric and Content Identity Contracts
         run: |
           npx tsx packages/data-configs/scripts/check-metric-contract.ts
+          # 家計の分析単位の台帳と、公開ページ・指標の実物との照合 (metrics:check の後半。KAKEI-CATALOG-CI-01)
+          npx tsx packages/data-configs/scripts/check-kakei-analysis-catalog.ts
           npm run content:check
           node .claude/scripts/content-types/check-content-types.mjs
           npm run test:issue-graph

@@ -89,3 +89,25 @@ test('the PR build job runs the build precondition check before next build', () 
   assert.equal(/^ {8}if:/m.test(steps[precheck].body), false, '検査の段に if: を付けない');
   assert.equal(/^ {8}continue-on-error:\s*true/m.test(steps[precheck].body), false, '検査の段に continue-on-error: true を付けない');
 });
+
+// KAKEI-CATALOG-CI-01: metrics:check は check-metric-contract.ts と check-kakei-analysis-catalog.ts を続けて走らせるが、
+// PR の CI は前者だけを動かしていた。合成の入力で検査する vitest だけでは、掲載先のページが非公開になった・
+// 指標の絞り込みが変わった、を PR で止められない。metrics:check に入っている検査は PR の Static Gates でも全部走らせる。
+test('the PR static gates run every check that metrics:check runs', () => {
+  const pkg = JSON.parse(readFileSync(fileURLToPath(new URL('../../../../packages/data-configs/package.json', import.meta.url)), 'utf8'));
+  const checks = [...pkg.scripts['metrics:check'].matchAll(/tsx (scripts\/[\w-]+\.ts)/g)].map((m) => m[1]);
+  assert.ok(checks.includes('scripts/check-kakei-analysis-catalog.ts'), 'metrics:check に家計の分析単位の台帳の検査が無い');
+  const pr = readFileSync(fileURLToPath(new URL('../../../../.github/workflows/pr-quality-check.yml', import.meta.url)), 'utf8');
+  const start = pr.indexOf('\n  static-gates:\n');
+  assert.ok(start >= 0, 'pr-quality-check.yml に static-gates job が無い');
+  const rest = pr.slice(start + 1);
+  const next = rest.slice(1).search(/^ {2}[\w-]+:\n/m);
+  const job = next >= 0 ? rest.slice(0, next + 1) : rest;
+  const steps = job.split(/^ {6}- name: /m).slice(1);
+  for (const check of checks) {
+    const step = steps.find((chunk) => chunk.includes(`npx tsx packages/data-configs/${check}`));
+    assert.ok(step, `PR の Static Gates が ${check} を走らせていない`);
+    assert.equal(/^ {8}if:/m.test(step), false, `${check} の段に if: を付けない`);
+    assert.equal(/^ {8}continue-on-error:\s*true/m.test(step), false, `${check} の段に continue-on-error: true を付けない`);
+  }
+});
