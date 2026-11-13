@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const savingsDepositBalance: MetricConfig = {
   "key": "savings-deposit-balance",
   "title": "預貯金（通貨性＋定期性）",
+  "subtitle": "二人以上の世帯の1世帯当たり",
   "unit": "千円",
   "category": "economy",
   "source": {

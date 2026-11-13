@@ -8896,8 +8896,11 @@
           "cdCat02": "01040100",
           "cdCat03": "01030100"
         },
-        "derived": false,
-        "configHash": "41e0250cce078a27"
+        "ops": {
+          "timeScope": "annual"
+        },
+        "derived": true,
+        "configHash": "cf882d65446c682e"
       },
       "dependencies": [],
       "normalizationDependencies": [

@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const financialDebtBalance: MetricConfig = {
   "key": "financial-debt-balance",
   "title": "金融負債残高",
+  "subtitle": "二人以上の世帯の1世帯当たり",
   "unit": "千円",
   "category": "economy",
   "source": {

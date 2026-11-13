@@ -5,6 +5,7 @@ export const generalClinicCountPer100k: MetricConfig = {
   "key": "general-clinic-count-per-100k",
   "title": "一般診療所数",
   "subtitle": "人口10万人当たり",
+  "description": "医療施設調査で一般診療所に区分された施設数を、総人口で除して人口10万人当たりに換算した値です。",
   "unit": "施設",
   "category": "socialsecurity",
   "source": {
@@ -35,22 +36,6 @@ export const generalClinicCountPer100k: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "施設/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "施設/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "groupKey": "general-clinic-count",
   "seoTitle": "一般診療所数ランキング都道府県【2023年】｜1位和歌山県（113施設）",
