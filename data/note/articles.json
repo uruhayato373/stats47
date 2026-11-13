@@ -337,46 +337,6 @@
       ]
     },
     {
-      "key": "A-laborwage-paid-leave-utilization-prefecture",
-      "vertical": "stats47-note",
-      "series": "A",
-      "title": "【2026年版】有給休暇取得率ランキング｜休める県・休めない県",
-      "magazine": "s47-labor",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/stats47-note/A-laborwage-paid-leave-utilization-prefecture",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "fc33f97762237e6b29c3045de846f97ab319c5a60cf3599c42f2d5e1dcad545a",
-          "files": 5,
-          "bytes": 100549,
-          "savedAt": "2026-10-12T22:05:55.248Z"
-        },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
-    },
-    {
-      "key": "A-laborwage-wages-by-industry-prefecture",
-      "vertical": "stats47-note",
-      "series": "A",
-      "title": "【2026年版】産業別平均賃金ランキング｜稼げる業界の地域差",
-      "magazine": "s47-labor",
-      "isPaid": false,
-      "status": "draft",
-      "r2Path": "note/stats47-note/A-laborwage-wages-by-industry-prefecture",
-      "body": {
-        "store": "r2-public",
-        "manifest": {
-          "sha256": "ad32b27d6df64329c668e0fd80589c141089fe9c7859cc1a118dcdca95653664",
-          "files": 5,
-          "bytes": 100273,
-          "savedAt": "2026-10-24T11:59:24.493Z"
-        },
-        "verifiedAt": "2026-10-24T11:59:24.493Z"
-      }
-    },
-    {
       "key": "a-agricultural-employment-population",
       "vertical": "stats47-note",
       "series": "A",
@@ -791,7 +751,14 @@
           "savedAt": "2026-10-12T22:03:31.683Z"
         },
         "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+      },
+      "publishedLinkRepairs": [
+        {
+          "mode": "replace-url",
+          "fromUrl": "https://stats47.jp/ranking/gross-prefectural-product-accommodation-food-h27",
+          "toUrl": "https://stats47.jp/category/tourism"
+        }
+      ]
     },
     {
       "key": "b-hottest-prefecture",
@@ -989,7 +956,14 @@
           "savedAt": "2026-10-12T22:03:43.738Z"
         },
         "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+      },
+      "publishedLinkRepairs": [
+        {
+          "mode": "replace-url",
+          "fromUrl": "https://stats47.jp/ranking/food-expenditure",
+          "toUrl": "https://stats47.jp/ranking/food-expenditure-total"
+        }
+      ]
     },
     {
       "key": "d-kakei-spending-personality",
@@ -1011,7 +985,54 @@
           "savedAt": "2026-10-12T22:03:44.722Z"
         },
         "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+      },
+      "publishedLinkRepairs": [
+        {
+          "mode": "replace-url",
+          "fromUrl": "https://stats47.jp/category/food-beverage",
+          "toUrl": "https://stats47.jp/themes/household-food-spending"
+        },
+        {
+          "mode": "replace-url",
+          "fromUrl": "https://stats47.jp/ranking/beer",
+          "toUrl": "https://stats47.jp/ranking/beer-consumption-expenditure"
+        },
+        {
+          "mode": "replace-url",
+          "fromUrl": "https://stats47.jp/ranking/bread",
+          "toUrl": "https://stats47.jp/ranking/bread-consumption-expenditure"
+        },
+        {
+          "mode": "replace-url",
+          "fromUrl": "https://stats47.jp/ranking/wine",
+          "toUrl": "https://stats47.jp/ranking/wine-consumption-expenditure"
+        },
+        {
+          "mode": "replace-url",
+          "fromUrl": "https://stats47.jp/ranking/frozen-gyoza",
+          "toUrl": "https://stats47.jp/ranking/gyoza-frozen-consumption-expenditure"
+        },
+        {
+          "mode": "replace-url",
+          "fromUrl": "https://stats47.jp/ranking/sushi-eating-out",
+          "toUrl": "https://stats47.jp/ranking/sushi-dining-consumption-expenditure"
+        },
+        {
+          "mode": "replace-url",
+          "fromUrl": "https://stats47.jp/ranking/ice-cream-sherbet",
+          "toUrl": "https://stats47.jp/ranking/icecream-consumption-expenditure"
+        },
+        {
+          "mode": "replace-url",
+          "fromUrl": "https://stats47.jp/ranking/chinese-noodles-eating-out",
+          "toUrl": "https://stats47.jp/ranking/chinese-noodles-consumption-expenditure"
+        },
+        {
+          "mode": "replace-url",
+          "fromUrl": "https://stats47.jp/ranking/yakiniku-eating-out",
+          "toUrl": "https://stats47.jp/ranking/yakiniku-consumption-expenditure"
+        }
+      ]
     },
     {
       "key": "koumuin-shigoto-kouritsuka-ai",
@@ -1033,7 +1054,14 @@
           "savedAt": "2026-10-12T22:03:45.461Z"
         },
         "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+      },
+      "publishedLinkRepairs": [
+        {
+          "mode": "replace-url",
+          "fromUrl": "https://stats47.jp/ranking/public-employee-count",
+          "toUrl": "https://stats47.jp/ranking/prefectural-general-administration-staff"
+        }
+      ]
     },
     {
       "key": "paid-n0135c75ca76c",

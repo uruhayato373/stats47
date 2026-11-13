@@ -347,7 +347,7 @@ updated: 2026-11-01
 
 - **2026-11-13 公開指示と実測**: オーナーが全商品のコミット・デプロイとnote更新を承認。14商品の追加分析を再生成・検査し、private R2へ不変ZIPを保全、`analysisDelivery.status=prepared`に固定済み。note所有者APIで全14件の価格と添付を照合。P-14は実公開v5（2025年・832指標）へ台帳とLP画像を同期し、v4のOffice実機確認は引き継がない。
 - **サイト側の反映**: PR #1258・main `0e07839fb` をデプロイ済み（run 43370547519 成功）。本番14LPの内容・上下のnote導線・テーマ参照と59画像のSHA256を台帳に照合済み。追加分析の販売公開はnote確認後に共通release CLIで行う。
-- **note更新の停止条件と再開**: Windowsから画像アップロードを試行すると通信フィルターがHTTP 503「ブロックされました」を返した。公開記事・添付は未更新。2026-11-13にオーナーが別の環境は現在利用できないと回答。通信を許可された環境が利用可能になってから、既存添付を保持して分析ZIPを追加し、価格不変・既存有料本文保全・添付の非露出を確認して、共通release CLIへverification JSONを渡す。無料会員で添付は1日10回までのため、制限が出たら翌日に残件を進める。制限を回避しない。
+- **note更新の停止条件と再開**: Windowsから画像アップロードを試行すると通信フィルターがHTTP 503「ブロックされました」を返した。公開記事・添付は未更新。2026-11-13にオーナーが別の環境は現在利用できないと回答。通信を許可された環境が利用可能になってから、既存添付を保持して分析ZIPを追加し、価格不変・既存有料本文保全・添付の非露出を確認して、共通release CLIへverification JSONを渡す。無料会員で添付は1日10回までのため、制限が出たら翌日に残件を進める。制限を回避しない。2026-11-13 夜の切り分けで、503 は Playwright の直接リクエストがプロキシを通らないことが原因と分かり、起動部分を直した (詳細と、画像のアップロードが通るかの検証手順は `NOTE-FIGURE-ROLLOUT-01` の制約)。アップロードが会社の PC から通るかは未検証。
 - **完了条件の追加**: 全14件のnote確認とpublished台帳・公開LPの作成例が一致し、本番画像が表示されること。Office実機確認は未確認のまま合格扱いしない。保存原稿の古い価格（P-01〜P-12）を現公開価格に同期してprivate R2へ再保存する。
 - **残る公開作業**: note無料部分14本の初稿反映、公開中の添付と固定納品版の照合、5商品の分析改訂案の実機・目視確認は残る。サイトの固定販売版LPはPR #1252で反映し、2026-11-12に本番14件の用途・画像59枚への参照・上下の購入導線・価格を照合済み。画像幅・作成例の並び方の契約はデザインシステム、回帰検査は `responsive-layout.spec.ts` を参照。改訂案を販売版へ自動昇格しない。
 - **作業用資料の片付け**: 原典とR2の調査用コピー `C:/tmp/stats47-population-research` は台帳と改訂候補へ必要事項を統合済み。Codexの自動承認がフォルダ削除と限定したJSON削除の両方を拒否したため、許可された環境でこの一時フォルダだけ片付ける。改訂候補 `.local/data-packs/P-01/analysis-20261112` は目視用に保持する。
@@ -389,12 +389,13 @@ updated: 2026-11-01
   - 公開 R2 への書き込み、CDN の消去、note 記事の更新、本番デプロイは、それぞれオーナーの承認を取る。
   - 型の台帳に無い図を LP に載せない (型が足りなければ先に型を足す)。
   - Kindle 13 件は対象外。中身の見本は書籍のページで、データの図とは別の話になる。必要になったら別カードにする。
-- **関連**: `PRODUCTS-PAGE-CONTENT-01` (商品ページで中身が分からない。このカードが仕組み、あちらが各商品の中身の是正) / `PRODUCT-SAMPLE-TYPED-01` (note の見本画像を型へ) / `PRODUCT-PACK-CONTENT-MISMATCH-01` (データ集の中身と説明の食い違い)。2026-11-10 の実装は commit `149629f56` (サイト) と `571272640` (note の型の経路)。
+- **関連**: `PRODUCTS-PAGE-CONTENT-01` (商品ページで中身が分からない。このカードが仕組み、あちらが各商品の中身の是正) / `PRODUCT-PACK-CONTENT-MISMATCH-01` (データ集の中身と説明の食い違い)。2026-11-10 の実装は commit `149629f56` (サイト) と `571272640` (note の型の経路)。
 - **完了条件**:
   - 公開中の note データ商品すべてで、サイトの見本の節と note の見本画像が同じ spec から作られている。
   - 生成スクリプトに手書きの `showcase` が 0 件。
   - 見本の全 URL の GET 検査が通る。
   - LP の無い商品の上限が 0 になっている。
+  - 公開中の商品記事の見本画像がすべて型に結ばれ、`.claude/config/note-figure-baseline.json` の `maxUntypedProductArticles` (現在 14・縮小専用) が 0 になっている (2026-11-13 に `PRODUCT-SAMPLE-TYPED-01` を統合。データ集の地図 `choropleth-map.png`・`sample-map.png` は商品工場の独自の描画器で、型を通っていない。型に未登録の画像や固定納品で再現できない例は載せない)。
 
 ### [VACANCY-TYPES-TEST-NODE-TS-01] 空き家の種類のテストが data-configs の index.ts を node で読めずに落ち、関係の無い push を止める
 タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/themes/__tests__/vacancy-types.test.mjs] [起票:2026-11-10] [領域:管理]
@@ -405,17 +406,6 @@ updated: 2026-11-01
 - **次**: ① テストまたは `ingest-vacancy-types.mjs` を tsx 経由で読む形にする (他の `.claude/scripts` の TS 読み込みと同じ方法に合わせる)。`index.ts` の import に拡張子を付ける直し方は、web のビルドへの影響を確かめてからにする。② CI でこのテストが走っているかを確かめ、走っていないなら全件の node テストに載せる。③ 名前の重なりで無関係のテストを選ぶ件は、`selectNodeTests` の stem 判定 (`types` のような一般語) を見直すかを決める。
 - **完了条件**: 上の検証コマンドが pass し、CI の node テストにこのテストが含まれている。
 - **同じ型の別のテスト (2026-11-11)**: `node --test .claude/scripts/themes/__tests__/record-theme-viewpoints.test.mjs` も手元で `ERR_MODULE_NOT_FOUND` で落ちる (pass 0 / fail 1)。PR の Contract Tests のログにこのファイル名は出てこないので、CI では走っていない。原因が同じかは未確認。
-
-### [PRODUCT-SAMPLE-TYPED-01] note のデータ商品の見本画像を型の画像へ差し替える
-タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-11-10] [領域:商品]
-
-- **起点 (2026-11-10 オーナー指示)**: 商品の見本画像は型の台帳の型で描く。型 `treemap`・`file-preview` を足し、経路 `note-product-samples` (`render-product-figures.ts` + 記事の `figure-specs.json`) を登録した。本文画像の台帳は型の無い画像を持つ商品記事を `product-untyped` と数え、`--check` が上限 `maxUntypedProductArticles` (15・縮小専用) で止める。
-- **分かっていること**: `muni-manufacturing-shipment-data` は作業コピーに `figure-specs.json` (比較・構成・変化の 6 枚とファイルの中身 1 枚) があり、型の描画器で描けることを確かめた (R2 へは未保存・note は未更新)。データ集 14 本の地図 (`choropleth-map.png`・`sample-map.png`) は商品工場の独自の描画器で、型を通っていない。
-- **済み (2026-11-10)**: `muni-manufacturing-shipment-data` は型の画像 11 枚へ差し替え、上限を 14 にした (`MUNI-INDUSTRY-PRODUCT-01`)。
-- **次**: PRODUCT-LP-SHOWCASE-01 の2026-11-12判断に従い、価格実験の判定を待たず13パックの見本を共通型で作る。固定納品の値から生成した画像をサイトとnote無料部分の初稿で共用し、タブで目視確認する。確認後の画像配置・note更新と note:figures の product-sample 判定までを残作業とする。
-- **関連**: サイトの商品ページの見本の節も同じ spec から作る仕組みは `PRODUCT-LP-SHOWCASE-01`。データ集の spec はあちらの ④ と同じ差分で作る。
-- **停止条件・禁止**: 共通型に未登録の画像や固定納品で再現できない例を載せない。公開中の有料記事の書き換えはローカル初稿の目視後に記事単位で行い、有料境界・価格・添付を変更しない。初稿の型検査合格を公開済み記事の差し替え完了と扱わない。
-- **完了条件**: 公開中の商品記事の見本画像がすべて型に結ばれ、`maxUntypedProductArticles` が 0 になっている。
 
 ### [MUNI-INDUSTRY-PRODUCT-01] 市区町村の製造品出荷額等のデータ商品に、業種別 (産業中分類 24 業種) の内訳を足す
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-11-10] [領域:商品]
@@ -658,7 +648,7 @@ updated: 2026-11-01
 
 - **証拠**: 2026-11-05 の note 公開で、`Page.handleJavaScriptDialog: No dialog is showing` の未処理例外によりブラウザが 1 回終了した。ログイン切れではなく、保存済みの下書きから再開して重複公開はなかった。
 - **次**: ① 起動スクリプトでこの例外だけを無視し、ほかの例外は落とす ② 公開の手順で commit と push を `&&` でつなぎ、pre-commit で止まったときに push へ進まないようにする。
-- **オーナー作業**: 題名なしの下書き `n0ae79d01a60b` と `nbb8ef52bd1ff` の削除。
+- **オーナー作業**: 題名なしの下書き 2 本の削除は `NOTE-OWNER-ACTIONS-01` へ移した (2026-11-13)。
 - **完了条件**: 同じ例外で落ちない起動スクリプトがリポジトリにあり、手順の commit 失敗が公開の報告に現れる。
 
 ### [ADMIN-COMPETITOR-VIEW-01] 競合調査の結果を管理画面で見られるようにする
@@ -916,9 +906,9 @@ updated: 2026-11-01
 - **完了条件**: 監査済みの表示単位が全画面で同じ値・単位で出て、検査が誤った換算を止める。
 
 ### [NOTE-KAKEI-GYOZA-DRAFT-01] 家計調査の「餃子日本一は数え方で変わる」の note 原稿を台帳に登録し、カバーと本文の保存をそろえる
-タグ: [SNS・マーケ] [種類:制作] [実行:対話] [起票:2026-11-02] [領域:SNS]
+タグ: [SNS・マーケ] [種類:制作] [実行:別環境] [起票:2026-11-02] [領域:SNS]
 
-- **状態 (2026-11-02)**: 切り口「定義を読む」「都市の間で比べる」から作った無料記事の原稿が作業場 `docs/31_note記事原稿/b-kakei-gyoza-52cities/` (draft.md・chart-data.json。gitignore) にある。agent が記事台帳 `data/note/articles.json` に下書きとして登録したが、カバーの台帳 (`note:assets:validate` の cover catalog coverage) と本文の R2 保存が無く検査が落ちたため、登録は取り消した。同じ題材の記事は 2026-09-06 に公開済みなので、別稿としての差 (52 市・3 年平均・冷凍とテイクアウトの範囲) を確かめてから進める。
+- **状態 (2026-11-02)**: 切り口「定義を読む」「都市の間で比べる」から作った無料記事の原稿が作業場 `docs/31_note記事原稿/b-kakei-gyoza-52cities/` (draft.md・chart-data.json。gitignore) にある (Mac の作業場。会社の Windows PC には無いことを 2026-11-13 に確認)。agent が記事台帳 `data/note/articles.json` に下書きとして登録したが、カバーの台帳 (`note:assets:validate` の cover catalog coverage) と本文の R2 保存が無く検査が落ちたため、登録は取り消した。同じ題材の記事は 2026-09-06 に公開済みなので、別稿としての差 (52 市・3 年平均・冷凍とテイクアウトの範囲) を確かめてから進める。
 - **次**: ① 既存の公開記事との重複を確かめる ② `npm run note:article` の手順で台帳登録・本文保存・カバー作成をそろえる ③ note-critic の審査。
 - **完了条件**: 台帳・カバー・本文の保存がそろい、`npm run note:assets:validate` が通る。公開はオーナーの承認後。
 
@@ -1547,12 +1537,31 @@ updated: 2026-11-01
 - **未確認**: 生成処理の対象から外れた原因。ページの URL の応答も未確認。
 - **完了の判定**: 原因が分かり、公開するか無効にするかが決まって、指標の状態と R2 が一致する。
 
+### [NOTE-OWNER-ACTIONS-01] note の画面でオーナーだけができる操作と判断をまとめて済ませる
+タグ: [コンテンツ品質] [種類:改善] [実行:ユーザー] [起票:2026-11-13] [領域:商品]
+
+- **起点 (2026-11-13)**: note の下書きの削除・マガジンの作成と記事の追加・下書きを捨てるか公開するかの判断が 5 枚のカードに散っていたので 1 枚に集めた。どれも note へログインした画面での操作で、Claude は行わない (記事の削除・非公開化はオーナーの操作だけ)。済んだ行から消す。
+- **1. 残った下書きを削除する**:
+  - 題名なしの `n0ae79d01a60b`・`nbb8ef52bd1ff` (2026-11-05 の公開中にブラウザが落ちて残った)。
+  - 空・途中の `n6c6e1708a2a1`・`n7f3aa1bb55b8`・`nb2b302a56c8c`・`n706d8699fcd7` ほか (教材の note 92 本の公開で失敗した回の残り。下書き一覧で公開済みの記事と照合してから消す)。
+  - 公開済みの `c-kita-kanto-fiscal` (https://note.com/stats47/n/n56eb35145c32) に付いた未公開の下書き (2026-11-13 夜、`http://` → `https://` の更新の送信が終わらずに残った。公開版は変わっていない)。編集画面で下書きを破棄する。記事は消さない。
+- **2. 下書きを捨てるか公開するかを決める**:
+  - `recovered-n144d350fc14e` (沖縄の出生率): 以前から未公開の下書きがあり、目次の設定が公開版と違うので更新の道具が止まる。旧文言のカードが 4 枚残っている。
+  - ハッシュタグの置き換えで止まっている 6 件 (詳細は `NOTE-HASHTAG-ROLLOUT-20261003`): 有料 `paid-n92b846280d1a`・`paid-nfe2c65e669a8` は以前からの下書きなので内容を確かめる。無料 `recovered-n03e45e40d3a7`・`n144d350fc14e`・`n3908e5981967`・`n48dff1df249f` は編集画面で下書きを破棄する。あわせて、エディタがリンクカードの行き先を旧ブログ URL の転送先へ書き換えるのを許すかを決める。
+- **3. マガジンを作り、記事を追加する**:
+  - 「都道府県ランキング｜情報通信」(`s47-ict`) を作り、URL を `data/note/magazines.json` の `noteUrl` に記録する (Claude へ URL を伝えれば台帳は直す)。`b-ref-prc-a20`・`b-ref-prc-a24` を追加する。API での作成は 201 が返っても一覧に現れなかった (カバー画像が必須の可能性。未検証)。「国際・外国人」(`s47-international`) も作るかを決める。
+  - `a-annual-paid-leave-11-days-or-more-ratio`・`a-manufacturing-industry-annual-income` を、台帳が期待するマガジン `m4709a61adf77` へ追加する (11-07 の回遊監査の `missing_magazine_membership` 2 件)。
+- **4. 指標を足すかを決める**: `b-ref-dev-a05`・`a09`・`a15`・`a40` は、問いが求める指標 (子育て世帯の貧困率・通学時間と進学率・最新年の貯蓄・自家用車で通う人の割合) が無く、答えの一部を「このデータでは判断できない」としたまま公開した。
+- **別のカードで決めるもの**: 同じ記事が別 URL に複数回公開されている 8 組は `NOTE-PUBLISHED-DUPLICATES-DECISION-01`。
+- **完了条件**: 1〜3 の操作が済み、`npm run weekly:audits -- --only note-circulation` で `missing_magazine_membership` が 0 件、ハッシュタグの `--audit-only` で `draft_blocked` が 0 件。4 は決めた内容を、足すなら指標のカードに、足さないならこの行の削除で記録する。
+
 ### [NOTE-FIGURE-ROLLOUT-01] 公開中の note 記事の図を共通の型へ差し替える
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-05] [領域:商品]
+タグ: [コンテンツ品質] [種類:改善] [実行:別環境] [起票:2026-11-05] [領域:商品]
 
 - **起点**: `CHART-TYPE-ROLLOUT-01` から切り離した反映の作業。型が新しくなっても公開中の note の画像は旧いままである。
 - **道具**: `update-note-body-figures.mjs` が公開版の本文の画像だけを替える (文章・カード・タグ・カバーは変えない)。有料記事は止める。
-- **制約**: 会社の PC では Node からの note API が i-FILTER で止まる (503「ブロックされました」)。ブラウザの経路へ付け替えるかは未決なので Mac で実行する。R2 の書き込みも Mac で行う。有料記事の添付は 1 日 10 回まで。実際の更新はまだ一度も動かしていない。
+- **制約**: 会社の PC では Node からの note API が i-FILTER で止まる (503「ブロックされました」)。ブラウザの経路へ付け替えるかは未決なので Mac で実行する。2026-11-13 の切り分け (実測): 503 の出どころは Playwright の直接リクエスト (`ctx.request`) だった。同じ公開 API の GET が、プロキシ指定なしの `ctx.request` では 503「ブロックされました」、`proxy: { server: HTTPS_PROXY }` を付けると 200、ブラウザのページ内 `fetch` は元から 200。`lib/note-session.mjs` の `launchContext` が `HTTPS_PROXY` のある環境でだけ context にプロキシを渡すように直し、会社の PC から本文のリンク置換 4 本を公開できた (`NOTE-CIRCULATION-LINK-FIX-01`)。同じ夜の続きの 3 本は、編集画面が開かない・更新の送信が終わらない失敗で止まった (読み戻しでも接続タイムアウトが出ており、通信が不安定だった。原因がプロキシ経由のブラウザの遅さか一時的な不調かは未確認)。素の Node `fetch` で読む箇所は、memory `proxy-preload-for-fetch-scripts` の preload と `NODE_EXTRA_CA_CERTS` を付けて流す。
+- **[仮説] 画像のアップロードも会社の PC から通る**: 画像の presigned POST と S3 への POST も `ctx.request` から送る (`patch-note-paid-landing.mjs` の `uploadImage`) ので、11-13 の 503 は同じ原因の可能性がある。S3 の宛先がフィルターで別に止められている可能性は残る。**検証コマンド**: 上の preload と証明書を付けて `node .claude/scripts/note/update-note-body-figures.mjs --key a-maximum-temperature` (dry-run) → 差分が画像 3 枚だけなら `--commit`。**検証期日**: 2026-11-20。**判定**: `UPDATED` と 4 項目の検査が通れば仮説を支持し、このカードと `PRODUCT-LP-SHOWCASE-01` の「Mac で実行」を外す。アップロードで 503 が出れば棄却し、`[実行:別環境]` のままにする。R2 の書き込みも Mac で行う。有料記事の添付は 1 日 10 回まで。実際の更新はまだ一度も動かしていない。
 - **次 (Mac で実行。更新はオーナー承認済み)**: `git pull` のあと、次の順に行う。
   1. `npm run note:session:check` で口座が stats47 と確かめる。
   2. `node .claude/scripts/note/update-note-body-figures.mjs --key a-maximum-temperature` で dry-run し、画像 3 枚だけが変わると確かめる。
@@ -1586,11 +1595,8 @@ updated: 2026-11-01
   3. 道具が `FAIL` と出した記事は、公開 API (`https://note.com/api/v3/notes/<noteId>`) の `body` に新しい文言があるか・`has_draft` が false かを必ず確かめる。`FAIL` でも公開済みのことがあった。
   4. 文言が済んだら画像へ進む。先に `NOTE-FIGURE-ROLLOUT-01` の試行 1 本 (`a-maximum-temperature`) を行い、スマホ幅の見え方をオーナーが見る。そのあと `ranking-image-type` の 8 本。95 本は、R2 の値 (`app/stats/<key>/values.json`) と記事の年から `chart-data.json` を作る手順を先に足す (契約は `.claude/rules/note-image-assets.md` の契約 3。年を読めない記事と 47 県がそろわない指標は対象外として一覧に残す)。
   5. 最後に意味の確認 23 本。`note-critic` に該当の段落と 47 県の値だけを渡す。
-- **人が直す・決める (道具では進まない)**:
-  - `recovered-n144d350fc14e` (沖縄の出生率): 以前から未公開の下書きがあり、目次の設定が公開版と違うので道具が止める。下書きを捨てるか公開するかを note の画面で決める。旧文言のカードが 4 枚ある。
-  - 県民所得の記事の本文: 「中部 9 県のうち 7 県が全国平均を上回る」は 6 県が正しい (上回るのは愛知・福井・富山・静岡・山梨・岐阜。長野 2,788・新潟 2,784・石川 2,770 は下回る)。「全国平均 2,833 千円」は 47 都道府県の単純平均。「2023 年の TSMC 進出」は年の根拠を確かめていない。記事は 2020 年度で、サイトは 2021 年度を出している。
-  - 家計・所得のマガジン (`s47-economy`) の「このテーマのデータ」カードが、人口・世帯のパック (P-01) を指している。所得・賃金のパック (P-02) へ替えるかを決める (`data/note/magazines.json` の `paidProductId`)。
-  - タグは全 439 本で中央値 99 個 (上限 100)。意図した運用かを決める。違うなら採点の項目に足す。
+- **決定済み (2026-11-13 オーナー)**: 家計・所得のマガジン (`s47-economy`) の「このテーマのデータ」カードの行き先を、人口・世帯のパック (P-01) から所得・賃金のパック (P-02) に替えた (`data/note/magazines.json` の `paidProductId`。公開記事へは次にフッターを流すときに入る)。タグが全 439 本で中央値 99 個 (上限 100) なのは意図した運用で、採点の項目に足さない。
+- **ほかのカードへ移した (2026-11-13)**: `recovered-n144d350fc14e` (沖縄の出生率) の下書きの扱いは `NOTE-OWNER-ACTIONS-01`、県民所得の記事の本文の誤りは `NOTE-FIGURE-FIX-01`。
 - **道具の癖 (次に同じ所で止まらないために)**:
   - `update-published-navigation.mjs` は編集画面を開くので、途中で止まると未公開の下書きが残る。次の実行は「下書きが公開版と違う」で止まる。下書きと公開版の差が書式だけなら、本文の比較が吸収して進む。
   - dry-run の `wouldDedupeFooterHeading` は、本文に何か変更があれば true になる。見出しの重複の有無としては読めない。文言の置き換えは `wouldRewriteDatasetWording` を見る。
@@ -1598,7 +1604,7 @@ updated: 2026-11-01
   - コミットの pre-commit は作業ツリー全体を見るので、並行セッションの編集中のファイルで落ちることがある。自分の原因でなければ待つ (検査を飛ばさない)。
 - **残り 2 (意味の確認)**: 機械で判定できない記述の誤り (例: 同記事の「中部 9 県のうち 7 県が平均を上回る」は実際は 6 県) を、点数が低く閲覧の多い記事から週に上限を決めて読む。小さいモデル・低 effort で該当箇所だけを読ませ、上位モデルは有料記事に限る。
 - **残り 3 (修正)**: 画像は `NOTE-FIGURE-ROLLOUT-01`、値の誤りは `NOTE-FIGURE-FIX-01` の道具で直す。note への書き込みは 1 日 10 本程度に分け、毎回 dry-run の差分を確かめる。
-- **残り 4 (採点の拡張)**: タグは全 439 本で中央値 99 個 (上限 100) だった。意図した運用かをオーナーに確かめ、違うなら採点項目に足す。有料記事 (98 本) は公開 API に本文の全体が出ないので、型の寸法を測っていない。
+- **残り 4 (採点の拡張)**: 有料記事 (98 本) は公開 API に本文の全体が出ないので、型の寸法を測っていない。
 - **完了条件**: 採点が週次で更新され、59 点以下の記事が 0 本になり、「元データ」カードの扱いが決まって台帳で確かめられる。
 
 ### [NOTE-FIGURE-FIX-01] 本文の照合で見つかった note 記事の誤りを直す
@@ -1606,7 +1612,8 @@ updated: 2026-11-01
 
 - **直すべき note 記事 (2026-11-05)**: ① `a-volunteer-activity-annual-participation-rate-10plus` と `recovered-nf5b4ced7a736` の「滋賀県と岐阜県が10位台前半」(滋賀県は 4 位。2 本は同じ本文で URL が別) ② `recovered-n5158c5766a07` の題名「東京は最下位」と 1 位の 29.8 (R2 の 2019 年は愛知が最下位・1 位 29.9。どちらが正しいかは統計の表で確かめる)。
 - **値を照らせない記事**: `recovered-n3f65c01be9a8` の 2022 年と `recovered-nfe69996fb5c9` の 2023 年は R2 に値が無い (`general-dust-emission-facility-count` は 2017 の次が 2023、`utilities-expenditure-ratio-multi-person-households` は 2004 の次が 2024)。指標の年を足すかを決める。
-- **次**: ① は 1 文の修正。note への最初の更新は `NOTE-FIGURE-ROLLOUT-01` の結果を見てから行う。② は e-Stat の表で確かめてから、記事か指標のどちらを直すかを決める。
+- **県民所得の記事 `recovered-n80e58a01f660` (2026-11-11 に確認・2026-11-13 に `NOTE-PUBLISHED-AUDIT-01` から移した)**: ③「中部 9 県のうち 7 県が全国平均を上回る」は 6 県が正しい (上回るのは愛知・福井・富山・静岡・山梨・岐阜。長野 2,788・新潟 2,784・石川 2,770 は下回る)。「全国平均 2,833 千円」は 47 都道府県の単純平均。「2023 年の TSMC 進出」は年の根拠を確かめていない。記事は 2020 年度で、サイトは 2021 年度を出している。
+- **次**: ①③ は文の修正。無料記事の本文の文だけを直す道具はまだ無い (リンクの置換は `update-published-navigation.mjs` の `publishedLinkRepairs`、画像は `update-note-body-figures.mjs`。どちらも本文を組み直して公開 PUT に差し込む `publishEditedBody` (`patch-note-paid-landing.mjs`) を使う)。同じ関数で文の置換を足すか、編集画面で人が直すかを決める。② は e-Stat の表で確かめてから、記事か指標のどちらを直すかを決める。
 - **完了条件**: `node .claude/scripts/note/build-note-figure-ledger.mjs --check` の直すべき記事が 0 件で、`.claude/config/note-figure-baseline.json` の上限も 0 に下げた。
 
 ### [BLOG-CHART-FILES-MISSING-01] 公開中のブログ本文が指す図が R2 に無い
@@ -2111,11 +2118,11 @@ updated: 2026-11-01
   - **停止条件**: 提出していないページに出る設定 (`targetRankingKeys` なし) で登録しない。承認前にバナーを置かない。
   - **完了条件**: 提出したページの本番 HTML に広告が出て、それ以外のページに出ない。効果の観測は improvements の別 ID (`[kpi: affiliate-yield]`) へ引き渡す。
 
-### [NOTE-CIRCULATION-LINK-FIX-01] note 公開記事のリンク切れ 5 件と導線の欠けを直す
+### [NOTE-CIRCULATION-LINK-FIX-01] note 公開記事の http・転送リンクの残りと導線の欠けを直す (リンク切れ 4 記事は 11-13 に反映済み)
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-18] [領域:SNS]
 
 - **事象**: note 回遊の週次監査 (`npm run weekly:audits -- --only note-circulation`) でリンク切れ (`broken_site_link`)・http リンク・リダイレクト・無料部分のマガジン導線の欠け (`missing_magazine_link_in_free_body`)・カード前後の余分な空段落 (47記事・175件、`data/note/card-visibility-latest.json`) が出ている。明細は `data/note/evidence/note-circulation-audit-2026-10-30.json`。
-- **置換案 (2026-11-01・オーナー確認待ち。置換先は 11-01 に本番で HTTP 200 を確認)**:
+- **置換案 (2026-11-13 にオーナーが表のとおり全件を承認。奈良の記事は `/category/tourism` へ向ける。置換先 12 URL は 11-13 に本番で HTTP 200 を取り直した)**:
   | 記事 | 切れたリンク → 置換案 | 注意 |
   |---|---|---|
   | `d-engel-coefficient-income` | `/ranking/food-expenditure` → `/ranking/food-expenditure-total` | — |
@@ -2125,8 +2132,15 @@ updated: 2026-11-01
   | `koumuin-shigoto-kouritsuka-ai` | `/ranking/public-employee-count` → `/ranking/prefectural-general-administration-staff` | 一般行政部門の職員。本文の文脈に合うかを確かめる |
   | `b-hotel-rooms-nara` | `/ranking/gross-prefectural-product-accommodation-food-h27` → `/category/tourism` かリンクを外す | オーナー判断 |
   - http・転送されるリンクが `c-engel-food-gap`・`c-kita-kanto-fiscal`・`c-tokyo-vs-osaka-fiscal`・`d-education-income-gap`・`koumuin-shigoto-kouritsuka-ai`・`recovered-n03844512d58a` にある (転送先の URL へ書き換える)。`recovered-nf5b4ced7a736` は台帳 `data/note/articles.json` の行き先を直す。マガジンへのリンクが無料部分に無い 10 件はこの表に含めていない。
-- **次**: 置換案をオーナーが確認したら、公開済み記事を PUT パッチで直す (note への外部変更なので承認後)。この Mac から note が HTTP 403 の間は行わない。
-- **完了条件**: 週次監査の note-circulation で error 0 件 (Issue #1149 は手で閉じる)。
+- **道具と準備 (2026-11-13)**: 記事台帳の `publishedLinkRepairs` (`replace-url`) に置換を書き、`node .claude/scripts/note/update-published-navigation.mjs --slug <key>` で流す (既定は dry-run・書き込みは `--commit`)。http・転送リンクは `--repair-redirects`。会社の Windows PC では、公開 API の読み取りが素の Node `fetch` なので、memory `proxy-preload-for-fetch-scripts` の preload と `NODE_EXTRA_CA_CERTS` を付けて流す。この形で `npm run note:session:check` (口座 stats47) と 1 本目の dry-run が通った。
+- **道具の修正 (2026-11-13)**: `replace-url` は `replaceAll` で、置換元を前方一致で含む別の URL まで書き換えていた。`d-engel-coefficient-income` の本文には `/ranking/food-expenditure-ratio-multi-person-households` が 6 か所あり、そのまま流すと正常なリンクが壊れる。置換と、公開後の「置換元が残っていないか」の確認を URL の終端で判定する形に直した (`lib/navigation-footer.mjs` の `includesExactUrl`・テストで固定)。置換先が置換元を前方一致で含む置換 (ビール・パン・ワイン・食料費) も、公開後の確認で誤って失敗にならない。
+- **反映済み 4 本 (2026-11-13・会社の Windows PC から)**: `d-engel-coefficient-income`・`d-kakei-spending-personality` (9 件)・`koumuin-shigoto-kouritsuka-ai` (`http://` 4 か所の正規化を含む)・`b-hotel-rooms-nara`。リンク切れ (`broken_site_link`) の 4 記事はこれで全部。4 本とも公開 API の本文で、置換元が 0 か所・`has_draft` が false・画像とタグの数と価格が反映前と同じことを確かめた。道具は 4 本とも `FAIL Verified source image bytes changed` と表示した (公開後のカード画像の検証がリンクカード台帳の古さで落ちる。`NOTE-PUBLISHED-AUDIT-01` の 11-11 の実例と同じで、公開は済んでいる)。置換したテキストリンクの href には、既存の仕様で計測用の `?utm_source=note&…` が付く。
+- **R2 の原稿は未追従**: 4 本の公開 R2 の `draft.md` は旧リンクのまま (この道具は R2 を書かない)。R2 に書ける環境で `npm run note:article -- checkout <key>` → リンクを同じ置換で直す → `save <key>` で合わせる。
+- **失敗して止めた 3 本 (2026-11-13 夜)**: `c-engel-food-gap`・`c-tokyo-vs-osaka-fiscal` は「記事編集画面を確認できません: editor=0」、`c-kita-kanto-fiscal` は「更新APIが発火しません (status: sending)」。同じ時間帯に公開 API の読み戻しでも接続タイムアウトが出ており、通信が不安定だった。3 本とも公開版は変わっていない (`http://stats47.jp` が 1 か所のまま)。`c-kita-kanto-fiscal` には未公開の下書きが残った (`has_draft: true`。破棄は `NOTE-OWNER-ACTIONS-01`)。変更は `http://` → `https://` の 1 か所だけで、台帳の登録は要らない (`--slug <key>` で流せば正規化される)。
+- **見送った 2 本**: `d-education-income-gap` は転送リンクがテキストでなくリンクカード 2 枚の `data-src` で、URL を替えると note 側のカードの登録のやり直しが要る。今のリンクは 301 で正常に開けるので、カードを扱う修復 (`replace-card` か `regenerate-card`) にするかを決めてから行う。`recovered-n03844512d58a` (`/blog/food-expenditure-ranking` → `/blog/food-spending-pattern`) は家計・所得のマガジンの記事で、流すとフッターと旧文言の置き換え・データ商品のカード (11-13 に P-02 へ変更) も同時に入るので、`NOTE-PUBLISHED-AUDIT-01` の旧文言の束と一緒に流す。有料の `12-fiscal-peer-comparison`・`13-fiscal-peer-no-code` にも `http://stats47.jp` が 1 か所ずつある (11-07 の監査。承認済みの置換案に入っていないので未着手)。
+- **次**: 通信が安定している時間に、`c-engel-food-gap`・`c-tokyo-vs-osaka-fiscal` を 1 本ずつ流す。`c-kita-kanto-fiscal` は下書きの破棄の後。1 日 10 本以内。2 本続けて止まったらその日は止める。判定は道具の表示ではなく、公開 API の本文と `has_draft` で行う。
+- **`recovered-nf5b4ced7a736` は台帳でなく本文が違う (2026-11-13 に公開本文で確認)**: 題名は「10歳以上」で台帳の行き先も `…-10plus` だが、本文のリンクとカードは `/ranking/volunteer-activity-annual-participation-rate-15plus` を指している。両方のランキングは本番で HTTP 200。台帳は直さない。本文のリンクを `-10plus` へ替えるかはオーナーの確認待ち (11-13 に承認された置換案には入っていない)。
+- **完了条件**: 週次監査の note-circulation で `broken_site_link`・`non_https_site_link`・`redirected_site_link`・`missing_catalog_site_target` が 0 件 (Issue #1149 は手で閉じる)。マガジンへのリンクが無料部分に無い警告 109 件と、有料記事の無料部分の不足 16 件 (`d-geo-*` 5 本。画像が要る) はこのカードの対象外。
 
 ### [SSDS-YEARFORMAT-SOURCE-01] SSDS の指標生成器が年の区切りを一律「年度」で書くのをやめ、出典の期間から決めて検査で止める
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-21] [領域:データ]
@@ -2200,10 +2214,10 @@ updated: 2026-11-01
 タグ: [SNS・マーケ] [種類:制作] [実行:対話] [起票:2026-10-17] [領域:商品]
 
 - **企画**: `docs/30_note記事企画/backlog/H-howto-maps-data.md` (8 本)。
-- **済み (〜2026-10-28)**: 2 本目 H-02 (CSV 文字化け) は公開済み (https://note.com/stats47/n/nc884a0a01b71)。1 本目 H-01 (`h-howto-mymaps-kml`) と #9 (`h-howto-mymaps-share`) は本番の KML をマイマップで実機確認し、画面を入れて本文を差し替え R2 に保存した。#11 `h-howto-excel-filled-map` は 2026-10-27 に実機確認して公開本文を差し替えた (`NOTE-UNVERIFIED-PUBLISHED-01`)。統合した `NOTE-HOWTO-OWNER-CHECK-01` の実機確認・撮影も 10-28 に済み。#9 は公開後に案内先を H-01 へ替える。
+- **済み (記事台帳で 2026-11-13 に確認)**: H-02 (`h-howto-csv-mojibake`・10-17)、H-01 (`h-howto-mymaps-kml`・10-24)、#9 (`h-howto-mymaps-share`・10-24)、#11 (`h-howto-excel-filled-map`・10-24) は公開済み。完了条件の「2 本が公開」は満たした。
+- **残り (計測)**: H-01 と H-02 の 28 日の閲覧・note 内の表示・stats47 への送客を記録する (H-02 は 11-14 以降、H-01 は 11-21 以降の土曜の記録 `data/note/dashboard/latest.json` から読む)。H-01 が公開されたので、KML 記事の末尾と #9 の案内先を H-01 へ替えるかは `NOTE-KML-FUNNEL-01` ③ と `NOTE-PRODUCT-LADDER-01` 手順 4 で決める。
 - **#3 QGIS (`h-howto-qgis-choropleth`) 原稿完成・未公開 (台帳 status draft)**: 画面 10 枚と原稿を R2 に保存済み。**残り**: ① カバーを Codex imagegen で作る (`.claude/rules/note-image-assets.md` の制作 ID 経路) ② note-critic ③ 新規公開 (`publish-new-note.sh` は Mac の Chrome Profile 5 前提)。公開後は H シリーズの基準 (28 日で閲覧 190 以上) で有料の続き (港湾・人口増減・財政の地図) を作るか決める。
-- **残り**: 公開した記事の 28 日の計測。note-critic の再レビューで PASS してから、公開は 1 本ずつオーナーが判断する。
-- **完了条件**: 2 本が公開され、28 日の閲覧・note 内の表示・stats47 への送客を記録した。0 件なら 0 件と書く。
+- **完了条件**: 2 本が公開され (済み)、28 日の閲覧・note 内の表示・stats47 への送客を記録した。0 件なら 0 件と書く。QGIS の記事は note-critic が PASS してから、公開をオーナーが判断する。
 
 ### [CI-SMOKE-BOUNDING-BOX-01] 本番の画面幅テストで初回に寸法検査が失敗する原因を調べる
 タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [起票:2026-10-17] [期日:2026-10-24] [領域:サイト]
@@ -2486,14 +2500,6 @@ AdSense の最適化案「レスポンシブ広告で収益を拡大」(固定�
 - **完了条件**: 中身が変わらない指標の values.json が次の全件実行で送られず (ログの送信件数で確認)、Last-Modified が動かない。
 
 
-### [NOTE-LABOR-METRICS-ADD-01] 有給休暇と産業別賃金の県別指標を足し、note の雛形 2 本を作り直して公開する
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-15] [領域:サイト]
-
-- **経緯**: note の雛形 `A-laborwage-paid-leave-utilization-prefecture`・`A-laborwage-wages-by-industry-prefecture` は元になる県別ランキングが無く作り直せなかった (`NOTE-A-LABORWAGE-TEMPLATES-01`)。オーナー指示で指標を足してから作り直す。
-- **済み**: 指標 `annual-paid-leave-11-days-or-more-ratio` (取得率ではない)・`information-communication-industry-annual-income`・`manufacturing-industry-annual-income`・`medical-welfare-industry-annual-income` を足し、PR #1136 (`a3ca33515`) で本番反映した。置き換えの記事 `a-annual-paid-leave-11-days-or-more-ratio` (カバー `NCI-00500`)・`a-manufacturing-industry-annual-income` (`NCI-00501`) は記事台帳で `published`。情報通信業は隣り合う年の順位相関が 0.55〜0.68 と振れが大きいので note にせず、製造業に置き換えた (情報通信業・医療福祉はランキングのみ)。
-- **次**: 旧雛形 2 本 (`A-laborwage-paid-leave-utilization-prefecture`・`A-laborwage-wages-by-industry-prefecture`、記事台帳で `draft`) を記事台帳とカバー台帳から外す。
-- **完了条件**: 2 本の雛形が記事台帳から消え、置き換えの記事が公開済み (または指標が組めず見送りを記録)。
-
 ### [DEPS-RENOVATE-01] Renovate GitHub App をインストールし、最初の月曜の翌日に PR が出ることを確かめる
 タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [検証:gh pr list --state all --search "author:app/renovate"] [起票:2026-10-13]
 
@@ -2510,17 +2516,6 @@ AdSense の最適化案「レスポンシブ広告で収益を拡大」(固定�
 - **次 (オーナー)**: doboku-note-archive の保持方針 (許容か削減か) を決める。
 - **完了条件**: 削減なら削除量を根拠に `[target: -N GB]` と `[kpi: operating-cost]` 付きの別行で improvements.md に起票する。許容なら理由と見直し期日を cloudflare-cost-improvement の詳細ログに書く。
 - **決定 (2026-10-26 オーナー)**: 削減する。次: `r2-maintenance.yml` の `mode: du` (dry-run) で doboku-note-archive の内訳を取り、削減範囲の案と削減量を出してオーナーが範囲を承認する。承認後に `[target: -N GB]` 付きの行を improvements.md へ起票する (このカードはそのとき削除)。
-
-### [REFERENCE-EXPANSION-NOTE-01] 教材の分析企画から作った note の下書き 92 本を、意味のレビュー・R2 保存・公開まで進める
-タグ: [コンテンツ品質] [種類:制作] [実行:別環境] [検証:npm run reference:expansion -- status --channel note] [起票:2026-10-13] [領域:商品]
-
-- **状態 (2026-10-15)**: `b-ref-*` 92 本 (mh-a09 を含む) はすべて公開済みで、記事台帳 `data/note/articles.json` の `noteUrl`・`publishedAt` と展開記録 (note・済み 149 / 企画中 0) を更新済み。**完了条件の「企画中と未着手が 0」は満たした**。経過は `git log -p -- .claude/todo/backlog.md` で辿れる。
-- **残り**:
-  ① マガジン「都道府県ランキング｜情報通信」(`s47-ict`) が note に未作成 (`data/note/magazines.json` の `noteUrl` が null)。`b-ref-prc-a20`・`b-ref-prc-a24` はマガジンなしで公開した。オーナーが作成して URL を `data/note/magazines.json` に記録し、2 本をマガジンへ追加する。POST `/api/v1/my/magazines` は 201 でも一覧に現れなかった (カバー画像が必須の可能性。未検証)。同じく未作成の「国際・外国人」(`s47-international`) も要判断。
-  ② 失敗回で残った空・途中の下書き (`n6c6e1708a2a1`・`n7f3aa1bb55b8`・`nb2b302a56c8c`・`n706d8699fcd7` ほか) を下書き一覧で照合して削除する (削除はオーナー)。
-  ③ `b-ref-dev-a05`・`a09`・`a15`・`a40` は問いが求める指標 (子育て世帯の貧困率・通学時間と進学率・最新年の貯蓄・自家用車で通う人の割合) が無く、答えの一部を「このデータでは判断できない」としたまま公開した。指標を足すかを決める。
-- **停止条件**: 検査と意味のレビューに通らない本文を保存しない。公開はオーナーの確認なしに行わない。
-- **完了条件**: `reference:expansion -- status --channel note` の企画中と未着手が 0 (2026-10-15 に達成)。
 
 ### [REFERENCE-EXPANSION-BLOG-01] 教材の分析企画のうちブログが展開先の 215 件を、記事にする・結ぶ・見送るに振り分ける
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run reference:expansion -- status --channel blog] [起票:2026-10-13] [領域:データ]
@@ -2588,7 +2583,7 @@ AdSense の最適化案「レスポンシブ広告で収益を拡大」(固定�
 - **完了条件**: `packages/data-configs/src/evidence-inventory/` と japan-zue の `policy.ts`・`pilot.ts` にデータの配列・表が残らず (型・読み込み・判定関数だけ)、`check-datasets` が通る。
 
 ### [NOTE-LEDGER-FOLLOWUP-01] note 記事台帳への移行の後片付けと、private R2 を含む照合の定期実行
-タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run note:article -- verify --deep] [起票:2026-10-13] [領域:商品]
+タグ: [エージェント・SSOT] [種類:改善] [実行:別環境] [検証:npm run note:article -- verify --deep] [起票:2026-10-13] [領域:商品]
 
 - **背景**: 2026-10-13 に note 記事の正本を台帳 `data/note/articles.json` + R2 に移した (`84d6ac273`。規約 `.claude/scripts/note/catalog/README.md`)。残りは次のとおり。
 - **やること**:
@@ -2597,6 +2592,7 @@ AdSense の最適化案「レスポンシブ広告で収益を拡大」(固定�
   2. **R2 の取り残し**: どのマニフェストにも載らない `note/` 配下のオブジェクトを数える。既知の例は、公開 R2 の `note/a-maximum-temperature/` (vertical の無い旧パス・7 件)、
      有料記事の公開 R2 に残る旧 `public.json` (75 件・読み手なし)。削除するなら `r2-storage-design.md` の手順 (`r2-maintenance.yml` の allowlist) に従う。
      旧 `manifest.json` は `backfill-note-data-provenance.mjs` が読むので、`NOTE-PROVENANCE-BACKFILL-MANIFEST-01` が済むまで消さない。
+     2026-11-13 に台帳から外した旧雛形 2 本の本文 (公開 R2 の `note/stats47-note/A-laborwage-paid-leave-utilization-prefecture/`・`note/stats47-note/A-laborwage-wages-by-industry-prefecture/`、各 5 ファイル・約 100KB) も取り残しに加わった。
   3. **控えの削除**: 移行前の作業コピーの控え `.local/note-migration-backup-20261013.tar.gz` (14MB・この Mac のみ) は、verify --deep が 2 回続けて合格したら削除する。
   4. **カバーの観測記録**: `verify-cover-refresh.mjs` の出力先を `data/note/cover-lifecycle-latest.json` に直した (以前は台帳に無いパスへ書いていた)。2026-11-04 に全件 (`--keys` なし) で流して 428 本 pass (済)。
 - **完了条件**: 週次で private を含む verify が動き、取り残しの件数と扱いが決まり、控えを消している。
@@ -2614,7 +2610,7 @@ AdSense の最適化案「レスポンシブ広告で収益を拡大」(固定�
 - **完了条件**: `note:article status` で `note-only` が 0、`note:article verify` が全件合格。語彙から `note-only` が消え、公開済みで本文が R2 に無い記事を検査が止める。
 
 ### [NOTE-PRODUCT-ZIP-ARCHIVE-01] note 有料記事の添付 ZIP (商品ファイル) を private R2 に保全する経路を作る
-タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-10-13] [領域:商品]
+タグ: [収益化] [種類:改善] [実行:別環境] [起票:2026-10-13] [領域:商品]
 
 - **事実 (2026-10-13)**: `note:article save` は記事ディレクトリ (docs/31 の作業コピー) だけを保存するので、`.local/note-product-archives/P-NN-*.zip` や `.local/geo-products/` の添付 ZIP はこの Mac にしか無い (廃止した `publish-paid-note-private-r2.ts` は private R2 に `product/<name>.zip` として写していた)。
 - **次**: ZIP を記事の作業コピー (`product/<name>.zip`) に置いて `save` する (R2 の 1 オブジェクト上限 16MB を超えるものは分ける) か、
@@ -2649,12 +2645,13 @@ AdSense の最適化案「レスポンシブ広告で収益を拡大」(固定�
 - **停止条件**: 正しい期間の原表、または可住地面積の分母が確認できなければ推測で値を変更しない。
 - **完了条件**: 3指標の対象期間・分母・単位が原表と一致し、該当ランキングと県データブックの回帰検証を通過する。本番反映は既存の承認済み公開工程にまとめる。
 
-### [NOTE-READINESS-20261024] note記事台帳の未公開レコード98件を整理する
+### [NOTE-READINESS-20261024] note記事台帳の未公開レコード60件を整理する
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-24] [領域:商品]
 
-- **現在地**: 10/25、427公開・62未公開。元100下書きから25件公開・13件統合。「国土数値情報をQGISで扱う」を公開・配信照合。証拠は `data/note/evidence/note-draft-publication-audit-20261024.json`。
+- **現在地 (2026-11-13 に台帳を集計)**: 439公開・60未公開。未公開の内訳は、販売記事 (`product-sales`) 54件・本文未作成の `d-geo-*` 5件・原稿完成済みで未公開の `h-howto-qgis-choropleth` 1件 (公開の段取りは `NOTE-HOWTO-SERIES-01`)。統計値未入力だった旧雛形 2件 (`A-laborwage-*`) は置き換えの記事が公開済みなので 11-13 に台帳から外した。
+- **10/25 までの経過**: 元100下書きから25件公開・13件統合。「国土数値情報をQGISで扱う」を公開・配信照合。証拠は `data/note/evidence/note-draft-publication-audit-20261024.json`。
 - **10/24の指示**: 全件の公開を優先し、詳細な品質確認は後追い。My Maps・Excel操作記事は実機未確認を明示して公開。P-01〜P-10は各7ファイルのZIPをprivate R2でSHA照合し、価格・有料境界・添付を確認して公開。Office実機確認は記事内に未了と明記。
-- **残件**: 販売54件（納品物未作成）、本文未作成6件、統計値未入力2件。現行パック証拠は `data/products/note-pack-regeneration-2026-10-24.json`。地図資料サービスは受付休止中。
+- **残件**: 販売54件（納品物未作成）、本文未作成5件。現行パック証拠は `data/products/note-pack-regeneration-2026-10-24.json`。地図資料サービスは受付休止中。
 - **カバー配信照合**: P-01〜P-10の採用画像とnote配信画像を1280×670で比較し、6件は画素ゲートPASS・管理画面で反映済み。P-03/P-04/P-08/P-09はnote上で公開済みだが画素差ゲートを僅かに超過しており、管理画面では反映待ちとして残す。値と理由は記事別監査の `publishedEvidence.coverPixelVerification`。公開画像と採用画像の目視差を確認し、必要ならカバーのみ再適用して再照合する。
 - **P-11/12/14**: P-11/12/14は有料境界後のZIP・採用カバーを照合して公開済み。
 - **Geo検査キット**: 地域コード結合・データ品質管理・地域フィルタJSON・X/OGP地図カード・国土数値情報QGISガイドを公開。各ZIPは有料境界後、テスト・private R2・採用カバーを照合済み。QGIS実機検証は後追い。
@@ -3324,7 +3321,9 @@ AdSense の最適化案「レスポンシブ広告で収益を拡大」(固定�
 - **完了条件**: Windows と Mac で画面を開き、各 MCP の行が実際の `/mcp` の表示と同じ状態を示す。
 
 ### [NOTE-HASHTAG-ROLLOUT-20261003] note公開記事のハッシュタグを承認済みの99個へ置き換える
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-03] [領域:商品]
+タグ: [コンテンツ品質] [種類:改善] [実行:別環境] [起票:2026-10-03] [領域:商品]
+
+- **実行できる環境 (2026-11-13 にソースで確認)**: `update-published-hashtags.mjs` は macOS 固定 (`/Users/minamidaisuke` のパス・`/bin/zsh`・`osascript`・Chrome の Profile 5) で、Windows では後片付けとロックが動かない。Mac で実行する。残り 6 件は下書きの扱い (`NOTE-OWNER-ACTIONS-01`) が済んでから流し直す。11-07 の回遊監査では `b-hottest-prefecture` のタグが 62 個 (`hashtags_below_95`) で、これも同じ回に直す。
 
 - **正典**: 記事ごとの承認済みタグは台帳 `note.hashtags` (`data/note/hashtags.json`。全286件)。作成は `propose-note-hashtags.mjs`、反映は `update-published-hashtags.mjs`、検査は `lib/note-hashtags.mjs`。反映済みかどうかは台帳に持たず、毎回 `--audit-only` で note から取り直す。
 - **現状 (2026-10-12)**: 承認済みと一致 280/286。残り 6 件はすべて下書きが残って停止 (`draft_blocked`): 有料 `paid-n92b846280d1a`・`paid-nfe2c65e669a8` (以前からの下書き。内容を確認してから扱いを決める) と、無料 4 件 `recovered-n03e45e40d3a7`・`n144d350fc14e`・`n3908e5981967`・`n48dff1df249f`。無料 4 件はエディタがリンクカードの href を旧ブログURLの転送先に書き換えるため本文一致の安全装置で止まる。**リンク先の書き換えを許すかはオーナー判断** (許すなら比較で href の転送先を正規化する)。下書きは note の編集画面で破棄すれば解消する。`a-late-elderly-medical-expense-per-insured` は `--slugs a-late-elderly-medical-expense-per-insured --allow-free-draft` で片付く。
@@ -3374,7 +3373,7 @@ AdSense の最適化案「レスポンシブ広告で収益を拡大」(固定�
 ### [NOTE-COVER-ASSETS-SPLIT-01] note カバー台帳 cover-assets.json を 1MB 未満に分割する
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-repo-hygiene.cjs --baseline] [起票:2026-10-13] [領域:商品]
 
-- **現在地 (2026-10-13)**: `data/note/cover-assets.json` は記事 403 本分の採用版と操作履歴を持ち約 1.7MB で、repo hygiene の上限 1MB を超えるため `.claude/config/repo-hygiene-baseline.json` に既知の違反として 1 件登録した。
+- **現在地**: 2026-11-13 の実測で約 3.7MB (3,726,794 バイト。10-13 は記事 403 本分で約 1.7MB)。`data/note/cover-assets.json` は採用版と操作履歴を持ち、repo hygiene の上限 1MB を超えるため `.claude/config/repo-hygiene-baseline.json` に既知の違反として 1 件登録した。
 - **やること**: 完了・superseded の操作履歴を `data/note/evidence/` の月別ファイルへ移すなど、正本 (採用版と未完了の操作) と履歴を分ける。読み手 (`lib/cover-update.mjs`・`generate-cover-refresh.ts`・`verify-cover-refresh.mjs`・管理画面) を同時に直し、JSON Schema も更新する。
 - **完了条件**: 正本が 1MB 未満になり、baseline から `data/note/cover-assets.json` の行を消しても `check-repo-hygiene.cjs --baseline` が通る。`node --test .claude/scripts/note/__tests__/cover-update.test.mjs` が通る。
 
@@ -4035,24 +4034,9 @@ AdSense の最適化案「レスポンシブ広告で収益を拡大」(固定�
 - **次・実行順**: ①stats47の最新完全な期間集計を取得し、対象・維持記事・既存下書き・最近のカバー変更時刻を固定する (取得失敗を古い正常値で隠さない)。②前半3記事の旧図と候補を390px/320pxで比較する。③見出しと図の対応、短い導入、記事末の出典、主CTA1つ＋副最大2つを本文差分として提示する。④後半3記事へ型を適用し、マガジンの実所属と読む順を確認する。⑤承認された記事だけ保存・公開し、同じURLで図とカードの表示・クリック先を読み戻す。
 - **再発防止の実装候補**: 既存render-spec/入力SHA/単位・年/版の検査を再利用し、重複画像・CTA件数・指標と商品の対応・公開カードの空欄を検査する。意味の一致・縮小後の読みやすさは目視。未実装gateを実装済みと扱わない。
 - **画像基盤の完了条件案**: 元データ/生成条件/完成画像の不足を区別し、当時の固定値でのデザイン更新と最新データ更新を別操作にする。代表図を別端末で復元・再生成し、対象利用先と旧新比較を辿れること。カバーのAI生成は別契約を維持し、統計図に流用しない。
-- **関連タスク**: 空欄カードの復旧結果 `data/note/evidence/note-card-repair-result-2026-10-26.json`、導線は `NOTE-CIRCULATION-CTA-01`、マガジン整理は `NOTE-MAGAZINE-REORG-01`。先に全件のカード修復やマガジン作成を再実行しない。
+- **関連タスク**: 空欄カードの復旧結果 `data/note/evidence/note-card-repair-result-2026-10-26.json`、導線 (元データカードの文言と行き先) は `NOTE-PUBLISHED-AUDIT-01`。先に全件のカード修復やマガジン作成を再実行しない。
 - **停止条件・公開境界**: 管理画面・台帳・R2画像保存の実装と旧画像の検証付き移行は承認済み。数値・原典・集計単位が不一致、既存下書きがある、カードの公開表示が確認不能、本文の別変更を巻き込む場合は当該記事を止める。note公開・R2正本更新は差分レビューと当該反映指示後。統計図をimagegenで描かない。SNS下書きの承認・予約・公開は変更しない。
 - **完了条件**: 最大6記事で修正前後・採用図版・本文差分が確認され、承認対象だけ公開実測を通る。対象外本文・価格・公開状態を保持。共通生成・検査・保存手順を次記事でも再利用できる。効果観測を行う場合は最新baseline・対象・交絡・指標・期限を揃えて既存改善台帳へ引き渡す。記事内クリック・読了が未取得なら判定不能と明記する。画像制作だけで公開・効果検証を完了扱いにしない。
-
-### [NOTE-CIRCULATION-CTA-01] note回遊とCTAのcatalog駆動化
-
-タグ: [種類:改善] [実行:対話] [起票:2026-07-18] [領域:商品]
-
-- **owner**: Claude Code
-- **計測の前提**: 2026-08-27の別アカウント混入記録は使わない。stats47をassertした2026-09-07〜10-04集計は完全（当時286記事）だが、10-12のlatestは取得失敗。最新の対象範囲で再取得してから効果比較する。記事内クリックは現collectorで取得できず、PVをクリックと扱わない。
-- **次**: `NOTE-BODY-QUALITY-PILOT-01` の対象から意味の一致を確認する。2026-10-16の公開確認では、日照記事に農地転用、県民所得記事に衣服物価を「この記事の元データ」と案内していた。カテゴリの一致だけで商品を割り当てず、指標・年・粒度・収録ファイルの対応を検証する。重複CTAと空欄カードも同じ公開面で確認する。
-- **trigger**: 正常なstats47の集計と公開導線の対応が揃い、少数対象の差分をレビューできること。
-- **完了条件**: 記事、マガジン、stats47 CTAの対応をcatalogから決定的に生成し、全記事一括変更しない。
-- **統合 (2026-10-26 オーナー判断): `NOTE-MAGAZINE-REORG-01`** note既存投稿のマガジン再編成 + 新規投稿の増産
-  - **残り**:
-  - **残 36本** (resume): catalog で `status:"draft"` の stats47-note 27 + koumuin-claude-code 9。`npx tsx -e 'import {NOTE_ARTICLES} from "./.claude/scripts/note/catalog/index.ts"; console.log(NOTE_ARTICLES.filter(a=>a.status==="draft"&&a.r2Body!==false&&a.vertical!=="product-sales").map(a=>a.vertical+"/"+a.key).join("\n"))'` で残スラッグを列挙。1本 ~5分・実 Chrome 占有・Bash 10分上限で1回2本程度。resume 可 (published は skip)。
-  - **完了条件**: 公開済み記事が note.com 上でマガジンに束ねられ、新規投稿が catalog のカテゴリマガジンに自動で割り当たること。記事一括変更しない (1 マガジンずつ実証)。
-  - **停止条件 / 承認境界**: note.com への実反映 (マガジン作成・記事割当・新規公開) は outward-facing。人手ログイン + オーナー承認を経てから。SSOT は catalog git TS、note.com は反映先。
 
 ### [MIGRATION-FLOW-PHASE23-01] 人口移動 月次/年次 workflowの生成ステップ未実装
 

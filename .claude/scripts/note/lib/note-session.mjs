@@ -27,7 +27,13 @@ export function readAccount() {
 
 /** 永続プロファイルで Chrome を起動 (channel:chrome、fallback default)。既定 headless。 */
 export async function launchContext({ headless = true } = {}) {
-  const opts = { headless, viewport: { width: 1440, height: 1000 }, userAgent: UA, args: ["--disable-blink-features=AutomationControlled"] };
+  // 会社の Windows PC では、ブラウザは OS のプロキシ設定で通るが、ctx.request (APIRequestContext) は
+  // プロキシを見ずに出て通信フィルターの 503「ブロックされました」になる (2026-11-13 実測: 指定なし 503・指定あり 200)。
+  // HTTPS_PROXY がある環境でだけ context に渡す。Mac には無いので挙動は変わらない。
+  const proxyServer = process.env.HTTPS_PROXY || process.env.https_proxy;
+  const noProxy = process.env.NO_PROXY || process.env.no_proxy;
+  const proxy = proxyServer ? { proxy: { server: proxyServer, ...(noProxy ? { bypass: noProxy } : {}) } } : {};
+  const opts = { headless, viewport: { width: 1440, height: 1000 }, userAgent: UA, args: ["--disable-blink-features=AutomationControlled"], ...proxy };
   try {
     return await chromium.launchPersistentContext(PROFILE, { ...opts, channel: "chrome" });
   } catch {

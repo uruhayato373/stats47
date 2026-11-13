@@ -26,6 +26,7 @@ import {
   buildNoteProductCardUrl,
   canonicalizeNoteEditorBody,
   collapseDuplicateFooterHeadings,
+  includesExactUrl,
   resolveProductCardText,
   datasetCardLead,
 } from "./lib/navigation-footer.mjs";
@@ -465,7 +466,7 @@ async function installPatch(page, before, updatedBody, plan, visibilityNudge = n
       if (legacyFreeBoundary) payload.separator = targetSeparator;
       if (before.price > 0) {
         const freeRepairs = plan.repairs.filter(
-          (repair) => payload.free_body.includes(repair.fromUrl) || payload.free_body.includes(repair.toUrl),
+          (repair) => includesExactUrl(payload.free_body, repair.fromUrl) || includesExactUrl(payload.free_body, repair.toUrl),
         );
         const updatedFreeBody = applyPublishedLinkRepairs(payload.free_body, freeRepairs).body;
         if (!updatedBody.startsWith(updatedFreeBody)) {
@@ -547,7 +548,7 @@ async function publishPlan(ctx, plan, before, publicBefore) {
       forceRegenerateCards: FORCE_REGENERATE_CARDS,
     });
     const publicRepairs = plan.repairs.filter(
-      (repair) => publicBefore.body.includes(repair.fromUrl) || publicBefore.body.includes(repair.toUrl),
+      (repair) => includesExactUrl(publicBefore.body, repair.fromUrl) || includesExactUrl(publicBefore.body, repair.toUrl),
     );
     const repairedPublic = applyPublishedLinkRepairs(rewriteProductCards(publicBefore.body, plan.paidProduct), publicRepairs, {
       forceRegenerateCards: FORCE_REGENERATE_CARDS,
@@ -663,7 +664,7 @@ async function publishPlan(ctx, plan, before, publicBefore) {
       );
       const repairsOk = plan.repairs.every(
         (repair) => repair.mode === "regenerate-card"
-          || (!live.body.includes(repair.fromUrl) && live.body.includes(repair.toUrl)),
+          || (!includesExactUrl(live.body, repair.fromUrl) && includesExactUrl(live.body, repair.toUrl)),
       );
       if (footerOk && repairsOk) break;
       await sleep(1_000);
@@ -687,7 +688,7 @@ async function publishPlan(ctx, plan, before, publicBefore) {
     // 正しさは末尾の bodySignature 完全一致チェックが保証するので、ここでは対象外にする。
     for (const repair of plan.repairs) {
       if (repair.mode === "regenerate-card") continue;
-      if (live.body.includes(repair.fromUrl) || !live.body.includes(repair.toUrl)) {
+      if (includesExactUrl(live.body, repair.fromUrl) || !includesExactUrl(live.body, repair.toUrl)) {
         throw new Error(`更新後本文でリンク修復を確認できません: ${repair.fromUrl}`);
       }
     }

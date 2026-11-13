@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-11-10T08:17:41.057Z",
+  "updatedAt": "2026-11-13T12:21:26.326Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -18424,36 +18424,6 @@
             "households": "二人以上の世帯"
           }
         }
-      }
-    },
-    {
-      "articleKey": "A-laborwage-paid-leave-utilization-prefecture",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
-      "missingVersions": [],
-      "production": {
-        "id": "NCI-00109",
-        "policyId": "NCP-004",
-        "policyVersion": 3,
-        "brief": null
-      }
-    },
-    {
-      "articleKey": "A-laborwage-wages-by-industry-prefecture",
-      "noteUrl": null,
-      "revisions": [],
-      "candidateRevisionId": null,
-      "approvedRevisionId": null,
-      "published": null,
-      "missingVersions": [],
-      "production": {
-        "id": "NCI-00111",
-        "policyId": "NCP-004",
-        "policyVersion": 3,
-        "brief": null
       }
     },
     {
