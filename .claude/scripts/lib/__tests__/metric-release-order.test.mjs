@@ -68,3 +68,24 @@ test('the precheck fails on the date-only condition that broke the build, and pa
   const current = spawnSync(process.execPath, [precheckScript], { encoding: 'utf8' });
   assert.equal(current.status, 0, current.stdout + current.stderr);
 });
+
+// CI-TOOLING-FOLLOWUP-01: PR の Build Check は next build だけを走らせ、OpenNext の Build (workers:build) を
+// 通らない。OpenNext のサポート期限の判定は next build では落ちないので、PR が緑のまま main へ入り、
+// デプロイの検査で初めて赤になる。PR の build job でも同じ検査を next build より前に走らせる。
+test('the PR build job runs the build precondition check before next build', () => {
+  const pr = readFileSync(fileURLToPath(new URL('../../../../.github/workflows/pr-quality-check.yml', import.meta.url)), 'utf8');
+  const start = pr.indexOf('\n  build:\n');
+  assert.ok(start >= 0, 'pr-quality-check.yml に build job が無い');
+  const rest = pr.slice(start + 1);
+  const next = rest.slice(1).search(/^ {2}[\w-]+:\n/m);
+  const job = next >= 0 ? rest.slice(0, next + 1) : rest;
+  const steps = job.split(/^ {6}- name: /m).slice(1).map((chunk) => ({ name: chunk.slice(0, chunk.indexOf('\n')).trim(), body: chunk }));
+  const precheck = steps.findIndex((step) => step.body.includes('run: node .github/scripts/check-build-preconditions.mjs'));
+  const build = steps.findIndex((step) => step.body.includes('run: npm run build -w apps/web'));
+  assert.ok(build >= 0, 'build job に next build の段が無い');
+  assert.ok(precheck >= 0, 'PR の build job に Build の前提条件を検査する段が無い');
+  assert.ok(precheck < build, 'Build の前提条件の検査は next build より前に置く (落ちる PR で Build の時間を使わない)');
+  // 検査が落ちても job が緑になる書き方を止める
+  assert.equal(/^ {8}if:/m.test(steps[precheck].body), false, '検査の段に if: を付けない');
+  assert.equal(/^ {8}continue-on-error:\s*true/m.test(steps[precheck].body), false, '検査の段に continue-on-error: true を付けない');
+});

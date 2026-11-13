@@ -122,7 +122,7 @@ export default function PrivacyPage() {
               className="w-12 h-12 rounded-full object-cover shrink-0"
             />
             <div>
-              <p className="font-semibold text-sm md:text-base">
+              <p className="font-semibold text-base">
                 {OPERATOR_PROFILE.name}
               </p>
               <div className="flex items-center gap-1 mt-1">

@@ -1287,6 +1287,12 @@ jobs:
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: npm ci
 
+      # この job の Build は next build だけで、OpenNext の Build (workers:build) を通らない。OpenNext が
+      # Next.js のサポート期限だけで Build を拒否する条件は next build では落ちないので、デプロイと同じ検査を
+      # ここでも走らせ、main へ入る前に赤にする (CI-TOOLING-FOLLOWUP-01。位置は metric-release-order.test.mjs が固定)。
+      - name: Check build preconditions
+        run: node .github/scripts/check-build-preconditions.mjs
+
       # 指標の入力を変えていない PR は生成を省き、中継が本番の値を返す (実測 4.2 分。判定は plan-deploy-scope.mjs)
       - name: Generate metric metadata for this PR
         if: needs.changes.outputs.metric_metadata == 'true'

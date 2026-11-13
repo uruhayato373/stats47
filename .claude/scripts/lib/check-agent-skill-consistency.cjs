@@ -589,6 +589,8 @@ function checkCodexMirror(findings, scope) {
   }
   let actions;
   try {
+    // mirror の既定のルートは mirror 自身の作業ツリー。この検査が見ているルート (fixture を含む) に合わせる
+    mirror.setRoot(ROOT);
     actions = [...mirror.planSkills(), ...mirror.planAgents()];
   } catch (error) {
     findings.push({ level: "error", code: "E12", file: ".claude/agents", msg: `mirror 計画に失敗: ${error.message}` });

@@ -434,7 +434,7 @@ test("[E12] ドリフトした mirror を止め、再生成すると通る", (t)
   assert.equal(drifted.status, 1);
   assert.match(drifted.stdout, /\[E12\]/);
 
-  const regen = spawnSync(process.execPath, [MIRROR], { cwd: root, encoding: "utf8", env: { ...process.env, CLAUDE_PROJECT_DIR: root } });
+  const regen = spawnSync(process.execPath, [MIRROR, "--root", root], { cwd: root, encoding: "utf8" });
   assert.equal(regen.status, 0, regen.stdout + regen.stderr);
   assert.equal(fs.readFileSync(path.join(root, ".agents/skills/dev/probe/SKILL.md"), "utf8"), fs.readFileSync(path.join(root, ".claude/skills/dev/probe/SKILL.md"), "utf8"));
   assert.ok(!fs.existsSync(path.join(root, ".agents/skills/gone")), "SSOT に無い skill は消える");
@@ -445,8 +445,34 @@ test("[E12] ドリフトした mirror を止め、再生成すると通る", (t)
 
   const clean = run(root);
   assert.equal(clean.status, 0, clean.stdout + clean.stderr);
-  const check = spawnSync(process.execPath, [MIRROR, "--check"], { cwd: root, encoding: "utf8", env: { ...process.env, CLAUDE_PROJECT_DIR: root } });
+  const check = spawnSync(process.execPath, [MIRROR, "--check", "--root", root], { cwd: root, encoding: "utf8" });
   assert.equal(check.status, 0, check.stdout + check.stderr);
+});
+
+// CI-TOOLING-FOLLOWUP-01: worktree のセッションでは CLAUDE_PROJECT_DIR が元の作業ツリーを指す。
+// mirror がその変数をルートにすると、worktree で再生成したつもりで元の作業ツリーへ書き込む。
+// 書き込む先は、実行したスクリプトが置かれている作業ツリーにする。
+test("mirror は CLAUDE_PROJECT_DIR が別の作業ツリーを指していても、自分の作業ツリーだけに書く", (t) => {
+  const skill = "---\nname: probe\ndescription: probe skill\nprimary_agent: worker\n---\n\nbody\n";
+  const drifted = () => ({
+    ".claude/agents/worker.md": VALID_AGENT,
+    ".claude/skills/dev/probe/SKILL.md": skill,
+    ".agents/skills/dev/probe/SKILL.md": "stale copy",
+    ".codex/agents/worker.toml": 'name = "worker"\n',
+  });
+  // worktree: スクリプトの写しを持つ作業ツリー。original: セッションを開いた元の作業ツリー
+  const worktree = fixture({ ...drifted(), ".claude/scripts/lib/sync-codex-mirror.cjs": fs.readFileSync(MIRROR, "utf8") });
+  const original = fixture(drifted());
+  t.after(() => { fs.rmSync(worktree, { recursive: true }); fs.rmSync(original, { recursive: true }); });
+
+  const result = spawnSync(process.execPath, [path.join(worktree, ".claude/scripts/lib/sync-codex-mirror.cjs")], {
+    cwd: worktree, encoding: "utf8", env: { ...process.env, CLAUDE_PROJECT_DIR: original },
+  });
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.equal(fs.readFileSync(path.join(original, ".agents/skills/dev/probe/SKILL.md"), "utf8"), "stale copy", "元の作業ツリーへ書き込んでいる");
+  assert.equal(fs.readFileSync(path.join(original, ".codex/agents/worker.toml"), "utf8"), 'name = "worker"\n', "元の作業ツリーへ書き込んでいる");
+  assert.equal(fs.readFileSync(path.join(worktree, ".agents/skills/dev/probe/SKILL.md"), "utf8"), skill, "自分の作業ツリーを再生成していない");
+  assert.match(fs.readFileSync(path.join(worktree, ".codex/agents/worker.toml"), "utf8"), /^description = "bounded executor"$/m);
 });
 
 test("[E3] .codex/hooks.json の command が指す hook も存在検査する", (t) => {
@@ -469,9 +495,7 @@ test("mirror はログ・コード・指示の実体を共有し、誤リンク�
     ".agents/skills/dev/probe/SKILL.md": "old",
   });
   t.after(() => fs.rmSync(root, { recursive: true }));
-  const invoke = (...args) => spawnSync(process.execPath, [MIRROR, ...args], {
-    cwd: root, encoding: "utf8", env: { ...process.env, CLAUDE_PROJECT_DIR: root },
-  });
+  const invoke = (...args) => spawnSync(process.execPath, [MIRROR, ...args, "--root", root], { cwd: root, encoding: "utf8" });
   assert.equal(invoke().status, 0);
   const target = path.join(root, ".agents/skills/dev/probe/reference/improvement-log.md");
   const skill = path.join(root, ".agents/skills/dev/probe/SKILL.md");
