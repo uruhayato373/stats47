@@ -1,3 +1,6 @@
 #!/bin/sh
 # 変更に関係するテストだけを push の前に走らせる (全件は CI)。飛ばすときは git push --no-verify
+# core.hooksPath は本体の絶対パスなので、このフックは他の worktree の push でも動く。
+# push する作業ツリーにスクリプトが無ければ (スクリプトを持たないブランチの worktree) 何もせず通す。
+[ -f .claude/scripts/lib/pre-push-tests.mjs ] || exit 0
 node .claude/scripts/lib/pre-push-tests.mjs || exit 1
