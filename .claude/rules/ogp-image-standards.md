@@ -516,8 +516,9 @@ homeの「知りたいことから探す」に使う、文字なしの装飾イ�
 - **県シルエットカード (§5.7)**: トークン SSOT `apps/web/scripts/data/pref-silhouette-tokens.ts` /
   レンダラー `apps/web/scripts/lib/pref-silhouette-render.ts` / 生成 `generate-ogp-images.ts --type pref-silhouette`
 - **ブログ OGP AI 背景 (§5)**: 記事固有背景 `apps/web/scripts/lib/blog-article-background.ts` +
-  `assets/blog/article-backgrounds/` (生成は `/generate-blog-images` の Codex) / 背景の判定
-  `apps/web/scripts/lib/blog-background-status.ts` (push 前の検査 `check-blog-background.ts`) / 解決・hash
+  `assets/blog/article-backgrounds/` (生成は `/generate-blog-images` の Codex) / 背景の選択順・公開済み背景の照合・
+  背景が無いときの案内文は `apps/web/scripts/lib/blog-background-status.ts` の 1 か所 (生成スクリプトと push 前の検査
+  `check-blog-background.ts` はここを呼ぶ。呼び出し側へ書き戻さない) / 解決・hash
   `apps/web/scripts/lib/blog-ogp-visual.ts` / 合成 `apps/web/scripts/lib/blog-thumbnail-render.ts` /
   bundle 生成 `apps/web/scripts/generate-blog-thumbnails{,-cloud}.ts` / 公開済み Gemini 背景の再利用だけに残す
   `blog-ogp-visual-catalog.ts`・`gemini-image-client.ts` / 目視 `npm run admin` → /assets「ブログ OGP パイロット (local)」タブ
