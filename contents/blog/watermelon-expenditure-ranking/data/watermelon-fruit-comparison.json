@@ -1,0 +1,10 @@
+{
+  "title": "すいか・メロン・生鮮果物の支出額順位(2025年)",
+  "year": "2025",
+  "unit": "円",
+  "spearman": {
+    "watermelon-melon": 0.53,
+    "watermelon-freshFruits": 0.46
+  },
+  "note": "順位の元データは melon-ranking-2025.json / fresh-fruits-ranking-2025.json / watermelon-ranking.json"
+}

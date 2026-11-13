@@ -94,6 +94,17 @@ describe('blog scatter as the shared type', () => {
     if ('skip' in chart) throw Error(chart.skip);
     expect(chart).toMatchObject({ title: '年間降水量と単独世帯割合', xLabel: '年間降水量（mm）', yLabel: '単独世帯割合（施設・県庁所在市）' });
   });
+  it('takes the denominator from the subtitle without a bracket or a leading particle', () => {
+    // 持家率の説明文は「家計調査（二人以上世帯）の調査世帯に占める…」で、括弧の途中から切り出すと軸名の括弧が壊れる
+    const chart = scatterChartFromArticleData({ ...articleData(), xLabel: '持家率', xUnit: '％' }, {
+      x: { metric: { title: '持家率', subtitle: '家計調査（二人以上世帯）の調査世帯に占める持家世帯の割合', unit: '％' }, year: '2025年' },
+      y: { metric: { subtitle: '人口100万人当たり' }, year: '2025年' },
+      prefCodeOf, unitLabel, sourceNames: ['調査'],
+    });
+    if ('skip' in chart) throw Error(chart.skip);
+    expect(chart.xLabel).toMatch(/^持家率（[%％]・調査世帯に占める）$/);
+    expect(chart.yLabel).toContain('人口100万人当たり');
+  });
   it('keeps the article labels when both axes are one metric in two years', () => {
     const chart = scatterChartFromArticleData({ ...articleData(), title: '健康寿命 2019年 × 2022年', xLabel: '2019年の健康寿命', yLabel: '2022年の健康寿命' }, {
       x: { metric: { title: '健康寿命' }, year: '2019年' }, y: { metric: { title: '健康寿命' }, year: '2022年' }, prefCodeOf, unitLabel, sourceNames: ['調査'],

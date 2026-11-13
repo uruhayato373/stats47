@@ -1,0 +1,206 @@
+{
+  "chartType": "line",
+  "title": "えび消費量の推移（4県）",
+  "subtitle": "2015〜2025年",
+  "unit": "g",
+  "source": "家計調査",
+  "rankingKey": "shrimp-consumption-quantity",
+  "series": [
+    {
+      "label": "岡山県",
+      "data": [
+        {
+          "year": 2015,
+          "value": 2058
+        },
+        {
+          "year": 2016,
+          "value": 2202
+        },
+        {
+          "year": 2017,
+          "value": 1601
+        },
+        {
+          "year": 2018,
+          "value": 1375
+        },
+        {
+          "year": 2019,
+          "value": 1464
+        },
+        {
+          "year": 2020,
+          "value": 1581
+        },
+        {
+          "year": 2021,
+          "value": 1712
+        },
+        {
+          "year": 2022,
+          "value": 1469
+        },
+        {
+          "year": 2023,
+          "value": 1378
+        },
+        {
+          "year": 2024,
+          "value": 1172
+        },
+        {
+          "year": 2025,
+          "value": 1710
+        }
+      ]
+    },
+    {
+      "label": "熊本県",
+      "data": [
+        {
+          "year": 2015,
+          "value": 1477
+        },
+        {
+          "year": 2016,
+          "value": 1297
+        },
+        {
+          "year": 2017,
+          "value": 1331
+        },
+        {
+          "year": 2018,
+          "value": 1234
+        },
+        {
+          "year": 2019,
+          "value": 1372
+        },
+        {
+          "year": 2020,
+          "value": 1811
+        },
+        {
+          "year": 2021,
+          "value": 1365
+        },
+        {
+          "year": 2022,
+          "value": 1675
+        },
+        {
+          "year": 2023,
+          "value": 1769
+        },
+        {
+          "year": 2024,
+          "value": 1994
+        },
+        {
+          "year": 2025,
+          "value": 989
+        }
+      ]
+    },
+    {
+      "label": "群馬県",
+      "data": [
+        {
+          "year": 2015,
+          "value": 684
+        },
+        {
+          "year": 2016,
+          "value": 802
+        },
+        {
+          "year": 2017,
+          "value": 729
+        },
+        {
+          "year": 2018,
+          "value": 1107
+        },
+        {
+          "year": 2019,
+          "value": 808
+        },
+        {
+          "year": 2020,
+          "value": 1065
+        },
+        {
+          "year": 2021,
+          "value": 1162
+        },
+        {
+          "year": 2022,
+          "value": 896
+        },
+        {
+          "year": 2023,
+          "value": 707
+        },
+        {
+          "year": 2024,
+          "value": 961
+        },
+        {
+          "year": 2025,
+          "value": 634
+        }
+      ]
+    },
+    {
+      "label": "茨城県",
+      "data": [
+        {
+          "year": 2015,
+          "value": 864
+        },
+        {
+          "year": 2016,
+          "value": 951
+        },
+        {
+          "year": 2017,
+          "value": 921
+        },
+        {
+          "year": 2018,
+          "value": 779
+        },
+        {
+          "year": 2019,
+          "value": 833
+        },
+        {
+          "year": 2020,
+          "value": 697
+        },
+        {
+          "year": 2021,
+          "value": 911
+        },
+        {
+          "year": 2022,
+          "value": 822
+        },
+        {
+          "year": 2023,
+          "value": 741
+        },
+        {
+          "year": 2024,
+          "value": 826
+        },
+        {
+          "year": 2025,
+          "value": 809
+        }
+      ]
+    }
+  ]
+}

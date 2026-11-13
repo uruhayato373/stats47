@@ -1,4 +1,4 @@
-<!-- data-source: shrimp-consumption-quantity-prefecture-gap-map.json | generated: 2026-11-09T11:45:17.016Z -->
+<!-- data-source: shrimp-consumption-quantity-prefecture-gap-map.json | generated: 2026-11-13T12:12:11.959Z -->
 <svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350" data-image-template="tile-map" data-theme="dark"><rect width="1080" height="1350" fill="#262626"/><g font-family="'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic',Meiryo,sans-serif">
     <text x="64.0" y="120.0" font-size="72.0" font-weight="700" fill="#F5F5F5">えび消費量</text><text x="64.0" y="184.0" font-size="32.0" font-weight="400" fill="#B5B5B5">2025年 · 単位：g</text>
     <text x="64.0" y="230.0" font-size="28.0" font-weight="400" fill="#B5B5B5">都道府県庁所在市の二人以上世帯の年間えび消費量</text>

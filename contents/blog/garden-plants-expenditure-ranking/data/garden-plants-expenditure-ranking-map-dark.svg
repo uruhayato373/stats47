@@ -1,4 +1,4 @@
-<!-- data-source: garden-plants-expenditure-ranking-map.json | generated: 2026-11-09T13:43:04.749Z -->
+<!-- data-source: garden-plants-expenditure-ranking-map.json | generated: 2026-11-13T12:41:52.752Z -->
 <svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350" data-image-template="tile-map" data-theme="dark"><rect width="1080" height="1350" fill="#262626"/><g font-family="'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic',Meiryo,sans-serif">
     <text x="64.0" y="120.0" font-size="72.0" font-weight="700" fill="#F5F5F5">園芸用植物消費支出額</text><text x="64.0" y="184.0" font-size="32.0" font-weight="400" fill="#B5B5B5">2025年 · 単位：円</text>
     <text x="64.0" y="230.0" font-size="28.0" font-weight="400" fill="#B5B5B5">都道府県庁所在市の二人以上世帯の年間園芸用植物消費支出額</text>

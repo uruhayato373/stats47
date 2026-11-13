@@ -1,4 +1,4 @@
-<!-- data-source: whitebait-consumption-quantity-prefecture-gap-prefecture-rankings.json | generated: 2026-11-09T13:44:24.652Z -->
+<!-- data-source: whitebait-consumption-quantity-prefecture-gap-prefecture-rankings.json | generated: 2026-11-13T12:29:27.692Z -->
 <svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350" role="img" aria-label="しらす干し消費量ランキング" data-theme="light" data-image-template="bar" data-domain-min="105" data-domain-max="803">
     <rect width="1080" height="1350" fill="#F8FAFC"/>
     <g font-family="'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic',Meiryo,sans-serif" fill="#18283C">

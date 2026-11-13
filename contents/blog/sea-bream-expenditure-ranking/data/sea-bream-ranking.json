@@ -2,10 +2,12 @@
   "title": "たい消費支出額",
   "subtitle": "2025年",
   "label": "たい消費支出額",
+  "readerLabel": "たいへの支出",
+  "hook": "たいへの支出が最も多い都市は？",
   "unit": "円",
   "year": "2025",
   "rankingKey": "sea-bream-consumption-expenditure",
-  "source": "e-Stat（政府統計の総合窓口）",
+  "source": "家計調査",
   "generatedBy": "fetch-ranking-data-r2.mjs",
   "data": [
     {
@@ -128,7 +130,7 @@
       "areaCode": "39000"
     },
     {
-      "rank": 18,
+      "rank": 17,
       "areaName": "宮崎県",
       "pref": "宮崎県",
       "value": 1258,

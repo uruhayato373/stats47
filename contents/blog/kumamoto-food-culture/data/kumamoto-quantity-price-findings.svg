@@ -1,4 +1,4 @@
-<!-- data-source: kumamoto-quantity-price-findings.json | generated: 2026-11-10T00:13:00.376Z -->
+<!-- data-source: kumamoto-quantity-price-findings.json | generated: 2026-11-13T12:28:42.806Z -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 488" width="960" height="488" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="熊本の食卓を数量×価格で分解（2025年・47県庁所在市平均=100）">
   <style>
     .svg-bg{fill:#ffffff}
@@ -23,7 +23,7 @@
   <rect x="40" y="72" width="880" height="72" class="svg-plot" rx="8"/>
   <circle cx="58" cy="108" r="18" fill="#dc2626"/>
   <text x="58" y="114" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">1</text>
-  <text x="90" y="103.6" font-size="18" font-weight="bold" class="svg-title"><tspan x="90" dy="0">多く・高く買う（数量も価格も平均より高い）</tspan></text>
+  <text x="90" y="103.6" font-size="18" font-weight="bold" class="svg-title"><tspan x="90" dy="0">多く・高く買う（数量・価格とも指数120以上）</tspan></text>
   <text x="90" y="125.6" font-size="16" class="svg-axis"><tspan x="90" dy="0">該当なし</tspan></text>
   <rect x="40" y="154" width="880" height="94" class="svg-plot" rx="8"/>
   <circle cx="58" cy="201" r="18" fill="#dc2626"/>
@@ -38,6 +38,6 @@
   <rect x="40" y="362" width="880" height="94" class="svg-plot" rx="8"/>
   <circle cx="58" cy="409" r="18" fill="#dc2626"/>
   <text x="58" y="415" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">4</text>
-  <text x="90" y="393.6" font-size="18" font-weight="bold" class="svg-title"><tspan x="90" dy="0">支出額が大きい（数量・価格とも少し上回る）</tspan></text>
+  <text x="90" y="393.6" font-size="18" font-weight="bold" class="svg-title"><tspan x="90" dy="0">支出額が大きい（数量・価格とも平均を少し上回る）</tspan></text>
   <text x="90" y="415.6" font-size="16" class="svg-axis"><tspan x="90" dy="0">すいか（数量120・価格110）、もやし（数量103・価格120）、干ししいたけ（数量1</tspan><tspan x="90" dy="22">17・価格105）</tspan></text>
 </svg>

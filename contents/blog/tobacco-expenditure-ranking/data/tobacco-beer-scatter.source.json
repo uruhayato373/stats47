@@ -1,0 +1,30 @@
+{
+  "kind": "scatter",
+  "derivedFrom": [
+    "tobacco-consumption-expenditure",
+    "beer-consumption-expenditure"
+  ],
+  "year": "2025",
+  "xMetric": "tobacco-consumption-expenditure (円)",
+  "yMetric": "beer-consumption-expenditure (円)",
+  "source": "r2:app/ranking/{tobacco,beer}-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "transform": "join 47 prefectures by areaCode; x=tobacco, y=beer (円)",
+  "pearsonR": 0.1920036433546401,
+  "fetchedAt": "2026-11-13T12:33:21.911Z",
+  "generatedBy": "article-writer (inline join)",
+  "axes": {
+    "x": {
+      "metricKey": "tobacco-consumption-expenditure",
+      "year": "2025年",
+      "proof": "values"
+    },
+    "y": {
+      "metricKey": "beer-consumption-expenditure",
+      "year": "2025年",
+      "proof": "values"
+    }
+  },
+  "xRankingKey": "tobacco-consumption-expenditure",
+  "yRankingKey": "beer-consumption-expenditure"
+}

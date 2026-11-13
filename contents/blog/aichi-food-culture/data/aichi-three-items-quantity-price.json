@@ -1,0 +1,50 @@
+{
+  "title": "愛知県の3品目 数量・価格指数（2025年・47都道府県庁所在市の単純平均=100）",
+  "unit": "指数",
+  "year": "2025",
+  "method": "数量指数 = 愛知の購入数量/47市単純平均、支出指数 = 愛知の支出額/47市単純平均、価格指数 = (支出額/数量)/(平均支出額/平均数量)",
+  "items": [
+    {
+      "label": "生うどん・そば",
+      "areaName": "愛知県",
+      "rankingKeys": ["fresh-udon-soba-consumption-quantity", "fresh-udon-soba-consumption-expenditure"],
+      "quantity": 10535,
+      "quantityUnit": "g",
+      "quantityRank": 14,
+      "expenditure": 4328,
+      "expenditureRank": 9,
+      "expenditureMean": 3815.6,
+      "quantityIndex": 106,
+      "expenditureIndex": 113,
+      "priceIndex": 107
+    },
+    {
+      "label": "みそ",
+      "areaName": "愛知県",
+      "rankingKeys": ["miso-consumption-quantity", "miso-consumption-expenditure"],
+      "quantity": 3923,
+      "quantityUnit": "g",
+      "quantityRank": 35,
+      "expenditure": 2316,
+      "expenditureRank": 20,
+      "expenditureMean": 2297.8,
+      "quantityIndex": 91,
+      "expenditureIndex": 101,
+      "priceIndex": 110
+    },
+    {
+      "label": "ウイスキー",
+      "areaName": "愛知県",
+      "rankingKeys": ["whisky-consumption-quantity", "whisky-consumption-expenditure"],
+      "quantity": 659,
+      "quantityUnit": "ml",
+      "quantityRank": 41,
+      "expenditure": 1533,
+      "expenditureRank": 38,
+      "expenditureMean": 2702.2,
+      "quantityIndex": 45,
+      "expenditureIndex": 57,
+      "priceIndex": 127
+    }
+  ]
+}

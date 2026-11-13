@@ -1,0 +1,10 @@
+{
+  "kind": "derived",
+  "rankingKey": "personal-computer-consumption-expenditure",
+  "source": "r2:app/ranking/personal-computer-consumption-expenditure/values.json",
+  "transform": "全19パーティション(2007-2025年)それぞれで47県を値で並べ、北海道の値・1位の値・47県の中央値(24番目)を年ごとに抽出した3系列の折れ線。nineteenYearAverageは同じ19年の単純平均(筆者計算)",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "curl -s https://storage.stats47.jp/app/ranking/personal-computer-consumption-expenditure/values.json でpartitionsを年ごとに読み、北海道の値・最大値・値昇順24番目を抽出",
+  "fetchedAt": "2026-11-13T12:32:13.624Z",
+  "generatedBy": "manual-restore-from-r2-values"
+}

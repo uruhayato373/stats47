@@ -1,0 +1,30 @@
+{
+  "kind": "scatter",
+  "derivedFrom": [
+    "hobby-participation-rate-sports-spectating",
+    "sports-spectating-consumption-expenditure"
+  ],
+  "year": "x:2021/y:2025",
+  "xMetric": "hobby-participation-rate-sports-spectating (％)",
+  "yMetric": "sports-spectating-consumption-expenditure (円)",
+  "source": "r2:app/ranking/{hobby-participation-rate-sports-spectating,sports-spectating-consumption-expenditure}/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "transform": "join 47 prefectures by areaName; x=行動者率(2021), y=観覧料消費支出額(2025)",
+  "pearsonR": 0.140173260186529,
+  "fetchedAt": "2026-11-13T12:32:20.308Z",
+  "generatedBy": "article-writer (inline join)",
+  "axes": {
+    "x": {
+      "metricKey": "hobby-participation-rate-sports-spectating",
+      "year": "2021年",
+      "proof": "values"
+    },
+    "y": {
+      "metricKey": "sports-spectating-consumption-expenditure",
+      "year": "2025年",
+      "proof": "values"
+    }
+  },
+  "xRankingKey": "hobby-participation-rate-sports-spectating",
+  "yRankingKey": "sports-spectating-consumption-expenditure"
+}

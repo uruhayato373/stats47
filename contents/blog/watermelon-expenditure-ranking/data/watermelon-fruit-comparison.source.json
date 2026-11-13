@@ -1,0 +1,22 @@
+{
+  "kind": "calculated",
+  "inputs": [
+    {
+      "rankingKey": "watermelon-consumption-expenditure",
+      "year": "2025"
+    },
+    {
+      "rankingKey": "melon-consumption-expenditure",
+      "year": "2025"
+    },
+    {
+      "rankingKey": "fresh-fruits-group-consumption-expenditure",
+      "year": "2025"
+    }
+  ],
+  "formula": "各指標の2025年47県の順位を抜き出し、2指標間の順位差の二乗和からスピアマンの順位相関係数 1-6Σd²/(n(n²-1)) を算出",
+  "source": "r2:app/ranking/<key>/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "fetchedAt": "2026-11-13T12:34:24.267Z",
+  "generatedBy": "manual-restore-from-r2-values"
+}

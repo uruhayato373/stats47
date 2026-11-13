@@ -6,7 +6,7 @@ description: "47都道府県の火災・地震保険料消費支出を2025年デ
 category: landweather
 publishedAt: 2026-05-16
 updatedAt: 2026-11-09
-published: false
+published: true
 tags:
   - 地震
   - 保険
