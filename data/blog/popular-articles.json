@@ -1,51 +1,51 @@
 {
-  "generatedAt": "2026-11-12T03:33:54.630Z",
+  "generatedAt": "2026-11-13T22:52:56.548Z",
   "source": "ga4",
   "windowDays": 28,
   "period": {
-    "start": "2026-10-15",
-    "end": "2026-11-11"
+    "start": "2026-10-16",
+    "end": "2026-11-12"
   },
   "articles": [
     {
       "slug": "automotive-industry-transformation-map",
-      "pageViews": 667
-    },
-    {
-      "slug": "livable-prefecture-composite-ranking",
-      "pageViews": 430
+      "pageViews": 676
     },
     {
       "slug": "childcare-friendly-prefecture-ranking",
       "pageViews": 425
     },
     {
+      "slug": "livable-prefecture-composite-ranking",
+      "pageViews": 417
+    },
+    {
       "slug": "noodle-consumption-prefecture-character",
-      "pageViews": 344
+      "pageViews": 342
     },
     {
       "slug": "alcohol-prefecture-map",
-      "pageViews": 263
+      "pageViews": 262
     },
     {
       "slug": "foreign-residents-diversity-map",
-      "pageViews": 229
+      "pageViews": 225
     },
     {
       "slug": "household-spending-prefecture-gap",
-      "pageViews": 221
+      "pageViews": 216
     },
     {
       "slug": "academic-achievement-test-prefecture-ranking",
-      "pageViews": 210
+      "pageViews": 213
     },
     {
       "slug": "rice-harvest-volume-prefecture-gap",
-      "pageViews": 185
+      "pageViews": 183
     },
     {
-      "slug": "sports-urban-paradox",
-      "pageViews": 174
+      "slug": "annual-precipitation-rainy-season-gap",
+      "pageViews": 179
     }
   ]
 }

@@ -1,0 +1,40 @@
+{
+  "week": "2026-W45",
+  "date": "2026-11-08",
+  "totals": {
+    "not-found-404": 12653,
+    "robots-blocked": 4837,
+    "noindex-excluded": 2414,
+    "alt-canonical": 1226,
+    "redirect": 1148,
+    "soft-404": 413,
+    "duplicate-no-user-canonical": 22,
+    "redirect-error": 17,
+    "server-error-5xx": 17,
+    "crawled-not-indexed": 2068,
+    "duplicate-google-chose-other": 10,
+    "discovered-not-indexed": 834,
+    "robots-blocked-indexed": 586,
+    "indexed-submitted": 7069
+  },
+  "raw": {
+    "見つかりませんでした（404）": 12653,
+    "robots.txt によりブロックされました": 4837,
+    "noindex タグによって除外されました": 2414,
+    "代替ページ（適切な canonical タグあり）": 1226,
+    "ページにリダイレクトがあります": 1148,
+    "ソフト 404": 413,
+    "重複しています。ユーザーにより、正規ページとして選択されていません": 22,
+    "リダイレクト エラー": 17,
+    "サーバーエラー（5xx）": 17,
+    "クロール済み - インデックス未登録": 2068,
+    "重複しています。Google により、ユーザーがマークしたページとは異なるページが正規ページとして選択されました": 10,
+    "検出 - インデックス未登録": 834,
+    "robots.txt によりブロックされましたが、インデックスに登録しました": 586
+  },
+  "index_status": {
+    "date": "2026-10-23",
+    "indexed": 7069,
+    "not_indexed": 25659
+  }
+}
