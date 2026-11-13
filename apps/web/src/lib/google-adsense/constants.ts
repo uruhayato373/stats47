@@ -225,6 +225,16 @@ export const SEARCH_ROW_2: AdSlotConfig = { slotId: "9112779000", format: "recta
 export const SEARCH_ROW_3: AdSlotConfig = { slotId: "5121563102", format: "rectangle" }; // stats47-search-row-3
 
 /**
+ * 市区町村のページ (2026-11-13 オーナー決定・同日作成)。データブックを 5 つの章に分け、「分野別のデータ」の前・財政の章の前・
+ * 医療・福祉と教育の章の前に記事内広告 (W44 で本文の記事内広告は 1,000 表示あたり ¥29〜38、表示広告より高い) を本文の幅いっぱいに出す。
+ * 関連記事は 6 件にし、一覧が 1 列のとき 3 件目の後にインフィード広告を入れる (都道府県のページと同じ「横の画像」のテンプレート)。
+ */
+export const CITY_INARTICLE_1: AdSlotConfig = { slotId: "8714817044", format: "article" }; // stats47-city-inarticle-1 (記事内)
+export const CITY_INARTICLE_2: AdSlotConfig = { slotId: "6088653702", format: "article" }; // stats47-city-inarticle-2 (記事内)
+export const CITY_INARTICLE_3: AdSlotConfig = { slotId: "9836327027", format: "article" }; // stats47-city-inarticle-3 (記事内)
+export const CITY_INFEED: AdSlotConfig = { slotId: "1957837004", format: "infeed", layoutKey: "-fb+5w+4e-db+86" }; // stats47-city-infeed
+
+/**
  * ハブ / 一覧ページ共通の記事内広告（fluid / in-article）
  * top / category / theme / blog一覧 / survey / tag のセクション区切りに 1 枠だけ配置する。
  * ADSENSE-HUB-INCONTENT-01: モバイル imp/PV（W26 実測 0.37）改善のためハブ面に in-content を新設。

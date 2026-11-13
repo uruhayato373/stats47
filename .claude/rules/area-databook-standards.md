@@ -117,6 +117,7 @@ SNS 地域カルーセルは、**同じ選定関数 `selectAreaHighlights` / `se
 - **対象 = 市区町村の対象集合** (`buildMunicipalityEntityPolicy` の publishable。東京 23 区を含む)。索引・sitemap・
   県内の市区町村一覧も同じ集合 (`PUBLISHABLE_CITIES`)。人口の値が無い対象があれば生成器が止まる。
 - **特徴** は `selectCityHighlights` (率の指標・県内 5 位以内・値 0 除外・2019 年以降)。
+- **章** (2026-11-13): 節は `CITY_DATABOOK_LAYOUT.chapters` の 5 つの章にまとめて描く (章の節を順につなぐと `sectionOrder` と一致する。`validateCityDatabookLayout` が検査)。章の頭の 1 文は章の指標に `selectCityHighlights` を当てた 1 件で、選べない章は文を出さない。章の前の広告はページ (`page.tsx`) が組み立て、databook.json の形は変えない。
 - **載せる指標の上限**: 社会・人口統計体系の拡充分 (2026-10-22・541 件。台帳 `municipalities.ssds-expansion`) は
   `SSDS_EXPANSION_DATABOOK_PICKS` に挙げたものだけを載せる (`isCityDatabookMetric`)。全件を載せると 1 ページの HTML が
   ページの重さの予算 (900KB) を外れるため。残りは市区町村テーマのページから見る。テーマも 1 件 60 指標以下に保つ (契約テスト)。

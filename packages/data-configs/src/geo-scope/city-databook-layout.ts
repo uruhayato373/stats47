@@ -24,6 +24,19 @@ export interface CityDatabookLayout {
   headlineMetricKeys: readonly string[];
   /** 節の並び順。市区町村テーマの slug を全件ちょうど 1 回ずつ並べる。 */
   sectionOrder: readonly string[];
+  /**
+   * 節をまとめる章 (2026-11-13 オーナー決定)。26 個の表が続くと読みにくく、広告を置く切れ目も無かったので、5 つの章に分け、
+   * 章の頭に値から作る 1 文を置く。章の節を順につなぐと sectionOrder と一致する (validateCityDatabookLayout が検査)
+   */
+  chapters: readonly CityDatabookChapter[];
+}
+
+export interface CityDatabookChapter {
+  /** 章の id (ページの中のアンカーと、広告を差し込む位置の目印) */
+  key: string;
+  title: string;
+  /** 章に入る節 (市区町村テーマの slug)。並びは sectionOrder と同じ */
+  sections: readonly string[];
 }
 
 export const CITY_DATABOOK_POPULATION_METRIC_KEY = 'total-population';
@@ -69,7 +82,60 @@ export const CITY_DATABOOK_LAYOUT: CityDatabookLayout = {
     'safety-environment',
     'land-area',
   ],
+  chapters: [
+    {
+      key: 'chapter-population',
+      title: '人口と世帯',
+      sections: [
+        'population',
+        'age-structure',
+        'age-structure-by-sex',
+        'households',
+        'migration',
+        'vital-statistics',
+        'aging-society',
+        'foreign-residents',
+        'urban-structure',
+      ],
+    },
+    { key: 'chapter-finance', title: '財政', sections: ['local-finance', 'municipal-revenue', 'municipal-expenditure'] },
+    {
+      key: 'chapter-economy',
+      title: '仕事と産業',
+      sections: [
+        'labor',
+        'occupations',
+        'commuting',
+        'commerce',
+        'establishments',
+        'employees',
+        'business-sales',
+        'manufacturing',
+        'agriculture-forestry',
+      ],
+    },
+    { key: 'chapter-welfare-education', title: '医療・福祉と教育', sections: ['medical-welfare', 'welfare-facilities', 'education'] },
+    {
+      key: 'chapter-living',
+      title: '住まいと暮らしの環境',
+      sections: ['housing', 'housing-size-age', 'housing-households', 'living-environment', 'safety-environment', 'land-area'],
+    },
+  ],
 };
+
+/**
+ * データブックの節を章ごとにまとめる。節の無い章 (載せる指標の無い市区町村) は返さない。
+ * ページの表示だけが使う (databook.json の形は変えない)。
+ */
+export function groupCityDatabookSectionsByChapter<T extends { themeSlug: string }>(
+  sections: readonly T[],
+  layout: CityDatabookLayout = CITY_DATABOOK_LAYOUT
+): { chapter: CityDatabookChapter; sections: T[] }[] {
+  return layout.chapters.flatMap((chapter) => {
+    const members = sections.filter((section) => chapter.sections.includes(section.themeSlug));
+    return members.length > 0 ? [{ chapter, sections: members }] : [];
+  });
+}
 
 /** 市区町村テーマの title は「市区町村の◯◯」。市区町村ページの節見出しは「◯◯」だけを使う。 */
 const MUNICIPALITY_THEME_TITLE_PREFIX = '市区町村の';
@@ -137,6 +203,10 @@ export function validateCityDatabookLayout(
   }
   for (const slug of layout.sectionOrder) {
     if (!activeSlugs.includes(slug)) errors.push(`[city-databook-section] ${slug}: 公開中の市区町村テーマではない`);
+  }
+  const chaptered = layout.chapters.flatMap((chapter) => chapter.sections);
+  if (chaptered.join(',') !== layout.sectionOrder.join(',')) {
+    errors.push('[city-databook-chapter] 章の節を順につなぐと sectionOrder と一致させる (抜け・重複・並びの違い)');
   }
   return errors;
 }

@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import {
   CITY_DATABOOK_LAYOUT,
+  groupCityDatabookSectionsByChapter,
   listCityDatabookThemes,
   validateCityDatabookLayout,
 } from '../city-databook-layout';
@@ -24,7 +25,7 @@ describe('CITY_DATABOOK_LAYOUT', () => {
     const published = new Set(['total-population', 'fiscal-strength-index']);
     expect(
       validateCityDatabookLayout(
-        { headlineMetricKeys: ['fiscal-strength-index', 'not-published'], sectionOrder: ['population', 'draft'] },
+        { headlineMetricKeys: ['fiscal-strength-index', 'not-published'], sectionOrder: ['population', 'draft'], chapters: [{ key: 'c', title: 'c', sections: ['population', 'draft'] }] },
         themes,
         published
       )
@@ -41,5 +42,22 @@ describe('CITY_DATABOOK_LAYOUT', () => {
     const themesInOrder = listCityDatabookThemes();
     expect(themesInOrder.map((theme) => theme.slug)).toEqual(CITY_DATABOOK_LAYOUT.sectionOrder);
     expect(themesInOrder[0]).toMatchObject({ slug: 'population', title: '人口' });
+  });
+
+  // 2026-11-13: 26 個の表が続くページを 5 つの章に分け、章の切れ目に広告を置く。章は sectionOrder を順に覆う
+  it('章の節を順につなぐと並び順と一致し、抜け・並びの違いを見つける', () => {
+    expect(CITY_DATABOOK_LAYOUT.chapters.flatMap((chapter) => chapter.sections)).toEqual(CITY_DATABOOK_LAYOUT.sectionOrder);
+    const broken = { ...CITY_DATABOOK_LAYOUT, chapters: CITY_DATABOOK_LAYOUT.chapters.slice(1) };
+    expect(validateCityDatabookLayout(broken)).toContain(
+      '[city-databook-chapter] 章の節を順につなぐと sectionOrder と一致させる (抜け・重複・並びの違い)'
+    );
+  });
+
+  it('節を章ごとにまとめ、節の無い章は返さない', () => {
+    const groups = groupCityDatabookSectionsByChapter([{ themeSlug: 'population' }, { themeSlug: 'households' }, { themeSlug: 'education' }]);
+    expect(groups.map((group) => [group.chapter.key, group.sections.map((s) => s.themeSlug)])).toEqual([
+      ['chapter-population', ['population', 'households']],
+      ['chapter-welfare-education', ['education']],
+    ]);
   });
 });

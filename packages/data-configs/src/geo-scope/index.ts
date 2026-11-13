@@ -65,10 +65,11 @@ export {
 export {
   CITY_DATABOOK_LAYOUT,
   CITY_DATABOOK_POPULATION_METRIC_KEY,
+  groupCityDatabookSectionsByChapter,
   listCityDatabookThemes,
   validateCityDatabookLayout,
 } from './city-databook-layout';
-export type { CityDatabookLayout, CityDatabookTheme } from './city-databook-layout';
+export type { CityDatabookChapter, CityDatabookLayout, CityDatabookTheme } from './city-databook-layout';
 export {
   MUNICIPALITY_THEME_FOR_PREFECTURE_THEME,
   MUNICIPALITY_THEME_PAGE_SLUGS,

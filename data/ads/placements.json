@@ -681,9 +681,53 @@
     ],
     "city": [
       {
+        "slot": "adsense-body-responsive",
+        "region": "body",
+        "position": "「分野別のデータ」の前 (見出しの指標・特徴の後)",
+        "source": "apps/web/src/app/areas/[areaCode]/cities/[cityCode]/page.tsx",
+        "marker": "position=\"city-row-1\"",
+        "trackingPosition": "city-row-1",
+        "adsenseSlot": "CITY_INARTICLE_1",
+        "condition": "記事内広告 1 つを本文の幅いっぱい (上限 580px) に出す (2026-11-13 オーナー決定。データブックを 5 つの章に分けた切れ目)。AdSense を止めているときは出さない"
+      },
+      {
+        "slot": "adsense-body-responsive",
+        "region": "body",
+        "position": "財政の章の前",
+        "source": "apps/web/src/app/areas/[areaCode]/cities/[cityCode]/page.tsx",
+        "marker": "position=\"city-row-2\"",
+        "trackingPosition": "city-row-2",
+        "adsenseSlot": "CITY_INARTICLE_2",
+        "condition": "記事内広告 1 つを本文の幅いっぱい (上限 580px) に出す (2026-11-13 オーナー決定。データブックを 5 つの章に分けた切れ目)。AdSense を止めているときは出さない 章が無い市区町村では出ない",
+        "knownAdjacentReason": "ソースでは 3 段を並べて書くが、描画ではデータブックの章の前に別々に入り、間に章の表が入る"
+      },
+      {
+        "slot": "adsense-body-responsive",
+        "region": "body",
+        "position": "医療・福祉と教育の章の前",
+        "source": "apps/web/src/app/areas/[areaCode]/cities/[cityCode]/page.tsx",
+        "marker": "position=\"city-row-3\"",
+        "trackingPosition": "city-row-3",
+        "adsenseSlot": "CITY_INARTICLE_3",
+        "condition": "記事内広告 1 つを本文の幅いっぱい (上限 580px) に出す (2026-11-13 オーナー決定。データブックを 5 つの章に分けた切れ目)。AdSense を止めているときは出さない 章が無い市区町村では出ない",
+        "knownAdjacentReason": "ソースでは 3 段を並べて書くが、描画ではデータブックの章の前に別々に入り、間に章の表が入る"
+      },
+      {
+        "slot": "adsense-infeed",
+        "region": "body",
+        "position": "関連記事の 3 件目の後",
+        "source": "apps/web/src/app/areas/[areaCode]/cities/[cityCode]/page.tsx",
+        "marker": "<InFeedAdSlot slot={CITY_INFEED} />",
+        "adsenseSlot": "CITY_INFEED",
+        "condition": "記事が 4 件以上あり、一覧が 1 列のとき (スマホ) だけ出る。都道府県のページと同じ「横の画像」のテンプレート。2026-11-13 オーナー決定",
+        "devices": [
+          "mobile"
+        ]
+      },
+      {
         "slot": "adsense-footer",
         "region": "body",
-        "position": "市区町村の一覧の前 (後ろの県のバナー・返礼品のカードと隣り合わせにしない。2026-11-03)",
+        "position": "関連記事の後・市区町村の一覧の前 (県のバナーは 2026-11-13 に外した)",
         "source": "apps/web/src/features/area-profile/components/CityPageFooter.tsx",
         "marker": "slotBox={adSlotBox(\"adsense-footer\")}"
       }
