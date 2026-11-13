@@ -740,7 +740,8 @@ banner 上位 1 + text 上位 2 で頭打ちだったため。
 ### 需要 × 供給の突合は機械が行う
 
 `.claude/scripts/ads/build-placement-map.mjs` が GSC ページ別実測 × 在庫 × 確定EPC を突合し
-`data/affiliate/placement-map-latest.json` を生成する (週次 cron `affiliate-dashboard-refresh.yml`)。
+`data/affiliate/placement-map-latest.json` (要約・1MB 未満) を生成する (週次 cron `affiliate-dashboard-refresh.yml`)。
+ページ別の明細 (約 6.7MB・リポジトリ衛生の上限 1MB 超) は git に置かず `.local/affiliate-placement-map/pages-latest.json` に分ける (CI では artifact)。
 **目視 JOIN で propose しない** — 再現性が無く見落とすため。判定は `lib/placement-map-core.mjs` (テスト付き)。
 
 出力の読み方:
