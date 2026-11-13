@@ -26,6 +26,7 @@
 - **rules は `paths:` 条件付き読み込み**: 常時は `agent-output-contract.md` / `evidence-based-judgment.md` の 2 本のみ (CLAUDE.md 込み 600 行上限・DG070)。新規 rule は必ず `paths:` を付ける。チャット直打ちの git push / R2 push / SNS 投稿は `pre-bash-safety.js` の advisory が要約を返す → `docs-vs-issues.md`「rules の読み込み条件」
 - **モデル別 prompt の SSOT**: task capsule・effort・委譲上限は `.claude/rules/model-prompting.md`
 - **Agent prompt 冒頭に task capsule + Output Format を指定** → `.claude/rules/agent-output-contract.md`
+- **「以前から落ちている」を通過の理由にしない**: 失敗したテスト・検査を「今回の変更と無関係」として素通りさせない。その場で直すか、失敗の出力と再現コマンドを書いたカードを `.claude/todo/backlog.md` に起票してから進む (既にカードがあれば観測日を追記する)。継承か自作かの切り分けは `.claude/rules/branch-workflow.md`「マージ中にゲートが落ちたら」
 - **一時ファイルは `/tmp/`**: プロジェクトルートに作らない (pre-commit が `tmp_*` 等を自動削除)
 - **作ったら消す・ローカルを正本にしない**: スキル・エージェント・メインとも、作業で作ったファイルは最後に消す。残すものは git・R2・Google Drive (`drive-archive.mjs`) へ移してから消す。`.local/<名前>` の新しい置き場は `config/local-resources.json` に寿命か理由を付けて登録する (`check-local-registry.mjs` が PR で止める) → `.claude/rules/local-environment.md`「ローカルに残さない」
 - **レビューをタスクへ変換する**: 批判的レビュー / pre-mortem / 監査の全文を `docs/` に蓄積しない。未完了の対策だけを優先度・実行順・停止条件・完了条件付きで `.claude/todo/` へ統合する。恒久判断は既存の戦略文書・rules・コード近傍READMEへ、agent用の定期履歴は各skillの `reference/` へ、計測・監査・是正キューの記録は `data/<取得元>/` へ置く (`.claude/state/` はエージェント運用の状態だけ。判断は `.claude/rules/data-storage.md`)。Issues は (a) `enhancement`/`bug` ラベルの PR で close される機能改修、(b) `auto-generated` ラベルの機械アラートのみ → `.claude/rules/docs-vs-issues.md`

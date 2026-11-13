@@ -10,7 +10,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, readdirSync, statSync } from "node:fs";
-import { join, dirname, resolve } from "node:path";
+import { join, dirname, resolve, relative as relativePath } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { collectAdUnitEntries } from "../lib/adsense-ad-unit-walk.mjs";
@@ -128,7 +128,8 @@ test("adunits.list を呼ぶのは共有 walk だけ (再実装の検知)", () =
   // google-admin も .claude/scripts 配下なので、ここ 1 回で両方の消費者を覆う。
   walk(SCRIPTS_ROOT);
 
-  const relative = [...new Set(offenders)].map((p) => p.split("\\").join("/").split("/.claude/")[1] ?? p);
+  // .claude の親からの相対で比べる (作業ツリーが .claude/worktrees/ の下にあると、パスに .claude が 2 回出る)
+  const relative = [...new Set(offenders)].map((p) => relativePath(resolve(SCRIPTS_ROOT, ".."), p).split("\\").join("/"));
   assert.deepEqual(
     relative,
     ["scripts/metrics/lib/adsense-ad-unit-walk.mjs"],
