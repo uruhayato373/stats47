@@ -1,0 +1,53 @@
+{
+  "dataId": "N08",
+  "reference": {
+    "pageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N08-2021.html",
+    "specification": "KS-PS-N08-v2_0.pdf",
+    "dataVersion": "21",
+    "checkedAt": "2026-11-14",
+    "checkedScope": "データ詳細ページの属性情報の表と照合した。製品仕様書 PDF の本文とは照合していない"
+  },
+  "featureTypes": [
+    {
+      "key": "Airport",
+      "label": "空港区域",
+      "attributes": [
+        { "name": "N08_001", "label": "行政区域コード", "role": "prefecture", "prefectureKind": "muniCode", "valueType": "code", "codeList": "行政区域コード", "meaning": "空港区域がある市区町村の行政区域コード" },
+        { "name": "N08_002", "label": "空港種別", "role": "category", "valueType": "code", "codeList": "空港種別コード", "codeTable": "airport-type", "meaning": "空港の種別" },
+        { "name": "N08_003", "label": "空港名称", "role": "name", "valueType": "string", "meaning": "空港の名称" },
+        { "name": "N08_004", "label": "設置者", "role": "other", "valueType": "code", "codeList": "設置者・管理者コード", "meaning": "空港を設置した者" },
+        { "name": "N08_005", "label": "管理者", "role": "other", "valueType": "code", "codeList": "設置者・管理者コード", "meaning": "空港を管理する者" },
+        { "name": "N08_006", "label": "滑走路本数", "role": "measure", "valueType": "integer", "meaning": "空港の滑走路の本数" },
+        { "name": "N08_007", "label": "滑走路延長", "role": "measure", "valueType": "integer", "unit": "m", "meaning": "最も長い滑走路の長さ" },
+        { "name": "N08_008", "label": "運用時間（開始）", "role": "other", "valueType": "other", "meaning": "運用を始める時刻。24 時間運用は 0000、不明は 9999" },
+        { "name": "N08_009", "label": "運用時間（終了）", "role": "other", "valueType": "other", "meaning": "運用を終える時刻。24 時間運用は 2400、不明は 9999" },
+        { "name": "N08_010", "label": "定期便", "role": "other", "valueType": "code", "codeList": "定期便コード", "meaning": "定期便の有無" },
+        { "name": "N08_011", "label": "ジェット化", "role": "other", "valueType": "code", "codeList": "ジェット化コード", "meaning": "ジェット機の就航の状況" },
+        { "name": "N08_012", "label": "供用開始年", "role": "other", "valueType": "year", "meaning": "空港の供用が始まった年" },
+        { "name": "N08_013", "label": "供用状況", "role": "other", "valueType": "code", "codeList": "供用状況コード", "meaning": "空港が供用されているかの区分" },
+        { "name": "N08_014", "label": "設置期間（開始年）", "role": "startYear", "valueType": "year", "meaning": "空港が設置された年" },
+        { "name": "N08_015", "label": "設置期間（終了年）", "role": "endYear", "valueType": "year", "meaning": "変更・廃止された年の 1 年前の年。続いているものは 9999" },
+        { "name": "N08_016", "label": "関係ID", "role": "relation", "relationKind": "main", "valueType": "string", "meaning": "同じ地物の時系列の記録をつなぐグループ ID" },
+        { "name": "N08_017", "label": "変遷ID", "role": "other", "valueType": "code", "codeList": "変遷IDコード", "meaning": "同じ年に属性が複数回変わったときの属性項目を表す識別子" },
+        { "name": "N08_018", "label": "変遷備考", "role": "other", "valueType": "string", "meaning": "変遷 ID で示した属性の内容" }
+      ]
+    },
+    {
+      "key": "AirportPoint",
+      "label": "標点",
+      "attributes": [
+        { "name": "N08_019", "label": "空港名称", "role": "name", "valueType": "string", "meaning": "標点が属する空港の名称" },
+        { "name": "N08_020", "label": "供用開始年", "role": "other", "valueType": "year", "meaning": "標点の供用が始まった年" },
+        { "name": "N08_021", "label": "供用状況", "role": "other", "valueType": "code", "codeList": "供用状況コード", "meaning": "標点が供用されているかの区分" },
+        { "name": "N08_022", "label": "設置期間（開始年）", "role": "startYear", "valueType": "year", "meaning": "標点が設置された年" },
+        { "name": "N08_023", "label": "設置期間（終了年）", "role": "endYear", "valueType": "year", "meaning": "変更・廃止された年の 1 年前の年。続いているものは 9999" },
+        { "name": "N08_024", "label": "関係ID", "role": "relation", "relationKind": "main", "valueType": "string", "meaning": "同じ標点の時系列の記録をつなぐ ID" },
+        { "name": "N08_025", "label": "備考", "role": "other", "valueType": "string", "meaning": "標点を空港区域の外へ移したときの注記 (元の座標を記す)" }
+      ]
+    }
+  ],
+  "notes": [
+    "地物の種類の key はデータ詳細ページに書かれたシェープファイル名 (Airport.shp・AirportPoint.shp) の語幹。原典の 1 ファイルに区域 N08_001〜N08_018 と標点 N08_019〜N08_025 が混ざる版があるため、属性は地物の種類ごとに分けて持つ。",
+    "標点の N08_021 は意味が未確認だったが、2026-11-14 にデータ詳細ページの属性表で「供用状況 (供用状況コード)」と確かめた。"
+  ]
+}

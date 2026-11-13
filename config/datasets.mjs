@@ -847,8 +847,15 @@ export const DATASETS = [
       { field: "notes.$keys", to: "geo.ksj-classifications", key: "codeTables.$keys" },
     ],
   }),
+  d("geo.ksj-attributes", "data/geo/attributes/{name}.json", "master", "data", "data", "国土数値情報の属性の原典台帳 (1 ファイル 1 データ。ファイル名 = dataId。地物の種類ごとの属性の公式の名前・意味・型と、読む側が引く役割 role。意味は公式のデータ詳細ページで確かめた版と日付を持つ。区分のまとめ方と色は geo.ksj-classifications のコード表を codeTable で指す)。読み込みは packages/gis/src/mlit-ksj/attributes.ts", {
+    schema: "config/schema/geo.ksj-attributes.schema.json",
+    refs: [
+      { field: "dataId", to: "geo.ksj-datasets", key: "datasets.$keys" },
+      { field: "featureTypes[].attributes[].codeTable", to: "geo.ksj-classifications", key: "codeTables.$keys" },
+    ],
+  }),
   d("geo.ksj-license-retention", "data/geo/ksj/license-retention-20260905.json", "evidence", "data", "data", "利用条件の是正 (2026-09-05) で撤去を承認した R2 の KSJ オブジェクトの記録 (対象ごとの prefix とキー・バイト数・ETag。撤去の前に全件の一致を求める)。読み込みは packages/r2-storage/src/scripts/lib/license-retention.ts"),
-  d("geo.infra-history-networks", "data/geo/infra-history/networks.json", "ledger", "data", "data", "交通網の変遷ページ (/geo/history/<key>) の台帳 (原典の版・SHA-256・使い方・公開の状態と了承の根拠・原典の属性名・年の範囲・注意書き。並びがページの順。利用条件と公式ページの URL は geo.ksj-datasets、種別と色は geo.ksj-classifications から結ぶ。notes は判断の記録)。読み込みは packages/gis/src/infra-history/networks.ts", {
+  d("geo.infra-history-networks", "data/geo/infra-history/networks.json", "ledger", "data", "data", "交通網の変遷ページ (/geo/history/<key>) の台帳 (原典の版・SHA-256・使い方・公開の状態と了承の根拠・年の範囲・注意書き。並びがページの順。利用条件と公式ページの URL は geo.ksj-datasets、種別と色は geo.ksj-classifications、属性名は geo.ksj-attributes の役割から結ぶ。notes は判断の記録)。読み込みは packages/gis/src/infra-history/networks.ts", {
     schema: "config/schema/geo.infra-history-networks.schema.json",
     refs: [
       { field: "networks[].source.dataId", to: "geo.ksj-datasets", key: "datasets.$keys" },
