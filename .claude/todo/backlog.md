@@ -607,15 +607,6 @@ updated: 2026-11-01
 - **進み (2026-11-09)**: 2 本とも誤りと確かめ、直した改稿を `contents/blog/<slug>/` に用意した (新ジャンルは品目 3X7 に入る。酒税は 350ml 換算 54.25 円・財務省 d08 と国税庁の手引き。2026 年 10 月の一本化は実施済みの時制へ)。同時に `blog:household-spending-before-after-inflation` (`BLOG-ENGEL-VALUE-MISMATCH-01`) も直した。3 本とも gate blocker 0・factual exit 0・critic PASS。公開 (published のまま develop へ push) で反映する。
 - **残り (審査は通ったが残る指摘)**: ① (2026-11-09 済み・オーナー判断で題を本文の結論に合わせた。critic PASS・develop へ push 済み) ② household のコーヒー豆相場「約2倍」に出典が無い ③ household のビール値 (2019=10,720 / 2024=12,934) が beer-peak (0003343671 の月次合計 10,721 / 12,933) と 1 円ずれる (表の違いか丸めか未確認) ④ beer-vs-happoshu の焼酎との比較が一本化後も成り立つか未確認。
 
-### [BLOG-ANALYSIS-SCRIPT-PLACEMENT-01] 記事の図を作った分析スクリプトの置き場が決まっていない
-タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-11-09] [領域:サイト]
-
-- **事象 (2026-11-09)**: 家計調査の下書き 10 本のうち 3 本は、図の `source.json` の `generatedBy` が `contents/blog/<slug>/analysis/build.mjs` を指す。`contents/blog` は公開後に片付ける送り箱なので、片付けたあとは指す先が無くなる。ほかの 7 本の生成スクリプトは書き手の一時領域にだけあり、リポジトリに入っていない。図の `source.json` は 10 本とも `inspectChartSourceManifest` が valid と判定する (e-Stat の表番号と取得条件で作り直せる) ので、公開は止めていない。並行する書き手が同じ一時領域で同名のファイル (`lib.mjs` など) を上書きし合う事故も報告された。
-- **次**: ① 記事の図を作る使い捨ての分析を、リポジトリに残すか (置き場と寿命) 残さないか (`generatedBy` に何を書くか) を `blog-data-schema.md` で決める ② 書き手の prompt に、作業ディレクトリを記事ごとに分けることを書く。
-- **完了条件**: `blog-data-schema.md` に分析スクリプトの扱いが書かれ、`generatedBy` が存在しない道を指す図を週次の検査が数える。
-- **進み (2026-11-09)**: 決めた。使い捨ての分析は残さず、取得条件を作り直しの正本にする (`blog-data-schema.md`)。`config/schema/blog.chart-source.schema.json` が `contents/blog/`・`/private/tmp/`・`/var/folders/` を指す `generatedBy` を形の違反にし、`quality-gate.mjs` が止める (旧来の `/tmp/` は改稿を止めない)。週次の `audit-chart-axes.ts` も同じ形の検査で `bad-shape` と数える。書き手の作業ディレクトリと e-Stat の保存の共有は `manage-issue-ledger` SKILL.md §5 に書いた。
-- **完了の証拠 (2026-11-09)**: 公開済みの 3 本の R2 の `source.json` 31 件から `generatedBy` を消して書き戻した (オーナー承認済み・`diff-push-r2.ts` で 31 件成功・エラー 0)。書き戻した 31 件を公開 URL から読み直し、手元の修正版と 31 件一致・`generatedBy` 0 件。他の項目は変えていない。上書き前の版は `blog-archive/` に退避済み。週次レビューでカードを消してよい。
-
 ### [MUNI-THEME-INDEX-STAGING-01] 市区町村×テーマのページを、人口の多い市から段階的に検索に出す
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-11-09] [領域:サイト]
 
