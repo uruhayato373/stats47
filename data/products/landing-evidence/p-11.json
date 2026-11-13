@@ -64,5 +64,195 @@
       }
     ]
   },
-  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2014〜2025年で指標ごとに異なり、時系列データではありません。"
+  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2014〜2025年で指標ごとに異なり、時系列データではありません。",
+  "reuseRevision": {
+    "productId": "P-11",
+    "version": "analysis-20261113",
+    "planSha256": "fa5b166ab718e6171f612a55861ad46877a9debf0965ca1cddbf7fed137f8978",
+    "dependencies": [
+      {
+        "productId": "P-01",
+        "version": "analysis-20261112",
+        "manifestSha256": "c0bdad82937505b5955605e380ddcf88d5aa7a62be89b93300ac35cb48bc1b5b"
+      }
+    ],
+    "files": [
+      {
+        "file": "images/p-01-national-municipality-change.png",
+        "sha256": "4fc956c77a1d8a2369d0cf1e17033e0a76317967ef1f34e406d6d250bf18a0c3",
+        "bytes": 218802
+      },
+      {
+        "file": "images/p-01-elderly-single-household-map.png",
+        "sha256": "873e96c5f696fadbd9c97114aea8bce790c59379c9b8551ebcdae86d47a472a0",
+        "bytes": 219866
+      },
+      {
+        "file": "images/p-01-elderly-household-trend.png",
+        "sha256": "44c4a09d2c57de7aa027069d345870e5906c5e26b06be3ed66408d3c4ccc866b",
+        "bytes": 99735
+      },
+      {
+        "file": "sources/P-01/SOURCES.csv",
+        "sha256": "d97c5f1b99ca2d734d4ed55b8f899dfac8262b4aad7c51b602c04d81ff40d413",
+        "bytes": 9604
+      },
+      {
+        "file": "sources/P-01/LICENSE-ja.txt",
+        "sha256": "07eb760b739ab2c84ce33c7f3fdfaeee5f9f3118dc8efdbc36fccbc0767d4f29",
+        "bytes": 1265
+      },
+      {
+        "file": "sources/P-01/analysis-plan.json",
+        "sha256": "901b50acd8cae2fcdb030115acfe88e52717aaf6dfc46eb94b9995b646b90e5f",
+        "bytes": 27275
+      },
+      {
+        "file": "sources/P-01/README.md",
+        "sha256": "39099f2bd2648a8e2810c10e0d3b146070c908c71752857ef03cee9a3dc28eee",
+        "bytes": 8189
+      },
+      {
+        "file": "reuse-plan.json",
+        "sha256": "4eb213c0136ec5e83d5fa8b29c82a6c507452061ad4982eeddf7d6b1b4205185",
+        "bytes": 1531
+      },
+      {
+        "file": "dependencies.json",
+        "sha256": "e588c50157c5d37a26e7f242f14948b8550fdd025128e0d29e1499ad719a1937",
+        "bytes": 162
+      },
+      {
+        "file": "README.md",
+        "sha256": "6733420865074d10261f1cbafdf67fc562bf72584c431091aace9d4f2d513897",
+        "bytes": 861
+      },
+      {
+        "file": "READINESS.md",
+        "sha256": "578a2088b7c01d7860e8d66b8c8553c817184999bddf39f16b5adfcf1261c079",
+        "bytes": 193
+      },
+      {
+        "file": "analysis-pack.zip",
+        "sha256": "eb15ab81b6af7332ce99d76213137768c59f8f16910e6788ea98e89048e04825",
+        "bytes": 484019
+      },
+      {
+        "file": "preview-product.json",
+        "sha256": "9dbaa350fe543644f0926b9180e92085828c9ed647e5ef549eb5b6d0aad409f7",
+        "bytes": 5379
+      }
+    ]
+  },
+  "analysisDelivery": {
+    "productId": "P-11",
+    "status": "prepared",
+    "version": "analysis-20261113",
+    "sourceManifestSha256": "e07de6c56fc9cee006d6ced245afede609a6a5296286a29f4a7ce520f696d18f",
+    "planSha256": "fa5b166ab718e6171f612a55861ad46877a9debf0965ca1cddbf7fed137f8978",
+    "archive": {
+      "bucket": "stats47-private",
+      "key": "note/product-analysis-archives/P-11/analysis-20261113/eb15ab81b6af7332ce99d76213137768c59f8f16910e6788ea98e89048e04825.zip",
+      "sha256": "eb15ab81b6af7332ce99d76213137768c59f8f16910e6788ea98e89048e04825",
+      "bytes": 484019
+    },
+    "attachmentName": "P-11-analysis-20261113-analysis.zip",
+    "snapshot": {
+      "description": "全国の市区町村を塗り分けた地図と世帯の推移を、資料や記事に使える共通サイズの図で収録します。人口・世帯パックで検証した値と図をそのまま使います。",
+      "included": [
+        "共通型の図表PNG 3枚",
+        "元商品の版・出典・計算方法・利用条件"
+      ],
+      "useCases": [
+        {
+          "title": "地域の特徴を地図で説明する",
+          "description": "人口の増減や高齢単身世帯の割合を全国の市区町村地図で比べられます。"
+        },
+        {
+          "title": "世帯構成の変化を伝える",
+          "description": "高齢者世帯の推移を示す折れ線図を、出典・計算条件と一緒に資料へ掲載できます。"
+        }
+      ],
+      "purchaseNotes": [
+        "分析の追加ファイルはPNG素材集です。公開中の商品に含まれるSVG・PowerPoint・PDFとは構成が異なります。",
+        "元商品の版・対象年・地域・欠測・利用条件を引き継ぎます。",
+        "図の対象・年・単位・欠測条件と利用条件を確認してご利用ください。"
+      ],
+      "showcaseNote": "分析の追加ファイルは元商品の同じ版の図・出典・計算条件を引き継ぎます。既存の固定版とは別ファイルです。",
+      "showcase": [
+        {
+          "id": "p-01-national-municipality-change",
+          "kind": "chart",
+          "heading": "人口が増えた地域・減った地域を全国で見る",
+          "lead": "2000〜2020年の人口増減率を全国の市区町村で塗り分けます。都道府県の平均では見えない、都市周辺とそれ以外の地域の違いを確認できます。",
+          "note": "市町村合併を調整した系列を使用し、政令指定都市は市単位、東京都の特別区は区単位で比較します。基準年が0・欠測の場合は算出せず、離島は別位置に表示します。",
+          "themeRefs": [
+            {
+              "themeKey": "population-dynamics",
+              "sectionKey": "population-change",
+              "title": "人口動態",
+              "sectionTitle": "人口は増えているか",
+              "href": "/themes/population-dynamics#theme-section-population-change"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261113-p-01-national-municipality-change.png",
+              "alt": "全国の市区町村別 人口増減率（全国の市町村・特別区・2000〜2020年）",
+              "template": "choropleth",
+              "sha256": "4fc956c77a1d8a2369d0cf1e17033e0a76317967ef1f34e406d6d250bf18a0c3"
+            }
+          ]
+        },
+        {
+          "id": "p-01-elderly-single-household-map",
+          "kind": "chart",
+          "heading": "高齢単独世帯の割合を全国の市区町村で比べる",
+          "lead": "2020年の一般世帯に占める高齢単独世帯の割合を全国地図で確認できます。地域の世帯構成を比較する基礎資料として使えます。",
+          "note": "高齢夫婦のみの世帯は夫65歳以上・妻60歳以上です。割合の分母は一般世帯数で、65歳以上人口ではありません。 世帯構成だけでは、見守りや介護の必要性は判断できません。",
+          "themeRefs": [
+            {
+              "themeKey": "aging-society",
+              "sectionKey": "elderly-households",
+              "title": "少子高齢化",
+              "sectionTitle": "高齢者はどの世帯で暮らすか",
+              "href": "/themes/aging-society#theme-section-elderly-households"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261113-p-01-elderly-single-household-map.png",
+              "alt": "一般世帯に占める高齢単独世帯の割合（全国の市町村・特別区・2020年）",
+              "template": "choropleth",
+              "sha256": "873e96c5f696fadbd9c97114aea8bce790c59379c9b8551ebcdae86d47a472a0"
+            }
+          ]
+        },
+        {
+          "id": "p-01-elderly-household-trend",
+          "kind": "chart",
+          "heading": "高齢単独世帯と高齢夫婦世帯の変化を見る",
+          "lead": "一般世帯に占める高齢単独世帯と高齢夫婦のみの世帯の割合を、同じ分母で比較します。見本は高知県です。",
+          "note": "高齢夫婦のみの世帯は夫65歳以上・妻60歳以上です。割合の分母は一般世帯数で、65歳以上人口ではありません。",
+          "themeRefs": [
+            {
+              "themeKey": "aging-society",
+              "sectionKey": "elderly-households",
+              "title": "少子高齢化",
+              "sectionTitle": "高齢者はどの世帯で暮らすか",
+              "href": "/themes/aging-society#theme-section-elderly-households"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261113-p-01-elderly-household-trend.png",
+              "alt": "一般世帯に占める高齢世帯の割合（高知県・2000〜2020年）",
+              "template": "line",
+              "sha256": "44c4a09d2c57de7aa027069d345870e5906c5e26b06be3ed66408d3c4ccc866b"
+            }
+          ]
+        }
+      ]
+    }
+  }
 }

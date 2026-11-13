@@ -25,7 +25,13 @@
       "metricKeys": [
         "manufacturing-shipment-amount"
       ],
-      "preferredTemplate": "bar"
+      "preferredTemplate": "bar",
+      "themeRefs": [
+        {
+          "themeKey": "manufacturing",
+          "sectionKey": "production"
+        }
+      ]
     },
     {
       "id": "manufacturing-employment",
@@ -34,7 +40,13 @@
       "metricKeys": [
         "manufacturing-employees"
       ],
-      "preferredTemplate": "choropleth"
+      "preferredTemplate": "choropleth",
+      "themeRefs": [
+        {
+          "themeKey": "manufacturing",
+          "sectionKey": "sites-employment"
+        }
+      ]
     }
   ],
   "purchaseNotes": [
@@ -42,13 +54,13 @@
     "収録値の対象年は指標ごとに異なります。出荷額を生産性や利益と読み替えず、調査対象と単位を確認して利用してください。"
   ],
   "analysisPlan": {
-    "objective": "製造業の規模、従業者の集積、従業者あたり出荷額を分け、既存分析と市区町村商品の知見を再利用する。採用・調査対象は改訂設計であり、販売中の固定納品への追加を示しません。",
+    "objective": "2023年の製造品出荷額等の地域比較と2022〜2023年の推移を分け、製造業の名目金額の規模を説明できます。 採用対象は改訂分析であり、販売中の固定納品への追加を示しません。",
     "inputs": [
       {
         "metricKey": "manufacturing-shipment-amount",
         "scope": "prefecture",
         "decision": "use",
-        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+        "reason": "原典で対象・年・単位を確認した改訂分析の入力。従業者4人以上の製造業事業所を対象とした製造品出荷額等の暦年値。単位は百万円。物価調整していない名目金額を2022・2023年で比較する。"
       },
       {
         "metricKey": "manufacturing-employees",
@@ -91,6 +103,135 @@
     "reuseProducts": [],
     "limitations": [
       "従業者あたり出荷額は付加価値や利益ではない。M01の対象抽出条件・異年次の扱いを省略して全自治体へ結論を広げない。"
+    ],
+    "axes": [
+      {
+        "axis": "trend",
+        "decision": "required",
+        "reason": "比較可能な年度の変化を、計算結果と作成例で示す。",
+        "recipeRefs": [
+          "prefecture-manufacturing-trend"
+        ]
+      },
+      {
+        "axis": "composition",
+        "decision": "deferred",
+        "reason": "原票は製造品出荷額の総額のみ。業種別構成は同年・同対象の分子と分母を追加取得してから扱う。",
+        "recipeRefs": []
+      },
+      {
+        "axis": "comparison",
+        "decision": "required",
+        "reason": "同じ年・定義・地域単位の複数地域を、計算結果と作成例で比較する。",
+        "recipeRefs": [
+          "prefecture-manufacturing-scale-2023",
+          "prefecture-manufacturing-trend"
+        ]
+      }
     ]
+  },
+  "analysisRevision": {
+    "title": "製造品出荷額等の規模と推移を読むデータ集",
+    "description": "2023年の製造品出荷額等の地域比較と2022〜2023年の推移を分け、製造業の名目金額の規模を説明できます。",
+    "useCases": [
+      {
+        "title": "産業振興の現状説明に",
+        "description": "2023年の製造品出荷額等の分布から比較地域を選び、名目金額の規模を説明できます。"
+      },
+      {
+        "title": "地域経済の比較資料に",
+        "description": "愛知県・東京都の2022〜2023年の値を比較し、同じ調査対象の金額の変化を整理できます。"
+      }
+    ],
+    "sources": [
+      {
+        "id": "prefecture-manufacturing",
+        "title": "製造品出荷額等",
+        "grain": "prefecture",
+        "years": [
+          2022,
+          2023
+        ],
+        "inputs": [
+          {
+            "metricKey": "manufacturing-shipment-amount"
+          }
+        ],
+        "definition": "従業者4人以上の製造業事業所を対象とした製造品出荷額等の暦年値。単位は百万円。物価調整していない名目金額を2022・2023年で比較する。",
+        "boundary": "都道府県47地域。全国集計を除外。"
+      }
+    ],
+    "recipes": [
+      {
+        "id": "prefecture-manufacturing-scale-2023",
+        "heading": "2023年の製造品出荷額等の規模を比べる",
+        "lead": "2023年の製造品出荷額等を47都道府県の棒グラフで比較します。名目金額の規模の違いを、産業振興の説明資料にできます。",
+        "sourceId": "prefecture-manufacturing",
+        "metricIds": [
+          "manufacturing-shipment-amount"
+        ],
+        "method": "compare",
+        "template": "bar",
+        "references": [
+          "ssds-manufacturing"
+        ],
+        "limitation": "従業者4人以上の事業所の名目金額です。付加価値・利益や生産性ではありません。",
+        "presentationMetricKey": "manufacturing-shipment-amount",
+        "themeRefs": [
+          {
+            "themeKey": "manufacturing",
+            "sectionKey": "production"
+          }
+        ],
+        "year": 2023,
+        "chartTitle": "2023年の製造品出荷額等",
+        "scopeLabel": "都道府県47地域"
+      },
+      {
+        "id": "prefecture-manufacturing-trend",
+        "heading": "2022〜2023年の名目金額の推移を見る",
+        "lead": "愛知県・東京都の2022・2023年の製造品出荷額等を折れ線で比較します。地域間の規模の違いと、同じ地域の2年の変化を分けて確認できます。",
+        "sourceId": "prefecture-manufacturing",
+        "metricIds": [
+          "manufacturing-shipment-amount"
+        ],
+        "method": "series",
+        "template": "line",
+        "references": [
+          "ssds-manufacturing"
+        ],
+        "limitation": "比較期間は2年です。長期傾向や変化の原因を断定せず、物価変動を含む名目金額として読みます。従業者あたり出荷額や付加価値を示す図ではありません。",
+        "presentationMetricKey": "manufacturing-shipment-amount",
+        "themeRefs": [
+          {
+            "themeKey": "manufacturing",
+            "sectionKey": "production"
+          }
+        ],
+        "areaCodes": [
+          "23000",
+          "13000"
+        ],
+        "chartTitle": "製造品出荷額等の推移",
+        "scopeLabel": "愛知県・東京都"
+      }
+    ],
+    "notes": [
+      "この改訂分析では出荷額の規模と推移を扱います。従業者数との結合や生産性の計算は行っていません。"
+    ],
+    "research": {
+      "method": "確認済みの社会・人口統計体系の原典表・項目定義に基づき、地域単位・年・調査対象・単位を揃え、欠測・秘匿と実値0を区別して比較する。",
+      "references": [
+        {
+          "id": "ssds-manufacturing",
+          "title": "社会・人口統計体系 C3401 製造品出荷額等",
+          "url": "https://www.e-stat.go.jp/dbview?sid=0000010103",
+          "section": "C3401 製造品出荷額等",
+          "finding": "従業者4人以上の事業所の製造品出荷額等を暦年で比較する。名目金額と付加価値・利益を区別し、秘匿・欠測を実値0へ置き換えない。",
+          "checkedAt": "2026-11-13"
+        }
+      ]
+    },
+    "version": "analysis-20261113"
   }
 }

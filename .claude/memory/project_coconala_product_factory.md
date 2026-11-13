@@ -33,11 +33,25 @@ type: project
 **対策**: API型・キャッシュキー・取得側を `startPosition` に統一し、実HTTP転送をテストする。FROM/TO/NEXT_KEY/TOTALと件数・全座標の照合は維持する。認証設定は共通環境ローダーをAPIパッケージimport前に読む。
 **証拠**: https://www.e-stat.go.jp/api/api-info/e-stat-manual3-0 、`packages/product-factory/tests/analysis-fetch.test.ts`、`packages/estat-api/src/stats-data/repositories/api/`。
 
-**LP反映漏れ (2026-11-12)**: 改訂プレビューは更新されても、利用者が開いている通常の商品URLには旧販売版が表示された。
-**原因**: 通常LPは固定販売版だけ、previewルートは改訂候補だけを読み、通常URLを実測する検査がなかった。
-**対策**: `resolveProductDetail` が開発環境だけ商品IDで改訂候補へ接続し、両ルートは `ProductDetail` を共有する。改訂候補はnoindex・未公開表示・Product Offerなし。上下の購入案内は「現在販売中の版」の台帳を使い、改訂候補のデータ・図が販売版に含まれないことを明示する。本番は固定販売版を保持する。環境別の解決テストと、全14商品の通常URL・上下購入案内・画像幅を4画面幅で検査し、配線漏れを検知する。
-**証拠**: `apps/web/src/features/products/{product-detail.ts,__tests__/product-detail.test.ts}`、`apps/web/tests/smoke/responsive-layout.spec.ts`。表示確認はユーザーが開くURLで行い、専用previewの確認だけで完了にしない。
+**LP反映漏れ (2026-11-12〜13)**: 通常URLに改訂案が出ない問題の修正後、財政LPが市区町村だけの内容に見え、既存の都道府県データが隠れた。
+**原因**: 通常URLの固定版を改訂案に丸ごと置換した。改訂案は追加分析の範囲しか持たず、既存の収録内容を保存する検査がなかった。
+**対策**: `resolveProductDetail` は販売版と改訂案を分けて返す。`productEditions` をLP・note初稿・テーマで共有し、販売版を残して改訂案を別節に表示する。画像は各版のslugから解決し、作成例IDの重複を拒否する。開発中の両ルートはnoindex・未公開表示・Product Offerなし、購入案内は販売版だけ。本番は固定販売版を保持する。全商品で両版の収録内容・作成例・画像・テーマの参照を検査する。
+**証拠**: `apps/web/src/features/products/{editions.ts,product-detail.ts,__tests__/product-detail.test.ts,__tests__/theme-products.test.ts}`、`apps/web/tests/smoke/responsive-layout.spec.ts`、`.claude/scripts/note/__tests__/build-product-landing-preview.test.ts`。表示確認はユーザーが開くURLで行い、専用previewの確認だけで完了にしない。
+
+**商品分析の偏り (2026-11-13)**: 財政の改訂案が単年比較に偏り、家計では目的に記した品目構成の入力・図がなかった。
+**原因**: 原典参照と画像型は検査していたが、推移・構成・地域比較の採否が自由文の目的から計算へ結ばれていなかった。
+**対策**: `analysisPlan.axes` を全商品で必須とし、採用したレシピと実結果を照合する。未取得の年や分母は保留理由を残す。構成図は共通計算で総額・内訳・残差を検査して既存画像型へ渡し、欠測の0化や再正規化を防ぐ。証拠は `analysis-coverage.test.ts` / `analysis-compute.test.ts`、生成/再検査CLI。
 
 **地図の数値表示 (2026-11-12)**: 計算した割合の順位表は小数2桁でも、凡例に長い小数が出た。共通の `chartValueLabels` が推定した表示精度を `display` に渡していなかったため。推定精度を凡例にも共有し、観測値を変えずに表記を揃える。`apps/admin/tests/unit/template-area-scope.test.ts` で値と凡例の両方を検証する。
 
 **全国地図の配線 (2026-11-12)**: 全国の市区町村データがあっても、分析レシピと描画器が県指定を必須にしていたためLPへ全国図を出せなかった。`within` で全国／県内を宣言し、共通画像型・地域台帳・政令市統合境界へ接続する。描画前に対象外の集計コードを除き、離島を別位置へ配置して、欠測を含む全対象コードが一度ずつ描かれることを検査する。境界の一部欠落を「データなし」に見せない。証拠は `analysis-choropleth.test.ts` と `template-area-map.test.ts`。
+
+**テーマとの参照と出典表示 (2026-11-13)**: 商品の分析例とテーマの章が別々に更新され、関連する分析へ移動できなかった。また、原典の別定義を使う県の図にも元指標の「市区町村」という出典名が残った。
+**原因**: 作成例から章への参照契約がなく、出典名は取得表ではなく元指標の表示名を使っていた。
+**対策**: `products.landings` の作成例に `themeRefs` を持たせ、章名・URL・テーマ側の逆引きを共通解決する。テーマ側もLPと同じ版選択を使い、関連章だけに案内する。出典は解決後の表・項目コードから既存の出典台帳を引く。改訂時はLP・note初稿・図を同時に生成し、存在しない章・古い生成見出し・販売版と改訂案の混在をCIで止める。
+**証拠**: `analysis-source-contract.test.ts`、`analysis-catalog.test.ts`、`theme-products.test.ts`、`.claude/scripts/products/check-analysis-catalog.ts`。表示の往復と幅別検査は既存の `responsive-layout.spec.ts` に統合する。
+
+**表示境界の検査 (2026-11-13)**: テーマから商品へのリンクを足すと、県比較を禁じる検査が商品カタログ内のLP用説明文まで表示文とみなしてCIを止めた。
+**原因**: import先の全文を検索し、JSON相当の生成台帳と描画コードを区別していなかった。Windowsでは相対パスの区切りも既存の許可一覧と一致しなかった。
+**対策**: `region-page-no-comparison.test.ts` はASTで型importとリテラル定数だけの生成台帳を判別し、値import・関数・呼出し・JSXを含む場合は除外しない。商品別の許可は増やさず、全商品の販売版・改訂案からテーマへ渡る実際の案内文を検査し、説明文・図が混入しないことを確認する。相対パスはOSに依存しない形へ揃える。
+**証拠**: PR #1258の初回CIは2973件中この1件だけ失敗。修正後の対象6テストPASS（Windows）。

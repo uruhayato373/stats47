@@ -1,4 +1,7 @@
 import type { MetricConfig } from '@stats47/data-configs';
+import { resolveProductThemeReferences, type ProductThemeReference } from './theme-references';
+import { resolveAnalysisReuse, type AnalysisReuse } from './reuse';
+import { assertAnalysisAxes } from './coverage';
 import {
   describeMetricCapability, resolveAnalysisInput, resolveAnalysisRevision,
   type AuthoredAnalysisRevision, type ProductAnalysisPlan, type SourceVariant,
@@ -7,9 +10,10 @@ import {
 export interface AnalysisCatalogProduct {
   productId: string;
   articleKey: string;
-  examples: { metricKeys: string[] }[];
+  examples: { metricKeys: string[]; themeRefs?: ProductThemeReference[] }[];
   analysisPlan: ProductAnalysisPlan;
   analysisRevision?: AuthoredAnalysisRevision;
+  analysisReuse?: AnalysisReuse;
 }
 export interface AnalysisCatalogContext {
   registry: Record<string, MetricConfig>;
@@ -19,7 +23,7 @@ export interface AnalysisCatalogContext {
   paidArticleKeys: ReadonlySet<string>;
   analysisIds: ReadonlySet<string>;
   figures: ReadonlyMap<string, { analysis: string }>;
-  areaCodes: { prefecture: ReadonlySet<string>; municipality: ReadonlySet<string> };
+  areaCodes: { prefecture: ReadonlySet<string>; municipality: ReadonlySet<string>; 'capital-city': ReadonlySet<string> };
 }
 
 /** 通信なしで、原典を取得する前に商品・分析・入力の誤配線を止める。 */
@@ -40,11 +44,13 @@ export function validateAnalysisCatalog(products: readonly AnalysisCatalogProduc
   }
   for (const product of products) {
     const id = product.productId;
+    for (const example of product.examples) attempt(`${id}/example`, () => resolveProductThemeReferences(example.themeRefs ?? []));
     check(context.paidProductIds.includes(id), `${id}: 有料商品台帳にありません`);
     check(context.paidArticleKeys.has(product.articleKey), `${id}: 有料記事の参照が不正です`);
     check(context.articleKeysByProduct.get(id) === product.articleKey, `${id}: 商品と販売記事の対応が一致しません`);
     const plan = product.analysisPlan;
     if (!plan) { errors.push(`${id}: 分析計画がありません`); continue; }
+    attempt(`${id}/axes`, () => assertAnalysisAxes(product, products));
     unique(plan.inputs.map(input => `${input.metricKey}/${input.scope}/${input.variantId ?? ''}`), `${id}/inputs`);
     for (const input of plan.inputs) {
       const label = `${id}/${input.metricKey}/${input.scope}`;
@@ -69,6 +75,7 @@ export function validateAnalysisCatalog(products: readonly AnalysisCatalogProduc
       if (figure) check(plan.analysisRefs.includes(figure.analysis), `${id}/${reference}: 図の分析参照がありません`);
     }
     for (const dependency of plan.reuseProducts) check(byId.has(dependency), `${id}: 再利用元の商品がありません ${dependency}`);
+    if (product.analysisReuse) attempt(id, () => resolveAnalysisReuse(product, products));
     const revision = product.analysisRevision;
     if (!revision) continue;
     unique(revision.sources.map(source => source.id), `${id}/sources`);
@@ -83,6 +90,7 @@ export function validateAnalysisCatalog(products: readonly AnalysisCatalogProduc
     }
     for (const recipe of revision.recipes) {
       const label = `${id}/${recipe.id}`;
+      attempt(label, () => resolveProductThemeReferences(recipe.themeRefs ?? []));
       const source = revision.sources.find(item => item.id === recipe.sourceId);
       if (!source) { errors.push(`${label}: 分析の取得元がありません`); continue; }
       const metricKeys = source.inputs.map(input => input.metricKey);
@@ -108,11 +116,16 @@ export function validateAnalysisCatalog(products: readonly AnalysisCatalogProduc
         check(recipe.metricIds.length === 1 && (recipe.method === 'change' || recipe.year !== undefined), `${label}: 地域比較は1時点・1指標です`);
         if (recipe.template === 'choropleth') check(source.grain === 'municipality' && Boolean(recipe.within) && !areas.length,
           `${label}: 市区町村地図は全国または県内全域を指定します`);
+      } else if (recipe.template === 'stacked-bar') {
+        check(recipe.method === 'composition' && Boolean(recipe.remainder?.id && recipe.remainder.label), `${label}: 構成の計算と残差がありません`);
       } else {
         const years = source.years.filter(year => (recipe.year === undefined || year === recipe.year) && (recipe.from === undefined || year >= recipe.from) && (recipe.to === undefined || year <= recipe.to));
         check(years.length >= 2, `${label}: 折れ線には2時点以上が必要です`);
       }
-      if (recipe.method === 'share' || recipe.method === 'ratio') check(Boolean(recipe.denominatorId), `${label}: 分母がありません`);
+      if (recipe.method === 'share' || recipe.method === 'ratio' || recipe.method === 'composition') check(Boolean(recipe.denominatorId), `${label}: 分母がありません`);
+      if (recipe.method === 'share') check(!recipe.metricIds.includes(recipe.denominatorId!), `${label}: 全体自身を部分に指定できません`);
+      if (recipe.method === 'composition') check(recipe.template === 'stacked-bar' && !recipe.metricIds.includes(recipe.denominatorId!) &&
+        !metricKeys.includes(recipe.remainder?.id ?? ''), `${label}: 構成の全体・部分・残差が独立していません`);
       if (recipe.method === 'ratio') check(Number.isFinite(recipe.scale) && recipe.scale! > 0 && Boolean(recipe.unit?.trim()), `${label}: 比率の倍率・単位が不正です`);
       if (recipe.method === 'change') check(recipe.from !== undefined && recipe.to !== undefined, `${label}: 増減率の期間がありません`);
     }

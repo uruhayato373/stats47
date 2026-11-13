@@ -3364,6 +3364,10 @@
           "kind": "municipality-theme"
         },
         {
+          "pageId": "product:data-p-04",
+          "kind": "product-analysis"
+        },
+        {
           "pageId": "ranking:welfare-expense-municipal",
           "kind": "ranking"
         }
@@ -3401,6 +3405,10 @@
         {
           "pageId": "blog:welfare-expenses-squeeze",
           "kind": "blog"
+        },
+        {
+          "pageId": "product:data-p-04",
+          "kind": "product-analysis"
         },
         {
           "pageId": "ranking:welfare-expenses-prefecture",

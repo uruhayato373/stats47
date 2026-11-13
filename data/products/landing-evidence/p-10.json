@@ -64,5 +64,249 @@
       }
     ]
   },
-  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2006〜2025年で指標ごとに異なり、時系列データではありません。"
+  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2006〜2025年で指標ごとに異なり、時系列データではありません。",
+  "analysisRevision": {
+    "productId": "P-10",
+    "version": "analysis-20261113",
+    "planSha256": "759633d0d59bc89fde2dc1b5ce9b1d048b668e88659e3f7154485263bb96321a",
+    "resolvedPlanSha256": "09510d725308b29b4022e6941db903b1d9d8b08cc702e64296b4e8bb2e3fa616",
+    "sources": [
+      {
+        "id": "municipal-garbage-collection",
+        "inputs": [
+          {
+            "metricKey": "garbage-collection-population",
+            "statsDataId": "0000020208",
+            "code": "H5608",
+            "unit": "人"
+          }
+        ],
+        "grain": "municipality",
+        "years": [
+          2015,
+          2020,
+          2023
+        ],
+        "retrievedAt": "2026-11-13T01:27:50.760Z",
+        "tableTitle": "Ｈ　居住",
+        "rows": 5223,
+        "areas": 1741,
+        "missing": 0,
+        "coverage": [
+          {
+            "year": 2015,
+            "total": 1741,
+            "kept": 1741,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2020,
+            "total": 1741,
+            "kept": 1741,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2023,
+            "total": 1741,
+            "kept": 1741,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          }
+        ],
+        "inputSha256": "453f4f68da8e52eba1bf86e4e1ea8ebbd8e4d4aff601a6bc4e63db7a79920de4"
+      }
+    ],
+    "results": 1747,
+    "files": [
+      {
+        "file": "data.csv",
+        "sha256": "af5420ada00738d5e12fa7305de6ab566a57e207ead82697adb39e7e6c3915fb",
+        "bytes": 620798
+      },
+      {
+        "file": "analysis.csv",
+        "sha256": "7b5b5860ee947b9ecfa585bcbf5f373e560837b3875bd7923984843db797d0cb",
+        "bytes": 272316
+      },
+      {
+        "file": "analysis.xlsx",
+        "sha256": "52b03910a866426daa4bf57fa6d6f3bb46e62c248bb0955028bceaa413084ae0",
+        "bytes": 258038
+      },
+      {
+        "file": "SOURCES.csv",
+        "sha256": "7f8aee75e0e615dceb7de982c0726bc1e046d1409b24e69ac2af0b336c213dab",
+        "bytes": 829
+      },
+      {
+        "file": "LICENSE-ja.txt",
+        "sha256": "07eb760b739ab2c84ce33c7f3fdfaeee5f9f3118dc8efdbc36fccbc0767d4f29",
+        "bytes": 1265
+      },
+      {
+        "file": "analysis-plan.json",
+        "sha256": "d86e3a9fe90563639c71bab01e83527cba86134182b99454bb4749dab1c68fa8",
+        "bytes": 5760
+      },
+      {
+        "file": "figure-specs.json",
+        "sha256": "2d724230676beb4bf06c193bda540233ecdb93c9e6ec0a8cc91165e56b2700c4",
+        "bytes": 165411
+      },
+      {
+        "file": "README.md",
+        "sha256": "7d0e4d751fe5cd71b8c7379571823919822fdfc6af685cb9c28a26375971dc27",
+        "bytes": 3242
+      },
+      {
+        "file": "READINESS.md",
+        "sha256": "6576547c7e97355fa49fc32178fd85e89046f2b35c0e43b6a3666be68f4c3e0f",
+        "bytes": 192
+      },
+      {
+        "file": "images/national-garbage-collection-population.png",
+        "sha256": "da4b6a3fdfc8add975dc0c23a7233196013e93f0afa4515732f4b50caf899b89",
+        "bytes": 173518
+      },
+      {
+        "file": "images/municipal-garbage-collection-trend.png",
+        "sha256": "0ae5b93ca01b1d5f351bbdd77ec515db36c9e0410f10ccfdb81e85e742181b08",
+        "bytes": 104189
+      },
+      {
+        "file": "images/analysis-file-preview.png",
+        "sha256": "5a438897129ca0ed9c0be07bbc3b270b785266da1b3016d9135fbe52dde565b8",
+        "bytes": 123792
+      },
+      {
+        "file": "inputs/municipal-garbage-collection.json",
+        "sha256": "453f4f68da8e52eba1bf86e4e1ea8ebbd8e4d4aff601a6bc4e63db7a79920de4",
+        "bytes": 15314103
+      },
+      {
+        "file": "preview-product.json",
+        "sha256": "0a8840c37b137502de1569f1c1f9108665f71e9e13bb2dd528248b2b8ee1d052",
+        "bytes": 4898
+      },
+      {
+        "file": "analysis-pack.zip",
+        "sha256": "063a89c256b737f543a4ce5b88b90b768ce515141cd3dac8445860e96d556f3f",
+        "bytes": 1088841
+      }
+    ]
+  },
+  "analysisDelivery": {
+    "productId": "P-10",
+    "status": "prepared",
+    "version": "analysis-20261113",
+    "sourceManifestSha256": "2a391f9f29f754609a74f379abf6900520dd1b30fa85898e718bc6265e2c8d44",
+    "planSha256": "759633d0d59bc89fde2dc1b5ce9b1d048b668e88659e3f7154485263bb96321a",
+    "archive": {
+      "bucket": "stats47-private",
+      "key": "note/product-analysis-archives/P-10/analysis-20261113/063a89c256b737f543a4ce5b88b90b768ce515141cd3dac8445860e96d556f3f.zip",
+      "sha256": "063a89c256b737f543a4ce5b88b90b768ce515141cd3dac8445860e96d556f3f",
+      "bytes": 1088841
+    },
+    "attachmentName": "P-10-analysis-20261113-analysis.zip",
+    "snapshot": {
+      "description": "ごみ収集区域の人口を全国地図で確認し、豊田市・大阪市の年度別の推移を比較できます。災害被害の実績とは分けて生活インフラの対象規模を整理します。",
+      "included": [
+        "ごみ計画収集人口（1,741地域・2015〜2023年度・5,223行）",
+        "CSV・Excel、分析結果CSV、共通型の図表PNG、出典・計算方法・取得原票"
+      ],
+      "useCases": [
+        {
+          "title": "廃棄物行政の現状説明に",
+          "description": "全国のごみ計画収集人口の分布から比較地域を選び、行政サービスの対象規模を説明できます。"
+        },
+        {
+          "title": "自治体サービスの推移を整理するときに",
+          "description": "豊田市・大阪市の2015・2020・2023年度の人口を並べ、収集区域の対象人数の変化を確認できます。"
+        }
+      ],
+      "purchaseNotes": [
+        "取得範囲は全国1741自治体で、豊田市・大阪市は推移の作成例です。",
+        "各年度10月1日の住民基本台帳による人口です。国勢調査人口で割った普及率や、災害の将来危険度を示す図にはしません。"
+      ],
+      "showcaseNote": "分析の図は追加ファイルに同梱する観測値から計算しています。既存の固定版とは対象地域・基準年・収録形式が異なるため、各図の条件と出典を確認してください。",
+      "showcase": [
+        {
+          "id": "national-garbage-collection-population",
+          "kind": "chart",
+          "heading": "ごみ収集区域の人口を全国で見る",
+          "lead": "2023年度のごみ計画収集人口を全国の市町村・特別区の地図で確認します。収集区域の対象人数の規模を示し、廃棄物行政の現状説明に使えます。",
+          "note": "収集区域内の人口であり、ごみ排出量や収集頻度・サービスの質は示しません。国勢調査人口とは定義・時点が異なるため、人口比の普及率は算出しません。",
+          "themeRefs": [
+            {
+              "themeKey": "waste-recycling",
+              "sectionKey": "waste-disposal",
+              "title": "ごみ・リサイクル",
+              "sectionTitle": "ごみの排出・処分量はどこで多いか",
+              "href": "/themes/waste-recycling#theme-section-waste-disposal"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261113-national-garbage-collection-population.png",
+              "alt": "2023年度のごみ計画収集人口（全国の市町村・特別区・2023年度）",
+              "template": "choropleth",
+              "sha256": "da4b6a3fdfc8add975dc0c23a7233196013e93f0afa4515732f4b50caf899b89"
+            }
+          ]
+        },
+        {
+          "id": "municipal-garbage-collection-trend",
+          "kind": "chart",
+          "heading": "収集区域の人口の推移を比べる",
+          "lead": "豊田市と大阪市について、2015・2020・2023年度のごみ計画収集人口を折れ線で比較します。サービスの対象人数の変化を説明する基礎資料にできます。",
+          "note": "ごみ収集区域の対象人口の推移です。人口の変化だけからごみ処理能力の過不足やサービス改善の効果を判断できません。",
+          "themeRefs": [
+            {
+              "themeKey": "waste-recycling",
+              "sectionKey": "waste-disposal",
+              "title": "ごみ・リサイクル",
+              "sectionTitle": "ごみの排出・処分量はどこで多いか",
+              "href": "/themes/waste-recycling#theme-section-waste-disposal"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261113-municipal-garbage-collection-trend.png",
+              "alt": "ごみ計画収集人口の推移（豊田市・大阪市・2015〜2023年度）",
+              "template": "line",
+              "sha256": "0ae5b93ca01b1d5f351bbdd77ec515db36c9e0410f10ccfdb81e85e742181b08"
+            }
+          ]
+        },
+        {
+          "kind": "file",
+          "heading": "ファイルの中身",
+          "lead": "地域コード・地域名・年・指標・値・単位を列に持つCSVとExcelです。観測値と分析結果を分け、欠測は理由付きで保持します。",
+          "figures": [
+            {
+              "file": "analysis-20261113-analysis-file-preview.png",
+              "alt": "市区町村のごみ計画収集人口を読むデータ集のCSV見本",
+              "template": "file-preview",
+              "sha256": "5a438897129ca0ed9c0be07bbc3b270b785266da1b3016d9135fbe52dde565b8"
+            }
+          ],
+          "id": "analysis-file-2"
+        }
+      ]
+    }
+  }
 }

@@ -85,8 +85,8 @@
   "analysisRevision": {
     "productId": "P-08",
     "version": "analysis-20261112",
-    "planSha256": "50058e9377fad98e2c2b8cc481d6443787e46b589f9162197252b03eaf4592ee",
-    "resolvedPlanSha256": "2f5f255ec38ea48652ce094e6582606b8cd40c728759d637a9d9e44f9d9e2117",
+    "planSha256": "e8dc26e07ac9a1bcdb8ee9d64bf50d329cd857c198c67f3474472d9e6deb0766",
+    "resolvedPlanSha256": "c53ba4bcdbd9f38c659813b0e4763af897b78f2440f61c16434986b5affab0d0",
     "sources": [
       {
         "id": "municipal-commerce",
@@ -129,7 +129,7 @@
         "inputSha256": "908bafa581c4d9f955898c1319e8e2c0ed6fd6b15d562ce5c35283b8f2fd46fb"
       }
     ],
-    "results": 46,
+    "results": 1787,
     "files": [
       {
         "file": "data.csv",
@@ -138,13 +138,13 @@
       },
       {
         "file": "analysis.csv",
-        "sha256": "fcd5e5ca308a3f5c825c05672750e55c4f7b8cf1d75354816df09f28b3edccd8",
-        "bytes": 7255
+        "sha256": "0a9239b5229c3b2ca7033b870d21c23e82fda33e0e5517958430dd7460afb155",
+        "bytes": 263264
       },
       {
         "file": "analysis.xlsx",
-        "sha256": "15b102c3ff1061ab9ab9258821039f30bea669053cfea8d1fd7a53166fc3b187",
-        "bytes": 144014
+        "sha256": "dcc758736197b400994219ae007661e0880196be0ba43ea7a81e87513dd36d4b",
+        "bytes": 208160
       },
       {
         "file": "SOURCES.csv",
@@ -158,28 +158,33 @@
       },
       {
         "file": "analysis-plan.json",
-        "sha256": "23ae9192d5428402bb59f67f5ab9166ba1a576c2b85138ae46ff98e83f2c6049",
-        "bytes": 5968
+        "sha256": "3fed7878638377ae943c13b2dfeb358f3f8cb89b4afa0ebdebbab6c65c778d49",
+        "bytes": 8216
       },
       {
         "file": "figure-specs.json",
-        "sha256": "7c3712f4b8005077f48c1ec6356ad7bad3e9f4b7555cd5dd278bcbf535238ccf",
-        "bytes": 7730
+        "sha256": "3cee06548740cb9cd80b81555520628c1446717df31fc80d4fa03687657beae2",
+        "bytes": 170286
       },
       {
         "file": "README.md",
-        "sha256": "bdd47edc131b459717cfb90694cef7e7311ca9bd78596485171ed789db12c4ff",
-        "bytes": 2642
+        "sha256": "af934c305ce522089ecaf0476edfae17c29e35b37b2707e6e0d43674ab383e7c",
+        "bytes": 3901
       },
       {
         "file": "READINESS.md",
-        "sha256": "a48fe84e5d43757dbb7f5362a76d86f40e5f3bbc98adbbc39469fcb5904b7c0c",
-        "bytes": 272
+        "sha256": "6576547c7e97355fa49fc32178fd85e89046f2b35c0e43b6a3666be68f4c3e0f",
+        "bytes": 192
+      },
+      {
+        "file": "images/national-municipal-sales-scale.png",
+        "sha256": "cebda4fa57d15ec78e1c55543b2ee3d42e8b0e111c859dbdd8d709ed2f66c37f",
+        "bytes": 159567
       },
       {
         "file": "images/municipal-sales-scale.png",
-        "sha256": "c20d5258076fc25e0b58f5241669f471d3d8681f9d998484fa1d6d187b5594c0",
-        "bytes": 169607
+        "sha256": "12cdaeab72a45d652cd3f8a52c15a743964a721b84b5b9b91c68d7aca62b29c0",
+        "bytes": 169965
       },
       {
         "file": "images/municipal-sales-per-resident.png",
@@ -198,14 +203,140 @@
       },
       {
         "file": "preview-product.json",
-        "sha256": "e21c6e87e54145ca8cc3baa1b7ad2b9313a719f121930cf900485f271856a9b3",
-        "bytes": 3679
+        "sha256": "f1635388fdc06b8eddbac36b37e65cf1003e64420c0a6d3c349e744a7a5e4056",
+        "bytes": 6461
       },
       {
         "file": "analysis-pack.zip",
-        "sha256": "5bcf71b79a29921677a2165568327ec9b6a416458491fb8df8e79b960986ee8a",
-        "bytes": 1032515
+        "sha256": "5a6d1c7546168abf73d965fcad2cf6bf65dd3e6b1760a91487f38b374039e119",
+        "bytes": 1266010
       }
     ]
+  },
+  "analysisDelivery": {
+    "productId": "P-08",
+    "status": "prepared",
+    "version": "analysis-20261112",
+    "sourceManifestSha256": "c53adc0934228b981e8545b46fda8e7fd863f5b092f58f65b0029686344336a1",
+    "planSha256": "e8dc26e07ac9a1bcdb8ee9d64bf50d329cd857c198c67f3474472d9e6deb0766",
+    "archive": {
+      "bucket": "stats47-private",
+      "key": "note/product-analysis-archives/P-08/analysis-20261112/5a6d1c7546168abf73d965fcad2cf6bf65dd3e6b1760a91487f38b374039e119.zip",
+      "sha256": "5a6d1c7546168abf73d965fcad2cf6bf65dd3e6b1760a91487f38b374039e119",
+      "bytes": 1266010
+    },
+    "attachmentName": "P-08-analysis-20261112-analysis.zip",
+    "snapshot": {
+      "description": "全国の市町村の卸売業・小売業の年間商品販売額を見渡し、県内の総額と住民1人あたり販売額を別々の図で比較できます。",
+      "included": [
+        "年間商品販売額と総人口（1,741地域・2020年・3,482行、うち欠測15行）",
+        "CSV・Excel、分析結果CSV、共通型の図表PNG、出典・計算方法・取得原票"
+      ],
+      "useCases": [
+        {
+          "title": "商業の現状説明に",
+          "description": "全国の卸売業・小売業の販売額の分布から県内の比較へ絞り、地域の商業規模を地図・グラフで説明できます。"
+        },
+        {
+          "title": "人口規模の異なる自治体の比較に",
+          "description": "販売額の総額と住民1人あたりの値を分けて比較し、人口規模に対する商業集積の違いを整理できます。"
+        }
+      ],
+      "purchaseNotes": [
+        "卸売業を含む年間商品販売額であり、小売だけの市場規模や住民の消費額として解釈しません。",
+        "販売額の欠測・秘匿を0に変換しません。実値0は保持し、人口0または欠測の場合は人口あたり比率を算出しません。",
+        "改訂データの対象は全国の市町村・特別区です。高知県内の地図・グラフは比較方法を示す作成例です。",
+        "年間商品販売額は卸売業・小売業の総額です。小売業だけの販売額や、地域住民の個人消費額とは区別してください。"
+      ],
+      "showcaseNote": "分析の図は追加ファイルに同梱する観測値から計算しています。既存の固定版とは対象地域・基準年・収録形式が異なるため、各図の条件と出典を確認してください。",
+      "showcase": [
+        {
+          "id": "national-municipal-sales-scale",
+          "kind": "chart",
+          "heading": "卸売・小売の販売額を全国地図で見る",
+          "lead": "2020年の卸売業・小売業の年間商品販売額を、全国の市町村・特別区で塗り分けます。総額の大きい地域がどこにあるかを確認し、商業の現状説明で比較する地域を選べます。",
+          "note": "卸売業を含むため、地域住民の買い物額や小売店の集客力を直接示すものではありません。",
+          "themeRefs": [
+            {
+              "themeKey": "retail-commerce",
+              "sectionKey": "retail-market-scale",
+              "title": "商業と小売",
+              "sectionTitle": "地域での買い物の市場規模や年間売り上げはどれくらい大きいか",
+              "href": "/themes/retail-commerce#theme-section-retail-market-scale"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-national-municipal-sales-scale.png",
+              "alt": "全国の卸売業・小売業の年間商品販売額（全国の市町村・特別区・2020年）",
+              "template": "choropleth",
+              "sha256": "cebda4fa57d15ec78e1c55543b2ee3d42e8b0e111c859dbdd8d709ed2f66c37f"
+            }
+          ]
+        },
+        {
+          "id": "municipal-sales-scale",
+          "kind": "chart",
+          "heading": "県内の販売額の規模を比べる",
+          "lead": "全国地図で見た地域から高知県の市といの町を取り上げ、2020年の卸売業・小売業の年間商品販売額を棒グラフで比較します。総額の規模を、具体的な自治体の値で説明できます。",
+          "note": "卸売業を含むため、地域住民の買い物額や小売店の集客力を直接示すものではありません。",
+          "themeRefs": [
+            {
+              "themeKey": "retail-commerce",
+              "sectionKey": "retail-market-scale",
+              "title": "商業と小売",
+              "sectionTitle": "地域での買い物の市場規模や年間売り上げはどれくらい大きいか",
+              "href": "/themes/retail-commerce#theme-section-retail-market-scale"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-municipal-sales-scale.png",
+              "alt": "2020年の卸売業・小売業の年間商品販売額（2020年）",
+              "template": "bar",
+              "sha256": "12cdaeab72a45d652cd3f8a52c15a743964a721b84b5b9b91c68d7aca62b29c0"
+            }
+          ]
+        },
+        {
+          "id": "municipal-sales-per-resident",
+          "kind": "chart",
+          "heading": "人口あたりの販売額を県内地図で比べる",
+          "lead": "同じ2020年の卸売業・小売業の年間商品販売額を住民人口で割り、高知県内の市町村を塗り分けます。総額の棒グラフと見比べ、商業の規模と人口規模に対する比率を分けて説明できます。",
+          "note": "住民1人の消費額ではありません。卸売業、法人間取引や自治体外からの需要なども含みます。人口0・欠測の場合は比率を算出せず、販売額の秘匿・欠測を0に置き換えません。",
+          "themeRefs": [
+            {
+              "themeKey": "retail-commerce",
+              "sectionKey": "retail-market-scale",
+              "title": "商業と小売",
+              "sectionTitle": "地域での買い物の市場規模や年間売り上げはどれくらい大きいか",
+              "href": "/themes/retail-commerce#theme-section-retail-market-scale"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-municipal-sales-per-resident.png",
+              "alt": "住民1人あたりの年間商品販売額（高知県内の市町村・2020年）",
+              "template": "choropleth",
+              "sha256": "69d39a9e1ec60505123fe18d1dbffe7da6ade0db0c5d040663b102b394dde18c"
+            }
+          ]
+        },
+        {
+          "kind": "file",
+          "heading": "ファイルの中身",
+          "lead": "地域コード・地域名・年・指標・値・単位を列に持つCSVとExcelです。観測値と分析結果を分け、欠測は理由付きで保持します。",
+          "figures": [
+            {
+              "file": "analysis-20261112-analysis-file-preview.png",
+              "alt": "市区町村の商業規模を人口と比べるデータ集のCSV見本",
+              "template": "file-preview",
+              "sha256": "f5120e8dcd5f8c7265e7d17abd180b2fb2962fe4ff3a6c2e390a9c83bf9d7141"
+            }
+          ],
+          "id": "analysis-file-3"
+        }
+      ]
+    }
   }
 }

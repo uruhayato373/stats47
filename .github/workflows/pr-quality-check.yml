@@ -548,6 +548,7 @@ jobs:
         # ローカルR2がある環境では draft/H1/cover title のドリフトも同じvalidatorが検出する。
         run: |
           npm run check:product-storefront --workspace apps/web
+          npm run products:analysis:catalog
           npm run note:catalog:validate
           npm run note:catalog:check
           npm run note:article:test

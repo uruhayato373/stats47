@@ -598,11 +598,14 @@ export const DATASETS = [
     refs: [
       { field: "articleKey", to: "note.articles", key: "articles[].key" },
       { field: "examples[].metricKeys[]", to: "registry:metrics" },
+      { field: "examples[].themeRefs[].themeKey", to: "themes.catalogs", key: "key" },
+      { field: "analysisRevision.recipes[].themeRefs[].themeKey", to: "themes.catalogs", key: "key" },
       { field: "analysisPlan.inputs[].metricKey", to: "registry:metrics" },
       { field: "analysisPlan.inputs[].variantId", to: "metrics.analysis-source-variants", key: "variants[].id" },
       { field: "analysisPlan.analysisRefs[]", to: "content.analyses", key: "analyses[].id" },
       { field: "analysisPlan.figureRefs[]", to: "content.figures", key: "figures[].id" },
       { field: "analysisPlan.reuseProducts[]", to: "products.landings", key: "productId" },
+      { field: "analysisReuse.examples[].productId", to: "products.landings", key: "productId" },
       { field: "analysisRevision.sources[].inputs[].metricKey", to: "registry:metrics" },
       { field: "analysisRevision.sources[].inputs[].variantId", to: "metrics.analysis-source-variants", key: "variants[].id" },
       { field: "analysisRevision.recipes[].metricIds[]", to: "registry:metrics" },
@@ -619,7 +622,8 @@ export const DATASETS = [
   }),
   d("products.standalone-note", "data/products/standalone-note-products.json", "master", "product", "data", "商品ファクトリー外の商品IDとnote記事の対応。説明は共通LP台帳、公開状態・正式名・価格は記事台帳", {
     schema: "config/schema/products.standalone-note.schema.json",
-    refs: [{ field: "products[].articleKey", to: "note.articles", key: "articles[].key" }],
+    refs: [{ field: "products[].articleKey", to: "note.articles", key: "articles[].key" },
+      { field: "products[].licenseId", to: "products.licenses", key: "licenses.$keys" }],
   }),
   d("products.competitor-scan", "data/products/competitor-scan.csv", "series", "product", "data", "販売面ごとの競合の観測 (出品・価格・関心の目安。関心の目安は販売数ではない。再調査は行を追記する)"),
   d("products.price-history", "data/products/price-history.json", "ledger", "product", "data", "商品の価格実験と価格変更の履歴", { schema: "config/schema/products.price-history.schema.json" }),
@@ -922,6 +926,10 @@ export const DATASETS = [
   }),
   d("areas.prefectures", "data/areas/master/prefectures.json", "master", "data", "data", "都道府県のマスタ (5 桁の都道府県コード・名前・ローマ字。JIS 順の 47 件)。読み込みは packages/area/src/data/index.ts (PREFECTURES)", {
     schema: "config/schema/areas.prefectures.schema.json",
+  }),
+  d("areas.capital-cities", "data/areas/master/capital-cities.json", "master", "data", "data", "県庁所在市の名称と家計調査の原地域コード。サイト配信と商品分析が共用する", {
+    schema: "config/schema/areas.capital-cities.schema.json",
+    refs: [{ field: "[].prefectureCode", to: "areas.prefectures", key: "[].prefCode" }],
   }),
   d("areas.cities", "data/areas/master/cities.json", "master", "data", "data", "市区町村のマスタ (e-Stat の地域メタの市区町村と政令指定都市の行政区。level 2 の prefCode は都道府県、level 3 の prefCode は親の政令指定都市)。読み込みは packages/area/src/data/index.ts (CITIES)", {
     schema: "config/schema/areas.cities.schema.json",

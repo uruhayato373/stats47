@@ -7,7 +7,8 @@ import { SurfaceSection } from "@/components/surface";
 
 import { getRequiredBaseUrl } from "@/lib/env";
 
-import { findFiscalCompanionProduct, STOREFRONT_PRODUCTS } from "../storefront";
+import { productEditions } from "../editions";
+import { findFiscalCompanionProduct } from "../storefront";
 
 import { ProductOverview } from "./ProductOverview";
 import { ProductPurchase } from "./ProductPurchase";
@@ -17,12 +18,12 @@ import { TrackedProductLink } from "./TrackedProductLink";
 import type { StorefrontProduct } from "../types";
 
 /** 販売版・改訂案の構成を共有し、販売先の案内には公開中の商品だけを使う。 */
-export function ProductDetail({ product, preview = false }: {
+export function ProductDetail({ product, revision, preview = false }: {
   readonly product: StorefrontProduct;
+  readonly revision?: StorefrontProduct;
   readonly preview?: boolean;
 }) {
-  const purchaseProduct = preview ? STOREFRONT_PRODUCTS.find(item => item.id === product.id) : product;
-  if (!purchaseProduct) throw new Error(`販売版の参照がありません: ${product.id}`);
+  const editions = productEditions(product, revision);
   const fiscalCompanion = preview ? null : findFiscalCompanionProduct(product.slug);
   const displayTitle = product.displayTitle ?? product.title;
   const baseUrl = getRequiredBaseUrl();
@@ -61,18 +62,28 @@ export function ProductDetail({ product, preview = false }: {
         description={product.description}
       />
       <SurfaceSection aria-label="商品詳細" className="@container gap-8" data-product-preview={preview || undefined}>
-        {preview && <p className="text-sm text-muted-foreground">未公開の改訂候補です。公開中の商品にはまだ含まれていません。</p>}
-        <ProductOverview product={product} purchaseProduct={purchaseProduct} preview={preview} />
-        <ProductShowcase product={product} />
-
-        {product.purchaseNotes?.length ? (
-          <section aria-label={preview ? "データの範囲と注意点" : "購入前にご確認ください"} className="flex flex-col gap-3">
-            <SectionHeader title={preview ? "データの範囲と注意点" : "購入前にご確認ください"} hideRule className="mb-0" />
+        {revision && <nav aria-label="商品の内容と改訂案" className="flex flex-col gap-2 text-sm">
+          <p className="text-muted-foreground">販売中の内容と未公開の改訂候補を掲載しています。改訂案は現在販売中の商品には含まれていません。</p>
+          {editions.map(edition => <Link key={edition.key} href={`#product-${edition.key}`} className="inline-flex min-h-11 items-center text-primary hover:underline">
+            {edition.label}：{edition.product.displayTitle ?? edition.product.title}
+          </Link>)}
+        </nav>}
+        {editions.map(edition => <section key={edition.key} id={`product-${edition.key}`} data-product-edition={edition.key} aria-label={edition.label} className="scroll-mt-24 flex flex-col gap-8">
+          {revision && <div className="flex flex-col gap-2">
+            <p className="text-sm font-semibold">{edition.label}：{edition.product.displayTitle ?? edition.product.title}</p>
+            {edition.preview && <p className="text-sm text-muted-foreground">{edition.product.description}</p>}
+          </div>}
+          <ProductOverview product={edition.product} purchaseProduct={edition.preview ? undefined : product} preview={preview} />
+          <ProductShowcase product={edition.product} />
+          {edition.product.purchaseNotes?.length ? (
+          <section aria-label={edition.preview ? "改訂案の範囲と注意点" : "購入前にご確認ください"} className="flex flex-col gap-3">
+            <SectionHeader title={edition.preview ? "改訂案の範囲と注意点" : "購入前にご確認ください"} hideRule className="mb-0" />
             <ul className="flex list-disc flex-col gap-2 pl-5 text-sm leading-relaxed text-muted-foreground">
-              {product.purchaseNotes.map((note) => <li key={note}>{note}</li>)}
+              {edition.product.purchaseNotes.map((note) => <li key={note}>{note}</li>)}
             </ul>
           </section>
-        ) : null}
+          ) : null}
+        </section>)}
 
         {fiscalCompanion && (
           <section className="flex flex-col gap-4">
@@ -126,7 +137,7 @@ export function ProductDetail({ product, preview = false }: {
           </Link>
         </section>
 
-        <ProductPurchase product={purchaseProduct} placement="product_detail_bottom" currentVersion={preview} />
+        <ProductPurchase product={product} placement="product_detail_bottom" currentVersion={preview} />
       </SurfaceSection>
     </PageShell>
   );

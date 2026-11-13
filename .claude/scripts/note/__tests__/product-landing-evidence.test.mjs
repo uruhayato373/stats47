@@ -46,3 +46,14 @@ test('a mismatched source title/year/unit cannot be paired with another CSV colu
   const f = await fixture((rows, sources) => { sources[0]['年'] = '2025'; });
   await assert.rejects(inspectLandingArchive(f.bytes, f.archive, f.delivery), /定義・年・単位/);
 });
+
+test('a published ZIP with one enclosing folder retains the same delivery evidence', async () => {
+  const f = await fixture();
+  const original = await JSZip.loadAsync(f.bytes);
+  const wrapped = new JSZip();
+  for (const entry of Object.values(original.files)) wrapped.file(`P-14/${entry.name}`, await entry.async('nodebuffer'));
+  const bytes = await wrapped.generateAsync({ type: 'nodebuffer' });
+  const result = await inspectLandingArchive(bytes, { bytes: bytes.length, sha256: sha256(bytes) }, f.delivery);
+  assert.deepEqual(result.files, ['SOURCES.csv', 'data.csv']);
+  assert.equal(selectLandingMetric(result, 'sample').rows.length, 47);
+});

@@ -9,7 +9,13 @@
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
 
+import ts from 'typescript';
 import { describe, expect, it } from 'vitest';
+
+import { ANALYSIS_PREVIEWS } from '@/features/products/analysis-previews.generated';
+import { STOREFRONT_PRODUCTS } from '@/features/products/storefront';
+import { collectThemeProducts } from '@/features/products/theme-products';
+import type { StorefrontProduct } from '@/features/products/types';
 
 const SRC = resolve(__dirname, '..');
 
@@ -45,13 +51,15 @@ const TEXT_ALLOWLIST: Record<string, string> = {
     '47 都道府県の表は Geo の分析ページ用。テーマは regionOnly で隠す',
 };
 
+const sourcePath = (file: string) => relative(SRC, file).replaceAll('\\', '/');
+
 function listFiles(dir: string): string[] {
   const abs = join(SRC, dir);
   if (!existsSync(abs)) return [];
   return readdirSync(abs).flatMap((name) => {
     const path = join(abs, name);
-    if (statSync(path).isDirectory()) return name === '__tests__' ? [] : listFiles(relative(SRC, path));
-    return /\.(tsx?)$/.test(name) && !/\.test\.tsx?$/.test(name) ? [relative(SRC, path)] : [];
+    if (statSync(path).isDirectory()) return name === '__tests__' ? [] : listFiles(sourcePath(path));
+    return /\.(tsx?)$/.test(name) && !/\.test\.tsx?$/.test(name) ? [sourcePath(path)] : [];
   });
 }
 
@@ -60,7 +68,7 @@ const IMPORT_RE = /(?:from\s+|import\s*\(\s*)['"]((?:\.{1,2}|@)\/[^'"]+)['"]/g;
 function resolveImport(fromFile: string, spec: string): string | null {
   const base = spec.startsWith('@/') ? join(SRC, spec.slice(2)) : resolve(dirname(join(SRC, fromFile)), spec);
   for (const candidate of [base, `${base}.ts`, `${base}.tsx`, join(base, 'index.ts'), join(base, 'index.tsx')]) {
-    if (existsSync(candidate) && statSync(candidate).isFile()) return relative(SRC, candidate);
+    if (existsSync(candidate) && statSync(candidate).isFile()) return sourcePath(candidate);
   }
   return null;
 }
@@ -86,6 +94,25 @@ function withoutComments(source: string): string {
   return source.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '').replace(/\{\/\*[\s\S]*?\*\/\}/g, '');
 }
 
+/** JSON相当の生成台帳は表示コードではない。実行式・値import・JSXがあれば除外しない。 */
+function isLiteralCatalog(file: string, source: string): boolean {
+  if (!file.endsWith('.generated.ts')) return false;
+  const literal = (node: ts.Expression): boolean => {
+    if (ts.isAsExpression(node) || ts.isSatisfiesExpression(node)) return literal(node.expression);
+    if (ts.isStringLiteral(node) || ts.isNumericLiteral(node) ||
+      [ts.SyntaxKind.TrueKeyword, ts.SyntaxKind.FalseKeyword, ts.SyntaxKind.NullKeyword].includes(node.kind)) return true;
+    if (ts.isArrayLiteralExpression(node)) return node.elements.every(literal);
+    if (ts.isObjectLiteralExpression(node)) return node.properties.every(property =>
+      ts.isPropertyAssignment(property) && !ts.isComputedPropertyName(property.name) && literal(property.initializer));
+    return false;
+  };
+  const statements = ts.createSourceFile(file, source, ts.ScriptTarget.Latest, true).statements;
+  return statements.some(ts.isVariableStatement) && statements.every(statement =>
+    ts.isImportDeclaration(statement) ? statement.importClause?.isTypeOnly === true :
+      ts.isVariableStatement(statement) && Boolean(statement.declarationList.flags & ts.NodeFlags.Const) &&
+      statement.declarationList.declarations.every(declaration => declaration.initializer && literal(declaration.initializer)));
+}
+
 describe('テーマ・地域・全国のページに 47 都道府県の比較を置かない', () => {
   const files = reachableFiles();
 
@@ -107,10 +134,42 @@ describe('テーマ・地域・全国のページに 47 都道府県の比較を
   });
 
   it('「47都道府県の〜」のような比較の見出し・説明を持たない', () => {
-    const offenders = files.filter(
-      (file) => !TEXT_ALLOWLIST[file] && COMPARISON_TEXT.test(withoutComments(readFileSync(join(SRC, file), 'utf8')))
-    );
+    const offenders = files.filter(file => {
+      const source = readFileSync(join(SRC, file), 'utf8');
+      return !TEXT_ALLOWLIST[file] && !isLiteralCatalog(file, source) && COMPARISON_TEXT.test(withoutComments(source));
+    });
     expect(offenders.join('\n')).toBe('');
+  });
+
+  it('生成台帳でも実行式・値import・表示コードを含めば見出しの検査を省かない', () => {
+    const data = 'export const DATA = [{ title: "47都道府県の比較" }] as const;';
+    expect(isLiteralCatalog('catalog.generated.ts', data)).toBe(true);
+    expect(isLiteralCatalog('component.ts', data)).toBe(false);
+    for (const code of [
+      data + ' export function Heading() { return "47都道府県の比較"; }',
+      'import { render } from "./view"; ' + data,
+      'export const DATA = [{ title: render() }];',
+      'export const DATA = [{ ...otherData }];',
+      'export const DATA = <h2>47都道府県の比較</h2>;',
+    ]) expect(isLiteralCatalog('catalog.generated.ts', code), code).toBe(false);
+  });
+
+  it('商品台帳の説明文・図をテーマへ渡さず、販売版・改訂案とも案内文だけを検査する', () => {
+    const entries = STOREFRONT_PRODUCTS.map(product => ({ product, slug: product.slug, preview: false,
+      revision: ANALYSIS_PREVIEWS.find(revision => revision.id === product.id) }));
+    const products: readonly StorefrontProduct[] = [...STOREFRONT_PRODUCTS, ...ANALYSIS_PREVIEWS];
+    const themes = new Set(products.flatMap(product =>
+      product.showcase?.flatMap(section => section.themeRefs?.map(ref => ref.themeKey) ?? []) ?? []));
+    expect(themes.size).toBeGreaterThan(10);
+    for (const theme of themes) {
+      const chapters = collectThemeProducts(theme, entries);
+      expect(JSON.stringify(chapters), theme).not.toMatch(COMPARISON_TEXT);
+      for (const link of Object.values(chapters).flat()) {
+        expect(link.product).not.toHaveProperty('description');
+        expect(link.product).not.toHaveProperty('showcase');
+        for (const example of link.examples) expect(Object.keys(example).sort()).toEqual(['heading', 'href']);
+      }
+    }
   });
 
   it('許可の一覧は実在し、今も該当する (使われなくなった許可を残さない)', () => {

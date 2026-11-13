@@ -2,7 +2,8 @@
   "products": [
     {
       "id": "MUNI-MANUFACTURING",
-      "articleKey": "muni-manufacturing-shipment-data"
+      "articleKey": "muni-manufacturing-shipment-data",
+      "licenseId": "single-corporate"
     }
   ]
 }

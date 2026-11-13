@@ -1,6 +1,6 @@
 ---
 name: proxy-preload-for-fetch-scripts
-description: 会社PCで素のfetch()を使う既存scriptを無改修で通すnode --import preload手法 (undici ProxyAgent + file:// URL)
+description: 会社PCで素のfetch()を使う既存scriptを無改修で通すnode --import preload手法 (undici EnvHttpProxyAgent + file:// URL、ローカル配信は除外)
 metadata: 
   node_type: memory
   type: project
@@ -17,21 +17,23 @@ R2 取得に失敗する。script 側を改修せずに通す方法:
 ```js
 import { createRequire } from "node:module";
 const require = createRequire("C:/Users/m004195/stats47/package.json");
-const { ProxyAgent, setGlobalDispatcher } = require("undici");
-const proxy = process.env.HTTPS_PROXY || process.env.https_proxy;
-if (proxy) setGlobalDispatcher(new ProxyAgent(proxy));
+const { EnvHttpProxyAgent, setGlobalDispatcher } = require("undici");
+setGlobalDispatcher(new EnvHttpProxyAgent({
+  noProxy: [process.env.NO_PROXY ?? process.env.no_proxy ?? "", "localhost", "127.0.0.1", "::1"].join(","),
+}));
 ```
 
 2. `node --import "file:///C:/.../proxy-preload.mjs" <script> ...` で実行する。
 
 **Why:** Node の組み込み fetch は HTTPS_PROXY を見ない (`.claude/rules/local-environment.md` に実測記録)。
-global dispatcher を注入すれば script 内の素の fetch がすべて proxy 経由になる。
+環境変数に従う dispatcher を注入し、外部は proxy、除外したローカル配信は直接取得する。
 
 **How to apply:**
 - Windows では `--import` に **file:// URL が必須** (素のパスは `ERR_UNSUPPORTED_ESM_URL_SCHEME` で落ちる)。
 - `npx tsx` で動く script (generate-article-charts.ts 等) はネットワーク不要ならそのままでよい。
 - 恒久対応するなら script 側に `resolveDispatcher` パターン ([[proxy-fetch-canonical-pattern]] =
   `.claude/scripts/audit/theme-chart-live-audit.mjs` の手本) を入れる方が正だが、一時実行はこの preload が最速。
+- **ローカル地図のTimeoutError (2026-11-13)**: e-Stat取得は通るのに `http://127.0.0.1:4777/gis/...` が30秒で落ちる場合、全通信を固定の `ProxyAgent` へ渡していないか確認する。`EnvHttpProxyAgent` と上記除外で解決し、P-04の全国・県内地図を含む12画像を生成・照合した。外部とローカルを同じ実行で使うときも証明書検証は無効化しない。
 
 **証明書の追加 (2026-10-28 実測)**: プロキシを通しても `fetch failed` / `UNABLE_TO_VERIFY_LEAF_SIGNATURE` で落ちる
 (会社のネットワークが TLS 証明書を差し替えるため)。Node 22.14 には `--use-system-ca` が無いので、PowerShell で

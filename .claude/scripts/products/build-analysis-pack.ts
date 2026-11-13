@@ -22,6 +22,9 @@ import { renderProductFigures } from '../note/render-product-figures';
 import { buildPreviewFiles, writePreviewFiles, createPreviewServer } from '../note/build-product-landing-preview';
 import { STOREFRONT_PRODUCTS } from '../../../apps/web/src/features/products/storefront.generated';
 import type { StorefrontProduct, StorefrontShowcaseSection } from '../../../apps/web/src/features/products/types';
+import { buildReusePack } from './build-reuse-pack';
+import { listCapitalCityAreas } from '../../../packages/product-factory/src/analysis/capital-city';
+import { assertAnalysisAxes } from '../../../packages/product-factory/src/analysis/coverage';
 
 const ROOT = path.resolve(__dirname, '../../..');
 const hash = (bytes: string | Buffer) => createHash('sha256').update(bytes).digest('hex');
@@ -31,7 +34,7 @@ const write = (directory: string, file: string, content: string | Buffer) => fs.
 const read = (file: string) => JSON.parse(fs.readFileSync(file, 'utf8'));
 const acquisitionHash = (source: ResolvedSource) => hash(JSON.stringify({
   id: source.id, grain: source.grain, years: source.years,
-  inputs: source.inputs.map(({ id, statsDataId, code, unit, rawUnit }) => ({ id, statsDataId, code, unit, rawUnit })),
+  inputs: source.inputs.map(({ id, statsDataId, code, unit, rawUnit, filters }) => ({ id, statsDataId, code, unit, rawUnit, filters })),
 }));
 const resultTable = (rows: ReturnType<typeof computeAnalyses>) => [
   ['analysis_id', 'area_code', 'area_name', 'year', 'series_id', 'series_name', 'value', 'unit', 'missing_reason'],
@@ -40,15 +43,18 @@ const resultTable = (rows: ReturnType<typeof computeAnalyses>) => [
 const previewModule = (candidates: StorefrontProduct[]) => `/** 自動生成。products:analysis:build。未公開の改訂候補。 */\nimport type { StorefrontProduct } from './types';\nexport const ANALYSIS_PREVIEWS: readonly StorefrontProduct[] = ${JSON.stringify(candidates, null, 2)};\n`;
 
 export async function buildAnalysisPack(productId: string, refresh = false, check = false) {
-  if (!/^P-\d{2}$/.test(productId)) throw Error('商品IDが不正です');
-  const landing = read(path.join(ROOT, datasetDir('products.landings'), `${productId.toLowerCase()}.json`));
+  const entry = landingEntries().find(item => item.landing.productId === productId);
+  if (!entry) throw Error('商品IDが台帳にありません');
+  const { landing, file } = entry;
   assertDatasetShape('products.landings', landing);
+  const current = STOREFRONT_PRODUCTS.find(product => product.id === productId);
+  if (!current) throw Error('現行の商品がありません');
+  const evidencePath = path.join(ROOT, datasetDir('products.landing-evidence'), file);
+  if (landing.analysisReuse) return buildReusePack(ROOT, landing, landingEntries().map(item => item.landing), current, evidencePath, check);
   const authored: AuthoredAnalysisRevision = landing.analysisRevision;
   if (!authored) throw Error('この商品に分析の改訂台帳がありません');
   const variants = read(path.join(ROOT, datasetDir('metrics.analysis-source-variants'), 'analysis-source-variants.json')).variants;
   const plan = resolveAnalysisRevision(authored, variants);
-  const current = STOREFRONT_PRODUCTS.find(product => product.id === productId);
-  if (!current) throw Error('現行の商品がありません');
   const destination = path.join(ROOT, '.local/data-packs', productId, plan.version);
   let output = destination;
   const inputs = path.join(output, 'inputs');
@@ -61,7 +67,7 @@ export async function buildAnalysisPack(productId: string, refresh = false, chec
       const bytes = fs.readFileSync(path.join(output, file.file));
       if (hash(bytes) !== file.sha256 || bytes.length !== file.bytes) throw Error(`改訂候補のSHA不一致: ${file.file}`);
     }
-    const evidence = read(path.join(ROOT, datasetDir('products.landing-evidence'), `${productId.toLowerCase()}.json`));
+    const evidence = read(evidencePath);
     assertDatasetShape('products.landing-evidence', evidence);
     if (JSON.stringify(evidence.analysisRevision) !== JSON.stringify(manifest)) throw Error('検査台帳と改訂候補が不一致です');
     const recalculated = computeAnalyses(plan, plan.sources.flatMap(source => {
@@ -70,6 +76,7 @@ export async function buildAnalysisPack(productId: string, refresh = false, chec
       validateSourceRows(source, cached.rows);
       return cached.rows;
     }));
+    assertAnalysisAxes(landing, [landing], new Map(plan.recipes.map(recipe => [recipe.id, recalculated.filter(row => row.analysisId === recipe.id)])));
     if (fs.readFileSync(path.join(output, 'analysis.csv'), 'utf8') !== csv(resultTable(recalculated))) throw Error('同梱観測値から分析を再現できません');
     const archive = await JSZip.loadAsync(fs.readFileSync(path.join(output, 'analysis-pack.zip')));
     for (const file of manifest.files.filter((item: {file: string}) => !['analysis-pack.zip', 'preview-product.json'].includes(item.file))) {
@@ -80,6 +87,8 @@ export async function buildAnalysisPack(productId: string, refresh = false, chec
     await workbook.xlsx.readFile(path.join(output, 'analysis.xlsx'));
     if (workbook.worksheets.length !== 2 || workbook.worksheets[0].rowCount !== manifest.sources.reduce((sum: number, source: {rows: number}) => sum + source.rows, 1) || workbook.worksheets[1].rowCount !== recalculated.length + 1) throw Error('Excelのシートまたは行数が不一致です');
     const candidate: StorefrontProduct = read(path.join(output, 'preview-product.json'));
+    if (JSON.stringify(candidate.showcase?.filter(section => section.kind === 'chart')) !==
+        JSON.stringify(buildAnalysisFigures(plan, recalculated).showcase)) throw Error('作成例・テーマ参照が台帳と一致しません');
     for (const figure of candidate.showcase!.flatMap(section => section.figures)) {
       const localImage = fs.readFileSync(path.join(ROOT, '.local/r2/app/products', candidate.slug, 'showcase', figure.file));
       if (hash(localImage) !== manifest.files.find((file: {file: string}) => file.file === `images/${figure.file}`).sha256) throw Error('LP画像と同梱画像が不一致です');
@@ -94,7 +103,7 @@ export async function buildAnalysisPack(productId: string, refresh = false, chec
   fs.mkdirSync(path.join(output, 'inputs'), { recursive: true });
   const observations: AnalysisObservation[] = [];
   const sourceEvidence: {
-    id: string; inputs: Pick<ResolvedSource['inputs'][number], 'metricKey' | 'variantId' | 'statsDataId' | 'code' | 'unit' | 'rawUnit'>[];
+    id: string; inputs: Pick<ResolvedSource['inputs'][number], 'metricKey' | 'variantId' | 'statsDataId' | 'code' | 'unit' | 'rawUnit' | 'filters'>[];
     grain: string; years: number[]; retrievedAt: string; tableTitle: string; rows: number; areas: number; missing: number;
     coverage: (Omit<ReturnType<typeof checkCoverage>, 'rows'> & { year: number })[]; inputSha256: string;
   }[] = [];
@@ -115,19 +124,21 @@ export async function buildAnalysisPack(productId: string, refresh = false, chec
     validateSourceRows(source, result.rows);
     write(output, `inputs/${source.id}.json`, json(result));
     observations.push(...result.rows);
-    const entities = source.grain === 'prefecture' ? PREFECTURE_AREA_CODES.map(code => ({ code, name: code })) : listPublishableMunicipalities(buildMunicipalityEntityPolicy());
+    const entities = source.grain === 'prefecture' ? PREFECTURE_AREA_CODES.map(code => ({ code, name: code })) :
+      source.grain === 'capital-city' ? listCapitalCityAreas() : listPublishableMunicipalities(buildMunicipalityEntityPolicy());
     const coverage = source.years.map(year => {
       const frame = buildFrame({ entities, metrics: source.metrics.map(metric => ({ alias: metric.id, years: [year],
         rows: result.rows.filter((row: AnalysisObservation) => row.metricId === metric.id).map((row: AnalysisObservation) => ({ ...row, yearCode: String(row.year) })) })) });
       const { rows: _rows, ...summary } = checkCoverage(frame, { required: frame.columns.map((column: { column: string }) => column.column), compareColumn: undefined });
       return { year, ...summary };
     });
-    sourceEvidence.push({ id: source.id, inputs: source.inputs.map(({ metricKey, variantId, statsDataId, code, unit, rawUnit }) => ({ metricKey, ...(variantId ? { variantId } : {}), statsDataId, code, unit, ...(rawUnit ? { rawUnit } : {}) })),
+    sourceEvidence.push({ id: source.id, inputs: source.inputs.map(({ metricKey, variantId, statsDataId, code, unit, rawUnit, filters }) => ({ metricKey, ...(variantId ? { variantId } : {}), statsDataId, code, unit, ...(rawUnit ? { rawUnit } : {}), ...(filters ? { filters } : {}) })),
       grain: source.grain, years: source.years, retrievedAt: result.retrievedAt, tableTitle: result.tableTitle,
       rows: result.rows.length, areas: entities.length, missing: result.rows.filter((row: AnalysisObservation) => row.value === null).length,
       coverage, inputSha256: hash(json(result)) });
   }
   const results = computeAnalyses(plan, observations);
+  assertAnalysisAxes(landing, [landing], new Map(plan.recipes.map(recipe => [recipe.id, results.filter(row => row.analysisId === recipe.id)])));
   const observationTable = [['source_id', 'metric_id', 'area_code', 'area_name', 'year', 'value', 'unit', 'missing_reason'],
     ...observations.map(row => [row.sourceId, row.metricId, row.areaCode, row.areaName, row.year, row.value, row.unit, row.missingReason ?? ''])];
   const calculatedTable = resultTable(results);
@@ -141,7 +152,8 @@ export async function buildAnalysisPack(productId: string, refresh = false, chec
     transform: '観測値は未加工。分析式と対象はanalysis-plan.json / README.md参照', notes: `${metric.definition} ${source.definition} ${source.boundary}`,
   })));
   write(output, 'SOURCES.csv', serializeSourcesCsv(sources));
-  const productDefinition = read(path.join(ROOT, datasetDir('products.packs'), 'packs.json')).packs[productId];
+  const productDefinition = read(path.join(ROOT, datasetDir('products.packs'), 'packs.json')).packs[productId] ??
+    read(path.join(ROOT, datasetDir('products.standalone-note'), 'standalone-note-products.json')).products.find((product: { id: string }) => product.id === productId);
   write(output, 'LICENSE-ja.txt', renderLicenseText(productDefinition.licenseId, sources));
   const workbook = new ExcelJS.Workbook();
   for (const [name, table] of [['観測値', observationTable], ['分析結果', calculatedTable]] as const) {
@@ -178,19 +190,19 @@ export async function buildAnalysisPack(productId: string, refresh = false, chec
         return `${definition.title}（${source.areas.toLocaleString('ja-JP')}地域・${period}・${source.rows.toLocaleString('ja-JP')}行${source.missing ? `、うち欠測${source.missing.toLocaleString('ja-JP')}行` : ''}）`;
       }),
       'CSV・Excel、分析結果CSV、共通型の図表PNG、出典・計算方法・取得原票',
-    ], showcase, showcaseNote: '図はこの改訂候補に同梱する観測値から計算しています。公開中の固定版には含まれていません。',
+    ], showcase, showcaseNote: '分析の図は追加ファイルに同梱する観測値から計算しています。既存の固定版とは対象地域・基準年・収録形式が異なるため、各図の条件と出典を確認してください。',
     purchaseNotes: plan.notes };
   write(output, 'preview-product.json', json(candidate));
-  const readme = [`# ${plan.title}`, '', '未公開の改訂候補。既存の販売版に含まれると案内しないこと。', '', plan.description,
+  const readme = [`# ${plan.title}`, '', '分析データ追加版です。既存の固定版とは別ファイルです。対象・年・計算条件は本書と同梱の出典を確認してください。', '', plan.description,
     '', '## 再現方法', '商品台帳のanalysisRevisionを入力に products:analysis:build を実行します。地域・期間は台帳で変更します。',
     '', '## 分析', ...plan.recipes.map(recipe => `### ${recipe.heading}\n${recipe.lead}\n\n${describeAnalysis(recipe, results.filter(row => row.analysisId === recipe.id), plan.sources.find(source => source.id === recipe.sourceId)!.inputs[0].yearFormat)}\n\n制約: ${recipe.limitation}`),
     '', '## 参考資料', ...plan.research.references.map(ref => `- [${ref.title}](${ref.url}) ${ref.section}：${ref.finding}`),
     '', '## 検査と確認', '機械検査: 原典の項目/単位、地域の重複、年、欠測、分子/分母、画像型、全ファイルSHA。',
-    'オーナー確認: Excel実機・図の読みやすさ・改訂版の販売内容/価格・公開。',
-    '', '## 計算式', '指数 = 当年値 / 基準年値 × 100。割合 = 分子 / 分母 × 100。比率 = 分子 / 分母 × 台帳の倍率。分母0以下の比率は理由付き欠測です。増減 = 正項 - 負項。増減率 = (終点 / 始点 - 1) × 100。丸める前の値をCSVへ保存します。基準年0以下は指数を停止し、増減率は理由付き欠測とします。',
+    'ExcelファイルはOOXML構造を検査しています。Excel実機での表示・操作・互換性は未確認です。',
+    '', '## 計算式', '指数 = 当年値 / 基準年値 × 100。割合 = 分子 / 分母 × 100。構成 = 各内訳 / 総額 × 100、その他 = (総額 - 表示する内訳の合計) / 総額 × 100。構成図は欠測・0以下の総額・同じ指標IDの重複・内訳合計の総額超過があれば停止します。異なる項目の分類が重ならないことは原典の定義で確認します。比率 = 分子 / 分母 × 台帳の倍率。分母0以下の比率は理由付き欠測です。増減 = 正項 - 負項。増減率 = (終点 / 始点 - 1) × 100。丸める前の値をCSVへ保存します。基準年0以下は指数を停止し、増減率は理由付き欠測とします。',
     '', '## 利用', '利用範囲・出典表示はLICENSE-ja.txtを確認してください。', ''];
   write(output, 'README.md', readme.join('\n'));
-  write(output, 'READINESS.md', '# 公開前確認\n\n- [x] 原典・地域・年・単位の機械検査\n- [x] 同梱CSVからの再計算・共通図型\n- [ ] Excel実機での確認\n- [ ] オーナーによる図・販売内容・価格の確認\n- [ ] 非公開保全・note添付差し替え・LP公開\n');
+  write(output, 'READINESS.md', '# 検査記録\n\n- [x] 原典・地域・年・単位の機械検査\n- [x] 同梱CSVからの再計算・共通図型\n- [ ] Excel実機での表示・操作・互換性の確認（未確認）\n');
   const zip = new JSZip();
   const files = ['data.csv', 'analysis.csv', 'analysis.xlsx', 'SOURCES.csv', 'LICENSE-ja.txt', 'analysis-plan.json', 'figure-specs.json', 'README.md', 'READINESS.md',
     ...figures.map(figure => `images/${figure.file}`), ...plan.sources.map(source => `inputs/${source.id}.json`)];
@@ -200,7 +212,6 @@ export async function buildAnalysisPack(productId: string, refresh = false, chec
     files: [...files, 'preview-product.json', 'analysis-pack.zip'].map(file => { const bytes = fs.readFileSync(path.join(output, file));
       return { file, sha256: hash(bytes), bytes: bytes.length }; }) };
   write(output, 'manifest.json', json(manifest));
-  const evidencePath = path.join(ROOT, datasetDir('products.landing-evidence'), `${productId.toLowerCase()}.json`);
   const evidence = { ...read(evidencePath), analysisRevision: manifest };
   assertDatasetShape('products.landing-evidence', evidence);
   fs.mkdirSync(destination, { recursive: true });
@@ -214,21 +225,22 @@ export async function buildAnalysisPack(productId: string, refresh = false, chec
   }
 }
 
-function revisionLandings() {
+function landingEntries() {
   return fs.readdirSync(path.join(ROOT, datasetDir('products.landings'))).filter(file => file.endsWith('.json'))
-    .map(file => read(path.join(ROOT, datasetDir('products.landings'), file))).filter(item => item.analysisRevision);
+    .map(file => ({ file, landing: read(path.join(ROOT, datasetDir('products.landings'), file)) }));
 }
 
 if (require.main === module) {
   const arg = (key: string) => { const index = process.argv.indexOf(key); return index < 0 ? undefined : process.argv[index + 1]; };
   (async () => {
     const check = process.argv.includes('--check');
-    const landings = revisionLandings();
+    const landings = landingEntries().map(item => item.landing).filter(item => item.analysisRevision || item.analysisReuse)
+      .sort((a, b) => Number(Boolean(a.analysisReuse)) - Number(Boolean(b.analysisReuse)));
     const ids = process.argv.includes('--all') ? landings.map(item => item.productId) : [arg('--id') ?? 'P-01'];
     for (const id of ids) await buildAnalysisPack(id, process.argv.includes('--refresh'), check);
     // Publish the preview list only after every authored revision has been built.
     const candidates: StorefrontProduct[] = landings.map(item => {
-      const file = path.join(ROOT, '.local/data-packs', item.productId, item.analysisRevision.version, 'preview-product.json');
+      const file = path.join(ROOT, '.local/data-packs', item.productId, (item.analysisRevision ?? item.analysisReuse).version, 'preview-product.json');
       if (!fs.existsSync(file)) throw Error(`改訂案の生成が必要です: ${item.productId} (--all)`);
       return read(file);
     });
@@ -236,8 +248,7 @@ if (require.main === module) {
     if (check) {
       if (fs.readFileSync(previewPath, 'utf8') !== previewModule(candidates)) throw Error('サイト用の改訂候補一覧が古くなっています');
     } else fs.writeFileSync(previewPath, previewModule(candidates));
-    const files = buildPreviewFiles(STOREFRONT_PRODUCTS.map(product => candidates.find(candidate => candidate.id === product.id) ?? product),
-      { revisionIds: candidates.map(product => product.id) });
+    const files = buildPreviewFiles(STOREFRONT_PRODUCTS, { revisions: candidates });
     const directory = path.join(ROOT, '.local/product-portfolio/analysis-landings');
     writePreviewFiles(files, directory, process.argv.includes('--check'));
     if (!check) for (const id of ids) await buildAnalysisPack(id, false, true);

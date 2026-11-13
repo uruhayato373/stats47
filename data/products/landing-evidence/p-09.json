@@ -64,5 +64,236 @@
       }
     ]
   },
-  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2001〜2026年で指標ごとに異なり、時系列データではありません。"
+  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2001〜2026年で指標ごとに異なり、時系列データではありません。",
+  "analysisRevision": {
+    "productId": "P-09",
+    "version": "analysis-20261113",
+    "planSha256": "5a1aa531464a934802ee00f07af8782683bac0eef3c31857004f505b045341ae",
+    "resolvedPlanSha256": "02f71d3df8dfc6e17524af5a0f8ab3823d9d6729f1e76b15c5208bd6cbefd737",
+    "sources": [
+      {
+        "id": "prefecture-manufacturing",
+        "inputs": [
+          {
+            "metricKey": "manufacturing-shipment-amount",
+            "statsDataId": "0000010103",
+            "code": "C3401",
+            "unit": "百万円"
+          }
+        ],
+        "grain": "prefecture",
+        "years": [
+          2022,
+          2023
+        ],
+        "retrievedAt": "2026-11-13T01:27:44.784Z",
+        "tableTitle": "Ｃ　経済基盤",
+        "rows": 94,
+        "areas": 47,
+        "missing": 0,
+        "coverage": [
+          {
+            "year": 2022,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2023,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          }
+        ],
+        "inputSha256": "7d017ec4567a3c0b172ae15d1fc88d891bf5fee6829362cb816c1bac0d294e7c"
+      }
+    ],
+    "results": 51,
+    "files": [
+      {
+        "file": "data.csv",
+        "sha256": "78324070c2b09997aa00988b993de266fc721e78f598bdf49a2a1cc69147f1bd",
+        "bytes": 10654
+      },
+      {
+        "file": "analysis.csv",
+        "sha256": "9f49bcf74283671d9462f37160dd89f099d7fd192010ee3d168a228ff7a65519",
+        "bytes": 7604
+      },
+      {
+        "file": "analysis.xlsx",
+        "sha256": "0478da2ec6cd081bf47e60739fc67a01e72c690ef28c8f2a81087d85b2160800",
+        "bytes": 13071
+      },
+      {
+        "file": "SOURCES.csv",
+        "sha256": "e5d1a71141e12c6d3ca741fbe447e02a1db8ab341251239a6d82cb9a18ec2638",
+        "bytes": 759
+      },
+      {
+        "file": "LICENSE-ja.txt",
+        "sha256": "07eb760b739ab2c84ce33c7f3fdfaeee5f9f3118dc8efdbc36fccbc0767d4f29",
+        "bytes": 1265
+      },
+      {
+        "file": "analysis-plan.json",
+        "sha256": "ba6416e25c41329e274f0ddd61b96107515442b602786b8c62160059fe69e05b",
+        "bytes": 5181
+      },
+      {
+        "file": "figure-specs.json",
+        "sha256": "114b0ec038fe07c41bd466b75ecf43e0a9782f5687722ef5b166efb0a09a67a3",
+        "bytes": 7345
+      },
+      {
+        "file": "README.md",
+        "sha256": "032bdeb2f919f4936f57dd2ea9e155e7b276132c1b45b390e7ced4d4889b533f",
+        "bytes": 3035
+      },
+      {
+        "file": "READINESS.md",
+        "sha256": "6576547c7e97355fa49fc32178fd85e89046f2b35c0e43b6a3666be68f4c3e0f",
+        "bytes": 192
+      },
+      {
+        "file": "images/prefecture-manufacturing-scale-2023.png",
+        "sha256": "9230751f3ba0df420bda956707930e8cff8df590bca214435c869282a8147926",
+        "bytes": 167810
+      },
+      {
+        "file": "images/prefecture-manufacturing-trend.png",
+        "sha256": "745b66824cf18210917127da9a0c1bedc004b7c05c9b30ec06cfdb4e4c93ba2f",
+        "bytes": 102860
+      },
+      {
+        "file": "images/analysis-file-preview.png",
+        "sha256": "2351855d323ad27a822f99898e04e01ab61c9000b199080ce2f0a2284c41879f",
+        "bytes": 116527
+      },
+      {
+        "file": "inputs/prefecture-manufacturing.json",
+        "sha256": "7d017ec4567a3c0b172ae15d1fc88d891bf5fee6829362cb816c1bac0d294e7c",
+        "bytes": 893994
+      },
+      {
+        "file": "preview-product.json",
+        "sha256": "9d9bbb509403305c4ab526b62386d07ed999b9955aaf871733be3f7974036a3f",
+        "bytes": 4368
+      },
+      {
+        "file": "analysis-pack.zip",
+        "sha256": "e22c21688a6c1a961f2ef0a8f307aeea7e9261539eb898ca6be3aafa04ffaa74",
+        "bytes": 365494
+      }
+    ]
+  },
+  "analysisDelivery": {
+    "productId": "P-09",
+    "status": "prepared",
+    "version": "analysis-20261113",
+    "sourceManifestSha256": "1a39089f490fb5031309583f6cc4061ae63171bbcdd9179990c2b397fb4b6905",
+    "planSha256": "5a1aa531464a934802ee00f07af8782683bac0eef3c31857004f505b045341ae",
+    "archive": {
+      "bucket": "stats47-private",
+      "key": "note/product-analysis-archives/P-09/analysis-20261113/e22c21688a6c1a961f2ef0a8f307aeea7e9261539eb898ca6be3aafa04ffaa74.zip",
+      "sha256": "e22c21688a6c1a961f2ef0a8f307aeea7e9261539eb898ca6be3aafa04ffaa74",
+      "bytes": 365494
+    },
+    "attachmentName": "P-09-analysis-20261113-analysis.zip",
+    "snapshot": {
+      "description": "2023年の製造品出荷額等の地域比較と2022〜2023年の推移を分け、製造業の名目金額の規模を説明できます。",
+      "included": [
+        "製造品出荷額等（47地域・2022〜2023年・94行）",
+        "CSV・Excel、分析結果CSV、共通型の図表PNG、出典・計算方法・取得原票"
+      ],
+      "useCases": [
+        {
+          "title": "産業振興の現状説明に",
+          "description": "2023年の製造品出荷額等の分布から比較地域を選び、名目金額の規模を説明できます。"
+        },
+        {
+          "title": "地域経済の比較資料に",
+          "description": "愛知県・東京都の2022〜2023年の値を比較し、同じ調査対象の金額の変化を整理できます。"
+        }
+      ],
+      "purchaseNotes": [
+        "この改訂分析では出荷額の規模と推移を扱います。従業者数との結合や生産性の計算は行っていません。"
+      ],
+      "showcaseNote": "分析の図は追加ファイルに同梱する観測値から計算しています。既存の固定版とは対象地域・基準年・収録形式が異なるため、各図の条件と出典を確認してください。",
+      "showcase": [
+        {
+          "id": "prefecture-manufacturing-scale-2023",
+          "kind": "chart",
+          "heading": "2023年の製造品出荷額等の規模を比べる",
+          "lead": "2023年の製造品出荷額等を47都道府県の棒グラフで比較します。名目金額の規模の違いを、産業振興の説明資料にできます。",
+          "note": "従業者4人以上の事業所の名目金額です。付加価値・利益や生産性ではありません。",
+          "themeRefs": [
+            {
+              "themeKey": "manufacturing",
+              "sectionKey": "production",
+              "title": "製造業",
+              "sectionTitle": "生産規模",
+              "href": "/themes/manufacturing#theme-section-production"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261113-prefecture-manufacturing-scale-2023.png",
+              "alt": "2023年の製造品出荷額等（2023年）",
+              "template": "bar",
+              "sha256": "9230751f3ba0df420bda956707930e8cff8df590bca214435c869282a8147926"
+            }
+          ]
+        },
+        {
+          "id": "prefecture-manufacturing-trend",
+          "kind": "chart",
+          "heading": "2022〜2023年の名目金額の推移を見る",
+          "lead": "愛知県・東京都の2022・2023年の製造品出荷額等を折れ線で比較します。地域間の規模の違いと、同じ地域の2年の変化を分けて確認できます。",
+          "note": "比較期間は2年です。長期傾向や変化の原因を断定せず、物価変動を含む名目金額として読みます。従業者あたり出荷額や付加価値を示す図ではありません。",
+          "themeRefs": [
+            {
+              "themeKey": "manufacturing",
+              "sectionKey": "production",
+              "title": "製造業",
+              "sectionTitle": "生産規模",
+              "href": "/themes/manufacturing#theme-section-production"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261113-prefecture-manufacturing-trend.png",
+              "alt": "製造品出荷額等の推移（愛知県・東京都・2022〜2023年）",
+              "template": "line",
+              "sha256": "745b66824cf18210917127da9a0c1bedc004b7c05c9b30ec06cfdb4e4c93ba2f"
+            }
+          ]
+        },
+        {
+          "kind": "file",
+          "heading": "ファイルの中身",
+          "lead": "地域コード・地域名・年・指標・値・単位を列に持つCSVとExcelです。観測値と分析結果を分け、欠測は理由付きで保持します。",
+          "figures": [
+            {
+              "file": "analysis-20261113-analysis-file-preview.png",
+              "alt": "製造品出荷額等の規模と推移を読むデータ集のCSV見本",
+              "template": "file-preview",
+              "sha256": "2351855d323ad27a822f99898e04e01ab61c9000b199080ce2f0a2284c41879f"
+            }
+          ],
+          "id": "analysis-file-2"
+        }
+      ]
+    }
+  }
 }

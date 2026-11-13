@@ -1,5 +1,7 @@
+import Link from "@/components/atoms/SiteLink";
 import { SectionHeader } from "@/components/section";
 
+import { navSurfaceProps } from "@/lib/analytics/events";
 import { ogpImageUrl } from "@/lib/metadata/ogp-image";
 
 import type { StorefrontProduct, StorefrontShowcaseSection } from "../types";
@@ -10,7 +12,7 @@ function ShowcaseSection({ section, slug }: {
   readonly slug: string;
 }) {
   return (
-    <section aria-label={section.heading} className={`@container flex min-w-0 flex-col gap-3${section.figures.length > 1 ? " @sm:col-span-2" : ""}`}>
+    <section id={section.id ? `example-${section.id}` : undefined} aria-label={section.heading} className={`@container scroll-mt-24 flex min-w-0 flex-col gap-3${section.figures.length > 1 ? " @sm:col-span-2" : ""}`}>
       <SectionHeader title={section.heading} as={section.kind === "chart" ? "h3" : "h2"} hideRule className="mb-0" />
       <ul className={`grid gap-4${section.figures.length > 1 ? " @sm:grid-cols-2" : ""}`}>
         {section.figures.map((figure) => (
@@ -32,6 +34,13 @@ function ShowcaseSection({ section, slug }: {
       </ul>
       <p className="text-sm leading-relaxed text-pretty">{section.lead}</p>
       {section.note && <p className="text-xs leading-relaxed text-muted-foreground">{section.note}</p>}
+      {section.themeRefs?.length ? <ul className="flex flex-col gap-1 text-sm" aria-label="関連するテーマ" {...navSurfaceProps('product_theme')}>
+        {section.themeRefs.map(ref => <li key={ref.href}>
+          <Link href={ref.href} className="inline-flex min-h-11 items-center text-primary hover:underline">
+            {ref.title}：{ref.sectionTitle} →
+          </Link>
+        </li>)}
+      </ul> : null}
     </section>
   );
 }

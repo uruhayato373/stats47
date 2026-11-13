@@ -25,7 +25,13 @@
       "metricKeys": [
         "total-overnight-guests"
       ],
-      "preferredTemplate": "bar"
+      "preferredTemplate": "bar",
+      "themeRefs": [
+        {
+          "themeKey": "tourism",
+          "sectionKey": "stays"
+        }
+      ]
     },
     {
       "id": "foreign-overnight-distribution",
@@ -34,7 +40,13 @@
       "metricKeys": [
         "total-overnight-guests-foreign"
       ],
-      "preferredTemplate": "choropleth"
+      "preferredTemplate": "choropleth",
+      "themeRefs": [
+        {
+          "themeKey": "tourism",
+          "sectionKey": "stays"
+        }
+      ]
     },
     {
       "id": "room-utilization",
@@ -43,7 +55,13 @@
       "metricKeys": [
         "room-utilization-rate"
       ],
-      "preferredTemplate": "bar"
+      "preferredTemplate": "bar",
+      "themeRefs": [
+        {
+          "themeKey": "tourism",
+          "sectionKey": "accommodation"
+        }
+      ]
     }
   ],
   "purchaseNotes": [
@@ -51,19 +69,19 @@
     "収録版の値を固定した商品です。月別の繁閑や将来の宿泊需要を予測するデータではありません。"
   ],
   "analysisPlan": {
-    "objective": "宿泊者数、外国人比率、稼働率の県別推移から需要の規模と客室利用を分けて把握する。採用・調査対象は改訂設計であり、販売中の固定納品への追加を示しません。",
+    "objective": "2019〜2024年の延べ宿泊者数と外国人延べ宿泊者数の割合を別々の図で確認し、宿泊の規模と構成を整理できます。 採用対象は改訂分析であり、販売中の固定納品への追加を示しません。",
     "inputs": [
       {
         "metricKey": "total-overnight-guests",
         "scope": "prefecture",
         "decision": "use",
-        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+        "reason": "原典で対象・年・単位を確認した改訂分析の入力。宿泊旅行統計調査に基づく従業者数10人以上の宿泊施設の暦年値。外国人延べ宿泊者数を同じ範囲の延べ宿泊者総数で割り、割合を算出する。10人未満の施設を含む全施設の推計値と混ぜない。"
       },
       {
         "metricKey": "total-overnight-guests-foreign",
         "scope": "prefecture",
         "decision": "use",
-        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+        "reason": "原典で対象・年・単位を確認した改訂分析の入力。宿泊旅行統計調査に基づく従業者数10人以上の宿泊施設の暦年値。外国人延べ宿泊者数を同じ範囲の延べ宿泊者総数で割り、割合を算出する。10人未満の施設を含む全施設の推計値と混ぜない。"
       },
       {
         "metricKey": "room-utilization-rate",
@@ -84,6 +102,141 @@
     "limitations": [
       "観光目的と業務目的の宿泊を人数の合計だけで識別できない。調査対象・回収範囲の変更を時系列比較前に確認する。",
       "市区町村宿泊データを追加する場合は、別原典で対象・年・欠測を確認してから改訂する。"
+    ],
+    "axes": [
+      {
+        "axis": "trend",
+        "decision": "required",
+        "reason": "比較可能な年度の変化を、計算結果と作成例で示す。",
+        "recipeRefs": [
+          "tokyo-overnight-stays-trend",
+          "tokyo-foreign-overnight-share"
+        ]
+      },
+      {
+        "axis": "composition",
+        "decision": "required",
+        "reason": "同じ地域・年度・母集団の全体と部分を使い、構成割合を示す。",
+        "recipeRefs": [
+          "tokyo-foreign-overnight-share"
+        ]
+      },
+      {
+        "axis": "comparison",
+        "decision": "deferred",
+        "reason": "改訂案の図は東京都の推移に限定。取得済み47県×6年を使った県間比較を追加する。",
+        "recipeRefs": []
+      }
     ]
+  },
+  "analysisRevision": {
+    "title": "宿泊需要の規模と外国人割合を読むデータ集",
+    "description": "2019〜2024年の延べ宿泊者数と外国人延べ宿泊者数の割合を別々の図で確認し、宿泊の規模と構成を整理できます。",
+    "useCases": [
+      {
+        "title": "観光施策の現状説明に",
+        "description": "延べ宿泊者数の推移と外国人割合を分け、東京都の例から宿泊の規模と構成の変化を説明できます。"
+      },
+      {
+        "title": "宿泊統計の読み方を学ぶ研修に",
+        "description": "人数の合計と割合を別図で比較し、対象施設の範囲を揃えて時系列を読む練習ができます。"
+      }
+    ],
+    "sources": [
+      {
+        "id": "prefecture-overnight-stays",
+        "title": "延べ宿泊者数・外国人延べ宿泊者数",
+        "grain": "prefecture",
+        "years": [
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "inputs": [
+          {
+            "metricKey": "total-overnight-guests"
+          },
+          {
+            "metricKey": "total-overnight-guests-foreign"
+          }
+        ],
+        "definition": "宿泊旅行統計調査に基づく従業者数10人以上の宿泊施設の暦年値。外国人延べ宿泊者数を同じ範囲の延べ宿泊者総数で割り、割合を算出する。10人未満の施設を含む全施設の推計値と混ぜない。",
+        "boundary": "都道府県47地域。全国集計を除外。"
+      }
+    ],
+    "recipes": [
+      {
+        "id": "tokyo-overnight-stays-trend",
+        "heading": "延べ宿泊者数の変化を見る",
+        "lead": "東京都について2019〜2024年の延べ宿泊者数を確認します。人泊の合計を折れ線で示し、宿泊需要の規模の変化を説明できます。",
+        "sourceId": "prefecture-overnight-stays",
+        "metricIds": [
+          "total-overnight-guests"
+        ],
+        "method": "series",
+        "template": "line",
+        "references": [
+          "ssds-overnight-stays"
+        ],
+        "limitation": "延べ人数であり、実際に訪れた人の数ではありません。観光目的と業務目的は識別できず、従業者数10人未満の施設を含みません。",
+        "presentationMetricKey": "total-overnight-guests",
+        "themeRefs": [
+          {
+            "themeKey": "tourism",
+            "sectionKey": "stays"
+          }
+        ],
+        "areaCode": "13000",
+        "chartTitle": "東京都の延べ宿泊者数",
+        "scopeLabel": "東京都"
+      },
+      {
+        "id": "tokyo-foreign-overnight-share",
+        "heading": "外国人宿泊の割合を別の図で見る",
+        "lead": "東京都の外国人延べ宿泊者数を延べ宿泊者総数で割り、2019〜2024年の割合を比較します。宿泊総数の図と見比べ、規模と構成の違いを説明できます。",
+        "sourceId": "prefecture-overnight-stays",
+        "metricIds": [
+          "total-overnight-guests-foreign"
+        ],
+        "method": "share",
+        "template": "line",
+        "references": [
+          "ssds-overnight-stays"
+        ],
+        "limitation": "分母・分子とも従業者数10人以上の施設の人泊です。外国人旅行者の実人数割合や、全宿泊施設の外国人割合とは異なります。",
+        "presentationMetricKey": "total-overnight-guests-foreign",
+        "themeRefs": [
+          {
+            "themeKey": "tourism",
+            "sectionKey": "stays"
+          }
+        ],
+        "denominatorId": "total-overnight-guests",
+        "areaCode": "13000",
+        "chartTitle": "東京都の外国人延べ宿泊者数の割合",
+        "scopeLabel": "東京都"
+      }
+    ],
+    "notes": [
+      "都道府県47地域のデータを対象とし、東京都は作成例です。市区町村の宿泊需要へ値を割り振りません。",
+      "従業者数10人以上の施設の結果です。全施設を含む観光庁の推計値と区別してください。"
+    ],
+    "research": {
+      "method": "確認済みの社会・人口統計体系の原典表・項目定義に基づき、地域単位・年・調査対象・単位を揃え、欠測・秘匿と実値0を区別して比較する。",
+      "references": [
+        {
+          "id": "ssds-overnight-stays",
+          "title": "社会・人口統計体系 G7101・G7102 延べ宿泊者数",
+          "url": "https://www.e-stat.go.jp/dbview?sid=0000010107",
+          "section": "G7101・G7102 延べ宿泊者数",
+          "finding": "両指標は従業者数10人以上の宿泊施設が対象。2019〜2024年の暦年値を揃え、規模と外国人割合を別図で示す。",
+          "checkedAt": "2026-11-13"
+        }
+      ]
+    },
+    "version": "analysis-20261113"
   }
 }

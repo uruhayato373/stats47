@@ -1,0 +1,237 @@
+[
+  {
+    "prefectureCode": "10000",
+    "name": "前橋市",
+    "estatAreaCode": "10003"
+  },
+  {
+    "prefectureCode": "11000",
+    "name": "さいたま市",
+    "estatAreaCode": "11003"
+  },
+  {
+    "prefectureCode": "12000",
+    "name": "千葉市",
+    "estatAreaCode": "12003"
+  },
+  {
+    "prefectureCode": "13000",
+    "name": "東京都区部",
+    "estatAreaCode": "13003"
+  },
+  {
+    "prefectureCode": "14000",
+    "name": "横浜市",
+    "estatAreaCode": "14003"
+  },
+  {
+    "prefectureCode": "15000",
+    "name": "新潟市",
+    "estatAreaCode": "15003"
+  },
+  {
+    "prefectureCode": "16000",
+    "name": "富山市",
+    "estatAreaCode": "16003"
+  },
+  {
+    "prefectureCode": "17000",
+    "name": "金沢市",
+    "estatAreaCode": "17003"
+  },
+  {
+    "prefectureCode": "18000",
+    "name": "福井市",
+    "estatAreaCode": "18003"
+  },
+  {
+    "prefectureCode": "19000",
+    "name": "甲府市",
+    "estatAreaCode": "19003"
+  },
+  {
+    "prefectureCode": "20000",
+    "name": "長野市",
+    "estatAreaCode": "20003"
+  },
+  {
+    "prefectureCode": "21000",
+    "name": "岐阜市",
+    "estatAreaCode": "21003"
+  },
+  {
+    "prefectureCode": "22000",
+    "name": "静岡市",
+    "estatAreaCode": "22003"
+  },
+  {
+    "prefectureCode": "23000",
+    "name": "名古屋市",
+    "estatAreaCode": "23003"
+  },
+  {
+    "prefectureCode": "24000",
+    "name": "津市",
+    "estatAreaCode": "24003"
+  },
+  {
+    "prefectureCode": "25000",
+    "name": "大津市",
+    "estatAreaCode": "25003"
+  },
+  {
+    "prefectureCode": "26000",
+    "name": "京都市",
+    "estatAreaCode": "26003"
+  },
+  {
+    "prefectureCode": "27000",
+    "name": "大阪市",
+    "estatAreaCode": "27003"
+  },
+  {
+    "prefectureCode": "28000",
+    "name": "神戸市",
+    "estatAreaCode": "28003"
+  },
+  {
+    "prefectureCode": "29000",
+    "name": "奈良市",
+    "estatAreaCode": "29003"
+  },
+  {
+    "prefectureCode": "30000",
+    "name": "和歌山市",
+    "estatAreaCode": "30003"
+  },
+  {
+    "prefectureCode": "31000",
+    "name": "鳥取市",
+    "estatAreaCode": "31003"
+  },
+  {
+    "prefectureCode": "32000",
+    "name": "松江市",
+    "estatAreaCode": "32003"
+  },
+  {
+    "prefectureCode": "33000",
+    "name": "岡山市",
+    "estatAreaCode": "33003"
+  },
+  {
+    "prefectureCode": "34000",
+    "name": "広島市",
+    "estatAreaCode": "34003"
+  },
+  {
+    "prefectureCode": "35000",
+    "name": "山口市",
+    "estatAreaCode": "35003"
+  },
+  {
+    "prefectureCode": "36000",
+    "name": "徳島市",
+    "estatAreaCode": "36003"
+  },
+  {
+    "prefectureCode": "37000",
+    "name": "高松市",
+    "estatAreaCode": "37003"
+  },
+  {
+    "prefectureCode": "38000",
+    "name": "松山市",
+    "estatAreaCode": "38003"
+  },
+  {
+    "prefectureCode": "39000",
+    "name": "高知市",
+    "estatAreaCode": "39003"
+  },
+  {
+    "prefectureCode": "40000",
+    "name": "福岡市",
+    "estatAreaCode": "40004"
+  },
+  {
+    "prefectureCode": "41000",
+    "name": "佐賀市",
+    "estatAreaCode": "41003"
+  },
+  {
+    "prefectureCode": "42000",
+    "name": "長崎市",
+    "estatAreaCode": "42003"
+  },
+  {
+    "prefectureCode": "43000",
+    "name": "熊本市",
+    "estatAreaCode": "43003"
+  },
+  {
+    "prefectureCode": "44000",
+    "name": "大分市",
+    "estatAreaCode": "44003"
+  },
+  {
+    "prefectureCode": "45000",
+    "name": "宮崎市",
+    "estatAreaCode": "45003"
+  },
+  {
+    "prefectureCode": "46000",
+    "name": "鹿児島市",
+    "estatAreaCode": "46003"
+  },
+  {
+    "prefectureCode": "47000",
+    "name": "那覇市",
+    "estatAreaCode": "47003"
+  },
+  {
+    "prefectureCode": "01000",
+    "name": "札幌市",
+    "estatAreaCode": "01003"
+  },
+  {
+    "prefectureCode": "02000",
+    "name": "青森市",
+    "estatAreaCode": "02003"
+  },
+  {
+    "prefectureCode": "03000",
+    "name": "盛岡市",
+    "estatAreaCode": "03003"
+  },
+  {
+    "prefectureCode": "04000",
+    "name": "仙台市",
+    "estatAreaCode": "04003"
+  },
+  {
+    "prefectureCode": "05000",
+    "name": "秋田市",
+    "estatAreaCode": "05003"
+  },
+  {
+    "prefectureCode": "06000",
+    "name": "山形市",
+    "estatAreaCode": "06003"
+  },
+  {
+    "prefectureCode": "07000",
+    "name": "福島市",
+    "estatAreaCode": "07003"
+  },
+  {
+    "prefectureCode": "08000",
+    "name": "水戸市",
+    "estatAreaCode": "08003"
+  },
+  {
+    "prefectureCode": "09000",
+    "name": "宇都宮市",
+    "estatAreaCode": "09003"
+  }
+]
