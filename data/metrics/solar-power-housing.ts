@@ -34,7 +34,7 @@ export const solarPowerHousing: MetricConfig = {
   },
   "display": {
     "conversionFactor": 0.0001,
-    "decimalPlaces": 0,
+    "decimalPlaces": 1,
     "displayUnit": "万戸",
   },
   "calculation": {

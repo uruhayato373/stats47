@@ -127,18 +127,35 @@ Instagram の型の画像) は、**図ごとに 1 つ**の表示単位を選び�
 | 台帳 | `data/metrics/display-units/ledger.json` (+ schema)。公開中の全ランキングの単位・倍率・小数桁と最新年の最大・最小。`build-chart-display-units.ts` が R2 から作る (週次 `npm run weekly:audits` の display-units)。手で編集しない |
 | 検査 | PR の Metric Config Gate の `check:display-units`: 台帳が規則と一致すること・読めない単位で 6 桁以上の指標が増えないこと (縮小専用) を止める。台帳に無い指標・単位を直した指標は警告 (週次で埋まる) |
 
-指標定義の `display` (表示単位と係数) は、ランキングページの地図の凡例が使う。**係数は `validate:config` の
-`[display-factor]` が単位の正典で検算する** (2026-11-03 に「千円→万円」を 0.001 と書いた 9 件が凡例を 10〜100 倍
-ずらしていた)。正典が解釈できない単位でも、表示単位が「万」「億」を前に付けただけなら接頭辞の倍率で検算する。
+指標定義の `display` (表示単位と係数) の**係数は `validate:config` の `[display-factor]` が単位の正典で検算する**
+(2026-11-03 に「千円→万円」を 0.001 と書いた 9 件が 10〜100 倍ずれていた)。正典が解釈できない単位でも、表示単位が
+「万」「億」を前に付けただけなら接頭辞の倍率で検算する。定義の `display` と図の規則の関係は §2.7。
 
 初回の実測 (2026-11-03・公開中 2,463 指標): 単位を寄せる 543 / 寄せない小さい値 1,260 / 量でない 579 / 値なし 38 /
 解釈できない 43 (うち 6 桁以上 13: TJ・万MJ・kg/日・m³/日・円/m²・総トン・人/日)。
+
+## 2.7 指標の表示単位は 1 か所で決め、定義と図の規則を重ねて掛けない (2026-11-14)
+
+表示単位を決める仕組みは 2 つある: 指標の定義の `display` (人が書いた「万円」「MW」) と、§2.6 の図の規則。
+両方を別々に掛けると二重に換算されるので、画面は入口を 1 つにする。
+
+| 決めごと | 内容 |
+|---|---|
+| 入口 | `packages/data-configs/src/unit/metric-display-scale.ts` の `resolveMetricDisplayScale`。定義が `displayUnit` を書いていれば定義の単位・係数・小数桁、書いていなければ図の規則。**どちらか 1 つだけ**を元の値に掛ける |
+| ランキング | `@stats47/ranking` の `resolveRankingValueDisplay` が 1 回決め、上位と下位・推移・地図のホバー・表・県の詳細・ブログ本文のランキングカード (`/api/ranking-card`) が同じ単位・倍率・小数桁で書く。値は元の単位のまま持ち回り、書くときに `formatRankingValue(value, precision, factor)` で掛ける (順位・偏差値・地図の色は元の値で決まる)。0 でないのに 0 に丸まる値は「0.1未満」 |
+| 換算しない場合 | 人口あたり・面積あたりの表示 (選んだ計算方法の単位で配信される) と市区町村の表示は元の単位のまま。単位を変えない指標は今までどおり観測値の桁で書く |
+| 定義の検査 | `validate:config` の `[display-denominator]`: 表示単位が「/日」「/12h」を落とさない。`check:display-units` の `checkAuthoredDisplays`: 台帳の最新年の最大・最小に照らし、7 桁以上 (`[display-digits]`)・図の規則と違う小数桁 (`[display-decimals]`)・図の規則なら丸まらない最小の県が 0 に丸まる (`[display-hides-min]`) を止める |
+| 台帳を作り直したとき | 値が動いて表示の最大が 1,000 をまたぐと `[display-decimals]` が落ちる。指標の定義の `decimalPlaces` を 1 行直す。計算型 (`fetcherKey:"calculated"`) は `decimalPlaces` が配信値の丸め桁でもあるので、直したら作り直す |
+
+初回の監査 (2026-11-14・表示単位を書いた 71 指標): 7 桁以上 2 件 (年金総額が 243,603,259 万円)・分母を落とす 3 件・
+小数桁の食い違い 18 件・最小の県が 0 に丸まる 2 件を直した。
 
 ## 3. 禁止事項
 
 | NG | OK |
 |---|---|
 | 図の値を値ごとに 万・億 で寄せる / 図の表示単位の係数を手で書く | `resolveChartDisplayScale` で図ごとに 1 つ決める (§2.6) |
+| 画面で `display.conversionFactor` や `resolveChartDisplayScale` を直接掛ける (二重換算のもと) | `resolveMetricDisplayScale` / `resolveRankingValueDisplay` で 1 回決める (§2.7) |
 | 新しいスケール表 (`{ 千: 1e3, 万: 1e4 }` 等) をファイル内に書く | `unit-semantics` の `scalePrefixMultiplier` / `conversionFactor` を呼ぶ |
 | 換算不能を 1 倍にフォールバックする | `null` を返して呼び出し側に比較を諦めさせる |
 | 鏡 (`.claude/scripts/lib/unit-semantics.mjs`) を直接編集 | 正典を編集して再生成 |

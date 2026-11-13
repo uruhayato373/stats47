@@ -17,6 +17,7 @@ export * from "./normalize-ranking-item-properties";
 export * from "./prepare-hierarchical-rankings";
 export * from "./rank-by-value";
 export * from "./ranking-display-formatter";
+export * from "./ranking-value-display";
 export * from "./source-config";
 export * from "./to-bar-chart-race-frames";
 export * from "./to-display-entry";

@@ -29,6 +29,8 @@ interface RankingNationalAverageStatProps {
    * 平均だけ別の桁数で出すと表と食い違うため、ここで独自に決めない。
    */
   precision: number;
+  /** 表示単位への倍率 (ページが決めた表示単位があるとき)。値と推移は元の単位のまま受け取る */
+  factor?: number;
   presentation: Pick<MetricPresentation, "colorScheme" | "trendDomain">;
 }
 
@@ -43,6 +45,7 @@ export function RankingNationalAverageStat({
   series,
   yearName,
   precision,
+  factor = 1,
   presentation,
 }: RankingNationalAverageStatProps) {
   if (figure === null) return null;
@@ -98,7 +101,7 @@ export function RankingNationalAverageStat({
           <div key={summary.label} className="flex items-baseline whitespace-nowrap" title={summary.description}>
             <dt className="text-xs text-muted-foreground">{summary.label}：</dt>
             <dd className={cn(STAT_VALUE_CLASS, hasTotal && "text-base leading-6")}>
-              {summary.value == null ? "—" : formatRankingValue(summary.value, precision)}
+              {summary.value == null ? "—" : formatRankingValue(summary.value, precision, factor)}
               {summary.value != null && <span className={STAT_UNIT_CLASS}>{displayUnit}</span>}
             </dd>
           </div>
@@ -110,7 +113,7 @@ export function RankingNationalAverageStat({
           policy={trendPolicy}
           label={lineLabel}
           unit={displayUnit}
-          formatValue={(value) => formatRankingValue(value, precision)}
+          formatValue={(value) => formatRankingValue(value, precision, factor)}
           fillHeight
           showAxes={false}
           areaSeries={areaSeries}

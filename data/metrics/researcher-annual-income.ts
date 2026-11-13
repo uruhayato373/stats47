@@ -34,7 +34,7 @@ export const researcherAnnualIncome: MetricConfig = {
   },
   "yearFormat": "calendar",
   "display": {
-    "decimalPlaces": 1,
+    "decimalPlaces": 0,
     "displayUnit": "万円",
   },
   "calculation": {

@@ -33,7 +33,6 @@ export const averageRoadTrafficVolume: MetricConfig = {
   "display": {
     "conversionFactor": 1,
     "decimalPlaces": 0,
-    "displayUnit": "台"
   },
   "calculation": {
     "isCalculated": false

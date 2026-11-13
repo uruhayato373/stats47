@@ -30,7 +30,7 @@ export const windPowerCapacity: MetricConfig = {
   },
   "display": {
     "conversionFactor": 0.001,
-    "decimalPlaces": 0,
+    "decimalPlaces": 1,
     "displayUnit": "MW",
   },
   "calculation": {
