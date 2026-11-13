@@ -129,6 +129,16 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [NSM-REVENUE-INPUTS-01] 週次収益 (KGI) を判定不能にしている note の売上と Kindle の日別観測の欠けを直す
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node --test .claude/scripts/metrics/__tests__/weekly-revenue.test.mjs] [起票:2026-11-14] [領域:管理]
+
+- **事実 (2026-11-14、W44)**: 管理画面のホームと KPI ツリーの週次収益は `weekly-revenue.mjs` で計算するようになったが、合計に入る note が判定不能なので週次収益の値が出ない (判定できた分は AdSense の ¥313 だけ)。
+- **原因 1 (note)**: 認証付き計測の note は閲覧数の収集が pass でも、売上 API が `revenueStatus: verification_required` (再確認切れ) を返し、`summarize.mjs` が `revenue-history.json` へ足さない。note の最終観測は 2026-10-17 のまま。
+- **原因 2 (Kindle)**: `product-revenue.mjs` は日別の観測 7 日分を要求するが、取得は土曜の週 1 回で「昨日」の 1 日分しか入らない (`recorded-measurement-first.md` の既知の制約)。構造上 7/7 にならない。Kindle は見積りなので合計には入れないが、有料購入 (KPI) が判定不能のまま。
+- **次**: ① note の売上 API の再確認をオーナーと土曜のレビューで通し、`revenue-history.json` に 11 月の行が入ることを確かめる ② Kindle は「過去 7 日間」の取得へ切り替えるか、週 1 点で数える定義へ変えるかを決める (`MEASUREMENT-MAC-DIRECT-01` の既知の制約と同じ箇所)。
+- **停止条件**: 2 段階認証・再確認を自動化しない。欠測を 0 円で埋めない。
+- **完了条件**: 管理画面のホームで週次収益が「判定不能」でなく金額で出る週が 1 週ある。
+
 ### [BLOG-ISR-STALE-ON-REVISE-01] 改稿版を公開しても、公開前に開かれたページは旧版のまま残る
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:サイト]
 

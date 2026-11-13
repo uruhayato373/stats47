@@ -25,6 +25,7 @@ import {
 import { judgeability } from "./lib/gsc-improvements-adapter.mjs";
 import { parseDimensionLedger } from "../google-admin/dimension-ledger.mjs";
 import { parseBacklog } from "../lib/scan-pending-improvements.mjs";
+import { summarizeWeeklyRevenue } from "./lib/weekly-revenue.mjs";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const strategyLanes = createRequire(import.meta.url)("../lib/strategy-lanes.cjs");
@@ -178,6 +179,18 @@ function main() {
   const journey = transitions.rows && pagesClean ? summarizeJourney({ transitions: transitions.rows, pagesClean }) : null;
   const workContext = landing.rows ? summarizeWorkContext(landing.rows) : null;
   const operations = buildOperations(week, asOf, pending);
+  const adsenseHistory = readCsvIfExists(join(PROJECT_ROOT, datasetDir("adsense.history"), "history.csv"));
+  const weeklyRevenue = summarizeWeeklyRevenue({
+    week,
+    weekStart: isoWeekToDateRange(week).startDate,
+    weekEnd: asOf,
+    asOf: new Date(`${asOf}T23:59:59Z`),
+    adsenseHistory,
+    revenueHistory: readJsonIfExists(`${datasetDir("revenue.authenticated")}/revenue-history.json`),
+    authLatest: readJsonIfExists(AUTHENTICATED_LATEST),
+    a8Results: readJsonIfExists(datasetPath("a8.results")),
+    rakutenResults: readJsonIfExists(datasetPath("rakuten.results")),
+  });
   const kpiTree = summarizeKpiTree({
     ...readKpiInputs(),
     week,
@@ -185,7 +198,8 @@ function main() {
     gscHistory: readCsvIfExists(join(PROJECT_ROOT, datasetPath("gsc.history"))),
     ga4Finalized: readCsvIfExists(join(PROJECT_ROOT, datasetPath("ga4.history-finalized"))),
     submittedHistory: readCsvIfExists(join(PROJECT_ROOT, datasetPath("gsc.coverage-submitted"))),
-    adsenseHistory: readCsvIfExists(join(PROJECT_ROOT, datasetDir("adsense.history"), "history.csv")),
+    adsenseHistory,
+    weeklyRevenue,
     cycleHistory: history,
     journey,
     workContext,

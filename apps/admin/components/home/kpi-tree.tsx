@@ -16,7 +16,6 @@ const TIER_LABEL = { nsm: "NSM", driver: "駆動", guardrail: "守り" } as cons
 const STATUS: Record<string, { tone: Tone; label: string }> = {
   ok: { tone: "good", label: "正常" },
   partial: { tone: "info", label: "一部" },
-  "see-nsm": { tone: "info", label: "内訳あり" },
   degraded: { tone: "warn", label: "劣化" },
   stale: { tone: "warn", label: "古い" },
   missing: { tone: "bad", label: "欠測" },
