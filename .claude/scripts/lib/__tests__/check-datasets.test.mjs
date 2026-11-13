@@ -526,6 +526,7 @@ test("[mutation] 投稿台帳: 指標を指す投稿の参照切れは error、w
   const clean = run();
   assert.deepEqual(clean.errors, []);
   for (const w of clean.warnings) assert.match(w, /posts\[\]\.content_key=.* が registry:ranking-content-keys に無い$/);
+  assert.deepEqual(clean.warnings, [], "YouTube・note の key は別の体系なので、ranking-content-keys と照合しない");
   const byId = new Map(doc.posts.map((p) => [p.id, p]));
   for (const w of clean.warnings) {
     const post = byId.get(Number(w.match(/\(id=(\d+)\)/)[1]));
@@ -553,7 +554,7 @@ test("[mutation] 投稿台帳: 指標を指す投稿の参照切れは error、w
   assert.deepEqual(run().errors, [], "戻すと通る");
 });
 
-test("[mutation] 投稿台帳: X・Threads の投稿の template は sns.x-catalog の templates[].id に無いと error (他媒体の template と下書きは対象外)", () => {
+test("[mutation] 投稿台帳: X・Threads の投稿の template は sns.x-catalog の templates[].id に無いと error (他媒体の template は対象外。下書きも対象)", () => {
   const catalogPath = datasetPath("sns.x-catalog");
   const files = ["data/sns/posts.json", catalogPath];
   const doc = JSON.parse(readFileSync(resolve(ROOT, "data/sns/posts.json"), "utf8"));
@@ -576,7 +577,7 @@ test("[mutation] 投稿台帳: X・Threads の投稿の template は sns.x-catal
   x.template = saved;
   const draftSaved = draft.template;
   draft.template = "no-such-template";
-  assert.deepEqual(templateErrors(), [], "下書きの仮の template は止めない (素材の取り込みが domain 名を入れる)");
+  assert.ok(templateErrors().some((e) => e.includes(`(id=${draft.id}) の posts[].template=no-such-template が sns.x-catalog の templates[].id に無い`)), "下書きも止める (素材の取り込みは型が無ければ template を空にし、domain 名を入れない)");
   draft.template = draftSaved;
   assert.deepEqual(templateErrors(), [], "戻すと通る (Instagram の ranking・area-carousel などはカタログに無くても error にしない)");
 });

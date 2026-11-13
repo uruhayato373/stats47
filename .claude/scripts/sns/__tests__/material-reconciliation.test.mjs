@@ -34,3 +34,13 @@ test('プレビューとhookだけの素材は投稿画像・完成本文とし�
   assert.throws(()=>materialDirectory(root,{...material,content_key:'../escape'}),/不正/);
  } finally {fs.rmSync(root,{recursive:true,force:true});}
 });
+test('素材に型 (draft.json の template) が無いとき、domain 名を仮の template として入れない (カタログの id ではないため)',()=>{
+ const root=fs.mkdtempSync(path.join(os.tmpdir(),'sns-import-'));
+ try {
+  const dir=path.join(root,'.local/r2/sns/area/01000/x');fs.mkdirSync(dir,{recursive:true});
+  fs.writeFileSync(path.join(dir,'a.png'),'test');
+  assert.equal(prepareMaterial(root,material).record.template,null);
+  fs.writeFileSync(path.join(dir,'draft.json'),JSON.stringify([{template:'question'}]));
+  assert.equal(prepareMaterial(root,material).record.template,'question');
+ } finally {fs.rmSync(root,{recursive:true,force:true});}
+});
