@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const highSchoolAdvancementRate: MetricConfig = {
   "key": "high-school-advancement-rate",
   "title": "高等学校卒業者の進学率",
+  "description": "当年3月の高等学校卒業者（新規）のうち進学者の占める割合。進学者には大学の学部と短期大学の本科への進学者を含み、専修学校・各種学校への入学者は含まない。分母は新規の高等学校卒業者で、浪人などの既卒者は入らない。出典は文部科学省の学校基本調査（社会・人口統計体系の E4701）。",
   "unit": "％",
   "category": "educationsports",
   "source": {
