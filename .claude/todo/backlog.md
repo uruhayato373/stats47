@@ -382,6 +382,7 @@ updated: 2026-11-01
 - **証拠 (2026-11-10)**: `sync-snapshots.yml` は `blog.json` を書き戻すが `metrics:build-index` を呼ばず、`data/metrics/index` も `git add` しない。記事の指標が変わった回の後は `metrics:check` が古い逆引きで落ちる (今回の作り直しで 29 ファイルが変わった)
 - **次**: 公開の workflow の最後で台帳と索引と逆引きを作り直して書き戻すか、`sync-snapshots` の書き戻しに逆引きを足すかを決めて実装する。台帳の 410 の 18 件は題が空なので、git の履歴の索引から埋められるかを確かめる
 - **完了条件**: ブログを 1 本公開した後、手で何も起動せずに `npm run content:check` と `npm run metrics:check --workspace packages/data-configs` が通る
+- **再発の観測 (2026-11-13)**: 公開ボットの書き戻し `ab2497213` が `known-tag-keys.ts` だけを進め、`data/content/pages/tag.json` の 3 タグ (園芸用品・えのきたけ・鳥取) の `published` が食い違った。origin/develop `8b3c71c02` の Catalog Gates が `content-identity-navigation` (「ID索引が古い状態です: tag」) で落ちた。`npm run content:sync` で作り直して通した。公開のたびに再発する。
 
 ### [WINDOWS-LOCAL-GATES-01] 会社の Windows PC でだけ落ちる検査を直す (パス区切り・改行)
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-10] [領域:管理]
