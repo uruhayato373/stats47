@@ -81,6 +81,12 @@ test("どのファイルにも当たらない行は落ちる (planned は通す)
   assert.deepEqual(r.errors, ["どのファイルにも当たらない: a (data/x.json)"]);
 });
 
+test("planned の行が追跡ファイルに当たっていれば落ちる (件数があるのに「まだ 1 件も無い」と宣言した食い違い)", () => {
+  const r = run([ds("a", "data/x/{**}", { planned: true })], ["data/x/1.json"]);
+  assert.deepEqual(r.errors, ["planned なのに追跡ファイルが 1 件ある (planned を外す): a (data/x/{**})"]);
+  assert.deepEqual(run([ds("a", "data/x/{**}", { planned: true })], ["data/x/.gitkeep"]).errors, []);
+});
+
 test("語彙外の kind / target / 領域と id の重複は落ちる", () => {
   const files = ["data/x.json"];
   assert.match(run([ds("a", "data/x.json", { kind: "nope" })], files).errors.join(), /語彙外の kind/);
