@@ -5,7 +5,7 @@ paths:
   - "data/surveys/**"
   - "config/schema/surveys.lenses.schema.json"
   - ".claude/scripts/lib/survey-lenses.mjs"
-  - "packages/data-configs/src/kakei-analysis-catalog.ts"
+  - "packages/data-configs/src/{kakei-analysis-catalog,survey-editorial}.ts"
   - ".claude/agents/survey-curator.md"
 ---
 # survey コンテンツクラスター標準 (survey-content-standards)
@@ -15,7 +15,7 @@ survey ハブの編集コンテンツ (summary / 分かること / 代表的な�
 agent (`survey-curator`) / 人間はこれに従う。2026-07-12 に旧 survey 別コンテンツクラスター計画
 の運用スペック（編集文法・ハブ構成・SSOT/境界・禁止事項）を本 rule へ抽出し、運用 SSOT を `.claude/` に一本化した。旧版が必要な場合は Git 履歴を参照する。
 
-> **実装済み SSOT**: survey 編集情報の git TS は `apps/web/src/features/survey/survey-editorial.ts`
+> **実装済み SSOT**: survey 編集情報はカタログの `surveys.editorial` (JSON + Schema。読み込みは `packages/data-configs/src/survey-editorial.ts`)
 > (`summary` / `whatYouCanLearn[]` / `readerQuestions[]{question,rankingKey}` / `caveats[]` / `relatedArticleSlugs[]` /
 > `areaLabel` (ハブ冒頭の地域の表記。都市別の値を集める調査だけ書く) / `relatedHubs[]{surveyKey,label}` (同じ調査の別ハブ))。
 > `readerQuestions` の rankingKey は、ハブの代表ランキングとランキングページの「同じ調査のランキング」でも最優先に並ぶ (2026-11-02)。
@@ -77,15 +77,14 @@ Google の people-first 方針に合わせ、独自分析・明確な出典・�
 
 ## SSOT と実装境界
 
-survey 固有の編集情報は低 volume・人手・型/review 対象なので **git TS を SSOT** とする
-(実装: `apps/web/src/features/survey/survey-editorial.ts`)。R2 JSON を手編集しない。調査マスタと
+survey 固有の編集情報は低 volume・人手・review 対象なので **`data/` の台帳 (`surveys.editorial`) を SSOT** とする。R2 JSON を手編集しない。調査マスタと
 ranking 紐付けの既存 SSOT (surveys.json / `resolveSurveyLinkage`) は変更しない。
 
 ```text
-packages/ranking/src/data/surveys.json
+surveys.master (カタログの ID)
   └─ 調査の reference 情報（名称・組織・URL）: 既存のまま
 
-apps/web/src/features/survey/survey-editorial.ts  ← survey 編集情報の git TS SSOT
+surveys.editorial (カタログの ID)  ← survey 編集情報の SSOT
   ├─ summary
   ├─ whatYouCanLearn[]
   ├─ readerQuestions[] { question, rankingKey }
@@ -122,9 +121,9 @@ R2 app/survey/<id>/items.json
 - 台帳が持たないもの: **展開の進み具合**。済み・企画中・見送りは展開記録 (`data/source-inventory/expansion.json`) と各チャネルの
   正本から集計する (`npm run surveys:lenses:status`)。同じ状態を 2 か所に書くとずれる。
 - 参照の向き: 資料の問い (`data/source-inventory/<source>/<edition>/analyses.json` の `lensIds`) と、調査ごとの分析単位
-  (家計調査は `packages/data-configs/src/kakei-analysis-catalog.ts` の `lensId`。問い × 表の軸 × 載せるページ) が切り口を参照する。
+  (家計調査はカタログの `surveys.analysis-units` の `lensId`。問い × 表の軸 × 載せるページ) が切り口を参照する。
   **切り口台帳のある調査を `surveyIds` に持つ問いは、資料を問わず 1 つ以上の切り口に結ぶ** (文脈だけの資料は任意)。
-- 検査: `npm run surveys:lenses:check` (PR CI)。調査 id・表 id の実在、問いと分析単位からの参照の実在、未接続の問いを止める。
+- 検査: `npm run surveys:lenses:check` (PR CI)。表 id の実在、問いと分析単位からの参照の実在 (調査 id の実在は check-datasets の refs)、未接続の問いを止める。
   品目単位の「どの品目を指標にし、どれを見送ったか」は調査ごとの台帳 (家計調査は `data/estat/kakei-ledger/`) が持ち、切り口台帳には書かない。
 - 新しい調査に切り口台帳を作るときは、表の棚卸し (e-Stat カタログ `npm run estat:catalog:search`) を先に行い、切り口ごとに使う表を確かめてから書く。
 
@@ -135,7 +134,7 @@ R2 app/survey/<id>/items.json
 1. **e-Stat カタログ → 調査の台帳** (家計調査は `data/estat/kakei-ledger/`): すべての表に採用・予定・除外を理由付きで書く。
    採用は指標か作成済みの分析単位から自動で決まり、予定・除外は `decisions.json` に書く。未判断の数は `maxUndecidedTables` を超えられない (縮小専用。判断したら下げる)
 2. **台帳 ↔ 切り口台帳**: 切り口が使う表は未判断にできない (`LENS_TABLE_UNDECIDED`)。採用・予定の表はどれかの切り口に属させる (`TABLE_WITHOUT_LENS`)。除外した表を切り口が使わない (`LENS_USES_EXCLUDED`)
-3. **台帳 → 指標・分析単位**: 指標 (`kind: kakei-chousa`) と分析単位 (`kakei-analysis-catalog.ts`) の両方を表の使い手として数える。予定の表を使う指標・図ができたら台帳を作り直す (`npm run estat:kakei-ledger:build`)
+3. **台帳 → 指標・分析単位**: 指標 (`kind: kakei-chousa`) と分析単位 (`surveys.analysis-units`) の両方を表の使い手として数える。予定の表を使う指標・図ができたら台帳を作り直す (`npm run estat:kakei-ledger:build`)
 4. **指標 → ページ**: テーマ・調査ハブ・ランキング・県ページは指標の定義と台帳を読むだけにする
 5. **週次レビュー**: `npm run weekly:audits` の survey-taxonomy が台帳と切り口台帳を検査し、予定のまま作られていない表 (`PLANNED_TABLES`) と未判断の数 (`UNDECIDED_TABLES`) を出す。レビュー本文の課題へ書き、backlog へ流す
 
@@ -178,8 +177,8 @@ R2 app/survey/<id>/items.json
 ## 関連
 
 - 紐付けメタ (別正典): `.claude/rules/survey-linkage-standards.md`
-- 実装 SSOT: `apps/web/src/features/survey/survey-editorial.ts`
-- 横展開・census 実験の進捗: `data/surveys/{portfolio,experiments}.json` (skill `/manage-survey-portfolio`・schema は `data/surveys/README.md`)
+- 編集本文の SSOT: カタログの `surveys.editorial`
+- 横展開・census 実験の進捗: `data/surveys/{portfolio,experiments}.json` (skill `/manage-survey-portfolio`・形は カタログの surveys.portfolio・surveys.experiments (Schema))
 - 情報設計 (ファネル役割): `docs/01_技術設計/03_情報設計.md`
 - 品質基準 (blog 側): `.claude/rules/blog-quality-standards.md` / 実証判定: `.claude/rules/evidence-based-judgment.md`
 - agent: `survey-curator` (編集コンテンツ + 紐付け) / 生成は article-writer / 監査は `/audit-survey-linkage`

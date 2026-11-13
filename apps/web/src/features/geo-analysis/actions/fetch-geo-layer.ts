@@ -3,8 +3,7 @@
 import { findGeoLayer } from '@stats47/data-configs/business-plan';
 
 import { projectGeoLayer } from '../lib/geo-layer-data';
-
-import { fetchGeoDetailAction } from './fetch-geo-detail';
+import { resolveGeoDetail } from '../lib/resolve-geo-detail';
 
 export async function fetchGeoLayerAction(
   slug: string,
@@ -13,7 +12,7 @@ export async function fetchGeoLayerAction(
 ) {
   const layer = findGeoLayer(slug);
   if (!layer) return null;
-  const detail = await fetchGeoDetailAction(
+  const detail = await resolveGeoDetail(
     layer.sourceAnalysis,
     prefCode,
     expected

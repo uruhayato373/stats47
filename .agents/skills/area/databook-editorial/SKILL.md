@@ -75,15 +75,11 @@ npm run source-vault:process -- crop \
 - 産地・特徴・由来のうち一次情報で確認できた事実のみ書く。書籍の言い回しをなぞらない。
 - シンボルは県公式ページ (`pref.<県>.lg.jp` 等) で裏取りし sourceUrl を付ける。
 
-## Stage 3: editorial TS 化
+## Stage 3: 台帳 areas.editorial に書く
 
-`packages/data-configs/src/area-databook/editorial/<code>.ts` を Write し、`editorial/index.ts` の
-`AREA_EDITORIALS` に import + 登録する。slug は kebab-case・県内一意 (R2 イラスト asset キーになる)。
-
-```ts
-import type { AreaEditorial } from "../types";
-export const <PREF>_EDITORIAL: AreaEditorial = { areaCode: "<code>", symbols: {...}, specialties: [ ... ] };
-```
+台帳 `areas.editorial` の県の JSON (`{ areaCode, sourceNote, symbols, specialties }`) を Write し、
+`npm run generate:editorial-index --workspace=@stats47/data-configs` で `AREA_EDITORIALS` を再生成する。
+slug は kebab-case・県内一意 (R2 イラスト asset キーになる)。
 
 ## Stage 4: validator (必須ゲート)
 

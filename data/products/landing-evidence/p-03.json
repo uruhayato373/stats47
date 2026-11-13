@@ -1,0 +1,85 @@
+{
+  "productId": "P-03",
+  "deliveryVersion": "v4-20261024-mac-r2",
+  "manifestSha256": "1e44bba7fda79a782ef10ef0e059a375e01370693e2fdaa0d441c17420b254e1",
+  "sourceArchive": {
+    "bucket": "stats47-private",
+    "key": "note/product-archives/P-03/v4-20261024-mac-r2/4b799e3f4922e079853dab2e4c02fca6e9cf830d19b66b89408559ef07b31ac1.zip",
+    "sha256": "4b799e3f4922e079853dab2e4c02fca6e9cf830d19b66b89408559ef07b31ac1"
+  },
+  "selectedMetrics": [
+    {
+      "key": "total-overnight-guests",
+      "title": "延べ宿泊者数",
+      "year": "2024",
+      "unit": "人泊"
+    },
+    {
+      "key": "total-overnight-guests-foreign",
+      "title": "外国人延べ宿泊者数",
+      "year": "2024",
+      "unit": "人泊"
+    },
+    {
+      "key": "room-utilization-rate",
+      "title": "客室稼働率",
+      "year": "2024",
+      "unit": "％"
+    }
+  ],
+  "included": [
+    "CSV（47地域・44指標、基準年は指標ごとに固定）",
+    "Excel（44指標）",
+    "PowerPoint（30指標の図表）",
+    "PDFデータブック・地図PNG",
+    "出典一覧（SOURCES.csv）・利用条件"
+  ],
+  "examples": [
+    {
+      "id": "overnight-demand",
+      "figures": [
+        {
+          "file": "overnight-demand.png",
+          "alt": "延べ宿泊者数（2024年・地域別比較）",
+          "template": "bar",
+          "sha256": "206d6c66e244de18813f047387b778e248cebd25e7c73260de996d5d3f334103"
+        }
+      ]
+    },
+    {
+      "id": "foreign-overnight-distribution",
+      "figures": [
+        {
+          "file": "foreign-overnight-distribution.png",
+          "alt": "外国人延べ宿泊者数（2024年・地図）",
+          "template": "choropleth",
+          "sha256": "980f1cf003b6a40c09a9dd836e70bdeba595cd3480bd038c2843b373f6d1e331"
+        }
+      ]
+    },
+    {
+      "id": "room-utilization",
+      "figures": [
+        {
+          "file": "room-utilization.png",
+          "alt": "客室稼働率（2024年・地域別比較）",
+          "template": "bar",
+          "sha256": "e796663687966d1825910c82d0f759fbee98f053a8b62a57c2f8a9b8243d094d"
+        }
+      ]
+    }
+  ],
+  "filePreview": {
+    "heading": "ファイルの中身",
+    "lead": "CSVは地域コード・地域名と指標の値を横に並べた形式です。画像は8行と1指標を抜粋しています。元の数値列名には指標名・年・単位が入り、画像では「数値」と省略しています。全44指標の出典と基準年はSOURCES.csvで確認できます。",
+    "figures": [
+      {
+        "file": "file-preview.png",
+        "alt": "P-03のdata.csvから列と8行を抜粋した見本",
+        "template": "file-preview",
+        "sha256": "d77d8e4d67290cad20cdcaa57f2136121bfb9ce7fed7977ca2b66469790b2529"
+      }
+    ]
+  },
+  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2001〜2026年で指標ごとに異なり、時系列データではありません。"
+}

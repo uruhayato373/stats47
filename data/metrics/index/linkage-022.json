@@ -1955,6 +1955,10 @@
           "kind": "municipality-theme"
         },
         {
+          "pageId": "product:data-p-05",
+          "kind": "product-analysis"
+        },
+        {
           "pageId": "ranking:population-aged-65-plus",
           "kind": "ranking"
         }
@@ -3085,14 +3089,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:living-housing",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "japan-theme:population-dynamics",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:population-density-per-km2-inhabitable-area",
           "kind": "municipality-ranking"
         },
@@ -3779,14 +3775,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:aging-society",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "japan-theme:population-dynamics",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:population-growth-rate",
           "kind": "ranking"
         },
@@ -4467,6 +4455,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:chicken-consumption-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:local-production-local-consumption-meat",
           "kind": "blog"
         },
@@ -4804,15 +4796,17 @@
       ],
       "consumers": [
         {
-          "pageId": "japan-theme:ports",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:port-count",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:ports",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "ports"
+      ]
     },
     {
       "metricKey": "port-entry-vessel-count",

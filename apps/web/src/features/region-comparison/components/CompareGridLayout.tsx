@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { Fragment, Suspense, type ReactNode } from "react";
 
 import { ChartLoadingCard, type DashboardComponent, type DashboardComponentType } from "@/components/stat-charts";
 import { DashboardComponentRenderer, computeSharedYDomain, type PageComponent } from "@/components/stat-charts/server";
@@ -53,7 +53,15 @@ const CHART_TYPES_WITH_Y_AXIS = new Set<string>([
 interface CompareGridLayoutProps {
   regions: [ComparisonRegion, ComparisonRegion];
   components: PageComponent[];
+  /**
+   * 比較の行の真ん中の後に置く要素 (ページが組み立てる記事内広告。2026-11-13 オーナー決定)。行が 4 つ以上のときだけ出す
+   * (前後に比較の行が 2 つ以上ずつ入り、最初の画面とページの最後の広告に隣り合わない)
+   */
+  middleInsert?: ReactNode;
 }
+
+/** middleInsert を出す行の数の下限 */
+const MIDDLE_INSERT_MIN_ROWS = 4;
 
 /**
  * 比較コンポーネントを地域ごとに左右に並べて描画するサーバーコンポーネント。
@@ -62,7 +70,7 @@ interface CompareGridLayoutProps {
  * チャート系コンポーネントは選択中の全地域データから共有 Y 軸ドメインを事前算出し、
  * 東京と大阪など異なるスケールの地域でもグラフのスケールが揃う。
  */
-export async function CompareGridLayout({ regions, components }: CompareGridLayoutProps) {
+export async function CompareGridLayout({ regions, components, middleInsert }: CompareGridLayoutProps) {
   if (components.length === 0) return null;
 
   const areaCodes = regions.map((r) => r.areaCode);
@@ -88,8 +96,9 @@ export async function CompareGridLayout({ regions, components }: CompareGridLayo
 
   return (
     <>
-      {components.map((comp) => (
-        <div key={comp.componentKey} className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      {components.map((comp, index) => (
+        <Fragment key={comp.componentKey}>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {regions.map((region) => (
             <div
               key={`${comp.componentKey}-${region.areaCode}`}
@@ -105,6 +114,8 @@ export async function CompareGridLayout({ regions, components }: CompareGridLayo
             </div>
           ))}
         </div>
+        {middleInsert && components.length >= MIDDLE_INSERT_MIN_ROWS && index + 1 === Math.floor(components.length / 2) && middleInsert}
+        </Fragment>
       ))}
     </>
   );

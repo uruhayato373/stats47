@@ -1,7 +1,7 @@
 /**
  * buzz-map spec（1カード/1動画 = 1 spec JSON）
  *
- * spec ファイルは `apps/remotion/src/features/buzz-map/specs/*.json` に置き、
+ * spec ファイルは台帳 `sns.buzz-map-specs` に置き (見本の sample-*.json だけはこのフォルダの specs/)、
  * `npx remotion still/render <compId> --props=<specパス>` でそのまま inputProps になる。
  * 規約・テーマカタログは `.claude/rules/buzz-map-standards.md`。
  */
@@ -43,7 +43,7 @@ export interface BuzzMapSpec {
   /** タイトルの手動改行（最大2行・助詞の前で切る）。指定時は title より優先 */
   titleLines?: string[];
   subtitle: string;
-  /** 出典行（複数行）。最終行はサイトドメイン */
+  /** 出典行（複数行）。データ出典だけで、発行元 (stats47.jp) は入れない（chart-image-copy.md） */
   source: string[];
   /** 強調色テーマ: social（人口・社会系） / infra（インフラ・経済系）。実色は theme のパレットで決まる */
   accent?: "social" | "infra";

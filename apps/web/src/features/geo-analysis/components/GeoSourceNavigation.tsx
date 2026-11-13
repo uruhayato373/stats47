@@ -60,14 +60,14 @@ export function GeoSourceNavigation({
   );
   if (mobile) {
     return (
-      <ContentDisclosure title={title} className="mb-3 xl:hidden">
+      <ContentDisclosure title={title} className="mb-3 rail:hidden">
         {body}
       </ContentDisclosure>
     );
   }
   // PageShell also places its rail below the article on mobile; use the top disclosure there.
   return (
-    <div className="hidden xl:block">
+    <div className="hidden rail:block">
       <RailCard title={title}>{body}</RailCard>
     </div>
   );

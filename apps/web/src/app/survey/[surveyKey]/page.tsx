@@ -11,7 +11,6 @@ import { PanelGrid } from '@stats47/components';
 import { buttonVariants } from '@stats47/components/atoms/ui/button';
 import { listCategories, METRICS_REGISTRY } from '@stats47/data-configs';
 import { canonicalSurveyHubKey, hrefFor, surveyHubSourceIds } from "@stats47/data-configs/content/href";
-import { listJapanCatalogThemes } from '@stats47/data-configs/geo-scope';
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 import {
   CATEGORY_TOPIC_CATALOGS,
@@ -38,13 +37,12 @@ import {
 import { SourcesSheet } from '@/components/charts/SourcesSheet';
 import { ArticleShell, PageHeader, Breadcrumbs } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
-import { ArticleTeaserCard, CardGrid, SurfaceLinkCard } from '@/components/surface';
+import { ArticleTeaserCard, CardGrid, RailCard, RailNavRow, SurfaceLinkCard } from '@/components/surface';
 
 import {
   AdRow,
   composeAdRows,
 } from '@/features/ads';
-import { resolveGenericAffiliateBanners } from '@/features/ads/server';
 import { listArticleSummariesBySurveyId } from '@/features/blog/server';
 import {
   FeaturedRankingCard,
@@ -64,7 +62,7 @@ import {
   themeNavGroupOf,
 } from "@/features/theme-dashboard/config/theme-navigation";
 
-import { CONTENT_FOOTER, HUB_INCONTENT, THEMES_CONTENT } from '@/lib/google-adsense';
+import { CONTENT_FOOTER, HUB_INCONTENT, HUB_ROW_2 } from '@/lib/google-adsense';
 import { getIcon } from '@/lib/icons';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 import { blogThumbnailUrl } from '@/lib/metadata/ogp-image';
@@ -182,48 +180,28 @@ export default async function SurveyPage({ params }: PageProps) {
       )
     )
     .map((catalog) => ({ key: catalog.key, title: catalog.title, metricCount: catalog.metrics.length }));
-  const relatedJapanThemes = surveyKey === 'kakei-chousa'
-    ? listJapanCatalogThemes().filter(theme => theme.themeSlug.startsWith('household-'))
-    : [];
-  // 全国の時系列 (/japan/<slug>) は同じテーマの比較の単位違い (slug が同じ)。テーマは 1 枚のカードにまとめ、
-  // 県で比べられるテーマはテーマのページへ、全国版しか無いテーマは全国のページへつなぐ (2026-11-03)
-  const japanThemeSlugs = new Set(relatedJapanThemes.map((theme) => theme.themeSlug));
-  const prefectureThemeKeys = new Set(relatedThemes.map((theme) => theme.key));
+  // 日本全体のテーマ (/japan/<テーマ>) は 2026-11-12 に全国のテーマへまとめた (家計の品目は「食卓と家計の支出」の章)。カードはテーマだけ
   const themeCards = [
     ...relatedThemes.map((theme) => ({
       key: theme.key,
       title: theme.title,
       href: themeHref(theme.key),
       groupKey: theme.key,
-      meta: `${theme.metricCount} 指標${japanThemeSlugs.has(theme.key) ? '・全国の推移もあり' : ''}`,
+      meta: `${theme.metricCount} 指標`,
     })),
-    ...relatedJapanThemes
-      .filter((theme) => !prefectureThemeKeys.has(theme.themeSlug))
-      .map((theme) => ({
-        key: theme.themeSlug,
-        title: theme.title,
-        href: hrefFor('japan-theme', { themeSlug: theme.themeSlug }),
-        groupKey: null,
-        meta: `全国の推移・${theme.metrics.length} 指標`,
-      })),
   ];
   const relatedArticles = await listArticleSummariesBySurveyId(
     sourceIds,
     6,
     getSurveyEditorialContent(surveyKey)?.relatedArticleSlugs ?? []
   ).catch(() => []);
-  // ★ 2026-07-28: 旧実装は tag を ['economy','population','labor'] に固定しており、
-  //   調査の主題 (農林業センサス / 学校基本調査 等) と広告が一切連動していなかった。
-  //   この調査に属するランキングの categoryKey 最頻値から vertical を導出する。
-  // 2026-11-03 (オーナー決定・収益化戦略 §3.2): 調査ごとの文脈の案件 (家計調査 → ふるさと納税など) をやめ、
-  // 共通の案件 (対象者が広く気軽に始められる商品) を本文の広告の段に横 3 枠で出す。狭い幅では入る数だけ (モバイルは 1 枠)
-  const nativeBanners = await resolveGenericAffiliateBanners(3).catch(() => []);
-  // 広告の段 (2026-11-03 オーナー決定): AdSense と PR を 1 行に並べ、本文の幅に入る数だけ左から出す (モバイルは先頭の 1 枠)。
-  // 全ランキングの前・全ランキングの後・ページの最後 (旧: デスクトップだけの本文とページ末の AdSense と PR の列)
+  // 広告の段: 地図付きのランキングのカードの後・全ランキングの前・ページの最後に、AdSense 1 つを本文の幅いっぱい (上限 580px) に出す
+  // (位置は 2026-11-13 オーナー決定で並べ替えた)
+  // (2026-11-12 オーナー決定でアフィリエイトを止め、PR を外した)。2 段目はハブ用の HUB_ROW_2 (THEMES_CONTENT はテーマの段に使う)
   const [surveyRow1, surveyRow2, surveyRow3] = composeAdRows(
-    [['adsense', 'affiliate'], ['affiliate', 'adsense'], ['adsense', 'affiliate']],
-    [HUB_INCONTENT, THEMES_CONTENT, CONTENT_FOOTER],
-    nativeBanners,
+    [['adsense'], ['adsense'], ['adsense']],
+    [HUB_INCONTENT, HUB_ROW_2, CONTENT_FOOTER],
+    [],
   );
   const editorial = getSurveyEditorialContent(surveyKey);
   const isKakei = surveyKey === 'kakei-chousa';
@@ -253,12 +231,8 @@ export default async function SurveyPage({ params }: PageProps) {
       // 名前の組み立ては共通関数に寄せる。補足が題を含む家計調査の指標で「納豆消費支出額（…年間納豆消費支出額）」と
       // 同じ語が 2 回並んでいた (2026-11-02)
       title: metricDisplayName(item),
-      subtitle: item.subtitle,
       latestYear,
       unit: item.unit,
-      description: item.description,
-      demographicAttr: item.demographicAttr,
-      normalizationBasis: item.normalizationBasis,
       top1: rankingTop1Label(item),
       ...(isKakei ? { topicLabel: topicLabels.get(topicKey) ?? OTHER_TOPIC_LABEL } : {}),
     };
@@ -444,6 +418,13 @@ export default async function SurveyPage({ params }: PageProps) {
         </section>
       )}
 
+      {/* 1 段目: 地図付きのランキングのカードの後 (ブログ記事・テーマの前)。2026-11-13 オーナー決定で、最初の約 4,400px (スマホ)
+          に広告が無く最後の 2 段が約 600px で並んでいた配置を、上から下まで約 2,400px おきに並べ替えた。カードが無い調査では
+          最初の画面に入るので出さず、後ろにブログ記事かテーマがあるときだけ出す (次の 2 段目と隣り合わせにしない) */}
+      {featuredItems.length > 0 && (relatedArticles.length > 0 || themeCards.length > 0) && surveyRow1.length > 0 && (
+        <AdRow cells={surveyRow1} position="survey-row-1" trackingCategory={`survey-${surveyKey}`} wide />
+      )}
+
       {relatedArticles.length > 0 && (
         // 記事カードの格子を含むセルは余白を持たないので、見出しと格子を別のセルにした格子の節にする
         <PanelGrid as="section" id="related-articles" className="scroll-mt-24">
@@ -499,14 +480,9 @@ export default async function SurveyPage({ params }: PageProps) {
         </section>
       )}
 
-      {/*
-        記事内広告はランキング表の「前」に置く。表より後ろに置くと、そこから
-        フッター広告までの間は「数字を読むときの注意」(editorial 定義は 75 調査中 1 件)と
-        ネイティブアフィリ(在庫ゼロで消える)しか無く、どちらも欠けた調査で広告 2 連になる。
-        ランキング表は無条件で必ず描画されるので、ここに置けば必ず両枠が離れる (2026-07-29 是正)。
-      */}
-      {surveyRow1.length > 0 && (
-        <AdRow cells={surveyRow1} position="survey-row-1" trackingCategory={`survey-${surveyKey}`} />
+      {/* 2 段目: 全ランキングの表の前。表は必ず描かれるので、ページの最後の段と隣り合わない (2026-07-29 是正の考え方) */}
+      {surveyRow2.length > 0 && (
+        <AdRow cells={surveyRow2} position="survey-row-2" trackingCategory={`survey-${surveyKey}`} wide />
       )}
 
       <section id="all-rankings" className="mb-4 scroll-mt-24">
@@ -519,6 +495,17 @@ export default async function SurveyPage({ params }: PageProps) {
           </p>
         )}
         <CategoryRankingTable items={allItems} topicOptions={topicOptions} trackingSurface="survey_ranking" />
+        {/* 表はページ送りなので、サーバーの HTML に出るリンクは先頭 20 件だけになる。全件のリンクを畳んだ一覧で
+            出し、検索エンジンと JavaScript 無しの閲覧でも全ランキングへ辿れるようにする (GSC-INTERNAL-DISCOVERY-01) */}
+        <RailCard title={`全 ${allItems.length} 件を名前の一覧で見る`} collapsible bodyClassName="p-0">
+          <nav aria-label="すべてのランキング (名前の一覧)" className="grid gap-x-5 px-4 pb-3 sm:grid-cols-2">
+            {allItems.map((item) => (
+              <RailNavRow key={item.rankingKey} href={hrefFor('ranking', { rankingKey: item.rankingKey })} chevron={false}>
+                {item.title}
+              </RailNavRow>
+            ))}
+          </nav>
+        </RailCard>
       </section>
 
       {relatedCategories.length > 0 && (
@@ -549,14 +536,6 @@ export default async function SurveyPage({ params }: PageProps) {
         </section>
       )}
 
-      {/* ネイティブアフィリエイト。広告枠に本文セクションの採番を与えない。
-          全ランキングの表の後・注意の前に置き、ページ末の関連コンテンツ型と隣り合わせにしない (2026-10-30) */}
-      {surveyRow2.length > 0 && (
-        <section className="mb-4">
-          <AdRow cells={surveyRow2} position="survey-row-2" trackingCategory={`survey-${surveyKey}`} />
-        </section>
-      )}
-
       {/* 調査の要約はページに残す。シートの中身は押すまで読み込まないので、ページの説明文がゼロにならないようにし、
           PR の列とページ末の広告の間も空ける (2026-11-03) */}
       {editorial && (
@@ -566,10 +545,9 @@ export default async function SurveyPage({ params }: PageProps) {
         </section>
       )}
 
-      {/* コンテンツ末尾の全幅フッター広告。PR の列との間に「この調査について」を挟めるときだけ出す
-          (注意の無い調査で PR の列と隣り合わせにしない。2026-10-30) */}
-      {editorial && surveyRow3.length > 0 && (
-        <AdRow cells={surveyRow3} position="survey-row-3" trackingCategory={`survey-${surveyKey}`} />
+      {/* 3 段目: ページの最後。2 段目との間には全ランキングの表が必ず入る */}
+      {surveyRow3.length > 0 && (
+        <AdRow cells={surveyRow3} position="survey-row-3" trackingCategory={`survey-${surveyKey}`} wide />
       )}
     </ArticleShell>
   );

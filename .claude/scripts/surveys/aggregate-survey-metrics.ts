@@ -6,7 +6,7 @@
  * 56 日 = **非重複 2 窓 (最新週 + その 4 週前)** の合算で構成する
  * (2026-07-11 survey ポートフォリオ監査の訂正記録で実証済みの失敗パターンの再発防止)。
  *
- * 集計規約 (schema 正典: data/surveys/README.md):
+ * 集計規約 (形: カタログの surveys.portfolio・surveys.experiments (Schema)):
  *   - GSC: impressions/clicks = 2 窓合算。ctr = 合算比、averagePosition = impressions 加重平均
  *     — いずれも measured (impressions >= 100/56d) のみ保存。measured-low はカウント値のみ
  *   - GA4: landingPageViews = screenPageViews の 2 窓合算 (加算可能)。engagedSessions は

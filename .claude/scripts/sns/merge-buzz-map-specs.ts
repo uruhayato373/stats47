@@ -27,9 +27,10 @@
 
 import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
-const SPECS_DIR = join(PROJECT_ROOT, "apps/remotion/src/features/buzz-map/specs");
+const SPECS_DIR = join(PROJECT_ROOT, datasetDir("sns.buzz-map-specs"));
 
 interface LegendRow {
   key: string;
@@ -128,11 +129,10 @@ function main() {
     marker: (hasLines ? "line" : "point") as "line" | "point",
   }));
 
-  // ── 出典マージ (末尾 stats47.jp は 1 回) ──
+  // ── 出典マージ (データ出典だけ。旧 spec に残る発行元 stats47.jp は落とす。chart-image-copy.md) ──
   const srcLines = [
     ...(base?.source ?? []).filter((l) => l !== "stats47.jp"),
     ...overlay.source.filter((l) => l !== "stats47.jp"),
-    "stats47.jp",
   ];
 
   const spec: BuzzSpec = {
@@ -176,7 +176,7 @@ function main() {
   console.log(`\nレンダ:`);
   console.log(`  cd apps/remotion && npx remotion still src/index.ts BuzzMap-Still-45 \\`);
   console.log(`    ../../.local/r2/sns/buzz-map/${opts.id}/x/stills/${opts.id}-45.png \\`);
-  console.log(`    --props=src/features/buzz-map/specs/${opts.id}.json`);
+  console.log(`    --props=../../${datasetDir("sns.buzz-map-specs")}/${opts.id}.json`);
 }
 
 main();

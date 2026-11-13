@@ -4,7 +4,7 @@ import { createRequire } from 'node:module';
 import { extractLandslideDesignations } from '../ingest-landslide-designations.mjs';
 
 const require = createRequire(import.meta.url);
-const prefectures = require('../../../../packages/area/src/data/prefectures.json');
+const prefectures = require('../../lib/prefectures.cjs').PREFECTURES;
 function fixture() {
   const header = '全国における土砂災害警戒区域等の指定状況 2026/6/30時点 土石流 急傾斜地の崩壊 地滑り うち土砂災害特別 基礎調査';
   const rows = [...prefectures].reverse().map((pref) => `${pref.prefName} 10 1 20 2 30 3 60 6 60 10 20 30`);

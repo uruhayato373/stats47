@@ -33,14 +33,6 @@
     },
     {
       "channel": "theme",
-      "metricKey": "general-households",
-      "status": "rejected",
-      "reason": "人口動態は増減の仕組みを扱うテーマで無関係。世帯構造は別テーマ向き",
-      "decidedAt": "2026-09-14",
-      "decidedBy": "theme-designer (2026-09-14 判定) と参考文献の展開判断"
-    },
-    {
-      "channel": "theme",
       "metricKey": "area-ratio-of-total",
       "status": "rejected",
       "reason": "面積割合は気候 (気象) と直接関係しない地理指標",

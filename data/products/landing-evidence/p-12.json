@@ -1,0 +1,86 @@
+{
+  "productId": "P-12",
+  "deliveryVersion": "v4-20261024-mac-r2",
+  "manifestSha256": "7edd2e3427c3ff0124c3060d44c1c20ce24c19b5038a4f49369f683f870ebaac",
+  "sourceArchive": {
+    "bucket": "stats47-private",
+    "key": "note/product-archives/P-12/v4-20261024-mac-r2/833df0a5e0127f3288029b27a2edc4beee882fdfeffab8ffd92338c50fedd379.zip",
+    "sha256": "833df0a5e0127f3288029b27a2edc4beee882fdfeffab8ffd92338c50fedd379"
+  },
+  "selectedMetrics": [
+    {
+      "key": "total-population",
+      "title": "総人口",
+      "year": "2025",
+      "unit": "人"
+    },
+    {
+      "key": "total-overnight-guests",
+      "title": "延べ宿泊者数",
+      "year": "2024",
+      "unit": "人泊"
+    },
+    {
+      "key": "manufacturing-shipment-amount",
+      "title": "製造品出荷額等",
+      "year": "2023",
+      "unit": "百万円"
+    }
+  ],
+  "included": [
+    "CSV（47地域・2,073指標、基準年は指標ごとに固定）",
+    "Excel（2,073指標）",
+    "PowerPoint（30指標の図表）",
+    "PDFデータブック・地図PNG",
+    "編集用の地図SVG",
+    "出典一覧（SOURCES.csv）・利用条件"
+  ],
+  "examples": [
+    {
+      "id": "population-overview",
+      "figures": [
+        {
+          "file": "population-overview.png",
+          "alt": "総人口（2025年・地域別比較）",
+          "template": "bar",
+          "sha256": "b75c87108887af8dd8b29fb9e5fd5ce595981b2ef342468512c1a1ddd00564e1"
+        }
+      ]
+    },
+    {
+      "id": "tourism-overview",
+      "figures": [
+        {
+          "file": "tourism-overview.png",
+          "alt": "延べ宿泊者数（2024年・地図）",
+          "template": "choropleth",
+          "sha256": "d7934aea5e9106e4521b8ebd63e30e93603cae287dcb9ec9a072c74bb8b43de3"
+        }
+      ]
+    },
+    {
+      "id": "industry-overview",
+      "figures": [
+        {
+          "file": "industry-overview.png",
+          "alt": "製造品出荷額等（2023年・地域別比較）",
+          "template": "bar",
+          "sha256": "dde78ff4762c986b057e4f257d3b7ffdd2cad69e9ac2e984cb5c8c294607be84"
+        }
+      ]
+    }
+  ],
+  "filePreview": {
+    "heading": "ファイルの中身",
+    "lead": "CSVは地域コード・地域名と指標の値を横に並べた形式です。画像は8行と1指標を抜粋しています。元の数値列名には指標名・年・単位が入り、画像では「数値」と省略しています。全2,073指標の出典と基準年はSOURCES.csvで確認できます。",
+    "figures": [
+      {
+        "file": "file-preview.png",
+        "alt": "P-12のdata.csvから列と8行を抜粋した見本",
+        "template": "file-preview",
+        "sha256": "6dd10015d975fdf55f104d1b3cb4d8659c72680a343d516a097e2435bcda34a6"
+      }
+    ]
+  },
+  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は1991〜2050年で指標ごとに異なり、時系列データではありません。"
+}

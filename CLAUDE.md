@@ -31,12 +31,12 @@
 - **レビューをタスクへ変換する**: 批判的レビュー / pre-mortem / 監査の全文を `docs/` に蓄積しない。未完了の対策だけを優先度・実行順・停止条件・完了条件付きで `.claude/todo/` へ統合する。恒久判断は既存の戦略文書・rules・コード近傍READMEへ、agent用の定期履歴は各skillの `reference/` へ、計測・監査・是正キューの記録は `data/<取得元>/` へ置く (`.claude/state/` はエージェント運用の状態だけ。判断は `.claude/rules/data-storage.md`)。Issues は (a) `enhancement`/`bug` ラベルの PR で close される機能改修、(b) `auto-generated` ラベルの機械アラートのみ → `.claude/rules/docs-vs-issues.md`
 - **文書作成・整理はガバナンスSSOTに従う**: 新規文書より既存SSOTへの統合を優先する。判断規則は`.claude/rules/docs-vs-issues.md`、機械契約は`.claude/config/docs-governance.json`。文書の作成・移動・削除後は`npm run docs:fix`と`npm run docs:check`を実行する。意味判断を伴う棚卸しは`/maintain-docs`
 - **参考文献は private Google Drive で保全し、利用実装仕様書を通して展開する**: 固定ルートは `stats47/参考文献/<資料名>/<版>/` (1 資料 1 版 = 1 directory。PDF・`pages/`・`md/`・`figures/` を展開したまま置き、tar bundle にしない)。folder名は日本語を優先する。ローカルマウントから`$TMPDIR/stats47-source-vault/`へ検証付きで復元し、`npm run source-vault:process`の共通OCR・ページ画像・内部cropを使う。全ページ処理後は`npm run source-vault:inventory`で本文・書籍値を含まない解決台帳を生成し、coverage 100%を確認してからprofile単位で一時領域を削除する。リポジトリ内の`books/`、`docs/books/`、`.claude/pdfs/`は`npm run source-vault:check`で禁止する。資料単位のactiveな利用実装仕様書で権利・一次資料・mapping・gateを定義してから既存SSOTへ反映する → `.claude/rules/reference-source-standards.md`
-- **完全 DB レスが正典** → `docs/01_技術設計/02_データアーキテクチャ.md`。永続/常駐 D1 を SSOT に持たない。SSOT は **git TS** と **R2** の二つだけ。本番アプリは R2 snapshot のみ読む:
-  - **Authored / 設定** (低volume・人手・型/review: metric 定義等) → **git TS が SSOT** → 生成スクリプトで R2 反映。例外: テーマの指標・チャート定義は `data/themes/catalogs/<key>.json` + JSON Schema が SSOT (2026-10-06 オーナー決定 → `.claude/rules/theme-catalog-standards.md`)
-  - **Authored / 運用** (page_components / theme_metrics / sns_posts / affiliate_ads / categories/themes) → **git TS 定義が SSOT** → 生成スクリプトで R2 JSON（横断整合性はビルド時に検証）。手編集 JSON を SSOT にしない
+- **完全 DB レスが正典** → `docs/01_技術設計/02_データアーキテクチャ.md`。永続/常駐 D1 を SSOT に持たない。SSOT は **git の `data/`** と **R2** の二つだけ。本番アプリは R2 snapshot のみ読む:
+  - **DB (マスタと台帳)** → **`data/<領域>/` の JSON + Schema が SSOT**。カタログ `config/datasets.mjs` に登録し、関係は ID と `refs` で結ぶ。`config/` はシステムの設定だけ、`packages/`・`apps/` は型・読み込み・検査とアプリだけ (2026-11-10 オーナー決定。守らせるのは `npm run check-datasets` → `.claude/rules/data-storage.md`)。指標の定義だけは型が要るので `data/metrics/<key>.ts`
+  - **配信** → DB と R2 の観測値から生成スクリプトで R2 JSON にする（横断整合性はビルド時に検証）。生成物を手で編集しない
   - **Reference** (metrics=TS / articles=article.md / estat_catalog=e-Stat API / prefectures=JSON) → **再生成**
   - **Derived** (area_profiles / correlations) → **エフェメラル計算**（使い捨て `:memory:` SQLite / DuckDB が R2 を読む）→ R2。永続しない
-- **永続/リモート D1 は使わない**。S3 creds があれば集計もクラウドで完結する。git TS → R2 反映の実装例: `apps/web/scripts/export-page-components-snapshot.ts`（`data/page-components/` → R2）
+- **永続/リモート D1 は使わない**。S3 creds があれば集計もクラウドで完結する。R2 反映の実装例: `apps/web/scripts/export-page-components-snapshot.ts`
 - **観測値・派生を永続 DB に入れない** (DB 肥大で解約に至った経緯があるため R2 に置く)。schema 定義 (`packages/database/src/schema/*.ts`) と integration テスト基盤は「型ソース / テスト用」として残置可（配信 R2 に影響しない）。正典: `docs/01_技術設計/02_データアーキテクチャ.md`
 - **Geo分析は結論だけ作らない**: Geo/GIS掛け合わせコンテンツは、計算入力・決定的空間演算・補助レイヤー・県別途中artifact・保存則・最終集計を同じcanonical着地で辿れることを必須とする。X・ブログ・noteもこのlineageへ接続し、単一指標ランキングと混在させない → `.claude/rules/geo-analysis-standards.md`
 - **browser-use は終了時に必ず daemon 停止 + Chrome タブクローズ** → `.claude/rules/browser-use-cleanup.md`
@@ -105,8 +105,8 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | `r2-storage-design.md` | snapshot 追加・変更・R2 キー設計・保持ポリシー | packages/r2-storage・skills/db/push-r2 等 |
 | `shared-business-policy.md` | 3プロジェクト共通事業方針(HARM)の同期・検証・管理画面表示 (正本はObsidian vault) | .claude/shared-policy・apps/admin/app/strategy/policy |
 | `page-quality-standards.md` | ページ肥大化・重複・速度の継続監視 (変更時代表URL/週次全URL、PSI/Cloudflare監視とは別系統) | .claude/scripts/page-quality・apps/admin/app/quality/page-audit |
-| `data-storage.md` | スキル設計時の記録先判定 (git TS / R2 vs `.claude/` vs `docs/`) | .claude/skills・state・todo・docs |
-| `gis-data.md` | 国土数値情報 (KSJ) GIS の取り込み・管理 (datasets.ts SSOT / ライセンス境界) | packages/gis・skills/gis |
+| `data-storage.md` | データの置き場の規則 (DB は `data/`・設定は `config/`・カタログと検査・置き場を移す手順) | .claude/skills・state・todo・docs |
+| `gis-data.md` | 国土数値情報 (KSJ) GIS の取り込み・管理 (台帳 geo.ksj-datasets / ライセンス境界) | packages/gis・skills/gis |
 | `recorded-measurement-first.md` | ログインが要る計測は週次 (土曜) に Mac が記録し、セッションではブラウザで取りに行かず記録から判断する (hook が止める) | skills/{ads,analytics,management,product,sns,note}・計測/ASP系 agent・scripts/{measurement,ads,note,gsc,kdp}・計測の data |
 | `geo-analysis-standards.md` | Geo/GIS 掛け合わせコンテンツ (lineage / 保存則 / canonical / X・note 境界) | app/geo・features/geo-analysis・skills/gis |
 | `estat-api.md` | e-Stat API 利用 (年の 4 桁正規化・cdArea 禁止) | packages/estat-api・metrics・skills/estat |
@@ -148,7 +148,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | ドメイン境界 | `docs/01_技術設計/01_システムアーキテクチャ.md` |
 | エラーハンドリング | `docs/01_技術設計/05_エラーハンドリング.md` |
 | 自動化インベントリ ★追加・削除時は必ず更新 | `docs/01_技術設計/06_自動化インベントリ.md` |
-| URL 構造・301/410・canonical 戦略 ★新規ページ作成時必読 | コード SSOT: `apps/web/src/lib/url-policy.ts` + `config/{blog-redirects,legacy-category-keys,redirect-tag-keys}.ts` + `middleware.ts` / `sitemap.ts`。機械検証: `src/__tests__/middleware.test.ts` / `.github/scripts/smoke-test-routes.sh`。新規ページ手順は `.claude/rules/coding-standards.md` |
+| URL 構造・301/410・canonical 戦略 ★新規ページ作成時必読 | コード SSOT: `apps/web/src/lib/url-policy.ts` + `config/{blog-redirects,legacy-category-keys,redirect-tag-keys}.ts` + `middleware.ts` / `sitemap.ts`。転送・410 の記録の正本は台帳 `data/site/url-history/` (`config/` の同名 TS はその読み込み口)。機械検証: `src/__tests__/middleware.test.ts` / `.github/scripts/smoke-test-routes.sh`。新規ページ手順は `.claude/rules/coding-standards.md` |
 | **情報設計 (ページ責務・3タクソノミー・ファネル役割)** ★page_components配置/分類軸追加/ページKPI判定時必読 | `docs/01_技術設計/03_情報設計.md` |
 | **デザインシステム** (横幅/レール/Surface/フォント/ナビ) ★UI実装時必読 | `docs/01_技術設計/04_デザインシステム.md` |
 | Playwright 認証プロファイル | `docs/01_技術設計/07_Playwright認証プロファイル.md` |

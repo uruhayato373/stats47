@@ -1,3 +1,4 @@
+import { datasetPath } from '../../../config/datasets.mjs';
 import { METRIC_DEFINITIONS_DIR } from '../../../config/paths.mjs';
 /**
  * validate-metric-config — metric config の構造規約を検証する lint。
@@ -91,14 +92,14 @@ interface Row {
 }
 
 /**
- * surveys マスタ (packages/ranking/src/data/surveys.json) の id 集合。
+ * surveys マスタ (カタログの surveys.master) の id 集合。
  * config.surveyId は survey 紐付けの手動オーバーライド (正典: .claude/rules/survey-linkage-standards.md)。
  * 実在しない id は配信で orphan リンクになるため error で弾く。
  * ※ ranking パッケージを import すると循環依存になるため file 読みする。
  */
 function loadSurveyMasterIds(): Set<string> | null {
   try {
-    const p = resolve(__dirname, '../../ranking/src/data/surveys.json');
+    const p = resolve(__dirname, '../../..', datasetPath('surveys.master'));
     const list = JSON.parse(readFileSync(p, 'utf8')) as Array<{ id: string }>;
     return new Set(list.map((s) => s.id));
   } catch {
@@ -203,7 +204,7 @@ function main() {
     for (const r of rows) {
       if (r.surveyId && !surveyMasterIds.has(r.surveyId)) {
         errors.push(
-          `[survey-id] ${r.file}: surveyId "${r.surveyId}" が surveys.json に実在しない (packages/ranking/src/data/surveys.json)`
+          `[survey-id] ${r.file}: surveyId "${r.surveyId}" が調査マスタ (surveys.master) に実在しない`
         );
       }
     }

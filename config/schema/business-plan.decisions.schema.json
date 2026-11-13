@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "事業計画の章ごとの採否",
+  "description": "data/business-plan/plan/decisions.json の形状契約。外部の事業計画書 (25 章) を全面採用せず、章ごとに採用・適合変更・保留・不採用を決めた記録 (並びが章の順)。canonicalPaths は判断を反映した正典のパス、owners は担当 agent、skills は運用する skill、metricIds は判断を測る指標 (business-plan.metrics の id)。読み込み口は packages/data-configs/src/business-plan/catalog.ts (BUSINESS_PLAN_DECISIONS)。",
+  "type": "object",
+  "required": ["decisions"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "decisions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["chapter", "title", "status", "summary", "rationale", "canonicalPaths", "owners", "skills", "metricIds"],
+        "additionalProperties": false,
+        "properties": {
+          "chapter": { "type": "integer", "minimum": 1 },
+          "title": { "type": "string", "minLength": 1 },
+          "status": { "enum": ["adopted", "adapted", "deferred", "rejected"] },
+          "summary": { "type": "string", "minLength": 1 },
+          "rationale": { "type": "string", "minLength": 1 },
+          "canonicalPaths": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+          "owners": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" } },
+          "skills": { "type": "array", "items": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" } },
+          "metricIds": { "type": "array", "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" } }
+        }
+      }
+    }
+  }
+}

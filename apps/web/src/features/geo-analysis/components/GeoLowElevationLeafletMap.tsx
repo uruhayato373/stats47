@@ -1,10 +1,10 @@
 'use client';
 import { useMemo, useState } from 'react';
 
-import { Button } from '@stats47/components/atoms/ui/button';
 import { GeoJSON } from 'react-leaflet';
 
 import { LeafletMapFrame } from '@/components/charts/LeafletMapFrame';
+import { SingleSelectToggleGroup } from '@/components/molecules/SingleSelectToggleGroup';
 
 import {
   buildGeoLowElevationMapModel,
@@ -36,24 +36,15 @@ export function GeoLowElevationLeafletMap({
       focus={focus}
       toolbar={
         view === 'overlap' ? (
-          <>
-            <Button
-              size="sm"
-              variant={basis === 'mean' ? 'default' : 'outline'}
-              aria-pressed={basis === 'mean'}
-              onClick={() => setBasis('mean')}
-            >
-              平均標高で区分
-            </Button>
-            <Button
-              size="sm"
-              variant={basis === 'min' ? 'default' : 'outline'}
-              aria-pressed={basis === 'min'}
-              onClick={() => setBasis('min')}
-            >
-              最低標高で区分（上限側）
-            </Button>
-          </>
+          <SingleSelectToggleGroup
+            aria-label="標高の区分"
+            value={basis}
+            onValueChange={setBasis}
+            options={[
+              { value: 'mean', label: '平均標高で区分' },
+              { value: 'min', label: '最低標高で区分（上限側）' },
+            ]}
+          />
         ) : null
       }
     >

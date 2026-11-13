@@ -1,0 +1,79 @@
+{
+  "productId": "P-10",
+  "articleKey": "prefecture-disaster-infrastructure-pack",
+  "displayTitle": "都道府県別 防災・交通・インフラデータ",
+  "description": "生活インフラの整備状況と過去の災害被害を県別に整理し、地域の特徴を説明する資料を作れます。",
+  "useCases": [
+    {
+      "title": "インフラ整備の説明資料に",
+      "description": "下水道普及率を他県と比較し、整備状況の違いを地図で示せます。"
+    },
+    {
+      "title": "災害被害の振り返りに",
+      "description": "対象年の被害額を人口あたりで比べ、被害の大きかった地域を確認できます。"
+    },
+    {
+      "title": "地域調査の項目整理に",
+      "description": "収録指標を並べ、整備状況や被害実績から詳しく確認する項目を選べます。"
+    }
+  ],
+  "examples": [
+    {
+      "id": "sewerage-coverage",
+      "heading": "下水道の整備状況を地図で見る",
+      "lead": "下水道普及率で色分けし、自県と近隣県の違いや全国の分布を確認できます。",
+      "metricKeys": [
+        "sewerage-penetration-rate-2012on"
+      ],
+      "preferredTemplate": "choropleth"
+    },
+    {
+      "id": "disaster-losses",
+      "heading": "災害被害を人口あたりで比べる",
+      "lead": "人口1人あたりの災害被害額を並べ、人口規模を揃えて対象年の被害実績を振り返れます。",
+      "metricKeys": [
+        "disaster-damage-amount-per-person"
+      ],
+      "preferredTemplate": "bar"
+    }
+  ],
+  "purchaseNotes": [
+    "災害被害額は過去の実績です。将来の災害発生確率や、個別の住所・施設の安全性を示すものではありません。",
+    "指標ごとに対象年・単位・集計範囲が異なります。下水道普及率だけで生活インフラ全体を評価せず、各指標の説明と併せて確認してください。"
+  ],
+  "analysisPlan": {
+    "objective": "人口変化に対する生活インフラの整備状況を確認し、災害被害の実績とは分けて地域を比較する。採用・調査対象は改訂設計であり、販売中の固定納品への追加を示しません。",
+    "inputs": [
+      {
+        "metricKey": "sewerage-penetration-rate-2012on",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "disaster-damage-amount-per-person",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "garbage-collection-population",
+        "scope": "municipality",
+        "decision": "investigate",
+        "reason": "収集対象人口と人口総数の時点・対象範囲を確認し、行政サービスの対象規模を比較する候補。"
+      },
+      {
+        "metricKey": "total-population",
+        "scope": "municipality",
+        "decision": "investigate",
+        "reason": "施設・サービスの対象規模を補う候補。分子と年次・境域を揃えてから採用する。"
+      }
+    ],
+    "analysisRefs": [],
+    "figureRefs": [],
+    "reuseProducts": [],
+    "limitations": [
+      "災害被害額の実績は将来の危険度を示さない。行政サービスの対象人口と国勢調査人口の定義差を確認する。"
+    ]
+  }
+}

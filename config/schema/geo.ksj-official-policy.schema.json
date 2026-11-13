@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "国土数値情報 (KSJ) の公式利用条件の監査",
+  "description": "data/geo/ksj/official-policy.json の形状契約。公式の一覧ページ (verifiedFrom) を verifiedAt に監査した、未登録データセットの利用条件と取得判断。policies のキーが dataId で、未登録のデータが多いので geo.ksj-datasets には結ばない。decision が acquire のものだけ public R2 へ置いてよい (publicR2Eligible は読み込み口が導出する)。expectedArchiveCounts は、2026-08-30 の公式利用条件監査で公開・商用利用可能と確定した追加 29 件 (decision が acquire の policies) について、2026-08-30 時点の公式最新版に取得選択規則を適用したアーカイブ数。R2 の manifest.json 数と一致したときだけ取得完了と判定する。キーは geo.ksj-datasets に登録済みの dataId。件数の定数 (84 件・29 件) と導出の makePolicy は packages/gis/src/mlit-ksj/official-policy.ts が持つ。",
+  "type": "object",
+  "required": ["verifiedAt", "verifiedFrom", "policies", "expectedArchiveCounts"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "verifiedAt": { "description": "公式ページで確認した日 (YYYY-MM-DD)", "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "verifiedFrom": { "type": "string", "pattern": "^https://" },
+    "policies": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*$" },
+      "additionalProperties": {
+        "type": "object",
+        "required": ["license", "decision"],
+        "additionalProperties": false,
+        "properties": {
+          "license": { "enum": ["cc-by-4.0", "cc-by-4.0-partial", "commercial-ok", "non-commercial"] },
+          "decision": { "enum": ["acquire", "license-review", "local-only"] }
+        }
+      }
+    },
+    "expectedArchiveCounts": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*$" },
+      "additionalProperties": { "type": "integer", "minimum": 1 }
+    }
+  }
+}

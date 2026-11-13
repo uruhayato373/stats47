@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stats47.jp/schema/surveys.editorial.schema.json",
+  "title": "調査ハブの編集コンテンツ",
+  "description": "/survey/<id> の本文。調査ごとの検索意図を受ける編集ハブの、要約・分かること・読者の問い・数字を読む注意・関連記事。調査の名前・機関・URL は持たず、調査マスタ (surveys.master) の id で結ぶ。ranking への導線は rankingKey (指標キー)、記事は slug で指し、本文に ID を書かない。1 調査 1 件。編集の規約: .claude/rules/survey-content-standards.md。読み込みは packages/data-configs/src/survey-editorial.ts。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "entries"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "entries": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/definitions/entry" }
+    }
+  },
+  "definitions": {
+    "text": { "type": "string", "minLength": 1 },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["surveyId", "summary", "whatYouCanLearn", "readerQuestions", "caveats"],
+      "properties": {
+        "surveyId": {
+          "description": "調査マスタ (surveys.master) の id。台帳の中で一意",
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "summary": { "description": "この調査について (ページの説明文)", "$ref": "#/definitions/text" },
+        "whatYouCanLearn": {
+          "description": "この調査で分かること (出典・指標の定義のシートに出る)",
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/definitions/text" }
+        },
+        "readerQuestions": {
+          "description": "代表的な問い。ハブの代表ランキングと、ランキングページの「同じ調査のランキング」で最優先に並ぶ",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["question", "rankingKey"],
+            "properties": {
+              "question": { "$ref": "#/definitions/text" },
+              "rankingKey": {
+                "description": "指標キー (metric config のキー)",
+                "type": "string",
+                "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+              }
+            }
+          }
+        },
+        "caveats": {
+          "description": "数字を読む注意",
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/definitions/text" }
+        },
+        "areaLabel": {
+          "description": "ハブ冒頭の地域の表記。省略時は「47都道府県」。都市別の値を集める調査はここで言い換える",
+          "$ref": "#/definitions/text"
+        },
+        "relatedArticleSlugs": {
+          "description": "「この調査を使う記事」の先頭に置く記事の slug (公開済みのものだけ出る)。残りは公開日の新しい順",
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" }
+        }
+      }
+    }
+  }
+}

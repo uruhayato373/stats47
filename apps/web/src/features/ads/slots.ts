@@ -5,4 +5,4 @@
  *
  * root barrel (`./index`) は互換性のため残す。
  */
-export { InContentAdSlot, FooterAdSlot, RailAdSlot } from "./components/slots";
+export { InContentAdSlot, FooterAdSlot, RailAdSlot, InFeedAdSlot } from "./components/slots";

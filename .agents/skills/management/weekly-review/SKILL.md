@@ -110,7 +110,7 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 | AdSense の配置 | `data/adsense/LATEST.md`・`history-units.csv`・`impact-LATEST.md` と KPI `ad-yield`。運用は `/adsense-improvement`。再開後 4 週 (W42〜W45) はベースライン期間で配置を変えない。取得が 0 行 (`manifest.json` の `status: error`) なら Blockers へ (`ADSENSE-RESTART-01` 手順⑤) |
 | 楽天アフィリエイト成果 | 認証付き収集の `rakuten` (毎週土曜。`rakuten-report.mjs` が管理画面の JSON から当月・前月の発生と確定を読み `data/affiliate/rakuten-results.json` へ) を週次 Issue の「週次収益 (NSM)」の楽天行で確認する。収集が失敗・10 日超なら判定不能として Blockers へ。**収集が止まっている週だけ**、オーナーに管理画面の成果レポートを見てもらい `npm run rakuten:record -- --month <YYYY-MM> --orders <件> --estimated-yen <円> [--confirmed-yen <円>]` で記録する。値を推測で入れない |
 | 認証付き計測 | `npm run measurement:status` + `data/authenticated/latest.json`。48時間超・取得失敗・status-only・成果未取得をBlockersへ分離する。生データはprivate R2、現在の収集状態を過去週の実測にしない |
-| 計測→記録→改善サイクル | `data/measurement-cycle/LATEST.md`（Phase 0b で作り直したもの。週次メトリクス Issue の「🔁」節と同じ。GA4 回遊・GSC 判定目印・PSI / Cloudflare / SNS の週次要約を含む）。state の週が当週と違う・Phase 0b の記録を終えていない週は Blockers、未登録 custom dimension の登録と再ログインはオーナー作業として申し送る。個別の再照会は `node .claude/scripts/metrics/ga4-query.mjs` |
+| 計測→記録→改善サイクル | `data/measurement-cycle/LATEST.md`（Phase 0b で作り直したもの。週次メトリクス Issue の「🔁」節と同じ。GA4 回遊・GSC 判定目印・PSI / Cloudflare / SNS の週次要約を含む）。state の週が当週と違う・Phase 0b の記録を終えていない週は Blockers、未登録 custom dimension の登録と再ログインはオーナー作業として申し送る。個別の再照会は `node .claude/scripts/metrics/ga4-query.mjs`。GSC は毎週、送信済みビューの登録済み・未登録と前週差、理由別の件数と検証の状態、「ブロックされましたが登録」の件数、Googlebot の POST と HTML の件数を読む（表の行は runbook の「計測→記録→改善サイクル」。未取得は 0 と書かない） |
 | 商品 | `data/products/PRODUCT-LEDGER.md` (Phase 0b で作り直す)。期日の来た価格実験と商品群は、`data/products/price-history.json` の判定基準で続ける・変える・止めるを決め、決定を `data/products/product-strategy.json` の `decisions` に書く |
 | GA4の設定 | `data/measurement-cycle/LATEST.md` の「GA4 の設定の変化」(週次の記録は `data/google-admin/audits/<週>.json`)。追加・削除・問題があれば意図した変更か確かめ、意図しないものはバックログへ起票して改善につなげる |
 | SEOの提案 | `data/seo/latest-review.json` と `data/seo/proposals/`。サイトを変えない提案は PR を作らず develop へ記録されるので、ここで読み、担当へ渡すものを起票する |
@@ -120,10 +120,11 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 | note画像資産 | `npm run note:images:audit -- --json` の `summary` (`docs31Tracked` = docs/31 に紛れ込んだ追跡ファイル数。0 以外は違反)。週次CIの `note-circulation-audit` artifact の `note-image-assets.json` は `--verify-r2` 付きで、公開 R2 の本文・生成 AI 背景の欠落 (`NOTE_R2_BODY_MISSING` / `NOTE_BACKGROUND_MISSING`) を示す。正典 `.claude/rules/note-image-assets.md` |
 | 教材の展開 | `npm run reference:expansion -- status --json` の `totals` (展開先ごとの済み・企画中・見送り・未着手)。未着手が前週より増えた展開先は、担当 (正典 `.claude/rules/reference-source-standards.md` §5) を来週の計画で指名する |
 | noteカード表示 | `npm run note:cards:audit -- --browser-verify --previous data/note/card-visibility-latest.json --output data/note/card-visibility-latest.json` の `summary`。公開HTMLで空の候補はブラウザ描画で確定し、カード前の余分な空段落も検出。ブラウザ検証失敗があれば `--retry-unknown-from <直前report> --output <同report>` で失敗記事だけ再確認。取得・検証失敗は0件扱いしない。スクショは異常時だけ `--screenshots /tmp/note-card-screenshots --max-screenshots 3` で一時取得 |
+| note公開記事の採点 | `npm run note:published:audit` の `summary` (`data/note/published-audit-latest.json`)。公開ページの実物から、型でない本文画像・画像の重複・元データカードの行き先・古い年を記事ごとに採点する。ログイン不要・noteへは書かない。点数の低い記事から是正する |
 | ページUI週次確認 | `data/page-quality/metrics/ui-review-latest.json` (`quality-suite-weekly` の page-quality job が毎週土曜に更新)。`auditGeneratedAt` が当週か、`reviewStatus`、`readCoverage` の読んだ切り出し / 読むべき枚数、agent 指摘件数 (`findings`)、新規の機械検出件数 (`newViolationCount`) を書く。監査が当週に無い・`reviewStatus` が `not-run`/`blocked`・読み残し (`readCoverage.unreadScreens`) がある週は Blockers へ。読み残したページは確認済みに数えない。正典 `.claude/rules/page-quality-standards.md` |
 | 事業計画 | `data/business-plan/latest.json` + `packages/data-configs/src/business-plan/` |
 | モデル使用量 | `npm run model-usage:collect && npm run model-usage:report` → `.claude/state/metrics/model-usage/latest.json` の `proposals` / `canary`。提案は採否だけ決め、frontmatter・workflow は canary 合格を見てから変える (`.claude/rules/model-prompting.md`「継続最適化サイクル」)。canary 未実施で費用の大きい提案は今週の Should に 1 件まで |
-| Kindle | `config/kdp-listings.json` + `data/products/sales-ledger.json` + `data/products/kdp-weekly-publication.json` |
+| Kindle | `data/products/kdp/listings.json` + `data/products/sales-ledger.json` + `data/products/kdp-weekly-publication.json` |
 
 各snapshotの期間、取得日、freshnessを保持する。行が無い場合を推測の0へ変換せず、
 `not-measured` / `not-instrumented` / `insufficient-data`を区別する。

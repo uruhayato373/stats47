@@ -17,8 +17,8 @@ import { cached, fileExists, readCsv, readJson, TTL, wrap, type Wrapped } from "
  * 入力:
  * - 成果: `data/affiliate/{a8-results,a8-report-log,moshimo-results}.json`、
  *   `data/authenticated/latest.json` (ASP ごとの取得状態)、`data/affiliate/ga4-affiliate-history.csv`
- * - 掲載先: git TS の広告定義 (`apps/web/scripts/affiliate-ads-data.ts` = 自動配置、
- *   `affiliate-direct-placements-data.ts` = 記事への直貼り)。配信と同じ定義を読むので、画面と本番がずれない
+ * - 掲載先: 広告の台帳 (`affiliate.ads` = 自動配置、`affiliate.direct-placements` = 記事への直貼り) を
+ *   apps/web/scripts の読み込み口から読む。配信と同じ定義を読むので、画面と本番がずれない
  * - 提携・案件: `data/affiliate/{a8-catalog,affiliate-catalog}.json`
  * 欠測は 0 にせず、取得できなかった理由を返す (収益化戦略 §1)。
  */

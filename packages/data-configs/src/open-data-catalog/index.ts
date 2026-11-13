@@ -1,5 +1,5 @@
 /**
- * open-data-catalog — e-Stat 外オープンデータの source / dataset カタログ (git TS SSOT)。
+ * open-data-catalog — e-Stat 外オープンデータの source / dataset カタログの読み込み口。記録の正本は台帳 open-data.sources / open-data.datasets (data/open-data/catalog/)。
  * 管理 agent: open-data-curator / 検証: validate-open-data-catalog.ts + check-open-data-links.ts
  */
 export * from "./types";

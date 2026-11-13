@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "商品ファクトリーのテーマパック (P-01〜P-14)",
+  "description": "data/products/packs/packs.json の形状契約。出品・実データ接続・管理の単位であるテーマ別 14 パック (2026-07-23 に旧 174 件 A-01〜L-07 を縮約。sourceIds が吸収元の旧 ID のトレース)。packs のキーがパック ID で、theme は ID と 1:1 (EXPECTED_PACK_IDS と THEME_BY_ID は読み込み口がここから導く。件数 14 と ID の並びは packages/product-factory/tests/catalog.test.ts が固定する)。rankingKeys は持たず、読み込み口 packages/product-factory/src/catalog/products/packs.ts が生成物 pack-rankingkeys.generated.ts から ID 単位で注入する。licenseId は products.licenses のキー、datasets は products.pack-datasets の key (どちらも config/datasets.mjs の refs が検査する)。出品規律: 実データを接続済みのパックだけ status を approved にできる (validator が datasets の実在を検査する。当面 P-01 のみ接続済み)。データ系パックの formats は pptx・xlsx・csv・pdf・png、compatibility は PowerPoint 365 (Windows / Mac)・Excel 365 (Windows / Mac)・UTF-8 (BOM) 対応表計算ソフト・PDF 閲覧環境。notes はパックごとの判断の記録 (パック ID をキーにした文の配列)。",
+  "type": "object",
+  "required": ["packs", "notes"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "packs": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^P-\\d{2}$" },
+      "additionalProperties": {
+        "type": "object",
+        "required": ["theme", "name", "audience", "jobToBeDone", "formats", "price", "dataMode", "metrics", "datasets", "templateIds", "licenseId", "supportLevel", "compatibility", "risk", "status"],
+        "additionalProperties": false,
+        "properties": {
+          "theme": {
+            "description": "パックのテーマ (PackTheme)。パックと 1:1",
+            "enum": [
+              "population-household",
+              "income-wage-hiring",
+              "tourism-lodging",
+              "municipal-finance",
+              "healthcare-nursing",
+              "education-childcare",
+              "migration-living",
+              "retail-trade-area",
+              "industry-economy",
+              "disaster-infrastructure",
+              "map-chart-assets",
+              "all-in-one",
+              "free-trial",
+              "household-consumption"
+            ]
+          },
+          "name": { "type": "string", "minLength": 1 },
+          "audience": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+          "jobToBeDone": { "type": "string", "minLength": 1 },
+          "formats": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["pptx", "xlsx", "csv", "svg", "png", "pdf", "docx", "web"] } },
+          "price": {
+            "type": "object",
+            "required": ["minYen", "maxYen", "initialYen"],
+            "additionalProperties": false,
+            "properties": {
+              "minYen": { "type": "integer", "minimum": 0 },
+              "maxYen": { "type": "integer", "minimum": 0 },
+              "initialYen": { "type": "integer", "minimum": 0 }
+            }
+          },
+          "dataMode": { "enum": ["empty", "sample", "fixed-year", "updated", "customer"] },
+          "metrics": { "description": "使用する R2 ranking key 群。未接続パックは []", "type": "array", "items": { "type": "string" } },
+          "datasets": { "description": "収録する実データセットの key 群 (products.pack-datasets の key。config/datasets.mjs の refs が検査する)。未接続パックは []", "type": "array", "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" } },
+          "templateIds": { "type": "array", "items": { "type": "string" } },
+          "licenseId": { "description": "products.licenses のキー", "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+          "supportLevel": { "enum": ["none", "manual", "limited", "custom"] },
+          "compatibility": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+          "risk": { "enum": ["normal", "high-stakes", "rights-review"] },
+          "status": { "enum": ["cataloged", "spike", "buildable", "generated", "reviewed", "approved", "paused"] },
+          "variantOptions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["id", "label", "addYen"],
+              "additionalProperties": false,
+              "properties": {
+                "id": { "type": "string", "minLength": 1 },
+                "label": { "type": "string", "minLength": 1 },
+                "addYen": { "type": "integer", "minimum": 0 }
+              }
+            }
+          },
+          "sourceIds": { "description": "吸収した旧 174 件 ID のトレース (非網羅)", "type": "array", "items": { "type": "string", "minLength": 1 } }
+        }
+      }
+    },
+    "notes": {
+      "type": "object",
+      "propertyNames": { "pattern": "^P-\\d{2}$" },
+      "additionalProperties": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+    }
+  }
+}

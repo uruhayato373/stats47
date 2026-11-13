@@ -1,31 +1,39 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import test from "node:test";
 
+import { datasetPath } from "../../../../config/datasets.mjs";
 import {
-  validateTail,
+  validateAdsDoc,
+  parseAdsDoc,
+  serializeAdsDoc,
   extractIds,
   extractA8mats,
   draftA8mat,
   uniqueId,
   renderEntry,
-  insertEntry,
+  appendEntry,
   buildAdDraft,
   validateDecisionTargets,
 } from "../lib/a8-append-core.mjs";
 
-const SRC = `import type { AffiliateAd } from "../src/features/ads/types";
+const ROOT = join(import.meta.dirname, "../../../..");
 
-const AFFILIATE_ADS_BASE: AffiliateAd[] = [
-  {
-    "id": "af_existing_001",
-    "title": "既存案件",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=EXIST",
-    "adType": "banner"
-  },
-];
+const SRC = `{
+  "ads": [
+    {
+      "id": "af_existing_001",
+      "title": "既存案件",
+      "htmlContent": "https://px.a8.net/svt/ejp?a8mat=EXIST",
+      "adType": "banner"
+    }
+  ]
+}
 `;
 
-const EMPTY_SRC = `const AFFILIATE_ADS_BASE: AffiliateAd[] = [];\n`;
+const DOC = JSON.parse(SRC);
+const EMPTY_DOC = { ads: [] };
 
 const draft = {
   id: "af_new_a8_001",
@@ -50,42 +58,61 @@ const draft = {
   updatedAt: null,
 };
 
-test("validateTail: 正常な配列 → ok", () => {
-  const v = validateTail(SRC);
+test("parseAdsDoc / validateAdsDoc: 正常な台帳 → ok", () => {
+  const parsed = parseAdsDoc(SRC);
+  assert.equal(parsed.ok, true);
+  assert.deepEqual(parsed.doc, DOC);
+  const v = validateAdsDoc(DOC);
   assert.equal(v.ok, true);
   assert.equal(v.isEmpty, false);
 });
 
-test("validateTail: 配列後の派生コードにある `];` を閉じ括弧と取り違えない", () => {
-  const src = `${SRC}\nexport const X = BASE.map((ad) => {\n  const r = MAP[ad.id];\n  return r;\n});\n`;
-  const v = validateTail(src);
-  assert.equal(v.ok, true);
-  assert.equal(v.closeIndex, SRC.indexOf("\n];") + 1);
-});
-
-test("validateTail: 空配列 → ok isEmpty", () => {
-  const v = validateTail(EMPTY_SRC);
+test("validateAdsDoc: 空配列 → ok isEmpty", () => {
+  const v = validateAdsDoc(EMPTY_DOC);
   assert.equal(v.ok, true);
   assert.equal(v.isEmpty, true);
 });
 
-test("validateTail: 宣言なし → error", () => {
-  assert.equal(validateTail("const x = [];").ok, false);
+test("parseAdsDoc: JSON として読めない (途中で切れた台帳) → error", () => {
+  const r = parseAdsDoc(SRC.slice(0, SRC.length - 10));
+  assert.equal(r.ok, false);
+  assert.match(r.error, /^invalid-json:/);
 });
 
-test("validateTail: 閉じ括弧なし → error", () => {
-  const broken = SRC.replace("];", "");
-  assert.equal(validateTail(broken).ok, false);
+test("validateAdsDoc: ads が無い・配列でない・id の無い要素 → error", () => {
+  assert.equal(validateAdsDoc({}).ok, false);
+  assert.equal(validateAdsDoc([]).ok, false);
+  assert.equal(validateAdsDoc({ ads: {} }).ok, false);
+  assert.equal(validateAdsDoc({ ads: [{ title: "id なし" }] }).ok, false);
+  assert.equal(parseAdsDoc('{"ads": null}').ok, false);
+});
+
+test("serializeAdsDoc: 書き手の書き方は JSON.stringify(doc, null, 2) + 改行 で、読んで書き直しても変わらない", () => {
+  assert.equal(serializeAdsDoc(DOC), SRC);
+  assert.equal(serializeAdsDoc(parseAdsDoc(SRC).doc), SRC);
+});
+
+test("台帳 affiliate.ads は最初から書き手の書く形 (最初の追記で全行が差分にならない)", () => {
+  const text = readFileSync(join(ROOT, datasetPath("affiliate.ads")), "utf8");
+  const parsed = parseAdsDoc(text);
+  assert.equal(parsed.ok, true, parsed.error);
+  assert.equal(serializeAdsDoc(parsed.doc), text);
 });
 
 test("extractIds: 既存 id を抽出", () => {
-  assert.deepEqual(extractIds(SRC), ["af_existing_001"]);
+  assert.deepEqual(extractIds(DOC), ["af_existing_001"]);
 });
 
-test("extractA8mats: SSOT 全文から a8mat トークンを集合抽出", () => {
-  const s = extractA8mats(SRC);
+test("extractA8mats: 台帳の全項目から a8mat トークンを集合抽出", () => {
+  const s = extractA8mats({
+    ads: [
+      { id: "a", htmlContent: "https://px.a8.net/svt/ejp?a8mat=EXIST" },
+      { id: "b", htmlContent: "https://example.com", trackingPixelUrl: "https://www1.a8.net/0.gif?a8mat=PIXEL+X" },
+    ],
+  });
   assert.ok(s.has("EXIST"));
-  assert.equal(s.size, 1);
+  assert.ok(s.has("PIXEL+X"));
+  assert.equal(s.size, 2);
 });
 
 test("draftA8mat: draft の htmlContent から a8mat / 無ければ null", () => {
@@ -100,41 +127,38 @@ test("uniqueId: 衝突なし → そのまま / 衝突 → 連番", () => {
   assert.equal(uniqueId("af_new_a8_001", ["af_new_a8_001", "af_new_a8_002"]), "af_new_a8_003");
 });
 
-test("renderEntry: 2space インデント + 末尾カンマ + null 補完", () => {
-  const lit = renderEntry(draft, "2026-07-19 00:00:00");
-  assert.ok(lit.startsWith("  {"));
-  assert.ok(lit.endsWith("},"));
-  assert.ok(lit.includes('    "id": "af_new_a8_001"'));
-  assert.ok(lit.includes('"createdAt": "2026-07-19 00:00:00"'));
-  // JSON として (末尾カンマ除去で) パースできる
-  const parsed = JSON.parse(lit.replace(/,$/, ""));
-  assert.equal(parsed.vertical, "labor");
-  assert.equal(parsed.width, 300);
+test("renderEntry: 台帳の項目の順にそろえ、null を補完し、時刻を入れる", () => {
+  const entry = renderEntry(draft, "2026-07-19 00:00:00");
+  assert.equal(Object.keys(entry)[0], "id");
+  assert.deepEqual(Object.keys(entry).slice(-2), ["createdAt", "updatedAt"]);
+  assert.equal(entry.id, "af_new_a8_001");
+  assert.equal(entry.createdAt, "2026-07-19 00:00:00");
+  assert.equal(entry.vertical, "labor");
+  assert.equal(entry.width, 300);
+  assert.equal(renderEntry({ id: "x" }, "t").imageUrl, null);
 });
 
-test("insertEntry: 最終 ]; 直前に挿入・全体は追記後も配列が閉じる", () => {
-  const lit = renderEntry(draft, "2026-07-19 00:00:00");
-  const out = insertEntry(SRC, lit);
-  assert.ok(out.includes("af_new_a8_001"));
-  // 既存も残る
-  assert.ok(out.includes("af_existing_001"));
-  // ]; は最後に 1 つ
-  assert.equal((out.match(/\];/g) || []).length, 1);
-  // 挿入後、新エントリは ]; より前
-  assert.ok(out.indexOf("af_new_a8_001") < out.lastIndexOf("];"));
-  // 既存エントリの後に新エントリ (末尾追記)
-  assert.ok(out.indexOf("af_existing_001") < out.indexOf("af_new_a8_001"));
+test("appendEntry: 末尾に足し、既存を残し、元の文書は変えない", () => {
+  const out = appendEntry(DOC, renderEntry(draft, "2026-07-19 00:00:00"));
+  assert.deepEqual(out.ads.map((ad) => ad.id), ["af_existing_001", "af_new_a8_001"]);
+  assert.equal(DOC.ads.length, 1);
+  // 書き出すと既存の行はそのまま残り、追記分の行だけが増える
+  const before = serializeAdsDoc(DOC).split("\n");
+  const after = serializeAdsDoc(out).split("\n");
+  assert.deepEqual(after.slice(0, 8), [...before.slice(0, 7), "    },"]);
+  assert.deepEqual(after.slice(-4), ["    }", "  ]", "}", ""]);
+  // 書き出した文字列は読み直せて、書き直しても変わらない
+  assert.equal(serializeAdsDoc(parseAdsDoc(serializeAdsDoc(out)).doc), serializeAdsDoc(out));
 });
 
-test("insertEntry: 空配列にも挿入できる", () => {
-  const lit = renderEntry(draft, "t");
-  const out = insertEntry(EMPTY_SRC, lit);
-  assert.ok(out.includes("af_new_a8_001"));
-  assert.equal((out.match(/\];/g) || []).length, 1);
+test("appendEntry: 空配列にも足せる", () => {
+  const out = appendEntry(EMPTY_DOC, renderEntry(draft, "t"));
+  assert.deepEqual(out.ads.map((ad) => ad.id), ["af_new_a8_001"]);
 });
 
-test("insertEntry: 壊れた tail は throw", () => {
-  assert.throws(() => insertEntry("const x = 1;", "  {},"), /invalid tail/);
+test("appendEntry: 形の崩れた文書・既にある id は throw", () => {
+  assert.throws(() => appendEntry({ ads: null }, renderEntry(draft, "t")), /invalid doc/);
+  assert.throws(() => appendEntry(DOC, renderEntry({ ...draft, id: "af_existing_001" }, "t")), /id が重複/);
 });
 
 // ── buildAdDraft の locationCode 振り分け (2026-07-28 追加) ─────────────────
@@ -213,11 +237,11 @@ test("同一プログラムの banner と text は a8mat が別なので両方�
 // AFF-APPEND-TARGET-KEYS-01 (2026-10-19): 追記スクリプトが targetRankingKeys を書き出さず、decision レーンの 13 件を手で直した
 test("renderEntry: targetRankingKeys があれば書き出し、無ければ出さない", () => {
   const withKeys = renderEntry({ ...draft, targetRankingKeys: ["real-disposable-income", "engel-coefficient"] }, "2026-10-19 00:00:00");
-  const parsed = JSON.parse(withKeys.trim().replace(/,$/, ""));
-  assert.deepEqual(parsed.targetRankingKeys, ["real-disposable-income", "engel-coefficient"]);
-  assert.ok(withKeys.indexOf("targetCategories") < withKeys.indexOf("targetRankingKeys"));
-  assert.doesNotMatch(renderEntry(draft, "2026-10-19 00:00:00"), /targetRankingKeys/);
-  assert.doesNotMatch(renderEntry({ ...draft, targetRankingKeys: [] }, "2026-10-19 00:00:00"), /targetRankingKeys/);
+  assert.deepEqual(withKeys.targetRankingKeys, ["real-disposable-income", "engel-coefficient"]);
+  const keys = Object.keys(withKeys);
+  assert.ok(keys.indexOf("targetCategories") < keys.indexOf("targetRankingKeys"));
+  assert.equal("targetRankingKeys" in renderEntry(draft, "2026-10-19 00:00:00"), false);
+  assert.equal("targetRankingKeys" in renderEntry({ ...draft, targetRankingKeys: [] }, "2026-10-19 00:00:00"), false);
 });
 
 test("validateDecisionTargets: decision レーンは対象ランキングが空・実在しない key なら問題を返す", () => {

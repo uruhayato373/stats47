@@ -20,7 +20,7 @@ const WORKSPACES = ["apps/admin", "apps/web"];
 
 const stemOf = (path) => basename(path).replace(/\.test\.[cm]?[jt]s$/, "").replace(/\.[^.]+$/, "");
 
-/** 変更したファイルと名前が重なる node --test のテストを選ぶ (config/domains.json → check-domains.test.cjs) */
+/** 変更したファイルと名前が重なる node --test のテストを選ぶ (data/business/domains.json → check-domains.test.cjs) */
 export function selectNodeTests(changed, tests) {
   const stems = [...new Set(changed.map(stemOf))].filter((stem) => stem.length >= MIN_STEM);
   return tests.filter((test) => {
@@ -51,7 +51,9 @@ function changedSinceRemote() {
 
 function run(label, command, args, cwd = ROOT) {
   console.log(`▶ ${label}`);
-  const { status } = spawnSync(command, args, { cwd, stdio: "inherit" });
+  // Windows の npx は npx.cmd で、shell なしでは起動できず status が null になる (出力なしで失敗扱いになっていた。2026-11-12)
+  const { status, error } = spawnSync(command, args, { cwd, stdio: "inherit", shell: process.platform === "win32" });
+  if (error) console.error(`起動に失敗: ${command} (${error.message})`);
   return status === 0;
 }
 
@@ -61,7 +63,8 @@ function main() {
   const nodeTests = selectNodeTests(changed, listNodeTests());
   let ok = true;
   if (nodeTests.length > MAX_NODE_TESTS) console.log(`関係するテストが ${nodeTests.length} 件あるので CI に任せる`);
-  else if (nodeTests.length) ok = run(`スクリプトのテスト ${nodeTests.length} 件`, "node", ["--test", ...nodeTests]) && ok;
+  // .ts を require するスクリプトがある。型を外せない Node (22.14 など) でも CI と同じ結果になるよう tsx を通す (2026-11-12)
+  else if (nodeTests.length) ok = run(`スクリプトのテスト ${nodeTests.length} 件`, "node", ["--import", "tsx", "--test", ...nodeTests]) && ok;
   for (const workspace of WORKSPACES) {
     const sources = selectVitestSources(changed, workspace);
     if (sources.length === 0) continue;

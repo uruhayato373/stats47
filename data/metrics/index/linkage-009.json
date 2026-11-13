@@ -210,10 +210,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:fishery-marine",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:fishing-port-count-ksj",
           "kind": "ranking"
         },
@@ -3234,11 +3230,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:fukui-food-culture",
+          "pageId": "blog:gifu-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:gifu-food-culture",
+          "pageId": "blog:hyogo-food-culture",
           "kind": "blog"
         },
         {
@@ -3251,6 +3247,10 @@
         },
         {
           "pageId": "blog:nara-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:okayama-food-culture",
           "kind": "blog"
         },
         {
@@ -3513,11 +3513,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:fukui-food-culture",
+          "pageId": "blog:gifu-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:gifu-food-culture",
+          "pageId": "blog:hyogo-food-culture",
           "kind": "blog"
         },
         {
@@ -3530,6 +3530,10 @@
         },
         {
           "pageId": "blog:nara-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:okayama-food-culture",
           "kind": "blog"
         },
         {
@@ -4200,10 +4204,6 @@
         {
           "pageId": "blog:mineral-water-spending-prefecture-gap",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:household-food-spending",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:food-expenditure-total",
@@ -5813,10 +5813,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:foreign-residents",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:foreign-resident-count",
           "kind": "municipality-ranking"
         },
@@ -6058,10 +6054,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:foreign-residents",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:foreign-resident-count-china",
           "kind": "ranking"
         },
@@ -6286,10 +6278,6 @@
         {
           "pageId": "area-theme:47000:foreign-residents",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:foreign-residents",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:foreign-resident-count-china-per-100k",
@@ -6525,10 +6513,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:foreign-residents",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:foreign-resident-count-korea",
           "kind": "ranking"
         },
@@ -6753,10 +6737,6 @@
         {
           "pageId": "area-theme:47000:foreign-residents",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:foreign-residents",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:foreign-resident-count-korea-per-100k",
@@ -7185,10 +7165,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:foreign-residents",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:foreign-resident-count-per-100k",
           "kind": "municipality-ranking"
         },
@@ -7426,10 +7402,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:foreign-residents",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:foreign-resident-count-usa",
           "kind": "ranking"
         },
@@ -7654,10 +7626,6 @@
         {
           "pageId": "area-theme:47000:foreign-residents",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:foreign-residents",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:foreign-resident-count-usa-per-100k",
@@ -8590,14 +8558,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:forestry-timber",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "japan-theme:natural-environment",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:forest-area-ratio",
           "kind": "ranking"
         },
@@ -8838,10 +8798,6 @@
         {
           "pageId": "blog:roadside-station-count-vs-forest-road-length",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:forestry-timber",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:forest-road-length",
@@ -10709,6 +10665,14 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:kyoto-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:wakayama-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:fresh-meat-group-consumption-expenditure",
           "kind": "ranking"
         }
@@ -10745,6 +10709,14 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:kyoto-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:wakayama-food-culture",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:fresh-meat-group-consumption-quantity",
           "kind": "ranking"
@@ -11042,6 +11014,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:wakayama-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:fresh-seafood-group-consumption-expenditure",
           "kind": "ranking"
         }
@@ -11078,6 +11054,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:wakayama-food-culture",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:fresh-seafood-group-consumption-quantity",
           "kind": "ranking"
@@ -11406,6 +11386,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:fukui-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kagawa-food-culture",
           "kind": "blog"
         },
@@ -11464,6 +11448,10 @@
         },
         {
           "pageId": "blog:fresh-udon-soba-consumption-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:fukui-food-culture",
           "kind": "blog"
         },
         {

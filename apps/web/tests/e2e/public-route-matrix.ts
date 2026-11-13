@@ -134,8 +134,9 @@ export const THEME_ROUTE_MATRIX: readonly ThemeRouteContract[] = [
   },
   {
     id: "theme-local-finance",
-    path: "/themes/local-finance",
-    canonicalPath: "/themes/local-finance",
+    // 決算カードは選択した県の会計を描く。全国ページでは県を代入しない。
+    path: "/areas/28000/local-finance",
+    canonicalPath: "/areas/28000/local-finance",
     heading: "地方財政",
     dataSelector: '[data-theme-chart="true"]',
     expectedChartCount: 4,

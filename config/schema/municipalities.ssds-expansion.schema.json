@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "社会・人口統計体系 (SSDS) の市区町村指標の拡充",
+  "description": "data/municipalities/catalog/ssds-expansion.json の形状契約。社会・人口統計体系の市区町村コードのうち 2026-10-22 まで使っていなかったものの公開判断 (MUNI-RANKING-EXPANSION-01)。判定 (e-Stat 実測・未使用 733 コード): 最新年 2015 以降・値のある市区町村 800 以上・0 の割合 90% 未満・公開済みの市区町村指標と値が一致しない。通った 541 件 (新規の市区町村専用 530 + 県の指標に市区町村を足した 11)。retail-employees はテーマ専用の取り込み (ingest-retail-employees.mjs) が県だけを前提にするため対象外。読み込み口 packages/data-configs/src/geo-scope/municipality-ssds-expansion.ts が公開判断 (municipalities.metric-availability) とテーマ (municipalities.themes) に足す。指標のキーは config/datasets.mjs の refs が検査する。",
+  "type": "object",
+  "required": ["newThemes", "themeMetrics", "positiveOnlyKeys", "databookPicks"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "newThemes": {
+      "description": "新設の市区町村テーマ (キーが slug)。title は「市区町村の◯◯」(市区町村ページの節見出しに◯◯を使う)。指標は themeMetrics が足す。",
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-z][a-z0-9-]*$" },
+      "additionalProperties": {
+        "type": "object",
+        "required": ["title", "defaultMetricKey"],
+        "additionalProperties": false,
+        "properties": {
+          "title": { "type": "string", "minLength": 1 },
+          "defaultMetricKey": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" }
+        }
+      }
+    },
+    "themeMetrics": {
+      "description": "テーマ (既存・新設) ごとに足す指標。キーは市区町村テーマの slug。並びはテーマページと市区町村ページの表示順。",
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-z][a-z0-9-]*$" },
+      "additionalProperties": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" } }
+    },
+    "positiveOnlyKeys": {
+      "description": "0 の割合が 50% 以上の指標 (施設・区域が無い自治体の 0)。0 を除いて順位を付ける (valuePolicy.minExclusive = 0)。",
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" }
+    },
+    "databookPicks": {
+      "description": "市区町村ページのデータブックに載せる指標。拡充分はここに挙げたものだけを載せる (全件を載せると 1 ページが 2MB を超え、ページの重さの予算を外れる。残りはテーマページから見られる)。",
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" }
+    }
+  }
+}

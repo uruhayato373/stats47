@@ -1,7 +1,7 @@
 import { fetchPrefectures } from "@stats47/area";
 
 // 完全DBレス (docs/01_技術設計/02_データアーキテクチャ.md): prefecture master の SSOT は
-// git TS の packages/area/src/data/prefectures.json (47 県, 静的 Reference)。`@stats47/area` 経由で読む。
+// git TS の 台帳 areas.prefectures (47 県, 静的 Reference)。`@stats47/area` 経由で読む。
 // 旧版は D1 prefectures を読んでいたが Phase C で git TS に repoint した
 // (D1 と code/name/順序が完全一致することを移行時に検証済)。
 

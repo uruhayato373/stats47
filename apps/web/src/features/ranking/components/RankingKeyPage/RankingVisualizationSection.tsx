@@ -60,7 +60,7 @@ interface RankingVisualizationSectionProps {
     headerActions?: ReactNode;
     cardFooter?: ReactNode;
     isPending?: boolean;
-    /** パネルの題名。既定は「都道府県別の地図と表」(テーマの分布の節は指標名を入れる) */
+    /** パネルの題名。既定は地域種別に応じた「都道府県別ランキング」等 (テーマの分布の節は指標名を入れる) */
     title?: string;
     /**
      * 県の詳細を開いていないときに地図と表で強調する県 (テーマの県のページの県)。
@@ -132,11 +132,11 @@ export function RankingVisualizationSection({
 
     return (
         <ChartPanel
-            title={title ?? `${unitLabel}別の地図と表`}
+            title={title ?? `${unitLabel}別ランキング`}
             icon={<MapIcon />}
             action={headerActions}
-            // 補足 (集計条件・最終更新・出典) はパネルの中の下端に置く。地図・表との間は線 1 本で区切る
-            footer={<div className="-mx-4 space-y-1.5 border-t px-4 pt-3">{cardFooter}</div>}
+            // 集計条件があるときだけ補足を置き、空の線と余白を作らない。
+            footer={cardFooter && <div className="-mx-4 space-y-1.5 border-t px-4 pt-3">{cardFooter}</div>}
             // 地図を枠の端まで描く: 横は px-0!、上は Card の gap-4 を外して見出しの下線に接する
             className="gap-0!"
             contentClassName="px-0!"

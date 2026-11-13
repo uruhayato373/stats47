@@ -68,11 +68,14 @@ export interface AdSlotProps {
   rootMargin?: number;
 
   /**
-   * 広告の枠の台帳 (config/ads/placements.json) の箱。予約の高さと開発中の代わりの表示がこの寸法になる
+   * 広告の枠の台帳 (data/ads/placements.json) の箱。予約の高さと開発中の代わりの表示がこの寸法になる
    * (本番の実測に合わせた箱)。AdSenseAd では必須 (2026-10-30。渡さない枠が形式ごとの既定値 120px・300px で
    * 本番の実測 280px・466px より小さく確保していた)。
    */
   slotBox?: AdSlotBoxProp;
+
+  /** インフィード広告の data-ad-layout-key (AdSense がユニットごとに発行する) */
+  layoutKey?: string;
 
   /**
    * data-full-width-responsive属性を強制的に設定するか

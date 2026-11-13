@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "商品のライセンス定義",
+  "description": "data/products/packs/licenses.json の形状契約。ライセンス ID をキーにした定義 (レビュー「利用許諾の推奨」と節 K の更新・ライセンス違いの商品に基づく)。どのライセンスでも「テンプレート・shape・SVG・元データ単体の再販売 / 再配布」は禁止なので resale は常に false。attribution は e-Stat の出典表示義務の文面で、全ライセンスが同じ文面を持つ。パックの licenseId (products.packs) がこのキーを指す。読み込み口は packages/product-factory/src/catalog/licenses.ts (LICENSE_REGISTRY・LicenseId・LICENSE_IDS)。",
+  "type": "object",
+  "required": ["licenses"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "licenses": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^[a-z][a-z0-9-]*$" },
+      "additionalProperties": {
+        "type": "object",
+        "required": ["name", "scope", "clientWork", "resale", "attribution"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "scope": { "description": "利用範囲 (購入者本人 / 1 法人内 / 教育機関等)", "type": "string", "minLength": 1 },
+          "clientWork": { "description": "クライアント納品物への組み込み可否", "type": "boolean" },
+          "resale": { "description": "テンプレート / shape / SVG / 元データ単体の再販売・再配布は常に不可", "const": false },
+          "attribution": { "description": "出典表示義務 (e-Stat 等)", "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

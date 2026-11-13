@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stats47.jp/schema/categories.topics.schema.json",
+  "title": "カテゴリのトピック",
+  "description": "/category/<key> の一覧を意味のあるまとまりで束ねる見出し。カテゴリ 1 件に 1 ファイル。URL を持たず、1 つの指標は 1 つのカテゴリ文脈で 1 つのトピックにだけ属し (複数に属させるとタグと重複する)、描画物を持たない。MetricConfig.groupKey (同一指標の別カットを束ねる) とは別物で、混ぜない。解決は resolveTopicKey (packages/data-configs/src/topics/resolve-topic.ts): overrides を先に引き、次に topics を配列順に評価して先勝ち (広いパターンは後ろに置く)、どれにも当たらなければ予約キー other (その他) に落ちる。topics に other を定義できない。matchers を変えても本番は変わらず、R2 の app/category/<key>/items.json の再生成 (sync-snapshots の ranking-items) が要る。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "categoryKey", "topics"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "categoryKey": { "description": "カテゴリマスタ (categories.master) の key。ファイル名と一致する", "type": "string", "pattern": "^[a-z]+$" },
+    "topics": {
+      "description": "表示順 = 配列の順。受け皿 other は含めない (該当があれば末尾に自動で付く)",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["key", "label", "matchers"],
+        "properties": {
+          "key": { "description": "カテゴリ内で一意の kebab-case。other は予約語", "type": "string", "pattern": "^(?!other$)[a-z0-9]+(-[a-z0-9]+)*$" },
+          "label": { "description": "見出しに出す日本語", "type": "string", "minLength": 1 },
+          "matchers": {
+            "description": "指標をこのトピックへ割り当てる規則。空配列なら overrides でのみ到達できる",
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "description": "ランキング名 (title) の正規表現一致。pattern は RegExp の source でフラグなしで評価する",
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["kind", "pattern"],
+                  "properties": { "kind": { "const": "title" }, "pattern": { "type": "string", "minLength": 1 } }
+                },
+                {
+                  "description": "家計調査の品目コード (source.filter.cdCat01) の前方一致。economy 専用。先頭 2 桁が 10 大費目、続く 2 桁が中分類。economy の家計調査品目の分類に使う",
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["kind", "prefixes"],
+                  "properties": {
+                    "kind": { "const": "kakei-cat01" },
+                    "prefixes": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^[0-9]+$" } }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "overrides": {
+      "description": "規則で拾えない・誤分類される指標の個別指定。matchers より優先する。キー = 指標キー、値 = このファイルの topics の key か other",
+      "type": "object",
+      "additionalProperties": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" }
+    }
+  }
+}

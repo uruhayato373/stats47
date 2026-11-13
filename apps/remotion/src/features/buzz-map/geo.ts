@@ -219,6 +219,8 @@ export function computeBuzzMapGeo(
     lineYearProp?: string;
     /** 沖縄インセット枠の差し替え（型台帳「地図（実際の形）」は島の範囲に合わせた小さい枠を使う） */
     insetBox?: { x: number; y: number; width: number; height: number };
+    /** 全国の市区町村比較では、枠外の離島も同じインセットへ移して自治体を落とさない。 */
+    includeOffshore?: boolean;
   }
 ): BuzzMapGeo {
   const { level, ratio, type } = opts;
@@ -245,11 +247,15 @@ export function computeBuzzMapGeo(
     };
   }
 
+  // 全自治体版は本土の東西端にある小島も本土側へ残し、南の離島だけを別位置へ移す。
+  const inMainMap = opts.includeOffshore ? (_lon: number, lat: number) => lat >= MAINLAND_BBOX.south : inMainlandBox;
   const mainFeatures = features
-    .filter((f) => !isOkinawa(codeOf(f)) && inMainland(f))
-    .map((f) => keepPolygonsWithin(f, inMainlandBox))
+    .filter((f) => opts.includeOffshore || (!isOkinawa(codeOf(f)) && inMainland(f)))
+    .map((f) => keepPolygonsWithin(f, inMainMap))
     .filter((f): f is Feature => f !== null);
-  const okinawaFeatures = features
+  const okinawaFeatures = opts.includeOffshore ? features
+    .map((f) => keepPolygonsWithin(f, (lon, lat) => !inMainMap(lon, lat)))
+    .filter((f): f is Feature => f !== null) : features
     .filter((f) => {
       if (!isOkinawa(codeOf(f))) return false;
       const [lon, lat] = geoCentroid(f);
@@ -273,15 +279,23 @@ export function computeBuzzMapGeo(
   // 沖縄インセット（16:9 は本土トリムのため出さない）
   let inset: BuzzMapPathInfo[] | null = null;
   if (insetBox && okinawaFeatures.length > 0) {
-    const fc: FeatureCollection = {
-      type: "FeatureCollection",
-      features: okinawaFeatures,
-    };
-    inset = fitAndRender(okinawaFeatures, fc, {
-      x0: insetBox.x + 12,
-      y0: insetBox.y + 12,
-      x1: insetBox.x + insetBox.width - 12,
-      y1: insetBox.y + insetBox.height - 12,
+    let groups = [okinawaFeatures];
+    if (opts.includeOffshore && okinawaFeatures.length > 1) {
+      // 東西に離れた島群を最大の経度間隔で分ける。特定の自治体コードを直書きしない。
+      const ordered = okinawaFeatures.map(feature => ({ feature, lon: geoCentroid(feature)[0] })).sort((a, b) => a.lon - b.lon);
+      let split = 1;
+      for (let i = 2; i < ordered.length; i++)
+        if (ordered[i].lon - ordered[i - 1].lon > ordered[split].lon - ordered[split - 1].lon) split = i;
+      groups = [ordered.slice(0, split), ordered.slice(split)].map(group => group.map(item => item.feature));
+    }
+    inset = groups.flatMap((group, index) => {
+      const height = insetBox.height / groups.length;
+      return fitAndRender(group, { type: "FeatureCollection", features: group }, {
+        x0: insetBox.x + 12,
+        y0: insetBox.y + index * height + 12,
+        x1: insetBox.x + insetBox.width - 12,
+        y1: insetBox.y + (index + 1) * height - 12,
+      });
     });
   }
 

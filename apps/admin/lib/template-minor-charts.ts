@@ -6,7 +6,7 @@ import { rankingRows } from './template-ranking-bars';
 import { RANKING_SAMPLE_METRIC, RANKING_SAMPLE_PRESENTATION, RANKING_SAMPLE_YEAR, rankingSampleLabels } from './template-ranking-data';
 import { compositionSampleRows } from './template-composition-stacked';
 import { LIGHT_THEME, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
-import { SAMPLE_FRAME, escapeXml, sampleBodyTop, sampleFrame } from './template-sample-frame';
+import { SAMPLE_FRAME, escapeXml, fitTitleSize, sampleBodyTop, sampleFrame } from './template-sample-frame';
 
 const LIQUOR = { title: '酒類別の販売数量構成比', source: '国税庁「酒のしおり」' } as const;
 
@@ -96,34 +96,63 @@ export function renderDistributionBoxplot(raw: unknown) {
   });
 }
 
-/** One fiscal year's composition as a donut: the year in the centre, every share in the legend. */
-export function renderCompositionPie(raw: unknown, theme: ChartTheme = LIGHT_THEME) {
-  const { categories, years, share } = liquorShares(raw);
-  const year = years[years.length - 1];
-  const top = sampleBodyTop(false) + 30;
+/** One whole as a donut: the parts' shares around the ring, a short label in the centre, every share in the legend. */
+export interface DonutChart {
+  title: string;
+  meta: string;
+  note?: string;
+  source: string;
+  /** Written in the hole, e.g. the year or the area. */
+  centerLabel: string;
+  /** Few parts that sum to the whole (the ledger's fit: up to about six); group the rest into one 「その他」. */
+  categories: { label: string; value: number }[];
+}
+const DONUT_MAX_PARTS = 8;
+
+export function renderDonutChart(chart: DonutChart, theme: ChartTheme = LIGHT_THEME) {
+  const { categories } = chart;
+  if (categories.length < 2 || categories.length > DONUT_MAX_PARTS) throw Error(`ドーナツの区分は 2〜${DONUT_MAX_PARTS} 個 (${categories.length})。残りは「その他」にまとめる`);
+  if (categories.some((c) => !Number.isFinite(c.value) || c.value < 0)) throw Error('ドーナツの値は 0 以上の数');
+  const total = categories.reduce((sum, c) => sum + c.value, 0);
+  if (!(total > 0)) throw Error('ドーナツの合計が 0');
+  const share = (value: number) => value / total * 100;
+  // A part too small to round to 0.1% is still there; 「0.0%」 would read as nothing.
+  const shareText = (value: number) => (value > 0 && share(value) < 0.05 ? '0.1%未満' : `${share(value).toFixed(1)}%`);
+  const top = sampleBodyTop(Boolean(chart.note)) + 30;
   const center = { x: 540, y: top + 330 }, radius = { outer: 300, inner: 170 };
   let angle = -Math.PI / 2;
   const point = (r: number, a: number) => `${(center.x + r * Math.cos(a)).toFixed(1)},${(center.y + r * Math.sin(a)).toFixed(1)}`;
-  const slices = categories.map((category, i) => {
-    const value = share(category, year), sweep = value / 100 * Math.PI * 2, end = angle + sweep;
+  const slices = categories.map(({ label, value: raw }, i) => {
+    const value = share(raw), sweep = value / 100 * Math.PI * 2, end = angle + sweep;
     const large = sweep > Math.PI ? 1 : 0;
     const d = `M${point(radius.outer, angle)} A${radius.outer},${radius.outer} 0 ${large} 1 ${point(radius.outer, end)} L${point(radius.inner, end)} A${radius.inner},${radius.inner} 0 ${large} 0 ${point(radius.inner, angle)} Z`;
     const fill = SERIES_COLORS[i % SERIES_COLORS.length];
     const mid = angle + sweep / 2, labelR = (radius.outer + radius.inner) / 2;
     const text = value >= 6 ? `<text x="${(center.x + labelR * Math.cos(mid)).toFixed(1)}" y="${(center.y + labelR * Math.sin(mid) + 11).toFixed(1)}" text-anchor="middle" font-size="30" font-weight="700" fill="${labelOn(fill)}">${value.toFixed(1)}%</text>` : '';
     angle = end;
-    return `<path data-category="${escapeXml(category)}" d="${d}" fill="${fill}" stroke="${theme.paper}" stroke-width="3"/>${text}`;
+    return `<path data-category="${escapeXml(label)}" d="${d}" fill="${fill}" stroke="${theme.paper}" stroke-width="3"/>${text}`;
   }).join('');
   const legendTop = center.y + radius.outer + 70, column = (SAMPLE_FRAME.right - SAMPLE_FRAME.left) / 2;
-  const legend = categories.map((category, i) => {
+  const legend = categories.map(({ label, value }, i) => {
     const x = SAMPLE_FRAME.left + (i % 2) * column, y = legendTop + Math.floor(i / 2) * 60;
-    return `<rect x="${x}" y="${y}" width="32" height="32" rx="4" fill="${SERIES_COLORS[i % SERIES_COLORS.length]}"/><text x="${x + 46}" y="${y + 26}" font-size="${Math.min(26, (column - 46 - 130) / category.length).toFixed(1)}">${escapeXml(category)}</text><text x="${x + column - 24}" y="${y + 26}" text-anchor="end" font-size="26" font-weight="700">${share(category, year).toFixed(1)}%</text>`;
+    return `<rect x="${x}" y="${y}" width="32" height="32" rx="4" fill="${SERIES_COLORS[i % SERIES_COLORS.length]}"/><text x="${x + 46}" y="${y + 26}" font-size="${Math.min(26, (column - 46 - 130) / label.length).toFixed(1)}">${escapeXml(label)}</text><text x="${x + column - 24}" y="${y + 26}" text-anchor="end" font-size="26" font-weight="700">${shareText(value)}</text>`;
   }).join('');
   return sampleFrame({
-    title: LIQUOR.title, titleSize: 64, meta: `${year} · 全国 · 単位：%`, source: LIQUOR.source,
+    title: chart.title, titleSize: fitTitleSize(chart.title, 64), meta: chart.meta, note: chart.note, source: chart.source,
+    attributes: `data-image-template="pie" data-parts="${categories.length}"`,
     theme,
-    body: `${slices}<text x="${center.x}" y="${center.y + 14}" text-anchor="middle" font-size="40" font-weight="700">${escapeXml(year)}</text>${legend}`,
+    body: `${slices}<text x="${center.x}" y="${center.y + 14}" text-anchor="middle" font-size="40" font-weight="700">${escapeXml(chart.centerLabel)}</text>${legend}`,
   });
+}
+
+/** The fixed liquor sample: one fiscal year's composition, the year in the centre. */
+export function renderCompositionPie(raw: unknown, theme: ChartTheme = LIGHT_THEME) {
+  const { categories, years, share } = liquorShares(raw);
+  const year = years[years.length - 1];
+  return renderDonutChart({
+    title: LIQUOR.title, meta: `${year} · 全国 · 単位：%`, source: LIQUOR.source, centerLabel: year,
+    categories: categories.map((label) => ({ label, value: share(label, year) })),
+  }, theme);
 }
 
 /** Categories × fiscal years, each cell shaded by its share with the value written in it. */

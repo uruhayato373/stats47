@@ -191,6 +191,10 @@
           "kind": "municipality-theme"
         },
         {
+          "pageId": "product:data-p-01",
+          "kind": "product-analysis"
+        },
+        {
           "pageId": "ranking:elderly-couple-households",
           "kind": "ranking"
         }
@@ -785,10 +789,6 @@
         {
           "pageId": "area:47000",
           "kind": "area"
-        },
-        {
-          "pageId": "japan-theme:living-housing",
-          "kind": "japan-theme"
         },
         {
           "pageId": "municipality-ranking:elderly-couple-only-household-ratio",
@@ -1407,6 +1407,10 @@
         {
           "pageId": "municipality-theme:aging-society",
           "kind": "municipality-theme"
+        },
+        {
+          "pageId": "product:data-p-01",
+          "kind": "product-analysis"
         },
         {
           "pageId": "ranking:elderly-single-households",
@@ -2843,6 +2847,10 @@
           "kind": "municipality-theme"
         },
         {
+          "pageId": "product:data-p-06",
+          "kind": "product-analysis"
+        },
+        {
           "pageId": "ranking:elementary-school-children-count",
           "kind": "ranking"
         }
@@ -3117,6 +3125,10 @@
           "kind": "municipality-theme"
         },
         {
+          "pageId": "product:data-p-06",
+          "kind": "product-analysis"
+        },
+        {
           "pageId": "ranking:elementary-school-count",
           "kind": "ranking"
         },
@@ -3376,10 +3388,6 @@
         {
           "pageId": "area-theme:47000:education-culture",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:education-culture",
-          "kind": "japan-theme"
         },
         {
           "pageId": "municipality-ranking:elementary-school-count-per-100km2-habitable",
@@ -4416,6 +4424,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "product:data-p-06",
+          "kind": "product"
+        },
+        {
           "pageId": "ranking:elementary-school-students-per-teacher",
           "kind": "ranking"
         },
@@ -4471,6 +4483,10 @@
         {
           "pageId": "municipality-theme:education-culture",
           "kind": "municipality-theme"
+        },
+        {
+          "pageId": "product:data-p-06",
+          "kind": "product-analysis"
         },
         {
           "pageId": "ranking:elementary-school-teachers",
@@ -5998,10 +6014,6 @@
         {
           "pageId": "area-theme:47000:labor-wages",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:labor-wages",
-          "kind": "japan-theme"
         },
         {
           "pageId": "municipality-ranking:employed-people-ratio",
@@ -9823,14 +9835,6 @@
         {
           "pageId": "area-theme:47000:labor-wages",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:labor-mobility",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "japan-theme:labor-wages",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:employment-rate",

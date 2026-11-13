@@ -23,7 +23,6 @@ import {
 import { buildExternalContentPages, type ExternalSnsSource } from '@stats47/data-configs/content/external';
 import {
   KNOWN_MUNICIPALITY_RANKING_KEYS,
-  JAPAN_CATALOGS,
   MUNICIPALITY_THEME_PAGE_SLUGS,
   buildMunicipalityRankingSubtitles,
   municipalityMetricKeysForPrefectureTheme,
@@ -32,22 +31,32 @@ import { listThemeCatalogs } from '@stats47/data-configs/theme-catalog';
 import { municipalityRankingDisplayTitle } from '@stats47/ranking';
 import { KNOWN_RANKING_KEYS } from '@stats47/ranking/config';
 
+import { assertDatasetShape } from '../../../.claude/scripts/lib/dataset-shape.mjs';
 import { NOTE_ARTICLES } from '../../../.claude/scripts/note/catalog';
 import { datasetPath, datasetDir } from '../../../config/datasets.mjs';
-import cities from '../../../packages/area/src/data/cities.json';
-import prefectures from '../../../packages/area/src/data/prefectures.json';
+import cities from '../../../data/areas/master/cities.json';
+import prefectures from '../../../data/areas/master/prefectures.json';
+import surveys from '../../../data/surveys/master/surveys.json';
 import { AREA_DATABOOK_TEMPLATE, collectTemplateMetricKeys, listTemplateCharts } from '../../../packages/data-configs/src/area-databook';
 import { CATEGORIES } from '../../../packages/data-configs/src/categories';
 import { collectChartDependencies } from '../../../packages/data-configs/src/theme-catalog/chart-dependencies';
-import surveys from '../../../packages/ranking/src/data/surveys.json';
 import { BLOG_SLUG_REDIRECTS } from '../src/config/blog-redirects';
 import { GONE_BLOG_SLUGS } from '../src/config/gone-blog-slugs';
 import { KNOWN_TAG_KEYS } from '../src/config/known-tag-keys';
 import { KNOWN_THEME_SLUGS } from '../src/config/known-theme-slugs';
+import { UNPUBLISHED_BLOG_SLUGS } from '../src/config/unpublished-blog-slugs';
 import { GEO_CROSS_ANALYSIS_SLUGS } from '../src/features/geo-analysis/lib/geo-cross-analysis';
 import { STOREFRONT_PRODUCTS } from '../src/features/products/storefront.generated';
 import { ALL_THEMES } from '../src/features/theme-dashboard/config/all-themes';
 import { AREA_THEMES } from '../src/features/theme-dashboard/config/area-theme-slugs';
+
+import {
+  blogPagesFromLedger,
+  serializeBlogArticleLedger,
+  upsertBlogArticleLedger,
+  type BlogArticleLedger,
+  type BlogSnapshotArticle,
+} from './lib/blog-article-ledger';
 
 async function run() {
   const root = path.resolve(
@@ -61,19 +70,16 @@ async function run() {
     ?.split('=')
     .slice(1)
     .join('=');
-  type BlogEntry = {
-    slug: string;
-    title: string;
-    published: boolean;
-    tags: { tagKey: string }[];
-    rankingRefs?: { rankingKey: string }[];
-    surveyIds?: string[];
-  };
+  type BlogEntry = BlogSnapshotArticle;
   const pagesDir = path.join(root, datasetDir('content.pages'));
-  const blogPath = path.join(pagesDir, 'blog.json');
-  const previousBlog = fs.existsSync(blogPath)
-    ? JSON.parse(fs.readFileSync(blogPath, 'utf8')).pages
-    : [];
+  // ブログの一覧の正本は記事台帳。R2 の一覧を読んだ実行だけが台帳を更新し、ページ索引は常に台帳から作る
+  const blogLedgerPath = path.join(root, datasetPath('blog.articles'));
+  const blogLedgerText = fs.existsSync(blogLedgerPath)
+    ? fs.readFileSync(blogLedgerPath, 'utf8')
+    : undefined;
+  const previousBlogLedger: BlogArticleLedger | undefined = blogLedgerText
+    ? JSON.parse(blogLedgerText)
+    : undefined;
   const blogEntries: BlogEntry[] | undefined = blogFile
     ? JSON.parse(fs.readFileSync(blogFile, 'utf8').replace(/^\uFEFF/, ''))
         .articles
@@ -180,16 +186,7 @@ async function run() {
       published: publishableCityCodes.has(city.cityCode),
     });
   }
-  for (const theme of Object.values(JAPAN_CATALOGS))
-    add({
-      id: `japan-theme:${theme.themeSlug}`,
-      kind: 'japan-theme',
-      key: theme.themeSlug,
-      title: `日本の${theme.title}`,
-      href: `/japan/${theme.themeSlug}`,
-      rankingKeys: theme.metrics.map(metric => metric.metricKey),
-      published: true,
-    });
+  // 日本全体のテーマ (/japan/<テーマ>) は 2026-11-12 にすべて全国のテーマへ 301 したので、ページとして数えない
   // 「全国の市区町村を比べる」ページ。slug は都道府県のテーマ名にそろえ、対応する市区町村テーマの指標をまとめる
   // (2026-10-31 IA-REGION-THEME-01。旧: 市区町村テーマ 29 個ごと。旧 URL は middleware が 301)
   for (const slug of MUNICIPALITY_THEME_PAGE_SLUGS) {
@@ -281,6 +278,7 @@ async function run() {
       }
     }
   }
+  let blogLedger = previousBlogLedger;
   if (blogEntries) {
     for (const article of blogEntries) {
       const unknown = article.tags.filter(
@@ -290,21 +288,36 @@ async function run() {
         throw new Error(
           `未登録タグ: ${article.slug}: ${unknown.map((tag) => tag.tagKey).join(', ')}`
         );
-      add({
-        id: `blog:${article.slug}`,
-        kind: 'blog',
-        key: article.slug,
-        title: article.title,
-        href: `/blog/${article.slug}`,
-        published:
-          article.published &&
-          !GONE_BLOG_SLUGS.has(article.slug) &&
-          !(article.slug in BLOG_SLUG_REDIRECTS),
-        rankingKeys: (article.rankingRefs ?? []).map((ref) => ref.rankingKey),
-        tagIds: contentTagIds(article.tags.map((tag) => tag.tagKey)),
-      });
     }
-  } else pages.push(...previousBlog);
+    blogLedger = upsertBlogArticleLedger({
+      previous: previousBlogLedger,
+      snapshot: blogEntries,
+      goneSlugs: GONE_BLOG_SLUGS,
+      unpublishedSlugs: UNPUBLISHED_BLOG_SLUGS,
+      tagIdsOf: contentTagIds,
+    });
+    // 形の契約に合わない台帳は書かない (合わなければここで止まり、ページ索引も更新しない)
+    assertDatasetShape('blog.articles', blogLedger);
+    const serializedLedger = serializeBlogArticleLedger(blogLedger);
+    if (check) {
+      if (serializedLedger !== blogLedgerText)
+        throw new Error(
+          'ブログの記事台帳が古い状態です。npm run content:sync -- --from-r2 を実行してください。'
+        );
+    } else {
+      fs.mkdirSync(path.dirname(blogLedgerPath), { recursive: true });
+      fs.writeFileSync(blogLedgerPath, serializedLedger);
+    }
+  }
+  if (!blogLedger)
+    throw new Error(
+      'ブログの記事台帳がありません。npm run content:sync -- --from-r2 で R2 の一覧から作ってください。'
+    );
+  pages.push(
+    ...blogPagesFromLedger(blogLedger, {
+      redirectedSlugs: new Set(Object.keys(BLOG_SLUG_REDIRECTS)),
+    })
+  );
 
   const allIds = new Set(pages.map((page) => page.id));
   // 終了記事・企画中の記事への関係は公開導線に出さない。未公開の企画関係はlifecycle側に残る。

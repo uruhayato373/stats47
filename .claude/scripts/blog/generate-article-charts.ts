@@ -78,7 +78,7 @@ const PREF_NAME_TO_CODE = (() => {
   const map = new Map();
   try {
     const raw = fs.readFileSync(
-      path.join(PROJECT_ROOT, 'packages/area/src/data/prefectures.json'),
+      path.join(PROJECT_ROOT, datasetPath('areas.prefectures')),
       'utf8'
     );
     for (const p of JSON.parse(raw)) {

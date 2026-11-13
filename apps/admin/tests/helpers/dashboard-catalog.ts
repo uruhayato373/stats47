@@ -1,7 +1,7 @@
+import { datasetPath } from "../../../../config/datasets.mjs";
 import { THEME_INDICATOR_SETS } from "@stats47/types";
 
-export const DASHBOARD_CATALOG_REL =
-  ".claude/skills/theme/research-theme-catalog/reference/public-dashboard-catalog.json";
+export const DASHBOARD_CATALOG_REL = datasetPath("themes.public-dashboards");
 
 export function makeDashboardCatalogFixture(options?: {
   duplicateStoryId?: boolean;

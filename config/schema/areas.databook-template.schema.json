@@ -1,0 +1,149 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "県データブックのテンプレート",
+  "description": "data/areas/databook/template.json の形状契約。47 県共通の県データブック (県ページ /areas/<code>) のセクション構成で、どの指標をどのブロックでどの順に見せるかを持つ。数値は持たず rankingKey (指標のキー) で参照する。chart ブロックは generator が apps/web/scripts/data/page-components/area/<code>.json に出力する (47 県同一・手編集しない)。ranked-kpi-grid・gender-paired-kpi・agri-top10 は R2 app/areas/<code>/databook.json の焼き込み値で、specialty-list・symbol-card は県の本文 (areas.editorial) で描画する。rankingKey の実在と isActive は validate-area-databook (npm run validate:area-databook) と refs が止める。読み込みは packages/data-configs/src/area-databook/template.ts、型は同 types.ts。規約は .claude/rules/area-databook-standards.md。",
+  "type": "object",
+  "required": ["sections"],
+  "additionalProperties": false,
+  "properties": {
+    "sections": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["sectionKey", "kind", "title", "sortOrder", "blocks"],
+        "additionalProperties": false,
+        "properties": {
+          "sectionKey": { "description": "アンカー id。英小文字 kebab-case でテンプレ内一意", "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+          "kind": {
+            "enum": [
+              "symbols", "specialties", "agriculture", "food", "civic-population", "civic-living", "civic-economy", "civic-industry",
+              "household", "climate", "gender", "land-price", "tourism", "education-facility", "consumption"
+            ]
+          },
+          "title": { "description": "表示見出し。chart ブロックの page-components の section 値にもなる", "type": "string", "minLength": 1 },
+          "description": { "description": "見出し下の 1 行説明", "type": "string", "minLength": 1 },
+          "sortOrder": { "type": "integer" },
+          "blocks": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": ["blockType", "blockKey", "metrics"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "blockType": { "const": "ranked-kpi-grid" },
+                    "blockKey": { "$ref": "#/definitions/blockKey" },
+                    "metrics": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "object",
+                        "required": ["rankingKey", "shortLabel"],
+                        "additionalProperties": false,
+                        "properties": {
+                          "rankingKey": { "$ref": "#/definitions/metricKey" },
+                          "shortLabel": { "description": "KPI カードの短縮ラベル", "type": "string", "minLength": 1 },
+                          "compareNationalAvg": { "description": "全国平均を併記する (所得・物価など水準対比が意味を持つ指標のみ)", "type": "boolean" },
+                          "capitalCityValue": { "description": "県庁所在市の値 (家計調査系)。UI が「県庁所在市の値」の注記を自動で付ける", "type": "boolean" },
+                          "selection": {
+                            "description": "選定根拠 (テーマのカタログの MetricSelection と同型)。新しく足す指標では書く (書かないと validator が warn)",
+                            "type": "object",
+                            "required": ["proposedBy", "surveyedAt", "rationale"],
+                            "additionalProperties": false,
+                            "properties": {
+                              "proposedBy": { "type": "string", "minLength": 1 },
+                              "sourceUrl": { "type": "string", "pattern": "^https?://" },
+                              "surveyedAt": { "$ref": "common.schema.json#/$defs/date" },
+                              "rationale": { "type": "string", "minLength": 1 },
+                              "adoptionCriteria": {
+                                "type": "array",
+                                "items": { "enum": ["representativeness", "comparability", "complementarity", "dataQuality", "readerValue"] }
+                              },
+                              "readerQuestion": { "type": "string", "minLength": 1 },
+                              "targetReaderOrDecision": { "type": "string", "minLength": 1 }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "required": ["blockType", "blockKey", "pairs"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "blockType": { "const": "gender-paired-kpi" },
+                    "blockKey": { "$ref": "#/definitions/blockKey" },
+                    "pairs": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "object",
+                        "required": ["label", "maleKey", "femaleKey"],
+                        "additionalProperties": false,
+                        "properties": {
+                          "label": { "type": "string", "minLength": 1 },
+                          "maleKey": { "$ref": "#/definitions/metricKey" },
+                          "femaleKey": { "$ref": "#/definitions/metricKey" }
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "required": ["blockType", "chart"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "blockType": { "const": "chart" },
+                    "chart": {
+                      "type": "object",
+                      "required": ["componentKey", "componentType", "title", "componentProps", "sortOrder"],
+                      "additionalProperties": false,
+                      "properties": {
+                        "componentKey": { "description": "テンプレ内で一意。慣例は area-ov-*", "type": "string", "minLength": 1 },
+                        "componentType": { "enum": ["stacked-area", "line-chart", "bar-chart", "mixed-chart", "composition-chart", "radar-chart", "sunburst", "stats-table"] },
+                        "title": { "type": "string", "minLength": 1 },
+                        "componentProps": { "description": "チャート固有の props (estatParams など)。型は app 層の DashboardConfigMap が担保する", "type": "object" },
+                        "relatedRankingKeys": {
+                          "description": "このチャートが扱う指標のキー。validator の実在照合用で、page-components には出力しない",
+                          "type": "array",
+                          "items": { "$ref": "#/definitions/metricKey" }
+                        },
+                        "sourceName": { "type": ["string", "null"] },
+                        "sourceLink": { "type": ["string", "null"] },
+                        "rankingLink": { "type": ["string", "null"] },
+                        "gridColumnSpan": { "type": "integer" },
+                        "gridColumnSpanTablet": { "type": ["integer", "null"] },
+                        "gridColumnSpanSm": { "type": ["integer", "null"] },
+                        "dataSource": { "type": ["string", "null"] },
+                        "sortOrder": { "description": "テンプレ内で重複しない", "type": "integer" }
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "required": ["blockType", "blockKey"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "blockType": { "enum": ["agri-top10", "specialty-list", "symbol-card"] },
+                    "blockKey": { "$ref": "#/definitions/blockKey" }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "blockKey": { "description": "テンプレ内で一意 (アンカー・計測用)", "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "metricKey": { "description": "指標のキー (METRICS_REGISTRY)", "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" }
+  }
+}

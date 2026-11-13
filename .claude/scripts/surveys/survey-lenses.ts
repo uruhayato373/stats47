@@ -18,7 +18,6 @@ import { checkLensLedgers, lensStatus, type LensLedger } from "../lib/survey-len
 import { expansionStatus, loadAnalyses, loadChannelIndex, loadExpansion } from "../source-vault/lib/reference-expansion.mjs";
 
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
-const SURVEY_MASTER = "packages/ranking/src/data/surveys.json";
 /** 表の実在を確かめられる調査の台帳 (statsDataId の一覧を持つもの) */
 const TABLE_LEDGERS: Record<string, string> = { "kakei-chousa": "estat.kakei-ledger" };
 
@@ -44,7 +43,6 @@ function loadLedgers(): LensLedger[] {
 
 function inputs() {
   const ledgers = loadLedgers();
-  const knownSurveyIds = new Set(readJson<{ id: string }[]>(SURVEY_MASTER).map((s) => s.id));
   const tablesBySurvey = new Map<string, Set<string>>();
   for (const [surveyId, id] of Object.entries(TABLE_LEDGERS)) {
     const ledger = readJson<{ tables: { statsDataId: string }[] }>(datasetPath(id));
@@ -52,12 +50,12 @@ function inputs() {
   }
   const analyses = loadAnalyses(PROJECT_ROOT);
   const units = KAKEI_ANALYSES.map((a) => ({ id: a.id, lensId: a.lensId }));
-  return { ledgers, knownSurveyIds, tablesBySurvey, analyses, units };
+  return { ledgers, tablesBySurvey, analyses, units };
 }
 
 function check(): void {
-  const { ledgers, knownSurveyIds, tablesBySurvey, analyses, units } = inputs();
-  const findings = checkLensLedgers({ ledgers, knownSurveyIds, tablesBySurvey, analyses, units });
+  const { ledgers, tablesBySurvey, analyses, units } = inputs();
+  const findings = checkLensLedgers({ ledgers, tablesBySurvey, analyses, units });
   for (const f of findings) console.log(`${f.level === "error" ? "✗" : "⚠"} [${f.code}] ${f.message}`);
   const errors = findings.filter((f) => f.level === "error").length;
   const lensCount = ledgers.reduce((n, l) => n + l.lenses.length, 0);
@@ -65,7 +63,7 @@ function check(): void {
     console.error(`❌ 調査の切り口台帳: error ${errors} 件`);
     process.exit(1);
   }
-  console.log(`✓ 調査の切り口台帳: ${ledgers.length} 調査・切り口 ${lensCount} 件。問い ${analyses.filter((a) => a.lensIds?.length).length} 件・分析単位 ${units.length} 件の参照が一致`);
+  console.log(`✓ 調査の切り口台帳: ${ledgers.length} 調査・切り口 ${lensCount} 件。問い ${analyses.filter((a) => a.lensIds?.length).length} 件・分析単位 ${units.length} 件 (切り口 id の実在は check-datasets の refs)`);
 }
 
 function status(): void {

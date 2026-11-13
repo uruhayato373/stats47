@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Geo 分析の台帳",
+  "description": "data/geo/analyses/analyses.json の形状契約。analyses のキーが分析の slug (GeoAnalysisSlug) で、公開 URL /geo/<slug> と R2 の app/geo/<slug>/ を決める。Geo 公開面に出せるのは、計算入力 2 層以上の空間横断分析 (spatial-cross) だけで、単一指標の入口 (baseline) は含めない。豪雪 (snow-designation) と土砂 (landslide-exposure) は themeSource を持ち、出典に由来する 7 項目 (r2Key・evidenceManifestKey・detailR2KeyPattern・dataVersion・sourceName・sourceUrl・caveats) を書かない。読み込み口 packages/data-configs/src/business-plan/geo-analyses.ts が geo-analysis-theme-sources.ts の結合の関数で埋める。themeSource が無い分析は 7 項目をすべて書く。notes は判断の記録で、キーは analyses の slug。contentId は事業計画のコンテンツの機会 (business-plan.content-opportunities) を指す。themeSource はテーマの出典の台帳 (themes.sources) のファイル名を指す。check-datasets の refs は参照先のキーにファイル名を使えないので、この enum と theme-sources.test.ts の対応の検査で縛る。",
+  "type": "object",
+  "required": ["analyses"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "notes": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-z][a-z0-9-]*$" },
+      "additionalProperties": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+    },
+    "analyses": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^[a-z][a-z0-9-]*$" },
+      "additionalProperties": { "$ref": "#/definitions/analysis" }
+    }
+  },
+  "definitions": {
+    "analysis": {
+      "type": "object",
+      "required": ["id", "contentId", "title", "question", "analysisKind", "sourceLayers", "spatialOperations", "primaryMetricKey", "metricKeys", "status", "geography", "comparisonLimit", "expectedObservationCount", "evidenceCheckedAt"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^m1-analysis-[a-z][a-z0-9-]*$" },
+        "contentId": { "description": "コンテンツの機会の ID (business-plan.content-opportunities の geo-NNN)", "type": "string", "pattern": "^geo-\\d{3}$" },
+        "themeSource": { "description": "出典をテーマの出典の台帳 (themes.sources) に持つ分析。値は台帳のファイル名 (data/themes/sources/<値>.json) で、geo-analysis-theme-sources.ts の結合の関数の名前", "enum": ["snow-designation", "landslide-exposure"] },
+        "title": { "type": "string", "minLength": 1 },
+        "question": { "type": "string", "minLength": 1 },
+        "analysisKind": { "description": "Geo 公開面は複数レイヤーから導く空間分析だけ", "const": "spatial-cross" },
+        "sourceLayers": {
+          "description": "投稿・管理画面がランキングとの違いを機械判定する入力レイヤー。計算に使う層か説明用の補助層かを混在させない",
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "required": ["id", "label", "geometry", "role", "usedInCalculation"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "type": "string", "minLength": 1 },
+              "label": { "type": "string", "minLength": 1 },
+              "geometry": { "enum": ["prefecture", "mesh", "point", "polygon"] },
+              "role": { "enum": ["calculation-input", "context-only"] },
+              "usedInCalculation": { "type": "boolean" }
+            }
+          }
+        },
+        "spatialOperations": { "description": "数値を導いた決定的処理。AI に計算・空間判定を委ねない", "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "primaryMetricKey": { "type": "string", "pattern": "^[a-z][A-Za-z0-9]*$" },
+        "metricKeys": {
+          "description": "snapshot で配信する集計値の名前。Geo の投稿の claimMetricKey はこの集合外を参照できない (REGISTRIES の geo-analysis-metric-names が 1 行 1 件で読む)",
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "pattern": "^[a-z][A-Za-z0-9]*$" }
+        },
+        "relatedRankingKey": { "description": "主指標を単独のランキングとして公開している指標 key。ランキングページから分析の canonical 着地へ接続する", "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+        "r2Key": { "type": "string", "pattern": "^app/geo/[a-z0-9-]+/item\\.json$" },
+        "evidenceManifestKey": { "description": "入力 SHA・途中 artifact・集計値の lineage", "type": "string", "pattern": "^app/geo/[a-z0-9-]+/manifest\\.json$" },
+        "detailR2KeyPattern": { "type": "string", "pattern": "^app/geo/[a-z0-9-]+/pref/\\{NN\\}\\.json$" },
+        "status": { "enum": ["ready", "in-progress", "blocked", "gated", "candidate"] },
+        "geography": { "const": "prefecture" },
+        "comparisonLimit": { "type": "integer", "minimum": 1 },
+        "expectedObservationCount": { "type": "integer", "minimum": 1 },
+        "dataVersion": { "type": "string", "minLength": 1 },
+        "evidenceCheckedAt": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+        "sourceName": { "type": "string", "minLength": 1 },
+        "sourceUrl": { "type": "string", "pattern": "^https://" },
+        "caveats": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+      },
+      "if": { "type": "object", "required": ["themeSource"] },
+      "then": {
+        "not": {
+          "anyOf": [
+            { "required": ["r2Key"] },
+            { "required": ["evidenceManifestKey"] },
+            { "required": ["detailR2KeyPattern"] },
+            { "required": ["dataVersion"] },
+            { "required": ["sourceName"] },
+            { "required": ["sourceUrl"] },
+            { "required": ["caveats"] }
+          ]
+        }
+      },
+      "else": { "required": ["r2Key", "evidenceManifestKey", "detailR2KeyPattern", "dataVersion", "sourceName", "sourceUrl", "caveats"] }
+    }
+  }
+}

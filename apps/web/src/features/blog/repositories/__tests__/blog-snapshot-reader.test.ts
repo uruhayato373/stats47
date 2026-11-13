@@ -14,6 +14,14 @@ vi.mock('server-only', () => ({}));
 vi.mock('@stats47/r2-storage/server', () => ({
   createSnapshotReader: () => loadSnapshot,
 }));
+// 「よく読まれている記事」の順は 2026-11-12 から GA4 で週次に変わる (data/blog/popular-articles.json)。テストでは固定する
+vi.mock('../../config/popular-articles', () => ({
+  POPULAR_BLOG_ARTICLE_SLUGS: [
+    'local-government-debt-burden',
+    'livable-prefecture-composite-ranking',
+    'childcare-friendly-prefecture-ranking',
+  ],
+}));
 
 function article(
   slug: string,
@@ -175,6 +183,33 @@ describe('readBlogIndexPageFromR2', () => {
       'local-government-debt-burden',
       'livable-prefecture-composite-ranking',
       'a5',
+    ]);
+  });
+
+  it('記事ページの右レールの人気記事は、閲覧数の順のまま表示中の記事と非公開の記事を除いて件数まで返す', async () => {
+    const withPopular = (debtPublished: boolean) => ({
+      ...SNAPSHOT,
+      articles: [
+        ...SNAPSHOT.articles,
+        article('local-government-debt-burden', '2025-02-01', debtPublished),
+        article('livable-prefecture-composite-ranking', '2025-01-01'),
+        article('childcare-friendly-prefecture-ranking', '2025-03-01'),
+      ],
+    });
+    const { readPopularArticlesFromR2 } = await importReader();
+
+    // 1 位は非公開・3 位は表示中の記事なので、2 位だけが残る
+    loadSnapshot.mockResolvedValueOnce(withPopular(false));
+    const popular = await readPopularArticlesFromR2('childcare-friendly-prefecture-ranking', 5);
+    expect(popular).toEqual([
+      { slug: 'livable-prefecture-composite-ranking', title: 'livable-prefecture-composite-ranking のタイトル' },
+    ]);
+
+    // 件数で切る (順は閲覧数の順のまま)
+    loadSnapshot.mockResolvedValueOnce(withPopular(true));
+    expect((await readPopularArticlesFromR2('a1', 2)).map((a) => a.slug)).toEqual([
+      'local-government-debt-burden',
+      'livable-prefecture-composite-ranking',
     ]);
   });
 

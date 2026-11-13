@@ -392,3 +392,12 @@ test("adsenseUnitRow: match 未指定なら unmanaged 扱い (matched に倒さ�
   assert.equal(row.code_slot, "");
   assert.equal(row.unit_id, "");
 });
+
+test("resolveUnitMatch: inventory の slot_id が空なら unit_id の末尾の slot で matched (記事内・関連コンテンツ型)", () => {
+  const unitId = "ca-pub-9055416085403520:8185387982";
+  const inv = new Map([[unitId, { unit_id: unitId, slot_id: "" }]]);
+  const r = resolveUnitMatch({ unitId, unitName: "stats47-hub-incontent", inventoryByUnitId: inv, codeIndex: codeIndexFixture() });
+  assert.equal(r.matchStatus, "matched");
+  assert.equal(r.slotId, "8185387982");
+  assert.equal(r.codeSlot, "HUB_INCONTENT");
+});

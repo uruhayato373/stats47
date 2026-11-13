@@ -105,7 +105,7 @@ export function DataSourceList({ sources, surface, className }: DataSourceListPr
     <section
       aria-labelledby={`${surface}-heading`}
       data-testid="data-source-section"
-      className={`not-prose mt-10 border-t border-border pt-6 ${className ?? ""}`}
+      className={`not-prose ${className ?? ""}`}
     >
       <h2 id={`${surface}-heading`} className="text-base font-bold text-foreground">
         データ出典

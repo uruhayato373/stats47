@@ -2922,7 +2922,7 @@
       "id": "note:muni-manufacturing-shipment-data",
       "kind": "note",
       "key": "muni-manufacturing-shipment-data",
-      "title": "市区町村別 製造品出荷額等 1980〜2023年 CSV＋境界GeoJSON（1,719自治体・最新境域の時系列）",
+      "title": "市区町村別 製造品出荷額等 1980〜2023年＋業種別 CSV＋境界GeoJSON（1,719自治体・最新境域の時系列）",
       "href": "https://note.com/stats47/n/n5d86476e9c73",
       "published": true,
       "rankingKeys": []

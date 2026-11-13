@@ -59,7 +59,7 @@ node .claude/scripts/management/check-review-cadence.mjs
 2. **KPI ツリーの判定**: 重点レーンの駆動 KPI について、月内の週次推移と、4 週前 (窓が重ならない週) との比較を書き、
    動いた・動かなかったを 1 文で判定する。値が `not-connected` / `missing` / `stale` / `degraded` の KPI は 0 と読まず、
    理由を書いて「課題・ブロッカー」へ入れる。NSM (週次収益) の判定不能週を 0 円と書かない。
-   領域表 (収益化戦略 §5) の「構えを変える条件」を満たした領域があれば、来月への申し送りに改訂提案として書く。
+   領域の台帳 `data/business/domain-stances.json` の「構えを変える条件」(`gate`) を満たした領域があれば、来月への申し送りに改訂提案として書く。
 3. **週次レビューの総括**: 週ごとの Must 達成比、2 週以上続いた未達、週次の申し送りがカード ID に結ばれた割合
    (`check-review-cadence.mjs --json` の `reviews.weekly[].routed`) を表にする。
 4. **施策の効果判定**: 対象月の verdict を full / partial / none / adverse / pending ごとに数え、pending は効いている
@@ -110,6 +110,8 @@ node .claude/scripts/management/check-review-cadence.mjs
 
 ### GSC画面監査・技術是正
 | 問題・観測日 | 月内の修正/本番確認 | Google検証の遷移 | 残カードID・owner・次回確認日 | 証拠 |
+| 送信済み登録率（登録済み ÷ (登録済み + 未登録)）・観測日 | 月内の推移。missing の週は未取得と書き、0 と書かない | - | 2 か月続けて下がったときは重点に上げるかを次月計画へ申し送る | `data/gsc/coverage-submitted-history.csv` |
+| 検証の状態・観測日 | 開始前 / 開始 / 合格 / 失敗の月内の遷移 | 同左 | 失敗は重点に上げるかを次月計画へ申し送る | 画面・取得記録 |
 
 ## 点検と Issue
 | Issue / 自動処理 | 状態 | 振り分け |

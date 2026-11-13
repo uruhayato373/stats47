@@ -9,6 +9,7 @@ import { createRequire } from "node:module";
 import { dirname, resolve, relative, isAbsolute, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseArgs } from "node:util";
+import { datasetPath } from "../../../config/datasets.mjs";
 const require = createRequire(import.meta.url);
 const {
   CULTURAL_HERITAGE_SOURCE: source,
@@ -69,7 +70,7 @@ export async function main(args = process.argv.slice(2)) {
       "--definition",
       definitionPath,
       "--prefectures",
-      resolve(root, "packages/area/src/data/prefectures.json"),
+      resolve(root, datasetPath("areas.prefectures")),
       "--source-dir",
       sourceDir,
       "--output",

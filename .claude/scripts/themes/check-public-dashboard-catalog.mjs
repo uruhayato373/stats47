@@ -3,15 +3,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { datasetPath } from '../../../config/datasets.mjs';
 
 const ROOT = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   '../../..'
 );
-export const CATALOG_PATH = path.join(
-  ROOT,
-  '.claude/skills/theme/research-theme-catalog/reference/public-dashboard-catalog.json'
-);
+export const CATALOG_PATH = path.join(ROOT, datasetPath('themes.public-dashboards'));
 
 const EXPECTED_RESAS_CATEGORY_COUNTS = Object.freeze({
   marketing: 6,

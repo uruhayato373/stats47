@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 const root = process.cwd(),
   require = createRequire(resolve(root, 'package.json'));
-const prefectures = require('./packages/area/src/data/prefectures.json');
+const prefectures = require('./.claude/scripts/lib/prefectures.cjs').PREFECTURES;
 const sha = (b) => createHash('sha256').update(b).digest('hex');
 export const SOURCES = {
   age: {

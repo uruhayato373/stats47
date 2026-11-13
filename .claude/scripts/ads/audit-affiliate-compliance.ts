@@ -1,7 +1,7 @@
 /**
  * アフィリエイト直接配置 (direct-attribute) の決定的 compliance 監査 CLI。
  *
- * SSOT = apps/web/scripts/affiliate-direct-placements-data.ts を読み、
+ * SSOT = 直貼りの台帳 affiliate.direct-placements (読み込み口 apps/web/scripts/affiliate-direct-placements-data.ts) を読み、
  *   - 構造検証 (ID 重複 / URL scheme / サイズ / 配置形式) — ネットワーク不要
  *   - --live: 配置先記事 (R2 公開 URL) と突合 — 孤立配置 / 本文タグ不一致 / PR 表記漏れ
  *   - --scan-all-blog: 公開全記事を走査し台帳未登録の <affiliate-banner> を検出

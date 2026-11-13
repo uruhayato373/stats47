@@ -13,7 +13,7 @@
 #   効果が測れない状態で在庫を増やしても A8 への申請リスクだけが増える。
 #   再開条件: measurement gate v2 が ready になってから。再開するときは APPLY_NEW=1 にする。
 #
-#   SSOT (apps/web/scripts/affiliate-ads-data.ts) への実追記と develop push は **やらない**。
+#   SSOT (広告の台帳 affiliate.ads) への実追記と develop push は **やらない**。
 #   アプリコードの無人書き換えは並行セッションとの git 競合を招き、push は R2 公開 =
 #   outward-facing になるため。cron は catalog (機械 state) を進めて報告するところで止める。
 #

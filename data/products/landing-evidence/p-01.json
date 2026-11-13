@@ -1,0 +1,583 @@
+{
+  "productId": "P-01",
+  "deliveryVersion": "v4-20261024-mac-r2",
+  "manifestSha256": "44fa48318299172b8bca042365382d1b90a90fd0875d2ba73e3ea060b8e52b9a",
+  "sourceArchive": {
+    "bucket": "stats47-private",
+    "key": "note/product-archives/P-01/v4-20261024-mac-r2/d660e1a968a82d4b9073d1e681038ba9ab772f2eda97f1e0b133e2e01935e933.zip",
+    "sha256": "d660e1a968a82d4b9073d1e681038ba9ab772f2eda97f1e0b133e2e01935e933"
+  },
+  "selectedMetrics": [
+    {
+      "key": "total-population",
+      "title": "総人口",
+      "year": "2025",
+      "unit": "人"
+    },
+    {
+      "key": "ratio-65-plus",
+      "title": "65歳以上人口割合",
+      "year": "2025",
+      "unit": "％"
+    },
+    {
+      "key": "general-households",
+      "title": "一般世帯数",
+      "year": "2020",
+      "unit": "万世帯"
+    }
+  ],
+  "included": [
+    "CSV（47地域・134指標、基準年は指標ごとに固定）",
+    "Excel（134指標）",
+    "PowerPoint（30指標の図表）",
+    "PDFデータブック・地図PNG",
+    "出典一覧（SOURCES.csv）・利用条件"
+  ],
+  "examples": [
+    {
+      "id": "population-scale",
+      "figures": [
+        {
+          "file": "population-scale.png",
+          "alt": "総人口（2025年・地域別比較）",
+          "template": "bar",
+          "sha256": "b75c87108887af8dd8b29fb9e5fd5ce595981b2ef342468512c1a1ddd00564e1"
+        }
+      ]
+    },
+    {
+      "id": "aging-distribution",
+      "figures": [
+        {
+          "file": "aging-distribution.png",
+          "alt": "65歳以上人口割合（2025年・地図）",
+          "template": "choropleth",
+          "sha256": "69fc9d3d463d259dba9116f58e76d8156167ec66e10b6d65bc062b1b7bae9d24"
+        }
+      ]
+    },
+    {
+      "id": "household-scale",
+      "figures": [
+        {
+          "file": "household-scale.png",
+          "alt": "一般世帯数（2020年・地域別比較）",
+          "template": "bar",
+          "sha256": "299770e9fba3b5cb653eaa18dddd5f263e8f858d7c0dca131877bd71996382f0"
+        }
+      ]
+    }
+  ],
+  "filePreview": {
+    "heading": "ファイルの中身",
+    "lead": "CSVは地域コード・地域名と指標の値を横に並べた形式です。画像は8行と1指標を抜粋しています。元の数値列名には指標名・年・単位が入り、画像では「数値」と省略しています。全134指標の出典と基準年はSOURCES.csvで確認できます。",
+    "figures": [
+      {
+        "file": "file-preview.png",
+        "alt": "P-01のdata.csvから列と8行を抜粋した見本",
+        "template": "file-preview",
+        "sha256": "aa30da274dbc85d1442f0033c1493260c4c6bb8f9903a6a8f4eb47693f67b91d"
+      }
+    ]
+  },
+  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2003〜2050年で指標ごとに異なり、時系列データではありません。",
+  "analysisRevision": {
+    "productId": "P-01",
+    "version": "analysis-20261112",
+    "planSha256": "2bd414c3d1cf6b87d71937305ea84b30c5449895abf49eb0c3de5f669a98f629",
+    "resolvedPlanSha256": "37ac62e8bd3c478664044d5b4e4734c8ae00ccca469d594639bc08268f83146e",
+    "sources": [
+      {
+        "id": "prefecture-census",
+        "inputs": [
+          {
+            "metricKey": "total-population",
+            "statsDataId": "0000010101",
+            "code": "A1101",
+            "unit": "人"
+          },
+          {
+            "metricKey": "general-households",
+            "variantId": "general-households-prefecture",
+            "statsDataId": "0000010101",
+            "code": "A710101",
+            "unit": "世帯"
+          },
+          {
+            "metricKey": "general-household-members",
+            "variantId": "general-household-members-prefecture",
+            "statsDataId": "0000010101",
+            "code": "A710201",
+            "unit": "人"
+          },
+          {
+            "metricKey": "single-person-households",
+            "statsDataId": "0000010101",
+            "code": "A810105",
+            "unit": "世帯"
+          },
+          {
+            "metricKey": "elderly-single-households",
+            "variantId": "elderly-single-households-prefecture",
+            "statsDataId": "0000010101",
+            "code": "A8301",
+            "unit": "世帯"
+          },
+          {
+            "metricKey": "elderly-couple-households",
+            "variantId": "elderly-couple-households-prefecture",
+            "statsDataId": "0000010101",
+            "code": "A8201",
+            "unit": "世帯"
+          }
+        ],
+        "grain": "prefecture",
+        "years": [
+          2000,
+          2005,
+          2010,
+          2015,
+          2020
+        ],
+        "retrievedAt": "2026-11-12T04:25:40.342Z",
+        "tableTitle": "Ａ　人口・世帯",
+        "rows": 1410,
+        "areas": 47,
+        "missing": 0,
+        "coverage": [
+          {
+            "year": 2000,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2005,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2010,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2015,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2020,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          }
+        ],
+        "inputSha256": "d8f37d74bd63517a3274ec07cc5e2511c72b2ab4370296d84858230a21ecdf07"
+      },
+      {
+        "id": "municipality-census",
+        "inputs": [
+          {
+            "metricKey": "total-population",
+            "statsDataId": "0000020201",
+            "code": "A1101",
+            "unit": "人"
+          },
+          {
+            "metricKey": "general-households",
+            "variantId": "general-households-municipality",
+            "statsDataId": "0000020201",
+            "code": "A710101",
+            "unit": "世帯"
+          },
+          {
+            "metricKey": "general-household-members",
+            "statsDataId": "0000020201",
+            "code": "A710201",
+            "unit": "人"
+          },
+          {
+            "metricKey": "single-person-households",
+            "statsDataId": "0000020201",
+            "code": "A810105",
+            "unit": "世帯"
+          },
+          {
+            "metricKey": "elderly-single-households",
+            "statsDataId": "0000020201",
+            "code": "A8301",
+            "unit": "世帯"
+          },
+          {
+            "metricKey": "elderly-couple-households",
+            "statsDataId": "0000020201",
+            "code": "A8201",
+            "unit": "世帯"
+          }
+        ],
+        "grain": "municipality",
+        "years": [
+          2000,
+          2005,
+          2010,
+          2015,
+          2020
+        ],
+        "retrievedAt": "2026-11-12T04:26:01.446Z",
+        "tableTitle": "Ａ　人口・世帯",
+        "rows": 52230,
+        "areas": 1741,
+        "missing": 0,
+        "coverage": [
+          {
+            "year": 2000,
+            "total": 1741,
+            "kept": 1741,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2005,
+            "total": 1741,
+            "kept": 1741,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2010,
+            "total": 1741,
+            "kept": 1741,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2015,
+            "total": 1741,
+            "kept": 1741,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2020,
+            "total": 1741,
+            "kept": 1741,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          }
+        ],
+        "inputSha256": "a652278d01d136d1087303ee1180541b80fec64ffddda09756c3faf32c04bca4"
+      },
+      {
+        "id": "prefecture-flows",
+        "inputs": [
+          {
+            "metricKey": "births",
+            "statsDataId": "0000010101",
+            "code": "A4101",
+            "unit": "人"
+          },
+          {
+            "metricKey": "death-count",
+            "statsDataId": "0000010101",
+            "code": "A4200",
+            "unit": "人"
+          },
+          {
+            "metricKey": "japanese-movers-in",
+            "statsDataId": "0000010101",
+            "code": "A5101",
+            "unit": "人"
+          },
+          {
+            "metricKey": "japanese-movers-out",
+            "statsDataId": "0000010101",
+            "code": "A5102",
+            "unit": "人"
+          }
+        ],
+        "grain": "prefecture",
+        "years": [
+          2015,
+          2016,
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023
+        ],
+        "retrievedAt": "2026-11-12T04:26:04.265Z",
+        "tableTitle": "Ａ　人口・世帯",
+        "rows": 1692,
+        "areas": 47,
+        "missing": 0,
+        "coverage": [
+          {
+            "year": 2015,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2016,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2017,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2018,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2019,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2020,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2021,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2022,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2023,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          }
+        ],
+        "inputSha256": "9e3fb3b5f5a561baadb237b2765a73b966e58db6ab6d4724c9ed671e1ca67714"
+      }
+    ],
+    "results": 1862,
+    "files": [
+      {
+        "file": "data.csv",
+        "sha256": "824e3962f01de397ea6253d972570ee878858a9dc928984da35df3bdac938663",
+        "bytes": 5717401
+      },
+      {
+        "file": "analysis.csv",
+        "sha256": "b829548a8c63427ca6b78e13d522d1e22a71312e4d91332f882e445e2b0b1376",
+        "bytes": 244702
+      },
+      {
+        "file": "analysis.xlsx",
+        "sha256": "c02793f75305a2841c03d079e7e49706631e252b9353c942c3cfb27b1bf94618",
+        "bytes": 1793058
+      },
+      {
+        "file": "SOURCES.csv",
+        "sha256": "655e7e1f5656534e8ded0a13b9b5546f5ce9761bb69793ec8f229d74c8ed13d7",
+        "bytes": 10660
+      },
+      {
+        "file": "LICENSE-ja.txt",
+        "sha256": "07eb760b739ab2c84ce33c7f3fdfaeee5f9f3118dc8efdbc36fccbc0767d4f29",
+        "bytes": 1265
+      },
+      {
+        "file": "analysis-plan.json",
+        "sha256": "7adf82802de406754b1c7c9ee26f28b7aaa2699fa9cd4822faf434300144a8e2",
+        "bytes": 22835
+      },
+      {
+        "file": "figure-specs.json",
+        "sha256": "9d4a3a853047a85f73c4372ddea243269ca34039bc21503e383e1e14f7e7ac28",
+        "bytes": 204330
+      },
+      {
+        "file": "README.md",
+        "sha256": "77ec6ac6e880d48ea422db4d6540359dc6b47cf371af0418c69754846e4e9217",
+        "bytes": 6148
+      },
+      {
+        "file": "READINESS.md",
+        "sha256": "a48fe84e5d43757dbb7f5362a76d86f40e5f3bbc98adbbc39469fcb5904b7c0c",
+        "bytes": 272
+      },
+      {
+        "file": "images/national-municipality-change.png",
+        "sha256": "386849830325b70f144940c8fd91bd121eab379a8fc8de3cd869f0fcae537f17",
+        "bytes": 224163
+      },
+      {
+        "file": "images/municipality-change.png",
+        "sha256": "6ebc70e7accf3ae991a8e2d2cc440ed08ca39f25f713f164bcc5634419473680",
+        "bytes": 175246
+      },
+      {
+        "file": "images/population-household-trend.png",
+        "sha256": "1b2a075e0a7ca47d42d60c20b52e8c3da90e4f400180f95730d0db3970c5e53d",
+        "bytes": 106695
+      },
+      {
+        "file": "images/municipal-household-size-trend.png",
+        "sha256": "8eb4eed67a8b8e5c5647d724ceee6100a714ea2c1c08c670bcf1ec90c21185d8",
+        "bytes": 131071
+      },
+      {
+        "file": "images/single-household-trend.png",
+        "sha256": "ca0989ed43b4ac7b361f01d9e9a4bf19f5f68704cc6de4ba959c4faf0021582d",
+        "bytes": 97899
+      },
+      {
+        "file": "images/municipal-single-household-map.png",
+        "sha256": "da802bd399c0b210b37ca24f9d2fc4c6b9228079218ae577c300f6475859f6c7",
+        "bytes": 163104
+      },
+      {
+        "file": "images/population-flow-trend.png",
+        "sha256": "91e67935090fec9cb24815597ab1902a47667b38da1748f19ce7d573a52507d4",
+        "bytes": 108650
+      },
+      {
+        "file": "images/analysis-file-preview.png",
+        "sha256": "ab58110616d5338398f74439457c2a3d26cd06f4cff39b6e19af7e9c2554ec9c",
+        "bytes": 118628
+      },
+      {
+        "file": "inputs/prefecture-census.json",
+        "sha256": "d8f37d74bd63517a3274ec07cc5e2511c72b2ab4370296d84858230a21ecdf07",
+        "bytes": 1626334
+      },
+      {
+        "file": "inputs/municipality-census.json",
+        "sha256": "a652278d01d136d1087303ee1180541b80fec64ffddda09756c3faf32c04bca4",
+        "bytes": 35209334
+      },
+      {
+        "file": "inputs/prefecture-flows.json",
+        "sha256": "9e3fb3b5f5a561baadb237b2765a73b966e58db6ab6d4724c9ed671e1ca67714",
+        "bytes": 2855011
+      },
+      {
+        "file": "preview-product.json",
+        "sha256": "eb98c599bb991c795835c3b670fbdb7f737135b8a6f472f0ab1613245da5a566",
+        "bytes": 7547
+      },
+      {
+        "file": "analysis-pack.zip",
+        "sha256": "87496a260e1c1b1380cb6f015643a1d33694c33a26d76d83f5d68bd790a93131",
+        "bytes": 4194935
+      }
+    ]
+  }
+}

@@ -78,6 +78,7 @@ npm run google-admin:audit-api
 | イベント | 関数 (events.ts) | 登録が要るパラメータ | 状態 | ドメイン所有 |
 |---|---|---|---|---|
 | `nav_click` | `trackNavClick` | `nav_label` / `nav_surface`（`nav_href` は任意） | ✅登録済 (2026-07-20) | UI (P0-1) |
+| `nav_impression` / `nav_click` (関連記事) | `trackNavImpression` / `trackAutoNavClick` | `nav_label` / `nav_surface` / `card_variant` | ✅登録済 (既存登録を再利用: `nav_*` は 2026-07-20、`card_variant` は 2026-09-26)。追加登録なし。実装 2026-11-12、本番送信・週次実測は反映後に確認 | `RELATED-ARTICLES-BASELINE-01` |
 | `rail_click` | `trackRailClick` | `rail_widget` / `rail_slot`（`rail_href` は任意） | ✅登録済 (2026-07-20) | UI (P0-2) |
 | `affiliate_click` | `trackAffiliateClick` | `affiliate_vertical` / `affiliate_category` / `link_position` / `experiment_id` / `variant_id` / `creative_size` | **✅登録済 (2026-07-06)** | `affiliate-ads-standards.md §6` |
 | `affiliate_click` (ad_id のみ) | `trackAffiliateClick` | `ad_id` | **✅登録済 (2026-07-28)** — google-admin Playwright runner で `Affiliate ad ID` (scope=Event, param=`ad_id`) を実登録・reload 後に画面 verify (最終変更日 2026年7月28日)。集計反映は 24-48h・非遡及のため、API で `customEvent:ad_id` が引けるのは反映後 | `affiliate-ads-standards.md §6` |
@@ -112,7 +113,7 @@ npm run google-admin:audit-api
 | `ui_interaction` | `trackUiInteraction` | `ui_action` / `ui_target`（値は `UI_ACTIONS`・`UI_TARGETS` の固定語彙） | ✅登録済 (2026-09-26 Admin API で作成・audit-api で確認) | 全ページ |
 | `read_progress` | `trackReadProgress` | `progress`（25・50・75・100） | ✅登録済 (2026-09-26 Admin API で作成・audit-api で確認) | 全ページ |
 | `search_result_click` | `trackSearchResultClick` | `result_type` / `result_position` | ✅登録済 (2026-09-26 Admin API で作成・audit-api で確認) | 検索 |
-| `product_impression` / `product_click` | `trackProductImpression` / `trackProductClick` | `product_destination` / `product_id`（`link_position` は登録済み） | ✅登録済 (2026-11-03 GA4 管理画面で作成し、カスタム定義の一覧で 2 件を読み戻して確認。`audit-api` の突合も confirmed-registered)。キーイベント `product_click` も 2026-11-03 に Admin API (`applyCreateKeyEvent`、ローカルの鍵・オーナーの指示) で作成し、読み戻しで確認 (`keyEvents/16259309748`) | 商品送客 (`PRODUCT-REFERRAL-MEASURE-01`) |
+| `product_impression` / `product_click` | `trackProductImpression` / `trackProductClick` | `product_destination` / `product_id`（`link_position`・`cta_id` は登録済み） | ✅登録済 (2026-11-03 GA4 管理画面で作成し、カスタム定義の一覧で 2 件を読み戻して確認。`audit-api` の突合も confirmed-registered)。キーイベント `product_click` も 2026-11-03 に Admin API (`applyCreateKeyEvent`、ローカルの鍵・オーナーの指示) で作成し、読み戻しで確認 (`keyEvents/16259309748`) | 商品送客 (`PRODUCT-REFERRAL-MEASURE-01`) |
 | `contact_click` | `trackContactClick` | `link_position` は登録済み（key event 候補） | 要否× | 行政資料 |
 | ユーザー単位 `declared_purpose` | `setDeclaredPurpose` | `declared_purpose`（USER scope。値は CSV 後アンケートの固定語彙） | ✅登録済 (2026-09-26 Admin API で作成・audit-api で確認) | 行政資料 |
 | `geo_analysis_view` | `trackGeoAnalysisView` | `analysis_slug` / `geography`（`analysis_id` は slug と重複、`data_version` は分析価値が低いので登録しない） | ✅登録済 (2026-09-26 Admin API で作成・audit-api で確認) | geo M1 |
@@ -126,6 +127,8 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 | `search` | `trackSearch` | `search_term` は GA4 推奨イベント標準（要否×） | 要否× | 検索 |
 | `share` | `trackShare` | `method` / `content_type` / `item_id` は GA4 標準（要否×） | 要否× | 共有 |
 | `page_not_found` | `trackNotFound` | `page_path` / `page_referrer`（登録不要・レポート可） | 要否× | 監視 |
+
+> **商品詳細 LP の配置別計測 (2026-11-12)**: `ProductPurchase` は登録済み `cta_id` に `product_detail_top` / `product_detail_bottom` を入れ、`product_impression` と `product_click` の双方で送る。`link_position` は詳細へ来る前の導線（直接流入は `product_detail`）を維持する。表示は画像・ボタンを含む案内全体が50%以上・1秒連続見えた場合にマウントごと1回。画像とボタンの表示を重複計上しない。週次 `product-referrals` は `cta_id` 列で配置別に記録する。配置ごとのクリック率は同じ `cta_id` の表示を分母にし、従来の案内表示（`cta_id` 未設定）とは合算しない。計測開始はデプロイ後。上下の比較だけで画像の有無による効果を断定せず、note上の購入成立とも区別する。
 
 > **楽天市場のカードの計測 (2026-11-06 撤去)**: `rakuten-items` と `*-furusato-*`・`rakuten-*` の `link_position` は過去の記録にだけ残る。
 > **nav_surface の値追加 (2026-09-15・県ページ回遊導線)**: 都道府県ページ右レールの

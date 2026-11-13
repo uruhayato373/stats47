@@ -71,14 +71,11 @@
       "maxItems": 4,
       "items": {
         "type": "object",
-        "required": ["id", "contentType", "title", "question", "examples"],
+        "required": ["id", "contentType"],
         "additionalProperties": false,
         "properties": {
           "id": { "$ref": "#/definitions/bizId" },
           "contentType": { "type": "string", "pattern": "^type:[a-z]+$" },
-          "title": { "type": "string", "minLength": 1 },
-          "question": { "type": "string", "minLength": 1 },
-          "examples": { "type": "string", "minLength": 1 },
           "relatedDataset": { "type": "string", "minLength": 1 }
         }
       }

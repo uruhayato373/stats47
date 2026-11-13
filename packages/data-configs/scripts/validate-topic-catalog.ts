@@ -1,7 +1,7 @@
 /**
  * validate-topic-catalog — Topic カタログ (カテゴリ内グループ分類) の内整合を検証する lint。
  *
- * 規約の正典: `packages/data-configs/src/topics/README.md`
+ * 記録の正本: `data/categories/topics/<categoryKey>.json` (カタログの categories.topics。形と解決の規則は Schema の description)
  *
  * error (exit 1 / CI・pre-commit をブロック):
  *   - categoryKey が 17 軸外 / カタログ間で重複
@@ -19,6 +19,7 @@
  *   npx tsx packages/data-configs/scripts/validate-topic-catalog.ts
  *   npx tsx packages/data-configs/scripts/validate-topic-catalog.ts --strict
  */
+import { datasetPath } from "../../../config/datasets.mjs";
 import { METRICS_REGISTRY } from "../src/registry";
 import { listTopicCatalogs } from "../src/topics";
 import { toTopicResolutionInput } from "../src/topics/from-metric";
@@ -156,7 +157,7 @@ function main(): void {
     console.error("   内訳:", tally(errors));
     for (const e of errors.slice(0, 50)) console.error("   " + e);
     if (errors.length > 50) console.error(`   … 他 ${errors.length - 50} 件`);
-    console.error("   規約: packages/data-configs/src/topics/README.md");
+    console.error(`   規約: ${datasetPath("categories.topics-schema")} の description`);
     process.exit(1);
   }
   if (STRICT && warns.length > 0) {

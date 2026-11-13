@@ -7,7 +7,7 @@ import { Grid, Stack } from "@/components/layout-primitives";
 import { PageHeading } from "@/components/ops/primitives";
 import { domainOverview } from "@/lib/server/domains";
 
-import domainsConfig from "../../../../../config/domains.json";
+import domainsConfig from "../../../../../data/business/domains.json";
 import { DOMAINS } from "../../../../../config/paths.mjs";
 
 export const dynamic = "force-dynamic";
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 /**
  * /domains/<id> — 領域の概要 (サイドメニューのグループ名から開く)。
  * 判断に使う画面・構えと狙い・やりかけのカード・担当のエージェント/スキル・文書を 1 画面に並べる。
- * 文書はサイドメニューに置かず、ここの「文書」欄から開く (config/domains.json の navRules)。
+ * 文書はサイドメニューに置かず、ここの「文書」欄から開く (data/business/domains.json の navRules)。
  */
 export default async function DomainPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -55,7 +55,7 @@ export default async function DomainPage({ params }: { params: Promise<{ id: str
             )}
           </Stack>
         </PanelCard>
-        <PanelCard title="構えと今の狙い" icon={<CompassIcon />} description="収益化戦略 §5 の領域表">
+        <PanelCard title="構えと今の狙い" icon={<CompassIcon />} description="領域と構えの台帳">
           {stance ? (
             <Stack gap="sm">
               <div><StatusBadge tone={STANCE_TONE[stance as keyof typeof STANCE_TONE] ?? "neutral"}>{stance}</StatusBadge></div>
@@ -63,7 +63,7 @@ export default async function DomainPage({ params }: { params: Promise<{ id: str
               <Link href="/strategy/lanes" className="text-xs font-medium underline-offset-4 hover:underline">領域と構えへ →</Link>
             </Stack>
           ) : (
-            <p className="text-sm text-muted-foreground">領域表に行が無い</p>
+            <p className="text-sm text-muted-foreground">領域と構えの台帳に行が無い</p>
           )}
         </PanelCard>
       </Grid>

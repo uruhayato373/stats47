@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "事業計画の施策",
+  "description": "data/business-plan/plan/initiatives.json の形状契約。事業計画の施策 (並びが表示順)。wave は着手の段階 (foundation → pilot → scale、需要を確かめてから着手するものは demand-gated)、readinessGate は着手してよい条件、metricIds は施策を測る指標 (business-plan.metrics の id)、owner は担当 agent。読み込み口は packages/data-configs/src/business-plan/catalog.ts (BUSINESS_PLAN_INITIATIVES)。",
+  "type": "object",
+  "required": ["initiatives"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "initiatives": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "wave", "status", "owner", "skills", "deliverables", "readinessGate", "metricIds"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+          "title": { "type": "string", "minLength": 1 },
+          "wave": { "enum": ["foundation", "pilot", "scale", "demand-gated"] },
+          "status": { "enum": ["ready", "in-progress", "blocked", "gated", "candidate"] },
+          "owner": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+          "skills": { "type": "array", "items": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" } },
+          "deliverables": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+          "readinessGate": { "type": "string", "minLength": 1 },
+          "metricIds": { "type": "array", "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" } }
+        }
+      }
+    }
+  }
+}

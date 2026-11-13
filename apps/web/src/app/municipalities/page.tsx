@@ -1,3 +1,5 @@
+import { Fragment } from 'react';
+
 
 import {
   buildMunicipalityEntityPolicy,
@@ -28,11 +30,10 @@ import {
 import { SectionHeader } from '@/components/section';
 import { SurfaceLinkCard, SurfaceSection } from '@/components/surface';
 
-import { AdRow, composeAdRows } from '@/features/ads';
-import { resolveGenericAffiliateBanners } from '@/features/ads/server';
+import { AdRow, composeAdRows, InFeedAdSlot } from '@/features/ads';
 import { ALL_THEMES } from '@/features/theme-dashboard/server';
 
-import { HUB_INCONTENT } from '@/lib/google-adsense';
+import { HUB_INCONTENT, MUNICIPALITIES_INDEX_INFEED } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
 
@@ -90,13 +91,8 @@ export default async function MunicipalitiesHubPage() {
   });
   const draftThemes = themes.filter((theme) => theme.status === 'draft');
   const prefectures = fetchPrefectures();
-  // 広告の段 (2026-11-03 オーナー決定): 公開中のテーマの後。旧: 広告は右レールの AdSense だけで、モバイルでは 0 枠だった。
-  // 本文 (右レールの横で約 810px) では 2 枠、モバイルは AdSense。読者の意図が決まらないので PR は共通の案件
-  const [hubRow] = composeAdRows(
-    [['adsense', 'affiliate']],
-    [HUB_INCONTENT],
-    await resolveGenericAffiliateBanners(1).catch(() => []),
-  );
+  // 広告の段: 公開中のテーマの後に AdSense 1 つを本文の幅いっぱい (上限 580px) に出す (2026-11-12 オーナー決定でアフィリエイトを止め、PR を外した)
+  const [hubRow] = composeAdRows([['adsense']], [HUB_INCONTENT], []);
   const activeThemeBySlug = new Map(
     activeThemes.map((theme) => [theme.slug, theme])
   );
@@ -178,7 +174,7 @@ export default async function MunicipalitiesHubPage() {
         stats={`${entityCount.toLocaleString('ja-JP')} 自治体を比較`}
       />
 
-      <div className="mb-6 xl:hidden">
+      <div className="mb-6 rail:hidden">
         <RailLinksCard
           title="はじめに見るテーマ"
           items={starterThemeItems}
@@ -200,13 +196,13 @@ export default async function MunicipalitiesHubPage() {
           </p>
         </div>
         <PanelGrid className="sm:grid-cols-2">
-          {activeThemes.map((theme) => {
+          {activeThemes.map((theme, index) => {
             const metricTitles = getMetricTitles(theme.metricKeys);
             const visibleMetricTitles = metricTitles.slice(0, 3);
 
             return (
+              <Fragment key={theme.slug}>
               <SurfaceLinkCard
-                key={theme.slug}
                 href={hrefFor("municipality-theme", { themeSlug: theme.slug })}
                 className="group flex min-h-36 flex-col justify-between"
                 aria-label={`${theme.title}、${metricTitles.length}指標を見る`}
@@ -232,6 +228,11 @@ export default async function MunicipalitiesHubPage() {
                   />
                 </span>
               </SurfaceLinkCard>
+              {/* 一覧が 1 列のとき (スマホ) 真ん中あたりにインフィード広告 (2026-11-13 オーナー決定。広告が一覧の後にしか無かった) */}
+              {index + 1 === Math.floor(activeThemes.length / 2) && (
+                <div className="sm:hidden"><InFeedAdSlot slot={MUNICIPALITIES_INDEX_INFEED} /></div>
+              )}
+              </Fragment>
             );
           })}
         </PanelGrid>
@@ -239,7 +240,7 @@ export default async function MunicipalitiesHubPage() {
 
       {hubRow.length > 0 && (
         <div className="mt-8">
-          <AdRow cells={hubRow} position="municipalities-row-1" trackingCategory="municipalities" />
+          <AdRow cells={hubRow} position="municipalities-row-1" trackingCategory="municipalities" wide />
         </div>
       )}
 

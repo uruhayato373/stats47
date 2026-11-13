@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
  * 公開済み note 記事のハッシュタグ99個を、記事のタイトルと公開本文から Claude に提案させ、
- * 決定的な検査 (lib/note-hashtags.mjs) を通ったものだけを config/note-hashtags/<slug>.json に書く。
+ * 決定的な検査 (lib/note-hashtags.mjs) を通ったものだけを台帳 note.hashtags (data/note/hashtags.json) の
+ * その記事の行に書く (表全体を読んで 1 件を入れ替える。題・URL・系統は記事台帳にあるので書かない)。
  * note には書き込まない。反映は update-published-hashtags.mjs が行う。
  *
  * Usage (--concurrency N で並列数、既定 3):
@@ -14,7 +15,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { fetchNoteDetail } from './lib/cover-storage.mjs';
-import { plainText, sourceSha256, hashtagFile, HASHTAG_MODEL } from './lib/note-hashtags.mjs';
+import { plainText, sourceSha256, readHashtagTable, writeHashtagRecord, HASHTAG_MODEL } from './lib/note-hashtags.mjs';
 import { proposeHashtags } from './lib/note-hashtags-propose.mjs';
 import { datasetPath } from "../../../config/datasets.mjs";
 
@@ -40,16 +41,13 @@ async function proposeOne([slug, article]) {
     const title = detail.name;
     const text = plainText(detail.body);
     const source = sourceSha256(title, text);
-    const file = hashtagFile(ROOT, slug);
-    if (!force && fs.existsSync(file) && JSON.parse(fs.readFileSync(file, 'utf8')).sourceSha256 === source) {
+    if (!force && readHashtagTable(ROOT).hashtags[slug]?.sourceSha256 === source) {
       summary.skipped += 1;
       return;
     }
     const { tags, costUsd } = await proposeHashtags({ title, vertical: article.vertical, text, cwd: ROOT });
     summary.costUsd += costUsd;
-    fs.mkdirSync(path.dirname(file), { recursive: true });
-    fs.writeFileSync(file, `${JSON.stringify({ slug, noteUrl: article.url, title, vertical: article.vertical,
-      sourceSha256: source, model: HASHTAG_MODEL, generatedAt: new Date().toISOString(), tags }, null, 2)}\n`);
+    writeHashtagRecord(ROOT, slug, { tags, sourceSha256: source, model: HASHTAG_MODEL, generatedAt: new Date().toISOString() });
     summary.written += 1;
     console.log(`OK ${slug}`);
   } catch (error) {

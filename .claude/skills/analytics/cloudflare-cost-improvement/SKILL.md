@@ -24,6 +24,18 @@ Cloudflare の請求は月次（前月 15 日〜当月 14 日集計、翌 15 日
 
 → **責務分離**: `.claude/todo/improvements.md` はactive一覧、agent 用詳細は `data/improvement/cloudflare-cost-improvement/improvement-log.md`。日次アラートのみ Issues に残す（PSI/Cloudflare daily アラート方針）。
 
+## 料金の検知 (3 段)
+
+料金は Workers CPU 時間で決まる (込み分 3,000 万 ms/月、超過 $0.02/100 万 ms、基本料 $5、サイクルは毎月 15 日開始)。検知は次の 3 段で、どれかが鳴ったら `audit` で内訳を読む。
+
+| 段 | 何が鳴るか | 設定の置き場 |
+|---|---|---|
+| Cloudflare の予算アラート (メール) | サイクルの支出が $10 (注意)・$20 (警告)・$30 (異常) を超えたとき | Cloudflare の画面: 請求 → 支払い請求可能な使用量 → 予算アラート。名前は「stats47 月額 $N …」。2026-11-13 にオーナーの承認で $3.00 の 1 件から作り直した。変更はオーナーの承認が要る |
+| 日次の閾値検査 (Issue) | `workers_cpu_ms` が 4,500 万 ms/日 (warning)・8,000 万 ms/日 (critical) を超えたとき、または請求サイクルの累計から出した推定額が日割りの許容額を超えたとき | `.claude/config/budgets/cloudflare-cost-improvement/budgets-daily.json` と `threshold-check.mjs` の `evaluateCyclePace` |
+| 月次の予算対比 | 日次 CPU 合計から出した推定額が月予算 (warning $10・error $15) を超えたとき | `.claude/config/budgets/cloudflare-cost-improvement/budgets.json` と `monthly-snapshot.mjs` |
+
+どの URL とどのクローラーが CPU を使ったかは日次の記録に無い。Cloudflare の画面の Workers → stats47 → Observability で `sum($workers.cpuTimeMs)` を `$metadata.trigger` や `$workers.event.request.headers.user-agent` で集計する (画面を読むのはオーナーが頼んだときだけ。`recorded-measurement-first.md`)。
+
 ## TODO行の契約
 
 `.claude/todo/improvements.md` の6列

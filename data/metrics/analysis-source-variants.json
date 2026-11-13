@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "variants": [
+    {
+      "id": "general-households-prefecture",
+      "metricKey": "general-households",
+      "scope": "prefecture",
+      "statsDataId": "0000010101",
+      "code": "A710101",
+      "unit": "世帯",
+      "label": "一般世帯数",
+      "yearFormat": "calendar",
+      "definition": "一般世帯数の原数。万世帯に丸めた社会生活統計指標から換算せず基礎データを使う。",
+      "url": "https://www.e-stat.go.jp/dbview?sid=0000010101"
+    },
+    {
+      "id": "general-household-members-prefecture",
+      "metricKey": "general-household-members",
+      "scope": "prefecture",
+      "statsDataId": "0000010101",
+      "code": "A710201",
+      "unit": "人",
+      "label": "一般世帯人員",
+      "yearFormat": "calendar",
+      "definition": "社会・人口統計体系の国勢調査年。一般世帯と施設等の世帯を区別し、割合の分母には一般世帯数を使う。",
+      "url": "https://www.e-stat.go.jp/dbview?sid=0000010101"
+    },
+    {
+      "id": "elderly-single-households-prefecture",
+      "metricKey": "elderly-single-households",
+      "scope": "prefecture",
+      "statsDataId": "0000010101",
+      "code": "A8301",
+      "unit": "世帯",
+      "label": "65歳以上の単独世帯",
+      "yearFormat": "calendar",
+      "definition": "社会・人口統計体系の国勢調査年。一般世帯と施設等の世帯を区別し、割合の分母には一般世帯数を使う。",
+      "url": "https://www.e-stat.go.jp/dbview?sid=0000010101"
+    },
+    {
+      "id": "elderly-couple-households-prefecture",
+      "metricKey": "elderly-couple-households",
+      "scope": "prefecture",
+      "statsDataId": "0000010101",
+      "code": "A8201",
+      "unit": "世帯",
+      "label": "高齢夫婦世帯",
+      "yearFormat": "calendar",
+      "definition": "社会・人口統計体系の国勢調査年。一般世帯と施設等の世帯を区別し、割合の分母には一般世帯数を使う。",
+      "url": "https://www.e-stat.go.jp/dbview?sid=0000010101"
+    },
+    {
+      "id": "general-households-municipality",
+      "metricKey": "general-households",
+      "scope": "municipality",
+      "statsDataId": "0000020201",
+      "code": "A710101",
+      "unit": "世帯",
+      "label": "一般世帯数",
+      "yearFormat": "calendar",
+      "definition": "一般世帯数の原数。万世帯に丸めた社会生活統計指標から換算せず基礎データを使う。",
+      "url": "https://www.e-stat.go.jp/dbview?sid=0000020201"
+    },
+    {
+      "id": "fiscal-strength-index-municipality",
+      "metricKey": "fiscal-strength-index",
+      "scope": "municipality",
+      "statsDataId": "0000020204",
+      "code": "D2201",
+      "unit": "指数",
+      "rawUnit": "‐",
+      "label": "財政力指数",
+      "yearFormat": "fiscal",
+      "definition": "市区町村財政。基準財政収入額を基準財政需要額で除した値の過去3年平均。原典の無次元記号を指数と表示し、数値は換算しない。",
+      "url": "https://www.e-stat.go.jp/dbview?sid=0000020204"
+    }
+  ]
+}

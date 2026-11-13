@@ -69,13 +69,13 @@ describe("SURVEY_AFFILIATE_MAP", () => {
   // 調査マスタ (survey-linkage-standards.md の SSOT)。package exports に無いので直接読む
   // vitest は apps/web を cwd に走る (package.json の test script / turbo とも同じ)
   const surveysJson = JSON.parse(
-    readFileSync(path.resolve(process.cwd(), "../../packages/ranking/src/data/surveys.json"), "utf8"),
+    readFileSync(path.resolve(process.cwd(), "../../data/surveys/master/surveys.json"), "utf8"),
   ) as { id: string }[] | { surveys: { id: string }[] };
   const surveyIds = new Set(
     (Array.isArray(surveysJson) ? surveysJson : surveysJson.surveys).map((s) => s.id),
   );
 
-  it("surveys.json に実在する調査 id だけを持つ", () => {
+  it("調査マスタに実在する調査 id だけを持つ", () => {
     for (const id of Object.keys(SURVEY_AFFILIATE_MAP)) {
       expect(surveyIds.has(id), id).toBe(true);
     }
@@ -128,5 +128,28 @@ describe("resolveContentVertical (出典調査 → タグ → カテゴリ)", ()
   it("空・未指定の入力でも落ちない", () => {
     expect(resolveContentVertical({}).source).toBe("none");
     expect(resolveContentVertical({ surveyIds: null, tagKeys: null, categoryKey: null }).source).toBe("none");
+  });
+});
+
+describe("vertical の列挙 (コードの AffiliateVertical と台帳の Schema の 2 か所)", () => {
+  // 写像の記録は台帳 affiliate.vertical-map (JSON) に移したので、値の列挙は Schema の enum が縛る。
+  // 型 AffiliateVertical・AFFILIATE_VERTICALS と同じ 10 軸・同じ並びであることを固定する (どちらかだけ足すと落ちる)
+  const readSchema = (name: string) =>
+    JSON.parse(readFileSync(path.resolve(process.cwd(), `../../config/schema/${name}.schema.json`), "utf8"));
+
+  it("意図軸の対応表・広告・案件の Schema の enum が AFFILIATE_VERTICALS と一致する", () => {
+    const verticalMap = readSchema("affiliate.vertical-map");
+    const ads = readSchema("affiliate.ads");
+    const profiles = readSchema("affiliate.offer-profiles");
+    const enums = {
+      "vertical-map": verticalMap.definitions.vertical.enum,
+      "vertical-map (null 可)": verticalMap.definitions.verticalOrNull.enum.filter((v: string | null) => v !== null),
+      ads: ads.properties.ads.items.properties.vertical.enum,
+      "offer-profiles.vertical": profiles.properties.profiles.items.properties.vertical.enum,
+      "offer-profiles.allowedVerticals": profiles.properties.profiles.items.properties.allowedVerticals.items.enum,
+    };
+    for (const [name, values] of Object.entries(enums)) {
+      expect(values, name).toEqual([...AFFILIATE_VERTICALS]);
+    }
   });
 });

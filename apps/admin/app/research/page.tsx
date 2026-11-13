@@ -4,7 +4,7 @@ import { PageHeading } from "@/components/ops/primitives";
 import { DashboardCatalogView } from "@/components/research/dashboard-catalog-view";
 import { JapanZueInventoryPanel } from "@/components/research/japan-zue-inventory-panel";
 import { japanZueResearchData } from "@/lib/server/japan-zue";
-import { datasetDir } from "../../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 
 export const metadata: Metadata = {
   title: "調査カタログ — stats47 管理コンソール",
@@ -16,7 +16,7 @@ export default function ResearchPage() {
     <>
       <PageHeading
         title="調査カタログ"
-        source={`${datasetDir("source-inventory.manifests")}/japan-zue/2025-26/evidence-summary.json + .claude/skills/theme/research-theme-catalog/reference/public-dashboard-catalog.json`}
+        source={`${datasetDir("source-inventory.manifests")}/japan-zue/2025-26/evidence-summary.json + ${datasetPath("themes.public-dashboards")}`}
       />
       <JapanZueInventoryPanel data={japanZueResearchData()} />
       <DashboardCatalogView />

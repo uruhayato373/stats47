@@ -219,7 +219,7 @@ Markdown 見出しを再解析しない。空回答・不正見出し・重複�
 ```
 
 - **不採用にした候補は `rejectedCandidates` に残す** (`{ rankingKey, reason }`)。再調査の重複を防ぐ。
-- **採用基準の定義と、提案・レビューで使う判断規則の正本は `config/theme-selection-viewpoints.json`**。
+- **採用基準の定義と、提案・レビューで使う判断規則の正本は `data/themes/viewpoints/selection.json`**。
   機械で数えられる規則 (カードと図の重複・単年の推移・他テーマの主指標・選定根拠の欠け) は
   `theme-catalog/selection-viewpoints.ts` が数え、管理画面 `/quality/theme-viewpoints` に全テーマの該当箇所を出す (gate ではない)。
   同じ画面に次に見直すテーマの候補 (GSC 表示回数順) と、週次監査が記録した該当件数の推移も出す。
@@ -322,7 +322,7 @@ Remotion と共有する型なので、theme 固有の UI 都合を持ち込ま�
 ## 4.6 白書・統計の論点レンズ (`evidenceTopics`) — 2026-08-24 新設
 
 白書・報告書を独立した第四 taxonomy にせず、Theme に従属する「データを読む問い」として管理する。
-論点レンズと公式資料の正典は `theme-catalog/evidence-lenses.ts`、テーマごとの採択結果は
+論点レンズと公式資料の正典は 台帳 `themes.evidence-lenses`、テーマごとの採択結果は
 `ThemeCatalog.evidenceTopics` に置く。
 
 ```ts
@@ -399,7 +399,7 @@ harmRelevance: [
 | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **error**                      | metrics.rankingKey / relatedRankingKeys が METRICS_REGISTRY・metrics に不在 / `markdown-section` 以外で relatedRankingKeys が空 / componentType union 外 / componentKey **テーマ内**重複                                                                                                 |
 | **error (chart editorial)**    | 旧 componentType 別の汎用 description、空 annotation、catalog と componentProps の annotation 二重定義                                                                                                                                                                                 |
-| **error (metricGroups)**       | `[group-key]` rankingKeys が metrics に不在 / `[group-dup-key]`・`[group-dup-title]` テーマ内重複 / `[group-empty]` rankingKeys が空 / `[group-default]` defaultCheckedKeys が空 or rankingKeys 外 / **`[group-units]` グループ内の相異なる単位が 3 種以上** (Y 軸は左右 2 本しかない) |
+| **error (metricGroups)**       | `[group-key]` rankingKeys が metrics に不在 / `[group-dup-key]`・`[group-dup-title]` テーマ内重複 / `[group-empty]` rankingKeys が空 / `[group-default]` defaultCheckedKeys が空 or rankingKeys 外 / **`[group-units]` グループ内の相異なる単位が 3 種以上** (Y 軸は左右 2 本しかない) / **`[group-single-year]` view 無しの 2 件以上のカードで、どの指標も 1 年分しかない** (推移の図の枠が空になる。`tiles`、5 件以上は `table` にする。2026-11-12) |
 | **error (鮮度)**               | `generate:catalog --check` — 生成物と SSOT の diff (手編集・生成忘れの両方向)                                                                                                                                                                                                          |
 | **warn** (`--strict` で error) | selection 未記入 / componentKey **横断**共有 (複数ページ再利用は設計上許容) / primary がチャート未使用 (metrics[] の stat-card で描画) / sortOrder 重複 / 指標ハブ本文の定義・注釈が未整備                                                                                               |
 | **warn (metricGroups)**        | `[group-default-many]` 初期チェック 4 件以上 (mount 時にその数だけ時系列を取りに行く) / `[group-large]` 系列候補 9 件以上 / `[group-orphan]` 非 context 指標がどのグループにも未所属                                                                                                   |
@@ -434,7 +434,7 @@ harmRelevance: [
 | 工程                                                                | 担当                                                                |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | 指標×チャート候補の**調査・提案** (白書/Web/競合/GSC)               | `theme-researcher` (app/config read-only、提案を `.claude/todo/backlog.md` へ) |
-| 公式ダッシュボードの**問い・指標・可視化研究**                      | `theme-researcher` (`public-dashboard-catalog.json` を公式一次資料で保守) |
+| 公式ダッシュボードの**問い・指標・可視化研究**                      | `theme-researcher` (台帳 `themes.public-dashboards` を公式一次資料で保守) |
 | 白書からの**論点レンズ候補抽出** (NotebookLM + 公式資料照合)        | `theme-researcher` (read-only、候補を theme-designer へ返す)        |
 | 提案の**採否判断・カタログ設計** (role/チャート構成/evidenceTopics) | `theme-designer` (採択分を `data/themes/catalogs/<key>.json` へ反映) |
 | チャート **componentProps 詳細化・監査**                            | `theme-component-builder` (`relatedChartKeys` との整合も確認)       |
@@ -472,9 +472,10 @@ harmRelevance: [
 
 > テーマ専用の地図のタブ (コロプレス/指標タブ/年度セレクタ) は 2026-10-30 に撤去した (2026-06-20 から全テーマで隠していた `hideMap`)。
 > 都道府県の地図と表はテーマに置かず、ランキングのページが受け持つ (2026-10-31 オーナー決定)。テーマ専用の地図・表を作らない。
-> カタログ無しテーマ (climate / local-finance) は
-> IndicatorSet.metrics にフォールバック (selection なしで動く)。local-finance は bespoke ページ
-> (`app/themes/local-finance/page.tsx`) に全指標セクションを個別追加。
+> カタログ無しテーマ (climate) は IndicatorSet.metrics にフォールバック (selection なしで動く)。
+> local-finance の専用ページ (`app/themes/local-finance/page.tsx`) は 2026-11-12 オーナー決定でやめた。決算カードの 2 章と
+> 財政の流れは埋め込みの章 (`finance-overview` / `finance-sustainability` / `finance-flow`) として共通の部品が描く。
+> テーマに専用ページを作らない (`metric-groups-reachability.test.ts` が `app/themes/<slug>/page.tsx` を拒否する)。
 
 ## 8.1 管理画面 (`/quality/catalog-audit`) — 2026-09-15 新設
 
@@ -502,7 +503,7 @@ export 済み関数を再利用する (判定ロジックを admin 側へ複製�
 - drift guard: `apps/web/src/features/theme-dashboard/actions/theme-chart-props.ts` 末尾 (`_ThemeChartTypeDriftGuard`)
 - 調査スキル: `.claude/skills/theme/research-theme-catalog/SKILL.md`
 - 選定根拠の backfill: `.claude/skills/theme/backfill-theme-selection/SKILL.md` (夜間 driver `.claude/scripts/themes/run-selection-backfill.sh`)
-- 公式ダッシュボード研究カタログ: `.claude/skills/theme/research-theme-catalog/reference/public-dashboard-catalog.json`
+- 公式ダッシュボード研究カタログ: `data/themes/research/public-dashboards.json`
 - 研究カタログ監査: `npm run theme:dashboard-catalog:test && npm run theme:dashboard-catalog:check`
 - 調査 agent: `.claude/agents/theme-researcher.md`
 - チャートコンポーネント: `.claude/rules/chart-component-standards.md`

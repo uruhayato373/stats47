@@ -1,5 +1,5 @@
 /**
- * 広告の配置の一覧の撮影 (2026-11-03)。広告の枠の台帳 (config/ads/placements.json) の全てのページの種類を、
+ * 広告の配置の一覧の撮影 (2026-11-03)。広告の枠の台帳 (data/ads/placements.json) の全てのページの種類を、
  * モバイル 390・タブレット 768・デスクトップ 1440 の 3 幅で撮り、広告の枠に色付きの枠線とラベルを重ねる。
  * 管理画面の「広告の配置」(/affiliate/layout) が manifest を読み、台帳の定義と並べて見せる。
  *
@@ -24,10 +24,11 @@ import { chromium, type Page } from "playwright";
 import { VIEWPORTS, type ViewportSpec } from "../page-quality/lib/screenshots";
 import { scrollThroughPage } from "../page-quality/lib/ui-probe";
 
+import { ADS_PLACEMENTS } from "../../../config/paths.mjs";
 import { adsenseUnitNames, unitOfEntry } from "./lib/ad-layout-ledger";
 
 const REPO_ROOT = resolve(__dirname, "../../..");
-const PLACEMENTS_PATH = join(REPO_ROOT, "config/ads/placements.json");
+const PLACEMENTS_PATH = join(REPO_ROOT, ADS_PLACEMENTS);
 const OUT_ROOT = join(REPO_ROOT, ".local/ad-layout");
 /** slotId (番号) → ユニットの定数名 */
 const unitNames = adsenseUnitNames(REPO_ROOT);
@@ -48,14 +49,30 @@ const NAVIGATION_RETRIES = 3;
  * ページの種類ごとの代表 URL (台帳の pages のキーと 1 対 1)。page-quality の代表 URL
  * (.claude/scripts/page-quality/templates.ts) を優先し、無い種類は route から実在する URL を選んだ。
  */
-const PAGE_URLS: Record<string, { label: string; path: string }> = {
+/** ページの種類の中の地域の単位 (テーマの全国・県別・日本・市区町村)。単位ごとに代表 URL を 1 つ撮る */
+interface PageScope {
+  id: string;
+  label: string;
+  path: string;
+}
+
+const PAGE_URLS: Record<string, { label: string; path: string; scopes?: PageScope[] }> = {
   home: { label: "ホーム", path: "/" },
   ranking: { label: "ランキング", path: "/ranking/total-population" },
   "ranking-index": { label: "ランキング一覧", path: "/ranking" },
-  theme: { label: "テーマ", path: "/themes/labor-wages" },
-  "theme-local-finance": { label: "テーマ (地方財政)", path: "/themes/local-finance" },
+  // テーマは 1 つのページの種類で、地域の単位は横串の分類 (2026-11-12 オーナー決定。旧: 日本全体・市区町村のテーマは別の種類で、県別は撮っていなかった)
+  theme: {
+    label: "テーマ",
+    path: "/themes/labor-wages",
+    scopes: [
+      { id: "national", label: "全国", path: "/themes/labor-wages" },
+      { id: "area", label: "県別", path: "/areas/13000/labor-wages" },
+      { id: "municipalities", label: "市区町村", path: "/municipalities/themes/aging-society" },
+    ],
+  },
   "themes-index": { label: "テーマ一覧", path: "/themes" },
   blog: { label: "ブログ記事", path: "/blog/beer-peak-month-july-to-december" },
+  "blog-index": { label: "ブログ一覧", path: "/blog" },
   "blog-tags": { label: "ブログのタグ一覧", path: "/blog/tags" },
   category: { label: "カテゴリ", path: "/category/population" },
   "category-compare": { label: "カテゴリの比較", path: "/category/population/compare" },
@@ -66,14 +83,14 @@ const PAGE_URLS: Record<string, { label: string; path: string }> = {
   "areas-index": { label: "都道府県一覧", path: "/areas" },
   city: { label: "市区町村", path: "/areas/13000/cities/13101" },
   search: { label: "検索", path: "/search?q=人口" },
-  "japan-theme": { label: "日本全体のテーマ", path: "/japan/education-culture" },
   "municipality-ranking": { label: "市区町村ランキング", path: "/municipalities/ranking/junior-high-school-count" },
-  "municipality-theme": { label: "市区町村のテーマ", path: "/municipalities/themes/aging-society" },
   "municipalities-index": { label: "市区町村のハブ", path: "/municipalities" },
 };
 
 interface PlacementEntry {
   slot: string;
+  /** この枠が出る地域の単位。無ければ全ての単位 */
+  scopes?: string[];
   region: string;
   position: string;
   marker: string;
@@ -121,6 +138,8 @@ export interface DetectedAd {
 
 export interface AdLayoutShot {
   pageType: string;
+  /** ページの種類の中の地域の単位。単位を持たない種類は null */
+  scope: string | null;
   label: string;
   url: string;
   viewport: string;
@@ -141,7 +160,7 @@ export interface AdLayoutManifest {
   date: string;
   baseUrl: string;
   widths: number[];
-  pageTypes: { id: string; label: string; url: string }[];
+  pageTypes: { id: string; label: string; url: string; scopes?: { id: string; label: string; url: string }[] }[];
   shots: AdLayoutShot[];
 }
 
@@ -151,9 +170,10 @@ export function assignUnits(
   pageType: string,
   ledger: PlacementsLedger,
   unitNames: Map<string, string> = new Map(),
+  scope: string | null = null,
 ): DetectedAd[] {
   const typeByName = new Map(ledger.slotTypes.map((t) => [t.name, t.id]));
-  const entries = ledger.pages[pageType] ?? [];
+  const entries = (ledger.pages[pageType] ?? []).filter((e) => !scope || !e.scopes || e.scopes.includes(scope));
   const seen = new Map<string, number>();
   return raw
     .slice()
@@ -336,7 +356,8 @@ async function captureOne(
   viewport: ViewportSpec,
   outDir: string,
   ledger: PlacementsLedger,
-): Promise<Omit<AdLayoutShot, "pageType" | "label" | "url" | "viewport" | "width" | "capturedAt" | "error">> {
+  scope: string | null = null,
+): Promise<Omit<AdLayoutShot, "pageType" | "scope" | "label" | "url" | "viewport" | "width" | "capturedAt" | "error">> {
   const response = await page.goto(url, { waitUntil: "load", timeout: GOTO_TIMEOUT_MS });
   const httpStatus = response?.status() ?? null;
   if (httpStatus !== null && httpStatus >= 400) throw new Error(`HTTP ${httpStatus}`);
@@ -347,11 +368,11 @@ async function captureOne(
       await page.waitForLoadState("networkidle", { timeout: 10_000 }).catch(() => undefined);
       await scrollThroughPage(page, MAX_SHOT_HEIGHT);
       const raw = await waitForStableAds(page);
-      const ads = assignUnits(raw, pageType, ledger, unitNames);
+      const ads = assignUnits(raw, pageType, ledger, unitNames, scope);
       await inBrowser(page, drawOverlays, ads);
       const pageHeight = await page.evaluate(() => document.documentElement.scrollHeight);
       const imageHeight = Math.min(pageHeight, MAX_SHOT_HEIGHT);
-      const image = `${pageType}-${viewport.width}.png`;
+      const image = `${pageType}${scope ? `-${scope}` : ""}-${viewport.width}.png`;
       await page.screenshot({ path: join(outDir, image), fullPage: true, clip: { x: 0, y: 0, width: viewport.width, height: imageHeight } });
       return { image, imageHeight, pageHeight, truncated: pageHeight > MAX_SHOT_HEIGHT, httpStatus, ads };
     } catch (e) {
@@ -396,10 +417,16 @@ async function main() {
   const browser = await chromium.launch({ headless: true });
   const shots: AdLayoutShot[] = [];
   try {
-    for (const pageType of pageTypes) {
+    const targets = pageTypes.flatMap((pageType) => {
+      const { label, path, scopes } = PAGE_URLS[pageType];
+      return scopes?.length
+        ? scopes.map((sc) => ({ pageType, scope: sc.id, label: `${label}・${sc.label}`, path: sc.path }))
+        : [{ pageType, scope: null as string | null, label, path }];
+    });
+    for (const { pageType, scope, label, path } of targets) {
       await waitForServer(opts.baseUrl);
-      const { label, path } = PAGE_URLS[pageType];
       const url = new URL(encodeURI(path), opts.baseUrl).href;
+      const tag = `${pageType}${scope ? `-${scope}` : ""}`;
       for (const viewport of opts.viewports) {
         const context = await browser.newContext({
           viewport: { width: viewport.width, height: viewport.height },
@@ -409,21 +436,21 @@ async function main() {
         });
         // Cookie 同意の帯 (sticky) が撮影の途中に重ならないよう、同意を断った状態で開く
         await context.addCookies([{ name: "stats47_consent", value: "denied", url: opts.baseUrl }]);
-        const base = { pageType, label, url: path, viewport: viewport.id, width: viewport.width };
+        const base = { pageType, scope, label, url: path, viewport: viewport.id, width: viewport.width };
         try {
           const page = await context.newPage();
-          const result = await captureOne(page, url, pageType, viewport, outDir, ledger).catch(async (e: Error) => {
+          const result = await captureOne(page, url, pageType, viewport, outDir, ledger, scope).catch(async (e: Error) => {
             if (!SERVER_TROUBLE.test(e.message)) throw e;
-            console.error(`${pageType}-${viewport.width}: サーバーの応答待ちで撮り直す — ${e.message.split("\n")[0]}`);
+            console.error(`${tag}-${viewport.width}: サーバーの応答待ちで撮り直す — ${e.message.split("\n")[0]}`);
             await waitForServer(opts.baseUrl);
-            return captureOne(page, url, pageType, viewport, outDir, ledger);
+            return captureOne(page, url, pageType, viewport, outDir, ledger, scope);
           });
           shots.push({ ...base, ...result, capturedAt: new Date().toISOString(), error: null });
-          console.log(`${pageType}-${viewport.width}: 枠 ${result.ads.length} (${result.imageHeight}px${result.truncated ? "・上限で切った" : ""})`);
+          console.log(`${tag}-${viewport.width}: 枠 ${result.ads.length} (${result.imageHeight}px${result.truncated ? "・上限で切った" : ""})`);
         } catch (e) {
           const error = (e as Error).message.split("\n")[0];
           shots.push({ ...base, image: null, imageHeight: null, pageHeight: null, truncated: false, httpStatus: null, ads: [], capturedAt: new Date().toISOString(), error });
-          console.error(`${pageType}-${viewport.width}: 撮れなかった — ${error}`);
+          console.error(`${tag}-${viewport.width}: 撮れなかった — ${error}`);
         } finally {
           await context.close();
         }
@@ -441,12 +468,13 @@ async function main() {
   } catch {
     previous = [];
   }
-  const key = (s: AdLayoutShot) => `${s.pageType}@${s.width}`;
+  const key = (s: AdLayoutShot) => `${s.pageType}/${s.scope ?? ""}@${s.width}`;
   // 撮り直しで失敗した組は、同じ日に撮れていた前の撮影を残す (失敗で上書きして画像と枠の一覧を失わない)
   const keptPrevious = new Map(previous.filter((s) => !s.error).map((s) => [key(s), s]));
   const latest = shots.map((s) => (s.error && keptPrevious.has(key(s)) ? (keptPrevious.get(key(s)) as AdLayoutShot) : s));
   const fresh = new Set(latest.map(key));
-  const merged = [...previous.filter((s) => !fresh.has(key(s))), ...latest].sort(
+  // 台帳から消えたページの種類 (2026-11-12 にテーマへまとめた japan-theme など) の前の撮影は残さない
+  const merged = [...previous.filter((s) => ledgerTypes.includes(s.pageType) && !fresh.has(key(s))), ...latest].sort(
     (a, b) => ledgerTypes.indexOf(a.pageType) - ledgerTypes.indexOf(b.pageType) || a.width - b.width,
   );
   const manifest: AdLayoutManifest = {
@@ -454,7 +482,12 @@ async function main() {
     date,
     baseUrl: opts.baseUrl,
     widths: VIEWPORT_IDS.map((id) => VIEWPORTS.find((v) => v.id === id)?.width ?? 0),
-    pageTypes: ledgerTypes.map((id) => ({ id, label: PAGE_URLS[id].label, url: PAGE_URLS[id].path })),
+    pageTypes: ledgerTypes.map((id) => ({
+      id,
+      label: PAGE_URLS[id].label,
+      url: PAGE_URLS[id].path,
+      ...(PAGE_URLS[id].scopes ? { scopes: PAGE_URLS[id].scopes.map((sc) => ({ id: sc.id, label: sc.label, url: sc.path })) } : {}),
+    })),
     shots: merged,
   };
   writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);

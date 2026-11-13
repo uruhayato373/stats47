@@ -9,25 +9,7 @@ interface ArticleRendererProps {
     article: Article;
     slug: string;
     relatedArticleTitles?: Record<string, string>;
-    affiliateBannersByCategory?: Record<string, {
-        id?: string;
-        href: string;
-        imageUrl: string;
-        trackingPixelUrl?: string | null;
-        width?: number | null;
-        height?: number | null;
-        title?: string;
-    }>;
-    /** 本文中に自動挿入するテキストリンク広告 (記事の tagKeys から解決済み)。 */
-    affiliateTextAds?: Array<{
-        id: string;
-        title: string;
-        href: string;
-        trackingPixelUrl?: string | null;
-        /** GA4 `affiliate_vertical` に送る広告自身の意図軸 (解決層が確定させる)。 */
-        vertical: AffiliateCategory | null;
-    }>;
-    /** テキストリンクのテーマ色に使う vertical。 */
+    /** 広告の段の計測に送る記事の意図軸。 */
     affiliateVertical?: AffiliateCategory | null;
     /** 広告の段 (AdSense と PR)。最後の 1 段が記事の末尾、残りが本文の h2 の前 */
     adRows?: AdRowCell[][];
@@ -37,8 +19,6 @@ export function ArticleRenderer({
     article,
     slug,
     relatedArticleTitles,
-    affiliateBannersByCategory,
-    affiliateTextAds,
     affiliateVertical,
     adRows,
 }: ArticleRendererProps) {
@@ -47,8 +27,6 @@ export function ArticleRenderer({
             source={article.content}
             slug={slug}
             relatedArticleTitles={relatedArticleTitles}
-            affiliateBannersByCategory={affiliateBannersByCategory}
-            affiliateTextAds={affiliateTextAds}
             affiliateVertical={affiliateVertical}
             adRows={adRows}
         />

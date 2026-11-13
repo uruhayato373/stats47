@@ -1,0 +1,109 @@
+{
+  "productId": "MUNI-MANUFACTURING",
+  "sourceArticle": {
+    "articleKey": "muni-manufacturing-shipment-data",
+    "store": "r2-private",
+    "manifestSha256": "c2369672e10b58447b764ea5070177e058f38b2b6f44c5d363b11da0fec65a0a"
+  },
+  "sourceArchive": {
+    "bucket": "stats47-private",
+    "key": "note/product-sales/muni-manufacturing-shipment-data/product/muni-manufacturing-shipment-data-v3.zip",
+    "sha256": "fbda8a7af06a8927b305cc89a161b8fd63eeda065e09b8734cb6359dd4ee92f8"
+  },
+  "included": [
+    "CSV (時系列 1980〜2023 年・1,719 自治体)",
+    "CSV (業種別 2021〜2023 年・24 業種)",
+    "GeoJSON (自治体の境界)",
+    "README・検算表"
+  ],
+  "examples": [
+    {
+      "id": "regional-comparison",
+      "figures": [
+        {
+          "file": "compare-bars-2023.png",
+          "alt": "製造品出荷額等の上位と下位の自治体（2023年）",
+          "template": "bar",
+          "sha256": "265398d0eb328c6be48226416daa8c03200dd61c8d1b8a1db90e9359b5075a8a"
+        },
+        {
+          "file": "compare-map-2023.png",
+          "alt": "製造品出荷額等の色分け地図（2023年・市区町村別）",
+          "template": "choropleth",
+          "sha256": "631541d08cf516181d9552b189629792e1c64c1da9c40679534e75082b1c5918"
+        },
+        {
+          "file": "aichi-map-2023.png",
+          "alt": "愛知県の製造品出荷額等（2023年）",
+          "template": "choropleth",
+          "sha256": "1fb30b24507cc747829a7e0c7ba8c3059e69485e33b3bd1a77fa7e8f8a7799b9"
+        }
+      ]
+    },
+    {
+      "id": "industry-composition",
+      "figures": [
+        {
+          "file": "industry-donut-toyota-2023.png",
+          "alt": "豊田市の製造品出荷額等の業種別内訳（2023年）",
+          "template": "pie",
+          "sha256": "bcbfdc1f5b5c13a8e7b9206eae13d317e1f229a6031c5bd322e8ff334442397f"
+        },
+        {
+          "file": "industry-mix-3cities-2023.png",
+          "alt": "上位3市の業種構成（2023年）",
+          "template": "stacked-bar",
+          "sha256": "631ce95efde6ae2acebff5b5389cf321c0d54cd4ec035340650d2a88e15a6101"
+        },
+        {
+          "file": "structure-aichi-treemap-2023.png",
+          "alt": "愛知県の製造品出荷額等の内訳（2023年・54市町村）",
+          "template": "treemap",
+          "sha256": "b343720bf787c4c3eae359bb82e3718e7276548904bc1b4e08d3efef53839a2a"
+        },
+        {
+          "file": "structure-share-map-2023.png",
+          "alt": "県内の合計に占める割合（2023年・市区町村別）",
+          "template": "choropleth",
+          "sha256": "37f5c28e93117e117cd7af744cc916195eceb1d7874b74d60e03bc2df48f596a"
+        }
+      ]
+    },
+    {
+      "id": "long-term-change",
+      "figures": [
+        {
+          "file": "change-trend-1980-2023.png",
+          "alt": "製造品出荷額等の推移（1980〜2023年）",
+          "template": "line",
+          "sha256": "385f38854d9f6cb7a97a1c84d088fc7a5155941119856a83d79c63292e25caae"
+        },
+        {
+          "file": "change-ratio-map-1980-2023.png",
+          "alt": "1980年→2023年で何倍か（市区町村別）",
+          "template": "choropleth",
+          "sha256": "2778e688fb2d238e5f2b65b529ae52d1282f0b42a805f5a4e996166665161532"
+        }
+      ]
+    }
+  ],
+  "filePreview": {
+    "heading": "ファイルの中身",
+    "lead": "CSV は自治体コード・年・値の形で、業種別は業種コードと業種名の列が加わります。値が空の行には、秘匿などの理由を注記の列に書いています。",
+    "figures": [
+      {
+        "file": "file-preview-toyota.png",
+        "alt": "時系列のCSVの中身（豊田市の行の一部）",
+        "template": "file-preview",
+        "sha256": "b0815d8c792bb6df0ab68190e288be0367942461ce3852c10dd967d2721e32fd"
+      },
+      {
+        "file": "file-preview-industry-kurashiki.png",
+        "alt": "業種別のCSVの中身（倉敷市・2023年の一部）",
+        "template": "file-preview",
+        "sha256": "69a5573fb91539ee042437d225434b25c5115de1c3c0f9bdcc21a7c3c243943e"
+      }
+    ]
+  },
+  "showcaseNote": "図は収録CSVの値から作成し、地図の描画には国土数値情報の行政区域データを使用しています。同梱GeoJSONは、令和2年国勢調査の境界データを自治体単位にまとめたものです（2020年10月1日時点）。"
+}

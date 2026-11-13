@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Kindle 書籍版だけの図の中の文字の校訂",
+  "description": "data/products/kindle/figure-corrections.json の形状契約。図の中の文字 (SVG の text と title) に対する書籍版だけの校訂。本文は critic の指摘で直っても、図は R2 の SVG をそのまま PNG 化するので図題・副題・軸ラベルが旧表記のまま残り、critic が「据え置き (図側工程)」として 3 冊 (K-S1-06・08・10) で持ち越した (2026-09-19 の S1 全冊レビュー)。図データ (ブログ記事の data/*.json) を直すのはブログ側の工程なので、ここでは PNG 化の直前に文字だけを置き換える。数値・座標・点は触らない。契約は products.kindle-editorial-corrections と同じ: before は R2 の SVG の逐語で、1 回以上現れなければ生成を止める (ブログ側で図が直ったら、この校訂は不要になり before が消える → エントリを削除する)。同じ文字列が title と text の 2 か所に出る地図は両方置き換える (置換は全件)。年の型 (年/年度) は指標定義シート (data-configs の yearFormat) に合わせる。config 側の型が疑わしい指標 (警察庁の犯罪統計は暦年集計) は backlog METRIC-YEARFORMAT-KAKEI-01 で config を直してから戻す。corrections のキーは <記事 slug>/<図の名前> (article.md の ![..](data/<名前>.svg))。文字列の置換では直せない図の変換 (FIGURE_TRANSFORMS) と、どの図にも当てる直し (fixFigureTemplate) は packages/product-factory/src/channels/kindle/figure-corrections.ts が持つ。notes はキーの直前に置かれていた見出しや経緯の記録 (節の見出しはその節の先頭のキーに付ける)。",
+  "type": "object",
+  "required": ["corrections", "notes"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "corrections": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^[a-z0-9][a-z0-9-]*/[a-z0-9][a-z0-9-]*$" },
+      "additionalProperties": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "object",
+          "required": ["before", "after", "reason"],
+          "additionalProperties": false,
+          "properties": {
+            "before": { "type": "string", "minLength": 1 },
+            "after": { "type": "string" },
+            "reason": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    },
+    "notes": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-z0-9][a-z0-9-]*/[a-z0-9][a-z0-9-]*$" },
+      "additionalProperties": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "productId": "P-10",
+  "deliveryVersion": "v4-20261024-mac-r2",
+  "manifestSha256": "bc28f9f4d5e7b15afaf329ba840c6da30b4ce8895dddeab2862fbc2a30724e3d",
+  "sourceArchive": {
+    "bucket": "stats47-private",
+    "key": "note/product-archives/P-10/v4-20261024-mac-r2/5b98130fd8d427d80d6abe38dbbaeed70daf69693b25aed7bbbb7fdd0f004bd2.zip",
+    "sha256": "5b98130fd8d427d80d6abe38dbbaeed70daf69693b25aed7bbbb7fdd0f004bd2"
+  },
+  "selectedMetrics": [
+    {
+      "key": "sewerage-penetration-rate-2012on",
+      "title": "下水道普及率（2012－）",
+      "year": "2021",
+      "unit": "％"
+    },
+    {
+      "key": "disaster-damage-amount-per-person",
+      "title": "災害被害額（人口1人当たり）",
+      "year": "2023",
+      "unit": "円"
+    }
+  ],
+  "included": [
+    "CSV（47地域・230指標、基準年は指標ごとに固定）",
+    "Excel（230指標）",
+    "PowerPoint（30指標の図表）",
+    "PDFデータブック・地図PNG",
+    "出典一覧（SOURCES.csv）・利用条件"
+  ],
+  "examples": [
+    {
+      "id": "sewerage-coverage",
+      "figures": [
+        {
+          "file": "sewerage-coverage.png",
+          "alt": "下水道普及率（2012－）（2021年度・地図）",
+          "template": "choropleth",
+          "sha256": "c3645ced5548b5df2458a20bf0ceae7a0d4706e6d1ffdcdad44991519b0d8285"
+        }
+      ]
+    },
+    {
+      "id": "disaster-losses",
+      "figures": [
+        {
+          "file": "disaster-losses.png",
+          "alt": "災害被害額（人口1人当たり）（2023年・地域別比較）",
+          "template": "bar",
+          "sha256": "12e4d01276d329ac9571ef46e047423a80f59421423b68aed6224afbbaaf9b37"
+        }
+      ]
+    }
+  ],
+  "filePreview": {
+    "heading": "ファイルの中身",
+    "lead": "CSVは地域コード・地域名と指標の値を横に並べた形式です。画像は8行と1指標を抜粋しています。元の数値列名には指標名・年・単位が入り、画像では「数値」と省略しています。全230指標の出典と基準年はSOURCES.csvで確認できます。",
+    "figures": [
+      {
+        "file": "file-preview.png",
+        "alt": "P-10のdata.csvから列と8行を抜粋した見本",
+        "template": "file-preview",
+        "sha256": "6b8b9e569c651cd63a0e4c4c7595c2ff3feed36405a6561a3dba8f2274ed2896"
+      }
+    ]
+  },
+  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2006〜2025年で指標ごとに異なり、時系列データではありません。"
+}

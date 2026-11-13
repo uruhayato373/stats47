@@ -1,13 +1,16 @@
 import { Suspense, type ReactNode } from 'react';
 
 
+
 import { METRICS_REGISTRY } from '@stats47/data-configs';
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { scopeHrefsForPrefectureTheme } from '@stats47/data-configs/geo-scope';
 import { MUNICIPALITY_THEME_FOR_PREFECTURE_THEME } from '@stats47/data-configs/geo-scope/scope-theme-map';
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
+import { getRankingTitle } from '@stats47/ranking';
 import { getSurveyTaxonomyEntries, resolveThemeSurveyTaxonomy } from '@stats47/ranking/survey';
 
+import { FaqSection } from '@/components/content/FaqSection';
 import { PageShell, PanelGrid } from '@/components/layout';
 import { THEME_HEROES } from '@/components/layout/page-heroes';
 import {
@@ -17,18 +20,29 @@ import {
 import { loadPageComponents } from '@/components/stat-charts/server';
 import { RailCard, RailNavRow } from '@/components/surface';
 
-import { AdRow, composeAdRows, isLandscapeBanner } from '@/features/ads';
-import { resolveGenericAffiliateBanners } from '@/features/ads/server';
+import { AdRow, composeAdRows } from '@/features/ads';
 
-import { CONTENT_FOOTER, HUB_INCONTENT, RAIL_RECT, THEMES_CONTENT } from '@/lib/google-adsense';
+import { THEME_END, THEME_ROW_2, THEMES_CONTENT } from '@/lib/google-adsense';
 import { AD_FREE_THEME_KEYS } from '@/lib/google-adsense/ad-free-paths';
 
 import { isAreaTheme } from '../config/area-theme-slugs';
-import { THEME_SECTION_REGISTRY } from '../config/theme-section-registry';
+import {
+  NATIONAL_ONLY_SECTIONS,
+  PREFECTURE_ONLY_SECTIONS,
+  THEME_SECTION_REGISTRY,
+} from '../config/theme-section-registry';
 import { THEME_SWITCHER_THEMES } from '../config/theme-switcher-themes';
 import { areaThemeDescription, getAreaThemeHighlights } from '../lib/area-theme-highlights';
+import { loadInitialThemeData } from '../lib/initial-theme-data';
 import { KAKEI_RANKING_DIRECTORY } from '../lib/kakei-ranking-directory.generated';
 import { prefectureCityOptions } from '../lib/prefecture-city-options';
+import {
+  buildAreaThemeFaqItems,
+  buildFaqStructuredData,
+  buildThemeFaqItems,
+  leadFactFromValues,
+  themeLeadRankingKeys,
+} from '../lib/theme-seo';
 import {
   generateThemeBreadcrumbStructuredData,
   generateThemePageStructuredData,
@@ -44,6 +58,7 @@ import { ThemeHero } from './ThemeHero';
 import { ThemePrefectureProvider } from './ThemePrefectureContext';
 import { ThemeRegionNav } from './ThemeRegionNav';
 import { ThemeRelatedArticles } from './ThemeRelatedArticles';
+
 
 import type { ThemePageData } from '../lib/load-theme-data';
 import type { ThemeConfig } from '../types';
@@ -99,6 +114,35 @@ export async function ThemePageLayout({
       }
     : undefined;
   const breadcrumbData = generateThemeBreadcrumbStructuredData(theme, structuredArea);
+  // 主な指標の順位の Q&A (2026-11-12 オーナー決定・theme-seo.ts)。画面に出す Q&A と構造化データを同じデータから作る
+  // (Google は FAQ の構造化データに画面と同じ内容を求める)。全国のページは 1 位・最下位、県のページはその県の全国順位
+  const leadData = themeLeadRankingKeys(theme.themeKey)
+    .map((key) => data.indicatorDataMap[key])
+    .filter((d): d is NonNullable<typeof d> => d != null);
+  const faqItems = areaContext
+    ? buildAreaThemeFaqItems(
+        areaContext.areaName,
+        leadData.flatMap((d) => {
+          const finite = d.rankingValues.filter((v) => v.areaCode !== '00000' && typeof v.value === 'number' && Number.isFinite(v.value));
+          const row = finite.find((v) => v.areaCode === areaContext.areaCode);
+          if (!row || typeof row.value !== 'number' || row.rank == null) return [];
+          return [{
+            itemName: getRankingTitle(d.rankingItem),
+            unit: d.rankingItem.unit ?? '',
+            yearName: d.rankingItem.latestYear?.yearName ?? '',
+            value: row.value,
+            rank: row.rank,
+            total: finite.length,
+          }];
+        }),
+      )
+    : buildThemeFaqItems(
+        leadData.flatMap((d) => {
+          const fact = leadFactFromValues(d.rankingItem, d.rankingValues);
+          return fact ? [fact] : [];
+        }),
+      );
+  const faqData = buildFaqStructuredData(faqItems);
   const pageData = generateThemePageStructuredData(theme, structuredArea);
   const catalog = THEME_CATALOGS[theme.themeKey];
   const catalogTaxonomy = catalog
@@ -142,6 +186,10 @@ export async function ThemePageLayout({
   ];
   const embeddedSections = Object.fromEntries(
     (theme.embeddedSections ?? []).flatMap((key) => {
+      // 全国の値の図の章は、県のページでは組み立てない (章ごと出さない)
+      if (areaContext && NATIONAL_ONLY_SECTIONS.has(key)) return [];
+      // 県を選んだときだけ描く章は、県を選べない全国のページ (県のページを持つテーマ) では組み立てない
+      if (!areaContext && isAreaTheme(theme.themeKey) && PREFECTURE_ONLY_SECTIONS.has(key)) return [];
       const Section = THEME_SECTION_REGISTRY[key];
       return Section
         ? [[key, <Suspense key={key} fallback={null}><Section /></Suspense>]]
@@ -149,28 +197,20 @@ export async function ThemePageLayout({
     })
   );
 
-  // 本文の広告の段 (PR の列)。2026-11-03 (オーナー決定・収益化戦略 §3.2) からテーマごとの文脈の案件をやめ、
-  // 共通の案件 (対象者が広く気軽に始められる商品) を横 3 枠で出す。
-  // 非商用データの節を埋め込むテーマは広告・アフィリエイトを出さない (ad-free-paths.ts。AdSense の script も止まる)
+  // 本文の広告の段 (2026-11-12 オーナー決定): アフィリエイトを止め、3 段とも AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。
+  // ユニットは段ごとにテーマ専用 (2 段目と最後は同日に作成。それまではハブ・一覧と共用で、テーマの分を測れなかった)。
+  // 非商用データの節を埋め込むテーマは広告を出さない (ad-free-paths.ts。AdSense の script も止まる)
   const isAdFree = AD_FREE_THEME_KEYS.includes(theme.themeKey);
-  const nativeBanners = isAdFree
-    ? []
-    : (await resolveGenericAffiliateBanners(5).catch(() => [])).filter(isLandscapeBanner);
-  // 広告の段 (2026-11-03 オーナー決定): 1 章目の後・3 章目の後・ページの最後の 3 段。幅に入る数だけ左から出す
-  // (モバイル 1 枠・本文 608px 以上 2 枠・916px 以上 3 枠)。モバイルで上から AdSense → PR → AdSense になるよう先頭の種類を変える。
-  // AdSense は段ごとに別のユニット (同じユニットを 1 ページで重ねない)。テーマには右レールが無いので RAIL_RECT も使う
   const [chapterRow1, chapterRow2, endRow] = isAdFree
     ? [[], [], []]
-    : composeAdRows(
-        [
-          ['adsense', 'affiliate', 'adsense'],
-          ['affiliate', 'adsense', 'affiliate'],
-          ['adsense', 'affiliate', 'affiliate'],
-        ],
-        [HUB_INCONTENT, THEMES_CONTENT, CONTENT_FOOTER, RAIL_RECT],
-        nativeBanners,
-      );
+    : composeAdRows([['adsense'], ['adsense'], ['adsense']], [THEMES_CONTENT, THEME_ROW_2, THEME_END], []);
   const providerPrefecture = areaContext ?? initialPrefecture;
+  // 指標カードの時系列と章の図の結果を初回描画で渡す (表示直後の POST を出さない。GSC-CRAWL-WASTE-01)
+  const initialThemeData = await loadInitialThemeData({
+    metricKeys: Object.keys(data.indicatorDataMap),
+    charts: pageCharts,
+    prefectureCode: providerPrefecture?.areaCode ?? null,
+  });
 
   return (
     <ThemePrefectureProvider
@@ -187,6 +227,12 @@ export async function ThemePageLayout({
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(pageData) }}
           />
+          {faqData && (
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{ __html: JSON.stringify(faqData) }}
+            />
+          )}
           {/* パンくずの各段と右端のアイコンから、地域・テーマを Sheet で選ぶ (2026-10-31 IA-REGION-THEME-01)。
           旧: パンくずとは別に、地域単位のリンク・テーマのボタン・県の Select を並べた帯を置いていた */}
           <div className="mb-4">
@@ -244,6 +290,7 @@ export async function ThemePageLayout({
             pageCharts={pageCharts}
             chartSourceLinks={chartSourceLinks}
             chapterAdRows={[chapterRow1, chapterRow2]}
+            initialThemeData={initialThemeData}
           />
 
           {(themeMetrics.length > 0 || themeSurveys.length > 0) && (
@@ -336,6 +383,17 @@ export async function ThemePageLayout({
             <ThemeCorrelatedMetrics themeKey={theme.themeKey} />
           </Suspense>
 
+          {/* 主な指標の順位の Q&A。上の構造化データ (FAQPage) と同じ内容 */}
+          {faqItems.length > 0 && (
+            <div className="mt-8">
+              <FaqSection
+                title={`${theme.title}の順位についてのよくある質問`}
+                subtitle={areaContext ? undefined : '都道府県の並びは、各指標のランキングのページで見られます。'}
+                items={faqItems.map(({ q, a }) => ({ question: q, answer: a }))}
+              />
+            </div>
+          )}
+
           {/* このテーマを読み解く記事はページの最後 (ダッシュボードを読み終えた位置) に置く (2026-10-29) */}
           {((theme.relatedArticleTagKeys?.length ?? 0) > 0 || theme.rankingKeys.length > 0) && (
             <div className="mt-8">
@@ -351,7 +409,7 @@ export async function ThemePageLayout({
 
           {/* ページの最後の広告の段 (このテーマを読み解く記事の後) */}
           {endRow.length > 0 && (
-            <AdRow cells={endRow} position="theme-row-end" trackingCategory={`theme-${theme.themeKey}`} />
+            <AdRow cells={endRow} position="theme-row-end" trackingCategory={`theme-${theme.themeKey}`} wide />
           )}
 
         </PanelGrid>

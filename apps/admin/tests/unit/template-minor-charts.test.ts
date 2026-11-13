@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import sharp from 'sharp';
-import { renderCompositionHeatmap, renderCompositionPie, renderDistributionBoxplot } from '@/lib/template-minor-charts';
+import { renderCompositionHeatmap, renderCompositionPie, renderDistributionBoxplot, renderDonutChart } from '@/lib/template-minor-charts';
 import { RANKING_SAMPLE_METRIC } from '@/lib/template-ranking-data';
 import { resolveMetricColor } from '../../../remotion/src/features/data-cards/tile-scale';
 import { assertMinimalChartCopy } from '../../../../.claude/scripts/media/lib/image-copy.mjs';
@@ -50,5 +50,17 @@ describe('使用例の少ない統計図の見本', () => {
     expect(svg.match(/font-size="34" font-weight="700"[^>]*>[\d.]+%<\/text>/g)).toHaveLength(24);
     expect(() => assertMinimalChartCopy(svg)).not.toThrow();
     expect(await png(svg)).toMatchObject({ width: 1080, height: 1350 });
+  });
+  it('draws any small composition as a donut, with shares that sum to the whole, and refuses too many parts', () => {
+    const chart = { title: '豊田市の業種別内訳', meta: '2023年', source: 'e-Stat', centerLabel: '豊田市',
+      categories: [{ label: '輸送用機械', value: 934 }, { label: '電気機械', value: 22 }, { label: 'その他', value: 44 }] };
+    const svg = renderDonutChart(chart);
+    expect(svg).toContain('data-image-template="pie"');
+    expect(svg.match(/data-category="/g)).toHaveLength(3);
+    for (const share of ['93.4%', '2.2%', '4.4%']) expect(svg).toContain(`>${share}</text>`);
+    // A part under 0.05% is not written as 0.0%, which would read as nothing.
+    expect(renderDonutChart({ ...chart, categories: [...chart.categories, { label: '秘匿', value: 0.3 }] })).toContain('>0.1%未満</text>');
+    expect(() => renderDonutChart({ ...chart, categories: Array.from({ length: 9 }, (_, i) => ({ label: `区分${i}`, value: 1 })) })).toThrow();
+    expect(() => renderDonutChart({ ...chart, categories: [{ label: 'a', value: 0 }, { label: 'b', value: 0 }] })).toThrow();
   });
 });

@@ -674,14 +674,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:forestry-timber",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "japan-theme:natural-environment",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:artificial-forest-area",
           "kind": "ranking"
         },
@@ -2853,10 +2845,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:aging-society",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:average-age-of-first-marriage-wife",
           "kind": "ranking"
         },
@@ -4454,10 +4442,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:roads",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:average-road-traffic-volume",
           "kind": "ranking"
         },
@@ -4874,6 +4858,10 @@
         {
           "pageId": "blog:temperature-extremes-map",
           "kind": "blog"
+        },
+        {
+          "pageId": "product:data-p-07",
+          "kind": "product"
         },
         {
           "pageId": "ranking:average-temperature",
@@ -6305,10 +6293,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:real-income",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:avg-propensity-to-consume-worker-households",
           "kind": "ranking"
         },
@@ -7249,10 +7233,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:household-assets-debt",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:avg-savings-rate-worker-households",
           "kind": "ranking"
         },
@@ -7450,19 +7430,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:chiba-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:fukushima-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:hokkaido-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:hyogo-food-culture",
           "kind": "blog"
         },
         {
@@ -7495,6 +7467,10 @@
         },
         {
           "pageId": "blog:tokyo-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:wakayama-food-culture",
           "kind": "blog"
         },
         {
@@ -7543,19 +7519,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:chiba-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:fukushima-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:hokkaido-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:hyogo-food-culture",
           "kind": "blog"
         },
         {
@@ -7588,6 +7552,10 @@
         },
         {
           "pageId": "blog:tokyo-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:wakayama-food-culture",
           "kind": "blog"
         },
         {
@@ -7862,10 +7830,6 @@
         },
         {
           "pageId": "blog:banana-consumption-quantity",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:icecream-consumption-expenditure",
           "kind": "blog"
         },
         {
@@ -9069,10 +9033,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:sports-participation",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:baseball-field-public",
           "kind": "ranking"
         },
@@ -9835,10 +9795,6 @@
         {
           "pageId": "area-theme:47000:local-services",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:local-services",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:beauty-salon-count",
@@ -10698,7 +10654,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:osaka-food-culture",
+          "pageId": "blog:saga-food-culture",
           "kind": "blog"
         },
         {
@@ -10706,8 +10662,8 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:wakayama-food-culture",
-          "kind": "blog"
+          "pageId": "product:data-p-14",
+          "kind": "product"
         },
         {
           "pageId": "ranking:beef-consumption-expenditure",
@@ -11177,10 +11133,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:osaka-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:pork-consumption-expenditure",
           "kind": "blog"
         },
@@ -11189,16 +11141,16 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:saga-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:shiga-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:wakayama-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:household-food-spending",
-          "kind": "japan-theme"
+          "pageId": "product:data-p-14",
+          "kind": "product"
         },
         {
           "pageId": "ranking:beef-consumption-quantity",

@@ -233,12 +233,12 @@ export const HEALTHCARE_SET: IndicatorSet = {
     {
       "rankingKey": "life-expectancy-0-male",
       "shortLabel": "男性平均寿命（2020年）",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "life-expectancy-0-female",
       "shortLabel": "女性平均寿命（2020年）",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "new-cancer-incidence-count",

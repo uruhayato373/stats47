@@ -1,0 +1,196 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "テーマの改善実験台帳",
+  "description": "data/themes/experiments.json の形の契約。テーマごとの改善 (指標・チャート・文面・構造・統合・分割・改名・廃止) と新規 URL の初回公開 (launch) を、baseline・観測の期日・判定とともに 1 実験 1 件で持つ。効果の判定材料と実験の履歴の台帳で、改善バックログ (.claude/todo/improvements.md) へは書かない (effect ラベルの反映は improvement-triage に頼む)。書き込みは evaluate-theme-experiments.mjs だけが行う: --register (登録。verdict は pending 固定、startedAt・evaluateAt・result は null)、--schedule (実際に公開した日から startedAt と evaluateAt の +7/+28/+56 日を算出)、--check (期日の到達分に実測を result.d7/d28/d56 へ記録し、窓不足の再観測は result.rechecks へ追記)、--verdict (確定)、--launch-review (launch の d56 後の判断)、--update-baseline (未開始の改善実験の baseline だけ)。手で書かない。判定の規律 (一意・同一 themeKey × changeType の pending は 1 件・改善は baseline 必須・launch は baseline を null にして公開前を 0 で代用しない・確定には result と evidenceRefs・d7 では確定しない・d56 の適合する窓が要る) は evaluate-theme-experiments.mjs の experimentIssues / assessCheckpoint と validate-theme-state.mjs が持つ。運用は .claude/skills/theme/manage-theme-portfolio/reference/テーマポートフォリオ運用.md。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "experiments"],
+  "definitions": {
+    "week": { "type": "string", "pattern": "^\\d{4}-W\\d{2}$" },
+    "kpi": { "description": "<計測元>.<指標> (計測元は portfolio の metrics のキー。例: gsc.impressions)", "type": "string", "pattern": "^(gsc|ga4|internalNav)\\.[A-Za-z][A-Za-z0-9]*$" },
+    "scope": { "enum": ["search-console", "Japan"] },
+    "metricStatus": { "enum": ["measured", "measured-low", "insufficient-data", "not-instrumented"] },
+    "valueEntry": {
+      "description": "KPI の実測 1 件 (portfolio の metrics から解決)。古い d7 の記録は value と status だけ。窓が揃わなかったときは windowDays が 0・periodStart と periodEnd が null・weeks が空",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "status"],
+      "properties": {
+        "value": { "type": ["number", "null"] },
+        "status": { "$ref": "#/definitions/metricStatus" },
+        "scope": { "anyOf": [{ "$ref": "#/definitions/scope" }, { "type": "null" }] },
+        "windowDays": { "type": ["integer", "null"], "minimum": 0 },
+        "periodStart": { "anyOf": [{ "$ref": "common.schema.json#/$defs/date" }, { "type": "null" }] },
+        "periodEnd": { "anyOf": [{ "$ref": "common.schema.json#/$defs/date" }, { "type": "null" }] },
+        "weeks": { "type": "array", "items": { "$ref": "#/definitions/week" } }
+      }
+    },
+    "assessmentStatus": {
+      "description": "quality-only = d7 (品質の実測だけ。効果の判定に使わない) / insufficient-data = 窓・標本・scope・baseline のどれかが適合しない / provisional = d28 の暫定 / eligible = d56 で効果を確定できる / launch-provisional・launch-observed = launch の d28・d56 の観測 (効果ではない)",
+      "enum": ["quality-only", "insufficient-data", "provisional", "eligible", "launch-provisional", "launch-observed"]
+    },
+    "observation": {
+      "description": "期日の到達時に --check が記録する観測。旧い記録は status・reasons・constraints を持たない",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["observedAt", "values"],
+      "properties": {
+        "observedAt": { "$ref": "common.schema.json#/$defs/date" },
+        "status": { "$ref": "#/definitions/assessmentStatus" },
+        "values": { "type": "object", "propertyNames": { "$ref": "#/definitions/kpi" }, "additionalProperties": { "$ref": "#/definitions/valueEntry" } },
+        "reasons": { "description": "適合しない理由 (assessCheckpoint が付ける語彙)", "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "constraints": { "description": "guardrail の不適合と launch の制約", "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "quality": {
+          "description": "d7 の品質の実測 (portfolio の dataQualityStatus と dataQuality の写し)",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "status": { "enum": ["ok", "gaps", "unknown"] },
+            "observedAt": { "type": ["string", "null"] },
+            "keysChecked": { "type": "integer", "minimum": 0 },
+            "oldestLatestDataYear": { "type": ["string", "null"] },
+            "ageReviewKeys": { "type": "array", "items": { "type": "string" } },
+            "freshnessStatus": { "type": "string" },
+            "missingKeys": { "type": "integer", "minimum": 0 },
+            "missingKeyList": { "type": "array", "items": { "type": "string" } },
+            "latestYearPrefCoverageMin": { "type": ["integer", "null"], "minimum": 0 }
+          }
+        }
+      }
+    }
+  },
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "experiments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "experimentId", "themeKey", "hypothesis", "changeType", "baselinePeriod", "startedAt", "evaluateAt",
+          "primaryKpi", "guardrailKpis", "baseline", "result", "verdict", "notes", "evidenceRefs"
+        ],
+        "properties": {
+          "experimentId": { "description": "一意", "type": "string", "pattern": "^[A-Z0-9]+(-[A-Z0-9]+)*(-[a-z0-9]+)*$" },
+          "themeKey": { "description": "テーマのカタログ (themes.catalogs) の key (実在は check-datasets の refs が止める)。portfolio にあることは validate-theme-state.mjs が検査する", "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+          "hypothesis": { "type": "string", "minLength": 1 },
+          "changeType": { "enum": ["catalog-metrics", "catalog-charts", "copy", "structure", "merge", "split", "rename", "retire", "launch"] },
+          "baselinePeriod": {
+            "description": "変更前の 56 日窓。launch は公開前の窓が存在しないので null",
+            "anyOf": [
+              { "type": "null" },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["from", "to"],
+                "properties": { "from": { "$ref": "common.schema.json#/$defs/date" }, "to": { "$ref": "common.schema.json#/$defs/date" } }
+              }
+            ]
+          },
+          "startedAt": { "description": "実際に公開した日 (反映と本番の確認が済んだ日。ローカルの build 日や PR の作成日ではない)。--schedule が設定するまで null (登録のみ)", "anyOf": [{ "$ref": "common.schema.json#/$defs/date" }, { "type": "null" }] },
+          "evaluateAt": {
+            "description": "確認を始める日 (観測窓の代用ではない)。d7 = 品質の実測だけ (異常の検知) / d28 = 暫定 / d56 = 基本の判定。startedAt の +7/+28/+56 日 (experimentIssues が検査する)。--schedule が設定するまで null",
+            "anyOf": [
+              { "type": "null" },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["d7", "d28", "d56"],
+                "properties": {
+                  "d7": { "$ref": "common.schema.json#/$defs/date" },
+                  "d28": { "$ref": "common.schema.json#/$defs/date" },
+                  "d56": { "$ref": "common.schema.json#/$defs/date" }
+                }
+              }
+            ]
+          },
+          "primaryKpi": { "$ref": "#/definitions/kpi" },
+          "guardrailKpis": { "type": "array", "items": { "$ref": "#/definitions/kpi" } },
+          "baseline": {
+            "description": "変更前の KPI の値。改善は必須 (1 件以上)。launch は null (公開前を 0 で代用しない)。標本不足などで取れなかった KPI は null",
+            "anyOf": [
+              { "type": "null" },
+              { "type": "object", "minProperties": 1, "propertyNames": { "$ref": "#/definitions/kpi" }, "additionalProperties": { "type": ["number", "null"] } }
+            ]
+          },
+          "baselineStatus": { "description": "launch だけ。公開前の baseline が存在しないことの明示", "const": "not-applicable-new-url" },
+          "baselineScopes": { "description": "baseline の計測元ごとの対象範囲。無い旧い baseline は効果の確定に使わない", "type": "object", "additionalProperties": false, "properties": { "gsc": { "$ref": "#/definitions/scope" }, "ga4": { "$ref": "#/definitions/scope" }, "internalNav": { "$ref": "#/definitions/scope" } } },
+          "baselineStatuses": { "description": "baseline の KPI ごとの標本の状態。measured でないものは効果の比較に使わない", "type": "object", "propertyNames": { "$ref": "#/definitions/kpi" }, "additionalProperties": { "$ref": "#/definitions/metricStatus" } },
+          "result": {
+            "description": "観測と判断の履歴。登録時は null。保存済みの d7/d28/d56 は書き換えず、再観測を rechecks へ追記する (同じ内容は日時だけ変わっても重複させない)",
+            "anyOf": [
+              { "type": "null" },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "d7": { "$ref": "#/definitions/observation" },
+                  "d28": { "$ref": "#/definitions/observation" },
+                  "d56": { "$ref": "#/definitions/observation" },
+                  "rechecks": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "d7": { "type": "array", "items": { "$ref": "#/definitions/observation" } },
+                      "d28": { "type": "array", "items": { "$ref": "#/definitions/observation" } },
+                      "d56": { "type": "array", "items": { "$ref": "#/definitions/observation" } }
+                    }
+                  },
+                  "launchReview": {
+                    "description": "launch の d56 後の判断 (--launch-review)。効果の確定ではない。continue には適合する公開後 56 日窓が要る",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["reviewedAt", "decision", "observedAt", "assessment", "evidenceRefs", "note"],
+                    "properties": {
+                      "reviewedAt": { "$ref": "common.schema.json#/$defs/date" },
+                      "decision": { "enum": ["continue", "improve", "hold"] },
+                      "observedAt": { "$ref": "common.schema.json#/$defs/date" },
+                      "assessment": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": ["status", "reasons", "constraints"],
+                        "properties": {
+                          "status": { "$ref": "#/definitions/assessmentStatus" },
+                          "reasons": { "type": "array", "items": { "type": "string" } },
+                          "constraints": { "type": "array", "items": { "type": "string" } }
+                        }
+                      },
+                      "evidenceRefs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+                      "note": { "type": "string", "minLength": 1 }
+                    }
+                  },
+                  "baselineCandidate": {
+                    "description": "launch の最初の適合する 56 日窓。次の改善実験の baseline の候補で、launch 自身の baseline を置き換えない。主 KPI が measured のときだけ",
+                    "anyOf": [
+                      { "type": "null" },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": ["sourceExperimentId", "sourceObservedAt", "baselinePeriod", "baseline", "baselineScopes", "baselineStatuses", "evidenceRefs"],
+                        "properties": {
+                          "sourceExperimentId": { "type": "string" },
+                          "sourceObservedAt": { "$ref": "common.schema.json#/$defs/date" },
+                          "baselinePeriod": { "type": "object", "additionalProperties": false, "required": ["from", "to"], "properties": { "from": { "$ref": "common.schema.json#/$defs/date" }, "to": { "$ref": "common.schema.json#/$defs/date" } } },
+                          "baseline": { "type": "object", "propertyNames": { "$ref": "#/definitions/kpi" }, "additionalProperties": { "type": "number" } },
+                          "baselineScopes": { "type": "object", "additionalProperties": { "$ref": "#/definitions/scope" } },
+                          "baselineStatuses": { "type": "object", "propertyNames": { "$ref": "#/definitions/kpi" }, "additionalProperties": { "$ref": "#/definitions/metricStatus" } },
+                          "evidenceRefs": { "type": "array", "items": { "type": "string" } }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          "verdict": {
+            "description": "pending = 未判定 / effect-full・effect-partial・effect-none・effect-adverse = 効果の確定 (公開後の適合する d56 実測と比較できる baseline が要る。launch では確定しない) / launch-reviewed = launch の d56 後の判断 / insufficient-data = 判定に足りない / aborted = 中止。確定は --verdict と --launch-review だけが行う",
+            "enum": ["pending", "launch-reviewed", "effect-full", "effect-partial", "effect-none", "effect-adverse", "insufficient-data", "aborted"]
+          },
+          "notes": { "description": "季節性・検索順位の変動・サイト全体の変動の注記 (疑われるときは必須)", "type": ["string", "null"] },
+          "evidenceRefs": { "description": "実測 snapshot・レビュー文書への参照。effect の確定には 1 件以上", "type": "array", "items": { "type": "string", "minLength": 1 } }
+        }
+      }
+    }
+  }
+}

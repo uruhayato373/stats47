@@ -368,15 +368,57 @@ describe('市区町村URLのknown集合と旧query移行', () => {
     expect(middleware(request(pathname)).status).toBe(410);
   });
 
-  test.each([
-    // 自治体名の検索・ページ送りを伴う絞り込みは全国版に残す
-    '/municipalities/ranking/manufacturing-shipment-amount?pref=23000&q=豊田',
-    '/municipalities/ranking/manufacturing-shipment-amount?pref=23000&page=2',
-    // 県別ページを作らない指標・不正な県コードは転送しない
-    '/municipalities/ranking/future-burden-ratio-city?pref=23000',
-    '/municipalities/ranking/manufacturing-shipment-amount?pref=99000',
-  ])('%s は県別ページへ転送しない', (pathname) => {
-    expect(middleware(request(pathname)).status).not.toBe(301);
+  describe('旧クエリ (pref / q / page) は必ず 301 で畳む (2026-11-13 URL 原則)', () => {
+    const base = 'https://stats47.jp/municipalities/ranking';
+    // 県別ページあり: manufacturing-shipment-amount / 県別ページなし: future-burden-ratio-city
+    test.each([
+      ['県別ページあり + pref → 県別パス', '/manufacturing-shipment-amount?pref=23000', '/manufacturing-shipment-amount/23000'],
+      ['県別ページなし + pref → 全国版', '/future-burden-ratio-city?pref=23000', '/future-burden-ratio-city'],
+      ['page だけ → 全国版', '/manufacturing-shipment-amount?page=2', '/manufacturing-shipment-amount'],
+      ['q だけ → 全国版', '/manufacturing-shipment-amount?q=%E8%B1%8A%E7%94%B0', '/manufacturing-shipment-amount'],
+      ['pref + q → 県別パス (q は落とす)', '/manufacturing-shipment-amount?pref=23000&q=%E8%B1%8A%E7%94%B0', '/manufacturing-shipment-amount/23000'],
+      ['pref + page + utm_source → 県別パス (utm は残る)', '/manufacturing-shipment-amount?pref=23000&page=2&utm_source=x', '/manufacturing-shipment-amount/23000?utm_source=x'],
+      ['無効な pref → 全国版 (県別パスにしない)', '/manufacturing-shipment-amount?pref=99000', '/manufacturing-shipment-amount'],
+      ['空の pref → 全国版', '/manufacturing-shipment-amount?pref=', '/manufacturing-shipment-amount'],
+      ['県別パス + page → 県別パス', '/manufacturing-shipment-amount/23000?page=3', '/manufacturing-shipment-amount/23000'],
+      ['県別パス + q + page + utm → 県別パス (utm は残る)', '/manufacturing-shipment-amount/23000?q=a&page=2&utm_medium=m', '/manufacturing-shipment-amount/23000?utm_medium=m'],
+      ['県別パス + pref → 県別パス', '/manufacturing-shipment-amount/23000?pref=13000', '/manufacturing-shipment-amount/23000'],
+    ])('%s', (_name, source, expected) => {
+      const response = middleware(request(`/municipalities/ranking${source}`));
+      expect(response.status).toBe(301);
+      expect(response.headers.get('location')).toBe(`${base}${expected}`);
+    });
+
+    test('転送先を再度投げても転送しない (ループしない)', () => {
+      const sources = [
+        '/manufacturing-shipment-amount?pref=23000&page=2&utm_source=x',
+        '/future-burden-ratio-city?pref=23000&q=a',
+        '/manufacturing-shipment-amount/23000?q=a&page=2&pref=1',
+        '/manufacturing-shipment-amount?pref=99000&page=9',
+      ];
+      for (const source of sources) {
+        const first = middleware(request(`/municipalities/ranking${source}`));
+        expect(first.status).toBe(301);
+        const location = new URL(first.headers.get('location') as string);
+        const second = middleware(request(`${location.pathname}${location.search}`));
+        expect(second.status).not.toBe(301);
+      }
+    });
+
+    test.each([
+      '/municipalities/ranking/manufacturing-shipment-amount',
+      '/municipalities/ranking/manufacturing-shipment-amount?utm_source=x',
+      '/municipalities/ranking/manufacturing-shipment-amount/23000',
+      '/municipalities/ranking/manufacturing-shipment-amount/23000?utm_source=x',
+    ])('%s は転送しない', (pathname) => {
+      expect(middleware(request(pathname)).status).not.toBe(301);
+    });
+
+    test('未登録の指標・県別ページの無い指標の県別パスは、クエリが付いても 301 でなく 410', () => {
+      expect(middleware(request('/municipalities/ranking/not-real?page=2')).status).toBe(410);
+      expect(middleware(request('/municipalities/ranking/future-burden-ratio-city/23000?page=2')).status).toBe(410);
+      expect(middleware(request('/municipalities/ranking/manufacturing-shipment-amount/99000?page=2')).status).toBe(410);
+    });
   });
 
   test('旧市区町村テーマは市区町村ハブへ恒久転送する', () => {
@@ -531,8 +573,8 @@ describe('廃止ページ・旧カテゴリURLからテーマへの301 (表は c
     ['/gis-cross/unknown', '/themes'],
     ['/gis-cross', '/themes'],
     ['/areas/13000/laborwage', '/areas/13000/labor-wages'],
-    // 地方財政は県別テーマを持たず、先の規則で /themes/local-finance?pref= へ転送される
-    ['/areas/13000/administrativefinancial', '/themes/local-finance?pref=13000'],
+    // 地方財政も 2026-11-12 から県×テーマの共通のページ (専用ページの特例をやめた)
+    ['/areas/13000/administrativefinancial', '/areas/13000/local-finance'],
     ['/areas/13000/energy', '/areas/13000'],
   ])('%s を %s へ301する', (source, destination) => {
     const response = middleware(legacyRequest(source));
@@ -550,8 +592,12 @@ describe('廃止ページ・旧カテゴリURLからテーマへの301 (表は c
   }
 
   test('廃止ページ表の全行が末尾スラッシュの有無にかかわらず 1 回の 301 で着地する', () => {
-    const sources = ['/ports', '/fishing-ports', '/station-passengers', '/maps/highway-timeline', '/gis-cross/migration-flow', '/gis-cross/depopulation-medical', '/gis-cross/sunshine-map', '/gis-cross'];
+    // 日本全体のテーマの行 (2026-11-12) は /japan/<テーマ> を転送表から作る。それ以外の行は手で並べる
+    const japanSources = LEGACY_THEME_PATH_REDIRECTS.filter(({ pattern }) => pattern.source.startsWith('^\\/japan\\/') || pattern.source.startsWith('^/japan/'))
+      .map(({ pattern }) => pattern.source.replace(/^\^/, '').replace(/\\\//g, '/').replace(/\/\?\$$/, ''));
+    const sources = ['/ports', '/fishing-ports', '/station-passengers', '/maps/highway-timeline', '/gis-cross/migration-flow', '/gis-cross/depopulation-medical', '/gis-cross/sunshine-map', '/gis-cross', ...japanSources];
     // 表に行を足したら sources にも足す (行と source の数が食い違うと落ちる)
+    expect(japanSources.length).toBe(50);
     expect(sources.length).toBe(LEGACY_THEME_PATH_REDIRECTS.length);
     for (const source of sources) {
       expectSingleHop(source);
@@ -596,8 +642,27 @@ describe('テーマの県の絞り込み (?pref=) は県ごとのページへ', 
     expect(middleware(request('/themes/living-housing?pref=all')).status).not.toBe(301);
   });
 
-  test('県ごとのページを持たないテーマ (港湾) と専用ページの地方財政は転送しない', () => {
+  // 2026-11-12 オーナー決定: 日本全体のテーマ (/japan/<テーマ>) をすべて全国のテーマへまとめた (転送表 site.theme-redirects)。
+  // 家計だけの品目のテーマは「食卓と家計の支出」(household-food-spending) の章へ
+  test('日本全体のテーマは全国のテーマへ 301 し、家計の品目は食卓と家計の支出へ', () => {
+    const moved = middleware(request('/japan/aging-society'));
+    expect(moved.status).toBe(301);
+    expect(moved.headers.get('location')).toMatch(/\/themes\/aging-society$/);
+    expect(middleware(request('/japan/household-assets-debt')).headers.get('location')).toMatch(/\/themes\/household-assets-debt$/);
+    expect(middleware(request('/japan/household-appliances')).headers.get('location')).toMatch(/\/themes\/household-food-spending$/);
+  });
+
+  test('県ごとのページを持たないテーマ (港湾) は転送しない', () => {
     expect(middleware(request('/themes/ports?pref=16000')).status).not.toBe(301);
-    expect(middleware(request('/themes/local-finance?pref=16000')).status).not.toBe(301);
+  });
+
+  // 2026-11-12: 地方財政も他のテーマと同じ (専用ページの特例をやめた)。専用ページが受けていた 2 桁の県コードも全テーマで受ける
+  test('地方財政も県×テーマのページへ転送し、2 桁の県コードも受ける', () => {
+    const fiveDigit = middleware(request('/themes/local-finance?pref=16000'));
+    expect(fiveDigit.status).toBe(301);
+    expect(fiveDigit.headers.get('location')).toContain('/areas/16000/local-finance');
+    const twoDigit = middleware(request('/themes/living-housing?pref=13'));
+    expect(twoDigit.status).toBe(301);
+    expect(twoDigit.headers.get('location')).toContain('/areas/13000/living-housing');
   });
 });

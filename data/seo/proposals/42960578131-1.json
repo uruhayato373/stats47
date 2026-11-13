@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "42960578131-1",
+  "status": "implementation-needed",
+  "keyword": "金沢市 人口",
+  "targetPath": "/areas/17000/cities/17201",
+  "needs": "金沢市の現在の人口を知りたい人が検索している。人数と、それが国勢調査か住民基本台帳かという基準が分かれば足りる。他の市との比較や推移は次に見たい情報になる。",
+  "gap": "タイトルと説明文には「45.4万人（2025年）」と2020年からの2.1%減が入っており、人数、推移、順位は競合より厚い。不足は2点ある。リード文に出典と基準日がなく、同じ2025年でも住民基本台帳（443,123人）とは違う値なのに違いが分からない。また1万人単位の丸めのため、人数を探す人に453,605人という実数が先頭に出ない。7.06位で462表示・0クリックだが、この数字だけでは原因を断定できない。",
+  "done": "今日は文字列を置換しない。editableFileがnullで、title・descriptionは packages/ranking/src/municipalities/municipality-page-meta.ts の buildCityPageMeta が生成している。同関数のtitleは効果判定MUNI-PAGE-SEO-01（2026-11-21判定）の対象で、いま変えると判定が混ざる。残る実装は、判定後にMUNI-TITLE-MAGNITUDE-01の整形へ替えて実数を出すことと、2025年の値の出典と基準日を一次資料で確認し、リードへ1語足すこと。完了条件は、確認した出典・基準日と、実数表示のtitleが生成テストで固定されること。",
+  "method": "title",
+  "competitors": [
+    {
+      "url": "https://www.seikatsu-guide.com/keyword/1500/17/17201/",
+      "findings": "WebFetchで読めた。金沢市の人口を出典別の表で答えている。国勢調査2020年の463,254人（全国42位）と、住民基本台帳2025年1月1日の443,123人を併記し、年齢3区分の率、世帯数、外国人人口、増減率も載せる。人口の年次推移は2005〜2020年の増減比率だけで、実数の時系列は無い。2つの値の違いは説明されていない。対象は金沢市（市区）単位で、近隣4市との比較ページがある。"
+    }
+  ],
+  "patches": [],
+  "research": {
+    "targetPage": {
+      "url": "https://stats47.jp/areas/17000/cities/17201",
+      "status": 200,
+      "fetchedAt": "2026-11-11T04:40:36.945Z",
+      "inputHash": "09046934d4f40a8fe72c53004745d7c7e1afbba9150ea9c01a8ab73d8c029b83",
+      "htmlFile": ".local/seo-rank-watch/target-page.html",
+      "htmlSha256": "89c355972a927eb24cf21361b2e6d17ac1e297705bc570be2ed6a430eb3a0652",
+      "textFile": ".local/seo-rank-watch/target-page.txt",
+      "textSha256": "8ef5c81975cba3b428a12f97afde1ca038c9fb4991e8a649dbcf6713551b3351"
+    },
+    "toolCalls": [
+      {
+        "name": "WebSearch",
+        "target": "金沢市 人口"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://stats47.jp/areas/17000/cities/17201"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://www.seikatsu-guide.com/keyword/1500/17/17201/"
+      }
+    ]
+  },
+  "selectedAt": "2026-11-11",
+  "inputHash": "09046934d4f40a8fe72c53004745d7c7e1afbba9150ea9c01a8ab73d8c029b83",
+  "methods": [],
+  "files": []
+}

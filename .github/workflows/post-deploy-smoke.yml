@@ -9,6 +9,11 @@ on:
     branches:
       - main
 
+  # 週 1 回。AdSense の自動広告の設定はデプロイと無関係に変わりうるので、デプロイの無い週も
+  # 出典の書き換え (third-party-dom-injection) を本番で検査する (2026-11-11 ADSENSE-OVERLAY-AB-01)
+  schedule:
+    - cron: "30 20 * * 5" # 土曜 05:30 JST (金 20:30 UTC)
+
   # 手動実行（URL 指定可能）
   workflow_dispatch:
     inputs:
@@ -31,6 +36,7 @@ jobs:
     # deploy が成功した場合のみ実行（手動実行時は常に実行）
     if: >-
       github.event_name == 'workflow_dispatch' ||
+      github.event_name == 'schedule' ||
       github.event.workflow_run.conclusion == 'success'
     # 実測 (2026-07-29 run 30417240556): checkout〜Playwright 完了で 3分20秒、
     # warm-cache が 29 URL × 約5.1秒 (DELAY=2 + リクエスト) = 約2分30秒 → 合計 約5分50秒。

@@ -1170,10 +1170,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:local-finance",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:local-allocation-tax-ratio-pref-finance",
           "kind": "ranking"
         },
@@ -1823,10 +1819,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:local-finance",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:local-tax-ratio-pref-finance",
           "kind": "ranking"
         },
@@ -2459,11 +2451,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:hyogo-food-culture",
+          "pageId": "blog:ishikawa-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:ishikawa-food-culture",
+          "pageId": "blog:kanagawa-food-culture",
           "kind": "blog"
         },
         {
@@ -2472,6 +2464,14 @@
         },
         {
           "pageId": "blog:nara-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:osaka-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:wakayama-food-culture",
           "kind": "blog"
         },
         {
@@ -2710,11 +2710,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:hyogo-food-culture",
+          "pageId": "blog:ishikawa-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:ishikawa-food-culture",
+          "pageId": "blog:kanagawa-food-culture",
           "kind": "blog"
         },
         {
@@ -2723,6 +2723,14 @@
         },
         {
           "pageId": "blog:nara-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:osaka-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:wakayama-food-culture",
           "kind": "blog"
         },
         {
@@ -3869,10 +3877,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:roads",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:main-road-paving-rate",
           "kind": "ranking"
         },
@@ -4413,10 +4417,6 @@
         {
           "pageId": "area-theme:47000:labor-wages",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:labor-wages",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:male-part-time-hourly-wage",
@@ -5046,10 +5046,6 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:fukui-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:hokkaido-food-culture",
           "kind": "blog"
         },
@@ -5313,10 +5309,6 @@
         {
           "pageId": "area-theme:47000:household-food-spending",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:fukui-food-culture",
-          "kind": "blog"
         },
         {
           "pageId": "blog:hokkaido-food-culture",
@@ -5645,16 +5637,20 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:manufacturing",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:manufacturing-employees",
           "kind": "municipality-ranking"
         },
         {
           "pageId": "municipality-theme:manufacturing",
           "kind": "municipality-theme"
+        },
+        {
+          "pageId": "product:data-muni-manufacturing",
+          "kind": "product-analysis"
+        },
+        {
+          "pageId": "product:data-p-09",
+          "kind": "product"
         },
         {
           "pageId": "ranking:manufacturing-employees",
@@ -5888,10 +5884,6 @@
         {
           "pageId": "blog:manufacturing-shipment-amount-vs-manufacturing",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:manufacturing",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:manufacturing-establishment-site-area",
@@ -6315,16 +6307,20 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:manufacturing",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:manufacturing-establishments",
           "kind": "municipality-ranking"
         },
         {
           "pageId": "municipality-theme:manufacturing",
           "kind": "municipality-theme"
+        },
+        {
+          "pageId": "product:data-muni-manufacturing",
+          "kind": "product-analysis"
+        },
+        {
+          "pageId": "product:data-p-09",
+          "kind": "product-analysis"
         },
         {
           "pageId": "ranking:manufacturing-establishments",
@@ -6758,10 +6754,6 @@
         {
           "pageId": "blog:manufacturing-productivity",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:manufacturing",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:manufacturing-industry-added-value",
@@ -7498,16 +7490,24 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:manufacturing",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:manufacturing-shipment-amount",
           "kind": "municipality-ranking"
         },
         {
           "pageId": "municipality-theme:manufacturing",
           "kind": "municipality-theme"
+        },
+        {
+          "pageId": "product:data-muni-manufacturing",
+          "kind": "product"
+        },
+        {
+          "pageId": "product:data-p-09",
+          "kind": "product"
+        },
+        {
+          "pageId": "product:data-p-12",
+          "kind": "product"
         },
         {
           "pageId": "ranking:manufacturing-shipment-amount",
@@ -7936,10 +7936,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:manufacturing",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:manufacturing-shipment-amount-per-employee",
           "kind": "ranking"
         },
@@ -8168,10 +8164,6 @@
         {
           "pageId": "blog:manufacturing-productivity",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:manufacturing",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:manufacturing-shipment-amount-per-establishment",
@@ -8409,15 +8401,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:hyogo-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:shimane-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:wakayama-food-culture",
           "kind": "blog"
         },
         {
@@ -8656,15 +8640,7 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "blog:hyogo-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:shimane-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:wakayama-food-culture",
           "kind": "blog"
         },
         {
@@ -9093,10 +9069,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:fishery-marine",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:marine-aquaculture-harvest",
           "kind": "ranking"
         },
@@ -9356,10 +9328,6 @@
         {
           "pageId": "area-theme:47000:fishery-marine",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:fishery-marine",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:marine-fishery-aquaculture-output-value",
@@ -9779,10 +9747,6 @@
           "kind": "area"
         },
         {
-          "pageId": "japan-theme:fishery-marine",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:marine-fishery-catch",
           "kind": "ranking"
         },
@@ -10012,10 +9976,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:fishery-marine",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:marine-fishery-output-value",
           "kind": "ranking"
         },
@@ -10056,10 +10016,6 @@
         "total-population"
       ],
       "consumers": [
-        {
-          "pageId": "japan-theme:ports",
-          "kind": "japan-theme"
-        },
         {
           "pageId": "ranking:maritime-import-export-cargo",
           "kind": "ranking"
@@ -10288,10 +10244,6 @@
         {
           "pageId": "area-theme:47000:living-housing",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:living-housing",
-          "kind": "japan-theme"
         },
         {
           "pageId": "municipality-ranking:marriages",
@@ -10587,15 +10539,205 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "japan-theme:household-health-spending",
-          "kind": "japan-theme"
+          "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-food-spending",
+          "kind": "area-theme"
         },
         {
           "pageId": "ranking:massage-fee-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-food-spending",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "household-food-spending"
+      ]
     },
     {
       "metricKey": "material-production",
@@ -11547,10 +11689,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:daily-time-use",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:meal-avg-time-female",
           "kind": "ranking"
         },
@@ -11775,10 +11913,6 @@
         {
           "pageId": "area-theme:47000:daily-time-use",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:daily-time-use",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:meal-avg-time-male",

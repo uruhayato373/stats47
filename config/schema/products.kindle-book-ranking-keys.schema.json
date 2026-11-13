@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Kindle 書籍に載せる指標の採否",
+  "description": "data/products/kindle/book-ranking-keys.json の形状契約。書籍ごとに章へ載せる ranking のキー (書籍 ID をキーにした指標キーの並び)。以前は pack の全キー (最大 2,179) を渡して先頭 24 件を章にしていたため、(a) テーマと関係ない指標が並び (b) S3 8 冊 + S4 が同じ P-12 を見て全冊ほぼ同一の本になっていた (2026-08-12)。選定は scripts/select-book-keys.mts が実測して出した候補を人が確定する。基準: 共通 = 章コンポーザ (ai-content + 数値ゲート) で本文 600 字以上を組めること / S2 = テーマ pack 内で本文が厚い順 / S3 = その地域が特徴的な指標を優先 (地域の県が上位・下位に偏るほど高スコア) / S4 = 1 位が人口規模の大きい県でない × 格差が大きい「意外な1位」を優先。更新は select-book-keys.mts --book <id> --emit で候補を出し直し、人が採否を決めてここへ置く。手で足すときも実在キーだけ (実在しないキーは章がスキップされ、静かに薄い本になる)。単位の欠陥が既知の統計表の指標を載せない (不変量は __tests__/book-ranking-keys.test.ts)。notes は書籍 ID・指標キーごとの選定理由 (指標名 — 本文の字数 / 地域特徴度または意外性 / 使える ai-content の節)。japanZueCoverage は『日本国勢図会』の論点を Kindle へ接続した結果 (書籍の本文・数値・図版は使わず、一次資料から取得した既存 metric と、数値監査を通った R2 ai-content だけを S2 データブックへ載せる。除外も理由付きで固定し、全件を無理に出版しない)。included は書籍 ID ごとの採択 metric、excluded は除外 metric と理由。読み込み口は packages/product-factory/src/channels/kindle/book-ranking-keys.ts。",
+  "type": "object",
+  "required": ["books", "japanZueCoverage", "notes"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "books": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^K-S[1-4]-\\d{2}$" },
+      "additionalProperties": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" } }
+    },
+    "japanZueCoverage": {
+      "type": "object",
+      "required": ["included", "excluded"],
+      "additionalProperties": false,
+      "properties": {
+        "included": {
+          "type": "object",
+          "propertyNames": { "pattern": "^K-S[1-4]-\\d{2}$" },
+          "additionalProperties": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" } }
+        },
+        "excluded": {
+          "type": "object",
+          "propertyNames": { "pattern": "^[a-z0-9][a-z0-9-]*$" },
+          "additionalProperties": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "notes": {
+      "type": "object",
+      "propertyNames": { "pattern": "^K-S[1-4]-\\d{2}$" },
+      "additionalProperties": {
+        "type": "object",
+        "propertyNames": { "pattern": "^[a-z0-9][a-z0-9-]*$" },
+        "additionalProperties": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

@@ -60,6 +60,9 @@ const TYPE_A_THEME_SLUGS = AREA_THEME_SLUGS;
  */
 export const isValidPrefCode = UrlPolicy.area.isValidPrefCode;
 
+/** 市区町村ランキングで 301 により URL から落とす旧クエリ (サーバー描画を変えない画面操作の状態)。 */
+const MUNICIPALITY_RANKING_LEGACY_QUERY_KEYS = ['pref', 'q', 'page'] as const;
+
 // ============================================================================
 // Section 1: 旧 URL 構造の 301 リダイレクト / 410 Gone
 // ============================================================================
@@ -112,9 +115,9 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
     });
   }
 
-  // /areas/{prefCode}/administrativefinancial → /themes/local-finance?pref={prefCode}
-  // areas/categoryKey の 47 × N ページを作らない方針 (2026-05-26) との両立。
-  // 旧 URL アクセスを themes 側の 1 県深掘りに集約する 301。
+  // /areas/{prefCode}/administrativefinancial → /areas/{prefCode}/local-finance (県別の地方財政のテーマ)
+  // areas/categoryKey の 47 × N ページを作らない方針 (2026-05-26) との両立。2026-11-12 に地方財政の専用ページをやめ、
+  // 県×テーマの共通のページへ直接 301 する (旧: /themes/local-finance?pref= を経由)。
   if (
     segments.length === 3 &&
     segments[0] === 'areas' &&
@@ -123,7 +126,7 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
   ) {
     if (!UrlPolicy.area.isValidPrefCode(segments[1])) return gone();
     return NextResponse.redirect(
-      new URL(`/themes/local-finance?pref=${segments[1]}`, baseUrl),
+      new URL(hrefFor('area-theme', { areaCode: segments[1], themeSlug: 'local-finance' }), baseUrl),
       { status: 301 }
     );
   }
@@ -527,35 +530,45 @@ export default function middleware(req: NextRequest) {
     }
   }
 
-  // 県名×市区町村ランキングを持つ指標の「県だけの絞り込み」(`?pref=23000`) は県別ページへ恒久転送する
-  // (MUNI-PREF-RANKING-ROUTE-01)。自治体名の検索 (q) やページ送り (page) を伴う絞り込みは全国版のまま残す。
-  const municipalityRankingMatch = pathname.match(/^\/municipalities\/ranking\/([^/]+)$/);
+  // 市区町村ランキングの旧クエリ (`pref` / `q` / `page`) は必ず 301 で畳む (2026-11-13 オーナー決定:
+  // サーバーが描き分ける違いはパスで表す。ページ送りと自治体名の検索は URL に載せず、ブラウザ側の状態にする)。
+  // 転送先は、県別ページを持つ指標で `pref` が有効な県コードなら県別パス、それ以外はクエリなしの全国版。
+  // 3 つのキーだけを落とし、utm_* などは保つ。転送先には 3 つのキーが無いので転送ループは起きない。
+  // 未登録の指標・無効な県コードはここで転送せず、後段の 410 判定に渡す (soft-404 を 301 で隠さない)。
+  const municipalityRankingMatch = pathname.match(/^\/municipalities\/ranking\/([^/]+)(?:\/([^/]+))?$/);
   if (municipalityRankingMatch) {
-    const rankingKey = municipalityRankingMatch[1];
+    const [, rankingKey, pathPrefCode] = municipalityRankingMatch;
     const params = req.nextUrl.searchParams;
-    const prefCode = params.get('pref') ?? '';
-    if (
-      UrlPolicy.municipality.hasPrefectureRanking(rankingKey) &&
-      UrlPolicy.area.isValidPrefCode(prefCode) &&
-      !params.get('q') &&
-      (params.get('page') ?? '1') === '1'
-    ) {
-      const url = new URL(
-        hrefFor('municipality-pref-ranking', { rankingKey, prefCode }),
-        req.url
-      );
-      url.search = req.nextUrl.search;
-      for (const key of ['pref', 'q', 'page']) url.searchParams.delete(key);
-      return NextResponse.redirect(url, 301);
+    if (MUNICIPALITY_RANKING_LEGACY_QUERY_KEYS.some((key) => params.has(key)) && UrlPolicy.municipality.isKnownRanking(rankingKey)) {
+      let target: string | null = null;
+      if (pathPrefCode) {
+        // 県別パス: 指標と県コードが正しいときだけクエリを落とす
+        if (UrlPolicy.municipality.hasPrefectureRanking(rankingKey) && UrlPolicy.area.isValidPrefCode(pathPrefCode)) {
+          target = hrefFor('municipality-pref-ranking', { rankingKey, prefCode: pathPrefCode });
+        }
+      } else {
+        const prefCode = params.get('pref') ?? '';
+        target =
+          UrlPolicy.municipality.hasPrefectureRanking(rankingKey) && UrlPolicy.area.isValidPrefCode(prefCode)
+            ? hrefFor('municipality-pref-ranking', { rankingKey, prefCode })
+            : `/municipalities/ranking/${rankingKey}`;
+      }
+      if (target) {
+        const url = new URL(target, req.url);
+        url.search = req.nextUrl.search;
+        for (const key of MUNICIPALITY_RANKING_LEGACY_QUERY_KEYS) url.searchParams.delete(key);
+        return NextResponse.redirect(url, 301);
+      }
     }
   }
 
   // 県ごとのページを持つテーマの「県だけの絞り込み」(`/themes/<テーマ>?pref=16000`) は、同じ内容の
   // `/areas/<県>/<テーマ>` へ恒久転送する (県×テーマの交点を 1 つの URL にする。2026-10-30 オーナー決定)。
-  // 地方財政 (local-finance) は専用ページが ?pref で市区町村まで切り替えるので対象外。
+  // 2026-11-12: 地方財政の専用ページをやめたので特例は無い。専用ページが受けていた 2 桁の県コード (?pref=13) は全テーマで受ける
   const themeMatch = pathname.match(/^\/themes\/([^/]+)$/);
-  if (themeMatch && TYPE_A_THEME_SLUGS.has(themeMatch[1]) && themeMatch[1] !== 'local-finance') {
-    const prefCode = req.nextUrl.searchParams.get('pref') ?? '';
+  if (themeMatch && TYPE_A_THEME_SLUGS.has(themeMatch[1])) {
+    const rawPref = req.nextUrl.searchParams.get('pref') ?? '';
+    const prefCode = /^\d{2}$/.test(rawPref) ? `${rawPref}000` : rawPref;
     if (UrlPolicy.area.isValidPrefCode(prefCode)) {
       const url = new URL(hrefFor('area-theme', { areaCode: prefCode, themeSlug: themeMatch[1] }), req.url);
       url.search = req.nextUrl.search;
@@ -648,7 +661,7 @@ export default function middleware(req: NextRequest) {
   if (legacyThemeDestination) {
     return NextResponse.redirect(
       new URL(`${legacyThemeDestination}${req.nextUrl.search}`, req.url),
-      { status: 301 }
+      301
     );
   }
 

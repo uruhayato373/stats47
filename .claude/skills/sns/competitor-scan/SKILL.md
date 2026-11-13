@@ -93,5 +93,5 @@ tags: [competitor]
 ## 関連
 
 - チャネル戦略・差別化軸: `.claude/rules/sns-content-standards.md` §0
-- 競合 memory: `project_competitor_riskmap_jp` / `feedback_sns_competitor_search` / `project_competitor_indicator_benchmark` / `reference_competitor_research_label`
+- 競合 memory: `project_competitor_riskmap_jp` / `feedback_sns_competitor_search` / `project_competitor_indicator_benchmark`
 - 週次運用への組み込み: `/sns-weekly-plan` Step 2

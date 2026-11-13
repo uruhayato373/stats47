@@ -63,7 +63,7 @@ candidate key (`<rule>::<key>`) をバックログ行に明記して解決する
 `.claude/todo/backlog.md` のカードにする。
 
 - `[kpi: <id>]` — その施策が動かす KPI。id は `data/business-plan/kpi-tree.json` の nodes
-  (正典は `packages/data-configs/src/business-plan/catalog.ts` の `kpiTier` 付き metric) から選ぶ。複数ならカンマ区切り
+  (正典は台帳 `business-plan.metrics` の `kpiTier` 付き metric) から選ぶ。複数ならカンマ区切り
 - `[target: ±N 単位]` — 成功とみなす変化量。根拠 (過去事例か計算式) を行か詳細ログに書けるときだけ
 
 active 施策が上限 (`strategy-lanes.cjs` の `MAX_ACTIVE_IMPROVEMENTS`) を超えている間は新しい行を足さない。

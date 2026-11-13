@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest';
 
-import { filterMunicipalityRanking } from '../filter-municipality-ranking';
+import {
+  filterMunicipalityRanking,
+  matchMunicipalityRanking,
+} from '../filter-municipality-ranking';
 
 const values = Array.from({ length: 120 }, (_, index) => ({
   areaCode: String(10000 + index),
@@ -31,5 +34,27 @@ describe('filterMunicipalityRanking', () => {
     });
     expect(result.page).toBe(3);
     expect(result.rows).toHaveLength(20);
+  });
+});
+
+/** 守る意図: 全国版ページのクライアント絞り込みは、ページ送りの上限 (100 件) に切られず条件に合う全行を順位順で返す */
+describe('matchMunicipalityRanking', () => {
+  it('県と自治体名の両方に合う行だけを、件数を切らずに順位の順で返す', () => {
+    const rows = matchMunicipalityRanking(values, {
+      prefectureCode: '02000',
+      query: '自治体1',
+    });
+    // 青森県 (index 60-119) のうち名前に「自治体1」を含むのは 100-119 の 20 件
+    expect(rows.map((row) => row.rank)).toEqual(
+      Array.from({ length: 20 }, (_, index) => 101 + index)
+    );
+  });
+
+  it('条件が無ければ全行 (ページの上限を超える 120 件) を返す', () => {
+    expect(matchMunicipalityRanking(values, {})).toHaveLength(120);
+  });
+
+  it('形の違う県コードは絞り込みに使わない (クエリの値をそのまま信じない)', () => {
+    expect(matchMunicipalityRanking(values, { prefectureCode: '1' })).toHaveLength(120);
   });
 });

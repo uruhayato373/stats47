@@ -1,0 +1,95 @@
+{
+  "productId": "P-14",
+  "articleKey": "prefecture-household-consumption-pack",
+  "displayTitle": "県庁所在市別 家計・消費データ",
+  "description": "県庁所在市の二人以上世帯について、食品や飲料などの支出額と購入量を図にして比較できます。",
+  "useCases": [
+    {
+      "title": "食品・日用品の企画資料に",
+      "description": "品目別の支出を都市ごとに並べ、調査対象の世帯でどのような違いがあるかを整理できます。"
+    },
+    {
+      "title": "食や暮らしを紹介する記事に",
+      "description": "牛肉やコーヒーなど身近な品目を図にし、都市ごとの支出の特徴を伝えられます。"
+    },
+    {
+      "title": "消費の比較レポートに",
+      "description": "支出額と購入量を別々に示し、お金を多く使う地域と、多く買う地域を見比べられます。"
+    }
+  ],
+  "examples": [
+    {
+      "id": "beef-expenditure",
+      "heading": "牛肉に使う金額を比べる",
+      "lead": "二人以上世帯の1世帯あたり牛肉支出額を並べ、都市ごとの支出の違いを確認できます。",
+      "metricKeys": [
+        "beef-consumption-expenditure"
+      ],
+      "preferredTemplate": "bar"
+    },
+    {
+      "id": "beef-quantity",
+      "heading": "牛肉を買う量も確認する",
+      "lead": "牛肉の購入量を並べ、支出額の図と見比べることで、金額と量のどちらに違いがあるかを確認できます。",
+      "metricKeys": [
+        "beef-consumption-quantity"
+      ],
+      "preferredTemplate": "bar"
+    },
+    {
+      "id": "coffee-expenditure",
+      "heading": "別の品目で消費の特徴を見る",
+      "lead": "コーヒー支出額を都市別に比較できます。品目を変えて、地域の消費を複数の視点から紹介する図を作れます。",
+      "metricKeys": [
+        "coffee-consumption-expenditure"
+      ],
+      "preferredTemplate": "bar"
+    }
+  ],
+  "purchaseNotes": [
+    "対象は県庁所在市（東京都は区部）の二人以上世帯です。県全体や単身世帯を含む値ではありません。",
+    "品目によって支出額・購入量の収録状況や単位が異なります。支出額の大きさを、そのまま購入量や地域全体の市場規模と読み替えないでください。"
+  ],
+  "analysisPlan": {
+    "objective": "対象都市の家計について、支出額と購入量、品目構成、複数年の変化を分けて比較する。採用・調査対象は改訂設計であり、販売中の固定納品への追加を示しません。",
+    "inputs": [
+      {
+        "metricKey": "beef-consumption-expenditure",
+        "scope": "capital-city",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "beef-consumption-quantity",
+        "scope": "capital-city",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "coffee-consumption-expenditure",
+        "scope": "capital-city",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "beef-consumption-expenditure",
+        "scope": "prefecture",
+        "decision": "exclude",
+        "reason": "家計調査の県庁所在市等の標本を県全体の家計として扱わない。"
+      },
+      {
+        "metricKey": "beef-consumption-expenditure",
+        "scope": "municipality",
+        "decision": "exclude",
+        "reason": "全市区町村を網羅する調査ではないため、全自治体比較や未調査地域への値の割当には使わない。"
+      }
+    ],
+    "analysisRefs": [],
+    "figureRefs": [],
+    "reuseProducts": [],
+    "limitations": [
+      "対象都市と調査対象世帯の範囲を明記する。県全体・全市区町村の消費行動へ一般化しない。",
+      "支出額の増減を購入量の増減と同一視せず、単年の標本変動と複数年平均を区別する。"
+    ]
+  }
+}

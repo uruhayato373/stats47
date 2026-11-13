@@ -10,13 +10,13 @@ primary_agent: theme-portfolio-manager
 
 テーマポートフォリオ (`data/themes/`) の継続評価サイクルを回す。
 運用設計の正典: `.claude/skills/theme/manage-theme-portfolio/reference/テーマポートフォリオ運用.md`。
-schema・判定規律の正典: `data/themes/README.md`。
+形と判定規律の正典: 台帳 `themes.portfolio` / `themes.experiments` の Schema (`config/schema/themes.*.schema.json`) と `validate-theme-state.mjs`。
 
 ## 参照ルーティング
 
 | 作業 | 必読 |
 |---|---|
-| 1 テーマの指標・図・章の改善を提案する (表 1〜3・承認・検証の形) | `reference/theme-proposal-format.md`、視点は `config/theme-selection-viewpoints.json` (管理画面 `/quality/theme-viewpoints`) |
+| 1 テーマの指標・図・章の改善を提案する (表 1〜3・承認・検証の形) | `reference/theme-proposal-format.md`、視点は `data/themes/viewpoints/selection.json` (管理画面 `/quality/theme-viewpoints`) |
 | 採択済みの指標・チャート改善を実装へ渡す | `reference/theme-improvement-execution.md` |
 | 定義・比較時の注意カードを実装する | `reference/theme-guidance-implementation.md` |
 | keep/split/merge/parent-hub判定やURL移行を設計する | `reference/theme-taxonomy-reorganization.md` |
@@ -47,7 +47,7 @@ schema・判定規律の正典: `data/themes/README.md`。
 7. **内部導線**: **構造** = catalog metrics→`/ranking/<key>` リンク + relatedArticleTagKeys→blog (null なら「関連記事導線なし」と報告)。**計測**は既存nav_clickのtheme_* surfaceを `theme-navigation.csv` で取得する。計測行が無ければ insufficient-data とする
 
 出力 (固定 10 項・この順):
-現状 / 問題 / 仮説 / 判定 (keep・improve・merge/split/rename/retire 候補 — state README の判定規律準拠、根拠なし候補は validator が弾く) / 変更案 / primary KPI / guardrail KPI / 変更前 baseline (現行実測値) / 28日・56日の判定条件 (d28=暫定・d56=基本) / **Claude Code 実装契約** (実装 owner agent・対象ファイル・検証コマンド・禁止事項・R2/本番に触れない旨)
+現状 / 問題 / 仮説 / 判定 (keep・improve・merge/split/rename/retire 候補 — 運用文書「ライフサイクル判定の規律」準拠、根拠なし候補は validator が弾く) / 変更案 / primary KPI / guardrail KPI / 変更前 baseline (現行実測値) / 28日・56日の判定条件 (d28=暫定・d56=基本) / **Claude Code 実装契約** (実装 owner agent・対象ファイル・検証コマンド・禁止事項・R2/本番に触れない旨)
 
 保存: `reference/audits/YYYY-MM-DD-theme-deepdive-<key>.md` のみ (docs/ には書かない)。
 変更を実行に移す場合: ①experiments.json に baseline 登録 (build/evaluate スクリプト経由) →

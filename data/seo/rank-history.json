@@ -275,6 +275,21 @@
       "date": "2026-11-09",
       "file": "data/seo/rank-history/2026-11-09.json",
       "sha256": "e40ca748f350dbb51e443d83d37ca00fc08b314d17b352be816281b2c930ab37"
+    },
+    {
+      "date": "2026-11-11",
+      "file": "data/seo/rank-history/2026-11-11.json",
+      "sha256": "be2819d5aadaf9510232c202a431fa0513b30b7f49919c89c22dde4cd47e84b3"
+    },
+    {
+      "date": "2026-11-12",
+      "file": "data/seo/rank-history/2026-11-12.json",
+      "sha256": "7f7d38385d1ffbc91b4b1744c08f24ca37467be28f647b00f2229f848365a126"
+    },
+    {
+      "date": "2026-11-13",
+      "file": "data/seo/rank-history/2026-11-13.json",
+      "sha256": "ad37944d2972829546710f715541e44f5f265139dd9b3d66d02b864adca6d13f"
     }
   ]
 }

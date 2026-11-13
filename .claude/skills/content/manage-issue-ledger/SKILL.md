@@ -63,6 +63,7 @@ npm run issues:view         # 人が読む一覧の HTML (既定 /tmp/stats47-is
 | `dataNote` / `pitfall` | 使う統計と、読み違えやすい点。生産スキルへの入力になるので分かっている範囲で書く |
 | `revenue` | 答えがつながる収益。`広告` / `データ` / `ノウハウ` / `実務` (行政や業務で使う人) を 1〜3 個。仮置きなので売上の根拠にしない |
 | `products` | 問いから企画した商品の ID (`note:<key>`)。同じ指標を使うだけの商品は書かない。実在は `check-datasets` が見る |
+| `axes` | 説明側 (`explanatory`。記述の問いは `null`) と結果側 (`outcome`) を `{label, pattern, data?}` で書く。`pattern` は `compare` / `compose` / `change`。`data` は軸が使うデータへの参照で、指標は `{ "metric": "<指標キー>" }`、年収階級・世帯類型など属性別の値は `{ "series": "<家計調査の分析単位の ID>" }` (`packages/data-configs/src/kakei-analysis-catalog.ts`)。指標は問いの `unit` の粒度の値を持つものを選ぶ。問いと違う粒度の値で答えるときだけ `"grain": "prefecture"` のように書く (`--axes` で「別粒度」と出て、図が決まった数に入らない)。説明側が群の区分 (年収五分位・有無など) なら `group: true` を書き、指標は書かない (区分の系列があれば `series` を書ける)。区分以外でデータの無い軸は `--axes` で「未検証」になる。存在しない指標・系列と、その粒度の値を持たない指標は `npm run issues:check` と `npm run check-datasets` が止める。家計調査の指標は県庁所在市の値として読み、県の問いでは「県庁所在市の値」の注記付きで図が決まる (`--axes` に注記が出る)。軸はあるがデータの無い問い (「未検証」) は `label-issue-axes.ts --fill` で下書きし、`--apply` はデータの無い側にだけ足す。下書きは `npx tsx packages/ai-content/src/scripts/label-issue-axes.ts --prefix issue:K` (端末で実行・headless。未検証を埋めるときは `--fill`)、中身を見てから `--apply`。確認は `npm run issues:check -- --axes issue:K` |
 | `sensitive` | 犯罪・自殺・虐待・生活保護など、地域や属性への偏見を招きやすい重い問いを `true` にする |
 
 ## 4. 配線する

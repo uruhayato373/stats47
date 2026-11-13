@@ -1,0 +1,149 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "日本国勢図会の試行",
+  "description": "data/source-inventory/japan-zue/pilot.json の形状契約。items は人が一次資料・指標定義・地理粒度を確認した最初の 10 件 (evidenceId は解決台帳の項目 ID)、masterContent は最初に作る 1 本のコンテンツの企画 (記事の原稿・YouTube の構成・派生の投稿)。書籍の文章・見出し・数値は持たず、独立した問いと stats47 の lineage だけを持つ。読み込み口は packages/data-configs/src/evidence-inventory/japan-zue/pilot.ts。",
+  "type": "object",
+  "required": ["items", "masterContent"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["evidenceId", "question", "metricKeys", "surveyIds", "provenanceUrls", "placements", "status", "nextAction"],
+        "additionalProperties": false,
+        "properties": {
+          "evidenceId": { "$ref": "#/definitions/evidenceId" },
+          "question": { "type": "string", "minLength": 1 },
+          "metricKeys": { "type": "array", "minItems": 1, "items": { "$ref": "#/definitions/metricKey" } },
+          "surveyIds": { "type": "array", "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" } },
+          "provenanceUrls": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^https://" } },
+          "placements": { "type": "array", "minItems": 1, "items": { "$ref": "#/definitions/contentRole" } },
+          "status": { "enum": ["existing-live", "local-ready-publication-pending"] },
+          "nextAction": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "masterContent": {
+      "type": "object",
+      "required": ["contentKey", "title", "question", "metricKeys", "surveyIds", "provenanceUrls", "lineage", "article", "youtube", "derivatives"],
+      "additionalProperties": false,
+      "properties": {
+        "contentKey": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+        "title": { "type": "string", "minLength": 1 },
+        "question": { "type": "string", "minLength": 1 },
+        "metricKeys": { "type": "array", "minItems": 1, "items": { "$ref": "#/definitions/metricKey" } },
+        "surveyIds": { "type": "array", "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" } },
+        "provenanceUrls": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^https://" } },
+        "lineage": {
+          "type": "object",
+          "required": ["evidenceId", "landingRoute", "landingStatus", "primaryContentRole", "derivativeContentRoles"],
+          "additionalProperties": false,
+          "properties": {
+            "evidenceId": { "$ref": "#/definitions/evidenceId" },
+            "landingRoute": { "type": "string", "pattern": "^/" },
+            "landingStatus": { "type": "string", "minLength": 1 },
+            "primaryContentRole": { "$ref": "#/definitions/contentRole" },
+            "derivativeContentRoles": { "type": "array", "items": { "$ref": "#/definitions/contentRole" } }
+          }
+        },
+        "article": {
+          "type": "object",
+          "required": ["status", "intendedChannels", "lead", "sections", "editorialSafeguards"],
+          "additionalProperties": false,
+          "properties": {
+            "status": { "type": "string", "minLength": 1 },
+            "intendedChannels": { "type": "array", "minItems": 1, "items": { "$ref": "#/definitions/contentRole" } },
+            "lead": { "type": "string", "minLength": 1 },
+            "sections": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": ["heading", "body", "metricKeys"],
+                "additionalProperties": false,
+                "properties": {
+                  "heading": { "type": "string", "minLength": 1 },
+                  "body": { "type": "string", "minLength": 1 },
+                  "metricKeys": { "type": "array", "minItems": 1, "items": { "$ref": "#/definitions/metricKey" } }
+                }
+              }
+            },
+            "editorialSafeguards": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+          }
+        },
+        "youtube": {
+          "type": "object",
+          "required": ["experimentId", "status", "experimentCapacity", "registration", "targetDurationMinutes", "claim", "chapters"],
+          "additionalProperties": false,
+          "properties": {
+            "experimentId": { "description": "実験の台帳 (business.experiments) の ID", "type": "string", "pattern": "^EXP-\\d{3}$" },
+            "status": { "type": "string", "minLength": 1 },
+            "experimentCapacity": {
+              "type": "object",
+              "required": ["maxMasters", "plannedMasters", "availableSlots", "assignment", "reason"],
+              "additionalProperties": false,
+              "properties": {
+                "maxMasters": { "type": "integer", "minimum": 0 },
+                "plannedMasters": { "type": "integer", "minimum": 0 },
+                "availableSlots": { "type": "integer", "minimum": 0 },
+                "assignment": { "type": "string", "minLength": 1 },
+                "reason": { "type": "string", "minLength": 1 }
+              }
+            },
+            "registration": {
+              "type": "object",
+              "required": ["status", "postsSsot", "utmPolicy"],
+              "additionalProperties": false,
+              "properties": {
+                "status": { "type": "string", "minLength": 1 },
+                "postsSsot": { "type": "string", "minLength": 1 },
+                "utmPolicy": { "type": "string", "minLength": 1 }
+              }
+            },
+            "targetDurationMinutes": { "type": "number", "exclusiveMinimum": 0 },
+            "claim": { "type": "string", "minLength": 1 },
+            "chapters": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": ["start", "title"],
+                "additionalProperties": false,
+                "properties": {
+                  "start": { "type": "string", "pattern": "^\\d{2}:\\d{2}$" },
+                  "title": { "type": "string", "minLength": 1 }
+                }
+              }
+            }
+          }
+        },
+        "derivatives": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["contentKey", "platform", "postType", "parentContentKey", "parentPlatform", "sourceTimecode", "status"],
+            "additionalProperties": false,
+            "properties": {
+              "contentKey": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+              "platform": { "$ref": "#/definitions/mediaChannel" },
+              "postType": { "type": "string", "minLength": 1 },
+              "parentContentKey": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+              "parentPlatform": { "$ref": "#/definitions/mediaChannel" },
+              "sourceTimecode": { "type": "string", "pattern": "^\\d{2}:\\d{2}-\\d{2}:\\d{2}$" },
+              "status": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "evidenceId": { "type": "string", "pattern": "^japan-zue-\\d{4}-\\d{2}-p\\d{3}-[a-z]+\\d{2}$" },
+    "metricKey": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+    "mediaChannel": { "description": "派生の投稿の出し先 (読み込み口の JapanZueMediaChannel と同じ)", "enum": ["blog", "note", "youtube", "instagram", "x"] },
+    "contentRole": { "enum": ["ranking", "survey", "theme", "area", "japan", "blog", "note", "kindle", "youtube", "instagram", "x", "agent", "skill", "internal-documentation"] }
+  }
+}

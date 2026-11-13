@@ -9,6 +9,7 @@
  * - Google-Extended (Google Gemini): 全ページを明示的に許可
  * - GPTBot (ChatGPT): 全ページを禁止（AI学習用のクロール禁止）
  * - CCBot (Common Crawl): 全ページを禁止
+ * - MJ12bot / SemrushBot / DotBot / AhrefsBot / YandexBot: 検索流入の送客が無く Workers CPU 課金だけを生むため全ページを禁止
  * - サイトマップのURLを指定
  *
  * アーキテクチャ:
@@ -40,7 +41,8 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "*",
         // ranking の派生指標 toggle URL (?norm=per_population / per_area) を明示的に許可
         // 公開配布ファイルは X-Robots-Tag: noindex を読めるようにする。
-        allow: ["/", "/ranking/*?norm=*", "/api/ranking/*/download$", "/api/ranking/*/download?"],
+        // /api/geo/analysis/ は Geo 地図の描画データ。Google の描画に地図を出すため取得を許可する。
+        allow: ["/", "/ranking/*?norm=*", "/api/ranking/*/download$", "/api/ranking/*/download?", "/api/geo/analysis/"],
         disallow: [
           "/admin/*", // 管理画面
           "/api/*", // 内部 route handler（blog-data, ranking-data 等）。フロントから fetch するだけで Googlebot に露出させない
@@ -55,7 +57,8 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: "Google-Extended", // Google Gemini
-        allow: ["/", "/ranking/*?norm=*", "/api/ranking/*/download$", "/api/ranking/*/download?"],
+        // /api/geo/analysis/ は Geo 地図の描画データ。Google の描画に地図を出すため取得を許可する。
+        allow: ["/", "/ranking/*?norm=*", "/api/ranking/*/download$", "/api/ranking/*/download?", "/api/geo/analysis/"],
         disallow: [
           "/admin/*", // 管理画面は除外
           "/api/*", // 内部 route handler
@@ -69,6 +72,11 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: "CCBot", // Common Crawl
+        disallow: ["/"],
+      },
+      {
+        // 送客の無い SEO 解析・検索ボット (2026-11-13 実測: UA 別で Workers CPU 課金の約 12%)
+        userAgent: ["MJ12bot", "SemrushBot", "DotBot", "AhrefsBot", "YandexBot"],
         disallow: ["/"],
       },
     ],

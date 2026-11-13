@@ -20,7 +20,7 @@ KDP の出品フォーム操作は agent `kdp-operator` (skill `/kdp-publish`) �
 
 product-factory の **kindle チャネル** が Amazon KDP 向けの電子書籍 (EPUB3) を生成する（2026-07-23 新設）。データパックが「Office/データを売る」のに対し、Kindle は「読ませて送客する」役割で、既存ブログ 98 記事・ランキング ai-content を再構成して束ねる。ランキング大全は競合先行で弱いため、S1 論点読み物を最優先する。
 
-- **SSOT = `packages/product-factory/src/channels/kindle/book-catalog.ts`**（`KINDLE_BOOKS`）。4 シリーズ = S1 論点読み物 / S2 テーマ別データブック / S3 地域別 / S4 ランキング大全。本文素材の SSOT は **R2 `app/blog/<slug>/article.md` + `data/*.svg`**。生成物 `.local/kindle-books/<id>/v1/` は派生物（git 管理外・手編集を正典にしない）だが、**KDPへ送る版は送信前にAES-256-GCM暗号化してR2 `archive/kindle-encrypted/<id>/v1/<revision>/`へ完全bundleで保全する**。配信用R2へ平文EPUBを置かない。
+- **SSOT = 台帳 `products.kindle-books`**（読み込み口 `src/channels/kindle/book-catalog.ts` の `KINDLE_BOOKS`）。4 シリーズ = S1 論点読み物 / S2 テーマ別データブック / S3 地域別 / S4 ランキング大全。本文素材の SSOT は **R2 `app/blog/<slug>/article.md` + `data/*.svg`**。生成物 `.local/kindle-books/<id>/v1/` は派生物（git 管理外・手編集を正典にしない）だが、**KDPへ送る版は送信前にAES-256-GCM暗号化してR2 `archive/kindle-encrypted/<id>/v1/<revision>/`へ完全bundleで保全する**。配信用R2へ平文EPUBを置かない。
 - **別PC復元の正典**は `data/products/kindle-archives.json`（Git）+ 上記R2暗号化bundle。`book.epub / cover.jpg / cover.png / metadata.json / READINESS.md`（`review.md`があれば同梱）のSHA-256からimmutable revisionを作る。暗号鍵はR2/Gitへ置かず、`KINDLE_ARCHIVE_KEY`、未設定時は当該PCの`R2_SECRET_ACCESS_KEY`からHKDFで導出する。認証Cookie・2FA・KDP profileはarchive対象外。
 - **主エンジンは EPUB3 リフロー型**（`src/generators/epub.ts`・jszip）。図表は章内ブロック画像として SVG→PNG 化して同梱（sharp・density 288）。カバーは satori→sharp で 1600×2560 自動生成。**KDP は電子で PDF を実質受け付けない**ため EPUB を採る（PDF 生成器 `databook-pdf.ts` は目次・画像・チャート非対応でそもそも書籍に不向き）。
 
@@ -31,7 +31,7 @@ product-factory の **kindle チャネル** が Amazon KDP 向けの電子書籍
   3 列 (順位・都道府県・値)・12 行ずつに分け、2 つ目から「<指標>（年・単位）のつづき・n〜m番目」(h5) を付ける (Kindle は表の見出し行を繰り返さない)。
   注記は表の下。表は書き下ろし比率の分母に数えない。**新しく作る本・作り直す本は `fullTables: true` を付ける** (付けない本は理由を catalog に書く)。
 - **図の題**: 図だけで「何の指標・何年・単位」が分かること。ブログの図の題が汎用語 (「都道府県別ランキング」「都道府県マップ」) のままなら、
-  ブログの図を描き直すまでは `figure-corrections.ts` で書籍版だけ直す (描き直して元の文字が消えると生成が止まるので、そのときエントリを消す)。
+  ブログの図を描き直すまでは台帳 `products.kindle-figure-corrections` で書籍版だけ直す (描き直して元の文字が消えると生成が止まるので、そのときエントリを消す)。
 - **入稿前の確認**: Kindle Previewer の代わりにエージェントが `capture-pages.mjs` (本の CSS のまま 1 段 = 1 ページ・600×800 と 390×700。全章は `--all`) で、
   全県表の見出し・つづきの小見出しの取り残しと 1〜2 行だけのページが 0 であることを確かめる。Send to Kindle で Amazon の変換は確かめられるが、
   Kindle for Web はパーソナル・ドキュメントを表示しないので、変換後の見た目は Kindle アプリか端末でしか見られない。
@@ -72,7 +72,7 @@ backlog `KDP-EXPANSION-01` の順で設計してから再生成する。design �
 | 層 | SSOT / 実装 | 役割 |
 |---|---|---|
 | 章本文 | `src/channels/kindle/ai-content-composer.ts` | R2 `app/ranking/<key>/ai-content.json` の insights / regionalAnalysis / FAQ / 県別解説を**フィールド単位の数値ゲートを通してから**合成する。1 章 150 字 → 1,000〜1,600 字 |
-| 載せる指標 | `src/channels/kindle/book-ranking-keys.ts` (git TS) | 書籍ごとに 30 キー。選定理由をキーごとにコメントで残す。「先頭 24 件」は廃止 |
+| 載せる指標 | 台帳 `products.kindle-book-ranking-keys` | 書籍ごとに 30 キー。選定理由をキーごとに同じ台帳の `notes` に残す。「先頭 24 件」は廃止 |
 | 選定の実行 | `scripts/select-book-keys.mts` | 地域固有性・意外性でスコアリングして候補を出す。**欠陥 unit・`isActive:false` を除外** |
 | 書き下ろし | `src/channels/kindle/manuscripts/<id>/*.md` | S2/S4 は 7 本、S3 は 7 本。ブリーフは `scripts/build-fresh-briefs.mts` が実データを焼いて生成 |
 | 検証 | `scripts/verify-fresh.mts` | ファイル数・スタブでないこと・漢数字・である調・煽り語・SSOT との数値整合 |
@@ -188,7 +188,7 @@ S1 各冊に「この記事 / 本記事」が 11〜38 件、S2/S3 で同一章�
 | 1 章あたり | **800 字** | 実書籍 1,952〜2,906 / 薄い本 144〜191 |
 
 分離幅が 4〜10 倍あるので誤検知しない。`buildBook` が `volumeOk` を返し `generate` が `⛔` を出す。
-床に届かない書籍は `kdp-listings.json` の `status: "blocked-thin"` + `blockReason` で出品を止める
+床に届かない書籍は `kdp.listings` の `status: "blocked-thin"` + `blockReason` で出品を止める
 (理由が消えると次の人が status だけ戻して出品しかねないので upsert 保持する)。
 
 **S1 の 12 冊は合格・S2/S3/S4 の 20 冊は不合格**だった。以下の章コンポーザで是正した。
@@ -202,7 +202,7 @@ R2 `app/ranking/<key>/ai-content.json` はサイトで公開済み・監査済�
 | 層 | 実装 |
 |---|---|
 | 取得・合成・フィールド判定 | `src/channels/kindle/ai-content-composer.ts` |
-| 書籍別のキー選定 SSOT | `src/channels/kindle/book-ranking-keys.ts` (生成: `scripts/select-book-keys.mts`) |
+| 書籍別のキー選定 SSOT | 台帳 `products.kindle-book-ranking-keys` (候補: `scripts/select-book-keys.mts`) |
 | 書き下ろしの執筆ブリーフ | `scripts/build-fresh-briefs.mts` (実データ 30 指標を焼き込む) |
 | 書き下ろしの検証 | `scripts/verify-fresh.mts` |
 
@@ -215,7 +215,7 @@ R2 `app/ranking/<key>/ai-content.json` はサイトで公開済み・監査済�
 
 | NG | OK |
 |---|---|
-| pack の全キーを渡して先頭 N 件を章にする | `book-ranking-keys.ts` で書籍ごとに確定させる |
+| pack の全キーを渡して先頭 N 件を章にする | 台帳 `products.kindle-book-ranking-keys` で書籍ごとに確定させる |
 | S3 8 冊が同じキー・同じ本文になる | 地域の県が上位/下位に偏る指標を選び、本文も県名で地域抽出する |
 | ai-content の見出し語で地方ブロックを照合する | **節の中の県名**で判定 (見出しは内容ベースの自由文で固定区分ではない) |
 | 書き下ろし章を `freshText` でインライン持ちする | `manuscripts/<id>/*.md` を `freshFile` で参照 (S1 と同じ) |
@@ -230,7 +230,7 @@ R2 `app/ranking/<key>/ai-content.json` はサイトで公開済み・監査済�
 - **ログイン認証・2FA はエージェントが行わない**。初回のみ人間が headed Chrome で **stats47 の Amazon/KDP アカウント**へ手動ログインし、永続プロファイル `.local/playwright-kdp-profile` に保持する。
 - **税務情報（Tax interview）・銀行口座・支払情報の入力は人間工程**。KDP はこれらが未完了だと公開させない。エージェントは一切触らない。
 - **account assert 必須**: `config/kdp-account.json` の `accountEmail`/`accountName` が KDP のアカウント表示に一致することを確認してから操作。別アカウントは即中断。
-- **出品内容 SoT = `config/kdp-listings.json`**。改訂書誌は`products:kindle:kdp-listings --version <VERSION>`で`.local/kindle-listing-revisions/`へ準備提案を出し、公開記録と分離する。旧`--apply`での一括上書きは禁止。独立レビュー・Previewer・保全・承認後に対象IDだけ切り替える。カテゴリと読みはgit TSを参照し、公開履歴を保持する。
+- **出品内容 SoT = `data/products/kdp/listings.json`**。改訂書誌は`products:kindle:kdp-listings --version <VERSION>`で`.local/kindle-listing-revisions/`へ準備提案を出し、公開記録と分離する。旧`--apply`での一括上書きは禁止。独立レビュー・Previewer・保全・承認後に対象IDだけ切り替える。カテゴリと読みはgit TSを参照し、公開履歴を保持する。
 - **KDP運用状態も同じSoT**に `kdpStatus`（`draft|in_review|live|unknown`）/ 生の日本語表示 / `kdpStatusCheckedAt` / `lastSubmittedAt` / `salesStartedAt`（販売中を初めて確認した日）/ ASIN を保存する。`listed`だけで審査中を販売中扱いしない。`kdp-batch --phase status`はASIN未割当でも毎回状態を書き戻す。
 - **出版工程の状態機械**も同じSoTに保存する。`publicationStage` は
   `prepared → details_filled → files_processed → verified → submitted → live → previous_unpublished` の一方向。
@@ -264,7 +264,7 @@ R2 `app/ranking/<key>/ai-content.json` はサイトで公開済み・監査済�
 ### 紹介文とキーワード (2026-11-06 オーナー依頼)
 
 紹介文は読者が買うかを決める文章で、定型文の差し替えにしない。正本は `data/products/kdp-listing-copy.json` で、
-`config/kdp-listings.json` の `description` と `keywords` はここから作る。台帳を手で直さない。
+`data/products/kdp/listings.json` の `description` と `keywords` はここから作る。台帳を手で直さない。
 
 - **構成**: 読者の悩み → 【この本で分かること】 → 【こんな方に】 → 【収録内容】 → 【データについて】。新版は冒頭に KDP が求める旧版の刊行情報を置く ([KDP](https://kdp.amazon.com/en_US/help/topic/GW7J4WEKBVU25YEC)、2026-11-06 確認)。
 - **収録内容**: 図と全県表の数は `kindle-quality.json` の EPUB 実測から入れる。手で書かない。
@@ -322,7 +322,7 @@ account assert後は本棚を直前取得し、`下書き + レビュー中 + �
 掃除は `.claude/scripts/kdp/kdp-drafts.mjs`
 (`--prune` で対象表示 / `--prune --apply` で削除。SSOT の draftId は消さない)。
 
-- 実装: agent `kdp-operator` / skill `/kdp-publish` / `.claude/scripts/kdp/`（`{login,capture-account,kdp-publish,kdp-batch,kdp-drafts}.mjs` + `lib/kdp-{session,form,flow,status,archive-gate}.mjs`。フローの単一実装は `lib/kdp-flow.mjs`、多冊数は `kdp-batch.mjs --phase draft|verify|publish|status`）。完成物保全・復元は `npm run kindle:archive --workspace=@stats47/r2-storage -- --push|--audit|--restore`。出品内容と公開状態の SSOT は `config/kdp-listings.json`、暗号化archive台帳は `data/products/kindle-archives.json`。書籍生成・カタログは `kindle-publisher` に委譲。
+- 実装: agent `kdp-operator` / skill `/kdp-publish` / `.claude/scripts/kdp/`（`{login,capture-account,kdp-publish,kdp-batch,kdp-drafts}.mjs` + `lib/kdp-{session,form,flow,status,archive-gate}.mjs`。フローの単一実装は `lib/kdp-flow.mjs`、多冊数は `kdp-batch.mjs --phase draft|verify|publish|status`）。完成物保全・復元は `npm run kindle:archive --workspace=@stats47/r2-storage -- --push|--audit|--restore`。出品内容と公開状態の SSOT は `data/products/kdp/listings.json`、暗号化archive台帳は `data/products/kindle-archives.json`。書籍生成・カタログは `kindle-publisher` に委譲。
 
 ## 3. 役割分担
 

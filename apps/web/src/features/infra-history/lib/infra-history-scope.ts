@@ -1,8 +1,10 @@
 import { PREFECTURE_LIST_2DIGIT } from '@stats47/area';
 import {
+  INFRA_NETWORKS,
   INFRA_REGIONS,
   INFRA_SCOPE_REGIONS,
   findInfraScopeRegionOfPref,
+  isInfraNetworkPublishable,
   type InfraNetworkDefinition,
   type InfraNetworkKey,
 } from '@stats47/gis/infra-history';
@@ -38,6 +40,20 @@ const ALL_PREF_CODES = PREFECTURE_LIST_2DIGIT.map((pref) => pref.code);
 
 export function infraHistoryPath(network: InfraNetworkKey, scopeSlug: string | null = null): string {
   return scopeSlug ? `/geo/history/${network}/${scopeSlug}` : `/geo/history/${network}`;
+}
+
+/**
+ * 検索に載せるページのパス (サイトマップ用)。ページ側の robots と同じ条件で決める:
+ * 一覧 `/geo/history` は全ネットワークが公開できるときだけ、各ネットワークは自分が公開できるときだけ index になる。
+ * 範囲は全国・地方 (2 都道府県以上の区分)・47 都道府県で、`resolveInfraScope` が解決できるものと一致する。
+ */
+export function infraHistoryIndexablePaths(): string[] {
+  const publishable = INFRA_NETWORKS.filter(isInfraNetworkPublishable);
+  const scopeSlugs = [null, ...INFRA_REGIONS.map((region) => region.code), ...ALL_PREF_CODES];
+  return [
+    ...(publishable.length === INFRA_NETWORKS.length ? ['/geo/history'] : []),
+    ...publishable.flatMap((network) => scopeSlugs.map((slug) => infraHistoryPath(network.key, slug))),
+  ];
 }
 
 function topologyApiPath(network: InfraNetworkKey, file: string): string {

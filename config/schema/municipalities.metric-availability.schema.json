@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "市区町村の指標の公開判断",
+  "description": "data/municipalities/catalog/metric-availability.json の形状契約。人手で品質を判断した差分だけを書く (指標の定義の entities は取得できるかどうかで、ここに無い市区町村の指標を自動で published にはしない。ここに無い city 指標は unknown として扱う)。metrics のキーが指標のキー。published は公開する (comparisonModes は比べ方、valuePolicy は順位に入れる値の範囲で、minExclusive と minInclusive は一方だけ・下限は maxInclusive より小さい)、candidate は公開前、unsupported は公開しない理由 (値の重複・古い・欠損が多い・表が無い)、unknown は未判定。社会・人口統計体系の拡充分 (municipalities.ssds-expansion) と住宅・土地統計調査の拡充分 (municipalities.housing-survey-expansion) は記録から読み込み口が導くので、ここには書かない。batches はまとめて判断した指標の共通の根拠 (metrics のキーの並びで連続する範囲)、notes は指標ごとの判断の記録で、どちらもコードは読まない。読み込み口は packages/data-configs/src/geo-scope/municipality-catalog.ts。",
+  "type": "object",
+  "required": ["metrics", "batches", "notes"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "metrics": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^[a-z0-9][a-z0-9-]*$" },
+      "additionalProperties": {
+        "type": "object",
+        "required": ["status"],
+        "additionalProperties": false,
+        "properties": {
+          "status": { "enum": ["published", "candidate", "unsupported", "unknown"] },
+          "entityPolicyKey": { "type": "string", "minLength": 1 },
+          "comparisonModes": { "type": "array", "minItems": 1, "items": { "enum": ["ranking", "prefecture-filter", "municipality-search"] } },
+          "valuePolicy": {
+            "type": "object",
+            "minProperties": 1,
+            "additionalProperties": false,
+            "properties": {
+              "minExclusive": { "type": "number" },
+              "minInclusive": { "type": "number" },
+              "maxInclusive": { "type": "number" }
+            }
+          },
+          "reason": { "type": "string", "minLength": 1 }
+        },
+        "allOf": [
+          {
+            "if": { "properties": { "status": { "const": "published" } } },
+            "then": { "required": ["entityPolicyKey", "comparisonModes"], "not": { "required": ["reason"] } },
+            "else": { "required": ["reason"], "not": { "anyOf": [{ "required": ["entityPolicyKey"] }, { "required": ["comparisonModes"] }, { "required": ["valuePolicy"] }] } }
+          }
+        ]
+      }
+    },
+    "batches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "metricKeys"],
+        "additionalProperties": false,
+        "properties": {
+          "title": { "type": "string", "minLength": 1 },
+          "note": { "type": "string", "minLength": 1 },
+          "metricKeys": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" } }
+        }
+      }
+    },
+    "notes": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-z0-9][a-z0-9-]*$" },
+      "additionalProperties": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+    }
+  }
+}

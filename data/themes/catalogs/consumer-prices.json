@@ -60,7 +60,7 @@
     {
       "rankingKey": "consumer-price-difference-index-housing",
       "shortLabel": "住居",
-      "role": "secondary",
+      "role": "primary",
       "selection": {
         "proposedBy": "消費者物価地域差指数－小売物価統計調査（構造編）2024年（令和6年）結果 結果の概要「2 10大費目別の物価水準」（総務省統計局、令和7年6月27日公表）",
         "sourceUrl": "https://www.stat.go.jp/data/kouri/kouzou/pdf/g_2024.pdf",
@@ -171,7 +171,7 @@
     {
       "rankingKey": "household-survey-utilities-expenditure",
       "shortLabel": "光熱・水道支出（二人以上世帯・10〜11月の月平均）",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "令和6年全国家計構造調査 家計収支に関する結果 結果の概要「（参考）調査時期に起因する留意事項」（総務省統計局、2025年12月19日公表）",
         "sourceUrl": "https://www.stat.go.jp/data/zenkokukakei/2024/pdf/gaiyou1219.pdf",
@@ -188,7 +188,7 @@
     {
       "rankingKey": "household-survey-food-expenditure",
       "shortLabel": "食料支出（二人以上世帯・10〜11月の月平均）",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "令和6年全国家計構造調査 家計収支に関する結果 結果の概要「Ⅰ 世帯の支出 1 消費支出の概況（2）二人以上の世帯」（総務省統計局、2025年12月19日公表）",
         "sourceUrl": "https://www.stat.go.jp/data/zenkokukakei/2024/pdf/gaiyou1219.pdf",

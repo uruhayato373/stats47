@@ -31,6 +31,7 @@ export const PROJECT_ROOT = path.resolve(__dirname, '..', '..', '..');
 const DEFAULT_POLICY = {
   schemaVersion: 1,
   urlInspectionMaxAgeDays: 3,
+  submittedViewMaxAgeDays: 8,
   searchGrowthMaxAgeDays: 8,
   minimumCandidateDecisionsPerWeek: 1,
   minimumReviewsInTrailingFourWeeks: 3,
@@ -63,6 +64,17 @@ function readJson(file, fallback = null) {
   } catch {
     return fallback;
   }
+}
+
+// coverage-submitted-history.csv (week,date,status,...) を行配列で返す。ファイルが無ければ null。
+function parseSubmittedRows(text) {
+  if (text == null) return null;
+  const [header, ...lines] = text.split('\n').filter((line) => line.trim());
+  if (!header) return [];
+  const cols = header.split(',');
+  return lines
+    .map((line) => Object.fromEntries(line.split(',').map((v, i) => [cols[i], v])))
+    .sort((a, b) => String(a.week).localeCompare(String(b.week)));
 }
 
 function listIsoWeeks(dir) {
@@ -226,6 +238,7 @@ export function auditOperationsCycle({
       datasetPath("gsc.url-inspection-latest")
     ),
     improvements: path.join(root, '.claude/todo/improvements.md'),
+    submittedHistory: path.join(root, datasetPath('gsc.coverage-submitted')),
   };
 
   const snapshotWeeks = listIsoWeeks(paths.snapshots);
@@ -447,6 +460,32 @@ export function auditOperationsCycle({
       : 'LATEST.md の取得日を読めない',
     inspectionFresh ? null : 'fetch-metrics-weekly の url-inspection job を確認'
   );
+
+  // 送信済みビューの週次記録。CSV が無い間 (初回の週次取得より前) は落とさず warn に留める。
+  const submittedRows = parseSubmittedRows(readText(paths.submittedHistory));
+  const submittedLatest = submittedRows?.at(-1) ?? null;
+  const submittedCaptured = submittedRows?.filter((row) => row.status === 'captured').at(-1) ?? null;
+  const submittedAge = ageDays(submittedCaptured?.date, now);
+  const submittedMax = policy.submittedViewMaxAgeDays;
+  let submittedLevel = 'pass';
+  let submittedDetail = `latest captured=${submittedCaptured?.date}, age=${submittedAge}d`;
+  let submittedAction = null;
+  if (!submittedRows) {
+    submittedLevel = 'warn';
+    submittedDetail = '送信済みビューの記録が未取得 (初回の記録待ち)';
+    submittedAction = `weekly:collect の週次取得で ${datasetPath('gsc.coverage-submitted')} が作られるのを待つ`;
+  } else if (submittedLatest?.status === 'missing') {
+    submittedLevel = 'fail';
+    submittedDetail = `最新行 ${submittedLatest.week} が missing (送信済みビューを取得できなかった)`;
+    submittedAction = 'npm run weekly:collect を再実行し、送信済みビューの概要 zip を取り込む';
+  } else if (submittedAge == null || submittedAge > submittedMax) {
+    submittedLevel = 'fail';
+    submittedDetail = submittedCaptured
+      ? `latest captured=${submittedCaptured.date}, age=${submittedAge}d > ${submittedMax}d`
+      : '取得済み (captured) の行が無い';
+    submittedAction = 'npm run weekly:collect を再実行し、送信済みビューの概要 zip を取り込む';
+  }
+  addCheck(checks, 'submitted-view-freshness', submittedLevel, submittedDetail, submittedAction);
 
   const reviewPath = measurementWeek
     ? path.join(paths.reviews, `${measurementWeek}.md`)

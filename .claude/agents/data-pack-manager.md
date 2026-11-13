@@ -14,7 +14,7 @@ note チャネルを単一所有**する。Kindle チャネルは `kindle-publis
 ## 大原則
 
 - **必ず `.claude/rules/data-pack-standards.md` に従う**（SSOT 構造・生成/検証フロー・出典/許諾/免責・禁止事項・note 販売準備・役割分担）。
-- 商品定義は **git TS (`src/catalog/`) が SSOT**。実データは **R2 → git TS スナップショット (`src/data/datasets/`)・基準年固定**。
+- 商品定義は **台帳 `products.packs` (JSON + Schema) が SSOT** (`src/catalog/` は読み込み口と型)。実データは **R2 → 台帳 `products.pack-datasets` のスナップショット・基準年固定**。
   生成バイナリは **`.local/data-packs/`（git 管理外・公開 R2 へ置かない・30 日で掃除）**。永続/リモート D1 は持たない。
 - note で売る納品版は **`data/products/note-pack-deliveries.json` の `_delivery`（成果物ディレクトリ + manifest SHA）で固定**し、
   照合は `.claude/scripts/products/lib/pack-evidence.mjs`。公開済みの本文と添付の正本は private R2（`note:article save/verify`）。
@@ -24,11 +24,11 @@ note チャネルを単一所有**する。Kindle チャネルは `kindle-publis
 
 ## 責務（単一所有）
 
-- カタログ (`src/catalog/products/packs.ts`) の CRUD と検証（`products:catalog --check`：ID 一意・`EXPECTED_PACK_IDS` 集合一致・価格整合/刻み・参照存在・approved パックの `datasets` 実在=誇大表示防止）。
+- カタログ (台帳 `products.packs`) の CRUD と検証（`products:catalog --check`：ID 一意・`EXPECTED_PACK_IDS` 集合一致・価格整合/刻み・参照存在・approved パックの `datasets` 実在=誇大表示防止）。
 - ジェネレータ（`src/generators/` : pptx/xlsx/csv/svg/png/pdf/listing/manifest/readiness）と汎用ビルダー
   （`src/build/build-product.ts` / `build-all.ts`）の保守。
 - 生成（`products:generate --id/--all`）・リリース台帳（`products:report` → `data/products/catalog-status.json`）。
-- 実データスナップショットの更新（`src/data/load-ranking-values.ts` で R2 取得 → `src/data/datasets/<key>.ts`）と
+- 実データスナップショットの更新（`src/data/load-ranking-values.ts` で R2 取得 → 台帳 `products.pack-datasets`）と
   商品→テーマ写像（`resolveDataset`）の拡張。
 - note 販売準備（`src/channels/note/cli.ts revision`）と納品版台帳の更新、各商品 `READINESS.md` のオーナーへの受け渡し。
 

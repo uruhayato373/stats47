@@ -45,13 +45,15 @@ describe('Windows development R2 gateway contract', () => {
     expect(gateway).toContain('Cache-Control"] = "no-store"');
   });
 
-  it('serves generated municipality snapshots from the local R2 mirror', () => {
+  it('serves generated municipality and correlation snapshots from the local R2 mirror', () => {
     const supervisor = read('scripts/dev-server.ts');
     const gateway = read('scripts/r2-dev-gateway.ps1');
 
     expect(supervisor).toContain("'.local', 'r2'");
     expect(supervisor).toContain("'-LocalR2Root'");
     expect(gateway).toContain('"app/municipalities/"');
+    expect(gateway).toContain('"app/correlation/"');
+    expect(gateway).toContain('"app/products/"');
     expect(gateway).toContain('$localR2Base');
   });
 

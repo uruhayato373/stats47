@@ -1,4 +1,6 @@
 import { describe, expect, it } from 'vitest';
+
+import analysisUnits from '../../../../data/surveys/analysis-units/kakei-chousa.json';
 import {
   KAKEI_ANALYSES,
   validateKakeiAnalyses,
@@ -25,6 +27,33 @@ const metrics = new Map(
 );
 
 describe('家計調査の分析単位の台帳', () => {
+  it('正本 data/surveys/analysis-units/kakei-chousa.json の 24 件を、記録の形のまま読む', () => {
+    expect(analysisUnits.surveyId).toBe('kakei-chousa');
+    expect(KAKEI_ANALYSES).toHaveLength(24);
+    expect(KAKEI_ANALYSES).toEqual(analysisUnits.units);
+    expect(new Set(KAKEI_ANALYSES.map((row) => row.id)).size).toBe(24);
+    expect(KAKEI_ANALYSES[0]).toEqual({
+      id: 'natto-city-spending',
+      lensId: 'kakei-city-comparison',
+      question: '納豆への年間支出は都市でどう違うか',
+      source: {
+        statsDataId: '0004023605',
+        frequency: 'annual',
+        household: 'two-plus',
+        geography: 'capital-cities',
+        axis: 'city',
+        year: 2025,
+        filters: { cdCat01: '010530030', cdCat02: '03' },
+      },
+      evidence: 'value-checked',
+      placement: {
+        pageId: 'ranking:natto-consumption-expenditure',
+        form: 'ranking',
+        state: 'configured',
+        metricKey: 'natto-consumption-expenditure',
+      },
+    });
+  });
   it('実値を確かめていない候補は表を採用済みにしない proposed のまま置く', () => {
     const unverified = KAKEI_ANALYSES.filter(
       (row) => row.evidence === 'metadata-checked'

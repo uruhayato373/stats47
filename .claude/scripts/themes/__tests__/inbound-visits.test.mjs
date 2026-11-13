@@ -5,7 +5,7 @@ import { extractInboundVisits } from '../ingest-tourism-consumption.mjs';
 
 const require = createRequire(import.meta.url);
 const ExcelJS = require('exceljs');
-const prefectures = require('../../../../packages/area/src/data/prefectures.json');
+const prefectures = require('../../lib/prefectures.cjs').PREFECTURES;
 
 function fixture() {
   const book = new ExcelJS.Workbook();

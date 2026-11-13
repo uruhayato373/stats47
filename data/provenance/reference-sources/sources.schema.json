@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stats47.jp/schema/reference-sources.schema.json",
+  "title": "調査以外の共通出典",
+  "description": "キーが出典ID。調査マスタに含めない編成統計・地図の出典を管理する。アプリはIDで参照し、調査の名前・機関・URLはsurveys.masterだけが持つ。",
+  "type": "object",
+  "minProperties": 1,
+  "propertyNames": { "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+  "additionalProperties": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["name", "url"],
+    "properties": {
+      "name": { "type": "string", "minLength": 1 },
+      "organization": { "type": "string", "minLength": 1 },
+      "url": { "type": "string", "pattern": "^https://" },
+      "note": { "type": "string", "minLength": 1 }
+    }
+  }
+}

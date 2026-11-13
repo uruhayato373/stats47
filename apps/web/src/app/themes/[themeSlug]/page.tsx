@@ -7,6 +7,10 @@ import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
 import { isAreaTheme } from "@/features/theme-dashboard/config/area-theme-slugs";
 import { themeHref } from "@/features/theme-dashboard/config/theme-href";
 import {
+  buildThemeDescription,
+  buildThemeTitle,
+  readThemeLeadFact,
+  themeLeadLabels,
   THEME_PREFECTURE_COOKIE_NAME,
   ThemePageLayout,
   loadThemeData,
@@ -53,16 +57,24 @@ export async function generateMetadata({
   const theme = ALL_THEMES.find((t) => t.themeKey === themeSlug);
   if (!theme) return {};
 
-  // 題名に今の地域を入れる (2026-10-31 IA-REGION-THEME-01)。このページは全国の値を見せる (県を覚えていれば県のページへ移る)
-  const title = `全国の${theme.title}`;
+  // 題名に今の地域を入れる (2026-10-31 IA-REGION-THEME-01)。このページは全国の値を見せる (県を覚えていれば県のページへ移る)。
+  // 題と説明文は単位に関係なく theme-seo.ts で作る (2026-11-12 オーナー決定。検索語に合わせ、主な指標の名前と 1 位・最下位を入れる)
+  const labels = themeLeadLabels(theme.themeKey);
+  const title = buildThemeTitle({ scope: "national", themeTitle: theme.title, labels });
+  const description = buildThemeDescription({
+    scope: "national",
+    base: theme.description,
+    labels,
+    fact: await readThemeLeadFact(theme.themeKey),
+  });
   return {
     title,
-    description: theme.description,
+    description,
     keywords: theme.keywords,
     alternates: { canonical: themeHref(theme.themeKey) },
     ...generateOGMetadata({
       title,
-      description: theme.description,
+      description,
       imageUrl: ogpImageUrl(ogpImageKeys.theme(theme.themeKey)),
     }),
   };

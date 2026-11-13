@@ -19,7 +19,7 @@ features/ads/
 │   ├── RelatedAmazonBook.tsx      # ブログ記事末の関連書籍（Amazon アソシエイト）
 │   └── tracked-affiliate-link.tsx # GA4クリック計測付きリンク（use client）
 ├── constants/
-│   ├── affiliate-category.ts      # カテゴリマッピング・テーマ・型定義
+│   ├── affiliate-category.ts      # 意図軸の型・対応表の読み込み口 (台帳 affiliate.vertical-map)・解決の関数
 │   ├── furusato-nozei.ts          # 本文からの県名判定
 │   └── related-books.ts           # カテゴリ別関連書籍定数
 ├── repositories/

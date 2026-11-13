@@ -1,0 +1,203 @@
+{
+  "pilotSpecs": [
+    {
+      "id": "pilot-population-future",
+      "contentId": "geo-001",
+      "question": "2050年も人口が維持されやすい場所はどこか",
+      "geography": "市区町村を主表示、1kmメッシュを根拠レイヤーにする",
+      "dataRefs": [
+        {
+          "kind": "metric",
+          "id": "future-population-change-rate-2050",
+          "role": "既存の県比較・入口"
+        },
+        {
+          "kind": "metric",
+          "id": "total-population",
+          "role": "現在人口の文脈"
+        },
+        {
+          "kind": "gis",
+          "id": "mesh1000r6",
+          "role": "1kmメッシュ将来推計人口"
+        },
+        {
+          "kind": "gis",
+          "id": "N03",
+          "role": "市区町村集約境界"
+        }
+      ],
+      "existingAssets": [
+        "/ranking/future-population-change-rate-2050",
+        "/themes/population-dynamics",
+        "KSJ mesh1000r6 pipeline"
+      ],
+      "method": [
+        "同一基準年の現在人口と2050年推計を地域コードで結合",
+        "維持率を決定論的に算出し欠損を順位から除外",
+        "県平均と市区町村内分布を分けて説明"
+      ],
+      "outputChannels": [
+        "地域分析pilot",
+        "X地図カード6案",
+        "無料note解説",
+        "有料の再現手順候補"
+      ],
+      "qualityGates": [
+        "IPSS/国交省の一次資料と推計注記",
+        "地域コード・基準年・単位・47県/市区町村coverage",
+        "将来を保証する表現を使わない"
+      ],
+      "owner": "data-ingester",
+      "status": "ready"
+    },
+    {
+      "id": "pilot-population-land-price",
+      "contentId": "geo-016",
+      "question": "地価が高すぎず、将来人口が相対的に残る場所はどこか",
+      "geography": "市区町村集約と地価地点を分離表示",
+      "dataRefs": [
+        {
+          "kind": "metric",
+          "id": "future-population-change-rate-2050",
+          "role": "将来人口"
+        },
+        {
+          "kind": "metric",
+          "id": "residential-land-price-change-rate",
+          "role": "既存地価比較"
+        },
+        {
+          "kind": "gis",
+          "id": "L01",
+          "role": "地価公示地点"
+        },
+        {
+          "kind": "open-data",
+          "id": "reinfolib-land-price-point-tiles",
+          "role": "地点確認候補"
+        }
+      ],
+      "existingAssets": [
+        "/ranking/future-population-change-rate-2050",
+        "/ranking/residential-land-price-change-rate",
+        "MLIT不動産情報ライブラリcatalog"
+      ],
+      "method": [
+        "地価地点値と市区町村推計を空間結合",
+        "地価水準と変化率を混同せず別変数にする",
+        "等重みを既定とし主観重みは使わない"
+      ],
+      "outputChannels": [
+        "地域分析pilot",
+        "X比較カード",
+        "住まいAffiliateの文脈一致候補",
+        "地価×将来人口note候補"
+      ],
+      "qualityGates": [
+        "地価の価格時点・用途・地点代表性",
+        "年度差と外れ値処理の開示",
+        "将来価格・投資成果を保証しない"
+      ],
+      "owner": "open-data-curator",
+      "status": "gated"
+    },
+    {
+      "id": "pilot-population-flood",
+      "contentId": "geo-031",
+      "question": "浸水想定区域にどれだけの居住人口が重なるか",
+      "geography": "1km/500mメッシュと浸水想定polygon",
+      "dataRefs": [
+        {
+          "kind": "gis",
+          "id": "A31b",
+          "role": "洪水浸水想定区域"
+        },
+        {
+          "kind": "gis",
+          "id": "mesh1000r6",
+          "role": "人口メッシュ"
+        },
+        {
+          "kind": "gis",
+          "id": "N03",
+          "role": "市区町村集約"
+        }
+      ],
+      "existingAssets": [
+        "KSJ A31b catalog",
+        "KSJ mesh1000r6 pipeline",
+        "防災カテゴリランキング"
+      ],
+      "method": [
+        "浸水想定polygonと人口メッシュを決定論的に交差",
+        "想定深・計画規模・提供年が異なるレイヤーを混ぜない",
+        "重複面積と境界セルの扱いを公開"
+      ],
+      "outputChannels": [
+        "地域分析pilot",
+        "X地図カード",
+        "防災方法note候補",
+        "法人ケース候補"
+      ],
+      "qualityGates": [
+        "公式ハザード情報への常設導線",
+        "安全・避難判断を断定しない",
+        "CRS・空間単位・更新年・coverage監査"
+      ],
+      "owner": "gis-curator",
+      "status": "gated"
+    },
+    {
+      "id": "pilot-population-station",
+      "contentId": "geo-062",
+      "question": "駅に近く、2050年人口が相対的に残る場所はどこか",
+      "geography": "駅地点/路線と1kmメッシュ、市区町村",
+      "dataRefs": [
+        {
+          "kind": "gis",
+          "id": "N02",
+          "role": "鉄道・駅"
+        },
+        {
+          "kind": "gis",
+          "id": "S12",
+          "role": "駅別乗降客数の補助"
+        },
+        {
+          "kind": "gis",
+          "id": "mesh1000r6",
+          "role": "将来人口メッシュ"
+        },
+        {
+          "kind": "metric",
+          "id": "railway-station-count",
+          "role": "既存県比較・入口"
+        }
+      ],
+      "existingAssets": [
+        "/ranking/railway-station-count",
+        "KSJ N02/S12 catalog",
+        "KSJ mesh1000r6 pipeline"
+      ],
+      "method": [
+        "駅徒歩圏の距離定義を先に固定",
+        "駅数とアクセス可能人口を別指標にする",
+        "将来人口メッシュとの交差結果を市区町村へ集約"
+      ],
+      "outputChannels": [
+        "地域分析pilot",
+        "X地図カード",
+        "駅アクセスnote候補",
+        "移住・住宅導線候補"
+      ],
+      "qualityGates": [
+        "徒歩圏距離とネットワーク距離の限界",
+        "廃駅・年度・駅グループ重複",
+        "交通利便性を駅数だけで断定しない"
+      ],
+      "owner": "gis-curator",
+      "status": "gated"
+    }
+  ]
+}

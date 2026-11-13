@@ -1,7 +1,7 @@
 /**
  * build-survey-portfolio.ts — survey ポートフォリオ state の決定的 builder (upsert)
  *
- * 機械項目 (surveys.json のマスタ情報・紐付け監査の itemCount/orphan・R2 all.json の
+ * 機械項目 (調査マスタ surveys.master の情報・紐付け監査の itemCount/orphan・R2 all.json の
  * activeItemCount/linkage drift・survey-editorial.ts の編集実装状態・レビュー文書対応付け) を
  * 毎回再導出し、意味項目 (lifecycleStatus / editorialStatus / currentHypothesis / evidenceRefs /
  * metrics / nextReviewAt) は既存値を保持する (theme portfolio / blog remediation-queue と同じ upsert 思想)。
@@ -10,7 +10,7 @@
  * 紐付けの導出ロジックは書かない: itemCount 等は audit-survey-linkage.ts (--json) の実測値を転記する
  * (resolveSurveyLinkage への一本化 — survey-linkage-standards.md §5)。
  *
- * schema・判定規律の正典: data/surveys/README.md
+ * 形: カタログの surveys.portfolio・surveys.experiments (Schema)。判定規律: validate-survey-portfolio.ts
  * 運用設計: .claude/skills/survey/manage-survey-portfolio/reference/surveyポートフォリオ運用.md
  *
  * Usage:
@@ -31,7 +31,7 @@ import { fileURLToPath } from "node:url";
 
 import { getSurveyEditorialContent } from "../../../apps/web/src/features/survey/survey-editorial";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
-import { datasetDir } from "../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
@@ -42,7 +42,7 @@ const REVIEW_DIR = path.join(
 );
 const PORTFOLIO = path.join(STATE_DIR, "portfolio.json");
 const EXPERIMENTS = path.join(STATE_DIR, "experiments.json");
-const SURVEYS_JSON = path.join(PROJECT_ROOT, "packages/ranking/src/data/surveys.json");
+const SURVEYS_JSON = path.join(PROJECT_ROOT, datasetPath("surveys.master"));
 const AUDIT_SCRIPT = "packages/ranking/src/scripts/audit-survey-linkage.ts";
 const R2_ALL_URL = `${R2_PUBLIC_BASE_URL}/app/survey/all.json`;
 
@@ -124,6 +124,8 @@ function runAudit(auditFile?: string): AuditJson {
     cwd: PROJECT_ROOT,
     encoding: "utf8",
     maxBuffer: 64 * 1024 * 1024,
+    // Node は .cmd を shell なしで起動しない (EINVAL)。Windows では shell を通す (2026-11-12)
+    shell: process.platform === "win32",
   });
   return JSON.parse(out) as AuditJson;
 }
@@ -217,11 +219,11 @@ function defaults(mech: Partial<SurveyEntry>, reviewRef: string | null): SurveyE
     gscSnapshotRef: null, // PR-3 で埋める
     ga4SnapshotRef: null,
     metrics: {
-      // PR-3 の集計前は「判定に使える標本なし」= insufficient-data (数値は持たない)
-      gsc: { status: "insufficient-data", windowDays: 0 },
-      ga4: { status: "insufficient-data", windowDays: 0 },
+      // PR-3 の集計前は「判定に使える標本なし」= insufficient-data (数値は持たない。windowDays は Schema が 1 以上を求めるので書かない)
+      gsc: { status: "insufficient-data" },
+      ga4: { status: "insufficient-data" },
       // 初回 build 時点では snapshot が無い。aggregate-survey-metrics が実測へ置換する。
-      internalNav: { status: "insufficient-data", windowDays: 0 },
+      internalNav: { status: "insufficient-data" },
     },
     currentHypothesis: null,
     evidenceRefs: reviewRef ? [reviewRef] : [],

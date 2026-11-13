@@ -20,7 +20,7 @@ const CODE_GLOBS = ["*.ts", "*.tsx", "*.mts", "*.cts", "*.js", "*.jsx", "*.mjs",
 const SKIP_LINE = /^\s*(?:\/\/|\/?\*|#|import\b|export\b.*\bfrom\b)/;
 
 const escape = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-// "config/kdp-listings.json" → "kdp-listings.json"。ディレクトリ付きで現れたら直書きとみなす (置き場は問わない)
+// "config/kdp-account.json" → "kdp-account.json"。ディレクトリ付きで現れたら直書きとみなす (置き場は問わない)
 // data/ paths are governed by check-datasets, which permits static imports and
 // test fixtures. This contract owns literal paths into config/ only.
 const tails = Object.values(CONFIG_PATHS).filter((p) => /^(?:\.claude\/)?config\//.test(String(p))).map((p) => String(p).replace(/^(?:\.claude\/)?config\//, ""));

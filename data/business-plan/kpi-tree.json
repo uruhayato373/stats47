@@ -112,6 +112,15 @@
       "source": "data/cloudflare/ + claude-usage/history.csv"
     },
     {
+      "id": "index-coverage-rate",
+      "label": "インデックス登録率",
+      "tier": "guardrail",
+      "cadence": "weekly",
+      "measurementStatus": "partially-measured",
+      "unit": "%",
+      "source": "GSC 送信済みページの週次記録 (gsc.coverage-submitted)"
+    },
+    {
       "id": "measurement-freshness",
       "label": "計測の鮮度",
       "tier": "guardrail",

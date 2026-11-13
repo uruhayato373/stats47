@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "市区町村のマスタ",
+  "description": "data/areas/master/cities.json の形状契約。e-Stat の地域メタの市区町村 (1,913 件)。cityCode は 5 桁。level \"2\" は都道府県の直下 (市区町村・政令指定都市)、\"3\" は政令指定都市の行政区で、level \"2\" の prefCode は都道府県コード、level \"3\" の prefCode は親の政令指定都市の cityCode (e-Stat の @parentCode をそのまま写してある)。読み込みは packages/area/src/data/index.ts (CITIES)。",
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "type": "object",
+    "required": ["cityCode", "cityName", "level", "prefCode"],
+    "additionalProperties": false,
+    "properties": {
+      "cityCode": { "type": "string", "pattern": "^\\d{5}$" },
+      "cityName": { "type": "string", "minLength": 1 },
+      "level": { "enum": ["2", "3"] },
+      "prefCode": { "type": "string", "pattern": "^\\d{5}$" }
+    }
+  }
+}

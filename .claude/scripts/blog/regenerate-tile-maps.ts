@@ -35,6 +35,7 @@ import { rankingChartFromArticleData } from "./lib/type-chart-input";
 import { toShortColorScheme } from "../../../packages/types/src/color-scheme.ts";
 import { matchRate, parseMapDisplay } from "../lib/map-value-match.mjs";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
@@ -63,7 +64,7 @@ const MAPPING: Record<string, string | { key: string; year?: string }> | null = 
 // 都道府県 名前(短縮/正式)→ 2桁コード
 const PREF: Record<string, string> = {};
 for (const p of JSON.parse(
-  fs.readFileSync(path.join(PROJECT_ROOT, "packages/area/src/data/prefectures.json"), "utf8"),
+  fs.readFileSync(path.join(PROJECT_ROOT, datasetPath("areas.prefectures")), "utf8"),
 )) {
   const code = String(p.prefCode).slice(0, 2);
   PREF[p.prefName] = code;

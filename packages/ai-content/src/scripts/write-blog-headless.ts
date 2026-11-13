@@ -49,7 +49,7 @@ import {
   buildBlogCriticPrompt,
   decideBlogCriticVerdict,
 } from "../services/prompts/blog-article-prompt";
-import { datasetDir } from "../../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..", "..");
@@ -193,7 +193,7 @@ function buildRegionGuide(basePrompt: string): string {
   const hasMaterials = basePrompt.includes(MATERIALS_HEADING);
   const names = new Map(
     (JSON.parse(
-      fs.readFileSync(path.join(PROJECT_ROOT, "packages/area/src/data/prefectures.json"), "utf8"),
+      fs.readFileSync(path.join(PROJECT_ROOT, datasetPath("areas.prefectures")), "utf8"),
     ) as { prefCode: string; prefName: string }[]).map((p) => [p.prefCode, p.prefName]),
   );
   return [

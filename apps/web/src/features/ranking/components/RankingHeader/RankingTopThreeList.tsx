@@ -1,9 +1,10 @@
 'use client';
 
 import { ChartPanel } from '@stats47/components';
-import { formatUnitForDisplay, parseUnit } from '@stats47/data-configs/unit';
+import { formatUnitForDisplay } from '@stats47/data-configs/unit';
 import { Trophy } from 'lucide-react';
 
+import { getMetricChartColor } from '@/components/charts/ChartPalette';
 import { ValueDotPlot } from '@/components/charts/ValueDotPlot';
 
 import {
@@ -11,44 +12,42 @@ import {
   type RankingHeaderStats,
 } from '../../utils/compute-ranking-header-stats';
 
-import type { NumericDomainPolicy } from '@stats47/types';
+import type { MetricPresentation } from '@stats47/types';
 
 interface RankingTopThreeListProps {
   stats: RankingHeaderStats;
   unit: string;
   /**
    * 小数桁。**47 県全体から解決した値**を呼び元 (RankingHeaderStats) が渡す。
-   * ここで items から解決すると、上位3件と最下位を別リストで描くため
+   * ここで items から解決すると、上位3件と下位3件を別リストで描くため
    * 2 つのリストで桁数が食い違いうる (2026-07-31)。
    */
   precision: number;
-  domainPolicy: NumericDomainPolicy;
+  presentation: Pick<MetricPresentation, 'colorScheme' | 'comparisonDomain'>;
 }
 
 /**
- * 上位 3 件と最下位を 1 枚にまとめたリスト。
+ * 上位 3 件と下位 3 件を 1 枚にまとめたリスト。
  *
- * 共通の数値軸上の点で値の位置と差を示す。破線は単純平均。
+ * 共通の数値軸上の点で値の位置と差を示す。平均は点のツールチップで読む。
  */
 export function RankingTopThreeList({
   stats,
   unit,
   precision,
-  domainPolicy,
+  presentation,
 }: RankingTopThreeListProps) {
-  const { top3, last } = stats;
+  const { top3, bottom3 } = stats;
   if (top3.length === 0) return null;
 
-  // 最下位が上位 3 件に含まれる (県数が極端に少ない指標) なら重複表示しない
-  const showLast =
-    last != null && !top3.some((e) => e.areaCode === last.areaCode);
-  const entries = [...top3, ...(showLast ? [last] : [])];
-  const gapUnit =
-    parseUnit(unit).dimension === 'percent' ? 'pt' : formatUnitForDisplay(unit);
+  // 小件数でも同じ地域を二度表示しない。同順位の別地域はそれぞれ表示する。
+  const bottomEntries = bottom3.filter((entry) => !top3.some((top) => top.areaCode === entry.areaCode));
+  const entries = [...top3, ...bottomEntries];
+  const title = `上位${top3.length}件${bottomEntries.length ? `と下位${bottomEntries.length}件` : ''}`;
   const formatValue = (value: number) => formatRankingValue(value, precision);
   return (
     <ChartPanel
-      title={`上位3件${showLast ? 'と最下位' : ''}`}
+      title={title}
       icon={<Trophy />}
       action={
         unit ? (
@@ -57,7 +56,7 @@ export function RankingTopThreeList({
           </span>
         ) : undefined
       }
-      contentClassName="flex flex-col gap-2"
+      contentClassName="flex flex-1 flex-col gap-2"
     >
       <ValueDotPlot
         items={entries.map((entry) => ({
@@ -68,22 +67,14 @@ export function RankingTopThreeList({
         }))}
         values={entries.map((entry) => entry.value)}
         reference={stats.average}
-        policy={domainPolicy}
+        policy={presentation.comparisonDomain}
         formatValue={formatValue}
+        color={getMetricChartColor(presentation)}
+        unit={formatUnitForDisplay(unit)}
+        showAxes={false}
+        showReferenceLine={false}
+        fillHeight
       />
-      {top3.length > 1 && (
-        <p className="text-xs text-muted-foreground">
-          {top3[0].rank === top3[1].rank
-            ? '上位2件は同順位（差なし）'
-            : `${top3[0].rank}位と${top3[1].rank}位の差`}{' '}
-          {top3[0].rank !== top3[1].rank && (
-            <span className="font-medium text-foreground tabular-nums">
-              {formatValue(top3[0].value - top3[1].value)}
-              {gapUnit}
-            </span>
-          )}
-        </p>
-      )}
     </ChartPanel>
   );
 }

@@ -1,0 +1,86 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stats47.jp/schema/surveys.analysis-units.schema.json",
+  "title": "統計調査の分析単位",
+  "description": "どの表のどの軸 (都市・年・年収階級など) を、どのページで答えるかの記録。調査ごとに 1 ファイル。切り口そのものは切り口台帳 (surveys.lenses) が持ち、各行は lensId で指す。指標の出典・値は metric config と R2 が正本で、ここには持たない。state が published は全国のページの図として公開済み、staged は値と図をローカル生成済み (未公開)、proposed は候補。proposed を published へ進めるのは、e-Stat の実値 (表・分類コード・単位・年・行数) を確かめた後に限る。読み込みの関数と整合検査は packages/data-configs/src/kakei-analysis-catalog.ts。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "surveyId", "units"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "surveyId": {
+      "description": "調査マスタ (surveys.master) の id",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "units": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/definitions/unit" }
+    }
+  },
+  "definitions": {
+    "unit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "lensId", "question", "source", "evidence", "placement"],
+      "properties": {
+        "id": {
+          "description": "分析単位の id。問いの軸 (issues[].axes.*.data[].series) がこの id で指す。不変",
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "lensId": {
+          "description": "調査の切り口 (surveys.lenses の lenses[].id)",
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "question": { "type": "string", "minLength": 1 },
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["statsDataId", "frequency", "household", "geography", "axis", "year"],
+          "properties": {
+            "statsDataId": { "description": "e-Stat の統計表 ID (10 桁)", "type": "string", "pattern": "^\\d{10}$" },
+            "frequency": { "enum": ["annual", "monthly"] },
+            "household": { "enum": ["two-plus", "all", "single"] },
+            "geography": { "enum": ["capital-cities", "national"] },
+            "axis": {
+              "enum": [
+                "city",
+                "item",
+                "year",
+                "income-quintile",
+                "income-18-class",
+                "age",
+                "household-size",
+                "household-type",
+                "housing-tenure",
+                "month"
+              ]
+            },
+            "year": { "description": "値を確かめた年", "type": "integer" },
+            "filters": {
+              "description": "表の絞り込み (分類コード)。ranking の行は metric config と一致させる。全国の図の行は、その分析単位の図すべてに共通する絞り込みだけを書く",
+              "type": "object",
+              "minProperties": 1,
+              "additionalProperties": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        "evidence": { "enum": ["value-checked", "metadata-checked"] },
+        "placement": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["pageId", "form", "state"],
+          "properties": {
+            "pageId": { "description": "載せるページ (content.pages の pages[].id)", "type": "string", "minLength": 1 },
+            "form": { "enum": ["ranking", "line-chart", "bar-chart", "article"] },
+            "state": { "enum": ["configured", "published", "staged", "proposed"] },
+            "metricKey": { "description": "ranking の指標キー (metric config)。configured の行だけが持つ", "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    }
+  }
+}

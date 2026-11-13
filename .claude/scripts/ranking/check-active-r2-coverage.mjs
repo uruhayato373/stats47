@@ -16,7 +16,7 @@
  * 配線: 週次レビューの npm run weekly:audits (.claude/scripts/management/weekly-audits/consistency.sh)
  */
 import fs from "node:fs";
-import { datasetDir } from "../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
@@ -39,8 +39,8 @@ const extractQuotedKeys = (filePath) => {
 const known = extractQuotedKeys(
   path.join(PROJECT_ROOT, "packages/ranking/src/config/known-ranking-keys.ts"),
 );
-const gone = extractQuotedKeys(
-  path.join(PROJECT_ROOT, "apps/web/src/config/gone-ranking-keys.ts"),
+const gone = new Set(
+  JSON.parse(fs.readFileSync(path.join(PROJECT_ROOT, datasetPath("site.gone-ranking-keys")), "utf8")).keys.map((row) => row.key),
 );
 
 // metric config の isActive:true キー

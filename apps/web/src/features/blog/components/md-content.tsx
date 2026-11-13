@@ -20,16 +20,8 @@ import remarkGfm from "remark-gfm";
 import Link from "@/components/atoms/SiteLink";
 import { SurfaceLinkCard, SurfaceSection } from "@/components/surface";
 
-import { AdCell, AdRow, type AdRowCell, AffiliateTextAdList, BannerAd } from "@/features/ads";
+import { AdRow, type AdRowCell } from "@/features/ads";
 import type { AffiliateCategory } from "@/features/ads/constants/affiliate-category";
-import { MANUAL_AD_DESKTOP_ONLY_CLASS } from "@/features/ads/constants/manual-ad-policy";
-
-import { adSlotBox } from "@/lib/ad-placements";
-import {
-    ADSENSE_DISPLAY_ENABLED,
-    AdSenseAd,
-    BLOG_ARTICLE_INLINE,
-} from "@/lib/google-adsense";
 
 import { R2_PUBLIC_BASE_URL } from "@/config/site";
 
@@ -55,34 +47,11 @@ function extractTextFromChildren(children: ReactNode): string {
   return "";
 }
 
-interface AffiliateBannerData {
-    id?: string;
-    href: string;
-    imageUrl: string;
-    trackingPixelUrl?: string | null;
-    width?: number | null;
-    height?: number | null;
-    title?: string;
-}
-
-/** 本文インラインのテキストリンク広告 1 件 (サーバー側で vertical 解決済み)。 */
-interface AffiliateTextAdData {
-    id: string;
-    title: string;
-    href: string;
-    trackingPixelUrl?: string | null;
-    /** GA4 `affiliate_vertical` に送る広告自身の意図軸。解決層 (`toTextAd`) が確定させる。 */
-    vertical: AffiliateCategory | null;
-}
-
 interface MDContentProps {
     source: string;
     slug?: string;
     relatedArticleTitles?: Record<string, string>;
-    affiliateBannersByCategory?: Record<string, AffiliateBannerData>;
-    /** 本文中に差し込むテキストリンク。記事の tagKeys から解決済みで、順に 1 件ずつ消費する。 */
-    affiliateTextAds?: AffiliateTextAdData[];
-    /** テキストリンクのテーマ色に使う vertical。 */
+    /** 広告の段の計測に送る記事の意図軸 (GA4 の trackingCategory)。 */
     affiliateVertical?: AffiliateCategory | null;
     /**
      * 広告の段 (AdSense と PR。2026-11-03 オーナー決定)。最後の 1 段を記事の末尾に、残りを本文の h2 の
@@ -98,8 +67,6 @@ interface ComponentProps {
 
 function makeMdComponents(
     slug?: string,
-    affiliateBannersByCategory?: Record<string, AffiliateBannerData>,
-    affiliateTextAds?: AffiliateTextAdData[],
     affiliateVertical?: AffiliateCategory | null,
     adRows?: AdRowCell[][],
 ): Record<string, React.ComponentType<ComponentProps>> {
@@ -157,7 +124,7 @@ function makeMdComponents(
         },
 
         table: ({ children, ...props }: ComponentProps) => (
-            <div className="my-6">
+            <div className="google-anno-skip my-6">
                 <Table {...props}>
                     {children}
                 </Table>
@@ -190,7 +157,7 @@ function makeMdComponents(
         ),
 
         blockquote: ({ children }: ComponentProps) => (
-            <blockquote className="my-4 border-l-4 border-primary/30 pl-4 italic text-muted-foreground [quotes:none]">
+            <blockquote className="google-anno-skip my-4 border-l-4 border-primary/30 pl-4 italic text-muted-foreground [quotes:none]">
                 {children}
             </blockquote>
         ),
@@ -264,28 +231,17 @@ function makeMdComponents(
             if (!cells || cells.length === 0) return null;
             return (
                 <div className="my-8 not-prose">
-                    <AdRow cells={cells} position={`blog-row-${Number(index) + 1}`} trackingCategory={affiliateVertical ?? "other"} />
+                    <AdRow cells={cells} position={`blog-row-${Number(index) + 1}`} trackingCategory={affiliateVertical ?? "other"} wide />
                 </div>
             );
         },
 
-        // 記事に手で置いた <ad-slot> (自動の差し込みは広告の段に移した)。モバイルでは描画しない (2026-08-04)。
-        // 理由と実測は features/ads/constants/manual-ad-policy.ts を参照。
-        "ad-slot": () =>
-            ADSENSE_DISPLAY_ENABLED ? (
-                <AdCell label="広告" className={`${MANUAL_AD_DESKTOP_ONLY_CLASS} my-8 not-prose px-0!`}>
-                    <AdSenseAd
-                        format={BLOG_ARTICLE_INLINE.format}
-                        slotId={BLOG_ARTICLE_INLINE.slotId}
-                        showLabel={false}
-                        // 箱は広告の枠の台帳の「本文の AdSense」(本番の実測 幅いっぱい × 280px。デスクトップだけ)
-                        slotBox={adSlotBox("adsense-body")}
-                    />
-                </AdCell>
-            ) : null,
+        // 記事に手で置いた <ad-slot> は描かない (2026-11-12 オーナー決定)。手置きのある記事 (公開 861 本のうち 97 本・ブログの閲覧の 34%) は
+        // 本文の段が入らず、手置きの枠もスマホでは出ないので、スマホの本文に広告が無かった。今は全記事に本文の段を入れる
+        "ad-slot": () => null,
 
         "data-source": ({ url, label, year, note }: ComponentProps & { url?: string; label?: string; year?: string; note?: string }) => (
-            <span className="-mt-1 mb-6 flex justify-end not-prose">
+            <span className="google-anno-skip -mt-1 mb-6 flex justify-end not-prose">
                 <span className="inline-flex items-start gap-1.5 text-xs text-muted-foreground">
                     <BookOpenText className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden />
                     <span>
@@ -306,66 +262,15 @@ function makeMdComponents(
         // 図に属する導線なので上は詰め (直上の図・出典行との間)、下は次の本文と切り離す。
         "source-link": ({ href, children }: ComponentProps & { href?: string }) =>
             href ? (
-                <span className="mb-8 mt-4 block not-prose">
+                <span className="google-anno-skip mb-8 mt-4 block not-prose">
                     <RankingLinkCard href={href}>{children}</RankingLinkCard>
                 </span>
             ) : null,
 
-        // 本文インラインのテキストリンク広告。index 属性 (0 始まり) で解決済み配列から 1 件消費する。
-        // 描画は既存 AffiliateTextAdList を再利用 (PR ラベル / rel="sponsored" / GA4 計装が入っている)。
-        // 在庫が index に足りなければ何も出さない (空枠を残さない)。
-        "affiliate-text": ({ index }: ComponentProps & { index?: string }) => {
-            const i = Number(index);
-            const ad = affiliateTextAds?.[Number.isFinite(i) ? i : 0];
-            if (!ad) return null;
-            return (
-                <div className="my-8 not-prose">
-                    <AffiliateTextAdList
-                        ads={[ad]}
-                        affiliateCategory={affiliateVertical ?? null}
-                        position="article-inline"
-                    />
-                </div>
-            );
-        },
-
-        "affiliate-banner": ({ src, href, tracking, width, height, label, category, index }: ComponentProps & { src?: string; href?: string; tracking?: string; width?: string; height?: string; label?: string; category?: string; index?: string }) => {
-            // index 指定は旧来の自動挿入のバナー枠 (2026-11-03 に広告の段へ移した)。手で書く記法ではないので何も出さない
-            if (index != null) return null;
-            if (category && affiliateBannersByCategory?.[category]) {
-                const b = affiliateBannersByCategory[category];
-                return (
-                    <div className="my-8 not-prose">
-                        <BannerAd
-                            href={b.href}
-                            imageUrl={b.imageUrl}
-                            trackingPixelUrl={b.trackingPixelUrl}
-                            width={b.width ?? null}
-                            height={b.height ?? null}
-                            label={b.title ?? ""}
-                            // 台帳の vertical キーをそのまま計測へ渡す (既定 "other" を流さない)。
-                            category={category}
-                            position="article-inline"
-                            adId={b.id}
-                        />
-                    </div>
-                );
-            }
-            return (
-                <div className="my-8 not-prose">
-                    <BannerAd
-                        href={href ?? "#"}
-                        imageUrl={src ?? ""}
-                        trackingPixelUrl={tracking}
-                        width={Number(width) || null}
-                        height={Number(height) || null}
-                        label={label ?? ""}
-                        category={category ?? affiliateVertical ?? "other"}
-                        position="article-inline"
-                    />
-                </div>
-            );
-        },
+        // 記事に手で置いた PR のバナーとテキストリンクは描かない (2026-11-12 オーナー決定でアフィリエイトを止めた)。
+        // 直接配置の台帳 (affiliate.direct-placements) と記事の原稿のタグは、戦略を練り直すときのために残す
+        "affiliate-banner": () => null,
+        "affiliate-text": () => null,
 
         // `> [!NOTE]` 等 (md-preprocessor が <callout type="note"> に変換)。見た目は Callout が持つ。
         callout: ({ type, children }: ComponentProps & { type?: string }) => {
@@ -374,7 +279,7 @@ function makeMdComponents(
         },
 
         "related-articles": ({ children }: ComponentProps) => (
-            <SurfaceSection className="my-8 overflow-hidden border-primary/30 p-0">
+            <SurfaceSection className="google-anno-skip my-8 overflow-hidden border-primary/30 p-0">
                 <div className="bg-primary/10 px-4 py-2.5">
                     <span className="text-sm font-bold text-primary">関連記事</span>
                 </div>
@@ -414,8 +319,6 @@ export function MDContent({
     source,
     slug,
     relatedArticleTitles,
-    affiliateBannersByCategory,
-    affiliateTextAds,
     affiliateVertical,
     adRows,
 }: MDContentProps) {
@@ -423,12 +326,10 @@ export function MDContent({
         () =>
             makeMdComponents(
                 slug,
-                affiliateBannersByCategory,
-                affiliateTextAds,
                 affiliateVertical,
                 adRows,
             ),
-        [slug, affiliateBannersByCategory, affiliateTextAds, affiliateVertical, adRows],
+        [slug, affiliateVertical, adRows],
     );
     const endRow = adRows?.[adRows.length - 1];
     const processed = useMemo(
@@ -452,7 +353,7 @@ export function MDContent({
             {/* 記事の末尾の広告の段 (手で広告を置いた記事にも出す) */}
             {endRow && endRow.length > 0 && (
                 <div className="my-8 not-prose">
-                    <AdRow cells={endRow} position="blog-row-end" trackingCategory={affiliateVertical ?? "other"} />
+                    <AdRow cells={endRow} position="blog-row-end" trackingCategory={affiliateVertical ?? "other"} wide />
                 </div>
             )}
         </article>

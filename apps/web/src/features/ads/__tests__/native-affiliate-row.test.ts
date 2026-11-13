@@ -8,7 +8,9 @@
  * 規約 (affiliate-ads-standards.md §3):
  *   - 縦長 (height > width) は native / 本文枠に出さない — isLandscapeBanner で描画側除外
  *   - 縦長を出す枠は無い (受け皿だったホームの縦長バナーは 2026-10-30 に外した。広告同士の隣り合わせを無くすため)
- *   - NativeAffiliateRow の可視要素はリンク付きバナー画像だけ
+ *   - 本文の横並びのバナー (NativeBannerTile) の可視要素はリンク付きバナー画像だけ
+ * 2026-11-12: PR の列の部品 (NativeAffiliateRow) は使われなくなり削除した。横並びの 1 枚と列の幅の決まりは
+ * 広告の段 (AdRow) が使うので、同じファイルに残した分をここで固定する。
  */
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
@@ -37,25 +39,16 @@ describe("isLandscapeBanner", () => {
   });
 });
 
-describe("NativeAffiliateRow の構造契約", () => {
+describe("本文の横並びのバナー (NativeBannerTile) と列の幅の構造契約", () => {
   const src = readComponent("NativeAffiliateRow.tsx");
 
   it("client-safe row から server service を import しない", () => {
     expect(src).not.toMatch(/from ["']\.\.\/services["']/);
     expect(src).not.toMatch(/from ["'][^"']*services\//);
-    expect(src).toMatch(/from ["']\.\.\/utils["']/);
   });
 
-  it("縦長を isLandscapeBanner で除外している", () => {
-    // import の存在ではなく「適用」を見る (import だけ残してフィルタを外す退行を
-    // 変異テストで実際に見逃したため。2026-08-06)
-    expect(src).toContain(".filter(isLandscapeBanner)");
-  });
-
-  // 2026-10-08 オーナー判断: 画像だけでは記事の図と見分けにくいので PR 表記は付ける (ステマ告示への対応)。
-  // 2026-10-30 (案 A): 表記は列ごとに 1 つ、本文の広告のセル (AdCell) の左上に置く
-  it("PR 表記を広告のセルに付け、見出し・商品名・もっと見る導線は表示しない", () => {
-    expect(src).toContain('<AdCell label="PR">');
+  // PR 表記は広告の段 (AdRow) のセルの左上が持つ (2026-10-30 案 A)。バナーの側では見出し・商品名・導線を足さない
+  it("見出し・商品名・もっと見る導線は表示しない", () => {
     expect(src).not.toContain("<PrLabel />");
     expect(src).not.toContain(">PR<");
     expect(src).not.toContain("<h3");
@@ -88,26 +81,17 @@ describe("NativeAffiliateRow の構造契約", () => {
   });
 
   it("列の数はブラウザの幅ではなく本文の幅 (コンテナ) で決める", () => {
-    expect(src).toContain('<div className="@container w-full">');
     expect(src).not.toMatch(/\bmd:grid-cols-/);
     expect(src).not.toMatch(/\bmd:block/);
     // 境界 = 300px × 列 + 8px × (列 − 1)
     // 列は原寸 300px の幅で、まとめて中央に置く (2026-10-30 案 A)
     expect(src).toContain("@min-[608px]:grid-cols-[repeat(2,300px)] @min-[916px]:grid-cols-[repeat(3,300px)]");
     expect(src).toContain("@min-[1224px]:grid-cols-[repeat(4,300px)]");
-    expect(src).toContain("justify-center");
   });
 
   it("1 行に入らない分は出さず、2 段目に半端な行を作らない", () => {
     expect(src).toContain('"hidden @min-[608px]:block"');
     expect(src).toContain('"hidden @min-[916px]:block"');
-    expect(src).toContain("className={ITEM_VISIBILITY_CLASS[index]}");
-  });
-
-  it("three-up は最大 3 件、standard は最大 4 件", () => {
-    expect(src).toContain('variant?: "standard" | "three-up"');
-    expect(src).toContain('variant === "three-up" ? 3 : 4');
-    expect(src).toContain('variant = "standard"');
   });
 });
 

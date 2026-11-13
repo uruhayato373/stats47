@@ -8,7 +8,7 @@
  * | note の記事の本文リンク | note | referral | note_article | note の記事キー (n…) |
  *
  * - Kindle の campaign を ASIN にしないのは、EPUB を作る時点では ASIN が無い (出版後に付く) ため。
- *   書籍 ID と ASIN は config/kdp-listings.json が 1 対 1 で対応させる。
+ *   書籍 ID と ASIN は data/products/kdp/listings.json が 1 対 1 で対応させる。
  * - note のリンクカード (data-src を持つ figure) には付けない。note はカードの URL に query があると
  *   カードを作れないので、商品カードは clean path `/products/<slug>/from/note/<noteKey>`
  *   (サイト側で utm_campaign=note_product へ転送) を使い、ページへのカードは参照元 note.com で数える。

@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "事業計画の正典文書",
+  "description": "data/business-plan/plan/documents.json の形状契約。事業計画 (BUSINESS_PLAN_2026) が拠り所にする正典文書の一覧 (並びが管理画面の表示順)。owner は担当 agent。読み込み口は packages/data-configs/src/business-plan/catalog.ts (BUSINESS_PLAN_DOCUMENTS)。",
+  "type": "object",
+  "required": ["documents"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "documents": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "path", "role", "owner"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+          "title": { "type": "string", "minLength": 1 },
+          "path": { "description": "リポジトリの root からの相対パス", "type": "string", "minLength": 1 },
+          "role": { "type": "string", "minLength": 1 },
+          "owner": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" }
+        }
+      }
+    }
+  }
+}

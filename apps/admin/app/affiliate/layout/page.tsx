@@ -13,6 +13,7 @@ import {
   placementDefinitions,
 } from "@/lib/server/ad-layout";
 import { buttonVariants } from "@stats47/components";
+import { ADS_PLACEMENTS } from "../../../../../config/paths.mjs";
 
 export const metadata: Metadata = {
   title: "広告の配置 — stats47 管理コンソール",
@@ -50,6 +51,14 @@ function expectedAdsense(shot: AdLayoutShot, defs: PlacementDefinition[]): Expec
   return defs
     .filter((d) => d.devices.includes(deviceOf(shot.width)) && (d.region !== "rail" || shot.width >= RAIL_MIN_WIDTH))
     .flatMap((d): ExpectedUnit[] => {
+      // 幅いっぱいの段を縦に複数持つ行 (ブログの本文の段) は、cells が上から順の段のユニット。2 つ目以降は見出しの数で出る
+      if (d.provider === "adsense" && d.cells)
+        return d.cells.map((c, i) => ({
+          unit: c.unit,
+          slot: d.slot,
+          slotName: d.slotName,
+          condition: i === 0 ? d.condition : "見出しの数で出る段 (見出しが足りない記事では出ない)",
+        }));
       if (d.provider === "adsense") return [{ unit: d.unit, slot: d.slot, slotName: d.slotName, condition: d.condition }];
       if (!d.cells) return [];
       return d.cells.flatMap((c, i) =>
@@ -97,10 +106,47 @@ function ShotSummary({ shot, defs }: { shot: AdLayoutShot; defs: PlacementDefini
   );
 }
 
+/**
+ * ページの種類 1 つ分。地域の単位を持つ種類 (テーマ: 全国・県別・日本・市区町村。2026-11-12 オーナー決定でテーマを 1 つの種類にまとめた) は、
+ * 単位ごとに撮影と台帳の枠を並べる。台帳の枠は、その単位で出るもの (scopes が無いか、単位を含む) だけを照らす
+ */
 function PageTypePanel({ manifest, pageType, defs }: { manifest: AdLayoutManifest; pageType: AdLayoutManifest["pageTypes"][number]; defs: PlacementDefinition[] }) {
-  const shots = manifest.widths.map((w) => manifest.shots.find((s) => s.pageType === pageType.id && s.width === w));
+  const variants = pageType.scopes?.length ? pageType.scopes : [{ id: null, label: null, url: pageType.url }];
   return (
-    <PanelCard id={pageType.id} title={`${pageType.label} (${pageType.id})`} description={pageType.url}>
+    <>
+      {variants.map((v) => (
+        <ScopePanel
+          key={v.id ?? "all"}
+          manifest={manifest}
+          pageType={pageType}
+          scope={v}
+          defs={defs.filter((d) => !v.id || !d.scopes || d.scopes.includes(v.id))}
+        />
+      ))}
+    </>
+  );
+}
+
+function ScopePanel({
+  manifest,
+  pageType,
+  scope,
+  defs,
+}: {
+  manifest: AdLayoutManifest;
+  pageType: AdLayoutManifest["pageTypes"][number];
+  scope: { id: string | null; label: string | null; url: string };
+  defs: PlacementDefinition[];
+}) {
+  const shots = manifest.widths.map((w) =>
+    manifest.shots.find((s) => s.pageType === pageType.id && (s.scope ?? null) === scope.id && s.width === w),
+  );
+  return (
+    <PanelCard
+      id={scope.id ? `${pageType.id}-${scope.id}` : pageType.id}
+      title={`${pageType.label}${scope.label ? `・${scope.label}` : ""} (${pageType.id})`}
+      description={scope.url}
+    >
       <div className="grid gap-3 lg:grid-cols-3">
         {manifest.widths.map((width, i) => {
           const shot = shots[i];
@@ -111,7 +157,7 @@ function PageTypePanel({ manifest, pageType, defs }: { manifest: AdLayoutManifes
               {shot?.image ? (
                 <a href={shotUrl(manifest.date, shot.image)} target="_blank" rel="noreferrer" className="block max-h-[80vh] overflow-y-auto border">
                   {/* eslint-disable-next-line @next/next/no-img-element -- ローカルの撮影画像をそのまま見せる */}
-                  <img src={shotUrl(manifest.date, shot.image)} alt={`${pageType.label} ${width}px`} loading="lazy" className="block w-full" />
+                  <img src={shotUrl(manifest.date, shot.image)} alt={`${pageType.label}${scope.label ? `・${scope.label}` : ""} ${width}px`} loading="lazy" className="block w-full" />
                 </a>
               ) : null}
             </div>
@@ -166,7 +212,7 @@ function PageTypePanel({ manifest, pageType, defs }: { manifest: AdLayoutManifes
 
 /**
  * /affiliate/layout — 広告の配置をページの種類 × 画面の幅のスクショで見る。型 B (一覧): ページの種類ごとに 3 幅を横に並べ、
- * 下に撮影で見つけた枠と広告の枠の台帳 (config/ads/placements.json) の定義を並べる。読み取り専用。
+ * 下に撮影で見つけた枠と広告の枠の台帳 (data/ads/placements.json) の定義を並べる。読み取り専用。
  * 撮影は開発サーバーから `npx tsx .claude/scripts/ads/capture-ad-layout.ts` (.local/ad-layout/<日付>/)。
  */
 export default async function AdLayoutPage({ searchParams }: { searchParams: Promise<Record<string, string | undefined>> }) {
@@ -175,7 +221,7 @@ export default async function AdLayoutPage({ searchParams }: { searchParams: Pro
   if (!manifest) {
     return (
       <>
-        <PageHeading title="広告の配置" source={`${AD_LAYOUT_ROOT}/<日付>/manifest.json + config/ads/placements.json`} />
+        <PageHeading title="広告の配置" source={`${AD_LAYOUT_ROOT}/<日付>/manifest.json + ${ADS_PLACEMENTS}`} />
         <PanelCard title="まだ撮影していません">
           <p className="m-0 text-sm">
             開発サーバーを起動し (npm run dev:web)、撮影します (npx tsx .claude/scripts/ads/capture-ad-layout.ts)。
@@ -192,7 +238,7 @@ export default async function AdLayoutPage({ searchParams }: { searchParams: Pro
 
   return (
     <>
-      <PageHeading title="広告の配置" source={`${AD_LAYOUT_ROOT}/${manifest.date}/manifest.json + config/ads/placements.json`} />
+      <PageHeading title="広告の配置" source={`${AD_LAYOUT_ROOT}/${manifest.date}/manifest.json + ${ADS_PLACEMENTS}`} />
       <Stack>
         <p className="m-0 text-sm text-muted-foreground">
           {new Date(manifest.generatedAt).toLocaleString("ja-JP")} に {manifest.baseUrl} から撮影 ({manifest.shots.length} 枚

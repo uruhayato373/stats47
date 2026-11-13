@@ -14,7 +14,7 @@ describe('generateCacheKey', () => {
     ).toBe('estat-api/stats-data/0000010101/cdTime=2024100000_cdCat01=A1101.json');
   });
 
-  it('★limit / startRecord 未指定なら従来キーと同一 (既存キャッシュを無効化しない)', () => {
+  it('★limit / startPosition 未指定なら従来キーと同一 (既存キャッシュを無効化しない)', () => {
     const key = generateCacheKey({ statsDataId: '0000010101', cdCat01: 'A1101' });
     expect(key).toBe('estat-api/stats-data/0000010101/cdCat01=A1101.json');
   });
@@ -30,13 +30,13 @@ describe('generateCacheKey', () => {
       statsDataId: '0000010101',
       cdCat01: 'A1101',
       limit: 100,
-      startRecord: 101,
+      startPosition: 101,
     });
 
     expect(limited).not.toBe(base);
     expect(paged).not.toBe(limited);
     expect(limited).toContain('limit=100');
-    expect(paged).toContain('startRecord=101');
+    expect(paged).toContain('startPosition=101');
   });
 
   it('ファイル名に使えない文字をサニタイズする', () => {

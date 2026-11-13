@@ -20,7 +20,7 @@ ranking ↔ 統計調査 (survey) 紐付けの SSOT 再設計 (feature/survey-li
   導出優先: `config.surveyId`(手動オーバーライド) > 辞書導出 > 空(未分類=非表示)。
 - 導出実装 `resolveSurveyLinkage` (`packages/ranking/src/builders/build-ranking-item-from-metric.ts`)。
   item.json に `surveyIds: string[]`(SSDS複数調査対応) + `originalSurveys: {id,name}[]` を焼き込み。
-- surveys マスタ SSOT = `packages/ranking/src/data/surveys.json`。導出辞書 = ssds-provenance/estat-provenance.generated.json。
+- surveys マスタ SSOT = `surveys.master` (カタログの ID。実体は data/surveys/master/)。導出辞書 = ssds-provenance/estat-provenance.generated.json。
 - R2反映は順序厳守: generate-ranking-items (item.json) → export-master-snapshots (survey items.json/all.json)。逆だとmaster がstale item読む。
 
 ## orphan 削除 + 継続管理

@@ -3,7 +3,7 @@
  *
  * | 事実 | 正本 | 写し・導出 |
  * |---|---|---|
- * | 販売先での公開状態 | 各販路の台帳 (note は data/note/articles.json、Kindle は config/kdp-listings.json) | 商品定義 (packs.ts) は持たない (ProductStatus に "listed" が無い) |
+ * | 販売先での公開状態 | 各販路の台帳 (note は data/note/articles.json、Kindle は data/products/kdp/listings.json) | 商品定義 (packs.ts) は持たない (ProductStatus に "listed" が無い) |
  * | 書籍の題名・状態 | book-catalog.ts | data/products/kindle-status.json (products:kindle:report の出力) |
  *
  * KDP の status・kdpStatus・publicationStage の関係は config/schema/kdp.listings.schema.json が固定し、

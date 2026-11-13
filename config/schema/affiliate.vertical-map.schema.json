@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "アフィリエイトの意図軸の対応表",
+  "description": "data/affiliate/ledger/vertical-map.json の形状契約。ページの内容 (カテゴリ・テーマ・タグ・市区町村テーマ・出典調査) → 広告の意図軸 (vertical の 10 軸) の対応表。解決はページ共通で、出典調査 (survey) → タグ (tag) → カテゴリ (category) → 無し の順 (推測で別の軸へ流さない)。category は e-Stat の 17 軸のカテゴリのキー (ranking・category のページ)。categoryPagePolicy はカテゴリ一覧のページの枠で、回遊が主目的なので 17 軸を明示し、null は掲載漏れではなく、適合する導線を確認するまで空にする。theme はテーマページ (/themes/*) の slug。tag は記事 frontmatter のタグキーで、日本語のタグもそのまま書く。汎用・無意図のタグは入れない。municipalityTheme は市区町村テーマ (/municipalities/themes/<slug>) の slug。survey は出典調査の id で、カテゴリより細かい主題で意図を決める最上位の写像。値が null の調査は、主題はあるが合う商材が無いので意図軸の広告を出さない (ハウス枠と AdSense だけ)。notes は判断の記録で、キーは対応表の名前 (表全体の判断) か <対応表の名前>.<キー> (1 件の判断)。vertical の値の列挙はコードの AffiliateVertical・AFFILIATE_VERTICALS と同じで、テストが一致を固定する。読み込み口は apps/web/src/features/ads/constants/affiliate-category.ts。",
+  "type": "object",
+  "required": ["category", "categoryPagePolicy", "theme", "tag", "municipalityTheme", "survey"],
+  "additionalProperties": false,
+  "definitions": {
+    "vertical": { "enum": ["labor", "housing", "population", "economy", "health", "energy", "travel", "furusato", "education", "mobility"] },
+    "verticalOrNull": { "enum": ["labor", "housing", "population", "economy", "health", "energy", "travel", "furusato", "education", "mobility", null] }
+  },
+  "properties": {
+    "category": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-z]+$" },
+      "additionalProperties": { "$ref": "#/definitions/vertical" }
+    },
+    "categoryPagePolicy": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-z]+$" },
+      "additionalProperties": { "$ref": "#/definitions/verticalOrNull" }
+    },
+    "theme": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-z0-9][a-z0-9-]*$" },
+      "additionalProperties": { "$ref": "#/definitions/vertical" }
+    },
+    "tag": {
+      "type": "object",
+      "propertyNames": { "minLength": 1 },
+      "additionalProperties": { "$ref": "#/definitions/vertical" }
+    },
+    "municipalityTheme": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-z0-9][a-z0-9-]*$" },
+      "additionalProperties": { "$ref": "#/definitions/vertical" }
+    },
+    "survey": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-z0-9][a-z0-9-]*$" },
+      "additionalProperties": { "$ref": "#/definitions/verticalOrNull" }
+    },
+    "notes": {
+      "type": "object",
+      "propertyNames": { "pattern": "^(category|categoryPagePolicy|theme|tag|municipalityTheme|survey)(\\..+)?$" },
+      "additionalProperties": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+    }
+  }
+}

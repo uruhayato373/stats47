@@ -1,5 +1,5 @@
 /**
- * KDP 出品内容 (`config/kdp-listings.json`) の不変量。
+ * KDP 出品内容 (`data/products/kdp/listings.json`) の不変量。
  *
  * ★守りたいのは 1 つ: **読者が読む文章に社内の言葉を出さない**。
  *   2026-08-12 に実測したところ、紹介文が `concept` + `newContentNote` の素の連結で、

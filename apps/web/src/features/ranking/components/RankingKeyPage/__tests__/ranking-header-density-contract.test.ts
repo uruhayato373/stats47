@@ -47,12 +47,16 @@ const RANKING_COMPONENT_ROOT = path.resolve(
 );
 
 describe('ranking header density contract', () => {
-  it('ページ上部はH1だけを表示し、説明とメタ情報を重複させない', () => {
+  it('見出しは共通生成し、表示中の指標名・地域粒度・更新日を配線する', () => {
+    expect(HEADER).toContain('buildRankingPageTitle(metricTitle, areaType)');
     expect(HEADER).not.toContain('description=');
-    expect(HEADER).not.toContain('meta=');
+    const header = PAGE_CLIENT.match(/<RankingHeaderPanel\b[\s\S]*?\/>/)?.[0];
+    expect(header).toContain('metricTitle={displayInfo.title}');
+    expect(header).toContain('areaType={currentAreaType}');
+    expect(header).toContain('updatedAt={activeRankingItem.updatedAt}');
   });
 
-  it('説明と更新日は地図・テーブルの共通直下に置く', () => {
+  it('集計条件だけを可視化直下に置き、更新日の重複を防ぐ', () => {
     const visualizationIndex = PAGE_CLIENT.indexOf(
       '<RankingVisualizationSection'
     );
@@ -60,6 +64,9 @@ describe('ranking header density contract', () => {
 
     expect(visualizationIndex).toBeGreaterThan(-1);
     expect(detailsIndex).toBeGreaterThan(visualizationIndex);
+    const details = readFileSync(path.join(RANKING_COMPONENT_ROOT, 'RankingKeyPage/RankingVisualizationDetails.tsx'), 'utf8');
+    expect(details).not.toContain('updatedAt');
+    expect(details).not.toContain('最終更新');
   });
 
   it('全国の基準値 (全国値 / 単純平均) と推移は共通ヘッダーカードだけで一度表示する', () => {
@@ -79,10 +86,14 @@ describe('ranking header density contract', () => {
     ]);
   });
 
-  it('基準値と単位は折り返さず、期間と数値軸を表示する', () => {
+  it('基準値と単位は折り返さず、軸と変化率を省いて年ごとの値を読める', () => {
     expect(NATIONAL_AVERAGE_STAT).toContain('whitespace-nowrap');
-    expect(NATIONAL_AVERAGE_STAT).toContain('selectedYear=');
+    expect(NATIONAL_AVERAGE_STAT).not.toContain('selectedYear=');
+    expect(NATIONAL_AVERAGE_STAT).not.toContain('ChartLegend');
     expect(NATIONAL_AVERAGE_STAT).toContain('<ChartPanel');
     expect(NATIONAL_AVERAGE_STAT).not.toContain('<ChartCard');
+    expect(NATIONAL_AVERAGE_STAT).toContain('showAxes={false}');
+    expect(NATIONAL_AVERAGE_STAT).toContain('tooltipItems=');
+    expect(NATIONAL_AVERAGE_STAT).not.toContain('periodChange');
   });
 });

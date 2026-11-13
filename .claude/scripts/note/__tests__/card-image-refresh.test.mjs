@@ -90,3 +90,9 @@ test('a correct direct URL with stale CDN bytes is rejected before a card can be
   await assert.rejects(registerMissingCards(page,'nf962c6702b93',figure(site),[],row=>saved.push(row),(entry,card)=>current.verifyFresh(entry,card.url)),/source image bytes changed/);
   assert.equal(saved.length,0);
 });
+
+test('添付ファイルの要素のように URL を持たないカードは、画像の検証の対象外にする', async () => {
+  // 2026-11-11: 添付ファイルを持つ記事の更新が、公開のあとの検証で Invalid URL になり「失敗」と表示された
+  assert.equal(await refresh.verifyFresh({}, ''), null);
+  assert.equal(refresh.rewriteBody('<figure embedded-service="attachment" embedded-content-key="emb1"></figure>'), '<figure embedded-service="attachment" embedded-content-key="emb1"></figure>');
+});

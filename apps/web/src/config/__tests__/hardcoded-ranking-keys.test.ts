@@ -39,8 +39,11 @@ describe("直書きの ranking key が KNOWN_RANKING_KEYS に実在する", () =
     expect(unknown(keys)).toEqual([]);
   });
 
-  it("調査ハブの読者の問い (survey-editorial)", () => {
-    const keys = literalKeys("features/survey/survey-editorial.ts", /rankingKey: '([^']+)'/g);
+  it("調査ハブの読者の問い (data/surveys/editorial/editorial.json)", () => {
+    const editorial = JSON.parse(
+      readFileSync(path.resolve(process.cwd(), "../../data/surveys/editorial/editorial.json"), "utf8"),
+    ) as { entries: { readerQuestions: { rankingKey: string }[] }[] };
+    const keys = editorial.entries.flatMap((entry) => entry.readerQuestions.map((q) => q.rankingKey));
     expect(keys.length).toBeGreaterThan(300);
     expect(unknown(keys)).toEqual([]);
   });

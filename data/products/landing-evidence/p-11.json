@@ -1,0 +1,68 @@
+{
+  "productId": "P-11",
+  "deliveryVersion": "v4-20261024-mac-r2",
+  "manifestSha256": "bc9194703136d08ed3b3b240e215449c9f92e2d3e1e9a36f2dcfd855f8a26355",
+  "sourceArchive": {
+    "bucket": "stats47-private",
+    "key": "note/product-archives/P-11/v4-20261024-mac-r2/137691d3b78da404fffeaac837979afbff81fa65426be46f0a58d3db9f497548.zip",
+    "sha256": "137691d3b78da404fffeaac837979afbff81fa65426be46f0a58d3db9f497548"
+  },
+  "selectedMetrics": [
+    {
+      "key": "total-population",
+      "title": "総人口",
+      "year": "2025",
+      "unit": "人"
+    },
+    {
+      "key": "general-households",
+      "title": "一般世帯数",
+      "year": "2020",
+      "unit": "万世帯"
+    }
+  ],
+  "included": [
+    "CSV（47地域・28指標、基準年は指標ごとに固定）",
+    "PowerPoint（28指標の図表）",
+    "PDFデータブック・地図PNG",
+    "編集用の地図SVG",
+    "出典一覧（SOURCES.csv）・利用条件"
+  ],
+  "examples": [
+    {
+      "id": "population-map",
+      "figures": [
+        {
+          "file": "population-map.png",
+          "alt": "総人口（2025年・地図）",
+          "template": "choropleth",
+          "sha256": "e98ee67555864b6acc47a7c9ebba519a413ca907fe0886e72a520dc2a62fea9a"
+        }
+      ]
+    },
+    {
+      "id": "household-ranking",
+      "figures": [
+        {
+          "file": "household-ranking.png",
+          "alt": "一般世帯数（2020年・地域別比較）",
+          "template": "bar",
+          "sha256": "299770e9fba3b5cb653eaa18dddd5f263e8f858d7c0dca131877bd71996382f0"
+        }
+      ]
+    }
+  ],
+  "filePreview": {
+    "heading": "ファイルの中身",
+    "lead": "CSVは地域コード・地域名と指標の値を横に並べた形式です。画像は8行と1指標を抜粋しています。元の数値列名には指標名・年・単位が入り、画像では「数値」と省略しています。全28指標の出典と基準年はSOURCES.csvで確認できます。",
+    "figures": [
+      {
+        "file": "file-preview.png",
+        "alt": "P-11のdata.csvから列と8行を抜粋した見本",
+        "template": "file-preview",
+        "sha256": "006726f2edea5954eae4c702124f518f47a9700f326a6bef54e782a9ac2acf8b"
+      }
+    ]
+  },
+  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2014〜2025年で指標ごとに異なり、時系列データではありません。"
+}

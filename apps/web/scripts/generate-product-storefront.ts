@@ -3,7 +3,8 @@
  *
  * 真実源:
  * - 商品内容: packages/product-factory の型付きカタログ
- * - 公開状態・販売 URL: config/kdp-listings.json / data/note/articles.json
+ * - 全データ商品の説明・見本: products.landings / products.landing-evidence 台帳
+ * - 公開状態・販売 URL: data/products/kdp/listings.json / data/note/articles.json
  * - ココナラ撤退済みのデータパックを旧出品URLから復活させない
  *
  * 下書き・審査中・ASIN/URL 未確定の商品は fail-closed で出力しない。
@@ -11,6 +12,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import { assertDatasetShape } from "../../../.claude/scripts/lib/dataset-shape.mjs";
 import { readArticleLedger } from "../../../.claude/scripts/note/lib/article-ledger.mjs";
 import { datasetPath } from "../../../config/datasets.mjs";
 import { KDP_LISTINGS } from "../../../config/paths.mjs";
@@ -19,6 +21,7 @@ import { KINDLE_BOOKS } from "../../../packages/product-factory/src/channels/kin
 import { NOTE_PRODUCT_MAPPINGS } from "../../../packages/product-factory/src/channels/note/product-note-mapping";
 
 import { selectLiveKindleEdition, type KindleStorefrontListing } from "./lib/kindle-storefront";
+import { readProductLanding } from "./lib/product-landing";
 
 import type { NoteArticle } from "../../../.claude/scripts/note/catalog/types";
 import type { StorefrontProduct } from "../src/features/products/types";
@@ -35,15 +38,7 @@ interface KdpListingsFile {
 }
 
 /** 商品カタログ (product-factory) を通さず、note の台帳だけで公開状態が決まるデータ商品。 */
-const STANDALONE_NOTE_PRODUCTS = [
-  {
-    articleKey: "muni-manufacturing-shipment-data",
-    id: "MUNI-MANUFACTURING",
-    description: "市区町村別の製造品出荷額等を 1980〜2023 年の時系列でそろえ、最新の境界の地図データと結合して使う",
-    included: ["CSV", "GEOJSON", "PNG"],
-    audience: ["自治体の企画・産業振興担当", "立地調査・地域分析の担当", "研究者"],
-  },
-] as const;
+type StandaloneNoteProduct = { readonly id: string; readonly articleKey: string };
 
 function readJson<T>(filePath: string): T {
   return JSON.parse(fs.readFileSync(filePath, "utf8")) as T;
@@ -51,6 +46,10 @@ function readJson<T>(filePath: string): T {
 
 function buildStorefrontProducts(): StorefrontProduct[] {
   const kdp = readJson<KdpListingsFile>(KDP_LISTINGS_PATH).listings;
+  const standalone = readJson<{ readonly products: readonly StandaloneNoteProduct[] }>(
+    path.join(ROOT, datasetPath("products.standalone-note")),
+  );
+  assertDatasetShape("products.standalone-note", standalone);
 
   const booksById = new Map(KINDLE_BOOKS.map((book) => [book.id, book]));
   const productsById = new Map(ALL_PRODUCTS.map((product) => [product.id, product]));
@@ -88,24 +87,24 @@ function buildStorefrontProducts(): StorefrontProduct[] {
     const product = productsById.get(mapping.productId);
     if (!product) throw Error(`Unknown note product: ${mapping.productId}`);
     return [{ id: product.id, slug: `data-${product.id.toLowerCase()}`, channel: 'note', channelLabel: 'note有料データ集',
-      title: article.title, description: product.jobToBeDone, priceYen: article.priceJpy, externalUrl: article.noteUrl,
-      included: product.formats.map((format) => format.toUpperCase()), audience: [...product.audience], sourceBlogSlugs: [] }];
+      listingTitle: article.title, priceYen: article.priceJpy, externalUrl: article.noteUrl,
+      audience: [...product.audience], sourceBlogSlugs: [],
+      ...readProductLanding(ROOT, product.id, article.key) }];
   });
-  const standaloneProducts: StorefrontProduct[] = STANDALONE_NOTE_PRODUCTS.flatMap((item): StorefrontProduct[] => {
-    const article = noteArticles.find((candidate) => candidate.key === item.articleKey);
+  const standaloneProducts: StorefrontProduct[] = standalone.products.flatMap(({ articleKey, ...content }): StorefrontProduct[] => {
+    const article = noteArticles.find((candidate) => candidate.key === articleKey);
     if (!article || article.status !== "published" || !article.isPaid || !article.noteUrl || !article.priceJpy) return [];
     return [{
-      id: item.id,
-      slug: `data-${item.id.toLowerCase()}`,
+      id: content.id,
+      slug: `data-${content.id.toLowerCase()}`,
       channel: "note",
       channelLabel: "note有料データ集",
-      title: article.title,
-      description: item.description,
+      listingTitle: article.title,
       priceYen: article.priceJpy,
       externalUrl: article.noteUrl,
-      included: [...item.included],
-      audience: [...item.audience],
+      audience: [],
       sourceBlogSlugs: [],
+      ...readProductLanding(ROOT, content.id, articleKey),
     }];
   });
   const coverUrls = readJson<Record<string, string>>(path.join(ROOT, datasetPath("products.note-cover-urls")));

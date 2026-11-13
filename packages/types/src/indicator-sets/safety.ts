@@ -183,7 +183,7 @@ export const SAFETY_SET: IndicatorSet = {
     {
       "rankingKey": "disaster-recovery-expenses-prefecture",
       "shortLabel": "災害復旧費（都道府県財政）",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "fire-department-water-count-per-100-thousand-people",
@@ -213,7 +213,7 @@ export const SAFETY_SET: IndicatorSet = {
     {
       "rankingKey": "individual-evacuation-plan-listed-persons",
       "shortLabel": "避難行動要支援者名簿の掲載人数",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "individual-evacuation-plan-covered-persons",

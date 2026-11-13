@@ -13,7 +13,7 @@ co_agents: [data-ingester, estat-researcher]
 ## 大原則
 
 - **必ず `.claude/rules/data-pack-standards.md` に従う**（SSOT 構造・生成フロー・出典/許諾/免責・禁止事項・note 販売準備）。
-- 商品定義は git TS (`src/catalog/`) が SSOT。生成バイナリは `.local/data-packs/`（**git 管理外・公開 R2 へ置かない**）。
+- 商品定義は `data/products/` の JSON 台帳が SSOT（`src/catalog/` は読み込み口）。生成バイナリは `.local/data-packs/`（**git 管理外・公開 R2 へ置かない**）。
 - **Office 実機検証・note 公開はしない**（人間工程・`note-manager`）。「生成成功」を「互換性検証済み」と書かない。
 
 ## スコープ
@@ -27,7 +27,7 @@ co_agents: [data-ingester, estat-researcher]
 ```bash
 npm run products:catalog --workspace=@stats47/product-factory -- --check   # ID一意・レビュー集合一致・価格整合・参照存在
 ```
-error があれば `src/catalog/` の該当 family ファイルを修正して再検証。
+error があれば対応する `data/products/` の台帳を修正して再検証。分析と地域・年の参照は `npm run products:analysis:catalog` で全有料商品を検査する。
 
 ### B. 商品を生成する
 ```bash
@@ -47,8 +47,19 @@ npm run products:generate --workspace=@stats47/product-factory -- --all --versio
 ```bash
 npx tsx packages/product-factory/src/data/load-ranking-values.ts <rankingKey>   # R2 から最新47県フルを取得
 ```
-出力をスナップショット `src/data/datasets/<key>.ts` に貼り、SOURCES（調査名・statsDataId・URL・年・取得日・加工式）を手記。
+出力 (JSON の配列) を台帳 `products.pack-datasets` の `<key>.json` の `values` に貼り、出典の行 `source`（調査名・statsDataId・URL・年・取得日・加工式）を手記。
 商品→テーマの写像は `src/build/build-all.ts` の `resolveDataset` を拡張する。
+
+### D2. 時系列・市区町村の分析改訂
+商品台帳 `products.landings.analysisPlan` に採用・調査中・除外の理由を記録し、`analysisRevision` の入力は指標キーで参照する。既存指標と精度・対象が違う原典だけ `metrics.analysis-source-variants` に別定義を登録する。表番号・単位を商品側に複製しない。
+
+```bash
+npm run products:analysis:catalog
+npm run products:analysis:build -- --all
+npm run products:analysis:check -- --all
+```
+
+計算・画像・CSV/Excel・LP・note初稿を共通生成する。図は原票の完全性・欠測・分母を検査した結果だけで描く。全件の候補を生成後、開発環境の `/products/preview/<slug>` で確認する。公開中の固定版を改訂候補で上書きしない。Windows PowerShellは `npm.cmd` を使い、引数欠落を避ける。
 
 ### E. リリース台帳を再生成する
 ```bash
@@ -59,6 +70,12 @@ npm run products:report --workspace=@stats47/product-factory   # data/products/c
 改訂Kindleは `-- --kindle-version <VERSION>`、noteは `--note-revision <REVISION>` で固定する。商品・公開記録・納品版・未完了工程を混同しない。
 note販売準備は `npx tsx packages/product-factory/src/channels/note/cli.ts revision --revision <NEW_REVISION> --all`。
 旧v1直参照のgenerate/promoteは使わず、納品版台帳 `data/products/note-pack-deliveries.json` の `_delivery` 固定SHAに接続する。
+
+### E2. note の見本画像を型で描く
+note の販売記事の見本画像 (地図・棒・推移・内訳・ファイルの中身) は手で描かない。記事の作業コピーに
+`figure-specs.json` (画像ごとに `file`・型の台帳の `template`・`input`) を置き、
+`npx tsx .claude/scripts/note/render-product-figures.ts --spec <記事>/figure-specs.json` で描く。spec も記事と一緒に
+`note:article save` で R2 へ保存する。型の無い画像を持つ記事は `build-note-figure-ledger.mjs --check` が縮小専用の上限で止める。
 
 ### F. オーナーへ渡す
 各商品の `.local/data-packs/<id>/<version>/READINESS.md`（機械充足項目 vs オーナー実施項目）を案内する。

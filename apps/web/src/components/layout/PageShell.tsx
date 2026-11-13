@@ -50,16 +50,16 @@ export const SHELL_WIDTH_CLASS = 'mx-auto w-full max-w-[1280px]';
  * `@container/shell` を持つ。余白は main#main-content の p-4 に任せる。
  *
  * サイドバーの開閉で本文の幅が変わるため、レールの出現はビューポートではなく
- * このコンテナの幅で決める (左 936px・右 988px。どちらも本文 656px を保つ値)。
+ * このコンテナの幅で決める (globals.css の rail:。本文 656px を保つ値)。
  */
 export const SHELL_CONTAINER_CLASS = '@container/shell mx-auto w-full max-w-[1280px]';
 
 /**
- * 右レールの列と表示境界。PageShell / ArticleShell で共有する。
+ * 右レールの列幅。PageShell / ArticleShell で共有する。表示境界は globals.css の rail:。
  * 988px = 本文 656px + gap 16px + 右レール 316px。
  */
 export const RIGHT_RAIL_GRID_CLASS =
-  '@min-[988px]/shell:grid @min-[988px]/shell:grid-cols-[minmax(0,1fr)_316px] @min-[988px]/shell:gap-4 @min-[988px]/shell:items-start';
+  'rail:grid rail:grid-cols-[minmax(0,1fr)_316px] rail:gap-4 rail:items-start';
 
 /**
  * 全ページ共通の単一レイアウト Shell。
@@ -97,7 +97,7 @@ export function PageShell({
   const mainClass = cn(
     'min-w-0',
     variant === 'reading' &&
-      'mx-auto w-full max-w-[760px] @min-[988px]/shell:mx-0'
+      'mx-auto w-full max-w-[760px] rail:mx-0'
   );
 
   // 見出し・ページ内ナビ・本文は 1 本の線の格子 (LeftRailLayout → ShellColumn)。右レールは格子の外の列
@@ -112,7 +112,8 @@ export function PageShell({
       {hasRight ? (
         <div className={RIGHT_RAIL_GRID_CLASS}>
           {column}
-          <div className="mt-4 space-y-4 @min-[988px]/shell:mt-0">
+          {/* 本文の横にあるときは本文と同じ高さまで伸ばす (追従する広告が動ける範囲。2026-11-12) */}
+          <div data-slot="shell-rail" className="mt-4 space-y-4 rail:mt-0 rail:self-stretch">
             {rightRail}
           </div>
         </div>

@@ -32,7 +32,7 @@ export const CARD_ACTIONS = {
     tier: "🔴",
     kind: "不具合",
     title: (n) => `誤って 410 にしている公開中ランキング ${n} 件を戻す`,
-    next: "KNOWN_RANKING_KEYS と metric config が isActive:true なのに 410 を返している。`packages/ranking/src/config/gone-ranking-keys.ts` から外すのが正しいかを config で確かめて直す。",
+    next: "KNOWN_RANKING_KEYS と metric config が isActive:true なのに 410 を返している。410 の台帳 (site の url-history にある gone-ranking-keys) から外すのが正しいかを config で確かめて直す。",
   },
   "verify-intent": {
     slug: "404",

@@ -89,7 +89,7 @@ function fixture(
         code: '01000',
         name: '北海道',
         editorialPath:
-          'packages/data-configs/src/area-databook/editorial/01000.ts',
+          'data/areas/editorial/01000.json',
       },
     ],
     ...overrides,

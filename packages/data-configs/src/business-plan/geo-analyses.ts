@@ -1,70 +1,75 @@
-import { SNOW_DESIGNATION_ANALYSIS } from './snow-designation-analysis';
-import { LANDSLIDE_EXPOSURE_ANALYSIS } from './landslide-exposure-analysis';
-import { LOW_ELEVATION_POPULATION_ANALYSIS } from './low-elevation-population-analysis';
-import { BUSINESS_PLAN_M1_GEO_ANALYSES } from './m1';
+import data from '../../../../data/geo/analyses/analyses.json';
+import {
+  GEO_ANALYSIS_THEME_SOURCES,
+  type GeoAnalysisThemeSource,
+} from './geo-analysis-theme-sources';
 import type { BusinessPlanM1Analysis } from './types';
 
+/**
+ * Geo 分析の読み込み口。記録の正本は台帳 `geo.analyses` (data/geo/analyses/analyses.json + Schema)。
+ * ここは型を付けて export するだけで、記録を持たない。出典をテーマの出典の台帳 `themes.sources` に持つ分析 (themeSource) の
+ * 7 項目だけ geo-analysis-theme-sources.ts の結合の関数で埋める。
+ */
+export type GeoAnalysisSlug = keyof typeof data.analyses;
+
+const THEME_DERIVED_KEYS = [
+  'r2Key',
+  'evidenceManifestKey',
+  'detailR2KeyPattern',
+  'dataVersion',
+  'sourceName',
+  'sourceUrl',
+  'caveats',
+] as const;
+
+type ThemeDerivedKey = (typeof THEME_DERIVED_KEYS)[number];
+
+type GeoAnalysisBase = Omit<
+  BusinessPlanM1Analysis,
+  'slug' | 'relatedRankingKey' | 'r2Key' | 'evidenceManifestKey' | 'detailR2KeyPattern'
+> & {
+  readonly slug: GeoAnalysisSlug;
+  readonly r2Key: string;
+  readonly evidenceManifestKey: string;
+  readonly detailR2KeyPattern: string;
+};
+
+/** relatedRankingKey を持つ分析だけが、`in` で絞り込める型を持つ */
+export type GeoAnalysis =
+  | GeoAnalysisBase
+  | (GeoAnalysisBase & { readonly relatedRankingKey: string });
+
+type RawGeoAnalysis = Omit<GeoAnalysisBase, 'slug' | ThemeDerivedKey> &
+  Partial<Pick<BusinessPlanM1Analysis, ThemeDerivedKey>> & {
+    readonly themeSource?: GeoAnalysisThemeSource;
+    readonly relatedRankingKey?: string;
+  };
+
+const RECORDS = data.analyses as Record<GeoAnalysisSlug, RawGeoAnalysis>;
+
+function buildGeoAnalysis(slug: GeoAnalysisSlug): GeoAnalysis {
+  const { themeSource, ...raw } = RECORDS[slug];
+  if (!themeSource) return { ...raw, slug } as GeoAnalysis;
+  const { slug: sourceSlug, ...derived } = GEO_ANALYSIS_THEME_SOURCES[themeSource]();
+  if (sourceSlug !== slug) {
+    throw new Error(
+      `Geo分析 ${slug} の themeSource ${themeSource} の slug (${sourceSlug}) が台帳のキーと一致しません`
+    );
+  }
+  return { ...raw, slug, ...derived } as GeoAnalysis;
+}
+
 /** Site analyses include theme extensions; the M1 publication campaign keeps its own scope. */
-export const GEO_ANALYSES = [
-  ...BUSINESS_PLAN_M1_GEO_ANALYSES,
-  SNOW_DESIGNATION_ANALYSIS,
-  LANDSLIDE_EXPOSURE_ANALYSIS,
-  LOW_ELEVATION_POPULATION_ANALYSIS,
-{
-  "id": "m1-analysis-population-public-facility-access",
-  "contentId": "geo-128",
-  "slug": "population-public-facility-access",
-  "title": "行政施設・公的集会施設までの距離と地域人口",
-  "question": "市町村役場等と公的集会施設への距離帯ごとに、2020年人口と2050年推計人口はどう分布するか",
-  "analysisKind": "spatial-cross",
-  "sourceLayers": [
-    {
-      "id": "ipss-population-mesh-1km",
-      "label": "1km将来人口メッシュ",
-      "geometry": "mesh",
-      "role": "calculation-input",
-      "usedInCalculation": true
-    },
-    {
-      "id": "ksj-p05-public-facility-point",
-      "label": "市町村役場等・公的集会施設の原典地点",
-      "geometry": "point",
-      "role": "calculation-input",
-      "usedInCalculation": true
-    }
-  ],
-  "spatialOperations": [
-    "全国2施設群の最近隣検索とメッシュ中心からの大円距離",
-    "5距離帯へ排他的に分類し、2人口年と2施設群を独立集計"
-  ],
-  "primaryMetricKey": "administrativeWithin1000mShare2020",
-  "metricKeys": [
-    "administrativeWithin1000mShare2020",
-    "administrativeWithin1000mShare2050",
-    "meetingWithin1000mShare2020",
-    "meetingWithin1000mShare2050",
-    "population2020",
-    "population2050"
-  ],
-  "r2Key": "app/geo/population-public-facility-access/item.json",
-  "evidenceManifestKey": "app/geo/population-public-facility-access/manifest.json",
-  "detailR2KeyPattern": "app/geo/population-public-facility-access/pref/{NN}.json",
-  "status": "ready",
-  "geography": "prefecture",
-  "comparisonLimit": 3,
-  "expectedObservationCount": 47,
-  "dataVersion": "P05-22_population2020-2050_mesh1000r6-24",
-  "evidenceCheckedAt": "2026-09-10",
-  "sourceName": "国土交通省「市町村役場等・公的集会施設」・1kmメッシュ別将来推計人口",
-  "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P05-v3_0.html",
-  "caveats": [
-    "2022年4月の施設位置を固定し、2020年人口と2050年推計人口を比較する",
-    "1kmメッシュ中心からの大円距離で、500m帯は粗い近似。道路距離や徒歩時間ではない",
-    "県外最寄りを含み、行政窓口の利用資格・開館時間・将来の施設存続を判定しない",
-    "2施設群は同じ人口を別々に分類し、両群の人口を合算しない"
-  ]
-},
-] as const satisfies readonly BusinessPlanM1Analysis[];
+export const GEO_ANALYSES: readonly GeoAnalysis[] = (
+  Object.keys(RECORDS) as GeoAnalysisSlug[]
+).map(buildGeoAnalysis);
+
+/** 台帳の slug から分析を引く。M1 の公開キャンペーン (m1.ts) が自分の範囲の分析を選ぶのに使う。 */
+export function getGeoAnalysis(slug: GeoAnalysisSlug): GeoAnalysis {
+  const analysis = GEO_ANALYSES.find((item) => item.slug === slug);
+  if (!analysis) throw new Error(`Geo分析がありません: ${slug}`);
+  return analysis;
+}
 
 /** 主指標を単独のランキングとしても公開している分析。ランキングページから分析の canonical 着地へ接続する。 */
 export function findGeoAnalysisByRankingKey(rankingKey: string) {

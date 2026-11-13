@@ -1,0 +1,178 @@
+{
+  "redirects": [
+    {
+      "from": "aging-society-ranking",
+      "to": "aging-rate-akita-vs-okinawa"
+    },
+    {
+      "from": "agricultural-output-ranking",
+      "to": "agriculture-hokkaido-dominance"
+    },
+    {
+      "from": "alcohol-consumption-ranking",
+      "to": "alcohol-prefecture-map"
+    },
+    {
+      "from": "birth-rate-fertility-ranking",
+      "to": "fertility-rate-prefecture-gap"
+    },
+    {
+      "from": "child-physique-ranking",
+      "to": "child-height-regional-gap"
+    },
+    {
+      "from": "consumer-price-regional-gap-ranking",
+      "to": "price-index-high-low-prefecture"
+    },
+    {
+      "from": "cpi-change-rate-ranking",
+      "to": "cpi-change-regional-pattern"
+    },
+    {
+      "from": "fiscal-strength-ranking",
+      "to": "fiscal-self-reliance-gap"
+    },
+    {
+      "from": "food-expenditure-ranking",
+      "to": "food-spending-pattern"
+    },
+    {
+      "from": "fresh-udon-soba-consumption-quantity",
+      "to": "fresh-udon-soba-consumption-prefecture-gap",
+      "since": "2026-10-08",
+      "reason": "重複記事をまとめた (BLOG-DUPLICATE-AUDIT-01)"
+    },
+    {
+      "from": "household-income-ranking",
+      "to": "household-income-tokyo-okinawa"
+    },
+    {
+      "from": "household-spending-ranking",
+      "to": "household-spending-prefecture-gap"
+    },
+    {
+      "from": "household-structure-ranking",
+      "to": "household-solo-vs-dualincome"
+    },
+    {
+      "from": "ict-communication-cost-burden-ranking",
+      "to": "communication-cost-burden"
+    },
+    {
+      "from": "ict-mobile-phone-contracts-ranking",
+      "to": "mobile-contracts-over-population"
+    },
+    {
+      "from": "ict-post-office-density-ranking",
+      "to": "post-office-last-window"
+    },
+    {
+      "from": "inflation-rate-ranking",
+      "to": "inflation-rate-prefecture-gap"
+    },
+    {
+      "from": "local-debt-ranking",
+      "to": "local-government-debt-burden"
+    },
+    {
+      "from": "manufacturing-productivity-ranking",
+      "to": "manufacturing-productivity"
+    },
+    {
+      "from": "manufacturing-shipment-ranking",
+      "to": "manufacturing-aichi-dominance"
+    },
+    {
+      "from": "marriage-divorce-ranking",
+      "to": "marriage-divorce-okinawa"
+    },
+    {
+      "from": "nursing-care-infrastructure-ranking",
+      "to": "nursing-care-shortage-2040"
+    },
+    {
+      "from": "park-green-space-ranking",
+      "to": "park-green-space-gap"
+    },
+    {
+      "from": "per-capita-prefectural-income-ranking",
+      "to": "per-capita-income-gap"
+    },
+    {
+      "from": "population-decline-birthrate-ranking",
+      "to": "birth-death-gap-decline"
+    },
+    {
+      "from": "prefectural-income-ranking",
+      "to": "dual-income-reversal"
+    },
+    {
+      "from": "real-purchasing-power-ranking",
+      "to": "purchasing-power-adjusted"
+    },
+    {
+      "from": "real-wage-ranking",
+      "to": "wage-vs-living-cost"
+    },
+    {
+      "from": "safe-prefecture-features-ranking",
+      "to": "safe-driving-5-features"
+    },
+    {
+      "from": "savings-balance-ranking",
+      "to": "savings-balance-gap"
+    },
+    {
+      "from": "savings-rate-ranking",
+      "to": "savings-rate-gap"
+    },
+    {
+      "from": "school-nonattendance-ranking",
+      "to": "school-nonattendance-pattern"
+    },
+    {
+      "from": "school-teacher-annual-income-prefecture-gap",
+      "to": "school-teacher-annual-income",
+      "since": "2026-10-08",
+      "reason": "重複記事をまとめた (BLOG-DUPLICATE-AUDIT-01)"
+    },
+    {
+      "from": "soba-udon-dining-consumption-expenditure",
+      "to": "soba-udon-dining-consumption-expenditure-prefecture-gap",
+      "since": "2026-10-08",
+      "reason": "重複記事をまとめた (BLOG-DUPLICATE-AUDIT-01)"
+    },
+    {
+      "from": "sports-participation-ranking",
+      "to": "sports-urban-paradox"
+    },
+    {
+      "from": "sunshine-duration-ranking",
+      "to": "sunshine-pacific-vs-nihonkai"
+    },
+    {
+      "from": "traffic-accident-deaths-ranking",
+      "to": "traffic-accident-deaths-regional-risk"
+    },
+    {
+      "from": "traffic-deaths-elderly",
+      "to": "traffic-accident-deaths-regional-risk"
+    },
+    {
+      "from": "unemployment-rate-ranking",
+      "to": "unemployment-structure"
+    },
+    {
+      "from": "vacant-house-rate-ranking",
+      "to": "vacant-house-crisis"
+    },
+    {
+      "from": "waiting-children-ranking",
+      "to": "waiting-children-progress"
+    },
+    {
+      "from": "waste-recycling-rate-ranking",
+      "to": "recycling-rate-gap"
+    }
+  ]
+}

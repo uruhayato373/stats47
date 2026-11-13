@@ -19,6 +19,7 @@ import {
 import { ThemeGraduationPathsSection } from '@/features/graduation-paths';
 import { ThemeHighwayTimelineSection } from '@/features/highway-history';
 import { ThemeIndustrySpecializationSection } from '@/features/industry-specialization';
+import { ThemeFinanceOverviewSection, ThemeFinanceSustainabilitySection } from '@/features/local-finance-dashboard';
 import { ThemeMedicalWorkforceSection } from '@/features/medical-workforce';
 import { ThemeMigrationFlowSection } from '@/features/migration-flow';
 import { ThemeNutritionSection } from '@/features/nutrition';
@@ -36,6 +37,8 @@ import { ThemeSunshineMapSection } from '@/features/sunshine-map';
 import { ThemeTourismSeasonalitySection } from '@/features/tourism-seasonality';
 import { ThemeTsunamiExposureSection } from '@/features/tsunami-exposure';
 import { ThemeWaterQualitySection } from '@/features/water-quality';
+
+import { ThemeKakeiAxisAssetsDebtSection, ThemeKakeiAxisFoodSpendingSection } from '../components/kakei-axis/ThemeKakeiAxisSection';
 
 /**
  * テーマダッシュボードに埋め込む GIS マップ section の registry。
@@ -72,7 +75,12 @@ export const THEME_SECTION_REGISTRY: Record<string, ComponentType> = {
   'five-year-residence': ThemeFiveYearResidenceSection,
   'young-migration-link': ThemeYoungMigrationLink,
   'commute-flow': ThemeCommuteFlowSection,
+  'finance-overview': ThemeFinanceOverviewSection,
+  'finance-sustainability': ThemeFinanceSustainabilitySection,
   'finance-flow': ThemeFinanceFlowSection,
+  // 家計調査の分類軸別の全国の値 (2026-11-12 に日本全体のテーマのページから移した。県のページでは描かない)
+  'kakei-axis-household-food-spending': ThemeKakeiAxisFoodSpendingSection,
+  'kakei-axis-household-assets-debt': ThemeKakeiAxisAssetsDebtSection,
   'geo-station-access': ThemeGeoStationAccessSection,
   'geo-public-facility-access': ThemeGeoPublicFacilityAccessSection,
   highway: ThemeHighwayTimelineSection,
@@ -92,4 +100,23 @@ export const THEME_SECTION_REGISTRY: Record<string, ComponentType> = {
 export const HALF_WIDTH_SECTIONS = new Set<string>([
   'migration-flow',
   'commute-flow',
+]);
+
+/**
+ * 全国のページ (`/themes/<テーマ>`) だけで描く章。全国の値の図なので、県のページ (`/areas/<県>/<テーマ>`) では組み立てず、
+ * 章ごと出さない (テーマ・地域のページは 1 つの地域を見せる。theme-catalog-standards §3.0。2026-11-12)
+ */
+/**
+ * 県を選んでいるときだけ描く章 (選んでいないと何も描かない)。県のページを持つテーマの全国のページでは県を選べない
+ * (選ぶと県のページへ移る) ので組み立てず、章ごと出さない。見出しだけの章を残さない (2026-11-12。全国の地方財政で
+ * 「財政の規模と収支」「財政運営の余裕と負担」が見出しだけになっていた)
+ */
+export const PREFECTURE_ONLY_SECTIONS = new Set<string>([
+  'finance-overview',
+  'finance-sustainability',
+]);
+
+export const NATIONAL_ONLY_SECTIONS = new Set<string>([
+  'kakei-axis-household-food-spending',
+  'kakei-axis-household-assets-debt',
 ]);

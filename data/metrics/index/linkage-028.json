@@ -69,11 +69,19 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:fukushima-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:furikake-expenditure-ranking",
           "kind": "blog"
         },
         {
           "pageId": "blog:hiroshima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:saga-food-culture",
           "kind": "blog"
         },
         {
@@ -314,11 +322,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:fukushima-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:hiroshima-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:miso-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:saga-food-culture",
           "kind": "blog"
         },
         {
@@ -1387,6 +1403,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:niigata-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:spinach-consumption-ranking",
           "kind": "blog"
         },
@@ -1624,6 +1644,10 @@
         {
           "pageId": "area-theme:47000:household-food-spending",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:niigata-food-culture",
+          "kind": "blog"
         },
         {
           "pageId": "blog:spinach-consumption-ranking",
@@ -1874,10 +1898,6 @@
         {
           "pageId": "blog:travel-behavior-gender-gap",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:sports-participation",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:sports-annual-participation-rate-10plus",
@@ -2492,10 +2512,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:sports-participation",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:sports-park-count",
           "kind": "ranking"
         },
@@ -2909,10 +2925,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:sports-participation",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:sports-participation-rate-cycling",
           "kind": "ranking"
         },
@@ -3141,10 +3153,6 @@
         {
           "pageId": "area-theme:47000:sports-participation",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:sports-participation",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:sports-participation-rate-fishing",
@@ -3387,10 +3395,6 @@
         {
           "pageId": "blog:sports-urban-paradox",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:sports-participation",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:sports-participation-rate-golf",
@@ -3701,10 +3705,6 @@
         {
           "pageId": "blog:sports-participation-rate-hiking-prefecture-gap",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:sports-participation",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:sports-participation-rate-hiking",
@@ -4047,10 +4047,6 @@
         {
           "pageId": "area-theme:47000:sports-participation",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:sports-participation",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:sports-participation-rate-skiing",
@@ -5635,10 +5631,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:labor-wages",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:starting-salary-highschool",
           "kind": "ranking"
         },
@@ -5875,10 +5867,6 @@
         {
           "pageId": "blog:starting-salary-university-prefecture-gap",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:labor-wages",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:starting-salary-university",
@@ -6726,10 +6714,6 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:chiba-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:gunma-food-culture",
           "kind": "blog"
         },
@@ -6975,10 +6959,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "blog:chiba-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:gunma-food-culture",
           "kind": "blog"
         },
@@ -6992,10 +6972,6 @@
         },
         {
           "pageId": "blog:strawberry-consumption-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tochigi-food-culture",
           "kind": "blog"
         },
         {
@@ -8082,10 +8058,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:construction-industry",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:subcontractor-completed-construction",
           "kind": "ranking"
         },
@@ -8250,10 +8222,6 @@
         {
           "pageId": "blog:yamaguchi-food-culture",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:household-food-spending",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:sugar-consumption-expenditure",
@@ -8481,24 +8449,12 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "blog:chicken-consumption-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:icecream-consumption-expenditure",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:sugar-consumption-prefecture-gap",
           "kind": "blog"
         },
         {
           "pageId": "blog:yamaguchi-food-culture",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:household-food-spending",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:sugar-consumption-quantity",

@@ -31,7 +31,8 @@ describe('category page featured ranking cards', () => {
     expect(PAGE).not.toContain('leftRail');
     expect(PAGE).not.toContain('RailCategoryList');
     expect(PAGE).not.toContain('trackingSurface="category_sidebar"');
-    expect(PAGE).toMatch(/const rightRail = \(\s*<RailStack>/);
+    // 右レールの列の高さまで伸ばす指定 (rail:h-full) とその説明のコメントを許す (2026-11-13。追従する広告のため)
+    expect(PAGE).toMatch(/const rightRail = \(\s*(?:\/\/[^\n]*\n\s*)?<RailStack[\s>]/);
     expect(PAGE).toContain('<PageShell rightRail={rightRail}');
     const rightRailBlock =
       PAGE.match(/const rightRail = \(([\s\S]*?)<\/RailStack>/)?.[1] ?? '';

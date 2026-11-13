@@ -1,0 +1,1271 @@
+{
+  "keys": [
+    {
+      "key": "dam-count",
+      "since": "2026-09-05",
+      "reason": "非商用KSJ入力の公開終了。旧漁港系列の転送はURL層で新版への301を優先"
+    },
+    {
+      "key": "hydroelectric-power-plant-count",
+      "since": "2026-09-05",
+      "reason": "非商用KSJ入力の公開終了。旧漁港系列の転送はURL層で新版への301を優先"
+    },
+    {
+      "key": "thermal-power-plant-count",
+      "since": "2026-09-05",
+      "reason": "非商用KSJ入力の公開終了。旧漁港系列の転送はURL層で新版への301を優先"
+    },
+    {
+      "key": "nuclear-power-plant-count",
+      "since": "2026-09-05",
+      "reason": "非商用KSJ入力の公開終了。旧漁港系列の転送はURL層で新版への301を優先"
+    },
+    {
+      "key": "geothermal-power-plant-count",
+      "since": "2026-09-05",
+      "reason": "非商用KSJ入力の公開終了。旧漁港系列の転送はURL層で新版への301を優先"
+    },
+    {
+      "key": "wind-power-plant-count-facility",
+      "since": "2026-09-05",
+      "reason": "非商用KSJ入力の公開終了。旧漁港系列の転送はURL層で新版への301を優先"
+    },
+    {
+      "key": "biomass-power-station-count",
+      "since": "2026-09-05",
+      "reason": "非商用KSJ入力の公開終了。旧漁港系列の転送はURL層で新版への301を優先"
+    },
+    {
+      "key": "tourism-resource-count",
+      "since": "2026-09-05",
+      "reason": "非商用KSJ入力の公開終了。旧漁港系列の転送はURL層で新版への301を優先"
+    },
+    {
+      "key": "fishing-port-count",
+      "since": "2026-09-05",
+      "reason": "非商用KSJ入力の公開終了。旧漁港系列の転送はURL層で新版への301を優先"
+    },
+    {
+      "key": "kindergarten-education-diffusion-rate",
+      "since": "2026-08-28",
+      "reason": "SSDS 項目削除・後継なし"
+    },
+    {
+      "key": "nursery-education-diffusion-rate",
+      "since": "2026-08-28",
+      "reason": "SSDS 項目削除・後継なし"
+    },
+    {
+      "key": "health-checkup-rate-lifestyle-diseases",
+      "since": "2026-08-28",
+      "reason": "定義・欠落により都道府県ランキングとして成立しない"
+    },
+    {
+      "key": "port-passengers-total",
+      "since": "2026-08-28",
+      "reason": "定義・欠落により都道府県ランキングとして成立しない"
+    },
+    {
+      "key": "construction-contract-total",
+      "since": "2026-08-16",
+      "reason": "e-Stat 側で統計表が廃止・後継なし"
+    },
+    {
+      "key": "construction-contract-housing",
+      "since": "2026-08-16",
+      "reason": "e-Stat 側で統計表が廃止・後継なし"
+    },
+    {
+      "key": "construction-contract-road",
+      "since": "2026-08-16",
+      "reason": "e-Stat 側で統計表が廃止・後継なし"
+    },
+    {
+      "key": "construction-contract-river",
+      "since": "2026-08-16",
+      "reason": "e-Stat 側で統計表が廃止・後継なし"
+    },
+    {
+      "key": "construction-contract-sewerage",
+      "since": "2026-08-16",
+      "reason": "e-Stat 側で統計表が廃止・後継なし"
+    },
+    {
+      "key": "construction-contract-port-airport",
+      "since": "2026-08-16",
+      "reason": "e-Stat 側で統計表が廃止・後継なし"
+    },
+    {
+      "key": "construction-contract-disaster-recovery",
+      "since": "2026-08-16",
+      "reason": "e-Stat 側で統計表が廃止・後継なし"
+    },
+    {
+      "key": "construction-projects-total",
+      "since": "2026-08-16",
+      "reason": "e-Stat 側で統計表が廃止・後継なし"
+    },
+    {
+      "key": "noise-regulation-rate",
+      "since": "2026-08-16",
+      "reason": "e-Stat 側で統計表が廃止・後継なし"
+    },
+    {
+      "key": "patient-receiving-rate-by-age",
+      "since": "2026-08-17",
+      "reason": "患者調査の総数を指し、生存する別の指標と同一値の重複コンテンツ (RANKING-DUPLICATE-PATIENT-SURVEY-01)"
+    },
+    {
+      "key": "patient-receiving-rate-by-disease",
+      "since": "2026-08-17",
+      "reason": "患者調査の総数を指し、生存する別の指標と同一値の重複コンテンツ (RANKING-DUPLICATE-PATIENT-SURVEY-01)"
+    },
+    {
+      "key": "ssdse-c-lb072003"
+    },
+    {
+      "key": "ssdse-c-lb080011"
+    },
+    {
+      "key": "ssdse-c-lb121202"
+    },
+    {
+      "key": "child-height-regional-gap"
+    },
+    {
+      "key": "miso-consumption-quantity-prefecture-gap"
+    },
+    {
+      "key": "ssdse-c-lb092009"
+    },
+    {
+      "key": "ssdse-c-lb021105"
+    },
+    {
+      "key": "ssdse-d-md17"
+    },
+    {
+      "key": "ssdse-c-lb051208"
+    },
+    {
+      "key": "ssdse-c-lb102001"
+    },
+    {
+      "key": "ssdse-c-lb110003"
+    },
+    {
+      "key": "ssdse-c-lb072001"
+    },
+    {
+      "key": "ssdse-c-la03"
+    },
+    {
+      "key": "agricultural-production-value"
+    },
+    {
+      "key": "ssdse-d-md12"
+    },
+    {
+      "key": "instant-noodles-expenditure"
+    },
+    {
+      "key": "avg-height-middle-school-2nd-male"
+    },
+    {
+      "key": "ssdse-c-lb054005"
+    },
+    {
+      "key": "ssdse-c-lb110005"
+    },
+    {
+      "key": "ssdse-c-lb122001"
+    },
+    {
+      "key": "ssdse-c-lb103005"
+    },
+    {
+      "key": "ssdse-c-lb061008"
+    },
+    {
+      "key": "population-density"
+    },
+    {
+      "key": "ssdse-d-md18"
+    },
+    {
+      "key": "ssdse-f-snow-days"
+    },
+    {
+      "key": "ssdse-c-lb054001"
+    },
+    {
+      "key": "rice-expenditure"
+    },
+    {
+      "key": "total-overnight-guests-foreign-china"
+    },
+    {
+      "key": "consumer-price-regional-difference-index"
+    },
+    {
+      "key": "ssdse-c-lb051203"
+    },
+    {
+      "key": "ssdse-d-md13"
+    },
+    {
+      "key": "ssdse-c-lb072010"
+    },
+    {
+      "key": "ssdse-c-lb054008"
+    },
+    {
+      "key": "ssdse-c-lb051206"
+    },
+    {
+      "key": "fiscal-self-reliance-ratio"
+    },
+    {
+      "key": "total-overnight-guests-foreign-korea"
+    },
+    {
+      "key": "ssdse-c-lb061001"
+    },
+    {
+      "key": "education-cost-per-student"
+    },
+    {
+      "key": "commerce-sales-amount"
+    },
+    {
+      "key": "actual-road-length"
+    },
+    {
+      "key": "age-adjusted-death-rate-female-h27-per-1000"
+    },
+    {
+      "key": "age-adjusted-death-rate-female-s60-per-1000"
+    },
+    {
+      "key": "age-adjusted-death-rate-male-h27-per-1000"
+    },
+    {
+      "key": "age-adjusted-death-rate-male-s60-per-1000"
+    },
+    {
+      "key": "age-adjusted-mortality-rate-old"
+    },
+    {
+      "key": "agricultural-output-city"
+    },
+    {
+      "key": "agricultural-output-per-worker-individual-farm"
+    },
+    {
+      "key": "agriculture-forestry-fishery-employees"
+    },
+    {
+      "key": "agriculture-forestry-fishery-workers"
+    },
+    {
+      "key": "amount-of-public-construction-contracts"
+    },
+    {
+      "key": "annual-water-supply-volume-municipal"
+    },
+    {
+      "key": "apparel-retail-store-count-per-1000-alt"
+    },
+    {
+      "key": "average-life-expectancy-male-65"
+    },
+    {
+      "key": "average-number-of-people-in-general-households"
+    },
+    {
+      "key": "births-under-2500g"
+    },
+    {
+      "key": "blood-donor-count"
+    },
+    {
+      "key": "bowling-alley-public",
+      "since": "2026-08-05",
+      "reason": "値分布ゲート (VALUE-GATE-01): 公共ボウリング場が最良年でも値 1 の県が 2 つだけで順位として成立しない"
+    },
+    {
+      "key": "building-fire-count-per-100k"
+    },
+    {
+      "key": "bullying-recognition-count"
+    },
+    {
+      "key": "bullying-resolution-count"
+    },
+    {
+      "key": "capacity-utilization-rate"
+    },
+    {
+      "key": "city-gas-meter-installations"
+    },
+    {
+      "key": "city-gas-meter-readings"
+    },
+    {
+      "key": "commercial-neighborhood-zone"
+    },
+    {
+      "key": "commercial-zone"
+    },
+    {
+      "key": "community-center-count"
+    },
+    {
+      "key": "community-parks-area"
+    },
+    {
+      "key": "computer-per-student-elementary"
+    },
+    {
+      "key": "computer-per-student-junior-high"
+    },
+    {
+      "key": "consolidated-real-deficit-ratio-municipal"
+    },
+    {
+      "key": "constructed-building-floor-area"
+    },
+    {
+      "key": "corporate-income-h27"
+    },
+    {
+      "key": "cpi-change-rate-overall-excl-imputed-rent"
+    },
+    {
+      "key": "cpi-change-rate-overall-incl-imputed-rent"
+    },
+    {
+      "key": "criminal-arrest-count"
+    },
+    {
+      "key": "current-account-ratio-municipal"
+    },
+    {
+      "key": "current-local-bonds-municipality"
+    },
+    {
+      "key": "death-accident-male"
+    },
+    {
+      "key": "death-cerebrovascular"
+    },
+    {
+      "key": "death-diabetes"
+    },
+    {
+      "key": "death-heart-disease"
+    },
+    {
+      "key": "death-hypertension"
+    },
+    {
+      "key": "death-lifestyle-disease"
+    },
+    {
+      "key": "deaths-male"
+    },
+    {
+      "key": "department-stores-10-per"
+    },
+    {
+      "key": "digital-textbook-rate-high"
+    },
+    {
+      "key": "domestic-bank-personal-deposit-balance"
+    },
+    {
+      "key": "domestic-case-count-mediation"
+    },
+    {
+      "key": "dual-income-household-count"
+    },
+    {
+      "key": "dwelling-per-floor-area"
+    },
+    {
+      "key": "edu-academic-junior-math"
+    },
+    {
+      "key": "education-cost-per-student-high-fulltime"
+    },
+    {
+      "key": "electricity-consumption"
+    },
+    {
+      "key": "electronic-blackboard-per-school-high"
+    },
+    {
+      "key": "electronic-blackboard-rate-elementary"
+    },
+    {
+      "key": "elementary-school-long-absence-count"
+    },
+    {
+      "key": "elementary-school-long-absence-count-illness"
+    },
+    {
+      "key": "elementary-school-long-absence-count-nonattendance"
+    },
+    {
+      "key": "elementary-school-student-count"
+    },
+    {
+      "key": "elementary-school-teacher-count"
+    },
+    {
+      "key": "employed-people-count"
+    },
+    {
+      "key": "employee-compensation-h27"
+    },
+    {
+      "key": "factor-income-from-outside-prefecture-nominal-h27"
+    },
+    {
+      "key": "final-education-population-university-graduate"
+    },
+    {
+      "key": "final-waste-disposal-volume"
+    },
+    {
+      "key": "financial-capability-index-municipal"
+    },
+    {
+      "key": "fire-brigade-count"
+    },
+    {
+      "key": "fire-damage-casualties"
+    },
+    {
+      "key": "fire-damage-death-count"
+    },
+    {
+      "key": "fire-damage-injury-count"
+    },
+    {
+      "key": "fire-department-branch-count"
+    },
+    {
+      "key": "fire-department-count"
+    },
+    {
+      "key": "fire-department-dispatch-building-fire-count"
+    },
+    {
+      "key": "fire-department-dispatch-count"
+    },
+    {
+      "key": "fire-department-emergency-car-count"
+    },
+    {
+      "key": "fire-department-emergency-dispatch-count"
+    },
+    {
+      "key": "fire-department-employees-count"
+    },
+    {
+      "key": "fire-department-fire-hydrant-count"
+    },
+    {
+      "key": "fire-department-member-count"
+    },
+    {
+      "key": "fire-department-pump-car-count"
+    },
+    {
+      "key": "fire-division-count"
+    },
+    {
+      "key": "fire-insurance-amount-received-per-contract-alt"
+    },
+    {
+      "key": "fire-insurance-claims-received-per-1000-households"
+    },
+    {
+      "key": "fire-insurance-claims-received-per-1000-households-alt"
+    },
+    {
+      "key": "fire-insurance-new-contract-count"
+    },
+    {
+      "key": "fire-insurance-new-contracts-per-1000-households"
+    },
+    {
+      "key": "fire-insurance-new-contracts-per-1000-households-alt"
+    },
+    {
+      "key": "fire-officer-count"
+    },
+    {
+      "key": "fire-outbreak-count"
+    },
+    {
+      "key": "food-poisoning-patient-count"
+    },
+    {
+      "key": "food-retail-store-count-per-1000-alt"
+    },
+    {
+      "key": "fulltime-physicians-general-hospital-per-100beds-report"
+    },
+    {
+      "key": "future-burden-ratio-municipal"
+    },
+    {
+      "key": "gdp-growth-rate-pref-h27"
+    },
+    {
+      "key": "general-funds-municipality"
+    },
+    {
+      "key": "general-household-members"
+    },
+    {
+      "key": "goods-services-net-exports-imports-nominal-h27"
+    },
+    {
+      "key": "green-corridor-area"
+    },
+    {
+      "key": "gross-capital-formation-nominal-h27"
+    },
+    {
+      "key": "gross-capital-formation-real-h27"
+    },
+    {
+      "key": "gross-fixed-capital-formation-nominal-h27"
+    },
+    {
+      "key": "gross-fixed-capital-formation-real-h27"
+    },
+    {
+      "key": "gross-prefectural-income-growth-rate-nominal-h27"
+    },
+    {
+      "key": "gross-prefectural-income-nominal-h27"
+    },
+    {
+      "key": "gross-prefectural-product-accommodation-food-h27"
+    },
+    {
+      "key": "gross-prefectural-product-agriculture-forestry-fisheries-h27"
+    },
+    {
+      "key": "gross-prefectural-product-agriculture-h27"
+    },
+    {
+      "key": "gross-prefectural-product-construction-h27"
+    },
+    {
+      "key": "gross-prefectural-product-education-h27"
+    },
+    {
+      "key": "gross-prefectural-product-electricity-gas-water-waste-h27"
+    },
+    {
+      "key": "gross-prefectural-product-expenditure-nominal-h27"
+    },
+    {
+      "key": "gross-prefectural-product-finance-insurance-h27"
+    },
+    {
+      "key": "gross-prefectural-product-fisheries-h27"
+    },
+    {
+      "key": "gross-prefectural-product-forestry-h27"
+    },
+    {
+      "key": "gross-prefectural-product-health-social-h27"
+    },
+    {
+      "key": "gross-prefectural-product-manufacturing-h27"
+    },
+    {
+      "key": "gross-prefectural-product-mining-h27"
+    },
+    {
+      "key": "gross-prefectural-product-primary-industry-h27"
+    },
+    {
+      "key": "gross-prefectural-product-professional-scientific-support-h27"
+    },
+    {
+      "key": "gross-prefectural-product-public-h27"
+    },
+    {
+      "key": "gross-prefectural-product-real-estate-h27"
+    },
+    {
+      "key": "gross-prefectural-product-secondary-industry-h27"
+    },
+    {
+      "key": "gross-prefectural-product-tertiary-industry-h27"
+    },
+    {
+      "key": "gross-prefectural-product-transport-postal-h27"
+    },
+    {
+      "key": "gross-prefectural-product-wholesale-retail-h27"
+    },
+    {
+      "key": "handball-throw-grade8-female"
+    },
+    {
+      "key": "handball-throw-grade8-male"
+    },
+    {
+      "key": "health-life-expectancy-female"
+    },
+    {
+      "key": "health-life-expectancy-male"
+    },
+    {
+      "key": "height-grade11-male"
+    },
+    {
+      "key": "height-grade5-male"
+    },
+    {
+      "key": "height-grade8-female"
+    },
+    {
+      "key": "height-grade8-male"
+    },
+    {
+      "key": "high-school-student-count"
+    },
+    {
+      "key": "hospital-count"
+    },
+    {
+      "key": "house-councillors-election-turnout-constituency"
+    },
+    {
+      "key": "households-in-city-gas-supply-area"
+    },
+    {
+      "key": "households-on-public-assistance-benefit"
+    },
+    {
+      "key": "households-started-assistance"
+    },
+    {
+      "key": "industrial-only-zone"
+    },
+    {
+      "key": "industrial-quasi-zone"
+    },
+    {
+      "key": "industrial-water-usage-fresh"
+    },
+    {
+      "key": "industrial-zone"
+    },
+    {
+      "key": "intellectual-offense-recognized-count"
+    },
+    {
+      "key": "inventory-change-nominal-h27"
+    },
+    {
+      "key": "investment-expenses-municipality"
+    },
+    {
+      "key": "job-changers"
+    },
+    {
+      "key": "junior-college-student-count"
+    },
+    {
+      "key": "junior-high-school-class-count"
+    },
+    {
+      "key": "junior-high-school-graduates"
+    },
+    {
+      "key": "junior-high-school-student-count"
+    },
+    {
+      "key": "junior-high-school-teacher-count"
+    },
+    {
+      "key": "juvenile-heinous-offense-arrested-person-count"
+    },
+    {
+      "key": "juvenile-protection-event-new-admission-person"
+    },
+    {
+      "key": "kenmin-shotoku-h27"
+    },
+    {
+      "key": "kindergarten-count"
+    },
+    {
+      "key": "kindergarten-enrollment"
+    },
+    {
+      "key": "kindergarten-teacher-count"
+    },
+    {
+      "key": "labor-force-population"
+    },
+    {
+      "key": "labor-union-members"
+    },
+    {
+      "key": "labor-unions"
+    },
+    {
+      "key": "land-use-zone-area"
+    },
+    {
+      "key": "large-display-rate-elementary"
+    },
+    {
+      "key": "large-display-rate-junior-high"
+    },
+    {
+      "key": "large-retail-store-count-per-100k-alt"
+    },
+    {
+      "key": "large-scale-retail-stores-10-per"
+    },
+    {
+      "key": "late-elderly-medical-expense"
+    },
+    {
+      "key": "late-elderly-medical-expense-per-person"
+    },
+    {
+      "key": "leavers"
+    },
+    {
+      "key": "library-count"
+    },
+    {
+      "key": "life-expectancy-at-60-male"
+    },
+    {
+      "key": "local-government-final-consumption-expenditure-nominal-h27"
+    },
+    {
+      "key": "local-government-final-consumption-expenditure-real-h27"
+    },
+    {
+      "key": "marine-aquaculture-output"
+    },
+    {
+      "key": "medical-expenses-per-person"
+    },
+    {
+      "key": "mobile-phone-contracts"
+    },
+    {
+      "key": "morals-offense-arrested-count"
+    },
+    {
+      "key": "morals-offense-arrested-person-count"
+    },
+    {
+      "key": "municipal-assembly-election-turnout"
+    },
+    {
+      "key": "municipal-mayor-election-turnout"
+    },
+    {
+      "key": "museum-count"
+    },
+    {
+      "key": "national-medical-expenses-total"
+    },
+    {
+      "key": "neighborhood-commercial-zone"
+    },
+    {
+      "key": "neighborhood-parks"
+    },
+    {
+      "key": "neighborhood-parks-area"
+    },
+    {
+      "key": "non-flush-toilet-population"
+    },
+    {
+      "key": "nuclear-family-households"
+    },
+    {
+      "key": "number-of-commercial-establishments-wholesale-retail"
+    },
+    {
+      "key": "number-of-public-construction-contracts"
+    },
+    {
+      "key": "number-of-ryokan-facilities-incl-hotel"
+    },
+    {
+      "key": "number-of-ryokan-rooms-incl-hotel"
+    },
+    {
+      "key": "nursing-welfare-facilities-basic-tabulation-6510-per"
+    },
+    {
+      "key": "nursing-welfare-facilities-detailed-tabulation-6510-per"
+    },
+    {
+      "key": "occupational-accident-severity-rate"
+    },
+    {
+      "key": "old-population"
+    },
+    {
+      "key": "outflow-population-other-pref"
+    },
+    {
+      "key": "outpatients-per-fulltime-physician-per-day-report"
+    },
+    {
+      "key": "overtime-working-hours-female"
+    },
+    {
+      "key": "overtime-working-hours-male"
+    },
+    {
+      "key": "owner-occupied-housing"
+    },
+    {
+      "key": "passenger-car-ownership-per-household"
+    },
+    {
+      "key": "paved-road-length"
+    },
+    {
+      "key": "per-capita-kenmin-shotoku-h27"
+    },
+    {
+      "key": "persons-on-public-assistance-benefit"
+    },
+    {
+      "key": "planned-construction-cost"
+    },
+    {
+      "key": "pollution-complaint-accepted-seven-typical"
+    },
+    {
+      "key": "pollution-complaint-processed-count"
+    },
+    {
+      "key": "post-offices"
+    },
+    {
+      "key": "prefectural-governor-election-turnout"
+    },
+    {
+      "key": "prefectural-income-growth-rate-h27"
+    },
+    {
+      "key": "private-auto-insurance-payment-count"
+    },
+    {
+      "key": "private-final-consumption-expenditure-nominal-h27"
+    },
+    {
+      "key": "private-final-consumption-expenditure-real-h27"
+    },
+    {
+      "key": "production-age-population"
+    },
+    {
+      "key": "projected-population-2020"
+    },
+    {
+      "key": "projected-population-2025"
+    },
+    {
+      "key": "projected-population-2030"
+    },
+    {
+      "key": "projected-population-2035"
+    },
+    {
+      "key": "projected-population-2040"
+    },
+    {
+      "key": "projected-population-2045"
+    },
+    {
+      "key": "projected-population-2050"
+    },
+    {
+      "key": "property-income-h27"
+    },
+    {
+      "key": "property-offense-arrested-count"
+    },
+    {
+      "key": "property-offense-arrested-person-count"
+    },
+    {
+      "key": "public-harm-complaint-handling-count"
+    },
+    {
+      "key": "public-telephones"
+    },
+    {
+      "key": "real-debt-service-ratio-municipal"
+    },
+    {
+      "key": "real-deficit-ratio-municipal"
+    },
+    {
+      "key": "rental-housing-units"
+    },
+    {
+      "key": "residential-zone"
+    },
+    {
+      "key": "restaurant-count-per-1000-alt"
+    },
+    {
+      "key": "restaurants-per"
+    },
+    {
+      "key": "retail-store-count-per-1000-alt"
+    },
+    {
+      "key": "road-traffic-accident-count"
+    },
+    {
+      "key": "road-traffic-law-violation-arrest-count"
+    },
+    {
+      "key": "run50m-grade5-female"
+    },
+    {
+      "key": "run50m-grade5-male"
+    },
+    {
+      "key": "run50m-grade8-female"
+    },
+    {
+      "key": "run50m-grade8-male"
+    },
+    {
+      "key": "secondary-industry-employed-people-count"
+    },
+    {
+      "key": "sewerage-drainage-area-population"
+    },
+    {
+      "key": "shipment-value-manufacturing"
+    },
+    {
+      "key": "shipment-value-manufacturing-1"
+    },
+    {
+      "key": "shipment-value-manufacturing-10"
+    },
+    {
+      "key": "shipment-value-manufacturing-11"
+    },
+    {
+      "key": "shipment-value-manufacturing-12"
+    },
+    {
+      "key": "shipment-value-manufacturing-13"
+    },
+    {
+      "key": "shipment-value-manufacturing-14"
+    },
+    {
+      "key": "shipment-value-manufacturing-15"
+    },
+    {
+      "key": "shipment-value-manufacturing-16"
+    },
+    {
+      "key": "shipment-value-manufacturing-17"
+    },
+    {
+      "key": "shipment-value-manufacturing-18"
+    },
+    {
+      "key": "shipment-value-manufacturing-19"
+    },
+    {
+      "key": "shipment-value-manufacturing-2"
+    },
+    {
+      "key": "shipment-value-manufacturing-20"
+    },
+    {
+      "key": "shipment-value-manufacturing-3"
+    },
+    {
+      "key": "shipment-value-manufacturing-4"
+    },
+    {
+      "key": "shipment-value-manufacturing-5"
+    },
+    {
+      "key": "shipment-value-manufacturing-6"
+    },
+    {
+      "key": "shipment-value-manufacturing-7"
+    },
+    {
+      "key": "shipment-value-manufacturing-8"
+    },
+    {
+      "key": "shipment-value-manufacturing-9"
+    },
+    {
+      "key": "shipment-value-manufacturing-beverage"
+    },
+    {
+      "key": "shipment-value-manufacturing-food"
+    },
+    {
+      "key": "shipment-value-manufacturing-textile"
+    },
+    {
+      "key": "sleep-avg-time-male-10plus"
+    },
+    {
+      "key": "sleep-avg-time-male-15plus"
+    },
+    {
+      "key": "sports-parks"
+    },
+    {
+      "key": "sports-parks-area"
+    },
+    {
+      "key": "ssdse-c-lb013002"
+    },
+    {
+      "key": "ssdse-c-lb014002"
+    },
+    {
+      "key": "ssdse-c-lb021104"
+    },
+    {
+      "key": "ssdse-c-lb024001"
+    },
+    {
+      "key": "ssdse-c-lb051303"
+    },
+    {
+      "key": "ssdse-c-lb052003"
+    },
+    {
+      "key": "ssdse-c-lb061011"
+    },
+    {
+      "key": "ssdse-c-lb072014"
+    },
+    {
+      "key": "ssdse-c-lb080012"
+    },
+    {
+      "key": "ssdse-c-lb091005"
+    },
+    {
+      "key": "ssdse-c-lb092004"
+    },
+    {
+      "key": "ssdse-c-lb103001"
+    },
+    {
+      "key": "ssdse-c-lb121107"
+    },
+    {
+      "key": "ssdse-c-lb121201"
+    },
+    {
+      "key": "ssdse-d-md03"
+    },
+    {
+      "key": "ssdse-d-md31"
+    },
+    {
+      "key": "ssdse-d-md33"
+    },
+    {
+      "key": "ssdse-d-mf0211"
+    },
+    {
+      "key": "ssdse-d-mg07"
+    },
+    {
+      "key": "ssdse-d-mg09"
+    },
+    {
+      "key": "ssdse-f-avg-temp-under-0"
+    },
+    {
+      "key": "ssdse-f-max-temp-avg"
+    },
+    {
+      "key": "ssdse-f-snow-depth-over-10"
+    },
+    {
+      "key": "ssdse-f-snow-depth-over-5"
+    },
+    {
+      "key": "ssdse-f-wind-over-10"
+    },
+    {
+      "key": "standard-financial-scale-municipal"
+    },
+    {
+      "key": "standing-long-jump-grade5-female"
+    },
+    {
+      "key": "standing-long-jump-grade8-female"
+    },
+    {
+      "key": "standing-long-jump-grade8-male"
+    },
+    {
+      "key": "statistical-discrepancy-nominal-h27"
+    },
+    {
+      "key": "stereo-cd-md-radio-ownership-multi-person-households-per-1000"
+    },
+    {
+      "key": "taxable-income"
+    },
+    {
+      "key": "tertiary-industry-employed-people-count"
+    },
+    {
+      "key": "total-housing-units"
+    },
+    {
+      "key": "total-overnight-guests-prefecture"
+    },
+    {
+      "key": "total-population-female"
+    },
+    {
+      "key": "total-population-male"
+    },
+    {
+      "key": "total-waste-generation-volume"
+    },
+    {
+      "key": "traffic-accident-casualties"
+    },
+    {
+      "key": "traffic-accident-casualties-elementary"
+    },
+    {
+      "key": "traffic-accident-death-count"
+    },
+    {
+      "key": "traffic-accident-injury-count"
+    },
+    {
+      "key": "tv-broadcast-contracts"
+    },
+    {
+      "key": "unemployed-people-count"
+    },
+    {
+      "key": "unemployment-measures-project-expenses-prefecture",
+      "since": "2026-08-05",
+      "reason": "値分布ゲート (VALUE-GATE-01): 失業対策事業は 1996 年廃止で 2007 年以降全年 0 で順位として成立しない"
+    },
+    {
+      "key": "unemployment-rate-man"
+    },
+    {
+      "key": "unemployment-rate-woman"
+    },
+    {
+      "key": "university-advancement"
+    },
+    {
+      "key": "university-graduates"
+    },
+    {
+      "key": "university-student-count"
+    },
+    {
+      "key": "university-teacher-count"
+    },
+    {
+      "key": "unmarried-ratio-female-20-24"
+    },
+    {
+      "key": "unmarried-ratio-male-20-24"
+    },
+    {
+      "key": "urban-green-area"
+    },
+    {
+      "key": "urbanization-control-area"
+    },
+    {
+      "key": "urbanization-promotion-area"
+    },
+    {
+      "key": "vacant-houses"
+    },
+    {
+      "key": "violence-incident-count"
+    },
+    {
+      "key": "violent-offense-arrested-count"
+    },
+    {
+      "key": "violent-offense-recognized-count"
+    },
+    {
+      "key": "voluntary-auto-insurance-contract-count"
+    },
+    {
+      "key": "wages-salaries-h27"
+    },
+    {
+      "key": "waste-generation-per-person-per-day"
+    },
+    {
+      "key": "waste-planned-collection-population"
+    },
+    {
+      "key": "waste-treatment-volume-total"
+    },
+    {
+      "key": "water-supply-population-municipal"
+    },
+    {
+      "key": "weight-grade5-male"
+    },
+    {
+      "key": "weight-grade8-female"
+    },
+    {
+      "key": "weight-grade8-male"
+    },
+    {
+      "key": "wind-power-generation-capacity"
+    },
+    {
+      "key": "wind-power-generation-number-of-units"
+    },
+    {
+      "key": "young-population"
+    }
+  ]
+}

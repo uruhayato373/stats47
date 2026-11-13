@@ -15,6 +15,11 @@
       "import": "./src/color-policy.ts",
       "require": "./src/color-policy.ts"
     },
+    "./metric-summary-display": {
+      "types": "./src/metric-summary-display.ts",
+      "import": "./src/metric-summary-display.ts",
+      "require": "./src/metric-summary-display.ts"
+    },
     "./registry": {
       "types": "./src/registry.ts",
       "import": "./src/registry.ts",
@@ -35,6 +40,11 @@
       "import": "./src/provenance/resolve-metric-provenance.ts",
       "require": "./src/provenance/resolve-metric-provenance.ts"
     },
+    "./survey-editorial": {
+      "types": "./src/survey-editorial.ts",
+      "import": "./src/survey-editorial.ts",
+      "require": "./src/survey-editorial.ts"
+    },
     "./source-name-to-survey": {
       "types": "./src/ssds/source-name-to-survey.ts",
       "import": "./src/ssds/source-name-to-survey.ts",
@@ -44,6 +54,11 @@
       "types": "./src/topics/index.ts",
       "import": "./src/topics/index.ts",
       "require": "./src/topics/index.ts"
+    },
+    "./category-keys": {
+      "types": "./src/category-keys.generated.ts",
+      "import": "./src/category-keys.generated.ts",
+      "require": "./src/category-keys.generated.ts"
     },
     "./categories": {
       "types": "./src/categories.ts",
@@ -144,10 +159,21 @@
       "types": "./src/content/external.ts",
       "import": "./src/content/external.ts",
       "require": "./src/content/external.ts"
+    },
+    "./ssds/entity-source": {
+      "types": "./src/ssds/entity-source.ts",
+      "import": "./src/ssds/entity-source.ts",
+      "require": "./src/ssds/entity-source.ts"
+    },
+    "./product-metric-keys": {
+      "types": "./src/product-metric-keys.ts",
+      "import": "./src/product-metric-keys.ts",
+      "require": "./src/product-metric-keys.ts"
     }
   },
   "scripts": {
     "build:registry": "tsx scripts/build-registry.ts",
+    "build:category-keys": "tsx scripts/build-category-keys.ts",
     "validate:years": "tsx scripts/validate-metric-years.ts",
     "validate:config": "tsx scripts/check-metric-contract.ts && tsx scripts/validate-metric-config.ts",
     "generate:catalog": "tsx scripts/generate-theme-catalog.ts",

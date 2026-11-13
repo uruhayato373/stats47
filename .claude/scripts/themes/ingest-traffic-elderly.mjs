@@ -71,7 +71,7 @@ for (const r of rows) {
   assert.equal(r['@unit'], '人');
   assert.match(r.$, /^\d+$/);
 }
-const prefs = require('./packages/area/src/data/prefectures.json');
+const prefs = require('./.claude/scripts/lib/prefectures.cjs').PREFECTURES;
 const historical = docs.values;
 assert.equal(historical.metricKey, key);
 assert.equal(historical.entityKind, 'prefecture');

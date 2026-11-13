@@ -3,12 +3,12 @@ import path from 'node:path';
 
 import { describe, expect, it } from 'vitest';
 
-import placements from '../../../../../config/ads/placements.json';
+import placements from '../../../../../data/ads/placements.json';
 import { AFFILIATE_ADS } from '../../../scripts/affiliate-ads-data';
 import { adSlotType } from '../ad-placements';
 
 /**
- * 広告の枠の台帳 (config/ads/placements.json) とコードの照合 (2026-10-29 新設。同日ランキングを載せて一般化)。
+ * 広告の枠の台帳 (data/ads/placements.json) とコードの照合 (2026-10-29 新設。同日ランキングを載せて一般化)。
  *
  * 台帳は「どの枠を、どのページの、どこに置くか」の正本。コードと別々に直すとずれるので、次をここで止める:
  *  (a) 置き方の目印 (marker) が、そのファイル (source) に台帳と同じ順である
@@ -23,9 +23,21 @@ const read = (rel: string) => readFileSync(path.join(ROOT, rel), 'utf8');
 type Placement = (typeof placements.pages)[keyof typeof placements.pages][number] & {
   knownAdjacentReason?: string;
   adsenseSlot?: string;
+  scopes?: string[];
   cells?: { kind: string; adsenseSlot?: string }[];
 };
 const PAGES = placements.pages as Record<string, Placement[]>;
+/**
+ * 1 つの実際のページとして見る単位。地域の単位 (scopes) を持つページの種類 (テーマ: 全国・県別・日本・市区町村。2026-11-12 オーナー決定で
+ * 1 つの種類にまとめた) は、単位ごとに別のページなので「種類@単位」に分ける。その単位で出る枠 (scopes が無いか、単位を含む) だけを入れる
+ */
+const SCOPED_PAGES: Record<string, Placement[]> = Object.fromEntries(
+  Object.entries(PAGES).flatMap(([page, entries]) => {
+    const scopes = [...new Set(entries.flatMap((e) => e.scopes ?? []))];
+    if (scopes.length === 0) return [[page, entries]];
+    return scopes.map((scope) => [`${page}@${scope}`, entries.filter((e) => !e.scopes || e.scopes.includes(scope))]);
+  }),
+);
 const SLOT_COMPONENTS = new Set(placements.slotTypes.map((slot) => slot.component));
 /** 広告を描く部品 (隣り合わせの判定で「内容」に数えない) */
 const AD_COMPONENTS = new Set([
@@ -49,7 +61,7 @@ function locate(list: Placement[]) {
   });
 }
 
-describe('広告の枠の台帳 (config/ads/placements.json)', () => {
+describe('広告の枠の台帳 (data/ads/placements.json)', () => {
   it('ページの置き方が指す枠の種類は台帳にある', () => {
     for (const [page, list] of Object.entries(PAGES)) {
       for (const placement of list) expect(() => adSlotType(placement.slot), `${page}: ${placement.slot}`).not.toThrow();
@@ -81,8 +93,8 @@ describe('広告の枠の台帳 (config/ads/placements.json)', () => {
     }
   });
 
-  it.each(Object.keys(PAGES))('%s: 続く枠の間に内容がある (隣り合わせは理由付きの例外だけ)', (page) => {
-    const located = locate(PAGES[page]);
+  it.each(Object.keys(SCOPED_PAGES))('%s: 続く枠の間に内容がある (隣り合わせは理由付きの例外だけ)', (page) => {
+    const located = locate(SCOPED_PAGES[page]);
     for (let i = 1; i < located.length; i++) {
       const prev = located[i - 1];
       const cur = located[i];
@@ -107,12 +119,9 @@ describe('広告の枠の台帳 (config/ads/placements.json)', () => {
     }
   });
 
-  it.each(Object.keys(PAGES))('%s: 本文の AdSense は上限まで (広告の段の AdSense の枠も数える)', (page) => {
-    const bodyAdsense =
-      PAGES[page].filter((p) => p.slot === 'adsense-body').length +
-      PAGES[page].flatMap((p) => p.cells ?? []).filter((cell) => cell.kind === 'adsense').length;
-    expect(bodyAdsense).toBeLessThanOrEqual(placements.rules.maxAdsenseBodyPerPage);
-  });
+  // 本文の AdSense の数の上限 (1 ページ 4 枠) は 2026-11-12 オーナー決定で撤廃した。手置きの数だけでは自動広告を含めた
+  // 実際の広告の量を表さないため。量はスマホの広告密度 (本文の高さに対する広告の高さ・自動広告込み。Better Ads Standards の
+  // 30%) を本番で測って判断する (backlog ADSENSE-FORMAT-EXPERIMENT-01)
 
   it('登録されている広告の大きさは、すべて台帳の大きさの語彙に載っている', () => {
     const vocabulary = new Map(placements.sizes.map((s) => [s.size, s]));
@@ -130,10 +139,9 @@ describe('広告の枠の台帳 (config/ads/placements.json)', () => {
   it('台帳の枠の部品を置いたファイルは、どれも台帳のページの置き方に載っている', () => {
     const sources = new Set(Object.values(PAGES).flat().map((p) => p.source));
     const componentFiles = /^apps\/web\/src\/(features\/ads\/components\/|lib\/google-adsense\/)/;
-    // 節を組み立てるだけのファイル。置き場所は台帳の {sections.inContentAffiliate} / {sections.nativeAffiliate} (RankingPageContentSections)
+    // 節を組み立てるだけのファイル。置き場所は台帳の {sections.adRowMid} / {sections.adRowFooter} / {sections.adRowEnd} (RankingPageContentSections)
     const sectionBuilders = new Set([
       'apps/web/src/features/ranking/components/RankingKeyPage/RankingPageClientShell.tsx',
-      'apps/web/src/features/ranking/components/RankingKeyPage/RankingPageNativeAffiliateSection.tsx',
     ]);
     const unlisted: string[] = [];
     const walk = (dir: string) => {
@@ -149,21 +157,56 @@ describe('広告の枠の台帳 (config/ads/placements.json)', () => {
       }
     };
     walk('apps/web/src');
-    expect(unlisted, '台帳の config/ads/placements.json の pages に載せる').toEqual([]);
+    expect(unlisted, '台帳の data/ads/placements.json の pages に載せる').toEqual([]);
   });
 
   // 2026-10-31 オーナー決定: AdSense は全て 300×250 の固定の大きさ。幅に合わせて伸びる広告は、同日の本番の実測で
-  // 最大 1200×600・積まれた右レールで 928×280・モバイルの関連コンテンツ型で 308×1503 まで広がっていた
-  it('AdSense の枠は全て 300×250 の固定の大きさ', () => {
+  // 最大 1200×600・積まれた右レールで 928×280・モバイルの関連コンテンツ型で 308×1503 まで広がっていた。
+  // 2026-11-12 オーナー決定の例外: ランキングの解説の後の 1 枠だけ幅いっぱい。広がりすぎないよう幅の上限を必ず持つ
+  const RESPONSIVE_ADSENSE_SLOT_IDS = new Set(['adsense-body-responsive']);
+  // 2026-11-12 オーナー決定の例外: 右レールの最後の追従する縦長。Google の追従広告の条件 (幅 300px 以下・PC だけ) に収める
+  const STICKY_RAIL_ADSENSE_SLOT_IDS = new Set(['adsense-rail-sticky']);
+  it('AdSense の枠は、例外の幅いっぱいの枠と追従する縦長を除いて 300×250 の固定の大きさ', () => {
     const adsense = placements.slotTypes.filter((slot) => slot.provider === 'adsense');
     expect(adsense.length).toBeGreaterThan(0);
-    for (const slot of adsense) expect(adSlotType(slot.id).box, slot.id).toEqual({ width: 300, height: 250 });
+    for (const slot of adsense) {
+      const box = adSlotType(slot.id).box;
+      if (RESPONSIVE_ADSENSE_SLOT_IDS.has(slot.id)) {
+        expect(box.width, slot.id).toBe('full');
+        expect(box.maxWidth, `${slot.id} は幅の上限を持つ`).toBeGreaterThan(0);
+        continue;
+      }
+      // 2026-11-12 オーナー決定の例外: 記事の一覧の中のインフィード広告。一覧の行の幅いっぱいで、大きさは AdSense が行に合わせて決める
+      if (slot.id === 'adsense-infeed') {
+        expect(box.width, slot.id).toBe('full');
+        expect(slot.accepts, slot.id).toEqual(['adsense:infeed']);
+        continue;
+      }
+      if (STICKY_RAIL_ADSENSE_SLOT_IDS.has(slot.id)) {
+        expect(box, slot.id).toEqual({ width: 300, height: 600 });
+        expect(adSlotType(slot.id).devices, `${slot.id} は PC だけ`).toEqual(['desktop']);
+        continue;
+      }
+      expect(box, slot.id).toEqual({ width: 300, height: 250 });
+    }
+  });
+
+  // 2026-11-13: 追従する広告は親の高さの中でしか動けない。PageShell の右レールに置く RailStack は、レールの列 (本文と同じ高さ) まで
+  // 伸ばさないと追従しない (分野のページで実測。ArticleShell は右レール自身が flex の列なので対象外)
+  it('PageShell の右レールで追従する広告を置くページは、RailStack を rail:h-full で伸ばす', () => {
+    const sources = [...new Set(Object.values(PAGES).flat().filter((p) => p.slot === 'adsense-rail-sticky').map((p) => p.source))];
+    expect(sources.length).toBeGreaterThan(0);
+    for (const source of sources) {
+      const code = read(source);
+      if (!/<PageShell[^>]*rightRail=/.test(code)) continue;
+      expect(code, source).toMatch(/<RailStack className="[^"]*rail:h-full/);
+    }
   });
 
   // 2026-11-03 オーナー決定: 全ページのモバイルの本文に AdSense を 1 枠以上出す (自動広告なしで再開したので、手置きが無いと 0 枠になる)。
   // 広告の段はモバイルで先頭の 1 枠だけが出るので、先頭が AdSense の段か、モバイルにも出す AdSense の枠を数える
-  it.each(Object.keys(PAGES))('%s: モバイルの本文に AdSense が 1 枠以上出る', (page) => {
-    const mobileAdsense = PAGES[page].filter((p) => {
+  it.each(Object.keys(SCOPED_PAGES))('%s: モバイルの本文に AdSense が 1 枠以上出る', (page) => {
+    const mobileAdsense = SCOPED_PAGES[page].filter((p) => {
       if (p.region !== 'body') return false;
       const type = adSlotType(p.slot);
       const devices = (p as { devices?: readonly string[] }).devices ?? type.devices;
@@ -181,13 +224,13 @@ describe('広告の枠の台帳 (config/ads/placements.json)', () => {
       expect(read(rel), rel).toContain('RAIL_AD_BESIDE_BODY_ONLY_CLASS');
     }
     expect(read('apps/web/src/features/ads/constants/manual-ad-policy.ts')).toContain(
-      'export const RAIL_AD_BESIDE_BODY_ONLY_CLASS = "hidden @min-[988px]/shell:block"',
+      'export const RAIL_AD_BESIDE_BODY_ONLY_CLASS = "hidden rail:block"',
     );
   });
 
   // 2026-11-03: 広告の段は枠ごとに別の AdSense ユニットを使う (同じユニットを 1 ページで重ねない。ADSENSE-SLOT-DEDUPE-01)
-  it.each(Object.keys(PAGES))('%s: 同じ AdSense のユニットを 1 ページで重ねない', (page) => {
-    const units = PAGES[page].flatMap((p) => [p.adsenseSlot, ...(p.cells ?? []).map((cell) => cell.adsenseSlot)]).filter(Boolean);
+  it.each(Object.keys(SCOPED_PAGES))('%s: 同じ AdSense のユニットを 1 ページで重ねない', (page) => {
+    const units = SCOPED_PAGES[page].flatMap((p) => [p.adsenseSlot, ...(p.cells ?? []).map((cell) => cell.adsenseSlot)]).filter(Boolean);
     expect(new Set(units).size, units.join(', ')).toBe(units.length);
   });
 });

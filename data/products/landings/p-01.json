@@ -1,0 +1,513 @@
+{
+  "productId": "P-01",
+  "articleKey": "prefecture-population-household-pack",
+  "displayTitle": "都道府県別 人口・世帯データ",
+  "description": "人口の規模、年齢構成、世帯の違いを比較し、地域の現状を説明する資料を作れます。",
+  "useCases": [
+    {
+      "title": "地域計画の現状整理に",
+      "description": "自県と近隣県の人口や高齢化の状況を並べ、計画の冒頭で地域の特徴を説明できます。"
+    },
+    {
+      "title": "営業エリアの基礎資料に",
+      "description": "人口と世帯数を比べ、地域ごとの市場規模を検討するための基礎表を作れます。"
+    },
+    {
+      "title": "会議や研修の説明資料に",
+      "description": "表だけでは伝わりにくい人口の集中や年齢構成の違いを、地図とランキングで示せます。"
+    }
+  ],
+  "examples": [
+    {
+      "id": "population-scale",
+      "heading": "人口の規模を比べる",
+      "lead": "総人口を棒グラフで比較すると、自県が全国の中でどの程度の規模かを説明できます。営業エリアや行政サービスの対象規模を整理する資料に使えます。",
+      "metricKeys": [
+        "total-population"
+      ],
+      "preferredTemplate": "bar"
+    },
+    {
+      "id": "aging-distribution",
+      "heading": "高齢化の地域差を地図で見る",
+      "lead": "65歳以上人口の割合で地図を色分けし、高齢化の進み方が似ている地域を探せます。人数の多さと割合の高さを分けて説明するための図です。",
+      "metricKeys": [
+        "ratio-65-plus"
+      ],
+      "preferredTemplate": "choropleth"
+    },
+    {
+      "id": "household-scale",
+      "heading": "世帯を単位に地域を比べる",
+      "lead": "一般世帯数を並べ、住宅や世帯向けサービスの対象規模を整理できます。人口と世帯数では比較の単位が異なることも、資料で示せます。",
+      "metricKeys": [
+        "general-households"
+      ],
+      "preferredTemplate": "bar"
+    }
+  ],
+  "purchaseNotes": [
+    "収録版の値を固定した商品です。人口・世帯などの指標は基準年が異なる場合があるため、比較前に各表の年次を確認してください。",
+    "都道府県単位の比較用です。市区町村別・町丁目別の商圏や世帯を直接調べるデータではありません。"
+  ],
+  "analysisRevision": {
+    "version": "analysis-20261112",
+    "title": "人口・世帯の変化を読むデータ集",
+    "description": "人口と世帯数の推移、1世帯あたりの人数、単身世帯の割合を組み合わせ、全国の市区町村の分布と身近な地域の変化を地図・グラフで説明できます。",
+    "useCases": [
+      {
+        "title": "人口ビジョンの現状整理に",
+        "description": "人口と一般世帯数の推移を同じ基準年で比較し、地域の変化を説明できます。"
+      },
+      {
+        "title": "福祉・住宅計画の基礎資料に",
+        "description": "単独世帯と高齢単独世帯の割合を、同じ分母・同じ国勢調査年で比較できます。"
+      },
+      {
+        "title": "県内の地域差を調べるときに",
+        "description": "市町村合併を調整した人口増減率と単身世帯の割合を地図にし、県全体の平均では見えない違いを説明できます。"
+      }
+    ],
+    "sources": [
+      {
+        "id": "prefecture-census",
+        "grain": "prefecture",
+        "years": [
+          2000,
+          2005,
+          2010,
+          2015,
+          2020
+        ],
+        "definition": "社会・人口統計体系の国勢調査年。一般世帯と施設等の世帯を区別し、割合の分母には一般世帯数を使う。",
+        "boundary": "都道府県47地域。全国集計を除外。",
+        "title": "人口・世帯（都道府県）",
+        "inputs": [
+          {
+            "metricKey": "total-population"
+          },
+          {
+            "metricKey": "general-households",
+            "variantId": "general-households-prefecture"
+          },
+          {
+            "metricKey": "general-household-members",
+            "variantId": "general-household-members-prefecture"
+          },
+          {
+            "metricKey": "single-person-households"
+          },
+          {
+            "metricKey": "elderly-single-households",
+            "variantId": "elderly-single-households-prefecture"
+          },
+          {
+            "metricKey": "elderly-couple-households",
+            "variantId": "elderly-couple-households-prefecture"
+          }
+        ]
+      },
+      {
+        "id": "municipality-census",
+        "grain": "municipality",
+        "years": [
+          2000,
+          2005,
+          2010,
+          2015,
+          2020
+        ],
+        "definition": "社会・人口統計体系の市区町村データ（廃置分合処理済）。同じ境域に調整された国勢調査年の値。",
+        "boundary": "取得表の境域（メタ情報では2025年3月31日現在）。指定都市は市単位、東京都は特別区単位。政令市区と特別区部の集計行を除外。",
+        "title": "人口・世帯（市区町村）",
+        "inputs": [
+          {
+            "metricKey": "total-population"
+          },
+          {
+            "metricKey": "general-households",
+            "variantId": "general-households-municipality"
+          },
+          {
+            "metricKey": "general-household-members"
+          },
+          {
+            "metricKey": "single-person-households"
+          },
+          {
+            "metricKey": "elderly-single-households"
+          },
+          {
+            "metricKey": "elderly-couple-households"
+          }
+        ]
+      },
+      {
+        "id": "prefecture-flows",
+        "grain": "prefecture",
+        "years": [
+          2015,
+          2016,
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023
+        ],
+        "definition": "出生・死亡は日本人、転入・転出は日本人の国内移動。いずれも1月1日〜12月31日。",
+        "boundary": "都道府県47地域。国外移動・外国人移動は含めず、国勢調査人口差の分解とはしない。",
+        "title": "出生・死亡・国内移動（都道府県、日本人）",
+        "inputs": [
+          {
+            "metricKey": "births"
+          },
+          {
+            "metricKey": "death-count"
+          },
+          {
+            "metricKey": "japanese-movers-in"
+          },
+          {
+            "metricKey": "japanese-movers-out"
+          }
+        ]
+      }
+    ],
+    "research": {
+      "method": "政府白書・統計定義・推計報告書の原典確認。NotebookLMは接続時CSRF取得エラーのため利用せず、原典に直接戻って論点を確認した。",
+      "references": [
+        {
+          "id": "aging-households",
+          "title": "令和8年版高齢社会白書",
+          "url": "https://www8.cao.go.jp/kourei/whitepaper/w-2026/html/zenbun/s1_1_3.html",
+          "section": "第1章第1節3 家族と世帯",
+          "finding": "高齢者のいる世帯の構造と一人暮らしの推移を分けて扱う。白書の国民生活基礎調査の値を国勢調査の世帯値と混合せず、分析の視点を採用する。",
+          "checkedAt": "2026-11-12"
+        },
+        {
+          "id": "household-projections",
+          "title": "日本の世帯数の将来推計（都道府県別推計）令和6年推計",
+          "url": "https://www.ipss.go.jp/pp-pjsetai/j/hpjp2024/t-page.asp",
+          "section": "家族類型別推計・よくあるご質問",
+          "finding": "人口と世帯の動き、世帯の家族類型を分けて検討する。今回は実績の比較に絞り、将来推計の値を実績線につなげない。",
+          "checkedAt": "2026-11-12"
+        },
+        {
+          "id": "ssds-definitions",
+          "title": "社会・人口統計体系の項目定義 A 人口・世帯",
+          "url": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/A",
+          "section": "A1101、A4101、A4200、A5101、A5102、A710101、A810105、A8301",
+          "finding": "総世帯数と一般世帯数、日本人の自然増減と国内移動を区別する。国籍・期間・分母を揃える。",
+          "checkedAt": "2026-11-12"
+        },
+        {
+          "id": "municipal-boundaries",
+          "title": "社会・人口統計体系 市区町村データ 基礎データ（廃置分合処理済）",
+          "url": "https://www.e-stat.go.jp/dbview?sid=0000020201",
+          "section": "統計表のメタ情報・説明",
+          "finding": "市町村合併等を調整した系列を用い、指定都市と行政区を重複して集計しない。",
+          "checkedAt": "2026-11-12"
+        }
+      ]
+    },
+    "recipes": [
+      {
+        "id": "national-municipality-change",
+        "heading": "人口が増えた地域・減った地域を全国で見る",
+        "lead": "2000〜2020年の人口増減率を全国の市区町村で塗り分けます。都道府県の平均では見えない、都市周辺とそれ以外の地域の違いを確認できます。",
+        "sourceId": "municipality-census",
+        "metricIds": [
+          "total-population"
+        ],
+        "method": "change",
+        "from": 2000,
+        "to": 2020,
+        "template": "choropleth",
+        "references": [
+          "municipal-boundaries",
+          "ssds-definitions"
+        ],
+        "limitation": "市町村合併を調整した系列を使用し、政令指定都市は市単位、東京都の特別区は区単位で比較します。基準年が0・欠測の場合は算出せず、離島は別位置に表示します。",
+        "presentationMetricKey": "population-growth-rate",
+        "chartTitle": "全国の市区町村別 人口増減率",
+        "scopeLabel": "全国の市町村・特別区",
+        "within": {
+          "kind": "nation"
+        }
+      },
+      {
+        "id": "municipality-change",
+        "heading": "県内の人口変化を詳しく見る",
+        "lead": "2000〜2020年の人口増減率を、高知県内の市町村ごとに塗り分けます。減少の大きい地域がどこにあるかを、位置関係とともに確認できます。",
+        "sourceId": "municipality-census",
+        "metricIds": [
+          "total-population"
+        ],
+        "method": "change",
+        "from": 2000,
+        "to": 2020,
+        "template": "choropleth",
+        "references": [
+          "municipal-boundaries",
+          "ssds-definitions"
+        ],
+        "limitation": "市町村の境界は取得表に合わせて調整されています。基準年が0・欠測の自治体は増減率を算出しません。",
+        "presentationMetricKey": "population-growth-rate",
+        "chartTitle": "高知県の市町村別 人口増減率",
+        "scopeLabel": "高知県内の市町村",
+        "within": {
+          "kind": "prefecture",
+          "prefCode": "39"
+        }
+      },
+      {
+        "id": "population-household-trend",
+        "heading": "人口と世帯数の動きの違いを見る",
+        "lead": "2000年を100とした指数で、人数と世帯数の増減の方向を比較します。見本は高知県です。",
+        "sourceId": "prefecture-census",
+        "metricIds": [
+          "total-population",
+          "general-households"
+        ],
+        "method": "index",
+        "areaCode": "39000",
+        "template": "line",
+        "references": [
+          "household-projections",
+          "ssds-definitions"
+        ],
+        "limitation": "指数は規模の大小を示しません。世帯数だけから住宅需要の増減を断定できません。"
+      },
+      {
+        "id": "municipal-household-size-trend",
+        "heading": "1世帯あたりの人数がどう変わったかを見る",
+        "lead": "高知市・いの町・黒潮町を例に、一般世帯人員を一般世帯数で割った値を比較します。人口の減少と世帯の小規模化を分けて、住宅・福祉計画の基礎資料にできます。",
+        "sourceId": "municipality-census",
+        "metricIds": [
+          "general-household-members"
+        ],
+        "denominatorId": "general-households",
+        "method": "ratio",
+        "scale": 1,
+        "unit": "人/世帯",
+        "areaCodes": [
+          "39201",
+          "39386",
+          "39428"
+        ],
+        "template": "line",
+        "references": [
+          "household-projections",
+          "ssds-definitions",
+          "municipal-boundaries"
+        ],
+        "limitation": "一般世帯の平均です。施設等の世帯は含まず、個別の世帯構成や必要な住宅戸数を直接示しません。",
+        "chartTitle": "一般世帯の1世帯あたり人員",
+        "scopeLabel": "高知市・いの町・黒潮町"
+      },
+      {
+        "id": "single-household-trend",
+        "heading": "単身世帯の変化を確認する",
+        "lead": "一般世帯数を分母に、単独世帯と65歳以上の単独世帯の割合を比較します。見本は高知県です。",
+        "sourceId": "prefecture-census",
+        "metricIds": [
+          "single-person-households",
+          "elderly-single-households"
+        ],
+        "denominatorId": "general-households",
+        "method": "share",
+        "areaCode": "39000",
+        "template": "line",
+        "references": [
+          "aging-households",
+          "ssds-definitions"
+        ],
+        "limitation": "高齢単独世帯は単独世帯の内数です。2つの割合を合計しません。"
+      },
+      {
+        "id": "municipal-single-household-map",
+        "heading": "単身世帯の割合を地図で比べる",
+        "lead": "同じ2020年の一般世帯数を分母に、単独世帯の割合を市町村ごとに比較します。人口増減率の地図と見比べることで、人口規模と世帯構成の違いを整理できます。",
+        "sourceId": "municipality-census",
+        "metricIds": [
+          "single-person-households"
+        ],
+        "denominatorId": "general-households",
+        "method": "share",
+        "year": 2020,
+        "template": "choropleth",
+        "references": [
+          "aging-households",
+          "ssds-definitions",
+          "municipal-boundaries"
+        ],
+        "limitation": "単独世帯は1人で暮らす一般世帯です。高齢者だけの割合ではなく、単身であることから支援の必要性は判断できません。",
+        "presentationMetricKey": "single-person-households",
+        "chartTitle": "一般世帯に占める単独世帯の割合",
+        "scopeLabel": "高知県内の市町村",
+        "within": {
+          "kind": "prefecture",
+          "prefCode": "39"
+        }
+      },
+      {
+        "id": "population-flow-trend",
+        "heading": "自然増減と国内移動を分けて見る",
+        "lead": "日本人について、出生数と死亡数の差、国内の転入者と転出者の差を比べます。見本は高知県です。",
+        "sourceId": "prefecture-flows",
+        "metricIds": [
+          "births",
+          "death-count",
+          "japanese-movers-in",
+          "japanese-movers-out"
+        ],
+        "method": "balance",
+        "areaCode": "39000",
+        "balances": [
+          {
+            "id": "natural",
+            "label": "自然増減（日本人）",
+            "positiveId": "births",
+            "negativeId": "death-count"
+          },
+          {
+            "id": "domestic",
+            "label": "国内転入超過（日本人）",
+            "positiveId": "japanese-movers-in",
+            "negativeId": "japanese-movers-out"
+          }
+        ],
+        "template": "line",
+        "references": [
+          "ssds-definitions"
+        ],
+        "limitation": "国外移動・外国人を含まず、社会増減全体や国勢調査人口の増減を説明する分解ではありません。"
+      }
+    ],
+    "notes": [
+      "国勢調査の人口・世帯と、日本人の暦年動態を別系列で収録しています。外国人を含む人口差の完全な分解には使えません。",
+      "市区町村は2025年3月31日の境域に揃えた原典表を使用しています。欠測・秘匿・実値0を区別してください。"
+    ]
+  },
+  "analysisPlan": {
+    "objective": "人口と世帯の変化、単身化、自然増減と国内移動を区別し、県内の市町村差まで説明する。採用・調査対象は改訂設計であり、販売中の固定納品への追加を示しません。",
+    "inputs": [
+      {
+        "metricKey": "total-population",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "国勢調査年・一般世帯の定義・境域を揃えた既存改訂分析に接続する。"
+      },
+      {
+        "metricKey": "ratio-65-plus",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "general-households",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "国勢調査年・一般世帯の定義・境域を揃えた既存改訂分析に接続する。",
+        "variantId": "general-households-prefecture"
+      },
+      {
+        "metricKey": "total-population",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "国勢調査年・一般世帯の定義・境域を揃えた既存改訂分析に接続する。"
+      },
+      {
+        "metricKey": "general-households",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "国勢調査年・一般世帯の定義・境域を揃えた既存改訂分析に接続する。",
+        "variantId": "general-households-municipality"
+      },
+      {
+        "metricKey": "general-household-members",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "国勢調査年・一般世帯の定義・境域を揃えた既存改訂分析に接続する。",
+        "variantId": "general-household-members-prefecture"
+      },
+      {
+        "metricKey": "general-household-members",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "国勢調査年・一般世帯の定義・境域を揃えた既存改訂分析に接続する。"
+      },
+      {
+        "metricKey": "single-person-households",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "国勢調査年・一般世帯の定義・境域を揃えた既存改訂分析に接続する。"
+      },
+      {
+        "metricKey": "single-person-households",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "国勢調査年・一般世帯の定義・境域を揃えた既存改訂分析に接続する。"
+      },
+      {
+        "metricKey": "elderly-single-households",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "国勢調査年・一般世帯の定義・境域を揃えた既存改訂分析に接続する。",
+        "variantId": "elderly-single-households-prefecture"
+      },
+      {
+        "metricKey": "elderly-single-households",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "国勢調査年・一般世帯の定義・境域を揃えた既存改訂分析に接続する。"
+      },
+      {
+        "metricKey": "elderly-couple-households",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "国勢調査年・一般世帯の定義・境域を揃えた既存改訂分析に接続する。",
+        "variantId": "elderly-couple-households-prefecture"
+      },
+      {
+        "metricKey": "elderly-couple-households",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "国勢調査年・一般世帯の定義・境域を揃えた既存改訂分析に接続する。"
+      },
+      {
+        "metricKey": "births",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "日本人の暦年動態として自然増減と国内移動を別々に比較する。"
+      },
+      {
+        "metricKey": "death-count",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "日本人の暦年動態として自然増減と国内移動を別々に比較する。"
+      },
+      {
+        "metricKey": "japanese-movers-in",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "日本人の暦年動態として自然増減と国内移動を別々に比較する。"
+      },
+      {
+        "metricKey": "japanese-movers-out",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "日本人の暦年動態として自然増減と国内移動を別々に比較する。"
+      }
+    ],
+    "analysisRefs": [],
+    "figureRefs": [],
+    "reuseProducts": [],
+    "limitations": [
+      "人口・一般世帯・日本人の人口動態は対象と時点が異なる。国勢調査人口差を日本人の国内移動だけで分解しない。",
+      "市町村合併を調整した同じ境域を使い、指定都市と行政区を重複集計しない。"
+    ]
+  }
+}

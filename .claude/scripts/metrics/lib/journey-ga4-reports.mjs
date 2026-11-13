@@ -122,6 +122,22 @@ const eventIn = (names) => ({ filter: { fieldName: 'eventName', inListFilter: { 
 export const KEY_EVENT_NAMES = ['affiliate_click', 'contact_click', 'cta_click', 'file_download', 'product_click'];
 
 export const MEASUREMENT_REPORTS = Object.freeze({
+  // RELATED-ARTICLES-BASELINE-01: 同じ記事・ページ・端末・表示形式の分子/分母を保存する。
+  'related-articles': {
+    columns: ['date', 'pagePath', 'deviceCategory', 'eventName', 'nav_surface', 'nav_label', 'card_variant', 'eventCount'],
+    request: (period) => ({
+      dateRanges: range(period),
+      dimensions: ['date', 'pagePath', 'deviceCategory', 'eventName', 'customEvent:nav_surface', 'customEvent:nav_label', 'customEvent:card_variant'].map((name) => ({ name })),
+      metrics: [{ name: 'eventCount' }],
+      dimensionFilter: japanAnd(
+        eventIn(['nav_impression', 'nav_click']),
+        { filter: { fieldName: 'customEvent:nav_surface', inListFilter: { values: ['area_blog', 'ranking_blog', 'theme_blog', 'municipality_related'] } } },
+        { filter: { fieldName: 'customEvent:card_variant', stringFilter: { matchType: 'BEGINS_WITH', value: 'related-articles-' } } },
+      ),
+    }),
+    dims: ['date', 'pagePath', 'deviceCategory', 'eventName', 'customEvent:nav_surface', 'customEvent:nav_label', 'customEvent:card_variant'],
+    metrics: ['eventCount'],
+  },
   'content-group': {
     columns: ['contentGroup', 'sessionDefaultChannelGroup', 'deviceCategory', 'screenPageViews', 'engagedSessions', 'keyEvents'],
     request: (period) => ({
@@ -206,16 +222,16 @@ export const MEASUREMENT_REPORTS = Object.freeze({
     metrics: ['sessions', 'engagedSessions', 'screenPageViews'],
   },
   // PRODUCT-REFERRAL-MEASURE-01 (2026-11-03): 商品案内の表示と販売先クリックを、販売先・販売先の商品 ID・置き場所別に。
-  // product_destination / product_id は登録待ちの custom dimension。登録前の週はこのレポートが error になり、判定不能として扱う。
+  // cta_id は商品詳細内の上部・末尾、link_position は詳細へ来る前の流入元。既存の登録済み dimension を使う。
   'product-referrals': {
-    columns: ['eventName', 'product_destination', 'product_id', 'link_position', 'eventCount'],
+    columns: ['eventName', 'product_destination', 'product_id', 'link_position', 'cta_id', 'eventCount'],
     request: (period) => ({
       dateRanges: range(period),
-      dimensions: ['eventName', 'customEvent:product_destination', 'customEvent:product_id', 'customEvent:link_position'].map((name) => ({ name })),
+      dimensions: ['eventName', 'customEvent:product_destination', 'customEvent:product_id', 'customEvent:link_position', 'customEvent:cta_id'].map((name) => ({ name })),
       metrics: [{ name: 'eventCount' }],
       dimensionFilter: japanAnd(eventIn(['product_impression', 'product_click'])),
     }),
-    dims: ['eventName', 'customEvent:product_destination', 'customEvent:product_id', 'customEvent:link_position'],
+    dims: ['eventName', 'customEvent:product_destination', 'customEvent:product_id', 'customEvent:link_position', 'customEvent:cta_id'],
     metrics: ['eventCount'],
   },
   // 逆向き: 自分の商品 (Kindle の本・note の記事本文) からサイトへ戻ったセッション。UTM の規約は config/inbound-utm.mjs。

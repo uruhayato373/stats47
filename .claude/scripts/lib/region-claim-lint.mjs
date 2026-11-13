@@ -29,6 +29,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { PREF_NAMES, normalizePref } from './article-factual-check.mjs';
+import { datasetPath } from '../../../config/datasets.mjs';
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
 
@@ -51,7 +52,7 @@ const SEA_OF_JAPAN = ['北海道', '青森', '秋田', '山形', '新潟', '富�
 /** regions.ts の 7 区分を読む。名前の表は prefectures.json */
 export function loadRegionTable(root = PROJECT_ROOT) {
   const source = fs.readFileSync(path.join(root, 'packages/area/src/constants/regions.ts'), 'utf8');
-  const prefectures = JSON.parse(fs.readFileSync(path.join(root, 'packages/area/src/data/prefectures.json'), 'utf8'));
+  const prefectures = JSON.parse(fs.readFileSync(path.join(root, datasetPath('areas.prefectures')), 'utf8'));
   const nameOf = new Map(prefectures.map((p) => [p.prefCode, normalizePref(p.prefName)]));
   const regions = {};
   for (const m of source.matchAll(/regionName:\s*"([^"]+)",\s*prefectures:\s*\[([^\]]+)\]/g)) {

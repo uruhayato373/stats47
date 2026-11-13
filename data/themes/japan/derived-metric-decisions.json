@@ -1,0 +1,159 @@
+{
+  "decisions": [
+    {
+      "metricKey": "port-count",
+      "themeKey": "ports",
+      "verdict": "adopted",
+      "availability": {
+        "status": "derived-additive",
+        "recipeKey": "sum-complete-prefecture-series-v1"
+      },
+      "sourceMetricKey": "port-count",
+      "observedAt": "2026-09-06",
+      "evidence": [
+        "港湾調査規則2025年1月1日施行版の別表。全港湾ではなく甲種163港・乙種501港の調査対象664港",
+        "40県の指定港と未掲載7県の0で47県。共同港の境港は国交省みなと一覧の鳥取県欄に従い一度だけ計上",
+        "固定原典SHA・施行日・甲乙別合計・全国保存則を検証し、旧2024年699港と接続しない"
+      ]
+    },
+    {
+      "metricKey": "fishing-port-count",
+      "themeKey": "fishery-marine",
+      "verdict": "rejected",
+      "availability": {
+        "status": "unsupported",
+        "reason": "同一C09/06の現行KSJ系列と全国合計が不一致で、旧系列を全国値の入力に固定できない"
+      },
+      "observedAt": "2026-08-28",
+      "evidence": [
+        "configはC09/06、配信47行合計2896港",
+        "同じconfigHashのfishing-port-count-ksjは2931港",
+        "現行KSJ生成器の採用keyはfishing-port-count-ksj"
+      ]
+    },
+    {
+      "metricKey": "fishing-port-count-ksj",
+      "themeKey": "fishery-marine",
+      "verdict": "adopted",
+      "availability": {
+        "status": "derived-additive",
+        "recipeKey": "sum-complete-prefecture-series-v1"
+      },
+      "sourceMetricKey": "fishing-port-count-ksj",
+      "observedAt": "2026-09-05",
+      "evidence": [
+        "水産庁2026年4月1日現在の指定漁港全数表（PDL1.0）へ入力を移行",
+        "新版stagingは40県掲載と未掲載7県の0補完で47県・合計2768港。滋賀20港を含む",
+        "official-counts生成器が版SHA・各行内訳・全国15列の保存則を検証し旧年を混在させない"
+      ]
+    },
+    {
+      "metricKey": "laspeyres-index-prefecture",
+      "themeKey": "local-finance",
+      "verdict": "rejected",
+      "availability": {
+        "status": "unsupported",
+        "reason": "都道府県ラスパイレス指数は加算不能で、全国値を再計算する給与ウェイトがない"
+      },
+      "observedAt": "2026-08-28",
+      "evidence": [
+        "config単位は指数",
+        "配信値は47都道府県別指数のみ",
+        "source configに全国分子・全国分母・ウェイト宣言がない"
+      ]
+    },
+    {
+      "metricKey": "railway-passengers",
+      "themeKey": "railway",
+      "verdict": "adopted",
+      "availability": {
+        "status": "derived-additive",
+        "recipeKey": "sum-complete-prefecture-series-v1"
+      },
+      "sourceMetricKey": "railway-passengers",
+      "observedAt": "2026-08-28",
+      "evidence": [
+        "KSJ S12はcoverage=national",
+        "configは登録駅の1日乗降客数を県内合計する実数",
+        "2019-2023各年が47県・有限47行"
+      ]
+    },
+    {
+      "metricKey": "railway-station-count",
+      "themeKey": "railway",
+      "verdict": "adopted",
+      "availability": {
+        "status": "derived-additive",
+        "recipeKey": "sum-complete-prefecture-series-v1"
+      },
+      "sourceMetricKey": "railway-station-count",
+      "observedAt": "2026-08-28",
+      "evidence": [
+        "KSJ N02/24はcoverage=national",
+        "配信2024年は47県・有限47行・合計10235駅",
+        "KSJ生成器は県帰属未解決が1件でもあれば書かない"
+      ]
+    },
+    {
+      "metricKey": "real-disposable-income",
+      "themeKey": "real-income",
+      "verdict": "rejected",
+      "availability": {
+        "status": "unsupported",
+        "reason": "全国の物価地域差指数系列がなく、同一年の分母をartifactとして検証できない"
+      },
+      "observedAt": "2026-08-28",
+      "evidence": [
+        "config式は可処分所得÷物価地域差指数×100",
+        "全国可処分所得artifactは存在",
+        "consumer-price-difference-index-overallの全国artifactは404"
+      ]
+    },
+    {
+      "metricKey": "disposable-income-after-rent",
+      "themeKey": "real-income",
+      "verdict": "rejected",
+      "availability": {
+        "status": "unsupported",
+        "reason": "家賃側が県庁所在市の世帯値で、全国可処分所得と同じ母集団の分母系列がない"
+      },
+      "observedAt": "2026-08-28",
+      "evidence": [
+        "config式は月額可処分所得−年間民営家賃÷12",
+        "家賃系列はkakei-capital-city remap",
+        "private-rent-consumption-expenditureの全国artifactは404"
+      ]
+    },
+    {
+      "metricKey": "private-rent-consumption-expenditure",
+      "themeKey": "real-income",
+      "verdict": "rejected",
+      "availability": {
+        "status": "unsupported",
+        "reason": "県庁所在市の二人以上世帯1世帯当たり額であり、47値の合計は全国値にならない"
+      },
+      "observedAt": "2026-08-28",
+      "evidence": [
+        "subtitleは県庁所在市の二人以上世帯",
+        "recipeはareaRemap=kakei-capital-city",
+        "配信は47県相当行だが世帯数ウェイトを持たない"
+      ]
+    },
+    {
+      "metricKey": "roadside-station-count",
+      "themeKey": "roads",
+      "verdict": "adopted",
+      "availability": {
+        "status": "derived-additive",
+        "recipeKey": "sum-complete-prefecture-series-v1"
+      },
+      "sourceMetricKey": "roadside-station-count",
+      "observedAt": "2026-09-05",
+      "evidence": [
+        "国土交通省2026年9月4日現在の登録一覧（PDL1.0）へ入力を移行",
+        "新版stagingは47県・有限47行・合計1234か所。公表一覧の登録駅数と一致",
+        "official-counts生成器が版SHA・行の一意性・県集合・全国合計を検証し旧年を混在させない"
+      ]
+    }
+  ]
+}

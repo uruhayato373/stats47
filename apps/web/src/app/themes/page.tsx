@@ -1,13 +1,14 @@
+import { Fragment } from 'react';
+
 import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
 import { StatisticsScopeNav } from '@/components/navigation';
 import { SurfaceLinkCard } from '@/components/surface';
 
-import { AdRow, composeAdRows } from '@/features/ads';
-import { resolveGenericAffiliateBanners } from '@/features/ads/server';
+import { AdRow, composeAdRows, InFeedAdSlot } from '@/features/ads';
 import { themeHref } from '@/features/theme-dashboard/config/theme-urls';
 import { ALL_THEMES } from '@/features/theme-dashboard/listing.server';
 
-import { CONTENT_FOOTER, HUB_INCONTENT } from '@/lib/google-adsense';
+import { CONTENT_FOOTER, THEMES_INDEX_INFEED_1, THEMES_INDEX_INFEED_2 } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
 import { DEFAULT_OGP_IMAGE_PATH } from '@/config/site';
@@ -26,14 +27,17 @@ export function generateMetadata(): Metadata {
   };
 }
 
+/** インフィード広告を入れる位置 (何件目の後か)。スマホで約 3,100px と約 5,900px */
+const THEMES_INDEX_INFEED_AFTER = [20, 40] as const;
+
 export default async function ThemesPage() {
   const totalRankings = ALL_THEMES.reduce(
     (acc, t) => acc + t.rankingKeys.length,
     0
   );
 
-  // 広告の段 (2026-11-03 オーナー決定): ページの最後に AdSense と PR を並べる (旧: デスクトップだけのページ末の AdSense。モバイルは 0 枠だった)
-  const [indexRow] = composeAdRows([['adsense', 'affiliate', 'adsense']], [CONTENT_FOOTER, HUB_INCONTENT], await resolveGenericAffiliateBanners(1).catch(() => []));
+  // 広告の段: ページの最後に AdSense 1 つを本文の幅いっぱい (上限 580px) に出す (2026-11-12 オーナー決定でアフィリエイトを止め、PR を外した)
+  const [indexRow] = composeAdRows([['adsense']], [CONTENT_FOOTER], []);
   return (
     <PageShell>
       <Breadcrumbs
@@ -48,9 +52,9 @@ export default async function ThemesPage() {
       />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {ALL_THEMES.map((theme) => (
+        {ALL_THEMES.map((theme, index) => (
+          <Fragment key={theme.themeKey}>
           <SurfaceLinkCard
-            key={theme.themeKey}
             href={themeHref(theme.themeKey)}
             className="block"
           >
@@ -64,16 +68,19 @@ export default async function ThemesPage() {
               {theme.rankingKeys.length} 指標
             </p>
           </SurfaceLinkCard>
+          {/* 一覧が 1 列のとき (スマホ) 20 件目と 40 件目の後にインフィード広告 (2026-11-13 オーナー決定。一覧は約 8,000px 続く) */}
+          {index + 1 === THEMES_INDEX_INFEED_AFTER[0] && index + 1 < ALL_THEMES.length && (
+            <div className="sm:hidden"><InFeedAdSlot slot={THEMES_INDEX_INFEED_1} /></div>
+          )}
+          {index + 1 === THEMES_INDEX_INFEED_AFTER[1] && index + 1 < ALL_THEMES.length && (
+            <div className="sm:hidden"><InFeedAdSlot slot={THEMES_INDEX_INFEED_2} /></div>
+          )}
+          </Fragment>
         ))}
       </div>
 
-      {/*
-        記事内広告は置かない。この面は単一のテーマグリッドしか無く、グリッドの上は
-        ファーストビュー・下はフッター広告の直前しか置き場が無いため、置くと必ず
-        広告 2 連になる (2026-07-29 是正)。末尾の Multiplex 1 枠に統一する。
-      */}
       {/* コンテンツ末尾の全幅フッター広告 */}
-      {indexRow.length > 0 && <AdRow cells={indexRow} position="themes-index-row" trackingCategory="themes-index" />}
+      {indexRow.length > 0 && <AdRow cells={indexRow} position="themes-index-row" trackingCategory="themes-index" wide />}
     </PageShell>
   );
 }

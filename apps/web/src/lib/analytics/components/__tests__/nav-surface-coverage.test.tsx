@@ -38,29 +38,20 @@ describe("導線名を付けた部品", () => {
     expect(navSurfaceProps("ranking_table")).toEqual({ "data-nav-surface": "ranking_table" });
   });
 
-  it("相関が高い指標のリンクは、ランキングも解説記事も ranking_correlation で送る", () => {
+  it("相関が高い指標のリンクは、ランキングを ranking_correlation で送る", () => {
     const { container } = render(
       <CorrelationSectionClient
-        correlatedItems={[
+        groups={{ positive: [
           {
             rankingKey: "bar",
             title: "別の指標",
-            subtitle: null,
-            unit: "%",
-            pearsonR: 0.8,
             populationAdjustedR: 0.7,
-            partialRPopulation: null,
-            partialRArea: null,
-            partialRAging: null,
-            partialRDensity: null,
-            scatterData: [],
           },
-        ]}
-        articleByPairKey={{ bar: { slug: "foo-vs-bar", title: "解説" } }}
+        ], negative: [] }}
       />,
     );
     const surfaces = surfacesOf(container);
-    expect(surfaces.length).toBeGreaterThanOrEqual(2);
+    expect(surfaces.length).toBeGreaterThanOrEqual(1);
     expect(new Set(surfaces)).toEqual(new Set(["ranking_correlation"]));
   });
 
@@ -72,12 +63,8 @@ describe("導線名を付けた部品", () => {
             rankingKey: "bar",
             areaType: "prefecture",
             title: "別の指標",
-            subtitle: null,
             latestYear: "2024",
             unit: "%",
-            description: null,
-            demographicAttr: null,
-            normalizationBasis: null,
           },
         ]}
       />,

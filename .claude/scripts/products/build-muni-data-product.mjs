@@ -19,6 +19,7 @@ import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 import { extractYearCode } from '../../../packages/estat-api/src/stats-data/utils/extract-year-code.ts';
 import { renderReadme } from './lib/muni-data-product-readme.mjs';
+import { INDUSTRY_HEADER, buildIndustryRows, industryCatalog, industryCheck, industryRowCells, renderIndustryReadme } from './lib/muni-industry-product.mjs';
 import { BOUNDARY_CODE_OVERRIDES, BOUNDARY_EXCLUDED_CODES, MUNI_PRODUCT_SPECS } from './lib/muni-data-product-specs.mjs';
 import {
   CSV_HEADER,
@@ -31,6 +32,7 @@ import {
   splitAreaName,
   toCsv,
 } from './lib/muni-data-product.mjs';
+import { datasetPath } from '../../../config/datasets.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 const R2_BASE = 'https://storage.stats47.jp/app/stats';
@@ -192,7 +194,7 @@ async function buildBoundary(areas) {
   return report;
 }
 
-const areasAll = JSON.parse(readFileSync(join(ROOT, 'packages/area/src/data/cities.json'), 'utf8'));
+const areasAll = JSON.parse(readFileSync(join(ROOT, datasetPath('areas.cities')), 'utf8'));
 const municipalities = areasAll.filter((a) => a.level === '2');
 const wards = areasAll.filter((a) => a.level === '3');
 const [cities, prefs] = await Promise.all([
@@ -245,6 +247,36 @@ writeFileSync(
   toCsv(reconHeader, recon.byYear.map((y) => [y.year, y.prefTotal, y.muniTotal, y.diff, y.diffPct, y.blanks, y.prefsBlank, y.prefsRounding, y.prefsCrossPref, y.prefsSourceIssue, y.prefsUnexplained]), { bom: true }),
 );
 
+// 業種別の表。元の値は CI (estat-muni-industry.yml) が e-Stat から取り、gh run download で _cache/industry/ へ取り込む
+let industry = null;
+if (spec.industry) {
+  const industryDir = join(cacheDir, 'industry');
+  const tables = spec.industry.statsDataIds.map((id) => {
+    const path = join(industryDir, `estat-industry-${id}.json`);
+    if (!existsSync(path)) throw new Error(`業種別の元データが無い: ${path}\n  CI の estat-muni-industry.yml を動かし、gh run download <run> -n estat-muni-industry -D ${industryDir} で取り込む`);
+    const table = JSON.parse(readFileSync(path, 'utf8'));
+    if (!table.rows?.length) throw new Error(`業種別の表 ${id} に行が無い (${path})`);
+    return { ...table, years: [...new Set(table.rows.map((r) => r.year))].sort((a, b) => a - b) };
+  });
+  // 業種別が区単位でしか公表されない市 = 区を持つ市 (区の prefCode が親の市のコード)
+  const designated = new Set(wards.map((w) => w.prefCode));
+  const industryRows = buildIndustryRows({ tables, areas: municipalities, designated });
+  const industryWardRows = buildIndustryRows({ tables, areas: wards });
+  const check = industryCheck({ rows: industryRows, mainRows: rows, scale: spec.industry.scale });
+  for (const [name, list] of [[`${args.metric}_industry_municipalities`, industryRows], [`${args.metric}_industry_wards`, industryWardRows]]) {
+    const cells = list.map(industryRowCells);
+    writeFileSync(join(outDir, `${name}_utf8.csv`), toCsv(INDUSTRY_HEADER, cells));
+    writeFileSync(join(outDir, `${name}_utf8bom.csv`), toCsv(INDUSTRY_HEADER, cells, { bom: true }));
+  }
+  const checkHeader = ['自治体コード', '都道府県', '自治体名', '年', `製造業計(${tables[0].unit})`, `公表された業種の和(${tables[0].unit})`, `公表されていない業種の合計(${tables[0].unit})`, '秘匿の業種の数', `本体の値(${spec.unit})`, `本体との差(${spec.unit})`];
+  writeFileSync(
+    join(outDir, `${args.metric}_industry_check.csv`),
+    toCsv(checkHeader, check.checks.map((c) => [c.code, c.pref, c.name, c.year, c.total, c.published, c.unpublished, c.hiddenIndustries, c.main, c.mainDiff]), { bom: true }),
+  );
+  industry = { tables, industries: industryCatalog(tables), rows: industryRows.length, wardRows: industryWardRows.length, check, designated: designated.size };
+  console.log(`[muni-data] 業種別 ${industryRows.length} 行 / 区 ${industryWardRows.length} 行 / 本体と一致 ${check.summary.matchesMain}/${check.summary.compared} / 公表されていない業種の合計が負 ${check.summary.negativeUnpublished.length}`);
+}
+
 const geoReportPath = join(cacheDir, 'geo-report.json');
 let geo = null;
 if (!args['skip-geo']) geo = await buildBoundary(areasAll);
@@ -252,12 +284,17 @@ else if (existsSync(geoReportPath)) geo = JSON.parse(readFileSync(geoReportPath,
 
 writeFileSync(
   join(outDir, 'README.md'),
-  renderReadme({ metric: args.metric, spec, rows, wardRows, recon, geo, boundaryFile: BOUNDARY_FILE, symbolsChecked: Boolean(estat), generatedAt: cities.meta?.generatedAt, today: new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Tokyo' }).format(new Date()) }),
+  renderReadme({ metric: args.metric, spec, rows, wardRows, recon, geo, boundaryFile: BOUNDARY_FILE, symbolsChecked: Boolean(estat), generatedAt: cities.meta?.generatedAt, today: new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Tokyo' }).format(new Date()) })
+    + (industry ? `\n${renderIndustryReadme({ metric: args.metric, spec, industry })}` : ''),
 );
 
 for (const file of readdirSync(outDir).sort()) console.log(`${statSync(join(outDir, file)).size}\t${file}`);
 console.log(`[muni-data] 行 ${rows.length} (自治体 ${municipalities.length}) / 行政区 ${wardRows.length} / e-Stat 記号 ${estatCheck ? JSON.stringify(estatCheck) : '未取得 (appId なし)'}`);
 console.log(JSON.stringify(recon.byYear.at(-1)));
+if (industry?.check.summary.negativeUnpublished.length) {
+  console.error('製造業計より業種の和が大きい:', industry.check.summary.negativeUnpublished.slice(0, 20).join(' '));
+  process.exit(1);
+}
 if (recon.unexplained.length) {
   console.error('未説明の差:', recon.unexplained.map((r) => `${r.year}/${r.prefCode}:${r.diff}`).join(' '));
   process.exit(1);

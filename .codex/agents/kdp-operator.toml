@@ -24,7 +24,7 @@ Amazon KDP の**出品・修正の実操作**を決定的スクリプトで行�
 ## スコープ
 
 含む: 出品フォーム操作 (Details/Content/Pricing の充填・EPUB/カバーのアップロード・下書き保存・公開)、
-出品内容 SoT (`config/kdp-listings.json`) の反映、公開状態の書き戻し (status/asin)。
+出品内容 SoT (`data/products/kdp/listings.json`) の反映、公開状態の書き戻し (status/asin)。
 含まない (委譲):
 - 書籍の生成 (EPUB)・書籍カタログ (KINDLE_BOOKS) の管理 = `kindle-publisher`
 - 書き下ろしの起草・意味レビュー = `article-writer` / `blog-critic`
@@ -48,7 +48,7 @@ node .claude/scripts/kdp/kdp-unpublish.mjs --all-previous --commit  # ★新版�
 
 1. **前提 (人間)**: KDP アカウントの Tax interview + 銀行口座が完了していること。未完了なら公開は不可。
 2. **初回セットアップ**: `login.mjs` (人間が手動ログイン) → `capture-account.mjs --write` で account assert を厳格化。
-3. **SoT 生成**: `products:kindle:kdp-listings --apply` で `kdp-listings.json` を最新化 (title/description/keywords/
+3. **SoT 生成**: `products:kindle:kdp-listings --apply` で `kdp.listings` を最新化 (title/description/keywords/
    price/epubPath)。**カテゴリ・DRM・AI 開示・フリガナは git TS が SSOT** で機械生成する
    (`kdp-{category,publishing-policy,reading}.ts`)。カテゴリは必須項目で、未選択だと
    ウィザードが 1 歩も進まないため「人手で詰める」運用は成立しない。
@@ -60,7 +60,7 @@ node .claude/scripts/kdp/kdp-unpublish.mjs --all-previous --commit  # ★新版�
    dump し、KDP の React SPA のセレクタが `kdp-form.mjs` の label 正規表現と合うか確認する (合わなければ調整)。
 5. **下書き検証**: `kdp-publish --id <id>` (--commit なし) → `.local/kdp-debug/details-<id>.png` と未充填 warnings を
    確認。warnings が残る間は公開しない。
-6. **公開**: オーナー承認後に `--commit`。成功時に `kdp-listings.json` を `status:listed`+asin に書き戻す。
+6. **公開**: オーナー承認後に `--commit`。成功時に `kdp.listings` を `status:listed`+asin に書き戻す。
    KDP 審査 (最大72時間) 後に販売開始。
 7. **横断確認**: `/content/kindle` でKDP状態と原稿・成果物を突合し、`npm run audit:content-operations`
    のerrorが0であることを確認する。ASIN未採番は審査中warningとして保持し、公開失敗と混同しない。
@@ -85,7 +85,7 @@ BEHAVIOR CONTRACT (命令): 結論先行。進捗の実証 (下書き保存/公�
 
 - 規約: `.claude/rules/kindle-publishing-standards.md` / skill: `.claude/skills/product/kdp-publish/SKILL.md`
 - スクリプト: `.claude/scripts/kdp/{login,capture-account,kdp-publish}.mjs` + `lib/kdp-{session,form}.mjs`
-- 出品 SoT: `config/kdp-listings.json` / アカウント: `config/kdp-account.json`
+- 出品 SoT: `data/products/kdp/listings.json` / アカウント: `config/kdp-account.json`
 - 運用ミラー: `http://127.0.0.1:4747/content/kindle` / 横断監査: `npm run audit:content-operations`
 - 認証プロファイル: `docs/01_技術設計/07_Playwright認証プロファイル.md` (`playwright-kdp-profile`)
 - 書籍生成・カタログ: `kindle-publisher`'''

@@ -58,10 +58,7 @@ const STATE_PATH = join(
   PROJECT_ROOT,
   `${datasetDir("sns.buzz-map-attribution")}/buzz-map-catalog.json`
 );
-const SPEC_DIR = join(
-  PROJECT_ROOT,
-  'apps/remotion/src/features/buzz-map/specs'
-);
+const SPEC_DIR = join(PROJECT_ROOT, datasetDir("sns.buzz-map-specs"));
 const REMOTION_DIR = join(PROJECT_ROOT, 'apps/remotion');
 const LOCAL_R2 = join(PROJECT_ROOT, '.local/r2');
 const R2_PUBLIC =

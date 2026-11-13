@@ -2,10 +2,11 @@ import "server-only";
 
 import path from "node:path";
 
+import { datasetPath } from "../../../../config/datasets.mjs";
 import { projectRoot } from "./project-root";
 
 /**
- * 戦略レーン (収益化戦略 §5 の優先順位表) と、月次・週次・バックログの配線状態。**読み取り専用**。
+ * 領域と構え (台帳 business.domain-stances) と、月次・週次・バックログの配線状態。**読み取り専用**。
  *
  * ★判定は自前で持たず `.claude/scripts/lib/strategy-lanes.cjs` を共有する。docs:check (DG073〜078) と
  *   同じ実体なので、画面の警告と CI の警告がずれない。.cjs の読み込みは todo.ts と同じ eval("require")。
@@ -62,7 +63,7 @@ interface LibBoard {
   issues: LibIssue[];
 }
 type StrategyLanesLib = {
-  STRATEGY_DOC: string;
+  LANES_LEDGER: string;
   MAX_ACTIVE_IMPROVEMENTS: number;
   laneBoard: (root: string) => LibBoard;
 };
@@ -94,7 +95,8 @@ export interface LaneView extends LibLane {
 }
 
 export interface StrategyLaneBoard {
-  strategyDoc: string;
+  /** 領域と構えの正本 (台帳のパス) */
+  source: string;
   lanes: LaneView[];
   focusLanes: string[] | null;
   weekly: LibWeeklyItem[];
@@ -136,7 +138,7 @@ export function strategyLaneBoard(): StrategyLaneBoard {
       };
     });
     return {
-      strategyDoc: l.STRATEGY_DOC,
+      source: l.LANES_LEDGER,
       lanes,
       focusLanes: board.focusLanes,
       weekly: board.weekly,
@@ -147,7 +149,7 @@ export function strategyLaneBoard(): StrategyLaneBoard {
     };
   } catch (e) {
     return {
-      strategyDoc: "docs/00_プロジェクト管理/02_収益化戦略.md",
+      source: datasetPath("business.domain-stances"),
       lanes: [],
       focusLanes: null,
       weekly: [],

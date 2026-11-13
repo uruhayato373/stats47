@@ -266,6 +266,8 @@ export interface ProductReferralParams {
   productId: string;
   /** 案内の置き場所。登録済み `link_position` に入れる (例 `blog_product` / `ranking_product` / `ranking-footer`) */
   placement: string;
+  /** 商品詳細内の購入案内の位置。流入元の link_position と分けて記録する。 */
+  ctaId?: string;
 }
 
 /**
@@ -273,7 +275,7 @@ export interface ProductReferralParams {
  * 販売台帳 (KDP は ASIN を書籍 ID に引き当てる) と GA4 のクリックを同じ ID で突き合わせるため、
  * サイト内の商品 ID ではなく販売先の ID を送る。形が合わない URL は null (推測した ID を送らない)。
  */
-export function productReferralOf(externalUrl: string): Omit<ProductReferralParams, 'placement'> | null {
+export function productReferralOf(externalUrl: string): Pick<ProductReferralParams, 'destination' | 'productId'> | null {
   let url: URL;
   try {
     url = new URL(externalUrl);
@@ -297,6 +299,7 @@ function productReferralPayload(params: ProductReferralParams): Record<string, u
     product_destination: params.destination,
     product_id: params.productId,
     link_position: params.placement,
+    ...(params.ctaId ? { cta_id: params.ctaId } : {}),
   };
 }
 
@@ -543,13 +546,25 @@ export function trackNavClick(params: {
  * 共通のクリック監視 (NavClickTracker) が送る nav_click。部品側の送信記録 (二重送信の判定) は更新しない。
  * 値の意味は trackNavClick と同じ。
  */
-export function trackAutoNavClick(params: { label: string; href: string; surface: string }): void {
+export function trackAutoNavClick(params: { label: string; href: string; surface: string; cardVariant?: string }): void {
   sendEvent('nav_click', {
     event_category: 'navigation',
     event_label: params.label,
     nav_label: params.label,
     nav_href: params.href,
     nav_surface: params.surface,
+    ...(params.cardVariant ? { card_variant: params.cardVariant } : {}),
+  });
+}
+
+/** 表示・クリックで同じ記事 ID / 導線 / 表示形式を使う。50%・1 秒の判定は共通 watcher が行う。 */
+export function trackNavImpression(params: { label: string; href: string; surface: string; cardVariant?: string }): void {
+  sendEvent('nav_impression', {
+    event_category: 'navigation',
+    nav_label: params.label,
+    nav_href: params.href,
+    nav_surface: params.surface,
+    ...(params.cardVariant ? { card_variant: params.cardVariant } : {}),
   });
 }
 

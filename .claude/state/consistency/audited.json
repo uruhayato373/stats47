@@ -1,7 +1,9 @@
 {
-  "hash": "79fb99b9a3973ef4dbf96c05f4099278d12f75262e4ae2204c92d6f57f3f8e70",
-  "audited_at": "2026-11-07T23:19:56",
+  "hash": "678ae75c5b94de8e5b29a92ca4e30ee849e1cf6c3220c1072bed49d598539191",
+  "audited_at": "2026-11-12T21:44:54",
   "files": [
-    ".claude/scripts/measurement/refresh-session.mjs"
+    ".claude/rules/affiliate-ads-standards.md",
+    ".claude/scripts/ads/capture-ad-layout.ts",
+    ".claude/scripts/lib/check-ad-placement.cjs"
   ]
 }

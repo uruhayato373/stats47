@@ -34,7 +34,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../lib/site-config.cjs";
-import { datasetDir } from "../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const ORIGIN = (process.env.SITE_ORIGIN ?? SITE_ORIGIN).replace(/\/$/, "");
 const R2_PUBLIC = (process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL).replace(/\/$/, "");
@@ -140,14 +140,13 @@ async function collectNonSitemapUrls() {
   }
   // category / survey はリポジトリの定義から (ネットワーク非依存)
   const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
-  const catSrc = path.join(root, "packages/data-configs/src/types.ts");
+  const catSrc = path.join(root, datasetPath("categories.master"));
   if (fs.existsSync(catSrc)) {
-    const m = fs.readFileSync(catSrc, "utf8").match(/CATEGORY_KEYS\s*=\s*\[([\s\S]*?)\]/);
-    for (const k of [...(m?.[1] ?? "").matchAll(/"([a-z0-9-]+)"/g)].map((x) => x[1])) {
-      urls.push(`/category/${k}`);
+    for (const c of JSON.parse(fs.readFileSync(catSrc, "utf8")).categories) {
+      urls.push(`/category/${c.key}`);
     }
   }
-  const surveySrc = path.join(root, "packages/ranking/src/data/surveys.json");
+  const surveySrc = path.join(root, datasetPath("surveys.master"));
   if (fs.existsSync(surveySrc)) {
     for (const s of JSON.parse(fs.readFileSync(surveySrc, "utf8"))) {
       if (s?.id) urls.push(`/survey/${s.id}`);

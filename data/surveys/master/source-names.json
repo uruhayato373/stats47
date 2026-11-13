@@ -1,0 +1,650 @@
+{
+  "knownSourceToSurvey": {
+    "国勢調査報告": "census",
+    "人口推計": "population-estimates",
+    "人口動態統計": "vital-statistics",
+    "学校基本調査報告書": "school-basic-survey",
+    "社会生活基本調査報告": "social-life-basic-survey",
+    "住宅・土地統計調査報告": "housing-land-survey",
+    "医療施設調査": "medical-facility-survey",
+    "医療施設調査・病院報告": "medical-facility-survey",
+    "病院報告": "hospital-report",
+    "県民経済計算年報": "prefectural-accounts",
+    "地方財政統計年報": "local-finance",
+    "地方財政状況調査": "local-finance",
+    "国土数値情報": "mlit-ksj",
+    "森林・林業統計要覧": "forestry-statistics-handbook",
+    "社会教育調査報告書": "social-education-survey",
+    "賃金構造基本統計調査報告": "wage-structure-survey",
+    "就業構造基本調査報告": "employment-structure-survey",
+    "衛生行政報告例": "health-admin-report",
+    "患者調査": "patient-survey",
+    "家計調査": "household-survey",
+    "全国家計構造調査": "national-household-survey",
+    "全国消費実態調査報告": "national-household-survey",
+    "犯罪統計書": "police-statistics",
+    "交通事故統計年報": "traffic-accident-statistics",
+    "道路の交通に関する統計": "traffic-accident-statistics",
+    "宿泊旅行統計調査報告": "accommodation-survey",
+    "医師・歯科医師・薬剤師統計": "physician-survey",
+    "医師・歯科医師・薬剤師調査": "physician-survey",
+    "工業統計調査": "industrial-statistics",
+    "商業統計調査": "commercial-statistics",
+    "商業統計表": "commercial-statistics",
+    "労働災害動向調査報告": "workplace-accident-survey",
+    "地域別最低賃金の全国一覧": "minimum-wage",
+    "市町村税課税状況等の調": "local-tax",
+    "消費者物価指数": "cpi-annual",
+    "漁業・養殖業生産統計": "fishery-aquaculture-production",
+    "気象庁ウェブサイト": "weather-statistics",
+    "作物統計": "crop-statistics",
+    "野菜生産出荷統計": "crop-statistics",
+    "建築着工統計調査報告": "housing-starts-statistics",
+    "建築着工統計調査": "housing-starts-statistics",
+    "気象庁年報": "weather-statistics",
+    "耕地及び作付面積統計": "crop-statistics",
+    "港湾調査": "port-statistics",
+    "小売物価統計調査年報": "retail-price-survey",
+    "消費者物価指数月報": "cpi-annual",
+    "社会福祉行政業務報告": "welfare-admin-report",
+    "都市公園整備現況": "urban-park-survey",
+    "登録外国人統計調査": "foreign-residents-statistics",
+    "日本郵政公社統計データ（簡易保険編）": "japan-post-statistics",
+    "道路交通センサス": "road-statistics",
+    "全国道路・街路交通情勢調査": "road-statistics",
+    "新規学卒者（高校・中学）の職業紹介状況": "job-placement-statistics",
+    "障害者の職業紹介状況等": "job-placement-statistics",
+    "児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査": "student-guidance-issues-survey",
+    "都道府県別生命表": "life-tables",
+    "地域保健･健康増進事業報告": "regional-health-promotion-report",
+    "消防白書": "fire-annual-report",
+    "貨物自動車運送事業者数（運輸局・支局別）": "truck-operator-statistics",
+    "地方公共団体の議会の議員及び長の所属党派別人員調等": "local-election-statistics",
+    "選挙人名簿及び在外選挙人名簿登録者数": "voter-registration-statistics",
+    "衆議院議員総選挙　最高裁判所裁判官国民審査結果調": "national-election-results",
+    "参議院議員通常選挙結果調": "national-election-results",
+    "住民基本台帳に基づく人口、人口動態及び世帯数調査（住民基本台帳人口要覧）": "resident-registry-population-survey"
+  },
+  "proposedSourceToSurvey": {
+    "特許行政年次報告書": "patent-administration-annual-report",
+    "電気通信サービスの契約数及びシェアに関する四半期データの公表": "telecommunications-contract-share-quarterly",
+    "埋蔵文化財関係統計資料": "buried-cultural-property-statistics",
+    "地方における文化行政及び文化関係経費の状況": "local-cultural-administration-survey",
+    "旅行・観光消費動向調査": "travel-tourism-consumption-survey",
+    "社会福祉施設等調査": "social-welfare-facility-survey",
+    "都道府県決算状況調": "prefectural-settlement-survey",
+    "市町村別決算状況調": "municipal-settlement-survey",
+    "経済センサス-活動調査": "economic-census-activity",
+    "経済センサス-基礎調査": "economic-census-basic",
+    "全国都道府県市区町村別面積調": "area-survey",
+    "介護サービス施設・事業所調査": "care-service-facility-survey",
+    "被保護者調査": "public-assistance-survey",
+    "消費者物価指数年報": "cpi-annual",
+    "小売物価統計調査（構造編）": "retail-price-survey",
+    "学校保健統計調査報告書": "school-health-survey",
+    "福祉行政報告例": "welfare-admin-report",
+    "事業所・企業統計調査報告": "establishment-enterprise-census",
+    "農林業センサス": "agriculture-forestry-census",
+    "道路施設現況調査（道路統計年報）": "road-statistics",
+    "行政投資実績": "administrative-investment-report",
+    "漁業・養殖業生産統計年報": "fishery-aquaculture-production",
+    "労働市場年報": "labor-market-annual",
+    "過去の気象データ": "weather-statistics",
+    "住宅着工統計": "housing-starts-statistics",
+    "一般職業紹介状況": "job-placement-statistics",
+    "都市計画現況調査": "city-planning-survey",
+    "一般廃棄物処理事業実態調査": "waste-management-survey",
+    "在留外国人統計": "foreign-residents-statistics",
+    "日本の将来推計人口": "population-projection",
+    "地方公共団体定員管理調査": "local-gov-staffing-survey",
+    "損害保険料率算出機構統計集": "insurance-rate-org-statistics",
+    "都道府県地価調査": "prefectural-land-price-survey",
+    "水道統計": "waterworks-statistics",
+    "農業経営統計調査報告": "agriculture-management-survey",
+    "都市公園データベース・都市公園等整備現況調査": "urban-park-survey",
+    "下水道統計": "sewerage-statistics",
+    "地方教育費調査報告書": "local-education-expense-survey",
+    "火災年報": "fire-annual-report",
+    "建設工事施工統計調査報告": "construction-work-statistics",
+    "旅客地域流動調査": "passenger-regional-flow-survey",
+    "自然公園の面積": "natural-park-area",
+    "貨物地域流動調査": "freight-regional-flow-survey",
+    "厚生年金保険・国民年金事業年報": "pension-insurance-annual-report",
+    "国民医療費": "national-medical-expenditure",
+    "後期高齢者医療事業年報": "late-elderly-medical-annual-report",
+    "港湾調査（港湾統計年報）": "port-statistics",
+    "住民基本台帳人口移動報告年報": "resident-registry-migration-report",
+    "電気通信役務契約等状況報告": "telecommunications-service-contract-report",
+    "日本銀行統計": "boj-statistics",
+    "国民生活基礎調査": "comprehensive-living-conditions-survey",
+    "日本郵政統計": "japan-post-statistics",
+    "水害統計調査": "flood-statistics",
+    "建設工事受注動態統計調査": "construction-orders-statistics",
+    "地方公務員給与実態調査": "local-public-employee-salary",
+    "漁業センサス": "fishery-census",
+    "雇用動向調査": "employment-trends-survey",
+    "住民基本台帳人口・世帯数調査": "resident-registry-population-survey",
+    "地域保健・健康増進事業報告": "regional-health-promotion-report",
+    "騒音規制法施行状況調査": "noise-control-law-status-survey",
+    "全国学力・学習状況調査": "academic-achievement-survey",
+    "加盟校・加盟生徒数調査": "junior-high-athletics-membership-survey",
+    "都道府県別年齢調整死亡率": "age-adjusted-mortality-statistics",
+    "完全生命表": "life-tables",
+    "農地の移動と転用": "farmland-transfer-conversion-report",
+    "木材需給報告書": "wood-supply-demand-report",
+    "特用林産基礎資料": "special-forest-products-statistics",
+    "6次産業化総合調査": "sixth-industry-survey",
+    "交通関連統計資料集": "motor-vehicle-transport-statistics",
+    "ガス事業年報": "gas-business-statistics",
+    "電気事業便覧": "electricity-business-statistics",
+    "都道府県別石油製品販売総括": "petroleum-sales-statistics",
+    "地方公共団体における男女共同参画社会の形成又は女性に関する施策の推進状況": "local-government-gender-equality-policy-status",
+    "都道府県別エネルギー消費統計": "prefectural-energy-consumption-statistics",
+    "日本における都道府県別風力発電導入量": "wind-power-deployment-statistics",
+    "固定資産の価格等の概要調書（土地）": "fixed-asset-tax-land-statistics",
+    "公庫融資利用者調査報告": "housing-finance-user-survey",
+    "雇用保険事業年報": "employment-insurance-annual-report",
+    "労働者災害補償保険事業年報": "workers-compensation-annual-report",
+    "国民健康保険事業年報": "national-health-insurance-annual-report",
+    "健康保険事業年報": "health-insurance-annual-report",
+    "健康保険組合事業年報": "health-insurance-society-annual-report",
+    "大気汚染防止法施行状況": "air-pollution-control-law-status",
+    "水質汚濁防止法等の施行状況": "water-pollution-control-law-status",
+    "生命保険事業概況": "life-insurance-business-statistics",
+    "人口問題研究": "population-research",
+    "自然環境保全地域各種データ": "natural-conservation-area-data",
+    "国税庁統計年報書": "nta-annual-statistics",
+    "汚水処理人口普及状況": "wastewater-treatment-coverage-report",
+    "都道府県別食糧自給率": "prefectural-food-self-sufficiency",
+    "地方公共団体議員・長所属党派別人員調": "local-election-statistics",
+    "選挙人名簿登録者数": "voter-registration-statistics",
+    "国政選挙結果調": "national-election-results",
+    "地方選挙結果調": "local-election-results",
+    "介護保険事業状況報告年報": "long-term-care-insurance-annual-report",
+    "貨物自動車運送事業者数": "truck-operator-statistics",
+    "自動車保有車両数": "vehicle-registration-statistics",
+    "経済構造実態調査": "economic-structure-survey",
+    "生産農業所得統計": "agricultural-income-statistics",
+    "児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査結果": "student-guidance-issues-survey",
+    "放送受信契約数統計要覧": "broadcast-reception-contract-statistics"
+  },
+  "cdcat01SourceOverride": {
+    "D2201": [
+      "地方財政統計年報"
+    ],
+    "D2202": [
+      "地方財政統計年報"
+    ],
+    "D2203": [
+      "地方財政統計年報"
+    ],
+    "D2211": [
+      "地方財政統計年報"
+    ],
+    "#D02213": [
+      "地方財政統計年報"
+    ],
+    "#D02214": [
+      "地方財政統計年報"
+    ],
+    "#D02215": [
+      "地方財政統計年報"
+    ],
+    "D2212": [
+      "地方財政統計年報"
+    ],
+    "C360111": [
+      "日本銀行統計"
+    ],
+    "C360211": [
+      "日本銀行統計"
+    ],
+    "C360311": [
+      "日本銀行統計"
+    ],
+    "C360120": [
+      "日本郵政統計"
+    ],
+    "#H06309": [
+      "日本郵政統計"
+    ],
+    "H7501": [
+      "日本郵政統計"
+    ],
+    "#A03506": [
+      "国勢調査報告"
+    ],
+    "#H02103": [
+      "住宅・土地統計調査報告"
+    ],
+    "#E0910101": [
+      "学校基本調査報告書"
+    ],
+    "#E0910102": [
+      "社会福祉施設等調査"
+    ],
+    "#J02206": [
+      "社会福祉施設等調査"
+    ],
+    "I1601": [
+      "国民生活基礎調査"
+    ],
+    "I1602": [
+      "国民生活基礎調査"
+    ],
+    "#I1520401": [
+      "健康保険事業年報"
+    ],
+    "#I1520402": [
+      "健康保険事業年報"
+    ],
+    "#I1520301": [
+      "健康保険組合事業年報"
+    ],
+    "#I1520302": [
+      "健康保険組合事業年報"
+    ],
+    "#I1520501": [
+      "健康保険組合事業年報"
+    ],
+    "#I1520502": [
+      "健康保険組合事業年報"
+    ],
+    "J520111": [
+      "厚生年金保険・国民年金事業年報"
+    ],
+    "J520112": [
+      "厚生年金保険・国民年金事業年報"
+    ]
+  },
+  "displayNameToSurvey": {
+    "特許庁「特許行政年次報告書」": "patent-administration-annual-report",
+    "厚生労働省 令和5年医療施設（静態）調査": "medical-facility-survey",
+    "文化庁 埋蔵文化財関係統計資料 令和7年度": "buried-cultural-property-statistics",
+    "文化庁 令和7年度地方における文化行政及び令和6年度文化関係経費の状況": "local-cultural-administration-survey",
+    "観光庁「旅行・観光消費動向調査」都道府県別集計": "travel-tourism-consumption-survey",
+    "総務省「地方公営企業決算状況調査」・デジタル庁公開データ": "local-public-enterprise-accounts-survey",
+    "地方消費者行政の現況調査": "local-consumer-administration-status-survey",
+    "生活困窮者自立支援制度支援状況調査": "poverty-self-reliance-support-status-survey",
+    "国民生活基礎調査": "comprehensive-living-conditions-survey",
+    "全国家計構造調査": "national-household-survey",
+    "環境省「自然公園等利用者数調」": "nature-park-visitor-survey",
+    "こども家庭庁「保育所等関連状況取りまとめ」": "childcare-related-status-report",
+    "全国がん登録": "national-cancer-registry",
+    "介護保険事業状況報告": "long-term-care-insurance-annual-report",
+    "医療施設調査": "medical-facility-survey",
+    "国民健康・栄養調査": "national-health-nutrition-survey",
+    "観光庁「インバウンド消費動向調査」都道府県別集計": "inbound-consumption-survey",
+    "文部科学省「廃校施設活用状況実態調査」": "closed-school-facility-survey",
+    "体育・スポーツ施設現況調査": "sports-facilities-survey",
+    "農林水産省「令和6年木材需給報告書」": "wood-supply-demand-report",
+    "経済センサス‐活動調査から算出": "economic-census-activity",
+    "経済センサス‐活動調査": "economic-census-activity",
+    "社会・人口統計体系（経済センサス‐活動調査）": "economic-census-activity",
+    "農林水産省「2025年農林業センサス」": "agriculture-forestry-census",
+    "農林水産省「令和6年林業産出額」": "forestry-output-statistics",
+    "農林水産省「令和7年牛乳乳製品統計」": "milk-dairy-statistics",
+    "厚生労働省「令和6年医師・歯科医師・薬剤師統計」": "physician-survey",
+    "厚生労働省「令和6年国民健康・栄養調査報告」第4部": "national-health-nutrition-survey",
+    "スポーツ庁 令和7年度全国体力・運動能力、運動習慣等調査": "national-child-fitness-survey",
+    "社会生活基本調査": "social-life-basic-survey",
+    "賃金構造基本統計調査": "wage-structure-survey",
+    "人口動態統計": "vital-statistics",
+    "公共施設状況調査": "public-facilities-status-survey",
+    "地方公共団体における男女共同参画社会の形成又は女性に関する施策の推進状況": "local-government-gender-equality-policy-status",
+    "都道府県別エネルギー消費統計": "prefectural-energy-consumption-statistics",
+    "人口動態調査": "vital-statistics",
+    "社会教育調査": "social-education-survey",
+    "衛生行政報告例": "health-admin-report",
+    "住宅・土地統計調査": "housing-land-survey",
+    "就業構造基本調査": "employment-structure-survey",
+    "個人企業経済調査": "sole-proprietor-survey",
+    "商業動態統計調査": "commercial-dynamics-survey",
+    "作物統計調査": "crop-statistics",
+    "生産農業所得統計": "agricultural-income-statistics",
+    "水質汚濁物質排出量総合調査": "water-pollution-survey",
+    "患者調査": "patient-survey",
+    "病院報告": "hospital-report",
+    "労働災害動向調査": "workplace-accident-survey",
+    "国勢調査": "census",
+    "人口推計": "population-estimates",
+    "社会福祉施設等調査": "social-welfare-facility-survey",
+    "海面漁業生産統計調査": "fishery-aquaculture-production",
+    "水害統計調査": "flood-statistics",
+    "建設工事受注動態統計調査": "construction-orders-statistics",
+    "地方公務員給与実態調査": "local-public-employee-salary",
+    "畜産統計調査": "livestock-statistics",
+    "工場立地動向調査": "factory-location-survey",
+    "漁業センサス": "fishery-census",
+    "雇用動向調査": "employment-trends-survey",
+    "地域保健・健康増進事業報告": "regional-health-promotion-report",
+    "騒音規制法施行状況調査": "noise-control-law-status-survey",
+    "国立教育政策研究所「全国学力・学習状況調査」": "academic-achievement-survey",
+    "(公財)日本中学校体育連盟": "junior-high-athletics-membership-survey",
+    "金融広報中央委員会(知るぽると)": "financial-literacy-survey",
+    "県民経済計算年報（内閣府）": "prefectural-accounts",
+    "日本の地域別将来推計人口（令和5年推計）": "population-projection"
+  },
+  "statsDataIdToSurveyOverride": {
+    "0004008606": {
+      "id": "employment-structure-survey",
+      "name": "就業構造基本調査"
+    },
+    "0004008518": {
+      "id": "employment-structure-survey",
+      "name": "就業構造基本調査"
+    },
+    "0004008493": {
+      "id": "employment-structure-survey",
+      "name": "就業構造基本調査"
+    },
+    "0003450603": {
+      "id": "census",
+      "name": "国勢調査"
+    },
+    "0003450643": {
+      "id": "census",
+      "name": "国勢調査"
+    },
+    "0004005665": {
+      "id": "economic-census-activity",
+      "name": "経済センサス‐活動調査"
+    },
+    "0004006330": {
+      "id": "economic-census-activity",
+      "name": "経済センサス‐活動調査"
+    },
+    "0003440743": {
+      "id": "national-household-survey",
+      "name": "全国家計構造調査"
+    },
+    "0003440696": {
+      "id": "national-household-survey",
+      "name": "全国家計構造調査"
+    },
+    "0003450610": {
+      "id": "census",
+      "name": "国勢調査"
+    },
+    "0004006264": {
+      "id": "economic-census-activity",
+      "name": "経済センサス‐活動調査"
+    },
+    "0003130688": {
+      "id": "port-statistics",
+      "name": "港湾調査（港湾統計年報）"
+    },
+    "0003130737": {
+      "id": "port-statistics",
+      "name": "港湾調査（港湾統計年報）"
+    },
+    "0003130773": {
+      "id": "port-statistics",
+      "name": "港湾調査（港湾統計年報）"
+    },
+    "0003130796": {
+      "id": "port-statistics",
+      "name": "港湾調査（港湾統計年報）"
+    },
+    "0003262278": {
+      "id": "fishery-census",
+      "name": "漁業センサス"
+    },
+    "0003262280": {
+      "id": "fishery-census",
+      "name": "漁業センサス"
+    },
+    "0003262281": {
+      "id": "fishery-census",
+      "name": "漁業センサス"
+    },
+    "0003262282": {
+      "id": "fishery-census",
+      "name": "漁業センサス"
+    },
+    "0003262285": {
+      "id": "fishery-census",
+      "name": "漁業センサス"
+    },
+    "0003262287": {
+      "id": "fishery-census",
+      "name": "漁業センサス"
+    },
+    "0003262291": {
+      "id": "fishery-census",
+      "name": "漁業センサス"
+    },
+    "0003262295": {
+      "id": "fishery-census",
+      "name": "漁業センサス"
+    },
+    "0003281586": {
+      "id": "traffic-accident-statistics",
+      "name": "道路の交通に関する統計"
+    },
+    "0003355281": {
+      "id": "housing-land-survey",
+      "name": "住宅・土地統計調査"
+    },
+    "0003355488": {
+      "id": "housing-land-survey",
+      "name": "住宅・土地統計調査"
+    },
+    "0003355518": {
+      "id": "housing-land-survey",
+      "name": "住宅・土地統計調査"
+    },
+    "0003376330": {
+      "id": "employment-trends-survey",
+      "name": "雇用動向調査"
+    },
+    "0003395254": {
+      "id": "commercial-dynamics-survey",
+      "name": "商業動態統計調査"
+    },
+    "0003411431": {
+      "id": "factory-location-survey",
+      "name": "工場立地動向調査"
+    },
+    "0003411445": {
+      "id": "factory-location-survey",
+      "name": "工場立地動向調査"
+    },
+    "0003411708": {
+      "id": "vital-statistics",
+      "name": "人口動態調査"
+    },
+    "0003412078": {
+      "id": "vital-statistics",
+      "name": "人口動態調査"
+    },
+    "0003423836": {
+      "id": "crop-statistics",
+      "name": "作物統計調査"
+    },
+    "0003455918": {
+      "id": "social-life-basic-survey",
+      "name": "社会生活基本調査"
+    },
+    "0003455935": {
+      "id": "social-life-basic-survey",
+      "name": "社会生活基本調査"
+    },
+    "0003455936": {
+      "id": "social-life-basic-survey",
+      "name": "社会生活基本調査"
+    },
+    "0003455937": {
+      "id": "social-life-basic-survey",
+      "name": "社会生活基本調査"
+    },
+    "0003455926": {
+      "id": "social-life-basic-survey",
+      "name": "社会生活基本調査"
+    },
+    "0003457306": {
+      "id": "social-life-basic-survey",
+      "name": "社会生活基本調査"
+    },
+    "0003457311": {
+      "id": "social-life-basic-survey",
+      "name": "社会生活基本調査"
+    },
+    "0003457319": {
+      "id": "social-life-basic-survey",
+      "name": "社会生活基本調査"
+    },
+    "0003457337": {
+      "id": "social-life-basic-survey",
+      "name": "社会生活基本調査"
+    },
+    "0004002555": {
+      "id": "patient-survey",
+      "name": "患者調査"
+    },
+    "0004003256": {
+      "id": "economic-census-activity",
+      "name": "経済センサス‐活動調査"
+    },
+    "0004003259": {
+      "id": "economic-census-activity",
+      "name": "経済センサス‐活動調査"
+    },
+    "0004003261": {
+      "id": "economic-census-activity",
+      "name": "経済センサス‐活動調査"
+    },
+    "0004008452": {
+      "id": "employment-structure-survey",
+      "name": "就業構造基本調査"
+    },
+    "0004026105": {
+      "id": "patient-survey",
+      "name": "患者調査"
+    },
+    "0004026840": {
+      "id": "health-admin-report",
+      "name": "衛生行政報告例"
+    },
+    "0004026844": {
+      "id": "health-admin-report",
+      "name": "衛生行政報告例"
+    },
+    "0004026870": {
+      "id": "health-admin-report",
+      "name": "衛生行政報告例"
+    },
+    "0004026904": {
+      "id": "health-admin-report",
+      "name": "衛生行政報告例"
+    },
+    "0004048079": {
+      "id": "health-admin-report",
+      "name": "衛生行政報告例"
+    },
+    "0004026906": {
+      "id": "health-admin-report",
+      "name": "衛生行政報告例"
+    },
+    "0004026929": {
+      "id": "health-admin-report",
+      "name": "衛生行政報告例"
+    },
+    "0004026960": {
+      "id": "health-admin-report",
+      "name": "衛生行政報告例"
+    },
+    "0004027019": {
+      "id": "health-admin-report",
+      "name": "衛生行政報告例"
+    },
+    "0004027738": {
+      "id": "regional-health-promotion-report",
+      "name": "地域保健・健康増進事業報告"
+    },
+    "0004027740": {
+      "id": "regional-health-promotion-report",
+      "name": "地域保健・健康増進事業報告"
+    },
+    "0004027744": {
+      "id": "regional-health-promotion-report",
+      "name": "地域保健・健康増進事業報告"
+    },
+    "0004027806": {
+      "id": "regional-health-promotion-report",
+      "name": "地域保健・健康増進事業報告"
+    },
+    "0004027833": {
+      "id": "regional-health-promotion-report",
+      "name": "地域保健・健康増進事業報告"
+    },
+    "0003445244": {
+      "id": "census",
+      "name": "国勢調査"
+    },
+    "0003448099": {
+      "id": "industrial-statistics",
+      "name": "工業統計調査"
+    },
+    "0003368792": {
+      "id": "noise-control-law-status-survey",
+      "name": "騒音規制法施行状況調査"
+    },
+    "0003130738": {
+      "id": "port-statistics",
+      "name": "港湾調査（港湾統計年報）"
+    },
+    "0003441258": {
+      "id": "retail-price-survey",
+      "name": "小売物価統計調査（構造編）"
+    },
+    "0003348240": {
+      "id": "kakei-chousa",
+      "name": "家計調査"
+    },
+    "0004023605": {
+      "id": "kakei-chousa",
+      "name": "家計調査"
+    },
+    "0004023606": {
+      "id": "kakei-chousa",
+      "name": "家計調査"
+    },
+    "0003343671": {
+      "id": "kakei-chousa",
+      "name": "家計調査"
+    },
+    "0003343670": {
+      "id": "kakei-chousa",
+      "name": "家計調査"
+    },
+    "0003427113": {
+      "id": "cpi-annual",
+      "name": "消費者物価指数"
+    },
+    "0003419944": {
+      "id": "resident-registry-migration-report",
+      "name": "住民基本台帳人口移動報告"
+    },
+    "0003419946": {
+      "id": "resident-registry-migration-report",
+      "name": "住民基本台帳人口移動報告"
+    },
+    "0003445081": {
+      "id": "census",
+      "name": "国勢調査"
+    },
+    "0003447398": {
+      "id": "census",
+      "name": "国勢調査"
+    },
+    "0003423613": {
+      "id": "resident-registry-migration-report",
+      "name": "住民基本台帳人口移動報告"
+    },
+    "0001894246": {
+      "id": "agricultural-income-statistics",
+      "name": "生産農業所得統計"
+    }
+  }
+}

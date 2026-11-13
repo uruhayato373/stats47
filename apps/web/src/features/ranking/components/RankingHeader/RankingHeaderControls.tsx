@@ -2,11 +2,9 @@
 
 import { type ReactNode } from "react";
 
-import {
-  ToggleGroup,
-  ToggleGroupItem,
-} from "@stats47/components/atoms/ui/toggle-group";
 import { LazySelect } from "@stats47/components/molecules/lazy-select";
+
+import { SingleSelectToggleGroup } from "@/components/molecules/SingleSelectToggleGroup";
 
 import type { NormalizationOption } from "@stats47/ranking";
 
@@ -34,10 +32,10 @@ export function RankingHeaderControls({
   normalizationDisabled,
   shareButton,
 }: RankingHeaderControlsProps) {
-  const pills: { type: string; label: string }[] = [
-    { type: "original", label: "総数" },
+  const pills = [
+    { value: "original", label: "総数" },
     ...(normalizationOptions ?? []).map((opt) => ({
-      type: opt.type,
+      value: opt.type,
       label: opt.label,
     })),
   ];
@@ -45,44 +43,29 @@ export function RankingHeaderControls({
 
   if (!showPills && !shareButton) return null;
 
-  // シェアのボタン列は切替ボタンの下端 (基準線) にそろえる (items-end)
   return (
-    <div className="flex flex-wrap items-end justify-between gap-3">
+    <div className="flex flex-wrap items-center justify-between gap-3">
       {showPills ? (
         <div className="min-w-0">
-          <p className="mb-1.5 text-xs font-medium text-muted-foreground">
-            計算方法を切替
-          </p>
           {/* モバイル: Select / sm 以上: ToggleGroup。どちらもアイコンを付けず文字だけで揃える */}
           <div className="sm:hidden">
             <LazySelect
               value={normalizationValue}
               onValueChange={onNormalizationChange}
-              items={pills.map((p) => ({ value: p.type, label: p.label }))}
+              items={pills}
               disabled={normalizationDisabled}
               aria-label="計算方法"
               triggerClassName="w-full"
             />
           </div>
-          <ToggleGroup
+          <SingleSelectToggleGroup
             aria-label="計算方法"
-            variant="outline"
-            spacing={0}
-            value={[normalizationValue]}
-            onValueChange={(groupValue) => {
-              // 押下中の項目をもう一度押して空にする操作は無視する (常に 1 つ選ぶ)
-              const next = groupValue.find((value) => value !== normalizationValue);
-              if (next) onNormalizationChange(next);
-            }}
+            value={normalizationValue}
+            options={pills}
+            onValueChange={onNormalizationChange}
             disabled={normalizationDisabled}
             className="hidden sm:flex"
-          >
-            {pills.map((p) => (
-              <ToggleGroupItem key={p.type} value={p.type}>
-                {p.label}
-              </ToggleGroupItem>
-            ))}
-          </ToggleGroup>
+          />
         </div>
       ) : (
         <div />

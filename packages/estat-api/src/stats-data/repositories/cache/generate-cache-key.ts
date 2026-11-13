@@ -11,7 +11,7 @@ const FILTER_PARAM_KEYS = [
 ] as const;
 
 /** 取得範囲を変えるパラメータ (指定時のみキーに含める) */
-const RANGE_PARAM_KEYS = ['limit', 'startRecord'] as const;
+const RANGE_PARAM_KEYS = ['limit', 'startPosition'] as const;
 
 /**
  * ファイル名として使用できない文字をサニタイズ

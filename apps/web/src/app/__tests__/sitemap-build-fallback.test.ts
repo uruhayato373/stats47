@@ -12,7 +12,8 @@
  */
 import { CATEGORY_KEYS } from "@stats47/data-configs";
 import { SURVEY_HUB_ALIASES } from "@stats47/data-configs/content/href";
-import { ok } from "@stats47/types";
+import { KNOWN_RANKING_KEYS } from "@stats47/ranking/config";
+import { err, ok } from "@stats47/types";
 import { describe, it, expect, vi } from "vitest";
 
 import { PUBLISHABLE_CITIES } from "@/features/area-profile/constants/publishable-cities";
@@ -46,6 +47,7 @@ const idOf = (name: (typeof SITEMAP_SEGMENTS)[number]): number =>
 const SEGMENT_ID = {
   blog: idOf("blog"),
   categories: idOf("categories"),
+  ranking: idOf("ranking"),
   surveys: idOf("surveys"),
   tags: idOf("tags"),
   cities: idOf("cities"),
@@ -117,6 +119,37 @@ describe("sitemap ビルド時フォールバック (R2 が空でも空にしな
     vi.mocked(readCategoriesFromR2).mockRejectedValueOnce(new Error("R2 unreachable"));
     const entries = await sitemap({ id: SEGMENT_ID.categories });
     expect(entries).toHaveLength(CATEGORY_KEYS.length);
+  });
+
+  describe("ranking: reader が空・失敗・reject でも既知キーから出す", () => {
+    const expected = async () => {
+      const { UrlPolicy } = await import("@/lib/url-policy");
+      return [...KNOWN_RANKING_KEYS].filter((k) => UrlPolicy.ranking.shouldIncludeInSitemap(k)).length;
+    };
+
+    it("ok([]) のとき", async () => {
+      const n = await expected();
+      expect(n).toBeGreaterThan(0);
+      const entries = await sitemap({ id: SEGMENT_ID.ranking });
+      expect(entries).toHaveLength(n);
+      expect(entries.every((e) => e.url.includes("/ranking/"))).toBe(true);
+    });
+
+    it("err のとき", async () => {
+      const { readActiveKeysForSitemapFromR2 } = await import("@stats47/ranking/server");
+      vi.mocked(readActiveKeysForSitemapFromR2).mockResolvedValueOnce(
+        err(new Error("R2 unreachable")) as never,
+      );
+      const entries = await sitemap({ id: SEGMENT_ID.ranking });
+      expect(entries).toHaveLength(await expected());
+    });
+
+    it("reject のとき", async () => {
+      const { readActiveKeysForSitemapFromR2 } = await import("@stats47/ranking/server");
+      vi.mocked(readActiveKeysForSitemapFromR2).mockRejectedValueOnce(new Error("R2 unreachable"));
+      const entries = await sitemap({ id: SEGMENT_ID.ranking });
+      expect(entries).toHaveLength(await expected());
+    });
   });
 
   it("survey id は本番 404 にならない形をしている (合成 id / 表記ゆれを提出しない)", () => {

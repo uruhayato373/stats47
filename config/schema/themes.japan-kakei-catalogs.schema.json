@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "全国 (/japan) の家計調査テーマ",
+  "description": "data/themes/japan/kakei-catalogs.json の形状契約。公式全国行の実値と単位を検証した家計調査 (二人以上世帯) の年次系列。themes のキーがテーマの slug (/japan/<slug>) で、記録は仕様だけを持つ。shortLabel は持たず、読み込み口 packages/data-configs/src/geo-scope/kakei-japan-catalog.ts が指標の題から結び、指標が家計調査 (source.kind = kakei-chousa) でなければ throw する。metricKeys は指標のキー (config/datasets.mjs の refs が検査する)。",
+  "type": "object",
+  "required": ["themes"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "themes": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^[a-z][a-z0-9-]*$" },
+      "additionalProperties": {
+        "type": "object",
+        "required": ["title", "description", "keywords", "metricKeys"],
+        "additionalProperties": false,
+        "properties": {
+          "title": { "type": "string", "minLength": 1 },
+          "description": { "type": "string", "minLength": 1 },
+          "keywords": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+          "metricKeys": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" } }
+        }
+      }
+    }
+  }
+}

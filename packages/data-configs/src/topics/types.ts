@@ -1,7 +1,7 @@
 /**
  * Topic — カテゴリ内グループ分類の SSOT 型
  *
- * 規約の正典: `packages/data-configs/src/topics/README.md`
+ * 記録の正本: `data/categories/topics/<categoryKey>.json` (カタログの categories.topics。形と解決の規則は Schema の description)
  *
  * ## これは何か
  *

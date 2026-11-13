@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "完全削除したブログ slug (410)",
+  "description": "data/site/url-history/gone-blog-slugs.json の形の契約。記事を完全に削除した slug で、middleware が 410 Gone を返す (Google に過去インデックスされた URL へ「完全削除」のシグナルを送り、除去を早める)。一時的な unpublished は 404 のままでよく、slug を変えただけなら 410 でなく転送 (site.blog-redirects) に載せる。GSC の「見つかりませんでした」レポートに /blog/{slug} が出てきたら足し、記事を復活させるときは消す。slug はブログ記事の台帳 blog.articles に実在する (check-datasets が検査する。状態は gone)。since は削除を決めた日、reason は理由。",
+  "type": "object",
+  "required": ["slugs"],
+  "additionalProperties": false,
+  "properties": {
+    "slugs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["slug"],
+        "additionalProperties": false,
+        "properties": {
+          "slug": { "type": "string", "minLength": 1 },
+          "since": { "$ref": "common.schema.json#/$defs/date" },
+          "reason": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

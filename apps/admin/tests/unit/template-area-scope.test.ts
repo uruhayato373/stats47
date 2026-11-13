@@ -7,6 +7,7 @@ import { areasOf, resolveAreaChart, type AreaScope, type AreaValue } from '@/lib
 import { applyColorPolicy, colorPolicyOf, colorPolicyRow, joinColorPolicy, signedThresholds } from '../../../../packages/types/src/color-policy';
 import { renderGroupedBarsChart } from '@/lib/template-grouped-bars';
 import { renderAreaBarsChart } from '@/lib/template-ranking-bars';
+import { resolveTileScale } from '../../../remotion/src/features/data-cards/tile-scale';
 
 const presentation = { colorScheme: 'interpolateBlues', colorSchemeType: 'sequential', domain: { mode: 'extent' }, classification: { method: 'continuous' }, trendDomain: { mode: 'extent' }, comparisonDomain: { mode: 'extent' } } as never;
 const base = { title: '人口', yearLabel: '2020年', unit: '人', source: '国勢調査', presentation };
@@ -38,6 +39,15 @@ describe('地域の範囲', () => {
 });
 
 describe('順位は集合ごとに数える', () => {
+  it('計算した割合の凡例にも値と同じ表示精度を渡し、長い小数を表示しない', () => {
+    const chart = resolveAreaChart({ ...base, unit: '%', scope: merged, values: [
+      { areaCode: YOKOHAMA, value: -49.0122255923 }, { areaCode: KAWASAKI, value: -1.3767881123 },
+    ] });
+    const scale = resolveTileScale(chart.presentation, chart.rows.map(row => row.value), chart.display)!;
+    expect(scale.boundaries.map(scale.formatBoundary!)).toEqual(['-49.01', '-1.38']);
+    expect(chart.formatValue(chart.rows[0].value)).toBe('-1.38');
+    expect(chart.rows[0].value).toBe(-1.3767881123);
+  });
   it('同じ市でも統合と分割で順位が変わる', () => {
     const inMerged = resolveAreaChart({ ...base, scope: merged, values });
     const inSplit = resolveAreaChart({ ...base, scope: split, values });

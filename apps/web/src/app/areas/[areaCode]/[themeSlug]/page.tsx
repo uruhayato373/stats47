@@ -7,11 +7,13 @@ import { hrefFor } from "@stats47/data-configs/content/href";
 
 import { AREA_THEMES } from "@/features/theme-dashboard/config/area-theme-slugs";
 import {
+  buildThemeTitle,
+  themeLeadLabels,
   ThemePageLayout,
   areaThemeDescription,
   getAreaThemeHighlights,
   loadThemeData,
-} from "@/features/theme-dashboard/server";
+} from '@/features/theme-dashboard/server';
 
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 import { formatOgpTitle } from "@/lib/metadata/site-title";
@@ -50,7 +52,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const pref = prefectures.find((p) => p.prefCode === areaCode);
   if (!theme || !pref) return {};
 
-  const title = `${pref.prefName}の${theme.title}`;
+  // 題は単位に関係なく theme-seo.ts で作る (2026-11-12 オーナー決定)。説明文はその県の主な値と順位を先頭に置く既存の文のまま
+  const title = buildThemeTitle({ scope: "area", themeTitle: theme.title, labels: themeLeadLabels(theme.themeKey), areaName: pref.prefName });
   // その県の主な値と順位を先頭に置く (構造化データと同じ文。2026-10-30)
   const data = await loadAreaThemeData(theme.themeKey);
   const description = areaThemeDescription(

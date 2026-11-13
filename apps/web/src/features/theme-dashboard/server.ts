@@ -4,7 +4,6 @@ export { ALL_THEMES } from "./config/all-themes";
 
 // Server Component
 export { ThemePageLayout } from "./components/ThemePageLayout";
-export { ThemeIndicatorCatalogSection } from "./components/ThemeIndicatorCatalogSection";
 
 // Client Component（テーマ切替）。bespoke ページが barrel 経由で使うため再 export する
 // （app 層からの feature/components 直 import は no-restricted-imports で禁止）。
@@ -31,3 +30,4 @@ export { prefectureCityOptions } from './lib/prefecture-city-options';
 
 // 県ごとのページを持つテーマか (全テーマ定義を読むのでサーバーの入口から出す。2026-10-31)
 export { isAreaTheme } from './config/area-theme-slugs';
+export { buildThemeDescription, buildThemeTitle, readThemeLeadFact, themeLeadLabels } from "./lib/theme-seo";

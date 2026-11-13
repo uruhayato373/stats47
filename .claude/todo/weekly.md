@@ -3,7 +3,7 @@ title: 今週の計画
 type: weekly-plan
 week: 2026-W46
 date: 2026-11-09
-updated: 2026-11-09
+updated: 2026-11-11
 status: active
 tags: []
 ---
@@ -147,8 +147,13 @@ W45 のレビューは 11-14 に書く。ここでは計画の checkbox と back
 
 ### 定常
 
-- 11-13 以降: `ADSENSE-PLACEMENT-01` の 4 週のベースラインを判定する (11-14 の取得で W45 分が入ってから)。
+- 11-13 以降: `ADSENSE-PLACEMENT-01` の 4 週のベースラインを判定する (11-14 の取得で W45 分が入ってから)。 判定の前に読むこと: この 4 週の間に、表示広告の固定化 (10-31)・自動広告のアンカーの適用 (11-04) とその後の拡大・広告インテントのブログでの開始 (11-11) が入っており、「配置を変えない 4 週」にはなっていない (`ADSENSE-FORMAT-EXPERIMENT-01`・`ADSENSE-OVERLAY-AB-01` の 11-11 の実測)。
+- 11-12 以降: `GSC-CRAWL-WASTE-01` — Googlebot の POST を 24 時間で数え、11-11 の基準 (県×テーマとテーマで 262 件) と比べる。
 - 11-14（土）: `npm run weekly:collect` → `/weekly-review 2026-W45` → `/weekly-plan 2026-W47` を続けて行う。
+- 11-14（土）の取得の後: `GSC-SOURCE-FRESHNESS-01` — `data/gsc/coverage-submitted-history.csv` に最初の行が入り、登録済みが 6,729 と同じ桁かを確かめる。入ったら `review-wiring.json` の週次・月次の入力に足す。概要の export に検証の状態の列があるかも見る。
+- 11-14（土）のレビューで: `ADSENSE-OVERLAY-AB-01` — AdSense の管理画面で、広告インテントの「リンクを既存のテキストに挿入」がオフのままかを読む (オンなら `isAdIntentAllowedPath` を常に false に戻す)。`data/adsense/history-formats.csv` で自動広告の形式別の収益を読む。
+- 11-12 の本番反映の後: `ADSENSE-OVERLAY-AB-01` — Cookie 同意の帯が、本番の広告インテントのアンカーと重ならないことを実測する。
+- 11-25 以降 (W48 の計画へ送る): `GSC-MESSAGE-TRIAGE-01`・`GSC-SITEMAP-LASTMOD-01` — GSC の検証 5 件の結果と、ランキングの `lastmod` の出所 (`all.json` の `updatedAt` が次の生成で動かないか) を読む。
 - ブログの全型一律の是正・新規生成は今週の Must にしない。家計調査の書き直しを優先する。
 - 期日 11-13・11-15 のアフィリエイトのカード 2 枚は、領域が「維持」なので今週は扱わない (11-14 のレビューで期日を置き直す)。
 

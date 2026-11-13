@@ -297,8 +297,9 @@ jobs:
             apps/web/src/config/unpublished-blog-slugs.ts
             apps/web/src/config/sitemap-blog-entries.ts
           )
-          # KNOWN から作る生成物。キーではないので件数の増減には数えない
+          # KNOWN と R2 のブログの一覧から作るもの (ブログの記事台帳と、そこから作るページ索引)。キーではないので件数の増減には数えない
           DERIVED_FILES=(
+            data/blog/ledger
             data/content/entities.json
             data/content/pages
             packages/data-configs/src/prominence/ranking-prominence.generated.ts

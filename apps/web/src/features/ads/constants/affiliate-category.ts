@@ -2,8 +2,11 @@
  * アフィリエイト広告の「意図軸 (vertical)」= 全タクソノミー (category / theme / tag / ranking) を
  * 集約する単一ハブ。ページの意図 → vertical → 広告 で解決する。
  *
- * 正典: `.claude/rules/affiliate-ads-standards.md`。vertical の追加・写像変更はここだけで行う。
+ * 正典: `.claude/rules/affiliate-ads-standards.md`。写像の記録の正本は台帳 `affiliate.vertical-map`
+ * (data/affiliate/ledger/vertical-map.json + Schema) で、ここは型を付けて export し、解決の関数を持つ。
+ * vertical の値の列挙は AffiliateVertical と Schema の enum の 2 か所にあり、テストが一致を固定する。
  */
+import data from "../../../../../../data/affiliate/ledger/vertical-map.json";
 
 /** 広告意図軸 (10 vertical)。コンテンツ分類 (category 17 / theme 20 / tag) はここへ写像する。 */
 export type AffiliateVertical =
@@ -41,240 +44,29 @@ export type AffiliateCategory = AffiliateVertical;
  * categoryKey (e-Stat 17 軸) → vertical。
  * ranking / category ページはこの写像で vertical を得る。
  */
-export const CATEGORY_AFFILIATE_MAP: Record<string, AffiliateVertical> = {
-  "laborwage":               "labor",
-  "construction":            "housing",
-  "landweather":             "housing",
-  "population":              "population",
-  "economy":                 "economy",
-  "socialsecurity":          "health",
-  "energy":                  "energy",
-  "tourism":                 "travel",
-  "administrativefinancial": "furusato",
-  "educationsports":         "education",
-  "safetyenvironment":       "mobility",
-  // ★ 2026-07-28 追加。写像が無い間これらのランキングは vertical を解決できず、
-  //   AffiliateAdSlot が実験→banner→text の全経路で空振りして **常に AdSense に落ちていた**
-  //   (GSC 2026-W30 実測で計 7,866 imp。placement-map の unmapped.byReason で確認)。
-  //   各カテゴリの metric 構成を実際に読んで寄せ先を決めた (推測で写像しない)。
-  "commercial":              "economy",   // 商業販売額・小売店数・理容美容所数 → 消費・商業
-  "agriculture":             "furusato",  // 農業産出額・養殖収獲量・耕地 → 返礼品 (食品) と直結
-  "infrastructure":          "mobility",  // 空港・給油所・林道・立体横断施設 → 交通インフラが主
-  "ict":                     "energy",    // 携帯契約数・公衆電話・郵便局 → 通信 (energy は通信を含む軸)
-  "miningindustry":          "economy",   // 鉱工業出荷額 → 経済
-  "international":           "travel",    // 国際・外国人 → 旅行
-};
+export const CATEGORY_AFFILIATE_MAP = data.category as Record<string, AffiliateVertical>;
 
 /**
  * カテゴリ一覧は回遊が主目的。17軸を明示し、分類の写像だけで広告枠を増やさない。
  * null は掲載漏れではない。人口/医療/気候や既存枠のないカテゴリは適合導線を確認するまで空。
  */
-export const CATEGORY_PAGE_AFFILIATE_POLICY: Readonly<Record<string, AffiliateVertical | null>> = {
-  laborwage: "labor",
-  construction: "housing",
-  landweather: null,
-  population: null,
-  economy: "economy",
-  socialsecurity: null,
-  energy: "energy",
-  tourism: "travel",
-  administrativefinancial: "furusato",
-  educationsports: null,
-  safetyenvironment: null,
-  commercial: null,
-  agriculture: null,
-  infrastructure: null,
-  ict: null,
-  miningindustry: null,
-  international: null,
-};
+export const CATEGORY_PAGE_AFFILIATE_POLICY = data.categoryPagePolicy as Readonly<Record<string, AffiliateVertical | null>>;
 
 /**
  * theme スラッグ (20) → vertical。テーマページ (`/themes/*`) の広告解決に使う。
- * theme の SSOT は `packages/data-configs/src/theme-catalog/`。theme 追加時はここも更新。
+ * theme の正本は台帳 `themes.catalogs`。theme を足したら `affiliate.vertical-map` の theme も足す。
  */
-export const THEME_AFFILIATE_MAP: Record<string, AffiliateVertical> = {
-  "aging-society":       "health",
-  "consumer-prices":     "economy",
-  "education-culture":   "education",
-  "fishery-marine":      "economy",
-  "foreign-residents":   "population",
-  "healthcare":          "health",
-  "labor-mobility":      "labor",
-  "labor-wages":         "labor",
-  "living-housing":      "housing",
-  "local-economy":       "economy",
-  "local-finance":       "furusato",
-  "manufacturing":       "economy",
-  "occupation-salary":   "labor",
-  "population-dynamics": "population",
-  "ports":               "mobility",
-  "railway":             "mobility",
-  "real-income":         "economy",
-  "roads":               "mobility",
-  "safety":              "mobility",
-  "tourism":             "travel",
-};
+export const THEME_AFFILIATE_MAP = data.theme as Record<string, AffiliateVertical>;
 
 /** タグキー → vertical（tagKey ベース。blog frontmatter tags の写像） */
-export const TAG_AFFILIATE_MAP: Record<string, AffiliateVertical> = {
-  // 労働・賃金
-  "wages": "labor", "labor": "labor", "employment": "labor",
-  "labor-market": "labor", "minimum-wage": "labor",
-  "industrial-structure": "labor",
-  // 住宅・土地
-  "housing": "housing", "real-estate": "housing", "relocation": "housing",
-  "rent": "housing", "vacant-houses": "housing", "land-prices": "housing",
-  "land-use": "housing",
-  // 人口・世帯
-  "population": "population", "household-structure": "population",
-  "marriage": "population", "birth-rate": "population",
-  "declining-birthrate": "population", "aging-population": "population",
-  "childcare": "population",
-  // 家計・経済・投資
-  "economy": "economy", "household-finance": "economy", "gdp": "economy",
-  "prices": "economy", "consumption": "economy", "income": "economy",
-  "real-income": "economy", "savings": "economy", "savings-rate": "economy",
-  "household-income": "economy", "household-head-income": "economy",
-  "monthly-income": "economy", "income-inequality": "economy",
-  "prefectural-income": "economy", "consumption-expenditure": "economy",
-  "consumer-price-index": "economy",
-  // 健康・医療
-  "medical-care": "health", "health": "health", "long-term-care": "health",
-  "welfare": "health",
-  // エネルギー・水
-  "energy": "energy", "water-supply": "energy", "environment": "energy",
-  // 旅行・観光 (OTA)
-  "tourism": "travel", "travel": "travel", "accommodation": "travel",
-  "sightseeing": "travel",
-  // 交通・移動・自動車 (自動車保険・車査定)
-  "transportation": "mobility", "traffic-safety": "mobility",
-  "traffic-accidents": "mobility", "public-safety": "mobility",
-  "railway": "mobility", "roads": "mobility", "automobile": "mobility",
-  // 教育・学習 (通信教育)
-  "education": "education", "school": "education", "学習": "education",
-  "教育": "education",
-  // ふるさと納税・地方財政
-  "public-finance": "furusato", "furusato-nozei": "furusato",
-  "tax-revenue": "furusato", "local-government-finance": "furusato",
-  "government-expenditure": "furusato",
-  // 日本語 tagKey (記事 frontmatter は日本語タグをそのまま tagKey にするため)
-  "賃金": "labor", "労働": "labor", "年収": "labor", "雇用": "labor",
-  "労働時間": "labor", "残業": "labor", "働き方": "labor", "テレワーク": "labor",
-  "エンジニア": "labor", "IT": "labor", "転職": "labor", "情報通信": "labor",
-  "所得": "economy", "経済": "economy", "収入": "economy", "家計": "economy",
-  "旅行": "travel", "観光": "travel", "宿泊": "travel",
-  "自動車": "mobility", "交通": "mobility", "車": "mobility",
-  // ★ 2026-07-28 追加: 公開 430 記事の実タグを集計し、頻出かつ意味が明確なものを写像した。
-  //   これで tag→vertical の解決率が 19% (83 記事) → 70% (301 記事) に上がる。
-  //   「都道府県ランキング」「地域差」「地域格差」「都道府県別」等の**汎用タグは意図的に入れない** —
-  //   誤った軸へ流すくらいなら economy フォールバックの方が無害なため。
-  "家計調査": "economy", "消費支出": "economy", "食費": "economy", "物価": "economy",
-  "貯蓄": "economy", "可処分所得": "economy", "食文化": "economy", "消費量": "economy",
-  "外食": "economy",
-  "人口": "population", "高齢化": "population", "人口減少": "population",
-  "少子化": "population", "出生率": "population", "世帯": "population",
-  "結婚": "population", "子育て": "population",
-  "医療": "health", "健康": "health", "介護": "health", "病院": "health",
-  "地方財政": "furusato", "財政": "furusato", "税": "furusato",
-  "住宅": "housing", "不動産": "housing", "土地": "housing", "空き家": "housing",
-  "学校": "education", "進学": "education",
-  "エネルギー": "energy", "電力": "energy", "通信": "energy",
-  "交通事故": "mobility", "道路": "mobility", "鉄道": "mobility",
-  // ★ 2026-09-02 追加: 公開 523 記事の実タグ × GSC 2026-W35 imp で棚卸しした。
-  //   写像なしの 212 記事 (ブログ imp の 56%) のうち意図が明確なものを足し、解決率を
-  //   記事数 311→363 / imp 44%→89% に上げる。寄せ先は CATEGORY_AFFILIATE_MAP と
-  //   THEME_AFFILIATE_MAP の既存判断に揃える (同じ主題の ranking / theme ページと同じ広告が出る)。
-  //   「都道府県格差」「地域差」「地名」「公務員」等の汎用・無意図タグは引き続き入れない。
-  //   同日、出典調査による上書き (SURVEY_AFFILIATE_MAP) を導入したので、身長・気候のような
-  //   「主題はあるが商材が無い」タグは写像せず調査側で null にする。
-  // 教育 (educationsports → education)。身長・体重等の学校保健統計は意図が無いので
-  //   写像せず、SURVEY_AFFILIATE_MAP の school-health-survey: null で広告を止める
-  "高校生": "education", "中学生": "education",
-  "教育スポーツ": "education", "大学": "education", "進学率": "education",
-  "教育格差": "education", "収容力指数": "education", "図書館": "education",
-  "博物館": "education", "文化施設": "education", "社会教育": "education",
-  "文化資本": "education",
-  // 社会保障 (socialsecurity → health)
-  "熱中症": "health", "平均寿命": "health", "健康寿命": "health",
-  // 鉱工業・商業 (miningindustry / commercial → economy)。manufacturing テーマも economy
-  "製造業": "economy", "工業統計": "economy", "ものづくり": "economy",
-  "製造品出荷額": "economy", "付加価値": "economy", "自動化": "economy",
-  "半導体": "economy", "電子部品": "economy", "商業": "economy", "小売": "economy",
-  "コンビニ": "economy", "酒類消費": "economy", "アルコール": "economy",
-  "酒税改正": "economy", "消費": "economy",
-  // 労働
-  "労働生産性": "labor",
-  // 農林水産 (agriculture → furusato: 産品は返礼品と直結) / 地方財政 (administrativefinancial → furusato)
-  "農業": "furusato", "米": "furusato", "水稲収穫量": "furusato", "作物統計": "furusato",
-  "漁獲量": "furusato", "水産": "furusato", "カツオ": "furusato", "特産品": "furusato",
-  "地方債": "furusato", "借金": "furusato", "財政健全性": "furusato",
-  "将来負担比率": "furusato", "財政力指数": "furusato",
-  // 人口 (外国人住民は foreign-residents テーマと同じ population)
-  "人口密度": "population", "都市化": "population", "人口集中地区": "population",
-  "昼夜間人口": "population", "ベッドタウン": "population", "人口構成": "population",
-  "人口流出": "population", "在留外国人": "population", "外国人": "population",
-  "多文化共生": "population", "国際化": "population", "世帯構造": "population",
-  "単独世帯": "population", "核家族": "population", "ひとり親世帯": "population",
-  "共働き": "population",
-  // 国土・気候 (landweather / construction → housing)
-  "可住地面積": "housing", "土地利用": "housing", "国土": "housing", "林野面積": "housing",
-  "地価": "housing", "移住": "housing",
-  //   気候・気温・降雪は意図が無いので写像しない (weather-statistics: null で止める)
-  // エネルギー (太陽光・再エネは電力・蓄電池の案件と直結)
-  "再生可能エネルギー": "energy", "太陽光発電": "energy", "風力発電": "energy",
-  "カーボンニュートラル": "energy", "GX": "energy", "太陽光": "energy",
-  "日照時間": "energy", "快晴日数": "energy", "電気代": "energy",
-  // ★ 2026-10-31 追加 (オーナー指示「ページや記事の内容とアフィリエイトの配線をしっかり」): 配置マップ (GSC 2026-W42) の
-  //   「タグが意図軸に届かない記事」121 本・検索表示 25,684 回のタグを、検索表示の多い順に見て意図が明確なものだけ写した。
-  //   通信 (回線・格安 SIM) は energy、通勤は mobility、労災は labor、Claude Code・業務効率化はプログラミング・AI スクールの education。
-  //   「都道府県ランキング」「行政」「自治体」「地名」「公務員」「インフラ」等の汎用タグ、中絶率・女性健康等の医療の当事者のタグは入れない。
-  "公衆電話": "energy", "ICT": "energy", "通勤": "mobility",
-  "労働災害": "labor", "労災": "labor", "労災保険": "labor", "安全衛生": "labor",
-  "旅行行動者率": "travel", "おでかけ格差": "travel",
-  "ClaudeCode": "education", "業務効率化": "education",
-  "昼間人口": "population", "都市圏": "population", "離婚率": "population",
-};
+export const TAG_AFFILIATE_MAP = data.tag as Record<string, AffiliateVertical>;
 
 /**
  * 市区町村テーマ (`/municipalities/themes/<slug>`) → vertical。
- * slug の SSOT は `packages/data-configs/src/geo-scope/` の MUNICIPALITY_THEME_CATALOGS。
+ * slug の正本は MUNICIPALITY_THEME_CATALOGS (台帳 `municipalities.themes` と拡充の台帳 2 つから組み立てる)。
  * 寄せ先は同じ主題の CATEGORY_AFFILIATE_MAP / THEME_AFFILIATE_MAP と揃える (2026-09-02)。
  */
-export const MUNICIPALITY_THEME_AFFILIATE_MAP: Record<string, AffiliateVertical> = {
-  "aging-society":        "health",
-  "population":           "population",
-  "households":           "population",
-  "migration":            "population",
-  "vital-statistics":     "population",
-  "foreign-residents":    "population",
-  "urban-structure":      "housing",
-  "local-finance":        "furusato",
-  "commerce":             "economy",
-  "establishments":       "economy",
-  "manufacturing":        "economy",
-  "medical-welfare":      "health",
-  "education":            "education",
-  "housing":              "housing",
-  "commuting":            "mobility",
-  "labor":                "labor",
-  "safety-environment":   "mobility",
-  "agriculture-forestry": "furusato",
-  "land-area":            "housing",
-  // 2026-10-22 社会・人口統計体系の拡充で新設したテーマ。寄せ先は同じ主題の既存テーマに揃える
-  "age-structure":         "population",
-  "age-structure-by-sex":  "population",
-  "occupations":           "labor",
-  "employees":             "economy",
-  "business-sales":        "economy",
-  "municipal-revenue":     "furusato",
-  "municipal-expenditure": "furusato",
-  "welfare-facilities":    "health",
-  "housing-size-age":      "housing",
-  "housing-households":    "housing",
-  // 2026-10-28 住宅・土地統計調査の住環境 (最寄り施設までの距離・空き家の内訳)。住宅テーマに揃える
-  "living-environment":    "housing",
-};
+export const MUNICIPALITY_THEME_AFFILIATE_MAP = data.municipalityTheme as Record<string, AffiliateVertical>;
 
 /**
  * 広告に付与された vertical を解決する。`vertical` を正とし、未設定なら categoryKey から写像 (後方互換)。
@@ -307,31 +99,7 @@ export { AFFILIATE_THEME } from "./affiliate-category.palette";
  * ここに無い調査はタグ → カテゴリの従来解決に落ちる。追加は「カテゴリ写像より明らかに
  * 良い/悪い」と実測で言える調査だけ (2026-09-03: GSC 2026-W35 の imp 上位から選定)。
  */
-export const SURVEY_AFFILIATE_MAP: Readonly<Record<string, AffiliateVertical | null>> = {
-  // 家計調査 (品目別): ランキング 28,867 imp/週・ブログ 12,366。読者は「◯◯をよく買う県」を見に来る。
-  //   金融 (economy) ではなく返礼品 (furusato) と楽天商品カードが合う
-  "kakei-chousa": "furusato",
-  // 学校保健統計 (身長・体重): 6,370 imp。合う商材が無い (資格講座・研修が出ていた)
-  "school-health-survey": null,
-  // 気象統計 (日照・気温・降雪): 合う商材が無い (不動産・バーチャルオフィスが出ていた)
-  "weather-statistics": null,
-  // 面積調 / 自然公園面積: 同上
-  "area-survey": null,
-  "natural-park-area": null,
-  // 犯罪・火災・水害: safetyenvironment → mobility (自動車保険) は交通事故には合うがこれらには合わない
-  "police-statistics": null,
-  "fire-annual-report": null,
-  "flood-statistics": null,
-  // 廃棄物・水質・上下水道: infrastructure/safetyenvironment → mobility は合わない
-  "waste-management-survey": null,
-  "water-pollution-survey": null,
-  "sewerage-statistics": null,
-  "waterworks-statistics": null,
-  // 地方公務員給与: administrativefinancial → furusato ではなく転職 (labor)
-  "local-public-employee-salary": "labor",
-  // 在留外国人統計: international → travel (旅行) ではなく population (foreign-residents テーマと同じ)
-  "foreign-residents-statistics": "population",
-};
+export const SURVEY_AFFILIATE_MAP = data.survey as Readonly<Record<string, AffiliateVertical | null>>;
 
 /** tagKey 群 → 重複なし vertical 群 (出現順)。 */
 export function verticalsFromTagKeys(tagKeys: readonly string[]): AffiliateVertical[] {

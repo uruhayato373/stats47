@@ -9,7 +9,7 @@ import {
   SOURCE,
 } from '../ingest-water-pipe-maintenance.mjs';
 const require = createRequire(resolve(process.cwd(), 'package.json'));
-const prefs = require('./packages/area/src/data/prefectures.json');
+const prefs = require('./.claude/scripts/lib/prefectures.cjs').PREFECTURES;
 function entity(
   pref,
   index = 1,

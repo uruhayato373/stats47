@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Geo コンテンツの公開ライフサイクルの手書き部分",
+  "description": "data/geo/analyses/content-lifecycle.json の形状契約。contents のキーが contentId (business-plan.content-opportunities の geo-NNN)。ここは手で決める部分 (テーマ・記事の slug と題案・公開計画) だけで、無料面・SNS・有料面の経路や公開ゲートは読み込み口 packages/data-configs/src/business-plan/geo-content-lifecycle.ts が分析 (geo.analyses) と商品から結合して作る。数値の正典は canonical の Geo 分析と R2 の artifact。",
+  "type": "object",
+  "required": ["contents"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "contents": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^geo-\\d{3}$" },
+      "additionalProperties": {
+        "type": "object",
+        "required": ["themeKeys", "blogSlug", "suggestedTitle", "launch"],
+        "additionalProperties": false,
+        "properties": {
+          "themeKeys": { "description": "関連するテーマ (themes.catalogs の key)", "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" } },
+          "blogSlug": { "description": "対応するブログ記事 (blog.articles の slug)", "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+          "suggestedTitle": { "type": "string", "minLength": 1 },
+          "launch": {
+            "type": "object",
+            "required": ["order", "role", "audience", "readerJob", "promise", "hook", "borrowedPatterns", "surfaceOrder", "reusableOutputs", "evaluationWindowDays", "successGate", "stopCondition"],
+            "additionalProperties": false,
+            "properties": {
+              "order": { "type": "integer", "minimum": 1 },
+              "role": { "enum": ["commercial-lead", "public-utility", "decision-support", "evidence-hub"] },
+              "audience": { "type": "string", "minLength": 1 },
+              "readerJob": { "type": "string", "minLength": 1 },
+              "promise": { "type": "string", "minLength": 1 },
+              "hook": { "type": "string", "minLength": 1 },
+              "borrowedPatterns": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+              "surfaceOrder": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+              "reusableOutputs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+              "evaluationWindowDays": { "const": 28 },
+              "successGate": { "type": "string", "minLength": 1 },
+              "stopCondition": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      }
+    }
+  }
+}

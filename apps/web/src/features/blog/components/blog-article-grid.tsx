@@ -1,3 +1,5 @@
+import type { ComponentProps } from 'react';
+
 import { hrefFor } from '@stats47/data-configs/content/href';
 import { normalizePercentInText } from "@stats47/data-configs/unit";
 
@@ -19,9 +21,11 @@ function formatCardDate(iso: string | null): string | null {
 
 interface BlogArticleGridProps {
   articles: Article[];
+  /** 一覧が 1 列のとき index 件目の後に出す要素 (ブログ一覧のインフィード広告。CardGrid の insertAfter) */
+  insertAfter?: ComponentProps<typeof CardGrid>['insertAfter'];
 }
 
-export function BlogArticleGrid({ articles }: BlogArticleGridProps) {
+export function BlogArticleGrid({ articles, insertAfter }: BlogArticleGridProps) {
   if (articles.length === 0) {
     return (
       <p className="py-12 text-center text-muted-foreground">
@@ -32,7 +36,7 @@ export function BlogArticleGrid({ articles }: BlogArticleGridProps) {
 
   // 記事カードの格子 (列は本文の幅で 1 → 2 → 3 列。部品の台帳 card-grid)。2026-10-29 にテーマの記事欄と同じ部品へ寄せた
   return (
-    <CardGrid>
+    <CardGrid insertAfter={insertAfter}>
       {articles.map((article, index) => {
         const cardDate = formatCardDate(article.updatedAt ?? article.publishedAt);
         return (

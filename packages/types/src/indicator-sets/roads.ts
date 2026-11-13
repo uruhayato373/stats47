@@ -43,7 +43,7 @@ export const ROADS_SET: IndicatorSet = {
     {
       "rankingKey": "road-length-per-km2",
       "shortLabel": "道路実延長（総面積1km²当たり）",
-      "role": "secondary"
+      "role": "primary"
     },
     {
       "rankingKey": "main-road-paving-rate",

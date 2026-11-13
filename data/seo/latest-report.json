@@ -1,48 +1,75 @@
 {
   "schemaVersion": 1,
-  "date": "2026-11-09",
+  "date": "2026-11-13",
   "period": {
-    "periodStart": "2026-10-31",
-    "periodEnd": "2026-11-06",
+    "periodStart": "2026-11-04",
+    "periodEnd": "2026-11-10",
     "windowDays": 7
   },
-  "inputHash": "8460dbe35273199353a351153952bb5aa6c81686c610bec4fe4fae42d805d732",
+  "inputHash": "87374e82a97f9427a5508066abbe19021f7799b5005dbd3f830d91609f6f88e0",
   "movements": [
     {
-      "keyword": "自治体 数",
-      "targetPath": "/blog/municipality-count-prefecture-gap",
-      "before": 8,
-      "after": 77.33333333333333,
-      "beforeImpressions": 1,
-      "impressions": 3,
-      "change": -69.33333333333333
-    },
-    {
-      "keyword": "埼玉 県 人口",
-      "targetPath": "/areas/11000/cities/11100",
-      "before": 26,
-      "after": 87,
+      "keyword": "福島 市 人口",
+      "targetPath": "/areas/07000/cities/07201",
+      "before": 9,
+      "after": 96,
       "beforeImpressions": 1,
       "impressions": 1,
-      "change": -61
+      "change": -87
+    },
+    {
+      "keyword": "佐賀 市 人口",
+      "targetPath": "/areas/41000/cities/41201",
+      "before": 10,
+      "after": 77,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": -67
+    },
+    {
+      "keyword": "宮古島人口",
+      "targetPath": "/areas/47000/cities/47214",
+      "before": 6,
+      "after": 70,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": -64
+    },
+    {
+      "keyword": "離婚率 日本",
+      "targetPath": "/blog/divorces-per-total-population",
+      "before": 21.333333333333332,
+      "after": 83,
+      "beforeImpressions": 3,
+      "impressions": 2,
+      "change": -61.66666666666667
     },
     {
       "keyword": "松本 市 人口",
       "targetPath": "/areas/20000/cities/20202",
       "before": 10.5,
-      "after": 67,
+      "after": 68.5,
       "beforeImpressions": 2,
-      "impressions": 1,
-      "change": -56.5
+      "impressions": 2,
+      "change": -58
     },
     {
-      "keyword": "品川 区 人口",
-      "targetPath": "/areas/13000/cities/13109",
-      "before": 10,
-      "after": 59,
+      "keyword": "岐阜 市 人口",
+      "targetPath": "/areas/21000/cities/21201",
+      "before": 8.6,
+      "after": 66.5,
+      "beforeImpressions": 5,
+      "impressions": 2,
+      "change": -57.9
+    },
+    {
+      "keyword": "富士 市 人口",
+      "targetPath": "/areas/22000/cities/22210",
+      "before": 61,
+      "after": 7,
       "beforeImpressions": 1,
       "impressions": 1,
-      "change": -49
+      "change": 54
     },
     {
       "keyword": "離婚 率 日本",
@@ -54,49 +81,22 @@
       "change": -48.5
     },
     {
-      "keyword": "四日市 人口",
-      "targetPath": "/areas/24000/cities/24202",
-      "before": 15.166666666666666,
-      "after": 60,
-      "beforeImpressions": 6,
-      "impressions": 1,
-      "change": -44.833333333333336
-    },
-    {
-      "keyword": "高卒 初任 給 平均",
-      "targetPath": "/ranking/starting-salary-highschool",
-      "before": 22,
-      "after": 65.5,
-      "beforeImpressions": 1,
-      "impressions": 2,
-      "change": -43.5
-    },
-    {
-      "keyword": "外国人人口",
-      "targetPath": "/themes/foreign-residents",
-      "before": 100,
-      "after": 58,
+      "keyword": "四国の高速道路",
+      "targetPath": "/geo/history/expressway/shikoku",
+      "before": 83,
+      "after": 38,
       "beforeImpressions": 1,
       "impressions": 1,
-      "change": 42
+      "change": 45
     },
     {
-      "keyword": "漁獲量",
-      "targetPath": "/japan/fishery-marine",
-      "before": 52,
+      "keyword": "兵庫県津波",
+      "targetPath": "/areas/28000/tsunami-exposure",
+      "before": 54,
       "after": 10,
       "beforeImpressions": 1,
-      "impressions": 2,
-      "change": 42
-    },
-    {
-      "keyword": "住民税 ランキング",
-      "targetPath": "/municipalities/ranking/municipal-resident-tax",
-      "before": 49,
-      "after": 8,
-      "beforeImpressions": 1,
-      "impressions": 2,
-      "change": 41
+      "impressions": 1,
+      "change": 44
     }
   ],
   "verdicts": [
@@ -107,10 +107,10 @@
     }
   ],
   "selected": {
-    "keyword": "金沢市 人口",
-    "targetPath": "/areas/17000/cities/17201",
-    "rank": 7.226120857699805,
-    "impressions": 513,
+    "keyword": "阿波市 人口",
+    "targetPath": "/areas/36000/cities/36206",
+    "rank": 6.940711462450593,
+    "impressions": 759,
     "clicks": 0,
     "group": 5,
     "previousMethod": null,
@@ -177,6 +177,11 @@
       "keyword": "酷暑日の都道府県数",
       "targetPath": "/blog/extreme-heat-days-prefecture",
       "proposalId": "42320157489-1"
+    },
+    {
+      "keyword": "金沢市 人口",
+      "targetPath": "/areas/17000/cities/17201",
+      "proposalId": "42960578131-1"
     }
   ]
 }

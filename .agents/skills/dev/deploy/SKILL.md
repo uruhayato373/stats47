@@ -83,7 +83,7 @@ web モードでは下表の MCP ツールだけを使う。
 | 対象 | 反映経路 | 起動 |
 |---|---|---|
 | 新規/更新ブログ記事 (`contents/blog/<slug>/article.md`, `published:true`) | `blog-auto-publish.yml`（**develop checkout**・factual/quality ゲート後 R2 push・MAX_PUBLISH 件） | **develop への article.md push で自動発火** (Phase 2) / 手動は `publish-blog.yml` dispatch |
-| affiliate 広告 (`apps/web/scripts/affiliate-ads-data.ts`) | `publish-affiliate-ads.yml`（develop checkout → `run.sh --only affiliate-ads`） | **develop への affiliate-ads-data.ts push で自動発火** / 手動は `sync-snapshots.yml -f only=affiliate-ads` |
+| affiliate 広告 (台帳 `affiliate.ads`) | `publish-affiliate-ads.yml`（develop checkout → `run.sh --only affiliate-ads`） | **develop への台帳 `affiliate.ads` (と読み込み口) の push で自動発火** / 手動は `sync-snapshots.yml -f only=affiliate-ads` |
 | page_components 等その他 snapshot | `sync-snapshots.yml` | dispatch (`-f only=<task>`) |
 | 固定バナー画像 (コード直書きの `SidebarPromoBanner` 等) | コードデプロイのみで反映 (R2 不要) | main マージで自動 |
 
@@ -259,7 +259,7 @@ curl -s -o /dev/null -w "%{http_code}\n" \
 - `apps/web/src/middleware.ts` のルール追加・変更（特に 410 / 301 / noindex 分岐）
 - `apps/web/src/app/**/page.tsx` の `generateMetadata` で `robots` / `canonical` を変更
 - `apps/web/src/app/robots.ts` / `sitemap.ts` / `manifest.ts` の変更
-- `apps/web/src/config/gone-*.ts` / `known-*.ts` / `legacy-category-keys.ts` への追加・削除
+- `apps/web/src/config/gone-*.ts` / `known-*.ts` への追加・削除
 - `apps/web/src/lib/url-policy.ts` の変更（indexable 判定の SSOT。area / cityCategory / ranking 等）
 
 **理由**: 本番の HTML 200 応答は `Cache-Control: s-maxage=86400` で Cloudflare エッジに最大 24 時間キャッシュされる。middleware ルール変更を即時反映するには Purge が必要。

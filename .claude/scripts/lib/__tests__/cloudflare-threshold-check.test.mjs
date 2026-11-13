@@ -74,3 +74,131 @@ test("stats47 bucketだけを12.5GB閾値で判定する", () => {
   assert.equal(missing.violations.length, 1);
   assert.equal(missing.violations[0].severity, "critical");
 });
+
+
+// ---- Workers CPU (2026-11-13) ----
+import {
+  buildReport,
+  cycleLengthDays,
+  cycleStartDate,
+  estimateWorkersCostUsd,
+  evaluateCyclePace,
+} from "../../cloudflare/threshold-check.mjs";
+
+test("flatten は CPU を ms で含み、null なら workers_cpu_ms キー自体を入れない", () => {
+  const withCpu = createSnapshot(undefined);
+  withCpu.workers.totalCpuTimeUs = 50_000_000_000;
+  assert.equal(flatten(withCpu).workers_cpu_ms, 50_000_000);
+
+  const nullCpu = createSnapshot(undefined);
+  nullCpu.workers.totalCpuTimeUs = null;
+  assert.equal("workers_cpu_ms" in flatten(nullCpu), false);
+  assert.equal("workers_cpu_ms" in flatten(createSnapshot(undefined)), false);
+});
+
+test("CPU ルール: 通過・warning・critical と、metric 欠落は critical", () => {
+  const rules = budgets.rules.filter((r) => r.metric_key === "workers_cpu_ms");
+  assert.deepEqual(rules.map((r) => r.rule_id), ["workers-cpu-warning", "workers-cpu-critical"]);
+
+  assert.equal(evaluateRules({ workers_cpu_ms: 40_000_000 }, rules).violations.length, 0);
+  const warn = evaluateRules({ workers_cpu_ms: 50_000_000 }, rules).violations;
+  assert.deepEqual(warn.map((v) => [v.rule_id, v.severity]), [["workers-cpu-warning", "warning"]]);
+  const crit = evaluateRules({ workers_cpu_ms: 90_000_000 }, rules).violations;
+  assert.deepEqual(crit.map((v) => v.severity).sort(), ["critical", "warning"]);
+  const missing = evaluateRules({}, rules).violations;
+  assert.equal(missing.length, 2);
+  assert.ok(missing.every((v) => v.severity === "critical"));
+});
+
+test("mutation: 閾値を動かすと CPU 判定が変わる", () => {
+  const rules = budgets.rules.filter((r) => r.rule_id === "workers-cpu-warning");
+  const metrics = { workers_cpu_ms: 50_000_000 };
+  assert.equal(evaluateRules(metrics, rules).violations.length, 1);
+  const raised = rules.map((r) => ({ ...r, threshold: 60_000_000 }));
+  assert.equal(evaluateRules(metrics, raised).violations.length, 0);
+  const lowered = rules.map((r) => ({ ...r, threshold: 10_000_000 }));
+  assert.equal(evaluateRules({ workers_cpu_ms: 20_000_000 }, lowered).violations.length, 1);
+});
+
+test("サイクル開始日: 14 日は前月 15 日、15 日はその月、月またぎ・年またぎ", () => {
+  assert.equal(cycleStartDate("2026-11-14"), "2026-10-15");
+  assert.equal(cycleStartDate("2026-11-15"), "2026-11-15");
+  assert.equal(cycleStartDate("2026-11-13"), "2026-10-15");
+  assert.equal(cycleStartDate("2027-01-10"), "2026-12-15");
+  assert.equal(cycleStartDate("2026-12-31"), "2026-12-15");
+  assert.equal(cycleLengthDays("2026-10-15"), 31);
+  assert.equal(cycleLengthDays("2026-11-15"), 30);
+  assert.equal(cycleLengthDays("2026-12-15"), 31);
+  assert.equal(cycleLengthDays("2027-01-15"), 31);
+  assert.equal(cycleLengthDays("2027-02-15"), 28);
+});
+
+test("推定額は基本料 $5 + 込み分 3,000 万 ms 超過分", () => {
+  assert.equal(estimateWorkersCostUsd(20_000_000), 5);
+  assert.ok(Math.abs(estimateWorkersCostUsd(1_530_000_000) - 35) < 1e-9);
+});
+
+function daySnap(date, cpuMs) {
+  return { date, workers: { totalCpuTimeUs: cpuMs === null ? null : cpuMs * 1000 } };
+}
+
+test("累計ペース: 日割り許容額を超えれば warning を 1 件、超えなければ 0 件", () => {
+  // CPU が込み分の範囲ならサイクル初日でも超過にしない (基本料は日割りしない)
+  assert.equal(
+    evaluateCyclePace({ snapshots: [daySnap("2026-10-15", 900_000)], latestDate: "2026-10-15", monthlyBudgetUsd: 15 }).violations.length,
+    0,
+  );
+
+  // 10/15〜10/24 (10 日) 各 1 億 ms = 10 億 ms → 5 + 970*0.02 = 24.4。許容 5 + 10*10/31 = 8.23
+  const over = [];
+  for (let d = 15; d <= 24; d++) over.push(daySnap(`2026-10-${d}`, 100_000_000));
+  const r = evaluateCyclePace({ snapshots: over, latestDate: "2026-10-24", monthlyBudgetUsd: 15 });
+  assert.equal(r.violations.length, 1);
+  assert.equal(r.violations[0].rule_id, "workers-cpu-cycle-pace");
+  assert.equal(r.violations[0].severity, "warning");
+  assert.ok(Math.abs(r.violations[0].actual - 24.4) < 1e-9);
+  assert.match(r.violations[0].note, /経過 10\/31 日/);
+  assert.equal(r.elapsedDays, 10);
+
+  // 10 日 各 2,000 万 ms = 2 億 → 5 + 170*0.02 = 8.4 > 8.23 → 超過。予算を 30 にすれば許容 13.06 で非超過
+  const mid = [];
+  for (let d = 15; d <= 24; d++) mid.push(daySnap(`2026-10-${d}`, 20_000_000));
+  assert.equal(evaluateCyclePace({ snapshots: mid, latestDate: "2026-10-24", monthlyBudgetUsd: 15 }).violations.length, 1);
+  assert.equal(evaluateCyclePace({ snapshots: mid, latestDate: "2026-10-24", monthlyBudgetUsd: 30 }).violations.length, 0);
+});
+
+test("累計ペース: サイクル外の日は数えず、CPU null の日は missingDays に残す", () => {
+  const snaps = [
+    daySnap("2026-10-14", 999_000_000), // 前サイクル
+    daySnap("2026-10-15", 10_000_000),
+    daySnap("2026-10-16", null),
+    daySnap("2026-10-17", 10_000_000),
+  ];
+  const r = evaluateCyclePace({ snapshots: snaps, latestDate: "2026-10-17", monthlyBudgetUsd: 100 });
+  assert.equal(r.cumulativeCpuMs, 20_000_000);
+  assert.equal(r.missingDays, 1);
+  assert.equal(r.violations.length, 0);
+});
+
+test("info の violation と required な info ルールでも報告生成は落ちない", () => {
+  const info = budgets.rules.filter((r) => r.severity === "info" && r.metric_key.startsWith("r2_"));
+  assert.ok(info.some((r) => r.rule_id === "r2-storage-growth"));
+  assert.ok(info.some((r) => r.rule_id === "r2-stats47-storage-growth" && r.required === true));
+
+  const snap = createSnapshot({ stats47: { bytes: 13_000_000_000, objects: 1 } });
+  snap.date = "2026-11-13";
+  snap.fetched_at = "x";
+  const metrics = flatten(snap);
+  const { violations } = evaluateRules(metrics, info);
+  assert.equal(violations.length, 2);
+  assert.ok(violations.every((v) => v.severity === "info"));
+  const report = buildReport({ snapshot: snap, metrics, violations });
+  assert.match(report, /## ℹ️ Info/);
+  assert.match(report, /Workers CPU ms \| 取得不能/);
+
+  // required な info の metric 欠落は従来どおり critical
+  const missing = evaluateRules({}, info).violations;
+  assert.equal(missing.length, 1);
+  assert.equal(missing[0].severity, "critical");
+  assert.doesNotThrow(() => buildReport({ snapshot: snap, metrics, violations: missing }));
+});

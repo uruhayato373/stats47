@@ -21,7 +21,7 @@ import {
   KINDLE_SERIES_LABELS,
 } from '../../../../packages/product-factory/src/channels/kindle/cover-design';
 import { KDP_PORTFOLIO_POLICY } from '../../../../packages/product-factory/src/channels/kindle/kdp-publishing-policy';
-import surveysMaster from '../../../../packages/ranking/src/data/surveys.json';
+import surveysMaster from '../../../../data/surveys/master/surveys.json';
 
 import {
   ContentKdpListingsState,
@@ -183,22 +183,15 @@ function loadThemeTargets(root: string, metricKeys: string[]) {
 }
 
 function loadJapanTargets(root: string, metricKeys: string[]) {
-  const file = path.join(
-    root,
-    'packages/data-configs/src/geo-scope/japan-catalog.ts'
-  );
+  // 手書きの全国のテーマの台帳 (themes.japan-catalogs)。家計調査のテーマ (themes.japan-kakei-catalogs) は対象に含めない
+  const file = path.join(root, datasetPath('themes.japan-catalogs'));
   if (!fs.existsSync(file)) return [];
-  const body = fs.readFileSync(file, 'utf8');
-  const themes = [...body.matchAll(/themeSlug:\s*["']([^"']+)["']/g)];
-  return themes.map((match, index) => {
-    const section = body.slice(
-      match.index,
-      index + 1 < themes.length ? themes[index + 1].index : body.length
-    );
-    return {
-      slug: match[1],
-      metricKeys: metricKeys.filter((key) => hasQuotedKey(section, key)),
-    };
+  const { themes } = JSON.parse(fs.readFileSync(file, 'utf8')) as {
+    themes: Record<string, { metrics: Array<{ metricKey: string }> }>;
+  };
+  return Object.entries(themes).map(([slug, theme]) => {
+    const themeKeys = new Set(theme.metrics.map((metric) => metric.metricKey));
+    return { slug, metricKeys: metricKeys.filter((key) => themeKeys.has(key)) };
   });
 }
 
@@ -339,8 +332,7 @@ function loadNoteGenerationBlockers(root: string) {
 }
 
 function referenceMediaPlans(): ReferenceMediaPlanSource[] {
-  const sourcePath =
-    'packages/data-configs/src/evidence-inventory/japan-zue/pilot.ts';
+  const sourcePath = datasetPath('source-inventory.japan-zue-pilot');
   const pilotPlans = JAPAN_ZUE_PILOT_ITEMS.flatMap((item) =>
     (['youtube', 'instagram', 'x'] as const)
       .filter((channel) => item.placements.includes(channel))
@@ -448,7 +440,7 @@ export function loadContentOperations(
   ];
   const prefecturesRaw = readOptionalJson(
     root,
-    'packages/area/src/data/prefectures.json'
+    datasetPath('areas.prefectures')
   );
   const prefectures = prefecturesRaw
     ? ContentPrefectures.parse(prefecturesRaw)
@@ -506,7 +498,7 @@ export function loadContentOperations(
     notePublishedMetrics: notePublishedMetrics(external),
     blogTopicQueue: loadBlogTopicQueue(root),
     areas: prefectures.map((prefecture) => {
-      const editorialPath = `packages/data-configs/src/area-databook/editorial/${prefecture.prefCode}.ts`;
+      const editorialPath = `${datasetDir('areas.editorial')}/${prefecture.prefCode}.json`;
       return {
         code: prefecture.prefCode,
         name: prefecture.prefName,

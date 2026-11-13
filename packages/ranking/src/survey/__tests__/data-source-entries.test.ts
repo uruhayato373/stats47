@@ -1,6 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
 import { METRICS_REGISTRY, buildRecipe, mergeDataSourceEntries } from '@stats47/data-configs';
+import { getReferenceDataSource } from '@stats47/data-configs/data-source';
+import { resolveProvenanceByParams } from '@stats47/data-configs/provenance';
+import referenceSources from '../../../../../data/provenance/reference-sources/sources.json';
+import surveysMaster from '../../../../../data/surveys/master/surveys.json';
 
 import {
   extractGeoAnalysisSlugs,
@@ -94,6 +98,21 @@ describe('resolveBlogChartDataSources', () => {
 });
 
 describe('resolveMetricDataSources', () => {
+  it('年別の補助出典も全件、統計表IDからJSON辞書で原典調査へ解決できる', () => {
+    const supplements = Object.values(METRICS_REGISTRY).flatMap((metric) =>
+      (metric.supplementalSources ?? []).map(({ source }) => ({ key: metric.key, source })),
+    );
+    expect(supplements.length).toBeGreaterThan(0);
+    for (const { key, source } of supplements) {
+      if (source.kind !== 'estat') continue;
+      const surveys = resolveProvenanceByParams(source.statsDataId, source.cdCat01);
+      expect(surveys.length, `${key}: ${source.statsDataId}`).toBeGreaterThan(0);
+      for (const survey of surveys) {
+        expect(surveysMaster.some(({ id }) => id === survey.id), `${key}: ${survey.id}`).toBe(true);
+      }
+    }
+  });
+
   it('calculated 指標は分子・分母の出典をたどって統合する', () => {
     const calculated = Object.values(METRICS_REGISTRY).find(
       (metric) => metric.source.kind === 'calculated'
@@ -105,6 +124,34 @@ describe('resolveMetricDataSources', () => {
 });
 
 describe('resolveRankingItemDataSources', () => {
+  it.each([
+    ['annual-sunshine-duration', ['weather-statistics']],
+    ['total-population', ['census', 'population-estimates']],
+  ] as const)('%s は配信レシピのIDからJSONの原典・編成統計に解決する', (key, surveyIds) => {
+    const entries = resolveRankingItemDataSources({
+      sourceConfig: { recipe: buildRecipe(METRICS_REGISTRY[key]) },
+    });
+    expect(entries[0]).toMatchObject({
+      label: referenceSources.ssds.name,
+      organization: referenceSources.ssds.organization,
+      url: referenceSources.ssds.url,
+    });
+    expect(entries.flatMap((entry) => entry.surveyId ? [entry.surveyId] : []).sort()).toEqual([...surveyIds].sort());
+    for (const surveyId of surveyIds) {
+      const master = surveysMaster.find((survey) => survey.id === surveyId)!;
+      expect(entries.find((entry) => entry.surveyId === surveyId)).toMatchObject({
+        label: master.name, organization: master.organization,
+      });
+    }
+  });
+
+  it('地図出典はJSON台帳から解決し、統計調査のリンクを作らない', () => {
+    const source = getReferenceDataSource('codh-historical-boundaries');
+    const master = referenceSources['codh-historical-boundaries'];
+    expect(source).toEqual({ label: master.name, url: master.url, note: master.note, tables: [] });
+    expect(source.surveyId).toBeUndefined();
+  });
+
   it('統計表 ID が無い item は焼き込み済みの source と原典調査から作る', () => {
     const entries = resolveRankingItemDataSources({
       sourceConfig: { recipe: buildRecipe(METRICS_REGISTRY['fishing-port-count-ksj']), source: { name: '国土数値情報', url: 'https://nlftp.mlit.go.jp/ksj/' } },

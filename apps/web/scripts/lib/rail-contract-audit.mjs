@@ -6,6 +6,8 @@
  * 違反 (ruleId / lineNumber / line / message) を返す。副作用なし = fixture テストで固定する。
  *
  * それぞれの rule が捕まえる回帰:
+ * - rail-shared-breakpoint: Shell の表示境界を個別のコンテナ閾値で上書きする
+ * - rail-card-width-owned-by-shell: 通常のレールカードへ個別の幅制限を付ける
  * - rail-no-raw-aside-in-page: page.tsx が `<aside>` を自前で描く (Shell / LeftRailLayout が landmark を持つので二重になる)
  * - rail-card-no-muted-root: RailCard / SectionCard の外枠に bg-muted を足す (Surface 3 段階の崩れ: 通常カードは bg-card)
  * - rail-links-no-grid-layout: RailLinksCard に layout="grid" (2 列 bg-muted セル) が復活する
@@ -81,6 +83,11 @@ export function findRailContractViolations(source, relativePath) {
     const trimmed = line.trim();
     if (trimmed.startsWith('//') || trimmed.startsWith('*')) return;
 
+    if (/@(?:min|max)-\[[^\]]+\]\/shell:(?:hidden|block|flex|contents)/.test(line)) {
+      push('rail-shared-breakpoint', lineNumber,
+        '右レールの出し分けは globals.css の rail: を使う。表示境界を個別に直書きしない。');
+    }
+
     if (isPageFile(relativePath) && /<aside\b/.test(line)) {
       push(
         'rail-no-raw-aside-in-page',
@@ -124,6 +131,10 @@ export function findRailContractViolations(source, relativePath) {
 
   for (const tag of jsxOpenTags(source, ['RailCard', 'SectionCard'])) {
     const classLiteral = /className=["']([^"']*)["']/.exec(tag.attrs)?.[1] ?? '';
+    if (tag.tag === 'RailCard' && /(?:^|\s)(?:w|max-w)-(?:\[[\d.]+(?:px|rem)\]|fit|max)(?:\s|$)/.test(classLiteral)) {
+      push('rail-card-width-owned-by-shell', tag.lineNumber,
+        'RailCard の幅を個別指定しない。列幅は共通 Shell、カードは列いっぱいに広げる。');
+    }
     if (/\bbg-muted\b/.test(classLiteral)) {
       push(
         'rail-card-no-muted-root',

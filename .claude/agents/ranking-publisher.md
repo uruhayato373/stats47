@@ -63,7 +63,7 @@ ranking の middleware は `isGone` のみ 410、未登録キー（KNOWN にも 
                                        出力: packages/ranking/src/config/known-ranking-keys.ts → 要 git commit
 4. SITEMAP / INDEXABLE 再生成       → apps/web/src/config/{sitemap,indexable}-ranking-keys.ts を整合
                                        (※ sync-snapshots 未配線。手動 or スクリプト実行が要る場合あり)
-5. GONE から除外                    → apps/web/src/config/gone-ranking-keys.ts から該当キーを削除
+5. GONE から除外                    → data/site/url-history/gone-ranking-keys.json から該当キーを削除
                                        (復帰時。GONE に残ると 410 のまま)
 6. commit → deploy                  → オーナーの指示で devops-runner / /deploy に委譲 (develop→main PR→CI→Cloudflare)
 7. CDN purge                        → /purge-cdn に委譲 (GONE 410 はエッジ 7 日キャッシュ・404 は ISR)

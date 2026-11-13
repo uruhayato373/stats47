@@ -21,6 +21,7 @@ import {
   type MetricLinkageIndex,
 } from '../src/metric-linkage';
 import { buildRecipe } from '../src/recipe';
+import { productMetricKeys, type ProductMetricReferences } from '../src/product-metric-keys';
 import { METRICS_DIR, REPO_ROOT } from './_lib';
 import { checkMetricSchema, METRIC_SCHEMA_PATH } from './metric-schema';
 import { checkThemePropsSchema } from './theme-props-schema';
@@ -63,6 +64,21 @@ for (const page of pages) {
       errors.push('Unknown content metric: ' + page.id + ' → ' + key);
     const existing = consumers.get(key) ?? [];
     existing.push({ pageId: page.id, kind: page.kind });
+    consumers.set(key, existing);
+  }
+}
+// 商品LPの採用例と、改訂・調査中の入力を区別する。後者は販売中の同梱を意味しない。
+const productDirectory = resolve(REPO_ROOT, datasetDir('products.landings'));
+for (const file of readdirSync(productDirectory).filter(name => name.endsWith('.json')).sort()) {
+  const product = JSON.parse(readFileSync(resolve(productDirectory, file), 'utf8')) as ProductMetricReferences & { productId: string };
+  const pageId = `product:data-${product.productId.toLowerCase()}`;
+  if (!pagesById.has(pageId)) errors.push(`Unknown product page: ${product.productId} → ${pageId}`);
+  const examples = new Set(product.examples.flatMap(example => example.metricKeys));
+  for (const key of productMetricKeys(product)) {
+    if (!METRICS_REGISTRY[key]) errors.push(`Unknown product metric: ${product.productId} → ${key}`);
+    const consumer = { pageId, kind: examples.has(key) ? 'product' : 'product-analysis' };
+    const existing = consumers.get(key) ?? [];
+    if (!existing.some(item => item.pageId === pageId && item.kind === consumer.kind)) existing.push(consumer);
     consumers.set(key, existing);
   }
 }

@@ -1,0 +1,85 @@
+{
+  "productId": "P-07",
+  "deliveryVersion": "v4-20261024-mac-r2",
+  "manifestSha256": "2f3130a97002a51965d7680e5973e9c2118fd1a631fa4bc3f96e7899ede11676",
+  "sourceArchive": {
+    "bucket": "stats47-private",
+    "key": "note/product-archives/P-07/v4-20261024-mac-r2/f3d64146d4b59041844b1e1951af36076136cc052a983046991c084307fe40ab.zip",
+    "sha256": "f3d64146d4b59041844b1e1951af36076136cc052a983046991c084307fe40ab"
+  },
+  "selectedMetrics": [
+    {
+      "key": "consumer-price-difference-index-overall",
+      "title": "消費者物価地域差指数（総合）",
+      "year": "2025",
+      "unit": "（全国=100）"
+    },
+    {
+      "key": "consumer-price-difference-index-housing",
+      "title": "消費者物価地域差指数（住居）",
+      "year": "2025",
+      "unit": "（全国=100）"
+    },
+    {
+      "key": "average-temperature",
+      "title": "年平均気温",
+      "year": "2024",
+      "unit": "℃"
+    }
+  ],
+  "included": [
+    "CSV（47地域・76指標、基準年は指標ごとに固定）",
+    "Excel（76指標）",
+    "PowerPoint（30指標の図表）",
+    "PDFデータブック・地図PNG",
+    "出典一覧（SOURCES.csv）・利用条件"
+  ],
+  "examples": [
+    {
+      "id": "overall-price-comparison",
+      "figures": [
+        {
+          "file": "overall-price-comparison.png",
+          "alt": "消費者物価地域差指数（総合）（2025年・地域別比較）",
+          "template": "bar",
+          "sha256": "9c022575b034a9ae28b7447be881f4181db1c90ba3ba2db7440e6342de1d677a"
+        }
+      ]
+    },
+    {
+      "id": "housing-price-distribution",
+      "figures": [
+        {
+          "file": "housing-price-distribution.png",
+          "alt": "消費者物価地域差指数（住居）（2025年・地図）",
+          "template": "choropleth",
+          "sha256": "2ddef5b190c98f8482f8ada96050bac3cc35486fb45047d996d63e095d417ecc"
+        }
+      ]
+    },
+    {
+      "id": "temperature-comparison",
+      "figures": [
+        {
+          "file": "temperature-comparison.png",
+          "alt": "年平均気温（2024年・地域別比較）",
+          "template": "bar",
+          "sha256": "099c379ff480e9b8d45102a2ef68a3c6dae32ee22f6fd3cb43b03ca47c5232d8"
+        }
+      ]
+    }
+  ],
+  "filePreview": {
+    "heading": "ファイルの中身",
+    "lead": "CSVは地域コード・地域名と指標の値を横に並べた形式です。画像は8行と1指標を抜粋しています。元の数値列名には指標名・年・単位が入り、画像では「数値」と省略しています。全76指標の出典と基準年はSOURCES.csvで確認できます。",
+    "figures": [
+      {
+        "file": "file-preview.png",
+        "alt": "P-07のdata.csvから列と8行を抜粋した見本",
+        "template": "file-preview",
+        "sha256": "3e6c384d0dea1ed46f128e763f67ad3e1cae4e725f888605fd1c6d0d33ef4ca7"
+      }
+    ]
+  },
+  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2005〜2025年で指標ごとに異なり、時系列データではありません。"
+}

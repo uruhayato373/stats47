@@ -18,7 +18,9 @@
         "areaCode",
         "cityCode",
         "themeSlug"
-      ]
+      ],
+      "pageType": "theme",
+      "scope": "city"
     },
     {
       "id": "route:city:areaCode:cityCode",
@@ -128,7 +130,9 @@
       "pattern": "/municipalities/themes/[themeSlug]",
       "parameters": [
         "themeSlug"
-      ]
+      ],
+      "pageType": "theme",
+      "scope": "municipalities"
     },
     {
       "id": "route:area-theme:areaCode:themeSlug",
@@ -137,7 +141,9 @@
       "parameters": [
         "areaCode",
         "themeSlug"
-      ]
+      ],
+      "pageType": "theme",
+      "scope": "area"
     },
     {
       "id": "route:area-theme-cities:areaCode:themeSlug",
@@ -146,7 +152,9 @@
       "parameters": [
         "areaCode",
         "themeSlug"
-      ]
+      ],
+      "pageType": "theme",
+      "scope": "area-cities"
     },
     {
       "id": "page:blog-tags",
@@ -233,13 +241,6 @@
       "title": "新幹線の駅ができた町は、どう変わったか"
     },
     {
-      "id": "theme:local-finance",
-      "kind": "theme",
-      "pattern": "/themes/local-finance",
-      "parameters": [],
-      "title": "地方財政"
-    },
-    {
       "id": "route:area:areaCode",
       "kind": "area",
       "pattern": "/areas/[areaCode]",
@@ -272,11 +273,11 @@
       ]
     },
     {
-      "id": "route:japan-theme:themeSlug",
-      "kind": "japan-theme",
-      "pattern": "/japan/[themeSlug]",
+      "id": "route:products-preview:slug",
+      "kind": "products-preview",
+      "pattern": "/products/preview/[slug]",
       "parameters": [
-        "themeSlug"
+        "slug"
       ]
     },
     {
@@ -317,7 +318,9 @@
       "pattern": "/themes/[themeSlug]",
       "parameters": [
         "themeSlug"
-      ]
+      ],
+      "pageType": "theme",
+      "scope": "national"
     },
     {
       "id": "page:home",

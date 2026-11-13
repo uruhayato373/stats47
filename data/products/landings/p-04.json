@@ -1,0 +1,205 @@
+{
+  "productId": "P-04",
+  "articleKey": "prefecture-municipal-finance-pack",
+  "displayTitle": "都道府県別 自治体財政・職員給与データ",
+  "description": "財政力、借入返済の負担、歳入の規模を分けて比べ、財政説明の資料を作れます。",
+  "useCases": [
+    {
+      "title": "予算・決算の説明資料に",
+      "description": "自県と比較対象の県の財政指標を並べ、数字の位置づけを説明する図表を作れます。"
+    },
+    {
+      "title": "近隣県との財政比較に",
+      "description": "歳入額の大きさと財政力指数などの比率を分け、規模だけでは捉えにくい違いを整理できます。"
+    },
+    {
+      "title": "財政を学ぶ研修や授業に",
+      "description": "財政力指数と実質公債費比率を別々の図で扱い、それぞれ何を表す指標なのかを説明できます。"
+    }
+  ],
+  "examples": [
+    {
+      "id": "fiscal-strength-comparison",
+      "heading": "財政力指数で自県の位置を確かめる",
+      "lead": "財政力指数を棒グラフで比較し、自県と他県の違いを説明できます。歳入総額の多さとは別の指標として示すことで、財政の特徴を整理できます。",
+      "metricKeys": [
+        "fiscal-strength-index-prefecture"
+      ],
+      "preferredTemplate": "bar"
+    },
+    {
+      "id": "debt-service-distribution",
+      "heading": "借入返済の負担を地図で比べる",
+      "lead": "実質公債費比率で地図を色分けし、公債費などの負担が地域ごとにどう異なるかを示せます。財政力指数とは意味が異なるため、別の図として読み比べます。",
+      "metricKeys": [
+        "real-public-debt-service-ratio"
+      ],
+      "preferredTemplate": "choropleth"
+    },
+    {
+      "id": "revenue-scale",
+      "heading": "歳入の規模を比べる",
+      "lead": "歳入総額を並べ、比較対象の県の財政規模を確認できます。人口や行政の役割も異なるため、金額の大小だけで財政の良し悪しは判断しません。",
+      "metricKeys": [
+        "total-revenue-prefecture"
+      ],
+      "preferredTemplate": "bar"
+    }
+  ],
+  "purchaseNotes": [
+    "作成例は都道府県財政の比較です。個々の市区町村の財政状況を直接示す図ではありません。",
+    "収録版の値を固定した商品です。決算年度と各指標の定義を確認し、単独の指標で財政の健全性を断定しないでください。"
+  ],
+  "analysisPlan": {
+    "objective": "都道府県財政と市町村財政を分け、財政基盤と経常的な財政負担を同じ年度で比較する。採用・調査対象は改訂設計であり、販売中の固定納品への追加を示しません。",
+    "inputs": [
+      {
+        "metricKey": "fiscal-strength-index-prefecture",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "real-public-debt-service-ratio",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "total-revenue-prefecture",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "現行LPの作成例に用いる指標。固定納品の年・単位・対象範囲を保持する。"
+      },
+      {
+        "metricKey": "fiscal-strength-index",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "実在を確認した2022年度の市町村財政指標を、異なる単位・意味の2図で比較する。",
+        "variantId": "fiscal-strength-index-municipality"
+      },
+      {
+        "metricKey": "current-balance-ratio-city",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "実在を確認した2022年度の市町村財政指標を、異なる単位・意味の2図で比較する。"
+      }
+    ],
+    "analysisRefs": [],
+    "figureRefs": [],
+    "reuseProducts": [],
+    "limitations": [
+      "県と市町村は行政の役割が異なり、同じ順位表に混ぜない。",
+      "財政力指数・経常収支比率の単独の大小から財政健全性を断定しない。東京特別区など欠測の行は0にしない。"
+    ]
+  },
+  "analysisRevision": {
+    "version": "analysis-20261112",
+    "title": "市町村の財政基盤と経常負担を比べるデータ集",
+    "description": "同じ年度の財政力指数と経常収支比率を揃え、自治体ごとの財政基盤と経常的な負担を別々の図で比較できます。",
+    "useCases": [
+      {
+        "title": "決算説明の比較資料に",
+        "description": "近隣市町村の財政力指数と経常収支比率を並べ、自分の自治体の位置を説明できます。"
+      },
+      {
+        "title": "財政研修の教材に",
+        "description": "財政力と経常的な負担を別の指標として読み、金額の規模だけで判断しない比較ができます。"
+      }
+    ],
+    "sources": [
+      {
+        "id": "municipal-finance",
+        "title": "市町村財政の指標",
+        "grain": "municipality",
+        "years": [
+          2022
+        ],
+        "inputs": [
+          {
+            "metricKey": "fiscal-strength-index",
+            "variantId": "fiscal-strength-index-municipality"
+          },
+          {
+            "metricKey": "current-balance-ratio-city"
+          }
+        ],
+        "definition": "市町村財政の2022年度値。財政力指数と経常収支比率は意味と単位が異なるため、別図で比較する。",
+        "boundary": "原典の廃置分合処理済の市区町村境域。指定都市は市単位、東京都は特別区単位とし、指定都市の行政区と集計行を重複して含めない。"
+      }
+    ],
+    "research": {
+      "method": "社会・人口統計体系の原典表と項目定義を確認し、地域単位・年・分母・欠測を揃えられる範囲で比較する。",
+      "references": [
+        {
+          "id": "ssds-finance",
+          "title": "社会・人口統計体系の項目定義 D",
+          "url": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/D",
+          "section": "D2201 財政力指数、D2203 経常収支比率",
+          "finding": "基準財政収入額と基準財政需要額に基づく指数と、経常経費に充当する一般財源等の比率を区別する。県と市町村の指標を同じ順位に混ぜない。",
+          "checkedAt": "2026-11-12"
+        }
+      ]
+    },
+    "recipes": [
+      {
+        "id": "municipal-fiscal-strength",
+        "heading": "財政力の地域差を地図で見る",
+        "lead": "2022年度の財政力指数を、高知県内の市町村ごとに塗り分けます。近隣自治体との違いを位置関係とともに示し、決算説明の比較資料に使えます。",
+        "sourceId": "municipal-finance",
+        "metricIds": [
+          "fiscal-strength-index"
+        ],
+        "method": "compare",
+        "year": 2022,
+        "template": "choropleth",
+        "references": [
+          "ssds-finance"
+        ],
+        "limitation": "財政力指数だけで自治体の健全性や住民サービスの水準は判断できません。",
+        "presentationMetricKey": "fiscal-strength-index",
+        "chartTitle": "市町村別の財政力指数",
+        "scopeLabel": "高知県内の市町村",
+        "within": {
+          "kind": "prefecture",
+          "prefCode": "39"
+        }
+      },
+      {
+        "id": "municipal-current-balance",
+        "heading": "経常的な財政負担を比べる",
+        "lead": "同じ自治体の経常収支比率を並べ、財政力とは別の面から比較します。",
+        "sourceId": "municipal-finance",
+        "metricIds": [
+          "current-balance-ratio-city"
+        ],
+        "method": "compare",
+        "year": 2022,
+        "areaCodes": [
+          "39201",
+          "39202",
+          "39203",
+          "39204",
+          "39205",
+          "39206",
+          "39208",
+          "39209",
+          "39210",
+          "39211",
+          "39212",
+          "39386"
+        ],
+        "template": "bar",
+        "references": [
+          "ssds-finance"
+        ],
+        "limitation": "値の大小を単独で財政の良し悪しに読み替えません。歳入の構成や行政の役割も確認してください。",
+        "presentationMetricKey": "current-balance-ratio-city"
+      }
+    ],
+    "notes": [
+      "分析対象は市町村財政です。県財政と同じ順位表に混ぜません。",
+      "東京特別区など原典で欠測となる自治体を0に置き換えません。値のある自治体だけで比較します。"
+    ]
+  }
+}

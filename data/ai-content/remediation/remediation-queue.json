@@ -1,23 +1,23 @@
 {
-  "generatedAt": "2026-11-09T01:46:48.742Z",
+  "generatedAt": "2026-11-13T02:39:34.514Z",
   "gscSnapshot": "2026-W44",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通り (blocker 0)、解説の年が values.json の最新年と同じ",
   "summary": {
     "total": 2596,
-    "done": 1359,
-    "needsRegen": 1237,
+    "done": 1360,
+    "needsRegen": 1236,
     "needsByReason": {
-      "stale-year": 806,
+      "stale-year": 805,
       "missing": 430,
       "incomplete": 1
     },
     "notEligible": 0,
     "notEligibleByCode": {},
     "doneButUnhealthy": 0,
-    "doneImpressions": 118667,
-    "needsImpressions": 103504,
+    "doneImpressions": 122908,
+    "needsImpressions": 99263,
     "manualEscalationTier": 30,
     "geminiDailyLimit": 3
   },
@@ -65,18 +65,19 @@
       "impressions": 4241,
       "clicks": 41,
       "position": 6.27,
-      "status": "needs-regen",
-      "reason": "stale-year",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "warns": [],
-      "lastModified": "Thu, 16 Jul 2026 12:23:50 GMT",
-      "updatedAt": "2026-07-16T11:30:20.613Z",
-      "contentYear": "2018",
-      "dataYear": "2003",
+      "warns": [
+        "length-short",
+        "pref-count",
+        "pref-len"
+      ],
+      "lastModified": "Mon, 09 Nov 2026 01:48:40 GMT",
+      "updatedAt": "2026-11-09T01:47:12.813Z",
       "dataWarns": [
         "thin-coverage"
-      ],
-      "reviewTier": "manual-escalation"
+      ]
     },
     {
       "rankingKey": "annual-sunshine-duration",
@@ -814,7 +815,7 @@
       "updatedAt": "2026-08-26T00:00:00.000Z",
       "contentYear": "2022",
       "dataYear": "2023",
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "green-tea-consumption-quantity",

@@ -7,7 +7,7 @@ import type { MetricConfig } from '../../packages/data-configs/src/types';
  *
  * resourceId "S12" (国土数値情報 駅別乗降客数) は packages/gis/src/mlit-ksj/datasets.ts で確認済み
  * (dataId:"S12", coverage:"national", isRankingTarget:false)。同データは PR #328 で駅別乗降客数機能・
- * 47連結動画に既に使用実績あり (memory project_station_passengers)。
+ * 47連結動画に既に使用実績あり。
  *
  * TODO (Phase 7): データ投入は未完了 (isRankingTarget:false のため ranking pipeline 未配線)。削除条件: 下記 3 手順で R2 投入後に本コメント削除。
  *   - gis-pipeline-runner で S12 を R2 (gis/mlit-ksj/S12/) へ変換・投入

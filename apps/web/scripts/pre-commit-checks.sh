@@ -82,10 +82,10 @@ if printf '%s\n' "$PRECOMMIT_PATHS_1" | grep -q "^.claude/skills/db/sync-snapsho
   fi
 fi
 
-# 2.2b GIS 台帳の参照整合 (2026-10-29)。datasets.ts を親表に、技術設定・公式利用条件・GIS 一覧・単体ページ・
+# 2.2b GIS 台帳の参照整合 (2026-10-29)。KSJ 台帳 (geo.ksj-datasets) を親表に、技術設定・公式利用条件・GIS 一覧・単体ページ・
 # 指標の ksjDataId・交通網の変遷の台帳が存在しない dataId を指していないかを R2 なしで検査する。
 # geo:check-data-catalog は R2 の在庫まで読むため手動で、台帳どうしのずれを commit 前に止める手段が無かった。
-if printf '%s\n' "$PRECOMMIT_PATHS_1" | grep -qE "^(packages/gis/src/(mlit-ksj|infra-history)/|packages/data-configs/src/(business-plan/geo-|registry\.ts)|data/metrics/)"; then
+if printf '%s\n' "$PRECOMMIT_PATHS_1" | grep -qE "^(packages/gis/src/(mlit-ksj|infra-history)/|packages/data-configs/src/(business-plan/geo-|registry\.ts)|data/metrics/|data/geo/(ksj|analyses|source-pages|infra-history)/|data/open-data/)"; then
   echo -e "${GREEN}🗂️  GIS 台帳の参照整合...${NC}"
   if ! (cd "$GUARD_ROOT/packages/gis" && npx vitest run src/mlit-ksj/__tests__/dataset-references.test.ts > /tmp/gis-dataset-references.log 2>&1); then
     tail -30 /tmp/gis-dataset-references.log
@@ -99,8 +99,9 @@ fi
 # 2.1b ドキュメントガバナンス
 # 文書の固定構成、frontmatter、TODO ID、実装計画INDEX、Claude/Codex共通SSOT、
 # 削除・移動後の参照悪化を、文書関連差分があるcommitだけ検査する。
+# 領域と構えの台帳・領域のマスタは DG073〜083 の入力なので、同じ検査に掛ける。
 STAGED_DOCS=$(printf '%s\n' "$PRECOMMIT_PATHS_0"RD | grep -E \
-  '^(docs/|\.claude/todo/|CLAUDE\.md$|AGENTS\.md$|\.claude/(config/docs-governance\.json|rules/docs-vs-issues\.md|skills/management/maintain-docs/|scripts/lib/check-docs-(governance|links)\.cjs|scripts/lib/__tests__/check-docs-(governance|links)\.test\.cjs)|package\.json$)' || true)
+  '^(docs/|\.claude/todo/|data/business/(domain-stances|domains)\.json$|CLAUDE\.md$|AGENTS\.md$|\.claude/(config/docs-governance\.json|rules/docs-vs-issues\.md|skills/management/maintain-docs/|scripts/lib/check-docs-(governance|links)\.cjs|scripts/lib/__tests__/check-docs-(governance|links)\.test\.cjs)|package\.json$)' || true)
 if [ -n "$STAGED_DOCS" ]; then
   echo -e "${GREEN}📚 ドキュメントガバナンスチェック...${NC}"
   if ! (cd "$GUARD_ROOT" && npm run docs:check); then
@@ -121,8 +122,8 @@ if printf '%s\n' "$PRECOMMIT_PATHS_2" | grep -qE '^(contents/blog/|data/note/art
 fi
 
 # Canonical metric and content contracts: reject schema, ID and generated-index drift.
-if printf '%s\n' "$PRECOMMIT_PATHS_2" | grep -qE '^(data/(metrics|metric-sources|themes|content)/|packages/(data-configs|types)/|apps/web/scripts/(sync-content-catalog|validate-content-catalog)\.ts$|package\.json$)'; then
-  if ! (cd "$GUARD_ROOT" && npm run metrics:check && npm run content:check); then
+if printf '%s\n' "$PRECOMMIT_PATHS_2" | grep -qE '^(data/(metrics|metric-sources|themes|content|categories|ads)/|data/surveys/(master|analysis-units|editorial)/|data/site/url-history/|data/geo/(ksj|analyses|source-pages|infra-history)/|data/open-data/|data/municipalities/catalog/|data/areas/|data/products/(packs|kindle)/|data/note/series\.json$|data/blog/ledger/|data/business-plan/plan/|data/source-inventory/(policies/|japan-zue/[^/]+\.json$)|data/ranking/hooks/|data/data-quality/allowlists/|packages/(data-configs|types)/|apps/web/scripts/(sync-content-catalog|validate-content-catalog|lib/blog-article-ledger)\.ts$|package\.json$)'; then
+  if ! (cd "$GUARD_ROOT" && npm run build:category-keys --workspace=@stats47/data-configs -- --check && npm run metrics:check && npm run content:check); then
     echo "Metric/content identity contract failed"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
@@ -538,15 +539,15 @@ fi
 #     - develop 着地: develop-quality-gate.yml の catalog-gates job (同じ preflight:pr)
 #     - main PR: pr-quality-check.yml の Catalog Gates job
 #   が走らせるので、commit ごとに直列で払わない。commit 前に手元で確かめたいときは preflight:pr。
-STAGED_CATALOG_HINT=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^packages/data-configs/src/(topics|theme-catalog|area-databook|unit)/|^data/(metrics|themes)/|^packages/types/src/indicator-sets/|^apps/web/scripts/data/page-components/(theme|area)/" || true)
+STAGED_CATALOG_HINT=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^packages/data-configs/src/(topics|theme-catalog|area-databook|unit)/|^data/(metrics|themes|areas)/|^packages/types/src/indicator-sets/|^apps/web/scripts/data/page-components/(theme|area)/" || true)
 if [ -n "$STAGED_CATALOG_HINT" ]; then
   echo -e "${GREEN}📚 catalog / metric config の整合チェックは commit では走らせない${NC}"
   echo -e "${YELLOW}💡 push 前に: npm run preflight:pr (develop 着地時と main PR の CI でも同じ検査が走る)${NC}"
 fi
 
 # 6.7 アフィリエイト広告のサイズ規約チェック (.claude/rules/affiliate-ads-standards.md §サイズ)
-#     affiliate-ads-data.ts が staged のとき、canonical/legacy 以外のサイズ混入を弾く。
-STAGED_AFFILIATE=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^apps/web/scripts/affiliate-ads-data\.ts$" || true)
+#     広告の台帳 (affiliate.ads) か読み込み口 affiliate-ads-data.ts が staged のとき、canonical/legacy 以外のサイズ混入を弾く。
+STAGED_AFFILIATE=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^(apps/web/scripts/affiliate-ads-data\.ts|data/affiliate/ledger/ads\.json)$" || true)
 
 if [ -n "$STAGED_AFFILIATE" ]; then
   echo -e "${GREEN}📐 アフィリエイト サイズ規約チェック...${NC}"
@@ -561,9 +562,9 @@ if [ -n "$STAGED_AFFILIATE" ]; then
 fi
 
 # 6.8 直接配置アフィリエイト台帳の構造チェック (/audit-affiliate-compliance)
-#     affiliate-direct-placements-data.ts が staged のとき、ID 重複・URL scheme・配置形式の
-#     構造 error を弾く (ネットワーク不要。本文突合は週次 CI が --live で実行)。
-STAGED_DIRECT_AFFILIATE=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^apps/web/scripts/affiliate-direct-placements-data\.ts$" || true)
+#     直貼りの台帳 (affiliate.direct-placements) か読み込み口 affiliate-direct-placements-data.ts が staged のとき、
+#     ID 重複・URL scheme・配置形式の構造 error を弾く (ネットワーク不要。本文突合は週次 CI が --live で実行)。
+STAGED_DIRECT_AFFILIATE=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^(apps/web/scripts/affiliate-direct-placements-data\.ts|data/affiliate/ledger/direct-placements\.json)$" || true)
 
 if [ -n "$STAGED_DIRECT_AFFILIATE" ]; then
   echo -e "${GREEN}📐 直接配置アフィリエイト 構造チェック...${NC}"
@@ -572,7 +573,7 @@ if [ -n "$STAGED_DIRECT_AFFILIATE" ]; then
   else
     echo -e "${RED}❌ 直接配置台帳に構造 error があります。${NC}"
     grep -E "error|❌" /tmp/affiliate-direct.log | head -5 || true
-    echo -e "${YELLOW}💡 skill: /audit-affiliate-compliance / SSOT: apps/web/scripts/affiliate-direct-placements-data.ts${NC}"
+    echo -e "${YELLOW}💡 skill: /audit-affiliate-compliance / SSOT: 台帳 affiliate.direct-placements${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
 fi

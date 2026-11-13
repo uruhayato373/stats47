@@ -18,12 +18,12 @@ export const LOCAL_SERVICES_SET: IndicatorSet = {
     {
       "rankingKey": "number-of-hotel-facilities",
       "shortLabel": "ホテル営業施設数",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "number-of-hotel-rooms",
       "shortLabel": "ホテル営業施設客室数",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "personal-items-service-consumption-expenditure",

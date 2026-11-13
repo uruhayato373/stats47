@@ -164,6 +164,22 @@ export async function readArticleTitlesBySlugsFromR2(
   );
 }
 
+/**
+ * 記事ページの右レールの「よく読まれている記事」(2026-11-12)。閲覧数の多い順 (POPULAR_BLOG_ARTICLE_SLUGS) のまま、
+ * 公開中の記事だけを、表示中の記事を除いて limit 件返す
+ */
+export async function readPopularArticlesFromR2(
+  excludeSlug: string,
+  limit: number
+): Promise<Array<{ slug: string; title: string }>> {
+  const snapshot = await loadSnapshot();
+  const bySlug = new Map(snapshot.articles.filter((a) => a.published === true).map((a) => [a.slug, a]));
+  return POPULAR_BLOG_ARTICLE_SLUGS.flatMap((slug) => {
+    const article = slug === excludeSlug ? undefined : bySlug.get(slug);
+    return article ? [{ slug: article.slug, title: article.title }] : [];
+  }).slice(0, limit);
+}
+
 export async function readTagKeysForArticleFromR2(
   slug: string
 ): Promise<Array<{ tagKey: string }>> {

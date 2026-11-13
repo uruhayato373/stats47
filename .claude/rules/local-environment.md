@@ -16,17 +16,32 @@ paths:
 ```
 apps/
   web/       Next.js (Cloudflare Pages) — 公開サイト
+  admin/     Next.js — ローカルの管理画面 (`npm run admin`)。台帳・計画・原稿・公開状態を読む
   remotion/  Remotion — 動画・SNS 投稿画像生成（Instagram/X/note）
   ges/       Google Earth Studio — 47都道府県旋回動画の生成・自動化
 packages/
-  database/        Drizzle schema (型ソース) + テスト基盤 + 使い捨てビルドキャッシュ操作 (永続 D1 なし)
-  types/           共通型定義
-  visualization/   D3.js チャートコンポーネント
-  components/      shadcn/ui ベース共通 UI
-  estat-api/       e-Stat API クライアント
-  ranking/         ランキング計算ロジック
-  r2-storage/      Cloudflare R2 アクセス
-  utils/           汎用ユーティリティ
+  database/           Drizzle schema (型ソース) + テスト基盤 + 使い捨てビルドキャッシュ操作 (永続 D1 なし)
+  types/              共通型定義
+  data-configs/       指標・テーマ・事業計画などの型と読み込み口 (`data/` の台帳を import する)
+  stats-r2/           R2 の観測値の型・読み手・schema
+  r2-storage/         Cloudflare R2 アクセス
+  estat-api/          e-Stat API クライアント
+  gis/                GIS (国土数値情報) の取得・変換
+  ranking/            ランキング計算ロジック
+  correlation/        相関の計算と選定
+  area/               都道府県・市区町村の地域データ
+  area-profile/       地域プロファイルの型とユーティリティ
+  category/           e-Stat 機械分類 (17 軸) とサイドバーの分類
+  ai-content/         AI 生成コンテンツの型
+  visualization/      D3.js チャートコンポーネント
+  svg-builder/        静的 SVG チャートの生成
+  components/         shadcn/ui ベース共通 UI
+  ui-theme/           色・角丸トークンと部品のスタイル (CSS だけ)
+  migration-flow/     人口移動リール (Remotion の部品)
+  station-passengers/ 駅乗降客数リール (Remotion の部品)
+  product-factory/    データパックと Kindle 書籍のカタログ・生成・検証
+  logger/             ログ出力
+  utils/              汎用ユーティリティ
 ```
 
 ## ストレージ

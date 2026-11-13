@@ -156,6 +156,7 @@ test("--pr は registry に無い手書き生成物ゲートについて PR CI (
   // (CI-SPEED-PREFLIGHT-PR-REGISTRY-01 恒久案、2026-09-24)。
   const shared = [
     "build:registry",
+    "build:category-keys",
     "validate:config",
     "validate:years",
     "validate:polarity",

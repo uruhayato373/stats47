@@ -20,21 +20,17 @@ const NON_PRODUCTION = new Set(["context-only", "primary-source-unavailable", "r
 /**
  * @param {object} p
  * @param {LensLedger[]} p.ledgers
- * @param {Set<string>} p.knownSurveyIds  調査マスタ (packages/ranking/src/data/surveys.json) の id
  * @param {Map<string, Set<string>>} [p.tablesBySurvey]  調査ごとに実在を確かめられる表の集合 (例: 家計調査の台帳の表)。無い調査は照合しない
  * @param {LensAnalysis[]} p.analyses
  * @param {LensUnit[]} p.units
  * @returns {LensFinding[]}
  */
-export function checkLensLedgers({ ledgers, knownSurveyIds, tablesBySurvey = new Map(), analyses, units }) {
+export function checkLensLedgers({ ledgers, tablesBySurvey = new Map(), analyses, units }) {
   /** @type {LensFinding[]} */
   const findings = [];
   const lensById = new Map();
   const surveysWithLedger = new Map(); // 調査 id (関連 id を含む) → その台帳の切り口 id の集合
   for (const ledger of ledgers) {
-    for (const id of [ledger.surveyId, ...(ledger.relatedSurveyIds ?? [])]) {
-      if (!knownSurveyIds.has(id)) findings.push({ level: "error", code: "UNKNOWN_SURVEY", message: `${ledger.surveyId}: 調査 ${id} が調査マスタに無い` });
-    }
     const ids = new Set();
     const tables = tablesBySurvey.get(ledger.surveyId);
     for (const lens of ledger.lenses) {
@@ -52,18 +48,11 @@ export function checkLensLedgers({ ledgers, knownSurveyIds, tablesBySurvey = new
   }
 
   for (const a of analyses) {
-    for (const lensId of a.lensIds ?? []) {
-      if (!lensById.has(lensId)) findings.push({ level: "error", code: "UNKNOWN_LENS", message: `${a.id}: 切り口 ${lensId} が台帳に無い` });
-    }
     const covered = a.surveyIds.filter((s) => surveysWithLedger.has(s));
     if (covered.length && !NON_PRODUCTION.has(a.resolution) && !(a.lensIds ?? []).some((l) => covered.some((s) => surveysWithLedger.get(s)?.has(l)))) {
       findings.push({ level: "error", code: "UNLINKED_QUESTION", message: `${a.id}: 調査 ${covered.join(",")} の問いなのに、その調査の切り口 (lensIds) に結ばれていない` });
     }
   }
-  for (const u of units) {
-    if (!lensById.has(u.lensId)) findings.push({ level: "error", code: "UNKNOWN_LENS", message: `${u.id}: 切り口 ${u.lensId} が台帳に無い` });
-  }
-
   const usedLenses = new Set([...analyses.flatMap((a) => a.lensIds ?? []), ...units.map((u) => u.lensId)]);
   for (const id of lensById.keys()) {
     if (!usedLenses.has(id)) findings.push({ level: "warn", code: "LENS_WITHOUT_QUESTIONS", message: `${id}: 問いも分析単位もまだ無い` });

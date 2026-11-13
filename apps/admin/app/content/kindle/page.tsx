@@ -71,7 +71,7 @@ export default async function KindleContentPage({
     <>
       <PageHeading
         title="Kindle運用"
-        source="book-catalog.ts / manuscripts / kdp-listings.json / kindle-archives.json / .local EPUB"
+        source="book-catalog.ts / manuscripts / kdp.listings / kindle-archives.json / .local EPUB"
       >
         <p className="text-sm text-muted-foreground">
           書籍設計・原稿・ローカル成果物・KDP公開状態を突合します。公開操作は /kdp-publish とオーナー承認のままです。

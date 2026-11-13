@@ -101,6 +101,7 @@ const CityDatabookMetricSchema = z
     nationalCount: z.number().int().positive(),
     prefectureRank: z.number().int().positive(),
     prefectureCount: z.number().int().positive(),
+    prefectureTies: z.number().int().positive().optional(),
     basis: z.enum(['rate', 'total', 'unknown']),
   })
   .strict();

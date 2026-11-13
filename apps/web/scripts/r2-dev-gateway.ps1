@@ -117,6 +117,8 @@ function Resolve-LocalOverrideFile {
   if ($localR2Base -and (
       $Key.StartsWith("app/ranking/", [StringComparison]::Ordinal) -or
       $Key.StartsWith("app/ranking-items/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("app/correlation/", [StringComparison]::Ordinal) -or
+      $Key.StartsWith("app/products/", [StringComparison]::Ordinal) -or
       $Key.StartsWith("app/stats/", [StringComparison]::Ordinal) -or
       $Key.StartsWith("app/japan/", [StringComparison]::Ordinal) -or
       $Key.StartsWith("app/municipalities/", [StringComparison]::Ordinal) -or

@@ -39,6 +39,11 @@ import { GSC_PROPERTY } from "../lib/site-config.cjs";
 const PROPERTY = GSC_PROPERTY;
 const INDEX_URL = `https://search.google.com/search-console/index?resource_id=${encodeURIComponent(PROPERTY)}`;
 
+/** 「すべての送信済みページ」ビュー。値は 2026-11-11 に画面で確認 (SUBMITTED 等は HTTP 400)。 */
+export const SUBMITTED_VIEW = "ALL_SUBMITTED_URLS";
+export const SUBMITTED_VIEW_SLUG = "概要-送信済みビュー"; // ingest-gsc-export.py の SUBMITTED_MARKER と一致させる
+export const submittedViewUrl = (indexUrl = INDEX_URL) => `${indexUrl}&pages=${SUBMITTED_VIEW}`;
+
 /** 既定の export 対象。actionable (転換可能) を優先し、意図的カテゴリは既定で採らない。 */
 const DEFAULT_TARGETS = [
   "クロール済み - インデックス未登録",
@@ -164,7 +169,7 @@ export async function openCoverageReason(page, reason) {
 }
 
 /** null reason is an explicitly requested overview, never a failed drilldown fallback. */
-async function exportOne(page, reason, dest) {
+async function exportOne(page, reason, dest, { slugOverride = null } = {}) {
   if (reason) await openCoverageReason(page, reason);
 
   // The heading appears before this button on SPA drilldown navigation.
@@ -198,15 +203,29 @@ async function exportOne(page, reason, dest) {
   //   "stats47.jp-Coverage-Drilldown-<日付>.zip" で **理由を含まない**ため、
   //   同日に複数カテゴリを export すると後の 1 件が前を上書きして消える (2026-08-06 実測)。
   //   ingest は zip の中身で分類するので名前は識別子であればよい。
-  const slug = (reason ?? '概要').replace(/[\\/:*?"<>|]/g, "").replace(/\s+/g, "-").slice(0, 40);
+  const slug = slugOverride ?? (reason ?? '概要').replace(/[\\/:*?"<>|]/g, "").replace(/\s+/g, "-").slice(0, 40);
   const filename = base.replace(/\.zip$/i, "") + `-${slug}.zip`;
   const target = path.join(dest, filename);
   await download.saveAs(target);
   return {
-    reason: reason ?? '概要',
+    reason: slugOverride ?? reason ?? '概要',
     ok: true,
     note: pickedUpByIngest ? target : `${target} (ingest が拾える名前に改名: 元 "${suggested}")`,
   };
+}
+
+/**
+ * 送信済みビューの概要 export。別 slug で保存し、ingest が「すべての既知」の集計と分離する。
+ * ビューが切り替わっていない (pages が URL に残らない) 場合は export せず失敗にする。
+ */
+async function exportSubmittedView(page, dest) {
+  await page.goto(submittedViewUrl(), { waitUntil: "domcontentloaded", timeout: 60000 });
+  await assertNotBlocked(page);
+  if (new URL(page.url()).searchParams.get("pages") !== SUBMITTED_VIEW) {
+    return { reason: SUBMITTED_VIEW_SLUG, ok: false, note: "送信済みビューに切り替わらなかった" };
+  }
+  await page.waitForTimeout(4000);
+  return exportOne(page, null, dest, { slugOverride: SUBMITTED_VIEW_SLUG });
 }
 
 async function main() {
@@ -239,13 +258,26 @@ async function main() {
       await page.waitForTimeout(3000);
     }
 
+    // 送信済みビューは補助。失敗しても必須 export の成否に影響させず、ingest が「未取得」と記録する。
+    let submittedResult = null;
+    if (!args.only) {
+      try {
+        submittedResult = await exportSubmittedView(page, args.dest);
+      } catch (e) {
+        submittedResult = { reason: SUBMITTED_VIEW_SLUG, ok: false, note: String(e.message).split("\n")[0].slice(0, 120) };
+      }
+      results.push({ ...submittedResult, optional: true });
+    }
+
     console.log("\n=== export 結果 ===");
     for (const r of results) console.log(`${r.ok ? "OK  " : "NG  "} ${r.reason} — ${r.note}`);
-    const okCount = results.filter((r) => r.ok).length;
-    console.log(`\n${okCount}/${results.length} 件を ${args.dest} に保存`);
-    fs.writeFileSync(path.join(args.dest, 'manifest.json'), JSON.stringify({ generatedAt: new Date().toISOString(), property: PROPERTY, results, complete: okCount === results.length }, null, 2));
-    if (okCount !== results.length) {
-      console.error(`!! export が不完全です (${okCount}/${results.length})。--probe で DOM を確認してください`);
+    const required = results.filter((r) => !r.optional);
+    const okCount = required.filter((r) => r.ok).length;
+    console.log(`\n${okCount}/${required.length} 件を ${args.dest} に保存`);
+    if (submittedResult && !submittedResult.ok) console.warn("!! 送信済みビューは未取得 (ingest が missing と記録します)");
+    fs.writeFileSync(path.join(args.dest, 'manifest.json'), JSON.stringify({ generatedAt: new Date().toISOString(), property: PROPERTY, results, complete: okCount === required.length }, null, 2));
+    if (okCount !== required.length) {
+      console.error(`!! export が不完全です (${okCount}/${required.length})。--probe で DOM を確認してください`);
       process.exitCode = 1;
       return;
     }

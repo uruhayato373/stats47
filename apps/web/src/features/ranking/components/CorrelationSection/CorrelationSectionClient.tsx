@@ -1,5 +1,7 @@
 "use client";
 
+import { cn } from "@stats47/components";
+import { CORRELATION_DIRECTIONS, CORRELATION_SELECTION_POLICY, type CorrelatedItem, type CorrelationGroups } from "@stats47/correlation";
 import { hrefFor } from "@stats47/data-configs/content/href";
 
 import Link from "@/components/atoms/SiteLink";
@@ -8,73 +10,40 @@ import { SectionCard, ValueTable } from "@/components/surface";
 import { navSurfaceProps } from "@/lib/analytics/events";
 import { correlationColorClass, formatCorrelation } from "@/lib/correlation-display";
 
-interface CorrelatedItem {
-    rankingKey: string;
-    title: string;
-    subtitle: string | null;
-    unit: string;
-    pearsonR: number;
-    populationAdjustedR: number;
-    partialRPopulation: number | null;
-    partialRArea: number | null;
-    partialRAging: number | null;
-    partialRDensity: number | null;
-    scatterData: Array<{
-        areaCode: string;
-        areaName: string;
-        x: number;
-        y: number;
-    }>;
-}
+export type CorrelationListItem = Pick<CorrelatedItem, "rankingKey" | "title" | "populationAdjustedR">;
 
-interface CorrelationSectionClientProps {
-    correlatedItems: CorrelatedItem[];
-    /** 相手指標 rankingKey → この 2 指標の関係を解説した記事 */
-    articleByPairKey?: Record<string, { slug: string; title: string }>;
-}
+export function CorrelationSectionClient({ groups }: { groups: CorrelationGroups<CorrelationListItem> }) {
+  const directions = CORRELATION_DIRECTIONS.filter(direction => groups[direction].length > 0);
+  if (directions.length === 0) return null;
 
-export function CorrelationSectionClient({
-    correlatedItems,
-    articleByPairKey = {},
-}: CorrelationSectionClientProps) {
-    return (
-        <SectionCard title="相関が高い指標">
-            {/* 並び順と数値は snapshot の populationAdjustedR (人口補正後の順位相関)。生の r だと人口規模や 1 県の外れ値だけで連動する組が上位を占める */}
-            <p className="mb-2 text-xs text-muted-foreground">
-                人口規模の影響を除いた順位相関（1県の極端な値に左右されにくい）
-            </p>
-            {/* 指標・解説記事・順位相関を行ごとに比べて読むので、共通の静的な表で描く (2026-11-03。旧: リンクの一覧) */}
-            <div {...navSurfaceProps("ranking_correlation")}>
-                <ValueTable
-                    ariaLabel="相関が高い指標"
-                    columns={[
-                        { key: "metric", header: "指標", rowHeader: true },
-                        { key: "article", header: "解説", align: "left" },
-                        { key: "r", header: "順位相関" },
-                    ]}
-                    rows={correlatedItems.map((item) => {
-                        const article = articleByPairKey[item.rankingKey];
-                        return {
-                            key: item.rankingKey,
-                            cells: [
-                                <Link key="metric" href={hrefFor("ranking", { rankingKey: item.rankingKey })}>
-                                    {item.title}
-                                </Link>,
-                                article ? (
-                                    <Link key="article" href={hrefFor("blog", { slug: article.slug })} title={article.title}>
-                                        解説記事
-                                    </Link>
-                                ) : (
-                                    "—"
-                                ),
-                                <span key="r" className={correlationColorClass(item.populationAdjustedR)}>
-                                    {formatCorrelation(item.populationAdjustedR)}
-                                </span>,
-                            ],
-                        };
-                    })}
-                />
-            </div>
-        </SectionCard>
-    );
+  return (
+    <SectionCard title="相関が高い指標">
+      <p className="mb-2 text-xs text-muted-foreground">
+        人口規模の影響を除いた順位相関（1県の極端な値に左右されにくい）
+      </p>
+      <div {...navSurfaceProps("ranking_correlation")} className="@container">
+        <div className={cn("grid grid-cols-1 gap-6", directions.length > 1 && "@md:grid-cols-2")}>
+          {directions.map(direction => (
+            <section key={direction} aria-label={CORRELATION_SELECTION_POLICY.groups[direction].label} className="min-w-0">
+              <h3 className="mb-2 text-sm font-medium">{CORRELATION_SELECTION_POLICY.groups[direction].label}</h3>
+              <ValueTable
+                ariaLabel={CORRELATION_SELECTION_POLICY.groups[direction].label}
+                columns={[
+                  { key: "metric", header: "指標", rowHeader: true },
+                  { key: "r", header: "順位相関", className: "w-20 whitespace-nowrap" },
+                ]}
+                rows={groups[direction].map(item => ({
+                  key: item.rankingKey,
+                  cells: [
+                    <Link key="metric" href={hrefFor("ranking", { rankingKey: item.rankingKey })}>{item.title}</Link>,
+                    <span key="r" className={correlationColorClass(item.populationAdjustedR)}>{formatCorrelation(item.populationAdjustedR)}</span>,
+                  ],
+                }))}
+              />
+            </section>
+          ))}
+        </div>
+      </div>
+    </SectionCard>
+  );
 }

@@ -360,10 +360,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:local-finance",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:per-capita-inhabitant-tax-pref-municipal",
           "kind": "ranking"
         },
@@ -1194,14 +1190,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:local-economy",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "japan-theme:real-income",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:per-capita-prefectural-income-h27",
           "kind": "ranking"
         },
@@ -1605,10 +1593,6 @@
         {
           "pageId": "area-theme:47000:local-finance",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:local-finance",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:per-capita-total-expenditure-pref-municipal",
@@ -2302,14 +2286,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:local-economy",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "japan-theme:local-finance",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:per-taxpayer-taxable-income",
           "kind": "municipality-ranking"
         },
@@ -2492,6 +2468,14 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:kanagawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kyoto-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:nara-food-culture",
           "kind": "blog"
         },
@@ -2501,6 +2485,10 @@
         },
         {
           "pageId": "blog:shimane-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokyo-food-culture",
           "kind": "blog"
         },
         {
@@ -2569,6 +2557,14 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:kanagawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kyoto-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:nara-food-culture",
           "kind": "blog"
         },
@@ -2578,6 +2574,10 @@
         },
         {
           "pageId": "blog:shimane-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokyo-food-culture",
           "kind": "blog"
         },
         {
@@ -2622,19 +2622,209 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:personal-computer-expenditure-ranking",
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:household-education-leisure",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:personal-computer-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-food-spending",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "household-food-spending"
+      ]
     },
     {
       "metricKey": "personal-effects-group-consumption-expenditure",
@@ -3286,10 +3476,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:local-finance",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:personnel-expenditure-ratio-pref-finance",
           "kind": "ranking"
         },
@@ -3627,10 +3813,6 @@
         {
           "pageId": "area-theme:47000:public-assistance",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:public-assistance",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:persons-on-public-assistance-per-1000",
@@ -4452,10 +4634,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:healthcare",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:pharmacy-count-per-100k",
           "kind": "ranking"
         },
@@ -4790,10 +4968,6 @@
         {
           "pageId": "area-theme:47000:disability-support",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:disability-support",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:physical-disability-certificates-issued-per-1000",
@@ -5939,8 +6113,8 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:healthcare",
-          "kind": "japan-theme"
+          "pageId": "product:data-p-05",
+          "kind": "product"
         },
         {
           "pageId": "ranking:physicians-in-medical-facilities-per-100k",
@@ -6069,6 +6243,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:fukushima-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:ishikawa-food-culture",
           "kind": "blog"
         },
@@ -6126,6 +6304,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:fukushima-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:ishikawa-food-culture",
           "kind": "blog"
         },
@@ -6175,10 +6357,6 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:fukushima-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:gifu-food-culture",
           "kind": "blog"
         },
@@ -6219,10 +6397,6 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
-        {
-          "pageId": "blog:fukushima-food-culture",
-          "kind": "blog"
-        },
         {
           "pageId": "blog:gifu-food-culture",
           "kind": "blog"
@@ -6273,11 +6447,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:nagano-food-culture",
+          "pageId": "blog:kanagawa-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:okinawa-food-culture",
+          "pageId": "blog:nagano-food-culture",
           "kind": "blog"
         },
         {
@@ -6342,11 +6516,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:nagano-food-culture",
+          "pageId": "blog:kanagawa-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:okinawa-food-culture",
+          "pageId": "blog:nagano-food-culture",
           "kind": "blog"
         },
         {
@@ -8869,10 +9043,6 @@
         {
           "pageId": "blog:police-officer-density-vs-crime-gap",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:safety",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:police-officer-count-per-population",

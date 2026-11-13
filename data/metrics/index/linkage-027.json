@@ -559,10 +559,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:safety",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:serious-crime-per-100k",
           "kind": "ranking"
         },
@@ -1060,10 +1056,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:water-services",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:sewerage-coverage-rate",
           "kind": "ranking"
         },
@@ -1151,6 +1143,10 @@
         {
           "pageId": "blog:water-sewage-crisis",
           "kind": "blog"
+        },
+        {
+          "pageId": "product:data-p-10",
+          "kind": "product"
         },
         {
           "pageId": "ranking:sewerage-penetration-rate-2012on",
@@ -2347,6 +2343,14 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:okayama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokyo-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:shellfish-group-consumption-expenditure",
           "kind": "ranking"
         }
@@ -2383,6 +2387,14 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:okayama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokyo-food-culture",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:shellfish-group-consumption-quantity",
           "kind": "ranking"
@@ -2426,10 +2438,6 @@
         },
         {
           "pageId": "blog:ehime-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:fukushima-food-culture",
           "kind": "blog"
         },
         {
@@ -2479,10 +2487,6 @@
         },
         {
           "pageId": "blog:ehime-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:fukushima-food-culture",
           "kind": "blog"
         },
         {
@@ -2768,11 +2772,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:okinawa-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:saga-food-culture",
+          "pageId": "blog:okayama-food-culture",
           "kind": "blog"
         },
         {
@@ -3035,11 +3035,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:okinawa-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:saga-food-culture",
+          "pageId": "blog:okayama-food-culture",
           "kind": "blog"
         },
         {
@@ -4433,10 +4429,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:single-parent-households",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:single-father-households",
           "kind": "municipality-ranking"
         },
@@ -5525,10 +5517,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:single-parent-households",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:single-mother-households",
           "kind": "municipality-ranking"
         },
@@ -5901,10 +5889,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:single-parent-households",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:single-mother-households-income-100to199",
           "kind": "ranking"
         },
@@ -6131,10 +6115,6 @@
         {
           "pageId": "area-theme:47000:single-parent-households",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:single-parent-households",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:single-mother-households-income-200to299",
@@ -6365,10 +6345,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:single-parent-households",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:single-mother-households-income-300to399",
           "kind": "ranking"
         },
@@ -6595,10 +6571,6 @@
         {
           "pageId": "area-theme:47000:single-parent-households",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:single-parent-households",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:single-mother-households-income-400to499",
@@ -6829,10 +6801,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:single-parent-households",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:single-mother-households-income-500plus",
           "kind": "ranking"
         },
@@ -7061,10 +7029,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:single-parent-households",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:single-mother-households-income-under100",
           "kind": "ranking"
         },
@@ -7291,10 +7255,6 @@
         {
           "pageId": "area-theme:47000:single-parent-households",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:single-parent-households",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:single-mother-public-assistance-households",
@@ -7903,10 +7863,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:living-housing",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:single-person-household-old-population-ratio",
           "kind": "municipality-ranking"
         },
@@ -8405,6 +8361,10 @@
         {
           "pageId": "municipality-theme:single-parent-households",
           "kind": "municipality-theme"
+        },
+        {
+          "pageId": "product:data-p-01",
+          "kind": "product-analysis"
         },
         {
           "pageId": "ranking:single-person-households",
@@ -8924,10 +8884,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:daily-time-use",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:sleep-avg-time-female",
           "kind": "ranking"
         },
@@ -9156,10 +9112,6 @@
         {
           "pageId": "blog:sleep-avg-time-male-prefecture-gap",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:daily-time-use",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:sleep-avg-time-male",
@@ -10547,14 +10499,6 @@
         {
           "pageId": "blog:population-migration-tokyo-concentration",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:aging-society",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "japan-theme:population-dynamics",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:social-increase-rate",

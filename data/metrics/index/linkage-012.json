@@ -251,10 +251,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:cultural-participation",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:hobby-participation-rate-art-appreciation",
           "kind": "ranking"
         },
@@ -483,10 +479,6 @@
         {
           "pageId": "area-theme:47000:cultural-participation",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:cultural-participation",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:hobby-participation-rate-calligraphy",
@@ -827,10 +819,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:cultural-participation",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:hobby-participation-rate-classical-music",
           "kind": "ranking"
         },
@@ -1133,10 +1121,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:cultural-participation",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:hobby-participation-rate-flower-arrangement",
           "kind": "ranking"
         },
@@ -1367,10 +1351,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:daily-time-use",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:hobby-participation-rate-gardening",
           "kind": "ranking"
         },
@@ -1599,10 +1579,6 @@
         {
           "pageId": "area-theme:47000:cultural-participation",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:cultural-participation",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:hobby-participation-rate-go",
@@ -1873,10 +1849,6 @@
         {
           "pageId": "blog:hobby-participation-rate-instrument-prefecture-gap",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:cultural-participation",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:hobby-participation-rate-instrument",
@@ -2181,10 +2153,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:daily-time-use",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:hobby-participation-rate-karaoke",
           "kind": "ranking"
         },
@@ -2413,10 +2381,6 @@
         {
           "pageId": "area-theme:47000:cultural-participation",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:cultural-participation",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:hobby-participation-rate-knitting",
@@ -2725,10 +2689,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:daily-time-use",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:hobby-participation-rate-pachinko",
           "kind": "ranking"
         },
@@ -2959,10 +2919,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:cultural-participation",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:hobby-participation-rate-painting",
           "kind": "ranking"
         },
@@ -3191,10 +3147,6 @@
         {
           "pageId": "area-theme:47000:cultural-participation",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:cultural-participation",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:hobby-participation-rate-photography",
@@ -3499,10 +3451,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:cultural-participation",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:hobby-participation-rate-reading",
           "kind": "ranking"
         },
@@ -3769,10 +3717,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:cultural-participation",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:hobby-participation-rate-shogi",
           "kind": "ranking"
         },
@@ -4001,10 +3945,6 @@
         {
           "pageId": "area-theme:47000:sports-participation",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:sports-participation",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:hobby-participation-rate-sports-spectating",
@@ -4239,10 +4179,6 @@
         {
           "pageId": "blog:hobby-participation-rate-tea-ceremony-prefecture-gap",
           "kind": "blog"
-        },
-        {
-          "pageId": "japan-theme:cultural-participation",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:hobby-participation-rate-tea-ceremony",
@@ -4663,10 +4599,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:cultural-participation",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:hobby-participation-rate-theater",
           "kind": "ranking"
         },
@@ -4936,10 +4868,6 @@
         {
           "pageId": "area-theme:47000:daily-time-use",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:daily-time-use",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:hobby-participation-rate-video-games",
@@ -6477,10 +6405,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:hyogo-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:kagawa-food-culture",
           "kind": "blog"
         },
@@ -6573,10 +6497,6 @@
         },
         {
           "pageId": "blog:hiroshima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:hyogo-food-culture",
           "kind": "blog"
         },
         {
@@ -8023,10 +7943,6 @@
         {
           "pageId": "area-theme:47000:aging-society",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:aging-society",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:household-ratio-with-65plus",
@@ -11140,10 +11056,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:regional-transport",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:household-survey-transport-communication-expenditure",
           "kind": "ranking"
         },
@@ -12064,10 +11976,6 @@
           "kind": "area"
         },
         {
-          "pageId": "japan-theme:living-housing",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "municipality-ranking:households",
           "kind": "municipality-ranking"
         },
@@ -12730,10 +12638,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "japan-theme:public-assistance",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:households-on-public-assistance-per-1000",
           "kind": "ranking"
         },
@@ -13264,14 +13168,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "japan-theme:daily-time-use",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "japan-theme:gender-participation",
-          "kind": "japan-theme"
-        },
-        {
           "pageId": "ranking:housework-avg-time-female",
           "kind": "ranking"
         },
@@ -13689,14 +13585,6 @@
         {
           "pageId": "area-theme:47000:gender-participation",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:daily-time-use",
-          "kind": "japan-theme"
-        },
-        {
-          "pageId": "japan-theme:gender-participation",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:housework-avg-time-male",
@@ -14696,10 +14584,6 @@
         {
           "pageId": "area-theme:47000:household-assets-debt",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "japan-theme:household-assets-debt",
-          "kind": "japan-theme"
         },
         {
           "pageId": "ranking:housing-land-liabilities-ratio-multi-person-households",

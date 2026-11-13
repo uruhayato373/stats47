@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Geo の単一レイヤー表示の台帳",
+  "description": "data/geo/analyses/layers.json の形状契約。layers のキーが層の slug (GeoLayerSlug) で、公開 URL /geo/layers/<slug> になる。検証済みで描画できる表現だけが経路を持つ。dataId は geo.ksj-datasets の ID、sourceAnalysis と related は geo.analyses の slug。kind の列挙は読み込み口 packages/data-configs/src/business-plan/geo-layers.ts の GEO_LAYER_KINDS と同じ。",
+  "type": "object",
+  "required": ["layers"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "layers": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^[a-z][a-z0-9-]*$" },
+      "additionalProperties": {
+        "type": "object",
+        "required": ["name", "kind", "dataId", "sourceAnalysis", "representation", "description", "reading", "limitation", "related"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "kind": { "enum": ["population", "land-price", "stations"] },
+          "dataId": { "type": "string", "pattern": "^[A-Za-z0-9]+$" },
+          "sourceAnalysis": { "description": "この層の値を配信する分析の slug。web が型で県別 bundle を絞るので、読み込み口の GEO_LAYER_SOURCE_ANALYSES と同じ列挙", "enum": ["population-land-price", "population-station-access"] },
+          "representation": { "type": "string", "minLength": 1 },
+          "description": { "type": "string", "minLength": 1 },
+          "reading": { "type": "string", "minLength": 1 },
+          "limitation": { "type": "string", "minLength": 1 },
+          "related": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" } }
+        }
+      }
+    }
+  }
+}

@@ -9,7 +9,7 @@ import { execFile } from 'node:child_process';
 
 // Intended location: .claude/scripts/themes/ingest-road-maintenance.mjs.
 const require = createRequire(import.meta.url);
-const prefectures = require('../../../packages/area/src/data/prefectures.json');
+const prefectures = require('../lib/prefectures.cjs').PREFECTURES;
 const { METRICS_REGISTRY } = require('../../../packages/data-configs/src/registry.ts');
 const { buildRecipe } = require('../../../packages/data-configs/src/recipe.ts');
 const { parseStatsValuesPayload } = require('../../../packages/stats-r2/src/schemas.ts');

@@ -4,14 +4,13 @@ import { hrefFor } from '@stats47/data-configs/content/href';
 import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
 
 import { AdRow, composeAdRows } from '@/features/ads';
-import { resolveGenericAffiliateBanners } from '@/features/ads/server';
 import {
   AreaDirectoryRegionNav,
   AreaDirectoryRegionProvider,
   PrefectureNavigator,
 } from '@/features/area-profile';
 
-import { CONTENT_FOOTER, HUB_INCONTENT } from '@/lib/google-adsense';
+import { CONTENT_FOOTER } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 import { formatOgpTitle } from '@/lib/metadata/site-title';
 
@@ -53,8 +52,8 @@ export default async function AreasPage() {
     })),
   };
 
-  // 広告の段 (2026-11-03 オーナー決定): ページの最後に AdSense と PR を並べる (旧: デスクトップだけのページ末の AdSense。モバイルは 0 枠だった)
-  const [indexRow] = composeAdRows([['adsense', 'affiliate', 'adsense']], [CONTENT_FOOTER, HUB_INCONTENT], await resolveGenericAffiliateBanners(1).catch(() => []));
+  // 広告の段: ページの最後に AdSense 1 つを本文の幅いっぱい (上限 580px) に出す (2026-11-12 オーナー決定でアフィリエイトを止め、PR を外した)
+  const [indexRow] = composeAdRows([['adsense']], [CONTENT_FOOTER], []);
   return (
     <AreaDirectoryRegionProvider>
       {/* ページ内ナビ (地方の切替) はパンくずと h1 の後・本文の上に置く (PageShell の header → leftRail → 本文) */}
@@ -90,7 +89,7 @@ export default async function AreasPage() {
           一覧面の共通フッター枠。PageShell の左レール化により広告は本文カラム幅へ
           収まり、地方ナビと同じグリッド内でカテゴリ・テーマ面と揃う。
         */}
-        {indexRow.length > 0 && <AdRow cells={indexRow} position="areas-index-row" trackingCategory="areas-index" />}
+        {indexRow.length > 0 && <AdRow cells={indexRow} position="areas-index-row" trackingCategory="areas-index" wide />}
       </PageShell>
     </AreaDirectoryRegionProvider>
   );

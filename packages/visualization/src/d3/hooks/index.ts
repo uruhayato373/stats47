@@ -1,1 +1,1 @@
-export { useD3Tooltip, type UseD3TooltipReturn } from "./useD3Tooltip";
+export { useD3Tooltip, type UseD3TooltipReturn, type TooltipSeriesItem } from "./useD3Tooltip";

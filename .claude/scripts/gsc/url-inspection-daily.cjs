@@ -133,16 +133,19 @@ function getLatestSnapshotDir() {
 }
 
 function loadKeysFromTsFile(filename) {
-  const movedRankingConfig = new Set([
-    "known-ranking-keys.ts",
-    "gone-ranking-keys.ts",
-  ]);
+  const movedRankingConfig = new Set(["known-ranking-keys.ts"]);
   const p = movedRankingConfig.has(filename)
     ? path.join(PROJECT_ROOT, "packages/ranking/src/config", filename)
     : path.join(PROJECT_ROOT, "apps/web/src/config", filename);
   if (!fs.existsSync(p)) return [];
   const txt = fs.readFileSync(p, "utf-8");
   return [...txt.matchAll(/^\s*"([^"]+)",?\s*$/gm)].map((m) => m[1]);
+}
+
+/** 退役した ranking キー。URL の履歴の台帳 (data/site/url-history/gone-ranking-keys.json) が正本 */
+function loadGoneRankingKeys() {
+  const p = path.join(PROJECT_ROOT, datasetPath("site.gone-ranking-keys"));
+  return JSON.parse(fs.readFileSync(p, "utf-8")).keys.map((row) => row.key);
 }
 
 function loadSitemapTagKeys() {
@@ -308,7 +311,7 @@ function buildUrlList(maxUrls = MAX_URLS) {
 
   // Priority 6: GONE_RANKING_KEYS（数日で全件を巡回）
   const goneKeys = rotateDaily(
-    loadKeysFromTsFile("gone-ranking-keys.ts"),
+    loadGoneRankingKeys(),
     quota.gone,
   );
   for (const k of goneKeys) {

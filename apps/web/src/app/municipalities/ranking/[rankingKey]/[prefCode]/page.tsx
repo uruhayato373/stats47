@@ -57,9 +57,10 @@ interface Params {
 /**
  * 「県名×市区町村ランキング」(MUNI-PREF-RANKING-ROUTE-01)。
  *
- * 全国版の `?pref=` 絞り込みは canonical が全国版を向くので検索に出ない。県名を含む検索に届くよう、
+ * 全国版 (`/municipalities/ranking/<key>`) はクエリを読まず 1 指標 1 URL で revalidate する。旧 `?pref=` のリンクは
+ * middleware が県別ページ (対象の指標) か全国版へ 301 する。県名を含む検索に届くよう、
  * 対象の指標 (MUNICIPALITY_PREFECTURE_RANKING_KEYS) だけ県ごとの独立ページにして canonical を自分に向ける。
- * 本文は配信値からテンプレートで組む (LLM で書かない)。全国版と同じく R2 を読むので force-dynamic。
+ * 本文は配信値からテンプレートで組む (LLM で書かない)。この県別ページは R2 を読むので force-dynamic。
  */
 export const dynamic = 'force-dynamic';
 

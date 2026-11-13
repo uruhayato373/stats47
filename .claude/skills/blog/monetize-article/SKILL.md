@@ -55,7 +55,7 @@ $ARGUMENTS — {slug}
 ### Phase 3: `<affiliate-banner>` の配置
 
 1. 記事のタグを確認する（記事 frontmatter またはファイル名から推測）
-2. `TAG_AFFILIATE_MAP`（`apps/web/src/features/ads/constants/affiliate-category.ts`）でカテゴリを特定:
+2. `TAG_AFFILIATE_MAP`（台帳 `affiliate.vertical-map` の `tag`）でカテゴリを特定:
    - タグが複数ある場合は最初にマッチしたカテゴリを使用
 3. 記事本文・セクションタイトルを見て、カテゴリと最も関連するセクションを選択
 4. そのセクション末尾に `<affiliate-banner category="{category}">` を挿入
