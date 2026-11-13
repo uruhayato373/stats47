@@ -723,3 +723,66 @@ test("実リポジトリの問いの台帳は、文章 (dataNote) に e-Stat の
   const issues = JSON.parse(readFileSync(resolve(ROOT, datasetPath("content.issues")), "utf8")).issues;
   assert.deepEqual(issues.filter((i) => /[0-9]{10}/.test(i.dataNote ?? "")).map((i) => i.id), []);
 });
+
+// ── 調査ポートフォリオ: 列挙と ID の実在の持ち主は Schema と refs だけ (2026-11-14 SURVEY-PORTFOLIO-VALIDATOR-DEDUPE-01) ──
+const SURVEY_STATE_IDS = ["surveys.portfolio", "surveys.experiments"];
+const SURVEY_VALIDATOR = ".claude/scripts/surveys/validate-survey-portfolio.ts";
+
+test("[mutation] 調査ポートフォリオと実験台帳の語彙外の値は Schema が、調査 ID の参照切れは refs が落とす", () => {
+  const portfolioPath = datasetPath("surveys.portfolio");
+  const experimentsPath = datasetPath("surveys.experiments");
+  const masterPath = datasetPath("surveys.master");
+  const files = [portfolioPath, experimentsPath, masterPath];
+  const store = Object.fromEntries(files.map((f) => [f, JSON.parse(readFileSync(resolve(ROOT, f), "utf8"))]));
+  const rows = DATASETS.filter((d) => [...SURVEY_STATE_IDS, "surveys.master"].includes(d.id));
+  const readJson = (p) => store[p] ?? JSON.parse(readFileSync(resolve(ROOT, p), "utf8"));
+  const schemaErrors = () => checkSchemas({ datasets: rows, files, readJson, exists: (p) => existsSync(resolve(ROOT, p)) });
+  const refErrors = () => checkRefs({ datasets: rows, files, readJson, readText: (p) => readFileSync(resolve(ROOT, p), "utf8"), registries: REGISTRIES }).errors;
+  assert.deepEqual(schemaErrors(), []);
+  assert.deepEqual(refErrors(), []);
+
+  const survey = store[portfolioPath].surveys[0];
+  const experiment = store[experimentsPath].experiments[0];
+  assert.ok(experiment, "実験台帳に 1 件以上ある (無ければこの検査は実験側を見ていない)");
+  const mutations = [
+    [survey, "lifecycleStatus", /surveys\.portfolio: .* が schema に合わない/],
+    [survey, "editorialStatus", /surveys\.portfolio: .* が schema に合わない/],
+    [survey, "linkageStatus", /surveys\.portfolio: .* が schema に合わない/],
+    [survey.metrics.gsc, "status", /surveys\.portfolio: .* が schema に合わない/],
+    [experiment, "verdict", /surveys\.experiments: .* が schema に合わない/],
+    [experiment, "changeType", /surveys\.experiments: .* が schema に合わない/],
+  ];
+  for (const [target, field, expected] of mutations) {
+    const original = target[field];
+    target[field] = "no-such-value";
+    assert.match(schemaErrors().join("\n"), expected, `${field} の語彙外の値を Schema が落とす`);
+    target[field] = original;
+  }
+  for (const [target, id] of [[survey, "surveys.portfolio"], [experiment, "surveys.experiments"]]) {
+    const original = target.surveyId;
+    target.surveyId = "no-such-survey";
+    assert.match(refErrors().join("\n"), new RegExp(`参照切れ: ${id.replace(".", "\\.")} .*surveyId=no-such-survey が surveys\\.master の`), `${id} の調査 ID の参照切れを refs が落とす`);
+    target.surveyId = original;
+  }
+  assert.deepEqual(schemaErrors(), [], "戻すと通る (赤は書き換えた値が理由)");
+  assert.deepEqual(refErrors(), []);
+});
+
+test("調査ポートフォリオの検証スクリプトは、Schema の列挙と refs の ID の実在を二重に持たない", () => {
+  // コメントを除いたコードだけを見る (判定の規律の説明に値の名前が出るのは構わない)
+  const code = readFileSync(resolve(ROOT, SURVEY_VALIDATOR), "utf8")
+    .replace(/\/\*[\s\S]*?\*\//g, "")
+    .replace(/(^|\s)\/\/.*$/gm, "$1");
+  const enums = [];
+  const walk = (node, trail) => {
+    if (Array.isArray(node)) return node.forEach((child, i) => walk(child, `${trail}[${i}]`));
+    if (!node || typeof node !== "object") return;
+    if (Array.isArray(node.enum)) enums.push({ trail, values: node.enum });
+    for (const [key, child] of Object.entries(node)) if (key !== "enum") walk(child, `${trail}.${key}`);
+  };
+  for (const id of SURVEY_STATE_IDS) walk(JSON.parse(readFileSync(resolve(ROOT, DATASETS.find((d) => d.id === id).schema), "utf8")), id);
+  assert.ok(enums.length >= 6, `Schema から列挙を ${enums.length} 個しか読めていない (lifecycle・linkage・editorial・計測の状態・verdict・changeType)`);
+  const duplicated = enums.filter(({ values }) => values.every((value) => code.includes(`"${value}"`) || code.includes(`'${value}'`)));
+  assert.deepEqual(duplicated.map((e) => e.trail), [], "Schema の列挙の全部の値を検証スクリプトが文字列で持っている (列挙は Schema だけが持つ。部分集合を使う意味の検査は構わない)");
+  assert.doesNotMatch(code, /masterIds\.has\(/, "調査 ID の実在は refs (surveys[].surveyId・experiments[].surveyId → surveys.master) だけが持つ");
+});

@@ -3,10 +3,12 @@
  *
  * 対象: data/surveys/{portfolio,experiments}.json
  * 形: カタログの surveys.portfolio・surveys.experiments (Schema)。判定規律: このスクリプトと運用文書
+ * 列挙の値 (lifecycleStatus・verdict など) は Schema、調査 ID の実在は台帳の refs だけが持ち、
+ * `npm run check-datasets` が止める。このスクリプトは意味の検査 (判定の規律・drift・鮮度) だけを持つ。
  * 運用設計: .claude/skills/survey/manage-survey-portfolio/reference/surveyポートフォリオ運用.md
  *
  * enforce する規律 (根拠なし判定・重複実験・drift を機械的に禁止する):
- *   S1 surveyId 一意 / surveys.json (マスタ) との双方向一致 / enum 値
+ *   S1 surveyId 一意 / surveys.json (マスタ) の調査が portfolio に全部ある (逆向きの実在は refs)
  *   S2 survey-editorial.ts との drift (editorialContentExists / readerQuestionCount の再導出照合)
  *   S3 editorialStatus ↔ editorialContentExists の整合
  *      (exists=true ⇔ implemented|measuring|validated)
@@ -21,9 +23,9 @@
  *   S8 survey-editorial.ts の実装数 ratchet。通常CIでは実装済み全件、
  *      --require-all-editorial では master 全件を要求し、必須項目件数、
  *      readerQuestions の所属・重複、過度な本文類似も検査
- *   E1 experimentId 一意 / surveyId がマスタに実在
+ *   E1 experimentId 一意
  *   E2 同一 surveyId × changeType の pending 実験は 1 件まで (重複実験防止)
- *   E3 baseline 必須 / verdict enum / effect-* 確定には observations の d28|d56 + evidenceRefs 必須
+ *   E3 baseline 必須 / effect-* 確定には observations の d28|d56 + evidenceRefs 必須
  *   E4 primaryKpi が gsc.ctr の effect-* 確定には判定観測の gsc.impressions >= 100 が必須
  *      (impressions 100 未満で CTR 効果を確定しない)
  *
@@ -56,27 +58,13 @@ const SURVEYS_JSON =
 const jsonMode = process.argv.includes("--json");
 const requireAllEditorial = process.argv.includes("--require-all-editorial");
 
-const LIFECYCLE = new Set([
-  "keep", "observe", "improve", "editorial-candidate", "linkage-fix-required",
-  "merge-candidate", "retire-candidate", "insufficient-data",
-]);
-const EDITORIAL = new Set([
-  "fallback", "candidate", "audit-ready", "implemented", "measuring", "validated", "rejected",
-]);
 const EDITORIAL_IMPLEMENTED = new Set(["implemented", "measuring", "validated"]);
-const LINKAGE_STATUS = new Set(["ok", "r2-drift", "inactive-only", "orphan", "unknown"]);
-const METRIC_STATUS = new Set(["measured", "measured-low", "insufficient-data", "not-instrumented"]);
 // measured-low で保存を許可するカウント値 (比率値は標本不足でノイズ支配のため保存禁止 — README §判定規律)
 const MEASURED_LOW_COUNT_FIELDS: Record<string, Set<string>> = {
   gsc: new Set(["impressions", "clicks"]),
   ga4: new Set(["landingPageViews"]),
   internalNav: new Set(["rankingOutboundClicks"]),
 };
-const VERDICT = new Set([
-  "pending", "effect-full", "effect-partial", "effect-none",
-  "effect-adverse", "insufficient-data", "aborted",
-]);
-const CHANGE_TYPE = new Set(["editorial-hub", "linkage", "title-meta", "structure", "merge", "retire"]);
 const HARD_CANDIDATES = new Set(["merge-candidate", "retire-candidate"]);
 const MIN_CTR_IMPRESSIONS = 100;
 const MAX_STATE_AGE_DAYS = Number(process.env.SURVEY_STATE_MAX_AGE_DAYS ?? 35);
@@ -102,7 +90,6 @@ const w = (code: string, msg: string) => warnings.push(`[${code}] ${msg}`);
 const masterSurveys = JSON.parse(
   fs.readFileSync(SURVEYS_JSON, "utf8"),
 ) as Array<{ id: string }>;
-const masterIds = new Set(masterSurveys.map((s) => s.id));
 
 function sentenceCount(value: string): number {
   return value.split(/[。！？!?]+/).map((part) => part.trim()).filter(Boolean).length;
@@ -257,10 +244,6 @@ function validatePortfolio(pf: any) {
     }
     if (ids.has(id)) v("S1", `surveyId 重複: ${id}`);
     ids.add(id);
-    if (!masterIds.has(id)) v("S1", `${id}: surveys.json (マスタ) に存在しない`);
-    if (!LIFECYCLE.has(s.lifecycleStatus)) v("S1", `${id}: lifecycleStatus 不正 (${s.lifecycleStatus})`);
-    if (!EDITORIAL.has(s.editorialStatus)) v("S1", `${id}: editorialStatus 不正 (${s.editorialStatus})`);
-    if (!LINKAGE_STATUS.has(s.linkageStatus)) v("S1", `${id}: linkageStatus 不正 (${s.linkageStatus})`);
 
     // S2: survey-editorial.ts との drift (再導出照合)
     const editorial = getSurveyEditorialContent(id);
@@ -293,10 +276,6 @@ function validatePortfolio(pf: any) {
     // S5: status ごとの許可数値フィールド (推測値・標本不足比率の混入防止)
     for (const [name, m] of Object.entries<any>(s.metrics ?? {})) {
       if (!m || typeof m !== "object") continue;
-      if (!METRIC_STATUS.has(m.status)) {
-        v("S5", `${id}: metrics.${name}.status 不正 (${m.status})`);
-        continue;
-      }
       if (m.status === "measured") continue; // 制限なし
       const numeric = Object.entries(m).filter(([k, val]) => k !== "windowDays" && typeof val === "number");
       if (m.status === "measured-low") {
@@ -325,8 +304,8 @@ function validatePortfolio(pf: any) {
     if (s.linkageStatus === "inactive-only")
       w("S6", `${id}: 在庫 ${s.itemCount} 件すべて未公開 (isActive:false) — 公開判断は ranking-publisher / expansion queue (R2 不在は正常)`);
   }
-  // マスタ側の取りこぼし (双方向一致)
-  for (const id of masterIds) if (!ids.has(id)) v("S1", `surveys.json の ${id} が portfolio に無い (build を再実行)`);
+  // マスタ側の取りこぼし (portfolio → マスタの向きは台帳の refs が止める)
+  for (const { id } of masterSurveys) if (!ids.has(id)) v("S1", `surveys.json の ${id} が portfolio に無い (build を再実行)`);
 }
 
 // ---------- experiments.json ----------
@@ -345,10 +324,6 @@ function validateExperiments(ex: any) {
     }
     if (ids.has(id)) v("E1", `experimentId 重複: ${id}`);
     ids.add(id);
-    if (!e.surveyId || !masterIds.has(e.surveyId))
-      v("E1", `${id}: surveyId がマスタに実在しない (${e.surveyId})`);
-    if (!CHANGE_TYPE.has(e.changeType)) v("E1", `${id}: changeType 不正 (${e.changeType})`);
-    if (!VERDICT.has(e.verdict)) v("E3", `${id}: verdict 不正 (${e.verdict})`);
 
     // E3: baseline 必須
     if (!e.baseline || typeof e.baseline !== "object" || Object.keys(e.baseline).length === 0)

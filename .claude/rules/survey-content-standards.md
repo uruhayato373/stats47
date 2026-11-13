@@ -17,7 +17,7 @@ agent (`survey-curator`) / 人間はこれに従う。2026-07-12 に旧 survey �
 
 > **実装済み SSOT**: survey 編集情報はカタログの `surveys.editorial` (JSON + Schema。読み込みは `packages/data-configs/src/survey-editorial.ts`)
 > (`summary` / `whatYouCanLearn[]` / `readerQuestions[]{question,rankingKey}` / `caveats[]` / `relatedArticleSlugs[]` /
-> `areaLabel` (ハブ冒頭の地域の表記。都市別の値を集める調査だけ書く) / `relatedHubs[]{surveyKey,label}` (同じ調査の別ハブ))。
+> `areaLabel` (ハブ冒頭の地域の表記。都市別の値を集める調査だけ書く))。
 > `readerQuestions` の rankingKey は、ハブの代表ランキングとランキングページの「同じ調査のランキング」でも最優先に並ぶ (2026-11-02)。
 > **同じ調査の別 ID は 1 つのハブにまとめる**: 指標の紐付けで ID が分かれていても (家計調査は品目別 `kakei-chousa` と社会・人口統計体系経由の
 > `household-survey`)、読者にとって 1 つの調査ならハブは 1 つにする。表は `packages/data-configs/src/content/href.ts` の `SURVEY_HUB_ALIASES`
@@ -89,7 +89,7 @@ surveys.editorial (カタログの ID)  ← survey 編集情報の SSOT
   ├─ whatYouCanLearn[]
   ├─ readerQuestions[] { question, rankingKey }
   ├─ caveats[]
-  ├─ areaLabel / relatedHubs[]
+  ├─ areaLabel
   └─ relatedArticleSlugs[]
 
 data/surveys/lenses/<surveyId>.json  ← 調査の切り口台帳 (下の「調査の切り口台帳」)
@@ -149,7 +149,7 @@ R2 app/survey/<id>/items.json
   単位が測っているものと合う (食品は消費量、耐久財などは購入数量)。誤読しやすい品目に定義の注記がある (`kakei-definition-reading`)。
   「同じ調査のランキング」が編集の `readerQuestions` を先に出す。
 - **テーマ** (`/themes/<key>`): 切り口のチャネルに `theme` があるとき、その指標が ThemeCatalog に入っている。全国集計 (`national`) の切り口を県の地図にしない。
-- **調査ハブ** (`/survey/<key>`): 地域の表記 (`areaLabel`)・読者の問い・注意点が台帳の `readerQuestion`・`caveats` と食い違わない。同じ調査の別ハブ (`relatedHubs`) へ行ける。
+- **調査ハブ** (`/survey/<key>`): 地域の表記 (`areaLabel`)・読者の問い・注意点が台帳の `readerQuestion`・`caveats` と食い違わない。同じ調査の別 ID は 1 つのハブにまとまり (`SURVEY_HUB_ALIASES`)、別名の URL はそのハブへ 301 する。
 - **導線**: ランキング → 調査ハブ → 関連記事 → ランキングの往復がどれも実在するページへ届く (soft 404 は `audit-site-links.mjs` で見る)。
   切り口の記事 (ブログ) が、その指標のランキングの関連記事に出る (`rankingArticleIndex`)。
 - **UI**: 代表カードのフック文が値と単位を取り違えない。スマホ幅 (375px) で題・単位・注記が切れない。

@@ -55,7 +55,7 @@
           "relatedArticleCount", "gscSnapshotRef", "ga4SnapshotRef", "metrics", "currentHypothesis", "evidenceRefs", "lastReviewedAt", "nextReviewAt"
         ],
         "properties": {
-          "surveyId": { "description": "一意。調査マスタ (surveys.master) の id と双方向に一致する (マスタにある調査は全部ここにある)", "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+          "surveyId": { "description": "一意。調査マスタ (surveys.master) の id と双方向に一致する (実在は check-datasets の refs、マスタにある調査が全部ここにあることは validate-survey-portfolio.ts が止める)", "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
           "name": { "description": "調査マスタから転記 (ずれの検知用)", "type": "string", "minLength": 1 },
           "organization": { "description": "調査マスタから転記", "type": ["string", "null"] },
           "lifecycleStatus": {

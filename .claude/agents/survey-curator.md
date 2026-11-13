@@ -135,7 +135,8 @@ npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts --compare-r2  # R2 
 npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check # 横断 state / freshness / ratchet
 npm run validate:config --workspace=@stats47/data-configs             # surveyId 実在 lint
 npx tsx .claude/scripts/surveys/build-survey-portfolio.ts             # portfolio 再導出 (upsert)
-npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts          # schema + 判定規律 + drift
+npm run check-datasets                                                # portfolio・実験台帳の形 (Schema の列挙) + 調査 ID の実在 (refs)
+npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts          # 判定規律 + drift + 鮮度 (意味の検査)
 npm run surveys:lenses:check                                          # 切り口台帳: 表の実在、問い・分析単位からの参照、未接続の問い
 npm run surveys:lenses:status -- --survey kakei-chousa                # 切り口 × チャネルの展開状況 (展開記録から集計)
 cd packages/ranking && npx vitest run src/exporters/survey-bucketing.test.ts src/builders
