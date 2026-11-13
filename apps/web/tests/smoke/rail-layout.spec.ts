@@ -1,4 +1,4 @@
-import { expect, test, type Page } from '@playwright/test';
+import { expect, test, type Page } from './fixtures';
 
 // 共通 Shell の全 rightRail 呼び出し元と、レールなし・ページ内ナビの代表。
 // URL ごとの寸法補正・許容リストは持たない。同じ検査を全ページへ適用する。
