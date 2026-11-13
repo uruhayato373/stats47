@@ -1,7 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { mergeViewpointHistory, parseViewpointHistory } from "../record-theme-viewpoints.ts";
+import { require as tsxRequire } from "tsx/cjs/api";
+
+// .ts は tsx 経由で読む (素の node は拡張子なしの import を解決できない)
+const { mergeViewpointHistory, parseViewpointHistory } = tsxRequire("../record-theme-viewpoints.ts", import.meta.url);
 
 // 週次の監査は同じ週に何度も走る (再実行・手動実行)。同じ週の行を重ねると推移が水増しされるので、上書きを固定する。
 test("同じ週の行は置き換え、ほかの週は残して週・規則の順に並べる", () => {
