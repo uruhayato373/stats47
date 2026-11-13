@@ -532,6 +532,18 @@
         "marker": "<RailAdSlot slot={RAIL_RECT} />"
       },
       {
+        "slot": "adsense-rail-sticky",
+        "region": "rail",
+        "position": "右レールの最後 (よく読まれている記事・運営者のプロフィールの後)",
+        "source": "apps/web/src/app/category/[categoryKey]/page.tsx",
+        "marker": "<RailAdSlot slot={CATEGORY_RAIL_STICKY} sticky />",
+        "adsenseSlot": "CATEGORY_RAIL_STICKY",
+        "devices": [
+          "desktop"
+        ],
+        "condition": "300×600 をヘッダーの下 (80px) に追従させる (2026-11-13 オーナー決定。右レールの中身が約 600px で、PC で本文の下が約 2,900px 空いていた)。専用ユニット stats47-category-rail-sticky"
+      },
+      {
         "slot": "adsense-body-responsive",
         "region": "body",
         "position": "新着ブログの後・全ランキングの前",
