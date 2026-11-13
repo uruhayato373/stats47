@@ -137,8 +137,44 @@ describe('グループ棒グラフ', () => {
     if ('skip' in chart) throw Error(chart.skip);
     const svg = renderGroupedBarsChart({ ...chart, source: '家計調査' });
     expect(svg).toContain('data-image-template="grouped-bar"');
-    expect(svg.match(/<rect data-value="/g)).toHaveLength(6);
-    expect(svg).toContain('>0</text>');
+    const heights = [...svg.matchAll(/<rect data-value="(\d+)"[^>]* height="([\d.]+)"/g)].map((m) => Number(m[2]) / Number(m[1]));
+    expect(heights).toHaveLength(6);
+    for (const perUnit of heights) expect(perUnit).toBeCloseTo(heights[0], 0);
+  });
+  // chart-image-copy.md: 棒グラフは数値ラベルを直接置き、軸目盛りと目盛線は既定で表示しない
+  const valueLabels = (svg: string) => [...svg.matchAll(/<text data-label="value"[^>]*>([^<]*)<\/text>/g)];
+  const bars = (groups: number, series: number, valueOf = (g: number, s: number) => 1000 + g * 10 + s) => ({
+    title: 'a', meta: 'b', source: 'c', groups: Array.from({ length: groups }, (_, g) => `${g + 1}月`),
+    series: Array.from({ length: series }, (_, s) => ({ label: `系列${s}`, values: Array.from({ length: groups }, (_, g) => valueOf(g, s)) })),
+  });
+  it('棒ごとに値を置き、目盛りと目盛線を出さない', () => {
+    const svg = renderGroupedBarsChart(bars(3, 2, (g, s) => [[41.3, 6, -12.8], [-3.4, 4.1, 27.9]][s][g]));
+    expect(valueLabels(svg).map((m) => m[1]).sort()).toEqual(['-12.8', '-3.4', '27.9', '4.1', '41.3', '6.0']);
+    // The only line left is the bars' baseline at zero.
+    expect(svg.match(/<line /g)).toHaveLength(1);
+    expect(svg).not.toContain('>40</text>');
+    assertMinimalChartCopy(svg);
+  });
+  it('負の値は棒の下に置き、区分の名前の行より上に収める', () => {
+    const svg = renderGroupedBarsChart(bars(2, 1, (g) => [10, -10][g]));
+    const [up, down] = valueLabels(svg).map((m) => Number(/ y="([\d.]+)"/.exec(m[0])![1]));
+    const baseline = Number(/<line [^>]*y1="([\d.]+)"/.exec(svg)![1]);
+    const groupName = Number(/<text x="[\d.]+" y="([\d.]+)" text-anchor="middle" font-size="26"/.exec(svg)![1]);
+    expect(up).toBeLessThan(baseline);
+    expect(down).toBeGreaterThan(baseline);
+    expect(down).toBeLessThan(groupName - 26);
+  });
+  it('値が棒の幅に収まらないときは縦に置く', () => {
+    const svg = renderGroupedBarsChart(bars(12, 3));
+    expect(valueLabels(svg)).toHaveLength(36);
+    expect(valueLabels(svg).every((m) => m[0].includes('rotate(-90'))).toBe(true);
+    expect(svg.match(/<line /g)).toHaveLength(1);
+  });
+  it('値の文字より細い棒は、値を置かずに目盛りで読ませる', () => {
+    const svg = renderGroupedBarsChart(bars(12, 4));
+    expect(valueLabels(svg)).toHaveLength(0);
+    expect(svg.match(/<line /g)!.length).toBeGreaterThan(1);
+    expect(svg).toContain('>1,000</text>');
   });
   it('欠測は 0 の棒にしない', () => {
     const svg = renderGroupedBarsChart({ title: 'a', meta: 'b', source: 'c', groups: ['1月', '2月'], series: [{ label: 'x', values: [1, null] }] });
