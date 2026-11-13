@@ -4,9 +4,10 @@
  * (未宣言・重なり・空の行・語彙外・寿命の不一致を見逃すと、台帳が置き場の正本として機能しない)。
  */
 import assert from "node:assert/strict";
-import { execFileSync } from "node:child_process";
-import { existsSync, readFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { execFileSync, spawnSync } from "node:child_process";
+import { copyFileSync, existsSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join, resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
@@ -75,6 +76,38 @@ test("[mutation] skill の reference/{reviews,audits}/ に監査・レビュー�
   for (const file of planted) assert.ok(result.errors.includes(`未宣言: ${file}`), `未宣言で落ちない: ${file}`);
   // skill の reference/ のほかのファイル (手順・契約) は範囲に入れない
   assert.ok(!GOVERNED.some((re) => re.test(".claude/skills/theme/manage-theme-portfolio/reference/theme-proposal-format.md")));
+});
+
+test("[mutation] skill の reference/reports/ に定期レポートを置くと未宣言で落ちる (置き場は data/<取得元>/)", () => {
+  // 2026-11-14 DOCS-GOVERNANCE-GAPS-01。SNS の週次レポート・競合の定点観測・X とブログの勝ち要因のレポートを
+  // skill の reference/reports/ に書いていて、docs-vs-issues.md (定期レポートは data/<取得元>/) と食い違っていた。
+  // 旧置き場は RETIRED の宣言から組み立てる (このファイルに直書きすると、旧置き場の参照の検査に自分が掛かる)
+  const moved = RETIRED.filter((r) => r.since === "2026-11-14" && /\/reference\/reports$/.test(r.from));
+  assert.equal(moved.length, 4, "SNS の週次・競合の定点観測・X の勝ち要因・ブログの勝ち要因の 4 か所");
+  const planted = [...moved.map((r) => `${r.from}/2026-11-14.md`), ".claude/skills/dev/some-new-skill/reference/reports/2026-W46.md"];
+  const files = execFileSync("git", ["-C", ROOT, "ls-files", "-z"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 })
+    .split("\0")
+    .filter(Boolean);
+  const result = checkDatasets({
+    datasets: DATASETS,
+    files: [...files.filter((f) => !planted.includes(f)), ...planted],
+    governed: GOVERNED,
+    ignoredNames: IGNORED_NAMES,
+    kinds: KINDS,
+    targets: TARGETS,
+    domainIds,
+    retention: RETENTION_POLICIES,
+  });
+  for (const file of planted) assert.ok(result.errors.includes(`未宣言: ${file}`), `未宣言で落ちない: ${file}`);
+  // 移した先はカタログの行で、書き手と読み手が id で引ける
+  const destinations = {
+    "sns.weekly-reports": "data/sns/weekly-reports",
+    "sns.competitor-scans": "data/sns/competitor-scans",
+    "sns.x-winning-pattern-reports": "data/sns/x-winning-pattern-reports",
+    "blog.winning-pattern-reports": "data/blog/winning-pattern-reports",
+  };
+  assert.deepEqual(moved.map((r) => r.to).sort(), Object.values(destinations).sort());
+  for (const [id, dir] of Object.entries(destinations)) assert.equal(datasetDir(id), dir);
 });
 
 test("可変部分は決めた形だけに当たる", () => {
@@ -727,6 +760,8 @@ test("実リポジトリの問いの台帳は、文章 (dataNote) に e-Stat の
 // ── 調査ポートフォリオ: 列挙と ID の実在の持ち主は Schema と refs だけ (2026-11-14 SURVEY-PORTFOLIO-VALIDATOR-DEDUPE-01) ──
 const SURVEY_STATE_IDS = ["surveys.portfolio", "surveys.experiments"];
 const SURVEY_VALIDATOR = ".claude/scripts/surveys/validate-survey-portfolio.ts";
+const SURVEY_EVALUATOR = ".claude/scripts/surveys/evaluate-survey-experiments.mjs";
+const SURVEY_BUILDER = ".claude/scripts/surveys/build-survey-portfolio.ts";
 
 test("[mutation] 調査ポートフォリオと実験台帳の語彙外の値は Schema が、調査 ID の参照切れは refs が落とす", () => {
   const portfolioPath = datasetPath("surveys.portfolio");
@@ -768,11 +803,12 @@ test("[mutation] 調査ポートフォリオと実験台帳の語彙外の値は
   assert.deepEqual(refErrors(), []);
 });
 
-test("調査ポートフォリオの検証スクリプトは、Schema の列挙と refs の ID の実在を二重に持たない", () => {
+test("調査ポートフォリオの検証スクリプトと実験の判定スクリプトは、Schema の列挙と refs の ID の実在を二重に持たない", () => {
   // コメントを除いたコードだけを見る (判定の規律の説明に値の名前が出るのは構わない)
-  const code = readFileSync(resolve(ROOT, SURVEY_VALIDATOR), "utf8")
+  const codeOf = (file) => readFileSync(resolve(ROOT, file), "utf8")
     .replace(/\/\*[\s\S]*?\*\//g, "")
     .replace(/(^|\s)\/\/.*$/gm, "$1");
+  const code = codeOf(SURVEY_VALIDATOR);
   const enums = [];
   const walk = (node, trail) => {
     if (Array.isArray(node)) return node.forEach((child, i) => walk(child, `${trail}[${i}]`));
@@ -782,7 +818,50 @@ test("調査ポートフォリオの検証スクリプトは、Schema の列挙�
   };
   for (const id of SURVEY_STATE_IDS) walk(JSON.parse(readFileSync(resolve(ROOT, DATASETS.find((d) => d.id === id).schema), "utf8")), id);
   assert.ok(enums.length >= 6, `Schema から列挙を ${enums.length} 個しか読めていない (lifecycle・linkage・editorial・計測の状態・verdict・changeType)`);
-  const duplicated = enums.filter(({ values }) => values.every((value) => code.includes(`"${value}"`) || code.includes(`'${value}'`)));
-  assert.deepEqual(duplicated.map((e) => e.trail), [], "Schema の列挙の全部の値を検証スクリプトが文字列で持っている (列挙は Schema だけが持つ。部分集合を使う意味の検査は構わない)");
+  // 実験の判定スクリプトは verdict の値の集合を自前で持っていた (Schema に値を足しても --verdict が受け付けない。CI-TOOLING-FOLLOWUP-02)
+  for (const file of [SURVEY_VALIDATOR, SURVEY_EVALUATOR]) {
+    const source = codeOf(file);
+    const duplicated = enums.filter(({ values }) => values.every((value) => source.includes(`"${value}"`) || source.includes(`'${value}'`)));
+    assert.deepEqual(duplicated.map((e) => e.trail), [], `Schema の列挙の全部の値を ${file} が文字列で持っている (列挙は Schema だけが持つ。部分集合を使う意味の検査は構わない)`);
+  }
   assert.doesNotMatch(code, /masterIds\.has\(/, "調査 ID の実在は refs (surveys[].surveyId・experiments[].surveyId → surveys.master) だけが持つ");
+});
+
+/** 実物の portfolio と実験台帳を一時ディレクトリへ写し、書き込み口のスクリプトをそこへ向けて動かす */
+function surveyStateCopy(t) {
+  const dir = mkdtempSync(join(tmpdir(), "stats47-survey-state-"));
+  t.after(() => rmSync(dir, { recursive: true, force: true }));
+  for (const [id, name] of [["surveys.portfolio", "portfolio.json"], ["surveys.experiments", "experiments.json"]]) copyFileSync(resolve(ROOT, datasetPath(id)), join(dir, name));
+  const run = (command, args) => spawnSync(command, args, { cwd: ROOT, encoding: "utf8", env: { ...process.env, STATE_DIR: dir } });
+  return { dir, run, read: (name) => readFileSync(join(dir, name), "utf8") };
+}
+
+test("build-survey-portfolio.ts の --set は、Schema の語彙に無い値を portfolio.json へ書かない", (t) => {
+  const state = surveyStateCopy(t);
+  const before = state.read("portfolio.json");
+  const surveyId = JSON.parse(before).surveys[0].surveyId;
+  const set = (...args) => state.run(process.execPath, ["--import", "tsx", SURVEY_BUILDER, "--set", surveyId, ...args]);
+  for (const [option, field] of [["--lifecycle", "lifecycleStatus"], ["--editorial", "editorialStatus"]]) {
+    const result = set(option, "no-such-value");
+    assert.equal(result.status, 1, `${option} no-such-value が通った: ${result.stdout}${result.stderr}`);
+    assert.match(result.stderr, new RegExp(`${option} no-such-value は ${field} の語彙に無い`));
+    assert.equal(state.read("portfolio.json"), before, `${option} の語彙外の値で portfolio.json が書き換わった`);
+  }
+  const ok = set("--lifecycle", "improve");
+  assert.equal(ok.status, 0, ok.stderr);
+  assert.equal(JSON.parse(state.read("portfolio.json")).surveys[0].lifecycleStatus, "improve", "語彙にある値は書く");
+});
+
+test("evaluate-survey-experiments.mjs の --verdict は、Schema の verdict の語彙 (pending を除く) だけを受け付ける", (t) => {
+  const state = surveyStateCopy(t);
+  const before = state.read("experiments.json");
+  const experimentId = JSON.parse(before).experiments[0].experimentId;
+  const schema = JSON.parse(readFileSync(resolve(ROOT, DATASETS.find((d) => d.id === "surveys.experiments").schema), "utf8"));
+  const settable = schema.properties.experiments.items.properties.verdict.enum.filter((value) => value !== "pending");
+  for (const verdict of ["no-such-value", "pending"]) {
+    const result = state.run(process.execPath, [SURVEY_EVALUATOR, "--verdict", experimentId, verdict]);
+    assert.equal(result.status, 1, `--verdict ${verdict} が通った`);
+    assert.ok(result.stderr.includes(`(${settable.join("|")})`), `受け付ける値の一覧が Schema と違う: ${result.stderr}`);
+    assert.equal(state.read("experiments.json"), before);
+  }
 });

@@ -23,7 +23,7 @@ function runWithOrphan(root) {
   return spawnSync(process.execPath, [CHECKER], {
     cwd: root,
     encoding: "utf8",
-    env: { ...process.env, CLAUDE_PROJECT_DIR: root },
+    env: { ...process.env, STATS47_SCAN_ROOT: root },
   });
 }
 
@@ -31,7 +31,7 @@ function run(root) {
   return spawnSync(process.execPath, [CHECKER, "--no-orphan"], {
     cwd: root,
     encoding: "utf8",
-    env: { ...process.env, CLAUDE_PROJECT_DIR: root },
+    env: { ...process.env, STATS47_SCAN_ROOT: root },
   });
 }
 

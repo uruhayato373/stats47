@@ -64,9 +64,9 @@ export const GOVERNED = [
   /^\.claude\/skills\/analytics\/[^/]+\/snapshots\//,
   /^\.claude\/skills\/management\/nsm-experiment\/reference\/weekly-snapshots\//,
   /^\.claude\/skills\/management\/(weekly|monthly)-review\/reference\/reviews\//,
-  // 監査・レビューの全文は skill の reference/ に置かない (2026-11-14。置き場は data/<領域>/{reviews,audits}/)。
-  // 行が無い置き場なので、ここへ置いた追跡ファイルは「未宣言」で落ちる
-  /^\.claude\/skills\/(?:[^/]+\/)+reference\/(reviews|audits)\//,
+  // 監査・レビューの全文と定期レポートは skill の reference/ に置かない (2026-11-14。置き場は data/<領域>/{reviews,audits}/ と
+  // data/<取得元>/<レポートの名前>/)。行が無い置き場なので、ここへ置いた追跡ファイルは「未宣言」で落ちる
+  /^\.claude\/skills\/(?:[^/]+\/)+reference\/(reviews|audits|reports)\//,
   /^\.claude\/config\/budgets\//,
 ];
 /**
@@ -634,7 +634,7 @@ export const DATASETS = [
     refs: [{ field: "products[].articleKey", to: "note.articles", key: "articles[].key" },
       { field: "products[].licenseId", to: "products.licenses", key: "licenses.$keys" }],
   }),
-  d("products.competitor-scan", "data/products/competitor-scan.csv", "series", "product", "data", "販売面ごとの競合の観測 (出品・価格・関心の目安。関心の目安は販売数ではない。再調査は行を追記する)"),
+  d("products.competitor-scan", "data/products/competitor-scan.csv", "series", "product", "data", "販売面ごとの競合の観測 (出品・価格・関心の目安。関心の目安は販売数ではない。再調査は行を追記する。category は納品物の分類で stats-data=公的統計や公開データの表・データセット / map=既製の地図データ・素材・ツール / commission=依頼ごとに作る受注 / other=どれでもない。読む画面は管理画面 /strategy/competitors)"),
   d("products.price-history", "data/products/price-history.json", "ledger", "product", "data", "商品の価格実験と価格変更の履歴", { schema: "config/schema/products.price-history.schema.json" }),
   d("products.free-sample-delivery", "data/products/free-sample-delivery.json", "ledger", "product", "data", "無料見本の配布の記録", { schema: "config/schema/products.free-sample-delivery.schema.json" }),
   d("products.interviews", "data/products/admin-stat-interviews.json", "evidence", "product", "data", "行政実務向け商品の聞き取り"),
@@ -685,6 +685,9 @@ export const DATASETS = [
     ],
   }),
   d("sns.post-log", "data/sns/post-log.md", "report", "sns", "data", "SNS 投稿の人が読む記録"),
+  d("sns.weekly-reports", "data/sns/weekly-reports/{week}.md", "report", "sns", "data", "SNS 横断の週次レポート (プラットフォーム別の集計と上位の投稿。sns-weekly-report.mjs が日曜の workflow で書き、分析の節は /sns-weekly-report が足す)"),
+  d("sns.competitor-scans", "data/sns/competitor-scans/{date}.md", "report", "sns", "data", "競合アカウントの定点観測のレポート (/competitor-scan が書く。月次レビューの実施状況が対象月の日付のものを読む)"),
+  d("sns.x-winning-pattern-reports", "data/sns/x-winning-pattern-reports/{date}.md", "report", "sns", "data", "X の勝ち要因の比較用レポート (analyze-x-winning-patterns.mjs の月次レポートと /x-viral-research の調査レポート。最新の状態は同じスクリプトが書く x-winning-patterns.json)", { planned: true }),
   d("sns.image-replacements", "data/sns/image-replacements/{name}.json", "evidence", "sns", "data", "予約済み投稿の画像差し替えの記録 (決定・対象 ID・差し替え前後)"),
   d("sns.material-reconciliation", "data/sns/material-reconciliation-{date}.json", "series", "sns", "data", "素材キーから投稿IDへの照合証跡。候補の正本はposts.json"),
   d("sns.posts-schema", "data/sns/posts.schema.json", "schema", "sns", "data", "SNS 投稿台帳の JSON Schema"),
@@ -771,6 +774,7 @@ export const DATASETS = [
     ],
   }),
   d("blog.articles-schema", "data/blog/ledger/articles.schema.json", "schema", "site", "data", "上の台帳の JSON Schema"),
+  d("blog.winning-pattern-reports", "data/blog/winning-pattern-reports/{date}.md", "report", "site", "data", "ブログの勝ち要因の比較用レポート (analyze-winning-patterns.mjs が書く。最新の状態は data/blog/winning-patterns.json)"),
   d("blog.critic-findings", "data/blog/critic-findings/{date}.jsonl", "series", "site", "data", "ブログの審査 (critic) の BLOCK・MAJOR の指摘。日付ごとに追記し、型ごとに数えて規約・gate への格上げに使う", { retain: "blog-critic-findings" }),
   d("ci.health", "data/ci/{name}", "state", "ops", "data", "workflow の健全性・R2 の鮮度・認証付き計測の追いつき"),
   d("content.quality", "data/content-operations/quality.json", "ledger", "product", "data", "記事と画像の改善方針・目視確認・候補の参照", { schema: "data/content-operations/quality.schema.json" }),
@@ -1271,6 +1275,11 @@ export const RETIRED = [
   { from: ".claude/skills/analytics/sns-metrics-improvement/reference", to: "data/improvement/sns-metrics-improvement", since: "2026-10-06" },
   { from: ".claude/skills/analytics/sns-metrics-improvement/snapshots", to: "data/sns/metric-snapshots", since: "2026-10-06" },
   // 監査・レビューの全文 (2026-11-14 に skill の reference/ から data/<領域>/ へ。GOVERNED が同じ置き場への新規を止める)
+  // 定期レポート (2026-11-14 に skill の reference/reports/ から data/<取得元>/ へ。GOVERNED が同じ置き場への新規を止める)
+  { from: ".claude/skills/blog/analyze-winning-patterns/reference/reports", to: "data/blog/winning-pattern-reports", since: "2026-11-14" },
+  { from: ".claude/skills/sns/competitor-scan/reference/reports", to: "data/sns/competitor-scans", since: "2026-11-14" },
+  { from: ".claude/skills/sns/sns-weekly-report/reference/reports", to: "data/sns/weekly-reports", since: "2026-11-14" },
+  { from: ".claude/skills/sns/x-viral-research/reference/reports", to: "data/sns/x-winning-pattern-reports", since: "2026-11-14" },
   { from: ".claude/skills/analytics/seo-audit/reference/audits", to: "data/seo/audits", since: "2026-11-14" },
   { from: ".claude/skills/survey/manage-survey-portfolio/reference/audits", to: "data/surveys/audits", since: "2026-11-14" },
   { from: ".claude/skills/survey/manage-survey-portfolio/reference/reviews", to: "data/surveys/reviews", since: "2026-11-14" },

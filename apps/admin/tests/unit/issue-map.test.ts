@@ -4,13 +4,14 @@ import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 
 import type { ContentTypeDef } from "@/lib/content-coverage";
-import { buildIssueMap, resolveRef, validateIssueMap, type IssueCell, type IssueMapSpec, type LedgerIndex } from "@/lib/issue-map";
+import { buildIssueMap, buildRequiredPv, resolveRef, validateIssueMap, type IssueCell, type IssueMapSpec, type KpiReading, type LedgerIndex } from "@/lib/issue-map";
 
 /**
  * 事業イシューマップが守る意図:
  *   - 判定日と状態は参照先の台帳の値で出す (台帳に写さないので、参照先を直せば画面も変わる)
  *   - 参照先の無い ID を「未定」に紛れさせない
  *   - 4 型 × 3 収益源の全マスが 1 つずつある
+ *   - 月 ¥1 万に要る PV のグラフは、KPI の広告収益効率 (ad-yield) に値があるときだけ出す (概算の効率で描かない)
  */
 
 const INDEX: LedgerIndex = {
@@ -118,5 +119,44 @@ describe("事業イシューマップ", () => {
     expect(spec.cells.map((c) => c.rating).join("")).toBe("◎✕○○○○○△○△◎○");
     // 判定日は参照先から引くので、根拠の文に日付の形で写さない
     expect(JSON.stringify(spec.cells)).not.toMatch(/\b\d{1,2}-\d{2}\b/);
+  });
+});
+
+describe("月 ¥1 万に要る PV", () => {
+  const PV: KpiReading = { id: "site-pageviews", value: "52955", target: { value: 79000, dueWeek: "2026-W52" } };
+  const adYield = (value: string | null): KpiReading => ({ id: "ad-yield", value });
+
+  it("ad-yield に値があれば、月 ¥1 万を 28 日へ直して要る PV と今の何倍かを出す", () => {
+    const chart = buildRequiredPv([PV, adYield("6.5")]);
+    // 月 ¥10,000 × 28/30 ÷ ¥6.5 × 1,000 PV
+    expect(chart).toMatchObject({ adYield: 6.5, currentPv: 52955, requiredPv: 1435897, multiple: 27.1 });
+    expect(chart?.target).toEqual({ value: 79000, dueWeek: "2026-W52" });
+    expect(chart?.bars).toEqual([
+      { key: "current", label: "実績", pv: 52955 },
+      { key: "target", label: "目標", pv: 79000 },
+      { key: "required", label: "月¥1万", pv: 1435897 },
+    ]);
+  });
+
+  it("ad-yield が null のあいだ (再開後 4 週のベースライン期間) はグラフを出さない", () => {
+    expect(buildRequiredPv([PV, adYield(null)])).toBeNull();
+    expect(buildRequiredPv([PV])).toBeNull();
+  });
+
+  it("効率は KPI から読むので、ad-yield が変われば要る PV も変わる", () => {
+    expect(buildRequiredPv([PV, adYield("22")])?.requiredPv).toBe(424242);
+  });
+
+  it("PV が無い・効率が 0 や数値でないときは計算できないので出さない", () => {
+    expect(buildRequiredPv([{ ...PV, value: null }, adYield("6.5")])).toBeNull();
+    expect(buildRequiredPv([adYield("6.5")])).toBeNull();
+    expect(buildRequiredPv([PV, adYield("0")])).toBeNull();
+    expect(buildRequiredPv([PV, adYield("判定不能")])).toBeNull();
+  });
+
+  it("PV の目標が無ければ目標の棒を省く", () => {
+    const chart = buildRequiredPv([{ id: "site-pageviews", value: "52955", target: null }, adYield("6.5")]);
+    expect(chart?.target).toBeNull();
+    expect(chart?.bars.map((b) => b.key)).toEqual(["current", "required"]);
   });
 });

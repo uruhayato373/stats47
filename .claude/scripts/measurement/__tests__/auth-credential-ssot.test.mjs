@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { LOGIN } from '../refresh-session.mjs';
-import { credentialServices, parseCmdkeyList, readCiCredential, readCredential, storedAccounts } from '../credential-store.mjs';
+import { credentialServices, parseCmdkeyList, readCredential, storedAccounts } from '../credential-store.mjs';
 
 const ROOT = fileURLToPath(new URL('../../../../', import.meta.url));
 const services = credentialServices();
@@ -22,14 +22,15 @@ test('項目名は stats47-measurement-<service> で、パスワードを持た�
   }
 });
 
-test('CI の資格情報は GitHub Actions で、許可 service が指定されたときだけ読む', () => {
+// 意図 (2026-10-20 オーナー判断): ログインは Mac だけが持つ。CI (Linux) に ID/PW の環境変数が渡されても読まない。
+// 正本にも「CI が使う」「Secrets に保管する」の印を残さない (残すと管理画面が Secrets の登録を促す)。
+test('Mac・Windows 以外では、ID/PW の環境変数が渡されていても資格情報を読まない', () => {
   const env = { GITHUB_ACTIONS: 'true', STATS47_AUTH_SOURCE: 'note', STATS47_AUTH_USER: 'u', STATS47_AUTH_PASSWORD: 'p' };
-  assert.deepEqual(readCiCredential('note', env), { user: 'u', password: 'p', totpSecret: null });
-  assert.deepEqual(readCredential('note', { platform: 'linux', env }), { user: 'u', password: 'p', totpSecret: null });
-  assert.equal(readCiCredential('afb', { ...env, STATS47_AUTH_SOURCE: 'afb' }), null, 'ciCredential=false (保管のみ)');
-  assert.equal(readCiCredential('coconala', env), null, '別 service の Secrets を使わない');
-  assert.equal(readCiCredential('note', { ...env, GITHUB_ACTIONS: undefined }), null, 'GitHub Actions 以外');
-  assert.equal(readCiCredential('note', { ...env, STATS47_AUTH_PASSWORD: '' }), null, 'Secrets 未登録');
+  const exec = () => { throw new Error('資格情報ストアを呼ばない'); };
+  assert.equal(readCredential('note', { platform: 'linux', env, exec }), null);
+  for (const [id, v] of Object.entries(services)) {
+    assert.deepEqual(Object.keys(v).filter((k) => /^ci/i.test(k)), [], id);
+  }
 });
 
 test('cmdkey /list の英語・日本語出力から項目名と ID を取り出す', () => {

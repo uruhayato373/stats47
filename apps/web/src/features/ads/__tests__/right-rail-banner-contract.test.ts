@@ -24,7 +24,7 @@ function runPlacementGuard(blogPage: string) {
           path === resolve(PROJECT_ROOT, "apps/web/src/app/blog/[slug]/page.tsx")
             ? blogPage : readFileSync(path, encoding),
       } : require(id),
-      process: { env: { CLAUDE_PROJECT_DIR: PROJECT_ROOT }, exit: (code: number) => { status = code; throw exit; } },
+      process: { env: { STATS47_SCAN_ROOT: PROJECT_ROOT }, exit: (code: number) => { status = code; throw exit; } },
       console: { log: (message: string) => messages.push(message), error: (message: string) => messages.push(message) },
     });
   } catch (error) {

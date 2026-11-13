@@ -482,7 +482,7 @@ export function handoffSummary(result, cadence = "weekly") {
 
 const MEASUREMENT_HISTORY = `${datasetDir("business.measurement-cycle")}/history.csv`;
 const VERDICT_DIR = datasetDir("effect.verdicts");
-const COMPETITOR_REPORTS = ".claude/skills/sns/competitor-scan/reference/reports";
+const COMPETITOR_REPORTS = datasetDir("sns.competitor-scans");
 
 /** ISO 週 YYYY-Www の月曜〜日曜 */
 export function weekRange(week) {

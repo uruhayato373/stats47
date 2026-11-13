@@ -39,6 +39,7 @@ PORT=5000 npm run admin    # ポート上書き
 | `/docs` `/docs/<path>`            | docs/ の全文書を領域ごとに一覧し、本文を表示する (docs/ の外は開かない)                                                                                                                            |
 | `/buzz-map`                       | curated catalog・score・evidence・landing・素材previewの読み取り専用ギャラリー。実行は `/buzz-map` skill                                                                                           |
 | `/ops/agents`                     | agent・skill・CI 無人実行・backlog-loop のモデル/effort 割り当て一覧。正本の frontmatter・workflow・routing policy を表示のたびに読む                                                              |
+| `/ops/mcp`                        | この PC が使う MCP の一覧 (用途・有効か・認証方式・トークンの有無・HTTP サーバーへの `initialize` の応答コード)。設定ファイルを表示のたびに読み、結果は保存しない。用途の正本は `.claude/config/mcp-servers.json`                 |
 
 ## 構成
 

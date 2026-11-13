@@ -7,6 +7,7 @@ import { findClassOverrideViolations, jsxOpeningTag, PANEL_COMPONENTS, topLevelM
 import { addWrappers, buildLyraMap, findLyraDeadCallerClasses } from './lib/lyra-dead-class-audit.mjs';
 import { findRailContractViolations } from './lib/rail-contract-audit.mjs';
 import { findSelectionControlViolations } from './lib/selection-control-audit.mjs';
+import { findStatTilesOutsideGrid } from './lib/stat-tile-grid-audit.mjs';
 
 const cwd = process.cwd();
 // Phase 0-6 (2026-06-23) で src/app の既存債務 (Card 直 import / bg-white) を是正し、
@@ -965,16 +966,14 @@ for (const file of scanRoots.flatMap((root) => listFiles(root))) {
   // 数値タイル (StatTile) は数値タイルの格子 (StatTileGrid) に並べる。PanelGrid に直に入れると列の数をページが決め、
   // ページごとに 2 列・3 列・4 列とばらつく (2026-10-29 に 4 通り以上あったのをまとめた。台帳 data/design/components.json)
   if (!file.endsWith('stat-tile-grid.tsx')) {
-    // 数値タイルを 2 枚以上並べる格子だけを見る (地図の横に 1 枚置くような、ページの組み立ての格子は対象外)
-    for (const match of text.matchAll(/<PanelGrid\b[\s\S]*?<\/PanelGrid>/g)) {
-      if ((match[0].match(/<StatTile\b/g) ?? []).length < 2) continue;
+    for (const found of findStatTilesOutsideGrid(text)) {
       violations.push({
         ruleId: 'stat-tile-grid-owns-columns',
         message:
           'Place StatTile cells in StatTileGrid (@/components/surface). It owns the column count (1 / 2 / 4 columns at container widths 0 / 480 / 768px); pages do not set grid-cols for numeric tiles.',
         file,
-        lineNumber: lineOf(match.index),
-        line: match[0].split('\n')[0],
+        lineNumber: lineOf(found.index),
+        line: found.line,
       });
     }
   }

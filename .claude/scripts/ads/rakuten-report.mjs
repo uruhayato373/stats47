@@ -11,7 +11,7 @@
  * - 当月と前月の発生を毎回取り直す (前月の成果は月をまたいで動くため)
  * - confirmedYen は「その月に確定した額」(ポイント + キャッシュ + 銀行振込)。発生月の確定額ではない
  *
- * セッション: CI は collect.mjs が渡す MEASUREMENT_BROWSER_STATE_PATH、手元は .local/playwright-rakuten-state.json。
+ * セッション: 週次の取得は collect.mjs が渡す MEASUREMENT_BROWSER_STATE_PATH、手元の単体実行は .local/playwright-rakuten-state.json。
  * ログイン画面へ戻されたら auth_required で止まる (値を作らない)。
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';

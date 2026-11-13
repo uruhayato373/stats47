@@ -14,15 +14,15 @@
  * 冪等。既存の実ディレクトリは repo に無いファイルだけ取り込んでから <path>.bak.<epoch> に退避し、
  * Windows は junction (管理者権限不要)、それ以外は symlink を張る。
  *
- *   node .claude/scripts/setup-memory-symlink.mjs
- *   node .claude/scripts/setup-memory-symlink.mjs --check   # 張られているかだけ確認 (exit 1 で未設定)
+ *   node .claude/scripts/lib/setup-memory-symlink.mjs
+ *   node .claude/scripts/lib/setup-memory-symlink.mjs --check   # 張られているかだけ確認 (exit 1 で未設定)
  */
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
+const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const REPO_MEM = path.join(REPO_ROOT, ".claude", "memory");
 
 export function projectHash(absolutePath) {

@@ -1,12 +1,12 @@
 /** Authenticated, read-only collectors. Commands are fixed here, never supplied by workflow input. */
 export const SOURCES = {
   // もしも・afb は 2026-10-19 に A8・楽天へ集約して取得元から外した (ASP-CONSOLIDATE-A8-RAKUTEN-01)
-  a8: { domains: ['a8.net'], profile: 'playwright-a8-profile', state: 'playwright-a8-state.json', secret: 'MEASUREMENT_SESSION_A8', capability: 'site-outcomes' },
-  note: { domains: ['note.com'], profile: 'playwright-note-profile', secret: 'MEASUREMENT_SESSION_NOTE', capability: 'dashboard-metrics' },
-  gsc: { domains: ['google.com'], profile: 'playwright-google-admin-profile', secret: 'MEASUREMENT_SESSION_GSC', capability: 'verified-coverage-export' },
-  kdp: { domains: ['amazon.co.jp', 'amazon.com'], profile: 'playwright-kdp-profile', secret: 'MEASUREMENT_SESSION_KDP', capability: 'publication-daily-and-monthly-royalties' },
+  a8: { domains: ['a8.net'], profile: 'playwright-a8-profile', state: 'playwright-a8-state.json', capability: 'site-outcomes' },
+  note: { domains: ['note.com'], profile: 'playwright-note-profile', capability: 'dashboard-metrics' },
+  gsc: { domains: ['google.com'], profile: 'playwright-google-admin-profile', capability: 'verified-coverage-export' },
+  kdp: { domains: ['amazon.co.jp', 'amazon.com'], profile: 'playwright-kdp-profile', capability: 'publication-daily-and-monthly-royalties' },
   // 楽天アフィリエイト (2026-10-01): 管理画面の JSON API を読む。SSO は login.account.rakuten.com のため rakuten.com も含める
-  rakuten: { domains: ['rakuten.co.jp', 'rakuten.com'], profile: 'playwright-rakuten-profile', state: 'playwright-rakuten-state.json', secret: 'MEASUREMENT_SESSION_RAKUTEN', capability: 'monthly-outcomes' },
+  rakuten: { domains: ['rakuten.co.jp', 'rakuten.com'], profile: 'playwright-rakuten-profile', state: 'playwright-rakuten-state.json', capability: 'monthly-outcomes' },
 };
 
 /**
@@ -20,12 +20,6 @@ export function sourceFor(name) {
   const source = Object.hasOwn(SOURCES, name) ? SOURCES[name] : null;
   if (!source) throw new Error('unknown_source');
   return source;
-}
-
-/** A refresh from an older login must never supersede a newly published human login. */
-export function selectSessionBundle(seed, remote) {
-  const bundle = remote && (!seed || (remote.bootstrapCapturedAt === seed.capturedAt && remote.capturedAt >= seed.capturedAt)) ? remote : seed;
-  return bundle ? { ...bundle, bootstrapCapturedAt: bundle.bootstrapCapturedAt ?? bundle.capturedAt } : null;
 }
 
 export function scopedState(name, state) {

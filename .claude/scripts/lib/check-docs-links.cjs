@@ -23,7 +23,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..", "..");
+const ROOT = process.env.STATS47_SCAN_ROOT || path.resolve(__dirname, "..", "..", "..");
 const args = process.argv.slice(2);
 const has = (f) => args.includes(f);
 const writeBaselineIndex = args.indexOf("--write-baseline");

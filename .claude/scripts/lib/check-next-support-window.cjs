@@ -22,7 +22,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 
-const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..", "..");
+const ROOT = process.env.STATS47_SCAN_ROOT || path.resolve(__dirname, "..", "..", "..");
 const WARN_DAYS = 60;
 const SUPPORT_YEARS = 2;
 const DAY_MS = 86_400_000;

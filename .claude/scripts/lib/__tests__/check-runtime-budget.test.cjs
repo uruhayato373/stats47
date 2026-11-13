@@ -39,7 +39,7 @@ function fixture({ steps, suiteBudgetMs = 100000, workflow }) {
   return { dir, config };
 }
 function runIn(f, args) {
-  const env = { ...process.env, CHECK_RUNTIME_CONFIG: f.config, CLAUDE_PROJECT_DIR: f.dir };
+  const env = { ...process.env, CHECK_RUNTIME_CONFIG: f.config, STATS47_SCAN_ROOT: f.dir };
   delete env.GITHUB_STEP_SUMMARY; delete env.GITHUB_ACTIONS;
   const result = spawnSync(process.execPath, [CHECKER, ...args], { cwd: ROOT, encoding: "utf8", env });
   fs.rmSync(f.dir, { recursive: true, force: true }); return result;

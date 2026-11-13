@@ -40,7 +40,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 
-const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..", "..");
+const ROOT = process.env.STATS47_SCAN_ROOT || path.resolve(__dirname, "..", "..", "..");
 const BASELINE =
   process.env.VALUE_FORMAT_BASELINE ||
   path.join(ROOT, ".claude/config/value-format-baseline.json");

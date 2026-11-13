@@ -13,8 +13,14 @@
  * 前提: 開発サーバー (`npm run dev:web`、在庫を代わりの広告で満たすなら `npm run dev:web:ad-preview`)。
  * 出力はローカルだけ (.local/ad-layout/<YYYY-MM-DD>/。git にも R2 にも置かない)。
  *
+ * 広告・計測の通信 (AD-LAYOUT-WEEKLY-CAPTURE-01): 手元の開発サーバー以外 (本番) を `--base-url` に指定すると、
+ * AdSense・GA4・アフィリエイトの host への要求をブラウザから出る前に必ず中断する (lib/ad-traffic-block.mjs)。
+ * 自動の閲覧を広告の表示と計測の記録に混ぜないためで、外す引数は無い。止めた件数・通った件数・一覧に無い外部の host を
+ * 最後の 1 行と manifest の `adTraffic` に出し、通った通信が 1 件でもあれば失敗 (exit 1) にする。
+ * 開発サーバーでも止めて確かめるときは `--block-ad-traffic` を付ける。
+ *
  * Usage:
- *   npx tsx .claude/scripts/ads/capture-ad-layout.ts [--base-url http://localhost:3000] [--pages survey,theme] [--widths 390,1440]
+ *   npx tsx .claude/scripts/ads/capture-ad-layout.ts [--base-url http://localhost:3000] [--pages survey,theme] [--widths 390,1440] [--block-ad-traffic]
  */
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
@@ -26,6 +32,14 @@ import { scrollThroughPage } from "../page-quality/lib/ui-probe";
 
 import { ADS_PLACEMENTS } from "../../../config/paths.mjs";
 import { adsenseUnitNames, unitOfEntry } from "./lib/ad-layout-ledger";
+import {
+  AD_TRAFFIC_CONTEXT_OPTIONS,
+  createAdTrafficTally,
+  formatAdTrafficSummary,
+  installAdTrafficBlock,
+  requiresAdTrafficBlock,
+  summarizeAdTraffic,
+} from "./lib/ad-traffic-block.mjs";
 
 const REPO_ROOT = resolve(__dirname, "../../..");
 const PLACEMENTS_PATH = join(REPO_ROOT, ADS_PLACEMENTS);
@@ -161,6 +175,8 @@ export interface AdLayoutManifest {
   baseUrl: string;
   widths: number[];
   pageTypes: { id: string; label: string; url: string; scopes?: { id: string; label: string; url: string }[] }[];
+  /** この回の撮影で止めた広告・計測の通信 (撮り直しで残した前の撮影の分は含まない)。止めなかった回は null */
+  adTraffic: ReturnType<typeof summarizeAdTraffic> | null;
   shots: AdLayoutShot[];
 }
 
@@ -338,8 +354,11 @@ function parseArgs() {
   const widths = list("--widths")?.map(Number);
   const viewports = VIEWPORT_IDS.map((id) => VIEWPORTS.find((v) => v.id === id)).filter((v): v is ViewportSpec => Boolean(v));
   if (viewports.length !== VIEWPORT_IDS.length) throw new Error(`VIEWPORTS に無い幅があります: ${VIEWPORT_IDS.join(",")}`);
+  const baseUrl = get("--base-url") ?? "http://localhost:3000";
   return {
-    baseUrl: get("--base-url") ?? "http://localhost:3000",
+    baseUrl,
+    // 本番は必ず止める。開発サーバーは頼まれたときだけ止める
+    blockAdTraffic: requiresAdTrafficBlock(baseUrl) || args.includes("--block-ad-traffic"),
     pageIds,
     viewports: widths ? viewports.filter((v) => widths.includes(v.width)) : viewports,
   };
@@ -416,6 +435,7 @@ async function main() {
 
   const browser = await chromium.launch({ headless: true });
   const shots: AdLayoutShot[] = [];
+  const adTraffic = opts.blockAdTraffic ? createAdTrafficTally(opts.baseUrl) : null;
   try {
     const targets = pageTypes.flatMap((pageType) => {
       const { label, path, scopes } = PAGE_URLS[pageType];
@@ -433,7 +453,10 @@ async function main() {
           isMobile: viewport.touch,
           hasTouch: viewport.touch,
           deviceScaleFactor: 1,
+          ...(adTraffic ? AD_TRAFFIC_CONTEXT_OPTIONS : {}),
         });
+        // 最初の要求から止めるため、ページを開く前に差し込む
+        if (adTraffic) await installAdTrafficBlock(context, adTraffic);
         // Cookie 同意の帯 (sticky) が撮影の途中に重ならないよう、同意を断った状態で開く
         await context.addCookies([{ name: "stats47_consent", value: "denied", url: opts.baseUrl }]);
         const base = { pageType, scope, label, url: path, viewport: viewport.id, width: viewport.width };
@@ -488,12 +511,21 @@ async function main() {
       url: PAGE_URLS[id].path,
       ...(PAGE_URLS[id].scopes ? { scopes: PAGE_URLS[id].scopes.map((sc) => ({ id: sc.id, label: sc.label, url: sc.path })) } : {}),
     })),
+    adTraffic: adTraffic ? summarizeAdTraffic(adTraffic) : null,
     shots: merged,
   };
   writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
   const failed = shots.filter((s) => s.error);
   console.log(`${shots.length - failed.length}/${shots.length} 枚 → ${outDir}`);
   if (failed.length) process.exitCode = 1;
+  if (adTraffic) {
+    console.log(formatAdTrafficSummary(adTraffic));
+    const leaked = summarizeAdTraffic(adTraffic).leaked;
+    if (leaked.length) {
+      console.error(`止めるはずの広告・計測の通信が通った (${leaked.length} 件): ${leaked.slice(0, 5).join(", ")}`);
+      process.exitCode = 1;
+    }
+  }
 }
 
 if (require.main === module) {

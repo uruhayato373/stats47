@@ -16,12 +16,10 @@ function filesUnder(dir: string): string[] {
 
 /**
  * 子プロセスの例外 (理由付き)。例外のファイルも書き込みはしない (下のテストで固定)。
- * auth-credentials.ts: /ops/auth で資格情報の登録状況をページを開くたびに読む (2026-10-01 オーナー判断)。
- *   呼ぶのは gh secret list と credential-store の storedAccounts (cmdkey /list・security -w なし) だけ。
+ * 現在は無い。/ops/auth の auth-credentials.ts は gh secret list を呼んでいたが、CI の Secrets に資格情報を
+ * 置かなくなったので外した (2026-11-14 MEASUREMENT-MAC-DIRECT-01)。登録状況は credential-store の storedAccounts が読む。
  */
-const CHILD_PROCESS_EXCEPTIONS: Record<string, RegExp> = {
-  "lib/server/auth-credentials.ts": /execFileSync\("gh", \["secret", "list"/,
-};
+const CHILD_PROCESS_EXCEPTIONS: Record<string, RegExp> = {};
 
 describe("admin read-only contract", () => {
   it("API routeは下書き本文とカバー制作確認のPATCH以外はGETだけを公開する", () => {
@@ -99,5 +97,9 @@ describe("admin read-only contract", () => {
       // パスワードを読む経路 (資格情報ストアの直接読み) と書き込みを持たない
       expect(source, rel).not.toMatch(/writeFile|appendFile|CredRead|find-generic-password|readCredential|readSecret/);
     }
+    // /ops/auth は登録の有無と ID だけを読む。例外から外れたあとも、パスワードを読む読み口と子プロセスを持たない
+    const auth = fs.readFileSync(path.join(adminRoot, "lib/server/auth-credentials.ts"), "utf8");
+    expect(auth).toMatch(/storedAccounts/);
+    expect(auth).not.toMatch(/child_process|CredRead|find-generic-password|readCredential|readSecret/);
   });
 });

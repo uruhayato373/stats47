@@ -16,7 +16,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 
-const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..", "..");
+const ROOT = process.env.STATS47_SCAN_ROOT || path.resolve(__dirname, "..", "..", "..");
 const WORKFLOW_DIR = path.join(ROOT, ".github/workflows");
 
 // github.rest.<group>.<method>( / github.graphql( / github.paginate( / octokit(.rest)?.…(

@@ -26,7 +26,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const semver = require("semver");
 
-const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..", "..");
+const ROOT = process.env.STATS47_SCAN_ROOT || path.resolve(__dirname, "..", "..", "..");
 const SINGLETON_PACKAGES = ["next", "react", "react-dom"];
 const DEPENDENCY_FIELDS = ["dependencies", "devDependencies", "peerDependencies", "optionalDependencies"];
 

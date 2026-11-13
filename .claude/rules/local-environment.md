@@ -338,7 +338,7 @@ git checkout -- AGENTS.md .claude/design-system/SSOT.md
 |---|---|---|
 | dotfiles | `git clone <dotfiles> $env:USERPROFILE\dotfiles; node $env:USERPROFILE\dotfiles\bin\link.mjs --host windows` | `git clone <dotfiles> ~/dotfiles && node ~/dotfiles/bin/link.mjs --host mac` |
 | stats47 | `git clone -c core.symlinks=true --filter=blob:none <stats47>` | `git clone --filter=blob:none <stats47>` |
-| memory | `node .claude/scripts/setup-memory-symlink.mjs` (junction) | 同左 (symlink) |
+| memory | `node .claude/scripts/lib/setup-memory-symlink.mjs` (junction) | 同左 (symlink) |
 | hooks | `git config core.hooksPath .husky` | 同左 |
 | 一時領域 | `C:\tmp` (`STATS47_WORKTREE_ROOT`) | `~/tmp` (`/tmp` は 3 日で掃除される) |
 | 定期掃除 | `scripts/scheduled/local-resources.ps1 -Action Install` | `bash scripts/scheduled/local-resources.sh install` |
