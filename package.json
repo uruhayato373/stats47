@@ -186,7 +186,7 @@
     "metrics:check-period-contract": "node .claude/scripts/metrics/check-period-contract.mjs",
     "metrics:adsense-diagnostics": "node .claude/scripts/metrics/adsense-diagnostics-run.mjs",
     "metrics:test": "node --test .claude/scripts/metrics/__tests__/*.test.mjs",
-    "test:dependency-security": "node --test .claude/scripts/lib/__tests__/dependency-security-contract.test.cjs .claude/scripts/lib/__tests__/check-dependency-audit.test.mjs",
+    "test:dependency-security": "node --test .claude/scripts/lib/__tests__/dependency-security-contract.test.cjs .claude/scripts/lib/__tests__/check-dependency-audit.test.mjs .claude/scripts/lib/__tests__/root-script-tools.test.cjs",
     "psi:test": "node --test .claude/scripts/psi/__tests__/*.test.mjs",
     "cloudflare:test": "node --test .claude/scripts/lib/__tests__/cloudflare-threshold-check.test.mjs .claude/scripts/lib/__tests__/cloudflare-monthly-snapshot.test.mjs",
     "model-usage:collect": "node .claude/scripts/model-usage/collect-local-usage.mjs",
@@ -308,6 +308,7 @@
     "knip": "^6.39.0",
     "next": "16.4.3",
     "prettier": "^3.4.2",
+    "tsx": "^4.21.0",
     "turbo": "^2.10.12",
     "vite": "^8.2.4"
   },
