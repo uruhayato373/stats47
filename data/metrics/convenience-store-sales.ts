@@ -13,6 +13,7 @@ export const convenienceStoreSales: MetricConfig = {
     "cdCat03": "01030100",
     "cdCat01": "0101300",
     "cdCat02": "01040100",
+    "timeScope": "annual",
     "displayName": "商業動態統計調査",
     "url": "https://www.meti.go.jp/statistics/tyo/syoudou/",
   },
@@ -20,8 +21,8 @@ export const convenienceStoreSales: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2025,
-    "to": 2025,
+    "from": 2022,
+    "to": 2024,
   },
   "yearFormat": "fiscal",
   "visualization": {
@@ -55,7 +56,7 @@ export const convenienceStoreSales: MetricConfig = {
     ],
   },
   "groupKey": "convenience-store-sales",
-  "seoTitle": "コンビニエンスストア販売額ランキング都道府県【2025年】｜1位東京都（155,869百万円）",
-  "seoDescription": "2025年のコンビニエンスストア販売額の都道府県別ランキング。1位東京都（155,869百万円）、最下位鳥取県（3,912百万円）で39.8倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "コンビニエンスストア販売額（年計）ランキング都道府県",
+  "seoDescription": "コンビニエンスストア販売額（年計）の都道府県別ランキング。商業動態統計調査の年計値で、地図やグラフを使って47都道府県を比較できます。",
   "isActive": true,
 };
