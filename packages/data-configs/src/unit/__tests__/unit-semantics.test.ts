@@ -183,6 +183,34 @@ describe("語彙カバレッジ", () => {
   });
 });
 
+describe("語彙 — 熱量 (ジュール) と総トン数 (UNIT-VOCAB-LARGE-UNPARSED-01)", () => {
+  it("TJ・GJ・MJ を熱量として読み、ジュールの中だけで換算する", () => {
+    expect(parseUnit("TJ")).toMatchObject({ dimension: "energy", baseUnit: "J", scaleExponent: 12 });
+    expect(parseUnit("GJ")).toMatchObject({ dimension: "energy", baseUnit: "J", scaleExponent: 9 });
+    // 都市ガス販売量 (city-gas-sales-volume) の単位。全角のまま入っている。
+    expect(parseUnit("万ＭＪ")).toMatchObject({ dimension: "energy", baseUnit: "J", scaleExponent: 10 });
+    expect(conversionFactor("TJ", "GJ")).toBe(1000);
+    expect(conversionFactor("万MJ", "TJ")).toBe(0.01);
+  });
+
+  it("★ジュールとワット時は 3,600 倍の関係で 10 の累乗にならないので換算しない", () => {
+    expect(conversionFactor("TJ", "MWh")).toBeNull();
+    expect(conversionFactor("kWh", "MJ")).toBeNull();
+  });
+
+  it("★SI 接頭辞の大小文字を畳まない (mJ をメガジュールと読まない)", () => {
+    expect(parseUnit("mJ").dimension).toBeNull();
+    expect(parseUnit("tj").dimension).toBeNull();
+  });
+
+  it("★総トンは船の容積の単位で、重さのトンと換算しない", () => {
+    expect(parseUnit("総トン")).toMatchObject({ dimension: "gross-tonnage", baseUnit: "総トン", scaleExponent: 0 });
+    expect(conversionFactor("万総トン", "総トン")).toBe(10_000);
+    expect(conversionFactor("総トン", "トン")).toBeNull();
+    expect(conversionFactor("総トン", "t")).toBeNull();
+  });
+});
+
 describe("scalePrefixMultiplier — 本文表記の接頭辞", () => {
   it("接頭辞 1 語を倍率にする", () => {
     expect(scalePrefixMultiplier("千")).toBe(1000);
