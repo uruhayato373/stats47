@@ -132,6 +132,29 @@ describe('municipality geo scope and catalog', () => {
     }
   });
 
+  // MUNI-RANKING-DENSITY-MISSING-01: population-density-habitable は active で cities.json (R2) もあるのに
+  // 市区町村ランキングが無い。原因は欠落ではなく、可住地面積1km²当たり人口密度の別名 (15,304 行の観測値が
+  // population-density-per-km2-inhabitable-area と完全一致) として台帳で unsupported にしているため。
+  // 重複を理由に外した key は、必ず公開側の相手を指し、その相手が公開されていること。
+  // 相手まで外れると、同じ統計の市区町村ランキングがサイトから消える。
+  it('重複を理由に除外した指標は、公開済みの相手を台帳の理由に書いている', () => {
+    const duplicates = listMunicipalityMetricAvailability().flatMap(({ metricKey, availability }) => {
+      if (availability.status !== 'unsupported') return [];
+      const partner = availability.reason.match(/^([a-z0-9][a-z0-9-]*) /)?.[1];
+      return partner && METRICS_REGISTRY[partner] ? [{ metricKey, partner }] : [];
+    });
+    // 理由の書き方が変わって 1 件も拾えなくなる (検査が空振りする) ことを防ぐ
+    expect(duplicates.map((d) => d.metricKey)).toContain('population-density-habitable');
+    expect(duplicates.length).toBeGreaterThanOrEqual(7);
+    for (const { metricKey, partner } of duplicates) {
+      expect(KNOWN_MUNICIPALITY_RANKING_KEYS.has(partner), `${metricKey} の相手 ${partner} が公開されていない`).toBe(true);
+      expect(KNOWN_MUNICIPALITY_RANKING_KEYS.has(metricKey), `${metricKey} が重複なのに公開集合にある`).toBe(false);
+    }
+    expect(
+      duplicates.find((d) => d.metricKey === 'population-density-habitable')?.partner
+    ).toBe('population-density-per-km2-inhabitable-area');
+  });
+
   it('published city metricだけをmunicipality known集合へ導出する', () => {
     const known = buildKnownMunicipalityRankingKeys({
       'elderly-population-ratio': {
