@@ -1,13 +1,14 @@
 'use strict';
 
 /**
- * 戦略領域 (収益化戦略の優先順位表) の読み取りと、月次・週次・バックログとの整合検査。
+ * 戦略領域 (領域ごとの構えと優先順位) の読み取りと、月次・週次・バックログとの整合検査。
  *
- * 正典: docs/00_プロジェクト管理/02_収益化戦略.md §5「戦略領域と優先順位」の
- *       `<!-- strategy-lanes:start -->` 〜 `end` の表。領域の名前・構え・順番はそこだけに書く。
+ * 正典: 台帳 business.domain-stances (data/business/domain-stances.json)。領域の構え・順番・狙い・KPI はそこだけに書く。
+ *       領域の id と表示名は領域のマスタ (data/business/domains.json) が持ち、台帳は id で指す。
  *       ここに領域名の写しを持たない (手で二重管理すると必ずずれる)。
+ *       構えの考え方と行政向け商品の検証順序は docs/00_プロジェクト管理/02_収益化戦略.md §5 に残る。
  *
- * KPI: 領域表の KPI 列と improvements.md の `[kpi: id]` は、事業計画 catalog の KPI ツリー
+ * KPI: 台帳の kpis と improvements.md の `[kpi: id]` は、事業計画 catalog の KPI ツリー
  *      (`data/business-plan/kpi-tree.json`、`npm run business-plan:build-state` が生成) の id だけを参照できる。
  *
  * 計画の規律: 🔴 の上限と鮮度 (DG081)、連続未達 Must の再掲禁止 (DG082)、週次 Must と 🔴 上位の接続 (DG083)。
@@ -21,17 +22,14 @@ const path = require('node:path');
 const backlogLib = require('./backlog-lib.cjs');
 const { assessmentForSubject } = require('../metrics/lib/adsense-measurement-contract.mjs');
 const { DOMAINS } = require('../../../config/paths.mjs');
-const { datasetDir } = require("../../../config/datasets.mjs");
+const { datasetDir, datasetPath } = require("../../../config/datasets.mjs");
 // 「効果判定エンジン対象外: <理由>」の記法は計測サイクルと同じ判定を使う (別に正規表現を書くと片方だけ変わる)
 const { OUT_OF_SCOPE_MARKER } = require("../metrics/lib/gsc-improvements-adapter.mjs");
 
-const STRATEGY_DOC = 'docs/00_プロジェクト管理/02_収益化戦略.md';
+const LANES_LEDGER = datasetPath("business.domain-stances");
 const STANCES = ['攻める', '維持', '凍結'];
 const ATTACK = '攻める';
 const FROZEN = '凍結';
-const START = '<!-- strategy-lanes:start -->';
-const END = '<!-- strategy-lanes:end -->';
-const COLUMNS = ['順', '領域', '構え', '今の狙い', '構えを変える条件', '改善Metric', 'KPI'];
 const KPI_TREE = `${datasetDir("business-plan.state")}/kpi-tree.json`;
 const DOMAINS_JSON = DOMAINS;
 /**
@@ -67,46 +65,35 @@ function cellsOf(line) {
   return line.split('|').slice(1, -1).map((c) => c.trim());
 }
 
-/** 収益化戦略の本文から領域表を読む。表の破損は errors に積み、例外にしない。 */
-function parseLanes(text) {
-  const src = String(text ?? '').replace(/\r\n/g, '\n');
+/**
+ * 台帳 business.domain-stances の中身から領域の並びを作る。形の破損は errors に積み、例外にしない。
+ * domains は領域のマスタ (id と表示名)。渡すと id を表示名へ引き、台帳とマスタの過不足も errors に積む。
+ * 渡さないとき (fixture) は id をそのまま名前にする。
+ */
+function lanesFromLedger(doc, domains = null) {
+  const rows = doc && Array.isArray(doc.lanes) ? doc.lanes : null;
+  if (!rows) return { lanes: [], errors: [`領域の台帳 (${LANES_LEDGER}) に lanes が無い`] };
+  if (rows.length === 0) return { lanes: [], errors: ['領域の台帳が空'] };
+  const labelOf = domains ? new Map(domains.map((d) => [d.id, d.label])) : null;
   const errors = [];
-  const s = src.indexOf(START);
-  const e = src.indexOf(END);
-  if (s < 0 || e < 0 || e < s) {
-    return { lanes: [], errors: [`領域表のマーカー (${START} / ${END}) が見つからない`] };
-  }
-  const rows = src
-    .slice(s + START.length, e)
-    .split('\n')
-    .filter((l) => l.trim().startsWith('|'));
-  if (rows.length === 0) return { lanes: [], errors: ['領域表が空'] };
-  const header = cellsOf(rows[0]);
-  if (header.join('|') !== COLUMNS.join('|')) {
-    errors.push(`領域表の列が契約と違う: ${header.join(' | ')} (期待: ${COLUMNS.join(' | ')})`);
-    return { lanes: [], errors };
-  }
   const lanes = [];
-  for (const row of rows.slice(1)) {
-    const cells = cellsOf(row);
-    if (cells.every((c) => /^[-:\s]*$/.test(c))) continue;
-    if (cells.length !== COLUMNS.length) {
-      errors.push(`領域表の行の列数が違う: ${row.trim()}`);
-      continue;
-    }
-    const [order, name, stance, aim, gate, metrics, kpis] = cells;
-    if (!/^\d+$/.test(order)) errors.push(`${name} の順が整数でない: ${order}`);
-    if (!name) errors.push('領域名が空の行がある');
-    if (!STANCES.includes(stance)) errors.push(`${name} の構えが語彙外: ${stance} (${STANCES.join(' / ')})`);
-    if (lanes.some((l) => l.name === name)) errors.push(`領域名が重複: ${name}`);
+  for (const row of rows) {
+    const domain = String(row.domain ?? '');
+    const name = labelOf?.get(domain) ?? domain;
+    if (!domain) errors.push('領域が空の行がある');
+    else if (labelOf && !labelOf.has(domain)) errors.push(`台帳の領域が domains.json に無い: ${domain}`);
+    if (!Number.isInteger(row.order)) errors.push(`${name} の順が整数でない: ${row.order}`);
+    if (!STANCES.includes(row.stance)) errors.push(`${name} の構えが語彙外: ${row.stance} (${STANCES.join(' / ')})`);
+    if (lanes.some((l) => l.domain === domain)) errors.push(`領域が重複: ${name}`);
     lanes.push({
-      order: Number(order),
+      order: row.order,
+      domain,
       name,
-      stance,
-      aim,
-      gate,
-      improvementMetrics: metrics === '—' || metrics === '' ? [] : metrics.split(',').map((m) => m.trim()),
-      kpis: kpis === '—' || kpis === '' ? [] : kpis.split(',').map((m) => m.trim()),
+      stance: row.stance,
+      aim: row.aim ?? '',
+      gate: row.gate ?? '',
+      improvementMetrics: [...(row.improvementMetrics ?? [])],
+      kpis: [...(row.kpis ?? [])],
     });
   }
   const orders = lanes.map((l) => l.order);
@@ -118,7 +105,11 @@ function parseLanes(text) {
       claimed.set(m, lane.name);
     }
   }
-  lanes.sort((a, b) => a.order - b.order);
+  // サイドメニュー・タグ・月次重点が同じ領域を使うので、マスタにある領域は台帳にも 1 行ずつ要る
+  for (const d of domains ?? []) {
+    if (!lanes.some((l) => l.domain === d.id)) errors.push(`domains.json の領域が台帳に無い: ${d.label}`);
+  }
+  lanes.sort((x, y) => x.order - y.order);
   return { lanes, errors };
 }
 
@@ -299,7 +290,7 @@ function parseWeeklyItems(weeklyText) {
  */
 /**
  * 施策 → KPI の配線 (純関数)。kpiNodes が null (KPI ツリー未生成) なら検査しない。
- * DG079 (error): 領域表の KPI 列・施策の `[kpi:]` が KPI ツリーに無い id / 施策に `[kpi:]` が無い。
+ * DG079 (error): 領域の台帳の kpis・施策の `[kpi:]` が KPI ツリーに無い id / 施策に `[kpi:]` が無い。
  * DG080 (warning): active 施策が上限超過 / `[target:]` の無い施策 (効果判定エンジンが insufficient-target で止まる)。
  */
 function auditKpiLinkage({ lanes, improvementRows, kpiNodes, files }) {
@@ -311,7 +302,7 @@ function auditKpiLinkage({ lanes, improvementRows, kpiNodes, files }) {
   const known = new Set(kpiNodes.map((n) => n.id));
   for (const lane of lanes) {
     for (const id of lane.kpis) {
-      if (!known.has(id)) issues.push({ level: 'error', code: 'DG079', file: files.strategy, message: `領域 ${lane.name} の KPI が KPI ツリーに無い: ${id}` });
+      if (!known.has(id)) issues.push({ level: 'error', code: 'DG079', file: files.lanes, message: `領域 ${lane.name} の KPI が KPI ツリーに無い: ${id}` });
     }
   }
   const byKpi = new Map(kpiNodes.map((n) => [n.id, []]));
@@ -337,9 +328,9 @@ function auditKpiLinkage({ lanes, improvementRows, kpiNodes, files }) {
   return { issues, byKpi };
 }
 
-function auditLaneAlignment({ strategyText, backlogText, improvementsText, monthlyText, weeklyText, kpiNodes = null, reviews = [], today = null, files = {}, domainLabels = null }) {
+function auditLaneAlignment({ stances, domains = null, backlogText, improvementsText, monthlyText, weeklyText, kpiNodes = null, reviews = [], today = null, files = {} }) {
   const f = {
-    strategy: STRATEGY_DOC,
+    lanes: LANES_LEDGER,
     backlog: '.claude/todo/backlog.md',
     monthly: '.claude/todo/monthly.md',
     weekly: '.claude/todo/weekly.md',
@@ -349,14 +340,8 @@ function auditLaneAlignment({ strategyText, backlogText, improvementsText, month
   const issues = [];
   const add = (level, code, file, message) => issues.push({ level, code, file, message });
 
-  const { lanes, errors } = parseLanes(strategyText);
-  for (const err of errors) add('error', 'DG073', f.strategy, err);
-  // 領域表の名前は領域の正本 domains.json の label と一致させる (サイドメニュー・タグ・月次重点が同じ語を使う)
-  if (domainLabels && lanes.length) {
-    const names = new Set(lanes.map((l) => l.name));
-    for (const label of domainLabels) if (!names.has(label)) add('error', 'DG073', f.strategy, `domains.json の領域が領域表に無い: ${label}`);
-    for (const name of names) if (!domainLabels.includes(name)) add('error', 'DG073', f.strategy, `領域表の領域が domains.json に無い: ${name}`);
-  }
+  const { lanes, errors } = lanesFromLedger(stances, domains);
+  for (const err of errors) add('error', 'DG073', f.lanes, err);
   const byName = new Map(lanes.map((l) => [l.name, l]));
 
   // backlog カードの領域
@@ -366,7 +351,7 @@ function auditLaneAlignment({ strategyText, backlogText, improvementsText, month
   for (const card of cards) {
     const label = card.id ?? `L${card.line} ${card.title}`;
     if (card.lane && lanes.length && !byName.has(card.lane)) {
-      add('error', 'DG074', f.backlog, `${label}の領域が収益化戦略の領域表に無い: ${card.lane}`);
+      add('error', 'DG074', f.backlog, `${label}の領域が領域の台帳に無い: ${card.lane}`);
     }
     if (!card.lane) noLane += 1;
     if (card.id) idIndex.set(card.id, { lane: card.lane, kind: card.kind, source: 'backlog', title: card.title });
@@ -447,11 +432,25 @@ function readReviews(root) {
     .map((f) => ({ week: f.replace(/\.md$/, ''), text: fs.readFileSync(path.join(dir, f), 'utf8') }));
 }
 
-/** 領域の正本 domains.json の label 一覧。無ければ null (照合しない)。 */
-function readDomainLabels(root) {
+/** 領域のマスタ domains.json の領域 (id と表示名)。無ければ null (照合せず、id をそのまま名前にする)。 */
+function readDomains(root) {
   const abs = path.join(root, DOMAINS_JSON);
   if (!fs.existsSync(abs)) return null;
-  return JSON.parse(fs.readFileSync(abs, 'utf8')).domains.map((d) => d.label);
+  return JSON.parse(fs.readFileSync(abs, 'utf8')).domains.map((d) => ({ id: d.id, label: d.label }));
+}
+
+/** 領域の台帳の中身。壊れていれば null (lanesFromLedger が DG073 の error にする)。 */
+function readStances(root) {
+  try {
+    return JSON.parse(fs.readFileSync(path.join(root, LANES_LEDGER), 'utf8'));
+  } catch {
+    return null;
+  }
+}
+
+/** 実リポジトリの領域の並び (計測サイクルなど、整合検査をせず領域だけ要る読み手の入口)。 */
+function readLanes(root) {
+  return lanesFromLedger(readStances(root), readDomains(root));
 }
 
 /** KPI ツリーの nodes。無い・壊れているときは null (検査側が DG079 warning にする)。 */
@@ -468,11 +467,11 @@ function readKpiNodes(root) {
 
 /**
  * リポジトリの実ファイルから整合検査する (governance / 管理画面の入口)。
- * 収益化戦略そのものが無い root (governance テストの fixture) では検査しない。
- * 実リポジトリでの存在は 00_プロジェクト管理 の固定構成検査が保証する。
+ * 領域の台帳そのものが無い root (governance テストの fixture) では検査しない。
+ * 実リポジトリでの存在は check-datasets (カタログの行がファイルに当たること) が保証する。
  */
 function laneBoard(root, today = new Date().toISOString().slice(0, 10)) {
-  if (!fs.existsSync(path.join(root, STRATEGY_DOC))) {
+  if (!fs.existsSync(path.join(root, LANES_LEDGER))) {
     return { lanes: [], focusLanes: null, cards: [], cardLanes: new Map(), idIndex: new Map(), weekly: [], kpiNodes: null, kpiLinks: new Map(), discipline: null, issues: [], skipped: true };
   }
   const read = (rel) => {
@@ -480,7 +479,8 @@ function laneBoard(root, today = new Date().toISOString().slice(0, 10)) {
     return fs.existsSync(abs) ? fs.readFileSync(abs, 'utf8') : '';
   };
   return auditLaneAlignment({
-    strategyText: read(STRATEGY_DOC),
+    stances: readStances(root),
+    domains: readDomains(root),
     backlogText: read('.claude/todo/backlog.md'),
     improvementsText: read('.claude/todo/improvements.md'),
     monthlyText: read('.claude/todo/monthly.md'),
@@ -488,14 +488,12 @@ function laneBoard(root, today = new Date().toISOString().slice(0, 10)) {
     kpiNodes: readKpiNodes(root),
     reviews: readReviews(root),
     today,
-    domainLabels: readDomainLabels(root),
   });
 }
 
 module.exports = {
-  STRATEGY_DOC,
+  LANES_LEDGER,
   STANCES,
-  COLUMNS,
   KPI_TREE,
   MAX_ACTIVE_IMPROVEMENTS,
   MAX_HIGH_TIER_CARDS,
@@ -508,7 +506,8 @@ module.exports = {
   summarizeReviews,
   auditPlanDiscipline,
   readReviews,
-  parseLanes,
+  lanesFromLedger,
+  readLanes,
   parseKpiMarker,
   auditKpiLinkage,
   readKpiNodes,

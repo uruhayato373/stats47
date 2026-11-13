@@ -21,5 +21,5 @@ paths:
 - **配布**: 正本更新後、Obsidian vaultで `npm run policy:sync` を実行するとstats47・doboku-noteへ配布される。配布物は 上記 `*.md`(本文) / `sync.mjs`(検証スクリプト) / `manifest.json`(SHA-256・`docs` に文書ごとの version・updated・sourcePath。トップレベルは POLICY.md の値)
 - **検証**: `npm run policy:check`(`preadmin`で`npm run admin`起動前に自動実行)。正本(Obsidian vault)が同じ親ディレクトリに無い環境(クラウド・単独clone)では、配布物とmanifestのlocal整合性だけを検査し「最新版との一致は未確認」と表示する
 - **`application.json`はこのリポジトリが所有する**(sync対象外・手編集してよい)。stats47固有の適用文(対象読者・提供価値の解釈)を書く。共通原則の定義・KPI・優先順位はここに書かない
-- **管理画面表示**: `/strategy/policy`(「戦略・収益化」→「共通方針」)が `manifest.json` の `docs` から 3 文書の索引(version / updated / 正本パス)を出し、`/strategy/policy/{POLICY,REPURPOSE,STRUCTURE}` で読み取り専用のミラー表示(`apps/admin/lib/server/shared-policy.ts`)。manifest に無い slug は 404。全ページ共通ヘッダーには表示しない。書き換え機能は追加しない
+- **管理画面表示**: `/strategy/policy`(ナビ「戦略」→「方針」の入口カード「共通方針」から開く。ナビに直接の項目は無い)が `manifest.json` の `docs` から 4 文書の索引(version / updated / 正本パス)を出し、`/strategy/policy/{POLICY,REPURPOSE,STRUCTURE,LOCAL-DATA}` で読み取り専用のミラー表示(`apps/admin/lib/server/shared-policy.ts`)。manifest に無い slug は 404。全ページ共通ヘッダーには表示しない。書き換え機能は追加しない
 - 対象作業(企画・収益化・商品設計・週次/月次計画とレビュー)では判断理由に「読者の課題／HARM分類と理由／提供価値・支払う理由／需要の証拠または未検証／次の検証」を短く含める。ユーザーの具体的指示や安全・公開規約を上書きしない

@@ -134,15 +134,15 @@ updated: 2026-11-01
 ### [OPENDATA-RANKING-PILOT-01] 外部データ台帳で実ファイル確認済みの指標候補 81 件から、NDB 特定健診の 10 本前後を試しに公開する
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run validate:config -w @stats47/data-configs] [起票:2026-11-13] [領域:データ]
 
-- **背景 (2026-11-13)**: 外部データ台帳の 5 出典について統計ファイルを実際に落とし、47 都道府県の行を数えて確かめた。確認できた指標候補は 81 件で、台帳 `open-data.datasets` の `candidateMetricConcepts` に出典ファイルの URL とハッシュ付きで書いてある (管理画面 `/data/open-data`)。内訳は NDB オープンデータ 34、金融リテラシー調査 14、学力調査の質問紙 14、医療情報ネット 9、交通事故 7、道路交通センサス 3。うち 3 件 (NDB の喫煙・交通事故の自転車関与・金融トラブル経験) はメインが原典から再計算して一致を確かめた。
-- **最初の対象**: NDB の特定健診質問票と検査値。理由は 3 つ。既存の取り込み `.claude/scripts/themes/ingest-singleparent-nutrition.mjs` が同じ zip (第 11 回・質問項目 15 と 17) を読んでいて対象の設問を広げるだけで済む、1 列を読むだけで率になる、喫煙・飲酒・運動・睡眠・BMI・血圧・血糖は検索される題材である。
-- **済み (2026-11-13・手元まで)**: 質問票の 10 設問を指標定義にした (`data/metrics/health-checkup-{blood-pressure-medication,smoking,weight-gain-10kg,exercise-habit,daily-activity,fast-walking,fast-eating,daily-snacking,daily-drinking,sufficient-sleep}-rate.ts`)。取り込みは `.claude/scripts/themes/ingest-ndb-questionnaire.mjs` (原典の zip と xlsx の SHA・設問文・47 県と選択肢の並び・秘匿なし・年齢 7 階級の合計を assert)、テストは `.claude/scripts/themes/__tests__/ndb-questionnaire.test.mjs` (実装を 1 か所壊すと落ちることを確認済み)。値は `.local/r2/app/stats/<key>/values.json` に 470 行。喫煙率は別経路の再計算と一致 (奈良県 18.41%〜北海道 27.84%)。検査値 (BMI・血圧・HbA1c) は別の zip なので未着手。
+- **背景 (2026-11-13)**: 外部データ台帳の 5 出典の統計ファイルを落とし、47 都道府県の行を数えて指標候補 81 件を確かめた。一覧と出典ファイルのハッシュは台帳 `open-data.datasets` の `candidateMetricConcepts` と `verification` にある (管理画面 `/data/open-data`)。
+- **最初の対象**: NDB の特定健診質問票。既存の取り込みと同じ zip で、1 列を読むだけで率になる。
+- **済み (2026-11-13・手元まで)**: 質問票の 10 設問 (質問 1・8・9・10・11・12・14・16・18・20) を非公開の指標定義にし、`.claude/scripts/themes/ingest-ndb-questionnaire.mjs` で手元に 470 行の値を作った。検査値 (BMI・血圧・HbA1c) は別の zip なので未着手。
 - **残り・実行順**: ① R2 の `app/stats/<key>/` へ値を上げる (EXTERNAL-METRIC-R2-INGEST-01 の経路。オーナーの承認が要る) ② 10 本を `isActive: true` にして `npm run metrics:regen-derived` → `npm run preflight:pr` ③ `sync-snapshots.yml` (`only=ranking-items` → `ranking-values`) → 既知キーの同期 → OGP → develop→main ④ 本番を Googlebot UA で実測し、管理画面 `/data/open-data` で「公開中」になることを確かめる。
 - **停止条件**: R2 に値を上げる前に `isActive: true` にしない (値の無いランキングページが配信される)。質問項目 13・21 (選択肢が番号だけで凡例が未確認) と 19 (秘匿のセルが 4 つあり、分母が飲酒者だけかも未確認) は、NDB の解説編で定義を確かめるまで指標にしない。母数は特定健診の受診者 (40〜74 歳) で県民全体ではなく、年齢調整もしていないことを、指標の題か注記に必ず書く。一度に 10 本前後を超えて公開しない (公開の 4 週後に流入を測ってから広げる。`.claude/agents/ranking-expander.md`)。
 - **完了条件**: 選んだ指標が本番で 200 を返し、Googlebot UA で実測できる。台帳の反映状況が「公開中」になる。4 週後の流入を測る施策を `improvements.md` へ別 ID で引き渡す。
 - **次の候補 (この順)**: 金融リテラシー調査 2025 年版 (既存の `financial-literacy-correct-rate` は 2022 年版なので更新も兼ねる。2025 年版の利用条件と、県別の標本が 130〜3,381 人と小さい県があることを先に確かめる) → 学力調査の質問紙 (選択肢の文言を質問紙 PDF で確定し、残り 44 県の設問位置を確かめる) → 交通事故の属性別 (当事者 A が第 1 当事者かを定義書で確かめる。長崎の自転車 3.9% など極端な値が記録実務の差かも見る) → 医療情報ネットの診療科別 (休診フラグの定義と、医療施設調査との定義差を確かめる)。
-- **保留**: 不動産情報ライブラリの中古マンション価格は、公式のダウンロードが認証付きで実ファイルを確認できていない。既存の `ingest-property-prices.mjs` は画面から落とした zip を使っている。
-- **台帳の記述の訂正**: `open-data.sources` の `nier-gakuryoku-chousa` の notes にある「宿題・地域行事参加・ネット利用・通学時間」は、令和 7 年度の児童質問紙に設問が無かった。指標化のときに notes を直す。
+- **保留**: 不動産情報ライブラリの中古マンション価格 (公式のダウンロードが認証付きで、実ファイルを未確認)。
+- **台帳の訂正**: `open-data.sources` の `nier-gakuryoku-chousa` の notes にある「宿題・地域行事参加・ネット利用・通学時間」は令和 7 年度の質問紙に無い。指標化のときに直す。
 
 ### [EXTERNAL-METRIC-R2-INGEST-01] e-Stat 以外の指標の観測値を R2 へ上げる CI の経路が無く、手順の文書も食い違っている
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:管理]
@@ -150,11 +150,71 @@ updated: 2026-11-01
 - **観測 (2026-11-13・読み取り調査)**: external 指標は 244 本 (公開中 233) あるが、取り込みスクリプトが手元に書いた `app/stats/<key>/values.json` を R2 へ上げる workflow が見つからなかった。`data-refresh.yml` は e-Stat 以外を「No e-Stat fetch path」で拒否し (:251・:265)、`deploy-workers.yml` の exact publish は `app/stats` を対象にしていない。外部データを CI で取り込む例は `ksj-aggregate-ingest.yml` (対象は `tourism-resource-count` だけ) の 1 本。`correlation-refresh.yml:7-9` のコメントから、既存の 244 本は workflow の外で push されたと読める。
 - **文書の食い違い**: `.claude/rules/r2-storage-design.md:31` は「2026-09-14 以降ローカルから push しない」、`.claude/skills/db/push-r2/SKILL.md` と `.claude/rules/local-environment.md:41-56` は手元からの push を可としている。R2 の認証情報は手元から撤去済みなので、実際には手元から上げられない。
 - **もう 1 つの穴**: R2 に値が無い公開中の external 指標でも `generate-ranking-items` は止まらず、`latestYear=null` の item が作られて空のページが既知キーに載りうる (`packages/ranking/src/scripts/generate-ranking-items.ts:94-97`)。
-- **済み (2026-11-13・オーナーの指示で作成)**: `.github/workflows/external-metric-ingest.yml` (手動・既定は dry run・`r2-write`)。取り込みスクリプトを CI で走らせ、`.claude/scripts/themes/verify-external-ingest.mjs` が上げるファイルを読み直して検査し、`push-exact-r2-assets.ts --key` で報告に載ったキーだけを上げる (R2 から何も消さない)。登録済みの取り込みは `ndb-questionnaire` の 1 本。手元では、検査の実行と exact publish の dry run (候補 10・変更 10・アップロード 0) まで確かめた。手順は `.claude/rules/metric-config-standards.md` に書いた。
+- **済み (2026-11-13)**: `.github/workflows/external-metric-ingest.yml` (手動・既定は dry run・`r2-write`)。取り込み → `.claude/scripts/themes/verify-external-ingest.mjs` の検査 → `push-exact-r2-assets.ts --key` で報告のキーだけを上げる (R2 から何も消さない)。登録済みは `ndb-questionnaire`。手元では検査と exact publish の dry run (候補 10・アップロード 0) まで確認した。手順は `.claude/rules/metric-config-standards.md`。
 - **残り・実行順**: ① develop→main のマージ後に、workflow を `dry_run` のまま 1 回走らせて結果を確かめる (workflow は main に入るまで起動できない。CI での実行は未確認) ② オーナーの承認を得て `dry_run: false` で上げ、R2 の `app/stats/<key>/values.json` を公開 URL から読み戻す ③ 値の無い公開中の external 指標を item 生成の前に止める検査を足す ④ `r2-storage-design.md`・`push-r2/SKILL.md`・`local-environment.md` の手元からの push の記述をそろえる。
 - **停止条件**: `dry_run: false` での実行は R2 への書き込みなので、その都度オーナーへ確認する。
 - **完了条件**: workflow の dry run が CI で通り、上げる対象の key が出る。実際に上げた値を公開 URL から読み戻せる。3 文書の記述が一致する。
 - **関連**: OPENDATA-RANKING-PILOT-01 の ⑤ はこの経路が前提。
+
+### [STRATEGY-LEDGER-JSON-01] 戦略文書の表・値・決定を `data/` の JSON 台帳へ移し、管理画面が台帳を描く形にする (8 段)
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-11-13] [領域:戦略]
+
+- **背景 (2026-11-13 オーナー決定)**: 戦略の中身は JSON 台帳にし、管理画面は閲覧だけにする。着手前は `/strategy/lanes` が `docs/00_プロジェクト管理/02_収益化戦略.md` §5 の表を文字列で読んで描いていた (段 1・2 で台帳読みに替えた)。競合・ペルソナ・KPI・決定は docs/00 の 4 本、`data/business-plan/`、`packages/data-configs/src/business-plan/catalog.ts` のリテラルに重複している。
+- **実行順 (1 段 = 1 PR。各段は台帳・Schema・カタログの行・管理画面の表示・Markdown の表の削除を 1 組にする)**:
+  1. (済み 2026-11-13) `data/business/domain-stances.json` を足した
+  2. (済み 2026-11-13) `strategy-lanes.cjs` と `build-measurement-cycle.mjs` を台帳読みに替え、02 §5 の領域表を消した。Stop hook と pre-commit の発火条件に台帳を足した。残り: `.claude/rules/todo-standards.md` の `[領域:X]` の行は「§5 の領域表」のままで、doboku-note と同文の規約なので両リポへ同じ差分を当てて直す。`.claude/todo/monthly.md` の参照は次の `/monthly-plan` の上書きで直す
+  3. `catalog.ts` のリテラルを `data/business-plan/plan/catalog.json` へ、`geo-content-lifecycle.ts` の `COMMON_GATES` を `data/geo/analyses/content-lifecycle.json` へ移す。どの画面も使っていない `apps/admin/lib/server/dashboard.ts` の `parseStrategyDocs` を消す
+  4. 文書の台帳を `data/business-plan/plan/documents.json` の 1 本にし、02 §9 と各文書の「関連ドキュメント」を寄せる。`/strategy/doc/[id]` を `/docs/[...path]` に寄せ、`/docs` と `/strategy/policy` をナビに載せる。改善ログ 7 本と週次・月次レビューの全文を管理画面で開けるようにする (`domains.ts` の `readDocument` の基点を引数にする)
+  5. `data/business/monetization.json` (収益モデル・ページ種別の責務・ゲート・チャネル配分) と `data/business/decisions.json` (02 §3.1 の日付つきオーナー決定) を足す
+  6. `data/business/{project,audiences,competitors}.json` を足し、01・03・04 と 02 §2.1・§2.2・§3.6 の重複した表を消す (競合は 03 の版を元にする)
+  7. `data/business/traffic-roadmap.json` を足し、閾値を KPI の id に `refs` で結ぶ
+  8. `data/sns/{platform-specs,profiles,content-plans}.json` を足して `docs/10_SNS戦略/` の 02・04・05 を廃止し、`update-x-profile.cjs` を台帳読みに替える。`data/note/series.json` に編集シリーズ A〜D の定義を足す
+- **禁止**: docs/00 の 4 本を廃止しない・見出しと番号を変えない (「収益化戦略 §5」の形の参照が rules と skills に 60 か所以上ある)。`data/` の既存フォルダを改名しない。管理画面に編集機能と専用部品を作らない。段 5 でゲートと行政検証の段階を扱うときは `STRATEGY-GATE-TABLE-01`・`STRATEGY-GATE-ADMIN-PILOT-01` の禁止 (聞き取り台帳から導ける値を別の JSON へ手で写さない) に従う。
+- **完了条件**: 戦略の文書に機械が読む表が残らず、`npm run docs:check` の DG073〜083 が台帳読みで同じ判定を返し、管理画面の戦略区分から全台帳を開ける。
+
+### [DOCS-GOVERNANCE-GAPS-01] 検査の外に溜まった文書 (skill の監査全文・散った設計文書・memory の戦略重複・古い実装計画) を片づけ、検査の範囲に入れる
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run docs:check] [起票:2026-11-13] [領域:管理]
+
+- **観測 (2026-11-13)**: `.claude/skills/theme/manage-theme-portfolio/reference/` に reviews 30 件・audits 6 件 (最大 1,791 行)、survey に 4 件、seo-audit に 1 件の全文がある。置き場について `data-storage.md` (監査は `data/`) と `docs-vs-issues.md` (skill の reference) が食い違う。設計文書が `packages/database/SCHEMA.md`・`packages/estat-api/src/stats-data/TESTING_STRATEGY.md`・`apps/web` 配下の `PLAN.md` と `DARK_MODE_FIX.md`・`.claude/design-system/` に散っている。`.claude/memory/project_monetization_contract.md` は 02_収益化戦略と二重で、`project_sns_10k_roadmap.md` は Instagram 停止の記録と並存している。`MEMORY.md` は読み込み上限の 200 行ちょうど。`docs/02_実装計画/` の 43・44・45・47 は `related_backlog` が null。
+- **次**: ① 監査とレビューの全文は、未完了の対策だけをこの台帳へ移して消す。事業として見返すものだけ `data/<領域>/` へ移す。2 つの rule を `data/` に揃えて書き直す ② 設計文書をコード近傍の README か既存の設計文書へ統合して消す ③ memory の戦略重複を正本への参照に縮める ④ 古い実装計画は `/maintain-docs` の手順で統合か削除を決める ⑤ `config/datasets.mjs` の `GOVERNED` に `skills/**/reference/{reviews,audits}/` を足し、`docs:check` に「`docs/` の Markdown が文書の台帳に無い」「`apps/*/.claude/` と `.claude/scripts/` 直下のファイル」の検査を足す。
+- **禁止**: 検査を足さずに文書だけを消さない。未完了の対策を拾わずに監査の全文を消さない。
+- **完了条件**: 上の全文と散った文書が無くなり、同じ置き場へ新しく置くと検査が落ちる。検査を足したら `docs/01_技術設計/06_自動化インベントリ.md` を更新している。
+
+### [DIR-PLACEMENT-CLEANUP-01] 置き場の規則から外れたスクリプト・データ・設定を正しい置き場へ移す
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-11-13] [領域:管理]
+
+- **観測 (2026-11-13)**: `scripts/ui-theme/` (5 件) は `skill-code-placement.md` が `scripts/` に認める例外 (`scheduled/` だけ) の外にある。`.claude/scripts/` の直下にファイルが 5 本あり、1 件しか無いドメインが 8 つ (adsense・content-operations・db・municipalities・ranking・site・ui・web)、`sns/` の外に `instagram/`・`threads/` がある。`data/infra-history-publish-requests.json` は領域フォルダの外にあり、依頼を消費して消す処理が無いまま 2026-11-03 から残っている。`data/ai-content-staging/` は公開待ちの置き場 (`contents/`) の外にある。`data/ads/` は 1 件だけで `data/affiliate/` と役割が重なる。`.claude/config/` の `auth-credentials.json`・`env-registry.json`・`model-pricing.json` は品質ゲートの基準ではなくシステム設定である。
+- **次**: スクリプトの移動 (呼び出し元の package.json・workflow・SKILL.md を同じ差分で直す) と、データと設定の移動 (`data-storage.md`「置き場を移す手順」に従い `RETIRED` に宣言する) を別の PR に分ける。
+- **禁止**: `data/` の大きなフォルダ (`business`・`business-plan`・`nsm`・`seo`・`gsc`・`search-growth`・`adsense`・`affiliate`) を改名・統合しない (置き場がずれると CI の書き戻しが記録を落とす。2026-10-06 に 3 run が落とした)。skills (単数形) と scripts・data (複数形) の名前を揃えない。
+- **完了条件**: 上の置き場が無くなり、移した workflow を手動で起動して新しい置き場へ書くことを確かめている。
+
+### [DOCS-LINKS-RELATIVE-01] 文書のリンク検査が相対リンクの切れを見逃す
+タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:npm run docs:check] [起票:2026-11-13] [領域:管理]
+
+- **観測 (2026-11-13)**: `docs/INDEX.md` の `[todo/](todo/todo-standards.md)` は実在しないファイルを指していたが、`npm run docs:check` は error 0 件だった。`.claude/scripts/lib/check-docs-links.cjs` が拾うのは `docs/…md` という文字列で、文書からの相対パスで書いたリンクは解決していない。
+- **次**: Markdown のリンク先を、書かれた文書の場所を基準に解決して実在を確かめる。
+- **完了条件**: 実在しない相対リンクを 1 つ足すと検査が落ちるテストがある。
+
+### [GOAL-PSI-LCP-STALE-01] 性能目標 `psi-mobile-lcp-2500` の記録が ACTIVE のまま 2026-05-15 から止まっている
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:管理]
+
+- **観測 (2026-11-13)**: `data/goals/psi-mobile-lcp-2500/meta.json` は status が ACTIVE、cycle 1 が proposed、`updated_at` が 2026-05-15。`md_path` が指す `.claude/skills/management/goal/reference/goals/psi-mobile-lcp-2500-2026-05-15.md` は存在しない。baseline の `source` は `data/psi/` へ移す前の旧置き場 (エージェントの state 配下) を指す。
+- **次**: 目標を続けるか閉じるかをオーナーが決める。続けるなら baseline を `data/psi/` の現在の計測で取り直し、閉じるなら `close_reason` を書く。
+- **完了条件**: status と実態が一致し、存在しないパスへの参照が無い。
+
+### [X-CATALOG-RULES-PARSE-01] X の投稿上限・テンプレ・画像種のマスタが rules の Markdown から読まれている
+タグ: [SNS・マーケ] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-11-13] [領域:SNS]
+
+- **観測 (2026-11-13)**: `.claude/scripts/lib/x-catalog.cjs` が `.claude/rules/sns-content-standards.md` の §1・§2-0・§2-8・§2-9 の表をパースし、X の投稿上限・テンプレ・画像種として使っている。マスタは `data/<領域>/` の JSON + Schema に置く決定 (2026-11-10) と同じ型の違反である。
+- **次**: 表を `data/sns/` の台帳へ移してカタログに登録し、`x-catalog.cjs` を台帳読みに替える。rule には台帳 id への参照を残す。`STRATEGY-LEDGER-JSON-01` の段 8 と同じ PR にまとめてよい。
+- **完了条件**: rule の表を書き換えても X の投稿の挙動が変わらず、台帳を書き換えると変わる。
+
+### [CATALOG-FULLBLEED-PLANNED-01] ブログ背景の原本 861 件があるのに、カタログの行が「まだ 1 件も無い」のままになっている
+タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:npm run check-datasets] [起票:2026-11-13] [領域:管理]
+
+- **観測 (2026-11-13)**: `config/datasets.mjs` の `blog.fullbleed-backgrounds` は `planned: true` だが、`git ls-files assets/blog/fullbleed-backgrounds` は 861 件を返す。
+- **次**: `planned` を外す。件数があるのに `planned: true` の行を `check-datasets` が落とすかを確かめ、落とさないなら検査を足す。
+- **完了条件**: 行が実態と一致し、同じ食い違いを検査が止める。
 
 ### [RELEASE-SQUASH-SKIP-TOKEN-01] develop→main の squash マージ本文に取り込んだコミットの skip-ci 系トークンが入り、本番デプロイが起動しない
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:管理]
@@ -3137,7 +3197,7 @@ AdSense の最適化案「レスポンシブ広告で収益を拡大」(固定�
 - **次**: ② 月次レビューで、媒体ごとの送客セッションと投稿数を並べる ③ 2 か月分がそろったら、SNS 領域を「維持」のままにするか、送客の多い媒体だけ投稿を増やすかを決める。
 - **統合 (2026-10-26 オーナー判断): `SNS-SITE-FUNNEL-01`** 投稿からサイトへの流入の経路 (プロフィールのリンク・投稿の誘導・UTM) を見直し、既存の計測 (GA4 の参照元・`nav_click`) で前後を比べられる形にする。
 - **停止条件**: 送客が測れないうちに投稿を増やさない。インプレッションやいいねを送客の代わりにしない。
-- **完了条件**: 媒体別の送客が 2 か月分記録され、SNS 領域の構えの判断が収益化戦略 §5 の領域表に反映されている。
+- **完了条件**: 媒体別の送客が 2 か月分記録され、SNS 領域の構えの判断が領域の台帳 `data/business/domain-stances.json` に反映されている。
 
 ### [NOTE-FREE-DEFAULT-01] note の雑学・ランキングの有料記事を無料に戻し、送客の変化を前後で測る
 タグ: [収益化] [種類:改善] [実行:ユーザー] [起票:2026-10-07] [領域:商品]
@@ -4895,6 +4955,13 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **完了条件**: Windows で 4 種とも通り、CI の結果は変わらない。
 
 ## 🟣 判断待ち — やるかどうかの意思決定が未了
+
+### [BUSINESS-PLAN-TARGETS-CONFLICT-01] KPI の台帳に残る M3・M6・M12 の目標値を消すか、仮説として残すかを決める
+タグ: [収益化] [種類:意思決定] [実行:ユーザー] [起票:2026-11-13] [領域:戦略]
+
+- **観測 (2026-11-13)**: `data/business-plan/plan/metrics.json` は `targetM3`・`targetM6`・`targetM12` (週次収益は 30,000・187,000・1,030,000) を持つ。`docs/00_プロジェクト管理/02_収益化戦略.md` の 166 行目は「既存のM3/M6/M12の売上・アクセス値を今回の戦略の予測として流用しない」と書いている。
+- **次**: 目標値を消すか、仮説の印を付けて残すかをオーナーが決める。`STRATEGY-LEDGER-JSON-01` の段 5 で KPI の階層を足す前に決める。
+- **完了条件**: 台帳と戦略の記述が一致している。
 
 ### [TRADE-AREA-REPORT-DECISION-01] 補助金・創業融資の根拠に使える「商圏の参考資料」を受注するかを決める
 タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-11-11] [領域:商品]
