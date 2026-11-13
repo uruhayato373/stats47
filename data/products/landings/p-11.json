@@ -25,7 +25,13 @@
       "metricKeys": [
         "total-population"
       ],
-      "preferredTemplate": "choropleth"
+      "preferredTemplate": "choropleth",
+      "themeRefs": [
+        {
+          "themeKey": "population-dynamics",
+          "sectionKey": "population-change"
+        }
+      ]
     },
     {
       "id": "household-ranking",
@@ -34,7 +40,13 @@
       "metricKeys": [
         "general-households"
       ],
-      "preferredTemplate": "bar"
+      "preferredTemplate": "bar",
+      "themeRefs": [
+        {
+          "themeKey": "living-housing",
+          "sectionKey": "household-structure-and-elderly"
+        }
+      ]
     }
   ],
   "purchaseNotes": [
@@ -64,6 +76,73 @@
     ],
     "limitations": [
       "再利用元の基準年・地域・単位・欠測の条件を引き継ぐ。元商品が未承認の改訂案なら素材集でも公開済みの内容として扱わない。"
+    ],
+    "axes": [
+      {
+        "axis": "trend",
+        "decision": "required",
+        "reason": "比較可能な年度の変化を、計算結果と作成例で示す。",
+        "recipeRefs": [
+          "P-01/national-municipality-change",
+          "P-01/elderly-household-trend"
+        ]
+      },
+      {
+        "axis": "composition",
+        "decision": "required",
+        "reason": "同じ地域・年度・母集団の全体と部分を使い、構成割合を示す。",
+        "recipeRefs": [
+          "P-01/elderly-single-household-map",
+          "P-01/elderly-household-trend"
+        ]
+      },
+      {
+        "axis": "comparison",
+        "decision": "required",
+        "reason": "同じ年・定義・地域単位の複数地域を、計算結果と作成例で比較する。",
+        "recipeRefs": [
+          "P-01/national-municipality-change",
+          "P-01/elderly-single-household-map"
+        ]
+      }
+    ]
+  },
+  "analysisReuse": {
+    "version": "analysis-20261113",
+    "title": "人口・世帯の地域分析 図表素材集",
+    "description": "全国の市区町村を塗り分けた地図と世帯の推移を、資料や記事に使える共通サイズの図で収録します。人口・世帯パックで検証した値と図をそのまま使います。",
+    "useCases": [
+      {
+        "title": "地域の特徴を地図で説明する",
+        "description": "人口の増減や高齢単身世帯の割合を全国の市区町村地図で比べられます。"
+      },
+      {
+        "title": "世帯構成の変化を伝える",
+        "description": "高齢者世帯の推移を示す折れ線図を、出典・計算条件と一緒に資料へ掲載できます。"
+      }
+    ],
+    "notes": [
+      "分析の追加ファイルはPNG素材集です。公開中の商品に含まれるSVG・PowerPoint・PDFとは構成が異なります。",
+      "元商品の版・対象年・地域・欠測・利用条件を引き継ぎます。",
+      "図の対象・年・単位・欠測条件と利用条件を確認してご利用ください。"
+    ],
+    "format": "figures",
+    "examples": [
+      {
+        "productId": "P-01",
+        "version": "analysis-20261112",
+        "recipeId": "national-municipality-change"
+      },
+      {
+        "productId": "P-01",
+        "version": "analysis-20261112",
+        "recipeId": "elderly-single-household-map"
+      },
+      {
+        "productId": "P-01",
+        "version": "analysis-20261112",
+        "recipeId": "elderly-household-trend"
+      }
     ]
   }
 }

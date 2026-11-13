@@ -1,13 +1,14 @@
 import { buildMunicipalityEntityPolicy, listPublishableMunicipalities, PREFECTURE_AREA_CODES } from '@stats47/area';
 import { fetchAnalysisSource, type AnalysisObservation, type AnalysisSource } from './fetch-estat';
 import type { ResolvedSource } from './catalog';
+import { listCapitalCityAreas } from './capital-city';
 
 export function validateSourceRows(source: ResolvedSource, rows: AnalysisObservation[]): void {
-  if (!source.id || !['prefecture', 'municipality'].includes(source.grain) || !source.years.length ||
+  if (!source.id || !['prefecture', 'municipality', 'capital-city'].includes(source.grain) || !source.years.length ||
       new Set(source.years).size !== source.years.length || !source.metrics.length ||
       new Set(source.metrics.map(metric => metric.id)).size !== source.metrics.length)
     throw Error(`取得元の地域単位・年・指標が空または不正です: ${source.id}`);
-  const expectedAreas = source.grain === 'prefecture' ? PREFECTURE_AREA_CODES :
+  const expectedAreas = source.grain === 'capital-city' ? listCapitalCityAreas().map(area => area.code) : source.grain === 'prefecture' ? PREFECTURE_AREA_CODES :
     listPublishableMunicipalities(buildMunicipalityEntityPolicy()).map(area => area.code);
   const allowedAreas = new Set<string>(expectedAreas);
   const metrics = new Map(source.metrics.map(metric => [metric.id, metric]));
@@ -30,11 +31,13 @@ export function validateSourceRows(source: ResolvedSource, rows: AnalysisObserva
 
 /** Group by actual source table; a logical analysis can join several tables at the same scope and years. */
 export async function fetchResolvedSource(source: ResolvedSource, fetchSource = fetchAnalysisSource) {
-  const tables = [...new Set(source.inputs.map(input => input.statsDataId))];
+  const groupKey = (input: ResolvedSource['inputs'][number]) => JSON.stringify([input.statsDataId, Object.entries(input.filters ?? {}).sort()]);
+  const tables = [...new Set(source.inputs.map(groupKey))];
   const parts: (Awaited<ReturnType<typeof fetchAnalysisSource>> & { request: AnalysisSource })[] = [];
-  for (const statsDataId of tables) {
-    const inputs = source.inputs.filter(input => input.statsDataId === statsDataId);
-    const request: AnalysisSource = { id: source.id, statsDataId, grain: source.grain, years: source.years,
+  for (const table of tables) {
+    const inputs = source.inputs.filter(input => groupKey(input) === table);
+    const { statsDataId, filters } = inputs[0];
+    const request: AnalysisSource = { id: source.id, statsDataId, ...(filters ? { filters } : {}), grain: source.grain, years: source.years,
       metrics: inputs.map(input => ({ id: input.id, code: input.code, label: input.label, unit: input.rawUnit ?? input.unit })) };
     const result = await fetchSource(request);
     parts.push({ ...result, request });
@@ -54,7 +57,7 @@ export function relinkCachedRows(previous: AnalysisSource, source: ResolvedSourc
   if (previous.grain !== source.grain || JSON.stringify(previous.years) !== JSON.stringify(source.years) ||
       previous.metrics.length !== source.inputs.length || new Set(previous.metrics.map(metric => metric.id)).size !== previous.metrics.length ||
       new Set(previous.metrics.map(metric => metric.code)).size !== previous.metrics.length ||
-      source.inputs.some(input => input.statsDataId !== previous.statsDataId))
+      source.inputs.some(input => input.statsDataId !== previous.statsDataId || JSON.stringify(Object.entries(input.filters ?? {}).sort()) !== JSON.stringify(Object.entries(previous.filters ?? {}).sort())))
     throw Error('取得対象が変わりました。原典の再取得が必要です');
   const mapping = new Map(previous.metrics.map(old => {
     const matches = source.inputs.filter(item => item.code === old.code && (item.rawUnit ?? item.unit) === old.unit);

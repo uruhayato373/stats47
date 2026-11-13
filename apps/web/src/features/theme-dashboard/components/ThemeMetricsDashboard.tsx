@@ -51,6 +51,7 @@ interface Props {
   metricGroups?: CatalogMetricGroup[];
   sections?: CatalogSection[];
   embeddedSections?: Record<string, ReactNode>;
+  sectionFooters?: Record<string, ReactNode>;
   /** 全指標のプリロード済みデータ（rankingKey → data） */
   indicatorDataMap: Record<string, ThemeIndicatorData>;
   /** ThemeCatalog から生成し R2 配信するチャート（page_components） */
@@ -142,6 +143,7 @@ export function ThemeMetricsDashboard({
   themeConfig,
   metricGroups,
   sections,
+  sectionFooters,
   embeddedSections = {},
   indicatorDataMap,
   pageCharts,
@@ -670,6 +672,7 @@ export function ThemeMetricsDashboard({
       {chapter.embedded.map((key) => (
         <div key={key} data-embedded-section={key}>{embeddedSections[key]}</div>
       ))}
+      {sectionFooters?.[chapter.key]}
     </PanelGrid>
     );
   };

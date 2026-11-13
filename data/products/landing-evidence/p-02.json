@@ -64,5 +64,248 @@
       }
     ]
   },
-  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2006〜2024年で指標ごとに異なり、時系列データではありません。"
+  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2006〜2024年で指標ごとに異なり、時系列データではありません。",
+  "analysisRevision": {
+    "productId": "P-02",
+    "version": "analysis-20261113",
+    "planSha256": "d6905b41b3e2432b3f66b12d7df9c6e34ecae5077cfb511c260bde097f00ee6b",
+    "resolvedPlanSha256": "3b1d1e17b1a7293512cd7803a59e8a7a5dc13a2b7c6d5813d95b4eab4b89b86e",
+    "sources": [
+      {
+        "id": "municipal-commuters",
+        "inputs": [
+          {
+            "metricKey": "commuters-to-other-municipalities",
+            "statsDataId": "0000020206",
+            "code": "F2705",
+            "unit": "人"
+          }
+        ],
+        "grain": "municipality",
+        "years": [
+          2010,
+          2015,
+          2020
+        ],
+        "retrievedAt": "2026-11-13T01:26:18.210Z",
+        "tableTitle": "Ｆ　労働",
+        "rows": 5223,
+        "areas": 1741,
+        "missing": 6,
+        "coverage": [
+          {
+            "year": 2010,
+            "total": 1741,
+            "kept": 1735,
+            "dropped": 6,
+            "share": 0.996553704767375,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2015,
+            "total": 1741,
+            "kept": 1741,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2020,
+            "total": 1741,
+            "kept": 1741,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          }
+        ],
+        "inputSha256": "ef864a740799d0c8230d9802c8076d72c20c77e4b04fb828d29ea9a693979c04"
+      }
+    ],
+    "results": 1747,
+    "files": [
+      {
+        "file": "data.csv",
+        "sha256": "c3f77a4b815dd9cc82cce3be2be4b526cce20be3f954bb72bb76914551941d02",
+        "bytes": 590285
+      },
+      {
+        "file": "analysis.csv",
+        "sha256": "b89de944c6669680ccedc41461f5ba99db1e800d0a557075805272089de72c4c",
+        "bytes": 281363
+      },
+      {
+        "file": "analysis.xlsx",
+        "sha256": "43e530ab58a8307057806c3640d72a2a1214739eec89e1f06eb381081265162c",
+        "bytes": 255196
+      },
+      {
+        "file": "SOURCES.csv",
+        "sha256": "f3e58331438c71c5de3a430cbe605a647fe9dec3ca41fffdaa482b6533849c16",
+        "bytes": 721
+      },
+      {
+        "file": "LICENSE-ja.txt",
+        "sha256": "07eb760b739ab2c84ce33c7f3fdfaeee5f9f3118dc8efdbc36fccbc0767d4f29",
+        "bytes": 1265
+      },
+      {
+        "file": "analysis-plan.json",
+        "sha256": "e13bfe30bc51470c496185d13f6869f1f107346c87611f12ba718e4381af2093",
+        "bytes": 5531
+      },
+      {
+        "file": "figure-specs.json",
+        "sha256": "dbf7c6dc5a9bf3fddd39672608ff19e29e1976934ee51729621c1bb4d5b37c60",
+        "bytes": 163985
+      },
+      {
+        "file": "README.md",
+        "sha256": "d99ba5ff0efd7073cedebed7c069f772d9441ab2b90e368906e5fe11f0451946",
+        "bytes": 3178
+      },
+      {
+        "file": "READINESS.md",
+        "sha256": "6576547c7e97355fa49fc32178fd85e89046f2b35c0e43b6a3666be68f4c3e0f",
+        "bytes": 192
+      },
+      {
+        "file": "images/national-municipal-outcommuters.png",
+        "sha256": "2ee15e54a77a3535a73801faa4a5c4651a2212580699e540ccec08594c3d9ed9",
+        "bytes": 184167
+      },
+      {
+        "file": "images/municipal-outcommuter-trend.png",
+        "sha256": "5a8ceff771eef1c1937e99cb957df88229576a5841df6af1e747e567d9f98cd8",
+        "bytes": 107241
+      },
+      {
+        "file": "images/analysis-file-preview.png",
+        "sha256": "885ab79aab747f21bf4b26a2d74bf7dc5b8f982210abc07f3c7946ac3e984437",
+        "bytes": 123929
+      },
+      {
+        "file": "inputs/municipal-commuters.json",
+        "sha256": "ef864a740799d0c8230d9802c8076d72c20c77e4b04fb828d29ea9a693979c04",
+        "bytes": 6560164
+      },
+      {
+        "file": "preview-product.json",
+        "sha256": "842b333879dcbdfc3537f8f04e2078ec4b7a0f409448a2040f0cb51a31931968",
+        "bytes": 4933
+      },
+      {
+        "file": "analysis-pack.zip",
+        "sha256": "06b15c949ca62f6be760f6b397597a3032a11d788539ea68dd08d46e79eea643",
+        "bytes": 837458
+      }
+    ]
+  },
+  "analysisDelivery": {
+    "productId": "P-02",
+    "status": "prepared",
+    "version": "analysis-20261113",
+    "sourceManifestSha256": "b96934f39129abedff48ee0bf6be9068f5bbc03bd4c04e3176977fcb798867e3",
+    "planSha256": "d6905b41b3e2432b3f66b12d7df9c6e34ecae5077cfb511c260bde097f00ee6b",
+    "archive": {
+      "bucket": "stats47-private",
+      "key": "note/product-analysis-archives/P-02/analysis-20261113/06b15c949ca62f6be760f6b397597a3032a11d788539ea68dd08d46e79eea643.zip",
+      "sha256": "06b15c949ca62f6be760f6b397597a3032a11d788539ea68dd08d46e79eea643",
+      "bytes": 837458
+    },
+    "attachmentName": "P-02-analysis-20261113-analysis.zip",
+    "snapshot": {
+      "description": "全国の他市区町村への通勤者数の分布と、八王子市・京都市の推移を地図と折れ線で確認できます。",
+      "included": [
+        "他市区町村への通勤者数（1,741地域・2010〜2020年・5,223行、うち欠測6行）",
+        "CSV・Excel、分析結果CSV、共通型の図表PNG、出典・計算方法・取得原票"
+      ],
+      "useCases": [
+        {
+          "title": "採用圏を検討する基礎資料に",
+          "description": "他市区町村へ通勤する人数の全国分布から比較地域を選び、地域を越える通勤の規模を説明できます。"
+        },
+        {
+          "title": "自治体の雇用施策の現状整理に",
+          "description": "国勢調査年の通勤者数の推移を確認し、県別の求人・賃金とは異なる市区町村の動きを整理できます。"
+        }
+      ],
+      "purchaseNotes": [
+        "市区町村の通勤者数を対象とする分析データ追加分です。求人倍率・賃金の県別固定販売版とは分けて確認してください。"
+      ],
+      "showcaseNote": "分析の図は追加ファイルに同梱する観測値から計算しています。既存の固定版とは対象地域・基準年・収録形式が異なるため、各図の条件と出典を確認してください。",
+      "showcase": [
+        {
+          "id": "national-municipal-outcommuters",
+          "kind": "chart",
+          "heading": "他市区町村へ通勤する人数を全国で見る",
+          "lead": "2020年に他市区町村へ通勤した人数を全国地図で確認します。人数の大きい地域を位置関係とともに示し、詳しく比較する地域を選べます。",
+          "note": "通勤者の実人数であり、域外通勤の割合や移動距離は示しません。総人口を労働供給とみなしたり、県別求人倍率を自治体へ割り振ったりしません。",
+          "themeRefs": [
+            {
+              "themeKey": "labor-mobility",
+              "sectionKey": "regional-commute-and-daytime-population",
+              "title": "人材流動性・雇用環境",
+              "sectionTitle": "職住近接や他市区町村への通勤など就業者の移動実態はどうなっているか",
+              "href": "/themes/labor-mobility#theme-section-regional-commute-and-daytime-population"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261113-national-municipal-outcommuters.png",
+              "alt": "全国の他市区町村への通勤者数（全国の市町村・特別区・2020年）",
+              "template": "choropleth",
+              "sha256": "2ee15e54a77a3535a73801faa4a5c4651a2212580699e540ccec08594c3d9ed9"
+            }
+          ]
+        },
+        {
+          "id": "municipal-outcommuter-trend",
+          "kind": "chart",
+          "heading": "他地域へ通勤する人数の推移を比べる",
+          "lead": "八王子市と京都市について、2010・2015・2020年の他市区町村への通勤者数を比較します。通勤の規模がどう変わったかを、自治体の雇用施策の説明資料にできます。",
+          "note": "人数の増減は人口規模や就業構成にも影響されます。通勤のしやすさや採用成功の因果関係は示しません。",
+          "themeRefs": [
+            {
+              "themeKey": "labor-mobility",
+              "sectionKey": "regional-commute-and-daytime-population",
+              "title": "人材流動性・雇用環境",
+              "sectionTitle": "職住近接や他市区町村への通勤など就業者の移動実態はどうなっているか",
+              "href": "/themes/labor-mobility#theme-section-regional-commute-and-daytime-population"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261113-municipal-outcommuter-trend.png",
+              "alt": "他市区町村への通勤者数の推移（八王子市・京都市・2010〜2020年）",
+              "template": "line",
+              "sha256": "5a8ceff771eef1c1937e99cb957df88229576a5841df6af1e747e567d9f98cd8"
+            }
+          ]
+        },
+        {
+          "kind": "file",
+          "heading": "ファイルの中身",
+          "lead": "地域コード・地域名・年・指標・値・単位を列に持つCSVとExcelです。観測値と分析結果を分け、欠測は理由付きで保持します。",
+          "figures": [
+            {
+              "file": "analysis-20261113-analysis-file-preview.png",
+              "alt": "市区町村の他地域への通勤を読むデータ集のCSV見本",
+              "template": "file-preview",
+              "sha256": "885ab79aab747f21bf4b26a2d74bf7dc5b8f982210abc07f3c7946ac3e984437"
+            }
+          ],
+          "id": "analysis-file-2"
+        }
+      ]
+    }
+  }
 }

@@ -292,7 +292,8 @@
     "note:cards:repair-native": "node .claude/scripts/note/repair-note-cards-native.mjs",
     "products:analysis:build": "tsx .claude/scripts/products/build-analysis-pack.ts",
     "products:analysis:check": "tsx .claude/scripts/products/build-analysis-pack.ts --check",
-    "products:analysis:catalog": "tsx .claude/scripts/products/check-analysis-catalog.ts"
+    "products:analysis:catalog": "tsx .claude/scripts/products/check-analysis-catalog.ts",
+    "products:analysis:release": "tsx .claude/scripts/products/release-analysis-pack.ts"
   },
   "devDependencies": {
     "@remotion/bundler": "4.0.517",

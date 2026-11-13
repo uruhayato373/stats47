@@ -105,5 +105,238 @@
       }
     ]
   },
-  "showcaseNote": "図は収録CSVの値から作成し、地図の描画には国土数値情報の行政区域データを使用しています。同梱GeoJSONは、令和2年国勢調査の境界データを自治体単位にまとめたものです（2020年10月1日時点）。"
+  "showcaseNote": "図は収録CSVの値から作成し、地図の描画には国土数値情報の行政区域データを使用しています。同梱GeoJSONは、令和2年国勢調査の境界データを自治体単位にまとめたものです（2020年10月1日時点）。",
+  "analysisRevision": {
+    "productId": "MUNI-MANUFACTURING",
+    "version": "analysis-20261113",
+    "planSha256": "c3e204968bb53e7f7629c70545d81b91c516e2510647d5982ea683b3c72f796a",
+    "resolvedPlanSha256": "56627f8d3fe4850f4b4cf9d72255f83edb7d84e5f89c1d53e1741d6d0f0f66c2",
+    "sources": [
+      {
+        "id": "municipal-manufacturing",
+        "inputs": [
+          {
+            "metricKey": "manufacturing-shipment-amount",
+            "statsDataId": "0000020203",
+            "code": "C3401",
+            "unit": "百万円"
+          }
+        ],
+        "grain": "municipality",
+        "years": [
+          2022,
+          2023
+        ],
+        "retrievedAt": "2026-11-13T01:25:29.462Z",
+        "tableTitle": "Ｃ　経済基盤",
+        "rows": 3482,
+        "areas": 1741,
+        "missing": 114,
+        "coverage": [
+          {
+            "year": 2022,
+            "total": 1741,
+            "kept": 1684,
+            "dropped": 57,
+            "share": 0.9672601952900631,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2023,
+            "total": 1741,
+            "kept": 1684,
+            "dropped": 57,
+            "share": 0.9672601952900631,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          }
+        ],
+        "inputSha256": "3bce9b1dbfa6050ef6a95947651f61b32668eb8c4702ede4f5e23ecb8416451b"
+      }
+    ],
+    "results": 1745,
+    "files": [
+      {
+        "file": "data.csv",
+        "sha256": "9745120357f72ebcf51b3935ad9504a7504bfbcdac953bac5414ecbfa0d9a4dc",
+        "bytes": 417664
+      },
+      {
+        "file": "analysis.csv",
+        "sha256": "5c8a74c615769fe885289448a2afb28650b01ccb1e7738c658b690ec52862eb1",
+        "bytes": 278374
+      },
+      {
+        "file": "analysis.xlsx",
+        "sha256": "c45335fb6c359ddb87a0e19f22b778ef4af83200b8712589a41093e2bff42e0b",
+        "bytes": 199811
+      },
+      {
+        "file": "SOURCES.csv",
+        "sha256": "e14da10a1944ab8c7bd34451659f93b2d8beb7d4598611c92b815cd9ddfa1f0d",
+        "bytes": 895
+      },
+      {
+        "file": "LICENSE-ja.txt",
+        "sha256": "07eb760b739ab2c84ce33c7f3fdfaeee5f9f3118dc8efdbc36fccbc0767d4f29",
+        "bytes": 1265
+      },
+      {
+        "file": "analysis-plan.json",
+        "sha256": "13fccd96e1d9bbabf54bdb305168076069749a6528323af5e4e1f5508d43a080",
+        "bytes": 5861
+      },
+      {
+        "file": "figure-specs.json",
+        "sha256": "1251bd97586e52dd3f9587245c13d46024554c0fc8608b895e3c11267be0a064",
+        "bytes": 165552
+      },
+      {
+        "file": "README.md",
+        "sha256": "6cb3f52dd833c292fe9702f8743d3687c571da727738d4096175027a51d7c0c6",
+        "bytes": 3150
+      },
+      {
+        "file": "READINESS.md",
+        "sha256": "6576547c7e97355fa49fc32178fd85e89046f2b35c0e43b6a3666be68f4c3e0f",
+        "bytes": 192
+      },
+      {
+        "file": "images/national-municipal-manufacturing-scale.png",
+        "sha256": "098dff017255d7c5b1a241766df96e75835da4dc6c66f8d7e9f6c0b978dbf504",
+        "bytes": 167297
+      },
+      {
+        "file": "images/municipal-manufacturing-trend.png",
+        "sha256": "7c653d2e22a00522385f737e90e8ff90380bb6cf0d4bb26e050a3e125719e85f",
+        "bytes": 105445
+      },
+      {
+        "file": "images/analysis-file-preview.png",
+        "sha256": "89f24f4c022f658bb32a911f337a291c1c5a5dcb5dbb74aa73fd6303cee6ac95",
+        "bytes": 124233
+      },
+      {
+        "file": "inputs/municipal-manufacturing.json",
+        "sha256": "3bce9b1dbfa6050ef6a95947651f61b32668eb8c4702ede4f5e23ecb8416451b",
+        "bytes": 25629894
+      },
+      {
+        "file": "preview-product.json",
+        "sha256": "c75dfec23b695e05779ba3ec102acd48018a29deb4ea1a68b72a1af0afbb0067",
+        "bytes": 4934
+      },
+      {
+        "file": "analysis-pack.zip",
+        "sha256": "67846ae6c44100c786ce29d1295a005b3fd69e37a7398dc34ea47570442dc130",
+        "bytes": 1329308
+      }
+    ]
+  },
+  "analysisDelivery": {
+    "productId": "MUNI-MANUFACTURING",
+    "status": "prepared",
+    "version": "analysis-20261113",
+    "sourceManifestSha256": "d9562018ebac33043d940d95a8d3c640459969cb7a2939d47135ce99d58d9f6e",
+    "planSha256": "c3e204968bb53e7f7629c70545d81b91c516e2510647d5982ea683b3c72f796a",
+    "archive": {
+      "bucket": "stats47-private",
+      "key": "note/product-analysis-archives/MUNI-MANUFACTURING/analysis-20261113/67846ae6c44100c786ce29d1295a005b3fd69e37a7398dc34ea47570442dc130.zip",
+      "sha256": "67846ae6c44100c786ce29d1295a005b3fd69e37a7398dc34ea47570442dc130",
+      "bytes": 1329308
+    },
+    "attachmentName": "MUNI-MANUFACTURING-analysis-20261113-analysis.zip",
+    "snapshot": {
+      "description": "2023年の製造品出荷額等の地域比較と2022〜2023年の推移を分け、製造業の名目金額の規模を説明できます。",
+      "included": [
+        "製造品出荷額等（1,741地域・2022〜2023年・3,482行、うち欠測114行）",
+        "CSV・Excel、分析結果CSV、共通型の図表PNG、出典・計算方法・取得原票"
+      ],
+      "useCases": [
+        {
+          "title": "産業振興の現状説明に",
+          "description": "2023年の製造品出荷額等の分布から比較地域を選び、名目金額の規模を説明できます。"
+        },
+        {
+          "title": "地域経済の比較資料に",
+          "description": "豊田市・大阪市の2022〜2023年の値を比較し、同じ調査対象の金額の変化を整理できます。"
+        }
+      ],
+      "purchaseNotes": [
+        "この改訂分析では出荷額の規模と推移を扱います。従業者数との結合や生産性の計算は行っていません。",
+        "分析データ追加分の取得範囲は全国1741自治体で、既存の1719自治体を含む固定販売版とは異なります。固定販売版の収録範囲が増えたことを示すものではありません。",
+        "2023年の1741自治体には秘匿Xが57自治体、実値0が15自治体あります。秘匿・欠測は数値0と区別します。"
+      ],
+      "showcaseNote": "分析の図は追加ファイルに同梱する観測値から計算しています。既存の固定版とは対象地域・基準年・収録形式が異なるため、各図の条件と出典を確認してください。",
+      "showcase": [
+        {
+          "id": "national-municipal-manufacturing-scale",
+          "kind": "chart",
+          "heading": "製造品出荷額等を全国の市区町村で見る",
+          "lead": "2023年の製造品出荷額等を全国の市町村・特別区の地図で確認します。製造業の規模が大きい地域の分布を、位置関係とともに説明できます。",
+          "note": "従業者4人以上の事業所の名目金額です。付加価値・利益や生産性ではありません。秘匿のXと実値0を区別し、欠測を0に置き換えません。",
+          "themeRefs": [
+            {
+              "themeKey": "manufacturing",
+              "sectionKey": "production",
+              "title": "製造業",
+              "sectionTitle": "生産規模",
+              "href": "/themes/manufacturing#theme-section-production"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261113-national-municipal-manufacturing-scale.png",
+              "alt": "2023年の製造品出荷額等（全国の市町村・特別区・2023年）",
+              "template": "choropleth",
+              "sha256": "098dff017255d7c5b1a241766df96e75835da4dc6c66f8d7e9f6c0b978dbf504"
+            }
+          ]
+        },
+        {
+          "id": "municipal-manufacturing-trend",
+          "kind": "chart",
+          "heading": "2022〜2023年の名目金額の推移を見る",
+          "lead": "豊田市・大阪市の2022・2023年の製造品出荷額等を折れ線で比較します。地域間の規模の違いと、同じ地域の2年の変化を分けて確認できます。",
+          "note": "比較期間は2年です。長期傾向や変化の原因を断定せず、物価変動を含む名目金額として読みます。従業者あたり出荷額や付加価値を示す図ではありません。",
+          "themeRefs": [
+            {
+              "themeKey": "manufacturing",
+              "sectionKey": "production",
+              "title": "製造業",
+              "sectionTitle": "生産規模",
+              "href": "/themes/manufacturing#theme-section-production"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261113-municipal-manufacturing-trend.png",
+              "alt": "製造品出荷額等の推移（豊田市・大阪市・2022〜2023年）",
+              "template": "line",
+              "sha256": "7c653d2e22a00522385f737e90e8ff90380bb6cf0d4bb26e050a3e125719e85f"
+            }
+          ]
+        },
+        {
+          "kind": "file",
+          "heading": "ファイルの中身",
+          "lead": "地域コード・地域名・年・指標・値・単位を列に持つCSVとExcelです。観測値と分析結果を分け、欠測は理由付きで保持します。",
+          "figures": [
+            {
+              "file": "analysis-20261113-analysis-file-preview.png",
+              "alt": "製造品出荷額等の規模と推移を読むデータ集のCSV見本",
+              "template": "file-preview",
+              "sha256": "89f24f4c022f658bb32a911f337a291c1c5a5dcb5dbb74aa73fd6303cee6ac95"
+            }
+          ],
+          "id": "analysis-file-2"
+        }
+      ]
+    }
+  }
 }

@@ -95,7 +95,10 @@ export async function buildProductLandingAssets(productId: string, archiveCache?
     'PDFデータブック・地図PNG', ...(source.files.some((file: string) => file.endsWith('.svg')) ? ['編集用の地図SVG'] : []),
     '出典一覧（SOURCES.csv）・利用条件',
   ];
+  const evidencePath = path.join(ROOT, datasetDir('products.landing-evidence'), `${productId.toLowerCase()}.json`);
+  const previous = fs.existsSync(evidencePath) ? readJson(path.relative(ROOT, evidencePath)) : {};
   const evidence = {
+    ...previous,
     productId, deliveryVersion: path.basename(delivery.artifactDirectory), manifestSha256: delivery.manifestSha256,
     sourceArchive: { bucket: archive.bucket, key: archive.key, sha256: archive.sha256 },
     selectedMetrics: [...selected.values()].map(({ key, title, year, unit }) => ({ key, title, year, unit })),
@@ -106,7 +109,6 @@ export async function buildProductLandingAssets(productId: string, archiveCache?
     showcaseNote: `図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は${years[0]}〜${years.at(-1)}年で指標ごとに異なり、時系列データではありません。`,
   };
   assertDatasetShape('products.landing-evidence', evidence);
-  const evidencePath = path.join(ROOT, datasetDir('products.landing-evidence'), `${productId.toLowerCase()}.json`);
   fs.mkdirSync(path.dirname(evidencePath), { recursive: true });
   fs.writeFileSync(evidencePath, `${JSON.stringify(evidence, null, 2)}\n`);
   return { productId, figures: specs.length, indicators: source.metrics.length, output: out };

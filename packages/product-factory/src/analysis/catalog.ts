@@ -1,11 +1,12 @@
 import { METRICS_REGISTRY } from '@stats47/data-configs/registry';
 import { buildRecipe } from '@stats47/data-configs/recipe';
 import { prefToCityStatsDataId } from '@stats47/data-configs/ssds/entity-source';
-import { isCapitalCityValueMetric } from '@stats47/data-configs/provenance';
+import { isCapitalCityValueMetric, resolveAttribution } from '@stats47/data-configs/provenance';
 import { getMunicipalityMetricAvailability } from '@stats47/data-configs/geo-scope';
 import { parseUnit } from '@stats47/data-configs/unit';
 import type { MetricConfig } from '@stats47/data-configs';
 import type { AnalysisRevision } from './compute';
+import type { AnalysisAxis } from './coverage';
 
 export type AnalysisScope = 'prefecture' | 'municipality' | 'capital-city';
 export interface AnalysisInput { metricKey: string; variantId?: string }
@@ -15,18 +16,19 @@ export interface SourceVariant {
   yearFormat: 'calendar' | 'fiscal'; definition: string; url: string;
 }
 export interface SourcePlan {
-  id: string; title: string; grain: 'prefecture' | 'municipality'; years: number[];
+  id: string; title: string; grain: 'prefecture' | 'municipality' | 'capital-city'; years: number[];
   inputs: AnalysisInput[]; definition: string; boundary: string;
 }
 export interface AuthoredAnalysisRevision extends Omit<AnalysisRevision, 'sources'> { sources: SourcePlan[] }
 export interface ProductAnalysisPlan {
   objective: string;
+  axes: AnalysisAxis[];
   inputs: (AnalysisInput & { scope: AnalysisScope; decision: 'use' | 'investigate' | 'exclude'; reason: string })[];
   analysisRefs: string[]; figureRefs: string[]; reuseProducts: string[]; limitations: string[];
 }
 export interface ResolvedInput {
   metricKey: string; variantId?: string; id: string; code: string; label: string; unit: string; rawUnit?: string;
-  statsDataId: string; url: string; yearFormat: NonNullable<MetricConfig['yearFormat']>; definition: string;
+  statsDataId: string; filters?: Record<string, string>; url: string; yearFormat: NonNullable<MetricConfig['yearFormat']>; definition: string;
 }
 export type ResolvedSource = AnalysisRevision['sources'][number] & {
   inputs: ResolvedInput[];
@@ -70,9 +72,10 @@ export function resolveAnalysisInput(input: AnalysisInput, scope: SourcePlan['gr
   const source = scope === 'municipality' && metric.citySource ? metric.citySource : metric.source;
   const recipe = buildRecipe({ ...metric, source });
   const params = recipe.estatParams;
-  if (!params?.cdCat01 || Object.keys(recipe.ops ?? {}).some(key => key !== 'supplements') ||
+  const capital = scope === 'capital-city' && source.kind === 'kakei-chousa';
+  if (!params?.cdCat01 || Object.keys(recipe.ops ?? {}).some(key => key !== 'supplements' && !(capital && key === 'areaRemap')) ||
       recipe.ops?.supplements?.some(item => item.years.some(year => years.includes(year))) ||
-      Object.keys(params).some(key => !['statsDataId', 'cdCat01'].includes(key)))
+      Object.keys(params).some(key => !['statsDataId', 'cdCat01', ...(capital ? ['cdCat02', 'cdCat03', 'cdCat04', 'cdCat05', 'cdTab'] : [])].includes(key)))
     throw Error(`分析用の原典取得に未対応の分類・加工があります: ${input.metricKey}`);
   const statsDataId = scope === 'municipality' && !metric.citySource ? prefToCityStatsDataId(params.statsDataId) : params.statsDataId;
   if (!statsDataId) throw Error(`対応する市区町村の原典がありません: ${input.metricKey}`);
@@ -81,7 +84,8 @@ export function resolveAnalysisInput(input: AnalysisInput, scope: SourcePlan['gr
     throw Error(`市区町村の項目コードの確認と別定義の登録が必要です: ${input.metricKey}`);
   return {
     metricKey: metric.key, id: metric.key, code: params.cdCat01, label: metric.title, unit: metric.unit,
-    statsDataId, url: `https://www.e-stat.go.jp/dbview?sid=${statsDataId}`,
+    statsDataId, ...(capital ? { filters: Object.fromEntries(Object.entries(params).filter(([key]) => !['statsDataId', 'cdCat01'].includes(key))) } : {}),
+    url: `https://www.e-stat.go.jp/dbview?sid=${statsDataId}`,
     yearFormat: metric.yearFormat ?? 'calendar', definition: metric.description ?? metric.subtitle ?? metric.title,
   };
 }
@@ -91,7 +95,7 @@ export function resolveAnalysisRevision(plan: AuthoredAnalysisRevision, variants
   if (!plan.sources.length || new Set(plan.sources.map(source => source.id)).size !== plan.sources.length)
     throw Error('分析取得元が空または重複しています');
   const sources = plan.sources.map(source => {
-    if (!['prefecture', 'municipality'].includes(source.grain) || !source.years.length ||
+    if (!['prefecture', 'municipality', 'capital-city'].includes(source.grain) || !source.years.length ||
         new Set(source.years).size !== source.years.length || source.years.some(year => !Number.isInteger(year) || year < 1900 || year > 2100))
       throw Error(`分析の地域単位または年が不正です: ${source.id}`);
     if (!source.inputs.length || new Set(source.inputs.map(input => input.metricKey)).size !== source.inputs.length)
@@ -99,12 +103,16 @@ export function resolveAnalysisRevision(plan: AuthoredAnalysisRevision, variants
     const inputs = source.inputs.map(input => resolveAnalysisInput(input, source.grain, variants, registry, source.years));
     if (new Set(inputs.map(input => input.yearFormat)).size !== 1)
       throw Error(`暦年と年度を同じ分析へ結合できません: ${source.id}`);
-    if (new Set(inputs.map(input => `${input.statsDataId}/${input.code}`)).size !== inputs.length)
+    if (new Set(inputs.map(input => `${input.statsDataId}/${input.code}/${JSON.stringify(input.filters ?? {})}`)).size !== inputs.length)
       throw Error(`同じ原典座標に複数の指標を割り当てています: ${source.id}`);
     return { ...source, inputs, metrics: inputs.map(({ id, code, label, unit }) => ({ id, code, label, unit })),
-      label: [...new Set(inputs.map(input => {
-        const origin = registry[input.metricKey].source;
-        return 'displayName' in origin ? origin.displayName ?? '政府統計' : '政府統計';
+      // 別定義で取得表を変えた場合も、実際の原典座標から出典台帳を引く。
+      // 元metricの表示名を使うと、県の図へ「市区町村」と焼き込むことがある。
+      label: [...new Set(inputs.flatMap(input => {
+        const attribution = resolveAttribution(input.statsDataId, input.code);
+        const labels = attribution.compilation ? [attribution.compilation.name] : attribution.originalSurveys.map(survey => survey.name);
+        if (!labels.length) throw Error(`出典台帳に原典がありません: ${input.statsDataId}/${input.code}`);
+        return labels;
       }))].join('・'),
       url: inputs[0].url,
       ...(new Set(inputs.map(input => input.statsDataId)).size === 1 ? { statsDataId: inputs[0].statsDataId } : {}),

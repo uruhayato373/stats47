@@ -10,8 +10,11 @@ export async function inspectLandingArchive(bytes, archive, delivery) {
   if (bytes.length !== archive.bytes || sha256(bytes) !== archive.sha256) throw Error('固定納品ZIPのSHA/サイズが一致しません');
   const zip = await JSZip.loadAsync(bytes);
   const entries = Object.values(zip.files).filter((entry) => !entry.dir);
+  const roots = new Set(entries.map((entry) => entry.name.split('/')[0]));
+  const prefix = zip.file('data.csv') ? '' : roots.size === 1 ? `${[...roots][0]}/` : '';
+  if (entries.some((entry) => entry.name.includes('..') || entry.name.includes('\\'))) throw Error('固定納品ZIPのパスが不正です');
   const read = async (name) => {
-    const entry = zip.file(name);
+    const entry = zip.file(`${prefix}${name}`);
     if (!entry) throw Error(`固定納品ZIPに ${name} がありません`);
     return entry.async('nodebuffer');
   };
@@ -31,7 +34,7 @@ export async function inspectLandingArchive(bytes, archive, delivery) {
       header: rows[0][i + 2], column: i + 2 };
   });
   if (new Set(metrics.map((metric) => metric.key)).size !== metrics.length) throw Error('固定納品の指標キーが重複しています');
-  return { rows, metrics, files: entries.map((entry) => entry.name).sort(),
+  return { rows, metrics, files: entries.map((entry) => entry.name.slice(prefix.length)).sort(),
     dataSha256: sha256(csv), sourcesSha256: sha256(sourceCsv) };
 }
 

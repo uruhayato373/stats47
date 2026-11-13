@@ -1061,6 +1061,10 @@
       ],
       "consumers": [
         {
+          "pageId": "product:data-p-04",
+          "kind": "product-analysis"
+        },
+        {
           "pageId": "ranking:assistance-expenses-prefecture",
           "kind": "ranking"
         }

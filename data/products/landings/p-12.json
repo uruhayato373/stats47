@@ -25,7 +25,13 @@
       "metricKeys": [
         "total-population"
       ],
-      "preferredTemplate": "bar"
+      "preferredTemplate": "bar",
+      "themeRefs": [
+        {
+          "themeKey": "population-dynamics",
+          "sectionKey": "population-change"
+        }
+      ]
     },
     {
       "id": "tourism-overview",
@@ -34,7 +40,13 @@
       "metricKeys": [
         "total-overnight-guests"
       ],
-      "preferredTemplate": "choropleth"
+      "preferredTemplate": "choropleth",
+      "themeRefs": [
+        {
+          "themeKey": "tourism",
+          "sectionKey": "stays"
+        }
+      ]
     },
     {
       "id": "industry-overview",
@@ -43,7 +55,13 @@
       "metricKeys": [
         "manufacturing-shipment-amount"
       ],
-      "preferredTemplate": "bar"
+      "preferredTemplate": "bar",
+      "themeRefs": [
+        {
+          "themeKey": "manufacturing",
+          "sectionKey": "production"
+        }
+      ]
     }
   ],
   "purchaseNotes": [
@@ -89,6 +107,175 @@
     ],
     "limitations": [
       "分野間で基準年・地域単位・分母が一致するとは限らない。採用元の分析条件を保持し、改訂案の存在と販売中の収録内容を分ける。"
+    ],
+    "axes": [
+      {
+        "axis": "trend",
+        "decision": "required",
+        "reason": "比較可能な年度の変化を、計算結果と作成例で示す。",
+        "recipeRefs": [
+          "P-01/national-municipality-change",
+          "P-01/municipality-change",
+          "P-01/population-household-trend",
+          "P-01/municipal-household-size-trend",
+          "P-01/single-household-trend",
+          "P-01/elderly-household-trend",
+          "P-01/population-flow-trend",
+          "P-02/municipal-outcommuter-trend",
+          "P-03/tokyo-overnight-stays-trend",
+          "P-03/tokyo-foreign-overnight-share",
+          "P-04/prefecture-budget-trend",
+          "P-04/prefecture-budget-revenue",
+          "P-04/prefecture-budget-purpose",
+          "P-04/prefecture-budget-nature",
+          "P-04/municipal-budget-trend",
+          "P-04/municipal-budget-revenue",
+          "P-04/municipal-budget-purpose",
+          "P-04/municipal-budget-nature",
+          "P-07/municipal-vacancy-share-trend",
+          "P-09/prefecture-manufacturing-trend",
+          "P-10/municipal-garbage-collection-trend",
+          "P-14/beef-expenditure-trend",
+          "P-14/beef-quantity-trend"
+        ]
+      },
+      {
+        "axis": "composition",
+        "decision": "required",
+        "reason": "同じ地域・年度・母集団の全体と部分を使い、構成割合を示す。",
+        "recipeRefs": [
+          "P-01/single-household-trend",
+          "P-01/elderly-household-trend",
+          "P-01/elderly-single-household-map",
+          "P-01/elderly-couple-household-map",
+          "P-01/municipal-single-household-map",
+          "P-03/tokyo-foreign-overnight-share",
+          "P-04/prefecture-budget-revenue",
+          "P-04/prefecture-budget-purpose",
+          "P-04/prefecture-budget-nature",
+          "P-04/municipal-budget-revenue",
+          "P-04/municipal-budget-purpose",
+          "P-04/municipal-budget-nature",
+          "P-05/elderly-population-share",
+          "P-07/municipal-vacancy-share-trend",
+          "P-07/municipal-vacancy-share-2023"
+        ]
+      },
+      {
+        "axis": "comparison",
+        "decision": "required",
+        "reason": "同じ年・定義・地域単位の複数地域を、計算結果と作成例で比較する。",
+        "recipeRefs": [
+          "P-01/national-municipality-change",
+          "P-01/municipality-change",
+          "P-01/municipal-household-size-trend",
+          "P-01/elderly-single-household-map",
+          "P-01/elderly-couple-household-map",
+          "P-01/municipal-single-household-map",
+          "P-02/national-municipal-outcommuters",
+          "P-02/municipal-outcommuter-trend",
+          "P-04/national-municipal-fiscal-strength",
+          "P-04/municipal-fiscal-strength",
+          "P-04/municipal-current-balance",
+          "P-05/national-clinics-per-population",
+          "P-05/clinics-per-population",
+          "P-05/municipal-clinic-count",
+          "P-05/elderly-population-share",
+          "P-06/national-pupils-per-teacher",
+          "P-06/pupils-per-teacher",
+          "P-06/municipal-pupil-count",
+          "P-06/pupils-per-school",
+          "P-07/municipal-vacancy-share-trend",
+          "P-07/municipal-vacancy-share-2023",
+          "P-08/national-municipal-sales-scale",
+          "P-08/municipal-sales-scale",
+          "P-08/municipal-sales-per-resident",
+          "P-09/prefecture-manufacturing-scale-2023",
+          "P-09/prefecture-manufacturing-trend",
+          "P-10/national-garbage-collection-population",
+          "P-10/municipal-garbage-collection-trend",
+          "P-14/beef-expenditure-trend",
+          "P-14/beef-quantity-trend"
+        ]
+      }
+    ]
+  },
+  "analysisReuse": {
+    "version": "analysis-20261113",
+    "title": "地域分析データ 総合集",
+    "description": "人口、財政、医療、教育、商業などの分析データを、検証済みの商品別ZIPでまとめます。分野に合う地域・年・単位を保ち、必要なデータと図を選んで利用できます。",
+    "useCases": [
+      {
+        "title": "複数分野の地域資料を作る",
+        "description": "市区町村の人口・公共サービス・産業の図を、共通のサイズで資料に並べられます。"
+      },
+      {
+        "title": "必要な分野から分析を始める",
+        "description": "各商品のCSV・Excelと計算方法を使い、出典と条件をたどりながら比較できます。"
+      }
+    ],
+    "notes": [
+      "分析の追加ファイルは、列挙した版の分析データをまとめたものです。販売中の固定版の収録内容とは異なります。",
+      "対象地域・基準年・調査定義は分野ごとに異なります。異なる年や対象の値を無条件に結合しないでください。",
+      "元商品の利用条件を引き継ぎます。図の対象・年・単位・欠測条件と利用条件を確認してご利用ください。"
+    ],
+    "format": "packs",
+    "examples": [
+      {
+        "productId": "P-01",
+        "version": "analysis-20261112",
+        "recipeId": "national-municipality-change"
+      },
+      {
+        "productId": "P-02",
+        "version": "analysis-20261113",
+        "recipeId": "national-municipal-outcommuters"
+      },
+      {
+        "productId": "P-03",
+        "version": "analysis-20261113",
+        "recipeId": "tokyo-overnight-stays-trend"
+      },
+      {
+        "productId": "P-04",
+        "version": "analysis-20261112",
+        "recipeId": "national-municipal-fiscal-strength"
+      },
+      {
+        "productId": "P-05",
+        "version": "analysis-20261112",
+        "recipeId": "national-clinics-per-population"
+      },
+      {
+        "productId": "P-06",
+        "version": "analysis-20261112",
+        "recipeId": "national-pupils-per-teacher"
+      },
+      {
+        "productId": "P-07",
+        "version": "analysis-20261113",
+        "recipeId": "municipal-vacancy-share-trend"
+      },
+      {
+        "productId": "P-08",
+        "version": "analysis-20261112",
+        "recipeId": "national-municipal-sales-scale"
+      },
+      {
+        "productId": "P-09",
+        "version": "analysis-20261113",
+        "recipeId": "prefecture-manufacturing-scale-2023"
+      },
+      {
+        "productId": "P-10",
+        "version": "analysis-20261113",
+        "recipeId": "national-garbage-collection-population"
+      },
+      {
+        "productId": "P-14",
+        "version": "analysis-20261113",
+        "recipeId": "beef-expenditure-trend"
+      }
     ]
   }
 }

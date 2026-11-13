@@ -1746,6 +1746,10 @@
           "kind": "municipality-theme"
         },
         {
+          "pageId": "product:data-p-07",
+          "kind": "product-analysis"
+        },
+        {
           "pageId": "ranking:total-dwellings",
           "kind": "ranking"
         }
@@ -1786,6 +1790,10 @@
           "kind": "municipality-theme"
         },
         {
+          "pageId": "product:data-p-04",
+          "kind": "product-analysis"
+        },
+        {
           "pageId": "ranking:total-expenditure-municipal",
           "kind": "ranking"
         }
@@ -1820,6 +1828,10 @@
         "total-population"
       ],
       "consumers": [
+        {
+          "pageId": "product:data-p-04",
+          "kind": "product-analysis"
+        },
         {
           "pageId": "ranking:total-expenditure-prefecture",
           "kind": "ranking"
@@ -5632,6 +5644,10 @@
         {
           "pageId": "municipality-theme:local-finance",
           "kind": "municipality-theme"
+        },
+        {
+          "pageId": "product:data-p-04",
+          "kind": "product-analysis"
         },
         {
           "pageId": "ranking:total-revenue-municipal",

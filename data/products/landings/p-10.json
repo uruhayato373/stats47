@@ -25,7 +25,13 @@
       "metricKeys": [
         "sewerage-penetration-rate-2012on"
       ],
-      "preferredTemplate": "choropleth"
+      "preferredTemplate": "choropleth",
+      "themeRefs": [
+        {
+          "themeKey": "water-services",
+          "sectionKey": "water-sewerage-coverage"
+        }
+      ]
     },
     {
       "id": "disaster-losses",
@@ -34,7 +40,13 @@
       "metricKeys": [
         "disaster-damage-amount-per-person"
       ],
-      "preferredTemplate": "bar"
+      "preferredTemplate": "bar",
+      "themeRefs": [
+        {
+          "themeKey": "safety",
+          "sectionKey": "natural-disaster-impact"
+        }
+      ]
     }
   ],
   "purchaseNotes": [
@@ -42,7 +54,7 @@
     "指標ごとに対象年・単位・集計範囲が異なります。下水道普及率だけで生活インフラ全体を評価せず、各指標の説明と併せて確認してください。"
   ],
   "analysisPlan": {
-    "objective": "人口変化に対する生活インフラの整備状況を確認し、災害被害の実績とは分けて地域を比較する。採用・調査対象は改訂設計であり、販売中の固定納品への追加を示しません。",
+    "objective": "ごみ収集区域の人口を全国地図で確認し、豊田市・大阪市の年度別の推移を比較できます。災害被害の実績とは分けて生活インフラの対象規模を整理します。 採用対象は改訂分析であり、販売中の固定納品への追加を示しません。",
     "inputs": [
       {
         "metricKey": "sewerage-penetration-rate-2012on",
@@ -59,8 +71,8 @@
       {
         "metricKey": "garbage-collection-population",
         "scope": "municipality",
-        "decision": "investigate",
-        "reason": "収集対象人口と人口総数の時点・対象範囲を確認し、行政サービスの対象規模を比較する候補。"
+        "decision": "use",
+        "reason": "原典で対象・年・単位を確認した改訂分析の入力。各年度10月1日現在の住民基本台帳に基づく、ごみ収集区域内の計画収集人口。2015・2020・2023年度の人数を比較する。国勢調査人口とは定義・時点が異なるため、国勢調査人口を分母とする普及率にはしない。"
       },
       {
         "metricKey": "total-population",
@@ -74,6 +86,140 @@
     "reuseProducts": [],
     "limitations": [
       "災害被害額の実績は将来の危険度を示さない。行政サービスの対象人口と国勢調査人口の定義差を確認する。"
+    ],
+    "axes": [
+      {
+        "axis": "trend",
+        "decision": "required",
+        "reason": "比較可能な年度の変化を、計算結果と作成例で示す。",
+        "recipeRefs": [
+          "municipal-garbage-collection-trend"
+        ]
+      },
+      {
+        "axis": "composition",
+        "decision": "deferred",
+        "reason": "ごみ計画収集人口は全人口の内数と断定できない。国勢調査人口で割って普及率とせず、原典の対象範囲が一致する分母を確認する。",
+        "recipeRefs": []
+      },
+      {
+        "axis": "comparison",
+        "decision": "required",
+        "reason": "同じ年・定義・地域単位の複数地域を、計算結果と作成例で比較する。",
+        "recipeRefs": [
+          "national-garbage-collection-population",
+          "municipal-garbage-collection-trend"
+        ]
+      }
     ]
+  },
+  "analysisRevision": {
+    "title": "市区町村のごみ計画収集人口を読むデータ集",
+    "description": "ごみ収集区域の人口を全国地図で確認し、豊田市・大阪市の年度別の推移を比較できます。災害被害の実績とは分けて生活インフラの対象規模を整理します。",
+    "useCases": [
+      {
+        "title": "廃棄物行政の現状説明に",
+        "description": "全国のごみ計画収集人口の分布から比較地域を選び、行政サービスの対象規模を説明できます。"
+      },
+      {
+        "title": "自治体サービスの推移を整理するときに",
+        "description": "豊田市・大阪市の2015・2020・2023年度の人口を並べ、収集区域の対象人数の変化を確認できます。"
+      }
+    ],
+    "sources": [
+      {
+        "id": "municipal-garbage-collection",
+        "title": "ごみ計画収集人口",
+        "grain": "municipality",
+        "years": [
+          2015,
+          2020,
+          2023
+        ],
+        "inputs": [
+          {
+            "metricKey": "garbage-collection-population"
+          }
+        ],
+        "definition": "各年度10月1日現在の住民基本台帳に基づく、ごみ収集区域内の計画収集人口。2015・2020・2023年度の人数を比較する。国勢調査人口とは定義・時点が異なるため、国勢調査人口を分母とする普及率にはしない。",
+        "boundary": "原典の廃置分合処理済の市区町村境域。指定都市は市単位、東京都は特別区単位とし、指定都市の行政区と集計行を重複して含めない。"
+      }
+    ],
+    "recipes": [
+      {
+        "id": "national-garbage-collection-population",
+        "heading": "ごみ収集区域の人口を全国で見る",
+        "lead": "2023年度のごみ計画収集人口を全国の市町村・特別区の地図で確認します。収集区域の対象人数の規模を示し、廃棄物行政の現状説明に使えます。",
+        "sourceId": "municipal-garbage-collection",
+        "metricIds": [
+          "garbage-collection-population"
+        ],
+        "method": "compare",
+        "template": "choropleth",
+        "references": [
+          "ssds-garbage-collection"
+        ],
+        "limitation": "収集区域内の人口であり、ごみ排出量や収集頻度・サービスの質は示しません。国勢調査人口とは定義・時点が異なるため、人口比の普及率は算出しません。",
+        "presentationMetricKey": "garbage-collection-population",
+        "themeRefs": [
+          {
+            "themeKey": "waste-recycling",
+            "sectionKey": "waste-disposal"
+          }
+        ],
+        "year": 2023,
+        "within": {
+          "kind": "nation"
+        },
+        "chartTitle": "2023年度のごみ計画収集人口",
+        "scopeLabel": "全国の市町村・特別区"
+      },
+      {
+        "id": "municipal-garbage-collection-trend",
+        "heading": "収集区域の人口の推移を比べる",
+        "lead": "豊田市と大阪市について、2015・2020・2023年度のごみ計画収集人口を折れ線で比較します。サービスの対象人数の変化を説明する基礎資料にできます。",
+        "sourceId": "municipal-garbage-collection",
+        "metricIds": [
+          "garbage-collection-population"
+        ],
+        "method": "series",
+        "template": "line",
+        "references": [
+          "ssds-garbage-collection"
+        ],
+        "limitation": "ごみ収集区域の対象人口の推移です。人口の変化だけからごみ処理能力の過不足やサービス改善の効果を判断できません。",
+        "presentationMetricKey": "garbage-collection-population",
+        "themeRefs": [
+          {
+            "themeKey": "waste-recycling",
+            "sectionKey": "waste-disposal"
+          }
+        ],
+        "areaCodes": [
+          "23211",
+          "27100"
+        ],
+        "chartTitle": "ごみ計画収集人口の推移",
+        "scopeLabel": "豊田市・大阪市"
+      }
+    ],
+    "notes": [
+      "取得範囲は全国1741自治体で、豊田市・大阪市は推移の作成例です。",
+      "各年度10月1日の住民基本台帳による人口です。国勢調査人口で割った普及率や、災害の将来危険度を示す図にはしません。"
+    ],
+    "research": {
+      "method": "確認済みの社会・人口統計体系の原典表・項目定義に基づき、地域単位・年・調査対象・単位を揃え、欠測・秘匿と実値0を区別して比較する。",
+      "references": [
+        {
+          "id": "ssds-garbage-collection",
+          "title": "社会・人口統計体系 H5608 ごみ計画収集人口",
+          "url": "https://www.e-stat.go.jp/dbview?sid=0000020208",
+          "section": "H5608 ごみ計画収集人口",
+          "finding": "年度値は10月1日現在の住民基本台帳による収集区域の人口。全1741自治体の対象年度に欠測がないことを確認し、国勢調査人口で割った普及率には加工しない。",
+          "checkedAt": "2026-11-13"
+        }
+      ]
+    },
+    "version": "analysis-20261113"
   }
 }

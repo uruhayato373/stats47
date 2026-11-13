@@ -25,7 +25,13 @@
       "metricKeys": [
         "fiscal-strength-index-prefecture"
       ],
-      "preferredTemplate": "bar"
+      "preferredTemplate": "bar",
+      "themeRefs": [
+        {
+          "themeKey": "local-finance",
+          "sectionKey": "fiscal-capacity"
+        }
+      ]
     },
     {
       "id": "debt-service-distribution",
@@ -34,7 +40,13 @@
       "metricKeys": [
         "real-public-debt-service-ratio"
       ],
-      "preferredTemplate": "choropleth"
+      "preferredTemplate": "choropleth",
+      "themeRefs": [
+        {
+          "themeKey": "local-finance",
+          "sectionKey": "fiscal-capacity"
+        }
+      ]
     },
     {
       "id": "revenue-scale",
@@ -43,15 +55,21 @@
       "metricKeys": [
         "total-revenue-prefecture"
       ],
-      "preferredTemplate": "bar"
+      "preferredTemplate": "bar",
+      "themeRefs": [
+        {
+          "themeKey": "local-finance",
+          "sectionKey": "balance"
+        }
+      ]
     }
   ],
   "purchaseNotes": [
-    "作成例は都道府県財政の比較です。個々の市区町村の財政状況を直接示す図ではありません。",
+    "基本の指標セットの作成例は都道府県財政の比較です。県と市区町村の図は集計範囲を確認して読み分けてください。",
     "収録版の値を固定した商品です。決算年度と各指標の定義を確認し、単独の指標で財政の健全性を断定しないでください。"
   ],
   "analysisPlan": {
-    "objective": "都道府県財政と市町村財政を分け、財政基盤と経常的な財政負担を同じ年度で比較する。採用・調査対象は改訂設計であり、販売中の固定納品への追加を示しません。",
+    "objective": "都道府県財政と市区町村財政を分け、財政規模の推移、歳入構成、目的別・性質別の歳出構成と自治体間の違いを説明する。改訂設計であり、販売中の固定納品への追加を示しません。",
     "inputs": [
       {
         "metricKey": "fiscal-strength-index-prefecture",
@@ -83,6 +101,144 @@
         "scope": "municipality",
         "decision": "use",
         "reason": "実在を確認した2022年度の市町村財政指標を、異なる単位・意味の2図で比較する。"
+      },
+      {
+        "metricKey": "total-expenditure-prefecture",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "普通会計の推移と同年度の構成を、同地域・同会計・同単位で計算する。"
+      },
+      {
+        "metricKey": "local-tax-prefecture",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "普通会計の推移と同年度の構成を、同地域・同会計・同単位で計算する。"
+      },
+      {
+        "metricKey": "local-allocation-tax-prefecture",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "普通会計の推移と同年度の構成を、同地域・同会計・同単位で計算する。"
+      },
+      {
+        "metricKey": "national-treasury-disbursement-prefecture",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "普通会計の推移と同年度の構成を、同地域・同会計・同単位で計算する。"
+      },
+      {
+        "metricKey": "local-bonds-prefecture",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "普通会計の推移と同年度の構成を、同地域・同会計・同単位で計算する。"
+      },
+      {
+        "metricKey": "welfare-expenses-prefecture",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "普通会計の推移と同年度の構成を、同地域・同会計・同単位で計算する。"
+      },
+      {
+        "metricKey": "education-expenses-prefecture",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "普通会計の推移と同年度の構成を、同地域・同会計・同単位で計算する。"
+      },
+      {
+        "metricKey": "public-works-expenses-prefecture",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "普通会計の推移と同年度の構成を、同地域・同会計・同単位で計算する。"
+      },
+      {
+        "metricKey": "personnel-expenses-prefecture",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "普通会計の推移と同年度の構成を、同地域・同会計・同単位で計算する。"
+      },
+      {
+        "metricKey": "assistance-expenses-prefecture",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "普通会計の推移と同年度の構成を、同地域・同会計・同単位で計算する。"
+      },
+      {
+        "metricKey": "public-bond-expenses-nature-prefecture",
+        "scope": "prefecture",
+        "decision": "use",
+        "reason": "普通会計の推移と同年度の構成を、同地域・同会計・同単位で計算する。"
+      },
+      {
+        "metricKey": "total-revenue-municipal",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "普通会計の推移と同年度の構成を、同地域・同会計・同単位で計算する。"
+      },
+      {
+        "metricKey": "total-expenditure-municipal",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "普通会計の推移と同年度の構成を、同地域・同会計・同単位で計算する。"
+      },
+      {
+        "metricKey": "local-tax-revenue-municipal",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "普通会計の推移と同年度の構成を、同地域・同会計・同単位で計算する。"
+      },
+      {
+        "metricKey": "local-allocation-tax-municipal",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "普通会計の推移と同年度の構成を、同地域・同会計・同単位で計算する。"
+      },
+      {
+        "metricKey": "national-treasury-disbursements-municipal",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "普通会計の推移と同年度の構成を、同地域・同会計・同単位で計算する。"
+      },
+      {
+        "metricKey": "municipal-bonds-outstanding",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "普通会計の推移と同年度の構成を、同地域・同会計・同単位で計算する。"
+      },
+      {
+        "metricKey": "welfare-expense-municipal",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "普通会計の推移と同年度の構成を、同地域・同会計・同単位で計算する。"
+      },
+      {
+        "metricKey": "education-expense-municipal",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "普通会計の推移と同年度の構成を、同地域・同会計・同単位で計算する。"
+      },
+      {
+        "metricKey": "civil-engineering-expense-municipal",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "普通会計の推移と同年度の構成を、同地域・同会計・同単位で計算する。"
+      },
+      {
+        "metricKey": "personnel-expense-municipal",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "普通会計の推移と同年度の構成を、同地域・同会計・同単位で計算する。"
+      },
+      {
+        "metricKey": "public-assistance-expense-municipal",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "普通会計の推移と同年度の構成を、同地域・同会計・同単位で計算する。"
+      },
+      {
+        "metricKey": "debt-service-by-nature-municipal",
+        "scope": "municipality",
+        "decision": "use",
+        "reason": "普通会計の推移と同年度の構成を、同地域・同会計・同単位で計算する。"
       }
     ],
     "analysisRefs": [],
@@ -91,20 +247,64 @@
     "limitations": [
       "県と市町村は行政の役割が異なり、同じ順位表に混ぜない。",
       "財政力指数・経常収支比率の単独の大小から財政健全性を断定しない。東京特別区など欠測の行は0にしない。"
+    ],
+    "axes": [
+      {
+        "axis": "trend",
+        "decision": "required",
+        "reason": "比較可能な年度の変化を、計算結果と作成例で示す。",
+        "recipeRefs": [
+          "prefecture-budget-trend",
+          "prefecture-budget-revenue",
+          "prefecture-budget-purpose",
+          "prefecture-budget-nature",
+          "municipal-budget-trend",
+          "municipal-budget-revenue",
+          "municipal-budget-purpose",
+          "municipal-budget-nature"
+        ]
+      },
+      {
+        "axis": "composition",
+        "decision": "required",
+        "reason": "同じ地域・年度・母集団の全体と部分を使い、構成割合を示す。",
+        "recipeRefs": [
+          "prefecture-budget-revenue",
+          "prefecture-budget-purpose",
+          "prefecture-budget-nature",
+          "municipal-budget-revenue",
+          "municipal-budget-purpose",
+          "municipal-budget-nature"
+        ]
+      },
+      {
+        "axis": "comparison",
+        "decision": "required",
+        "reason": "同じ年・定義・地域単位の複数地域を、計算結果と作成例で比較する。",
+        "recipeRefs": [
+          "national-municipal-fiscal-strength",
+          "municipal-fiscal-strength",
+          "municipal-current-balance"
+        ]
+      }
     ]
   },
   "analysisRevision": {
     "version": "analysis-20261112",
-    "title": "市町村の財政基盤と経常負担を比べるデータ集",
-    "description": "同じ年度の財政力指数と経常収支比率を揃え、自治体ごとの財政基盤と経常的な負担を別々の図で比較できます。",
+    "title": "都道府県・市区町村の財政を推移と内訳で比べるデータ集",
+    "description": "47都道府県と全国の市区町村のデータから、歳入・歳出の推移、財源の内訳、目的別・性質別の支出を図にできます。県と市町村は分けて比較します。",
     "useCases": [
       {
-        "title": "決算説明の比較資料に",
-        "description": "近隣市町村の財政力指数と経常収支比率を並べ、自分の自治体の位置を説明できます。"
+        "title": "予算・決算の説明資料に",
+        "description": "歳入・歳出が何年でどう変わったかを折れ線で示し、財源と支出の構成を別の図で説明できます。"
       },
       {
-        "title": "財政研修の教材に",
-        "description": "財政力と経常的な負担を別の指標として読み、金額の規模だけで判断しない比較ができます。"
+        "title": "財源や支出の見直しに",
+        "description": "地方税・地方交付税・国庫支出金・地方債の割合と、福祉・教育・土木などの支出の割合を年度別に比べられます。"
+      },
+      {
+        "title": "他自治体との比較や研修に",
+        "description": "47都道府県と全国の市区町村をそれぞれ選べるCSV・Excelを使い、地域と年度を揃えた比較資料を作れます。"
       }
     ],
     "sources": [
@@ -126,6 +326,110 @@
         ],
         "definition": "市町村財政の2022年度値。財政力指数と経常収支比率は意味と単位が異なるため、別図で比較する。",
         "boundary": "原典の廃置分合処理済の市区町村境域。指定都市は市単位、東京都は特別区単位とし、指定都市の行政区と集計行を重複して含めない。"
+      },
+      {
+        "id": "prefecture-budget",
+        "title": "都道府県の普通会計決算",
+        "grain": "prefecture",
+        "years": [
+          2018,
+          2019,
+          2020,
+          2021,
+          2022
+        ],
+        "inputs": [
+          {
+            "metricKey": "total-revenue-prefecture"
+          },
+          {
+            "metricKey": "total-expenditure-prefecture"
+          },
+          {
+            "metricKey": "local-tax-prefecture"
+          },
+          {
+            "metricKey": "local-allocation-tax-prefecture"
+          },
+          {
+            "metricKey": "national-treasury-disbursement-prefecture"
+          },
+          {
+            "metricKey": "local-bonds-prefecture"
+          },
+          {
+            "metricKey": "welfare-expenses-prefecture"
+          },
+          {
+            "metricKey": "education-expenses-prefecture"
+          },
+          {
+            "metricKey": "public-works-expenses-prefecture"
+          },
+          {
+            "metricKey": "personnel-expenses-prefecture"
+          },
+          {
+            "metricKey": "assistance-expenses-prefecture"
+          },
+          {
+            "metricKey": "public-bond-expenses-nature-prefecture"
+          }
+        ],
+        "definition": "同じ地域・年度の普通会計決算。歳入の地方債は当年度の収入で、年度末残高ではない。目的別と性質別は同じ歳出総額を異なる切り口で分類する。",
+        "boundary": "47都道府県の県自身の財政。管内市町村の合計ではない。"
+      },
+      {
+        "id": "municipal-budget",
+        "title": "市区町村の普通会計決算",
+        "grain": "municipality",
+        "years": [
+          2018,
+          2019,
+          2020,
+          2021,
+          2022
+        ],
+        "inputs": [
+          {
+            "metricKey": "total-revenue-municipal"
+          },
+          {
+            "metricKey": "total-expenditure-municipal"
+          },
+          {
+            "metricKey": "local-tax-revenue-municipal"
+          },
+          {
+            "metricKey": "local-allocation-tax-municipal"
+          },
+          {
+            "metricKey": "national-treasury-disbursements-municipal"
+          },
+          {
+            "metricKey": "municipal-bonds-outstanding"
+          },
+          {
+            "metricKey": "welfare-expense-municipal"
+          },
+          {
+            "metricKey": "education-expense-municipal"
+          },
+          {
+            "metricKey": "civil-engineering-expense-municipal"
+          },
+          {
+            "metricKey": "personnel-expense-municipal"
+          },
+          {
+            "metricKey": "public-assistance-expense-municipal"
+          },
+          {
+            "metricKey": "debt-service-by-nature-municipal"
+          }
+        ],
+        "definition": "同じ地域・年度の普通会計決算。歳入の地方債は当年度の収入で、年度末残高ではない。目的別と性質別は同じ歳出総額を異なる切り口で分類する。",
+        "boundary": "原典の廃置分合処理済の市区町村境域。指定都市は市単位、東京都は特別区単位とし、指定都市の行政区と集計行を重複して含めない。"
       }
     ],
     "research": {
@@ -135,17 +439,263 @@
           "id": "ssds-finance",
           "title": "社会・人口統計体系の項目定義 D",
           "url": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/D",
-          "section": "D2201 財政力指数、D2203 経常収支比率",
-          "finding": "基準財政収入額と基準財政需要額に基づく指数と、経常経費に充当する一般財源等の比率を区別する。県と市町村の指標を同じ順位に混ぜない。",
-          "checkedAt": "2026-11-12"
+          "section": "D3101・D3201 歳入、D3103・D3203 歳出、目的別・性質別分類、D2201・D2203 財政指標",
+          "finding": "普通会計の同年度・同地域の総額を分母に、重複しない同一分類の内訳を用いる。地方債の歳入額と年度末残高、目的別と性質別の歳出を混ぜない。県と市町村の重複する移転額を全国合計として足さない。",
+          "checkedAt": "2026-11-13"
+        },
+        {
+          "id": "finance-dashboard",
+          "title": "デジタル庁 都道府県の財政",
+          "url": "https://www.digital.go.jp/resources/japandashboard/prefectural-finance",
+          "section": "経年比較・歳入と歳出の内訳・他団体との比較",
+          "finding": "財政規模の推移、歳入構成、目的別と性質別の歳出構成を分けて見る。地方公共団体の役割と会計範囲を揃える。",
+          "checkedAt": "2026-11-13"
         }
       ]
     },
     "recipes": [
       {
-        "id": "municipal-fiscal-strength",
-        "heading": "財政力の地域差を地図で見る",
-        "lead": "2022年度の財政力指数を、高知県内の市町村ごとに塗り分けます。近隣自治体との違いを位置関係とともに示し、決算説明の比較資料に使えます。",
+        "sourceId": "prefecture-budget",
+        "areaCode": "39000",
+        "references": [
+          "ssds-finance",
+          "finance-dashboard"
+        ],
+        "id": "prefecture-budget-trend",
+        "heading": "都道府県の歳入・歳出の推移を見る",
+        "chartTitle": "歳入・歳出の推移",
+        "lead": "高知県を例に、2018〜2022年度の歳入・歳出の動きを同じ図に示します。期間を通じた規模の変化を確認し、次の構成図と読み比べられます。",
+        "metricIds": [
+          "total-revenue-prefecture",
+          "total-expenditure-prefecture"
+        ],
+        "method": "series",
+        "template": "line",
+        "limitation": "普通会計の名目金額です。物価の影響を除いた実質増減や、差額だけで財政の健全性を判断する図ではありません。県と市区町村は別々に比較します。",
+        "themeRefs": [
+          {
+            "themeKey": "local-finance",
+            "sectionKey": "balance"
+          }
+        ]
+      },
+      {
+        "sourceId": "prefecture-budget",
+        "areaCode": "39000",
+        "references": [
+          "ssds-finance",
+          "finance-dashboard"
+        ],
+        "id": "prefecture-budget-revenue",
+        "heading": "都道府県の歳入の構成を比べる",
+        "chartTitle": "歳入の構成",
+        "lead": "高知県を例に、地方税・地方交付税・国庫支出金・地方債とその他の財源が、歳入総額に占める割合を年度別に比較します。総額の大小とは分けて、内訳の変化を説明できます。",
+        "metricIds": [
+          "local-tax-prefecture",
+          "local-allocation-tax-prefecture",
+          "national-treasury-disbursement-prefecture",
+          "local-bonds-prefecture"
+        ],
+        "denominatorId": "total-revenue-prefecture",
+        "remainder": {
+          "id": "other-revenue",
+          "label": "その他"
+        },
+        "method": "composition",
+        "template": "stacked-bar",
+        "limitation": "地方債は当年度の収入で、年度末の地方債残高ではありません。 その他は総額から表示した内訳を引いた残額です。原典の欠測を0にせず、内訳の欠けた地域・年度では図を作りません。",
+        "themeRefs": [
+          {
+            "themeKey": "local-finance",
+            "sectionKey": "finance-flow"
+          }
+        ]
+      },
+      {
+        "sourceId": "prefecture-budget",
+        "areaCode": "39000",
+        "references": [
+          "ssds-finance",
+          "finance-dashboard"
+        ],
+        "id": "prefecture-budget-purpose",
+        "heading": "都道府県の目的別の歳出構成を比べる",
+        "chartTitle": "目的別の歳出構成",
+        "lead": "高知県を例に、民生費・教育費・土木費とその他の支出が、歳出総額に占める割合を年度別に比較します。総額の大小とは分けて、内訳の変化を説明できます。",
+        "metricIds": [
+          "welfare-expenses-prefecture",
+          "education-expenses-prefecture",
+          "public-works-expenses-prefecture"
+        ],
+        "denominatorId": "total-expenditure-prefecture",
+        "remainder": {
+          "id": "other-purpose",
+          "label": "その他"
+        },
+        "method": "composition",
+        "template": "stacked-bar",
+        "limitation": "行政の何の目的に使ったかを示します。人件費や扶助費などの性質別内訳とは合算しません。 その他は総額から表示した内訳を引いた残額です。原典の欠測を0にせず、内訳の欠けた地域・年度では図を作りません。",
+        "themeRefs": [
+          {
+            "themeKey": "local-finance",
+            "sectionKey": "candidate-122"
+          }
+        ]
+      },
+      {
+        "sourceId": "prefecture-budget",
+        "areaCode": "39000",
+        "references": [
+          "ssds-finance",
+          "finance-dashboard"
+        ],
+        "id": "prefecture-budget-nature",
+        "heading": "都道府県の性質別の歳出構成を比べる",
+        "chartTitle": "性質別の歳出構成",
+        "lead": "高知県を例に、人件費・扶助費・公債費とその他の支出が、歳出総額に占める割合を年度別に比較します。総額の大小とは分けて、内訳の変化を説明できます。",
+        "metricIds": [
+          "personnel-expenses-prefecture",
+          "assistance-expenses-prefecture",
+          "public-bond-expenses-nature-prefecture"
+        ],
+        "denominatorId": "total-expenditure-prefecture",
+        "remainder": {
+          "id": "other-nature",
+          "label": "その他"
+        },
+        "method": "composition",
+        "template": "stacked-bar",
+        "limitation": "経費の性質で分類します。民生費や教育費などの目的別内訳とは合算しません。 その他は総額から表示した内訳を引いた残額です。原典の欠測を0にせず、内訳の欠けた地域・年度では図を作りません。",
+        "themeRefs": [
+          {
+            "themeKey": "local-finance",
+            "sectionKey": "candidate-122"
+          }
+        ]
+      },
+      {
+        "sourceId": "municipal-budget",
+        "areaCode": "39201",
+        "references": [
+          "ssds-finance",
+          "finance-dashboard"
+        ],
+        "id": "municipal-budget-trend",
+        "heading": "市区町村の歳入・歳出の推移を見る",
+        "chartTitle": "歳入・歳出の推移",
+        "lead": "高知市を例に、2018〜2022年度の歳入・歳出の動きを同じ図に示します。期間を通じた規模の変化を確認し、次の構成図と読み比べられます。",
+        "metricIds": [
+          "total-revenue-municipal",
+          "total-expenditure-municipal"
+        ],
+        "method": "series",
+        "template": "line",
+        "limitation": "普通会計の名目金額です。物価の影響を除いた実質増減や、差額だけで財政の健全性を判断する図ではありません。県と市区町村は別々に比較します。",
+        "themeRefs": [
+          {
+            "themeKey": "local-finance",
+            "sectionKey": "balance"
+          }
+        ]
+      },
+      {
+        "sourceId": "municipal-budget",
+        "areaCode": "39201",
+        "references": [
+          "ssds-finance",
+          "finance-dashboard"
+        ],
+        "id": "municipal-budget-revenue",
+        "heading": "市区町村の歳入の構成を比べる",
+        "chartTitle": "歳入の構成",
+        "lead": "高知市を例に、地方税・地方交付税・国庫支出金・地方債とその他の財源が、歳入総額に占める割合を年度別に比較します。総額の大小とは分けて、内訳の変化を説明できます。",
+        "metricIds": [
+          "local-tax-revenue-municipal",
+          "local-allocation-tax-municipal",
+          "national-treasury-disbursements-municipal",
+          "municipal-bonds-outstanding"
+        ],
+        "denominatorId": "total-revenue-municipal",
+        "remainder": {
+          "id": "other-revenue",
+          "label": "その他"
+        },
+        "method": "composition",
+        "template": "stacked-bar",
+        "limitation": "地方債は当年度の収入で、年度末の地方債残高ではありません。 その他は総額から表示した内訳を引いた残額です。原典の欠測を0にせず、内訳の欠けた地域・年度では図を作りません。",
+        "themeRefs": [
+          {
+            "themeKey": "local-finance",
+            "sectionKey": "finance-flow"
+          }
+        ]
+      },
+      {
+        "sourceId": "municipal-budget",
+        "areaCode": "39201",
+        "references": [
+          "ssds-finance",
+          "finance-dashboard"
+        ],
+        "id": "municipal-budget-purpose",
+        "heading": "市区町村の目的別の歳出構成を比べる",
+        "chartTitle": "目的別の歳出構成",
+        "lead": "高知市を例に、民生費・教育費・土木費とその他の支出が、歳出総額に占める割合を年度別に比較します。総額の大小とは分けて、内訳の変化を説明できます。",
+        "metricIds": [
+          "welfare-expense-municipal",
+          "education-expense-municipal",
+          "civil-engineering-expense-municipal"
+        ],
+        "denominatorId": "total-expenditure-municipal",
+        "remainder": {
+          "id": "other-purpose",
+          "label": "その他"
+        },
+        "method": "composition",
+        "template": "stacked-bar",
+        "limitation": "行政の何の目的に使ったかを示します。人件費や扶助費などの性質別内訳とは合算しません。 その他は総額から表示した内訳を引いた残額です。原典の欠測を0にせず、内訳の欠けた地域・年度では図を作りません。",
+        "themeRefs": [
+          {
+            "themeKey": "local-finance",
+            "sectionKey": "candidate-122"
+          }
+        ]
+      },
+      {
+        "sourceId": "municipal-budget",
+        "areaCode": "39201",
+        "references": [
+          "ssds-finance",
+          "finance-dashboard"
+        ],
+        "id": "municipal-budget-nature",
+        "heading": "市区町村の性質別の歳出構成を比べる",
+        "chartTitle": "性質別の歳出構成",
+        "lead": "高知市を例に、人件費・扶助費・公債費とその他の支出が、歳出総額に占める割合を年度別に比較します。総額の大小とは分けて、内訳の変化を説明できます。",
+        "metricIds": [
+          "personnel-expense-municipal",
+          "public-assistance-expense-municipal",
+          "debt-service-by-nature-municipal"
+        ],
+        "denominatorId": "total-expenditure-municipal",
+        "remainder": {
+          "id": "other-nature",
+          "label": "その他"
+        },
+        "method": "composition",
+        "template": "stacked-bar",
+        "limitation": "経費の性質で分類します。民生費や教育費などの目的別内訳とは合算しません。 その他は総額から表示した内訳を引いた残額です。原典の欠測を0にせず、内訳の欠けた地域・年度では図を作りません。",
+        "themeRefs": [
+          {
+            "themeKey": "local-finance",
+            "sectionKey": "candidate-122"
+          }
+        ]
+      },
+      {
+        "id": "national-municipal-fiscal-strength",
+        "heading": "市町村の財政力を全国地図で見る",
+        "lead": "2022年度の財政力指数を全国の市町村・特別区で表示します。都道府県の平均では見えない地域差を確認し、詳しく比較する地域を選ぶための基礎資料にできます。",
         "sourceId": "municipal-finance",
         "metricIds": [
           "fiscal-strength-index"
@@ -156,19 +706,53 @@
         "references": [
           "ssds-finance"
         ],
-        "limitation": "財政力指数だけで自治体の健全性や住民サービスの水準は判断できません。",
+        "limitation": "2022年度の財政力指数は基準財政収入額を基準財政需要額で除した値の過去3年平均です。県の財政と同じ順位表に混ぜず、欠測は0に置き換えません。指数だけでは財政の健全性や住民サービスの水準は判断できません。",
+        "presentationMetricKey": "fiscal-strength-index",
+        "chartTitle": "全国の市町村別 財政力指数",
+        "scopeLabel": "全国の市町村・特別区",
+        "within": {
+          "kind": "nation"
+        },
+        "themeRefs": [
+          {
+            "themeKey": "local-finance",
+            "sectionKey": "fiscal-capacity"
+          }
+        ]
+      },
+      {
+        "id": "municipal-fiscal-strength",
+        "heading": "県内の財政力を詳しく見る",
+        "lead": "全国地図から高知県内へ範囲を絞り、同じ2022年度の財政力指数を市町村ごとに確認します。近隣自治体との位置関係を示し、決算説明や財政研修の比較資料に使えます。",
+        "sourceId": "municipal-finance",
+        "metricIds": [
+          "fiscal-strength-index"
+        ],
+        "method": "compare",
+        "year": 2022,
+        "template": "choropleth",
+        "references": [
+          "ssds-finance"
+        ],
+        "limitation": "2022年度の財政力指数は基準財政収入額を基準財政需要額で除した値の過去3年平均です。県の財政と同じ順位表に混ぜず、欠測は0に置き換えません。指数だけでは財政の健全性や住民サービスの水準は判断できません。",
         "presentationMetricKey": "fiscal-strength-index",
         "chartTitle": "市町村別の財政力指数",
         "scopeLabel": "高知県内の市町村",
         "within": {
           "kind": "prefecture",
           "prefCode": "39"
-        }
+        },
+        "themeRefs": [
+          {
+            "themeKey": "local-finance",
+            "sectionKey": "fiscal-capacity"
+          }
+        ]
       },
       {
         "id": "municipal-current-balance",
         "heading": "経常的な財政負担を比べる",
-        "lead": "同じ自治体の経常収支比率を並べ、財政力とは別の面から比較します。",
+        "lead": "高知県の市といの町を例に、2022年度の経常収支比率を並べます。財政力指数とは別の図で確認し、経常的な経費に充てる一般財源の割合を説明できます。",
         "sourceId": "municipal-finance",
         "metricIds": [
           "current-balance-ratio-city"
@@ -194,12 +778,24 @@
           "ssds-finance"
         ],
         "limitation": "値の大小を単独で財政の良し悪しに読み替えません。歳入の構成や行政の役割も確認してください。",
-        "presentationMetricKey": "current-balance-ratio-city"
+        "presentationMetricKey": "current-balance-ratio-city",
+        "themeRefs": [
+          {
+            "themeKey": "local-finance",
+            "sectionKey": "fiscal-capacity"
+          }
+        ],
+        "chartTitle": "2022年度の経常収支比率",
+        "scopeLabel": "高知県の市といの町"
       }
     ],
     "notes": [
-      "分析対象は市町村財政です。県財政と同じ順位表に混ぜません。",
-      "東京特別区など原典で欠測となる自治体を0に置き換えません。値のある自治体だけで比較します。"
+      "都道府県と市区町村を分けて収録します。互いの財政を同じ順位表に混ぜず、重複する移転額を全国の純額として合計しません。",
+      "普通会計の歳入・歳出と内訳は2018〜2022年度、財政力指数・経常収支比率の地域比較は2022年度です。最新年度への自動更新商品ではありません。",
+      "高知県・高知市は作成例です。分析データ追加分の原票には47都道府県と全国の市区町村の値・欠測理由を収録します。",
+      "目的別と性質別は同じ歳出を異なる切り口で分類します。両者の内訳を足し合わせません。",
+      "財政力指数は過去3年平均です。単年度の歳入規模や経常収支比率と区別してください。",
+      "東京特別区などの欠測を0に置き換えません。比較できる地域・年度を確認して利用します。"
     ]
   }
 }

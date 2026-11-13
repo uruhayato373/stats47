@@ -1,35 +1,35 @@
 {
   "productId": "P-14",
-  "deliveryVersion": "v4-20261024-mac-r2",
-  "manifestSha256": "6030641163fb584f65d8577af882f064e45e124aad0fefe3e24a413b34255f1c",
+  "deliveryVersion": "v5-20261104-mac-r1",
+  "manifestSha256": "d6517bcc80f3422d552ae6f3b7b8eeae78c15f09cbd00227397095913dce1195",
   "sourceArchive": {
     "bucket": "stats47-private",
-    "key": "note/product-archives/P-14/v4-20261024-mac-r2/f8a7107d12b667e6170c7a6c692284775fafecab0383e26fbe9dc73b9e92522d.zip",
-    "sha256": "f8a7107d12b667e6170c7a6c692284775fafecab0383e26fbe9dc73b9e92522d"
+    "key": "note/product-archives/P-14/v5-20261104-mac-r1/404ba562cb62f6da033fdb8715aa0a018524f3730ce3356f51c5d16afc30a08d.zip",
+    "sha256": "404ba562cb62f6da033fdb8715aa0a018524f3730ce3356f51c5d16afc30a08d"
   },
   "selectedMetrics": [
     {
       "key": "beef-consumption-expenditure",
       "title": "牛肉消費支出額（都道府県庁所在市の二人以上世帯の年間牛肉消費支出額）",
-      "year": "2024",
+      "year": "2025",
       "unit": "円"
     },
     {
       "key": "beef-consumption-quantity",
       "title": "牛肉消費量（都道府県庁所在市の二人以上世帯の年間牛肉消費量）",
-      "year": "2024",
+      "year": "2025",
       "unit": "g"
     },
     {
       "key": "coffee-consumption-expenditure",
       "title": "コーヒー消費支出額（都道府県庁所在市の二人以上世帯の年間コーヒー消費支出額）",
-      "year": "2024",
+      "year": "2025",
       "unit": "円"
     }
   ],
   "included": [
-    "CSV（47県庁所在市・二人以上世帯・685指標、基準年は指標ごとに固定）",
-    "Excel（685指標）",
+    "CSV（47県庁所在市・二人以上世帯・832指標、基準年は指標ごとに固定）",
+    "Excel（832指標）",
     "PowerPoint（30指標の図表）",
     "PDFデータブック・地図PNG",
     "出典一覧（SOURCES.csv）・利用条件"
@@ -40,9 +40,9 @@
       "figures": [
         {
           "file": "beef-expenditure.png",
-          "alt": "牛肉消費支出額（都道府県庁所在市の二人以上世帯の年間牛肉消費支出額）（2024年・地域別比較）",
+          "alt": "牛肉消費支出額（都道府県庁所在市の二人以上世帯の年間牛肉消費支出額）（2025年・地域別比較）",
           "template": "bar",
-          "sha256": "302bd1407cc2875eaadfe844aae77ffcce8a1508413b8eaedf7a7faf8f8a7fb1"
+          "sha256": "bba2082ce98b586a88b91f321421b6bc6ff571e97173af785ac012448429a18d"
         }
       ]
     },
@@ -51,9 +51,9 @@
       "figures": [
         {
           "file": "beef-quantity.png",
-          "alt": "牛肉消費量（都道府県庁所在市の二人以上世帯の年間牛肉消費量）（2024年・地域別比較）",
+          "alt": "牛肉消費量（都道府県庁所在市の二人以上世帯の年間牛肉消費量）（2025年・地域別比較）",
           "template": "bar",
-          "sha256": "d3d045c9bb7486eeb9dea4e1b51f70c00b13dfb80f6156564b7ddac54d88ef5d"
+          "sha256": "a16fe9cb6eb80b9d2a7d412c85c0dbafc8407360b7ca105a4a3b436aceadf2c0"
         }
       ]
     },
@@ -62,24 +62,276 @@
       "figures": [
         {
           "file": "coffee-expenditure.png",
-          "alt": "コーヒー消費支出額（都道府県庁所在市の二人以上世帯の年間コーヒー消費支出額）（2024年・地域別比較）",
+          "alt": "コーヒー消費支出額（都道府県庁所在市の二人以上世帯の年間コーヒー消費支出額）（2025年・地域別比較）",
           "template": "bar",
-          "sha256": "327c2777ccc17a1906a8a9a487309d38c715dc402d84846871353dd5a3dff900"
+          "sha256": "5017868003ec0d1e44e2775ca8297c3ab63f6bba9b787bde720f1b5badbda98c"
         }
       ]
     }
   ],
   "filePreview": {
     "heading": "ファイルの中身",
-    "lead": "CSVは地域コード・地域名と指標の値を横に並べた形式です。納品CSVでは県のコード・県名で記録していますが、家計調査の値は県庁所在市の二人以上世帯が対象です。画像は8行と1指標を抜粋しています。元の数値列名には指標名・年・単位が入り、画像では「数値」と省略しています。全685指標の出典と基準年はSOURCES.csvで確認できます。",
+    "lead": "CSVは地域コード・地域名と指標の値を横に並べた形式です。納品CSVでは県のコード・県名で記録していますが、家計調査の値は県庁所在市の二人以上世帯が対象です。画像は8行と1指標を抜粋しています。元の数値列名には指標名・年・単位が入り、画像では「数値」と省略しています。全832指標の出典と基準年はSOURCES.csvで確認できます。",
     "figures": [
       {
         "file": "file-preview.png",
         "alt": "P-14のdata.csvから列と8行を抜粋した見本",
         "template": "file-preview",
-        "sha256": "98bd3989d16cfb8436c42bde19e4f66512735a734e54782d5d831f042e856e88"
+        "sha256": "9239caa4fc714607f831423ec4ed3319c652ff6b52b8eee1095cc3da629de448"
       }
     ]
   },
-  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2024〜2024年で指標ごとに異なり、時系列データではありません。"
+  "showcaseNote": "図は販売済みの固定納品ファイルの値から作成しています。収録指標の基準年は2024〜2025年で指標ごとに異なり、時系列データではありません。",
+  "analysisRevision": {
+    "productId": "P-14",
+    "version": "analysis-20261113",
+    "planSha256": "3ad367b48eda7109bf15db3f42f49bcdc0bfd7ef4baf5378ab422c8edf121c6b",
+    "resolvedPlanSha256": "24072a750876b9df8e5830bf118bfc2df3cde896b02df25da0aa7eda10b75af7",
+    "sources": [
+      {
+        "id": "capital-city-beef",
+        "inputs": [
+          {
+            "metricKey": "beef-consumption-expenditure",
+            "statsDataId": "0004023605",
+            "code": "010310010",
+            "unit": "円",
+            "filters": {
+              "cdCat02": "03"
+            }
+          },
+          {
+            "metricKey": "beef-consumption-quantity",
+            "statsDataId": "0004023606",
+            "code": "010310010",
+            "unit": "g",
+            "filters": {
+              "cdCat02": "03"
+            }
+          }
+        ],
+        "grain": "capital-city",
+        "years": [
+          2022,
+          2023,
+          2024
+        ],
+        "retrievedAt": "2026-11-13T01:31:06.628Z",
+        "tableTitle": "品目分類 品目分類（2025年改定）（総数：金額） / 品目分類 品目分類（2025年改定）（総数：数量）",
+        "rows": 282,
+        "areas": 47,
+        "missing": 0,
+        "coverage": [
+          {
+            "year": 2022,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2023,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          },
+          {
+            "year": 2024,
+            "total": 47,
+            "kept": 47,
+            "dropped": 0,
+            "share": 1,
+            "compareColumn": null,
+            "keptMedian": null,
+            "droppedMedian": null,
+            "status": "ok"
+          }
+        ],
+        "inputSha256": "e6499aced8adab35dcf1ce0557e4eefa8cac2aec8c17da232b27e3acdaa61449"
+      }
+    ],
+    "results": 12,
+    "files": [
+      {
+        "file": "data.csv",
+        "sha256": "7e2490513f2af5925d6d6dc330e6ac935f02318bef804153f38c915c7fd76d8d",
+        "bytes": 26441
+      },
+      {
+        "file": "analysis.csv",
+        "sha256": "04ce60e91e76bedc8e37823f76906a531409d53d810bcacd0c5fcc33d35a17a8",
+        "bytes": 1517
+      },
+      {
+        "file": "analysis.xlsx",
+        "sha256": "0181a7e11332bb6940d54902d7ec8c49786792ea5b4eeeb93e1e832c7b3435fd",
+        "bytes": 17498
+      },
+      {
+        "file": "SOURCES.csv",
+        "sha256": "3a66aca4ab7c4c2bd0dade31edef2d7317ed4e6b6fe2ae27f759962e95a8a262",
+        "bytes": 1457
+      },
+      {
+        "file": "LICENSE-ja.txt",
+        "sha256": "07eb760b739ab2c84ce33c7f3fdfaeee5f9f3118dc8efdbc36fccbc0767d4f29",
+        "bytes": 1265
+      },
+      {
+        "file": "analysis-plan.json",
+        "sha256": "695848e42545dded52e55f5ac044cca41d1c095eaee1eb3b1f8ba0c5b75e1800",
+        "bytes": 6049
+      },
+      {
+        "file": "figure-specs.json",
+        "sha256": "03cfbfe8857db76e80b543370b62d23fd8dc90f2a74b84d54744c8f5bab2e692",
+        "bytes": 4073
+      },
+      {
+        "file": "README.md",
+        "sha256": "4f0f1170739706950026035f9068776db66532aff351059fb8ad67d6ae03b964",
+        "bytes": 3296
+      },
+      {
+        "file": "READINESS.md",
+        "sha256": "6576547c7e97355fa49fc32178fd85e89046f2b35c0e43b6a3666be68f4c3e0f",
+        "bytes": 192
+      },
+      {
+        "file": "images/beef-expenditure-trend.png",
+        "sha256": "430eb225cc74941054b375bae3bfb022085507a3808ee39f14382e8f270acf83",
+        "bytes": 96457
+      },
+      {
+        "file": "images/beef-quantity-trend.png",
+        "sha256": "ffb6f3f7bcf43ff0fb266434c41249929969da78ab1c86592ed27a0a572aea87",
+        "bytes": 104534
+      },
+      {
+        "file": "images/analysis-file-preview.png",
+        "sha256": "1ed4fc306c08db6ea246726f3c10be7a4a92113f76cd7b457e491bcb7fded528",
+        "bytes": 110029
+      },
+      {
+        "file": "inputs/capital-city-beef.json",
+        "sha256": "e6499aced8adab35dcf1ce0557e4eefa8cac2aec8c17da232b27e3acdaa61449",
+        "bytes": 1121303
+      },
+      {
+        "file": "preview-product.json",
+        "sha256": "cadd10b180ba9a4f1f63dc2b230ee3f0386e596b7b5cac68539851b03586120e",
+        "bytes": 4618
+      },
+      {
+        "file": "analysis-pack.zip",
+        "sha256": "5dd7a31dc53e7690b64894f9b0300a4d3b029d5c69a0f1c0ba305a348d54ba85",
+        "bytes": 298817
+      }
+    ]
+  },
+  "analysisDelivery": {
+    "productId": "P-14",
+    "status": "prepared",
+    "version": "analysis-20261113",
+    "sourceManifestSha256": "2270013ce4971aae5d0ea1e0c964df0ef909b794568e635d57e163503005ae81",
+    "planSha256": "3ad367b48eda7109bf15db3f42f49bcdc0bfd7ef4baf5378ab422c8edf121c6b",
+    "archive": {
+      "bucket": "stats47-private",
+      "key": "note/product-analysis-archives/P-14/analysis-20261113/5dd7a31dc53e7690b64894f9b0300a4d3b029d5c69a0f1c0ba305a348d54ba85.zip",
+      "sha256": "5dd7a31dc53e7690b64894f9b0300a4d3b029d5c69a0f1c0ba305a348d54ba85",
+      "bytes": 298817
+    },
+    "attachmentName": "P-14-analysis-20261113-analysis.zip",
+    "snapshot": {
+      "description": "札幌市と京都市の二人以上世帯について、牛肉への年間支出額と購入量を2022〜2024年で比較します。",
+      "included": [
+        "県庁所在市の牛肉支出額・購入量（47地域・2022〜2024年・282行）",
+        "CSV・Excel、分析結果CSV、共通型の図表PNG、出典・計算方法・取得原票"
+      ],
+      "useCases": [
+        {
+          "title": "金額と量の動きを分けて説明する",
+          "description": "同じ都市・年・品目で支出額と購入量を別々の図にし、金額だけでは分からない違いを確認できます。"
+        }
+      ],
+      "purchaseNotes": [
+        "対象は県庁所在市の二人以上世帯です。全市区町村や単身世帯、県全体の市場規模を示しません。単年の標本変動があり、支出額の変化を購入量や価格だけの変化とはみなしません。",
+        "各年の値を示し、複数年平均や将来予測とは区別します。"
+      ],
+      "showcaseNote": "分析の図は追加ファイルに同梱する観測値から計算しています。既存の固定版とは対象地域・基準年・収録形式が異なるため、各図の条件と出典を確認してください。",
+      "showcase": [
+        {
+          "id": "beef-expenditure-trend",
+          "kind": "chart",
+          "heading": "牛肉に使う金額はどう変わったか",
+          "lead": "札幌市と京都市の年間支出額を同じ期間で比べます。",
+          "note": "対象は県庁所在市の二人以上世帯です。全市区町村や単身世帯、県全体の市場規模を示しません。単年の標本変動があり、支出額の変化を購入量や価格だけの変化とはみなしません。",
+          "themeRefs": [
+            {
+              "themeKey": "household-food-spending",
+              "sectionKey": "household-food-spending-meat-dairy",
+              "title": "食卓と家計の支出",
+              "sectionTitle": "肉や乳製品をよく買う地域か",
+              "href": "/themes/household-food-spending#theme-section-household-food-spending-meat-dairy"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261113-beef-expenditure-trend.png",
+              "alt": "牛肉に使う金額はどう変わったか（札幌市・京都市の二人以上世帯・2022〜2024年）",
+              "template": "line",
+              "sha256": "430eb225cc74941054b375bae3bfb022085507a3808ee39f14382e8f270acf83"
+            }
+          ]
+        },
+        {
+          "id": "beef-quantity-trend",
+          "kind": "chart",
+          "heading": "牛肉を買う量はどう変わったか",
+          "lead": "同じ2都市の購入量を示し、支出額の図と見比べます。",
+          "note": "対象は県庁所在市の二人以上世帯です。全市区町村や単身世帯、県全体の市場規模を示しません。単年の標本変動があり、支出額の変化を購入量や価格だけの変化とはみなしません。",
+          "themeRefs": [
+            {
+              "themeKey": "household-food-spending",
+              "sectionKey": "household-food-spending-meat-dairy",
+              "title": "食卓と家計の支出",
+              "sectionTitle": "肉や乳製品をよく買う地域か",
+              "href": "/themes/household-food-spending#theme-section-household-food-spending-meat-dairy"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261113-beef-quantity-trend.png",
+              "alt": "牛肉を買う量はどう変わったか（札幌市・京都市の二人以上世帯・2022〜2024年）",
+              "template": "line",
+              "sha256": "ffb6f3f7bcf43ff0fb266434c41249929969da78ab1c86592ed27a0a572aea87"
+            }
+          ]
+        },
+        {
+          "kind": "file",
+          "heading": "ファイルの中身",
+          "lead": "地域コード・地域名・年・指標・値・単位を列に持つCSVとExcelです。観測値と分析結果を分け、欠測は理由付きで保持します。",
+          "figures": [
+            {
+              "file": "analysis-20261113-analysis-file-preview.png",
+              "alt": "県庁所在市の牛肉支出と購入量の変化のCSV見本",
+              "template": "file-preview",
+              "sha256": "1ed4fc306c08db6ea246726f3c10be7a4a92113f76cd7b457e491bcb7fded528"
+            }
+          ],
+          "id": "analysis-file-2"
+        }
+      ]
+    }
+  }
 }

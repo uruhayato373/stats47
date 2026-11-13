@@ -20,6 +20,7 @@ export function ThemeDashboardClient({
   metricGroups,
   sections,
   embeddedSections,
+  sectionFooters,
   indicatorDataMap,
   pageCharts,
   chartSourceLinks,
@@ -35,6 +36,7 @@ export function ThemeDashboardClient({
         metricGroups={metricGroups}
         sections={sections}
         embeddedSections={embeddedSections}
+        sectionFooters={sectionFooters}
         indicatorDataMap={indicatorDataMap}
         pageCharts={pageCharts}
         chartSourceLinks={chartSourceLinks}

@@ -25,7 +25,13 @@
       "metricKeys": [
         "active-job-opening-ratio"
       ],
-      "preferredTemplate": "bar"
+      "preferredTemplate": "bar",
+      "themeRefs": [
+        {
+          "themeKey": "labor-mobility",
+          "sectionKey": "job-market"
+        }
+      ]
     },
     {
       "id": "scheduled-pay-distribution",
@@ -34,7 +40,13 @@
       "metricKeys": [
         "scheduled-salary-male"
       ],
-      "preferredTemplate": "choropleth"
+      "preferredTemplate": "choropleth",
+      "themeRefs": [
+        {
+          "themeKey": "labor-wages",
+          "sectionKey": "wage-differences"
+        }
+      ]
     }
   ],
   "purchaseNotes": [
@@ -42,7 +54,7 @@
     "給与は対象者と月額・年額、所定内・手当込みなどの定義を確認してください。作成例の男性の所定内給与額は、男女合計の平均年収や手取り額ではありません。"
   ],
   "analysisPlan": {
-    "objective": "賃金・求人の県別比較に、地域内外への通勤と就業構成を組み合わせ、採用圏の基礎資料を作る。採用・調査対象は改訂設計であり、販売中の固定納品への追加を示しません。",
+    "objective": "全国の他市区町村への通勤者数の分布と、八王子市・京都市の推移を地図と折れ線で確認できます。 採用対象は改訂分析であり、販売中の固定納品への追加を示しません。",
     "inputs": [
       {
         "metricKey": "active-job-opening-ratio",
@@ -59,8 +71,8 @@
       {
         "metricKey": "commuters-to-other-municipalities",
         "scope": "municipality",
-        "decision": "investigate",
-        "reason": "通勤先の広がりを補う候補。国勢調査年、就業者の対象、利用可能自治体を確認してから採用する。"
+        "decision": "use",
+        "reason": "原典で対象・年・単位を確認した改訂分析の入力。国勢調査に基づく他市区町村への通勤者数。2010・2015・2020年の人数を比較し、居住人口や就業者総数を分母にした率には加工しない。"
       },
       {
         "metricKey": "total-population",
@@ -74,6 +86,139 @@
     "reuseProducts": [],
     "limitations": [
       "求人倍率・賃金の都道府県値を市区町村へ割り振らない。通勤人口と居住人口は対象が異なる。"
+    ],
+    "axes": [
+      {
+        "axis": "trend",
+        "decision": "required",
+        "reason": "比較可能な年度の変化を、計算結果と作成例で示す。",
+        "recipeRefs": [
+          "municipal-outcommuter-trend"
+        ]
+      },
+      {
+        "axis": "composition",
+        "decision": "deferred",
+        "reason": "通勤割合には就業者等の適切な分母が未収録。人口総数で代用せず、就業構成と合わせて追加取得を判断する。",
+        "recipeRefs": []
+      },
+      {
+        "axis": "comparison",
+        "decision": "required",
+        "reason": "同じ年・定義・地域単位の複数地域を、計算結果と作成例で比較する。",
+        "recipeRefs": [
+          "national-municipal-outcommuters",
+          "municipal-outcommuter-trend"
+        ]
+      }
     ]
+  },
+  "analysisRevision": {
+    "title": "市区町村の他地域への通勤を読むデータ集",
+    "description": "全国の他市区町村への通勤者数の分布と、八王子市・京都市の推移を地図と折れ線で確認できます。",
+    "useCases": [
+      {
+        "title": "採用圏を検討する基礎資料に",
+        "description": "他市区町村へ通勤する人数の全国分布から比較地域を選び、地域を越える通勤の規模を説明できます。"
+      },
+      {
+        "title": "自治体の雇用施策の現状整理に",
+        "description": "国勢調査年の通勤者数の推移を確認し、県別の求人・賃金とは異なる市区町村の動きを整理できます。"
+      }
+    ],
+    "sources": [
+      {
+        "id": "municipal-commuters",
+        "title": "他市区町村への通勤者数",
+        "grain": "municipality",
+        "years": [
+          2010,
+          2015,
+          2020
+        ],
+        "inputs": [
+          {
+            "metricKey": "commuters-to-other-municipalities"
+          }
+        ],
+        "definition": "国勢調査に基づく他市区町村への通勤者数。2010・2015・2020年の人数を比較し、居住人口や就業者総数を分母にした率には加工しない。",
+        "boundary": "原典の廃置分合処理済の市区町村境域。指定都市は市単位、東京都は特別区単位とし、指定都市の行政区と集計行を重複して含めない。"
+      }
+    ],
+    "recipes": [
+      {
+        "id": "national-municipal-outcommuters",
+        "heading": "他市区町村へ通勤する人数を全国で見る",
+        "lead": "2020年に他市区町村へ通勤した人数を全国地図で確認します。人数の大きい地域を位置関係とともに示し、詳しく比較する地域を選べます。",
+        "sourceId": "municipal-commuters",
+        "metricIds": [
+          "commuters-to-other-municipalities"
+        ],
+        "method": "compare",
+        "template": "choropleth",
+        "references": [
+          "ssds-commuters"
+        ],
+        "limitation": "通勤者の実人数であり、域外通勤の割合や移動距離は示しません。総人口を労働供給とみなしたり、県別求人倍率を自治体へ割り振ったりしません。",
+        "presentationMetricKey": "commuters-to-other-municipalities",
+        "themeRefs": [
+          {
+            "themeKey": "labor-mobility",
+            "sectionKey": "regional-commute-and-daytime-population"
+          }
+        ],
+        "year": 2020,
+        "within": {
+          "kind": "nation"
+        },
+        "chartTitle": "全国の他市区町村への通勤者数",
+        "scopeLabel": "全国の市町村・特別区"
+      },
+      {
+        "id": "municipal-outcommuter-trend",
+        "heading": "他地域へ通勤する人数の推移を比べる",
+        "lead": "八王子市と京都市について、2010・2015・2020年の他市区町村への通勤者数を比較します。通勤の規模がどう変わったかを、自治体の雇用施策の説明資料にできます。",
+        "sourceId": "municipal-commuters",
+        "metricIds": [
+          "commuters-to-other-municipalities"
+        ],
+        "method": "series",
+        "template": "line",
+        "references": [
+          "ssds-commuters"
+        ],
+        "limitation": "人数の増減は人口規模や就業構成にも影響されます。通勤のしやすさや採用成功の因果関係は示しません。",
+        "presentationMetricKey": "commuters-to-other-municipalities",
+        "themeRefs": [
+          {
+            "themeKey": "labor-mobility",
+            "sectionKey": "regional-commute-and-daytime-population"
+          }
+        ],
+        "areaCodes": [
+          "13201",
+          "26100"
+        ],
+        "chartTitle": "他市区町村への通勤者数の推移",
+        "scopeLabel": "八王子市・京都市"
+      }
+    ],
+    "notes": [
+      "市区町村の通勤者数を対象とする分析データ追加分です。求人倍率・賃金の県別固定販売版とは分けて確認してください。"
+    ],
+    "research": {
+      "method": "確認済みの社会・人口統計体系の原典表・項目定義に基づき、地域単位・年・調査対象・単位を揃え、欠測・秘匿と実値0を区別して比較する。",
+      "references": [
+        {
+          "id": "ssds-commuters",
+          "title": "社会・人口統計体系 F2705 他市区町村への通勤者数",
+          "url": "https://www.e-stat.go.jp/dbview?sid=0000020206",
+          "section": "F2705 他市区町村への通勤者数",
+          "finding": "同じ市区町村単位・国勢調査年の人数を用いる。求人倍率や人口総数とは対象が異なるため、通勤者数だけで労働供給や採用のしやすさを評価しない。",
+          "checkedAt": "2026-11-13"
+        }
+      ]
+    },
+    "version": "analysis-20261113"
   }
 }

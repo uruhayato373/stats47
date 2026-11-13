@@ -85,8 +85,8 @@
   "analysisRevision": {
     "productId": "P-05",
     "version": "analysis-20261112",
-    "planSha256": "982d6c18dc8fb672eb17974b2b0dd1cd99b7e4b32be776d0bc985c7c3bb988d7",
-    "resolvedPlanSha256": "1431576dfc379c62af507c0ccad042b18521948f4a79b1161be85d770e4c3641",
+    "planSha256": "d78806724988084d1a2f777b6707fd6da14daaf24111fe76be95dce55126a20e",
+    "resolvedPlanSha256": "5cf32412f44489451d353821be5733a37d79fa02131d9302318e56f014f8ee17",
     "sources": [
       {
         "id": "municipal-health",
@@ -132,10 +132,10 @@
             "status": "ok"
           }
         ],
-        "inputSha256": "f7f2632791991daea4872d76f8e9ebf9339942d26c8cdb7c341f2bca596687bb"
+        "inputSha256": "926041e4346aac2a127436f49e2228542cc75e74e538155a3108b5ed67bce587"
       }
     ],
-    "results": 46,
+    "results": 1799,
     "files": [
       {
         "file": "data.csv",
@@ -144,18 +144,18 @@
       },
       {
         "file": "analysis.csv",
-        "sha256": "aea22dc3a900c123be83c289d567d8f8fb42a0c809eb85ac0e4af3b5f4e91a69",
-        "bytes": 6837
+        "sha256": "b06f8f53a932208aadcdfdb2f03c15240bb7c59df07da4e30aabf915e5e7d3a7",
+        "bytes": 283575
       },
       {
         "file": "analysis.xlsx",
-        "sha256": "321768588fe3dd1a955267fead8c5818e7dd3b4889f3dbb9ca27ead55b053694",
-        "bytes": 196810
+        "sha256": "5a4f74a0dfe59f5fe7a067605c399cb547d42b9023aae1d7b825e86192ce28b4",
+        "bytes": 275052
       },
       {
         "file": "SOURCES.csv",
-        "sha256": "a17cec9d4a8113e63626eb0398101ee4363fe6967c59eff48bf37d0868f205b6",
-        "bytes": 2294
+        "sha256": "724597fae9a976affe3fcece7839c3d43368242b7a3c39dc51fc0f57b5cee469",
+        "bytes": 2051
       },
       {
         "file": "LICENSE-ja.txt",
@@ -164,54 +164,213 @@
       },
       {
         "file": "analysis-plan.json",
-        "sha256": "99f0bffb688da2582d79845a3f13ea3cccadc379e27964e6f573c341873ba10f",
-        "bytes": 6584
+        "sha256": "d6bd87b8cf635693bfbe4696b65234f209a92f511fd28bab27d4211e8b119a55",
+        "bytes": 9848
       },
       {
         "file": "figure-specs.json",
-        "sha256": "6ff7ab11f85421eb73ad6f1a9846d8d5dfd87c274d0dfe6bbc33f35dc09792ae",
-        "bytes": 8057
+        "sha256": "3eadf5a891c64df40d87748f5505be259335aca20a1cae6a633e161e74cf9333",
+        "bytes": 193057
       },
       {
         "file": "README.md",
-        "sha256": "155335fc13566b006043d248e65a53cc47da371d2a9abcd103ba8951fb31cb20",
-        "bytes": 2592
+        "sha256": "a4462f4ca6b81683ace23e0e1b88ce6ee05d48439875d7220d1d9457e533ac45",
+        "bytes": 4339
       },
       {
         "file": "READINESS.md",
-        "sha256": "a48fe84e5d43757dbb7f5362a76d86f40e5f3bbc98adbbc39469fcb5904b7c0c",
-        "bytes": 272
+        "sha256": "6576547c7e97355fa49fc32178fd85e89046f2b35c0e43b6a3666be68f4c3e0f",
+        "bytes": 192
+      },
+      {
+        "file": "images/national-clinics-per-population.png",
+        "sha256": "2f870ae1b11f43915f47e4f6a03a54487f9bb99f3a87cc8dae30173bc6dd9219",
+        "bytes": 196374
       },
       {
         "file": "images/clinics-per-population.png",
-        "sha256": "ebaa599df9748a767185b0fdbaa841ec50b753d1c99286b59dd4d90d9e8dbdb2",
-        "bytes": 173164
+        "sha256": "b96ede4457bca9a27c91c269265f9273368d849d700b856dafc743cad6e63f82",
+        "bytes": 167830
+      },
+      {
+        "file": "images/municipal-clinic-count.png",
+        "sha256": "9a9295490a9e5f12632ecc8adfeeb41baa6fe571f7988488b1edb6d8c919c55a",
+        "bytes": 161375
       },
       {
         "file": "images/elderly-population-share.png",
-        "sha256": "3e7f59a86d2edd0e651c9122ca12c520672d4658ef0301254a97ad9ffb60eb42",
-        "bytes": 162652
+        "sha256": "a6870f27a16ae4c83fa216e093ca1f5fffa570e53ed63a83d8961b54f92a80c5",
+        "bytes": 163013
       },
       {
         "file": "images/analysis-file-preview.png",
-        "sha256": "87c70976d6095443bb771a521ae0af98e919954b785510b09947e69693071239",
-        "bytes": 124196
+        "sha256": "75518d348652bdb576babf548865f323351e40e8a49a2af641ebd154029f894c",
+        "bytes": 118566
       },
       {
         "file": "inputs/municipal-health.json",
-        "sha256": "f7f2632791991daea4872d76f8e9ebf9339942d26c8cdb7c341f2bca596687bb",
-        "bytes": 35613413
+        "sha256": "926041e4346aac2a127436f49e2228542cc75e74e538155a3108b5ed67bce587",
+        "bytes": 35613332
       },
       {
         "file": "preview-product.json",
-        "sha256": "1f0fca3a9ae96e71398201434d1d73a8cf6f9fec58f9401faf5d29b2ee806f97",
-        "bytes": 3619
+        "sha256": "286cc7699c8c0c7b0482bfc6dd61e996db2c3c763deef01cb94da7f63209f74c",
+        "bytes": 6868
       },
       {
         "file": "analysis-pack.zip",
-        "sha256": "3bd9952b3bdc7d02e1d8ee28c9c8dc1459425156e99fc192a79888ce7e7a590d",
-        "bytes": 1484204
+        "sha256": "eeb5c54467d793ab3dc5743b86e3023bb9d3fb40d2be5afc7b0acf698bf3d224",
+        "bytes": 1913734
       }
     ]
+  },
+  "analysisDelivery": {
+    "productId": "P-05",
+    "status": "prepared",
+    "version": "analysis-20261112",
+    "sourceManifestSha256": "62d1fe45d851b195e9ce5063fc522924efb9e91c5b738aca155167f7e2e2eaca",
+    "planSha256": "d78806724988084d1a2f777b6707fd6da14daaf24111fe76be95dce55126a20e",
+    "archive": {
+      "bucket": "stats47-private",
+      "key": "note/product-analysis-archives/P-05/analysis-20261112/eeb5c54467d793ab3dc5743b86e3023bb9d3fb40d2be5afc7b0acf698bf3d224.zip",
+      "sha256": "eeb5c54467d793ab3dc5743b86e3023bb9d3fb40d2be5afc7b0acf698bf3d224",
+      "bytes": 1913734
+    },
+    "attachmentName": "P-05-analysis-20261112-analysis.zip",
+    "snapshot": {
+      "description": "一般診療所の実数と人口あたりの施設数を分け、全国の分布と県内の地域差を地図・グラフで確認できます。高齢人口の割合も別図で整理できます。",
+      "included": [
+        "一般診療所と人口構成（1,741地域・2020年・5,223行）",
+        "CSV・Excel、分析結果CSV、共通型の図表PNG、出典・計算方法・取得原票"
+      ],
+      "useCases": [
+        {
+          "title": "地域医療の現状整理に",
+          "description": "全国の人口あたり診療所数を見渡してから県内を拡大し、近隣市町村との違いを説明できます。"
+        },
+        {
+          "title": "医療・福祉担当者の研修に",
+          "description": "診療所の実数と人口あたりの値、高齢人口の割合を別図で読み、施設の規模と人口構成の違いを学べます。"
+        }
+      ],
+      "purchaseNotes": [
+        "医療施設数と人口構成を別図にし、診療所数だけで医療の充足や不足を断定しません。",
+        "人口0または欠測の自治体は比率を算出しません。診療所の実値0は欠測と区別して保持します。",
+        "改訂データの対象は全国の市町村・特別区です。高知県内の地図・グラフは比較方法を示す作成例です。"
+      ],
+      "showcaseNote": "分析の図は追加ファイルに同梱する観測値から計算しています。既存の固定版とは対象地域・基準年・収録形式が異なるため、各図の条件と出典を確認してください。",
+      "showcase": [
+        {
+          "id": "national-clinics-per-population",
+          "kind": "chart",
+          "heading": "人口あたりの診療所数を全国で見る",
+          "lead": "2020年の一般診療所数を人口10万人あたりに換算し、全国の市町村・特別区を地図で比較します。人口規模の違いを揃え、地域医療の現状を整理するための基礎資料にできます。",
+          "note": "施設の規模・診療科・自治体を越える受診は含まれず、医療アクセスの順位ではありません。",
+          "themeRefs": [
+            {
+              "themeKey": "healthcare",
+              "sectionKey": "supply",
+              "title": "医療・健康",
+              "sectionTitle": "医療人材と施設",
+              "href": "/themes/healthcare#theme-section-supply"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-national-clinics-per-population.png",
+              "alt": "全国の人口10万人あたり一般診療所数（全国の市町村・特別区・2020年）",
+              "template": "choropleth",
+              "sha256": "2f870ae1b11f43915f47e4f6a03a54487f9bb99f3a87cc8dae30173bc6dd9219"
+            }
+          ]
+        },
+        {
+          "id": "clinics-per-population",
+          "kind": "chart",
+          "heading": "県内の人口あたり診療所数を詳しく見る",
+          "lead": "全国地図から高知県内へ範囲を絞り、同じ2020年の一般診療所数を人口10万人あたりで比較します。近隣の市町村の位置関係と比率の違いを、地域医療の検討資料にまとめられます。",
+          "note": "施設の規模・診療科・自治体を越える受診は含まれず、医療アクセスの順位ではありません。",
+          "themeRefs": [
+            {
+              "themeKey": "healthcare",
+              "sectionKey": "supply",
+              "title": "医療・健康",
+              "sectionTitle": "医療人材と施設",
+              "href": "/themes/healthcare#theme-section-supply"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-clinics-per-population.png",
+              "alt": "人口10万人あたりの一般診療所数（高知県内の市町村・2020年）",
+              "template": "choropleth",
+              "sha256": "b96ede4457bca9a27c91c269265f9273368d849d700b856dafc743cad6e63f82"
+            }
+          ]
+        },
+        {
+          "id": "municipal-clinic-count",
+          "kind": "chart",
+          "heading": "診療所の実数と人口あたりの値を分けて見る",
+          "lead": "高知県の市といの町を例に、2020年の一般診療所数そのものを並べます。人口あたりの地図と見比べ、施設数の規模と人口に対する比率の違いを説明できます。",
+          "note": "一般診療所の施設数であり、医師数・診療科・診療能力は示しません。施設数の多さだけで医療へのアクセスを判断できません。",
+          "themeRefs": [
+            {
+              "themeKey": "aging-society",
+              "sectionKey": "birth-aging",
+              "title": "少子高齢化",
+              "sectionTitle": "出生と高齢化の現在地",
+              "href": "/themes/aging-society#theme-section-birth-aging"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-municipal-clinic-count.png",
+              "alt": "2020年の一般診療所数（2020年）",
+              "template": "bar",
+              "sha256": "9a9295490a9e5f12632ecc8adfeeb41baa6fe571f7988488b1edb6d8c919c55a"
+            }
+          ]
+        },
+        {
+          "id": "elderly-population-share",
+          "kind": "chart",
+          "heading": "高齢人口の割合を比べる",
+          "lead": "同じ高知県の市といの町について、2020年の総人口に占める65歳以上人口の割合を確認します。診療所の規模・人口あたりの施設数とは別の図で、人口構成を説明できます。",
+          "note": "総人口には年齢不詳を含みます。年齢不詳を除く人口を分母とする公表割合とは一致しない場合があります。",
+          "themeRefs": [
+            {
+              "themeKey": "aging-society",
+              "sectionKey": "birth-aging",
+              "title": "少子高齢化",
+              "sectionTitle": "出生と高齢化の現在地",
+              "href": "/themes/aging-society#theme-section-birth-aging"
+            }
+          ],
+          "figures": [
+            {
+              "file": "analysis-20261112-elderly-population-share.png",
+              "alt": "2020年の65歳以上人口の割合（2020年）",
+              "template": "bar",
+              "sha256": "a6870f27a16ae4c83fa216e093ca1f5fffa570e53ed63a83d8961b54f92a80c5"
+            }
+          ]
+        },
+        {
+          "kind": "file",
+          "heading": "ファイルの中身",
+          "lead": "地域コード・地域名・年・指標・値・単位を列に持つCSVとExcelです。観測値と分析結果を分け、欠測は理由付きで保持します。",
+          "figures": [
+            {
+              "file": "analysis-20261112-analysis-file-preview.png",
+              "alt": "市区町村の診療所と高齢化を比べるデータ集のCSV見本",
+              "template": "file-preview",
+              "sha256": "75518d348652bdb576babf548865f323351e40e8a49a2af641ebd154029f894c"
+            }
+          ],
+          "id": "analysis-file-4"
+        }
+      ]
+    }
   }
 }
