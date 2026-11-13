@@ -157,6 +157,26 @@ test('image-pipeline ゲートの trigger に現行の buzz-map publisher が含
   assert.ok(fs.existsSync(path.join(ROOT, publisher)), `${publisher} が実在しない`);
 });
 
+test('背景の選択のテストは test:image-pipeline が走らせ、その部品を変えた commit で image-pipeline ゲートが動く', () => {
+  // 一覧に無いと、背景の選択を変えた commit でもテストが CI まで走らない (CI-TOOLING-FOLLOWUP-03)
+  const pkg = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
+  const command = pkg.scripts['test:image-pipeline'];
+  const shell = fs.readFileSync(SHELL, 'utf8');
+  const start = shell.indexOf('STAGED_IMAGE_PIPELINE=$(');
+  assert.ok(start >= 0, 'image-pipeline ゲートの trigger を見つけられない');
+  const paths = collectGuardPaths(shell.slice(start, shell.indexOf('|| true)', start)));
+  assert.ok(paths.includes('.claude/scripts/sns/prepare-buzz-map-batch.ts'), 'image-pipeline の trigger の抽出が壊れている');
+  for (const name of ['blog-background-status', 'blog-background-gate', 'blog-fullbleed-background']) {
+    const testFile = `apps/web/scripts/lib/__tests__/${name}.test.ts`;
+    assert.ok(fs.existsSync(path.join(ROOT, testFile)), `${testFile} が実在しない`);
+    assert.ok(command.split(/\s+/).includes(testFile), `test:image-pipeline に ${testFile} が無い`);
+    assert.ok(paths.includes(testFile), `image-pipeline ゲートの trigger に ${testFile} が無い`);
+  }
+  for (const source of ['apps/web/scripts/lib/blog-background-status.ts', 'apps/web/scripts/lib/blog-fullbleed-background.ts']) {
+    assert.ok(paths.includes(source), `image-pipeline ゲートの trigger に ${source} が無い`);
+  }
+});
+
 // ── ゲート自体の検証 (全 PASS が「何も見ていない」と区別できるように) ──────
 
 test('[mutation] 存在しないパスを trigger に混ぜると検出する', () => {

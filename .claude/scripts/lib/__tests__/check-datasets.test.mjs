@@ -848,9 +848,18 @@ test("build-survey-portfolio.ts の --set は、Schema の語彙に無い値を 
     assert.match(result.stderr, new RegExp(`${option} no-such-value は ${field} の語彙に無い`));
     assert.equal(state.read("portfolio.json"), before, `${option} の語彙外の値で portfolio.json が書き換わった`);
   }
-  const ok = set("--lifecycle", "improve");
+  // --next-review は Schema の date (YYYY-MM-DD) で、暦に無い日付も書かない (CI-TOOLING-FOLLOWUP-03)
+  for (const value of ["next-month", "2026/12/01", "2026-13-01", "2026-02-30"]) {
+    const result = set("--next-review", value);
+    assert.equal(result.status, 1, `--next-review ${value} が通った: ${result.stdout}${result.stderr}`);
+    assert.match(result.stderr, /--next-review .* は YYYY-MM-DD の日付ではない/);
+    assert.equal(state.read("portfolio.json"), before, `--next-review ${value} で portfolio.json が書き換わった`);
+  }
+  const ok = set("--lifecycle", "improve", "--next-review", "2026-12-01");
   assert.equal(ok.status, 0, ok.stderr);
-  assert.equal(JSON.parse(state.read("portfolio.json")).surveys[0].lifecycleStatus, "improve", "語彙にある値は書く");
+  const written = JSON.parse(state.read("portfolio.json")).surveys[0];
+  assert.equal(written.lifecycleStatus, "improve", "語彙にある値は書く");
+  assert.equal(written.nextReviewAt, "2026-12-01", "暦にある日付は書く");
 });
 
 test("evaluate-survey-experiments.mjs の --verdict は、Schema の verdict の語彙 (pending を除く) だけを受け付ける", (t) => {

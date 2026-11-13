@@ -155,6 +155,12 @@ jobs:
           node .claude/scripts/lib/check-render-ci-contract.cjs --base origin/main
         continue-on-error: false
 
+      - name: 🧪 Claude Scripts Lib Contracts
+        # .claude/scripts/lib/__tests__ のうち、ほかのどの step・script も名前で走らせていないテスト
+        # (無いと pre-push の「変更したテストだけ」でしか走らない)。漏れは lib-tests-wiring.test.cjs が止める
+        run: npm run test:claude-lib-contracts
+        continue-on-error: false
+
       - name: Metric and Content Identity Contracts
         run: |
           npx tsx packages/data-configs/scripts/check-metric-contract.ts
@@ -785,6 +791,11 @@ jobs:
           npm run theme:py:test
           node .claude/scripts/lib/check-runtime-budget.cjs --ci-step theme-portfolio-state --elapsed-sec "$SECONDS"
         continue-on-error: false
+
+      - name: 🌐 Install Playwright Chromium
+        # ad-traffic-block.test.mjs の実ブラウザの確認 (広告・計測の通信を遮断できるか) 用。
+        # 入れないと CI で毎回 skip になる。テストは CI で Chromium を起動できなければ落ちる (CI-TOOLING-FOLLOWUP-03)
+        run: npx playwright install --with-deps chromium
 
       - name: 📊 Affiliate Compliance / Operations Guard
         # 直接配置台帳の構造検証 + compliance/operations 判定コアの fixture テスト。
