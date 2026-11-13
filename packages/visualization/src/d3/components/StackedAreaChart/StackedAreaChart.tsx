@@ -18,13 +18,20 @@ import {
 import type { SeriesPoint } from "d3";
 import { useEffect, useRef } from "react";
 import {
+  axisUnitBaseline,
+  bottomMarginForTickLabels,
   computeChartLayout,
   computeFontSize,
   computeMarginsByRatio,
+  fitCategoryAxis,
   leftMarginForTickLabels,
+  topMarginForAxisUnit,
+  xTickLabelDy,
+  yTickCount,
 } from "../../../shared/layout";
 import { CHART_STYLES, compactAxisFormat } from "../../constants";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
+import { useReadableFontSize } from "../../hooks/useReadableFontSize";
 import { D3ChartLegend } from "../shared/D3ChartLegend";
 import type { D3StackedAreaChartProps, StackedAreaDataNode } from "./types";
 import { fitSvgViewBox } from "../../utils/fit-svg-viewbox";
@@ -60,6 +67,7 @@ export function StackedAreaChart({
   yDomain: yDomainProp,
 }: D3StackedAreaChartProps) {
   const svgRef = useRef<SVGSVGElement>(null);
+  const plotRef = useRef<HTMLDivElement>(null);
   const { showStackedTooltip, hideTooltip, updateTooltipPosition } = useD3Tooltip();
 
   const marginsByRatio = computeMarginsByRatio(width, height, CHART_STYLES.margin.timeSeries);
@@ -71,15 +79,19 @@ export function StackedAreaChart({
     marginLeft: propsMarginLeft ?? marginsByRatio.marginLeft,
   });
 
-  const {
-    innerWidth,
-    innerHeight,
-    marginTop,
-    marginLeft,
-    marginRight,
-    marginBottom,
-  } = layout;
-  const baseFontSize = computeFontSize(width, height, CHART_STYLES.font.sizeRatio);
+  const { innerHeight, marginLeft, marginRight } = layout;
+  // 縮小表示でも画面上で読める文字サイズ (viewBox 単位)。等倍以上なら従来の大きさのまま
+  const baseFontSize = useReadableFontSize(
+    plotRef,
+    width,
+    computeFontSize(width, height, CHART_STYLES.font.sizeRatio),
+  );
+  // 100% 積み上げは目盛りが「50%」と単位を含むので、軸の頭の単位は実数のときだけ出す
+  const axisUnit = normalize ? "" : unit;
+  // 文字を大きくした分だけ上下の余白を足し、その分 viewBox を縦に伸ばす (プロット領域の高さは変えない)
+  const marginTop = axisUnit ? topMarginForAxisUnit(baseFontSize, layout.marginTop) : layout.marginTop;
+  const marginBottom = bottomMarginForTickLabels(baseFontSize, layout.marginBottom);
+  const drawHeight = height + (marginTop - layout.marginTop) + (marginBottom - layout.marginBottom);
   const legendItems = series.map((s) => ({
     key: s.key,
     label: s.label,
@@ -152,21 +164,41 @@ export function StackedAreaChart({
     // Y scale
     const domain = resolveChartDomain(stackedNumericValues(processedData, keys), normalize ? {mode: 'fixed', min: 0, max: 100} : {mode: 'zero'}, normalize ? undefined : yDomainProp);
     if (!domain) return;
-    const y = scaleLinear().domain(domain).range([height - marginBottom, marginTop]);
+    const y = scaleLinear().domain(domain).range([drawHeight - marginBottom, marginTop]);
 
     // 縦軸のラベルが左端で切れないよう、目盛りの実際の文字列から左余白を決める
-    const yTicks = y.ticks(innerHeight / 40);
-    const plotLeft = leftMarginForTickLabels(
+    const yTicks = y.ticks(yTickCount(innerHeight, baseFontSize));
+    const axisLeftEdge = leftMarginForTickLabels(
       yTicks.map((v) => yFormat(Number(v))),
       baseFontSize,
       marginLeft,
     );
 
-    // X scale
+    // X scale。横軸の目盛りは 5 年ごと。ラベルの幅と位置から、重なる (縮小表示で文字を大きくした)
+    // ときは 10 年・20 年と広げ、両端の年ラベルがはみ出すときは描画領域の左右を詰める。
     const catValues = processedData.map((d) => String(d[categoryKey] ?? ""));
-    const x = scalePoint()
-      .domain(catValues)
-      .range([plotLeft, width - marginRight]);
+    const scaleForRange = (left: number, right: number) => scalePoint().domain(catValues).range([left, right]);
+    const { plotLeft, plotRight, tickValues: filteredTicks } = fitCategoryAxis(
+      width,
+      axisLeftEdge,
+      width - marginRight,
+      baseFontSize,
+      (left, right) => {
+        const scale = scaleForRange(left, right);
+        return processedData.map((d) => {
+          const value = String(d[categoryKey] ?? "");
+          return {
+            value,
+            label: String(d.label ?? value),
+            position: scale(value) ?? 0,
+            yearCode: (d as Record<string, unknown>).yearCode as string | number | undefined,
+          };
+        });
+      },
+      { fallback: "all" },
+    );
+    const plotWidth = plotRight - plotLeft;
+    const x = scaleForRange(plotLeft, plotRight);
 
     // Area generator
     const areaFn = area<SeriesPoint<StackedAreaDataNode>>()
@@ -191,7 +223,7 @@ export function StackedAreaChart({
     const hoverLine = svg
       .append("line")
       .attr("y1", marginTop)
-      .attr("y2", height - marginBottom)
+      .attr("y2", drawHeight - marginBottom)
       .attr("stroke", "currentColor")
       .attr("stroke-opacity", 0)
       .attr("stroke-width", 1)
@@ -199,7 +231,7 @@ export function StackedAreaChart({
       .style("pointer-events", "none");
 
     // Per-category vertical hover for value display
-    const overlayWidth = innerWidth / Math.max(1, catValues.length - 1);
+    const overlayWidth = plotWidth / Math.max(1, catValues.length - 1);
     svg
       .append("g")
       .selectAll("rect")
@@ -238,16 +270,9 @@ export function StackedAreaChart({
         hideTooltip();
       });
 
-    // X axis — 5年ごとに間引き
-    const tickInterval = 5;
-    const filteredTicks = catValues.filter((val) => {
-      const row = processedData.find((d) => String(d[categoryKey]) === val);
-      const code = String((row as Record<string, unknown>)?.yearCode ?? val);
-      const num = parseInt(code, 10);
-      return !isNaN(num) && num % tickInterval === 0;
-    });
+    // X axis
     const xAxis = axisBottom(x)
-      .tickValues(filteredTicks.length > 0 ? filteredTicks : catValues)
+      .tickValues(filteredTicks)
       .tickFormat((val) => {
         const row = processedData.find(
           (d) => String(d[categoryKey]) === val
@@ -257,11 +282,11 @@ export function StackedAreaChart({
       .tickSizeOuter(0);
     svg
       .append("g")
-      .attr("transform", `translate(0,${height - marginBottom})`)
+      .attr("transform", `translate(0,${drawHeight - marginBottom})`)
       .call(xAxis)
       .call((g) => g.selectAll(".domain").remove())
       .call((g) => g.selectAll(".tick line").remove())
-      .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dy", "8"));
+      .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dy", xTickLabelDy(baseFontSize)));
 
     // Y axis
     const yAxis = axisLeft(y)
@@ -273,14 +298,27 @@ export function StackedAreaChart({
       .call(yAxis)
       .call((g) => g.selectAll(".domain").remove())
       .call((g) => g.selectAll(".tick line").attr("stroke-opacity", 0).clone()
-          .attr("x2", width - plotLeft - marginRight)
+          .attr("x2", plotWidth)
           .attr("stroke-opacity", CHART_STYLES.grid.strokeOpacity)
           .attr("stroke-dasharray", CHART_STYLES.grid.dashArray)
       )
       .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dx", "-4"));
 
+    // 縦軸の頭の単位 (縦軸の数字だけでは何の量か読めない)
+    if (axisUnit) {
+      svg
+        .append("text")
+        .attr("class", "axis-unit")
+        .attr("x", plotLeft)
+        .attr("y", axisUnitBaseline(marginTop))
+        .attr("text-anchor", "start")
+        .attr("font-size", baseFontSize)
+        .attr("fill", "currentColor")
+        .text(axisUnit);
+    }
+
     // 目盛ラベル (例: "1,400.0万") が比率マージンより長いと負の x にはみ出すので viewBox を広げる
-    fitSvgViewBox(svgRef.current, width, height);
+    fitSvgViewBox(svgRef.current, width, drawHeight);
 
     // Legend is rendered as HTML below the SVG
   }, [
@@ -290,15 +328,15 @@ export function StackedAreaChart({
     normalize,
     showLegend,
     width,
-    height,
+    drawHeight,
     marginTop,
     marginRight,
     marginBottom,
     marginLeft,
     baseFontSize,
     innerHeight,
-    innerWidth,
     unit,
+    axisUnit,
     yFormat,
     tooltipFormatter,
     showStackedTooltip,
@@ -320,10 +358,10 @@ export function StackedAreaChart({
       {showLegend && series.length > 0 && (
         <D3ChartLegend items={legendItems} />
       )}
-      <div className="relative w-full overflow-hidden">
+      <div ref={plotRef} className="relative w-full overflow-hidden">
         <svg
           ref={svgRef}
-          viewBox={`0 0 ${width} ${height}`}
+          viewBox={`0 0 ${width} ${drawHeight}`}
           className="h-auto w-full"
           role="img"
           aria-label={accessibleLabel}

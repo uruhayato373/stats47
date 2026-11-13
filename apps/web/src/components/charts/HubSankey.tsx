@@ -1,6 +1,8 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
+
+import { estimateTextWidth, useReadableFontSize } from "@stats47/visualization";
 
 /**
  * 焦点 hub 型 Sankey の純描画コンポーネント。
@@ -51,10 +53,81 @@ const PAD_TOP = { card: 70, bare: 40 } as const;
 const PAD_BOT = { card: 44, bare: 16 } as const;
 const NODE_W = 14;
 const FOCUS_W = 40;
+/** 等倍表示での文字サイズ (viewBox 単位)。縮小表示では画面上で読める大きさまで上げる */
 const FONT = 15;
 const NODE_GAP = 6;
-const LABEL_ADV = FONT + 3;
 const DEFAULT_USABLE_H = 616;
+/** ラベルとノードの間隔 */
+const LABEL_GAP = 6;
+/** ラベルと viewBox の端の間に残す幅 */
+const LABEL_EDGE_PAD = 4;
+/** 流れの帯 (ノードと中央のノードの間) に残す幅の下限。ラベルの列をこれ以上は広げない */
+const MIN_RIBBON_W = 60;
+const MAX_LABEL_GUTTER = VIEW_W / 2 - FOCUS_W / 2 - NODE_W - MIN_RIBBON_W;
+/** 1 行のラベルの列がこの幅を超えるときは、名前と値を 2 行に分ける (帯の幅を残すため) */
+const SINGLE_LINE_MAX_GUTTER = 300;
+/** 2 行のラベルの行送り (文字サイズに対する比) */
+const STACKED_LINE_HEIGHT = 1.15;
+/** ノードの列の高さに対して、ラベルを並べるのに最低限要る高さへ足す余裕 (帯の太さの差を残す) */
+const LABEL_COLUMN_HEADROOM = 1.25;
+
+/** 文字サイズから決まる寸法。等倍 (font = FONT) では従来の値になる */
+interface HubMetrics {
+  font: number;
+  /** 等倍の文字サイズに対する倍率。SVG 内の文字と余白をこの倍率で広げる */
+  k: number;
+  /** 名前と値を 2 行に分けるか (狭い幅) */
+  stacked: boolean;
+  /** ラベル 1 件が縦に占める高さ (ノードがこれより低くても行はこの高さを取る) */
+  labelAdv: number;
+  labelGutter: number;
+  usableH: number;
+  padTop: number;
+  padBot: number;
+}
+
+function hubMetrics(
+  font: number,
+  leftNodes: HubNode[],
+  rightNodes: HubNode[],
+  formatValue: (n: number) => string,
+  labelGutter: number,
+  chrome: "card" | "bare",
+  usableHeight: number,
+): HubMetrics {
+  const k = font / FONT;
+  const nodes = [...leftNodes, ...rightNodes];
+  const widest = (measure: (node: HubNode) => number) =>
+    Math.ceil(Math.max(0, ...nodes.map(measure))) + LABEL_GAP + LABEL_EDGE_PAD;
+
+  // 1 行 (名前 値) で収まる列の幅。呼び出し側の指定より長いラベルがあれば、切れないよう広げる
+  const singleLineGutter = Math.max(
+    labelGutter * k,
+    widest((node) => estimateTextWidth(`${node.name} ${formatValue(node.value)}`, font)),
+  );
+  const stacked = singleLineGutter > SINGLE_LINE_MAX_GUTTER;
+  const gutter = stacked
+    ? widest((node) =>
+        Math.max(estimateTextWidth(node.name, font), estimateTextWidth(formatValue(node.value), font)),
+      )
+    : singleLineGutter;
+
+  const labelAdv = stacked ? Math.ceil(font * STACKED_LINE_HEIGHT * 2) + 3 : font + 3;
+  const rows = Math.max(leftNodes.length, rightNodes.length);
+  const minColumnHeight = rows * labelAdv + Math.max(0, rows - 1) * NODE_GAP;
+
+  return {
+    font,
+    k,
+    stacked,
+    labelAdv,
+    labelGutter: Math.min(MAX_LABEL_GUTTER, gutter),
+    // 文字を大きくした分だけ縦に伸ばす。等倍では呼び出し側の高さのまま
+    usableH: k > 1 ? Math.max(usableHeight * k, minColumnHeight * LABEL_COLUMN_HEADROOM) : usableHeight,
+    padTop: PAD_TOP[chrome] * k,
+    padBot: PAD_BOT[chrome] * k,
+  };
+}
 
 function ribbonPath(
   x0: number,
@@ -94,10 +167,10 @@ interface HubModel {
   xFocusRight: number;
 }
 
-function colHeight(nodes: HubNode[], scale: number): number {
+function colHeight(nodes: HubNode[], scale: number, labelAdv: number): number {
   let h = 0;
   nodes.forEach((n, i) => {
-    h += Math.max(n.value * scale, LABEL_ADV);
+    h += Math.max(n.value * scale, labelAdv);
     if (i < nodes.length - 1) h += NODE_GAP;
   });
   return h;
@@ -107,12 +180,9 @@ function colHeight(nodes: HubNode[], scale: number): number {
 function buildHubModel(
   leftNodes: HubNode[],
   rightNodes: HubNode[],
-  labelGutter: number,
-  chrome: "card" | "bare",
-  usableH: number,
+  metrics: HubMetrics,
 ): HubModel {
-  const padTop = PAD_TOP[chrome];
-  const padBot = PAD_BOT[chrome];
+  const { padTop, padBot, labelGutter, usableH, labelAdv } = metrics;
   const xLeftNode = labelGutter;
   const xRightNode = VIEW_W - labelGutter - NODE_W;
   const xFocusLeft = Math.round(VIEW_W / 2 - FOCUS_W / 2);
@@ -123,7 +193,7 @@ function buildHubModel(
   const maxTotal = Math.max(totalLeft, totalRight, 1);
 
   const colMaxAt = (s: number) =>
-    Math.max(colHeight(leftNodes, s), colHeight(rightNodes, s), maxTotal * s);
+    Math.max(colHeight(leftNodes, s, labelAdv), colHeight(rightNodes, s, labelAdv), maxTotal * s);
 
   let lo = 0;
   let hi = usableH / maxTotal;
@@ -137,12 +207,12 @@ function buildHubModel(
   const viewH = padTop + colMaxH + padBot;
 
   const layout = (nodes: HubNode[], xNode: number, isLeft: boolean): LaidNode[] => {
-    const colH = colHeight(nodes, scale);
+    const colH = colHeight(nodes, scale, labelAdv);
     let y = padTop + (colMaxH - colH) / 2;
     return nodes.map((n) => {
       const h = n.value * scale;
       const laid: LaidNode = { ...n, y, h, xr: isLeft ? xNode + NODE_W : xNode };
-      y += Math.max(h, LABEL_ADV) + NODE_GAP;
+      y += Math.max(h, labelAdv) + NODE_GAP;
       return laid;
     });
   };
@@ -198,14 +268,53 @@ export function HubSankey({
   chrome = "card",
   usableHeight = DEFAULT_USABLE_H,
 }: Props) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  // 幅 1000 の viewBox をスマホの幅に縮めると 15 の文字が約 4px になる。表示幅から文字サイズを逆算する
+  const font = useReadableFontSize(containerRef, VIEW_W, FONT);
+  const metrics = useMemo(
+    () => hubMetrics(font, leftNodes, rightNodes, formatValue, labelGutter, chrome, usableHeight),
+    [font, leftNodes, rightNodes, formatValue, labelGutter, chrome, usableHeight],
+  );
   const model = useMemo(
-    () => buildHubModel(leftNodes, rightNodes, labelGutter, chrome, usableHeight),
-    [leftNodes, rightNodes, labelGutter, chrome, usableHeight],
+    () => buildHubModel(leftNodes, rightNodes, metrics),
+    [leftNodes, rightNodes, metrics],
   );
   const bare = chrome === "bare";
+  const { k, stacked, labelAdv } = metrics;
+  // 中央のラベルの基準の高さ。狭い幅では文字が帯の列の幅いっぱいに広がるので、帯に重ならないよう
+  // ノードの列の上端 (padTop) より上に置く。等倍では従来どおり中央のノードのすぐ上
+  const centerLabelBase = stacked ? Math.min(model.focusTop, metrics.padTop) : model.focusTop;
+
+  /** ノードの横のラベル。狭い幅では名前と値を 2 行に分け、行 (ノードが低くても labelAdv の高さ) の中央に置く */
+  const nodeLabel = (n: LaidNode, x: number, anchor: "start" | "end") => {
+    if (!stacked) {
+      return (
+        <text
+          x={x}
+          y={n.y + n.h / 2 + font * 0.35}
+          textAnchor={anchor}
+          fontSize={font}
+          className="fill-foreground"
+        >
+          {n.name}{" "}
+          <tspan className="fill-muted-foreground">{formatValue(n.value)}</tspan>
+        </text>
+      );
+    }
+    const firstBaseline = n.y + Math.max(n.h, labelAdv) / 2 - font * 0.2;
+    return (
+      <text x={x} y={firstBaseline} textAnchor={anchor} fontSize={font} className="fill-foreground">
+        <tspan x={x}>{n.name}</tspan>
+        <tspan x={x} dy={font * STACKED_LINE_HEIGHT} className="fill-muted-foreground">
+          {formatValue(n.value)}
+        </tspan>
+      </text>
+    );
+  };
 
   return (
     <div
+      ref={containerRef}
       className={
         bare ? "w-full" : "w-full overflow-hidden rounded-card border bg-card"
       }
@@ -220,9 +329,9 @@ export function HubSankey({
           <>
             <text
               x={VIEW_W / 2}
-              y={30}
+              y={30 * k}
               textAnchor="middle"
-              fontSize={22}
+              fontSize={22 * k}
               fontWeight={700}
               className="fill-foreground"
             >
@@ -230,9 +339,9 @@ export function HubSankey({
             </text>
             <text
               x={VIEW_W / 2}
-              y={52}
+              y={52 * k}
               textAnchor="middle"
-              fontSize={13}
+              fontSize={13 * k}
               className="fill-muted-foreground"
             >
               {subtitle}
@@ -257,9 +366,9 @@ export function HubSankey({
         />
         <text
           x={model.xFocusLeft + FOCUS_W / 2}
-          y={model.focusTop - 22}
+          y={centerLabelBase - 22 * k}
           textAnchor="middle"
-          fontSize={FONT + 3}
+          fontSize={(FONT + 3) * k}
           fontWeight={700}
           className="fill-foreground"
         >
@@ -267,9 +376,9 @@ export function HubSankey({
         </text>
         <text
           x={model.xFocusLeft + FOCUS_W / 2}
-          y={model.focusTop - 6}
+          y={centerLabelBase - 6 * k}
           textAnchor="middle"
-          fontSize={FONT}
+          fontSize={font}
           fontWeight={700}
           fill={centerSubColor}
         >
@@ -286,18 +395,7 @@ export function HubSankey({
               rx={2}
               fill={leftColor}
             />
-            <text
-              x={model.xLeftNode - 6}
-              y={n.y + n.h / 2 + FONT * 0.35}
-              textAnchor="end"
-              fontSize={FONT}
-              className="fill-foreground"
-            >
-              {n.name}{" "}
-              <tspan className="fill-muted-foreground">
-                {formatValue(n.value)}
-              </tspan>
-            </text>
+            {nodeLabel(n, model.xLeftNode - LABEL_GAP, "end")}
           </g>
         ))}
 
@@ -311,27 +409,16 @@ export function HubSankey({
               rx={2}
               fill={rightColor}
             />
-            <text
-              x={model.xRightNode + NODE_W + 6}
-              y={n.y + n.h / 2 + FONT * 0.35}
-              textAnchor="start"
-              fontSize={FONT}
-              className="fill-foreground"
-            >
-              {n.name}{" "}
-              <tspan className="fill-muted-foreground">
-                {formatValue(n.value)}
-              </tspan>
-            </text>
+            {nodeLabel(n, model.xRightNode + NODE_W + LABEL_GAP, "start")}
           </g>
         ))}
 
         {footer && !bare && (
           <text
             x={VIEW_W / 2}
-            y={model.viewH - 16}
+            y={model.viewH - 16 * k}
             textAnchor="middle"
-            fontSize={12}
+            fontSize={12 * k}
             className="fill-muted-foreground"
           >
             {footer}
