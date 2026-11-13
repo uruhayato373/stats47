@@ -85,7 +85,7 @@ function runPreflight(projectDir) {
 function tempProject(files = {}) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "stats47-preflight-"));
   const seeded = {
-    ".claude/config/env-registry.json": `${JSON.stringify({ version: 1, variables: [] }, null, 2)}\n`,
+    "config/env-registry.json": `${JSON.stringify({ version: 1, variables: [] }, null, 2)}\n`,
     ...files,
   };
   for (const [rel, content] of Object.entries(seeded)) {

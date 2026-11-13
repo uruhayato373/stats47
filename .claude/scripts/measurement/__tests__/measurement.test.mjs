@@ -368,7 +368,7 @@ test('no CI-only entry point for sessions or credentials remains', () => {
   const dir = '.claude/scripts/measurement';
   const files = [
     ...readdirSync(dir).filter((file) => file.endsWith('.mjs')).map((file) => join(dir, file)),
-    'package.json', '.claude/config/env-registry.json', '.claude/config/auth-credentials.json',
+    'package.json', 'config/env-registry.json', '.claude/config/auth-credentials.json',
     'apps/admin/app/ops/auth/page.tsx', 'apps/admin/lib/server/auth-credentials.ts',
     'docs/01_技術設計/07_Playwright認証プロファイル.md',
   ];

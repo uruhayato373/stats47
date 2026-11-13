@@ -8,7 +8,7 @@
  *       .claude/state/metrics/claude-usage/history.csv  (CI 無人実行の実績。record-claude-usage.mjs が書く)
  *       .claude/state/metrics/model-usage/canary/*.json (run-canary.mjs が書く品質比較)
  *       .claude/agents/*.md の frontmatter (model / effort)
- *       .claude/config/{model-pricing,model-optimization-policy}.json
+ *       config/model-pricing.json (単価)・.claude/config/model-optimization-policy.json (最適化の方針)
  * 書く: .claude/state/metrics/model-usage/latest.json (管理画面 /ops/agents と /weekly-review が読む)
  *
  * 提案は決定的な規則だけで出し、frontmatter は書き換えない。採否は canary の結果を見て人が決める。
@@ -116,7 +116,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
     agents: readAgents(path.join(ROOT, '.claude/agents')),
     ciCsv: fs.existsSync(ciPath) ? fs.readFileSync(ciPath, 'utf8') : null,
     canary: readCanaryResults(path.join(STATE, 'canary')),
-    pricing: readJson(path.join(ROOT, '.claude/config/model-pricing.json')),
+    pricing: readJson(path.join(ROOT, 'config/model-pricing.json')),
     policy: readJson(path.join(ROOT, '.claude/config/model-optimization-policy.json')),
   });
   if (process.argv.includes('--stdout')) {

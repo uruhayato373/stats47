@@ -15,7 +15,7 @@ paths:
 - [Prompting Claude Fable 5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5)
 - [Prompting Claude Sonnet 5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5)
 - [Subagent frontmatter](https://code.claude.com/docs/en/sub-agents) (`model` / `effort` の許容値。2026-10-02 参照)
-- [Pricing](https://platform.claude.com/docs/en/about-claude/pricing) (単価の正本。写しは `.claude/config/model-pricing.json`)
+- [Pricing](https://platform.claude.com/docs/en/about-claude/pricing) (単価の正本。写しは `config/model-pricing.json`)
 - [Prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices)
 
 ## 共通の Task Capsule
@@ -114,7 +114,7 @@ visible output量、token/cost、所要時間。保存する場合は
 ## 継続最適化サイクル (計測 → 記録 → 改善)
 
 モデルと effort は印象で変えず、次の 3 段で回す (2026-10-02 導入)。閾値は
-`.claude/config/model-optimization-policy.json`、単価は `.claude/config/model-pricing.json` だけに置く。
+`.claude/config/model-optimization-policy.json`、単価は `config/model-pricing.json` だけに置く。
 
 | 段 | 何をするか | 実体 |
 |---|---|---|

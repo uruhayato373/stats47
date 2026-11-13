@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Claude モデルの API 単価",
+  "description": "config/model-pricing.json の形状契約 (2026-11-14 に .claude/config/ から移したときに作成)。単価は USD / 100 万トークン。単価が変わったら source を開き直し observedAt と一緒に更新する。",
+  "type": "object",
+  "properties": {
+    "_doc": { "type": "string" },
+    "source": { "type": "string" },
+    "observedAt": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "models": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "input": { "type": "number", "minimum": 0 },
+          "cacheWrite5m": { "type": "number", "minimum": 0 },
+          "cacheWrite1h": { "type": "number", "minimum": 0 },
+          "cacheRead": { "type": "number", "minimum": 0 },
+          "output": { "type": "number", "minimum": 0 }
+        },
+        "required": ["input", "cacheWrite5m", "cacheWrite1h", "cacheRead", "output"]
+      }
+    }
+  },
+  "required": ["source", "observedAt", "models"]
+}

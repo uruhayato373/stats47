@@ -161,6 +161,14 @@ test("planned の行が追跡ファイルに当たっていれば落ちる (件�
   assert.deepEqual(run([ds("a", "data/x/{**}", { planned: true })], ["data/x/.gitkeep"]).errors, []);
 });
 
+test("transient の行 (CI が消費して消す依頼・公開待ち) は 0 件でも 1 件以上でも通す", () => {
+  // 依頼や公開待ちは普段 0 件で、cloud セッションが push した直後だけ 1 件以上ある。planned だと push の commit が止まり、
+  // 何も付けないと消費した後に止まる (2026-11-14 DIR-PLACEMENT-CLEANUP-01)
+  assert.deepEqual(run([ds("a", "data/x-requests.json", { transient: true })], []).errors, []);
+  assert.deepEqual(run([ds("a", "data/x/{**}", { transient: true })], ["data/x/1.json", "data/x/2.json"]).errors, []);
+  assert.match(run([ds("a", "data/x/{**}", { transient: true, planned: true })], []).errors.join(), /transient と planned は同時に付けない/);
+});
+
 test("語彙外の kind / target / 領域と id の重複は落ちる", () => {
   const files = ["data/x.json"];
   assert.match(run([ds("a", "data/x.json", { kind: "nope" })], files).errors.join(), /語彙外の kind/);

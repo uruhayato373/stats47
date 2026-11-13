@@ -92,7 +92,7 @@ function inScope(file) {
 }
 
 function candidateRoots() {
-  // root の scripts/ も探す。lyra の書き込みスクリプト (scripts/ui-theme/inline-lyra.mjs) のように、
+  // root の scripts/ も探す。lyra の書き込みスクリプト (2026-11-14 まで root の scripts/ にあった inline-lyra.mjs) のように、
   // root に置かれた検査が台帳へ宣言されても探索範囲の外で NOT_A_CHECKER になり、例外登録で通していた。
   const roots = [path.join(ROOT, ".claude/scripts"), path.join(ROOT, "scripts")];
   for (const parent of ["apps", "packages"]) {

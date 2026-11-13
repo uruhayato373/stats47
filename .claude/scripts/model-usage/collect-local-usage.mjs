@@ -21,7 +21,7 @@ import { markRun, mergeRows, mergeWeeks, rowsFromTranscript } from './usage-core
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 const OUT_DIR = path.join(ROOT, '.claude/state/metrics/model-usage');
-const PRICING = path.join(ROOT, '.claude/config/model-pricing.json');
+const PRICING = path.join(ROOT, 'config/model-pricing.json');
 
 function arg(name) {
   const i = process.argv.indexOf(name);

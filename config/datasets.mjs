@@ -15,6 +15,7 @@
  *                   宣言すれば検証する (check-datasets。判断に使う記録は書き手も .claude/scripts/lib/dataset-shape.mjs で書く前に検証)
  *           retain: 日付付きファイルの寿命 (.claude/scripts/lib/prune-state-snapshots.mjs の RETENTION_POLICIES の名前。
  *                   数値はそちらだけに置く) / planned: まだ 1 件も無い (追跡ファイルができたら外す。check-datasets が落とす)
+ *           transient: CI が消費して消す依頼・公開待ちの outbox。普段は 0 件で push の直後だけある (件数を問わない。planned と併用しない)
  *           r2State: 正本は private R2 のこの prefix。手元は git 管理外の live/ に置く (npm run media:state:pull / push)。
  *                    git の追跡ファイルに当たらなくてよい (2026-10-18 オーナー判断: 画像まわりの派生データは R2)
  *           refs:   この台帳の ID が指す先 (外部キー相当。2026-10-26)。下の「REFS の書き方」
@@ -123,6 +124,8 @@ export const SYSTEM_CONFIG = {
   "local.resources": "端末の容量予算・掃除対象・保持日数",
   "source-vault.profiles": "参考文献 vault の接続先と資料 profile",
   "web.yoy-batch": "バッチの設定",
+  "ops.env-registry": "環境変数の名前と公開の区分の登録表 (値は置かない。未登録の process.env を止める検査が読む)",
+  "claude.model-pricing": "Claude モデルの API 単価 (使用量の費用換算が読む)",
 };
 
 /**
@@ -262,6 +265,8 @@ export const DATASETS = [
   d("local.resources", P.LOCAL_RESOURCES, "config", "ops", "config", "端末の容量予算・掃除対象・保持日数", { schema: "config/schema/local.resources.schema.json" }),
   d("source-vault.profiles", P.SOURCE_VAULT, "config", "data", "config", "参考文献 vault の資料 profile", { schema: "config/schema/source-vault.profiles.schema.json" }),
   d("web.yoy-batch", P.YOY_BATCH, "config", "data", "config", "前年比時系列のバッチ設定", { schema: "config/schema/web.yoy-batch.schema.json" }),
+  d("ops.env-registry", "config/env-registry.json", "config", "ops", "config", "環境変数の名前と公開の区分 (値は置かない)。読み書きは .claude/scripts/lib/check-env-registry.cjs", { schema: "config/schema/ops.env-registry.schema.json" }),
+  d("claude.model-pricing", "config/model-pricing.json", "config", "ops", "config", "Claude モデルの API 単価 (USD / 100 万トークン)。読むのは .claude/scripts/model-usage/", { schema: "config/schema/claude.model-pricing.schema.json" }),
 
   // ── data/ : 事業の記録 ──
   d("note.kakei-expense-evidence", "data/note/kakei-expense-evidence.json", "ledger", "product", "data", "note 家計シリーズの十大費目→根拠指標の対応表 (build-kakei-note-evidence-data.mjs の入力)", { schema: "data/note/kakei-expense-evidence.schema.json" }),
@@ -491,7 +496,7 @@ export const DATASETS = [
   d("claude.model-usage", `${SM}/model-usage/{name}.json`, "state", "ops", "state", "モデル使用量と最適化提案"),
   d("claude.model-canary", `${SM}/model-usage/canary/{date}-{name}.json`, "evidence", "ops", "state", "モデル / effort の canary 比較", { retain: "model-usage-canary" }),
   d("claude.prompt-evals", `${SM}/prompt-evals/{date}.json`, "evidence", "ops", "state", "プロンプト評価の結果"),
-  d("ops.ci-requests", "data/{name}-requests.json", "state", "ops", "data", "cloud セッションが CI に頼む実行依頼 (workflow の代理起動など)。CI が消費して git rm するので普段は 0 件"),
+  d("ops.ci-requests", "data/{name}-requests.json", "state", "ops", "data", "cloud セッションが CI に頼む実行依頼 (workflow の代理起動など)。CI が消費して git rm するので普段は 0 件", { transient: true }),
   d("ops.monthly-jobs", "data/ci/monthly-jobs/{name}.json", "state", "ops", "data", "月次ジョブの最終実行"),
   d("ops.releases", "data/releases/{date}-{name}.json", "evidence", "ops", "data", "release の検証証跡", { retain: "releases" }),
   d("instagram.token", "data/sns/instagram-token.json", "state", "sns", "data", "Instagram トークンの更新日と期限 (トークン本体は置かない)"),
@@ -1355,6 +1360,9 @@ export const RETIRED = [
   { from: "ges/scripts/data/ports.json", to: "data/areas/master/ports.json (台帳 areas.ports を読む)", since: "2026-11-11" },
   // 段 13 (2026-11-12): note のハッシュタグ 286 ファイルを、記事の ID をキーにした 1 つの表へ (題・URL・系統の写しは持たない)
   { from: "data/note/hashtags/", to: "data/note/hashtags.json", since: "2026-11-12" },
+  // 品質ゲートの基準ではないシステムの設定を .claude/config/ から config/ へ (2026-11-14 DIR-PLACEMENT-CLEANUP-01)
+  { from: ".claude/config/env-registry.json", to: "config/env-registry.json", since: "2026-11-14" },
+  { from: ".claude/config/model-pricing.json", to: "config/model-pricing.json", since: "2026-11-14" },
 ];
 
 const BY_ID = new Map(DATASETS.map((ds) => [ds.id, ds]));

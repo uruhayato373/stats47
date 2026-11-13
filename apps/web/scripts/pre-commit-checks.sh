@@ -241,7 +241,7 @@ if [ -n "$STAGED_ANY" ]; then
   echo -e "${GREEN}🔐 環境変数レジストリ・資産ポリシー・保守負債ガード...${NC}"
   stage "環境変数レジストリ (check-env-registry)"
   if ! node "$GUARD_ROOT/.claude/scripts/lib/check-env-registry.cjs"; then
-    echo -e "${RED}❌ 未登録の環境変数があります。.claude/config/env-registry.json に登録してください。${NC}"
+    echo -e "${RED}❌ 未登録の環境変数があります。config/env-registry.json に登録してください。${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
   stage "画像資産ポリシー (check-asset-policy)"

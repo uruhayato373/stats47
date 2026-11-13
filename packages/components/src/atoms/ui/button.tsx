@@ -5,7 +5,7 @@
 // その variant の lyra の値も className に書き込まれるので、使わない見た目の分だけ全ページの CSS が
 // 重くなる (2026-10-28 配信サイズの点検・策 E)。使い始めるときはテンプレートの写しから戻す。
 // lyra の cn-* 規則が別の値で上書きする素のクラス (rounded-xl・text-sm 等) は消してある (packages/ui-theme/README.md の差の一覧)。
-// lyra の値は cva の外 (<名前>Lyra) に書き、呼び出し側の className より後ろで合成する (scripts/ui-theme/inline-lyra.mjs)。
+// lyra の値は cva の外 (<名前>Lyra) に書き、呼び出し側の className より後ろで合成する (.claude/scripts/ui/inline-lyra.mjs)。
 import { Button as ButtonPrimitive } from "@base-ui/react/button"
 import { cva, type VariantProps } from "class-variance-authority"
 
@@ -45,7 +45,7 @@ const buttonClasses = cva(
     },
   }
 )
-// lyra:begin buttonClasses (scripts/ui-theme/inline-lyra.mjs が style-lyra.css から書く。手で直さない)
+// lyra:begin buttonClasses (.claude/scripts/ui/inline-lyra.mjs が style-lyra.css から書く。手で直さない)
 const buttonClassesLyra = cva("focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 rounded-md border border-transparent bg-clip-padding font-medium focus-visible:ring-1 aria-invalid:ring-1 active:not-aria-[haspopup]:translate-y-px [&_svg:not([class*='size-'])]:size-4 text-sm", {
   variants: {
     variant: {

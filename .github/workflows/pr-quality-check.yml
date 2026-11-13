@@ -225,7 +225,7 @@ jobs:
         # 書き込み漏れの検査本体 (--check) を直に呼ぶ。台帳 lyra-inline の checker として配線が辿れる
         run: |
           npm run ui-theme:lyra:test
-          node --import tsx scripts/ui-theme/inline-lyra.mjs --check
+          node --import tsx .claude/scripts/ui/inline-lyra.mjs --check
         continue-on-error: false
 
       - name: 🃏 Card Census Guard
@@ -362,7 +362,7 @@ jobs:
 
       - name: 🔐 Environment Registry Guard
         # 値は読まず、コード/workflowが参照するenv名と公開区分だけを検査。
-        # 新規envは `.claude/config/env-registry.json` への登録を必須にする。
+        # 新規envは `config/env-registry.json` への登録を必須にする。
         run: node .claude/scripts/lib/check-env-registry.cjs
         continue-on-error: false
 
