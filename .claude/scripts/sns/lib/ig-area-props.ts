@@ -26,6 +26,20 @@ export {
 export const MAX_ITEMS_PER_SOURCE = 2;
 export const MAX_ITEMS_PER_CATEGORY = 1;
 
+/**
+ * 台本が読める databook.json の最低版。2 = 「特徴」の選定に使う highlight メタを焼き込んだ版。
+ * 3 以降の版上げは任意項目の追加 (例: kakeiTopItems) なので、この台本は版の完全一致を求めない。
+ * 現行版 (AREA_DATABOOK_SCHEMA_VERSION) と比べると、任意項目を足すたびに R2 の再生成まで止まってしまう。
+ */
+export const IG_AREA_MIN_DATABOOK_SCHEMA_VERSION = 2;
+
+/** 台本が読めない旧版なら理由を返し、読めるなら null を返す。 */
+export function databookTooOldMessage(databook: { schemaVersion?: number }): string | null {
+  const version = databook.schemaVersion ?? 1;
+  if (version >= IG_AREA_MIN_DATABOOK_SCHEMA_VERSION) return null;
+  return `✗ databook.json が旧版です (schemaVersion ${version}、最低 ${IG_AREA_MIN_DATABOOK_SCHEMA_VERSION})。R2 の databook.json を再生成するか --databook でローカル生成物を渡してください。`;
+}
+
 /** 最終的に props.json へ書き出す1件 */
 export interface AreaCarouselItem {
   rankingKey: string;

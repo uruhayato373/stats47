@@ -2,10 +2,12 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import type { AreaHighlight } from "../../../../packages/area-profile/src/highlights/select-area-highlights.ts";
+import { AREA_DATABOOK_SCHEMA_VERSION } from "../../../../packages/area-profile/src/types/databook-snapshot.ts";
 import {
   buildCoverHook,
   buildCoverTeaser,
   buildScopeNote,
+  databookTooOldMessage,
   extractYear,
   normalizePrefCode,
   toAreaCarouselItem,
@@ -95,4 +97,14 @@ test("normalizePrefCode は2桁/5桁のどちらも受け付け、範囲外は�
   assert.deepEqual(normalizePrefCode("46000"), { pref2: "46", pref5: "46000" });
   assert.throws(() => normalizePrefCode("99"));
   assert.throws(() => normalizePrefCode("abc"));
+});
+
+test("databookTooOldMessage は『特徴』のメタを持つ版 (2 以上) を、任意項目を足した版上げでも止めない", () => {
+  // 現行版・将来の版上げ (任意項目の追加) は通す
+  for (const v of [2, AREA_DATABOOK_SCHEMA_VERSION, AREA_DATABOOK_SCHEMA_VERSION + 1, 99]) {
+    assert.equal(databookTooOldMessage({ schemaVersion: v }), null, `schemaVersion ${v} は止めない`);
+  }
+  // メタの無い旧版 (1 と未設定) だけ止める
+  assert.match(databookTooOldMessage({ schemaVersion: 1 }) ?? "", /旧版/);
+  assert.match(databookTooOldMessage({}) ?? "", /旧版/);
 });
