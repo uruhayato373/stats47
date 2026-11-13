@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-07",
+  "generated_at": "2026-11-14",
   "week": "2026-W44",
   "source_observed_at": "2026-10-31",
   "source_age_weeks": 1,
@@ -22,20 +22,20 @@
   },
   "summary": {
     "tracked_urls": 3264,
-    "pending_actionable": 1802,
+    "pending_actionable": 1745,
     "by_action": {
       "observe-after-fix": 852,
       "sitemap-gap": 958,
       "none": 1454
     },
     "by_status": {
-      "done": 8,
-      "pending": 1802,
+      "done": 65,
+      "pending": 1745,
       "resolved-by-design": 1454
     },
-    "indexed_by_inspection": 8,
+    "indexed_by_inspection": 65,
     "pending_by_action": {
-      "observe-after-fix": 844,
+      "observe-after-fix": 787,
       "sitemap-gap": 958
     },
     "by_verdict": {
@@ -25129,7 +25129,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-15",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25150,16 +25150,16 @@
       "canonical_url": "https://stats47.jp/areas/36000/retail-commerce",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-15",
-        "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T06:24:37Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -25177,16 +25177,16 @@
       "canonical_url": "https://stats47.jp/areas/36000/single-parent-households",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-15",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T21:04:49Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -25210,7 +25210,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-15",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25236,7 +25236,12 @@
       "last_checked": "2026-11-07",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-11-14",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -25259,7 +25264,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-15",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25280,16 +25285,16 @@
       "canonical_url": "https://stats47.jp/areas/37000/construction-industry",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-15",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T00:52:21Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -25313,9 +25318,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-15",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -25340,7 +25345,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-15",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25361,16 +25366,16 @@
       "canonical_url": "https://stats47.jp/areas/38000/business-demography",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-15",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T03:50:45Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -25394,7 +25399,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-15",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25421,7 +25426,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-15",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25442,16 +25447,16 @@
       "canonical_url": "https://stats47.jp/areas/38000/construction-industry",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-15",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-12T15:50:40Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -25475,7 +25480,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-15",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25502,7 +25507,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-15",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25529,7 +25534,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-15",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25555,7 +25560,12 @@
       "last_checked": "2026-11-07",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-11-14",
+        "verdict": "NEUTRAL",
+        "coverage_state": "URL が Google に認識されていません",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -25572,16 +25582,16 @@
       "canonical_url": "https://stats47.jp/areas/38000/local-services",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-15",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T21:24:24Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -25605,7 +25615,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-15",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
@@ -25632,9 +25642,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-15",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -25653,16 +25663,16 @@
       "canonical_url": "https://stats47.jp/areas/38000/retail-commerce",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-15",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-12T23:33:31Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -25686,7 +25696,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-15",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
@@ -25707,16 +25717,16 @@
       "canonical_url": "https://stats47.jp/areas/38000/waste-recycling",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-15",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T12:53:43Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -25734,16 +25744,16 @@
       "canonical_url": "https://stats47.jp/areas/39000/construction-industry",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-15",
-        "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T03:51:56Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -25767,9 +25777,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-15",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -25794,7 +25804,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-15",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25821,9 +25831,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -25848,7 +25858,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25875,7 +25885,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25902,7 +25912,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25928,7 +25938,12 @@
       "last_checked": "2026-11-07",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-11-14",
+        "verdict": "NEUTRAL",
+        "coverage_state": "サーバーエラー（5xx）",
+        "last_crawl": "2026-11-13T06:44:25Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -25945,16 +25960,16 @@
       "canonical_url": "https://stats47.jp/areas/40000/natural-environment",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-12T23:00:33Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -25972,16 +25987,16 @@
       "canonical_url": "https://stats47.jp/areas/40000/retail-commerce",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T01:50:20Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -26004,7 +26019,12 @@
       "last_checked": "2026-11-07",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-11-14",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -26027,7 +26047,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26054,9 +26074,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -26075,16 +26095,16 @@
       "canonical_url": "https://stats47.jp/areas/42000/innovation-patents",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-10T19:54:16Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -26102,16 +26122,16 @@
       "canonical_url": "https://stats47.jp/areas/42000/landslide-exposure",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T08:50:25Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -26135,7 +26155,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26162,7 +26182,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26183,16 +26203,16 @@
       "canonical_url": "https://stats47.jp/areas/43000/childcare-services",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-10T18:26:35Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -26216,7 +26236,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26243,7 +26263,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26264,12 +26284,17 @@
       "canonical_url": "https://stats47.jp/areas/43000/household-food-spending",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-11-07",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-10T16:49:47Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -26292,7 +26317,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26319,7 +26344,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26340,16 +26365,16 @@
       "canonical_url": "https://stats47.jp/areas/43000/sports-participation",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T12:20:18Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -26373,9 +26398,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -26394,16 +26419,16 @@
       "canonical_url": "https://stats47.jp/areas/44000/cultural-participation",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T00:53:01Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -26421,16 +26446,16 @@
       "canonical_url": "https://stats47.jp/areas/44000/disability-support",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-10T17:53:34Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -26448,16 +26473,16 @@
       "canonical_url": "https://stats47.jp/areas/44000/earthquake-exposure",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-10T23:21:48Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -26481,7 +26506,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26502,16 +26527,16 @@
       "canonical_url": "https://stats47.jp/areas/44000/gender-participation",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T03:22:35Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -26534,7 +26559,12 @@
       "last_checked": "2026-11-07",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-11-14",
+        "verdict": "NEUTRAL",
+        "coverage_state": "サーバーエラー（5xx）",
+        "last_crawl": "2026-11-13T02:22:56Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -26557,7 +26587,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26578,16 +26608,16 @@
       "canonical_url": "https://stats47.jp/areas/44000/regional-transport",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-10T19:52:11Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -26605,16 +26635,16 @@
       "canonical_url": "https://stats47.jp/areas/44000/retail-commerce",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T06:51:07Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -26638,9 +26668,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -26665,7 +26695,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
@@ -26692,7 +26722,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26719,9 +26749,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -26746,7 +26776,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26772,7 +26802,12 @@
       "last_checked": "2026-11-07",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-11-14",
+        "verdict": "NEUTRAL",
+        "coverage_state": "URL が Google に認識されていません",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -26789,16 +26824,16 @@
       "canonical_url": "https://stats47.jp/areas/45000/landslide-exposure",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-13T16:21:20Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -26822,7 +26857,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26843,16 +26878,16 @@
       "canonical_url": "https://stats47.jp/areas/45000/public-assistance",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-10-17",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T06:39:39Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -26876,7 +26911,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26903,7 +26938,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26930,7 +26965,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26957,7 +26992,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
@@ -26984,9 +27019,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -27011,7 +27046,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -27032,16 +27067,16 @@
       "canonical_url": "https://stats47.jp/areas/46000/health-checkups",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T01:20:41Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -27064,7 +27099,12 @@
       "last_checked": "2026-11-07",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-11-14",
+        "verdict": "NEUTRAL",
+        "coverage_state": "サーバーエラー（5xx）",
+        "last_crawl": "2026-11-13T20:22:35Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -27081,16 +27121,16 @@
       "canonical_url": "https://stats47.jp/areas/46000/innovation-patents",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T07:51:31Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -27108,16 +27148,16 @@
       "canonical_url": "https://stats47.jp/areas/46000/local-government-digital",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-13T19:52:28Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -27140,7 +27180,12 @@
       "last_checked": "2026-11-07",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-11-14",
+        "verdict": "NEUTRAL",
+        "coverage_state": "URL が Google に認識されていません",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -27163,7 +27208,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -27190,9 +27235,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -27217,7 +27262,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -27238,16 +27283,16 @@
       "canonical_url": "https://stats47.jp/areas/47000/forestry-timber",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T03:50:25Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -27265,16 +27310,16 @@
       "canonical_url": "https://stats47.jp/areas/47000/gender-participation",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-12T21:44:02Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -27292,16 +27337,16 @@
       "canonical_url": "https://stats47.jp/areas/47000/geographic-access",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T22:32:08Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -27325,9 +27370,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -27346,12 +27391,17 @@
       "canonical_url": "https://stats47.jp/areas/47000/household-food-spending",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-11-07",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T22:25:41Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -27368,16 +27418,16 @@
       "canonical_url": "https://stats47.jp/areas/47000/information-industry",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T14:22:05Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -27395,16 +27445,16 @@
       "canonical_url": "https://stats47.jp/areas/47000/land-property-market",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-12T02:21:01Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -27428,9 +27478,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -27455,7 +27505,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -27482,7 +27532,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -27509,7 +27559,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -27536,7 +27586,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -27563,7 +27613,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -27590,7 +27640,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -27611,16 +27661,16 @@
       "canonical_url": "https://stats47.jp/blog/cake-consumption-expenditure-prefecture-gap",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-20",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T11:21:51Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -27644,7 +27694,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -27665,16 +27715,16 @@
       "canonical_url": "https://stats47.jp/blog/convenience-store-sales-monthly-prefecture-gap",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-20",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-13T04:26:12Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -27698,9 +27748,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -27719,16 +27769,16 @@
       "canonical_url": "https://stats47.jp/blog/densely-populated-area-prefecture-gap",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-20",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-13T04:35:22Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -27752,7 +27802,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -27779,7 +27829,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -27806,9 +27856,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -27827,16 +27877,16 @@
       "canonical_url": "https://stats47.jp/blog/miscellaneous-school-students-prefecture-gap",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-20",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-10T20:06:16Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -27860,9 +27910,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -27887,9 +27937,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -27914,7 +27964,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -27941,7 +27991,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -27968,9 +28018,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -27989,16 +28039,16 @@
       "canonical_url": "https://stats47.jp/blog/physical-therapist-annual-income-prefecture-gap",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-20",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-13T15:39:04Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -28022,7 +28072,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -28049,9 +28099,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -28076,9 +28126,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -28103,7 +28153,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -28130,9 +28180,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -28157,9 +28207,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -28184,7 +28234,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
@@ -28211,9 +28261,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -28238,7 +28288,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -28265,9 +28315,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -28292,9 +28342,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -28313,16 +28363,16 @@
       "canonical_url": "https://stats47.jp/geo/datasets/A03",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-13T16:55:18Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -28346,9 +28396,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -28373,9 +28423,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -28400,7 +28450,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -28421,16 +28471,16 @@
       "canonical_url": "https://stats47.jp/municipalities/ranking/general-clinic-count-per-100k",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-07",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-13T15:39:54Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -28454,7 +28504,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -28481,7 +28531,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -28502,16 +28552,16 @@
       "canonical_url": "https://stats47.jp/municipalities/ranking/number-of-establishments-agriculture-forestry-fisheries",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-07",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-09T11:35:37Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -28529,16 +28579,16 @@
       "canonical_url": "https://stats47.jp/municipalities/ranking/number-of-establishments-education-learning-support",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-10-17",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T12:06:55Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -28604,16 +28654,16 @@
       "canonical_url": "https://stats47.jp/products/kindle-k-s1-10",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-20",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-10T20:08:07Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -28637,7 +28687,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -28664,7 +28714,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -28691,7 +28741,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -28718,7 +28768,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -28745,7 +28795,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -28772,7 +28822,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -28799,10 +28849,10 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
-        "last_crawl": null
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-11-08T18:40:05Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -28826,9 +28876,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -28853,7 +28903,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -28874,16 +28924,16 @@
       "canonical_url": "https://stats47.jp/ranking/ambulance-transported-moderate",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-10-17",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-12T02:53:00Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -28907,9 +28957,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -28934,7 +28984,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -28961,7 +29011,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -28988,7 +29038,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -29015,7 +29065,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -29036,12 +29086,17 @@
       "canonical_url": "https://stats47.jp/ranking/annual-paid-leave-11-days-or-more-ratio",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-11-07",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-13T16:59:41Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -29064,10 +29119,10 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
-        "last_crawl": null
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-11-08T18:39:30Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -29091,9 +29146,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -29118,7 +29173,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -29145,9 +29200,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -29172,9 +29227,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -29199,7 +29254,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -29226,7 +29281,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -29253,7 +29308,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -29280,9 +29335,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -29307,7 +29362,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -29334,7 +29389,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -29361,9 +29416,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -29388,7 +29443,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -29415,10 +29470,10 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-11-07T03:53:28Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -29469,7 +29524,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -29496,10 +29551,10 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-11-08T18:39:35Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -29523,7 +29578,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -29550,9 +29605,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -29577,9 +29632,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -29604,7 +29659,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -29631,9 +29686,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -29658,7 +29713,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -29685,7 +29740,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -29712,7 +29767,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -29733,16 +29788,16 @@
       "canonical_url": "https://stats47.jp/ranking/breast-cancer-asr75-mortality-female",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-10-17",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T05:18:48Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -29760,16 +29815,16 @@
       "canonical_url": "https://stats47.jp/ranking/broadcast-media-time-all",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-10-17",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-10T05:58:49Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -29793,9 +29848,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -29820,7 +29875,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -29847,9 +29902,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -29874,7 +29929,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -29901,7 +29956,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -29928,7 +29983,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -29949,16 +30004,16 @@
       "canonical_url": "https://stats47.jp/ranking/business-closure-establishments",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-10-17",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T14:50:38Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -29982,7 +30037,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -30009,7 +30064,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -30036,7 +30091,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -30063,7 +30118,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -30090,7 +30145,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -30117,7 +30172,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -30144,9 +30199,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -30171,7 +30226,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -30198,7 +30253,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -30225,7 +30280,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -30252,7 +30307,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -30279,7 +30334,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -30306,7 +30361,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -30333,7 +30388,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
@@ -30360,7 +30415,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -30386,7 +30441,12 @@
       "last_checked": "2026-11-07",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-11-14",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -30409,7 +30469,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -30436,7 +30496,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -30462,7 +30522,12 @@
       "last_checked": "2026-11-07",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-11-14",
+        "verdict": "NEUTRAL",
+        "coverage_state": "URL が Google に認識されていません",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -30485,7 +30550,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -30511,7 +30576,12 @@
       "last_checked": "2026-11-07",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-11-14",
+        "verdict": "NEUTRAL",
+        "coverage_state": "URL が Google に認識されていません",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -30534,7 +30604,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -30561,9 +30631,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -30588,7 +30658,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -30615,7 +30685,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -30642,9 +30712,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -30696,10 +30766,10 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
-        "last_crawl": null
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-11-08T18:39:23Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -30723,7 +30793,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -30750,9 +30820,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -30777,7 +30847,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -30804,7 +30874,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -30825,16 +30895,16 @@
       "canonical_url": "https://stats47.jp/ranking/day-time-population",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-07",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T05:09:19Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -30858,9 +30928,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -30879,16 +30949,16 @@
       "canonical_url": "https://stats47.jp/ranking/deaths-diabetes-per-100k",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-07",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T05:12:14Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -30912,7 +30982,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -30933,16 +31003,16 @@
       "canonical_url": "https://stats47.jp/ranking/deaths-hypertensive-diseases-per-100k",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-07",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T05:19:30Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -30960,16 +31030,16 @@
       "canonical_url": "https://stats47.jp/ranking/densely-inhabited-district-population",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-07",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T05:19:10Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -30987,16 +31057,16 @@
       "canonical_url": "https://stats47.jp/ranking/densely-inhabited-district-population-density",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-07",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T05:22:14Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -31014,16 +31084,16 @@
       "canonical_url": "https://stats47.jp/ranking/densely-inhabited-district-population-ratio",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-07",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T05:21:45Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -31047,7 +31117,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -31074,9 +31144,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -31101,7 +31171,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -31128,7 +31198,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -31155,7 +31225,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -31182,7 +31252,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -31209,7 +31279,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -31236,7 +31306,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -31263,7 +31333,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -31284,16 +31354,16 @@
       "canonical_url": "https://stats47.jp/ranking/divorces",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-07",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-11T05:07:46Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -31317,7 +31387,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -31344,7 +31414,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -31398,9 +31468,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -31425,7 +31495,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -31452,7 +31522,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -31478,7 +31548,12 @@
       "last_checked": "2026-11-07",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-11-14",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-11-07T03:52:21Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -31501,7 +31576,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -31528,7 +31603,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -31555,7 +31630,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -31582,7 +31657,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -31609,9 +31684,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -31630,16 +31705,16 @@
       "canonical_url": "https://stats47.jp/ranking/elementary-school-count-per-100km2-habitable",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-07",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-31",
-        "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-12T18:43:37Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -31663,7 +31738,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -31690,9 +31765,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -31717,9 +31792,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -31744,7 +31819,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -31771,7 +31846,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -31798,9 +31873,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -31825,9 +31900,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-31",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -31846,16 +31921,16 @@
       "canonical_url": "https://stats47.jp/ranking/elementary5-fitness-score-male",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-10-17",
       "last_checked": "2026-11-07",
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-14",
+      "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-20",
-        "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
-        "last_crawl": null
+        "observed_at": "2026-11-14",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-11-13T05:56:33Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -31879,7 +31954,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-20",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -31906,7 +31981,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-20",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -41427,7 +41502,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-11-07",
+        "observed_at": "2026-11-14",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
