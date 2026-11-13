@@ -601,12 +601,12 @@ function typeRendererOf(baseName: string, type: string, parsed: unknown): ((them
     const ranking = rankingChartFromArticleData(parsed, { metric, prefCodeOf, prefNameOf: (code) => prefNameOf(code) });
     if (!('skip' in ranking)) {
       const render = type === 'bar' ? renderRankingBarsChart : renderTileMapChart;
-      return (theme) => render(ranking, theme);
+      return (theme) => render(withSource(ranking, parsed, baseName), theme);
     }
     // Not all 47: the map cannot be filled, and the bar's card takes any set of rows.
     const items = itemBarChartFromArticleData(parsed, { metric });
     if ('skip' in items) return { skip: `${ranking.skip}・${items.skip}` };
-    return (theme) => renderItemBarsChart(items, theme);
+    return (theme) => renderItemBarsChart(withSource(items, parsed, baseName), theme);
   }
   if (type === 'line') {
     if (hasCyclicAxis(parsed)) {

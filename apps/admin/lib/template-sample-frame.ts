@@ -35,7 +35,7 @@ export function sampleFrame(options: {
   title: string; titleSize?: number; meta: string; note?: string; source: string;
   body: string; ariaLabel?: string; attributes?: string; theme?: ChartTheme;
 }) {
-  const { title, titleSize = 72, meta, note, source, body, ariaLabel = title, attributes = '', theme = LIGHT_THEME } = options;
+  const { title, titleSize = fitTitleSize(title), meta, note, source, body, ariaLabel = title, attributes = '', theme = LIGHT_THEME } = options;
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${SAMPLE_FRAME.width}" height="${SAMPLE_FRAME.height}" viewBox="0 0 ${SAMPLE_FRAME.width} ${SAMPLE_FRAME.height}" role="img" aria-label="${escapeXml(ariaLabel)}" data-theme="${theme.name}"${attributes ? ' ' + attributes : ''}>
     <rect width="${SAMPLE_FRAME.width}" height="${SAMPLE_FRAME.height}" fill="${theme.paper}"/>
     <g font-family="${FONT}" fill="${theme.ink}">

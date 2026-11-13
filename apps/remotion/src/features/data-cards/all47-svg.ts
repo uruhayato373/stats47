@@ -278,6 +278,6 @@ export function renderAll47TileSvg(
     ${topPanel}
     ${tiles}
     ${legend}
-    ${text('出典：' + opts.source, 64, 1310, 26, 952, theme.muted, 400)}
+    ${opts.source ? text('出典：' + opts.source, 64, 1310, 26, 952, theme.muted, 400) : ''}
   </g></svg>`;
 }

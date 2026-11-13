@@ -37,8 +37,9 @@ bar / tile-grid / scatter の寸法・配色・透過背景の規定は、型に
 | 印 | root `<svg>` に `data-image-template` (bar / tile-map / scatter) と `data-theme` (light / dark) |
 | 軸の記録 | 決まった軸は生成器が source.json の `axes` に `{ metricKey, year, scale, proof }` で書き戻す。形は `config/schema/blog.chart-source.schema.json`、型は `ChartAxisRecord`。手で書かない |
 | 値の検査 | `audit-chart-axes.ts` が公開中の散布図を開き、点データ・出典の形・全点の再現・型の画像・暗い版を確かめる。結果は `data/blog/chart-axes-LATEST.md`、`notTyped` と `unproved` は週次のラチェットで増加を止める |
-| 検査 | `lintImageTypeSvg` (1080×1350・data-theme・文字化け・矢印。散布図は県の正式名と暗い版の点のコントラスト 3:1 以上) / `lintDarkPair` (暗い版の有無と型の一致)。旧 `lintTileGridQuality`・凡例ラベル検査・`lintScatterQuality` (720×720) は型の画像を対象外にする。`lintScatterParity` は型の画像の点を `data-pref` で数える。週次の `rerender-scatter-canonical.mts` は型の画像を svg-builder の図に戻さず、点の数だけを照らす |
-| 年 | data JSON の `subtitle` が「2022年度」なら年度で、そうでなければ `year` に「年」を付けて出す |
+| 検査 | `lintImageTypeSvg` (1080×1350・data-theme・文字化け・矢印。散布図は県の正式名と暗い版の点のコントラスト 3:1 以上。出典名の無い「出典：」だけの行と、枠の右端を越える題は `findImageTypeCopyDefects` が warning で数える) / `lintDarkPair` (暗い版の有無と型の一致)。旧 `lintTileGridQuality`・凡例ラベル検査・`lintScatterQuality` (720×720) は型の画像を対象外にする。`lintScatterParity` は型の画像の点を `data-pref` で数える。週次の `rerender-scatter-canonical.mts` は型の画像を svg-builder の図に戻さず、点の数だけを照らす |
+| 年 | ランキングと地図は、指標が分かれば指標の定義の `yearFormat` で書く (fiscal は「2022年度」、calendar は「2022年」)。指標が分からない図は、data JSON の `subtitle` が「2022年度」なら年度で、そうでなければ `year` に「年」を付けて出す |
+| 題・出典 | 題は枠の幅に収まる大きさまで字を小さくする (`fitTitleSize`・タイル地図は `all47-svg.ts`)。題の末尾の「（2024年）」は副題の行へ回し、「ランキング」は棒の型が足す。出典名は data JSON の `source`、source.json の調査名、指標の定義の `source.displayName` の順で入れ、どこにも無ければ出典の行を出さない |
 | 単位・桁 | 桁の大きい指標は図ごとに 1 つの表示単位 (億円・万人など) で描く。決め方と台帳は `unit-semantics-standards.md` §2.6 |
 
 型の画像の見た目を変えるときは、管理画面の型 (`/ops/image-templates`) で見本を確かめてから変える。ブログ専用の版を作らない。
