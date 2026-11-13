@@ -21,7 +21,7 @@ try {
   let monthlyRoyalties = null;
   let revenue = null;
   if (source === 'kdp') {
-    const account = JSON.parse(readFileSync('.local/kdp-account.local.json', 'utf8'));
+    const account = JSON.parse(readFileSync(resolve(ROOT, '.local/kdp-account.local.json'), 'utf8'));
     if (!/^B0[A-Z0-9]{8}$/.test(account.knownAsin ?? '')) throw new Error('account_mismatch: knownAsin missing');
     const expected = { asin: account.knownAsin };
     const identity = await readBookshelfState(page, '__identity__', expected);
