@@ -150,9 +150,10 @@ updated: 2026-11-01
 - **観測 (2026-11-13・読み取り調査)**: external 指標は 244 本 (公開中 233) あるが、取り込みスクリプトが手元に書いた `app/stats/<key>/values.json` を R2 へ上げる workflow が見つからなかった。`data-refresh.yml` は e-Stat 以外を「No e-Stat fetch path」で拒否し (:251・:265)、`deploy-workers.yml` の exact publish は `app/stats` を対象にしていない。外部データを CI で取り込む例は `ksj-aggregate-ingest.yml` (対象は `tourism-resource-count` だけ) の 1 本。`correlation-refresh.yml:7-9` のコメントから、既存の 244 本は workflow の外で push されたと読める。
 - **文書の食い違い**: `.claude/rules/r2-storage-design.md:31` は「2026-09-14 以降ローカルから push しない」、`.claude/skills/db/push-r2/SKILL.md` と `.claude/rules/local-environment.md:41-56` は手元からの push を可としている。R2 の認証情報は手元から撤去済みなので、実際には手元から上げられない。
 - **もう 1 つの穴**: R2 に値が無い公開中の external 指標でも `generate-ranking-items` は止まらず、`latestYear=null` の item が作られて空のページが既知キーに載りうる (`packages/ranking/src/scripts/generate-ranking-items.ts:94-97`)。
-- **次**: `ksj-aggregate-ingest.yml` を手本に、登録した取り込みスクリプトを CI で走らせて `diff-push-r2.ts --prefix app/stats/<key>/` で上げる workflow を 1 本作る (入力は取り込みスクリプトの id と `dry_run`)。あわせて、値の無い external 指標を item 生成の前に止める検査を足し、上の 3 文書を 1 つの手順にそろえる。
-- **停止条件**: 新しい workflow と R2 への書き込みなので、作る前にオーナーへ確認する。`dry_run` を既定にする。
-- **完了条件**: 取り込みスクリプト 1 本を workflow から `dry_run` で走らせ、上げる対象の key と bytes が出る。3 文書の記述が一致する。
+- **済み (2026-11-13・オーナーの指示で作成)**: `.github/workflows/external-metric-ingest.yml` (手動・既定は dry run・`r2-write`)。取り込みスクリプトを CI で走らせ、`.claude/scripts/themes/verify-external-ingest.mjs` が上げるファイルを読み直して検査し、`push-exact-r2-assets.ts --key` で報告に載ったキーだけを上げる (R2 から何も消さない)。登録済みの取り込みは `ndb-questionnaire` の 1 本。手元では、検査の実行と exact publish の dry run (候補 10・変更 10・アップロード 0) まで確かめた。手順は `.claude/rules/metric-config-standards.md` に書いた。
+- **残り・実行順**: ① develop→main のマージ後に、workflow を `dry_run` のまま 1 回走らせて結果を確かめる (workflow は main に入るまで起動できない。CI での実行は未確認) ② オーナーの承認を得て `dry_run: false` で上げ、R2 の `app/stats/<key>/values.json` を公開 URL から読み戻す ③ 値の無い公開中の external 指標を item 生成の前に止める検査を足す ④ `r2-storage-design.md`・`push-r2/SKILL.md`・`local-environment.md` の手元からの push の記述をそろえる。
+- **停止条件**: `dry_run: false` での実行は R2 への書き込みなので、その都度オーナーへ確認する。
+- **完了条件**: workflow の dry run が CI で通り、上げる対象の key が出る。実際に上げた値を公開 URL から読み戻せる。3 文書の記述が一致する。
 - **関連**: OPENDATA-RANKING-PILOT-01 の ⑤ はこの経路が前提。
 
 ### [RELEASE-SQUASH-SKIP-TOKEN-01] develop→main の squash マージ本文に取り込んだコミットの skip-ci 系トークンが入り、本番デプロイが起動しない

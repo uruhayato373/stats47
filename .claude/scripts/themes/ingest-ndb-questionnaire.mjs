@@ -17,7 +17,7 @@
  *
  * 公開の順序: 指標定義は isActive: false で登録する → このスクリプトで値を作る → R2 の app/stats/<key>/ へ上げる →
  * isActive: true にする。先に true にすると、値の無いランキングページが配信される (.claude/rules/metric-config-standards.md
- * 「isActive:true ≠ 本番公開」)。R2 へ上げる経路は .claude/todo/backlog.md の EXTERNAL-METRIC-R2-INGEST-01。
+ * 「isActive:true ≠ 本番公開」)。R2 へ上げるのは .github/workflows/external-metric-ingest.yml (ingest: ndb-questionnaire)。
  */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';

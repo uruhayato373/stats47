@@ -1,0 +1,119 @@
+name: 📥 External metric ingest → R2
+
+# e-Stat 以外の出典 (省庁の xlsx / CSV / PDF) から作る指標の観測値を、CI の中で原典から取り直して
+# app/stats/<metric>/values.json へ上げる。data-refresh.yml は e-Stat の指標しか扱わないため、その外側を受け持つ。
+#
+# - 取り込みスクリプトが原典の SHA・表の形・47 都道府県を検査し、外れたら何も書かない。
+# - verify-external-ingest.mjs が、上げるファイルそのものを読み直して検査する。
+# - 反映は push-exact-r2-assets.ts の明示キーだけ。報告に載ったキー以外は上げず、R2 から何も消さない。
+# - 既定は dry run (R2 の現状との差を出すだけ)。実際に上げるのは dry_run に false を入れたときだけ。
+#
+# 取り込みを足すとき: 下の options と「取り込みスクリプトを決める」の case に 1 行ずつ足す。
+# 公開の順序: 指標定義を isActive: false で main へ入れる → この workflow で値を上げる → isActive: true にする。
+# 正典: .claude/rules/metric-config-standards.md「isActive:true ≠ 本番公開」/ .claude/rules/data-provenance-standards.md
+
+on:
+  workflow_dispatch:
+    inputs:
+      ingest:
+        description: '走らせる取り込み'
+        required: true
+        type: choice
+        default: ndb-questionnaire
+        options:
+          - ndb-questionnaire
+      dry_run:
+        description: 'false のときだけ R2 へ上げる (それ以外は取得・検査・差分の表示のみ)'
+        required: false
+        default: 'true'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: r2-write
+  cancel-in-progress: false
+
+env:
+  R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+  R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+  INGEST: ${{ inputs.ingest }}
+  DRY_RUN: ${{ inputs.dry_run }}
+  KEYS_FILE: .local/verification/themes/external-ingest-keys.txt
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: 🧰 Checkout main
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🗂️ 取り込みスクリプトを決める
+        run: |
+          case "$INGEST" in
+            ndb-questionnaire)
+              script=.claude/scripts/themes/ingest-ndb-questionnaire.mjs
+              report=.local/verification/themes/ndb-questionnaire-source.json
+              ;;
+            *)
+              echo "::error::未登録の取り込みです: $INGEST"
+              exit 1
+              ;;
+          esac
+          {
+            echo "INGEST_SCRIPT=$script"
+            echo "INGEST_REPORT=$report"
+          } >> "$GITHUB_ENV"
+
+      - name: 📥 原典を取得して値を作る (形が違えば何も書かない)
+        run: node --import tsx "$INGEST_SCRIPT" --write-local --out "$INGEST_REPORT"
+
+      - name: ✅ 上げるファイルを読み直して検査する
+        run: node .claude/scripts/themes/verify-external-ingest.mjs --report "$INGEST_REPORT" --keys-out "$KEYS_FILE"
+
+      - name: 🔍 R2 の現状との差を出す (書かない)
+        if: inputs.dry_run != 'false'
+        run: |
+          npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts \
+            --key "$(cat "$KEYS_FILE")" --dry-run
+
+      - name: 📤 報告に載ったキーだけを R2 へ上げる
+        if: inputs.dry_run == 'false'
+        run: |
+          npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts \
+            --key "$(cat "$KEYS_FILE")"
+
+      - name: 📝 Summary
+        if: always()
+        run: |
+          {
+            echo '### External metric ingest'
+            echo ''
+            echo "- 取り込み: \`$INGEST\`"
+            echo "- dry run: \`$DRY_RUN\` (false のときだけ R2 へ上げる)"
+            if [ -f "$KEYS_FILE" ]; then
+              echo "- 対象: $(tr ',' '\n' < "$KEYS_FILE" | wc -l | tr -d ' ') ファイル"
+              echo ''
+              tr ',' '\n' < "$KEYS_FILE" | sed 's/^/  - `/; s/$/`/'
+            else
+              echo '- 対象: 検査を通らなかったため無し'
+            fi
+            echo ''
+            echo '値を上げたあとは、指標を公開 (isActive: true) にしてから sync-snapshots.yml の ranking-items → ranking-values を実行する。'
+          } >> "$GITHUB_STEP_SUMMARY"

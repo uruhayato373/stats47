@@ -22,6 +22,7 @@
 | Affiliate metrics (`affiliate-ga4-weekly.yml`) | 毎週日曜22時JST、手動 | GA4 schema v3、二層portfolio、operations、pilot readinessを生成してartifact化。候補提示までで広告変更・winner・pushをしない |
 | GSC Operations Cycle (`gsc-operations-cycle-weekly.yml`) | 毎週日曜20時30分JST (土曜のレビュー・来週の計画の後)、手動 | 最新GSC snapshotに対する週次レビュー、候補のapprove/dismiss、翌週計画、月次GSC欄、effect verdictの接続を決定的に監査。異常は固定`gsc-cycle-alert` Issueへupsertし、回復時に自動Close |
 | KSJ aggregate ingest (`ksj-aggregate-ingest.yml`) | 手動 | KSJの元データをCI内で再取得し、都道府県帰属の未解決0・47県ゲート後に集計`app/stats`だけをR2へ公開。元GIS / TopoJSONは公開しない |
+| External metric ingest (`external-metric-ingest.yml`) | 手動 | e-Stat 以外の出典 (省庁の xlsx / CSV / PDF) の指標を CI 内で原典から取り直し、`app/stats/<metric>/values.json` だけを R2 へ上げる。原典の SHA・表の形・47 県を検査し、報告に載ったキー以外は上げない。既定は dry run で、`dry_run` に `false` を入れたときだけ書く。指標は `isActive: false` で main に入れてから実行し、値を上げたあとに公開にする |
 
 テーマは `quality-suite-weekly.yml` の theme job が毎週土曜01:00 JSTに、公開R2と構成、全テーマのPC/mobile画面を監査する
 (2026-10-26 に毎日の期日確認から変更。未観測d7/d28/d56は次の土曜に拾う)。手動実行でも監査する。
