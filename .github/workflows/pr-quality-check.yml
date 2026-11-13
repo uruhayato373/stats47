@@ -852,6 +852,15 @@ jobs:
           npm run estat:kakei-classification:check
         continue-on-error: false
 
+      - name: 🗓️ SSDS Year Format Gate
+        run: |
+          # 社会・人口統計体系の指標の yearFormat (暦年 / 年度) が、e-Stat の定義の「時点又は期間」から決めた区切りと一致することを担保。
+          # 生成器が全指標に fiscal を固定で書き、国勢調査・犯罪統計などが「2020年度」と表示されていた再発防止 (2026-10-21)。
+          # 正本: data/estat/ssds-year-format/{definitions,decisions}.json (控えの生成: .claude/scripts/estat/build-ssds-definitions.mjs)
+          npm run estat:ssds-year-format:test
+          npm run estat:ssds-year-format:check
+        continue-on-error: false
+
       - name: 🧾 Kakei Ledger Gate
         run: |
           # 家計調査の台帳 (data/estat/kakei-ledger/ledger.json) が今の metric config・採否判断と一致することを担保。

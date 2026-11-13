@@ -1,0 +1,1082 @@
+{
+  "schemaVersion": 1,
+  "surveyNaming": [
+    {
+      "survey": "賃金構造基本統計調査",
+      "yearFormat": "calendar",
+      "evidence": "カード SSDS-YEARFORMAT-SOURCE-01 の判定の手順 ③ (2026-10-21 に e-Stat の統計表一覧 API getStatsList の表題で確認した記録)。期間は 6月中・6月30日"
+    },
+    {
+      "survey": "経済センサス-基礎調査",
+      "yearFormat": "calendar",
+      "evidence": "カード SSDS-YEARFORMAT-SOURCE-01 の判定の手順 ③ (2026-10-21 に e-Stat の統計表一覧 API getStatsList の表題で確認した記録)。2026-11-14 に e-Stat の統計表一覧ページでも表題「令和元年経済センサス‐基礎調査」を確認 (https://www.e-stat.go.jp/stat-search/files?toukei=00200552)"
+    },
+    {
+      "survey": "経済センサス-活動調査",
+      "yearFormat": "calendar",
+      "evidence": "カード SSDS-YEARFORMAT-SOURCE-01 の判定の手順 ③ (2026-10-21 に e-Stat の統計表一覧 API getStatsList の表題で確認した記録)。2026-11-14 に e-Stat の統計表一覧ページでも表題「平成28年経済センサス‐活動調査」を確認 (https://www.e-stat.go.jp/stat-search/files?toukei=00200553)"
+    },
+    {
+      "survey": "経済構造実態調査",
+      "yearFormat": "calendar",
+      "evidence": "カード SSDS-YEARFORMAT-SOURCE-01 の判定の手順 ③ (2026-10-21 に e-Stat の統計表一覧 API getStatsList の表題で確認した記録)。2026-11-14 に e-Stat の統計表一覧ページでも表題「2025年経済構造実態調査（産業横断調査）」を確認 (https://www.e-stat.go.jp/stat-search/files?layout=datalist&toukei=00200555)"
+    },
+    {
+      "survey": "事業所・企業統計調査",
+      "yearFormat": "calendar",
+      "evidence": "カード SSDS-YEARFORMAT-SOURCE-01 の判定の手順 ③ (2026-10-21 に e-Stat の統計表一覧 API getStatsList の表題で確認した記録)。2026-11-14 に e-Stat の統計表一覧ページでも表題「平成18年事業所・企業統計調査」を確認 (https://www.e-stat.go.jp/stat-search/files?toukei=00200551)"
+    },
+    {
+      "survey": "国民生活基礎調査",
+      "yearFormat": "calendar",
+      "evidence": "カード SSDS-YEARFORMAT-SOURCE-01 の判定の手順 ③ (2026-10-21 に e-Stat の統計表一覧 API getStatsList の表題で確認した記録)。2026-11-14 に e-Stat の統計表一覧ページでも表題「平成30年国民生活基礎調査」を確認 (https://www.e-stat.go.jp/stat-search/files?toukei=00450061)"
+    },
+    {
+      "survey": "農林業センサス",
+      "yearFormat": "calendar",
+      "evidence": "カード SSDS-YEARFORMAT-SOURCE-01 の判定の手順 ③ (2026-10-21 に e-Stat の統計表一覧 API getStatsList の表題で確認した記録)。2026-11-14 に e-Stat の統計表一覧ページでも表題「2005年農林業センサス」を確認 (https://www.e-stat.go.jp/stat-search/files?toukei=00500209)"
+    },
+    {
+      "survey": "漁業センサス",
+      "yearFormat": "calendar",
+      "evidence": "カード SSDS-YEARFORMAT-SOURCE-01 の判定の手順 ③ (2026-10-21 に e-Stat の統計表一覧 API getStatsList の表題で確認した記録)"
+    },
+    {
+      "survey": "社会生活基本調査",
+      "yearFormat": "calendar",
+      "evidence": "カード SSDS-YEARFORMAT-SOURCE-01 の判定の手順 ③ (2026-10-21 に e-Stat の統計表一覧 API getStatsList の表題で確認した記録)。2026-11-14 に e-Stat の統計表一覧ページでも表題「平成28年社会生活基本調査」を確認 (https://www.e-stat.go.jp/stat-search/files?toukei=00200533)"
+    }
+  ],
+  "itemOverrides": [
+    {
+      "code": "H2101",
+      "yearFormat": "calendar",
+      "reason": "定義ページ H (https://www.e-stat.go.jp/koumoku/koumoku_teigi/H、2026-11-14 取得) は畳数別住宅数 H2101〜H2108 の期間を「年度計」と書くが、同じ節の定義は住宅・土地統計調査の「居住室の畳数別住宅数」で、同調査のほかの 280 項目の期間はすべて「10月1日」。調査時点の住宅数なので暦年として扱う"
+    },
+    {
+      "code": "H2102",
+      "yearFormat": "calendar",
+      "reason": "定義ページ H (https://www.e-stat.go.jp/koumoku/koumoku_teigi/H、2026-11-14 取得) は畳数別住宅数 H2101〜H2108 の期間を「年度計」と書くが、同じ節の定義は住宅・土地統計調査の「居住室の畳数別住宅数」で、同調査のほかの 280 項目の期間はすべて「10月1日」。調査時点の住宅数なので暦年として扱う"
+    },
+    {
+      "code": "H2103",
+      "yearFormat": "calendar",
+      "reason": "定義ページ H (https://www.e-stat.go.jp/koumoku/koumoku_teigi/H、2026-11-14 取得) は畳数別住宅数 H2101〜H2108 の期間を「年度計」と書くが、同じ節の定義は住宅・土地統計調査の「居住室の畳数別住宅数」で、同調査のほかの 280 項目の期間はすべて「10月1日」。調査時点の住宅数なので暦年として扱う"
+    },
+    {
+      "code": "H2104",
+      "yearFormat": "calendar",
+      "reason": "定義ページ H (https://www.e-stat.go.jp/koumoku/koumoku_teigi/H、2026-11-14 取得) は畳数別住宅数 H2101〜H2108 の期間を「年度計」と書くが、同じ節の定義は住宅・土地統計調査の「居住室の畳数別住宅数」で、同調査のほかの 280 項目の期間はすべて「10月1日」。調査時点の住宅数なので暦年として扱う"
+    },
+    {
+      "code": "H2105",
+      "yearFormat": "calendar",
+      "reason": "定義ページ H (https://www.e-stat.go.jp/koumoku/koumoku_teigi/H、2026-11-14 取得) は畳数別住宅数 H2101〜H2108 の期間を「年度計」と書くが、同じ節の定義は住宅・土地統計調査の「居住室の畳数別住宅数」で、同調査のほかの 280 項目の期間はすべて「10月1日」。調査時点の住宅数なので暦年として扱う"
+    },
+    {
+      "code": "H2106",
+      "yearFormat": "calendar",
+      "reason": "定義ページ H (https://www.e-stat.go.jp/koumoku/koumoku_teigi/H、2026-11-14 取得) は畳数別住宅数 H2101〜H2108 の期間を「年度計」と書くが、同じ節の定義は住宅・土地統計調査の「居住室の畳数別住宅数」で、同調査のほかの 280 項目の期間はすべて「10月1日」。調査時点の住宅数なので暦年として扱う"
+    },
+    {
+      "code": "H2107",
+      "yearFormat": "calendar",
+      "reason": "定義ページ H (https://www.e-stat.go.jp/koumoku/koumoku_teigi/H、2026-11-14 取得) は畳数別住宅数 H2101〜H2108 の期間を「年度計」と書くが、同じ節の定義は住宅・土地統計調査の「居住室の畳数別住宅数」で、同調査のほかの 280 項目の期間はすべて「10月1日」。調査時点の住宅数なので暦年として扱う"
+    },
+    {
+      "code": "H2108",
+      "yearFormat": "calendar",
+      "reason": "定義ページ H (https://www.e-stat.go.jp/koumoku/koumoku_teigi/H、2026-11-14 取得) は畳数別住宅数 H2101〜H2108 の期間を「年度計」と書くが、同じ節の定義は住宅・土地統計調査の「居住室の畳数別住宅数」で、同調査のほかの 280 項目の期間はすべて「10月1日」。調査時点の住宅数なので暦年として扱う"
+    }
+  ],
+  "undetermined": [
+    {
+      "key": "abandoned-cultivated-land-area",
+      "reason": "C3109 期間「センサス実施年の2月1日」(農業構造統計（農林業センサス、世界農林業センサス）) は年度か暦年か決まらない"
+    },
+    {
+      "key": "agricultural-employment-population",
+      "reason": "C310410 期間「センサス 実施年の 2月1日」(農林業センサス、農業センサス) は年度か暦年か決まらない"
+    },
+    {
+      "key": "agricultural-income-ratio",
+      "reason": "L210101 期間「年計」(農業経営統計調査) は年度か暦年か決まらない、L2100 期間「年計」(農業経営統計調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "agricultural-output-per-employed-person",
+      "reason": "C310410 期間「センサス 実施年の 2月1日」(農林業センサス、農業センサス) は年度か暦年か決まらない"
+    },
+    {
+      "key": "annual-income-per-household",
+      "reason": "L7610 期間「調査前年11月～調査年10月」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "annual-minimum-relative-humidity",
+      "reason": "B4112 期間「年間」(過去の気象データ) は年度か暦年か決まらない"
+    },
+    {
+      "key": "assessed-residential-land-area",
+      "reason": "B120103 期間「1月1日」(固定資産の価格等の概要調書（土地）) は年度か暦年か決まらない"
+    },
+    {
+      "key": "average-height-high-school-second-grade-female",
+      "reason": "I411302 期間「4月～6月中の任意の日」(学校保健統計調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "average-height-middle-school-second-grade-female",
+      "reason": "I411202 期間「4月～6月中の任意の日」(学校保健統計調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "average-height-middle-school-second-grade-male",
+      "reason": "I411201 期間「4月～6月中の任意の日」(学校保健統計調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "average-height-primary-school-fifth-grade-female",
+      "reason": "I411102 期間「4月～6月中の任意の日」(学校保健統計調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "average-height-primary-school-fifth-grade-male",
+      "reason": "I411101 期間「4月～6月中の任意の日」(学校保健統計調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "average-life-expectancy-female-20",
+      "reason": "I1202 期間「─」(完全生命表、都道府県別生命表、市区町村別生命表) は年度か暦年か決まらない"
+    },
+    {
+      "key": "average-life-expectancy-female-65",
+      "reason": "I1502 期間「─」(完全生命表、都道府県別生命表、市区町村別生命表) は年度か暦年か決まらない"
+    },
+    {
+      "key": "average-life-expectancy-male",
+      "reason": "I1201 期間「─」(完全生命表、都道府県別生命表、市区町村別生命表) は年度か暦年か決まらない"
+    },
+    {
+      "key": "average-propensity-to-consume-of-farm-households",
+      "reason": "L2203 期間「年間」(農業経営統計調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "average-road-traffic-volume",
+      "reason": "H7160 期間「－」(全国道路・街路交通情勢調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "average-weight-high-school-second-grade-female",
+      "reason": "I412302 期間「4月～6月中の任意の日」(学校保健統計調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "average-weight-high-school-second-grade-male",
+      "reason": "I412301 期間「4月～6月中の任意の日」(学校保健統計調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "average-weight-middle-school-second-grade-female",
+      "reason": "I412202 期間「4月～6月中の任意の日」(学校保健統計調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "average-weight-middle-school-second-grade-male",
+      "reason": "I412201 期間「4月～6月中の任意の日」(学校保健統計調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "average-weight-primary-school-fifth-grade-female",
+      "reason": "I412102 期間「4月～6月中の任意の日」(学校保健統計調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "average-weight-primary-school-fifth-grade-male",
+      "reason": "I412101 期間「4月～6月中の任意の日」(学校保健統計調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "avg-height-high-school-2nd-male",
+      "reason": "I411301 期間「4月～6月中の任意の日」(学校保健統計調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "car-ownership-multi-person-households-per-1000",
+      "reason": "L5108 期間「10月31日」(全国消費実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "compulsory-education-school-count-per-100k-6-14",
+      "reason": "E3901 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "consolidated-real-deficit-ratio-municipal",
+      "reason": "市区町村の指標 #D02215 の計算式は公開されていない (指標計算式のページは都道府県の指標)"
+    },
+    {
+      "key": "construction-industry-count",
+      "reason": "C3306 期間「決算期まで の1年間」(建設工事施工統計調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "core-agricultural-workers",
+      "reason": "C310510 期間「センサス 実施年の 2月1日」(農林業センサス、農業センサス) は年度か暦年か決まらない"
+    },
+    {
+      "key": "crime-rate-per-1k",
+      "reason": "市区町村の指標 #K06101 の計算式は公開されていない (指標計算式のページは都道府県の指標)"
+    },
+    {
+      "key": "cultivated-area",
+      "reason": "C3107 期間「7月15日」(耕地及び作付面積統計) は年度か暦年か決まらない"
+    },
+    {
+      "key": "cultivated-land-area-per-household",
+      "reason": "C3107 期間「7月15日」(耕地及び作付面積統計) は年度か暦年か決まらない"
+    },
+    {
+      "key": "cultivated-land-area-ratio",
+      "reason": "C3107 期間「7月15日」(耕地及び作付面積統計) は年度か暦年か決まらない"
+    },
+    {
+      "key": "current-deposit-balance-ratio-multi-person-households",
+      "reason": "L730102 期間「10月末日」(全国家計構造調査) は年度か暦年か決まらない、L730101 期間「10月末日」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "current-liabilities-balance-multi-person-households-per-household",
+      "reason": "L740101 期間「10月末日」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "current-life-insurance-balance-ratio-multi-person-households",
+      "reason": "L730103 期間「10月末日」(全国家計構造調査) は年度か暦年か決まらない、L730101 期間「10月末日」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "current-savings-balance-multi-person-households",
+      "reason": "L430101 期間「11月30日」(全国消費実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "current-securities-balance-ratio-multi-person-households",
+      "reason": "L730104 期間「10月末日」(全国家計構造調査) は年度か暦年か決まらない、L730101 期間「10月末日」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "department-stores-10-per",
+      "reason": "市区町村の指標 #H06111 の計算式は公開されていない (指標計算式のページは都道府県の指標)"
+    },
+    {
+      "key": "dwelling-per-floor-area",
+      "reason": "市区町村の指標 #H02103 の計算式は公開されていない (指標計算式のページは都道府県の指標)"
+    },
+    {
+      "key": "education-department-staff",
+      "reason": "D1204 期間「4月1日」(地方公共団体定員管理調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "elderly-on-public-assistance-per-1000-65plus",
+      "reason": "J110702 期間「7月31日」(被保護者調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "elderly-population-ratio",
+      "reason": "市区町村の指標 #A03506 の計算式は公開されていない (指標計算式のページは都道府県の指標)"
+    },
+    {
+      "key": "elementary-long-term-absent-students",
+      "reason": "E2508 期間「5月1日」(学校基本調査、児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "elementary-school-children-1-per",
+      "reason": "E2501 期間「5月1日」(学校基本調査、児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査) は年度か暦年か決まらない、E2301 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "elementary-school-children-count",
+      "reason": "E2501 期間「5月1日」(学校基本調査、児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "elementary-school-classes",
+      "reason": "E2301 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "elementary-school-count",
+      "reason": "E2101 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "elementary-school-count-per-100k-6-11",
+      "reason": "E2101 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "elementary-school-count-per-100km2-habitable",
+      "reason": "E2101 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "elementary-school-long-absence-ratio-nonattendance-over-30days-per-1000",
+      "reason": "E250802 期間「5月1日」(学校基本調査、児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査) は年度か暦年か決まらない、E2501 期間「5月1日」(学校基本調査、児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "elementary-school-long-absence-ratio-over-30days-per-1000",
+      "reason": "E2508 期間「5月1日」(学校基本調査、児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査) は年度か暦年か決まらない、E2501 期間「5月1日」(学校基本調査、児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "elementary-school-students-per-teacher",
+      "reason": "E2501 期間「5月1日」(学校基本調査、児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査) は年度か暦年か決まらない、E2401 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "elementary-school-teachers",
+      "reason": "E2401 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "elementary-school-teachers-ratio-female",
+      "reason": "E240102 期間「5月1日」(学校基本調査) は年度か暦年か決まらない、E2401 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "farm-household-expenditure-per-month",
+      "reason": "L2201 期間「年計」(農業経営統計調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "financial-assets-balance-multi-person-households",
+      "reason": "L730101 期間「10月末日」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "financial-debt-balance",
+      "reason": "L740101 期間「10月末日」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "fire-department-branch-count-per-100-km2",
+      "reason": "K1104 期間「4月1日」(消防白書) は年度か暦年か決まらない"
+    },
+    {
+      "key": "fire-department-count-per-100-km2",
+      "reason": "K1101 期間「4月1日」(消防白書) は年度か暦年か決まらない"
+    },
+    {
+      "key": "fire-department-emergency-car-count-per-100k",
+      "reason": "K1209 期間「4月1日」(救急・救助の現況) は年度か暦年か決まらない"
+    },
+    {
+      "key": "fire-department-employees",
+      "reason": "D1203 期間「4月1日」(地方公共団体定員管理調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "fire-department-member-count-per-100-thousand-people",
+      "reason": "K1103 期間「4月1日」(消防年報) は年度か暦年か決まらない"
+    },
+    {
+      "key": "fire-department-pump-car-count-per-100-thousand-people",
+      "reason": "K1106 期間「4月1日」(消防年報) は年度か暦年か決まらない"
+    },
+    {
+      "key": "fire-department-water-count-per-100-thousand-people",
+      "reason": "K1107 期間「4月1日」(消防年報) は年度か暦年か決まらない"
+    },
+    {
+      "key": "fire-related-personnel-count-per-100k",
+      "reason": "K1103 期間「4月1日」(消防年報) は年度か暦年か決まらない、K1105 期間「4月1日」(消防白書) は年度か暦年か決まらない"
+    },
+    {
+      "key": "foreign-population-per-100k",
+      "reason": "市区町村の指標 #A01601 の計算式は公開されていない (指標計算式のページは都道府県の指標)"
+    },
+    {
+      "key": "foreign-resident-population",
+      "reason": "A2201 期間「1月1日」(住民基本台帳に基づく人口、人口動態及び世帯数調査（住民基本台帳人口要覧）) は年度か暦年か決まらない"
+    },
+    {
+      "key": "frequency-of-occupational-accidents",
+      "reason": "F8101 期間「年間」(労働災害動向調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "garbage-collection-population",
+      "reason": "H5608 期間「―」(一般廃棄物処理事業実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "general-hospital-per-100k",
+      "reason": "市区町村の指標 #I0910103 の計算式は公開されていない (指標計算式のページは都道府県の指標)"
+    },
+    {
+      "key": "high-school-advancement-rate",
+      "reason": "E4701 期間「3月」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "high-school-count",
+      "reason": "E4101 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "high-school-count-per-100k-15-17",
+      "reason": "E4101 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "high-school-count-per-100km2-habitable",
+      "reason": "E4101 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "high-school-graduates-job-ratio",
+      "reason": "E4604 期間「3月」(学校基本調査) は年度か暦年か決まらない、E4601 期間「3月」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "high-school-graduates-out-of-prefecture-job-ratio",
+      "reason": "E460410 期間「3月」(学校基本調査) は年度か暦年か決まらない、E4604 期間「3月」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "high-school-new-graduates-employment-rate",
+      "reason": "F3322 期間「6月末日までの計」(新規学卒者（高校・中学）の職業紹介状況) は年度か暦年か決まらない、F3302 期間「6月末日までの計」(新規学卒者（高校・中学）の職業紹介状況) は年度か暦年か決まらない"
+    },
+    {
+      "key": "high-school-new-graduates-job-opening-ratio",
+      "reason": "F3312 期間「6月末日までの計」(新規学卒者（高校・中学）の職業紹介状況) は年度か暦年か決まらない、F3302 期間「6月末日までの計」(新規学卒者（高校・中学）の職業紹介状況) は年度か暦年か決まらない"
+    },
+    {
+      "key": "high-school-students",
+      "reason": "E4501 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "high-school-students-per-teacher",
+      "reason": "E4501 期間「5月1日」(学校基本調査) は年度か暦年か決まらない、E4401 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "home-helper-users-per-office",
+      "reason": "J230156 期間「9月」(介護サービス施設・事業所調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "household-head-annual-income-per-household",
+      "reason": "L761101 期間「調査前年11月～調査年10月」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "household-survey-clothing-footwear-expenditure",
+      "reason": "L720105 期間「2か月平均」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "household-survey-consumption-expenditure",
+      "reason": "L7201 期間「2か月平均」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "household-survey-culture-recreation-expenditure",
+      "reason": "L720109 期間「2か月平均」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "household-survey-education-expenditure",
+      "reason": "L720108 期間「2か月平均」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "household-survey-food-expenditure",
+      "reason": "L720101 期間「2か月平均」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "household-survey-furniture-household-goods-expenditure",
+      "reason": "L720104 期間「2か月平均」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "household-survey-healthcare-expenditure",
+      "reason": "L720106 期間「2か月平均」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "household-survey-housing-expenditure",
+      "reason": "L720102 期間「2か月平均」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "household-survey-other-expenditure",
+      "reason": "L720110 期間「2か月平均」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "household-survey-transport-communication-expenditure",
+      "reason": "L720107 期間「2か月平均」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "household-survey-utilities-expenditure",
+      "reason": "L720103 期間「2か月平均」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "housing-floor-area",
+      "reason": "市区町村の指標 #H02103 の計算式は公開されていない (指標計算式のページは都道府県の指標)"
+    },
+    {
+      "key": "housing-land-liabilities-ratio-multi-person-households",
+      "reason": "L740102 期間「10月末日」(全国家計構造調査) は年度か暦年か決まらない、L740101 期間「10月末日」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "in-pref-university-entrance-ratio-by-highschool-origin",
+      "reason": "E470201 期間「5月1日」(学校基本調査) は年度か暦年か決まらない、E470205 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "industrial-land-price",
+      "reason": "C5405 期間「7月1日」(都道府県地価調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "industrial-land-price-change-rate",
+      "reason": "C5505 期間「7月1日」(都道府県地価調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "integrated-kindergarten-enrollment",
+      "reason": "E1701 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "japanese-entries",
+      "reason": "A5201 期間「前年10月から当年9月」(人口推計) は年度か暦年か決まらない"
+    },
+    {
+      "key": "junior-college-capacity-index",
+      "reason": "E6402 期間「5月1日」(学校基本調査) は年度か暦年か決まらない、E460210 期間「3月」(学校基本調査) は年度か暦年か決まらない、E4902 期間「3月」(学校基本調査) は年度か暦年か決まらない、E5902 期間「3月」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "junior-college-count",
+      "reason": "E6101 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "junior-college-count-per-100k",
+      "reason": "E6101 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "junior-college-new-graduates-unemployment-rate",
+      "reason": "E650130 期間「3月」(学校基本調査) は年度か暦年か決まらない、E6501 期間「3月」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "junior-high-school-advancement-rate",
+      "reason": "E3801 期間「3月」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "junior-high-school-classes",
+      "reason": "E3301 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "junior-high-school-count",
+      "reason": "E3101 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "junior-high-school-count-per-100k-12-14",
+      "reason": "E3101 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "junior-high-school-count-per-100km2-habitable",
+      "reason": "E3101 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000",
+      "reason": "E350502 期間「5月1日」(学校基本調査、児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査) は年度か暦年か決まらない、E3501 期間「5月1日」(学校基本調査、児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "junior-high-school-long-absence-ratio-over-30days-per-1000",
+      "reason": "E3505 期間「5月1日」(学校基本調査、児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査) は年度か暦年か決まらない、E3501 期間「5月1日」(学校基本調査、児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "junior-high-school-students-count",
+      "reason": "E3501 期間「5月1日」(学校基本調査、児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "junior-high-school-students-per-teacher",
+      "reason": "E3501 期間「5月1日」(学校基本調査、児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査) は年度か暦年か決まらない、E3401 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "junior-high-school-teachers",
+      "reason": "E3401 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "kei-car-count",
+      "reason": "H7207 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "kindergarten-count-city",
+      "reason": "E1101 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "kindergarten-count-per-100k-3-5",
+      "reason": "E1101 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "kindergarten-education-diffusion-rate",
+      "reason": "指標 #E0910101 が指標計算式のページに無い"
+    },
+    {
+      "key": "kindergarten-enrollment-city",
+      "reason": "E1501 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "kindergarten-students-per-teacher",
+      "reason": "E1501 期間「5月1日」(学校基本調査) は年度か暦年か決まらない、E1301 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "kindergarten-teachers",
+      "reason": "E1301 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "land-productivity-per-ha",
+      "reason": "C3107 期間「7月15日」(耕地及び作付面積統計) は年度か暦年か決まらない"
+    },
+    {
+      "key": "large-scale-retail-stores-10-per",
+      "reason": "市区町村の指標 #H06109 の計算式は公開されていない (指標計算式のページは都道府県の指標)"
+    },
+    {
+      "key": "life-expectancy-0-female",
+      "reason": "I1102 期間「─」(完全生命表、都道府県別生命表、市区町村別生命表) は年度か暦年か決まらない"
+    },
+    {
+      "key": "life-expectancy-0-male",
+      "reason": "I1101 期間「─」(完全生命表、都道府県別生命表、市区町村別生命表) は年度か暦年か決まらない"
+    },
+    {
+      "key": "life-expectancy-65-male",
+      "reason": "I1501 期間「─」(完全生命表、都道府県別生命表、市区町村別生命表) は年度か暦年か決まらない"
+    },
+    {
+      "key": "life-expectancy-at-birth-female",
+      "reason": "I1102 期間「─」(完全生命表、都道府県別生命表、市区町村別生命表) は年度か暦年か決まらない"
+    },
+    {
+      "key": "life-expectancy-at-birth-male",
+      "reason": "I1101 期間「─」(完全生命表、都道府県別生命表、市区町村別生命表) は年度か暦年か決まらない"
+    },
+    {
+      "key": "light-and-small-special-vehicle-count",
+      "reason": "H7210 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "long-absence-middle-school-illness-per-1000",
+      "reason": "E350501 期間「5月1日」(学校基本調査、児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査) は年度か暦年か決まらない、E3501 期間「5月1日」(学校基本調査、児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "long-absence-primary-school-illness-per-1000",
+      "reason": "E250801 期間「5月1日」(学校基本調査、児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査) は年度か暦年か決まらない、E2501 期間「5月1日」(学校基本調査、児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "lowest-temperature",
+      "reason": "B4103 期間「年間」(調査名なし) は年度か暦年か決まらない"
+    },
+    {
+      "key": "maximum-snow-depth",
+      "reason": "B4110 期間「寒候期」(調査名なし) は年度か暦年か決まらない"
+    },
+    {
+      "key": "maximum-temperature",
+      "reason": "B4102 期間「年間」(調査名なし) は年度か暦年か決まらない"
+    },
+    {
+      "key": "microwave-ownership-multi-person-households-per-1000",
+      "reason": "L5103 期間「10月31日」(全国消費実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "middle-school-students-1-per",
+      "reason": "E3501 期間「5月1日」(学校基本調査、児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査) は年度か暦年か決まらない、E3301 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "middle-school-teachers-ratio-female",
+      "reason": "E340102 期間「5月1日」(学校基本調査) は年度か暦年か決まらない、E3401 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "migrant-worker-ratio-sales-farm",
+      "reason": "C310612 期間「センサス 実施年の 2月1日」(農林業センサス、農業センサス、農業構造動態調査報告書) は年度か暦年か決まらない、C310410 期間「センサス 実施年の 2月1日」(農林業センサス、農業センサス) は年度か暦年か決まらない"
+    },
+    {
+      "key": "minicar-count",
+      "reason": "H720904 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "miscellaneous-school-count",
+      "reason": "E7102 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "miscellaneous-school-count-per-100k",
+      "reason": "E7102 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "miscellaneous-school-students",
+      "reason": "E7202 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "miscellaneous-school-students-per-1000",
+      "reason": "E7202 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "mobile-phone-ownership-multi-person-households-per-1000",
+      "reason": "L5112 期間「10月31日」(全国消費実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "moped-count",
+      "reason": "H7209 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "moped-count-50-90cc",
+      "reason": "H720902 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "moped-count-50cc-or-less",
+      "reason": "H720901 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "moped-count-over-90cc",
+      "reason": "H720903 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "motorcycle-count",
+      "reason": "H7208 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "municipal-general-administration-staff",
+      "reason": "D1202 期間「4月1日」(地方公共団体定員管理調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "municipality-count",
+      "reason": "D110101 期間「4月1日」(全国地方公共団体コード) は年度か暦年か決まらない"
+    },
+    {
+      "key": "national-university-student-ratio",
+      "reason": "E630210 期間「5月1日」(学校基本調査) は年度か暦年か決まらない、E6302 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "night-soil-treatment-population-ratio",
+      "reason": "H550701 期間「―」(一般廃棄物処理事業実態調査) は年度か暦年か決まらない、A2301 期間「1月1日」(住民基本台帳に基づく人口、人口動態及び世帯数調査（住民基本台帳人口要覧）) は年度か暦年か決まらない"
+    },
+    {
+      "key": "night-soil-treatment-volume",
+      "reason": "H5509 期間「―」(一般廃棄物処理事業実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "non-agricultural-income-ratio",
+      "reason": "L210102 期間「年計」(農業経営統計調査) は年度か暦年か決まらない、L2100 期間「年計」(農業経営統計調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "non-flush-toilet-population-city",
+      "reason": "H550701 期間「―」(一般廃棄物処理事業実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "number-of-individual-fishery-management",
+      "reason": "C312301 期間「調査前年の 11月～調査 年10月」(調査名なし) は年度か暦年か決まらない"
+    },
+    {
+      "key": "nursery-education-diffusion-rate",
+      "reason": "指標 #E0910102 が指標計算式のページに無い"
+    },
+    {
+      "key": "nursery-waiting-children-count",
+      "reason": "J250502 期間「4月1日」(保育所等関連状況取りまとめ) は年度か暦年か決まらない"
+    },
+    {
+      "key": "nursing-home-residents-per-1000-65plus",
+      "reason": "J230125 期間「9月30日 24時」(介護サービス施設・事業所調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "nursing-welfare-facilities-basic-tabulation-6510-per",
+      "reason": "市区町村の指標 #J02206 の計算式は公開されていない (指標計算式のページは都道府県の指標)"
+    },
+    {
+      "key": "nursing-welfare-facilities-detailed-tabulation-6510-per",
+      "reason": "市区町村の指標 #J02205 の計算式は公開されていない (指標計算式のページは都道府県の指標)"
+    },
+    {
+      "key": "pc-ownership-multi-person-households-per-1000",
+      "reason": "L5114 期間「10月31日」(全国消費実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "per-taxpayer-income",
+      "reason": "市区町村の指標 #D02206 の計算式は公開されていない (指標計算式のページは都道府県の指標)"
+    },
+    {
+      "key": "per-taxpayer-taxable-income",
+      "reason": "C120110 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない、C120120 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "piano-ownership-multi-person-households-per-1000",
+      "reason": "L5107 期間「10月31日」(全国消費実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "police-department-staff",
+      "reason": "D1205 期間「4月1日」(地方公共団体定員管理調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "police-officer-count",
+      "reason": "K4102 期間「4月1日」(地方公共団体定員管理調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "police-officer-count-per-population",
+      "reason": "K4102 期間「4月1日」(地方公共団体定員管理調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "population-density-habitable",
+      "reason": "市区町村の指標 #A01202 の計算式は公開されていない (指標計算式のページは都道府県の指標)"
+    },
+    {
+      "key": "prefectural-general-administration-staff",
+      "reason": "D1201 期間「4月1日」(地方公共団体定員管理調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "prime-contractor-completed-construction",
+      "reason": "C3304 期間「決算期まで の1年間」(建設工事施工統計調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "prime-contractor-completed-construction-public",
+      "reason": "C330420 期間「決算期まで の1年間」(建設工事施工統計調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "private-university-student-ratio",
+      "reason": "E630230 期間「5月1日」(学校基本調査) は年度か暦年か決まらない、E6302 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "public-elementary-school-gym-installation-rate",
+      "reason": "E2206 期間「5月1日」(公共施設状況調) は年度か暦年か決まらない、E210102 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "public-elementary-school-pool-installation-rate",
+      "reason": "E2207 期間「5月1日」(公共施設状況調) は年度か暦年か決まらない、E210102 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "public-enterprise-accounting-staff",
+      "reason": "D1206 期間「4月1日」(地方公共団体定員管理調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "public-high-school-pool-installation-rate",
+      "reason": "E4207 期間「5月1日」(公共施設状況調) は年度か暦年か決まらない、E410102 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "public-high-school-ratio",
+      "reason": "E410102 期間「5月1日」(学校基本調査) は年度か暦年か決まらない、E4101 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "public-high-school-student-ratio",
+      "reason": "E4512 期間「5月1日」(学校基本調査) は年度か暦年か決まらない、E4501 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "public-junior-high-school-gym-installation-rate",
+      "reason": "E3206 期間「5月1日」(公共施設状況調) は年度か暦年か決まらない、E310102 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "public-junior-high-school-pool-installation-rate",
+      "reason": "E3207 期間「5月1日」(公共施設状況調) は年度か暦年か決まらない、E310102 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "public-kindergarten-ratio",
+      "reason": "E110102 期間「5月1日」(学校基本調査) は年度か暦年か決まらない、E1101 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "public-kindergarten-student-ratio",
+      "reason": "E1502 期間「5月1日」(学校基本調査) は年度か暦年か決まらない、E1501 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "public-university-student-ratio",
+      "reason": "E630220 期間「5月1日」(学校基本調査) は年度か暦年か決まらない、E6302 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "real-deficit-ratio-municipal",
+      "reason": "市区町村の指標 #D02214 の計算式は公開されていない (指標計算式のページは都道府県の指標)"
+    },
+    {
+      "key": "resident-registry-households-japanese",
+      "reason": "A7103 期間「1月1日」(住民基本台帳に基づく人口、人口動態及び世帯数調査（住民基本台帳人口要覧）) は年度か暦年か決まらない"
+    },
+    {
+      "key": "resident-registry-population-japanese",
+      "reason": "A2101 期間「1月1日」(国勢調査、人口推計) は年度か暦年か決まらない"
+    },
+    {
+      "key": "resident-registry-population-japanese-female",
+      "reason": "A210102 期間「1月1日」(国勢調査、人口推計) は年度か暦年か決まらない"
+    },
+    {
+      "key": "resident-registry-population-japanese-male",
+      "reason": "A210101 期間「1月1日」(国勢調査、人口推計) は年度か暦年か決まらない"
+    },
+    {
+      "key": "resident-registry-population-total",
+      "reason": "A2301 期間「1月1日」(住民基本台帳に基づく人口、人口動態及び世帯数調査（住民基本台帳人口要覧）) は年度か暦年か決まらない"
+    },
+    {
+      "key": "residential-land-price-change-rate",
+      "reason": "C5501 期間「7月1日」(都道府県地価調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "restaurants-per",
+      "reason": "市区町村の指標 #H06107 の計算式は公開されていない (指標計算式のページは都道府県の指標)"
+    },
+    {
+      "key": "retail-stores-per",
+      "reason": "市区町村の指標 #H06101 の計算式は公開されていない (指標計算式のページは都道府県の指標)"
+    },
+    {
+      "key": "room-aircon-ownership-multi-person-households-per-1000",
+      "reason": "L5104 期間「10月31日」(全国消費実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "sanitation-total-population",
+      "reason": "H5507 期間「―」(一般廃棄物処理事業実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "savings-deposit-balance",
+      "reason": "L430102 期間「11月30日」(全国消費実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "secondary-education-school-count-per-100k-12-17",
+      "reason": "E4801 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "securities-balance",
+      "reason": "L430104 期間「11月30日」(全国消費実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "septic-tank-flush-rate",
+      "reason": "H5508 期間「―」(一般廃棄物処理事業実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "small-scale-farm-households",
+      "reason": "C310234 期間「センサス 実施年の 2月1日」(農林業センサス、農業センサス) は年度か暦年か決まらない"
+    },
+    {
+      "key": "smartphone-ownership-multi-person-households-per-1000",
+      "reason": "L5122 期間「10月31日」(全国消費実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "social-increase",
+      "reason": "A5302 期間「前年10月から当年9月」(人口推計) は年度か暦年か決まらない"
+    },
+    {
+      "key": "social-increase-rate",
+      "reason": "A5301 期間「前年10月から当年9月」(人口推計) は年度か暦年か決まらない"
+    },
+    {
+      "key": "specialized-school-count",
+      "reason": "E7101 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "specialized-school-count-per-100k",
+      "reason": "E7101 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "specialized-school-students",
+      "reason": "E7201 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "specialized-school-students-per-1000",
+      "reason": "E7201 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "specified-small-moped-count",
+      "reason": "H720905 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "standard-financial-scale-municipal",
+      "reason": "市区町村の指標 #D02213 の計算式は公開されていない (指標計算式のページは都道府県の指標)"
+    },
+    {
+      "key": "standard-price-change-rate-commercial",
+      "reason": "C5503 期間「7月1日」(都道府県地価調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "standard-price-change-rate-industrial",
+      "reason": "C5505 期間「7月1日」(都道府県地価調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "standard-price-change-rate-residential",
+      "reason": "C5501 期間「7月1日」(都道府県地価調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "stereo-cd-md-radio-ownership-multi-person-households-per-1000",
+      "reason": "L5116 期間「10月31日」(全国消費実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "subcontractor-completed-construction",
+      "reason": "C3305 期間「決算期まで の1年間」(建設工事施工統計調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "tablet-ownership-multi-person-households-per-1000",
+      "reason": "L5121 期間「10月31日」(全国消費実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "taxable-income-total",
+      "reason": "C120110 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "taxpayer-count-equal",
+      "reason": "C120130 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "taxpayer-count-income",
+      "reason": "C120120 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "taxpayer-ratio-per-pref-resident",
+      "reason": "C120120 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "three-wheeled-light-vehicle-count",
+      "reason": "H721002 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "total-area-prefecture-ratio",
+      "reason": "市区町村の指標 #B01101 の計算式は公開されていない (指標計算式のページは都道府県の指標)"
+    },
+    {
+      "key": "total-assessed-land-area",
+      "reason": "B1201 期間「1月1日」(固定資産の価格等の概要調書（土地）) は年度か暦年か決まらない"
+    },
+    {
+      "key": "total-assessed-land-area-ratio",
+      "reason": "B1201 期間「1月1日」(固定資産の価格等の概要調書（土地）) は年度か暦年か決まらない"
+    },
+    {
+      "key": "total-assessed-land-area-ratio-field",
+      "reason": "B120102 期間「1月1日」(固定資産の価格等の概要調書（土地）) は年度か暦年か決まらない、B1201 期間「1月1日」(固定資産の価格等の概要調書（土地）) は年度か暦年か決まらない"
+    },
+    {
+      "key": "total-assessed-land-area-ratio-paddy",
+      "reason": "B120101 期間「1月1日」(固定資産の価格等の概要調書（土地）) は年度か暦年か決まらない、B1201 期間「1月1日」(固定資産の価格等の概要調書（土地）) は年度か暦年か決まらない"
+    },
+    {
+      "key": "total-assessed-land-area-ratio-residential",
+      "reason": "B120103 期間「1月1日」(固定資産の価格等の概要調書（土地）) は年度か暦年か決まらない、B1201 期間「1月1日」(固定資産の価格等の概要調書（土地）) は年度か暦年か決まらない"
+    },
+    {
+      "key": "total-farm-household-income",
+      "reason": "L2100 期間「年計」(農業経営統計調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "traffic-accident-per-100k",
+      "reason": "市区町村の指標 #K04101 の計算式は公開されていない (指標計算式のページは都道府県の指標)"
+    },
+    {
+      "key": "two-wheeled-light-vehicle-count",
+      "reason": "H721001 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "university-capacity-index",
+      "reason": "E6403 期間「5月1日」(学校基本調査) は年度か暦年か決まらない、E460220 期間「3月」(学校基本調査) は年度か暦年か決まらない、E4901 期間「3月」(学校基本調査) は年度か暦年か決まらない、E5901 期間「3月」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "university-count",
+      "reason": "E6102 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "university-count-per-100k",
+      "reason": "E6102 期間「5月1日」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "university-graduates-job-ratio",
+      "reason": "E650220 期間「3月」(学校基本調査) は年度か暦年か決まらない、E6502 期間「3月」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "university-new-graduates-unemployment-rate",
+      "reason": "E650230 期間「3月」(学校基本調査) は年度か暦年か決まらない、E6502 期間「3月」(学校基本調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "vehicle-kilometers-traveled",
+      "reason": "H7150 期間「4月1日」(道路交通センサス) は年度か暦年か決まらない"
+    },
+    {
+      "key": "voter-list-registrants",
+      "reason": "D1212 期間「9月1日」(選挙人名簿及び在外選挙人名簿登録者数) は年度か暦年か決まらない"
+    },
+    {
+      "key": "voter-turnout-city-assembly",
+      "reason": "G6307 期間「選挙期日」(地方選挙結果調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "voter-turnout-council-district",
+      "reason": "G6304 期間「選挙期日」(衆議院議員総選挙 最高裁判所裁判官国民審査結果調、参議院議員通常選挙結果調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "voter-turnout-council-proportional",
+      "reason": "G6303 期間「選挙期日」(衆議院議員総選挙 最高裁判所裁判官国民審査結果調、参議院議員通常選挙結果調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "voter-turnout-governor",
+      "reason": "G6306 期間「選挙期日」(地方選挙結果調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "voter-turnout-house-proportional",
+      "reason": "G6302 期間「選挙期日」(衆議院議員総選挙 最高裁判所裁判官国民審査結果調、参議院議員通常選挙結果調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "voter-turnout-house-single",
+      "reason": "G6301 期間「選挙期日」(衆議院議員総選挙 最高裁判所裁判官国民審査結果調、参議院議員通常選挙結果調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "voter-turnout-mayor",
+      "reason": "G6308 期間「選挙期日」(地方選挙結果調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "voter-turnout-pref-assembly",
+      "reason": "G6305 期間「選挙期日」(地方選挙結果調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "work-accident-severity",
+      "reason": "F8102 期間「年間」(労働災害動向調査) は年度か暦年か決まらない"
+    }
+  ]
+}

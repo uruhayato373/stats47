@@ -308,6 +308,12 @@ export const PR_GATES = [
     hint: "npm run estat:kakei-ledger:build で台帳を作り直し、新しい表は decisions.json と切り口台帳に載せる",
   },
   {
+    name: "SSDS Year Format",
+    why: "SSDS の指標を足す・yearFormat を変えると、定義の期間から決めた年の区切りと食い違う",
+    run: () => tryRun("npm", ["run", "estat:ssds-year-format:check"]),
+    hint: `${datasetDir("metrics.definitions")}/<key>.ts の yearFormat を表示された区切りに直す (根拠は npx tsx .claude/scripts/estat/check-ssds-year-format.ts --explain <key>)`,
+  },
+  {
     name: "Sitemap / Tag Keys",
     why: "公開記事の増減で sitemap・tag・prominence が古くなる (R2 実測)",
     run: async () => {
