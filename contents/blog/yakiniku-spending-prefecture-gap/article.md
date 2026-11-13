@@ -14,7 +14,7 @@ tags:
   - 都道府県ランキング
 publishedAt: 2026-05-31
 updatedAt: 2026-11-13
-published: true
+published: false
 ogImage: /blog/yakiniku-spending-prefecture-gap/og.png
 ---
 

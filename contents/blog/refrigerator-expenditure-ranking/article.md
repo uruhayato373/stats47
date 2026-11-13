@@ -14,7 +14,7 @@ tags:
   - 耐久消費財
 publishedAt: 2026-07-10
 updatedAt: 2026-11-13
-published: true
+published: false
 ogImage: /blog/refrigerator-expenditure-ranking/og.png
 ---
 

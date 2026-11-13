@@ -6,7 +6,7 @@ slug: whitebait-consumption-quantity-prefecture-gap
 publishedAt: 2026-09-01
 updatedAt: 2026-11-09
 archetype: D2
-published: true
+published: false
 tags: []
 ---
 

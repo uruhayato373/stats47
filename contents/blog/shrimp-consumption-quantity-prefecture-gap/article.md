@@ -6,7 +6,7 @@ slug: shrimp-consumption-quantity-prefecture-gap
 archetype: C
 publishedAt: 2026-09-01
 updatedAt: 2026-11-09
-published: true
+published: false
 tags: []
 ---
 

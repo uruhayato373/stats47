@@ -12,7 +12,7 @@ tags:
   - 東西差
 publishedAt: 2026-03-29
 updatedAt: 2026-11-09
-published: true
+published: false
 ogImage: /blog/natto-consumption-east-west-divide/og.png
 ---
 
