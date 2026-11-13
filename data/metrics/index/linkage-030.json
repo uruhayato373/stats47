@@ -6883,10 +6883,7 @@
         "configHash": "8877a34d6409c50e"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:traffic-accident-casualties-per-100-accidents",
@@ -6918,10 +6915,7 @@
         "configHash": "9905f3e6e6fa606d"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:traffic-accident-casualties-per-population",
@@ -7382,10 +7376,7 @@
         "configHash": "a2ecbe2528812256"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:traffic-accident-count-per-1000-km",
@@ -8608,9 +8599,7 @@
         "configHash": "8081d71cebbd3eaf"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "municipality-ranking:traffic-accident-per-100k",

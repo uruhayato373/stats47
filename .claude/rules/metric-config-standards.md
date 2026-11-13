@@ -222,6 +222,23 @@ npm run sync:estat-years --workspace=@stats47/data-configs
 
 警告 (warn) を新たに増やさない。注釈は `note` に、年は `years` に、区別は `subtitle` に置く。
 
+## SSDS の `yearFormat` は出典の期間から決める (2026-11-14)
+
+社会・人口統計体系 (SSDS) の表は時間軸の表示がどれも「◯年度」だが、中身は国勢調査 (10月1日)・犯罪統計 (暦年計)・
+家計調査 (暦年平均) のように暦年の項目が多い。生成器が全指標に `yearFormat: "fiscal"` を固定で書いていて
+「2020年度」と表示されていたので (2026-10-21 に 410 指標を是正)、区切りは e-Stat の定義から決める。
+
+- 根拠は「統計項目の定義」の「時点又は期間」と「指標計算式」の基礎項目。控えは
+  `data/estat/ssds-year-format/definitions.json` (`npm run estat:ssds-year-format:build` で取り直す)。
+- 判定は `.claude/scripts/estat/lib/ssds-year-format.mjs`。年度の項目 (年度計・年度間・3月31日 など) を 1 つでも含めば
+  fiscal、すべて暦年の項目 (暦年計・暦年平均・12月31日・10月1日、または年で呼ぶ調査) なら calendar、それ以外は決めない。
+- `gen-ssds-configs.mjs` はこの判定で `yearFormat` を書き、決まらない spec は書かずに止まる。
+- `npm run estat:ssds-year-format:check` (preflight・PR の CI) が全 SSDS 指標を突き合わせ、食い違いを error にする。
+  根拠は `npx tsx .claude/scripts/estat/check-ssds-year-format.ts --explain <key>`。
+- 人の判断は `data/estat/ssds-year-format/decisions.json`: 期間で決まらない調査の年の呼び方 (`surveyNaming`。一次資料で
+  確かめたものだけ)・定義ページの誤りの上書き (`itemOverrides`)・判定できない指標の一覧 (`undetermined`。縮小専用)。
+  判定できない指標を、年度か暦年のどちらかへ一括で倒さない。
+
 ## 分類軸は必ず 1 系列に絞る（形状ゲート）
 
 **e-Stat の統計表は多次元クロス集計なので、config で軸を絞りきらないと同じ県が複数行になる。**

@@ -33,22 +33,6 @@ export const govtHealthInsuranceVisitExpenseDependentsPerPerson: MetricConfig = 
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "円/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "円/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "seoTitle": "政府管掌健康保険受診金額ランキング都道府県【2007年】｜1位千葉県（123,945円）",
   "seoDescription": "2007年の政府管掌健康保険受診金額の都道府県別ランキング。1位千葉県（123,945円）、最下位東京都（56,361円）で2.2倍の格差。地図やグラフで47都道府県を比較。",

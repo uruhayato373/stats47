@@ -18,6 +18,7 @@ import {
   LOW_ELEVATION_PRIMARY_METRIC_KEY,
   LOW_ELEVATION_SLUG,
   assertGeoLowElevationConservation,
+  isCanonicalGeoJsonBody,
   lowElevationCensusPopulation,
   parseGeoLowElevationManifest,
   parseGeoLowElevationPrefDetail,
@@ -463,7 +464,12 @@ function auditLowElevation(): void {
       output: `${prefix}/{item,manifest,pref/*}.json`,
     });
   }
-  const { value: raw } = readArtifact<unknown>(geoAnalysisManifestKey(slug));
+  const { value: raw, body: manifestBody } = readArtifact<unknown>(
+    geoAnalysisManifestKey(slug)
+  );
+  // manifest 自身は SHA を持てないので、再直列化とバイトが一致すること(キー順を含む)で正準性を保証する。
+  if (!isCanonicalGeoJsonBody(raw, manifestBody))
+    throw new Error(`${slug}: manifestが正準JSON(compact)ではない(整数風キーの並びなど)`);
   const manifest = parseGeoLowElevationManifest(raw);
   if (!manifest) throw new Error(`${slug}: manifest契約(承認済み入力集合・段階・品質)不一致`);
   // 定義 = 生成スクリプト本体。変更後に再生成していない生成物は公開しない。

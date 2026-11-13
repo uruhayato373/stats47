@@ -23,14 +23,13 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { THEME_CATALOGS } from "../../../packages/data-configs/src/theme-catalog/index";
-import { datasetDir } from "../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const STATE_DIR = path.join(PROJECT_ROOT, datasetDir("themes.portfolio"));
 const REVIEW_DIR = path.join(PROJECT_ROOT, datasetDir("themes.reviews"));
-const PORTFOLIO = path.join(STATE_DIR, "portfolio.json");
-const EXPERIMENTS = path.join(STATE_DIR, "experiments.json");
+const PORTFOLIO = path.join(PROJECT_ROOT, datasetPath("themes.portfolio"));
+const EXPERIMENTS = path.join(PROJECT_ROOT, datasetPath("themes.experiments"));
 
 const LEGACY_SETS: Record<string, unknown> = {};
 
@@ -145,7 +144,7 @@ function load<T>(file: string, fallback: T): T {
 }
 
 function main() {
-  fs.mkdirSync(STATE_DIR, { recursive: true });
+  fs.mkdirSync(path.dirname(PORTFOLIO), { recursive: true });
   const pf = load(PORTFOLIO, { schemaVersion: 1, generatedAt: null as string | null, themes: [] as ThemeEntry[] });
   const byKey = new Map(pf.themes.map((t) => [t.themeKey, t]));
 

@@ -10623,10 +10623,7 @@
         "configHash": "dd5ac75ea0a1ccad"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:residential-telephone-subscription-count-per-1000",
@@ -10698,10 +10695,7 @@
         "configHash": "9c05a859b8a87842"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:local-services",
@@ -12227,10 +12221,7 @@
         "configHash": "bde1b3c732055d6c"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:convenience-store-density-map",

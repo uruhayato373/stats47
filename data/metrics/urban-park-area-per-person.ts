@@ -80,22 +80,6 @@ export const urbanParkAreaPerPerson: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "ｍ2/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "ｍ2/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "groupKey": "urban-parks-area",
   "seoTitle": "都市公園面積ランキング都道府県【2023年】｜1位北海道（27.84ｍ2）",

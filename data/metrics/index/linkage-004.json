@@ -958,10 +958,7 @@
         "configHash": "b5cb96650c04aece"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:compulsory-education-school-count-per-100k-6-14",
@@ -8853,10 +8850,7 @@
         "configHash": "c98d0960033a36e3"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:convenience-store-density-map",
@@ -11221,9 +11215,7 @@
         "configHash": "8385f7f6d64afcfd"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "municipality-ranking:crime-rate-per-1k",

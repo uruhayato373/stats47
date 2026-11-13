@@ -8742,10 +8742,7 @@
         "configHash": "ef86c639ba86fc42"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:high-school-count-per-100k-15-17",
@@ -9011,10 +9008,7 @@
         "configHash": "43c75d15386c2e0a"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:pachinko-education-cost",

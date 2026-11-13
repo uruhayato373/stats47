@@ -348,3 +348,18 @@ test("data/metrics: 世帯・農家の 1 戸当たり金額 4 指標は subtitle
     assert.equal(isMoneyTotalMetric(meta), false, `${key} が金額の総額と判定される`);
   }
 });
+
+// 1 世帯・1 戸当たりの値に「人口10万人あたり」「面積100km²あたり」を残すと、平均を人口や面積で
+// さらに割る二重の換算を選べてしまう (METRIC-HOUSEHOLD-ASSET-SUBTITLE-01)
+test("data/metrics: 1 世帯・1 戸当たり金額 4 指標は人口・面積あたりの換算の選択肢を持たない", () => {
+  for (const key of [
+    "financial-debt-balance",
+    "savings-deposit-balance",
+    "securities-balance",
+    "total-farm-household-income",
+  ]) {
+    const source = fs.readFileSync(path.join(PROJECT_ROOT, "data/metrics", `${key}.ts`), "utf8");
+    assert.match(source, /"normalizationOptions":\s*\[\s*\]/u, `${key} に換算の選択肢が残っている`);
+    assert.doesNotMatch(source, /per_population|per_area/u, `${key} に人口・面積の換算が残っている`);
+  }
+});

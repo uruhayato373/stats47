@@ -63,10 +63,7 @@
         "configHash": "52f2108dd8313e32"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:ict-digital-divide-composite-analysis",
@@ -1416,10 +1413,7 @@
         "configHash": "aa88d9ddc03373fe"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:per-capita-national-tax-collected",
@@ -2768,9 +2762,7 @@
         "configHash": "e64780e945db3a5e"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "municipality-ranking:per-taxpayer-income",
@@ -4544,10 +4536,7 @@
         "configHash": "326212ffc0319ffc"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:public-assistance",
@@ -4890,10 +4879,7 @@
         "configHash": "00d134232680d33c"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:pharmaceutical-sales-count-per-100k",
@@ -4925,10 +4911,7 @@
         "configHash": "6f532e6cf32ca7df"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:pharmaceutical-sales-count-per-100km2",
@@ -5592,10 +5575,7 @@
         "configHash": "7abd952bb42ac984"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:pharmacy-count-per-100km2",
@@ -5699,10 +5679,7 @@
         "configHash": "a3d4b0e3820b1da8"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:disability-support",
@@ -6011,10 +5988,7 @@
         "configHash": "47c5f1309ee1e7c3"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:physical-disability-rehabilitation-cases-per-1000",
@@ -6081,10 +6055,7 @@
         "configHash": "b017b7398060002e"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:physical-disability-rehabilitation-center-cases-per-1000",
@@ -6159,10 +6130,7 @@
         "configHash": "75952984045b7827"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:physical-disability-rehabilitation-facility-capacity-per-100k",
@@ -6194,10 +6162,7 @@
         "configHash": "ae76cb5a76ccfa41"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:physical-disability-rehabilitation-facility-count-per-1m",
@@ -6276,10 +6241,7 @@
         "configHash": "97e85d9b80937268"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:physical-disability-rehabilitation-facility-residents-per-100k",
@@ -6311,10 +6273,7 @@
         "configHash": "8d44e85da209e946"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:physical-disability-rehabilitation-facility-staff-per-100k",
@@ -7115,10 +7074,7 @@
         "configHash": "62c6b4f307d2553c"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:piano-ownership-prefecture-gap",
@@ -8150,10 +8106,7 @@
         "configHash": "c508110f81177980"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:planned-construction-cost-per-m2",

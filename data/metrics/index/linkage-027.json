@@ -96,10 +96,7 @@
         "configHash": "4f30d2defd585709"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-assets-debt",
@@ -1186,10 +1183,7 @@
         "configHash": "7ada335ab90fad65"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:self-service-store-count-per-100k",
@@ -1295,10 +1289,7 @@
         "configHash": "cb49963d82e33bca"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:senior-recreation-home-count-per-100k-65plus",
@@ -1330,10 +1321,7 @@
         "configHash": "3882297ae0ad66d5"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:senior-recreation-home-staff-per-100k-65plus",
@@ -1413,10 +1401,7 @@
         "configHash": "8c2d16701a8bedf3"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:senior-welfare-center-count-per-100k-65plus",
@@ -1448,10 +1433,7 @@
         "configHash": "3bca056fb5493310"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:senior-welfare-center-staff-per-100k-65plus",
@@ -5049,10 +5031,7 @@
         "configHash": "d9fb7ace7736ecdd"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:simple-life-insurance-contract-amount-per-contract",
@@ -5119,10 +5098,7 @@
         "configHash": "b918fb70a0040593"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:simple-life-insurance-contract-count-per-population",
@@ -9558,10 +9534,7 @@
         "configHash": "8fcc72e2c4bda209"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:bread-consumption-expenditure-vs-site-area-per-dwelling",
@@ -10346,10 +10319,7 @@
         "configHash": "fff155e3eb471cb4"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:smartphone-ownership-prefecture-gap",

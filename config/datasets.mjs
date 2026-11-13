@@ -787,6 +787,9 @@ export const DATASETS = [
   d("estat.kakei-ledger-schema", "data/estat/kakei-ledger/ledger.schema.json", "schema", "data", "data", "上の台帳の JSON Schema"),
   d("estat.kakei-decisions", "data/estat/kakei-ledger/decisions.json", "ledger", "data", "data", "家計調査の表・品目の採否判断 (指標を作らない excluded / 作る予定の planned と理由。指標があるものは書かない)", { schema: "data/estat/kakei-ledger/decisions.schema.json" }),
   d("estat.kakei-decisions-schema", "data/estat/kakei-ledger/decisions.schema.json", "schema", "data", "data", "上の判断の JSON Schema"),
+  d("estat.ssds-definitions", "data/estat/ssds-year-format/definitions.json", "evidence", "data", "data", "e-Stat「統計項目の定義」「指標計算式」(社会・人口統計体系 13 分野) の控え。項目符号ごとの時点又は期間・調査名と、指標の計算式の基礎項目 (build-ssds-definitions.mjs の生成物。手で編集しない)"),
+  d("estat.ssds-year-format-decisions", "data/estat/ssds-year-format/decisions.json", "ledger", "data", "data", "SSDS の指標の年の区切り (暦年 / 年度) の判断。期間で決まらない調査の年の呼び方・定義ページの誤りの上書き・判定できない指標の一覧 (理由付き・縮小専用)。検査は npm run estat:ssds-year-format:check", { schema: "data/estat/ssds-year-format/decisions.schema.json" }),
+  d("estat.ssds-year-format-decisions-schema", "data/estat/ssds-year-format/decisions.schema.json", "schema", "data", "data", "上の判断の JSON Schema"),
   d("estat.monthly-decisions", "data/estat/monthly/decisions.json", "ledger", "data", "data", "月次の統計の採否・使い道・問い。サイトの指標は年単位なので、月別の図と季節の話題の入口をここで管理する", {
     schema: "data/estat/monthly/decisions.schema.json",
     refs: [{ field: "decisions[].issues[]", to: "content.issues", key: "issues[].id" }],

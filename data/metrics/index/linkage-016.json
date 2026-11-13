@@ -72,10 +72,7 @@
         "configHash": "c9c422ae8099fbf1"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:maternal-health-guidance-per-100-births",
@@ -6446,10 +6443,7 @@
         "configHash": "0b280bbf00403e20"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:microwave-ownership-multi-person-households-per-1000",
@@ -6545,10 +6539,7 @@
         "configHash": "ed62e3573695ae70"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:middle-school-students-1-per",
@@ -8527,10 +8518,7 @@
         "configHash": "23ceabc6c1726875"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:miscellaneous-school-count-per-100k",
@@ -8601,10 +8589,7 @@
         "configHash": "88bcb439cb10029e"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:miscellaneous-school-students-per-1000",
@@ -9208,10 +9193,7 @@
         "configHash": "2f48be1bfa3b49d8"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:communication-access",
@@ -9453,10 +9435,7 @@
         "configHash": "8e2934ef8c641298"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:communication-access",

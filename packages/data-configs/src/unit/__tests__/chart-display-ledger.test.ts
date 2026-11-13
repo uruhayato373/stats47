@@ -30,9 +30,17 @@ describe("chart display-unit ledger check", () => {
     // The rule moved (or the row was edited by hand): the stored scale no longer follows from the stored values.
     expect(checkLedger(ledger([row({ chartUnit: "万円", factor: 0.1 })]), ["business-tax"], units({ "business-tax": "千円" })).errors[0]).toMatch(/^\[rule-changed\]/);
     // One more large metric whose unit the canon cannot read: the baseline only shrinks.
-    const unread = row({ key: "energy", unit: "TJ", max: 970_018, min: 1_000, minNonZeroAbs: 1_000, chartUnit: "TJ", factor: 1, decimals: null, reason: "unparsed" });
-    expect(checkLedger(ledger([unread]), ["energy"], units({ energy: "TJ" })).errors).toEqual([expect.stringMatching(/^\[unparsed-large\] .*energy/)]);
-    expect(checkLedger(ledger([unread], ["energy"]), ["energy"], units({ energy: "TJ" })).errors).toEqual([]);
+    const unread = row({ key: "pollution", unit: "kg/日", max: 205_599, min: 1_007.8, minNonZeroAbs: 1_007.8, chartUnit: "kg/日", factor: 1, decimals: null, reason: "unparsed" });
+    expect(checkLedger(ledger([unread]), ["pollution"], units({ pollution: "kg/日" })).errors).toEqual([expect.stringMatching(/^\[unparsed-large\] .*pollution/)]);
+    expect(checkLedger(ledger([unread], ["pollution"]), ["pollution"], units({ pollution: "kg/日" })).errors).toEqual([]);
+  });
+
+  it("the committed ledger no longer lists joules or gross tonnage as unreadable (UNIT-VOCAB-LARGE-UNPARSED-01)", () => {
+    const committed = JSON.parse(readFileSync(resolve(LEDGER_PATH), "utf8")) as DisplayUnitLedger;
+    const unread = committed.rows.filter((r) => committed.summary.unparsedLarge.includes(r.key)).map((r) => r.unit.normalize("NFKC"));
+    expect(unread.filter((unit) => /^(万?[TGM]J|総トン)$/.test(unit))).toEqual([]);
+    // The rest are rates (per day, per m²) the canon still cannot read: 13 on 2026-11-03, 7 after this vocabulary.
+    expect(committed.summary.unparsedLarge.length).toBeLessThanOrEqual(7);
   });
 
   it("the committed ledger matches the rule for every row", () => {

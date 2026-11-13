@@ -43,22 +43,8 @@ export const securitiesBalance: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "千円/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "千円/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
+    // 1 世帯当たりの平均なので人口・面積当たりへの換算は意味が無い (METRIC-HOUSEHOLD-ASSET-SUBTITLE-01)
+    "normalizationOptions": [],
   },
   "groupKey": "household-finance",
   "seoTitle": "有価証券保有額ランキング都道府県【2014年】｜1位東京都（4,303千円）",

@@ -3,7 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
 import assert from 'node:assert/strict';
-import { datasetDir } from "../../../config/datasets.mjs";
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const ROOT = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -11,8 +11,8 @@ const ROOT = path.resolve(
 );
 const git = (...args) =>
   execFileSync('git', args, { cwd: ROOT, encoding: 'utf8' });
-const reportPath = `${datasetDir("themes.portfolio")}/ci-review.json`;
-const experimentsPath = `${datasetDir("themes.portfolio")}/experiments.json`;
+const reportPath = datasetPath("themes.ci-review");
+const experimentsPath = datasetPath("themes.experiments");
 const meaningful = text => typeof text === 'string' && text.trim() && !/^(test|todo|tbd|placeholder|sample|テスト|仮|未記入)[.!。]*$/i.test(text.trim());
 const evidenceRef = ref => typeof ref === 'string' && (/^https:\/\/[^/\s]+\/[^\s]+$/.test(ref) || /^(\.claude|\.local|apps|packages)\/[^\s]+$/.test(ref)) && !ref.split('/').includes('..');
 export function evidenceFilePath(ref) {
@@ -130,7 +130,7 @@ if (
   }
   const { codeChanged, proposalChanges } = validateReview(
     read(reportPath),
-    read(`${datasetDir("themes.portfolio")}/ci-followup.json`),
+    read(datasetPath("themes.ci-followup")),
     files,
     JSON.parse(git('show', `HEAD:${experimentsPath}`)),
     read(experimentsPath)
@@ -144,7 +144,7 @@ if (
   fs.writeFileSync(
     path.join(evidenceDir, 'review-body.md'),
     read(reportPath).summary +
-      `\n\n検証と根拠: \`${datasetDir("themes.portfolio")}/ci-review.json\`。\n`
+      `\n\n検証と根拠: \`${reportPath}\`。\n`
   );
   if (process.env.GITHUB_OUTPUT)
     fs.appendFileSync(

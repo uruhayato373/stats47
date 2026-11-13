@@ -60,9 +60,7 @@
         "configHash": "34ccdd29a99bced6"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "municipality-ranking:retail-stores-per",
@@ -1555,10 +1553,7 @@
         "configHash": "e380f3fc342ce7cf"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:safe-driving-5-features",
@@ -1729,10 +1724,7 @@
         "configHash": "632327ee36fb3a69"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:room-aircon-ownership-multi-person-households-per-1000",
@@ -2197,10 +2189,7 @@
         "configHash": "238cbbb3ea7762d8"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:dual-income-household-ratio-vs-rooms-per-dwelling",
@@ -6945,10 +6934,7 @@
         "configHash": "92769fdc3fb51617"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:savings-deposit-balance",
@@ -9438,10 +9424,7 @@
         "configHash": "8c21e4b694b23fb9"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:secondary-education-school-count-per-100k-12-17",
@@ -9513,10 +9496,7 @@
         "configHash": "f1566d86debe59e1"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:secondary-industry-employees-per-establishment",

@@ -2225,10 +2225,7 @@
         "configHash": "d478d8b0bd6eef9b"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:avg-height-high-school-2nd-male-vs-floor-area-new-owner",
@@ -2264,10 +2261,7 @@
         "configHash": "2251174a23925211"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:floor-area-new-rented-dwelling",
@@ -3727,10 +3721,7 @@
         "configHash": "596bca13eadc50c0"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:food-business-facility-penalties-per-1000",
@@ -4903,10 +4894,7 @@
         "configHash": "80d6a87b8ec10c48"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:commercial-sales-productivity-gap",
@@ -5573,9 +5561,7 @@
         "configHash": "74813deb46baaf58"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:foreign-resident-five-percent-municipalities",
@@ -12769,10 +12755,7 @@
         "configHash": "b43312910e17e56a"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:fulltime-physicians-general-hospital-per-100beds",

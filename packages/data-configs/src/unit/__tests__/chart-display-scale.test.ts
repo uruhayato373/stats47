@@ -22,6 +22,15 @@ describe("resolveChartDisplayScale", () => {
     expect(resolveChartDisplayScale("kW", [5_287_064, 10_000])).toMatchObject({ unit: "万kW" });
   });
 
+  it("brings joules and gross tonnage into 万・億 once the canon reads them (UNIT-VOCAB-LARGE-UNPARSED-01)", () => {
+    // final-energy-consumption, city-gas-sales-volume and port-ships-tonnage: six to nine digits when shown as written.
+    expect(resolveChartDisplayScale("TJ", [970_018, 60_385])).toEqual({ unit: "万TJ", factor: 1e-4, decimals: 1, reason: "rescaled" });
+    expect(resolveChartDisplayScale("万ＭＪ", [23_010_341, 82_733])).toEqual({ unit: "億MJ", factor: 1e-4, decimals: 0, reason: "rescaled" });
+    expect(resolveChartDisplayScale("総トン", [399_226_924, 3_203_855])).toEqual({ unit: "万総トン", factor: 1e-4, decimals: 0, reason: "rescaled" });
+    // Per-capita energy stays as written: the values are small.
+    expect(resolveChartDisplayScale("GJ", [308.84, 63.32])).toMatchObject({ unit: "GJ", factor: 1, reason: "small" });
+  });
+
   it("does not hide a small prefecture as 0: uses a smaller prefix, up to six digits", () => {
     // Fish catch: 850,981 t to 1 t. 万t would show 1 t as 0.0, so the tonnes stay.
     expect(resolveChartDisplayScale("トン", [850_981, 1])).toMatchObject({ unit: "トン", factor: 1, decimals: 0 });
@@ -32,7 +41,7 @@ describe("resolveChartDisplayScale", () => {
     expect(resolveChartDisplayScale("％", [99.1, 12.3])).toMatchObject({ factor: 1, reason: "not-quantity" });
     expect(resolveChartDisplayScale("人（人口10万対）", [2_000_000, 1])).toMatchObject({ factor: 1, reason: "not-quantity" });
     // Not interpretable: never assumed to be ×1 of a known unit, only shown as written.
-    expect(resolveChartDisplayScale("TJ", [970_018, 1_000])).toMatchObject({ unit: "TJ", factor: 1, reason: "unparsed" });
+    expect(resolveChartDisplayScale("kg/日", [205_599, 1_007.8])).toMatchObject({ unit: "kg/日", factor: 1, reason: "unparsed" });
     expect(resolveChartDisplayScale("円", [])).toMatchObject({ reason: "no-values" });
   });
 

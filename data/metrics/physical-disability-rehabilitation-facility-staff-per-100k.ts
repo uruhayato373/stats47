@@ -34,22 +34,6 @@ export const physicalDisabilityRehabilitationFacilityStaffPer100k: MetricConfig 
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "人/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "人/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "seoTitle": "身体障害者更生援護施設従事者数ランキング都道府県【2011年】｜1位高知県（48人）",
   "seoDescription": "2011年の身体障害者更生援護施設従事者数の都道府県別ランキング。1位高知県（48人）、最下位茨城県（0人）で地図やグラフで47都道府県を比較。",

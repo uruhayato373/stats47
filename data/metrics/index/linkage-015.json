@@ -4363,10 +4363,7 @@
         "configHash": "44aa20cb27fa77fc"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:long-term-care-medical-facility-count-per-100k-65plus",
@@ -5974,10 +5971,7 @@
         "configHash": "a648ab91c038adda"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:main-road-length-per-km2",

@@ -33,22 +33,6 @@ export const plannedConstructionCostPerM2: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "千円/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "千円/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "groupKey": "residential-building-construction-cost",
   "seoTitle": "着工居住用建築物工事費予定額ランキング都道府県【2024年】｜1位東京都（364.2千円）",

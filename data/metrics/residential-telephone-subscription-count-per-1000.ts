@@ -82,22 +82,6 @@ export const residentialTelephoneSubscriptionCountPer1000: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "加入/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "加入/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "seoTitle": "住宅用電話加入数ランキング都道府県【2024年】｜1位青森県（118.8加入）",
   "seoDescription": "2024年の住宅用電話加入数の都道府県別ランキング。1位青森県（118.8加入）、最下位沖縄県（43.3加入）で2.7倍の格差。地図やグラフで47都道府県を比較。",

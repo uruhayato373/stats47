@@ -33,22 +33,6 @@ export const fireDepartmentMemberCountPer100ThousandPeople: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "人/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "人/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "seoTitle": "消防吏員数ランキング都道府県【2022年】｜1位秋田県（222人）",
   "seoDescription": "2022年の消防吏員数の都道府県別ランキング。1位秋田県（222人）、最下位福岡県（98.7人）で2.2倍の格差。地図やグラフで47都道府県を比較。",

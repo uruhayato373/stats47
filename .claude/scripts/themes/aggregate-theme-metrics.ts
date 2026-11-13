@@ -29,11 +29,11 @@ import { parse } from "csv-parse/sync";
 import { selectThemeWindows, selectLatestThemeWindow, isJapanPageReport, normalizeThemePath, summarizeThemeTraffic, summarizeThemeNavigation } from "./theme-metrics-core.mjs";
 import { readThemeQualityState } from "./theme-quality-state.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
+import { themeStatePath } from "./theme-state-path.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const STATE_DIR = process.env.STATE_DIR || path.join(PROJECT_ROOT, datasetDir("themes.portfolio"));
-const PORTFOLIO = path.join(STATE_DIR, "portfolio.json");
+const PORTFOLIO = themeStatePath("themes.portfolio");
 const GSC_SNAP = process.env.GSC_SNAPSHOT_DIR || path.join(PROJECT_ROOT, datasetDir("gsc.snapshots"));
 const GA4_SNAP = process.env.GA4_SNAPSHOT_DIR || path.join(PROJECT_ROOT, datasetDir("ga4.snapshots"));
 
@@ -61,7 +61,7 @@ function reportWindows(source: string, stem: string) {
 // ---------- R2 データ品質 ----------
 interface KeyQuality { key: string; ok: boolean; latestYear: string | null; latestYearPrefCoverage: number | null }
 
-const qualityFile = path.join(STATE_DIR, "quality.json");
+const qualityFile = themeStatePath("themes.quality");
 const audit = fs.existsSync(qualityFile) ? readThemeQualityState(qualityFile) : null;
 const recentQuality = audit?.summary?.mode === "structure-and-public-data" && Date.now() - Date.parse(audit.observedAt) < 7 * 86_400_000;
 async function fetchKeyQuality(key: string): Promise<KeyQuality> {

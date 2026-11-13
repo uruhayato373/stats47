@@ -9,7 +9,7 @@ import { formatUnitForDisplay } from "./unit-display";
  * `formatReadableMagnitude` は見出しや文中の 1 つの値用)。
  *
  * 決め方 (全 2,425 指標の最新年で実測して決めた。`data/metrics/chart-display-units.json`):
- * 1. 量の次元 (金額・人数・世帯・件数・戸数・重さ・面積・体積・電力・エネルギー) だけを寄せる。
+ * 1. 量の次元 (金額・人数・世帯・件数・戸数・重さ・面積・体積・電力・エネルギー・船の総トン数) だけを寄せる。
  *    割合・指数・分母つき・時間・長さ・温度は寄せない。単位を解釈できないものも寄せない
  *    (1 倍で済ませず、そのままの単位で出す)。
  * 2. 単位の先頭の数の接頭辞 (千・百万…) を外した語 (円・人・トン・ha…) に、万・億・兆を付け直す。
@@ -30,7 +30,7 @@ export interface ChartDisplayScale {
 
 /** 桁を寄せてよい「量」の次元。parseUnit の dimension 名。 */
 export const CHART_QUANTITY_DIMENSIONS: ReadonlySet<string> = new Set([
-  "currency", "people", "household", "count", "dwelling", "mass", "area", "volume", "power", "energy",
+  "currency", "people", "household", "count", "dwelling", "mass", "area", "volume", "power", "energy", "gross-tonnage",
 ]);
 /** 付け直す接頭辞。小さい順に試す。 */
 const CHART_PREFIXES = ["", "万", "億", "兆"] as const;

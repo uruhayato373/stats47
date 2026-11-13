@@ -1260,10 +1260,7 @@
         "configHash": "77b14b5c5496935f"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:special-law-criminal-arrest-count-per-population",
@@ -1458,10 +1455,7 @@
         "configHash": "1d1bbbf1242a3c66"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:specialized-school-count-per-100k",
@@ -1528,10 +1522,7 @@
         "configHash": "50b320ae1de195dd"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:specialized-school-students-per-1000",
@@ -3391,10 +3382,7 @@
         "configHash": "47413922aa05d429"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:sports-park-count-per-100km2",

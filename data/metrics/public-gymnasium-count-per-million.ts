@@ -62,22 +62,6 @@ export const publicGymnasiumCountPerMillion: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "施設/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "施設/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "seoTitle": "体育館数ランキング都道府県【2021年】｜1位鳥取県（235施設）",
   "seoDescription": "2021年の体育館数の都道府県別ランキング。1位鳥取県（235施設）、最下位東京都（18.3施設）で12.8倍の格差。地図やグラフで47都道府県を比較。",
