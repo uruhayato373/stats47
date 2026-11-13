@@ -454,7 +454,6 @@ YYYY-MM-DD-<method>[-<batch>]
 | `project_blog_brushup_risk_2026_05_25.md` | brushup の FAIL/WARN リスクと factual-check 実装状態 | factual-check 検出力測定後 |
 | `feedback_bulk_blog_publish_isr_404.md`   | bulk publish の ISR 404 リスク                       | 該当現象観測時             |
 | `feedback_evidence_based_judgment`        | 実証ベース判定ルールの参照                           | 判定方針変更時             |
-| `feedback_skill_schema_drift`             | SKILL.md と実 schema 乖離リスク                      | schema migration 時        |
 
 ### State (機械向け真実源)
 
@@ -472,7 +471,7 @@ YYYY-MM-DD-<method>[-<batch>]
 
 1. **改善ログの section ID と auto-brushup-history.json の wave_id が一致しているか** (`jq '[.entries[].wave_id] | unique' data/blog/auto-brushup-history.json` で一覧)
 2. **auto memory が実装と一致しているか** (個別 memory の `description` を読み、現状確認)
-3. **SKILL.md が実装と乖離していないか** (`feedback_skill_schema_drift` の警告に該当しないか)
+3. **SKILL.md が実装と乖離していないか** (SKILL.md が参照するテーブル・ファイル・スクリプトが今も実在するか)
 4. **改善ログの section が「単一施策 = 1 section」になっているか** (重複対応の場合は `predecessor_wave` / `successor_wave` で明示)
 
 混乱の兆候:
