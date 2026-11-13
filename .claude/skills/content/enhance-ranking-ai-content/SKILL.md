@@ -224,7 +224,7 @@ R2 PUT: app/ranking/<ranking_key>/ai-content.json (last-modified YYYY-MM-DDTHH:M
 - NotebookLM 1 クエリ ~30 秒 × 3 = 約 90 秒/件
 - DBレスでは **1 件だけ R2 push**（旧 `exportRankingAiContentSnapshot` の全件 2,000 件 PUT は不要・削除済）
 - ISR キャッシュ (24h) があるため即時反映には個別 purge が必要 (`/purge-cdn` スキル参照)
-- 効果 (CTR / position) は **4 週後の GSC snapshot** でないと判定不能 ([`evidence-based-judgment.md`](.claude/rules/evidence-based-judgment.md))
+- 効果 (CTR / position) は **4 週後の GSC snapshot** でないと判定不能 ([`evidence-based-judgment.md`](../../../rules/evidence-based-judgment.md))
 
 ## 関連
 

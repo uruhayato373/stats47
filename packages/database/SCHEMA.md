@@ -781,5 +781,5 @@ erDiagram
 ## 関連ドキュメント
 
 - **パッケージ使用方法**: [README.md](./README.md) - Drizzle ORMの使い方、スキーマ変更ワークフロー
-- **Seed Scripts**: [scripts/README.md](./scripts/README.md) - シードデータ管理
-- **統計チャート開発**: [apps/web/src/features/stat-charts/README.md](../../apps/web/src/features/stat-charts/README.md) - 統計チャートコンポーネント実装ガイド
+- **Seed Scripts**: [seed/README.md](./seed/README.md) - シードデータ管理
+- **統計チャート開発**: [apps/web/src/components/stat-charts/README.md](../../apps/web/src/components/stat-charts/README.md) - 統計チャートコンポーネント実装ガイド
