@@ -2,11 +2,15 @@
 "use strict";
 
 const fs = require("node:fs");
+const { spawnSync } = require("node:child_process");
 const path = require("node:path");
 
 const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..", "..");
 const args = process.argv.slice(2);
 const has = (value) => args.includes(value);
+// --staged: pre-commit 用。index に入っているファイルだけを見て、staged の検査スクリプトと
+// staged の workflow から辿れる指摘だけを判定する。追跡されていない作りかけは数えない。
+const STAGED = has("--staged");
 const writeIndex = args.indexOf("--write-baseline");
 const baselineArg = writeIndex === -1 ? null : args[writeIndex + 1];
 const BASELINE_PATH = path.resolve(
@@ -62,6 +66,31 @@ function walk(directory, output = []) {
   return output;
 }
 
+// --staged のとき、index に入っている (追跡中か staged の) ファイルの集合。他の作業者の
+// 未追跡の作りかけや .gitignore 対象は検査スクリプトの候補にも参照元にも数えない。
+let indexedCache = null;
+function gitList(gitArgs, what) {
+  const result = spawnSync("git", gitArgs, { cwd: ROOT, encoding: "utf8", maxBuffer: 256 * 1024 * 1024 });
+  if (result.status !== 0) {
+    console.error(`✗ --staged は git の作業ツリーが要る (${what}): ${(result.stderr || result.error || "").toString().trim()}`);
+    process.exit(2);
+  }
+  return new Set(result.stdout.split("\0").filter(Boolean));
+}
+
+function indexedFiles() {
+  if (!indexedCache) indexedCache = gitList(["ls-files", "-z"], "git ls-files");
+  return indexedCache;
+}
+
+function stagedFiles() {
+  return gitList(["diff", "--cached", "--name-only", "-z"], "git diff --cached");
+}
+
+function inScope(file) {
+  return !STAGED || indexedFiles().has(rel(file));
+}
+
 function candidateRoots() {
   const roots = [path.join(ROOT, ".claude/scripts")];
   for (const parent of ["apps", "packages"]) {
@@ -80,6 +109,7 @@ function candidateRoots() {
 function candidates() {
   return candidateRoots()
     .flatMap((root) => walk(root))
+    .filter(inScope)
     .filter((file) => SCRIPT_EXTENSIONS.has(path.extname(file)))
     .filter((file) => CHECKER_NAME.test(path.basename(file)))
     .sort();
@@ -96,6 +126,7 @@ function corpusFiles() {
   ];
   const files = roots.flatMap((root) => walk(path.join(ROOT, root)));
   return [...files, path.join(ROOT, "package.json")]
+    .filter(inScope)
     .filter((file) => CORPUS_EXTENSIONS.has(path.extname(file)) || isHuskyHook(file))
     .filter((file) => rel(file) !== rel(BASELINE_PATH));
 }
@@ -448,9 +479,15 @@ function inspect() {
   const gateByChecker = new Map(registry.gates.map((gate) => [gate.checker, gate]));
   const findings = [...registryResult.findings, ...validateGates(registry)];
   const classifications = [];
+  const staged = STAGED ? stagedFiles() : null;
+  // --staged で判定する検査スクリプト: staged のもの、または staged のファイル (workflow など) から参照されるもの。
+  const touched = new Set();
 
   for (const checkerFile of checkerFiles) {
     const references = referencesFor(corpus, checkerFile);
+    if (staged && (staged.has(checkerFile) || references.some((entry) => staged.has(entry.file)))) {
+      touched.add(checkerFile);
+    }
     const executable = references.filter((entry) => entry.kind !== "docs" && entry.kind !== "other");
     const gate = gateByChecker.get(checkerFile);
     const classification = {
@@ -513,7 +550,10 @@ function inspect() {
     (item) => NON_BASELINE_CODES.has(item.code) ||
       !exceptions.active.some((exception) => exceptionMatches(exception, item)),
   );
-  return { checkerFiles, classifications, workspaces: workspaces.inventory, findings: unsuppressed };
+  const scoped = staged
+    ? unsuppressed.filter((item) => staged.has(item.file) || touched.has(item.file))
+    : unsuppressed;
+  return { checkerFiles, classifications, workspaces: workspaces.inventory, findings: scoped };
 }
 
 function key(item) {
@@ -555,7 +595,8 @@ function main() {
     const known = new Set(baseline.findings.map(key));
     const current = new Set(result.findings.map(key));
     regressions = result.findings.filter((item) => !known.has(key(item)));
-    resolved = baseline.findings.filter((item) => !current.has(key(item)));
+    // --staged は一部のファイルしか見ていないので、見ていない baseline 行を「解消済み」と数えない。
+    resolved = STAGED ? [] : baseline.findings.filter((item) => !current.has(key(item)));
     const regressionKeys = new Set(regressions.map(key));
     for (const item of result.findings.filter((findingItem) => NON_BASELINE_CODES.has(findingItem.code))) {
       if (!regressionKeys.has(key(item))) {

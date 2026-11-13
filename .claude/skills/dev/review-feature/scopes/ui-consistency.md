@@ -119,7 +119,7 @@ Phase 1 の結果をページ種別ごとに整理する。
 
 7人の専門家として、Phase 1-2 の結果を元にそれぞれ独立した視点で評価する。
 
-パネリスト定義は [reference/panelists.md](reference/panelists.md) を参照。
+パネリスト定義は `reference/panelists.md` を参照 (ファイルは未作成)。
 
 ### Phase 4: 出力
 
@@ -127,7 +127,7 @@ Phase 1 の結果をページ種別ごとに整理する。
 
 ## パネリスト定義
 
-[reference/panelists.md](reference/panelists.md) に定義。
+`reference/panelists.md` に定義 (ファイルは未作成)。
 
 ## 出力フォーマット
 

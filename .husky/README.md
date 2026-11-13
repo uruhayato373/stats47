@@ -57,3 +57,5 @@ git commit --no-verify -m "message"
 ## pre-push
 
 `pre-push` は変更に関係するテストだけを走らせる (`.claude/scripts/lib/pre-push-tests.mjs`)。全件は CI が持つ。CI では動かない。飛ばすときは `git push --no-verify`。
+
+`core.hooksPath` は本体の `.husky` の絶対パスなので、このフックは他の worktree の push でも動く。push する作業ツリーにスクリプトが無いとき (スクリプトを持たないブランチの worktree) は、何もせず通す。

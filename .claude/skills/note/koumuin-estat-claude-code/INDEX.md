@@ -20,7 +20,7 @@ stats47 (47 都道府県統計サイト) 開発で使い込んだ既存スキル
 
 ## 親計画
 
-- 戦略プラン: [../../30_note記事企画/koumuin-estat-claude-code/strategy.md](../../30_note記事企画/koumuin-estat-claude-code/strategy.md) (本ヴァーティカル用)
+- 戦略プラン: [docs/30_note記事企画/koumuin-estat-claude-code/strategy.md](../../../../docs/30_note記事企画/koumuin-estat-claude-code/strategy.md) (本ヴァーティカル用)
 - 既存ヴァーティカル: [../koumuin-claude-code/INDEX.md](../koumuin-claude-code/INDEX.md) (33 本、Claude Code 全般)
 - 関連スキル: `.claude/skills/estat/{search-estat,inspect-estat-meta,fetch-estat-data}/`
 
@@ -144,7 +144,7 @@ note マガジン方式 (`koumuin-claude-code` と同じ運用)。
 
 ## 関連
 
-- 戦略: [../../30_note記事企画/koumuin-estat-claude-code/strategy.md](../../30_note記事企画/koumuin-estat-claude-code/strategy.md)
+- 戦略: [docs/30_note記事企画/koumuin-estat-claude-code/strategy.md](../../../../docs/30_note記事企画/koumuin-estat-claude-code/strategy.md)
 - マガジン設定: [MAGAZINE.md](MAGAZINE.md)
 - 既存ヴァーティカル: [../koumuin-claude-code/INDEX.md](../koumuin-claude-code/INDEX.md)
 - 既存スキル: `.claude/skills/estat/`, `.claude/skills/note/publish-note/`

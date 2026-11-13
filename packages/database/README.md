@@ -401,4 +401,4 @@ db.close();
 ## 関連ドキュメント
 
 - **テーブル定義リファレンス**: [SCHEMA.md](./SCHEMA.md)
-- **シードスクリプト**: [scripts/README.md](./scripts/README.md) — seed スクリプトの仕様
+- **シードスクリプト**: [seed/README.md](./seed/README.md) — seed スクリプトの仕様
