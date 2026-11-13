@@ -131,7 +131,7 @@ export const MEASUREMENT_REPORTS = Object.freeze({
       metrics: [{ name: 'eventCount' }],
       dimensionFilter: japanAnd(
         eventIn(['nav_impression', 'nav_click']),
-        { filter: { fieldName: 'customEvent:nav_surface', inListFilter: { values: ['area_blog', 'ranking_blog', 'theme_blog'] } } },
+        { filter: { fieldName: 'customEvent:nav_surface', inListFilter: { values: ['area_blog', 'ranking_blog', 'theme_blog', 'municipality_related'] } } },
         { filter: { fieldName: 'customEvent:card_variant', stringFilter: { matchType: 'BEGINS_WITH', value: 'related-articles-' } } },
       ),
     }),

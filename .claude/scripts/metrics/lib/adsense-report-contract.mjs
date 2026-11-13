@@ -465,7 +465,9 @@ export function resolveUnitMatch({
       // レポートにはあるが現在の inventory に無い = 削除済みユニットの過去データ
       return { slotId: "", codeSlot: "", matchStatus: "orphan" };
     }
-    const slotId = inv.slot_id || "";
+    // 記事内・関連コンテンツ・インフィードの広告コードからは slot_id を取り出せない (空で記録される)。
+    // そのユニットは unit_id の末尾 (ca-pub-…:<slot>) が広告コードの data-ad-slot と同じ値なので、そこから補う。
+    const slotId = inv.slot_id || /:(\d+)$/.exec(unitId)?.[1] || "";
     const hit = slotId ? codeIndex?.bySlotId?.get(slotId) : null;
     if (hit && hit.length > 0) {
       return { slotId, codeSlot: names(hit), matchStatus: "matched" };
