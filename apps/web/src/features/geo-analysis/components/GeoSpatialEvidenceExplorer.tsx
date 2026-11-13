@@ -392,9 +392,9 @@ function GeoSpatialEvidenceExplorerState({
         <SectionHeader as="h3" title="数値の確かめ方" hideRule />
         {detail && !loading ? (detail.slug === 'population-landslide-exposure' ? <GeoLandslideAudit detail={detail} /> :
           <StatTileGrid>
-            {/* 検算の式は桁の多い数が続く。4 列のマスに収まらない数は途中で折り返し、枠で切れないようにする */}
+            {/* 検算の行は結果 (合計・比率) を値に、内訳の式を値の下の補足に出す */}
             {spatialAuditRows(detail).map((row) => (
-              <StatTile key={row.label} className="wrap-anywhere" label={row.label} value={row.value} />
+              <StatTile key={row.label} label={row.label} value={row.value} meta={row.meta} />
             ))}
           </StatTileGrid>
         ) : null}

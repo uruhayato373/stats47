@@ -82,11 +82,18 @@ function valueUnit(key: string): string {
   return '';
 }
 
+/** 集計の値の表示。人数はメッシュの按分で小数が残る (14,047,593.999人) ので整数に丸める。比率・地価は集計の値のまま */
+function summaryValue(key: string, value: number): string {
+  return (valueUnit(key) === '人' ? Math.round(value) : value).toLocaleString('ja-JP');
+}
+
 /** 「この県の検算済み集計」の数値タイル。式で検算を見せる分析は検算の行を、それ以外は集計の項目をそのまま 1 枚にする */
 function summaryTiles(detail: GeoAnalysisPrefDetail): Array<{
   label: string;
   value: string | null;
   unit?: string;
+  /** 検算の内訳の式 (値の下の補足) */
+  meta?: string;
 }> {
   if (
     detail.slug === 'population-public-facility-access' ||
@@ -97,7 +104,7 @@ function summaryTiles(detail: GeoAnalysisPrefDetail): Array<{
     return spatialAuditRows(detail);
   return Object.entries(detail.summary).map(([key, value]) => ({
     label: summaryLabels[key] ?? key,
-    value: typeof value === 'number' ? value.toLocaleString('ja-JP') : null,
+    value: typeof value === 'number' ? summaryValue(key, value) : null,
     unit: valueUnit(key) || undefined,
   }));
 }
@@ -194,14 +201,14 @@ export default async function GeoArticleDataPage({ params }: PageProps) {
       <PanelGrid as="section">
         <SectionHeader title="この県の検算済み集計" hideRule />
         <StatTileGrid>
-          {/* 検算の式と丸め前の人口は桁が多い。4 列のマスに収まらない数は途中で折り返し、枠で切れないようにする */}
+          {/* 検算の行は結果 (合計・比率) を値に、内訳の式を値の下の補足に出す */}
           {summaryTiles(detail).map((tile) => (
             <StatTile
               key={tile.label}
-              className="wrap-anywhere"
               label={tile.label}
               value={tile.value}
               unit={tile.unit}
+              meta={tile.meta}
             />
           ))}
         </StatTileGrid>

@@ -64,6 +64,16 @@ describe('LinkRowNav', () => {
     expect(nav.querySelector('.flex-wrap')).toBeNull();
   });
 
+  // UI-FOLLOWUP-01: リンクは高さ 28px (Button sm)・行間 4px で、スマホのタップ領域の目安 44px を下回っていた。
+  // リンクの行 (LINK_ROW_SIZE_CLASS) と同じく、sm 未満の幅だけ最小の高さを 44px (min-h-11) にする
+  it('スマホの幅ではリンクの高さを 44px 以上にする (横スクロールでも折り返しでも)', () => {
+    const { unmount } = render(<LinkRowNav label="このページの内容" items={items} />);
+    for (const link of screen.getAllByRole('link')) expect(link).toHaveClass('max-sm:min-h-11');
+    unmount();
+    render(<LinkRowNav label="東京都の目次" items={items} wrap />);
+    for (const link of screen.getAllByRole('link')) expect(link).toHaveClass('max-sm:min-h-11');
+  });
+
   // AREA-TOC-MOBILE-01: 幅 375px で 1 行の横スクロールだと県の目次 18 件のうち 3 件しか表示領域に入らない。
   // 項目の多い目次は折り返して全件を出す。スクロールしないので、続きを示すフェードも置かない
   it('wrap を渡すと折り返すリンクの並びにし、横スクロールの容器とフェードを持たない', () => {

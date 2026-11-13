@@ -36,7 +36,7 @@ import {
 } from "@/lib/structured-data/person";
 import { buildOrganizationSchema } from "@/lib/structured-data/scripts";
 
-import { OPERATOR_PROFILE } from "@/config/operator-profile";
+import { OPERATOR_AVATAR_CLASS, OPERATOR_AVATAR_SIZE, OPERATOR_PROFILE } from "@/config/operator-profile";
 import { CONTACT_FORM_URL, DEFAULT_OGP_IMAGE_PATH, SITE_NAME, SITE_ORIGIN } from "@/config/site";
 
 import type { Metadata } from "next";
@@ -142,9 +142,9 @@ export default function AboutPage() {
             <Image
               src={OPERATOR_PROFILE.avatarSrc}
               alt={OPERATOR_PROFILE.avatarAlt}
-              width={56}
-              height={56}
-              className="w-14 h-14 rounded-full object-cover shrink-0"
+              width={OPERATOR_AVATAR_SIZE}
+              height={OPERATOR_AVATAR_SIZE}
+              className={OPERATOR_AVATAR_CLASS}
             />
             <div>
               <p className="font-semibold text-base">

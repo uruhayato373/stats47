@@ -32,6 +32,8 @@ interface RankingNationalAverageStatProps {
   presentation: Pick<MetricPresentation, "colorScheme" | "trendDomain">;
 }
 
+/** 観測の数がこれ以下の折れ線は、縦軸に 0 を含める (2 点は傾きしか情報が無い) */
+const MAX_POINTS_FOR_ZERO_BASELINE = 2;
 
 /** 指標の推移。選択年の数値を並べ、年ごとの値は図の操作時に表示する。 */
 export function RankingNationalAverageStat({
@@ -60,6 +62,13 @@ export function RankingNationalAverageStat({
   const linePoints = hasTotal
     ? series.map((point) => ({ year: point.year, value: point.mean ?? Number.NaN }))
     : series;
+  // このカードは軸の文字を出さない。観測が 2 点だけの折れ線は傾きしか情報が無く、縦軸を値の範囲に切り詰めると
+  // 27.1% → 27.4% の差が枠いっぱいの上昇に見える。2 点のときは 0 を含む縦軸にして、差を値との比で見せる。
+  // 範囲が固定の指標 (fixed) は範囲そのものが意味を持つので変えない。
+  const observedCount = linePoints.filter((point) => Number.isFinite(point.value)).length;
+  const trendPolicy = observedCount <= MAX_POINTS_FOR_ZERO_BASELINE && presentation.trendDomain.mode === "extent"
+    ? { ...presentation.trendDomain, mode: "zero" as const }
+    : presentation.trendDomain;
   const areaSeries = hasTotal ? {
     label: totalLabel,
     points: series.map((point) => ({ year: point.year, value: point.total ?? Number.NaN })),
@@ -98,7 +107,7 @@ export function RankingNationalAverageStat({
       {hasTrend ? (
         <NumericTrendChart
           points={linePoints}
-          policy={presentation.trendDomain}
+          policy={trendPolicy}
           label={lineLabel}
           unit={displayUnit}
           formatValue={(value) => formatRankingValue(value, precision)}

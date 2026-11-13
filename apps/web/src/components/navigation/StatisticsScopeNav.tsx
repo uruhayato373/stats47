@@ -25,6 +25,8 @@ export interface LinkRowNavItem {
  * 列の末尾に同じ幅の余白 (pr-8) を置いて、最後まで送ると最後の項目がフェードの外に出るようにする。
  * 項目の多い目次 (県の節) は `wrap` で折り返し、送らなくても全項目が表示領域に入るようにする
  * (幅 375px の 1 行では 18 件のうち 3 件しか入らなかった。AREA-TOC-MOBILE-01)。
+ * リンクの高さは Button sm の 28px。スマホの幅 (sm 未満) だけ最小の高さを 44px にして、タップ領域の目安を満たす
+ * (リンクの行 LINK_ROW_SIZE_CLASS と同じ決まり。折り返す目次は行間が 4px なので、高さを足さないと上下の行を押し間違える)。
  * JS を持たない。
  */
 export const LINK_ROW_SCROLL_CLASS = 'overflow-x-auto [scrollbar-width:none]';
@@ -36,7 +38,7 @@ const LINK_ROW_WRAP_CLASS = 'flex w-full min-w-0 flex-wrap items-center gap-1';
 export function linkRowItemClass(current = false) {
   return cn(
     buttonVariants({ variant: current ? 'outline' : 'ghost', size: 'sm' }),
-    'shrink-0',
+    'shrink-0 max-sm:min-h-11',
     !current && 'text-muted-foreground'
   );
 }
