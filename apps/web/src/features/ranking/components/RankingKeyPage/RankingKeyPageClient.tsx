@@ -58,6 +58,8 @@ interface RankingKeyPageClientProps {
     breadcrumb?: React.ReactNode;
     /** 同じ指標の市区町村ページへのリンク (既存の関連付けからサーバーで解決) */
     municipalityLink?: React.ReactNode;
+    /** 見出しの最新年が古いかを測る基準の年 (西暦)。サーバーが描画時に決めて渡す */
+    nowYear: number;
 }
 
 export function RankingKeyPageClient({
@@ -73,6 +75,7 @@ export function RankingKeyPageClient({
     groupMembers = [],
     breadcrumb,
     municipalityLink,
+    nowYear,
 }: RankingKeyPageClientProps) {
     const {
         activeRankingItem,
@@ -177,6 +180,8 @@ export function RankingKeyPageClient({
                 metricTitle={displayInfo.title}
                 areaType={currentAreaType}
                 updatedAt={activeRankingItem.updatedAt}
+                latestYear={activeRankingItem.latestYear}
+                nowYear={nowYear}
             />
             <RankingHeaderControls
                 normalizationOptions={rankingItem.calculation?.normalizationOptions}
