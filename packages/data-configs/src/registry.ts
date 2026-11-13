@@ -1161,11 +1161,21 @@ import { happoshuConsumptionQuantity } from "../../../data/metrics/happoshu-cons
 import { hatConsumptionExpenditure } from "../../../data/metrics/hat-consumption-expenditure";
 import { hatConsumptionQuantity } from "../../../data/metrics/hat-consumption-quantity";
 import { healthCenterExpensesPrefecture } from "../../../data/metrics/health-center-expenses-prefecture";
+import { healthCheckupBloodPressureMedicationRate } from "../../../data/metrics/health-checkup-blood-pressure-medication-rate";
 import { healthCheckupBreakfastSkippingRate } from "../../../data/metrics/health-checkup-breakfast-skipping-rate";
 import { healthCheckupConsumptionExpenditure } from "../../../data/metrics/health-checkup-consumption-expenditure";
+import { healthCheckupDailyActivityRate } from "../../../data/metrics/health-checkup-daily-activity-rate";
+import { healthCheckupDailyDrinkingRate } from "../../../data/metrics/health-checkup-daily-drinking-rate";
+import { healthCheckupDailySnackingRate } from "../../../data/metrics/health-checkup-daily-snacking-rate";
+import { healthCheckupExerciseHabitRate } from "../../../data/metrics/health-checkup-exercise-habit-rate";
+import { healthCheckupFastEatingRate } from "../../../data/metrics/health-checkup-fast-eating-rate";
+import { healthCheckupFastWalkingRate } from "../../../data/metrics/health-checkup-fast-walking-rate";
 import { healthCheckupLateDinnerRate } from "../../../data/metrics/health-checkup-late-dinner-rate";
 import { healthCheckupRateLifestyleDiseases } from "../../../data/metrics/health-checkup-rate-lifestyle-diseases";
 import { healthCheckupRecipients } from "../../../data/metrics/health-checkup-recipients";
+import { healthCheckupSmokingRate } from "../../../data/metrics/health-checkup-smoking-rate";
+import { healthCheckupSufficientSleepRate } from "../../../data/metrics/health-checkup-sufficient-sleep-rate";
+import { healthCheckupWeightGain10kgRate } from "../../../data/metrics/health-checkup-weight-gain-10kg-rate";
 import { healthConsumablesConsumptionExpenditure } from "../../../data/metrics/health-consumables-consumption-expenditure";
 import { healthInsurancePremiumConsumptionExpenditure } from "../../../data/metrics/health-insurance-premium-consumption-expenditure";
 import { healthMedicalExpenditureTotal } from "../../../data/metrics/health-medical-expenditure-total";
@@ -4489,11 +4499,21 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "hat-consumption-expenditure": hatConsumptionExpenditure,
   "hat-consumption-quantity": hatConsumptionQuantity,
   "health-center-expenses-prefecture": healthCenterExpensesPrefecture,
+  "health-checkup-blood-pressure-medication-rate": healthCheckupBloodPressureMedicationRate,
   "health-checkup-breakfast-skipping-rate": healthCheckupBreakfastSkippingRate,
   "health-checkup-consumption-expenditure": healthCheckupConsumptionExpenditure,
+  "health-checkup-daily-activity-rate": healthCheckupDailyActivityRate,
+  "health-checkup-daily-drinking-rate": healthCheckupDailyDrinkingRate,
+  "health-checkup-daily-snacking-rate": healthCheckupDailySnackingRate,
+  "health-checkup-exercise-habit-rate": healthCheckupExerciseHabitRate,
+  "health-checkup-fast-eating-rate": healthCheckupFastEatingRate,
+  "health-checkup-fast-walking-rate": healthCheckupFastWalkingRate,
   "health-checkup-late-dinner-rate": healthCheckupLateDinnerRate,
   "health-checkup-rate-lifestyle-diseases": healthCheckupRateLifestyleDiseases,
   "health-checkup-recipients": healthCheckupRecipients,
+  "health-checkup-smoking-rate": healthCheckupSmokingRate,
+  "health-checkup-sufficient-sleep-rate": healthCheckupSufficientSleepRate,
+  "health-checkup-weight-gain-10kg-rate": healthCheckupWeightGain10kgRate,
   "health-consumables-consumption-expenditure": healthConsumablesConsumptionExpenditure,
   "health-insurance-premium-consumption-expenditure": healthInsurancePremiumConsumptionExpenditure,
   "health-medical-expenditure-total": healthMedicalExpenditureTotal,

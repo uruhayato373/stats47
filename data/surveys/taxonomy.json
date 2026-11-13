@@ -3,11 +3,11 @@
   "generatedAt": "2026-11-07T23:56:49.443Z",
   "masterSurveyCount": 152,
   "ranking": {
-    "metrics": 2740,
+    "metrics": 2750,
     "activeMetrics": 2596,
     "applicableMetrics": 2651,
     "activeApplicableMetrics": 2508,
-    "notApplicable": 89,
+    "notApplicable": 99,
     "activeNotApplicable": 88,
     "resolved": 2651,
     "unresolved": 0,

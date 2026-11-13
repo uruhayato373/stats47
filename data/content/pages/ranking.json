@@ -9250,6 +9250,14 @@
       "published": true
     },
     {
+      "id": "ranking:health-checkup-blood-pressure-medication-rate",
+      "kind": "ranking",
+      "key": "health-checkup-blood-pressure-medication-rate",
+      "title": "血圧を下げる薬を使っている人の割合",
+      "href": "/ranking/health-checkup-blood-pressure-medication-rate",
+      "published": false
+    },
+    {
       "id": "ranking:health-checkup-breakfast-skipping-rate",
       "kind": "ranking",
       "key": "health-checkup-breakfast-skipping-rate",
@@ -9264,6 +9272,54 @@
       "title": "人間ドック等受診料消費支出額",
       "href": "/ranking/health-checkup-consumption-expenditure",
       "published": true
+    },
+    {
+      "id": "ranking:health-checkup-daily-activity-rate",
+      "kind": "ranking",
+      "key": "health-checkup-daily-activity-rate",
+      "title": "歩行などの身体活動を1日1時間以上している人の割合",
+      "href": "/ranking/health-checkup-daily-activity-rate",
+      "published": false
+    },
+    {
+      "id": "ranking:health-checkup-daily-drinking-rate",
+      "kind": "ranking",
+      "key": "health-checkup-daily-drinking-rate",
+      "title": "お酒を毎日飲む人の割合",
+      "href": "/ranking/health-checkup-daily-drinking-rate",
+      "published": false
+    },
+    {
+      "id": "ranking:health-checkup-daily-snacking-rate",
+      "kind": "ranking",
+      "key": "health-checkup-daily-snacking-rate",
+      "title": "間食や甘い飲み物を毎日とる人の割合",
+      "href": "/ranking/health-checkup-daily-snacking-rate",
+      "published": false
+    },
+    {
+      "id": "ranking:health-checkup-exercise-habit-rate",
+      "kind": "ranking",
+      "key": "health-checkup-exercise-habit-rate",
+      "title": "1回30分以上の運動を週2日以上続けている人の割合",
+      "href": "/ranking/health-checkup-exercise-habit-rate",
+      "published": false
+    },
+    {
+      "id": "ranking:health-checkup-fast-eating-rate",
+      "kind": "ranking",
+      "key": "health-checkup-fast-eating-rate",
+      "title": "食べる速度が速い人の割合",
+      "href": "/ranking/health-checkup-fast-eating-rate",
+      "published": false
+    },
+    {
+      "id": "ranking:health-checkup-fast-walking-rate",
+      "kind": "ranking",
+      "key": "health-checkup-fast-walking-rate",
+      "title": "同年代の同性より歩く速度が速い人の割合",
+      "href": "/ranking/health-checkup-fast-walking-rate",
+      "published": false
     },
     {
       "id": "ranking:health-checkup-late-dinner-rate",
@@ -9288,6 +9344,30 @@
       "title": "生活習慣病健康診断受診延人員（都道府県別）",
       "href": "/ranking/health-checkup-recipients",
       "published": true
+    },
+    {
+      "id": "ranking:health-checkup-smoking-rate",
+      "kind": "ranking",
+      "key": "health-checkup-smoking-rate",
+      "title": "習慣的に喫煙している人の割合",
+      "href": "/ranking/health-checkup-smoking-rate",
+      "published": false
+    },
+    {
+      "id": "ranking:health-checkup-sufficient-sleep-rate",
+      "kind": "ranking",
+      "key": "health-checkup-sufficient-sleep-rate",
+      "title": "睡眠で休養が十分とれている人の割合",
+      "href": "/ranking/health-checkup-sufficient-sleep-rate",
+      "published": false
+    },
+    {
+      "id": "ranking:health-checkup-weight-gain-10kg-rate",
+      "kind": "ranking",
+      "key": "health-checkup-weight-gain-10kg-rate",
+      "title": "20歳の時から体重が10kg以上増えた人の割合",
+      "href": "/ranking/health-checkup-weight-gain-10kg-rate",
+      "published": false
     },
     {
       "id": "ranking:health-consumables-consumption-expenditure",

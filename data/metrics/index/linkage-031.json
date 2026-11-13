@@ -2,6 +2,638 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "treatment-rate-asthma-outpatient",
+      "pageId": "ranking:treatment-rate-asthma-outpatient",
+      "title": "喘息の受療率（外来）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004026105",
+          "filters": {
+            "cdCat01": "34",
+            "cdCat03": "4"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004026105",
+          "cdCat01": "34",
+          "cdCat03": "4"
+        },
+        "ops": {
+          "areaAxis": {
+            "axis": "cat02",
+            "scheme": "seq-pref"
+          }
+        },
+        "derived": true,
+        "configHash": "0c90d6d24b354de5"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:treatment-rate-asthma-outpatient",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "treatment-rate-cancer-inpatient",
+      "pageId": "ranking:treatment-rate-cancer-inpatient",
+      "title": "がん（悪性新生物）の受療率（入院）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004026105",
+          "filters": {
+            "cdCat01": "8",
+            "cdCat03": "1"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004026105",
+          "cdCat01": "8",
+          "cdCat03": "1"
+        },
+        "ops": {
+          "areaAxis": {
+            "axis": "cat02",
+            "scheme": "seq-pref"
+          }
+        },
+        "derived": true,
+        "configHash": "41e563c0e61f22a3"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:treatment-rate-cancer-inpatient",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "treatment-rate-cancer-outpatient",
+      "pageId": "ranking:treatment-rate-cancer-outpatient",
+      "title": "がん（悪性新生物）の受療率（外来）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004026105",
+          "filters": {
+            "cdCat01": "8",
+            "cdCat03": "4"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004026105",
+          "cdCat01": "8",
+          "cdCat03": "4"
+        },
+        "ops": {
+          "areaAxis": {
+            "axis": "cat02",
+            "scheme": "seq-pref"
+          }
+        },
+        "derived": true,
+        "configHash": "011138c5543ab8c8"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:treatment-rate-cancer-outpatient",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "treatment-rate-cerebrovascular-inpatient",
+      "pageId": "ranking:treatment-rate-cerebrovascular-inpatient",
+      "title": "脳血管疾患の受療率（入院）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004026105",
+          "filters": {
+            "cdCat01": "28",
+            "cdCat03": "1"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004026105",
+          "cdCat01": "28",
+          "cdCat03": "1"
+        },
+        "ops": {
+          "areaAxis": {
+            "axis": "cat02",
+            "scheme": "seq-pref"
+          }
+        },
+        "derived": true,
+        "configHash": "c5d26a984bb7989b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:treatment-rate-cerebrovascular-inpatient",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "treatment-rate-cerebrovascular-outpatient",
+      "pageId": "ranking:treatment-rate-cerebrovascular-outpatient",
+      "title": "脳血管疾患の受療率（外来）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004026105",
+          "filters": {
+            "cdCat01": "28",
+            "cdCat03": "4"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004026105",
+          "cdCat01": "28",
+          "cdCat03": "4"
+        },
+        "ops": {
+          "areaAxis": {
+            "axis": "cat02",
+            "scheme": "seq-pref"
+          }
+        },
+        "derived": true,
+        "configHash": "8245b43d0f008e4e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:treatment-rate-cerebrovascular-outpatient-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:treatment-rate-cerebrovascular-outpatient",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "treatment-rate-circulatory-inpatient",
+      "pageId": "ranking:treatment-rate-circulatory-inpatient",
+      "title": "循環器系の疾患の受療率（入院）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004026105",
+          "filters": {
+            "cdCat01": "24",
+            "cdCat03": "1"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004026105",
+          "cdCat01": "24",
+          "cdCat03": "1"
+        },
+        "ops": {
+          "areaAxis": {
+            "axis": "cat02",
+            "scheme": "seq-pref"
+          }
+        },
+        "derived": true,
+        "configHash": "fbda79cc100285cf"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:treatment-rate-circulatory-inpatient",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "treatment-rate-circulatory-outpatient",
+      "pageId": "ranking:treatment-rate-circulatory-outpatient",
+      "title": "循環器系の疾患の受療率（外来）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004026105",
+          "filters": {
+            "cdCat01": "24",
+            "cdCat03": "4"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004026105",
+          "cdCat01": "24",
+          "cdCat03": "4"
+        },
+        "ops": {
+          "areaAxis": {
+            "axis": "cat02",
+            "scheme": "seq-pref"
+          }
+        },
+        "derived": true,
+        "configHash": "12e1d949979483a2"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:treatment-rate-circulatory-outpatient",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "treatment-rate-diabetes-inpatient",
+      "pageId": "ranking:treatment-rate-diabetes-inpatient",
+      "title": "糖尿病の受療率（入院）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004026105",
+          "filters": {
+            "cdCat01": "15",
+            "cdCat03": "1"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004026105",
+          "cdCat01": "15",
+          "cdCat03": "1"
+        },
+        "ops": {
+          "areaAxis": {
+            "axis": "cat02",
+            "scheme": "seq-pref"
+          }
+        },
+        "derived": true,
+        "configHash": "fc664638d0e0854b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:treatment-rate-diabetes-inpatient",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "treatment-rate-diabetes-outpatient",
+      "pageId": "ranking:treatment-rate-diabetes-outpatient",
+      "title": "糖尿病の受療率（外来）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004026105",
+          "filters": {
+            "cdCat01": "15",
+            "cdCat03": "4"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004026105",
+          "cdCat01": "15",
+          "cdCat03": "4"
+        },
+        "ops": {
+          "areaAxis": {
+            "axis": "cat02",
+            "scheme": "seq-pref"
+          }
+        },
+        "derived": true,
+        "configHash": "291d665d0a64c406"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:treatment-rate-diabetes-outpatient-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:treatment-rate-diabetes-outpatient",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:healthcare",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "healthcare"
+      ]
+    },
+    {
+      "metricKey": "treatment-rate-hypertension-inpatient",
+      "pageId": "ranking:treatment-rate-hypertension-inpatient",
+      "title": "高血圧性疾患の受療率（入院）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004026105",
+          "filters": {
+            "cdCat01": "25",
+            "cdCat03": "1"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004026105",
+          "cdCat01": "25",
+          "cdCat03": "1"
+        },
+        "ops": {
+          "areaAxis": {
+            "axis": "cat02",
+            "scheme": "seq-pref"
+          }
+        },
+        "derived": true,
+        "configHash": "50d2ce917944df8a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:treatment-rate-hypertension-inpatient",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "treatment-rate-hypertension-outpatient",
       "pageId": "ranking:treatment-rate-hypertension-outpatient",
       "title": "高血圧性疾患の受療率（外来）",
@@ -10463,816 +11095,6 @@
         }
       ],
       "themes": []
-    },
-    {
-      "metricKey": "video-recorder-consumption-quantity",
-      "pageId": "ranking:video-recorder-consumption-quantity",
-      "title": "ビデオレコーダー・プレイヤー購入数量",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023606",
-          "filters": {
-            "cdCat01": "090100040",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023606",
-          "cdCat01": "090100040",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "cd112e5f2005dd64"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:video-recorder-consumption-quantity",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "vinegar-consumption-expenditure",
-      "pageId": "ranking:vinegar-consumption-expenditure",
-      "title": "酢消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "010720050",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "010720050",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "a5743cef82e9fcfc"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:kagoshima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kanagawa-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kochi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:oita-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:okinawa-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tochigi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tokushima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tottori-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:vinegar-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "vinegar-consumption-quantity",
-      "pageId": "ranking:vinegar-consumption-quantity",
-      "title": "酢消費量",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023606",
-          "filters": {
-            "cdCat01": "010720050",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023606",
-          "cdCat01": "010720050",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "fbff8b2227878511"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:kagoshima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kanagawa-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kochi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:oita-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:okinawa-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tochigi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tokushima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tottori-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:vinegar-consumption-quantity-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:vinegar-consumption-quantity",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "violent-crime-per-100k",
-      "pageId": "ranking:violent-crime-per-100k",
-      "title": "粗暴犯認知件数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010111",
-          "filters": {
-            "cdCat01": "K420102"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010111",
-          "cdCat01": "K420102"
-        },
-        "derived": false,
-        "configHash": "cc2edd2f61d737f4"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:safety",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:livable-prefecture-composite-ranking",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:violent-crime-per-100k",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:safety",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "safety"
-      ]
-    },
-    {
-      "metricKey": "vocational-school-consumption-expenditure",
-      "pageId": "ranking:vocational-school-consumption-expenditure",
-      "title": "専修学校消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "080100100",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "080100100",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "e3bab35c4b95f83f"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:vocational-school-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "vocational-training-expenses-prefecture",
-      "pageId": "ranking:vocational-training-expenses-prefecture",
-      "title": "職業訓練費",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010104",
-          "filters": {
-            "cdCat01": "D3103052"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D3103052"
-        },
-        "derived": false,
-        "configHash": "61ce338f3555522a"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:vocational-training-expenses-prefecture",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "voluntary-car-insurance-rate-bodily-injury",
-      "pageId": "ranking:voluntary-car-insurance-rate-bodily-injury",
-      "title": "任意自動車保険普及率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010111",
-          "filters": {
-            "cdCat01": "K330502"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010111",
-          "cdCat01": "K330502"
-        },
-        "derived": false,
-        "configHash": "9c85bf837d7ee9dc"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:voluntary-car-insurance-rate-bodily-injury-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:voluntary-car-insurance-rate-bodily-injury",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "voluntary-car-insurance-rate-property",
-      "pageId": "ranking:voluntary-car-insurance-rate-property",
-      "title": "任意自動車保険普及率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010111",
-          "filters": {
-            "cdCat01": "K330503"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010111",
-          "cdCat01": "K330503"
-        },
-        "derived": false,
-        "configHash": "2105b2722c6faff5"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:voluntary-car-insurance-rate-property",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "voluntary-car-insurance-rate-vehicle",
-      "pageId": "ranking:voluntary-car-insurance-rate-vehicle",
-      "title": "任意自動車保険普及率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010111",
-          "filters": {
-            "cdCat01": "K330501"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010111",
-          "cdCat01": "K330501"
-        },
-        "derived": false,
-        "configHash": "0d8e53e88c97854b"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:voluntary-car-insurance-rate-vehicle",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "volunteer-activity-annual-participation-rate-10plus",
-      "pageId": "ranking:volunteer-activity-annual-participation-rate-10plus",
-      "title": "ボランティア活動の年間行動者率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010207",
-          "filters": {
-            "cdCat01": "#G041011"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010207",
-          "cdCat01": "#G041011"
-        },
-        "derived": false,
-        "configHash": "c20a887846db67ab"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:community-participation",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:volunteer-activity-annual-participation-rate-10plus",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:community-participation",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "community-participation"
-      ]
     }
   ]
 }
