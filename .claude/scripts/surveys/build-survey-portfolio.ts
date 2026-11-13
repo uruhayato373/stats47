@@ -35,10 +35,10 @@ import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const STATE_DIR = path.join(PROJECT_ROOT, datasetDir("surveys.portfolio"));
 const REVIEW_DIR = path.join(PROJECT_ROOT, datasetDir("surveys.reviews"));
-const PORTFOLIO = path.join(STATE_DIR, "portfolio.json");
-const EXPERIMENTS = path.join(STATE_DIR, "experiments.json");
+const PORTFOLIO = path.join(PROJECT_ROOT, datasetPath("surveys.portfolio"));
+const EXPERIMENTS = path.join(PROJECT_ROOT, datasetPath("surveys.experiments"));
+const STATE_DIR = path.dirname(PORTFOLIO);
 const SURVEYS_JSON = path.join(PROJECT_ROOT, datasetPath("surveys.master"));
 const AUDIT_SCRIPT = "packages/ranking/src/scripts/audit-survey-linkage.ts";
 const R2_ALL_URL = `${R2_PUBLIC_BASE_URL}/app/survey/all.json`;

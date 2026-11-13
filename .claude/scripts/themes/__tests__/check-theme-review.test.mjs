@@ -145,3 +145,11 @@ test('file evidence supports line numbers without treating them as a filename', 
   assert.equal(evidenceFilePath('packages/config.ts#L12-L18'), 'packages/config.ts');
   assert.equal(evidenceFilePath('data/themes/quality.json'), 'data/themes/quality.json');
 });
+
+test('data/ 配下のテーマレビュー文書を finding の証拠に引ける (data/themes/reviews へ移した後の契約)', () => {
+  const withRef = ref => ({ ...report, unreviewedThemes: ['test-theme'], findings: [{ themeKey: 'test-theme', detail: '実際の検査結果', evidenceRefs: [ref] }] });
+  assert.doesNotThrow(() => validateReview(withRef('data/themes/reviews/2026-11-theme-review.md'), input, [record], before, before));
+  assert.doesNotThrow(() => validateReview(withRef('data/themes/reviews/2026-11-theme-review.md:12-30'), input, [record], before, before));
+  assert.throws(() => validateReview(withRef('data/../secrets.json'), input, [record], before, before));
+  assert.throws(() => validateReview(withRef('docs/foo.md'), input, [record], before, before));
+});

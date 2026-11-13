@@ -650,6 +650,10 @@ export const DATASETS = [
     schema: "data/sns/posts.schema.json",
     refs: [
       { field: "posts[].parent_post_id", to: "sns.posts", key: "posts[].id" },
+      // X・Threads の投稿のキャプションの型は X カタログの templates[].id。Instagram・YouTube の template (ranking・area-carousel・bcr など) は別の体系なので対象にしない。
+      // 素材の取り込み (planning.origin=material-import) が draft に domain 名 (ranking・buzz-map) を仮の template として入れる 10 件 (2026-11-14 時点) があるので、
+      // 下書きは対象にしない。キャプションを書いて予約・投稿へ進めた投稿 (draft 以外) はカタログの id でなければ止める
+      { field: "posts[].template", where: { platform: ["x", "threads"] }, unless: { status: "draft" }, to: "sns.x-catalog", key: "templates[].id" },
       // 投稿が使った指標。外部公開物の索引 (data/content/external.json) が指標へ関係を張る入力。参照先は domain で分ける
       // (2026-10-27。それまでは全 domain を指標の registry と照合し、Geo の集計値名などで 92 件を warn にしていた)。
       //   geo         Geo 分析の集計値の名前 (floodExposureShare2050 など) か都道府県の指標
@@ -1141,7 +1145,7 @@ export const DATASETS = [
   d("themes.role-review", "data/themes/role-review/{name}", "state", "data", "data", "テーマの指標の役割レビューキュー"),
   d("themes.reviews", "data/themes/reviews/{date}-theme-{name}.md", "evidence", "data", "data", "テーマごとのレビュー (公式資料の根拠・構成の確認・リリース gate の結論)。build-theme-portfolio.ts が最新の日付のものを reviewDocRef に結び、管理画面の視点の一覧が読む。未完了の対策は本文に溜めず backlog のカードにする"),
   d("themes.audits", "data/themes/audits/{date}-{name}.md", "report", "data", "data", "テーマポートフォリオの監査の報告 (四半期の監査・月次の確認・テーマの深掘り・selection の夜間 backfill の報告)。selection-backfill.mjs と theme-portfolio-manager が書き、build-role-review-queue.mjs が backfill の報告を読む"),
-  d("themes.chart-audit", "data/themes/charts/{name}", "state", "data", "data", "テーマのチャートの本番監査"),
+  d("themes.live-audit", "data/themes/charts/live-audit.json", "state", "data", "data", "テーマのチャートの本番監査 (全チャートの依存を R2 の配信値で実測した結果。theme-chart-live-audit.mjs が週次で書く)"),
 
   // ── .claude/state : エージェント運用の状態 (エージェントの運用をやめたら不要になるものだけ) ──
   d("agent.backlog-loop", ".claude/state/backlog-loop/ledger.json", "ledger", "ops", "state", "バックログ自動処理の実行台帳 (gate の証拠)", { schema: "config/schema/agent.backlog-loop.schema.json" }),

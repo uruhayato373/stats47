@@ -29,11 +29,11 @@ import { addDays, isoWeekOf, isoWeekRange } from "../metrics/lib/periods.mjs";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { datasetDir } from "../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const PORTFOLIO = path.join(PROJECT_ROOT, `${datasetDir("surveys.portfolio")}/portfolio.json`);
+const PORTFOLIO = path.join(PROJECT_ROOT, datasetPath("surveys.portfolio"));
 const GSC_SNAP = path.join(PROJECT_ROOT, datasetDir("gsc.snapshots"));
 const GA4_SNAP = path.join(PROJECT_ROOT, datasetDir("ga4.snapshots"));
 

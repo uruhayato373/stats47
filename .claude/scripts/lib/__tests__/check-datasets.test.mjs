@@ -516,11 +516,13 @@ test("where の値の配列はどれかに一致する行、unless は合う行�
 });
 
 test("[mutation] 投稿台帳: 指標を指す投稿の参照切れは error、warn は投稿済みの ranking の content_key だけ", () => {
-  const files = ["data/sns/posts.json"];
+  const catalogPath = datasetPath("sns.x-catalog");
+  const files = ["data/sns/posts.json", catalogPath];
   const doc = JSON.parse(readFileSync(resolve(ROOT, "data/sns/posts.json"), "utf8"));
-  const rows = DATASETS.filter((d) => d.id === "sns.posts");
+  const catalog = JSON.parse(readFileSync(resolve(ROOT, catalogPath), "utf8"));
+  const rows = DATASETS.filter((d) => d.id === "sns.posts" || d.id === "sns.x-catalog").map((d) => (d.id === "sns.x-catalog" ? { ...d, refs: [] } : d));
   const run = () =>
-    checkRefs({ datasets: rows, files, readJson: () => doc, readText: (p) => readFileSync(resolve(ROOT, p), "utf8"), registries: REGISTRIES });
+    checkRefs({ datasets: rows, files, readJson: (p) => (p === catalogPath ? catalog : doc), readText: (p) => readFileSync(resolve(ROOT, p), "utf8"), registries: REGISTRIES });
   const clean = run();
   assert.deepEqual(clean.errors, []);
   for (const w of clean.warnings) assert.match(w, /posts\[\]\.content_key=.* が registry:ranking-content-keys に無い$/);
@@ -549,6 +551,34 @@ test("[mutation] 投稿台帳: 指標を指す投稿の参照切れは error、w
   assert.equal(run().warnings.length, clean.warnings.length, "旧 slug は 301 先の指標へ届くので warn を増やさない");
   posted.content_key = before;
   assert.deepEqual(run().errors, [], "戻すと通る");
+});
+
+test("[mutation] 投稿台帳: X・Threads の投稿の template は sns.x-catalog の templates[].id に無いと error (他媒体の template と下書きは対象外)", () => {
+  const catalogPath = datasetPath("sns.x-catalog");
+  const files = ["data/sns/posts.json", catalogPath];
+  const doc = JSON.parse(readFileSync(resolve(ROOT, "data/sns/posts.json"), "utf8"));
+  const catalog = JSON.parse(readFileSync(resolve(ROOT, catalogPath), "utf8"));
+  const rows = DATASETS.filter((d) => d.id === "sns.posts" || d.id === "sns.x-catalog").map((d) => (d.id === "sns.x-catalog" ? { ...d, refs: [] } : d));
+  const run = () =>
+    checkRefs({
+      datasets: rows, files, readJson: (p) => (p === catalogPath ? catalog : doc),
+      readText: (p) => readFileSync(resolve(ROOT, p), "utf8"), registries: REGISTRIES,
+    });
+  const templateErrors = () => run().errors.filter((e) => e.includes("posts[].template="));
+  assert.deepEqual(templateErrors(), [], "現状の台帳は X・Threads の template がすべてカタログにある");
+  const x = doc.posts.find((p) => p.platform === "x" && p.template && p.status !== "draft");
+  const draft = doc.posts.find((p) => p.platform === "x" && p.status === "draft" && p.template);
+  const ig = doc.posts.find((p) => p.platform === "instagram" && p.template && !catalog.templates.some((t) => t.id === p.template));
+  assert.ok(x && ig, "fixture: X の投稿と、カタログに無い template を持つ Instagram の投稿が実台帳にある");
+  const saved = x.template;
+  x.template = "no-such-template";
+  assert.ok(templateErrors().some((e) => e.includes(`(id=${x.id}) の posts[].template=no-such-template が sns.x-catalog の templates[].id に無い`)), templateErrors().join("\n"));
+  x.template = saved;
+  const draftSaved = draft.template;
+  draft.template = "no-such-template";
+  assert.deepEqual(templateErrors(), [], "下書きの仮の template は止めない (素材の取り込みが domain 名を入れる)");
+  draft.template = draftSaved;
+  assert.deepEqual(templateErrors(), [], "戻すと通る (Instagram の ranking・area-carousel などはカタログに無くても error にしない)");
 });
 
 test("[mutation] KDP の status・kdpStatus・publicationStage の組み合わせを schema が固定する (2026-10-27)", () => {
