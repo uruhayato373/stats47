@@ -433,7 +433,8 @@ export function scatterChartFromArticleData(
     const subtitle = text(m?.subtitle);
     if (subtitle.includes('県庁所在市')) return '県庁所在市';
     // Inside the label's brackets only: 一人当たり in the metric's own name is not a separate basis.
-    const per = /[^（(・、\s]*(?:当たり|あたり|に占める)/.exec(`${subtitle} ${label.replace(/^[^（(]*/, '')}`)?.[0];
+    // A bracket closed before the phrase (家計調査（二人以上世帯）の調査世帯に占める…) is not part of the denominator.
+    const per = /[^（(）)・、\s]*(?:当たり|あたり|に占める)/.exec(`${subtitle} ${label.replace(/^[^（(]*/, '')}`)?.[0].replace(/^の/, '');
     if (per) return per;
     return /(?:小学|中学|高校)\d年|男子|女子/.test(subtitle) && subtitle.length <= 10 ? subtitle : '';
   };

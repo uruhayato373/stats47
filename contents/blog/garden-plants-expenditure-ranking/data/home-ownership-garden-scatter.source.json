@@ -1,0 +1,30 @@
+{
+  "kind": "scatter",
+  "derivedFrom": [
+    "home-ownership-rate-kakei",
+    "garden-plants-consumption-expenditure"
+  ],
+  "year": "2025",
+  "xMetric": "home-ownership-rate-kakei (％)",
+  "yMetric": "garden-plants-consumption-expenditure (円)",
+  "source": "r2:app/ranking/{home-ownership-rate-kakei,garden-plants-consumption-expenditure}/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "transform": "join 47 prefectures by areaCode; x=持家率(家計調査), y=園芸用植物消費支出額 (円)",
+  "pearsonR": 0.49519926469365866,
+  "fetchedAt": "2026-11-13T12:18:49.121Z",
+  "generatedBy": "article-writer (inline join)",
+  "axes": {
+    "x": {
+      "metricKey": "home-ownership-rate-kakei",
+      "year": "2025年",
+      "proof": "values"
+    },
+    "y": {
+      "metricKey": "garden-plants-consumption-expenditure",
+      "year": "2025年",
+      "proof": "values"
+    }
+  },
+  "xRankingKey": "home-ownership-rate-kakei",
+  "yRankingKey": "garden-plants-consumption-expenditure"
+}
