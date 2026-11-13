@@ -4742,6 +4742,30 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 
 ## 🟢 低 — 再開条件を満たしたら着手する
 
+### [OPENDATA-LICENSE-VERIFY-01] 外部データ台帳で商用可否が未確定の 31 件の規約を確定し、採用候補へ上げる
+
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run validate:open-data-catalog --workspace packages/data-configs] [起票:2026-11-13] [領域:データ]
+
+- **背景 (2026-11-13)**: Qiita の「公共データ100選」から 52 データセット・40 提供元を `open-data.datasets` へ追加した。公式ページは全件開いて確認したが、規約ページに到達できなかった 31 件が `license.commercialUse: "unknown"` のままで、validator の規則により `research-only` 止まりになっている。商用可否が決まれば `ranking` / `theme` / `map` に上げられる。
+- **対象**: 管理画面 `/data/open-data` でライセンス「不明」かつ使い道「調査」の行。特に次が都道府県別の指標になり得る。
+  - `nies-air-monitoring` (大気汚染常時監視。既存の PM2.5 指標と同じ出典)
+  - `mlit-kunijiban-boring` (国土地盤情報)
+  - `idwr-*` (感染症週報の定点当たり報告数)
+  - `boj-*` (日銀時系列)、`mext-school-code` (学校コード)
+  - `cao-watcher-survey` (景気ウォッチャー。地域区分が都道府県かブロックかも未確認)
+- **次**: ① 各府省の「利用規約」ページを開き、政府標準利用規約 2.0 / PDL1.0 / CC BY のどれかを特定して `license` を確定する ② 確定したものは `stats47Uses` を見直し、`verification.verifiedFromUrls` に規約 URL を足す ③ `npm run validate:open-data-catalog` を通す。
+- **停止条件**: 規約ページを開けないものを推測で `allowed` にしない。`unknown` のまま残すほうが、誤った商用可の記録より安全。
+- **完了条件**: `commercialUse: "unknown"` の件数が減り、採用候補に上げたものが validator を通る。確定できなかったものは `verification.notes` に「どの規約ページに到達できなかったか」が書かれている。
+- **関連**: 公式ページを開けず台帳に入れられなかった 11 件 (記事番号 2・13・30・32・37・44・45・46・70・77・78) も、現行 URL が見つかれば同じ手順で追加できる。44 郵便番号 (日本郵便は株式会社) と 78 ODPT (協議会) は台帳の定義「政府・自治体の公式の提供元」に当たるかの判断が先。
+
+### [OPENDATA-CURATOR-DOC-01] open-data-curator の定義が「git TS カタログ」のままで、台帳の現在地とずれている
+
+タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [起票:2026-11-13] [領域:データ]
+
+- **観測 (2026-11-13)**: `.claude/agents/open-data-curator.md` は外部データ源のカタログを「git TS カタログ」と書いているが、正本は 2026-11-11 に `data/open-data/catalog/{sources,datasets}.json` + Schema へ移っている (`config/datasets.mjs` の RETIRED に記録あり)。この定義を読んだエージェントが旧い置き場を探す。
+- **次**: agent 定義の置き場の記述を台帳 `open-data.sources` / `open-data.datasets` に直し、読み込み口が `packages/data-configs/src/open-data-catalog/` であることと、管理画面の表示が `/data/open-data` であることを 1 行ずつ足す。
+- **完了条件**: 定義中に「git TS カタログ」の記述が残っていない。
+
 ### [RELATED-ARTICLES-BASELINE-01] 共通化した大画像の関連記事を計測し、画像サイズの次の比較を判断する
 
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-11-12] [領域:サイト]
