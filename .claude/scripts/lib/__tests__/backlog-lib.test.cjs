@@ -176,3 +176,109 @@ test('CRLF 入力でも同じ結果 (Windows 編集耐性)', () => {
   assert.equal(a.id, 'FEAT-A-01');
   assert.equal(a.executor, 'sweep');
 });
+
+// ── 待ちの理由 [待ち:X] / 年間計画 annual.md / 期日で引く (2026-11-14)。
+// 意図: backlog に「時期待ち」「観測待ち」のカードが溜まり、いつ・何を待っているかが機械で読めなかった。
+// 待ちの理由をタグで持たせ、時期待ちは年間計画へ、期日で月次・週次へ引けるようにする。
+const lib = require('../backlog-lib.cjs');
+
+test('[待ち:X] は 1 枚に複数付けられ、waits に書いた順で入る (重複は 1 つ)', () => {
+  const t = parseTagLine('[収益化] [実行:対話] [待ち:承認] [待ち:ログイン] [待ち:承認]');
+  assert.deepStrictEqual(t.waits, ['承認', 'ログイン']);
+  assert.deepStrictEqual(t.unknownKeys, [], '待ち は語彙内のキー');
+  assert.strictEqual(t.executor, '対話', '他のキーの読みは変わらない');
+});
+
+test('[待ち:X] の語彙は 5 つで、語彙外の値もパースは寛容に保持する (検査が error にする)', () => {
+  assert.deepStrictEqual(lib.WAITS, ['承認', '時期', '観測', 'ログイン', '判断']);
+  assert.deepStrictEqual(parseTagLine('[待ち:そのうち]').waits, ['そのうち']);
+});
+
+test('タグ行の無いカードも waits は空配列 (読み手が null を気にしない)', () => {
+  const cards = parseBacklog('## 🟡 中\n\n### [W-A-01] タグなし\n本文');
+  assert.deepStrictEqual(cards[0].waits, []);
+  assert.strictEqual('month' in cards[0], false, 'backlog のカードに month は付けない (既存の形を変えない)');
+});
+
+const ANNUAL = [
+  '---',
+  'title: 年間計画',
+  'type: annual-plan',
+  'status: active',
+  'updated: 2026-11-14',
+  '---',
+  '',
+  '# 年間計画',
+  '',
+  '### [ANN-ORPHAN-01] 月見出しの外 (カードにならない)',
+  '',
+  '## 2026-12 — 年末',
+  '',
+  '### [ANN-DEC-01] 年末の作業',
+  'タグ: [収益化] [種類:制作] [実行:対話] [待ち:時期] [期日:2026-12-20]',
+  '',
+  '本文。',
+  '',
+  '```bash',
+  '## 2027-01 フェンス内の月見出しもどき',
+  '### フェンス内のカードもどき',
+  '```',
+  '',
+  '## 2027-01',
+  '',
+  '### [ANN-JAN-01] 年明けの作業',
+  'タグ: [インフラ・計測] [期日:2027-01-15]',
+  '',
+  '## メモ',
+  '',
+  '### [ANN-MEMO-01] 月見出しでない章の下 (カードにならない)',
+].join('\n');
+
+test('parseAnnual は月見出しの下のカードだけを読み、month を持たせる (フェンス内は構造にしない)', () => {
+  const cards = lib.parseAnnual(ANNUAL);
+  assert.deepStrictEqual(cards.map((c) => [c.id, c.month, c.tier, c.due]), [
+    ['ANN-DEC-01', '2026-12', null, '2026-12-20'],
+    ['ANN-JAN-01', '2027-01', null, '2027-01-15'],
+  ]);
+  assert.deepStrictEqual(cards[0].waits, ['時期']);
+  assert.match(cards[0].body, /フェンス内の月見出しもどき/, 'フェンスは本文に残る');
+  assert.deepStrictEqual(lib.findAnnualOrphanHeadings(ANNUAL).map((o) => o.title.split(' ')[0]), [
+    '[ANN-ORPHAN-01]',
+    '[ANN-MEMO-01]',
+  ]);
+});
+
+test('[mutation] 月として読めない見出し (13 月・日付付き) は月見出しにしない', () => {
+  const text = '## 2026-13\n\n### [X-A-01] a\n\n## 2026-12-01\n\n### [X-B-01] b\n\n## 2026-12\n\n### [X-C-01] c';
+  assert.deepStrictEqual(lib.parseAnnual(text).map((c) => c.id), ['X-C-01']);
+  assert.deepStrictEqual(parseBacklog(text), [], 'backlog のパーサは月見出しを tier にしない');
+});
+
+test('cardsDueWithin は期日が範囲内 (両端含む) と超過を分けて返し、source を付ける', () => {
+  const backlogText = [
+    '## 🔴 高',
+    '### [B-OVER-01] 超過',
+    'タグ: [収益化] [期日:2026-11-30]',
+    '### [B-FROM-01] 範囲の始まり',
+    'タグ: [収益化] [期日:2026-12-01]',
+    '### [B-NODUE-01] 期日なし',
+    'タグ: [収益化]',
+    '### [B-BAD-01] 日付でない',
+    'タグ: [収益化] [期日:2026-12-32]',
+    '### [B-AFTER-01] 範囲の後',
+    'タグ: [収益化] [期日:2027-01-01]',
+  ].join('\n');
+  const r = lib.cardsDueWithin({ backlogText, annualText: ANNUAL, from: '2026-12-01', to: '2026-12-31' });
+  assert.deepStrictEqual(r.due.map((c) => [c.id, c.source]), [['B-FROM-01', 'backlog'], ['ANN-DEC-01', 'annual']]);
+  assert.deepStrictEqual(r.overdue.map((c) => [c.id, c.source]), [['B-OVER-01', 'backlog']]);
+  // 範囲の終わりちょうども含む
+  const end = lib.cardsDueWithin({ backlogText, from: '2026-11-01', to: '2026-11-30' });
+  assert.deepStrictEqual(end.due.map((c) => c.id), ['B-OVER-01']);
+  assert.deepStrictEqual(end.overdue, []);
+});
+
+test('cardsDueWithin は日付を引数でしか受けず、読めない日付は例外にする', () => {
+  assert.throws(() => lib.cardsDueWithin({ backlogText: '', from: '2026-12', to: '2026-12-31' }), /YYYY-MM-DD/);
+  assert.throws(() => lib.cardsDueWithin({ backlogText: '', from: '2026-12-31', to: '2026-12-01' }), /from が to より後/);
+  assert.deepStrictEqual(lib.cardsDueWithin({ from: '2026-12-01', to: '2026-12-01' }), { due: [], overdue: [] }, '本文が無ければ空');
+});

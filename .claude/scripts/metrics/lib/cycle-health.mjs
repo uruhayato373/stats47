@@ -9,7 +9,8 @@ import { join } from "node:path";
 import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 
 const require = createRequire(import.meta.url);
-const { parseBacklog } = require("../../lib/backlog-lib.cjs");
+// 期日の読み方 (範囲内・超過の境界) は月次・週次計画が期日で引く cardsDueWithin と同じ partitionByDue を使う
+const { parseAnnual, parseBacklog, partitionByDue } = require("../../lib/backlog-lib.cjs");
 // Must の読み取り・連続未達の閾値・🔴 の上限は docs:check (DG081/082) と同じ実装を使う
 const strategyLanes = require("../../lib/strategy-lanes.cjs");
 
@@ -19,13 +20,19 @@ import { BY_DESIGN_PATH as YEAR_BY_DESIGN, CARD_PREFIX as YEAR_PREFIX } from "..
 import { handoffSummary, reviewCadence } from "../../management/lib/review-cadence.mjs";
 
 const TODO_FILES = [".claude/todo/backlog.md", ".claude/todo/improvements.md"];
+/** 年間計画 (月見出しの下のカード)。無い間は空として読む */
+const ANNUAL_FILE = ".claude/todo/annual.md";
 /** 連続未達がこの週数に達したら、次週計画で分割か降格を必須にする (DG082 が再掲を error にする) */
 export const MUST_MISS_STREAK_LIMIT = strategyLanes.MUST_MISS_STREAK_LIMIT;
 
-/** 起票 → 分類 / 実行 → 完了: レーン・種類の無いカードと期日超過のカード */
+/**
+ * 起票 → 分類 / 実行 → 完了: レーン・種類の無いカードと期日超過のカード
+ * @param {Array<{id:string, lane:string|null, kind:string|null, due:string|null}>} cards
+ * @param {string} today YYYY-MM-DD
+ */
 export function summarizeCards(cards, today) {
   const unclassified = cards.filter((c) => !c.lane || !c.kind).map((c) => c.id);
-  const overdue = cards.filter((c) => c.due && c.due < today).map((c) => c.id);
+  const overdue = partitionByDue(cards, { from: today, to: today }).overdue.map((c) => c.id);
   return { total: cards.length, unclassified, overdue };
 }
 
@@ -85,7 +92,10 @@ function summarizeReviews(root, today) {
 }
 
 export function readCycleHealth(root, today) {
-  const cards = TODO_FILES.flatMap((rel) => parseBacklog(readText(root, rel) ?? "")).filter((c) => c.id);
+  const cards = [
+    ...TODO_FILES.flatMap((rel) => parseBacklog(readText(root, rel) ?? "")),
+    ...parseAnnual(readText(root, ANNUAL_FILE) ?? ""),
+  ].filter((c) => c.id);
   const reviews = strategyLanes.readReviews(root);
   const weeks = reviews.map((r) => ({ week: r.week, ratio: parseMustRatio(r.text) }));
   const board = strategyLanes.laneBoard(root, today);

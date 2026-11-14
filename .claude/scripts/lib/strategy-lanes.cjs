@@ -39,6 +39,11 @@ const DOMAINS_JSON = DOMAINS;
  */
 const MAX_ACTIVE_IMPROVEMENTS = 5;
 /**
+ * 上限に数える Status。`effect/pending` は施策を打ち終えて効果の観測だけが残る行で、手を動かす量に入らないので
+ * 数えない (観測待ちを improvements.md に置く運用と、上限 5 件の両立。2026-11-14)。
+ */
+const ACTIVE_LIMIT_STATUSES = ['pending', 'in-progress'];
+/**
  * バックログ 🔴 (今月中に着手したい) の上限と鮮度。🔴 は起票時に付いたまま下がらず、2026-09-27 に 31 枚
  * (うち 29 枚が 9 月起票) まで膨らみ、週次 Must 3 件も未達だった。🔴 は「今月の重点で今月着手するもの」に限る。
  * 上限は週次 Must 3 件 × 月 4 週を下回る運用方針値。値はここだけに置く (DG081 と週次 Issue が共有)。
@@ -291,7 +296,7 @@ function parseWeeklyItems(weeklyText) {
 /**
  * 施策 → KPI の配線 (純関数)。kpiNodes が null (KPI ツリー未生成) なら検査しない。
  * DG079 (error): 領域の台帳の kpis・施策の `[kpi:]` が KPI ツリーに無い id / 施策に `[kpi:]` が無い。
- * DG080 (warning): active 施策が上限超過 / `[target:]` の無い施策 (効果判定エンジンが insufficient-target で止まる)。
+ * DG080 (warning): active 施策 (Status が pending / in-progress。effect/pending は数えない) が上限超過 / `[target:]` の無い施策 (効果判定エンジンが insufficient-target で止まる)。
  */
 function auditKpiLinkage({ lanes, improvementRows, kpiNodes, files }) {
   const issues = [];
@@ -316,8 +321,9 @@ function auditKpiLinkage({ lanes, improvementRows, kpiNodes, files }) {
       else byKpi.get(id).push(row.id);
     }
   }
-  if (improvementRows.length > MAX_ACTIVE_IMPROVEMENTS) {
-    issues.push({ level: 'warning', code: 'DG080', file: files.improvements, message: `active 施策 ${improvementRows.length} 件が上限 ${MAX_ACTIVE_IMPROVEMENTS} 件を超えている。新しい施策を足さず、月次計画で判定・backlog 降格して削る` });
+  const active = improvementRows.filter((r) => ACTIVE_LIMIT_STATUSES.includes(r.status));
+  if (active.length > MAX_ACTIVE_IMPROVEMENTS) {
+    issues.push({ level: 'warning', code: 'DG080', file: files.improvements, message: `active 施策 (${ACTIVE_LIMIT_STATUSES.join(' / ')}) ${active.length} 件が上限 ${MAX_ACTIVE_IMPROVEMENTS} 件を超えている (観測だけの effect/pending は数えない)。新しい施策を足さず、月次計画で判定・backlog 降格して削る` });
   }
   // 理由付きで機械判定から外した行は欠落に数えない (計測サイクルの「理由付きで対象外」と同じ扱い。2026-10-11)
   const noTarget = improvementRows.filter((r) => !r.hasTarget && !r.outOfScope &&
@@ -496,6 +502,7 @@ module.exports = {
   STANCES,
   KPI_TREE,
   MAX_ACTIVE_IMPROVEMENTS,
+  ACTIVE_LIMIT_STATUSES,
   MAX_HIGH_TIER_CARDS,
   HIGH_TIER_MAX_AGE_DAYS,
   MUST_MISS_STREAK_LIMIT,

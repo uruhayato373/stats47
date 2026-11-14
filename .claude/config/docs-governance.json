@@ -76,6 +76,11 @@
       "weekly.md"
     ]
   },
+  "fixedDirectoriesOptional": {
+    ".claude/todo": [
+      "annual.md"
+    ]
+  },
   "governedDirectories": [
     "docs/00_プロジェクト管理",
     "docs/01_技術設計",
@@ -203,6 +208,14 @@
       ".claude/todo/improvements.md",
       ".claude/todo/backlog.md"
     ],
+    "annual": {
+      "file": ".claude/todo/annual.md",
+      "type": "annual-plan"
+    },
+    "waitPlacement": {
+      "severity": "warning"
+    },
+    "untriagedMaxAgeDays": 30,
     "idPattern": "^[A-Z0-9]+(?:-[A-Z0-9]+)+$",
     "allowedImprovementStatuses": [
       "pending",
