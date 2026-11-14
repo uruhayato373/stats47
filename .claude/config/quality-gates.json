@@ -120,7 +120,16 @@
     { "id": "revenue-guards", "checker": ".claude/scripts/metrics/check-revenue-guards.mjs", "command": "node .claude/scripts/metrics/check-revenue-guards.mjs", "scope": ["affiliate", "operations"], "owner": "affiliate-manager", "trigger": ["schedule"], "blocking": true, "networkOrSecrets": "none", "timeoutMinutes": 5 },
     { "id": "threads-posted-verification", "checker": ".claude/scripts/sns/verify-threads-posted.cjs", "command": "node .claude/scripts/sns/verify-threads-posted.cjs --apply", "scope": ["operations"], "owner": "x-strategist", "trigger": ["schedule", "workflow_dispatch", "push"], "blocking": true, "networkOrSecrets": "scheduled-network", "timeoutMinutes": 20 },
     { "id": "local-registry", "checker": ".claude/scripts/lib/check-local-registry.mjs", "command": "node .claude/scripts/lib/check-local-registry.mjs", "scope": ["environment", "maintenance"], "owner": "devops-runner", "trigger": ["pull_request"], "blocking": true, "networkOrSecrets": "none", "timeoutMinutes": 1 },
-    { "id": "external-metric-ingest-verification", "checker": ".claude/scripts/themes/verify-external-ingest.mjs", "command": "node .claude/scripts/themes/verify-external-ingest.mjs --report .local/verification/themes/ndb-questionnaire-source.json", "scope": ["metrics", "data"], "owner": "data-ingester", "trigger": ["workflow_dispatch"], "blocking": true, "networkOrSecrets": "none", "timeoutMinutes": 2 }
+    { "id": "external-metric-ingest-verification", "checker": ".claude/scripts/themes/verify-external-ingest.mjs", "command": "node .claude/scripts/themes/verify-external-ingest.mjs --report .local/verification/themes/ndb-questionnaire-source.json", "scope": ["metrics", "data"], "owner": "data-ingester", "trigger": ["workflow_dispatch"], "blocking": true, "networkOrSecrets": "none", "timeoutMinutes": 2 },
+    { "id": "estat-table-snapshot-equivalence", "checker": "packages/data-configs/scripts/verify-table-snapshot-equivalence.ts", "command": "node --import tsx packages/data-configs/scripts/verify-table-snapshot-equivalence.ts", "scope": ["estat", "snapshot-migration", "public-values"], "owner": "data-ingester", "trigger": ["manual"], "blocking": false, "networkOrSecrets": "network-and-secrets", "timeoutMinutes": 30 }
   ],
-  "exceptions": []
+  "exceptions": [
+    {
+      "code": "DECLARED_ONLY_GATE",
+      "file": "packages/data-configs/scripts/verify-table-snapshot-equivalence.ts",
+      "gateId": "estat-table-snapshot-equivalence",
+      "reason": "段3でも表ごとの移行前に --table <statsDataId> [--out <dir>] で手動実行する同値検査。private R2 の固定版から生成した値と公開 R2 の現行値を比べるため、e-Stat の正当な訂正・更新でも差が生じる。恒常的な CI blocking gate や定期実行へは接続せず、差分時の exit 1 と版・値の比較レポートを人が確認して移行可否を判断する。通信なしの比較・対象選択テストと型検査は既存の PR gate で実行する。段3の運用を見て期限前に手動分類を再確認する。",
+      "expiresAt": "2027-02-14"
+    }
+  ]
 }

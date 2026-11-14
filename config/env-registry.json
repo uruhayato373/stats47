@@ -417,6 +417,19 @@
       ]
     },
     {
+      "name": "ESTAT_SNAPSHOT_ONLY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ],
+      "description": "非秘密のサーバー側実行フラグ。1 のとき切片が未転送・未登録、または非対応形状でも live e-Stat API (getStatsData/getMetaInfo) へ戻らず失敗させる。未設定では移行中の API 併存を許可する。",
+      "usedBy": [
+        "packages/data-configs/scripts/lib/estat-table-reader.ts",
+        "packages/data-configs/scripts/page-data-batch.ts",
+        "packages/data-configs/scripts/verify-table-snapshot-equivalence.ts"
+      ]
+    },
+    {
       "name": "EXPANSION_QUEUE_NOW",
       "visibility": "server",
       "contexts": [
