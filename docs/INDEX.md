@@ -24,7 +24,6 @@
 ```
 01_技術設計/
 ├── 01_システムアーキテクチャ.md
-├── 02_データアーキテクチャ.md
 ├── 03_情報設計.md
 ├── 04_デザインシステム.md
 ├── 05_エラーハンドリング.md
@@ -32,7 +31,7 @@
 └── 07_Playwright認証プロファイル.md
 ```
 
-設計判断はこの7文書へ統合する。実装に密結合するコマンド、schema、component API、運用手順はコード近傍の README または `.claude/rules/` を正典とし、技術設計へ複製しない。
+設計判断はこの6文書へ統合 (データの置き場の正本は文書でなく、機械の台帳 `config/datasets.mjs` と `r2-key-classes.ts`。`.claude/rules/data-storage.md`)する。実装に密結合するコマンド、schema、component API、運用手順はコード近傍の README または `.claude/rules/` を正典とし、技術設計へ複製しない。
 
 ## ドキュメント分類
 

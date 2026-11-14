@@ -10,6 +10,8 @@ paths:
 ---
 # データ出典・再現性 (provenance) 標準
 
+e-Stat 由来は、既存の e-Stat カタログ (R2 `estat-catalog/`) と表の写し (非公開 R2 `estat-tables/`・台帳 `data/estat/table-snapshots.json`・`estat-table-snapshot.ts --check-updates`) を出典の入口として先に引く。
+
 stats47 の全データ (metric / blog / theme / area / open-data) について、**出典と「いつでも一次資料から
 再取得・再検証できる情報」を機械チェック可能な形で記録する**ための単一ソース (SSOT) 規約。データを投入・
 是正・監査する agent (`data-ingester` / `open-data-curator` / `snapshot-exporter`) / skill (`/audit-provenance`) /

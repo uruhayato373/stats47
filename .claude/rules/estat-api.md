@@ -8,6 +8,8 @@ paths:
 ---
 # e-Stat API データ取得規約
 
+既存の e-Stat カタログ (R2 `estat-catalog/`) と表の写し (非公開 R2 `estat-tables/`・台帳 `data/estat/table-snapshots.json`・`estat-table-snapshot.ts --check-updates`) を、新しい取得を作る前に先に引く。 e-Stat の取得は Mac と CI の両方でできる (2026-11-14 オーナー決定。app ID は公開の値で `apps/web/.env.development`)。呼び出しは共通の入口 (`check-estat-entrypoint.mjs` が直書きを止める) を使う。
+
 ## 規約
 
 - **`cdTimeFrom`/`cdTimeTo`（年度範囲指定）を使わない。** 全年度を一括取得し、必要な年度はメモリ上で `yearCode` フィルタする。理由:

@@ -262,7 +262,7 @@
       "rationale": "自由SQLや本番更新権限を与えず、検索ログと反復需要の後にβ化する。",
       "canonicalPaths": [
         "docs/00_プロジェクト管理/01_プロジェクト定義.md",
-        "docs/01_技術設計/02_データアーキテクチャ.md"
+        ".claude/rules/data-storage.md"
       ],
       "owners": [
         "strategy-advisor",
@@ -282,7 +282,7 @@
       "summary": "Next.js + git TS + R2 + エフェメラルDuckDBを継続する。",
       "rationale": "原案の常設D1/PostGISは完全DBレス正典と競合するため採用しない。",
       "canonicalPaths": [
-        "docs/01_技術設計/02_データアーキテクチャ.md"
+        ".claude/rules/data-storage.md"
       ],
       "owners": [
         "data-ingester",

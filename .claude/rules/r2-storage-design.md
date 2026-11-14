@@ -7,6 +7,8 @@ paths:
 ---
 # R2 ストレージ設計ルール
 
+prefix の区分・書き手・何のデータかの一覧は `npm run r2:classes` (git 側は `npm run check-datasets -- --er`)。e-Stat は既存の `estat-catalog/` と非公開 `estat-tables/` (表の写し) を先に引く。
+
 ## 設計原則
 
 **画像の実体は共有ストレージを正本にする (2026-10-02 オーナー決定)。** ローカルは生成・検証・転送の

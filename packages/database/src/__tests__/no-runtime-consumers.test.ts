@@ -5,7 +5,7 @@ import { describe, expect, it } from "vitest";
 
 /**
  * このパッケージの Drizzle schema は永続 DB 時代の型の残置で、型ソース / テスト用としてだけ残す
- * (CLAUDE.md・docs/01_技術設計/02_データアーキテクチャ.md)。metric・カテゴリ・都道府県の現在の正本は
+ * (CLAUDE.md・.claude/rules/data-storage.md)。metric・カテゴリ・都道府県の現在の正本は
  * data-configs / area にあり、ここの型は正本と食い違う (例: metrics.ts と MetricConfig)。
  * 本番コードがここから型や値を引くと、正本と別の第 3 の定義に依存することになるので、それを止める。
  */

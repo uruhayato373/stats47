@@ -21,7 +21,7 @@ source: legacy implementation plan removed on 2026-06-29
 
 Related canon:
 
-- `docs/01_技術設計/02_データアーキテクチャ.md`
+- `.claude/rules/data-storage.md`
 - `docs/01_技術設計/03_情報設計.md`
 - `.claude/rules/r2-storage-design.md`
 - `.claude/rules/data-storage.md`

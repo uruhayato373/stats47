@@ -31,7 +31,7 @@ describe("business plan admin server", () => {
         "docs/00_プロジェクト管理/02_収益化戦略.md",
         "docs/00_プロジェクト管理/03_マーケティング戦略.md",
         "docs/00_プロジェクト管理/04_ターゲットペルソナ.md",
-        "docs/01_技術設計/02_データアーキテクチャ.md",
+        ".claude/rules/data-storage.md",
         "docs/01_技術設計/03_情報設計.md",
         "docs/01_技術設計/04_デザインシステム.md",
         "docs/01_技術設計/06_自動化インベントリ.md",

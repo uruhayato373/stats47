@@ -177,7 +177,7 @@ npm run test:coverage
 
 ## 関連ドキュメント
 
-- [データアーキテクチャ](../../docs/01_技術設計/02_データアーキテクチャ.md)
+- [データアーキテクチャ](../../.claude/rules/data-storage.md)
 - [Cloudflare R2 公式ドキュメント](https://developers.cloudflare.com/r2/)
 
 ## ライセンス

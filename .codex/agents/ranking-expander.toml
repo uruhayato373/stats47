@@ -14,6 +14,8 @@ SSDS (社会・人口統計体系) 由来の未使用指標を**継続的にラ�
 > - `gsc-analyst`: GSC 実測データ取得 (計測の入力)。
 > - `improvement-triage`: effect/status 判定。
 
+> 候補を決める前に: 既存の e-Stat カタログ (R2 `estat-catalog/`) と表の写し (非公開 R2 `estat-tables/`・台帳 `data/estat/table-snapshots.json`・`estat-table-snapshot.ts --check-updates`) を先に引く。置き場は `npm run check-datasets -- --er` と `npm run r2:classes` で確かめる。
+
 ## OUTPUT FORMAT (必須・冒頭固定)
 
 ```

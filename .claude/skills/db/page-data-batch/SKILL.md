@@ -16,7 +16,7 @@ Phase 6 で D1 → R2 移行が完了した後、本 skill が新規 metric / �
 
 Phase 1-4 までは e-Stat → D1 → R2 snapshot の二段階フローだったが、D1 が 15GB に肥大化したため D1 を経由しない方針に転換 (Phase 6)。本 skill は **TS-config = authored SSOT、R2 = 配信・観測値SSOT** という完全DBレス構成の中心。
 
-詳細: [データアーキテクチャ](../../../../docs/01_技術設計/02_データアーキテクチャ.md)、
+詳細: [データアーキテクチャ](../../../../.claude/rules/data-storage.md)、
 [`r2-storage-design.md`](../../../rules/r2-storage-design.md)
 
 ## 手順

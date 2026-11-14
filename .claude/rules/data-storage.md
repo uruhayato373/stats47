@@ -10,8 +10,78 @@ paths:
 ---
 # データの置き場 (DB は `data/`、設定は `config/`)
 
-データ層は「完全 DB レス」が正典 → [`docs/01_技術設計/02_データアーキテクチャ.md`](../../docs/01_技術設計/02_データアーキテクチャ.md)。
-永続 DB は持たず、**git の `data/` (マスタと台帳) と R2 (観測値と配信 snapshot)** だけを正本にする。
+## 置き場の正本は機械の台帳 2 つ (2026-11-14 オーナー決定)
+
+「何のデータをどこに持つか」の正本は、検査が実物と照合する 2 つの台帳だけである。文章の正典は持たない
+(手で書く一覧は実物とずれ、R2 の区分表に行があるのに文章に無いため「無い」と思い込んだ事故が起きた)。
+新しい置き場・層は文章に足さず、台帳の行で表す。
+
+| 見たいもの | 台帳 | 一覧を出すコマンド |
+|---|---|---|
+| git のマスタと台帳 (置き場・Schema・`refs`) | `config/datasets.mjs` | `npm run check-datasets -- --er` |
+| R2 の prefix ごとの区分・書き手・何のデータか | `packages/r2-storage/src/scripts/r2-key-classes.ts` | `npm run r2:classes` |
+
+取り込む前に、まず上の 2 つで既存の置き場を引く (e-Stat は R2 `estat-catalog/` と、非公開 R2 `estat-tables/` の表の写し)。
+
+### 原則 (完全 DB レス)
+
+永続 DB を真実源にも本番ランタイムの依存先にもしない。正本は **git の `data/` (人が定義するマスタと台帳)** と
+**Cloudflare R2 (観測値と、公開アプリが読む配信 snapshot)** の二つだけである。
+
+- 本番アプリは R2 snapshot を読み、DB query を実行しない。リモート D1・常駐 SQLite を SSOT として再導入しない
+- 観測値と派生値を永続 DB・git に置かない (DB の肥大で解約に至った経緯がある)。R2 に置く
+- 人が定義する低 volume の設定は git で review できるようにする。派生値は入力とロジックから再生成できるようにする
+- 集計に SQLite / DuckDB を使うのは、プロセス終了で破棄できる一時領域 (`:memory:`) に限る。一時 DB は cache か計算手段で、
+  復元できない唯一のデータを持たない
+- schema 定義 (`packages/database/src/schema/*.ts`) と integration テスト基盤は型ソース・テスト用として残してよいが、
+  存在することを永続 DB 利用の根拠にしない
+
+| 許容 | 禁止 |
+|---|---|
+| integration test の一時 DB・build 中だけの cache・`:memory:` 集計 | リモート D1 を運用 SSOT にする・ローカル SQLite だけに authored data を置く |
+| schema を型・テストに再利用 | 観測値・派生値を DB へ恒久保存する・本番アプリから DB query する |
+
+#### データ分類
+
+| 分類 | 真実源 | 配信先 |
+|---|---|---|
+| Authored / config | `data/` のマスタと台帳 (JSON + Schema) | 必要に応じて R2 snapshot |
+| Authored / content | git 上の原稿・frontmatter (公開後の正本は R2) | R2 snapshot |
+| Operational state | domain が定める git 管理 state | 原則 agent / automation 内だけ (公開アプリの runtime SSOT に転用しない) |
+| Observation | R2 | R2 |
+| Reference | 外部 API または再生成できる git source | git または R2 |
+| Derived | 入力データ + 計算コード | R2 snapshot (入力から再生成する) |
+
+どの prefix がどの区分かは R2 の区分表 (`npm run r2:classes`) が持つ。新しい prefix は reader・writer・検証・保持期間・所有 domain を
+同時に定め、区分表に「何のデータか」を書いて足す。
+
+#### 流れ
+
+- 設定・コンテンツ: git の定義 → 型・Schema・相互参照の検査 → 決定的な exporter → R2 snapshot → runtime reader。生成物は手編集せず、入力側を直して同じコマンドで再現する
+- 観測値: 外部 API → 取得 → 出典と形の検証 → R2。取得元・期間・単位・地域粒度を失わず、欠損と 0 を区別する (`data-provenance-standards.md`)
+- 派生値: R2 の観測値 + git の定義 → 一時計算 (`:memory:` SQLite / DuckDB / 純コード) → 検証 → R2 の派生 snapshot
+- 利用者が条件を持ち込むツールは、利用者ごとの状態を持たない限り DB が要らない (条件は URL query、値は R2 を読む)。ログイン・端末をまたぐ保存・更新通知の登録は
+  利用者データの永続保存で、上の分類に該当がない。入れるなら先にこの分類へ「利用者データ」(真実源・保持期間・削除手順・個人情報の範囲) を足す改訂をし、
+  収益化戦略 §5 のゲートを通った機能に限る
+
+#### 保存先の判断
+
+```text
+外部に真実源があるか
+  ├─ yes → Reference / Observation として取得・再生成
+  └─ no
+      ├─ 入力から決定的に計算できるか
+      │   ├─ yes → Derived。計算後 R2 へ出力
+      │   └─ no  → Authored。git の型付き定義へ
+      └─ agent の進捗・台帳か → .claude/state または .claude/todo
+```
+
+新しい永続層を足して解決しない。変更時は、真実源・生成物・cache を分けたか、writer と reader が同じ schema と key を使うか、欠損・空・0・not-found・upstream failure を
+区別するか、生成が決定的か、remote write を dry-run と差分確認なしで実行しないか、巨大な registry や全量 R2 read を runtime bundle に引き込まないかを確かめる。
+
+R2 に置けるのは、配信の権利条件まで確認済みの観測値・原典・派生 snapshot だけである。GIS の元データ公開可否と商用成果物の利用可否は別に判定する
+(`gis-data.md`・`license-policy.ts`)。非商用原典はローカル作業キャッシュに限り、公開 JSON/CSV も書面確認なしで生成しない。
+R2 の key・Content-Type・cache・差分 upload・削除は `r2-storage-design.md`。
 
 ## 規則 (2026-11-10 オーナー決定)
 
@@ -53,7 +123,7 @@ RDB の考え方で読む。
 未完了の対策は記録に溜めず、バックログのカードにする ([`docs-vs-issues.md`](./docs-vs-issues.md))。
 
 アプリが読む配信データは、`data/` の DB と R2 の観測値から生成スクリプトで R2 の snapshot にする。生成物を手で編集しない。
-観測値と派生値を git や永続 DB に置かない (分類は `02_データアーキテクチャ.md`「データ分類」)。
+観測値と派生値を git や永続 DB に置かない (上の「データ分類」)。
 文書・TODO・Issue の使い分けは [`docs-vs-issues.md`](./docs-vs-issues.md)。
 
 ### `.claude/state/` に置いてよいもの (許可リスト)

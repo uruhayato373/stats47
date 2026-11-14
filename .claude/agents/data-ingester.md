@@ -13,6 +13,8 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
 
 ## 担当範囲
 
+- **取り込む前に**: 既存の e-Stat カタログ (R2 `estat-catalog/`) と表の写し (非公開 R2 `estat-tables/`・台帳 `data/estat/table-snapshots.json`・`estat-table-snapshot.ts --check-updates`) を先に引く。置き場は `npm run check-datasets -- --er` と `npm run r2:classes` で確かめる。
+
 - TS-config 駆動の R2 観測値投入 (`/page-data-batch`)
 - metrics ビルドキャッシュの同期 (`/sync-metrics-cache`、TS registry が SSOT)
 - カバレッジ / FK 整合性検証 (`/verify-d1-integrity`、ビルドキャッシュ対象)

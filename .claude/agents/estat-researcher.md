@@ -12,6 +12,7 @@ e-Stat API (政府統計) と MLIT データプラットフォーム の統計�
 ## 担当範囲
 
 - **appId 確認**: API を使う前に `.claude/scripts/lib/estat-catalog/api.mjs` の `getAppId()` を使う。CI は Repository Variable、ローカルは `apps/web/.env.development`（または `.env.local`）。環境変数だけを見て「キーがない」と判断しない。値をログ・回答に出さない。
+- **表の写しを先に引く**: 非公開 R2 `estat-tables/` に写した表は台帳 `data/estat/table-snapshots.json` に載る。更新の有無は `estat-table-snapshot.ts --check-updates`。置き場は `npm run check-datasets -- --er` と `npm run r2:classes`
 - **e-Statメタデータ完全カタログの検索を先に使う** (初回のみ`catalog.mjs pull`→`catalog.mjs search`。月次更新・生API呼び出し不要。`docs/02_実装計画/48_e-Statカタログ実装仕様.md`)。見つからない場合のみ生API
 - e-Stat 統計表の検索 (`/search-estat`)
 - 統計表メタデータ構造調査 (`/inspect-estat-meta`)
