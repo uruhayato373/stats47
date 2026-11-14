@@ -31,6 +31,25 @@ test("分類漏れと期日超過を数える (期日当日は超過にしない
   assert.deepEqual(s.overdue, ["A-01"]);
 });
 
+test("期日超過の数え方は計画が期日で引く cardsDueWithin と同じ (読めない日付は数えない)", async () => {
+  const { createRequire } = await import("node:module");
+  const { cardsDueWithin, parseAnnual, parseBacklog } = createRequire(import.meta.url)("../../lib/backlog-lib.cjs");
+  const backlogText = [
+    "## 🔴 高",
+    "### [A-01] 超過",
+    "タグ: [収益化] [期日:2026-09-25]",
+    "### [B-01] 日付として読めない",
+    "タグ: [収益化] [期日:2026-02-30]",
+    "### [C-01] 当日",
+    "タグ: [収益化] [期日:2026-09-26]",
+  ].join("\n");
+  const annualText = "## 2026-09\n\n### [D-01] 年間計画の超過\nタグ: [収益化] [期日:2026-09-01]";
+  const cards = [...parseBacklog(backlogText), ...parseAnnual(annualText)];
+  const shared = cardsDueWithin({ backlogText, annualText, from: "2026-09-26", to: "2026-09-26" }).overdue.map((c) => c.id);
+  assert.deepEqual(summarizeCards(cards, "2026-09-26").overdue, shared);
+  assert.deepEqual(shared, ["D-01", "A-01"]);
+});
+
 test("計画が参照する完了済み ID は、台帳にまだ残っていれば数えない", () => {
   const plan = "`AFF-MEASURE-RECOVER-01` と `NAV-CLICK-COVERAGE-01` と `DATA-ESTAT-FETCH-01`";
   const completed = new Set(["AFF-MEASURE-RECOVER-01", "NAV-CLICK-COVERAGE-01"]);
