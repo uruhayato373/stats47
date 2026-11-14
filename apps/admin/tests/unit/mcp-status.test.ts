@@ -194,7 +194,7 @@ describe("mcpStatus (一覧 + 接続確認)", () => {
     const asked: string[] = [];
     const fetchImpl = async (url: string | URL | Request) => {
       asked.push(String(url));
-      return new Response("", { status: String(url).includes("docs.example.com") ? 200 : 401 });
+      return new Response("", { status: new URL(String(url)).hostname === "docs.example.com" ? 200 : 401 });
     };
     const v = await mcpStatus({ home: f.home, fetchImpl });
     if ("error" in v) throw new Error(v.error);

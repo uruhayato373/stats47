@@ -245,6 +245,21 @@ describe("content operations core", () => {
     );
   });
 
+  it("企画段階 (idea) の本には出品定義を求めず、生成済みの本の欠落は止める", () => {
+    const base = fixture();
+    const idea = buildContentOperations(
+      fixture({ kindleBuildBooks: [...base.kindleBuildBooks, { id: "K-S9-01", status: "idea" }] }),
+    );
+    expect(idea.audit.findings.filter((x) => x.itemId === "K-S9-01")).toEqual([]);
+
+    const generated = buildContentOperations(
+      fixture({ kindleBuildBooks: [...base.kindleBuildBooks, { id: "K-S9-01", status: "generated" }] }),
+    );
+    expect(generated.audit.findings).toContainEqual(
+      expect.objectContaining({ code: "KDP_LISTING_MISSING", itemId: "K-S9-01" }),
+    );
+  });
+
   it("個別コンテンツをTODOカードへ複製すると拒否する", () => {
     const result = buildContentOperations(
       fixture({ backlogText: "### [K-S1-01] この本を公開する\n" }),

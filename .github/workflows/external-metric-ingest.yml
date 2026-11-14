@@ -110,7 +110,7 @@ jobs:
             if [ -f "$KEYS_FILE" ]; then
               echo "- 対象: $(tr ',' '\n' < "$KEYS_FILE" | wc -l | tr -d ' ') ファイル"
               echo ''
-              tr ',' '\n' < "$KEYS_FILE" | sed 's/^/  - `/; s/$/`/'
+              tr ',' '\n' < "$KEYS_FILE" | sed "s/^/  - \`/; s/\$/\`/"
             else
               echo '- 対象: 検査を通らなかったため無し'
             fi

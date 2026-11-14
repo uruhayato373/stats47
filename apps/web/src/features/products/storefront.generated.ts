@@ -703,7 +703,7 @@ export const STOREFRONT_PRODUCTS = [
             "themeKey": "long-term-care",
             "sectionKey": "nursing-home-capacity",
             "title": "介護認定とサービスの需給",
-            "sectionTitle": "高齢者施設数や定員など入所受け入れ基盤は整っているか",
+            "sectionTitle": "老人ホームの受け入れ枠は足りているか",
             "href": "/themes/long-term-care#theme-section-nursing-home-capacity"
           }
         ],
@@ -803,7 +803,7 @@ export const STOREFRONT_PRODUCTS = [
             "themeKey": "childcare-services",
             "sectionKey": "facility-capacity-and-utilization",
             "title": "保育の需給",
-            "sectionTitle": "保育施設や定員の確保状況は十分か",
+            "sectionTitle": "近くに預け先は十分あり、空きに余裕はあるか",
             "href": "/themes/childcare-services#theme-section-facility-capacity-and-utilization"
           }
         ],
@@ -1023,7 +1023,7 @@ export const STOREFRONT_PRODUCTS = [
             "themeKey": "retail-commerce",
             "sectionKey": "retail-market-scale",
             "title": "商業と小売",
-            "sectionTitle": "地域での買い物の市場規模や年間売り上げはどれくらい大きいか",
+            "sectionTitle": "小売・商業の売り上げと売場は、どれくらいの規模か",
             "href": "/themes/retail-commerce#theme-section-retail-market-scale"
           }
         ],
@@ -1044,7 +1044,7 @@ export const STOREFRONT_PRODUCTS = [
             "themeKey": "retail-commerce",
             "sectionKey": "retail-market-scale",
             "title": "商業と小売",
-            "sectionTitle": "地域での買い物の市場規模や年間売り上げはどれくらい大きいか",
+            "sectionTitle": "小売・商業の売り上げと売場は、どれくらいの規模か",
             "href": "/themes/retail-commerce#theme-section-retail-market-scale"
           }
         ],
@@ -1065,7 +1065,7 @@ export const STOREFRONT_PRODUCTS = [
             "themeKey": "retail-commerce",
             "sectionKey": "retail-store-convenience",
             "title": "商業と小売",
-            "sectionTitle": "日常生活で買い物がしやすい店舗数は確保されているか",
+            "sectionTitle": "買い物ができる店は、人口に対して身近にあるか",
             "href": "/themes/retail-commerce#theme-section-retail-store-convenience"
           }
         ],
@@ -1243,7 +1243,7 @@ export const STOREFRONT_PRODUCTS = [
             "themeKey": "water-services",
             "sectionKey": "water-sewerage-coverage",
             "title": "水道の持続性",
-            "sectionTitle": "上水道や下水道は生活圏にどれくらい普及しているか",
+            "sectionTitle": "下水道はどれくらい普及しているか",
             "href": "/themes/water-services#theme-section-water-sewerage-coverage"
           }
         ],
@@ -1264,7 +1264,7 @@ export const STOREFRONT_PRODUCTS = [
             "themeKey": "safety",
             "sectionKey": "natural-disaster-impact",
             "title": "安全",
-            "sectionTitle": "自然災害による人的・物的被害や復旧費用はどれくらいか",
+            "sectionTitle": "自然災害でどれくらいの被害や費用が出ているか",
             "href": "/themes/safety#theme-section-natural-disaster-impact"
           }
         ],
