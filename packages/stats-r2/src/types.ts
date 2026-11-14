@@ -43,6 +43,10 @@ export interface SingleEntityRow extends Pick<StatsSchema, 'areaCode' | 'areaNam
   /** city only */
   prefectureCode?: string;
   rankPref?: number | null;
+  /** 標本から推計した人数 (`source.sampleCount` を宣言した指標だけ) */
+  sampleCount?: number | null;
+  /** 推計の人数が下限未満で順位から外した行。rank は null で、ページでは参考値として示す */
+  reference?: boolean;
 }
 
 export interface StatsValuesPayload {

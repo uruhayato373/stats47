@@ -103,6 +103,10 @@ function parseSingleEntityRow(value: unknown, index: number): SingleEntityRow {
     rank: assertOptionalNullableFiniteNumber(value.rank, `rows[${index}].rank`),
     prefectureCode: assertOptionalString(value.prefectureCode, `rows[${index}].prefectureCode`),
     rankPref: assertOptionalNullableFiniteNumber(value.rankPref, `rows[${index}].rankPref`),
+    ...(value.sampleCount === undefined
+      ? {}
+      : { sampleCount: assertOptionalNullableFiniteNumber(value.sampleCount, `rows[${index}].sampleCount`) }),
+    ...(value.reference === true ? { reference: true } : {}),
   };
 }
 

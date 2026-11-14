@@ -62,6 +62,11 @@ export interface RecipeOps {
    * 宣言を直せば configHash が動き、監査 (検査 k) が「R2 が stale」と自動検出する。
    */
   valueScale?: number;
+  /**
+   * 推計の人数で順位から外す県・年を決める (`EstatSource.sampleCount`)。
+   * 配信される順位と参考値が変わるのでレシピに載せる (宣言を足すと configHash が動き、再取得の対象になる)。
+   */
+  sampleCount?: { cdTab: string; factor: number; minimum: number };
   /** 地域が area 軸ではなく cat 軸に入っている表の写像 */
   areaAxis?: { axis: EstatAxis; scheme: "seq-pref" | "name"; coverage?: "coastal" };
   /** 家計調査の県庁所在市 → 都道府県 写像 */
@@ -301,6 +306,9 @@ function buildOps(config: MetricConfig): RecipeOps | undefined {
       ops.valueScale = s.valueScale;
     }
     if (s.areaAxis) ops.areaAxis = buildAreaAxisOp(s.areaAxis);
+    if (s.sampleCount) {
+      ops.sampleCount = { cdTab: s.sampleCount.cdTab, factor: s.sampleCount.factor, minimum: s.sampleCount.minimum };
+    }
   }
 
   if (s.kind === "kakei-chousa") {
@@ -484,6 +492,12 @@ function parseOps(value: unknown): RecipeOps | undefined {
   }
 
   if (value.areaRemap === "kakei-capital-city") ops.areaRemap = "kakei-capital-city";
+
+  if (isRecord(value.sampleCount)) {
+    const cdTab = optString(value.sampleCount.cdTab);
+    const { factor, minimum } = value.sampleCount;
+    if (cdTab && typeof factor === "number" && typeof minimum === "number") ops.sampleCount = { cdTab, factor, minimum };
+  }
 
   if (Array.isArray(value.supplements)) {
     const supplements: Array<{ years: number[]; estatParams: EstatQueryParams; areaAxis?: AreaAxisOp }> = [];

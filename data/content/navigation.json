@@ -101,6 +101,11 @@
       "from": "ranking:life-expectancy-0-female",
       "to": "municipality-ranking:life-expectancy-at-birth-female",
       "relation": "sameMetric"
+    },
+    {
+      "from": "ranking:total-fertility-rate",
+      "to": "blog:fertility-rate-prefecture-gap",
+      "relation": "explains"
     }
   ]
 }

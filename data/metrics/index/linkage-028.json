@@ -137,10 +137,15 @@
               "factor": 1
             }
           ],
-          "valueScale": 0.1
+          "valueScale": 0.1,
+          "sampleCount": {
+            "cdTab": "13,45",
+            "factor": 10,
+            "minimum": 10
+          }
         },
         "derived": true,
-        "configHash": "f00643aba840e510"
+        "configHash": "f987cf3e60444f3d"
       },
       "dependencies": [],
       "normalizationDependencies": [],

@@ -104,6 +104,14 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [SYNC-SNAPSHOTS-DRYRUN-DESC-01] sync-snapshots の試走の説明と実装を合わせる
+タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [起票:2026-11-14] [領域:サイト]
+
+`sync-snapshots.yml` の入力 `dry_run` は「生成のみ」と説明しているが、`.claude/skills/db/sync-snapshots/run.sh` (81 行目付近) は試走のとき生成も R2 反映も省き、予定のコマンドを表示するだけである (2026-11-14 Codex の読み取りレビューで確認)。試走で生成物を確かめられると思って起動すると何も得られない。
+
+- 次: 説明を実装に合わせるか、試走で生成までを行うよう run.sh を直す (どちらかを選んで理由を残す)
+- 完了条件: workflow の説明と run.sh の動作が一致し、試走の run のログで確かめた
+
 ### [THEME-PAGE-REVIEW-01] テーマページを、全ルート込みの実績で採点し、共通の UI と指標を見直す
 タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run theme:portfolio:audit] [起票:2026-11-14] [領域:サイト] [進行中]
 
@@ -2107,6 +2115,7 @@ updated: 2026-11-01
 - **残り (計測)**: 最大の負荷は middleware ではなく Worker 全体なので、Worker 全体のサイズを測る。手順は、OpenNext で build してから `wrangler deploy --outdir bundled/ --dry-run` の Total Upload を読み、64 MiB と起動時間の上限 1 秒と比べる。
 - **完了条件**: geo の 3 件の warning が消えるか、残す理由が台帳に書いてある。Worker 全体の Total Upload の実測値と上限の比較が、このカードに書いてある。
 - **追補 (2026-11-14)**: `.claude/scripts/page-quality/__tests__/ui-findings.test.mjs` は `node --test` だけでは `lib/ui-report` を解決できずに落ち、`node --import tsx --test` なら通る。どの入口で回す前提かをファイルの冒頭に書くか、tsx 無しで動く import に直す。`push-r2-wrangler.ts` には diff-push-r2 の止め (一覧失敗・正本の上書き・読み戻し) が無いのに、`.claude/scripts/blog/` の 4 スクリプト (backfill-source・resolve-scatter-axes・rerender-ranking-columns・restore-findings-from-svg) と `push-article-md-r2.ts` の冒頭がローカルからの反映の経路として案内している。案内を workflow に直すか、同じ止めを通す。
+- **追補 (2026-11-14)**: `apps/web` の `ranking-header-density-contract.test.ts` は `process.cwd()` に頼っていて、リポジトリのルートから vitest を走らせると ENOENT で落ちる (apps/web からなら 5 件通る)。
 
 ### [NOTE-BODY-RECOVERY-01] 本文が note.com にしか無い 73 本を R2 へ回収する
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run note:article -- status] [起票:2026-10-13] [領域:商品]
@@ -2382,11 +2391,11 @@ updated: 2026-11-01
 ### [DATA-WAGE-TEACHER-COVERAGE-01] 賃金構造基本統計の教員年収ランキングが教員全体の約 5% しか映していないことをページに示すか、公開をやめるかを決める
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-08] [領域:サイト]
 
-- **事象 (2026-10-08 に e-Stat API で実測)**: `school-teacher-annual-income` (表 0003445758・cdCat02=1192) の推計労働者数は全国で約 3.3 万人で、小・中学校教員数の約 4.9%。県ごとの平均が数十人の推計に基づくため、1 位・最下位と平均年齢が毎年入れ替わる。調査範囲は「5人以上の民営事業所」と「10人以上の公営事業所」(厚生労働省「令和5年賃金構造基本統計調査 調査の概要」https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/z2023/dl/gaiyo.pdf、2026-10-08 取得)。なぜ 5% しか映らないかは公式資料で未確認なので、理由を断定しない。
-- **決定と実施 (2026-10-26 オーナー)**: 教員年収は公開を続け、注記を出す。`data/metrics/school-teacher-annual-income.ts` の note に推計教員数・顔ぶれの入れ替わり・順位が公立教員の給与水準を表さないことを書いた。
-- **残り**: ① 同じ表の職種別 40 指標 (例: `high-school-teacher-annual-income` = cdCat02 1194) で、推計労働者数と実際の就業者数の比を同じ方法で出し、比が小さい指標の扱い (推計人数の併記・note・`isActive:false` + 410/301) をオーナーが決める。公開をやめる場合は `ranking-publisher` の手順 (KNOWN/SITEMAP/R2) に乗せる ② 推計 10 人未満の県年 (2021 岩手は「労働者数」0・平均年齢 86.5 歳で 39 位) を順位から外すか注記するか ③ 注記の本番反映の確認。
+- **済み (2026-11-14・`a7be3eaaa`)**: オーナー決定 (2026-11-14: 公開は続け、推計の人数と注記を出す。推計 10 人未満の県年は順位から外して参考値にする) を、賃金構造基本統計の職種別 40 指標へ広げる仕組みを入れた。共通の宣言と注記は `data/metrics/defaults/wage-structure-coverage.ts` の 1 か所に置き、40 指標が参照する (推計人数の表章項目は 13/45、e-Stat の表の画面で十人単位と確認)。page-data-batch は人数を行に付けて 10 人未満の行を順位から外し、配信の snapshot は参考値を `referenceValues` に分け、ランキングページの地図・表の下に人数の要約と参考値を出す (fixture の画面で確認)。人数が分からない県・年は「少ない」と読み替えず順位に残す。
+- **残り (承認済み・2026-11-14 オーナー「賃金の再取得は進めて」)**: CI でこの 40 指標を取り直し (page-data-batch)、ranking-values・ranking-items を作り直して、人数を取る経路を実データで初めて動かす。観測値 `app/stats` の上書きなので R2 の正本の更新にあたる (`todo-standards.md` §7)。宣言が configHash に効くので、40 指標は再取得の対象になっている。
+- **残り**: 再取得した sampleCount から職種別の推計人数を集計し、国勢調査の職業別就業者数 (年と出典をそろえる) との比を表にする。比を見て、職種ごとの扱いをオーナーが決める。本番のランキングページの注記は、R2 の item.json が古いので旧文のまま (再生成の後に新しい注記と人数が出る)。
 - **停止条件**: 推計人数が小さいことだけを理由に、他の職種の指標を一括で非公開にしない (職種ごとに比を見てから決める)。
-- **完了条件**: 対象指標の扱いが決まり、ページの表示 (併記・note・非公開) が本番に反映されている。
+- **完了条件**: 40 指標の比の表がそろい、本番のランキングページに推計の人数と参考値が出ている。
 
 ### [CRITIC-PATTERN-TITLE-PROMISE] critic の指摘「タイトル・約束」が 3 本の記事で繰り返した。writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:サイト]
@@ -2506,15 +2515,6 @@ updated: 2026-11-01
 - **残り**: ① ブログ 4 本 (と第 2・3 弾) の search-growth 承認を W44 以降の枠 (週 2 件・人が承認) で記録する。② `/survey/census` は title を変えず、ハブから `unmarried-ratio-{male,female}-40-44` のランキングへのリンクを目立たせる。③ 出生率の ranking→blog リンクは `RELATED-ARTICLES-TIEBREAK-01` で扱う。④ 効果観測は `SEO-TITLE-CTR-EFFECT-01` (improvement-triage の排他)。⑤ `data/seo/latest-report.json` の pendingPublication 8 件 (全件 `implementation-needed`) を既存 7 ページと照合し、重複提案を各 1 件の担当・対象・完了 gate へ落とす。⑥ 7 ページの手順が固まったら、GSC 2026-W41 で順位 4〜15 位・表示 500 以上の 197 本 (`data/gsc/snapshots/2026-W41/pages.csv` を impressions ≥ 500 かつ 4 ≤ position ≤ 15 で抽出) を表示の多い順に `/search-growth` へ渡す (一括変更はしない)。
 - **停止条件**: title の一括置換をしない。食料自給率はデータの年を直す (`DATA-FOOD-SELF-SUFFICIENCY-MAFF-01`) まで title を変えない。
 - **完了条件**: 7 ページそれぞれに「変えた / 見送った」と理由が記録され、変えたページの変更日が search-growth の台帳にある。
-
-### [RELATED-ARTICLES-TIEBREAK-01] ランキングの関連記事が同点のとき記事 ID のアルファベット順で選ばれ、その指標を主題にした記事が押し出される
-タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-20] [領域:サイト]
-
-- **事象 (2026-10-20 実測)**: `/ranking/total-fertility-rate` の関連記事 3 本に、出生率そのものを扱う `fertility-rate-prefecture-gap` (「出生率 ランキング」で順位 1〜1.5) と `total-fertility-rate` が出ない。`packages/data-configs/src/content/navigation.ts` の推薦が同点を `a.id.localeCompare(b.id)` で切るため (`navigation.json` の `links` に明示の関係を足しても同点のまま)。影響は指標を共有する公開記事が 4 本以上ある 194 ランキング (GSC 2026-W41 の表示 36,671)。
-- **2026-10-20 実装 (未デプロイ)**: 同点を「一致数 ÷ 記事が使う指標数」の高い順で切り、それでも同じなら ID 順にした (テスト `navigation.test.ts`)。全公開ページ 26,172 件の上位 3 本を変更前後で比べ、変わったのは 1,416 件 (area-theme の変化の大半は同じ記事の並び替え)。**未達**: 出生率のランキングには `total-fertility-rate` の記事が入ったが、`fertility-rate-prefecture-gap` (指標 2 つ) は指標 1 つの `cc-estat-07-birthrate-line` に負けて入らない。
-- **次**: 編集者が `data/content/navigation.json` の `links` で明示した関係に加点する案を検討する (モデルの推測で記事の主題を決めない)。本番反映は次のデプロイ (他の変更とまとめて 1 回)。
-- **停止条件**: 全ランキングの推薦が変わるので、変更前後の上位 3 本の差分を全件出してから本番に出す。デプロイは他の変更とまとめて 1 回。
-- **完了条件**: `/ranking/total-fertility-rate` の関連記事に `fertility-rate-prefecture-gap` が入り、差分一覧で意図しない入れ替わりが無いことを確かめた。
 
 ### [LIVABLE-COMPOSITE-CHART-DATA-01] 住みやすい県ランキングの総合スコアの図に、1 人当たり県民所得のデータが紐づいている
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-20] [領域:サイト] [待ち:承認] [待ち:判断]
@@ -2657,13 +2657,6 @@ updated: 2026-11-01
 - **止まっている理由**: 画像生成は Codex が要り、クラウド環境では codex MCP が接続できないので、オーナーのローカルで回す必要がある。
 - **残り (判断)**: 左側の文字用の余白不足やチャートの描き込みを機械で測る検査を足すかを決める。選択肢は (a) 画像の左 55% の輝度分散や輪郭量を測る検査を `check:blog-images` に足す、(b) 目視のまま据え置く、の 2 つ。現行の全面構図背景 (blog-photo-v2) は画像内に文字を載せないので、推奨は (b) で、旧構図の背景が残る間だけ目視で補う。2026-08-31 に上げた背景に R2 の HEAD メタデータ (`stats47-sha256`) の欠落が他にも無いかは未調査で、R2 の読み取りが要る。
 - **完了条件**: `blog-images:codex queue` の targets が 0 で、リポジトリに Gemini の画像生成コードが無い。
-
-### [BLOG-TUTORIAL-GATE-GAPS-01] 手順解説記事 (cc-estat 連載) で quality-gate が誤って数える・照合できない 3 か所を直す
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:node .claude/scripts/blog/quality-gate.mjs <slug>] [起票:2026-10-07] [領域:サイト] [待ち:判断]
-
-- **済み (2026-11-14・`fc9ad2b3e`)**: (b) 県名の直後の派生値 (2 県の差・目減り額) と、県の組 (「岐阜・愛知・三重」「…の3都県」) の合計値を、県の値と照合しないようにした (`.claude/scripts/lib/article-factual-check.mjs` に 4 規則・テスト 14 件)。公開記事 254 本で blocker 0→0、警告 150→126 (消えた 24 件は文脈を読んで誤検知と確認、新しい警告 0)。(a) `cc-estat-04-aging-heatmap` の図 2 枚を repo のスクリプト (`.claude/scripts/blog/article-renderers/cc-estat-04-aging-heatmap/aging-heatmap.ts`) で作り直し、critic PASS で再公開した。
-- **残り (判断)**: (c) 「倍」を照合するかをオーナーが決める。判断材料: 公開記事 254 本のうち 163 本が「倍」を 371 回使い、うち約 127 回は「A県のN倍」の 2 県の比。data の単位が「倍」の記事は 0 本なので、照合するなら 2 県の値から比を計算する。誤検知になりうる形は 4 種 (年どうしの比「2025年の約4倍」、不等式「2倍弱」「4倍を超える」、比を「差」と呼ぶ「差は1.59倍」、大きく丸めた値「約19,000倍」)。
-- **完了条件**: 照合するかが決まり、照合するなら上の 4 種で誤検知が 0 件で、誤った倍率が検出されることをテストで固定している。
 
 ### [BLOG-REFRESH-DERIVED-SCATTER-01] 図の年の取り直しスクリプトが、計算で作った散布図を取り直せない
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/blog/lib/__tests__/refresh-chart-year.test.mjs] [起票:2026-10-07] [領域:サイト] [待ち:判断]

@@ -11,17 +11,17 @@ import { fileURLToPath } from "node:url";
 import { isDeepStrictEqual } from "node:util";
 import { SITE } from "@stats47/types";
 import { listAllMetrics } from "../src/registry.js";
-import { processOne, cityEstatSource, kakeiEstatSource, WAGE_SAMPLE_REFERENCE_BELOW } from "./page-data-batch.js";
+import { processOne, cityEstatSource, kakeiEstatSource } from "./page-data-batch.js";
 import type { MetricConfig } from "../src/types.js";
 import type { SnapshotEntry, SourceEvidence } from "./lib/estat-table-reader.js";
-type Row = Record<string, unknown> & { areaCode: string; yearCode: string; sampleCount?: number | null; isReference?: boolean };
+type Row = Record<string, unknown> & { areaCode: string; yearCode: string; sampleCount?: number | null; isReference?: boolean; reference?: boolean };
 interface Payload { metricKey: string; entityKind: string; rows: Row[]; meta: Record<string, unknown> }
 const hash = (raw: string) => createHash("sha256").update(raw).digest("hex");
 const root = fileURLToPath(new URL("../../../", import.meta.url));
 
 /** Compare all public fields except metadata and the two newly added annotations. No numeric tolerance. */
 export function compareValues(local: Payload, published: Payload) {
-  const strip = ({ sampleCount: _count, isReference: _reference, ...row }: Row) => row;
+  const strip = ({ sampleCount: _count, isReference: _oldReference, reference: _reference, ...row }: Row) => row;
   const index = (rows: Row[]) => {
     const result = new Map(rows.map((row) => [`${row.areaCode}|${row.yearCode}`, strip(row)]));
     if (result.size !== rows.length) throw new Error("Duplicate area/year in comparison input");
@@ -137,13 +137,15 @@ async function main() {
         publicEvidence: { url, retrievedAt: new Date().toISOString(), sha256: hash(raw), etag: response.headers.get("etag"), lastModified: response.headers.get("last-modified"), path: publicPath } });
       // Estimated-worker annotations are optional outside wage tables; never assume particular tab codes or depth.
       if (payload.meta.sampleCount) {
+        const { referenceBelow } = payload.meta.sampleCount as { referenceBelow: number };
+        if (!Number.isFinite(referenceBelow)) throw new Error("Invalid sample reference threshold");
         for (const year of [...new Set(payload.rows.map((row) => row.yearCode))].sort()) {
           const rows = payload.rows.filter((row) => row.yearCode === year);
           for (const row of rows) {
-            if (!("sampleCount" in row) || row.isReference !== (row.sampleCount != null && row.sampleCount < WAGE_SAMPLE_REFERENCE_BELOW)) throw new Error(`Invalid sample annotation: ${row.areaCode}/${year}`);
+            if (!("sampleCount" in row) || Boolean(row.reference) !== (row.value != null && row.sampleCount != null && row.sampleCount < referenceBelow)) throw new Error(`Invalid sample annotation: ${row.areaCode}/${year}`);
           }
           samples.push({ metricKey: config.key, entity, year, estimatedWorkerTotal: rows.reduce((n, row) => n + (row.sampleCount ?? 0), 0),
-            referenceAreaYears: rows.filter((row) => row.isReference).length, missingSampleCount: rows.filter((row) => row.sampleCount == null).length, areaYears: rows.length });
+            referenceAreaYears: rows.filter((row) => row.reference).length, missingSampleCount: rows.filter((row) => row.sampleCount == null).length, areaYears: rows.length });
         }
       }
       console.log(`[table-audit] ${table}/${config.key}/${entity}: ${compared.matches ? "MATCH" : `DIFFERENT ${compared.differences.length}`} rows=${payload.rows.length}`);

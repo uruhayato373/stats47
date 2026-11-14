@@ -20,6 +20,10 @@ export const RankingValueSchema = z.object({
   rank: z.number().finite(),
 }).passthrough();
 
+export const RankingReferenceValueSchema = RankingValueSchema.omit({ rank: true }).extend({
+  sampleCount: z.number().finite().nonnegative(),
+});
+
 export const RankingValuesKeySnapshotSchema = z.object({
   generatedAt: z.string().min(1),
   rankingKey: z.string().min(1),
@@ -28,6 +32,8 @@ export const RankingValuesKeySnapshotSchema = z.object({
     yearCode: z.string().min(1),
     count: z.number().int().nonnegative(),
     values: z.array(RankingValueSchema),
+    /** 順位から外した参考値 (推計の人数が下限未満。DATA-WAGE-TEACHER-COVERAGE-01) */
+    referenceValues: z.array(RankingReferenceValueSchema).optional(),
   })),
 }).passthrough();
 

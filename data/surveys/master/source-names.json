@@ -63,7 +63,8 @@
     "選挙人名簿及び在外選挙人名簿登録者数": "voter-registration-statistics",
     "衆議院議員総選挙　最高裁判所裁判官国民審査結果調": "national-election-results",
     "参議院議員通常選挙結果調": "national-election-results",
-    "住民基本台帳に基づく人口、人口動態及び世帯数調査（住民基本台帳人口要覧）": "resident-registry-population-survey"
+    "住民基本台帳に基づく人口、人口動態及び世帯数調査（住民基本台帳人口要覧）": "resident-registry-population-survey",
+    "学校基本調査": "school-basic-survey"
   },
   "proposedSourceToSurvey": {
     "特許行政年次報告書": "patent-administration-annual-report",
@@ -645,6 +646,74 @@
     "0001894246": {
       "id": "agricultural-income-statistics",
       "name": "生産農業所得統計"
+    },
+    "0004023601": {
+      "id": "kakei-chousa",
+      "name": "家計調査"
+    },
+    "0004023602": {
+      "id": "kakei-chousa",
+      "name": "家計調査"
+    },
+    "0004023607": {
+      "id": "kakei-chousa",
+      "name": "家計調査"
+    },
+    "0004023609": {
+      "id": "kakei-chousa",
+      "name": "家計調査"
+    },
+    "0004023614": {
+      "id": "kakei-chousa",
+      "name": "家計調査"
+    },
+    "0002070003": {
+      "id": "kakei-chousa",
+      "name": "家計調査"
+    },
+    "0002070005": {
+      "id": "kakei-chousa",
+      "name": "家計調査"
+    },
+    "0002070009": {
+      "id": "kakei-chousa",
+      "name": "家計調査"
+    },
+    "0002070011": {
+      "id": "kakei-chousa",
+      "name": "家計調査"
+    },
+    "0002070013": {
+      "id": "kakei-chousa",
+      "name": "家計調査"
+    },
+    "0002070017": {
+      "id": "kakei-chousa",
+      "name": "家計調査"
+    },
+    "0002190004": {
+      "id": "kakei-chousa",
+      "name": "家計調査"
+    },
+    "0002200006": {
+      "id": "kakei-chousa",
+      "name": "家計調査"
+    },
+    "0002210008": {
+      "id": "kakei-chousa",
+      "name": "家計調査"
+    },
+    "0002210018": {
+      "id": "kakei-chousa",
+      "name": "家計調査"
+    },
+    "0003000797": {
+      "id": "kakei-chousa",
+      "name": "家計調査"
+    },
+    "0003000807": {
+      "id": "kakei-chousa",
+      "name": "家計調査"
     }
   }
 }

@@ -97,7 +97,7 @@ describe("pushed table source selection (offline)", () => {
     expect(result.sources[0].sliceKeys).toEqual([]);
     expect(f.get).toHaveBeenCalledTimes(1);
   });
-  it("annual income and estimated workers use distinct tabs and preserve value/rank", async () => {
+  it("annual income uses declared worker tabs, applies scaling once and excludes reference rows from ranks", async () => {
     const f = fixture([row("08", "300"), row("12", "500"), row("13", "0", { "@unit": "十人" }),
       row("40", "310", { "@time": "2023000000" }), row("44", "600", { "@time": "2023000000" }), row("45", "2", { "@time": "2023000000", "@unit": "十人" })], 2);
     const config = listAllMetrics().find((m) => m.key === "nurse-annual-income")!;
@@ -106,9 +106,9 @@ describe("pushed table source selection (offline)", () => {
     await withSnapshotReader(f.reader, async () => {
       const fetched = await fetchEstatData("", wageSource);
       const counts = await fetchSampleCounts("", wageSource);
-      const payload = shapeForPrefecture(config, fetched.values, counts, sourceEvidence([...fetched.sources, ...counts?.sources ?? []]));
-      expect(payload.rows.map((r) => [r.yearCode, r.value, r.rank, r.sampleCount, r.isReference])).toEqual([
-        ["2022", 410, 1, 0, true], ["2023", 432, 1, 20, false],
+      const payload = shapeForPrefecture(config, fetched.values, { counts: counts!, spec: wageSource.sampleCount! }, sourceEvidence([...fetched.sources, ...counts?.sources ?? []]));
+      expect(payload.rows.map((r) => [r.yearCode, r.value, r.rank, r.sampleCount, Boolean(r.reference)])).toEqual([
+        ["2022", 410, null, 0, true], ["2023", 432, 1, 20, false],
       ]);
       expect(payload.meta.source?.sliceKeys).toHaveLength(6);
       expect(payload.meta.sampleCount).toEqual({ kind: "estimated-workers", unit: "人", referenceBelow: 10, cdTab: "13,45" });
@@ -119,6 +119,28 @@ describe("pushed table source selection (offline)", () => {
     await withSnapshotReader(f.reader, async () => {
       expect((await fetchEstatData("", { ...source, axisSum: { axis: "cat02", codes: ["A", "B"] } })).values[0].$).toBe("100");
       expect((await fetchEstatData("", { ...source, axisRatio: { axis: "cat02", numeratorCodes: ["A"], denominatorCodes: ["A", "B"] } })).values[0].$).toBe("30");
+    });
+  });
+  it("does not fetch worker counts unless the source declares them", async () => {
+    const f = fixture([row("08", "30")]);
+    const network = vi.fn(); vi.stubGlobal("fetch", network);
+    expect(await withSnapshotReader(f.reader, () => fetchSampleCounts("", source))).toBeNull();
+    expect(f.get).not.toHaveBeenCalled();
+    expect(network).not.toHaveBeenCalled();
+  });
+  it("uses declared tabs, conversion and threshold, keeping reference values but ranking only eligible prefectures", async () => {
+    const config = listAllMetrics().find((m) => m.key === "nurse-annual-income")!;
+    const spec = { cdTab: "99", factor: 1, minimum: 20 };
+    const values = [row("08", "500"), row("08", "400", { "@area": "02000" }), row("08", "400", { "@area": "03000" })];
+    const f = fixture([...values, row("99", "19", { "@unit": "人" }), row("99", "20", { "@unit": "人", "@area": "02000" }), row("99", "25", { "@unit": "人", "@area": "03000" })]);
+    await withSnapshotReader(f.reader, async () => {
+      const counts = await fetchSampleCounts("", { ...source, sampleCount: spec });
+      const payload = shapeForPrefecture(config, values, { counts: counts!, spec });
+      expect(payload.rows.map((r) => [r.value, r.rank, r.sampleCount, Boolean(r.reference)])).toEqual([
+        [50, null, 19, true], [40, 1, 20, false], [40, 1, 25, false],
+      ]);
+      expect(counts?.sources[0].sliceKeys).toEqual([`estat-tables/${table}/data/tab=99.json.gz`]);
+      expect(payload.meta.sampleCount?.referenceBelow).toBe(20);
     });
   });
   it("supplemental years keep their slice provenance, including a reused cached supplement", async () => {
@@ -153,8 +175,8 @@ describe("pushed table source selection (offline)", () => {
     expect(network).not.toHaveBeenCalled();
   });
   it("sample count rejects ambiguous coordinates and unknown units instead of inventing people", async () => {
-    for (const values of [[row("13", "1", { "@unit": "不明" })], [row("13", "1", { "@unit": "人" }), row("45", "1", { "@unit": "人" })]]) {
-      await expect(withSnapshotReader(fixture(values).reader, () => fetchSampleCounts("", source))).rejects.toThrow(/unit|Duplicate/);
+    for (const values of [[row("13", "1", { "@unit": "不明" })], [row("13", "1", { "@unit": "十人" }), row("45", "1", { "@unit": "十人" })]]) {
+      await expect(withSnapshotReader(fixture(values).reader, () => fetchSampleCounts("", source, { cdTab: "13,45", factor: 10, minimum: 10 }))).rejects.toThrow(/unit|複数の値/);
     }
   });
   it("mixed supplemental tables retain every input's provenance without changing earlier results", () => {
@@ -171,6 +193,7 @@ describe("strict public equivalence", () => {
   const original = { metricKey: "fixture", entityKind: "prefecture", rows: [{ areaCode: "01000", yearCode: "2023", value: 123, unit: "万円", rank: 1 }], meta: {} };
   it("ignores only metadata and newly added sample annotations", () => {
     expect(compareValues({ ...original, meta: { generatedAt: "new" }, rows: [{ ...original.rows[0], sampleCount: 0, isReference: true }] }, original).matches).toBe(true);
+    expect(compareValues({ ...original, rows: [{ ...original.rows[0], sampleCount: 0, reference: true }] }, original).matches).toBe(true);
     for (const field of ["value", "unit", "yearCode", "areaCode", "rank"]) {
       expect(compareValues({ ...original, rows: [{ ...original.rows[0], [field]: "changed" }] }, original).matches).toBe(false);
     }

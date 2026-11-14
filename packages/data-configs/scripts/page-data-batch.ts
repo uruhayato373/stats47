@@ -1,6 +1,5 @@
 import { readSnapshot, sourceEvidence, assertLiveEstatAllowed, type SourceEvidence } from "./lib/estat-table-reader.js";
 import { conversionFactor } from "../src/unit/unit-semantics.js";
-import { extractYearCode } from "../../estat-api/src/stats-data/utils/extract-year-code.js";
 import { prefToCityStatsDataId } from "../src/ssds/entity-source";
 import { PREFECTURE_CAPITAL_CITIES } from "@stats47/area";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
@@ -52,6 +51,7 @@ import { applyValueScale } from "../src/money-unit.js";
 import { fillMissingTimeFromSurveyDate } from "../src/estat-time.js";
 import { mergeSupplementalValues } from "../src/supplemental-values.js";
 import { applyValueCorrections } from "../src/value-corrections";
+import { applySampleCounts, sampleCountKey } from "../src/sample-count";
 import { relabelYearNames, type YearNamedRow } from "../src/year-names";
 import {
   combineLinear,
@@ -72,7 +72,7 @@ import {
   type ShapeSummary,
   type ShapeViolation,
 } from "../src/shape-gate.js";
-import type { KakeiChousaSource, MetricConfig, SourceConfig } from "../src/types.js";
+import type { KakeiChousaSource, MetricConfig, SampleCountSpec, SourceConfig } from "../src/types.js";
 
 // known-broken は「公開済みの欠陥を認知している」だけなので新規書き込みを許可しない。
 // legitimate は統計の定義上正しい形であり、重症度ラチェットの範囲内なら書き込んでよい。
@@ -883,8 +883,10 @@ interface ShapedRow {
   unit: string;
   rank: number | null;
   prefectureCode?: string;
+  /** 推計の人数 (`source.sampleCount` を宣言した指標だけ) */
   sampleCount?: number | null;
-  isReference?: boolean;
+  /** 推計の人数が下限未満で順位から外した行 (ページでは参考値として示す) */
+  reference?: boolean;
 }
 
 /** 年ごとに value 降順で rank を付与 (1=最大値)。null は rank null。同値は同順位 (競争順位)。 */
@@ -896,7 +898,8 @@ function assignRanks(rows: ShapedRow[]): void {
   }
   for (const group of byYear.values()) {
     const ranked = group
-      .filter((r) => r.value != null)
+      // 推計の人数が少ない県・年 (参考値) は順位を持たせない (DATA-WAGE-TEACHER-COVERAGE-01)
+      .filter((r) => r.value != null && !r.reference)
       .sort((a, b) => (b.value as number) - (a.value as number));
     let prevValue: number | null = null;
     let prevRank = 0;
@@ -954,11 +957,43 @@ function valueScaleOf(config: MetricConfig): number | undefined {
   return config.source.kind === "estat" ? config.source.valueScale : undefined;
 }
 
+/**
+ * 推計の人数の表章項目を取り、(地域, 年) → 表の単位の人数にする (`source.sampleCount`)。
+ * 年代違いのコードを並べた cdTab が同じ年に 2 つ値を返したら、定義が重なっているので止める (tabCombination と同じ)。
+ */
+export async function fetchSampleCounts(
+  appId: string,
+  src: Extract<SourceConfig, { kind: "estat" }>,
+  spec: SampleCountSpec | undefined = src.sampleCount,
+) {
+  if (!spec) return null;
+  const part = await fetchEstatData(appId, { ...src, cdTab: spec.cdTab, tabCombination: undefined, sampleCount: undefined });
+  const counts = new Map<string, number | null>();
+  for (const v of part.values) {
+    const key = sampleCountKey(v["@area"], v["@time"]);
+    if (counts.has(key)) {
+      throw new Error(`sampleCount の cdTab "${spec.cdTab}" が ${key} に複数の値を返した (年代違いのコードが同じ年に重なっている)`);
+    }
+    const factor = conversionFactor(v["@unit"], "人");
+    if (factor === null || factor !== spec.factor) throw new Error(`sampleCount unit/factor mismatch: ${v["@unit"]}/${spec.factor}`);
+    const raw = parseEstatValue(v.$);
+    if (raw !== null && raw < 0) throw new Error(`Negative estimated-worker count: ${key}`);
+    // Keep source units here: applySampleCounts performs the declared conversion exactly once.
+    counts.set(key, raw);
+  }
+  return Object.assign(counts, { sources: part.sources });
+}
+
 /** 取得 raw values → StatsValues 構造 (prefecture)。areaName/unit/yearName/rank を付与し本番投入可能形に。 */
-export function shapeForPrefecture(config: MetricConfig, values: EstatValue[], counts?: Map<string, number | null> | null, source?: WrittenStatsMeta["source"]) {
+export function shapeForPrefecture(
+  config: MetricConfig,
+  values: EstatValue[],
+  sample?: { counts: ReadonlyMap<string, number | null>; spec: SampleCountSpec },
+  source?: WrittenStatsMeta["source"],
+) {
   const masters = loadAreaMasters();
   const scale = valueScaleOf(config);
-  const rows: ShapedRow[] = values
+  const shaped: ShapedRow[] = values
     .filter((v) => isPrefCode5(v["@area"]) && inYearRange(v["@time"].slice(0, 4), config))
     .map((v) => {
       const yearCode = v["@time"].slice(0, 4);
@@ -977,15 +1012,12 @@ export function shapeForPrefecture(config: MetricConfig, values: EstatValue[], c
         ? a.areaCode.localeCompare(b.areaCode)
         : a.yearCode.localeCompare(b.yearCode),
     );
+  const rows = sample ? applySampleCounts(shaped, sample.counts, sample.spec) : shaped;
   assignRanks(rows);
   const meta = buildMeta(config, rows);
   if (source) meta.source = source;
-  if (counts) {
-    for (const row of rows) {
-      row.sampleCount = counts.get(`${row.areaCode}|${row.yearCode}`) ?? null;
-      row.isReference = row.sampleCount !== null && row.sampleCount < WAGE_SAMPLE_REFERENCE_BELOW;
-    }
-    meta.sampleCount = { kind: "estimated-workers", unit: "人", referenceBelow: WAGE_SAMPLE_REFERENCE_BELOW, cdTab: "13,45" };
+  if (sample) {
+    meta.sampleCount = { kind: "estimated-workers", unit: "人", referenceBelow: sample.spec.minimum, cdTab: sample.spec.cdTab };
   }
   return { metricKey: config.key, entityKind: "prefecture" as const, rows, meta };
 }
@@ -1175,28 +1207,6 @@ export async function applySupplements(
   };
 }
 
-/** Estimated workers, not the number of survey respondents. Source unit is validated, never inferred. */
-export const WAGE_SAMPLE_REFERENCE_BELOW = 10;
-export async function fetchSampleCounts(appId: string, source: Extract<SourceConfig, { kind: "estat" }>) {
-  if (source.statsDataId !== "0003445758") return null;
-  if (source.axisSum || source.axisRatio || source.areaAxis) {
-    console.warn(`[sampleCount] ${source.statsDataId}: composed population cannot be inferred`);
-    return null;
-  }
-  const fetched = await fetchEstatData(appId, { ...source, cdTab: "13,45", tabCombination: undefined });
-  const counts = new Map<string, number | null>();
-  for (const value of fetched.values) {
-    const key = `${value["@area"]}|${extractYearCode(value["@time"])}`;
-    if (counts.has(key)) throw new Error(`Duplicate estimated-worker coordinate: ${key}`);
-    const factor = conversionFactor(value["@unit"], "人");
-    if (factor === null) throw new Error(`Unknown estimated-worker unit: ${value["@unit"]}`);
-    const raw = parseEstatValue(value.$);
-    if (raw !== null && raw < 0) throw new Error(`Negative estimated-worker count: ${key}`);
-    counts.set(key, raw === null ? null : raw * factor);
-  }
-  return Object.assign(counts, { sources: fetched.sources });
-}
-
 export async function processOne(
   config: MetricConfig,
   appId: string,
@@ -1369,8 +1379,11 @@ export async function processOne(
       );
       const values =
         config.source.kind === "kakei-chousa" ? remapKakeiAreas(fetched.values) : fetched.values;
-      const counts = await fetchSampleCounts(appId, src);
-      const payload = shapeForPrefecture(config, values, counts, sourceEvidence([...fetched.sources, ...counts?.sources ?? []]));
+      const sampleSpec = config.source.kind === "estat" ? config.source.sampleCount : undefined;
+      const counts = sampleSpec ? await fetchSampleCounts(appId, src, sampleSpec) : null;
+      const sample = sampleSpec && counts ? { counts, spec: sampleSpec } : undefined;
+      const payload = shapeForPrefecture(config, values, sample, sourceEvidence([...fetched.sources, ...(counts?.sources ?? [])]));
+      if (sample) notes.push(`reference=${payload.rows.filter((r) => r.reference).length}`);
       const notEmpty = await gateEmpty("prefecture", values.length, payload.rows.length, "values.json");
       // 0 件なら形状は見ない (expected-empty の担当。二重に鳴らさない)
       const shapeOk = notEmpty

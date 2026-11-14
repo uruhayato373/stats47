@@ -2,39 +2,176 @@
   "$comment": "chart source.json から出典を導出できない公開記事に displaySources を付ける置換表。backfill-display-sources.ts が R2 の source.json に書き足す。URL は実到達を確認できたものだけ書き、確認できないものは書かない (2026-09-25)。",
   "articles": {
     "development-history-place-name-map": {
-      "displaySources": [{ "label": "国土地理院『電子国土基本図（地名情報）』", "license": "PDL1.0" }],
+      "displaySources": [
+        {
+          "label": "国土地理院『電子国土基本図（地名情報）』",
+          "license": "PDL1.0"
+        }
+      ],
       "evidence": "記事本文の旧データ出典節 + .claude/rules/buzz-map-standards.md (R2 gis/gsi-pni の取得元・PDL1.0)。www.gsi.go.jp はこの環境から到達不可のため URL は付けない"
     },
     "distinctive-place-name-kanji-by-prefecture": {
-      "displaySources": [{ "label": "国土地理院『電子国土基本図（地名情報）』", "license": "PDL1.0" }],
+      "displaySources": [
+        {
+          "label": "国土地理院『電子国土基本図（地名情報）』",
+          "license": "PDL1.0"
+        }
+      ],
       "evidence": "同上"
     },
     "hama-ura-tsu-coastal-place-names": {
-      "displaySources": [{ "label": "国土地理院『電子国土基本図（地名情報）』", "license": "PDL1.0" }],
+      "displaySources": [
+        {
+          "label": "国土地理院『電子国土基本図（地名情報）』",
+          "license": "PDL1.0"
+        }
+      ],
       "evidence": "同上"
     },
     "kawa-gawa-river-place-name-map": {
-      "displaySources": [{ "label": "国土地理院『電子国土基本図（地名情報）』", "license": "PDL1.0" }],
+      "displaySources": [
+        {
+          "label": "国土地理院『電子国土基本図（地名情報）』",
+          "license": "PDL1.0"
+        }
+      ],
       "evidence": "同上"
     },
     "yato-yatsu-place-name-boundary": {
-      "displaySources": [{ "label": "国土地理院『電子国土基本図（地名情報）』", "license": "PDL1.0" }],
+      "displaySources": [
+        {
+          "label": "国土地理院『電子国土基本図（地名情報）』",
+          "license": "PDL1.0"
+        }
+      ],
       "evidence": "同上"
     },
     "depopulation-area-medical-facilities": {
       "displaySources": [
-        { "label": "国土交通省『国土数値情報（過疎地域 A17）』", "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A17.html" },
-        { "label": "国土交通省『国土数値情報（医療機関 P04）』", "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html" }
+        {
+          "label": "国土交通省『国土数値情報（過疎地域 A17）』",
+          "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A17.html"
+        },
+        {
+          "label": "国土交通省『国土数値情報（医療機関 P04）』",
+          "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html"
+        }
       ],
       "evidence": "記事本文の data-source タグ。A17 は HTTP 200、P04 は本文の旧 URL が 404 のため国土数値情報の一覧にある現行ページ (2026-09-25 に HTTP 200 を確認) を使う"
     },
     "income-1000man-which-prefecture": {
-      "displaySources": [{ "label": "賃金構造基本統計調査", "surveyId": "wage-structure-survey" }],
+      "displaySources": [
+        {
+          "label": "賃金構造基本統計調査",
+          "surveyId": "wage-structure-survey"
+        }
+      ],
       "evidence": "source.json の source 文字列「厚生労働省『賃金構造基本統計調査』」。調査マスタ wage-structure-survey に解決する"
     },
     "cc-estat-09-radar-prefecture": {
-      "displaySources": [{ "label": "総務省統計局『社会・人口統計体系（都道府県データ）』", "url": "https://www.stat.go.jp/data/ssds/index.htm" }],
+      "displaySources": [
+        {
+          "label": "総務省統計局『社会・人口統計体系（都道府県データ）』",
+          "url": "https://www.stat.go.jp/data/ssds/index.htm"
+        }
+      ],
       "evidence": "レーダー図 2 枚 (tokyo-radar / tokyo-kyoto-radar) の source.json inputs 6 指標はすべて SSDS の statsDataId (0000010101 / 0000010203 / 0000010112 / 0000010209 / 0000010211 / 0000010107)。kind:calculated のため出典が自動解決されない。URL は 2026-10-08 に HTTP 200 を確認"
+    },
+    "kakei-number-one-city-rotation": {
+      "charts": {
+        "leader-count-bars": {
+          "add": {
+            "statsDataIds": [
+              "0004023605",
+              "0004023606"
+            ]
+          }
+        },
+        "gap-churn-bars": {
+          "add": {
+            "statsDataIds": [
+              "0004023605",
+              "0004023606"
+            ]
+          }
+        },
+        "category-churn-bars": {
+          "add": {
+            "statsDataIds": [
+              "0004023605",
+              "0004023606"
+            ]
+          }
+        },
+        "stability-bars": {
+          "add": {
+            "statsDataIds": [
+              "0004023605",
+              "0004023606"
+            ]
+          }
+        },
+        "firmness-bars": {
+          "add": {
+            "statsDataIds": [
+              "0004023605",
+              "0004023606"
+            ]
+          }
+        },
+        "rank-agreement-bars": {
+          "add": {
+            "statsDataIds": [
+              "0004023605",
+              "0004023606"
+            ]
+          }
+        },
+        "yearly-churn-lines": {
+          "add": {
+            "statsDataIds": [
+              "0004023605",
+              "0004023606"
+            ]
+          }
+        },
+        "new-leader-prior-bars": {
+          "add": {
+            "statsDataIds": [
+              "0004023605",
+              "0004023606"
+            ]
+          }
+        },
+        "city-leader-bars": {
+          "add": {
+            "statsDataIds": [
+              "0004023605",
+              "0004023606"
+            ]
+          }
+        },
+        "case-gap-bars": {
+          "add": {
+            "statsDataIds": [
+              "0004023605",
+              "0004023606"
+            ]
+          }
+        }
+      },
+      "evidence": "各図の source.json の upstream に「statsDataId 0004023605/0004023606」(家計調査の品目分類の金額・数量の表) と書かれている。source の「<metricKey>」は書きかけの文字で指標に解決できず、調査の紐付けが未解決になっていた (2026-11-14・オーナー承認)"
+    },
+    "beer-happoshu-liquor-tax-steps-household-response": {
+      "charts": {
+        "liquor-tax-steps-timeseries": {
+          "add": {
+            "surveyScope": "not-applicable",
+            "surveyScopeReason": "国税庁の手引きにある酒税の税率表を転記した図で、統計調査の結果ではない"
+          }
+        }
+      },
+      "evidence": "source.json の source が国税庁「発泡性酒類の段階的な税率変更に係る品目及び税率適用区分の表示方法の手引き」(令和5年8月)。統計調査ではないので紐付けの対象外にする (2026-11-14・オーナー承認)"
     }
   }
 }

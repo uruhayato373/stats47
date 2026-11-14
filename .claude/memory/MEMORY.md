@@ -5,6 +5,7 @@
 - [periodic progress reports](feedback_periodic_progress_reports.md) — 長い作業は約5分おきに実測で進捗を伝える
 - [bypass permissions](feedback_bypass_permissions.md) — Agent は確認なしで最後まで処理
 - [autonomous execution](feedback_autonomous_execution.md) — スキル実行は確認不要で自動処理
+- [codex delegation token saving](feedback_codex_delegation_token_saving.md) — トークン節約のため読み取りの確認・調査は Codex に分担
 - [agent output contract](feedback_agent_output_contract.md) — Agent prompt 冒頭に Task Capsule と OUTPUT FORMAT
 - [commit in batches](feedback_commit_in_batches.md) — 修正を重ねる間は毎回コミットせず、まとまりで 1 回
 - [no deploy per iteration](feedback_no_deploy_per_iteration.md) — 指示なしに main へ出さない。本番は 1 日 1 回
@@ -183,8 +184,7 @@
 - [browser use cleanup](feedback_browser_use_cleanup.md) — browser-use の daemon は pkill で止める
 - [native chrome session export](feedback_native_chrome_session_export.md) — Google 認証の export は専用 profile のコピーで
 - [playwright profile dual os](feedback_playwright_profile_dual_os.md) — Playwright profile の root の決め方
-- [codex exec stdin](feedback_codex_exec_stdin.md) — codex exec は </dev/null で閉じる
-- [codex mcp model override](feedback_codex_mcp_model_override.md) — Codex MCP は model を上書きする
+- [codex exec stdin](feedback_codex_exec_stdin.md)・[codex mcp model override](feedback_codex_mcp_model_override.md) — codex exec は </dev/null で閉じる / Codex MCP は model を上書きする
 - [codex image registered route](feedback_codex_image_registered_route_only.md) — 画像生成は登録済み経路だけ
 - [workflow worktree base and deps](feedback_workflow_worktree_base_and_deps.md) — Workflow の worktree は古い起点で deps 無し
 - [tmp worktree lost on resume](feedback_tmp_worktree_lost_on_resume.md) — scratchpad の worktree は再開で消える
