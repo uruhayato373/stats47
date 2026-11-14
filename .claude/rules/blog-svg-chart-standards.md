@@ -465,8 +465,9 @@ svg-builder の対象外なので §6 のカタログ別 gate には掛けない
 - **コード例の `<svg>` はインライン svg に数えない。** `quality-gate.mjs` はコードブロックとインラインコードを除いて判定する。
   検出を避けるために `<svg{...props}>` のような不自然な書き方をしない。
 
-実例: cc-estat-04-aging-heatmap の 2 枚は一時スクリプトで描かれ、スクリプトが残っていない (2026-10-07)。
-作り直すときは上の置き場に描画スクリプトを書いてから描く (BLOG-TUTORIAL-GATE-GAPS-01)。
+実例: cc-estat-04-aging-heatmap の 2 枚は一時スクリプトで描かれ、スクリプトが残っていなかった (2026-10-07)。
+2026-11-14 に記事 Step 3・Step 5 のコードを写した `.claude/scripts/blog/article-renderers/cc-estat-04-aging-heatmap/aging-heatmap.ts`
+(`--scheme oranges|viridis`) を置き、公開中の図と provenance の行以外が同じバイト列になることを確かめた (BLOG-TUTORIAL-GATE-GAPS-01)。
 
 ## 7. 禁止パターン
 

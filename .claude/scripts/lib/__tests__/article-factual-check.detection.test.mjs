@@ -449,3 +449,96 @@ describe("割合 (％) の値と、指標を名指しした順位の取り違え
     });
   });
 });
+
+// ============================================================================
+// 県名の直後の派生値と県の組の合計 (BLOG-TUTORIAL-GATE-GAPS-01 ⑤ / MANUFACTURING-ZONE-CHART-LINEAGE-01 ③)
+// ============================================================================
+
+describe("県名の直後でも、その県単独の値ではない数値 (差・目減り額・県の組の合計) は照合しない", () => {
+  // real-disposable-income-reversal の実データの形 (勤労者世帯の可処分所得と、物価で割り戻した値)
+  const INCOME_FILES = {
+    "disposable.json": {
+      label: "可処分所得",
+      unit: "円",
+      year: "2024",
+      data: [
+        { rank: 1, areaName: "東京都", pref: "東京都", value: 637958 },
+        { rank: 3, areaName: "埼玉県", pref: "埼玉県", value: 620576 },
+      ],
+    },
+    "disposable.source.json": { label: "可処分所得", unit: "円", year: "2024" },
+    "real.json": {
+      label: "物価で割り戻した可処分所得",
+      unit: "円",
+      year: "2024",
+      data: [
+        { rank: 1, areaName: "埼玉県", pref: "埼玉県", value: 618720 },
+        { rank: 2, areaName: "東京都", pref: "東京都", value: 613421 },
+      ],
+    },
+    "real.source.json": { label: "物価で割り戻した可処分所得", unit: "円", year: "2024" },
+  };
+  const OPERANDS = "東京都は637,958円が613,421円になり、埼玉県は620,576円が618,720円になります。";
+
+  const derived = [
+    ["「しか」を挟んで増減を語る", "埼玉県は1,856円しか目減りしません。"],
+    ["「の目減り」", "埼玉県は1,856円の目減りで済みます。"],
+    ["「多く残る」", "東京都より埼玉県が22,681円多く残ります。"],
+    ["「多くなる」", "埼玉県は東京都より22,681円多くなります。"],
+    ["述語を共有する並列の前の項", "東京都は24,537円、埼玉県は1,856円目減りします。"],
+    ["「開き」", "埼玉県では目減りが小さく、東京都との開きは22,681円です。"],
+    ["同じ段落の 2 つの数値の差 (語が無くても)", `${OPERANDS}東京都24,537円に対して埼玉県1,856円です。`],
+  ];
+  for (const [name, body] of derived) {
+    it(`★${name}: ${body.slice(-28)}`, () => {
+      withFiles(INCOME_FILES, (gt) => assert.deepEqual(checkValueClaims(body, gt), []));
+    });
+  }
+
+  it("県の値として書いた誤りは従来どおり検出する (mutation)", () => {
+    withFiles(INCOME_FILES, (gt) => {
+      assert.equal(checkValueClaims("埼玉県は1,856円です。", gt).length, 1);
+      // 差に 1 円でも合わなければ派生値と見なさない
+      assert.equal(checkValueClaims(`${OPERANDS}埼玉県は1,857円です。`, gt).length, 1);
+      assert.equal(checkValueClaims("埼玉県の可処分所得は1,240,000円です。", gt).length, 1);
+    });
+  });
+
+  it("正しい県の値は止めない", () => {
+    withFiles(INCOME_FILES, (gt) => assert.deepEqual(checkValueClaims(OPERANDS, gt), []));
+  });
+
+  // manufacturing-aichi-dominance の実データの形 (製造品出荷額等・百万円)
+  const SHIPMENT_FILES = {
+    "shipment.json": {
+      label: "製造品出荷額等",
+      unit: "百万円",
+      year: "2023",
+      data: [
+        { rank: 1, areaName: "愛知県", pref: "愛知県", value: 58021789 },
+        { rank: 4, areaName: "兵庫県", pref: "兵庫県", value: 18461711 },
+        { rank: 6, areaName: "埼玉県", pref: "埼玉県", value: 15329652 },
+        { rank: 9, areaName: "三重県", pref: "三重県", value: 12311360 },
+      ],
+    },
+    "shipment.source.json": { label: "製造品出荷額等", unit: "百万円", year: "2023" },
+  };
+  const groups = [
+    "中京工業地帯（岐阜・愛知・三重）が77.1兆円でダントツ1位です。",
+    "京浜を東京・神奈川・埼玉の3都県とする区分では42.4兆円になります。",
+    "中京を愛知・三重の2県、阪神を大阪・兵庫の2府県に絞ると、中京は70.3兆円です。",
+  ];
+  for (const body of groups) {
+    it(`★県の組の合計: ${body.slice(0, 26)}`, () => {
+      withFiles(SHIPMENT_FILES, (gt) => assert.deepEqual(checkValueClaims(body, gt), []));
+    });
+  }
+
+  it("1 県の値として書いた誤りは従来どおり検出する (mutation)", () => {
+    withFiles(SHIPMENT_FILES, (gt) => {
+      assert.equal(checkValueClaims("三重県は77.1兆円です。", gt).length, 1);
+      assert.equal(checkValueClaims("埼玉県は42.4兆円です。", gt).length, 1);
+      assert.deepEqual(checkValueClaims("愛知県は58.0兆円、三重県は12.3兆円です。", gt), []);
+    });
+  });
+});
