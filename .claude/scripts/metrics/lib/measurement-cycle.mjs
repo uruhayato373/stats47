@@ -431,7 +431,7 @@ export function summarizeIndexCoverage(rows, { week, asOf }) {
  * @param {object|null} input.authenticated data/authenticated/latest.json (ASP・note・KDP 等の認証付き収集)
  * @param {object|null} [input.dataQuality] summarizeDataQuality の結果 (ranking/integrity-audit.json)
  * @param {object|null} [input.paidPurchases] summarizePaidPurchases の結果
- * @param {Array<{id:string, kpis:string[]|null, hasTarget?:boolean}>} input.improvementRows strategy-lanes.parseImprovementRows
+ * @param {Array<{id:string, kpis:string[]|null, hasTarget?:boolean, status?:string}>} input.improvementRows strategy-lanes.parseImprovementRows
  * @param {string[]} input.focusKpis 今月の重点レーンの KPI id
  * @param {number} input.maxActive active 施策の上限
  */
@@ -550,10 +550,11 @@ export function summarizeKpiTree({ nodes, week, asOf, gscHistory, ga4Finalized =
     for (const id of ids) linked.get(id).push(row.id);
   }
   const focus = new Set(focusKpis ?? []);
+  // active は観測だけの effect/pending を数えない (文書の検査 DG080 の ACTIVE_LIMIT_STATUSES と同じ数え方。strategy-lanes.cjs は循環 import になるので読まない)
   return {
     compareWeek: prevWeek,
     nodes: nodes.map((n) => ({ ...n, focus: focus.has(n.id), ...valueOf(n.id), improvements: linked.get(n.id) })),
-    improvements: { active: improvementRows.length, maxActive, unlinked, noTarget: improvementRows.filter((r) => !r.hasTarget).map((r) => r.id) },
+    improvements: { active: improvementRows.filter((r) => r.status !== "effect/pending").length, maxActive, unlinked, noTarget: improvementRows.filter((r) => !r.hasTarget).map((r) => r.id) },
     focusWithoutImprovements: nodes.filter((n) => focus.has(n.id) && linked.get(n.id).length === 0).map((n) => n.id),
   };
 }
