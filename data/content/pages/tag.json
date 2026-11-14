@@ -5946,6 +5946,14 @@
       "published": true
     },
     {
+      "id": "tag:t-c06b1b297335",
+      "kind": "tag",
+      "key": "CloudflareWorkers",
+      "title": "CloudflareWorkers",
+      "href": "/tag/CloudflareWorkers",
+      "published": false
+    },
+    {
       "id": "tag:t-c1f21f14d967",
       "kind": "tag",
       "key": "医療機関",

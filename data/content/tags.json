@@ -134,6 +134,12 @@
       "aliases": []
     },
     {
+      "id": "tag:t-c06b1b297335",
+      "label": "CloudflareWorkers",
+      "key": "CloudflareWorkers",
+      "aliases": []
+    },
+    {
       "id": "tag:t-0ef384847cc3",
       "label": "CPI",
       "key": "CPI",
