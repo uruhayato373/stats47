@@ -151,7 +151,15 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:01000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -159,7 +167,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:03000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:03000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -167,7 +183,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:05000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:05000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -175,7 +199,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:07000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:07000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -183,7 +215,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:09000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:09000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -191,7 +231,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:11000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:11000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -199,7 +247,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:13000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:13000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -207,7 +263,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:15000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:15000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -215,7 +279,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:17000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:17000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -223,7 +295,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:19000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:19000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -231,7 +311,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:21000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:21000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -239,7 +327,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:23000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:23000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -247,7 +343,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:25000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:25000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -255,7 +359,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:27000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:27000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -263,7 +375,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:29000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:29000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -271,7 +391,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:31000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:31000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -279,7 +407,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:33000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:33000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -287,7 +423,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:35000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:35000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -295,7 +439,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:37000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:37000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -303,7 +455,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:39000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:39000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -311,7 +471,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:41000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:41000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -319,7 +487,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:43000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:43000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -327,11 +503,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:45000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:45000:occupation-salary",
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:46000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:46000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -371,11 +559,16 @@
           "kind": "ranking"
         },
         {
+          "pageId": "theme:information-industry",
+          "kind": "theme"
+        },
+        {
           "pageId": "theme:occupation-salary",
           "kind": "theme"
         }
       ],
       "themes": [
+        "information-industry",
         "occupation-salary"
       ]
     },
@@ -3394,11 +3587,205 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "ranking:sports-park-count-per-100km2",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:sports-participation",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "sports-participation"
+      ]
     },
     {
       "metricKey": "sports-participation-rate-badminton",
@@ -5847,11 +6234,205 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "ranking:ss-pollution-load",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:environmental-quality",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "environmental-quality"
+      ]
     },
     {
       "metricKey": "standard-financial-scale-municipal",

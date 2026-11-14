@@ -178,11 +178,31 @@
       "sourceLink": "https://www.e-stat.go.jp/dbview?sid=0004008606",
       "dataSource": "ranking",
       "gridColumnSpan": 12,
-      "section": "single-parent-households-trend",
+      "section": "single-parent-employment-rate",
       "sortOrder": 10
     }
   ],
   "metricGroups": [
+    {
+      "key": "single-parent-employment-rate-1",
+      "title": "母子世帯の母の就業割合（労働状態不詳を除く）",
+      "rankingKeys": [
+        "single-mother-employment-rate"
+      ],
+      "defaultCheckedKeys": [
+        "single-mother-employment-rate"
+      ]
+    },
+    {
+      "key": "single-parent-employment-rate-2",
+      "title": "父子世帯の父の就業割合（労働状態不詳を除く）",
+      "rankingKeys": [
+        "single-father-employment-rate"
+      ],
+      "defaultCheckedKeys": [
+        "single-father-employment-rate"
+      ]
+    },
     {
       "key": "single-parent-households-trend-1",
       "title": "母子世帯数と父子世帯数の推移",
@@ -196,79 +216,43 @@
       ]
     },
     {
-      "key": "single-parent-employment-rate-1",
-      "title": "父子世帯の父の就業割合（労働状態不詳を除く）",
-      "rankingKeys": [
-        "single-father-employment-rate"
-      ],
-      "defaultCheckedKeys": [
-        "single-father-employment-rate"
-      ]
-    },
-    {
-      "key": "single-parent-employment-rate-2",
-      "title": "母子世帯の母の就業割合（労働状態不詳を除く）",
-      "rankingKeys": [
-        "single-mother-employment-rate"
-      ],
-      "defaultCheckedKeys": [
-        "single-mother-employment-rate"
-      ]
-    },
-    {
-      "key": "child-rearing-allowance-status-1",
-      "title": "児童扶養手当受給者数（年度末）",
-      "rankingKeys": [
-        "child-rearing-allowance-recipients"
-      ],
-      "defaultCheckedKeys": [
-        "child-rearing-allowance-recipients"
-      ]
-    },
-    {
       "key": "single-mother-public-assistance-1",
-      "title": "生活保護を受ける母子世帯数（年度平均）",
+      "title": "生活保護を受ける母子世帯数と児童扶養手当の受給者数の推移",
       "rankingKeys": [
-        "single-mother-public-assistance-households"
+        "single-mother-public-assistance-households",
+        "child-rearing-allowance-recipients"
       ],
       "defaultCheckedKeys": [
-        "single-mother-public-assistance-households"
+        "single-mother-public-assistance-households",
+        "child-rearing-allowance-recipients"
       ]
     }
   ],
   "sections": [
     {
-      "key": "single-parent-households-trend",
-      "title": "ひとり親家庭の数はどのように推移しているか",
-      "concern": "地域のひとり親家庭が増加傾向にあるのか変化を把握したい。",
+      "key": "single-parent-employment-rate",
+      "title": "ひとり親は働いているか、母と父で違いはあるか",
+      "concern": "ひとり親として働くにあたり、自分の県の就業割合と母子・父子の違いが気になる。",
       "metricGroupKeys": [
-        "single-parent-households-trend-1"
+        "single-parent-employment-rate-1",
+        "single-parent-employment-rate-2"
       ],
       "chartKeys": [
         "single-parent-income-composition"
       ]
     },
     {
-      "key": "single-parent-employment-rate",
-      "title": "ひとり親家庭の親の就業状況に男女差はあるか",
-      "concern": "ひとり親として働くにあたり地域での就業割合や男女差が気になる。",
+      "key": "single-parent-households-trend",
+      "title": "母子世帯・父子世帯は増えているか、減っているか",
+      "concern": "地域のひとり親世帯が増加傾向にあるのか、変化を把握したい。",
       "metricGroupKeys": [
-        "single-parent-employment-rate-1",
-        "single-parent-employment-rate-2"
-      ]
-    },
-    {
-      "key": "child-rearing-allowance-status",
-      "title": "児童扶養手当の受給者はどれくらいいるか",
-      "concern": "自立支援や生活費補助となる手当の受給状況を把握したい。",
-      "metricGroupKeys": [
-        "child-rearing-allowance-status-1"
+        "single-parent-households-trend-1"
       ]
     },
     {
       "key": "single-mother-public-assistance",
-      "title": "生活保護を受けている母子世帯はどれくらいあるか",
-      "concern": "困窮時のセーフティネットとなる生活保護の受給実態を知りたい。",
+      "title": "生活保護や児童扶養手当を受ける家庭はどれくらいか",
+      "concern": "生活費の補助となる公的支援の利用状況を、自分の県で把握したい。",
       "metricGroupKeys": [
         "single-mother-public-assistance-1"
       ]

@@ -54,6 +54,16 @@ export const BUSINESS_DEMOGRAPHY_SET: IndicatorSet = {
       "rankingKey": "nonprimary-enterprises-under5-employees",
       "shortLabel": "常用雇用者0〜4人企業の従業者数",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "establishment-ratio-1-4-employees-private",
+      "shortLabel": "従業者1〜4人の事業所割合",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "employee-ratio-1-4-employee-establishments-private",
+      "shortLabel": "1〜4人事業所の従業者割合",
+      "role": "secondary"
     }
   ],
   "keywords": [

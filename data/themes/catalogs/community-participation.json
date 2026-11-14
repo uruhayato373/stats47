@@ -44,10 +44,110 @@
         "surveyedAt": "2026-09-09",
         "rationale": "まちづくり活動の年間行動者率（10歳以上）を都道府県別の実値として比較する。"
       }
+    },
+    {
+      "rankingKey": "library-books",
+      "shortLabel": "図書館蔵書数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「図書館 蔵書数 ランキング」(週85回表示) の中心の問いに直接答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "library-lending-books",
+      "shortLabel": "図書館館外貸出冊数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「図書館 貸出冊数 ランキング」に答え、蔵書がどれだけ使われているかを登録者数と並べて見せる。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "voter-turnout-mayor",
+      "shortLabel": "市区町村長選挙投票率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「市長選挙 投票率 ランキング」に答え、知事選との関心の差を比べられる。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "voter-turnout-pref-assembly",
+      "shortLabel": "都道府県議会議員選挙投票率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「知事選 投票率 ランキング」を見る人が、県議選の投票率も知事選と並べて比べられる。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
     }
   ],
   "charts": [],
   "metricGroups": [
+    {
+      "key": "library-and-cultural-participation-1",
+      "title": "図書館蔵書数",
+      "rankingKeys": [
+        "library-books"
+      ],
+      "defaultCheckedKeys": [
+        "library-books"
+      ]
+    },
+    {
+      "key": "library-and-cultural-participation-2",
+      "title": "貸出冊数と登録者数の推移",
+      "rankingKeys": [
+        "library-lending-books",
+        "library-registered-users"
+      ],
+      "defaultCheckedKeys": [
+        "library-lending-books",
+        "library-registered-users"
+      ]
+    },
+    {
+      "key": "civic-engagement-and-elections-1",
+      "title": "都道府県知事選挙投票率",
+      "rankingKeys": [
+        "voter-turnout-governor"
+      ],
+      "defaultCheckedKeys": [
+        "voter-turnout-governor"
+      ]
+    },
+    {
+      "key": "civic-engagement-and-elections-2",
+      "title": "市区町村長選と県議選の投票率の推移",
+      "rankingKeys": [
+        "voter-turnout-mayor",
+        "voter-turnout-pref-assembly"
+      ],
+      "defaultCheckedKeys": [
+        "voter-turnout-mayor",
+        "voter-turnout-pref-assembly"
+      ]
+    },
     {
       "key": "volunteer-and-community-activities-1",
       "title": "ボランティア年間行動者率（10歳以上）",
@@ -67,52 +167,34 @@
       "defaultCheckedKeys": [
         "community-building-volunteer-participation-rate-10plus"
       ]
-    },
-    {
-      "key": "civic-engagement-and-elections-1",
-      "title": "都道府県知事選挙投票率",
-      "rankingKeys": [
-        "voter-turnout-governor"
-      ],
-      "defaultCheckedKeys": [
-        "voter-turnout-governor"
-      ]
-    },
-    {
-      "key": "library-and-cultural-participation-1",
-      "title": "図書館登録者数",
-      "rankingKeys": [
-        "library-registered-users"
-      ],
-      "defaultCheckedKeys": [
-        "library-registered-users"
-      ]
     }
   ],
   "sections": [
     {
-      "key": "volunteer-and-community-activities",
-      "title": "地域でのボランティアや社会貢献活動は活発に行われているか",
-      "concern": "助け合いや地域奉仕活動への住民参加が減っていないか心配です。",
+      "key": "library-and-cultural-participation",
+      "title": "身近な図書館は、県によってどれだけそろい、使われているか",
+      "concern": "地域の図書館の数・蔵書・利用状況が県ごとにどれだけ違うか気になります。",
       "metricGroupKeys": [
-        "volunteer-and-community-activities-1",
-        "volunteer-and-community-activities-2"
+        "library-and-cultural-participation-1",
+        "library-and-cultural-participation-2"
       ]
     },
     {
       "key": "civic-engagement-and-elections",
-      "title": "地域の政治や自治に対する住民の関心は高いか",
-      "concern": "地方選挙の投票率低下など住民の政治や行政への関心薄れが懸念されます。",
+      "title": "知事選・市長選の投票率は、県によってどれだけ違うか",
+      "concern": "地方選挙の投票率低下など、住民の政治や行政への関心の薄れが心配です。",
       "metricGroupKeys": [
-        "civic-engagement-and-elections-1"
+        "civic-engagement-and-elections-1",
+        "civic-engagement-and-elections-2"
       ]
     },
     {
-      "key": "library-and-cultural-participation",
-      "title": "身近な生涯学習や文化施設の利用は進んでいるか",
-      "concern": "地域の図書館など生涯学習や読書環境の利用状況が十分か気になります。",
+      "key": "volunteer-and-community-activities",
+      "title": "ボランティアやまちづくりに参加する人は、県によってどれだけ違うか",
+      "concern": "助け合いや地域の奉仕活動への住民参加が減っていないか心配です。",
       "metricGroupKeys": [
-        "library-and-cultural-participation-1"
+        "volunteer-and-community-activities-1",
+        "volunteer-and-community-activities-2"
       ]
     }
   ],

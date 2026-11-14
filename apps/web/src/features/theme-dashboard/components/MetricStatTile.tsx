@@ -1,8 +1,6 @@
 import type { ReactNode } from 'react';
 
 import { cn } from '@stats47/components';
-import { formatUnitForDisplay } from "@stats47/data-configs/unit";
-
 
 import { RankBadge, rankToneByPosition } from '@/components/atoms/RankBadge';
 import { SourcesSheet } from '@/components/charts/SourcesSheet';
@@ -10,7 +8,7 @@ import { StatTile } from '@/components/surface';
 
 import { metricSourceGroups } from '../lib/metric-source-groups';
 
-import { formatMetricValue, type MetricKpi } from './metric-kpi';
+import { formatMetricValue, metricDisplayUnit, type MetricKpi } from './metric-kpi';
 
 
 /**
@@ -62,7 +60,7 @@ export function MetricStatTile({
     !selectedPrefectureCode && shown === null ? '全国の値は未収録' : null,
     // 問いの型「全国平均との差」: 県の値の横に全国の値を置く (全国行が無い指標は出さない。2026-10-31)
     selectedPrefectureCode && metric.value !== null && metric.nationalValue !== undefined
-      ? `全国 ${formatMetricValue(metric.nationalValue, metric.precision)}`
+      ? `全国 ${formatMetricValue(metric.nationalValue, metric.precision, metric.displayScale)}`
       : null,
   ]
     .filter(Boolean)
@@ -85,8 +83,8 @@ export function MetricStatTile({
           label
         )
       }
-      value={shown !== null ? formatMetricValue(shown, metric.precision) : null}
-      unit={metric.unit ? formatUnitForDisplay(metric.unit) : undefined}
+      value={shown !== null ? formatMetricValue(shown, metric.precision, metric.displayScale) : null}
+      unit={metricDisplayUnit(metric) || undefined}
       badge={
         selectedPrefectureCode && metric.rank !== null ? (
           <RankBadge rank={metric.rank} tone={rankToneByPosition(metric.rank, metric.total)} />

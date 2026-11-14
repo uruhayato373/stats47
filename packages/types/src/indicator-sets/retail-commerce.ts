@@ -29,6 +29,26 @@ export const RETAIL_COMMERCE_SET: IndicatorSet = {
       "rankingKey": "retail-employees",
       "shortLabel": "小売業従業者数",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "department-supermarket-count-per-100k",
+      "shortLabel": "百貨店・総合スーパー数(人口10万人あたり)",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "convenience-store-count-commercial",
+      "shortLabel": "コンビニ店舗数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "annual-sales-amount-per-establishment",
+      "shortLabel": "商業の1事業所あたり年間商品販売額",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "annual-sales-amount-per-employee",
+      "shortLabel": "商業の従業者1人あたり年間商品販売額",
+      "role": "secondary"
     }
   ],
   "keywords": [

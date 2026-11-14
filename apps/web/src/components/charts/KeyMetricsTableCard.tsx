@@ -46,8 +46,10 @@ export function KeyMetricsTableCard({
           hideHeader
           ariaLabel={typeof title === "string" ? title : undefined}
           columns={[
-            { key: "label", header: "項目", rowHeader: true },
-            { key: "value", header: "値", className: "font-bold text-foreground" },
+            // 数値タイルの格子の 1 マス (スマホ幅で約 180px) に収める: 左右の余白を詰め、項目名は折り返さない
+            // (「標準財政規模」が 3 文字ずつ 2 行に割れていた。2026-11-14)
+            { key: "label", header: "項目", rowHeader: true, className: "px-1! whitespace-nowrap!" },
+            { key: "value", header: "値", className: "px-1! font-bold text-foreground" },
           ]}
           rows={rows.map((row, index) => ({
             key: String(index),

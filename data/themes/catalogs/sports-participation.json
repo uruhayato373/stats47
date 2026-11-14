@@ -307,6 +307,48 @@
       "rankingKey": "junior-high-club-per100-volleyball",
       "shortLabel": "中学部活動部員数（バレーボール・100人当たり）",
       "role": "context"
+    },
+    {
+      "rankingKey": "golf-course-public",
+      "shortLabel": "ゴルフ場数（公共）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「ゴルフ場 数 ランキング」「ゴルフ場が多い都道府県」(2026-W45 の 28 日で合計約 150 回表示) に答える施設の指標で、ランキング側で人口 10 万人あたり・面積 100km2 あたりに切り替えられる。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "private-sports-facility",
+      "shortLabel": "民間体育施設数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「体育・スポーツ施設は都道府県でどれだけ整備されているか」(「体育・スポーツ施設現況調査」20 回) に対し、いまの公共施設中心の章に欠けている民間 (ジムなど) の供給を足す。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "sports-park-count-per-100km2",
+      "shortLabel": "運動公園数（可住地面積100km²当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "運動公園数の実数 (context) は総量だけなので、面積あたりの登録済み指標を足して「公園が多い都道府県」「運動できる場所は身近にあるか」の問いに県の比較で答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
     }
   ],
   "charts": [],
@@ -353,16 +395,28 @@
     },
     {
       "key": "sports-facilities-environment-2",
-      "title": "運動公園数",
+      "title": "運動公園数（可住地面積100km²当たり）",
       "rankingKeys": [
-        "sports-park-count"
+        "sports-park-count-per-100km2"
       ],
       "defaultCheckedKeys": [
-        "sports-park-count"
+        "sports-park-count-per-100km2"
       ]
     },
     {
       "key": "sports-facilities-environment-3",
+      "title": "ゴルフ場と民間体育施設は増えたか減ったか",
+      "rankingKeys": [
+        "golf-course-public",
+        "private-sports-facility"
+      ],
+      "defaultCheckedKeys": [
+        "golf-course-public",
+        "private-sports-facility"
+      ]
+    },
+    {
+      "key": "sports-facilities-environment-4",
       "title": "小学校体育館設置箇所数",
       "rankingKeys": [
         "elementary-school-gymnasium-count"
@@ -372,7 +426,7 @@
       ]
     },
     {
-      "key": "sports-facilities-environment-4",
+      "key": "sports-facilities-environment-5",
       "title": "中学校体育館設置箇所数",
       "rankingKeys": [
         "junior-high-school-gymnasium-count"
@@ -425,8 +479,8 @@
   "sections": [
     {
       "key": "resident-exercise-habits",
-      "title": "住民の運動習慣や日常の歩数は十分か",
-      "concern": "日頃から身体を動かす習慣や歩数が健康的に維持されているか知りたい。",
+      "title": "運動やスポーツをしている人は多いか。ゴルフなど種目別や歩数はどうか",
+      "concern": "自分の県でスポーツや運動がどれだけ行われているか、日頃の歩数も含めて知りたい。",
       "metricGroupKeys": [
         "resident-exercise-habits-1",
         "resident-exercise-habits-2",
@@ -438,13 +492,14 @@
     },
     {
       "key": "sports-facilities-environment",
-      "title": "地域内で利用できるスポーツ施設は充実しているか",
-      "concern": "運動やスポーツ活動を行うための地域施設や公園が整っているか確かめたい。",
+      "title": "地域内で利用できるスポーツ施設は充実しているか。ゴルフ場や運動公園はどうか",
+      "concern": "運動やスポーツをするための公共・民間の施設、ゴルフ場、運動公園が身近にあるか確かめたい。",
       "metricGroupKeys": [
         "sports-facilities-environment-1",
         "sports-facilities-environment-2",
         "sports-facilities-environment-3",
-        "sports-facilities-environment-4"
+        "sports-facilities-environment-4",
+        "sports-facilities-environment-5"
       ]
     },
     {

@@ -124,20 +124,133 @@
       "rankingKey": "primary-school-commute-time-weekday",
       "shortLabel": "小学生の通勤・通学の総平均時間",
       "role": "context"
+    },
+    {
+      "rankingKey": "monthly-average-actual-working-hours-male",
+      "shortLabel": "月間平均実労働時間（男性）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「労働時間ランキング」「仕事満足度ランキング 労働時間」で来る読者の、労働時間が長い県はどこかという問いに直接答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "monthly-average-actual-working-hours-female",
+      "shortLabel": "女性の月間実労働時間",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "男性の月間実労働時間と男女で並べ、労働時間の長い県が男女で同じかという問いに答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "employees-weekly-hours-60plus-rate",
+      "shortLabel": "週60時間以上働く雇用者割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0004008493",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「労働時間 平均」の問いに対し、平均では見えない長時間労働者の割合(率)で県を比べられる。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "relaxation-avg-time-female",
+      "shortLabel": "女性の休養・くつろぎ時間",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「余暇時間 都道府県別」の問いに対し、現カタログに無い自由に使える時間(休養・くつろぎ)を示す。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "relaxation-avg-time-male",
+      "shortLabel": "男性の休養・くつろぎ時間",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "女性の休養・くつろぎ時間と男女で並べ、自由な時間に男女差があるかという問いに答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
     }
   ],
   "charts": [],
   "metricGroups": [
     {
       "key": "sleep-duration-1",
-      "title": "男女の睡眠時間",
+      "title": "女性の睡眠時間",
       "rankingKeys": [
-        "sleep-avg-time-male",
         "sleep-avg-time-female"
       ],
       "defaultCheckedKeys": [
-        "sleep-avg-time-male",
         "sleep-avg-time-female"
+      ]
+    },
+    {
+      "key": "sleep-duration-2",
+      "title": "男性の睡眠時間",
+      "rankingKeys": [
+        "sleep-avg-time-male"
+      ],
+      "defaultCheckedKeys": [
+        "sleep-avg-time-male"
+      ]
+    },
+    {
+      "key": "work-time-and-balance-1",
+      "title": "男女の月間実労働時間",
+      "rankingKeys": [
+        "monthly-average-actual-working-hours-male",
+        "monthly-average-actual-working-hours-female"
+      ],
+      "defaultCheckedKeys": [
+        "monthly-average-actual-working-hours-male",
+        "monthly-average-actual-working-hours-female"
+      ],
+      "view": "sex"
+    },
+    {
+      "key": "work-time-and-balance-2",
+      "title": "週60時間以上働く雇用者割合",
+      "rankingKeys": [
+        "employees-weekly-hours-60plus-rate"
+      ],
+      "defaultCheckedKeys": [
+        "employees-weekly-hours-60plus-rate"
+      ]
+    },
+    {
+      "key": "work-time-and-balance-3",
+      "title": "有業者の一日の仕事時間(男女)",
+      "rankingKeys": [
+        "work-avg-time-employed-male",
+        "work-avg-time-employed-female"
+      ],
+      "defaultCheckedKeys": [
+        "work-avg-time-employed-male",
+        "work-avg-time-employed-female"
       ],
       "view": "sex"
     },
@@ -155,28 +268,21 @@
       "view": "sex"
     },
     {
-      "key": "work-time-and-balance-1",
-      "title": "男性有業者の仕事時間",
-      "rankingKeys": [
-        "work-avg-time-employed-male"
-      ],
-      "defaultCheckedKeys": [
-        "work-avg-time-employed-male"
-      ]
-    },
-    {
-      "key": "work-time-and-balance-2",
-      "title": "女性有業者の仕事時間",
-      "rankingKeys": [
-        "work-avg-time-employed-female"
-      ],
-      "defaultCheckedKeys": [
-        "work-avg-time-employed-female"
-      ]
-    },
-    {
       "key": "leisure-and-recreation-1",
-      "title": "有業者男女の趣味・娯楽時間",
+      "title": "男女の休養・くつろぎ時間",
+      "rankingKeys": [
+        "relaxation-avg-time-male",
+        "relaxation-avg-time-female"
+      ],
+      "defaultCheckedKeys": [
+        "relaxation-avg-time-male",
+        "relaxation-avg-time-female"
+      ],
+      "view": "sex"
+    },
+    {
+      "key": "leisure-and-recreation-2",
+      "title": "有業者の趣味・娯楽時間(男女)",
       "rankingKeys": [
         "hobby-leisure-avg-time-employed-male",
         "hobby-leisure-avg-time-employed-female"
@@ -191,10 +297,21 @@
   "sections": [
     {
       "key": "sleep-duration",
-      "title": "睡眠時間は十分に確保できているか",
+      "title": "自分の県の睡眠時間は全国や他県と比べて長いか短いか",
       "concern": "仕事や家事に追われて睡眠不足になり健康を損なわないか心配です。",
       "metricGroupKeys": [
-        "sleep-duration-1"
+        "sleep-duration-1",
+        "sleep-duration-2"
+      ]
+    },
+    {
+      "key": "work-time-and-balance",
+      "title": "労働時間が長い県はどこか",
+      "concern": "長時間労働によって家族と過ごす時間や休養が削られていないか心配です。",
+      "metricGroupKeys": [
+        "work-time-and-balance-1",
+        "work-time-and-balance-2",
+        "work-time-and-balance-3"
       ]
     },
     {
@@ -206,20 +323,12 @@
       ]
     },
     {
-      "key": "work-time-and-balance",
-      "title": "仕事による生活時間の圧迫は解消されているか",
-      "concern": "長時間労働によって家族と過ごす時間や休養が削られていないか心配です。",
-      "metricGroupKeys": [
-        "work-time-and-balance-1",
-        "work-time-and-balance-2"
-      ]
-    },
-    {
       "key": "leisure-and-recreation",
-      "title": "趣味やリフレッシュの時間は取れているか",
+      "title": "余暇・自由に使える時間が多い県はどこか",
       "concern": "忙しい日々の中で自分のための趣味やリフレッシュの時間が持てないことが不安です。",
       "metricGroupKeys": [
-        "leisure-and-recreation-1"
+        "leisure-and-recreation-1",
+        "leisure-and-recreation-2"
       ]
     }
   ],

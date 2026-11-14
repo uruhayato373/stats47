@@ -38,7 +38,7 @@
     {
       "rankingKey": "artificial-forest-area",
       "shortLabel": "人工造林面積",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "令和6年度 森林・林業白書 第I部第1章第2節「森林整備の動向」（林野庁）",
         "sourceUrl": "https://www.rinya.maff.go.jp/j/kikaku/hakusyo/r6hakusyo_h/all/chap1_2_1.html",
@@ -244,46 +244,6 @@
   "charts": [],
   "metricGroups": [
     {
-      "key": "forest-resources-and-roads-1",
-      "title": "林道延長",
-      "rankingKeys": [
-        "forest-road-length"
-      ],
-      "defaultCheckedKeys": [
-        "forest-road-length"
-      ]
-    },
-    {
-      "key": "forest-resources-and-roads-2",
-      "title": "森林面積",
-      "rankingKeys": [
-        "woodland-area"
-      ],
-      "defaultCheckedKeys": [
-        "woodland-area"
-      ]
-    },
-    {
-      "key": "forest-resources-and-roads-3",
-      "title": "林野面積割合",
-      "rankingKeys": [
-        "forest-area-ratio"
-      ],
-      "defaultCheckedKeys": [
-        "forest-area-ratio"
-      ]
-    },
-    {
-      "key": "forest-resources-and-roads-4",
-      "title": "人工造林面積",
-      "rankingKeys": [
-        "artificial-forest-area"
-      ],
-      "defaultCheckedKeys": [
-        "artificial-forest-area"
-      ]
-    },
-    {
       "key": "timber-production-and-output-1",
       "title": "林業産出額（2024年確報）",
       "rankingKeys": [
@@ -305,26 +265,6 @@
     },
     {
       "key": "timber-production-and-output-3",
-      "title": "すぎの素材生産量",
-      "rankingKeys": [
-        "roundwood-sugi-production-volume"
-      ],
-      "defaultCheckedKeys": [
-        "roundwood-sugi-production-volume"
-      ]
-    },
-    {
-      "key": "timber-production-and-output-4",
-      "title": "ひのきの素材生産量",
-      "rankingKeys": [
-        "roundwood-hinoki-production-volume"
-      ],
-      "defaultCheckedKeys": [
-        "roundwood-hinoki-production-volume"
-      ]
-    },
-    {
-      "key": "timber-production-and-output-5",
       "title": "木材生産産出額（2024年確報）",
       "rankingKeys": [
         "forestry-timber-output-value"
@@ -334,13 +274,63 @@
       ]
     },
     {
-      "key": "timber-production-and-output-6",
+      "key": "timber-production-and-output-4",
       "title": "栽培きのこ類産出額（2024年確報）",
       "rankingKeys": [
         "forestry-mushroom-output-value"
       ],
       "defaultCheckedKeys": [
         "forestry-mushroom-output-value"
+      ]
+    },
+    {
+      "key": "timber-production-and-output-5",
+      "title": "すぎの素材生産量",
+      "rankingKeys": [
+        "roundwood-sugi-production-volume"
+      ],
+      "defaultCheckedKeys": [
+        "roundwood-sugi-production-volume"
+      ]
+    },
+    {
+      "key": "timber-production-and-output-6",
+      "title": "ひのきの素材生産量",
+      "rankingKeys": [
+        "roundwood-hinoki-production-volume"
+      ],
+      "defaultCheckedKeys": [
+        "roundwood-hinoki-production-volume"
+      ]
+    },
+    {
+      "key": "forest-resources-and-roads-1",
+      "title": "森林面積",
+      "rankingKeys": [
+        "woodland-area"
+      ],
+      "defaultCheckedKeys": [
+        "woodland-area"
+      ]
+    },
+    {
+      "key": "forest-resources-and-roads-2",
+      "title": "林野面積割合",
+      "rankingKeys": [
+        "forest-area-ratio"
+      ],
+      "defaultCheckedKeys": [
+        "forest-area-ratio"
+      ]
+    },
+    {
+      "key": "forest-resources-and-roads-3",
+      "title": "林道延長",
+      "rankingKeys": [
+        "forest-road-length"
+      ],
+      "defaultCheckedKeys": [
+        "forest-road-length"
       ]
     },
     {
@@ -382,34 +372,13 @@
       "defaultCheckedKeys": [
         "forestry-hired-workers"
       ]
-    },
-    {
-      "key": "forestry-workforce-and-entities-3",
-      "title": "林業経営体の内部労働者数（2025年調査）",
-      "rankingKeys": [
-        "forestry-internal-workers"
-      ],
-      "defaultCheckedKeys": [
-        "forestry-internal-workers"
-      ]
     }
   ],
   "sections": [
     {
-      "key": "forest-resources-and-roads",
-      "title": "豊かな森林資源や林業を支える路網は確保されているか",
-      "concern": "森林の適切な維持管理や林業経営に必要な林道整備が進んでいるか気になります。",
-      "metricGroupKeys": [
-        "forest-resources-and-roads-1",
-        "forest-resources-and-roads-2",
-        "forest-resources-and-roads-3",
-        "forest-resources-and-roads-4"
-      ]
-    },
-    {
       "key": "timber-production-and-output",
-      "title": "素材生産量や林業産出額の規模と内訳はどうなっているか",
-      "concern": "地域における木材生産や特用林産物（きのこ類）の産出規模が気になります。",
+      "title": "林業が盛んな県はどこか(産出額・素材生産量)",
+      "concern": "自分の県が林業でどのくらいの規模なのか、産出額や素材生産量の全国での位置を知りたい。",
       "metricGroupKeys": [
         "timber-production-and-output-1",
         "timber-production-and-output-2",
@@ -420,9 +389,19 @@
       ]
     },
     {
+      "key": "forest-resources-and-roads",
+      "title": "自分の県の森林面積や林道は全国でどのくらいか",
+      "concern": "県の森林面積や林野面積割合、林業を支える林道の整備状況を全国と比べたい。",
+      "metricGroupKeys": [
+        "forest-resources-and-roads-1",
+        "forest-resources-and-roads-2",
+        "forest-resources-and-roads-3"
+      ]
+    },
+    {
       "key": "lumber-processing-industry",
-      "title": "伐採された木材を加工・出荷する製材産業の供給能力はあるか",
-      "concern": "地元産木材の活用や木材加工・製材品の供給体制が整っているか不安です。",
+      "title": "伐採された木材を加工・出荷する製材の体制はどうなっているか",
+      "concern": "地元産木材を加工する製材工場や製材品の出荷が県内でどの程度あるのか知りたい。",
       "metricGroupKeys": [
         "lumber-processing-industry-1",
         "lumber-processing-industry-2"
@@ -430,12 +409,11 @@
     },
     {
       "key": "forestry-workforce-and-entities",
-      "title": "林業を担う経営体や労働力は維持されているか",
-      "concern": "人手不足や高齢化が進む中で林業経営体や現場の労働者が確保されているか心配です。",
+      "title": "林業を担う経営体や雇用者はどのくらいいるか",
+      "concern": "林業経営体の数や、そこで働く雇用者の規模が県ごとにどう違うのか知りたい。",
       "metricGroupKeys": [
         "forestry-workforce-and-entities-1",
-        "forestry-workforce-and-entities-2",
-        "forestry-workforce-and-entities-3"
+        "forestry-workforce-and-entities-2"
       ]
     }
   ],

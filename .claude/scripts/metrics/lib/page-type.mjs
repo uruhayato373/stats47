@@ -38,7 +38,7 @@ function loadThemeRouteMatchers() {
         params.push(name);
         return "([^/]+)";
       });
-      return { regex: new RegExp(`^${source}/?$`), params, slugs: themeSlugs };
+      return { regex: new RegExp(`^${source}/?$`), params, slugs: themeSlugs, pattern: r.pattern };
     });
   // テーマへ 301 した旧 URL (日本全体のテーマ /japan/<テーマ> など。2026-11-12 に全国のテーマへまとめた) もテーマに数える。
   // 転送の前の週の GA4・GSC の記録にはこの URL が残るので、前後の週でテーマの数が切れないようにする。正本は転送表
@@ -57,6 +57,27 @@ function isThemePath(path) {
     const slug = m[params.indexOf("themeSlug") + 1];
     return slug !== undefined && slugs.has(decodeURIComponent(slug));
   });
+}
+
+/**
+ * テーマのページの URL から、テーマの名前とルートの形を返す。テーマのページでなければ null。
+ * テーマは /themes/<テーマ> のほか /areas/<県>/<テーマ> などでも同じ内容を出すので、テーマごとの実績は
+ * この関数で全ルートをまとめて数える (全国版だけを数えると、検索から入る県別のページが抜ける。2026-11-14)。
+ * 転送前の旧 URL はテーマの名前を持たないので対象外。
+ * @param {string} rawPath URL か path (host・query・末尾の / は無視する)
+ * @returns {{ themeSlug: string, route: string } | null}
+ */
+export function themeOfPath(rawPath) {
+  if (typeof rawPath !== "string") return null;
+  const path = rawPath.replace(/^https?:\/\/[^/]+/, "").split(/[?#]/)[0].replace(/\/$/, "");
+  themeRouteMatchers ??= loadThemeRouteMatchers();
+  for (const { regex, params, slugs, pattern } of themeRouteMatchers) {
+    if (!params) continue;
+    const m = path.match(regex);
+    const slug = m ? m[params.indexOf("themeSlug") + 1] : undefined;
+    if (slug !== undefined && slugs.has(decodeURIComponent(slug))) return { themeSlug: decodeURIComponent(slug), route: pattern };
+  }
+  return null;
 }
 
 export const PAGE_TYPES = Object.freeze([

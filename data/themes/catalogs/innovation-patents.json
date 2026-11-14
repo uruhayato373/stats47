@@ -80,14 +80,12 @@
   "metricGroups": [
     {
       "key": "patent-creation-and-inventors-1",
-      "title": "特許出願件数と発明者数の推移",
+      "title": "特許出願件数（筆頭出願人住所）",
       "rankingKeys": [
-        "patent-application-count",
-        "patent-inventor-count"
+        "patent-application-count"
       ],
       "defaultCheckedKeys": [
-        "patent-application-count",
-        "patent-inventor-count"
+        "patent-application-count"
       ]
     },
     {
@@ -98,6 +96,16 @@
       ],
       "defaultCheckedKeys": [
         "patent-registration-count"
+      ]
+    },
+    {
+      "key": "patent-creation-and-inventors-3",
+      "title": "出願に記載された延べ発明者数",
+      "rankingKeys": [
+        "patent-inventor-count"
+      ],
+      "defaultCheckedKeys": [
+        "patent-inventor-count"
       ]
     },
     {
@@ -128,16 +136,17 @@
   "sections": [
     {
       "key": "patent-creation-and-inventors",
-      "title": "地域での技術開発や特許出願は活発に行われているか",
+      "title": "自分の県の特許出願・登録・発明者数は、どれだけあるか",
       "concern": "地元企業の技術開発力やイノベーション創出の停滞、研究開発人材の不足が懸念されます。",
       "metricGroupKeys": [
         "patent-creation-and-inventors-1",
-        "patent-creation-and-inventors-2"
+        "patent-creation-and-inventors-2",
+        "patent-creation-and-inventors-3"
       ]
     },
     {
       "key": "design-rights-and-innovation",
-      "title": "製品デザインや意匠の開発・権利化は進んでいるか",
+      "title": "製品デザイン（意匠）の出願と登録は増えているか",
       "concern": "独自のデザインやブランドデザインによる製品の差別化・権利保護が十分か気になります。",
       "metricGroupKeys": [
         "design-rights-and-innovation-1"
@@ -145,7 +154,7 @@
     },
     {
       "key": "trademark-creation-and-branding",
-      "title": "地域ブランドや新規事業の商標登録・権利保護は盛んか",
+      "title": "商標の出願と登録は増えているか",
       "concern": "地域特産品や新規サービスのブランド化・商標権確保の取り組みが気になります。",
       "metricGroupKeys": [
         "trademark-creation-and-branding-1"

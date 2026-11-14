@@ -19,6 +19,11 @@ export const TSUNAMI_EXPOSURE_SET: IndicatorSet = {
       "rankingKey": "tsunami-evacuation-tower-count",
       "shortLabel": "津波避難タワー等整備数",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "individual-evacuation-plan-coverage-rate",
+      "shortLabel": "個別避難計画の作成率",
+      "role": "secondary"
     }
   ],
   "keywords": [

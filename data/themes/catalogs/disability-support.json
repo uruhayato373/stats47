@@ -54,6 +54,34 @@
         "surveyedAt": "2026-09-09",
         "rationale": "障害者就職率（ハローワーク）を都道府県別の実値として比較する。"
       }
+    },
+    {
+      "rankingKey": "treatment-rate-mental-disorder-outpatient",
+      "shortLabel": "精神及び行動の障害の受療率（外来・人口10万対）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0004026105",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「精神疾患 都道府県 ランキング」「熊本 精神病 多い」のように、精神の障害で医療にかかる人の多さを県ごとに知りたい読者の問いに、人口10万対の割合で答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "treatment-rate-mental-disorder-inpatient",
+      "shortLabel": "精神及び行動の障害の受療率（入院・人口10万対）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0004026105",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「平均在院日数 精神科」「日本 精神科病院ランキング」のように、精神科の入院の多さを知りたい読者の問いに、人口10万対の割合で答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
     }
   ],
   "charts": [],
@@ -69,6 +97,26 @@
       ]
     },
     {
+      "key": "disability-prevalence-and-certificates-2",
+      "title": "精神及び行動の障害の受療率（外来・人口10万対）",
+      "rankingKeys": [
+        "treatment-rate-mental-disorder-outpatient"
+      ],
+      "defaultCheckedKeys": [
+        "treatment-rate-mental-disorder-outpatient"
+      ]
+    },
+    {
+      "key": "disability-prevalence-and-certificates-3",
+      "title": "精神及び行動の障害の受療率（入院・人口10万対）",
+      "rankingKeys": [
+        "treatment-rate-mental-disorder-inpatient"
+      ],
+      "defaultCheckedKeys": [
+        "treatment-rate-mental-disorder-inpatient"
+      ]
+    },
+    {
       "key": "disability-employment-and-work-1",
       "title": "障害者就職率（ハローワーク）",
       "rankingKeys": [
@@ -79,8 +127,8 @@
       ]
     },
     {
-      "key": "facility-support-and-capacity-1",
-      "title": "知的障害者援護施設数・定員数・在所者数の推移",
+      "key": "disability-employment-and-work-2",
+      "title": "知的障害者援護施設の数・定員・在所者の推移（人口あたり）",
       "rankingKeys": [
         "intellectual-disability-support-facility-count-per-1m",
         "intellectual-disability-support-facility-capacity-per-100k",
@@ -96,26 +144,21 @@
   "sections": [
     {
       "key": "disability-prevalence-and-certificates",
-      "title": "地域で障害者手帳の交付を受ける人の割合はどのように推移しているか",
-      "concern": "障害のある家族や自身が地域社会で適切な支援や手帳交付を受けられているか気になります。",
+      "title": "身体障害者手帳の交付や、精神の障害での受診は、人口に対してどれくらいか",
+      "concern": "障害のある家族や自身の暮らす地域で、手帳の交付や精神科の受診がどれくらいの割合なのか知りたい。",
       "metricGroupKeys": [
-        "disability-prevalence-and-certificates-1"
+        "disability-prevalence-and-certificates-1",
+        "disability-prevalence-and-certificates-2",
+        "disability-prevalence-and-certificates-3"
       ]
     },
     {
       "key": "disability-employment-and-work",
-      "title": "障害のある人の就職や働く機会は確保されているか",
-      "concern": "障害があっても希望する仕事に就き自立した社会参加ができるか不安です。",
+      "title": "障害のある人の就職や、知的障害者の支援施設はどう推移しているか",
+      "concern": "障害があっても働けるか、必要なとき知的障害者の施設や定員が確保されているか不安だ。",
       "metricGroupKeys": [
-        "disability-employment-and-work-1"
-      ]
-    },
-    {
-      "key": "facility-support-and-capacity",
-      "title": "知的障害者の支援施設や受け皿は十分にあるか",
-      "concern": "必要としたときに知的障害者援護施設や定員・入所枠が確保されているか心配です。",
-      "metricGroupKeys": [
-        "facility-support-and-capacity-1"
+        "disability-employment-and-work-1",
+        "disability-employment-and-work-2"
       ]
     }
   ],

@@ -34,6 +34,22 @@ describe('buildSectionAnswer', () => {
     expect(answer).toBe('兵庫県の食料費は1,094,070円（2025年・全国26位）。全国（1,138,736円）より4%少ない。');
   });
 
+  it('表示単位に寄せる指標は、県の値も全国の値も同じ単位で書く (差の割合は元の値で計算する)', () => {
+    // 「141,212,322,090.16円」のように桁の多い値は、数字の途中で折り返して読めない (2026-11-14)
+    const answer = buildSectionAnswer({
+      metrics: [kpi({
+        title: '歳出決算総額', unit: '千円', value: 8_000_000_000, nationalValue: 60_000_000_000, precision: 0,
+        displayScale: { unit: '億円', factor: 0.00001, decimals: 0 },
+      })],
+      labels: {},
+      areaName: '東京都',
+      isPrefecture: true,
+    });
+    expect(answer).toContain('東京都の歳出決算総額は80,000億円（2025年・全国26位）');
+    expect(answer).toContain('全国（600,000億円）');
+    expect(answer).not.toContain('千円');
+  });
+
   it('章の中で全国順位が 5 位以内の指標を、向きの言葉を付けずに挙げる', () => {
     const answer = buildSectionAnswer({
       metrics: [kpi({}), kpi({ metricKey: 'bread', title: '食パンへの支出', rank: 1 }), kpi({ metricKey: 'rice', title: '米', rank: 22 })],

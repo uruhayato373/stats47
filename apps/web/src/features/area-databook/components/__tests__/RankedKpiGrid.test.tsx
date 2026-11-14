@@ -31,7 +31,9 @@ describe("RankedKpiGrid", () => {
     expect(html).not.toContain("1,157,000");
     expect(html).toContain("31位");
     expect(html.match(/border-card-outline/g)).toHaveLength(1);
-    expect(html).toContain("grid-cols-1");
+    // スマホの幅でも 2 列 (2026-11-14)
+    expect(html).toContain("grid-cols-2");
+    expect(html).not.toContain("grid-cols-1");
     // 1 枚でも 4 列の 1 マスの幅にそろえる (2026-10-29「幅を 4 列にそろえる」)
     expect(html).toContain("@md:grid-cols-4");
   });
@@ -103,7 +105,7 @@ describe("RankedKpiGrid", () => {
     expect(html).not.toContain("—");
   });
 
-  // 2026-10-29 数値タイルの格子 (StatTileGrid): 列の数は本文の幅で 1 → 2 → 4 列 (3 列は使わない)。最終行の空きマスは
+  // 数値タイルの格子 (StatTileGrid): 列の数は本文の幅で 2 → 4 列 (3 列は使わない。スマホの幅でも 2 列。2026-11-14)。最終行の空きマスは
   // 幅ごとに白いセルで埋める (線の格子は空きマスが灰色に見えるため)。
   it("指標の数だけ数値タイルを数値タイルの格子に並べ、最終行の空きマスは幅ごとに白いセルで埋める", () => {
     const keys = ["a", "b", "c", "d", "e"];
@@ -120,10 +122,10 @@ describe("RankedKpiGrid", () => {
     // 5 枚: 2 列では空きマス 1、4 列では 3。2 列の幅では 1 つだけ、4 列の幅では 3 つ見せる
     const fillers = [...html.matchAll(/<div aria-hidden="true" data-cell="flush" class="([^"]*)"/g)].map((m) => m[1]);
     expect(fillers).toHaveLength(3);
-    expect(fillers[0].split(" ")).toEqual(expect.arrayContaining(["hidden", "@sm:block", "@md:block"]));
+    expect(fillers[0].split(" ")).toEqual(expect.arrayContaining(["block", "@md:block"]));
+    expect(fillers[0].split(" ")).not.toContain("hidden");
     for (const className of fillers.slice(1)) {
       expect(className.split(" ")).toEqual(expect.arrayContaining(["hidden", "@md:block"]));
-      expect(className).not.toContain("@sm:block");
     }
   });
 

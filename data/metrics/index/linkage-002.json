@@ -6473,7 +6473,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:01000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:02000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -6481,7 +6489,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:03000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:04000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -6489,7 +6505,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:05000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:06000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -6497,7 +6521,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:07000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:08000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -6505,7 +6537,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:09000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:10000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -6513,7 +6553,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:11000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:12000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -6521,7 +6569,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:13000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:14000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -6529,7 +6585,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:15000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:16000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -6537,7 +6601,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:17000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:18000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -6545,7 +6617,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:19000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:20000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -6553,7 +6633,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:21000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:22000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -6561,7 +6649,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:23000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:24000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -6569,7 +6665,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:25000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:26000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -6577,7 +6681,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:27000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:28000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -6585,7 +6697,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:29000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:30000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -6593,7 +6713,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:31000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:32000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -6601,7 +6729,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:33000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:34000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -6609,7 +6745,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:35000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:36000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -6617,7 +6761,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:37000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:38000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -6625,7 +6777,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:39000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:40000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -6633,7 +6793,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:41000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:42000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -6641,7 +6809,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:43000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:44000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -6649,11 +6825,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:45000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:46000:occupation-salary",
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:46000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:47000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -6667,10 +6855,15 @@
         {
           "pageId": "theme:occupation-salary",
           "kind": "theme"
+        },
+        {
+          "pageId": "theme:regional-transport",
+          "kind": "theme"
         }
       ],
       "themes": [
-        "occupation-salary"
+        "occupation-salary",
+        "regional-transport"
       ]
     },
     {
@@ -6704,11 +6897,205 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "ranking:bus-fare-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:regional-transport",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "regional-transport"
+      ]
     },
     {
       "metricKey": "bus-operators",
@@ -11052,7 +11439,15 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:01000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -11060,7 +11455,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:03000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:03000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -11068,7 +11471,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:05000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:05000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -11076,7 +11487,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:07000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:07000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -11084,7 +11503,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:09000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:09000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -11092,7 +11519,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:11000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:11000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -11100,7 +11535,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:13000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:13000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -11108,7 +11551,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:15000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:15000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -11116,7 +11567,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:17000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:17000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -11124,7 +11583,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:19000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:19000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -11132,7 +11599,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:21000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:21000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -11140,7 +11615,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:23000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:23000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -11148,7 +11631,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:25000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:25000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -11156,7 +11647,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:27000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:27000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -11164,7 +11663,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:29000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:29000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -11172,7 +11679,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:31000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:31000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -11180,7 +11695,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:33000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:33000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -11188,7 +11711,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:35000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:35000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -11196,7 +11727,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:37000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:37000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -11204,7 +11743,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:39000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:39000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -11212,7 +11759,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:41000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:41000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -11220,7 +11775,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:43000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:43000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -11228,11 +11791,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:45000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:45000:occupation-salary",
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:46000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:46000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -11260,11 +11835,16 @@
           "kind": "ranking"
         },
         {
+          "pageId": "theme:long-term-care",
+          "kind": "theme"
+        },
+        {
           "pageId": "theme:occupation-salary",
           "kind": "theme"
         }
       ],
       "themes": [
+        "long-term-care",
         "occupation-salary"
       ]
     },
@@ -11317,7 +11897,15 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:01000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -11325,7 +11913,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:03000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:03000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -11333,7 +11929,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:05000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:05000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -11341,7 +11945,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:07000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:07000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -11349,7 +11961,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:09000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:09000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -11357,7 +11977,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:11000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:11000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -11365,7 +11993,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:13000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:13000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -11373,7 +12009,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:15000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:15000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -11381,7 +12025,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:17000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:17000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -11389,7 +12041,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:19000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:19000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -11397,7 +12057,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:21000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:21000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -11405,7 +12073,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:23000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:23000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -11413,7 +12089,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:25000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:25000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -11421,7 +12105,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:27000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:27000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -11429,7 +12121,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:29000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:29000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -11437,7 +12137,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:31000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:31000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -11445,7 +12153,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:33000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:33000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -11453,7 +12169,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:35000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:35000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -11461,7 +12185,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:37000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:37000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -11469,7 +12201,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:39000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:39000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -11477,7 +12217,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:41000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:41000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -11485,7 +12233,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:43000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:43000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -11493,11 +12249,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:45000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:45000:occupation-salary",
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:46000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:46000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -11513,11 +12281,16 @@
           "kind": "ranking"
         },
         {
+          "pageId": "theme:construction-industry",
+          "kind": "theme"
+        },
+        {
           "pageId": "theme:occupation-salary",
           "kind": "theme"
         }
       ],
       "themes": [
+        "construction-industry",
         "occupation-salary"
       ]
     },

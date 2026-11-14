@@ -69,6 +69,21 @@ export const CONSTRUCTION_INDUSTRY_SET: IndicatorSet = {
       "rankingKey": "public-construction-contract-amount",
       "shortLabel": "公共工事の請負契約額（施工地別）",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "carpenter-annual-income",
+      "shortLabel": "大工の平均年収",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "electrician-annual-income",
+      "shortLabel": "電気工事従事者の平均年収",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "new-housing-starts",
+      "shortLabel": "着工新設住宅戸数",
+      "role": "secondary"
     }
   ],
   "keywords": [

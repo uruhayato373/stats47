@@ -40,12 +40,36 @@
         "readerQuestion": "津波避難タワー等はどのような型が多く、自分の都道府県にはどの程度整備されているか。",
         "targetReaderOrDecision": "津波避難ビルが少ない地域でタワー等による代替整備状況を確認したい自治体・住民。"
       }
+    },
+    {
+      "rankingKey": "individual-evacuation-plan-coverage-rate",
+      "shortLabel": "個別避難計画の作成率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.bousai.go.jp/taisaku/hisaisyagyousei/pdf/r8chosa1.pdf",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「個別避難計画 作成率」「個別避難計画 策定率」の検索に答え、棟数だけの現カタログに率の指標を足す。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
     }
   ],
   "charts": [],
   "metricGroups": [
     {
       "key": "tsunami-evacuation-building-1",
+      "title": "個別避難計画の作成率",
+      "rankingKeys": [
+        "individual-evacuation-plan-coverage-rate"
+      ],
+      "defaultCheckedKeys": [
+        "individual-evacuation-plan-coverage-rate"
+      ]
+    },
+    {
+      "key": "tsunami-evacuation-building-2",
       "title": "津波避難ビル整備数",
       "rankingKeys": [
         "tsunami-evacuation-building-count"
@@ -55,7 +79,7 @@
       ]
     },
     {
-      "key": "tsunami-evacuation-tower-1",
+      "key": "tsunami-evacuation-building-3",
       "title": "津波避難タワー等整備数",
       "rankingKeys": [
         "tsunami-evacuation-tower-count"
@@ -68,21 +92,15 @@
   "sections": [
     {
       "key": "tsunami-evacuation-building",
-      "title": "津波発生時に駆け込める避難ビルは確保されているか",
-      "concern": "高台がない沿岸地域で緊急時に逃げ込める頑丈な建物があるか不安だ。",
+      "title": "津波に備える避難の体制は県ごとにどれだけ違うか",
+      "concern": "自分の県の津波避難の備えが、他の県と比べてどこまで進んでいるか知りたい。",
       "metricGroupKeys": [
-        "tsunami-evacuation-building-1"
+        "tsunami-evacuation-building-1",
+        "tsunami-evacuation-building-2",
+        "tsunami-evacuation-building-3"
       ],
       "embeddedSectionKeys": [
         "tsunami-scenario-exposure"
-      ]
-    },
-    {
-      "key": "tsunami-evacuation-tower",
-      "title": "高台や高層ビルのない沿岸部で避難タワーの整備は進んでいるか",
-      "concern": "近くに避難できるビルがない地域で津波避難タワーが設置されているか知りたい。",
-      "metricGroupKeys": [
-        "tsunami-evacuation-tower-1"
       ]
     }
   ],

@@ -39,6 +39,21 @@ export const ENVIRONMENTAL_QUALITY_SET: IndicatorSet = {
       "rankingKey": "cod-pollution-load",
       "shortLabel": "COD汚濁負荷量",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "pollution-complaints-received-per-100k",
+      "shortLabel": "公害苦情受付件数(人口10万人当たり)",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "ss-pollution-load",
+      "shortLabel": "SS汚濁負荷量",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "sewerage-coverage-rate",
+      "shortLabel": "下水道処理人口普及率",
+      "role": "secondary"
     }
   ],
   "keywords": [

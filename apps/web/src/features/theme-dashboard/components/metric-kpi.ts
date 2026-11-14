@@ -1,3 +1,4 @@
+import { formatChartValue, formatUnitForDisplay, type MetricDisplayScale } from "@stats47/data-configs/unit";
 import { formatValueWithPrecision } from "@stats47/utils";
 
 import type {NumericDomainPolicy} from "@stats47/types";
@@ -42,6 +43,12 @@ export interface MetricKpi {
   isLoading: boolean;
   /** 全国の値 (公式の全国の系列の最新の値)。無い指標は undefined (47 県の平均を代わりに作らない) */
   nationalValue?: number;
+  /**
+   * 桁の多い値を読める単位に寄せる倍率と単位 (「113,039,852千円」→「1,130億円」)。寄せない指標は undefined。
+   * 決め方はランキングと同じ入口 `resolveMetricDisplayScale` (指標の定義の表示単位、無ければ図の規則)。
+   * value・nationalValue・series は元の単位のまま持ち、表示のときだけ `formatMetricValue` / `metricDisplayUnit` で寄せる
+   */
+  displayScale?: Pick<MetricDisplayScale, "unit" | "factor" | "decimals">;
 }
 
 /**
@@ -57,10 +64,22 @@ export interface MetricKpi {
  * 指標の値の表示 (小数 2 桁まで)。数値タイルと県のページの説明文で同じ書き方にする (2026-10-30。
  * 旧: 説明文だけ丸めず「30.124%」、タイルは「30.12%」だった)
  */
-export function formatMetricValue(value: number, precision?: number): string {
+export function formatMetricValue(
+  value: number,
+  precision?: number,
+  displayScale?: MetricKpi["displayScale"]
+): string {
+  // 表示単位に寄せる指標は、寄せた桁で書く (丸めると 0 になる値は「0.1未満」。県の値を 0 と区別する)
+  if (displayScale) return formatChartValue(value, displayScale);
   // 47 県の値から決めた桁があればそれで揃える。無いと 33.0% が「33%」になり、隣の県の 33.6% と桁がずれる (2026-11-02)
   if (precision !== undefined) return formatValueWithPrecision(value, precision);
   return value.toLocaleString('ja-JP', { maximumFractionDigits: 2 });
+}
+
+/** 値の横に書く単位。表示単位に寄せる指標はその単位 */
+export function metricDisplayUnit(metric: Pick<MetricKpi, "unit" | "displayScale">): string {
+  if (metric.displayScale) return metric.displayScale.unit;
+  return metric.unit ? formatUnitForDisplay(metric.unit) : "";
 }
 
 export type SingleMetricGroup = [MetricKpi];

@@ -1,10 +1,9 @@
 import { hrefFor } from '@stats47/data-configs/content/href';
-import { formatUnitForDisplay } from '@stats47/data-configs/unit';
 
 import Link from '@/components/atoms/SiteLink';
 import type { ValueTableColumn, ValueTableRow } from '@/components/surface';
 
-import { formatMetricValue, type MetricKpi } from '../components/metric-kpi';
+import { formatMetricValue, metricDisplayUnit, type MetricKpi } from '../components/metric-kpi';
 
 function percentDiff(value: number, base: number): string {
   const percent = Math.round((value / base - 1) * 100);
@@ -34,7 +33,7 @@ export function buildMetricTableRows(
   const rows = shown.map((metric): ValueTableRow => {
     const value = metric.value as number;
     const national = metric.nationalValue;
-    const unit = metric.unit ? formatUnitForDisplay(metric.unit) : '';
+    const unit = metricDisplayUnit(metric);
     return {
       key: metric.metricKey,
       cells: [
@@ -43,13 +42,13 @@ export function buildMetricTableRows(
           {metric.yearName && <small className="block">{metric.yearName}</small>}
         </>,
         <>
-          {formatMetricValue(value, metric.precision)}
+          {formatMetricValue(value, metric.precision, metric.displayScale)}
           {unit && <small className="ml-0.5">{unit}</small>}
         </>,
         ...(isPrefecture ? [metric.rank !== null ? `${metric.rank}位` : '—'] : []),
         ...(hasNational
           ? [
-              national !== undefined ? formatMetricValue(national, metric.precision) : '—',
+              national !== undefined ? formatMetricValue(national, metric.precision, metric.displayScale) : '—',
               national ? percentDiff(value, national) : '—',
             ]
           : []),

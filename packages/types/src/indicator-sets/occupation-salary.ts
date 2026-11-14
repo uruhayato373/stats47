@@ -113,12 +113,12 @@ export const OCCUPATION_SALARY_SET: IndicatorSet = {
     {
       "rankingKey": "university-professor-annual-income",
       "shortLabel": "大学教授",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "associate-professor-annual-income",
       "shortLabel": "大学准教授",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "high-school-teacher-annual-income",
@@ -148,7 +148,7 @@ export const OCCUPATION_SALARY_SET: IndicatorSet = {
     {
       "rankingKey": "carpenter-annual-income",
       "shortLabel": "大工",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "electrician-annual-income",
@@ -203,7 +203,7 @@ export const OCCUPATION_SALARY_SET: IndicatorSet = {
     {
       "rankingKey": "dentist-annual-income",
       "shortLabel": "歯科医師",
-      "role": "context"
+      "role": "secondary"
     }
   ],
   "keywords": [

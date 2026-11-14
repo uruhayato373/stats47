@@ -84,6 +84,34 @@
         "surveyedAt": "2026-09-09",
         "rationale": "環境性能割の申請総件数を都道府県別の実値として比較する。"
       }
+    },
+    {
+      "rankingKey": "personnel-expenditure-ratio-pref-finance",
+      "shortLabel": "人件費割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「地方自治体 財政 ランキング」を探す読者に、歳出に占める人件費の割合(総量でなく割合)で行政コストの背景を示す。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "prefectural-general-administration-staff",
+      "shortLabel": "一般行政部門職員数(都道府県)",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「自治体 職員数 ランキング」を探す読者に、DXを進める行政側の人員の規模と推移を示す。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
     }
   ],
   "charts": [],
@@ -129,7 +157,7 @@
       ]
     },
     {
-      "key": "auto-tax-dx-1",
+      "key": "tax-and-recruitment-dx-3",
       "title": "環境性能割申告のオンライン利用率（2023年度）",
       "rankingKeys": [
         "prefectural-auto-environment-tax-online-application-rate"
@@ -139,7 +167,7 @@
       ]
     },
     {
-      "key": "auto-tax-dx-2",
+      "key": "tax-and-recruitment-dx-4",
       "title": "環境性能割のオンライン申請件数",
       "rankingKeys": [
         "prefectural-auto-environment-tax-online-application-count"
@@ -149,13 +177,33 @@
       ]
     },
     {
-      "key": "auto-tax-dx-3",
+      "key": "tax-and-recruitment-dx-5",
       "title": "環境性能割の申請総件数",
       "rankingKeys": [
         "prefectural-auto-environment-tax-application-count"
       ],
       "defaultCheckedKeys": [
         "prefectural-auto-environment-tax-application-count"
+      ]
+    },
+    {
+      "key": "administrative-capacity-1",
+      "title": "人件費割合",
+      "rankingKeys": [
+        "personnel-expenditure-ratio-pref-finance"
+      ],
+      "defaultCheckedKeys": [
+        "personnel-expenditure-ratio-pref-finance"
+      ]
+    },
+    {
+      "key": "administrative-capacity-2",
+      "title": "一般行政部門職員数(都道府県)",
+      "rankingKeys": [
+        "prefectural-general-administration-staff"
+      ],
+      "defaultCheckedKeys": [
+        "prefectural-general-administration-staff"
       ]
     }
   ],
@@ -171,21 +219,23 @@
     },
     {
       "key": "tax-and-recruitment-dx",
-      "title": "地方税の申告や採用試験のオンライン申請は利用されているか",
-      "concern": "税申告や職員採用試験などの手続がオンラインでスムーズに行えるか気になります。",
+      "title": "オンライン申請は実際に使われているか",
+      "concern": "税申告や職員採用試験、自動車購入時の申告などの手続が、オンラインで実際にどれくらい使われているか気になります。",
       "metricGroupKeys": [
         "tax-and-recruitment-dx-1",
-        "tax-and-recruitment-dx-2"
+        "tax-and-recruitment-dx-2",
+        "tax-and-recruitment-dx-3",
+        "tax-and-recruitment-dx-4",
+        "tax-and-recruitment-dx-5"
       ]
     },
     {
-      "key": "auto-tax-dx",
-      "title": "自動車税環境性能割のオンライン申告はどれくらい活用されているか",
-      "concern": "自動車購入時の税申告手続きでオンライン利用が浸透しているか気になります。",
+      "key": "administrative-capacity",
+      "title": "行政の人員と人件費はどれくらいか",
+      "concern": "DXを進める行政側の職員数や、歳出に占める人件費の水準が気になります。",
       "metricGroupKeys": [
-        "auto-tax-dx-1",
-        "auto-tax-dx-2",
-        "auto-tax-dx-3"
+        "administrative-capacity-1",
+        "administrative-capacity-2"
       ]
     }
   ],

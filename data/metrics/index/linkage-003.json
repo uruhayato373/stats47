@@ -1886,6 +1886,194 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:childcare-friendly-prefecture-ranking",
           "kind": "blog"
         },
@@ -1896,9 +2084,15 @@
         {
           "pageId": "ranking:childcare-employment-rate",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:childcare-services",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "childcare-services"
+      ]
     },
     {
       "metricKey": "childcare-fee-consumption-expenditure",
@@ -4632,6 +4826,194 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:local-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area:01000",
           "kind": "area"
         },
@@ -4826,9 +5208,15 @@
         {
           "pageId": "ranking:cleaning-shop-count-per-100k",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:local-services",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "local-services"
+      ]
     },
     {
       "metricKey": "cleaning-worker-annual-income",
@@ -7959,7 +8347,15 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:01000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -7967,7 +8363,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:03000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:03000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -7975,7 +8379,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:05000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:05000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -7983,7 +8395,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:07000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:07000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -7991,7 +8411,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:09000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:09000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -7999,7 +8427,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:11000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:11000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -8007,7 +8443,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:13000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:13000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -8015,7 +8459,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:15000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:15000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -8023,7 +8475,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:17000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:17000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -8031,7 +8491,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:19000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:19000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -8039,7 +8507,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:21000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:21000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -8047,7 +8523,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:23000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:23000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -8055,7 +8539,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:25000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:25000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -8063,7 +8555,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:27000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:27000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -8071,7 +8571,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:29000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:29000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -8079,7 +8587,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:31000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:31000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -8087,7 +8603,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:33000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:33000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -8095,7 +8619,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:35000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:35000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -8103,7 +8635,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:37000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:37000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -8111,7 +8651,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:39000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:39000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -8119,7 +8667,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:41000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:41000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -8127,7 +8683,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:43000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:43000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -8135,11 +8699,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:45000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:45000:regional-transport",
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:46000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:46000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -8163,11 +8739,16 @@
           "kind": "ranking"
         },
         {
+          "pageId": "theme:geographic-access",
+          "kind": "theme"
+        },
+        {
           "pageId": "theme:regional-transport",
           "kind": "theme"
         }
       ],
       "themes": [
+        "geographic-access",
         "regional-transport"
       ]
     },
@@ -8893,11 +9474,16 @@
           "kind": "ranking"
         },
         {
+          "pageId": "theme:railway",
+          "kind": "theme"
+        },
+        {
           "pageId": "theme:regional-transport",
           "kind": "theme"
         }
       ],
       "themes": [
+        "railway",
         "regional-transport"
       ]
     },
@@ -9014,7 +9600,15 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:01000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -9022,7 +9616,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:03000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:03000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -9030,7 +9632,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:05000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:05000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -9038,7 +9648,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:07000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:07000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -9046,7 +9664,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:09000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:09000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -9054,7 +9680,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:11000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:11000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -9062,7 +9696,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:13000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:13000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -9070,7 +9712,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:15000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:15000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -9078,7 +9728,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:17000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:17000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -9086,7 +9744,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:19000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:19000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -9094,7 +9760,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:21000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:21000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -9102,7 +9776,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:23000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:23000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -9110,7 +9792,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:25000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:25000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -9118,7 +9808,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:27000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:27000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -9126,7 +9824,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:29000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:29000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -9134,7 +9840,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:31000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:31000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -9142,7 +9856,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:33000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:33000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -9150,7 +9872,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:35000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:35000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -9158,7 +9888,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:37000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:37000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -9166,7 +9904,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:39000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:39000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -9174,7 +9920,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:41000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:41000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -9182,7 +9936,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:43000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:43000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -9190,11 +9952,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:45000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:45000:labor-mobility",
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:46000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:46000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -9214,11 +9988,16 @@
           "kind": "ranking"
         },
         {
+          "pageId": "theme:geographic-access",
+          "kind": "theme"
+        },
+        {
           "pageId": "theme:labor-mobility",
           "kind": "theme"
         }
       ],
       "themes": [
+        "geographic-access",
         "labor-mobility"
       ]
     },

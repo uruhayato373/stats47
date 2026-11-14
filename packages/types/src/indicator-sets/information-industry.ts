@@ -24,6 +24,21 @@ export const INFORMATION_INDUSTRY_SET: IndicatorSet = {
       "rankingKey": "gross-prefectural-product-information-communication-h27",
       "shortLabel": "県内総生産（名目・2015年基準）",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "employment-location-quotient-information-communication",
+      "shortLabel": "従業者特化係数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "information-communication-industry-annual-income",
+      "shortLabel": "情報通信業の平均年収",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "software-engineer-annual-income",
+      "shortLabel": "ソフトウェア作成者の平均年収",
+      "role": "secondary"
     }
   ],
   "keywords": [

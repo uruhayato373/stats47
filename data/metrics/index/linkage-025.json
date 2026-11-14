@@ -1163,6 +1163,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:inpatient-rate-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:nursing-care-shortage-2040",
           "kind": "blog"
         },
@@ -6050,7 +6054,15 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:01000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:cultural-participation",
           "kind": "area-theme"
         },
         {
@@ -6058,7 +6070,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:03000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:03000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:cultural-participation",
           "kind": "area-theme"
         },
         {
@@ -6066,7 +6086,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:05000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:05000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:cultural-participation",
           "kind": "area-theme"
         },
         {
@@ -6074,7 +6102,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:07000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:07000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:cultural-participation",
           "kind": "area-theme"
         },
         {
@@ -6082,7 +6118,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:09000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:09000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:cultural-participation",
           "kind": "area-theme"
         },
         {
@@ -6090,7 +6134,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:11000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:11000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:cultural-participation",
           "kind": "area-theme"
         },
         {
@@ -6098,7 +6150,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:13000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:13000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:cultural-participation",
           "kind": "area-theme"
         },
         {
@@ -6106,7 +6166,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:15000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:15000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:cultural-participation",
           "kind": "area-theme"
         },
         {
@@ -6114,7 +6182,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:17000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:17000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:cultural-participation",
           "kind": "area-theme"
         },
         {
@@ -6122,7 +6198,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:19000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:19000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:cultural-participation",
           "kind": "area-theme"
         },
         {
@@ -6130,7 +6214,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:21000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:21000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:cultural-participation",
           "kind": "area-theme"
         },
         {
@@ -6138,7 +6230,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:23000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:23000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:cultural-participation",
           "kind": "area-theme"
         },
         {
@@ -6146,7 +6246,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:25000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:25000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:cultural-participation",
           "kind": "area-theme"
         },
         {
@@ -6154,7 +6262,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:27000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:27000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:cultural-participation",
           "kind": "area-theme"
         },
         {
@@ -6162,7 +6278,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:29000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:29000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:cultural-participation",
           "kind": "area-theme"
         },
         {
@@ -6170,7 +6294,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:31000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:31000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:cultural-participation",
           "kind": "area-theme"
         },
         {
@@ -6178,7 +6310,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:33000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:33000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:cultural-participation",
           "kind": "area-theme"
         },
         {
@@ -6186,7 +6326,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:35000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:35000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:cultural-participation",
           "kind": "area-theme"
         },
         {
@@ -6194,7 +6342,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:37000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:37000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:cultural-participation",
           "kind": "area-theme"
         },
         {
@@ -6202,7 +6358,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:39000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:39000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:cultural-participation",
           "kind": "area-theme"
         },
         {
@@ -6210,7 +6374,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:41000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:41000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:cultural-participation",
           "kind": "area-theme"
         },
         {
@@ -6218,7 +6390,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:43000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:43000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:cultural-participation",
           "kind": "area-theme"
         },
         {
@@ -6226,11 +6406,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:45000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:45000:education-culture",
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:46000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:46000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:cultural-participation",
           "kind": "area-theme"
         },
         {
@@ -6242,11 +6434,16 @@
           "kind": "ranking"
         },
         {
+          "pageId": "theme:cultural-participation",
+          "kind": "theme"
+        },
+        {
           "pageId": "theme:education-culture",
           "kind": "theme"
         }
       ],
       "themes": [
+        "cultural-participation",
         "education-culture"
       ]
     },
@@ -6928,7 +7125,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:01000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:02000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -6936,7 +7141,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:03000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:04000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -6944,7 +7157,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:05000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:06000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -6952,7 +7173,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:07000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:08000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -6960,7 +7189,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:09000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:10000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -6968,7 +7205,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:11000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:12000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -6976,7 +7221,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:13000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:14000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -6984,7 +7237,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:15000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:16000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -6992,7 +7253,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:17000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:18000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7000,7 +7269,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:19000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:20000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7008,7 +7285,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:21000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:22000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7016,7 +7301,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:23000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:24000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7024,7 +7317,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:25000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:26000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7032,7 +7333,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:27000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:28000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7040,7 +7349,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:29000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:30000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7048,7 +7365,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:31000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:32000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7056,7 +7381,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:33000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:34000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7064,7 +7397,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:35000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:36000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7072,7 +7413,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:37000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:38000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7080,7 +7429,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:39000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:40000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7088,7 +7445,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:41000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:42000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7096,7 +7461,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:43000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:44000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7104,11 +7477,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:45000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:46000:cultural-participation",
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:46000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:47000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7118,10 +7503,15 @@
         {
           "pageId": "theme:cultural-participation",
           "kind": "theme"
+        },
+        {
+          "pageId": "theme:daily-time-use",
+          "kind": "theme"
         }
       ],
       "themes": [
-        "cultural-participation"
+        "cultural-participation",
+        "daily-time-use"
       ]
     },
     {
@@ -7154,7 +7544,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:01000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:02000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7162,7 +7560,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:03000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:04000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7170,7 +7576,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:05000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:06000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7178,7 +7592,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:07000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:08000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7186,7 +7608,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:09000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:10000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7194,7 +7624,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:11000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:12000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7202,7 +7640,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:13000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:14000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7210,7 +7656,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:15000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:16000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7218,7 +7672,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:17000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:18000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7226,7 +7688,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:19000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:20000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7234,7 +7704,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:21000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:22000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7242,7 +7720,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:23000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:24000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7250,7 +7736,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:25000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:26000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7258,7 +7752,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:27000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:28000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7266,7 +7768,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:29000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:30000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7274,7 +7784,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:31000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:32000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7282,7 +7800,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:33000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:34000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7290,7 +7816,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:35000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:36000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7298,7 +7832,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:37000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:38000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7306,7 +7848,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:39000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:40000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7314,7 +7864,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:41000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:42000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7322,7 +7880,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:43000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:44000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7330,11 +7896,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:45000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:46000:cultural-participation",
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:46000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:47000:cultural-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -7344,10 +7922,15 @@
         {
           "pageId": "theme:cultural-participation",
           "kind": "theme"
+        },
+        {
+          "pageId": "theme:daily-time-use",
+          "kind": "theme"
         }
       ],
       "themes": [
-        "cultural-participation"
+        "cultural-participation",
+        "daily-time-use"
       ]
     },
     {

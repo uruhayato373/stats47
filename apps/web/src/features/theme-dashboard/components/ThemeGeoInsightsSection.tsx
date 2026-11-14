@@ -4,16 +4,11 @@ import {
 } from '@stats47/data-configs/business-plan';
 
 import Link from '@/components/atoms/SiteLink';
-import { PanelGrid } from '@/components/layout/PageShell';
-import { SectionHeader } from '@/components/section';
-import { SurfaceCard } from '@/components/surface';
+import { LinkRowFrame, linkRowItemClass } from '@/components/navigation/StatisticsScopeNav';
 
-import {
-  formatGeoValue,
-  isGeoCrossAnalysisSlug,
-  loadGeoAnalysisSnapshot,
-  GEO_CROSS_ANALYSIS_CONFIGS,
-} from '@/features/geo-analysis/embedded';
+import { isGeoCrossAnalysisSlug, GEO_CROSS_ANALYSIS_CONFIGS } from '@/features/geo-analysis/embedded';
+
+import { navSurfaceProps } from '@/lib/analytics/events';
 
 interface Props {
   themeKey: string;
@@ -25,11 +20,12 @@ const GEO_ANALYSIS_SLUGS = new Set<string>(
   BUSINESS_PLAN_M1_GEO_ANALYSES.map((analysis) => analysis.slug)
 );
 
-export async function ThemeGeoInsightsSection({
-  themeKey,
-  areaCode,
-  areaName,
-}: Props) {
+/**
+ * テーマに関係する空間分析への入口。分析の名前のリンクを 1 行に並べる (2026-11-14 オーナー決定)。
+ * 旧: 分析ごとのカード (名前・その県の値・リンク) を並べていた。約 650px を使い、押されたのはテーマ全体で
+ * 28 日に 2 回前後だった (2026-W45 の nav-click-surfaces)。値は分析のページが見せるので、ここでは読まない。
+ */
+export function ThemeGeoInsightsSection({ themeKey, areaCode, areaName }: Props) {
   const content = BUSINESS_PLAN_GEO_CONTENT_LIFECYCLE.filter(
     (item) =>
       GEO_ANALYSIS_SLUGS.has(item.analysisSlug) &&
@@ -37,66 +33,24 @@ export async function ThemeGeoInsightsSection({
   );
   if (content.length === 0) return null;
 
-  const cards = await Promise.all(
-    content.map(async (item) => {
-      if (!isGeoCrossAnalysisSlug(item.analysisSlug)) {
-        return { item, snapshot: null, row: null, metric: null };
-      }
-      const snapshot = await loadGeoAnalysisSnapshot(item.analysisSlug);
-      const metric = snapshot?.metrics.find(
-        (candidate) => candidate.key === snapshot.primaryMetricKey
-      );
-      const row = areaCode
-        ? (snapshot?.rows.find(
-            (candidate) => candidate.areaCode === areaCode
-          ) ?? null)
-        : null;
-      return { item, snapshot, row, metric: metric ?? null };
-    })
-  );
-
+  const label = areaName ? `${areaName}の空間分析` : '関連する空間分析';
+  const prefCode2 = areaCode?.slice(0, 2);
   return (
-    <PanelGrid as="section">
-      <SectionHeader
-        title={areaName ? `${areaName}を空間分析で読む` : '関連する空間分析'}
-        description="テーマ指標の概況に加え、公式GISレイヤーを重ねた分析を確認できます。計算・途中データ・限界は各Geoページへ集約しています。"
-        hideRule
-      />
-      <PanelGrid className="mt-4 md:grid-cols-2 xl:grid-cols-3">
-        {cards.map(({ item, snapshot, row, metric }) => {
-          const prefCode2 = areaCode?.slice(0, 2);
-          const href = prefCode2
-            ? `${item.free.canonicalPath}/${prefCode2}/overlap`
-            : item.free.canonicalPath;
-          return (
-            <SurfaceCard key={item.contentId}>
-              <p className="text-xs font-medium text-muted-foreground">
-                {snapshot ? '検算済み空間分析' : '空間分析'}
-              </p>
-              <h3 className="mt-1 font-bold leading-snug">{isGeoCrossAnalysisSlug(item.analysisSlug) ? GEO_CROSS_ANALYSIS_CONFIGS[item.analysisSlug].shortTitle : item.title}</h3>
-              {snapshot && row && metric ? (
-                <p className="mt-3 text-sm">
-                  {areaName ?? row.areaName}:{' '}
-                  <strong>
-                    {formatGeoValue(metric, row.values[metric.key])}
-                  </strong>
-                  {!areaName ? `（全国${row.rank}位）` : ''}
-                </p>
-              ) : (
-                <p className="mt-3 text-sm text-muted-foreground">
-                  {isGeoCrossAnalysisSlug(item.analysisSlug) ? GEO_CROSS_ANALYSIS_CONFIGS[item.analysisSlug].description : item.title}
-                </p>
-              )}
-              <Link
-                className="mt-4 inline-block text-sm font-medium text-primary underline"
-                href={href}
-              >
-                県内の地図・方法を見る
-              </Link>
-            </SurfaceCard>
-          );
-        })}
-      </PanelGrid>
-    </PanelGrid>
+    <div className="mt-8 flex flex-col gap-1" {...navSurfaceProps('geo_analysis_list')}>
+      <p className="text-sm font-medium text-foreground">{label}</p>
+      <LinkRowFrame label={label} wrap>
+        {content.map((item) => (
+          <Link
+            key={item.contentId}
+            className={linkRowItemClass()}
+            href={prefCode2 ? `${item.free.canonicalPath}/${prefCode2}/overlap` : item.free.canonicalPath}
+          >
+            {isGeoCrossAnalysisSlug(item.analysisSlug)
+              ? GEO_CROSS_ANALYSIS_CONFIGS[item.analysisSlug].shortTitle
+              : item.title}
+          </Link>
+        ))}
+      </LinkRowFrame>
+    </div>
   );
 }

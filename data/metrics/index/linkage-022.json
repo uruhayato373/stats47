@@ -817,15 +817,209 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:pollution-complaints-regional-map",
           "kind": "blog"
         },
         {
           "pageId": "ranking:pollution-complaints-received-per-100k",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:environmental-quality",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "environmental-quality"
+      ]
     },
     {
       "metricKey": "population-aged-0-15",
@@ -5734,8 +5928,200 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "ranking:port-count",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:freight-logistics",
+          "kind": "theme"
         },
         {
           "pageId": "theme:ports",
@@ -5743,6 +6129,7 @@
         }
       ],
       "themes": [
+        "freight-logistics",
         "ports"
       ]
     },
