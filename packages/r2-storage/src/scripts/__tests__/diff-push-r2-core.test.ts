@@ -1,0 +1,206 @@
+import { createHash } from 'node:crypto';
+
+import { describe, expect, it } from 'vitest';
+
+import {
+  DiffPushGuardError,
+  parseDiffPushFlags,
+  pickReadbackSample,
+  planDiffPush,
+  runDiffPush,
+  summarizeDiffPushPlan,
+  type DiffPushFlags,
+  type DiffPushIo,
+} from '../diff-push-r2-core';
+import type { RemoteObjectSummary } from '../lib/diff-push-remote-match';
+import { R2_PUBLIC_BUCKET } from '../r2-key-classes';
+
+interface FakeFile {
+  key: string;
+  size: number;
+  body: string;
+}
+
+const md5 = (s: string) => createHash('md5').update(s).digest('hex');
+const file = (key: string, body: string): FakeFile => ({ key, size: Buffer.byteLength(body), body });
+
+/** R2 の代わり。list・put・head を記録し、put した中身を head で返す */
+function fakeIo(options: {
+  remote?: Record<string, string>;
+  listFails?: boolean;
+  putFails?: (key: string) => boolean;
+  headOverride?: (key: string) => { contentLength: number | null; etag: string | null } | null;
+} = {}) {
+  const objects = new Map(Object.entries(options.remote ?? {}));
+  const puts: string[] = [];
+  const heads: string[] = [];
+  const io: DiffPushIo<FakeFile> = {
+    async list(): Promise<Map<string, RemoteObjectSummary>> {
+      if (options.listFails) throw new Error('AccessDenied');
+      return new Map([...objects].map(([key, body]) => [key, { size: Buffer.byteLength(body), etag: `"${md5(body)}"` }]));
+    },
+    async put(f) {
+      if (options.putFails?.(f.key)) throw new Error('500');
+      puts.push(f.key);
+      objects.set(f.key, f.body);
+    },
+    async head(key) {
+      heads.push(key);
+      if (options.headOverride) return options.headOverride(key);
+      const body = objects.get(key);
+      return body === undefined ? null : { contentLength: Buffer.byteLength(body), etag: `"${md5(body)}"` };
+    },
+    md5Of: (f) => md5(f.body),
+  };
+  return { io, puts, heads };
+}
+
+const NO_FLAGS: DiffPushFlags = { allowFullUpload: false, allowAuthoritativeOverwrite: false };
+const quiet = () => undefined;
+
+function run(candidates: FakeFile[], io: DiffPushIo<FakeFile>, flags: DiffPushFlags = NO_FLAGS, readbackMax?: number) {
+  return runDiffPush({ bucket: R2_PUBLIC_BUCKET, prefix: '', candidates, flags, io, log: quiet, readbackMax });
+}
+
+describe('(a) R2 の一覧が取れないとき', () => {
+  it('全件を送らずに止まる (PUT 0 件)', async () => {
+    const { io, puts } = fakeIo({ listFails: true });
+    await expect(run([file('app/ranking/a/values.json', '1')], io)).rejects.toThrow(/--allow-full-upload/);
+    expect(puts).toEqual([]);
+  });
+
+  it('--allow-full-upload があれば regenerable は照合せずに送る', async () => {
+    const { io, puts } = fakeIo({ listFails: true });
+    const result = await run([file('app/ranking/a/values.json', '1')], io, { ...NO_FLAGS, allowFullUpload: true });
+    expect(puts).toEqual(['app/ranking/a/values.json']);
+    expect(result.plan.entries[0].change).toBe('UNKNOWN');
+  });
+
+  it('--allow-full-upload でも authoritative は上書きか判定できないので上書きの許可が要る', async () => {
+    const { io, puts } = fakeIo({ listFails: true });
+    await expect(run([file('app/stats/a/values.json', '1')], io, { ...NO_FLAGS, allowFullUpload: true }))
+      .rejects.toThrow(/\[UNKNOWN\] app\/stats\/a\/values\.json/);
+    expect(puts).toEqual([]);
+  });
+
+  it('フラグ名を引数から読む', () => {
+    expect(parseDiffPushFlags(['--prefix', 'x', '--allow-full-upload'])).toEqual({
+      allowFullUpload: true, allowAuthoritativeOverwrite: false,
+    });
+    expect(parseDiffPushFlags(['--allow-authoritative-overwrite']).allowAuthoritativeOverwrite).toBe(true);
+  });
+});
+
+describe('(b) authoritative の上書き', () => {
+  it('CHANGED の authoritative があれば key を列挙して止まり、ほかのファイルも送らない', async () => {
+    const { io, puts } = fakeIo({ remote: { 'app/stats/a/values.json': 'old' } });
+    const err = await run([
+      file('app/ranking/a/values.json', 'new'),
+      file('app/stats/a/values.json', 'new'),
+    ], io).catch((e: unknown) => e);
+    expect(err).toBeInstanceOf(DiffPushGuardError);
+    expect((err as Error).message).toMatch(/\[CHANGED\] app\/stats\/a\/values\.json/);
+    expect((err as Error).message).toMatch(/--allow-authoritative-overwrite/);
+    expect(puts).toEqual([]);
+  });
+
+  it('authoritative でも新しい key (NEW) は止めない', async () => {
+    const { io, puts } = fakeIo();
+    await run([file('app/blog/new-slug/article.md', 'body')], io);
+    expect(puts).toEqual(['app/blog/new-slug/article.md']);
+  });
+
+  it('R2 と中身が同じ authoritative は上書きではないので止めない', async () => {
+    const { io, puts } = fakeIo({ remote: { 'app/stats/a/values.json': 'same' } });
+    await run([file('app/stats/a/values.json', 'same')], io);
+    expect(puts).toEqual([]);
+  });
+
+  it('regenerable の CHANGED は止めない', async () => {
+    const { io, puts } = fakeIo({ remote: { 'app/ranking/a/values.json': 'old' } });
+    await run([file('app/ranking/a/values.json', 'new')], io);
+    expect(puts).toEqual(['app/ranking/a/values.json']);
+  });
+
+  it('未登録の prefix の上書きは authoritative と同じく止める', async () => {
+    const { io } = fakeIo({ remote: { 'unknown/a.json': 'old' } });
+    await expect(run([file('unknown/a.json', 'new')], io)).rejects.toThrow(/区分表に未登録/);
+  });
+
+  it('--allow-authoritative-overwrite があれば上書きする', async () => {
+    const { io, puts } = fakeIo({ remote: { 'app/stats/a/values.json': 'old' } });
+    await run([file('app/stats/a/values.json', 'new')], io, { ...NO_FLAGS, allowAuthoritativeOverwrite: true });
+    expect(puts).toEqual(['app/stats/a/values.json']);
+  });
+});
+
+describe('(c) 書いた後の照合', () => {
+  it('1 件でも PUT に失敗したら件数不一致で止まる', async () => {
+    const { io } = fakeIo({ putFails: (key) => key.endsWith('b.json') });
+    await expect(run([file('app/ranking/a.json', '1'), file('app/ranking/b.json', '2')], io))
+      .rejects.toThrow(/attempted=2 success=1 errors=1/);
+  });
+
+  it('HEAD の ETag が本文の MD5 と違えば止まる', async () => {
+    const { io } = fakeIo({ headOverride: () => ({ contentLength: 1, etag: '"00000000000000000000000000000000"' }) });
+    await expect(run([file('app/ranking/a.json', '1')], io)).rejects.toThrow(/読み戻しが一致しません/);
+  });
+
+  it('HEAD のサイズが違えば止まる', async () => {
+    const { io } = fakeIo({ headOverride: () => ({ contentLength: 99, etag: `"${md5('1')}"` }) });
+    await expect(run([file('app/ranking/a.json', '1')], io)).rejects.toThrow(/size 99\/1/);
+  });
+
+  it('R2 に無ければ止まる', async () => {
+    const { io } = fakeIo({ headOverride: () => null });
+    await expect(run([file('app/ranking/a.json', '1')], io)).rejects.toThrow(/R2 に無い/);
+  });
+
+  it('抜き取りは既定で最大 20 件、少なければ全件', async () => {
+    const many = Array.from({ length: 45 }, (_, i) => file(`app/ranking/k${i}.json`, String(i)));
+    const big = fakeIo();
+    const result = await run(many, big.io);
+    expect(result.readback.checked).toBe(20);
+    expect(big.heads).toHaveLength(20);
+    expect(big.heads[0]).toBe('app/ranking/k0.json');
+    expect(big.heads[19]).toBe('app/ranking/k44.json');
+
+    const small = fakeIo();
+    const r2 = await run(many.slice(0, 3), small.io);
+    expect(r2.readback.checked).toBe(3);
+  });
+
+  it('pickReadbackSample は重複なく端を含む', () => {
+    const picked = pickReadbackSample(Array.from({ length: 100 }, (_, i) => i), 20);
+    expect(new Set(picked).size).toBe(20);
+    expect(picked[0]).toBe(0);
+    expect(picked[19]).toBe(99);
+  });
+});
+
+describe('(d) 区分ごとの件数', () => {
+  it('regenerable / authoritative ごとに NEW・CHANGED・削除・一致を数える', () => {
+    const remote = new Map<string, RemoteObjectSummary>([
+      ['app/ranking/a.json', { size: 3, etag: `"${md5('old')}"` }],
+      ['app/stats/s/values.json', { size: 3, etag: `"${md5('old')}"` }],
+      ['app/home/featured.json', { size: 4, etag: `"${md5('same')}"` }],
+    ]);
+    const plan = planDiffPush({
+      bucket: R2_PUBLIC_BUCKET,
+      candidates: [
+        file('app/ranking/a.json', 'new'),
+        file('app/ranking/b.json', 'new'),
+        file('app/stats/s/values.json', 'new'),
+        file('app/blog/x/article.md', 'new'),
+        file('app/home/featured.json', 'same'),
+      ],
+      removedKeys: ['app/stats/gone/values.json', 'app/category/c/items.json'],
+      remote,
+      md5Of: (f) => md5(f.body),
+    });
+    expect(summarizeDiffPushPlan(plan)).toEqual({
+      regenerable: { NEW: 1, CHANGED: 1, UNKNOWN: 0, UNCHANGED: 1, REMOVED: 1 },
+      authoritative: { NEW: 1, CHANGED: 1, UNKNOWN: 0, UNCHANGED: 0, REMOVED: 1 },
+    });
+  });
+});

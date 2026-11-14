@@ -32,6 +32,19 @@ npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --dry-run
 ```
 
 `diff-push-r2.ts`はJSON snapshot・記事等の通常staging用。生成画像には使わない。
+
+区分表 `r2-key-classes.ts` (`classifyR2Key(bucket, key)`) が key ごとに `regenerable` / `authoritative`
+(R2 が唯一の正本。未登録も同じ扱い) と、書く場所 `origin: ci | mac` を返す。`diff-push-r2.ts` の止め:
+
+| 条件 | 挙動 | 明示フラグ |
+|---|---|---|
+| R2 の一覧が取れない | 1 件も送らず非 0 | `--allow-full-upload` (照合せずに全件を送る) |
+| authoritative の上書き (CHANGED、一覧なしで判定不能のもの) | key を列挙して非 0。NEW は止めない | `--allow-authoritative-overwrite` |
+| 書いた後の件数不一致・抜き取り最大 20 件の HEAD (サイズ・ETag=MD5) 不一致 | 非 0 | なし |
+
+dry-run は認証があれば R2 を一覧し、区分ごとの NEW・CHANGED・削除 (manifest のみ。R2 からは消さない) の件数と、
+本番で止まる key を出す。`_assert-ci-write.ts` は CI (`GITHUB_ACTIONS=true`) では常に通し、ローカルでは
+書く key がすべて `origin: mac` のときだけ通す。それ以外は書き手の workflow を案内して止める。逃げ道は `ALLOW_LOCAL_R2_WRITE=1`。
 KSJ原典とKSJ由来の観測値は、diff/exact/wranglerの全候補を`lib/ksj-publication-guard.ts`で
 公開ライセンス検査してから書き込む。禁止データが1件でも混在すればバッチ全体をPUT前に停止する。
 
