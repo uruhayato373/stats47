@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n578b6e871067",
+  "production": {
+    "id": "NCI-00421",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "ビジネスを学ぶ人\n多い県は？",
+      "subline": "1位は東京都\n2021年・10歳以上",
+      "subject": "明るい水色と黄色、濃紺の大きな文字を使う温かい手描きのカバー。右側に無地の学習ノートを1点だけ大きく描く。ノートは開き、ページには文字や数字を入れず、少数の薄い罫線だけにする。左側に問いを大きく2行、下に補足を太い帯で2行。人物・顔・手・動物・キャラクター・マスコット・擬人化、架空の地図・ランキング図・棒グラフ・表彰台・メダル、指定外の文字・数字・ロゴを描かない。",
+      "evidence": "https://storage.stats47.jp/note/stats47-note/n578b6e871067/draft.md の公開本文を2026-10-23に確認。総務省「社会生活基本調査」の2021年、過去1年間に商業実務・ビジネス関係の学習を行った10歳以上の人の割合。本文は1位東京都29.2％、47位青森県12.7％と記載。カバーには企業研修や都市部の原因推測を加えず、対象年・年齢・1位だけを示す。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "57208553fe6afe622203e55288f5566853d3d7c3cf3d7684d6d95ec509599f9a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n578b6e871067/revisions/57208553fe6afe622203e55288f5566853d3d7c3cf3d7684d6d95ec509599f9a.png"
+      },
+      "bytes": 41244,
+      "id": "57208553fe6afe622203e55288f5566853d3d7c3cf3d7684d6d95ec509599f9a",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:09.617Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312774092/rectangle_large_type_2_c53cb663bed22b0824370a3bbe6db0e0.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "57208553fe6afe622203e55288f5566853d3d7c3cf3d7684d6d95ec509599f9a"
+      }
+    },
+    {
+      "sha256": "10b47148ae171f463cb93459a1596a0ad543ead85fdfe9ae6db8819dedbc9a01",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n578b6e871067/revisions/10b47148ae171f463cb93459a1596a0ad543ead85fdfe9ae6db8819dedbc9a01.png"
+      },
+      "bytes": 124132,
+      "id": "10b47148ae171f463cb93459a1596a0ad543ead85fdfe9ae6db8819dedbc9a01",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:15:34.507Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ac0eea76877ef3b055c7aa46a32569da5b7bcf3c0240218d30f2e74a62fa756c"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/study-participation-rate-business/values.json",
+        "sourceSha256": "a2f829ebe5e9569d68e3386adcfca9d806a4ef70703c31bc4662f73a01c01f95",
+        "input": {
+          "sha256": "ac0eea76877ef3b055c7aa46a32569da5b7bcf3c0240218d30f2e74a62fa756c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n578b6e871067/inputs/ac0eea76877ef3b055c7aa46a32569da5b7bcf3c0240218d30f2e74a62fa756c.json"
+          },
+          "bytes": 6690
+        }
+      }
+    },
+    {
+      "sha256": "33c71487ac43e0e9fdc862178e4e54739804322daec0da1cc4da20e26c1e3266",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n578b6e871067/revisions/33c71487ac43e0e9fdc862178e4e54739804322daec0da1cc4da20e26c1e3266.png"
+      },
+      "bytes": 1733735,
+      "id": "33c71487ac43e0e9fdc862178e4e54739804322daec0da1cc4da20e26c1e3266",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-fef11fd625e4",
+      "createdAt": "2026-10-23T04:09:20.970Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "0d1746cc8862c4abcc7cb12316fd519d2eb55caa7275b7592fd2fd3b9abc6fb2"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸と幅320pxで指定の6文言を照合。対象年・年齢・1位は本文と一致し、ノートの題材、人物なし、文字切れなしを確認。",
+        "reviewedAt": "2026-10-23T04:09:44.871Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "0d1746cc8862c4abcc7cb12316fd519d2eb55caa7275b7592fd2fd3b9abc6fb2",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n578b6e871067/inputs/0d1746cc8862c4abcc7cb12316fd519d2eb55caa7275b7592fd2fd3b9abc6fb2.json"
+          },
+          "bytes": 8787
+        },
+        "production": {
+          "id": "NCI-00421",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "fef11fd625e4fd3b55652b5ddfa86d3f6181d597b2a2c3ea4157552d055ea73c"
+        }
+      }
+    }
+  ]
+}

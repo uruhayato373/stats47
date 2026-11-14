@@ -17,11 +17,10 @@ import {
   evaluateSelectionViewpoints,
   MACHINE_VIEWPOINT_IDS,
 } from "../../../packages/data-configs/src/theme-catalog/selection-viewpoints";
-import { datasetDir } from "../../../config/datasets.mjs";
+import { datasetPath } from "../../../config/datasets.mjs";
 import { isoWeekOf } from "../lib/effect-verdict/iso-week.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
-export const VIEWPOINT_HISTORY_FILE = "viewpoint-history.csv";
 const HEADER = "week,rule,hits,themes";
 
 export interface ViewpointHistoryRow {
@@ -66,7 +65,7 @@ function main(): void {
     themes: new Set(evaluated[rule].map((h) => h.themeKey)).size,
   }));
 
-  const file = path.join(ROOT, datasetDir("themes.portfolio"), VIEWPOINT_HISTORY_FILE);
+  const file = path.join(ROOT, datasetPath("themes.viewpoint-history"));
   const existing = fs.existsSync(file) ? parseViewpointHistory(fs.readFileSync(file, "utf8")) : [];
   const merged = mergeViewpointHistory(existing, rows);
   fs.writeFileSync(file, [HEADER, ...merged.map((r) => `${r.week},${r.rule},${r.hits},${r.themes}`)].join("\n") + "\n");

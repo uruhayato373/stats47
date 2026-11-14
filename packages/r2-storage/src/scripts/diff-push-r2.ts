@@ -3,6 +3,9 @@
  *
  * push 成功したファイルの key:size をマニフェストファイルに記録し、
  * 次回実行時はマニフェストと比較して差分のみ push する。
+ * マニフェストで絞った後、R2 の一覧 (size と ETag) と照合し、R2 にある object と中身が同じ
+ * ファイルは送らない。CI の runner はマニフェストが毎回空なので、送らない判定はこの照合が担う
+ * (判定と出典: lib/diff-push-remote-match.ts)。照合できないときは従来どおり全件を送る。
  *
  * 使い方:
  *   npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix blog
@@ -13,9 +16,15 @@
 import { config } from "dotenv";
 import * as fs from "fs";
 import * as path from "path";
-import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { createHash } from "crypto";
+import { ListObjectsV2Command, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
 import { assertR2WriteAllowed } from "./_assert-ci-write";
+import {
+  remoteListPrefixes,
+  splitUnchangedOnRemote,
+  type RemoteObjectSummary,
+} from "./lib/diff-push-remote-match";
 import { assertDiffPushComplete } from "./lib/diff-push-result";
 import { assertKsjPublicAssetsAllowed } from "./lib/ksj-publication-guard";
 import { assertBlogPublicAssetsAllowed, BLOG_INDEX_KEY, blogSnapshotWriteCondition } from './lib/blog-publication-guard';
@@ -95,6 +104,32 @@ function collectLocalFiles(
   return results;
 }
 
+/** R2 の一覧から key ごとの size と ETag を集める (照合用。読み取りのみ) */
+async function listRemoteObjects(
+  s3: S3Client,
+  prefixes: readonly string[],
+): Promise<Map<string, RemoteObjectSummary>> {
+  const remote = new Map<string, RemoteObjectSummary>();
+  for (const listPrefix of prefixes) {
+    let continuationToken: string | undefined;
+    do {
+      const response = await s3.send(new ListObjectsV2Command({
+        Bucket: BUCKET,
+        Prefix: listPrefix,
+        ContinuationToken: continuationToken,
+        MaxKeys: 1000,
+      }));
+      for (const object of response.Contents ?? []) {
+        if (object.Key && object.Size !== undefined && object.ETag) {
+          remote.set(object.Key, { size: object.Size, etag: object.ETag });
+        }
+      }
+      continuationToken = response.IsTruncated ? response.NextContinuationToken : undefined;
+    } while (continuationToken);
+  }
+  return remote;
+}
+
 async function main(): Promise<void> {
   const args = process.argv.slice(2);
   const dryRun = args.includes("--dry-run");
@@ -148,7 +183,7 @@ async function main(): Promise<void> {
 
   if (dryRun) {
     if (toUpload.length > 0) {
-      console.log("\n[アップロード対象]");
+      console.log("\n[アップロード対象] (dry-run は R2 と照合しない。実際に送る件数はこれ以下になる)");
       toUpload.slice(0, 30).forEach((f) => {
         const reason = !manifest[f.key] ? "NEW" : "CHANGED";
         console.log(`  [${reason}] ${f.key} (${f.size} bytes)`);
@@ -171,17 +206,35 @@ async function main(): Promise<void> {
     process.exit(1);
   }
   const s3 = new S3Client({ region: "auto", endpoint, credentials: { accessKeyId, secretAccessKey } });
-  const blogCandidate = toUpload.find((file) => file.key === BLOG_INDEX_KEY);
+
+  // R2 にある object と中身が同じファイルは送らない。一覧を取れないときは照合をやめて全件を送る
+  // (送らない側へは倒さない)。
+  const updatedManifest = { ...manifest };
+  let uploadTargets = toUpload;
+  try {
+    const remote = await listRemoteObjects(s3, remoteListPrefixes(prefix, toUpload.map((f) => f.key)));
+    const split = splitUnchangedOnRemote(toUpload, remote, (f) =>
+      createHash("md5").update(fs.readFileSync(f.absolutePath)).digest("hex"));
+    uploadTargets = split.toUpload;
+    // 次回の実行で照合を繰り返さないよう、R2 と同じだったファイルも送信済みとして記録する
+    for (const f of split.unchanged) updatedManifest[f.key] = { size: f.size, mtime: f.mtime };
+    console.log(`R2 と中身が同じ（送らない）: ${split.unchanged.length}`);
+    console.log(`送信する: ${uploadTargets.length}`);
+  } catch (e: unknown) {
+    const msg = e instanceof Error ? e.message.split("\n")[0] : String(e);
+    console.warn(`⚠ R2 の一覧を取れず照合できないため、アップロード対象の全件を送ります: ${msg}`);
+  }
+
+  const blogCandidate = uploadTargets.find((file) => file.key === BLOG_INDEX_KEY);
   const blogBody = blogCandidate ? fs.readFileSync(blogCandidate.absolutePath) : null;
   const blogCondition = blogBody
     ? await blogSnapshotWriteCondition(blogBody, createS3ImageObjectStore(s3, BUCKET)) : null;
 
   let success = 0;
   let errors = 0;
-  const updatedManifest = { ...manifest };
 
-  for (let i = 0; i < toUpload.length; i += CONCURRENCY) {
-    const chunk = toUpload.slice(i, i + CONCURRENCY);
+  for (let i = 0; i < uploadTargets.length; i += CONCURRENCY) {
+    const chunk = uploadTargets.slice(i, i + CONCURRENCY);
     await Promise.all(
       chunk.map(async (f) => {
         try {
@@ -205,9 +258,9 @@ async function main(): Promise<void> {
       })
     );
 
-    const processed = Math.min(i + CONCURRENCY, toUpload.length);
-    if (processed === toUpload.length || i % 48 === 0) {
-      console.log(`Progress: ${processed} / ${toUpload.length} (success: ${success}, errors: ${errors})`);
+    const processed = Math.min(i + CONCURRENCY, uploadTargets.length);
+    if (processed === uploadTargets.length || i % 48 === 0) {
+      console.log(`Progress: ${processed} / ${uploadTargets.length} (success: ${success}, errors: ${errors})`);
       saveManifest(prefix, updatedManifest);
     }
   }
@@ -225,7 +278,7 @@ async function main(): Promise<void> {
 
   // 一部だけ書けた状態を exit 0 にすると、後続 producer が新旧混在の R2 を読み込む。
   // 成功済み object は温存しつつ run 自体は必ず赤にして再実行を要求する。
-  assertDiffPushComplete({ attempted: toUpload.length, success, errors });
+  assertDiffPushComplete({ attempted: uploadTargets.length, success, errors });
 }
 
 main().catch((err) => {

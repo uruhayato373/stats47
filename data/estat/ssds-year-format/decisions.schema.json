@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SSDS の指標の年の区切りの判断 (data/estat/ssds-year-format/decisions.json)",
+  "description": "社会・人口統計体系の指標の yearFormat (暦年 calendar / 年度 fiscal) を、e-Stat の定義の控え (definitions.json) だけでは決められないところの判断。判定は .claude/scripts/estat/lib/ssds-year-format.mjs、検査は npm run estat:ssds-year-format:check。",
+  "type": "object",
+  "required": ["schemaVersion", "surveyNaming", "itemOverrides", "cityIndicators", "undetermined"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "surveyNaming": {
+      "description": "定義の「時点又は期間」(調査日・6月中 など) では年度か暦年か決まらない調査の、表題での年の呼び方。「令和N年◯◯調査」と年で呼ぶ調査は calendar、「令和N年度◯◯調査」は fiscal。一次資料で確かめたものだけを足す。",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["survey", "yearFormat", "evidence"],
+        "additionalProperties": false,
+        "properties": {
+          "survey": { "type": "string", "minLength": 1, "description": "定義の「調査名又は報告書名」の欄の 1 調査の名前 (ハイフンは半角)" },
+          "yearFormat": { "enum": ["calendar", "fiscal"] },
+          "evidence": { "type": "string", "minLength": 1, "description": "呼び方を確かめた資料と日付" }
+        }
+      }
+    },
+    "itemOverrides": {
+      "description": "定義ページの「時点又は期間」が誤っている項目の上書き。ページの記載より優先する。",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "yearFormat", "reason"],
+        "additionalProperties": false,
+        "properties": {
+          "code": { "type": "string", "pattern": "^[A-M][0-9]{1,8}$", "description": "基礎項目の符号" },
+          "yearFormat": { "enum": ["calendar", "fiscal"] },
+          "reason": { "type": "string", "minLength": 1, "description": "ページの記載を誤りと判断した根拠" }
+        }
+      }
+    },
+    "cityIndicators": {
+      "description": "市区町村の指標の表 (00000203xx) の指標のうち、同じ符号の都道府県の指標と同じ定義だと確かめたもの。指標計算式のページは都道府県の指標のものなので、ここに載る符号にだけ都道府県の計算式の基礎項目を当てはめて年の区切りを決める。市区町村の表の項目名が都道府県の指標と違う定義を指す符号 (#B01101 は都道府県が全国面積、市区町村が都道府県面積に占める割合) は足さない。",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "name", "evidence"],
+        "additionalProperties": false,
+        "properties": {
+          "code": { "type": "string", "pattern": "^#[A-M][0-9]{4,8}$", "description": "指標の符号" },
+          "name": { "type": "string", "minLength": 1, "description": "市区町村の指標の表での項目名" },
+          "evidence": { "type": "string", "minLength": 1, "description": "項目名を確かめた資料と日付、都道府県の指標の項目名・計算式と比べた結果" }
+        }
+      }
+    },
+    "undetermined": {
+      "description": "定義からは年の区切りが決まらない指標の一覧。縮小専用 (件数の上限は lib/ssds-year-format.mjs の UNDETERMINED_CEILING)。ここに載る指標の yearFormat は検査しない。調査の呼び方を確かめて surveyNaming に足すと決まるようになり、検査が行を消すよう求める。",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["key", "reason"],
+        "additionalProperties": false,
+        "properties": {
+          "key": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$", "description": "指標の key (data/metrics/<key>.ts)" },
+          "reason": { "type": "string", "minLength": 1, "description": "決まらない理由 (基礎項目の符号・期間・調査名)" }
+        }
+      }
+    }
+  }
+}

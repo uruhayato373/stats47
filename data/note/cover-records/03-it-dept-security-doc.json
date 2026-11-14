@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "03-it-dept-security-doc",
+  "production": {
+    "id": "NCI-00008",
+    "policyId": "NCP-007",
+    "policyVersion": 4,
+    "brief": {
+      "headline": "IT担当に渡せる\nセキュリティ説明資料",
+      "subline": "資料テンプレートと想定問答",
+      "subject": "大きな南京錠と、閉じた資料バインダーを大きく描く。実務カテゴリの机上の資料構図。青と明るい黄色の暖かい手描き。画面・紙・道具の表面は無文字。実在UI・製品ロゴ・グラフ・地図は描かない。人物・顔・手・動物は描かない。",
+      "evidence": "https://note.com/stats47/n/nedcf6ded5c36 本文確認2026-11-04。IT担当課に提出するセキュリティ説明資料のテンプレートと想定質問への回答集。安全の保証や認証を示唆しない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "1a949970d31a3d6fb286d09a520bc0f1c873ecbc67dfc9a1a0fef5f6dc84899b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/03-it-dept-security-doc/revisions/1a949970d31a3d6fb286d09a520bc0f1c873ecbc67dfc9a1a0fef5f6dc84899b.png"
+      },
+      "bytes": 114723,
+      "id": "1a949970d31a3d6fb286d09a520bc0f1c873ecbc67dfc9a1a0fef5f6dc84899b",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:29.185Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/293001119/rectangle_large_type_2_5df0c6cae961e94fa1f5ae1b443af17a.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "1a949970d31a3d6fb286d09a520bc0f1c873ecbc67dfc9a1a0fef5f6dc84899b"
+      }
+    },
+    {
+      "sha256": "bc153865e5bcd8056d25c187538593013a5455e9293a179087e0bb562164aeae",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/03-it-dept-security-doc/revisions/bc153865e5bcd8056d25c187538593013a5455e9293a179087e0bb562164aeae.png"
+      },
+      "bytes": 68452,
+      "id": "bc153865e5bcd8056d25c187538593013a5455e9293a179087e0bb562164aeae",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:45:12.500Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "2576a7dea6faf5edf444973eabf06bff036c0cbea2c6eebd28ab3b2303ea9482"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出しとシリーズ名・話数・色でシリーズが区別できる",
+        "reviewedAt": "2026-10-11T11:51:01.980Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "2576a7dea6faf5edf444973eabf06bff036c0cbea2c6eebd28ab3b2303ea9482",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/03-it-dept-security-doc/inputs/2576a7dea6faf5edf444973eabf06bff036c0cbea2c6eebd28ab3b2303ea9482.json"
+          },
+          "bytes": 1124
+        }
+      }
+    },
+    {
+      "sha256": "0a4898a9677569e449a74561f91e92c23b386f15d86d041cc7cb7003b66caf7d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/03-it-dept-security-doc/revisions/0a4898a9677569e449a74561f91e92c23b386f15d86d041cc7cb7003b66caf7d.png"
+      },
+      "bytes": 92722,
+      "id": "0a4898a9677569e449a74561f91e92c23b386f15d86d041cc7cb7003b66caf7d",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:55:53.788Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320329174/rectangle_large_type_2_1bf10c6d2184cf448a2532b4efac5497.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "0a4898a9677569e449a74561f91e92c23b386f15d86d041cc7cb7003b66caf7d"
+      }
+    },
+    {
+      "sha256": "f8846229fc9eec8bd3a669f891c3b2b865c1b6dc18e167e96d83076f1a718948",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/03-it-dept-security-doc/revisions/f8846229fc9eec8bd3a669f891c3b2b865c1b6dc18e167e96d83076f1a718948.png"
+      },
+      "bytes": 1878947,
+      "id": "f8846229fc9eec8bd3a669f891c3b2b865c1b6dc18e167e96d83076f1a718948",
+      "kind": "candidate",
+      "version": "pop-NCP-007-v4-c6cf2a838b29",
+      "createdAt": "2026-11-04T00:17:01.148Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "789def021bd70ec1c3afdf2fb71d91843ab3e7e2eac0a3c97d3a25cdd78b7cc5"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:18:16.292Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "789def021bd70ec1c3afdf2fb71d91843ab3e7e2eac0a3c97d3a25cdd78b7cc5",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/03-it-dept-security-doc/inputs/789def021bd70ec1c3afdf2fb71d91843ab3e7e2eac0a3c97d3a25cdd78b7cc5.json"
+          },
+          "bytes": 8792
+        },
+        "production": {
+          "id": "NCI-00008",
+          "policyId": "NCP-007",
+          "policyVersion": 4,
+          "planSha256": "c6cf2a838b29d4f1dd3052e4f131a0d30ec32dcdae275e93b4a4ccbccdbfaf67"
+        }
+      }
+    }
+  ]
+}

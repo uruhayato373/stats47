@@ -36,7 +36,6 @@ export const vehicleKilometersTraveled: MetricConfig = {
   "display": {
     "conversionFactor": 1,
     "decimalPlaces": 0,
-    "displayUnit": "千台･km",
   },
   "calculation": {
     "isCalculated": false,

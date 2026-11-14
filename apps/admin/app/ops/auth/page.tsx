@@ -1,4 +1,4 @@
-import { ClockIcon, KeyRoundIcon, LaptopIcon, ShieldAlertIcon, TerminalIcon } from "lucide-react";
+import { ClockIcon, KeyRoundIcon, LaptopIcon, ShieldAlertIcon } from "lucide-react";
 
 import { Cell, DataTable, PanelCard, Row, StatCard, StatusBadge } from "@/components/admin-ui";
 import { Grid, Section, Stack } from "@/components/layout-primitives";
@@ -11,28 +11,19 @@ export const metadata = { title: "ログインと資格情報 — stats47 admin"
 
 /**
  * /ops/auth — ログインが必要な全サービスについて、人が見るべきことだけを出す
- * (ログイン ID・この PC の登録・CI の登録・自動ログインの有無・要対応)。doboku-note の /ops/auth と同じ構成。
+ * (ログイン ID・この PC の登録・自動ログインの有無・要対応)。ログインは Mac だけが持ち、CI の Secrets には置かない。
  * 正本は .claude/config/auth-credentials.json。登録状況はページを開くたびに読む (パスワードは読まない)。
  */
 function action(r: AuthCredentialRow): string | null {
   if (r.stored === false) return "未登録";
   // 正本の ID とこの PC のストアの ID が違うと、ログインは別アカウントか失敗になる (2026-09-30 の全角スペース事故)
   if (r.stored && r.loginId && r.user !== r.loginId) return "ID 不一致";
-  if ((r.ciCredential || r.ciStored) && r.ciSecrets === false) return "CI 未登録";
   return null;
 }
 
 function localCell(r: AuthCredentialRow) {
   if (r.stored === null) return <span className="text-muted-foreground">?</span>;
   return r.stored ? <StatusBadge tone="good">済</StatusBadge> : <StatusBadge tone="warn">未</StatusBadge>;
-}
-
-function ciCell(r: AuthCredentialRow) {
-  if (!r.ciCredential && !r.ciStored) return <span className="text-muted-foreground">—</span>;
-  if (r.ciSecrets === null) return <span className="text-muted-foreground">?</span>;
-  if (!r.ciSecrets) return <StatusBadge tone="warn">未</StatusBadge>;
-  // CI が実際に使うのは ciCredential だけ。保管だけのものは「保管」(理由は自動ログイン欄のツールチップ)
-  return r.ciCredential ? <StatusBadge tone="good">済</StatusBadge> : <StatusBadge tone="info">保管</StatusBadge>;
 }
 
 export default function AuthCredentialsPage() {
@@ -48,7 +39,6 @@ export default function AuthCredentialsPage() {
   const todo = v.rows.filter((r) => action(r));
   const unregistered = v.rows.filter((r) => r.stored === false);
   const toRegister = v.rows.filter((r) => action(r) === "未登録" || action(r) === "ID 不一致");
-  const ciMissing = v.rows.filter((r) => (r.ciCredential || r.ciStored) && r.ciSecrets === false);
 
   return (
     <>
@@ -60,7 +50,7 @@ export default function AuthCredentialsPage() {
       </Grid>
 
         <Section title="サービス">
-          <DataTable columns={["サービス", "ログイン ID", "この PC", "CI", "自動ログイン", "要対応"]}>
+          <DataTable columns={["サービス", "ログイン ID", "この PC", "自動ログイン", "要対応"]}>
             {v.rows.map((r) => {
               const a = action(r);
               return (
@@ -68,7 +58,6 @@ export default function AuthCredentialsPage() {
                   <Cell nowrap>{r.label}</Cell>
                   <Cell nowrap muted>{r.loginId ?? r.user ?? "—"}</Cell>
                   <Cell nowrap>{localCell(r)}</Cell>
-                  <Cell nowrap>{ciCell(r)}</Cell>
                   <Cell nowrap>
                     <span title={r.policyNote}>{r.autoLogin ? "する" : "しない"}</span>
                   </Cell>
@@ -78,7 +67,7 @@ export default function AuthCredentialsPage() {
             })}
           </DataTable>
           <p className="text-xs text-muted-foreground">
-            CI は note・KDP・A8・もしも・楽天がパスワードを使う (セッション切れの入り直し)。「保管」は Secrets にあるだけで CI は使わない。方針は「自動ログイン」欄にマウスを置くと出る。
+            ログインは Mac だけが持ち、CI の Secrets には置かない。方針は「自動ログイン」欄にマウスを置くと出る。
             登録状況はページを開くたびに調べる。パスワードは表示も読み出しもしない。
           </p>
         </Section>
@@ -92,16 +81,6 @@ export default function AuthCredentialsPage() {
             <Stack gap="sm">
               {toRegister.map((r) => (
                 <code key={r.id} className="font-mono text-xs">{r.registerCommand}</code>
-              ))}
-            </Stack>
-          </PanelCard>
-        )}
-
-        {ciMissing.length > 0 && (
-          <PanelCard title="CI の Secrets を登録する" icon={<TerminalIcon />} description="ID はこの PC に登録済みのものを自動で入れる。聞かれたらパスワードだけを入力する">
-            <Stack gap="sm">
-              {ciMissing.map((r) => (
-                <code key={r.id} className="font-mono text-xs">npm run auth:ci-secret -- {r.id}</code>
               ))}
             </Stack>
           </PanelCard>

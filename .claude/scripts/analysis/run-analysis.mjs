@@ -147,7 +147,7 @@ const STEPS = {
   },
   research() {
     // NotebookLM は白書などの論点を集めるだけで、数値の根拠にしない。使えないときは無しで進む
-    const done = shell("node", [`.claude/scripts/notebooklm-cross-query.mjs`, "--json", "--notebooks", arg("--notebooks"), `${issue.question} について、先行する分析の論点、よくある読み違い、定義の注意点を出典付きで挙げてください。`], { allowFailure: true });
+    const done = shell("node", [`.claude/scripts/notebooklm/notebooklm-cross-query.mjs`, "--json", "--notebooks", arg("--notebooks"), `${issue.question} について、先行する分析の論点、よくある読み違い、定義の注意点を出典付きで挙げてください。`], { allowFailure: true });
     writeJson(paths.research, done.status === 0 ? { answers: done.stdout } : { skipped: `exit ${done.status}` });
   },
   plan() {

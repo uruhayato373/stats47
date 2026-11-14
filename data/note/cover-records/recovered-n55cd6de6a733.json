@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n55cd6de6a733",
+  "production": {
+    "id": "NCI-00419",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "テニスをした人\n1位は神奈川県",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無地のテニスラケットと黄色のボールを描く。選手・手・大会ロゴは描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n55cd6de6a733 2026-10-23公開API本文照合。記事題名「【2021年版】テニスをした人が多い県は？ 1位は神奈川県｜都道府県ランキング」。本文中の「神奈川県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "4b4fed38a9bf5c896746340794e02498a1fa3b3e5a2ee3137296c3a82313e5e9",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n55cd6de6a733/revisions/4b4fed38a9bf5c896746340794e02498a1fa3b3e5a2ee3137296c3a82313e5e9.png"
+      },
+      "bytes": 57796,
+      "id": "4b4fed38a9bf5c896746340794e02498a1fa3b3e5a2ee3137296c3a82313e5e9",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:08.874Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312774072/rectangle_large_type_2_5ce676733c4253fed53444c0f2f92633.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "4b4fed38a9bf5c896746340794e02498a1fa3b3e5a2ee3137296c3a82313e5e9"
+      }
+    },
+    {
+      "sha256": "9c403607b329437f2d90382fa6f165f6faf3da617017660eb1ad43d8b9d56ccd",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n55cd6de6a733/revisions/9c403607b329437f2d90382fa6f165f6faf3da617017660eb1ad43d8b9d56ccd.png"
+      },
+      "bytes": 111386,
+      "id": "9c403607b329437f2d90382fa6f165f6faf3da617017660eb1ad43d8b9d56ccd",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:15:26.124Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "3013853219212e4282bdec471f9cebfa94b02227a36cbbacc1bae19289c6b419"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/sports-participation-rate-tennis/values.json",
+        "sourceSha256": "68a0147c73071d11eae537433b37612886745cf83dbb04a226f3b4da50d6526c",
+        "input": {
+          "sha256": "3013853219212e4282bdec471f9cebfa94b02227a36cbbacc1bae19289c6b419",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n55cd6de6a733/inputs/3013853219212e4282bdec471f9cebfa94b02227a36cbbacc1bae19289c6b419.json"
+          },
+          "bytes": 6499
+        }
+      }
+    },
+    {
+      "sha256": "84443f496667720e9924693263533cdedd9135919a6142317f0ad4e7ca5f7077",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n55cd6de6a733/revisions/84443f496667720e9924693263533cdedd9135919a6142317f0ad4e7ca5f7077.png"
+      },
+      "bytes": 1728051,
+      "id": "84443f496667720e9924693263533cdedd9135919a6142317f0ad4e7ca5f7077",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-4ebe679118e1",
+      "createdAt": "2026-10-23T12:38:03.454Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "3682583c1aa1f22b76dfd28591e4a4b2260843e1e9b9fef9df27054060e92fe8"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T12:40:56.382Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "3682583c1aa1f22b76dfd28591e4a4b2260843e1e9b9fef9df27054060e92fe8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n55cd6de6a733/inputs/3682583c1aa1f22b76dfd28591e4a4b2260843e1e9b9fef9df27054060e92fe8.json"
+          },
+          "bytes": 8620
+        },
+        "production": {
+          "id": "NCI-00419",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "4ebe679118e1ce5a9f3588826443f2b70b7c742b6348e6ecaf0a756825a45671"
+        }
+      }
+    }
+  ]
+}

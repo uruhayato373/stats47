@@ -26,8 +26,10 @@ describe('調査ハブの本文の台帳 (surveys.editorial)', () => {
     const census = getSurveyEditorialContent('census');
     expect(census).not.toBeNull();
     expect(Object.keys(census ?? {}).sort()).toEqual(
-      ['caveats', 'readerQuestions', 'summary', 'whatYouCanLearn'].sort()
+      ['caveats', 'readerQuestions', 'summary', 'surveyCycle', 'whatYouCanLearn'].sort()
     );
+    // 国勢調査は 5 年ごと (西暦が 5 の倍数の年)。ハブ冒頭の最新年を実施年から出すのに使う (SURVEY-PAGES-01)
+    expect(census?.surveyCycle).toEqual({ intervalYears: 5, anchorYear: 2020 });
     expect(census?.readerQuestions[0]).toEqual({
       question: '40代前半（40〜44歳）男性の未婚率が高い都道府県は？',
       rankingKey: 'unmarried-ratio-male-40-44',

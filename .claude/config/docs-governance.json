@@ -136,6 +136,33 @@
     "docs/31_note記事原稿",
     "assets/page-heroes"
   ],
+  "placement": {
+    "nestedAgentDirectories": {
+      "parents": [
+        "apps",
+        "packages"
+      ],
+      "name": ".claude"
+    },
+    "scriptsRoot": {
+      "directory": ".claude/scripts",
+      "allowedFiles": [
+        "tsconfig.checkjs.json",
+        "tsconfig.json"
+      ]
+    },
+    "codeAdjacentDocs": {
+      "roots": [
+        "apps",
+        "packages"
+      ],
+      "allowedUppercaseNames": [
+        "README.md",
+        "AGENTS.md",
+        "CLAUDE.md"
+      ]
+    }
+  },
   "freshness": [
     {
       "file": ".claude/todo/monthly.md",
@@ -181,6 +208,11 @@
       "pending",
       "in-progress",
       "effect/pending"
-    ]
+    ],
+    "sizeBudget": {
+      "maxFileBytes": 1048576,
+      "warnFileRatio": 0.9,
+      "maxCardBytes": 8192
+    }
   }
 }

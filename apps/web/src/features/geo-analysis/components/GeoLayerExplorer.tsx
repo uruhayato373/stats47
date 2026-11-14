@@ -22,6 +22,8 @@ import { GEO_BASEMAP_SHORELINE_ATTRIBUTION } from '@/components/charts/leaflet-b
 import { SingleSelectToggleGroup } from '@/components/molecules/SingleSelectToggleGroup';
 import { SurfaceCard, ValueTable, type ValueTableColumn, type ValueTableRow } from '@/components/surface';
 
+import { navSurfaceProps } from '@/lib/analytics/events';
+
 import { fetchGeoLayerAction } from '../actions';
 import { GEO_CROSS_ANALYSIS_CONFIGS } from '../lib/geo-cross-analysis';
 import { populationLayerColor, type GeoLayerData } from '../lib/geo-layer-data';
@@ -280,7 +282,7 @@ export function GeoLayerExplorer({
       )}
       <div className="mt-6 border-t pt-4">
         <h2 className="font-semibold">このデータを重ねて読む</h2>
-        <ul className="mt-2">
+        <ul className="mt-2" {...navSurfaceProps('geo_analysis_list')}>
           {layer.related.map((slug) => (
             <li key={slug}>
               <Link

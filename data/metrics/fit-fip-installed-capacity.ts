@@ -48,7 +48,7 @@ export const fitFipInstalledCapacity: MetricConfig = {
   "yearFormat": "calendar",
   "display": {
     "conversionFactor": 0.001,
-    "decimalPlaces": 1,
+    "decimalPlaces": 0,
     "displayUnit": "MW"
   },
   "isActive": true,

@@ -283,10 +283,7 @@
         "configHash": "c75bcb5a1aadfcf1"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area:01000",
@@ -582,10 +579,7 @@
         "configHash": "7864d0cb995976dc"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:postal-savings-balance-per-capita",
@@ -854,11 +848,11 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "blog:banana-consumption-quantity",
+          "pageId": "blog:potato-consumption-quantity",
           "kind": "blog"
         },
         {
-          "pageId": "blog:potato-consumption-quantity",
+          "pageId": "blog:taro-consumption-quantity-prefecture-gap",
           "kind": "blog"
         },
         {
@@ -6822,10 +6816,7 @@
         "configHash": "e86b06cbd1c4d270"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:private-life-insurance-amount-per-contract",
@@ -6857,10 +6848,7 @@
         "configHash": "4765c6b58af82dfe"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:private-life-insurance-contract-amount-per-household",
@@ -6927,10 +6915,7 @@
         "configHash": "9748bcf7c360337c"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:private-life-insurance-contracts-per-1000",

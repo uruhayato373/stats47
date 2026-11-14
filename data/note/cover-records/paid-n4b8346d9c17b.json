@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "paid-n4b8346d9c17b",
+  "production": {
+    "id": "NCI-00312",
+    "policyId": "NCP-004",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "自主財源比率\n東京都と高知県",
+      "subline": "2021年度・都道府県財政",
+      "subject": "横長1280×670相当の完成カバー。紫と黄色。右に同じ大きさの無文字の歳入資料ファイル2冊。財政自立や政策成果を断定するグラフ・順位台・数値を描かない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n4b8346d9c17b 2026-10-24公開API本文照合。記事題名「【2021年度】自主財源比率ランキング！東京76%、高知24.1%で格差3.15倍の衝撃」。本文中の 2021年度、自主財源比率、東京都、高知県 を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "10e7a60ce22b31e180bbc568358ff46aae7948e72d98d8a75c59a7b80c244053",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n4b8346d9c17b/revisions/10e7a60ce22b31e180bbc568358ff46aae7948e72d98d8a75c59a7b80c244053.png"
+      },
+      "bytes": 43140,
+      "id": "10e7a60ce22b31e180bbc568358ff46aae7948e72d98d8a75c59a7b80c244053",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:23.705Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312772845/rectangle_large_type_2_b3977ada9dc25952c13e5fa31dd7aadf.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "10e7a60ce22b31e180bbc568358ff46aae7948e72d98d8a75c59a7b80c244053"
+      }
+    },
+    {
+      "sha256": "12914c59d8e5c1c05f2516fc778ff28340aeca26dffe462513f4cfcd75821cf2",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n4b8346d9c17b/revisions/12914c59d8e5c1c05f2516fc778ff28340aeca26dffe462513f4cfcd75821cf2.png"
+      },
+      "bytes": 94702,
+      "id": "12914c59d8e5c1c05f2516fc778ff28340aeca26dffe462513f4cfcd75821cf2",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:39:44.449Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "5bae0dbce26cd58d6b33232a2ee287ff979e882b3e1e475a3891ec838d5b02ab"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で主題・年・記事題名の順位/値/格差が読める。地図は値を持たない背景",
+        "reviewedAt": "2026-10-11T11:48:54.217Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "5bae0dbce26cd58d6b33232a2ee287ff979e882b3e1e475a3891ec838d5b02ab",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n4b8346d9c17b/inputs/5bae0dbce26cd58d6b33232a2ee287ff979e882b3e1e475a3891ec838d5b02ab.json"
+          },
+          "bytes": 1280
+        }
+      }
+    },
+    {
+      "sha256": "59065f371f489ccafcadf6e5e355733f25ca4913eade9ab34dd51c80de87fb52",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n4b8346d9c17b/revisions/59065f371f489ccafcadf6e5e355733f25ca4913eade9ab34dd51c80de87fb52.png"
+      },
+      "bytes": 112266,
+      "id": "59065f371f489ccafcadf6e5e355733f25ca4913eade9ab34dd51c80de87fb52",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:55:08.484Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320256270/rectangle_large_type_2_b575e0bcb0c40faedf9c639e14e8edd0.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "59065f371f489ccafcadf6e5e355733f25ca4913eade9ab34dd51c80de87fb52"
+      }
+    },
+    {
+      "sha256": "11bfbe88062897403fef083ab42ff7ac3a1fad55251900ea87651417f48c7cef",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n4b8346d9c17b/revisions/11bfbe88062897403fef083ab42ff7ac3a1fad55251900ea87651417f48c7cef.png"
+      },
+      "bytes": 41394,
+      "id": "11bfbe88062897403fef083ab42ff7ac3a1fad55251900ea87651417f48c7cef",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:04:53.788Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "22f8db23165a8c6e04e242a25a16752b4f5d19306a77b35db89e7e50c1c228dd"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.008/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:15:40.850Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "22f8db23165a8c6e04e242a25a16752b4f5d19306a77b35db89e7e50c1c228dd",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n4b8346d9c17b/inputs/22f8db23165a8c6e04e242a25a16752b4f5d19306a77b35db89e7e50c1c228dd.json"
+          },
+          "bytes": 1280
+        }
+      }
+    },
+    {
+      "sha256": "8d438d72c9e3ac38b9c02895db1aae62cdc95fa23265cd41995613bf396f9563",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n4b8346d9c17b/revisions/8d438d72c9e3ac38b9c02895db1aae62cdc95fa23265cd41995613bf396f9563.png"
+      },
+      "bytes": 1773499,
+      "id": "8d438d72c9e3ac38b9c02895db1aae62cdc95fa23265cd41995613bf396f9563",
+      "kind": "candidate",
+      "version": "pop-NCP-004-v3-793c119f3743",
+      "createdAt": "2026-10-23T17:09:47.578Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "4370c97933db3f23876a68166cf9a34251925ee330537dc0f16120f048840539"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の主題・対象年・集計範囲・比較県と掲載文字を照合し、原寸/320pxを目視。管理画面で公開旧版と新候補を比較。",
+        "reviewedAt": "2026-10-23T17:12:30.197Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "4370c97933db3f23876a68166cf9a34251925ee330537dc0f16120f048840539",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n4b8346d9c17b/inputs/4370c97933db3f23876a68166cf9a34251925ee330537dc0f16120f048840539.json"
+          },
+          "bytes": 8991
+        },
+        "production": {
+          "id": "NCI-00312",
+          "policyId": "NCP-004",
+          "policyVersion": 3,
+          "planSha256": "793c119f3743f01eb0d92170088efdb709d1608c8a24f7c46b7647c231d9bde4"
+        }
+      }
+    }
+  ]
+}

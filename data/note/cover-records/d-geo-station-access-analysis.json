@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "d-geo-station-access-analysis",
+  "production": {
+    "id": "NCI-00252",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "駅から直線800m\n将来人口を再現",
+      "subline": "2050年推計・47都道府県\n駅代表点とメッシュ中心で判定",
+      "subject": "データ整備の青緑とクリーム、明るい黄色。右側に無文字のファイルフォルダー1冊と、無人の小さな駅舎を表す単純な紙模型1点。駅舎は地理上の位置を示さない机上の小物で、実在の駅や完成GIS分析結果ではない。建物の窓は均一な水色、人影なし。地図・円形バッファ・半径線・徒歩ルート・人口メッシュ図・実データ・駅名・路線・時計の文字は描かない。補足2行を全幅帯に大きく。横長1280×670相当、約1.91:1。濃紺の極太見出しを左から中央へ大きく2行で置く。補足の全行は画面下部の全幅の独立した太い帯へ置く。複数行の補足は横並びにせず同じ大きさで縦に積む。補足の文字は幅320pxで16px程度、1280pxで64px程度以上を目安に大きくする。補足は淡い色の帯に濃紺文字で高いコントラストを確保する。主見出しを少し小さくしてでも補足を読める大きさにする。カテゴリ名とstats47署名にも読める大きさの専用スペースを用意し、全ての文字を四辺から離す。指定外の文字・数字・URL・ロゴ・図表・地図を足さない。人物・顔・手・足・動物・キャラクター・マスコット・擬人化は一切禁止。余計な小物や植物を足さず背景は単純な紙の色面。",
+      "evidence": "https://note.com/stats47/n/n041e38af8fb5 2026-10-15公開無料部分と掲載タイトル確認。駅グループ代表点と1km人口メッシュ中心点の大円距離800m判定、2050年推計人口を47都道府県に集計した再現パック。徒歩10分や道路距離、駅入口から住宅までの距離、駅別/市町村別データや居住選択の原因ではない。カバーには分析結果の地図・危険区域・利便性の評価・商品にない収録内容を描かない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "26073e3934b50f5e28f17e8f15d4e08be1ae3ee9989340013ba9cf619aeb56b7",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-geo-station-access-analysis/revisions/26073e3934b50f5e28f17e8f15d4e08be1ae3ee9989340013ba9cf619aeb56b7.png"
+      },
+      "bytes": 46756,
+      "id": "26073e3934b50f5e28f17e8f15d4e08be1ae3ee9989340013ba9cf619aeb56b7",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:04.225Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312772510/rectangle_large_type_2_b275f23ac69890fcf580213346f4c206.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "26073e3934b50f5e28f17e8f15d4e08be1ae3ee9989340013ba9cf619aeb56b7"
+      }
+    },
+    {
+      "sha256": "b777de578bc72c1686a2bb1eadfeac17b9836a2d69a1cd027fcf86c547e87b41",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-geo-station-access-analysis/revisions/b777de578bc72c1686a2bb1eadfeac17b9836a2d69a1cd027fcf86c547e87b41.png"
+      },
+      "bytes": 39959,
+      "id": "b777de578bc72c1686a2bb1eadfeac17b9836a2d69a1cd027fcf86c547e87b41",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:04:04.784Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "143e436e65965b8c156f0c300ee7040abd3c59349f7961ec18e493b29a75eca0"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出し・記事の分析結果の県別地図または記事図が確認できる(平均画素差0.024/255で確認版と同一)",
+        "reviewedAt": "2026-10-11T12:18:09.728Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "143e436e65965b8c156f0c300ee7040abd3c59349f7961ec18e493b29a75eca0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-geo-station-access-analysis/inputs/143e436e65965b8c156f0c300ee7040abd3c59349f7961ec18e493b29a75eca0.json"
+          },
+          "bytes": 1314
+        }
+      }
+    },
+    {
+      "sha256": "0d37635ec14f105dc06e9e5d3af8210ee8a7509fcfc1c16d467b8e29ee3413cb",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-geo-station-access-analysis/revisions/0d37635ec14f105dc06e9e5d3af8210ee8a7509fcfc1c16d467b8e29ee3413cb.png"
+      },
+      "bytes": 78344,
+      "id": "0d37635ec14f105dc06e9e5d3af8210ee8a7509fcfc1c16d467b8e29ee3413cb",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T08:01:09.272Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323277101/rectangle_large_type_2_ae9048c49836481edc3cb563cbeda212.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "0d37635ec14f105dc06e9e5d3af8210ee8a7509fcfc1c16d467b8e29ee3413cb"
+      }
+    },
+    {
+      "sha256": "3530725648706708a3990326a204bab40f428c438d5be025e3166baacb9117b8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-geo-station-access-analysis/revisions/3530725648706708a3990326a204bab40f428c438d5be025e3166baacb9117b8.png"
+      },
+      "bytes": 1492933,
+      "id": "3530725648706708a3990326a204bab40f428c438d5be025e3166baacb9117b8",
+      "kind": "candidate",
+      "version": "imagegen-explainer-palette-20261015",
+      "createdAt": "2026-10-15T08:03:17.038Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "6c70ddd4afc5d7acab1c46baa95e53ccae7b688c76139c8461f5e69b8eb92d5c"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "NCI-00252: 統計解説4・配色5・データ整備1の原寸/320pxの指定全文・補足・人物なし・本文との一致とカテゴリ固有条件を個別確認済み。dataset-geo。2026-10-15ユーザーが表示中10件のnote反映を指示。候補SHA 3530725648706708a3990326a204bab40f428c438d5be025e3166baacb9117b8。",
+        "reviewedAt": "2026-10-15T08:11:19.719Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "6c70ddd4afc5d7acab1c46baa95e53ccae7b688c76139c8461f5e69b8eb92d5c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-geo-station-access-analysis/inputs/6c70ddd4afc5d7acab1c46baa95e53ccae7b688c76139c8461f5e69b8eb92d5c.json"
+          },
+          "bytes": 11259
+        },
+        "production": {
+          "id": "NCI-00252",
+          "policyId": "NCP-006",
+          "policyVersion": 3,
+          "planSha256": "25e37f9332d7ab63382438b24c7b3fd5c58499b16876d95cef69b4c8794ed770"
+        }
+      }
+    }
+  ]
+}

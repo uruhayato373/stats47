@@ -7,7 +7,7 @@ import { validateCoverLedger, emptyCoverArticle, coverSha, coverAssetKey, addCov
   recordCoverObservation, applyCoverAudit, coverDisplayState, updateCoverLedger, readCoverLedger, adoptedCoverRevision, approvedCoverRevision } from '../lib/cover-assets.mjs';
 import { storeCoverBytes, readStoredCover, storeCoverInput, readStoredCoverInput, fetchCoverSource, wranglerTokenProvider, wranglerConfigFile, retryCoverRead } from '../lib/cover-storage.mjs';
 import { buildTab } from '../../lib/gallery-collectors.mjs';
-import { COVER_ROOT, assertCoverGenerationType } from '../lib/cover-assets.mjs';
+import { COVER_ROOT, COVER_LEDGER_PATH, COVER_RECORDS_DIR, coverLedgerFiles, assertCoverGenerationType } from '../lib/cover-assets.mjs';
 
 const now = '2026-10-02T00:00:00.000Z';
 test('transient read recovery is bounded and never retries an uncertain POST, write, or authentication failure', async () => {
@@ -192,6 +192,75 @@ test('ledger update is atomic and exclusive; validation failure leaves prior dat
     const lock = path.join(root, 'data/note/cover-assets.json.lock'); fs.writeFileSync(lock, '');
     await assert.rejects(updateCoverLedger(() => {}, root), /EEXIST/); fs.unlinkSync(lock);
     assert.deepEqual(fs.readdirSync(path.dirname(lock)), ['cover-assets.json']);
+  } finally { fs.rmSync(root, { recursive: true, force: true }); }
+});
+const production = { id: 'NCI-00001', policyId: 'NCP-001', policyVersion: 1, brief: null };
+test('the main ledger file holds pointers only; each article keeps production and revisions in its own record and reading joins them', async () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'cover-ledger-split-test-'));
+  const stored = (relative) => JSON.parse(fs.readFileSync(path.join(root, relative), 'utf8'));
+  try {
+    const first = revision(), second = revision('archived copy', 'published-original');
+    const record = `${COVER_RECORDS_DIR}/${catalog[0].key}.json`, briefOnly = `${COVER_RECORDS_DIR}/brief-only.json`;
+    await updateCoverLedger(l => {
+      l.articles.push(emptyCoverArticle(catalog[0]), emptyCoverArticle({ key: 'brief-only' }), emptyCoverArticle({ key: 'nothing-yet' }));
+      addCoverRevision(l.articles[0], first, { candidate: true }); addCoverRevision(l.articles[0], second);
+      l.articles[1].production = production;
+    }, root);
+    assert.deepEqual(stored(COVER_LEDGER_PATH).articles.map(a => Object.keys(a)),
+      Array(3).fill(['articleKey', 'noteUrl', 'candidateRevisionId', 'approvedRevisionId', 'published', 'missingVersions']));
+    assert.equal(stored(COVER_LEDGER_PATH).articles[0].candidateRevisionId, first.id);
+    assert.deepEqual(fs.readdirSync(path.join(root, COVER_RECORDS_DIR)), [`${catalog[0].key}.json`, 'brief-only.json']);
+    assert.deepEqual(stored(record), { schemaVersion: 1, articleKey: catalog[0].key, revisions: [first, second] });
+    assert.deepEqual(stored(briefOnly), { schemaVersion: 1, articleKey: 'brief-only', production, revisions: [] });
+    const joined = readCoverLedger(root);
+    assert.deepEqual(joined.articles.map(a => a.revisions.map(r => r.id)), [[first.id, second.id], [], []]);
+    assert.deepEqual(joined.articles.map(a => a.production), [undefined, production, undefined]);
+    assert.deepEqual(Object.keys(joined.articles[1]), ['articleKey', 'noteUrl', 'revisions', 'candidateRevisionId', 'approvedRevisionId', 'published', 'missingVersions', 'production']);
+    // A pointer-only update rewrites the main file and leaves the untouched records alone.
+    const stamps = () => [record, briefOnly].map(relative => fs.statSync(path.join(root, relative)).mtimeMs), before = stamps();
+    await updateCoverLedger(l => observe(l), root);
+    assert.deepEqual(stamps(), before);
+    assert.equal(readCoverLedger(root).articles[0].published.status, 'configured');
+    // A review edits a revision, so it lands in that article's record; the approval pointer lands in the main file.
+    await updateCoverLedger(l => reviewCoverRevision(l.articles[0], first.id, 'pass', 'Reviewed', now), root);
+    assert.equal(stored(record).revisions[0].review.status, 'pass');
+    assert.equal(stored(COVER_LEDGER_PATH).articles[0].approvedRevisionId, first.id);
+    assert.equal(stamps()[1], before[1]);
+    // Dropping an article in an edit removes its record with it.
+    await updateCoverLedger(l => { l.articles = l.articles.filter(a => a.articleKey !== catalog[0].key); }, root);
+    assert.deepEqual(fs.readdirSync(path.join(root, COVER_RECORDS_DIR)), ['brief-only.json']);
+  } finally { fs.rmSync(root, { recursive: true, force: true }); }
+});
+test('the pre-split single file, an orphan record and a record under another key stop reads and writes', async () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'cover-ledger-split-guard-test-'));
+  const write = (files) => { for (const [relative, text] of Object.entries(files)) {
+    fs.mkdirSync(path.dirname(path.join(root, relative)), { recursive: true }); fs.writeFileSync(path.join(root, relative), text); } };
+  try {
+    const ledger = fixture(); addCoverRevision(ledger.articles[0], revision(), { candidate: true });
+    const files = coverLedgerFiles(ledger), record = `${COVER_RECORDS_DIR}/${catalog[0].key}.json`;
+    assert.deepEqual(Object.keys(files), [record, COVER_LEDGER_PATH]);
+    write(files); assert.equal(readCoverLedger(root).articles[0].revisions.length, 1);
+    // The pre-split layout (revisions or production inline in the main file) is refused, not read as an empty history.
+    write({ [COVER_LEDGER_PATH]: JSON.stringify(ledger) });
+    assert.throws(() => readCoverLedger(root), /cover ledger schema/);
+    await assert.rejects(updateCoverLedger(() => {}, root), /cover ledger schema/);
+    const mainOnly = JSON.parse(files[COVER_LEDGER_PATH]);
+    write({ [COVER_LEDGER_PATH]: JSON.stringify({ ...mainOnly, articles: [{ ...mainOnly.articles[0], production }] }) });
+    assert.throws(() => readCoverLedger(root), /cover ledger schema/);
+    write(files);
+    write({ [`${COVER_RECORDS_DIR}/removed-article.json`]: files[record].replace(catalog[0].key, 'removed-article') });
+    assert.throws(() => readCoverLedger(root), /cover record file without ledger article: removed-article/);
+    await assert.rejects(updateCoverLedger(() => {}, root), /without ledger article/);
+    assert.equal(fs.existsSync(path.join(root, COVER_RECORDS_DIR, 'removed-article.json')), true);
+    fs.rmSync(path.join(root, COVER_RECORDS_DIR, 'removed-article.json'));
+    write({ [record]: files[record].replace(`"articleKey": "${catalog[0].key}"`, '"articleKey": "other-article"') });
+    assert.throws(() => readCoverLedger(root), /cover record file identity/);
+    // A pointer whose record is gone is a broken reference, not an article without revisions.
+    fs.rmSync(path.join(root, record));
+    assert.throws(() => readCoverLedger(root), /cover revision reference/);
+    // Records without the main file are a broken checkout, not a fresh ledger.
+    write(files); fs.rmSync(path.join(root, COVER_LEDGER_PATH));
+    await assert.rejects(updateCoverLedger(() => {}, root), /without the main ledger/);
   } finally { fs.rmSync(root, { recursive: true, force: true }); }
 });
 test('management and static galleries use the same ledger and never guess old R2 paths', async () => {

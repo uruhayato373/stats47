@@ -8,8 +8,9 @@ import { METRIC_DEFINITIONS_DIR } from '../../../../config/paths.mjs';
  *   - src/ssds/source-name-to-survey.ts        … 原典名 → survey id の対応 (正本は data/surveys/master/source-names.json)
  *
  * 出力:
- *   - src/ssds/ssds-provenance.generated.json  … cdCat01 → { kind, originalSurveys: [{id,name}] }
+ *   - src/ssds/ssds-provenance.generated.json  … cdCat01 → { kind, originalSurveys: [{id,name}], primarySurveys? }
  *     (アプリ/exporter が読む最終形。2 階層出典モデルの「原典」側)
+ *     primarySurveys は指標計算式の分子の原典 (調査のページへ並べる主出典)。originalSurveys と同じなら書かない。
  *
  * 併せて、metrics ディレクトリを走査して SSDS metric の原典解決カバレッジを stdout に報告する。
  *
@@ -22,6 +23,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { datasetPath } from "../../../../config/datasets.mjs";
+import { numeratorBaseCodes } from "../../src/ssds/formula-numerator";
 import {
   CDCAT01_SOURCE_OVERRIDE,
   KNOWN_SOURCE_TO_SURVEY,
@@ -38,7 +40,7 @@ const SURVEY_MASTER_NAME = new Map(
 
 type RawEntry = { kind: "base" | "indicator"; sources: string[]; formula?: string };
 type Survey = { id: string; name: string };
-type ProvenanceEntry = { kind: "base" | "indicator"; originalSurveys: Survey[] };
+type ProvenanceEntry = { kind: "base" | "indicator"; originalSurveys: Survey[]; primarySurveys?: Survey[] };
 
 /** 辞書未登録の原典名を決定的に auto survey へ。formal なマスタ化は後追い。 */
 function autoSlug(name: string): string {
@@ -59,6 +61,34 @@ function dedupeSurveys(surveys: Survey[]): Survey[] {
   return [...seen.values()];
 }
 
+/**
+ * 基礎項目コードの資料源 (原典名)。資料源の手当て (override) を先に引く。
+ * 一覧に無いコードは extract-ssds-sources.py と同じく、前方一致する基礎項目の資料源を使う。
+ */
+function baseSourceNames(base: string, raw: Record<string, RawEntry>): string[] {
+  const direct = CDCAT01_SOURCE_OVERRIDE[base] ?? raw[base]?.sources;
+  if (direct) return direct;
+  const near = Object.keys(raw).find(
+    (code) => !code.startsWith("#") && (base.startsWith(code) || code.startsWith(base)),
+  );
+  return near ? raw[near].sources : [];
+}
+
+/**
+ * 指標の主出典 = 計算式の分子に出る基礎項目の原典。人口や面積で割っただけの指標に、分母の調査
+ * (国勢調査・人口推計・面積調) を調査のページの紐付けとして数えないために使う。
+ * 分子から原典が 1 つも取れない式は undefined (全原典を主出典として扱う)。
+ */
+function primarySurveysOf(formula: string | undefined, raw: Record<string, RawEntry>): Survey[] | undefined {
+  if (!formula) return undefined;
+  const names = numeratorBaseCodes(formula).flatMap((base) => baseSourceNames(base, raw));
+  return names.length > 0 ? dedupeSurveys(names.map(resolveSurvey)) : undefined;
+}
+
+function sameSurveyIds(a: Survey[], b: Survey[]): boolean {
+  return a.length === b.length && a.every((survey) => b.some((other) => other.id === survey.id));
+}
+
 function main(): void {
   const raw: Record<string, RawEntry> = JSON.parse(
     readFileSync(join(SSDS_DIR, "cdcat01-sources.generated.json"), "utf-8"),
@@ -77,7 +107,13 @@ function main(): void {
     const sourceNames =
       override ?? entry?.sources ?? [];
     const surveys = dedupeSurveys(sourceNames.map(resolveSurvey));
-    provenance[code] = { kind: entry?.kind ?? "indicator", originalSurveys: surveys };
+    // 資料源を手当てした指標は、その手当てが主出典 (式からは引かない)
+    const primary = override ? undefined : primarySurveysOf(entry?.formula, raw);
+    provenance[code] = {
+      kind: entry?.kind ?? "indicator",
+      originalSurveys: surveys,
+      ...(primary && !sameSurveyIds(primary, surveys) ? { primarySurveys: primary } : {}),
+    };
   }
   writeFileSync(
     join(SSDS_DIR, "ssds-provenance.generated.json"),

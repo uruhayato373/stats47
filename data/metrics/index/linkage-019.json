@@ -541,11 +541,23 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:hiroshima-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:hyogo-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:kochi-food-culture",
+          "pageId": "blog:ishikawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kagawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:mie-food-culture",
           "kind": "blog"
         },
         {
@@ -553,7 +565,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:saitama-food-culture",
+          "pageId": "blog:tokushima-food-culture",
           "kind": "blog"
         },
         {
@@ -600,11 +612,23 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:hiroshima-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:hyogo-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:kochi-food-culture",
+          "pageId": "blog:ishikawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kagawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:mie-food-culture",
           "kind": "blog"
         },
         {
@@ -612,7 +636,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:saitama-food-culture",
+          "pageId": "blog:tokushima-food-culture",
           "kind": "blog"
         },
         {
@@ -1343,31 +1367,23 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:akita-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:fukui-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:ishikawa-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:miyagi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:oita-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:shimane-food-culture",
+          "pageId": "blog:mandarin-expenditure-ranking",
           "kind": "blog"
         },
         {
           "pageId": "blog:toyama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamagata-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamaguchi-food-culture",
           "kind": "blog"
         },
         {
@@ -1412,31 +1428,19 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:akita-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:fukui-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:ishikawa-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:miyagi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:oita-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:shimane-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:toyama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamagata-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamaguchi-food-culture",
           "kind": "blog"
         },
         {
@@ -3317,6 +3321,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:mandarin-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:other-citrus-consumption-expenditure",
           "kind": "ranking"
         },
@@ -4539,10 +4547,6 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:nagasaki-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "ranking:other-fresh-fish-consumption-expenditure",
           "kind": "ranking"
         }
@@ -5637,6 +5641,10 @@
         {
           "pageId": "area-theme:47000:household-food-spending",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:kumamoto-food-culture",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:other-meat-consumption-expenditure",

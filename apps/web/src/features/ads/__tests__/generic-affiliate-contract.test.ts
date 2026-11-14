@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it } from 'vitest';
 
 import { AFFILIATE_ADS } from '../../../../scripts/affiliate-ads-data';

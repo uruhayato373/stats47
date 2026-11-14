@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-prc-a14",
+  "production": {
+    "id": "NCI-00197",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "園芸・手芸・英語\n盛んな県はばらばら",
+      "subline": "3つの趣味を47都道府県で比較",
+      "subject": "植木鉢と毛糸玉、無文字の単語カードの束を大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n44a61a72fdf2 本文確認2026-11-04。ガーデニングは群馬県、手芸は北海道、英語学習は東京都が上位。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "5efefafe7b3bda2ff44a6d8f10e168ae8c1c5d62857650e3e504cebacb8a5130",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a14/revisions/5efefafe7b3bda2ff44a6d8f10e168ae8c1c5d62857650e3e504cebacb8a5130.png"
+      },
+      "bytes": 34749,
+      "id": "5efefafe7b3bda2ff44a6d8f10e168ae8c1c5d62857650e3e504cebacb8a5130",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:08:06.167Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "94316fdb727eeca711a0a8dcf1ceda4131d26fc4c2126c9cd5fc9fc13bc7bb99"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:13:18.579Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "94316fdb727eeca711a0a8dcf1ceda4131d26fc4c2126c9cd5fc9fc13bc7bb99",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a14/inputs/94316fdb727eeca711a0a8dcf1ceda4131d26fc4c2126c9cd5fc9fc13bc7bb99.json"
+          },
+          "bytes": 1336
+        }
+      }
+    },
+    {
+      "sha256": "d958ece57e57c9d73d04c0ab6038436ff7c5d0555781f1ea0e93c8590e6e0b3b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a14/revisions/d958ece57e57c9d73d04c0ab6038436ff7c5d0555781f1ea0e93c8590e6e0b3b.png"
+      },
+      "bytes": 43595,
+      "id": "d958ece57e57c9d73d04c0ab6038436ff7c5d0555781f1ea0e93c8590e6e0b3b",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:50.086Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324157991/rectangle_large_type_2_52a6978d52737c582910a100c3068a0e.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "d958ece57e57c9d73d04c0ab6038436ff7c5d0555781f1ea0e93c8590e6e0b3b"
+      }
+    },
+    {
+      "sha256": "b91f0c1c7fde759e5e1dc9ef41b50c8785ac03ba3226ab51b8f962deb0dc6e32",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a14/revisions/b91f0c1c7fde759e5e1dc9ef41b50c8785ac03ba3226ab51b8f962deb0dc6e32.png"
+      },
+      "bytes": 1955228,
+      "id": "b91f0c1c7fde759e5e1dc9ef41b50c8785ac03ba3226ab51b8f962deb0dc6e32",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-a515e13a1732",
+      "createdAt": "2026-11-04T01:41:10.279Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "d1da20b34f5afbad56dc4c71537ebdebb1f6effdba3239a10de1534d39b45f17"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:42:00.507Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "d1da20b34f5afbad56dc4c71537ebdebb1f6effdba3239a10de1534d39b45f17",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a14/inputs/d1da20b34f5afbad56dc4c71537ebdebb1f6effdba3239a10de1534d39b45f17.json"
+          },
+          "bytes": 8197
+        },
+        "production": {
+          "id": "NCI-00197",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "a515e13a1732cf07543c4b50bab38875485b374b4c0c1a5b9c1f69c7d52f40a7"
+        }
+      }
+    }
+  ]
+}

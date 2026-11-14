@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "d-geo-land-price-future-population",
+  "production": {
+    "id": "NCI-00246",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "人口減少×住宅地価格\n再現できるデータ",
+      "subline": "47都道府県のCSVと検算手順",
+      "subject": "無文字の表が印刷された紙の束と、閉じたバインダー、小さな家の模型を置く。青緑と黄色の整理された作業机。画面・紙は無文字。地図・行政界・分析結果の図・実在UIは描かない。人物・顔・手・動物は描かない。",
+      "evidence": "https://note.com/stats47/n/n23a2071a016f 本文確認2026-11-04。2026年の住宅地価地点と同じ県の1km将来人口メッシュを座標で結び付けたデータ商品。CSV・lineage・検算を提供。投資判断や地価の予測ではない。"
+    },
+    "titleCorrection": {
+      "generatedTitle": "人口減少×住宅地価格を再現できるデータにする｜47都道府県CSV・lineage・検算",
+      "publishedTitle": "地価上昇地点と周囲の人口減少を照合する｜47都道府県CSV・包含結合・検算",
+      "reason": "2026-11-04に記事台帳の題名をnote公開中の題名へ揃えた。カバーの掲載文言と生成済み版は維持。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "833c11813e0ea1d638cfa0e4b1fbb8664a259c48d5333319cb62a4a887c1f74b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-geo-land-price-future-population/revisions/833c11813e0ea1d638cfa0e4b1fbb8664a259c48d5333319cb62a4a887c1f74b.png"
+      },
+      "bytes": 41407,
+      "id": "833c11813e0ea1d638cfa0e4b1fbb8664a259c48d5333319cb62a4a887c1f74b",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:04.235Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312772483/rectangle_large_type_2_768989768c4400f310fc36086f7b5aba.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "833c11813e0ea1d638cfa0e4b1fbb8664a259c48d5333319cb62a4a887c1f74b"
+      }
+    },
+    {
+      "sha256": "fa28d5de4d6a3b327c7073c57d86bd5f89231cd319b591e22aa566b5cf6ff10a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-geo-land-price-future-population/revisions/fa28d5de4d6a3b327c7073c57d86bd5f89231cd319b591e22aa566b5cf6ff10a.png"
+      },
+      "bytes": 37684,
+      "id": "fa28d5de4d6a3b327c7073c57d86bd5f89231cd319b591e22aa566b5cf6ff10a",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:03:57.208Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "64f00875708487be2636c855eb5c19134d175445c8ae82dcd0ac64ac60e9b0dc"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出し・記事の分析結果の県別地図または記事図が確認できる(平均画素差0.026/255で確認版と同一)",
+        "reviewedAt": "2026-10-11T12:18:08.544Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "64f00875708487be2636c855eb5c19134d175445c8ae82dcd0ac64ac60e9b0dc",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-geo-land-price-future-population/inputs/64f00875708487be2636c855eb5c19134d175445c8ae82dcd0ac64ac60e9b0dc.json"
+          },
+          "bytes": 1347
+        }
+      }
+    },
+    {
+      "sha256": "c84b1aca81d32e1175e7b8df8629bf25de769066b68096f166930918f9b010c1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-geo-land-price-future-population/revisions/c84b1aca81d32e1175e7b8df8629bf25de769066b68096f166930918f9b010c1.png"
+      },
+      "bytes": 1916922,
+      "id": "c84b1aca81d32e1175e7b8df8629bf25de769066b68096f166930918f9b010c1",
+      "kind": "candidate",
+      "version": "pop-NCP-006-v3-b42981f6c692",
+      "createdAt": "2026-11-04T02:33:27.836Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "71ad03cce7fe138dbf93400b9bfaf79606d5718faeb50a65024e26d08ceb00ea"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T02:35:15.045Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "71ad03cce7fe138dbf93400b9bfaf79606d5718faeb50a65024e26d08ceb00ea",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-geo-land-price-future-population/inputs/71ad03cce7fe138dbf93400b9bfaf79606d5718faeb50a65024e26d08ceb00ea.json"
+          },
+          "bytes": 8295
+        },
+        "production": {
+          "id": "NCI-00246",
+          "policyId": "NCP-006",
+          "policyVersion": 3,
+          "planSha256": "b42981f6c69288185a371a22373770ce43ed6a61216d8bbd21dc7c7e4ff4179a"
+        }
+      }
+    }
+  ]
+}

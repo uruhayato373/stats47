@@ -33,7 +33,7 @@ import { ArticleShell, PageHeader } from "@/components/layout";
 import { PanelGrid } from "@/components/layout/PageShell";
 import { SectionCard } from "@/components/surface";
 
-import { OPERATOR_PROFILE } from "@/config/operator-profile";
+import { OPERATOR_AVATAR_CLASS, OPERATOR_AVATAR_SIZE, OPERATOR_PROFILE } from "@/config/operator-profile";
 import { CONTACT_FORM_URL, DEFAULT_OGP_IMAGE_PATH, SITE_ORIGIN } from "@/config/site";
 
 interface LegalSectionProps {
@@ -72,10 +72,6 @@ const EXTERNAL_LINKS = {
   googleAdSettings: "https://www.google.com/settings/ads",
   contactForm: CONTACT_FORM_URL,
 } as const;
-
-// 共通テキストスタイルクラス
-const TEXT_STYLE = "text-xs leading-relaxed md:text-sm md:leading-5";
-const TEXT_STYLE_WITH_MARGIN = "text-xs leading-relaxed mb-4 md:text-sm md:leading-5";
 
 /**
  * ページメタデータ
@@ -121,12 +117,12 @@ export default function PrivacyPage() {
             <Image
               src={OPERATOR_PROFILE.avatarSrc}
               alt={OPERATOR_PROFILE.avatarAlt}
-              width={48}
-              height={48}
-              className="w-12 h-12 rounded-full object-cover shrink-0"
+              width={OPERATOR_AVATAR_SIZE}
+              height={OPERATOR_AVATAR_SIZE}
+              className={OPERATOR_AVATAR_CLASS}
             />
             <div>
-              <p className="font-semibold text-sm md:text-base">
+              <p className="font-semibold text-base">
                 {OPERATOR_PROFILE.name}
               </p>
               <div className="flex items-center gap-1 mt-1">
@@ -196,10 +192,10 @@ export default function PrivacyPage() {
         </LegalSection>
 
         <LegalSection number="2" title="個人情報の取得">
-          <p className={TEXT_STYLE_WITH_MARGIN}>
+          <p className="mb-4">
             当サービスは、以下の場合に個人情報を取得することがあります。
           </p>
-          <ul className={`space-y-2 ${TEXT_STYLE}`}>
+          <ul className="space-y-2">
             <li>ユーザー登録時（メールアドレス、ユーザー名など）</li>
             <li>
               お問い合わせフォーム送信時（お名前、メールアドレス、お問い合わせ内容）
@@ -210,10 +206,10 @@ export default function PrivacyPage() {
 
         {/* 3. 個人情報の利用目的 / 6. 第三者提供 — 2列 */}
         <LegalSection number="3" title="個人情報の利用目的">
-          <p className={TEXT_STYLE_WITH_MARGIN}>
+          <p className="mb-4">
             当サービスは、取得した個人情報を以下の目的で利用します。
           </p>
-          <ul className={`space-y-2 ${TEXT_STYLE}`}>
+          <ul className="space-y-2">
             <li>当サービスの提供・運営・改善のため</li>
             <li>お問い合わせ対応のため</li>
             <li>不正行為の防止、セキュリティ確保のため</li>
@@ -223,10 +219,10 @@ export default function PrivacyPage() {
         </LegalSection>
 
         <LegalSection number="6" title="第三者提供">
-          <p className={TEXT_STYLE_WITH_MARGIN}>
+          <p className="mb-4">
             当サービスは、以下の場合を除き、本人の同意なく個人情報を第三者へ提供しません。
           </p>
-          <ul className={`space-y-2 ${TEXT_STYLE}`}>
+          <ul className="space-y-2">
             <li>法令に基づく場合</li>
             <li>人の生命、身体または財産の保護のために必要がある場合</li>
             <li>
@@ -242,14 +238,14 @@ export default function PrivacyPage() {
         <div className="lg:col-span-2">
           <LegalSection number="4" title="Cookie（クッキー）の使用について">
             <div className="space-y-4">
-              <p className={TEXT_STYLE}>
+              <p>
                 当サービスは、サービス品質の向上と利用状況の分析のため、Cookieを使用しています。
               </p>
               <div>
                 <h3 className="text-sm font-semibold mb-3">
                   4.1 使用するCookie
                 </h3>
-                <ul className={`space-y-2 ${TEXT_STYLE}`}>
+                <ul className="space-y-2">
                   <li>
                     <strong>Google Analytics</strong>: アクセス解析のため
                     <ul className="mt-2 ml-4 space-y-1">
@@ -276,7 +272,7 @@ export default function PrivacyPage() {
                 <h3 className="text-sm font-semibold mb-3">
                   4.2 Cookieの無効化
                 </h3>
-                <p className={TEXT_STYLE}>
+                <p>
                   ブラウザの設定により、Cookieを無効にすることができます。
                   ただし、Cookieを無効にした場合、一部の機能が正常に動作しない可能性があります。
                 </p>
@@ -289,7 +285,7 @@ export default function PrivacyPage() {
         <div className="lg:col-span-2">
           <LegalSection number="5" title="広告配信について">
             <div className="space-y-4">
-              <p className={TEXT_STYLE}>
+              <p>
                 現在、当サービスでは第三者配信の広告サービス（Google
                 AdSense）による広告表示と関連スクリプトを一時停止しています。
                 将来再開する場合、広告配信プロバイダーは、ユーザーが当サービスや他のウェブサイトにアクセスした際の情報に基づいて、
@@ -299,7 +295,7 @@ export default function PrivacyPage() {
                 <h3 className="text-sm font-semibold mb-3">
                   5.1 広告配信プロバイダー
                 </h3>
-                <ul className={`space-y-2 ${TEXT_STYLE}`}>
+                <ul className="space-y-2">
                   <li>
                     <strong>Google AdSense</strong>
                     <ul className="mt-2 ml-4 space-y-1">
@@ -329,7 +325,7 @@ export default function PrivacyPage() {
                   </li>
                 </ul>
               </div>
-              <p className={TEXT_STYLE}>
+              <p>
                 Google AdSenseを再開した場合、広告配信プロバイダーはCookieを使用して、ユーザーが過去にアクセスしたウェブサイトの情報に基づいて広告を配信することがあります。
                 ユーザーは、上記のオプトアウトページから、パーソナライズド広告を停止できます。
               </p>
@@ -337,21 +333,21 @@ export default function PrivacyPage() {
                 <h3 className="text-sm font-semibold mb-3">
                   5.2 アフィリエイトプログラムについて
                 </h3>
-                <p className={TEXT_STYLE_WITH_MARGIN}>
+                <p className="mb-4">
                   当サービスは、アフィリエイト広告（Amazonアソシエイトを含む）を掲載しています。
                   Amazonのアソシエイトとして、当メディアは適格販売により収入を得ています。
                 </p>
-                <p className={TEXT_STYLE}>
+                <p>
                   当サービスが参加している主なアフィリエイトプログラムは以下のとおりです。
                 </p>
-                <ul className={`mt-2 space-y-2 ${TEXT_STYLE}`}>
+                <ul className="mt-2 space-y-2">
                   <li>
                     <strong>Amazonアソシエイト・プログラム</strong>
                     （Amazon.co.jp を宣伝しリンクすることによって紹介料を得る手段を提供する、アフィリエイトプログラム）
                   </li>
                   <li>その他、第三者が運営するアフィリエイトサービス</li>
                 </ul>
-                <p className={`mt-2 ${TEXT_STYLE}`}>
+                <p className="mt-2">
                   これらのプログラムにおいて、広告配信事業者がCookie等を使用して
                   ユーザーのアクセス情報を取得する場合があります。取得される情報に
                   個人を特定するものは含まれません。
@@ -363,14 +359,14 @@ export default function PrivacyPage() {
 
         {/* 7. 安全管理措置 / 8. 個人情報の開示・訂正・削除 — 2列 */}
         <LegalSection number="7" title="安全管理措置">
-          <p className={TEXT_STYLE}>
+          <p>
             当サービスは、個人情報の漏えい、滅失又はき損の防止その他の安全管理のために、
             必要かつ適切な技術的・組織的安全管理措置を講じます。
           </p>
         </LegalSection>
 
         <LegalSection number="8" title="個人情報の開示・訂正・削除">
-          <p className={TEXT_STYLE}>
+          <p>
             利用者からの個人情報の開示・訂正・削除等の請求には、法令に従い適切に対応します。
             ご請求の際は、お問い合わせ窓口までご連絡ください。
           </p>
@@ -378,14 +374,14 @@ export default function PrivacyPage() {
 
         {/* 9. プライバシーポリシーの変更 / 10. お問い合わせ窓口 — 2列 */}
         <LegalSection number="9" title="プライバシーポリシーの変更">
-          <p className={TEXT_STYLE}>
+          <p>
             本ポリシーは、必要に応じて予告なく変更することがあります。
             変更後のプライバシーポリシーは、当ページに掲載した時点より効力を生じるものとします。
           </p>
         </LegalSection>
 
         <LegalSection number="10" title="お問い合わせ窓口">
-          <p className={TEXT_STYLE_WITH_MARGIN}>
+          <p className="mb-4">
             本プライバシーポリシーに関するお問い合わせ、個人情報の開示・訂正・削除のご請求は、
             以下のGoogleフォームよりお願いいたします。
           </p>
@@ -394,7 +390,7 @@ export default function PrivacyPage() {
               href={EXTERNAL_LINKS.contactForm}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary hover:underline font-medium text-xs md:text-sm"
+              className="text-primary hover:underline font-medium"
             >
               お問い合わせフォーム
             </a>

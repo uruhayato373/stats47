@@ -26,9 +26,10 @@
 - **rules は `paths:` 条件付き読み込み**: 常時は `agent-output-contract.md` / `evidence-based-judgment.md` の 2 本のみ (CLAUDE.md 込み 600 行上限・DG070)。新規 rule は必ず `paths:` を付ける。チャット直打ちの git push / R2 push / SNS 投稿は `pre-bash-safety.js` の advisory が要約を返す → `docs-vs-issues.md`「rules の読み込み条件」
 - **モデル別 prompt の SSOT**: task capsule・effort・委譲上限は `.claude/rules/model-prompting.md`
 - **Agent prompt 冒頭に task capsule + Output Format を指定** → `.claude/rules/agent-output-contract.md`
+- **「以前から落ちている」を通過の理由にしない**: 失敗したテスト・検査を「今回の変更と無関係」として素通りさせない。その場で直すか、失敗の出力と再現コマンドを書いたカードを `.claude/todo/backlog.md` に起票してから進む (既にカードがあれば観測日を追記する)。継承か自作かの切り分けは `.claude/rules/branch-workflow.md`「マージ中にゲートが落ちたら」
 - **一時ファイルは `/tmp/`**: プロジェクトルートに作らない (pre-commit が `tmp_*` 等を自動削除)
 - **作ったら消す・ローカルを正本にしない**: スキル・エージェント・メインとも、作業で作ったファイルは最後に消す。残すものは git・R2・Google Drive (`drive-archive.mjs`) へ移してから消す。`.local/<名前>` の新しい置き場は `config/local-resources.json` に寿命か理由を付けて登録する (`check-local-registry.mjs` が PR で止める) → `.claude/rules/local-environment.md`「ローカルに残さない」
-- **レビューをタスクへ変換する**: 批判的レビュー / pre-mortem / 監査の全文を `docs/` に蓄積しない。未完了の対策だけを優先度・実行順・停止条件・完了条件付きで `.claude/todo/` へ統合する。恒久判断は既存の戦略文書・rules・コード近傍READMEへ、agent用の定期履歴は各skillの `reference/` へ、計測・監査・是正キューの記録は `data/<取得元>/` へ置く (`.claude/state/` はエージェント運用の状態だけ。判断は `.claude/rules/data-storage.md`)。Issues は (a) `enhancement`/`bug` ラベルの PR で close される機能改修、(b) `auto-generated` ラベルの機械アラートのみ → `.claude/rules/docs-vs-issues.md`
+- **レビューをタスクへ変換する**: 批判的レビュー / pre-mortem / 監査の全文を `docs/` に蓄積しない。未完了の対策だけを優先度・実行順・停止条件・完了条件付きで `.claude/todo/` へ統合する。恒久判断は既存の戦略文書・rules・コード近傍READMEへ、定期のレビュー・監査の全文と計測・是正キューの記録は `data/<取得元>/` へ置く (skill の `reference/` は手順・契約・テンプレだけ。`.claude/state/` はエージェント運用の状態だけ。判断は `.claude/rules/data-storage.md`)。Issues は (a) `enhancement`/`bug` ラベルの PR で close される機能改修、(b) `auto-generated` ラベルの機械アラートのみ → `.claude/rules/docs-vs-issues.md`
 - **文書作成・整理はガバナンスSSOTに従う**: 新規文書より既存SSOTへの統合を優先する。判断規則は`.claude/rules/docs-vs-issues.md`、機械契約は`.claude/config/docs-governance.json`。文書の作成・移動・削除後は`npm run docs:fix`と`npm run docs:check`を実行する。意味判断を伴う棚卸しは`/maintain-docs`
 - **参考文献は private Google Drive で保全し、利用実装仕様書を通して展開する**: 固定ルートは `stats47/参考文献/<資料名>/<版>/` (1 資料 1 版 = 1 directory。PDF・`pages/`・`md/`・`figures/` を展開したまま置き、tar bundle にしない)。folder名は日本語を優先する。ローカルマウントから`$TMPDIR/stats47-source-vault/`へ検証付きで復元し、`npm run source-vault:process`の共通OCR・ページ画像・内部cropを使う。全ページ処理後は`npm run source-vault:inventory`で本文・書籍値を含まない解決台帳を生成し、coverage 100%を確認してからprofile単位で一時領域を削除する。リポジトリ内の`books/`、`docs/books/`、`.claude/pdfs/`は`npm run source-vault:check`で禁止する。資料単位のactiveな利用実装仕様書で権利・一次資料・mapping・gateを定義してから既存SSOTへ反映する → `.claude/rules/reference-source-standards.md`
 - **完全 DB レスが正典** → `docs/01_技術設計/02_データアーキテクチャ.md`。永続/常駐 D1 を SSOT に持たない。SSOT は **git の `data/`** と **R2** の二つだけ。本番アプリは R2 snapshot のみ読む:
@@ -73,7 +74,7 @@
 | コンテンツ backlog | `docs/30_note記事企画/backlog/` |
 | 未着手の機能・自動化・指標拡充バックログ | `.claude/todo/backlog.md`（tier 見出し + タグ行のカード形式） |
 | 非自明な API 仕様・制約 | `/knowledge` (問題・原因・対策の 3 項目) |
-| プロジェクト固有の恒常事実 | auto memory → 正典は **repo 内 `.claude/memory/`**（git で複数 PC・クラウドと共有）。Claude Code のグローバルパス `~/.claude/projects/<hash>/memory/` は `.claude/memory/` への symlink (Windows は junction)。**新しいマシンで clone した直後に `node .claude/scripts/setup-memory-symlink.mjs` を 1 回実行**して張る (`--check` で確認。純 Node なので Windows / Mac 共通) |
+| プロジェクト固有の恒常事実 | auto memory → 正典は **repo 内 `.claude/memory/`**（git で複数 PC・クラウドと共有）。Claude Code のグローバルパス `~/.claude/projects/<hash>/memory/` は `.claude/memory/` への symlink (Windows は junction)。**新しいマシンで clone した直後に `node .claude/scripts/lib/setup-memory-symlink.mjs` を 1 回実行**して張る (`--check` で確認。純 Node なので Windows / Mac 共通) |
 
 ## ドキュメント参照ガイド
 

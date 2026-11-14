@@ -1,0 +1,1118 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-13T23:03:51.401Z",
+  "kind": "audit-api",
+  "audit": {
+    "propertyId": "463218070",
+    "gscProperty": "sc-domain:stats47.jp",
+    "property": {
+      "status": "ok",
+      "name": "properties/463218070"
+    },
+    "webStreams": {
+      "status": "ok",
+      "host": "stats47.jp",
+      "webStreamCount": 1
+    },
+    "customDimensions": {
+      "status": "ok",
+      "params": [
+        "ranking_key",
+        "category_key",
+        "area_type",
+        "search_term",
+        "year_code",
+        "creative_size",
+        "affiliate_vertical",
+        "affiliate_category",
+        "link_position",
+        "variant_id",
+        "experiment_id",
+        "rail_slot",
+        "rail_widget",
+        "nav_surface",
+        "nav_label",
+        "ad_id",
+        "progress",
+        "theme_slug",
+        "ui_target",
+        "experiment_variant",
+        "area_code",
+        "target_type",
+        "cta_id",
+        "pv_trigger",
+        "result_type",
+        "ui_action",
+        "geography",
+        "declared_purpose",
+        "download_purpose",
+        "slot",
+        "card_variant",
+        "analysis_slug",
+        "result_position",
+        "interaction_type",
+        "product_destination",
+        "product_id"
+      ],
+      "scopeByParam": {
+        "ranking_key": "EVENT",
+        "category_key": "EVENT",
+        "area_type": "EVENT",
+        "search_term": "EVENT",
+        "year_code": "EVENT",
+        "creative_size": "EVENT",
+        "affiliate_vertical": "EVENT",
+        "affiliate_category": "EVENT",
+        "link_position": "EVENT",
+        "variant_id": "EVENT",
+        "experiment_id": "EVENT",
+        "rail_slot": "EVENT",
+        "rail_widget": "EVENT",
+        "nav_surface": "EVENT",
+        "nav_label": "EVENT",
+        "ad_id": "EVENT",
+        "progress": "EVENT",
+        "theme_slug": "EVENT",
+        "ui_target": "EVENT",
+        "experiment_variant": "EVENT",
+        "area_code": "EVENT",
+        "target_type": "EVENT",
+        "cta_id": "EVENT",
+        "pv_trigger": "EVENT",
+        "result_type": "EVENT",
+        "ui_action": "EVENT",
+        "geography": "EVENT",
+        "declared_purpose": "USER",
+        "download_purpose": "EVENT",
+        "slot": "EVENT",
+        "card_variant": "EVENT",
+        "analysis_slug": "EVENT",
+        "result_position": "EVENT",
+        "interaction_type": "EVENT",
+        "product_destination": "EVENT",
+        "product_id": "EVENT"
+      },
+      "eventScopedCount": 35,
+      "userScopedCount": 1,
+      "count": 36
+    },
+    "adsenseLinks": {
+      "status": "ok",
+      "linkCount": 1,
+      "linked": true
+    },
+    "settings": {
+      "keyEvents": {
+        "status": "ok",
+        "eventNames": [
+          "affiliate_click",
+          "contact_click",
+          "cta_click",
+          "file_download",
+          "product_click",
+          "purchase"
+        ]
+      },
+      "customMetrics": {
+        "status": "ok",
+        "count": 0,
+        "params": []
+      },
+      "dataRetention": {
+        "status": "ok",
+        "eventDataRetention": "FOURTEEN_MONTHS",
+        "resetUserDataOnNewActivity": true
+      },
+      "googleSignals": {
+        "status": "ok",
+        "state": "GOOGLE_SIGNALS_ENABLED"
+      },
+      "enhancedMeasurement": {
+        "status": "ok",
+        "streamEnabled": true,
+        "pageChangesEnabled": null,
+        "scrollsEnabled": true,
+        "outboundClicksEnabled": true,
+        "siteSearchEnabled": true,
+        "fileDownloadsEnabled": true,
+        "warnings": []
+      },
+      "bigQueryLinks": {
+        "status": "ok",
+        "linkCount": 1,
+        "links": [
+          {
+            "dailyExportEnabled": true,
+            "streamingExportEnabled": null,
+            "datasetLocation": "US"
+          }
+        ]
+      },
+      "audiences": {
+        "status": "ok",
+        "count": 2
+      }
+    },
+    "gsc": {
+      "status": "ok",
+      "property": "sc-domain:stats47.jp",
+      "present": true,
+      "permissionLevel": "siteOwner",
+      "siteCount": 2
+    },
+    "adsense": {
+      "account": {
+        "status": "credentials-missing",
+        "detail": "GOOGLE_ADSENSE_CLIENT_ID / CLIENT_SECRET / REFRESH_TOKEN が無い (.env.local か shell env に設定する)"
+      },
+      "adUnits": {
+        "status": "credentials-missing",
+        "source": "api",
+        "units": [],
+        "skippedClients": [],
+        "desired": [],
+        "codeSlots": [
+          {
+            "exportName": "RANKING_PAGE_TABLE_SIDE",
+            "slotId": "5182030050",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "SIDEBAR_AFFILIATE_FALLBACK",
+            "slotId": "4607314986",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "RANKING_SIDEBAR_TOP",
+            "slotId": "8897913786",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "RAIL_RECT",
+            "slotId": "9435960671",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "RANKING_PAGE_FOOTER",
+            "slotId": "3686603642",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "RANKING_RAIL_MIDDLE",
+            "slotId": "2308454706",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "RANKING_PAGE_END",
+            "slotId": "3452480564",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "BLOG_ROW_2",
+            "slotId": "9307296688",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "BLOG_ROW_3",
+            "slotId": "4897424179",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "BLOG_END",
+            "slotId": "2394403971",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "BLOG_RAIL",
+            "slotId": "1595814272",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "BLOG_RAIL_STICKY",
+            "slotId": "6270069803",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "BLOG_RAIL_MIDDLE",
+            "slotId": "4422635661",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "AREA_DATABOOK_ROW_1",
+            "slotId": "3776748345",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "AREA_DATABOOK_ROW_2",
+            "slotId": "3704450369",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "AREA_DATABOOK_ROW_3",
+            "slotId": "3540944628",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "AREA_AFTER_DATABOOK",
+            "slotId": "4929902121",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "AREA_END",
+            "slotId": "4738330430",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "AREA_INFEED",
+            "slotId": "9371196667",
+            "format": "infeed",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "MUNICIPALITY_AFTER_MAP",
+            "slotId": "7607523006",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "MUNICIPALITY_AFTER_TABLE",
+            "slotId": "4981359660",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "MUNICIPALITY_RAIL",
+            "slotId": "3309698695",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "MUNICIPALITY_RAIL_STICKY",
+            "slotId": "5716370187",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "BLOG_ARTICLE_INLINE",
+            "slotId": "6809797335",
+            "format": "article",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "RANKING_INCONTENT_MOBILE",
+            "slotId": "2894688778",
+            "format": "article",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "THEMES_CONTENT",
+            "slotId": "8298138821",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "THEME_ROW_2",
+            "slotId": "9630518288",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "THEME_END",
+            "slotId": "2430685118",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "HOME_ROW_1",
+            "slotId": "6019089689",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "HOME_ROW_2",
+            "slotId": "3189892156",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "HOME_RAIL_STICKY",
+            "slotId": "3704063320",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "CATEGORY_RAIL_STICKY",
+            "slotId": "5537009425",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "HUB_ROW_2",
+            "slotId": "6020069625",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "SEARCH_ROW_1",
+            "slotId": "4024103858",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "SEARCH_ROW_2",
+            "slotId": "9112779000",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "SEARCH_ROW_3",
+            "slotId": "5121563102",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "CITY_INARTICLE_1",
+            "slotId": "8714817044",
+            "format": "article",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "CITY_INARTICLE_2",
+            "slotId": "6088653702",
+            "format": "article",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "CITY_INARTICLE_3",
+            "slotId": "9836327027",
+            "format": "article",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "CITY_INFEED",
+            "slotId": "1957837004",
+            "format": "infeed",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "THEMES_INDEX_INFEED_1",
+            "slotId": "2956058055",
+            "format": "infeed",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "THEMES_INDEX_INFEED_2",
+            "slotId": "6929982144",
+            "format": "infeed",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "MUNICIPALITIES_INDEX_INFEED",
+            "slotId": "7257285208",
+            "format": "infeed",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "SURVEY_INDEX_INFEED",
+            "slotId": "9691876858",
+            "format": "infeed",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "BLOG_INDEX_INFEED_1",
+            "slotId": "6024415380",
+            "format": "infeed",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "BLOG_INDEX_INFEED_2",
+            "slotId": "4247978485",
+            "format": "infeed",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "SEARCH_INFEED",
+            "slotId": "7824582218",
+            "format": "infeed",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "HUB_INCONTENT",
+            "slotId": "9995373035",
+            "format": "article",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "CONTENT_FOOTER",
+            "slotId": "6994459114",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          }
+        ]
+      },
+      "codeSlotsError": null,
+      "expected": "missing"
+    },
+    "dimensionReconcile": {
+      "rows": [
+        {
+          "events": [
+            "nav_click"
+          ],
+          "param": "nav_label",
+          "ledgerStatus": "✅登録済 (2026-07-20)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "nav_click"
+          ],
+          "param": "nav_surface",
+          "ledgerStatus": "✅登録済 (2026-07-20)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "nav_impression",
+            "nav_click"
+          ],
+          "param": "nav_label",
+          "ledgerStatus": "✅登録済 (既存登録を再利用: `nav_*` は 2026-07-20、`card_variant` は 2026-09-26)。追加登録なし。実装 2026-11-12、本番送信・週次実測は反映後に確認",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "nav_impression",
+            "nav_click"
+          ],
+          "param": "nav_surface",
+          "ledgerStatus": "✅登録済 (既存登録を再利用: `nav_*` は 2026-07-20、`card_variant` は 2026-09-26)。追加登録なし。実装 2026-11-12、本番送信・週次実測は反映後に確認",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "nav_impression",
+            "nav_click"
+          ],
+          "param": "card_variant",
+          "ledgerStatus": "✅登録済 (既存登録を再利用: `nav_*` は 2026-07-20、`card_variant` は 2026-09-26)。追加登録なし。実装 2026-11-12、本番送信・週次実測は反映後に確認",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "rail_click"
+          ],
+          "param": "rail_widget",
+          "ledgerStatus": "✅登録済 (2026-07-20)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "rail_click"
+          ],
+          "param": "rail_slot",
+          "ledgerStatus": "✅登録済 (2026-07-20)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "affiliate_click"
+          ],
+          "param": "affiliate_vertical",
+          "ledgerStatus": "**✅登録済 (2026-07-06)**",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "affiliate_click"
+          ],
+          "param": "affiliate_category",
+          "ledgerStatus": "**✅登録済 (2026-07-06)**",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "affiliate_click"
+          ],
+          "param": "link_position",
+          "ledgerStatus": "**✅登録済 (2026-07-06)**",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "affiliate_click"
+          ],
+          "param": "experiment_id",
+          "ledgerStatus": "**✅登録済 (2026-07-06)**",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "affiliate_click"
+          ],
+          "param": "variant_id",
+          "ledgerStatus": "**✅登録済 (2026-07-06)**",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "affiliate_click"
+          ],
+          "param": "creative_size",
+          "ledgerStatus": "**✅登録済 (2026-07-06)**",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "affiliate_click"
+          ],
+          "param": "ad_id",
+          "ledgerStatus": "**✅登録済 (2026-07-28)** — google-admin Playwright runner で `Affiliate ad ID` (scope=Event, param=`ad_id`) を実登録・reload 後に画面 verify (最終変更日 2026年7月28日)。集計反映は 24-48h・非遡及のため、API で `customEvent:ad_id` が引けるのは反映後",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "affiliate_impression"
+          ],
+          "param": "affiliate_vertical",
+          "ledgerStatus": "**✅登録済 (2026-07-31 API確認)** — dimensionはparameter名に紐づき、イベント名改名後もlive定義に存在",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "affiliate_impression"
+          ],
+          "param": "affiliate_category",
+          "ledgerStatus": "**✅登録済 (2026-07-31 API確認)** — dimensionはparameter名に紐づき、イベント名改名後もlive定義に存在",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "affiliate_impression"
+          ],
+          "param": "link_position",
+          "ledgerStatus": "**✅登録済 (2026-07-31 API確認)** — dimensionはparameter名に紐づき、イベント名改名後もlive定義に存在",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "affiliate_impression"
+          ],
+          "param": "experiment_id",
+          "ledgerStatus": "**✅登録済 (2026-07-31 API確認)** — dimensionはparameter名に紐づき、イベント名改名後もlive定義に存在",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "affiliate_impression"
+          ],
+          "param": "variant_id",
+          "ledgerStatus": "**✅登録済 (2026-07-31 API確認)** — dimensionはparameter名に紐づき、イベント名改名後もlive定義に存在",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "affiliate_impression"
+          ],
+          "param": "creative_size",
+          "ledgerStatus": "**✅登録済 (2026-07-31 API確認)** — dimensionはparameter名に紐づき、イベント名改名後もlive定義に存在",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "cta_click"
+          ],
+          "param": "link_position",
+          "ledgerStatus": "✅登録済 (2026-07-31 API確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "cta_click"
+          ],
+          "param": "cta_id",
+          "ledgerStatus": "✅登録済 (2026-09-26 Admin API で作成・audit-api で確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "cta_click"
+          ],
+          "param": "target_type",
+          "ledgerStatus": "✅登録済 (2026-09-26 Admin API で作成・audit-api で確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "home_featured_impression",
+            "home_featured_click"
+          ],
+          "param": "experiment_id",
+          "ledgerStatus": "✅登録済 (2026-07-31 API確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "home_featured_impression",
+            "home_featured_click"
+          ],
+          "param": "card_variant",
+          "ledgerStatus": "✅登録済 (2026-09-26 Admin API で作成・audit-api で確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "home_featured_impression",
+            "home_featured_click"
+          ],
+          "param": "slot",
+          "ledgerStatus": "✅登録済 (2026-09-26 Admin API で作成・audit-api で確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "home_featured_impression",
+            "home_featured_click"
+          ],
+          "param": "experiment_variant",
+          "ledgerStatus": "✅登録済 (2026-09-26 Admin API で作成・audit-api で確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "ranking_view"
+          ],
+          "param": "ranking_key",
+          "ledgerStatus": "✅登録済 (2026-07-31 API確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "ranking_view"
+          ],
+          "param": "category_key",
+          "ledgerStatus": "✅登録済 (2026-07-31 API確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "ranking_view"
+          ],
+          "param": "area_type",
+          "ledgerStatus": "✅登録済 (2026-07-31 API確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "ranking_view"
+          ],
+          "param": "year_code",
+          "ledgerStatus": "✅登録済 (2026-07-31 API確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "file_download"
+          ],
+          "param": "ranking_key",
+          "ledgerStatus": "✅登録済 (2026-07-31 API確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "file_download"
+          ],
+          "param": "year_code",
+          "ledgerStatus": "✅登録済 (2026-07-31 API確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "csv_download_purpose"
+          ],
+          "param": "download_purpose",
+          "ledgerStatus": "✅登録済 (2026-09-26 Admin API で作成・audit-api で確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "page_view"
+          ],
+          "param": "pv_trigger",
+          "ledgerStatus": "✅登録済 (2026-09-26 Admin API で作成・audit-api で確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "page_view"
+          ],
+          "param": "theme_slug",
+          "ledgerStatus": "✅登録済 (2026-09-26 Admin API で作成・audit-api で確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "page_view"
+          ],
+          "param": "area_code",
+          "ledgerStatus": "✅登録済 (2026-09-26 Admin API で作成・audit-api で確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "ui_interaction"
+          ],
+          "param": "ui_action",
+          "ledgerStatus": "✅登録済 (2026-09-26 Admin API で作成・audit-api で確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "ui_interaction"
+          ],
+          "param": "ui_target",
+          "ledgerStatus": "✅登録済 (2026-09-26 Admin API で作成・audit-api で確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "read_progress"
+          ],
+          "param": "progress",
+          "ledgerStatus": "✅登録済 (2026-09-26 Admin API で作成・audit-api で確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "search_result_click"
+          ],
+          "param": "result_type",
+          "ledgerStatus": "✅登録済 (2026-09-26 Admin API で作成・audit-api で確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "search_result_click"
+          ],
+          "param": "result_position",
+          "ledgerStatus": "✅登録済 (2026-09-26 Admin API で作成・audit-api で確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "product_impression",
+            "product_click"
+          ],
+          "param": "product_destination",
+          "ledgerStatus": "✅登録済 (2026-11-03 GA4 管理画面で作成し、カスタム定義の一覧で 2 件を読み戻して確認。`audit-api` の突合も confirmed-registered)。キーイベント `product_click` も 2026-11-03 に Admin API (`applyCreateKeyEvent`、ローカルの鍵・オーナーの指示) で作成し、読み戻しで確認 (`keyEvents/16259309748`)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "product_impression",
+            "product_click"
+          ],
+          "param": "product_id",
+          "ledgerStatus": "✅登録済 (2026-11-03 GA4 管理画面で作成し、カスタム定義の一覧で 2 件を読み戻して確認。`audit-api` の突合も confirmed-registered)。キーイベント `product_click` も 2026-11-03 に Admin API (`applyCreateKeyEvent`、ローカルの鍵・オーナーの指示) で作成し、読み戻しで確認 (`keyEvents/16259309748`)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "declared_purpose"
+          ],
+          "param": "declared_purpose",
+          "ledgerStatus": "✅登録済 (2026-09-26 Admin API で作成・audit-api で確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "geo_analysis_view"
+          ],
+          "param": "analysis_slug",
+          "ledgerStatus": "✅登録済 (2026-09-26 Admin API で作成・audit-api で確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "geo_analysis_view"
+          ],
+          "param": "geography",
+          "ledgerStatus": "✅登録済 (2026-09-26 Admin API で作成・audit-api で確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "geo_map_interaction"
+          ],
+          "param": "analysis_slug",
+          "ledgerStatus": "✅登録済 (2026-09-26 Admin API で作成・audit-api で確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "geo_map_interaction"
+          ],
+          "param": "geography",
+          "ledgerStatus": "✅登録済 (2026-09-26 Admin API で作成・audit-api で確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "geo_map_interaction"
+          ],
+          "param": "interaction_type",
+          "ledgerStatus": "✅登録済 (2026-09-26 Admin API で作成・audit-api で確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "geo_map_interaction"
+          ],
+          "param": "area_code",
+          "ledgerStatus": "✅登録済 (2026-09-26 Admin API で作成・audit-api で確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "geo_region_select"
+          ],
+          "param": "analysis_slug",
+          "ledgerStatus": "✅登録済 (2026-09-26 Admin API で作成・audit-api で確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "geo_region_select"
+          ],
+          "param": "geography",
+          "ledgerStatus": "✅登録済 (2026-09-26 Admin API で作成・audit-api で確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        },
+        {
+          "events": [
+            "geo_region_select"
+          ],
+          "param": "area_code",
+          "ledgerStatus": "✅登録済 (2026-09-26 Admin API で作成・audit-api で確認)",
+          "statusKind": "registered",
+          "present": true,
+          "verdict": "confirmed-registered"
+        }
+      ],
+      "summary": {
+        "confirmed-registered": 54
+      },
+      "requiredParams": [
+        "nav_label",
+        "nav_surface",
+        "card_variant",
+        "rail_widget",
+        "rail_slot",
+        "affiliate_vertical",
+        "affiliate_category",
+        "link_position",
+        "experiment_id",
+        "variant_id",
+        "creative_size",
+        "ad_id",
+        "cta_id",
+        "target_type",
+        "slot",
+        "experiment_variant",
+        "ranking_key",
+        "category_key",
+        "area_type",
+        "year_code",
+        "download_purpose",
+        "pv_trigger",
+        "theme_slug",
+        "area_code",
+        "ui_action",
+        "ui_target",
+        "progress",
+        "result_type",
+        "result_position",
+        "product_destination",
+        "product_id",
+        "declared_purpose",
+        "analysis_slug",
+        "geography",
+        "interaction_type"
+      ]
+    }
+  },
+  "problems": []
+}

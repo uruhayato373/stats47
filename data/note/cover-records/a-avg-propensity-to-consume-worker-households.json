@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-avg-propensity-to-consume-worker-households",
+  "production": {
+    "id": "NCI-00051",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "平均消費性向\n高い県は鳥取県",
+      "subline": "2024年・勤労者世帯",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無文字の家計簿を1冊。実際の支出額や貯蓄率を暗示する現金の山、グラフは描かない。 左に太い見出し、下に補足の太い帯。文字は指定全文のみ。幅320pxでも全行が明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・表彰台・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n76446d252957 2026-10-23公開API本文照合。鳥取県は71.5％で1位。勤労者世帯の可処分所得に占める消費支出の割合。 カバーは数値・因果を追加せず、対象年・単位・首位県だけを示す。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "69a65eb9821bc8ac4b8f52bcb5247347824bdac526af7d0940e7bb690a55c700",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-avg-propensity-to-consume-worker-households/revisions/69a65eb9821bc8ac4b8f52bcb5247347824bdac526af7d0940e7bb690a55c700.png"
+      },
+      "bytes": 66362,
+      "id": "69a65eb9821bc8ac4b8f52bcb5247347824bdac526af7d0940e7bb690a55c700",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:07.122Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312770750/rectangle_large_type_2_12c7435dcb340194d8943d9d8aa84c49.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "69a65eb9821bc8ac4b8f52bcb5247347824bdac526af7d0940e7bb690a55c700"
+      }
+    },
+    {
+      "sha256": "2cf341f499f077977ea78755fca75b98c78b3b380b60ecaca12c28cf9d3555c2",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-avg-propensity-to-consume-worker-households/revisions/2cf341f499f077977ea78755fca75b98c78b3b380b60ecaca12c28cf9d3555c2.png"
+      },
+      "bytes": 113502,
+      "id": "2cf341f499f077977ea78755fca75b98c78b3b380b60ecaca12c28cf9d3555c2",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:12:58.850Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "4bc7035e794c79e2e0d0291e31cff3f2c116071666fb3e7f0588fdd4634e6b8b"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.840Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/avg-propensity-to-consume-worker-households/values.json",
+        "sourceSha256": "10b2d631a0b105f8018e01c8017589c3a7cafcd0f681c224ef268fae3f22d5c7",
+        "input": {
+          "sha256": "4bc7035e794c79e2e0d0291e31cff3f2c116071666fb3e7f0588fdd4634e6b8b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-avg-propensity-to-consume-worker-households/inputs/4bc7035e794c79e2e0d0291e31cff3f2c116071666fb3e7f0588fdd4634e6b8b.json"
+          },
+          "bytes": 7498
+        }
+      }
+    },
+    {
+      "sha256": "9d4e57af5943c1f1ce40f3e8b28ec048296afc02f5627106e4b945c849f26f47",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-avg-propensity-to-consume-worker-households/revisions/9d4e57af5943c1f1ce40f3e8b28ec048296afc02f5627106e4b945c849f26f47.png"
+      },
+      "bytes": 1633033,
+      "id": "9d4e57af5943c1f1ce40f3e8b28ec048296afc02f5627106e4b945c849f26f47",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-158fa718613a",
+      "createdAt": "2026-10-23T10:41:38.809Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "d416ee29f7b30af928fd0bbf6ffe061b8c74fdf073e077b6b663abfbfdd1d7f6"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T10:43:53.780Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "d416ee29f7b30af928fd0bbf6ffe061b8c74fdf073e077b6b663abfbfdd1d7f6",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-avg-propensity-to-consume-worker-households/inputs/d416ee29f7b30af928fd0bbf6ffe061b8c74fdf073e077b6b663abfbfdd1d7f6.json"
+          },
+          "bytes": 8464
+        },
+        "production": {
+          "id": "NCI-00051",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "158fa718613afcffe2de0739afaeb9bd6451a2a1331e5473dff4609c4cbec6c1"
+        }
+      }
+    }
+  ]
+}

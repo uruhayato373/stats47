@@ -14,6 +14,9 @@
  *   SINGLETON_MULTIPLE_VERSIONS — next・react・react-dom (1 つの版でしか動かない部品) が lock に 2 つ以上の版で入っている
  *   OVERRIDE_OUTSIDE_RANGE      — ルート overrides の版が、その依存を持つ workspace の指定範囲を満たさない
  *   LOCK_OUTSIDE_OVERRIDE       — lock に入っている版が overrides を満たさない (= `npm ls` の invalid を lock だけで見る)
+ *   OPTIONAL_LOCK_MISMATCH      — lock の各パッケージの optionalDependencies が完全一致の版を要求するのに、npm の解決順で当たる記録の版が違う
+ *                                 (DEPS-PLATFORM-OPTIONAL-LOCK-01。2026-10-26: workerd 本体は 1.20261019.1 なのに他 OS 向けバイナリの記録が
+ *                                 1.20260825.1 のまま残り、Linux の CI の `npm ci` だけが落ちた。Mac は自 OS 用しか入れ直さないので気づけない)
  *
  * 入口: `node .claude/scripts/lib/check-dependency-overrides.cjs [--json]`
  * 登録: .claude/config/quality-gates.json (id: dependency-overrides) → preflight:pr と pr-quality-check.yml
@@ -23,7 +26,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const semver = require("semver");
 
-const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..", "..");
+const ROOT = process.env.STATS47_SCAN_ROOT || path.resolve(__dirname, "..", "..", "..");
 const SINGLETON_PACKAGES = ["next", "react", "react-dom"];
 const DEPENDENCY_FIELDS = ["dependencies", "devDependencies", "peerDependencies", "optionalDependencies"];
 
@@ -44,6 +47,20 @@ function lockPackageName(key) {
   return index === -1 ? null : key.slice(index + "node_modules/".length);
 }
 
+/** lock のキー (`node_modules/a/node_modules/b`) から、依存 dep を npm が探す順 (入れ子 → 親 → ルート) のキー候補を返す。 */
+function lockResolutionCandidates(key, dep) {
+  const candidates = [];
+  let base = key;
+  while (base) {
+    candidates.push(`${base}/node_modules/${dep}`);
+    const index = base.lastIndexOf("node_modules/");
+    // 先頭の node_modules/<pkg> まで来たらルート直下の候補だけが残る。
+    base = index > 0 ? base.slice(0, index - 1) : "";
+  }
+  candidates.push(`node_modules/${dep}`);
+  return candidates;
+}
+
 /** 版 (または範囲) の override がこの範囲と両立するか。 */
 function overrideFitsRange(overrideSpec, range) {
   if (semver.valid(overrideSpec)) return semver.satisfies(overrideSpec, range, { includePrerelease: true });
@@ -51,7 +68,7 @@ function overrideFitsRange(overrideSpec, range) {
 }
 
 /**
- * @param {{ rootPackage: Record<string, any>, workspacePackages: Record<string, Record<string, any>>, lockPackages: Record<string, { version?: string, link?: boolean }> }} input
+ * @param {{ rootPackage: Record<string, any>, workspacePackages: Record<string, Record<string, any>>, lockPackages: Record<string, { version?: string, link?: boolean, optionalDependencies?: Record<string, string> }> }} input
  * @returns {Array<{ code: string, package: string, message: string }>}
  */
 function inspectDependencies({ rootPackage, workspacePackages, lockPackages }) {
@@ -109,6 +126,21 @@ function inspectDependencies({ rootPackage, workspacePackages, lockPackages }) {
           message: `package-lock.json の ${key}=${version} が overrides.${name}=${spec} を満たさない`,
         });
       }
+    }
+  }
+
+  for (const [key, entry] of Object.entries(lockPackages)) {
+    if (entry?.link) continue;
+    for (const [dep, wanted] of Object.entries(entry?.optionalDependencies ?? {})) {
+      // 完全一致の版だけを照合する。範囲指定は別の版でも満たしうるので対象外。
+      if (typeof wanted !== "string" || !semver.valid(wanted)) continue;
+      const recorded = lockResolutionCandidates(key, dep).map((candidate) => lockPackages[candidate]).find((item) => item);
+      if (typeof recorded?.version !== "string" || recorded.version === wanted) continue;
+      findings.push({
+        code: "OPTIONAL_LOCK_MISMATCH",
+        package: dep,
+        message: `package-lock.json の ${key} は optionalDependencies.${dep}=${wanted} を要求するが、記録の版は ${recorded.version} (他 OS 向けの取り残し。npm install で lock を作り直す)`,
+      });
     }
   }
   return findings;

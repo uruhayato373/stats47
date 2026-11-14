@@ -162,6 +162,45 @@ function indexScatterPoints(node, idx, source) {
   return indexed;
 }
 
+/**
+ * 複数年平均の都市ランキング `{years, data:[{rank, areaCode, areaName, value, isCapital, byYear}]}`
+ * (fetch-kakei-city-average.mjs の出力) を「平均の系列」(series: "avg") として索引する。
+ *
+ * ★なぜ別系列にするか (FACTUAL-CHECK-CROSS-METRIC-RANK-01): 県別ランキングは県庁所在市の単年値で、52 市の
+ * 3 年平均とは順位も値も違う。同じ県の facts に混ぜると本文の「京都市 3 位 (平均)」を「京都府 2 位 (単年)」と
+ * 取り違えるので、`series` で区別し、claimFacts が本文の文脈 (市名・平均の語) で選ぶ。
+ * 県庁所在市は areaCode の上 2 桁 (JIS 都道府県コード = PREF_NAMES の順) で県にも結ぶ。
+ *
+ * @returns {boolean} 索引したら true (呼び出し側は generic 走査を省略できる)
+ */
+function indexAverageSeries(json, idx, source, meta) {
+  const rows = json && Array.isArray(json.data) ? json.data : null;
+  if (!rows || !rows.some((r) => r && typeof r === "object" && r.byYear && typeof r.byYear === "object")) return false;
+  const label = meta.label || (typeof json.title === "string" ? json.title : "");
+  const unit = (typeof json.unit === "string" && json.unit) || meta.unit || null;
+  let indexed = false;
+  for (const row of rows) {
+    if (!row || typeof row !== "object") continue;
+    const name = normalizePref(extractPrefName(row));
+    if (!name) continue;
+    const keys = new Set([name]);
+    if (!PREF_NAMES.includes(name) && row.isCapital !== false && typeof row.areaCode === "string") {
+      const prefName = PREF_NAMES[parseInt(row.areaCode.slice(0, 2), 10) - 1];
+      if (prefName) keys.add(prefName);
+    }
+    for (const key of keys) {
+      if (!idx[key]) idx[key] = [];
+      idx[key].push({ rank: extractRank(row), value: extractValue(row), unit: extractUnit(row) || unit, label, source, series: "avg" });
+      for (const [year, value] of Object.entries(row.byYear)) {
+        if (typeof value !== "number") continue;
+        idx[key].push({ rank: null, value, unit: extractUnit(row) || unit, label, source, series: "avg", year: String(year) });
+      }
+    }
+    indexed = true;
+  }
+  return indexed;
+}
+
 function walkAndIndex(node, idx, source, currentLabel, currentUnit) {
   if (node && typeof node === "object" && !Array.isArray(node)) {
     // 散布図は専用形式 (points + 軸ごとの単位) なので generic 走査より先に処理する
@@ -234,7 +273,9 @@ export function buildGroundTruth(dataDir) {
       // 判別できない。source.json は人間可読な指標名 (例「紅茶消費支出額」) を持つので、
       // これを既定 label にすると「本文が別指標を語っているか」を判定できるようになる。
       const meta = readSourceMeta(dataDir, file);
-      walkAndIndex(json, idx, file, meta.label || "", meta.unit || null);
+      if (!indexAverageSeries(json, idx, file, meta)) {
+        walkAndIndex(json, idx, file, meta.label || "", meta.unit || null);
+      }
       // data の年を各 fact に付ける。本文が別の年の順位を語っているかの判定に使う (無ければ判定しない)
       if (meta.year) {
         for (const facts of Object.values(idx)) {
@@ -314,6 +355,50 @@ function isCitingUnknownRanking(matchText, gt) {
 }
 
 // ============================================================================
+// 系列の選択 (FACTUAL-CHECK-CROSS-METRIC-RANK-01)
+// ============================================================================
+
+/** 「3年平均」「5年間の平均」「八年平均」のような期間の平均 (「平均寿命」や単なる「平均」は含まない) */
+const PERIOD_AVERAGE_RE = /(?:[0-9０-９]+|[二三四五六七八九十]+)\s*(?:年間|か年|ヵ年|年)\s*(?:の)?\s*(?:単純)?平均/;
+
+/** 数値そのものが平均順位 (「平均4位」「平均順位は5位」) を表す書き方 */
+const AVERAGE_RANK_RE = /平均(?:順位)?\s*(?:は|が|の)?\s*約?\s*$/;
+
+/**
+ * 本文の 1 つの主張が照合してよい facts を返す。
+ * 県別ランキング (県庁所在市の単年値) と 52 市・複数年平均の都市ランキング (series: "avg") は別の系列なので、
+ * 平均を語る文か、県名の直後に「市」が付く主張 (京都市) のときだけ平均の系列も照合先に足す。
+ * 平均を語っているのに平均の系列が data に無いなら null (照合先なし = 呼び出し側は主張を飛ばす)。
+ *
+ * @returns {object[] | null}
+ */
+function claimFacts(facts, { cityScope, averageScope }) {
+  const single = facts.filter((f) => f.series !== "avg");
+  const avg = facts.filter((f) => f.series === "avg");
+  if (averageScope && avg.length === 0) return null;
+  return cityScope || averageScope ? [...single, ...avg] : single;
+}
+
+/**
+ * 順位の直前に指標名を名指ししているとき (「年収42位の北海道」「北海道の年収は42位」)、その指標の系列の順位だけを返す。
+ * 同じ県に別の指標の順位 (割合は 42 位) があると、どの系列の順位にも当てはまれば一致扱いになり、年収の順位の誤りが通っていた
+ * (BLOG-TUTORIAL-GATE-GAPS-01)。
+ * 名指しの語は順位の直前の漢字・カタカナの連なり (助詞 1 字は許す)。その語を含む label の系列が一部だけあるときに限り絞る。
+ * 語が無い・どの label にも含まれない・全系列に含まれるときは絞らない (従来どおりどの系列とも照合する)。
+ *
+ * @param {object[]} facts 照合先の facts
+ * @param {string} leadText 順位の数字の直前までの文字列
+ * @returns {object[]} 順位を持つ facts (絞れたときは名指しされた指標のものだけ)
+ */
+function rankFactsForNamedMetric(facts, leadText) {
+  const ranked = facts.filter((f) => f.rank !== null);
+  const token = leadText.match(/([一-龥ァ-ヶー]{2,8})(?:が|は|で|も|の)?[ \t]*$/)?.[1];
+  if (!token) return ranked;
+  const named = ranked.filter((f) => typeof f.label === "string" && f.label.includes(token));
+  return named.length > 0 && named.length < ranked.length ? named : ranked;
+}
+
+// ============================================================================
 // Rank claim checks
 // ============================================================================
 
@@ -327,13 +412,17 @@ export function checkRankClaims(content, gt) {
   const body = content.replace(/^---[\s\S]*?\n---\n/, "");
   const prefPattern = PREF_NAMES.join("|");
   const rankRe = new RegExp(
-    `(${prefPattern})(?:都|府|県)?[^、。\\n（）()]{0,40}?(\\d+)\\s*位`,
+    `(${prefPattern})(?:都|府|県)?[^、。\\n（）()]{0,40}?(?<![\\d.．])(\\d+(?:[.．]\\d+)?)\\s*位`,
     "g"
   );
   const seenClaims = new Set();
   let m;
   while ((m = rankRe.exec(body)) !== null) {
     const pref = m[1];
+    // 小数の順位 (「平均4.8位」) と平均順位 (「平均5位」) は順位そのものではなく集計値 (FACTUAL-CHECK-CROSS-METRIC-RANK-01)
+    if (m[2].includes(".") || m[2].includes("．")) continue;
+    const beforeRank = m[0].slice(0, m[0].lastIndexOf(m[2]));
+    if (AVERAGE_RANK_RE.test(beforeRank)) continue;
     const claimedRank = parseInt(m[2], 10);
     if (claimedRank < 1 || claimedRank > 47) continue;
 
@@ -358,22 +447,29 @@ export function checkRankClaims(content, gt) {
     const rankContext = body.slice(rankSentenceStart, m.index) + m[0].slice(0, m[0].lastIndexOf(m[2]));
     if (mentionsForeignMetric(rankContext, knownLabels)) continue;
 
-    const key = `${pref}:${claimedRank}`;
+    // 県名の直後が「市」なら都市の主張、文が期間の平均を語るなら平均の系列も照合先に足す。平均の系列が無ければ照合しない
+    const cityScope = new RegExp(`^${pref}(?:都|府|県)?(?:市|区部)`).test(m[0]);
+    const averageScope = PERIOD_AVERAGE_RE.test(rankContext);
+    const key = `${pref}:${claimedRank}:${cityScope}:${averageScope}`;
     if (seenClaims.has(key)) continue;
     seenClaims.add(key);
 
-    const facts = gt[pref];
+    const facts = claimFacts(gt[pref] || [], { cityScope, averageScope });
     if (!facts || facts.length === 0) continue;
-    const ranks = facts.filter((f) => f.rank !== null).map((f) => f.rank);
+    const rankedFacts = rankFactsForNamedMetric(facts, beforeRank);
+    const ranks = rankedFacts.map((f) => f.rank);
     if (ranks.length === 0) continue;
     // data の年が分かっていて、本文がそれと違う年の順位を語っているなら照合しない (「1972 年は 2 位」)
+    // 年ごとの値だけを持つ系列 (順位なし) の年も、その年の順位は照合できない
     const claimYear = m[0].match(/((?:19|20)\d{2})\s*年/)?.[1];
     const dataYears = facts.map((f) => f.year).filter(Boolean);
-    if (claimYear && dataYears.length > 0 && !dataYears.includes(claimYear)) continue;
+    if (claimYear && dataYears.length > 0) {
+      if (!dataYears.includes(claimYear)) continue;
+      if (!facts.some((f) => f.year === claimYear && f.rank !== null)) continue;
+    }
 
     if (!ranks.includes(claimedRank)) {
-      const actualList = facts
-        .filter((f) => f.rank !== null)
+      const actualList = rankedFacts
         .slice(0, 3)
         .map((f) => `${f.label || "?"}=${f.rank}位`)
         .join(" / ");
@@ -396,7 +492,8 @@ export function checkInverseRankClaims(content, gt) {
   const inverseRe = new RegExp(
     // 先頭に数字を含めない (?<![・、と\d]): 「45位 岩手県」を「5位 岩手県」と誤マッチしないため。
     // 二桁順位 (下位グループ 4X位/3X位) を一桁順位に切り詰める false positive を防ぐ。
-    `(?<![・、と\\d])(\\d+)[ \\t]*位[ \\t]*(?:は|の|に|が|を|で|まで|から)?[ \\t]{0,2}(${prefPattern})(?:都|府|県)?(?![・、])`,
+    // 「から」「まで」は範囲の言い方 (「秋田県の3位から青森県の46位まで」) で、直後の県の順位ではないので助詞に含めない。
+    `(?<![・、と\\d.．])(\\d+)[ \\t]*位[ \\t]*(?:は|の|に|が|を|で)?[ \\t]{0,2}(${prefPattern})(?:都|府|県)?(?![・、])`,
     "g"
   );
   const seenClaims = new Set();
@@ -414,20 +511,30 @@ export function checkInverseRankClaims(content, gt) {
       PER_CAPITA_SKIP.test(leadContext)
     ) continue;
     if (isCitingUnknownRanking(m[0], gt)) continue;
+    // 平均順位 (「平均5位の京都府」) は順位そのものではない
+    if (AVERAGE_RANK_RE.test(body.slice(Math.max(0, m.index - 12), m.index))) continue;
 
-    const key = `${pref}:${claimedRank}`;
+    // 県名の直後が「市」なら都市の主張、同じ文が期間の平均を語るなら平均の系列も照合先に足す (checkRankClaims と同じ)
+    const cityScope = /^(?:市|区部)/.test(body.slice(m.index + m[0].length));
+    const sentenceStart = Math.max(
+      body.lastIndexOf("。", m.index - 1) + 1,
+      body.lastIndexOf("\n", m.index - 1) + 1,
+      m.index - 200,
+    );
+    const averageScope = PERIOD_AVERAGE_RE.test(body.slice(sentenceStart, m.index + m[0].length));
+    const key = `${pref}:${claimedRank}:${cityScope}:${averageScope}`;
     if (seenClaims.has(key)) continue;
     seenClaims.add(key);
 
-    const facts = gt[pref];
+    const facts = claimFacts(gt[pref] || [], { cityScope, averageScope });
     if (!facts || facts.length === 0) continue;
-    const ranks = facts.filter((f) => f.rank !== null).map((f) => f.rank);
+    const ranks = rankFactsForNamedMetric(facts, body.slice(Math.max(0, m.index - 12), m.index)).map((f) => f.rank);
     if (ranks.length === 0) continue;
 
     if (!ranks.includes(claimedRank)) {
       let actualPref = null;
       for (const [otherPref, otherFacts] of Object.entries(gt)) {
-        if (otherFacts.some((f) => f.rank === claimedRank)) {
+        if (otherFacts.some((f) => f.series !== "avg" && f.rank === claimedRank)) {
           actualPref = otherPref;
           break;
         }
@@ -517,7 +624,8 @@ function unitDimension(unit) {
   if (typeof unit !== "string") return null;
   const stripped = unit.replace(/[兆億万千百]/g, "").trim();
   const m = stripped.match(/(%|％|円|人|世帯|戸|床|件|台|校|時間|ha|㎡|平方|kg|kw|wh|mwh|kwh|度|℃|cm|mm|社|店)/i);
-  return m ? m[1].toLowerCase() : (stripped || null);
+  // 全角の「％」で持つ data と半角の「%」で書いた本文を別の次元と見なさない (BLOG-TUTORIAL-GATE-GAPS-01)
+  return m ? m[1].toLowerCase().replace("％", "%") : (stripped || null);
 }
 
 /** data fact の value を base スケールに正規化 (value × unit のスケール倍率) */
@@ -610,6 +718,15 @@ function mentionsForeignMetric(lead, knownLabels) {
     return hasDenominatorQualifier(label) === phraseHasDenom;
   });
 }
+
+/**
+ * 差・増減・振れ幅の数値 (「堺市と69円差」「4,304円増えており」「2,415円離れて」「560円の範囲」) は data の値ではない。
+ * 県名から数値までの間に語がある場合 (DELTA_BEFORE_RE) と、数値の直後に語が続く場合 (DELTA_AFTER_RE) の両方を見る。
+ */
+const DELTA_BEFORE_RE = /差|増え|増加|増や|減り|減少|減ら|離れ|上回|下回|振れ幅|変動幅|範囲|合計|平均/;
+/** 同じ文の頭から数値までに差・振れ幅を語る語がある (「最大と最小の差を比べると、京都市は4,304円」) */
+const DELTA_CONTEXT_RE = /差|振れ幅|変動幅|増減|離れ/;
+const DELTA_AFTER_RE = /^\s*(?:差|の差|離れ|増|減|上回|下回|の範囲|の幅|の振れ|の開き|の違い|アップ|ダウン|上昇|下落|超の差)/;
 
 const APPROX_BEFORE_RE = /(約|およそ|おおよそ|ほぼ|概ね|おおむね)\s*$/;
 
@@ -741,7 +858,16 @@ export function checkValueClaims(content, gt) {
       continue;
     }
 
+    if (DELTA_BEFORE_RE.test(between) || DELTA_CONTEXT_RE.test(metricContext) || DELTA_AFTER_RE.test(body.slice(nm.index + nm[0].length, nm.index + nm[0].length + 8))) continue;
+
     if (mentionsForeignMetric(metricContext, knownLabels)) continue;
+
+    // 県名の直後が「市」なら都市の主張、文が期間の平均を語るなら平均の系列 (52 市・複数年平均) も照合先に足す。
+    // 平均を語っているのに平均の系列が data に無いなら、単年値とは照合しない (FACTUAL-CHECK-CROSS-METRIC-RANK-01)
+    const cityScope = /^(?:市|区部)/.test(body.slice(anchor.end));
+    const averageScope = PERIOD_AVERAGE_RE.test(metricContext);
+    const scopedFacts = claimFacts(gt[pref] || [], { cityScope, averageScope });
+    if (scopedFacts === null) continue;
 
     // 年号らしき値 (1900-2100 で単位が無いケースは上で弾く) はここでは単位付きなので通す
     // スケールは numeralRaw 側で解釈済みなので、次元は単位実体だけから取る
@@ -752,7 +878,7 @@ export function checkValueClaims(content, gt) {
     if (seen.has(key)) continue;
     seen.add(key);
 
-    const facts = (gt[pref] || []).filter((f) => typeof f.value === "number");
+    const facts = scopedFacts.filter((f) => typeof f.value === "number");
     // 次元が一致する value のみ比較対象 (単位が取れない fact は除外)
     const comparable = facts.filter((f) => {
       const dim = unitDimension(f.unit || "");

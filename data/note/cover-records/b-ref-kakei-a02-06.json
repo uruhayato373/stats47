@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-kakei-a02-06",
+  "production": {
+    "id": "NCI-00175",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "車とガソリンの支出\n年収5階級で比較",
+      "subline": "自動車購入は4.37倍",
+      "subject": "小さな車の模型と、ガソリン給油ノズルの模型を大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n0f84e2661d89 本文確認2026-11-04。2024年の自動車購入は第Ⅴ階級が第Ⅰ階級の4.37倍。ガソリンの家計に占める割合は両端の階級でほぼ同じ。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "c74eb7481a4a2befb62db9c981a6eaf0e1c63d435550f0cd9dbee40af27db200",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a02-06/revisions/c74eb7481a4a2befb62db9c981a6eaf0e1c63d435550f0cd9dbee40af27db200.png"
+      },
+      "bytes": 41660,
+      "id": "c74eb7481a4a2befb62db9c981a6eaf0e1c63d435550f0cd9dbee40af27db200",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:11:09.967Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "231b47eaa3deb6caa734c7deee97b1534e42064e6d0414edf19b463628388331"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:47.585Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "231b47eaa3deb6caa734c7deee97b1534e42064e6d0414edf19b463628388331",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a02-06/inputs/231b47eaa3deb6caa734c7deee97b1534e42064e6d0414edf19b463628388331.json"
+          },
+          "bytes": 1296
+        }
+      }
+    },
+    {
+      "sha256": "7fbb9ce66a10b732a62fd98b27855a8fd6b690ac333881b1b08e723a9d2780a8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a02-06/revisions/7fbb9ce66a10b732a62fd98b27855a8fd6b690ac333881b1b08e723a9d2780a8.png"
+      },
+      "bytes": 106786,
+      "id": "7fbb9ce66a10b732a62fd98b27855a8fd6b690ac333881b1b08e723a9d2780a8",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:22:19.631Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324128657/rectangle_large_type_2_27dbe3c658400706795c7ff93daf1ae0.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "7fbb9ce66a10b732a62fd98b27855a8fd6b690ac333881b1b08e723a9d2780a8"
+      }
+    },
+    {
+      "sha256": "e68197abc34faa7da481e4dc69cc4ef132dbb5a12c880cfd0d3a2bc96aa1dc10",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a02-06/revisions/e68197abc34faa7da481e4dc69cc4ef132dbb5a12c880cfd0d3a2bc96aa1dc10.png"
+      },
+      "bytes": 1873781,
+      "id": "e68197abc34faa7da481e4dc69cc4ef132dbb5a12c880cfd0d3a2bc96aa1dc10",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-11186873aaf8",
+      "createdAt": "2026-11-04T01:22:23.185Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "1abef561384a577e48fa13468cfd88157fab81b8ad3329e39aa20e24ce796520"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:23:36.544Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "1abef561384a577e48fa13468cfd88157fab81b8ad3329e39aa20e24ce796520",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a02-06/inputs/1abef561384a577e48fa13468cfd88157fab81b8ad3329e39aa20e24ce796520.json"
+          },
+          "bytes": 8217
+        },
+        "production": {
+          "id": "NCI-00175",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "11186873aaf894487fa1aacad880c67dd91f2f55c836cd4e082d8605bdd97ea6"
+        }
+      }
+    }
+  ]
+}

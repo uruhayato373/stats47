@@ -41,7 +41,7 @@ const crypto = require("crypto");
 const { execFileSync } = require("child_process");
 const { datasetDir } = require("../../../config/datasets.mjs");
 
-const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..", "..");
+const ROOT = process.env.STATS47_SCAN_ROOT || path.resolve(__dirname, "..", "..", "..");
 const AUDIT_MARKER = path.join(ROOT, ".claude/state/consistency/audited.json");
 
 // 組み込み/プラグイン agent 型 (ファイル .claude/agents/*.md を持たない)。E1 で誤検知しない。
@@ -589,6 +589,8 @@ function checkCodexMirror(findings, scope) {
   }
   let actions;
   try {
+    // mirror の既定のルートは mirror 自身の作業ツリー。この検査が見ているルート (fixture を含む) に合わせる
+    mirror.setRoot(ROOT);
     actions = [...mirror.planSkills(), ...mirror.planAgents()];
   } catch (error) {
     findings.push({ level: "error", code: "E12", file: ".claude/agents", msg: `mirror 計画に失敗: ${error.message}` });

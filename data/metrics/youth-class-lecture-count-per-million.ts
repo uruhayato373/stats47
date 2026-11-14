@@ -58,22 +58,6 @@ export const youthClassLectureCountPerMillion: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "学級･講座/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "学級･講座/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "seoTitle": "青少年学級・講座数ランキング都道府県【2020年】｜1位鳥取県（3,001.4学級･講座）",
   "seoDescription": "2020年の青少年学級・講座数の都道府県別ランキング。1位鳥取県（3,001.4学級･講座）、最下位神奈川県（41.6学級･講座）で72.1倍の格差。地図やグラフで47都道府県を比較。",

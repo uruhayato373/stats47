@@ -4,91 +4,6 @@
   "maxFileSize": 1048576,
   "findings": [
     {
-      "code": "DATED_STATE_ARTIFACT",
-      "file": "data/affiliate/affiliate-placement-baseline-2026-09-08.json",
-      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
-    },
-    {
-      "code": "DATED_STATE_ARTIFACT",
-      "file": "data/content-operations/content-release-2026-09-08.json",
-      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
-    },
-    {
-      "code": "DATED_STATE_ARTIFACT",
-      "file": "data/geo/evidence/geo-flood-repair-2026-09-05.json",
-      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
-    },
-    {
-      "code": "DATED_STATE_ARTIFACT",
-      "file": "data/geo/evidence/geo-page-audit-2026-09-05.json",
-      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
-    },
-    {
-      "code": "DATED_STATE_ARTIFACT",
-      "file": "data/geo/evidence/geo-release-publication-2026-09-05.json",
-      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
-    },
-    {
-      "code": "DATED_STATE_ARTIFACT",
-      "file": "data/note/evidence/note-branding-update-2026-09-06.json",
-      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
-    },
-    {
-      "code": "DATED_STATE_ARTIFACT",
-      "file": "data/note/evidence/note-circulation-audit-2026-09-06.json",
-      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
-    },
-    {
-      "code": "DATED_STATE_ARTIFACT",
-      "file": "data/note/evidence/note-cover-audit-2026-09-12-v1-after.json",
-      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
-    },
-    {
-      "code": "DATED_STATE_ARTIFACT",
-      "file": "data/note/evidence/note-cover-audit-2026-09-12.json",
-      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
-    },
-    {
-      "code": "DATED_STATE_ARTIFACT",
-      "file": "data/note/evidence/note-cover-production-2026-09-12-v1.json",
-      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
-    },
-    {
-      "code": "DATED_STATE_ARTIFACT",
-      "file": "data/note/evidence/note-cover-refresh-2026-09-12-v1-verification.json",
-      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
-    },
-    {
-      "code": "DATED_STATE_ARTIFACT",
-      "file": "data/note/evidence/note-cover-refresh-2026-09-12-v1.json",
-      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
-    },
-    {
-      "code": "DATED_STATE_ARTIFACT",
-      "file": "data/note/evidence/note-hashtag-audit-2026-09-06.json",
-      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
-    },
-    {
-      "code": "DATED_STATE_ARTIFACT",
-      "file": "data/note/evidence/note-magazine-expansion-2026-09-06.json",
-      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
-    },
-    {
-      "code": "DATED_STATE_ARTIFACT",
-      "file": "data/note/evidence/note-referrals-2026-09-06.json",
-      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
-    },
-    {
-      "code": "FORBIDDEN_ARTIFACT",
-      "file": "data/blog/auto-brushup-skipped.log",
-      "message": "temporary/build/database artifact is tracked"
-    },
-    {
-      "code": "FORBIDDEN_ARTIFACT",
-      "file": "packages/ranking/type-check-output.txt",
-      "message": "temporary/build/database artifact is tracked"
-    },
-    {
       "code": "LARGE_FILE",
       "file": "data/estat/expansion-queue.json",
       "message": "1399387 bytes exceeds 1048576 bytes"
@@ -287,11 +202,6 @@
       "code": "LARGE_FILE",
       "file": "packages/gis/data/geoshape/prefecture.topojson",
       "message": "1917623 bytes exceeds 1048576 bytes"
-    },
-    {
-      "code": "LARGE_FILE",
-      "file": "data/note/cover-assets.json",
-      "message": "1721164 bytes exceeds 1048576 bytes"
     }
   ]
 }

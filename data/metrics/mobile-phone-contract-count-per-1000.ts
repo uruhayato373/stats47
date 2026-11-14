@@ -33,22 +33,6 @@ export const mobilePhoneContractCountPer1000: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "契約/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "契約/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "seoTitle": "携帯電話契約数ランキング都道府県【2023年】｜1位東京都（5,531.4契約）",
   "seoDescription": "2023年の携帯電話契約数の都道府県別ランキング。1位東京都（5,531.4契約）、最下位秋田県（992.8契約）で5.6倍の格差。地図やグラフで47都道府県を比較。",

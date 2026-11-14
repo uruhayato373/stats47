@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-volunteer-activity-annual-participation-rate-10plus",
+  "production": {
+    "id": "NCI-00127",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "ボランティア参加\n多い県は？",
+      "subline": "参加率1位は島根県\n2021年・10歳以上",
+      "subject": "水色と明るい黄色、濃紺の大きな文字を使う温かい手描きのカバー。右側に無地の清掃用トングを1本だけ大きく描き、公園の緑を背景にする。ボランティア活動の一例を示す題材であり、清掃活動の参加率という意味に見せない。左側に問いを大きく2行、下に補足を太い帯で2行。人物・顔・手・動物・キャラクター・マスコット・擬人化、地図・グラフ・表彰台・メダル・指定外の文字と数字を描かない。",
+      "evidence": "https://storage.stats47.jp/note/stats47-note/a-volunteer-activity-annual-participation-rate-10plus/draft.md の公開本文を2026-10-23に確認。総務省「社会生活基本調査」の2021年、過去1年間にボランティア活動を行った10歳以上の人の割合。島根県25.6％で1位、青森県14.0％で47位。清掃は活動の一例であり、清掃だけの参加率や参加人数ではない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "2037cad68441ad5ed9d8979ee21bac005442abaa0c8910673a198e7baa88e140",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-volunteer-activity-annual-participation-rate-10plus/revisions/2037cad68441ad5ed9d8979ee21bac005442abaa0c8910673a198e7baa88e140.png"
+      },
+      "bytes": 48631,
+      "id": "2037cad68441ad5ed9d8979ee21bac005442abaa0c8910673a198e7baa88e140",
+      "kind": "candidate",
+      "version": "2026-10-12-drafts",
+      "createdAt": "2026-10-12T00:52:48.705Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "43fa696a72159c64afa37b682e10d31c0b3fbd943a25dead76130cc0d14480c9"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出し・記事の事実・図(または値を持たない背景地図)が読める。登録前の確認版とSHA一致",
+        "reviewedAt": "2026-10-12T00:54:01.881Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/volunteer-activity-annual-participation-rate-10plus/values.json",
+        "sourceSha256": "06e393cb4d564336cb9bdeb4caa639cc299127636dd11f8d429847dcfaa38438",
+        "input": {
+          "sha256": "43fa696a72159c64afa37b682e10d31c0b3fbd943a25dead76130cc0d14480c9",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-volunteer-activity-annual-participation-rate-10plus/inputs/43fa696a72159c64afa37b682e10d31c0b3fbd943a25dead76130cc0d14480c9.json"
+          },
+          "bytes": 7358
+        }
+      }
+    },
+    {
+      "sha256": "29f3796761e8fe0ad6c11200943a7042c27e14f3089c51980f90e0ad9f823142",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-volunteer-activity-annual-participation-rate-10plus/revisions/29f3796761e8fe0ad6c11200943a7042c27e14f3089c51980f90e0ad9f823142.png"
+      },
+      "bytes": 60613,
+      "id": "29f3796761e8fe0ad6c11200943a7042c27e14f3089c51980f90e0ad9f823142",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T01:14:33.218Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323534115/rectangle_large_type_2_db74c6f70a254c4ab8e7d02e2d9b9eb5.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "29f3796761e8fe0ad6c11200943a7042c27e14f3089c51980f90e0ad9f823142"
+      }
+    },
+    {
+      "sha256": "f26fa5728447bc7c223c49510be0077fb0a66e736fd97da7f5263b4f2507fa53",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-volunteer-activity-annual-participation-rate-10plus/revisions/f26fa5728447bc7c223c49510be0077fb0a66e736fd97da7f5263b4f2507fa53.png"
+      },
+      "bytes": 1970113,
+      "id": "f26fa5728447bc7c223c49510be0077fb0a66e736fd97da7f5263b4f2507fa53",
+      "kind": "candidate",
+      "version": "imagegen-pop-v2-third-six-20261015",
+      "createdAt": "2026-10-15T01:25:07.352Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "afd46cc93e46f13c9e452fe5622c4b98140845c2e3fd068d5af8fe95ef016abe"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸・320pxで掲載全文と補足文の可読性、切れ・重なり・追加文字を確認済み。管理画面の修正前後比較を提示し、2026-10-15にユーザーがこの6件の反映を指示。",
+        "reviewedAt": "2026-10-15T01:45:08.519Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "afd46cc93e46f13c9e452fe5622c4b98140845c2e3fd068d5af8fe95ef016abe",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-volunteer-activity-annual-participation-rate-10plus/inputs/afd46cc93e46f13c9e452fe5622c4b98140845c2e3fd068d5af8fe95ef016abe.json"
+          },
+          "bytes": 8061
+        },
+        "production": {
+          "id": "NCI-00127",
+          "policyId": "NCP-003",
+          "policyVersion": 2,
+          "planSha256": "a7014981e7f51bd540a8fc2f48854e4bf95f719930ee9952a560d9b81ea5da6a"
+        }
+      }
+    },
+    {
+      "sha256": "b6601c0d02df7ad46ac35d662ca4ed52b86bb8e8a64d48a0d2c40969fe5484d7",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-volunteer-activity-annual-participation-rate-10plus/revisions/b6601c0d02df7ad46ac35d662ca4ed52b86bb8e8a64d48a0d2c40969fe5484d7.png"
+      },
+      "bytes": 1885678,
+      "id": "b6601c0d02df7ad46ac35d662ca4ed52b86bb8e8a64d48a0d2c40969fe5484d7",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-076741a89a0e",
+      "createdAt": "2026-10-23T05:18:20.548Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "54e55cc1b91094359c75a913450a53740bc963d69a842a1009c25803a8a04b41"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "旧版の人物表現を解消。新画像は無人の公園と清掃用トングで活動の一例を示す。2021年・10歳以上・参加率1位島根県は本文と一致し、幅320pxでも読める。",
+        "reviewedAt": "2026-10-23T05:19:30.751Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "54e55cc1b91094359c75a913450a53740bc963d69a842a1009c25803a8a04b41",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-volunteer-activity-annual-participation-rate-10plus/inputs/54e55cc1b91094359c75a913450a53740bc963d69a842a1009c25803a8a04b41.json"
+          },
+          "bytes": 9153
+        },
+        "production": {
+          "id": "NCI-00127",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "076741a89a0e5239325174edff17b608d246585d2725f907ee5d16b3d395848a"
+        }
+      }
+    }
+  ]
+}

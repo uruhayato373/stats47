@@ -48,7 +48,8 @@ describe("FeaturedRankingCard", () => {
     expect(value).toHaveTextContent("2,309時間");
   });
 
-  it("桁の多い値は省略せず、文字を段階で小さくして単位まで出す", () => {
+  // 2026-11-14 までは「58,021,789百万円」と 13 文字で書き、文字を小さくして 1 行に収めていた (UNIT-NOTATION-FORMAT-01)
+  it("桁の多い金額はランキングのページと同じ表示単位に寄せて書く", () => {
     const { getByText } = render(
       <FeaturedRankingCard
         {...PROPS}
@@ -56,8 +57,33 @@ describe("FeaturedRankingCard", () => {
         model={{ ...PROPS.model, top: { rank: 1, areaName: "愛知県", value: "58,021,789" } }}
       />,
     );
+    const value = getByText(/58\.0/);
+    expect(value).toHaveTextContent("58.0兆円");
+    expect(value).toHaveClass("text-xl");
+  });
+
+  it("定義が表示単位を書いた指標は、その単位と小数桁で書く", () => {
+    const { getByText } = render(
+      <FeaturedRankingCard
+        {...PROPS}
+        unit="円"
+        valueDisplay={{ conversionFactor: 0.0001, decimalPlaces: 1, displayUnit: "万円" }}
+        model={{ ...PROPS.model, top: { rank: 1, areaName: "埼玉県", value: "639,356" } }}
+      />,
+    );
+    expect(getByText(/63\.9/)).toHaveTextContent("63.9万円");
+  });
+
+  it("寄せられない単位の桁の多い値は省略せず、文字を段階で小さくして単位まで出す", () => {
+    const { getByText } = render(
+      <FeaturedRankingCard
+        {...PROPS}
+        unit="人/日"
+        model={{ ...PROPS.model, top: { rank: 1, areaName: "東京都", value: "58,021,789" } }}
+      />,
+    );
     const value = getByText(/58,021,789/);
-    expect(value).toHaveTextContent("58,021,789百万円");
+    expect(value).toHaveTextContent("58,021,789人/日");
     expect(value).toHaveClass("text-base");
     expect(value.className).not.toMatch(/truncate/);
   });

@@ -4,7 +4,7 @@
 import { useMemo } from "react";
 
 import { cn } from "@stats47/components";
-import { resolveNationalFigure, type RankingValue } from "@stats47/ranking";
+import { resolveNationalFigure, type RankingValue, type RankingValueDisplay } from "@stats47/ranking";
 
 import { PanelGrid } from "@/components/layout/PageShell";
 
@@ -30,6 +30,8 @@ interface RankingHeaderStatsProps {
   areaType: AreaType;
   yearName?: string | null;
   className?: string;
+  /** ページが決めた表示単位。渡すと単位・倍率・小数桁をこれにそろえる (表・地図と同じ値) */
+  valueDisplay?: RankingValueDisplay | null;
 }
 
 /**
@@ -47,6 +49,7 @@ export function RankingHeaderStats({
   areaType,
   yearName,
   className,
+  valueDisplay,
 }: RankingHeaderStatsProps) {
   const stats = useMemo(
     () => computeRankingHeaderStats(rankingValues),
@@ -55,13 +58,16 @@ export function RankingHeaderStats({
 
   // 桁数は 47 県の観測値から 1 度だけ決め、表・ヘッダー・平均で同じ値を使う。
   // ここを揃えないと 60.42 が表では「60.42」ヘッダーでは「60.4」になる (旧実装の実バグ)
-  const precision = useMemo(
+  const dataPrecision = useMemo(
     () =>
       resolveRankingPrecision(
         rankingValues.map((v) => v.value).filter((v): v is number => v !== null),
       ),
     [rankingValues],
   );
+  const precision = valueDisplay?.precision ?? dataPrecision;
+  const shownUnit = valueDisplay?.unit ?? unit;
+  const factor = valueDisplay?.factor ?? 1;
 
   const nationalFigure = useMemo(
     () => resolveNationalFigure(rankingValues),
@@ -79,16 +85,17 @@ export function RankingHeaderStats({
       {/* 2 枚は線の格子で並べ、隣り合う線を共有する (見本の grid gap-px bg-border)。
           本文幅 730px (サイドバー + 右レールあり) でも 2 列にする。@md (768px) では効かなかった。 */}
       <PanelGrid className={cn("grid-cols-1", showNationalAverage && "@min-[40rem]:grid-cols-2")}>
-        <RankingTopThreeList stats={stats} unit={unit} precision={precision} presentation={presentation} />
+        <RankingTopThreeList stats={stats} unit={shownUnit} precision={precision} factor={factor} presentation={presentation} />
         {showNationalAverage && (
           <RankingNationalAverageStat
             metricTitle={metricTitle}
             presentation={presentation}
             figure={nationalFigure}
-            unit={unit}
+            unit={shownUnit}
             series={nationalAverageSeries}
             yearName={yearName}
             precision={precision}
+            factor={factor}
           />
         )}
       </PanelGrid>

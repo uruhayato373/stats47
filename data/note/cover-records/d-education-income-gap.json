@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "d-education-income-gap",
+  "production": {
+    "id": "NCI-00238",
+    "policyId": "NCP-005",
+    "policyVersion": 2,
+    "brief": {
+      "headline": "年収で変わる\n教育への支出",
+      "subline": "所得階層別に比較\n2024年・二人以上の世帯",
+      "subject": "大きな参考書と鉛筆、家計のノートを親しみやすいひと組として描く。緑と黄色、濃紺の縁取り文字。裕福な子どもと貧しい子どもの対比や、子どもへの優劣表現はしない。数字の棒グラフや札束は描かない。",
+      "evidence": "https://note.com/stats47/n/n7c8391d4c639 本文確認2026-10-14。本文は2024年家計調査の年間収入五分位階級別、二人以上世帯の教育支出。子ども一人当たりの学習効果や塾利用世帯だけの費用ではないため56倍をカバーでは強調しない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "5f4657d07ff288aa2020f4cef54e0b977d62ca7b05a0c40021a155bd143b959b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-education-income-gap/revisions/5f4657d07ff288aa2020f4cef54e0b977d62ca7b05a0c40021a155bd143b959b.png"
+      },
+      "bytes": 36212,
+      "id": "5f4657d07ff288aa2020f4cef54e0b977d62ca7b05a0c40021a155bd143b959b",
+      "kind": "candidate",
+      "version": "2026-10-12-drafts",
+      "createdAt": "2026-10-12T00:53:29.259Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ab4eb7cbae44c77e50b42e4c79d1843ab6273001b2f3c9784eecfa3b45570aec"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出し・記事の事実・図(または値を持たない背景地図)が読める。登録前の確認版とSHA一致",
+        "reviewedAt": "2026-10-12T00:54:32.218Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "ab4eb7cbae44c77e50b42e4c79d1843ab6273001b2f3c9784eecfa3b45570aec",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-education-income-gap/inputs/ab4eb7cbae44c77e50b42e4c79d1843ab6273001b2f3c9784eecfa3b45570aec.json"
+          },
+          "bytes": 1210
+        }
+      }
+    },
+    {
+      "sha256": "967a9a6972f333032942bf6bbf0b97810ac21123e87d8a3ffa2a810fc6f7c541",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-education-income-gap/revisions/967a9a6972f333032942bf6bbf0b97810ac21123e87d8a3ffa2a810fc6f7c541.png"
+      },
+      "bytes": 74806,
+      "id": "967a9a6972f333032942bf6bbf0b97810ac21123e87d8a3ffa2a810fc6f7c541",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-14T01:08:30.238Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323546954/rectangle_large_type_2_6caecef7ce18d0e16f057bc376d6f6e3.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "967a9a6972f333032942bf6bbf0b97810ac21123e87d8a3ffa2a810fc6f7c541"
+      }
+    },
+    {
+      "sha256": "a55b46b4fb37799411b7c0e3e378d27b9913a5ad530c5486448ef1c44d3293c0",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-education-income-gap/revisions/a55b46b4fb37799411b7c0e3e378d27b9913a5ad530c5486448ef1c44d3293c0.png"
+      },
+      "bytes": 1910563,
+      "id": "a55b46b4fb37799411b7c0e3e378d27b9913a5ad530c5486448ef1c44d3293c0",
+      "kind": "candidate",
+      "version": "imagegen-pop-v2-recent-six-20261014",
+      "createdAt": "2026-10-14T01:10:20.376Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e3de2daa9050c15be0300656bd075e5bab04e6370e39e5624d2daf36bec8c569"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸・幅320pxの目視と転記・文字切れ・重なりを確認済み。2026-10-14ユーザーがこの6件の公開カバー更新を指示。",
+        "reviewedAt": "2026-10-14T01:43:20.341Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "e3de2daa9050c15be0300656bd075e5bab04e6370e39e5624d2daf36bec8c569",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-education-income-gap/inputs/e3de2daa9050c15be0300656bd075e5bab04e6370e39e5624d2daf36bec8c569.json"
+          },
+          "bytes": 8948
+        },
+        "production": {
+          "id": "NCI-00238",
+          "policyId": "NCP-005",
+          "policyVersion": 2,
+          "planSha256": "f0dbb03f7c9190f8a8c3b3efaec28a9cf505761acae226a7b4f77244e2f12227"
+        }
+      }
+    }
+  ]
+}

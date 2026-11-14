@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n991a75be91ce",
+  "production": {
+    "id": "NCI-00446",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "ゲームをした人\n1位は愛知県",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無文字のゲームコントローラーを1つ大きく描く。画面やキャラクターは描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n991a75be91ce 2026-10-23公開API本文照合。記事題名「【2021年版】ゲームをした人が多い県は？ 1位は愛知県｜都道府県ランキング」。本文中の「愛知県」「10歳以上」「2021」を確認。カバーは主題、対象年齢、掲載順位のみ示し、因果・実績・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "12818fd88f74c21de6402ba321bcd68333408e01f199d032aae8620d991f1689",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n991a75be91ce/revisions/12818fd88f74c21de6402ba321bcd68333408e01f199d032aae8620d991f1689.png"
+      },
+      "bytes": 60619,
+      "id": "12818fd88f74c21de6402ba321bcd68333408e01f199d032aae8620d991f1689",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:23.980Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312774483/rectangle_large_type_2_83612e8ac30db586b678fd241503cf87.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "12818fd88f74c21de6402ba321bcd68333408e01f199d032aae8620d991f1689"
+      }
+    },
+    {
+      "sha256": "4f6c1c7820163d924cc537468a81f61a1af1a0e41b3cc9c65330f496b781f3b6",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n991a75be91ce/revisions/4f6c1c7820163d924cc537468a81f61a1af1a0e41b3cc9c65330f496b781f3b6.png"
+      },
+      "bytes": 113614,
+      "id": "4f6c1c7820163d924cc537468a81f61a1af1a0e41b3cc9c65330f496b781f3b6",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:16:38.649Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "09dffb59b77cec2f8f4fb606e4c85ae2ac2486cbe663bbdfd1f229b615a84c40"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-video-games/values.json",
+        "sourceSha256": "6c783e2d518d23da2dd7577bd3974cdba84b78bac62424e3b4913e8a3321a43f",
+        "input": {
+          "sha256": "09dffb59b77cec2f8f4fb606e4c85ae2ac2486cbe663bbdfd1f229b615a84c40",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n991a75be91ce/inputs/09dffb59b77cec2f8f4fb606e4c85ae2ac2486cbe663bbdfd1f229b615a84c40.json"
+          },
+          "bytes": 6568
+        }
+      }
+    },
+    {
+      "sha256": "af252e8ee7851d390d96d0cf6254eed11b26f63d6a7d8fd264a55f15b047f613",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n991a75be91ce/revisions/af252e8ee7851d390d96d0cf6254eed11b26f63d6a7d8fd264a55f15b047f613.png"
+      },
+      "bytes": 1686013,
+      "id": "af252e8ee7851d390d96d0cf6254eed11b26f63d6a7d8fd264a55f15b047f613",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-0b395fafa7d0",
+      "createdAt": "2026-10-23T12:08:12.775Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "a29cdee38ed505f5bfa5b11ec5f8f559d60bde9020175ed7920a12fb6fea7111"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T12:12:04.830Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "a29cdee38ed505f5bfa5b11ec5f8f559d60bde9020175ed7920a12fb6fea7111",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n991a75be91ce/inputs/a29cdee38ed505f5bfa5b11ec5f8f559d60bde9020175ed7920a12fb6fea7111.json"
+          },
+          "bytes": 8610
+        },
+        "production": {
+          "id": "NCI-00446",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "0b395fafa7d0820eca202e6c24d995a91334c9acdedb82d881e9809402b83cec"
+        }
+      }
+    }
+  ]
+}

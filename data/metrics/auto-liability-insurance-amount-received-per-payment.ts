@@ -34,22 +34,6 @@ export const autoLiabilityInsuranceAmountReceivedPerPayment: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "万円/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "万円/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "seoTitle": "自動車損害賠償責任保険受取保険金額ランキング都道府県【2023年】｜1位大阪府（72.9万円）",
   "seoDescription": "2023年の自動車損害賠償責任保険受取保険金額の都道府県別ランキング。1位大阪府（72.9万円）、最下位島根県（50.6万円）で1.4倍の格差。地図やグラフで47都道府県を比較。",

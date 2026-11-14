@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { buildRankingDisplayInfo, deriveFeaturedTopList } from "@stats47/ranking";
+import { applyRankingValueDisplay, buildRankingDisplayInfo, deriveFeaturedTopList, resolveRankingValueDisplay } from "@stats47/ranking";
 import { readRankingItemFromR2, readRankingValuesFromR2 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 import { generateRankingThumbnailMapSvg } from "@stats47/visualization/server";
@@ -40,7 +40,9 @@ export async function GET(
 
     const valuesResult = await readRankingValuesFromR2(rankingKey, "prefecture", yearCode);
     const values = isOk(valuesResult) ? valuesResult.data : [];
-    const top = deriveFeaturedTopList(values, TOP_AREA_COUNT);
+    // ランキングのページと同じ表示単位 (万円・億円) で上位の値を書く。地図の色は元の値で決める
+    const valueDisplay = resolveRankingValueDisplay(item, values.map((v) => v.value));
+    const top = deriveFeaturedTopList(applyRankingValueDisplay(values, valueDisplay), TOP_AREA_COUNT);
     if (top.length === 0) {
       return NextResponse.json(null, { headers: NO_STORE_CACHE_HEADERS });
     }
@@ -57,7 +59,7 @@ export async function GET(
     );
 
     const body: RankingLinkCardData = {
-      unit: buildRankingDisplayInfo(item).unit,
+      unit: valueDisplay?.unit ?? buildRankingDisplayInfo(item).unit,
       yearName: item.latestYear?.yearName ?? `${yearCode}年`,
       top: top.map((t) => ({ rank: t.rank ?? 0, areaName: t.areaName, value: t.value ?? "" })),
       mapSvg,

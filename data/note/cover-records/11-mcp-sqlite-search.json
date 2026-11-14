@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "11-mcp-sqlite-search",
+  "production": {
+    "id": "NCI-00024",
+    "policyId": "NCP-007",
+    "policyVersion": 4,
+    "brief": {
+      "headline": "自前DBとe-Statを\n連携する",
+      "subline": "MCP sqliteで統計を検索",
+      "subject": "円柱を積み重ねたデータベースの置物と、ノートPCを大きく描く。実務カテゴリの机上の資料構図。青と明るい黄色の暖かい手描き。画面・紙・道具の表面は無文字。実在UI・製品ロゴ・グラフ・地図は描かない。人物・顔・手・動物は描かない。",
+      "evidence": "https://note.com/stats47/n/n347f923606f1 本文確認2026-11-04。MCP sqliteで自前DBとe-Statを連携し統計ダッシュボードを再現する記事。ロゴや実在UIは描かない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "69c01d81085beb7b7f5ca71d91168da6769264c857ba1042592c67f9e133fcae",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/11-mcp-sqlite-search/revisions/69c01d81085beb7b7f5ca71d91168da6769264c857ba1042592c67f9e133fcae.png"
+      },
+      "bytes": 111054,
+      "id": "69c01d81085beb7b7f5ca71d91168da6769264c857ba1042592c67f9e133fcae",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:47.313Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/293011773/rectangle_large_type_2_19f68dc2158abd57be6fdc54b06e6e03.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "69c01d81085beb7b7f5ca71d91168da6769264c857ba1042592c67f9e133fcae"
+      }
+    },
+    {
+      "sha256": "5dac30483f8a55a36b17dfef1137d025eb8eef95a0c3b40d38590d88d26a6165",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/11-mcp-sqlite-search/revisions/5dac30483f8a55a36b17dfef1137d025eb8eef95a0c3b40d38590d88d26a6165.png"
+      },
+      "bytes": 57004,
+      "id": "5dac30483f8a55a36b17dfef1137d025eb8eef95a0c3b40d38590d88d26a6165",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:47:23.075Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "fb122957568ac46386880638023ae7b5d75a2512eed5518d89ca38d39435cbf4"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出しとシリーズ名・話数・色でシリーズが区別できる",
+        "reviewedAt": "2026-10-11T11:51:47.006Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "fb122957568ac46386880638023ae7b5d75a2512eed5518d89ca38d39435cbf4",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/11-mcp-sqlite-search/inputs/fb122957568ac46386880638023ae7b5d75a2512eed5518d89ca38d39435cbf4.json"
+          },
+          "bytes": 1105
+        }
+      }
+    },
+    {
+      "sha256": "4f901abe81abf073c378eeea72a37827f3b5787ada8e4c307c89be1308ea8547",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/11-mcp-sqlite-search/revisions/4f901abe81abf073c378eeea72a37827f3b5787ada8e4c307c89be1308ea8547.png"
+      },
+      "bytes": 55258,
+      "id": "4f901abe81abf073c378eeea72a37827f3b5787ada8e4c307c89be1308ea8547",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:56:10.458Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320331293/rectangle_large_type_2_234d1e1a2510055641ebc29974f8c4ed.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "4f901abe81abf073c378eeea72a37827f3b5787ada8e4c307c89be1308ea8547"
+      }
+    },
+    {
+      "sha256": "ac6ca092052565a6503f07d5a570e2e3ca200077716ba47e88b57feff6d1422b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/11-mcp-sqlite-search/revisions/ac6ca092052565a6503f07d5a570e2e3ca200077716ba47e88b57feff6d1422b.png"
+      },
+      "bytes": 23358,
+      "id": "ac6ca092052565a6503f07d5a570e2e3ca200077716ba47e88b57feff6d1422b",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:12:34.462Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "dea08e39f990f96cfec7f4c1b97e4efaad1be56435c140dcbba2f8f8fa3340c5"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.005/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:18:00.190Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "dea08e39f990f96cfec7f4c1b97e4efaad1be56435c140dcbba2f8f8fa3340c5",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/11-mcp-sqlite-search/inputs/dea08e39f990f96cfec7f4c1b97e4efaad1be56435c140dcbba2f8f8fa3340c5.json"
+          },
+          "bytes": 1105
+        }
+      }
+    },
+    {
+      "sha256": "bb23a4b4fe5d28617191096382669f3040d19122aa8380fced502ae0673b7ab7",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/11-mcp-sqlite-search/revisions/bb23a4b4fe5d28617191096382669f3040d19122aa8380fced502ae0673b7ab7.png"
+      },
+      "bytes": 1991933,
+      "id": "bb23a4b4fe5d28617191096382669f3040d19122aa8380fced502ae0673b7ab7",
+      "kind": "candidate",
+      "version": "pop-NCP-007-v4-b6f875c13abd",
+      "createdAt": "2026-11-04T00:41:33.060Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "2ab6b381959b4463b41af0016dd20793d31b6c0fbc1e1b8f0f1e9eb1c604afc4"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:43:22.105Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "2ab6b381959b4463b41af0016dd20793d31b6c0fbc1e1b8f0f1e9eb1c604afc4",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/11-mcp-sqlite-search/inputs/2ab6b381959b4463b41af0016dd20793d31b6c0fbc1e1b8f0f1e9eb1c604afc4.json"
+          },
+          "bytes": 8675
+        },
+        "production": {
+          "id": "NCI-00024",
+          "policyId": "NCP-007",
+          "policyVersion": 4,
+          "planSha256": "b6f875c13abdd0acbc758dc2be62ababb139a30d20475d731db3dacd23731aff"
+        }
+      }
+    }
+  ]
+}

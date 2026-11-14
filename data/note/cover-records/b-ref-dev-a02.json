@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-dev-a02",
+  "production": {
+    "id": "NCI-00142",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "昆布をよく買う\nのはどの市？",
+      "subline": "支出と購入量を47市で比較\n2024年の家計調査",
+      "subject": "木のテーブルに束ねた乾燥昆布と、文字のない紙袋入りの昆布、小さな土鍋を大きく描く。緑とクリーム色の雑誌挿絵。袋や器に文字を入れず、グラフ・地図・金額・順位の図は描かない。人物・手は描かない。",
+      "evidence": "https://note.com/stats47/n/n0f9c73ec2188 2026-11-04公開本文確認。家計調査2024年の県庁所在市47市・二人以上世帯のこんぶ支出と購入量を比較する記事。答えはカバーで断定せず問いの形にし、産地と消費の因果は本文でも未確認なので書かない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "3e35be6afc04a700aeaa00683e1e0fb7c91a00c3c54d6604ef5cc47a64067c81",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a02/revisions/3e35be6afc04a700aeaa00683e1e0fb7c91a00c3c54d6604ef5cc47a64067c81.png"
+      },
+      "bytes": 33775,
+      "id": "3e35be6afc04a700aeaa00683e1e0fb7c91a00c3c54d6604ef5cc47a64067c81",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:10:09.152Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "c47e01b98388ba22d184e349bd19d4042ead6a5259112db5cf5762fbaee2d676"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:11:56.929Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "c47e01b98388ba22d184e349bd19d4042ead6a5259112db5cf5762fbaee2d676",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a02/inputs/c47e01b98388ba22d184e349bd19d4042ead6a5259112db5cf5762fbaee2d676.json"
+          },
+          "bytes": 1287
+        }
+      }
+    },
+    {
+      "sha256": "d0ef46bef4a750031a5d256c1d6d1e8172a029a5495a0a0c4e172bc6273329d4",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a02/revisions/d0ef46bef4a750031a5d256c1d6d1e8172a029a5495a0a0c4e172bc6273329d4.png"
+      },
+      "bytes": 41882,
+      "id": "d0ef46bef4a750031a5d256c1d6d1e8172a029a5495a0a0c4e172bc6273329d4",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:22:12.483Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324038081/rectangle_large_type_2_42aff7261236202a045ea06cea727dd2.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "d0ef46bef4a750031a5d256c1d6d1e8172a029a5495a0a0c4e172bc6273329d4"
+      }
+    },
+    {
+      "sha256": "40f7e1427018798eced4e2c8bfe5dd0c6a21b48eb8ff6323fff2da0752e2df70",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a02/revisions/40f7e1427018798eced4e2c8bfe5dd0c6a21b48eb8ff6323fff2da0752e2df70.png"
+      },
+      "bytes": 1932108,
+      "id": "40f7e1427018798eced4e2c8bfe5dd0c6a21b48eb8ff6323fff2da0752e2df70",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-19e552c7cfd8",
+      "createdAt": "2026-11-03T22:53:13.879Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "16c40e75728fa7aeab96f1c50145897370c814c4511d6397f18aa0d31e5530e9"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に旧版との比較画像で方向を承認。原寸・幅320pxの全文と題材を確認した版",
+        "reviewedAt": "2026-11-03T22:59:02.598Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "16c40e75728fa7aeab96f1c50145897370c814c4511d6397f18aa0d31e5530e9",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a02/inputs/16c40e75728fa7aeab96f1c50145897370c814c4511d6397f18aa0d31e5530e9.json"
+          },
+          "bytes": 8419
+        },
+        "production": {
+          "id": "NCI-00142",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "19e552c7cfd8253559feebb3c310d63f2646ac9887d7ee383604824bc54a6620"
+        }
+      }
+    }
+  ]
+}

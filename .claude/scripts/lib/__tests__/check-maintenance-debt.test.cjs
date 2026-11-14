@@ -14,7 +14,7 @@ function fixture(source) {
   return root;
 }
 function run(root, args = ["--json"]) {
-  return spawnSync(process.execPath, [CHECKER, ...args], { encoding: "utf8", env: { ...process.env, CLAUDE_PROJECT_DIR: root } });
+  return spawnSync(process.execPath, [CHECKER, ...args], { encoding: "utf8", env: { ...process.env, STATS47_SCAN_ROOT: root } });
 }
 test("追跡情報付きTODOを受理する", (t) => {
   const root = fixture("// TODO #123: migrate later\n"); t.after(() => fs.rmSync(root, { recursive: true, force: true }));
@@ -207,7 +207,7 @@ test("チェッカーが変わったらローカルの stat キャッシュを�
   // 旧チェッカーで「問題なし」と記録されたキャッシュを置く
   fs.writeFileSync(cache, JSON.stringify({ version: 1, checker: "old", entries: { "apps/web/src/sample.ts": { size: st.size, mtimeMs: st.mtimeMs, results: [] } } }));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
-  const result = spawnSync(process.execPath, [CHECKER, "--json"], { encoding: "utf8", env: { ...process.env, CLAUDE_PROJECT_DIR: root, MAINTENANCE_DEBT_CACHE: cache } });
+  const result = spawnSync(process.execPath, [CHECKER, "--json"], { encoding: "utf8", env: { ...process.env, STATS47_SCAN_ROOT: root, MAINTENANCE_DEBT_CACHE: cache } });
   assert.equal(result.status, 1, result.stdout + result.stderr);
   assert.ok(JSON.parse(result.stdout).newFindings.some((item) => item.code === "SITE_IDENTITY_LITERAL"));
 });

@@ -1,0 +1,262 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-kakei-yamaguchi",
+  "production": {
+    "id": "NCI-00105",
+    "policyId": "NCP-002",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "山口県の家計\n教育費に注目",
+      "subline": "山口市・2024年\n二人以上の世帯",
+      "subject": "添付画像は編集対象ではなく、山口県の地理輪郭を示す検証済みの参照素材。完成画像は横長1280×670相当で新たに作る。右側に参照の県主域輪郭を大きく、縦横比・凹凸・北向きを忠実に保って描き、切り絵のような淡黄色または青緑の明快な面と濃紺の縁取りで主役にする。県形を別物に描き換えたり、回転・反転・県境・島・データ塗り分けを追加しない。生活の題材は輪郭と重ならない右下の小さな無地の学習用の本一点だけ。人物・顔・手・動物・キャラクター・擬人化なし。指定外の文字や数字・ロゴ・図表は描かず、補足2行も見出しに近い太さで大きく読みやすくする。 新版は輪郭の周囲に余白を広くとり、淡いクリーム色の背景にして、県形を最も目立つ位置へ置く。 新版は輪郭の周囲に余白を広くとり、淡いクリーム色の背景にして、県形を最も目立つ位置へ置く。",
+      "evidence": "https://note.com/stats47/n/n88dde65e0774 2026-10-15公開本文確認。公開本文は山口市の2024年・二人以上の世帯。教育支出は47市単純平均比0.70倍で、十大費目の最大の乖離。婚礼費の大倍率や全国最低という表現はカバーに採らず、教育水準・教育意欲や県全体の評価へ置き換えない。 人物・キャラクターは使わない。 新方針: 地図は山口県の主域（遠隔離島省略）の地域識別用。家計の観測対象は山口市であり、県全域の観測図ではない。 2026-10-23再確認。 2026-10-23に記事台帳と既存の本文確認記録を照合。",
+      "dataScope": {
+        "place": "山口市",
+        "year": "2024",
+        "households": "二人以上の世帯"
+      }
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "5ee889cb076fba3d808c910aea632c97e4198c22b4b732f9f0040737188a0194",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-yamaguchi/revisions/5ee889cb076fba3d808c910aea632c97e4198c22b4b732f9f0040737188a0194.png"
+      },
+      "bytes": 74349,
+      "id": "5ee889cb076fba3d808c910aea632c97e4198c22b4b732f9f0040737188a0194",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:20.345Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312771968/rectangle_large_type_2_f7ce414d0e7f644fa39b6cc92123d416.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "5ee889cb076fba3d808c910aea632c97e4198c22b4b732f9f0040737188a0194"
+      }
+    },
+    {
+      "sha256": "60a0ae2ac00930b2735a5a62c4c06970161c2ec3045d12b57c7b2384777862e5",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-yamaguchi/revisions/60a0ae2ac00930b2735a5a62c4c06970161c2ec3045d12b57c7b2384777862e5.png"
+      },
+      "bytes": 120625,
+      "id": "60a0ae2ac00930b2735a5a62c4c06970161c2ec3045d12b57c7b2384777862e5",
+      "kind": "candidate",
+      "version": "2026-10-02-household-r1",
+      "createdAt": "2026-10-02T03:19:11.562Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "fac25c42210b876cd9905510246844195920566ff7ffdf0c11291db3185ce280"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+        "reviewedAt": "2026-10-02T05:27:41.112Z"
+      },
+      "provenance": {
+        "renderer": "bold-note-cover",
+        "sourceUrl": "https://storage.stats47.jp/app/stats/education-expenditure-total/values.json",
+        "sourceSha256": "8fff1a0bc37d5de9718095212fd0c25c9122a0f48bacc30d3cf6da912b8c9ab9"
+      }
+    },
+    {
+      "sha256": "b44a7cc2918303e34c2d788cf5d665c17445c73a5d6c5c6c2f29cdacdbdaad68",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-yamaguchi/revisions/b44a7cc2918303e34c2d788cf5d665c17445c73a5d6c5c6c2f29cdacdbdaad68.png"
+      },
+      "bytes": 100013,
+      "id": "b44a7cc2918303e34c2d788cf5d665c17445c73a5d6c5c6c2f29cdacdbdaad68",
+      "kind": "r2-archive",
+      "version": "legacy-r2-import-2026-10-02",
+      "createdAt": "2026-10-02T03:29:49.364Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Legacy R2 asset preserved; not adopted for note",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "legacy-public-r2",
+        "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-yamaguchi/images/cover-1280x670.png",
+        "sourceSha256": "b44a7cc2918303e34c2d788cf5d665c17445c73a5d6c5c6c2f29cdacdbdaad68"
+      }
+    },
+    {
+      "sha256": "c54c9fd7a7b529d0ca4e0a20c477a1895005a6960ca43e096c5835f58281f50d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-yamaguchi/revisions/c54c9fd7a7b529d0ca4e0a20c477a1895005a6960ca43e096c5835f58281f50d.png"
+      },
+      "bytes": 38467,
+      "id": "c54c9fd7a7b529d0ca4e0a20c477a1895005a6960ca43e096c5835f58281f50d",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T05:01:17.054Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/319911903/rectangle_large_type_2_1ab5d8dfa7af860dada6fdd9d8535627.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "c54c9fd7a7b529d0ca4e0a20c477a1895005a6960ca43e096c5835f58281f50d"
+      }
+    },
+    {
+      "sha256": "638d47af164640c8f2ad4902eec547d675e9f6fe2392b18334d14a351eb1af0b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-yamaguchi/revisions/638d47af164640c8f2ad4902eec547d675e9f6fe2392b18334d14a351eb1af0b.png"
+      },
+      "bytes": 1918922,
+      "id": "638d47af164640c8f2ad4902eec547d675e9f6fe2392b18334d14a351eb1af0b",
+      "kind": "candidate",
+      "version": "imagegen-no-character-next10-02-20261015",
+      "createdAt": "2026-10-15T05:10:17.501Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "55d94f17842434e386630bbb7bba1bad904ee2d1b34bac828480f5095c7bb091"
+      },
+      "review": {
+        "status": "pending",
+        "reason": null,
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "55d94f17842434e386630bbb7bba1bad904ee2d1b34bac828480f5095c7bb091",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-yamaguchi/inputs/55d94f17842434e386630bbb7bba1bad904ee2d1b34bac828480f5095c7bb091.json"
+          },
+          "bytes": 8993
+        },
+        "production": {
+          "id": "NCI-00105",
+          "policyId": "NCP-002",
+          "policyVersion": 2,
+          "planSha256": "ee628bd2896a5aff5503b1a72cad408cb796887c81b6c9906baaff63cb887a05"
+        }
+      }
+    },
+    {
+      "sha256": "90b493e09604853e0a0bd5731ad24224c1c34d1af206429b43b295fe16044944",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-yamaguchi/revisions/90b493e09604853e0a0bd5731ad24224c1c34d1af206429b43b295fe16044944.png"
+      },
+      "bytes": 1301120,
+      "id": "90b493e09604853e0a0bd5731ad24224c1c34d1af206429b43b295fe16044944",
+      "kind": "candidate",
+      "version": "imagegen-category-contract-v1-20261015",
+      "createdAt": "2026-10-15T05:45:22.960Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e10555c079ad478a2497f647ff417792f054ee1050582105a0af515059032986"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "NCI-00105: 原寸/320pxの文字・補足・人物なし・題材を個別確認済み。家計は検証済み県主域参照と対象市・2024年・二人以上の世帯を照合。2026-10-15ユーザーが今回10件の反映を指示。",
+        "reviewedAt": "2026-10-15T05:55:31.143Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "e10555c079ad478a2497f647ff417792f054ee1050582105a0af515059032986",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-yamaguchi/inputs/e10555c079ad478a2497f647ff417792f054ee1050582105a0af515059032986.json"
+          },
+          "bytes": 12256
+        },
+        "production": {
+          "id": "NCI-00105",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "2de109ef0a8714568433f4ae3ae0e221f7a5cf55e9bb68b6c1128ac3de1f5b2d"
+        }
+      }
+    },
+    {
+      "sha256": "1fb0aa61c3a4eab9ee72b4eccbac4a757936a1df1603414c889374ef1cda5194",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-yamaguchi/revisions/1fb0aa61c3a4eab9ee72b4eccbac4a757936a1df1603414c889374ef1cda5194.png"
+      },
+      "bytes": 1272514,
+      "id": "1fb0aa61c3a4eab9ee72b4eccbac4a757936a1df1603414c889374ef1cda5194",
+      "kind": "candidate",
+      "version": "pop-NCP-002-v3-580908b78707",
+      "createdAt": "2026-10-23T07:06:47.277Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "85b1a06559e02a254b4f6a563c97cb3546898ba35a9f0a8cc26ea22f61d02731"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "山口県主域の輪郭、山口市・2024年・二人以上の世帯、教育費の題材を新旧比較。原寸と幅320pxで文字・県形を確認。",
+        "reviewedAt": "2026-10-23T07:13:57.627Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "85b1a06559e02a254b4f6a563c97cb3546898ba35a9f0a8cc26ea22f61d02731",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-yamaguchi/inputs/85b1a06559e02a254b4f6a563c97cb3546898ba35a9f0a8cc26ea22f61d02731.json"
+          },
+          "bytes": 12763
+        },
+        "production": {
+          "id": "NCI-00105",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "580908b787072904b640a4fd852ac7c20334aa3cf3406a3a6f0382263bdf6576"
+        }
+      }
+    }
+  ]
+}

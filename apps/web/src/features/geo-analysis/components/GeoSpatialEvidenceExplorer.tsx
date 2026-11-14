@@ -27,9 +27,10 @@ import { ChartLegend } from '@/components/charts/ChartLegend';
 import { GEO_BASEMAP_SHORELINE_ATTRIBUTION } from '@/components/charts/leaflet-basemap';
 import { PanelGrid } from '@/components/layout/PageShell';
 import { SectionHeader } from '@/components/section';
-import { SurfaceCard } from '@/components/surface';
+import { StatTile, StatTileGrid } from '@/components/surface';
 
 import {
+  navSurfaceProps,
   trackGeoMapInteraction,
   trackGeoRegionSelect,
 } from '@/lib/analytics/events';
@@ -391,16 +392,12 @@ function GeoSpatialEvidenceExplorerState({
       <PanelGrid data-testid="spatial-audit">
         <SectionHeader as="h3" title="数値の確かめ方" hideRule />
         {detail && !loading ? (detail.slug === 'population-landslide-exposure' ? <GeoLandslideAudit detail={detail} /> :
-          <PanelGrid className="sm:grid-cols-3">
+          <StatTileGrid>
+            {/* 検算の行は結果 (合計・比率) を値に、内訳の式を値の下の補足に出す */}
             {spatialAuditRows(detail).map((row) => (
-              <SurfaceCard key={row.label}>
-                <p className="text-xs text-muted-foreground">{row.label}</p>
-                <p className="mt-2 text-base font-semibold tabular-nums">
-                  {row.value}
-                </p>
-              </SurfaceCard>
+              <StatTile key={row.label} label={row.label} value={row.value} meta={row.meta} />
             ))}
-          </PanelGrid>
+          </StatTileGrid>
         ) : null}
         <p className="mt-3 text-sm text-muted-foreground">
           {landslide ? '対象46県（京都府除外）の途中データと県別集計を照合（' : '全47県の途中データと県別集計を照合（'}
@@ -408,7 +405,7 @@ function GeoSpatialEvidenceExplorerState({
           /{landslide ? 46 : 47}）。表示の人数は丸めているため足し算に1人程度の差が出ることがあります。検算は丸め前の値で行います。
         </p>
       </PanelGrid>
-      <div className="mt-4 flex flex-wrap gap-4 text-sm">
+      <div className="mt-4 flex flex-wrap gap-4 text-sm" {...navSurfaceProps('geo_evidence')}>
         <Link
           href={`${hrefFor('geo', { analysisSlug: slug })}?pref=${prefCode}&stage=${view}${publicFacility ? `&group=${facilityGroup}` : ''}`}
           className="text-primary underline"

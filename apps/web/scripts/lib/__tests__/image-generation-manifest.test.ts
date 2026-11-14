@@ -547,7 +547,6 @@ describe('image generator registry', () => {
     expect(IMAGE_GENERATOR_TYPES).toEqual([
       'ranking',
       'areas',
-      'ranking-cards',
       'note-covers',
       'pref-silhouette',
       'products',

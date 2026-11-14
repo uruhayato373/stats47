@@ -102,6 +102,8 @@ class×model の成功率を出し、`guards` を通ったときだけ policy �
 | **completed と記録したのに行が残る** (順序を逆にする) | 同上。この run は push まで到達しないので、**実装差分も ledger もまとめて破棄される**。だから prompt は「消してから記録する」順序で、消せなければ `deferred` に落とす (2026-08-20 に 16 分・$16.21 を失った) |
 | 処理対象外の ID を巻き込む削除 | 同上 (`removal-out-of-queue`) |
 | ledger の直接編集 | CLI 経由のみ (agent の禁止事項に明記)。直接編集は証拠の捏造 |
+| 並行した記録で先の記録が消える | `record-backlog-outcome.mjs` がロックファイルで 1 プロセスずつに絞り、一時ファイルからの rename で書く |
+| 割当表に無い class の記録 | 同 CLI が `backlog-routing-policy.json` の `classes` に無い名前を拒否する |
 | improvements / memory / learned への write | verify の `FORBIDDEN_PATH_PATTERNS` |
 | `.env` 等の秘密 | 同上 + workflow の `disallowedTools` |
 | owner 待ちの自動処理 | `preClassify` が needs-owner へ固定 |

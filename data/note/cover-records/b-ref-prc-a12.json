@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-prc-a12",
+  "production": {
+    "id": "NCI-00195",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "ゴルフと釣りは\n盛んな県が逆？",
+      "subline": "愛知県と広島県が1位",
+      "subject": "ゴルフクラブと白いボール、釣り竿とリールを大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n4503382d72b7 本文確認2026-11-04。ゴルフは愛知県9.0％、釣りは広島県12.2％が1位。盛んな県が逆になりやすい。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "3320b339f41faaf017824b08cdeefb79852d73bb7c4bb27b0eae3aec118b8263",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a12/revisions/3320b339f41faaf017824b08cdeefb79852d73bb7c4bb27b0eae3aec118b8263.png"
+      },
+      "bytes": 34991,
+      "id": "3320b339f41faaf017824b08cdeefb79852d73bb7c4bb27b0eae3aec118b8263",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:07:58.203Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ece3ba81ef9875e9d094089297115e2069772d7b12ae8150a68cf4e7da237539"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:13:15.821Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "ece3ba81ef9875e9d094089297115e2069772d7b12ae8150a68cf4e7da237539",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a12/inputs/ece3ba81ef9875e9d094089297115e2069772d7b12ae8150a68cf4e7da237539.json"
+          },
+          "bytes": 1301
+        }
+      }
+    },
+    {
+      "sha256": "f8e0e1e5d52109047b3749ae2b824204c43c3333d83b3d71db2090472c7f0dde",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a12/revisions/f8e0e1e5d52109047b3749ae2b824204c43c3333d83b3d71db2090472c7f0dde.png"
+      },
+      "bytes": 41796,
+      "id": "f8e0e1e5d52109047b3749ae2b824204c43c3333d83b3d71db2090472c7f0dde",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:47.945Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324155542/rectangle_large_type_2_e643483403bc66a77a430fcd722e60e7.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "f8e0e1e5d52109047b3749ae2b824204c43c3333d83b3d71db2090472c7f0dde"
+      }
+    },
+    {
+      "sha256": "fd5f321c1983cd315163cb6915694b2ea218441c28db5b59970ceef7618b9b97",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a12/revisions/fd5f321c1983cd315163cb6915694b2ea218441c28db5b59970ceef7618b9b97.png"
+      },
+      "bytes": 1917848,
+      "id": "fd5f321c1983cd315163cb6915694b2ea218441c28db5b59970ceef7618b9b97",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-adc2f10a80dd",
+      "createdAt": "2026-11-04T01:40:50.037Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "a5f25d35fdd9fb4dc9d127e18b2bc145d92747bc6d0d90d6eb5f753893cd953c"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:41:53.857Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "a5f25d35fdd9fb4dc9d127e18b2bc145d92747bc6d0d90d6eb5f753893cd953c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a12/inputs/a5f25d35fdd9fb4dc9d127e18b2bc145d92747bc6d0d90d6eb5f753893cd953c.json"
+          },
+          "bytes": 8104
+        },
+        "production": {
+          "id": "NCI-00195",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "adc2f10a80dd7f812ae3a9a7830f7629ef41ffbaed2f670021bb174ad2d584c6"
+        }
+      }
+    }
+  ]
+}

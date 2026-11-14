@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "d-kakei-spending-personality",
+  "production": {
+    "id": "NCI-00256",
+    "policyId": "NCP-005",
+    "policyVersion": 2,
+    "brief": {
+      "headline": "あなたの街の\n消費グセは？",
+      "subline": "家計調査で食の地域差を読む\n県庁所在市・二人以上の世帯",
+      "subject": "緑とクリームと明るい黄色。大きなラーメンの器と、ぎょうざの小皿を右側に親しみやすい食卓として描く。生活雑誌の食特集のような温かい手描き。食べている人物は不要。金額、ランキング、県境地図、データ図は描かない。",
+      "evidence": "https://note.com/stats47/n/n94cd84139a45 公開本文を2026-10-14確認。家計調査の県庁所在市別、二人以上の世帯の年間支出額を主に食で比較する記事。県全体の消費量・生産量と誤認させず、690品目や特定の順位をカバーでは断定しない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "f9cb43b914ebf9d5a6cf48ae6960823799bfc86f1ee598a0e272104b95b2db3c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-kakei-spending-personality/revisions/f9cb43b914ebf9d5a6cf48ae6960823799bfc86f1ee598a0e272104b95b2db3c.png"
+      },
+      "bytes": 38306,
+      "id": "f9cb43b914ebf9d5a6cf48ae6960823799bfc86f1ee598a0e272104b95b2db3c",
+      "kind": "candidate",
+      "version": "2026-10-12-drafts",
+      "createdAt": "2026-10-12T00:53:37.989Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "f9d9f198d71abb72e5c4259f0d9c5b90aef44271cefc5186359414d43a26c689"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出し・記事の事実・図(または値を持たない背景地図)が読める。登録前の確認版とSHA一致",
+        "reviewedAt": "2026-10-12T00:54:37.115Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "f9d9f198d71abb72e5c4259f0d9c5b90aef44271cefc5186359414d43a26c689",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-kakei-spending-personality/inputs/f9d9f198d71abb72e5c4259f0d9c5b90aef44271cefc5186359414d43a26c689.json"
+          },
+          "bytes": 1275
+        }
+      }
+    },
+    {
+      "sha256": "ecc2b416105ce935b374aa578244ea4c705ca2f1e958353694eceefccd117655",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-kakei-spending-personality/revisions/ecc2b416105ce935b374aa578244ea4c705ca2f1e958353694eceefccd117655.png"
+      },
+      "bytes": 72597,
+      "id": "ecc2b416105ce935b374aa578244ea4c705ca2f1e958353694eceefccd117655",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-14T08:41:26.219Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323549967/rectangle_large_type_2_6c8421a6e9b839a2f3437d21e2568e1d.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "ecc2b416105ce935b374aa578244ea4c705ca2f1e958353694eceefccd117655"
+      }
+    },
+    {
+      "sha256": "deb0f93283d9c54bb119e27df835a6d4cc6ffbba0081b1767b82175bbe7284b6",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-kakei-spending-personality/revisions/deb0f93283d9c54bb119e27df835a6d4cc6ffbba0081b1767b82175bbe7284b6.png"
+      },
+      "bytes": 2074011,
+      "id": "deb0f93283d9c54bb119e27df835a6d4cc6ffbba0081b1767b82175bbe7284b6",
+      "kind": "candidate",
+      "version": "imagegen-pop-v2-next-six-20261014",
+      "createdAt": "2026-10-14T08:58:37.887Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "cabe4511510a9e8b7a15cb7560f526d097a04fca7000916ef2d3f049b6f58f06"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "2026-10-14に原寸と幅320px、管理画面の修正前後で確認済み。2026-10-15ユーザーがこの6件の公開反映を指示。",
+        "reviewedAt": "2026-10-15T00:44:22.317Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "cabe4511510a9e8b7a15cb7560f526d097a04fca7000916ef2d3f049b6f58f06",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-kakei-spending-personality/inputs/cabe4511510a9e8b7a15cb7560f526d097a04fca7000916ef2d3f049b6f58f06.json"
+          },
+          "bytes": 8142
+        },
+        "production": {
+          "id": "NCI-00256",
+          "policyId": "NCP-005",
+          "policyVersion": 2,
+          "planSha256": "305f4354ef51d1d03a93b1ffaf59099dad80fc494aa0ad33ac8daa85a756ee22"
+        }
+      }
+    }
+  ]
+}

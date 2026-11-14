@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n6305d990f2d2",
+  "production": {
+    "id": "NCI-00429",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "邦舞・おどり\n東京都・鹿児島県が同率1位",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人の伝統舞踊の舞台と無地の扇子を描く。踊り手や衣装を着た人は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n6305d990f2d2 2026-10-23公開API本文照合。記事題名「【2021年版】邦舞・おどりをした人が多い県は？ 1位は鹿児島県・東京都｜都道府県ランキング」。本文中の「鹿児島県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "e097e5bfae5d2182188f2a4a2fd3acde5e76d635bd206419e9fac0af63a94809",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n6305d990f2d2/revisions/e097e5bfae5d2182188f2a4a2fd3acde5e76d635bd206419e9fac0af63a94809.png"
+      },
+      "bytes": 76651,
+      "id": "e097e5bfae5d2182188f2a4a2fd3acde5e76d635bd206419e9fac0af63a94809",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:14.843Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312774228/rectangle_large_type_2_c52583609fc30c227c4a96942a09f0e0.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "e097e5bfae5d2182188f2a4a2fd3acde5e76d635bd206419e9fac0af63a94809"
+      }
+    },
+    {
+      "sha256": "a6d6ad70c9baec5d82c9dddcde683e215791628dbf79f5402ae9acdced209db3",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n6305d990f2d2/revisions/a6d6ad70c9baec5d82c9dddcde683e215791628dbf79f5402ae9acdced209db3.png"
+      },
+      "bytes": 119171,
+      "id": "a6d6ad70c9baec5d82c9dddcde683e215791628dbf79f5402ae9acdced209db3",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:15:55.868Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "32d3d30f13162d8881ed4ad76d4032aa89c3a2e4a757d92c459ae128ddbabd29"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-japanese-dance/values.json",
+        "sourceSha256": "f33efa78d4d8a89bab2d06f1ef095771b003f5e66ecc0645c0a666492c996e2b",
+        "input": {
+          "sha256": "32d3d30f13162d8881ed4ad76d4032aa89c3a2e4a757d92c459ae128ddbabd29",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n6305d990f2d2/inputs/32d3d30f13162d8881ed4ad76d4032aa89c3a2e4a757d92c459ae128ddbabd29.json"
+          },
+          "bytes": 6620
+        }
+      }
+    },
+    {
+      "sha256": "a4a62ad32f685862e5b68cdf857e4f0f6fa3b19c1089a4821fab792760108284",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n6305d990f2d2/revisions/a4a62ad32f685862e5b68cdf857e4f0f6fa3b19c1089a4821fab792760108284.png"
+      },
+      "bytes": 1898224,
+      "id": "a4a62ad32f685862e5b68cdf857e4f0f6fa3b19c1089a4821fab792760108284",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-96d47076e813",
+      "createdAt": "2026-10-23T13:07:42.974Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "cc8276b1e0e73b3be41ebb51ab73aebd0f2b09a2e36e15c8842b79e345eb64c9"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T13:09:48.607Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "cc8276b1e0e73b3be41ebb51ab73aebd0f2b09a2e36e15c8842b79e345eb64c9",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n6305d990f2d2/inputs/cc8276b1e0e73b3be41ebb51ab73aebd0f2b09a2e36e15c8842b79e345eb64c9.json"
+          },
+          "bytes": 8873
+        },
+        "production": {
+          "id": "NCI-00429",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "96d47076e813de2137c6ebef269e837f95e6ee86419b50b71b5ea6fc9fe127de"
+        }
+      }
+    }
+  ]
+}

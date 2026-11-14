@@ -38,7 +38,8 @@ export type SourceAttribution = {
 const ssdsSource = getReferenceDataSource('ssds');
 const SSDS_COMPILATION = { name: ssdsSource.label, url: ssdsSource.url };
 
-type SsdsEntry = { kind: string; originalSurveys: ProvenanceSurvey[] };
+/** primarySurveys = 指標計算式の分子の原典 (主出典)。全原典と同じ項目には無い */
+type SsdsEntry = { kind: string; originalSurveys: ProvenanceSurvey[]; primarySurveys?: ProvenanceSurvey[] };
 const SSDS_PROVENANCE = ssdsProvenanceJson as Record<string, SsdsEntry>;
 
 const ESTAT_PROVENANCE = estatProvenanceJson as {
@@ -103,22 +104,44 @@ export function resolveProvenanceByParams(
   return survey ? [withMasterName(survey)] : [];
 }
 
+/**
+ * 辿る範囲。'all' = 式に出る全項目の原典 (出典の表記)、'primary' = 分子の原典だけ (調査のページへ並べる主出典)。
+ * 人口や面積で割っただけの指標を、分母の調査 (国勢調査・人口推計・面積調) のページへ並べないために分ける (2026-11-14)。
+ */
+type ProvenanceScope = 'all' | 'primary';
+
+/** SSDS 指標の主出典 (分子の原典)。主出典を持たない項目・一次統計は全原典と同じ。 */
+function resolvePrimaryProvenanceByParams(
+  statsDataId: string | undefined,
+  cdCat01: string | undefined
+): ProvenanceSurvey[] {
+  const primary =
+    statsDataId && cdCat01 && SSDS_TABLE_IDS.has(statsDataId)
+      ? SSDS_PROVENANCE[cdCat01]?.primarySurveys
+      : undefined;
+  return primary
+    ? primary.map(withMasterName)
+    : resolveProvenanceByParams(statsDataId, cdCat01);
+}
+
 function resolveCalculated(
   source: Extract<SourceConfig, { kind: 'calculated' }>,
   registry: MetricRegistry | undefined,
-  depth: number
+  depth: number,
+  scope: ProvenanceScope
 ): ProvenanceSurvey[] {
   if (!registry || depth > 4) return [];
   const f = source.formula;
   const operandKeys: string[] = [];
-  if (f.op === 'divide') operandKeys.push(f.numerator, f.denominator);
+  if (f.op === 'divide')
+    operandKeys.push(f.numerator, ...(scope === 'all' ? [f.denominator] : []));
   else if (f.op === 'multiply' || f.op === 'subtract')
     operandKeys.push(f.left, f.right);
   else if (f.op === 'per_population') operandKeys.push(f.numerator);
   const out: ProvenanceSurvey[] = [];
   for (const key of operandKeys) {
     const m = registry[key];
-    if (m) out.push(...resolveMetricProvenance(m, registry, depth + 1));
+    if (m) out.push(...resolveMetricScoped(m, registry, depth + 1, scope));
   }
   return out;
 }
@@ -126,43 +149,43 @@ function resolveCalculated(
 function resolveLegacyCalculated(
   metric: MetricConfig,
   registry: MetricRegistry | undefined,
-  depth: number
+  depth: number,
+  scope: ProvenanceScope
 ): ProvenanceSurvey[] {
   if (!registry || depth > 4) return [];
   const calculation = metric.calculation;
+  // 引き算は両方の項目が主出典。割り算 (ratio / per_capita) の分母だけを主出典から外す
+  const includesDenominator = scope === 'all' || calculation?.type === 'subtraction';
   const operandKeys = [
     calculation?.numeratorKey,
-    calculation?.denominatorKey,
+    includesDenominator ? calculation?.denominatorKey : undefined,
   ].filter((key): key is string => Boolean(key));
   const out: ProvenanceSurvey[] = [];
   for (const key of operandKeys) {
     const operand = registry[key];
     if (operand)
-      out.push(...resolveMetricProvenance(operand, registry, depth + 1));
+      out.push(...resolveMetricScoped(operand, registry, depth + 1, scope));
   }
   return out;
 }
 
-/**
- * SourceConfig 単体から原典調査を解決する。metric 全体を持たない呼び出し元
- * (exporter が RankingItem.sourceConfig から解決する等) はこちらを使う。
- *
- * @param registry calculated source の分子/分母を辿るために必要 (任意)
- */
-export function resolveSourceProvenance(
+function resolveSourceScoped(
   source: SourceConfig,
-  registry?: MetricRegistry,
-  depth = 0
+  registry: MetricRegistry | undefined,
+  depth: number,
+  scope: ProvenanceScope
 ): ProvenanceSurvey[] {
   switch (source.kind) {
     case 'kakei-chousa':
       return [KAKEI_SURVEY];
     case 'estat':
       return dedupe(
-        resolveProvenanceByParams(source.statsDataId, source.cdCat01)
+        scope === 'primary'
+          ? resolvePrimaryProvenanceByParams(source.statsDataId, source.cdCat01)
+          : resolveProvenanceByParams(source.statsDataId, source.cdCat01)
       );
     case 'calculated':
-      return dedupe(resolveCalculated(source, registry, depth));
+      return dedupe(resolveCalculated(source, registry, depth, scope));
     case 'mlit':
     case 'external':
       if (!source.displayName) return [];
@@ -179,6 +202,38 @@ export function resolveSourceProvenance(
   }
 }
 
+function resolveMetricScoped(
+  metric: MetricConfig,
+  registry: MetricRegistry | undefined,
+  depth: number,
+  scope: ProvenanceScope
+): ProvenanceSurvey[] {
+  if (
+    metric.source.kind === 'external' &&
+    metric.source.fetcherKey === 'calculated'
+  ) {
+    const resolved = dedupe(
+      resolveLegacyCalculated(metric, registry, depth, scope)
+    );
+    if (resolved.length > 0) return resolved;
+  }
+  return resolveSourceScoped(metric.source, registry, depth, scope);
+}
+
+/**
+ * SourceConfig 単体から原典調査を解決する。metric 全体を持たない呼び出し元
+ * (exporter が RankingItem.sourceConfig から解決する等) はこちらを使う。
+ *
+ * @param registry calculated source の分子/分母を辿るために必要 (任意)
+ */
+export function resolveSourceProvenance(
+  source: SourceConfig,
+  registry?: MetricRegistry,
+  depth = 0
+): ProvenanceSurvey[] {
+  return resolveSourceScoped(source, registry, depth, 'all');
+}
+
 /**
  * metric の原典調査を解決する。解決できない場合は空配列を返す
  * (auto-slug で偽の survey を作らず、未解決を可視化する方針)。
@@ -190,14 +245,20 @@ export function resolveMetricProvenance(
   registry?: MetricRegistry,
   depth = 0
 ): ProvenanceSurvey[] {
-  if (
-    metric.source.kind === 'external' &&
-    metric.source.fetcherKey === 'calculated'
-  ) {
-    const resolved = dedupe(resolveLegacyCalculated(metric, registry, depth));
-    if (resolved.length > 0) return resolved;
-  }
-  return resolveSourceProvenance(metric.source, registry, depth);
+  return resolveMetricScoped(metric, registry, depth, 'all');
+}
+
+/**
+ * metric の主出典 (調査のページへ並べる調査) を解決する。割り算の指標は分子の原典だけを返し、
+ * 分母の人口・面積の調査を数えない。出典の表記には全原典 (`resolveMetricProvenance`) を使う。
+ *
+ * @param registry calculated metric の分子を辿るために必要 (任意)
+ */
+export function resolveMetricPrimaryProvenance(
+  metric: MetricConfig,
+  registry?: MetricRegistry
+): ProvenanceSurvey[] {
+  return resolveMetricScoped(metric, registry, 0, 'primary');
 }
 
 /**

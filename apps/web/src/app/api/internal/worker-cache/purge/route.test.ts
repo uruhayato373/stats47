@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { getCloudflareContext, type CloudflareEnv } from "@opennextjs/cloudflare";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 

@@ -1,0 +1,215 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-kakei-quantity-price",
+  "production": {
+    "id": "NCI-00138",
+    "policyId": "NCP-005",
+    "policyVersion": 2,
+    "brief": {
+      "headline": "支出が多いのは\n量？単価？",
+      "subline": "数量と単価で読み解く\n2024年の家計調査",
+      "subject": "緑と明るいクリーム、黄色のアクセント。右側に少数の無地の食品パッケージと野菜が入った買い物かごを一点、大きな白紙の値札を一点。数量・値段に目を向ける題材として描き、大小の比較、天秤、数量の比率、データ図や式を描かない。人物・顔・人の手・動物・キャラクター・マスコット・擬人化は一切描かない。地図、架空の統計グラフ、数式、表彰台、順位図、製品ロゴ、指定外の文言を描かない。紙面・タグ・ラベルは完全な白紙。左側の大きな見出しと下の補足2行は、幅320pxでも明瞭に読める太さと大きさにし、四辺の余白を守る。",
+      "evidence": "https://note.com/stats47/n/n7ba6c516c1e9 2026-10-15公開本文確認。本文で支出額を数量と単価へ分け、2024年の札幌市などの実例を読む。支出の多さを食べる量の多さに直接置き換えず、数量と単価の区別を問いにする。 人物・キャラクターは使わない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "6505357974552fa997f5e306e6bbbba887ba2a873b85285e64a905738a8bb142",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-quantity-price/revisions/6505357974552fa997f5e306e6bbbba887ba2a873b85285e64a905738a8bb142.png"
+      },
+      "bytes": 46616,
+      "id": "6505357974552fa997f5e306e6bbbba887ba2a873b85285e64a905738a8bb142",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:25.638Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312772423/rectangle_large_type_2_f4c9aae3462745717a3808df15401c8d.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "6505357974552fa997f5e306e6bbbba887ba2a873b85285e64a905738a8bb142"
+      }
+    },
+    {
+      "sha256": "8116700b23385a4d859146cf284b12caefc3e107b265f55c7b1565ddc4303b56",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-quantity-price/revisions/8116700b23385a4d859146cf284b12caefc3e107b265f55c7b1565ddc4303b56.png"
+      },
+      "bytes": 98045,
+      "id": "8116700b23385a4d859146cf284b12caefc3e107b265f55c7b1565ddc4303b56",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:44:52.761Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "859b7c77d6d7e27da4900863c2f6c83b3c6e7276aec05336868459e361c8cdbc"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で問いと記事固有の図(公開R2の記事画像)が確認できる",
+        "reviewedAt": "2026-10-11T11:50:55.620Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "859b7c77d6d7e27da4900863c2f6c83b3c6e7276aec05336868459e361c8cdbc",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-quantity-price/inputs/859b7c77d6d7e27da4900863c2f6c83b3c6e7276aec05336868459e361c8cdbc.json"
+          },
+          "bytes": 1395
+        }
+      }
+    },
+    {
+      "sha256": "eee82d15e405a8518de90c0416009add23658a8d6a2326969b4a3e821ff88c61",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-quantity-price/revisions/eee82d15e405a8518de90c0416009add23658a8d6a2326969b4a3e821ff88c61.png"
+      },
+      "bytes": 74282,
+      "id": "eee82d15e405a8518de90c0416009add23658a8d6a2326969b4a3e821ff88c61",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:55:51.256Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320302305/rectangle_large_type_2_e9ea52b937517a98778526a31e7d68f0.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "eee82d15e405a8518de90c0416009add23658a8d6a2326969b4a3e821ff88c61"
+      }
+    },
+    {
+      "sha256": "1c1e0ee14f403d8ec49649d18cb6d68261f0af0946af69c7743c407c5006eec5",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-quantity-price/revisions/1c1e0ee14f403d8ec49649d18cb6d68261f0af0946af69c7743c407c5006eec5.png"
+      },
+      "bytes": 42839,
+      "id": "1c1e0ee14f403d8ec49649d18cb6d68261f0af0946af69c7743c407c5006eec5",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:10:43.866Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "539d726f31350f50873b064cdf221d6fe7c1645557ce3c3acc453c411d09304f"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.023/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:17:26.963Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "539d726f31350f50873b064cdf221d6fe7c1645557ce3c3acc453c411d09304f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-quantity-price/inputs/539d726f31350f50873b064cdf221d6fe7c1645557ce3c3acc453c411d09304f.json"
+          },
+          "bytes": 1395
+        }
+      }
+    },
+    {
+      "sha256": "2acbef760f1cad6f5fac6be3c0bbec38cf47a982d95f364c45c4a8a8f235508d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-quantity-price/revisions/2acbef760f1cad6f5fac6be3c0bbec38cf47a982d95f364c45c4a8a8f235508d.png"
+      },
+      "bytes": 65638,
+      "id": "2acbef760f1cad6f5fac6be3c0bbec38cf47a982d95f364c45c4a8a8f235508d",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T04:06:17.584Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323276991/rectangle_large_type_2_a3bbab4277cf562dde775158b6716518.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "2acbef760f1cad6f5fac6be3c0bbec38cf47a982d95f364c45c4a8a8f235508d"
+      }
+    },
+    {
+      "sha256": "ac3a7dfafe5f5a78da0277a21b9070a3e4d743dc53559bd6391c2da414d5605a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-quantity-price/revisions/ac3a7dfafe5f5a78da0277a21b9070a3e4d743dc53559bd6391c2da414d5605a.png"
+      },
+      "bytes": 1892230,
+      "id": "ac3a7dfafe5f5a78da0277a21b9070a3e4d743dc53559bd6391c2da414d5605a",
+      "kind": "candidate",
+      "version": "imagegen-no-character-next10-20261015",
+      "createdAt": "2026-10-15T04:13:58.406Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "8f8f09ce8a6c25aa8301fe7478fe2b8f3d14b82136ab2024bc7007465bb78bf5"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "人物・キャラクターなし。原寸と320pxで指定全文・対象年・地域・世帯区分・補足の可読性・文字切れ・重なりを確認済み。制作原本と目視記録のSHAを照合。管理画面の修正前後10件を提示し、2026-10-15にユーザーが表示中10件の反映を指示。",
+        "reviewedAt": "2026-10-15T04:29:00.039Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "8f8f09ce8a6c25aa8301fe7478fe2b8f3d14b82136ab2024bc7007465bb78bf5",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-quantity-price/inputs/8f8f09ce8a6c25aa8301fe7478fe2b8f3d14b82136ab2024bc7007465bb78bf5.json"
+          },
+          "bytes": 9056
+        },
+        "production": {
+          "id": "NCI-00138",
+          "policyId": "NCP-005",
+          "policyVersion": 2,
+          "planSha256": "b686a100a1b962ae58a94e50d4495f450ff0361375f6a3a30a19074c12cb85f6"
+        }
+      }
+    }
+  ]
+}

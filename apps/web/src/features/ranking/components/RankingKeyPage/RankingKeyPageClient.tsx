@@ -6,6 +6,7 @@ import {
     type RankingItem,
     type RankingValue,
     buildRankingDisplayInfo,
+    resolveRankingValueDisplay,
 } from "@stats47/ranking";
 
 import { ArticleShell, PanelGrid } from "@/components/layout";
@@ -58,6 +59,8 @@ interface RankingKeyPageClientProps {
     breadcrumb?: React.ReactNode;
     /** 同じ指標の市区町村ページへのリンク (既存の関連付けからサーバーで解決) */
     municipalityLink?: React.ReactNode;
+    /** 見出しの最新年が古いかを測る基準の年 (西暦)。サーバーが描画時に決めて渡す */
+    nowYear: number;
 }
 
 export function RankingKeyPageClient({
@@ -73,6 +76,7 @@ export function RankingKeyPageClient({
     groupMembers = [],
     breadcrumb,
     municipalityLink,
+    nowYear,
 }: RankingKeyPageClientProps) {
     const {
         activeRankingItem,
@@ -101,6 +105,15 @@ export function RankingKeyPageClient({
 
     const presentedItem = useMemo(() => resolveRankingPresentation(activeRankingItem, normalizationType ?? null), [activeRankingItem, normalizationType]);
     const displayInfo = buildRankingDisplayInfo(presentedItem);
+    // 表示単位 (万円・億円) はここで 1 回だけ決め、上位と下位・推移・地図・表・県の詳細へ同じ値を渡す。
+    // 人口あたり・面積あたりの値は選んだ計算方法の単位で配信されるので換算しない。市区町村は値の幅が広く、
+    // 都道府県向けに書いた表示単位では小さい町村が 0 に丸まるので、元の単位のまま出す。
+    const valueDisplay = useMemo(
+        () => normalizationType || currentAreaType !== "prefecture"
+            ? null
+            : resolveRankingValueDisplay(activeRankingItem, rankingValues.map((v) => v.value)),
+        [normalizationType, currentAreaType, activeRankingItem, rankingValues],
+    );
 
     const shareText = useMemo(() => {
         const top = rankingValues.find((v) => v.rank === 1);
@@ -177,6 +190,8 @@ export function RankingKeyPageClient({
                 metricTitle={displayInfo.title}
                 areaType={currentAreaType}
                 updatedAt={activeRankingItem.updatedAt}
+                latestYear={activeRankingItem.latestYear}
+                nowYear={nowYear}
             />
             <RankingHeaderControls
                 normalizationOptions={rankingItem.calculation?.normalizationOptions}
@@ -210,6 +225,7 @@ export function RankingKeyPageClient({
                         nationalAverageSeries={nationalAverageSeries}
                         areaType={currentAreaType}
                         yearName={latestYearName}
+                        valueDisplay={valueDisplay}
                     />
                     <RankingVisualizationSection
                         rankingItem={presentedItem}
@@ -221,6 +237,7 @@ export function RankingKeyPageClient({
                             definitionDetail && <RankingVisualizationDetails description={definitionDetail} />
                         }
                         isPending={isPending}
+                        valueDisplay={valueDisplay}
                     />
                 </PanelGrid>
 

@@ -6,6 +6,27 @@ import {
 } from "./types";
 import { parseUnit } from "../unit/unit-semantics";
 
+/**
+ * 2 つの単位表記が同じ単位かを返す。NFKC 後の文字列が等しければ同じ。等しくなくても、
+ * 両方を解釈でき、次元・基底単位・倍率・分母が一致すれば同じとみなす
+ * (e-Stat の全角「Ｍｗｈ」は NFKC 後「Mwh」で、指標定義の「MWh」と文字列は食い違う)。
+ * 電力の mW と MW のように大文字小文字が倍率を分ける単位は、parseUnit が畳まないので同じとみなさない。
+ */
+function isSameUnit(a: string, b: string): boolean {
+  const x = parseUnit(a);
+  const y = parseUnit(b);
+  if (x.normalized === y.normalized) return true;
+  if (x.dimension === null || y.dimension === null) return false;
+  return (
+    x.dimension === y.dimension &&
+    x.baseUnit === y.baseUnit &&
+    x.scaleExponent === y.scaleExponent &&
+    x.hasDenominator === y.hasDenominator &&
+    x.denominator?.population === y.denominator?.population &&
+    x.denominator?.quantity === y.denominator?.quantity
+  );
+}
+
 /** e-Stat から取得した 00000 (全国) 行の最小形。writer はこれだけを渡す (pure)。 */
 export interface EstatNationalRow {
   yearCode: string;
@@ -46,7 +67,8 @@ export type BuildJapanSeriesResult =
  *   単位が一致しない場合は推測で進めず停止する)。1 年だけ捨てて残りを書く、はしない
  *   (部分的に正しいデータより、全体が疑わしいと分かる方が安全)。
  * ★比較は `unit-semantics.ts` の NFKC 正規化を通す (全半角ゆれ「ｋｍ」↔「km」を
- *   誤って不一致と判定しないため。WP6 実測で road-*-length の2 metric がこれで
+ *   誤って不一致と判定しないため。NFKC 後に文字列が違っても、次元・基底単位・倍率が同じなら
+ *   同じ単位とみなす (「Ｍｗｈ」↔「MWh」。mW と MW は倍率が違うので不一致のまま)。WP6 実測で road-*-length の2 metric がこれで
  *   誤って unsupported 判定されていた)。プレースホルダ ('‐' 等、意味的に異なる単位) は
  *   NFKC 正規化しても一致しないため引き続き不一致=停止のまま (安全側は変えない)。
  * ★年ごとの値は `resolveJapanValue` (official) を通す。プレースホルダ値 ('-' 等が
@@ -62,9 +84,8 @@ export function buildJapanSeriesRows(
     return { ok: false, reason: "00000 (全国) 行が1件もない" };
   }
 
-  const expectedNormalized = parseUnit(expectedUnit).normalized;
   const mismatched = nationalRows.find(
-    (r) => r.unit != null && parseUnit(r.unit).normalized !== expectedNormalized,
+    (r) => r.unit != null && !isSameUnit(r.unit, expectedUnit),
   );
   if (mismatched) {
     return {
@@ -111,9 +132,8 @@ export function buildDerivedAdditiveJapanSeriesRows(
     return { ok: false, reason: "都道府県行が1件もない" };
   }
 
-  const expectedNormalized = parseUnit(expectedUnit).normalized;
   const mismatched = prefectureRows.find(
-    (row) => row.unit != null && parseUnit(row.unit).normalized !== expectedNormalized,
+    (row) => row.unit != null && !isSameUnit(row.unit, expectedUnit),
   );
   if (mismatched) {
     return {

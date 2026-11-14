@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-11T07:04:06.383Z",
+  "updatedAt": "2026-11-13T22:13:00.707Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -9240,6 +9240,2857 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-11T07:04:06.383Z"
+    },
+    "MUNI-INDUSTRY-PRODUCT-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "市区町村の製造品出荷額等のデータ商品に、業種別 (産業中分類 24 業種) の内訳を足す",
+      "attempts": [
+        {
+          "at": "2026-11-13T13:05:36.703Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "git cat-file -e c0b8ac76f e65891757 e748bf07c"
+            ],
+            "pass": true
+          },
+          "evidence": "完了を確認: c0b8ac76f・e65891757 で業種別 CSV・検算表・README 節を生成、e748bf07c で note 記事を ZIP v3・¥1,980・manifest c2369672 に更新。data/products/price-history.json の PRICE-MUNI-INDUSTRY-2026-11、note-figure-baseline.json の maxUntypedProductArticles=14 で確認",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T13:05:36.703Z"
+    },
+    "BLOG-GATE-NATIONAL-VALUES-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "品質ゲートの値照合が全国の値・派生比率に効かない",
+      "attempts": [
+        {
+          "at": "2026-11-13T13:05:36.766Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "git cat-file -e 8e0dd1f60",
+              "node --test .claude/scripts/lib/__tests__/quality-gate.q-numbers.test.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "完了を確認: 8e0dd1f60: quality-gate.mjs:483-493 が archetype Q の本文数値を checkArticleNumbers で data と照合し blocker 化。quality-gate.q-numbers.test.mjs と article-numbers.test.mjs 計 16 件 pass、pr-quality-check.yml:620 に配線",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T13:05:36.766Z"
+    },
+    "WEB-REGION-TEST-WIN-PATH-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "テーマ・地域のページの比較検査が Windows のパス区切りで落ちる",
+      "attempts": [
+        {
+          "at": "2026-11-13T13:05:36.824Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "git cat-file -e 64da20ade",
+              "grep replaceAll apps/web/src/__tests__/region-page-no-comparison.test.ts"
+            ],
+            "pass": true
+          },
+          "evidence": "完了を確認: 64da20ade (PR #1258 merge 0e07839fb9) で region-page-no-comparison.test.ts の relative を sourcePath(replaceAll('\\\\','/')) に統一。現行 54 行目と列挙・import 解決での使用を確認。Windows 実機再実行は未実施。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T13:05:36.824Z"
+    },
+    "BLOG-CHART-LINEAGE-R2-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "今日の家計調査の新記事の図6枚で survey が判定できない (unresolved 6)",
+      "attempts": [
+        {
+          "at": "2026-11-13T13:05:36.882Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "git cat-file -e 0a6c8581a 86b4a4dbe"
+            ],
+            "pass": true
+          },
+          "evidence": "完了を確認: 0a6c8581a で解消。86b4a4dbe の週次Mac監査でオンライン再生成(data/surveys/taxonomy.json generatedAt 2026-11-07T23:56Z)、blog unresolved 0/missing 0。--offline --check 通過。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T13:05:36.882Z"
+    },
+    "REFERENCE-LEDGER-DATA-MOVE-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "参考文献の残りの authored 台帳 (資料ごとの方針・japan-zue の方針と試行) を data/ へ移す",
+      "attempts": [
+        {
+          "at": "2026-11-13T13:05:36.940Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "git cat-file -e 8ac353652",
+              "ls data/source-inventory/policies/reference-sources.json data/source-inventory/japan-zue/pilot.json data/source-inventory/japan-zue/policy.json"
+            ],
+            "pass": true
+          },
+          "evidence": "完了を確認: 8ac353652 で reference-sources/pilot/policy のデータを data/source-inventory/{policies/reference-sources,japan-zue/pilot,japan-zue/policy}.json へ移動 (Schema 付き・config/datasets.mjs 1036-1049 登録)。現ts は読み込み口と関数のみ。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T13:05:36.940Z"
+    },
+    "AFF-FURUSATO-SHOP-DIVERSITY-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "ふるさと納税の返礼品カードを「代表品目を複数」にし、品目と店の重複をなくして毎日・毎週検査する",
+      "attempts": [
+        {
+          "at": "2026-11-13T13:05:36.999Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "git cat-file -e 6f8809c72",
+              "ls apps/web/src/features/ads/components/FurusatoNozeiCard.tsx (不在を確認)"
+            ],
+            "pass": true
+          },
+          "evidence": "前提が消えた: 6f8809c72 (2026-11-06・オーナー判断) が rakuten-api.ts・sync/audit-rakuten-catalog.ts・sync-rakuten-catalog.yml・FurusatoNozeiCard.tsx を削除。furusato-nozei.ts は県名検出のみ。根拠文書 .claude/rules/affiliate-ads-standards.md 736 行。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T13:05:36.999Z"
+    },
+    "CF-HTML-EDGE-TTL-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "HTML の Workers Cache の期間を 1 日から延ばす可否を決める",
+      "attempts": [
+        {
+          "at": "2026-11-13T13:06:59.640Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "backlog-cleanup merge (残す側に統合の行と受入条件が入り、吸収した ID が backlog に残らないことを assert)"
+            ],
+            "pass": true
+          },
+          "evidence": "同じ成果のカード CF-EDGE-TTL-01 へ統合した。どちらも HTML の edge/Workers Cache 保持を 1 日から延ばす可否と、延ばす前提となる purge 経路の確認を扱い、CF-EDGE-TTL-01 が後発で具体的 (7 日・パージ配線) に同じ成果を指している。",
+          "failReason": null,
+          "followUps": [
+            "CF-EDGE-TTL-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T13:06:59.640Z"
+    },
+    "CF-CPU-RENDER-WEIGHT-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "キャッシュに無いページの描画 1 回あたりの Workers CPU を減らす",
+      "attempts": [
+        {
+          "at": "2026-11-13T13:06:59.701Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "backlog-cleanup merge (残す側に統合の行と受入条件が入り、吸収した ID が backlog に残らないことを assert)"
+            ],
+            "pass": true
+          },
+          "evidence": "同じ成果のカード CF-RENDER-CPU-01 へ統合した。どちらもキャッシュに無いページの 1 描画あたり Workers CPU (約 1.5 秒) を、R2 の重複読み・JSON 読み込みの見直しで下げることを目的とし、同じルート群 (/ranking・/areas) の同じ計測を指している。",
+          "failReason": null,
+          "followUps": [
+            "CF-RENDER-CPU-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T13:06:59.701Z"
+    },
+    "MEMORY-INDEX-TRIM-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "auto memory の索引 MEMORY.md が上限を超え、後半が読み込まれていない",
+      "attempts": [
+        {
+          "at": "2026-11-13T13:06:59.760Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "backlog-cleanup merge (残す側に統合の行と受入条件が入り、吸収した ID が backlog に残らないことを assert)"
+            ],
+            "pass": true
+          },
+          "evidence": "同じ成果のカード MEMORY-INDEX-OVERSIZE-01 へ統合した。どちらも MEMORY.md が上限 (約 24.4KB) を超えて末尾が起動時に読み込まれない同じ不具合で、同じ手当て (1 行約 200 字に縮め詳細は各記憶ファイルへ) を指している。",
+          "failReason": null,
+          "followUps": [
+            "MEMORY-INDEX-OVERSIZE-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T13:06:59.760Z"
+    },
+    "ADMIN-AGENT-MODELS-WIN-PATH-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "管理画面の agent-models テストが Windows のパス区切りで落ちる",
+      "attempts": [
+        {
+          "at": "2026-11-13T13:06:59.818Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "backlog-cleanup merge (残す側に統合の行と受入条件が入り、吸収した ID が backlog に残らないことを assert)"
+            ],
+            "pass": true
+          },
+          "evidence": "同じ成果のカード WINDOWS-LOCAL-GATES-01 へ統合した。どちらも Windows のパス区切りで落ちるテストで、WINDOWS-LOCAL-GATES-01 の証拠欄がすでに同じテスト (region-page-no-comparison・agent-models) を含み、完了条件が重なっている。",
+          "failReason": null,
+          "followUps": [
+            "WINDOWS-LOCAL-GATES-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T13:06:59.818Z"
+    },
+    "PROVENANCE-REGEN-STALE-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "調査の対応表の生成物が古く、再生成すると検査が落ちる",
+      "attempts": [
+        {
+          "at": "2026-11-13T13:06:59.876Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "backlog-cleanup merge (残す側に統合の行と受入条件が入り、吸収した ID が backlog に残らないことを assert)"
+            ],
+            "pass": true
+          },
+          "evidence": "同じ成果のカード ESTAT-PROVENANCE-GENERATED-STALE-01 へ統合した。どちらも build-estat-provenance.ts の再生成結果がコミット済み生成物とずれ、再生成すると survey-master-consistency の合成 ID ラチェットが落ちる同じ不具合を指している。",
+          "failReason": null,
+          "followUps": [
+            "ESTAT-PROVENANCE-GENERATED-STALE-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T13:06:59.876Z"
+    },
+    "SYNC-SNAPSHOTS-MANIFEST-CARRY-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "sync-snapshots の「差分 push」が CI では毎回フル push になる",
+      "attempts": [
+        {
+          "at": "2026-11-13T13:06:59.934Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "backlog-cleanup merge (残す側に統合の行と受入条件が入り、吸収した ID が backlog に残らないことを assert)"
+            ],
+            "pass": true
+          },
+          "evidence": "同じ成果のカード R2-VALUES-REUPLOAD-01 へ統合した。どちらも diff-push-r2 が CI では manifest が空で毎回全件 (約 1.4 万件) を送り直す問題を直すことを指し、manifest 持ち越し/ETag・SHA 照合という同じ手当てになる。",
+          "failReason": null,
+          "followUps": [
+            "R2-VALUES-REUPLOAD-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T13:06:59.934Z"
+    },
+    "GSC-POSTDEPLOY-VERIFY-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "11-11 の GSC 是正で、確認しきれていない 3 点を確かめる",
+      "attempts": [
+        {
+          "at": "2026-11-13T13:06:59.993Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "backlog-cleanup merge (残す側に統合の行と受入条件が入り、吸収した ID が backlog に残らないことを assert)"
+            ],
+            "pass": true
+          },
+          "evidence": "同じ成果のカード GSC-CRAWL-WASTE-01 へ統合した。GSC-POSTDEPLOY-VERIFY-01 は GSC-CRAWL-WASTE-01 の 11-11 デプロイ分 (storage の robots.txt・POST 数の再計測) を確認する子で、結果の書き込み先も親カードと明記されている。",
+          "failReason": null,
+          "followUps": [
+            "GSC-CRAWL-WASTE-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T13:06:59.993Z"
+    },
+    "PRODUCT-SAMPLE-TYPED-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "note のデータ商品の見本画像を型の画像へ差し替える",
+      "attempts": [
+        {
+          "at": "2026-11-13T13:07:00.052Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "backlog-cleanup merge (残す側に統合の行と受入条件が入り、吸収した ID が backlog に残らないことを assert)"
+            ],
+            "pass": true
+          },
+          "evidence": "同じ成果のカード PRODUCT-LP-SHOWCASE-01 へ統合した。PRODUCT-SAMPLE-TYPED-01 の「次」は PRODUCT-LP-SHOWCASE-01 の 2026-11-12 判断に従い、同じ spec から作った見本画像をサイトの LP と note 無料部分で共用するもので、同じ画像指定の仕組みの一部になっている。",
+          "failReason": null,
+          "followUps": [
+            "PRODUCT-LP-SHOWCASE-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T13:07:00.052Z"
+    },
+    "METRIC-FARM-INCOME-DEFS-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "農家総所得の指標で、対象・分母・調査が定義に出ず、意味の無い正規化が選べる",
+      "attempts": [
+        {
+          "at": "2026-11-13T13:07:00.110Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "backlog-cleanup merge (残す側に統合の行と受入条件が入り、吸収した ID が backlog に残らないことを assert)"
+            ],
+            "pass": true
+          },
+          "evidence": "同じ成果のカード METRIC-HOUSEHOLD-ASSET-SUBTITLE-01 へ統合した。どちらも農家総所得 (total-farm-household-income) など家計系指標の分母が 1 世帯/1 農家当たりかを e-Stat の定義で確かめて metric config に書き、総額と誤判定させない同じ修正を指している。",
+          "failReason": null,
+          "followUps": [
+            "METRIC-HOUSEHOLD-ASSET-SUBTITLE-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T13:07:00.110Z"
+    },
+    "RANKING-PAGE-DISPLAY-UNIT-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "ランキングページの値も、図と同じ表示単位 (億円・万人など) で出す",
+      "attempts": [
+        {
+          "at": "2026-11-13T13:07:00.170Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "backlog-cleanup merge (残す側に統合の行と受入条件が入り、吸収した ID が backlog に残らないことを assert)"
+            ],
+            "pass": true
+          },
+          "evidence": "同じ成果のカード METRIC-DISPLAY-UNIT-WIRING-01 へ統合した。どちらもランキングページ等が元データの単位のまま表示される問題を、指標定義の display と図用の表示換算の関係を 1 つに決めて全画面に効かせることで直す同じ成果を指している。",
+          "failReason": null,
+          "followUps": [
+            "METRIC-DISPLAY-UNIT-WIRING-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T13:07:00.170Z"
+    },
+    "MUNI-KOSODATE-PAGES-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "子育ての市区町村ランキングと県別ページを公開し、県版の子育てページから内部リンクを張る",
+      "attempts": [
+        {
+          "at": "2026-11-13T13:07:00.228Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "backlog-cleanup merge (残す側に統合の行と受入条件が入り、吸収した ID が backlog に残らないことを assert)"
+            ],
+            "pass": true
+          },
+          "evidence": "同じ成果のカード MUNI-KOSODATE-RANKING-01 へ統合した。MUNI-KOSODATE-PAGES-01 は MUNI-KOSODATE-RANKING-01 (EXP-008) の子カードで、その完了条件 (公開と内部リンク・EXP-008 を running にして判定日を入れる) は親の「次」に含まれている。",
+          "failReason": null,
+          "followUps": [
+            "MUNI-KOSODATE-RANKING-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T13:07:00.228Z"
+    },
+    "DOCS-LINKS-RELATIVE-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "文書のリンク検査が相対リンクの切れを見逃す",
+      "attempts": [
+        {
+          "at": "2026-11-13T14:10:54.025Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/check-docs-links.test.cjs",
+              "node --test .claude/scripts/lib/__tests__/check-docs-governance.test.cjs .claude/scripts/lib/__tests__/check-docs-code-refs.test.cjs",
+              "npm run docs:check"
+            ],
+            "pass": true
+          },
+          "evidence": "b1db8993a check-docs-links.cjs が .md/.mdc の [text](path.md) 相対リンクを書かれた文書基準で解決し、実在しなければ broken にする。追加した相対リンクのテストを検査の修正前の版で走らせると失敗し、修正後は 10 件すべて通った。docs:check と preflight:pr も通り、pre-commit もすべて成功してコミットできた。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T14:10:54.025Z"
+    },
+    "CATALOG-FULLBLEED-PLANNED-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "ブログ背景の原本 861 件があるのに、カタログの行が「まだ 1 件も無い」のままになっている",
+      "attempts": [
+        {
+          "at": "2026-11-13T14:10:54.083Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/check-datasets.test.mjs",
+              "node .claude/scripts/lib/check-datasets.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "6d9d833bd check-datasets が追跡ファイルに当たる planned の行を error にするようになり、実リポジトリでは blog.fullbleed-backgrounds (861 件) のほか ops.ci-requests と sns.material-reconciliation も同じ食い違いとして検出されたので 3 行すべての planned を外し、check-datasets は error 0、テスト 43 件が通り、pre-commit も全通過した。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T14:10:54.083Z"
+    },
+    "DEPS-PLATFORM-OPTIONAL-LOCK-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "依存の検査が、他 OS 向けバイナリの lock 記録の取り残しを捕まえない",
+      "attempts": [
+        {
+          "at": "2026-11-13T14:10:54.142Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/check-dependency-overrides.test.cjs",
+              "node .claude/scripts/lib/check-dependency-overrides.cjs"
+            ],
+            "pass": true
+          },
+          "evidence": "2cf5eb221 check-dependency-overrides.cjs に OPTIONAL_LOCK_MISMATCH を追加した。lock の各パッケージの optionalDependencies が完全一致の版を要求するとき、npm の解決順で当たる記録の版と照合する。テスト 7 件が全通過し、現在の lock でも検査は通る。pre-commit も全通過した。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T14:10:54.142Z"
+    },
+    "PRECOMMIT-WIRING-STAGED-SCOPE-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "pre-commit の配線検査が、他の作業者の作りかけの検査スクリプトで自分の commit まで止める",
+      "attempts": [
+        {
+          "at": "2026-11-13T14:10:54.200Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/check-checker-wiring.test.cjs",
+              "node .claude/scripts/lib/check-checker-wiring.cjs --baseline --staged",
+              "node .claude/scripts/lib/check-checker-wiring.cjs --baseline"
+            ],
+            "pass": true
+          },
+          "evidence": "df10ec81a check-checker-wiring.cjs に --staged を追加し、index 内のファイルだけを候補と参照元に数え、staged の検査スクリプトと staged ファイルから参照される検査スクリプトの指摘だけを判定するようにした。pre-commit は --baseline --staged で呼ぶ。テストは 18 件すべて通り、追加した 5 件のうち 4 件は修正前の実装では落ちた。npm run preflight:pr は 57 ゲート中 56 が通り、落ちた 1 件は R2 との差分を見る sit",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T14:10:54.200Z"
+    },
+    "MEMORY-INDEX-OVERSIZE-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "記憶の索引 MEMORY.md が上限を超え、起動時に末尾が読み込まれない",
+      "attempts": [
+        {
+          "at": "2026-11-13T14:10:54.259Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/check-memory-index-size.test.cjs",
+              "node .claude/scripts/lib/check-memory-index-size.cjs"
+            ],
+            "pass": true
+          },
+          "evidence": "138cfe107 MEMORY.md の上限超過を止める検査 check-memory-index-size.cjs を追加し、24,400 バイトまたは 200 行を超えると失敗する。テスト 6 件は検査スクリプトが無い状態で 5 件落ち、実装後に全件通った。現物は 21,230 バイト・200 行で通る。quality-gates.json と pr-quality-check.yml に配線し、preflight:pr では新ゲートが通った。索引の縮小自体は 857986208 で済んでいる。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T14:10:54.259Z"
+    },
+    "HOOK-UNPUSHED-CWD-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "push 確認の Stop フックが、作業場所を基準に記録を書き、apps/web/.claude/ のような置き場の外にファイルを作る",
+      "attempts": [
+        {
+          "at": "2026-11-13T14:10:54.319Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/check-unpushed-on-stop.test.cjs"
+            ],
+            "pass": true
+          },
+          "evidence": "c05720cfb check-unpushed-on-stop.js に lockBaseDir を追加し、記録の基準を CLAUDE_PROJECT_DIR、無ければ cwd の git toplevel、それも無ければ hook 置き場の根にした。追加した 2 本のテストは修正前に落ち、修正後は既存 3 本と合わせて 5 本全て通った。apps/web/.claude は存在しない。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T14:10:54.319Z"
+    },
+    "PRE-PUSH-WORKTREE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "pre-push フックが develop から切った worktree で落ちる",
+      "attempts": [
+        {
+          "at": "2026-11-13T14:10:54.377Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/pre-push-tests.test.mjs",
+              "git -c core.hooksPath=<bl-a>/.husky push --dry-run origin HEAD:refs/heads/x (scratchpad に作った、スクリプトを持たない一時リポジトリとローカルの bare リモートで実行)"
+            ],
+            "pass": true
+          },
+          "evidence": "a8ad6aa23 .husky/pre-push がスクリプトの有無を先に確かめ、無ければ exit 0 で抜けるようにした。スクリプトの無い一時リポジトリでの git push --dry-run は、旧フックでは MODULE_NOT_FOUND で exit 1、新フックでは exit 0 だった。preflight:pr は 58 件中 57 件が通り、残る Sitemap / Tag Keys は変更を外した状態でも同じ内容で落ちた。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T14:10:54.377Z"
+    },
+    "VACANCY-TYPES-TEST-NODE-TS-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "空き家の種類のテストが data-configs の index.ts を node で読めずに落ち、関係の無い push を止める",
+      "attempts": [
+        {
+          "at": "2026-11-13T14:10:54.436Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/themes/__tests__/vacancy-types.test.mjs",
+              "node --test .claude/scripts/themes/__tests__/record-theme-viewpoints.test.mjs",
+              "node --import tsx --test .claude/scripts/themes/__tests__/*.test.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "5e84633aa vacancy-types.test.mjs は素の node --test で 14 件 pass、record-theme-viewpoints.test.mjs は 2 件 pass、themes の全テストも tsx 付きで 566 件 pass / fail 0 である。CI は npm run theme:quality:test で pr-quality-check.yml と quality-suite-weekly.yml の両方から themes/__tests__ の全件を走らせており、完了条件の「CI",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T14:10:54.436Z"
+    },
+    "THEME-SOURCE-PROPOSAL-WRITES-TS-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "テーマの出典の提案を作る道具が、移した後も TS を書き・読む",
+      "attempts": [
+        {
+          "at": "2026-11-13T14:10:54.496Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --import tsx --test .claude/scripts/themes/__tests__/theme-source-proposal.test.mjs",
+              "npm run theme:quality:test",
+              "npm run theme:py:test",
+              "npm run check-datasets"
+            ],
+            "pass": true
+          },
+          "evidence": "fdc398dc5 新しいテスト 4 件は直す前に全件落ち、直した後に通った。生成した提案を台帳へ置いた状態で npm run check-datasets は error 0 で通った。preflight:pr は 57 中 56 が通り、落ちた Sitemap / Tag Keys は変更を外しても同じ exit 1 で、R2 の公開記事とコミット済み sitemap の差が原因である。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T14:10:54.496Z"
+    },
+    "IG-AREA-PROPS-SCHEMA-VERSION-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "Instagram の県カードの台本が、県データブックの snapshot の版を上げるたびに止まる",
+      "attempts": [
+        {
+          "at": "2026-11-13T14:10:54.554Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/sns/__tests__/ig-area-props.test.ts"
+            ],
+            "pass": true
+          },
+          "evidence": "d2c5f10ec build-ig-area-props.ts の現行版との比較をやめ、台本が必要とする最低版 2 との比較 (databookTooOldMessage) に変え、版 2・3・4・99 は通し、版 1 と未設定だけ止めるテストを足した。テストは関数が無い状態で落ち、実装後は 8 件全部が通った。pre-commit も全て通った。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T14:10:54.554Z"
+    },
+    "METRIC-LIBRARY-PER-MILLION-LABEL-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "library-count-per-million の副題「人口100万人当たり」が値 (人口 10 万人当たり) と合わない",
+      "attempts": [
+        {
+          "at": "2026-11-13T14:10:54.613Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "cd packages/product-factory && npx vitest run src/channels/kindle tests/product-indicator-label.test.ts",
+              "cd packages/product-factory && npx tsc --noEmit -p ."
+            ],
+            "pass": true
+          },
+          "evidence": "65a369c20 e-Stat メタ data/estat/meta/0000010207.json は #G01104 を人口100万人当たり、#G01321 と #G01325 も人口100万人当たりと定義し、R2 の値は山梨 65.8、秋田 906.9 で定義の副題と一致するため、指標定義は正しくカードの前提が誤りだった。山梨 6.58 館は、ブログの図のデータが 65.8 を 10 で割って単位「館/10万人」にした値であり、TABLE_OVERRIDES は無条件だったので R2 のランキング値から作る表にも誤って「人口10万人当た",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T14:10:54.613Z"
+    },
+    "BLOG-AD-ROW-HYDRATION-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "ブログの本文の広告の段が段落の中に入り、hydration に失敗する",
+      "attempts": [
+        {
+          "at": "2026-11-13T14:10:54.673Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "cd apps/web && npx vitest run src/features/blog/components/__tests__/md-content-ad-row.test.tsx",
+              "cd apps/web && npx vitest run src/features/blog"
+            ],
+            "pass": true
+          },
+          "evidence": "46af85c18 md-content.tsx の hasBlockElement の一覧に ad-row を足しました。追加した md-content-ad-row.test.tsx は直す前に、段が p の中に入っているため落ち、直した後は通りました。blog 配下の 16 ファイル 114 テストと preflight:pr も通り、pre-commit も成功しました。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T14:10:54.673Z"
+    },
+    "AFFILIATE-SIZE-CHECK-WRITES-STATE-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "pre-commit の広告のサイズ検査が、在庫の記録を書いて作業ツリーに差分を残す",
+      "attempts": [
+        {
+          "at": "2026-11-13T14:10:54.731Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/ads/__tests__/audit-affiliate-inventory-check-size.test.mjs",
+              "npx tsx .claude/scripts/ads/audit-affiliate-inventory.ts --json --check-size",
+              "git status --short"
+            ],
+            "pass": true
+          },
+          "evidence": "dce7c7c6a audit-affiliate-inventory.ts は --check-size のとき data/affiliate/ へ記録を書かなくなり、pre-commit-checks.sh と同じ形で実行した後の git status --short には変更したファイル 2 件以外の差分も未追跡ファイルも出ない。新しいテスト 2 件は修正前に 1 件落ち、修正後に両方通った。--check-size なしの棚卸しが従来どおり記録を書くことも同じテストで固定した。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T14:10:54.731Z"
+    },
+    "ADMIN-DISTMAP-TEST-STACK-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "管理画面の地図の見本のテストが Mac の手元でだけスタックあふれで落ちる",
+      "attempts": [
+        {
+          "at": "2026-11-13T14:10:54.790Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "cd apps/admin && npx vitest run tests/unit/template-distribution-map.test.ts"
+            ],
+            "pass": true
+          },
+          "evidence": "原因だった Math.max(...mainland) の巨大な引数展開は、コミット cc044c856 (2026-11-04) で reduce による畳み込みに直済みです。現在のテストファイル 31〜32 行目にその理由のコメントと reduce があり、残る spread は点の少ない沖縄だけです。この作業ツリー (Mac、Node v22.23.3) で同テストを実行すると 4 件すべて通りました。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T14:10:54.790Z"
+    },
+    "ADMIN-VITEST-TIMEOUT-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "管理画面の単体テストが高負荷時に既定 5 秒でタイムアウトする",
+      "attempts": [
+        {
+          "at": "2026-11-13T14:10:54.850Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run test --workspace apps/admin",
+              "npx vitest run tests/unit/vitest-config-timeout.test.ts (apps/admin)"
+            ],
+            "pass": true
+          },
+          "evidence": "ce725a765 apps/admin/vitest.config.mts に testTimeout と hookTimeout を 120 秒で設定し、設定値を固定するテストを追加した。apps/admin の全 78 ファイル 526 件が通った。preflight:pr は 57 ゲート中 1 件(sitemap-blog-entries)だけ失敗したが、変更を退避しても同じ失敗が出るので無関係である。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T14:10:54.850Z"
+    },
+    "UTILS-DIST-PROJECT-REFERENCE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "packages/ranking の型検査が、git で追跡しているビルド成果物 packages/utils/dist に依存している",
+      "attempts": [
+        {
+          "at": "2026-11-13T14:10:54.911Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "cd packages/ranking && npx tsc --noEmit -p .",
+              "npm run type-check:scripts",
+              "cd packages/utils && npx vitest run",
+              "cd packages/ranking && npx vitest run"
+            ],
+            "pass": true
+          },
+          "evidence": "4537407a6 dist を追跡から外した状態で ranking の型検査は exit 0、turbo の type-check は 25 中 24 が成功し、type-check:scripts は 9/9 通った。残る admin の失敗 (TS5097) と preflight:pr の Sitemap ゲート 1 件の失敗は、変更を外した HEAD でも同じ内容で出ることを確かめた。utils 48 件と ranking 524 件のテストは通った。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T14:10:54.911Z"
+    },
+    "ROOT-TSX-NODE-PIN-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "ルートの npm script が宣言していない tsx と Node の型の除去に頼っている",
+      "attempts": [
+        {
+          "at": "2026-11-13T14:10:54.971Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/root-script-tools.test.cjs",
+              "npm run ui-theme:lyra:test",
+              "npm run design-system:check -w apps/web",
+              "npm run test:dependency-security"
+            ],
+            "pass": true
+          },
+          "evidence": "7f6f18db0 ルート package.json の devDependencies に tsx ^4.21.0 を追加し lockfile を更新した。新規テスト root-script-tools.test.cjs は追加前に tsx 未宣言で落ち、追加後に通った。ui-theme:lyra:test は 13 件、design-system:check は通過、test:dependency-security は 16 件通過、pre-commit も通過した。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T14:10:54.971Z"
+    },
+    "PATHS-CONSTANT-CWD-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "`config/paths.mjs` の定数を、リポジトリのルートと結合せずに読むスクリプトを直す",
+      "attempts": [
+        {
+          "at": "2026-11-13T14:10:55.030Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run packages/product-factory/tests/config-paths.test.ts",
+              "npx tsc -p .claude/scripts/tsconfig.checkjs.json --noEmit"
+            ],
+            "pass": true
+          },
+          "evidence": "e08f191d3・dee7baac3 config/paths.mjs の定数と KDP 口座の設定をルートと結合して読むよう直した。config-paths.test.ts の追加検査は直す前に 2 ファイル 3 行で落ち、直した後は 3 件通った。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T14:10:55.030Z"
+    },
+    "TEST-NO-PREEXISTING-PASS-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "「以前から失敗している」を理由にテストを通さない規約を入れる",
+      "attempts": [
+        {
+          "at": "2026-11-13T14:10:55.090Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/metrics/__tests__/adsense-ad-unit-walk.test.mjs",
+              "grep -c 以前から落ちている CLAUDE.md"
+            ],
+            "pass": true
+          },
+          "evidence": "c3c11b970 CLAUDE.md (AGENTS.md は同じファイルへのリンク) に規約を足した。スクリプト類の node テスト全件を回し、落ちる 2 件のうち 1 件を直し、1 件は WINDOWS-LOCAL-GATES-01 に証拠を追記した。vitest は packages・web・admin とも全件通過。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T14:10:55.090Z"
+    },
+    "CHECKER-WIRING-ROOT-SCRIPTS-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "check-checker-wiring の探索範囲が root の scripts/ を含まず、lyra の検査を例外登録で通している",
+      "attempts": [
+        {
+          "at": "2026-11-13T16:12:11.159Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/check-checker-wiring.test.cjs",
+              "node .claude/scripts/lib/check-checker-wiring.cjs --baseline",
+              "node --import tsx scripts/ui-theme/inline-lyra.mjs --check",
+              "npx tsc -p .claude/scripts/tsconfig.checkjs.json --noEmit",
+              "npx tsc -p .claude/scripts/tsconfig.json --noEmit",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "df555fc0e quality-gates.json の exceptions は空になり、node .claude/scripts/lib/check-checker-wiring.cjs --baseline は例外なしで「190 checkers / known 0 / new 0」で通った。check-checker-wiring のテストは 20 件すべて通り、型検査 2 種、preflight:pr、pre-commit も通ってコミット df555fc0e になった。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T16:12:11.159Z"
+    },
+    "AGENT-COMMIT-HOOK-BYPASS-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "pre-commit の文書検査を通らない backlog の commit が develop に入り、リリース PR を止めた",
+      "attempts": [
+        {
+          "at": "2026-11-13T16:12:11.222Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/pre-push-tests.test.mjs",
+              "npx tsc -p .claude/scripts/tsconfig.checkjs.json --noEmit",
+              "npx tsc -p .claude/scripts/tsconfig.json --noEmit",
+              "npm run preflight:pr",
+              "npm run docs:check (DG057 違反を作業ツリーに入れた状態で終了コード 1 を確認)"
+            ],
+            "pass": true
+          },
+          "evidence": "a66c3143f pre-push-tests.mjs に needsDocsCheck を足し、pre-commit と同じ範囲の文書変更を含む push では npm run docs:check を走らせて、失敗なら push を止めるようにした。一時リポジトリで main を実際に走らせるテストで、docs:check が落ちれば終了コード 1、通れば 0 になることを確認した。また backlog のカテゴリを語彙外にした状態の docs:check が DG057 で終了コード 1 になることを実測した。テスト 12 件、型検査 ",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T16:12:11.222Z"
+    },
+    "FACTUAL-CHECK-CROSS-METRIC-RANK-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "事実確認が別系列の順位・値・差を記事の主指標と取り違える誤検知を直す",
+      "attempts": [
+        {
+          "at": "2026-11-13T16:12:11.280Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/article-factual-check.detection.test.mjs",
+              "node --test .claude/scripts/lib/__tests__/*.test.mjs",
+              "npx tsc -p .claude/scripts/tsconfig.checkjs.json --noEmit",
+              "npx tsc -p .claude/scripts/tsconfig.json --noEmit",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "7bd180d9e article-factual-check.mjs で、複数年平均の都市ランキングを別系列 (avg) として索引し、市名の主張か期間平均の文のときだけ照合先に足した。差・離れ・増減の数値と、小数・平均の順位は照合から外した。パンの記事 (京都市 3 年平均) の warning は 11 件から 0 件になり、検出テスト 5 件を含む既存 35 件と新規 7 件の計 42 件が通った。修正前の lib では新規テスト 4 件が落ちることを確かめた。lib テスト全 730 件、型検査 2 種、preflight:pr も通",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T16:12:11.280Z"
+    },
+    "BLOG-REVISE-PATTERNS-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "図の年の書き直しで critic が繰り返し REVISE にした型を、writer の規約か gate に入れる",
+      "attempts": [
+        {
+          "at": "2026-11-13T16:12:11.338Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/quality-gate.revise-patterns.test.mjs",
+              "node --test .claude/scripts/lib/__tests__/quality-gate.claim-gates.test.mjs",
+              "node --test .claude/scripts/lib/__tests__/quality-gate.q-numbers.test.mjs",
+              "node .claude/scripts/lib/__tests__/quality-gate.svg-gates.test.mjs",
+              "node --test .claude/scripts/blog/lib/__tests__/critic-findings.test.mjs",
+              "npx tsc -p .claude/scripts/tsconfig.checkjs.json --noEmit",
+              "npx tsc -p .claude/scripts/tsconfig.json --noEmit",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "a0cc40009 quality-gate に related-link-lint (関連記事の表示名がリンク先の現在の題と語を共有しない、または旧題のまま) と figure-year-lint (節の本文の年と図の年が重ならず断りも無い) を blocker として配線した。新テスト 13 件は、gate の配線を外すと配線テストが落ち、戻すと通った。contents/blog の公開済み 294 本に当てた誤検知は 0 件で、本物の旧題リンク 2 件だけが既知として検出された。型検査 2 本と preflight:pr と pre-co",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T16:12:11.338Z"
+    },
+    "CLIENT-GRAPH-AUDIT-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "ブラウザ向けの全部品について、重い依存に届かないことを定期に検査する",
+      "attempts": [
+        {
+          "at": "2026-11-13T16:12:11.395Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/audit/__tests__/client-graph-audit.test.mjs",
+              "npm run test:audit-scripts",
+              "node --test .claude/scripts/lib/__tests__/ci-test-tiering.test.mjs .claude/scripts/lib/__tests__/alert-issue-lifecycle.test.cjs",
+              "node .claude/scripts/lib/check-checker-wiring.cjs",
+              "npx tsc -p .claude/scripts/tsconfig.checkjs.json --noEmit",
+              "npx tsc -p .claude/scripts/tsconfig.json --noEmit",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "5fc5c846b .claude/scripts/audit/client-graph-audit.mjs が追跡された \"use client\" 258 件を約 1 秒で走査し、現在は重い依存へ届くファイルが 0 件で通る。実リポジトリの client ファイルに registry の import を 1 件注入すると exit 1 で経路付きで落ち、戻すと通った。fixture の注入テスト 17 件、audit-scripts 31 件、preflight:pr、型検査 2 種、pre-commit が通った。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T16:12:11.395Z"
+    },
+    "X-CATALOG-RULES-PARSE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "X の投稿上限・テンプレ・画像種のマスタが rules の Markdown から読まれている",
+      "attempts": [
+        {
+          "at": "2026-11-13T16:12:11.453Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/x-catalog.test.cjs .claude/scripts/sns/__tests__/check-x-post-budget.test.cjs .claude/scripts/lib/__tests__/check-datasets.test.mjs .claude/scripts/sns/__tests__/x-direct-ledger.test.cjs .claude/scripts/sns/__tests__/promote-scheduled-x.test.cjs .claude/scripts/lib/__tests__/scripts-checkjs-scope.test.cjs",
+              "npm run check-datasets",
+              "node .claude/scripts/lib/x-catalog.cjs --check",
+              "node .claude/scripts/sns/check-x-post-budget.cjs",
+              "npx tsc -p .claude/scripts/tsconfig.checkjs.json --noEmit",
+              "npx tsc -p .claude/scripts/tsconfig.json --noEmit",
+              "node .claude/scripts/lib/sync-codex-mirror.cjs --check",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "989a94822 台帳 data/sns/x-catalog.json の dailyMax を 3 から 5 に変えると --check と canSchedule の上限が 5 になり、rule の数字を書き換えても --json の出力は同一でした。移行前後の --json の差は画像なしの種類 none の 3 項目が「—」から null になった点だけです。check-datasets は error 0、preflight:pr は全 gate 通過、pre-commit も通過しました。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T16:12:11.453Z"
+    },
+    "DEPLOY-R2-AHEAD-OF-APP-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "本番デプロイの Build が落ちても、R2 の指標スナップショットだけが先に新しくなる",
+      "attempts": [
+        {
+          "at": "2026-11-13T16:12:11.512Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/metric-release-order.test.mjs .claude/scripts/lib/__tests__/r2-overlay-server.test.mjs .claude/scripts/lib/__tests__/workflow-node-version.test.cjs .claude/scripts/lib/__tests__/plan-deploy-scope.test.mjs .claude/scripts/lib/__tests__/audit-workflow-policy.test.cjs",
+              "cd apps/web && npx vitest run src/__tests__/workers-cache-contract.test.ts",
+              "node .claude/scripts/lib/audit-workflow-policy.cjs --strict",
+              "npx tsc -p .claude/scripts/tsconfig.checkjs.json --noEmit",
+              "npx tsc -p .claude/scripts/tsconfig.json --noEmit",
+              "npm run docs:check",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "f20f9f4d6 Build は prebuild で app/ranking-items/all.json を読むため反映は Build の前に残し、OpenNext のサポート期限判定と Cloudflare 認証の検査を反映より前へ置いた。検査は Next.js 14.2.35 で exit 1、現行 16.4.3 で exit 0 になり、契約テスト 4 件と preflight:pr が通った。二相が残る理由は branch-workflow.md に書いた。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T16:12:11.512Z"
+    },
+    "THEME-BRIDGE-INGEST-TSIMPORT-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "橋梁点検の取り込みが、提案なしの経路で TS の読み込みに失敗して止まる",
+      "attempts": [
+        {
+          "at": "2026-11-13T16:12:11.570Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/themes/__tests__/ingest-bridge-inspection-age-parser.test.mjs",
+              "node --import tsx --test .claude/scripts/themes/__tests__/ingest-bridge-inspection-age-parser.test.mjs",
+              "npm run theme:quality:test",
+              "npx tsc -p .claude/scripts/tsconfig.checkjs.json --noEmit",
+              "npx tsc -p .claude/scripts/tsconfig.json --noEmit",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "f85f7d0bb ingest-bridge-inspection-age.mjs の検査関数の読み込みを tsx の tsImport から、ingest-vacancy-types.mjs と同じ tsx/cjs/api の require を使う loadSnapshotParser に変えた。ESM 版で ERR_MODULE_NOT_FOUND を再現し、新しい CJS 版では読み込めることを確かめた。theme:quality:test は 572 件中 571 件が通り失敗 0 件、2 本の tsc と preflight:pr",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T16:12:11.570Z"
+    },
+    "GIS-SOURCE-PAGE-URL-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "公式ページの URL が無い登録済み GIS 31 件に URL を足し、利用条件の区分名のずれを個別ページで確かめる",
+      "attempts": [
+        {
+          "at": "2026-11-13T16:12:11.628Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "cd packages/gis && npx vitest run src/mlit-ksj/__tests__/dataset-references.test.ts",
+              "cd packages/gis && npx vitest run",
+              "cd packages/data-configs && npx vitest run src/business-plan",
+              "cd packages/gis && npx tsc --noEmit -p .",
+              "npm run check-datasets",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "36dbd3f0e 登録済み 31 件の sourcePageUrl を data/geo/ksj/datasets.json に足し、各 URL が curl で HTTP 200 を返すことを確かめた。KNOWN_MISSING_SOURCE_PAGE は廃止し、全登録データが URL を持つことを検査する形にした。gis パッケージの vitest 326 件、data-configs の business-plan 28 件、preflight:pr、pre-commit がすべて通った。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T16:12:11.628Z"
+    },
+    "ESTAT-PROVENANCE-GENERATED-STALE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "出典の生成物 estat-provenance.generated.json が指標定義より古い",
+      "attempts": [
+        {
+          "at": "2026-11-13T16:12:11.687Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "cd packages/data-configs && npx tsx scripts/ssds/build-estat-provenance.ts",
+              "npx vitest run packages/data-configs/src/provenance"
+            ],
+            "pass": true
+          },
+          "evidence": "カードの前提は現物と違い、既に直っている。生成スクリプトを再実行しても estat-provenance.generated.json に差分は出ず(SSDS 表 43 件、statsDataId→survey 155 件、削除・追加ともゼロ。0000020202 など市区町村 SSDS の表も ssdsTableIds に残っている)、provenance の vitest 4 ファイル 25 テストが通る。放送受信契約数統計要覧は surveys.json・source-names.json・portfolio.json に登録済みで、コミ",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T16:12:11.687Z"
+    },
+    "BLOG-METRIC-DEFINITION-GAPS-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "記事が使う指標の定義が config に無く、本文で断定できない",
+      "attempts": [
+        {
+          "at": "2026-11-13T16:12:11.746Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test --import tsx .claude/scripts/blog/__tests__/metric-definition-sheet-scope.test.ts",
+              "npx tsx .claude/scripts/blog/build-metric-definition-sheet.ts --keys university-capacity-index annual-sunshine-duration dual-income-household-ratio high-school-advancement-rate",
+              "npx tsx packages/data-configs/scripts/audit-seo-meta-facts.ts --only university-capacity-index annual-sunshine-duration dual-income-household-ratio high-school-advancement-rate",
+              "npm run metrics:regen-derived",
+              "npx tsc -p .claude/scripts/tsconfig.checkjs.json --noEmit",
+              "npx tsc -p .claude/scripts/tsconfig.json --noEmit",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "d45468cb6 統計局の指標一覧 (shihyou_ken.xlsx) と e-Stat 項目定義 B・E・F・A で 4 指標の定義を確かめて description に書いた。新テストは直す前に大学収容力指数の行が「対象の記述なし」で落ち、直した後は 3 件とも通り、定義シート 4 行すべてに対象が出る。npm run preflight:pr、スクリプトの型検査 2 本、pre-commit も通った。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T16:12:11.746Z"
+    },
+    "METRIC-CLINIC-PER-100K-UNIT-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "人口10万人当たりの一般診療所数・病院数が、題名と単位では実数に見え、さらに人口換算を重ねられる",
+      "attempts": [
+        {
+          "at": "2026-11-13T16:12:11.804Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "cd packages/data-configs && npx vitest run src/__tests__/ssds-rate-no-double-normalization.test.ts",
+              "cd packages/data-configs && npx vitest run",
+              "cd packages/ranking && npx vitest run",
+              "node --test .claude/scripts/blog/lib/__tests__/topic-queue-spurious-core.test.mjs",
+              "cd packages/data-configs && npx tsc --noEmit -p tsconfig.json",
+              "npm run metrics:regen-derived",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "b23a0a030 新しい検査 ssds-rate-no-double-normalization.test.ts は、直す前は 206 件の違反で落ち、206 指標から normalizationOptions を外した後は通った。data-configs の全 1364 件、ranking の全 524 件、blog の 28 件、data-configs の型検査、npm run preflight:pr、pre-commit も通り、変更は 1 コミット b23a0a030 になっている。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T16:12:11.804Z"
+    },
+    "THEMES-DATASET-ID-CALLSITES-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "テーマの台帳を読む約 24 か所を、ファイルごとのカタログの id で引く",
+      "attempts": [
+        {
+          "at": "2026-11-13T16:12:11.873Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --import tsx --test .claude/scripts/themes/__tests__/theme-ledger-paths.test.mjs",
+              "npm run theme:quality:test",
+              "npm run check-datasets",
+              "npx tsc -p .claude/scripts/tsconfig.checkjs.json --noEmit",
+              "npx tsc -p .claude/scripts/tsconfig.json --noEmit",
+              "cd apps/admin && npx tsc --noEmit --skipLibCheck",
+              "node .claude/scripts/lib/check-agent-skill-consistency.cjs",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "c350273a3 datasetDir(\"themes.portfolio\") は 24 か所から 0 件になり、12 ファイルが datasetPath(\"themes.<id>\") で各ファイルを引く。themes のテストは 574 件中 573 件が通り 1 件が skip、check-datasets は error 0、型検査 3 本と preflight:pr は exit 0 だった。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T16:12:11.873Z"
+    },
+    "STATIC-PAGE-BODY-TEXT-SIZE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "プライバシーポリシーと運営者情報の本文が 12px から始まり、パネル本文 14px の仕様と合わない",
+      "attempts": [
+        {
+          "at": "2026-11-13T16:12:11.932Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run design-system:check -w apps/web",
+              "cd apps/web && npx tsc --noEmit --skipLibCheck",
+              "cd apps/web && npx vitest run src/app/__tests__/rail-contract-structure.test.ts src/components/surface/__tests__/design-components-ledger.test.ts",
+              "npm run docs:check",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "dd9c3c4cc 作業ツリーの dev サーバーを Chromium で描画し、パネル内の p と li の computed style を測った。直した後は 390px と 1440px の両方で、privacy 35/35、about の本文 20/20、terms 49/49 が 14px だった。about に残る 12px 3 件は muted の補足、16px 1 件は運営者名である。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T16:12:11.932Z"
+    },
+    "CI-SMOKE-BOUNDING-BOX-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "本番の画面幅テストで初回に寸法検査が失敗する原因を調べる",
+      "attempts": [
+        {
+          "at": "2026-11-13T16:12:11.992Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "cd apps/web && npx playwright test --config playwright.smoke.config.ts --project=smoke-chromium --retries=0 --repeat-each=10 -g themes tests/smoke/selection-controls.spec.ts",
+              "cd apps/web && npx playwright test --config playwright.smoke.config.ts --project=smoke-chromium --retries=0 --repeat-each=5 tests/smoke/selection-controls.spec.ts",
+              "cd apps/web && npx playwright test --config playwright.smoke.config.ts --project=responsive-mobile-375 --project=responsive-tablet-768 --project=responsive-lg-1024 --retries=0 --repeat-each=3",
+              "cd apps/web && npx playwright test --config playwright.smoke.config.ts --project=smoke-chromium --retries=0 --repeat-each=3 -g /ranking/total-population tests/smoke/rail-layout.spec.ts",
+              "cd apps/web && npx tsc --noEmit --skipLibCheck",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "fa9fdb6e8 selection-controls の失敗は、ボタンの transition-all により、幅を 375px へ変えた直後の min-height が 0 から 44px へ補間中の値 (実測 20.6px と 30.6px) になり、高さ 32px が返ることが原因だと確かめた (最終値は常に 44px で表示側の欠陥ではない)。本番に対し retry なしで education-culture が 6 回中 4 回落ちたが、遷移を止めてから測る修正後は 20 回中 20 回通り、/areas を含む 15 回、res",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T16:12:11.992Z"
+    },
+    "VITE-CONFIG-ESM-WARN-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "vitest.config.ts が CommonJS として読まれ、Vite の次の major で読めなくなる警告が出ている",
+      "attempts": [
+        {
+          "at": "2026-11-13T16:12:12.052Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "cd packages/visualization && npx vitest run",
+              "cd packages/visualization && npx tsc --noEmit",
+              "cd apps/admin && npx tsc --noEmit --skipLibCheck",
+              "npm run test:packages:ci",
+              "node --test .claude/scripts/lib/__tests__/check-quality-exceptions.test.cjs",
+              "npx tsc -p .claude/scripts/tsconfig.checkjs.json --noEmit",
+              "npx tsc -p .claude/scripts/tsconfig.json --noEmit",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "cd92f1a77 visualization の vitest は、直す前は configLoader 警告 2 件(拡張子なし import と CommonJS として読まれる ESM)を出していたが、render-test-contract を .mts に改名して拡張子付きで import した後は 0 件で、visualization 195 件と package 全体 3,610 件が通った。admin の tsc は vitest.config.mts を含めて通り(listFilesOnly で 1 件確認)、prefligh",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T16:12:12.052Z"
+    },
+    "DESIGN-CHECK-CLASSNAME-EXPR-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "design-system:check の上書き禁止の規則が、cn() やテンプレート文字列で書いた className を見ない",
+      "attempts": [
+        {
+          "at": "2026-11-13T16:12:12.111Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "cd apps/web && npx vitest run scripts/lib/__tests__/ (39 ファイル 276 件通過)",
+              "cd apps/web && npm run design-system:check (既存コードの違反 0 件で通過)",
+              "cd apps/web && npx tsc --noEmit --skipLibCheck (エラーなし)",
+              "npm run preflight:pr (通過)",
+              "git commit の pre-commit (通過)"
+            ],
+            "pass": true
+          },
+          "evidence": "651d374fa 上書き禁止の 4 規則が、className の書き方によらず同じ取り出し関数 (apps/web/scripts/lib/class-override-audit.mjs) を通るようになり、cn()・テンプレート文字列・三項演算子の上書きも拾う。実ファイルの bodyClassName を cn(\"pt-4\",\"text-sm\") に変えると design-system:check が落ち、戻すと通ることを確かめた。既存コードの違反は 0 件。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T16:12:12.111Z"
+    },
+    "WEB-VITEST-SLOW-FILES-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "web の vitest 全件 (約 10 分) のうち遅いファイルを測り、重い import のモックなどで縮める",
+      "attempts": [
+        {
+          "at": "2026-11-13T16:12:12.171Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "cd apps/web && npx vitest run (全件 397 ファイル 3 055 件が通過、変更前後を連続実行)",
+              "cd apps/web && npx tsc --noEmit --skipLibCheck",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "25f7d2a1a 同じ Mac で負荷がほぼ同じ 2 並列の連続実行で、web の vitest 全件の所要が 151 秒から 127 秒に縮み、ファイルごとの環境起動の合計も 96 秒から 34 秒になった。DOM を使わない .test.ts 241 件に node 環境の指定を付け、全 3,055 件が通過した。前後の数値と上位の遅いファイルの一覧はコミット本文に書いた。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T16:12:12.171Z"
+    },
+    "DEV-SERVER-BARREL-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "サーバー側の入口経由の重い依存と、本番のページ別 JS の大きさを減らす",
+      "attempts": [
+        {
+          "at": "2026-11-13T16:12:12.231Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "cd apps/web && ANALYZE=true NODE_OPTIONS=--max-old-space-size=8192 NEXT_PUBLIC_ENV=production NODE_ENV=production npx next build --webpack (宣言なし・ありの 2 回、2 回とも完走)",
+              "npx vitest run --project @stats47/data-configs",
+              "cd packages/data-configs && npx tsc --noEmit",
+              "cd apps/web && npx tsc --noEmit --skipLibCheck",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "d610a337d 本番ビルドを ANALYZE 付きで宣言なし・ありの 2 回完走させて比べ、ページ別の先読み JS の内訳を data/improvement/performance-improvement/improvement-log.md に記録した。sideEffects: false により Geo 分析 20 route が一律 425KB 減り (gzip 103KB 減)、全 55 route で増えた route は無かった。data-configs のテスト 1355 件、両 tsc、preflight:pr は通った。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T16:12:12.231Z"
+    },
+    "NOTE-COVER-ASSETS-SPLIT-01": {
+      "class": "impl-large",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "note カバー台帳 cover-assets.json を 1MB 未満に分割する",
+      "attempts": [
+        {
+          "at": "2026-11-13T16:12:12.290Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/lib/check-repo-hygiene.cjs --baseline",
+              "node --test .claude/scripts/note/__tests__/cover-update.test.mjs .claude/scripts/note/__tests__/cover-assets.test.mjs",
+              "node --test .claude/scripts/note/__tests__/*.test.mjs .claude/scripts/media/__tests__/*.test.mjs .claude/scripts/lib/__tests__/gallery-collectors.test.mjs",
+              "node --test .claude/scripts/lib/__tests__/check-datasets.test.mjs .claude/scripts/lib/__tests__/check-repo-hygiene.test.cjs",
+              "npm run note:assets:validate",
+              "npm run check-datasets",
+              "cd apps/admin && npx vitest run --pool=threads --no-file-parallelism",
+              "npx tsc -p .claude/scripts/tsconfig.checkjs.json --noEmit",
+              "npx tsc -p .claude/scripts/tsconfig.json --noEmit",
+              "cd apps/admin && npx tsc --noEmit --skipLibCheck",
+              "node .claude/scripts/lib/sync-codex-mirror.cjs --check",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "5e0a1fe90 正本 data/note/cover-assets.json は 3,726,794 バイトから 335,753 バイトになり、baseline の行を消した状態で check-repo-hygiene.cjs --baseline が new 0 で通った。制作内容と版の記録は data/note/cover-records/ の 501 ファイル (最大 13KB) へ移し、読み戻した台帳は分割前のファイルとバイト単位で一致した (501 記事・1,789 版)。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T16:12:12.290Z"
+    },
+    "CATALOG-REFS-FOLLOWUP-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "カタログを通らない読み方と、宣言の無い参照の残り (第 2 波の実行で見つけた分)",
+      "attempts": [
+        {
+          "at": "2026-11-13T18:36:05.816Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/themes/__tests__/check-theme-review.test.mjs",
+              "node --test .claude/scripts/lib/__tests__/check-datasets.test.mjs",
+              "npm run check-datasets",
+              "npx tsc -p .claude/scripts/tsconfig.checkjs.json --noEmit",
+              "npx tsc -p .claude/scripts/tsconfig.json --noEmit",
+              "cd packages/data-configs && npx tsc --noEmit -p tsconfig.json",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "e8d658b25 check-theme-review の新テストは正規表現を直す前に落ち、data を許可に足した後に通った。sns.posts の template 参照の新テストも、refs 宣言前に落ち、宣言後に通った。check-datasets は error 0 で、preflight:pr と pre-commit も通った。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T18:36:05.816Z"
+    },
+    "METRIC-GATE-FOLLOWUP-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "指標の生成器・単位・定義シートに残る小さい不具合 4 点 (第 2 波の実行で見つけた分)",
+      "attempts": [
+        {
+          "at": "2026-11-13T18:36:05.879Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/ssds-year-format.test.mjs",
+              "npx tsx --test .claude/scripts/blog/__tests__/metric-definition-sheet-scope.test.ts",
+              "cd packages/data-configs && npx vitest run (131 ファイル 1369 件)",
+              "npx tsc -p .claude/scripts/tsconfig.checkjs.json --noEmit",
+              "npx tsc -p .claude/scripts/tsconfig.json --noEmit",
+              "cd packages/data-configs && npx tsc --noEmit -p tsconfig.json",
+              "node .claude/scripts/lib/check-datasets.mjs",
+              "npm run preflight:pr",
+              "git commit の pre-commit"
+            ],
+            "pass": true
+          },
+          "evidence": "82432b2b7 4 点それぞれに、直す前に落ち直した後に通る検査を足した。率の二重換算、kg/m2 の二重登録、指数の基準の誤表示は直す前に落ちることを実行して確かめた。出典索引の古さの検査は、生成物を一時的に壊して落ち、戻して通ることを確かめた。型検査、data-configs 全テスト、preflight:pr、pre-commit は通った。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T18:36:05.879Z"
+    },
+    "CI-TOOLING-FOLLOWUP-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "CI と開発の道具に残る小さい穴 5 点 (第 2 波の実行で見つけた分)",
+      "attempts": [
+        {
+          "at": "2026-11-13T18:36:05.941Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/metric-release-order.test.mjs .claude/scripts/lib/__tests__/check-agent-skill-consistency.test.cjs .claude/scripts/lib/__tests__/pre-commit-guard-paths.test.cjs .claude/scripts/lib/__tests__/check-repo-hygiene.test.cjs .claude/scripts/lib/__tests__/scripts-type-check-coverage.test.cjs .claude/scripts/lib/__tests__/preflight-commit.test.mjs .claude/scripts/lib/__tests__/ci-test-tiering.test.mjs .claude/scripts/lib/__tests__/workflow-commit-back.test.cjs .claude/scripts/lib/__tests__/pre-push-tests.test.mjs .claude/scripts/lib/__tests__/pr-skip-ci-head-guard.test.cjs .claude/scripts/lib/__tests__/workspace-ci-matrix-contract.test.cjs .claude/scripts/lib/__tests__/admin-ci-contract.test.cjs .claude/scripts/lib/__tests__/r2-overlay-server.test.mjs .claude/scripts/lib/__tests__/check-dispatch-freshness.test.cjs",
+              "npx tsc -p .claude/scripts/tsconfig.checkjs.json --noEmit",
+              "npx tsc -p .claude/scripts/tsconfig.json --noEmit",
+              "cd apps/web && npx tsc --noEmit --skipLibCheck",
+              "node .claude/scripts/lib/sync-codex-mirror.cjs --check",
+              "node .claude/scripts/lib/check-repo-hygiene.cjs --baseline --json",
+              "node .claude/scripts/lib/check-agent-skill-consistency.cjs --no-orphan",
+              "npm run design-system:check",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "02414cc68 5 点を 1 コミットにした。関係テスト 162 件・型検査 3 本・preflight:pr が通った。baseline の resolved は 17 件から 0 件、コミット時のシークレット検査は警告なし、運営者名は幅 375px で 14px から 16px (about と同じ) になった。PR の build job の新しい段は CI では未実行で、位置をテストで固定した。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T18:36:05.941Z"
+    },
+    "MUNI-RANKING-DENSITY-MISSING-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "有効な指標 population-density-habitable に公開ランキングが無い",
+      "attempts": [
+        {
+          "at": "2026-11-13T18:36:06.003Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "cd packages/data-configs && npx vitest run src/geo-scope (11 files  67 tests passed)",
+              "cd packages/data-configs && npx tsc --noEmit -p . (no errors)",
+              "npm run preflight:pr (passed)",
+              "git commit pre-commit hooks (passed)"
+            ],
+            "pass": true
+          },
+          "evidence": "19ce446b5 原因は欠落ではなく意図した除外だった。台帳 data/municipalities/catalog/metric-availability.json が population-density-habitable を unsupported (population-density-per-km2-inhabitable-area と観測値が完全一致の重複) にしていた。R2 の cities.json 2 本は 15,304 行が全件一致した。相手の item.json は 200、本番の /ranking/ と /munic",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T18:36:06.003Z"
+    },
+    "GEO-STAT-BOX-STATTILE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "Geo の検算の大きな数値を手組みの箱から共通の数値タイル (StatTile) にする",
+      "attempts": [
+        {
+          "at": "2026-11-13T18:36:06.064Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "cd apps/web && npx vitest run 'src/app/geo/data' src/features/geo-analysis/components/__tests__/GeoSpatialEvidenceExplorer.test.tsx",
+              "cd apps/web && npx vitest run src/features/geo-analysis src/app/geo src/app/api/geo src/__tests__/design-components-ledger.test.ts",
+              "cd apps/web && npx vitest related --run 'src/app/geo/data/[analysisSlug]/[prefCode]/page.tsx' src/features/geo-analysis/components/GeoSpatialEvidenceExplorer.tsx",
+              "npm run design-system:check -w apps/web",
+              "cd apps/web && npx tsc --noEmit --skipLibCheck",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "644e80fa5 2 か所の手組みの箱は StatTile と StatTileGrid に替わり、ページの「border p-3」と Explorer の SurfaceCard は 0 件です。localhost の 6 分析を幅 375px と 1280px で見て、名前と値の 114 組が変更前と一致しました。幅 10 通りで値の枠からのはみ出しは 0 件です。geo の vitest は 36 ファイル 187 件が通り、design-system 検査、型検査、preflight:pr も通りました。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T18:36:06.064Z"
+    },
+    "KAKEI-CATALOG-CI-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "家計の分析単位の台帳の実物との照合を PR の CI に載せる",
+      "attempts": [
+        {
+          "at": "2026-11-13T18:36:06.123Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx packages/data-configs/scripts/check-kakei-analysis-catalog.ts",
+              "node --test .claude/scripts/lib/__tests__/metric-release-order.test.mjs .claude/scripts/lib/__tests__/check-checker-wiring.test.cjs .claude/scripts/lib/__tests__/plan-pr-quality.test.mjs .claude/scripts/lib/__tests__/workflow-node-version.test.cjs",
+              "node .claude/scripts/lib/audit-workflow-policy.cjs --strict",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "ae98c5f82 pr-quality-check.yml の Static Gates に check-kakei-analysis-catalog.ts の段を足した。全 PR で走り、if も continue-on-error も付けず、失敗で job が止まる。台帳の検査はローカルで通る (24 件 PASS、約 2 秒)。metrics:check の検査が全て PR で走ることを固定する新テストは、修正前は落ち、修正後は通った。preflight:pr と pre-commit も通った。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T18:36:06.123Z"
+    },
+    "DISPLAY-SEMANTICS-FOLLOWUP-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "表示の意味の検査の残り (推移グラフの最低点数・週次 UI 確認の観点・ブログ本文の内部用語)",
+      "attempts": [
+        {
+          "at": "2026-11-13T18:36:06.185Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/audit/__tests__/theme-chart-live-audit.test.mjs",
+              "node .claude/scripts/audit/theme-chart-live-audit.mjs",
+              "npx tsx packages/data-configs/scripts/generate-theme-dependency-mirror.ts --check",
+              "cd packages/data-configs && npx vitest run src/theme-catalog src/__tests__/display-semantics.test.ts",
+              "cd apps/web && npx vitest run src/features/theme-dashboard/lib/__tests__/metric-trend.test.ts",
+              "npx tsc -p .claude/scripts/tsconfig.checkjs.json --noEmit",
+              "npx tsc -p .claude/scripts/tsconfig.json --noEmit",
+              "cd packages/data-configs && npx tsc --noEmit",
+              "cd apps/web && npx tsc --noEmit --skipLibCheck",
+              "npm run docs:check",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "a80430c60 「推移」と題したテーマの図 27 件の指標の観測年数を週次の theme-chart-live-audit が最低 5 点と比べ、満たなければ trend-years-short の error にする検査を足した。新規テスト 5 件は実装前に import 不足で落ち、実装後に 19 件すべて通った。公開 R2 を読む実走では 250 指標すべて通り、最小の観測年数は 9。ミラーの最低点数を一時的に 10 にすると 4 件が落ち、ミラーを再生成して戻した。型検査 4 種、関係テスト、docs:check、preflight",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T18:36:06.185Z"
+    },
+    "SURVEY-PORTFOLIO-VALIDATOR-DEDUPE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "調査ポートフォリオの検証スクリプトと Schema・refs の二重の検査をなくす",
+      "attempts": [
+        {
+          "at": "2026-11-13T18:36:06.247Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/check-datasets.test.mjs",
+              "node .claude/scripts/lib/check-datasets.mjs",
+              "npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts",
+              "cd apps/web && npx vitest run src/features/survey/survey-editorial-validator.test.ts",
+              "npx tsc -p .claude/scripts/tsconfig.checkjs.json --noEmit",
+              "npx tsc -p .claude/scripts/tsconfig.json --noEmit",
+              "node .claude/scripts/lib/audit-workflow-policy.cjs --strict",
+              "node .claude/scripts/lib/sync-codex-mirror.cjs --check",
+              "node .claude/scripts/lib/check-agent-skill-consistency.cjs",
+              "npm run docs:check",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "375535b05 検証スクリプトから 6 つの列挙と masterIds.has を消し、check-datasets は error 0、検証スクリプトは 152 調査で違反なし、preflight:pr は通過した。規約の relatedHubs[] は、欄を消した 4dde9365e6 (2026-11-02 のハブ統合) に合わせて記述を消した。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T18:36:06.247Z"
+    },
+    "MIDDLEWARE-REGISTRY-BUNDLE-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "middleware が指標の一覧 (3,324 件) を Edge のバンドルに取り込んでいる",
+      "attempts": [
+        {
+          "at": "2026-11-13T18:36:06.310Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "cd apps/web && npx vitest run src/__tests__/client-bundle-boundary.test.ts",
+              "cd apps/web && npx vitest run src/__tests__ src/config src/lib",
+              "cd packages/data-configs && npx vitest run",
+              "cd packages/data-configs && npx tsc --noEmit -p .",
+              "cd apps/web && npx tsc --noEmit --skipLibCheck",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "bf59b31c2 新しい検査「middleware.ts から全指標 registry へ値の import がつながらない」は、直す前に url-policy、geo-scope/index、municipality-catalog 経由で registry.ts に届いて落ちた。分離後は通り、陽性対照も通る。apps/web の関連 55 ファイル 680 件、data-configs 全 133 ファイル 1376 件、両パッケージの型検査、preflight:pr、pre-commit がすべて通った。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T18:36:06.310Z"
+    },
+    "LINE-GRID-COLUMN-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "描いた画面の線の格子の検査を定期実行に載せる",
+      "attempts": [
+        {
+          "at": "2026-11-13T18:36:06.371Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --import tsx --test .claude/scripts/page-quality/__tests__/*.test.mjs",
+              "npx tsc -p .claude/scripts/tsconfig.checkjs.json --noEmit",
+              "npx tsc -p .claude/scripts/tsconfig.json --noEmit",
+              "npm run preflight:pr",
+              "npm run ui-theme:line-grid -- https://stats47.jp <3 画面の pages.json> 412"
+            ],
+            "pass": true
+          },
+          "evidence": "43dc3e204 線の格子の判定を lib/line-grid-probe.mjs の 1 か所に移し、週次 page-quality の代表URL・variants のブラウザ検査が line_grid_issues (warning・予算 0) として数えるようにしたので、違反件数は週次の LATEST.md の違反表と UI 指摘キューに出る。page-quality の 104 件のテストと 2 つの型検査と preflight:pr が通り、本番 3 画面への手元検査も 0 件で動いた。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T18:36:06.371Z"
+    },
+    "BLOG-GROUPED-BARS-VALUE-LABELS-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "ブログの縦棒グラフに値のラベルが無く、軸の目盛りで読ませている",
+      "attempts": [
+        {
+          "at": "2026-11-13T18:36:06.436Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "cd apps/admin && npx vitest run --pool=threads --no-file-parallelism",
+              "cd apps/admin && npx tsc --noEmit --skipLibCheck",
+              "npx tsc -p .claude/scripts/tsconfig.json --noEmit",
+              "node --test .claude/scripts/analysis/__tests__/*.test.mjs",
+              "node --test .claude/scripts/issues/__tests__/issue-graph.test.mjs .claude/scripts/lib/__tests__/svg-lint.image-type.test.mjs .claude/scripts/lib/__tests__/chart-recurrence-guards.test.mjs",
+              "node --test .claude/scripts/blog/lib/__tests__/generate-article-charts-ranks.test.mjs",
+              "npm run check-datasets",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "0e4a5a8a9 グループ棒の型は棒ごとに値を置き、値を置く図では目盛りと目盛線を出さず0の線だけを引くようになった。管理画面の単体テスト535件、型検査、preflight:pr が通った。作り直しの判断「作り直す」を型の台帳の方針とコミット本文に記録した。公開R2には旧版の図が14記事66枚あり、63枚に値が付き、3枚は棒が細く目盛りのまま残る。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T18:36:06.436Z"
+    },
+    "MAP-TILE-FOREIGN-LABELS-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "ランキング詳細の地図タイルに外国の地名 (ハバロフスク・ウラジオストク等) が出る",
+      "attempts": [
+        {
+          "at": "2026-11-13T18:36:06.499Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "cd apps/web && npx vitest run src/features/ranking/__tests__/ranking-map-performance-contract.test.ts"
+            ],
+            "pass": true
+          },
+          "evidence": "カードの前提は現物と違い、既に直っていたのでコードは変えていない。コミット f2e8787b1a (2026-11-06) がランキングの地図を背景タイル無しの SVG に置き換えた。port 3103 の /ranking/total-population を幅 1440 と 390 で撮り、地図は 47 個の path だけの SVG で、地理院タイルへの要求は 0 件、外国の地名は出ていないことを画像で確かめた。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T18:36:06.499Z"
+    },
+    "NOTE-PROVENANCE-BACKFILL-MANIFEST-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "backfill-note-data-provenance を旧 manifest.json ではなく台帳のマニフェストで読む",
+      "attempts": [
+        {
+          "at": "2026-11-13T18:36:06.565Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/note/__tests__/backfill-note-data-provenance.test.mjs",
+              "npm run -s note:article:test",
+              "npx tsc -p .claude/scripts/tsconfig.checkjs.json --noEmit",
+              "npx tsc -p .claude/scripts/tsconfig.json --noEmit",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "8c158aeb4 スクリプトは台帳の body.manifest が指す private R2 のマニフェストからファイル一覧を読み、結果を作業コピーへ置くだけになった。偽の R2 で put と delete が 0 回、旧 manifest.json の読み取りが 0 回であることを新しいテスト 9 件が確かめ、note:article:test 18 件、型検査 2 本、preflight:pr が通った。実物の R2 に対する実行は認証が要るため行っていない。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T18:36:06.565Z"
+    },
+    "AREA-TOC-MOBILE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "県ページの目次をスマホでも本文上部に出すか、16 項目をどう見せるかを決める",
+      "attempts": [
+        {
+          "at": "2026-11-13T18:36:06.634Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "cd apps/web && npx vitest run src/components/navigation/__tests__/StatisticsScopeNav.test.tsx src/app/__tests__/rail-contract-structure.test.ts src/features/theme-dashboard/components/__tests__/theme-narrow-layout-contract.test.ts",
+              "cd apps/web && npx vitest related --run src/components/navigation/StatisticsScopeNav.tsx \"src/app/areas/[areaCode]/page.tsx\" src/app/__tests__/rail-contract-structure.test.ts",
+              "cd apps/web && npx tsc --noEmit --skipLibCheck",
+              "npm run design-system:check -w apps/web",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "a4655d04c localhost:3103 の /areas/13000 を Playwright で実測した。変更前は目次 18 節のうち表示領域に入るのが幅 375px で 3 節、1280px で 13 節だった。変更後は 375px で 5 行、1280px で 2 行に折り返し、両方の幅で 18 節すべてが入り、ページの横はみ出しは無い。型検査、デザイン検査、関係テスト 79 件、preflight:pr は通った。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T18:36:06.634Z"
+    },
+    "RANKING-HEADING-YEAR-DECISION-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "ランキングページの見出しの近くに最新年を出すか決める",
+      "attempts": [
+        {
+          "at": "2026-11-13T18:36:06.697Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "cd apps/web && npx vitest run src/features/ranking/components/RankingHeader/__tests__/RankingHeaderPanel.test.tsx src/features/ranking/components/RankingKeyPage/__tests__/ranking-header-density-contract.test.ts",
+              "cd apps/web && npx vitest run",
+              "cd apps/web && npx tsc --noEmit --skipLibCheck",
+              "npm run design-system:check",
+              "npm run check-datasets",
+              "node --import tsx --test .claude/scripts/page-quality/__tests__/ui-findings.test.mjs",
+              "npm run preflight:pr",
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed 'agent|ranking--old-2years' --note \"...\""
+            ],
+            "pass": true
+          },
+          "evidence": "5e76cca83 localhost:3103 の /ranking/national-pension-full-exemption-rate で、h1 の直下に「最新 2006年度（10年以上前のデータ）」が注意の色で出た。/ranking/total-population は「最新 2025年」が通常の色で出た。幅 375 と 1280 で h1 の文言は不変、横スクロールなし。指摘 agent|ranking--old-2years は fixed にした。web の vitest 全 3074 件、型検査、preflight:pr が",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T18:36:06.697Z"
+    },
+    "PERF-RANKING-LCP-03": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "ランキングページの LCP がベースラインより悪化したまま",
+      "attempts": [
+        {
+          "at": "2026-11-13T18:36:06.762Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "grep \"ranking/total-population mobile\" data/psi/history.csv | awk -F  '$1>=\"2026-10-09\" && $1<=\"2026-11-06\"{n++; if($6>m)m=$6; if(min==\"\"||$6<min)min=$6} END{print n min m}'",
+              "git show fe2de93ee9:data/psi/psi-batch-2026-10-08T22-12-37.json | jq (ranking/total-population mobile の LCP と lcp_element)",
+              "git show 5cd51235a5:data/psi/psi-batch-2026-10-09T21-50-41.json | jq (同上)",
+              "npm run docs:check",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "0dbdd5414 history.csv の ranking/total-population mobile は 2026-10-09〜11-06 の 19 点が 4,051〜7,545ms で、ベースライン 9,347ms を全点で下回る (10-24〜11-06 の 4 点は 5,176・5,101・5,321・4,051ms)。各日の psi-batch の lcp_element は、10-08 までが Leaflet タイル (9,390ms)、10-09 からが Cookie バナーの p (4,801ms)、10-30 からが「",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T18:36:06.762Z"
+    },
+    "NOTE-LABOR-METRICS-ADD-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "有給休暇と産業別賃金の県別指標を足し、note の雛形 2 本を作り直して公開する",
+      "attempts": [
+        {
+          "at": "2026-11-13T22:03:18.842Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run note:catalog:validate",
+              "npm run note:catalog:check",
+              "npm run note:assets:validate",
+              "npm run check-datasets",
+              "npm run note:article:test",
+              "npm run note:assets:test",
+              "npm run note:covers:test",
+              "npm run note:images:test",
+              "npm run note:circulation:test",
+              "node --test .claude/scripts/lib/__tests__/gallery-collectors.test.mjs .claude/scripts/media/__tests__/workspace.test.mjs",
+              "cd apps/admin && npx vitest run tests/integration/content-route.test.ts tests/integration/note-cover-production.test.ts tests/unit/media-classification-route.test.ts tests/unit/note-covers.test.ts",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "5b254f9a8 旧雛形 2 本を記事台帳・カバー台帳・カバー記録・下書き索引から外し、git grep で 4 か所とも 0 件になった。note:catalog:validate は「検証 pass」、下書きは 62 件から 60 件、check-datasets は error 0、preflight:pr は exit 0 だった。置き換えの 2 記事は台帳で published (2026-10-24、noteUrl あり) である。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T22:03:18.842Z"
+    },
+    "STRATEGY-GATE-ADMIN-PILOT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "管理画面に、行政向け商品の検証が4段階のどこにいるかを出す",
+      "attempts": [
+        {
+          "at": "2026-11-13T22:03:18.943Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run test -w apps/admin",
+              "cd apps/admin && npx tsc --noEmit --skipLibCheck",
+              "cd apps/admin && npx eslint <変更した 6 ファイル> --max-warnings 0",
+              "npm run admin-ui:check",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "5cd4f0f99 /dashboard の判断ゲート表の B2B基盤 の行に、聞き取り台帳から導いた「聞き取り: 0/3 件」「段階: 未記録」「次の判断点: 聞き取りが 3 件に達した時点 (残り 3 件)」が出ることを、幅 375px と 1280px の画面で確かめた。apps/admin のテストは 81 ファイル 562 件が通り、型検査・lint・admin-ui:check・preflight:pr も exit 0 だった。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T22:03:18.943Z"
+    },
+    "STRATEGY-ISSUE-MAP-PV-CHART-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "広告の効率が出たら、事業イシューマップに月 ¥1 万へ要る PV のグラフを足す",
+      "attempts": [
+        {
+          "at": "2026-11-13T22:03:19.043Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run test -w apps/admin",
+              "cd apps/admin && npx vitest run --pool=threads tests/unit/issue-map.test.ts",
+              "cd apps/admin && npx tsc --noEmit --skipLibCheck",
+              "cd apps/admin && npx eslint app/strategy/issue-map lib/issue-map.ts lib/server/issue-map.ts tests/unit/issue-map.test.ts --max-warnings 0",
+              "npm run admin-ui:check",
+              "npm run design-system:check -w apps/web",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "2dba2fdc1 buildRequiredPv は KPI の ad-yield と site-pageviews に値があるときだけ要る PV を返し、null・0・非数値では null を返すので、画面はそのときグラフを出しません。管理画面のテストは 81 ファイル 567 件が通り、型検査と preflight:pr も通りました。実データ (ad-yield が null) ではグラフ 0 個、値を一時的に 6.5 にした画面では棒 3 本が 375px と 1280px で崩れなく出ることを撮影で確かめました。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T22:03:19.043Z"
+    },
+    "ADMIN-COMPETITOR-VIEW-01": {
+      "class": "impl-large",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "競合調査の結果を管理画面で見られるようにする",
+      "attempts": [
+        {
+          "at": "2026-11-13T22:03:19.173Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "cd apps/admin && npx vitest run --pool=threads tests/unit/competitor-scan.test.ts",
+              "cd apps/admin && npm test",
+              "cd apps/admin && npx tsc --noEmit --skipLibCheck",
+              "cd apps/admin && npx eslint app/strategy lib/competitor-scan.ts lib/server/competitor-scan.ts tests/unit/competitor-scan.test.ts --max-warnings 0",
+              "npm run admin-ui:check",
+              "npm run design-system:check -w apps/web",
+              "npm run check-datasets",
+              "npm run docs:check",
+              "node --test .claude/scripts/lib/__tests__/check-datasets.test.mjs",
+              "npm run type-check",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "45ac9b1c3 localhost:4763 の /strategy/competitors が 200 で開き、注記と §2.2 へのリンク、販売面ごとの表 (BOOTH 48・ココナラ 217・note 3・ランサーズ 3)、上位 13 件、全 271 件の一覧が出ることを幅 375px と 1280px の画像で確かめた。変更前は同じ URL が 404 だった。管理画面のテストは 82 ファイル 578 件が通り、check-datasets・docs:check・type-check・preflight:pr も通った。分類の列は",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T22:03:19.173Z"
+    },
+    "MIGRATION-FLOW-PHASE23-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "人口移動 月次/年次 workflowの生成ステップ未実装",
+      "attempts": [
+        {
+          "at": "2026-11-13T22:13:00.595Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "git show --stat 294d88f433"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-14 オーナー決定「人の移動の動画は一旦やめる」。生成元の MigrationFlow-Reel と render-migration-flow.ts は 294d88f433 で撤去済み。migration-flow の workflow 3 本と npm script の片付けは同じ日に別コミットで行う。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T22:13:00.595Z"
+    },
+    "AFF-INTENT-FALLBACK-STOP-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "意図が解決しない面への配信を止め、priority を期待収益順にする",
+      "attempts": [
+        {
+          "at": "2026-11-13T22:13:00.707Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/ads/check-revenue-guards.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-14 オーナー決定でカードを閉じる。2026-11-12 からアフィリエイトの配信を止めており、features/ads/server を読むページは 0 件なので、priority の振り直しは読者に見える広告を変えない。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-13T22:13:00.707Z"
     }
   }
 }

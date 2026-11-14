@@ -29,6 +29,13 @@ export const OPERATOR_PROFILE = {
   },
 } as const;
 
+/**
+ * 本文で運営者を紹介する所 (運営者情報・プライバシーポリシー) の写真の大きさ (px) と class。
+ * ページごとに書くと食い違う (48px と 56px だった)。右レールの運営者カード (44px) はレールの寸法なので別。
+ */
+export const OPERATOR_AVATAR_SIZE = 48;
+export const OPERATOR_AVATAR_CLASS = 'size-12 shrink-0 rounded-full object-cover';
+
 /** Organization / Person の sameAs に使用する外部プロフィール URL。 */
 export const OPERATOR_SOCIAL_URLS = [
   OPERATOR_PROFILE.links.note,

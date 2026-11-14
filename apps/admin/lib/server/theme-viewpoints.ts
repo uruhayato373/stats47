@@ -12,7 +12,7 @@ import {
 import fs from "node:fs";
 import path from "node:path";
 
-import { datasetDir } from "../../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 import { THEME_SELECTION_VIEWPOINTS } from "../../../../config/paths.mjs";
 import { projectRoot } from "./project-root";
 import { cached, fileExists, readJson, readText, TTL } from "./state-io";
@@ -96,7 +96,7 @@ export interface ThemeViewpointSummary {
   trend: ViewpointTrend;
 }
 
-const REVIEWS_DIR = ".claude/skills/theme/manage-theme-portfolio/reference/reviews";
+const REVIEWS_DIR = datasetDir("themes.reviews");
 const TREND_WEEKS = 8;
 /** 承認待ちとみなす提案の新しさ。これより古い proposal-ready は放置された提案として、候補に戻す */
 const PROPOSAL_FRESH_DAYS = 30;
@@ -144,8 +144,8 @@ function latestReviews(): Map<string, { date: string; status: string }> {
   return latest;
 }
 
-function readTrend(themesDir: string): ViewpointTrend {
-  const rel = path.join(themesDir, "viewpoint-history.csv");
+function readTrend(): ViewpointTrend {
+  const rel = datasetPath("themes.viewpoint-history");
   if (!fileExists(rel)) return { weeks: [], byRule: {} };
   const rows = readText(rel).trim().split(/\r?\n/).slice(1).map((line) => line.split(","));
   const weeks = [...new Set(rows.map(([week]) => week))].sort().slice(-TREND_WEEKS);
@@ -186,12 +186,12 @@ function buildSummary(): ThemeViewpointSummary {
   });
 
   const severity = new Map(config.rules.map((r) => [r.id, r.severity]));
-  const themesDir = datasetDir("themes.portfolio");
-  const readState = <T,>(file: string, empty: T): T =>
-    fileExists(path.join(themesDir, file)) ? readJson<T>(path.join(themesDir, file)) : empty;
   const gsc = latestThemeImpressions();
   const today = new Date().toISOString().slice(0, 10);
-  const experiments = readState<{ experiments: Experiment[] }>("experiments.json", { experiments: [] });
+  const experimentsPath = datasetPath("themes.experiments");
+  const experiments = fileExists(experimentsPath)
+    ? readJson<{ experiments: Experiment[] }>(experimentsPath)
+    : { experiments: [] };
   const pendingUntil = new Map<string, string>();
   for (const e of experiments.experiments) {
     const d56 = e.evaluateAt?.d56;
@@ -223,7 +223,7 @@ function buildSummary(): ThemeViewpointSummary {
   return {
     gscWeek: gsc.week,
     candidates,
-    trend: readTrend(themesDir),
+    trend: readTrend(),
     themeCount: catalogs.length,
     primaryAndSecondaryCount: catalogs.reduce(
       (n, c) => n + c.metrics.filter((m) => m.role !== "context").length,

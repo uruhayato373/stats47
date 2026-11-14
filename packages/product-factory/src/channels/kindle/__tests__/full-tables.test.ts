@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { fullTableMarkdown, insertBeforeSources, tableFromFigureData, yearSuffixOf } from "../full-tables";
+import { applyTableOverride, fullTableMarkdown, insertBeforeSources, tableFromFigureData, yearSuffixOf } from "../full-tables";
 
 const PREFS = Array.from({ length: 47 }, (_, i) => `県${String(i + 1).padStart(2, "0")}`);
 
@@ -49,5 +49,24 @@ describe("normalizeUnit", () => {
     expect(normalizeUnit("（件/百万時間）")).toBe("件/百万時間");
     expect(normalizeUnit("（全国=100）")).toBe("全国=100");
     expect(normalizeUnit("円")).toBe("円");
+  });
+});
+
+describe("applyTableOverride (定義と値の尺度が違う表の見出し)", () => {
+  const rows = PREFS.map((name, i) => ({ name, value: i + 1 }));
+  const base = { year: "2021", rankingKey: "library-count-per-million", rows };
+
+  it("ブログの図が ÷10 した人口10万人当たり (館/10万人) の表は、見出しを人口10万人当たりにする", () => {
+    const table = applyTableOverride({ ...base, label: "図書館数（人口100万人当たり）", unit: "館/10万人" });
+    expect(table.label).toBe("図書館数（人口10万人当たり）");
+    expect(table.unit).toBe("館");
+  });
+  it("R2 のランキング値 (人口100万人当たり・館) から作る表は、指標の定義の見出しのままにする", () => {
+    const table = applyTableOverride({ ...base, label: "図書館数（人口100万人当たり）", unit: "館" });
+    expect(table.label).toBe("図書館数（人口100万人当たり）");
+  });
+  it("whenUnit のない上書きは単位に関係なく当てる", () => {
+    expect(applyTableOverride({ ...base, rankingKey: "work-accident-severity", label: "強度率", unit: "日" }).unit).toBe("日/千時間");
+    expect(applyTableOverride({ ...base, rankingKey: null, label: "x", unit: "館/10万人" }).unit).toBe("館/10万人");
   });
 });

@@ -101,6 +101,19 @@
       "sourcePageSha256": "58357708743ba8d530fe5b97f1203bc07dc1a9fc58589e046d5beb618d52b6bd"
     },
     {
+      "key": "general-clinic-count-per-100k",
+      "code": "#I0910105",
+      "unit": "施設",
+      "subtitle": "人口10万人当たり",
+      "denominator": "人口10万人",
+      "formula": "I5102/A1101",
+      "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/I",
+      "normalizationOptionsRemoved": 2,
+      "recipeHash": "ee13f713c367e874",
+      "sourceRow": "#I0910105 一般診療所数（人口10万人当たり） 施設 一般診療所数／総人口 I5102/A1101",
+      "observedAt": "2026-11-13"
+    },
+    {
       "key": "general-hospital-bed-count-per-100k",
       "code": "#I0910203",
       "unit": "床",

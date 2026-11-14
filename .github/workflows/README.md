@@ -57,7 +57,7 @@ Repository Variables に置く。Workflow では前者を `secrets.*`、後者�
 
 | Secret                    | 用途                                                                                                                                                            | 形式                                                      |
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| `CLOUDFLARE_API_TOKEN`       | Cloudflareデプロイ認証                                                                                                                                          | 40文字の英数字（Workers Scripts、D1、R2の編集権限が必要） |
+| `CLOUDFLARE_API_TOKEN`       | Cloudflareデプロイ認証                                                                                                                                          | 40文字の英数字（Workers Scripts と R2 の編集権限が必要。デプロイは D1 を使わないので D1 の編集権限は要らない） |
 | `AUTH_SECRET`                | NextAuth認証シークレット                                                                                                                                        | 32文字以上のランダム文字列                                |
 | `WORKER_CACHE_PURGE_SECRET`  | R2公開後にWorkers Cacheを全体/tag purgeする内部APIのBearer認証。deploy時に同名Worker secretへ同期する                                                           | `openssl rand -hex 32`。Variable やログへ出さない         |
 | `CLAUDE_CODE_OAUTH_TOKEN`    | `backlog-loop-daily.yml` の Claude Code 認証。ローカルで `claude setup-token` を実行して発行し、Repository Secret に登録する | OAuth token。Variable やログへ出さない                    |
@@ -139,38 +139,42 @@ Static gateは常に実行する。その他は変更パスを決定的に分類
 
 ### Production環境デプロイ
 
-**トリガー**: `main` ブランチへのPush
+**トリガー**: `main` ブランチへのPush、または手動実行（`workflow_dispatch`。コード変更なしで buildId を更新したいとき）
+
+最初に `Plan deploy` job が、この push が本番に関係するパスを含むかを `.claude/scripts/lib/plan-deploy-scope.mjs` で判定する。
+関係しないパスだけの push はデプロイせず、判断できないときと手動実行はデプロイする
+（正典: `.claude/rules/branch-workflow.md`「デプロイの要否」）。
+
+デプロイする場合は `Deploy` job が次の 16 段を順に実行する。R2 へ書くので `r2-write` の同時実行枠に入り、制限時間は 40 分。
 
 1. 📥 リポジトリをチェックアウト
-2. 🟢 Node.js 20をセットアップ
+2. 🟢 Node.js 22をセットアップ（Wrangler 4.123+ が Node.js 22 以上を要求する）
 3. 📦 依存関係をインストール（`npm ci`）
-4. 🔐 **Cloudflare認証確認**
+4. 🧪 **ビルドの前提を検査**: `node .github/scripts/check-build-preconditions.mjs`
+   - スナップショットの中身と関係なく後の段を落とす条件を、R2 への反映より前に検査する
+5. 🔐 **Cloudflare認証確認**
    - API Tokenの形式チェック（40文字の英数字）
    - Account IDの形式チェック（32文字の16進数）
    - `npx wrangler whoami` で認証テスト
-5. 🔨 **ビルド**: `npm run workers:build`
+6. 🧮 **指標スナップショットを生成して検証**
+   - ランキング・市区町村ランキング・市区町村データブック・マスタ・page-components を `.local/r2` に生成
+   - `npm run metrics:verify-snapshots` と、反映するキーの一覧（SHA-256 付き）の作成
+7. 📤 **検証済みスナップショットを R2 へ反映**（`push-exact-r2-assets.ts`。中身が変わったファイルだけを送る）
+   - ビルドが R2 の新しいスナップショットを読むので、ビルドより前に置く
+8. 🔨 **ビルド**: `npm run workers:build`（`apps/web`）
    - 環境変数: `NEXT_PUBLIC_ENV=production`
-   - Production用のベースURL、GA測定IDを設定
-6. ✅ OpenNextビルド検証（`.open-next/` ディレクトリ確認）
-7. 📤 **Cloudflare Workersへデプロイ**
-   - Production環境: `stats47`
-   - D1データベース: `stats47_static`
-8. 🏥 **ヘルスチェック**
-   - デプロイされたURLへアクセス確認
-   - HTTPステータスコード200を確認
+   - Production用のベースURL、GA測定ID、ビルド時に R2 を読むための S3 互換 API の認証情報を設定
+9. ✅ OpenNextビルド検証（`.open-next/` の必須ファイルと `wrangler.toml` の入口を確認）
+10. 🛡️ **デプロイ前ゲート**: `check-prerender-notfound.sh` が prerender された SSG ページの notFound 固着を検出
+11. 🔐 Production の Worker に secret を設定（`wrangler secret put`）
+12. 🚀 **Cloudflare Workersへデプロイ**: `wrangler deploy --env production`
+13. 🧹 **Workers Cache をリセット**: `reset-worker-cache-after-deploy.sh`
+14. 🔥 キャッシュをウォーム（`warm-cache.sh`。失敗してもデプロイは失敗にしない）
+15. 🔎 **スモークテスト**: `smoke-test-routes.sh` が各 route の代表 URL を内容で検査
+16. 🗺️ **sitemap index の整合性**: `check-sitemap-index.sh`
 
-### エリアデータアップロード
-
-**ワークフロー**: `upload-area-data.yml`
-**トリガー**: `main` ブランチへのPush（`data/mock/area/**` または `scripts/upload-area-data.ts` の変更時）
-
-1. 📥 リポジトリをチェックアウト
-2. 🟢 Node.js 20をセットアップ
-3. 📦 依存関係をインストール
-4. 🔍 エリアデータの変更をチェック
-5. 📤 R2へアップロード（変更がある場合のみ）
-   - Production: `stats47-area-data`
-6. ✅ アップロード検証
+永続の D1 データベースは使わない（完全 DB レス。正典: `docs/01_技術設計/02_データアーキテクチャ.md`）。
+前提の検査と認証を R2 への反映より前に、反映をビルドより前に置く順序は `.claude/scripts/lib/__tests__/metric-release-order.test.mjs` が固定する。
 
 ## トラブルシューティング
 
@@ -250,9 +254,14 @@ npm run workers:build
    - Account - Workers Scripts - Read
    - Account - Workers Scripts - Edit
    - Account - Account - Read
-   - Account - D1 - Edit
    - Account - R2 - Edit
 3. GitHub Settings > Secrets で `CLOUDFLARE_API_TOKEN` を更新
+
+D1 の編集権限は要らない。`apps/web/wrangler.toml` は D1 の binding を持たず、`.github/` と各 `package.json` の scripts に
+`wrangler d1` の呼び出しは見つからない (2026-11-14 に検索)。
+同じトークンを使う日次の使用量監視 (`cloudflare-usage-daily.yml` の `.claude/scripts/cloudflare/fetch-usage.mjs`) は
+D1 の使用量を GraphQL Analytics API で読むので、トークンを作り直すときは、このスクリプトの冒頭に書いてある読み取り権限
+(Account Analytics・Workers Scripts・D1 の Read) も付ける。
 
 #### API Token形式エラー
 
@@ -335,7 +344,6 @@ GitHub Actionsのキャッシュが古い場合:
 
 ### デプロイ前
 
-- [ ] D1データベースマイグレーション実行済み（必要な場合）
 - [ ] 環境変数が設定済み（GitHub Secrets / Repository Variables）
 - [ ] ロールバックプランを準備
 - [ ] 関係者への通知済み（本番デプロイの場合）

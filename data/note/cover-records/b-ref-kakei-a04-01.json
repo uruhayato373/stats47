@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-kakei-a04-01",
+  "production": {
+    "id": "NCI-00181",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "食費の割合\n34.38％と26.52％",
+      "subline": "2024年・年収第Ⅰ/Ⅴ階級",
+      "subject": "食料品の入った買い物かごと白紙の家計ノートを並べる。食費が家計に占める割合を考える題材。架空の棒グラフ・数表・金額表示は描かない。人物・手・顔・キャラクターなし。",
+      "evidence": "公開本文のエンゲル係数にあたる値は2024年の食料費/消費支出。年収第Ⅰ階級34.38％、第Ⅴ階級26.52％。対象は全国の二人以上の世帯。食費の円額とは単位が違い、割合から生活水準を逆向きに断定できない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "25e8f8de6ba5d3e4b1e1836bfdf5ad304b2ce74e2a4407b33d5ea3cf0be51c6c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a04-01/revisions/25e8f8de6ba5d3e4b1e1836bfdf5ad304b2ce74e2a4407b33d5ea3cf0be51c6c.png"
+      },
+      "bytes": 47731,
+      "id": "25e8f8de6ba5d3e4b1e1836bfdf5ad304b2ce74e2a4407b33d5ea3cf0be51c6c",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:11:30.659Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "bbb85d4231dce1cfc81b20e2c9cf2c4e964b8030b12fa8444c2dfe4228b8cb02"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:55.171Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "bbb85d4231dce1cfc81b20e2c9cf2c4e964b8030b12fa8444c2dfe4228b8cb02",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a04-01/inputs/bbb85d4231dce1cfc81b20e2c9cf2c4e964b8030b12fa8444c2dfe4228b8cb02.json"
+          },
+          "bytes": 1326
+        }
+      }
+    },
+    {
+      "sha256": "4e299b05e56acf03d175d10860a69c06c7c59363007aef7792023992cfc5e519",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a04-01/revisions/4e299b05e56acf03d175d10860a69c06c7c59363007aef7792023992cfc5e519.png"
+      },
+      "bytes": 1837012,
+      "id": "4e299b05e56acf03d175d10860a69c06c7c59363007aef7792023992cfc5e519",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-302a7516b82d",
+      "createdAt": "2026-10-23T23:55:52.030Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "b65d20d6d818bbffdf29b530c925939ee75d9215cfd439b2b4098602fbf86fa0"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "旧図は食料費の円額で、本文のエンゲル係数（割合）と単位が違った。新画像の34.38％・26.52％と2024年の階級条件を原寸／320pxで確認。",
+        "reviewedAt": "2026-10-23T23:57:30.123Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "b65d20d6d818bbffdf29b530c925939ee75d9215cfd439b2b4098602fbf86fa0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a04-01/inputs/b65d20d6d818bbffdf29b530c925939ee75d9215cfd439b2b4098602fbf86fa0.json"
+          },
+          "bytes": 8275
+        },
+        "production": {
+          "id": "NCI-00181",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "302a7516b82da9c71392536857e8cfa0febc1725ef259571c77fcb40ef795fa0"
+        }
+      }
+    }
+  ]
+}

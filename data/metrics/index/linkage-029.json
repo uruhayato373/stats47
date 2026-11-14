@@ -488,7 +488,11 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:yamaguchi-food-culture",
+          "pageId": "blog:kagawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shimane-food-culture",
           "kind": "blog"
         },
         {
@@ -717,11 +721,15 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "blog:sugar-consumption-prefecture-gap",
+          "pageId": "blog:kagawa-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:yamaguchi-food-culture",
+          "pageId": "blog:shimane-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:sugar-consumption-prefecture-gap",
           "kind": "blog"
         },
         {
@@ -1919,6 +1927,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:textbook-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:supplementary-education-group-consumption-expenditure",
           "kind": "ranking"
         }
@@ -2252,15 +2264,19 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kagoshima-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:nara-food-culture",
+          "pageId": "blog:miyazaki-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:shiga-food-culture",
+          "pageId": "blog:nara-food-culture",
           "kind": "blog"
         },
         {
@@ -2269,10 +2285,6 @@
         },
         {
           "pageId": "blog:tokushima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:toyama-food-culture",
           "kind": "blog"
         },
         {
@@ -2317,7 +2329,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:kagoshima-food-culture",
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:miyazaki-food-culture",
           "kind": "blog"
         },
         {
@@ -2325,19 +2341,15 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:shiga-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:sweet-potato-expenditure-ranking",
           "kind": "blog"
         },
         {
-          "pageId": "blog:tokushima-food-culture",
+          "pageId": "blog:taro-consumption-quantity-prefecture-gap",
           "kind": "blog"
         },
         {
-          "pageId": "blog:toyama-food-culture",
+          "pageId": "blog:tokushima-food-culture",
           "kind": "blog"
         },
         {
@@ -2891,7 +2903,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:ishikawa-food-culture",
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {
@@ -2899,11 +2911,19 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:miyazaki-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:okinawa-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:saitama-food-culture",
+          "pageId": "blog:shimane-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamaguchi-food-culture",
           "kind": "blog"
         },
         {
@@ -3136,7 +3156,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:ishikawa-food-culture",
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {
@@ -3144,15 +3164,23 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:miyazaki-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:okinawa-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:saitama-food-culture",
+          "pageId": "blog:shimane-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:table-salt-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamaguchi-food-culture",
           "kind": "blog"
         },
         {
@@ -3228,10 +3256,7 @@
         "configHash": "36d29f720104fab1"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:tablet-ownership-multi-person-households-per-1000",
@@ -3357,19 +3382,15 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:miyazaki-food-culture",
+          "pageId": "blog:gifu-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kumamoto-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:niigata-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:shizuoka-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:toyama-food-culture",
           "kind": "blog"
         },
         {
@@ -3422,7 +3443,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:miyazaki-food-culture",
+          "pageId": "blog:gifu-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kumamoto-food-culture",
           "kind": "blog"
         },
         {
@@ -3430,15 +3455,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:shizuoka-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:taro-consumption-quantity-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:toyama-food-culture",
           "kind": "blog"
         },
         {
@@ -3522,10 +3539,7 @@
         "configHash": "aed32101664b4812"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:dual-income-household-ratio-vs-tatami-per-dwelling-owner",
@@ -3576,10 +3590,7 @@
         "configHash": "bdf28f96ad292bd5"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "municipality-ranking:tatami-per-dwelling-rented",
@@ -4888,10 +4899,7 @@
         "configHash": "beaea5c9e1b39d52"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:telephone-subscription-count-per-1000",
@@ -6097,10 +6105,7 @@
         "configHash": "06c4c10dd6255f22"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:tertiary-industry-employees-per-establishment",

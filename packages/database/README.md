@@ -400,5 +400,5 @@ db.close();
 
 ## 関連ドキュメント
 
-- **テーブル定義リファレンス**: [SCHEMA.md](./SCHEMA.md)
-- **シードスクリプト**: [scripts/README.md](./scripts/README.md) — seed スクリプトの仕様
+- **テーブル定義**: `src/schema/*.ts` (Drizzle の定義が正本。列・型・index はここを読む。写しの文書は持たない)
+- **シードスクリプト**: [seed/README.md](./seed/README.md) — seed スクリプトの仕様

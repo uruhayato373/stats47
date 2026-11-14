@@ -3,6 +3,7 @@ import { parseStatSeriesRefs, validateChartProps } from './registered-series-ref
 import type { CatalogChart, CatalogComponentType } from './types';
 import { getMetricConfig } from '../registry';
 import { buildRecipe } from '../recipe';
+import { MIN_TREND_YEARS } from '../display-semantics';
 
 export interface ChartDependencies {
   componentKey: string;
@@ -50,15 +51,33 @@ export function collectThemeDataDependenciesWithProvenance(catalogs: Record<stri
   }
   return { totalMetricRefs, distinctMetricRefs: [...metrics.values()].sort((a, b) => a.metricKey.localeCompare(b.metricKey)) };
 }
+/** 「推移」と題した図 (観測年が MIN_TREND_YEARS に満たない指標を描いていないか、live 監査が検査する対象) */
+export interface TrendChartMirror {
+  themeKey: string;
+  componentKey: string;
+  title: string;
+  metricKeys: string[];
+}
+export function collectTrendCharts(catalogs: Record<string, { charts: CatalogChart[] }>): TrendChartMirror[] {
+  const out: TrendChartMirror[] = [];
+  for (const [themeKey, catalog] of Object.entries(catalogs)) for (const chart of catalog.charts) {
+    if (!/推移/.test(chart.title)) continue;
+    const metricKeys = [...new Set(collectChartDependencies(chart).metricRefs.map((ref) => ref.metricKey))];
+    if (metricKeys.length > 0) out.push({ themeKey, componentKey: chart.componentKey, title: chart.title, metricKeys });
+  }
+  return out;
+}
 export interface ThemeDependencyMirror {
   generatedFrom: string;
   totalMetricRefs: number;
   distinctMetricRefs: number;
+  minTrendYears: number;
+  trendCharts: TrendChartMirror[];
   metrics: Array<MetricRefWithProvenance & { expectedUnit: string; expectedConfigHash: string }>;
 }
 export function buildThemeDependencyMirror(catalogs: Record<string, { charts: CatalogChart[] }>): ThemeDependencyMirror {
   const { distinctMetricRefs, totalMetricRefs } = collectThemeDataDependenciesWithProvenance(catalogs);
-  return { generatedFrom: 'collectThemeDataDependenciesWithProvenance(THEME_CATALOGS)', totalMetricRefs, distinctMetricRefs: distinctMetricRefs.length, metrics: distinctMetricRefs.map((ref) => {
+  return { generatedFrom: 'collectThemeDataDependenciesWithProvenance(THEME_CATALOGS)', totalMetricRefs, distinctMetricRefs: distinctMetricRefs.length, minTrendYears: MIN_TREND_YEARS, trendCharts: collectTrendCharts(catalogs), metrics: distinctMetricRefs.map((ref) => {
     const config = getMetricConfig(ref.metricKey);
     if (!config) throw new Error('Unregistered metric: ' + ref.metricKey);
     return { ...ref, expectedUnit: config.unit, expectedConfigHash: buildRecipe(config).configHash };

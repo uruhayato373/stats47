@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "data-packs-culture-demographics",
+  "production": {
+    "id": "NCI-00260",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

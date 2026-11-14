@@ -2,6 +2,8 @@
 
 import type { ReactNode } from "react";
 
+import { normalizeUnitsInText } from "@stats47/data-configs/unit";
+
 import type { AreaType } from "@/features/area";
 
 import { DataUsageCard } from "../DataUsageCard";
@@ -65,7 +67,7 @@ export function RankingPageContentSections({
         <>
             {dataNote && (
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                    {dataNote}
+                    {normalizeUnitsInText(dataNote)}
                 </p>
             )}
 

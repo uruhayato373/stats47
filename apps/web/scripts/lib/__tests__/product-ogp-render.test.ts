@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 

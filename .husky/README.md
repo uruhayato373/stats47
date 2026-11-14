@@ -9,6 +9,11 @@
 型・文書・コンテンツの条件付き検査は引き続きcommit hookが実行します。
 `npm audit` は依存manifest・lock変更時だけローカル実行し、PRと週次の `security-scan.yml` でも検査します。
 
+commit hook は終了時に、段ごとの所要時間を重い順に表示します (0.1 秒未満の段は 1 行にまとめます)。
+段は `apps/web/scripts/pre-commit-stage-timer.sh` の `stage "名前"` で切ります。検査を足すときは
+段も足してください。1 つの段で `node` / `npm run` / `npx` を 2 本起動すると
+`pre-commit-guard-paths.test.cjs` が落ちます。
+
 ## チェック項目
 
 コミット（`git commit`）時に自動的に実行される項目は以下の通りです。
@@ -57,3 +62,5 @@ git commit --no-verify -m "message"
 ## pre-push
 
 `pre-push` は変更に関係するテストだけを走らせる (`.claude/scripts/lib/pre-push-tests.mjs`)。全件は CI が持つ。CI では動かない。飛ばすときは `git push --no-verify`。
+
+`core.hooksPath` は本体の `.husky` の絶対パスなので、このフックは他の worktree の push でも動く。push する作業ツリーにスクリプトが無いとき (スクリプトを持たないブランチの worktree) は、何もせず通す。

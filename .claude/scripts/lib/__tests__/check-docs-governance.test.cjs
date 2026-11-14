@@ -12,6 +12,7 @@ const {
   inspectRepository,
   isIsoDate,
   isoWeek,
+  loadConfig,
   parseFrontmatter,
 } = require("../check-docs-governance.cjs");
 
@@ -447,4 +448,113 @@ test("related_backlog はカードの見出しで判定し、本文の言及だ�
   assert.ok(report.errors.some((item) => item.code === "DG042"), "本文の言及だけなら DG042 で落ちる");
   fs.writeFileSync(backlogPath, original);
   assert.ok(!inspectRepository({ root, config, now: "2026-07-30" }).errors.some((item) => item.code === "DG042"), "見出しがあれば通る");
+});
+
+test("backlog が 1 ファイルの上限に近づいたら DG085 で知らせ、余裕があるうちは出さない", (t) => {
+  const { root, config } = fixture(t);
+  const backlogBytes = Buffer.byteLength(fs.readFileSync(path.join(root, ".claude/todo/backlog.md"), "utf8"));
+  const withBudget = (maxFileBytes) => ({
+    ...config,
+    todo: { ...config.todo, sizeBudget: { maxFileBytes, warnFileRatio: 0.9, maxCardBytes: 100000 } },
+  });
+
+  // 上限の 9 割を超えている (上限をファイルの大きさちょうどにする)
+  const near = inspectRepository({ root, config: withBudget(backlogBytes), now: "2026-07-30" });
+  const warning = near.warnings.find((item) => item.code === "DG085");
+  assert.ok(warning, "上限に近いのに警告が出ない");
+  assert.match(warning.message, new RegExp(`${backlogBytes} バイト`));
+
+  // 上限がじゅうぶん大きければ出ない
+  const far = inspectRepository({ root, config: withBudget(backlogBytes * 10), now: "2026-07-30" });
+  assert.ok(!far.warnings.some((item) => item.code === "DG085"), "余裕があるのに警告が出た");
+
+  // 契約に大きさの予算が無いリポジトリでは検査しない
+  const none = inspectRepository({ root, config, now: "2026-07-30" });
+  assert.ok(!none.warnings.some((item) => item.code === "DG085" || item.code === "DG086"));
+});
+
+test("経緯を溜めて大きくなったカードを DG086 で名指しし、小さいカードは数えない", (t) => {
+  const { root, config } = fixture(t);
+  const backlogPath = path.join(root, ".claude/todo/backlog.md");
+  const original = fs.readFileSync(backlogPath, "utf8");
+  const budget = { ...config, todo: { ...config.todo, sizeBudget: { maxFileBytes: 10 ** 9, warnFileRatio: 0.9, maxCardBytes: 400 } } };
+
+  assert.ok(!inspectRepository({ root, config: budget, now: "2026-07-30" }).warnings.some((item) => item.code === "DG086"));
+
+  // DOCS-FEATURE-01 にだけ長い経緯を足す
+  const log = Array.from({ length: 12 }, (_, i) => `- **進み (2026-07-${String(i + 1).padStart(2, "0")})**: 経緯の記録を本文に書き足した。`).join("\n");
+  fs.writeFileSync(backlogPath, original.replace("- **完了条件**: testが通る。", `- **完了条件**: testが通る。\n${log}`));
+  const report = inspectRepository({ root, config: budget, now: "2026-07-30" });
+  const warning = report.warnings.find((item) => item.code === "DG086");
+  assert.ok(warning, "大きいカードがあるのに警告が出ない");
+  assert.match(warning.message, /カード 1 枚/);
+  assert.match(warning.message, /DOCS-FEATURE-01/);
+  assert.doesNotMatch(warning.message, /DOCS-INDICATOR-01/);
+});
+
+// ── 検査の外に溜まる置き場 (DG087〜089。2026-11-14 DOCS-GOVERNANCE-GAPS-01) ──
+const PLACEMENT = {
+  nestedAgentDirectories: { parents: ["apps", "packages"], name: ".claude" },
+  scriptsRoot: { directory: ".claude/scripts", allowedFiles: ["tsconfig.json"] },
+  codeAdjacentDocs: { roots: ["apps", "packages"], allowedUppercaseNames: ["README.md", "AGENTS.md", "CLAUDE.md"] },
+};
+
+function placementFixture(t) {
+  const { root, config } = fixture(t);
+  write(root, ".claude/scripts/tsconfig.json", "{}\n");
+  write(root, ".claude/scripts/lib/tool.cjs", "// 領域のディレクトリの中は問わない\n");
+  write(root, "apps/web/README.md", "# web\n");
+  write(root, "apps/web/AGENTS.md", "# agents\n");
+  write(root, "packages/kindle/manuscripts/00-intro.md", "# 原稿は設計文書ではない\n");
+  return { root, config: { ...config, placement: PLACEMENT } };
+}
+
+test("置き場の契約どおりのリポジトリは DG087〜089 を出さず、契約が無いリポジトリでは検査しない", (t) => {
+  const { root, config } = placementFixture(t);
+  const codes = (report) => report.findings.map((item) => item.code).filter((code) => /^DG08[789]$/.test(code));
+  assert.deepEqual(codes(inspectRepository({ root, config, now: "2026-07-30" })), []);
+
+  write(root, "apps/web/.claude/notes.md", "# 契約が無ければ見ない\n");
+  const { placement: _placement, ...withoutPlacement } = config;
+  assert.deepEqual(codes(inspectRepository({ root, config: withoutPlacement, now: "2026-07-30" })), []);
+});
+
+test("[mutation] apps/*/.claude/ にファイルを置くと DG087 で落ちる", (t) => {
+  const { root, config } = placementFixture(t);
+  write(root, "apps/web/.claude/skills/local/SKILL.md", "# アプリの下に置いた手順\n");
+  const report = inspectRepository({ root, config, now: "2026-07-30" });
+  const hit = report.errors.filter((item) => item.code === "DG087");
+  assert.deepEqual(hit.map((item) => item.file), ["apps/web/.claude/skills/local/SKILL.md"]);
+});
+
+test("[mutation] .claude/scripts/ の直下に新しいファイルを置くと DG088 で落ち、消したファイルの行が残っても落ちる", (t) => {
+  const { root, config } = placementFixture(t);
+  write(root, ".claude/scripts/one-off.mjs", "// 領域のディレクトリに入れていない\n");
+  const added = inspectRepository({ root, config, now: "2026-07-30" }).errors.filter((item) => item.code === "DG088");
+  assert.deepEqual(added.map((item) => item.file), [".claude/scripts/one-off.mjs"]);
+
+  fs.rmSync(path.join(root, ".claude/scripts/one-off.mjs"));
+  fs.rmSync(path.join(root, ".claude/scripts/tsconfig.json"));
+  const stale = inspectRepository({ root, config, now: "2026-07-30" }).errors.filter((item) => item.code === "DG088");
+  assert.deepEqual(stale.map((item) => item.file), [".claude/scripts/tsconfig.json"]);
+  assert.match(stale[0].message, /行も消す/);
+});
+
+test("[mutation] apps/・packages/ に README 以外の大文字名の Markdown (設計文書・計画・修正メモ) を置くと DG089 で落ちる", (t) => {
+  const { root, config } = placementFixture(t);
+  write(root, "packages/database/SCHEMA.md", "# 型の写し\n");
+  write(root, "apps/web/src/features/ranking/DARK_MODE_FIX.md", "# 済んだ修正の記録\n");
+  write(root, "apps/web/node_modules/dep/CHANGELOG.md", "# 依存の中は見ない\n");
+  const report = inspectRepository({ root, config, now: "2026-07-30" });
+  const hit = report.errors.filter((item) => item.code === "DG089").map((item) => item.file).sort();
+  assert.deepEqual(hit, ["apps/web/src/features/ranking/DARK_MODE_FIX.md", "packages/database/SCHEMA.md"]);
+});
+
+test("実リポジトリの機械契約が置き場の 3 検査を宣言している", () => {
+  const real = loadConfig(path.resolve(__dirname, "..", "..", "..", ".."));
+  assert.deepEqual(real.placement.nestedAgentDirectories, { parents: ["apps", "packages"], name: ".claude" });
+  assert.equal(real.placement.scriptsRoot.directory, ".claude/scripts");
+  // 直下に残してよいのは型検査の設定だけ。スクリプトは <領域>/ に置く (2026-11-14 に setup-memory-symlink.mjs を lib/ へ移した)
+  assert.deepEqual(real.placement.scriptsRoot.allowedFiles, ["tsconfig.checkjs.json", "tsconfig.json"]);
+  assert.deepEqual(real.placement.codeAdjacentDocs.roots, ["apps", "packages"]);
 });

@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-nfbdfd99fee1b",
+  "production": {
+    "id": "NCI-00489",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "映画館以外で映画鑑賞\n1位は東京都",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無地のテレビ画面とリモコン、無文字のDVDを描く。映像中の人物は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/nfbdfd99fee1b 2026-10-23公開API本文照合。記事題名「【2021年版】映画館以外での映画鑑賞をした人が多い県は？ 1位は東京都｜都道府県ランキング」。本文中の「東京都」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "242f32fbda51f6ae8e957af401c2dbb12abfa1688671d755c593b5c98648daa2",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nfbdfd99fee1b/revisions/242f32fbda51f6ae8e957af401c2dbb12abfa1688671d755c593b5c98648daa2.png"
+      },
+      "bytes": 40996,
+      "id": "242f32fbda51f6ae8e957af401c2dbb12abfa1688671d755c593b5c98648daa2",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:46.712Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312775360/rectangle_large_type_2_82b981d2980216c4bbf02677e1e24291.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "242f32fbda51f6ae8e957af401c2dbb12abfa1688671d755c593b5c98648daa2"
+      }
+    },
+    {
+      "sha256": "7389af2e863ab16886a3fa50e3b818ff9a1c20c6164692cea2ac2a30b8e2325a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nfbdfd99fee1b/revisions/7389af2e863ab16886a3fa50e3b818ff9a1c20c6164692cea2ac2a30b8e2325a.png"
+      },
+      "bytes": 123445,
+      "id": "7389af2e863ab16886a3fa50e3b818ff9a1c20c6164692cea2ac2a30b8e2325a",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:18:33.974Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "f225fbd05455f334b55e275fa5ac906185c7743e7336d726a121c8379d815185"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-home-movie/values.json",
+        "sourceSha256": "89f8777b53867aec03163ea2ca1260c09fdd7f57a47d585abdb653f98ee05478",
+        "input": {
+          "sha256": "f225fbd05455f334b55e275fa5ac906185c7743e7336d726a121c8379d815185",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-nfbdfd99fee1b/inputs/f225fbd05455f334b55e275fa5ac906185c7743e7336d726a121c8379d815185.json"
+          },
+          "bytes": 6682
+        }
+      }
+    },
+    {
+      "sha256": "37a056e587d44ef75bc6d315bdff9e334bad960163fa9b62f92821194e6dc0b9",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nfbdfd99fee1b/revisions/37a056e587d44ef75bc6d315bdff9e334bad960163fa9b62f92821194e6dc0b9.png"
+      },
+      "bytes": 1848642,
+      "id": "37a056e587d44ef75bc6d315bdff9e334bad960163fa9b62f92821194e6dc0b9",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-8d8bde04b612",
+      "createdAt": "2026-10-23T13:07:59.449Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "4e3278dbf6f45391a26fdccfec7a4c82075278ccdc39dd512b5c39c6f1cf4795"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T13:09:59.107Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "4e3278dbf6f45391a26fdccfec7a4c82075278ccdc39dd512b5c39c6f1cf4795",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-nfbdfd99fee1b/inputs/4e3278dbf6f45391a26fdccfec7a4c82075278ccdc39dd512b5c39c6f1cf4795.json"
+          },
+          "bytes": 8810
+        },
+        "production": {
+          "id": "NCI-00489",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "8d8bde04b612ea0df340537b66558e445de0f5b774a93449c55c8b431504131a"
+        }
+      }
+    }
+  ]
+}

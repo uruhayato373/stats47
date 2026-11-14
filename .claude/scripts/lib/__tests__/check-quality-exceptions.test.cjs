@@ -52,3 +52,12 @@ test('vitest 設定の拡張子変更 (.ts → .mts) は例外の追加と数え
   assert.ok(auditRegistryGrowth([{ ...renamed, count: 2 }], [before]).some((error) => error.includes('baseline increased')));
   assert.ok(auditRegistryGrowth([{ ...renamed, path: 'apps/web/other.config.mts' }], [before]).some((error) => error.includes('exception added')));
 });
+
+test('render-test-contract の拡張子変更 (.ts → .mts) は例外の追加と数えず、件数の増加は止める', () => {
+  const dir = 'packages/visualization/src/shared/__tests__/helpers';
+  const before = { ...sample, type: 'test-exclude', path: `${dir}/render-test-contract.ts`, detail: 'OPT_IN_RENDER_TEST_FILES', count: 9 };
+  const renamed = { ...before, path: `${dir}/render-test-contract.mts` };
+  assert.deepEqual(auditRegistryGrowth([renamed], [before]), []);
+  assert.ok(auditRegistryGrowth([{ ...renamed, count: 10 }], [before]).some((error) => error.includes('baseline increased')));
+  assert.ok(auditRegistryGrowth([{ ...renamed, path: `${dir}/other-contract.mts` }], [before]).some((error) => error.includes('exception added')));
+});

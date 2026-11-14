@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-prc-a50",
+  "production": {
+    "id": "NCI-00231",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "近畿7府県の\n1位と47位",
+      "subline": "全国で上位・下位に入る指標",
+      "subject": "色違いの無文字のノート7冊を棚に立てて並べ、手前に小さな金魚鉢ではなくたこ焼き用の舟皿を描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/nd94fc821b273 本文確認2026-11-04。近畿7府県の指標。滋賀県は男性の平均寿命、大阪府は製造業事業所数で1位。順位は良し悪しではない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "eaf5bf60aad9890a92b43288bdcdda2e4cdffc7da023c41fba7acb4fa6eae268",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a50/revisions/eaf5bf60aad9890a92b43288bdcdda2e4cdffc7da023c41fba7acb4fa6eae268.png"
+      },
+      "bytes": 41353,
+      "id": "eaf5bf60aad9890a92b43288bdcdda2e4cdffc7da023c41fba7acb4fa6eae268",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:10:38.863Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "163d4807404a6f058e1b25792b97f519c5458b0f496086451f975f049ace1496"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:14:06.817Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "163d4807404a6f058e1b25792b97f519c5458b0f496086451f975f049ace1496",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a50/inputs/163d4807404a6f058e1b25792b97f519c5458b0f496086451f975f049ace1496.json"
+          },
+          "bytes": 1186
+        }
+      }
+    },
+    {
+      "sha256": "6aac0df6495adf469086f74246a8f54fd255bcbd7ca083b3a882920247b7e138",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a50/revisions/6aac0df6495adf469086f74246a8f54fd255bcbd7ca083b3a882920247b7e138.png"
+      },
+      "bytes": 46886,
+      "id": "6aac0df6495adf469086f74246a8f54fd255bcbd7ca083b3a882920247b7e138",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:22:17.317Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324194821/rectangle_large_type_2_6479fc656458117569862a63b0bf3fe8.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "6aac0df6495adf469086f74246a8f54fd255bcbd7ca083b3a882920247b7e138"
+      }
+    },
+    {
+      "sha256": "04e2ccf7d2e39f06b7b0da3c91f711b0bcfeeb144ad75c19c56fada5f4aeb08a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a50/revisions/04e2ccf7d2e39f06b7b0da3c91f711b0bcfeeb144ad75c19c56fada5f4aeb08a.png"
+      },
+      "bytes": 1801739,
+      "id": "04e2ccf7d2e39f06b7b0da3c91f711b0bcfeeb144ad75c19c56fada5f4aeb08a",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-653a8718d7f2",
+      "createdAt": "2026-11-04T02:23:21.510Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "38a30f838f987385f6adc27cf432c7266f1fd255b622eaacc3854347aa10fdf7"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T02:24:00.610Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "38a30f838f987385f6adc27cf432c7266f1fd255b622eaacc3854347aa10fdf7",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a50/inputs/38a30f838f987385f6adc27cf432c7266f1fd255b622eaacc3854347aa10fdf7.json"
+          },
+          "bytes": 8251
+        },
+        "production": {
+          "id": "NCI-00231",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "653a8718d7f2ebff9d857bc58339d21ca27f898595f9134063958c311b171009"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-electricity-generation-capacity",
+  "production": {
+    "id": "NCI-00057",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "発電電力量\n多い県は千葉県",
+      "subline": "2023年・MWhで比較",
+      "subject": "1280×670相当の横長完成カバー。右側に文字・数字のないシンプルな発電所の模型を1点。煙や特定電源・送電先を示す図は描かない。電力消費や設備容量と取り違えない。 大きな単一モチーフを描き、人物・顔・手・動物・キャラクター・マスコットは一切描かない。文字は指定全文のみ。上部にカテゴリ名、左に見出し、下に補足を太い帯で配置。幅320pxでも全文読める大きさに。",
+      "evidence": "https://note.com/stats47/n/n5b3dbb6c7cef 2026-10-23公開API本文照合。千葉県80,635,294MWhで1位、埼玉県537,679MWhで47位。2023年の県内発電設備による発電電力量。 カバーは数値・因果を追加せず、対象年・単位・1位だけを示す。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "a12277e1d6176c3d9d3895dabff0de54ebec6acf5a532d334d794c6243daef57",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-electricity-generation-capacity/revisions/a12277e1d6176c3d9d3895dabff0de54ebec6acf5a532d334d794c6243daef57.png"
+      },
+      "bytes": 30907,
+      "id": "a12277e1d6176c3d9d3895dabff0de54ebec6acf5a532d334d794c6243daef57",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:09.969Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312770900/rectangle_large_type_2_4017538a13146a9c5024e317fbf7bae3.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "a12277e1d6176c3d9d3895dabff0de54ebec6acf5a532d334d794c6243daef57"
+      }
+    },
+    {
+      "sha256": "c5907a578ebd2a8928d90fbfbfc9a3e13ab1e9ce23b551b986e5d1b80219ca4f",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-electricity-generation-capacity/revisions/c5907a578ebd2a8928d90fbfbfc9a3e13ab1e9ce23b551b986e5d1b80219ca4f.png"
+      },
+      "bytes": 112233,
+      "id": "c5907a578ebd2a8928d90fbfbfc9a3e13ab1e9ce23b551b986e5d1b80219ca4f",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:13:25.585Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "3aef386365457edefc1c7c46f0f227ec8b2c86497bd51c8d38bae33b483e7e07"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.840Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/electricity-generation-capacity/values.json",
+        "sourceSha256": "c337678ff4eb7de8ceb2f75ff00c4c4ba081e7027aa4ab48c792d0294285664d",
+        "input": {
+          "sha256": "3aef386365457edefc1c7c46f0f227ec8b2c86497bd51c8d38bae33b483e7e07",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-electricity-generation-capacity/inputs/3aef386365457edefc1c7c46f0f227ec8b2c86497bd51c8d38bae33b483e7e07.json"
+          },
+          "bytes": 7628
+        }
+      }
+    },
+    {
+      "sha256": "6a99c1aa6033c160c0c5da7480b1f95cb97e4e1537b3d77f45d962f452925558",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-electricity-generation-capacity/revisions/6a99c1aa6033c160c0c5da7480b1f95cb97e4e1537b3d77f45d962f452925558.png"
+      },
+      "bytes": 1565396,
+      "id": "6a99c1aa6033c160c0c5da7480b1f95cb97e4e1537b3d77f45d962f452925558",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-d093135b767a",
+      "createdAt": "2026-10-23T10:12:32.367Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "8f5cb4566c9f2e47e49ace281a07b92f595203313f7bb9de5f4428ba349d3569"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T10:14:36.473Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "8f5cb4566c9f2e47e49ace281a07b92f595203313f7bb9de5f4428ba349d3569",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-electricity-generation-capacity/inputs/8f5cb4566c9f2e47e49ace281a07b92f595203313f7bb9de5f4428ba349d3569.json"
+          },
+          "bytes": 8786
+        },
+        "production": {
+          "id": "NCI-00057",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "d093135b767a3b13ce2c5017b8d03d78be757083b64fb978df648d72efd15253"
+        }
+      }
+    }
+  ]
+}

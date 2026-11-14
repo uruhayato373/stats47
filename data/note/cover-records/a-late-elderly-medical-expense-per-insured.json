@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-late-elderly-medical-expense-per-insured",
+  "production": {
+    "id": "NCI-00112",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "後期高齢者医療費\n多い県は福岡県",
+      "subline": "2023年・1人あたり年額",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に文字のない医療用聴診器を1点。人物・患者・医療の質や健康度を暗示する記号は描かない。 左に太い見出し、下に補足の太い帯。文字は指定全文のみ。幅320pxでも全行が明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・表彰台・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/ncd0aea7cd435 2026-10-23公開API本文照合。福岡県は1,195,147円で1位。後期高齢者医療制度の被保険者1人あたり年額。 カバーは数値・因果を追加せず、対象年・単位・首位県だけを示す。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "bc5684db52a86e033d31e171efa62bacdb0f4a401f017b2dff7bedd1c8e4f7ab",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-late-elderly-medical-expense-per-insured/revisions/bc5684db52a86e033d31e171efa62bacdb0f4a401f017b2dff7bedd1c8e4f7ab.png"
+      },
+      "bytes": 57052,
+      "id": "bc5684db52a86e033d31e171efa62bacdb0f4a401f017b2dff7bedd1c8e4f7ab",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:11.783Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312772015/rectangle_large_type_2_09a50714ec66ed761f77976cb08f8e6d.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "bc5684db52a86e033d31e171efa62bacdb0f4a401f017b2dff7bedd1c8e4f7ab"
+      }
+    },
+    {
+      "sha256": "37836c20cb0f82da4d0f0bfc14486b510103a59038459cbba7a6af7944fecc0b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-late-elderly-medical-expense-per-insured/revisions/37836c20cb0f82da4d0f0bfc14486b510103a59038459cbba7a6af7944fecc0b.png"
+      },
+      "bytes": 114726,
+      "id": "37836c20cb0f82da4d0f0bfc14486b510103a59038459cbba7a6af7944fecc0b",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:13:34.420Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "d1c062b14eb5696cb37549d0bb47ee8f767e4b9ac3a1c5d9bd3907e9a228d4b8"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.840Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/late-elderly-medical-expense-per-insured/values.json",
+        "sourceSha256": "ea79b55a0131cad0126282d7908238bbce0e8892f755c3caaa3babb54a493572",
+        "input": {
+          "sha256": "d1c062b14eb5696cb37549d0bb47ee8f767e4b9ac3a1c5d9bd3907e9a228d4b8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-late-elderly-medical-expense-per-insured/inputs/d1c062b14eb5696cb37549d0bb47ee8f767e4b9ac3a1c5d9bd3907e9a228d4b8.json"
+          },
+          "bytes": 7662
+        }
+      }
+    },
+    {
+      "sha256": "0a8ce05bd650709be883be640be2d7c7a1cc70c5f12bafb648d9befef3e39f98",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-late-elderly-medical-expense-per-insured/revisions/0a8ce05bd650709be883be640be2d7c7a1cc70c5f12bafb648d9befef3e39f98.png"
+      },
+      "bytes": 1645359,
+      "id": "0a8ce05bd650709be883be640be2d7c7a1cc70c5f12bafb648d9befef3e39f98",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-c381282e705f",
+      "createdAt": "2026-10-23T10:42:41.274Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "1f6bc2abbe359470e9495dbcaad917022a81d2af0afe30549d4d0d412981c955"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T10:44:28.555Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "1f6bc2abbe359470e9495dbcaad917022a81d2af0afe30549d4d0d412981c955",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-late-elderly-medical-expense-per-insured/inputs/1f6bc2abbe359470e9495dbcaad917022a81d2af0afe30549d4d0d412981c955.json"
+          },
+          "bytes": 8528
+        },
+        "production": {
+          "id": "NCI-00112",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "c381282e705f924a847d80ce4f5cb3b1d782f353f928cdcbb32def9c1e5d0826"
+        }
+      }
+    }
+  ]
+}

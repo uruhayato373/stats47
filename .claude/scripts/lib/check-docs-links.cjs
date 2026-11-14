@@ -15,12 +15,15 @@
  *
  * 検出対象: ルート相対 `docs/<...>.md` 参照 (agent が読む主要な参照形式)。
  *           日本語ディレクトリ名 (01_技術設計 等) に対応。#anchor は除いてファイル存在を見る。
+ *           加えて、Markdown 文書 (.md / .mdc) の `[text](path.md)` で書かれた相対リンクを、
+ *           書かれた文書のディレクトリを基準に解決して実在を確かめる (http(s)・mailto・#anchor・
+ *           ルート絶対 `/…`・コードブロック内は対象外)。解決後のリポジトリ相対パスを ref として扱う。
  */
 
 const fs = require("fs");
 const path = require("path");
 
-const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..", "..");
+const ROOT = process.env.STATS47_SCAN_ROOT || path.resolve(__dirname, "..", "..", "..");
 const args = process.argv.slice(2);
 const has = (f) => args.includes(f);
 const writeBaselineIndex = args.indexOf("--write-baseline");
@@ -69,6 +72,9 @@ function walk(dir, out = []) {
       if (rel(p) === ".claude/worktrees") continue;
       walk(p, out);
     } else {
+      // symlink は実体を実体の場所で走査する。リンク側のパスを基準に相対リンクを解決すると、
+      // 実体の書き手が意図した基準とずれて誤検知する (.claude/design-system/SSOT.md → docs/01_技術設計/04_…md)。
+      if (e.isSymbolicLink()) continue;
       // ガードの baseline ファイル群は「finding 行内容の引用」であってリンク参照元ではない
       // (maintenance-debt baseline v2 が行内容に旧 docs パス文字列を含み誤検知 — 2026-07-14)
       if (/-baseline\.json$/.test(e.name)) continue;
@@ -124,15 +130,43 @@ const STAT_CACHE = process.env.DOCS_LINKS_CACHE || path.join(ROOT, ".local", "do
 let statCache = {};
 try {
   const parsed = JSON.parse(fs.readFileSync(STAT_CACHE, "utf8"));
-  if (parsed && parsed.version === 1 && parsed.entries) statCache = parsed.entries;
+  if (parsed && parsed.version === 2 && parsed.entries) statCache = parsed.entries;
 } catch { /* 初回 or 破損 */ }
 const nextCache = {};
-function extractRefs(text) {
+// Markdown のインラインリンク `[text](target)` の target。`<a b.md>` 形式と `"title"` 付きに対応。
+const MD_LINK_RE = /\[[^\]\n]*\]\(\s*(<[^>\n]+>|[^)\s]+)(?:\s+(?:"[^"\n]*"|'[^'\n]*'))?\s*\)/g;
+// コード例の中のリンクは実リンクではない。fenced block と inline code を空白に置き換えて除く。
+const stripCode = (text) =>
+  text
+    .replace(/^( {0,3})(```|~~~)[^\n]*\n[\s\S]*?(?:^ {0,3}\2[^\n]*$|(?![\s\S]))/gm, "")
+    .replace(/`[^`\n]*`/g, "");
+function extractRelativeLinks(text, relativePath) {
+  const refs = [];
+  const baseDir = path.posix.dirname(relativePath);
+  for (const match of stripCode(text).matchAll(MD_LINK_RE)) {
+    let target = match[1].replace(/^<|>$/g, "");
+    target = target.split("#")[0].split("?")[0];
+    if (!target.toLowerCase().endsWith(".md")) continue;
+    if (/^[a-z][a-z0-9+.-]*:/i.test(target) || target.startsWith("/") || target.startsWith("//")) continue;
+    try { target = decodeURI(target); } catch { /* そのまま使う */ }
+    const resolved = path.posix.normalize(path.posix.join(baseDir, target));
+    if (resolved.startsWith("../") || resolved === "..") continue; // リポジトリ外
+    if (isPlaceholder(resolved)) continue;
+    refs.push(resolved);
+  }
+  return refs;
+}
+function extractRefs(text, relativePath) {
   const refs = [];
   for (const match of text.matchAll(DOCS_REF_RE)) {
     if (isEmbeddedDocsSegment(text, match.index)) continue;
     if (isPlaceholder(match[0])) continue;
     refs.push(match[0]);
+  }
+  if (/\.(md|mdc)$/.test(relativePath)) {
+    for (const r of extractRelativeLinks(text, relativePath)) {
+      if (!refs.includes(r)) refs.push(r);
+    }
   }
   return refs;
 }
@@ -149,7 +183,7 @@ for (const f of scanFiles) {
   let st;
   try { st = fs.statSync(f); } catch { continue; }
   const hit = statCache[relativePath];
-  const refs = hit && hit.size === st.size && hit.mtimeMs === st.mtimeMs ? hit.refs : extractRefs(readSafe(f));
+  const refs = hit && hit.size === st.size && hit.mtimeMs === st.mtimeMs ? hit.refs : extractRefs(readSafe(f), relativePath);
   nextCache[relativePath] = { size: st.size, mtimeMs: st.mtimeMs, refs };
   for (const m of refs) {
     if (!refMap.has(m)) refMap.set(m, new Set());
@@ -158,7 +192,7 @@ for (const f of scanFiles) {
 }
 try {
   fs.mkdirSync(path.dirname(STAT_CACHE), { recursive: true });
-  fs.writeFileSync(STAT_CACHE, JSON.stringify({ version: 1, entries: nextCache }));
+  fs.writeFileSync(STAT_CACHE, JSON.stringify({ version: 2, entries: nextCache }));
 } catch { /* cache は任意 */ }
 
 // ── broken 参照検出 ───────────────────────────────────────────

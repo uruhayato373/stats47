@@ -144,7 +144,7 @@ npm run admin  # http://127.0.0.1:4747/content/note
 note記事の表紙は全カテゴリ・新規・差し替えとも `/image-prompt --use-case note-header` の専用経路を使う。
 Claudeは描画せず、記事のコピー・題材・根拠を準備し、Codex built-in imagegenへ文字込み生成を委譲する。
 使えない場合は生成待ちで止め、SVG/Remotion/Satori等による代作はしない。
-方針は `data/note/cover-policies.json`、制作ID・候補・採用は `data/note/cover-assets.json`。
+方針は `data/note/cover-policies.json`、候補・採用の参照は `data/note/cover-assets.json`、制作IDと版の記録は記事ごとの `data/note/cover-records/<key>.json`。
 元画像・完成版・実際のprompt・原寸/320px目視確認はprivate R2へ保管する。
 新記事登録後の `generate-note-catalog.ts --apply` は制作IDも同期する。公開時は `materialize-cover.mjs` の現行仕様・採用版検査を通す。
 

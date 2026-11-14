@@ -19,7 +19,7 @@
 - [permission grant owner only](feedback_permission_grant_owner_only.md) — GA4/GCP の権限付与は最後をオーナーへ
 
 ## 事業・収益化
-- [monetization contract](project_monetization_contract.md) — AdSense 再開・NSM は週次収益・本線は行政実務向け商品
+- [monetization contract](project_monetization_contract.md) — AdSense の現行と口座・本線は行政実務向け商品。ほかは正本への参照
 - [affiliate strategy](affiliate-strategy.md) — 広告の停止・文脈・重複・可視 1 秒の検証
 - [business plan adaptation](project_business_plan_adaptation_contract.md) — 外部事業計画は 25 章の適合差分で取り込む
 - [product ledger](project_product_ledger.md) — 商品の判断・価格実験の台帳。12-30 判定まで価格固定
@@ -107,7 +107,7 @@
 ## ブログ・ランキング解説
 - [blog publish cloud first](project_blog_publish_cloud_first.md) — 公開は publish-blog.yml、直列ディスパッチ
 - [blog auto publish reconcile](project_blog_auto_publish_reconcile_limits.md) — 公開の skip と停止の条件
-- [bulk blog publish isr 404](feedback_bulk_blog_publish_isr_404.md) — 一括公開で ISR 404 が残る
+- [bulk blog publish isr 404](feedback_bulk_blog_publish_isr_404.md)・[blog revise isr stale entry](feedback_blog_revise_isr_stale_entry.md) — 一括公開の ISR 404 / 改稿の公開前に本番ページを取得しない
 - [blog remediation loop](project_blog_remediation_loop.md) — 品質是正の順は remediation-queue
 - [blog mass rewrite lessons](project_blog_mass_rewrite_lessons.md) — 大量リライトは 15〜20 本ずつ
 - [blog brushup risk](project_blog_brushup_risk_2026_05_25.md) — 自動 brushup は本文数値の突合が要る
@@ -124,7 +124,6 @@
 
 ## SNS・note
 - [sns reorg](project_sns_reorg_2026_07.md) — SNS の正典と投稿台帳。YouTube は手動 pilot
-- [sns 10k roadmap](project_sns_10k_roadmap.md) — IG 10K 戦略
 - [sns growth emotion themes](feedback_sns_growth_emotion_themes.md) — 伸びは感情喚起。信頼性で差別化
 - [sns competitor search](feedback_sns_competitor_search.md) — 競合検索はテーマ別の名乗りも
 - [sns gallery console](project_sns_gallery_and_ig_cron_fix.md) — 管理コンソール npm run admin
@@ -135,7 +134,7 @@
 - [x post url integrity](feedback_x_post_url_integrity.md) — posted 判定は status URL と本文一致で
 - [x scheduled bulk delete](feedback_x_scheduled_bulk_delete.md) — X 予約の一括削除は残 0 まで繰り返す
 - [publish x ui](project_publish_x_ui_2026_04.md) — publish-x の UI 対応
-- [instagram paused](project_instagram_paused_2026_10_27.md) — IG 自動投稿は停止中。勝手に enable しない
+- [instagram paused](project_instagram_paused_2026_10_27.md) — IG 自動投稿は停止中。勝手に enable しない。[IG 10K 戦略](project_sns_10k_roadmap.md) も停止中は実行しない
 - [instagram graph api](project_instagram_graph_api_setup.md) — IG Graph API の設定
 - [note article ledger](project_note_article_ledger.md) — note 記事は台帳 + R2
 - [note image assets](project_note_image_assets_contract.md) — note 画像の契約

@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "excel-domain-comparison",
+  "production": {
+    "id": "NCI-00271",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

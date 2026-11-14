@@ -54,6 +54,7 @@ node .claude/scripts/estat/measure-expansion-impact.mjs [--week YYYY-Www]
 
 - 生成後: `npm run build:registry` + `npm run validate:config` + `npm run validate:years` (@stats47/data-configs)。error 0 必須。
 - key: 英語 kebab (SEO)。GONE 衝突・dup-title (lint は括弧内全除去で正規化) は gen-ssds-configs が skip。
+- 年の区切り (`yearFormat`) は gen-ssds-configs が e-Stat の定義の期間から決める。決まらない spec は書かずに exit 1 で止まるので、調査の年の呼び方を一次資料で確かめて `data/estat/ssds-year-format/decisions.json` に足す (`--dry-run` で書かずに確認できる。検査: `npm run estat:ssds-year-format:check`、規約: metric-config-standards.md「SSDS の `yearFormat`」)。
 
 ## 関連
 

@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "ppt-healthcare-education-deck",
+  "production": {
+    "id": "NCI-00352",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

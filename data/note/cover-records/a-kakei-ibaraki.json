@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-kakei-ibaraki",
+  "production": {
+    "id": "NCI-00073",
+    "policyId": "NCP-002",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "茨城県の家計\n交通・通信に注目",
+      "subline": "水戸市・2024年\n二人以上の世帯",
+      "subject": "添付は茨城県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に完全に無人の小さな自動車の模型を小さく1点だけ。車両や家の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+      "evidence": "https://note.com/stats47/n/n65d95575f7a5 2026-10-23公開API本文照合。水戸市の2024年・二人以上の世帯の家計調査。交通・通信1.28倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は茨城県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は水戸市であり県全域の観測図ではない。人物・キャラクターなし。",
+      "dataScope": {
+        "place": "水戸市",
+        "year": "2024",
+        "households": "二人以上の世帯"
+      }
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "2187c396348b62095aa9c38e3408c937afbf8005ab9ea379557dec28834427cc",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-ibaraki/revisions/2187c396348b62095aa9c38e3408c937afbf8005ab9ea379557dec28834427cc.png"
+      },
+      "bytes": 42967,
+      "id": "2187c396348b62095aa9c38e3408c937afbf8005ab9ea379557dec28834427cc",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:02.375Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312771253/rectangle_large_type_2_b218d10b8ed0e0286c0292248c86b2ce.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "2187c396348b62095aa9c38e3408c937afbf8005ab9ea379557dec28834427cc"
+      }
+    },
+    {
+      "sha256": "a07e8765921137f972cf53ee25c142d169b270d6c4e364db2521a8f29a5dc902",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-ibaraki/revisions/a07e8765921137f972cf53ee25c142d169b270d6c4e364db2521a8f29a5dc902.png"
+      },
+      "bytes": 102276,
+      "id": "a07e8765921137f972cf53ee25c142d169b270d6c4e364db2521a8f29a5dc902",
+      "kind": "candidate",
+      "version": "2026-10-02-household-r1",
+      "createdAt": "2026-10-02T03:18:02.457Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "83b34e51d9d13346bde97603a336d4c356406fe0d032da40f07cd95b9f7c9ea5"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+        "reviewedAt": "2026-10-02T05:27:41.112Z"
+      },
+      "provenance": {
+        "renderer": "bold-note-cover",
+        "sourceUrl": "https://storage.stats47.jp/app/stats/housing-expenditure-total/values.json",
+        "sourceSha256": "5d5e5bf90081c0d39a47f286cb71c2134fdff0c4142931100f0756859e788672"
+      }
+    },
+    {
+      "sha256": "c2ab44032535a30089dd4c189acbb1fde8ca055fb49ba00a47255b54ebf5c856",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-ibaraki/revisions/c2ab44032535a30089dd4c189acbb1fde8ca055fb49ba00a47255b54ebf5c856.png"
+      },
+      "bytes": 97568,
+      "id": "c2ab44032535a30089dd4c189acbb1fde8ca055fb49ba00a47255b54ebf5c856",
+      "kind": "r2-archive",
+      "version": "legacy-r2-import-2026-10-02",
+      "createdAt": "2026-10-02T03:28:35.790Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Legacy R2 asset preserved; not adopted for note",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "legacy-public-r2",
+        "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-ibaraki/images/cover-1280x670.png",
+        "sourceSha256": "c2ab44032535a30089dd4c189acbb1fde8ca055fb49ba00a47255b54ebf5c856"
+      }
+    },
+    {
+      "sha256": "41bde77aab367781acd1e866a828a671d65e7004411d6f3b7620159972013426",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-ibaraki/revisions/41bde77aab367781acd1e866a828a671d65e7004411d6f3b7620159972013426.png"
+      },
+      "bytes": 1646904,
+      "id": "41bde77aab367781acd1e866a828a671d65e7004411d6f3b7620159972013426",
+      "kind": "candidate",
+      "version": "pop-NCP-002-v3-e563e2703e4c",
+      "createdAt": "2026-10-23T09:31:50.316Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "0e53d60e0f0c21baced9273b42d19c63af170c9db6409bc96ad90cdda6336785"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "本文の水戸市・2024年・二人以上の世帯と県輪郭、全掲載文字を原寸/320pxで確認。新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T09:34:19.893Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "0e53d60e0f0c21baced9273b42d19c63af170c9db6409bc96ad90cdda6336785",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-ibaraki/inputs/0e53d60e0f0c21baced9273b42d19c63af170c9db6409bc96ad90cdda6336785.json"
+          },
+          "bytes": 13235
+        },
+        "production": {
+          "id": "NCI-00073",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "e563e2703e4c66dfe4ef1dd9c07e0d8615c2ee1b095e565371487aa40be19001"
+        }
+      }
+    }
+  ]
+}

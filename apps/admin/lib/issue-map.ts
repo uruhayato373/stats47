@@ -225,3 +225,67 @@ export function buildIssueMap(spec: IssueMapSpec, index: LedgerIndex, contentTyp
 }
 
 export type IssueMapBuilt = ReturnType<typeof buildIssueMap>;
+
+/** オーナー目標の AdSense 月額 (マーケティング戦略「広告収益との換算」) */
+export const MONTHLY_AD_REVENUE_TARGET_YEN = 10_000;
+/** KPI `site-pageviews`・`ad-yield` の窓は 28 日。月額は 28/30 で窓へ直す (同じ節の T2・T3 のゲートと同じ換算) */
+const KPI_WINDOW_DAYS = 28;
+const MONTH_DAYS = 30;
+const PV_PER_YIELD_UNIT = 1000;
+
+/** KPI ツリーの節のうち、要る PV の計算に使う部分 */
+export interface KpiReading {
+  id: string;
+  value: string | null;
+  target?: { value: number; dueWeek: string } | null;
+}
+export interface RequiredPvBar {
+  key: "current" | "target" | "required";
+  label: string;
+  pv: number;
+}
+export interface RequiredPv {
+  /** 円 / 1,000 GA4 Japan PV */
+  adYield: number;
+  /** どれも 28 日の PV */
+  currentPv: number;
+  requiredPv: number;
+  /** 要る PV が今の何倍か (小数 1 桁) */
+  multiple: number;
+  /** KPI `site-pageviews` の目標 (あれば) */
+  target: { value: number; dueWeek: string } | null;
+  /** 棒の名前は幅 375px でも 3 本とも軸に出る長さにする (長いと軸の目盛りが間引かれる) */
+  bars: RequiredPvBar[];
+}
+
+const positive = (value: string | null | undefined) => {
+  const n = value == null || value === "" ? Number.NaN : Number(value);
+  return Number.isFinite(n) && n > 0 ? n : null;
+};
+
+/**
+ * 月 ¥1 万の広告収益に要る 28 日 PV。効率は台帳に写さず KPI `ad-yield` から読む。
+ * `ad-yield` か `site-pageviews` に値が無いあいだは null を返し、画面はグラフを出さない (概算の効率で描かない)。
+ */
+export function buildRequiredPv(nodes: KpiReading[]): RequiredPv | null {
+  const pv = nodes.find((n) => n.id === "site-pageviews");
+  const adYield = positive(nodes.find((n) => n.id === "ad-yield")?.value);
+  const currentPv = positive(pv?.value);
+  if (adYield == null || currentPv == null) return null;
+
+  const windowYen = (MONTHLY_AD_REVENUE_TARGET_YEN * KPI_WINDOW_DAYS) / MONTH_DAYS;
+  const requiredPv = Math.round((windowYen / adYield) * PV_PER_YIELD_UNIT);
+  const target = pv?.target ?? null;
+  return {
+    adYield,
+    currentPv,
+    requiredPv,
+    multiple: Math.round((requiredPv / currentPv) * 10) / 10,
+    target,
+    bars: [
+      { key: "current", label: "実績", pv: currentPv },
+      ...(target ? [{ key: "target" as const, label: "目標", pv: target.value }] : []),
+      { key: "required", label: "月¥1万", pv: requiredPv },
+    ],
+  };
+}

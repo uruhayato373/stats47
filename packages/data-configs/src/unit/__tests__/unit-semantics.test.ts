@@ -6,6 +6,9 @@
  * 桁違いの値が「一致」と判定され、監査が全 PASS になって意味を失う
  * (2026-08-12 に書籍監査・ブログ factual-check の両方で実際に起きた)。
  */
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
+
 import { describe, expect, it } from "vitest";
 import {
   KNOWN_UNIT_SAMPLES,
@@ -183,6 +186,34 @@ describe("語彙カバレッジ", () => {
   });
 });
 
+describe("語彙 — 熱量 (ジュール) と総トン数 (UNIT-VOCAB-LARGE-UNPARSED-01)", () => {
+  it("TJ・GJ・MJ を熱量として読み、ジュールの中だけで換算する", () => {
+    expect(parseUnit("TJ")).toMatchObject({ dimension: "energy", baseUnit: "J", scaleExponent: 12 });
+    expect(parseUnit("GJ")).toMatchObject({ dimension: "energy", baseUnit: "J", scaleExponent: 9 });
+    // 都市ガス販売量 (city-gas-sales-volume) の単位。全角のまま入っている。
+    expect(parseUnit("万ＭＪ")).toMatchObject({ dimension: "energy", baseUnit: "J", scaleExponent: 10 });
+    expect(conversionFactor("TJ", "GJ")).toBe(1000);
+    expect(conversionFactor("万MJ", "TJ")).toBe(0.01);
+  });
+
+  it("★ジュールとワット時は 3,600 倍の関係で 10 の累乗にならないので換算しない", () => {
+    expect(conversionFactor("TJ", "MWh")).toBeNull();
+    expect(conversionFactor("kWh", "MJ")).toBeNull();
+  });
+
+  it("★SI 接頭辞の大小文字を畳まない (mJ をメガジュールと読まない)", () => {
+    expect(parseUnit("mJ").dimension).toBeNull();
+    expect(parseUnit("tj").dimension).toBeNull();
+  });
+
+  it("★総トンは船の容積の単位で、重さのトンと換算しない", () => {
+    expect(parseUnit("総トン")).toMatchObject({ dimension: "gross-tonnage", baseUnit: "総トン", scaleExponent: 0 });
+    expect(conversionFactor("万総トン", "総トン")).toBe(10_000);
+    expect(conversionFactor("総トン", "トン")).toBeNull();
+    expect(conversionFactor("総トン", "t")).toBeNull();
+  });
+});
+
 describe("scalePrefixMultiplier — 本文表記の接頭辞", () => {
   it("接頭辞 1 語を倍率にする", () => {
     expect(scalePrefixMultiplier("千")).toBe(1000);
@@ -226,5 +257,23 @@ describe("unitScaleMultiplier", () => {
 
   it("解釈できなければ null (1 にフォールバックしない)", () => {
     expect(unitScaleMultiplier("学級･講座")).toBeNull();
+  });
+});
+
+describe("基底単位の表は同じ表記を二重に持たない", () => {
+  // 先に書いた行が後の行を隠すので、同じ表記の 2 行目は到達しない (kg/m2 が body-mass-index と bmi で重なっていた)。
+  // matchBaseUnit は大文字小文字ゆれも畳んで引くので、重なりも小文字で数える。
+  const source = readFileSync(resolve(__dirname, "../unit-semantics.ts"), "utf8");
+  const table = source.slice(source.indexOf("const BASE_UNITS"), source.indexOf("];", source.indexOf("const BASE_UNITS")));
+  const tokens = [...table.matchAll(/^\s*\["([^"]+)",\s*"[^"]+"\],/gm)].map((match) => match[1].toLowerCase());
+
+  it("表を読み取れている (空振り防止)", () => {
+    expect(tokens.length).toBeGreaterThan(50);
+    expect(tokens).toContain("kg/m2");
+  });
+
+  it("どの表記も 1 回だけ登録されている", () => {
+    const duplicated = tokens.filter((token, index) => tokens.indexOf(token) !== index);
+    expect(duplicated).toEqual([]);
   });
 });

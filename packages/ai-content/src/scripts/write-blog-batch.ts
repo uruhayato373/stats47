@@ -178,7 +178,7 @@ function importResearch(candidate: RankedTopic): boolean {
     const question =
       `「${candidate.topic.label}」について、都道府県差の背景・関連する制度・白書での扱いを、` +
       "資料名と章を添えて箇条書きで教えてください。数値は不要です。";
-    const r = spawnSync("node", [".claude/scripts/notebooklm-cross-query.mjs", "--notebooks", NOTEBOOK, question], {
+    const r = spawnSync("node", [".claude/scripts/notebooklm/notebooklm-cross-query.mjs", "--notebooks", NOTEBOOK, question], {
       cwd: PROJECT_ROOT,
       encoding: "utf8",
     });

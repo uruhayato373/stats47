@@ -1,3 +1,4 @@
+// @vitest-environment node
 /**
  * ネイティブ枠 (NativeAffiliateRow) と縦長クリエイティブの分離契約。
  *

@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n279776fbbbb1",
+  "production": {
+    "id": "NCI-00397",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "サイクリングをした人\n1位は東京都",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人の整備された自転車道に駐めた無地の自転車を描く。人・動物・地図は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n279776fbbbb1 2026-10-23公開API本文照合。記事題名「【2021年版】サイクリングをした人が多い県は？ 1位は東京都｜都道府県ランキング」。本文中の「東京都」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "fcce8025ed2b4a3a9198dcc5e78709767be46697a40976f94829584b1110c208",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n279776fbbbb1/revisions/fcce8025ed2b4a3a9198dcc5e78709767be46697a40976f94829584b1110c208.png"
+      },
+      "bytes": 65810,
+      "id": "fcce8025ed2b4a3a9198dcc5e78709767be46697a40976f94829584b1110c208",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:55.912Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312773747/rectangle_large_type_2_78d24ac31b2a79d30ca7b4a06c08bc8f.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "fcce8025ed2b4a3a9198dcc5e78709767be46697a40976f94829584b1110c208"
+      }
+    },
+    {
+      "sha256": "4be73b5e2bdd083d423c6c21b3dd05df763f079e8d6b1eeea7865bf719409250",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n279776fbbbb1/revisions/4be73b5e2bdd083d423c6c21b3dd05df763f079e8d6b1eeea7865bf719409250.png"
+      },
+      "bytes": 115055,
+      "id": "4be73b5e2bdd083d423c6c21b3dd05df763f079e8d6b1eeea7865bf719409250",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:14:29.314Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "8c299af5942441e777bb9a7fbac863fe7e565923617380a1e92c03c86a6d27fc"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/sports-participation-rate-cycling/values.json",
+        "sourceSha256": "fd98b1ec5c1a1491c766d421fb8af73a9623cdf3fbd584a22f66c8cf78841911",
+        "input": {
+          "sha256": "8c299af5942441e777bb9a7fbac863fe7e565923617380a1e92c03c86a6d27fc",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n279776fbbbb1/inputs/8c299af5942441e777bb9a7fbac863fe7e565923617380a1e92c03c86a6d27fc.json"
+          },
+          "bytes": 6539
+        }
+      }
+    },
+    {
+      "sha256": "d3219d77fbc3caab48f1aa656aac7509d2ba19862f0ea0cfaa4faddd7089a9e0",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n279776fbbbb1/revisions/d3219d77fbc3caab48f1aa656aac7509d2ba19862f0ea0cfaa4faddd7089a9e0.png"
+      },
+      "bytes": 1879552,
+      "id": "d3219d77fbc3caab48f1aa656aac7509d2ba19862f0ea0cfaa4faddd7089a9e0",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-de63a98db193",
+      "createdAt": "2026-10-23T14:37:56.791Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "d923d5001c3146ef06eee2b2a179ded436d5123b596e41918835d48b841db006"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00461は東京都と兵庫県の同率首位。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T14:40:00.744Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "d923d5001c3146ef06eee2b2a179ded436d5123b596e41918835d48b841db006",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n279776fbbbb1/inputs/d923d5001c3146ef06eee2b2a179ded436d5123b596e41918835d48b841db006.json"
+          },
+          "bytes": 8836
+        },
+        "production": {
+          "id": "NCI-00397",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "de63a98db193650666558d3d7c481c295e259e853fe1a8296af4aeca14d1a4a5"
+        }
+      }
+    }
+  ]
+}

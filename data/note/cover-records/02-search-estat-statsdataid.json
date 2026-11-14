@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "02-search-estat-statsdataid",
+  "production": {
+    "id": "NCI-00006",
+    "policyId": "NCP-007",
+    "policyVersion": 4,
+    "brief": {
+      "headline": "e-Statの統計表IDを\n見つける",
+      "subline": "search-estatスキルの使い方",
+      "subject": "分厚い資料ファイルの束と、色付きのインデックス付箋を大きく描く。実務カテゴリの机上の資料構図。青と明るい黄色の暖かい手描き。画面・紙・道具の表面は無文字。実在UI・製品ロゴ・グラフ・地図は描かない。人物・顔・手・動物は描かない。",
+      "evidence": "https://note.com/stats47/n/n7e4572d23a1b 本文確認2026-11-04。Claude Codeのsearch-estatスキルでstatsDataIdを特定する手順。1分という時間の主張はカバーに書かない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "f8452fdb20901179484a3747445ccba9239fc5911e016a6d4db6ac310d2afa1c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/02-search-estat-statsdataid/revisions/f8452fdb20901179484a3747445ccba9239fc5911e016a6d4db6ac310d2afa1c.png"
+      },
+      "bytes": 108818,
+      "id": "f8452fdb20901179484a3747445ccba9239fc5911e016a6d4db6ac310d2afa1c",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:42.926Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/293008327/rectangle_large_type_2_16031f72295d9f400a063b1f1ab4d227.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "f8452fdb20901179484a3747445ccba9239fc5911e016a6d4db6ac310d2afa1c"
+      }
+    },
+    {
+      "sha256": "24f82fa61466128e0b04ed3c4e7d5c80192935da983a83e8124a959f6aefe73e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/02-search-estat-statsdataid/revisions/24f82fa61466128e0b04ed3c4e7d5c80192935da983a83e8124a959f6aefe73e.png"
+      },
+      "bytes": 59355,
+      "id": "24f82fa61466128e0b04ed3c4e7d5c80192935da983a83e8124a959f6aefe73e",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:46:48.422Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "43e531b4c3a15f80bfa9c811d5869ec5fc1fd192ee16f3ffae58f1f81e088d41"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出しとシリーズ名・話数・色でシリーズが区別できる",
+        "reviewedAt": "2026-10-11T11:51:36.521Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "43e531b4c3a15f80bfa9c811d5869ec5fc1fd192ee16f3ffae58f1f81e088d41",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/02-search-estat-statsdataid/inputs/43e531b4c3a15f80bfa9c811d5869ec5fc1fd192ee16f3ffae58f1f81e088d41.json"
+          },
+          "bytes": 1100
+        }
+      }
+    },
+    {
+      "sha256": "499091f9eec6ff79e59615c29efacfdc94cbaa47b4c63425c897350a05cdc163",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/02-search-estat-statsdataid/revisions/499091f9eec6ff79e59615c29efacfdc94cbaa47b4c63425c897350a05cdc163.png"
+      },
+      "bytes": 61964,
+      "id": "499091f9eec6ff79e59615c29efacfdc94cbaa47b4c63425c897350a05cdc163",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:56:06.141Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320329086/rectangle_large_type_2_6f1c94ced26cb0a58e6e2a04f485ba2d.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "499091f9eec6ff79e59615c29efacfdc94cbaa47b4c63425c897350a05cdc163"
+      }
+    },
+    {
+      "sha256": "907533fb49f2ea21627037fcb72902912d872fbea20145458585b1c6105fce8a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/02-search-estat-statsdataid/revisions/907533fb49f2ea21627037fcb72902912d872fbea20145458585b1c6105fce8a.png"
+      },
+      "bytes": 1872455,
+      "id": "907533fb49f2ea21627037fcb72902912d872fbea20145458585b1c6105fce8a",
+      "kind": "candidate",
+      "version": "pop-NCP-007-v4-e91dfce55a4f",
+      "createdAt": "2026-11-04T00:16:40.492Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "f5ca698bbcb60671625e6d9d65b72cdf52a30cbff6ca786aafa659f031197035"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:18:09.219Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "f5ca698bbcb60671625e6d9d65b72cdf52a30cbff6ca786aafa659f031197035",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/02-search-estat-statsdataid/inputs/f5ca698bbcb60671625e6d9d65b72cdf52a30cbff6ca786aafa659f031197035.json"
+          },
+          "bytes": 8743
+        },
+        "production": {
+          "id": "NCI-00006",
+          "policyId": "NCP-007",
+          "policyVersion": 4,
+          "planSha256": "e91dfce55a4f7de1496d323b6c5333fbd4d679df390defdcc35a6f7a41bb15c5"
+        }
+      }
+    }
+  ]
+}

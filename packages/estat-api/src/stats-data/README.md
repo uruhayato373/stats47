@@ -95,6 +95,9 @@ packages/estat-api/src/stats-data/
         └── mock-responses.ts
 ```
 
+テストは `__tests__/` の中に対象と同じ階層で置き、名前は `{対象ファイル名}.test.ts` にする (Vitest)。
+純粋関数 (`utils/`・`repositories/` のキー生成やパラメータ構築) から書き、`services/` は repositories をモックして確かめる。
+
 ---
 
 ## e-Stat API 仕様リファレンス

@@ -710,17 +710,20 @@ grid 推奨: `4, 6, 12, 12` or `6, 12, 12, 12`
 
 ### `definitions-card` — 定義・説明カード
 
-テキスト表示用（LaTeX 数式対応）。
+用語と内訳の定義を表示する。`slide-presentation` と同じ形で、config はキーだけを持ち、中身はファイルに置く。
 
 ```json
 {
-  "definition": "経常収支比率 = 経常経費充当一般財源 ÷ 経常一般財源総額 × 100"
+  "definitionSetKey": "revenue"
 }
 ```
 
 | プロパティ | 必須 | 説明 |
 |:-----------|:-----|:-----|
-| `definition` | Yes | 定義テキスト（LaTeX `$...$` 対応） |
+| `definitionSetKey` | Yes | `data/definitions/index.ts` の `DEFINITION_REGISTRY` のキー |
+
+定義の中身 (`DefinitionSetData`: 説明・バッジ・グループと項目・出典) は `data/definitions/<key>.ts` に書き、
+`DEFINITION_REGISTRY` に登録する。`getDefinitionSet(key)` が見つけられないキーのカードは描画しない。
 
 grid 推奨: `12, 12, 12, 12`
 
@@ -1020,8 +1023,8 @@ export const getCachedEstatData = unstable_cache(
 
 ## 関連ドキュメント
 
-- **ブログ記事チャート**: [Blog Feature README](../blog/README.md) - ブログ用チャートとの違い
-- **e-Stat APIパッケージ**: [packages/estat-api/README.md](../../../../packages/estat-api/README.md)
+- **ブログ記事チャート**: [Blog Feature README](../../features/blog/README.md) - ブログ用チャートとの違い
+- **e-Stat APIパッケージ**: [packages/estat-api/README.md](../../../../../packages/estat-api/README.md)
 - **デザインシステム**: [デザインシステム](../../../../../docs/01_技術設計/04_デザインシステム.md)
 - **データベーススキーマ**: [packages/database/src/schema/dashboard.ts](../../../../packages/database/src/schema/dashboard.ts)
 

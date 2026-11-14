@@ -253,10 +253,7 @@
         "configHash": "dbdd11ae14670325"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:junior-college-count-per-100k",
@@ -2816,10 +2813,7 @@
         "configHash": "0063849069205e6b"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:junior-high-school-count-per-100k-12-14",
@@ -3085,10 +3079,7 @@
         "configHash": "e3621c1eb58f29bd"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:cc-estat-06-income-scatter",
@@ -3730,10 +3721,7 @@
         "configHash": "4c07fb62cc5c9625"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:students-per-teacher-class-size-gap",
@@ -4182,10 +4170,7 @@
         "configHash": "eec0791b735af25c"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:juvenile-theft-offender-arrests-per-1000-14-19",
@@ -5071,11 +5056,19 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:gifu-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:hokkaido-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:katsuobushi-expenditure-ranking",
           "kind": "blog"
         },
         {
-          "pageId": "blog:kochi-food-culture",
+          "pageId": "blog:kumamoto-food-culture",
           "kind": "blog"
         },
         {
@@ -5088,18 +5081,6 @@
         },
         {
           "pageId": "blog:okinawa-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:shiga-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tokushima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:yamagata-food-culture",
           "kind": "blog"
         },
         {
@@ -5334,11 +5315,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:gifu-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:hokkaido-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:katsuobushi-expenditure-ranking",
           "kind": "blog"
         },
         {
-          "pageId": "blog:kochi-food-culture",
+          "pageId": "blog:kumamoto-food-culture",
           "kind": "blog"
         },
         {
@@ -5351,18 +5340,6 @@
         },
         {
           "pageId": "blog:okinawa-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:shiga-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tokushima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:yamagata-food-culture",
           "kind": "blog"
         },
         {
@@ -5684,6 +5661,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:gas-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:heating-cost-vs-disposable-income",
           "kind": "blog"
         },
@@ -5768,11 +5749,11 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:kagoshima-food-culture",
+          "pageId": "blog:ketchup-consumption-expenditure-prefecture-gap",
           "kind": "blog"
         },
         {
-          "pageId": "blog:ketchup-consumption-expenditure-prefecture-gap",
+          "pageId": "blog:miyagi-food-culture",
           "kind": "blog"
         },
         {
@@ -5813,11 +5794,11 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:kagoshima-food-culture",
+          "pageId": "blog:ketchup-consumption-quantity-prefecture-gap",
           "kind": "blog"
         },
         {
-          "pageId": "blog:ketchup-consumption-quantity-prefecture-gap",
+          "pageId": "blog:miyagi-food-culture",
           "kind": "blog"
         },
         {
@@ -5964,10 +5945,7 @@
         "configHash": "ee48468ab035c82d"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area:01000",
@@ -6187,10 +6165,7 @@
         "configHash": "840ca1c045fc7ab3"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:kindergarten-education-cost-per-student",
@@ -6369,10 +6344,7 @@
         "configHash": "332e55c8395e89d3"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:kindergarten-students-per-teacher",
@@ -6998,7 +6970,15 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:fukuoka-food-culture",
+          "pageId": "blog:ishikawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kagoshima-food-culture",
           "kind": "blog"
         },
         {
@@ -7010,11 +6990,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:osaka-food-culture",
+          "pageId": "blog:mie-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:shiga-food-culture",
+          "pageId": "blog:osaka-food-culture",
           "kind": "blog"
         },
         {
@@ -7265,7 +7245,15 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:fukuoka-food-culture",
+          "pageId": "blog:ishikawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kagoshima-food-culture",
           "kind": "blog"
         },
         {
@@ -7281,15 +7269,15 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:mie-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:osaka-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:potato-consumption-quantity",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:shiga-food-culture",
           "kind": "blog"
         },
         {
@@ -7352,7 +7340,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:nara-food-culture",
+          "pageId": "blog:kagoshima-food-culture",
           "kind": "blog"
         },
         {
@@ -7401,7 +7389,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:nara-food-culture",
+          "pageId": "blog:kagoshima-food-culture",
           "kind": "blog"
         },
         {
@@ -8426,10 +8414,7 @@
         "configHash": "60155d66e0d93e6d"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:agriculture-hokkaido-dominance",
@@ -9888,10 +9873,7 @@
         "configHash": "aa6414bf9e392954"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:convenience-store-density-map",
@@ -11953,19 +11935,15 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:ehime-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:gunma-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:kagawa-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:shizuoka-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:yamaguchi-food-culture",
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {
@@ -12006,15 +11984,11 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:kagawa-food-culture",
+          "pageId": "blog:ehime-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:shizuoka-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:yamaguchi-food-culture",
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {

@@ -7,6 +7,8 @@ import { SurfaceLinkCard } from '@/components/surface';
 
 import { infraHistoryPath } from '@/features/infra-history';
 
+import { navSurfaceProps } from '@/lib/analytics/events';
+
 import type { Metadata } from 'next';
 
 const IS_PUBLIC = INFRA_NETWORKS.every(isInfraNetworkPublishable);
@@ -43,7 +45,7 @@ export default function InfraHistoryIndexPage() {
         </>
       }
     >
-      <PanelGrid className="@md:grid-cols-2 @lg:grid-cols-3">
+      <PanelGrid className="@md:grid-cols-2 @lg:grid-cols-3" {...navSurfaceProps('geo_analysis_list')}>
         {INFRA_NETWORKS.map((network) => (
           <SurfaceLinkCard key={network.key} href={infraHistoryPath(network.key)} className="space-y-2 p-4">
             <p className="text-xs text-muted-foreground">

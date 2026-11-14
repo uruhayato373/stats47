@@ -27,9 +27,9 @@ export const industrialWaterUsage: MetricConfig = {
     "colorSchemeType": "sequential",
   },
   "display": {
-    "conversionFactor": 1,
+    "conversionFactor": 0.0001,
     "decimalPlaces": 0,
-    "displayUnit": "m3",
+    "displayUnit": "万m3/日",
   },
   "calculation": {
     "isCalculated": false,

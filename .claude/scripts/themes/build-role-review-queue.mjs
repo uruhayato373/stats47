@@ -2,7 +2,7 @@
 // build-role-review-queue.mjs — 夜間 selection backfill の「role の推奨」を横断集約し、
 // 採否・反映状況を進捗管理できる queue にする。
 //
-// なぜ要るか: run-selection-backfill.sh の report (reference/audits/<日付>-selection-backfill.md)
+// なぜ要るか: run-selection-backfill.sh の report (data/themes/audits/<日付>-selection-backfill.md)
 // は夜ごとに増えるが、どれが人間にレビューされ・採用され・実際に ThemeCatalog へ反映されたかを
 // 追う場所が無かった。「反映済み」は手書きフラグにせず、実際の THEME_CATALOGS の role と
 // 突合して自動判定する (手動フラグは必ずドリフトする — feedback_hand_synced_duplication)。
@@ -35,10 +35,7 @@ import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "../../..");
-const AUDITS_DIR = path.join(
-  ROOT,
-  ".claude/skills/theme/manage-theme-portfolio/reference/audits",
-);
+const AUDITS_DIR = path.join(ROOT, datasetDir("themes.audits"));
 const STATE_DIR = path.join(ROOT, datasetDir("themes.role-review"));
 const QUEUE_FILE = path.join(STATE_DIR, "role-review-queue.json");
 const LATEST_FILE = path.join(STATE_DIR, "LATEST.md");

@@ -14,7 +14,12 @@
  *       コミット 67168f54 が残した follow-up の完成。
  */
 import { metricPresentation } from '@stats47/data-configs/color-policy';
-import { rankingHookAreaNoun, resolveAttribution, resolveMetricProvenance } from "@stats47/data-configs/provenance";
+import {
+  rankingHookAreaNoun,
+  resolveAttribution,
+  resolveMetricPrimaryProvenance,
+  resolveMetricProvenance,
+} from "@stats47/data-configs/provenance";
 import { buildRecipe } from "@stats47/data-configs/recipe";
 import type { MetricConfig, MetricRegistry, ProvenanceSurvey } from "@stats47/data-configs";
 import {
@@ -61,17 +66,35 @@ const SURVEY_MASTER_IDS = new Set(
 );
 
 /**
+ * 主出典 (計算式の分子の原典) が調査マスタに 1 つも無いために、全原典での紐付けへ戻している指標か。
+ * 該当する指標は分母の調査 (国勢調査・人口推計など) のページに並んだままになる。原典を調査マスタへ登録すると外れる。
+ */
+export function usesAllSourcesLinkageFallback(config: MetricConfig, registry?: MetricRegistry): boolean {
+  const inMaster = (s: ProvenanceSurvey) => SURVEY_MASTER_IDS.has(s.id);
+  return (
+    !resolveMetricPrimaryProvenance(config, registry).some(inMaster) &&
+    resolveMetricProvenance(config, registry).some(inMaster)
+  );
+}
+
+/**
  * config.source → surveys マスタ実在の調査群を決定的導出する。
  * 優先順位: config.surveyId (手動オーバーライド) > provenance 辞書導出 > 空 (未分類)。
  * 合成 id (`ssds-src:` / `src:`) とマスタ非実在 id は配信に出さない。
+ *
+ * 辞書導出は主出典 (割り算の指標は分子の原典) だけを使う。人口や面積で割っただけの指標を、分母の調査
+ * (国勢調査・人口推計・面積調) のページへ並べない (2026-11-14 SURVEY-PAGES-01)。出典の表記 (attribution) は
+ * 分母も含めた全原典のまま。主出典がマスタに無い指標だけは、未分類にせず従来どおり全原典で結ぶ
+ * (`usesAllSourcesLinkageFallback`。対象の指標はテストが列挙して固定する)。
  */
 export function resolveSurveyLinkage(
   config: MetricConfig,
   registry?: MetricRegistry,
 ): { surveyIds: string[]; originalSurveys: ProvenanceSurvey[] } {
-  const resolved = resolveMetricProvenance(config, registry).filter((s) =>
-    SURVEY_MASTER_IDS.has(s.id),
-  );
+  const provenance = usesAllSourcesLinkageFallback(config, registry)
+    ? resolveMetricProvenance(config, registry)
+    : resolveMetricPrimaryProvenance(config, registry);
+  const resolved = provenance.filter((s) => SURVEY_MASTER_IDS.has(s.id));
   if (config.surveyId && SURVEY_MASTER_IDS.has(config.surveyId)) {
     // 手動オーバーライドを先頭にし、辞書導出の残り (SSDS 複数原典) を後続に保つ
     const rest = resolved.filter((s) => s.id !== config.surveyId);

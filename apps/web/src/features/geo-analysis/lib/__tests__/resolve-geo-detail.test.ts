@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { buildFloodPrefDetail } from '@stats47/gis';
 import { fetchFromR2AsJson } from '@stats47/r2-storage/server';
 import { describe, expect, it, vi } from 'vitest';

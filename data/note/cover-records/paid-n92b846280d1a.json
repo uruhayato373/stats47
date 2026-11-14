@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "paid-n92b846280d1a",
+  "production": {
+    "id": "NCI-00323",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "年収五分位別\n家計CSVデータ",
+      "subline": "159品目×25年\n2000〜2024年・二人以上の世帯",
+      "subject": "横長1280×670相当の完成カバー。青緑と黄色。無人の机に、無文字のCSVファイルを表すシンプルな紙束、無文字のフォルダ、無文字の家計簿を並べる。有料記事で提供する家計調査の五分位階級別CSVの用途を示す。架空のデータ表・地図・グラフ・商品収録数を描かない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n92b846280d1a 2026-10-24公開API本文照合。記事題名「年収で「塾代」は56倍違う──家計調査 五分位階級別 159品目×25年分CSVデータセット」。本文中の 159品目、25年、2000年、2024年、二人以上の世帯 を確認。主題、対象年・集計範囲、比較対象のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "32313f8c6c60a0c69e4cdb679abb40d33ca1b2c16637495d3db3b09df56a28d6",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n92b846280d1a/revisions/32313f8c6c60a0c69e4cdb679abb40d33ca1b2c16637495d3db3b09df56a28d6.png"
+      },
+      "bytes": 44566,
+      "id": "32313f8c6c60a0c69e4cdb679abb40d33ca1b2c16637495d3db3b09df56a28d6",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:29.761Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312773008/rectangle_large_type_2_a57296f0614d06552e5fd8fa62066ed4.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "32313f8c6c60a0c69e4cdb679abb40d33ca1b2c16637495d3db3b09df56a28d6"
+      }
+    },
+    {
+      "sha256": "d5425cdefeda86e00f328b299bad99c5ae4acb2687e1e532648fd244a498c0e4",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n92b846280d1a/revisions/d5425cdefeda86e00f328b299bad99c5ae4acb2687e1e532648fd244a498c0e4.png"
+      },
+      "bytes": 43005,
+      "id": "d5425cdefeda86e00f328b299bad99c5ae4acb2687e1e532648fd244a498c0e4",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:05:55.713Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "76aa6edb334869a6874ff439a40f4972467b8ad7f6016e4dbeb21c418320dc75"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出し・記事の分析結果の県別地図または記事図が確認できる(平均画素差0.027/255で確認版と同一)",
+        "reviewedAt": "2026-10-11T12:18:11.013Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "76aa6edb334869a6874ff439a40f4972467b8ad7f6016e4dbeb21c418320dc75",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n92b846280d1a/inputs/76aa6edb334869a6874ff439a40f4972467b8ad7f6016e4dbeb21c418320dc75.json"
+          },
+          "bytes": 1378
+        }
+      }
+    },
+    {
+      "sha256": "8b1fa73cfc2d3489b01b8897e13d77fdbc3f9b2ec095c892d1b42d1a3e01bdca",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n92b846280d1a/revisions/8b1fa73cfc2d3489b01b8897e13d77fdbc3f9b2ec095c892d1b42d1a3e01bdca.png"
+      },
+      "bytes": 1606220,
+      "id": "8b1fa73cfc2d3489b01b8897e13d77fdbc3f9b2ec095c892d1b42d1a3e01bdca",
+      "kind": "candidate",
+      "version": "pop-NCP-006-v3-7a57c0e4c0ca",
+      "createdAt": "2026-10-23T15:39:05.907Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "4bbb24d9ed0aaa97179220db9e294af1051ef367bdc644e8441e545c725b390c"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の主題・対象範囲・比較県、全掲載文字、無人の題材、署名を原寸/320pxで目視し、管理画面で公開旧版と新候補を比較。有料記事のCSV収録範囲は159品目×25年、二人以上の世帯。",
+        "reviewedAt": "2026-10-23T15:42:05.682Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "4bbb24d9ed0aaa97179220db9e294af1051ef367bdc644e8441e545c725b390c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n92b846280d1a/inputs/4bbb24d9ed0aaa97179220db9e294af1051ef367bdc644e8441e545c725b390c.json"
+          },
+          "bytes": 9559
+        },
+        "production": {
+          "id": "NCI-00323",
+          "policyId": "NCP-006",
+          "policyVersion": 3,
+          "planSha256": "7a57c0e4c0ca020e7cb3e29cc3bb43c7967b1f89e9285c60c88c647064c752df"
+        }
+      }
+    }
+  ]
+}

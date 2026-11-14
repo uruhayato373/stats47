@@ -1,0 +1,274 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "pinned-intro",
+  "production": {
+    "id": "NCI-00349",
+    "policyId": "NCP-001",
+    "policyVersion": 4,
+    "brief": {
+      "headline": "47都道府県を\n統計で見比べる",
+      "subline": "元県庁職員がつくった\n統計サイトの自己紹介",
+      "subject": "右側に白紙の見開きノートと無文字の青・黄の資料フォルダーを重ね、やわらかな紙の色面を背景にする。人物・顔・手・キャラクター・地図・日本列島の輪郭・グラフ・実在UI・架空の数値・指定外の文字を描かない。",
+      "evidence": "https://note.com/stats47/n/na69997771fe5 2026-10-15公開本文確認。県庁で統計を扱った経験、47都道府県のランキング・地域プロファイル・テーマ別ダッシュボードを紹介する自己紹介記事。変動する指標総数はカバーに載せない。人物は本人の肖像でなく汎用案内役とする。 2026-10-15ユーザー指示で人物・キャラクターを使わず、道具を主役に変更。 2026-10-23再確認。 2026-10-23再確認。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "046826a1785a27f32ebecdbef4e291ef3a1f7470035d51fc86624a2be5df5f1a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/pinned-intro/revisions/046826a1785a27f32ebecdbef4e291ef3a1f7470035d51fc86624a2be5df5f1a.png"
+      },
+      "bytes": 55081,
+      "id": "046826a1785a27f32ebecdbef4e291ef3a1f7470035d51fc86624a2be5df5f1a",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:43.710Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312767198/rectangle_large_type_2_394759d53ec9079a4b4ccddefa66a956.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "046826a1785a27f32ebecdbef4e291ef3a1f7470035d51fc86624a2be5df5f1a"
+      }
+    },
+    {
+      "sha256": "87bd3397e5fbdc54fa1f70251eebecad609b432c205648c63ad6239cdaa5933b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/pinned-intro/revisions/87bd3397e5fbdc54fa1f70251eebecad609b432c205648c63ad6239cdaa5933b.png"
+      },
+      "bytes": 110060,
+      "id": "87bd3397e5fbdc54fa1f70251eebecad609b432c205648c63ad6239cdaa5933b",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:41:42.161Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "73d7d2d43152dfd4af6b487920e1bfd68a035b1f28f507f975141d4b2aa03fea"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で問いとサイト説明が読める。日本地図の向き・縮尺が正しい",
+        "reviewedAt": "2026-10-11T11:49:37.329Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "73d7d2d43152dfd4af6b487920e1bfd68a035b1f28f507f975141d4b2aa03fea",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/pinned-intro/inputs/73d7d2d43152dfd4af6b487920e1bfd68a035b1f28f507f975141d4b2aa03fea.json"
+          },
+          "bytes": 1377
+        }
+      }
+    },
+    {
+      "sha256": "75bd40c468a240ba472133b13d44ef2284f426156b0cc5fc7e722eb11a9391c8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/pinned-intro/revisions/75bd40c468a240ba472133b13d44ef2284f426156b0cc5fc7e722eb11a9391c8.png"
+      },
+      "bytes": 49879,
+      "id": "75bd40c468a240ba472133b13d44ef2284f426156b0cc5fc7e722eb11a9391c8",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:07:18.671Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "8ad8bf9d967a6750fe7a178e6bcf590251f9d16dbe405e5824224403d6cd5984"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.012/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:16:23.826Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "8ad8bf9d967a6750fe7a178e6bcf590251f9d16dbe405e5824224403d6cd5984",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/pinned-intro/inputs/8ad8bf9d967a6750fe7a178e6bcf590251f9d16dbe405e5824224403d6cd5984.json"
+          },
+          "bytes": 1377
+        }
+      }
+    },
+    {
+      "sha256": "1ef763a841baec0901826623f13d46a9594c4de8ddfd383f0eae2fea4adccbd0",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/pinned-intro/revisions/1ef763a841baec0901826623f13d46a9594c4de8ddfd383f0eae2fea4adccbd0.png"
+      },
+      "bytes": 105306,
+      "id": "1ef763a841baec0901826623f13d46a9594c4de8ddfd383f0eae2fea4adccbd0",
+      "kind": "candidate",
+      "version": "2026-10-11-truecolor-v3b",
+      "createdAt": "2026-10-11T12:30:25.054Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "75fabf86476a5f184a871988d2a7c1aeeddcefee06fa922a07c5c3b33ee8d1a0"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "フルカラー再発行版。目視合格した確認版との平均画素差0.012/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:36:53.036Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "75fabf86476a5f184a871988d2a7c1aeeddcefee06fa922a07c5c3b33ee8d1a0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/pinned-intro/inputs/75fabf86476a5f184a871988d2a7c1aeeddcefee06fa922a07c5c3b33ee8d1a0.json"
+          },
+          "bytes": 1377
+        }
+      }
+    },
+    {
+      "sha256": "2790752a4a2437964fc2a76bea15f05502c13e91eae6fde564c7f215e221efa1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/pinned-intro/revisions/2790752a4a2437964fc2a76bea15f05502c13e91eae6fde564c7f215e221efa1.png"
+      },
+      "bytes": 71477,
+      "id": "2790752a4a2437964fc2a76bea15f05502c13e91eae6fde564c7f215e221efa1",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T02:14:16.867Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323285472/rectangle_large_type_2_b2461650002c07b179e6905705b335aa.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "2790752a4a2437964fc2a76bea15f05502c13e91eae6fde564c7f215e221efa1"
+      }
+    },
+    {
+      "sha256": "5092adf52a15649a716c963bdf3abdbc43f93421cfb57b525e6e21a33ec5e298",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/pinned-intro/revisions/5092adf52a15649a716c963bdf3abdbc43f93421cfb57b525e6e21a33ec5e298.png"
+      },
+      "bytes": 1760613,
+      "id": "5092adf52a15649a716c963bdf3abdbc43f93421cfb57b525e6e21a33ec5e298",
+      "kind": "candidate",
+      "version": "imagegen-no-character-priority3-20261015",
+      "createdAt": "2026-10-15T02:21:58.344Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "b840bd7e4a79a226cb80c0581279de025f817063473b3d3dcda4c43714a6f0dd"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "人物・キャラクターなしの最新版。原寸と320pxで指定全文・補足の可読性・切れ・重なりを確認済み。管理画面で修正前後を提示し、2026-10-15にユーザーが3件の反映を指示。",
+        "reviewedAt": "2026-10-15T02:36:33.894Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "b840bd7e4a79a226cb80c0581279de025f817063473b3d3dcda4c43714a6f0dd",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/pinned-intro/inputs/b840bd7e4a79a226cb80c0581279de025f817063473b3d3dcda4c43714a6f0dd.json"
+          },
+          "bytes": 9243
+        },
+        "production": {
+          "id": "NCI-00349",
+          "policyId": "NCP-001",
+          "policyVersion": 3,
+          "planSha256": "0edf56c9d58948d3f91aa3fd6da975a933137196219e5db679204d09c8e077ab"
+        }
+      }
+    },
+    {
+      "sha256": "2607f00b67577b9db6d247f93bbf94f9b524049792a16090746188a32ad84ee1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/pinned-intro/revisions/2607f00b67577b9db6d247f93bbf94f9b524049792a16090746188a32ad84ee1.png"
+      },
+      "bytes": 1733399,
+      "id": "2607f00b67577b9db6d247f93bbf94f9b524049792a16090746188a32ad84ee1",
+      "kind": "candidate",
+      "version": "pop-NCP-001-v4-cacebd65b6a0",
+      "createdAt": "2026-10-23T07:06:29.460Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "532966ec5042c136b58466229ea84ebbce797036f47547354257518d06c6bb96"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "元県庁職員による統計サイトの自己紹介に一致。新旧を管理画面で比較し、無人のノートと資料、全掲載文字を原寸・幅320pxで確認。",
+        "reviewedAt": "2026-10-23T07:12:18.058Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "532966ec5042c136b58466229ea84ebbce797036f47547354257518d06c6bb96",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/pinned-intro/inputs/532966ec5042c136b58466229ea84ebbce797036f47547354257518d06c6bb96.json"
+          },
+          "bytes": 8922
+        },
+        "production": {
+          "id": "NCI-00349",
+          "policyId": "NCP-001",
+          "policyVersion": 4,
+          "planSha256": "cacebd65b6a06281219a1133c0188793160143d3e5e7e1718c73448e2a2d4574"
+        }
+      }
+    }
+  ]
+}

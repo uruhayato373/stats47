@@ -211,7 +211,7 @@
       },
       "notes": "旧baselineは国内条件と取得期間の適合を証明できないため効果確定しない。元の観測を維持して終了し、今回の構成改善はTHEME-STRUCTURE-20260908-population-dynamicsで公開後に計測する。",
       "evidenceRefs": [
-        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-07-13-theme-deepdive-population-dynamics.md",
+        "data/themes/audits/2026-07-13-theme-deepdive-population-dynamics.md",
         ".claude/state/themes/portfolio.json"
       ],
       "experimentId": "THEME-EXP-001",
@@ -318,7 +318,7 @@
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        "data/themes/audits/2026-09-08-theme-portfolio-audit.md",
         ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
       ],
       "experimentId": "THEME-STRUCTURE-20260908-aging-society",
@@ -621,6 +621,108 @@
                 "gsc.impressions: baseline-missing-or-low-sample",
                 "ga4.engagementRatePvWeighted: missing-or-low-sample"
               ]
+            },
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 12,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 17,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-02",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 13,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 58,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: window-includes-pre-publication",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: window-includes-pre-publication"
+              ]
             }
           ]
         },
@@ -682,7 +784,7 @@
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        "data/themes/audits/2026-09-08-theme-portfolio-audit.md",
         ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
       ],
       "experimentId": "THEME-STRUCTURE-20260908-climate",
@@ -794,7 +896,7 @@
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        "data/themes/audits/2026-09-08-theme-portfolio-audit.md",
         ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
       ],
       "experimentId": "THEME-STRUCTURE-20260908-consumer-prices",
@@ -1113,6 +1215,112 @@
                 "ga4.engagementRatePvWeighted: missing-or-low-sample",
                 "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
               ]
+            },
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 37,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 69,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-02",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 64,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 118,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "window-includes-pre-publication",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: window-includes-pre-publication",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
             }
           ]
         },
@@ -1176,7 +1384,7 @@
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        "data/themes/audits/2026-09-08-theme-portfolio-audit.md",
         ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
       ],
       "experimentId": "THEME-STRUCTURE-20260908-education-culture",
@@ -1304,7 +1512,7 @@
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        "data/themes/audits/2026-09-08-theme-portfolio-audit.md",
         ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
       ],
       "experimentId": "THEME-STRUCTURE-20260908-fishery-marine",
@@ -1423,7 +1631,7 @@
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        "data/themes/audits/2026-09-08-theme-portfolio-audit.md",
         ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
       ],
       "experimentId": "THEME-STRUCTURE-20260908-healthcare",
@@ -1543,7 +1751,7 @@
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        "data/themes/audits/2026-09-08-theme-portfolio-audit.md",
         ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
       ],
       "experimentId": "THEME-STRUCTURE-20260908-labor-mobility",
@@ -1662,7 +1870,7 @@
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        "data/themes/audits/2026-09-08-theme-portfolio-audit.md",
         ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
       ],
       "experimentId": "THEME-STRUCTURE-20260908-labor-wages",
@@ -1789,7 +1997,7 @@
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        "data/themes/audits/2026-09-08-theme-portfolio-audit.md",
         ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
       ],
       "experimentId": "THEME-STRUCTURE-20260908-living-housing",
@@ -1916,7 +2124,7 @@
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        "data/themes/audits/2026-09-08-theme-portfolio-audit.md",
         ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
       ],
       "experimentId": "THEME-STRUCTURE-20260908-local-economy",
@@ -2215,6 +2423,108 @@
                 "gsc.impressions: baseline-missing-or-low-sample",
                 "ga4.engagementRatePvWeighted: missing-or-low-sample"
               ]
+            },
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 11,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 28,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-02",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 39,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 55,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: window-includes-pre-publication",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: window-includes-pre-publication"
+              ]
             }
           ]
         },
@@ -2276,7 +2586,7 @@
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        "data/themes/audits/2026-09-08-theme-portfolio-audit.md",
         ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
       ],
       "experimentId": "THEME-STRUCTURE-20260908-local-finance",
@@ -2588,6 +2898,112 @@
                 "ga4.engagementRatePvWeighted: missing-or-low-sample",
                 "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
               ]
+            },
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 25,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 76,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-02",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 39,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 130,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "window-includes-pre-publication",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: window-includes-pre-publication",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
             }
           ]
         },
@@ -2651,7 +3067,7 @@
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        "data/themes/audits/2026-09-08-theme-portfolio-audit.md",
         ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
       ],
       "experimentId": "THEME-STRUCTURE-20260908-manufacturing",
@@ -2908,6 +3324,112 @@
                 "ga4.engagementRatePvWeighted: missing-or-low-sample",
                 "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
               ]
+            },
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 10,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 5,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-02",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 18,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 10,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "window-includes-pre-publication",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: window-includes-pre-publication",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
             }
           ]
         },
@@ -2971,7 +3493,7 @@
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        "data/themes/audits/2026-09-08-theme-portfolio-audit.md",
         ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
       ],
       "experimentId": "THEME-STRUCTURE-20260908-occupation-salary",
@@ -3085,7 +3607,7 @@
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        "data/themes/audits/2026-09-08-theme-portfolio-audit.md",
         ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
       ],
       "experimentId": "THEME-STRUCTURE-20260908-population-dynamics",
@@ -3394,6 +3916,112 @@
                 "ga4.engagementRatePvWeighted: missing-or-low-sample",
                 "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
               ]
+            },
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 3,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 15,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-02",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 11,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 30,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "window-includes-pre-publication",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: window-includes-pre-publication",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
             }
           ]
         },
@@ -3457,7 +4085,7 @@
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        "data/themes/audits/2026-09-08-theme-portfolio-audit.md",
         ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
       ],
       "experimentId": "THEME-STRUCTURE-20260908-ports",
@@ -3766,6 +4394,112 @@
                 "ga4.engagementRatePvWeighted: missing-or-low-sample",
                 "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
               ]
+            },
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 18,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 18,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-02",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 31,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 42,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "window-includes-pre-publication",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: window-includes-pre-publication",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
             }
           ]
         },
@@ -3829,7 +4563,7 @@
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        "data/themes/audits/2026-09-08-theme-portfolio-audit.md",
         ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
       ],
       "experimentId": "THEME-STRUCTURE-20260908-railway",
@@ -4091,6 +4825,108 @@
                 "ga4.engagementRatePvWeighted: missing-or-low-sample",
                 "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
               ]
+            },
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 110,
+                  "status": "measured",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 25,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-02",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": 0.9655,
+                  "status": "measured",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 150,
+                  "status": "measured",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 75,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": 0.9155,
+                  "status": "measured",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "window-includes-pre-publication",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: window-includes-pre-publication",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
             }
           ]
         },
@@ -4152,7 +4988,7 @@
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        "data/themes/audits/2026-09-08-theme-portfolio-audit.md",
         ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
       ],
       "experimentId": "THEME-STRUCTURE-20260908-real-income",
@@ -4463,6 +5299,112 @@
                 "ga4.engagementRatePvWeighted: missing-or-low-sample",
                 "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
               ]
+            },
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 17,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 33,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-02",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 36,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 71,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "window-includes-pre-publication",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: window-includes-pre-publication",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
             }
           ]
         },
@@ -4526,7 +5468,7 @@
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        "data/themes/audits/2026-09-08-theme-portfolio-audit.md",
         ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
       ],
       "experimentId": "THEME-STRUCTURE-20260908-roads",
@@ -4838,6 +5780,112 @@
                 "ga4.engagementRatePvWeighted: missing-or-low-sample",
                 "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
               ]
+            },
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 13,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 7,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-02",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 13,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 66,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "window-includes-pre-publication",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: window-includes-pre-publication",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
             }
           ]
         },
@@ -4901,7 +5949,7 @@
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        "data/themes/audits/2026-09-08-theme-portfolio-audit.md",
         ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
       ],
       "experimentId": "THEME-STRUCTURE-20260908-safety",
@@ -5023,7 +6071,7 @@
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
-        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md",
+        "data/themes/audits/2026-09-08-theme-portfolio-audit.md",
         ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json"
       ],
       "experimentId": "THEME-STRUCTURE-20260908-tourism",
@@ -5230,6 +6278,60 @@
                 "primary-low-sample-count-only"
               ]
             }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                },
+                "gsc.impressions": {
+                  "value": 35,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "complete-window-unavailable",
+                "window-includes-pre-publication",
+                "window-not-observed-yet",
+                "non-overlapping-report-references-unavailable"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: missing-or-low-sample",
+                "internalNav.eventCount: complete-window-unavailable",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "internalNav.eventCount: window-not-observed-yet",
+                "internalNav.eventCount: non-overlapping-report-references-unavailable",
+                "new-url-has-no-pre-publication-baseline"
+              ]
+            }
           ]
         },
         "d56": {
@@ -5420,6 +6522,60 @@
                 "internalNav.eventCount: complete-window-unavailable",
                 "internalNav.eventCount: window-includes-pre-publication",
                 "internalNav.eventCount: window-not-observed-yet",
+                "new-url-has-no-pre-publication-baseline",
+                "primary-low-sample-count-only"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 16,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 81,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: missing-or-low-sample",
+                "internalNav.eventCount: complete-window-unavailable",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "internalNav.eventCount: window-not-observed-yet",
+                "internalNav.eventCount: non-overlapping-report-references-unavailable",
                 "new-url-has-no-pre-publication-baseline",
                 "primary-low-sample-count-only"
               ]
@@ -5671,6 +6827,60 @@
                 "primary-low-sample-count-only"
               ]
             }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                },
+                "gsc.impressions": {
+                  "value": 79,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "complete-window-unavailable",
+                "window-includes-pre-publication",
+                "window-not-observed-yet",
+                "non-overlapping-report-references-unavailable"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: missing-or-low-sample",
+                "internalNav.eventCount: complete-window-unavailable",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "internalNav.eventCount: window-not-observed-yet",
+                "internalNav.eventCount: non-overlapping-report-references-unavailable",
+                "new-url-has-no-pre-publication-baseline"
+              ]
+            }
           ]
         },
         "d56": {
@@ -5914,6 +7124,60 @@
                 "internalNav.eventCount: complete-window-unavailable",
                 "internalNav.eventCount: window-includes-pre-publication",
                 "internalNav.eventCount: window-not-observed-yet",
+                "new-url-has-no-pre-publication-baseline",
+                "primary-low-sample-count-only"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 22,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 61,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: missing-or-low-sample",
+                "internalNav.eventCount: complete-window-unavailable",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "internalNav.eventCount: window-not-observed-yet",
+                "internalNav.eventCount: non-overlapping-report-references-unavailable",
                 "new-url-has-no-pre-publication-baseline",
                 "primary-low-sample-count-only"
               ]
@@ -6163,6 +7427,59 @@
                 "primary-low-sample-count-only"
               ]
             }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 43,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 158,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": 9,
+                  "status": "measured",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "new-url-has-no-pre-publication-baseline",
+                "primary-low-sample-count-only"
+              ]
+            }
           ]
         },
         "d56": {
@@ -6402,6 +7719,60 @@
               "status": "launch-provisional",
               "reasons": [],
               "constraints": [
+                "new-url-has-no-pre-publication-baseline",
+                "primary-low-sample-count-only"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 9,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 67,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: missing-or-low-sample",
+                "internalNav.eventCount: complete-window-unavailable",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "internalNav.eventCount: window-not-observed-yet",
+                "internalNav.eventCount: non-overlapping-report-references-unavailable",
                 "new-url-has-no-pre-publication-baseline",
                 "primary-low-sample-count-only"
               ]
@@ -6647,6 +8018,60 @@
               "constraints": [
                 "new-url-has-no-pre-publication-baseline",
                 "primary-low-sample-count-only"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                },
+                "gsc.impressions": {
+                  "value": 4,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "complete-window-unavailable",
+                "window-includes-pre-publication",
+                "window-not-observed-yet",
+                "non-overlapping-report-references-unavailable"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: missing-or-low-sample",
+                "internalNav.eventCount: complete-window-unavailable",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "internalNav.eventCount: window-not-observed-yet",
+                "internalNav.eventCount: non-overlapping-report-references-unavailable",
+                "new-url-has-no-pre-publication-baseline"
               ]
             }
           ]
@@ -7103,6 +8528,59 @@
                 "primary-low-sample-count-only"
               ]
             }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 5,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 14,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": 2,
+                  "status": "measured",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "new-url-has-no-pre-publication-baseline",
+                "primary-low-sample-count-only"
+              ]
+            }
           ]
         },
         "d56": {
@@ -7304,6 +8782,60 @@
                 "internalNav.eventCount: complete-window-unavailable",
                 "internalNav.eventCount: window-includes-pre-publication",
                 "internalNav.eventCount: window-not-observed-yet",
+                "new-url-has-no-pre-publication-baseline",
+                "primary-low-sample-count-only"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 28,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 15,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: missing-or-low-sample",
+                "internalNav.eventCount: complete-window-unavailable",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "internalNav.eventCount: window-not-observed-yet",
+                "internalNav.eventCount: non-overlapping-report-references-unavailable",
                 "new-url-has-no-pre-publication-baseline",
                 "primary-low-sample-count-only"
               ]
@@ -7556,6 +9088,60 @@
                 "primary-low-sample-count-only"
               ]
             }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                },
+                "gsc.impressions": {
+                  "value": 35,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "complete-window-unavailable",
+                "window-includes-pre-publication",
+                "window-not-observed-yet",
+                "non-overlapping-report-references-unavailable"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: missing-or-low-sample",
+                "internalNav.eventCount: complete-window-unavailable",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "internalNav.eventCount: window-not-observed-yet",
+                "internalNav.eventCount: non-overlapping-report-references-unavailable",
+                "new-url-has-no-pre-publication-baseline"
+              ]
+            }
           ]
         },
         "d56": {
@@ -7746,6 +9332,60 @@
               "status": "launch-provisional",
               "reasons": [],
               "constraints": [
+                "new-url-has-no-pre-publication-baseline",
+                "primary-low-sample-count-only"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 5,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 22,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: missing-or-low-sample",
+                "internalNav.eventCount: complete-window-unavailable",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "internalNav.eventCount: window-not-observed-yet",
+                "internalNav.eventCount: non-overlapping-report-references-unavailable",
                 "new-url-has-no-pre-publication-baseline",
                 "primary-low-sample-count-only"
               ]
@@ -8094,6 +9734,108 @@
                 "internalNav.eventCount: window-not-observed-yet",
                 "new-url-has-no-pre-publication-baseline"
               ]
+            },
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                },
+                "gsc.impressions": {
+                  "value": 1,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-02",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "complete-window-unavailable",
+                "window-includes-pre-publication",
+                "window-not-observed-yet"
+              ],
+              "constraints": [
+                "internalNav.eventCount: missing-or-low-sample",
+                "internalNav.eventCount: complete-window-unavailable",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "internalNav.eventCount: window-not-observed-yet",
+                "new-url-has-no-pre-publication-baseline"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                },
+                "gsc.impressions": {
+                  "value": 19,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "complete-window-unavailable",
+                "window-includes-pre-publication",
+                "window-not-observed-yet",
+                "non-overlapping-report-references-unavailable"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: missing-or-low-sample",
+                "internalNav.eventCount: complete-window-unavailable",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "internalNav.eventCount: window-not-observed-yet",
+                "internalNav.eventCount: non-overlapping-report-references-unavailable",
+                "new-url-has-no-pre-publication-baseline"
+              ]
             }
           ]
         },
@@ -8339,6 +10081,59 @@
                 "primary-low-sample-count-only"
               ]
             }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 31,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 70,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": 4,
+                  "status": "measured",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "new-url-has-no-pre-publication-baseline",
+                "primary-low-sample-count-only"
+              ]
+            }
           ]
         },
         "d56": {
@@ -8576,6 +10371,59 @@
               "status": "launch-provisional",
               "reasons": [],
               "constraints": [
+                "new-url-has-no-pre-publication-baseline",
+                "primary-low-sample-count-only"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 21,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 177,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": 8,
+                  "status": "measured",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: window-includes-pre-publication",
                 "new-url-has-no-pre-publication-baseline",
                 "primary-low-sample-count-only"
               ]
@@ -8877,6 +10725,60 @@
                 "primary-low-sample-count-only"
               ]
             }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                },
+                "gsc.impressions": {
+                  "value": 21,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "complete-window-unavailable",
+                "window-includes-pre-publication",
+                "window-not-observed-yet",
+                "non-overlapping-report-references-unavailable"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: missing-or-low-sample",
+                "internalNav.eventCount: complete-window-unavailable",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "internalNav.eventCount: window-not-observed-yet",
+                "internalNav.eventCount: non-overlapping-report-references-unavailable",
+                "new-url-has-no-pre-publication-baseline"
+              ]
+            }
           ]
         },
         "d56": {
@@ -9072,6 +10974,60 @@
                 "internalNav.eventCount: complete-window-unavailable",
                 "internalNav.eventCount: window-includes-pre-publication",
                 "internalNav.eventCount: window-not-observed-yet",
+                "new-url-has-no-pre-publication-baseline",
+                "primary-low-sample-count-only"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 7,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 26,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: missing-or-low-sample",
+                "internalNav.eventCount: complete-window-unavailable",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "internalNav.eventCount: window-not-observed-yet",
+                "internalNav.eventCount: non-overlapping-report-references-unavailable",
                 "new-url-has-no-pre-publication-baseline",
                 "primary-low-sample-count-only"
               ]
@@ -9318,6 +11274,59 @@
                 "primary-low-sample-count-only"
               ]
             }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 33,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 62,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": 12,
+                  "status": "measured",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "new-url-has-no-pre-publication-baseline",
+                "primary-low-sample-count-only"
+              ]
+            }
           ]
         },
         "d56": {
@@ -9516,6 +11525,61 @@
                 "gsc.impressions: complete-window-unavailable",
                 "gsc.impressions: window-includes-pre-publication",
                 "gsc.impressions: window-not-observed-yet",
+                "new-url-has-no-pre-publication-baseline",
+                "primary-low-sample-count-only"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 9,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "search-console",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                },
+                "internalNav.eventCount": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: complete-window-unavailable",
+                "gsc.impressions: window-includes-pre-publication",
+                "gsc.impressions: window-not-observed-yet",
+                "gsc.impressions: non-overlapping-report-references-unavailable",
+                "internalNav.eventCount: missing-or-low-sample",
+                "internalNav.eventCount: complete-window-unavailable",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "internalNav.eventCount: window-not-observed-yet",
+                "internalNav.eventCount: non-overlapping-report-references-unavailable",
                 "new-url-has-no-pre-publication-baseline",
                 "primary-low-sample-count-only"
               ]
@@ -9812,6 +11876,60 @@
                 "primary-low-sample-count-only"
               ]
             }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                },
+                "gsc.impressions": {
+                  "value": 29,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "complete-window-unavailable",
+                "window-includes-pre-publication",
+                "window-not-observed-yet",
+                "non-overlapping-report-references-unavailable"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: missing-or-low-sample",
+                "internalNav.eventCount: complete-window-unavailable",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "internalNav.eventCount: window-not-observed-yet",
+                "internalNav.eventCount: non-overlapping-report-references-unavailable",
+                "new-url-has-no-pre-publication-baseline"
+              ]
+            }
           ]
         },
         "d56": {
@@ -10005,6 +12123,60 @@
                 "internalNav.eventCount: window-not-observed-yet",
                 "new-url-has-no-pre-publication-baseline",
                 "primary-low-sample-count-only"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                },
+                "gsc.impressions": {
+                  "value": 18,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "complete-window-unavailable",
+                "window-includes-pre-publication",
+                "window-not-observed-yet",
+                "non-overlapping-report-references-unavailable"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: missing-or-low-sample",
+                "internalNav.eventCount: complete-window-unavailable",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "internalNav.eventCount: window-not-observed-yet",
+                "internalNav.eventCount: non-overlapping-report-references-unavailable",
+                "new-url-has-no-pre-publication-baseline"
               ]
             }
           ]
@@ -10243,6 +12415,60 @@
               "status": "launch-provisional",
               "reasons": [],
               "constraints": [
+                "new-url-has-no-pre-publication-baseline",
+                "primary-low-sample-count-only"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 20,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 62,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: missing-or-low-sample",
+                "internalNav.eventCount: complete-window-unavailable",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "internalNav.eventCount: window-not-observed-yet",
+                "internalNav.eventCount: non-overlapping-report-references-unavailable",
                 "new-url-has-no-pre-publication-baseline",
                 "primary-low-sample-count-only"
               ]
@@ -10491,6 +12717,60 @@
                 "primary-low-sample-count-only"
               ]
             }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 6,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 39,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: missing-or-low-sample",
+                "internalNav.eventCount: complete-window-unavailable",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "internalNav.eventCount: window-not-observed-yet",
+                "internalNav.eventCount: non-overlapping-report-references-unavailable",
+                "new-url-has-no-pre-publication-baseline",
+                "primary-low-sample-count-only"
+              ]
+            }
           ]
         },
         "d56": {
@@ -10695,6 +12975,59 @@
               "status": "launch-provisional",
               "reasons": [],
               "constraints": [
+                "new-url-has-no-pre-publication-baseline",
+                "primary-low-sample-count-only"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 25,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 9,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": 4,
+                  "status": "measured",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: window-includes-pre-publication",
                 "new-url-has-no-pre-publication-baseline",
                 "primary-low-sample-count-only"
               ]
@@ -10942,6 +13275,60 @@
                 "primary-low-sample-count-only"
               ]
             }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 7,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 12,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: missing-or-low-sample",
+                "internalNav.eventCount: complete-window-unavailable",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "internalNav.eventCount: window-not-observed-yet",
+                "internalNav.eventCount: non-overlapping-report-references-unavailable",
+                "new-url-has-no-pre-publication-baseline",
+                "primary-low-sample-count-only"
+              ]
+            }
           ]
         },
         "d56": {
@@ -11141,6 +13528,60 @@
                 "primary-low-sample-count-only"
               ]
             }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 5,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 25,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: missing-or-low-sample",
+                "internalNav.eventCount: complete-window-unavailable",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "internalNav.eventCount: window-not-observed-yet",
+                "internalNav.eventCount: non-overlapping-report-references-unavailable",
+                "new-url-has-no-pre-publication-baseline",
+                "primary-low-sample-count-only"
+              ]
+            }
           ]
         },
         "d56": {
@@ -11329,6 +13770,59 @@
               "status": "launch-provisional",
               "reasons": [],
               "constraints": [
+                "new-url-has-no-pre-publication-baseline",
+                "primary-low-sample-count-only"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 23,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 59,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": 2,
+                  "status": "measured",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: window-includes-pre-publication",
                 "new-url-has-no-pre-publication-baseline",
                 "primary-low-sample-count-only"
               ]
@@ -11577,6 +14071,60 @@
                 "primary-low-sample-count-only"
               ]
             }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 17,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 51,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: missing-or-low-sample",
+                "internalNav.eventCount: complete-window-unavailable",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "internalNav.eventCount: window-not-observed-yet",
+                "internalNav.eventCount: non-overlapping-report-references-unavailable",
+                "new-url-has-no-pre-publication-baseline",
+                "primary-low-sample-count-only"
+              ]
+            }
           ]
         },
         "d56": {
@@ -11819,6 +14367,59 @@
               "status": "launch-provisional",
               "reasons": [],
               "constraints": [
+                "new-url-has-no-pre-publication-baseline",
+                "primary-low-sample-count-only"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 35,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 214,
+                  "status": "measured",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": 5,
+                  "status": "measured",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: window-includes-pre-publication",
                 "new-url-has-no-pre-publication-baseline",
                 "primary-low-sample-count-only"
               ]
@@ -12071,6 +14672,60 @@
                 "primary-low-sample-count-only"
               ]
             }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 17,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 53,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: missing-or-low-sample",
+                "internalNav.eventCount: complete-window-unavailable",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "internalNav.eventCount: window-not-observed-yet",
+                "internalNav.eventCount: non-overlapping-report-references-unavailable",
+                "new-url-has-no-pre-publication-baseline",
+                "primary-low-sample-count-only"
+              ]
+            }
           ]
         },
         "d56": {
@@ -12312,6 +14967,59 @@
               "status": "launch-provisional",
               "reasons": [],
               "constraints": [
+                "new-url-has-no-pre-publication-baseline",
+                "primary-low-sample-count-only"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 16,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 52,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": 4,
+                  "status": "measured",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: window-includes-pre-publication",
                 "new-url-has-no-pre-publication-baseline",
                 "primary-low-sample-count-only"
               ]
@@ -12562,6 +15270,60 @@
                 "primary-low-sample-count-only"
               ]
             }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 46,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 79,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: missing-or-low-sample",
+                "internalNav.eventCount: complete-window-unavailable",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "internalNav.eventCount: window-not-observed-yet",
+                "internalNav.eventCount: non-overlapping-report-references-unavailable",
+                "new-url-has-no-pre-publication-baseline",
+                "primary-low-sample-count-only"
+              ]
+            }
           ]
         },
         "d56": {
@@ -12753,6 +15515,60 @@
                 "internalNav.eventCount: complete-window-unavailable",
                 "internalNav.eventCount: window-includes-pre-publication",
                 "internalNav.eventCount: window-not-observed-yet",
+                "new-url-has-no-pre-publication-baseline",
+                "primary-low-sample-count-only"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 5,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 33,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: missing-or-low-sample",
+                "internalNav.eventCount: complete-window-unavailable",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "internalNav.eventCount: window-not-observed-yet",
+                "internalNav.eventCount: non-overlapping-report-references-unavailable",
                 "new-url-has-no-pre-publication-baseline",
                 "primary-low-sample-count-only"
               ]
@@ -12997,6 +15813,60 @@
                 "internalNav.eventCount: complete-window-unavailable",
                 "internalNav.eventCount: window-includes-pre-publication",
                 "internalNav.eventCount: window-not-observed-yet",
+                "new-url-has-no-pre-publication-baseline",
+                "primary-low-sample-count-only"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 17,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 66,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "internalNav.eventCount": {
+                  "value": null,
+                  "status": "insufficient-data",
+                  "scope": "Japan",
+                  "windowDays": 0,
+                  "periodStart": null,
+                  "periodEnd": null,
+                  "weeks": []
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "internalNav.eventCount: missing-or-low-sample",
+                "internalNav.eventCount: complete-window-unavailable",
+                "internalNav.eventCount: window-includes-pre-publication",
+                "internalNav.eventCount: window-not-observed-yet",
+                "internalNav.eventCount: non-overlapping-report-references-unavailable",
                 "new-url-has-no-pre-publication-baseline",
                 "primary-low-sample-count-only"
               ]
@@ -13257,6 +16127,84 @@
                 "gsc.impressions: missing-or-low-sample",
                 "gsc.impressions: baseline-missing-or-low-sample"
               ]
+            },
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 18,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 6,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-02",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: baseline-missing-or-low-sample"
+              ]
+            }
+          ],
+          "d56": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 29,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-06",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 31,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 56,
+                  "periodStart": "2026-09-04",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W40",
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "window-includes-pre-publication",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: window-includes-pre-publication",
+                "gsc.impressions: baseline-missing-or-low-sample"
+              ]
             }
           ]
         },
@@ -13304,7 +16252,7 @@
       "notes": "未公開。2026-07-12〜2026-09-05の56日を公式APIへ直接指定して取得した実カウントをbaselineとして保存する。欠落した前28日を0補完していない。PV11・impressions15は最低標本未満のため比率・効果を確定しない。実公開後にscheduleし、D7品質・D28暫定・D56観測と低標本の制約を記録する。 同時変更: 2026-10-07 (#1099) にカード見出し 2 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json",
-        ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-foreign-residents.md",
+        "data/themes/reviews/2026-07-13-theme-foreign-residents.md",
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json"
       ],
       "verdict": "pending",
@@ -13415,6 +16363,58 @@
             "gsc.impressions: window-includes-pre-publication",
             "ga4.engagementRatePvWeighted: missing-or-low-sample",
             "ga4.engagementRatePvWeighted: window-includes-pre-publication"
+          ]
+        },
+        "rechecks": {
+          "d28": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 60,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 927,
+                  "status": "measured",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-02",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: window-includes-pre-publication",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: window-includes-pre-publication"
+              ]
+            }
           ]
         }
       },
@@ -13541,6 +16541,61 @@
             "ga4.engagementRatePvWeighted: window-includes-pre-publication",
             "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
           ]
+        },
+        "rechecks": {
+          "d28": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 14,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 122,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-02",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "window-includes-pre-publication",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: window-includes-pre-publication",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
+            }
+          ]
         }
       },
       "notes": "THEME-STRUCTURE-20260908-fishery-marine (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。 同時変更: 2026-10-08 オーナー承認の 「主な魚種と産地」章を新設し魚種別漁獲量 5 指標を secondary に (cf0335d56)。uruhayato373/stats47#1112 のマージ日に公開。",
@@ -13665,6 +16720,61 @@
             "ga4.engagementRatePvWeighted: missing-or-low-sample",
             "ga4.engagementRatePvWeighted: window-includes-pre-publication",
             "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+          ]
+        },
+        "rechecks": {
+          "d28": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 21,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 62,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-02",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "window-includes-pre-publication",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: window-includes-pre-publication",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
+            }
           ]
         }
       },
@@ -13792,6 +16902,62 @@
             "ga4.engagementRatePvWeighted: window-includes-pre-publication",
             "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
           ]
+        },
+        "rechecks": {
+          "d28": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 40,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 34,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-02",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "window-includes-pre-publication",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: window-includes-pre-publication",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
+            }
+          ]
         }
       },
       "notes": "THEME-STRUCTURE-20260908-healthcare (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。 同時変更: 2026-10-08 オーナー承認の candidate 章の重複カード 5 枚を削除 (b942a5926)。uruhayato373/stats47#1112 のマージ日に公開。",
@@ -13917,6 +17083,62 @@
             "ga4.engagementRatePvWeighted: missing-or-low-sample",
             "ga4.engagementRatePvWeighted: window-includes-pre-publication",
             "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+          ]
+        },
+        "rechecks": {
+          "d28": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 29,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 13,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-02",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "window-includes-pre-publication",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: window-includes-pre-publication",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
+            }
           ]
         }
       },
@@ -14044,6 +17266,62 @@
             "ga4.engagementRatePvWeighted: window-includes-pre-publication",
             "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
           ]
+        },
+        "rechecks": {
+          "d28": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 20,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 67,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-02",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "window-includes-pre-publication",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: window-includes-pre-publication",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
+            }
+          ]
         }
       },
       "notes": "THEME-STRUCTURE-20260908-labor-wages (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。",
@@ -14170,6 +17448,62 @@
             "ga4.engagementRatePvWeighted: window-includes-pre-publication",
             "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
           ]
+        },
+        "rechecks": {
+          "d28": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 43,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 114,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-02",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "window-includes-pre-publication",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: window-includes-pre-publication",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
+            }
+          ]
         }
       },
       "notes": "THEME-STRUCTURE-20260908-living-housing (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。 同時変更: 2026-10-08 オーナー承認の candidate 章の重複カード 2 枚を削除し、カード見出し「一般世帯数」から章名を外した (b942a5926)。uruhayato373/stats47#1112 のマージ日に公開。",
@@ -14292,6 +17626,59 @@
             "gsc.impressions: window-includes-pre-publication",
             "ga4.engagementRatePvWeighted: missing-or-low-sample",
             "ga4.engagementRatePvWeighted: window-includes-pre-publication"
+          ]
+        },
+        "rechecks": {
+          "d28": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 93,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 109,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-02",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: window-includes-pre-publication",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: window-includes-pre-publication"
+              ]
+            }
           ]
         }
       },
@@ -14419,6 +17806,62 @@
             "ga4.engagementRatePvWeighted: window-includes-pre-publication",
             "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
           ]
+        },
+        "rechecks": {
+          "d28": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 42,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 69,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-02",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "window-includes-pre-publication",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: window-includes-pre-publication",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
+            }
+          ]
         }
       },
       "notes": "THEME-STRUCTURE-20260908-tourism (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-08 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。",
@@ -14541,6 +17984,59 @@
             "gsc.impressions: window-includes-pre-publication",
             "ga4.engagementRatePvWeighted: missing-or-low-sample",
             "ga4.engagementRatePvWeighted: window-includes-pre-publication"
+          ]
+        },
+        "rechecks": {
+          "d28": [
+            {
+              "observedAt": "2026-11-14",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 34,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 88,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-02",
+                  "periodEnd": "2026-10-29",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-04",
+                  "periodEnd": "2026-10-31",
+                  "weeks": [
+                    "2026-W44"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "window-includes-pre-publication"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: window-includes-pre-publication",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: window-includes-pre-publication"
+              ]
+            }
           ]
         }
       },

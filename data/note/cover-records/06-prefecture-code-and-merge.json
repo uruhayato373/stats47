@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "06-prefecture-code-and-merge",
+  "production": {
+    "id": "NCI-00014",
+    "policyId": "NCP-007",
+    "policyVersion": 4,
+    "brief": {
+      "headline": "都道府県コードと\n地域階層を扱う",
+      "subline": "JIS・e-Stat・市区町村コード",
+      "subject": "色分けした無文字の見出しカードを階段状に並べたカードボックスを大きく描く。実務カテゴリの机上の資料構図。青と明るい黄色の暖かい手描き。画面・紙・道具の表面は無文字。実在UI・製品ロゴ・グラフ・地図は描かない。人物・顔・手・動物は描かない。",
+      "evidence": "https://note.com/stats47/n/n7ba7ee560bbb 本文確認2026-11-04。JIS X 0401、e-Stat 5桁、市区町村コードの変換を扱う記事。地図は描かない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "4c2de972cd61a91c36576f0b5dc325693f64188a0a08779b368b86eca05a3839",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/06-prefecture-code-and-merge/revisions/4c2de972cd61a91c36576f0b5dc325693f64188a0a08779b368b86eca05a3839.png"
+      },
+      "bytes": 111846,
+      "id": "4c2de972cd61a91c36576f0b5dc325693f64188a0a08779b368b86eca05a3839",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:44.944Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/293009701/rectangle_large_type_2_dcb0b4087290b256ed4bb254287a2fef.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "4c2de972cd61a91c36576f0b5dc325693f64188a0a08779b368b86eca05a3839"
+      }
+    },
+    {
+      "sha256": "6d0191aa103871ce28e102778ecd1dda14972798cedbab35103c419566c63045",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/06-prefecture-code-and-merge/revisions/6d0191aa103871ce28e102778ecd1dda14972798cedbab35103c419566c63045.png"
+      },
+      "bytes": 54175,
+      "id": "6d0191aa103871ce28e102778ecd1dda14972798cedbab35103c419566c63045",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:46:59.891Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "0a0bb79cb9f01fc4422f123b6f314cea32fe923afb10bdd6b2453b81f8a83d22"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出しとシリーズ名・話数・色でシリーズが区別できる",
+        "reviewedAt": "2026-10-11T11:51:41.186Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "0a0bb79cb9f01fc4422f123b6f314cea32fe923afb10bdd6b2453b81f8a83d22",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/06-prefecture-code-and-merge/inputs/0a0bb79cb9f01fc4422f123b6f314cea32fe923afb10bdd6b2453b81f8a83d22.json"
+          },
+          "bytes": 1086
+        }
+      }
+    },
+    {
+      "sha256": "89a6df35cad39eede9a2e5ae740b549e98d1922a59636fd2c745e49b01ca00ce",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/06-prefecture-code-and-merge/revisions/89a6df35cad39eede9a2e5ae740b549e98d1922a59636fd2c745e49b01ca00ce.png"
+      },
+      "bytes": 58284,
+      "id": "89a6df35cad39eede9a2e5ae740b549e98d1922a59636fd2c745e49b01ca00ce",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:56:08.111Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320329450/rectangle_large_type_2_f6169b6850428aaf9cc6c33bc642e4e8.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "89a6df35cad39eede9a2e5ae740b549e98d1922a59636fd2c745e49b01ca00ce"
+      }
+    },
+    {
+      "sha256": "083b6d311a58434349471581b21a4a8b1774575a38a80b55d35a4319bafe9890",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/06-prefecture-code-and-merge/revisions/083b6d311a58434349471581b21a4a8b1774575a38a80b55d35a4319bafe9890.png"
+      },
+      "bytes": 21480,
+      "id": "083b6d311a58434349471581b21a4a8b1774575a38a80b55d35a4319bafe9890",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:12:14.009Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "c20e6a3069995de897253a3f9494a45e5d9c6f07f509dd6d7ae52b0d15ad7e73"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.004/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:17:54.281Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "c20e6a3069995de897253a3f9494a45e5d9c6f07f509dd6d7ae52b0d15ad7e73",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/06-prefecture-code-and-merge/inputs/c20e6a3069995de897253a3f9494a45e5d9c6f07f509dd6d7ae52b0d15ad7e73.json"
+          },
+          "bytes": 1086
+        }
+      }
+    },
+    {
+      "sha256": "985234fbf5c46515adf4c4d118e26e85239dd91bee322e065459f519a05053bb",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/06-prefecture-code-and-merge/revisions/985234fbf5c46515adf4c4d118e26e85239dd91bee322e065459f519a05053bb.png"
+      },
+      "bytes": 1929567,
+      "id": "985234fbf5c46515adf4c4d118e26e85239dd91bee322e065459f519a05053bb",
+      "kind": "candidate",
+      "version": "pop-NCP-007-v4-2633c1e21b41",
+      "createdAt": "2026-11-04T00:29:25.770Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "aefdbd9199161f0c01756f56861774e6e89e52156a750664fa6623a29b053572"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:31:06.677Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "aefdbd9199161f0c01756f56861774e6e89e52156a750664fa6623a29b053572",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/06-prefecture-code-and-merge/inputs/aefdbd9199161f0c01756f56861774e6e89e52156a750664fa6623a29b053572.json"
+          },
+          "bytes": 8807
+        },
+        "production": {
+          "id": "NCI-00014",
+          "policyId": "NCP-007",
+          "policyVersion": 4,
+          "planSha256": "2633c1e21b4151646df9306513dbcf70c2b1d015dc4bc5ffb1abca1fdacf5b07"
+        }
+      }
+    }
+  ]
+}

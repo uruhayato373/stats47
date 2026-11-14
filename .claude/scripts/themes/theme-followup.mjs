@@ -9,7 +9,7 @@ import {
   summarizeFollowup,
   needsEvidenceReview,
 } from './theme-followup-core.mjs';
-import { datasetDir } from "../../../config/datasets.mjs";
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const ROOT = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -28,7 +28,7 @@ const { values: cli } = parseArgs({
 const read = (p) => JSON.parse(fs.readFileSync(path.join(ROOT, p), 'utf8'));
 const dir = path.join(ROOT, '.local/ci/theme-followup');
 fs.mkdirSync(dir, { recursive: true });
-const experiments = read(`${datasetDir("themes.portfolio")}/experiments.json`).experiments;
+const experiments = read(datasetPath("themes.experiments")).experiments;
 const today = cli.today ?? jstDateOf();
 if (cli.plan) {
   const plan = planFollowup(experiments, today, cli.force ?? false);
@@ -58,7 +58,7 @@ if (cli.plan) {
   };
   const result = summarizeFollowup({
     experiments,
-    quality: optional(`${datasetDir("themes.portfolio")}/quality.json`),
+    quality: optional(datasetPath("themes.quality")),
     runtime: optional('.local/ci/theme-followup/runtime.json'),
     codes,
     today,
@@ -73,13 +73,13 @@ if (cli.plan) {
       })
     )
     .digest('hex');
-  const priorReview = optional(`${datasetDir("themes.portfolio")}/ci-review.json`);
+  const priorReview = optional(datasetPath("themes.ci-review"));
   result.reviewRequired = needsEvidenceReview(result, priorReview);
   result.runUrl = process.env.GITHUB_RUN_ID
     ? `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`
     : null;
   fs.writeFileSync(
-    path.join(ROOT, `${datasetDir("themes.portfolio")}/ci-followup.json`),
+    path.join(ROOT, datasetPath("themes.ci-followup")),
     JSON.stringify(result, null, 2) + '\n'
   );
   fs.writeFileSync(path.join(dir, 'alert.md'), result.alertBody);

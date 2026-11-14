@@ -149,6 +149,52 @@ describe("不具合2: 使い方スライドの記載とグラフの参照範囲"
   }, 60000);
 });
 
+describe("不具合5: ランキング棒グラフは 1 位を一番上に描く", () => {
+  // 横棒グラフ (barDir=bar) は既定で先頭の項目を一番下に描く。1 位から順に渡す実装では、
+  // カテゴリ軸を maxMin に反転しないと 1 位が一番下に並ぶ (2026-10-28 に Office で実測)。
+  async function barChartXmls(path: string): Promise<string[]> {
+    const zip = await JSZip.loadAsync(readFileSync(path));
+    const xmls: string[] = [];
+    for (const name of Object.keys(zip.files).filter((f) => /^ppt\/charts\/chart\d+\.xml$/.test(f))) {
+      const xml = await zip.file(name)!.async("string");
+      if (xml.includes("<c:barChart>")) xmls.push(xml);
+    }
+    return xmls;
+  }
+
+  function expectTopRankedAtTop(xmls: string[]): void {
+    expect(xmls.length).toBeGreaterThan(0);
+    for (const xml of xmls) {
+      expect(xml).toContain('<c:barDir val="bar"/>');
+      // カテゴリ軸だけが反転している (値軸は反転しない)
+      const catAx = xml.match(/<c:catAx>[\s\S]*?<\/c:catAx>/)![0];
+      const valAx = xml.match(/<c:valAx>[\s\S]*?<\/c:valAx>/)![0];
+      expect(catAx).toContain('<c:orientation val="maxMin"/>');
+      expect(valAx).toContain('<c:orientation val="minMax"/>');
+      // 反転すると値軸が上に移るため、一番下 (最後のカテゴリ側) に固定する
+      expect(valAx).toContain('<c:crosses val="max"/>');
+    }
+  }
+
+  it("単一指標 PowerPoint の棒グラフはカテゴリ軸を反転し、1 位を一番上に描く", async () => {
+    const dir = mkdtempSync(join(tmpdir(), "pf-pptx-"));
+    try {
+      const out = join(dir, "s.pptx");
+      await buildProductPptx(JAPANESE_POPULATION_2024, loadPrefectureGeometry(1000, JAPAN_CLIP), out, "t");
+      expectTopRankedAtTop(await barChartXmls(out));
+    } finally { rmSync(dir, { recursive: true, force: true }); }
+  }, 60000);
+
+  it("データブック PowerPoint の棒グラフもカテゴリ軸を反転し、1 位を一番上に描く", async () => {
+    const dir = mkdtempSync(join(tmpdir(), "pf-pptx-"));
+    try {
+      const out = join(dir, "d.pptx");
+      await buildDatabookPptx(packs.get("P-01")!.slice(0, 2), loadPrefectureGeometry(1000, JAPAN_CLIP), out, "t");
+      expectTopRankedAtTop(await barChartXmls(out));
+    } finally { rmSync(dir, { recursive: true, force: true }); }
+  }, 60000);
+});
+
 describe("不具合3: SOURCES の statsDataId は指標定義の取得元と一致する", () => {
   it("補完出典で取得した年は補完側の statsDataId・調査名を書く (総人口 2025 は国勢調査 0004065881)", () => {
     const d = packs.get("P-01")!.find((x) => x.rankingKey === "total-population") ?? byKey("total-population");

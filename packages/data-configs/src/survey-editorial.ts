@@ -12,6 +12,15 @@ export interface SurveyReaderQuestion {
   rankingKey: string;
 }
 
+/**
+ * 調査の実施周期 (毎年でない調査だけ書く)。実施年 = anchorYear から intervalYears の倍数だけ離れた年。
+ * ハブ冒頭の最新年を、掲載データの年のうち実施年に当たる年から出すのに使う。
+ */
+export interface SurveyCycle {
+  intervalYears: number;
+  anchorYear: number;
+}
+
 export interface SurveyEditorialContent {
   summary: string;
   whatYouCanLearn: readonly string[];
@@ -19,6 +28,8 @@ export interface SurveyEditorialContent {
   caveats: readonly string[];
   /** ハブ冒頭の地域の表記。省略時は「47都道府県」。都市別の値を集める調査はここで言い換える */
   areaLabel?: string;
+  /** 調査の実施周期。省略時は毎年の調査として、ハブ冒頭に掲載データの最新年を出す */
+  surveyCycle?: SurveyCycle;
   /** 「この調査を使う記事」の先頭に置く記事 (公開済みのものだけ出る)。残りは公開日の新しい順 */
   relatedArticleSlugs?: readonly string[];
 }

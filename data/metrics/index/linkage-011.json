@@ -32,14 +32,6 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:aichi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:nara-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:shiga-food-culture",
           "kind": "blog"
         },
@@ -457,6 +449,10 @@
           "kind": "area"
         },
         {
+          "pageId": "blog:black-tea-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:black-tea-income-gap",
           "kind": "blog"
         },
@@ -465,7 +461,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:ibaraki-food-culture",
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {
@@ -485,11 +481,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:nagano-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:nagasaki-food-culture",
+          "pageId": "blog:oita-food-culture",
           "kind": "blog"
         },
         {
@@ -502,14 +494,6 @@
         },
         {
           "pageId": "blog:tochigi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:yamagata-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:yamanashi-food-culture",
           "kind": "blog"
         },
         {
@@ -744,6 +728,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:coffee-consumption-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:fukuoka-food-culture",
           "kind": "blog"
         },
@@ -752,7 +740,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:ibaraki-food-culture",
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {
@@ -772,11 +760,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:nagano-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:nagasaki-food-culture",
+          "pageId": "blog:oita-food-culture",
           "kind": "blog"
         },
         {
@@ -793,14 +777,6 @@
         },
         {
           "pageId": "blog:tochigi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:yamagata-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:yamanashi-food-culture",
           "kind": "blog"
         },
         {
@@ -2078,11 +2054,11 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:ehime-food-culture",
+          "pageId": "blog:hiroshima-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:hiroshima-food-culture",
+          "pageId": "blog:kagawa-food-culture",
           "kind": "blog"
         },
         {
@@ -2099,10 +2075,6 @@
         },
         {
           "pageId": "blog:osaka-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tokushima-food-culture",
           "kind": "blog"
         },
         {
@@ -2143,11 +2115,11 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:ehime-food-culture",
+          "pageId": "blog:hiroshima-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:hiroshima-food-culture",
+          "pageId": "blog:kagawa-food-culture",
           "kind": "blog"
         },
         {
@@ -2164,10 +2136,6 @@
         },
         {
           "pageId": "blog:osaka-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:tokushima-food-culture",
           "kind": "blog"
         },
         {
@@ -2924,10 +2892,6 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:ibaraki-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:kanagawa-food-culture",
           "kind": "blog"
         },
@@ -2976,10 +2940,6 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
-        {
-          "pageId": "blog:ibaraki-food-culture",
-          "kind": "blog"
-        },
         {
           "pageId": "blog:kanagawa-food-culture",
           "kind": "blog"
@@ -3956,11 +3916,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:kochi-food-culture",
+          "pageId": "blog:hiroshima-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:miyazaki-food-culture",
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {
@@ -3968,7 +3928,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:shiga-food-culture",
+          "pageId": "blog:tokushima-food-culture",
           "kind": "blog"
         },
         {
@@ -4203,11 +4163,11 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "blog:kochi-food-culture",
+          "pageId": "blog:hiroshima-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:miyazaki-food-culture",
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {
@@ -4215,7 +4175,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:shiga-food-culture",
+          "pageId": "blog:tokushima-food-culture",
           "kind": "blog"
         },
         {
@@ -8742,10 +8702,7 @@
         "configHash": "ef86c639ba86fc42"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:high-school-count-per-100k-15-17",
@@ -9011,10 +8968,7 @@
         "configHash": "43c75d15386c2e0a"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:pachinko-education-cost",

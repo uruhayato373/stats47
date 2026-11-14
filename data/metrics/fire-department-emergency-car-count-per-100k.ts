@@ -33,22 +33,6 @@ export const fireDepartmentEmergencyCarCountPer100k: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "台/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "台/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "seoTitle": "救急自動車数ランキング都道府県【2024年】｜1位島根県（12台）",
   "seoDescription": "2024年の救急自動車数の都道府県別ランキング。1位島根県（12台）、最下位東京都（2.7台）で4.4倍の格差。地図やグラフで47都道府県を比較。",

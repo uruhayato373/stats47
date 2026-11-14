@@ -39,7 +39,7 @@ primary_agent: theme-portfolio-manager
 
 必須入力 (すべて既存基盤から取得):
 1. **ThemeCatalog**: `data/themes/catalogs/<key>.json` (legacy は indicator-sets)
-2. **最新テーマレビュー**: `reference/reviews/*-theme-<key>.md` (公式根拠セクション含む。不足時は theme-researcher へ調査委譲)
+2. **最新テーマレビュー**: `data/themes/reviews/*-theme-<key>.md` (公式根拠セクション含む。不足時は theme-researcher へ調査委譲)
 3. **GSC 直近28日 vs 前28日**: snapshots `<最新週>/pages.csv` vs `<4週前>/pages.csv` (各週 = last-28d 窓。合算しない)
 4. **GA4 同**: Japan-only `pages-clean.csv` と成功/期間/国条件のmeta.jsonを持つ、実期間が連続した非重複窓ペア
 5. **指標の最新年・欠測率**: テーマ集計は portfolio.json の dataQuality、**指標別**は R2 `app/ranking/<rankingKey>/values.json` を個別 fetch (年列・47県カバレッジ)
@@ -49,7 +49,7 @@ primary_agent: theme-portfolio-manager
 出力 (固定 10 項・この順):
 現状 / 問題 / 仮説 / 判定 (keep・improve・merge/split/rename/retire 候補 — 運用文書「ライフサイクル判定の規律」準拠、根拠なし候補は validator が弾く) / 変更案 / primary KPI / guardrail KPI / 変更前 baseline (現行実測値) / 28日・56日の判定条件 (d28=暫定・d56=基本) / **Claude Code 実装契約** (実装 owner agent・対象ファイル・検証コマンド・禁止事項・R2/本番に触れない旨)
 
-保存: `reference/audits/YYYY-MM-DD-theme-deepdive-<key>.md` のみ (docs/ には書かない)。
+保存: `data/themes/audits/YYYY-MM-DD-theme-deepdive-<key>.md` のみ (docs/ には書かない)。
 変更を実行に移す場合: ①experiments.json に baseline 登録 (build/evaluate スクリプト経由) →
 ②実装契約を theme-designer 等へ委譲 (セッションの実装承認範囲内) → ③d28/d56 で効果判定。
 
@@ -62,7 +62,7 @@ primary_agent: theme-portfolio-manager
    raw GA4は統廃合判断に使わない。行欠落を0にせず、低標本では比率を保存しない。
 4. **portfolio.json 更新** → `node .claude/scripts/themes/validate-theme-state.mjs` が green であること。
 5. **差分レポート**: 前回との lifecycle 変更・stale 検知・insufficient-data の一覧を agent の
-   OUTPUT FORMAT で報告。四半期監査時は `.claude/skills/theme/manage-theme-portfolio/reference/audits/YYYY-MM-DD-theme-portfolio-audit.md` に保存。
+   OUTPUT FORMAT で報告。四半期監査時は `data/themes/audits/YYYY-MM-DD-theme-portfolio-audit.md` に保存。
 
 ## コマンド (PR-4 で確定)
 
@@ -85,7 +85,7 @@ node .claude/scripts/themes/capture-theme-page.mjs <themeKey>                   
 node --import tsx .claude/scripts/themes/record-theme-viewpoints.ts              # 視点の該当件数を週ごとに記録 (週次監査の 5b が呼ぶ)
 ```
 
-- cadence: **週次で機械監査、月次で公式資料と構成の再確認、四半期で監査レポート** (`.claude/skills/theme/manage-theme-portfolio/reference/audits/YYYY-MM-DD-theme-portfolio-audit.md`) を必須とする。CI (`pr-quality-check.yml` の Theme Portfolio State Guard) は schema/規律を検証。週次theme-chart-auditは公開R2と構成を読み、固定アラートを更新する。
+- cadence: **週次で機械監査、月次で公式資料と構成の再確認、四半期で監査レポート** (`data/themes/audits/YYYY-MM-DD-theme-portfolio-audit.md`) を必須とする。CI (`pr-quality-check.yml` の Theme Portfolio State Guard) は schema/規律を検証。週次theme-chart-auditは公開R2と構成を読み、固定アラートを更新する。
 
 ## 検証 (毎回必須)
 

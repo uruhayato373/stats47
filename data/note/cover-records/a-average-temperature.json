@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-average-temperature",
+  "production": {
+    "id": "NCI-00050",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "年平均気温\n高い県は？",
+      "subline": "1位は沖縄県\n2024年のデータ",
+      "subject": "右側に無文字・無数字の温度計を1点だけ大きく描く。具体的な温度値や地点を図示せず、夏の最高気温にも見せない。人物・キャラクター・地図・グラフ・県の輪郭・ロゴ・指定外の文字を描かない。",
+      "evidence": "公開本文を確認。2024年の年平均気温は沖縄県24.4℃で1位、北海道10.5℃で47位。年間平均であり、夏の最高気温や長期平年値ではない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "5485b7e57b8a14cb6a670d0c538eece25a05a4d7bfdb783949a65011504b659c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-average-temperature/revisions/5485b7e57b8a14cb6a670d0c538eece25a05a4d7bfdb783949a65011504b659c.png"
+      },
+      "bytes": 63542,
+      "id": "5485b7e57b8a14cb6a670d0c538eece25a05a4d7bfdb783949a65011504b659c",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:07.019Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312770730/rectangle_large_type_2_2373b9079c2cb21aba27a7f78472cd82.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "5485b7e57b8a14cb6a670d0c538eece25a05a4d7bfdb783949a65011504b659c"
+      }
+    },
+    {
+      "sha256": "b34ef362b918e62d123da92e084acde8be0ef040f5f561ca279fc2109f528ec8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-average-temperature/revisions/b34ef362b918e62d123da92e084acde8be0ef040f5f561ca279fc2109f528ec8.png"
+      },
+      "bytes": 112847,
+      "id": "b34ef362b918e62d123da92e084acde8be0ef040f5f561ca279fc2109f528ec8",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:13:07.444Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ec89d543de536fc53da30ebb3e741895cdc7983892e423fb8b07a09bc46578f8"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.840Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/average-temperature/values.json",
+        "sourceSha256": "f19754b62b535f851961bc0777c63801d17045d1fdc8612d9474acba74bb330c",
+        "input": {
+          "sha256": "ec89d543de536fc53da30ebb3e741895cdc7983892e423fb8b07a09bc46578f8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-average-temperature/inputs/ec89d543de536fc53da30ebb3e741895cdc7983892e423fb8b07a09bc46578f8.json"
+          },
+          "bytes": 7362
+        }
+      }
+    },
+    {
+      "sha256": "ac40e035b32e25bbaefa68e1098be7ab47d08cd3f9e0ae97f60a14533630bcd4",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-average-temperature/revisions/ac40e035b32e25bbaefa68e1098be7ab47d08cd3f9e0ae97f60a14533630bcd4.png"
+      },
+      "bytes": 1949494,
+      "id": "ac40e035b32e25bbaefa68e1098be7ab47d08cd3f9e0ae97f60a14533630bcd4",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-836f075b3e65",
+      "createdAt": "2026-10-23T05:45:47.133Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "753ef334faee7f08e1f16bda334f2b0c3994dd32cc4a06f8e9eed817123a87b0"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "本文の2024年の年平均気温と沖縄県1位に一致。夏の最高気温ではなく年間平均と明記。原寸・320pxで文字と無数値温度計を確認。",
+        "reviewedAt": "2026-10-23T05:50:31.485Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "753ef334faee7f08e1f16bda334f2b0c3994dd32cc4a06f8e9eed817123a87b0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-average-temperature/inputs/753ef334faee7f08e1f16bda334f2b0c3994dd32cc4a06f8e9eed817123a87b0.json"
+          },
+          "bytes": 7892
+        },
+        "production": {
+          "id": "NCI-00050",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "836f075b3e650a4c27015b062d45c04c9362de47a445c07d3acb67a29e4ff513"
+        }
+      }
+    }
+  ]
+}

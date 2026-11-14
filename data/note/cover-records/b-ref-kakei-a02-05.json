@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-kakei-a02-05",
+  "production": {
+    "id": "NCI-00174",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "紅茶は2.42倍\n緑茶は0.72倍",
+      "subline": "2024年・年収5階級の年間支出",
+      "subject": "紅茶のティーカップと緑茶の湯のみを左右に並べ、茶葉を小さく添える。二つの飲み物の対比を主役にし、棒グラフ・数表・人物・手・キャラクターは描かない。",
+      "evidence": "公開本文の結論: 年収の最も高い第Ⅴ階級は最も低い第Ⅰ階級に対し、2024年の紅茶支出が2.42倍、緑茶支出が0.72倍。対象は全国の二人以上の世帯、2014年と2024年の年間支出を比較。公開記事 https://note.com/stats47/n/nd8b1ce95b997 を確認。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "ecb16f25560a5ada9a9a86ac39d334b88c03ed0fe5a26f01a77122a8467f5bc1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a02-05/revisions/ecb16f25560a5ada9a9a86ac39d334b88c03ed0fe5a26f01a77122a8467f5bc1.png"
+      },
+      "bytes": 45285,
+      "id": "ecb16f25560a5ada9a9a86ac39d334b88c03ed0fe5a26f01a77122a8467f5bc1",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:11:05.521Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "1d67f9587e6b203d03b3a6365e0c08dfe08a15227ad877c5d1ca7b775e95daa1"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:46.200Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "1d67f9587e6b203d03b3a6365e0c08dfe08a15227ad877c5d1ca7b775e95daa1",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a02-05/inputs/1d67f9587e6b203d03b3a6365e0c08dfe08a15227ad877c5d1ca7b775e95daa1.json"
+          },
+          "bytes": 1304
+        }
+      }
+    },
+    {
+      "sha256": "cdc6a3d635cae300954ce7421669fde7f3964edbdf38e23ab9849294c50aafdb",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a02-05/revisions/cdc6a3d635cae300954ce7421669fde7f3964edbdf38e23ab9849294c50aafdb.png"
+      },
+      "bytes": 2010939,
+      "id": "cdc6a3d635cae300954ce7421669fde7f3964edbdf38e23ab9849294c50aafdb",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-86358a55dc91",
+      "createdAt": "2026-10-23T23:26:14.606Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "9e0609c77a9476be508d2ba9d2a498f25b10b6d7f31393bc7ffbd1eb445ecf00"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の結論（紅茶2.42倍、緑茶0.72倍）・2024年・年収5階級と一致。原寸と幅320pxで全掲載文字、ティーカップと湯のみ、余白を確認。旧版のかき（貝）の図による主題ずれを解消。",
+        "reviewedAt": "2026-10-23T23:27:33.094Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "9e0609c77a9476be508d2ba9d2a498f25b10b6d7f31393bc7ffbd1eb445ecf00",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a02-05/inputs/9e0609c77a9476be508d2ba9d2a498f25b10b6d7f31393bc7ffbd1eb445ecf00.json"
+          },
+          "bytes": 7515
+        },
+        "production": {
+          "id": "NCI-00174",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "86358a55dc91a23820f0f1d448b8754549be0d1cbc00b4bf8d3f80d8607be1cc"
+        }
+      }
+    }
+  ]
+}

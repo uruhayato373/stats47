@@ -1,3 +1,4 @@
+// @vitest-environment node
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -40,6 +41,7 @@ const upsert = (
   options: {
     previous?: BlogArticleLedger;
     gone?: string[];
+    goneTitles?: Record<string, string>;
     unpublished?: string[];
   } = {}
 ) =>
@@ -47,6 +49,7 @@ const upsert = (
     previous: options.previous,
     snapshot,
     goneSlugs: new Set(options.gone ?? []),
+    goneTitles: new Map(Object.entries(options.goneTitles ?? {})),
     unpublishedSlugs: new Set(options.unpublished ?? []),
     tagIdsOf,
   });
@@ -123,6 +126,57 @@ describe('記事台帳の upsert', () => {
       ['BarChartRace', 'gone', null],
       ['draft-only', 'unpublished', null],
       ['live', 'published', 'live の題'],
+    ]);
+  });
+
+  it('R2 の一覧に載ったことが無い 410 の slug は、410 の一覧に書いた題を記録に使う', () => {
+    const ledger = upsert([article('live')], {
+      gone: ['withdrawn-before-ledger', 'never-existed'],
+      goneTitles: { 'withdrawn-before-ledger': '台帳を作る前に消した記事の題' },
+    });
+
+    expect(
+      ledger.articles.map((record) => [record.slug, record.status, record.title])
+    ).toEqual([
+      ['live', 'published', 'live の題'],
+      ['never-existed', 'gone', null],
+      ['withdrawn-before-ledger', 'gone', '台帳を作る前に消した記事の題'],
+    ]);
+  });
+
+  it('題の無い 410 の記録が台帳に既にあっても、410 の一覧に題を足せば次の upsert で埋まる', () => {
+    const first = upsert([article('live')], { gone: ['old'] });
+    expect(first.articles[1]).toMatchObject({ slug: 'old', title: null });
+
+    const second = upsert([article('live')], {
+      previous: first,
+      gone: ['old'],
+      goneTitles: { old: '後から分かった題' },
+    });
+
+    expect(second.articles[1]).toMatchObject({
+      slug: 'old',
+      status: 'gone',
+      title: '後から分かった題',
+    });
+  });
+
+  it('R2 の一覧で見た題は、410 の一覧の題で上書きしない', () => {
+    const goneTitles = { listed: '410 の一覧の題', removed: '410 の一覧の題' };
+    const first = upsert([article('listed'), article('removed')], {
+      gone: ['listed', 'removed'],
+      goneTitles,
+    });
+
+    const second = upsert([article('listed')], {
+      previous: first,
+      gone: ['listed', 'removed'],
+      goneTitles,
+    });
+
+    expect(second.articles.map((record) => record.title)).toEqual([
+      'listed の題',
+      'removed の題',
     ]);
   });
 
@@ -254,6 +308,30 @@ describe('リポジトリの記事台帳', () => {
     }).sort((a, b) => a.id.localeCompare(b.id));
 
     expect(pages).toEqual(committed);
+  });
+
+  it('題の無い 410 の記録は、410 の一覧に題か、題が取れない理由を持つ', () => {
+    const gone = readJson('data/site/url-history/gone-blog-slugs.json')
+      .slugs as { slug: string; title?: string; titleUnknownReason?: string }[];
+    const goneBySlug = new Map(gone.map((entry) => [entry.slug, entry]));
+
+    // 410 の一覧に題がある slug は、台帳にも題が入っている (台帳が古ければ content:sync -- --from-r2 で埋まる)
+    const titleNotInLedger = gone
+      .filter((entry) => entry.title !== undefined)
+      .filter(
+        (entry) =>
+          ledger.articles.find((record) => record.slug === entry.slug)
+            ?.title === null
+      )
+      .map((entry) => entry.slug);
+    // 台帳に題が無いままの 410 の記録は、なぜ題が取れないかを 410 の一覧に残す
+    const unexplained = ledger.articles
+      .filter((record) => record.status === 'gone' && record.title === null)
+      .filter((record) => !goneBySlug.get(record.slug)?.titleUnknownReason)
+      .map((record) => record.slug);
+
+    expect(titleNotInLedger).toEqual([]);
+    expect(unexplained).toEqual([]);
   });
 
   it('台帳の slug が重複せず、昇順に並んでいる', () => {

@@ -1,16 +1,27 @@
-/** Shared, schema-validated note cover ledger. No local image paths are persisted. */
+/**
+ * Shared, schema-validated note cover ledger. No local image paths are persisted.
+ * The ledger is one document to every caller and two datasets on disk: the main file (which revision is the
+ * candidate/approved/published one, and the public observation) and one record file per article (its production
+ * content and every revision). Only this module joins and splits them.
+ */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import Ajv from 'ajv';
 import schema from '../../../../data/note/cover-assets.schema.json' with { type: 'json' };
-import { datasetPath } from "../../../../config/datasets.mjs";
+import recordSchema from '../../../../data/note/cover-records.schema.json' with { type: 'json' };
+import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 
 export const COVER_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../..');
 export const COVER_LEDGER_PATH = datasetPath("note.cover-assets");
+export const COVER_RECORDS_DIR = datasetDir("note.cover-records");
+const coverRecordPath = (key) => `${COVER_RECORDS_DIR}/${key}.json`;
 const ajv = new Ajv({ allErrors: true });
-const validateShape = ajv.compile(schema);
+const validateMainShape = ajv.compile(schema);
+const validateRecordShape = ajv.compile(recordSchema);
+const mainShapeError = () => Error(`cover ledger schema: ${ajv.errorsText(validateMainShape.errors)}`);
+const recordShapeError = (name) => Error(`cover ledger schema: ${name} ${ajv.errorsText(validateRecordShape.errors)}`);
 export const coverSha = (bytes) => createHash('sha256').update(bytes).digest('hex');
 export const coverAssetKey = (key, sha) => `note/covers/${key}/revisions/${sha}.png`;
 export const coverInputKey = (key, sha) => `note/covers/${key}/inputs/${sha}.json`;
@@ -31,8 +42,29 @@ export function assertCoverGenerationType(type) {
   if (type === 'note-covers') throw Error(`noteカバーは ${datasetPath("note.cover-assets")} が正本です。note:cover-production と Codex imagegen を使用してください。汎用OGP生成からの上書きは終了しました。`);
 }
 
+/** Stored form: the main document without production/revisions, and one record for each article that has either. */
+function splitCoverLedger(ledger) {
+  if (!Array.isArray(ledger?.articles) || ledger.articles.some((row) => !Array.isArray(row?.revisions)))
+    throw Error('cover ledger schema: every article needs a revisions array');
+  return { main: { ...ledger, articles: ledger.articles.map(({ production, revisions, ...row }) => row) },
+    records: ledger.articles.filter((row) => row.production || row.revisions.length).map((row) =>
+      ({ schemaVersion: 1, articleKey: row.articleKey, ...(row.production ? { production: row.production } : {}), revisions: row.revisions })) };
+}
+function storedCoverLedger(ledger) {
+  const { main, records } = splitCoverLedger(ledger), text = (document) => JSON.stringify(document, null, 2) + '\n';
+  // Record files come first: written in this order, a pointer in the main file never names a revision that is not on disk.
+  return { ...Object.fromEntries(records.map((record) => [coverRecordPath(record.articleKey), text(record)])),
+    [COVER_LEDGER_PATH]: text(main) };
+}
+/** Repository-relative path -> file text for a valid ledger (the writer and test fixtures share this one layout). */
+export function coverLedgerFiles(ledger) {
+  return storedCoverLedger(validateCoverLedger(ledger));
+}
+
 export function validateCoverLedger(ledger, catalog) {
-  if (!validateShape(ledger)) throw Error(`cover ledger schema: ${ajv.errorsText(validateShape.errors)}`);
+  const stored = splitCoverLedger(ledger);
+  if (!validateMainShape(stored.main)) throw mainShapeError();
+  for (const record of stored.records) if (!validateRecordShape(record)) throw recordShapeError(record.articleKey);
   const seen = new Set();
   const productionIds = new Set();
   for (const row of ledger.articles) {
@@ -81,8 +113,30 @@ export function validateCoverLedger(ledger, catalog) {
   return ledger;
 }
 
+function readCoverRecords(root) {
+  const directory = path.join(root, COVER_RECORDS_DIR), byArticle = new Map();
+  if (!fs.existsSync(directory)) return byArticle;
+  for (const name of fs.readdirSync(directory).filter((entry) => entry.endsWith('.json'))) {
+    const record = JSON.parse(fs.readFileSync(path.join(directory, name), 'utf8'));
+    if (!validateRecordShape(record)) throw recordShapeError(name);
+    if (`${record.articleKey}.json` !== name) throw Error(`cover record file identity: ${name}`);
+    byArticle.set(record.articleKey, record);
+  }
+  return byArticle;
+}
+
 export function readCoverLedger(root = COVER_ROOT) {
-  return validateCoverLedger(JSON.parse(fs.readFileSync(path.join(root, COVER_LEDGER_PATH), 'utf8')));
+  const main = JSON.parse(fs.readFileSync(path.join(root, COVER_LEDGER_PATH), 'utf8'));
+  // The stored main document is checked before joining: a row that still carries inline production or revisions
+  // (the pre-split single file) must stop here instead of shadowing the record files.
+  if (!validateMainShape(main)) throw mainShapeError();
+  const records = readCoverRecords(root), known = new Set(main.articles.map((row) => row.articleKey));
+  const orphan = [...records.keys()].find((key) => !known.has(key));
+  if (orphan) throw Error(`cover record file without ledger article: ${orphan}`);
+  return validateCoverLedger({ ...main, articles: main.articles.map(({ articleKey, noteUrl, ...row }) => {
+    const record = records.get(articleKey);
+    return { articleKey, noteUrl, revisions: record?.revisions ?? [], ...row, ...(record?.production ? { production: record.production } : {}) };
+  }) });
 }
 
 export function emptyCoverArticle(article) {
@@ -96,21 +150,34 @@ export async function updateCoverLedger(edit, root = COVER_ROOT) {
   fs.mkdirSync(path.dirname(file), { recursive: true });
   const lock = `${file}.lock`;
   const fd = fs.openSync(lock, 'wx');
-  const temporary = `${file}.${process.pid}.tmp`;
+  const temporaries = [];
   try {
+    if (!fs.existsSync(file) && readCoverRecords(root).size) throw Error('cover record files exist without the main ledger');
     const ledger = fs.existsSync(file) ? readCoverLedger(root)
       : { schemaVersion: 1, account: 'stats47', updatedAt: new Date().toISOString(), articles: [] };
+    const filed = ledger.articles.filter((row) => row.production || row.revisions.length).map((row) => coverRecordPath(row.articleKey));
     await edit(ledger);
     ledger.updatedAt = new Date().toISOString();
     validateCoverLedger(ledger);
     ledger.articles.sort((a, b) => a.articleKey.localeCompare(b.articleKey));
-    fs.writeFileSync(temporary, JSON.stringify(ledger, null, 2) + '\n');
-    // Windows readers/virus scanners can briefly hold the destination. Keep the
-    // writer lock and old ledger intact while retrying the same atomic rename.
-    await renameCoverFile(temporary, file);
+    const files = storedCoverLedger(ledger);
+    for (const [relative, text] of Object.entries(files)) {
+      const destination = path.join(root, relative);
+      // An edit touches a few articles; the record files of the others keep their bytes and mtime.
+      if (fs.existsSync(destination) && fs.readFileSync(destination, 'utf8') === text) continue;
+      fs.mkdirSync(path.dirname(destination), { recursive: true });
+      const temporary = `${destination}.${process.pid}.tmp`;
+      temporaries.push(temporary);
+      fs.writeFileSync(temporary, text);
+      // Windows readers/virus scanners can briefly hold the destination. Keep the
+      // writer lock and old ledger intact while retrying the same atomic rename.
+      await renameCoverFile(temporary, destination);
+    }
+    // An article removed by this edit takes its record file with it; files the ledger never knew are refused on read.
+    for (const relative of filed) if (!(relative in files)) fs.rmSync(path.join(root, relative));
     return ledger;
   } finally {
-    fs.rmSync(temporary, { force: true });
+    for (const temporary of temporaries) fs.rmSync(temporary, { force: true });
     fs.closeSync(fd);
     fs.unlinkSync(lock);
   }

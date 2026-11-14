@@ -22,16 +22,6 @@ const REGISTERED = new Set<string>(GIS_DATASETS.map((dataset) => dataset.dataId)
 const ALIASES = new Set<string>(GIS_DATASETS.flatMap((dataset) => dataset.candidateAliases ?? []));
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 
-/**
- * 公式ページの URL が台帳に無い登録データ (2026-10-29 時点の既存の欠け)。縮小専用。
- * URL を足したら一覧から消す。埋める作業はバックログ `GIS-SOURCE-PAGE-URL-01`。
- */
-const KNOWN_MISSING_SOURCE_PAGE: readonly string[] = [
-  'A10', 'A12', 'A13', 'A16', 'A17', 'A22', 'A27', 'A29', 'A31b', 'A32', 'A33', 'A38', 'A40',
-  'C02', 'C09', 'C23', 'N03', 'N07', 'P03', 'P04', 'P11', 'P12', 'P13', 'P14', 'P17', 'P18',
-  'P29', 'P35', 'P36', 'W01', 'W05',
-];
-
 function unknownIds(ids: readonly string[]): string[] {
   return [...new Set(ids)].filter((id) => !REGISTERED.has(id) && !ALIASES.has(id)).sort();
 }
@@ -47,12 +37,8 @@ describe('GIS 台帳 (親表)', () => {
     expect(GIS_DATASETS.filter((d) => !KSJ_CODE_CONFIG.has(d.dataId)).map((d) => d.dataId)).toEqual([]);
   });
 
-  it('公式ページの URL が無い登録データを増やさない (既存の欠けは縮小専用の一覧で管理する)', () => {
-    const missing = GIS_DATASETS.filter((d) => !d.sourcePageUrl).map((d) => d.dataId).sort();
-    // 新しく欠けたもの
-    expect(missing.filter((id) => !KNOWN_MISSING_SOURCE_PAGE.includes(id))).toEqual([]);
-    // URL を足したものは一覧から消す (一覧が実態より大きいまま残らないように)
-    expect(KNOWN_MISSING_SOURCE_PAGE.filter((id) => !missing.includes(id))).toEqual([]);
+  it('登録データはすべて公式の個別データページの URL を持つ', () => {
+    expect(GIS_DATASETS.filter((d) => !d.sourcePageUrl).map((d) => d.dataId).sort()).toEqual([]);
   });
 
   it('使い方ごとの利用条件は根拠の文言と確認日を持つ', () => {
@@ -65,8 +51,8 @@ describe('GIS 台帳 (親表)', () => {
   });
 
   it('公式利用条件の一覧と台帳で、公開と商用利用の扱いが食い違わない', () => {
-    // 区分名 (cc-by-4.0 / commercial-ok) の違いは扱いが同じなら許す。m250r6 は台帳が CC BY 4.0、
-    // 一覧が commercial-ok だが、どちらも「出典表示で商用可・公開可」(2026-10-29 に個別ページは CC BY 4.0 と確認)
+    // 区分名 (cc-by-4.0 / commercial-ok) の違いは扱いが同じなら許す。m250r6・m500r6 は個別ページが
+    // CC BY 4.0 (2026-10-29 確認) なので台帳も一覧も cc-by-4.0 に揃えた
     const mismatched = GIS_DATASETS.filter((dataset) => {
       const official = UNREGISTERED_KSJ_OFFICIAL_POLICY.get(dataset.dataId);
       if (!official) return false;

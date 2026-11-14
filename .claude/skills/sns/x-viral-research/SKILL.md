@@ -126,7 +126,7 @@ Chrome タブクローズ) を必ず仕込む。
 
 ### Phase 4: 比較用レポート出力
 
-`.claude/skills/sns/x-viral-research/reference/reports/YYYY-MM-DD.md`
+`data/sns/x-winning-pattern-reports/YYYY-MM-DD.md` (台帳 `sns.x-winning-pattern-reports`)
 (frontmatter `type: x-viral-research`):
 
 ```markdown

@@ -26,6 +26,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 
+import { datasetDir } from "../../../config/datasets.mjs";
 import {
   CLAUDE_CLI_MODELS,
   ClaudeCliError,
@@ -46,10 +47,7 @@ import {
   loadClassIndex,
 } from "./selection-backfill-core.mjs";
 
-const REPORT_DIR_DEFAULT = path.join(
-  PROJECT_ROOT,
-  ".claude/skills/theme/manage-theme-portfolio/reference/audits",
-);
+const REPORT_DIR_DEFAULT = path.join(PROJECT_ROOT, datasetDir("themes.audits"));
 const LOCAL_DIR = path.join(PROJECT_ROOT, ".local/selection-backfill");
 /** claude CLI の cwd。repo 外に固定して CLAUDE.md / rules / hooks を読ませない (ai-content と同じ理由) */
 const CLI_CWD = path.join(os.tmpdir(), "stats47-selection-backfill-cli");

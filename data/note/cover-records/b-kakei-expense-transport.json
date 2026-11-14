@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-kakei-expense-transport",
+  "production": {
+    "id": "NCI-00516",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "電車代が少ない県は\n交通費も少ない？",
+      "subline": "公共交通と車の費用を足して比べる",
+      "subject": "無地の電車の切符と車の鍵を並べて置く。人物・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。切符や鍵に文字・数字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "本文確認2026-11-05。鉄道運賃は東京都区部と那覇市で2025年18倍、5年平均9.6倍。公共交通に車の費用を足すと電車代の順位との順位相関は0.15でほとんど関係がない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "3a6c3dfffd95eed0a5e78f5101ccedd7dd8839dbb97ecce3203ce9b1e2bdbc27",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-expense-transport/revisions/3a6c3dfffd95eed0a5e78f5101ccedd7dd8839dbb97ecce3203ce9b1e2bdbc27.png"
+      },
+      "bytes": 1962038,
+      "id": "3a6c3dfffd95eed0a5e78f5101ccedd7dd8839dbb97ecce3203ce9b1e2bdbc27",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-b4e063170862",
+      "createdAt": "2026-11-04T23:09:44.402Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "80af866360a094d9697f69cbafc1955ae8ee5e69b98e991b26aed78247bb96b1"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸と幅320pxで全文・題材を確認。誤字・追加文字・文字切れ・重なりなし、人物と架空の図なし、本文の問いに一致",
+        "reviewedAt": "2026-11-04T23:09:48.083Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "80af866360a094d9697f69cbafc1955ae8ee5e69b98e991b26aed78247bb96b1",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-transport/inputs/80af866360a094d9697f69cbafc1955ae8ee5e69b98e991b26aed78247bb96b1.json"
+          },
+          "bytes": 8610
+        },
+        "production": {
+          "id": "NCI-00516",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "b4e063170862346c235cce60e2db8f12f28fe8f6d9ef6d94a036d5dd1c58b214"
+        }
+      }
+    },
+    {
+      "sha256": "fdf70dea3dd1b4a0affa8659369b0caffe8aec10957c7782ed123b02a3c7a0a1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-expense-transport/revisions/fdf70dea3dd1b4a0affa8659369b0caffe8aec10957c7782ed123b02a3c7a0a1.png"
+      },
+      "bytes": 504423,
+      "id": "fdf70dea3dd1b4a0affa8659369b0caffe8aec10957c7782ed123b02a3c7a0a1",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-05T12:29:43.654Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/332608891/rectangle_large_type_2_983528f029b42da3198a1833efd217cd.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "fdf70dea3dd1b4a0affa8659369b0caffe8aec10957c7782ed123b02a3c7a0a1"
+      }
+    }
+  ]
+}

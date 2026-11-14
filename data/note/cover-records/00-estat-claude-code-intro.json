@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "00-estat-claude-code-intro",
+  "production": {
+    "id": "NCI-00002",
+    "policyId": "NCP-007",
+    "policyVersion": 4,
+    "brief": {
+      "headline": "統計の仕事に\nClaude Code",
+      "subline": "e-Statで検索・取得・整形",
+      "subject": "実務カテゴリの机上の資料構図。青と黄色、白い紙のカットアウト。主見出しは上左に大きく2行。右下に閉じた資料バインダーと無人のノートPCの2点だけを重ね、太い輪郭で整理された作業の印象に。画面やバインダーは無文字で、実在UI・e-StatやClaudeのロゴ・グラフ・地図・指・人影は描かない。速度向上・実績の数字なし。1280×670相当、約1.91:1の横長。主見出しは濃紺の極太文字で大きく、補足は下部の太い帯に各行を1280px換算で高さ64px程度以上で入れる。上部のカテゴリ名も読みやすく、文字の四辺は余白を保つ。指定外の文字・数字・URL・ロゴ・細かな図表は入れない。道具の表面・紙・画面はすべて無文字。人物・顔・手・動物・キャラクター・擬人化は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n258277f96f88 2026-10-15公開本文確認。自治体職員向けe-Stat×Claude Code入門。公開統計の検索、取得、整形、派生指標、出力の全体像を扱う。カバーは最初の3作業だけを示し、本文の短縮時間や契約プラン等をカバーで保証・宣伝しない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "b1bc21a8bf39afbf8db31d581caf9354ea4b0e3dc92f53709a97f93bcc769466",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/00-estat-claude-code-intro/revisions/b1bc21a8bf39afbf8db31d581caf9354ea4b0e3dc92f53709a97f93bcc769466.png"
+      },
+      "bytes": 112095,
+      "id": "b1bc21a8bf39afbf8db31d581caf9354ea4b0e3dc92f53709a97f93bcc769466",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:41.479Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/292994579/rectangle_large_type_2_b61fe60699faf515ca8b187656511686.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "b1bc21a8bf39afbf8db31d581caf9354ea4b0e3dc92f53709a97f93bcc769466"
+      }
+    },
+    {
+      "sha256": "22151d1d8be9a540678e8b61ec86c444b3fa6a2d99407f96d2155462237591ef",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/00-estat-claude-code-intro/revisions/22151d1d8be9a540678e8b61ec86c444b3fa6a2d99407f96d2155462237591ef.png"
+      },
+      "bytes": 56176,
+      "id": "22151d1d8be9a540678e8b61ec86c444b3fa6a2d99407f96d2155462237591ef",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:46:37.726Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "a3bca8d62e8188313440608adfd425c7bc2e0a52d99b6b481e3ec863eff979ac"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出しとシリーズ名・話数・色でシリーズが区別できる",
+        "reviewedAt": "2026-10-11T11:51:34.085Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "a3bca8d62e8188313440608adfd425c7bc2e0a52d99b6b481e3ec863eff979ac",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/00-estat-claude-code-intro/inputs/a3bca8d62e8188313440608adfd425c7bc2e0a52d99b6b481e3ec863eff979ac.json"
+          },
+          "bytes": 1072
+        }
+      }
+    },
+    {
+      "sha256": "cfec6f31379ea0629109ae3a0c87af8d08bb54aaecb366d9a06201017a615c53",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/00-estat-claude-code-intro/revisions/cfec6f31379ea0629109ae3a0c87af8d08bb54aaecb366d9a06201017a615c53.png"
+      },
+      "bytes": 61985,
+      "id": "cfec6f31379ea0629109ae3a0c87af8d08bb54aaecb366d9a06201017a615c53",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:56:04.678Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320329008/rectangle_large_type_2_35b54eb4848d2be7d4c75cdf249ace32.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "cfec6f31379ea0629109ae3a0c87af8d08bb54aaecb366d9a06201017a615c53"
+      }
+    },
+    {
+      "sha256": "7f0dddcf32691b9df56872256ef4e86f99f57199ed0fee9e609e5fdae731b547",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/00-estat-claude-code-intro/revisions/7f0dddcf32691b9df56872256ef4e86f99f57199ed0fee9e609e5fdae731b547.png"
+      },
+      "bytes": 72523,
+      "id": "7f0dddcf32691b9df56872256ef4e86f99f57199ed0fee9e609e5fdae731b547",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T07:08:33.885Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323267188/rectangle_large_type_2_09eb7a8de55840e993098cebbffda3e6.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "7f0dddcf32691b9df56872256ef4e86f99f57199ed0fee9e609e5fdae731b547"
+      }
+    },
+    {
+      "sha256": "c1ce799077d238d7601e4e0ad1f89ad198d05d754476d8827d20c7f59809dc8e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/00-estat-claude-code-intro/revisions/c1ce799077d238d7601e4e0ad1f89ad198d05d754476d8827d20c7f59809dc8e.png"
+      },
+      "bytes": 1662492,
+      "id": "c1ce799077d238d7601e4e0ad1f89ad198d05d754476d8827d20c7f59809dc8e",
+      "kind": "candidate",
+      "version": "imagegen-multicategory-pilot-20261015",
+      "createdAt": "2026-10-15T07:10:26.598Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "27a025ca214d2ad4837c41f845063b4682962ac13620d1277d9d68e4acfbc1d0"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "NCI-00002: 6カテゴリ試作の原寸/320pxの指定全文・補足・人物なし・題材とカテゴリ固有条件を個別確認済み。practitioner。2026-10-15ユーザーが表示中10件のnote反映を指示。候補SHA c1ce799077d238d7601e4e0ad1f89ad198d05d754476d8827d20c7f59809dc8e。",
+        "reviewedAt": "2026-10-15T07:23:05.513Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "27a025ca214d2ad4837c41f845063b4682962ac13620d1277d9d68e4acfbc1d0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/00-estat-claude-code-intro/inputs/27a025ca214d2ad4837c41f845063b4682962ac13620d1277d9d68e4acfbc1d0.json"
+          },
+          "bytes": 10214
+        },
+        "production": {
+          "id": "NCI-00002",
+          "policyId": "NCP-007",
+          "policyVersion": 4,
+          "planSha256": "4b9bc941015f75fc418ac778d103236efcd473371487dcf10489932c383f9aa6"
+        }
+      }
+    }
+  ]
+}

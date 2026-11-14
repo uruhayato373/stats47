@@ -62,6 +62,11 @@ const SCALED_BASE_UNITS: ReadonlyArray<readonly [string, string, string, number]
   ["km2", "area", "m2", 6],
   ["kWh", "energy", "Wh", 3],
   ["MWh", "energy", "Wh", 6],
+  // 熱量 (ジュール)。SSDS・都道府県別エネルギー消費統計の最終エネルギー消費量 (TJ)、1人当たり (GJ)、
+  // 都市ガス販売量 (万MJ)。Wh とは 3,600 倍の関係で 10 の累乗にならないので、基底単位を分けて換算しない。
+  ["MJ", "energy", "J", 6],
+  ["GJ", "energy", "J", 9],
+  ["TJ", "energy", "J", 12],
   // 再エネ特措法 A表の設備容量 (fit-fip-installed-capacity)。発電量 Wh と区別する。
   // https://www.fit-portal.go.jp/publicinfosummary （原表・取得日は metric の provenance）
   ["W", "power", "W", 0],
@@ -145,7 +150,11 @@ const BASE_UNITS: ReadonlyArray<readonly [string, string]> = [
   ["者", "count"],
   ["基", "count"],
   ["束", "count"],
-  // 体格指数 BMI の単位。kg と m2 を割った量なので質量・面積とは換算しない。
+  // 港湾統計の入港船舶総トン数 (port-ships-tonnage)。総トン数は船の閉囲場所の容積から算定する
+  // 「船舶の大きさを表すための指標」で、重さのトンではない (船舶のトン数の測度に関する法律 第4条・第5条。
+  // https://laws.e-gov.go.jp/law/355AC0000000040 2026-11-13 に条文を確認)。質量とは換算しない。
+  ["総トン", "gross-tonnage"],
+  // 体格指数 BMI の単位。体重 ÷ 身長² の量なので質量・面積とは換算しない。
   // 国民健康・栄養調査の年齢調整BMI (bmi-male-20to69-age-adjusted / bmi-female-40to69-age-adjusted)。NFKC後は kg/m2。
   ["kg/m2", "body-mass-index"],
   ["g", "mass"],
@@ -174,9 +183,6 @@ const BASE_UNITS: ReadonlyArray<readonly [string, string]> = [
   // NFKC は「℃」を「°C」(2 文字) に分解する。正規化後の形で持つ
   // (元の 1 文字で書くとカタログ側が一致しない。2026-08-12 にテストで検出)
   ["°C", "temperature"],
-  // 国民健康・栄養調査の BMI 平均値 (bmi-*-age-adjusted)。NFKC 後は kg/m2。
-  // 体重 ÷ 身長² の指標で、質量・面積のどちらとも換算しない。
-  ["kg/m2", "bmi"],
 ];
 
 /** 割合を表す単位 (相互に換算しない — ‰ と ％ は 10 倍違うが混同事故を避け別次元にする)。 */
@@ -329,7 +335,8 @@ function matchBaseUnit(s: string): Pick<UnitSemantics, "dimension" | "baseUnit" 
   if (t === "") return null;
   for (const [token, dimension, baseUnit, scaleExponent] of SCALED_BASE_UNITS) {
     // 電力は mW と MW が別倍率。CO2 の物質表記も大小文字を勝手に畳まない。
-    const matches = dimension === "power" || dimension === "co2-mass"
+    // ジュールも mJ (ミリ) と MJ (メガ) が別倍率なので畳まない (Wh は e-Stat に Mwh・kwh の表記があるので畳む)。
+    const matches = dimension === "power" || dimension === "co2-mass" || baseUnit === "J"
       ? token === t
       : token.toLowerCase() === t.toLowerCase();
     if (matches) {

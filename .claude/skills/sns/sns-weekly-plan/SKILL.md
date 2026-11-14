@@ -71,7 +71,7 @@ node .claude/scripts/sns/promote-scheduled-x.cjs --apply                        
 /find-quote-rt                 # トレンドがあれば引用RT (1日≤3・72h以内・炎上/政治回避)
 ```
 
-- 頻度上限は rules §1 quota (`X_DAILY_MAX=3` / 週 21) が SSOT。ガードは `check-x-post-budget.cjs`。
+- 頻度上限は台帳 `sns.x-catalog` の quota (`dailyMax` / `weeklyTargetMax`。判断の理由は rules §1) が SSOT。ガードは `check-x-post-budget.cjs`。
 - 単発だけ作るなら `/post-x --key <rankingKey>` (post-x-batch の N=1 版)。
 
 ### Step 5: 月初のみ — note

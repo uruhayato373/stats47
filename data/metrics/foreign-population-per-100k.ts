@@ -42,22 +42,6 @@ export const foreignPopulationPer100k: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "人/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "人/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "seoTitle": "外国人人口（人口10万人当たり）ランキング市区町村【2020年】｜1位長野県 川上村（18,991.7人）",
   "seoDescription": "2020年の外国人人口（人口10万人当たり）の市区町村別ランキング。1位長野県 川上村（18,991.7人）、最下位和歌山県 北山村（0人）で地図やグラフで市区町村を比較。",

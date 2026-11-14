@@ -22,7 +22,7 @@ export const industrialLandPriceChangeRate: MetricConfig = {
     "colorSchemeType": "sequential",
   },
   "years": "all",
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "seoTitle": "標準価格（対前年平均変動率）（工業地）",
   "isActive": true,
 };

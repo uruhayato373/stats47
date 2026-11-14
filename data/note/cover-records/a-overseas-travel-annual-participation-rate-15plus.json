@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-overseas-travel-annual-participation-rate-15plus",
+  "production": {
+    "id": "NCI-00118",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "海外旅行に行く人\n多い県は？",
+      "subline": "1位は東京都\n2001年・15歳以上",
+      "subject": "水色と黄色、濃紺の大きな文字を使う温かい手描きのカバー。右側に文字やロゴのない旅客機を1機だけ大きく描き、空と雲を背景にする。左側に問いを大きく2行、下に補足を太い帯で2行。2001年が現在の順位に見えないよう対象年を明瞭にする。人物・顔・手・動物・キャラクター・マスコット・擬人化、地図・国旗・空港名・航空会社ロゴ・架空のグラフ・表彰台・メダル・指定外の文字と数字を描かない。",
+      "evidence": "https://storage.stats47.jp/note/stats47-note/a-overseas-travel-annual-participation-rate-15plus/draft.md の公開本文を2026-10-23に確認。総務省「社会生活基本調査」2001年、過去1年間に海外旅行をした15歳以上の人の割合。東京都18.2％で1位、秋田県5.0％で47位。現在のランキングや空港・所得による原因断定は掲載しない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "e496142085e679f8f30df8bb19e2b446df3de40f22c159c11b8f60d58528fedc",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-overseas-travel-annual-participation-rate-15plus/revisions/e496142085e679f8f30df8bb19e2b446df3de40f22c159c11b8f60d58528fedc.png"
+      },
+      "bytes": 48771,
+      "id": "e496142085e679f8f30df8bb19e2b446df3de40f22c159c11b8f60d58528fedc",
+      "kind": "candidate",
+      "version": "2026-10-12-drafts",
+      "createdAt": "2026-10-12T00:52:43.648Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "d9c58f3b04911164f5559a24371570177856d0b1f10d1578f277cb4f56bba851"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出し・記事の事実・図(または値を持たない背景地図)が読める。登録前の確認版とSHA一致",
+        "reviewedAt": "2026-10-12T00:53:56.692Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/overseas-travel-annual-participation-rate-15plus/values.json",
+        "sourceSha256": "2d7c166fa095264433c3bf1926cf900ca12fbe38d97d2b713c6f1adcc187e87c",
+        "input": {
+          "sha256": "d9c58f3b04911164f5559a24371570177856d0b1f10d1578f277cb4f56bba851",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-overseas-travel-annual-participation-rate-15plus/inputs/d9c58f3b04911164f5559a24371570177856d0b1f10d1578f277cb4f56bba851.json"
+          },
+          "bytes": 7270
+        }
+      }
+    },
+    {
+      "sha256": "da7c2b44438da962244822ee27d795aa8c9724e74b77f4566fcd8f45733aca20",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-overseas-travel-annual-participation-rate-15plus/revisions/da7c2b44438da962244822ee27d795aa8c9724e74b77f4566fcd8f45733aca20.png"
+      },
+      "bytes": 61105,
+      "id": "da7c2b44438da962244822ee27d795aa8c9724e74b77f4566fcd8f45733aca20",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-14T01:08:30.223Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323532367/rectangle_large_type_2_46f42e9da09a1e6649cf19ac39633b98.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "da7c2b44438da962244822ee27d795aa8c9724e74b77f4566fcd8f45733aca20"
+      }
+    },
+    {
+      "sha256": "cdbde224858bf63612df8bd2f62310752c015733c606ff0d17f7ec565edb6139",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-overseas-travel-annual-participation-rate-15plus/revisions/cdbde224858bf63612df8bd2f62310752c015733c606ff0d17f7ec565edb6139.png"
+      },
+      "bytes": 1935493,
+      "id": "cdbde224858bf63612df8bd2f62310752c015733c606ff0d17f7ec565edb6139",
+      "kind": "candidate",
+      "version": "imagegen-pop-v2-recent-six-20261014",
+      "createdAt": "2026-10-14T01:09:31.497Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "de7fd0ee691415adc7c7c47f788351c74ba92ea0e6abc746b239e73be5288d4b"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸・幅320pxの目視と転記・文字切れ・重なりを確認済み。2026-10-14ユーザーがこの6件の公開カバー更新を指示。",
+        "reviewedAt": "2026-10-14T01:42:18.955Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "de7fd0ee691415adc7c7c47f788351c74ba92ea0e6abc746b239e73be5288d4b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-overseas-travel-annual-participation-rate-15plus/inputs/de7fd0ee691415adc7c7c47f788351c74ba92ea0e6abc746b239e73be5288d4b.json"
+          },
+          "bytes": 7753
+        },
+        "production": {
+          "id": "NCI-00118",
+          "policyId": "NCP-003",
+          "policyVersion": 2,
+          "planSha256": "286295b01148fa00d6328e57f47f6089eae04e92058d8ad5bb9522cde69f3351"
+        }
+      }
+    },
+    {
+      "sha256": "52368d4e8156e5a8c46fefea56af7b3a84aa49308f2c9e78a8832f3bf2a8fb6e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-overseas-travel-annual-participation-rate-15plus/revisions/52368d4e8156e5a8c46fefea56af7b3a84aa49308f2c9e78a8832f3bf2a8fb6e.png"
+      },
+      "bytes": 1758298,
+      "id": "52368d4e8156e5a8c46fefea56af7b3a84aa49308f2c9e78a8832f3bf2a8fb6e",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-83713a5f9ee7",
+      "createdAt": "2026-10-23T05:18:02.582Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "121975bf0f0192cced00a22bb9eb0da27826a88a20c9c353eac2b5e719cf4c56"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "旧版と新版を比較。2001年・15歳以上、東京都1位の文言は本文に一致。旅客機1機で対象を示し、原寸と幅320pxで文字・余白・人物なしを確認。",
+        "reviewedAt": "2026-10-23T05:19:13.186Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "121975bf0f0192cced00a22bb9eb0da27826a88a20c9c353eac2b5e719cf4c56",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-overseas-travel-annual-participation-rate-15plus/inputs/121975bf0f0192cced00a22bb9eb0da27826a88a20c9c353eac2b5e719cf4c56.json"
+          },
+          "bytes": 8826
+        },
+        "production": {
+          "id": "NCI-00118",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "83713a5f9ee74be741321d2d15234d1675c67ff3658f66c447b287855c445119"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-dev-a49",
+  "production": {
+    "id": "NCI-00163",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "脳梗塞の死亡率\n47都道府県を比較",
+      "subline": "人口当たりの地域差",
+      "subject": "聴診器と、無文字のカルテ風の紙ばさみを大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n4ad7022a4411 本文確認2026-11-04。人口当たりの脳梗塞による死亡率。秋田県が最も高く、東京都が最も低い。年齢構成の影響に留意し県の良し悪しを示さない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "706307f5b352e9b08b0a8f88923ea1b0ba327464772b2d23ec8c27dce5172be8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a49/revisions/706307f5b352e9b08b0a8f88923ea1b0ba327464772b2d23ec8c27dce5172be8.png"
+      },
+      "bytes": 34743,
+      "id": "706307f5b352e9b08b0a8f88923ea1b0ba327464772b2d23ec8c27dce5172be8",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:07:36.254Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "7a411d728e1d08207f89013e2230c1c5f43e89166d043afc2ecce20a5d9f20c4"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:30.354Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "7a411d728e1d08207f89013e2230c1c5f43e89166d043afc2ecce20a5d9f20c4",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a49/inputs/7a411d728e1d08207f89013e2230c1c5f43e89166d043afc2ecce20a5d9f20c4.json"
+          },
+          "bytes": 1282
+        }
+      }
+    },
+    {
+      "sha256": "96338735e1f7ea304a1e8774b3f9a6bc7d6178b4c2ad2bb0951e942728e4f487",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a49/revisions/96338735e1f7ea304a1e8774b3f9a6bc7d6178b4c2ad2bb0951e942728e4f487.png"
+      },
+      "bytes": 82486,
+      "id": "96338735e1f7ea304a1e8774b3f9a6bc7d6178b4c2ad2bb0951e942728e4f487",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:45.367Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324072435/rectangle_large_type_2_6afbb313769c265bed84e5f7564e3311.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "96338735e1f7ea304a1e8774b3f9a6bc7d6178b4c2ad2bb0951e942728e4f487"
+      }
+    },
+    {
+      "sha256": "919efaf7153319ef923cc6c3047ad241c4f09f775edad64511dd05d7508fe70d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a49/revisions/919efaf7153319ef923cc6c3047ad241c4f09f775edad64511dd05d7508fe70d.png"
+      },
+      "bytes": 1928963,
+      "id": "919efaf7153319ef923cc6c3047ad241c4f09f775edad64511dd05d7508fe70d",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-2d7ca3a0aa1b",
+      "createdAt": "2026-11-04T01:08:19.028Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ebe45259930846c1a7cb3103a29f2b075fccc5f5e572ee586127b1e13ed2b50e"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:10:21.683Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "ebe45259930846c1a7cb3103a29f2b075fccc5f5e572ee586127b1e13ed2b50e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a49/inputs/ebe45259930846c1a7cb3103a29f2b075fccc5f5e572ee586127b1e13ed2b50e.json"
+          },
+          "bytes": 8168
+        },
+        "production": {
+          "id": "NCI-00163",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "2d7ca3a0aa1b6309f8429711214c77eac3295388765c53f5fde6872ed6f19520"
+        }
+      }
+    }
+  ]
+}

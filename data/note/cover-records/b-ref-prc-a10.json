@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-prc-a10",
+  "production": {
+    "id": "NCI-00194",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "アウトドアの楽しみ方\n47都道府県を比較",
+      "subline": "サイクリング・登山・スキー",
+      "subject": "自転車の模型と登山靴、スキー板を大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n76d822ca3e90 本文確認2026-11-04。サイクリングは東京都14.4％、スキーは北海道8.3％。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "162c1cf0d4f85ed9c12bde97585ffb02c0cfe8194f61fc8045e5db11dc09064a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a10/revisions/162c1cf0d4f85ed9c12bde97585ffb02c0cfe8194f61fc8045e5db11dc09064a.png"
+      },
+      "bytes": 36003,
+      "id": "162c1cf0d4f85ed9c12bde97585ffb02c0cfe8194f61fc8045e5db11dc09064a",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:07:54.590Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "c21cd54f4a67883e80a8a810fee70b579650bf3928220852b5254d2480557b29"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:13:14.203Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "c21cd54f4a67883e80a8a810fee70b579650bf3928220852b5254d2480557b29",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a10/inputs/c21cd54f4a67883e80a8a810fee70b579650bf3928220852b5254d2480557b29.json"
+          },
+          "bytes": 1356
+        }
+      }
+    },
+    {
+      "sha256": "87553de36e400fb3693f93b3650b67aac0b26dec60c530e1baa13f6532128eee",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a10/revisions/87553de36e400fb3693f93b3650b67aac0b26dec60c530e1baa13f6532128eee.png"
+      },
+      "bytes": 109833,
+      "id": "87553de36e400fb3693f93b3650b67aac0b26dec60c530e1baa13f6532128eee",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:47.860Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324154336/rectangle_large_type_2_0fa46ef3661a39e914c17ccb5cb17291.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "87553de36e400fb3693f93b3650b67aac0b26dec60c530e1baa13f6532128eee"
+      }
+    },
+    {
+      "sha256": "a854e4afd89c68510d361c5bee7985051818908380a32eb7703ba4aaab9c8be1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a10/revisions/a854e4afd89c68510d361c5bee7985051818908380a32eb7703ba4aaab9c8be1.png"
+      },
+      "bytes": 2067145,
+      "id": "a854e4afd89c68510d361c5bee7985051818908380a32eb7703ba4aaab9c8be1",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-ce4d0ada1502",
+      "createdAt": "2026-11-04T01:40:38.581Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "bb42d3a815969b886ef02964560b7a7a58663acf57007e8a74feaad66a7e5bab"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:41:50.809Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "bb42d3a815969b886ef02964560b7a7a58663acf57007e8a74feaad66a7e5bab",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a10/inputs/bb42d3a815969b886ef02964560b7a7a58663acf57007e8a74feaad66a7e5bab.json"
+          },
+          "bytes": 8170
+        },
+        "production": {
+          "id": "NCI-00194",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "ce4d0ada150226af42a3c5fa157e7253218ece325100a79ca1ee8d100506c186"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-rich-spending-patterns",
+  "production": {
+    "id": "NCI-00234",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "収入が違うと\n何に使う？",
+      "subline": "家計の使い道を比較\n2024年・二人以上の世帯",
+      "subject": "緑とクリームと明るい黄色。無文字の財布と、参考書と小さな電気スタンドが置かれた家庭の机を右側に大きく描く。参考書の表紙とページは完全な無地で、グラフや図や数字や商品名を描かない。札束、贅沢品、貧富を表す人物の対比は使わない。人物・顔・手・動物・猫・鹿・鳥は一切描かない。",
+      "evidence": "https://note.com/stats47/n/nd9bfdd519d2f 2026-10-15公開本文確認。2024年家計調査の年間収入五分位別、二人以上の世帯の品目支出。上位・下位20%の比較には年齢・子どもの有無等の世帯構成差がある。教育56倍を純粋な所得効果や一人当たり費用として強調せず、底辺等の表現を使わない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "8c43b5c7268c15fd27dd96b70b86aa2dfceff92f6f696b9afa587d6d3147c8d1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-rich-spending-patterns/revisions/8c43b5c7268c15fd27dd96b70b86aa2dfceff92f6f696b9afa587d6d3147c8d1.png"
+      },
+      "bytes": 50149,
+      "id": "8c43b5c7268c15fd27dd96b70b86aa2dfceff92f6f696b9afa587d6d3147c8d1",
+      "kind": "candidate",
+      "version": "2026-10-12-drafts",
+      "createdAt": "2026-10-12T00:53:10.521Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "18632b5bafcd7fa14aee1438ebca3535c4bfb7d0e66f5549f3336bd9b577d0f4"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出し・記事の事実・図(または値を持たない背景地図)が読める。登録前の確認版とSHA一致",
+        "reviewedAt": "2026-10-12T00:54:25.743Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "18632b5bafcd7fa14aee1438ebca3535c4bfb7d0e66f5549f3336bd9b577d0f4",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-rich-spending-patterns/inputs/18632b5bafcd7fa14aee1438ebca3535c4bfb7d0e66f5549f3336bd9b577d0f4.json"
+          },
+          "bytes": 1237
+        }
+      }
+    },
+    {
+      "sha256": "a02ba2c2d7892cf5ffd91fb650704a3a0f68e0948ad8121a89ca2c4b3b1045e9",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-rich-spending-patterns/revisions/a02ba2c2d7892cf5ffd91fb650704a3a0f68e0948ad8121a89ca2c4b3b1045e9.png"
+      },
+      "bytes": 88581,
+      "id": "a02ba2c2d7892cf5ffd91fb650704a3a0f68e0948ad8121a89ca2c4b3b1045e9",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T01:14:36.690Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323541284/rectangle_large_type_2_130bcae7b4e341e6a63c2524db809456.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "a02ba2c2d7892cf5ffd91fb650704a3a0f68e0948ad8121a89ca2c4b3b1045e9"
+      }
+    },
+    {
+      "sha256": "d284fd923026e2a3b7afa7a5e467a10e375cca99504663b248741182a3727e50",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-rich-spending-patterns/revisions/d284fd923026e2a3b7afa7a5e467a10e375cca99504663b248741182a3727e50.png"
+      },
+      "bytes": 1949564,
+      "id": "d284fd923026e2a3b7afa7a5e467a10e375cca99504663b248741182a3727e50",
+      "kind": "candidate",
+      "version": "imagegen-pop-v2-third-six-20261015",
+      "createdAt": "2026-10-15T01:24:38.069Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "d0713775454d884b51e060bda8d4ab3cce9f39777ad9675d9305d3592a81f647"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸・320pxで掲載全文と補足文の可読性、切れ・重なり・追加文字を確認済み。管理画面の修正前後比較を提示し、2026-10-15にユーザーがこの6件の反映を指示。",
+        "reviewedAt": "2026-10-15T01:44:47.653Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "d0713775454d884b51e060bda8d4ab3cce9f39777ad9675d9305d3592a81f647",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-rich-spending-patterns/inputs/d0713775454d884b51e060bda8d4ab3cce9f39777ad9675d9305d3592a81f647.json"
+          },
+          "bytes": 9807
+        },
+        "production": {
+          "id": "NCI-00234",
+          "policyId": "NCP-005",
+          "policyVersion": 2,
+          "planSha256": "e2c2f9be1efe98de733d79a36be5e6d5dbd4b8512ec2406493886b774f68fd93"
+        }
+      }
+    },
+    {
+      "sha256": "bcca6f24df8ff6de137eecd34bbe0b7915fd37e08d2d236c6a07b0de7d695b46",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-rich-spending-patterns/revisions/bcca6f24df8ff6de137eecd34bbe0b7915fd37e08d2d236c6a07b0de7d695b46.png"
+      },
+      "bytes": 1930511,
+      "id": "bcca6f24df8ff6de137eecd34bbe0b7915fd37e08d2d236c6a07b0de7d695b46",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-9ab9a7a7c04e",
+      "createdAt": "2026-11-04T03:54:28.976Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "8e07771b66da9ca3c6cc10b234adc2b2342af3b967e62ef06ba957b7e368e089"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T03:54:55.978Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "8e07771b66da9ca3c6cc10b234adc2b2342af3b967e62ef06ba957b7e368e089",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-rich-spending-patterns/inputs/8e07771b66da9ca3c6cc10b234adc2b2342af3b967e62ef06ba957b7e368e089.json"
+          },
+          "bytes": 8699
+        },
+        "production": {
+          "id": "NCI-00234",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "9ab9a7a7c04e09bcd2ad924dcd071cdb731fd0972107336eb88c1fdea89d217c"
+        }
+      }
+    }
+  ]
+}

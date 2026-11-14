@@ -113,6 +113,28 @@ test("__tests__内のchecker fixtureは対象外", (t) => {
   assert.deepEqual(result.output.findings, []);
 });
 
+test("root の scripts/ にある検査も探索する", (t) => {
+  const item = fixture();
+  t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
+  add(item.root, "scripts/ui-theme/check-orphan.mjs");
+  const result = run(item);
+  assert.equal(result.status, 1);
+  assert.ok(result.output.findings.some((finding) => finding.file === "scripts/ui-theme/check-orphan.mjs"));
+});
+
+test("台帳に宣言された検査は、名前が check 等でなくても root の scripts/ から探索範囲に入り例外なしで通る", (t) => {
+  const item = fixture();
+  t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
+  const checker = "scripts/ui-theme/inline-lyra.mjs";
+  add(item.root, checker);
+  add(item.root, ".github/workflows/lyra.yml", `name: lyra\non:\n  pull_request:\njobs:\n  lyra:\n    steps:\n      - run: node ${checker} --check\n`);
+  writeRegistry(item.root, [gate("lyra-inline", checker)]);
+  const result = run(item);
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(result.output.findings, []);
+  assert.ok(result.output.classifications.some((entry) => entry.file === checker && entry.declared && entry.blocking));
+});
+
 test("未配線checkerをdeclared-onlyとして分類する", (t) => {
   const item = fixture();
   t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
@@ -270,4 +292,93 @@ test("週次レビューの監査台本から npm run 経由で呼ぶ checker �
   add(item.root, script, "set -uo pipefail\nnpm run --silent audit:weekly || true\n");
   const failOpen = run(item);
   assert.equal(failOpen.status, 1, "失敗を握りつぶす行を止める gate に数えた"); assert.ok(failOpen.output.findings.some((f) => f.code === "NON_BLOCKING_GATE"), JSON.stringify(failOpen.output.findings));
+});
+
+// --staged: pre-commit は他の作業者の作りかけ (未追跡) で無関係な commit まで止めてはいけない。
+// 2026-10-26 に metric-name-lint.mjs / title-year-lint.mjs の作りかけで無関係な commit が 2 回止まった。
+function git(item, ...gitArgs) {
+  return execFileSync(
+    "git",
+    ["-c", "user.name=test", "-c", "user.email=test@example.com", "-c", "commit.gpgsign=false", ...gitArgs],
+    { cwd: item.root, encoding: "utf8" },
+  );
+}
+
+function gitFixture(t) {
+  const item = fixture();
+  t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
+  execFileSync(process.execPath, [item.checker, "--write-baseline"], { cwd: item.root });
+  git(item, "init", "-q");
+  git(item, "add", "-A");
+  git(item, "commit", "-q", "-m", "base");
+  return item;
+}
+
+test("--staged: 未追跡の未配線 checker があっても、無関係な staged 変更は通る", (t) => {
+  const item = gitFixture(t);
+  add(item.root, ".claude/scripts/audit/validate-wip.mjs");
+  add(item.root, "docs/note.md", "unrelated\n");
+  git(item, "add", "docs/note.md");
+
+  const whole = run(item, ["--baseline"]);
+  assert.equal(whole.status, 1, "作業ツリー全体で見る既存の挙動は変えない");
+
+  const staged = run(item, ["--baseline", "--staged"]);
+  assert.equal(staged.status, 0, staged.stderr);
+  assert.equal(staged.output.regressions.length, 0);
+});
+
+test("--staged: staged にした未配線 checker では止まる", (t) => {
+  const item = gitFixture(t);
+  add(item.root, ".claude/scripts/audit/validate-wip.mjs");
+  add(item.root, ".claude/scripts/audit/validate-staged.mjs");
+  git(item, "add", ".claude/scripts/audit/validate-staged.mjs");
+
+  const staged = run(item, ["--baseline", "--staged"]);
+
+  assert.equal(staged.status, 1);
+  const files = staged.output.regressions.map((entry) => entry.file);
+  assert.deepEqual(files, [".claude/scripts/audit/validate-staged.mjs"]);
+});
+
+test("--staged: 未追跡の workflow からの参照では、staged の checker を配線済みと数えない", (t) => {
+  const item = gitFixture(t);
+  const checker = ".claude/scripts/audit/validate-staged.mjs";
+  add(item.root, checker);
+  add(item.root, ".github/workflows/untracked.yml", `on:\n  pull_request:\njobs:\n  a:\n    steps:\n      - run: node ${checker}\n`);
+  git(item, "add", checker);
+
+  const staged = run(item, ["--baseline", "--staged"]);
+
+  assert.equal(staged.status, 1);
+  assert.ok(staged.output.regressions.some((entry) => entry.file === checker));
+});
+
+test("--staged: staged にした workflow が配線する checker の不備では止まる", (t) => {
+  const item = gitFixture(t);
+  const checker = ".claude/scripts/audit/check-soft-fail.cjs";
+  add(item.root, checker);
+  writeRegistry(item.root, [gate("soft-fail", checker)]);
+  git(item, "add", "-A");
+  git(item, "commit", "-q", "-m", "checker and registry");
+  add(
+    item.root,
+    ".github/workflows/quality.yml",
+    `name: quality\non:\n  pull_request:\njobs:\n  quality:\n    steps:\n      - run: node ${checker}\n        continue-on-error: true\n`,
+  );
+  git(item, "add", ".github/workflows/quality.yml");
+  add(item.root, ".claude/scripts/audit/validate-wip.mjs");
+
+  const staged = run(item, ["--baseline", "--staged"]);
+
+  assert.equal(staged.status, 1);
+  assert.ok(staged.output.regressions.some((entry) => entry.code === "NON_BLOCKING_GATE"));
+  assert.deepEqual([...new Set(staged.output.regressions.map((entry) => entry.file))], [checker], "未追跡の作りかけは数えない");
+});
+
+test("--staged: git の作業ツリーでなければ exit 2 で止まる (検査したことにしない)", (t) => {
+  const item = fixture();
+  t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
+  const result = spawnSync(process.execPath, [item.checker, "--json", "--staged"], { cwd: item.root, encoding: "utf8" });
+  assert.equal(result.status, 2);
 });

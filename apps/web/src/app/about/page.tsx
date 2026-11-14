@@ -36,7 +36,7 @@ import {
 } from "@/lib/structured-data/person";
 import { buildOrganizationSchema } from "@/lib/structured-data/scripts";
 
-import { OPERATOR_PROFILE } from "@/config/operator-profile";
+import { OPERATOR_AVATAR_CLASS, OPERATOR_AVATAR_SIZE, OPERATOR_PROFILE } from "@/config/operator-profile";
 import { CONTACT_FORM_URL, DEFAULT_OGP_IMAGE_PATH, SITE_NAME, SITE_ORIGIN } from "@/config/site";
 
 import type { Metadata } from "next";
@@ -58,9 +58,6 @@ const EXTERNAL_LINKS = {
   eStat: "https://www.e-stat.go.jp/",
   contactForm: CONTACT_FORM_URL,
 } as const;
-
-const TEXT_STYLE = "text-xs leading-relaxed md:text-sm md:leading-5";
-const TEXT_STYLE_WITH_MARGIN = "text-xs leading-relaxed mb-4 md:text-sm md:leading-5";
 
 export const metadata: Metadata = {
   title: "このサイトについて",
@@ -145,9 +142,9 @@ export default function AboutPage() {
             <Image
               src={OPERATOR_PROFILE.avatarSrc}
               alt={OPERATOR_PROFILE.avatarAlt}
-              width={56}
-              height={56}
-              className="w-14 h-14 rounded-full object-cover shrink-0"
+              width={OPERATOR_AVATAR_SIZE}
+              height={OPERATOR_AVATAR_SIZE}
+              className={OPERATOR_AVATAR_CLASS}
             />
             <div>
               <p className="font-semibold text-base">
@@ -165,16 +162,16 @@ export default function AboutPage() {
 
           <Separator className="mb-4" />
 
-          <p className={TEXT_STYLE_WITH_MARGIN}>
+          <p className="mb-4">
             約 20 年間、自治体職員として統計の「作る現場」と「使う現場」の両方に身を置いてきました。作る立場で見てきたのは、多くの職員が膨大な手間と時間をかけ、1 件 1 件の数字に込める真摯な仕事。しかし使う立場になると、その貴重なデータは複雑なサイトの奥底に眠り、<strong>どこに何があるか分からず、見つけても加工しなければ使い物にならない</strong>という現実に直面しました。
           </p>
-          <p className={TEXT_STYLE_WITH_MARGIN}>
+          <p className="mb-4">
             その違和感をきっかけに、在職中から独学で AI・データ処理を学び始めました。数年かけてスキルを蓄え、IT・データ業界へ転職。その後独立し、2024 年 10 月にこの stats47 を立ち上げました。公的データの正確性はそのままに、現代の UI/UX で「すぐに使える形」へとリデザインすることをミッションにしています。
           </p>
-          <p className={TEXT_STYLE_WITH_MARGIN}>
+          <p className="mb-4">
             統計を「作る側」にいたからこそ、数字がどう集計され、どこに落とし穴があるかを実感として知っています。だからこそ stats47 では、推計や孫引きを避け、<strong>総務省 e-Stat などの一次統計だけを出典に明記してそのまま可視化する</strong>方針を貫いています。元のデータに当たれること——それが、ここの数字を信じていただける理由です。
           </p>
-          <p className={TEXT_STYLE_WITH_MARGIN}>
+          <p className="mb-4">
             公務員から AI を独学して転職・独立するまでの体験記は、
             <Link href="/blog/koumuin-ai-tenshoku-1500man" className="text-primary underline underline-offset-2">
               「公務員→AI独学で転職した話」
@@ -223,16 +220,16 @@ export default function AboutPage() {
         <AboutSection title="ミッション">
           <div className="flex items-start gap-2 mb-4">
             <Target className="h-4 w-4 text-primary mt-1 shrink-0" />
-            <p className={`${TEXT_STYLE} font-semibold`}>
+            <p className="font-semibold">
               統計をもっと身近に。探す手間、加工する苦労をなくし、誰もがデータを「使える」社会をつくる。
             </p>
           </div>
-          <p className={TEXT_STYLE_WITH_MARGIN}>
+          <p className="mb-4">
             行政が手間と時間をかけて作り上げた統計の価値を、「データの翻訳者」として届ける。単なる数値の可視化ツールではなく、<strong>統計をもっと身近にするための総合プラットフォーム</strong>を目指しています。
           </p>
           <Separator className="my-4" />
-          <p className="text-xs font-semibold mb-2">目指す状態</p>
-          <ul className={`${TEXT_STYLE} list-disc pl-5 space-y-1 text-muted-foreground`}>
+          <p className="font-semibold mb-2">目指す状態</p>
+          <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
             <li><strong>知る</strong>: ランキング・チャート・地図で「統計って面白い」と気づく</li>
             <li><strong>理解する</strong>: 調査の仕組み・データの読み方を学ぶ（note 連携）</li>
             <li><strong>活用する</strong>: 加工済みデータで仕事や意思決定に使う</li>
@@ -279,11 +276,11 @@ export default function AboutPage() {
             </div>
           </div>
           <Separator className="my-4" />
-          <p className={TEXT_STYLE_WITH_MARGIN}>
+          <p className="mb-4">
             ブログの一覧などに表示する画像は生成したイメージで、実際の場所や調査の場面を写したものではありません。
           </p>
-          <p className="text-xs font-semibold mb-2">編集 6 原則</p>
-          <ol className={`${TEXT_STYLE} list-decimal pl-5 space-y-1 text-muted-foreground`}>
+          <p className="font-semibold mb-2">編集 6 原則</p>
+          <ol className="list-decimal pl-5 space-y-1 text-muted-foreground">
             <li><strong>わかりやすさ</strong>: 専門知識ゼロでも楽しめる入口を</li>
             <li><strong>信頼性</strong>: 一次統計に基づく正確な数値と出典の明示</li>
             <li><strong>中立性</strong>: 「不都合な真実」も隠さない客観的提示</li>
@@ -295,7 +292,7 @@ export default function AboutPage() {
 
         {/* 4. お問い合わせ・規約 */}
         <AboutSection title="お問い合わせ・規約">
-          <p className={TEXT_STYLE_WITH_MARGIN}>
+          <p className="mb-4">
             データの誤りの指摘、統計の読み解き方のご質問、コラボレーションのご提案などはお問い合わせフォームからお寄せください。
           </p>
           <div className="flex flex-col gap-2">

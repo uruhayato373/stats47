@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-mh-a07",
+  "production": {
+    "id": "NCI-00188",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "貯蓄に占める\n有価証券の割合",
+      "subline": "47都道府県を比較",
+      "subject": "無文字の封筒と小さな木の貯金箱、閉じたファイルを大きく描く。チャートや株価の図は描かない。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n13ec75728be3 本文確認2026-11-04。有価証券の割合は神奈川県21.7％、秋田県6.0％。投資を勧める表現にしない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "a7385cd564ad926cf540e37e36196dc024aa6203331c5081810fd278ad0d3faa",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-mh-a07/revisions/a7385cd564ad926cf540e37e36196dc024aa6203331c5081810fd278ad0d3faa.png"
+      },
+      "bytes": 32596,
+      "id": "a7385cd564ad926cf540e37e36196dc024aa6203331c5081810fd278ad0d3faa",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:05:59.377Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "b2a211b235e8663328eec8fcf6aa1d5cb94535da564b863ed0e76ffa041fe662"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:13:06.046Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "b2a211b235e8663328eec8fcf6aa1d5cb94535da564b863ed0e76ffa041fe662",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-mh-a07/inputs/b2a211b235e8663328eec8fcf6aa1d5cb94535da564b863ed0e76ffa041fe662.json"
+          },
+          "bytes": 1299
+        }
+      }
+    },
+    {
+      "sha256": "04dfcb4c0c64fe8579b26cc503e183357c478ff54a5a22012ac65db31312411d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-mh-a07/revisions/04dfcb4c0c64fe8579b26cc503e183357c478ff54a5a22012ac65db31312411d.png"
+      },
+      "bytes": 44182,
+      "id": "04dfcb4c0c64fe8579b26cc503e183357c478ff54a5a22012ac65db31312411d",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:29.936Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324148406/rectangle_large_type_2_b7f3e0660837e4d48cb9b36c246bb66a.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "04dfcb4c0c64fe8579b26cc503e183357c478ff54a5a22012ac65db31312411d"
+      }
+    },
+    {
+      "sha256": "150b61066b859468e2df34c06cf55a673d300acf0b1f6b48298ab29807086c71",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-mh-a07/revisions/150b61066b859468e2df34c06cf55a673d300acf0b1f6b48298ab29807086c71.png"
+      },
+      "bytes": 1920407,
+      "id": "150b61066b859468e2df34c06cf55a673d300acf0b1f6b48298ab29807086c71",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-9127faa01241",
+      "createdAt": "2026-11-04T01:39:42.023Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "30cc31b58826b2921837af0cd74c394d1a5c3f69300158b3573ddbc37ffa0979"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:41:27.976Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "30cc31b58826b2921837af0cd74c394d1a5c3f69300158b3573ddbc37ffa0979",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-mh-a07/inputs/30cc31b58826b2921837af0cd74c394d1a5c3f69300158b3573ddbc37ffa0979.json"
+          },
+          "bytes": 8174
+        },
+        "production": {
+          "id": "NCI-00188",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "9127faa01241762ba3ce07a9d0fcec3beba5c83278bca17cd6d548973a4e75fd"
+        }
+      }
+    }
+  ]
+}

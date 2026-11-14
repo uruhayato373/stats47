@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { INFRA_NETWORKS, isInfraNetworkPublishable } from '@stats47/gis/infra-history';
 import { describe, expect, it } from 'vitest';
 

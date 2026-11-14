@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "service-business-comparison",
+  "production": {
+    "id": "NCI-00491",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

@@ -24,10 +24,7 @@
         "configHash": "743ec2bb8a34c794"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:high-school-students-per-teacher",
@@ -5501,6 +5498,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:sports-spectating-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:hobby-participation-rate-sports-spectating",
           "kind": "ranking"
         },
@@ -6968,10 +6969,7 @@
         "configHash": "387bb850c4cbf323"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:home-helper-count-per-100k",
@@ -7673,6 +7671,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:garden-plants-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:home-ownership-rate-ranking",
           "kind": "blog"
         },
@@ -7947,15 +7949,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:gifu-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:hiroshima-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:horse-mackerel-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:ishikawa-food-culture",
           "kind": "blog"
         },
         {
@@ -7963,7 +7961,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:kumamoto-food-culture",
+          "pageId": "blog:mackerel-expenditure-ranking",
           "kind": "blog"
         },
         {
@@ -7984,14 +7982,6 @@
         },
         {
           "pageId": "blog:shimane-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:shizuoka-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:toyama-food-culture",
           "kind": "blog"
         },
         {
@@ -8046,11 +8036,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:gifu-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:hiroshima-food-culture",
+          "pageId": "blog:ishikawa-food-culture",
           "kind": "blog"
         },
         {
@@ -8058,15 +8044,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:kumamoto-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:miyazaki-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:nagasaki-food-culture",
           "kind": "blog"
         },
         {
@@ -8079,14 +8057,6 @@
         },
         {
           "pageId": "blog:shimane-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:shizuoka-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:toyama-food-culture",
           "kind": "blog"
         },
         {
@@ -8664,10 +8634,7 @@
         "configHash": "d42868634ebb25f4"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:household-head-annual-income-per-household",
@@ -13806,10 +13773,7 @@
         "configHash": "01877761977b5dfe"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:public-assistance",

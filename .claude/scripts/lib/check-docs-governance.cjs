@@ -24,7 +24,7 @@ const strategyLanes = require("./strategy-lanes.cjs");
 
 const DEFAULT_ROOT =
   process.env.DOCS_GOVERNANCE_ROOT ||
-  process.env.CLAUDE_PROJECT_DIR ||
+  process.env.STATS47_SCAN_ROOT ||
   path.resolve(__dirname, "..", "..", "..");
 const DEFAULT_CONFIG =
   process.env.DOCS_GOVERNANCE_CONFIG ||
@@ -387,6 +387,89 @@ function fixImplementationPlanIndex(root, config) {
   return false;
 }
 
+/**
+ * 検査の外に溜まる置き場 (DG087〜089)。契約は config.placement。無いリポジトリでは検査しない。
+ *
+ * 2026-11-13 の棚卸しで、どの検査にも掛からない場所に文書とスクリプトが溜まっていた:
+ * 済んだ修正の記録や古い計画がコードの隣に README 以外の名前で残り (SCHEMA.md・PLAN.md・DARK_MODE_FIX.md・
+ * TESTING_STRATEGY.md)、`.claude/scripts/` の直下に領域へ入れていないスクリプトが増えていた。
+ *   DG087 アプリ・パッケージの下に `.claude/` を作らない (手順・規約・状態はリポジトリ直下の `.claude/` だけ)
+ *   DG088 `.claude/scripts/` の直下は許可リストのファイルだけ (スクリプトは `<領域>/` に置く。縮小専用)
+ *   DG089 `apps/`・`packages/` の Markdown で名前が英大文字だけのものは README.md・AGENTS.md・CLAUDE.md だけ
+ *         (設計と契約はコードの隣の README か docs/01_技術設計 へ統合する。原稿などの小文字名は対象外)
+ */
+function checkPlacement(root, config, add) {
+  const placement = config.placement;
+  if (!placement) return;
+
+  const nested = placement.nestedAgentDirectories;
+  if (nested) {
+    for (const parent of nested.parents) {
+      let entries = [];
+      try {
+        entries = fs.readdirSync(path.join(root, parent), { withFileTypes: true });
+      } catch {
+        continue;
+      }
+      for (const entry of entries.filter((item) => item.isDirectory())) {
+        for (const absolute of walk(path.join(root, parent, entry.name, nested.name))) {
+          add(
+            "error",
+            "DG087",
+            relative(root, absolute),
+            `${parent}/*/${nested.name}/ にファイルを置かない。手順・規約・状態はリポジトリ直下の ${nested.name}/ に置く`,
+          );
+        }
+      }
+    }
+  }
+
+  const scriptsRoot = placement.scriptsRoot;
+  if (scriptsRoot) {
+    const allowed = new Set(scriptsRoot.allowedFiles);
+    let entries = [];
+    try {
+      entries = fs.readdirSync(path.join(root, scriptsRoot.directory), { withFileTypes: true });
+    } catch {
+      entries = [];
+    }
+    const actual = entries.filter((entry) => entry.isFile() && !entry.name.startsWith(".")).map((entry) => entry.name);
+    for (const name of actual.filter((item) => !allowed.has(item)).sort()) {
+      add(
+        "error",
+        "DG088",
+        `${scriptsRoot.directory}/${name}`,
+        `${scriptsRoot.directory}/ の直下にファイルを置かない。<領域>/ のディレクトリに置く (.claude/rules/skill-code-placement.md)`,
+      );
+    }
+    for (const name of [...allowed].filter((item) => !actual.includes(item)).sort()) {
+      add(
+        "error",
+        "DG088",
+        `${scriptsRoot.directory}/${name}`,
+        "placement.scriptsRoot.allowedFiles に無いファイルが載っている。移すか消したら行も消す (縮小専用)",
+      );
+    }
+  }
+
+  const adjacent = placement.codeAdjacentDocs;
+  if (adjacent) {
+    const allowedNames = new Set(adjacent.allowedUppercaseNames);
+    for (const directory of adjacent.roots) {
+      for (const absolute of walk(path.join(root, directory))) {
+        const name = path.basename(absolute);
+        if (!/^[A-Z][A-Z0-9_-]*\.md$/.test(name) || allowedNames.has(name)) continue;
+        add(
+          "error",
+          "DG089",
+          relative(root, absolute),
+          `${directory}/ に置く文書は ${adjacent.allowedUppercaseNames.join("・")} だけ。設計と契約はコードの隣の README.md か docs/01_技術設計 へ統合し、済んだ計画と修正の記録は消す`,
+        );
+      }
+    }
+  }
+}
+
 function inspectRepository({
   root = DEFAULT_ROOT,
   config = loadConfig(root),
@@ -738,6 +821,41 @@ function inspectRepository({
     if (noKind > 0) {
       add("warning", "DG059", todoFile, `種類なし ${noKind} 件 / 全 ${cards.length} カード`);
     }
+
+    // 大きさ。リポジトリは 1 ファイルの上限 (check-repo-hygiene) を超えると作業ツリー全体のコミットが止まる。
+    // 超えてから気づくと、起票した人でなく次にコミットする全員が止まるので、近づいた時点で知らせる
+    // (2026-11-13 に backlog.md が上限に達し、別のセッションのコミットが 3 回止まった)。
+    const budget = config.todo.sizeBudget;
+    if (budget) {
+      const fileBytes = Buffer.byteLength(text);
+      if (fileBytes >= budget.maxFileBytes * budget.warnFileRatio) {
+        add(
+          "warning",
+          "DG085",
+          todoFile,
+          `${fileBytes} バイトで、1 ファイルの上限 ${budget.maxFileBytes} バイトの ${Math.floor((fileBytes / budget.maxFileBytes) * 100)}%。超えると全コミットが止まる。完了済みのカードを消すか、済んだ作業の経緯を本文から削る`,
+        );
+      }
+      const lines = text.split("\n");
+      const large = cards
+        .map((card) => ({
+          label: card.id ?? `L${card.line}`,
+          bytes: Buffer.byteLength(lines.slice(card.startLine - 1, card.endLine).join("\n")),
+        }))
+        .filter((card) => card.bytes > budget.maxCardBytes)
+        .sort((a, b) => b.bytes - a.bytes);
+      if (large.length > 0) {
+        add(
+          "warning",
+          "DG086",
+          todoFile,
+          `${budget.maxCardBytes} バイトを超えるカード ${large.length} 枚 (大きい順: ${large
+            .slice(0, 3)
+            .map((card) => `${card.label} ${card.bytes}`)
+            .join(" / ")})。カードには未完了の行動だけを書き、経緯は git に任せる`,
+        );
+      }
+    }
   }
 
   // 月次・週次は TODO のコピー先ではなく、既存 ID を選ぶ計画ビュー。
@@ -795,6 +913,7 @@ function inspectRepository({
   }
 
   checkAlwaysLoadedInstructions(root, config, add);
+  checkPlacement(root, config, add);
 
   findings.sort((a, b) =>
     `${a.level}:${a.code}:${a.file}:${a.message}`.localeCompare(

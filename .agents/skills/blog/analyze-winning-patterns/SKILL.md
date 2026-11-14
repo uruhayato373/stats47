@@ -32,7 +32,7 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs            # 既定 imp>=
 ```
 
 出力:
-- `.claude/skills/blog/analyze-winning-patterns/reference/reports/<date>.md` — 比較用レポート
+- `data/blog/winning-pattern-reports/<date>.md` — 比較用レポート (台帳 `blog.winning-pattern-reports`)
 - `data/blog/winning-patterns.json` — 機械向け (featureSignals + 記事別 conformance)
 
 ### Step 2: シグナルを読む (confidence で足切り)

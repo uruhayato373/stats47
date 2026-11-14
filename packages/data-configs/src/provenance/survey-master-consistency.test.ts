@@ -18,9 +18,12 @@ import {
 /**
  * 合成 id のラチェット (2026-10-26 実測)。**増えたら fail、減ったら定数を下げる** (縮小専用)。
  * 減らし方: 原典を調査マスタ (surveys.master) に足し、対応表 (surveys.source-names) へ写像する。
+ *
+ * 数えるのは合成 id の種類だけ。合成 id を持つ指標の本数の上限 (157 本) は 2026-11-13 にオーナー決定で廃止した。
+ * 既にある出典 (例: NDB オープンデータ) から指標を足すだけで落ち、調査マスタへの登録が済むまで指標を足せなくなるため。
+ * 新しい出典 (新しい合成 id) が増えたときは、これまでどおりここで止まる。
  */
 const MAX_SYNTHETIC_SURVEY_IDS = 55;
-const MAX_METRICS_WITH_SYNTHETIC_SURVEY = 157;
 
 const MASTER_NAME = new Map(
   (surveysMaster as Array<{ id: string; name: string }>).map((s) => [s.id, s.name])
@@ -68,20 +71,15 @@ describe('生成 provenance ⇄ surveys.json', () => {
 });
 
 describe('合成 survey id の縮小専用ラチェット', () => {
-  it(`合成 id は ${MAX_SYNTHETIC_SURVEY_IDS} 種・${MAX_METRICS_WITH_SYNTHETIC_SURVEY} metric を超えない (減ったら定数を下げる)`, () => {
+  it(`合成 id は ${MAX_SYNTHETIC_SURVEY_IDS} 種を超えない (減ったら定数を下げる)`, () => {
     const all = resolveAll();
     const ids = new Set(
       all.flatMap(({ surveys }) => surveys.map((s) => s.id).filter(isSyntheticSurveyId))
     );
-    const metrics = all.filter(({ surveys }) => surveys.some((s) => isSyntheticSurveyId(s.id)));
     expect(ids.size, '合成 id が増えた。原典を surveys.json と辞書へ登録する').toBeLessThanOrEqual(
       MAX_SYNTHETIC_SURVEY_IDS
     );
-    expect(metrics.length).toBeLessThanOrEqual(MAX_METRICS_WITH_SYNTHETIC_SURVEY);
     // 縮小したらラチェットを締める (緩いまま放置すると次の増加を見逃す)
     expect(ids.size, '合成 id が減った。MAX_SYNTHETIC_SURVEY_IDS を下げる').toBe(MAX_SYNTHETIC_SURVEY_IDS);
-    expect(metrics.length, 'MAX_METRICS_WITH_SYNTHETIC_SURVEY を下げる').toBe(
-      MAX_METRICS_WITH_SYNTHETIC_SURVEY
-    );
   }, 60000);
 });

@@ -32,7 +32,7 @@ export const actualOvernightGuests: MetricConfig = {
   },
   "display": {
     "conversionFactor": 0.0001,
-    "decimalPlaces": 1,
+    "decimalPlaces": 0,
     "displayUnit": "万人",
   },
   "calculation": {

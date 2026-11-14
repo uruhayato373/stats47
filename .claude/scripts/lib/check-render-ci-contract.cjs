@@ -7,7 +7,7 @@ const path = require('node:path');
 const childProcess = require('node:child_process');
 const YAML = require('yaml');
 
-const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, '../../..');
+const ROOT = process.env.STATS47_SCAN_ROOT || path.resolve(__dirname, '../../..');
 const COMMAND = 'npm run test:run --workspace=@stats47/visualization';
 const GOLDEN_PREFIX = 'packages/visualization/src/shared/__tests__/__golden__/';
 

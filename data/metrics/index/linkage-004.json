@@ -958,10 +958,7 @@
         "configHash": "b5cb96650c04aece"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:compulsory-education-school-count-per-100k-6-14",
@@ -1190,6 +1187,10 @@
         },
         {
           "pageId": "blog:confectionery-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:nagasaki-food-culture",
           "kind": "blog"
         },
         {
@@ -8853,10 +8854,7 @@
         "configHash": "c98d0960033a36e3"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:convenience-store-density-map",
@@ -8896,8 +8894,11 @@
           "cdCat02": "01040100",
           "cdCat03": "01030100"
         },
-        "derived": false,
-        "configHash": "41e0250cce078a27"
+        "ops": {
+          "timeScope": "annual"
+        },
+        "derived": true,
+        "configHash": "cf882d65446c682e"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -10802,23 +10803,19 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:ishikawa-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:mie-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:nagano-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:nara-food-culture",
+          "pageId": "blog:miyazaki-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:okinawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shizuoka-food-culture",
           "kind": "blog"
         },
         {
@@ -10827,10 +10824,6 @@
         },
         {
           "pageId": "blog:wakayama-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:yamanashi-food-culture",
           "kind": "blog"
         },
         {
@@ -10877,6 +10870,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:crab-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:fukui-food-culture",
           "kind": "blog"
         },
@@ -10889,19 +10886,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:ishikawa-food-culture",
+          "pageId": "blog:miyazaki-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:mie-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:nagano-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:nara-food-culture",
+          "pageId": "blog:shizuoka-food-culture",
           "kind": "blog"
         },
         {
@@ -10910,10 +10899,6 @@
         },
         {
           "pageId": "blog:wakayama-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:yamanashi-food-culture",
           "kind": "blog"
         },
         {
@@ -11218,9 +11203,7 @@
         "configHash": "8385f7f6d64afcfd"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "municipality-ranking:crime-rate-per-1k",

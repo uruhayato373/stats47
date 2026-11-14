@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-nefd814b49c5d",
+  "production": {
+    "id": "NCI-00482",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "スポーツをした人\n1位は東京都",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバー。無人の運動施設でランニングシューズ、無地のボール、ラケットを大きさ控えめに描き、複数のスポーツ全般を示す。人物・手・競技者・動物は描かない。左に太い見出し。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/nefd814b49c5d 2026-10-24公開API本文照合。記事題名「【2021年版】スポーツをした人が多い県は？ 1位は東京都｜都道府県ランキング」。本文中の 東京都、2021、10歳以上 を確認。主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "8cd5d1fb9acf7476c69434d1a103feffa9926c0ff309436bda8d404fdbbd9e04",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nefd814b49c5d/revisions/8cd5d1fb9acf7476c69434d1a103feffa9926c0ff309436bda8d404fdbbd9e04.png"
+      },
+      "bytes": 50680,
+      "id": "8cd5d1fb9acf7476c69434d1a103feffa9926c0ff309436bda8d404fdbbd9e04",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:43.481Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312775254/rectangle_large_type_2_da57aef4ae030906f7593809b6db5dc7.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "8cd5d1fb9acf7476c69434d1a103feffa9926c0ff309436bda8d404fdbbd9e04"
+      }
+    },
+    {
+      "sha256": "64ad2afa6c8da6b586a83430c71956fd37ab0fd4726af4f67dd8d780a65a01fc",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nefd814b49c5d/revisions/64ad2afa6c8da6b586a83430c71956fd37ab0fd4726af4f67dd8d780a65a01fc.png"
+      },
+      "bytes": 114979,
+      "id": "64ad2afa6c8da6b586a83430c71956fd37ab0fd4726af4f67dd8d780a65a01fc",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:18:13.204Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "3ae68b749f823b98322b5329de4dd6e721c102da7a7762f2a55fc96ea4b7e56e"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/sports-annual-participation-rate-10plus/values.json",
+        "sourceSha256": "5098d5ac7b7ed90ab9dbbc34ac158a03dfe31b99602be46d47fac593e6d02898",
+        "input": {
+          "sha256": "3ae68b749f823b98322b5329de4dd6e721c102da7a7762f2a55fc96ea4b7e56e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-nefd814b49c5d/inputs/3ae68b749f823b98322b5329de4dd6e721c102da7a7762f2a55fc96ea4b7e56e.json"
+          },
+          "bytes": 6586
+        }
+      }
+    },
+    {
+      "sha256": "f70ef4b6ed48182d29256a07a525e79d419eaa5fea908e20b376a72ecd073d42",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nefd814b49c5d/revisions/f70ef4b6ed48182d29256a07a525e79d419eaa5fea908e20b376a72ecd073d42.png"
+      },
+      "bytes": 1811717,
+      "id": "f70ef4b6ed48182d29256a07a525e79d419eaa5fea908e20b376a72ecd073d42",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-314487a1e9f1",
+      "createdAt": "2026-10-23T15:07:57.404Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "c4c7c70b9f5f036afb7ec734ea7ba82e5b42cef298640e0d7125981a2f90237b"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の種目・2021年・10歳以上・首位県と掲載文字を原寸/320px、管理画面の新旧比較で確認。",
+        "reviewedAt": "2026-10-23T15:09:27.153Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "c4c7c70b9f5f036afb7ec734ea7ba82e5b42cef298640e0d7125981a2f90237b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-nefd814b49c5d/inputs/c4c7c70b9f5f036afb7ec734ea7ba82e5b42cef298640e0d7125981a2f90237b.json"
+          },
+          "bytes": 8646
+        },
+        "production": {
+          "id": "NCI-00482",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "314487a1e9f14d6dc8cf8bc94dd5141686052b405686e7c35bfb31fd523e6bee"
+        }
+      }
+    }
+  ]
+}

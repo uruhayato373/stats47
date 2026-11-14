@@ -200,6 +200,10 @@
       "ageDays": 30
     },
     {
+      "path": ".local/affiliate-placement-map",
+      "ageDays": 30
+    },
+    {
       "path": ".local/gsi-pni",
       "ageDays": 30
     },

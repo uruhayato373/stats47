@@ -132,9 +132,17 @@ agent の「問題なし」は自己申告なので、execution file の `Read` 
 2. **全URL (静的・週次)**: `internal_jargon_terms` (内部用語の辞書 `INTERNAL_JARGON_TERMS`)・`unit_symbol_mixing` (同じページの `%` と `％`)・
    `abnormal_value_strings` (`NaN`/`undefined`/`Infinity`/`[object Object]`)・`same_shop_ad_duplicates` (同じ ASP 案件の別リンク。
    同じ href は従来の `ad_duplicate_count`)・`title_changed` (前回の週次 `latest.json` の `page_title` と比較。前回に無い URL は測らない)。
-   画面に見える文字だけを見る (script・RSC payload は除く)。場所は `ui_findings` に出る。
+   画面に見える文字だけを見る (script・RSC payload と、Next.js が body の途中へ流すページの `<title>` は除く)。場所は `ui_findings` に出る。
 3. **代表URL・variants (ブラウザ・412px)**: `small_text_count` (11px 未満の見える文字。SVG チャート内は `chart_text_issues` の担当なので除く)・
    `mobile_page_height` (ページ全体の高さ)。予算はテンプレート別。
+
+   **線の格子 (LINE-GRID-COLUMN-01・2026-11-14)**: 代表URL・variants のブラウザ検査 (412px) が `line_grid_issues` (warning・予算 0) も数える。
+   本文の列 (`shell-main` を含む `PanelGrid`) の中で、格子の外にあるパネル (`outside-grid`) と、パネルを含むセルが文章・見出しも直に持つもの (`mixed-cell`) を、描いた結果で見る。
+   判定は `lib/line-grid-probe.mjs` の 1 か所で、手元の `npm run ui-theme:line-grid -- <baseUrl>` と共有する (複製しない)。手元の検査の既定の画面は `templates.ts` の `browserPages()` で、週次と食い違わない。
+   違反は `UI_METRIC_KEYS` 経由で UI 指摘キューに入り、カードに `lineGridFixGuide` (パネルの並べ方を直す) が載る。検索結果がカードを空けて並べるだけで格子から外れていた実績から、検索・privacy・terms も variants に含める。
+   本文の列の格子が無い画面 (`noColumn`) は対象外で 0 件。
+
+4. **Claude のスクショ確認 (指摘止まり)**: `.claude/prompts/ci/page-ui-review.md` の「データの意味」の観点で、見出し・説明文と画面上の単位・値・グラフの形の食い違い、画面に出た内部用語を指摘させる (`__tests__/ui-review.test.mjs` がプロンプトの観点を固定)。
 
 **重さ**: 全コーパスで該当率を測ってから決めた (初回の実測は `page-quality-budgets.json` の各 note)。誤検知の出る規則は blocker にしない。
 

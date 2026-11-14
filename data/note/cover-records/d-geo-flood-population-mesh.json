@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "d-geo-flood-population-mesh",
+  "production": {
+    "id": "NCI-00242",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "洪水想定区域×\n2050年人口",
+      "subline": "47都道府県のデータと再現手順",
+      "subject": "青緑と黄色の整理された作業机に、無文字の表が印刷された紙束、閉じたバインダー、たたんだ黄色い傘を置く。地図・行政界・浸水範囲・危険区域・分析結果の図・実在UIは描かない。人物・手は描かない。",
+      "evidence": "https://note.com/stats47/n/nfe50fb61efc0 2026-11-04公開本文確認。2026-09-05訂正後の本文で、加工済みCSV・JSON、データ辞書、再現手順を有料提供する。旧版の8,235メッシュは現行結果ではないためカバーに書かない。総合的な災害リスク順位ではないため順位や危険度の表現を使わない。"
+    },
+    "titleCorrection": {
+      "generatedTitle": "洪水浸水想定区域×2050年人口｜47都道府県・8,235メッシュを再現",
+      "publishedTitle": "洪水浸水想定区域×2050年人口｜47都道府県・29,737メッシュを再現",
+      "reason": "2026-11-04に記事台帳の題名をnote公開中の題名へ揃えた。カバーの掲載文言と生成済み版は維持。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "1028a1f32737a8648c0c3d28294e42c86e6add3f08d9c3ec7bffa638d51c25dc",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-geo-flood-population-mesh/revisions/1028a1f32737a8648c0c3d28294e42c86e6add3f08d9c3ec7bffa638d51c25dc.png"
+      },
+      "bytes": 46242,
+      "id": "1028a1f32737a8648c0c3d28294e42c86e6add3f08d9c3ec7bffa638d51c25dc",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:04.259Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312770457/rectangle_large_type_2_f8ddcb07183c6c703240b9e782b9985f.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "1028a1f32737a8648c0c3d28294e42c86e6add3f08d9c3ec7bffa638d51c25dc"
+      }
+    },
+    {
+      "sha256": "945c9591f82f52947c1dd1bd7ca5cf1544fe22002c383365b917b6b8d8f586d1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-geo-flood-population-mesh/revisions/945c9591f82f52947c1dd1bd7ca5cf1544fe22002c383365b917b6b8d8f586d1.png"
+      },
+      "bytes": 38192,
+      "id": "945c9591f82f52947c1dd1bd7ca5cf1544fe22002c383365b917b6b8d8f586d1",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:03:53.587Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "98a0cdfffaf6cae896b210fdffdd359d2afc49ddf2105f1ac45c37ed89cb0b75"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出し・記事の分析結果の県別地図または記事図が確認できる(平均画素差0.025/255で確認版と同一)",
+        "reviewedAt": "2026-10-11T12:18:07.388Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "98a0cdfffaf6cae896b210fdffdd359d2afc49ddf2105f1ac45c37ed89cb0b75",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-geo-flood-population-mesh/inputs/98a0cdfffaf6cae896b210fdffdd359d2afc49ddf2105f1ac45c37ed89cb0b75.json"
+          },
+          "bytes": 1332
+        }
+      }
+    },
+    {
+      "sha256": "f4bf65c297576d9f116ba8b692e712c47e2fae332997e03a93f730cb7d93abd6",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-geo-flood-population-mesh/revisions/f4bf65c297576d9f116ba8b692e712c47e2fae332997e03a93f730cb7d93abd6.png"
+      },
+      "bytes": 1898052,
+      "id": "f4bf65c297576d9f116ba8b692e712c47e2fae332997e03a93f730cb7d93abd6",
+      "kind": "candidate",
+      "version": "pop-NCP-006-v3-44d1cc6a0198",
+      "createdAt": "2026-11-03T22:53:41.082Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "14cedf2955de57023e30df087646c0eaa2baae3d7b56dbf752f11e77f3494186"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に旧版との比較画像で方向を承認。原寸・幅320pxの全文と題材を確認した版",
+        "reviewedAt": "2026-11-03T22:59:15.007Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "14cedf2955de57023e30df087646c0eaa2baae3d7b56dbf752f11e77f3494186",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-geo-flood-population-mesh/inputs/14cedf2955de57023e30df087646c0eaa2baae3d7b56dbf752f11e77f3494186.json"
+          },
+          "bytes": 8249
+        },
+        "production": {
+          "id": "NCI-00242",
+          "policyId": "NCP-006",
+          "policyVersion": 3,
+          "planSha256": "44d1cc6a0198f6cda02ce1b08a424fbfa96b23d897df6466356c6eb3775b210b"
+        }
+      }
+    }
+  ]
+}

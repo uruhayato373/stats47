@@ -4,7 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const fabricConsumptionExpenditure: MetricConfig = {
   "key": "fabric-consumption-expenditure",
   "title": "着尺地・生地消費支出額",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間着尺地・生地消費支出額",
+  "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。",
   "unit": "円",
   "category": "economy",
   "source": {

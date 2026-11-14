@@ -27,8 +27,9 @@ import { datasetDir } from "../../../../config/datasets.mjs";
  *   (f) 正規化 snapshot 実在 — normalizationOptions を持つキーで
  *                             `values-per-*.json` / `national-trend.json` が 200 か
  *   (g) 正規化 値域         — fixture ゲート (lib/normalized-fixtures.ts) の期待レンジに入るか
- *   (h) 正規化 鮮度         — 相対 (values.json との generatedAt 差) と絶対 (現在時刻との差) の
- *                             2 軸。相対だけだと values.json ごと凍結したキーを見逃す
+ *   (h) 正規化 鮮度         — 相対 (values.json より古い日数) と絶対 (現在時刻との差) の
+ *                             2 軸。相対だけだと正規化の writer が止まったキーを見逃す
+ *                             (判定は lib/normalized-freshness.ts)
  *   (i) 正典 app/stats      — active キーの `app/stats/<key>/values.json` が実在し rowCount>0 か。
  *                             前回比 rowCount ドリフト (部分崩壊) も見る
  *   (k) レシピ整合         — 値の隣に焼かれた取得レシピが現在の config と一致するか
@@ -83,6 +84,12 @@ import surveysMaster from "../../../../data/surveys/master/surveys.json";
 import { expectedCalculatedYears } from "./lib/calculated-stats-core";
 import { findMissingCategoryMembers } from "./lib/category-membership";
 import { checkFixtureGates, type FixtureViolation } from "./lib/normalized-fixtures";
+import {
+  checkFreshness,
+  NORMALIZED_ABSOLUTE_STALE_DAYS,
+  NORMALIZED_STALE_DAYS,
+  type StaleArtifact,
+} from "./lib/normalized-freshness";
 import { SITE } from "@stats47/types";
 import { CATEGORY_KEYS } from "@stats47/data-configs/categories";
 
@@ -96,24 +103,6 @@ const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || SITE.r2PublicBaseUrl;
 // そのため「絶対フロア (count===0 は無条件で異常)」+「前回実行比 50% 未満に急減したら異常」
 // の 2 段構えにする。初回実行時は baseline が無いので絶対フロアのみ適用する。
 const DRIFT_RATIO_THRESHOLD = 0.5;
-
-/**
- * values.json と正規化 snapshot の generatedAt 差の許容日数。
- * sync-snapshots は週次なので 8 日あれば正常運用では絶対に超えない。
- * writer が止まると (2026-07-29 の 2 ヶ月 stale) 必ず超える。
- */
-const NORMALIZED_STALE_DAYS = 8;
-
-/**
- * 正規化 snapshot の **絶対鮮度** の上限日数 (現在時刻との差)。
- *
- * NORMALIZED_STALE_DAYS は values.json との**相対**比較なので、values.json 自身も同時に
- * 凍結していると素通りする (2026-07-29 実測: inpatient-rate-per-100k は values.json 05-22 /
- * 正規化 05-21 で 1 日差のため検知できず、100 倍の誤値が残っていた)。
- * writer は sync-snapshots のたびに全 target を上書きするので、正常運用なら 30 日を超えない。
- * 「writer が動かなくなった」ものを相対比較の死角なしに捕まえる。
- */
-const NORMALIZED_ABSOLUTE_STALE_DAYS = 30;
 
 const NORM_TYPES = ["per_population", "per_area"] as const;
 type NormType = (typeof NORM_TYPES)[number];
@@ -283,8 +272,8 @@ interface NormalizedChecks {
   trendPresent: number;
   /** 欠落 (宣言しているのに 200 でない) */
   missing: Array<{ key: string; artifact: string }>;
-  /** 鮮度違反。kind="relative" = values.json との差 / "absolute" = 現在時刻との差 */
-  stale: Array<{ key: string; artifact: string; ageDays: number; kind: "relative" | "absolute" }>;
+  /** 鮮度違反。kind="relative" = values.json より古い日数 / "absolute" = 現在時刻との差 */
+  stale: StaleArtifact[];
   /** 値域違反 */
   fixtureViolations: FixtureViolation[];
   /**
@@ -371,31 +360,6 @@ interface AuditReport {
 }
 
 /**
- * 正規化 artifact の鮮度を 2 軸で検査する。
- * - relative: values.json との差 (writer だけ止まったケース)
- * - absolute: 現在時刻との差 (values.json ごと凍結したケース = 相対比較の死角)
- */
-function checkFreshness(
-  key: string,
-  artifact: string,
-  baseGeneratedAt: string | undefined,
-  artifactGeneratedAt: string | undefined,
-  now: number,
-): NormalizedChecks["stale"] {
-  const out: NormalizedChecks["stale"] = [];
-  const rel = ageInDays(baseGeneratedAt, artifactGeneratedAt);
-  if (rel !== null && rel > NORMALIZED_STALE_DAYS) {
-    out.push({ key, artifact, ageDays: Math.round(rel), kind: "relative" });
-  }
-  const abs = artifactGeneratedAt ? (now - Date.parse(artifactGeneratedAt)) / 86_400_000 : null;
-  if (abs !== null && Number.isFinite(abs) && abs > NORMALIZED_ABSOLUTE_STALE_DAYS) {
-    out.push({ key, artifact, ageDays: Math.round(abs), kind: "absolute" });
-  }
-  return out;
-}
-
-/** 2 つの ISO 日時の差 (日) を返す。パース不能なら null */
-/**
  * レシピ差分を 1 行で説明する。hash が違うことだけ言われても直せないので、
  * 「どのフィールドがどう変わったか」まで出す。
  */
@@ -411,14 +375,6 @@ function describeRecipeDiff(baked: MetricRecipe, current: MetricRecipe): string 
   if (bo !== co) parts.push(`ops: ${bo} → ${co}`);
   if (baked.kind !== current.kind) parts.push(`kind: ${baked.kind} → ${current.kind}`);
   return parts.length > 0 ? parts.join(" / ") : "(estatParams/ops は同一。refetch 等の差)";
-}
-
-function ageInDays(a: string | undefined, b: string | undefined): number | null {
-  if (!a || !b) return null;
-  const ta = Date.parse(a);
-  const tb = Date.parse(b);
-  if (!Number.isFinite(ta) || !Number.isFinite(tb)) return null;
-  return Math.abs(ta - tb) / 86_400_000;
 }
 
 // ---- プロキシ対応 fetch (ローカル企業ネットワーク越しの実行を許容する) ----

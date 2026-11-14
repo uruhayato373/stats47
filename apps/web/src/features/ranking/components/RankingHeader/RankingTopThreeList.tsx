@@ -23,6 +23,8 @@ interface RankingTopThreeListProps {
    * 2 つのリストで桁数が食い違いうる (2026-07-31)。
    */
   precision: number;
+  /** 表示単位への倍率 (ページが決めた表示単位があるとき)。値は元の単位のまま受け取る */
+  factor?: number;
   presentation: Pick<MetricPresentation, 'colorScheme' | 'comparisonDomain'>;
 }
 
@@ -35,6 +37,7 @@ export function RankingTopThreeList({
   stats,
   unit,
   precision,
+  factor = 1,
   presentation,
 }: RankingTopThreeListProps) {
   const { top3, bottom3 } = stats;
@@ -44,7 +47,7 @@ export function RankingTopThreeList({
   const bottomEntries = bottom3.filter((entry) => !top3.some((top) => top.areaCode === entry.areaCode));
   const entries = [...top3, ...bottomEntries];
   const title = `上位${top3.length}件${bottomEntries.length ? `と下位${bottomEntries.length}件` : ''}`;
-  const formatValue = (value: number) => formatRankingValue(value, precision);
+  const formatValue = (value: number) => formatRankingValue(value, precision, factor);
   return (
     <ChartPanel
       title={title}

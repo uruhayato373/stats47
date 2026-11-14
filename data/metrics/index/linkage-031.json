@@ -3038,11 +3038,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:mie-food-culture",
+          "pageId": "blog:miyagi-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:saitama-food-culture",
+          "pageId": "blog:nagasaki-food-culture",
           "kind": "blog"
         },
         {
@@ -3123,11 +3123,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:mie-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:saitama-food-culture",
+          "pageId": "blog:miyagi-food-culture",
           "kind": "blog"
         },
         {
@@ -5517,10 +5513,7 @@
         "configHash": "13e6a53981be75b2"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:education-culture",
@@ -6474,10 +6467,7 @@
         "configHash": "a058e4c1966dbb26"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:childcare-friendly-prefecture-ranking",
@@ -6517,10 +6507,7 @@
         "configHash": "69fad7f35ab9de0c"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:park-green-space-gap",

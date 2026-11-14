@@ -72,10 +72,7 @@
         "configHash": "c9c422ae8099fbf1"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:maternal-health-guidance-per-100-births",
@@ -651,6 +648,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:ishikawa-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:mayonnaise-consumption-expenditure",
           "kind": "blog"
         },
@@ -695,6 +696,14 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:ishikawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:mayonnaise-consumption-expenditure",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:mayonnaise-consumption-quantity",
           "kind": "ranking"
@@ -4239,11 +4248,7 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:aichi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:akita-food-culture",
+          "pageId": "blog:hokkaido-food-culture",
           "kind": "blog"
         },
         {
@@ -4251,7 +4256,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:kumamoto-food-culture",
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {
@@ -4259,11 +4264,15 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:saitama-food-culture",
+          "pageId": "blog:miyazaki-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:yamaguchi-food-culture",
+          "pageId": "blog:tottori-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:watermelon-expenditure-ranking",
           "kind": "blog"
         },
         {
@@ -4304,11 +4313,7 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:aichi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:akita-food-culture",
+          "pageId": "blog:hokkaido-food-culture",
           "kind": "blog"
         },
         {
@@ -4316,15 +4321,15 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:kumamoto-food-culture",
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:saitama-food-culture",
+          "pageId": "blog:miyazaki-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:yamaguchi-food-culture",
+          "pageId": "blog:tottori-food-culture",
           "kind": "blog"
         },
         {
@@ -6446,10 +6451,7 @@
         "configHash": "0b280bbf00403e20"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:microwave-ownership-multi-person-households-per-1000",
@@ -6545,10 +6547,7 @@
         "configHash": "ed62e3573695ae70"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:middle-school-students-1-per",
@@ -8527,10 +8526,7 @@
         "configHash": "23ceabc6c1726875"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:miscellaneous-school-count-per-100k",
@@ -8601,10 +8597,7 @@
         "configHash": "88bcb439cb10029e"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:miscellaneous-school-students-per-1000",
@@ -8652,11 +8645,23 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:fukuoka-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:gunma-food-culture",
           "kind": "blog"
         },
         {
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kyoto-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:soy-sauce-consumption-expenditure-prefecture-gap",
           "kind": "blog"
         },
         {
@@ -8889,7 +8894,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:fukuoka-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:gunma-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {
@@ -9208,10 +9221,7 @@
         "configHash": "2f48be1bfa3b49d8"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:communication-access",
@@ -9453,10 +9463,7 @@
         "configHash": "8e2934ef8c641298"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:communication-access",
@@ -9690,7 +9697,7 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:ehime-food-culture",
+          "pageId": "blog:aichi-food-culture",
           "kind": "blog"
         },
         {
@@ -9698,7 +9705,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:ibaraki-food-culture",
+          "pageId": "blog:gifu-food-culture",
           "kind": "blog"
         },
         {
@@ -9706,7 +9713,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:shizuoka-food-culture",
+          "pageId": "blog:shiga-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shimane-food-culture",
           "kind": "blog"
         },
         {
@@ -9751,7 +9762,7 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:ehime-food-culture",
+          "pageId": "blog:aichi-food-culture",
           "kind": "blog"
         },
         {
@@ -9759,7 +9770,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:ibaraki-food-culture",
+          "pageId": "blog:gifu-food-culture",
           "kind": "blog"
         },
         {
@@ -9771,7 +9782,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:shizuoka-food-culture",
+          "pageId": "blog:shiga-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shimane-food-culture",
           "kind": "blog"
         },
         {

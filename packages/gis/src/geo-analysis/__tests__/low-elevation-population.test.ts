@@ -6,6 +6,7 @@ import {
   LOW_ELEVATION_BAND_LABELS,
   LOW_ELEVATION_THRESHOLDS_M,
   assertGeoLowElevationConservation,
+  isCanonicalGeoJsonBody,
   lowElevationBand,
   lowElevationMeshBounds,
   parseGeoLowElevationPrefDetail,
@@ -193,5 +194,26 @@ describe("承認済み原典の入力集合", () => {
     expect(LOW_ELEVATION_ATTRIBUTION["G04-a"].join("")).toContain("平成25情使、第590号");
     expect(LOW_ELEVATION_ATTRIBUTION["G04-a"].join("")).toContain("平成25情複、第581号");
     expect(LOW_ELEVATION_ATTRIBUTION.mesh1000r6).toContain("CC BY 4.0");
+  });
+});
+
+describe("manifestの正準JSON(JSON.stringifyと同じバイト列)", () => {
+  // populationByArea のキーは '10000' 以降が整数風。JSは整数風を先頭に昇順で出すので、
+  // 生成器が '01000' から順に書いたmanifestは再直列化とバイトが一致しない。
+  const canonical = '{"populationByArea":{"10000":1,"13000":1,"01000":1,"09000":1},"a":1}\n';
+  const pythonSorted = '{"populationByArea":{"01000":1,"09000":1,"10000":1,"13000":1},"a":1}\n';
+  const check = (body: string) => isCanonicalGeoJsonBody(JSON.parse(body), Buffer.from(body, "utf8"));
+
+  test("JS順のキーは受理する", () => {
+    expect(check(canonical)).toBe(true);
+  });
+  test("キー順を崩した(Pythonのsorted順)manifestは拒否する", () => {
+    expect(check(pythonSorted)).toBe(false);
+  });
+  test("末尾改行なし・整形(2スペース)の取り違えも拒否し、pretty指定で受理する", () => {
+    expect(check(canonical.trimEnd())).toBe(false);
+    const pretty = JSON.stringify(JSON.parse(canonical), null, 2) + "\n";
+    expect(check(pretty)).toBe(false);
+    expect(isCanonicalGeoJsonBody(JSON.parse(pretty), Buffer.from(pretty), true)).toBe(true);
   });
 });

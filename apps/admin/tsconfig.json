@@ -50,6 +50,7 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
+    "vitest.config.mts",
     ".local/next-admin-build/types/**/*.ts",
     ".local/next-admin-dev/types/**/*.ts",
     ".local/next-e2e/types/**/*.ts",

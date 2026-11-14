@@ -16,6 +16,8 @@ import {
   GEO_HOME_LAYER_NAV_ITEMS,
 } from '@/features/geo-analysis';
 
+import { navSurfaceProps } from '@/lib/analytics/events';
+
 import { POPULATION_BASELINE_RANKING_PATH } from '@/config/geo-redirects';
 
 import type { Metadata } from 'next';
@@ -50,6 +52,7 @@ function CompareLink() {
   return (
     <SurfaceLinkCard
       href="/geo/compare"
+      {...navSurfaceProps('geo_analysis_list')}
       className="flex items-center gap-3 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
     >
       <MapPin className="h-5 w-5 shrink-0 text-primary" aria-hidden="true" />

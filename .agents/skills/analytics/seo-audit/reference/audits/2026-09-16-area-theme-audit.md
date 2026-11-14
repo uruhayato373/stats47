@@ -1,1 +1,0 @@
-../../../../../../.claude/skills/analytics/seo-audit/reference/audits/2026-09-16-area-theme-audit.md

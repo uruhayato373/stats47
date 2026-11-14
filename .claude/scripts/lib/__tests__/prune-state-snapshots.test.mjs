@@ -107,6 +107,24 @@ const PERMANENT_DATED_DIRS = [
   "data/seo/rank-history", // キーワード改善サイクルの日次観測。保持期間は未決 (SEO サイクル側で決める)
   "data/seo/selections", // 同上の週ごとの対象選定。保持期間は未決
   "data/google-admin/audits", // GA4 の設定がいつ変わったかを追う履歴。週 25 KB なので削除しない (2026-11-04 オーナー判断)
+  // 2026-11-14 に skill の reference/ から移した監査・レビューの記録。portfolio と実験台帳の evidenceRefs が個々のファイルを指すので
+  // 件数では消さない。保持期間は未決 (未完了の対策をカードへ拾ってから全文を減らす判断が残っている)
+  "data/themes/reviews",
+  "data/themes/audits",
+  "data/surveys/reviews",
+  "data/surveys/audits",
+  // 2026-11-14 に skill の reference/reports/ から移した定期レポート。SNS の 3 つ (週次・競合の定点観測・X の勝ち要因) は
+  // 上の data/sns が覆う。週次レビューが最新を読み、前回との比較に過去分を使うので件数では消さない。保持期間は未決
+  "data/blog/winning-pattern-reports",
+  // カタログが「一回きりの作業の記録」(kind: evidence) と宣言している置き場。定期的に増える置き場ではないので件数では消さない。
+  // 2026-11-14 までは repo-hygiene の baseline (DATED_STATE_ARTIFACT) が寿命の宣言を兼ねていたが、
+  // 衛生検査の対象から外れて「解消済み」になった行を baseline から外したので、ここで宣言する。
+  "data/note/evidence", // note の一回きりの監査・更新・展開の記録 (note.operation-evidence)
+  "data/geo/evidence", // Geo 分析の修復・監査・公開の記録 (geo.operation-evidence)
+];
+// 同じ理由で、置き場ごとではなくファイル名の先頭で宣言するもの (同じディレクトリに state の索引が同居している)
+const PERMANENT_DATED_FILE_PREFIXES = [
+  "data/content-operations/content-release-", // コンテンツ公開の検証記録 (content.release-evidence)
 ];
 
 test("追跡中の日付名 state は必ず寿命 (policy / 恒久宣言 / baseline) を持つ", () => {
@@ -134,7 +152,7 @@ test("追跡中の日付名 state は必ず寿命 (policy / 恒久宣言 / basel
   const baseline = JSON.parse(readFileSync(join(root, ".claude/config/repo-hygiene-baseline.json"), "utf8"));
   const baselined = new Set(baseline.findings.filter((x) => x.code === "DATED_STATE_ARTIFACT").map((x) => x.file));
   const undeclared = dated.filter(
-    (f) => !inPolicy(f) && !baselined.has(f) && !PERMANENT_DATED_DIRS.some((d) => f.startsWith(`${d}/`)),
+    (f) => !inPolicy(f) && !baselined.has(f) && !PERMANENT_DATED_DIRS.some((d) => f.startsWith(`${d}/`)) && !PERMANENT_DATED_FILE_PREFIXES.some((d) => f.startsWith(d)),
   );
   assert.deepEqual(undeclared, [], `寿命未宣言の日付名 state: ${undeclared.slice(0, 10).join(", ")}`);
 });

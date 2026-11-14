@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "koumuin-gis-01-depopulation-medical",
+  "production": {
+    "id": "NCI-00290",
+    "policyId": "NCP-007",
+    "policyVersion": 4,
+    "brief": {
+      "headline": "自治体職員のための\nGIS入門",
+      "subline": "無料の国土数値情報で可視化",
+      "subject": "閉じたノートPCと、たたんだ紙、方位磁針を大きく描く。地図は描かない。補足の帯と署名は別々に配置し、帯の中に区切り線や記号を入れない。実務カテゴリの机上の資料構図。青と明るい黄色の暖かい手描き。画面・紙・道具の表面は無文字。実在UI・製品ロゴ・グラフ・地図は描かない。人物・顔・手・動物は描かない。",
+      "evidence": "https://note.com/stats47/n/n686dcc017bbe 本文確認2026-11-04。無料の国土数値情報で過疎地域と医療機関を重ねるGIS入門。カバーに地図を創作しない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "f4b8b684fda3bbef0a7bb205db2202325e46d9ba3d7f1f5c91e37d239a6db5b7",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/koumuin-gis-01-depopulation-medical/revisions/f4b8b684fda3bbef0a7bb205db2202325e46d9ba3d7f1f5c91e37d239a6db5b7.png"
+      },
+      "bytes": 42407,
+      "id": "f4b8b684fda3bbef0a7bb205db2202325e46d9ba3d7f1f5c91e37d239a6db5b7",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:48.834Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312770665/rectangle_large_type_2_9b7b50f8be51655a0d5a62facaeefa9b.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "f4b8b684fda3bbef0a7bb205db2202325e46d9ba3d7f1f5c91e37d239a6db5b7"
+      }
+    },
+    {
+      "sha256": "52f9d4a939fb903c9ca0311eab5242429b68ed02ae8a3f64248374c050a40cff",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/koumuin-gis-01-depopulation-medical/revisions/52f9d4a939fb903c9ca0311eab5242429b68ed02ae8a3f64248374c050a40cff.png"
+      },
+      "bytes": 69129,
+      "id": "52f9d4a939fb903c9ca0311eab5242429b68ed02ae8a3f64248374c050a40cff",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:47:30.061Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "a7bbec1e2cc1bd0aae4de6d67db41ace78e3c8c6a9e695ac25b3154266cc1ac5"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出しとシリーズ名・話数・色でシリーズが区別できる",
+        "reviewedAt": "2026-10-11T11:51:51.556Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "a7bbec1e2cc1bd0aae4de6d67db41ace78e3c8c6a9e695ac25b3154266cc1ac5",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/koumuin-gis-01-depopulation-medical/inputs/a7bbec1e2cc1bd0aae4de6d67db41ace78e3c8c6a9e695ac25b3154266cc1ac5.json"
+          },
+          "bytes": 1184
+        }
+      }
+    },
+    {
+      "sha256": "63cdab34e2a1e99a1e82dfd676a7e85244964be78c3bd16e4711087c0410ee01",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/koumuin-gis-01-depopulation-medical/revisions/63cdab34e2a1e99a1e82dfd676a7e85244964be78c3bd16e4711087c0410ee01.png"
+      },
+      "bytes": 39351,
+      "id": "63cdab34e2a1e99a1e82dfd676a7e85244964be78c3bd16e4711087c0410ee01",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:56:11.986Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320331872/rectangle_large_type_2_a65fdc62a9d0655f4f363f2f986fa18b.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "63cdab34e2a1e99a1e82dfd676a7e85244964be78c3bd16e4711087c0410ee01"
+      }
+    },
+    {
+      "sha256": "4c30e0607fabe0f8384c2d83ca85c38590683fd690dac7b650df5163ef04be22",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/koumuin-gis-01-depopulation-medical/revisions/4c30e0607fabe0f8384c2d83ca85c38590683fd690dac7b650df5163ef04be22.png"
+      },
+      "bytes": 30161,
+      "id": "4c30e0607fabe0f8384c2d83ca85c38590683fd690dac7b650df5163ef04be22",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:12:38.057Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "fa623f934f0b3b59abd58948cbffd27a2f3e57cc130f7327c2f2aa2a5a417291"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.006/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:18:03.941Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "fa623f934f0b3b59abd58948cbffd27a2f3e57cc130f7327c2f2aa2a5a417291",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/koumuin-gis-01-depopulation-medical/inputs/fa623f934f0b3b59abd58948cbffd27a2f3e57cc130f7327c2f2aa2a5a417291.json"
+          },
+          "bytes": 1184
+        }
+      }
+    },
+    {
+      "sha256": "691f34a6ef6128b8eedb8266dddd4b0d31ed226fc4b929bf923d731626a22a66",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/koumuin-gis-01-depopulation-medical/revisions/691f34a6ef6128b8eedb8266dddd4b0d31ed226fc4b929bf923d731626a22a66.png"
+      },
+      "bytes": 1748195,
+      "id": "691f34a6ef6128b8eedb8266dddd4b0d31ed226fc4b929bf923d731626a22a66",
+      "kind": "candidate",
+      "version": "pop-NCP-007-v4-d7994cd01062",
+      "createdAt": "2026-11-04T02:37:24.334Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "00d330e16fe7db07bebcc43592ba7d0a934f043b6076b4b61950dae4aafbbae5"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T02:37:29.268Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "00d330e16fe7db07bebcc43592ba7d0a934f043b6076b4b61950dae4aafbbae5",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/koumuin-gis-01-depopulation-medical/inputs/00d330e16fe7db07bebcc43592ba7d0a934f043b6076b4b61950dae4aafbbae5.json"
+          },
+          "bytes": 8988
+        },
+        "production": {
+          "id": "NCI-00290",
+          "policyId": "NCP-007",
+          "policyVersion": 4,
+          "planSha256": "d7994cd010624dea172644d02ecd3566a269798eae0153a63bcb8757f960366b"
+        }
+      }
+    }
+  ]
+}

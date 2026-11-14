@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-dev-a51",
+  "production": {
+    "id": "NCI-00164",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "いのちを守る\n統計を読む",
+      "subline": "自殺と交通事故の公的統計\n47都道府県を比較",
+      "subject": "穏やかな光の中の、閉じた無文字の資料ファイルと鉛筆だけを静かに描く。悲しみ・危険・自殺の手段を連想させる絵は一切描かない。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n5443898bbe1c 本文確認2026-11-04。自殺者数と人口当たりの交通事故死者数の比較記事。自殺の語を主見出しで目立たせず、手段や動機に触れず、順位を強調しない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "500db5e89bef75a3139568f001f6180a3c93b10c9bdb851f5d21461f4e0981f2",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a51/revisions/500db5e89bef75a3139568f001f6180a3c93b10c9bdb851f5d21461f4e0981f2.png"
+      },
+      "bytes": 31950,
+      "id": "500db5e89bef75a3139568f001f6180a3c93b10c9bdb851f5d21461f4e0981f2",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:07:41.196Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "2f9490b656988ca4bd7994ed37d50d65aa9cc301c1d25fc3a68b49568f2235bd"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:31.953Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "2f9490b656988ca4bd7994ed37d50d65aa9cc301c1d25fc3a68b49568f2235bd",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a51/inputs/2f9490b656988ca4bd7994ed37d50d65aa9cc301c1d25fc3a68b49568f2235bd.json"
+          },
+          "bytes": 1233
+        }
+      }
+    },
+    {
+      "sha256": "67ff8d4dbf617b283744e600d8521bea6226f4e425150370a5debb5e6533f55c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a51/revisions/67ff8d4dbf617b283744e600d8521bea6226f4e425150370a5debb5e6533f55c.png"
+      },
+      "bytes": 79369,
+      "id": "67ff8d4dbf617b283744e600d8521bea6226f4e425150370a5debb5e6533f55c",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:45.342Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324073530/rectangle_large_type_2_9686710a93ae2cbc118dcc02a99b7df7.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "67ff8d4dbf617b283744e600d8521bea6226f4e425150370a5debb5e6533f55c"
+      }
+    },
+    {
+      "sha256": "0a0b75ac5ed034b3d810f43eee313fecb64efa4b1202bc56356c01e12d4cb0be",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a51/revisions/0a0b75ac5ed034b3d810f43eee313fecb64efa4b1202bc56356c01e12d4cb0be.png"
+      },
+      "bytes": 1857812,
+      "id": "0a0b75ac5ed034b3d810f43eee313fecb64efa4b1202bc56356c01e12d4cb0be",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-388b186629db",
+      "createdAt": "2026-11-04T01:13:51.133Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ec96e85d5e80adc9425ebf24b122f8e4169836387850d23aaa11e0380443e4b8"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:13:54.993Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "ec96e85d5e80adc9425ebf24b122f8e4169836387850d23aaa11e0380443e4b8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a51/inputs/ec96e85d5e80adc9425ebf24b122f8e4169836387850d23aaa11e0380443e4b8.json"
+          },
+          "bytes": 8485
+        },
+        "production": {
+          "id": "NCI-00164",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "388b186629dbd542c3f4ae6bf7772dea29df9c0a3684710a9a2be659f4f0b19a"
+        }
+      }
+    }
+  ]
+}

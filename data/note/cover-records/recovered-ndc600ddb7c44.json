@@ -1,0 +1,229 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-ndc600ddb7c44",
+  "production": {
+    "id": "NCI-00469",
+    "policyId": "NCP-004",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "エアコンの所有台数\n徳島県と北海道",
+      "subline": "2014年・1000世帯当たり",
+      "subject": "横長1280×670相当の完成カバー。紫と黄色。右に同じ大きさの無地の家庭用エアコン模型2台。これは普及している世帯の割合でなく1000世帯当たりの所有台数なので、パーセント記号や割合を示す図表は置かない。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/ndc600ddb7c44 2026-10-24公開API本文照合。記事題名「エアコン普及率、徳島vs北海道で11倍格差！あなたの地域は本当に「普通」？」。本文中の 2014年、1000世帯、エアコン所有台数、徳島県、北海道 を確認。主題・対象年・集計範囲・比較県を示し、因果・効能・新しい数値を加えない。題名の普及率は本文の1000世帯当たり所有台数を正確に表していないためカバーは所有台数を用いる。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "0d7d85d4632fc7648cb8a496b794915483ff0eec74fb4c3b27c8bf8e936b70f7",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-ndc600ddb7c44/revisions/0d7d85d4632fc7648cb8a496b794915483ff0eec74fb4c3b27c8bf8e936b70f7.png"
+      },
+      "bytes": 50372,
+      "id": "0d7d85d4632fc7648cb8a496b794915483ff0eec74fb4c3b27c8bf8e936b70f7",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:36.261Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312774966/rectangle_large_type_2_f8a9033d449db54eec504fc840a7bd1a.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "0d7d85d4632fc7648cb8a496b794915483ff0eec74fb4c3b27c8bf8e936b70f7"
+      }
+    },
+    {
+      "sha256": "bc6098efbff39f705b3835a108aba3653baf914479b6bf745afb0f7aa15ff504",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-ndc600ddb7c44/revisions/bc6098efbff39f705b3835a108aba3653baf914479b6bf745afb0f7aa15ff504.png"
+      },
+      "bytes": 97820,
+      "id": "bc6098efbff39f705b3835a108aba3653baf914479b6bf745afb0f7aa15ff504",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:44:01.836Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "95292e0ada16c06678a32a25b15bde5d48c2939fe11cfb9aaddc739f6f2ed367"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で主題・年・記事題名の順位/値/格差が読める。地図は値を持たない背景",
+        "reviewedAt": "2026-10-11T11:50:32.094Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "95292e0ada16c06678a32a25b15bde5d48c2939fe11cfb9aaddc739f6f2ed367",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-ndc600ddb7c44/inputs/95292e0ada16c06678a32a25b15bde5d48c2939fe11cfb9aaddc739f6f2ed367.json"
+          },
+          "bytes": 1325
+        }
+      }
+    },
+    {
+      "sha256": "adec6be4a21866149ce360e81035a9b27755716a01ab12729b88d3f6b6ae5cc6",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-ndc600ddb7c44/revisions/adec6be4a21866149ce360e81035a9b27755716a01ab12729b88d3f6b6ae5cc6.png"
+      },
+      "bytes": 89286,
+      "id": "adec6be4a21866149ce360e81035a9b27755716a01ab12729b88d3f6b6ae5cc6",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:55:44.293Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320258527/rectangle_large_type_2_4b2f8441d08428194c5d1a58e99a4783.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "adec6be4a21866149ce360e81035a9b27755716a01ab12729b88d3f6b6ae5cc6"
+      }
+    },
+    {
+      "sha256": "f516ae779a0ff15c2a40fe4639c54f3b03274313cb480cbc5ad12cf09247d26d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-ndc600ddb7c44/revisions/f516ae779a0ff15c2a40fe4639c54f3b03274313cb480cbc5ad12cf09247d26d.png"
+      },
+      "bytes": 43097,
+      "id": "f516ae779a0ff15c2a40fe4639c54f3b03274313cb480cbc5ad12cf09247d26d",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:09:42.222Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "9c4319104a7e0bc109fda15e521f3eadb732528bc64bf5f9e18c912478d6088f"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.009/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:17:09.040Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "9c4319104a7e0bc109fda15e521f3eadb732528bc64bf5f9e18c912478d6088f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-ndc600ddb7c44/inputs/9c4319104a7e0bc109fda15e521f3eadb732528bc64bf5f9e18c912478d6088f.json"
+          },
+          "bytes": 1325
+        }
+      }
+    },
+    {
+      "sha256": "7ed9cea114669f97ccb0ac52b86781a1a3705bebaecf53f03e54225cb6ede4ed",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-ndc600ddb7c44/revisions/7ed9cea114669f97ccb0ac52b86781a1a3705bebaecf53f03e54225cb6ede4ed.png"
+      },
+      "bytes": 92186,
+      "id": "7ed9cea114669f97ccb0ac52b86781a1a3705bebaecf53f03e54225cb6ede4ed",
+      "kind": "candidate",
+      "version": "2026-10-11-truecolor-v3b",
+      "createdAt": "2026-10-11T12:33:59.999Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ef53f04585f231824f00472b90e065dc9bcfa5d396ffa2d6aefdf8748d434f7e"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "フルカラー再発行版。目視合格した確認版との平均画素差0.009/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:37:39.818Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "ef53f04585f231824f00472b90e065dc9bcfa5d396ffa2d6aefdf8748d434f7e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-ndc600ddb7c44/inputs/ef53f04585f231824f00472b90e065dc9bcfa5d396ffa2d6aefdf8748d434f7e.json"
+          },
+          "bytes": 1325
+        }
+      }
+    },
+    {
+      "sha256": "511118376e19a4c7a4be8f59306c64a38341767f9cd50823ddeba8cd78eddb4a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-ndc600ddb7c44/revisions/511118376e19a4c7a4be8f59306c64a38341767f9cd50823ddeba8cd78eddb4a.png"
+      },
+      "bytes": 1696542,
+      "id": "511118376e19a4c7a4be8f59306c64a38341767f9cd50823ddeba8cd78eddb4a",
+      "kind": "candidate",
+      "version": "pop-NCP-004-v3-19aa289016b0",
+      "createdAt": "2026-10-23T16:07:58.935Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "4b917c7a06bd58839633d3a18998cf724e1d3c43712413b80b8edb9db8d7e754"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の主題・対象範囲・比較県、全掲載文字、無人の題材、署名を原寸/320pxで目視し、管理画面で公開旧版と新候補を比較。題名の普及率を本文の1000世帯当たり所有台数に正確化。",
+        "reviewedAt": "2026-10-23T16:10:37.660Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "4b917c7a06bd58839633d3a18998cf724e1d3c43712413b80b8edb9db8d7e754",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-ndc600ddb7c44/inputs/4b917c7a06bd58839633d3a18998cf724e1d3c43712413b80b8edb9db8d7e754.json"
+          },
+          "bytes": 9433
+        },
+        "production": {
+          "id": "NCI-00469",
+          "policyId": "NCP-004",
+          "policyVersion": 3,
+          "planSha256": "19aa289016b030eb21990f695310f9292bf979c09e86aa643a25f2659f35c7f8"
+        }
+      }
+    }
+  ]
+}

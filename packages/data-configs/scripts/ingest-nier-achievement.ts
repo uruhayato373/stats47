@@ -13,17 +13,14 @@
  *
  * R2 への反映は別工程 (diff-push-r2 --prefix app/stats)。ここでは .local/r2 に書くだけ。
  */
-import { createRequire } from "node:module";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { PREFECTURES } from "../src/area-axis.js";
 import { buildRecipe } from "../src/recipe.js";
 import { METRICS_REGISTRY } from "../src/registry.js";
-
-const require = createRequire(import.meta.url);
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const JSZip = require("jszip") as typeof import("jszip");
+import type { SheetRows } from "./lib/childcare-waiting-rate.js";
+import { readXlsxSheet } from "./lib/read-xlsx-sheet.js";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const METRIC_KEY = "academic-achievement-test-average-rate";
@@ -61,48 +58,12 @@ const refresh = flag("refresh");
 const CACHE = resolve(REPO_ROOT, `.local/nier/${yy}`);
 const R2_LOCAL = resolve(REPO_ROOT, ".local/r2");
 
-function decodeXml(s: string): string {
-  return s.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&amp;/g, "&");
-}
-
-/** xlsx の指定シートを行→(列→値) に展開する最小パーサ (数式の cached value と共有文字列だけを読む) */
-async function readSheetRows(buf: Buffer, sheetName: string): Promise<Map<number, Map<string, string>>> {
-  const zip = await JSZip.loadAsync(buf);
-  const sharedXml = (await zip.file("xl/sharedStrings.xml")?.async("string")) ?? "";
-  const shared: string[] = [];
-  for (const m of sharedXml.matchAll(/<si>([\s\S]*?)<\/si>/g)) {
-    shared.push(decodeXml(Array.from(m[1].matchAll(/<t[^>]*>([^<]*)<\/t>/g)).map((t) => t[1]).join("")));
-  }
-  const wb = await zip.file("xl/workbook.xml")!.async("string");
-  const rels = await zip.file("xl/_rels/workbook.xml.rels")!.async("string");
-  const sheet = Array.from(wb.matchAll(/<sheet [^>]*name="([^"]+)"[^>]*r:id="([^"]+)"/g)).find((m) => decodeXml(m[1]) === sheetName);
-  if (!sheet) throw new Error(`sheet not found: ${sheetName} (available: ${Array.from(wb.matchAll(/name="([^"]+)"/g)).map((m) => m[1]).join(",")})`);
-  const rel = Array.from(rels.matchAll(/<Relationship [^>]*Id="([^"]+)"[^>]*Target="([^"]+)"/g)).find((m) => m[1] === sheet[2]);
-  if (!rel) throw new Error(`rel not found for ${sheetName}`);
-  const target = rel[2].startsWith("/") ? rel[2].slice(1) : `xl/${rel[2]}`;
-  const xml = await zip.file(target)!.async("string");
-  const rows = new Map<number, Map<string, string>>();
-  for (const c of xml.matchAll(/<c r="([A-Z]+)(\d+)"([^>]*?)(?:\/>|>([\s\S]*?)<\/c>)/g)) {
-    const [, col, rowStr, attrs, inner = ""] = c;
-    const v = inner.match(/<v>([^<]*)<\/v>/)?.[1];
-    let value: string | undefined;
-    if (/t="s"/.test(attrs)) value = v === undefined ? undefined : shared[Number(v)];
-    else if (/t="inlineStr"/.test(attrs)) value = decodeXml(Array.from(inner.matchAll(/<t[^>]*>([^<]*)<\/t>/g)).map((t) => t[1]).join(""));
-    else value = v;
-    if (value === undefined || value === "") continue;
-    const row = Number(rowStr);
-    if (!rows.has(row)) rows.set(row, new Map());
-    rows.get(row)!.set(col, value);
-  }
-  return rows;
-}
-
 function colIndex(col: string): number {
   return col.split("").reduce((a, ch) => a * 26 + (ch.charCodeAt(0) - 64), 0);
 }
 
 /** 「全体」行の (都道府県値, 全国値) を返す。並びは 対象問題数 → 都道府県 → 全国 */
-function extractOverall(rows: Map<number, Map<string, string>>): { pref: number; national: number } {
+function extractOverall(rows: SheetRows): { pref: number; national: number } {
   for (const cells of rows.values()) {
     const ordered = Array.from(cells.entries()).sort((a, b) => colIndex(a[0]) - colIndex(b[0]));
     const idx = ordered.findIndex(([, v]) => v.replace(/[\s　]/g, "") === "全体");
@@ -137,7 +98,7 @@ async function main() {
       const file = `${nn}${s.school}_${yy}${s.suffix}.xlsx`;
       const url = `https://www.nier.go.jp/${yy}chousakekkahoukoku/factsheet/${slug}/${file}`;
       const buf = await download(url, resolve(CACHE, slug, file));
-      const { pref: v, national } = extractOverall(await readSheetRows(buf, s.sheet));
+      const { pref: v, national } = extractOverall(await readXlsxSheet(buf, s.sheet));
       subjectValues.push(v);
       if (!nationalBySubject.has(s.label)) nationalBySubject.set(s.label, new Set());
       nationalBySubject.get(s.label)!.add(national);

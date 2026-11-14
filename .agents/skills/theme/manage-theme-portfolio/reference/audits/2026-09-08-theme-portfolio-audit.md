@@ -1,1 +1,0 @@
-../../../../../../.claude/skills/theme/manage-theme-portfolio/reference/audits/2026-09-08-theme-portfolio-audit.md

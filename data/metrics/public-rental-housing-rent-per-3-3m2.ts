@@ -33,22 +33,6 @@ export const publicRentalHousingRentPer33m2: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "円/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "円/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "seoTitle": "公営賃貸住宅の家賃ランキング都道府県【2014年】｜1位東京都（3,647円）",
   "seoDescription": "2014年の公営賃貸住宅の家賃の都道府県別ランキング。1位東京都（3,647円）、最下位岡山県（832円）で4.4倍の格差。地図やグラフで47都道府県を比較。",

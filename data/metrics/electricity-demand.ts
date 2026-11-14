@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const electricityDemand: MetricConfig = {
   "key": "electricity-demand",
   "title": "電力需要量",
-  "unit": "Ｍｗｈ",
+  "description": "電圧別の特別高圧・高圧・低圧（特定需要と一般需要）の需要実績を合わせた、年度計の電力量。出典は経済産業省資源エネルギー庁の「電気事業便覧」。都道府県別の需要実績は、電力調査統計が2016年4月実績分から取りまとめている。",
+  "unit": "MWh",
   "category": "energy",
   "source": {
     "kind": "estat",
@@ -36,20 +37,20 @@ export const electricityDemand: MetricConfig = {
       {
         "type": "per_population",
         "label": "人口10万人あたり",
-        "unit": "Ｍｗｈ/10万人",
+        "unit": "MWh/10万人",
         "scaleFactor": 100000,
         "decimalPlaces": 1,
       },
       {
         "type": "per_area",
         "label": "面積100km²あたり",
-        "unit": "Ｍｗｈ/100km²",
+        "unit": "MWh/100km²",
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
     ],
   },
-  "seoTitle": "電力需要量ランキング都道府県【2023年】｜1位東京都（75,521,853Ｍｗｈ）",
-  "seoDescription": "2023年の電力需要量の都道府県別ランキング。1位東京都（75,521,853Ｍｗｈ）、最下位鳥取県（3,416,535Ｍｗｈ）で22.1倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "電力需要量ランキング都道府県【2023年】｜1位東京都（75,521,853MWh）",
+  "seoDescription": "2023年の電力需要量の都道府県別ランキング。1位東京都（75,521,853MWh）、最下位鳥取県（3,416,535MWh）で22.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-kakei-expense-recreation",
+  "production": {
+    "id": "NCI-00515",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "普及率1位は徳島\n支出1位は福井",
+      "subline": "ケーブルテレビの受信料を読む",
+      "subject": "画面が無地の小さなブラウン管風テレビと、束ねた同軸ケーブルを描く。人物・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。テレビや紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "本文確認2026-11-05。ケーブルテレビ受信料の支出は福井市が2025年1位(2015年以降の11年のうち10年)、令和3年3月末の世帯普及率の全国1位は徳島県。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "82dab328f9d3cc1676e0e23365246bdc9ed69e1e155ea6fe953d83c5ac31c765",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-expense-recreation/revisions/82dab328f9d3cc1676e0e23365246bdc9ed69e1e155ea6fe953d83c5ac31c765.png"
+      },
+      "bytes": 1964396,
+      "id": "82dab328f9d3cc1676e0e23365246bdc9ed69e1e155ea6fe953d83c5ac31c765",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-ecd5cc1b473a",
+      "createdAt": "2026-11-04T23:09:32.305Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "cc4a0b05ee2fe71143e78a3c7a8e9739d4078c35adcb975a4b2b476fb7c69576"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸と幅320pxで全文・題材を確認。誤字・追加文字・文字切れ・重なりなし、人物と架空の図なし、本文の問いに一致",
+        "reviewedAt": "2026-11-04T23:09:35.869Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "cc4a0b05ee2fe71143e78a3c7a8e9739d4078c35adcb975a4b2b476fb7c69576",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-recreation/inputs/cc4a0b05ee2fe71143e78a3c7a8e9739d4078c35adcb975a4b2b476fb7c69576.json"
+          },
+          "bytes": 8600
+        },
+        "production": {
+          "id": "NCI-00515",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "ecd5cc1b473a1ed8d412e7a67759ee64cd91fda46d80162e1bac65cb5a9694a5"
+        }
+      }
+    },
+    {
+      "sha256": "65e0ae0fa2e2439512acd1ac4499f2412fb4d2de1b762f6c600f60facaa735c1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-expense-recreation/revisions/65e0ae0fa2e2439512acd1ac4499f2412fb4d2de1b762f6c600f60facaa735c1.png"
+      },
+      "bytes": 516019,
+      "id": "65e0ae0fa2e2439512acd1ac4499f2412fb4d2de1b762f6c600f60facaa735c1",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-05T01:42:03.385Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/332391189/rectangle_large_type_2_0f3e32d23f2a74d37b93315b43d3d88f.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "65e0ae0fa2e2439512acd1ac4499f2412fb4d2de1b762f6c600f60facaa735c1"
+      }
+    }
+  ]
+}

@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const diningOutConsumptionExpenditure: MetricConfig = {
   "key": "dining-out-consumption-expenditure",
   "title": "外食消費支出額",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間外食消費支出額（一般外食+学校給食）",
+  "subtitle": "一般外食+学校給食",
+  "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。",
   "unit": "円",
   "category": "economy",
   "source": {

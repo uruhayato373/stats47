@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "h-howto-qgis-choropleth",
+  "production": {
+    "id": "NCI-00506",
+    "policyId": "NCP-007",
+    "policyVersion": 4,
+    "brief": null
+  },
+  "revisions": []
+}

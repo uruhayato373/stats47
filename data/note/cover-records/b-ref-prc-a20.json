@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-prc-a20",
+  "production": {
+    "id": "NCI-00203",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "テレビ・新聞の時間\n47都道府県を比較",
+      "subline": "北海道155分・東京都106分",
+      "subject": "小型テレビとたたんだ新聞を大きく描く。新聞に文字を入れず無地の紙面にする。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n3cc132d3422d 本文確認2026-11-04。マスメディアに使う時間。最長は北海道155分、東京都106分。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "dbfaaf4ec462d75e34e84cf9d73a2186a18df619555d7a4ba30e56a503127863",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a20/revisions/dbfaaf4ec462d75e34e84cf9d73a2186a18df619555d7a4ba30e56a503127863.png"
+      },
+      "bytes": 34135,
+      "id": "dbfaaf4ec462d75e34e84cf9d73a2186a18df619555d7a4ba30e56a503127863",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:08:30.636Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "47a7e0a9b7882732dfeb062b62033dc842954e96aa0cd2d3c52e5ec175e6bce2"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:13:27.697Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "47a7e0a9b7882732dfeb062b62033dc842954e96aa0cd2d3c52e5ec175e6bce2",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a20/inputs/47a7e0a9b7882732dfeb062b62033dc842954e96aa0cd2d3c52e5ec175e6bce2.json"
+          },
+          "bytes": 1337
+        }
+      }
+    },
+    {
+      "sha256": "3f9ebda680933d57dfa0fc2afa3fa150ef24bcce1ce2a90cd905c9969ab44dfc",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a20/revisions/3f9ebda680933d57dfa0fc2afa3fa150ef24bcce1ce2a90cd905c9969ab44dfc.png"
+      },
+      "bytes": 43266,
+      "id": "3f9ebda680933d57dfa0fc2afa3fa150ef24bcce1ce2a90cd905c9969ab44dfc",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:55.466Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324164847/rectangle_large_type_2_2e2f30139dcd20da7ce7c3fb105ad09b.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "3f9ebda680933d57dfa0fc2afa3fa150ef24bcce1ce2a90cd905c9969ab44dfc"
+      }
+    },
+    {
+      "sha256": "0081c3c7c63a07d5d811f78394e49fa788572ea8e86ef9385e8221c35802534e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a20/revisions/0081c3c7c63a07d5d811f78394e49fa788572ea8e86ef9385e8221c35802534e.png"
+      },
+      "bytes": 1931520,
+      "id": "0081c3c7c63a07d5d811f78394e49fa788572ea8e86ef9385e8221c35802534e",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-15b21ae09c98",
+      "createdAt": "2026-11-04T01:54:04.739Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "1c4d8e75b9ae9a00c7b86f905bd73dbb1eeca54bec803ceca827722e0b72d52c"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:55:25.859Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "1c4d8e75b9ae9a00c7b86f905bd73dbb1eeca54bec803ceca827722e0b72d52c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a20/inputs/1c4d8e75b9ae9a00c7b86f905bd73dbb1eeca54bec803ceca827722e0b72d52c.json"
+          },
+          "bytes": 8234
+        },
+        "production": {
+          "id": "NCI-00203",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "15b21ae09c98a5e73c0b0c6222f5c5274dc52ed2efc82848bcc798c34d2b4dbb"
+        }
+      }
+    }
+  ]
+}

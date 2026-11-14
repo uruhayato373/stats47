@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it } from "vitest";
 
 import { RANKING_TABLE_COLUMN_WIDTHS, RANKING_TABLE_FRAME_WIDTH } from "../index";

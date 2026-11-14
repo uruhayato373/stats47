@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-kakei-expense-furniture",
+  "production": {
+    "id": "NCI-00511",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "エアコン1位の市は\n毎年変わる",
+      "subline": "ストーブとの違いで読むランキング",
+      "subject": "白い壁掛けエアコンと、床に置いた石油ストーブを1台ずつ描く。人物・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。家電や紙に文字・数字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "本文確認2026-11-05。2021〜2025年のエアコン1位は神戸市、長野市、岡山市、高松市、京都市で毎年違う。順位はその年の買い替えを映す面があり、ストーブとの違いを読む記事。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "b185ec23b708e7404b331ecd26d4d4a71c95f8a5b26f660f6d96cdad3f4ad0e8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-expense-furniture/revisions/b185ec23b708e7404b331ecd26d4d4a71c95f8a5b26f660f6d96cdad3f4ad0e8.png"
+      },
+      "bytes": 2061571,
+      "id": "b185ec23b708e7404b331ecd26d4d4a71c95f8a5b26f660f6d96cdad3f4ad0e8",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-4c6914a4a222",
+      "createdAt": "2026-11-04T23:08:39.421Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "a8784797c1353b94f566403895175144184cccdccc1c5fc9bb4bd9e8906026e7"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸と幅320pxで全文・題材を確認。誤字・追加文字・文字切れ・重なりなし、人物と架空の図なし、本文の問いに一致",
+        "reviewedAt": "2026-11-04T23:08:43.915Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "a8784797c1353b94f566403895175144184cccdccc1c5fc9bb4bd9e8906026e7",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-furniture/inputs/a8784797c1353b94f566403895175144184cccdccc1c5fc9bb4bd9e8906026e7.json"
+          },
+          "bytes": 8625
+        },
+        "production": {
+          "id": "NCI-00511",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "4c6914a4a222ec0dbc25a27ad13ef0afef8757c8469ed0c9e6cdebe1544cc9c1"
+        }
+      }
+    },
+    {
+      "sha256": "282747efdd228f562e515756f24145fe44f6ac130780acf2c9b30c721cc8a161",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-expense-furniture/revisions/282747efdd228f562e515756f24145fe44f6ac130780acf2c9b30c721cc8a161.png"
+      },
+      "bytes": 472720,
+      "id": "282747efdd228f562e515756f24145fe44f6ac130780acf2c9b30c721cc8a161",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-05T00:20:16.949Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/332366650/rectangle_large_type_2_c045af31a903f324c17ca92bce506827.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "282747efdd228f562e515756f24145fe44f6ac130780acf2c9b30c721cc8a161"
+      }
+    }
+  ]
+}

@@ -99,3 +99,38 @@ test('中継が手元から返す種類は共通の定義から決まり、返�
   for (const p of ['/app/categories/all.json', '/app/survey/all.json', '/app/municipalities/ranking/x/ai-content.json', '/app/stats/x/values.json']) assert.equal(OVERLAY_PATH_PATTERN.test(p), false, p);
   for (const kind of METRIC_RELEASE_KINDS.filter((k) => !k.overlay)) assert.ok(kind.reason, `${kind.id} は返さない理由を書く`);
 });
+
+test('本番 R2 が 5xx を返した取り次ぎも、接続失敗と同じくログに残る (E2E-FAILURE-EVIDENCE-01)', async () => {
+  const upstream = http.createServer((req, res) => {
+    res.writeHead(req.url === "/app/stats/x/values.json" ? 503 : 404);
+    res.end();
+  });
+  const upstreamPort = await listen(upstream);
+  const lines = [];
+  const overlay = createOverlayServer({ upstream: `http://127.0.0.1:${upstreamPort}`, localDir: fixtureDir(), log: (line) => lines.push(line) });
+  const port = await listen(overlay);
+  try {
+    const failed = await fetch(`http://127.0.0.1:${port}/app/stats/x/values.json`);
+    assert.equal(failed.status, 503);
+    assert.ok(lines.some((l) => l.includes("upstream 503") && l.includes("/app/stats/x/values.json")), lines.join("\n"));
+    // 404 は PR にだけ無い key の通常の取り次ぎなので、失敗として数えない
+    await fetch(`http://127.0.0.1:${port}/app/stats/x/missing.json`);
+    assert.equal(lines.some((l) => l.includes("missing.json")), false, lines.join("\n"));
+  } finally {
+    overlay.close();
+    upstream.close();
+  }
+});
+
+test('代表 E2E ジョブは、サーバーの出力と R2 中継のログを失敗時に artifact へ上げる (E2E-FAILURE-EVIDENCE-01)', () => {
+  const workflow = fs.readFileSync(path.join(ROOT, ".github/workflows/pr-quality-check.yml"), "utf8");
+  const start = workflow.indexOf("\n  e2e:\n");
+  const end = workflow.indexOf("\n  quality-check:\n", start);
+  assert.ok(start >= 0 && end > start, "e2e job が見つからない");
+  const job = workflow.slice(start, end);
+  // Playwright の webServer は reuseExistingServer で使われず、next start の出力は /tmp のファイルへ行く。
+  // そのファイルを artifact の対象へ集めていなければ、ジョブのログが流れた後は読めない。
+  assert.match(job, /cp \/tmp\/pr-e2e-next\.log \/tmp\/pr-e2e-r2-overlay\.log apps\/web\/server-logs\//, "2 つのログを server-logs へ集める");
+  const upload = job.slice(job.indexOf("name: playwright-e2e-report"));
+  assert.ok(upload.includes("apps/web/server-logs/"), "server-logs を artifact の path に含める");
+});

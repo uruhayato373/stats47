@@ -1,8 +1,8 @@
 /**
- * check-x-post-budget.cjs — X 投稿頻度ガード (SSOT: sns-content-standards.md §1 quota)
+ * check-x-post-budget.cjs — X 投稿頻度ガード (上限の正本: 台帳 sns.x-catalog の quota)
  *
- * X 投稿の頻度ガード。上限は x-catalog 経由で
- * §1 の `X_DAILY_MAX` / `X_WEEKLY_TARGET_MIN` / `X_WEEKLY_TARGET_MAX` を読む
+ * X 投稿の頻度ガード。上限は x-catalog 経由で台帳の quota (`dailyMax` = `X_DAILY_MAX` /
+ * `weeklyTargetMin` = `X_WEEKLY_TARGET_MIN` / `weeklyTargetMax` = `X_WEEKLY_TARGET_MAX`) を読む
  * (ハードコードしない)。posts.json の X 投稿 (status=scheduled|posted) を JST 日付で数える。
  *
  * ハード上限: 1 日 `X_DAILY_MAX` 本 / 週 `X_WEEKLY_TARGET_MAX` 本。超過で exit 1。

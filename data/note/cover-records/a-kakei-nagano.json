@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-kakei-nagano",
+  "production": {
+    "id": "NCI-00085",
+    "policyId": "NCP-002",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "長野県の家計\n教育費に注目",
+      "subline": "長野市・2024年\n二人以上の世帯",
+      "subject": "添付は長野県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無文字の学習机を小さく1点だけ。車両や家の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+      "evidence": "https://note.com/stats47/n/nb6061a164201 2026-10-23公開API本文照合。長野市の2024年・二人以上の世帯の家計調査。教育0.69倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は長野県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は長野市であり県全域の観測図ではない。人物・キャラクターなし。",
+      "dataScope": {
+        "place": "長野市",
+        "year": "2024",
+        "households": "二人以上の世帯"
+      }
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "e848bc740a0e4ce91540ecb56c7c910b1805e982fd332584252991fa501cde4c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-nagano/revisions/e848bc740a0e4ce91540ecb56c7c910b1805e982fd332584252991fa501cde4c.png"
+      },
+      "bytes": 57547,
+      "id": "e848bc740a0e4ce91540ecb56c7c910b1805e982fd332584252991fa501cde4c",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:09.820Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312771566/rectangle_large_type_2_fd5a722bca85e1b2371624416c4b5bec.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "e848bc740a0e4ce91540ecb56c7c910b1805e982fd332584252991fa501cde4c"
+      }
+    },
+    {
+      "sha256": "0d0c8341f30d3845810c6be537438a124a91a0074d6a8d4d9ab82a24db247c9d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-nagano/revisions/0d0c8341f30d3845810c6be537438a124a91a0074d6a8d4d9ab82a24db247c9d.png"
+      },
+      "bytes": 103036,
+      "id": "0d0c8341f30d3845810c6be537438a124a91a0074d6a8d4d9ab82a24db247c9d",
+      "kind": "candidate",
+      "version": "2026-10-02-household-r1",
+      "createdAt": "2026-10-02T03:18:27.379Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "128258afe0bf356113e936f07700294771a94d64083bf303d1797c067b21ab60"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+        "reviewedAt": "2026-10-02T05:27:41.112Z"
+      },
+      "provenance": {
+        "renderer": "bold-note-cover",
+        "sourceUrl": "https://storage.stats47.jp/app/stats/education-expenditure-total/values.json",
+        "sourceSha256": "8fff1a0bc37d5de9718095212fd0c25c9122a0f48bacc30d3cf6da912b8c9ab9"
+      }
+    },
+    {
+      "sha256": "a7560765a008fe747f1678da5f1bdf24e2afb500e33fcf22455c911b6472cd22",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-nagano/revisions/a7560765a008fe747f1678da5f1bdf24e2afb500e33fcf22455c911b6472cd22.png"
+      },
+      "bytes": 99567,
+      "id": "a7560765a008fe747f1678da5f1bdf24e2afb500e33fcf22455c911b6472cd22",
+      "kind": "r2-archive",
+      "version": "legacy-r2-import-2026-10-02",
+      "createdAt": "2026-10-02T03:29:03.463Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Legacy R2 asset preserved; not adopted for note",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "legacy-public-r2",
+        "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-nagano/images/cover-1280x670.png",
+        "sourceSha256": "a7560765a008fe747f1678da5f1bdf24e2afb500e33fcf22455c911b6472cd22"
+      }
+    },
+    {
+      "sha256": "82eeba011c678ec2eef53d48c1ed02abf0cfe8cae6d33c4f4756f1f7d935e584",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-nagano/revisions/82eeba011c678ec2eef53d48c1ed02abf0cfe8cae6d33c4f4756f1f7d935e584.png"
+      },
+      "bytes": 1647180,
+      "id": "82eeba011c678ec2eef53d48c1ed02abf0cfe8cae6d33c4f4756f1f7d935e584",
+      "kind": "candidate",
+      "version": "pop-NCP-002-v3-fbe4e36bea8f",
+      "createdAt": "2026-10-23T09:02:54.201Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "c486ee82c394ff60fccc3c46cf255ce5727edfb05ae809684e9bb471b8fb61dc"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "長野県の主域輪郭と長野市・2024年・二人以上の世帯、教育費と無人の学習机を新旧比較。原寸と幅320pxで全掲載文字を確認。",
+        "reviewedAt": "2026-10-23T09:05:34.387Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "c486ee82c394ff60fccc3c46cf255ce5727edfb05ae809684e9bb471b8fb61dc",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-nagano/inputs/c486ee82c394ff60fccc3c46cf255ce5727edfb05ae809684e9bb471b8fb61dc.json"
+          },
+          "bytes": 12879
+        },
+        "production": {
+          "id": "NCI-00085",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "fbe4e36bea8ffd7587bf1a2a36c93225770578d11895f266e9bd713120fca608"
+        }
+      }
+    }
+  ]
+}

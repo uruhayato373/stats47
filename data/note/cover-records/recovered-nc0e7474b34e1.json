@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-nc0e7474b34e1",
+  "production": {
+    "id": "NCI-00461",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "登山・ハイキング\n東京都・兵庫県が同率1位",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人の山道に置かれた無地の登山靴とバックパックを描く。人・動物・地図は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/nc0e7474b34e1 2026-10-23公開API本文照合。記事題名「【2021年版】登山・ハイキングをした人が多い県は？ 1位は東京都・兵庫県｜都道府県ランキング」。本文中の「東京都」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "ac3f77e43ec68a81894c53a8f059de314c7b0ca4c70ce072ae2588874465ad2a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nc0e7474b34e1/revisions/ac3f77e43ec68a81894c53a8f059de314c7b0ca4c70ce072ae2588874465ad2a.png"
+      },
+      "bytes": 45266,
+      "id": "ac3f77e43ec68a81894c53a8f059de314c7b0ca4c70ce072ae2588874465ad2a",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:31.550Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312774850/rectangle_large_type_2_1ff0989c28efbb263ee59e5c64a5a2f7.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "ac3f77e43ec68a81894c53a8f059de314c7b0ca4c70ce072ae2588874465ad2a"
+      }
+    },
+    {
+      "sha256": "a63b5188a2c6957417e59aabd259d038d6e6b9f3be3e635a2e95a0a3234d4692",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nc0e7474b34e1/revisions/a63b5188a2c6957417e59aabd259d038d6e6b9f3be3e635a2e95a0a3234d4692.png"
+      },
+      "bytes": 120967,
+      "id": "a63b5188a2c6957417e59aabd259d038d6e6b9f3be3e635a2e95a0a3234d4692",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:17:24.498Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "09f71ab6d1f08b547da83c2ca681b8d8825d15d3813ad77f70dc065eddeb8142"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/sports-participation-rate-hiking/values.json",
+        "sourceSha256": "7ba85c5f75cad2cacb016b3b7f85d04a950fe3a2452babadebb476791abc0f49",
+        "input": {
+          "sha256": "09f71ab6d1f08b547da83c2ca681b8d8825d15d3813ad77f70dc065eddeb8142",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-nc0e7474b34e1/inputs/09f71ab6d1f08b547da83c2ca681b8d8825d15d3813ad77f70dc065eddeb8142.json"
+          },
+          "bytes": 6637
+        }
+      }
+    },
+    {
+      "sha256": "94fd7e35b36341795475bce04df555fa9ec3804383618bd3cba26f9382eed710",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nc0e7474b34e1/revisions/94fd7e35b36341795475bce04df555fa9ec3804383618bd3cba26f9382eed710.png"
+      },
+      "bytes": 2023759,
+      "id": "94fd7e35b36341795475bce04df555fa9ec3804383618bd3cba26f9382eed710",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-64f9868ef517",
+      "createdAt": "2026-10-23T14:37:19.640Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "3f27413be432c1a0d1c1893018e357417c01e96606f7a83536e1acad5e6bc1a4"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00461は東京都と兵庫県の同率首位。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T14:39:37.149Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "3f27413be432c1a0d1c1893018e357417c01e96606f7a83536e1acad5e6bc1a4",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-nc0e7474b34e1/inputs/3f27413be432c1a0d1c1893018e357417c01e96606f7a83536e1acad5e6bc1a4.json"
+          },
+          "bytes": 8950
+        },
+        "production": {
+          "id": "NCI-00461",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "64f9868ef51758210e3c5ba2941160662a3508f0fd27c1ff10f14ffde8670ffd"
+        }
+      }
+    }
+  ]
+}

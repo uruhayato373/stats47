@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "industry-retail-food-location",
+  "production": {
+    "id": "NCI-00287",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

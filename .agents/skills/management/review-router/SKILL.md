@@ -94,9 +94,9 @@ primary_agent: strategy-advisor
 | `/review-feature --scope packages` | packages/ コード品質 | コード変更後 | 未完了策を機能バックログ |
 | `/review-feature --scope types` | 型安全性 | tsc エラー時 | 未完了策を機能バックログ |
 | `/review-tests` | テストの確認・作成 | コード変更後 | stdout |
-| `/sns-weekly-report` | SNS 週次パフォーマンス | 毎週 | skill `reference/reports/` |
+| `/sns-weekly-report` | SNS 週次パフォーマンス | 毎週 | `data/sns/weekly-reports/` |
 
 ### 過去分の参照
 
-戦略の変遷はGit、定期レポートは各skill reference、未完了策は `.claude/todo/` を参照する。
-詳細は [`../../rules/docs-vs-issues.md`](../../rules/docs-vs-issues.md)。
+戦略の変遷はGit、週次・月次レビューは `data/reviews/`、そのほかの定期レポートは上の表の出力先、未完了策は `.claude/todo/` を参照する。
+詳細は [`../../rules/docs-vs-issues.md`](../../../rules/docs-vs-issues.md)。

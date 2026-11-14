@@ -170,7 +170,7 @@ curl -s "https://storage.stats47.jp/app/blog/all.json" | jq '.articles[] | {slug
 2. **白書クエリを実行**: 各対象候補について、決定論的ラッパーを呼ぶ:
 
 ```bash
-node .claude/scripts/notebooklm-cross-query.mjs --json \
+node .claude/scripts/notebooklm/notebooklm-cross-query.mjs --json \
   --notebooks "最新の白書,国土交通白書" \
   "「{トレンドキーワード}」に関連して、{category名} 分野で白書が指摘している社会的課題・政策的背景・今後の方向性を教えてください。都道府県間の格差や地域差に触れた記述があれば優先してください。"
 ```
@@ -214,7 +214,7 @@ node .claude/scripts/notebooklm-cross-query.mjs --json \
 
    **(c) 白書に再照会**: 取得データの実際の上位/下位県を文脈に入れて白書へ再質問し、切り口を**実データで検証・精緻化**する:
    ```bash
-   node .claude/scripts/notebooklm-cross-query.mjs --json \
+   node .claude/scripts/notebooklm/notebooklm-cross-query.mjs --json \
      --notebooks "最新の白書,国土交通白書" \
      "{指標名} は実データで 1位{県A}・47位{県B} だった。白書が指摘する{社会課題}と整合するか、地域差の要因として白書が挙げる論点を教えてください。"
    ```

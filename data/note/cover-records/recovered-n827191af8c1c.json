@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n827191af8c1c",
+  "production": {
+    "id": "NCI-00439",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "海外旅行した人\n多い県は？",
+      "subline": "1位は京都府\n2021年・10歳以上",
+      "subject": "明るい水色と黄色、濃紺の大きな文字を使う温かい手描きのカバー。右側に海外旅行を示す無地の旅行かばんを1点だけ大きく描き、かばんのタグは無文字にする。左側に問いを大きく2行、下に補足を太い帯で2行。架空の地図・ランキング図・棒グラフ・表彰台・メダルを描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化、指定外の文字・数字・ロゴを描かない。",
+      "evidence": "https://storage.stats47.jp/note/stats47-note/n827191af8c1c/draft.md の公開本文を2026-10-23に確認。総務省「社会生活基本調査」の2021年、過去1年間に海外旅行をした10歳以上の人の割合。本文は1位京都府0.7％、47位高知県0.1％と記載。小さい値の同順位が多いため、カバーには倍率や地域差の強調を入れず、対象年・年齢・1位だけを示す。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "3832cfcac4c117e6bfd111547aaae3a15a4cbf53dfbd097c011993cc0caba2c1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n827191af8c1c/revisions/3832cfcac4c117e6bfd111547aaae3a15a4cbf53dfbd097c011993cc0caba2c1.png"
+      },
+      "bytes": 91768,
+      "id": "3832cfcac4c117e6bfd111547aaae3a15a4cbf53dfbd097c011993cc0caba2c1",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:19.459Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312774343/rectangle_large_type_2_2a94e3b350473e2ac7782160a5611c78.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "3832cfcac4c117e6bfd111547aaae3a15a4cbf53dfbd097c011993cc0caba2c1"
+      }
+    },
+    {
+      "sha256": "bbaee4912589acf1ba38c1761c285c3908227d1866efa7e0eb7f36db49ddc86e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n827191af8c1c/revisions/bbaee4912589acf1ba38c1761c285c3908227d1866efa7e0eb7f36db49ddc86e.png"
+      },
+      "bytes": 117166,
+      "id": "bbaee4912589acf1ba38c1761c285c3908227d1866efa7e0eb7f36db49ddc86e",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:16:22.646Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "12f859098b22d9d6108d3f8598d17cd03bb1c7ea451d5ce92bee055222605546"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/overseas-travel-annual-participation-rate-10plus/values.json",
+        "sourceSha256": "3a69f25a649f62c736315e5b4c6b58198f23bd1640b8d9f400de8fbbaf51fb73",
+        "input": {
+          "sha256": "12f859098b22d9d6108d3f8598d17cd03bb1c7ea451d5ce92bee055222605546",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n827191af8c1c/inputs/12f859098b22d9d6108d3f8598d17cd03bb1c7ea451d5ce92bee055222605546.json"
+          },
+          "bytes": 6589
+        }
+      }
+    },
+    {
+      "sha256": "4bbf148d9cb179732682b3791868fb4b55c79825522e39014f9c39c2dc620661",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n827191af8c1c/revisions/4bbf148d9cb179732682b3791868fb4b55c79825522e39014f9c39c2dc620661.png"
+      },
+      "bytes": 1858618,
+      "id": "4bbf148d9cb179732682b3791868fb4b55c79825522e39014f9c39c2dc620661",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-61f83ea5e046",
+      "createdAt": "2026-10-23T03:57:45.989Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "73fbad48c6d1954259a1ffe68442940ee18e4203efb5801c83ed72e4bb2532cf"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸と幅320pxで6行の日本語、補足の2021年・10歳以上、1位京都府を照合。人物なし、旅行かばんが主役で、本文の対象範囲と一致。",
+        "reviewedAt": "2026-10-23T03:58:17.321Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "73fbad48c6d1954259a1ffe68442940ee18e4203efb5801c83ed72e4bb2532cf",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n827191af8c1c/inputs/73fbad48c6d1954259a1ffe68442940ee18e4203efb5801c83ed72e4bb2532cf.json"
+          },
+          "bytes": 8822
+        },
+        "production": {
+          "id": "NCI-00439",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "61f83ea5e0469d6bf76ce360d28d5c10826ae5bc0e5671d7ea54209d92f16b41"
+        }
+      }
+    }
+  ]
+}

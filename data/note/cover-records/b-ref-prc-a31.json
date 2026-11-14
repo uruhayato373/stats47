@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-prc-a31",
+  "production": {
+    "id": "NCI-00213",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "野菜の好みは\n市ごとに違う？",
+      "subline": "野菜10品目の購入量を比較",
+      "subject": "キャベツ、もやしの束、はくさいをまな板に並べて大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n165c2696ddaf 本文確認2026-11-04。キャベツは鹿児島市、もやしは山形市、はくさいは神戸市が最多。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "02f5a467d2cd79c4b287f56ae024acface1c36ea2d7d532d54171d2b3f8e3597",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a31/revisions/02f5a467d2cd79c4b287f56ae024acface1c36ea2d7d532d54171d2b3f8e3597.png"
+      },
+      "bytes": 34927,
+      "id": "02f5a467d2cd79c4b287f56ae024acface1c36ea2d7d532d54171d2b3f8e3597",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:09:13.864Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "56b0fc22bc10c4b4bf8a04718c921c45274fc30aec1166f968970f4ac03a567b"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:13:42.509Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "56b0fc22bc10c4b4bf8a04718c921c45274fc30aec1166f968970f4ac03a567b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a31/inputs/56b0fc22bc10c4b4bf8a04718c921c45274fc30aec1166f968970f4ac03a567b.json"
+          },
+          "bytes": 1297
+        }
+      }
+    },
+    {
+      "sha256": "04f11a79d1d5bc4e390f882ac7fc65056bd0bacee191d1149b4e6a49dbf928d0",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a31/revisions/04f11a79d1d5bc4e390f882ac7fc65056bd0bacee191d1149b4e6a49dbf928d0.png"
+      },
+      "bytes": 42596,
+      "id": "04f11a79d1d5bc4e390f882ac7fc65056bd0bacee191d1149b4e6a49dbf928d0",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:22:02.193Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324174893/rectangle_large_type_2_12ced5936b869e69197aa43d102b265f.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "04f11a79d1d5bc4e390f882ac7fc65056bd0bacee191d1149b4e6a49dbf928d0"
+      }
+    },
+    {
+      "sha256": "00fcbe0f8d1904ba8e4efa52ec143676e8db6772623c45f30dd0087c09281982",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a31/revisions/00fcbe0f8d1904ba8e4efa52ec143676e8db6772623c45f30dd0087c09281982.png"
+      },
+      "bytes": 1997468,
+      "id": "00fcbe0f8d1904ba8e4efa52ec143676e8db6772623c45f30dd0087c09281982",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-bf23715f8ecd",
+      "createdAt": "2026-11-04T02:08:49.319Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "cf709f899c7f654ea9b619ff9248edceb83fe99cba7d47743670a3c0e90e9772"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T02:09:57.080Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "cf709f899c7f654ea9b619ff9248edceb83fe99cba7d47743670a3c0e90e9772",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a31/inputs/cf709f899c7f654ea9b619ff9248edceb83fe99cba7d47743670a3c0e90e9772.json"
+          },
+          "bytes": 8130
+        },
+        "production": {
+          "id": "NCI-00213",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "bf23715f8ecdc7c0862ba08cc200fc97afd74eebccf1c9f5159ff5457746d50f"
+        }
+      }
+    }
+  ]
+}

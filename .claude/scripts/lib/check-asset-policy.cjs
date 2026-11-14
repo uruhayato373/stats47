@@ -21,7 +21,7 @@ const crypto = require("node:crypto");
 const { execFileSync } = require("node:child_process");
 const sharp = require("sharp");
 
-const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..", "..");
+const ROOT = process.env.STATS47_SCAN_ROOT || path.resolve(__dirname, "..", "..", "..");
 const BASELINE = process.env.ASSET_POLICY_BASELINE || path.join(ROOT, ".claude/config/asset-policy-baseline.json");
 const PUBLIC = path.join(ROOT, "apps/web/public");
 // 本文画像参照 (相対解決) を検査する Markdown ルート。

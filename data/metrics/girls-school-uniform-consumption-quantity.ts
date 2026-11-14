@@ -4,7 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const girlsSchoolUniformConsumptionQuantity: MetricConfig = {
   "key": "girls-school-uniform-consumption-quantity",
   "title": "女子用学校制服購入数量",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間女子用学校制服購入数量",
+  "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。",
   "unit": "着",
   "category": "economy",
   "source": {

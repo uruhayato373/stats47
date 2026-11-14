@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-dev-a19",
+  "production": {
+    "id": "NCI-00154",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "核家族と空き家\n47都道府県を比較",
+      "subline": "家族のかたちと住まいの統計",
+      "subject": "灯りのついた小さな家の模型と、雨戸を閉めた家の模型を並べて大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n2d9fab7fc80d 本文確認2026-11-04。核家族世帯割合、3世代世帯、空き家率を47都道府県で比較。奈良県が核家族1位、徳島県が空き家率1位。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "1155399c6fa8c726816c873f9d5dc12cad75a4b05502a83014a23ac951fc7ab3",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a19/revisions/1155399c6fa8c726816c873f9d5dc12cad75a4b05502a83014a23ac951fc7ab3.png"
+      },
+      "bytes": 38414,
+      "id": "1155399c6fa8c726816c873f9d5dc12cad75a4b05502a83014a23ac951fc7ab3",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:06:59.860Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "72b1977bedd6046e598c05cb78bc688fda753ef7a85e22532d43ab16d6a7cbd1"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:17.345Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "72b1977bedd6046e598c05cb78bc688fda753ef7a85e22532d43ab16d6a7cbd1",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a19/inputs/72b1977bedd6046e598c05cb78bc688fda753ef7a85e22532d43ab16d6a7cbd1.json"
+          },
+          "bytes": 1313
+        }
+      }
+    },
+    {
+      "sha256": "b6fc6621a88d871b504b75f455321aecb347e5566b9a57d9540cc9207b044a04",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a19/revisions/b6fc6621a88d871b504b75f455321aecb347e5566b9a57d9540cc9207b044a04.png"
+      },
+      "bytes": 64815,
+      "id": "b6fc6621a88d871b504b75f455321aecb347e5566b9a57d9540cc9207b044a04",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:39.515Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324059435/rectangle_large_type_2_5a2dad930c87bb334440cc50e7f560b9.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "b6fc6621a88d871b504b75f455321aecb347e5566b9a57d9540cc9207b044a04"
+      }
+    },
+    {
+      "sha256": "d57a1cded0864bf26e378532a1f9199296c5226f554f7bb4b105f7defc9afeeb",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a19/revisions/d57a1cded0864bf26e378532a1f9199296c5226f554f7bb4b105f7defc9afeeb.png"
+      },
+      "bytes": 1983882,
+      "id": "d57a1cded0864bf26e378532a1f9199296c5226f554f7bb4b105f7defc9afeeb",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-fb173d0293e9",
+      "createdAt": "2026-11-04T00:55:43.455Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "8bb5c3f42f7bc94dccf65a18f6b6df544c5f4e09b8320199bfe50265868bd488"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:57:03.230Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "8bb5c3f42f7bc94dccf65a18f6b6df544c5f4e09b8320199bfe50265868bd488",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a19/inputs/8bb5c3f42f7bc94dccf65a18f6b6df544c5f4e09b8320199bfe50265868bd488.json"
+          },
+          "bytes": 8262
+        },
+        "production": {
+          "id": "NCI-00154",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "fb173d0293e9cd8a1e49bfc13c5d65dcfd836bda0683a5ee10bdb75e7214be51"
+        }
+      }
+    }
+  ]
+}

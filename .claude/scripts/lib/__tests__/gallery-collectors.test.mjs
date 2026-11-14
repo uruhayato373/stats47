@@ -1,20 +1,21 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { buildTab } from '../gallery-collectors.mjs';
+import { OGP_TABS, buildTab } from '../gallery-collectors.mjs';
 
 test('noteカバーは有料・専用デザインも共通台帳から列挙し、本文用の公開R2除外を引き継がない', async () => {
   const { mkdtempSync, mkdirSync, writeFileSync } = await import('node:fs');
   const { tmpdir } = await import('node:os');
   const { join } = await import('node:path');
   const { enumerateNoteCovers } = await import('../gallery-collectors.mjs');
-  const { emptyCoverArticle } = await import('../../note/lib/cover-assets.mjs');
+  const { emptyCoverArticle, coverLedgerFiles } = await import('../../note/lib/cover-assets.mjs');
   const root = mkdtempSync(join(tmpdir(), 'note-cover-ledger-'));
   mkdirSync(join(root, 'data/note'), { recursive: true });
   const articles = ['pub', 'paid', 'bespoke', 'draft'].map((key, i) =>
     emptyCoverArticle({ key, noteUrl: key === 'draft' ? undefined : `https://note.com/stats47/n/nabc${i}` }));
-  writeFileSync(join(root, 'data/note/cover-assets.json'), JSON.stringify({ schemaVersion: 1,
-    account: 'stats47', updatedAt: '2026-10-02T00:00:00.000Z', articles }));
+  // 版の無い記事だけなので、置かれるのは正本の 1 ファイル
+  for (const [relative, text] of Object.entries(coverLedgerFiles({ schemaVersion: 1,
+    account: 'stats47', updatedAt: '2026-10-02T00:00:00.000Z', articles }))) writeFileSync(join(root, relative), text);
   const entries = enumerateNoteCovers(root);
   assert.deepEqual(entries.map(e => e.slug), ['pub', 'paid', 'bespoke', 'draft']);
   assert.equal(entries.find(e => e.slug === 'draft').status, 'draft');
@@ -78,4 +79,10 @@ test('note 本文画像の監査対象は有料記事と専用デザインのシ
   const generatorSet = [...literal.matchAll(/'([^']+)'/g)].map((m) => m[1]).sort();
   assert.deepEqual(generatorSet, [...BESPOKE_COVER_VERTICALS].sort());
   assert.match(generator, /!n\.isPrivate/, '生成側も有料記事を除外する');
+});
+
+// RANKING-CARD-WEBP-UNUSED-01: ranking カード WebP は読み手が無く生成を止めた。タブに残すと週次監査が「欠落」を数え続ける
+test('ranking カード WebP のタブは持たない (生成を止めたので監査が欠落を数えない)', () => {
+  assert.ok(!OGP_TABS.includes('ranking-card'));
+  assert.ok(OGP_TABS.includes('ranking-ogp'));
 });

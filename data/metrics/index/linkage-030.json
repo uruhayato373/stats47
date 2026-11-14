@@ -1037,6 +1037,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:tokushima-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:tofu-consumption-expenditure",
           "kind": "ranking"
         }
@@ -1087,6 +1091,10 @@
         },
         {
           "pageId": "blog:tofu-consumption-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokushima-food-culture",
           "kind": "blog"
         },
         {
@@ -1209,19 +1217,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:fukuoka-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:saitama-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:tokyo-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:toyama-food-culture",
           "kind": "blog"
         },
         {
@@ -1454,19 +1450,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:fukuoka-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:saitama-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:tokyo-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:toyama-food-culture",
           "kind": "blog"
         },
         {
@@ -6883,10 +6867,7 @@
         "configHash": "8877a34d6409c50e"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:traffic-accident-casualties-per-100-accidents",
@@ -6918,10 +6899,7 @@
         "configHash": "9905f3e6e6fa606d"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:traffic-accident-casualties-per-population",
@@ -7382,10 +7360,7 @@
         "configHash": "a2ecbe2528812256"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:traffic-accident-count-per-1000-km",
@@ -8608,9 +8583,7 @@
         "configHash": "8081d71cebbd3eaf"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "municipality-ranking:traffic-accident-per-100k",

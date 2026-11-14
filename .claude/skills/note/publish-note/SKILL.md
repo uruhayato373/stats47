@@ -167,6 +167,8 @@ export PATH="$HOME/.browser-use-env/bin:$HOME/.browser-use/bin:$HOME/.local/bin:
 - `$BU` 変数は使わない。毎回フルコマンドを書く
 - バッチ実行中はブラウザを閉じない（最後に1回だけ `close`）
 
+**Profile 5 を読めない環境（専用プロファイルを CDP で使う）**: `node .claude/scripts/note/launch-note-cdp.mjs` を別の端末で起動する。`stats47` のログインを確かめたあとに出る `NOTE_BU_CDP=http://127.0.0.1:<port>` を付けて `publish-new-note.sh` などを実行し、終わったら Ctrl+C で閉じる。専用プロファイル `.local/playwright-note-profile` を素の Chrome や手書きの起動スクリプトで開かない。このスクリプトは、ページのダイアログを browser-use が先に閉じたときに Playwright 側で起きる `Page.handleJavaScriptDialog: No dialog is showing` だけを無視し、ほかの例外では終了する（2026-11-05 に、この例外でブラウザごと終了した）。
+
 ### ⚠️ 必須: 終了時クリーンアップ
 
 `browser-use ... close` は page を閉じるが **daemon プロセス本体を停止しない**。さらに `--profile "Profile 5"` で起動した場合は **ユーザーの実 Chrome 内にタブを開く**ため、daemon を kill してもエディタタブが残ってしまう（2026-04-25 検証で daemon 6 個 + note エディタタブ 5 個残存を確認）。
@@ -343,7 +345,14 @@ npx tsx .claude/scripts/note/catalog/generate-note-catalog.ts --apply
 
 # 4. 作業コピーに変更があれば R2 へ保存する (台帳の body.manifest も更新される)
 npm run note:article -- save "$SLUG"
+
+# 5. 台帳と索引を commit し、commit が通ったときだけ push する (git commit と git push を別々に打たない)
+bash .claude/scripts/note/commit-publish-record.sh "chore(note): <記事> の公開を台帳へ記録する" \
+  data/note/articles.json data/note/note-published-urls.json data/note/note-draft-index.json
+# (手順 2〜4 が git status にほかのファイルを出していたら、そのファイルも後ろへ足す)
 ```
+
+- 手順 5 の最後の 1 行 `PUBLISH_RECORD: ...` を公開の報告へそのまま写す。`PUBLISH_RECORD: FAILED commit` は pre-commit が止めたという意味で、push は実行されておらず、公開記録は手元にしか無い。原因を直して同じコマンドをやり直し、直せなければ `FAILED` の行のまま報告する（「記録済み」と書かない）
 
 - **下書き保存のみ**（公開していない）の場合は上記不要
 - 台帳に無い記事は `findLedgerArticle` が止める。新しい記事は公開前に台帳へレコードを足しておく（手順は `.claude/scripts/note/catalog/README.md`「作業手順」）

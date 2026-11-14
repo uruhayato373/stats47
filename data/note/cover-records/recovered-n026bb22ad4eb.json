@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n026bb22ad4eb",
+  "production": {
+    "id": "NCI-00377",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "バレーボール\n多い県は宮崎県",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無文字のバレーボールを1個だけ大きく置く。選手・体育館の実在チーム・大会結果は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n026bb22ad4eb 2026-10-23公開API本文照合。記事題名「【2021年版】バレーボールをした人が多い県は？ 1位は宮崎県｜都道府県ランキング」。本文中の「宮崎県」「10歳以上」を確認。カバーは本文の主題と年・対象だけを示し、因果・実績・保証・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "fb37a90e62e2a85d99f9a78a6aeb3f2e21893b7e2d509541211c6fcb7e3c76e1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n026bb22ad4eb/revisions/fb37a90e62e2a85d99f9a78a6aeb3f2e21893b7e2d509541211c6fcb7e3c76e1.png"
+      },
+      "bytes": 71438,
+      "id": "fb37a90e62e2a85d99f9a78a6aeb3f2e21893b7e2d509541211c6fcb7e3c76e1",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:45.058Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312773523/rectangle_large_type_2_0273806222ead869a6e1e8787b24466b.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "fb37a90e62e2a85d99f9a78a6aeb3f2e21893b7e2d509541211c6fcb7e3c76e1"
+      }
+    },
+    {
+      "sha256": "16693aff1d8d142f417635a44ba201a10d46e4a5f05b2c15b67741cd3cee1ea4",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n026bb22ad4eb/revisions/16693aff1d8d142f417635a44ba201a10d46e4a5f05b2c15b67741cd3cee1ea4.png"
+      },
+      "bytes": 113880,
+      "id": "16693aff1d8d142f417635a44ba201a10d46e4a5f05b2c15b67741cd3cee1ea4",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:13:55.899Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ef3e1ac66786f82536c12c9999f8b4675b75de21db7d9cdfcdf3b436d36d0263"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.840Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/sports-participation-rate-volleyball/values.json",
+        "sourceSha256": "0dcde72cb3d1d0773e032d9ad8ed14fd725b051d0e333b34f74885a87eb781b8",
+        "input": {
+          "sha256": "ef3e1ac66786f82536c12c9999f8b4675b75de21db7d9cdfcdf3b436d36d0263",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n026bb22ad4eb/inputs/ef3e1ac66786f82536c12c9999f8b4675b75de21db7d9cdfcdf3b436d36d0263.json"
+          },
+          "bytes": 6548
+        }
+      }
+    },
+    {
+      "sha256": "c8a7b595808b69de3f8938b8d8d4f77eb013fbeb5472e504d2c82aec77822979",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n026bb22ad4eb/revisions/c8a7b595808b69de3f8938b8d8d4f77eb013fbeb5472e504d2c82aec77822979.png"
+      },
+      "bytes": 1717125,
+      "id": "c8a7b595808b69de3f8938b8d8d4f77eb013fbeb5472e504d2c82aec77822979",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-61644c25d8b2",
+      "createdAt": "2026-10-23T11:42:16.144Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "24b705dba88b9e5ff28637883a158964f30011956660c0a232f2cfe300c095be"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T11:43:39.231Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "24b705dba88b9e5ff28637883a158964f30011956660c0a232f2cfe300c095be",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n026bb22ad4eb/inputs/24b705dba88b9e5ff28637883a158964f30011956660c0a232f2cfe300c095be.json"
+          },
+          "bytes": 8633
+        },
+        "production": {
+          "id": "NCI-00377",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "61644c25d8b26891aa0a3dd04968327e0e1d6bdf0f17ed2c980cd96fc5fa2530"
+        }
+      }
+    }
+  ]
+}

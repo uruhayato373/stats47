@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it } from "vitest";
 
 import { NATIONAL_REGION_LABEL, toPrefectureView } from "../types";

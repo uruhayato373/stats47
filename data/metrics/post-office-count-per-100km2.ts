@@ -4,7 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const postOfficeCountPer100km2: MetricConfig = {
   "key": "post-office-count-per-100km2",
   "title": "郵便局数",
-  "subtitle": "面積100km²当たり",
+  "subtitle": "可住地面積100km²当たり",
   "unit": "局",
   "category": "ict",
   "source": {
@@ -33,22 +33,6 @@ export const postOfficeCountPer100km2: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "局/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "局/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "groupKey": "post-office-count",
   "seoTitle": "郵便局数ランキング都道府県【2024年】｜1位東京都（105.27局）",

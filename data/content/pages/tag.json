@@ -3151,7 +3151,7 @@
       "key": "園芸用品",
       "title": "園芸用品",
       "href": "/tag/%E5%9C%92%E8%8A%B8%E7%94%A8%E5%93%81",
-      "published": true
+      "published": false
     },
     {
       "id": "tag:t-315647d0e4b4",
@@ -3319,7 +3319,7 @@
       "key": "えのきたけ",
       "title": "えのきたけ",
       "href": "/tag/%E3%81%88%E3%81%AE%E3%81%8D%E3%81%9F%E3%81%91",
-      "published": true
+      "published": false
     },
     {
       "id": "tag:t-398d632cb1eb",
@@ -5935,7 +5935,7 @@
       "key": "鳥取",
       "title": "鳥取",
       "href": "/tag/%E9%B3%A5%E5%8F%96",
-      "published": true
+      "published": false
     },
     {
       "id": "tag:t-c05d2f22fa45",

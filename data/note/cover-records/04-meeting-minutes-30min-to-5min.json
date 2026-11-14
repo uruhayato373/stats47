@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "04-meeting-minutes-30min-to-5min",
+  "production": {
+    "id": "NCI-00010",
+    "policyId": "NCP-007",
+    "policyVersion": 4,
+    "brief": {
+      "headline": "録音から議事録を\n下書きする",
+      "subline": "Whisperと要約で作る手順",
+      "subject": "小型のボイスレコーダーと、開いたノートを大きく描く。実務カテゴリの机上の資料構図。青と明るい黄色の暖かい手描き。画面・紙・道具の表面は無文字。実在UI・製品ロゴ・グラフ・地図は描かない。人物・顔・手・動物は描かない。",
+      "evidence": "https://note.com/stats47/n/n967644e00ad9 本文確認2026-11-04。録音mp3をWhisperとClaude Codeで議事録の下書きにする手順。本文の時間短縮はカバーの数値にしない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "946629ca6e539fc80687692203710aba903a411a8ef70322c1fad99fc6c1dcb9",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/04-meeting-minutes-30min-to-5min/revisions/946629ca6e539fc80687692203710aba903a411a8ef70322c1fad99fc6c1dcb9.png"
+      },
+      "bytes": 114993,
+      "id": "946629ca6e539fc80687692203710aba903a411a8ef70322c1fad99fc6c1dcb9",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:29.805Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/292992920/rectangle_large_type_2_a88379bc52ca40f5753e3abbbbaf07fa.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "946629ca6e539fc80687692203710aba903a411a8ef70322c1fad99fc6c1dcb9"
+      }
+    },
+    {
+      "sha256": "358602901f9f39ef825a094df3f5671d4799ed57972f1b4590a5110c92652621",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/04-meeting-minutes-30min-to-5min/revisions/358602901f9f39ef825a094df3f5671d4799ed57972f1b4590a5110c92652621.png"
+      },
+      "bytes": 62462,
+      "id": "358602901f9f39ef825a094df3f5671d4799ed57972f1b4590a5110c92652621",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:45:16.008Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "5465965aae5ab509583b2d060e1524d7a5102f10d88f6d96c72414a7d8683dab"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出しとシリーズ名・話数・色でシリーズが区別できる",
+        "reviewedAt": "2026-10-11T11:51:03.398Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "5465965aae5ab509583b2d060e1524d7a5102f10d88f6d96c72414a7d8683dab",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/04-meeting-minutes-30min-to-5min/inputs/5465965aae5ab509583b2d060e1524d7a5102f10d88f6d96c72414a7d8683dab.json"
+          },
+          "bytes": 1098
+        }
+      }
+    },
+    {
+      "sha256": "2ef04134aec674974bb951137f3c8147a18009fb26dca5e0753cc8ea29f947b3",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/04-meeting-minutes-30min-to-5min/revisions/2ef04134aec674974bb951137f3c8147a18009fb26dca5e0753cc8ea29f947b3.png"
+      },
+      "bytes": 69730,
+      "id": "2ef04134aec674974bb951137f3c8147a18009fb26dca5e0753cc8ea29f947b3",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:55:54.415Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320329232/rectangle_large_type_2_a382a015115b1f8734125b069ebd48c9.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "2ef04134aec674974bb951137f3c8147a18009fb26dca5e0753cc8ea29f947b3"
+      }
+    },
+    {
+      "sha256": "6fc23f63f6ad700c06335c5e123568bffdf1674cb757e26da5fe1763cbbb54f4",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/04-meeting-minutes-30min-to-5min/revisions/6fc23f63f6ad700c06335c5e123568bffdf1674cb757e26da5fe1763cbbb54f4.png"
+      },
+      "bytes": 1921966,
+      "id": "6fc23f63f6ad700c06335c5e123568bffdf1674cb757e26da5fe1763cbbb54f4",
+      "kind": "candidate",
+      "version": "pop-NCP-007-v4-3489b7528bc1",
+      "createdAt": "2026-11-04T00:17:31.852Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "fc81763f0e938acd37e916cd583b0fb1e0529bde7ab6efa223720933fc388d58"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:18:25.266Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "fc81763f0e938acd37e916cd583b0fb1e0529bde7ab6efa223720933fc388d58",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/04-meeting-minutes-30min-to-5min/inputs/fc81763f0e938acd37e916cd583b0fb1e0529bde7ab6efa223720933fc388d58.json"
+          },
+          "bytes": 8698
+        },
+        "production": {
+          "id": "NCI-00010",
+          "policyId": "NCP-007",
+          "policyVersion": 4,
+          "planSha256": "3489b7528bc1be8e5125c01a36059485848b0636cfe25843fa29776c708cce47"
+        }
+      }
+    }
+  ]
+}

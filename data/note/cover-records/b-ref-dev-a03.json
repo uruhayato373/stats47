@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-dev-a03",
+  "production": {
+    "id": "NCI-00143",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "かつお節の1位は\n那覇市",
+      "subline": "支出と購入量を47市で比較\n2024年の家計調査",
+      "subject": "木のテーブルに山盛りの削り節と、かつお節の塊、木の削り器を大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/na31526b66ac4 本文確認2026-11-04。支出・購入量とも沖縄県(那覇市)が1位(2,412円、681g)。県庁所在市47市の二人以上世帯の値。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "b70d394567d79f71aad217a47565d8c20fd825b4ba0a25ad3103085f765f28d9",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a03/revisions/b70d394567d79f71aad217a47565d8c20fd825b4ba0a25ad3103085f765f28d9.png"
+      },
+      "bytes": 39079,
+      "id": "b70d394567d79f71aad217a47565d8c20fd825b4ba0a25ad3103085f765f28d9",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:06:12.766Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "9944ef80d11bae1d1f1ff7ee798e09029430df9ccde0726611eb5afda4cebd2e"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:11:58.552Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "9944ef80d11bae1d1f1ff7ee798e09029430df9ccde0726611eb5afda4cebd2e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a03/inputs/9944ef80d11bae1d1f1ff7ee798e09029430df9ccde0726611eb5afda4cebd2e.json"
+          },
+          "bytes": 1339
+        }
+      }
+    },
+    {
+      "sha256": "9f4eebe480b70b221cbd60846f9810e298cd365d83b422634082e572bf021903",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a03/revisions/9f4eebe480b70b221cbd60846f9810e298cd365d83b422634082e572bf021903.png"
+      },
+      "bytes": 67670,
+      "id": "9f4eebe480b70b221cbd60846f9810e298cd365d83b422634082e572bf021903",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:32.473Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324039580/rectangle_large_type_2_e4b98d5fb64888dc66b6bdf4ad446e80.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "9f4eebe480b70b221cbd60846f9810e298cd365d83b422634082e572bf021903"
+      }
+    },
+    {
+      "sha256": "1d2de83bb48c516c2d5f33356caa8fe45071cbfbf1d5ab87c1993f3be7c6ef2b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a03/revisions/1d2de83bb48c516c2d5f33356caa8fe45071cbfbf1d5ab87c1993f3be7c6ef2b.png"
+      },
+      "bytes": 2010641,
+      "id": "1d2de83bb48c516c2d5f33356caa8fe45071cbfbf1d5ab87c1993f3be7c6ef2b",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-aa25c5a89993",
+      "createdAt": "2026-11-03T23:13:57.938Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "5b18b9f213ab35501ab032e6db9e0e6ea0cbd4f5af19426eae6e40a90471b412"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:05:01.525Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "5b18b9f213ab35501ab032e6db9e0e6ea0cbd4f5af19426eae6e40a90471b412",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a03/inputs/5b18b9f213ab35501ab032e6db9e0e6ea0cbd4f5af19426eae6e40a90471b412.json"
+          },
+          "bytes": 8247
+        },
+        "production": {
+          "id": "NCI-00143",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "aa25c5a89993268a6f16823af7a0c4ed44daef6c212327e1b7461c64a2b7df43"
+        }
+      }
+    }
+  ]
+}

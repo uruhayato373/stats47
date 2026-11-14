@@ -157,7 +157,7 @@ function templatesForCategory(category, affinity, templatesById) {
 
 function main() {
   const opts = parseArgs(process.argv);
-  const self = catalog.selfCheck(); // md ドリフト検出 (失敗は throw)
+  const self = catalog.selfCheck(); // 台帳 sns.x-catalog の検証 (失敗は throw)
   const quota = catalog.getQuota();
   const affinity = catalog.getAffinity();
   const templates = catalog.getTemplates();

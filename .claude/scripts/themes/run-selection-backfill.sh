@@ -15,7 +15,7 @@
 #      gate 不合格率 > 30% (10 件以上評価後) と利用枠エラー 3 連続で停止
 #   6. validate:catalog / generate:catalog --check、warning ratchet の baseline を縮小 (減少専用)
 #   7. 夜 1 コミット (pre-commit が走る。Windows PC は 12 分/回)。--push-develop で develop へ rebase push
-#   8. report: .claude/skills/theme/manage-theme-portfolio/reference/audits/<日付>-selection-backfill.md
+#   8. report: data/themes/audits/<日付>-selection-backfill.md
 #
 # 翌朝: report の「gate 不合格」「資料なし」「role の推奨」を人が処理する (role は夜間に書かない)。
 #
@@ -193,9 +193,7 @@ if [ "$NO_COMMIT" = 1 ]; then
   log "--no-commit: 変更は作業ツリーに残す ($ROOT)"
   exit "$RUN_STATUS"
 fi
-git add -- data/themes .claude/config/quality-warning-baseline.json \
-  .claude/skills/theme/manage-theme-portfolio/reference/audits \
-  data/themes/role-review/role-review-queue.json data/themes/role-review/LATEST.md
+git add -- data/themes .claude/config/quality-warning-baseline.json
 if git diff --cached --quiet; then
   log "commit 対象なし (通過 0 件)"
   exit "$RUN_STATUS"
@@ -206,7 +204,7 @@ const f=fs.readdirSync(dir).filter(x=>x.startsWith('run-')&&x.endsWith('.json'))
 const r=JSON.parse(fs.readFileSync(dir+'/'+f,'utf8'));
 console.log(r.totals.accepted+' selections / '+r.themes.length+' themes'+(r.stopReason?' / stop: '+r.stopReason:''));")"
 git commit -q -m "chore(theme): selection backfill $DATE_TAG — $ACCEPTED" \
-  -m "一次資料で裏付けた selection を書き込み (gate: 定型文 / https 到達 / 引用実在 / コード一致)。role は変更しない。report: .claude/skills/theme/manage-theme-portfolio/reference/audits/$DATE_TAG-selection-backfill.md" \
+  -m "一次資料で裏付けた selection を書き込み (gate: 定型文 / https 到達 / 引用実在 / コード一致)。role は変更しない。report: data/themes/audits/$DATE_TAG-selection-backfill.md" \
   -m "Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>"
 log "committed on $BRANCH: $(git rev-parse --short HEAD) ($ACCEPTED)"
 

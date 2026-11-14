@@ -31,6 +31,10 @@ const PLOT_X = { left: 168, right: 1000 } as const;
 const PLOT_BOTTOM = SAMPLE_FRAME.bodyBottom - 110;
 const MAX_LABELS = 4;
 const LABEL_FONT = 32;
+// From the dot's centre to the near edge of its name: the named dot's radius and a 5px gap.
+const LABEL_GAP = 18;
+// A name above or below a dot at the plot's edge stops this far from the frame line.
+const LABEL_INSET = 6;
 const AXIS_FONT = 30;
 const DOT_R = 10;
 const NAMED_DOT_R = 13;
@@ -148,18 +152,32 @@ export function renderRelationshipScatterChart(chart: ScatterChart, theme: Chart
     points.reduce((a, b) => (b.x < a.x ? b : a)), points.reduce((a, b) => (b.y < a.y ? b : a)),
   ];
   const labels: string[] = [];
+  const placed: { x0: number; x1: number; y: number }[] = [];
   const namedPoints = new Set<ScatterPoint>();
+  const half = LABEL_FONT / 2;
   for (const p of new Set([...named, ...extremes])) {
     if (labels.length === MAX_LABELS) break;
     const cx = sx(p.x), cy = sy(p.y), toLeft = cx > (PLOT.left + PLOT.right) / 2;
     const width = p.name.length * LABEL_FONT;
-    const x0 = toLeft ? cx - 18 - width : cx + 18, x1 = x0 + width;
-    // Hundreds of municipal dots leave no clear gap, and the caller named this town for the article: its small dots may sit under the label.
-    const clear = x0 >= PLOT.left && x1 <= PLOT.right && ((municipal && named.includes(p)) || points.every((o) => o === p ||
-      sx(o.x) + dotR < x0 || sx(o.x) - dotR > x1 || Math.abs(sy(o.y) - cy) > LABEL_FONT / 2 + dotR));
-    if (clear) {
+    const beside = (left: boolean) => ({ x0: left ? cx - LABEL_GAP - width : cx + LABEL_GAP, y: cy, x: left ? cx - LABEL_GAP : cx + LABEL_GAP, anchor: left ? 'end' : 'start' });
+    // Above or below the dot, the name is centred on it and slides inward at the plot's edge, short of the frame line.
+    const stacked = (direction: -1 | 1) => {
+      const x0 = Math.min(Math.max(cx - width / 2, PLOT.left + LABEL_INSET), PLOT.right - LABEL_INSET - width);
+      return { x0, y: cy + direction * (LABEL_GAP + half), x: x0 + width / 2, anchor: 'middle' };
+    };
+    // The side facing the middle of the plot first, as before; then the other side, above and below.
+    const spot = [beside(toLeft), beside(!toLeft), stacked(-1), stacked(1)].find(({ x0, y }) => {
+      const x1 = x0 + width;
+      if (x0 < PLOT.left || x1 > PLOT.right || y - half < PLOT.top || y + half > PLOT.bottom) return false;
+      if (placed.some((o) => x0 < o.x1 && x1 > o.x0 && Math.abs(o.y - y) < LABEL_FONT)) return false;
+      // Hundreds of municipal dots leave no clear gap, and the caller named this town for the article: its small dots may sit under the label.
+      return (municipal && named.includes(p)) || points.every((o) => o === p ||
+        sx(o.x) + dotR < x0 || sx(o.x) - dotR > x1 || Math.abs(sy(o.y) - y) > half + dotR);
+    });
+    if (spot) {
       namedPoints.add(p);
-      labels.push(`<text x="${toLeft ? cx - 18 : cx + 18}" y="${cy + 11}" text-anchor="${toLeft ? 'end' : 'start'}" font-size="${LABEL_FONT}" font-weight="700">${escapeXml(p.name)}</text>`);
+      placed.push({ x0: spot.x0, x1: spot.x0 + width, y: spot.y });
+      labels.push(`<text x="${spot.x}" y="${spot.y + 11}" text-anchor="${spot.anchor}" font-size="${LABEL_FONT}" font-weight="700">${escapeXml(p.name)}</text>`);
     }
   }
   const dot = (p: ScatterPoint) => {

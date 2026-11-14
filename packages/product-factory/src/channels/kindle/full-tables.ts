@@ -21,15 +21,24 @@ export const TABLE_CHUNK_ROWS = 12;
 const KEEP_QUALIFIER = /当たり|あたり|男性|女性|有業者/;
 /**
  * 指標の定義の名前・単位が値と合わない指標の上書き (2026-11-03 v6 レビュー)。指標の定義そのものの誤りは別に直す。
- * - library-count-per-million: 値は人口 10 万人当たり (山梨 6.58 館) なのに定義の副題が 100 万人当たり
+ * - library-count-per-million: 指標の定義 (人口100万人当たり・山梨 65.8) は e-Stat #G01104 と一致していて正しい。
+ *   ブログの図のデータだけが ÷10 した人口 10 万人当たり (山梨 6.58・単位「館/10万人」) なので、その表だけ見出しを合わせる。
+ *   R2 のランキング値 (65.8) から作る表は定義の見出しのまま (whenUnit で単位が館/10万人の表に限る。2026-11-13 分母を e-Stat meta で確認)
  * - library-lending-books: 値は人口 1 人当たりの冊数 (滋賀 7.08) なのに名前が総数に読める
  * - work-accident-severity: 強度率は延べ実労働時間 1,000 時間当たりの労働損失日数
  */
-const TABLE_OVERRIDES: Readonly<Record<string, { readonly label?: string; readonly unit?: string }>> = {
-  "library-count-per-million": { label: "図書館数（人口10万人当たり）", unit: "館" },
+const TABLE_OVERRIDES: Readonly<Record<string, { readonly label?: string; readonly unit?: string; readonly whenUnit?: string }>> = {
+  "library-count-per-million": { label: "図書館数（人口10万人当たり）", unit: "館", whenUnit: "館/10万人" },
   "library-lending-books": { label: "図書館館外貸出冊数（人口1人当たり）", unit: "冊" },
   "work-accident-severity": { unit: "日/千時間" },
 };
+
+/** TABLE_OVERRIDES を当てる。whenUnit がある上書きは、表の単位がそれと一致するときだけ当てる (値の尺度が違う表に見出しを流用しない) */
+export function applyTableOverride(table: FullTable): FullTable {
+  const override = table.rankingKey ? TABLE_OVERRIDES[table.rankingKey] : undefined;
+  const applies = override && (override.whenUnit === undefined || normalizeUnit(table.unit) === override.whenUnit);
+  return { ...table, label: (applies ? override.label : undefined) ?? table.label, unit: normalizeUnit((applies ? override.unit : undefined) ?? table.unit) };
+}
 
 /** 単位の書き方をそろえる: 全角英数を半角に、外側の括弧を外す (「（件/百万時間）」「Ｍｗｈ」) */
 export function normalizeUnit(unit: string): string {
@@ -170,8 +179,7 @@ export async function fullTablesForArticle(
     }
     // 指標名が 20 字を超えるときは、最後の括弧書き (「（家計調査結果）」など) を外す (見出しが長いとスマホ幅で取り残される)。分母・対象の括弧は外さない
     if (table.label.length > 20) table = { ...table, label: table.label.replace(/（([^（）]*)）$/, (all, inner: string) => (KEEP_QUALIFIER.test(inner) ? all : "")) };
-    const override = table.rankingKey ? TABLE_OVERRIDES[table.rankingKey] : undefined;
-    table = { ...table, label: override?.label ?? table.label, unit: normalizeUnit(override?.unit ?? table.unit) };
+    table = applyTableOverride(table);
     // 同じ年・同じ県の並びの表は、単位や丸めが違っても 1 つだけ載せる (百万円と兆円換算の重複を防ぐ)
     // 上位 10 県の並びで比べる (丸めた表は下位で同値が出て並びが揺れるため)
     const order = `${table.year}|${ranked(table.rows).slice(0, 10).map((row) => row.name).join(",")}`;

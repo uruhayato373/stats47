@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
 import type { MetricConfig, MetricRegistry } from '../types';
-import { resolveMetricProvenance } from './resolve-metric-provenance';
+import {
+  resolveMetricPrimaryProvenance,
+  resolveMetricProvenance,
+} from './resolve-metric-provenance';
 
 // 実在の statsDataId (estat-provenance.generated.json 由来):
 //   0000010103 = SSDS 都道府県テーブル / 0003445758 = 賃金構造基本統計調査 (非SSDS)
@@ -152,5 +155,73 @@ describe('resolveMetricProvenance (param 単一ルール)', () => {
         .map((survey) => survey.id)
         .sort()
     ).toEqual(['kakei-chousa', 'wage-structure-survey']);
+  });
+});
+
+describe('resolveMetricPrimaryProvenance (調査のページへ並べる主出典 = 計算式の分子)', () => {
+  const primaryIds = (m: MetricConfig, registry?: MetricRegistry) =>
+    resolveMetricPrimaryProvenance(m, registry)
+      .map((s) => s.id)
+      .sort();
+
+  it('SSDS 指標は分子の基礎項目の原典だけを返す (分母の人口・面積の調査を数えない)', () => {
+    // #A05202 粗出生率 = A4101 出生数 (人口動態統計) / A1101 総人口 (国勢調査・人口推計)
+    const m = metric({ kind: 'estat', statsDataId: SSDS_TABLE, cdCat01: '#A05202' });
+    expect(primaryIds(m)).toEqual(['vital-statistics']);
+    // 出典の表記に使う全原典は変えない
+    expect(ids(m)).toEqual(['census', 'population-estimates', 'vital-statistics']);
+  });
+
+  it('分子が国勢調査の指標は国勢調査のまま (分母の面積調だけ外れる)', () => {
+    // #A01201 人口密度 = A1101 総人口 / B1101 総面積
+    const m = metric({ kind: 'estat', statsDataId: SSDS_TABLE, cdCat01: '#A01201' });
+    expect(primaryIds(m)).toEqual(['census', 'population-estimates']);
+  });
+
+  it('SSDS 基礎項目・一次統計・家計調査は全原典と同じ', () => {
+    const base = metric({ kind: 'estat', statsDataId: SSDS_TABLE, cdCat01: 'A1101' });
+    expect(primaryIds(base)).toEqual(ids(base));
+    const primary = metric({ kind: 'estat', statsDataId: '0003445758' });
+    expect(primaryIds(primary)).toEqual(['wage-structure-survey']);
+    expect(primaryIds(metric({ kind: 'kakei-chousa' }))).toEqual(['kakei-chousa']);
+  });
+
+  it('分子の基礎項目が資料源の手当て (override) を持つ指標は、その原典を返す', () => {
+    // #C04605 = C360111 国内銀行預金残高 (Excel に資料源が無く、手当てで日本銀行統計) / A1101 総人口。
+    // 式の全項目の資料源を合わせた全原典は人口の調査だけになっていた
+    const m = metric({ kind: 'estat', statsDataId: SSDS_TABLE, cdCat01: '#C04605' });
+    expect(primaryIds(m)).toEqual(['boj-statistics']);
+  });
+
+  it('calculated divide は分子の指標だけを辿る', () => {
+    const registry = {
+      numerator: metric({ kind: 'kakei-chousa' }),
+      denominator: metric({ kind: 'estat', statsDataId: SSDS_TABLE, cdCat01: 'A1101' }),
+    } as MetricRegistry;
+    const m = metric({
+      kind: 'calculated',
+      formula: { op: 'divide', numerator: 'numerator', denominator: 'denominator' },
+    });
+    expect(primaryIds(m, registry)).toEqual(['kakei-chousa']);
+    expect(
+      resolveMetricProvenance(m, registry).map((s) => s.id).sort()
+    ).toEqual(['census', 'kakei-chousa', 'population-estimates']);
+  });
+
+  it('legacy external calculated は分子 (numeratorKey) だけを辿る', () => {
+    const registry = {
+      numerator: metric({ kind: 'kakei-chousa' }),
+      denominator: metric({ kind: 'estat', statsDataId: '0003445758' }),
+    } as MetricRegistry;
+    const m = {
+      ...metric({ kind: 'external', fetcherKey: 'calculated', config: {} }),
+      calculation: {
+        isCalculated: true,
+        type: 'ratio',
+        numeratorKey: 'numerator',
+        denominatorKey: 'denominator',
+      },
+    } satisfies MetricConfig;
+    expect(primaryIds(m, registry)).toEqual(['kakei-chousa']);
   });
 });

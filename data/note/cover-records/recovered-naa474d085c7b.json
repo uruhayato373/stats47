@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-naa474d085c7b",
+  "production": {
+    "id": "NCI-00453",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "つりをした人\n1位は広島県",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人の海辺に置かれた無地の釣り竿・釣り道具箱を描く。魚・人・手・船は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/naa474d085c7b 2026-10-23公開API本文照合。記事題名「【2021年版】つりをした人が多い県は？ 1位は広島県｜都道府県ランキング」。本文中の「広島県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "2deb1a62078b162698c0ace5e7befe3e7b062a7cc948112b7c2c95551857d5a3",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-naa474d085c7b/revisions/2deb1a62078b162698c0ace5e7befe3e7b062a7cc948112b7c2c95551857d5a3.png"
+      },
+      "bytes": 56487,
+      "id": "2deb1a62078b162698c0ace5e7befe3e7b062a7cc948112b7c2c95551857d5a3",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:26.715Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312774621/rectangle_large_type_2_031a05a1e6e76fdf8a0eb583d9f3f245.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "2deb1a62078b162698c0ace5e7befe3e7b062a7cc948112b7c2c95551857d5a3"
+      }
+    },
+    {
+      "sha256": "56080b282d73732bc510cf72f81590228a3073be54799c297cf5e6d6a29e7279",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-naa474d085c7b/revisions/56080b282d73732bc510cf72f81590228a3073be54799c297cf5e6d6a29e7279.png"
+      },
+      "bytes": 112391,
+      "id": "56080b282d73732bc510cf72f81590228a3073be54799c297cf5e6d6a29e7279",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:16:54.823Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "3cb42e8ba1626cdc4e854331aabe10515047a3e6af01a362274475d2826bc322"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/sports-participation-rate-fishing/values.json",
+        "sourceSha256": "adb49bae2aa1f1bfd17b339aabf05e9bb12fe95671314031b0ca2555cceced45",
+        "input": {
+          "sha256": "3cb42e8ba1626cdc4e854331aabe10515047a3e6af01a362274475d2826bc322",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-naa474d085c7b/inputs/3cb42e8ba1626cdc4e854331aabe10515047a3e6af01a362274475d2826bc322.json"
+          },
+          "bytes": 6480
+        }
+      }
+    },
+    {
+      "sha256": "f5eda6630e3d5129b53894e771c8afb16761bc10050c050f049d7abd7ea5e860",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-naa474d085c7b/revisions/f5eda6630e3d5129b53894e771c8afb16761bc10050c050f049d7abd7ea5e860.png"
+      },
+      "bytes": 1682472,
+      "id": "f5eda6630e3d5129b53894e771c8afb16761bc10050c050f049d7abd7ea5e860",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-bfb47713f390",
+      "createdAt": "2026-10-23T14:37:48.209Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "c6a7e767ddf2b88a53680a3fd70f8d89ad95a722b38da239e3c36833d039a528"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00461は東京都と兵庫県の同率首位。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T14:39:54.964Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "c6a7e767ddf2b88a53680a3fd70f8d89ad95a722b38da239e3c36833d039a528",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-naa474d085c7b/inputs/c6a7e767ddf2b88a53680a3fd70f8d89ad95a722b38da239e3c36833d039a528.json"
+          },
+          "bytes": 8740
+        },
+        "production": {
+          "id": "NCI-00453",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "bfb47713f390fdf00c82f35b660adc71e9f8980bce157e6bcd51362d2e1d35bb"
+        }
+      }
+    }
+  ]
+}

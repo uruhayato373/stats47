@@ -6,7 +6,7 @@ const os = require('node:os');
 const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 
-const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, '../../..');
+const ROOT = process.env.STATS47_SCAN_ROOT || path.resolve(__dirname, '../../..');
 const BASELINE_PATH = '.claude/config/money-unit-audit-baseline.json';
 
 function summarizeRows(rows) {

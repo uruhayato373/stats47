@@ -4,7 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const blockParkCountPer100km2: MetricConfig = {
   "key": "block-park-count-per-100km2",
   "title": "街区公園数",
-  "subtitle": "面積100km²当たり",
+  "subtitle": "可住地面積100km²当たり",
   "unit": "所",
   "category": "infrastructure",
   "source": {
@@ -33,22 +33,6 @@ export const blockParkCountPer100km2: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "所/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "所/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "groupKey": "block-park-count",
   "seoTitle": "街区公園数ランキング都道府県【2023年】｜1位東京都（487.3所）",

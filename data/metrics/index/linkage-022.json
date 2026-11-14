@@ -814,10 +814,7 @@
         "configHash": "5a920d92492b2b65"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:pollution-complaints-regional-map",
@@ -4289,14 +4286,6 @@
         },
         {
           "pageId": "blog:garbage-total-output",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:pasta-consumption-quantity",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:water-sewer-expenditure-ranking",
           "kind": "blog"
         },
         {

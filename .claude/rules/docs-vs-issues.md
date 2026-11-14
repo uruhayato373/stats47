@@ -16,9 +16,10 @@ skill、agent、prompt、READMEへ複製しない。
 
 ## 基本方針 (2026-07-30 以降)
 
-> **「現在の判断と未完了タスクは docs/、再生成可能な履歴は skill reference / state、PRで閉じるチケットと自動アラートだけ Issues」**
+> **「現在の判断と未完了タスクは docs/、記録と定期履歴は `data/<取得元>/`、エージェント運用の状態だけ `.claude/state/`、PRで閉じるチケットと自動アラートだけ Issues」**
 
 レビュー全文は保存しない。未完了の対策だけをTODOへ具体化し、恒久判断は既存の戦略・rules・READMEへ直接統合する。
+置き場の区分は `data-storage.md` が正本で、本規則はそれに揃える (2026-11-14 に食い違いを解消した)。
 
 ## 新規作成の原則
 
@@ -28,8 +29,8 @@ skill、agent、prompt、READMEへ複製しない。
 2. 未完了の行動なら`.claude/todo/`の固定バックログへ追加する。
 3. コードに密結合する仕様なら対象コード近傍の`README.md`へ置く。
 4. agentの実行規約・手順なら`.claude/rules/`または`.claude/skills/`へ置く。
-5. 計測・監査・是正キューなど機械が書く記録なら`data/<取得元>/`へ、エージェント運用の状態なら`.claude/state/`へ置く (判断は`data-storage.md`)。
-6. 比較用の定期履歴なら対応skillの`reference/`へ置く。
+5. 計測・監査・レビュー・是正キュー・比較用の定期履歴など、事業として見返す記録なら`data/<取得元>/`へ置き、カタログ (`config/datasets.mjs`) に行を足す。エージェント運用の状態なら`.claude/state/`へ置く (判断は`data-storage.md`)。
+6. skillの`reference/`には手順・契約・テンプレだけを置く。`reference/{reviews,audits,reports}/`は作らない (`npm run check-datasets`が未宣言として止める)。
 7. 上記に統合できず、人が継続的に意思決定へ使う独立した責務がある場合だけ新規作成する。
 
 新規作成時は「既存SSOTへ統合できない理由」「owner」「削除または見直し条件」を差分から説明できなければならない。
@@ -43,7 +44,7 @@ skill、agent、prompt、READMEへ複製しない。
 | 実装計画 | activeな領域実装の契約、受入条件、関連backlog | 完了済みPhase、単発prompt、status台帳の複製 |
 | TODO | 未完了の行動、owner、優先度、次、完了条件 | 完了履歴、レビュー全文、恒久知識 |
 | rule / skill / README | agent規約、反復手順、コード固有契約 | 現在の優先順位、期限、週次実測 |
-| state / reference | 機械状態、再生成値、比較に必要な履歴 | 人が読む戦略の複製 |
+| data / state | 機械状態、再生成値、比較に必要な履歴、監査・レビューの記録 | 人が読む戦略の複製 |
 
 同じ事実を複数箇所に書かない。参照先をリンクし、status・期日・件数・実装手順の正典を混在させない。
 
@@ -59,12 +60,12 @@ skill、agent、prompt、READMEへ複製しない。
 | agent用週次レビュー | `data/reviews/weekly/YYYY-Www.md` |
 | 週次メトリクス | `data/<取得元>/`（機械が書く記録。人手Markdownを複製しない） |
 | 批判的レビュー・事前検死・監査の未完了策 | `.claude/todo/{improvements,backlog}.md`。優先度・実行順・停止条件・完了条件を付ける |
-| 定期レポート・比較用履歴 | 対応skillの `reference/`。機械値だけなら `data/<取得元>/`。人間向け全文をdocsへ複製しない |
+| 定期レポート・比較用履歴 | `data/<取得元>/` (カタログに行を足す。例: `data/sns/{weekly-reports,competitor-scans,x-winning-pattern-reports}/`・`data/blog/winning-pattern-reports/`)。skill の `reference/` には手順・契約・テンプレだけを置く。人間向け全文をdocsへ複製しない |
 | 改善施策の一覧・TODO (gsc / ga4 / adsense / psi / affiliate / cloudflare-cost 等) | `.claude/todo/improvements.md` |
 | 未分類の思いつき TODO | `.claude/todo/backlog.md` へカード起票 (タグ無し = 分類待ちとして検査が集計 → `.claude/rules/todo-standards.md`) |
 | セッション残タスク | `.claude/todo/backlog.md` へカード起票 (改善施策のみ improvements.md。2026-07-22 に一時ハンドオフ文書を廃止) |
-| **テーマ関連のレビュー・監査・運用設計** | `.claude/skills/theme/manage-theme-portfolio/reference/{reviews,audits}/` + `テーマポートフォリオ運用.md`。最新状態はstate、未完了策はTODO |
-| **survey 関連のレビュー・監査・運用設計** | `.claude/skills/survey/manage-survey-portfolio/reference/{reviews,audits}/` + `surveyポートフォリオ運用.md`。最新状態は `data/surveys/portfolio.json`、未完了策はTODO |
+| **テーマ関連のレビュー・監査・運用設計** | レビューと監査 = `data/themes/{reviews,audits}/` (台帳 `themes.reviews`・`themes.audits`)、運用設計 = `.claude/skills/theme/manage-theme-portfolio/reference/テーマポートフォリオ運用.md`。最新状態は `data/themes/portfolio.json`、未完了策はTODO |
+| **survey 関連のレビュー・監査・運用設計** | レビューと監査 = `data/surveys/{reviews,audits}/` (台帳 `surveys.reviews`・`surveys.audits`)、運用設計 = `.claude/skills/survey/manage-survey-portfolio/reference/surveyポートフォリオ運用.md`。最新状態は `data/surveys/portfolio.json`、未完了策はTODO |
 | **アフィリエイト運用の台帳・監査・実験仕様 (例外)** | 広告在庫・直接配置 = git TS (`apps/web/scripts/affiliate-{ads,direct-placements}-data.ts`)、規約 = `.claude/rules/affiliate-ads-standards.md`、手順 = `.claude/skills/ads/*/SKILL.md`、機械状態 = `data/affiliate/*.json`、詳細履歴 = `data/improvement/affiliate-improvement/` — agent (affiliate-manager) 主導のため docs に置かない (2026-07-15 オーナー判断。旧 `docs/40_アフィリエイト管理/` は廃止済み、移行履歴はgitに保持) |
 | **商品ポートフォリオの実装・運用詳細 (例外)** | 進捗 = `.claude/todo/backlog.md`、商品生成規約 = `.claude/rules/data-pack-standards.md`、横断チャネル詳細 = `.claude/skills/product/build-data-pack/reference/multi-channel-content-product-factory.md` — Claude Code／商品管理agent向けの実行情報を実装計画へ重複させない (2026-07-29 オーナー判断で実装計画から移設) |
 | **SNS競合リサーチ運用 (例外)** | X投稿単位 = `.claude/skills/sns/x-viral-research/SKILL.md`、X/Instagramのアカウント単位 = `.claude/skills/sns/competitor-scan/SKILL.md` — 未採択の専用Playwright collector仕様を実装計画へ保持せず、既存skillを運用SSOTにする。Instagram投稿単位collectorが必要なら同skillの拡張として再提案する (2026-07-29 オーナー判断) |
@@ -112,7 +113,7 @@ PR で close される単発タスクか？
   ├─ YES → Issues (enhancement / bug)
   └─ NO → 自動 cron で生成される閾値違反アラートか？
           ├─ YES → Issues (auto-generated + *-alert)
-          └─ NO → 恒久判断は既存SSOT、定期履歴はskill reference、機械値はstate
+          └─ NO → 恒久判断は既存SSOT、記録と定期履歴は data/<取得元>/、エージェント運用の状態は .claude/state/
 ```
 
 ## 改善施策の記録構造 (active 一覧 + 詳細履歴)
@@ -145,7 +146,7 @@ improvement 系スキル (gsc / ga4 / adsense / affiliate / cloudflare-cost / ps
    承認対象と完了 gate を明記する。
 3. 週次・月次計画は優先順位を選ぶだけで、タスクの正典にならない。参照 ID のない独自タスクやカード構文を置かない。
 4. 反復する正常運用を `[種類:定期]` の backlog カードにしない。schedule は workflow / skill、今週の実行枠は
-   weekly、結果は state / reference が持つ。
+   weekly、結果は `data/<取得元>/` が持つ。
 5. backlog と improvements に同じ ID を同時に置かない。引き渡し先は別 ID にし、元カードの ledger evidence または
    詳細ログから相互参照する。
 
@@ -178,13 +179,14 @@ updated: 2026-MM-DD
 - 月次・週次計画はカードのIDを参照し、タグや詳細を複製しない。
 - 領域と構え: 優先順位の正典は領域の台帳 `data/business/domain-stances.json` (構えの考え方は `docs/00_プロジェクト管理/02_収益化戦略.md` §5)。backlog の `[領域:]`・月次 `focus_domains`・週次 Must の整合は `strategy-lanes.cjs` が DG073〜078 で検査する (管理画面 `/strategy/lanes`)。
 - 完了・撤退・supersededはカードまたは行を削除し、Git履歴へ委ねる。
+- カードには未完了の行動だけを書く。済んだ作業の経緯 (何日に何をした・どのコミットで入れた) は書かず、「済み」は 1 行の要約に留める。backlog.md が 1 ファイルの上限 (1 MiB) の 9 割を超えると DG085、1 枚が 8KB を超えると DG086 が警告する (`docs-governance.json` の `todo.sizeBudget`)。上限を超えると、起票した人だけでなく作業ツリー全体のコミットが止まる。
 
 ## 整理・削除契約
 
 1. ファイルのconsumerと参照元を`rg`とリンクチェッカーで確認する。
 2. 未完了策をTODOへ具体化する。
 3. 恒久判断を既存の戦略・rule・READMEへ統合する。
-4. 定期履歴が再利用される場合だけ対応skillの`reference/`へ移す。
+4. 定期履歴・監査・レビューが再利用される場合だけ`data/<領域>/`へ移し、カタログに行を足す (手順は`data-storage.md`「置き場を移す手順」)。
 5. 生成スクリプト・workflow・skillの旧出力先を同時に変更する。
 6. 対象を削除し、INDEXを`npm run docs:fix`で再生成する。
 7. `npm run docs:check`を通す。
@@ -197,7 +199,7 @@ updated: 2026-MM-DD
 | 層 | コマンド・入口 | 責務 |
 |---|---|---|
 | 自動修正 | `npm run docs:fix` | 生成マーカー内の実装計画INDEXだけを実ファイルから再生成 |
-| ローカル検査 | `npm run docs:check` | 構造、frontmatter、固定構成、TODO、INDEX、リンク悪化、docsから削除済みコード(path・npm script・`/skill`)への参照 |
+| ローカル検査 | `npm run docs:check` | 構造、frontmatter、固定構成、TODO、INDEX、リンク悪化、docsから削除済みコード(path・npm script・`/skill`)への参照、検査の外に溜まる置き場 (DG087 `apps/*/.claude/`・DG088 `.claude/scripts/` の直下・DG089 `apps/`と`packages/`の README 以外の大文字名の文書) |
 | 完全棚卸し | `npm run docs:check:all` | テスト、構造、鮮度、リンク、orphan候補 |
 | agent運用 | `/maintain-docs` | 重複、統合先、削除可否を意味レビュー |
 | Claude Stop hook | `.claude/hooks/check-docs-on-stop.js` | 文書差分があるturnの終了前に構造・リンクerrorを差し戻す |
@@ -240,3 +242,5 @@ PR で機能改修を行う場合、関連する docs/ ファイル (改善ロ�
 - 2026-06-07: `docs/50_Issues/` 廃止 → 機能・指標バックログ (現 `.claude/todo/backlog.md`) に統合。ui-improvements は対応済みで削除
 - 2026-07-30: レビュー保存ディレクトリを廃止。未完了策は `.claude/todo/`、恒久判断は既存SSOT、定期履歴はskill referenceへ統合
 - 2026-07-30: 文書ガバナンスを機械契約・checker・pre-commit・PR・週次監査へ配線
+- 2026-11-14: skill の `reference/{reviews,audits}/` にあったテーマ・調査・SEO の監査とレビューの全文 41 件を `data/{themes,surveys,seo}/` へ移し、カタログの `GOVERNED` で同じ置き場への新規を止めた。`packages/`・`apps/` に残っていた済みの計画と修正の記録 4 件を消し、DG087〜089 を足した
+- 2026-11-14: skill の `reference/reports/` にあった定期レポート 17 件 (SNS の週次 15・競合の定点観測 1・ブログの勝ち要因 1) を `data/{sns,blog}/` へ移し、`GOVERNED` に `reference/reports/` を足した。SNS の週次レポートの workflow は `data/sns/weekly-reports/` だけを書き戻す

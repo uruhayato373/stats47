@@ -21,7 +21,7 @@ test('failed automatic login stays paused; explicit human recovery saves only a 
     opens++;
     return { pages: () => [page], addCookies: async () => {}, storageState: async () => ({ cookies: validState ? [{ name: 'fixture', value: 'test', domain: '.note.com', path: '/' }] : [], origins: [] }), close: async () => {} };
   } };
-  const opts = { root, publish: false, headed: true, chromiumImpl };
+  const opts = { root, headed: true, chromiumImpl };
   try {
     assert.equal((await refresh('note', { ...opts, waitHuman: false })).status, 'blocked');
     assert.equal(opens, 0);

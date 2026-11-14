@@ -73,3 +73,19 @@ test('市区町村の散布図だけ 47 を超える点数を宣言できる', (
   assert.equal(bound('municipality').length, 0);
   assert.equal(bound(undefined).length, 1);
 });
+
+// 2026-11-03 の全記事の描き直しで出た型の不具合 (BLOG-FIGURE-REDRAW-REGRESSION-01)
+test('型の画像の「出典：」だけの行と、枠の右端を越える題を数える', () => {
+  const withText = (text) => typeSvg('bar', 'light').replace('</svg>', `${text}</svg>`);
+  const title = (size, text) => `<text x="64" y="120" font-size="${size}" font-weight="700">${text}</text>`;
+  const warned = (svg) => lintImageTypeSvg('sales-ranking.svg', svg).warnings;
+  // 出典名の無い行 (タイル地図の型は座標を小数で書く)
+  assert.match(warned(withText('<text x="64.0" y="1310.0" font-size="26.0" font-weight="400" fill="#475569">出典：</text>'))[0], /出典名が無い/);
+  assert.deepEqual(warned(withText('<text x="64" y="1310" font-size="26">出典：家計調査</text>')), []);
+  // 72px の題は全角 13 字 (936px) まで。18 字は 51px なら収まる
+  assert.match(warned(withText(title(72, '外国人延べ宿泊者数 都道府県ランキング')))[0], /題が枠の右端を越える/);
+  assert.deepEqual(warned(withText(title(51, '外国人延べ宿泊者数 都道府県ランキング'))), []);
+  assert.deepEqual(warned(withText(title('72.0', '大人用サンダル消費支出額'))), []);
+  // 公開中の図に残っている間は数えるだけで、公開は止めない
+  assert.deepEqual(lintImageTypeSvg('sales-ranking.svg', withText(title(72, '外国人延べ宿泊者数 都道府県ランキング'))).errors, []);
+});

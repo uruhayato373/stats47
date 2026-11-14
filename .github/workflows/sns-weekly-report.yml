@@ -48,7 +48,7 @@ jobs:
       - name: 📄 Step Summary
         if: always()
         run: |
-          REPORT_DIR=".claude/skills/sns/sns-weekly-report/reference/reports"
+          REPORT_DIR="data/sns/weekly-reports"
           # shellcheck disable=SC2012  # 最新レポートを mtime 順で取得
           LATEST=$(ls -t "$REPORT_DIR"/*.md 2>/dev/null | head -1)
           if [ -n "$LATEST" ]; then
@@ -59,10 +59,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # .agents/ (Codex 用のミラー) にも新しいレポートへのリンクが要る。入れ忘れると整合性検査 E12 で
-          # 品質ゲートが落ちる (2026-W43 で踏んだ。SNS-WEEKLY-REPORT-MIRROR-01)
-          node .claude/scripts/lib/sync-codex-mirror.cjs
-          git add ".claude/skills/sns/sns-weekly-report/reference/reports" ".agents/skills/sns/sns-weekly-report/reference/reports"
+          # レポートの置き場は data/sns/weekly-reports/ (台帳 sns.weekly-reports)。skill の配下ではないので、
+          # .agents/ (Codex 用のミラー) へのリンクは要らない (2026-11-14 に skill の reference/reports/ から移した)
+          git add "data/sns/weekly-reports"
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else

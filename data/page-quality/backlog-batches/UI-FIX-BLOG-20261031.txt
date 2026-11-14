@@ -1,1 +1,0 @@
-machine|https://stats47.jp/blog|a11y_violations

@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-day-time-population",
+  "production": {
+    "id": "NCI-00055",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "昼間人口\n多い県は東京都",
+      "subline": "2020年・人数で比較",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に晴れた昼間の簡潔な都市のシルエット。人物や人流・観光客を描かず、通勤通学だけを表す記号も加えない。 左に太い見出し、下に補足の太い帯。文字は指定全文のみ。幅320pxでも全行が明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・表彰台・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n7a494830e01d 2026-10-23公開API本文照合。東京都は16,315,279人で1位。常住人口に通勤・通学の流入出を調整した人口総数。 カバーは数値・因果を追加せず、対象年・単位・首位県だけを示す。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "a5b068acb599a73e2041080b190896dbbafaaf192248a67f005c6f2ba57ea56f",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-day-time-population/revisions/a5b068acb599a73e2041080b190896dbbafaaf192248a67f005c6f2ba57ea56f.png"
+      },
+      "bytes": 51091,
+      "id": "a5b068acb599a73e2041080b190896dbbafaaf192248a67f005c6f2ba57ea56f",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:09.482Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312770864/rectangle_large_type_2_54cee3b019e3ea1ac9e31613888a60ca.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "a5b068acb599a73e2041080b190896dbbafaaf192248a67f005c6f2ba57ea56f"
+      }
+    },
+    {
+      "sha256": "f83fbad11d2ff5798a882cd9d30a9b1206d80a6378001c024942b00929ac0cf5",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-day-time-population/revisions/f83fbad11d2ff5798a882cd9d30a9b1206d80a6378001c024942b00929ac0cf5.png"
+      },
+      "bytes": 110175,
+      "id": "f83fbad11d2ff5798a882cd9d30a9b1206d80a6378001c024942b00929ac0cf5",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:13:19.822Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "28315b3852ccb0f4705cfff7c81c022dbff40ad351790453e2b9caf2ffe0921c"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.840Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/day-time-population/values.json",
+        "sourceSha256": "cecd5cb6fc17d62de99ca0ee0a2842a1d0b6378337ebfd0df090a6a252190ef0",
+        "input": {
+          "sha256": "28315b3852ccb0f4705cfff7c81c022dbff40ad351790453e2b9caf2ffe0921c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-day-time-population/inputs/28315b3852ccb0f4705cfff7c81c022dbff40ad351790453e2b9caf2ffe0921c.json"
+          },
+          "bytes": 7519
+        }
+      }
+    },
+    {
+      "sha256": "0e879142da2f3584ce085669a793b51e1c1f07c3a42cde4de991428a5fd8d385",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-day-time-population/revisions/0e879142da2f3584ce085669a793b51e1c1f07c3a42cde4de991428a5fd8d385.png"
+      },
+      "bytes": 1756768,
+      "id": "0e879142da2f3584ce085669a793b51e1c1f07c3a42cde4de991428a5fd8d385",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-ead031c89b47",
+      "createdAt": "2026-10-23T10:41:57.036Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "76e8dcd2efca29ed99431409756893c430f1246e4cd28eec9f90b51495301149"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T10:44:04.579Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "76e8dcd2efca29ed99431409756893c430f1246e4cd28eec9f90b51495301149",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-day-time-population/inputs/76e8dcd2efca29ed99431409756893c430f1246e4cd28eec9f90b51495301149.json"
+          },
+          "bytes": 8441
+        },
+        "production": {
+          "id": "NCI-00055",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "ead031c89b47c121c63909a67c33ecfb648398b792effb6fc326ee7b720e4802"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "19-faq-auto-generation",
+  "production": {
+    "id": "NCI-00034",
+    "policyId": "NCP-007",
+    "policyVersion": 4,
+    "brief": {
+      "headline": "問い合わせから\nFAQをつくる",
+      "subline": "Claude Codeで下書き\n公開前は担当者が確認",
+      "subject": "実務カテゴリの道具を主役にした対角線構図。深い青と明るい黄色、紙の温かな質感。左上から中央に主見出しを2行、右に無人のノートPCと無文字の問い合わせメモの束、2点だけ。PCの画面は無地の淡黄色で、実在UI・吹き出し・人物アイコン・ロゴ・コード・表はなし。問い合わせからFAQのたたき台を作る作業を道具で示す。省力化の倍率・時間・品質保証・自動公開を描かない。1280×670相当、約1.91:1の横長。主見出しは濃紺の極太文字で大きく、補足は下部の太い帯に各行を1280px換算で高さ64px程度以上で入れる。上部のカテゴリ名も読みやすく、文字の四辺は余白を保つ。指定外の文字・数字・URL・ロゴ・細かな図表は入れない。道具の表面・紙・画面はすべて無文字。人物・顔・手・動物・キャラクター・擬人化は一切描かない。",
+      "evidence": "https://note.com/stats47/n/nb149e4940b5f 2026-10-15公開本文確認。過去の問い合わせ記録を匿名化して整理し、Claude CodeでFAQを生成する手順。根拠資料を参照し、担当者・所管課が公開前に確認する。本文の作業例を扱うが、カバーでは短縮時間や無確認で自動公開できるとの主張をしない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "c6d21e55f0d9cf3233179311173501858369757d4032e0afd2db9582c008571e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/19-faq-auto-generation/revisions/c6d21e55f0d9cf3233179311173501858369757d4032e0afd2db9582c008571e.png"
+      },
+      "bytes": 119151,
+      "id": "c6d21e55f0d9cf3233179311173501858369757d4032e0afd2db9582c008571e",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:37.874Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/292994338/rectangle_large_type_2_32fafcf2fe02800607bd27b23899fbae.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "c6d21e55f0d9cf3233179311173501858369757d4032e0afd2db9582c008571e"
+      }
+    },
+    {
+      "sha256": "fd9f222dcd074a8fbf0472fc48f4459e5eb80d2c312329cbe6646cb2a2f2458e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/19-faq-auto-generation/revisions/fd9f222dcd074a8fbf0472fc48f4459e5eb80d2c312329cbe6646cb2a2f2458e.png"
+      },
+      "bytes": 58849,
+      "id": "fd9f222dcd074a8fbf0472fc48f4459e5eb80d2c312329cbe6646cb2a2f2458e",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:46:10.528Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "63d71bb3da71ca2e38b7277506fe4a323560e00e2a31ee0b6010efbf1ac5bce8"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出しとシリーズ名・話数・色でシリーズが区別できる",
+        "reviewedAt": "2026-10-11T11:51:26.013Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "63d71bb3da71ca2e38b7277506fe4a323560e00e2a31ee0b6010efbf1ac5bce8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/19-faq-auto-generation/inputs/63d71bb3da71ca2e38b7277506fe4a323560e00e2a31ee0b6010efbf1ac5bce8.json"
+          },
+          "bytes": 1070
+        }
+      }
+    },
+    {
+      "sha256": "c65b64ae4f2c16f256f5648db17b27dbc65bd1c4b9fa0ffe6247648d6c6db8a9",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/19-faq-auto-generation/revisions/c65b64ae4f2c16f256f5648db17b27dbc65bd1c4b9fa0ffe6247648d6c6db8a9.png"
+      },
+      "bytes": 66681,
+      "id": "c65b64ae4f2c16f256f5648db17b27dbc65bd1c4b9fa0ffe6247648d6c6db8a9",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:56:01.277Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320331599/rectangle_large_type_2_e34c064eb8fc265bb9c9fd6b60d7c48a.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "c65b64ae4f2c16f256f5648db17b27dbc65bd1c4b9fa0ffe6247648d6c6db8a9"
+      }
+    },
+    {
+      "sha256": "c2421d7d4748211c4087401bddcdfff64afc26a055c81607efcc7797cf592588",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/19-faq-auto-generation/revisions/c2421d7d4748211c4087401bddcdfff64afc26a055c81607efcc7797cf592588.png"
+      },
+      "bytes": 23983,
+      "id": "c2421d7d4748211c4087401bddcdfff64afc26a055c81607efcc7797cf592588",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:11:44.045Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "91bfc3d4cc3b4299c7ef4e1111a6a7f36d6854b5e1a1e9c3a4ecc7b602e5b5a9"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.005/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:17:44.690Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "91bfc3d4cc3b4299c7ef4e1111a6a7f36d6854b5e1a1e9c3a4ecc7b602e5b5a9",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/19-faq-auto-generation/inputs/91bfc3d4cc3b4299c7ef4e1111a6a7f36d6854b5e1a1e9c3a4ecc7b602e5b5a9.json"
+          },
+          "bytes": 1070
+        }
+      }
+    },
+    {
+      "sha256": "8ef5bb279ea1051c2a8a1d6ed4d2354d181e76946bcb38bde631edf9233e4f5b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/19-faq-auto-generation/revisions/8ef5bb279ea1051c2a8a1d6ed4d2354d181e76946bcb38bde631edf9233e4f5b.png"
+      },
+      "bytes": 64995,
+      "id": "8ef5bb279ea1051c2a8a1d6ed4d2354d181e76946bcb38bde631edf9233e4f5b",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T07:08:33.830Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323276632/rectangle_large_type_2_a318e74dff9b8c76343a401b96b2f920.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "8ef5bb279ea1051c2a8a1d6ed4d2354d181e76946bcb38bde631edf9233e4f5b"
+      }
+    },
+    {
+      "sha256": "435d9d803322476a4dd05d9c48f7ad2c7d9385a52e2af83169b8a236e774352c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/19-faq-auto-generation/revisions/435d9d803322476a4dd05d9c48f7ad2c7d9385a52e2af83169b8a236e774352c.png"
+      },
+      "bytes": 1704396,
+      "id": "435d9d803322476a4dd05d9c48f7ad2c7d9385a52e2af83169b8a236e774352c",
+      "kind": "candidate",
+      "version": "imagegen-multicategory-pilot-20261015",
+      "createdAt": "2026-10-15T07:10:17.627Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "85edaef5e0375712fd36ec898554ca39b0d71b0d2698e3f66bb0366452b8c3a6"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "NCI-00034: 6カテゴリ試作の原寸/320pxの指定全文・補足・人物なし・題材とカテゴリ固有条件を個別確認済み。practitioner。2026-10-15ユーザーが表示中10件のnote反映を指示。候補SHA 435d9d803322476a4dd05d9c48f7ad2c7d9385a52e2af83169b8a236e774352c。",
+        "reviewedAt": "2026-10-15T07:22:56.526Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "85edaef5e0375712fd36ec898554ca39b0d71b0d2698e3f66bb0366452b8c3a6",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/19-faq-auto-generation/inputs/85edaef5e0375712fd36ec898554ca39b0d71b0d2698e3f66bb0366452b8c3a6.json"
+          },
+          "bytes": 11206
+        },
+        "production": {
+          "id": "NCI-00034",
+          "policyId": "NCP-007",
+          "policyVersion": 4,
+          "planSha256": "6fec8310e34840789ba4265872a321d7839352a96fa1de8b2874ccebdaec8f3a"
+        }
+      }
+    }
+  ]
+}

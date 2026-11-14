@@ -2,6 +2,7 @@ import AxeBuilder from "@axe-core/playwright";
 import type { Page } from "playwright";
 
 import type { MetricValue } from "../types";
+import { evaluateLineGridIssues } from "./line-grid-probe.mjs";
 
 export const MAX_UI_FINDINGS = 10;
 /** 検査前に遅延描画を起こすためにスクロールする深さの上限 (撮影の maxHeight と同程度) */
@@ -268,6 +269,8 @@ export interface UiProbeResult {
   clipped_text: MetricValue;
   overlapping_tap_targets: MetricValue;
   chart_text_issues: MetricValue;
+  /** 本文の列の線の格子の違反数 (格子の外のパネル・パネルを含むセルの直下の文章)。判定は lib/line-grid-probe.mjs。 */
+  line_grid_issues: MetricValue;
   a11y_violations: MetricValue;
   ui_findings: string[];
 }
@@ -299,6 +302,15 @@ export async function probeUi(page: Page): Promise<UiProbeResult> {
     chartText = { value: null, reason };
   }
 
+  let lineGrid: MetricValue;
+  try {
+    const grid = await evaluateLineGridIssues(page);
+    lineGrid = grid.issues.length;
+    findings.push(...grid.issues.slice(0, MAX_UI_FINDINGS).map((d) => `line_grid: ${d}`));
+  } catch (e) {
+    lineGrid = { value: null, reason: `line grid probe failed: ${(e as Error).message}` };
+  }
+
   let a11y: MetricValue;
   try {
     const result = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze();
@@ -315,6 +327,7 @@ export async function probeUi(page: Page): Promise<UiProbeResult> {
     clipped_text: clipped,
     overlapping_tap_targets: overlapping,
     chart_text_issues: chartText,
+    line_grid_issues: lineGrid,
     a11y_violations: a11y,
     ui_findings: findings,
   };

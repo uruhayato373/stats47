@@ -133,7 +133,9 @@ export function buildRetailPayload(result, config, generatedAt) {
   assert.equal(config?.key, KEY, 'metric identity');
   assert.equal(config.isActive, true, 'active config');
   assert.equal(config.unit, '人', 'config unit');
-  assert.equal(config.yearFormat, 'fiscal', 'fiscal source label');
+  // 画面の年の呼び方は出典の調査 (令和3年経済センサス-活動調査) に合わせて暦年。原表の時間軸の表示「2021年度」は
+  // parseRetailEmployees が別に検査し、成果物の scope.yearFormat には原表の表示 (fiscal) を残す。
+  assert.equal(config.yearFormat, 'calendar', 'survey year naming');
   assert.deepEqual(config.entities, ['prefecture'], 'prefecture only');
   assert.deepEqual(
     config.years,

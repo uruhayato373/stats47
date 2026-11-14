@@ -4,7 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const cookingApplianceConsumptionQuantity: MetricConfig = {
   "key": "cooking-appliance-consumption-quantity",
   "title": "炊事用電気器具購入数量",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間炊事用電気器具購入数量",
+  "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。",
   "unit": "台",
   "category": "economy",
   "source": {
