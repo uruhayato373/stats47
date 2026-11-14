@@ -480,6 +480,16 @@
     },
     {
       "from": "ranking:airport-count",
+      "to": "theme:freight-logistics",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:airport-count",
+      "to": "theme:geographic-access",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:airport-count",
       "to": "theme:tourism",
       "relation": "contains"
     },
@@ -516,6 +526,11 @@
     {
       "from": "ranking:ambulance-hospital-arrival-time",
       "to": "theme:healthcare",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:ambulance-hospital-arrival-time",
+      "to": "theme:safety",
       "relation": "contains"
     },
     {
@@ -1064,6 +1079,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:childcare-employment-rate",
+      "to": "theme:childcare-services",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:childrens-clothing-consumption-expenditure",
       "to": "theme:household-food-spending",
       "relation": "contains"
@@ -1140,6 +1160,11 @@
     },
     {
       "from": "ranking:commute-by-bus",
+      "to": "theme:geographic-access",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:commute-by-bus",
       "to": "theme:regional-transport",
       "relation": "contains"
     },
@@ -1156,6 +1181,11 @@
     {
       "from": "ranking:commute-by-train",
       "to": "theme:regional-transport",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:commuter-ratio-to-other-municipalities",
+      "to": "theme:geographic-access",
       "relation": "contains"
     },
     {
@@ -3349,6 +3379,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:main-road-length-per-km2",
+      "to": "theme:freight-logistics",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:main-road-paving-rate",
       "to": "theme:roads",
       "relation": "contains"
@@ -3436,6 +3471,11 @@
     {
       "from": "ranking:marine-fishery-output-value",
       "to": "theme:fishery-marine",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:maritime-import-export-cargo",
+      "to": "theme:freight-logistics",
       "relation": "contains"
     },
     {
@@ -3900,6 +3940,11 @@
     },
     {
       "from": "ranking:nursery-teacher-annual-income",
+      "to": "theme:childcare-services",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:nursery-teacher-annual-income",
       "to": "theme:occupation-salary",
       "relation": "contains"
     },
@@ -4179,6 +4224,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:pollution-complaints-received-per-100k",
+      "to": "theme:environmental-quality",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:population-density-per-km2-inhabitable-area",
       "to": "theme:living-housing",
       "relation": "contains"
@@ -4226,6 +4276,11 @@
     {
       "from": "ranking:port-container-count",
       "to": "theme:ports",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:port-count",
+      "to": "theme:freight-logistics",
       "relation": "contains"
     },
     {
@@ -4770,6 +4825,11 @@
     },
     {
       "from": "ranking:roadside-station-count",
+      "to": "theme:geographic-access",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:roadside-station-count",
       "to": "theme:roads",
       "relation": "contains"
     },
@@ -4896,6 +4956,11 @@
     {
       "from": "ranking:sewage-treatment-coverage-rate",
       "to": "theme:water-services",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:sewerage-coverage-rate",
+      "to": "theme:environmental-quality",
       "relation": "contains"
     },
     {
@@ -5146,6 +5211,11 @@
     {
       "from": "ranking:squid-consumption-expenditure",
       "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:ss-pollution-load",
+      "to": "theme:environmental-quality",
       "relation": "contains"
     },
     {

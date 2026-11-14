@@ -239,6 +239,11 @@ export const SAFETY_SET: IndicatorSet = {
       "rankingKey": "consumer-consultation-accepted-cases",
       "shortLabel": "消費生活相談受付件数（年度）",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "ambulance-hospital-arrival-time",
+      "shortLabel": "救急搬送の病院収容所要時間",
+      "role": "secondary"
     }
   ],
   "keywords": [

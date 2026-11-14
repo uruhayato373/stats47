@@ -91,7 +91,9 @@
         "nursery-utilization-rate",
         "certified-childcare-center-count-per-100k-0-5",
         "childcare-applicants",
-        "nursery-waiting-children-count"
+        "nursery-waiting-children-count",
+        "childcare-employment-rate",
+        "nursery-teacher-annual-income"
       ]
     },
     {
@@ -344,7 +346,10 @@
         "pm25-valid-general-station-count",
         "pm25-general-station-count",
         "bod-pollution-load",
-        "cod-pollution-load"
+        "cod-pollution-load",
+        "pollution-complaints-received-per-100k",
+        "ss-pollution-load",
+        "sewerage-coverage-rate"
       ]
     },
     {
@@ -438,7 +443,11 @@
         "jr-freight-shipment",
         "air-cargo-transport",
         "number-of-freight-cars",
-        "truck-operators"
+        "truck-operators",
+        "main-road-length-per-km2",
+        "maritime-import-export-cargo",
+        "port-count",
+        "airport-count"
       ]
     },
     {
@@ -471,7 +480,11 @@
       "rankingKeys": [
         "railway-station-count",
         "bus-operators",
-        "commute-by-car"
+        "commute-by-car",
+        "roadside-station-count",
+        "airport-count",
+        "commute-by-bus",
+        "commuter-ratio-to-other-municipalities"
       ]
     },
     {
@@ -1423,7 +1436,8 @@
         "tsunami-evacuation-building-count",
         "tsunami-evacuation-tower-count",
         "disaster-relief-expenses-prefecture",
-        "consumer-consultation-accepted-cases"
+        "consumer-consultation-accepted-cases",
+        "ambulance-hospital-arrival-time"
       ]
     },
     {

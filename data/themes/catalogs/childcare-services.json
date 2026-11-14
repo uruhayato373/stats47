@@ -59,40 +59,86 @@
       "rankingKey": "nursery-waiting-children-count",
       "shortLabel": "保育所等利用待機児童数",
       "role": "context"
+    },
+    {
+      "rankingKey": "childcare-employment-rate",
+      "shortLabel": "育児をしている人の就業率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/shugyou/2022/index.html",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「子育てしやすい県」を知りたい読者に、共働きで預けたい家庭が多いかという保育需要の背景を割合で示す。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "nursery-teacher-annual-income",
+      "shortLabel": "保育士の平均年収",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「保育士 年収ランキング」「保育士 給料 高い 県」の検索に答え、保育士の配置状況と並べて見られるようにする。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
     }
   ],
   "charts": [],
   "metricGroups": [
     {
-      "key": "childcare-demand-1",
-      "title": "保育所等利用申込者数（4月1日時点）",
-      "rankingKeys": [
-        "childcare-applicants"
-      ],
-      "defaultCheckedKeys": [
-        "childcare-applicants"
-      ]
-    },
-    {
       "key": "facility-capacity-and-utilization-1",
-      "title": "人口当たりの保育所等数と利用率の推移",
+      "title": "保育所等数（0～5歳人口10万人当たり）",
       "rankingKeys": [
-        "nursery-count-per-100k-0-5",
-        "nursery-utilization-rate"
+        "nursery-count-per-100k-0-5"
       ],
       "defaultCheckedKeys": [
-        "nursery-count-per-100k-0-5",
-        "nursery-utilization-rate"
+        "nursery-count-per-100k-0-5"
       ]
     },
     {
       "key": "facility-capacity-and-utilization-2",
+      "title": "保育所等利用率（在所児数／定員数）",
+      "rankingKeys": [
+        "nursery-utilization-rate"
+      ],
+      "defaultCheckedKeys": [
+        "nursery-utilization-rate"
+      ]
+    },
+    {
+      "key": "facility-capacity-and-utilization-3",
       "title": "認定こども園数（0～5歳人口10万人当たり）",
       "rankingKeys": [
         "certified-childcare-center-count-per-100k-0-5"
       ],
       "defaultCheckedKeys": [
         "certified-childcare-center-count-per-100k-0-5"
+      ]
+    },
+    {
+      "key": "childcare-demand-1",
+      "title": "育児をしている人の就業率",
+      "rankingKeys": [
+        "childcare-employment-rate"
+      ],
+      "defaultCheckedKeys": [
+        "childcare-employment-rate"
+      ]
+    },
+    {
+      "key": "childcare-demand-2",
+      "title": "保育所等利用申込者数（4月1日時点）",
+      "rankingKeys": [
+        "childcare-applicants"
+      ],
+      "defaultCheckedKeys": [
+        "childcare-applicants"
       ]
     },
     {
@@ -104,32 +150,45 @@
       "defaultCheckedKeys": [
         "nursery-children-per-nursery-teacher"
       ]
+    },
+    {
+      "key": "childcare-quality-and-staffing-2",
+      "title": "保育士の平均年収",
+      "rankingKeys": [
+        "nursery-teacher-annual-income"
+      ],
+      "defaultCheckedKeys": [
+        "nursery-teacher-annual-income"
+      ]
     }
   ],
   "sections": [
     {
-      "key": "childcare-demand",
-      "title": "保育所等の利用申し込みや需要の状況はどうか",
-      "concern": "子どもを預けたい希望者に対し実際の利用申し込みがどれくらいあるか気になります。",
+      "key": "facility-capacity-and-utilization",
+      "title": "近くに預け先は十分あり、空きに余裕はあるか",
+      "concern": "地域に保育所や認定こども園が十分にあり、定員に余裕があるか心配です。",
       "metricGroupKeys": [
-        "childcare-demand-1"
+        "facility-capacity-and-utilization-1",
+        "facility-capacity-and-utilization-2",
+        "facility-capacity-and-utilization-3"
       ]
     },
     {
-      "key": "facility-capacity-and-utilization",
-      "title": "保育施設や定員の確保状況は十分か",
-      "concern": "地域に保育所や認定こども園が十分にあり定員に余裕があるか心配です。",
+      "key": "childcare-demand",
+      "title": "保育を必要とする家庭はどれくらいあるか",
+      "concern": "子どもを預けたい家庭が多いのか、実際の利用申し込みがどれくらいあるか気になります。",
       "metricGroupKeys": [
-        "facility-capacity-and-utilization-1",
-        "facility-capacity-and-utilization-2"
+        "childcare-demand-1",
+        "childcare-demand-2"
       ]
     },
     {
       "key": "childcare-quality-and-staffing",
-      "title": "保育士の配置状況や保育の質は保たれているか",
-      "concern": "保育士不足によって1人当たりの負担が重く手厚い保育が受けられないか心配です。",
+      "title": "保育士は足りているか、年収はどうか",
+      "concern": "保育士不足で1人当たりの負担が重く、手厚い保育が受けられないか心配です。",
       "metricGroupKeys": [
-        "childcare-quality-and-staffing-1"
+        "childcare-quality-and-staffing-1",
+        "childcare-quality-and-staffing-2"
       ]
     }
   ],

@@ -261,11 +261,11 @@
   "theme": {
     "themes": 56,
     "metricGroups": {
-      "total": 510,
+      "total": 525,
       "byStatus": {
-        "resolved": 450,
+        "resolved": 459,
         "unresolved": 0,
-        "not-applicable": 60,
+        "not-applicable": 66,
         "missing-lineage": 0
       },
       "coveragePct": 100,
@@ -319,6 +319,7 @@
         "communication-access",
         "construction-industry",
         "education-culture",
+        "environmental-quality",
         "foreign-residents",
         "gender-participation",
         "geographic-access",
@@ -379,6 +380,7 @@
         "regional-energy"
       ],
       "employment-structure-survey": [
+        "childcare-services",
         "daily-time-use",
         "gender-participation",
         "labor-mobility",
@@ -526,6 +528,7 @@
         "local-economy"
       ],
       "mlit-ksj": [
+        "freight-logistics",
         "geographic-access",
         "railway",
         "tourism"
@@ -591,6 +594,7 @@
       "population-estimates": [
         "aging-society",
         "communication-access",
+        "environmental-quality",
         "healthcare",
         "living-housing",
         "population-dynamics",
@@ -600,6 +604,7 @@
         "population-dynamics"
       ],
       "port-statistics": [
+        "freight-logistics",
         "ports"
       ],
       "poverty-self-reliance-support-status-survey": [
@@ -642,6 +647,7 @@
         "real-income"
       ],
       "road-statistics": [
+        "freight-logistics",
         "roads"
       ],
       "school-basic-survey": [
@@ -708,6 +714,7 @@
         "safety"
       ],
       "wage-structure-survey": [
+        "childcare-services",
         "construction-industry",
         "daily-time-use",
         "gender-participation",
@@ -722,6 +729,7 @@
         "waste-recycling"
       ],
       "wastewater-treatment-coverage-report": [
+        "environmental-quality",
         "water-services"
       ],
       "water-pollution-survey": [
@@ -2545,6 +2553,7 @@
         "communication-access",
         "construction-industry",
         "education-culture",
+        "environmental-quality",
         "foreign-residents",
         "gender-participation",
         "geographic-access",
@@ -2930,6 +2939,7 @@
       "surveyId": "employment-structure-survey",
       "rankingCount": 22,
       "themeKeys": [
+        "childcare-services",
         "daily-time-use",
         "gender-participation",
         "labor-mobility",
@@ -3959,6 +3969,7 @@
       "surveyId": "mlit-ksj",
       "rankingCount": 4,
       "themeKeys": [
+        "freight-logistics",
         "geographic-access",
         "railway",
         "tourism"
@@ -4217,6 +4228,7 @@
       "themeKeys": [
         "aging-society",
         "communication-access",
+        "environmental-quality",
         "healthcare",
         "living-housing",
         "population-dynamics",
@@ -4360,6 +4372,7 @@
       "surveyId": "port-statistics",
       "rankingCount": 9,
       "themeKeys": [
+        "freight-logistics",
         "ports"
       ],
       "blogSlugs": []
@@ -4580,6 +4593,7 @@
       "surveyId": "road-statistics",
       "rankingCount": 18,
       "themeKeys": [
+        "freight-logistics",
         "roads"
       ],
       "blogSlugs": [
@@ -4903,6 +4917,7 @@
       "surveyId": "wage-structure-survey",
       "rankingCount": 79,
       "themeKeys": [
+        "childcare-services",
         "construction-industry",
         "daily-time-use",
         "gender-participation",
@@ -4967,6 +4982,7 @@
       "surveyId": "wastewater-treatment-coverage-report",
       "rankingCount": 2,
       "themeKeys": [
+        "environmental-quality",
         "water-services"
       ],
       "blogSlugs": [
