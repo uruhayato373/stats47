@@ -8,6 +8,7 @@ import { ChartPanel } from '@stats47/components';
 import { hrefFor } from '@stats47/data-configs/content/href';
 import { readSourceConfigRef } from '@stats47/data-configs/data-source';
 import { resolveChartColorHex, type CatalogMetricGroup, type CatalogSection } from '@stats47/data-configs/theme-catalog';
+import { resolveMetricDisplayScale } from '@stats47/data-configs/unit';
 import { metricDisplayName } from "@stats47/ranking";
 import { resolveValuePrecision } from "@stats47/utils";
 
@@ -168,7 +169,13 @@ export function ThemeMetricsDashboard({
             indicatorDataMap[k].rankingValues.length >= MIN_VALUES_FOR_KPI &&
             // 地域ごとに出す指標を変える (2026-11-01 オーナー決定): 全国のページは公式の全国の値がある指標だけ。
             // 県のページは県の値がある指標 (上の観測数)。市区町村は別のページ (市区町村の指標) が受け持つ
-            (selectedPrefectureCode !== null || hasOfficialNational(indicatorDataMap[k]))
+            (selectedPrefectureCode !== null || hasOfficialNational(indicatorDataMap[k])) &&
+            // その県の値が無い指標は出さない。値の無いタイル (「—」) は場所を取るだけで、壊れているようにも読める
+            // (2026-11-14 の計測で 3 テーマ。全国のページは上の「公式の全国の値がある指標だけ」が同じ役目)
+            (selectedPrefectureCode === null ||
+              indicatorDataMap[k].rankingValues.some(
+                (v) => v.areaCode === selectedPrefectureCode && typeof v.value === 'number'
+              ))
         ),
     [themeConfig.tabIndicators, metricGroups, indicatorDataMap, selectedPrefectureCode]
   );
@@ -200,19 +207,28 @@ export function ThemeMetricsDashboard({
       // 県のページはその県の値と順位、全国のページは全国の値 (2026-10-31 オーナー決定。旧: 47 都道府県の表示で 1 位の県の値)
       // 単位と年は観測の行から取る (全国のページは同じ年のどの県の行でもよい)
       const observed = target ?? d.rankingValues[0];
+      const unit = observed?.unit || d.rankingItem.unit || '';
+      const prefectureValues = d.rankingValues.flatMap((v) => (typeof v.value === 'number' ? [v.value] : []));
+      // 桁の多い値は読める単位に寄せる (ランキングと同じ入口。値は元の単位のまま持ち、表示のときだけ寄せる)。
+      // 全国のページは全国の値も収まる単位を選ぶ
+      const scale = resolveMetricDisplayScale(
+        { unit, display: d.rankingItem.valueDisplay },
+        selectedPrefectureCode === null && nationalValue !== undefined
+          ? [...prefectureValues, nationalValue]
+          : prefectureValues
+      );
       return {
         metricKey: key,
         title: metricDisplayName(d.rankingItem),
-        unit: observed?.unit || d.rankingItem.unit || '',
+        unit,
+        displayScale: scale.factor !== 1 ? { unit: scale.unit, factor: scale.factor, decimals: scale.decimals } : undefined,
         yearName: observed?.yearName ?? d.rankingItem.latestYear?.yearName,
         value: selectedPrefectureCode
           ? typeof target?.value === 'number' ? target.value : null
           : nationalValue ?? null,
         rank: selectedPrefectureCode ? (target?.rank ?? null) : null,
         total,
-        precision: resolveValuePrecision(
-          d.rankingValues.flatMap((v) => (typeof v.value === 'number' ? [v.value] : []))
-        ),
+        precision: resolveValuePrecision(prefectureValues),
         ...source,
         nationalValue,
         series: d.nationalSeries ?? [],

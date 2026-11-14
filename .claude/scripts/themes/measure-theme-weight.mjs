@@ -5,7 +5,8 @@
  *
  * 重さ (高さ・文字数・図の数) は数えるだけで判定しない。読みやすさの品質基準 6 項目は違反として数える
  * (各行の violations。0 件が目標):
- *   few-first-screen-tiles … 最初の画面に数値のタイルが 2 個未満
+ *   few-first-screen-tiles … 最初の画面に数値のタイルが 2 個未満 (ページにはタイルが 2 個以上ある = 並べ方の問題)
+ *   few-tiles-available    … ページ全体で数値のタイルが 2 個未満 (出せる値が無い = データの問題)
  *   broken-number          … 数字が途中で折り返している (タイルの値・表の数値のセル)
  *   empty-tile             … 値の無いタイル (「—」) が出ている
  *   overflow-x             … 横にはみ出している
@@ -106,7 +107,8 @@ function measureInPage() {
   const overflowX = document.documentElement.scrollWidth - document.documentElement.clientWidth;
   const firstScreenTiles = tiles.filter(inFirstScreen).length;
   const violations = [
-    ...(firstScreenTiles < 2 ? ["few-first-screen-tiles"] : []),
+    // ページ全体でもタイルが 2 個に満たないのは画面の並べ方でなくデータの穴 (全国の値が無い指標ばかりの全国版など)。原因が違うので分けて数える
+    ...(tiles.length < 2 ? ["few-tiles-available"] : firstScreenTiles < 2 ? ["few-first-screen-tiles"] : []),
     ...(brokenTileNumbers.length + brokenCellNumbers.length > 0 ? ["broken-number"] : []),
     ...(emptyTiles.length > 0 ? ["empty-tile"] : []),
     ...(overflowX > 0 ? ["overflow-x"] : []),

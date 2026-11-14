@@ -483,8 +483,18 @@ describe('地域ごとに出す指標 (2026-11-01 オーナー決定)', () => {
     renderDashboard('labor-wages', { indicatorDataMap: { ...indicatorDataMap, [METRIC_KEY]: noNational } });
     expect(screen.queryByTestId('single-card')).toBeNull();
     cleanup();
-    renderDashboard('labor-wages', { indicatorDataMap: { ...indicatorDataMap, [METRIC_KEY]: noNational }, selectedPrefectureCode: '13000' });
+    const withTokyo = {
+      ...noNational,
+      rankingValues: [...noNational.rankingValues, { areaCode: '13000', value: 300, rank: 1 }],
+    } as ThemeIndicatorData;
+    renderDashboard('labor-wages', { indicatorDataMap: { ...indicatorDataMap, [METRIC_KEY]: withTokyo }, selectedPrefectureCode: '13000' });
     expect(screen.getByTestId('single-card')).toBeInTheDocument();
+  });
+
+  it('県のページは、その県の値が無い指標を出さない (値の無いタイルを並べない。2026-11-14)', () => {
+    // 見本の観測は 13000 (東京都) の行を持たない
+    renderDashboard('labor-wages', { selectedPrefectureCode: '13000' });
+    expect(screen.queryByTestId('single-card')).toBeNull();
   });
 });
 

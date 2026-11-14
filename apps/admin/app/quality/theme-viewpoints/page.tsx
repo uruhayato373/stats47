@@ -18,6 +18,7 @@ const MAX_THEME_LINKS = 4;
 /** 読みやすさの品質基準の違反の名前 (measure-theme-weight.mjs の violations) */
 const UI_VIOLATION_LABEL: Record<string, string> = {
   "few-first-screen-tiles": "最初の画面に数値が少ない",
+  "few-tiles-available": "出せる数値が 2 個に満たない",
   "broken-number": "数字の途中で折り返す",
   "empty-tile": "値の無いタイル",
   "overflow-x": "横にはみ出す",
