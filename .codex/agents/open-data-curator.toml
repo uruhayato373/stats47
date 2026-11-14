@@ -57,6 +57,8 @@ No prose before/after. No section headers.
 ```bash
 npm run validate:open-data-catalog --workspace packages/data-configs   # 構造・参照整合 (決定的)
 npm run check:open-data-links --workspace packages/data-configs        # URL 到達性 (オンデマンド・CI に入れない)
+npm run open-data:fetch -- --dataset <id> --dry-run   # 原本を取得せず、到達性とサイズを確認する。
+npm run open-data:test                              # 取得と正規化の共通処理を検証する。
 npm run validate:prefecture-statistics --workspace packages/data-configs
 npm run check:prefecture-statistics-links --workspace packages/data-configs
 npm run type-check --workspace @stats47/data-configs
@@ -131,6 +133,8 @@ npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts --dry-run   # KS
 ## File Boundary
 
 - 排他write: 台帳 `open-data.sources`・`open-data.datasets`, `config/source-vault.json`, `data/source-inventory/**`
+- 排他write: `data/open-data/fetch/recipes.json` と `data/open-data/expansion.json` は本 agent が編集する。
+- `data/open-data/snapshots/` は CI だけが書き込み、本 agent は参照に限る。
 - 共有write: 台帳 `open-data.prefecture-statistics` は本agentのみがカタログ編集する
 - read-only: `packages/gis/src/mlit-ksj/**`, `data/metrics/**`, `theme-catalog/**`
 - `.claude/todo/backlog.md` へ直接大量追記せず、取得可能性を実証した候補だけを既存agentへ渡す

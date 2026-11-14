@@ -48,6 +48,8 @@ paths:
 `metrics:generate-schema` → `content:sync` → `metrics:build-index` → `metrics:check` で生成・整合性を確認する。
 指標を足す・変える・テーマや調査マスタを変えた後は、`npm run metrics:regen-derived` で決定的に作れる生成物 (schema・コンテンツ索引・逆引き索引・調査の分類・テーマカタログ・テーマの依存の写し・掲載価値) を 1 回で作り直してから commit する。1 つずつ作り直すと pre-commit と CI で順に落ちる (2026-11-02 に家計調査の 4 指標で 7 回落ちた)。既知キーと sitemap は R2 の item.json が要るので CI (sync-ranking-keys) が作り、極性は判断なので手で足す。
 利用ページ・統計表分類条件の逆引きは `data/metrics/index/linkage-*.json`。生のクエリをtheme chartへ残さない。
+RankingItem は表示契約と取得レシピを snapshot へ焼き込み、旧形の読取互換を持たない。公開は都道府県の全 RankingItem snapshot と集約索引・市区町村の全 item/values を同じコードから再生成・検証して R2 へ反映した後、アプリをまとめて 1 回デプロイする (UI だけ先に配信して旧 snapshot を読む段取りは禁止)。
+既存の e-Stat カタログ (R2 `estat-catalog/`) と表の写し (非公開 R2 `estat-tables/`・台帳 `data/estat/table-snapshots.json`・`estat-table-snapshot.ts --check-updates`) を、新しい取得を設計する前に先に引く。
 
 ### 配色の選び方と、画像の型での使い方 (2026-11-02)
 

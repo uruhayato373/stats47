@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "e-Stat 値の取得台帳",
-  "description": "値はprivate R2へ保全する。local-onlyはローカル取得検証済みで未転送。台帳は値を持たず取得manifestの版とSHAを持つ。",
+  "description": "値はprivate R2へ保全する。local-onlyは未転送、pushedは転送済み未一致検証、verifiedだけ指標生成に使う。台帳は値を持たず取得manifestの版とSHAを持つ。",
   "type": "object",
   "additionalProperties": false,
   "required": ["schemaVersion", "tables"],
@@ -32,7 +32,7 @@
           "warnings": { "type": "array", "items": { "$ref": "common.schema.json#/$defs/nonEmptyString" } },
           "manifestKey": { "type": "string", "pattern": "^estat-tables/[0-9]{10}/manifest\\.json$" },
           "manifestSha256": { "$ref": "common.schema.json#/$defs/sha256" },
-          "status": { "enum": ["local-only", "pushed"] },
+          "status": { "enum": ["local-only", "pushed", "verified"] },
           "bucket": { "const": "stats47-private" }
         }
       }

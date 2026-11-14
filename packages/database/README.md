@@ -6,7 +6,7 @@ Drizzle ORM + SQLite (better-sqlite3) を使用した共通データベースパ
 
 ## データ管理アーキテクチャ (完全DBレス)
 
-> **⚠️ 2026-05-29 更新: 正典は [`docs/01_技術設計/02_データアーキテクチャ.md`](../../docs/01_技術設計/02_データアーキテクチャ.md)。**
+> **⚠️ 2026-05-29 更新: 正典は [`.claude/rules/data-storage.md`](../../.claude/rules/data-storage.md)。**
 > stats47 は **完全DBレス**に決定 (doc 18 ハイブリッド / doc 17 リモートD1 は同日 superseded)。
 > **永続/リモート D1 を SSOT に持たない。** SSOT は **git TS (コード)** と **R2 (観測値・配信)** の二つだけ。
 > 本番アプリは R2 snapshot のみ読む。Derived (area_profiles / correlations) は
@@ -32,7 +32,7 @@ stats47 の data layer は **2 層モデル** で構成される。永続 DB は
 
 ### データ分類と置き場
 
-正本は `docs/01_技術設計/02_データアーキテクチャ.md`「データ分類」と `.claude/rules/data-storage.md` (ここには写さない)。
+正本は `.claude/rules/data-storage.md`「データ分類」と 2 つの台帳 (`npm run check-datasets -- --er`・`npm run r2:classes`)。ここには写さない。
 
 ### R2 に置くもの (観測値 + 配信 snapshot)
 
@@ -90,7 +90,7 @@ correlations / area_profiles は **R2 観測値を入力に使い捨て計算 �
 
 ### 関連
 
-- **正典**: `docs/01_技術設計/02_データアーキテクチャ.md`
+- **正典**: `.claude/rules/data-storage.md`
 - 却下した代替案と完了済み移行ログ: git 履歴
 - 記録先分類: `.claude/rules/data-storage.md`
 - R2 キー設計: `.claude/rules/r2-storage-design.md`
@@ -280,7 +280,7 @@ packages/database/
 >
 > 旧 D1 テーブル `stats_prefecture` / `stats_city` / `stats_port` / `stats_migration_flow` / `correlations` は **全 DROP 済** (Phase 7, 2026-05-28 で schema ファイルも削除)。観測値の SSOT は R2 (`app/stats/<metric>/{values,cities,ports,migration-flow-<year>}.json`)、metric メタの SSOT は TS-config (`data/metrics/<key>.ts`)、D1 `metrics` テーブルは TS-config の cache。
 >
-> 詳細: `docs/01_技術設計/02_データアーキテクチャ.md` / `.claude/rules/r2-storage-design.md`
+> 詳細: `.claude/rules/data-storage.md` / `.claude/rules/r2-storage-design.md`
 
 旧 3 層モデル (Phase 5 以前): `sources` → `metrics` → `stats_*`。1 観測 = 1 行の正規形を維持。
 

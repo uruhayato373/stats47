@@ -1,4 +1,4 @@
-/** Read-only, pinned table snapshots. Missing/corrupt pushed data must never fall back to live API. */
+/** Read-only, pinned table snapshots. Missing/corrupt verified data must never fall back to live API. */
 import { AsyncLocalStorage } from "node:async_hooks";
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
@@ -87,7 +87,7 @@ export function createSnapshotReader(entries: readonly SnapshotEntry[], get: (ke
     return slices.get(file.key)!;
   }
   return async (source) => {
-    const entry = entries.find((item) => item.statsDataId === source.statsDataId && item.status === "pushed");
+    const entry = entries.find((item) => item.statsDataId === source.statsDataId && item.status === "verified");
     if (!entry) return null;
     const info = await manifest(entry);
     const selections = filters(source);

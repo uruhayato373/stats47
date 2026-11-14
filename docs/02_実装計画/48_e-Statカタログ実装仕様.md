@@ -161,7 +161,7 @@ lib (純粋関数・テスト対象): `.claude/scripts/lib/estat-catalog/{api,no
 ## 関連
 
 - 恒久契約: `.claude/rules/r2-storage-design.md` (「ルート直下に置くもの」`estat-catalog/`行)
-- 完全DBレス: `docs/01_技術設計/02_データアーキテクチャ.md`
+- 完全DBレス: `.claude/rules/data-storage.md`
 - e-Stat API規約: `.claude/rules/estat-api.md`
 - 既存の需要ファースト拡充ループ: `.claude/agents/ranking-expander.md` /
   `.claude/memory/project_estat_expansion_pipeline_2026_07.md`

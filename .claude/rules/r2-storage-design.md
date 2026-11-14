@@ -7,6 +7,8 @@ paths:
 ---
 # R2 ストレージ設計ルール
 
+prefix の区分・書き手・何のデータかの一覧は `npm run r2:classes` (git 側は `npm run check-datasets -- --er`)。e-Stat は既存の `estat-catalog/` と非公開 `estat-tables/` (表の写し) を先に引く。
+
 ## 設計原則
 
 **画像の実体は共有ストレージを正本にする (2026-10-02 オーナー決定)。** ローカルは生成・検証・転送の
@@ -38,6 +40,9 @@ paths:
 
 R2 の key は、区分表 `packages/r2-storage/src/scripts/r2-key-classes.ts` の `R2_KEY_CLASSES` で 2 つに分ける
 (`classifyR2Key(bucket, key)` で引く。表に無い key は安全側で正本として扱う)。区分の一覧はこの文書に写さない。
+
+非公開バケットの `open-data/raw/` は CI が原本を保存する正本であり、上書きと削除にはオーナーの承認が要る。
+`open-data/normalized/` は保存した原本と取得定義から再生成できる。
 
 | 区分 | 意味 | 例 | 承認 |
 |---|---|---|---|

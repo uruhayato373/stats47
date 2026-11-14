@@ -8,7 +8,12 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { datasetPath } from "../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
+import Ajv from "ajv";
+import recipeSchema from "../../../config/schema/open-data.fetch-recipes.schema.json";
+import snapshotSchema from "../../../config/schema/open-data.snapshots.schema.json";
+import expansionSchema from "../../../config/schema/open-data.expansion.schema.json";
+import type { OpenDataFetchRecipe, OpenDataSnapshot, OpenDataExpansion } from "../src/open-data-catalog";
 import {
   OPEN_DATA_SOURCES,
   OPEN_DATASETS,
@@ -182,6 +187,59 @@ for (const s of OPEN_DATA_SOURCES) {
       errors.push(`source:${s.id}: datasetIds の ${id} が datasets に存在しません`);
     }
   }
+}
+
+// ── 原本保全 (段1: recipe 未登録は warn、未知 ID は error) ───────────────────
+const root = path.resolve(__dirname, "../../..");
+const ajv = new Ajv({ allErrors: true });
+function readLedger<T>(file: string, schema: object): T | undefined {
+  const doc: unknown = JSON.parse(fs.readFileSync(file, "utf8"));
+  const validate = ajv.compile(schema);
+  if (!validate(doc)) {
+    errors.push(`${file}: Schema ${ajv.errorsText(validate.errors)}`);
+    return undefined;
+  }
+  return doc as T;
+}
+const recipes = readLedger<{ recipes: OpenDataFetchRecipe[] }>(path.join(root, datasetPath("open-data.fetch-recipes")), recipeSchema)?.recipes ?? [];
+const recipeIds = new Set<string>();
+const recipeUrlOwners = new Map<string, string>();
+for (const recipe of recipes) {
+  if (!datasetIds.has(recipe.datasetId)) errors.push(`recipe: 未知の datasetId ${recipe.datasetId}`);
+  if (recipeIds.has(recipe.datasetId)) errors.push(`recipe: 重複 datasetId ${recipe.datasetId}`);
+  recipeIds.add(recipe.datasetId);
+  const urls = recipe.fetch.type === "http-file" ? recipe.fetch.urls : recipe.fetch.type === "http-index" ? [recipe.fetch.indexUrl] : [];
+  for (const url of urls) {
+    const owner = recipeUrlOwners.get(url);
+    if (owner && owner !== recipe.datasetId) errors.push(`Duplicate recipe URL: ${owner} / ${recipe.datasetId}: ${url}`);
+    recipeUrlOwners.set(url, recipe.datasetId);
+  }
+  const dataset = OPEN_DATASETS.find((d) => d.id === recipe.datasetId);
+  if (recipe.fetch.type !== "skip" && recipe.version === "latest-published-at" && !dataset?.latestPublishedAt) errors.push(`recipe:${recipe.datasetId}: latestPublishedAt がありません`);
+  try {
+    if (recipe.fetch.type === "http-index") new RegExp(recipe.fetch.linkPattern);
+    for (const table of recipe.normalize?.tables ?? []) new RegExp(table.filePattern);
+  } catch { errors.push(`recipe:${recipe.datasetId}: 不正な正規表現`); }
+}
+for (const id of datasetIds) if (!recipeIds.has(id)) warns.push(`dataset:${id}: recipe 未登録 (段2で必須化)`);
+const snapshotsDir = path.join(root, datasetDir("open-data.snapshots"));
+for (const file of fs.readdirSync(snapshotsDir).filter((name) => name.endsWith(".json"))) {
+  const snapshot = readLedger<OpenDataSnapshot>(path.join(snapshotsDir, file), snapshotSchema);
+  if (!snapshot) continue;
+  if (file !== `${snapshot.datasetId}.json` || !recipeIds.has(snapshot.datasetId)) errors.push(`snapshot:${file}: datasetId/recipe が一致しません`);
+  const versions = new Set<string>();
+  for (const version of snapshot.versions) {
+    if (version.datasetId !== snapshot.datasetId || versions.has(version.version)) errors.push(`snapshot:${file}: 版の重複/帰属不一致`);
+    versions.add(version.version);
+    const prefix = `open-data/raw/${snapshot.datasetId}/${version.version}/`;
+    if (version.manifestKey !== `${prefix}manifest.json` || version.files.some((f) => !f.key.startsWith(prefix))) errors.push(`snapshot:${file}: R2 key が帰属外`);
+  }
+}
+const expansion = readLedger<OpenDataExpansion>(path.join(root, datasetPath("open-data.expansion")), expansionSchema);
+for (const entry of expansion?.entries ?? []) {
+  const recipe = recipes.find((r) => r.datasetId === entry.datasetId);
+  if (!recipe?.normalize?.tables.some((t) => t.table === entry.table)) errors.push(`expansion:${entry.datasetId}: 正規化表がありません`);
+  if (!(entry.metricKey in METRICS_REGISTRY)) errors.push(`expansion:${entry.datasetId}: 未知の metricKey ${entry.metricKey}`);
 }
 
 // ── 結果 ────────────────────────────────────────────────────────────────────

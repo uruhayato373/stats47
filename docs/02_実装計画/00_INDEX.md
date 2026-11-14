@@ -42,7 +42,7 @@ tags: [実装計画]
 - **TODO 真実源**: `.claude/todo/`（改善 / 機能 / 指標バックログ + inbox）
 - 収益化戦略（NSM・収益レーン・配置判断・ゲート）: `docs/00_プロジェクト管理/02_収益化戦略.md`
 - セッション残タスク: `.claude/todo/` の該当バックログへ直接反映
-- データ層アーキテクチャ（完全DBレス・正典）: `docs/01_技術設計/02_データアーキテクチャ.md`
+- データ層アーキテクチャ（完全DBレス・正典）: `.claude/rules/data-storage.md`
 - デザインシステム（統一レイアウトを含む）: `docs/01_技術設計/04_デザインシステム.md`
 - theme-dashboard feature README: `apps/web/src/features/theme-dashboard/README.md`
 - 現在計画: `.claude/todo/{monthly,weekly}.md` / agent用週次レビュー: `data/reviews/weekly/`

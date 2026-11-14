@@ -10,6 +10,8 @@ paths:
 ---
 # データ出典・再現性 (provenance) 標準
 
+e-Stat 由来は、既存の e-Stat カタログ (R2 `estat-catalog/`) と表の写し (非公開 R2 `estat-tables/`・台帳 `data/estat/table-snapshots.json`・`estat-table-snapshot.ts --check-updates`) を出典の入口として先に引く。
+
 stats47 の全データ (metric / blog / theme / area / open-data) について、**出典と「いつでも一次資料から
 再取得・再検証できる情報」を機械チェック可能な形で記録する**ための単一ソース (SSOT) 規約。データを投入・
 是正・監査する agent (`data-ingester` / `open-data-curator` / `snapshot-exporter`) / skill (`/audit-provenance`) /
@@ -30,6 +32,9 @@ stats47 の全データ (metric / blog / theme / area / open-data) について�
 | **B: fetcher 依存・出典薄** | `external` で config が空 or url のみ (mlit_dpf / estat 空 / local-public-employee-salary / ssds) | 無し (fetcher コードに抽出ロジックが埋没) | **要**: config に再取得キー or provenance を backfill |
 | **C: 手動抽出** | `external` + `fetcherKey:"manual"` (PDF/xlsx/HTML 由来) | provenance 9点セット | **必須** (無いと復元不能) |
 | **D: 出典不明** | `fetcherKey:"unknown"` / TODO resourceId / calculated で親参照が config に無い | 無し | **新規投入禁止**。既存は是正対象 |
+
+クラス A' には、open-data の取得定義 (`data/open-data/fetch/recipes.json`) と非公開 R2 の原本 manifest に記録した
+SHA-256 によって、同じ原本を再取得・照合できるものも含める。
 
 ---
 
@@ -62,7 +67,7 @@ stats47 の全データ (metric / blog / theme / area / open-data) について�
 | blog SVG/data | R2 `app/blog/<slug>/data/<base>.source.json` (3点セット) | `quality-gate.mjs` の `svgLineageMissing` (blocker) / `build-lineage-queue.mjs` | 全量棚卸しの定期実行 |
 | theme catalog | `selection` (proposedBy/sourceUrl/surveyedAt/rationale) | `validate-theme-catalog.ts` の `no-selection` (warn) | selection backfill |
 | area-databook | editorial の `sourceUrl`+`accessedAt` | `validate-area-databook.ts` (error 済・良好) | — |
-| open-data-catalog | catalog の `verifiedFromUrls`/`commercialUse` | `validate-open-data-catalog.ts` (error 済・良好) | 到達性 cron |
+| open-data-catalog | catalog の `verifiedFromUrls`/`commercialUse` に加え、取得定義は `data/open-data/fetch/recipes.json`、原本 manifest の要約は `data/open-data/snapshots/` に記録する。 | `validate-open-data-catalog.ts` (error 済・良好) | 到達性 cron |
 | ranking ai-content | 生成プロンプト規約 (数値の書き方) | `audit-ai-content.mjs` | 数値出典は metric 側に依存 |
 
 ---

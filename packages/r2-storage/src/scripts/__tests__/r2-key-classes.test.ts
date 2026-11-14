@@ -9,6 +9,7 @@ import {
   R2_PRIVATE_BUCKET,
   R2_PUBLIC_BUCKET,
 } from '../r2-key-classes';
+import { formatKeyClassTable } from '../list-r2-key-classes';
 
 const REPO_ROOT = resolve(__dirname, '..', '..', '..', '..', '..');
 
@@ -126,5 +127,17 @@ describe('workflow が書く prefix は区分表のどれかの行に当たる',
   it.each(prefixes.map((p) => [p.source, p.value]))('%s: %s', (_source, value) => {
     const key = sampleKeyFor(value);
     expect(classifyR2Key(R2_PUBLIC_BUCKET, key).registered, key).toBe(true);
+  });
+});
+
+describe('区分表の各行は「何のデータか」を 1 文で持つ', () => {
+  it('what が空の行がない (一覧コマンド npm run r2:classes に出る)', () => {
+    const missing = R2_KEY_CLASSES.filter((r) => r.what.trim().length < 5).map((r) => `${r.bucket}:${r.prefix}`);
+    expect(missing).toEqual([]);
+  });
+
+  it('一覧は全行を出す', () => {
+    const table = formatKeyClassTable();
+    for (const r of R2_KEY_CLASSES) expect(table).toContain(r.what);
   });
 });

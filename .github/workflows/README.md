@@ -173,7 +173,7 @@ Static gateは常に実行する。その他は変更パスを決定的に分類
 15. 🔎 **スモークテスト**: `smoke-test-routes.sh` が各 route の代表 URL を内容で検査
 16. 🗺️ **sitemap index の整合性**: `check-sitemap-index.sh`
 
-永続の D1 データベースは使わない（完全 DB レス。正典: `docs/01_技術設計/02_データアーキテクチャ.md`）。
+永続の D1 データベースは使わない（完全 DB レス。正典: `.claude/rules/data-storage.md`）。
 前提の検査と認証を R2 への反映より前に、反映をビルドより前に置く順序は `.claude/scripts/lib/__tests__/metric-release-order.test.mjs` が固定する。
 
 ## トラブルシューティング

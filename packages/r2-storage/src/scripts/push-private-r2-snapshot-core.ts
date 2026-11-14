@@ -9,6 +9,16 @@ export interface PrivateSnapshotObject { key: string; bytes: Buffer }
 type Store = Pick<PrivateR2Store, "bucket" | "transport" | "get" | "put" | "head">;
 const sha = (bytes: Buffer) => createHash("sha256").update(bytes).digest("hex");
 
+const PRIVATE_SNAPSHOT_CONCURRENCY = 4;
+/** Settle every started operation before reporting failure; never leave background PUTs running. */
+async function inBatches<T>(items: readonly T[], work: (item: T) => Promise<void>) {
+  for (let i = 0; i < items.length; i += PRIVATE_SNAPSHOT_CONCURRENCY) {
+    const results = await Promise.allSettled(items.slice(i, i + PRIVATE_SNAPSHOT_CONCURRENCY).map(work));
+    const failed = results.find((result) => result.status === "rejected");
+    if (failed?.status === "rejected") throw failed.reason;
+  }
+}
+
 export async function pushPrivateR2Snapshot(options: {
   objects: readonly PrivateSnapshotObject[];
   manifestKey: string;
@@ -24,7 +34,7 @@ export async function pushPrivateR2Snapshot(options: {
   const ordered = [...objects.filter((o) => o.key !== manifestKey), objects.find((o) => o.key === manifestKey)!];
   const plan: DiffPushPlan<PrivateSnapshotObject & { size: number }> = { entries: [], removed: [] };
   // Complete the preflight for every key before the first PUT (including a changed manifest).
-  for (const file of ordered) {
+  await inBatches(ordered, async (file) => {
     const classification = classifyR2Key(store.bucket, file.key);
     if (!classification.registered || classification.origin !== "mac" || classification.class !== "authoritative") {
       throw new Error(`Expected registered authoritative Mac prefix: ${file.key}`);
@@ -32,7 +42,7 @@ export async function pushPrivateR2Snapshot(options: {
     const remote = await store.get(file.key); // errors are not interpreted as missing
     plan.entries.push({ file: { ...file, size: file.bytes.length }, registered: true, class: classification.class,
       change: remote === null ? "NEW" : sha(remote) === sha(file.bytes) ? "UNCHANGED" : "CHANGED" });
-  }
+  });
   const counts = { NEW: 0, UNCHANGED: 0, CHANGED: 0 };
   for (const entry of plan.entries) counts[entry.change as keyof typeof counts]++;
   const report = { ...counts, transport: store.transport,
@@ -42,7 +52,7 @@ export async function pushPrivateR2Snapshot(options: {
   assertR2WriteAllowed({ op: "estat-table-snapshot --push", bucket: store.bucket, targets: ordered.map((o) => o.key) });
   // S3 must support HEAD before the first PUT. OAuth GET was already checked in preflight.
   if (store.transport === "s3") await store.head(manifestKey);
-  for (const { file, change } of plan.entries) {
+  const upload = async ({ file, change }: (typeof plan.entries)[number]) => {
     if (change !== "UNCHANGED") {
       // A key created after the preflight must not be overwritten, even by a NEW upload.
       await store.put(file.key, file.bytes, { ifNoneMatch: change === "NEW" });
@@ -56,6 +66,8 @@ export async function pushPrivateR2Snapshot(options: {
       if (remote === null || remote.length !== file.size) throw new Error(`R2 GET size mismatch: ${file.key}`);
       if (sha(remote) !== sha(file.bytes)) throw new Error(`R2 GET sha256 mismatch: ${file.key}`);
     }
-  }
+  };
+  await inBatches(plan.entries.filter((entry) => entry.file.key !== manifestKey), upload);
+  await upload(plan.entries.find((entry) => entry.file.key === manifestKey)!);
   return report;
 }

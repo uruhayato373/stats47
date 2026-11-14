@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { filterActiveRefreshTargets, isIngestableCityCode } from "../../scripts/page-data-batch";
+import { filterActiveRefreshTargets, isIngestableCityCode, parseBatchArgs } from "../../scripts/page-data-batch";
 import type { MetricConfig } from "../types";
 
 const active = { key: "active", isActive: true } as MetricConfig;
@@ -37,5 +37,18 @@ describe("page-data-batch の市区町村コード判定", () => {
 
   it("都道府県コードは市区町村として取り込まない", () => {
     expect(isIngestableCityCode("28000", new Map([["28000", "兵庫県"]]))).toBe(false);
+  });
+});
+
+describe("page-data-batch の取得モード", () => {
+  it("既定は差分選択、全件は明示したときだけ", () => {
+    expect(parseBatchArgs([])).toMatchObject({ all: false, selectOnly: false, dryRun: false });
+    expect(parseBatchArgs(["--all"]).all).toBe(true);
+    expect(parseBatchArgs(["--select-only", "--metric", "a,b"])).toMatchObject({ all: false, selectOnly: true, metric: "a,b" });
+  });
+  it("曖昧な取得モード・空の指標指定・誤記は停止する", () => {
+    for (const args of [["--all", "--metric", "a"], ["--select-only", "--all"], ["--select-only", "--kind", "city"], ["--metric", ""], ["--metric"], ["--alll"]]) {
+      expect(() => parseBatchArgs(args)).toThrow();
+    }
   });
 });

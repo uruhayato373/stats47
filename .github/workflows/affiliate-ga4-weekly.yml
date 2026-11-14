@@ -13,7 +13,7 @@ name: 📊 Fetch Affiliate GA4 Metrics & Operations State
 # 日曜に本実行、月曜に同じ確定7日を自動再取得する。日曜が一時障害でも翌日に自己回復し、
 # 失敗時は即時Issue、復旧時は自動closeする。広告変更・effect 判定・deploy はしない。
 #
-# 置き場 (2026-09-14・docs/01_技術設計/02_データアーキテクチャ.md):
+# 置き場 (2026-09-14・.claude/rules/data-storage.md):
 #   - 生 snapshot ga4-affiliate-<date>.json は git に足さず R2 `state/ads/ga4-affiliate/` へ push する
 #     (公開 URL。ローカルは `npm run state:pull -- ads/ga4-affiliate` で live/ に取得。lifecycle 400 日)。
 #   - git には週次集約 `data/affiliate/ga4-affiliate-history.csv` と

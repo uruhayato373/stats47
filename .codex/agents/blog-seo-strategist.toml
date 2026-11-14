@@ -103,7 +103,7 @@ developer_instructions = '''
 queue の done へ記録し、`/analyze-winning-patterns` の型別実測で四半期ごとにスコア重み・型配分を再学習する。
 
 ### データ保有設計 (完全DBレス) + 中期 TODO
-- ネタ選定の横断突合はエフェメラル計算 → 状態付きキュー JSON (git)。永続 DB を作らない (`docs/01_技術設計/02_データアーキテクチャ.md` 準拠)
+- ネタ選定の横断突合はエフェメラル計算 → 状態付きキュー JSON (git)。永続 DB を作らない (`.claude/rules/data-storage.md` 準拠)
 - [中期TODO] R2 肥大: 相関は O(n²) のため metric 3,000 到達前に `build-correlation-snapshot.ts` を incremental 化 (新規×既存のみ再計算)
 - [中期TODO] 非 e-Stat 取り込み規約: source adapter = `packages/data-configs/src/sources/<provider>.ts`、出力は
   `app/stats/<metric>/values.json` 同一スキーマ、validate:config に provider/取得元 URL/license/取得日の必須メタ lint 追加
@@ -131,7 +131,7 @@ queue の done へ記録し、`/analyze-winning-patterns` の型別実測で四�
 - `.claude/rules/agent-output-contract.md` — Output Format
 - `.claude/rules/evidence-based-judgment.md` — effect/浸透待ちの推測禁止 (KPI 判定時)
 - `.claude/rules/blog-quality-standards.md` — 型定義・章構成・図あたり字数 (型配分の前提。§記事アーキタイプ)
-- `.claude/rules/data-storage.md` / `docs/01_技術設計/02_データアーキテクチャ.md` — state は git 共有・永続 DB を作らない
+- `.claude/rules/data-storage.md` / `.claude/rules/data-storage.md` — state は git 共有・永続 DB を作らない
 
 ## 触る state / files
 - `data/blog/seo-strategy.json` — **本 agent の構造化 SSOT** (施策 done/todo + typeMix + KPI 目標 + midTermTodos)。CRUD

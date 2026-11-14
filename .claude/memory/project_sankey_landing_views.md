@@ -21,7 +21,7 @@ metadata:
 - ESLint 注意: effect 内の同期 setState は `react-hooks/set-state-in-effect`、render scope 内の let 再代入は `react-hooks/immutability` で fail → モデル計算はモジュール関数へ、fetch reset は `.then` 内へ
 
 **通勤の e-Stat 取り込み知見 (再ingest 時用):** statsDataId `0003454526` (国勢調査2020 従業地集計)。
-APP_ID は CI 専任 (ローカル無し) → 取り込みは `commute-flow-ingest.yml` を `gh workflow run --ref <branch> -f dry_run=true/false`。
+e-Stat の取得は Mac と CI の両方でできる (オーナー決定 2026-11-14: app ID は公開の値で `apps/web/.env.development` にある)。CI で回すなら `commute-flow-ingest.yml` を `gh workflow run --ref <branch> -f dry_run=true/false`。
 dry_run で CLASS_INF 検出ログを確認 → 本実行で artifact 出力。e-Stat limit 上限=100000 (超過すると「レコード行数の値が正しくありません」)。
 旧 D1 取り込み `ingest-migration-flow.ts` は Phase 7 削除済 (移動データも今や静的コミット JSON)。
 

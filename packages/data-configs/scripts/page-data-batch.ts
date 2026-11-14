@@ -13,7 +13,9 @@ import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
  * 本バッチは「以後の data 更新」(新規 metric / 年度更新) を D1 をスキップして実行する。
  *
  * 使い方:
- *   tsx packages/data-configs/scripts/page-data-batch.ts                    # 全 metric
+ *   tsx packages/data-configs/scripts/page-data-batch.ts                    # 更新表 + configHash 差分
+ *   tsx packages/data-configs/scripts/page-data-batch.ts --select-only      # JSON の選択結果のみ (取得・書込なし)
+ *   tsx packages/data-configs/scripts/page-data-batch.ts --all              # 明示したときだけ全有効指標
  *   tsx packages/data-configs/scripts/page-data-batch.ts --metric <key>     # 単一
  *   tsx packages/data-configs/scripts/page-data-batch.ts --kind city        # entity 限定 (city 出力)
  *   tsx packages/data-configs/scripts/page-data-batch.ts --since 2024-01    # 更新が古いものだけ
@@ -106,6 +108,8 @@ const R2_LOCAL = resolve(REPO_ROOT, ".local/r2");
 
 interface Args {
   metric?: string;
+  all: boolean;
+  selectOnly: boolean;
   kind?: string;
   since?: string;
   dryRun: boolean;
@@ -116,10 +120,11 @@ interface Args {
   allowShape: Set<string>;
 }
 
-function parseArgs(): Args {
-  const argv = process.argv.slice(2);
+export function parseBatchArgs(argv = process.argv.slice(2)): Args {
   const out: Args = {
     dryRun: false,
+    all: false,
+    selectOnly: false,
     concurrency: 4,
     allowEmpty: new Set(),
     allowShape: new Set(),
@@ -129,13 +134,23 @@ function parseArgs(): Args {
   };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
-    if (a === "--metric") out.metric = argv[++i];
+    if (a === "--metric") {
+      out.metric = argv[++i];
+      if (!out.metric?.trim() || out.metric.startsWith("--")) throw new Error("--metric requires keys");
+    }
+    else if (a === "--all") out.all = true;
+    else if (a === "--select-only") out.selectOnly = true;
     else if (a === "--kind") out.kind = argv[++i];
     else if (a === "--since") out.since = argv[++i];
     else if (a === "--dry-run") out.dryRun = true;
     else if (a === "--concurrency") out.concurrency = Number(argv[++i]);
     else if (a === "--allow-empty") addKeys(out.allowEmpty, argv[++i]);
     else if (a === "--allow-shape") addKeys(out.allowShape, argv[++i]);
+    else throw new Error(`Unknown option: ${a}`);
+  }
+  if (out.all && out.metric) throw new Error("--all and --metric are exclusive");
+  if (out.selectOnly && (out.all || out.kind || out.since || out.dryRun || out.allowEmpty.size || out.allowShape.size)) {
+    throw new Error("--select-only only supports --metric filtering");
   }
   return out;
 }
@@ -1450,10 +1465,10 @@ export async function processOne(
 }
 
 async function main() {
-  const args = parseArgs();
+  const args = parseBatchArgs();
   const appId = ""; // Resolve credentials only on the live API branch.
   const all = listAllMetrics();
-  console.log(`[batch] registry size: ${all.length}`);
+  if (!args.selectOnly) console.log(`[batch] registry size: ${all.length}`);
 
   const isExplicitMetric = Boolean(args.metric);
   let targets = filterActiveRefreshTargets(all, isExplicitMetric);
@@ -1470,6 +1485,16 @@ async function main() {
       throw new Error(`--metric に registry 未登録のキーがあります: ${unknown.join(", ")}`);
     }
     targets = targets.filter((c) => wanted.has(c.key));
+  }
+  if ((!args.metric && !args.all) || args.selectOnly) {
+    const { selectRefreshMetrics } = await import("./estat-refresh-selection.js");
+    const selection = await selectRefreshMetrics(targets);
+    if (args.selectOnly) {
+      console.log(JSON.stringify(selection, null, 2));
+      return;
+    }
+    const wanted = new Set(selection.metricKeys);
+    targets = targets.filter((config) => wanted.has(config.key));
   }
   if (args.kind) {
     const entity = args.kind as MetricConfig["entities"][number];

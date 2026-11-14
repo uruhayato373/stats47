@@ -1,9 +1,13 @@
 import { createHash } from "node:crypto";
+import { mkdtempSync, readFileSync, writeFileSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import ledger from "../../../../data/estat/table-snapshots.json";
 import { gzipSync } from "node:zlib";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { createSnapshotReader, withSnapshotReader, sourceEvidence, type SnapshotEntry } from "../../scripts/lib/estat-table-reader.js";
 import { fetchEstatData, fetchSampleCounts, shapeForPrefecture, applySupplements } from "../../scripts/page-data-batch.js";
-import { compareValues, selectTableSnapshotTargets, parseAuditArgs, assertSnapshotPayload } from "../../scripts/verify-table-snapshot-equivalence.js";
+import { compareValues, selectTableSnapshotTargets, parseAuditArgs, assertSnapshotPayload, markSnapshotVerified, createVerificationReader } from "../../scripts/verify-table-snapshot-equivalence.js";
 import { makeSliceKey, type Axis } from "../../../estat-api/src/stats-data/utils/table-partitions.js";
 import { listAllMetrics } from "../registry.js";
 import type { MetricConfig, SourceConfig } from "../types.js";
@@ -13,7 +17,8 @@ const hash = (b: Buffer) => createHash("sha256").update(b).digest("hex");
 type Value = { "@area": string; "@time": string; $: string; [key: string]: string };
 const row = (tab: string, value: string, extra: Record<string, string> = {}): Value => ({ "@tab": tab, "@cat01": "01", "@cat02": "1133", "@area": "01000", "@time": "2022000000", "@unit": "千円", $: value, ...extra });
 const source: Extract<SourceConfig, { kind: "estat" }> = { kind: "estat", statsDataId: table, cdTab: "08", cdCat01: "01", cdCat02: "1133" };
-function fixture(rows: Value[], depth = 1, status = "pushed") {
+function fixture(rows: Value[], depth = 1, status = "verified", statsDataId = table) {
+  const table = statsDataId;
   const axes: Axis[] = ["tab", "cat01"].slice(0, depth).map((id) => ({ id, name: null, codes: [...new Set(rows.map((v) => v[`@${id}`]))] }));
   const bytes = new Map<string, Buffer>();
   const groups = new Map<string, Value[]>();
@@ -40,7 +45,7 @@ function fixture(rows: Value[], depth = 1, status = "pushed") {
 }
 afterEach(() => { vi.unstubAllGlobals(); vi.unstubAllEnvs(); vi.restoreAllMocks(); });
 
-describe("pushed table source selection (offline)", () => {
+describe("verified table source selection (offline)", () => {
   it.each([0, 1, 2])("depth %i reads canonical keys and filters remaining axes, without live API", async (depth) => {
     const f = fixture([row("08", "30"), row("08", "99", { "@cat02": "OTHER" }), row("12", "5")], depth);
     const network = vi.fn(() => { throw new Error("Network prohibited"); });
@@ -56,7 +61,7 @@ describe("pushed table source selection (offline)", () => {
     });
     expect(network).not.toHaveBeenCalled();
   });
-  it.each(["absent", "local-only"])("%s uses legacy API and records its source", async (status) => {
+  it.each(["absent", "local-only", "pushed"])("%s uses legacy API and records its source", async (status) => {
     const f = fixture([row("08", "30")], 1, status);
     const reader = status === "absent" ? createSnapshotReader([], f.get) : f.reader;
     const network = vi.fn(async () => new Response(JSON.stringify({ GET_STATS_DATA: { RESULT: { STATUS: 0 }, STATISTICAL_DATA: { DATA_INF: { VALUE: row("08", "30") } } } })));
@@ -233,7 +238,7 @@ describe("table-scoped manual equivalence audit", () => {
     expect(selectTableSnapshotTargets(table, [wage], listAllMetrics())).toHaveLength(40);
   });
   it("parses a required table and optional output directory, rejecting ambiguous arguments", () => {
-    expect(parseAuditArgs(["--table", primary, "--out", "/private/tmp/equivalence"])).toEqual({ table: primary, out: "/private/tmp/equivalence" });
+    expect(parseAuditArgs(["--table", primary, "--out", "/private/tmp/equivalence"])).toEqual({ table: primary, markVerified: false, out: "/private/tmp/equivalence" });
     expect(parseAuditArgs(["--table", primary]).out).toContain(`stats47-table-snapshot-equivalence/${primary}`);
     for (const args of [[], ["--table", "123"], ["--table", primary, "--table", city], ["--table", primary, "--push"], ["--out", "--table", primary]]) {
       expect(() => parseAuditArgs(args)).toThrow();
@@ -250,5 +255,60 @@ describe("table-scoped manual equivalence audit", () => {
       expect(() => assertSnapshotPayload({ ...payload, meta: { ...payload.meta, source: changed } }, target, f.entry, start)).toThrow("provenance missing");
     }
     expect(() => assertSnapshotPayload({ ...payload, meta: { ...payload.meta, generatedAt: "invalid" } }, target, f.entry, start)).toThrow("provenance missing");
+  });
+});
+
+
+describe("verified ledger transition", () => {
+  it("pins the owner-approved wage snapshot; reference-rank changes do not weaken strict comparisons", () => {
+    const entry = ledger.tables.find((item) => item.statsDataId === table)!;
+    expect(entry.status).toBe("verified");
+    expect(entry.manifestSha256).toBe("2abff7a09cf82a916d80cd0dd04f2c961a209c305d19344fe4bbbccfbfe5e411");
+    // Stage 2: all values/units/years/areas matched; 27 reference rows caused 370 intentional rank changes.
+    expect(entry.warnings).toContain("Stage 2 verified: values, units, years and areas match; 27 reference area-years (<10 estimated workers) explain 370 rank differences.");
+  });
+  it("audits pushed primary and supplemental inputs without enabling them for normal ingestion", async () => {
+    const primary = fixture([row("08", "30")], 1, "pushed");
+    const supplement = fixture([row("08", "20")], 1, "pushed", "0000000002");
+    const local = fixture([row("08", "10")], 1, "local-only", "0000000003");
+    const entries = [primary.entry, supplement.entry, local.entry];
+    const bytes = new Map([...primary.bytes, ...supplement.bytes, ...local.bytes]);
+    const get = async (key: string) => bytes.get(key) ?? null;
+    const audit = createVerificationReader(entries, get);
+    expect((await audit(source))?.source.statsDataId).toBe(table);
+    expect((await audit({ ...source, statsDataId: supplement.entry.statsDataId }))?.source.statsDataId).toBe(supplement.entry.statsDataId);
+    expect(await audit({ ...source, statsDataId: local.entry.statsDataId })).toBeNull();
+    expect(entries.map((entry) => entry.status)).toEqual(["pushed", "pushed", "local-only"]);
+    const normal = createSnapshotReader(entries, get);
+    expect(await normal(source)).toBeNull();
+    expect(await normal({ ...source, statsDataId: supplement.entry.statsDataId })).toBeNull();
+  });
+  it("marks only complete matching results, pins the manifest, and preserves unrelated tables", () => {
+    const dir = mkdtempSync(join(tmpdir(), "estat-verified-test-"));
+    try {
+      const file = join(dir, "ledger.json");
+      const f = fixture([row("08", "30")]);
+      const completeEntry = { ...ledger.tables.find((item) => item.statsDataId === table)!, ...f.entry, status: "pushed" };
+      const other = { ...completeEntry, statsDataId: "0000000002" };
+      const initial = JSON.stringify({ schemaVersion: 1, tables: [completeEntry, other] });
+      writeFileSync(file, initial);
+      const result = { statsDataId: table, catalogVersion: f.entry.catalogVersion, manifestSha256: f.entry.manifestSha256,
+        targetArtifacts: 2, comparedArtifacts: 2, matched: 2, different: 0, errors: 0 };
+      for (const change of [{ targetArtifacts: 0 }, { comparedArtifacts: 1 }, { matched: 1 }, { different: 1 }, { errors: 1 }]) {
+        expect(markSnapshotVerified(file, { ...result, ...change })).toBe(false);
+        expect(readFileSync(file, "utf8")).toBe(initial);
+      }
+      expect(() => markSnapshotVerified(file, { ...result, manifestSha256: "changed" })).toThrow("ledger mismatch");
+      expect(markSnapshotVerified(file, result)).toBe(true);
+      expect(JSON.parse(readFileSync(file, "utf8")).tables.map((entry: SnapshotEntry) => entry.status)).toEqual(["verified", "pushed"]);
+      expect(markSnapshotVerified(file, result)).toBe(true);
+      writeFileSync(file, initial.replace('"status":"pushed"', '"status":"local-only"'));
+      expect(() => markSnapshotVerified(file, result)).toThrow("ledger mismatch");
+    } finally { rmSync(dir, { recursive: true, force: true }); }
+  });
+  it("accepts --mark-verified only once and also permits re-auditing verified tables", () => {
+    expect(parseAuditArgs(["--table", table, "--mark-verified"]).markVerified).toBe(true);
+    expect(() => parseAuditArgs(["--table", table, "--mark-verified", "--mark-verified"])).toThrow();
+    expect(selectTableSnapshotTargets(table, [{ statsDataId: table, status: "verified" }], listAllMetrics())).toHaveLength(40);
   });
 });

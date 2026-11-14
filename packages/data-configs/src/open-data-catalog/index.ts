@@ -3,5 +3,9 @@
  * 管理 agent: open-data-curator / 検証: validate-open-data-catalog.ts + check-open-data-links.ts
  */
 export * from "./types";
+export * from "./fetch-recipe";
+export * from "./snapshot";
+export * from "./normalized-table";
+export * from "./expansion";
 export { OPEN_DATA_SOURCES, getOpenDataSource } from "./sources";
 export { OPEN_DATASETS, getOpenDataset, getDatasetsBySource } from "./datasets";

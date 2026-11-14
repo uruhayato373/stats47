@@ -12,21 +12,8 @@
  *
  * Usage: node .claude/scripts/estat/audit-time-coverage.cjs
  */
-const fs = require("node:fs");
-const path = require("node:path");
-const { ESTAT_STATS_DATA_URL } = require("../lib/estat-catalog/endpoints.cjs");
-const dotenv = require("dotenv");
-dotenv.config({
-  path: path.resolve(__dirname, "../../../.env.local"),
-  quiet: true,
-});
-dotenv.config({ path: path.resolve(__dirname, "../../../apps/web/.env.development"), quiet: true });
-
-const APP_ID = process.env.NEXT_PUBLIC_ESTAT_APP_ID;
-if (!APP_ID) {
-  console.error("NEXT_PUBLIC_ESTAT_APP_ID is required (CI variable or local apps/web/.env.development)");
-  process.exit(1);
-}
+const { require: tsRequire } = require("tsx/cjs/api");
+const { createEstatIngestClient } = tsRequire("../../../packages/estat-api/src/ingest.ts", __filename);
 
 const TARGETS = [
   { label: "総人口", key: "total-population", statsDataId: "0000010101", cdCat01: "A1101" },
@@ -52,13 +39,6 @@ const TARGETS = [
   { label: "コンビニ店舗数", key: "convenience-store-count", statsDataId: "0000010108", cdCat01: "H610504" },
 ];
 
-async function getStatsData(params) {
-  const sp = new URLSearchParams({ appId: APP_ID, lang: "J", ...params });
-  const url = `${ESTAT_STATS_DATA_URL}?${sp}`;
-  const res = await fetch(url);
-  return res.json();
-}
-
 function extractYears(json) {
   const stat = json?.GET_STATS_DATA?.STATISTICAL_DATA;
   if (!stat) return { years: [], note: json?.GET_STATS_DATA?.RESULT?.ERROR_MSG || "STATISTICAL_DATA missing" };
@@ -80,17 +60,16 @@ function extractYears(json) {
   };
 }
 
-async function main() {
+async function main(client = createEstatIngestClient()) {
   console.log("| 候補 | key | meta年範囲 | data年範囲 | data年数 | data件数 | 状況 |");
   console.log("|---|---|---|---|---|---|---|");
   for (const t of TARGETS) {
     try {
       // lvArea: 2 = 都道府県, no time filter → all available years
-      const json = await getStatsData({
+      const { response: json } = await client.fetchAll({
         statsDataId: t.statsDataId,
         cdCat01: t.cdCat01,
         lvArea: "2",
-        limit: "100000",
       });
       const r = extractYears(json);
       const dataRange = r.years.length ? `${r.years[0]}-${r.years[r.years.length - 1]}` : "-";
@@ -110,4 +89,5 @@ async function main() {
   }
 }
 
-main();
+module.exports = { extractYears, main, TARGETS };
+if (require.main === module) main().catch((error) => { console.error(error.message); process.exitCode = 1; });

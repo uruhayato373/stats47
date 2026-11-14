@@ -7,7 +7,7 @@ import { mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { createEstatIngestClient } from "../../../estat-api/src/ingest.js";
-import { parseSnapshotArgs, writeTableSnapshot, readSnapshotForPush, markSnapshotPushed, type TableMetadata } from "../estat-table-snapshot.js";
+import { parseSnapshotArgs, writeTableSnapshot, readSnapshotForPush, markSnapshotPushed, registerLocalSnapshot, type TableMetadata } from "../estat-table-snapshot.js";
 
 import { collectReferences, countSlices, makeSliceKey, measureSample, readAxes, planTablePartitions, type Axis } from "../estat-table-inventory.js";
 
@@ -268,8 +268,19 @@ test("pushは既存のmanifestとSHAを検査し、台帳の一致した行だ�
       manifestKey: local.manifestKey, manifestSha256: createHash("sha256").update(local.manifestBytes).digest("hex"),
       status: "local-only", bucket: "stats47-private" };
     await writeFile(ledgerPath, JSON.stringify({ schemaVersion: 1, tables: [entry] }));
+    await writeFile(ledgerPath, JSON.stringify({ schemaVersion: 1, tables: [] }));
+    await registerLocalSnapshot(local.manifestBytes, ledgerPath);
+    assert.deepEqual(JSON.parse(await readFile(ledgerPath, "utf8")).tables[0], entry);
     await markSnapshotPushed(local.manifestBytes, ledgerPath);
     assert.equal(JSON.parse(await readFile(ledgerPath, "utf8")).tables[0].status, "pushed");
+    await registerLocalSnapshot(local.manifestBytes, ledgerPath);
+    assert.equal(JSON.parse(await readFile(ledgerPath, "utf8")).tables[0].status, "pushed");
+    await assert.rejects(registerLocalSnapshot(Buffer.from(local.manifestBytes.toString() + " "), ledgerPath), /refusing replacement/);
+    const verified = JSON.parse(await readFile(ledgerPath, "utf8"));
+    verified.tables[0].status = "verified";
+    await writeFile(ledgerPath, JSON.stringify(verified));
+    await markSnapshotPushed(local.manifestBytes, ledgerPath);
+    assert.equal(JSON.parse(await readFile(ledgerPath, "utf8")).tables[0].status, "verified");
     await assert.rejects(markSnapshotPushed(Buffer.from(local.manifestBytes.toString() + " "), ledgerPath), /Ledger\/manifest mismatch/);
     await writeFile(join(dir, files[0].key), "tampered");
     await assert.rejects(readSnapshotForPush(m.statsDataId, dir), /Local SHA\/size mismatch/);

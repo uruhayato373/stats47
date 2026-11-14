@@ -460,7 +460,7 @@ stats47のサイト回遊グラフPhase 0監査だけを行ってください。
 - CLAUDE.md
 - .claude/skills/analytics/seo-audit/reference/site-navigation-graph.md
 - docs/01_技術設計/03_情報設計.md
-- docs/01_技術設計/02_データアーキテクチャ.md
+- .claude/rules/data-storage.md
 - docs/01_技術設計/04_デザインシステム.md
 - docs/01_技術設計/03_情報設計.md
 - .claude/rules/evidence-based-judgment.md

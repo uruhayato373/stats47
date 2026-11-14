@@ -31,7 +31,7 @@
     {
       "id": "data-architecture",
       "title": "データアーキテクチャ",
-      "path": "docs/01_技術設計/02_データアーキテクチャ.md",
+      "path": ".claude/rules/data-storage.md",
       "role": "git TS / R2 / エフェメラル集計の境界",
       "owner": "data-ingester"
     },

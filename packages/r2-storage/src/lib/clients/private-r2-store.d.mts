@@ -10,7 +10,10 @@ export interface PrivateR2Store {
   delete(key: string): Promise<void>;
   list(prefix: string): Promise<{ key: string; size: number; lastModified: string | null }[]>;
 }
-export function createR2Store(options: { bucket: string; writeOnce?: boolean; maxBytes?: number }): PrivateR2Store;
+export const R2_BULK_REQUEST_INTERVAL_MS: number;
+export function createR2Store(options: {
+  bucket: string; writeOnce?: boolean; maxBytes?: number; minimumRequestIntervalMs?: number;
+}): PrivateR2Store;
 export function r2ContentType(key: string): string;
 export function wranglerConfigFile(options?: {
   platform?: string; env?: NodeJS.ProcessEnv; home?: string; isDirectory?: (path: string) => boolean;
@@ -20,4 +23,5 @@ export function retryRemoteRead<T extends { status: number }>(read: () => Promis
   wait?: (milliseconds: number) => Promise<void>): Promise<T>;
 export function request(url: string | URL, options?: {
   method?: string; body?: Buffer; headers?: Record<string, string>; maxBytes?: number;
+  beforeRequest?: () => Promise<void>;
 }): Promise<{ status: number; headers: IncomingHttpHeaders; body: Buffer }>;

@@ -1,7 +1,7 @@
 #!/usr/bin/env tsx
 /**
  * Correlation snapshot producer (完全DBレス: Derived = エフェメラル計算 → R2)。
- * 正典: docs/01_技術設計/02_データアーキテクチャ.md
+ * 正典: .claude/rules/data-storage.md
  *
  * Phase 7 (commit 70758ac0) で D1 correlations テーブルと共に消えた
  * `run-batch-correlation.ts` + `correlation-snapshot.ts` + `per-key-snapshot.ts` の
