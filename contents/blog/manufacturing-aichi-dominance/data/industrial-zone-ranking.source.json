@@ -1,0 +1,113 @@
+{
+  "kind": "calculated",
+  "unit": "兆円",
+  "year": "2023",
+  "label": "製造品出荷額等（工業地帯・地域別）",
+  "inputs": [
+    {
+      "rankingKey": "manufacturing-shipment-amount",
+      "year": "2023",
+      "unit": "百万円",
+      "source": "r2:app/ranking/manufacturing-shipment-amount/values.json",
+      "label": "製造品出荷額等（都道府県別）"
+    }
+  ],
+  "formula": "各工業地帯・工業地域の値 = 構成都府県の製造品出荷額等（2023年・百万円）の合計 ÷ 1,000,000（兆円に換算）、小数第2位を四捨五入。構成都府県は zones に列挙したもの。合計の元値（百万円）は data の sumMillionYen。",
+  "zones": [
+    {
+      "name": "中京工業地帯",
+      "members": [
+        "岐阜県",
+        "愛知県",
+        "三重県"
+      ]
+    },
+    {
+      "name": "京浜工業地帯",
+      "members": [
+        "埼玉県",
+        "千葉県",
+        "東京都",
+        "神奈川県"
+      ]
+    },
+    {
+      "name": "阪神工業地帯",
+      "members": [
+        "大阪府",
+        "兵庫県",
+        "和歌山県"
+      ]
+    },
+    {
+      "name": "瀬戸内工業地域",
+      "members": [
+        "岡山県",
+        "広島県",
+        "山口県",
+        "香川県",
+        "愛媛県"
+      ]
+    },
+    {
+      "name": "北関東工業地域",
+      "members": [
+        "茨城県",
+        "栃木県",
+        "群馬県"
+      ]
+    },
+    {
+      "name": "東海工業地域",
+      "members": [
+        "静岡県"
+      ]
+    },
+    {
+      "name": "近畿内陸工業地域",
+      "members": [
+        "滋賀県",
+        "京都府",
+        "奈良県"
+      ]
+    },
+    {
+      "name": "北陸工業地域",
+      "members": [
+        "新潟県",
+        "富山県",
+        "石川県",
+        "福井県"
+      ]
+    },
+    {
+      "name": "北九州工業地域",
+      "members": [
+        "福岡県"
+      ]
+    }
+  ],
+  "rangeBasis": "工業地帯・地域の範囲に公式の統一基準はなく、教材・資料で異なる。本記事は中京に岐阜県、阪神に和歌山県、京浜に埼玉県・千葉県を含む広めの区分（近畿内陸は滋賀・京都・奈良）を採用した。岐阜県南部・和歌山県北部のみを含むとする説明もあるが、県別値しかないため県全域で近似した。近畿内陸の範囲は出典を確認できておらず本記事の区分。",
+  "rangeReferences": [
+    {
+      "label": "帝国書院「京浜工業地帯の範囲はどこまでですか。」",
+      "url": "https://www.teikokushoin.co.jp/faq/detail/141/",
+      "accessed": "2026-10-23",
+      "note": "京浜に千葉県を含む区分は旧来の教材の扱い。令和3年度版からは京浜=東京・神奈川・埼玉、京葉=千葉。阪神=大阪・兵庫、中京=愛知・三重、瀬戸内・東海・北陸・北関東・北九州は本記事と同じ。"
+    },
+    {
+      "label": "Wikipedia「中京工業地帯」",
+      "url": "https://ja.wikipedia.org/wiki/中京工業地帯",
+      "accessed": "2026-10-23",
+      "note": "岐阜県南部を含む東海3県と説明"
+    },
+    {
+      "label": "Wikipedia「阪神工業地帯」",
+      "url": "https://ja.wikipedia.org/wiki/阪神工業地帯",
+      "accessed": "2026-10-23",
+      "note": "広義には和歌山県北部を含むと説明"
+    }
+  ],
+  "transform": "top4+bottom4 (9地帯・地域のためsvg-builderが上位4+下位4を抽出)",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking"
+}
