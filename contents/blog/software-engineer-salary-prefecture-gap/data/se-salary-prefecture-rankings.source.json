@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "software-engineer-annual-income",
+  "year": "2023",
+  "unit": "",
+  "label": "",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/software-engineer-annual-income/values.json",
+  "upstream": "metric config → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug software-engineer-salary-prefecture-gap --keys software-engineer-annual-income --data-name se-salary-prefecture-rankings",
+  "verifiedMatchRate": 100,
+  "generatedBy": "backfill-source.mjs",
+  "note": "source-backfill: 既存jsonの値をSSOTと照合しrankingKey+年を確定(SVGから逆復元しない)"
+}

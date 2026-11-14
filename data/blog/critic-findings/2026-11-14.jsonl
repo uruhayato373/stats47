@@ -50,3 +50,4 @@
 {"key":"73b734e43ba8cc2b","date":"2026-11-14","slug":"inpatient-rate-prefecture-gap","mode":"expert","verdict":"REVISE","severity":"MAJOR","type":"region","summary":"題の「西高東低」と冒頭の「なぜ西日本ばかりが入院の多い県になるのか」が、地方別の値で支えられない。"}
 {"key":"7f0f13c48d92a220","date":"2026-11-14","slug":"natto-consumption-east-west-divide","mode":"expert","verdict":"PASS","severity":"MAJOR","type":"causal","summary":"「歴史的背景と全国トレンド」冒頭が「納豆の地域差は近年に生まれたものではなく、稲作の副産物としての大豆利用と、わらに棲む納豆菌を使った発酵という…食文化の蓄積に根ざす」と述べている。"}
 {"key":"79983782599b72b0","date":"2026-11-14","slug":"natto-consumption-east-west-divide","mode":"expert","verdict":"PASS","severity":"MAJOR","type":"region","summary":"「境界線は行政区分の「東日本／西日本」よりやや東に寄り」という比較は、基準が不明で根拠が無い。"}
+{"key":"2eda707e075be449","date":"2026-11-14","slug":"software-engineer-salary-prefecture-gap","mode":"expert","verdict":"PASS","severity":"MAJOR","type":"causal","summary":"「下位に並ぶ県」節の奈良県の通勤仮説と、神奈川県が 18 位と低いのは都内の勤め先の分が東京都で集計されているため、という説明は、記事の主張 (単年の順位は動く) と R2 の過去年の値の両方に反する。"}
