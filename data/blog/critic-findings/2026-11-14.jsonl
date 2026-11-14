@@ -48,3 +48,5 @@
 {"key":"29e7be3345cd2b6c","date":"2026-11-14","slug":"telework-rate-tokyo-gap","mode":"expert","verdict":"REVISE","severity":"MAJOR","type":"causal","summary":"比較節の「副業や転職はどの県にも一定の割合で起きるのに対し、テレワークは…条件に強く左右されるため地域差が大きく出ると読める」は、根拠のない原因づけ。"}
 {"key":"4bc6e486d0311d81","date":"2026-11-14","slug":"inpatient-rate-prefecture-gap","mode":"expert","verdict":"REVISE","severity":"BLOCK","type":"causal","summary":"「どちらが原因かは決められない」(病床数の節) と、後段の断定が食い違う。"}
 {"key":"73b734e43ba8cc2b","date":"2026-11-14","slug":"inpatient-rate-prefecture-gap","mode":"expert","verdict":"REVISE","severity":"MAJOR","type":"region","summary":"題の「西高東低」と冒頭の「なぜ西日本ばかりが入院の多い県になるのか」が、地方別の値で支えられない。"}
+{"key":"7f0f13c48d92a220","date":"2026-11-14","slug":"natto-consumption-east-west-divide","mode":"expert","verdict":"PASS","severity":"MAJOR","type":"causal","summary":"「歴史的背景と全国トレンド」冒頭が「納豆の地域差は近年に生まれたものではなく、稲作の副産物としての大豆利用と、わらに棲む納豆菌を使った発酵という…食文化の蓄積に根ざす」と述べている。"}
+{"key":"79983782599b72b0","date":"2026-11-14","slug":"natto-consumption-east-west-divide","mode":"expert","verdict":"PASS","severity":"MAJOR","type":"region","summary":"「境界線は行政区分の「東日本／西日本」よりやや東に寄り」という比較は、基準が不明で根拠が無い。"}
