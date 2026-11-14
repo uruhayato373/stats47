@@ -53,7 +53,6 @@ import { ThemeAreaHeader } from './ThemeAreaHeader';
 import { ThemeChapterLinks } from './ThemeChapterLinks';
 import { ThemeCorrelatedMetrics } from './ThemeCorrelatedMetrics';
 import { ThemeDashboardClient } from './ThemeDashboardClient';
-import { ThemeEvidenceTopicsSection } from './ThemeEvidenceTopicsSection';
 import { ThemeGeoInsightsSection } from './ThemeGeoInsightsSection';
 import { ThemeHero } from './ThemeHero';
 import { ThemePrefectureProvider } from './ThemePrefectureContext';
@@ -177,17 +176,12 @@ export async function ThemePageLayout({
     rankingKey: metric.rankingKey,
     label: metric.shortLabel,
   }));
-  const pageLinks = [
-    ...(catalog?.sections?.length
-      ? catalog.sections.map((section) => ({
-          href: `#theme-section-${section.key}`,
-          label: section.title,
-        }))
-      : [{ href: '#theme-indicators', label: '主要指標' }]),
-    ...((catalog?.evidenceTopics?.length ?? 0) > 0
-      ? [{ href: '#theme-evidence', label: '白書・統計の論点' }]
-      : []),
-  ];
+  const pageLinks = catalog?.sections?.length
+    ? catalog.sections.map((section) => ({
+        href: `#theme-section-${section.key}`,
+        label: section.title,
+      }))
+    : [{ href: '#theme-indicators', label: '主要指標' }];
   const embeddedSections = Object.fromEntries(
     (theme.embeddedSections ?? []).flatMap((key) => {
       // 全国の値の図の章は、県のページでは組み立てない (章ごと出さない)
@@ -372,17 +366,13 @@ export async function ThemePageLayout({
           )}
 
 
-          <Suspense fallback={null}>
-            <ThemeGeoInsightsSection
-              themeKey={theme.themeKey}
-              areaCode={areaContext?.areaCode}
-              areaName={areaContext?.areaName}
-            />
-          </Suspense>
-
-          <Suspense fallback={null}>
-            <ThemeEvidenceTopicsSection themeKey={theme.themeKey} />
-          </Suspense>
+          {/* 空間分析への入口は分析の名前のリンク 1 行。「白書・統計から見る論点」の節は置かない (2026-11-14 オーナー決定。
+          28 日のクリックはテーマ全体で 4 回・約 600px。論点は指標の選定の根拠としてカタログの evidenceTopics に残る) */}
+          <ThemeGeoInsightsSection
+            themeKey={theme.themeKey}
+            areaCode={areaContext?.areaCode}
+            areaName={areaContext?.areaName}
+          />
 
           <Suspense fallback={null}>
             <ThemeCorrelatedMetrics themeKey={theme.themeKey} />
