@@ -1,0 +1,65 @@
+{
+  "recipes": [
+    {
+      "datasetId": "mhlw-medical-hospitals",
+      "fetch": {
+        "type": "http-file",
+        "urls": [
+          "https://www.mhlw.go.jp/content/11121000/01-1_hospital_facility_info_20260601.csv.zip"
+        ]
+      },
+      "version": "latest-published-at",
+      "normalize": {
+        "tables": [
+          {
+            "table": "hospital-count",
+            "filePattern": "(^|/)01-1_hospital_facility_info_[0-9]+\\.csv$",
+            "encoding": "auto",
+            "areas": [
+              {
+                "column": "都道府県コード",
+                "level": "prefecture",
+                "width": 2
+              },
+              {
+                "level": "municipality",
+                "compose": [
+                  {
+                    "column": "都道府県コード",
+                    "width": 2
+                  },
+                  {
+                    "column": "市区町村コード",
+                    "width": 3
+                  }
+                ]
+              }
+            ],
+            "time": "2026-06-01",
+            "aggregation": "count",
+            "unit": "施設"
+          }
+        ]
+      }
+    },
+    {
+      "datasetId": "mhlw-medical-clinics",
+      "fetch": {
+        "type": "http-index",
+        "indexUrl": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html",
+        "linkPattern": "/02-1_clinic_facility_info_20260601\\.csv\\.zip$",
+        "maxFiles": 1
+      },
+      "version": "latest-published-at"
+    },
+    {
+      "datasetId": "reinfolib-transaction-prices",
+      "fetch": {
+        "type": "skip",
+        "reason": "needs-api-key",
+        "note": "API キーの運用を決めるまで取得しない。"
+      },
+      "version": "initial"
+    }
+  ]
+}

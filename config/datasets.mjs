@@ -927,6 +927,27 @@ export const DATASETS = [
       { field: "datasets[].suggestedCategories[]", to: "categories.master", key: "categories[].key" },
     ],
   }),
+  d("open-data.fetch-recipes", "data/open-data/fetch/recipes.json", "ledger", "data", "data", "原本取得の宣言 (段1は3件。全ID網羅は段2)", {
+    schema: "config/schema/open-data.fetch-recipes.schema.json",
+    refs: [{ field: "recipes[].datasetId", to: "open-data.datasets", key: "datasets[].id" }],
+  }),
+  d("open-data.snapshots", "data/open-data/snapshots/{name}.json", "ledger", "data", "data", "非公開R2原本の版・SHA・ライセンスと転送状態", {
+    // 初回取得前は0件。取得後も同じ登録で検証する (存在任意のカタログ契約)。
+    transient: true,
+    schema: "config/schema/open-data.snapshots.schema.json",
+    refs: [
+      { field: "datasetId", to: "open-data.datasets", key: "datasets[].id" },
+      { field: "datasetId", to: "open-data.fetch-recipes", key: "recipes[].datasetId" },
+      { field: "versions[].datasetId", to: "open-data.datasets", key: "datasets[].id" },
+    ],
+  }),
+  d("open-data.expansion", "data/open-data/expansion.json", "ledger", "data", "data", "正規化表から公開指標への対応 (段1は空)", {
+    schema: "config/schema/open-data.expansion.schema.json",
+    refs: [
+      { field: "entries[].datasetId", to: "open-data.fetch-recipes", key: "recipes[].datasetId" },
+      { field: "entries[].metricKey", to: "registry:metrics" },
+    ],
+  }),
   d("open-data.prefecture-statistics", "data/open-data/prefecture-statistics/resources.json", "ledger", "data", "data", "都道府県が公式に公開する統計ポータル・ダッシュボード・年鑑のリンク (県名は持たず読み込み口が県のマスタで結ぶ)。読み込みは packages/data-configs/src/prefecture-statistics-catalog/index.ts", {
     schema: "config/schema/open-data.prefecture-statistics.schema.json",
   }),
