@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { applySampleCounts, sampleCountKey } from "../sample-count";
+import { applySampleCounts, sampleCountKey, type SampleCountedRow } from "../sample-count";
 import { listAllMetrics } from "../registry";
 
 const spec = { cdTab: "13,45", factor: 10, minimum: 10 };
@@ -24,7 +24,7 @@ describe("applySampleCounts (DATA-WAGE-TEACHER-COVERAGE-01)", () => {
 
   it("値が欠測の行は人数が 0 でも参考値にしない (値も順位も出ない)", () => {
     const counts = new Map([[sampleCountKey("03000", "2021"), 0]]);
-    expect(applySampleCounts([{ areaCode: "03000", yearCode: "2021", value: null }], counts, spec)[0]?.reference).toBeUndefined();
+    expect(applySampleCounts<SampleCountedRow>([{ areaCode: "03000", yearCode: "2021", value: null }], counts, spec)[0]?.reference).toBeUndefined();
   });
 
   it("賃金構造基本統計の職種別の表 (0003445758) の全指標が推計の人数と共通の注記を宣言している", () => {

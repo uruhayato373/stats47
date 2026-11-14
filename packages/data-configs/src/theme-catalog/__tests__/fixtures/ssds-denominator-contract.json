@@ -725,7 +725,7 @@
       "definition": "賃金構造基本統計調査の一般労働者・男女計の医師について、6月のきまって支給する現金給与額を12倍し、前年1年間の賞与その他特別給与額を加えた推計年収。",
       "evidenceKind": "official-definition",
       "normalizationOptionsRemoved": 2,
-      "recipeHash": "32ba461e0bd6e029"
+      "recipeHash": "e6148375a7d83450"
     },
     {
       "key": "nurse-annual-income",
@@ -739,7 +739,7 @@
       "definition": "賃金構造基本統計調査の一般労働者・男女計の看護師について、6月のきまって支給する現金給与額を12倍し、前年1年間の賞与その他特別給与額を加えた推計年収。",
       "evidenceKind": "official-definition",
       "normalizationOptionsRemoved": 2,
-      "recipeHash": "44bfc11557830ac6"
+      "recipeHash": "d1b2e988c2883b8b"
     },
     {
       "key": "care-worker-annual-income",
@@ -753,7 +753,7 @@
       "definition": "賃金構造基本統計調査の一般労働者・男女計の介護職員（医療・福祉施設等）について、6月のきまって支給する現金給与額を12倍し、前年1年間の賞与その他特別給与額を加えた推計年収。",
       "evidenceKind": "official-definition",
       "normalizationOptionsRemoved": 2,
-      "recipeHash": "bce0f0808dd7357b"
+      "recipeHash": "d1aceb9724c9d3f6"
     },
     {
       "key": "software-engineer-annual-income",
@@ -767,7 +767,7 @@
       "definition": "賃金構造基本統計調査の一般労働者・男女計のソフトウェア作成者について、6月のきまって支給する現金給与額を12倍し、前年1年間の賞与その他特別給与額を加えた推計年収。",
       "evidenceKind": "official-definition",
       "normalizationOptionsRemoved": 2,
-      "recipeHash": "f00643aba840e510"
+      "recipeHash": "f987cf3e60444f3d"
     },
     {
       "key": "school-teacher-annual-income",
@@ -781,7 +781,7 @@
       "definition": "賃金構造基本統計調査の一般労働者・男女計の小・中学校教員について、6月のきまって支給する現金給与額を12倍し、前年1年間の賞与その他特別給与額を加えた推計年収。",
       "evidenceKind": "official-definition",
       "normalizationOptionsRemoved": 2,
-      "recipeHash": "031c0244cf12f5f7"
+      "recipeHash": "53f15683b16debee"
     },
     {
       "key": "truck-driver-annual-income",
@@ -795,7 +795,7 @@
       "definition": "賃金構造基本統計調査の一般労働者・男女計の営業用大型貨物自動車運転者について、6月のきまって支給する現金給与額を12倍し、前年1年間の賞与その他特別給与額を加えた推計年収。",
       "evidenceKind": "official-definition",
       "normalizationOptionsRemoved": 2,
-      "recipeHash": "8b54916f2f34d7a0"
+      "recipeHash": "dab66a2ad799c5d5"
     },
     {
       "key": "taxi-driver-annual-income",
@@ -809,7 +809,7 @@
       "definition": "賃金構造基本統計調査の一般労働者・男女計のタクシー運転者について、6月のきまって支給する現金給与額を12倍し、前年1年間の賞与その他特別給与額を加えた推計年収。",
       "evidenceKind": "official-definition",
       "normalizationOptionsRemoved": 2,
-      "recipeHash": "1e0920b525c46dda"
+      "recipeHash": "49454428045204c3"
     },
     {
       "key": "starting-salary-university",
