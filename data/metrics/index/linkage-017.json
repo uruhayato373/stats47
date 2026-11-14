@@ -2754,9 +2754,15 @@
         {
           "pageId": "ranking:municipal-road-paving-rate",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:roads",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "roads"
+      ]
     },
     {
       "metricKey": "municipal-tax-assessed",

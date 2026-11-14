@@ -261,11 +261,11 @@
   "theme": {
     "themes": 56,
     "metricGroups": {
-      "total": 547,
+      "total": 552,
       "byStatus": {
-        "resolved": 480,
+        "resolved": 484,
         "unresolved": 0,
-        "not-applicable": 67,
+        "not-applicable": 68,
         "missing-lineage": 0
       },
       "coveragePct": 100,
@@ -330,6 +330,7 @@
         "local-economy",
         "long-term-care",
         "population-dynamics",
+        "railway",
         "regional-transport",
         "safety",
         "single-parent-households"
@@ -466,6 +467,7 @@
         "household-food-spending",
         "living-housing",
         "local-services",
+        "railway",
         "real-income",
         "regional-energy",
         "regional-transport"
@@ -705,6 +707,7 @@
         "communication-access"
       ],
       "traffic-accident-statistics": [
+        "roads",
         "safety"
       ],
       "travel-tourism-consumption-survey": [
@@ -2580,6 +2583,7 @@
         "local-economy",
         "long-term-care",
         "population-dynamics",
+        "railway",
         "regional-transport",
         "safety",
         "single-parent-households"
@@ -3339,6 +3343,7 @@
         "household-food-spending",
         "living-housing",
         "local-services",
+        "railway",
         "real-income",
         "regional-energy",
         "regional-transport"
@@ -4851,6 +4856,7 @@
       "surveyId": "traffic-accident-statistics",
       "rankingCount": 11,
       "themeKeys": [
+        "roads",
         "safety"
       ],
       "blogSlugs": [

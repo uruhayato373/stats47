@@ -59,6 +59,48 @@
         "surveyedAt": "2026-09-08",
         "rationale": "JR貨物発送量は「貨物輸送」の補足として詳細索引に保持し、冒頭の要約へ重ねない。"
       }
+    },
+    {
+      "rankingKey": "commute-by-train",
+      "shortLabel": "鉄道・電車通勤通学者数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「電車通勤 割合」「通勤人口」の問いに、自宅外へ鉄道・電車で通勤・通学する人の数 (2020 年) で答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "train-commuter-pass-consumption-expenditure",
+      "shortLabel": "鉄道通勤定期代",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「定期代 平均」「通勤定期 値段」の問いに、家計調査の世帯あたりの年間支出額 (県庁所在市の値) で答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "train-fare-consumption-expenditure",
+      "shortLabel": "鉄道運賃",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
+        "surveyedAt": "2026-11-14",
+        "rationale": "鉄道に払う運賃の世帯あたりの年間支出額 (県庁所在市の値) で、総量中心のテーマに暮らしの負担の視点を足し、定期代の問いと並べて答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
     }
   ],
   "charts": [
@@ -135,7 +177,7 @@
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
-      "section": "freight",
+      "section": "stations",
       "sortOrder": 30
     }
   ],
@@ -191,11 +233,26 @@
   ],
   "sections": [
     {
-      "key": "passengers",
-      "title": "JRと民鉄の旅客利用",
-      "description": "JRと民鉄は収録期間が異なります。JRの単年値と民鉄の長期推移を分けて確認します。",
+      "key": "stations",
+      "title": "駅の数と主要駅の利用規模は都道府県でどう違うか",
+      "concern": "自分の県に駅がいくつあり、主要駅にどれだけの人が乗り降りしているかを知りたい。",
       "metricGroupKeys": [
-        "passengers"
+        "stations-1",
+        "stations-2"
+      ],
+      "chartKeys": [
+        "railway-freight-trend"
+      ],
+      "embeddedSectionKeys": [
+        "station-passengers"
+      ]
+    },
+    {
+      "key": "passengers",
+      "title": "鉄道はどれだけの人と貨物を運んでいるか",
+      "concern": "JR と民鉄のどちらが主に使われ、利用が増えているか減っているかを知りたい。",
+      "metricGroupKeys": [
+        "passengers-1"
       ],
       "chartKeys": [
         "railway-passenger-trend",
@@ -203,40 +260,16 @@
       ]
     },
     {
-      "key": "stations",
-      "title": "駅の数と利用",
-      "description": "駅の乗降客数と輸送人員では数え方が違います。乗換や往復を含むため実人数とは限りません。",
+      "key": "commute-cost",
+      "title": "通勤・通学での鉄道の使われ方と家計の負担は",
+      "concern": "電車通勤をする人がどれだけいて、定期代や運賃が家計にどれだけかかるかを知りたい。",
       "metricGroupKeys": [
-        "stations-1",
-        "stations-2"
-      ],
-      "embeddedSectionKeys": [
-        "station-passengers"
-      ]
-    },
-    {
-      "key": "freight",
-      "title": "貨物輸送",
-      "description": "貨物発送量は旅客人員と別の尺度です。",
-      "metricGroupKeys": [],
-      "chartKeys": [
-        "railway-freight-trend"
+        "commute-cost-1",
+        "commute-cost-2"
       ]
     }
   ],
   "metricGroups": [
-    {
-      "key": "passengers",
-      "title": "JRと民鉄の旅客利用",
-      "rankingKeys": [
-        "jr-passenger-transport",
-        "private-railway-passenger-transport"
-      ],
-      "defaultCheckedKeys": [
-        "jr-passenger-transport",
-        "private-railway-passenger-transport"
-      ]
-    },
     {
       "key": "stations-1",
       "title": "鉄道駅数",
@@ -255,6 +288,40 @@
       ],
       "defaultCheckedKeys": [
         "railway-passengers"
+      ]
+    },
+    {
+      "key": "passengers-1",
+      "title": "JR と民鉄の輸送人員の推移",
+      "rankingKeys": [
+        "jr-passenger-transport",
+        "private-railway-passenger-transport"
+      ],
+      "defaultCheckedKeys": [
+        "jr-passenger-transport",
+        "private-railway-passenger-transport"
+      ]
+    },
+    {
+      "key": "commute-cost-1",
+      "title": "鉄道・電車通勤通学者数",
+      "rankingKeys": [
+        "commute-by-train"
+      ],
+      "defaultCheckedKeys": [
+        "commute-by-train"
+      ]
+    },
+    {
+      "key": "commute-cost-2",
+      "title": "世帯の鉄道通勤定期代と運賃の推移",
+      "rankingKeys": [
+        "train-commuter-pass-consumption-expenditure",
+        "train-fare-consumption-expenditure"
+      ],
+      "defaultCheckedKeys": [
+        "train-commuter-pass-consumption-expenditure",
+        "train-fare-consumption-expenditure"
       ]
     }
   ]

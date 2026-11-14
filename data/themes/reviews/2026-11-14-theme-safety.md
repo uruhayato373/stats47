@@ -52,23 +52,20 @@ THEME-PAGE-REVIEW-01 の段 4 (全 56 テーマの指標の見直し)。調査 (
 | 順 | 章 (key) | カード | チャート |
 |---|---|---|---|
 | 1 | 自分の県は犯罪や詐欺の被害に遭いやすいか、警察は足りているか (`crime`) | 刑法犯認知件数（人口千人当たり）、検挙率、警察官数（人口千人当たり）、消費生活相談受付件数（年度） | crime-count-arrest-rate-trend、traffic-accident-deaths-trend、safety-crime-types-donut |
-| 2 | 火災で亡くなる人は多いか、救急や消防の態勢は十分か (`fire-emergency`) | 火災出火件数（人口10万人当たり）、火災死者、救急搬送の病院収容所要時間、救急出動件数（人口千人当たり）・救急自動車数（人口10万人当たり）、消防吏員数（人口10万人当たり）・消防ポンプ自動車等現有数（人口10万人当たり）、消防水利数 | fire-emergency-trend、fire-emergency-trend-fire、safety-fire-casualties-donut |
+| 2 | 火災で亡くなる人は多いか、救急や消防の態勢は十分か (`fire-emergency`) | 火災出火件数（人口10万人当たり）、火災死者、救急出動件数（人口千人当たり）・救急自動車数（人口10万人当たり）、消防吏員数（人口10万人当たり）・消防ポンプ自動車等現有数（人口10万人当たり）、消防水利数 | fire-emergency-trend、fire-emergency-trend-fire、safety-fire-casualties-donut |
 | 3 | 交通事故で死傷する危険は高いか (`traffic`) | 交通事故死者数（人口10万人当たり）、交通事故負傷者数（人口10万人当たり）・交通事故発生件数（人口10万人当たり）、高齢者事故 | — |
 | 4 | 災害のとき逃げる備えは整っているか (`evacuation-and-disaster-prevention`) | 個別避難計画の作成率、個別避難計画が作成された人数、津波避難ビル数・津波避難タワー等数 | — |
 | 5 | 自然災害でどれくらいの被害や費用が出ているか (`natural-disaster-impact`) | 災害被害額（人口1人当たり）、自然災害による死者数、自然災害による行方不明者数、自然災害による負傷者数、自然災害による全壊住家棟数、自然災害による半壊住家棟数、自然災害による一部破損住家棟数、災害救助費 | safety-natural-disaster-impact-composition-1、safety-natural-disaster-impact-composition-2 |
 
 見せ方 (推移・数値・構成比) は `apply-design.ts` がデータの形 (年の数・単位) に合わせて決め直した。
 
-## 足した指標 (登録済みの指標をカタログに載せた。role は secondary)
-
-| 指標 | rankingKey | 年 | 答える問い |
-|---|---|---|---|
-| 救急搬送の病院収容所要時間 | `ambulance-hospital-arrival-time` | 2024〜2024 | 「救急車 到着 時間 ランキング」「救急車 到着時間 都道府県別」の検索に、救急要請から病院収容までの平均分数で答える。 |
+足さなかった指標 (機械の検査で外した): `ambulance-hospital-arrival-time` (安全テーマは載せる指標の一覧をテストで固定している)
 
 ## 不採用・保留の候補
 
 | 候補 | rankingKey | statsDataId | 確認の状態 | 理由 |
 |---|---|---|---|---|
+| 救急搬送 病院収容所要時間(分) | ambulance-hospital-arrival-time |  | 登録済 | data/metrics に定義あり・isActive true・47都道府県・2024年の1時点のみ(inventory)。safety カタログに未掲載。検索「救急車 到着 時間 ランキング」計60回超。e-Stat ではなく消防庁 PDF の手入力(source.kind external)で statsDataId なし。 |
 | 交通事故発生件数(道路1000km当たり) | traffic-accident-count-per-1000-km | 0000010211 | 登録済 | isActive true・1975-2023。カタログ未掲載。人口あたりと別に道路延長あたりの事故密度で、人口あたり指標の偏りを補う。検索需要は直接は確認できず。 |
 | 消防機関出動回数(人口10万人当たり) | fire-department-dispatch-count-per-100-thousand-people | 0000010211 | 登録済 | isActive true。カタログ未掲載(掲載は救急出動と建物火災件数)。消防体制の負荷を人口比で示す。検索需要は未確認。 |
 | 建物火災損害額(人口当たり) | building-fire-damage-amount-per-person | 0000010211 | 登録済 | isActive true。カタログ未掲載。火災を人的被害(死者)と別に物的被害の人口比で見せる。検索需要は未確認。 |

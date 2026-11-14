@@ -529,11 +529,6 @@
       "relation": "contains"
     },
     {
-      "from": "ranking:ambulance-hospital-arrival-time",
-      "to": "theme:safety",
-      "relation": "contains"
-    },
-    {
       "from": "ranking:ambulance-transported-deaths",
       "to": "theme:healthcare",
       "relation": "contains"
@@ -1181,6 +1176,11 @@
     {
       "from": "ranking:commute-by-car",
       "to": "theme:regional-transport",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:commute-by-train",
+      "to": "theme:railway",
       "relation": "contains"
     },
     {
@@ -3444,6 +3444,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:main-road-length-per-km2",
+      "to": "theme:roads",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:main-road-paving-rate",
       "to": "theme:roads",
       "relation": "contains"
@@ -3766,6 +3771,11 @@
     {
       "from": "ranking:municipal-mental-health-consultation-extended-persons",
       "to": "theme:healthcare",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:municipal-road-paving-rate",
+      "to": "theme:roads",
       "relation": "contains"
     },
     {
@@ -5744,6 +5754,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:traffic-accident-count-per-1000-km",
+      "to": "theme:roads",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:traffic-accident-count-per-population",
       "to": "theme:safety",
       "relation": "contains"
@@ -5771,6 +5786,16 @@
     {
       "from": "ranking:traffic-accident-injuries",
       "to": "theme:safety",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:train-commuter-pass-consumption-expenditure",
+      "to": "theme:railway",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:train-fare-consumption-expenditure",
+      "to": "theme:railway",
       "relation": "contains"
     },
     {

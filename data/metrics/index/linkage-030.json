@@ -7365,9 +7365,15 @@
         {
           "pageId": "ranking:traffic-accident-count-per-1000-km",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:roads",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "roads"
+      ]
     },
     {
       "metricKey": "traffic-accident-count-per-population",
@@ -8712,9 +8718,15 @@
         {
           "pageId": "ranking:train-commuter-pass-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:railway",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "railway"
+      ]
     },
     {
       "metricKey": "train-fare-consumption-expenditure",
@@ -8753,9 +8765,15 @@
         {
           "pageId": "ranking:train-fare-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:railway",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "railway"
+      ]
     },
     {
       "metricKey": "train-student-pass-consumption-expenditure",

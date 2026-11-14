@@ -680,20 +680,6 @@
         "readerQuestion": "自分の住む都道府県では消費生活相談の件数が増えているのか減っているのか。",
         "targetReaderOrDecision": "消費者行政担当者や住民が消費者被害の動向を把握する際の参考情報。"
       }
-    },
-    {
-      "rankingKey": "ambulance-hospital-arrival-time",
-      "shortLabel": "救急搬送の病院収容所要時間",
-      "role": "secondary",
-      "selection": {
-        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
-        "sourceUrl": "https://www.fdma.go.jp/publication/rescue/post-7.html",
-        "surveyedAt": "2026-11-14",
-        "rationale": "「救急車 到着 時間 ランキング」「救急車 到着時間 都道府県別」の検索に、救急要請から病院収容までの平均分数で答える。",
-        "adoptionCriteria": [
-          "readerValue"
-        ]
-      }
     }
   ],
   "charts": [
@@ -1049,7 +1035,6 @@
       "metricGroupKeys": [
         "fire-emergency-1",
         "fire-emergency-2",
-        "fire-emergency-3",
         "fire-emergency-4",
         "fire-emergency-5",
         "fire-emergency-6"
@@ -1162,16 +1147,6 @@
       ],
       "defaultCheckedKeys": [
         "fire-deaths-per-100k"
-      ]
-    },
-    {
-      "key": "fire-emergency-3",
-      "title": "救急搬送の病院収容所要時間",
-      "rankingKeys": [
-        "ambulance-hospital-arrival-time"
-      ],
-      "defaultCheckedKeys": [
-        "ambulance-hospital-arrival-time"
       ]
     },
     {

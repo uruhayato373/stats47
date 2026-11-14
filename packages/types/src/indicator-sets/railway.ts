@@ -34,6 +34,21 @@ export const RAILWAY_SET: IndicatorSet = {
       "rankingKey": "jr-freight-shipment",
       "shortLabel": "JR貨物発送量",
       "role": "context"
+    },
+    {
+      "rankingKey": "commute-by-train",
+      "shortLabel": "鉄道・電車通勤通学者数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "train-commuter-pass-consumption-expenditure",
+      "shortLabel": "鉄道通勤定期代",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "train-fare-consumption-expenditure",
+      "shortLabel": "鉄道運賃",
+      "role": "secondary"
     }
   ],
   "keywords": [

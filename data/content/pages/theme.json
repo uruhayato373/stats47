@@ -1366,7 +1366,10 @@
         "jr-passenger-transport",
         "private-railway-passenger-transport",
         "railway-station-count",
-        "jr-freight-shipment"
+        "jr-freight-shipment",
+        "commute-by-train",
+        "train-commuter-pass-consumption-expenditure",
+        "train-fare-consumption-expenditure"
       ]
     },
     {
@@ -1503,7 +1506,10 @@
         "road-bridge-condition-iv-count",
         "road-tunnel-diagnosed-count",
         "road-tunnel-condition-iii-count",
-        "road-tunnel-condition-iv-count"
+        "road-tunnel-condition-iv-count",
+        "main-road-length-per-km2",
+        "municipal-road-paving-rate",
+        "traffic-accident-count-per-1000-km"
       ]
     },
     {
@@ -1560,7 +1566,6 @@
         "tsunami-evacuation-tower-count",
         "disaster-relief-expenses-prefecture",
         "consumer-consultation-accepted-cases",
-        "ambulance-hospital-arrival-time",
         "theft-offenses-recognized",
         "theme-prostitution-crime-recognition-count",
         "theme-fire-injured-count"
