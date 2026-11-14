@@ -126,7 +126,8 @@ export function classifyLoginOutcome(source, { url, hasPassword, hasChallenge })
   return 'login_failed';
 }
 
-function notify(message) {
+/** macOS の通知 (Mac 以外は標準エラー)。session-preflight.mjs の日次確認も使う */
+export function notify(message) {
   if (process.platform !== 'darwin') { console.error(`[stats47 計測ログイン] ${message}`); return; }
   try { execFileSync('osascript', ['-e', `display notification ${JSON.stringify(message.replace(/[\u0000-\u001f]+/g, ' ').slice(0, 200))} with title "stats47 計測ログイン"`]); } catch { /* 通知は補助 */ }
 }

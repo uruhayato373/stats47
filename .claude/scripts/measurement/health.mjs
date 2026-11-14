@@ -1,6 +1,7 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import { SOURCES, MEASUREMENT_MAX_AGE_MS } from './sources.mjs';
+import { runPreflight, formatPreflight, agentView } from './session-preflight.mjs';
 
 export function measurementHealth(state, now = Date.now()) {
   const age = now - Date.parse(state?.generatedAt);
@@ -36,8 +37,21 @@ export function formatMeasurementHealth(health) {
     '', '生データはprivate R2。status-onlyの成功・ローリング期間の値を確定7日の収益として合算しない。'].join('\n');
 }
 
+// 保存済みセッションの事前確認 (session-preflight.mjs) を同じ出力に足す。--check の判定 (終了コード) は収集状態だけで決め、事前確認は混ぜない。
+//   --preflight        : 事前確認だけを出す
+//   --json             : JSON で出す (--preflight と組むと agent 向けの最小形 = 取得元ごとの状態と期限だけ)
+//   --root PATH        : .local のプロファイルを読む checkout (worktree から main checkout のプロファイルを見るとき)
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  const health = readMeasurementHealth();
-  console.log(formatMeasurementHealth(health));
-  if (process.argv.includes('--check') && health.status !== 'pass') process.exitCode = 1;
+  const args = process.argv.slice(2);
+  const rootIndex = args.indexOf('--root');
+  const root = rootIndex < 0 ? '.' : args[rootIndex + 1];
+  const preflight = runPreflight({ root });
+  if (args.includes('--preflight')) {
+    console.log(args.includes('--json') ? JSON.stringify(agentView(preflight), null, 2) : formatPreflight(preflight));
+  } else {
+    const health = readMeasurementHealth(root);
+    if (args.includes('--json')) console.log(JSON.stringify({ health, preflight: agentView(preflight) }, null, 2));
+    else console.log(`${formatMeasurementHealth(health)}\n\n${formatPreflight(preflight)}`);
+    if (args.includes('--check') && health.status !== 'pass') process.exitCode = 1;
+  }
 }

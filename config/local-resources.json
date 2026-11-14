@@ -523,6 +523,11 @@
       "why": "予約中 SNS 画像の週次確認の最新結果"
     },
     {
+      "pattern": "session-preflight",
+      "kind": "state",
+      "why": "保存済みセッションの日次の事前確認の最新結果 (session-preflight.sh が上書き。管理画面 /ops/auth が読む)"
+    },
+    {
       "pattern": "note-card-repair-journal.json",
       "kind": "state",
       "why": "note カード修復の journal"
