@@ -1,0 +1,28 @@
+{
+  "kind": "scatter",
+  "xKey": "number-of-establishments-information-communication",
+  "yKey": "telework-rate",
+  "year": "x:2014/y:2022",
+  "xSource": "r2:app/ranking/number-of-establishments-information-communication/values.json",
+  "ySource": "r2:app/ranking/telework-rate/values.json",
+  "fetchedAt": "2026-08-11T23:17:35.577Z",
+  "restoredFrom": "scatter-restore-from-ssot (session 2026-08-12)",
+  "verifiedBy": "article-title-value-match",
+  "verifiedMatchRate": {
+    "x": 1,
+    "y": 1
+  },
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug telework-rate-tokyo-gap --keys number-of-establishments-information-communication,telework-rate --data-name telework-ict-scatter",
+  "axes": {
+    "x": {
+      "metricKey": "number-of-establishments-information-communication",
+      "year": "2014年",
+      "proof": "values"
+    },
+    "y": {
+      "metricKey": "telework-rate",
+      "year": "2022年",
+      "proof": "values"
+    }
+  }
+}
