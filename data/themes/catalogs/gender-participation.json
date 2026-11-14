@@ -89,12 +89,36 @@
       "rankingKey": "husband-childcare-rate",
       "shortLabel": "夫の育児参加率",
       "role": "context"
+    },
+    {
+      "rankingKey": "dual-income-household-ratio",
+      "shortLabel": "共働き世帯割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「共働き率 都道府県」「共働きが多い県」など、サイト全体で最大の検索需要（2026-W45で合計約978回）に答え、女性の就業の入口になる。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
     }
   ],
   "charts": [],
   "metricGroups": [
     {
       "key": "work-and-wage-gap-1",
+      "title": "共働き世帯割合",
+      "rankingKeys": [
+        "dual-income-household-ratio"
+      ],
+      "defaultCheckedKeys": [
+        "dual-income-household-ratio"
+      ]
+    },
+    {
+      "key": "work-and-wage-gap-2",
       "title": "男女間賃金比（女性／男性）",
       "rankingKeys": [
         "gender-wage-gap"
@@ -104,7 +128,20 @@
       ]
     },
     {
-      "key": "work-and-wage-gap-2",
+      "key": "work-and-wage-gap-3",
+      "title": "男女の労働力人口比率",
+      "rankingKeys": [
+        "labor-force-population-ratio-man",
+        "labor-force-population-ratio-woman"
+      ],
+      "defaultCheckedKeys": [
+        "labor-force-population-ratio-man",
+        "labor-force-population-ratio-woman"
+      ],
+      "view": "sex"
+    },
+    {
+      "key": "work-and-wage-gap-4",
       "title": "女性パートタイム時給",
       "rankingKeys": [
         "female-part-time-hourly-wage"
@@ -145,42 +182,24 @@
       "defaultCheckedKeys": [
         "prefectural-assembly-female-share"
       ]
-    },
-    {
-      "key": "labor-force-participation-1",
-      "title": "男性労働力人口比率",
-      "rankingKeys": [
-        "labor-force-population-ratio-man"
-      ],
-      "defaultCheckedKeys": [
-        "labor-force-population-ratio-man"
-      ]
-    },
-    {
-      "key": "labor-force-participation-2",
-      "title": "女性労働力人口比率",
-      "rankingKeys": [
-        "labor-force-population-ratio-woman"
-      ],
-      "defaultCheckedKeys": [
-        "labor-force-population-ratio-woman"
-      ]
     }
   ],
   "sections": [
     {
       "key": "work-and-wage-gap",
-      "title": "就業や賃金における男女格差は改善されているか",
-      "concern": "働く女性が増えても男女間の賃金差やパートタイムの時給水準が低いのではないか心配です。",
+      "title": "共働きや女性の就業は県でどれだけ進み、賃金は男性とどれだけ違うか",
+      "concern": "働く女性や共働きが増えても、男女間の賃金差やパートタイムの時給水準が低いままではないかと心配です。",
       "metricGroupKeys": [
         "work-and-wage-gap-1",
-        "work-and-wage-gap-2"
+        "work-and-wage-gap-2",
+        "work-and-wage-gap-3",
+        "work-and-wage-gap-4"
       ]
     },
     {
       "key": "housework-and-family",
-      "title": "家事や育児などの家庭内での負担は男女で均等になっているか",
-      "concern": "女性に家事負担が偏り仕事との両立や自己実現が難しくなっていないか不安です。",
+      "title": "家事や育児の負担は男女で均等になっているか",
+      "concern": "女性に家事負担が偏り、仕事との両立や自己実現が難しくなっていないか不安です。",
       "metricGroupKeys": [
         "housework-and-family-1"
       ]
@@ -188,19 +207,10 @@
     {
       "key": "decision-making-participation",
       "title": "都道府県の行政や議会など意思決定の場への女性進出は進んでいるか",
-      "concern": "地域の政策決定や管理職における女性割合が低く女性の意見が反映されにくいのではないか気になります。",
+      "concern": "地域の政策決定や管理職における女性割合が低く、女性の意見が反映されにくいのではないか気になります。",
       "metricGroupKeys": [
         "decision-making-participation-1",
         "decision-making-participation-2"
-      ]
-    },
-    {
-      "key": "labor-force-participation",
-      "title": "地域社会において男女ともに就業参加が進んでいるか",
-      "concern": "地域の労働力不足の中で女性や男性の就業参加状況がどうなっているか気になります。",
-      "metricGroupKeys": [
-        "labor-force-participation-1",
-        "labor-force-participation-2"
       ]
     }
   ],

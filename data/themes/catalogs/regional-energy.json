@@ -269,6 +269,62 @@
         "readerQuestion": "一般廃棄物の焼却によるCO2排出量は都道府県でどれくらい差があるか。",
         "targetReaderOrDecision": "廃棄物処理由来の排出を含めた地域の脱炭素対策を検討する自治体担当者。"
       }
+    },
+    {
+      "rankingKey": "electricity-consumption-quantity",
+      "shortLabel": "電気使用量(世帯あたり・県庁所在市)",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「京都の年間消費電力量」のように、自分の県の家庭が電気をどれくらい使うかを世帯あたりの値で知りたい読者に答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "gasoline-consumption-quantity",
+      "shortLabel": "ガソリン消費量(世帯あたり・県庁所在市)",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「ガソリン消費量」「ガソリン使用量」と検索する読者に、自分の県の世帯がガソリンをどれくらい使うかを世帯あたりの値で答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "electricity-generation-capacity",
+      "shortLabel": "発電電力量",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "電力需要量と同じ年・同じ単位で並べ、「自分の県は電気を使う量と作る量のどちらが多いか」を知りたい読者に答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "wind-power-capacity",
+      "shortLabel": "風力発電導入量(設備容量)",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「風力発電 都道府県 ランキング」「風力発電 多い県」と検索する読者に、県ごとの風力の設備容量を示す(登録の系列は 2017 年までなので年を明示して置く)。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
     }
   ],
   "charts": [
@@ -392,23 +448,13 @@
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
-      "section": "regional-co2-emissions",
+      "section": "sector-energy-breakdown",
       "sortOrder": 102
     }
   ],
   "metricGroups": [
     {
       "key": "energy-consumption-scale-1",
-      "title": "最終エネルギー消費量",
-      "rankingKeys": [
-        "final-energy-consumption"
-      ],
-      "defaultCheckedKeys": [
-        "final-energy-consumption"
-      ]
-    },
-    {
-      "key": "energy-consumption-scale-2",
       "title": "1人当たり最終エネルギー消費量",
       "rankingKeys": [
         "final-energy-consumption-per-capita"
@@ -418,28 +464,136 @@
       ]
     },
     {
-      "key": "energy-consumption-scale-3",
-      "title": "電力需要量",
+      "key": "energy-consumption-scale-2",
+      "title": "最終エネルギー消費量",
       "rankingKeys": [
-        "electricity-demand"
+        "final-energy-consumption"
       ],
       "defaultCheckedKeys": [
-        "electricity-demand"
+        "final-energy-consumption"
+      ]
+    },
+    {
+      "key": "energy-consumption-scale-3",
+      "title": "電力需要量と発電電力量の推移",
+      "rankingKeys": [
+        "electricity-demand",
+        "electricity-generation-capacity"
+      ],
+      "defaultCheckedKeys": [
+        "electricity-demand",
+        "electricity-generation-capacity"
       ]
     },
     {
       "key": "sector-energy-breakdown-1",
-      "title": "部門別最終エネルギー消費量の構成比",
+      "title": "電気使用量(世帯あたり・県庁所在市)",
       "rankingKeys": [
-        "regional-industry-final-energy-consumption",
-        "regional-business-final-energy-consumption",
-        "regional-household-final-energy-consumption",
-        "regional-household-car-final-energy-consumption"
+        "electricity-consumption-quantity"
+      ],
+      "defaultCheckedKeys": [
+        "electricity-consumption-quantity"
+      ]
+    },
+    {
+      "key": "sector-energy-breakdown-2",
+      "title": "ガソリン消費量(世帯あたり・県庁所在市)",
+      "rankingKeys": [
+        "gasoline-consumption-quantity"
+      ],
+      "defaultCheckedKeys": [
+        "gasoline-consumption-quantity"
+      ]
+    },
+    {
+      "key": "sector-energy-breakdown-3",
+      "title": "産業部門の最終エネルギー消費量",
+      "rankingKeys": [
+        "regional-industry-final-energy-consumption"
       ],
       "defaultCheckedKeys": [
         "regional-industry-final-energy-consumption"
+      ]
+    },
+    {
+      "key": "sector-energy-breakdown-4",
+      "title": "業務他部門の最終エネルギー消費量",
+      "rankingKeys": [
+        "regional-business-final-energy-consumption"
       ],
-      "view": "tiles"
+      "defaultCheckedKeys": [
+        "regional-business-final-energy-consumption"
+      ]
+    },
+    {
+      "key": "sector-energy-breakdown-5",
+      "title": "家庭部門の最終エネルギー消費量",
+      "rankingKeys": [
+        "regional-household-final-energy-consumption"
+      ],
+      "defaultCheckedKeys": [
+        "regional-household-final-energy-consumption"
+      ]
+    },
+    {
+      "key": "sector-energy-breakdown-6",
+      "title": "家庭乗用車の最終エネルギー消費量",
+      "rankingKeys": [
+        "regional-household-car-final-energy-consumption"
+      ],
+      "defaultCheckedKeys": [
+        "regional-household-car-final-energy-consumption"
+      ]
+    },
+    {
+      "key": "sector-energy-breakdown-7",
+      "title": "地域のCO₂排出量推計・合計",
+      "rankingKeys": [
+        "regional-co2-emissions-estimate"
+      ],
+      "defaultCheckedKeys": [
+        "regional-co2-emissions-estimate"
+      ]
+    },
+    {
+      "key": "sector-energy-breakdown-8",
+      "title": "産業部門のCO₂推計",
+      "rankingKeys": [
+        "regional-industry-co2-emissions-estimate"
+      ],
+      "defaultCheckedKeys": [
+        "regional-industry-co2-emissions-estimate"
+      ]
+    },
+    {
+      "key": "sector-energy-breakdown-9",
+      "title": "業務その他部門のCO₂推計",
+      "rankingKeys": [
+        "regional-business-co2-emissions-estimate"
+      ],
+      "defaultCheckedKeys": [
+        "regional-business-co2-emissions-estimate"
+      ]
+    },
+    {
+      "key": "sector-energy-breakdown-10",
+      "title": "家庭部門のCO₂推計",
+      "rankingKeys": [
+        "regional-household-co2-emissions-estimate"
+      ],
+      "defaultCheckedKeys": [
+        "regional-household-co2-emissions-estimate"
+      ]
+    },
+    {
+      "key": "sector-energy-breakdown-11",
+      "title": "運輸部門のCO₂推計（航空を除く）",
+      "rankingKeys": [
+        "regional-transport-co2-emissions-estimate"
+      ],
+      "defaultCheckedKeys": [
+        "regional-transport-co2-emissions-estimate"
+      ]
     },
     {
       "key": "renewable-energy-adoption-1",
@@ -463,7 +617,7 @@
     },
     {
       "key": "renewable-energy-adoption-3",
-      "title": "新規認定設備と移行設備の導入容量内訳",
+      "title": "新規認定分と旧制度移行分の導入容量の内訳",
       "rankingKeys": [
         "fit-fip-new-approved-installed-capacity",
         "fit-transition-installed-capacity"
@@ -474,36 +628,21 @@
       "view": "tiles"
     },
     {
-      "key": "regional-co2-emissions-1",
-      "title": "地域のCO₂排出量推計・合計",
+      "key": "renewable-energy-adoption-4",
+      "title": "風力発電導入量(設備容量)",
       "rankingKeys": [
-        "regional-co2-emissions-estimate"
+        "wind-power-capacity"
       ],
       "defaultCheckedKeys": [
-        "regional-co2-emissions-estimate"
+        "wind-power-capacity"
       ]
-    },
-    {
-      "key": "regional-co2-emissions-2",
-      "title": "部門別CO₂排出量の内訳",
-      "rankingKeys": [
-        "regional-industry-co2-emissions-estimate",
-        "regional-business-co2-emissions-estimate",
-        "regional-household-co2-emissions-estimate",
-        "regional-transport-co2-emissions-estimate",
-        "regional-waste-co2-emissions-estimate"
-      ],
-      "defaultCheckedKeys": [
-        "regional-industry-co2-emissions-estimate"
-      ],
-      "view": "table"
     }
   ],
   "sections": [
     {
       "key": "energy-consumption-scale",
-      "title": "地域の最終エネルギー消費や電力需要の規模はどれくらいか",
-      "concern": "居住地域や関心のある自治体全体でどれほどのエネルギーが消費されているか知りたい。",
+      "title": "自分の県はエネルギーや電気をどれくらい使っているか",
+      "concern": "自分の県のエネルギーや電気の消費量が、人口を考えても多いのか少ないのかを知りたい。",
       "metricGroupKeys": [
         "energy-consumption-scale-1",
         "energy-consumption-scale-2",
@@ -512,38 +651,38 @@
     },
     {
       "key": "sector-energy-breakdown",
-      "title": "部門別に見たエネルギー消費の内訳はどうなっているか",
-      "concern": "産業・業務・家庭などのうちどの部門がエネルギーを多く消費しているか把握したい。",
+      "title": "家庭や産業はエネルギーとCO₂をどれだけ使い、出しているか",
+      "concern": "家庭の電気・ガソリンの使い方と、産業・業務・家庭・運輸のエネルギー消費やCO₂排出が、自分の県でどれくらいかを知りたい。",
       "metricGroupKeys": [
-        "sector-energy-breakdown-1"
+        "sector-energy-breakdown-1",
+        "sector-energy-breakdown-2",
+        "sector-energy-breakdown-3",
+        "sector-energy-breakdown-4",
+        "sector-energy-breakdown-5",
+        "sector-energy-breakdown-6",
+        "sector-energy-breakdown-7",
+        "sector-energy-breakdown-8",
+        "sector-energy-breakdown-9",
+        "sector-energy-breakdown-10",
+        "sector-energy-breakdown-11"
       ],
       "chartKeys": [
-        "regional-energy-sector-energy-breakdown-composition-1"
+        "regional-energy-sector-energy-breakdown-composition-1",
+        "regional-energy-regional-co2-emissions-composition-2"
       ]
     },
     {
       "key": "renewable-energy-adoption",
-      "title": "再生可能エネルギーや住宅用太陽光発電の導入は進んでいるか",
-      "concern": "脱炭素社会に向けて地域での再生可能エネルギー設備や太陽光発電が普及しているか知りたい。",
+      "title": "再生可能エネルギーや太陽光発電は、どれだけ導入されているか",
+      "concern": "住宅の太陽光や再エネの設備が自分の県でどれくらい導入されているかを知りたい。",
       "metricGroupKeys": [
         "renewable-energy-adoption-1",
         "renewable-energy-adoption-2",
-        "renewable-energy-adoption-3"
+        "renewable-energy-adoption-3",
+        "renewable-energy-adoption-4"
       ],
       "chartKeys": [
         "regional-energy-renewable-energy-adoption-composition-3"
-      ]
-    },
-    {
-      "key": "regional-co2-emissions",
-      "title": "地域から排出される温室効果ガス（CO₂）はどの部門が多いか",
-      "concern": "地域の脱炭素化に向けて温室効果ガスの全体量や各部門の排出傾向を知りたい。",
-      "metricGroupKeys": [
-        "regional-co2-emissions-1",
-        "regional-co2-emissions-2"
-      ],
-      "chartKeys": [
-        "regional-energy-regional-co2-emissions-composition-2"
       ]
     }
   ],

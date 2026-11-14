@@ -6961,7 +6961,15 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:01000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:childcare-services",
           "kind": "area-theme"
         },
         {
@@ -6969,7 +6977,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:03000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:03000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:childcare-services",
           "kind": "area-theme"
         },
         {
@@ -6977,7 +6993,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:05000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:05000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:childcare-services",
           "kind": "area-theme"
         },
         {
@@ -6985,7 +7009,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:07000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:07000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:childcare-services",
           "kind": "area-theme"
         },
         {
@@ -6993,7 +7025,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:09000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:09000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:childcare-services",
           "kind": "area-theme"
         },
         {
@@ -7001,7 +7041,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:11000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:11000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:childcare-services",
           "kind": "area-theme"
         },
         {
@@ -7009,7 +7057,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:13000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:13000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:childcare-services",
           "kind": "area-theme"
         },
         {
@@ -7017,7 +7073,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:15000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:15000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:childcare-services",
           "kind": "area-theme"
         },
         {
@@ -7025,7 +7089,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:17000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:17000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:childcare-services",
           "kind": "area-theme"
         },
         {
@@ -7033,7 +7105,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:19000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:19000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:childcare-services",
           "kind": "area-theme"
         },
         {
@@ -7041,7 +7121,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:21000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:21000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:childcare-services",
           "kind": "area-theme"
         },
         {
@@ -7049,7 +7137,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:23000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:23000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:childcare-services",
           "kind": "area-theme"
         },
         {
@@ -7057,7 +7153,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:25000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:25000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:childcare-services",
           "kind": "area-theme"
         },
         {
@@ -7065,7 +7169,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:27000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:27000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:childcare-services",
           "kind": "area-theme"
         },
         {
@@ -7073,7 +7185,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:29000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:29000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:childcare-services",
           "kind": "area-theme"
         },
         {
@@ -7081,7 +7201,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:31000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:31000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:childcare-services",
           "kind": "area-theme"
         },
         {
@@ -7089,7 +7217,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:33000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:33000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:childcare-services",
           "kind": "area-theme"
         },
         {
@@ -7097,7 +7233,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:35000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:35000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:childcare-services",
           "kind": "area-theme"
         },
         {
@@ -7105,7 +7249,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:37000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:37000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:childcare-services",
           "kind": "area-theme"
         },
         {
@@ -7113,7 +7265,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:39000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:39000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:childcare-services",
           "kind": "area-theme"
         },
         {
@@ -7121,7 +7281,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:41000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:41000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:childcare-services",
           "kind": "area-theme"
         },
         {
@@ -7129,7 +7297,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:43000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:43000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:childcare-services",
           "kind": "area-theme"
         },
         {
@@ -7137,11 +7313,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:45000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:45000:occupation-salary",
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:46000:childcare-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:46000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:childcare-services",
           "kind": "area-theme"
         },
         {
@@ -7153,11 +7341,16 @@
           "kind": "ranking"
         },
         {
+          "pageId": "theme:childcare-services",
+          "kind": "theme"
+        },
+        {
           "pageId": "theme:occupation-salary",
           "kind": "theme"
         }
       ],
       "themes": [
+        "childcare-services",
         "occupation-salary"
       ]
     },
@@ -9485,15 +9678,209 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:nursing-care-shortage-2040",
           "kind": "blog"
         },
         {
           "pageId": "ranking:nursing-home-staff-per-100k-65plus",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:long-term-care",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "long-term-care"
+      ]
     },
     {
       "metricKey": "nursing-welfare-facilities-basic-tabulation-6510-per",

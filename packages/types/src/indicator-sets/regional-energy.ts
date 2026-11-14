@@ -94,6 +94,26 @@ export const REGIONAL_ENERGY_SET: IndicatorSet = {
       "rankingKey": "regional-waste-co2-emissions-estimate",
       "shortLabel": "一般廃棄物焼却のCO₂推計",
       "role": "context"
+    },
+    {
+      "rankingKey": "electricity-consumption-quantity",
+      "shortLabel": "電気使用量(世帯あたり・県庁所在市)",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "gasoline-consumption-quantity",
+      "shortLabel": "ガソリン消費量(世帯あたり・県庁所在市)",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "electricity-generation-capacity",
+      "shortLabel": "発電電力量",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "wind-power-capacity",
+      "shortLabel": "風力発電導入量(設備容量)",
+      "role": "secondary"
     }
   ],
   "keywords": [

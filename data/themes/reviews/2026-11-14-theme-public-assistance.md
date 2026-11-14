@@ -1,0 +1,102 @@
+---
+type: theme-catalog-review
+date: 2026-11-14
+status: implemented-pending-release
+theme: public-assistance
+supersedes: null
+tags: [theme-catalog, proposal, theme-page-review]
+---
+
+# テーマ改善の提案: 生活保護と生活困窮 (public-assistance)
+
+## 結論
+
+章を読者の検索の問いの順に並べ直し、県別ページの最初の画面にその県の数値が 2 つ以上並ぶようにする。検索の中心は都道府県別の多さと順位なので、最初の章に主指標の人口千人当たり被保護実人員と世帯千世帯当たりの stat を 2 つ並べ、県の数値を最初の画面に 2 つ出します。もとは世帯の指標が財政の章にありましたが、人と世帯の割合は同じ問いに答えるので最初の章へ移し、財政の章は 48 年ある生活保護費の推移だけにしました。相談受付件数は 1 年分しかないので stat、保護施設定員は 49 年分あるので trend とし、全指標を 1 回ずつ使い、章の数は増やさず、drop はありません。
+
+新しい指標は今回足さない。調査で見つかった候補 5 件は下の表に残し、取り込みを別に判断する。
+
+この提案は THEME-PAGE-REVIEW-01 の段 4 (全 56 テーマの指標の見直し) の 1 回目で、調査 (theme-researcher) と設計 (theme-designer) の結果を機械で検査してまとめた。カタログに無い指標・同じ指標の重複・取りこぼしは 0 件。agent が書いた事実の裏取りは「確かめていないこと」に挙げた範囲で未了。
+
+## Theme brief
+
+| 項目 | 内容 |
+|---|---|
+| 主問 | 生活保護を受けている人の割合が高い都道府県はどこか、自分の県は何位か |
+| baseline (全ルート込み・GSC 2026-10-09〜2026-11-05) | 表示 1896・クリック 79・クリック率 4.2%・平均順位 6.45 (`data/themes/portfolio.json#public-assistance/metricsAllRoutes28d`) |
+| 進行中の実験 | なし (公開しても測定中の実験に混ざらない) |
+
+### 読者の問い (調査の結果)
+
+| 問い | 根拠 |
+|---|---|
+| 生活保護を受けている人の割合が高い都道府県はどこか、自分の県は何位か | 2026-W45 queries.csv: 「生活保護 都道府県 ランキング」37回、「生活保護 多い県」32回、「生活保護 一番高い地域」29回、「生活保護率 都道府県」17回、「生活保護受給者数 ランキング」120回 (生活保護を含む語 120 種で合計 835 表示) |
+| 沖縄・大阪・埼玉など特定の県はなぜ多い (少ない) のか、理由は何か | queries.csv: 「沖縄 生活保護 ランキング」26回 (4クリック)、「沖縄 生活保護 多い」14回、「大阪府 生活保護 ランキング 市町村」21回、「埼玉県 生活保護 ランキング」20回、「生活保護 理由 ランキング」49回、「大阪 生活保護 多い 理由」6回 |
+| 生活保護費はいくらかかっているか、県の財政への負担はどのくらいか | queries.csv: 「生活保護費 高い地域」25回、「千葉県 生活保護費」「奈良県生活保護費」各1回、「京都市 生活保護 金額」1回。資料: data/themes/catalogs/public-assistance.json に生活保護費(都道府県財政)の章あり |
+| 受給の中身は何か (医療・住宅・教育・介護のどの扶助が多いか)、申請はどれくらいあるか | 検索語に直接の記録は少ない (「尼崎 生活保護 受け やすい」1回)。登録済み指標 public-assistance-medical/housing/education/nursing-beneficiaries-per-1000 と welfare-office-public-assistance-applications-per-1000-households が data/metrics に存在し、現カタログ (5 指標) には未掲載であることを確認 |
+| 生活保護はこの先増えるのか減るのか、長期でどう推移してきたか | inventory.json metricInfo: 被保護実人員 1975-2023 (49年・47県)、被保護世帯 1980-2023 (28年)、生活保護費 1975-2022 (48年)。検索語「日本 生活保護 割合」2回、「日本で生活保護を受けている人数」3回 |
+
+最初の章についての調査の所見: 最初の章は現在の「受給割合の推移」(被保護実人員 人口千人当たり、primary) に、同じ最初の画面で世帯千世帯当たりの値も並べ、県の数値を 2 つ以上見せるのがよい。検索の中心は「都道府県ランキング・多い県」なので、順位と全国比を最初の画面に出すことを優先する。
+
+## 現行の構成
+
+| 順 | 章 (key) | カード | チャート |
+|---|---|---|---|
+| 1 | 生活保護を受ける住民の割合はどのように推移しているか (`public-assistance-recipient-trend`) | 生活保護被保護実人員（月平均・人口千人当たり） | — |
+| 2 | 生活保護世帯の割合や自治体の財政負担はどのくらいか (`public-assistance-households-and-budget`) | 生活保護被保護実世帯数（月平均・一般世帯千世帯当たり）、生活保護費（都道府県財政） | — |
+| 3 | 生活保護に至る前の生活困窮に関する相談はどれくらいあるか (`poverty-support-consultation`) | 生活困窮者支援の新規相談受付件数 | — |
+| 4 | 受給者を支援する保護施設の受け入れ容量は十分か (`public-assistance-facility-capacity`) | 保護施設定員数（被保護実人員千人当たり） | — |
+
+指標数: primary 1 / secondary 4 / context 0
+
+## 提案する章とカード
+
+| 順 | 章 (key) | 見出し | 答える悩み | カード (見せ方) |
+|---|---|---|---|---|
+| 1 | `public-assistance-recipient-trend` | 生活保護を受けている人や世帯の割合は、自分の県でどのくらいか | 自分の県で生活保護を受ける人や世帯がどのくらいの割合で、全国と比べて多いのか少ないのかを知りたい。 | 生活保護被保護実人員（月平均・人口千人当たり） (数値)、生活保護被保護実世帯数（月平均・一般世帯千世帯当たり） (数値) |
+| 2 | `public-assistance-households-and-budget` | 生活保護費はどのように推移してきたか | 生活保護にかかる費用が県の財政の中でどう変わってきたのか知りたい。 | 生活保護費（都道府県財政） (推移) |
+| 3 | `poverty-support-consultation` | 生活保護に至る前の生活困窮の相談はどれくらい受け付けられているか | 生活保護の手前で相談できる窓口がどれくらい使われているのか気になる。 | 生活困窮者支援の新規相談受付件数 (数値) |
+| 4 | `public-assistance-facility-capacity` | 受給者が入れる保護施設の定員はどう推移してきたか | 施設への入所が必要な受給者に対して、保護施設の定員がどれくらいあるのか知りたい。 | 保護施設定員数（被保護実人員千人当たり） (推移) |
+
+## 足したい指標の候補 (今回は足さない)
+
+| 候補 | 調査 | statsDataId | 分類コード | 確認の状態 | 理由 |
+|---|---|---|---|---|---|
+| 生活保護医療扶助人員 (人口千人当たり) | 社会・人口統計体系 (都道府県) | 0000010210 | #J0110804 | 登録済 | data/metrics/public-assistance-medical-beneficiaries-per-1000.ts に記載 (isActive true、1975-2023、都道府県)。扶助の内訳として「受給の中身」の問いに答える。現カタログ未掲載。e-Stat API での生照会はしていない |
+| 生活保護住宅扶助人員 (人口千人当たり) | 社会・人口統計体系 (都道府県) | 0000010210 | #J0110805 | 登録済 | data/metrics/public-assistance-housing-beneficiaries-per-1000.ts に記載 (isActive true、1975-2023)。大阪・沖縄など都市部差の読み解きに使える。現カタログ未掲載 |
+| 福祉事務所生活保護申請件数 (被保護世帯千世帯当たり) | 社会・人口統計体系 (都道府県) | 0000010210 | #J05202 | 登録済 | data/metrics/welfare-office-public-assistance-applications-per-1000-households.ts に記載 (isActive true、1975-2023)。「受けやすい」系の問いと入口の指標。分母が被保護世帯である点は注記が必要 |
+| 生活保護費割合 (都道府県財政) | 社会・人口統計体系 (都道府県) | 0000010204 | #D0310701 | 登録済 | data/metrics/public-assistance-expenditure-ratio-pref-finance.ts に記載 (isActive true、1975-2022)。「県財政への負担」の問いに、金額(千円)でなく比率で答えられる。現カタログ未掲載 |
+| 生活保護を受ける母子世帯数 | 社会・人口統計体系 (都道府県) | 0000010110 | J110201 | 登録済 | data/metrics/single-mother-public-assistance-households.ts に記載 (isActive true)。世帯類型の切り口。分母が無い実数なので人口比にするか注記が必要。年次範囲は未確認 |
+
+## 確かめていないこと
+
+- e-Stat API・Web の生照会はしていない。候補の statsDataId と cdCat01 は登録済み metric ファイルの記載に基づき、e-Stat 側での現在の実在までは未確認
+- 公式ダッシュボード研究カタログ (public-dashboards.json) に生活保護・生活困窮の記録は見つからなかった (リテラル検索のみ。「存在しない」とは断定しない)。厚生労働省「被保護者調査」など一次資料の URL は未確認のため記載していない
+- 母子世帯数 (J110201) の年次範囲と県別の欠損は未確認
+- 検索語は 2026-W45 の 1 週分の snapshot のみ (表示回数は小さい)。市町村粒度の問い (大阪府 市町村、京都市、尼崎) は県別カタログでは答えられず、候補にも入れていない
+- 現カタログの persons-on-public-assistance-per-1000 の statsDataId・cdCat01 は今回確認していない
+- 設計案の見出しは agent が書いた文で、検索語との対応は上の「読者の問い」の根拠の範囲でしか確かめていない。
+- 画面での見え方 (最初の画面のタイルの数・高さ) は未計測。実装後に `measure-theme-weight.mjs` で測る。
+
+## 想定実装差分と検証
+
+- 編集するファイル: `data/themes/catalogs/public-assistance.json` (sections・metricGroups・引き上げる指標の role と selection)。生成物は `npm run generate:catalog`。
+- R2 への影響: page-components (章と図の並び)。観測値は変わらない。
+- 検証: `npm run validate:catalog --workspace=@stats47/data-configs` (error 0・warning を増やさない)、`measure-theme-weight.mjs --themes public-assistance` で品質基準 6 項目。
+- 実験: 公開日に `THEME-STRUCTURE-<公開日>-public-assistance` を `metricScope: all-routes` で登録する。
+
+## 実装した構成 (カタログの現在の形)
+
+| 順 | 章 (key) | カード |
+|---|---|---|
+| 1 | 生活保護を受けている人や世帯の割合は、自分の県でどのくらいか (`public-assistance-recipient-trend`) | 生活保護被保護実人員（月平均・人口千人当たり）、生活保護被保護実世帯数（月平均・一般世帯千世帯当たり） |
+| 2 | 生活保護費はどのように推移してきたか (`public-assistance-households-and-budget`) | 生活保護費（都道府県財政） |
+| 3 | 生活保護に至る前の生活困窮の相談はどれくらい受け付けられているか (`poverty-support-consultation`) | 生活困窮者支援の新規相談受付件数 |
+| 4 | 受給者が入れる保護施設の定員はどう推移してきたか (`public-assistance-facility-capacity`) | 保護施設定員数（被保護実人員千人当たり） |
+
+見せ方 (推移・数値・構成比) は `apply-design.ts` がデータの形 (年の数・単位) に合わせて決め直した。
+
+## 採用決定
+
+2026-11-14 オーナー承認。
+実装: branch `claude/theme-review-stage4-w1`。`apply-design.ts --approved public-assistance` でカタログへ適用し、`validate:catalog` は error 0・warning の増減なし。
+公開日に実験を `metricScope: all-routes` で登録する。足したい指標の候補のうち未採用のものは上の表に残す。

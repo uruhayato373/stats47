@@ -38,7 +38,7 @@ export const CULTURAL_PARTICIPATION_SET: IndicatorSet = {
     {
       "rankingKey": "total-museum-count",
       "shortLabel": "博物館総数",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "relaxation-avg-time-male",
@@ -104,6 +104,26 @@ export const CULTURAL_PARTICIPATION_SET: IndicatorSet = {
       "rankingKey": "hobby-participation-rate-knitting",
       "shortLabel": "編み物・手芸の行動者率",
       "role": "context"
+    },
+    {
+      "rankingKey": "museum-count-per-million",
+      "shortLabel": "博物館数(人口100万人あたり)",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "library-books",
+      "shortLabel": "図書館蔵書数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "library-registered-users",
+      "shortLabel": "図書館登録者数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "registered-museum-visitors",
+      "shortLabel": "登録博物館の入館者数",
+      "role": "secondary"
     }
   ],
   "keywords": [

@@ -189,46 +189,29 @@
   "sections": [
     {
       "key": "cargo",
-      "title": "港湾の取扱規模",
-      "description": "貨物のトン数とコンテナの個数・換算量は別の尺度です。対象外の県は0と見なしません。",
+      "title": "コンテナと貨物は、どの県の港でどれだけ扱われているか",
+      "concern": "コンテナ取扱量や港湾の貨物量が多い県を知りたい読者が、規模を複数の尺度で確かめられるようにする。",
       "metricGroupKeys": [
         "cargo-1",
-        "cargo-2"
+        "cargo-2",
+        "cargo-4"
       ]
     },
     {
       "key": "trade",
-      "title": "輸出と輸入",
-      "description": "港で取り扱う輸出入貨物量です。その県で生産・消費した量を直接表すものではありません。",
+      "title": "輸出入と国内の海上輸送は、それぞれどれだけか",
+      "concern": "港の貨物量を外国貿易だけと読み違えず、輸出・輸入と国内の出入りを分けて確かめたい読者に答える。",
       "metricGroupKeys": [
-        "trade"
+        "trade-1"
       ],
       "chartKeys": [
         "ports-cargo-trend"
-      ]
-    },
-    {
-      "key": "ships-passengers",
-      "title": "船舶と旅客の利用",
-      "description": "入港隻数、総トン数、旅客人員は別の利用側面です。",
-      "metricGroupKeys": [
-        "ships-passengers"
       ]
     }
   ],
   "metricGroups": [
     {
       "key": "cargo-1",
-      "title": "海上出入貨物量",
-      "rankingKeys": [
-        "port-cargo-total"
-      ],
-      "defaultCheckedKeys": [
-        "port-cargo-total"
-      ]
-    },
-    {
-      "key": "cargo-2",
       "title": "コンテナ個数",
       "rankingKeys": [
         "port-container-count"
@@ -238,25 +221,35 @@
       ]
     },
     {
-      "key": "trade",
-      "title": "輸出と輸入",
+      "key": "cargo-2",
+      "title": "海上出入貨物量",
       "rankingKeys": [
-        "port-cargo-export",
-        "port-cargo-import"
+        "port-cargo-total"
       ],
       "defaultCheckedKeys": [
-        "port-cargo-export",
-        "port-cargo-import"
+        "port-cargo-total"
       ]
     },
     {
-      "key": "ships-passengers",
-      "title": "船舶と旅客の利用",
+      "key": "cargo-4",
+      "title": "入港船舶隻数",
       "rankingKeys": [
         "port-inbound-ships"
       ],
       "defaultCheckedKeys": [
         "port-inbound-ships"
+      ]
+    },
+    {
+      "key": "trade-1",
+      "title": "輸出と輸入は増えているか",
+      "rankingKeys": [
+        "port-cargo-export",
+        "port-cargo-import"
+      ],
+      "defaultCheckedKeys": [
+        "port-cargo-export",
+        "port-cargo-import"
       ]
     }
   ]

@@ -24,6 +24,26 @@ export const GEOGRAPHIC_ACCESS_SET: IndicatorSet = {
       "rankingKey": "commute-by-car",
       "shortLabel": "自家用車通勤・通学者数",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "roadside-station-count",
+      "shortLabel": "道の駅数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "airport-count",
+      "shortLabel": "空港数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "commute-by-bus",
+      "shortLabel": "乗合バス通勤・通学者数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "commuter-ratio-to-other-municipalities",
+      "shortLabel": "他市区町村への通勤者比率",
+      "role": "secondary"
     }
   ],
   "keywords": [

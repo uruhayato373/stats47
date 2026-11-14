@@ -69,12 +69,148 @@
       "rankingKey": "commuters-total",
       "shortLabel": "自宅外通勤・通学者数",
       "role": "context"
+    },
+    {
+      "rankingKey": "gasoline-consumption-quantity",
+      "shortLabel": "ガソリン消費量（県庁所在市・二人以上世帯の年間値）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「ガソリン消費量」「ガソリン 消費量」と検索する読者の、車に頼る暮らしの度合いを県で比べたいという問いに答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "automobile-related-group-consumption-expenditure",
+      "shortLabel": "自動車等関係費（県庁所在市・二人以上世帯の年間値）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「車の維持費は県で違うのか」という問いに、世帯の自動車関係の支出額(2025年まで)で答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "bus-fare-consumption-expenditure",
+      "shortLabel": "バス代（県庁所在市・二人以上世帯の年間値）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「1年間に使うバス代が最も高い都道府県は」のような、バス利用の費用を県で比べたい問いに答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "taxi-driver-annual-income",
+      "shortLabel": "タクシー運転者の平均年収",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「タクシー運転手 年収 都道府県別」と検索する読者の、公共交通の担い手の収入を県で比べたい問いに答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "bus-driver-annual-income",
+      "shortLabel": "バス運転者の平均年収",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",
+        "surveyedAt": "2026-11-14",
+        "rationale": "バスの運転者の年収を県で比べたいという、公共交通の担い手の問いに、タクシー運転者と並べて答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
     }
   ],
   "charts": [],
   "metricGroups": [
     {
       "key": "car-dependency-1",
+      "title": "ガソリン消費量（県庁所在市・二人以上世帯の年間値）",
+      "rankingKeys": [
+        "gasoline-consumption-quantity"
+      ],
+      "defaultCheckedKeys": [
+        "gasoline-consumption-quantity"
+      ]
+    },
+    {
+      "key": "car-dependency-2",
+      "title": "自動車等関係費（県庁所在市・二人以上世帯の年間値）",
+      "rankingKeys": [
+        "automobile-related-group-consumption-expenditure"
+      ],
+      "defaultCheckedKeys": [
+        "automobile-related-group-consumption-expenditure"
+      ]
+    },
+    {
+      "key": "car-dependency-3",
+      "title": "手段別の自宅外通勤・通学者数 (2010年・2020年)",
+      "rankingKeys": [
+        "commute-by-car",
+        "commute-by-bus",
+        "commute-by-train"
+      ],
+      "defaultCheckedKeys": [
+        "commute-by-car",
+        "commute-by-bus",
+        "commute-by-train"
+      ]
+    },
+    {
+      "key": "public-transport-cost-1",
+      "title": "バス代（県庁所在市・二人以上世帯の年間値）",
+      "rankingKeys": [
+        "bus-fare-consumption-expenditure"
+      ],
+      "defaultCheckedKeys": [
+        "bus-fare-consumption-expenditure"
+      ]
+    },
+    {
+      "key": "public-transport-cost-2",
+      "title": "交通・通信支出（二人以上世帯・10〜11月の月平均）",
+      "rankingKeys": [
+        "household-survey-transport-communication-expenditure"
+      ],
+      "defaultCheckedKeys": [
+        "household-survey-transport-communication-expenditure"
+      ]
+    },
+    {
+      "key": "public-transport-cost-3",
+      "title": "バス・タクシー運転者の平均年収",
+      "rankingKeys": [
+        "taxi-driver-annual-income",
+        "bus-driver-annual-income"
+      ],
+      "defaultCheckedKeys": [
+        "taxi-driver-annual-income",
+        "bus-driver-annual-income"
+      ]
+    },
+    {
+      "key": "long-run-background-1",
       "title": "自動車所有数量（二人以上世帯千世帯当たり）",
       "rankingKeys": [
         "car-ownership-multi-person-households-per-1000"
@@ -84,21 +220,7 @@
       ]
     },
     {
-      "key": "commute-modes-1",
-      "title": "移動手段別の通勤・通学者数の推移",
-      "rankingKeys": [
-        "commute-by-car",
-        "commute-by-bus",
-        "commute-by-train"
-      ],
-      "defaultCheckedKeys": [
-        "commute-by-car",
-        "commute-by-bus",
-        "commute-by-train"
-      ]
-    },
-    {
-      "key": "public-bus-operators-1",
+      "key": "long-run-background-2",
       "title": "バス事業者",
       "rankingKeys": [
         "bus-operators"
@@ -106,49 +228,36 @@
       "defaultCheckedKeys": [
         "bus-operators"
       ]
-    },
-    {
-      "key": "transport-expenditure-1",
-      "title": "交通・通信支出（二人以上世帯・10〜11月の月平均）",
-      "rankingKeys": [
-        "household-survey-transport-communication-expenditure"
-      ],
-      "defaultCheckedKeys": [
-        "household-survey-transport-communication-expenditure"
-      ]
     }
   ],
   "sections": [
     {
       "key": "car-dependency",
-      "title": "自家用車への依存度はどれくらい高いか",
-      "concern": "日常生活や移動で自動車がどれくらい必須になっているか知りたい。",
+      "title": "ガソリンや車の費用、通勤の手段から見て、車にどれくらい頼る暮らしか",
+      "concern": "ガソリンの使い方や通勤・通学の手段から、車に頼る暮らしの度合いを知りたい。",
       "metricGroupKeys": [
-        "car-dependency-1"
+        "car-dependency-1",
+        "car-dependency-2",
+        "car-dependency-3"
       ]
     },
     {
-      "key": "commute-modes",
-      "title": "通勤や通学の移動手段は車と公共交通のどちらが中心か",
-      "concern": "毎日の通勤や通学で自家用車と公共交通機関のどちらが多く使われているか知りたい。",
+      "key": "public-transport-cost",
+      "title": "バスやタクシーを支える費用と担い手はどうなっているか",
+      "concern": "移動にかかる家計の費用と、バス・タクシーの運転者の年収が心配だ。",
       "metricGroupKeys": [
-        "commute-modes-1"
+        "public-transport-cost-1",
+        "public-transport-cost-2",
+        "public-transport-cost-3"
       ]
     },
     {
-      "key": "public-bus-operators",
-      "title": "地域の公共交通を支えるバス事業者は十分に確保されているか",
-      "concern": "自家用車に乗れない場合の移動手段として路線バスなどが維持されているか不安だ。",
+      "key": "long-run-background",
+      "title": "自動車の所有とバス事業者は長い期間でどう変わったか (2014年まで)",
+      "concern": "車社会の広がりと、バス事業者の数の移り変わりを長い期間で知りたい。",
       "metricGroupKeys": [
-        "public-bus-operators-1"
-      ]
-    },
-    {
-      "key": "transport-expenditure",
-      "title": "移動や通信にかかる家計の費用負担は変化しているか",
-      "concern": "自動車の維持費や交通費など移動に伴う家計への影響が心配だ。",
-      "metricGroupKeys": [
-        "transport-expenditure-1"
+        "long-run-background-1",
+        "long-run-background-2"
       ]
     }
   ],

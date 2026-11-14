@@ -2188,15 +2188,209 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:automobile-related-group-consumption-expenditure-prefecture",
           "kind": "blog"
         },
         {
           "pageId": "ranking:automobile-related-group-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:regional-transport",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "regional-transport"
+      ]
     },
     {
       "metricKey": "average-age-of-first-marriage-husband",
@@ -7026,7 +7220,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:01000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:02000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7034,7 +7236,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:03000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:04000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7042,7 +7252,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:05000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:06000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7050,7 +7268,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:07000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:08000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7058,7 +7284,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:09000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:10000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7066,7 +7300,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:11000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:12000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7074,7 +7316,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:13000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:14000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7082,7 +7332,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:15000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:16000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7090,7 +7348,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:17000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:18000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7098,7 +7364,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:19000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:20000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7106,7 +7380,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:21000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:22000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7114,7 +7396,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:23000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:24000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7122,7 +7412,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:25000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:26000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7130,7 +7428,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:27000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:28000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7138,7 +7444,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:29000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:30000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7146,7 +7460,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:31000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:32000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7154,7 +7476,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:33000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:34000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7162,7 +7492,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:35000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:36000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7170,7 +7508,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:37000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:38000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7178,7 +7524,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:39000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:40000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7186,7 +7540,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:41000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:42000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7194,7 +7556,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:43000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:44000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7202,11 +7572,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:45000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:46000:household-assets-debt",
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:46000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:47000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7228,10 +7610,15 @@
         {
           "pageId": "theme:household-assets-debt",
           "kind": "theme"
+        },
+        {
+          "pageId": "theme:real-income",
+          "kind": "theme"
         }
       ],
       "themes": [
-        "household-assets-debt"
+        "household-assets-debt",
+        "real-income"
       ]
     },
     {
@@ -8431,6 +8818,194 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:local-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area:01000",
           "kind": "area"
         },
@@ -8625,9 +9200,15 @@
         {
           "pageId": "ranking:barber-beauty-salon-count-per-100k",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:local-services",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "local-services"
+      ]
     },
     {
       "metricKey": "barber-shop-count",

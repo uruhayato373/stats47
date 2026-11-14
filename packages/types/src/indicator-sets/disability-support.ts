@@ -34,6 +34,16 @@ export const DISABILITY_SUPPORT_SET: IndicatorSet = {
       "rankingKey": "disabled-employment-rate",
       "shortLabel": "障害者就職率（ハローワーク）",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "treatment-rate-mental-disorder-outpatient",
+      "shortLabel": "精神及び行動の障害の受療率（外来・人口10万対）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "treatment-rate-mental-disorder-inpatient",
+      "shortLabel": "精神及び行動の障害の受療率（入院・人口10万対）",
+      "role": "secondary"
     }
   ],
   "keywords": [
