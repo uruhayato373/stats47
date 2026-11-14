@@ -1,0 +1,255 @@
+{
+ "statsDataId": "0004023601",
+ "title": "品目分類 品目分類（2025年改定）（総数：金額）",
+ "statName": "家計調査",
+ "govOrg": "総務省",
+ "surveyDate": null,
+ "overallTotalNumber": 8997140,
+ "dimensions": [
+  {
+   "id": "tab",
+   "name": "表章項目",
+   "valueCount": 1,
+   "sampleValues": [
+    {
+     "code": "01",
+     "name": "金額",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat01",
+   "name": "品目分類（2025年改定）",
+   "valueCount": 689,
+   "sampleValues": [
+    {
+     "code": "000100000",
+     "name": "世帯数分布(抽出率調整)",
+     "unit": "一万分比"
+    },
+    {
+     "code": "000200000",
+     "name": "集計世帯数",
+     "unit": "世帯"
+    },
+    {
+     "code": "000300000",
+     "name": "世帯人員",
+     "unit": "人"
+    },
+    {
+     "code": "000400000",
+     "name": "18歳未満人員",
+     "unit": "人"
+    },
+    {
+     "code": "000500000",
+     "name": "65歳以上人員",
+     "unit": "人"
+    },
+    {
+     "code": "000600000",
+     "name": "65歳以上無職者人員",
+     "unit": "人"
+    },
+    {
+     "code": "000700000",
+     "name": "有業人員",
+     "unit": "人"
+    },
+    {
+     "code": "000800000",
+     "name": "世帯主の年齢",
+     "unit": "歳"
+    },
+    {
+     "code": "000900000",
+     "name": "持家率",
+     "unit": "％"
+    },
+    {
+     "code": "001000000",
+     "name": "家賃・地代を支払っている世帯の割合",
+     "unit": "％"
+    },
+    {
+     "code": "001100000",
+     "name": "消費支出",
+     "unit": "円"
+    },
+    {
+     "code": "010000000",
+     "name": "1 食料",
+     "unit": "円"
+    }
+   ],
+   "hasTotal": true
+  },
+  {
+   "id": "cat02",
+   "name": "世帯区分",
+   "valueCount": 4,
+   "sampleValues": [
+    {
+     "code": "03",
+     "name": "二人以上の世帯（2000年～）",
+     "unit": null
+    },
+    {
+     "code": "04",
+     "name": "二人以上の世帯のうち勤労者世帯（2000年～）",
+     "unit": null
+    },
+    {
+     "code": "01",
+     "name": "二人以上の世帯（農林漁家世帯を除く）（1985年～2007年,2017年）",
+     "unit": null
+    },
+    {
+     "code": "02",
+     "name": "二人以上の世帯のうち勤労者世帯（農林漁家世帯を除く）（1985年～2007年,2017年）",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "area",
+   "name": "地域区分",
+   "valueCount": 53,
+   "sampleValues": [
+    {
+     "code": "00000",
+     "name": "全国",
+     "unit": null
+    },
+    {
+     "code": "01003",
+     "name": "01100 札幌市",
+     "unit": null
+    },
+    {
+     "code": "02003",
+     "name": "02201 青森市",
+     "unit": null
+    },
+    {
+     "code": "03003",
+     "name": "03201 盛岡市",
+     "unit": null
+    },
+    {
+     "code": "04003",
+     "name": "04100 仙台市",
+     "unit": null
+    },
+    {
+     "code": "05003",
+     "name": "05201 秋田市",
+     "unit": null
+    },
+    {
+     "code": "06003",
+     "name": "06201 山形市",
+     "unit": null
+    },
+    {
+     "code": "07003",
+     "name": "07201 福島市",
+     "unit": null
+    },
+    {
+     "code": "08003",
+     "name": "08201 水戸市",
+     "unit": null
+    },
+    {
+     "code": "09003",
+     "name": "09201 宇都宮市",
+     "unit": null
+    },
+    {
+     "code": "10003",
+     "name": "10201 前橋市",
+     "unit": null
+    },
+    {
+     "code": "11003",
+     "name": "11100 さいたま市",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "time",
+   "name": "時間軸（月次）",
+   "valueCount": 501,
+   "sampleValues": [
+    {
+     "code": "1985000101",
+     "name": "1985年1月",
+     "unit": null
+    },
+    {
+     "code": "1985000202",
+     "name": "1985年2月",
+     "unit": null
+    },
+    {
+     "code": "1985000303",
+     "name": "1985年3月",
+     "unit": null
+    },
+    {
+     "code": "1985000404",
+     "name": "1985年4月",
+     "unit": null
+    },
+    {
+     "code": "1985000505",
+     "name": "1985年5月",
+     "unit": null
+    },
+    {
+     "code": "1985000606",
+     "name": "1985年6月",
+     "unit": null
+    },
+    {
+     "code": "1985000707",
+     "name": "1985年7月",
+     "unit": null
+    },
+    {
+     "code": "1985000808",
+     "name": "1985年8月",
+     "unit": null
+    },
+    {
+     "code": "1985000909",
+     "name": "1985年9月",
+     "unit": null
+    },
+    {
+     "code": "1985001010",
+     "name": "1985年10月",
+     "unit": null
+    },
+    {
+     "code": "1985001111",
+     "name": "1985年11月",
+     "unit": null
+    },
+    {
+     "code": "1985001212",
+     "name": "1985年12月",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  }
+ ]
+}

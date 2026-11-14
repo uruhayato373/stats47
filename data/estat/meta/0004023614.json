@@ -1,0 +1,190 @@
+{
+ "statsDataId": "0004023614",
+ "title": "品目分類 品目分類（2025年改定）（金額）",
+ "statName": "家計調査",
+ "govOrg": "総務省",
+ "surveyDate": null,
+ "overallTotalNumber": 29448,
+ "dimensions": [
+  {
+   "id": "tab",
+   "name": "表章項目",
+   "valueCount": 1,
+   "sampleValues": [
+    {
+     "code": "01",
+     "name": "金額",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat01",
+   "name": "品目分類（2025年改定）",
+   "valueCount": 579,
+   "sampleValues": [
+    {
+     "code": "000100000",
+     "name": "世帯数分布(抽出率調整)",
+     "unit": "一万分比"
+    },
+    {
+     "code": "000200000",
+     "name": "集計世帯数",
+     "unit": "世帯"
+    },
+    {
+     "code": "000800000",
+     "name": "世帯主の年齢",
+     "unit": "歳"
+    },
+    {
+     "code": "000800100",
+     "name": "有業者比率",
+     "unit": null
+    },
+    {
+     "code": "000900000",
+     "name": "持家率",
+     "unit": "％"
+    },
+    {
+     "code": "001000000",
+     "name": "家賃・地代を支払っている世帯の割合",
+     "unit": "％"
+    },
+    {
+     "code": "001100000",
+     "name": "消費支出",
+     "unit": "円"
+    },
+    {
+     "code": "010000000",
+     "name": "1 食料",
+     "unit": "円"
+    },
+    {
+     "code": "010100000",
+     "name": "1.1 穀類",
+     "unit": "円"
+    },
+    {
+     "code": "010110001",
+     "name": "1.1.1 米",
+     "unit": "円"
+    },
+    {
+     "code": "010120000",
+     "name": "1.1.2 パン",
+     "unit": "円"
+    },
+    {
+     "code": "010120010",
+     "name": "120 食パン",
+     "unit": "円"
+    }
+   ],
+   "hasTotal": true
+  },
+  {
+   "id": "cat02",
+   "name": "世帯区分",
+   "valueCount": 2,
+   "sampleValues": [
+    {
+     "code": "21",
+     "name": "単身世帯",
+     "unit": null
+    },
+    {
+     "code": "22",
+     "name": "（単身）勤労者世帯",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "area",
+   "name": "地域区分",
+   "valueCount": 1,
+   "sampleValues": [
+    {
+     "code": "00000",
+     "name": "全国",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "time",
+   "name": "時間軸（年次）",
+   "valueCount": 26,
+   "sampleValues": [
+    {
+     "code": "2000000000",
+     "name": "2000年",
+     "unit": null
+    },
+    {
+     "code": "2001000000",
+     "name": "2001年",
+     "unit": null
+    },
+    {
+     "code": "2002000000",
+     "name": "2002年",
+     "unit": null
+    },
+    {
+     "code": "2003000000",
+     "name": "2003年",
+     "unit": null
+    },
+    {
+     "code": "2004000000",
+     "name": "2004年",
+     "unit": null
+    },
+    {
+     "code": "2005000000",
+     "name": "2005年",
+     "unit": null
+    },
+    {
+     "code": "2006000000",
+     "name": "2006年",
+     "unit": null
+    },
+    {
+     "code": "2007000000",
+     "name": "2007年",
+     "unit": null
+    },
+    {
+     "code": "2008000000",
+     "name": "2008年",
+     "unit": null
+    },
+    {
+     "code": "2009000000",
+     "name": "2009年",
+     "unit": null
+    },
+    {
+     "code": "2010000000",
+     "name": "2010年",
+     "unit": null
+    },
+    {
+     "code": "2011000000",
+     "name": "2011年",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  }
+ ]
+}
