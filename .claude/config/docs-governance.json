@@ -216,6 +216,7 @@
       "severity": "error"
     },
     "untriagedMaxAgeDays": 30,
+    "backlogTargetCards": 200,
     "idPattern": "^[A-Z0-9]+(?:-[A-Z0-9]+)+$",
     "allowedImprovementStatuses": [
       "pending",
