@@ -1281,7 +1281,7 @@ export const ANALYSIS_PREVIEWS: readonly StorefrontProduct[] = [
             "themeKey": "retail-commerce",
             "sectionKey": "retail-market-scale",
             "title": "商業と小売",
-            "sectionTitle": "地域での買い物の市場規模や年間売り上げはどれくらい大きいか",
+            "sectionTitle": "小売・商業の売り上げと売場は、どれくらいの規模か",
             "href": "/themes/retail-commerce#theme-section-retail-market-scale"
           }
         ],
@@ -1303,7 +1303,7 @@ export const ANALYSIS_PREVIEWS: readonly StorefrontProduct[] = [
             "themeKey": "retail-commerce",
             "sectionKey": "retail-market-scale",
             "title": "商業と小売",
-            "sectionTitle": "地域での買い物の市場規模や年間売り上げはどれくらい大きいか",
+            "sectionTitle": "小売・商業の売り上げと売場は、どれくらいの規模か",
             "href": "/themes/retail-commerce#theme-section-retail-market-scale"
           }
         ],
@@ -1325,7 +1325,7 @@ export const ANALYSIS_PREVIEWS: readonly StorefrontProduct[] = [
             "themeKey": "retail-commerce",
             "sectionKey": "retail-market-scale",
             "title": "商業と小売",
-            "sectionTitle": "地域での買い物の市場規模や年間売り上げはどれくらい大きいか",
+            "sectionTitle": "小売・商業の売り上げと売場は、どれくらいの規模か",
             "href": "/themes/retail-commerce#theme-section-retail-market-scale"
           }
         ],
@@ -1491,7 +1491,7 @@ export const ANALYSIS_PREVIEWS: readonly StorefrontProduct[] = [
             "themeKey": "waste-recycling",
             "sectionKey": "waste-disposal",
             "title": "ごみ・リサイクル",
-            "sectionTitle": "ごみの排出・処分量はどこで多いか",
+            "sectionTitle": "この県のごみはどれくらい出て、どれだけ資源になっているか",
             "href": "/themes/waste-recycling#theme-section-waste-disposal"
           }
         ],
@@ -1513,7 +1513,7 @@ export const ANALYSIS_PREVIEWS: readonly StorefrontProduct[] = [
             "themeKey": "waste-recycling",
             "sectionKey": "waste-disposal",
             "title": "ごみ・リサイクル",
-            "sectionTitle": "ごみの排出・処分量はどこで多いか",
+            "sectionTitle": "この県のごみはどれくらい出て、どれだけ資源になっているか",
             "href": "/themes/waste-recycling#theme-section-waste-disposal"
           }
         ],
@@ -1939,7 +1939,7 @@ export const ANALYSIS_PREVIEWS: readonly StorefrontProduct[] = [
             "themeKey": "retail-commerce",
             "sectionKey": "retail-market-scale",
             "title": "商業と小売",
-            "sectionTitle": "地域での買い物の市場規模や年間売り上げはどれくらい大きいか",
+            "sectionTitle": "小売・商業の売り上げと売場は、どれくらいの規模か",
             "href": "/themes/retail-commerce#theme-section-retail-market-scale"
           }
         ],
@@ -1983,7 +1983,7 @@ export const ANALYSIS_PREVIEWS: readonly StorefrontProduct[] = [
             "themeKey": "waste-recycling",
             "sectionKey": "waste-disposal",
             "title": "ごみ・リサイクル",
-            "sectionTitle": "ごみの排出・処分量はどこで多いか",
+            "sectionTitle": "この県のごみはどれくらい出て、どれだけ資源になっているか",
             "href": "/themes/waste-recycling#theme-section-waste-disposal"
           }
         ],

@@ -139,7 +139,10 @@ test('増減タイルは共通のタイル地図で描き、符号付きの値�
   if (card.kind !== 'tile-change') throw new Error('kind');
   const svg = renderTileChangeSvg(card);
   assert.equal((svg.match(/data-area="/g) || []).length, 47);
-  assert.ok(svg.includes('+50.0%') && svg.includes('-50.0%'));
+  // タイルの中には値を出さない (型の文字は 30 以上。入らない値は凡例と合計へ。2026-11-14 オーナー決定・chart-image-copy.md)
+  // 符号付きの値は凡例の区分と合計の行に出る
+  assert.ok(svg.includes('+30.0%以上') && svg.includes('-30.0%未満'));
+  assert.ok(/>[+-]\d+\.\d%</.test(svg));
   assert.ok(svg.includes('47都道府県の合計'));
   assertMinimalChartCopy(svg);
   for (const text of ['stats47', 'あなたの県', '模式図']) assert.ok(!svg.includes(text), text);
