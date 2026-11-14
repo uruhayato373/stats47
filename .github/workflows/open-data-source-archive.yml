@@ -76,7 +76,8 @@ jobs:
           R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
         run: |
-          export CLOUDFLARE_R2_BUCKET_NAME="$(node -p 'require("./packages/types/src/site.json").r2PrivateBucket')"
+          CLOUDFLARE_R2_BUCKET_NAME="$(node -p 'require("./packages/types/src/site.json").r2PrivateBucket')"
+          export CLOUDFLARE_R2_BUCKET_NAME
           node --import tsx .claude/scripts/open-data/lib/publish.mjs
 
       - name: Checkout develop for snapshot commit-back
