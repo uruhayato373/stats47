@@ -2774,6 +2774,7 @@ updated: 2026-11-01
   推測で再生成しない。公開参照asset契約と内容品質gateを各バッチ後に再実行する。
 - **完了条件**: 全公開記事の参照assetが200、must-fix 0、公開gate greenとなり、source lineage不明の図は削除または明示的に保留される。
 - **正典**: `.claude/rules/blog-data-schema.md`
+- **観測 (2026-11-14・develop の CI が落ちる)**: Develop Quality Gate の Catalog Gates (preflight:pr) で「Survey Taxonomy」が `✗ blog coverage 95.73% < 100%` で落ちる (run 43558460412 の a043f19d0 ほか、今日の 8a7e58804・0c08944be でも同じ)。ブログの図 2,279 件のうち 91 件が調査に結び付かない。名指しの先頭は 11-09 に公開した家計調査の記事 (`beer-happoshu-liquor-tax-steps-household-response` の 9 枚、`education-spending-income-quintile-decade` の 5 枚など)。この検査は `--offline` でもブログは公開中の R2 (`app/blog/all.json` と各図の source.json) を読むので、結果がコードではなく R2 の中身で決まり、同じコミットでも通ったり落ちたりする。再現: `npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check`。直すには、91 件の図の source.json に調査 (surveyIds か e-Stat の表 ID) を足して再公開する。あわせて、R2 の状態で CI の合否が変わる作りを、ゲートから外すか週次の監査へ移すかを決める。
 
 ### [CONTENT-PAINPOINT-PUBLISH-01] 悩み起点ブログ5本の公開とSNS展開を完了させる
 
