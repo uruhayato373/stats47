@@ -1,8 +1,13 @@
-name: 🗂️ Backlog Loop Daily (バックログ処理 + 行削除)
+name: 🗂️ Backlog Loop Weekly (バックログ処理 + 行削除)
 
-# .claude/todo のバックログを消化するループ (手動起動のみ。2026-09-27 に日次 cron を廃止)。
+# .claude/todo のバックログを消化するループ (週 1 回・日曜 01:30 JST + 手動)。
+# ファイル名は daily のまま残す: GitHub 側の有効/無効の状態がファイル名に結び付いているため
+# (2026-09-27 に日次を止めて無効化した。再開はオーナーが `gh workflow enable backlog-loop-daily.yml`)。
 #
-#   1. 05 / 01 / 06 をパースしてキューを再構築し、上位 N 件を選ぶ
+#   1. backlog.md をパースしてキューを再構築し、上位 N 件を選ぶ
+#      (対象と並び順の正典は queue-core.cjs: [実行:sweep|機械] を宣言し [待ち:X] の無いカードだけを、
+#       不具合 → 今月の重点領域 → tier → 起票日の古い順 → ID で並べる。選んだ理由は queue の各項目と
+#       このステップのログ (stderr) に出る)
 #   2. Claude Code Base Action (OAuth / sonnet) が分類して処理し、gate を実行して台帳へ記録する
 #   3. 「行削除 ⇔ ledger の gate.pass=true」を決定的に突合する (verify-backlog-run.mjs)
 #   4. リポジトリの静的ゲートを通してから develop へ push する
@@ -21,16 +26,20 @@ name: 🗂️ Backlog Loop Daily (バックログ処理 + 行削除)
 #   (固定費 15 分 + 1 件 12 分) を暫定的に当てている。予算式は
 #   (15 + 2 × 15) × 1.25 = 56 ≤ 60。実測が取れたら見直す。**件数で増やす前にスロットで増やす**
 #   (ai-content が limit 10 で timeout に当たって 0 件になった実測がある)。
-#   枠は JST 01:30 = 16:30 UTC。blog (14:00 UTC + 120 分) の後、ai-content (18:00 UTC) の前。
-#   3 つは同じ Pro / Max の利用枠を共有するので実時間で重ねない。
+#   枠は日曜 JST 01:30 = 土曜 16:30 UTC。土曜の週次レビュー (計測の記録とカードの可否) の後に回す。
+#   Claude を使う他の workflow (quality-suite-weekly = 土曜 01:00 JST 等) と同じ Pro / Max の
+#   利用枠を共有するので実時間で重ねない (機械ガード = backlog-loop-routine.test.cjs)。
 #
 # ★impl-large / indicator-expansion はこの run では着手しない (draft PR が要る)。
 #   prompt が skipped として記録する。skipped は quarantine を増やさないので、
 #   繰り返しても罰されず、attempts が増える分だけキューの後ろへ下がる。
 
 on:
-  # 2026-09-27 オーナー判断で日次の自動実行を止めた。何を処理するかは対話セッションで
-  # 優先順位を見て決める。手動で回すときだけ workflow_dispatch / request ファイルを使う。
+  # 2026-09-27 オーナー判断で日次の自動実行を止めた (優先順位と無関係なカードが上から無人で処理されたため)。
+  # 2026-11-14 に選定を直したうえで週 1 回の再開をオーナーが承認した。定期実行は main の定義で動くので、
+  # この schedule は main に出て、かつ GitHub 側で enable されるまで効かない。
+  schedule:
+    - cron: "30 16 * * 6" # 日曜 01:30 JST (土曜 16:30 UTC)。土曜の週次レビューの後
   # push トリガー (cloud 用): cloud セッションは actions:write が無く dispatch できない (403)。
   # data/backlog-loop-requests.json を develop へ commit すると実行し、request を消費する。
   #   { "limit": 2 }

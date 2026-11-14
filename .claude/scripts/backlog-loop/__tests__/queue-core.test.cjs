@@ -33,10 +33,13 @@ const card = (id, over = {}) => ({
   endLine: 5,
   category: '未分類',
   kind: null,
-  executor: null,
+  // 自動処理の対象は [実行:sweep|機械] の宣言があるカードだけなので、既定は sweep にする
+  executor: 'sweep',
   verify: null,
   filed: null,
   due: null,
+  lane: null,
+  waits: [],
   codex: false,
   wip: false,
   hasTagLine: false,
@@ -116,13 +119,13 @@ test('quarantine 中は理由つきで除外する (黙って消さない)', () 
   assert.match(skipped[0].reason, /quarantine.*3 回連続失敗.*gate 未達/);
 });
 
-test('tier の小さい順 → 試行回数の少ない順 で選ぶ', () => {
+test('同じ tier・同じ起票日なら ID の昇順で決まる (試行回数では並べ替えない)', () => {
   let ledger = emptyL();
-  ({ ledger } = recordAttempt(ledger, { id: 'T1-TRIED', class: 'impl-small', outcome: 'failed', at: AT }, 3));
+  ({ ledger } = recordAttempt(ledger, { id: 'T1-A', class: 'impl-small', outcome: 'failed', at: AT }, 3));
   const entries = [
     card('T2-FRESH', { tier: 'mid' }),
-    card('T1-TRIED', { tier: 'high' }),
-    card('T1-FRESH', { tier: 'high' }),
+    card('T1-B', { tier: 'high' }),
+    card('T1-A', { tier: 'high' }),
   ];
   const { picked } = buildQueue({
     entries,
@@ -131,7 +134,7 @@ test('tier の小さい順 → 試行回数の少ない順 で選ぶ', () => {
     policy: POLICY,
     limit: 3,
   });
-  assert.deepEqual(picked.map((p) => p.id), ['T1-FRESH', 'T1-TRIED', 'T2-FRESH']);
+  assert.deepEqual(picked.map((p) => p.id), ['T1-A', 'T1-B', 'T2-FRESH']);
 });
 
 test('limit は policy の maxItemsPerRun を超えられない (暴走の上限)', () => {
@@ -215,6 +218,7 @@ test('実データでキューが組める (0 件なら配線が壊れている)
 test('executor 未宣言でも本文がローカル端末依存なら needsOwner へ回る', () => {
   const entries = [
     card('LOCAL-01', {
+      executor: null,
       body: '- **前提**: 永続プロファイル `.local/playwright-a8-profile` に保持する。',
     }),
     card('OK-01', {
@@ -273,4 +277,88 @@ test('★[実行:sweep] の明示宣言は local-runtime backstop を通さな�
   });
   assert.deepEqual(picked.map((p) => p.id), ['DECLARED-01']);
   assert.equal(needsOwner.length, 0);
+});
+
+// ── 選定の規則 (2026-11-14。2026-09-27 に「優先順位と無関係なカードが上から無人で処理された」ため日次を止めた) ──
+// 対象 = [実行:sweep|機械] を宣言し、[待ち:X] が無く、[進行中] でも 🟣 でもないカード。
+// 並び = 不具合 → 今月の重点領域 → tier → 起票日の古い順 (無しは最後) → ID。
+
+const run = (entries, extra = {}) =>
+  buildQueue({ entries, ledger: emptyL(), quarantined: new Set(), policy: POLICY, limit: 10, ...extra });
+
+test('★[実行:] を宣言していないカードは本文に問題が無くても拾わない (分類待ちは自動処理しない)', () => {
+  const { picked, skipped } = run([
+    card('UNDECLARED-01', { executor: null }),
+    card('MACHINE-01', { executor: '機械' }),
+    card('SWEEP-01', { executor: 'sweep' }),
+  ]);
+  assert.deepEqual(picked.map((p) => p.id), ['MACHINE-01', 'SWEEP-01']);
+  assert.match(skipped.find((s) => s.id === 'UNDECLARED-01').reason, /実行.*宣言/);
+});
+
+test('★[待ち:X] が 1 つでもあるカードは拾わない (人の待ちは needsOwner・時期/観測は除外)', () => {
+  const { picked, needsOwner, skipped } = run([
+    card('WAIT-APPROVE', { waits: ['承認'] }),
+    card('WAIT-LOGIN', { waits: ['ログイン'] }),
+    card('WAIT-DECIDE', { waits: ['判断'] }),
+    card('WAIT-TIME', { waits: ['時期'] }),
+    card('WAIT-OBS', { waits: ['観測', '承認'] }),
+    card('READY-01'),
+  ]);
+  assert.deepEqual(picked.map((p) => p.id), ['READY-01']);
+  assert.deepEqual(needsOwner.map((n) => n.id).sort(), ['WAIT-APPROVE', 'WAIT-DECIDE', 'WAIT-LOGIN', 'WAIT-OBS']);
+  assert.deepEqual(skipped.map((s) => s.id), ['WAIT-TIME']);
+  for (const row of [...needsOwner, ...skipped]) assert.match(row.reason, /待ち:/);
+});
+
+test('★並び順: 不具合 → 重点領域 → tier → 起票日の古い順 (無しは最後) → ID', () => {
+  const entries = [
+    card('Z-LOW-FOCUS-OLD', { tier: 'low', lane: 'サイト', filed: '2026-01-01' }),
+    card('A-HIGH-OFF', { tier: 'high', lane: 'データ', filed: '2026-01-01' }),
+    card('B-MID-FOCUS-NOFILED', { tier: 'mid', lane: 'サイト' }),
+    card('C-MID-FOCUS-NEW', { tier: 'mid', lane: '商品', filed: '2026-10-01' }),
+    card('D-MID-FOCUS-OLD', { tier: 'mid', lane: 'サイト', filed: '2026-09-01' }),
+    card('E-DEFECT-LOW-OFF', { tier: 'low', kind: '不具合', lane: 'データ' }),
+    card('F-DEFECT-LOW-FOCUS', { tier: 'low', kind: '不具合', lane: 'サイト' }),
+  ];
+  const { ranked } = run(entries, { focusDomains: ['サイト', '商品'] });
+  assert.deepEqual(ranked.map((r) => r.id), [
+    'F-DEFECT-LOW-FOCUS',
+    'E-DEFECT-LOW-OFF',
+    'D-MID-FOCUS-OLD',
+    'C-MID-FOCUS-NEW',
+    'B-MID-FOCUS-NOFILED',
+    'Z-LOW-FOCUS-OLD',
+    'A-HIGH-OFF',
+  ]);
+  // 入力の並びに依存しない (決定的)
+  const again = run([...entries].reverse(), { focusDomains: ['商品', 'サイト'] });
+  assert.deepEqual(again.ranked.map((r) => r.id), ranked.map((r) => r.id));
+});
+
+test('★選んだ理由を各項目に持たせる (どのキーで上に来たかが読める)', () => {
+  const { picked } = run(
+    [
+      card('DEF-01', { tier: 'low', kind: '不具合', lane: 'データ', filed: '2026-08-01' }),
+      card('FOC-01', { tier: 'mid', kind: '改善', lane: 'サイト' }),
+    ],
+    { focusDomains: ['サイト'] },
+  );
+  const [def, foc] = picked;
+  assert.deepEqual(def.selection.keys, { defect: true, focus: false, lane: 'データ', tier: 'low', filed: '2026-08-01' });
+  assert.match(def.selection.reason, /不具合/);
+  assert.match(def.selection.reason, /重点外/);
+  assert.match(def.selection.reason, /2026-08-01/);
+  assert.equal(foc.selection.keys.focus, true);
+  assert.match(foc.selection.reason, /重点\(サイト\)/);
+  assert.match(foc.selection.reason, /起票なし/);
+});
+
+test('★重点領域が読めないときは黙らず queue の出力に警告を出す', () => {
+  const unread = run([card('ONE-01', { lane: 'サイト' })], { focusDomains: null });
+  assert.equal(unread.picked[0].selection.keys.focus, false);
+  assert.ok(unread.warnings.some((w) => /重点領域/.test(w)), '重点領域を読めないのに警告が無い');
+
+  const read = run([card('ONE-01', { lane: 'サイト' })], { focusDomains: ['サイト'] });
+  assert.deepEqual(read.warnings, []);
 });

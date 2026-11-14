@@ -26,8 +26,26 @@
  */
 const NEEDS_OWNER_EXECUTORS = new Set(['対話', 'ユーザー', 'windows', '別環境']);
 
+/**
+ * 自動処理が単独で完了まで持てる executor (todo-standards.md §3)。**この宣言があるカードだけ**を拾う。
+ * 未宣言 (分類待ち) まで拾っていた頃、優先順位と無関係なカードが上から無人で処理され、
+ * 2026-09-27 にオーナーが日次実行を止めた。宣言は人間が「無人で回してよい」と決めた印。
+ */
+const AUTO_EXECUTORS = new Set(['sweep', '機械']);
+
+/**
+ * `[待ち:X]` のうち人の手が要るもの (needsOwner へ surface する)。それ以外 (時期・観測) は
+ * 置き場違い (annual.md / improvements.md) なので除外だけする。語彙の正典は backlog-lib の WAITS。
+ */
+const OWNER_WAITS = new Set(['承認', '判断', 'ログイン']);
+
 /** tier の実行優先順 (backlog-lib の TIER_ORDER と同義。🟣 hold は eligibility で弾く) */
 const TIER_RANK = { high: 0, mid: 1, low: 2, hold: 9 };
+const TIER_LABEL = { high: '🔴', mid: '🟡', low: '🟢', hold: '🟣' };
+
+/** 選定の第 1 キー (todo-standards.md §4「不具合が第 1 キー」) */
+const DEFECT_KIND = '不具合';
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 
 const { localRuntimeSignals, localRuntimeReason } = require('./local-runtime-core.cjs');
 
@@ -47,6 +65,9 @@ function preClassify(entry) {
 
 /**
  * 処理対象になりうるか。理由つきで返す (除外理由を出力に残すため)。
+ *
+ * 対象 = `[実行:sweep|機械]` を宣言し、`[待ち:X]` が無く、`[進行中]` でも 🟣 でもないカード。
+ * 判定順は「触ってはいけないもの → 人の待ち → 機械の都合」。
  */
 function eligibility(entry, { ledger, quarantined }) {
   const id = entry.id;
@@ -62,25 +83,38 @@ function eligibility(entry, { ledger, quarantined }) {
         : `実行:${entry.executor} (自動処理の対象外)`;
     return { eligible: false, reason: why, class: 'needs-owner' };
   }
+  const waits = Array.isArray(entry.waits) ? entry.waits : [];
+  if (waits.length > 0) {
+    const label = waits.map((w) => `待ち:${w}`).join(' ');
+    return waits.some((w) => OWNER_WAITS.has(w))
+      ? { eligible: false, reason: `[${label}] (人の判断・操作を待っている)`, class: 'needs-owner' }
+      : { eligible: false, reason: `[${label}] (時期・観測待ちは annual.md / improvements.md の置き場)` };
+  }
   if (!id) {
     // ledger は ID で結び付けるので、ID の無いカードは処理できない (分類待ちとして surface)
     return { eligible: false, reason: 'ID なし (todo-curator が採番するまで処理対象外)' };
   }
-  // executor 未宣言のカードは、本文がローカル端末依存を名指ししていれば CI では閉じられない。
-  // 拾わせると 3 回失敗 → quarantine で日次枠を燃やすだけなので、ここで needs-owner へ回す
-  // (ASP-CONTINUITY-01 / PERF-LOCAL-NAV-01 で実際に踏んだ。判定の根拠は local-runtime-core.cjs)。
-  // **[実行:sweep|機械] の明示宣言があれば backstop を通さない** — 宣言は人間の判断で、
-  // 本文に「Playwright」等の語が引用されているだけのカードを恒久に弾かない override になる。
-  if (!entry.executor) {
-    const localSignals = localRuntimeSignals(entry.body);
-    if (localSignals.length > 0) {
-      return {
-        eligible: false,
-        reason: localRuntimeReason(localSignals),
-        class: 'needs-owner',
-        localRuntimeSignals: localSignals.map((s) => s.name),
-      };
+  if (!entry.executor || !AUTO_EXECUTORS.has(entry.executor)) {
+    // executor 未宣言のカードは、本文がローカル端末依存を名指ししていれば needs-owner へ回して人に見せる
+    // (ASP-CONTINUITY-01 / PERF-LOCAL-NAV-01 で実際に踏んだ。判定の根拠は local-runtime-core.cjs)。
+    // **[実行:sweep|機械] の明示宣言があれば backstop を通さない** — 宣言は人間の判断で、
+    // 本文に「Playwright」等の語が引用されているだけのカードを恒久に弾かない override になる。
+    if (!entry.executor) {
+      const localSignals = localRuntimeSignals(entry.body);
+      if (localSignals.length > 0) {
+        return {
+          eligible: false,
+          reason: localRuntimeReason(localSignals),
+          class: 'needs-owner',
+          localRuntimeSignals: localSignals.map((s) => s.name),
+        };
+      }
     }
+    const declared = entry.executor ? `実行:${entry.executor}` : '分類待ち';
+    return {
+      eligible: false,
+      reason: `[実行:sweep|機械] の宣言なし (${declared})。無人処理は宣言したカードだけ`,
+    };
   }
   if (quarantined.has(id)) {
     const q = ledger.items?.[id]?.quarantine;
@@ -93,15 +127,60 @@ function eligibility(entry, { ledger, quarantined }) {
 }
 
 /**
- * 優先度スコア。小さいほど先。
+ * 選定キー。並び順の正典は todo-standards.md §4 (不具合が第 1 キー・tier が第 2 キー) に、
+ * 今月の重点領域 (monthly.md の focus_domains) を tier の前に挟んだもの (2026-11-14 オーナー承認)。
  *
- * tier を第一基準にするのは todo-standards.md の 🔴>🟡>🟢 に従うため。同 tier 内では
- * **試行回数が少ないものを先**にする (何度も失敗しているものが枠を占有し続けるのを防ぐ)。
+ * 失敗を繰り返すカードが枠を占有し続ける問題は、並び順ではなく quarantine
+ * (連続失敗 `quarantineThreshold` 回で除外) が受け持つ。
+ *
+ * @param {object} entry
+ * @param {Set<string>} focusSet 今月の重点領域 (表示名。カードの [領域:X] と同じ語彙)
  */
-function priorityOf(entry, ledger) {
-  const tier = TIER_RANK[entry?.tier] ?? 9;
-  const attempts = ledger.items?.[entry.id]?.attempts?.length ?? 0;
-  return { tier, attempts };
+function selectionKeys(entry, focusSet) {
+  const filed = typeof entry?.filed === 'string' && ISO_DATE.test(entry.filed) ? entry.filed : null;
+  return {
+    defect: entry?.kind === DEFECT_KIND,
+    focus: Boolean(entry?.lane && focusSet.has(entry.lane)),
+    lane: entry?.lane ?? null,
+    tier: entry?.tier ?? null,
+    filed,
+  };
+}
+
+/**
+ * 小さいほど先。第 1 不具合 → 第 2 重点領域 → 第 3 tier → 第 4 起票日の古い順 (無しは最後) → ID 昇順。
+ * @param {{id: string, keys: ReturnType<typeof selectionKeys>}} a
+ * @param {{id: string, keys: ReturnType<typeof selectionKeys>}} b
+ */
+function compareSelection(a, b) {
+  const ka = a.keys;
+  const kb = b.keys;
+  if (ka.defect !== kb.defect) return ka.defect ? -1 : 1;
+  if (ka.focus !== kb.focus) return ka.focus ? -1 : 1;
+  const ta = TIER_RANK[ka.tier ?? ''] ?? 9;
+  const tb = TIER_RANK[kb.tier ?? ''] ?? 9;
+  if (ta !== tb) return ta - tb;
+  if (ka.filed !== kb.filed) {
+    if (ka.filed === null) return 1;
+    if (kb.filed === null) return -1;
+    return ka.filed < kb.filed ? -1 : 1;
+  }
+  // localeCompare は環境の照合順に依存するので、決定的な符号単位の比較にする
+  if (a.id === b.id) return 0;
+  return a.id < b.id ? -1 : 1;
+}
+
+/**
+ * 人が読む 1 行。どのキーで上に来たかを 4 キーぶん並べる (run のログと ledger の evidence に貼る)。
+ * @param {ReturnType<typeof selectionKeys>} keys
+ * @param {string|null|undefined} kind
+ */
+function selectionReason(keys, kind) {
+  const k1 = keys.defect ? '[1]不具合' : `[1]${kind ?? '種類なし'}`;
+  const k2 = keys.focus ? `[2]重点(${keys.lane})` : `[2]重点外(${keys.lane ?? '領域なし'})`;
+  const k3 = `[3]${TIER_LABEL[keys.tier ?? ''] ?? '?'}`;
+  const k4 = keys.filed ? `[4]起票${keys.filed}` : '[4]起票なし';
+  return `${k1} ${k2} ${k3} ${k4}`;
 }
 
 /**
@@ -162,9 +241,11 @@ function escalate(policy, className, ledger, id) {
  * @param {Set<string>} params.quarantined
  * @param {object} params.policy backlog-routing-policy.json
  * @param {number} [params.limit] 省略時 policy.limits.itemsPerRun
- * @returns {{picked: Array, skipped: Array, needsOwner: Array}}
+ * @param {string[]|null} [params.focusDomains] 今月の重点領域。null・空は「読めなかった」として warnings に出す
+ * @returns {{picked: Array, ranked: Array, skipped: Array, needsOwner: Array, warnings: string[], focusDomains: string[]|null}}
+ *   ranked は対象になった全カードの並び (picked はその先頭 limit 件)
  */
-function buildQueue({ entries, ledger, quarantined, policy, limit }) {
+function buildQueue({ entries, ledger, quarantined, policy, limit, focusDomains = null }) {
   const max = Number.isFinite(limit) ? limit : (policy?.limits?.itemsPerRun ?? 2);
   const hardMax = policy?.limits?.maxItemsPerRun ?? 6;
   const effectiveMax = Math.min(max, hardMax);
@@ -185,15 +266,32 @@ function buildQueue({ entries, ledger, quarantined, policy, limit }) {
     candidates.push(entry);
   }
 
-  candidates.sort((a, b) => {
-    const pa = priorityOf(a, ledger);
-    const pb = priorityOf(b, ledger);
-    if (pa.tier !== pb.tier) return pa.tier - pb.tier;
-    if (pa.attempts !== pb.attempts) return pa.attempts - pb.attempts;
-    return a.id.localeCompare(b.id);
-  });
+  const hasFocus = Array.isArray(focusDomains) && focusDomains.length > 0;
+  const focusSet = new Set(hasFocus ? focusDomains : []);
+  const warnings = [];
+  if (!hasFocus) {
+    warnings.push(
+      '今月の重点領域 (monthly.md の focus_domains) を読めなかったので、全カードを重点外として並べた (第 2 キーが効いていない)',
+    );
+  }
 
-  const picked = candidates.slice(0, effectiveMax).map((entry) => {
+  const ordered = candidates
+    .map((entry) => ({ entry, id: entry.id, keys: selectionKeys(entry, focusSet) }))
+    .sort(compareSelection)
+    .map(({ entry, keys }) => ({ entry, selection: { keys, reason: selectionReason(keys, entry.kind) } }));
+
+  const ranked = ordered.map(({ entry, selection }) => ({
+    id: entry.id,
+    title: entry.title,
+    kind: entry.kind ?? null,
+    tier: entry.tier ?? null,
+    lane: entry.lane ?? null,
+    filed: selection.keys.filed,
+    executor: entry.executor ?? null,
+    reason: selection.reason,
+  }));
+
+  const picked = ordered.slice(0, effectiveMax).map(({ entry, selection }) => {
     const known = ledger.items?.[entry.id]?.class ?? null;
     // 既知 class があれば escalation を効かせる。無ければモデルが分類する (route は暫定)
     const route = known
@@ -208,22 +306,35 @@ function buildQueue({ entries, ledger, quarantined, policy, limit }) {
       endLine: entry.endLine,
       tier: entry.tier ?? null,
       kind: entry.kind ?? null,
+      lane: entry.lane ?? null,
       executor: entry.executor ?? null,
       verify: entry.verify ?? null,
       knownClass: known,
       attempts: ledger.items?.[entry.id]?.attempts?.length ?? 0,
       route,
+      selection,
       body: entry.body,
     };
   });
 
-  return { picked, skipped, needsOwner };
+  return {
+    picked,
+    ranked,
+    skipped,
+    needsOwner,
+    warnings,
+    focusDomains: Array.isArray(focusDomains) ? [...focusDomains] : null,
+  };
 }
 
 module.exports = {
+  AUTO_EXECUTORS,
+  OWNER_WAITS,
   preClassify,
   eligibility,
-  priorityOf,
+  selectionKeys,
+  compareSelection,
+  selectionReason,
   routeFor,
   escalate,
   buildQueue,
