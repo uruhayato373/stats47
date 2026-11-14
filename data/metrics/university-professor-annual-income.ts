@@ -1,11 +1,12 @@
 import { DEFAULT_METRIC_PRESENTATION } from "./defaults/presentation";
+import { WAGE_STRUCTURE_COVERAGE_NOTE, WAGE_STRUCTURE_SAMPLE_COUNT } from "./defaults/wage-structure-coverage";
 import type { MetricConfig } from "../../packages/data-configs/src/types";
 
 export const universityProfessorAnnualIncome: MetricConfig = {
   "key": "university-professor-annual-income",
   "title": "大学教授の平均年収",
   "description": "賃金構造基本統計調査の一般労働者・男女計の大学教授（高等専門学校を含む）について、6月のきまって支給する現金給与額を12倍し、前年1年間の賞与その他特別給与額を加えた推計年収。",
-  "note": "高等専門学校の教授を含み、大学准教授・講師・助教は別職種。6月の月例給与を年換算した税・社会保険料等控除前の標本平均で、個人の実年収ではない。",
+  "note": `高等専門学校の教授を含み、大学准教授・講師・助教は別職種。6月の月例給与を年換算した税・社会保険料等控除前の標本平均で、個人の実年収ではない。${WAGE_STRUCTURE_COVERAGE_NOTE}`,
   "unit": "万円",
   "category": "educationsports",
   "source": {
@@ -19,6 +20,7 @@ export const universityProfessorAnnualIncome: MetricConfig = {
       { "cdTab": "08,40", "factor": 12 },
       { "cdTab": "12,44", "factor": 1 },
     ],
+    "sampleCount": WAGE_STRUCTURE_SAMPLE_COUNT,
     "cdCat02": "1196",
     "displayName": "賃金構造基本統計調査",
     "url": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",

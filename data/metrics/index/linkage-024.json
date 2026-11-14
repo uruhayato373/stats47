@@ -3447,10 +3447,15 @@
               "factor": 1
             }
           ],
-          "valueScale": 0.1
+          "valueScale": 0.1,
+          "sampleCount": {
+            "cdTab": "13,45",
+            "factor": 10,
+            "minimum": 10
+          }
         },
         "derived": true,
-        "configHash": "5b7d2783470e7c30"
+        "configHash": "0759c7b6f3e6efc9"
       },
       "dependencies": [],
       "normalizationDependencies": [
