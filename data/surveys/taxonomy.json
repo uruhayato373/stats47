@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-14T08:10:08.477Z",
+  "generatedAt": "2026-11-14T08:35:50.270Z",
   "masterSurveyCount": 152,
   "ranking": {
     "metrics": 2750,
@@ -775,71 +775,15 @@
   "blog": {
     "articles": 861,
     "charts": 2280,
-    "applicableCharts": 2132,
+    "applicableCharts": 2131,
     "byStatus": {
-      "resolved": 2121,
-      "unresolved": 11,
-      "not-applicable": 148,
+      "resolved": 2131,
+      "unresolved": 0,
+      "not-applicable": 149,
       "missing-lineage": 0
     },
-    "coveragePct": 99.48,
-    "unresolvedCharts": [
-      {
-        "slug": "beer-happoshu-liquor-tax-steps-household-response",
-        "base": "liquor-tax-steps-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "kakei-number-one-city-rotation",
-        "base": "leader-count-bars",
-        "status": "unresolved"
-      },
-      {
-        "slug": "kakei-number-one-city-rotation",
-        "base": "gap-churn-bars",
-        "status": "unresolved"
-      },
-      {
-        "slug": "kakei-number-one-city-rotation",
-        "base": "category-churn-bars",
-        "status": "unresolved"
-      },
-      {
-        "slug": "kakei-number-one-city-rotation",
-        "base": "stability-bars",
-        "status": "unresolved"
-      },
-      {
-        "slug": "kakei-number-one-city-rotation",
-        "base": "firmness-bars",
-        "status": "unresolved"
-      },
-      {
-        "slug": "kakei-number-one-city-rotation",
-        "base": "rank-agreement-bars",
-        "status": "unresolved"
-      },
-      {
-        "slug": "kakei-number-one-city-rotation",
-        "base": "yearly-churn-lines",
-        "status": "unresolved"
-      },
-      {
-        "slug": "kakei-number-one-city-rotation",
-        "base": "new-leader-prior-bars",
-        "status": "unresolved"
-      },
-      {
-        "slug": "kakei-number-one-city-rotation",
-        "base": "city-leader-bars",
-        "status": "unresolved"
-      },
-      {
-        "slug": "kakei-number-one-city-rotation",
-        "base": "case-gap-bars",
-        "status": "unresolved"
-      }
-    ],
+    "coveragePct": 100,
+    "unresolvedCharts": [],
     "snapshotSchemaVersion": 2,
     "dataSources": {
       "legacySectionArticles": [
@@ -896,84 +840,8 @@
       "sourcelessChartArticles": [],
       "snapshotSourcesMissingArticles": []
     },
-    "snapshotLineageMissingArticles": [
-      {
-        "slug": "education-spending-income-quintile-decade",
-        "surveyIds": [
-          "kakei-chousa",
-          "school-basic-survey"
-        ]
-      },
-      {
-        "slug": "engel-coefficient-living-standard-myth",
-        "surveyIds": [
-          "kakei-chousa"
-        ]
-      },
-      {
-        "slug": "household-spending-seasons-and-tax-hike-swings",
-        "surveyIds": [
-          "kakei-chousa"
-        ]
-      },
-      {
-        "slug": "income-quintile-high-income-sales-check",
-        "surveyIds": [
-          "kakei-chousa"
-        ]
-      },
-      {
-        "slug": "income-quintile-share-shift",
-        "surveyIds": [
-          "kakei-chousa"
-        ]
-      },
-      {
-        "slug": "single-household-spending-differences",
-        "surveyIds": [
-          "kakei-chousa"
-        ]
-      }
-    ],
-    "snapshotIndexMissingArticles": [
-      {
-        "slug": "education-spending-income-quintile-decade",
-        "surveyIds": [
-          "kakei-chousa",
-          "school-basic-survey"
-        ]
-      },
-      {
-        "slug": "engel-coefficient-living-standard-myth",
-        "surveyIds": [
-          "kakei-chousa"
-        ]
-      },
-      {
-        "slug": "household-spending-seasons-and-tax-hike-swings",
-        "surveyIds": [
-          "kakei-chousa"
-        ]
-      },
-      {
-        "slug": "income-quintile-high-income-sales-check",
-        "surveyIds": [
-          "kakei-chousa"
-        ]
-      },
-      {
-        "slug": "income-quintile-share-shift",
-        "surveyIds": [
-          "kakei-chousa"
-        ]
-      },
-      {
-        "slug": "single-household-spending-differences",
-        "surveyIds": [
-          "kakei-chousa"
-        ]
-      }
-    ],
+    "snapshotLineageMissingArticles": [],
+    "snapshotIndexMissingArticles": [],
     "perSurveyBlogs": {
       "academic-achievement-survey": [
         "academic-achievement-test-prefecture-ranking",
