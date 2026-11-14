@@ -203,10 +203,17 @@ function readLedger<T>(file: string, schema: object): T | undefined {
 }
 const recipes = readLedger<{ recipes: OpenDataFetchRecipe[] }>(path.join(root, datasetPath("open-data.fetch-recipes")), recipeSchema)?.recipes ?? [];
 const recipeIds = new Set<string>();
+const recipeUrlOwners = new Map<string, string>();
 for (const recipe of recipes) {
   if (!datasetIds.has(recipe.datasetId)) errors.push(`recipe: 未知の datasetId ${recipe.datasetId}`);
   if (recipeIds.has(recipe.datasetId)) errors.push(`recipe: 重複 datasetId ${recipe.datasetId}`);
   recipeIds.add(recipe.datasetId);
+  const urls = recipe.fetch.type === "http-file" ? recipe.fetch.urls : recipe.fetch.type === "http-index" ? [recipe.fetch.indexUrl] : [];
+  for (const url of urls) {
+    const owner = recipeUrlOwners.get(url);
+    if (owner && owner !== recipe.datasetId) errors.push(`Duplicate recipe URL: ${owner} / ${recipe.datasetId}: ${url}`);
+    recipeUrlOwners.set(url, recipe.datasetId);
+  }
   const dataset = OPEN_DATASETS.find((d) => d.id === recipe.datasetId);
   if (recipe.fetch.type !== "skip" && recipe.version === "latest-published-at" && !dataset?.latestPublishedAt) errors.push(`recipe:${recipe.datasetId}: latestPublishedAt がありません`);
   try {

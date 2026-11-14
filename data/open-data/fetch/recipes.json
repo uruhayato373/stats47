@@ -57,7 +57,1425 @@
       "fetch": {
         "type": "skip",
         "reason": "needs-api-key",
-        "note": "API キーの運用を決めるまで取得しない。"
+        "note": "2026-11-14 確認: 公式API手順で XIT001 と Ocp-Apim-Subscription-Key ヘッダーを確認。現行 api-paged は Bearer のみで認証を表現できない。登録先 https://www.reinfolib.mlit.go.jp/api/request/ 。必要secretは OPEN_DATA_REINFOLIB_API_KEY。 確認URL: https://www.reinfolib.mlit.go.jp/help/apiManual/xit001/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mhlw-medical-dental-clinics",
+      "fetch": {
+        "type": "http-file",
+        "urls": [
+          "https://www.mhlw.go.jp/content/11121000/03-1_dental_facility_info_20260601.csv.zip"
+        ]
+      },
+      "version": "latest-published-at"
+    },
+    {
+      "datasetId": "mhlw-medical-maternity-homes",
+      "fetch": {
+        "type": "http-file",
+        "urls": [
+          "https://www.mhlw.go.jp/content/11121000/04_maternity_home_20260601.csv.zip"
+        ]
+      },
+      "version": "latest-published-at"
+    },
+    {
+      "datasetId": "mhlw-medical-pharmacies",
+      "fetch": {
+        "type": "http-file",
+        "urls": [
+          "https://www.mhlw.go.jp/content/11121000/05_pharmacy_20260601.csv.zip"
+        ]
+      },
+      "version": "latest-published-at"
+    },
+    {
+      "datasetId": "reinfolib-municipality-list",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式API手順で XIT002 と Ocp-Apim-Subscription-Key ヘッダーを確認。現行 api-paged は Bearer のみで認証を表現できない。登録先 https://www.reinfolib.mlit.go.jp/api/request/ 。必要secretは OPEN_DATA_REINFOLIB_API_KEY。 確認URL: https://www.reinfolib.mlit.go.jp/help/apiManual/xit002/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "reinfolib-appraisal-reports",
+      "fetch": {
+        "type": "skip",
+        "reason": "needs-api-key",
+        "note": "2026-11-14 確認: 公式API手順で XCT001 と Ocp-Apim-Subscription-Key ヘッダーを確認。CSV配布画面 https://www.reinfolib.mlit.go.jp/landPrices/realEstateAppraisalReport/csv/ も読んだが静的な本体リンクなし。現行 api-paged は Bearer のみ。登録先 https://www.reinfolib.mlit.go.jp/api/request/ 。必要secretは OPEN_DATA_REINFOLIB_API_KEY。 確認URL: https://www.reinfolib.mlit.go.jp/help/apiManual/xct001/"
+      },
+      "version": "latest-published-at"
+    },
+    {
+      "datasetId": "reinfolib-price-point-tiles",
+      "fetch": {
+        "type": "skip",
+        "reason": "tile-service",
+        "note": "地図タイル配信のため、オーナー決定により取得対象外。"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "reinfolib-land-price-point-tiles",
+      "fetch": {
+        "type": "skip",
+        "reason": "tile-service",
+        "note": "地図タイル配信のため、オーナー決定により取得対象外。"
+      },
+      "version": "latest-published-at"
+    },
+    {
+      "datasetId": "reinfolib-urban-planning-tiles",
+      "fetch": {
+        "type": "skip",
+        "reason": "tile-service",
+        "note": "地図タイル配信のため、オーナー決定により取得対象外。"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "reinfolib-fire-prevention-tiles",
+      "fetch": {
+        "type": "skip",
+        "reason": "tile-service",
+        "note": "地図タイル配信のため、オーナー決定により取得対象外。"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "reinfolib-future-population-mesh-tiles",
+      "fetch": {
+        "type": "skip",
+        "reason": "tile-service",
+        "note": "地図タイル配信のため、オーナー決定により取得対象外。"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "reinfolib-disaster-risk-area-tiles",
+      "fetch": {
+        "type": "skip",
+        "reason": "tile-service",
+        "note": "地図タイル配信のため、オーナー決定により取得対象外。"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "reinfolib-large-fill-land-tiles",
+      "fetch": {
+        "type": "skip",
+        "reason": "tile-service",
+        "note": "地図タイル配信のため、オーナー決定により取得対象外。"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "reinfolib-did-tiles",
+      "fetch": {
+        "type": "skip",
+        "reason": "tile-service",
+        "note": "地図タイル配信のため、オーナー決定により取得対象外。"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-nlni-ksj",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-dpf-statistical-data",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-dpf-area-data",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-ipf",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-msil",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-dhb",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-hwq",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-ffd",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-qol",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-gtfs",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-rdpf",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-rsdb",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-mlit-plateau",
+      "fetch": {
+        "type": "skip",
+        "reason": "huge",
+        "note": "3D 都市モデル・ラスタはオーナー決定により取得対象外。"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-rtc",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-ngi",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-ndm",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-sip4d",
+      "fetch": {
+        "type": "skip",
+        "reason": "tile-service",
+        "note": "地図タイル配信のため、オーナー決定により取得対象外。"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-dimaps",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-lpfs",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-crtc",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-alpc",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-ntrack",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-psc",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-cyport",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-karte",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-mcc",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-nvpf",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-mms",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-imm",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-jyubunpc",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-kkd",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-nxc",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-tcd",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-cals-fukushima",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-dobox",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-dpf-sample",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式landingをcurlで確認したがHTTP 403 Forbidden。データ本体・認証・ページング仕様は確認できず、APIを推測して登録しない。 確認URL: https://www.mlit-data.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "gsi-hazard-flood-tiles",
+      "fetch": {
+        "type": "skip",
+        "reason": "tile-service",
+        "note": "地図タイル配信のため、オーナー決定により取得対象外。"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "gsi-hazard-landslide-tiles",
+      "fetch": {
+        "type": "skip",
+        "reason": "tile-service",
+        "note": "地図タイル配信のため、オーナー決定により取得対象外。"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "gsi-hazard-tsunami-tiles",
+      "fetch": {
+        "type": "skip",
+        "reason": "tile-service",
+        "note": "地図タイル配信のため、オーナー決定により取得対象外。"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "gsi-hazard-high-tide-tiles",
+      "fetch": {
+        "type": "skip",
+        "reason": "tile-service",
+        "note": "地図タイル配信のため、オーナー決定により取得対象外。"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "gsi-evacuation-sites",
+      "fetch": {
+        "type": "http-file",
+        "urls": [
+          "https://hinanmap.gsi.go.jp/hinanjocp/defaultFtpData/csv/mergeFromCity_2.csv"
+        ]
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "ods-public-facilities",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式の自治体標準オープンデータセット配布ページをcurlで確認。掲載は定義書・フォーマット類で、この台帳に対応する自治体実データ本体リンクは確認できなかった。定義書を原本として登録しない。 確認URL: https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "ods-cultural-properties",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式の自治体標準オープンデータセット配布ページをcurlで確認。掲載は定義書・フォーマット類で、この台帳に対応する自治体実データ本体リンクは確認できなかった。定義書を原本として登録しない。 確認URL: https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "ods-evacuation-spaces",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式の自治体標準オープンデータセット配布ページをcurlで確認。掲載は定義書・フォーマット類で、この台帳に対応する自治体実データ本体リンクは確認できなかった。定義書を原本として登録しない。 確認URL: https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "ods-population-by-district-age",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式の自治体標準オープンデータセット配布ページをcurlで確認。掲載は定義書・フォーマット類で、この台帳に対応する自治体実データ本体リンクは確認できなかった。定義書を原本として登録しない。 確認URL: https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "ods-preschools",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式の自治体標準オープンデータセット配布ページをcurlで確認。掲載は定義書・フォーマット類で、この台帳に対応する自治体実データ本体リンクは確認できなかった。定義書を原本として登録しない。 確認URL: https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "ods-open-data-list",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式の自治体標準オープンデータセット配布ページをcurlで確認。掲載は定義書・フォーマット類で、この台帳に対応する自治体実データ本体リンクは確認できなかった。定義書を原本として登録しない。 確認URL: https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "ods-public-wireless-lan",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式の自治体標準オープンデータセット配布ページをcurlで確認。掲載は定義書・フォーマット類で、この台帳に対応する自治体実データ本体リンクは確認できなかった。定義書を原本として登録しない。 確認URL: https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "ods-aed-locations",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式の自治体標準オープンデータセット配布ページをcurlで確認。掲載は定義書・フォーマット類で、この台帳に対応する自治体実データ本体リンクは確認できなかった。定義書を原本として登録しない。 確認URL: https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "ods-care-services",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式の自治体標準オープンデータセット配布ページをcurlで確認。掲載は定義書・フォーマット類で、この台帳に対応する自治体実データ本体リンクは確認できなかった。定義書を原本として登録しない。 確認URL: https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "ods-hospitals",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式の自治体標準オープンデータセット配布ページをcurlで確認。掲載は定義書・フォーマット類で、この台帳に対応する自治体実データ本体リンクは確認できなかった。定義書を原本として登録しない。 確認URL: https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "ods-tourism-facilities",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式の自治体標準オープンデータセット配布ページをcurlで確認。掲載は定義書・フォーマット類で、この台帳に対応する自治体実データ本体リンクは確認できなかった。定義書を原本として登録しない。 確認URL: https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "ods-events",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式の自治体標準オープンデータセット配布ページをcurlで確認。掲載は定義書・フォーマット類で、この台帳に対応する自治体実データ本体リンクは確認できなかった。定義書を原本として登録しない。 確認URL: https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "ods-public-toilets",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式の自治体標準オープンデータセット配布ページをcurlで確認。掲載は定義書・フォーマット類で、この台帳に対応する自治体実データ本体リンクは確認できなかった。定義書を原本として登録しない。 確認URL: https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "ods-fire-hydrants",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式の自治体標準オープンデータセット配布ページをcurlで確認。掲載は定義書・フォーマット類で、この台帳に対応する自治体実データ本体リンクは確認できなかった。定義書を原本として登録しない。 確認URL: https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "ods-food-business-permits",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式の自治体標準オープンデータセット配布ページをcurlで確認。掲載は定義書・フォーマット類で、この台帳に対応する自治体実データ本体リンクは確認できなかった。定義書を原本として登録しない。 確認URL: https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "ods-school-lunch-menus",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式の自治体標準オープンデータセット配布ページをcurlで確認。掲載は定義書・フォーマット類で、この台帳に対応する自治体実データ本体リンクは確認できなかった。定義書を原本として登録しない。 確認URL: https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "ods-school-districts",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式の自治体標準オープンデータセット配布ページをcurlで確認。掲載は定義書・フォーマット類で、この台帳に対応する自治体実データ本体リンクは確認できなかった。定義書を原本として登録しない。 確認URL: https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "ods-benefit-programs",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式の自治体標準オープンデータセット配布ページをcurlで確認。掲載は定義書・フォーマット類で、この台帳に対応する自治体実データ本体リンクは確認できなかった。定義書を原本として登録しない。 確認URL: https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "ods-table-c-datasets",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式の自治体標準オープンデータセット配布ページをcurlで確認。掲載は定義書・フォーマット類で、この台帳に対応する自治体実データ本体リンクは確認できなかった。定義書を原本として登録しない。 確認URL: https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "ods-table-d-datasets",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式の自治体標準オープンデータセット配布ページをcurlで確認。掲載は定義書・フォーマット類で、この台帳に対応する自治体実データ本体リンクは確認できなかった。定義書を原本として登録しない。 確認URL: https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "maff-shuraku-card",
+      "fetch": {
+        "type": "http-index",
+        "indexUrl": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/sa_2025.html",
+        "linkPattern": "/SA[0-9]+_2025_2025_[0-9]+\\.xlsx$",
+        "maxFiles": 70
+      },
+      "version": "2025"
+    },
+    {
+      "datasetId": "maff-fude-polygons",
+      "fetch": {
+        "type": "skip",
+        "reason": "huge",
+        "note": "2026-11-14 確認: https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/mb/index.html に全国47都道府県の204分割ZIPを確認。curl HEADで203ファイルまでのContent-Length合計が5,379,021,780 bytesとなり5GiBも超過したため、残り1ファイルと本体は取得せず停止。"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "maff-shuraku-boundaries",
+      "fetch": {
+        "type": "http-index",
+        "indexUrl": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/index.html",
+        "linkPattern": "/MA0001_2025_2025_[0-9]{2}\\.zip$",
+        "maxFiles": 47
+      },
+      "version": "2025"
+    },
+    {
+      "datasetId": "jflec-financial-literacy-survey-prefecture",
+      "fetch": {
+        "type": "http-file",
+        "urls": [
+          "https://j-flec.go.jp/wpimages/uploads/25lite_toukei.xlsx"
+        ]
+      },
+      "version": "latest-published-at"
+    },
+    {
+      "datasetId": "nier-gakuryoku-achievement",
+      "fetch": {
+        "type": "http-file",
+        "urls": [
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/01_hokkaido/01m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/01_hokkaido/01p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/02_aomori/02m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/02_aomori/02p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/03_iwate/03m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/03_iwate/03p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/04_miyagi/04m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/04_miyagi/04p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/05_akita/05m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/05_akita/05p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/06_yamagata/06m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/06_yamagata/06p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/07_fukushima/07m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/07_fukushima/07p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/08_ibaraki/08m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/08_ibaraki/08p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/09_tochigi/09m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/09_tochigi/09p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/10_gunma/10m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/10_gunma/10p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/11_saitama/11m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/11_saitama/11p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/12_chiba/12m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/12_chiba/12p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/13_tokyo/13m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/13_tokyo/13p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/14_kanagawa/14m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/14_kanagawa/14p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/15_niigata/15m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/15_niigata/15p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/16_toyama/16m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/16_toyama/16p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/17_ishikawa/17m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/17_ishikawa/17p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/18_fukui/18m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/18_fukui/18p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/19_yamanashi/19m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/19_yamanashi/19p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/20_nagano/20m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/20_nagano/20p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/21_gifu/21m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/21_gifu/21p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/22_shizuoka/22m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/22_shizuoka/22p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/23_aichi/23m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/23_aichi/23p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/24_mie/24m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/24_mie/24p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/25_shiga/25m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/25_shiga/25p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/26_kyoto/26m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/26_kyoto/26p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/27_osaka/27m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/27_osaka/27p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/28_hyougo/28m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/28_hyougo/28p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/29_nara/29m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/29_nara/29p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/30_wakayama/30m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/30_wakayama/30p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/31_tottori/31m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/31_tottori/31p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/32_shimane/32m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/32_shimane/32p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/33_okayama/33m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/33_okayama/33p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/34_hiroshima/34m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/34_hiroshima/34p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/35_yamaguchi/35m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/35_yamaguchi/35p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/36_tokushima/36m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/36_tokushima/36p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/37_kagawa/37m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/37_kagawa/37p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/38_ehime/38m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/38_ehime/38p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/39_kouchi/39m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/39_kouchi/39p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/40_fukuoka/40m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/40_fukuoka/40p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/41_saga/41m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/41_saga/41p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/42_nagasaki/42m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/42_nagasaki/42p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/43_kumamoto/43m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/43_kumamoto/43p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/44_ohita/44m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/44_ohita/44p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/45_miyazaki/45m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/45_miyazaki/45p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/46_kagoshima/46m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/46_kagoshima/46p_25q.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/47_okinawa/47m_25qs.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/47_okinawa/47p_25q.xlsx"
+        ]
+      },
+      "version": "2025"
+    },
+    {
+      "datasetId": "nier-gakuryoku-lifestyle",
+      "fetch": {
+        "type": "http-file",
+        "urls": [
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/01_hokkaido/01m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/01_hokkaido/01p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/02_aomori/02m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/02_aomori/02p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/03_iwate/03m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/03_iwate/03p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/04_miyagi/04m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/04_miyagi/04p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/05_akita/05m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/05_akita/05p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/06_yamagata/06m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/06_yamagata/06p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/07_fukushima/07m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/07_fukushima/07p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/08_ibaraki/08m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/08_ibaraki/08p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/09_tochigi/09m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/09_tochigi/09p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/10_gunma/10m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/10_gunma/10p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/11_saitama/11m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/11_saitama/11p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/12_chiba/12m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/12_chiba/12p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/13_tokyo/13m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/13_tokyo/13p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/14_kanagawa/14m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/14_kanagawa/14p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/15_niigata/15m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/15_niigata/15p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/16_toyama/16m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/16_toyama/16p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/17_ishikawa/17m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/17_ishikawa/17p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/18_fukui/18m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/18_fukui/18p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/19_yamanashi/19m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/19_yamanashi/19p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/20_nagano/20m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/20_nagano/20p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/21_gifu/21m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/21_gifu/21p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/22_shizuoka/22m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/22_shizuoka/22p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/23_aichi/23m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/23_aichi/23p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/24_mie/24m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/24_mie/24p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/25_shiga/25m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/25_shiga/25p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/26_kyoto/26m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/26_kyoto/26p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/27_osaka/27m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/27_osaka/27p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/28_hyougo/28m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/28_hyougo/28p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/29_nara/29m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/29_nara/29p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/30_wakayama/30m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/30_wakayama/30p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/31_tottori/31m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/31_tottori/31p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/32_shimane/32m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/32_shimane/32p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/33_okayama/33m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/33_okayama/33p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/34_hiroshima/34m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/34_hiroshima/34p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/35_yamaguchi/35m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/35_yamaguchi/35p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/36_tokushima/36m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/36_tokushima/36p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/37_kagawa/37m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/37_kagawa/37p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/38_ehime/38m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/38_ehime/38p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/39_kouchi/39m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/39_kouchi/39p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/40_fukuoka/40m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/40_fukuoka/40p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/41_saga/41m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/41_saga/41p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/42_nagasaki/42m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/42_nagasaki/42p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/43_kumamoto/43m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/43_kumamoto/43p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/44_ohita/44m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/44_ohita/44p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/45_miyazaki/45m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/45_miyazaki/45p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/46_kagoshima/46m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/46_kagoshima/46p_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/47_okinawa/47m_25a.xlsx",
+          "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/47_okinawa/47p_25a.xlsx"
+        ]
+      },
+      "version": "2025"
+    },
+    {
+      "datasetId": "fdma-heatstroke-emergency-transports",
+      "fetch": {
+        "type": "http-file",
+        "urls": [
+          "https://www.fdma.go.jp/disaster/heatstroke/items/heatstroke003_data_r7.xlsx"
+        ]
+      },
+      "version": "latest-published-at"
+    },
+    {
+      "datasetId": "jma-past-weather-observations",
+      "fetch": {
+        "type": "skip",
+        "reason": "web-only",
+        "note": "2026-11-14 確認: https://www.data.jma.go.jp/risk/obsdl/index.php と /risk/obsdl/web/dist/top.bundle.js をcurlで確認。観測地点・項目・期間を送る show/table へのPOSTでCSVを生成しており、静的な本体リンクなし。現行recipeはGETのみでPOSTに未対応。全国全地点・全期間を取得しない。"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "jma-normals-1991-2020",
+      "fetch": {
+        "type": "http-index",
+        "indexUrl": "https://www.data.jma.go.jp/stats/data/mdrr/normal/index.html",
+        "linkPattern": "/2020/data/normal_[a-z0-9_]+\\.zip$",
+        "maxFiles": 20
+      },
+      "version": "1991-2020"
+    },
+    {
+      "datasetId": "jma-bousai-xml-feed",
+      "fetch": {
+        "type": "http-file",
+        "urls": [
+          "https://www.data.jma.go.jp/developer/xml/feed/regular.xml",
+          "https://www.data.jma.go.jp/developer/xml/feed/extra.xml",
+          "https://www.data.jma.go.jp/developer/xml/feed/eqvol.xml",
+          "https://www.data.jma.go.jp/developer/xml/feed/other.xml"
+        ]
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "nied-jshis-seismic-hazard",
+      "fetch": {
+        "type": "skip",
+        "reason": "tile-service",
+        "note": "tile-service を含む地震ハザード地図。オーナー決定により取得対象外。"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "nied-knet-kik-net",
+      "fetch": {
+        "type": "skip",
+        "reason": "huge",
+        "note": "全国約1,700観測点の強震波形の全履歴は5GB超過のおそれがあるため取得しない。登録制・再配布禁止の記載もある。"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-kunijiban-boring",
+      "fetch": {
+        "type": "skip",
+        "reason": "huge",
+        "note": "全国約19万件のボーリング柱状図・土質試験結果は5GB超過のおそれがあるため、オーナー決定により取得対象外。"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "aist-active-fault-db",
+      "fetch": {
+        "type": "skip",
+        "reason": "web-only",
+        "note": "2026-11-14 確認: HTTP 200 の本文は「メンテナンス中」のみ。検索・データ配布リンクは確認できなかった。 確認URL: https://gbank.gsj.jp/activefault/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "aist-seamless-geology-v2",
+      "fetch": {
+        "type": "http-file",
+        "urls": [
+          "https://gbank.gsj.jp/seamless/download/seamlessV2.zip"
+        ]
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-water-info-hydrology",
+      "fetch": {
+        "type": "skip",
+        "reason": "huge",
+        "note": "全国観測所の水文水質の全履歴は5GB超過のおそれがある。大量自動取得を控える要請もあり、一括取得しない。"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "env-ikimono-map",
+      "fetch": {
+        "type": "http-index",
+        "indexUrl": "https://www.biodic.go.jp/shapedata/download.html",
+        "linkPattern": "/shapedata/do/do0[2-6]\\.zip$",
+        "maxFiles": 5
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "nies-air-monitoring",
+      "fetch": {
+        "type": "skip",
+        "reason": "web-only",
+        "note": "2026-11-14 確認: https://tenbou.nies.go.jp/download/ と download.js を確認。2024年度データ公開済みだが一覧は /download/api/searchfile.php へのPOST、取得は archivedownload.php。現行recipeはPOST・検索結果からの展開に未対応。全年度時間値は公式表示約8GBのため対象にせず、年次値を指定する実装が必要。 確認URL: https://tenbou.nies.go.jp/gis/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "env-eadas-assessment",
+      "fetch": {
+        "type": "skip",
+        "reason": "web-only",
+        "note": "2026-11-14 確認: HTTP 200 の支援ネットワークページを確認。動的に読込む構成で、環境情報本体の静的ファイル・API実エンドポイントは未特定。 確認URL: https://assess.env.go.jp/index.html"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mext-food-composition-db",
+      "fetch": {
+        "type": "http-index",
+        "indexUrl": "https://www.mext.go.jp/a_menu/syokuhinseibun/mext_00001.html",
+        "linkPattern": "/20260327-mxt_kagsei-mext-000029402_(?:02|04|05|06|07|09|10|11|13|14|15)\\.xlsx$",
+        "maxFiles": 11
+      },
+      "version": "2026-03-27"
+    },
+    {
+      "datasetId": "jma-weather-data-portal",
+      "fetch": {
+        "type": "http-file",
+        "urls": [
+          "https://www.jma.go.jp/jma/kishou/know/amedas/ame_master.zip",
+          "https://www.jma.go.jp/jma/kishou/know/amedas/snow_master.zip"
+        ]
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "jma-typhoon-position-table",
+      "fetch": {
+        "type": "http-index",
+        "indexUrl": "https://www.data.jma.go.jp/typhoon/position_table/table2026.html",
+        "linkPattern": "\\.csv(?:[?#]|$)",
+        "maxFiles": 10
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "jma-volcano-monthly-bulletin",
+      "fetch": {
+        "type": "http-index",
+        "indexUrl": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/veq.html",
+        "linkPattern": "/data/veq/En20(?:0[89]|1[0-6])[0-9]{2}\\.zip$",
+        "maxFiles": 104
+      },
+      "version": "2008-2016"
+    },
+    {
+      "datasetId": "egov-data-portal-datasets",
+      "fetch": {
+        "type": "http-file",
+        "urls": [
+          "https://data.e-gov.go.jp/data/api/3/action/package_list"
+        ]
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "nta-houjin-bangou-webapi",
+      "fetch": {
+        "type": "skip",
+        "reason": "needs-api-key",
+        "note": "2026-11-14 確認: https://www.houjin-bangou.nta.go.jp/webapi/kyuusiyousyo.html まで確認。無料アプリケーションIDと仕様書PDFへの案内はあるが、HTMLから現行recipeで実行可能な認証・ページングURLは確定できなかった。登録案内 https://www.houjin-bangou.nta.go.jp/webapi/ 。必要secretは OPEN_DATA_NTA_API_KEY。 確認URL: https://www.houjin-bangou.nta.go.jp/webapi/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "nta-invoice-webapi",
+      "fetch": {
+        "type": "skip",
+        "reason": "needs-api-key",
+        "note": "2026-11-14 確認: https://www.invoice-kohyo.nta.go.jp/web-api/web-api-download.html まで確認。利用ID・仕様書PDFの案内はあるが、HTMLから現行recipeで実行可能な認証・ページングURLは確定できなかった。登録先 https://www.invoice-kohyo.nta.go.jp/web-api/pre-reg 。必要secretは OPEN_DATA_NTA_API_KEY。 確認URL: https://www.invoice-kohyo.nta.go.jp/web-api/index.html"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "gbizinfo-corporate-data",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式Swagger https://api.info.gbiz.go.jp/hojin/v3/api-docs/v2 で /v2/hojin と X-hojinInfo-api-token ヘッダーを確認。現行 api-paged のBearer認証では利用不可。配布画面もPOSTとトークン必須。登録先 https://info.gbiz.go.jp/hojin/various_registration/form 。必要secretは OPEN_DATA_GBIZINFO_API_KEY。 確認URL: https://info.gbiz.go.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "edinet-disclosure-api",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: https://api.edinet-fsa.go.jp/api/v2/documents.json?date=2026-11-13&type=2 はHTTP 200だが本文はsubscription key不在の認証エラー。HEAD成功だけでは取得可能と判断できず、現行Bearerのみの認証・非skipのnote禁止を解決する必要あり。登録案内 https://disclosure2dl.edinet-fsa.go.jp/guide/static/disclosure/WZEK0110.html 。必要secretは OPEN_DATA_EDINET_API_KEY。 確認URL: https://disclosure2dl.edinet-fsa.go.jp/guide/static/disclosure/WZEK0110.html"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "stat-dashboard-data",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: https://dashboard.e-stat.go.jp/static/api で鍵不要の getData と getIndicatorInfo の実URLを確認。系列・時間・地域の範囲選定が必要だが非skipのnoteがスキーマで禁止され、固定page/pageSizeの既存実装だけでは取得範囲の契約を残せない。 確認URL: https://dashboard.e-stat.go.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "p-portal-award-results",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公開画面にJavaScriptのdoSubmitParamsとPOSTフォームを確認。落札実績データ本体の静的リンクは確認できなかった。 確認URL: https://www.p-portal.go.jp/pps-web-biz/UZA01/OZA0101"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "cao-keiki-watcher-survey",
+      "fetch": {
+        "type": "http-index",
+        "indexUrl": "https://www5.cao.go.jp/keizai3/2026/1110watcher/menu.html",
+        "linkPattern": "/watcher[45]\\.csv$",
+        "maxFiles": 2
+      },
+      "version": "2026-11-10"
+    },
+    {
+      "datasetId": "boj-time-series-stat",
+      "fetch": {
+        "type": "http-index",
+        "indexUrl": "https://www.boj.or.jp/statistics/dl/depo/pref/index.htm",
+        "linkPattern": "/pref/pre[0-9]{4}\\.xlsx$",
+        "maxFiles": 12
+      },
+      "version": "2026-03"
+    },
+    {
+      "datasetId": "jihs-idwr-provisional",
+      "fetch": {
+        "type": "http-index",
+        "indexUrl": "https://id-info.jihs.go.jp/surveillance/idwr/provisional/2026/44/index.html",
+        "linkPattern": "/2026-44-[a-z-]+\\.csv$",
+        "maxFiles": 10
+      },
+      "version": "2026-w44"
+    },
+    {
+      "datasetId": "mhlw-covid19-open-data",
+      "fetch": {
+        "type": "http-file",
+        "urls": [
+          "https://covid19.mhlw.go.jp/public/opendata/newly_confirmed_cases_daily.csv"
+        ]
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mext-school-code-list",
+      "fetch": {
+        "type": "http-index",
+        "indexUrl": "https://www.mext.go.jp/b_menu/toukei/mext_01087.html",
+        "linkPattern": "\\.xlsx?(?:[?#]|$)",
+        "maxFiles": 100
+      },
+      "version": "latest-published-at"
+    },
+    {
+      "datasetId": "yokohama-opendata-portal",
+      "fetch": {
+        "type": "http-file",
+        "urls": [
+          "https://data.city.yokohama.lg.jp/api/3/action/package_list"
+        ]
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "osaka-odpo-catalog",
+      "fetch": {
+        "type": "http-file",
+        "urls": [
+          "https://data.bodik.jp/api/3/action/package_list"
+        ]
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "tokyo-open-data-api-catalog",
+      "fetch": {
+        "type": "http-file",
+        "urls": [
+          "https://catalog.data.metro.tokyo.lg.jp/api/3/action/package_list"
+        ]
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "egov-laws-api-v2",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: https://laws.e-gov.go.jp/api/2/laws?limit=1&page=1&pageSize=1 で鍵不要、total_count=9571/count=1/next_offset=1を確認。APIはoffset/limit方式で、現行api-pagedの1始まり固定増分・pageSizeとは非互換。全件取得の欠落を避けるためskip継続。 確認URL: https://laws.e-gov.go.jp/apidoc/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "ndl-search-api",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: https://ndlsearch.ndl.go.jp/help/api/specifications でOpenSearch/SRUの実URLを確認。https://ndlsearch.ndl.go.jp/api/opensearch?cnt=1&title=%E9%83%BD%E9%81%93%E5%BA%9C はHTTP 429のため再アクセスせず停止。 確認URL: https://ndlsearch.ndl.go.jp/help/api"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "japansearch-archive",
+      "fetch": {
+        "type": "skip",
+        "reason": "web-only",
+        "note": "2026-11-14 確認: 公開ページはJavaScriptアプリ。API候補 https://jpsearch.go.jp/api/ はHTTP 404で、資料本体・公開検索APIの固定URLは未特定。 確認URL: https://jpsearch.go.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "ndb-open-data",
+      "fetch": {
+        "type": "http-index",
+        "indexUrl": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000177221_00014.html",
+        "linkPattern": "/content/12400000/[0-9]+\\.xlsx$",
+        "maxFiles": 410
+      },
+      "version": "9th"
+    },
+    {
+      "datasetId": "niad-university-portrait-api",
+      "fetch": {
+        "type": "skip",
+        "reason": "needs-api-key",
+        "note": "2026-11-14 確認: https://api-portal.portraits.niad.ac.jp/api-dev.html で https://edit.portraits.niad.ac.jp/api/v1/SchoolBasicSurvey/getCollegeUndergraduateStudentsDetail と accesskey クエリ、年度・組織ID必須を確認。現行api-pagedはBearerのみで非互換。登録先 https://api-portal.portraits.niad.ac.jp/web-api-userreg.html 。必要secretは OPEN_DATA_NIAD_API_KEY。 確認URL: https://api-portal.portraits.niad.ac.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-isj-location-reference",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: /isj/index.html と /isj/ は国土数値情報の案内HTMLを返し、位置参照情報の年次・本体ZIPリンクは確認できなかった。 確認URL: https://nlftp.mlit.go.jp/isj/index.html"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "gsi-fgd-basic-items",
+      "fetch": {
+        "type": "skip",
+        "reason": "huge",
+        "note": "全国の基盤地図と数値標高モデルを含む。ラスタはオーナー決定により取得対象外で、全国一括取得も5GB超過のおそれがある。"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "gsi-tiles-map-tiles",
+      "fetch": {
+        "type": "skip",
+        "reason": "tile-service",
+        "note": "XYZ地図タイル配信はオーナー決定により取得対象外。"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "digital-abr-address-dataset",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: https://dataset.address-br.digital.go.jp/ と公式メタデータAPI https://dataset.address-br.digital.go.jp/api/v3/datasets/1098a4f61dab4f52997839d04245132a を確認。町字・郵便番号のデータは公開されているが、本体案内は www.arcgis.com/sharing/rest/content/items/.../data で公式ドメイン限定の条件に合わない。公式ドメインの住所CSV/ZIP本体は未特定。"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "mlit-city-planning-gis-data",
+      "fetch": {
+        "type": "http-index",
+        "indexUrl": "https://www.mlit.go.jp/toshi/tosiko/toshi_tosiko_tk_000182.html",
+        "linkPattern": "/toshi/tosiko/content/[0-9]+\\.zip$",
+        "maxFiles": 150
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "jartic-traffic-volume-api",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式ページにAPI仕様書・利用規約PDFへのリンクを確認したが、HTMLにはWFSの実エンドポイントと時間範囲指定の記載がなく確定できなかった。 確認URL: https://www.jartic-open-traffic.org/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "npa-traffic-accident-opendata",
+      "fetch": {
+        "type": "http-index",
+        "indexUrl": "https://www.npa.go.jp/publications/statistics/koutsuu/opendata/2025/opendata_2025.html",
+        "linkPattern": "/honhyo_2025\\.csv$",
+        "maxFiles": 1
+      },
+      "version": "2025"
+    },
+    {
+      "datasetId": "mlit-road-census-r3",
+      "fetch": {
+        "type": "http-index",
+        "indexUrl": "https://www.mlit.go.jp/road/census/r3/",
+        "linkPattern": "\\.(?:csv|xlsx?)(?:[?#]|$)",
+        "maxFiles": 300
+      },
+      "version": "latest-published-at"
+    },
+    {
+      "datasetId": "mlit-plateau-3d-city-model",
+      "fetch": {
+        "type": "skip",
+        "reason": "huge",
+        "note": "PLATEAUの3D都市モデルはオーナー決定により取得対象外。"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "jaxa-earth-api-datasets",
+      "fetch": {
+        "type": "skip",
+        "reason": "huge",
+        "note": "COG/GeoTIFFの衛星ラスタはオーナー決定により取得対象外。"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "nii-cinii-research-api",
+      "fetch": {
+        "type": "skip",
+        "reason": "needs-api-key",
+        "note": "2026-11-14 確認: https://support.nii.ac.jp/en/cir/r_opensearch で https://cir.nii.ac.jp/opensearch/all とappid必須、count指定を確認。クエリ鍵を現行api-pagedのBearer認証で表現できない。登録案内 https://support.nii.ac.jp/en/cinii/api/developer 。必要secretは OPEN_DATA_NII_API_KEY。 確認URL: https://support.nii.ac.jp/en/cinii/api/api_outline"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "bunka-madb-lab",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 公式案内 https://mediag.bunka.go.jp/madb_lab/lod/sparql/ に https://mediaarts-db.artmuseums.go.jp/sparql を確認し、LIMIT 1 のGETがJSONを返すことを確認。全体ダンプはGitHub案内のみで、SPARQLのOFFSET/LIMITと取得範囲noteを現行recipeで表現できない。 確認URL: https://mediag.bunka.go.jp/madb_lab/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "bunka-heritage-online-search-api",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: 概要HTMLから作品検索ページを確認したが、APIの公開実エンドポイント・認証仕様・データ本体リンクは見つからなかった。 確認URL: https://online.bunka.go.jp/about"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "jpn-archives-digital-archive",
+      "fetch": {
+        "type": "skip",
+        "reason": "web-only",
+        "note": "2026-11-14 確認: 公開ページに /search と /crosssearch を確認。目録検索結果全体を取得するAPI・CSV本体へのリンクは未特定。 確認URL: https://www.digital.archives.go.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "artmuseums-union-catalog",
+      "fetch": {
+        "type": "skip",
+        "reason": "web-only",
+        "note": "2026-11-14 確認: Node標準CAをcurlに指定してトップ・terms.html・how_to_use.htmlを確認。検索フォームと作品別画像のダウンロード案内はあるが所蔵目録の一括データ本体リンクは未特定。 確認URL: https://search.artmuseums.go.jp/"
+      },
+      "version": "initial"
+    },
+    {
+      "datasetId": "ndl-digital-collections-iiif",
+      "fetch": {
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-14 確認: トップと https://dl.ndl.go.jp/guide/iiif.html はJavaScriptアプリのHTMLを返した。個別資料IDに対応するIIIF manifestの掲載URLは未特定。 確認URL: https://dl.ndl.go.jp/"
       },
       "version": "initial"
     }

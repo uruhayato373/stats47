@@ -228,6 +228,17 @@ updated: 2026-11-01
 - **次**: 検出を push の before..after の差分にするか、差分の検出に加えて常に総ざらいを足す。
 - **完了条件**: 記事を含む複数コミットの push で、全コミットの公開待ちが 1 回の run の対象になる。
 
+### [OPENDATA-ARCHIVE-01] e-Stat 外の原本を非公開 R2 に一度だけ固定し、共通スキーマ経由で展開する
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-14] [領域:データ]
+
+- **背景**: e-Stat 外の取り込み (`.claude/scripts/themes/ingest-*.mjs` 約 50 本) がそれぞれ原典を取りに行くため、同じサイトを何度も取得・確認している。オーナー決定 (2026-11-14): 機械で取れる原本は全件を非公開 R2 へ保存し、公開側へ出すのは `license.commercialUse === "allowed"` だけ。3D 都市モデル・地図タイル・ラスタは対象外。実装は Claude から Codex MCP で行う。
+- **済み (2026-11-14・`99bd3ce5b` ブランチ `claude/open-data-archive`)**: 段 1 の基盤 (台帳 `open-data.fetch-recipes`・`open-data.snapshots`・`open-data.expansion`、取得の型 5 種の `.claude/scripts/open-data/fetch-source.mjs`、正規化 `normalize-source.mjs`、非公開 R2 の 2 区分、workflow `open-data-source-archive.yml`)。厚労省の病院 CSV で 47 県・1,428 市区町村の合計 7,715 施設の一致を実測。
+- **済み (2026-11-14・段 2)**: 136 件すべてに recipe があり、`--all --dry-run` で 33 件・約 4.3GB が取得可能 (失敗 0、商用可 23・不明 10)。skip 103 件の内訳は対象外 (タイル・巨大) 25、自治体標準オープンデータセットの定義書 20 (本体は自治体ごとに分散)、国交 DPF 34、その他 API・閲覧のみ 24。
+- **残り**: (段 2 の続き) 国交 DPF の 34 件は GraphQL API で鍵 `MLIT_API_KEY` が要る。取得の型に `graphql` を足すか、ファイル URL を解決して http-file にするかを決め、オーナーが GitHub secret に鍵を登録する。法人番号・大学ポートレート・CiNii など鍵の要る API も同じく secret の登録待ち。(段 3) 実取得の承認を得る。workflow は `ref: main` で動くので、実取得は段 1・2 が main に出てから。(段 4) 実取得と `snapshots/` の書き戻し。(段 5) 商用可かつ県・市区町村粒度の 40 件の正規化宣言。(段 6) 正規化表から `expansion.json` へ展開候補を planned / rejected で記録。(段 7) 県ランキング 5 本の試行。
+- **停止条件**: 実取得 (R2 への書き込み) と main への反映はオーナーの指示があるまで行わない。API 鍵の secret 登録はオーナーが行う。
+- **完了条件**: 取得できる全 recipe の原本が非公開 R2 にあり、`snapshots/` の SHA と読み戻しが一致する。展開の試行 5 本が本番で 200。
+- **計画**: `/Users/minamidaisuke/.claude/plans/virtual-gathering-hopper.md`
+
 ### [OPENDATA-RANKING-PILOT-01] NDB 特定健診の 10 指標を R2 へ上げて公開する
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-11-13] [領域:データ] [待ち:承認]
 

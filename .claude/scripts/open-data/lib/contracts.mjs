@@ -36,9 +36,16 @@ export function httpUrl(value) {
 export function validateRecipes(doc) {
   validateDocument('fetch-recipes', doc);
   const ids = new Set();
+  const urlOwners = new Map();
   for (const recipe of doc.recipes) {
     if (ids.has(recipe.datasetId)) throw Error(`Duplicate recipe: ${recipe.datasetId}`);
     ids.add(recipe.datasetId);
+    const urls = recipe.fetch.type === 'http-file' ? recipe.fetch.urls : recipe.fetch.type === 'http-index' ? [recipe.fetch.indexUrl] : [];
+    for (const url of urls) {
+      const owner = urlOwners.get(url);
+      if (owner && owner !== recipe.datasetId) throw Error(`Duplicate recipe URL: ${owner} / ${recipe.datasetId}: ${url}`);
+      urlOwners.set(url, recipe.datasetId);
+    }
     for (const value of [...(recipe.fetch.urls ?? []), recipe.fetch.url, recipe.fetch.indexUrl, recipe.fetch.baseUrl].filter(Boolean)) httpUrl(value);
     if (recipe.fetch.linkPattern) new RegExp(recipe.fetch.linkPattern);
     const tables = new Set();

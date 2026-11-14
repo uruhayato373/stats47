@@ -51,6 +51,22 @@ test('schema rejects malformed recipes, unknown fields, unsafe URLs, duplicates 
   ]) assert.throws(() => validateRecipes({ recipes: [broken] }));
   assert.throws(() => validateRecipes({ recipes: [recipe, recipe] }), /Duplicate/);
 });
+test('different datasets cannot share file or index URLs, but skip recipes are excluded', () => {
+  const url = 'https://example.test/table_a.xlsx';
+  const file = { type: 'http-file', urls: ['https://example.test/unique.csv', url] };
+  const index = { type: 'http-index', indexUrl: url, linkPattern: '\\.xlsx$', maxFiles: 1 };
+  const skip = { type: 'skip', reason: 'other', note: 'Definition only' };
+  const pair = (a, b) => ({ recipes: [
+    { datasetId: 'dataset-a', version: 'initial', fetch: a },
+    { datasetId: 'dataset-b', version: 'initial', fetch: b },
+  ] });
+  for (const [a, b] of [[file, file], [index, index], [file, index], [index, file]]) {
+    assert.throws(() => validateRecipes(pair(a, b)), /Duplicate recipe URL: dataset-a \/ dataset-b:/);
+  }
+  for (const [a, b] of [[file, skip], [skip, index], [skip, skip], [file, { ...index, indexUrl: 'https://example.test/other' }]]) {
+    assert.doesNotThrow(() => validateRecipes(pair(a, b)));
+  }
+});
 test('publication and SHA checks fail closed; credentials stay in headers', () => {
   for (const license of [undefined, { commercialUse: 'unknown' }, { commercialUse: 'restricted' }]) assert.throws(() => assertPublishable({ license }), /Publication refused/);
   assert.doesNotThrow(() => assertPublishable(dataset));
