@@ -29,6 +29,26 @@ export const COMMUNITY_PARTICIPATION_SET: IndicatorSet = {
       "rankingKey": "community-building-volunteer-participation-rate-10plus",
       "shortLabel": "まちづくり活動の年間行動者率（10歳以上）",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "library-books",
+      "shortLabel": "図書館蔵書数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "library-lending-books",
+      "shortLabel": "図書館館外貸出冊数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "voter-turnout-mayor",
+      "shortLabel": "市区町村長選挙投票率",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "voter-turnout-pref-assembly",
+      "shortLabel": "都道府県議会議員選挙投票率",
+      "role": "secondary"
     }
   ],
   "keywords": [

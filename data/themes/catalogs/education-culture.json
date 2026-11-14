@@ -514,24 +514,67 @@
       "rankingKey": "education-cost-all-households",
       "shortLabel": "教育費（全世帯・月平均）",
       "role": "context"
+    },
+    {
+      "rankingKey": "elementary-school-children-count",
+      "shortLabel": "小学校児童数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「小学校 児童数 ランキング」「福岡市 小学校 児童数ランキング」など児童数の検索 (2026-W45 queries.csv で児童数・生徒数系の表示1220回) に答え、いまのカタログに無い児童数そのものを載せる。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "junior-high-school-students-count",
+      "shortLabel": "中学校生徒数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "児童数と対にして「中学校の生徒数は多いのか・減っているのか」(生徒数の検索) に答え、小中の人数の推移を同じ章の折れ線で見せる。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "school-teacher-annual-income",
+      "shortLabel": "小中学校教員の平均年収",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「教員 年収ランキング」など教員・教授・教諭の年収の検索 (表示1588回) に答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "university-professor-annual-income",
+      "shortLabel": "大学教授の平均年収",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「私立大学教授 年収ランキング」(表示93回) など大学教授の年収の検索に答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
     }
   ],
   "metricGroups": [
     {
       "key": "schools-1",
-      "title": "学校数（可住地100km²当たり）",
-      "rankingKeys": [
-        "elementary-school-count-per-100km2-habitable",
-        "junior-high-school-count-per-100km2-habitable",
-        "high-school-count-per-100km2-habitable"
-      ],
-      "defaultCheckedKeys": [
-        "elementary-school-count-per-100km2-habitable",
-        "junior-high-school-count-per-100km2-habitable"
-      ]
-    },
-    {
-      "key": "schools-2",
       "title": "教員1人当たり小学校児童数",
       "rankingKeys": [
         "elementary-school-students-per-teacher"
@@ -541,79 +584,71 @@
       ]
     },
     {
-      "key": "higher-education",
-      "title": "県内大学入学割合（同県出身入学者中）",
+      "key": "schools-2",
+      "title": "小学校数（可住地100km²当たり）",
       "rankingKeys": [
-        "in-pref-university-entrance-ratio-by-highschool-origin"
+        "elementary-school-count-per-100km2-habitable"
       ],
       "defaultCheckedKeys": [
-        "in-pref-university-entrance-ratio-by-highschool-origin"
+        "elementary-school-count-per-100km2-habitable"
       ]
     },
     {
-      "key": "culture-1",
-      "title": "図書館・公民館数（人口100万人当たり）",
+      "key": "schools-3",
+      "title": "小学校児童数と中学校生徒数の推移",
       "rankingKeys": [
-        "library-count-per-million",
-        "public-hall-count-per-million"
+        "elementary-school-children-count",
+        "junior-high-school-students-count"
       ],
       "defaultCheckedKeys": [
-        "library-count-per-million",
-        "public-hall-count-per-million"
+        "elementary-school-children-count",
+        "junior-high-school-students-count"
       ]
     },
     {
-      "key": "culture-2",
-      "title": "演芸・演劇・舞踊鑑賞の行動者率（10歳以上）",
+      "key": "schools-4",
+      "title": "中学校数・高等学校数(可住地100km²当たり)の推移",
       "rankingKeys": [
-        "hobby-participation-rate-theater"
+        "junior-high-school-count-per-100km2-habitable",
+        "high-school-count-per-100km2-habitable"
       ],
       "defaultCheckedKeys": [
-        "hobby-participation-rate-theater"
+        "junior-high-school-count-per-100km2-habitable",
+        "high-school-count-per-100km2-habitable"
       ]
     },
     {
-      "key": "school-environment-and-closures-1",
-      "title": "公立学校廃校発生数（2004〜2023年度累計）",
+      "key": "teacher-and-professor-pay-1",
+      "title": "小中学校教員の平均年収",
       "rankingKeys": [
-        "public-school-closures-cumulative"
+        "school-teacher-annual-income"
       ],
       "defaultCheckedKeys": [
-        "public-school-closures-cumulative"
+        "school-teacher-annual-income"
       ]
     },
     {
-      "key": "school-environment-and-closures-2",
-      "title": "小学校教育費",
+      "key": "teacher-and-professor-pay-2",
+      "title": "大学教授の平均年収",
       "rankingKeys": [
-        "elementary-school-education-cost-per-student"
+        "university-professor-annual-income"
       ],
       "defaultCheckedKeys": [
-        "elementary-school-education-cost-per-student"
-      ]
-    },
-    {
-      "key": "higher-education-and-advancement-1",
-      "title": "高等学校卒業者の進学率",
-      "rankingKeys": [
-        "high-school-advancement-rate"
-      ],
-      "defaultCheckedKeys": [
-        "high-school-advancement-rate"
-      ]
-    },
-    {
-      "key": "higher-education-and-advancement-2",
-      "title": "大学数（人口10万人当たり）",
-      "rankingKeys": [
-        "university-count-per-100k"
-      ],
-      "defaultCheckedKeys": [
-        "university-count-per-100k"
+        "university-professor-annual-income"
       ]
     },
     {
       "key": "lifelong-learning-and-libraries-1",
+      "title": "図書館数（人口100万人当たり）",
+      "rankingKeys": [
+        "library-count-per-million"
+      ],
+      "defaultCheckedKeys": [
+        "library-count-per-million"
+      ]
+    },
+    {
+      "key": "lifelong-learning-and-libraries-2",
       "title": "図書館の蔵書冊数と貸出冊数の推移",
       "rankingKeys": [
         "library-books",
@@ -625,7 +660,17 @@
       ]
     },
     {
-      "key": "lifelong-learning-and-libraries-2",
+      "key": "lifelong-learning-and-libraries-3",
+      "title": "公民館数（人口100万人当たり）",
+      "rankingKeys": [
+        "public-hall-count-per-million"
+      ],
+      "defaultCheckedKeys": [
+        "public-hall-count-per-million"
+      ]
+    },
+    {
+      "key": "lifelong-learning-and-libraries-4",
       "title": "商業実務・ビジネス関係の学習行動者率",
       "rankingKeys": [
         "study-participation-rate-business"
@@ -635,17 +680,64 @@
       ]
     },
     {
-      "key": "cultural-facilities-and-arts-1",
-      "title": "施設種別ごとの博物館等入館者数内訳",
+      "key": "higher-education-and-advancement-1",
+      "title": "県内大学入学割合（同県出身入学者中）",
       "rankingKeys": [
-        "registered-museum-visitors",
-        "designated-museum-visitors",
-        "museum-like-facility-visitors"
+        "in-pref-university-entrance-ratio-by-highschool-origin"
       ],
       "defaultCheckedKeys": [
-        "registered-museum-visitors"
+        "in-pref-university-entrance-ratio-by-highschool-origin"
+      ]
+    },
+    {
+      "key": "higher-education-and-advancement-2",
+      "title": "高等学校卒業者の進学率",
+      "rankingKeys": [
+        "high-school-advancement-rate"
       ],
-      "view": "tiles"
+      "defaultCheckedKeys": [
+        "high-school-advancement-rate"
+      ]
+    },
+    {
+      "key": "higher-education-and-advancement-3",
+      "title": "大学数（人口10万人当たり）",
+      "rankingKeys": [
+        "university-count-per-100k"
+      ],
+      "defaultCheckedKeys": [
+        "university-count-per-100k"
+      ]
+    },
+    {
+      "key": "school-environment-and-closures-1",
+      "title": "小学校教育費",
+      "rankingKeys": [
+        "elementary-school-education-cost-per-student"
+      ],
+      "defaultCheckedKeys": [
+        "elementary-school-education-cost-per-student"
+      ]
+    },
+    {
+      "key": "school-environment-and-closures-2",
+      "title": "公立学校廃校発生数（2004〜2023年度累計）",
+      "rankingKeys": [
+        "public-school-closures-cumulative"
+      ],
+      "defaultCheckedKeys": [
+        "public-school-closures-cumulative"
+      ]
+    },
+    {
+      "key": "cultural-facilities-and-arts-1",
+      "title": "演芸・演劇・舞踊鑑賞の行動者率（10歳以上）",
+      "rankingKeys": [
+        "hobby-participation-rate-theater"
+      ],
+      "defaultCheckedKeys": [
+        "hobby-participation-rate-theater"
+      ]
     },
     {
       "key": "cultural-facilities-and-arts-2",
@@ -659,12 +751,32 @@
     },
     {
       "key": "cultural-facilities-and-arts-3",
-      "title": "美術博物館数",
+      "title": "登録博物館の入館者数",
       "rankingKeys": [
-        "art-museum-count"
+        "registered-museum-visitors"
       ],
       "defaultCheckedKeys": [
-        "art-museum-count"
+        "registered-museum-visitors"
+      ]
+    },
+    {
+      "key": "cultural-facilities-and-arts-4",
+      "title": "指定施設の入館者数",
+      "rankingKeys": [
+        "designated-museum-visitors"
+      ],
+      "defaultCheckedKeys": [
+        "designated-museum-visitors"
+      ]
+    },
+    {
+      "key": "cultural-facilities-and-arts-5",
+      "title": "博物館類似施設の入館者数",
+      "rankingKeys": [
+        "museum-like-facility-visitors"
+      ],
+      "defaultCheckedKeys": [
+        "museum-like-facility-visitors"
       ]
     },
     {
@@ -721,7 +833,7 @@
       "dataSource": "ranking",
       "sortOrder": 10,
       "annotation": "当該県の高校出身の大学入学者が分母です。そのうち同じ県の大学へ入学した割合を示し、高校卒業者全体の大学進学率ではありません。",
-      "section": "higher-education"
+      "section": "higher-education-and-advancement"
     },
     {
       "componentKey": "theme-edu-higher-education-trend-attainment",
@@ -745,7 +857,7 @@
       "dataSource": "ranking",
       "sortOrder": 20,
       "annotation": "国勢調査の最終学歴における卒業者総数が分母です。住民全員や当年の高校卒業者・大学入学者に対する割合ではありません。",
-      "section": "higher-education"
+      "section": "schools"
     },
     {
       "componentKey": "education-culture-cultural-facilities-and-arts-composition-1",
@@ -867,72 +979,73 @@
   "sections": [
     {
       "key": "schools",
-      "title": "学校の配置と規模",
-      "description": "可住地100km²当たりの学校数と教員1人当たり小学校児童数を分けて確認します。教員1人当たり児童数は1学級の児童数ではありません。",
+      "title": "自分の県の小・中学校と児童生徒数は、ほかと比べて多いのか",
+      "concern": "自分の県や市の学校の数や児童生徒数が、全国と比べて多いのか少ないのか、教員1人に対して児童が多すぎないかが気になります。",
       "metricGroupKeys": [
         "schools-1",
-        "schools-2"
-      ]
-    },
-    {
-      "key": "higher-education",
-      "title": "高等教育へどう進むか",
-      "description": "当該県の高校出身大学入学者に占める県内大学入学者の割合と、卒業者総数に占める大学・大学院卒の割合は、対象・分母が異なります。",
-      "metricGroupKeys": [
-        "higher-education"
+        "schools-2",
+        "schools-3",
+        "schools-4"
       ],
       "chartKeys": [
-        "theme-edu-higher-education-trend",
         "theme-edu-higher-education-trend-attainment"
       ]
     },
     {
-      "key": "culture",
-      "title": "文化・社会教育の施設",
-      "description": "人口100万人当たりの図書館・公民館数と住民の鑑賞行動を分けて確認します。鑑賞行動者率は10歳以上の演芸・演劇・舞踊等が対象で、2021年の感染症流行下の調査です。",
+      "key": "teacher-and-professor-pay",
+      "title": "小中学校の教員や大学教授の年収は、どのくらいなのか",
+      "concern": "学校で教える人の年収が、自分の県でどの水準にあるのかが気になります。",
       "metricGroupKeys": [
-        "culture-1",
-        "culture-2"
+        "teacher-and-professor-pay-1",
+        "teacher-and-professor-pay-2"
       ]
     },
     {
-      "key": "school-environment-and-closures",
-      "title": "身近な学校環境や小中学校の統廃合リスクはどう推移しているか",
-      "concern": "少子化に伴う学校の統廃合や通学距離の遠大化、教員の負担感が気になります。",
+      "key": "lifelong-learning-and-libraries",
+      "title": "図書館や公民館など身近に学べる場所は整っているか",
+      "concern": "身近に図書館や公民館があり、本を借りたり学び直したりできる環境があるか気になります。",
       "metricGroupKeys": [
-        "school-environment-and-closures-1",
-        "school-environment-and-closures-2"
+        "lifelong-learning-and-libraries-1",
+        "lifelong-learning-and-libraries-2",
+        "lifelong-learning-and-libraries-3",
+        "lifelong-learning-and-libraries-4"
       ]
     },
     {
       "key": "higher-education-and-advancement",
-      "title": "地元での進学機会や大学の選択肢は十分にあるか",
-      "concern": "地元に大学が少なく進学時に県外へ流出してしまわないかや選択肢の少なさが心配です。",
+      "title": "地元で進学できる大学や進学の機会は十分にあるか",
+      "concern": "地元に大学が少なく、進学のときに県外へ出ていくことにならないかが気になります。",
       "metricGroupKeys": [
         "higher-education-and-advancement-1",
-        "higher-education-and-advancement-2"
+        "higher-education-and-advancement-2",
+        "higher-education-and-advancement-3"
+      ],
+      "chartKeys": [
+        "theme-edu-higher-education-trend"
       ],
       "embeddedSectionKeys": [
         "graduation-paths"
       ]
     },
     {
-      "key": "lifelong-learning-and-libraries",
-      "title": "図書館や公民館など身近な生涯学習の環境は整っているか",
-      "concern": "身近に図書館や公民館があり、読書や学び直しができる環境があるか気になります。",
+      "key": "school-environment-and-closures",
+      "title": "学校の統廃合や児童1人当たりの教育費はどうなっているか",
+      "concern": "学校の統廃合で通学の環境が変わらないか、児童1人にかかる教育費がどう動いてきたかが気になります。",
       "metricGroupKeys": [
-        "lifelong-learning-and-libraries-1",
-        "lifelong-learning-and-libraries-2"
+        "school-environment-and-closures-1",
+        "school-environment-and-closures-2"
       ]
     },
     {
       "key": "cultural-facilities-and-arts",
-      "title": "博物館や美術鑑賞など文化・芸術に触れる機会はあるか",
-      "concern": "地域で美術鑑賞や演劇などの文化芸術活動に親しむ施設や機会があるか不安です。",
+      "title": "博物館や演劇鑑賞など文化・芸術に触れる機会はあるか",
+      "concern": "身近に博物館・美術館があり、演劇などの鑑賞に親しめる地域かが気になります。",
       "metricGroupKeys": [
         "cultural-facilities-and-arts-1",
         "cultural-facilities-and-arts-2",
-        "cultural-facilities-and-arts-3"
+        "cultural-facilities-and-arts-3",
+        "cultural-facilities-and-arts-4",
+        "cultural-facilities-and-arts-5"
       ],
       "chartKeys": [
         "education-culture-cultural-facilities-and-arts-composition-1"
@@ -940,8 +1053,8 @@
     },
     {
       "key": "cultural-property-preservation",
-      "title": "地域の歴史的文化財の保護や専門体制は維持されているか",
-      "concern": "地域の歴史的な文化財や遺跡が適切に保護され後世に継承されているか気になります。",
+      "title": "地域の文化財を守る体制は維持されているか",
+      "concern": "地域の歴史的な文化財や遺跡が適切に保護され、後世に引き継がれているかが気になります。",
       "metricGroupKeys": [
         "cultural-property-preservation-1",
         "cultural-property-preservation-2",

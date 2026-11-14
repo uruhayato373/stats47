@@ -10734,6 +10734,194 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:cpi-change-regional-pattern",
           "kind": "blog"
         },
@@ -10744,9 +10932,15 @@
         {
           "pageId": "ranking:cpi-change-rate-total",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:real-income",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "real-income"
+      ]
     },
     {
       "metricKey": "cpi-change-rate-transport-communication",

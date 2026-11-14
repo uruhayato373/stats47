@@ -3595,6 +3595,194 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:education-culture",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:elementary-school-children-count",
           "kind": "blog"
         },
@@ -3617,9 +3805,15 @@
         {
           "pageId": "ranking:elementary-school-children-count",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:education-culture",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "education-culture"
+      ]
     },
     {
       "metricKey": "elementary-school-classes",
@@ -9936,7 +10130,15 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:01000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -9944,7 +10146,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:03000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:03000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -9952,7 +10162,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:05000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:05000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -9960,7 +10178,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:07000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:07000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -9968,7 +10194,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:09000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:09000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -9976,7 +10210,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:11000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:11000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -9984,7 +10226,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:13000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:13000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -9992,7 +10242,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:15000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:15000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -10000,7 +10258,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:17000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:17000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -10008,7 +10274,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:19000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:19000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -10016,7 +10290,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:21000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:21000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -10024,7 +10306,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:23000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:23000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -10032,7 +10322,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:25000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:25000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -10040,7 +10338,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:27000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:27000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -10048,7 +10354,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:29000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:29000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -10056,7 +10370,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:31000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:31000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -10064,7 +10386,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:33000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:33000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -10072,7 +10402,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:35000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:35000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -10080,7 +10418,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:37000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:37000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -10088,7 +10434,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:39000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:39000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -10096,7 +10450,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:41000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:41000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -10104,7 +10466,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:43000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:43000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -10112,11 +10482,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:45000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:45000:local-economy",
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:46000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:46000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:information-industry",
           "kind": "area-theme"
         },
         {
@@ -10128,11 +10510,16 @@
           "kind": "ranking"
         },
         {
+          "pageId": "theme:information-industry",
+          "kind": "theme"
+        },
+        {
           "pageId": "theme:local-economy",
           "kind": "theme"
         }
       ],
       "themes": [
+        "information-industry",
         "local-economy"
       ]
     },

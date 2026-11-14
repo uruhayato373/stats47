@@ -6216,7 +6216,15 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:education-culture",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:01000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:education-culture",
           "kind": "area-theme"
         },
         {
@@ -6224,7 +6232,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:03000:education-culture",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:03000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:education-culture",
           "kind": "area-theme"
         },
         {
@@ -6232,7 +6248,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:05000:education-culture",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:05000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:education-culture",
           "kind": "area-theme"
         },
         {
@@ -6240,7 +6264,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:07000:education-culture",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:07000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:education-culture",
           "kind": "area-theme"
         },
         {
@@ -6248,7 +6280,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:09000:education-culture",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:09000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:education-culture",
           "kind": "area-theme"
         },
         {
@@ -6256,7 +6296,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:11000:education-culture",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:11000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:education-culture",
           "kind": "area-theme"
         },
         {
@@ -6264,7 +6312,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:13000:education-culture",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:13000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:education-culture",
           "kind": "area-theme"
         },
         {
@@ -6272,7 +6328,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:15000:education-culture",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:15000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:education-culture",
           "kind": "area-theme"
         },
         {
@@ -6280,7 +6344,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:17000:education-culture",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:17000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:education-culture",
           "kind": "area-theme"
         },
         {
@@ -6288,7 +6360,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:19000:education-culture",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:19000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:education-culture",
           "kind": "area-theme"
         },
         {
@@ -6296,7 +6376,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:21000:education-culture",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:21000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:education-culture",
           "kind": "area-theme"
         },
         {
@@ -6304,7 +6392,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:23000:education-culture",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:23000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:education-culture",
           "kind": "area-theme"
         },
         {
@@ -6312,7 +6408,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:25000:education-culture",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:25000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:education-culture",
           "kind": "area-theme"
         },
         {
@@ -6320,7 +6424,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:27000:education-culture",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:27000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:education-culture",
           "kind": "area-theme"
         },
         {
@@ -6328,7 +6440,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:29000:education-culture",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:29000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:education-culture",
           "kind": "area-theme"
         },
         {
@@ -6336,7 +6456,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:31000:education-culture",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:31000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:education-culture",
           "kind": "area-theme"
         },
         {
@@ -6344,7 +6472,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:33000:education-culture",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:33000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:education-culture",
           "kind": "area-theme"
         },
         {
@@ -6352,7 +6488,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:35000:education-culture",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:35000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:education-culture",
           "kind": "area-theme"
         },
         {
@@ -6360,7 +6504,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:37000:education-culture",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:37000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:education-culture",
           "kind": "area-theme"
         },
         {
@@ -6368,7 +6520,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:39000:education-culture",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:39000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:education-culture",
           "kind": "area-theme"
         },
         {
@@ -6376,7 +6536,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:41000:education-culture",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:41000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:education-culture",
           "kind": "area-theme"
         },
         {
@@ -6384,7 +6552,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:43000:education-culture",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:43000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:education-culture",
           "kind": "area-theme"
         },
         {
@@ -6392,11 +6568,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:45000:education-culture",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:45000:occupation-salary",
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:46000:education-culture",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:46000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:education-culture",
           "kind": "area-theme"
         },
         {
@@ -6412,11 +6600,16 @@
           "kind": "ranking"
         },
         {
+          "pageId": "theme:education-culture",
+          "kind": "theme"
+        },
+        {
           "pageId": "theme:occupation-salary",
           "kind": "theme"
         }
       ],
       "themes": [
+        "education-culture",
         "occupation-salary"
       ]
     },

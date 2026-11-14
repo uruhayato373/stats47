@@ -261,9 +261,9 @@
   "theme": {
     "themes": 56,
     "metricGroups": {
-      "total": 525,
+      "total": 541,
       "byStatus": {
-        "resolved": 459,
+        "resolved": 475,
         "unresolved": 0,
         "not-applicable": 66,
         "missing-lineage": 0
@@ -354,6 +354,9 @@
       ],
       "construction-work-statistics": [
         "construction-industry"
+      ],
+      "cpi-annual": [
+        "real-income"
       ],
       "crop-statistics": [
         "agriculture-production"
@@ -457,6 +460,7 @@
         "sports-participation"
       ],
       "kakei-chousa": [
+        "communication-access",
         "earthquake-exposure",
         "household-assets-debt",
         "household-food-spending",
@@ -690,6 +694,9 @@
       "telecommunications-contract-share-quarterly": [
         "communication-access"
       ],
+      "telecommunications-service-contract-report": [
+        "communication-access"
+      ],
       "traffic-accident-statistics": [
         "safety"
       ],
@@ -717,8 +724,10 @@
         "childcare-services",
         "construction-industry",
         "daily-time-use",
+        "education-culture",
         "gender-participation",
         "healthcare",
+        "information-industry",
         "labor-mobility",
         "labor-wages",
         "long-term-care",
@@ -2800,7 +2809,9 @@
     {
       "surveyId": "cpi-annual",
       "rankingCount": 19,
-      "themeKeys": [],
+      "themeKeys": [
+        "real-income"
+      ],
       "blogSlugs": [
         "cpi-change-rate-culture-recreation-prefecture-gap",
         "cpi-change-rate-food-prefecture-gap",
@@ -3315,6 +3326,7 @@
       "surveyId": "kakei-chousa",
       "rankingCount": 853,
       "themeKeys": [
+        "communication-access",
         "earthquake-exposure",
         "household-assets-debt",
         "household-food-spending",
@@ -4810,7 +4822,9 @@
     {
       "surveyId": "telecommunications-service-contract-report",
       "rankingCount": 5,
-      "themeKeys": [],
+      "themeKeys": [
+        "communication-access"
+      ],
       "blogSlugs": [
         "public-phone-count",
         "public-phone-count-gap",
@@ -4920,8 +4934,10 @@
         "childcare-services",
         "construction-industry",
         "daily-time-use",
+        "education-culture",
         "gender-participation",
         "healthcare",
+        "information-industry",
         "labor-mobility",
         "labor-wages",
         "long-term-care",

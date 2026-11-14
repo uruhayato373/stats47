@@ -759,6 +759,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:avg-savings-rate-worker-households",
+      "to": "theme:real-income",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:banana-consumption-quantity",
       "to": "theme:household-food-spending",
       "relation": "contains"
@@ -1364,6 +1369,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:cpi-change-rate-total",
+      "to": "theme:real-income",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:crab-consumption-expenditure",
       "to": "theme:household-food-spending",
       "relation": "contains"
@@ -1789,6 +1799,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:elementary-school-children-count",
+      "to": "theme:education-culture",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:elementary-school-count-per-100km2-habitable",
       "to": "theme:education-culture",
       "relation": "contains"
@@ -1886,6 +1901,11 @@
     {
       "from": "ranking:employment-location-quotient-health-welfare",
       "to": "theme:local-economy",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:employment-location-quotient-information-communication",
+      "to": "theme:information-industry",
       "relation": "contains"
     },
     {
@@ -2979,6 +2999,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:information-communication-industry-annual-income",
+      "to": "theme:information-industry",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:information-private-employees",
       "to": "theme:information-industry",
       "relation": "contains"
@@ -3031,6 +3056,11 @@
     {
       "from": "ranking:interior-decoration-consumption-expenditure",
       "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:internet-fee-consumption-expenditure",
+      "to": "theme:communication-access",
       "relation": "contains"
     },
     {
@@ -3165,6 +3195,11 @@
     },
     {
       "from": "ranking:junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000",
+      "to": "theme:education-culture",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:junior-high-school-students-count",
       "to": "theme:education-culture",
       "relation": "contains"
     },
@@ -3305,12 +3340,22 @@
     },
     {
       "from": "ranking:library-books",
+      "to": "theme:community-participation",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:library-books",
       "to": "theme:education-culture",
       "relation": "contains"
     },
     {
       "from": "ranking:library-count-per-million",
       "to": "theme:education-culture",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:library-lending-books",
+      "to": "theme:community-participation",
       "relation": "contains"
     },
     {
@@ -3631,6 +3676,11 @@
     {
       "from": "ranking:miso-consumption-quantity",
       "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:mobile-phone-bill-consumption-expenditure",
+      "to": "theme:communication-access",
       "relation": "contains"
     },
     {
@@ -4104,6 +4154,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:pc-ownership-multi-person-households-per-1000",
+      "to": "theme:communication-access",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:penal-code-offenses-recognized-per-1000",
       "to": "theme:safety",
       "relation": "contains"
@@ -4471,6 +4526,11 @@
     {
       "from": "ranking:public-health-nurse-annual-income",
       "to": "theme:occupation-salary",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:public-phone-count-per-1000",
+      "to": "theme:communication-access",
       "relation": "contains"
     },
     {
@@ -4915,6 +4975,11 @@
     },
     {
       "from": "ranking:school-teacher-annual-income",
+      "to": "theme:education-culture",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:school-teacher-annual-income",
       "to": "theme:occupation-salary",
       "relation": "contains"
     },
@@ -5121,6 +5186,11 @@
     {
       "from": "ranking:social-increase-rate",
       "to": "theme:population-dynamics",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:software-engineer-annual-income",
+      "to": "theme:information-industry",
       "relation": "contains"
     },
     {
@@ -5785,6 +5855,11 @@
     },
     {
       "from": "ranking:university-professor-annual-income",
+      "to": "theme:education-culture",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:university-professor-annual-income",
       "to": "theme:occupation-salary",
       "relation": "contains"
     },
@@ -5870,6 +5945,16 @@
     },
     {
       "from": "ranking:voter-turnout-governor",
+      "to": "theme:community-participation",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:voter-turnout-mayor",
+      "to": "theme:community-participation",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:voter-turnout-pref-assembly",
       "to": "theme:community-participation",
       "relation": "contains"
     },

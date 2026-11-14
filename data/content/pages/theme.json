@@ -165,7 +165,11 @@
         "broadband-service-contract-count",
         "mobile-phone-contract-count-per-1000",
         "mobile-phone-ownership-multi-person-households-per-1000",
-        "internet-usage-rate-10plus"
+        "internet-usage-rate-10plus",
+        "public-phone-count-per-1000",
+        "internet-fee-consumption-expenditure",
+        "mobile-phone-bill-consumption-expenditure",
+        "pc-ownership-multi-person-households-per-1000"
       ]
     },
     {
@@ -179,7 +183,11 @@
         "volunteer-activity-annual-participation-rate-10plus",
         "voter-turnout-governor",
         "library-registered-users",
-        "community-building-volunteer-participation-rate-10plus"
+        "community-building-volunteer-participation-rate-10plus",
+        "library-books",
+        "library-lending-books",
+        "voter-turnout-mayor",
+        "voter-turnout-pref-assembly"
       ]
     },
     {
@@ -367,7 +375,11 @@
         "national-assessment-elementary-study-1h-plus-rate",
         "elementary-school-long-absence-ratio-nonattendance-over-30days-per-1000",
         "junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000",
-        "education-cost-all-households"
+        "education-cost-all-households",
+        "elementary-school-children-count",
+        "junior-high-school-students-count",
+        "school-teacher-annual-income",
+        "university-professor-annual-income"
       ]
     },
     {
@@ -855,7 +867,10 @@
       "rankingKeys": [
         "information-private-establishments",
         "information-private-employees",
-        "gross-prefectural-product-information-communication-h27"
+        "gross-prefectural-product-information-communication-h27",
+        "employment-location-quotient-information-communication",
+        "information-communication-industry-annual-income",
+        "software-engineer-annual-income"
       ]
     },
     {
@@ -1380,7 +1395,9 @@
         "gini-coefficient-disposable-income",
         "gini-coefficient-financial-assets",
         "consumption-expenditure-multi-person-households-per-month",
-        "current-liabilities-balance-multi-person-households-per-household"
+        "current-liabilities-balance-multi-person-households-per-household",
+        "avg-savings-rate-worker-households",
+        "cpi-change-rate-total"
       ]
     },
     {
