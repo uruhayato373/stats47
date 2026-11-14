@@ -3,14 +3,14 @@ import { rankingRows } from './template-ranking-bars';
 import { assertRankingRows, sampleRankingChart, type RankingChart } from './template-ranking-data';
 import { SAMPLE_FRAME, escapeXml, fitTitleSize, sampleBodyTop, sampleFrame } from './template-sample-frame';
 import { resolveMetricColor } from '../../remotion/src/features/data-cards/tile-scale';
-import { LIGHT_THEME, mixColor, toHex, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
+import { TEMPLATE_MIN_FONT_SIZE, LIGHT_THEME, mixColor, toHex, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
 
 export const RANKING_TABLE_SAMPLE_ID = 'maximum-temperature-table';
 const COLUMN_COUNT = 2;
 const COLUMN_GAP = 32;
 const HEADER_HEIGHT = 44;
-const TEXT_SIZE = 28;
-const HEADER_SIZE = 22;
+const TEXT_SIZE = TEMPLATE_MIN_FONT_SIZE;
+const HEADER_SIZE = TEMPLATE_MIN_FONT_SIZE;
 const CELL = { rankRight: 48, name: 64, valueInset: 12 } as const;
 
 /** The sample's fixed input, drawn by the same table every chart uses. */

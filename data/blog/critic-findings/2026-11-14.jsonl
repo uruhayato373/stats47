@@ -1,0 +1,2 @@
+{"key":"b54f3919ac46df3b","date":"2026-11-14","slug":"local-government-debt-burden","mode":"expert","verdict":"PASS","severity":"MAJOR","type":"reader-value","summary":"L44 の地図の段落は「分からないこと」の説明に終始し、地図が見せる分布 (上位は静岡・新潟・秋田・北海道・石川・富山と日本海側・北海道に偏り、東京41.6%と沖縄61.9%が低い) に一言も触れていない。"}
+{"key":"7afe880dfc75361a","date":"2026-11-14","slug":"local-government-debt-burden","mode":"expert","verdict":"PASS","severity":"MAJOR","type":"correlation","summary":"L54-56 の散布図の段落は、2指標の関係を述べていない。"}

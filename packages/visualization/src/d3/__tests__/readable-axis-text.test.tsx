@@ -2,6 +2,8 @@ import { render } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 
 import { estimateTextWidth } from "../../shared/layout";
+import { CategoryHeatmap } from "../components/CategoryHeatmap/CategoryHeatmap";
+import { HorizontalDivergingBarChart } from "../components/HorizontalDivergingBarChart/HorizontalDivergingBarChart";
 import { LineChart } from "../components/LineChart/LineChart";
 import { MixedChart } from "../components/MixedChart/MixedChart";
 import { StackedAreaChart } from "../components/StackedAreaChart/StackedAreaChart";
@@ -178,5 +180,46 @@ describe("縦軸の単位", () => {
     const fontSize = Number(unit?.getAttribute("font-size"));
     expect(fontSize * MOBILE_SCALE).toBeGreaterThanOrEqual(10);
     expect(Number(unit?.getAttribute("y")) - fontSize * 0.85).toBeGreaterThanOrEqual(0);
+  });
+});
+
+/**
+ * 消費者物価のページ (/areas/13000/consumer-prices) の 2 つの図。375px の画面 (表示幅 293px) で
+ * 文字が 5.9px と 3.9px だった (2026-11-14 CHART-AXIS-READABILITY-01)。
+ */
+describe("物価の図 — 縮小表示でも読める文字", () => {
+  const PHONE_WIDTH = 293;
+  const items = ["食料", "住居", "光熱・水道", "家具", "被服", "保健医療", "交通・通信", "教育", "教養娯楽", "諸雑費", "総合", "家賃除く総合"];
+  const allSizes = (container: HTMLElement) =>
+    [...container.querySelectorAll("text")].map((node) => Number(node.getAttribute("font-size")));
+
+  it("基準からの乖離の横棒は、文字が画面上で 10px 以上になり、行が文字より低くならない", () => {
+    reportContainerWidth(PHONE_WIDTH);
+    const data = items.map((label, i) => ({ label, value: 94 + i }));
+    const { container } = render(<HorizontalDivergingBarChart data={data} baseline={100} />);
+    const scale = PHONE_WIDTH / 500;
+    const sizes = allSizes(container);
+    expect(sizes.length).toBeGreaterThan(items.length);
+    for (const size of sizes) expect(size * scale).toBeGreaterThanOrEqual(10);
+    const rowPitch = viewBoxOf(container).height / items.length;
+    expect(rowPitch).toBeGreaterThan(Math.max(...sizes));
+  });
+
+  it("ヒートマップは、文字が画面上で 10px 以上になり、値が入らない狭いセルには値を書かない", () => {
+    const years = Array.from({ length: 13 }, (_, i) => `${2013 + i}年`);
+    const data = items.flatMap((y, r) => years.map((x, c) => ({ x, y, value: 95 + ((r + c) % 10) + 0.6 })));
+    reportContainerWidth(PHONE_WIDTH);
+    const narrow = render(<CategoryHeatmap data={data} baseline={100} />).container;
+    const scale = PHONE_WIDTH / 600;
+    for (const size of allSizes(narrow)) expect(size * scale).toBeGreaterThanOrEqual(10);
+    expect(narrow.querySelectorAll("text.cell-text")).toHaveLength(0);
+    // 年の目盛りは重ならないよう間引き、最新の年は残す
+    const yearLabels = [...narrow.querySelectorAll("text")].map((node) => node.textContent).filter((t) => /^\d{4}$/.test(t ?? ""));
+    expect(yearLabels.length).toBeLessThan(years.length);
+    expect(yearLabels.at(-1)).toBe("2025");
+    // PC の幅 (1280px の画面で表示幅 950px) ではセルに値を書く
+    reportContainerWidth(950);
+    const full = render(<CategoryHeatmap data={data} baseline={100} />).container;
+    expect(full.querySelectorAll("text.cell-text").length).toBe(data.length);
   });
 });

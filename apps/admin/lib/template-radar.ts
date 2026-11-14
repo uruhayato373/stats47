@@ -1,5 +1,5 @@
 import { SERIES_COLORS } from '../../../packages/svg-builder/src/shared/color';
-import { LIGHT_THEME, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
+import { TEMPLATE_MIN_FONT_SIZE, LIGHT_THEME, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
 import { SAMPLE_FRAME, escapeXml, fitTitleSize, sampleBodyTop, sampleFrame, textWidth } from './template-sample-frame';
 
 export interface RadarSeries {
@@ -26,7 +26,7 @@ const LABEL_GAP = 28;
 const LABEL_SIZE = 30;
 const LABEL_LINE = 38;
 const LABEL_WIDTH = 200;
-const LEGEND_SIZE = 28;
+const LEGEND_SIZE = TEMPLATE_MIN_FONT_SIZE;
 const LEGEND_GAP = 40;
 const LEGEND_MARK = 58;
 

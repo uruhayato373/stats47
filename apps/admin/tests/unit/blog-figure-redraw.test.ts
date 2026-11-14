@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { itemBarChartFromArticleData, rankingChartFromArticleData } from '../../../../.claude/scripts/blog/lib/type-chart-input';
 import { PREF_NAMES } from '../../../../.claude/scripts/lib/prefectures.cjs';
-import { findImageTypeCopyDefects } from '../../../../.claude/scripts/lib/svg-lint.mjs';
+import { TEMPLATE_MIN_FONT_SIZE as LINT_MIN_FONT_SIZE, findImageTypeCopyDefects, findTemplateFontFloorDefects } from '../../../../.claude/scripts/lib/svg-lint.mjs';
+import { TEMPLATE_MIN_FONT_SIZE } from '../../../remotion/src/features/data-cards/chart-theme';
 import { renderDistributionMapChart } from '@/lib/template-distribution-map';
 import { renderRankingBarsChart } from '@/lib/template-ranking-bars';
 import { renderTileMapChart } from '@/lib/template-ranking-tile-map';
@@ -21,6 +22,13 @@ const ranking = (data: Record<string, unknown>, metric?: Record<string, unknown>
 const RENDERERS = [renderRankingBarsChart, renderTileMapChart, renderDistributionMapChart] as const;
 
 describe('ブログの図の描き直しの型', () => {
+  // ブログの本文はスマホで約 360px 幅なので、1080 の型は 1/3 に縮む。型の文字は 30 以上で画面上 10px 以上 (CHART-AXIS-READABILITY-01)
+  it('型の文字は下限 30 を下回らない', () => {
+    expect(LINT_MIN_FONT_SIZE).toBe(TEMPLATE_MIN_FONT_SIZE);
+    const chart = ranking(article({ title: '地方債現在高の割合（対歳出決算総額）', source: '地方財政状況調査', note: '都道府県財政' }));
+    for (const render of RENDERERS) expect(findTemplateFontFloorDefects(render(chart)), render.name).toEqual([]);
+  });
+
   it('出典名がデータに無い図は指標の定義の出典名を書く', () => {
     const chart = ranking(article(), { key: 'x', source: { displayName: '地方財政状況調査' } });
     expect(chart.source).toBe('地方財政状況調査');
@@ -80,9 +88,11 @@ describe('ブログの図の描き直しの型', () => {
     const svg = renderTileMapChart(ranking(article({ title: '大人用サンダル消費支出額', unit: '円', data }), kakei));
     expect(svg).toContain('>上位3市</text>');
     expect(svg).not.toContain('上位3県');
+    // 2×2 の北海道は市の名前のまま。1 列のタイルは 30px で 2 文字までなので、市の名前の頭 2 文字 (東京区部→東京)
     expect(svg).toContain('>札幌市</text>');
-    expect(svg).toContain('>東京区部</text>');
-    expect(svg).not.toMatch(/>(北海道|東京)<\/text>/);
+    expect(svg).toMatch(/data-area="13000"[^>]*>.*?>東京<\/text>/);
+    expect(svg).toMatch(/data-area="23000"[^>]*>.*?>名古<\/text>/);
+    expect(svg).not.toMatch(/>(北海道|愛知)<\/text>/);
     expect(svg).toMatch(/>\d+市<\/text>/);
     expect(svg).not.toMatch(/>\d+県<\/text>/);
     // 範囲は 1 回だけ書く (定義の行が県庁所在市と書いていれば、単位の行に重ねない)

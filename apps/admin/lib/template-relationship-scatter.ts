@@ -9,7 +9,7 @@ import { linearRegression } from '../../../packages/svg-builder/src/shared/regre
 import { BRAND } from '../../web/src/features/ogp/brand';
 import { SAMPLE_FRAME, escapeXml, sampleBodyTop, sampleFrame } from './template-sample-frame';
 import { resolveMetricColor } from '../../remotion/src/features/data-cards/tile-scale';
-import { LIGHT_THEME, mixColor, toHex, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
+import { LIGHT_THEME, TEMPLATE_MIN_FONT_SIZE, mixColor, toHex, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
 import type { MetricPresentation } from '../../../packages/types/src/metric-presentation';
 
 export const RELATIONSHIP_SAMPLE_ID = 'temperature-kerosene';
@@ -140,9 +140,9 @@ export function renderRelationshipScatterChart(chart: ScatterChart, theme: Chart
     ? logTicks(domain).map((value) => ({ v: Math.log10(value), label: format(value) }))
     : niceTicks(domain[0], domain[1], 5).map((v) => ({ v, label: format(v) }));
   const xTicks = axisTicks(xDomain, fx).map(({ v, label }) =>
-    `<line x1="${sx(v)}" x2="${sx(v)}" y1="${PLOT.top}" y2="${PLOT.bottom}" stroke="${ink.grid}"/><text x="${sx(v)}" y="${PLOT.bottom + 44}" text-anchor="middle" font-size="28" fill="${ink.tick}">${label}</text>`);
+    `<line x1="${sx(v)}" x2="${sx(v)}" y1="${PLOT.top}" y2="${PLOT.bottom}" stroke="${ink.grid}"/><text x="${sx(v)}" y="${PLOT.bottom + 44}" text-anchor="middle" font-size="${TEMPLATE_MIN_FONT_SIZE}" fill="${ink.tick}">${label}</text>`);
   const yTicks = axisTicks(yDomain, fy).map(({ v, label }) =>
-    `<line x1="${PLOT.left}" x2="${PLOT.right}" y1="${sy(v)}" y2="${sy(v)}" stroke="${ink.grid}"/><text x="${PLOT.left - 16}" y="${sy(v) + 10}" text-anchor="end" font-size="28" fill="${ink.tick}">${label}</text>`);
+    `<line x1="${PLOT.left}" x2="${PLOT.right}" y1="${sy(v)}" y2="${sy(v)}" stroke="${ink.grid}"/><text x="${PLOT.left - 16}" y="${sy(v) + 10}" text-anchor="end" font-size="${TEMPLATE_MIN_FONT_SIZE}" fill="${ink.tick}">${label}</text>`);
   const reg = linearRegression(points);
   // Name the article's prefectures, then the extremes, only where the label clears every other dot.
   const named = (chart.labelNames ?? []).map((n) => points.find((p) => p.name === n)).filter((p): p is ScatterPoint => Boolean(p));
@@ -184,11 +184,11 @@ export function renderRelationshipScatterChart(chart: ScatterChart, theme: Chart
     const isNamed = namedPoints.has(p);
     return `<circle data-pref="${p.code}" cx="${sx(p.x)}" cy="${sy(p.y)}" r="${isNamed ? namedDotR : dotR}" fill="${isNamed ? ink.named : ink.dot}" stroke="${ink.dotEdge}" stroke-width="${municipal ? 1 : 2}"/>`;
   };
-  // Long axis labels shrink to their side of the plot, as the title does.
-  const axisFont = (label: string, length: number) => Math.min(AXIS_FONT, Math.floor(length / label.length));
+  // Long axis labels shrink to their side of the plot, as the title does, but not below the type's smallest size.
+  const axisFont = (label: string, length: number) => Math.max(TEMPLATE_MIN_FONT_SIZE, Math.min(AXIS_FONT, Math.floor(length / label.length)));
   return sampleFrame({
     // Two metric names can run long; shrink the title to the frame width instead of letting it overflow.
-    title: chart.title, titleSize: Math.min(64, Math.floor((SAMPLE_FRAME.right - SAMPLE_FRAME.left) / chart.title.length)), meta: everyPrefecture ? chart.meta : `${chart.meta}・${areaCount}`, note: chart.note, source: chart.source, theme,
+    title: chart.title, titleSize: Math.max(TEMPLATE_MIN_FONT_SIZE, Math.min(64, Math.floor((SAMPLE_FRAME.right - SAMPLE_FRAME.left) / chart.title.length))), meta: everyPrefecture ? chart.meta : `${chart.meta}・${areaCount}`, note: chart.note, source: chart.source, theme,
     ariaLabel: `${chart.title}・${everyPrefecture ? '全47都道府県' : areaCount}`, attributes: `data-image-template="scatter" data-points="${points.length}"${municipal ? ' data-level="municipality"' : ''}`,
     body: `<defs><clipPath id="scatter-plot"><rect x="${PLOT.left}" y="${PLOT.top}" width="${PLOT.right - PLOT.left}" height="${PLOT.bottom - PLOT.top}"/></clipPath></defs>
       <rect x="${PLOT.left}" y="${PLOT.top}" width="${PLOT.right - PLOT.left}" height="${PLOT.bottom - PLOT.top}" fill="${ink.plot}" stroke="${ink.edge}"/>

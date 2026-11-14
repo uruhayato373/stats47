@@ -3,7 +3,7 @@ import { SERIES_COLORS } from '../../../packages/svg-builder/src/shared/color';
 import { BRAND } from '../../web/src/features/ogp/brand';
 import type { StatsSchema } from '../../../packages/types/src';
 import { niceTicks } from '../../../packages/types/src/numeric-ticks';
-import { LIGHT_THEME, mixColor, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
+import { TEMPLATE_MIN_FONT_SIZE, LIGHT_THEME, mixColor, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
 import { SAMPLE_FRAME, escapeXml, fitTitleSize, sampleBodyTop, sampleFrame, textWidth } from './template-sample-frame';
 
 export const COMPOSITION_SAMPLE_SOURCE = {
@@ -98,7 +98,7 @@ export function renderStackedChart(chart: StackedChart, theme: ChartTheme = LIGH
   const available = legendTop - 40 - top;
   const height = Math.min(BAR_MAX_HEIGHT, available / (groups.length + (groups.length - 1) * BAR_GAP_RATIO));
   const gap = groups.length > 1 ? Math.min(70, (available - height * groups.length) / (groups.length - 1)) : 0;
-  const nameSize = height >= 60 ? 30 : 26;
+  const nameSize = TEMPLATE_MIN_FONT_SIZE;
   const left = SAMPLE_FRAME.left + Math.min(320, Math.max(...groups.map((g) => textWidth(g, nameSize)))) + 24;
   const width = SAMPLE_FRAME.right - left;
   const bars = groups.map((group, g) => {
@@ -109,7 +109,7 @@ export function renderStackedChart(chart: StackedChart, theme: ChartTheme = LIGH
       const w = width * value / (normalized ? totals[g] || 1 : largest);
       const label = normalized ? (value / (totals[g] || 1) * 100).toFixed(1) + '%' : value.toLocaleString('en-US', { maximumFractionDigits: decimals });
       const fill = SERIES_COLORS[c % SERIES_COLORS.length];
-      const size = w >= 110 ? 32 : 26;
+      const size = w >= 110 ? 32 : TEMPLATE_MIN_FONT_SIZE;
       const rect = `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w.toFixed(1)}" height="${height.toFixed(1)}" fill="${fill}"/>`;
       const text = w >= Math.max(MIN_LABEL_WIDTH, textWidth(label, size) + 8) && height >= 40 ? `<text x="${(x + w / 2).toFixed(1)}" y="${(y + height / 2 + 11).toFixed(1)}" text-anchor="middle" font-size="${size}" font-weight="700" fill="${labelColor(fill)}">${label}</text>` : '';
       x += w;
@@ -120,7 +120,7 @@ export function renderStackedChart(chart: StackedChart, theme: ChartTheme = LIGH
   const column = frameWidth / columns;
   const legend = categories.map((category, c) => {
     const x = SAMPLE_FRAME.left + (c % columns) * column, y = legendTop + Math.floor(c / columns) * LEGEND_ROW;
-    return `<rect x="${x}" y="${y}" width="34" height="34" rx="4" fill="${SERIES_COLORS[c % SERIES_COLORS.length]}"/><text x="${x + 50}" y="${y + 28}" font-size="28" fill="${theme.ink}">${escapeXml(category.label)}</text>`;
+    return `<rect x="${x}" y="${y}" width="34" height="34" rx="4" fill="${SERIES_COLORS[c % SERIES_COLORS.length]}"/><text x="${x + 50}" y="${y + 28}" font-size="${TEMPLATE_MIN_FONT_SIZE}" fill="${theme.ink}">${escapeXml(category.label)}</text>`;
   }).join('');
   return sampleFrame({
     title: chart.title, titleSize: fitTitleSize(chart.title, 64), meta: chart.meta, note: chart.note, source: chart.source,
@@ -184,7 +184,7 @@ export function renderStackedAreaChart(chart: StackedChart, theme: ChartTheme = 
     const label = categories[i].label;
     const width = 50 + textWidth(label, 28) + 36;
     if (legendX + width > SAMPLE_FRAME.right && legendX > SAMPLE_FRAME.left) { legendX = SAMPLE_FRAME.left; legendY += 48; }
-    legendItems.push(`<rect x="${legendX}" y="${legendY - 26}" width="34" height="34" rx="4" fill="${colorOf(i)}"/><text x="${legendX + 50}" y="${legendY}" font-size="28" fill="${theme.ink}">${escapeXml(label)}</text>`);
+    legendItems.push(`<rect x="${legendX}" y="${legendY - 26}" width="34" height="34" rx="4" fill="${colorOf(i)}"/><text x="${legendX + 50}" y="${legendY}" font-size="${TEMPLATE_MIN_FONT_SIZE}" fill="${theme.ink}">${escapeXml(label)}</text>`);
     legendX += width;
   });
 
@@ -201,7 +201,7 @@ export function renderStackedAreaChart(chart: StackedChart, theme: ChartTheme = 
 
   const grid = ticks.map((t) => {
     const y = yAt(t);
-    return `<line x1="${plot.left}" y1="${y.toFixed(1)}" x2="${plot.right}" y2="${y.toFixed(1)}" stroke="${theme.line}" stroke-width="1.5"/><text x="${plot.left - 20}" y="${(y + 10).toFixed(1)}" text-anchor="end" font-size="28" fill="${theme.muted}">${tickLabel(t)}</text>`;
+    return `<line x1="${plot.left}" y1="${y.toFixed(1)}" x2="${plot.right}" y2="${y.toFixed(1)}" stroke="${theme.line}" stroke-width="1.5"/><text x="${plot.left - 20}" y="${(y + 10).toFixed(1)}" text-anchor="end" font-size="${TEMPLATE_MIN_FONT_SIZE}" fill="${theme.muted}">${tickLabel(t)}</text>`;
   }).join('');
   const bands = categories.map((c, i) => {
     const top = groups.map((_, g) => point(g, cumulative[i][g]));
@@ -217,7 +217,7 @@ export function renderStackedAreaChart(chart: StackedChart, theme: ChartTheme = 
   const xLabels = [...kept, groups.length - 1].map((g) => {
     const half = textWidth(groups[g], 28) / 2;
     const x = Math.min(Math.max(xAt(g), SAMPLE_FRAME.left + half), SAMPLE_FRAME.right - half);
-    return `<text data-x-label="${escapeXml(groups[g])}" x="${x.toFixed(1)}" y="${plot.bottom + 52}" text-anchor="middle" font-size="28" fill="${theme.muted}">${escapeXml(groups[g])}</text>`;
+    return `<text data-x-label="${escapeXml(groups[g])}" x="${x.toFixed(1)}" y="${plot.bottom + 52}" text-anchor="middle" font-size="${TEMPLATE_MIN_FONT_SIZE}" fill="${theme.muted}">${escapeXml(groups[g])}</text>`;
   }).join('');
 
   const last = groups.length - 1;

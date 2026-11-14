@@ -1,0 +1,10 @@
+{
+  "kind": "ranking",
+  "rankingKey": "local-debt-current-ratio",
+  "year": "2022",
+  "unit": "％",
+  "source": "r2:app/ranking/local-debt-current-ratio/values.json",
+  "verifiedMatchRate": 100,
+  "schemeSource": "item.json",
+  "note": "SSOTから取得。既存地図の表示値と照合し metric+年を確定 (SVGから逆復元しない)"
+}
