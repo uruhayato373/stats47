@@ -52,7 +52,7 @@ export function navHrefs(groups: readonly NavGroup[]): string[] {
   return groups.flatMap((g) => g.items.flatMap((e) => (isBranch(e) ? e.children.map((c) => c.href) : [e.href])));
 }
 
-const TODO_LAYERS =new Set(["weekly", "monthly", "improvements"]);
+const TODO_LAYERS =new Set(["annual", "weekly", "monthly", "improvements"]);
 
 /**
  * ルート以外は前方一致。TODO だけは同じ pathname 内の f=層まで比較する。

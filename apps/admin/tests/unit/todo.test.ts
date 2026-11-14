@@ -26,7 +26,7 @@ updated: 2026-08-18
 - **次**: 何かする。
 
 ### [BETA-02] ユーザー待ちのカード
-タグ: [実行:ユーザー] [起票:2026-08-02]
+タグ: [実行:ユーザー] [起票:2026-08-02] [待ち:承認] [待ち:ログイン]
 
 ## 🟡 中
 
@@ -60,6 +60,28 @@ week: 2026-W34
 ## 今週やらないこと
 
 - 何か
+`;
+
+const ANNUAL_MD = `---
+title: 年間計画
+type: annual-plan
+status: active
+updated: 2026-11-14
+---
+
+# 年間計画
+
+## 2026-11
+
+### [WAIT-TIME-01] 公表を待つ
+タグ: [インフラ・計測] [種類:改善] [実行:機械] [起票:2026-11-02] [期日:2026-11-20] [待ち:時期]
+
+- **次**: 公表されたら取り込む。
+
+## 2026-12
+
+### [WAIT-OBS-01] 判定日を待つ
+タグ: [インフラ・計測] [種類:改善] [実行:機械] [期日:2026-12-15] [待ち:観測]
 `;
 
 const IMPROVEMENTS_MD = `---
@@ -120,11 +142,32 @@ describe("todo server (v3-unified)", () => {
     expect(alpha.line).toBe(BACKLOG_MD.split("\n").indexOf("### [ALPHA-01] 最初のカード") + 1);
 
     expect(backlogCards[2]).toMatchObject({ wip: true, codex: true });
+    // 待ちの理由は複数持てる。backlog のカードは月を持たない
+    expect(backlogCards[1]).toMatchObject({ waits: ["承認", "ログイン"], month: null });
+    expect(backlogCards[0].waits).toEqual([]);
     expect(backlogCards[4]).toMatchObject({ tier: "hold", executor: "対話" });
 
     // ファセット語彙は backlog-lib の宣言をそのまま渡す (画面側で別語彙を作らない)
     expect(b.kinds).toContain("不具合");
     expect(b.executors).toContain("sweep");
+    expect(b.waits).toEqual(["承認", "時期", "観測", "ログイン", "判断"]);
+  });
+
+  it("年間計画は月見出しの下のカードを読み、月・期日・待ちの理由を持つ", async () => {
+    root = makeFixtureRoot({ todoFiles: { "annual.md": ANNUAL_MD } });
+    const { todoBoard } = await loadTodo(root);
+    const b = todoBoard();
+
+    expect(b.error).toBeUndefined();
+    const annual = b.items.filter((c) => c.layer === "annual");
+    expect(annual.map((c) => [c.id, c.month, c.due, c.waits])).toEqual([
+      ["WAIT-TIME-01", "2026-11", "2026-11-20", ["時期"]],
+      ["WAIT-OBS-01", "2026-12", "2026-12-15", ["観測"]],
+    ]);
+    expect(annual[0]).toMatchObject({ tier: null, layerLabel: "年間計画", path: ".claude/todo/annual.md" });
+    expect(annual[0].line).toBe(ANNUAL_MD.split("\n").indexOf("### [WAIT-TIME-01] 公表を待つ") + 1);
+    const layer = b.layers.find((l) => l.id === "annual");
+    expect(layer).toMatchObject({ exists: true, count: 2, updated: "2026-11-14" });
   });
 
   it("weekly は ## 見出し単位でカード化する (タグ軸は持たない)", async () => {
@@ -162,8 +205,8 @@ describe("todo server (v3-unified)", () => {
     const b = todoBoard();
 
     expect(b.error).toBeUndefined();
-    expect(b.layers).toHaveLength(4);
-    expect(b.layers.map((l) => l.id)).toEqual(["backlog", "weekly", "monthly", "improvements"]);
+    expect(b.layers).toHaveLength(5);
+    expect(b.layers.map((l) => l.id)).toEqual(["backlog", "weekly", "monthly", "improvements", "annual"]);
     expect(b.layers.every((l) => !l.exists)).toBe(true);
     expect(b.items).toEqual([]);
   });

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { BugIcon, CalendarClockIcon, CircleAlertIcon, ListTodoIcon } from "lucide-react";
 
-import { DataGrid, StatCard, StatusBadge, type Tone } from "@/components/admin-ui";
+import { Cell, DataGrid, DataTable, Row, StatCard, StatusBadge, type Tone } from "@/components/admin-ui";
 import { Grid, Section } from "@/components/layout-primitives";
 import { ErrorNote, PageHeading } from "@/components/ops/primitives";
 import { Button, buttonVariants, Collapsible, CollapsibleContent, CollapsibleTrigger } from "@stats47/components";
@@ -17,14 +17,15 @@ export const metadata = { title: "TODO — stats47 統合メディアコンソ�
  *
  * - **役割 (実行/計画/検証) は共通サイドバーの TODO 階層**が持つ。台帳は別ファイルで、
  *   週間・月間は backlog の部分集合ではなく pull されたコピー＝「行き先」であって絞り込みではない。
- * - **優先度・種類は一覧の上の絞り込み**に置く。backlog カードの属性でしかない
+ * - **優先度・種類・待ちの理由は一覧の上の絞り込み**に置く。backlog カードの属性でしかない
  *   (他層には存在しない) ため。絞り込みは searchParams に載せる (リンクで共有できる):
- *   f=層 / t=優先度 / k=種類。実行タグは自動処理の内部契約で、読者向け分類には使わない。
+ *   f=層 / t=優先度 / k=種類 / w=待ちの理由 (none = 待ちなし)。実行タグは自動処理の内部契約で、読者向け分類には使わない。
+ * - 年間計画 (f=annual) は月見出しごとに表を分け、期日と待ちの理由を出す (時期・観測を待つカードの置き場)。
  * - 件数は**自分以外の絞り込みを当てた集合**で数える (押した先が 0 件になる導線に件数を出さない)。
  * - 読み取り専用。編集は vscode リンクで元ファイルを開く (排他 writer 契約を画面から崩さない)。
  */
 
-type Query = { f?: string; t?: string; k?: string; e?: string };
+type Query = { f?: string; t?: string; k?: string; w?: string; e?: string };
 type TierKey = Tier | "none";
 
 const TIERS: { key: TierKey; label: string; tone: Tone }[] = [
@@ -38,6 +39,7 @@ const TIER_ORDER = new Map(TIERS.map((t, i) => [t.key, i]));
 
 const LAYER_TITLES: Record<LayerId, string> = {
   backlog: "実行バックログ",
+  annual: "計画 — 年間",
   weekly: "計画 — 今週",
   monthly: "計画 — 今月",
   improvements: "効果測定・改善",
@@ -45,6 +47,7 @@ const LAYER_TITLES: Record<LayerId, string> = {
 
 const LAYER_HINTS: Record<LayerId, string> = {
   backlog: "未完了タスクの全量を持つマスタ・唯一の起票先",
+  annual: "時期や判定日が来るまで着手できないカードを月ごとに置いた計画。週次・月次の計画が期日で引く",
   weekly: "バックログから今週実行する項目を選んだ計画",
   monthly: "バックログから選んだ今月の重点とゴール",
   improvements: "実装後の効果判定・期限・Owner・Metricを持つ専用台帳",
@@ -53,6 +56,13 @@ const LAYER_HINTS: Record<LayerId, string> = {
 const LINK = "font-medium underline-offset-4 hover:underline";
 
 const tierKey = (c: TodoCard): TierKey => c.tier ?? "none";
+
+/** 待ちの理由の絞り込みで「待ちなし (いま着手できる)」を表すキー */
+const NO_WAIT = "none";
+/** 承認はオーナーが週次レビューでまとめて可否を出すので目立たせる。ほかは人の操作・決定・時間を待つ */
+const WAIT_TONE: Record<string, Tone> = { 承認: "warn", ログイン: "info", 判断: "info" };
+
+const isOverdue = (c: { due: string | null }, today: string) => c.due !== null && c.due < today;
 
 /** vscode://file/<abs>:<line> (Windows パスは / へ正規化) */
 function editorHref(abs: string, line: number) {
@@ -65,6 +75,15 @@ function href(q: Query, patch: Partial<Query>): string {
   for (const [k, v] of Object.entries({ ...q, ...patch })) if (v) p.set(k, v);
   const s = p.toString();
   return s ? "/todo?" + s : "/todo";
+}
+
+/** 待ちの理由ごとの枚数。1 枚が複数の理由を持てるので countBy と別に数える (待ちなしは NO_WAIT) */
+function countWaits(cards: TodoCard[]): Map<string, number> {
+  const m = new Map<string, number>();
+  for (const c of cards) {
+    for (const w of c.waits.length ? c.waits : [NO_WAIT]) m.set(w, (m.get(w) ?? 0) + 1);
+  }
+  return m;
 }
 
 function countBy(cards: TodoCard[], pick: (c: TodoCard) => string | null): Map<string, number> {
@@ -117,7 +136,7 @@ function getExecutorStatus(executor: string | null) {
 
 /** カードのタイトル・状態バッジ・詳細 (本文は Collapsible で開く) */
 function TodoCardCell({ c, today }: { c: TodoCard; today: string }) {
-  const overdue = c.due !== null && c.due < today;
+  const overdue = isOverdue(c, today);
   const executorStatus = getExecutorStatus(c.executor);
   return (
     <div className="flex flex-col gap-1.5">
@@ -127,6 +146,11 @@ function TodoCardCell({ c, today }: { c: TodoCard; today: string }) {
       <div className="flex flex-wrap items-center gap-1.5">
         {c.kind ? <StatusBadge tone={c.kind === "不具合" ? "bad" : "neutral"}>{c.kind}</StatusBadge> : null}
         {executorStatus ? <StatusBadge tone={executorStatus.tone}>{executorStatus.label}</StatusBadge> : null}
+        {c.waits.map((w) => (
+          <StatusBadge key={w} tone={WAIT_TONE[w] ?? "neutral"}>
+            {w}待ち
+          </StatusBadge>
+        ))}
         {c.wip ? <StatusBadge tone="info">進行中</StatusBadge> : null}
         {c.codex ? <StatusBadge tone="info">Codex</StatusBadge> : null}
         {overdue ? <StatusBadge tone="bad">期日超過</StatusBadge> : null}
@@ -142,6 +166,41 @@ function TodoCardCell({ c, today }: { c: TodoCard; today: string }) {
         </Collapsible>
       ) : null}
     </div>
+  );
+}
+
+/** 年間計画: 月見出しごとに 1 つの表。月の中は期日の早い順 (期日が同じなら台帳の順) */
+function AnnualMonths({ cards, today }: { cards: TodoCard[]; today: string }) {
+  const months = [...new Set(cards.map((c) => c.month ?? "月なし"))].sort();
+  return (
+    <>
+      {months.map((month) => {
+        const inMonth = cards
+          .filter((c) => (c.month ?? "月なし") === month)
+          .sort((x, y) => (x.due ?? "9999").localeCompare(y.due ?? "9999") || x.line - y.line);
+        return (
+          <Section key={month} id={`month-${month}`} title={month} count={`${inMonth.length} 件`}>
+            {/* 狭い幅で長い ID が列を占めてタスクが押し出されないよう、ID はタスクの列の先頭に置く */}
+            <DataTable columns={["期日", "タスク"]}>
+              {inMonth.map((c) => (
+                <Row key={c.path + c.line}>
+                  <Cell nowrap className={isOverdue(c, today) ? "text-negative" : "text-muted-foreground"}>
+                    {c.due ?? "—"}
+                  </Cell>
+                  {/* 待ちの理由と期日超過はタスクの列のバッジで出す (backlog と同じ見せ方) */}
+                  <Cell>
+                    <div className="flex flex-col gap-1">
+                      <span className="break-all font-mono text-xs text-muted-foreground">{c.id ?? "—"}</span>
+                      <TodoCardCell c={c} today={today} />
+                    </div>
+                  </Cell>
+                </Row>
+              ))}
+            </DataTable>
+          </Section>
+        );
+      })}
+    </>
   );
 }
 
@@ -221,26 +280,33 @@ export default async function TodoPage({ searchParams }: { searchParams: Promise
 
   const tier = TIERS.some((t) => t.key === q.t) ? (q.t as TierKey) : null;
   const kind = faceted && q.k && layerCards.some((c) => c.kind === q.k) ? q.k : null;
+  const wait = faceted && q.w && (q.w === NO_WAIT || board.waits.includes(q.w)) ? q.w : null;
 
   const byTier = (cs: TodoCard[]) => (tier ? cs.filter((c) => tierKey(c) === tier) : cs);
   const byKind = (cs: TodoCard[]) => (kind ? cs.filter((c) => c.kind === kind) : cs);
+  const byWait = (cs: TodoCard[]) =>
+    wait ? cs.filter((c) => (wait === NO_WAIT ? c.waits.length === 0 : c.waits.includes(wait))) : cs;
 
   // 各軸のスコープ＝自分以外の絞り込みだけを当てた集合
-  const tierScope = byKind(layerCards);
-  const kindScope = byTier(layerCards);
+  const tierScope = byKind(byWait(layerCards));
+  const kindScope = byTier(byWait(layerCards));
+  const waitScope = byTier(byKind(layerCards));
   const tierCounts = countBy(tierScope, tierKey);
   const kindCounts = countBy(kindScope, (c) => c.kind);
+  const waitCounts = countWaits(waitScope);
   const items = byTier(tierScope);
 
   const now: Query = {
     f: layer === "backlog" ? undefined : layer,
     t: tier ?? undefined,
     k: kind ?? undefined,
+    w: wait ?? undefined,
   };
 
-  // 語彙の宣言順で並べる (件数順にすると押すたびに行が動く)
+  // 語彙の宣言順で並べる (件数順にすると押すたびに行が動く)。待ちなしは最後
   const kindKeys = board.kinds.filter((k) => kindCounts.has(k) || kind === k);
-  const overdueCount = items.filter((c) => c.due !== null && c.due < today).length;
+  const waitKeys = [...board.waits, NO_WAIT].filter((w) => waitCounts.has(w) || wait === w);
+  const overdueCount = items.filter((c) => isOverdue(c, today)).length;
   const tierLabel = new Map(TIERS.map((t) => [t.key, t]));
   // 優先度の宣言順 (高 → 未設定) に並べる。同じ優先度の中は台帳の順のまま
   const byTierOrder = (cs: TodoCard[]) => [...cs].sort((x, y) => (TIER_ORDER.get(tierKey(x)) ?? 0) - (TIER_ORDER.get(tierKey(y)) ?? 0));
@@ -263,7 +329,15 @@ export default async function TodoPage({ searchParams }: { searchParams: Promise
         <p className="text-xs text-muted-foreground">{LAYER_HINTS[layer]}</p>
       </Section>
 
-      {layer === "improvements" ? (
+      {layer === "annual" ? (
+        <>
+          <Grid min="sm">
+            <StatCard label="カード" icon={<ListTodoIcon />} value={layerCards.length} sub={`${new Set(layerCards.map((c) => c.month)).size} か月`} />
+            <StatCard label="期日超過" icon={<CalendarClockIcon />} value={layerCards.filter((c) => isOverdue(c, today)).length} tone={layerCards.some((c) => isOverdue(c, today)) ? "bad" : "good"} />
+          </Grid>
+          <AnnualMonths cards={layerCards} today={today} />
+        </>
+      ) : layer === "improvements" ? (
         <>
           <Grid min="sm">
             <StatCard label="施策" icon={<ListTodoIcon />} value={board.improvements.length} />
@@ -319,7 +393,17 @@ export default async function TodoPage({ searchParams }: { searchParams: Promise
                 items={kindKeys.map((v) => ({ key: v, label: v, count: kindCounts.get(v) ?? 0 }))}
               />
             ) : null}
-            {tier || kind ? (
+            {faceted ? (
+              <Facet
+                title="待ち"
+                param="w"
+                now={now}
+                active={wait}
+                total={waitScope.length}
+                items={waitKeys.map((v) => ({ key: v, label: v === NO_WAIT ? "なし" : v, count: waitCounts.get(v) ?? 0 }))}
+              />
+            ) : null}
+            {tier || kind || wait ? (
               <Link href={href({}, { f: now.f })} className={`${LINK} self-start text-xs`}>
                 すべて解除
               </Link>
@@ -335,7 +419,7 @@ export default async function TodoPage({ searchParams }: { searchParams: Promise
             ]}
             rows={byTierOrder(items).map((c) => {
               const t = tierLabel.get(tierKey(c));
-              const overdue = c.due !== null && c.due < today;
+              const overdue = isOverdue(c, today);
               return {
                 id: c.path + c.line,
                 cells: [
@@ -351,7 +435,7 @@ export default async function TodoPage({ searchParams }: { searchParams: Promise
                   </span>,
                 ],
                 sort: [TIER_ORDER.get(tierKey(c)) ?? null, c.id, null, c.due],
-                search: `${c.id ?? ""} ${c.title} ${c.kind ?? ""}`,
+                search: `${c.id ?? ""} ${c.title} ${c.kind ?? ""} ${c.waits.join(" ")}`,
                 tone: overdue ? ("bad" as const) : undefined,
               };
             })}
