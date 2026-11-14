@@ -4,7 +4,7 @@
     {
       "keyword": "40代 未婚 割合 日本 国勢調査",
       "targetPath": "/survey/census",
-      "status": "observing",
+      "status": "active",
       "actions": [
         {
           "date": "2026-09-13",
@@ -36,7 +36,7 @@
           ]
         }
       ],
-      "nextReviewDate": "2026-09-20",
+      "nextReviewDate": null,
       "reviews": [
         {
           "date": "2026-09-20",
@@ -1929,8 +1929,26 @@
             "windowDays": 7
           },
           "snapshotHash": "95eb5dc8f0b626182c666773c59b634e6887ba8e54ab83ee03a8b262041334d6"
+        },
+        {
+          "date": "2026-11-14",
+          "outcome": "insufficient-data",
+          "reason": "closed-query-page-never-reported",
+          "note": "判定日 2026-09-20 を過ぎても Search Console にこの検索語とページの組の実績が出ず、161 回とも判定できなかった (2026-09-23〜2026-11-13)。国勢調査のページの指標の紐付けの修正 (7d417cfbc) を本番へ出すため、効果は判定不能として観測を閉じる (2026-11-14 オーナー承認)。",
+          "before": 4.385786802030457,
+          "after": null,
+          "attribution": "observed-change-only"
         }
-      ]
+      ],
+      "lastReview": {
+        "date": "2026-11-14",
+        "outcome": "insufficient-data",
+        "reason": "closed-query-page-never-reported",
+        "note": "判定日 2026-09-20 を過ぎても Search Console にこの検索語とページの組の実績が出ず、161 回とも判定できなかった (2026-09-23〜2026-11-13)。国勢調査のページの指標の紐付けの修正 (7d417cfbc) を本番へ出すため、効果は判定不能として観測を閉じる (2026-11-14 オーナー承認)。",
+        "before": 4.385786802030457,
+        "after": null,
+        "attribution": "observed-change-only"
+      }
     }
   ]
 }

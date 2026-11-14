@@ -108,7 +108,8 @@
             }
           },
           "nextReviewDate": {
-            "type": "string"
+            "description": "観測中 (observing) は判定日。判定が済むと reviewDue (keyword-cycle.mjs) が null にする",
+            "type": ["string", "null"]
           },
           "reviews": {
             "type": "array",

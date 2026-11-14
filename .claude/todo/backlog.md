@@ -1719,6 +1719,15 @@ updated: 2026-11-01
 - **禁止**: 自動適用の対象を広げる目的で、検査や `validate:config` を緩めない。
 - **完了条件**: `/ranking/general-hospital-count` と既存テーマ 1 件で `editableFile()` が実在ファイルを返すテストが通り、次回の `seo-keyword-cycle-daily` で ranking 向けの案が `editableFile` 付きで出る。
 
+### [SEO-KEYWORD-OBSERVATION-TIMEOUT-01] キーワード改善の観測が、検索語の実績が出ないと判定日を過ぎても終わらない
+タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/search-growth/__tests__/*.test.mjs] [起票:2026-11-14] [領域:サイト]
+
+`lib/keyword-cycle.mjs` の `reviewDue` は、Search Console に検索語とページの組の実績が無いと `query-page-not-reported` で観測を続ける。終わる条件が無いため、「40代 未婚 割合 日本 国勢調査」(/survey/census) は判定日 9-20 を過ぎて 161 回判定できず、観測中のページを変えない検査が、そのページの正当な修正 (7d417cfbc) を 11-14 の本番反映で止めた。オーナー承認でこの 1 件は手で「判定不能」として閉じた (`data/seo/improvement-log.json` の reviews の最後)。
+
+- 次: 判定日から一定日数 (例: 28 日) 実績が出なければ `insufficient-data` で閉じる規則を `reviewDue` に足し、テストで固定する。日数は 28 日の窓の取り直しが 1 回できる長さを根拠にする
+- 禁止: 観測中のページの変更を止める検査そのものは緩めない
+- 完了条件: 判定日から期限を過ぎて実績の無い観測が `active` に戻るテストが通る
+
 ### [PV-100K-LEVERS-01] 月10万PV (28日 93,000) へ向けて、新規ページより「見えているのに取れていないクリック」と「1訪問のページ数」を動かす
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-19] [期日:2027-01-31] [領域:サイト]
 
