@@ -204,26 +204,6 @@ export const EDUCATION_CULTURE_SET: IndicatorSet = {
       "rankingKey": "education-cost-all-households",
       "shortLabel": "教育費（全世帯・月平均）",
       "role": "context"
-    },
-    {
-      "rankingKey": "elementary-school-children-count",
-      "shortLabel": "小学校児童数",
-      "role": "secondary"
-    },
-    {
-      "rankingKey": "junior-high-school-students-count",
-      "shortLabel": "中学校生徒数",
-      "role": "secondary"
-    },
-    {
-      "rankingKey": "school-teacher-annual-income",
-      "shortLabel": "小中学校教員の平均年収",
-      "role": "secondary"
-    },
-    {
-      "rankingKey": "university-professor-annual-income",
-      "shortLabel": "大学教授の平均年収",
-      "role": "secondary"
     }
   ],
   "keywords": [

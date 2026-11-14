@@ -1075,8 +1075,8 @@
       "metricGroupKeys": [
         "natural-disaster-impact-1",
         "natural-disaster-impact-2",
-        "natural-disaster-impact-3",
-        "natural-disaster-impact-4",
+        "natural-disaster-impact-9",
+        "natural-disaster-impact-10",
         "natural-disaster-impact-5",
         "natural-disaster-impact-6",
         "natural-disaster-impact-7",
@@ -1268,7 +1268,7 @@
       ]
     },
     {
-      "key": "natural-disaster-impact-3",
+      "key": "natural-disaster-impact-9",
       "title": "自然災害による行方不明者数",
       "rankingKeys": [
         "natural-disaster-missing-persons"
@@ -1278,7 +1278,7 @@
       ]
     },
     {
-      "key": "natural-disaster-impact-4",
+      "key": "natural-disaster-impact-10",
       "title": "自然災害による負傷者数",
       "rankingKeys": [
         "natural-disaster-injured-persons"
