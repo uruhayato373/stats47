@@ -970,7 +970,7 @@ for (const file of scanRoots.flatMap((root) => listFiles(root))) {
       violations.push({
         ruleId: 'stat-tile-grid-owns-columns',
         message:
-          'Place StatTile cells in StatTileGrid (@/components/surface). It owns the column count (1 / 2 / 4 columns at container widths 0 / 480 / 768px); pages do not set grid-cols for numeric tiles.',
+          'Place StatTile cells in StatTileGrid (@/components/surface). It owns the column count (2 / 4 columns at container widths 0 / 768px); pages do not set grid-cols for numeric tiles.',
         file,
         lineNumber: lineOf(found.index),
         line: found.line,

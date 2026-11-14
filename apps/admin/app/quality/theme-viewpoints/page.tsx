@@ -14,7 +14,18 @@ export const metadata = { title: "指標を選ぶ視点 — stats47 admin" };
 
 const PAGE = "/quality/theme-viewpoints";
 const MAX_THEME_LINKS = 4;
-const MAX_CANDIDATES = 10;
+
+/** 読みやすさの品質基準の違反の名前 (measure-theme-weight.mjs の violations) */
+const UI_VIOLATION_LABEL: Record<string, string> = {
+  "few-first-screen-tiles": "最初の画面に数値が少ない",
+  "few-tiles-available": "出せる数値が 2 個に満たない",
+  "broken-number": "数字の途中で折り返す",
+  "empty-tile": "値の無いタイル",
+  "overflow-x": "横にはみ出す",
+  "narrow-first-column": "表の 1 列目が読めない",
+  "not-200": "ページが開かない",
+};
+const QUALITY_TONE = { ok: "good", gaps: "warn", stale: "warn" } as const;
 
 const SEVERITY_LABEL = { fix: "直す", review: "確かめる" } as const;
 
@@ -43,7 +54,7 @@ export default async function ThemeViewpointsPage({
     : [];
   const fixHits = machineRules.filter((r) => r.severity === "fix").reduce((n, r) => n + (r.hitCount ?? 0), 0);
   const reviewHits = machineRules.filter((r) => r.severity === "review").reduce((n, r) => n + (r.hitCount ?? 0), 0);
-  const nextCandidates = summary.candidates.filter((c) => !c.inFlight).slice(0, MAX_CANDIDATES);
+  const nextCandidates = summary.candidates.filter((c) => !c.inFlight);
   const inFlight = summary.candidates.filter((c) => c.inFlight);
   const ruleTitle = new Map(summary.rules.map((r) => [r.id, r.title]));
   const ruleSeverity = new Map(summary.rules.map((r) => [r.id, r.severity]));
@@ -82,11 +93,11 @@ export default async function ThemeViewpointsPage({
       </Grid>
 
       <Section
-        title="次に見直す候補"
-        count={nextCandidates.length}
-        note={`検索の表示回数 (GSC ${summary.gscWeek ?? "未取得"} の 28 日) が多い順。30 日以内の承認待ちと公開待ちのテーマは下に分けた。公開の目安より前に出すと、進行中の実験の観測に混ざる。`}
+        title="テーマの採点表"
+        count={summary.candidates.length}
+        note={`検索の表示回数が多い順 (GSC ${summary.gscWeek ?? "未取得"} の 28 日。全国版・県別・市区町村別の合計)。画面の違反は ${summary.uiMeasuredOn ?? "未計測"} の計測。30 日以内の承認待ちと公開待ちのテーマは下に分けた。公開の目安より前に出すと、進行中の実験の観測に混ざる。`}
       >
-        <DataTable columns={["テーマ", "表示 (28日)", "直す候補", "確かめる候補", "最新の提案", "公開の目安"]}>
+        <DataTable columns={["テーマ", "表示 (28日)", "クリック", "クリック率", "データの品質", "画面の違反", "直す候補", "確かめる候補", "最新の提案", "公開の目安"]}>
           {[...nextCandidates, ...inFlight].map((c) => (
             <Row key={c.key}>
               <Cell nowrap>
@@ -94,6 +105,24 @@ export default async function ThemeViewpointsPage({
                 <code className="font-mono text-xs text-muted-foreground">{c.key}</code>
               </Cell>
               <Cell nowrap>{c.impressions === null ? <span className="text-muted-foreground">—</span> : c.impressions.toLocaleString("ja-JP")}</Cell>
+              <Cell nowrap>{c.clicks === null ? <span className="text-muted-foreground">—</span> : c.clicks.toLocaleString("ja-JP")}</Cell>
+              <Cell nowrap>{c.ctr === null ? <span className="text-muted-foreground">—</span> : `${(c.ctr * 100).toFixed(1)}%`}</Cell>
+              <Cell nowrap>
+                {c.dataQuality === null ? (
+                  <span className="text-muted-foreground">—</span>
+                ) : (
+                  <StatusBadge tone={QUALITY_TONE[c.dataQuality as keyof typeof QUALITY_TONE] ?? "info"}>{c.dataQuality}</StatusBadge>
+                )}
+              </Cell>
+              <Cell>
+                {c.uiViolations === null ? (
+                  <span className="text-muted-foreground">—</span>
+                ) : c.uiViolations.length === 0 ? (
+                  <StatusBadge tone="good">0</StatusBadge>
+                ) : (
+                  <span className="text-xs">{c.uiViolations.map((code) => UI_VIOLATION_LABEL[code] ?? code).join("・")}</span>
+                )}
+              </Cell>
               <Cell nowrap>
                 <StatusBadge tone={c.fixHits ? "warn" : "good"}>{c.fixHits}</StatusBadge>
               </Cell>

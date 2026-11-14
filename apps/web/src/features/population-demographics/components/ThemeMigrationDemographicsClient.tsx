@@ -23,6 +23,9 @@ import {
 
 import type { MigrationDemographicsProfile } from '@stats47/data-configs/theme-catalog';
 
+/** 県のページで並べる相手県の数 (転入と転出の合計の多い順) */
+const TOP_PARTNER_ROWS = 10;
+
 export function ThemeMigrationDemographicsClient({
   snapshot,
 }: {
@@ -51,7 +54,16 @@ export function ThemeMigrationDemographicsClient({
     );
   const areaLabel = view.isNational ? '全国' : view.area.areaName;
   // 全国のページは全国の計だけを出し、47 都道府県を並べない (2026-10-31。県の比較はランキングのページ)
-  const shownRows = view.isNational ? [] : view.rows;
+  // 県のページは、移動の多い相手県の上位だけを並べる (2026-11-14。旧: 相手の 46 県を県コード順にすべて並べ、表だけで
+  // スマホの約 2.4 画面ぶんを使っていた)。計の行はすべての相手県の計のまま。ほかの県は「相手の都道府県」で選べる
+  const isTopOnly = !view.isNational && view.rows.length > TOP_PARTNER_ROWS;
+  const shownRows = view.isNational
+    ? []
+    : isTopOnly
+      ? [...view.rows]
+          .sort((a, b) => b.inbound + b.outbound - (a.inbound + a.outbound) || a.areaCode.localeCompare(b.areaCode))
+          .slice(0, TOP_PARTNER_ROWS)
+      : view.rows;
   const signed = (value: number) =>
     value > 0 ? `+${format(value)}` : format(value);
   const tableLabel = view.isNational ? '都道府県' : '相手の都道府県';
@@ -114,7 +126,7 @@ export function ThemeMigrationDemographicsClient({
           ariaLabel={`${areaLabel}の県間移動・${SEX_LABELS[sex]}・${view.ageLabel}`}
           className="min-w-96"
           scrollRegion
-          caption="県コード順。県内移動と海外との移動を含みません。年齢は移動時の年齢です。総数と年齢計の差も選択できます。"
+          caption={`${isTopOnly ? `転入と転出の合計が多い相手県の上位 ${TOP_PARTNER_ROWS} 県。ほかの県は「相手の都道府県」で選べます。` : ''}県内移動と海外との移動を含みません。年齢は移動時の年齢です。総数と年齢計の差も選択できます。`}
           columns={[
             { key: 'area', header: tableLabel, rowHeader: true },
             { key: 'inbound', header: '転入（人）' },
@@ -136,7 +148,7 @@ export function ThemeMigrationDemographicsClient({
               key: 'total',
               total: true,
               cells: [
-                view.isNational ? '全国の計' : '表示行の計',
+                view.isNational ? '全国の計' : isTopOnly ? 'すべての相手県の計' : '表示行の計',
                 { content: format(view.total.inbound), attrs: { 'data-total-inbound': view.total.inbound } },
                 { content: format(view.total.outbound), attrs: { 'data-total-outbound': view.total.outbound } },
                 { content: signed(view.total.net), attrs: { 'data-total-net': view.total.net } },

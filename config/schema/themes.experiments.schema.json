@@ -105,6 +105,7 @@
             ]
           },
           "primaryKpi": { "$ref": "#/definitions/kpi" },
+          "metricScope": { "description": "KPI を数えるページの範囲。theme-page (省略時) は全国版 /themes/<key> の 1 URL、all-routes は全国版 + 県別 + 市区町村別の合計 (portfolio の metricsAllRoutes)。baseline も同じ範囲の値で登録し、登録後は変えない", "enum": ["theme-page", "all-routes"] },
           "guardrailKpis": { "type": "array", "items": { "$ref": "#/definitions/kpi" } },
           "baseline": {
             "description": "変更前の KPI の値。改善は必須 (1 件以上)。launch は null (公開前を 0 で代用しない)。標本不足などで取れなかった KPI は null",

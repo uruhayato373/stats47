@@ -32,6 +32,25 @@ function theme(overrides = {}) {
   };
 }
 
+test("an all-routes experiment reads the all-routes totals, and a theme-page experiment never does", () => {
+  // 検索の表示の 94% は県別ページにある。全国版の 1 URL だけでは標本不足でも、全ルート込みなら判定できる (2026-11-14)
+  const window = { scope: "Japan", windowDays: 56, periodStart: "2026-07-14", periodEnd: "2026-09-07", weeks: ["2026-W32", "2026-W36"] };
+  const both = {
+    ...theme({ status: "measured-low", pageViews: 13 }),
+    metricsAllRoutes: { ga4: { status: "measured", pageViews: 4115, ...window } },
+  };
+  const themePage = observeCheckpoint(experiment(), "d56", both, NOW);
+  assert.equal(themePage.values["ga4.pageViews"].value, 13);
+  assert.equal(themePage.status, "insufficient-data");
+  const allRoutes = observeCheckpoint({ ...experiment(), metricScope: "all-routes" }, "d56", both, NOW);
+  assert.equal(allRoutes.values["ga4.pageViews"].value, 4115);
+  assert.equal(allRoutes.status, "eligible");
+  // 全ルートの集計が無いテーマでは、全国版の値で代用しない
+  const missing = observeCheckpoint({ ...experiment(), metricScope: "all-routes" }, "d56", theme(), NOW);
+  assert.equal(missing.values["ga4.pageViews"].value, null);
+  assert.equal(missing.status, "insufficient-data");
+});
+
 test("d7 records quality, without presenting rolling traffic as post-publication effect", () => {
   const record = observeCheckpoint(experiment(), "d7", theme(), NOW);
   assert.equal(record.status, "quality-only");

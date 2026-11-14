@@ -71,9 +71,7 @@ test('weekly observation commit preserves experiment checkpoints without staging
   const observations = [
     'data/themes/charts/live-audit.json',
     'data/themes/quality.json',
-    'data/themes/quality.definitions.json',
-    'data/themes/quality.observations.json',
-    'data/themes/quality.lastGoodObservations.json',
+    'data/themes/quality.*.json', // 詳細のファイルは分割されうるので、名前の並びでなくパターンで拾う
     'data/themes/portfolio.json',
     'data/themes/experiments.json',
     'data/themes/ci-followup.json',

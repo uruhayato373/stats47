@@ -1155,6 +1155,7 @@ export const DATASETS = [
     ],
   }),
   d("surveys.source-names-schema", "data/surveys/master/source-names.schema.json", "schema", "data", "data", "上の対応表の JSON Schema"),
+  d("themes.ui-weight", "data/themes/ui-weight/{date}.json", "state", "site", "data", "テーマページの重さの計測 (見える文字数・高さ・図や表やカードの数・最初の画面に入るもの。県別と全国版・スマホ幅とデスクトップ幅)。共通の UI を直す前後を同じ測り方で比べる (measure-theme-weight.mjs)"),
   d("themes.portfolio", "data/themes/portfolio.json", "ledger", "data", "data", "テーマポートフォリオ (テーマごとの指標数・チャート数・レビューの有無・GSC/GA4 の計測・データ品質・ライフサイクル判定)。機械項目は build-theme-portfolio.ts と aggregate-theme-metrics.ts が再導出し、意味項目は build-theme-portfolio.ts の --set で変える。ThemeCatalog には計測値を書かない。手で編集しない", {
     schema: "config/schema/themes.portfolio.schema.json",
     refs: [{ field: "themes[].themeKey", to: "themes.catalogs", key: "key" }],
@@ -1164,7 +1165,7 @@ export const DATASETS = [
     refs: [{ field: "experiments[].themeKey", to: "themes.catalogs", key: "key" }],
   }),
   d("themes.quality", "data/themes/quality.json", "state", "data", "data", "テーマの週次の品質監査 (章・登録・期間・単位・有限値・重複・履歴退行の観測の要約と、下の 3 つの詳細ファイルの件数と SHA-256)。audit-theme-quality.ts が theme-quality-state.mjs 経由で 4 ファイルを一括で書き、読むときに SHA-256 と件数が合わなければ止まる"),
-  d("themes.quality-parts", "data/themes/quality.{name}.json", "state", "data", "data", "上の品質監査の詳細 (definitions・observations・lastGoodObservations。前回の正常値を持ち、異常が続く間に比較の基準をすり替えない)。各 1 MiB 以内"),
+  d("themes.quality-parts", "data/themes/quality.{name}.json", "state", "data", "data", "上の品質監査の詳細 (definitions・observations・lastGoodObservations。前回の正常値を持ち、異常が続く間に比較の基準をすり替えない)。各ファイル 1 MiB 以内で、超える分は quality.<名前>.2.json から番号つきに分かれる"),
   d("themes.ci-followup", "data/themes/ci-followup.json", "state", "data", "data", "テーマの継続フォローの機械観測 (全テーマの PC/mobile の表示・期日の checkpoint・レビューの入力 hash)。theme-followup.mjs が quality-suite-weekly.yml で毎週書く"),
   d("themes.ci-review", "data/themes/ci-review.json", "state", "data", "data", "月次の公式資料の確認と改善判断の結果 (CI の Claude の構造化出力を record-theme-review.mjs が検証して保存。月内の sourceReviews を累積する)"),
   d("themes.viewpoint-history", "data/themes/viewpoint-history.csv", "series", "data", "data", "テーマの指標を選ぶ視点 (themes.selection-viewpoints) の週ごとの該当件数。record-theme-viewpoints.ts が週次監査で追記する"),

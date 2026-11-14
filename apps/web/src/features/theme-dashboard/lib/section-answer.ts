@@ -1,6 +1,5 @@
-import { formatUnitForDisplay } from '@stats47/data-configs/unit';
 
-import { formatMetricValue, type MetricKpi } from '../components/metric-kpi';
+import { formatMetricValue, metricDisplayUnit, type MetricKpi } from '../components/metric-kpi';
 
 /** 全国との差がこの割合未満なら「ほぼ同じ」と書く (丸めた値の差を多い・少ないと言わない) */
 const SAME_AS_NATIONAL_RATIO = 0.01;
@@ -21,8 +20,7 @@ interface SectionAnswerInput {
 }
 
 function valueText(metric: MetricKpi, value: number): string {
-  const unit = metric.unit ? formatUnitForDisplay(metric.unit) : '';
-  return `${formatMetricValue(value, metric.precision)}${unit}`;
+  return `${formatMetricValue(value, metric.precision, metric.displayScale)}${metricDisplayUnit(metric)}`;
 }
 
 function ratioText(ratio: number, more: string, less: string): string {
