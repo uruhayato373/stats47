@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "e-Stat 値の取得台帳",
+  "description": "値はprivate R2へ保全する。local-onlyはローカル取得検証済みで未転送。台帳は値を持たず取得manifestの版とSHAを持つ。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "tables"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "tables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["statsDataId", "title", "statCode", "catalogVersion", "catalogSha256", "fetchedAt", "depth", "partitionAxes", "rowLimit", "fileCount", "rowCount", "maxRowsPerFile", "gzipBytes", "uncompressedBytes", "manifestKey", "manifestSha256", "status", "bucket", "catalogReportedRows", "warnings"],
+        "properties": {
+          "statsDataId": { "type": "string", "pattern": "^\\d{10}$" },
+          "title": { "$ref": "common.schema.json#/$defs/nonEmptyString" },
+          "statCode": { "type": "string", "pattern": "^\\d{8}$" },
+          "catalogVersion": { "$ref": "common.schema.json#/$defs/date" },
+          "catalogSha256": { "$ref": "common.schema.json#/$defs/sha256" },
+          "fetchedAt": { "$ref": "common.schema.json#/$defs/datetime" },
+          "depth": { "type": "integer", "minimum": 0 },
+          "partitionAxes": { "type": "array", "uniqueItems": true, "items": { "type": "string", "pattern": "^(tab|cat[0-9]+)$" } },
+          "rowLimit": { "type": "integer", "minimum": 1 },
+          "fileCount": { "type": "integer", "minimum": 0 },
+          "rowCount": { "type": "integer", "minimum": 0 },
+          "maxRowsPerFile": { "type": "integer", "minimum": 0 },
+          "gzipBytes": { "type": "integer", "minimum": 0 },
+          "uncompressedBytes": { "type": "integer", "minimum": 0 },
+          "catalogReportedRows": { "type": ["integer", "null"], "minimum": 0 },
+          "warnings": { "type": "array", "items": { "$ref": "common.schema.json#/$defs/nonEmptyString" } },
+          "manifestKey": { "type": "string", "pattern": "^estat-tables/[0-9]{10}/manifest\\.json$" },
+          "manifestSha256": { "$ref": "common.schema.json#/$defs/sha256" },
+          "status": { "enum": ["local-only", "published"] },
+          "bucket": { "const": "stats47-private" }
+        }
+      }
+    }
+  }
+}
