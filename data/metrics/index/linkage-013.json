@@ -10251,6 +10251,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:telework-rate-tokyo-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:job-change-rate",
           "kind": "ranking"
         },

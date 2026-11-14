@@ -888,7 +888,7 @@
       "title": "牛肉消費の首位、なぜ毎年入れ替わる?",
       "status": "published",
       "publishedAt": "2026-06-07",
-      "updatedAt": "2026-11-02",
+      "updatedAt": "2026-11-14",
       "rankingKeys": [
         "beef-consumption-quantity",
         "chicken-consumption-quantity"
@@ -4081,10 +4081,10 @@
     },
     {
       "slug": "fertility-rate-prefecture-gap",
-      "title": "出生率は沖縄1.60・東京0.99｜なぜ早婚の県ほど高い? 婚姻年齢が映す少子化の地域差 (2023)",
+      "title": "出生率は沖縄1.60・東京0.99｜早婚の県ほど高い? 婚姻年齢が映す少子化の地域差 (2023)",
       "status": "published",
       "publishedAt": "2026-03-09",
-      "updatedAt": "2026-06-04",
+      "updatedAt": "2026-11-14",
       "rankingKeys": [
         "average-age-of-first-marriage-wife",
         "total-fertility-rate"
@@ -5960,7 +5960,7 @@
       "title": "病床は埋まっているか? 47都道府県",
       "status": "published",
       "publishedAt": "2026-04-27",
-      "updatedAt": "2026-06-04",
+      "updatedAt": "2026-11-14",
       "rankingKeys": [
         "avg-daily-inpatients-general-hospital-per-100k",
         "general-hospital-bed-occupancy-rate",
@@ -6889,13 +6889,15 @@
     },
     {
       "slug": "inpatient-rate-prefecture-gap",
-      "title": "入院は高知が日本一の県｜なぜ西高東低になる?",
+      "title": "入院は高知が日本一の県｜なぜ九州・四国で高い?",
       "status": "published",
       "publishedAt": "2026-05-17",
-      "updatedAt": "2026-06-23",
+      "updatedAt": "2026-11-14",
       "rankingKeys": [
+        "general-hospital-bed-count-per-100k",
         "inpatient-rate-per-100k",
-        "outpatient-rate-per-100k"
+        "outpatient-rate-per-100k",
+        "ratio-65-plus"
       ],
       "tagIds": [
         "tag:t-e7ba968af9af",
@@ -9279,7 +9281,7 @@
       "title": "納豆を食べる県・食べない県の境界はどこか｜福島7658円vs和歌山2733円",
       "status": "published",
       "publishedAt": "2026-03-29",
-      "updatedAt": "2026-11-09",
+      "updatedAt": "2026-11-14",
       "rankingKeys": [
         "natto-consumption-expenditure"
       ],
@@ -12529,10 +12531,10 @@
     },
     {
       "slug": "software-engineer-salary-prefecture-gap",
-      "title": "SEの最高年収はなぜ京都?東京より高い地方の真因",
+      "title": "SEの年収1位は京都? 毎年入れ替わる首位と東京",
       "status": "published",
       "publishedAt": "2026-06-02",
-      "updatedAt": null,
+      "updatedAt": "2026-11-14",
       "rankingKeys": [
         "number-of-establishments-information-communication",
         "software-engineer-annual-income"
@@ -13220,9 +13222,11 @@
       "title": "テレワーク率は東京39.8%・秋田6.4%｜なぜ同じ国で6倍も開くのか",
       "status": "published",
       "publishedAt": "2026-05-29",
-      "updatedAt": null,
+      "updatedAt": "2026-11-14",
       "rankingKeys": [
+        "job-change-rate",
         "number-of-establishments-information-communication",
+        "outflow-population-ratio",
         "side-job-rate",
         "telework-rate"
       ],
@@ -14355,7 +14359,7 @@
       "title": "空き家が多い県ほど地価は下がる?",
       "status": "published",
       "publishedAt": "2026-07-12",
-      "updatedAt": "2026-07-12",
+      "updatedAt": "2026-11-14",
       "rankingKeys": [
         "standard-price-change-rate-commercial",
         "vacant-housing-rate"
@@ -14744,7 +14748,7 @@
       "title": "小麦粉の購入量、なぜ長野は福井の4倍超?",
       "status": "published",
       "publishedAt": "2026-05-17",
-      "updatedAt": "2026-11-02",
+      "updatedAt": "2026-11-14",
       "rankingKeys": [
         "wheat-flour-consumption-expenditure",
         "wheat-flour-consumption-quantity"

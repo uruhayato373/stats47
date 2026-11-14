@@ -4013,7 +4013,7 @@
       "id": "blog:fertility-rate-prefecture-gap",
       "kind": "blog",
       "key": "fertility-rate-prefecture-gap",
-      "title": "出生率は沖縄1.60・東京0.99｜なぜ早婚の県ほど高い? 婚姻年齢が映す少子化の地域差 (2023)",
+      "title": "出生率は沖縄1.60・東京0.99｜早婚の県ほど高い? 婚姻年齢が映す少子化の地域差 (2023)",
       "href": "/blog/fertility-rate-prefecture-gap",
       "published": true,
       "rankingKeys": [
@@ -6801,12 +6801,14 @@
       "id": "blog:inpatient-rate-prefecture-gap",
       "kind": "blog",
       "key": "inpatient-rate-prefecture-gap",
-      "title": "入院は高知が日本一の県｜なぜ西高東低になる?",
+      "title": "入院は高知が日本一の県｜なぜ九州・四国で高い?",
       "href": "/blog/inpatient-rate-prefecture-gap",
       "published": true,
       "rankingKeys": [
+        "general-hospital-bed-count-per-100k",
         "inpatient-rate-per-100k",
-        "outpatient-rate-per-100k"
+        "outpatient-rate-per-100k",
+        "ratio-65-plus"
       ],
       "tagIds": [
         "tag:t-e7ba968af9af",
@@ -12361,7 +12363,7 @@
       "id": "blog:software-engineer-salary-prefecture-gap",
       "kind": "blog",
       "key": "software-engineer-salary-prefecture-gap",
-      "title": "SEの最高年収はなぜ京都?東京より高い地方の真因",
+      "title": "SEの年収1位は京都? 毎年入れ替わる首位と東京",
       "href": "/blog/software-engineer-salary-prefecture-gap",
       "published": true,
       "rankingKeys": [
@@ -13053,7 +13055,9 @@
       "href": "/blog/telework-rate-tokyo-gap",
       "published": true,
       "rankingKeys": [
+        "job-change-rate",
         "number-of-establishments-information-communication",
+        "outflow-population-ratio",
         "side-job-rate",
         "telework-rate"
       ],

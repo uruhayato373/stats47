@@ -5669,6 +5669,10 @@
           "kind": "area"
         },
         {
+          "pageId": "blog:inpatient-rate-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "product:data-p-05",
           "kind": "product"
         },
