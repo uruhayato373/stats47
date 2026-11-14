@@ -213,7 +213,7 @@
       "type": "annual-plan"
     },
     "waitPlacement": {
-      "severity": "warning"
+      "severity": "error"
     },
     "untriagedMaxAgeDays": 30,
     "idPattern": "^[A-Z0-9]+(?:-[A-Z0-9]+)+$",
