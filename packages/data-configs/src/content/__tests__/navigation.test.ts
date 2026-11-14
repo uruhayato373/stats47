@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { contentIdFromHref, contentTagIds, resolveContentTag, type ContentPage } from '../index';
+import { CONTENT_NAVIGATION, contentIdFromHref, contentTagIds, resolveContentTag, type ContentLink, type ContentPage } from '../index';
 import { selectContentRecommendations } from '../navigation';
 
 const page = (id: string, kind: string, rankingKeys: string[] = [], published = true): ContentPage => ({ id, kind, key: id.split(':')[1]!, title: id, href: `/${kind}/${id.split(':')[1]}`, published, rankingKeys });
@@ -72,6 +72,32 @@ describe('content identity and navigation', () => {
     const pages = [page('blog:src', 'blog', ['households']), page('municipality-ranking:households', 'municipality-ranking'), page('ranking:households', 'ranking')];
     const selected = selectContentRecommendations(pages, [], { sourceId: 'blog:src', kinds: ['ranking', 'municipality-ranking'] });
     expect(selected.map(row => [row.id, row.relation])).toEqual([['ranking:households', 'uses'], ['municipality-ranking:households', 'uses']]);
+  });
+  it('編集者が navigation.json の links で明示した記事は、同じ関係の自動の候補より先に出す', () => {
+    // 2026-10-20 実測: 出生率のランキングに、出生率そのものを扱う fertility-rate-prefecture-gap (指標 2 つ) が
+    // 指標 1 つの記事に絞り込みの同点で負けて出なかった (RELATED-ARTICLES-TIEBREAK-01)。指標と記事は data/content/pages/blog.json の実物
+    const source = page('ranking:total-fertility-rate', 'ranking');
+    const editorial = page('blog:fertility-rate-prefecture-gap', 'blog', ['average-age-of-first-marriage-wife', 'total-fertility-rate']);
+    const merged = page('blog:total-fertility-rate', 'blog', ['total-fertility-rate']);
+    const line = page('blog:cc-estat-07-birthrate-line', 'blog', ['total-fertility-rate']);
+    const fiscal = page('blog:fertility-fiscal-nexus', 'blog', ['fiscal-strength-index-prefecture', 'moving-in-excess-rate-japanese', 'total-fertility-rate']);
+    const links = CONTENT_NAVIGATION.links as ContentLink[];
+    const context = { sourceId: source.id, kinds: ['blog'], limit: 3 };
+    const ids = (pages: ContentPage[]) => selectContentRecommendations(pages, links, context).map(row => row.id);
+    expect(ids([source, merged, line, fiscal, editorial])).toEqual([editorial.id, line.id, merged.id]);
+    // BLOG-DUPLICATE-AUDIT-01 で total-fertility-rate の記事が 301 で統合された後 (非公開) も先頭に残る
+    expect(ids([source, { ...merged, published: false }, line, fiscal, editorial])).toEqual([editorial.id, line.id, fiscal.id]);
+    // 加点は関係を変えず、自動の一致と同じ表示名を使う
+    expect(selectContentRecommendations([source, editorial], links, context)[0]?.relation).toBe('explains');
+  });
+  it('明示の加点は navigation.json の編集関係だけに付け、生成された entities の関係には付けない', () => {
+    const source = page('ranking:sunshine', 'ranking');
+    const generated = page('theme:weather', 'theme', ['sunshine', 'rain']);
+    const matched = page('theme:sunshine-only', 'theme', ['sunshine']);
+    const links: ContentLink[] = [{ from: source.id, to: generated.id, relation: 'contains' }];
+    const context = { sourceId: source.id, kinds: ['theme'] };
+    expect(selectContentRecommendations([source, generated, matched], links, context, []).map(row => row.id)).toEqual(['theme:sunshine-only', 'theme:weather']);
+    expect(selectContentRecommendations([source, generated, matched], links, context, links).map(row => row.id)).toEqual(['theme:weather', 'theme:sunshine-only']);
   });
   it('同順位は不変IDで並び、件数上限と候補が空の状態を守る', () => {
     const pages = [page('ranking:sunshine','ranking'),page('blog:z','blog',['sunshine']),page('blog:a','blog',['sunshine'])];
