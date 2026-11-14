@@ -1,10 +1,12 @@
 import { DEFAULT_METRIC_PRESENTATION } from "./defaults/presentation";
+import { WAGE_STRUCTURE_COVERAGE_NOTE, WAGE_STRUCTURE_SAMPLE_COUNT } from "./defaults/wage-structure-coverage";
 import type { MetricConfig } from "../../packages/data-configs/src/types";
 
 export const highSchoolTeacherAnnualIncome: MetricConfig = {
   "key": "high-school-teacher-annual-income",
   "title": "高等学校教員の平均年収",
   "description": "高等学校教員の都道府県別平均年収。賃金構造基本統計調査に基づく。対象は一般労働者・男女計。",
+  "note": WAGE_STRUCTURE_COVERAGE_NOTE,
   "unit": "万円",
   "category": "economy",
   "source": {
@@ -17,6 +19,7 @@ export const highSchoolTeacherAnnualIncome: MetricConfig = {
       { "cdTab": "08,40", "factor": 12 },
       { "cdTab": "12,44", "factor": 1 },
     ],
+    "sampleCount": WAGE_STRUCTURE_SAMPLE_COUNT,
     "cdCat01": "01",
     "cdCat02": "1194",
   },

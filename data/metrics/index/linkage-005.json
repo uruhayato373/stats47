@@ -11882,10 +11882,15 @@
               "factor": 1
             }
           ],
-          "valueScale": 0.1
+          "valueScale": 0.1,
+          "sampleCount": {
+            "cdTab": "13,45",
+            "factor": 10,
+            "minimum": 10
+          }
         },
         "derived": true,
-        "configHash": "9ddd76a125352e8e"
+        "configHash": "b2c97becb086f077"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -12232,10 +12237,15 @@
               "factor": 1
             }
           ],
-          "valueScale": 0.1
+          "valueScale": 0.1,
+          "sampleCount": {
+            "cdTab": "13,45",
+            "factor": 10,
+            "minimum": 10
+          }
         },
         "derived": true,
-        "configHash": "4f49cb3f1f730158"
+        "configHash": "cbb0311af56ac1e1"
       },
       "dependencies": [],
       "normalizationDependencies": [

@@ -1,0 +1,258 @@
+{
+ "statsDataId": "0002070013",
+ "title": "用途分類 用途分類（世帯主の職業別）",
+ "statName": "家計調査",
+ "govOrg": "総務省",
+ "surveyDate": null,
+ "overallTotalNumber": 211176,
+ "dimensions": [
+  {
+   "id": "tab",
+   "name": "表章項目",
+   "valueCount": 1,
+   "sampleValues": [
+    {
+     "code": "01",
+     "name": "金額",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat01",
+   "name": "用途分類",
+   "valueCount": 265,
+   "sampleValues": [
+    {
+     "code": "001",
+     "name": "世帯数分布（抽出率調整）",
+     "unit": "一万分比"
+    },
+    {
+     "code": "002",
+     "name": "集計世帯数",
+     "unit": "世帯"
+    },
+    {
+     "code": "003",
+     "name": "世帯人員",
+     "unit": "人"
+    },
+    {
+     "code": "004",
+     "name": "18歳未満人員",
+     "unit": "人"
+    },
+    {
+     "code": "005",
+     "name": "65歳以上人員",
+     "unit": "人"
+    },
+    {
+     "code": "006",
+     "name": "65歳以上無職者人員",
+     "unit": "人"
+    },
+    {
+     "code": "007",
+     "name": "有業人員",
+     "unit": "人"
+    },
+    {
+     "code": "008",
+     "name": "世帯主の配偶者のうち女の有業率",
+     "unit": "％"
+    },
+    {
+     "code": "009",
+     "name": "世帯主の年齢",
+     "unit": "歳"
+    },
+    {
+     "code": "011",
+     "name": "持家率",
+     "unit": "％"
+    },
+    {
+     "code": "012",
+     "name": "平均畳数（持家）",
+     "unit": "畳"
+    },
+    {
+     "code": "013",
+     "name": "持家で住宅ローンを支払っている世帯の割合",
+     "unit": "％"
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat02",
+   "name": "世帯区分（年次－二人以上の世帯）",
+   "valueCount": 2,
+   "sampleValues": [
+    {
+     "code": "03",
+     "name": "二人以上の世帯（2000年～）",
+     "unit": null
+    },
+    {
+     "code": "01",
+     "name": "二人以上の世帯（農林漁家世帯を除く）（1985年～2007年,2017年）",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat03",
+   "name": "世帯主の職業",
+   "valueCount": 19,
+   "sampleValues": [
+    {
+     "code": "000",
+     "name": "平均",
+     "unit": null
+    },
+    {
+     "code": "001",
+     "name": "労務作業者",
+     "unit": null
+    },
+    {
+     "code": "002",
+     "name": "常用労務作業者",
+     "unit": null
+    },
+    {
+     "code": "003",
+     "name": "職員",
+     "unit": null
+    },
+    {
+     "code": "004",
+     "name": "民間職員",
+     "unit": null
+    },
+    {
+     "code": "005",
+     "name": "官公職員",
+     "unit": null
+    },
+    {
+     "code": "006",
+     "name": "勤労者以外の世帯",
+     "unit": null
+    },
+    {
+     "code": "007",
+     "name": "個人営業",
+     "unit": null
+    },
+    {
+     "code": "008",
+     "name": "商人及び職人",
+     "unit": null
+    },
+    {
+     "code": "009",
+     "name": "個人経営者",
+     "unit": null
+    },
+    {
+     "code": "010",
+     "name": "農林漁業従事者",
+     "unit": null
+    },
+    {
+     "code": "011",
+     "name": "その他の世帯（個人営業を除く勤労者以外の世帯）",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "area",
+   "name": "地域区分",
+   "valueCount": 1,
+   "sampleValues": [
+    {
+     "code": "00000",
+     "name": "全国",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "time",
+   "name": "時間軸（年次）",
+   "valueCount": 41,
+   "sampleValues": [
+    {
+     "code": "1985000000",
+     "name": "1985年",
+     "unit": null
+    },
+    {
+     "code": "1986000000",
+     "name": "1986年",
+     "unit": null
+    },
+    {
+     "code": "1987000000",
+     "name": "1987年",
+     "unit": null
+    },
+    {
+     "code": "1988000000",
+     "name": "1988年",
+     "unit": null
+    },
+    {
+     "code": "1989000000",
+     "name": "1989年",
+     "unit": null
+    },
+    {
+     "code": "1990000000",
+     "name": "1990年",
+     "unit": null
+    },
+    {
+     "code": "1991000000",
+     "name": "1991年",
+     "unit": null
+    },
+    {
+     "code": "1992000000",
+     "name": "1992年",
+     "unit": null
+    },
+    {
+     "code": "1993000000",
+     "name": "1993年",
+     "unit": null
+    },
+    {
+     "code": "1994000000",
+     "name": "1994年",
+     "unit": null
+    },
+    {
+     "code": "1995000000",
+     "name": "1995年",
+     "unit": null
+    },
+    {
+     "code": "1996000000",
+     "name": "1996年",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  }
+ ]
+}

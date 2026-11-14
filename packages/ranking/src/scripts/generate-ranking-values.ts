@@ -61,7 +61,7 @@ import { deriveRanks } from "../utils/derive-ranks";
 
 import { selectUnexpectedEmpties } from "./lib/empty-values-alarm";
 
-import type { RankingValue } from "../types";
+import type { RankingReferenceValue, RankingValue } from "../types";
 import type { RankingValuesKeySnapshot } from "../types/snapshot";
 
 const CONCURRENCY = 20;
@@ -102,6 +102,8 @@ export function buildPartitions(
     value: number | null;
     unit?: string | null;
     rank?: number | null;
+    sampleCount?: number | null;
+    reference?: boolean;
   }[],
   years: YearSpec,
 ): RankingValuesKeySnapshot["partitions"] {
@@ -125,12 +127,29 @@ export function buildPartitions(
   }
 
   const byYear = new Map<string, RankingValue[]>();
+  const referencesByYear = new Map<string, RankingReferenceValue[]>();
   for (const [yearCode, entries] of rawByYear) {
+    // 参考値 (推計の人数が下限未満) は順位から外し、別の列で配る (DATA-WAGE-TEACHER-COVERAGE-01)
+    const references = entries.filter((e) => e.row.reference === true && e.value != null && e.row.sampleCount != null);
+    if (references.length > 0) {
+      referencesByYear.set(yearCode, references.map(({ row }) => ({
+        metricKey,
+        areaType: AREA_TYPE,
+        areaCode: row.areaCode,
+        areaName: row.areaName,
+        yearCode: row.yearCode,
+        yearName: row.yearName ?? row.yearCode,
+        value: row.value,
+        unit: row.unit ?? "",
+        sampleCount: row.sampleCount as number,
+      })));
+    }
+    const ranked = entries.filter((e) => e.row.reference !== true);
     // 正典が rank を持たない年だけ導出する (持っている年は 1 行も書き換えない)
-    if (entries.every((e) => e.rank == null)) deriveRanks(entries);
+    if (ranked.every((e) => e.rank == null)) deriveRanks(ranked);
 
     const values: RankingValue[] = [];
-    for (const { row, rank } of entries) {
+    for (const { row, rank } of ranked) {
       if (rank == null) continue; // 値が null の行は順位を持てない
       values.push({
         metricKey,
@@ -142,6 +161,7 @@ export function buildPartitions(
         value: row.value,
         unit: row.unit ?? "",
         rank,
+        ...(row.sampleCount === undefined ? {} : { sampleCount: row.sampleCount }),
       } as RankingValue);
     }
     if (values.length > 0) byYear.set(yearCode, values);
@@ -152,7 +172,10 @@ export function buildPartitions(
     .sort((a, b) => parseInt(b[0], 10) - parseInt(a[0], 10))
     .map(([yearCode, values]) => {
       const sorted = [...values].sort((a, b) => a.rank - b.rank);
-      return { yearCode, count: sorted.length, values: sorted };
+      const referenceValues = referencesByYear.get(yearCode);
+      return referenceValues
+        ? { yearCode, count: sorted.length, values: sorted, referenceValues }
+        : { yearCode, count: sorted.length, values: sorted };
     });
 }
 

@@ -29,6 +29,7 @@ on:
           - backfill-display-sources
           - migrate-bodies
           - repair-published-frontmatter
+          - rebuild-blog-index
       dry_run:
         description: "true: R2 に書かず対象一覧のみ"
         required: false
@@ -84,10 +85,16 @@ jobs:
             repair-published-frontmatter)
               npx tsx .claude/scripts/blog/repair-published-frontmatter.ts 2>&1 | tee -a "$GITHUB_STEP_SUMMARY"
               ;;
+            rebuild-blog-index)
+              # 記事と source.json は書かない。索引 app/blog/all.json だけを、この ref のコード (調査の辞書) で作り直す。
+              # sync-snapshots.yml は main を checkout するため、main に未反映の辞書の修正はそちらでは効かない (2026-11-14)
+              echo "記事は書き換えない。索引だけを作り直す" | tee -a "$GITHUB_STEP_SUMMARY"
+              ;;
             *) echo "::error::unknown mode: $MODE"; exit 1 ;;
           esac
 
       - name: 📤 Push to R2
+        if: inputs.mode != 'rebuild-blog-index'
         env:
           DRY_RUN: ${{ inputs.dry_run }}
         run: |
@@ -99,7 +106,7 @@ jobs:
           npx tsx .claude/scripts/blog/push-article-md-r2.ts "${ARGS[@]}" 2>&1 | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: 🧮 Restore published article metadata after syntax repair
-        if: inputs.mode == 'repair-published-frontmatter' && inputs.dry_run == 'false'
+        if: (inputs.mode == 'repair-published-frontmatter' && inputs.dry_run == 'false') || inputs.mode == 'rebuild-blog-index'
         env:
           NODE_OPTIONS: '--conditions react-server'
           # Read the just-verified authoritative S3 bytes rather than the old public CDN response.
@@ -107,7 +114,7 @@ jobs:
         run: npx tsx apps/web/scripts/export-blog-snapshot.ts
 
       - name: 📤 Publish only the rebuilt blog index
-        if: inputs.mode == 'repair-published-frontmatter' && inputs.dry_run == 'false'
+        if: (inputs.mode == 'repair-published-frontmatter' || inputs.mode == 'rebuild-blog-index') && inputs.dry_run == 'false'
         run: npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts --key app/blog/all.json
 
       - name: 🗂️ Keep originals and report

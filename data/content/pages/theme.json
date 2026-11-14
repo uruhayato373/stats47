@@ -380,11 +380,7 @@
         "national-assessment-elementary-study-1h-plus-rate",
         "elementary-school-long-absence-ratio-nonattendance-over-30days-per-1000",
         "junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000",
-        "education-cost-all-households",
-        "elementary-school-children-count",
-        "junior-high-school-students-count",
-        "school-teacher-annual-income",
-        "university-professor-annual-income"
+        "education-cost-all-households"
       ]
     },
     {

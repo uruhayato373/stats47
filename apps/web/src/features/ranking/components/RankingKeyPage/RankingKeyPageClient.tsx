@@ -4,6 +4,7 @@ import { useMemo } from "react";
 
 import {
     type RankingItem,
+    type RankingReferenceValue,
     type RankingValue,
     buildRankingDisplayInfo,
     resolveRankingValueDisplay,
@@ -32,6 +33,7 @@ import { RankingYearSelector } from "../RankingPageHeader/RankingYearSelector";
 
 import { RankingBasisSwitcher, type RankingBasisMember } from "./RankingBasisSwitcher";
 import { RankingPageContentSections, type RankingPageSections } from "./RankingPageContentSections";
+import { RankingSampleCountNote } from "./RankingSampleCountNote";
 import { RankingVisualizationDetails } from "./RankingVisualizationDetails";
 import { RankingVisualizationSection } from "./RankingVisualizationSection";
 import { useRankingPageState } from "./useRankingPageState";
@@ -44,6 +46,8 @@ interface RankingKeyPageClientProps {
     rankingKey: string;
     rankingItem: RankingItem;
     rankingValues: RankingValue[];
+    /** 推計の人数が少なく順位から外した県・年 (全年。推計の人数を持たない指標は空) */
+    referenceValues?: RankingReferenceValue[];
     /** サーバーが全年 values から畳んだ総数ベースの全国平均系列 */
     nationalAverageSeries: NationalAveragePoint[];
     areaType?: AreaType;
@@ -67,6 +71,7 @@ export function RankingKeyPageClient({
     rankingKey,
     rankingItem,
     rankingValues: initialRankingValues,
+    referenceValues = [],
     nationalAverageSeries: initialNationalAverageSeries,
     areaType = "prefecture",
     selectedYear,
@@ -168,6 +173,22 @@ export function RankingKeyPageClient({
         : null;
     const dataNote = configNote ?? subtitleNote;
 
+    // 推計の人数と参考値 (DATA-WAGE-TEACHER-COVERAGE-01)。人口あたり等の換算や市区町村では出さない
+    const hasSampleCounts =
+        !normalizationType &&
+        currentAreaType === "prefecture" &&
+        (referenceValues.length > 0 || rankingValues.some((v) => typeof v.sampleCount === "number"));
+    const sampleCountNote = hasSampleCounts ? (
+        <RankingSampleCountNote
+            rankingValues={rankingValues}
+            referenceValues={referenceValues}
+            yearCode={currentYear}
+            yearName={latestYearName}
+            unit={displayInfo.unit}
+            valueDisplay={valueDisplay}
+        />
+    ) : null;
+
     // 右レール: ブログ詳細ページ (/blog/[slug]) と同じ構成に統一。
     // ArticleShell の右レールは shell コンテナ 988px 以上で表示する (本文 656px を保つ境界)。
     // ラッパーもブログと同じ非 sticky の <aside> に揃える。
@@ -234,7 +255,12 @@ export function RankingKeyPageClient({
                         areaType={currentAreaType}
                         headerActions={headerActions}
                         cardFooter={
-                            definitionDetail && <RankingVisualizationDetails description={definitionDetail} />
+                            (definitionDetail || sampleCountNote) && (
+                                <>
+                                    {definitionDetail && <RankingVisualizationDetails description={definitionDetail} />}
+                                    {sampleCountNote}
+                                </>
+                            )
                         }
                         isPending={isPending}
                         valueDisplay={valueDisplay}

@@ -1,11 +1,12 @@
 import { DEFAULT_METRIC_PRESENTATION } from "./defaults/presentation";
+import { WAGE_STRUCTURE_COVERAGE_NOTE, WAGE_STRUCTURE_SAMPLE_COUNT } from "./defaults/wage-structure-coverage";
 import type { MetricConfig } from "../../packages/data-configs/src/types";
 
 export const schoolTeacherAnnualIncome: MetricConfig = {
   "key": "school-teacher-annual-income",
   "title": "小中学校教員の平均年収",
   "description": "賃金構造基本統計調査の一般労働者・男女計の小・中学校教員について、6月のきまって支給する現金給与額を12倍し、前年1年間の賞与その他特別給与額を加えた推計年収。",
-  "note": "公立学校教員だけに限定した統計ではない。標本から推計される教員数は全国で約3.3万人 (2023年) と、小・中学校教員全体 (約67万人) の約5%にとどまり、県ごとでは数十人規模で年ごとに顔ぶれが入れ替わる。このため順位は公立学校教員の給与水準を表さない。6月の月例給与を年換算した税・社会保険料等控除前の標本平均で、個人の実年収ではない。",
+  "note": `公立学校教員だけに限定した統計ではない。標本から推計される教員数は全国で約3.3万人 (2023年) と、小・中学校教員全体 (約67万人) の約5%にとどまり、県ごとでは数十人規模で年ごとに顔ぶれが入れ替わる。このため順位は公立学校教員の給与水準を表さない。6月の月例給与を年換算した税・社会保険料等控除前の標本平均で、個人の実年収ではない。${WAGE_STRUCTURE_COVERAGE_NOTE}`,
   "unit": "万円",
   "category": "educationsports",
   "source": {
@@ -23,6 +24,7 @@ export const schoolTeacherAnnualIncome: MetricConfig = {
         "factor": 1
       }
     ],
+    "sampleCount": WAGE_STRUCTURE_SAMPLE_COUNT,
     "cdCat02": "1192",
     "displayName": "賃金構造基本統計調査",
     "url": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/"

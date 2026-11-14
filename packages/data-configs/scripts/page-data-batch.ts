@@ -49,6 +49,7 @@ import { applyValueScale } from "../src/money-unit.js";
 import { fillMissingTimeFromSurveyDate } from "../src/estat-time.js";
 import { mergeSupplementalValues } from "../src/supplemental-values.js";
 import { applyValueCorrections } from "../src/value-corrections";
+import { applySampleCounts, sampleCountKey } from "../src/sample-count";
 import { relabelYearNames, type YearNamedRow } from "../src/year-names";
 import {
   combineLinear,
@@ -69,7 +70,7 @@ import {
   type ShapeSummary,
   type ShapeViolation,
 } from "../src/shape-gate.js";
-import type { KakeiChousaSource, MetricConfig, SourceConfig } from "../src/types.js";
+import type { KakeiChousaSource, MetricConfig, SampleCountSpec, SourceConfig } from "../src/types.js";
 
 // known-broken は「公開済みの欠陥を認知している」だけなので新規書き込みを許可しない。
 // legitimate は統計の定義上正しい形であり、重症度ラチェットの範囲内なら書き込んでよい。
@@ -858,6 +859,10 @@ interface ShapedRow {
   unit: string;
   rank: number | null;
   prefectureCode?: string;
+  /** 推計の人数 (`source.sampleCount` を宣言した指標だけ) */
+  sampleCount?: number | null;
+  /** 推計の人数が下限未満で順位から外した行 (ページでは参考値として示す) */
+  reference?: boolean;
 }
 
 /** 年ごとに value 降順で rank を付与 (1=最大値)。null は rank null。同値は同順位 (競争順位)。 */
@@ -869,7 +874,8 @@ function assignRanks(rows: ShapedRow[]): void {
   }
   for (const group of byYear.values()) {
     const ranked = group
-      .filter((r) => r.value != null)
+      // 推計の人数が少ない県・年 (参考値) は順位を持たせない (DATA-WAGE-TEACHER-COVERAGE-01)
+      .filter((r) => r.value != null && !r.reference)
       .sort((a, b) => (b.value as number) - (a.value as number));
     let prevValue: number | null = null;
     let prevRank = 0;
@@ -925,11 +931,36 @@ function valueScaleOf(config: MetricConfig): number | undefined {
   return config.source.kind === "estat" ? config.source.valueScale : undefined;
 }
 
+/**
+ * 推計の人数の表章項目を取り、(地域, 年) → 表の単位の人数にする (`source.sampleCount`)。
+ * 年代違いのコードを並べた cdTab が同じ年に 2 つ値を返したら、定義が重なっているので止める (tabCombination と同じ)。
+ */
+async function fetchSampleCounts(
+  appId: string,
+  src: Extract<SourceConfig, { kind: "estat" }>,
+  spec: SampleCountSpec,
+): Promise<Map<string, number | null>> {
+  const part = await fetchEstatData(appId, { ...src, cdTab: spec.cdTab, tabCombination: undefined, sampleCount: undefined });
+  const counts = new Map<string, number | null>();
+  for (const v of part.values) {
+    const key = sampleCountKey(v["@area"], v["@time"]);
+    if (counts.has(key)) {
+      throw new Error(`sampleCount の cdTab "${spec.cdTab}" が ${key} に複数の値を返した (年代違いのコードが同じ年に重なっている)`);
+    }
+    counts.set(key, parseEstatValue(v.$));
+  }
+  return counts;
+}
+
 /** 取得 raw values → StatsValues 構造 (prefecture)。areaName/unit/yearName/rank を付与し本番投入可能形に。 */
-function shapeForPrefecture(config: MetricConfig, values: EstatValue[]) {
+function shapeForPrefecture(
+  config: MetricConfig,
+  values: EstatValue[],
+  sample?: { counts: ReadonlyMap<string, number | null>; spec: SampleCountSpec },
+) {
   const masters = loadAreaMasters();
   const scale = valueScaleOf(config);
-  const rows: ShapedRow[] = values
+  const shaped: ShapedRow[] = values
     .filter((v) => isPrefCode5(v["@area"]) && inYearRange(v["@time"].slice(0, 4), config))
     .map((v) => {
       const yearCode = v["@time"].slice(0, 4);
@@ -948,6 +979,7 @@ function shapeForPrefecture(config: MetricConfig, values: EstatValue[]) {
         ? a.areaCode.localeCompare(b.areaCode)
         : a.yearCode.localeCompare(b.yearCode),
     );
+  const rows = sample ? applySampleCounts(shaped, sample.counts, sample.spec) : shaped;
   assignRanks(rows);
   return { metricKey: config.key, entityKind: "prefecture" as const, rows, meta: buildMeta(config, rows) };
 }
@@ -1308,7 +1340,12 @@ export async function processOne(
       );
       const values =
         config.source.kind === "kakei-chousa" ? remapKakeiAreas(fetched.values) : fetched.values;
-      const payload = shapeForPrefecture(config, values);
+      const sampleSpec = config.source.kind === "estat" ? config.source.sampleCount : undefined;
+      const sample = sampleSpec
+        ? { counts: await fetchSampleCounts(appId, src, sampleSpec), spec: sampleSpec }
+        : undefined;
+      const payload = shapeForPrefecture(config, values, sample);
+      if (sample) notes.push(`reference=${payload.rows.filter((r) => r.reference).length}`);
       const notEmpty = await gateEmpty("prefecture", values.length, payload.rows.length, "values.json");
       // 0 件なら形状は見ない (expected-empty の担当。二重に鳴らさない)
       const shapeOk = notEmpty

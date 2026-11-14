@@ -5,7 +5,7 @@ import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
 
-import type { RankingValue } from "../../types";
+import type { RankingReferenceValue, RankingValue } from "../../types";
 import {
   rankingNationalTrendPath,
   rankingNormalizedValuesKeyPath,
@@ -95,19 +95,33 @@ export async function readAllYearsRankingValuesFromR2(
   rankingKey: string,
   areaType: AreaType,
 ): Promise<Result<RankingValue[], Error>> {
+  const result = await readAllYearsRankingValuesWithReferencesFromR2(rankingKey, areaType);
+  return result.success ? ok(result.data.values) : result;
+}
+
+/**
+ * 全年度の ranking_values と、順位から外した参考値 (推計の人数が下限未満) を 1 fetch で取得する。
+ * 参考値はランキングページだけが表で別に示す (DATA-WAGE-TEACHER-COVERAGE-01)。
+ */
+export async function readAllYearsRankingValuesWithReferencesFromR2(
+  rankingKey: string,
+  areaType: AreaType,
+): Promise<Result<{ values: RankingValue[]; referenceValues: RankingReferenceValue[] }, Error>> {
   if (process.env.NEXT_PHASE === "phase-production-build") {
-    return ok([]);
+    return ok({ values: [], referenceValues: [] });
   }
 
   try {
     const snapshot = await loadRankingValuesForKey(rankingKey, areaType);
-    if (!snapshot) return ok([]);
+    if (!snapshot) return ok({ values: [], referenceValues: [] });
 
-    const all: RankingValue[] = [];
+    const values: RankingValue[] = [];
+    const referenceValues: RankingReferenceValue[] = [];
     for (const partition of snapshot.partitions) {
-      all.push(...partition.values);
+      values.push(...partition.values);
+      referenceValues.push(...(partition.referenceValues ?? []));
     }
-    return ok(all);
+    return ok({ values, referenceValues });
   } catch (error) {
     logger.error(
       { rankingKey, areaType, error: error instanceof Error ? error.message : String(error) },

@@ -1,11 +1,12 @@
 import { DEFAULT_METRIC_PRESENTATION } from "./defaults/presentation";
+import { WAGE_STRUCTURE_COVERAGE_NOTE, WAGE_STRUCTURE_SAMPLE_COUNT } from "./defaults/wage-structure-coverage";
 import type { MetricConfig } from "../../packages/data-configs/src/types";
 
 export const taxiDriverAnnualIncome: MetricConfig = {
   "key": "taxi-driver-annual-income",
   "title": "タクシー運転者の平均年収",
   "description": "賃金構造基本統計調査の一般労働者・男女計のタクシー運転者について、6月のきまって支給する現金給与額を12倍し、前年1年間の賞与その他特別給与額を加えた推計年収。",
-  "note": "タクシー以外の乗用自動車運転者は別職種。6月の月例給与を年換算した税・社会保険料等控除前の標本平均で、個人の実年収ではない。",
+  "note": `タクシー以外の乗用自動車運転者は別職種。6月の月例給与を年換算した税・社会保険料等控除前の標本平均で、個人の実年収ではない。${WAGE_STRUCTURE_COVERAGE_NOTE}`,
   "unit": "万円",
   "category": "laborwage",
   "source": {
@@ -23,6 +24,7 @@ export const taxiDriverAnnualIncome: MetricConfig = {
         "factor": 1
       }
     ],
+    "sampleCount": WAGE_STRUCTURE_SAMPLE_COUNT,
     "cdCat02": "1612",
     "displayName": "賃金構造基本統計調査",
     "url": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/"

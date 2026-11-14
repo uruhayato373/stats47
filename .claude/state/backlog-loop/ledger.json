@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-14T04:23:49.151Z",
+  "updatedAt": "2026-11-14T06:40:39.340Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -12200,6 +12200,72 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-14T04:23:49.151Z"
+    },
+    "RELATED-ARTICLES-TIEBREAK-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "ランキングの関連記事の同点の切り方",
+      "attempts": [
+        {
+          "at": "2026-11-14T06:32:36.614Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run (packages/data-configs content navigation.test.ts)"
+            ],
+            "pass": true
+          },
+          "evidence": "cb828fd8a: navigation.json で編集者が明示した関係に加点。直す前に落ちるテスト 2 件を追加。全公開ページ 9,688 件×文脈 8 種=28,623 件の上位を前後比較し、変化は /ranking/total-fertility-rate の 4 件だけで先頭が fertility-rate-prefecture-gap になった。本番反映は次のリリース",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-14T06:32:36.614Z"
+    },
+    "BLOG-TUTORIAL-GATE-GAPS-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "手順解説記事で quality-gate が誤って数える・照合できない 3 か所",
+      "attempts": [
+        {
+          "at": "2026-11-14T06:40:39.340Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/article-factual-check.detection.test.mjs; node .claude/scripts/blog/quality-gate.mjs cc-estat-04-aging-heatmap"
+            ],
+            "pass": true
+          },
+          "evidence": "fc9ad2b3e: 県名の直後の派生値と県の組の合計を県の値と照合しない 4 規則とテスト 14 件。公開記事 254 本で blocker 0→0・警告 150→126。cc-estat-04 の図 2 枚を repo のスクリプトで作り直し critic PASS。「倍」は照合しないとオーナーが決定 (2026-11-14)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-14T06:40:39.340Z"
     }
   }
 }

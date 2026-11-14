@@ -2,9 +2,9 @@ import "server-only";
 
 import { readRankingAiContentFromR2 } from "@stats47/ai-content/server";
 import { shouldShowMetricTotal } from "@stats47/data-configs/metric-summary-display";
-import { getRankingTitle, type RankingValue } from "@stats47/ranking";
+import { getRankingTitle, type RankingReferenceValue, type RankingValue } from "@stats47/ranking";
 import {
-  readAllYearsRankingValuesFromR2,
+  readAllYearsRankingValuesWithReferencesFromR2,
   readRankingItemsByGroupKeyFromR2,
   readRankingItemsBySurveyFromR2,
   type GroupRankingItem,
@@ -50,11 +50,12 @@ export async function loadRankingPageModel(rankingKey: string) {
   // からメモリ上で年 partition を絞っているだけなので、全年版に替えても R2 の GET 回数・
   // 転送バイト数は変わらない。選択年はここで filter し、全年配列は client へ渡さない
   // (畳んだ全国平均系列 ≤50 点だけを渡す。全年配列は最大 400KB 超で RSC payload に乗せられない)。
-  const allYearsValuesPromise = readAllYearsRankingValuesFromR2(rankingKey, AREA_TYPE)
-    .then((r) => (isOk(r) ? r.data : []))
+  // 参考値 (推計の人数が下限未満で順位から外した県・年) も同じ 1 read で取る。件数は数行なので全年を client へ渡す
+  const allYearsPromise = readAllYearsRankingValuesWithReferencesFromR2(rankingKey, AREA_TYPE)
+    .then((r) => (isOk(r) ? r.data : { values: [] as RankingValue[], referenceValues: [] as RankingReferenceValue[] }))
     .catch((error) => {
       logger.error({ error }, "RankingKeyPage: 全年 ranking values 取得失敗");
-      return [] as RankingValue[];
+      return { values: [] as RankingValue[], referenceValues: [] as RankingReferenceValue[] };
     });
 
   // 都道府県 TopoJSON はここで取得しない。1,015,004 bytes が RSC payload へ直列化され、
@@ -111,14 +112,14 @@ export async function loadRankingPageModel(rankingKey: string) {
     : Promise.resolve(null);
 
   const [
-    allYearsValues,
+    { values: allYearsValues, referenceValues },
     aiContent,
     cityRankingItem,
     surveyRelatedItems,
     groupMembers,
     category,
   ] = await Promise.all([
-    allYearsValuesPromise,
+    allYearsPromise,
     aiContentPromise,
     cityRankingItemPromise,
     surveyRelatedItemsPromise,
@@ -158,6 +159,7 @@ export async function loadRankingPageModel(rankingKey: string) {
     rankingItem,
     selectedYear,
     rankingValues,
+    referenceValues,
     nationalAverageSeries,
     aiContent: currentAiContent,
     cityRankingItem,
