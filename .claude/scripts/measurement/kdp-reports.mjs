@@ -21,8 +21,11 @@ export function kdpAsinMap(listings) {
 }
 
 /** All-account downloads stay private. Only exact authored ASINs become stats47 observations. */
-export function parseKdpReport(workbook, listings, date) {
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || new Date(date).toISOString().slice(0, 10) !== date) throw new Error('report_incomplete');
+export function parseKdpReport(workbook, listings, period) {
+  // period は 1 日 ('YYYY-MM-DD') か、日付の範囲 ({ start, end }。両端を含む)。行の日付が範囲の外なら止める。
+  const { start, end } = typeof period === 'string' ? { start: period, end: period } : period;
+  const validDay = d => typeof d === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(d) && new Date(d).toISOString().slice(0, 10) === d;
+  if (!validDay(start) || !validDay(end) || start > end) throw new Error('report_incomplete');
   const asins = kdpAsinMap(listings);
   const records = [];
   let excludedRows = 0;
@@ -38,7 +41,8 @@ export function parseKdpReport(workbook, listings, date) {
       const cells = sheet.getRow(i).values.slice(1);
       if (cells.length !== columns.length || cells.some(x => x == null || typeof x === 'object')) throw new Error('report_schema_changed');
       const row = Object.fromEntries(columns.map((key, n) => [key, cells[n]]));
-      if (cells[0] !== date || !/^B0[A-Z0-9]{8}$/.test(row.ASIN) || !row['マーケットプレイス']) throw new Error('report_incomplete');
+      const date = cells[0];
+      if (!validDay(date) || date < start || date > end || !/^B0[A-Z0-9]{8}$/.test(row.ASIN) || !row['マーケットプレイス']) throw new Error('report_incomplete');
       const id = asins.get(row.ASIN);
       if (!id) {
         if (String(row['著者名']).trim().toLowerCase() === 'stats47') throw new Error('report_incomplete: unmapped_stats47_asin');
@@ -46,7 +50,7 @@ export function parseKdpReport(workbook, listings, date) {
         continue;
       }
       if (row['著者名'] !== 'stats47') throw new Error('account_mismatch');
-      const key = JSON.stringify([name, row.ASIN, row['マーケットプレイス'], row['ロイヤリティの種類'], row['コンテンツ区分'], row['通貨']]);
+      const key = JSON.stringify([name, date, row.ASIN, row['マーケットプレイス'], row['ロイヤリティの種類'], row['コンテンツ区分'], row['通貨']]);
       if (seen.has(key)) throw new Error('report_incomplete: duplicate_row');
       seen.add(key);
       // KDP documents orders by marketplace-local day, but KENP by UTC.
@@ -61,9 +65,33 @@ export function parseKdpReport(workbook, listings, date) {
       }
     }
   }
-  return { schemaVersion: 1, status: 'collected', scope: 'stats47-exact-asin', period: { start: date, end: date, basis: 'metric-specific-date' },
+  return { schemaVersion: 1, status: 'collected', scope: 'stats47-exact-asin', period: { start, end, basis: 'metric-specific-date' },
     finality: 'provisional', records, coverage: { complete: true, mappedAsins: asins.size, includedRows: records.length, excludedRows },
     limitations: ['注文は処理遅延、KENPは翌月確定まで変更されうる', '電子書籍ロイヤリティは見積り。KU確定ロイヤリティ・入金・税引後収益ではない', '当日・週次確定値・口座全体の売上へ読み替えない'] };
+}
+
+/**
+ * 取得したレポートを、収益の明細 (data/revenue/daily) の行にする。日付 × 書籍 × ストア × 種類ごとに 1 行へまとめる
+ * (ロイヤリティはロイヤリティの種類・コンテンツ区分ごとに行が分かれているので足す)。円以外のロイヤリティがあれば
+ * 円に直さず null を返す (明細に書かない)。
+ * @returns {Array<object>|null}
+ */
+export function kdpDailyRows(report, observedAt) {
+  const KIND = { 'processed-orders': null, kenp: 'kenp-pages', 'estimated-ebook-royalty': 'royalty-estimate' };
+  const rows = new Map();
+  const add = (r, kind, field, value) => {
+    const key = JSON.stringify([r.date, r.id, r.marketplace, kind]);
+    const row = rows.get(key) ?? { date: r.date, channel: 'kdp', productId: r.id, kind, [field]: 0, finality: 'provisional', marketplace: r.marketplace, observedAt };
+    row[field] += value;
+    rows.set(key, row);
+  };
+  for (const r of report.records) {
+    if (!(r.kind in KIND)) throw new Error('report_schema_changed');
+    if (r.kind === 'processed-orders') { add(r, 'paid-orders', 'quantity', r.paid); add(r, 'free-orders', 'quantity', r.free); }
+    else if (r.kind === 'kenp') add(r, 'kenp-pages', 'quantity', r.pages);
+    else { if (r.currency !== 'JPY') return null; add(r, 'royalty-estimate', 'amountYen', r.amount); }
+  }
+  return [...rows.values()];
 }
 
 export async function openKdpReports(page) {

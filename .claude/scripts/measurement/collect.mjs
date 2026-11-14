@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { sourceFor, scopedState, failureCode } from './sources.mjs';
 import { writeVault } from './vault.mjs';
 import { kdpMonthlyVaultKey } from './kdp-monthly-reports.mjs';
+import { kdpDailyRows } from './kdp-reports.mjs';
 import { kdpMonthlyObservations } from '../../../packages/product-factory/src/sales/ledger-core.mjs';
 import { acceptedNoteGap, noteInventoryAvailable } from './note-inventory.mjs';
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
@@ -91,6 +92,17 @@ try {
     await command('.claude/scripts/ads/rakuten-report.mjs');
     capture(datasetPath("rakuten.results"));
   } else if (name === 'note') {
+    // 売上と販売履歴は、パスワードの再確認を通したセッションでだけ読める。再確認は約 30 分で切れるので、
+    // 表紙の監査と閲覧数の取得 (合わせて十数分) より先に読む (2026-11-14。11-08 は後に読んで売上だけ落ちた)。
+    // 読めなくても閲覧数の収集は失敗にしない (値は作らない)。
+    let sales = null;
+    let salesStatus = 'collection_failed';
+    try {
+      await command('.claude/scripts/measurement/note-sales.mjs', [join(work, 'sales.json')], 180000);
+      capture(`.local/authenticated-measurement/${name}-${runId}/sales.json`);
+      sales = JSON.parse(readFileSync(join(work, 'sales.json'), 'utf8'));
+      salesStatus = sales.status === 'pass' ? 'pass' : sales.code;
+    } catch { sales = null; }
     await command('.claude/scripts/note/audit-note-covers.mjs', [], 360000, [1]);
     await command('.claude/scripts/note/fetch-note-metrics.mjs', ['--output-dir', join(work, 'note')], 360000, [2]);
     capture(`.local/authenticated-measurement/${name}-${runId}/note`);
@@ -100,15 +112,12 @@ try {
       missingRows: snapshot.coverage?.missingFromDashboard?.length ?? null, totalsMatched: snapshot.coverage?.totalsMatched === true,
       paginationComplete: snapshot.coverage?.paginationComplete === true };
     result.inventoryAvailable = noteInventoryAvailable(snapshot, cover);
-    // 売上は閲覧数と別の API。再確認切れで読めなくても閲覧数の収集は失敗にしない (値は作らない)。
-    try {
-      await command('.claude/scripts/measurement/note-sales.mjs', [join(work, 'sales.json')], 120000);
-      capture(`.local/authenticated-measurement/${name}-${runId}/sales.json`);
-      const sales = JSON.parse(readFileSync(join(work, 'sales.json'), 'utf8'));
-      result.quality.revenue = sales.status === 'pass' ? sales.revenue : null;
-      result.quality.revenueStatus = sales.status === 'pass' ? 'pass' : sales.code;
-      result.quality.revenueEvidenceAvailable = sales.status === 'pass';
-    } catch { result.quality.revenueStatus = 'collection_failed'; }
+    result.quality.revenue = sales?.status === 'pass' ? sales.revenue : null;
+    result.quality.revenueStatus = salesStatus;
+    result.quality.revenueEvidenceAvailable = sales?.status === 'pass';
+    // 収益の明細 (日 × 記事)。販売履歴が読めたときだけ渡す
+    result.quality.daily = sales?.status === 'pass' ? sales.daily ?? null : null;
+    if (sales?.dailyCode) result.quality.dailyCode = sales.dailyCode;
     const gap = acceptedNoteGap(snapshot, cover);
     if (gap) result.knownIncomplete = gap;
     else if (snapshot.status !== 'pass' || cover.status !== 'pass') {
@@ -141,7 +150,11 @@ try {
         ? { date: daily.period.end, royaltyYen: jpy.reduce((sum, r) => sum + (r.amount ?? 0), 0),
           paidOrders: daily.records.filter(r => r.kind === 'processed-orders').reduce((sum, r) => sum + (r.paid ?? 0), 0) }
         : null;
-      result.quality = { monthlyPeriod: monthly.period.month, monthlyRows: monthly.coverage.includedRows, monthlyComplete: true, revenue: dailyRevenue };
+      // 収益の明細 (data/revenue/daily) の入力。書籍 × 日 × 種類の行を summarize.mjs が台帳へ入れる。
+      // 円以外のロイヤリティがある・レポートが不完全なら渡さない (明細に書かない)。
+      const dailyRows = daily?.coverage?.complete === true ? kdpDailyRows(daily, now) : null;
+      result.quality = { monthlyPeriod: monthly.period.month, monthlyRows: monthly.coverage.includedRows, monthlyComplete: true, revenue: dailyRevenue,
+        daily: dailyRows ? { channel: 'kdp', start: daily.period.start, end: daily.period.end, rows: dailyRows } : null };
       if (vaultWrites) {
         const vaultKey = kdpMonthlyVaultKey(monthly.period.month);
         await writeVault(vaultKey, {

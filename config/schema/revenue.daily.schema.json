@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "収益の明細 (日 × 商品 × 種類)",
+  "description": "data/revenue/daily/<channel>-<YYYY-MM>.json の形状契約 (2026-11-14 オーナー決定)。販売元のレポートの粒度のまま 1 行 = 日付 × 商品 × 種類で持ち、週・月・年は .claude/scripts/metrics/lib/revenue-rollup.mjs が集計する。取得のたびに直近の期間を取り直し、(date, productId, kind, marketplace) をキーに上書きする。coverage に入っている日で行が無いものは 0、coverage の外は未計測と読む (欠測を 0 にしない)。項目を足すときは先にここへ足す。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "channel", "month", "coverage", "rows"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "channel": { "$ref": "#/$defs/channel" },
+    "month": { "type": "string", "pattern": "^\\d{4}-\\d{2}$" },
+    "coverage": {
+      "description": "この月のうち、レポートを最後まで取得できた日付の範囲 (両端を含む)。重なる範囲は書き手がまとめる",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["start", "end", "observedAt"],
+        "properties": {
+          "start": { "$ref": "common.schema.json#/$defs/date" },
+          "end": { "$ref": "common.schema.json#/$defs/date" },
+          "observedAt": { "$ref": "common.schema.json#/$defs/datetime" },
+          "evidenceSha256": { "$ref": "common.schema.json#/$defs/sha256" }
+        }
+      }
+    },
+    "rows": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/row" }
+    }
+  },
+  "$defs": {
+    "channel": { "enum": ["kdp", "note", "adsense", "a8", "rakuten"] },
+    "row": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["date", "channel", "productId", "kind", "finality", "observedAt"],
+      "properties": {
+        "date": { "$ref": "common.schema.json#/$defs/date" },
+        "channel": { "$ref": "#/$defs/channel" },
+        "productId": {
+          "description": "チャネルごとの商品 ID (Kindle は出品台帳のキー、note は記事の note ID = 記事台帳の noteUrl の末尾、ASP は案件の ID)。チャネル全体・商品に結べない値は null",
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "kind": { "type": "string" },
+        "quantity": { "description": "件数・ページ数・表示回数など、金額でない量", "type": "number", "minimum": 0 },
+        "amountYen": { "description": "金額 (円)。払い戻しで負になることがある", "type": "number" },
+        "finality": { "description": "provisional = 見積り・速報 (後で変わる)、final = 確定", "enum": ["provisional", "final"] },
+        "marketplace": { "description": "Kindle の販売国のストア (Amazon.co.jp など)", "type": "string", "minLength": 1 },
+        "observedAt": { "$ref": "common.schema.json#/$defs/datetime" }
+      },
+      "anyOf": [{ "required": ["quantity"] }, { "required": ["amountYen"] }],
+      "allOf": [
+        {
+          "if": { "properties": { "channel": { "const": "kdp" } } },
+          "then": {
+            "required": ["marketplace"],
+            "properties": {
+              "productId": { "$ref": "common.schema.json#/$defs/kindleBookId" },
+              "kind": { "enum": ["paid-orders", "free-orders", "kenp-pages", "royalty-estimate"] }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "channel": { "const": "note" } } },
+          "then": {
+            "properties": {
+              "productId": { "type": ["string", "null"], "pattern": "^n[0-9a-f]{12}$" },
+              "kind": { "description": "sales = 記事ごとの販売 (販売額・手数料を引く前)、sales-total = 記事に結べない購入 (マガジン・メンバーシップ・チップ) の 1 日の合計 (productId は null)", "enum": ["sales", "sales-total"] }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "channel": { "const": "adsense" } } },
+          "then": {
+            "properties": {
+              "productId": { "type": "null" },
+              "kind": { "enum": ["earnings", "page-views", "impressions", "clicks"] }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "channel": { "enum": ["a8", "rakuten"] } } },
+          "then": {
+            "properties": {
+              "kind": { "description": "occurred = 発生 (未確定)、confirmed = 確定", "enum": ["clicks", "occurred", "confirmed"] }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "kind": { "enum": ["royalty-estimate", "sales", "sales-total", "earnings"] } } },
+          "then": { "required": ["amountYen"] }
+        }
+      ]
+    }
+  }
+}

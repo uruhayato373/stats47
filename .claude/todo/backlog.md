@@ -104,6 +104,20 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [NSM-REVENUE-INPUTS-01] 収益を日 × 商品の明細で持ち、土曜の週次レビューをスケジュール済みタスクで自動実行する
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/metrics/__tests__/revenue-rollup.test.mjs] [起票:2026-11-14] [領域:管理] [進行中]
+
+- **方針 (2026-11-14 オーナー決定)**: 売上は販売元のレポートの粒度のまま、日 × 商品 × 種類の明細を `data/revenue/daily/<チャネル>-<年月>.json` (台帳 `revenue.daily`・Schema 付き) に持ち、週・月・年は `revenue-rollup.mjs` の集計で作る。明細も git に置く。週次レビューはこの Mac のスケジュール済みタスク (X 返信の承認リストと同じ方式) にし、最後まで自動で進める。計画の全文は `~/.claude/plans/gentle-strolling-tide.md`。
+- **済み**: 明細の Schema・カタログの行・集計の関数。Kindle の書籍別の行を取得結果から明細へ書く経路 (`collect.mjs` → `summarize.mjs`)。週次収益の計算は、週の 7 日が明細に入っているチャネルを明細から出し、入っていないチャネルは従来の記録から出す。
+- **次**:
+  1. **Kindle の取得期間を「昨日」から直近 35 日に替える。** パーサ (`parseKdpReport`) は日付の範囲に対応済み。レポート画面でどのタブ・期間指定を選ぶと日別・書籍別の xlsx が落ちるかは、ログインした画面で確かめる (`collectKdpReport`)。それまでは週 1 回の取得で 1 日分しか明細に入らず、有料購入は判定不能のまま。
+  2. **note の明細を実取得で確かめる。** 販売履歴 (`/dashboard/sales?datespan=YYYYMM`。購入 1 件ごとに記事の URL・日時・金額) を当月と前月の 2 か月分読み、日 × 記事の行にする実装は入れた (`note-sales.mjs`・`parseNoteSalesHistory`)。購入者名はブラウザの外へ出さない。売上は閲覧数の取得より先に読む順へ替えた (再確認が約 30 分で切れるため)。画面の構造は 2026-07 の 1 件でしか確かめていないので、次の土曜の取得で `data/authenticated/latest.json` の note の `dailyRows` と `dailyCode` を読み、行が入ることを確かめる。購入が多い月の続きの表示 (ページ送り) は未確認で、検出したら不完全として書かない作り。
+  3. AdSense の日別 (API)、A8・楽天の日別を明細に入れる。入れば「月累計なので合計に入れない」の但し書きが外れる。
+  4. 集計の生成物 `data/revenue/rollup/{weekly,monthly,yearly}.json` を書くスクリプトと、管理画面 `/revenue` の週・月・年・商品別の表。`summarizePaidPurchases` を明細の集計に替え、`revenue-history.json` への依存を外す。
+  5. スケジュール済みタスク `stats47-weekly-review` を作り、1 回通す。本体は sonnet・medium、判断は `strategy-advisor` へ 1 回、収集用の agent は起動しない。`weekly-review`・`weekly-plan` の SKILL.md を無人で進める形に直す。初回のトークンを `model-usage` で記録する。
+- **停止条件**: パスワード・2 段階認証・CAPTCHA を自動で通さない。欠測を 0 円で埋めない。main へのマージと本番デプロイをタスクから行わない。
+- **完了条件**: 管理画面のホームで週次収益と有料購入が金額と件数で出る週があり、土曜のタスクがレビューと計画の保存まで 1 回通った。
+
 ### [SYNC-SNAPSHOTS-DRYRUN-DESC-01] sync-snapshots の試走の説明と実装を合わせる
 タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [起票:2026-11-14] [領域:サイト]
 
