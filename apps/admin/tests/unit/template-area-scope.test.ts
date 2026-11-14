@@ -175,28 +175,30 @@ describe('グループ棒グラフ', () => {
     const svg = renderGroupedBarsChart(bars(2, 1, (g) => [10, -10][g]));
     const [up, down] = valueLabels(svg).map((m) => Number(/ y="([\d.]+)"/.exec(m[0])![1]));
     const baseline = Number(/<line [^>]*y1="([\d.]+)"/.exec(svg)![1]);
-    const groupName = Number(/<text x="[\d.]+" y="([\d.]+)" text-anchor="middle" font-size="26"/.exec(svg)![1]);
+    const groupName = Number(/<text x="[\d.]+" y="([\d.]+)" text-anchor="middle" font-size="30"/.exec(svg)![1]);
     expect(up).toBeLessThan(baseline);
     expect(down).toBeGreaterThan(baseline);
-    expect(down).toBeLessThan(groupName - 26);
+    expect(down).toBeLessThan(groupName - 30);
   });
   it('値が棒の幅に収まらないときは縦に置く', () => {
-    const svg = renderGroupedBarsChart(bars(12, 3));
-    expect(valueLabels(svg)).toHaveLength(36);
+    // 6 区分 × 3 系列の棒 (幅 約 50) は、横の値 (30px で約 87) は入らず、縦なら 30px で入る
+    const svg = renderGroupedBarsChart(bars(6, 3));
+    expect(valueLabels(svg)).toHaveLength(18);
     expect(valueLabels(svg).every((m) => m[0].includes('rotate(-90'))).toBe(true);
     expect(svg.match(/<line /g)).toHaveLength(1);
   });
   it('1 段では値を置けない細さの図は、区分を 2 段に分けて棒ごとに値を置く', () => {
     const svg = renderGroupedBarsChart(bars(12, 4, (g, s) => (g === 3 ? -1 : 1) * (1001 + g * 10 + s)));
     expect(valueLabels(svg)).toHaveLength(48);
-    expect(valueLabels(svg).every((m) => Number(/font-size="(\d+)"/.exec(m[0])![1]) >= 22)).toBe(true);
+    // 値の文字は型の下限 (30) を下回らない (CHART-AXIS-READABILITY-01)
+    expect(valueLabels(svg).every((m) => Number(/font-size="(\d+)"/.exec(m[0])![1]) >= 30)).toBe(true);
     // 段ごとに 0 の線を 1 本だけ引き、目盛りは出さない
     const baselines = [...svg.matchAll(/<line [^>]*y1="([\d.]+)"/g)].map((m) => Number(m[1]));
     expect(baselines).toHaveLength(2);
     expect(svg).not.toContain('>1,000</text>');
-    expect(svg).not.toContain('font-size="28" fill="#475569"');
+    expect(svg).not.toMatch(/text-anchor="end" font-size="30" fill="#475569"/);
     // 区分は順に上の段 6 つ・下の段 6 つで、同じ列の区分は同じ位置に並ぶ
-    const names = [...svg.matchAll(/<text x="([\d.]+)" y="([\d.]+)" text-anchor="middle" font-size="26"[^>]*>(\d+)<\/text>/g)].map((m) => ({ x: Number(m[1]), y: Number(m[2]), month: Number(m[3]) }));
+    const names = [...svg.matchAll(/<text x="([\d.]+)" y="([\d.]+)" text-anchor="middle" font-size="30"[^>]*>(\d+)<\/text>/g)].map((m) => ({ x: Number(m[1]), y: Number(m[2]), month: Number(m[3]) }));
     expect(names.map((n) => n.month)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
     expect(names.slice(0, 6).every((n) => n.y === names[0].y) && names.slice(6).every((n) => n.y === names[6].y)).toBe(true);
     expect(names[6].y).toBeGreaterThan(names[0].y);
@@ -211,8 +213,8 @@ describe('グループ棒グラフ', () => {
     const boxes = valueLabels(svg).map(labelBox);
     const upper = boxes.filter((b) => b.top < names[0].y), lower = boxes.filter((b) => b.top >= names[0].y);
     expect(upper).toHaveLength(24);
-    for (const b of upper) expect(b.bottom).toBeLessThanOrEqual(names[0].y - 26);
-    for (const b of lower) { expect(b.top).toBeGreaterThanOrEqual(names[0].y); expect(b.bottom).toBeLessThanOrEqual(names[6].y - 26); }
+    for (const b of upper) expect(b.bottom).toBeLessThanOrEqual(names[0].y - 30);
+    for (const b of lower) { expect(b.top).toBeGreaterThanOrEqual(names[0].y); expect(b.bottom).toBeLessThanOrEqual(names[6].y - 30); }
     assertMinimalChartCopy(svg);
   });
   it('2 段に分けても値の文字より細い棒は、値を置かずに 1 段のまま目盛りで読ませる', () => {
@@ -224,7 +226,8 @@ describe('グループ棒グラフ', () => {
   it('凡例が枠の幅に収まらないときは折り返し、棒をその下から描く', () => {
     const labels = ['幼児教育費用', '私立高校', '私立大学', '補習教育', '教育計'];
     const svg = renderGroupedBarsChart({ title: 'a', meta: 'b', source: 'c', groups: ['第Ⅰ', '第Ⅱ'], series: labels.map((label, i) => ({ label, values: [i + 1, -i - 1] })) });
-    const legend = [...svg.matchAll(/<text x="([\d.]+)" y="([\d.]+)" font-size="30"[^>]*>([^<]+)<\/text>/g)].map((m) => ({ right: Number(m[1]) + textWidth(m[3], 30), y: Number(m[2]), label: m[3] }));
+    // 出典の行も 30px なので、凡例の文字だけを数える
+    const legend = [...svg.matchAll(/<text x="([\d.]+)" y="([\d.]+)" font-size="30"[^>]*>([^<]+)<\/text>/g)].filter((m) => !m[3].startsWith('出典')).map((m) => ({ right: Number(m[1]) + textWidth(m[3], 30), y: Number(m[2]), label: m[3] }));
     expect(legend.map((item) => item.label)).toEqual(labels);
     for (const item of legend) expect(item.right, item.label).toBeLessThanOrEqual(SAMPLE_FRAME.right);
     expect(new Set(legend.map((item) => item.y)).size).toBe(2);
@@ -233,7 +236,7 @@ describe('グループ棒グラフ', () => {
     expect(Math.min(...tops)).toBeGreaterThan(lastRow + 30);
     // 1 行に収まる凡例は折り返さない
     const short = renderGroupedBarsChart(bars(3, 2));
-    expect(new Set([...short.matchAll(/<text x="[\d.]+" y="([\d.]+)" font-size="30"/g)].map((m) => m[1])).size).toBe(1);
+    expect(new Set([...short.matchAll(/<text x="[\d.]+" y="([\d.]+)" font-size="30"[^>]*>(?!出典)/g)].map((m) => m[1])).size).toBe(1);
   });
   it('欠測は 0 の棒にしない', () => {
     const svg = renderGroupedBarsChart({ title: 'a', meta: 'b', source: 'c', groups: ['1月', '2月'], series: [{ label: 'x', values: [1, null] }] });

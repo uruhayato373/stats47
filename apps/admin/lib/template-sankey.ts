@@ -1,5 +1,5 @@
 import { SERIES_COLORS } from '../../../packages/svg-builder/src/shared/color';
-import { LIGHT_THEME, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
+import { TEMPLATE_MIN_FONT_SIZE, LIGHT_THEME, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
 import { SAMPLE_FRAME, escapeXml, fitTitleSize, sampleBodyTop, sampleFrame } from './template-sample-frame';
 
 export interface SankeyFlow { from: string; to: string; value: number }
@@ -16,7 +16,7 @@ export interface SankeyChart {
 
 const NODE_WIDTH = 24;
 const NODE_GAP = 12;
-const LABEL_SIZE = 28;
+const LABEL_SIZE = TEMPLATE_MIN_FONT_SIZE;
 const LABEL_MIN_STEP = 36;
 const SOURCE_NODE_X = 326;
 const TARGET_NODE_X = 730;

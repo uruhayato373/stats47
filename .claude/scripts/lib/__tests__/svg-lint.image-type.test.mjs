@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import {
+  findTemplateFontFloorDefects,
   imageTemplateOf,
   lintDarkPair,
   lintImageTypeSvg,
@@ -88,4 +89,12 @@ test('型の画像の「出典：」だけの行と、枠の右端を越える�
   assert.deepEqual(warned(withText(title('72.0', '大人用サンダル消費支出額'))), []);
   // 公開中の図に残っている間は数えるだけで、公開は止めない
   assert.deepEqual(lintImageTypeSvg('sales-ranking.svg', withText(title(72, '外国人延べ宿泊者数 都道府県ランキング'))).errors, []);
+});
+
+// CHART-AXIS-READABILITY-01: 型の画像はスマホの本文で 1/3 に縮むので、30 未満の文字は画面上 10px を切る
+test('findTemplateFontFloorDefects: 型の画像の 30 未満の文字 (text と tspan) を返し、型でない SVG は見ない', () => {
+  const svg = '<svg data-image-template="bar"><text font-size="30">東京</text><text x="1" font-size="26">出典：x</text><text font-size="40">36.0<tspan font-size="24" dx="4">°C</tspan></text></svg>';
+  assert.deepEqual(findTemplateFontFloorDefects(svg), ['26 出典：x', '24 °C']);
+  assert.deepEqual(findTemplateFontFloorDefects(svg.replace(' data-image-template="bar"', '')), []);
+  assert.deepEqual(findTemplateFontFloorDefects(svg, 24), []);
 });
