@@ -334,7 +334,7 @@ function auditKpiLinkage({ lanes, improvementRows, kpiNodes, files }) {
   return { issues, byKpi };
 }
 
-function auditLaneAlignment({ stances, domains = null, backlogText, improvementsText, monthlyText, weeklyText, kpiNodes = null, reviews = [], today = null, files = {} }) {
+function auditLaneAlignment({ stances, domains = null, backlogText, annualText = '', improvementsText, monthlyText, weeklyText, kpiNodes = null, reviews = [], today = null, files = {} }) {
   const f = {
     lanes: LANES_LEDGER,
     backlog: '.claude/todo/backlog.md',
@@ -364,6 +364,10 @@ function auditLaneAlignment({ stances, domains = null, backlogText, improvements
   }
   if (noLane > 0) {
     add('warning', 'DG075', f.backlog, `領域未設定 ${noLane} 件 / 全 ${cards.length} カード — todo-curator が漸次付与する`);
+  }
+  // 年間計画へ移した時期待ちのカードも、週次計画が参照する ID として領域を引ける
+  for (const card of backlogLib.parseAnnual(annualText)) {
+    if (card.id && !idIndex.has(card.id)) idIndex.set(card.id, { lane: card.lane, kind: card.kind, source: 'annual', title: card.title });
   }
   const improvementRows = parseImprovementRows(improvementsText);
   const kpi = auditKpiLinkage({ lanes, improvementRows, kpiNodes, files: f });
@@ -414,7 +418,7 @@ function auditLaneAlignment({ stances, domains = null, backlogText, improvements
     }
     if (item.section !== 'Must') continue;
     if (item.status === 'unresolved') {
-      add('warning', 'DG077', f.weekly, `${where} の領域を引けない (backlog / improvements にある ID を参照する)${note}`);
+      add('warning', 'DG077', f.weekly, `${where} の領域を引けない (backlog / annual / improvements にある ID を参照する)${note}`);
     } else if (item.status === 'off-focus' && focusLanes !== null) {
       add('warning', 'DG077', f.weekly, `${where} は今月の重点領域外 (${item.lanes.join(', ')})${note}`);
     }
@@ -488,6 +492,7 @@ function laneBoard(root, today = new Date().toISOString().slice(0, 10)) {
     stances: readStances(root),
     domains: readDomains(root),
     backlogText: read('.claude/todo/backlog.md'),
+    annualText: read('.claude/todo/annual.md'),
     improvementsText: read('.claude/todo/improvements.md'),
     monthlyText: read('.claude/todo/monthly.md'),
     weeklyText: read('.claude/todo/weekly.md'),

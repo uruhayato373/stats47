@@ -343,3 +343,13 @@ test('DG080は登録済みtyped baselineだけをtarget欠落と区別する', (
   assert.equal(audit('ADSENSE-NEW-EXPERIMENT', 'adsense', 'baseline観測だからtarget不要').length, 1);
   assert.equal(audit('ADSENSE-PLACEMENT-01', 'gsc', 'baseline').length, 1);
 });
+
+test('年間計画 (annual.md) へ移したカードの ID も、週次の Must から領域を引ける', () => {
+  const annualText = ['## 2026-12', '', '### [WAIT-M-01] 公表を待つ', 'タグ: [インフラ・計測] [種類:改善] [実行:対話] [領域:計測] [待ち:時期] [期日:2026-12-15]', ''].join('\n');
+  const args = { stances: STANCES_DOC, backlogText: BACKLOG, improvementsText: IMPROVEMENTS, monthlyText: monthly('focus_domains: [計測]'), weeklyText: weekly(['- [ ] **公表** — `WAIT-M-01`']), kpiNodes: KPI_NODES };
+  const without = auditLaneAlignment(args);
+  assert.ok(without.issues.some((i) => i.code === 'DG077'), '年間計画を渡さなければ領域を引けない');
+  const withAnnual = auditLaneAlignment({ ...args, annualText });
+  assert.ok(!withAnnual.issues.some((i) => i.code === 'DG077'));
+  assert.deepStrictEqual(withAnnual.weekly[0].lanes, ['計測']);
+});
