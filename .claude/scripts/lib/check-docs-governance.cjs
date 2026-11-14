@@ -1102,6 +1102,7 @@ module.exports = {
   fixImplementationPlanIndex,
   inspectRepository,
   isIsoDate,
+  isUntriagedStale,
   isoWeek,
   loadConfig,
   parseFrontmatter,
