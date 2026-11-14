@@ -284,7 +284,7 @@
       "id": "blog:air-conditioner-consumption-quantity-prefecture-gap",
       "kind": "blog",
       "key": "air-conditioner-consumption-quantity-prefecture-gap",
-      "title": "エアコン購入、香川がなぜ全国1位なのか",
+      "title": "エアコン購入、前年1位の香川がなぜ43位?",
       "href": "/blog/air-conditioner-consumption-quantity-prefecture-gap",
       "published": true,
       "rankingKeys": [
@@ -1230,7 +1230,7 @@
       "id": "blog:bread-vs-rice-expenditure",
       "kind": "blog",
       "key": "bread-vs-rice-expenditure",
-      "title": "パン王国と米どころ、なぜ真逆?",
+      "title": "米の支出が2年で2倍、パンを逆転",
       "href": "/blog/bread-vs-rice-expenditure",
       "published": true,
       "rankingKeys": [
@@ -1855,7 +1855,7 @@
       "tagIds": [
         "tag:t-a8cd52d0d273",
         "tag:t-b92faeeb4911",
-        "tag:t-2f9af583a9f5",
+        "tag:t-c06b1b297335",
         "tag:t-52b617d5f464",
         "tag:t-6bc4718fbb15"
       ]
@@ -5896,7 +5896,7 @@
       "id": "blog:household-consumption-expenditure-ranking",
       "kind": "blog",
       "key": "household-consumption-expenditure-ranking",
-      "title": "生活費が高い県は埼玉・最下位は沖縄｜差はたった1.4倍の理由",
+      "title": "生活費の県差は1.5倍、沖縄は19年最下位圏",
       "href": "/blog/household-consumption-expenditure-ranking",
       "published": true,
       "rankingKeys": [
@@ -8277,7 +8277,7 @@
       "id": "blog:manufacturing-shipment-prefecture-ranking",
       "kind": "blog",
       "key": "manufacturing-shipment-prefecture-ranking",
-      "title": "製造品出荷額は愛知58兆円が別格──なぜ太平洋ベルトに集中するのか",
+      "title": "製造品出荷額は愛知59兆円が別格──なぜ太平洋ベルトに集中するのか",
       "href": "/blog/manufacturing-shipment-prefecture-ranking",
       "published": true,
       "rankingKeys": [
@@ -9975,7 +9975,7 @@
       "id": "blog:oyster-consumption-prefecture-gap",
       "kind": "blog",
       "key": "oyster-consumption-prefecture-gap",
-      "title": "牡蠣を一番食べる県は広島、なぜ海なし滋賀が僅差で追う?｜47都道府県2024",
+      "title": "牡蠣の首位、広島vs奈良が入れ替わった2025年",
       "href": "/blog/oyster-consumption-prefecture-gap",
       "published": true,
       "rankingKeys": [
@@ -10307,7 +10307,7 @@
       "id": "blog:pet-food-consumption-expenditure-prefecture-gap",
       "kind": "blog",
       "key": "pet-food-consumption-expenditure-prefecture-gap",
-      "title": "ペットフード代が福島と沖縄で3.7倍違う理由",
+      "title": "ペットフード代、首位はなぜ入れ替わる?",
       "href": "/blog/pet-food-consumption-expenditure-prefecture-gap",
       "published": true,
       "rankingKeys": [
@@ -13131,7 +13131,7 @@
       "id": "blog:tissue-paper-consumption-expenditure-prefecture-gap",
       "kind": "blog",
       "key": "tissue-paper-consumption-expenditure-prefecture-gap",
-      "title": "ティッシュ消費額、なぜ東北が上位を占めるのか",
+      "title": "ティッシュ代、東北vs近畿で19年続く差",
       "href": "/blog/tissue-paper-consumption-expenditure-prefecture-gap",
       "published": true,
       "rankingKeys": [
@@ -13875,13 +13875,13 @@
       "id": "blog:udon-soba-food-culture-prefecture-map",
       "kind": "blog",
       "key": "udon-soba-food-culture-prefecture-map",
-      "title": "香川の半分以下、福岡の生うどん・そば購入量｜「外食で補う」説は当てはまるか",
+      "title": "近畿は家、関東は外食｜生うどん・そばの地図",
       "href": "/blog/udon-soba-food-culture-prefecture-map",
       "published": true,
       "rankingKeys": [
+        "dried-udon-soba-consumption-quantity",
         "fresh-udon-soba-consumption-quantity",
-        "soba-udon-dining-consumption-expenditure",
-        "wheat-flour-consumption-quantity"
+        "soba-udon-dining-consumption-expenditure"
       ],
       "tagIds": [
         "tag:t-3808ac45a1de",

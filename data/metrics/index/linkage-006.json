@@ -5545,6 +5545,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:udon-soba-food-culture-prefecture-map",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:dried-udon-soba-consumption-quantity",
           "kind": "ranking"
         }
