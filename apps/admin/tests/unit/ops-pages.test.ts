@@ -171,7 +171,8 @@ describe("revenue server", () => {
     const unmeasured = d.coverage.filter((c: any) => c.state === "unmeasured").map(
       (c: any) => c.channel,
     );
-    expect(unmeasured).toEqual(["アフィリエイト", "Kindle (KDP)", "note"]);
+    // 週次 CSV が無いので AdSense も計測中と見なさない (CONTENT-FOLLOWUP-01)
+    expect(unmeasured).toEqual(["AdSense", "アフィリエイト", "Kindle (KDP)", "note"]);
     // 金額 0 を返していない (CSV が無ければ error に畳む)
     expect(d.adsense).toHaveProperty("error");
   });
