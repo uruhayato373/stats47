@@ -129,6 +129,46 @@
   "charts": [],
   "metricGroups": [
     {
+      "key": "financial-assets-and-portfolio-1",
+      "title": "金融資産残高（貯蓄現在高・二人以上世帯1世帯当たり）",
+      "rankingKeys": [
+        "financial-assets-balance-multi-person-households"
+      ],
+      "defaultCheckedKeys": [
+        "financial-assets-balance-multi-person-households"
+      ]
+    },
+    {
+      "key": "financial-assets-and-portfolio-2",
+      "title": "預貯金が金融資産に占める割合",
+      "rankingKeys": [
+        "current-deposit-balance-ratio-multi-person-households"
+      ],
+      "defaultCheckedKeys": [
+        "current-deposit-balance-ratio-multi-person-households"
+      ]
+    },
+    {
+      "key": "financial-assets-and-portfolio-3",
+      "title": "生命保険などが金融資産に占める割合",
+      "rankingKeys": [
+        "current-life-insurance-balance-ratio-multi-person-households"
+      ],
+      "defaultCheckedKeys": [
+        "current-life-insurance-balance-ratio-multi-person-households"
+      ]
+    },
+    {
+      "key": "financial-assets-and-portfolio-4",
+      "title": "有価証券が金融資産に占める割合",
+      "rankingKeys": [
+        "current-securities-balance-ratio-multi-person-households"
+      ],
+      "defaultCheckedKeys": [
+        "current-securities-balance-ratio-multi-person-households"
+      ]
+    },
+    {
       "key": "capital-city-savings-debt-1",
       "title": "貯蓄現在高（県庁所在市）",
       "rankingKeys": [
@@ -168,46 +208,6 @@
       ],
       "defaultCheckedKeys": [
         "avg-savings-rate-worker-households"
-      ]
-    },
-    {
-      "key": "financial-assets-and-portfolio-1",
-      "title": "金融資産残高（貯蓄現在高・二人以上世帯1世帯当たり）",
-      "rankingKeys": [
-        "financial-assets-balance-multi-person-households"
-      ],
-      "defaultCheckedKeys": [
-        "financial-assets-balance-multi-person-households"
-      ]
-    },
-    {
-      "key": "financial-assets-and-portfolio-2",
-      "title": "預貯金が金融資産に占める割合",
-      "rankingKeys": [
-        "current-deposit-balance-ratio-multi-person-households"
-      ],
-      "defaultCheckedKeys": [
-        "current-deposit-balance-ratio-multi-person-households"
-      ]
-    },
-    {
-      "key": "financial-assets-and-portfolio-3",
-      "title": "生命保険などが金融資産に占める割合",
-      "rankingKeys": [
-        "current-life-insurance-balance-ratio-multi-person-households"
-      ],
-      "defaultCheckedKeys": [
-        "current-life-insurance-balance-ratio-multi-person-households"
-      ]
-    },
-    {
-      "key": "financial-assets-and-portfolio-4",
-      "title": "有価証券が金融資産に占める割合",
-      "rankingKeys": [
-        "current-securities-balance-ratio-multi-person-households"
-      ],
-      "defaultCheckedKeys": [
-        "current-securities-balance-ratio-multi-person-households"
       ]
     },
     {
