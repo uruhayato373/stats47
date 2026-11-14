@@ -51,6 +51,12 @@ export const RETENTION_POLICIES = Object.freeze({
     pattern: /^\d{4}-\d{2}-\d{2}\.json$/,
     keep: 30,
   },
+  // テーマページの重さの計測。共通の UI を直す前後を比べるので、直近 12 回 (計測した日だけファイルができる) を残す
+  "theme-ui-weight": {
+    directory: datasetDir("themes.ui-weight"),
+    pattern: /^\d{4}-\d{2}-\d{2}\.json$/,
+    keep: 12,
+  },
   "page-quality": {
     directory: `${datasetDir("page-quality.metrics")}/snapshots`,
     pattern: /^\d{4}-\d{2}-\d{2}\.json$/,
