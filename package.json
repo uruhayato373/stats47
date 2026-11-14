@@ -163,6 +163,7 @@
     "db:studio": "cd packages/database && cross-env DB_LOCAL=true npx drizzle-kit studio",
     "admin": "npm run dev --workspace=apps/admin",
     "audit:content-operations": "tsx .claude/scripts/content-operations/audit-content-operations.ts",
+    "r2:classes": "tsx packages/r2-storage/src/scripts/list-r2-key-classes.ts",
     "r2:upload": "tsx packages/r2-storage/src/scripts/sync-upload.ts",
     "r2:download": "tsx packages/r2-storage/src/scripts/sync-download.ts",
     "r2:ges-portrait": "tsx packages/r2-storage/src/scripts/generate-portrait-videos.ts",

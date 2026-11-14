@@ -5,7 +5,7 @@
  *   npm run state:pull -- ads/ga4-affiliate            # index.json に載る全 object
  *   npm run state:pull -- ads/ga4-affiliate --latest   # latest.json だけ
  *
- * 置き場の規約 (docs/01_技術設計/02_データアーキテクチャ.md・.claude/rules/data-storage.md 2026-09-14):
+ * 置き場の規約 (.claude/rules/data-storage.md・.claude/rules/data-storage.md 2026-09-14):
  *   - 書き手は CI だけ (S3 creds は GitHub Actions secrets)。ローカルは公開 URL で読むだけ。
  *   - `state/<domain>/index.json` は CI が維持する object 一覧 (公開 R2 は list できないため)。
  *   - ローカル保存先は `data/<置き場>/live/<rest>/…` (R2 の ads は data/affiliate、それ以外は同名)。`live/` は各置き場の

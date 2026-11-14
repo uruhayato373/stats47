@@ -18,7 +18,7 @@ export interface ExportCategoriesSnapshotResult {
 }
 
 /**
- * categories snapshot を R2 に書き出す (完全DBレス: docs/01_技術設計/02_データアーキテクチャ.md)。
+ * categories snapshot を R2 に書き出す (完全DBレス: .claude/rules/data-storage.md)。
  *
  * SSOT は D1 `categories` テーブルではなく git TS マスタ
  * (`@stats47/data-configs` の `listCategories()` = CATEGORIES, 17件 displayOrder 順, icon 込み)。

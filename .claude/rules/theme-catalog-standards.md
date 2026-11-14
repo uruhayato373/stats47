@@ -509,7 +509,7 @@ export 済み関数を再利用する (判定ロジックを admin 側へ複製�
 - 調査 agent: `.claude/agents/theme-researcher.md`
 - チャートコンポーネント: `.claude/rules/chart-component-standards.md`
 - 情報設計 (テーマの責務): `docs/01_技術設計/03_情報設計.md`
-- 完全DBレス: `docs/01_技術設計/02_データアーキテクチャ.md`
+- 完全DBレス: `.claude/rules/data-storage.md`
 
 
 ## 9. 問い別の章と継続監査

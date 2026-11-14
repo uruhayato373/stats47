@@ -8,7 +8,7 @@
 - **規約 (SSOT・追加規約・DBレス integrity)**: `.claude/rules/gis-data.md`（正典）
 - **メタ SSOT (登録データセット一覧の真実源)**: 台帳 `geo.ksj-datasets`（JSON + Schema。読み込み口 `datasets.ts`）
 - **管理 agent**: `gis-curator`（SSOT 管理）+ `gis-pipeline-runner`（pipeline 実行）
-- **完全DBレス**: `docs/01_技術設計/02_データアーキテクチャ.md`
+- **完全DBレス**: `.claude/rules/data-storage.md`
 
 > **登録データセットの一覧は台帳 `geo.ksj-datasets` が真実源**。旧 doc 04 の自動生成表（`generate-docs.ts`）は
 > 台帳と重複するため 2026-07-12 に廃止。件数・構造の確認は下記で行う:

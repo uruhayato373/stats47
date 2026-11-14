@@ -16,7 +16,7 @@
  *   そこを読み続けており「ローカル D1 が見つかりません」と出したうえで **exit 0** していた。
  *   つまり呼んでも何も検査せず成功したように見える状態で、どの CI からも呼ばれていなかった
  *   ため誰も気づいていなかった (UNWIRED_CHECKER)。
- *   正典: docs/01_技術設計/02_データアーキテクチャ.md (SSOT は git TS と R2 のみ)
+ *   正典: .claude/rules/data-storage.md (SSOT は git TS と R2 のみ)
  */
 
 const path = require("path");

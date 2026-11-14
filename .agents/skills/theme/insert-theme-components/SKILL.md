@@ -76,6 +76,6 @@ primary_agent: theme-component-builder
 
 ## 関連
 
-- 正典: `docs/01_技術設計/02_データアーキテクチャ.md`（page_components）
+- 正典: `.claude/rules/data-storage.md`（page_components）
 - 設計: `/design-theme-charts` / reader: `apps/web/src/features/stat-charts/services/page-components-snapshot.ts`
 - 生成: `apps/web/scripts/export-page-components-snapshot.ts` / 検証: `apps/web/scripts/verify-page-components-snapshot.ts`

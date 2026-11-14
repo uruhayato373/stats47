@@ -13,7 +13,7 @@ GIS を扱う agent (`gis-curator` / `gis-pipeline-runner` / `geo-analysis-curat
 
 > 背景: 純メタが永続/ローカル D1 `gis_datasets` に寄せられ「新規は手動 INSERT」だった (旧 plan
 > stateless-stargazing-teapot Phase 2)。これは完全DBレス doctrine と矛盾し SQLite を消すとメタが
-> 失われた。2026-06-21 にメタを git TS に戻し DBレス化、2026-11-11 に台帳 `geo.ksj-datasets` (`data/geo/ksj/`) へ移した。正典: `docs/01_技術設計/02_データアーキテクチャ.md`。
+> 失われた。2026-06-21 にメタを git TS に戻し DBレス化、2026-11-11 に台帳 `geo.ksj-datasets` (`data/geo/ksj/`) へ移した。正典: `.claude/rules/data-storage.md`。
 
 ## SSOT 構造 (どのデータがどこにあるか)
 
@@ -230,4 +230,4 @@ npx tsc --noEmit -p packages/gis/tsconfig.json
 - Geo分析標準/skill: `.claude/rules/geo-analysis-standards.md` / `.claude/skills/gis/build-geo-analysis/SKILL.md`
 - SNS バズ地図での消費 (KSJ topojson → 点プロット/点→自治体カード): `.claude/rules/buzz-map-standards.md` §4 `ksj`/`mlit-dpf` レーン
 - モジュール設計・使い方: `packages/gis/src/mlit-ksj/README.md` / 登録一覧の真実源: 台帳 `geo.ksj-datasets`
-- データ層: `docs/01_技術設計/02_データアーキテクチャ.md` / `packages/database/README.md`
+- データ層: `.claude/rules/data-storage.md` / `packages/database/README.md`
