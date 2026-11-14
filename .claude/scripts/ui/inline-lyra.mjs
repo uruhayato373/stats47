@@ -20,16 +20,16 @@
  * - cn-* はソースに文字列として書く。`cn-${x}` や "cn-" + x のように組み立てると拾えない (テストが拒否する)
  *
  * 使い方:
- *   node scripts/ui-theme/inline-lyra.mjs          # 部品のソースを書き直す
- *   node scripts/ui-theme/inline-lyra.mjs --check  # 書き直さずに、書き込み漏れだけを調べる (漏れがあれば exit 1)
+ *   node .claude/scripts/ui/inline-lyra.mjs          # 部品のソースを書き直す
+ *   node .claude/scripts/ui/inline-lyra.mjs --check  # 書き直さずに、書き込み漏れだけを調べる (漏れがあれば exit 1)
  */
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, relative } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
-import { cn } from "../../packages/components/src/lib/cn.ts";
+import { cn } from "../../../packages/components/src/lib/cn.ts";
 
-export const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
+export const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 export const SOURCE_CSS = join(ROOT, "packages/ui-theme/style-lyra.css");
 /** 見本サイトに合わせて lyra の値を置き換える差分 (正本 style-lyra.css は手で直さないので別に持つ) */
 export const REFERENCE_CSS = join(ROOT, "packages/ui-theme/style-reference.css");
@@ -320,7 +320,7 @@ function regionPattern(name) {
 }
 
 function renderLyraCva(name, base, groups, defaults) {
-  const lines = [`// lyra:begin ${name} (scripts/ui-theme/inline-lyra.mjs が style-lyra.css から書く。手で直さない)`];
+  const lines = [`// lyra:begin ${name} (.claude/scripts/ui/inline-lyra.mjs が style-lyra.css から書く。手で直さない)`];
   lines.push(`const ${name}Lyra = cva(${JSON.stringify(base)}, {`);
   lines.push("  variants: {");
   for (const group of groups) {

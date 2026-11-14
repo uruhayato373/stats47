@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 import { describe, expect, it } from "vitest";
 
@@ -13,7 +14,8 @@ interface ReaderContract {
   owner: string;
 }
 
-const root = process.cwd();
+// vitest はパッケージの中からもリポジトリのルートからも実行されるので、cwd ではなくこのファイルの位置からルートを決める
+const root = fileURLToPath(new URL("../../../../../../", import.meta.url));
 const inventoryPath = path.join(root, ".claude/config/r2-reader-contracts.json");
 const inventory = JSON.parse(fs.readFileSync(inventoryPath, "utf8")) as {
   version: number;

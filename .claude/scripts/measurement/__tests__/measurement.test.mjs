@@ -11,7 +11,6 @@ import { SOURCES, scopedState, sourceFor, failureCode } from '../sources.mjs';
 import { encrypt, decrypt, BUCKET } from '../vault.mjs';
 import { consumerPath, validateAttempt } from '../consumer-paths.mjs';
 import { measurementHealth } from '../health.mjs';
-import { AFFILIATE_ASP } from '../../../../config/paths.mjs';
 import ExcelJS from 'exceljs';
 import { kdpAsinMap, parseKdpReport, openKdpReports } from '../kdp-reports.mjs';
 import { openCoverageReason } from '../../gsc/export-coverage-playwright.mjs';
@@ -156,10 +155,12 @@ test('KDP rejects malformed, wrong-day, unmapped, duplicate and foreign observat
   assert.throws(()=>kdpAsinMap({ ...kdpListings, other: { author:'stats47',asin:'B0HF17SQ9N' } }));
 });
 
-test('moshimo human login opens the same home as the collector', () => {
-  const config = JSON.parse(readFileSync(resolve(AFFILIATE_ASP), 'utf8')).asps.moshimo;
+test('human login opens a page for every collected source and none for sources removed from collection', () => {
+  // もしも・afb は 2026-10-19 に取得元から外した。sourceFor が unknown_source で止めるので、ログイン先の表に残しても使われない
   const bootstrap = readFileSync(resolve('.claude/scripts/measurement/bootstrap-session.mjs'), 'utf8');
-  assert.ok(bootstrap.includes(`moshimo: '${config.baseUrl}${config.homePath}'`));
+  for (const name of Object.keys(SOURCES)) assert.match(bootstrap, new RegExp(`\\b${name}: 'https://`), name);
+  for (const name of ['moshimo', 'afb']) assert.doesNotMatch(bootstrap, new RegExp(`\\b${name}: 'https://`), name);
+  assert.throws(() => sourceFor('moshimo'), /unknown_source/);
 });
 
 test('session export strips other services and rejects lookalike hosts', () => {
@@ -367,7 +368,7 @@ test('no CI-only entry point for sessions or credentials remains', () => {
   const dir = '.claude/scripts/measurement';
   const files = [
     ...readdirSync(dir).filter((file) => file.endsWith('.mjs')).map((file) => join(dir, file)),
-    'package.json', '.claude/config/env-registry.json', '.claude/config/auth-credentials.json',
+    'package.json', 'config/env-registry.json', '.claude/config/auth-credentials.json',
     'apps/admin/app/ops/auth/page.tsx', 'apps/admin/lib/server/auth-credentials.ts',
     'docs/01_技術設計/07_Playwright認証プロファイル.md',
   ];

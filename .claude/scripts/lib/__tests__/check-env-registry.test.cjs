@@ -16,7 +16,7 @@ function fixture(source) {
   fs.mkdirSync(path.dirname(app), { recursive: true });
   fs.copyFileSync(CHECKER, checker);
   fs.writeFileSync(app, source);
-  return { root, checker, registry: path.join(root, ".claude/config/env-registry.json") };
+  return { root, checker, registry: path.join(root, "config/env-registry.json") };
 }
 
 function run(item, args = []) {

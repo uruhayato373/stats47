@@ -106,6 +106,7 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 | 開発 | `git log --since`、`git status --short` |
 | コンテンツ | R2 blog/ranking snapshot、topic/remediation queue |
 | 性能・流入 | GSC / GA4の確定7日summary、SNSの最新snapshot |
+| 検索の需要 | アクセス・需要・人気の質問はまず `data/gsc/DEMAND-LATEST.md` (長期は `demand-history.csv`) を読み、期間とキーワード表の捕捉率を添えて答える。生の `snapshots/<週>/queries.csv` から直接答えない |
 | 検索成長 | `npm run search-growth:status`、`npm run search-growth:next -- --limit 10` |
 | GSC画面監査・技術是正 | `data/gsc/ui-audits/`、`data/improvement/gsc-improvement/improvement-log.md`、`.claude/todo/backlog.md`。全除外理由・メッセージ・拡張の監査、本番反映、Google再検証を `.claude/skills/analytics/gsc-improvement/SKILL.md`「画面監査・技術是正とレビューへの引き渡し」に従って読む。新通知・監査から7日超・確認期日到達なら該当画面を再確認し、取得不可はBlockersへ |
 | NSM実験 | `.claude/skills/management/nsm-experiment/reference/` |

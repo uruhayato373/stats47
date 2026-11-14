@@ -1240,7 +1240,7 @@
       "contexts": [
         "process"
       ],
-      "note": "検査スクリプト (.claude/scripts/lib の check-*.cjs と preflight-commit.mjs) が検査するルートの上書き。テストの fixture 用で、既定はスクリプト自身の作業ツリー。CLAUDE_PROJECT_DIR は読まない"
+      "note": "検査スクリプト (.claude/scripts/lib の check-*.cjs・preflight-commit.mjs・audit-workflow-policy.cjs) と、ルートを決める state-pull.mjs・remove-worktree.mjs・append-ga4-affiliate-history.mjs・audit-note-image-assets.mjs が扱うルートの上書き。テストの fixture 用で、既定はスクリプト自身の作業ツリー。CLAUDE_PROJECT_DIR は読まない"
     },
     {
       "name": "SURVEYS_JSON",

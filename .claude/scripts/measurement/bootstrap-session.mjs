@@ -18,7 +18,6 @@ if (!sourceName || args.includes('--help')) {
   process.exit(0);
 }
 const source = sourceFor(sourceName);
-if (source.transport === 'api') throw new Error(`api_source_requires_secret: configure ${source.apiSecret}; browser session export cannot activate this source`);
 if (args.includes('--reports') && (sourceName !== 'kdp' || !args.includes('--login'))) throw new Error('reports_requires_kdp_login');
 // 自動操作のブラウザ (Playwright) を拒否するサービスは、普通の Chrome で専用プロファイルにログインし、閉じてから取り出す。
 // Google (gsc)
@@ -61,7 +60,7 @@ else {
       ...(nativeProfile ? { ignoreDefaultArgs: ['--password-store=basic', '--use-mock-keychain'] } : {}),
     });
     if (login) {
-      const urls = { a8: 'https://pub.a8.net/', moshimo: 'https://af.moshimo.com/af/shop/index', afb: 'https://www.afi-b.com/pa/',
+      const urls = { a8: 'https://pub.a8.net/',
         note: 'https://note.com/settings/account', gsc: 'https://search.google.com/search-console?resource_id=sc-domain%3Astats47.jp',
         kdp: 'https://kdp.amazon.co.jp/ja_JP/bookshelf',
         rakuten: 'https://affiliate.rakuten.co.jp/report/summary' };

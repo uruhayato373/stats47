@@ -54,7 +54,7 @@
       "domain": "affiliate",
       "order": 4,
       "stance": "維持",
-      "aim": "既存アフィリエイト配置の効果判定を終える。枠と案件は増やさない。AdSense は再開手続き（`ADSENSE-RESTART-01`）だけを進める",
+      "aim": "既存アフィリエイト配置の効果判定を終える。枠と案件は増やさない。AdSense は 2026-10-11 に手動枠で再開済みで、配置は `/adsense-improvement` の判定で変える",
       "gate": "管理が維持へ移り、配置の効果判定が1件以上確定したら攻めるを検討する",
       "improvementMetrics": [
         "affiliate"

@@ -239,6 +239,17 @@ async function visitWithServer(chromium, { block }) {
   }
 }
 
+test("PR の workflow は、このテストを走らせる job で先に Chromium を入れる", () => {
+  // 入れないと下の実ブラウザの確認が CI で毎回 skip になり、遮断が壊れても緑のまま (CI-TOOLING-FOLLOWUP-03)
+  const workflow = readFileSync(join(HERE, "..", "..", "..", "..", ".github", "workflows", "pr-quality-check.yml"), "utf8");
+  const run = workflow.indexOf("node --test .claude/scripts/ads/__tests__/*.test.mjs");
+  assert.ok(run > 0, "pr-quality-check.yml で ads のテストを走らせる step を見つけられない");
+  const jobHeader = [...workflow.slice(0, run).matchAll(/\n  ([a-z][a-z0-9-]*):\n/g)].pop();
+  assert.ok(jobHeader, "ads のテストを走らせる job を見つけられない");
+  const job = workflow.slice(jobHeader.index, run);
+  assert.match(job, /npx playwright install (?:--with-deps )?chromium/, `${jobHeader[1]} の job が Chromium を入れていない`);
+});
+
 test("実際のブラウザで、遮断を差し込むと広告・計測の要求がサーバーに 1 件も届かない", async (t) => {
   let chromium;
   try {
@@ -246,6 +257,8 @@ test("実際のブラウザで、遮断を差し込むと広告・計測の要�
     const probe = await chromium.launch({ headless: true });
     await probe.close();
   } catch (error) {
+    // CI は Chromium を入れてから走らせるので、起動できないのは配線の壊れ。skip にせず落とす
+    if (process.env.CI) throw error;
     t.skip(`Chromium を起動できない環境なので飛ばす: ${String(error.message).split("\n")[0]}`);
     return;
   }

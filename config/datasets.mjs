@@ -15,6 +15,7 @@
  *                   宣言すれば検証する (check-datasets。判断に使う記録は書き手も .claude/scripts/lib/dataset-shape.mjs で書く前に検証)
  *           retain: 日付付きファイルの寿命 (.claude/scripts/lib/prune-state-snapshots.mjs の RETENTION_POLICIES の名前。
  *                   数値はそちらだけに置く) / planned: まだ 1 件も無い (追跡ファイルができたら外す。check-datasets が落とす)
+ *           transient: CI が消費して消す依頼・公開待ちの outbox。普段は 0 件で push の直後だけある (件数を問わない。planned と併用しない)
  *           r2State: 正本は private R2 のこの prefix。手元は git 管理外の live/ に置く (npm run media:state:pull / push)。
  *                    git の追跡ファイルに当たらなくてよい (2026-10-18 オーナー判断: 画像まわりの派生データは R2)
  *           refs:   この台帳の ID が指す先 (外部キー相当。2026-10-26)。下の「REFS の書き方」
@@ -123,6 +124,8 @@ export const SYSTEM_CONFIG = {
   "local.resources": "端末の容量予算・掃除対象・保持日数",
   "source-vault.profiles": "参考文献 vault の接続先と資料 profile",
   "web.yoy-batch": "バッチの設定",
+  "ops.env-registry": "環境変数の名前と公開の区分の登録表 (値は置かない。未登録の process.env を止める検査が読む)",
+  "claude.model-pricing": "Claude モデルの API 単価 (使用量の費用換算が読む)",
 };
 
 /**
@@ -262,6 +265,8 @@ export const DATASETS = [
   d("local.resources", P.LOCAL_RESOURCES, "config", "ops", "config", "端末の容量予算・掃除対象・保持日数", { schema: "config/schema/local.resources.schema.json" }),
   d("source-vault.profiles", P.SOURCE_VAULT, "config", "data", "config", "参考文献 vault の資料 profile", { schema: "config/schema/source-vault.profiles.schema.json" }),
   d("web.yoy-batch", P.YOY_BATCH, "config", "data", "config", "前年比時系列のバッチ設定", { schema: "config/schema/web.yoy-batch.schema.json" }),
+  d("ops.env-registry", "config/env-registry.json", "config", "ops", "config", "環境変数の名前と公開の区分 (値は置かない)。読み書きは .claude/scripts/lib/check-env-registry.cjs", { schema: "config/schema/ops.env-registry.schema.json" }),
+  d("claude.model-pricing", "config/model-pricing.json", "config", "ops", "config", "Claude モデルの API 単価 (USD / 100 万トークン)。読むのは .claude/scripts/model-usage/", { schema: "config/schema/claude.model-pricing.schema.json" }),
 
   // ── data/ : 事業の記録 ──
   d("note.kakei-expense-evidence", "data/note/kakei-expense-evidence.json", "ledger", "product", "data", "note 家計シリーズの十大費目→根拠指標の対応表 (build-kakei-note-evidence-data.mjs の入力)", { schema: "data/note/kakei-expense-evidence.schema.json" }),
@@ -443,6 +448,9 @@ export const DATASETS = [
   d("gsc.history", "data/gsc/history.csv", "series", "site", "data", "GSC の週次集約"),
   d("gsc.history-finalized", "data/gsc/history-finalized7d.csv", "series", "site", "data", "GSC の確定 7 日集約"),
   d("gsc.latest", "data/gsc/LATEST.md", "report", "site", "data", "GSC の前週比の要約"),
+  d("gsc.demand-history", "data/gsc/demand-history.csv", "series", "site", "data", "GSC のセクション別・カテゴリ別・テーマ別のクリックの長期推移 (重ならない 28 日窓ごと。期間と捕捉率付き)。snapshots から update-history-csv.mjs (lib/gsc-demand.mjs) が毎週作り直す。手で編集しない"),
+  d("gsc.demand-weekly", "data/gsc/demand-weekly.csv", "series", "site", "data", "GSC の確定 7 日の明細 (queries/pages-finalized7d.csv) から作るカテゴリ別の集計 (前週比用)。明細を保存した週だけ", { planned: true }),
+  d("gsc.demand-latest", "data/gsc/DEMAND-LATEST.md", "report", "site", "data", "「何にアクセスが集まっているか」の要約 (長期・直近 28 日・前週比のカテゴリ順位、上位テーマ・ページ・検索語、捕捉率と期間)"),
   d("gsc.priority-ranking-keys", "data/gsc/priority-100-ranking-keys.csv", "evidence", "site", "data", "GSC 表示回数の上位 100 ランキング (2026-09-16 時点の抽出。AI 解説の有無付き)"),
   d("gsc.coverage-drilldown", "data/gsc/coverage-drilldown/{week}/{name}", "series", "site", "data", "GSC カバレッジ 6 種別の週次ドリルダウン"),
   d("gsc.coverage-drilldown-history", "data/gsc/coverage-drilldown/history.csv", "series", "site", "data", "カバレッジ件数の推移"),
@@ -458,7 +466,7 @@ export const DATASETS = [
   d("ga4.history-finalized", "data/ga4/history-finalized7d.csv", "series", "site", "data", "GA4 の確定 7 日集約"),
   d("ga4.reconciliations", "data/ga4/reconciliations/{date}-{week}.json", "ledger", "site", "data", "GA4 の週次集計定義の照合証拠", { schema: "config/schema/ga4.reconciliations.schema.json", retain: "ga4-reconciliations" }),
   d("ga4.latest", "data/ga4/LATEST.md", "report", "site", "data", "GA4 の前週比の要約"),
-  d("psi.batch", "data/psi/psi-batch-{ts}.json", "series", "site", "data", "PSI 日次計測の生 JSON", { retain: "psi" }),
+  d("psi.batch", "data/psi/live/psi-batch-{ts}.json", "series", "site", "data", "PSI 週次計測の生 JSON (正本は R2。手元は npm run state:pull -- psi)", { r2State: "state/psi/" }),
   d("psi.history", "data/psi/history.csv", "series", "site", "data", "PSI の長期履歴"),
   d("psi.latest", "data/psi/LATEST.md", "report", "site", "data", "PSI の最新要約"),
   d("cloudflare.snapshots", "data/cloudflare/snapshots/{date}.json", "series", "ops", "data", "Cloudflare 日次 usage", { retain: "cloudflare" }),
@@ -491,7 +499,7 @@ export const DATASETS = [
   d("claude.model-usage", `${SM}/model-usage/{name}.json`, "state", "ops", "state", "モデル使用量と最適化提案"),
   d("claude.model-canary", `${SM}/model-usage/canary/{date}-{name}.json`, "evidence", "ops", "state", "モデル / effort の canary 比較", { retain: "model-usage-canary" }),
   d("claude.prompt-evals", `${SM}/prompt-evals/{date}.json`, "evidence", "ops", "state", "プロンプト評価の結果"),
-  d("ops.ci-requests", "data/{name}-requests.json", "state", "ops", "data", "cloud セッションが CI に頼む実行依頼 (workflow の代理起動など)。CI が消費して git rm するので普段は 0 件"),
+  d("ops.ci-requests", "data/{name}-requests.json", "state", "ops", "data", "cloud セッションが CI に頼む実行依頼 (workflow の代理起動など)。CI が消費して git rm するので普段は 0 件", { transient: true }),
   d("ops.monthly-jobs", "data/ci/monthly-jobs/{name}.json", "state", "ops", "data", "月次ジョブの最終実行"),
   d("ops.releases", "data/releases/{date}-{name}.json", "evidence", "ops", "data", "release の検証証跡", { retain: "releases" }),
   d("instagram.token", "data/sns/instagram-token.json", "state", "sns", "data", "Instagram トークンの更新日と期限 (トークン本体は置かない)"),
@@ -686,7 +694,7 @@ export const DATASETS = [
   d("sns.post-log", "data/sns/post-log.md", "report", "sns", "data", "SNS 投稿の人が読む記録"),
   d("sns.weekly-reports", "data/sns/weekly-reports/{week}.md", "report", "sns", "data", "SNS 横断の週次レポート (プラットフォーム別の集計と上位の投稿。sns-weekly-report.mjs が日曜の workflow で書き、分析の節は /sns-weekly-report が足す)"),
   d("sns.competitor-scans", "data/sns/competitor-scans/{date}.md", "report", "sns", "data", "競合アカウントの定点観測のレポート (/competitor-scan が書く。月次レビューの実施状況が対象月の日付のものを読む)"),
-  d("sns.x-winning-pattern-reports", "data/sns/x-winning-pattern-reports/{date}.md", "report", "sns", "data", "X の勝ち要因の比較用レポート (analyze-x-winning-patterns.mjs の月次レポートと /x-viral-research の調査レポート。最新の状態は同じスクリプトが書く x-winning-patterns.json)", { planned: true }),
+  d("sns.x-winning-pattern-reports", "data/sns/x-winning-pattern-reports/{date}-{name}.md", "report", "sns", "data", "X の勝ち要因の比較用レポート (analyze-x-winning-patterns.mjs の月次レポート <date>-winning-patterns.md と /x-viral-research の調査レポート <date>-viral-research.md。同じ日に両方を書いても上書きしない。最新の状態は同じスクリプトが書く x-winning-patterns.json)", { planned: true }),
   d("sns.image-replacements", "data/sns/image-replacements/{name}.json", "evidence", "sns", "data", "予約済み投稿の画像差し替えの記録 (決定・対象 ID・差し替え前後)"),
   d("sns.material-reconciliation", "data/sns/material-reconciliation-{date}.json", "series", "sns", "data", "素材キーから投稿IDへの照合証跡。候補の正本はposts.json"),
   d("sns.posts-schema", "data/sns/posts.schema.json", "schema", "sns", "data", "SNS 投稿台帳の JSON Schema"),
@@ -712,6 +720,7 @@ export const DATASETS = [
   d("page-quality.backlog-batches", "data/page-quality/backlog-batches/{**}", "state", "site", "data", "UI 指摘を backlog カードへ束ねた記録"),
   d("business-plan.state", "data/business-plan/{name}.json", "state", "strategy", "data", "事業計画 SSOT から派生した最新状態と KPI ツリー"),
   d("business-plan.history", "data/business-plan/history/{date}.json", "series", "strategy", "data", "事業計画の派生状態の履歴", { retain: "business-plan" }),
+  d("business-plan.catalog", "data/business-plan/plan/catalog.json", "master", "strategy", "data", "事業計画の見出し (ID・版・取り込んだ原本の記録・ビジョン・標語・原則・収益の層・重点テーマ)。読み込みは packages/data-configs/src/business-plan/catalog.ts (BUSINESS_PLAN_2026)", { schema: "config/schema/business-plan.catalog.schema.json" }),
   d("business-plan.documents", "data/business-plan/plan/documents.json", "master", "strategy", "data", "事業計画が拠り所にする正典文書の一覧。読み込みは packages/data-configs/src/business-plan/catalog.ts (BUSINESS_PLAN_DOCUMENTS)", { schema: "config/schema/business-plan.documents.schema.json" }),
   d("business-plan.decisions", "data/business-plan/plan/decisions.json", "ledger", "strategy", "data", "外部の事業計画書 25 章の章ごとの採否 (採用・適合変更・保留・不採用と理由・正典・担当)。読み込みは packages/data-configs/src/business-plan/catalog.ts (BUSINESS_PLAN_DECISIONS)", {
     schema: "config/schema/business-plan.decisions.schema.json",
@@ -876,7 +885,7 @@ export const DATASETS = [
       { field: "layers.*.related[]", to: "geo.analyses", key: "analyses.$keys" },
     ],
   }),
-  d("geo.content-lifecycle", "data/geo/analyses/content-lifecycle.json", "ledger", "data", "data", "Geo コンテンツの公開ライフサイクルの手書き部分 (contentId ごとのテーマ・記事の slug と題案・公開計画。無料面・SNS・有料面の結合は読み込み口)。読み込みは packages/data-configs/src/business-plan/geo-content-lifecycle.ts", {
+  d("geo.content-lifecycle", "data/geo/analyses/content-lifecycle.json", "ledger", "data", "data", "Geo コンテンツの公開ライフサイクルの手書き部分 (contentId ごとのテーマ・記事の slug と題案・公開計画と、公開ゲートの文言。無料面・SNS・有料面の結合とゲートの並びは読み込み口)。読み込みは packages/data-configs/src/business-plan/geo-content-lifecycle.ts", {
     schema: "config/schema/geo.content-lifecycle.schema.json",
     refs: [
       { field: "contents.$keys", to: "business-plan.content-opportunities", key: "contentOpportunities[].id" },
@@ -1355,6 +1364,9 @@ export const RETIRED = [
   { from: "ges/scripts/data/ports.json", to: "data/areas/master/ports.json (台帳 areas.ports を読む)", since: "2026-11-11" },
   // 段 13 (2026-11-12): note のハッシュタグ 286 ファイルを、記事の ID をキーにした 1 つの表へ (題・URL・系統の写しは持たない)
   { from: "data/note/hashtags/", to: "data/note/hashtags.json", since: "2026-11-12" },
+  // 品質ゲートの基準ではないシステムの設定を .claude/config/ から config/ へ (2026-11-14 DIR-PLACEMENT-CLEANUP-01)
+  { from: ".claude/config/env-registry.json", to: "config/env-registry.json", since: "2026-11-14" },
+  { from: ".claude/config/model-pricing.json", to: "config/model-pricing.json", since: "2026-11-14" },
 ];
 
 const BY_ID = new Map(DATASETS.map((ds) => [ds.id, ds]));

@@ -9,7 +9,7 @@ import type {
   BusinessPlanGeoLaunchPlan,
 } from './types';
 
-/** 手で決める部分の正本は台帳 `geo.content-lifecycle` (data/geo/analyses/content-lifecycle.json + Schema)。結合は下の関数が行う。 */
+/** 手で決める部分 (コンテンツごとの定義と公開ゲートの文言) の正本は台帳 `geo.content-lifecycle` (data/geo/analyses/content-lifecycle.json + Schema)。結合は下の関数が行う。 */
 interface GeoContentDefinition {
   readonly themeKeys: readonly string[];
   readonly blogSlug: string;
@@ -19,11 +19,8 @@ interface GeoContentDefinition {
 
 const CONTENT_DEFINITIONS = data.contents as Record<string, GeoContentDefinition>;
 
-const COMMON_GATES = [
-  '公式入力の版・利用条件・SHA-256を確認する',
-  '47都道府県のaggregateを欠損補完なしで生成する',
-  'canonical・記事・販売物の数値を同じR2 artifactから派生する',
-] as const;
+/** 公開ゲートの文言。全分析に共通の前段・分析の種類ごとの中段・共通の後段を台帳から読む。 */
+const PUBLICATION_GATES = data.publicationGates;
 
 export const BUSINESS_PLAN_GEO_CONTENT_LIFECYCLE: readonly BusinessPlanGeoContentLifecycle[] =
   BUSINESS_PLAN_M1_ANALYSES.map((analysis) => {
@@ -86,14 +83,11 @@ export const BUSINESS_PLAN_GEO_CONTENT_LIFECYCLE: readonly BusinessPlanGeoConten
         status: paid.status === 'in-progress' ? 'draft' : 'gated',
       },
       publicationGates: [
-        ...COMMON_GATES,
+        ...PUBLICATION_GATES.common,
         ...(analysis.analysisKind === 'spatial-cross'
-          ? [
-              '47県の途中artifact・lineage manifest・保存則をPASSする',
-              'context-onlyレイヤーを計算入力へ混入させない',
-            ]
-          : ['単一指標の入口であり空間横断分析ではないと明示する']),
-        '無料ページは結論、有料物は再現手順・辞書・テンプレート・加工済み成果物を提供する',
+          ? PUBLICATION_GATES.spatialCross
+          : PUBLICATION_GATES.baseline),
+        ...PUBLICATION_GATES.closing,
       ],
     };
   });

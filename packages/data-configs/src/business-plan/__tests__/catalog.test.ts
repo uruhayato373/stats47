@@ -1,3 +1,5 @@
+import { existsSync, readFileSync } from 'node:fs';
+
 import { describe, expect, it } from 'vitest';
 
 import { BUSINESS_PLAN_2026 } from '../catalog';
@@ -140,6 +142,18 @@ describe('stats47 2.0事業計画カタログ', () => {
 
 describe('事業計画の台帳 (data/business-plan/plan) と読み込み口の結合', () => {
   const pad = (n: number, width: number) => String(n).padStart(width, '0');
+
+  it('計画の見出し (ID・版・原本・ビジョン・原則・収益の層・重点テーマ) は台帳 business-plan.catalog の値をそのまま出し、コードに写さない', () => {
+    const ledgerUrl = new URL('../../../../../data/business-plan/plan/catalog.json', import.meta.url);
+    expect(existsSync(ledgerUrl)).toBe(true);
+    const ledger = JSON.parse(readFileSync(ledgerUrl, 'utf8'));
+    for (const key of ['id', 'version', 'source', 'vision', 'tagline', 'principles', 'revenueLayers', 'priorityThemes'] as const) {
+      expect(BUSINESS_PLAN_2026[key]).toEqual(ledger[key]);
+    }
+    const loader = readFileSync(new URL('../catalog.ts', import.meta.url), 'utf8');
+    expect(loader).not.toContain(ledger.vision);
+    expect(loader).not.toContain(ledger.source.sourceSha256);
+  });
 
   it('位置から作っていた ID を台帳に固定した並びのまま出す', () => {
     expect(BUSINESS_PLAN_2026.contentOpportunities.map((item) => item.id)).toEqual(

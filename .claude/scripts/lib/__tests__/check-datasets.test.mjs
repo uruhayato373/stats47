@@ -110,6 +110,22 @@ test("[mutation] skill の reference/reports/ に定期レポートを置くと�
   for (const [id, dir] of Object.entries(destinations)) assert.equal(datasetDir(id), dir);
 });
 
+test("X の勝ち要因レポートは書き手 2 つが別の名前で書き、同じ日に両方を回しても上書きしない", () => {
+  // analyze-x-winning-patterns.mjs の月次レポートと /x-viral-research の Phase 4 は種類の違うレポートを同じ置き場に書く。
+  // 名前が日付だけだと、同じ日に両方を実行すると後の方が前の方を上書きする。
+  const row = DATASETS.find((x) => x.id === "sns.x-winning-pattern-reports");
+  const re = patternToRegExp(row.path);
+  const dir = datasetDir("sns.x-winning-pattern-reports");
+  const script = readFileSync(resolve(ROOT, ".claude/scripts/sns/analyze-x-winning-patterns.mjs"), "utf8");
+  const skill = readFileSync(resolve(ROOT, ".claude/skills/sns/x-viral-research/SKILL.md"), "utf8");
+  const scriptName = /`\$\{today\}(-[a-z-]+)\.md`/.exec(script)?.[1];
+  const skillName = /x-winning-pattern-reports\/YYYY-MM-DD(-[a-z-]+)\.md/.exec(skill)?.[1];
+  assert.ok(scriptName, "analyze-x-winning-patterns.mjs は日付の後ろに種類の名前を付けて書く");
+  assert.ok(skillName, "x-viral-research の Phase 4 は日付の後ろに種類の名前を付けて書く");
+  assert.notEqual(scriptName, skillName);
+  for (const name of [scriptName, skillName]) assert.ok(re.test(`${dir}/2026-11-14${name}.md`), `台帳の行に当たらない: ${name}`);
+});
+
 test("可変部分は決めた形だけに当たる", () => {
   assert.ok(patternToRegExp("a/{date}.json").test("a/2026-10-06.json"));
   assert.ok(!patternToRegExp("a/{date}.json").test("a/2026-W41.json"));
@@ -143,6 +159,14 @@ test("planned の行が追跡ファイルに当たっていれば落ちる (件�
   const r = run([ds("a", "data/x/{**}", { planned: true })], ["data/x/1.json"]);
   assert.deepEqual(r.errors, ["planned なのに追跡ファイルが 1 件ある (planned を外す): a (data/x/{**})"]);
   assert.deepEqual(run([ds("a", "data/x/{**}", { planned: true })], ["data/x/.gitkeep"]).errors, []);
+});
+
+test("transient の行 (CI が消費して消す依頼・公開待ち) は 0 件でも 1 件以上でも通す", () => {
+  // 依頼や公開待ちは普段 0 件で、cloud セッションが push した直後だけ 1 件以上ある。planned だと push の commit が止まり、
+  // 何も付けないと消費した後に止まる (2026-11-14 DIR-PLACEMENT-CLEANUP-01)
+  assert.deepEqual(run([ds("a", "data/x-requests.json", { transient: true })], []).errors, []);
+  assert.deepEqual(run([ds("a", "data/x/{**}", { transient: true })], ["data/x/1.json", "data/x/2.json"]).errors, []);
+  assert.match(run([ds("a", "data/x/{**}", { transient: true, planned: true })], []).errors.join(), /transient と planned は同時に付けない/);
 });
 
 test("語彙外の kind / target / 領域と id の重複は落ちる", () => {
@@ -848,9 +872,18 @@ test("build-survey-portfolio.ts の --set は、Schema の語彙に無い値を 
     assert.match(result.stderr, new RegExp(`${option} no-such-value は ${field} の語彙に無い`));
     assert.equal(state.read("portfolio.json"), before, `${option} の語彙外の値で portfolio.json が書き換わった`);
   }
-  const ok = set("--lifecycle", "improve");
+  // --next-review は Schema の date (YYYY-MM-DD) で、暦に無い日付も書かない (CI-TOOLING-FOLLOWUP-03)
+  for (const value of ["next-month", "2026/12/01", "2026-13-01", "2026-02-30"]) {
+    const result = set("--next-review", value);
+    assert.equal(result.status, 1, `--next-review ${value} が通った: ${result.stdout}${result.stderr}`);
+    assert.match(result.stderr, /--next-review .* は YYYY-MM-DD の日付ではない/);
+    assert.equal(state.read("portfolio.json"), before, `--next-review ${value} で portfolio.json が書き換わった`);
+  }
+  const ok = set("--lifecycle", "improve", "--next-review", "2026-12-01");
   assert.equal(ok.status, 0, ok.stderr);
-  assert.equal(JSON.parse(state.read("portfolio.json")).surveys[0].lifecycleStatus, "improve", "語彙にある値は書く");
+  const written = JSON.parse(state.read("portfolio.json")).surveys[0];
+  assert.equal(written.lifecycleStatus, "improve", "語彙にある値は書く");
+  assert.equal(written.nextReviewAt, "2026-12-01", "暦にある日付は書く");
 });
 
 test("evaluate-survey-experiments.mjs の --verdict は、Schema の verdict の語彙 (pending を除く) だけを受け付ける", (t) => {

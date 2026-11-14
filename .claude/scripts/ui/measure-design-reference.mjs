@@ -1,8 +1,8 @@
-// 使い方: node scripts/ui-theme/measure-design-reference.mjs <outDir> [--links|--measure] [baseUrl] [pages.json]
+// 使い方: node .claude/scripts/ui/measure-design-reference.mjs <outDir> [--links|--measure] [baseUrl] [pages.json]
 // 見本の画面一覧は assets/design-reference/shadcndashboard/<日付>/pages.json、stats47 は assets/design-reference/stats47-baseline/<日付>/pages.json
 // 見本サイト (demos.shadcndashboard.dev) の各画面を開き、shadcn 部品 (data-slot) ごとの計算後スタイルを集計し、全体スクショを撮る。
 // --links はサイドバーのリンク一覧だけを出す
-import { chromium } from "../../node_modules/playwright/index.mjs";
+import { chromium } from "../../../node_modules/playwright/index.mjs";
 import fs from "node:fs";
 import path from "node:path";
 

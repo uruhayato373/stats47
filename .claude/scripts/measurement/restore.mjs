@@ -10,7 +10,7 @@ import { validateNoteInventory } from './note-inventory.mjs';
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const source = process.argv[2];
-const config = sourceFor(source);
+sourceFor(source); // 知らない取得元は unknown_source で止める
 if (process.argv.includes('--if-activated')) {
   const path = `${datasetDir("revenue.authenticated")}/latest.json`;
   const activated = existsSync(path) && JSON.parse(readFileSync(path, 'utf8')).sources?.some(s => s.source === source && s.activated === true);
@@ -64,8 +64,7 @@ try {
   if (restored === 0) throw new Error('consumer_evidence_missing');
   console.log(JSON.stringify({ source, status: 'restored', files: restored, observedAt: evidence.observedAt }));
 } catch {
-  console.error(JSON.stringify({ source, status: 'unavailable', instruction: config.transport === 'api'
-    ? `Check authenticated-measurement summary; verify ${config.apiSecret} if api_auth_required.`
-    : 'Check authenticated-measurement summary; refresh the named session if auth_required.' }));
+  console.error(JSON.stringify({ source, status: 'unavailable',
+    instruction: 'Check authenticated-measurement summary; refresh the named session if auth_required.' }));
   process.exitCode = 1;
 }

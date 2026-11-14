@@ -1,5 +1,0 @@
-{
-  "apply": true,
-  "requestedAt": "2026-11-03T13:40:00+09:00",
-  "note": "交通網の変遷 3 網と高速道路の接合部を R2 へ反映する依頼 (INFRA-HISTORY-R2-PUBLISH-01)。2026-11-03 の dry-run (run 41576647868、172 件すべて新規) をオーナーが承認して apply=true。.github/workflows/infra-history-publish.yml が読む"
-}

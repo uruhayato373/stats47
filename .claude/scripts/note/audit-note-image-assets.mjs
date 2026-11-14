@@ -16,7 +16,7 @@ import { DOCS31, auditBackgroundPresence, auditImageAssets, auditR2BodyPresence,
 import { readArticleLedger } from "./lib/article-ledger.mjs";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
-const ROOT = process.env.CLAUDE_PROJECT_DIR || resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
+const ROOT = process.env.STATS47_SCAN_ROOT || resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const args = new Set(process.argv.slice(2));
 
 const tracked = execFileSync("git", ["-c", "core.quotepath=off", "ls-files", "--", DOCS31], { cwd: ROOT, encoding: "utf8" })

@@ -9,6 +9,7 @@
  * 出力: data/{gsc,ga4,adsense}/history.csv
  *       data/{gsc,ga4}/history-finalized7d.csv （確定7日 KPI・非重複系列）
  *       data/{gsc,ga4,adsense}/LATEST.md
+ *       data/gsc/{demand-history.csv,demand-weekly.csv,DEMAND-LATEST.md} (カテゴリ別・長期の需要。lib/gsc-demand.mjs)
  *
  * 期間契約 (.claude/skills/analytics/search-growth/reference/weekly-cycle-contract.md):
  * - KPI/WoW は summary.json (finalized7d + 直前の重複しない previous7d) だけを使う。
@@ -58,6 +59,7 @@ import {
   markdownPageTypeSection,
 } from "./lib/adsense-page-types.mjs";
 import { loadCodeAdSlots } from "./lib/code-ad-slots.mjs";
+import { DEMAND_LATEST_FILE, readWeekSnapshot, snapshotDetailCoverage, writeGscDemand } from "./lib/gsc-demand.mjs";
 import { pathToFileURL } from "node:url";
 import { datasetDir } from "../../../config/datasets.mjs";
 
@@ -231,9 +233,23 @@ function updateGsc(week) {
     );
   }
 
-  // 3. LATEST.md (確定7日 KPI + ローリング28日を分離表示)
-  writeFileSync(join(stateDir, "LATEST.md"), renderGscLatest({ summary, rollingRows, week }), "utf-8");
+  // 3. LATEST.md (確定7日 KPI + ローリング28日を分離表示 + 明細の期間と捕捉率)
+  const detailCoverage = snapshotDetailCoverage(readWeekSnapshot(snapDir, week));
+  writeFileSync(join(stateDir, "LATEST.md"), renderGscLatest({ summary, rollingRows, week, detailCoverage }), "utf-8");
   console.log(`[gsc] updated history.csv (${rollingRows.length} weeks) / history-finalized7d.csv (${finRow ? "+1" : "±0"}) / LATEST.md`);
+
+  // 4. カテゴリ別・長期の需要 (demand-history.csv / demand-weekly.csv / DEMAND-LATEST.md)。
+  // 失敗しても GA4・AdSense の digest は止めない (警告として CI に出す)
+  try {
+    const demand = writeGscDemand({ root: PROJECT_ROOT, week });
+    console.log(
+      demand
+        ? `[gsc] updated ${DEMAND_LATEST_FILE} (長期の窓 ${demand.windows.length} 個・確定 7 日の明細 ${demand.weeklyWeeks.length} 週)`
+        : `[gsc] ${DEMAND_LATEST_FILE} は作らない (${week} の daily.csv / pages.csv が無い)`,
+    );
+  } catch (e) {
+    console.warn(`::warning title=GSC demand::${DEMAND_LATEST_FILE} を作れなかった: ${e instanceof Error ? e.message : e}`);
+  }
 }
 
 // ── GA4 ──

@@ -19,7 +19,7 @@ const config: Config = {
     "../../packages/components/src/**/*.{js,ts,jsx,tsx,mdx}",
     "../../packages/visualization/src/**/*.{js,ts,jsx,tsx,mdx}",
     // どこからも import されない atom は走査しない (index.ts の export * には残る。2026-10-28 配信サイズの点検)。
-    // 一覧は scripts/ui-theme/inline-lyra.mjs の UNUSED_ATOMS と同じ (テストが一致と importer 0 件を確かめる)。
+    // 一覧は .claude/scripts/ui/inline-lyra.mjs の UNUSED_ATOMS と同じ (テストが一致と importer 0 件を確かめる)。
     // base.css の `@source not` は Tailwind 4.3.3 でこの content を外せなかったので、除外はここに書く。
     "!../../packages/components/src/atoms/ui/accordion.tsx",
     "!../../packages/components/src/atoms/ui/alert.tsx",

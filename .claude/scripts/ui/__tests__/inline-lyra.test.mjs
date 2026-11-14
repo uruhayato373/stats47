@@ -15,7 +15,7 @@ import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import test from "node:test";
 
-import { cn } from "../../../packages/components/src/lib/cn.ts";
+import { cn } from "../../../../packages/components/src/lib/cn.ts";
 import {
   HSL_TOKENS_CSS,
   REFERENCE_CSS,

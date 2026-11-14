@@ -1,4 +1,4 @@
-// 使い方: node scripts/ui-theme/compare-design-slots.mjs <refDir> <siteDir> [width]
+// 使い方: node .claude/scripts/ui/compare-design-slots.mjs <refDir> <siteDir> [width]
 // 部品の種類 (data-slot) ごとに、見本と stats47 の最多の値 (上位 2 つ) を並べる
 import fs from "node:fs";
 import path from "node:path";
