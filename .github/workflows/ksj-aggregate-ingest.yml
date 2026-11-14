@@ -89,7 +89,8 @@ jobs:
       - name: 📤 Publish aggregate only (never raw GIS)
         if: inputs.dry_run != 'true'
         run: |
-          npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts \
+          # app/stats は観測値の唯一の正本。KSJ から集計し直した 47 県の値で更新するのが目的なので上書きを許す
+          npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --allow-authoritative-overwrite \
             --prefix "app/stats/${{ inputs.metric }}"
 
       - name: 📝 Summary

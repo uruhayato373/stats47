@@ -3,7 +3,7 @@ name: 🗂️ Sync Snapshots → R2
 # git TS (data/page-components, affiliate-ads 等) / article.md / R2 観測値を入力に
 # 配信 snapshot を再生成し R2 (app/) に push する手動 workflow。完全DBレス (doc12)。
 #
-# R2 書き込みはこの CI / クラウド専用 (ローカルからの push は _assert-ci-write ガードで停止)。
+# R2 書き込みはこの CI 専用 (_assert-ci-write は GITHUB_ACTIONS=true で通し、ローカルからの push は止める)。
 # ローカルは公開 URL 経由の読み取り専用。
 #
 # 使い方: Actions タブ → この workflow → Run workflow。
@@ -140,7 +140,7 @@ jobs:
           done
           echo "staged $count specialty webp → .local/r2/app/areas/**/specialty/"
 
-      # snapshot 再生成 → R2 push。CI では CI=true が立つため run.sh の push が実行される。
+      # snapshot 再生成 → R2 push。Actions では GITHUB_ACTIONS=true が立つため run.sh の push と diff-push-r2 の書き込みガードが通る。
       #
       # ★NODE_ENV=production 必須 (2026-07-27 障害の再発防止・data-refresh.yml と同じ理由):
       #   run.sh の TSX ラッパ (packages/ranking/src/scripts/setup-cli.js) は NODE_ENV 未設定なら

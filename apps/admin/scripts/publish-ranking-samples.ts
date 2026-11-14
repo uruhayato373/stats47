@@ -4,6 +4,7 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import sharp from 'sharp';
 import { assertR2WriteAllowed } from '../../../packages/r2-storage/src/scripts/_assert-ci-write';
+import { R2_PRIVATE_BUCKET } from '../../../packages/r2-storage/src/scripts/r2-key-classes';
 import {
   RANKING_SAMPLE_SOURCE,
   rankingInputFromStats,
@@ -110,7 +111,10 @@ async function main() {
     console.log(JSON.stringify({ kind, bytes: png.length, sha256: sha(png), apply }));
   }
   if (!apply) return;
-  assertR2WriteAllowed({ op: `${collection} samples: PNGs, SVGs and provenance (immutable exact keys)` });
+  assertR2WriteAllowed({
+    op: `${collection} samples: PNGs, SVGs and provenance (immutable exact keys)`,
+    targets: [{ bucket: R2_PRIVATE_BUCKET, key: 'media-workspace/' }],
+  });
   const store = mediaStore();
   // Also retain a private copy of the exact input so later public snapshot refreshes cannot lose it.
   const savedInputs = [];
