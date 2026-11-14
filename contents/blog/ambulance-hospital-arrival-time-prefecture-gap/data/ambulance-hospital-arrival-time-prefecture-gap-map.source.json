@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "ambulance-hospital-arrival-time",
+  "year": "2024",
+  "unit": "分",
+  "label": "救急搬送 病院収容所要時間",
+  "readerLabel": "救急搬送病院収容所要時間",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/ambulance-hospital-arrival-time/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug ambulance-hospital-arrival-time-prefecture-gap --keys ambulance-hospital-arrival-time --with-map",
+  "fetchedAt": "2026-11-13T23:34:57.626Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

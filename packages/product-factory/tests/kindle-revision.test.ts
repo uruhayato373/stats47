@@ -13,6 +13,7 @@ vi.mock("../src/channels/kindle/ranking-databook", () => ({
 vi.mock("../src/channels/kindle/fetch-content", () => ({
   fetchBlogArticle: mocked.blog,
   fetchPublishedSlugSet: async () => new Set<string>(),
+  fetchBlogSourcesBySlug: async () => new Map(),
 }));
 import { buildBook, assertBookVersion } from "../src/channels/kindle/build-book";
 

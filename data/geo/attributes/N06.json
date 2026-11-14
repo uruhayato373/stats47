@@ -1,0 +1,46 @@
+{
+  "dataId": "N06",
+  "reference": {
+    "pageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N06-2024.html",
+    "specification": "KS-PS-N06-v2_1.pdf",
+    "dataVersion": "24",
+    "checkedAt": "2026-11-14",
+    "checkedScope": "データ詳細ページの属性情報の表と照合した。製品仕様書 PDF の本文とは照合していない"
+  },
+  "featureTypes": [
+    {
+      "key": "HighwaySection",
+      "label": "路線",
+      "attributes": [
+        { "name": "N06_001", "label": "供用開始年", "role": "other", "valueType": "year", "meaning": "路線区間・接合部 (IC・JCT) ごとの供用開始年" },
+        { "name": "N06_002", "label": "設置期間（開始年）", "role": "startYear", "valueType": "year", "meaning": "地物が設置 (開業) された年" },
+        { "name": "N06_003", "label": "設置期間（終了年）", "role": "endYear", "valueType": "year", "meaning": "地物が変更・廃止された年の 1 年前の年" },
+        { "name": "N06_004", "label": "関係ID", "role": "relation", "relationKind": "main", "valueType": "string", "meaning": "区間・接合部の属性が変わったとき、同じ地物の時系列の記録であることを表すグループ ID" },
+        { "name": "N06_005", "label": "変遷ID", "role": "other", "valueType": "code", "codeList": "変遷IDコード", "meaning": "同じ年に属性が複数回変わったときの属性項目を表す識別子" },
+        { "name": "N06_006", "label": "変遷備考", "role": "other", "valueType": "string", "meaning": "変遷 ID で示した属性の内容" },
+        { "name": "N06_007", "label": "路線名", "role": "name", "valueType": "string", "meaning": "高速道路の路線名" },
+        { "name": "N06_008", "label": "路線種別", "role": "category", "valueType": "code", "codeList": "路線種別コード", "codeTable": "expressway-road", "meaning": "高速道路の種別" },
+        { "name": "N06_009", "label": "供用状況", "role": "other", "valueType": "code", "codeList": "供用状況コード", "meaning": "その路線が供用されている状況の区分" },
+        { "name": "N06_010", "label": "車線数", "role": "measure", "valueType": "integer", "meaning": "その路線区間の車線数 (上下線の合計)" },
+        { "name": "N06_011", "label": "関係備考", "role": "relation", "relationKind": "additional", "valueType": "string", "meaning": "同じ地物の時系列の変化でグループが変わったときの、主たる関係 ID 以外の関係 ID" }
+      ]
+    },
+    {
+      "key": "Joint",
+      "label": "接合部",
+      "attributes": [
+        { "name": "N06_012", "label": "供用開始年", "role": "other", "valueType": "year", "meaning": "路線区間・接合部 (IC・JCT) ごとの供用開始年" },
+        { "name": "N06_013", "label": "設置期間（開始年）", "role": "startYear", "valueType": "year", "meaning": "地物が設置 (開業) された年" },
+        { "name": "N06_014", "label": "設置期間（終了年）", "role": "endYear", "valueType": "year", "meaning": "地物が変更・廃止された年の 1 年前の年" },
+        { "name": "N06_015", "label": "関係ID", "role": "relation", "relationKind": "main", "valueType": "string", "meaning": "区間・接合部の属性が変わったとき、同じ地物の時系列の記録であることを表すグループ ID" },
+        { "name": "N06_016", "label": "変遷ID", "role": "other", "valueType": "code", "codeList": "変遷IDコード", "meaning": "同じ年に属性が複数回変わったときの属性項目を表す識別子" },
+        { "name": "N06_017", "label": "変遷備考", "role": "other", "valueType": "string", "meaning": "変遷 ID で示した属性の内容" },
+        { "name": "N06_018", "label": "地点名", "role": "name", "valueType": "string", "meaning": "接合部の名称" },
+        { "name": "N06_019", "label": "接合部種別", "role": "category", "valueType": "code", "codeList": "接合部種別コード", "meaning": "接合部の種別" }
+      ]
+    }
+  ],
+  "notes": [
+    "地物の種類の key はデータ詳細ページに書かれたシェープファイル名 (HighwaySection.shp・Joint.shp) の語幹。交通網の変遷は ZIP 内の UTF-8/N06-24_HighwaySection.geojson を読む。"
+  ]
+}

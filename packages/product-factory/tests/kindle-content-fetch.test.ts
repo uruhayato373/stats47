@@ -10,7 +10,11 @@ describe("Kindle source completeness", () => {
     const corrections = KINDLE_EDITORIAL_CORRECTIONS[slug];
     const correction = corrections[0];
     // 校訂は slug 単位で全件が exact-once を要求するので、mock 本文にも全件の before を 1 回ずつ置く。
-    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(new Response(`本文\n${corrections.map((c) => c.before).join("\n")}`)));
+    // 本文が旧「データ出典」節を持つ形にして、書籍版の出典節 (sourceSections) が足されないようにする。
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue(new Response(`本文\n${corrections.map((c) => c.before).join("\n")}\n\n## データ出典\n`)),
+    );
     const article = await fetchBlogArticle(slug);
     expect(article.body).toContain(correction.after);
     expect(article.body).not.toContain(correction.before);

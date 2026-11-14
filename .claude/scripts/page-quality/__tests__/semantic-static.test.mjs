@@ -37,6 +37,17 @@ test("body の中へ流し込まれた <title> (画面に出ない題) は単位
   assert.equal(analyzeHtml(visible, BASE).unit_symbol_mixing, 1);
 });
 
+// CONTENT-FOLLOWUP-01: 本番は検査の UA に <title> を body の途中へ流すので、head > title だけを読むと page_title が null になり
+// title_changed が比べられなかった。SVG の中の <title> (図の説明) はページの題ではない
+test("page_title は head に無ければ body の途中へ流された <title> から取り、SVG の <title> は取らない", () => {
+  const head = `<html><head><title>東京都 | 統計で見る都道府県</title></head><body><p>本文</p></body></html>`;
+  const streamed = `<html><head></head><body><svg><title>人口の図</title></svg><div hidden></div><title>東京都 | 統計で見る都道府県</title><p>本文</p></body></html>`;
+  const svgOnly = `<html><head></head><body><svg><title>人口の図</title></svg></body></html>`;
+  assert.equal(analyzeHtml(head, BASE).page_title, "東京都 | 統計で見る都道府県");
+  assert.equal(analyzeHtml(streamed, BASE).page_title, "東京都 | 統計で見る都道府県");
+  assert.equal(analyzeHtml(svgOnly, BASE).page_title, null);
+});
+
 test("値の描画失敗 (NaN / undefined / [object Object]) を数え、英単語の一部は数えない", () => {
   const html = `<html><body><p>人口 NaN 人</p><p>undefined位</p><p>[object Object]</p><p>Nanaimo undefinedness</p><p>記事のコード例 <code>return NaN</code></p><pre>let d = Infinity;</pre></body></html>`;
   assert.equal(analyzeHtml(html, BASE).abnormal_value_strings, 3);

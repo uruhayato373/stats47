@@ -94,6 +94,9 @@ export interface RankingChart {
   baseAreaCode?: string;
 }
 
+/** Values of the prefectural capitals (家計調査): the condition line says so, and every ranking type then names cities, not prefectures. */
+export const isCapitalCityChart = (chart: Pick<RankingChart, 'note'>) => /県庁所在市/.test(chart.note ?? '');
+
 /** Rows that are not a full ranking: a partial set of prefectures, items, income classes. Order is the author's. */
 export interface ItemBarChart extends Omit<RankingChart, 'rows' | 'baseAreaCode'> {
   rows: { name: string; value: number }[];

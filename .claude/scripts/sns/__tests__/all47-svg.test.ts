@@ -40,7 +40,8 @@ test('欠測・重複・非有限値は描画を止める', () => {
 
 test('県庁所在市の値を県全体と誤認させず都市名で表示する', () => {
   const svg = renderAll47TileSvg(rows, { ...opts, capitalCities: true });
-  for (const city of ['札幌市', 'さいたま市', '東京区部', '横浜市', '那覇市']) assert.ok(svg.includes(city));
+  // 5 文字の「さいたま市」はタイルの幅に収まらないので「市」を省く (見出しと凡例が「市」と書く。CONTENT-FOLLOWUP-01)
+  for (const city of ['札幌市', '>さいたま<', '東京区部', '横浜市', '那覇市']) assert.ok(svg.includes(city), city);
   assert.ok(svg.includes('県庁所在市'));
 });
 test('発行元・宣伝文・読み方の注記を画像に入れない (chart-image-copy.md)', async () => {

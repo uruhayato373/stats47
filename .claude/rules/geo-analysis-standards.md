@@ -156,7 +156,7 @@ Pythonが書くJSONはJSの`JSON.stringify`とバイトが一致する正準形�
 ### 交通網の変遷（高速道路・鉄道・空港の時系列）
 
 `/geo/history/<expressway|railway|airport>[/<regionCode|NN>]` は国土数値情報 N06・N05・N08 の時系列を年スライダーで描く。
-台帳は `geo.infra-history-networks`（原典URL・版・ZIP SHA・公開状態・属性名・線か点か・現況の dataId。読み込み口 `packages/gis/src/infra-history/networks.ts` が種別を区分の台帳から結ぶ）。
+台帳は `geo.infra-history-networks`（原典URL・版・ZIP SHA・公開状態・線か点か・現況の dataId。読み込み口 `packages/gis/src/infra-history/networks.ts` が種別を区分の台帳から、属性名を属性の台帳 `geo.ksj-attributes` の役割から結ぶ）。
 利用条件は網ごとに複製せず台帳 `geo.ksj-datasets` の `usageTerms`（時系列）から引く。N06「時系列データとして使用する場合：非商用」、N05「商用利用はできません」、N08「商用可」（2026-10-29 公式ページで確認）。
 広告の有無は台帳から導く（`apps/web/src/lib/google-adsense/ad-free-paths.ts`）。時系列が非商用の網と、出典表示だけで商用利用できない単体 GIS ページ（`/geo/datasets/<id>`）は AdSense の script を読まない。URL を手で列挙しない。
 非商用の網の公開（R2 反映・検索掲載）は、事務局の了承を `publication.permissionEvidence`（方法 official-terms / written / phone・日付・相手・了承の範囲・要旨・記録者）に記録し `public-approved` にしてから行う。電話も認める（2026-10-29 オーナー決定）。公開には範囲に `ad-free-page` と `processed-data-delivery` の両方が要り、判定は `isInfraNetworkPublishable` に集約する（ページの noindex と `ksj-publication-guard.ts` が同じ関数を使う）。

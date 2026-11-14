@@ -57,3 +57,65 @@ describe("appendDataSourceSection", () => {
     expect(appendDataSourceSection(md)).toBe(md);
   });
 });
+
+import { extractLegacySourceSection, restoreBookSourceSection } from "../fetch-content";
+
+describe("book-owned データ出典 section (KINDLE-DATA-SOURCE-01)", () => {
+  // 公開ブログの一括移行 (migrate-data-source-sections.ts) と同じ 2 つの形: 節ごと削除 / 見出しを「データについて」へ改名
+  const prose = "本文の段落。\n\n![要約](data/summary.svg)";
+  const removedTail = "\n\n---\n\n## データ出典\n\n- 総務省「家計調査」（2024年）\n";
+  const original = `${prose}\n${removedTail}`;
+  const migratedRemoved = `${prose}\n`;
+  const renamedOriginal = `${prose}\n\n### データ出典\n\n世帯数で割って算出した。\n`;
+  const migratedRenamed = `${prose}\n\n### データについて\n\n世帯数で割って算出した。\n`;
+
+  it("extracts the trailing legacy section together with the blank lines and rule before it", () => {
+    expect(extractLegacySourceSection(original)).toBe(removedTail);
+    expect(`${prose}\n${extractLegacySourceSection(original)}`).toBe(original);
+    expect(extractLegacySourceSection(prose)).toBeUndefined();
+  });
+
+  it("restores the reviewed section byte-for-byte after the blog body drops it", () => {
+    const section = extractLegacySourceSection(original);
+    expect(restoreBookSourceSection(migratedRemoved, section)).toBe(original);
+    expect(restoreBookSourceSection(`${prose}\n\n\n`, section)).toBe(original);
+  });
+
+  it("restores the reviewed heading after the blog body renames the section to データについて", () => {
+    const section = extractLegacySourceSection(renamedOriginal);
+    expect(restoreBookSourceSection(migratedRenamed, section)).toBe(renamedOriginal);
+  });
+
+  it("leaves a body that still carries its own section, and chapters without a book-owned section, untouched", () => {
+    const section = extractLegacySourceSection(original);
+    expect(restoreBookSourceSection(original, section)).toBe(original);
+    expect(restoreBookSourceSection(migratedRemoved, undefined)).toBe(migratedRemoved);
+  });
+});
+
+describe("appendDataSourceSection — snapshot sources", () => {
+  const sources = [
+    { label: "家計調査", organization: "総務省統計局", surveyId: "kakei-chousa", tables: [] },
+    { label: "社会・人口統計体系", organization: "総務省統計局", tables: [{ label: "x", url: "https://x" }] },
+    { label: "家計調査", organization: "総務省統計局", surveyId: "kakei-chousa", tables: [] },
+    { label: "国土数値情報 行政区域", note: "地図データ", tables: [] },
+  ];
+
+  it("builds the chapter-end データ出典 from all.json sources when the body has neither a section nor source cards", () => {
+    expect(appendDataSourceSection("本文\n", sources)).toBe(
+      "本文\n\n## データ出典\n\n- 総務省統計局 家計調査\n- 総務省統計局 社会・人口統計体系\n- 地図データ: 国土数値情報 行政区域\n",
+    );
+  });
+
+  it("keeps the reviewed source cards and an existing section ahead of the snapshot sources", () => {
+    const withCard = '本文\n\n<data-source label="総務省 家計調査" year="2024年"></data-source>\n';
+    expect(appendDataSourceSection(withCard, sources)).toBe(`${withCard.replace(/\s+$/, "")}\n\n## データ出典\n\n- 総務省 家計調査（2024年）\n`);
+    const withSection = "本文\n\n## データ出典\n\n- 手書き\n";
+    expect(appendDataSourceSection(withSection, sources)).toBe(withSection);
+  });
+
+  it("adds nothing when there is no source at all", () => {
+    expect(appendDataSourceSection("本文\n", [])).toBe("本文\n");
+    expect(appendDataSourceSection("本文\n")).toBe("本文\n");
+  });
+});

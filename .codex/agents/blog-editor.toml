@@ -96,14 +96,16 @@ R2 の書込資格は CI にしか無いので、既存記事の書き戻しは 
 gh workflow run blog-data-source-migration.yml --ref main -f mode=backfill-display-sources -f dry_run=false
 # 2. all.json に sources を焼く (sync-snapshots は main のコードで動く)
 gh workflow run sync-snapshots.yml -f only=blog
-# 3. 本文の手書き節を移行する (引用だけ → 削除 / 計算方法・定義を含む → 「データについて」へ改名。Kindle 書籍の章は据え置き)
+# 3. 本文の手書き節を移行する (引用だけ → 削除 / 計算方法・定義を含む → 「データについて」へ改名。Kindle 書籍の章は書籍版の出典節を写した記事だけ移す)
 gh workflow run blog-data-source-migration.yml --ref main -f mode=migrate-bodies -f dry_run=false
 ```
 
 ローカルで試すときは `backfill-display-sources.ts` / `migrate-data-source-sections.ts` を dry-run で実行する。
 `contents/blog` の原稿は `migrate-data-source-sections.ts --outbox --apply` で変換する (push すると公開が走るので、その原稿を公開する作業の一部として行う)。
 
-Kindle 書籍の章に使う記事は本文を変えない (書籍の校正指示が本文の文字列に固定されているため)。
+Kindle 書籍の章に使う記事は、先に `migrate-data-source-sections.ts --kindle-freeze --apply` で旧節を書籍版の台帳
+(`products.kindle-editorial-corrections` の sourceSections) へ写す。書籍の校正指示は節を含む本文の文字列に当たるので、
+書籍は生成時にその節を本文へ戻す。移行は、移行後の本文から元の本文へ逐語で戻せる記事だけを対象にする。
 Web の表示は描画時の同じ変換でそろう。正典: `docs/01_技術設計/04_デザインシステム.md`「データ出典」。
 
 ## OGP・画像生成の役割分担

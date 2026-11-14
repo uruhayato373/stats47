@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "surveyId": "kakei-chousa",
+      "lagYears": 1,
+      "month": 2,
+      "release": "家計収支編の年平均 (品目別の県庁所在市の値を含む)",
+      "evidence": {
+        "releasedOn": "2026-02-06",
+        "title": "家計調査 家計収支編(2025年10～12月期,2025年12月分,2025年平均)",
+        "url": "https://www.e-stat.go.jp/release-calendar?page_month=202602",
+        "observedAt": "2026-11-14"
+      }
+    },
+    {
+      "surveyId": "household-survey",
+      "lagYears": 1,
+      "month": 2,
+      "release": "家計収支編の年平均 (社会・人口統計体系経由の家計の指標も同じ公表から来る)",
+      "evidence": {
+        "releasedOn": "2026-02-06",
+        "title": "家計調査 家計収支編(2025年10～12月期,2025年12月分,2025年平均)",
+        "url": "https://www.e-stat.go.jp/release-calendar?page_month=202602",
+        "observedAt": "2026-11-14"
+      }
+    },
+    {
+      "surveyId": "cpi-annual",
+      "lagYears": 1,
+      "month": 1,
+      "release": "全国の 12 月分と同時に出る年平均",
+      "evidence": {
+        "releasedOn": "2026-01-23",
+        "title": "消費者物価指数 全国(2025年12月分,2025年平均)",
+        "url": "https://www.e-stat.go.jp/release-calendar?page_month=202601",
+        "observedAt": "2026-11-14"
+      }
+    },
+    {
+      "surveyId": "population-estimates",
+      "lagYears": 1,
+      "month": 4,
+      "skipEveryYears": 5,
+      "skipAnchorYear": 2020,
+      "release": "各年 10 月 1 日現在の都道府県別人口。国勢調査の年は推計を出さず国勢調査の値になる",
+      "evidence": {
+        "releasedOn": "2025-04-14",
+        "title": "人口推計（2024年（令和6年）10月1日現在）",
+        "url": "https://www.stat.go.jp/data/jinsui/2024np/index.html",
+        "observedAt": "2026-11-14"
+      }
+    },
+    {
+      "surveyId": "census",
+      "lagYears": 2,
+      "month": 7,
+      "everyYears": 5,
+      "anchorYear": 2020,
+      "release": "基本集計の最後の従業地・通学地集計。通勤・就業・共働きの指標はここまで出ないので、人口等基本集計 (令和7年は 2026-09-29) ではなく最後の集計で数える。人口と世帯だけの指標はこれより早く出るが、この暦では検出が遅れる",
+      "evidence": {
+        "releasedOn": "2022-07-22",
+        "title": "令和2年国勢調査 従業地・通学地による人口・就業状態等集計",
+        "url": "https://www.stat.go.jp/data/kokusei/2020/kekka.html",
+        "observedAt": "2026-11-14"
+      }
+    },
+    {
+      "surveyId": "vital-statistics",
+      "lagYears": 1,
+      "month": 9,
+      "release": "確定数の実数 (諸率は 11 月)",
+      "evidence": {
+        "releasedOn": "2026-09-30",
+        "title": "人口動態調査 令和７年(確定数（実数）)",
+        "url": "https://www.e-stat.go.jp/release-calendar?page_month=202609",
+        "observedAt": "2026-11-14"
+      }
+    },
+    {
+      "surveyId": "school-health-survey",
+      "lagYears": 1,
+      "month": 2,
+      "release": "年度の確定値",
+      "evidence": {
+        "releasedOn": "2026-02-13",
+        "title": "学校保健統計調査 令和7年度(確定値)",
+        "url": "https://www.e-stat.go.jp/release-calendar?page_month=202602",
+        "observedAt": "2026-11-14"
+      }
+    },
+    {
+      "surveyId": "school-basic-survey",
+      "lagYears": 0,
+      "month": 12,
+      "release": "年度の確定値 (速報は 8 月)",
+      "evidence": {
+        "releasedOn": "2025-12-26",
+        "title": "学校基本調査 令和7年度 確定値(高等教育機関,初等中等教育機関、専修学校・各種学校)",
+        "url": "https://www.e-stat.go.jp/release-calendar?page_month=202512",
+        "observedAt": "2026-11-14"
+      }
+    },
+    {
+      "surveyId": "wage-structure-survey",
+      "lagYears": 1,
+      "month": 3,
+      "release": "調査の概況 (都道府県別を含む。1 月の速報は全国のみ)",
+      "evidence": {
+        "releasedOn": "2026-03-24",
+        "title": "賃金構造基本統計調査 令和７年調査(ホームページ掲載,賃金構造基本統計調査の概況)",
+        "url": "https://www.e-stat.go.jp/release-calendar?page_month=202603",
+        "observedAt": "2026-11-14"
+      }
+    },
+    {
+      "surveyId": "medical-facility-survey",
+      "lagYears": 1,
+      "month": 9,
+      "release": "医療施設動態調査の年報 (各年 10 月 1 日現在)",
+      "evidence": {
+        "releasedOn": "2026-09-29",
+        "title": "医療施設調査 医療施設動態調査(令和７年 年報)",
+        "url": "https://www.e-stat.go.jp/release-calendar?page_month=202609",
+        "observedAt": "2026-11-14"
+      }
+    },
+    {
+      "surveyId": "prefectural-accounts",
+      "lagYears": 3,
+      "month": 11,
+      "release": "内閣府が 47 都道府県分をそろえて掲載する年度値",
+      "evidence": {
+        "releasedOn": "2026-11-05",
+        "title": "2023年度（令和５年度）値統計表を掲載しました。",
+        "url": "https://www.esri.cao.go.jp/jp/sna/sonota/kenmin/kenmin_top.html",
+        "observedAt": "2026-11-14"
+      }
+    }
+  ]
+}

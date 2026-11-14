@@ -197,7 +197,9 @@ source.json に表示用の出典を明示する:
   (指標の抽出は `extractBlogChartSourceReferences`、年は `year`) と本文の `/ranking/` リンクから
   `rankingRefs: [{ rankingKey, year? }]` を作り、`app/blog/all.json` に逆引き `rankingArticleIndex`
   (rankingKey → slug) を焼く (`article-ranking-refs.ts`)。用途は 2 つ: 指標 → 記事の回遊と、図の年が指標の最新年より
-  古い記事の検出 (`build-stale-data-years.mjs`、週次レビューの `npm run weekly:audits` の blog-remediation)。同じ指標を複数の年で描いた記事は
+  古い記事の検出 (`build-stale-data-years.mjs`、週次レビューの `npm run weekly:audits` の blog-remediation)。同じスクリプトが
+  統計の公表暦 (カタログの `surveys.release-calendar`、判定は `lib/release-calendar.mjs`) とも突き合わせ、公表済みの年より古い年のままの
+  記事を `stale-data-years.{json,md}` の `releaseDue` に出す (指標の取り込みが先なら `ingest-metric`、記事の更新だけなら `refresh-article`)。同じ指標を複数の年で描いた記事は
   最も古い年を残す。古い記事は是正キューの `data-refresh` レーンに入り、`refresh-article-data-years.mjs` が
   `kind: "ranking"` の図 (data JSON が fetch-ranking-data-r2.mjs の形のもの) を最新年で作り直す
   (source.json に `refreshedFromYear` を残す。判定は `lib/refresh-chart-year.mjs`)。2 指標の散布図

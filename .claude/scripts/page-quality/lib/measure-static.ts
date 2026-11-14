@@ -72,6 +72,17 @@ function visibleText($: cheerio.CheerioAPI): string {
 }
 
 /**
+ * ページの題。本番は検査の UA (検索エンジン以外) に <title> を body の途中へ流すので、head に無ければ body の <title> を読む。
+ * SVG の中の <title> は図の説明でページの題ではないので取らない (CONTENT-FOLLOWUP-01)。
+ */
+function pageTitle($: cheerio.CheerioAPI): string | null {
+  const headTitle = $("head > title").first().text().trim();
+  if (headTitle) return headTitle;
+  const streamed = $("title").filter((_, el) => $(el).closest("svg").length === 0).first().text().trim();
+  return streamed || null;
+}
+
+/**
  * 広告リンクの「店」(ASP の案件)。同じ店の広告が別のクリエイティブ (バナーとテキスト) で並ぶのを数える。
  * 案件 ID の取り出し方は `.claude/scripts/ads/lib/affiliate-offer-core.mjs` の programRef と同じ
  * (A8 = a8mat の 2 番目の token / もしも = p_id / afb = a / バリューコマース = pid)。楽天は遷移先の店。
@@ -147,7 +158,7 @@ export function analyzeSemantics($: cheerio.CheerioAPI, sponsoredHrefs: string[]
     unit_symbol_mixing: mixing,
     abnormal_value_strings: abnormal.length,
     same_shop_ad_duplicates: sameShop,
-    page_title: $("head > title").first().text().trim() || null,
+    page_title: pageTitle($),
     semantic_findings: findings,
   };
 }
