@@ -13,6 +13,12 @@
       "to": "alcohol-prefecture-map"
     },
     {
+      "from": "beef-consumption-prefecture-gap",
+      "to": "beef-consumption-quantity",
+      "since": "2026-11-14",
+      "reason": "重複記事をまとめた (BLOG-DUPLICATE-AUDIT-01)"
+    },
+    {
       "from": "birth-rate-fertility-ranking",
       "to": "fertility-rate-prefecture-gap"
     },
@@ -40,6 +46,12 @@
       "from": "fresh-udon-soba-consumption-quantity",
       "to": "fresh-udon-soba-consumption-prefecture-gap",
       "since": "2026-10-08",
+      "reason": "重複記事をまとめた (BLOG-DUPLICATE-AUDIT-01)"
+    },
+    {
+      "from": "general-hospital-bed-occupancy-rate",
+      "to": "hospital-bed-utilization-map",
+      "since": "2026-11-14",
       "reason": "重複記事をまとめた (BLOG-DUPLICATE-AUDIT-01)"
     },
     {
@@ -71,6 +83,12 @@
       "to": "inflation-rate-prefecture-gap"
     },
     {
+      "from": "inpatient-rate-aging-burden",
+      "to": "inpatient-rate-prefecture-gap",
+      "since": "2026-11-14",
+      "reason": "重複記事をまとめた (BLOG-DUPLICATE-AUDIT-01)"
+    },
+    {
       "from": "local-debt-ranking",
       "to": "local-government-debt-burden"
     },
@@ -85,6 +103,12 @@
     {
       "from": "marriage-divorce-ranking",
       "to": "marriage-divorce-okinawa"
+    },
+    {
+      "from": "natto-consumption-expenditure",
+      "to": "natto-consumption-east-west-divide",
+      "since": "2026-11-14",
+      "reason": "重複記事をまとめた (BLOG-DUPLICATE-AUDIT-01)"
     },
     {
       "from": "nursing-care-infrastructure-ranking",
@@ -143,12 +167,30 @@
       "reason": "重複記事をまとめた (BLOG-DUPLICATE-AUDIT-01)"
     },
     {
+      "from": "software-engineer-income-gap",
+      "to": "software-engineer-salary-prefecture-gap",
+      "since": "2026-11-14",
+      "reason": "重複記事をまとめた (BLOG-DUPLICATE-AUDIT-01)"
+    },
+    {
       "from": "sports-participation-ranking",
       "to": "sports-urban-paradox"
     },
     {
       "from": "sunshine-duration-ranking",
       "to": "sunshine-pacific-vs-nihonkai"
+    },
+    {
+      "from": "telework-gap-tokyo-6x",
+      "to": "telework-rate-tokyo-gap",
+      "since": "2026-11-14",
+      "reason": "重複記事をまとめた (BLOG-DUPLICATE-AUDIT-01)"
+    },
+    {
+      "from": "total-fertility-rate",
+      "to": "fertility-rate-prefecture-gap",
+      "since": "2026-11-14",
+      "reason": "重複記事をまとめた (BLOG-DUPLICATE-AUDIT-01)"
     },
     {
       "from": "traffic-accident-deaths-ranking",
@@ -167,12 +209,24 @@
       "to": "vacant-house-crisis"
     },
     {
+      "from": "vacant-housing-rate-vs-standard-price-change-rate-commercial",
+      "to": "vacant-housing-vs-land-price",
+      "since": "2026-11-14",
+      "reason": "重複記事をまとめた (BLOG-DUPLICATE-AUDIT-01)"
+    },
+    {
       "from": "waiting-children-ranking",
       "to": "waiting-children-progress"
     },
     {
       "from": "waste-recycling-rate-ranking",
       "to": "recycling-rate-gap"
+    },
+    {
+      "from": "wheat-flour-consumption-food-culture-gap",
+      "to": "wheat-flour-consumption-prefecture",
+      "since": "2026-11-14",
+      "reason": "重複記事をまとめた (BLOG-DUPLICATE-AUDIT-01)"
     }
   ]
 }
