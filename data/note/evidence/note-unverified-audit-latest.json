@@ -1,23 +1,10 @@
 {
-  "checkedAt": "2026-11-08T00:02:48.722Z",
+  "checkedAt": "2026-11-14T04:29:57.945Z",
   "summary": {
     "total": 439,
     "affected": 0,
-    "fetchFailed": 12
+    "fetchFailed": 0
   },
-  "fetchFailed": [
-    "d-geo-region-code-checklist",
-    "d-geo-ipss-prefecture-map",
-    "d-geo-ksj-qgis-guide",
-    "d-geo-flood-population-mesh",
-    "d-geo-land-price-future-population",
-    "d-geo-x-ogp-map-automation",
-    "d-geo-data-quality-management",
-    "d-geo-station-access-analysis",
-    "d-geo-natural-language-region-filter",
-    "d-geo-poi-license-practice",
-    "a-agricultural-employment-population",
-    "a-agricultural-output"
-  ],
+  "fetchFailed": [],
   "findings": []
 }

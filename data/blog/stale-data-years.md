@@ -1,6 +1,6 @@
 # 図の年が古い公開記事 (stale-data-years)
 
-- 生成: 2026-11-13T23:59:39.195Z
+- 生成: 2026-11-14T04:33:19.112Z
 - 公開記事 861 件のうち、使う指標を snapshot から読めた記事 816 件を判定
 - 図の年が指標の最新年より古い記事: **158 件**。遅れの大きい順
 - 直し方: `node .claude/scripts/blog/refresh-article-data-years.mjs --slug <slug> --pull --apply` で図を最新年で作り直す → 本文の年と数値を書き直して critic を通す (`/brushup-blog` の focus `最新データ更新`)。本文がその年そのものを主題にした図だけ、取り直さず source.json に `yearPinnedReason` を書く (本文が図の年を語っていない図は図だけの食い違いなので取り直す)
@@ -62,7 +62,7 @@
 
 ## 公表済みなのに古い年のままの記事 (公表暦)
 
-- 基準日 2026-11-13。公表暦 (`data/surveys/release-calendar/release-calendar.json`) の 11 調査について、公表月の翌月 1 日から公表済みとみなす。指標の調査が 1 つでも公表暦に無い図は判定しない
+- 基準日 2026-11-14。公表暦 (`data/surveys/release-calendar/release-calendar.json`) の 11 調査について、公表月の翌月 1 日から公表済みとみなす。指標の調査が 1 つでも公表暦に無い図は判定しない
 - 該当する記事: **236 件**。うち指標の年次更新が先 (`ingest-metric`) の指標 94 件、記事の更新だけで済む行 (`refresh-article`) 195 件
 - 順番: 先に `ingest-metric` の指標を公表済みの年まで取り込み、次に記事の数値と図を最新年にする (上の直し方)。検索実績のある既存 URL を新規記事より先にする
 

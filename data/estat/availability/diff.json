@@ -1,30 +1,23 @@
 {
-  "generatedAt": "2026-11-07T23:55:55.322Z",
+  "generatedAt": "2026-11-14T04:19:32.942Z",
   "summary": {
     "metrics": 2373,
-    "queries": 2371,
+    "queries": 2370,
     "tables": 148,
     "missingInside": 0,
     "newer": 0,
     "notInEstat": 13,
     "older": 0,
-    "clean": 2306,
+    "clean": 2307,
     "yearsAll": 53,
     "noLedger": 0,
     "fetchError": 0,
     "truncated": 0,
-    "duplicateRows": 1,
+    "duplicateRows": 0,
     "inheritedExclusions": 0,
     "judgedExclusions": 2
   },
   "metrics": {
-    "convenience-store-sales": {
-      "statsDataId": "0004032502",
-      "themes": [],
-      "status": "duplicate-rows",
-      "configYears": "2025",
-      "ledgerYears": "2021–2025"
-    },
     "fishery-species-catch-bonito": {
       "statsDataId": "0003238633",
       "themes": [

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T23:59:39.195Z",
+  "generatedAt": "2026-11-14T04:33:19.112Z",
   "published": 861,
   "withRankingRefs": 816,
   "stale": [
@@ -2143,7 +2143,7 @@
     }
   ],
   "releaseDue": {
-    "asOf": "2026-11-13",
+    "asOf": "2026-11-14",
     "calendarSurveys": [
       "kakei-chousa",
       "household-survey",

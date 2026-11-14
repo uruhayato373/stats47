@@ -5,7 +5,7 @@
     "ranking": 850,
     "theme": 850,
     "area": 233,
-    "blog": 389,
+    "blog": 393,
     "unreached": 0,
     "undecidedItems": 0,
     "plannedTables": 0
@@ -171,7 +171,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": true
+      "blog": false
     },
     {
       "key": "banana-consumption-expenditure",
@@ -332,7 +332,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "black-tea-consumption-expenditure",
@@ -843,7 +843,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": true
+      "blog": false
     },
     {
       "key": "city-gas-consumption-expenditure",
@@ -1326,7 +1326,7 @@
       "ranking": true,
       "theme": true,
       "area": true,
-      "blog": true
+      "blog": false
     },
     {
       "key": "dried-soup-consumption-expenditure",
@@ -1389,7 +1389,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "eggs-group-consumption-expenditure",
@@ -1627,7 +1627,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "fresh-fruits-group-consumption-quantity",
@@ -2117,7 +2117,7 @@
       "ranking": true,
       "theme": true,
       "area": true,
-      "blog": false
+      "blog": true
     },
     {
       "key": "hat-consumption-expenditure",
@@ -2544,7 +2544,7 @@
       "ranking": true,
       "theme": true,
       "area": true,
-      "blog": true
+      "blog": false
     },
     {
       "key": "konnyaku-consumption-expenditure",
@@ -2754,7 +2754,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "meal-charges-group-consumption-expenditure",
@@ -3027,7 +3027,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "mobile-phone-consumption-expenditure",
@@ -3223,7 +3223,7 @@
       "ranking": true,
       "theme": true,
       "area": true,
-      "blog": false
+      "blog": true
     },
     {
       "key": "orange-consumption-quantity",
@@ -3349,7 +3349,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": true
+      "blog": false
     },
     {
       "key": "other-clothing-group-consumption-expenditure",
@@ -3489,7 +3489,7 @@
       "ranking": true,
       "theme": true,
       "area": true,
-      "blog": true
+      "blog": false
     },
     {
       "key": "other-fresh-fish-consumption-quantity",
@@ -3657,7 +3657,7 @@
       "ranking": true,
       "theme": true,
       "area": true,
-      "blog": false
+      "blog": true
     },
     {
       "key": "other-meat-consumption-quantity",
@@ -4721,14 +4721,14 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "sashimi-platter-consumption-expenditure",
       "ranking": true,
       "theme": true,
       "area": true,
-      "blog": true
+      "blog": false
     },
     {
       "key": "sashimi-platter-consumption-quantity",
@@ -4798,7 +4798,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "scarf-consumption-expenditure",
@@ -4847,7 +4847,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "seasonings-group-consumption-expenditure",
@@ -5218,7 +5218,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "table-salt-consumption-expenditure",
@@ -5603,7 +5603,7 @@
       "ranking": true,
       "theme": true,
       "area": true,
-      "blog": true
+      "blog": false
     },
     {
       "key": "vinegar-consumption-quantity",
@@ -5631,7 +5631,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "washing-machine-consumption-expenditure",
@@ -5736,7 +5736,7 @@
       "ranking": true,
       "theme": true,
       "area": true,
-      "blog": false
+      "blog": true
     },
     {
       "key": "whitebait-consumption-quantity",
@@ -5757,7 +5757,7 @@
       "ranking": true,
       "theme": true,
       "area": true,
-      "blog": true
+      "blog": false
     },
     {
       "key": "womens-clothing-consumption-expenditure",
@@ -5890,7 +5890,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": true
+      "blog": false
     },
     {
       "key": "womens-sweater-consumption-quantity",
