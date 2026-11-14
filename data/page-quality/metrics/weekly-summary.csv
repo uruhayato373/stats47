@@ -81,3 +81,15 @@ date,template,urls,errors,warnings
 2026-10-30,category,17,1,30
 2026-10-30,survey,150,301,92
 2026-10-30,municipality,1741,208,2415
+2026-11-13,home,1,0,4
+2026-11-13,ranking,2597,0,359
+2026-11-13,prefecture-list,1,0,2
+2026-11-13,theme,57,2,102
+2026-11-13,geo-analysis,238,53,15
+2026-11-13,other,1334,690,117
+2026-11-13,prefecture-detail,2538,58,703
+2026-11-13,blog,1,0,3
+2026-11-13,blog-article,861,95,1275
+2026-11-13,category,17,9,24
+2026-11-13,survey,149,3,93
+2026-11-13,municipality,1741,0,1713

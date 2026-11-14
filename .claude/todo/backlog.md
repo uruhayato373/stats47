@@ -118,11 +118,84 @@ updated: 2026-11-01
 - **検索の実測 (2026-11-06・ブラウザ・電子書籍カテゴリ・1 回の観測)**: 30 語の 1 ページ目に出たのは 5 語 (家計調査 K-S1-02 8 位、都道府県 年収 K-S1-01 9 位、教育費 K-S1-05 9 位、地方財政と自治体 財政 K-S1-06 14 位)。「都道府県 統計」「47都道府県」「人口減少」「健康寿命」「インバウンド」「移住」には出ない。
 - **[仮説] 紹介文とキーワードを直すと検索の露出と購入が増える**: 検証は上の 30 語の再測定と販売台帳の 4 週の注文。KDP の検索が何を見るかの公式の仕様は未確認。
 - **済み (2026-11-06)**: 原稿の正本 `data/products/kdp-listing-copy.json`・監査 `npm run kdp:listing-copy -- check` (13 冊合格)・入稿前の検査 (`kdp-preflight`)・検索順位の週次記録 (基準 `data/products/kdp-search-ranks/2026-11-06.json`) を作った。原稿は別エージェントが EPUB と 2 回照合し、1 回目 26 件・2 回目 2 件の指摘を直した。
-- **やること**: ① (済み 2026-11-06: オーナー承認、13 冊を台帳へ写し `kdp-update-listing-copy.mjs` で KDP へ提出) ② レビュー後に `node .claude/scripts/kdp/kdp-update-listing-copy.mjs --verify` で読み直して `reflected` にする (2026-11-09 に実行) ③ 4 週後に検索 39 語の順位と注文を基準と比べる ④ K-S1-13 の表紙の縮小時の視認性と、K-S1-01 の表紙「6つ」と本文の章数を確かめる ⑤ 紹介文の悩みの文に本文で扱わない語が無いかを機械で見つける検査を足す (「移住」「電気代」など、本文に 0 件か否定の文脈だけの語が 1 回目の指摘の多くを占めた)。
+- **現在の状態 (2026-11-14)**: 販売中 13 冊と K-S1-14 の原稿は提出済み (`submitted`)。2026-11-13 に【データの範囲】【全県の値を表で収録している指標】を足した版を提出したので、効果の測定の基準日は 2026-11-13 (検索 39 語の順位 `data/products/kdp-search-ranks/` と注文)。2026-11-06 の変更だけの効果は判定できない。K-S1-13 の表紙の縮小確認は `KDP-COVER-47PREF-DECISION-01` へ渡した。
+- **次**: ① KDP のレビュー後に `node .claude/scripts/kdp/kdp-update-listing-copy.mjs --verify` で読み直して `reflected` にする ② 2026-12-11 以降に検索順位と注文を 2026-11-13 の基準と比べる ③ K-S1-01 の表紙の「6つ」と本文の章数が合うかを確かめる ④ 紹介文の悩みの文に、本文で扱わない語 (本文に 0 件か否定の文脈だけの語) が無いかを機械で見つける検査を足す。
 - **停止条件**: KDP への反映はオーナー承認の後。題名は公開後に変えられない (KDP ヘルプ)。
-- **完了条件**: 12 冊の紹介文とキーワードが KDP に反映され、30 語の再測定と 4 週の注文が記録された。
+- **完了条件**: 14 冊の紹介文とキーワードが KDP に反映され (`reflected`)、2026-11-13 を基準にした検索順位と 4 週の注文が記録された。
 
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [UI-FIX-PREFECTURE-DETAIL-HOKKAIDO-20261114] UI 是正: prefecture-detail--hokkaido の週次 UI 検査の指摘 1 件を直す
+
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-HOKKAIDO-20261114.txt] [起票:2026-11-14] [領域:サイト]
+
+- **自動起票**: 週次のページ品質監査 (`quality-suite-weekly.yml の page-quality job`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-HOKKAIDO-20261114.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail--hokkaido-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail--hokkaido-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
+- **対象**:
+  - `agent|prefecture-detail--hokkaido` (Claude の確認)
+    - [mobile-390/high] スマホ1枚目の下部、「北海道が全国上位」の表の右端(「全国順位」列): 表が画面幅からはみ出し、右端の「全国順位」列が見出しも順位の数字も「1…」「3…」のように途中で切れている。順位は北海道の特徴を示す中心情報なのに読み取れない。 → スマホでは指標・値・順位を縦積みのカード表示にするか、列を詰めて順位列を画面内に収める。
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@data/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-HOKKAIDO-20261114.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
+- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+
+### [UI-FIX-GEO-ANALYSIS-LAYER-20261114] UI 是正: geo-analysis--layer の週次 UI 検査の指摘 1 件を直す
+
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-LAYER-20261114.txt] [起票:2026-11-14] [領域:サイト]
+
+- **自動起票**: 週次のページ品質監査 (`quality-suite-weekly.yml の page-quality job`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-LAYER-20261114.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis--layer-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis--layer-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
+- **対象**:
+  - `agent|geo-analysis--layer` (Claude の確認)
+    - [tablet-768/high] タブレット1枚目の最上部、ページ上端を全幅で覆う広告バナー(トルコ語「STM Savunma Teknolojileri / Bilgi Edinin」): 外国語の大型広告が最初の画面の上部を覆っている。ページの見出しやパンくずが見えず、何のページか分からない。直下の「人口メッシュ」ヘッダーも広告に重なって途切れている。 → 広告枠の高さと位置を固定し、見出しに重ならないようにする。ページ上端への全幅オーバーレイ表示は避ける。
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-LAYER-20261114.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
+- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+
+### [UI-FIX-GEO-ANALYSIS-ANALYSIS-20261114] UI 是正: geo-analysis--analysis の週次 UI 検査の指摘 1 件を直す
+
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-ANALYSIS-20261114.txt] [起票:2026-11-14] [領域:サイト]
+
+- **自動起票**: 週次のページ品質監査 (`quality-suite-weekly.yml の page-quality job`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-ANALYSIS-20261114.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis--analysis-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis--analysis-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
+- **対象**:
+  - `agent|geo-analysis--analysis` (Claude の確認)
+    - [mobile-390/low] スマホ1枚目、見出し下のメタ情報行(「データ生成 2026/09/05・coverage 47/47」「47都道府県・2020-2050・%」): 「coverage 47/47」のような運用用語が読者向けの画面に出ている。「・%」だけの単位表記も何の値か分からない。 → 「47都道府県すべてを収録」のような平易な表現に置き換え、単位は指標名と併記する。
+    - 経緯: 修正の本番反映後も 2026-11-14 の週次で再検出 (前回: GeoSpatialEvidenceExplorer で地図をタブの直下に置き、凡例の説明・距離帯の凡例を地図の後ろへ移した。本番の 375x812 で同じ並べ替えを当てると地図の上端が 765px→640px (最初の画面に地図が 172px 入る)。未デプロイ)
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-ANALYSIS-20261114.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
+- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+
+### [UI-FIX-CATEGORY-20261114] UI 是正: category の週次 UI 検査の指摘 2 件を直す
+
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-CATEGORY-20261114.txt] [起票:2026-11-14] [領域:サイト]
+
+- **自動起票**: 週次のページ品質監査 (`quality-suite-weekly.yml の page-quality job`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-CATEGORY-20261114.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/category-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/category-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
+- **対象**:
+  - `machine|https://stats47.jp/category/landweather|clipped_text` — clipped_text = 1 (閾値 <= 0)
+    - 経緯: 修正の本番反映後も 2026-11-14 の週次で再検出 (前回: タイル地図の 3 文字名と文字の大きさ、記事の図の負の余白、タブ列の高さ (h-auto が lyra に負けていた) を修正。手元の 7 ページ・2 幅で切れ・重なり 0)
+  - `machine|https://stats47.jp/category/landweather|small_text_count` — small_text_count = 49 (閾値 <= 18)
+- **表示の意味 (定義単位で直す)**: 語・文字列・店名などの具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings` にある。全URLの検査はページの種類ごとに 1 件へまとめてあり、該当 URL の全件は週次 `latest.json` (`npm run state:pull -- page-quality` で `data/page-quality/live/` に取得) の `violations` にある。同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。文字の小ささ・ページ高さはテンプレート別の予算 (`page-quality-budgets.json`) との差で、予算を上げて閉じない。
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@data/page-quality/backlog-batches/UI-FIX-CATEGORY-20261114.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
+- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+
+### [UI-FIX-BLOG-20261114] UI 是正: blog の週次 UI 検査の指摘 1 件を直す
+
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-BLOG-20261114.txt] [起票:2026-11-14] [領域:サイト]
+
+- **自動起票**: 週次のページ品質監査 (`quality-suite-weekly.yml の page-quality job`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-BLOG-20261114.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/blog-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/blog-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
+- **対象**:
+  - `machine|https://stats47.jp/blog|clipped_text` — clipped_text = 1 (閾値 <= 0)
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@data/page-quality/backlog-batches/UI-FIX-BLOG-20261114.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
+- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
 
 ### [BLOG-ISR-STALE-ON-REVISE-01] 改稿版を公開しても、公開前に開かれたページは旧版のまま残る
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:サイト]
@@ -613,8 +686,8 @@ updated: 2026-11-01
 
 - **起点**: 問いの台帳に `products` を足し、M01 から製造品出荷額の商品を直接指した (`/content/questions` の「企画した商品」)。実在は `check-datasets` が見る。Kindle は外部台帳の ID が無いので対象外のまま。
 - **境界**: 指すのは社会の問いだけで、事業イシューマップと混ぜない。同じ指標を使うだけの商品は書かない。
-- **やること**: 新しい商品は企画の時点で書く。既存の商品は根拠があるものだけ足す。Kindle を指す必要が出たら外部台帳に ID を足す。
-- **完了条件**: 問いから企画した商品がすべて `products` で辿れる。
+- **やること**: 新しい商品は企画の時点で書く (note の商品は `products`、Kindle の本は `books`。`books` はカタログの本の ID を外部キーで指す。2026-11-14 に足した)。既存の note の商品は根拠があるものだけ足す。
+- **完了条件**: 問いから企画した商品がすべて `products` (note) か `books` (Kindle) で辿れる。
 
 ### [ANALYSIS-CYCLE-01] 問いの分析・図・記事・審査・公開後の評価を、視点の層で自動に回す
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run issues:check] [起票:2026-11-06] [領域:サイト]
@@ -1701,12 +1774,20 @@ updated: 2026-11-01
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-10-17] [領域:商品]
 
 - **決定 (2026-10-26 オーナー)**: やる。設定を変えるかは結果を見て 1 冊ずつ決める。
-- **原因 (2026-10-28 確認)**: KDP ヘルプ (https://kdp.amazon.com/ja_JP/help/topic/G200634500) では、Amazon.co.jp での販売で70%になるのは KDP セレクト登録の本だけ (70%の価格帯の条件もある)。`data/products/kdp/listings.json` は全冊 `royaltyPlan:70`・`kuEnrolled:false` なので、日本の販売はすべて35%になる (実売 ¥800→¥254・¥500→¥159)。セレクトに登録すると Kindle 版は90日単位で Amazon 以外に出せなくなる。打ち手の台帳は `data/business/experiments.json` の EXP-011。
-- **既刊は登録しない (2026-11-04 オーナー決定)**: 販売中の S1 12 冊は stats47.jp の無料記事と一字一句同じ文が 9.5〜33.3% あり (言い換えを含めるとさらに多い)、KDP Select の案内 (https://kdp.amazon.com/en_US/select) は期間中のウェブサイトやブログでの電子配布を認めない。さらに書き下ろし原稿 `packages/product-factory/src/channels/kindle/manuscripts/` の 178 ファイル (1.5 MB) が公開リポジトリと git の履歴に残っていて、書き直しても本文が別の場所で読めるので、書き直しにも着手していない。代わりにセレクト専用の新作 1 冊 K-S1-13 (原稿は `.local/kindle-private/K-S1-13/` で repo に入れない) で70%の効果を確かめる。本の組み立ては `freshFile` に repo の外の相対パスを渡せば読める。
-- **未確認**: 抜粋の許容の割合・違反時の扱い・自動更新の既定・改訂審査中の登録は、公開の案内ページに書かれていない (規約本文は 3 つの URL が 404 で取得できなかった)。解除は開始から 3 日以内ならできる。
-- **済み**: K-S1-13『住む県の選び方 — 統計で比べる5つの条件』を ¥500・70%・KDP セレクト登録ありで提出し、2026-11-06 に販売中になった (ASIN B0HQBGV4RD)。原稿は `packages/product-factory/.local/kindle-private/K-S1-13/`、R2 に暗号化保全 (revision d60ed0e8069a929a)、控えは Drive の `stats47/Kindle原稿/K-S1-13/`。
-- **次**: ① 審査へ出した紹介文に「国・自治体や e-Stat の公認・推奨を示すものではありません」が無い (data-provenance-standards の要求)。台帳とカタログは直し済みなので KDP の紹介文を更新する。カタログの変更で authoredSha が r8 と変わるので、組み立て直し (受領証・保全も) が要る。② 売上と KENP を土曜の記録で読み、35% の既刊と比べる。90 日の自動更新の既定は未確認なので、期限前に KDP の本棚で確かめる。③ KDP の管理画面の規約を確かめる。`kdp-form.mjs` の登録は「人手確認推奨」のままで、自動の登録は実装を確かめていない。
+- **完了の証拠 (2026-11-14)**: 35% の原因はセレクト未登録 (KDP ヘルプ G200634500、2026-10-28 確認)。既刊は登録せず、書き下ろしの K-S1-13・K-S1-14 と K-S1-05 は登録 (オーナー決定)。台帳の `kuEnrolled` と価格画面は販売中 13 冊で一致 (2026-11-13)、`verifyDraft` が食い違いを止める。効果は EXP-011 へ移した。週次レビューで消してよい。
 - **完了条件**: 35% の原因が公式の条件と台帳の設定で説明され、変えるかどうかをオーナーが決めた。
+
+### [KDP-COVER-47PREF-DECISION-01] Kindle の表紙で「47都道府県」を読める大きさに上げ、2 冊で試してから全冊へ広げるか決める
+タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-11-09] [領域:商品]
+
+- **経緯**: `KDP-LISTING-WIRING-01` の ④ を分けた (①〜③ の CI・公開の検査と表紙の縮小確認は 2026-11-09 に実装済み)。表紙の検査は寸法と文字の照合と、縮小しても題名が読めるかの目視記録 (`kdp-cover-thumbnail.mjs`) まで。
+- **観測 (2026-11-13、Kindle ストアの検索結果)**: 自社 S1 12 冊は最大の文字が「地図」で、「47都道府県」は最も小さい帯。検索「都道府県 ランキング 統計」の上位 14 冊はすべて「都道府県」が最大の文字。K-S1-13 は題名が小さく最も目立たない。
+- **決定 (2026-11-13 オーナー承認)**: 「47都道府県」を最大にはしない (12 冊の区別がつかなくなるため)。主題の語を最大にし、上部の共通の帯「47都道府県のデータで比べる」を 2 番目に上げる。見本はセレクト登録の K-S1-05 と K-S1-13。
+- **次**: ① `cover-design.ts` の 2 冊に新しい序列の文字を定義する ② Codex で候補を作り Drive へ置き (`stash-cover-candidate.mts`)、文字を 1 字ずつ照合する ③ `kdp-cover-thumbnail.mjs render` で 120px / 220px に縮めて記録する ④ オーナー承認後に R2 へ反映し、新しい版を保全して `kdp-publish --update` ⑤ 4 週後に検索順位と既読ページで残り 11 冊へ広げるか決める。
+- **判定の限界**: KDP の販売は台帳に 2 冊だけで、販売数では表紙の効果を判定できない。K-S1-13 の表紙を変えると EXP-011 と変更が重なる。
+- **K-S1-13 の縮小確認 (2026-11-14)**: 120px で副題が読めず `unreadable` と記録 (`kdp-cover-thumbnail-checks.json`)。このままでは次の更新が `kdp-publish --commit` で止まるので、作り直しで取り直す。
+- **停止条件**: 表紙の差し替えは KDP への外部変更で、オーナー承認の後。差し替えたら縮小確認を取り直す。題名は公開後に変えられないので (`KDP-LISTING-COPY-01` の停止条件)、題名・副題に「47都道府県」を足す変更はしない。
+- **完了条件**: 見本 2 冊の縮小確認の記録があり、KDP へ反映するかをオーナーが決めた。反映した場合は 4 週後の検索順位と既読ページを記録し、残り 11 冊へ広げるかを決めた。
 
 ### [NOTE-INS-IMG-HEADING-PLACEMENT-01] ins_img が見出し直前の段落をアンカーにすると画像が見出し直後へずれる
 
@@ -4242,6 +4323,7 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **図の配線 (2026-11-03 確認)**: ブログ由来の章の図は本を作るたびに R2 の `app/blog/<slug>/data/<name>.svg` を読む (`fetch-content.ts`) ので、ブログの図を共通の型 (`apps/admin/lib/template-ranking-bars.ts`・`template-ranking-tile-map.ts`) で描き直せば次の作り直しで入る。書籍版の図の校訂 (`figure-corrections.ts`) は元の文字が変わると生成を止める (止まったらエントリを消すか直す)。ランキング章の図 (`ranking-databook.ts` が `generateBarChartSvg` を直接呼ぶ) は共通の型を通っていないが、販売中の S1 12 冊には無く、効くのは公開を止めている S2〜S4 だけ。共通の型を `packages/product-factory` から使うには共有の場所へ移すか相対 import するかを決める (図の共通化の作業の持ち主と相談)。
 - **仕組み (トークンを使う段ほど対象を絞る)**: ① 機械の検査 `npm run kindle:quality [-- --write]` (`quality-cli.ts`・集計は `epub-inspect.ts` を管理画面と共有・記録 `data/products/kindle-quality.json`・EPUB は Mac の `.local` のみで CI 不可) ② 図のスクショ評価 (`capture-figures.mjs` 600px → Haiku/Sonnet、PNG の sha256 で `data/products/kindle-figure-reviews.json` に記録。1 枚約 7 千トークンなので印の付いた図か図の型ごとに 1 枚に絞る) ③ NotebookLM の通読 (`notebooklm-review.ts`、1 冊 1 notebook・`clear` で会話を切る。答えは `.local/kindle-quality/<id>/notebooklm.md`) ④ 直す [オーナー承認]: `editorial-corrections.ts` → `build-book` → `verify-publishable` → Previewer → `kdp-publish --update` で 1 冊ずつ ⑤ 効果を見る: 改訂した冊としていない冊で販売台帳の月次と GA4 `product_click` (`PRODUCT-REFERRAL-MEASURE-01`) を並べる。規模的に統計判定はできず「判定不能」も結果として書く。
 - **済み (2026-11-03 まで)**: ①を実装して 12 冊を計測した (印: 図の無い長い章 37・全県表の無い図の章 63・説明の無い図のある章 15・サイトへのリンクなし 12 冊)。K-S1-02・07 で ②③ を試行し、両方で「全 47 都道府県の表」が 1 位の改訂案だった。章末の全県表 (`full-tables.ts`・catalog の `fullTables: true`) と図の題・年・単位の校訂 5 枚を入れ、S1 12 冊すべてに手元の版 `v5-20261103-tables` (未入稿) がそろった。**Kindle Previewer・実機での改ページは未確認**で、文字サイズを大きくした場合は保証できない。
+- **紹介文の照合で見つかった本文の表記の不具合 (2026-11-13、入稿版 EPUB と照合。次の版で直す)**: 見出しと本文の年度表記の違い (K-S1-11 行動者率 3 表・K-S1-09 工業地帯の図・K-S1-10 労災の図 5 点)。見出しの指標名が本文と違う (K-S1-12 放送メディア利用時間・K-S1-02 中華そば)。単位 (K-S1-08「Mwh」「KL」)。県名の省略 (K-S1-07 台湾人宿泊者・K-S1-04 化学工業 2 表)。家計調査の注記の欠け (K-S1-01 は灯油・紅茶の 3 表だけ)。代替テキストと本文の矛盾 (K-S1-11 博物館数の類似施設)。家計調査の対象の書き方が 2 通り (K-S1-05)。紹介文は見出しを写すので、見出しを直すまで紹介文にも出る。
 - **残り (オーナー)**: ① Kindle アプリの「ドキュメント」に届いている K-S1-02-v5-tables・K-S1-07-v5-tables を 1 回開く (任意) ② 承認済みのポップ表紙で正式の版を作り直す (`KDP-K-S1-08-REUPLOAD-01` と同じ便) ③ critic の差分レビュー・保全・`kdp-publish --update` の承認 ④ K-S1-07 の通読の指摘 (同じ注意書きの 6〜7 か所の繰り返し・第 5 章が 2001 年の海外旅行でテーマと年がずれる) は本文の編集判断が要るので未着手 ⑤ Haiku の「本文と図の食い違い」候補 5 件 (K-S1-07「濃く塗られた 6 県」「3 つの断層」、K-S1-02 ラーメンの「鏡のように逆転」・かにの県と市の基準・「鳥取・福井に続いて新潟」) は候補で未確認。直す前に人が図と本文で確かめる。
 - **次 (実行順)**: ① 週次レビューで `kindle:quality -- --write` を回すかを決める ② ランキング章の図を共通の型へ寄せる方法を、図の共通化の作業と決める ③ 2 冊の試行のトークンと指摘の質を踏まえ、残り 10 冊へ ②③ を広げるかを決める。
 - **停止条件・禁止**: 新しい本・シリーズを作らない。販売中の版の差し替えはオーナー承認と `KDP-K-S1-08-REUPLOAD-01` の手順を通す。評価済みの図・章をもう一度評価しない (sha256 で記録)。NotebookLM に入れるのは自分の本だけ (他人の本や参考文献の全文を入れない)。
@@ -4341,15 +4423,6 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **守ること**: 納めるのは参考資料 (値・出典・計算表) まで。計画書の文章は書かない。商品の説明に「申請書の作成は申請者本人か行政書士」と書く (改正行政書士法)。
 - **前提**: `KAKEI-MARKET-SIZE-PILOT-01` の判定の後。
 - **完了条件**: 受ける・受けないと、受ける場合の販売面・範囲・価格・工数の上限をオーナーが決めた。
-
-### [KDP-COVER-47PREF-DECISION-01] Kindle の表紙の「47都道府県」の扱いを決め、見本 1 冊 → 全冊の順で作り直すか決める
-タグ: [収益化] [種類:意思決定] [実行:ユーザー] [起票:2026-11-09] [領域:商品]
-
-- **経緯**: `KDP-LISTING-WIRING-01` の ④ を分けた (①〜③ の CI・公開の検査と表紙の縮小確認は 2026-11-09 に実装済み)。表紙の検査は寸法と文字の照合と、縮小しても題名が読めるかの目視記録 (`kdp-cover-thumbnail.mjs`) まで。「47都道府県」の文字を表紙でどう見せるかは決まっていない。
-- **決めること**: 「47都道府県」を表紙に残すか・どの大きさで置くか。作り直すなら Codex で見本 1 冊を作り、縮小確認を通してから全冊へ広げる。
-- **停止条件**: 表紙の差し替えは KDP への外部変更で、オーナー承認の後。差し替えたら縮小確認を取り直す。
-- **完了条件**: 扱いが決まり、作り直す場合は見本 1 冊の縮小確認の記録がある。作り直さない場合はこのカードを消す。
-
 
 ### [IMAGE-BOUNDARY-CONSOLIDATE-01] 画像まわりの依存の向きと重複を直す
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-11-06]
@@ -4536,8 +4609,10 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **順序**: ①S1 12冊の4週売上を台帳で確かめる。②S1 12冊を `PRODUCT-SALES-READINESS-01` の是正でv3化して差し替える。③S2/S3/S4 の未公開10冊は現行設計のまま出さない。S3は型②「1県1章」へ、S4は型③「意外な1位の県民性ストーリー」へ設計変更してから再生成。④新規パイロット3冊: (a) 47県庁所在市の食卓・家計ガイド (型②) (b) 意外な1位ストーリー集 (型③。S4を置換。自社既刊の4週の売上とKENPが取れてから着手) (c) 47都道府県 総合スコアブック (`prefecture-deviation/analyses.json` を型の参照に使い文言・構成は複製しない)。各冊は書き下ろし30%・critic PASS・Previewer確認後に公開し、4週実測で横展開を判断する。
 - **設計契約**: `KindleBook.design` が必須 (`generate` は design 無しを拒否)。S1-01 以外の 31 冊は本カードの順序で設計する (S1 → S3 型② → S4 型③ → 新規 3 冊)。正典: `coconala-product-standards.md` §8「編集設計」。
 - **2026-11-03 の状態とオーナー判断待ち (`PRODUCT-REFERRAL-MEASURE-01`)**: S1 12 冊の 4 週窓 (08-30〜09-26) は 8・9 月の月次レポートで計測済み。販売は K-S1-02 の 8 月の 1 冊だけで、窓の中か外か分からず、週次判定 (`data/products/kdp-weekly-publication.json`) は「判定不能」で止まる。**オーナー判断が要る**: この 1 冊を需要の証拠として扱うか (扱えば第 1 パイロットの準備へ進むが、収益化戦略 §3.6 の「新商品は作らない」とぶつかる)、扱わず S1 の見せ方・導線の改善 (EXP-013) を先に見るか。台帳への自動記録は `KDP-LEDGER-AUTO-01`。
+- **現在の状態 (2026-11-14)**: 出版候補の正本はカタログ `data/products/kindle/books.json` の `status` (候補の一覧をこのカードに書かない)。公開計画の `pilots` は本の ID を指し (K-S1-14・K-S4-02・K-S2-12)、`npm run kdp:weekly` は審査中の K-S1-14 で新規出版を止める。問いから企画した本は問いの台帳の `books` で辿る。K-S1-14 は 2026-11-14 にオーナー承認で公開申請 (セレクト・¥500)。原稿は `packages/product-factory/.local/kindle-private/K-S1-14/` と Drive。
+- **次**: ① K-S1-14 の審査後に本棚の「販売中」と ASIN を確かめる (`node .claude/scripts/kdp/kdp-batch.mjs --phase status`) ② セレクト登録の 3 冊 (K-S1-13・K-S1-05・K-S1-14) の既読ページと販売を 2026-12 の土曜の記録で読む (実験 EXP-011) ③ その結果で、第 2 パイロット K-S4-02 の設計に進むかをオーナーが決める。企画 (`idea`) の本は需要の証拠が出るまで設計に進めない。
 - **停止条件**: 売上未計測のまま10冊以上を同時公開しない。型④ (単一表の薄冊) は模倣しない (自社サイトの無料ページと同内容になる)。競合本の本文・図案・章立てを複製しない (論点と型のみ)。週次Mustの記事公開・SEOを圧迫する場合は本カードを後回しにする。
-- **完了条件**: 自社22冊の4週売上が台帳にあり、S1 12冊がv3で差し替え済み、パイロット3冊が公開され各冊の初回4週KENP/販売数が記録されている。未計測のものを「需要あり」と書かない。
+- **完了条件**: 販売中の S1 と 3 パイロット (公開計画の `pilots`: K-S1-14・K-S4-02・K-S2-12) の初回 4 週の既読ページと販売が台帳にあり、パイロットごとに続けるか止めるかをオーナーが決めた。未計測のものを「需要あり」と書かない。
 
 ### [ADMIN-STAT-PILOT-01] 行政資料1業務の統計整理商品を検証し、有料pilotの採否を決める
 

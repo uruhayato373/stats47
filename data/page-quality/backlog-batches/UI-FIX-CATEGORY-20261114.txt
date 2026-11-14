@@ -1,0 +1,2 @@
+machine|https://stats47.jp/category/landweather|clipped_text
+machine|https://stats47.jp/category/landweather|small_text_count

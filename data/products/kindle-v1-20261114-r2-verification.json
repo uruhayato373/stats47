@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-13T22:49:39.300Z",
+  "version": "v1-20261114-r2",
+  "epubcheckExecuted": true,
+  "books": 1,
+  "totalErrors": 0,
+  "crossBook": [],
+  "report": [
+    {
+      "id": "K-S1-14",
+      "version": "v1-20261114-r2",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-14/v1-20261114-r2/book.epub",
+      "epubSha256": "7b5adcb3e44e44e2386fafebc333026412852f6b9b70c49126c8001116cf7963",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "fa8623a428941ba0a9ad04a9ed0fc12d543a75ec3cfef775331458f6f8004993"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "f482f5e018a4fd6832c656a461b399583155d18cea7ceed34f2028e216dba421"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "7f69adce5aedcf9055b3014775612b3bc7549dd55d06e43124dffdef69ab5fd9"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "ec45b3689315e9c4634a4ff89df64fa52a111f53e9a815c0c326abe7c1b52b11"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "5a3d35551a1a24a9bb5839a955f67899665e8e7335b8598cfc220f8b950f570c"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "f4fe6b5a21b749bfb0619d68b6872e50f950b3198f68e67741008542fd946359"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "c537492cf5696f7ea013151f09eeb0704d0d90a97e1f05e4a7b4853f94d07226"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "0733c359eccc417d0424be38f4fe8474f1132d01b51a32d684a19161646ec88b"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "d5cc0d12370a1220d3e7c9dbab0b94f22d5ccad143744164155baefbd0e7264d"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "e07151d2414c7063adce90850336e4a2b7187d3fba2b84f1eadfac74f8c81031"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "abad5e3d102b6f4bf502b4a11c33348eb2909a3f9245d4b3e78749ba3f95f63d"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "3522a37c57df456670ea934765335403c0f25785ea169496d7230910dca828d3"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "aa5e68bd8b001ffc59b6d7dcee72b5db3ff891dd3ce0344e51625b1b0c8de3bc"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "bbd09048404e8c5b412037e4a2f56a1b15714b6ee8e75c6c08ddb4d7f7f368e9"
+        },
+        {
+          "fileName": "chap014.xhtml",
+          "sha256": "8c08991b40508e625c794e06c3a41c634ca74e206ec4a0abc4f131c7eb34c565"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "2f2a4c052f02c2264892c078330f3ac64e40f44eb725855cfe01ee1e8cdc10fc"
+        }
+      ],
+      "errors": 0,
+      "warns": 0,
+      "findings": []
+    }
+  ]
+}

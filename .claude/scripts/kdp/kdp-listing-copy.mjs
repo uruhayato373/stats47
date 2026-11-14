@@ -71,7 +71,8 @@ if (command === "apply") {
   const entry = bookEntry(targetId);
   if (entry.copy?.status !== "approved") throw new Error(`${targetId}: 承認済みの原稿だけを台帳へ写す`);
   if (!hasCurrentReview(entry.copy, entry.facts)) throw new Error(`${targetId}: 今の EPUB と照合した別エージェントのレビューが無い`);
-  const books = liveIds.map(bookEntry);
+  // 新刊 (まだ販売していない本) も写せるよう、写す本を冊間の重複の比較に含める
+  const books = [...new Set([...liveIds, targetId])].map(bookEntry);
   const { errors } = auditListingCopy(targetId, books, await epubText(entry.listing));
   if (errors.length) throw new Error(`${targetId}: 監査に通らない: ${errors.join(" / ")}`);
   entry.listing.description = entry.description;

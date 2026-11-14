@@ -341,6 +341,7 @@ export const DATASETS = [
     refs: [
       { field: "issues[].primaryTheme", to: "content.pages", key: "pages[].id" },
       { field: "issues[].products[]", to: "content.external", key: "pages[].id" },
+      { field: "issues[].books[]", to: "products.kindle-books", key: "books.$keys" },
       // 文章 (dataNote) から出した e-Stat の表 ID。表の台帳が git にあるのは家計調査だけなので、ほかの調査の表は止めずに一覧する
       {
         field: "issues[].estatTables[]", to: "estat.kakei-ledger", key: "tables[].statsDataId",
