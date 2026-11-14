@@ -171,6 +171,15 @@ updated: 2026-11-14
 - **やること**: (1) main に出た後の定期実行 (data-refresh・sync-snapshots・blog-auto-publish・quality-suite-weekly・affiliate-ga4-weekly ほか) を一巡ぶん見て、`R2 authoritative overwrite` と `R2 readback mismatch` の警告注釈が出ていないかを確かめる。出ていれば、その呼び出しにフラグを足すか区分表を直す (特に `.claude/skills/db/sync-snapshots/run.sh` の全体 push と `publish-blog.yml` の索引の push)。(2) 本物の R2 で、1 回の PutObject の ETag が MD5 になること、空の prefix の一覧がエラーにならないことを run のログで確かめる。(3) 警告が 0 になったら、R2 に書く workflow の env に `R2_AUTHORITATIVE_GUARD: enforce` を足す。(4) 定着したら `resolveAuthoritativeGuardMode` の CI の既定を enforce に変え、`r2-storage-design.md`「書き込みの承認」の段階導入の項を消す。
 - **完了条件**: CI の既定が enforce で、正本を上書きする workflow がすべてフラグを明示し、直近 1 週の定期実行に警告注釈も失敗も無い。
 
+### [BACKLOG-LOOP-WEEKLY-ENABLE-01] バックログ自動処理 (週 1 回) を GitHub 側で有効にする
+タグ: [エージェント・SSOT] [種類:改善] [実行:ユーザー] [起票:2026-11-14] [領域:管理] [待ち:時期] [期日:2026-11-28]
+
+- **済み (2026-11-14)**: 対象を「sweep・機械を宣言し、待ちの無いカード」に絞り、不具合 → 今月の重点領域 → tier → 起票日の順に並べるよう直した。schedule は日曜 01:30 JST の週 1 回にした。
+- **着手の契機**: この変更が main に出ること (定期実行は main の workflow 定義で動く)。期日は契機を確かめる日で、まだなら延ばす。
+- **やること (オーナー)**: `node .claude/scripts/backlog-loop/build-backlog-queue.mjs --dry-run --top 10` で先頭の並びを見てから、`gh workflow enable backlog-loop-daily.yml` を打つ。あわせて `backlog-routing-policy-weekly.yml` の定期実行を戻すかを決める (自動化インベントリに「自動処理を再開するときに戻す」とある)。
+- **確認**: 最初の run で、処理した 2 件が queue の先頭と一致し、ledger の evidence に選んだ理由が入っている。先頭に並ぶ 2026-10-11 起票の UI-FIX-* 9 枚が、その後の週次の監査で出し直されていない古い指摘なら、先に閉じる。
+- **完了条件**: 週次の run が 2 週続けて成功し、処理したカードが優先順位どおりである。
+
 ## 2026-12
 
 ### [DEPS-DEPENDABOT-GROUP-01] dependabot の next・sharp の更新を、ルートの overrides と同じ PR で上げる

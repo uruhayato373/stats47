@@ -235,7 +235,7 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -q -m "chore(backlog): daily backlog loop (対象 ${TARGET_COUNT} 件)"
+          git commit -q -m "chore(backlog): weekly backlog loop (対象 ${TARGET_COUNT} 件)"
           for i in 1 2 3; do
             if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
               echo "✅ pushed"
@@ -263,7 +263,7 @@ jobs:
           TITLE="🚨 Backlog loop failed"
           DIAG="(診断なし: Claude step まで到達していないか、execution log を読めなかった)"
           if [ -s .local/ci/claude-diagnosis.txt ]; then DIAG=$(cat .local/ci/claude-diagnosis.txt); fi
-          BODY="日次バックログ処理が失敗しました。verify (行削除の裏付け / 許可外パス)、
+          BODY="週次バックログ処理が失敗しました。verify (行削除の裏付け / 許可外パス)、
           リポジトリゲート、push のいずれかです。
 
           Run: ${RUN_URL}
