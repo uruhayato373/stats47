@@ -129,7 +129,8 @@ jobs:
             echo "本番: 記事ファイルを cloud へ push (app/blog/$SLUG)"
             # 上書きの前後で本文の版を private R2 に退避する (blog-auto-publish.yml と同じ)
             node .claude/scripts/blog/archive-blog-articles.mjs --slugs "$SLUG"
-            npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "app/blog/$SLUG"
+            # 公開済み記事の再公開は R2 が正本の本文を置き換える。直前の行で旧版を blog-archive に退避済みなので上書きを許す
+            npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --allow-authoritative-overwrite --prefix "app/blog/$SLUG"
             node .claude/scripts/blog/archive-blog-articles.mjs --file ".local/r2/app/blog/$SLUG/article.md" --slug "$SLUG"
           else
             echo "dry-run: 記事 push スキップ (差分のみ)"

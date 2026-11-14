@@ -132,7 +132,8 @@ jobs:
 
       - name: 📤 Push staged ai-content to R2
         if: ${{ env.PUBLISHED != '' }}
-        run: npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/ranking
+        # ai-content.json は R2 が正本。監査ゲートを通した作り直しの解説で置き換えるのが目的なので上書きを許す
+        run: npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --allow-authoritative-overwrite --prefix app/ranking
 
       - name: 🧹 Purge CDN (公開した ranking ページのみピンポイント)
         if: ${{ env.PUBLISHED != '' }}

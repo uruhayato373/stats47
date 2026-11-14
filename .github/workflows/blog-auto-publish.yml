@@ -188,7 +188,8 @@ jobs:
             # manifest の楽観ロックを自分自身で壊すため、画像セット確定後に同期する。
             # 上書きの前後で本文の版を private R2 (blog-archive/<slug>/<sha>.md) に退避する (読み戻して SHA を照合)
             node .claude/scripts/blog/archive-blog-articles.mjs --slugs "$SLUG"
-            npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "app/blog/$SLUG"
+            # 再公開は R2 が正本の本文 (article.md・data/*.json) を置き換える。直前の行で旧版を blog-archive に退避済みなので上書きを許す
+            npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --allow-authoritative-overwrite --prefix "app/blog/$SLUG"
             node .claude/scripts/blog/archive-blog-articles.mjs --file "$A" --slug "$SLUG"
             PUBLISHED="$PUBLISHED $SLUG"
             echo "✅ $SLUG published"

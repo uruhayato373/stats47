@@ -157,7 +157,7 @@ for task in "${TASKS[@]}"; do
   if [ "$label" = "calculated-stats" ] && [ "$DRY_RUN" = "0" ] && push_allowed; then
     echo "── calculated-stats の出力を先に push (後続 ranking-values が remote から読むため) ──"
     # app/stats は R2 が唯一の正本 (authoritative)。計算指標の値を更新する意図の push なので上書きを明示で許す。
-    if ! npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/stats --allow-authoritative-overwrite; then
+    if ! npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --allow-authoritative-overwrite --prefix app/stats; then
       echo "❌ calculated-stats の中間 push に失敗"
       FAILED+=("calculated-stats-push")
     fi
