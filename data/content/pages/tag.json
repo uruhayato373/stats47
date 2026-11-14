@@ -3127,7 +3127,7 @@
       "key": "CloudflarePages",
       "title": "CloudflarePages",
       "href": "/tag/CloudflarePages",
-      "published": true
+      "published": false
     },
     {
       "id": "tag:t-3050c10e6d16",
@@ -5951,7 +5951,7 @@
       "key": "CloudflareWorkers",
       "title": "CloudflareWorkers",
       "href": "/tag/CloudflareWorkers",
-      "published": false
+      "published": true
     },
     {
       "id": "tag:t-c1f21f14d967",
