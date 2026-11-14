@@ -127,7 +127,7 @@
           2022,
           2023
         ],
-        "retrievedAt": "2026-11-13T01:25:29.462Z",
+        "retrievedAt": "2026-11-14T10:05:43.371Z",
         "tableTitle": "Ｃ　経済基盤",
         "rows": 3482,
         "areas": 1741,
@@ -156,7 +156,7 @@
             "status": "ok"
           }
         ],
-        "inputSha256": "3bce9b1dbfa6050ef6a95947651f61b32668eb8c4702ede4f5e23ecb8416451b"
+        "inputSha256": "8118a99d741bfab4b5fc6399dcfe456bfb6894f12df2da0cb2f166b645a0f37f"
       }
     ],
     "results": 1745,
@@ -173,12 +173,12 @@
       },
       {
         "file": "analysis.xlsx",
-        "sha256": "c45335fb6c359ddb87a0e19f22b778ef4af83200b8712589a41093e2bff42e0b",
+        "sha256": "236bfd879a95849b50cb02d26f48274e7e9d2a6cce6d06dad251b3d9163a77f0",
         "bytes": 199811
       },
       {
         "file": "SOURCES.csv",
-        "sha256": "e14da10a1944ab8c7bd34451659f93b2d8beb7d4598611c92b815cd9ddfa1f0d",
+        "sha256": "224e9ba5de685618c2ab40140706ec3780289f6dadaad088bd89db7fba2ae6c7",
         "bytes": 895
       },
       {
@@ -208,23 +208,23 @@
       },
       {
         "file": "images/national-municipal-manufacturing-scale.png",
-        "sha256": "098dff017255d7c5b1a241766df96e75835da4dc6c66f8d7e9f6c0b978dbf504",
-        "bytes": 167297
+        "sha256": "11fc6658c1b41d3d1d62b06cc4a7d93005fec33a78f6ba420569b940e6b4b0ee",
+        "bytes": 170415
       },
       {
         "file": "images/municipal-manufacturing-trend.png",
-        "sha256": "7c653d2e22a00522385f737e90e8ff90380bb6cf0d4bb26e050a3e125719e85f",
-        "bytes": 105445
+        "sha256": "e064cfa8a44d58a11c3bafa28e736e9c73734647ae2ebcfc4cbf4302dddbeb91",
+        "bytes": 107011
       },
       {
         "file": "images/analysis-file-preview.png",
-        "sha256": "89f24f4c022f658bb32a911f337a291c1c5a5dcb5dbb74aa73fd6303cee6ac95",
-        "bytes": 124233
+        "sha256": "949d42bdc2175e4be3d053336f53fa3170244fa28168e7b1755690f96fca7de0",
+        "bytes": 127489
       },
       {
         "file": "inputs/municipal-manufacturing.json",
-        "sha256": "3bce9b1dbfa6050ef6a95947651f61b32668eb8c4702ede4f5e23ecb8416451b",
-        "bytes": 25629894
+        "sha256": "8118a99d741bfab4b5fc6399dcfe456bfb6894f12df2da0cb2f166b645a0f37f",
+        "bytes": 25629890
       },
       {
         "file": "preview-product.json",
@@ -233,8 +233,8 @@
       },
       {
         "file": "analysis-pack.zip",
-        "sha256": "67846ae6c44100c786ce29d1295a005b3fd69e37a7398dc34ea47570442dc130",
-        "bytes": 1329308
+        "sha256": "9a3b695ec5fb22d33967140002ecbe9fe6e37d70bde424ce0f3fba28068f4ce2",
+        "bytes": 1338021
       }
     ]
   },

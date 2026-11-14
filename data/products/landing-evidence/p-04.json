@@ -110,7 +110,7 @@
         "years": [
           2022
         ],
-        "retrievedAt": "2026-11-12T06:04:33.047Z",
+        "retrievedAt": "2026-11-14T10:06:27.754Z",
         "tableTitle": "Ｄ　行政基盤",
         "rows": 3482,
         "areas": 1741,
@@ -128,7 +128,7 @@
             "status": "ok"
           }
         ],
-        "inputSha256": "4854c70e8ceb3bbe210d3d166181e55c9ffb300eb5b14b5a17157bcf5b684595"
+        "inputSha256": "ccf3ac587bc46af1ad62451543407062799a86ac49fb4f35e02f8171c4cb31fd"
       },
       {
         "id": "prefecture-budget",
@@ -214,7 +214,7 @@
           2021,
           2022
         ],
-        "retrievedAt": "2026-11-13T03:03:16.372Z",
+        "retrievedAt": "2026-11-14T10:06:31.368Z",
         "tableTitle": "Ｄ　行政基盤",
         "rows": 2820,
         "areas": 47,
@@ -276,7 +276,7 @@
             "status": "ok"
           }
         ],
-        "inputSha256": "9a95f06b36309d085ffc01488f842cd78df0cddce2bee2c0ad3c31296f1fcfaf"
+        "inputSha256": "32ca30a3d80a30695f05c98c3d8128f79b9c0663ec5a14c4124066dff1ad3942"
       },
       {
         "id": "municipal-budget",
@@ -362,7 +362,7 @@
           2021,
           2022
         ],
-        "retrievedAt": "2026-11-13T03:04:28.447Z",
+        "retrievedAt": "2026-11-14T10:07:55.951Z",
         "tableTitle": "Ｄ　行政基盤",
         "rows": 104460,
         "areas": 1741,
@@ -424,7 +424,7 @@
             "status": "ok"
           }
         ],
-        "inputSha256": "920f724cf0b76b0f80b889d49787bb23d94b31f3e55912f7f82e39fd2f9679c9"
+        "inputSha256": "da1b767b3d365add2e3ee6d177b6d1e44088faff02c14b3fce609136b404e82f"
       }
     ],
     "results": 1937,
@@ -441,12 +441,12 @@
       },
       {
         "file": "analysis.xlsx",
-        "sha256": "98542da6db28455d7dda38803d76a54f7007a0e8c8cc39daa7a61bc80f88ff1c",
-        "bytes": 3595992
+        "sha256": "810a2df3f3546e1d4d28d9d2b9effad587e295ea0dc40147f04e9337bad854cc",
+        "bytes": 3595993
       },
       {
         "file": "SOURCES.csv",
-        "sha256": "8310384a8ff665b4557e3f0f72e71444fc00a35511765ec487946e6cf569ef6e",
+        "sha256": "35f4eb2fe2f6efc128be225d6d5de528670c66f193125e724c3c7cde52c5739f",
         "bytes": 16286
       },
       {
@@ -476,77 +476,77 @@
       },
       {
         "file": "images/prefecture-budget-trend.png",
-        "sha256": "4e25584b4961aa0214a597e09cd43eb25ae01dbf34cf696b459c521d18fc1813",
-        "bytes": 131536
+        "sha256": "9fe95732ff1f9f67905917f93cdf48b43741c47890821afb57ab6bf7fd50cb65",
+        "bytes": 132648
       },
       {
         "file": "images/prefecture-budget-revenue.png",
-        "sha256": "28224f36ac5e08475f45f11d7c392f998f1541ef6415fcfc6e8b4cc34b1a0d82",
-        "bytes": 133802
+        "sha256": "9ecdadf43e58f684366c3c337725bf429d7efa89323e916f5ea3019260afddb6",
+        "bytes": 128392
       },
       {
         "file": "images/prefecture-budget-purpose.png",
-        "sha256": "4950ca5cd29f8fc31ae2c9d63934c3f083e429ff4ad61d38160e28652983e902",
-        "bytes": 129371
+        "sha256": "3b99bdf8656b31331533a92a3ad5ecbc57bb1a57efbf97f4216432abc26d459f",
+        "bytes": 127228
       },
       {
         "file": "images/prefecture-budget-nature.png",
-        "sha256": "90d3e29a40e18419c4d967fac1ed5f057b1b62c83d6bd8adcc49ad7a2f73f073",
-        "bytes": 120370
+        "sha256": "653636b8e46cbac03c218565c8d3dd82bc60a80be14bf1211601d74ee80591cc",
+        "bytes": 118874
       },
       {
         "file": "images/municipal-budget-trend.png",
-        "sha256": "4d010d3e95385758e27059c8c42f100fef2e576238b15bfe628961ea50ed6d9a",
-        "bytes": 122558
+        "sha256": "faee9a869ae9519e3b71e4b39c40e4853910c722b7fa4c1042b78277ecbf2744",
+        "bytes": 125848
       },
       {
         "file": "images/municipal-budget-revenue.png",
-        "sha256": "7593ab7e348875b5d6fcc78874dfe1a545edb9af271502e8106b4f8fb1ea4e82",
-        "bytes": 140212
+        "sha256": "eac831404acb409edaffc65cf039df9acea77dadb8004a3653e27a0a8239a5af",
+        "bytes": 135450
       },
       {
         "file": "images/municipal-budget-purpose.png",
-        "sha256": "4f4807a74ecb2f5ceac09c524be4c9db71fc4b086af47580d673cfee537a5516",
-        "bytes": 115934
+        "sha256": "409cbebe815e81113205581c936944fdb753393d4fcf9d3b55927b24248a65b6",
+        "bytes": 112310
       },
       {
         "file": "images/municipal-budget-nature.png",
-        "sha256": "5999b4e3d52f96a6d0cef82763cc1a77f18a33a6b05b42b096eff21fedf43d36",
-        "bytes": 124153
+        "sha256": "b1c1567529530e08ac44b795a21864f0df86eb715d2211beb0b60099659abde9",
+        "bytes": 120473
       },
       {
         "file": "images/national-municipal-fiscal-strength.png",
-        "sha256": "51efcee6d167d84760a84585bfc0d782a2f7bf5ad7cf2c84a3db70034074916f",
-        "bytes": 209013
+        "sha256": "bdafc746ba6a91308561479b4e21fe1e3ec2ad22a2674e1e4d6aa30c64fa09a0",
+        "bytes": 213952
       },
       {
         "file": "images/municipal-fiscal-strength.png",
-        "sha256": "dec0e4815b7d6a71b1e782761dee4fad6d08eaabac7980bba0801834179b130b",
-        "bytes": 157111
+        "sha256": "3940227783f3da0a5ed3fa59cee3287135abc0999133488b4197a40899391037",
+        "bytes": 159288
       },
       {
         "file": "images/municipal-current-balance.png",
-        "sha256": "967ef076de839038e316b594a04a7dc0ca34fdc8b3088497a6033e7c602ea7cc",
-        "bytes": 160555
+        "sha256": "87803d7d6ca77116328b9f1909f75f22cb623e4b4ea8afc435cfe41494d67ee7",
+        "bytes": 161350
       },
       {
         "file": "images/analysis-file-preview.png",
-        "sha256": "01fdb9f9487787ce6197481e08f63836ebd92a17aed9e4693ac3c2c3823b8b89",
-        "bytes": 118563
+        "sha256": "6131476997836c80edfc1b2050d32a66941888dd9056623c44746447d82ebfa6",
+        "bytes": 121401
       },
       {
         "file": "inputs/municipal-finance.json",
-        "sha256": "4854c70e8ceb3bbe210d3d166181e55c9ffb300eb5b14b5a17157bcf5b684595",
+        "sha256": "ccf3ac587bc46af1ad62451543407062799a86ac49fb4f35e02f8171c4cb31fd",
         "bytes": 36771007
       },
       {
         "file": "inputs/prefecture-budget.json",
-        "sha256": "9a95f06b36309d085ffc01488f842cd78df0cddce2bee2c0ad3c31296f1fcfaf",
+        "sha256": "32ca30a3d80a30695f05c98c3d8128f79b9c0663ec5a14c4124066dff1ad3942",
         "bytes": 8367617
       },
       {
         "file": "inputs/municipal-budget.json",
-        "sha256": "920f724cf0b76b0f80b889d49787bb23d94b31f3e55912f7f82e39fd2f9679c9",
+        "sha256": "da1b767b3d365add2e3ee6d177b6d1e44088faff02c14b3fce609136b404e82f",
         "bytes": 211023462
       },
       {
@@ -556,8 +556,8 @@
       },
       {
         "file": "analysis-pack.zip",
-        "sha256": "3dde4b3b80f3b79507019f895c169eccc95cd5d3ddc3a690ea4fd53e2313c6ad",
-        "bytes": 13320844
+        "sha256": "32cbfd52e90573c8e4bc13faa7783085e077d6a39f8e0b0f28610be91b856be9",
+        "bytes": 13316758
       }
     ]
   },

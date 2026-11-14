@@ -73,28 +73,28 @@
       {
         "productId": "P-01",
         "version": "analysis-20261112",
-        "manifestSha256": "c0bdad82937505b5955605e380ddcf88d5aa7a62be89b93300ac35cb48bc1b5b"
+        "manifestSha256": "8d7b5a200cb2b44fd4ae4fd6e31ecff1ef6963c41d0eb88334a1c1499ab6bce2"
       }
     ],
     "files": [
       {
         "file": "images/p-01-national-municipality-change.png",
-        "sha256": "4fc956c77a1d8a2369d0cf1e17033e0a76317967ef1f34e406d6d250bf18a0c3",
-        "bytes": 218802
+        "sha256": "1e91efbcdefdb71cbd3e7972d80bfadf85e6c89e094afd56f7cee3063f86d613",
+        "bytes": 222994
       },
       {
         "file": "images/p-01-elderly-single-household-map.png",
-        "sha256": "873e96c5f696fadbd9c97114aea8bce790c59379c9b8551ebcdae86d47a472a0",
-        "bytes": 219866
+        "sha256": "0da066693533e5f35e5ce1b870bccf19e779383cc0aa65ed8a0abb8d43993a8a",
+        "bytes": 223802
       },
       {
         "file": "images/p-01-elderly-household-trend.png",
-        "sha256": "44c4a09d2c57de7aa027069d345870e5906c5e26b06be3ed66408d3c4ccc866b",
-        "bytes": 99735
+        "sha256": "1f69af5550fb6a4bc8478c478361ef36e40ebac84ef1951bc71571d1e233beb4",
+        "bytes": 102933
       },
       {
         "file": "sources/P-01/SOURCES.csv",
-        "sha256": "d97c5f1b99ca2d734d4ed55b8f899dfac8262b4aad7c51b602c04d81ff40d413",
+        "sha256": "4f45826111d209389a4e886cca9dc59fdfc9886a84ccb8a7cdd26e9b6b030681",
         "bytes": 9604
       },
       {
@@ -119,7 +119,7 @@
       },
       {
         "file": "dependencies.json",
-        "sha256": "e588c50157c5d37a26e7f242f14948b8550fdd025128e0d29e1499ad719a1937",
+        "sha256": "b0fe5b90385481edc08d25911be9e51980a2a27f6bc7c8788fd03d0becf55f63",
         "bytes": 162
       },
       {
@@ -134,8 +134,8 @@
       },
       {
         "file": "analysis-pack.zip",
-        "sha256": "eb15ab81b6af7332ce99d76213137768c59f8f16910e6788ea98e89048e04825",
-        "bytes": 484019
+        "sha256": "295e7005a5535d4c6dca8058149816cc6d9f5da6b5caeb565535f9be0255b01e",
+        "bytes": 495651
       },
       {
         "file": "preview-product.json",
