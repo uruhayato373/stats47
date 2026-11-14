@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-14T04:23:49.151Z",
+  "updatedAt": "2026-11-14T06:32:36.614Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -12200,6 +12200,39 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-14T04:23:49.151Z"
+    },
+    "RELATED-ARTICLES-TIEBREAK-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "ランキングの関連記事の同点の切り方",
+      "attempts": [
+        {
+          "at": "2026-11-14T06:32:36.614Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run (packages/data-configs content navigation.test.ts)"
+            ],
+            "pass": true
+          },
+          "evidence": "cb828fd8a: navigation.json で編集者が明示した関係に加点。直す前に落ちるテスト 2 件を追加。全公開ページ 9,688 件×文脈 8 種=28,623 件の上位を前後比較し、変化は /ranking/total-fertility-rate の 4 件だけで先頭が fertility-rate-prefecture-gap になった。本番反映は次のリリース",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-14T06:32:36.614Z"
     }
   }
 }
