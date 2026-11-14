@@ -538,13 +538,6 @@ updated: 2026-11-01
 - **停止条件・禁止**: 納品実物と説明が合わない商品は PRODUCT-PACK-CONTENT-MISMATCH-01 で解消するまで公開しない。R2書き込み・CDN消去・note更新・本番デプロイはそれぞれオーナー承認を取る。型の台帳に無い図を載せない。改訂案を販売版へ自動昇格せず、既存固定版を上書きしない。Office実機未確認を合格扱いしない。制限や削除拒否を別経路で回避しない。Kindle 13件は対象外。
 - **完了条件**: 全14件のnote確認とpublished台帳・公開LPの作成例が一致し、本番画像が表示される。サイトとnoteの見本が同じspecから作られ、手書き `showcase` が0件、見本全URLのGET検査が通り、LPの無い商品の上限が0、`maxUntypedProductArticles` が下がっている (PRODUCT-SAMPLE-TYPED-01 を統合)。関連: PRODUCTS-PAGE-CONTENT-01。
 
-### [ESTAT-APPID-LOCAL-01] 手元の設定ファイルから e-Stat の appId が読めて、「CI 専任」と食い違う
-タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [起票:2026-11-10] [領域:サイト] [待ち:判断]
-
-- **証拠 (2026-11-10・Mac)**: e-Stat の調査担当 agent が `.claude/scripts/lib/estat-catalog/api.mjs` の `getAppId()` (環境変数 `NEXT_PUBLIC_ESTAT_APP_ID`。`.env.local` と `apps/web/.env.development` を dotenv で読む) で getMetaInfo・getStatsData を呼べた。オーナーの方針は「e-Stat は CI」(`vars.NEXT_PUBLIC_ESTAT_APP_ID`)、既存カードの記録も「appId は CI にあり手元に無い」。どちらのファイルから値が入ったかは、設定ファイルの読み取りが権限で止められ未確認。
-- **次**: オーナーがどちらのファイルに値があるかを確かめ、手元に置かないなら消す。残すなら「CI 専任」の記録と `getAppId()` の読み先を直す。
-- **完了条件**: 手元で e-Stat を呼べるかどうかと規約・カードの記述が一致している。
-
 ### [MEDIA-WORKSPACE-ORPHAN-01] 画像のワークスペース検査が「Orphan image」で止まる
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-10] [領域:SNS]
 
@@ -3426,6 +3419,13 @@ updated: 2026-11-01
   - **完了条件**: 上の高・中の項目が直り、`/geo` 系の代表 5 ページを 390 / 768 / 1440px で撮影して確認する。
   - **残り**: ① 小数 4 桁の人口 (「1,203,780.9571人」) は、`GeoLandslideAudit` の保存則の検証表と地図ポップアップにある。検証表は
 
+### [ESTAT-TABLE-SNAPSHOTS-01] e-Stat の表の写しを全表へ広げ、旧経路と直書きの許可を消す
+タグ: [データ] [種類:改善] [実行:対話] [起票:2026-11-15] [領域:データ] [進行中]
+
+- **済み (2026-11-15・`596cd0ed1`)**: 表の写し 118 表 (verified 106・pushed 12) を非公開 R2 `estat-tables/` に置き、台帳 `data/estat/table-snapshots.json` で管理。`estat-table-snapshot.ts --check-updates` (カタログの更新日との比較)、指標の自動選択 (`estat-refresh-selection.ts`。`page-data-batch` で指標を指定しないとき)、e-Stat の共通の入口と直書きの検査 (`check-estat-entrypoint.mjs`)。
+- **残り**: ① 家計調査と市区町村の表を取り込み、一致を確かめて verified にする ② pushed の 12 表の理由 (取り出し条件の差など。各カードに記録) を解く ③ カタログに目録の無い 32 表を `meta_stat_codes` に足して取る ④ 全表が verified になったら旧経路 (指標ごとに絞った要求) を消し、`values.json` の `meta.source` を必須にする ⑤ `.claude/config/estat-entrypoint-baseline.json` の 69 ファイルを共通の入口へ移して縮める ⑥ 指標の自動選択を月次のカタログ更新の後に起動する配線 (いまは手動起動で指標を空にしたときだけ)。
+- **完了条件**: 指標の値がすべて写しから作られ、e-Stat を叩くのが表の更新のときだけになり、許可リストが空になっている。
+
 ### [ESTAT-CATALOG-SSDS-DERIVE-01] `ssds-candidates.json` を e-Stat カタログから導出し、find-metrics に未登録候補の索引を足す
 
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --import tsx .claude/scripts/estat/catalog.mjs search 人口] [起票:2026-10-05] [領域:データ]
@@ -3880,6 +3880,7 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **期限**: GitHub の定期実行は main の設定で動くので、**2026-12-05 12:00 JST より前に**この変更を main へ入れる。次のまとまったデプロイに同乗させる。
 - **証拠**: run 42010655216 を最終同期 3,416 / 17,474 件で取り消した。24 指標の年の食い違いは run 42022242257 で修復し、公開データ監査は 0 件。ほかの約 14,000 件は 11-04 までの内容で、同じ年の値の改訂が未反映の可能性がある。
 - **次**: ① 台帳とカタログの整理が終わる時期をオーナーが決める ② その後に全範囲を手動で 1 回実行し、中断しない ③ 定期起動を戻すかを決める。
+- **追記 (2026-11-15)**: 定期の全範囲更新の代わりの仕組みを develop に入れた (`596cd0ed1`): 指標を空にして起動すると、更新された表を参照する指標と configHash の違う指標だけを選ぶ (全件は `--all`)。再開するなら全範囲ではなくこの選択で動かす → ESTAT-TABLE-SNAPSHOTS-01。
 - **完了条件**: main から定期起動が消えていることを確認し、再開か廃止かの判断が記録されている。
 
 ### [WEB-ANY-RATCHET-01] apps・packages の `any` を増やさない検査を入れる
