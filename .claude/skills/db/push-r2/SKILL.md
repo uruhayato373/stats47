@@ -19,11 +19,12 @@ exact plan (`.local/image-generation-publish-plan-<type>.json`) を、
 (正典: `.claude/rules/ogp-image-standards.md` §5.0)。manifest を持たない資産 (blog SVG / buzz-map 等) は
 `push-exact-r2-assets.ts` (明示 key のみ)。
 
-## ★ R2 書き込みはローカル / CIの両方から可能
+## ★ R2 書き込みは CI の workflow が既定・承認は区分で決まる
 
-完全DBレス運用では SSOT は git TS と R2。`_assert-ci-write.ts` はローカル実行を停止せず、
-書き込み通知を1行出す。ローカル実行には `.env.local` の R2 S3 creds、CIには対応するsecretが必要。
-対象はexact keyか十分狭いprefixに限定し、広域prefixの反映や任意削除を行わない。
+完全DBレス運用では SSOT は git TS と R2。**作り直せる生成物 (区分表で `regenerable`) の再生成と push、dry-run、
+再生成の workflow の起動は、オーナーの承認なしで実行してよい。正本 (`authoritative`) の上書きと削除は承認が要る**
+(正典: `.claude/rules/r2-storage-design.md`「書き込みの承認」)。ローカルから書けるのは Mac で実体を作る prefix だけで、
+それ以外は `_assert-ci-write.ts` が止める。対象はexact keyか十分狭いprefixに限定し、広域prefixの反映や任意削除を行わない。
 
 ローカルの R2 **読み取り**は公開 URL 経由で認証不要 (`R2_PUBLIC_FETCH_URL=https://storage.stats47.jp`)。
 
@@ -44,9 +45,10 @@ exact plan (`.local/image-generation-publish-plan-<type>.json`) を、
    （`gh auth login` 済みなら `! gh workflow run …` でこのセッションから直接起動できる）
 3. 完了したら run の結果を報告して終了（CDN キャッシュは ISR/TTL で更新。必要時のみ `/purge-cdn`）。
 
-## ローカルからpushする場合
+## ローカルからpushする場合 (Mac で作る prefix だけ)
 
-S3認証済みならCIと同じpublisherを使用できる。最初にdry-runまたは限定prefixで対象を確認する:
+SNS の画像など、区分表で `origin: "mac"` の prefix に限る。最初に dry-run で、区分ごとの NEW・CHANGED の件数を確認する。
+正本の上書きが含まれると止まるので、オーナーの承認があるときだけ `--allow-authoritative-overwrite` を付ける:
 
 ```bash
 # 事前に R2 S3 認証 (R2_S3_ENDPOINT / R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY) が必要

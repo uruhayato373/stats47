@@ -24,18 +24,36 @@ paths:
 - reader 関数に module-level メモリキャッシュを持たせない。各リクエストが対応する小さい JSON を直接 fetch する
 - `compare/` は `category/` と同じデータを使う。R2 ファイルは `app/category/[key]/items.json` に統一し reader 側で両方から参照する
 
-## R2 読み書き — ローカル / CI 両方から remote が唯一の真実源
+## R2 読み書き — remote が唯一の真実源
 
 - **読み取り**はローカル可 (公開 URL `https://storage.stats47.jp`、認証不要)。
-- **書き込み**はローカル / CI 両方から remote R2 へ直接可能。常駐するローカル R2 ミラーは廃止済み
-  (`.local/r2` は push の一時 staging。秘密値を CI 限定にした 2026-09-14 以降ローカルから push しないため
-  常駐させず `local:cleanup` が 7 日で回収する。CI は runner 内で自分の staging を作る。KSJ ミラーは R2 `gis/`
-  から再取得できる。同日実測 2.1GB (`app/` 14MB・`gis/` 2,130MB) は削除済み)。
-- ローカル書き込みには R2 S3 creds (`.env.local`: `R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` / `R2_S3_ENDPOINT`) または `wrangler login` 認証が必要。`_assert-ci-write.ts` はデフォルト許可（ローカル実行時は `console.warn` を出すだけ）。
-- 対象スクリプト: `diff-push-r2.ts` / `push-generated-image-set.ts` / `push-r2-wrangler.ts` /
-  `db-r2-sync.ts push` / `delete-r2-prefix.ts` / `r2-cleanup-orphans.ts`。
-- 新規に R2 書き込みスクリプトを追加する場合は **先頭で `assertR2WriteAllowed()` を呼ぶ**こと（通知のため）。
-- 詳細: `.claude/rules/local-environment.md` の「R2 読み書き」。
+- **書き込みは CI の workflow が既定**。ローカル (Mac) から書いてよいのは、実体を Mac で作る prefix だけ
+  (区分表で `origin: "mac"`: SNS の画像 `sns/`・note・note の背景・Kindle の暗号化保管・private bucket の素材など)。
+  それ以外の key へのローカルからの書き込みは `_assert-ci-write.ts` が書き手の workflow 名を案内して止める (2026-11-14。
+  それ以前は警告だけで通していた)。意図して通すときだけ `ALLOW_LOCAL_R2_WRITE=1` を付ける。
+- `.local/r2` は push の一時 staging で、常駐するローカル R2 ミラーは無い (`local:cleanup` が 7 日で回収する)。
+- 新しく R2 に書くスクリプトは、**先頭で `assertR2WriteAllowed()` を、書く key を渡して呼ぶ**。
+
+## 書き込みの承認 (2026-11-14 オーナー決定)
+
+R2 の key は、区分表 `packages/r2-storage/src/scripts/r2-key-classes.ts` の `R2_KEY_CLASSES` で 2 つに分ける
+(`classifyR2Key(bucket, key)` で引く。表に無い key は安全側で正本として扱う)。区分の一覧はこの文書に写さない。
+
+| 区分 | 意味 | 例 | 承認 |
+|---|---|---|---|
+| `regenerable` | git と観測値から作り直せる生成物。間違えても再生成で戻る | `app/` の snapshot・OGP・ISR キャッシュ・`estat-api/` のキャッシュ | **不要**。agent は再生成と push、workflow の起動を承認なしで行ってよい |
+| `authoritative` | R2 が唯一の正本。上書きや削除は元に戻せない | `app/stats/` の観測値・ブログの本文・`note/`・画像の原本・`archive/`・private bucket | **上書きと削除はオーナーの承認が要る**。新しい key の追加は不要 |
+
+- **機械の止め (`diff-push-r2.ts`)**: R2 の一覧が取れないときは 1 件も送らずに止まる (初回投入は `--allow-full-upload`)。
+  正本の上書きが差分に含まれると、対象の key を並べて止まる (`--allow-authoritative-overwrite` で通す)。書いた後に件数と
+  抜き取りの読み戻し (サイズと ETag) を照合する。dry-run は区分ごとの NEW・CHANGED の件数を出す。
+- **正本を上書きするのが役目の workflow** (観測値の更新・記事の再公開など) は、YAML でこのフラグを明示している。
+  agent が自分の判断でこのフラグを付けて実行するのは、オーナーの承認があるときだけ。
+- **段階導入**: CI では、正本の上書きの止めは当面「警告して続行」で動く (定期実行は main の workflow 定義で動くため、
+  フラグ付きの YAML が main に出るまで止めると定期実行が落ちる)。main に出たら `R2_AUTHORITATIVE_GUARD=enforce` に切り替える
+  (年間計画のカード `R2-AUTHORITATIVE-GUARD-ENFORCE-01`)。ローカルでは最初から止まる。
+- 削除は従来どおり `r2-maintenance.yml` の allowlist 経由で、承認が要る (下の「削除ポリシー」)。
+- `wrangler r2 object` と `aws s3` の直打ちは、この止めを通らないので使わない (`pre-bash-safety.js` が注意を出す)。
 
 ### note 記事の本文 (2026-10-13〜)
 

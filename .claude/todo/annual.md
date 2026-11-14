@@ -163,6 +163,14 @@ updated: 2026-11-14
 - **残り (合計が 100 秒を超える run が残った場合)**: Image Generation Pipeline は型検査 18.8 秒と vitest 14.5 秒が直列なので、並べて走らせるか差分連動にする。Theme Portfolio State は 45 本のテストファイルのうち 19 本が tsx で指標の定義 3,342 本を読み込み、プロセスの起動が所要の大半を占めるので、読み込みを減らすか差分連動と週次の全数に分ける。
 - **完了条件**: 変更後の 3 run 以上で 4 step の合計が 100 秒以下であり、`node .claude/scripts/lib/check-runtime-budget.cjs` が通る。
 
+### [R2-AUTHORITATIVE-GUARD-ENFORCE-01] R2 の正本の上書きと読み戻しの止めを、CI でも「止める」に切り替える
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-14] [領域:管理] [待ち:時期] [期日:2026-11-28]
+
+- **済み (2026-11-14)**: 区分表 `packages/r2-storage/src/scripts/r2-key-classes.ts` と `diff-push-r2.ts` の止めを入れ、正本を更新する workflow 10 本に `--allow-authoritative-overwrite` を付けた。CI では当面、正本の上書きと読み戻しの不一致を警告して続行する。
+- **着手の契機**: フラグ付きの YAML が main に出ること (定期実行は main の workflow 定義で動く)。期日は契機を確かめる日で、まだなら延ばす。
+- **やること**: (1) main に出た後の定期実行 (data-refresh・sync-snapshots・blog-auto-publish・quality-suite-weekly・affiliate-ga4-weekly ほか) を一巡ぶん見て、`R2 authoritative overwrite` と `R2 readback mismatch` の警告注釈が出ていないかを確かめる。出ていれば、その呼び出しにフラグを足すか区分表を直す (特に `.claude/skills/db/sync-snapshots/run.sh` の全体 push と `publish-blog.yml` の索引の push)。(2) 本物の R2 で、1 回の PutObject の ETag が MD5 になること、空の prefix の一覧がエラーにならないことを run のログで確かめる。(3) 警告が 0 になったら、R2 に書く workflow の env に `R2_AUTHORITATIVE_GUARD: enforce` を足す。(4) 定着したら `resolveAuthoritativeGuardMode` の CI の既定を enforce に変え、`r2-storage-design.md`「書き込みの承認」の段階導入の項を消す。
+- **完了条件**: CI の既定が enforce で、正本を上書きする workflow がすべてフラグを明示し、直近 1 週の定期実行に警告注釈も失敗も無い。
+
 ## 2026-12
 
 ### [DEPS-DEPENDABOT-GROUP-01] dependabot の next・sharp の更新を、ルートの overrides と同じ PR で上げる

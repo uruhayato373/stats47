@@ -2081,6 +2081,7 @@ updated: 2026-11-01
 - **残り (判断)**: geo.analyses の contentId 3 件 (geo-107・geo-128・geo-129) は、business-plan.content-opportunities (geo-001〜geo-100) に無いため、check-datasets が warning を出し続けている。選択肢は 2 つある。(a) 事業計画にこの 3 件の機会を足す。(b) 3 分析の contentId を既存の機会の ID に直す。この 3 分析が事業計画の外で始めた分析なら (a) を推奨する。根拠は、datasets.mjs が事業計画の担当に判断を任せると宣言していることである。
 - **残り (計測)**: 最大の負荷は middleware ではなく Worker 全体なので、Worker 全体のサイズを測る。手順は、OpenNext で build してから `wrangler deploy --outdir bundled/ --dry-run` の Total Upload を読み、64 MiB と起動時間の上限 1 秒と比べる。
 - **完了条件**: geo の 3 件の warning が消えるか、残す理由が台帳に書いてある。Worker 全体の Total Upload の実測値と上限の比較が、このカードに書いてある。
+- **追補 (2026-11-14)**: `.claude/scripts/page-quality/__tests__/ui-findings.test.mjs` は `node --test` だけでは `lib/ui-report` を解決できずに落ち、`node --import tsx --test` なら通る。どの入口で回す前提かをファイルの冒頭に書くか、tsx 無しで動く import に直す。`push-r2-wrangler.ts` には diff-push-r2 の止め (一覧失敗・正本の上書き・読み戻し) が無いのに、`.claude/scripts/blog/` の 4 スクリプト (backfill-source・resolve-scatter-axes・rerender-ranking-columns・restore-findings-from-svg) と `push-article-md-r2.ts` の冒頭がローカルからの反映の経路として案内している。案内を workflow に直すか、同じ止めを通す。
 
 ### [NOTE-BODY-RECOVERY-01] 本文が note.com にしか無い 73 本を R2 へ回収する
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run note:article -- status] [起票:2026-10-13] [領域:商品]

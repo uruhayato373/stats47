@@ -1,11 +1,13 @@
 ---
 name: project_r2_writes_ci_only
-description: 2026-06-20 方針転換: ローカル/CI 両方から remote R2 へ読み書き可。remote が唯一の真実源。ローカル R2 ミラー廃止。_assert-ci-write はデフォルト許可。
+description: R2 は remote が唯一の真実源。書き込みは CI が既定で、ローカルは Mac で作る prefix だけ。作り直せる生成物の push は承認不要、正本の上書きと削除は承認 (2026-11-14)
 metadata: 
   node_type: memory
   type: project
   originSessionId: 4d930b3a-9dfc-4616-8afd-8dd5bbb85bc1
 ---
+
+**2026-11-14 改訂**: 書き込みは CI の workflow が既定。ローカルから書けるのは区分表 (`packages/r2-storage/src/scripts/r2-key-classes.ts`) で `origin: "mac"` の prefix だけで、それ以外は `_assert-ci-write.ts` が止める (`ALLOW_LOCAL_R2_WRITE=1` で明示的に通す)。作り直せる生成物 (`regenerable`) の push と再生成の workflow の起動は承認不要、正本 (`authoritative`) の上書きと削除はオーナーの承認が要る。正典は `.claude/rules/r2-storage-design.md`「書き込みの承認」。以下は 2026-06-20 時点の記録で、「デフォルト許可」は上の改訂で置き換わった。
 
 2026-06-20 方針転換: **ローカル / CI 両方から remote R2 へ読み書き可。remote が唯一の真実源。ローカル R2 ミラー (`.local/r2` / `.local/d1/r2`) 廃止。**
 
