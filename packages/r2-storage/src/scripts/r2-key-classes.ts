@@ -136,7 +136,7 @@ export const R2_KEY_CLASSES: readonly R2KeyClassRule[] = [
   row(P, "archive/kindle-encrypted/", "authoritative", "mac", ["kindle-archive.ts"], `${DESIGN} 保持の表 (KDP 送信版)`),
 
   // ── private bucket ──
-  row(V, "estat-tables/", "authoritative", "mac", ["push-exact-r2-assets.ts (estat-table-snapshot.ts)"],
+  row(V, "estat-tables/", "authoritative", "mac", ["estat-table-snapshot.ts --push", "push-exact-r2-assets.ts"],
     "2026-11-14 オーナー決定: e-Stat表の全項目を行数上限まで軸分割して保全する値の封筒と取得manifest"),
   row(V, "note/", "authoritative", "mac", [".claude/scripts/note/note-article.mjs"], `${DESIGN}「note 記事の本文」(有料記事)`),
   row(V, "note-archive/", "authoritative", "mac", [".claude/scripts/note/note-article.mjs"], `${DESIGN}「note 記事の本文」(不変保存)`),

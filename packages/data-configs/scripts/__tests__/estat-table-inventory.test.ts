@@ -3,11 +3,11 @@ import { test } from "node:test";
 import { gzipSync } from "node:zlib";
 import { gunzipSync } from "node:zlib";
 import { createHash } from "node:crypto";
-import { mkdtemp, readFile, readdir, rm } from "node:fs/promises";
+import { mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { createEstatIngestClient } from "../../../estat-api/src/ingest.js";
-import { parseSnapshotArgs, writeTableSnapshot, type TableMetadata } from "../estat-table-snapshot.js";
+import { parseSnapshotArgs, writeTableSnapshot, readSnapshotForPush, markSnapshotPushed, type TableMetadata } from "../estat-table-snapshot.js";
 
 import { collectReferences, countSlices, makeSliceKey, measureSample, readAxes, planTablePartitions, type Axis } from "../estat-table-inventory.js";
 
@@ -251,4 +251,33 @@ test("複数--tableとdry-runを解釈し、不明な引数を拒否する", () 
   assert.equal(parseSnapshotArgs(["--table", "0003445758", "--dry-run"]).dryRun, true);
   assert.throws(() => parseSnapshotArgs(["--table"]));
   assert.throws(() => parseSnapshotArgs(["--table", "../evil"]));
+});
+
+
+test("pushは既存のmanifestとSHAを検査し、台帳の一致した行だけをpushedにする", async () => {
+  const dir = await mkdtemp(join(tmpdir(), "estat-push-local-test-"));
+  try {
+    const client = createEstatIngestClient({ appId: "test-secret", fetch: async () => new Response(JSON.stringify(snapshotPage(["08", "13"]))) });
+    const m = await writeTableSnapshot(snapshotMeta(), dir, client);
+    const local = await readSnapshotForPush(m.statsDataId, dir);
+    assert.equal(local.objects.length, 2);
+    assert.equal(local.objects[local.objects.length - 1].key, local.manifestKey);
+    const { files, emptyPartitions, schemaVersion, partition, requestCount, catalogFetchedAt, ...fields } = m;
+    const ledgerPath = join(dir, "ledger.json");
+    const entry = { ...fields, depth: partition.depth, partitionAxes: partition.partitionAxes, rowLimit: partition.rowLimit,
+      manifestKey: local.manifestKey, manifestSha256: createHash("sha256").update(local.manifestBytes).digest("hex"),
+      status: "local-only", bucket: "stats47-private" };
+    await writeFile(ledgerPath, JSON.stringify({ schemaVersion: 1, tables: [entry] }));
+    await markSnapshotPushed(local.manifestBytes, ledgerPath);
+    assert.equal(JSON.parse(await readFile(ledgerPath, "utf8")).tables[0].status, "pushed");
+    await assert.rejects(markSnapshotPushed(Buffer.from(local.manifestBytes.toString() + " "), ledgerPath), /Ledger\/manifest mismatch/);
+    await writeFile(join(dir, files[0].key), "tampered");
+    await assert.rejects(readSnapshotForPush(m.statsDataId, dir), /Local SHA\/size mismatch/);
+  } finally { await rm(dir, { recursive: true, force: true }); }
+});
+
+test("pushのdry-runと明示上書きフラグを解析し、push無しの上書き指定を拒否する", () => {
+  const flags = parseSnapshotArgs(["--table", "0003445758", "--push", "--dry-run", "--allow-authoritative-overwrite"]);
+  assert.equal(flags.push, true); assert.equal(flags.dryRun, true); assert.equal(flags.allowAuthoritativeOverwrite, true);
+  assert.throws(() => parseSnapshotArgs(["--table", "0003445758", "--allow-authoritative-overwrite"]), /requires --push/);
 });

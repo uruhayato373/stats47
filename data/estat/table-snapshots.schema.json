@@ -32,7 +32,7 @@
           "warnings": { "type": "array", "items": { "$ref": "common.schema.json#/$defs/nonEmptyString" } },
           "manifestKey": { "type": "string", "pattern": "^estat-tables/[0-9]{10}/manifest\\.json$" },
           "manifestSha256": { "$ref": "common.schema.json#/$defs/sha256" },
-          "status": { "enum": ["local-only", "published"] },
+          "status": { "enum": ["local-only", "pushed"] },
           "bucket": { "const": "stats47-private" }
         }
       }

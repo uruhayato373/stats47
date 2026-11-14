@@ -25,7 +25,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0003445758/manifest.json",
       "manifestSha256": "2abff7a09cf82a916d80cd0dd04f2c961a209c305d19344fe4bbbccfbfe5e411",
-      "status": "local-only",
+      "status": "pushed",
       "bucket": "stats47-private"
     }
   ]

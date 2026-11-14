@@ -1,7 +1,7 @@
-/** Local-only table snapshots. No R2 client or uploader is imported. */
+/** Local table snapshots; explicit --push uploads existing files to private R2. */
 import { SITE } from "@stats47/types";
 import { createHash, randomUUID } from "node:crypto";
-import { access, mkdir, rename, rm, writeFile } from "node:fs/promises";
+import { access, mkdir, readFile, rename, rm, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { gzipSync } from "node:zlib";
@@ -10,6 +10,8 @@ import { createEstatIngestClient, ESTAT_MAX_CONCURRENCY, planTablePartitions, re
 import { ESTAT_API_VERSION, type StatsDataCacheEnvelope } from "../../estat-api/src/stats-data/repositories/cache/envelope.js";
 import type { GetStatsDataParams, EstatValue } from "../../estat-api/src/stats-data/types/index.js";
 import { collectReferences } from "./estat-table-inventory.js";
+import { pushPrivateR2Snapshot, type PrivateSnapshotObject } from "../../r2-storage/src/scripts/push-private-r2-snapshot-core.js";
+import { R2_PRIVATE_BUCKET } from "../../r2-storage/src/scripts/r2-key-classes.js";
 
 export { makeSliceKey } from "../../estat-api/src/stats-data/utils/table-partitions.js";
 const REPO_ROOT = fileURLToPath(new URL("../../../", import.meta.url));
@@ -188,12 +190,67 @@ export async function writeTableSnapshot(meta: TableMetadata, outDir: string, cl
   } finally { await rm(staging, { recursive: true, force: true }); }
 }
 
+/** Read only committed local snapshots; --push never reacquires the source table. */
+export async function readSnapshotForPush(statsDataId: string, outDir: string) {
+  if (!/^\d{10}$/.test(statsDataId)) throw new Error("Invalid table ID");
+  const prefix = `estat-tables/${statsDataId}/`;
+  const manifestKey = `${prefix}manifest.json`;
+  const manifestBytes = await readFile(resolve(outDir, manifestKey));
+  const manifest = JSON.parse(manifestBytes.toString()) as TableSnapshotManifest;
+  if (manifest.schemaVersion !== 1 || manifest.statsDataId !== statsDataId || !Array.isArray(manifest.files) ||
+      manifest.files.length !== manifest.fileCount || manifest.fileCount === 0) throw new Error("Invalid local manifest");
+  const objects: PrivateSnapshotObject[] = [];
+  for (const file of manifest.files) {
+    if (!file.key.startsWith(`${prefix}data/`) || !file.key.endsWith(".json.gz") ||
+        file.key.split("/").some((part) => !part || part === "." || part === ".." || part.includes("\\"))) {
+      throw new Error("Invalid manifest key");
+    }
+    const bytes = await readFile(resolve(outDir, file.key));
+    if (bytes.length !== file.bytes || hash(bytes) !== file.sha256) throw new Error(`Local SHA/size mismatch: ${file.key}`);
+    objects.push({ key: file.key, bytes });
+  }
+  if (new Set(objects.map((o) => o.key)).size !== objects.length ||
+      manifest.files.reduce((sum, f) => sum + f.rowCount, 0) !== manifest.rowCount ||
+      objects.reduce((sum, f) => sum + f.bytes.length, 0) !== manifest.gzipBytes) throw new Error("Manifest totals mismatch");
+  objects.push({ key: manifestKey, bytes: manifestBytes });
+  return { manifest, manifestBytes, objects, manifestKey };
+}
+
+type SnapshotLedger = { schemaVersion: number; tables: { statsDataId: string; manifestSha256: string; status: string }[] };
+async function checkedLedger(manifestBytes: Buffer, ledgerPath: string) {
+  const { assertDatasetShape } = await import(new URL("../../../.claude/scripts/lib/dataset-shape.mjs", import.meta.url).href) as {
+    assertDatasetShape: (id: string, value: unknown) => void;
+  };
+  const ledger = JSON.parse(await readFile(ledgerPath, "utf8")) as SnapshotLedger;
+  assertDatasetShape("estat.table-snapshots", ledger);
+  const manifest = JSON.parse(manifestBytes.toString()) as TableSnapshotManifest;
+  const entries = ledger.tables.filter((t) => t.statsDataId === manifest.statsDataId);
+  if (entries.length !== 1 || entries[0].manifestSha256 !== hash(manifestBytes)) throw new Error("Ledger/manifest mismatch; register the local snapshot first");
+  return { ledger, entry: entries[0], assertDatasetShape };
+}
+
+/** Called after all objects and the final manifest pass S3 HEAD or OAuth GET size/SHA checks. */
+export async function markSnapshotPushed(manifestBytes: Buffer, ledgerPath: string) {
+  const { ledger, entry, assertDatasetShape } = await checkedLedger(manifestBytes, ledgerPath);
+  entry.status = "pushed";
+  assertDatasetShape("estat.table-snapshots", ledger);
+  const temporary = `${ledgerPath}.${randomUUID()}.tmp`;
+  try {
+    await writeFile(temporary, `${JSON.stringify(ledger, null, 2)}\n`, { flag: "wx" });
+    await rename(temporary, ledgerPath);
+  } finally { await rm(temporary, { force: true }); }
+}
+
 export function parseSnapshotArgs(args: string[]) {
   const tables: string[] = [];
   let out = DEFAULT_OUT;
   let dryRun = false;
+  let push = false;
+  let allowAuthoritativeOverwrite = false;
   for (let i = 0; i < args.length; i++) {
     if (args[i] === "--dry-run") dryRun = true;
+    else if (args[i] === "--push") push = true;
+    else if (args[i] === "--allow-authoritative-overwrite") allowAuthoritativeOverwrite = true;
     else if (args[i] === "--out" && args[i + 1] && !args[i + 1].startsWith("--")) out = resolve(args[++i]);
     else if (args[i] === "--table") {
       const start = tables.length;
@@ -202,12 +259,30 @@ export function parseSnapshotArgs(args: string[]) {
     } else throw new Error(`Unknown/incomplete option: ${args[i]}`);
   }
   if (!tables.length || tables.some((id) => !/^\d{10}$/.test(id))) throw new Error("--table requires 10-digit table IDs");
-  return { tables: [...new Set(tables)], out, dryRun };
+  if (allowAuthoritativeOverwrite && !push) throw new Error("--allow-authoritative-overwrite requires --push");
+  return { tables: [...new Set(tables)], out, dryRun, push, allowAuthoritativeOverwrite };
 }
 
 async function main() {
   const args = parseSnapshotArgs(process.argv.slice(2));
-  // No credential lookup, API calls or local writes in dry-run.
+  if (args.push) {
+    // Native ESM import: the plain-JS transport uses an import-only proxy dependency.
+    const { createR2Store } = await import(new URL("../../r2-storage/src/lib/clients/private-r2-store.mjs", import.meta.url).href) as
+      typeof import("../../r2-storage/src/lib/clients/private-r2-store.mjs");
+    const { datasetPath } = await import(new URL("../../../config/datasets.mjs", import.meta.url).href) as { datasetPath: (id: string) => string };
+    const ledgerPath = resolve(REPO_ROOT, datasetPath("estat.table-snapshots"));
+    for (const id of args.tables) {
+      const local = await readSnapshotForPush(id, args.out);
+      await checkedLedger(local.manifestBytes, ledgerPath);
+      const store = createR2Store({ bucket: R2_PRIVATE_BUCKET });
+      const counts = await pushPrivateR2Snapshot({ ...local, store, dryRun: args.dryRun,
+        allowAuthoritativeOverwrite: args.allowAuthoritativeOverwrite });
+      if (!args.dryRun) await markSnapshotPushed(local.manifestBytes, ledgerPath);
+      console.log(JSON.stringify({ statsDataId: id, dryRun: args.dryRun, ...counts }));
+    }
+    return;
+  }
+  // Acquisition dry-run reads only the public catalog; push dry-run above reads private R2.
   const metadata: TableMetadata[] = [];
   for (const id of args.tables) metadata.push(await loadTableMetadata(id));
   if (args.dryRun) {
