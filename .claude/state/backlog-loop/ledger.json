@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-14T01:24:05.334Z",
+  "updatedAt": "2026-11-14T04:23:49.151Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -12167,6 +12167,39 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-14T01:24:05.334Z"
+    },
+    "AREA-DATABOOK-CHART-FIX-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "県データブックの推移グラフの点数不足と文字・単位",
+      "attempts": [
+        {
+          "at": "2026-11-14T04:23:49.151Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run (apps/web area-databook-trend-points.test.ts)"
+            ],
+            "pass": true
+          },
+          "evidence": "5cde88232: 推移の点数不足は指標の years の絞り込みが原因で f6c06c75c・43559317d で解消済み。公開 R2 で推移の図 6 枚の 9 指標が 47 県とも 8〜50 年分。390px で文字 11.1px 以上・縦軸に単位 (localhost)。years を戻すと落ちるテストを追加",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-14T04:23:49.151Z"
     }
   }
 }

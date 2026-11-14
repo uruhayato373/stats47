@@ -2059,6 +2059,7 @@ updated: 2026-11-01
 - **残り (観測)**: 次の本番反映の後、週次 GA4 の nav-click-surfaces.csv から unlabeled × api の行が消えることを確かめる。正規化 snapshot の生成ログに「時刻を引き継いだ=」の行が出て、変わっていない分が送られていないことを確かめる。
 - **追補 (2026-11-14)**: 直した後もタイル地図の 4 文字の市名 (宇都宮市・名古屋市) は、短縮した「さいたま」より小さく描かれ、字の大きさが揃わない。`build-topic-queue.mjs` は自動の候補に無い pending の企画を作り直しで消すので、手で足す正規の入口が無い。quality-gate の factual 照合は「東京・千葉・埼玉・神奈川の4都県がそろって上位10位」の順位を最初の県の順位として読み、正しい文を RANK_MISMATCH にする。
 - **完了条件**: 2・3 の対象記事を是正キューか該当カードで扱っている。6 のオーナー確認の結果が台帳に反映されている。観測の 2 点が実測で確かめられている。
+- **追補 (2026-11-14・古い年の記事の取り直しで見つけた分)**: 是正キュー (22:53 生成) が古い年の一覧 (23:59 生成) より先に作られ、data-refresh レーンの 126 件が今の一覧に無い古い判定のまま残る (キューを一覧の後に作る順に直す)。`bonito-catch-prefecture` は一覧に古いと載るのに、`refresh-article-data-years.mjs` は取り直す図を見つけない。`article-factual-check` は「2024年の1位は兵庫」「前年は20位」のような過去年の順位も最新年の data と照らして RANK_MISMATCH にする (今回 5 本で言い回しを避けた)。本文に書く過去年の順位や回数を R2 の全年値と照らす検査が無い (critic が 3 本で数え間違いを見つけた)。R2 の values.json の rank は同じ値の県で順位が割れる年がある。`fresh-udon-soba-consumption-prefecture-gap` の本文に内部ラベル「[仮説B]」が残る。
 
 ### [METRIC-GATE-FOLLOWUP-02] 指標の定義と単位に残る小さい不具合 (第 3 波の実行で見つけた分)
 タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-11-14]
@@ -2537,15 +2538,13 @@ updated: 2026-11-01
 ### [BLOG-DUPLICATE-AUDIT-01] 同じ主題・同じ数値のブログが 2 本ずつ公開されている組を洗い出し、1 本にまとめる
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-07] [領域:サイト]
 
-- **GSC案16 / P3（条件確認後）**: 新たな統合対象は同じ問い・情報・役割の重複を本文とpage×queryで確認してから採用する。用途の違うrankingとblogは役割分担を先に試す。
-- **済 (2026-10-08〜09)**: 生うどん・そば外食・教員年収の 3 組は残す側へ固有の節を移して公開し、`apps/web/src/config/blog-redirects.ts` の 301 で統合済み (本番で 301 と all.json からの除外を 10-23 に確認)。`export-blog-snapshot.ts` は 301 の slug を `app/blog/all.json` から除く。
-- **手順 (1 組ずつ・この順を入れ替えない)**: ① 残す記事へ統合元にしか無い節を移し、quality-gate と critic を通して送り箱から公開する (公開はオーナー承認) ② 公開を確かめてから `blog-redirects.ts` に `"<統合元>": "<残す>"` を足す ③ 本番で `curl -sI https://stats47.jp/blog/<統合元>` が 301 と残す URL を返すことを確かめる。
-- **残り**:
-  - 出生率: `fertility-rate-prefecture-gap` (28 日 1,374/3) を残し `total-fertility-rate` (49/0) をまとめる候補。節の比較は未着手。
-  - 食文化マップ: `udon-soba-food-culture-prefecture-map` の「下位5県の構造」の論証が `fresh-udon-soba-consumption-prefecture-gap` とほぼ同じになった (blog-critic 報告)。GSC (map 73・fresh 359) を見て、map を 301 でまとめるか、地図と外食の対比に絞って差別化するかを決める。
-  - 機械照合 (2026-10-08・title / seoTitle に同じ数値が 2 つ以上) の 22 組。本文を読んでから組ごとに判断する。まとめる候補: 牛肉 `beef-consumption-quantity` / `beef-consumption-prefecture-gap`、乳用牛 `dairy-cattle-count` / `dairy-cattle-hokkaido-monopoly`、テレワーク `engineer-telework-prefecture` / `telework-gap-tokyo-6x` / `telework-rate-tokyo-gap`、病床利用率 `hospital-bed-utilization-map` / `general-hospital-bed-occupancy-rate`、納豆 `natto-consumption-expenditure` / `natto-consumption-east-west-divide`、ソフトウェア技術者 `software-engineer-salary-prefecture-gap` / `software-engineer-income-gap`、小麦粉 `wheat-flour-consumption-prefecture` / `wheat-flour-consumption-food-culture-gap`、空き家と地価 `vacant-housing-rate-vs-standard-price-change-rate-commercial` / `vacant-housing-vs-land-price`、県民所得 `prefectural-income-gdp-ranking` / `per-capita-income-gap` (指標が違う可能性)。切り口が違うので残す候補: `fertility-fiscal-nexus` / `udon-soba-food-culture-prefecture-map` / `inpatient-rate-aging-burden` / `minimum-wage-1000yen-prefecture` と `minimum-wage-increase-rate-prefecture-gap` / `tuna-consumption-medical-expense-correlation` / `vacant-housing-aging-correlation` / `black-tea-income-gap`。この数値照合は丸めが違う組を取りこぼす。
+- **済み (2026-11-14・`644802821`)**: 食文化マップ (`udon-soba-food-culture-prefecture-map`) をオーナー決定どおり差別化した (題「近畿は家、関東は外食｜生うどん・そばの地図」、家庭の購入量と外食の支出の 2 枚の地図)。姉妹記事 `fresh-udon-soba-consumption-prefecture-gap` の旧題の紹介も直した。2 本とも critic PASS で送り箱。候補 20 組の判断表を作った。
+- **オーナー決定 (2026-11-14)**: 推奨の統合 9 組を進めてよい。
+- **次 (統合 9 組。残す ← まとめる)**: 出生率 `fertility-rate-prefecture-gap` ← `total-fertility-rate` (移す: 東京0.99 の節・期間合計特殊出生率の注記・九州の上位の内訳。出典の無い因果の断定は移さない) / 牛肉 `beef-consumption-quantity` ← `beef-consumption-prefecture-gap` (地図) / テレワーク `telework-rate-tokyo-gap` ← `telework-gap-tokyo-6x` / 病床利用率 `hospital-bed-utilization-map` ← `general-hospital-bed-occupancy-rate` (「経営難」の節は出典を確かめてから) / 入院率 `inpatient-rate-prefecture-gap` ← `inpatient-rate-aging-burden` (高齢化の節) / 納豆 `natto-consumption-east-west-divide` ← `natto-consumption-expenditure` (時系列) / ソフトウェア技術者 `software-engineer-salary-prefecture-gap` ← `software-engineer-income-gap` (全国推移) / 空き家と地価 `vacant-housing-vs-land-price` ← `vacant-housing-rate-vs-standard-price-change-rate-commercial` / 小麦粉 `wheat-flour-consumption-prefecture` ← `wheat-flour-consumption-food-culture-gap` (香川と下位の節)。
+- **手順 (1 組ずつ・この順を入れ替えない)**: ① 残す記事へ、まとめる側にしか無い節を移し、quality-gate と critic を通して送り箱から公開する ② 公開を確かめてから `apps/web/src/config/blog-redirects.ts` に `"<まとめる側>": "<残す>"` を足す ③ 本番で `curl -sI https://stats47.jp/blog/<まとめる側>` が 301 と残す URL を返すことを確かめる。
+- **差別化 4 組 (記事を直す)**: 紅茶 `black-tea-expenditure-ranking` / `black-tea-income-gap` (順位の節を短くして切り口に寄せる)、`engineer-telework-prefecture` (エンジニア向けの切り口に寄せる)、最低賃金 2 本 (2024 年度のままなので最新年度へ取り直す)。残す 6 組は判断表のとおり。
 - **停止条件**: 主題が同じでも切り口が違う記事 (相関・地域別・県別シリーズ) はまとめない。301 は 1 組ずつ本番で確かめる。
-- **完了条件**: 重複の組の一覧と、それぞれの処置 (301・残す理由) が記録され、301 が本番で効いている。
+- **完了条件**: 統合 9 組がすべて 301 で本番に効き、差別化 4 組が直って公開され、残す組の理由がこのカードに記録されている。
 
 ### [NOTE-FREE-DEFAULT-01] note の雑学・ランキングの有料記事を無料に戻し、送客の変化を前後で測る
 タグ: [収益化] [種類:改善] [実行:ユーザー] [起票:2026-10-07] [領域:商品]
@@ -2657,6 +2656,7 @@ updated: 2026-11-01
 - **状態**: `cc-estat-18-cache-r2`・`cc-estat-19-skill-pipeline` は Pages → Workers (OpenNext)、`wrangler r2 object put/get` の `--remote`、`preview_bucket_name` と `remote = true` の注意、トークン例の D1 権限の削除などを直し、critic PASS で 2026-10-24 に公開・デプロイした (blog-auto-publish run 40038952462・PR #1174)。2026-11-03 に本番の 2 記事で「Cloudflare Pages」は 0 件。**未確認**: wrangler 4.148.0 の挙動と purge API は公式で未照合、載せたワークフローは通しで実行していない。
 - **残り**: 最終回 `cc-estat-20` のタグが `CloudflarePages` のまま。`CloudflareWorkers` に替えるには `apps/web/src/config/known-tag-keys.ts` の再生成を同じ変更に入れる (未登録のタグは 410 になる)。cc-estat-20 に次回予告などの食い違いが残っていないかも確認する。
 - **完了条件**: 2 本の本文に Pages 前提の記述が残っておらず、critic PASS で再公開されている。
+- **済み (2026-11-14・`80312b214`)**: cc-estat-20 のタグを CloudflareWorkers に替えてタグ台帳に登録し、本文の食い違い 3 か所と、critic の BLOCK (デプロイ用の secret の名前の衝突) を直した。critic PASS で送り箱。公式文書で照合済み (2026-11-14): wrangler 4 の r2 object は既定でローカルで、本番には `--remote` が要る (https://developers.cloudflare.com/workers/wrangler/migration/update-v3-to-v4/)。パージは `POST /zones/{zone_id}/purge_cache` に `files[]`、トークンに Cache Purge 権限 (https://developers.cloudflare.com/cache/how-to/purge-cache/)。ただし https://developers.cloudflare.com/r2/local-development/ は「--local なしなら remote」と読め、文書どうしが食い違う。残りは、公開後に本番の /blog/cc-estat-20-publish に「Cloudflare Pages」が 0 件で、/tag/CloudflareWorkers が 200 を返すことの確認。
 
 ### [GSC-COVERAGE-DEPLOY-01] カバレッジ是正後の再クロールと残存ソフト404を確認する
 
@@ -2970,18 +2970,12 @@ updated: 2026-11-01
   - **完了条件**: 補足文・注記・出典がカードに入り、補足と注記が 1 か所にまとまっている / 関連リストが 2 つ以下 / `DataUsageCard` が
 
 ### [CHART-AXIS-READABILITY-01] グラフの軸・凡例・ラベルがスマホで読めない、欠ける、単位が無い
-タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-09-25] [領域:サイト]
+タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-09-25] [領域:サイト] [待ち:判断]
 
-- **済み (2026-11-14・e38031f9f)**: 折れ線・積み上げ面・複合グラフ・市区町村ランキングのヒストグラム・サンキー図・カード内のミニチャートは、表示幅を測って文字サイズを逆算する仕組み (`useReadableFontSize`・`fitCategoryAxis`) で、幅 375・390・1280 のどれでも SVG の文字が画面上で 10px 以上になり、縦軸の頭に単位が出る。規約は `.claude/rules/chart-component-standards.md` の「文字の大きさ」に書いた。ブログの折れ線の 0 始まりは、コミット 25be2d4d9 で `genLineChartSvg` が消え、型がデータの範囲から軸を決めるので対応は要らない。`/themes/real-income` の縦軸も 0 始まりではない。
-- **残り**:
-  - `HorizontalDivergingBarChart` (`/areas/13000/consumer-prices` の 375px で文字が 5.9px) に `useReadableFontSize` を入れ、行の高さと左右の余白を文字サイズから決め直す。
-  - `CategoryHeatmap` (同じページで 3.9px。13 列 × 12 行のセルに値を書いている) は、表示幅 293px ではセルの幅が約 22px で 10px の「103.6」が入らない。狭い幅ではセルの値を出さずツールチップに任せる形へ直す。
-  - `BarChart`・`ColumnChart`・`DivergingBarChart`・`PyramidChart`・`RadarChart`・`BoxplotChart` を使うページを 375px で測り、10px 未満のものへ同じ仕組みを入れる。
-  - ビール記事 (`/blog/beer-peak-month-july-to-december`) の 3 図は旧形式 (viewBox 680×420・文字 8.5) のまま R2 にある。型で描き直す。
-  - 描き直しの後に、R2 の SVG の `svg-title` が汎用語でなく指標名になっていることを確かめる (Kindle の `figure-corrections.ts` のエントリを消す合図)。
-- **残り (承認)**: ブログの図の描き直しと R2 への反映は、オーナーの承認を得てから行う。
-- **残り (判断)**: 新しい型 (1080×1350) で描いた地方債記事の図は、文字が 13.9〜26 (タイル地図の県名が 13.9〜18、棒グラフのラベルが 26) で、スマホの本文の幅では 10px 未満になる計算である (本文の幅は未測定)。選択肢は (A) 型の文字サイズの下限を上げて全記事を描き直す、(B) ブログの図はタップで拡大して読む前提にして型は変えない、(C) スマホ向けに文字の大きい別の型を作って出し分ける。推奨は (A) で、根拠は、静的な SVG は表示幅に合わせて文字を変えられないことと、型を 1 つに保てば 4 媒体で同じ図を使う今の作りを崩さないこと。ただしタイル地図は 47 県の名前を 1 枚に入れるので、(A) では県名を略すか値だけにする設計が要る。
-- **完了条件**: 上の D3 の図が 375px で 10px 以上になり縦軸に単位がある。ブログの 2 記事の図が、本文の幅 (390px の画面) で文字 10px 以上、凡例の重なり・散布図の県名なし・淡色のタイルに白文字が無い。
+- **済み (2026-11-14・`db9c7ae94`)**: オーナー決定 (2026-11-14、画像は 1 つの型を 4 媒体で共通に使い、その共通化を保つ) に従い、型の文字の下限を 30 にした (正本 `chart-theme.ts` の `TEMPLATE_MIN_FONT_SIZE`、検査 `svg-lint.mjs` の `findTemplateFontFloorDefects`、規約 `chart-image-copy.md`)。タイル地図は県名を頭 2 文字にした。`HorizontalDivergingBarChart` と `CategoryHeatmap` に `useReadableFontSize` を入れ、物価ページの 375px で 5.9px・3.9px → 11.1px。ビールと地方債の記事の図を描き直し、critic PASS で送り箱に置いた。
+- **残り (判断)**: 本番のブログの図の幅は 375px の画面で 325px、390px で 340px で、想定した 360px より狭く、型の 30 は画面上 9.0〜9.4px になる。10px にするには、(A) 下限を 32〜34 に上げる (1 列のタイルに 2 文字が入らなくなる)、(B) スマホでは図を本文の左右の余白まで広げる (型は変えない)、のどちらかをオーナーが決める。
+- **残り**: chord (23)・treemap (18〜22)・ファイル見本 (22・26)・構成比のヒートマップ (24〜28) の型を下限まで上げる。ほかの記事の図を新しい型で描き直して再公開する。R2 private の型の見本画像の作り直し (R2 への書き込み)。`BarChart`・`ColumnChart`・`DivergingBarChart`・`PyramidChart`・`RadarChart`・`BoxplotChart` を使うページを特定し、375px で 10px 以上・縦軸に単位があるかを測る (測った 6 ページには無かった)。描き直しの後に R2 の SVG の `svg-title` が指標名になっているかを確かめる (Kindle の `figure-corrections.ts` のエントリを消す合図)。図を型で描き直しても、data の `chartType` (月別のビールの図は "line" のまま) と source.json の `unit` が書き戻されず、台帳と図が食い違う。
+- **完了条件**: 390px の画面でブログの 2 記事の図の文字が 10px 以上。上の 4 つの型の文字が下限以上。D3 の残りの部品を使うページが 375px で 10px 以上・縦軸に単位がある。
 
 ### [UNIT-NOTATION-FORMAT-01] 単位と数値の表記がページごとに不揃い
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-09-25] [領域:サイト]
@@ -2993,6 +2987,7 @@ updated: 2026-11-01
 - **残り (判断)**: 指標の定義の `seoTitle`・`seoDescription` は 322 指標が「1位北海道（46％）」と全角で書いていて、検索結果とタブの題に出る。選択肢は、(a) そのままにする、(b) `generate-meta-data.ts` で表示時に半角へそろえる (1 行。322 ページの題が 1 回変わり、週次の `title_changed` が出る)、(c) 定義を書き換えて R2 の item.json を更新する。推奨は (b) で、根拠は原稿と R2 を書き換えないこれまでの方針と同じ形で済み、画面の表記と題がそろうこと。検索結果に出る文字が変わるので、題の効果を測っている施策があればその判定の後にする。
 - **残り (判断)**: 指標の題「可住地面積１km2当たり人口密度」「総面積1km2当たり」は全角の数字と上付きでない指数のまま、関連ランキング・相関の表・一覧に出る。題は検索の入口でもあるので、定義 (`data/metrics/*.ts` の title) を「1km²当たり」に直すか、表示時だけ直すかを決める。推奨は定義を直すことで、根拠は題を描く場所が多く表示時の整形では漏れが出ること。
 - **完了条件**: 週次 page-quality の %/％ 混在が 0 ページ。テーマのページの代表 (`/themes/local-economy`・`/areas/13000/economy`・`/areas/01000/tourism`) で 7 桁以上の値が画面に出ない。値の換算は表示だけで、配信値は変えない。
+- **観測 (2026-11-14)**: 県のページの「1人当たり県民所得の推移」で、縦軸の頭が「千円」なのに目盛りも「5.8千」と書き、単位が二重になっている (`/areas/13000`)。
 
 ### [SURVEY-PAGES-01] 統計調査のページで、調査と関係のない指標が並び、最新年が誤って見える
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-09-25] [領域:データ]
@@ -3019,23 +3014,6 @@ updated: 2026-11-01
   - **Phase 6**: `fetch-ga4-bigquery.mjs` で週次集計 (journeys / search-terms / unregistered-params / session-depth)。`analytics_463218070.events_*` が出来ていることを確かめてから作る。課金の有無を確認し、クエリに `maximumBytesBilled`。
   - 別件 (オーナー判断): `kakkom@stats47` がプロジェクトのオーナー権限と鍵を持つ (未使用なら鍵を削除するか)。
 - **完了条件**: `npm run google-admin:audit-api` で Phase 4 の全件が confirmed-registered、key events 4 件、BigQuery link 1 件、拡張計測の二重 page_view 警告なし。次の日曜 snapshot に Phase 5・6 の新ファイルが出る。
-
-### [AREA-DATABOOK-CHART-FIX-01] 県データブックの「推移」グラフの点数不足と、スマホで読めない文字・単位なしの軸を直す
-
-タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-09-25] [領域:サイト]
-
-- **背景 (2026-09-25 `/areas/13000` 実測)**: 「有効求人倍率の推移」は 2022年度の 1 点、「1人当たり県民所得の推移」は
-  2020〜2021年度の 2 点だけで推移として機能していない (e-Stat をその場で読むグラフ。台帳 `areas.databook-template` の
-  `area-ov-job-opening` / `area-ov-prefectural-income`、原因は未確認)。390px では高さ 9px 未満のグラフ文字が 80 個あり、
-  「高齢化率・年少人口割合の推移」「高齢者世帯の推移」の縦軸に単位が無い。縦軸目盛りの切れは `UI-CHART-TEXT-LOOP-01` の担当。
-- **次**: ① 点数不足の原因 (statsDataId の年範囲・取得パラメータ・キャッシュ) を実測で特定し、年を揃えた系列に直すか、
-  推移グラフをやめて数値カードにする。② 狭い画面での文字サイズの下限と軸単位の表示を、共通チャート部品側で直す
-  (`chart-component-builder`)。③ 「推移」グラフの最低点数の検査は `SITE-DISPLAY-SEMANTICS-AUDIT-01` に含める。
-  **② は `UI-CHART-TEXT-LOOP-01` の D3 部品の修正 (文字を描画範囲に収める共通処理。14 部品分の途中成果がブランチ `wip/ui-chart-text-loop-01` にある) と
-  同じファイル群を触る。** 先に同カードの WIP ブランチを取り込み、その上で文字サイズの下限と軸単位を足す。
-- **完了条件**: 県データブックの推移グラフがすべて 3 点以上、390px でグラフ文字が 10px 以上、縦軸に単位がある。
-- **全面点検の指摘 (UI 全面点検 (2026-09-25・本番 44 URL × 7 幅 = 308 枚を撮影、250 枚を目視。`UI-FULL-SWEEP-01`))**: 有効求人倍率の推移が 2022 年度の 1 点だけで大きな枠を占める / 1 人当たり県民所得が 2 点だけ /
-  軸の文字が 5〜6px / 右端の年ラベルが切れる / 縦軸に単位が無い。縦軸の先頭の桁が欠ける不具合は `CHART-YAXIS-LABEL-CLIP-01` (🔴) で先に直す。
 
 ### [AREA-PAGE-LAYOUT-01] 県ページの長さと節構成を整理し、内部用語と表記揺れを除く
 
@@ -3523,13 +3501,9 @@ updated: 2026-11-01
 ### [YEARS-DOWNSTREAM-FOLLOW-01] 指標の年が増えたあと、AI 解説・ブログ・計算型 metric・年固定の比較カードが古い年のまま残るのを直す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-07] [領域:サイト]
 
-- **背景**: years を台帳から合わせる (`ESTAT-YEAR-AVAILABILITY-01`) と最新年が変わる指標が出る。ランキング・テーマの推移図・指標カード・データブック・市区町村ランキングは毎月の `data-refresh.yml` で追従するが、① ランキングの AI 解説 ② ブログの本文・図 ③ 計算型 metric の `item.latestYear` ④ テーマの年固定の比較カード (`comparisonYear`) は追従しなかった。
-- **済み (2026-10-07・#1095 / #1096 / #1097、マージ済み `ced09d767` / `d781bf064` / `c541e9447`)**: ① キューが解説の yearCode と最新年を比べ `needs-regen` (reason `stale-year`) に戻す ③ `calculated-stats` を `ranking-items` の前へ移した ② blog snapshot に `rankingRefs` と逆引き `rankingArticleIndex` を焼き、図の年が古い記事を `data/blog/stale-data-years.{json,md}` に日次で出し、`refresh-article-data-years.mjs` で `kind: ranking` の図を最新年で作り直す。是正キューに `data-refresh` レーン、brushup の focus `最新データ更新`。意図して古い年を描いた図は source.json の `yearPinnedReason` で外す ④ `comparisonYear` を起点の年とし、全指標に値がそろう最新年へ実行時に進める。
-- **次**:
-  ① sync-snapshots の blog task 後に `stale-data-years.md` の件数・キューの `data-refresh` 件数・ランキングの関連記事を確かめる (2026-10-30 の `stale-data-years.md` は 27 件)。
-  ② data-refresh レーンを `/brushup-blog --target queue` (focus `最新データ更新`) で消化する。一覧は `data/blog/stale-data-years.md`。2026-10-07 の振り分けで自動で取り直さない例外: `healthy-life-expectancy-male-female-gap` の `healthy-life-expectancy-female-prefecture-rankings` は alt (男女の散布図) と中身 (男性の棒グラフ) が違うので図を作り直す。`physical-therapist-annual-income-prefecture-gap` は 2023 年に順位が大きく入れ替わり結論から書き直す。`dairy-cattle-count`・`it-industry-concentration` はタイトルも年を含む。手順解説 (cc-estat・ai-claude-code) は本文に引用した AI の出力例の数値も直す。
-  ③ 年が 1 年だけのカードを推移へ戻すかは `THEME-SINGLE-YEAR-CARDS-01` で扱う。
-- **完了条件**: 新しい年が R2 に入った翌週に、AI 解説が新しい年で作り直しの対象になり、古い年のブログ記事が一覧と是正キューの data-refresh レーンに出て、計算型のランキングが 1 回の data-refresh で新しい年を表示し、テーマの比較カードが新しい年を描く。
+- **済み (2026-11-14・`c110c707a`・`d0f6a692b`・`23309bd7a`)**: 古い年のままの記事 8 本 (米の消費量・製造品出荷額・ペットフード・エアコン・ティッシュ・消費支出・パンと米・かき) を最新年へ取り直し、critic PASS で送り箱に置いた。家計調査の品目は 2025 年に首位が入れ替わる記事が多く、8 本中 6 本は題と結論から書き直した。2026-11-13 の一覧 (`data/blog/stale-data-years.md`) は図の年が古い記事 158 件、是正キューの data-refresh の pending は 277 件。
+- **残り**: (a) `chicken-consumption-quantity` は「宮崎は最多になった年が無い」に期間を足して再審査する (実際は 2011 年に 1 位)。(b) `food-trio-prefecture-map` は 2025 年に前提が崩れた (豆腐の 1 位は富山、宮城の焼酎は 40 位) ので結論から書き直す。(c) `automotive-industry-transformation-map` (表示 14,289) の推移図を 2024 年まで手で延ばす。(d) refresh の対象外の図 (derived・estat・authored) を持つ記事約 7 本 (manufacturing-aichi-dominance・manufacturing-productivity・pharma-medical-device-production-map・welfare-expenses-squeeze・prefectural-debt-future-burden・library-museum-cultural-capital・local-tax-regional-gap) は図を手で取り直す。(e) 一覧の残り約 150 本を 15〜20 本ずつ処理する (1 本あたり critic 2 回)。(f) 例外 5 種 (healthy-life-expectancy-male-female-gap・physical-therapist-annual-income-prefecture-gap・dairy-cattle-count・it-industry-concentration・手順解説)。(g) `per-capita-income-gap` は 2020 年のデータで、quality-gate が止める「## データ出典」節を持ったまま公開されている。最低賃金の 2 本は 2024 年度のまま (BLOG-DUPLICATE-AUDIT-01 の差別化と同時に直す)。③ の年が 1 年だけのカードは `THEME-SINGLE-YEAR-CARDS-01` で扱う。
+- **完了条件**: 新しい年が R2 に入った翌週に、AI 解説が作り直しの対象になり、古い年の記事が一覧とキューに出て、計算型のランキングとテーマの比較カードが新しい年を描く。加えて、一覧の件数が週次で減っていく。
 
 ### [THEME-SINGLE-YEAR-CARDS-01] 1 年分しかない指標のカード 287 枚を、年の拡張か年固定の比較カードへ振り分ける
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npx vitest run packages/data-configs/src/theme-catalog/__tests__/selection-viewpoints.test.ts] [起票:2026-10-07] [領域:データ]
