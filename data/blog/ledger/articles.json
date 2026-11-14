@@ -292,10 +292,10 @@
     },
     {
       "slug": "air-conditioner-consumption-quantity-prefecture-gap",
-      "title": "エアコン購入、香川がなぜ全国1位なのか",
+      "title": "エアコン購入、前年1位の香川がなぜ43位?",
       "status": "published",
       "publishedAt": "2026-08-30",
-      "updatedAt": null,
+      "updatedAt": "2026-11-14",
       "rankingKeys": [
         "air-conditioner-consumption-quantity"
       ],
@@ -1258,10 +1258,10 @@
     },
     {
       "slug": "bread-vs-rice-expenditure",
-      "title": "パン王国と米どころ、なぜ真逆?",
+      "title": "米の支出が2年で2倍、パンを逆転",
       "status": "published",
       "publishedAt": "2026-07-10",
-      "updatedAt": "2026-07-10",
+      "updatedAt": "2026-11-14",
       "rankingKeys": [
         "bread-consumption-expenditure",
         "rice-consumption-expenditure",
@@ -1887,14 +1887,14 @@
       "title": "Claude Code で作った47都道府県チャートを公開｜Next.js × Cloudflare 連載最終回",
       "status": "published",
       "publishedAt": "2026-05-17",
-      "updatedAt": "2026-10-07",
+      "updatedAt": "2026-11-14",
       "rankingKeys": [
         "total-population"
       ],
       "tagIds": [
         "tag:t-a8cd52d0d273",
         "tag:t-b92faeeb4911",
-        "tag:t-2f9af583a9f5",
+        "tag:t-c06b1b297335",
         "tag:t-52b617d5f464",
         "tag:t-6bc4718fbb15"
       ],
@@ -4734,7 +4734,7 @@
       "title": "香川は沖縄の2.9倍、生うどん・そばを買う｜本当に西高東低なのか?",
       "status": "published",
       "publishedAt": "2026-05-17",
-      "updatedAt": "2026-11-09",
+      "updatedAt": "2026-11-14",
       "rankingKeys": [
         "chinese-noodles-consumption-quantity",
         "dried-udon-soba-consumption-quantity",
@@ -5984,10 +5984,10 @@
     },
     {
       "slug": "household-consumption-expenditure-ranking",
-      "title": "生活費が高い県は埼玉・最下位は沖縄｜差はたった1.4倍の理由",
+      "title": "生活費の県差は1.5倍、沖縄は19年最下位圏",
       "status": "published",
       "publishedAt": "2026-07-09",
-      "updatedAt": "2026-07-10",
+      "updatedAt": "2026-11-14",
       "rankingKeys": [
         "consumption-expenditure-total",
         "engel-coefficient",
@@ -8385,10 +8385,10 @@
     },
     {
       "slug": "manufacturing-shipment-prefecture-ranking",
-      "title": "製造品出荷額は愛知58兆円が別格──なぜ太平洋ベルトに集中するのか",
+      "title": "製造品出荷額は愛知59兆円が別格──なぜ太平洋ベルトに集中するのか",
       "status": "published",
       "publishedAt": "2026-06-07",
-      "updatedAt": "2026-06-14",
+      "updatedAt": "2026-11-14",
       "rankingKeys": [
         "manufacturing-shipment-amount",
         "manufacturing-shipment-amount-per-employee"
@@ -10093,10 +10093,10 @@
     },
     {
       "slug": "oyster-consumption-prefecture-gap",
-      "title": "牡蠣を一番食べる県は広島、なぜ海なし滋賀が僅差で追う?｜47都道府県2024",
+      "title": "牡蠣の首位、広島vs奈良が入れ替わった2025年",
       "status": "published",
       "publishedAt": "2026-05-31",
-      "updatedAt": "2026-06-04",
+      "updatedAt": "2026-11-14",
       "rankingKeys": [
         "oyster-consumption-quantity"
       ],
@@ -10425,10 +10425,10 @@
     },
     {
       "slug": "pet-food-consumption-expenditure-prefecture-gap",
-      "title": "ペットフード代が福島と沖縄で3.7倍違う理由",
+      "title": "ペットフード代、首位はなぜ入れ替わる?",
       "status": "published",
       "publishedAt": "2026-08-30",
-      "updatedAt": null,
+      "updatedAt": "2026-11-14",
       "rankingKeys": [
         "pet-food-consumption-expenditure"
       ],
@@ -11549,7 +11549,7 @@
       "title": "米どころ新潟、消費トップに届かず",
       "status": "published",
       "publishedAt": "2026-07-10",
-      "updatedAt": "2026-07-10",
+      "updatedAt": "2026-11-14",
       "rankingKeys": [
         "bread-consumption-expenditure",
         "rice-consumption-expenditure",
@@ -13299,10 +13299,10 @@
     },
     {
       "slug": "tissue-paper-consumption-expenditure-prefecture-gap",
-      "title": "ティッシュ消費額、なぜ東北が上位を占めるのか",
+      "title": "ティッシュ代、東北vs近畿で19年続く差",
       "status": "published",
       "publishedAt": "2026-08-29",
-      "updatedAt": null,
+      "updatedAt": "2026-11-14",
       "rankingKeys": [
         "tissue-paper-consumption-expenditure"
       ],
@@ -14043,14 +14043,14 @@
     },
     {
       "slug": "udon-soba-food-culture-prefecture-map",
-      "title": "香川の半分以下、福岡の生うどん・そば購入量｜「外食で補う」説は当てはまるか",
+      "title": "近畿は家、関東は外食｜生うどん・そばの地図",
       "status": "published",
       "publishedAt": "2026-06-07",
-      "updatedAt": "2026-11-09",
+      "updatedAt": "2026-11-14",
       "rankingKeys": [
+        "dried-udon-soba-consumption-quantity",
         "fresh-udon-soba-consumption-quantity",
-        "soba-udon-dining-consumption-expenditure",
-        "wheat-flour-consumption-quantity"
+        "soba-udon-dining-consumption-expenditure"
       ],
       "tagIds": [
         "tag:t-3808ac45a1de",
