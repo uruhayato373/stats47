@@ -103,6 +103,7 @@ export async function ThemePageLayout({
   const pageCharts = await loadPageComponents('theme', theme.themeKey);
   // 県の値と順位は説明文 (meta description・構造化データ) にだけ使う。本文は下の指標カードの 1 か所で見せる
   // (2026-10-30。旧: 本文にも「主なデータ」の節を別に描き、同じ値が名前・丸め・順位なしで 2 回出ていた)
+  // 見出しの直下に主指標の値を並べる「要点のタイル」も同じ理由で置かない (2026-11-14 オーナー決定)
   const areaHighlights = areaContext
     ? getAreaThemeHighlights(data, areaContext.areaCode, theme.tabIndicators)
     : [];

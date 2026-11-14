@@ -22037,6 +22037,565 @@
         "gsc.impressions": "measured",
         "ga4.engagementRatePvWeighted": "measured"
       }
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "gsc.avgPosition"
+      ],
+      "baselinePeriod": {
+        "from": "2026-09-11",
+        "to": "2026-11-05"
+      },
+      "startedAt": "2026-11-12",
+      "evaluateAt": {
+        "d7": "2026-11-19",
+        "d28": "2026-12-10",
+        "d56": "2027-01-07"
+      },
+      "result": null,
+      "notes": "基準は portfolio.json の metricsAllRoutes (非重複の 28 日 2 本 W41+W45)。公開日は本番デプロイ (deploy-workers の e3ac001a7・2026-11-12 21:54 JST)。同時変更: THEME-PAGE-REVIEW-01 の共通の UI の変更 (値の単位・値の無いタイル・表・県間移動の表) が d28 までの間に本番へ出る見込みで、題の効果と切り分けられない。d28・d56 の判定ではこれを制約として併記し、因果の効果と断定しない。",
+      "evidenceRefs": [
+        "data/themes/portfolio.json#manufacturing/metricsAllRoutes",
+        "data/gsc/snapshots/2026-W41/pages.csv",
+        "data/gsc/snapshots/2026-W45/pages.csv"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-COPY-20261112-manufacturing",
+      "themeKey": "manufacturing",
+      "changeType": "copy",
+      "metricScope": "all-routes",
+      "hypothesis": "2026-11-12 に題・説明文・FAQ を検索語に合わせて全テーマ共通の仕組みへ統一した (THEME-SEO-UNIFY-01)。表示が多いのにクリック率がテーマの中央値 2.33% (2026-10-09〜11-05 の 28 日・全ルート) を下回っていたこのテーマで、全ルート込み (全国版 + 県別 + 市区町村別) の検索からのクリックが増えるかを確かめる。",
+      "primaryKpi": "gsc.clicks",
+      "baseline": {
+        "gsc.clicks": 81,
+        "gsc.impressions": 5194,
+        "gsc.avgPosition": 8.33
+      },
+      "baselineScopes": {
+        "gsc": "search-console"
+      },
+      "baselineStatuses": {
+        "gsc.clicks": "measured",
+        "gsc.impressions": "measured",
+        "gsc.avgPosition": "measured"
+      }
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "gsc.avgPosition"
+      ],
+      "baselinePeriod": {
+        "from": "2026-09-11",
+        "to": "2026-11-05"
+      },
+      "startedAt": "2026-11-12",
+      "evaluateAt": {
+        "d7": "2026-11-19",
+        "d28": "2026-12-10",
+        "d56": "2027-01-07"
+      },
+      "result": null,
+      "notes": "基準は portfolio.json の metricsAllRoutes (非重複の 28 日 2 本 W41+W45)。公開日は本番デプロイ (deploy-workers の e3ac001a7・2026-11-12 21:54 JST)。同時変更: THEME-PAGE-REVIEW-01 の共通の UI の変更 (値の単位・値の無いタイル・表・県間移動の表) が d28 までの間に本番へ出る見込みで、題の効果と切り分けられない。d28・d56 の判定ではこれを制約として併記し、因果の効果と断定しない。",
+      "evidenceRefs": [
+        "data/themes/portfolio.json#population-dynamics/metricsAllRoutes",
+        "data/gsc/snapshots/2026-W41/pages.csv",
+        "data/gsc/snapshots/2026-W45/pages.csv"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-COPY-20261112-population-dynamics",
+      "themeKey": "population-dynamics",
+      "changeType": "copy",
+      "metricScope": "all-routes",
+      "hypothesis": "2026-11-12 に題・説明文・FAQ を検索語に合わせて全テーマ共通の仕組みへ統一した (THEME-SEO-UNIFY-01)。表示が多いのにクリック率がテーマの中央値 2.33% (2026-10-09〜11-05 の 28 日・全ルート) を下回っていたこのテーマで、全ルート込み (全国版 + 県別 + 市区町村別) の検索からのクリックが増えるかを確かめる。",
+      "primaryKpi": "gsc.clicks",
+      "baseline": {
+        "gsc.clicks": 77,
+        "gsc.impressions": 4410,
+        "gsc.avgPosition": 8.7
+      },
+      "baselineScopes": {
+        "gsc": "search-console"
+      },
+      "baselineStatuses": {
+        "gsc.clicks": "measured",
+        "gsc.impressions": "measured",
+        "gsc.avgPosition": "measured"
+      }
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "gsc.avgPosition"
+      ],
+      "baselinePeriod": {
+        "from": "2026-09-11",
+        "to": "2026-11-05"
+      },
+      "startedAt": "2026-11-12",
+      "evaluateAt": {
+        "d7": "2026-11-19",
+        "d28": "2026-12-10",
+        "d56": "2027-01-07"
+      },
+      "result": null,
+      "notes": "基準は portfolio.json の metricsAllRoutes (非重複の 28 日 2 本 W41+W45)。公開日は本番デプロイ (deploy-workers の e3ac001a7・2026-11-12 21:54 JST)。同時変更: THEME-PAGE-REVIEW-01 の共通の UI の変更 (値の単位・値の無いタイル・表・県間移動の表) が d28 までの間に本番へ出る見込みで、題の効果と切り分けられない。d28・d56 の判定ではこれを制約として併記し、因果の効果と断定しない。",
+      "evidenceRefs": [
+        "data/themes/portfolio.json#aging-society/metricsAllRoutes",
+        "data/gsc/snapshots/2026-W41/pages.csv",
+        "data/gsc/snapshots/2026-W45/pages.csv"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-COPY-20261112-aging-society",
+      "themeKey": "aging-society",
+      "changeType": "copy",
+      "metricScope": "all-routes",
+      "hypothesis": "2026-11-12 に題・説明文・FAQ を検索語に合わせて全テーマ共通の仕組みへ統一した (THEME-SEO-UNIFY-01)。表示が多いのにクリック率がテーマの中央値 2.33% (2026-10-09〜11-05 の 28 日・全ルート) を下回っていたこのテーマで、全ルート込み (全国版 + 県別 + 市区町村別) の検索からのクリックが増えるかを確かめる。",
+      "primaryKpi": "gsc.clicks",
+      "baseline": {
+        "gsc.clicks": 50,
+        "gsc.impressions": 4529,
+        "gsc.avgPosition": 8.15
+      },
+      "baselineScopes": {
+        "gsc": "search-console"
+      },
+      "baselineStatuses": {
+        "gsc.clicks": "measured",
+        "gsc.impressions": "measured",
+        "gsc.avgPosition": "measured"
+      }
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "gsc.avgPosition"
+      ],
+      "baselinePeriod": {
+        "from": "2026-09-11",
+        "to": "2026-11-05"
+      },
+      "startedAt": "2026-11-12",
+      "evaluateAt": {
+        "d7": "2026-11-19",
+        "d28": "2026-12-10",
+        "d56": "2027-01-07"
+      },
+      "result": null,
+      "notes": "基準は portfolio.json の metricsAllRoutes (非重複の 28 日 2 本 W41+W45)。公開日は本番デプロイ (deploy-workers の e3ac001a7・2026-11-12 21:54 JST)。同時変更: THEME-PAGE-REVIEW-01 の共通の UI の変更 (値の単位・値の無いタイル・表・県間移動の表) が d28 までの間に本番へ出る見込みで、題の効果と切り分けられない。d28・d56 の判定ではこれを制約として併記し、因果の効果と断定しない。",
+      "evidenceRefs": [
+        "data/themes/portfolio.json#agriculture-production/metricsAllRoutes",
+        "data/gsc/snapshots/2026-W41/pages.csv",
+        "data/gsc/snapshots/2026-W45/pages.csv"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-COPY-20261112-agriculture-production",
+      "themeKey": "agriculture-production",
+      "changeType": "copy",
+      "metricScope": "all-routes",
+      "hypothesis": "2026-11-12 に題・説明文・FAQ を検索語に合わせて全テーマ共通の仕組みへ統一した (THEME-SEO-UNIFY-01)。表示が多いのにクリック率がテーマの中央値 2.33% (2026-10-09〜11-05 の 28 日・全ルート) を下回っていたこのテーマで、全ルート込み (全国版 + 県別 + 市区町村別) の検索からのクリックが増えるかを確かめる。",
+      "primaryKpi": "gsc.clicks",
+      "baseline": {
+        "gsc.clicks": 55,
+        "gsc.impressions": 3455,
+        "gsc.avgPosition": 8.87
+      },
+      "baselineScopes": {
+        "gsc": "search-console"
+      },
+      "baselineStatuses": {
+        "gsc.clicks": "measured",
+        "gsc.impressions": "measured",
+        "gsc.avgPosition": "measured"
+      }
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "gsc.avgPosition"
+      ],
+      "baselinePeriod": {
+        "from": "2026-09-11",
+        "to": "2026-11-05"
+      },
+      "startedAt": "2026-11-12",
+      "evaluateAt": {
+        "d7": "2026-11-19",
+        "d28": "2026-12-10",
+        "d56": "2027-01-07"
+      },
+      "result": null,
+      "notes": "基準は portfolio.json の metricsAllRoutes (非重複の 28 日 2 本 W41+W45)。公開日は本番デプロイ (deploy-workers の e3ac001a7・2026-11-12 21:54 JST)。同時変更: THEME-PAGE-REVIEW-01 の共通の UI の変更 (値の単位・値の無いタイル・表・県間移動の表) が d28 までの間に本番へ出る見込みで、題の効果と切り分けられない。d28・d56 の判定ではこれを制約として併記し、因果の効果と断定しない。",
+      "evidenceRefs": [
+        "data/themes/portfolio.json#consumer-prices/metricsAllRoutes",
+        "data/gsc/snapshots/2026-W41/pages.csv",
+        "data/gsc/snapshots/2026-W45/pages.csv"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-COPY-20261112-consumer-prices",
+      "themeKey": "consumer-prices",
+      "changeType": "copy",
+      "metricScope": "all-routes",
+      "hypothesis": "2026-11-12 に題・説明文・FAQ を検索語に合わせて全テーマ共通の仕組みへ統一した (THEME-SEO-UNIFY-01)。表示が多いのにクリック率がテーマの中央値 2.33% (2026-10-09〜11-05 の 28 日・全ルート) を下回っていたこのテーマで、全ルート込み (全国版 + 県別 + 市区町村別) の検索からのクリックが増えるかを確かめる。",
+      "primaryKpi": "gsc.clicks",
+      "baseline": {
+        "gsc.clicks": 29,
+        "gsc.impressions": 2654,
+        "gsc.avgPosition": 8.38
+      },
+      "baselineScopes": {
+        "gsc": "search-console"
+      },
+      "baselineStatuses": {
+        "gsc.clicks": "measured",
+        "gsc.impressions": "measured",
+        "gsc.avgPosition": "measured"
+      }
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "gsc.avgPosition"
+      ],
+      "baselinePeriod": {
+        "from": "2026-09-11",
+        "to": "2026-11-05"
+      },
+      "startedAt": "2026-11-12",
+      "evaluateAt": {
+        "d7": "2026-11-19",
+        "d28": "2026-12-10",
+        "d56": "2027-01-07"
+      },
+      "result": null,
+      "notes": "基準は portfolio.json の metricsAllRoutes (非重複の 28 日 2 本 W41+W45)。公開日は本番デプロイ (deploy-workers の e3ac001a7・2026-11-12 21:54 JST)。同時変更: THEME-PAGE-REVIEW-01 の共通の UI の変更 (値の単位・値の無いタイル・表・県間移動の表) が d28 までの間に本番へ出る見込みで、題の効果と切り分けられない。d28・d56 の判定ではこれを制約として併記し、因果の効果と断定しない。",
+      "evidenceRefs": [
+        "data/themes/portfolio.json#foreign-residents/metricsAllRoutes",
+        "data/gsc/snapshots/2026-W41/pages.csv",
+        "data/gsc/snapshots/2026-W45/pages.csv"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-COPY-20261112-foreign-residents",
+      "themeKey": "foreign-residents",
+      "changeType": "copy",
+      "metricScope": "all-routes",
+      "hypothesis": "2026-11-12 に題・説明文・FAQ を検索語に合わせて全テーマ共通の仕組みへ統一した (THEME-SEO-UNIFY-01)。表示が多いのにクリック率がテーマの中央値 2.33% (2026-10-09〜11-05 の 28 日・全ルート) を下回っていたこのテーマで、全ルート込み (全国版 + 県別 + 市区町村別) の検索からのクリックが増えるかを確かめる。",
+      "primaryKpi": "gsc.clicks",
+      "baseline": {
+        "gsc.clicks": 34,
+        "gsc.impressions": 2715,
+        "gsc.avgPosition": 12.08
+      },
+      "baselineScopes": {
+        "gsc": "search-console"
+      },
+      "baselineStatuses": {
+        "gsc.clicks": "measured",
+        "gsc.impressions": "measured",
+        "gsc.avgPosition": "measured"
+      }
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "gsc.avgPosition"
+      ],
+      "baselinePeriod": {
+        "from": "2026-09-11",
+        "to": "2026-11-05"
+      },
+      "startedAt": "2026-11-12",
+      "evaluateAt": {
+        "d7": "2026-11-19",
+        "d28": "2026-12-10",
+        "d56": "2027-01-07"
+      },
+      "result": null,
+      "notes": "基準は portfolio.json の metricsAllRoutes (非重複の 28 日 2 本 W41+W45)。公開日は本番デプロイ (deploy-workers の e3ac001a7・2026-11-12 21:54 JST)。同時変更: THEME-PAGE-REVIEW-01 の共通の UI の変更 (値の単位・値の無いタイル・表・県間移動の表) が d28 までの間に本番へ出る見込みで、題の効果と切り分けられない。d28・d56 の判定ではこれを制約として併記し、因果の効果と断定しない。",
+      "evidenceRefs": [
+        "data/themes/portfolio.json#local-economy/metricsAllRoutes",
+        "data/gsc/snapshots/2026-W41/pages.csv",
+        "data/gsc/snapshots/2026-W45/pages.csv"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-COPY-20261112-local-economy",
+      "themeKey": "local-economy",
+      "changeType": "copy",
+      "metricScope": "all-routes",
+      "hypothesis": "2026-11-12 に題・説明文・FAQ を検索語に合わせて全テーマ共通の仕組みへ統一した (THEME-SEO-UNIFY-01)。表示が多いのにクリック率がテーマの中央値 2.33% (2026-10-09〜11-05 の 28 日・全ルート) を下回っていたこのテーマで、全ルート込み (全国版 + 県別 + 市区町村別) の検索からのクリックが増えるかを確かめる。",
+      "primaryKpi": "gsc.clicks",
+      "baseline": {
+        "gsc.clicks": 18,
+        "gsc.impressions": 2776,
+        "gsc.avgPosition": 8.75
+      },
+      "baselineScopes": {
+        "gsc": "search-console"
+      },
+      "baselineStatuses": {
+        "gsc.clicks": "measured",
+        "gsc.impressions": "measured",
+        "gsc.avgPosition": "measured"
+      }
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "gsc.avgPosition"
+      ],
+      "baselinePeriod": {
+        "from": "2026-09-11",
+        "to": "2026-11-05"
+      },
+      "startedAt": "2026-11-12",
+      "evaluateAt": {
+        "d7": "2026-11-19",
+        "d28": "2026-12-10",
+        "d56": "2027-01-07"
+      },
+      "result": null,
+      "notes": "基準は portfolio.json の metricsAllRoutes (非重複の 28 日 2 本 W41+W45)。公開日は本番デプロイ (deploy-workers の e3ac001a7・2026-11-12 21:54 JST)。同時変更: THEME-PAGE-REVIEW-01 の共通の UI の変更 (値の単位・値の無いタイル・表・県間移動の表) が d28 までの間に本番へ出る見込みで、題の効果と切り分けられない。d28・d56 の判定ではこれを制約として併記し、因果の効果と断定しない。",
+      "evidenceRefs": [
+        "data/themes/portfolio.json#climate/metricsAllRoutes",
+        "data/gsc/snapshots/2026-W41/pages.csv",
+        "data/gsc/snapshots/2026-W45/pages.csv"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-COPY-20261112-climate",
+      "themeKey": "climate",
+      "changeType": "copy",
+      "metricScope": "all-routes",
+      "hypothesis": "2026-11-12 に題・説明文・FAQ を検索語に合わせて全テーマ共通の仕組みへ統一した (THEME-SEO-UNIFY-01)。表示が多いのにクリック率がテーマの中央値 2.33% (2026-10-09〜11-05 の 28 日・全ルート) を下回っていたこのテーマで、全ルート込み (全国版 + 県別 + 市区町村別) の検索からのクリックが増えるかを確かめる。",
+      "primaryKpi": "gsc.clicks",
+      "baseline": {
+        "gsc.clicks": 20,
+        "gsc.impressions": 2697,
+        "gsc.avgPosition": 10.97
+      },
+      "baselineScopes": {
+        "gsc": "search-console"
+      },
+      "baselineStatuses": {
+        "gsc.clicks": "measured",
+        "gsc.impressions": "measured",
+        "gsc.avgPosition": "measured"
+      }
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "gsc.avgPosition"
+      ],
+      "baselinePeriod": {
+        "from": "2026-09-11",
+        "to": "2026-11-05"
+      },
+      "startedAt": "2026-11-12",
+      "evaluateAt": {
+        "d7": "2026-11-19",
+        "d28": "2026-12-10",
+        "d56": "2027-01-07"
+      },
+      "result": null,
+      "notes": "基準は portfolio.json の metricsAllRoutes (非重複の 28 日 2 本 W41+W45)。公開日は本番デプロイ (deploy-workers の e3ac001a7・2026-11-12 21:54 JST)。同時変更: THEME-PAGE-REVIEW-01 の共通の UI の変更 (値の単位・値の無いタイル・表・県間移動の表) が d28 までの間に本番へ出る見込みで、題の効果と切り分けられない。d28・d56 の判定ではこれを制約として併記し、因果の効果と断定しない。",
+      "evidenceRefs": [
+        "data/themes/portfolio.json#natural-environment/metricsAllRoutes",
+        "data/gsc/snapshots/2026-W41/pages.csv",
+        "data/gsc/snapshots/2026-W45/pages.csv"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-COPY-20261112-natural-environment",
+      "themeKey": "natural-environment",
+      "changeType": "copy",
+      "metricScope": "all-routes",
+      "hypothesis": "2026-11-12 に題・説明文・FAQ を検索語に合わせて全テーマ共通の仕組みへ統一した (THEME-SEO-UNIFY-01)。表示が多いのにクリック率がテーマの中央値 2.33% (2026-10-09〜11-05 の 28 日・全ルート) を下回っていたこのテーマで、全ルート込み (全国版 + 県別 + 市区町村別) の検索からのクリックが増えるかを確かめる。",
+      "primaryKpi": "gsc.clicks",
+      "baseline": {
+        "gsc.clicks": 14,
+        "gsc.impressions": 2451,
+        "gsc.avgPosition": 8.75
+      },
+      "baselineScopes": {
+        "gsc": "search-console"
+      },
+      "baselineStatuses": {
+        "gsc.clicks": "measured",
+        "gsc.impressions": "measured",
+        "gsc.avgPosition": "measured"
+      }
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "gsc.avgPosition"
+      ],
+      "baselinePeriod": {
+        "from": "2026-09-11",
+        "to": "2026-11-05"
+      },
+      "startedAt": "2026-11-12",
+      "evaluateAt": {
+        "d7": "2026-11-19",
+        "d28": "2026-12-10",
+        "d56": "2027-01-07"
+      },
+      "result": null,
+      "notes": "基準は portfolio.json の metricsAllRoutes (非重複の 28 日 2 本 W41+W45)。公開日は本番デプロイ (deploy-workers の e3ac001a7・2026-11-12 21:54 JST)。同時変更: THEME-PAGE-REVIEW-01 の共通の UI の変更 (値の単位・値の無いタイル・表・県間移動の表) が d28 までの間に本番へ出る見込みで、題の効果と切り分けられない。d28・d56 の判定ではこれを制約として併記し、因果の効果と断定しない。",
+      "evidenceRefs": [
+        "data/themes/portfolio.json#tourism/metricsAllRoutes",
+        "data/gsc/snapshots/2026-W41/pages.csv",
+        "data/gsc/snapshots/2026-W45/pages.csv"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-COPY-20261112-tourism",
+      "themeKey": "tourism",
+      "changeType": "copy",
+      "metricScope": "all-routes",
+      "hypothesis": "2026-11-12 に題・説明文・FAQ を検索語に合わせて全テーマ共通の仕組みへ統一した (THEME-SEO-UNIFY-01)。表示が多いのにクリック率がテーマの中央値 2.33% (2026-10-09〜11-05 の 28 日・全ルート) を下回っていたこのテーマで、全ルート込み (全国版 + 県別 + 市区町村別) の検索からのクリックが増えるかを確かめる。",
+      "primaryKpi": "gsc.clicks",
+      "baseline": {
+        "gsc.clicks": 38,
+        "gsc.impressions": 1798,
+        "gsc.avgPosition": 8.78
+      },
+      "baselineScopes": {
+        "gsc": "search-console"
+      },
+      "baselineStatuses": {
+        "gsc.clicks": "measured",
+        "gsc.impressions": "measured",
+        "gsc.avgPosition": "measured"
+      }
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "gsc.avgPosition"
+      ],
+      "baselinePeriod": {
+        "from": "2026-09-11",
+        "to": "2026-11-05"
+      },
+      "startedAt": "2026-11-12",
+      "evaluateAt": {
+        "d7": "2026-11-19",
+        "d28": "2026-12-10",
+        "d56": "2027-01-07"
+      },
+      "result": null,
+      "notes": "基準は portfolio.json の metricsAllRoutes (非重複の 28 日 2 本 W41+W45)。公開日は本番デプロイ (deploy-workers の e3ac001a7・2026-11-12 21:54 JST)。同時変更: THEME-PAGE-REVIEW-01 の共通の UI の変更 (値の単位・値の無いタイル・表・県間移動の表) が d28 までの間に本番へ出る見込みで、題の効果と切り分けられない。d28・d56 の判定ではこれを制約として併記し、因果の効果と断定しない。",
+      "evidenceRefs": [
+        "data/themes/portfolio.json#local-finance/metricsAllRoutes",
+        "data/gsc/snapshots/2026-W41/pages.csv",
+        "data/gsc/snapshots/2026-W45/pages.csv"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-COPY-20261112-local-finance",
+      "themeKey": "local-finance",
+      "changeType": "copy",
+      "metricScope": "all-routes",
+      "hypothesis": "2026-11-12 に題・説明文・FAQ を検索語に合わせて全テーマ共通の仕組みへ統一した (THEME-SEO-UNIFY-01)。表示が多いのにクリック率がテーマの中央値 2.33% (2026-10-09〜11-05 の 28 日・全ルート) を下回っていたこのテーマで、全ルート込み (全国版 + 県別 + 市区町村別) の検索からのクリックが増えるかを確かめる。",
+      "primaryKpi": "gsc.clicks",
+      "baseline": {
+        "gsc.clicks": 22,
+        "gsc.impressions": 2035,
+        "gsc.avgPosition": 9.58
+      },
+      "baselineScopes": {
+        "gsc": "search-console"
+      },
+      "baselineStatuses": {
+        "gsc.clicks": "measured",
+        "gsc.impressions": "measured",
+        "gsc.avgPosition": "measured"
+      }
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "gsc.avgPosition"
+      ],
+      "baselinePeriod": {
+        "from": "2026-09-11",
+        "to": "2026-11-05"
+      },
+      "startedAt": "2026-11-12",
+      "evaluateAt": {
+        "d7": "2026-11-19",
+        "d28": "2026-12-10",
+        "d56": "2027-01-07"
+      },
+      "result": null,
+      "notes": "基準は portfolio.json の metricsAllRoutes (非重複の 28 日 2 本 W41+W45)。公開日は本番デプロイ (deploy-workers の e3ac001a7・2026-11-12 21:54 JST)。同時変更: THEME-PAGE-REVIEW-01 の共通の UI の変更 (値の単位・値の無いタイル・表・県間移動の表) が d28 までの間に本番へ出る見込みで、題の効果と切り分けられない。d28・d56 の判定ではこれを制約として併記し、因果の効果と断定しない。",
+      "evidenceRefs": [
+        "data/themes/portfolio.json#labor-wages/metricsAllRoutes",
+        "data/gsc/snapshots/2026-W41/pages.csv",
+        "data/gsc/snapshots/2026-W45/pages.csv"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-COPY-20261112-labor-wages",
+      "themeKey": "labor-wages",
+      "changeType": "copy",
+      "metricScope": "all-routes",
+      "hypothesis": "2026-11-12 に題・説明文・FAQ を検索語に合わせて全テーマ共通の仕組みへ統一した (THEME-SEO-UNIFY-01)。表示が多いのにクリック率がテーマの中央値 2.33% (2026-10-09〜11-05 の 28 日・全ルート) を下回っていたこのテーマで、全ルート込み (全国版 + 県別 + 市区町村別) の検索からのクリックが増えるかを確かめる。",
+      "primaryKpi": "gsc.clicks",
+      "baseline": {
+        "gsc.clicks": 22,
+        "gsc.impressions": 1351,
+        "gsc.avgPosition": 10.38
+      },
+      "baselineScopes": {
+        "gsc": "search-console"
+      },
+      "baselineStatuses": {
+        "gsc.clicks": "measured",
+        "gsc.impressions": "measured",
+        "gsc.avgPosition": "measured"
+      }
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "gsc.avgPosition"
+      ],
+      "baselinePeriod": {
+        "from": "2026-09-11",
+        "to": "2026-11-05"
+      },
+      "startedAt": "2026-11-12",
+      "evaluateAt": {
+        "d7": "2026-11-19",
+        "d28": "2026-12-10",
+        "d56": "2027-01-07"
+      },
+      "result": null,
+      "notes": "基準は portfolio.json の metricsAllRoutes (非重複の 28 日 2 本 W41+W45)。公開日は本番デプロイ (deploy-workers の e3ac001a7・2026-11-12 21:54 JST)。同時変更: THEME-PAGE-REVIEW-01 の共通の UI の変更 (値の単位・値の無いタイル・表・県間移動の表) が d28 までの間に本番へ出る見込みで、題の効果と切り分けられない。d28・d56 の判定ではこれを制約として併記し、因果の効果と断定しない。",
+      "evidenceRefs": [
+        "data/themes/portfolio.json#landslide-exposure/metricsAllRoutes",
+        "data/gsc/snapshots/2026-W41/pages.csv",
+        "data/gsc/snapshots/2026-W45/pages.csv"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-COPY-20261112-landslide-exposure",
+      "themeKey": "landslide-exposure",
+      "changeType": "copy",
+      "metricScope": "all-routes",
+      "hypothesis": "2026-11-12 に題・説明文・FAQ を検索語に合わせて全テーマ共通の仕組みへ統一した (THEME-SEO-UNIFY-01)。表示が多いのにクリック率がテーマの中央値 2.33% (2026-10-09〜11-05 の 28 日・全ルート) を下回っていたこのテーマで、全ルート込み (全国版 + 県別 + 市区町村別) の検索からのクリックが増えるかを確かめる。",
+      "primaryKpi": "gsc.clicks",
+      "baseline": {
+        "gsc.clicks": 33,
+        "gsc.impressions": 1427,
+        "gsc.avgPosition": 8.78
+      },
+      "baselineScopes": {
+        "gsc": "search-console"
+      },
+      "baselineStatuses": {
+        "gsc.clicks": "measured",
+        "gsc.impressions": "measured",
+        "gsc.avgPosition": "measured"
+      }
     }
   ]
 }
