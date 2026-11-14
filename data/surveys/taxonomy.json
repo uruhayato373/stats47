@@ -261,9 +261,9 @@
   "theme": {
     "themes": 56,
     "metricGroups": {
-      "total": 552,
+      "total": 546,
       "byStatus": {
-        "resolved": 484,
+        "resolved": 478,
         "unresolved": 0,
         "not-applicable": 68,
         "missing-lineage": 0
@@ -734,7 +734,6 @@
         "childcare-services",
         "construction-industry",
         "daily-time-use",
-        "education-culture",
         "gender-participation",
         "healthcare",
         "information-industry",
@@ -5169,7 +5168,6 @@
         "childcare-services",
         "construction-industry",
         "daily-time-use",
-        "education-culture",
         "gender-participation",
         "healthcare",
         "information-industry",

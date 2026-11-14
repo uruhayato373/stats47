@@ -1799,11 +1799,6 @@
       "relation": "contains"
     },
     {
-      "from": "ranking:elementary-school-children-count",
-      "to": "theme:education-culture",
-      "relation": "contains"
-    },
-    {
       "from": "ranking:elementary-school-count-per-100km2-habitable",
       "to": "theme:education-culture",
       "relation": "contains"
@@ -3200,11 +3195,6 @@
     },
     {
       "from": "ranking:junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000",
-      "to": "theme:education-culture",
-      "relation": "contains"
-    },
-    {
-      "from": "ranking:junior-high-school-students-count",
       "to": "theme:education-culture",
       "relation": "contains"
     },
@@ -5030,11 +5020,6 @@
     },
     {
       "from": "ranking:school-teacher-annual-income",
-      "to": "theme:education-culture",
-      "relation": "contains"
-    },
-    {
-      "from": "ranking:school-teacher-annual-income",
       "to": "theme:occupation-salary",
       "relation": "contains"
     },
@@ -5920,11 +5905,6 @@
     },
     {
       "from": "ranking:university-count",
-      "to": "theme:education-culture",
-      "relation": "contains"
-    },
-    {
-      "from": "ranking:university-professor-annual-income",
       "to": "theme:education-culture",
       "relation": "contains"
     },

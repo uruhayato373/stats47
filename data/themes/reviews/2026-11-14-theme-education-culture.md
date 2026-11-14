@@ -1,7 +1,7 @@
 ---
 type: theme-catalog-review
 date: 2026-11-14
-status: implemented-pending-release
+status: proposal-ready
 theme: education-culture
 supersedes: null
 tags: [theme-catalog, proposal, theme-page-review]
@@ -102,3 +102,7 @@ THEME-PAGE-REVIEW-01 の段 4 (全 56 テーマの指標の見直し)。調査 (
 2026-11-14 オーナーの指示 (提案は基本的に承認する。出し直しが要る案は設計し直して自動で承認とする) により採用。
 実装: `apply-design.ts --approved education-culture` でカタログへ適用し、`validate:catalog` は error 0・warning の増減なし。
 公開日に実験を `metricScope: all-routes` で登録する。
+
+## 実装の取り消し (2026-11-14)
+
+`apply-design.ts --approved` で適用したが、develop の検査で `education-culture-visualization.test.ts` が落ちた。このテストは、人が問いを決めた章の 5 つのカード (学校密度・学習環境・進路・文化施設・鑑賞行動) を分母ごとに分けた構成を固定している。機械の組み直しはこの構成を壊すので、カタログを組み直す前に戻した。実装するときは、測定中の実験がある 17 テーマと同じく、提案の採否を 1 項目ずつ決めて手で直す (`THEME-PAGE-REVIEW-HELD-01`)。
