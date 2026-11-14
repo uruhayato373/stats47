@@ -22,11 +22,13 @@ export function formatUnitForDisplay(unit: string | null | undefined): string {
  * R2 の生成文や記事の原稿は書き換えず、表示時だけ整える。
  *
  * 変えるのは数字の直後 (千・万などの接頭辞をはさんでもよい) だけ: 全角の ％ → %、全角の英字 → 半角、m2・km2・m3 → m²・km²・m³。
- * 数字に続かない全角文字 (「％表示」「ＧＤＰ」「総面積km2当たり」)、全角の数字・括弧・句読点は変えない。
+ * 単位を宣言する「単位は％」「単位：％」も同じ % にする (数字に続かないので残り、同じ記事の「96.6%」と混在していた。2026-11-14)。
+ * それ以外の数字に続かない全角文字 (「％表示」「ＧＤＰ」「総面積km2当たり」)、全角の数字・括弧・句読点は変えない。
  */
 export function normalizeUnitsInText(text: string): string {
   return text
     .replace(/(\d)\s*％/g, "$1%")
+    .replace(/(単位\s*(?:は|：|:)\s*)％/g, "$1%")
     .replace(/(\d\s*[百千万億]*)([ａ-ｚＡ-Ｚ]+)/g, (_, head: string, letters: string) => `${head}${letters.normalize("NFKC")}`)
     .replace(/(\d\s*[百千万億]*(?:k|c)?m)([23])(?![0-9A-Za-z])/g, (_, head: string, power: string) => `${head}${power === "2" ? "²" : "³"}`);
 }

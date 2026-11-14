@@ -9,9 +9,12 @@ import { join } from "node:path";
 import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 
 const require = createRequire(import.meta.url);
-const { parseBacklog } = require("../../lib/backlog-lib.cjs");
+// 期日の読み方 (範囲内・超過の境界) は月次・週次計画が期日で引く cardsDueWithin と同じ partitionByDue を使う
+const { parseAnnual, parseBacklog, partitionByDue } = require("../../lib/backlog-lib.cjs");
 // Must の読み取り・連続未達の閾値・🔴 の上限は docs:check (DG081/082) と同じ実装を使う
 const strategyLanes = require("../../lib/strategy-lanes.cjs");
+// 起票と完了の流れ・総枚数の目安は npm run backlog:waits -- flow と同じ実装を使う
+const { buildFlow } = require("../../backlog-loop/backlog-waits-core.cjs");
 
 import { CARD_ACTIONS as GSC_CARD_ACTIONS, CARD_PREFIX as GSC_PREFIX } from "../../gsc/lib/coverage-backlog.mjs";
 import { BY_DESIGN_PATH as YEAR_BY_DESIGN, CARD_PREFIX as YEAR_PREFIX } from "../../data/lib/year-coverage-backlog.mjs";
@@ -19,14 +22,30 @@ import { BY_DESIGN_PATH as YEAR_BY_DESIGN, CARD_PREFIX as YEAR_PREFIX } from "..
 import { handoffSummary, reviewCadence } from "../../management/lib/review-cadence.mjs";
 
 const TODO_FILES = [".claude/todo/backlog.md", ".claude/todo/improvements.md"];
+/** 年間計画 (月見出しの下のカード)。無い間は空として読む */
+const ANNUAL_FILE = ".claude/todo/annual.md";
 /** 連続未達がこの週数に達したら、次週計画で分割か降格を必須にする (DG082 が再掲を error にする) */
 export const MUST_MISS_STREAK_LIMIT = strategyLanes.MUST_MISS_STREAK_LIMIT;
 
-/** 起票 → 分類 / 実行 → 完了: レーン・種類の無いカードと期日超過のカード */
+/**
+ * 起票 → 分類 / 実行 → 完了: レーン・種類の無いカードと期日超過のカード
+ * @param {Array<{id:string, lane:string|null, kind:string|null, due:string|null}>} cards
+ * @param {string} today YYYY-MM-DD
+ */
 export function summarizeCards(cards, today) {
   const unclassified = cards.filter((c) => !c.lane || !c.kind).map((c) => c.id);
-  const overdue = cards.filter((c) => c.due && c.due < today).map((c) => c.id);
+  const overdue = partitionByDue(cards, { from: today, to: today }).overdue.map((c) => c.id);
   return { total: cards.length, unclassified, overdue };
+}
+
+/**
+ * 起票 → 完了: flow の最新週 (today を含む ISO 週) の起票数・閉じた数と、backlog の総枚数・目安超過の有無
+ * @param {{backlogCards:any[], annualCards:any[], ledgerItems:Record<string, any>, today:string, target?:number, untriagedMaxAgeDays?:number}} input
+ */
+export function summarizeFlow({ backlogCards, annualCards, ledgerItems, today, target, untriagedMaxAgeDays }) {
+  const flow = buildFlow({ backlogCards, annualCards, ledgerItems, today, weeks: 1, target, untriagedMaxAgeDays });
+  const [latest] = flow.weeks;
+  return { week: latest.week, filed: latest.filed, closed: latest.closed, total: flow.total, target: flow.target, overTarget: flow.overTarget };
 }
 
 export const parseMustRatio = strategyLanes.parseMustRatio;
@@ -85,16 +104,24 @@ function summarizeReviews(root, today) {
 }
 
 export function readCycleHealth(root, today) {
-  const cards = TODO_FILES.flatMap((rel) => parseBacklog(readText(root, rel) ?? "")).filter((c) => c.id);
+  const backlogCards = parseBacklog(readText(root, ".claude/todo/backlog.md") ?? "");
+  const annualCards = parseAnnual(readText(root, ANNUAL_FILE) ?? "");
+  const cards = [
+    ...TODO_FILES.flatMap((rel) => parseBacklog(readText(root, rel) ?? "")),
+    ...parseAnnual(readText(root, ANNUAL_FILE) ?? ""),
+  ].filter((c) => c.id);
   const reviews = strategyLanes.readReviews(root);
   const weeks = reviews.map((r) => ({ week: r.week, ratio: parseMustRatio(r.text) }));
   const board = strategyLanes.laneBoard(root, today);
   let completedIds = new Set();
+  let ledgerItems = {};
   const ledgerText = readText(root, ".claude/state/backlog-loop/ledger.json");
   if (ledgerText) {
     const items = JSON.parse(ledgerText).items ?? {};
+    ledgerItems = items;
     completedIds = new Set(Object.entries(items).filter(([, v]) => v.status === "completed").map(([id]) => id));
   }
+  const todoConfig = JSON.parse(readText(root, ".claude/config/docs-governance.json") ?? "{}").todo ?? {};
   const yearText = readText(root, `${datasetDir("estat.year-coverage")}/queue.json`);
   const gscText = readText(root, datasetPath("gsc.coverage-queue"));
   const detectors = summarizeDetectors({
@@ -109,6 +136,14 @@ export function readCycleHealth(root, today) {
     must: summarizeMust(weeks),
     stalePlanIds: findStalePlanIds(readText(root, ".claude/todo/weekly.md") ?? "", completedIds, new Set(cards.map((c) => c.id))),
     review: summarizeReviews(root, today),
+    flow: summarizeFlow({
+      backlogCards,
+      annualCards,
+      ledgerItems,
+      today,
+      target: todoConfig.backlogTargetCards,
+      untriagedMaxAgeDays: todoConfig.untriagedMaxAgeDays,
+    }),
     discipline: board.discipline
       ? {
           highCount: board.discipline.highCount,
@@ -125,7 +160,7 @@ export function readCycleHealth(root, today) {
 const list = (ids, max = 8) => ids.slice(0, max).map((id) => `\`${id}\``).join(", ") + (ids.length > max ? ` ほか ${ids.length - max} 件` : "");
 
 export function formatCycleHealth(h) {
-  const { cards, must, stalePlanIds, detectors, review, discipline } = h;
+  const { cards, must, stalePlanIds, detectors, review, discipline, flow } = h;
   const cadenceLine = (s) =>
     !s
       ? "未計測"
@@ -154,6 +189,9 @@ export function formatCycleHealth(h) {
   const detectorLine = detectors
     .map((d) => (d.measured ? `${d.name} 残 ${d.pending} 件・カード${d.open ? "あり" : "なし"}${d.stalled ? " ⚠️ 起票が止まっている" : ""}` : `${d.name} state なし`))
     .join(" / ");
+  const flowLine = flow
+    ? `${flow.week} の起票 ${flow.filed} 枚・閉じた ${flow.closed} 枚 / backlog ${flow.total} 枚 (目安 ${flow.target} 枚${flow.overTarget ? `を ${flow.total - flow.target} 枚超過 ⚠️ \`npm run backlog:waits -- flow\` で週ごとの流れを見る` : "以内"})`
+    : "未計測";
   const mustLine = must.latest
     ? `${must.latest.week} の Must ${must.latest.ratio.done}/${must.latest.ratio.planned}・連続未達 ${must.missStreak} 週` +
       (must.needsSplit ? `（${MUST_MISS_STREAK_LIMIT} 週以上: 次週計画で残った Must を分割か降格する）` : "")
@@ -167,6 +205,7 @@ export function formatCycleHealth(h) {
     `| 計画 → 実行 | 🔴 の着手順 (上から) が今週の Must に入っているか (DG083) | ${topLine} |`,
     `| 計画 → 実行 | 週次 Must の達成 | ${mustLine} |`,
     `| 計画 → 実行 | 連続未達の Must を同じ形で再掲 (DG082) | ${repeatLine} |`,
+    `| 起票 → 完了 | 今週の起票と閉じた枚数・backlog の総枚数と目安 | ${flowLine} |`,
     `| 実行 → 完了 | 期日超過のカード | ${cards.overdue.length} 件${cards.overdue.length ? `: ${list(cards.overdue)}` : ""} |`,
     `| 実行 → 完了 | 完了済みなのに週次計画が参照する ID | ${stalePlanIds.length} 件${stalePlanIds.length ? `: ${list(stalePlanIds)}` : ""} |`,
     `| 振り返り | 前週の週次レビュー | ${reviewLine} |`,

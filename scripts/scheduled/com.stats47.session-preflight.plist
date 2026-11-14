@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  保存済みセッションの事前確認 (毎日 09:00 JST とログイン時・ローカル Mac 限定)。
+  ブラウザを起動せず、ネットワークに出ず、ファイルを読むだけ。期限が近い・切れている・失敗印ありなら macOS の通知を出す。
+  スクリプト: scripts/scheduled/session-preflight.sh
+
+  インストール:
+    cp scripts/scheduled/com.stats47.session-preflight.plist ~/Library/LaunchAgents/
+    launchctl bootstrap gui/$UID ~/Library/LaunchAgents/com.stats47.session-preflight.plist
+  アンインストール:
+    launchctl bootout gui/$UID/com.stats47.session-preflight
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.stats47.session-preflight</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/Users/minamidaisuke/stats47/scripts/scheduled/session-preflight.sh</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>9</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>WorkingDirectory</key>
+    <string>/Users/minamidaisuke/stats47</string>
+    <key>StandardOutPath</key>
+    <string>/Users/minamidaisuke/Library/Logs/stats47/session-preflight.launchd.out</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/minamidaisuke/Library/Logs/stats47/session-preflight.launchd.err</string>
+</dict>
+</plist>

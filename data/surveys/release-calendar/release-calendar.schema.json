@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "統計の公表暦",
+  "description": "主要統計が都道府県別の年次の値を公表する月。データの年 N が N + lagYears 年の month 月に公表される、の形で 1 調査 1 件持つ。調査の名前・機関・URL は持たず、調査マスタ (surveys.master) の id で結ぶ。読むのは .claude/scripts/blog/build-stale-data-years.mjs (判定は lib/release-calendar.mjs) で、公表月の翌月 1 日から公表済みとみなす。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "entries"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "entries": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/definitions/entry" }
+    }
+  },
+  "definitions": {
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["surveyId", "lagYears", "month", "release", "evidence"],
+      "properties": {
+        "surveyId": {
+          "description": "調査マスタ (surveys.master) の id。台帳の中で一意",
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "lagYears": {
+          "description": "データの年 (指標の yearCode と同じ数え方。年度の調査は年度の年) から公表する年までの年数",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "month": { "description": "公表する月 (1〜12)", "type": "integer", "minimum": 1, "maximum": 12 },
+        "everyYears": { "description": "周期調査の周期 (国勢調査は 5)。anchorYear と組で書く", "type": "integer", "minimum": 2 },
+        "anchorYear": { "description": "周期調査の実施年の 1 つ", "type": "integer" },
+        "skipEveryYears": { "description": "公表しない年の周期 (人口推計は国勢調査の年に 10 月 1 日現在の推計を出さない)。skipAnchorYear と組で書く", "type": "integer", "minimum": 2 },
+        "skipAnchorYear": { "description": "公表しない年の 1 つ", "type": "integer" },
+        "release": { "description": "どの公表を「都道府県の年次の値が出た」とみなすか (速報か確定か、どの集計か)", "type": "string", "minLength": 1 },
+        "evidence": {
+          "description": "公表月を確かめた実際の公表 1 件",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["releasedOn", "title", "url", "observedAt"],
+          "properties": {
+            "releasedOn": { "description": "実際の公表日", "$ref": "common.schema.json#/$defs/date" },
+            "title": { "description": "公表の題 (公表予定の一覧の表記のまま)", "type": "string", "minLength": 1 },
+            "url": { "description": "公表日を確かめたページ", "$ref": "common.schema.json#/$defs/httpsUrl" },
+            "observedAt": { "description": "ページを見た日", "$ref": "common.schema.json#/$defs/date" }
+          }
+        }
+      },
+      "dependencies": {
+        "everyYears": ["anchorYear"],
+        "anchorYear": ["everyYears"],
+        "skipEveryYears": ["skipAnchorYear"],
+        "skipAnchorYear": ["skipEveryYears"]
+      }
+    }
+  }
+}

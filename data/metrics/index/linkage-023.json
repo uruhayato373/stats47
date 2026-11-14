@@ -3515,7 +3515,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:01000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:02000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3523,7 +3531,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:03000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:04000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3531,7 +3547,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:05000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:06000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3539,7 +3563,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:07000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:08000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3547,7 +3579,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:09000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:10000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3555,7 +3595,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:11000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:12000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3563,7 +3611,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:13000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:14000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3571,7 +3627,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:15000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:16000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3579,7 +3643,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:17000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:18000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3587,7 +3659,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:19000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:20000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3595,7 +3675,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:21000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:22000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3603,7 +3691,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:23000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:24000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3611,7 +3707,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:25000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:26000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3619,7 +3723,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:27000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:28000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3627,7 +3739,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:29000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:30000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3635,7 +3755,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:31000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:32000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3643,7 +3771,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:33000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:34000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3651,7 +3787,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:35000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:36000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3659,7 +3803,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:37000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:38000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3667,7 +3819,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:39000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:40000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3675,7 +3835,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:41000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:42000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3683,7 +3851,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:43000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:44000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3691,11 +3867,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:45000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:46000:local-finance",
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:46000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:47000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3705,10 +3893,15 @@
         {
           "pageId": "theme:local-finance",
           "kind": "theme"
+        },
+        {
+          "pageId": "theme:local-government-digital",
+          "kind": "theme"
         }
       ],
       "themes": [
-        "local-finance"
+        "local-finance",
+        "local-government-digital"
       ]
     },
     {
@@ -7456,7 +7649,15 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:01000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7464,7 +7665,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:03000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:03000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7472,7 +7681,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:05000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:05000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7480,7 +7697,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:07000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:07000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7488,7 +7713,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:09000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:09000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7496,7 +7729,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:11000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:11000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7504,7 +7745,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:13000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:13000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7512,7 +7761,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:15000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:15000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7520,7 +7777,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:17000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:17000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7528,7 +7793,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:19000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:19000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7536,7 +7809,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:21000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:21000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7544,7 +7825,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:23000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:23000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7552,7 +7841,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:25000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:25000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7560,7 +7857,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:27000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:27000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7568,7 +7873,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:29000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:29000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7576,7 +7889,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:31000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:31000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7584,7 +7905,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:33000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:33000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7592,7 +7921,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:35000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:35000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7600,7 +7937,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:37000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:37000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7608,7 +7953,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:39000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:39000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7616,7 +7969,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:41000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:41000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7624,7 +7985,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:43000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:43000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7632,11 +8001,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:45000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:45000:real-income",
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:46000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:46000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7664,11 +8045,16 @@
           "kind": "ranking"
         },
         {
+          "pageId": "theme:land-property-market",
+          "kind": "theme"
+        },
+        {
           "pageId": "theme:real-income",
           "kind": "theme"
         }
       ],
       "themes": [
+        "land-property-market",
         "real-income"
       ]
     },
@@ -7773,11 +8159,205 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "ranking:private-sports-facility",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:sports-participation",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "sports-participation"
+      ]
     },
     {
       "metricKey": "private-university-consumption-expenditure",

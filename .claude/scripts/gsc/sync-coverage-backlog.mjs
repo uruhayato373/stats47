@@ -2,7 +2,7 @@
 /**
  * sync-coverage-backlog.mjs — GSC カバレッジ是正キューの「判断が要る pending」をバックログカードにする。
  *
- * 起票したカードは backlog-loop-daily (CI の Claude) が 1 日 2 件の枠で処理し、
+ * 起票したカードは backlog-loop-daily (CI の Claude・週 1 回) が 1 回 2 件の枠で処理し、
  * `build-coverage-queue.mjs --assert-handled <batch>` を completion gate にして行を消す。
  * action ごとに開いているカードは 1 枚まで。消化されたら次の実行で次の batch を起票する。
  * 完了したカードの batch ファイルはここで消す。

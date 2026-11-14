@@ -14,9 +14,12 @@ import {
 import { isOk } from "@stats47/types";
 
 import { PageShell, PageHeader, Breadcrumbs } from "@/components/layout";
+import { LinkRowNav } from "@/components/navigation/StatisticsScopeNav";
+import { SectionHeader } from "@/components/section";
 import { SurfaceLinkCard } from "@/components/surface";
 
 import { AdRow, composeAdRows, InFeedAdSlot } from "@/features/ads";
+import { groupSurveysByMinistry } from "@/features/survey/group-surveys-by-ministry";
 
 import { CONTENT_FOOTER, SURVEY_INDEX_INFEED } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
@@ -75,10 +78,16 @@ export default async function SurveyIndexPage() {
     countMap.set(hub, (countMap.get(hub) ?? 0) + count);
   }
 
-  const sortedSurveys = surveys.filter((s) => canonicalSurveyHubKey(s.id) === s.id).filter((s) => {
+  const visibleSurveys = surveys.filter((s) => canonicalSurveyHubKey(s.id) === s.id).filter((s) => {
     const count = countMap.get(s.id) ?? 0;
     return count > 0;
   });
+  // 作成した府省庁で分け、分類の中はランキングの多い順に並べる (HUB-LIST-FINDABILITY-01。約 100 の調査が規則なしで並んでいた)
+  const groups = groupSurveysByMinistry(visibleSurveys, (id) => countMap.get(id) ?? 0);
+  // インフィード広告の位置は分類をまたいで数える (一覧全体の何件目か)
+  const groupStarts = groups.map((_, position) =>
+    groups.slice(0, position).reduce((total, group) => total + group.surveys.length, 0),
+  );
 
   // 広告の段: ページの最後に AdSense 1 つを本文の幅いっぱい (上限 580px) に出す (2026-11-12 オーナー決定でアフィリエイトを止め、PR を外した)
   const [indexRow] = composeAdRows([['adsense']], [CONTENT_FOOTER], []);
@@ -94,46 +103,72 @@ export default async function SurveyIndexPage() {
         eyebrow="政府統計"
         title="調査別ランキング一覧"
         description="政府統計調査ごとに、都道府県別ランキングを分類しています。各調査をクリックすると、その調査データに基づくランキングの一覧を閲覧できます。"
+        stats={`全 ${visibleSurveys.length} 調査 ・ 並び順: 作成した府省庁ごと、その中はランキングの多い順`}
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {sortedSurveys.map((survey, index) => {
-          const count = countMap.get(survey.id) ?? 0;
-          return (
-            <Fragment key={survey.id}>
-            <SurfaceLinkCard
-              href={hrefFor("survey", { surveyKey: survey.id })}
-              className="block"
-            >
-              <div className="flex items-start justify-between">
-                <div className="min-w-0 flex-1">
-                  <h3 className="font-semibold text-base truncate">
-                    {survey.name}
-                  </h3>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    {survey.organization}
-                  </p>
-                </div>
-                <span className="ml-2 shrink-0 bg-primary/10 text-primary text-xs font-medium px-2 py-0.5 rounded">
-                  {count}件
-                </span>
-              </div>
-              {survey.description && (
-                <p className="mt-2 text-xs text-muted-foreground line-clamp-2 leading-relaxed">
-                  {survey.description}
-                </p>
-              )}
-            </SurfaceLinkCard>
-            {/* 一覧が 1 列のとき (スマホ) 25 件目の後から 30 件ごとにインフィード広告 (2026-11-13 オーナー決定。一覧は約 15,000px 続く) */}
-            {index + 1 >= SURVEY_INDEX_INFEED_START &&
-              (index + 1 - SURVEY_INDEX_INFEED_START) % SURVEY_INDEX_INFEED_EVERY === 0 &&
-              sortedSurveys.length - (index + 1) >= 3 && (
-              <div className="md:hidden"><InFeedAdSlot slot={SURVEY_INDEX_INFEED} /></div>
-            )}
-            </Fragment>
-          );
-        })}
-      </div>
+      {groups.length > 1 && (
+        <LinkRowNav
+          label="府省庁から探す"
+          items={groups.map((group) => ({
+            key: group.id,
+            label: `${group.label} ${group.surveys.length}`,
+            href: `#${group.id}`,
+          }))}
+          wrap
+        />
+      )}
+
+      {groups.flatMap((group, position) => {
+        const start = groupStarts[position] ?? 0;
+        return [
+          <div key={`${group.id}-heading`} id={group.id} className="scroll-mt-24">
+            <SectionHeader
+              title={group.label}
+              description={`${group.surveys.length} 調査`}
+              hideRule
+            />
+          </div>,
+          <div key={group.id} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {group.surveys.map((survey, groupIndex) => {
+              const index = start + groupIndex;
+              const count = countMap.get(survey.id) ?? 0;
+              return (
+                <Fragment key={survey.id}>
+                <SurfaceLinkCard
+                  href={hrefFor("survey", { surveyKey: survey.id })}
+                  className="block"
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-semibold text-base">
+                        {survey.name}
+                      </h3>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {survey.organization}
+                      </p>
+                    </div>
+                    <span className="ml-2 shrink-0 bg-primary/10 text-primary text-xs font-medium px-2 py-0.5 rounded">
+                      {count}件
+                    </span>
+                  </div>
+                  {survey.description && (
+                    <p className="mt-2 text-xs text-muted-foreground line-clamp-2 leading-relaxed">
+                      {survey.description}
+                    </p>
+                  )}
+                </SurfaceLinkCard>
+                {/* 一覧が 1 列のとき (スマホ) 25 件目の後から 30 件ごとにインフィード広告 (2026-11-13 オーナー決定。一覧は約 15,000px 続く) */}
+                {index + 1 >= SURVEY_INDEX_INFEED_START &&
+                  (index + 1 - SURVEY_INDEX_INFEED_START) % SURVEY_INDEX_INFEED_EVERY === 0 &&
+                  visibleSurveys.length - (index + 1) >= 3 && (
+                  <div className="md:hidden"><InFeedAdSlot slot={SURVEY_INDEX_INFEED} /></div>
+                )}
+                </Fragment>
+              );
+            })}
+          </div>,
+        ];
+      })}
 
       {/* コンテンツ末尾の全幅フッター広告 */}
       {indexRow.length > 0 && <AdRow cells={indexRow} position="survey-index-row" trackingCategory="survey-index" wide />}

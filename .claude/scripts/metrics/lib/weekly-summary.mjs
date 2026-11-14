@@ -362,7 +362,28 @@ const deltaStr = (w) => {
  * @param {{summary:object|null, rollingRows:object[], week:string}} p
  *   rollingRows は v2 列名の history.csv 行 (末尾が最新)。
  */
-export function renderGscLatest({ summary, rollingRows, week }) {
+/**
+ * 明細 (queries.csv / pages.csv) の期間と捕捉率の節 (GSC-DEMAND-REPORT-01)。
+ * キーワード表はクリックの一部しか載らないので、捕捉率を出さずに「アクセスの多い語」と答えさせない。
+ * @param {{rolling28d: any, finalized7d: any}} cov gsc-demand.mjs の snapshotDetailCoverage の戻り値
+ */
+function renderDetailCoverage(cov) {
+  const rate = (v) => (v === null || v === undefined ? "-" : `${(v * 100).toFixed(1)}%`);
+  const row = (label, c) =>
+    `| ${label} | ${c.periodStart} 〜 ${c.periodEnd} | ${c.siteClicks} | ${c.queryClicks} (${c.queryRows} 語) | ${rate(c.queryCaptureRate)} | ${rate(c.pageCaptureRate)} |`;
+  const lines = ["## 明細 (queries / pages) の期間と捕捉率", ""];
+  lines.push("| 明細 | 期間 | サイト全体のクリック | キーワード表のクリック | キーワード表の捕捉率 | ページ表の捕捉率 |");
+  lines.push("|---|---|---|---|---|---|");
+  lines.push(row("28 日 (queries.csv / pages.csv)", cov.rolling28d));
+  if (cov.finalized7d) lines.push(row("確定 7 日 (queries-finalized7d.csv / pages-finalized7d.csv)", cov.finalized7d));
+  lines.push("");
+  if (!cov.finalized7d) lines.push("確定 7 日の明細はこの週の snapshot に無い (2026-11-14 の取得の追加より前の週は保存していない)。");
+  lines.push("> キーワード表に無いクリックは GSC が検索語を伏せた分で、推定で埋めない。カテゴリ別の需要は [`DEMAND-LATEST.md`](./DEMAND-LATEST.md) を読む。");
+  lines.push("");
+  return lines;
+}
+
+export function renderGscLatest({ summary, rollingRows, week, detailCoverage = null }) {
   const lines = [];
   lines.push(`# GSC Latest — ${week}`);
   lines.push("");
@@ -403,6 +424,7 @@ export function renderGscLatest({ summary, rollingRows, week }) {
     lines.push("_rolling28d 履歴なし_");
   }
   lines.push("");
+  if (detailCoverage) lines.push(...renderDetailCoverage(detailCoverage));
   lines.push("履歴: 確定7日 = [`history-finalized7d.csv`](./history-finalized7d.csv) / ローリング28日 = [`history.csv`](./history.csv)");
   lines.push("");
   lines.push("> schema v2 (2026-07-28): 旧 `history.csv` の clicks/impressions/ctr/position は当初から");

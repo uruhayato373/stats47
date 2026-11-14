@@ -205,3 +205,7 @@ docs/books/
 
 # GA4 Admin 監査の state は commit しない (.claude/scripts/google-admin/README.md)
 .claude/state/metrics/google-admin/
+
+# Python のバイトコード
+__pycache__/
+*.pyc

@@ -70,7 +70,9 @@ describe("GenderPairedKpiGrid", () => {
     const html = markup();
     expect(html.match(/data-slot-kind="stat-tile"/g)).toHaveLength(2);
     expect(html).toContain('data-slot="panel-grid"');
-    expect(html).toContain("@sm:grid-cols-2");
+    // スマホの幅でも 2 列なので、男女の 1 組はどの幅でも同じ行に並ぶ (2026-11-14)
+    expect(html).toContain("grid-cols-2");
+    expect(html).not.toContain("grid-cols-1");
     expect(html.indexOf("男性")).toBeLessThan(html.indexOf("女性"));
   });
 

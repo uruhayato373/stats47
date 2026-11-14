@@ -19,8 +19,8 @@ Playwright を使う運用スクリプトのログイン状態、アカウント
   - **資格情報の読み口 (2026-09-28)**: `.claude/scripts/measurement/credential-store.mjs` が唯一の入口。Mac はキーチェーン、Windows は資格情報マネージャー (`cmdkey /generic:stats47-measurement-<source> /user:<ID> /pass` で登録。Win32 `CredRead` を PowerShell 5.1 から読むので追加モジュール不要)、それ以外 (CI) は読まない。サービス名は両 OS で同じ。直接読む書き方は `credential-store-contract.test.mjs` が止める。Bitwarden 等の外部サービスは使わない (オーナー判断)。
   - **資格情報の正本 (2026-10-01 オーナー決定)**: ログインが必要な全サービスの一覧と自動ログインの可否は `.claude/config/auth-credentials.json` が正本 (ID/PW は書かない)。この PC の登録状況は管理画面 `/ops/auth`「ログインと資格情報」で見る (登録の有無と ID だけを読み、パスワードは読まない)。ログインは Mac だけが持ち、CI と GitHub Secrets には ID・パスワード・セッションを置かない (2026-10-20 オーナー判断。下の「Macでの認証付き計測」)。**楽天アフィリエイト (2026-10-01)**: 成果 API が無いので、`rakuten-report.mjs` がログイン済みセッションで管理画面と同じ JSON (`/api/report/monthly?overview=1`・`/api/report/reward`) を読み `rakuten-results.json` に当月・前月を書く。照合テストは `__tests__/auth-credential-ssot.test.mjs`。
   - **2FA は認証アプリ方式 (TOTP) だけ自動化する**: `stats47-measurement-<source>-totp` に秘密鍵 (base32) を登録した口座だけ、`/ap/mfa` の画面でコードを計算して 1 回入力する (RFC 6238 の試験値でテスト済み)。SMS / メールのコード、追加確認 (`/ap/cvf`)、CAPTCHA は従来どおり停止する。Amazon の MFA 画面のセレクタは実機未確認で、外れた場合も停止する。
-  - **同時に 2 台でログインしない**: 下の state 共用の理由と同じく、定期的な自動ログインは 1 台 (現状 Mac の launchd) だけにする。Windows で `refresh-session.mjs` を使うのは、Mac の定期実行を止めているときか、手動で 1 回だけ回すときに限る。
-- A8 / もしもの state (`playwright-{a8,moshimo}-state.json`) は stats47 と doboku-note で共用する (2026-09-26)。実体は `~/.local/share/asp-sessions/{a8,moshimo}-state.json` (mode 600) で、両リポジトリの `.local/` にはそこへの symlink を置く。ログインするのは stats47 の launchd (`refresh-session.mjs`) だけで、doboku-note は読むだけにする (同じ口座へ別々にログインすると互いのセッションを切る恐れがある)。新しいマシンでは symlink を張り直す。state を rename で置き換える書き方は symlink を壊すので使わない。
+  - **同時に 2 台でログインしない**: 下の state 共用の理由と同じく、自動ログインは 1 台 (現状は Mac で、週次レビューの最初にオーナーが手で回す `npm run weekly:collect` の `refresh-session.mjs`。2026-11-08 に launchd の自動起動はやめた) だけにする。Windows で `refresh-session.mjs` を使うのは、Mac で回せない週に手動で 1 回だけ回すときに限る。
+- A8 / もしもの state (`playwright-{a8,moshimo}-state.json`) は stats47 と doboku-note で共用する (2026-09-26)。実体は `~/.local/share/asp-sessions/{a8,moshimo}-state.json` (mode 600) で、両リポジトリの `.local/` にはそこへの symlink を置く。ログインするのは stats47 の Mac の `refresh-session.mjs` (`npm run weekly:collect` の 1 段目) だけで、doboku-note は読むだけにする (同じ口座へ別々にログインすると互いのセッションを切る恐れがある)。新しいマシンでは symlink を張り直す。state を rename で置き換える書き方は symlink を壊すので使わない。
 - 2FA、CAPTCHA、税務・銀行情報、規約同意は人の操作として残す。
 - 実行後は `.claude/rules/browser-use-cleanup.md` に従い browser / daemon / tab を閉じる。
 
@@ -136,8 +136,9 @@ MCP が有用なのは**セレクタ確定の探索工程**である。実機を
 
 | `.local/` 配下                                        | サービス             | 主な利用箇所                                                            | 固定契約                                                |
 | ----------------------------------------------------- | -------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------- |
-| `playwright-x-profile/`                               | X                    | `.claude/skills/sns/publish-x/`、`.claude/skills/sns/update-x-profile/` | `--expect-account` で handle を照合。切れたら `refresh-session.mjs x` (キーチェーン `stats47-measurement-x`、launchd 毎日) が Playwright 同梱 Chromium で 1 回だけ再ログインする。Chrome 本体で開かない (Cookie の暗号化方式が変わる)。state は CI へ渡さない |
+| `playwright-x-profile/`                               | X                    | `.claude/skills/sns/publish-x/`、`.claude/skills/sns/update-x-profile/` | `--expect-account` で handle を照合。切れたら `refresh-session.mjs x` (キーチェーン `stats47-measurement-x`。土曜の週次の取得 `weekly:collect` の最初と、必要なときに) が Playwright 同梱 Chromium で 1 回だけ再ログインする。Chrome 本体で開かない (Cookie の暗号化方式が変わる)。state は CI へ渡さない |
 | `playwright-ig-profile/`                              | Instagram            | `.claude/scripts/sns/delete-instagram-posts.ts`                         | headed login を保持                                     |
+| `playwright-threads-profile/` | Threads | `.claude/skills/sns/publish-threads/` | ログインはオーナーが行う (自動ログインの経路は無い)。期限は日次の事前確認が `sessionid` で見る |
 | `playwright-a8-profile/` + `playwright-a8-state.json` | A8.net               | `.claude/skills/ads/scout-asp/scripts/`、`.claude/scripts/ads/`         | storage state の再注入を併用                            |
 | `playwright-moshimo-profile/`                         | もしもアフィリエイト | `.claude/scripts/ads/`                                                  | `config/affiliate-asp.json` の site ID を照合   |
 | `playwright-afb-profile/`                             | afb                  | `.claude/scripts/ads/`                                                  | login から完了まで同一 headed process                   |
@@ -182,6 +183,23 @@ GA4 Admin API、AdSense read API、CIの承認境界、設定変更のallowlist�
 このため browser 操作は原則として main checkout から実行する。別 OS または別 clone で動かす場合は、空 profile を正しい profile と誤認していないか、対象 script の `PROFILE_ROOT` / `PROFILE_DIR` を先に確認する。
 
 profile path の実装を統一する変更は、全サービスを一括置換せず、account assertion とログイン復旧をサービス単位で検証する。
+
+## agent が使ってよい範囲 (2026-11-14 オーナー決定)
+
+「ログインが要る」ことを理由に作業を止めない。止める理由になるのは、サービス側の制約で人の操作が要るときだけである。
+
+| 操作 | agent | 根拠 |
+|---|---|---|
+| 保存済みセッション (profile / storage state) での画面操作 | 実行してよい。先に `npm run measurement:status -- --preflight --json` で、そのサービスが `usable` かを確かめる | 値を読まずに済む |
+| セッションが切れたときの再ログイン 1 回 | `refresh-session.mjs <src>` を実行してよい。キーチェーンを読むのはこのスクリプトで、agent は ID・パスワードの値を読まない・出力しない・入力しない | 自動ログインの承認範囲 (本文書「原則」) |
+| 2 段階認証・CAPTCHA・追加確認・失敗印 `.autologin-failed` | 止めて、`refresh-session.mjs <src> --wait-human` をオーナーへ渡す。迂回しない | 人の確認が要る |
+| 税務・銀行・規約同意・資格情報の登録 | 行わない (オーナーの作業) | 本文書「禁止事項」 |
+
+- セッションが使えても、公開・送信・申請・出品などの外へ出る操作は、従来どおりオーナーの承認が要る (`todo-standards.md` §7)。
+  カードには `[待ち:承認]` を付け、`[待ち:ログイン]` は上の表の下 2 行に当たるときだけ付ける。
+- 計測値を読むための管理画面は、従来どおり土曜の記録から読む (`recorded-measurement-first.md`。hook が止める)。
+- 期限の事前確認は launchd の日次 (`scripts/scheduled/com.stats47.session-preflight.plist`) が行い、期限が近い・切れている・
+  失敗印ありを通知する。状態は管理画面 `/ops/auth` の「保存済みセッション」に出る。cookie の期限は上限で、提供元が先に切ることはある。
 
 ## ログイン復旧
 

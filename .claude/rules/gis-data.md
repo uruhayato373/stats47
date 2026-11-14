@@ -105,6 +105,14 @@ N05 は 2026-10-29 に交通網の変遷のため登録した (public mirror は
 交通網の変遷 (台帳 `geo.infra-history-networks`) と単体 GIS ページの地図・凡例はこの台帳をそのまま使い、区分を複製しない。
 区分の属性を持たない地物 (空港の標点など) は推測で区分を当てず「区分のない地物」として描く。検査は `__tests__/classifications.test.ts`。
 
+## 属性の原典台帳
+
+各データの属性の公式の名前・意味・型と、読む側が引く役割 (`name`・`startYear`・`endYear`・`category`・`relation`・`prefecture`・`identifier`・`measure`・`other`) は
+台帳 `geo.ksj-attributes` (`data/geo/attributes/<dataId>.json` + Schema。読み込み口 `packages/gis/src/mlit-ksj/attributes.ts`) に書く。
+地物の種類は原典のファイル名の語幹 (例: `HighwaySection`) で分け、意味は公式のデータ詳細ページで確かめた版と日付を `reference` に残す。確かめていない意味は「未確認」と書く。
+読む側 (交通網の変遷・接合部の生成) は属性名を書かず役割から引く。区分のコード表は `codeTable` で区分の台帳を指すだけで複製しない。
+取り込みが付け替える属性名 (`property-map.ts`) は `distributedName` に持つ。検査は `__tests__/attributes.test.ts`。
+
 ## 台帳の ID と参照整合
 
 `datasets.ts` は台帳のキーから `KsjDataId` 型を導く。gis パッケージ内の台帳は

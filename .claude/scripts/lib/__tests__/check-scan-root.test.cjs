@@ -23,6 +23,24 @@ test("check-*.cjs と preflight-commit.mjs は CLAUDE_PROJECT_DIR をルート�
   assert.deepEqual(readers, [], "別のルートを検査させるときは STATS47_SCAN_ROOT を使う");
 });
 
+// check-*.cjs 以外でルートを決めるスクリプトも同じ (CI-TOOLING-FOLLOWUP-03)。CLAUDE_PROJECT_DIR を優先すると、
+// worktree のセッションでは別の作業ツリーの台帳へ書き、別の作業ツリーの worktree 一覧を読む
+const ROOT_READERS = [
+  ".claude/scripts/lib/audit-workflow-policy.cjs",
+  ".claude/scripts/lib/remove-worktree.mjs",
+  ".claude/scripts/lib/state-pull.mjs",
+  ".claude/scripts/ads/append-ga4-affiliate-history.mjs",
+  ".claude/scripts/note/audit-note-image-assets.mjs",
+];
+
+test("ルートを決める他のスクリプトも CLAUDE_PROJECT_DIR を読まず、上書きの口は STATS47_SCAN_ROOT にする", () => {
+  for (const file of ROOT_READERS) {
+    const source = fs.readFileSync(path.join(ROOT, file), "utf8");
+    assert.doesNotMatch(source, /process\.env\.CLAUDE_PROJECT_DIR|process\.env\[["']CLAUDE_PROJECT_DIR["']\]/, `${file} が CLAUDE_PROJECT_DIR をルートにしている`);
+    assert.match(source, /process\.env\.STATS47_SCAN_ROOT/, `${file} にルートの上書きの口 STATS47_SCAN_ROOT が無い`);
+  }
+});
+
 test("CLAUDE_PROJECT_DIR が別のディレクトリを指していても自分の作業ツリーを検査し、STATS47_SCAN_ROOT を渡したときだけそこを検査する", (t) => {
   const elsewhere = fs.mkdtempSync(path.join(os.tmpdir(), "stats47-scan-root-"));
   t.after(() => fs.rmSync(elsewhere, { recursive: true, force: true }));

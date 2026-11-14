@@ -1,0 +1,50 @@
+{
+  "dataId": "N05",
+  "reference": {
+    "pageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N05-2024.html",
+    "specification": "KS-PS-N05-v2_1.pdf",
+    "dataVersion": "24",
+    "checkedAt": "2026-11-14",
+    "checkedScope": "データ詳細ページの属性情報の表と照合した。製品仕様書 PDF の本文とは照合していない"
+  },
+  "featureTypes": [
+    {
+      "key": "RailroadSection2",
+      "label": "路線",
+      "attributes": [
+        { "name": "N05_001", "label": "事業者種別", "role": "category", "valueType": "code", "codeList": "事業者種別コード", "codeTable": "railway-operator", "meaning": "鉄道路線の事業者を区分するコード" },
+        { "name": "N05_002", "label": "路線名", "role": "name", "valueType": "string", "meaning": "鉄道路線の名称" },
+        { "name": "N05_003", "label": "運営会社", "role": "other", "valueType": "string", "meaning": "鉄道路線を運営する会社名" },
+        { "name": "N05_004", "label": "供用開始年", "role": "other", "valueType": "year", "meaning": "その区間の供用が始まった年" },
+        { "name": "N05_005b", "label": "設置期間（設置開始）", "role": "startYear", "valueType": "year", "meaning": "鉄道路線・駅が設置された年" },
+        { "name": "N05_005e", "label": "設置期間（設置終了）", "role": "endYear", "valueType": "year", "meaning": "変更・廃止された年の 1 年前の年" },
+        { "name": "N05_006", "label": "関係ID", "role": "relation", "relationKind": "main", "valueType": "string", "meaning": "同じ地物であることを表すグループ ID" },
+        { "name": "N05_007", "label": "変遷ID", "role": "other", "valueType": "code", "codeList": "変遷IDコード", "meaning": "同じ年に属性が複数回変わったときの属性項目を表す識別子" },
+        { "name": "N05_008", "label": "変遷備考", "role": "other", "valueType": "string", "meaning": "変遷 ID で示した属性の内容" },
+        { "name": "N05_009", "label": "備考", "role": "other", "valueType": "string", "meaning": "駅や路線の位置が明確でないときの、図形の精度に関するコメント" },
+        { "name": "N05_010", "label": "関係備考", "role": "relation", "relationKind": "additional", "valueType": "string", "meaning": "主たる関係 ID 以外の関係 ID" }
+      ]
+    },
+    {
+      "key": "Station2",
+      "label": "駅",
+      "attributes": [
+        { "name": "N05_001", "label": "事業者種別", "role": "category", "valueType": "code", "codeList": "事業者種別コード", "codeTable": "railway-operator", "meaning": "鉄道路線の事業者を区分するコード" },
+        { "name": "N05_002", "label": "路線名", "role": "other", "valueType": "string", "meaning": "鉄道路線の名称" },
+        { "name": "N05_003", "label": "運営会社", "role": "other", "valueType": "string", "meaning": "鉄道路線を運営する会社名" },
+        { "name": "N05_004", "label": "供用開始年", "role": "other", "valueType": "year", "meaning": "その区間の供用が始まった年" },
+        { "name": "N05_005b", "label": "設置期間（設置開始）", "role": "startYear", "valueType": "year", "meaning": "鉄道路線・駅が設置された年" },
+        { "name": "N05_005e", "label": "設置期間（設置終了）", "role": "endYear", "valueType": "year", "meaning": "変更・廃止された年の 1 年前の年" },
+        { "name": "N05_006", "label": "関係ID", "role": "relation", "relationKind": "main", "valueType": "string", "meaning": "同じ地物であることを表すグループ ID" },
+        { "name": "N05_007", "label": "変遷ID", "role": "other", "valueType": "code", "codeList": "変遷IDコード", "meaning": "同じ年に属性が複数回変わったときの属性項目を表す識別子" },
+        { "name": "N05_008", "label": "変遷備考", "role": "other", "valueType": "string", "meaning": "変遷 ID で示した属性の内容" },
+        { "name": "N05_009", "label": "備考", "role": "other", "valueType": "string", "meaning": "駅や路線の位置が明確でないときの、図形の精度に関するコメント" },
+        { "name": "N05_011", "label": "駅名", "role": "name", "valueType": "string", "meaning": "駅の名称" }
+      ]
+    }
+  ],
+  "notes": [
+    "地物の種類の key はデータ詳細ページに書かれたシェープファイル名 (RailroadSection2.shp・Station2.shp) の語幹。N05_001〜N05_009 は路線と駅の両方に付く。関係備考 N05_010 は路線だけ、駅名 N05_011 は駅だけに付く。",
+    "駅には路線名 N05_002 と駅名 N05_011 があり、地物の名前 (role name) は駅名にした。"
+  ]
+}

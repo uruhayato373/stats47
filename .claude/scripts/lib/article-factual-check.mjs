@@ -723,10 +723,57 @@ function mentionsForeignMetric(lead, knownLabels) {
  * 差・増減・振れ幅の数値 (「堺市と69円差」「4,304円増えており」「2,415円離れて」「560円の範囲」) は data の値ではない。
  * 県名から数値までの間に語がある場合 (DELTA_BEFORE_RE) と、数値の直後に語が続く場合 (DELTA_AFTER_RE) の両方を見る。
  */
-const DELTA_BEFORE_RE = /差|増え|増加|増や|減り|減少|減ら|離れ|上回|下回|振れ幅|変動幅|範囲|合計|平均/;
+const DELTA_BEFORE_RE = /差|増え|増加|増や|減り|減少|減ら|離れ|開き|上回|下回|振れ幅|変動幅|範囲|合計|平均/;
 /** 同じ文の頭から数値までに差・振れ幅を語る語がある (「最大と最小の差を比べると、京都市は4,304円」) */
 const DELTA_CONTEXT_RE = /差|振れ幅|変動幅|増減|離れ/;
 const DELTA_AFTER_RE = /^\s*(?:差|の差|離れ|増|減|上回|下回|の範囲|の幅|の振れ|の開き|の違い|アップ|ダウン|上昇|下落|超の差)/;
+/**
+ * 数値の直後に「しか」「の」「だけ」などを挟んで増減を語る書き方 (「1,856円しか目減りしません」「22,681円多く残ります」)。
+ * DELTA_AFTER_RE は語が数値に直接続く形しか見ないため、2 県の差や目減り額を県の値と取り違えていた (BLOG-TUTORIAL-GATE-GAPS-01 ⑤)
+ */
+const DELTA_AFTER_PARTICLE_RE =
+  /^\s*(?:分が?|ほど|も|だけ|しか|の)?\s*(?:目減り|減|増|差|開き|多[くいけ]|少な[くいけ]|高[くいけ]|低[くいけ]|安[くいけ]|大き[くいけ]|小さ[くいけ])/;
+/** 「東京都は24,537円、埼玉県は1,856円目減りします」の、述語を共有する並列の次の項 (県名 + 数値 + 単位) */
+const PARALLEL_ITEM_RE = new RegExp(
+  `^\\s*[、，,]\\s*(?:${PREF_NAMES.join("|")})(?:都|府|県)?\\s*(?:は|が|では|も)?\\s*(?:[\\d,]+(?:\\.\\d+)?\\s*(?:百万|兆|億|万|千)?)+\\s*(?:MWh|kWh|GWh|kW|MW|Wh|円|人|世帯|戸|床|件|台|校|時間|ha|㎡|kg|%|％|社|店)`,
+);
+/** 数値が「県名の直後」でも、その県単独の値ではなく県の組の合計を語る書き方 (「岐阜・愛知・三重」「東京・神奈川・埼玉の3都県」) */
+const PREF_GROUP_BEFORE_RE = new RegExp(`(?:${PREF_NAMES.join("|")})(?:都|府|県)?\\s*[・と]\\s*$`);
+const PREF_GROUP_BETWEEN_RE = /の\s*[0-9０-９一二三四五六七八九十]+\s*(?:都道府県|都府県|府県|都県|道県|県)/;
+
+/**
+ * 増減を語る述語が数値の後ろにあるか。並列の項 (「、埼玉県は1,856円」) を飛ばして、述語を共有する最後の項の後ろを見る。
+ */
+function hasDeltaPredicateAfter(body, numEnd) {
+  let rest = body.slice(numEnd, numEnd + 80);
+  for (let m = PARALLEL_ITEM_RE.exec(rest); m; m = PARALLEL_ITEM_RE.exec(rest)) rest = rest.slice(m[0].length);
+  return DELTA_AFTER_RE.test(rest.slice(0, 8)) || DELTA_AFTER_PARTICLE_RE.test(rest.slice(0, 10));
+}
+
+/**
+ * 数値が、同じ段落に書いた同じ単位の 2 つの数値の差に等しいか (「620,576円が618,720円になり、…1,856円」)。
+ * 差は data に無い派生値なので、県の値と照合しない。本文が言い切った桁の精度 (かつ 0.5% 以内) で一致したときだけ認める。
+ */
+function equalsDifferenceInParagraph(body, numIndex, numEnd, claimBase, tolerance, unitTail, numRe) {
+  if (tolerance === null) return false;
+  // 「3万円」のような丸めた数は許容幅が広く、段落の数値の差に偶然一致しやすい。差は本文が計算して書く値なので 0.5% 以内に絞る
+  const diffTolerance = Math.min(tolerance, Math.abs(claimBase) * 0.005);
+  const paraStart = body.lastIndexOf("\n", numIndex - 1) + 1;
+  let paraEnd = body.indexOf("\n", numEnd);
+  if (paraEnd === -1) paraEnd = body.length;
+  const values = [];
+  for (const other of body.slice(paraStart, paraEnd).matchAll(numRe)) {
+    if (paraStart + other.index === numIndex || unitDimension(other[2]) !== unitDimension(unitTail)) continue;
+    const v = parseJapaneseNumeral(other[1].trim());
+    if (v !== null) values.push(v);
+  }
+  for (let i = 0; i < values.length; i++) {
+    for (let j = i + 1; j < values.length; j++) {
+      if (Math.abs(Math.abs(values[i] - values[j]) - claimBase) <= diffTolerance) return true;
+    }
+  }
+  return false;
+}
 
 const APPROX_BEFORE_RE = /(約|およそ|おおよそ|ほぼ|概ね|おおむね)\s*$/;
 
@@ -858,7 +905,10 @@ export function checkValueClaims(content, gt) {
       continue;
     }
 
-    if (DELTA_BEFORE_RE.test(between) || DELTA_CONTEXT_RE.test(metricContext) || DELTA_AFTER_RE.test(body.slice(nm.index + nm[0].length, nm.index + nm[0].length + 8))) continue;
+    if (DELTA_BEFORE_RE.test(between) || DELTA_CONTEXT_RE.test(metricContext) || hasDeltaPredicateAfter(body, nm.index + nm[0].length)) continue;
+
+    // 県の組 (「岐阜・愛知・三重」「東京・神奈川・埼玉の3都県」) の後ろの数値は組の合計で、最後の県の値ではない (MANUFACTURING-ZONE-CHART-LINEAGE-01 ③)
+    if (PREF_GROUP_BEFORE_RE.test(body.slice(Math.max(0, m.index - 8), m.index)) || PREF_GROUP_BETWEEN_RE.test(between)) continue;
 
     if (mentionsForeignMetric(metricContext, knownLabels)) continue;
 
@@ -890,6 +940,7 @@ export function checkValueClaims(content, gt) {
     // 「約」などで丸めを断っているときと、精度が読めない書き方は従来の ±5% (BLOG-TUTORIAL-GATE-GAPS-01:
     // ±5% だと 4,970戸 → 4,790戸 の書き誤りが一致扱いになっていた)
     const tolerance = APPROX_BEFORE_RE.test(body.slice(Math.max(0, nm.index - 8), nm.index)) ? null : claimTolerance(numeralRaw);
+    if (equalsDifferenceInParagraph(body, nm.index, nm.index + nm[0].length, claimBase, tolerance, unitTail, numRe)) continue;
     const matched = comparable.some((f) => {
       const base = factBaseValue(f);
       if (base === null || base === 0) return base === claimBase;

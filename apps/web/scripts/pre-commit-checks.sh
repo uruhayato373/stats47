@@ -241,7 +241,7 @@ if [ -n "$STAGED_ANY" ]; then
   echo -e "${GREEN}🔐 環境変数レジストリ・資産ポリシー・保守負債ガード...${NC}"
   stage "環境変数レジストリ (check-env-registry)"
   if ! node "$GUARD_ROOT/.claude/scripts/lib/check-env-registry.cjs"; then
-    echo -e "${RED}❌ 未登録の環境変数があります。.claude/config/env-registry.json に登録してください。${NC}"
+    echo -e "${RED}❌ 未登録の環境変数があります。config/env-registry.json に登録してください。${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
   stage "画像資産ポリシー (check-asset-policy)"
@@ -296,7 +296,7 @@ fi
 # workflow / planner / manifest / publisher の変更時だけ、CI と同じ fail-closed policy を先行実行する。
 stage "画像 pipeline: workflow policy (audit-workflow-policy)"
 STAGED_IMAGE_PIPELINE=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E \
-  '^(\.github/workflows/.*\.ya?ml|\.claude/scripts/(lib/(audit-workflow-policy\.cjs|__tests__/audit-workflow-policy\.test\.cjs)|sns/(prepare-buzz-map-batch\.ts|lib/buzz-map-batch-core\.mjs))|apps/web/scripts/(generate-(ogp-images|blog-thumbnails(-cloud)?)\.ts|manage-blog-codex-backgrounds\.ts|data/(image-generator-registry|blog-(ogp-visual|codex-background)-catalog)\.ts|lib/(image-generation-manifest|image-generation-r2-inspector|blog-image-generation|blog-image-render|blog-ogp-visual|blog-thumbnail-render|blog-codex-background-workflow|ranking-ogp-fallback-render|satori-image-render|gemini-image-client)\.ts|lib/__tests__/(image-generation-manifest|image-pipeline-source-policy|blog-ogp-visual|blog-codex-background-catalog|gemini-image-client)\.test\.ts)|assets/(ogp/ogp-bg-brand-(dark|light)\.jpg|blog/codex-backgrounds/.*\.jpg)|packages/(r2-storage/src/(image-pipeline\.ts|scripts/(push-(generated-image-set|exact-r2-assets(-core)?)\.ts|__tests__/push-(generated-image-set|exact-r2-assets)\.test\.ts))|types/src/(image-generation-manifest\.ts|index\.ts))|package\.json)$' || true)
+  '^(\.github/workflows/.*\.ya?ml|\.claude/scripts/(lib/(audit-workflow-policy\.cjs|__tests__/audit-workflow-policy\.test\.cjs)|sns/(prepare-buzz-map-batch\.ts|lib/buzz-map-batch-core\.mjs))|apps/web/scripts/(generate-(ogp-images|blog-thumbnails(-cloud)?)\.ts|manage-blog-codex-backgrounds\.ts|data/(image-generator-registry|blog-(ogp-visual|codex-background)-catalog)\.ts|lib/(image-generation-manifest|image-generation-r2-inspector|blog-image-generation|blog-image-render|blog-ogp-visual|blog-thumbnail-render|blog-codex-background-workflow|ranking-ogp-fallback-render|satori-image-render|gemini-image-client|blog-background-status|blog-fullbleed-background)\.ts|lib/__tests__/(image-generation-manifest|image-pipeline-source-policy|blog-ogp-visual|blog-codex-background-catalog|gemini-image-client|blog-background-status|blog-background-gate|blog-fullbleed-background)\.test\.ts)|assets/(ogp/ogp-bg-brand-(dark|light)\.jpg|blog/codex-backgrounds/.*\.jpg)|packages/(r2-storage/src/(image-pipeline\.ts|scripts/(push-(generated-image-set|exact-r2-assets(-core)?)\.ts|__tests__/push-(generated-image-set|exact-r2-assets)\.test\.ts))|types/src/(image-generation-manifest\.ts|index\.ts))|package\.json)$' || true)
 if [ -n "$STAGED_IMAGE_PIPELINE" ]; then
   echo -e "${GREEN}🖼️  画像生成 pipeline policy チェック...${NC}"
   if ! node "$GUARD_ROOT/.claude/scripts/lib/audit-workflow-policy.cjs" --strict; then

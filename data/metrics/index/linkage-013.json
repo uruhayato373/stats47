@@ -2018,7 +2018,19 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:earthquake-exposure",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:01000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:01000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:earthquake-exposure",
           "kind": "area-theme"
         },
         {
@@ -2026,7 +2038,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:02000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:earthquake-exposure",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:03000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:earthquake-exposure",
           "kind": "area-theme"
         },
         {
@@ -2034,7 +2062,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:04000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:earthquake-exposure",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:05000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:earthquake-exposure",
           "kind": "area-theme"
         },
         {
@@ -2042,7 +2086,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:06000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:earthquake-exposure",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:07000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:earthquake-exposure",
           "kind": "area-theme"
         },
         {
@@ -2050,7 +2110,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:08000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:earthquake-exposure",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:09000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:earthquake-exposure",
           "kind": "area-theme"
         },
         {
@@ -2058,7 +2134,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:10000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:earthquake-exposure",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:11000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:earthquake-exposure",
           "kind": "area-theme"
         },
         {
@@ -2066,7 +2158,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:12000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:earthquake-exposure",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:13000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:earthquake-exposure",
           "kind": "area-theme"
         },
         {
@@ -2074,7 +2182,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:14000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:earthquake-exposure",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:15000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:earthquake-exposure",
           "kind": "area-theme"
         },
         {
@@ -2082,7 +2206,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:16000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:earthquake-exposure",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:17000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:earthquake-exposure",
           "kind": "area-theme"
         },
         {
@@ -2090,7 +2230,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:18000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:earthquake-exposure",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:19000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:earthquake-exposure",
           "kind": "area-theme"
         },
         {
@@ -2098,7 +2254,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:20000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:earthquake-exposure",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:21000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:earthquake-exposure",
           "kind": "area-theme"
         },
         {
@@ -2106,7 +2278,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:22000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:earthquake-exposure",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:23000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:earthquake-exposure",
           "kind": "area-theme"
         },
         {
@@ -2114,7 +2302,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:24000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:earthquake-exposure",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:25000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:earthquake-exposure",
           "kind": "area-theme"
         },
         {
@@ -2122,7 +2326,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:26000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:earthquake-exposure",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:27000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:earthquake-exposure",
           "kind": "area-theme"
         },
         {
@@ -2130,7 +2350,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:28000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:earthquake-exposure",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:29000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:earthquake-exposure",
           "kind": "area-theme"
         },
         {
@@ -2138,7 +2374,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:30000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:earthquake-exposure",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:31000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:earthquake-exposure",
           "kind": "area-theme"
         },
         {
@@ -2146,7 +2398,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:32000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:earthquake-exposure",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:33000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:earthquake-exposure",
           "kind": "area-theme"
         },
         {
@@ -2154,7 +2422,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:34000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:earthquake-exposure",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:35000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:earthquake-exposure",
           "kind": "area-theme"
         },
         {
@@ -2162,7 +2446,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:36000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:earthquake-exposure",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:37000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:earthquake-exposure",
           "kind": "area-theme"
         },
         {
@@ -2170,7 +2470,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:38000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:earthquake-exposure",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:39000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:earthquake-exposure",
           "kind": "area-theme"
         },
         {
@@ -2178,7 +2494,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:40000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:earthquake-exposure",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:41000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:earthquake-exposure",
           "kind": "area-theme"
         },
         {
@@ -2186,7 +2518,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:42000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:earthquake-exposure",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:43000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:earthquake-exposure",
           "kind": "area-theme"
         },
         {
@@ -2194,7 +2542,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:44000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:earthquake-exposure",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:45000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:earthquake-exposure",
           "kind": "area-theme"
         },
         {
@@ -2202,7 +2566,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:46000:tsunami-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:earthquake-exposure",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:47000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:tsunami-exposure",
           "kind": "area-theme"
         },
         {
@@ -2210,12 +2586,22 @@
           "kind": "ranking"
         },
         {
+          "pageId": "theme:earthquake-exposure",
+          "kind": "theme"
+        },
+        {
           "pageId": "theme:safety",
+          "kind": "theme"
+        },
+        {
+          "pageId": "theme:tsunami-exposure",
           "kind": "theme"
         }
       ],
       "themes": [
-        "safety"
+        "earthquake-exposure",
+        "safety",
+        "tsunami-exposure"
       ]
     },
     {
@@ -4324,11 +4710,205 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:information-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:information-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "ranking:information-communication-industry-annual-income",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:information-industry",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "information-industry"
+      ]
     },
     {
       "metricKey": "information-communication-private-net-value-added",
@@ -7648,7 +8228,15 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:communication-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:communication-access",
           "kind": "area-theme"
         },
         {
@@ -7656,7 +8244,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:03000:communication-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:communication-access",
           "kind": "area-theme"
         },
         {
@@ -7664,7 +8260,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:05000:communication-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:communication-access",
           "kind": "area-theme"
         },
         {
@@ -7672,7 +8276,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:07000:communication-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:communication-access",
           "kind": "area-theme"
         },
         {
@@ -7680,7 +8292,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:09000:communication-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:communication-access",
           "kind": "area-theme"
         },
         {
@@ -7688,7 +8308,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:11000:communication-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:communication-access",
           "kind": "area-theme"
         },
         {
@@ -7696,7 +8324,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:13000:communication-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:communication-access",
           "kind": "area-theme"
         },
         {
@@ -7704,7 +8340,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:15000:communication-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:communication-access",
           "kind": "area-theme"
         },
         {
@@ -7712,7 +8356,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:17000:communication-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:communication-access",
           "kind": "area-theme"
         },
         {
@@ -7720,7 +8372,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:19000:communication-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:communication-access",
           "kind": "area-theme"
         },
         {
@@ -7728,7 +8388,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:21000:communication-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:communication-access",
           "kind": "area-theme"
         },
         {
@@ -7736,7 +8404,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:23000:communication-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:communication-access",
           "kind": "area-theme"
         },
         {
@@ -7744,7 +8420,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:25000:communication-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:communication-access",
           "kind": "area-theme"
         },
         {
@@ -7752,7 +8436,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:27000:communication-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:communication-access",
           "kind": "area-theme"
         },
         {
@@ -7760,7 +8452,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:29000:communication-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:communication-access",
           "kind": "area-theme"
         },
         {
@@ -7768,7 +8468,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:31000:communication-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:communication-access",
           "kind": "area-theme"
         },
         {
@@ -7776,7 +8484,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:33000:communication-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:communication-access",
           "kind": "area-theme"
         },
         {
@@ -7784,7 +8500,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:35000:communication-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:communication-access",
           "kind": "area-theme"
         },
         {
@@ -7792,7 +8516,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:37000:communication-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:communication-access",
           "kind": "area-theme"
         },
         {
@@ -7800,7 +8532,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:39000:communication-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:communication-access",
           "kind": "area-theme"
         },
         {
@@ -7808,7 +8548,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:41000:communication-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:communication-access",
           "kind": "area-theme"
         },
         {
@@ -7816,7 +8564,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:43000:communication-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:communication-access",
           "kind": "area-theme"
         },
         {
@@ -7824,11 +8580,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:45000:communication-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:45000:household-food-spending",
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:46000:communication-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:communication-access",
           "kind": "area-theme"
         },
         {
@@ -7840,11 +8608,16 @@
           "kind": "ranking"
         },
         {
+          "pageId": "theme:communication-access",
+          "kind": "theme"
+        },
+        {
           "pageId": "theme:household-food-spending",
           "kind": "theme"
         }
       ],
       "themes": [
+        "communication-access",
         "household-food-spending"
       ]
     },
@@ -10248,6 +11021,10 @@
         },
         {
           "pageId": "blog:telework-gap-tokyo-6x",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:telework-rate-tokyo-gap",
           "kind": "blog"
         },
         {

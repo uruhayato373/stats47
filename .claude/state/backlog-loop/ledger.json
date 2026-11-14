@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-13T22:13:00.707Z",
+  "updatedAt": "2026-11-14T04:23:49.151Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -12091,6 +12091,115 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-13T22:13:00.707Z"
+    },
+    "HUB-LIST-FINDABILITY-01": {
+      "class": "impl-large",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "一覧ページで目的のものを探しにくい (分類・検索・並び順・日付)",
+      "attempts": [
+        {
+          "at": "2026-11-14T01:24:05.171Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "cd apps/web && npx vitest run src/features/survey src/features/theme-dashboard/lib/__tests__/group-themes-for-listing.test.ts src/features/blog",
+              "cd apps/web && npx vitest related --run (変更した 11 ファイル)",
+              "cd apps/web && npx tsc --noEmit --skipLibCheck",
+              "cd apps/web && npx eslint (変更したファイル)",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "99b032f20 /survey は府省庁ごと、/themes はサイドバーと同じ 5 分野ごとに分け、ページ内の分類リンクを置きました。/survey・/themes・/municipalities・/tag・/blog・/areas には並び順の基準を出し、タグの記事カードには公開日を出しました。375px と 1280px のスクリーンショットで、はみ出しが無いことを確かめました。テスト、型検査、preflight:pr はすべて通っています。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-14T01:24:05.171Z"
+    },
+    "BLOG-RELEASE-CALENDAR-01": {
+      "class": "impl-large",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "統計の公表日に合わせて記事を更新・新規公開する暦を作る",
+      "attempts": [
+        {
+          "at": "2026-11-14T01:24:05.334Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/blog/lib/__tests__/release-calendar.test.mjs .claude/scripts/blog/lib/__tests__/stale-data-years.test.mjs",
+              "npx tsc -p .claude/scripts/tsconfig.checkjs.json --noEmit",
+              "npx tsc -p .claude/scripts/tsconfig.json --noEmit",
+              "npm run check-datasets",
+              "node .claude/scripts/blog/build-stale-data-years.mjs",
+              "npm run preflight:pr",
+              "git commit (pre-commit 全段通過)"
+            ],
+            "pass": true
+          },
+          "evidence": "74137ea77 公表暦の台帳を11調査分作りました。各行は e-Stat・統計局・内閣府のページで確かめた実際の公表日を証拠に持ちます。週次の build-stale-data-years.mjs を公開R2で実行すると、releaseDue に公表済みなのに古い年のままの記事が236件出ました。このうち94指標は、記事の更新より先に指標の取り込みが要ります。テスト6件・型検査2種・check-datasets・preflight:pr はすべて通りました。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-14T01:24:05.334Z"
+    },
+    "AREA-DATABOOK-CHART-FIX-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "県データブックの推移グラフの点数不足と文字・単位",
+      "attempts": [
+        {
+          "at": "2026-11-14T04:23:49.151Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run (apps/web area-databook-trend-points.test.ts)"
+            ],
+            "pass": true
+          },
+          "evidence": "5cde88232: 推移の点数不足は指標の years の絞り込みが原因で f6c06c75c・43559317d で解消済み。公開 R2 で推移の図 6 枚の 9 指標が 47 県とも 8〜50 年分。390px で文字 11.1px 以上・縦軸に単位 (localhost)。years を戻すと落ちるテストを追加",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-14T04:23:49.151Z"
     }
   }
 }

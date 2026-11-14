@@ -4,67 +4,167 @@
   "description": "data/themes/portfolio.json の形の契約。テーマごとの評価 (指標数・チャート数・レビューの有無・GSC/GA4 の計測・データ品質・ライフサイクル判定) を 1 テーマ 1 行で持つ。テーマの定義 (themes.catalogs) は ThemeCatalog が唯一の正本で、変動値 (GSC/GA4/品質評価) はここにだけ置き、カタログに計測値を書かない。機械項目は build-theme-portfolio.ts (カタログ・レビュー文書から導出) と aggregate-theme-metrics.ts (計測 snapshot・公開データの品質) が再導出し、意味項目 (lifecycleStatus / currentHypothesis / evidenceRefs / nextReviewAt) は build-theme-portfolio.ts の --set で変える。手で編集しない。判定の規律 (候補の根拠の最低数・merge/retire に要る集計済みの 56 日窓・status ごとに許す数値・カタログ登録との一致) は validate-theme-state.mjs が持ち、最低標本数 (GSC 表示回数 200・GA4 ページビュー 100) は theme-metrics-core.mjs が持つ。運用は .claude/skills/theme/manage-theme-portfolio/reference/テーマポートフォリオ運用.md。",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schemaVersion", "generatedAt", "themes"],
+  "required": [
+    "schemaVersion",
+    "generatedAt",
+    "themes"
+  ],
   "definitions": {
-    "count": { "type": "integer", "minimum": 0 },
-    "week": { "type": "string", "pattern": "^\\d{4}-W\\d{2}$" },
+    "count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "week": {
+      "type": "string",
+      "pattern": "^\\d{4}-W\\d{2}$"
+    },
     "scope": {
       "description": "計測の対象範囲。GSC は検索全体 (search-console)、GA4 と内部遷移は日本国内だけ (Japan)。raw の GA4 (国条件なし) は効果判定や統廃合判断に使わない",
-      "enum": ["search-console", "Japan"]
+      "enum": [
+        "search-console",
+        "Japan"
+      ]
     },
     "metricStatus": {
       "description": "measured = 集計済みで最低標本数以上 (カウント値も比率値も解釈できる) / measured-low = 集計済みだが最低標本数未満 (カウント値だけ保存し、比率値は標本不足でノイズ支配のため保存しない。窓での低カウントは需要が低い証拠になる) / insufficient-data = 集計自体が未実施・取得不能 (数値を持たない) / not-instrumented = 計装が存在しない (数値を持たない)",
-      "enum": ["measured", "measured-low", "insufficient-data", "not-instrumented"]
+      "enum": [
+        "measured",
+        "measured-low",
+        "insufficient-data",
+        "not-instrumented"
+      ]
     },
     "metricBase": {
       "type": "object",
-      "required": ["status"],
+      "required": [
+        "status"
+      ],
       "properties": {
-        "status": { "$ref": "#/definitions/metricStatus" },
-        "windowDays": { "description": "56 = 期間の重複しない 2 つの週次窓 (最新週と 4 週前) の合算 (metrics)、28 = 最新の単独の 28 日窓 (metrics28d)。週次 snapshot は各週 last-28d 窓なので、重複する窓を合算しない。集計できなかったときは 0", "type": "integer", "minimum": 0 },
-        "weeks": { "description": "集計に使った週次窓 (集計できなかったときは空)", "type": "array", "items": { "$ref": "#/definitions/week" } },
-        "periodStart": { "$ref": "common.schema.json#/$defs/date" },
-        "periodEnd": { "$ref": "common.schema.json#/$defs/date" },
-        "scope": { "$ref": "#/definitions/scope" },
-        "reason": { "description": "集計できなかった理由 (insufficient-data のとき)", "type": "string" }
+        "status": {
+          "$ref": "#/definitions/metricStatus"
+        },
+        "windowDays": {
+          "description": "56 = 期間の重複しない 2 つの週次窓 (最新週と 4 週前) の合算 (metrics)、28 = 最新の単独の 28 日窓 (metrics28d)。週次 snapshot は各週 last-28d 窓なので、重複する窓を合算しない。集計できなかったときは 0",
+          "type": "integer",
+          "minimum": 0
+        },
+        "weeks": {
+          "description": "集計に使った週次窓 (集計できなかったときは空)",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/week"
+          }
+        },
+        "periodStart": {
+          "$ref": "common.schema.json#/$defs/date"
+        },
+        "periodEnd": {
+          "$ref": "common.schema.json#/$defs/date"
+        },
+        "scope": {
+          "$ref": "#/definitions/scope"
+        },
+        "reason": {
+          "description": "集計できなかった理由 (insufficient-data のとき)",
+          "type": "string"
+        }
       }
     },
     "metrics": {
       "description": "実測の集計コピー。取れない値は status で明示し、推測値を入れない。metrics は非重複 56 日窓の合算、metrics28d は成功メタ付きの最新の単独 28 日窓 (公開後だけの完全窓を読む launch の d28 が使う)",
       "type": "object",
       "additionalProperties": false,
-      "required": ["gsc", "ga4", "internalNav"],
+      "required": [
+        "gsc",
+        "ga4",
+        "internalNav"
+      ],
       "properties": {
         "gsc": {
-          "allOf": [{ "$ref": "#/definitions/metricBase" }],
+          "allOf": [
+            {
+              "$ref": "#/definitions/metricBase"
+            }
+          ],
           "type": "object",
           "properties": {
-            "status": {}, "windowDays": {}, "weeks": {}, "periodStart": {}, "periodEnd": {}, "scope": {}, "reason": {},
-            "clicks": { "$ref": "#/definitions/count" },
-            "impressions": { "$ref": "#/definitions/count" },
-            "ctr": { "description": "合算 clicks / 合算 impressions。measured のときだけ", "type": "number" },
-            "avgPosition": { "description": "表示回数で重みを付けた平均。measured のときだけ", "type": "number" }
+            "status": {},
+            "windowDays": {},
+            "weeks": {},
+            "periodStart": {},
+            "periodEnd": {},
+            "scope": {},
+            "reason": {},
+            "clicks": {
+              "$ref": "#/definitions/count"
+            },
+            "impressions": {
+              "$ref": "#/definitions/count"
+            },
+            "ctr": {
+              "description": "合算 clicks / 合算 impressions。measured のときだけ",
+              "type": "number"
+            },
+            "avgPosition": {
+              "description": "表示回数で重みを付けた平均。measured のときだけ",
+              "type": "number"
+            }
           },
           "additionalProperties": false
         },
         "ga4": {
-          "allOf": [{ "$ref": "#/definitions/metricBase" }],
+          "allOf": [
+            {
+              "$ref": "#/definitions/metricBase"
+            }
+          ],
           "type": "object",
           "properties": {
-            "status": {}, "windowDays": {}, "weeks": {}, "periodStart": {}, "periodEnd": {}, "scope": {}, "reason": {},
-            "pageViews": { "description": "2 窓合算 (加算できる)。measured-low もここまで", "$ref": "#/definitions/count" },
-            "activeUsersLast28d": { "description": "ユーザー数は週をまたいで加算できないので最新の窓だけ。measured のときだけ", "$ref": "#/definitions/count" },
-            "engagementRatePvWeighted": { "description": "週次 snapshot に engagedSessions が無いため、pageViews で重みを付けた engagementRate で代える (近似であることを名前で示す)。measured のときだけ", "type": "number" },
-            "avgSessionDurationSecPvWeighted": { "description": "pageViews で重みを付けた平均。measured のときだけ", "type": "number" }
+            "status": {},
+            "windowDays": {},
+            "weeks": {},
+            "periodStart": {},
+            "periodEnd": {},
+            "scope": {},
+            "reason": {},
+            "pageViews": {
+              "description": "2 窓合算 (加算できる)。measured-low もここまで",
+              "$ref": "#/definitions/count"
+            },
+            "activeUsersLast28d": {
+              "description": "ユーザー数は週をまたいで加算できないので最新の窓だけ。measured のときだけ",
+              "$ref": "#/definitions/count"
+            },
+            "engagementRatePvWeighted": {
+              "description": "週次 snapshot に engagedSessions が無いため、pageViews で重みを付けた engagementRate で代える (近似であることを名前で示す)。measured のときだけ",
+              "type": "number"
+            },
+            "avgSessionDurationSecPvWeighted": {
+              "description": "pageViews で重みを付けた平均。measured のときだけ",
+              "type": "number"
+            }
           },
           "additionalProperties": false
         },
         "internalNav": {
-          "allOf": [{ "$ref": "#/definitions/metricBase" }],
+          "allOf": [
+            {
+              "$ref": "#/definitions/metricBase"
+            }
+          ],
           "type": "object",
           "properties": {
-            "status": {}, "windowDays": {}, "weeks": {}, "periodStart": {}, "periodEnd": {}, "scope": {}, "reason": {},
-            "eventCount": { "description": "テーマの theme_* の nav_click の件数 (Japan のみ)。未取得の窓や欠落行は insufficient-data とし、0 で補完しない", "$ref": "#/definitions/count" }
+            "status": {},
+            "windowDays": {},
+            "weeks": {},
+            "periodStart": {},
+            "periodEnd": {},
+            "scope": {},
+            "reason": {},
+            "eventCount": {
+              "description": "テーマの theme_* の nav_click の件数 (Japan のみ)。未取得の窓や欠落行は insufficient-data とし、0 で補完しない",
+              "$ref": "#/definitions/count"
+            }
           },
           "additionalProperties": false
         }
@@ -72,75 +172,467 @@
     }
   },
   "properties": {
-    "schemaVersion": { "const": 1 },
-    "generatedAt": { "description": "生成日", "$ref": "common.schema.json#/$defs/date" },
+    "schemaVersion": {
+      "const": 1
+    },
+    "generatedAt": {
+      "description": "生成日",
+      "$ref": "common.schema.json#/$defs/date"
+    },
     "themes": {
       "type": "array",
       "items": {
         "type": "object",
         "additionalProperties": false,
         "required": [
-          "themeKey", "catalogStatus", "lifecycleStatus", "reviewStatus", "reviewGate", "reviewDocRef", "latestDataYear",
-          "primaryMetricCount", "secondaryMetricCount", "contextMetricCount", "selectionMissingCount", "chartCount",
-          "officialSourceReviewedAt", "gscSnapshotRef", "ga4SnapshotRef", "metrics", "contentCoverage", "dataQualityStatus",
-          "currentHypothesis", "nextReviewAt", "evidenceRefs"
+          "themeKey",
+          "catalogStatus",
+          "lifecycleStatus",
+          "reviewStatus",
+          "reviewGate",
+          "reviewDocRef",
+          "latestDataYear",
+          "primaryMetricCount",
+          "secondaryMetricCount",
+          "contextMetricCount",
+          "selectionMissingCount",
+          "chartCount",
+          "officialSourceReviewedAt",
+          "gscSnapshotRef",
+          "ga4SnapshotRef",
+          "metrics",
+          "contentCoverage",
+          "dataQualityStatus",
+          "currentHypothesis",
+          "nextReviewAt",
+          "evidenceRefs"
         ],
         "properties": {
-          "themeKey": { "description": "一意。テーマのカタログ (themes.catalogs) の key (実在は check-datasets の refs が止める)", "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+          "themeKey": {
+            "description": "一意。テーマのカタログ (themes.catalogs) の key (実在は check-datasets の refs が止める)",
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+          },
           "catalogStatus": {
             "description": "catalog = ThemeCatalog に登録がある / legacy = IndicatorSet だけ。THEME_CATALOGS の登録状況との一致は validate-theme-state.mjs が検査する",
-            "enum": ["catalog", "legacy"]
+            "enum": [
+              "catalog",
+              "legacy"
+            ]
           },
           "lifecycleStatus": {
             "description": "意味項目。keep = 現状維持でよい / improve = 改善作業中 / merge-candidate・split-candidate・rename-candidate・retire-candidate = 統合・分割・改名・廃止の候補 (根拠付き) / insufficient-data = 判断する計測が足りない。根拠のない候補は validate-theme-state.mjs が止める",
-            "enum": ["keep", "improve", "merge-candidate", "split-candidate", "rename-candidate", "retire-candidate", "insufficient-data"]
+            "enum": [
+              "keep",
+              "improve",
+              "merge-candidate",
+              "split-candidate",
+              "rename-candidate",
+              "retire-candidate",
+              "insufficient-data"
+            ]
           },
           "reviewStatus": {
             "description": "reviewed = 該当のレビュー文書がある / review-missing = 無い / stale = レビューの後にカタログが大きく変わった",
-            "enum": ["reviewed", "review-missing", "stale"]
+            "enum": [
+              "reviewed",
+              "review-missing",
+              "stale"
+            ]
           },
-          "reviewGate": { "description": "レビュー文書の frontmatter の status をそのまま転記する (自由な文字列)。次の作業の優先度の判断に使う", "type": ["string", "null"] },
-          "reviewDocRef": { "description": "レビュー文書 (台帳 themes.reviews。data/themes/reviews/) のうち最新の日付のものへのパス", "type": ["string", "null"] },
-          "latestDataYear": { "description": "公開データ (R2 の app/ranking/<key>/values.json) の実測から。未集計は null", "type": ["string", "null"] },
-          "primaryMetricCount": { "description": "ThemeCatalog から導出", "$ref": "#/definitions/count" },
-          "secondaryMetricCount": { "$ref": "#/definitions/count" },
-          "contextMetricCount": { "$ref": "#/definitions/count" },
-          "selectionMissingCount": { "description": "primary と secondary のうち選定根拠 (selection) が未記入の数。legacy は概念が無いので null", "anyOf": [{ "$ref": "#/definitions/count" }, { "type": "null" }] },
-          "chartCount": { "description": "legacy は null", "anyOf": [{ "$ref": "#/definitions/count" }, { "type": "null" }] },
-          "officialSourceReviewedAt": { "description": "選定根拠の surveyedAt の最新、無ければレビューの日付、それも無ければ null", "anyOf": [{ "$ref": "common.schema.json#/$defs/date" }, { "type": "null" }] },
-          "gscSnapshotRef": { "description": "集計に使った GSC snapshot のパス", "type": ["string", "null"] },
-          "ga4SnapshotRef": { "description": "集計に使った GA4 snapshot (Japan-only の pages-clean.csv) のパス", "type": ["string", "null"] },
-          "metrics": { "$ref": "#/definitions/metrics" },
-          "metrics28d": { "$ref": "#/definitions/metrics" },
+          "reviewGate": {
+            "description": "レビュー文書の frontmatter の status をそのまま転記する (自由な文字列)。次の作業の優先度の判断に使う",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "reviewDocRef": {
+            "description": "レビュー文書 (台帳 themes.reviews。data/themes/reviews/) のうち最新の日付のものへのパス",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "latestDataYear": {
+            "description": "公開データ (R2 の app/ranking/<key>/values.json) の実測から。未集計は null",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "primaryMetricCount": {
+            "description": "ThemeCatalog から導出",
+            "$ref": "#/definitions/count"
+          },
+          "secondaryMetricCount": {
+            "$ref": "#/definitions/count"
+          },
+          "contextMetricCount": {
+            "$ref": "#/definitions/count"
+          },
+          "selectionMissingCount": {
+            "description": "primary と secondary のうち選定根拠 (selection) が未記入の数。legacy は概念が無いので null",
+            "anyOf": [
+              {
+                "$ref": "#/definitions/count"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "chartCount": {
+            "description": "legacy は null",
+            "anyOf": [
+              {
+                "$ref": "#/definitions/count"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "officialSourceReviewedAt": {
+            "description": "選定根拠の surveyedAt の最新、無ければレビューの日付、それも無ければ null",
+            "anyOf": [
+              {
+                "$ref": "common.schema.json#/$defs/date"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "gscSnapshotRef": {
+            "description": "集計に使った GSC snapshot のパス",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ga4SnapshotRef": {
+            "description": "集計に使った GA4 snapshot (Japan-only の pages-clean.csv) のパス",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "metrics": {
+            "$ref": "#/definitions/metrics"
+          },
+          "metrics28d": {
+            "$ref": "#/definitions/metrics"
+          },
           "contentCoverage": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["relatedArticles"],
-            "properties": { "relatedArticles": { "description": "関連記事数。未集計は null", "anyOf": [{ "$ref": "#/definitions/count" }, { "type": "null" }] } }
+            "required": [
+              "relatedArticles"
+            ],
+            "properties": {
+              "relatedArticles": {
+                "description": "関連記事数。未集計は null",
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/count"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
           },
           "dataQuality": {
             "description": "公開データ (R2 の app/ranking/<key>/values.json) の実測 (aggregate-theme-metrics.ts)。古い系列を隠さないための補助で、古さは更新漏れの断定ではなく一次資料確認の入口。海の無い県や秘匿の欠測を 0 に変えない",
             "type": "object",
             "additionalProperties": false,
-            "required": ["observedAt", "keysChecked", "oldestLatestDataYear", "ageReviewKeys", "freshnessStatus", "missingKeys", "missingKeyList", "latestYearPrefCoverageMin"],
+            "required": [
+              "observedAt",
+              "keysChecked",
+              "oldestLatestDataYear",
+              "ageReviewKeys",
+              "freshnessStatus",
+              "missingKeys",
+              "missingKeyList",
+              "latestYearPrefCoverageMin"
+            ],
             "properties": {
-              "observedAt": { "description": "品質監査 (quality.json) の観測日時。監査が無ければ null", "type": ["string", "null"] },
-              "keysChecked": { "$ref": "#/definitions/count" },
-              "oldestLatestDataYear": { "description": "指標ごとの最新年のうち最も古いもの", "type": ["string", "null"] },
-              "ageReviewKeys": { "description": "最新の観測が 5 年以上前の指標のキー。一次資料を確認する候補で、未更新の確定ではない。5 年周期の調査を更新遅延と断定しない", "type": "array", "items": { "type": "string" } },
-              "freshnessStatus": { "description": "公表済みの新年との照合が別の工程 (月次の公式資料の確認) であることを示す", "enum": ["requires-official-release-check"] },
-              "missingKeys": { "description": "404 または空だった指標の数", "$ref": "#/definitions/count" },
-              "missingKeyList": { "description": "その先頭 10 件", "type": "array", "items": { "type": "string" } },
-              "latestYearPrefCoverageMin": { "description": "最新年の都道府県カバレッジの最小値 (都道府県の行が無い指標は対象外)。未集計は null", "anyOf": [{ "$ref": "#/definitions/count" }, { "type": "null" }] }
+              "observedAt": {
+                "description": "品質監査 (quality.json) の観測日時。監査が無ければ null",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "keysChecked": {
+                "$ref": "#/definitions/count"
+              },
+              "oldestLatestDataYear": {
+                "description": "指標ごとの最新年のうち最も古いもの",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "ageReviewKeys": {
+                "description": "最新の観測が 5 年以上前の指標のキー。一次資料を確認する候補で、未更新の確定ではない。5 年周期の調査を更新遅延と断定しない",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "freshnessStatus": {
+                "description": "公表済みの新年との照合が別の工程 (月次の公式資料の確認) であることを示す",
+                "enum": [
+                  "requires-official-release-check"
+                ]
+              },
+              "missingKeys": {
+                "description": "404 または空だった指標の数",
+                "$ref": "#/definitions/count"
+              },
+              "missingKeyList": {
+                "description": "その先頭 10 件",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "latestYearPrefCoverageMin": {
+                "description": "最新年の都道府県カバレッジの最小値 (都道府県の行が無い指標は対象外)。未集計は null",
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/count"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
             }
           },
           "dataQualityStatus": {
             "description": "ok = 欠測も品質 error も無い / gaps = 値の欠測または品質 error がある / unknown = 品質監査が無い、または最新年が取れない。経過年数だけで更新遅延を確定しない",
-            "enum": ["ok", "gaps", "unknown"]
+            "enum": [
+              "ok",
+              "gaps",
+              "unknown"
+            ]
           },
-          "currentHypothesis": { "description": "意味項目。無ければ null", "type": ["string", "null"] },
-          "nextReviewAt": { "anyOf": [{ "$ref": "common.schema.json#/$defs/date" }, { "type": "null" }] },
-          "evidenceRefs": { "description": "レビュー文書・実測・実験 ID への参照。merge/split/rename/retire の候補は 2 件以上 (validate-theme-state.mjs)", "type": "array", "items": { "type": "string", "minLength": 1 } }
+          "currentHypothesis": {
+            "description": "意味項目。無ければ null",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "nextReviewAt": {
+            "anyOf": [
+              {
+                "$ref": "common.schema.json#/$defs/date"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "evidenceRefs": {
+            "description": "レビュー文書・実測・実験 ID への参照。merge/split/rename/retire の候補は 2 件以上 (validate-theme-state.mjs)",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "metricsAllRoutes": {
+            "description": "全ルート込み (全国版 /themes/<テーマ> + 県別 /areas/<県>/<テーマ> + 市区町村別) の非重複 56 日。テーマの需要はこちらで読む。metrics は全国版だけで、実験の baseline との比較用 (2026-11-14)",
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "gsc",
+              "ga4"
+            ],
+            "properties": {
+              "gsc": {
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/metricBase"
+                  }
+                ],
+                "type": "object",
+                "properties": {
+                  "status": {},
+                  "windowDays": {},
+                  "weeks": {},
+                  "periodStart": {},
+                  "periodEnd": {},
+                  "scope": {},
+                  "reason": {},
+                  "clicks": {
+                    "$ref": "#/definitions/count"
+                  },
+                  "impressions": {
+                    "$ref": "#/definitions/count"
+                  },
+                  "ctr": {
+                    "description": "合算 clicks / 合算 impressions。measured のときだけ",
+                    "type": "number"
+                  },
+                  "avgPosition": {
+                    "description": "表示回数で重みを付けた平均。measured のときだけ",
+                    "type": "number"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "ga4": {
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/metricBase"
+                  }
+                ],
+                "type": "object",
+                "properties": {
+                  "status": {},
+                  "windowDays": {},
+                  "weeks": {},
+                  "periodStart": {},
+                  "periodEnd": {},
+                  "scope": {},
+                  "reason": {},
+                  "pageViews": {
+                    "description": "2 窓合算 (加算できる)。measured-low もここまで",
+                    "$ref": "#/definitions/count"
+                  },
+                  "activeUsersLast28d": {
+                    "description": "ユーザー数は週をまたいで加算できないので最新の窓だけ。measured のときだけ",
+                    "$ref": "#/definitions/count"
+                  },
+                  "engagementRatePvWeighted": {
+                    "description": "週次 snapshot に engagedSessions が無いため、pageViews で重みを付けた engagementRate で代える (近似であることを名前で示す)。measured のときだけ",
+                    "type": "number"
+                  },
+                  "avgSessionDurationSecPvWeighted": {
+                    "description": "pageViews で重みを付けた平均。measured のときだけ",
+                    "type": "number"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "metricsAllRoutes28d": {
+            "description": "全ルート込みの最新の単独 28 日と、ルート別の内訳",
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "gsc",
+              "ga4",
+              "routes"
+            ],
+            "properties": {
+              "gsc": {
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/metricBase"
+                  }
+                ],
+                "type": "object",
+                "properties": {
+                  "status": {},
+                  "windowDays": {},
+                  "weeks": {},
+                  "periodStart": {},
+                  "periodEnd": {},
+                  "scope": {},
+                  "reason": {},
+                  "clicks": {
+                    "$ref": "#/definitions/count"
+                  },
+                  "impressions": {
+                    "$ref": "#/definitions/count"
+                  },
+                  "ctr": {
+                    "description": "合算 clicks / 合算 impressions。measured のときだけ",
+                    "type": "number"
+                  },
+                  "avgPosition": {
+                    "description": "表示回数で重みを付けた平均。measured のときだけ",
+                    "type": "number"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "ga4": {
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/metricBase"
+                  }
+                ],
+                "type": "object",
+                "properties": {
+                  "status": {},
+                  "windowDays": {},
+                  "weeks": {},
+                  "periodStart": {},
+                  "periodEnd": {},
+                  "scope": {},
+                  "reason": {},
+                  "pageViews": {
+                    "description": "2 窓合算 (加算できる)。measured-low もここまで",
+                    "$ref": "#/definitions/count"
+                  },
+                  "activeUsersLast28d": {
+                    "description": "ユーザー数は週をまたいで加算できないので最新の窓だけ。measured のときだけ",
+                    "$ref": "#/definitions/count"
+                  },
+                  "engagementRatePvWeighted": {
+                    "description": "週次 snapshot に engagedSessions が無いため、pageViews で重みを付けた engagementRate で代える (近似であることを名前で示す)。measured のときだけ",
+                    "type": "number"
+                  },
+                  "avgSessionDurationSecPvWeighted": {
+                    "description": "pageViews で重みを付けた平均。measured のときだけ",
+                    "type": "number"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "routes": {
+                "description": "最新の 28 日のルート別の内訳 (ルートの形は content.routes の pattern)",
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "route",
+                    "pages",
+                    "clicks",
+                    "impressions",
+                    "pageViews"
+                  ],
+                  "properties": {
+                    "route": {
+                      "type": "string"
+                    },
+                    "pages": {
+                      "$ref": "#/definitions/count"
+                    },
+                    "clicks": {
+                      "$ref": "#/definitions/count"
+                    },
+                    "impressions": {
+                      "$ref": "#/definitions/count"
+                    },
+                    "pageViews": {
+                      "$ref": "#/definitions/count"
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

@@ -2056,6 +2056,194 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:local-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:barber-beauty-salon-regional-gap",
           "kind": "blog"
         },
@@ -2066,9 +2254,15 @@
         {
           "pageId": "ranking:public-bath-count-per-100k",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:local-services",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "local-services"
+      ]
     },
     {
       "metricKey": "public-bond-expenses-nature-prefecture",
@@ -4297,15 +4491,209 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:communication-access",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:communication-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:public-phone-count-per-1000-prefecture-gap",
           "kind": "blog"
         },
         {
           "pageId": "ranking:public-phone-count-per-1000",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:communication-access",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "communication-access"
+      ]
     },
     {
       "metricKey": "public-rent-consumption-expenditure",

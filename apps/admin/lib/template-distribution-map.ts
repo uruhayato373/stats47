@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import type { Topology } from 'topojson-specification';
-import { LIGHT_THEME, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
+import { LIGHT_THEME, TEMPLATE_MIN_FONT_SIZE, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
 import { computeBuzzMapGeo } from '../../remotion/src/features/buzz-map/geo';
 import { renderClassLegend, renderTopThree } from '../../remotion/src/features/data-cards/all47-svg';
 import { resolveTileScale } from '../../remotion/src/features/data-cards/tile-scale';
@@ -69,7 +69,7 @@ export function renderDistributionMapChart(chart: RankingChart, theme: ChartThem
   };
   const rule = okinawaRule(geo.inset ?? [], geo.mainland);
   const inset = `<line data-okinawa-rule="" x1="${rule.from.x}" y1="${rule.from.y}" x2="${rule.to.x}" y2="${rule.to.y}" stroke="${theme.line}" stroke-width="2"/>
-    <text x="${rule.label.x}" y="${rule.label.y}" text-anchor="middle" font-size="24" fill="${theme.muted}">沖縄</text>`;
+    <text x="${rule.label.x}" y="${rule.label.y}" text-anchor="middle" font-size="${TEMPLATE_MIN_FONT_SIZE}" fill="${theme.muted}">沖縄</text>`;
   const all = rows.map((row) => ({ areaCode: row.area_code, areaName: row.area_name, value: row.value }));
   const format = chart.formatValue;
   const topThree = renderTopThree(all, { x: SAMPLE_FRAME.left, ...TOP_THREE, unit: chart.unit, format, theme });

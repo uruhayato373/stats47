@@ -2,6 +2,13 @@ import type { ChartTheme } from '@stats47/types';
 
 export { CHART_THEMES, LIGHT_THEME, type ChartTheme } from '@stats47/types';
 
+/**
+ * The smallest text size in a 1080-wide 4:5 image type. The same image goes to note, X, Instagram and
+ * the blog, where a phone shows it about 360px wide (1/3): 30 stays at 10px on screen (owner decision
+ * 2026-11-14, CHART-AXIS-READABILITY-01). Lay text out so it fits at this size; never shrink below it.
+ */
+export const TEMPLATE_MIN_FONT_SIZE = 30;
+
 /** `stroke` attributes for an outlined shape, or nothing in a theme without outlines. */
 export const outlineAttrs = (theme: ChartTheme, width = 2) =>
   theme.outline ? ` stroke="${theme.outline}" stroke-width="${width}"` : '';

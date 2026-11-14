@@ -237,6 +237,13 @@ function getOpt(args: string[], name: string): string | undefined {
   return i >= 0 ? args[i + 1] : undefined;
 }
 
+/** Schema の date (YYYY-MM-DD) の形で、かつ暦にある日付か (2026-02-30 のような値を書かない) */
+function isCalendarDate(value: string): boolean {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const date = new Date(`${value}T00:00:00Z`);
+  return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value;
+}
+
 /** 意味項目の語彙。正本は portfolio の Schema の enum で、ここに値を写さない */
 function vocabulary(field: "lifecycleStatus" | "editorialStatus"): string[] {
   const schemaPath = DATASETS.find((d) => d.id === "surveys.portfolio")?.schema;
@@ -273,13 +280,17 @@ async function main() {
         process.exit(1);
       }
     }
+    const nr = getOpt(args, "--next-review");
+    if (nr && !isCalendarDate(nr)) {
+      console.error(`✗ --next-review ${nr} は YYYY-MM-DD の日付ではない (暦に無い日付も書かない)`);
+      process.exit(1);
+    }
     if (lc) entry.lifecycleStatus = lc;
     if (ed) entry.editorialStatus = ed;
     const hyp = getOpt(args, "--hypothesis");
     if (hyp) entry.currentHypothesis = hyp;
     const ev = getOpt(args, "--add-evidence");
     if (ev && !entry.evidenceRefs.includes(ev)) entry.evidenceRefs.push(ev);
-    const nr = getOpt(args, "--next-review");
     if (nr) entry.nextReviewAt = nr;
     console.log(
       `set: ${id} lifecycle=${entry.lifecycleStatus} editorial=${entry.editorialStatus} evidence=${entry.evidenceRefs.length}`,

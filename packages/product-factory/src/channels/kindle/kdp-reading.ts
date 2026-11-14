@@ -100,6 +100,26 @@ export const KDP_READINGS: Readonly<Record<string, KdpReading>> = {
     titleKana: "デジタルセイカツノチズ ツウシン ピーシー テレワーク",
     titleRomaji: "Digital Seikatsu no Chizu - Tsushin PC Telework",
   },
+  "K-S1-15": {
+    titleKana: "ネンシュウデショクタクハドウカワルノカ カケイチョウサデヨムセタイノカイカタ",
+    titleRomaji: "Nenshu de Shokutaku wa Do Kawaru noka - Kakei Chosa de Yomu Setai no Kaikata",
+  },
+  "K-S1-16": {
+    titleKana: "ショクタクカラキエタシナ フエタシナ カケイチョウサデヨムヒンモクノセイスイ",
+    titleRomaji: "Shokutaku kara Kieta Shina, Fueta Shina - Kakei Chosa de Yomu Hinmoku no Seisui",
+  },
+  "K-S2-12": {
+    titleKana: "ヨンジュウナナトドウフケンノソウゴウスコア シヒョウヲタバネテケンノスガタヲヨム",
+    titleRomaji: "47 Todofuken no Sogo Score - Shihyo wo Tabanete Ken no Sugata wo Yomu",
+  },
+  "K-S4-02": {
+    titleKana: "イガイナイチイノケン スウジデヨムヨンジュウナナトドウフケンノケンミンセイ",
+    titleRomaji: "Igai na 1 i no Ken - Suji de Yomu 47 Todofuken no Kenminsei",
+  },
+  "K-S1-14": {
+    titleKana: "ヨンジュウナナトシノショクタクハニテキタノカ カケイチョウサデヨムジュウキュウネンノヘンカ",
+    titleRomaji: "47 Toshi no Shokutaku wa Nitekita noka - Kakei Chosa de Yomu 19 nen no Henka",
+  },
   "K-S1-13": {
     titleKana: "スムケンノエラビカタ トウケイデクラベルイツツノジョウケン",
     titleRomaji: "Sumu Ken no Erabikata - Tokei de Kuraberu Itsutsu no Joken",
@@ -213,6 +233,11 @@ export const KDP_READING_SOURCES: Readonly<Record<string, { readonly title: stri
   "K-S1-11": { title: "文化・スポーツ・余暇の地図" },
   "K-S1-12": { title: "デジタル生活の地図 — 通信・PC・テレワーク" },
   "K-S1-13": { title: "住む県の選び方 — 統計で比べる5つの条件" },
+  "K-S1-14": { title: "47都市の食卓は似てきたのか — 家計調査で読む19年の変化" },
+  "K-S1-15": { title: "年収で食卓はどう変わるのか — 家計調査で読む世帯の買い方" },
+  "K-S1-16": { title: "食卓から消えた品、増えた品 — 家計調査で読む品目の盛衰" },
+  "K-S2-12": { title: "47都道府県の総合スコア — 指標を束ねて県の姿を読む" },
+  "K-S4-02": { title: "意外な1位の県 — 数字で読む47都道府県の県民性" },
   "K-S2-01": { title: "データで見る47都道府県 人口・世帯" },
   "K-S2-02": { title: "データで見る47都道府県 所得・賃金・採用" },
   "K-S2-03": { title: "データで見る47都道府県 観光・宿泊" },

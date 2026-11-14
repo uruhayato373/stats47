@@ -19,7 +19,10 @@ import { GEO_SOURCE_PAGES } from '../../../packages/data-configs/src/business-pl
 import { downloadSourceArchive } from '../../../packages/gis/src/mlit-ksj/scripts/rebuild-source-page-data';
 import {
   REPAIR_VERSIONS,
+  createGeoSourceMetrics,
+  instrumentGeoSourceStore,
   mapGeoSourceBatch,
+  timeGeoSourcePhase,
   assertPublicDataset,
   buildExactPlan,
   decoded,
@@ -78,10 +81,32 @@ if (!store)
   throw Error(
     'R2 S3 credentials are required for exact inventory, plans and verification'
   );
-const objectStore = store;
+// Every R2 call of this command is counted so CI runs can be compared phase by phase.
+const metrics = createGeoSourceMetrics();
+const objectStore = instrumentGeoSourceStore(store, metrics);
+const commandStartedAt = new Date();
 mkdirSync(evidence, { recursive: true });
 const write = (file: string, value: unknown) =>
   writeFileSync(file, JSON.stringify(value, null, 2) + '\n');
+function writeMetrics(outcome: 'succeeded' | 'failed') {
+  const mode =
+    command === 'publish'
+      ? args.includes('--apply')
+        ? 'publish-apply'
+        : 'publish-dry-run'
+      : command === 'verify' && args.includes('--canonical')
+        ? 'verify-canonical'
+        : command;
+  const finishedAt = new Date();
+  write(path.join(evidence, `metrics-${mode}.json`), {
+    mode,
+    outcome,
+    startedAt: commandStartedAt.toISOString(),
+    finishedAt: finishedAt.toISOString(),
+    wallMs: finishedAt.getTime() - commandStartedAt.getTime(),
+    ...metrics,
+  });
+}
 
 async function run(script: string, extra: string[] = []) {
   await new Promise<void>((resolve, reject) => {
@@ -105,22 +130,26 @@ async function run(script: string, extra: string[] = []) {
 async function prepare() {
   const ids = parseRepairIds(idsValue);
   const inventory: SourceInventoryRow[] = [];
-  for (const page of GEO_SOURCE_PAGES) {
-    assertPublicDataset(page.dataId, page.version);
-    const rows = await listFromR2WithSize(
-      `gis/mlit-ksj/${page.dataId}/${page.version}/`
-    );
-    inventory.push(
-      ...rows
-        .filter((row) => /\.(topojson|geojson)$/.test(row.key))
-        .map((row) => ({ key: row.key, bytes: row.size }))
-    );
-  }
+  await timeGeoSourcePhase(metrics, 'inventory', async () => {
+    for (const page of GEO_SOURCE_PAGES) {
+      assertPublicDataset(page.dataId, page.version);
+      metrics.api.list++;
+      const rows = await listFromR2WithSize(
+        `gis/mlit-ksj/${page.dataId}/${page.version}/`
+      );
+      inventory.push(
+        ...rows
+          .filter((row) => /\.(topojson|geojson)$/.test(row.key))
+          .map((row) => ({ key: row.key, bytes: row.size }))
+      );
+    }
+  });
   write(path.join(evidence, 'observed-inventory.json'), {
     observedAt: new Date().toISOString(),
     objects: inventory,
   });
   const scratch = mkdtempSync(path.join(tmpdir(), 'stats47-geo-source-'));
+  const generationStartedAt = performance.now();
   try {
     for (const id of ids) {
       console.log(`GENERATE ${id}/${REPAIR_VERSIONS[id]}`);
@@ -148,6 +177,9 @@ async function prepare() {
     }
   } finally {
     rmSync(scratch, { recursive: true, force: true });
+    metrics.phases.generate = Math.round(
+      performance.now() - generationStartedAt
+    );
   }
 
   let rows = inventory;
@@ -173,18 +205,26 @@ async function prepare() {
       id === 'A31b'
         ? validateFloodManifest(manifest)
         : validateRepairManifest(manifest);
-    await mapGeoSourceBatch(outputs, async (output) => {
-      if (ids.includes(id)) validateLocalOutput(root, output);
-      else {
-        const current = await objectStore.head(output.key);
-        if (
-          !current ||
-          current.contentLength !== output.bytes ||
-          current.metadata['stats47-sha256'] !== output.outputSha256
-        )
-          throw Error(`Published repair output changed/missing: ${output.key}`);
-      }
-    });
+    await timeGeoSourcePhase(metrics, 'repair-proofs', () =>
+      mapGeoSourceBatch(
+        outputs,
+        async (output) => {
+          if (ids.includes(id)) validateLocalOutput(root, output);
+          else {
+            const current = await objectStore.head(output.key);
+            if (
+              !current ||
+              current.contentLength !== output.bytes ||
+              current.metadata['stats47-sha256'] !== output.outputSha256
+            )
+              throw Error(
+                `Published repair output changed/missing: ${output.key}`
+              );
+          }
+        },
+        metrics
+      )
+    );
     // Both selected and already-published repaired datasets replace their entire inventory.
     // Malformed extra files remain untouched. Remove this inventory replacement only after
     // an exact-key retention audit confirms all superseded source files were removed.
@@ -236,7 +276,7 @@ async function prepare() {
       writeGeoSourceCatalog(root, data);
     }
   }
-  const plan = await buildExactPlan(root, keys, ids, objectStore);
+  const plan = await buildExactPlan(root, keys, ids, objectStore, metrics);
   write(planPath, plan);
   write(path.join(evidence, 'scope.json'), {
     generatedAt: plan.generatedAt,
@@ -276,14 +316,20 @@ async function main() {
     }
   };
   if (command === 'verify') {
-    await mapGeoSourceBatch(plan.objects, async (object) =>
-      record(
-        await readbackObject(
-          object,
-          objectStore,
-          publicBase,
-          args.includes('--canonical')
-        )
+    await timeGeoSourcePhase(metrics, 'readback', () =>
+      mapGeoSourceBatch(
+        plan.objects,
+        async (object) =>
+          record(
+            await readbackObject(
+              object,
+              objectStore,
+              publicBase,
+              args.includes('--canonical'),
+              metrics
+            )
+          ),
+        metrics
       )
     );
     write(
@@ -319,6 +365,7 @@ async function main() {
     publicBase,
     apply,
     onVerified: record,
+    metrics,
   });
   write(path.join(evidence, apply ? 'result.json' : 'dry-run.json'), {
     completedAt: new Date().toISOString(),
@@ -329,12 +376,16 @@ async function main() {
   });
   console.log(JSON.stringify(result));
 }
-main().catch((error: unknown) => {
-  write(path.join(evidence, 'failure.json'), {
-    failedAt: new Date().toISOString(),
-    command,
-    message: error instanceof Error ? error.message : String(error),
-  });
-  console.error(error);
-  process.exitCode = 1;
-});
+main().then(
+  () => writeMetrics('succeeded'),
+  (error: unknown) => {
+    writeMetrics('failed');
+    write(path.join(evidence, 'failure.json'), {
+      failedAt: new Date().toISOString(),
+      command,
+      message: error instanceof Error ? error.message : String(error),
+    });
+    console.error(error);
+    process.exitCode = 1;
+  }
+);

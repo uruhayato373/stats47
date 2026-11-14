@@ -53,10 +53,10 @@ packages/
 - **R2 読み取り (標準)**: ビルド/集計スクリプトは **公開 URL 経由**で R2 を読める →
   `R2_PUBLIC_FETCH_URL=https://storage.stats47.jp`（GET のみ・list 不可）+ `NODE_OPTIONS='--conditions react-server'`。
 
-## R2 読み書き — ローカル / CI 両方から remote R2 が唯一の真実源
+## R2 読み書き — remote R2 が唯一の真実源
 
-**読み取り・書き込みともにローカルから remote R2 へ直接可能。ローカル R2 ミラー (`.local/r2`) は廃止。**
-`_assert-ci-write.ts` はデフォルト許可に変更済み。ローカル書き込み時は `console.warn` を出すだけで続行する。
+**読み取りはローカルから可能。書き込みは CI の workflow が既定で、ローカルから書けるのは Mac で実体を作る prefix だけ** (区分表の `origin: "mac"`)。
+それ以外は `_assert-ci-write.ts` が止める (`ALLOW_LOCAL_R2_WRITE=1` で明示的に通す)。ローカル R2 ミラー (`.local/r2`) は廃止。承認の線引きは `r2-storage-design.md`「書き込みの承認」。
 
 - **読み取り (標準)**: `R2_PUBLIC_FETCH_URL=https://storage.stats47.jp`（GET のみ・list 不可・認証不要）
 - **書き込み (ローカル)**: `.env.local` に R2 S3 creds (`R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` / `R2_S3_ENDPOINT`) または `wrangler login` 認証が必要。S3 creds はユーザーが Cloudflare ダッシュボードで発行する。

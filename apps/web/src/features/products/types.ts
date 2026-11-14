@@ -23,6 +23,8 @@ export interface StorefrontProduct {
   readonly audience: readonly string[];
   /** 商品のデータでできる具体的な作業。ある場合は職種の列挙に代えて表示する。 */
   readonly useCases?: readonly { readonly title: string; readonly description: string }[];
+  /** Kindle 本の目次 (出品した版の章)。旧版の販売中は新版の章と異なりうるので持たない。 */
+  readonly tableOfContents?: readonly string[];
   /** 固定年・対象地域・ファイル形式など、購入判断に必要な商品の条件。 */
   readonly purchaseNotes?: readonly string[];
   /** KDP 書籍へ実際に収録した公開ブログ。文脈一致 CTA の決定にだけ使う。 */

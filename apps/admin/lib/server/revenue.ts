@@ -3,6 +3,7 @@ import "server-only";
 import fs from "node:fs";
 
 import { KDP_LISTINGS } from "../../../../config/paths.mjs";
+import { isoWeekRange } from "../../../../.claude/scripts/metrics/lib/periods.mjs";
 
 import {
   cached,
@@ -205,8 +206,40 @@ function autoState(date: string | undefined): { fresh: boolean; label: string } 
   return { fresh: age <= AUTO_FRESH_DAYS, label: `自動取得 最新 ${date}${age > AUTO_FRESH_DAYS ? ` (${age}日前・停止中)` : ""}` };
 }
 
+/**
+ * 週次 CSV の最新週の日曜からこの日数を超えたら AdSense を「計測中」と見なさない。週次の取得は土曜に前の週 (月〜日) を
+ * 記録するので、最新週の日曜から次の土曜の取得までが 13 日。それを過ぎたら土曜の取得が抜けている。
+ */
+const ADSENSE_FRESH_DAYS = 13;
+const DAY_MS = 86_400_000;
+
+/**
+ * AdSense の計測範囲の行。週次 CSV (history.csv) の最新週が新しいときだけ measured にする (CONTENT-FOLLOWUP-01。
+ * 以前は定数の measured で、週次の取得が止まってもゲート表の AdSense 行は通過のままだった)。
+ */
+export function adsenseCoverage(latestWeek: string | null, now: number = Date.now()): RevenueChannel {
+  const channel = "AdSense";
+  if (!latestWeek) return { channel, state: "unmeasured", note: "週次 CSV (history.csv) を読めない" };
+  let sunday: string;
+  try {
+    sunday = isoWeekRange(latestWeek).sunday;
+  } catch {
+    return { channel, state: "unmeasured", note: `週次 CSV の最新週を読めない (${latestWeek})` };
+  }
+  const age = Math.floor((now - Date.parse(`${sunday}T00:00:00+09:00`)) / DAY_MS);
+  return age <= ADSENSE_FRESH_DAYS
+    ? { channel, state: "measured", note: `週次 CSV (history.csv ほか 5 種) 最新 ${latestWeek}` }
+    : { channel, state: "unmeasured", note: `週次 CSV 最新 ${latestWeek} (週末から${age}日・停止中)` };
+}
+
+function latestAdsenseWeek(adsense: RevenueSummary["adsense"]): string | null {
+  if ("error" in adsense) return null;
+  return adsense.weeks[0] ? String(adsense.weeks[0].week) : null;
+}
+
 function revenueCoverage(
   productSales: RevenueSummary["productSales"],
+  adsense: RevenueSummary["adsense"],
 ): RevenueChannel[] {
   const auto = wrap(latestAutoObservation);
   const autoDate = (channel: string) => ("error" in auto ? undefined : auto.get(channel));
@@ -218,7 +251,7 @@ function revenueCoverage(
   const kindleCount = "error" in counts ? "?" : String(counts.kindle);
 
   return [
-    { channel: "AdSense", state: "measured", note: "週次 CSV (history.csv ほか 5 種)" },
+    adsenseCoverage(latestAdsenseWeek(adsense)),
     {
       channel: "アフィリエイト",
       state: "unmeasured",
@@ -241,14 +274,15 @@ export function revenueSummary(): RevenueSummary {
   // 週次更新なので 60 秒で読み直しても意味がない
   return cached("revenue", TTL.weekly, () => {
     const productSales = readProductSales();
+    const adsense = readAdsense();
     return {
-      adsense: readAdsense(),
+      adsense,
       breakdowns: readBreakdowns(),
       latestMd: readMd(`${ADSENSE}/LATEST.md`),
       impactMd: readMd(`${ADSENSE}/impact-LATEST.md`),
       candidates: readCandidates(),
       productSales,
-      coverage: revenueCoverage(productSales),
+      coverage: revenueCoverage(productSales, adsense),
     };
   });
 }

@@ -67,6 +67,7 @@ export default async function AreasPage() {
               eyebrow="エリア"
               title="都道府県から統計を見る"
               description="47都道府県の全国順位、地域の強み・弱み、人口・産業・暮らしの統計を確認できます。"
+              stats="47 都道府県 ・ 並び順: 地方ごと、地方の中は都道府県コードの順 (北から)"
             />
           </>
         }

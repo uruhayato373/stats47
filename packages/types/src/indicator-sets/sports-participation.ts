@@ -174,6 +174,21 @@ export const SPORTS_PARTICIPATION_SET: IndicatorSet = {
       "rankingKey": "junior-high-club-per100-volleyball",
       "shortLabel": "中学部活動部員数（バレーボール・100人当たり）",
       "role": "context"
+    },
+    {
+      "rankingKey": "golf-course-public",
+      "shortLabel": "ゴルフ場数（公共）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "private-sports-facility",
+      "shortLabel": "民間体育施設数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "sports-park-count-per-100km2",
+      "shortLabel": "運動公園数（可住地面積100km²当たり）",
+      "role": "secondary"
     }
   ],
   "keywords": [

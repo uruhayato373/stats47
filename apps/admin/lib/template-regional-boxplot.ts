@@ -2,7 +2,7 @@ import { REGIONS } from '../../../packages/area/src/constants/regions';
 import { prefectureShortName } from '../../../packages/area/src/utils/prefecture-short-name';
 import { BRAND } from '../../web/src/features/ogp/brand';
 import { resolveMetricColor } from '../../remotion/src/features/data-cards/tile-scale';
-import { LIGHT_THEME, mixColor, toHex, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
+import { TEMPLATE_MIN_FONT_SIZE, LIGHT_THEME, mixColor, toHex, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
 import { SAMPLE_FRAME, escapeXml, sampleBodyTop, sampleFrame } from './template-sample-frame';
 import { assertRankingRows, type RankingChart } from './template-ranking-data';
 
@@ -39,8 +39,8 @@ export function renderRegionalBoxplotChart(chart: RankingChart, theme: ChartThem
     const wash = i % 2 === 0 ? `<rect x="${left}" y="${y}" width="${right - left}" height="${rowHeight}" fill="${mixColor(color, theme.paper, dark ? 0.86 : 0.94)}"/>` : '';
     const name = (row: typeof high) => prefectureShortName(row.area_name);
     const dots = members.map((row) => `<circle data-area="${row.area_code}" cx="${xAt(row.value).toFixed(1)}" cy="${mid}" r="8" fill="${dot}" stroke="${theme.paper}" stroke-width="2"/>`).join('');
-    const ends = high === low ? '' : `<text x="${xAt(low.value)}" y="${labelY}" font-size="26" text-anchor="${xAt(low.value) < left + 90 ? 'start' : 'middle'}" fill="${theme.muted}">${escapeXml(name(low))}</text>
-      <text x="${xAt(high.value)}" y="${labelY}" font-size="26" text-anchor="${xAt(high.value) > right - 90 ? 'end' : 'middle'}" fill="${theme.muted}">${escapeXml(name(high))}</text>`;
+    const ends = high === low ? '' : `<text x="${xAt(low.value)}" y="${labelY}" font-size="${TEMPLATE_MIN_FONT_SIZE}" text-anchor="${xAt(low.value) < left + 90 ? 'start' : 'middle'}" fill="${theme.muted}">${escapeXml(name(low))}</text>
+      <text x="${xAt(high.value)}" y="${labelY}" font-size="${TEMPLATE_MIN_FONT_SIZE}" text-anchor="${xAt(high.value) > right - 90 ? 'end' : 'middle'}" fill="${theme.muted}">${escapeXml(name(high))}</text>`;
     return `<g data-region="${escapeXml(region.regionName)}" data-median="${median}">${wash}
       <text x="${left + 20}" y="${y + 38}" font-size="30" font-weight="700">${escapeXml(region.regionName)}</text>
       <text x="${right - 20}" y="${y + 38}" text-anchor="end" font-size="30" font-weight="700" fill="${ink}">中央値 ${escapeXml(chart.formatValue(median))}</text>

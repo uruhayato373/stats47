@@ -49,20 +49,66 @@
       "rankingKey": "internet-usage-rate-10plus",
       "shortLabel": "インターネットの利用行動者率",
       "role": "context"
+    },
+    {
+      "rankingKey": "public-phone-count-per-1000",
+      "shortLabel": "公衆電話設置台数（人口千人当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「公衆電話 数」「公衆電話の数」「公衆電話 数 推移」など公衆電話の台数と減少を知りたい読者の問いに、人口あたりで答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "internet-fee-consumption-expenditure",
+      "shortLabel": "インターネット接続料（1世帯の年間支出）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「交通通信費」「交通通信費とは」など通信にかかる費用を知りたい読者の問いに、ネット接続料の支出額で答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "mobile-phone-bill-consumption-expenditure",
+      "shortLabel": "携帯電話通信料（1世帯の年間支出）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「交通通信費」など通信費の関心に、携帯電話の通信料という世帯の負担額の角度で答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "pc-ownership-multi-person-households-per-1000",
+      "shortLabel": "パソコン所有数量（二人以上世帯千世帯当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "世帯の情報機器の保有を携帯電話と並べて見たい読者に、1984年以降の複数年の千世帯あたりの値で答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
     }
   ],
   "charts": [],
   "metricGroups": [
-    {
-      "key": "fixed-broadband-environment-1",
-      "title": "ブロードバンド契約数（3.9〜4世代携帯電話アクセスを除く）",
-      "rankingKeys": [
-        "broadband-contract-count-excluding-39-4g"
-      ],
-      "defaultCheckedKeys": [
-        "broadband-contract-count-excluding-39-4g"
-      ]
-    },
     {
       "key": "mobile-contract-prevalence-1",
       "title": "携帯電話契約数（人口千人当たり）",
@@ -74,39 +120,84 @@
       ]
     },
     {
-      "key": "household-mobile-ownership-1",
-      "title": "携帯電話所有数量（二人以上世帯千世帯当たり）",
+      "key": "mobile-contract-prevalence-2",
+      "title": "ブロードバンド契約数（3.9〜4世代携帯電話アクセスを除く）",
       "rankingKeys": [
-        "mobile-phone-ownership-multi-person-households-per-1000"
+        "broadband-contract-count-excluding-39-4g"
       ],
       "defaultCheckedKeys": [
-        "mobile-phone-ownership-multi-person-households-per-1000"
+        "broadband-contract-count-excluding-39-4g"
+      ]
+    },
+    {
+      "key": "fixed-broadband-environment-1",
+      "title": "公衆電話設置台数（人口千人当たり）",
+      "rankingKeys": [
+        "public-phone-count-per-1000"
+      ],
+      "defaultCheckedKeys": [
+        "public-phone-count-per-1000"
+      ]
+    },
+    {
+      "key": "fixed-broadband-environment-2",
+      "title": "世帯の携帯電話・パソコンの所有数量の推移",
+      "rankingKeys": [
+        "mobile-phone-ownership-multi-person-households-per-1000",
+        "pc-ownership-multi-person-households-per-1000"
+      ],
+      "defaultCheckedKeys": [
+        "mobile-phone-ownership-multi-person-households-per-1000",
+        "pc-ownership-multi-person-households-per-1000"
+      ]
+    },
+    {
+      "key": "household-mobile-ownership-1",
+      "title": "携帯電話通信料（1世帯の年間支出）",
+      "rankingKeys": [
+        "mobile-phone-bill-consumption-expenditure"
+      ],
+      "defaultCheckedKeys": [
+        "mobile-phone-bill-consumption-expenditure"
+      ]
+    },
+    {
+      "key": "household-mobile-ownership-2",
+      "title": "インターネット接続料（1世帯の年間支出）",
+      "rankingKeys": [
+        "internet-fee-consumption-expenditure"
+      ],
+      "defaultCheckedKeys": [
+        "internet-fee-consumption-expenditure"
       ]
     }
   ],
   "sections": [
     {
-      "key": "fixed-broadband-environment",
-      "title": "自宅や地域の光回線・ブロードバンド環境は整っているか",
-      "concern": "テレワークやオンライン学習に必要な固定ブロードバンドの普及状況が十分か心配です。",
+      "key": "mobile-contract-prevalence",
+      "title": "携帯電話やブロードバンドの契約は、自分の地域でどれくらいか",
+      "concern": "携帯電話の契約数やブロードバンドの普及が自分の地域でどの水準にあるのか知りたい。",
       "metricGroupKeys": [
-        "fixed-broadband-environment-1"
+        "mobile-contract-prevalence-1",
+        "mobile-contract-prevalence-2"
       ]
     },
     {
-      "key": "mobile-contract-prevalence",
-      "title": "携帯電話やモバイル通信の普及率は地域でどう違うか",
-      "concern": "移動体通信の普及やスマートフォンの浸透度合いに地域差がないか気になります。",
+      "key": "fixed-broadband-environment",
+      "title": "公衆電話は何台あり、世帯の端末はどう変わってきたか",
+      "concern": "公衆電話の台数と、世帯が持つ携帯電話・パソコンの数が時代とともにどう変わったか知りたい。",
       "metricGroupKeys": [
-        "mobile-contract-prevalence-1"
+        "fixed-broadband-environment-1",
+        "fixed-broadband-environment-2"
       ]
     },
     {
       "key": "household-mobile-ownership",
-      "title": "世帯における携帯電話や端末の所有状況はどうなっているか",
-      "concern": "世帯単位での情報通信機器の所有やデジタル化の基盤状況が気になります。",
+      "title": "通信にいくらかかっているか",
+      "concern": "携帯電話の通信料やインターネット接続料に、1世帯でいくら使っているのか知りたい。",
       "metricGroupKeys": [
-        "household-mobile-ownership-1"
+        "household-mobile-ownership-1",
+        "household-mobile-ownership-2"
       ]
     }
   ],

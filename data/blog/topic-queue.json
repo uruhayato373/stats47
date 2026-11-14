@@ -3,9 +3,9 @@
   "gscWeek": "2026-W45",
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
-    "total": 178,
+    "total": 179,
     "pending": 97,
-    "inProgress": 0,
+    "inProgress": 1,
     "done": 81,
     "mustWritePending": 43,
     "byArchetype": {
@@ -5191,6 +5191,31 @@
       "in_progress_at": "2026-08-29",
       "done_at": "2026-08-29",
       "published_slug": "sex-ratio-total-prefecture-gap"
+    },
+    {
+      "topicKey": "whitepaper-ambulance-hospital-arrival-time",
+      "archetype": "A",
+      "metricKeys": [
+        "ambulance-hospital-arrival-time"
+      ],
+      "label": "救急搬送 病院収容所要時間",
+      "source": "whitepaper-gap",
+      "scores": {
+        "queryGap": 0,
+        "seasonality": 0,
+        "surprise": 0,
+        "competitionGap": 0.5
+      },
+      "evidence": {
+        "rankingUrl": "/ranking/ambulance-hospital-arrival-time",
+        "whitepaper": "消防白書 (令和6〜7年版) が救急搬送時間の地域差を論じている (BLOG-WHITEPAPER-METRIC-GAP-01)"
+      },
+      "suggestedTitle": "救急車が病院に着くまでの時間、県でどれだけ違う",
+      "combinedScore": 0.1,
+      "lane": "opportunity",
+      "status": "in-progress",
+      "priority": null,
+      "in_progress_at": "2026-11-13"
     }
   ]
 }

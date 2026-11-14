@@ -353,6 +353,9 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > (`apps/web/src/features/municipalities/components/`)。地図・ヒストグラムの hover は
 > 計測しない (新 dimension 登録 = owner 工程が要るため。クリック導線で回遊判定は成立する)。
 >
+> **nav_surface の送信終了 (2026-11-14)**: テーマページの「白書・統計から見る論点」の節を外したので、`theme_evidence` は反映日以降は送られない
+> (過去の記録には残る)。同じ日に「空間分析」のカードを分析の名前のリンク 1 行に替え、`geo_analysis_list` で数える (登録済みの値)。
+>
 > **nav_surface の値追加 (2026-08-24・evidence lens)**: ThemeCatalog の白書・統計論点から
 > ranking / theme / tag へ進む内部導線に `theme_evidence` を追加した。登録済みの
 > `nav_surface` / `nav_label` を使う値追加で、新しい custom dimension は無い。公式資料への外部リンクは

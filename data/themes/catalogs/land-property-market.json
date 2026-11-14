@@ -64,18 +64,46 @@
         "surveyedAt": "2026-09-09",
         "rationale": "標準価格変動率（工業地）を都道府県別の実値として比較する。"
       }
+    },
+    {
+      "rankingKey": "private-rental-housing-rent-per-3-3m2",
+      "shortLabel": "民営家賃(3.3㎡あたり月額)",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「家賃が安い県・高い県はどこか」「家賃 安い都道府県」など家賃の検索語(合計60回超)に答え、地価と並べて住まいの費用を読めるようにする。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "per-capita-fixed-asset-tax-pref-municipal",
+      "shortLabel": "住民1人あたり固定資産税",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「固定資産税 高い ランキング」など土地・家屋の税負担を知りたい検索語(合計60回超)に、住民1人あたりの額で答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
     }
   ],
   "charts": [],
   "metricGroups": [
     {
       "key": "residential-land-prices-1",
-      "title": "住宅地の公示価格中央値（100〜300㎡未満）",
+      "title": "民営家賃(3.3㎡あたり月額)",
       "rankingKeys": [
-        "residential-official-land-median-price"
+        "private-rental-housing-rent-per-3-3m2"
       ],
       "defaultCheckedKeys": [
-        "residential-official-land-median-price"
+        "private-rental-housing-rent-per-3-3m2"
       ]
     },
     {
@@ -90,6 +118,26 @@
     },
     {
       "key": "residential-land-prices-3",
+      "title": "住宅地の公示価格中央値（100〜300㎡未満）",
+      "rankingKeys": [
+        "residential-official-land-median-price"
+      ],
+      "defaultCheckedKeys": [
+        "residential-official-land-median-price"
+      ]
+    },
+    {
+      "key": "residential-land-prices-4",
+      "title": "住民1人あたり固定資産税",
+      "rankingKeys": [
+        "per-capita-fixed-asset-tax-pref-municipal"
+      ],
+      "defaultCheckedKeys": [
+        "per-capita-fixed-asset-tax-pref-municipal"
+      ]
+    },
+    {
+      "key": "residential-land-prices-5",
       "title": "住宅地の取引価格標本数",
       "rankingKeys": [
         "residential-land-transaction-sample-count"
@@ -100,21 +148,13 @@
     },
     {
       "key": "residential-land-price-trends-1",
-      "title": "住宅地地価変動率",
+      "title": "住宅地と工業地の地価の変動率は",
       "rankingKeys": [
-        "residential-land-price-change-rate"
-      ],
-      "defaultCheckedKeys": [
-        "residential-land-price-change-rate"
-      ]
-    },
-    {
-      "key": "industrial-land-price-trends-1",
-      "title": "標準価格変動率（工業地）",
-      "rankingKeys": [
+        "residential-land-price-change-rate",
         "industrial-land-price-change-rate"
       ],
       "defaultCheckedKeys": [
+        "residential-land-price-change-rate",
         "industrial-land-price-change-rate"
       ]
     }
@@ -122,12 +162,14 @@
   "sections": [
     {
       "key": "residential-land-prices",
-      "title": "住宅地の実際の取引価格や公示価格の相場はどれくらいか",
-      "concern": "マイホーム購入や土地売買の検討にあたり実際の取引単価や公示価格の相場感がわかりません。",
+      "title": "自分の県の住まいの費用(家賃・土地の価格・固定資産税)はどれくらいか",
+      "concern": "家を借りるか土地を買うかを考えるとき、自分の県の家賃・取引価格・公示価格・固定資産税の水準がどれくらいか分かりません。",
       "metricGroupKeys": [
         "residential-land-prices-1",
         "residential-land-prices-2",
-        "residential-land-prices-3"
+        "residential-land-prices-3",
+        "residential-land-prices-4",
+        "residential-land-prices-5"
       ],
       "embeddedSectionKeys": [
         "property-prices"
@@ -135,18 +177,10 @@
     },
     {
       "key": "residential-land-price-trends",
-      "title": "住宅地の地価は上昇傾向にあるか下落傾向にあるか",
-      "concern": "住宅地の価格変動や今後の地価動向が資産価値や売買タイミングにどう影響するか不安です。",
+      "title": "地価は上がっているか下がっているか",
+      "concern": "住宅地・工業地の価格の変動が、資産価値や売買・立地のタイミングにどう影響するか不安です。",
       "metricGroupKeys": [
         "residential-land-price-trends-1"
-      ]
-    },
-    {
-      "key": "industrial-land-price-trends",
-      "title": "工業地の地価や標準価格は長期的にどのように推移しているか",
-      "concern": "産業立地や物流拠点等の検討において工業地の地価の長期推移や価格動向が気になります。",
-      "metricGroupKeys": [
-        "industrial-land-price-trends-1"
       ]
     }
   ],

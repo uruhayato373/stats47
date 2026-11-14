@@ -15,6 +15,7 @@ import * as path from "node:path";
 import * as topojsonServer from "topojson-server";
 import unzipper from "unzipper";
 
+import { findKsjFeatureType, ksjPropertyName, requireKsjAttributeByRole } from "../../mlit-ksj/attributes";
 import { findGeoSubject, geoSubjectClassOf } from "../../subjects";
 import { UNKNOWN_YEAR, parseSourceYear } from "../core";
 import { infraHistoryKeys } from "../keys";
@@ -26,19 +27,18 @@ const OUT_ROOT = path.join(ROOT, ".local/r2");
 /** 点の座標の量子化 (約 1m)。点だけの TopoJSON は簡略化・再量子化しない (二重に量子化されるため) */
 const QUANTIZATION = 1e5;
 
-/**
- * 接合部の属性 (2026-10-29 に公式ページの属性表で確認)。原典の事実なので、原典台帳
- * (GIS-ATTRIBUTE-LEDGER-01 の data/geo/attributes/N06.json) ができたらそこから引く
- */
+/** 接合部 (Joint) の属性。属性の台帳 (data/geo/attributes/N06.json) の役割から引く */
+const JOINT = findKsjFeatureType("N06", "Joint");
+if (!JOINT) throw new Error("属性の台帳に N06 の接合部 (Joint) がありません");
 const JOINT_ATTRIBUTES = {
   /** 設置期間の開始年 */
-  start: "N06_013",
+  start: ksjPropertyName(requireKsjAttributeByRole(JOINT, "startYear")),
   /** 設置期間の終了年 (今もあるものは 9999) */
-  end: "N06_014",
+  end: ksjPropertyName(requireKsjAttributeByRole(JOINT, "endYear")),
   /** 地点名 */
-  name: "N06_018",
-  /** 接合部種別コード (HighwayConCd) */
-  category: "N06_019",
+  name: ksjPropertyName(requireKsjAttributeByRole(JOINT, "name")),
+  /** 接合部種別コード */
+  category: ksjPropertyName(requireKsjAttributeByRole(JOINT, "category")),
 } as const;
 
 async function main(): Promise<void> {

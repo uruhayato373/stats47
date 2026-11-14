@@ -89,6 +89,31 @@ export const DAILY_TIME_USE_SET: IndicatorSet = {
       "rankingKey": "primary-school-commute-time-weekday",
       "shortLabel": "小学生の通勤・通学の総平均時間",
       "role": "context"
+    },
+    {
+      "rankingKey": "monthly-average-actual-working-hours-male",
+      "shortLabel": "月間平均実労働時間（男性）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "monthly-average-actual-working-hours-female",
+      "shortLabel": "女性の月間実労働時間",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "employees-weekly-hours-60plus-rate",
+      "shortLabel": "週60時間以上働く雇用者割合",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "relaxation-avg-time-female",
+      "shortLabel": "女性の休養・くつろぎ時間",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "relaxation-avg-time-male",
+      "shortLabel": "男性の休養・くつろぎ時間",
+      "role": "secondary"
     }
   ],
   "keywords": [

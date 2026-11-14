@@ -1,6 +1,6 @@
 // 線の格子 (PanelGrid・docs/01_技術設計/04_デザインシステム.md「見本の実測値と部品の仕様」) を、描いた画面で検査する判定。
 // 検査の本体はこの 1 か所だけに持つ。週次の page-quality (lib/ui-probe.ts の line_grid_issues) と、
-// 手元の本番ビルドに流す npm run ui-theme:line-grid (scripts/ui-theme/check-line-grid.mjs) が同じ関数を使う。
+// 手元の本番ビルドに流す npm run ui-theme:line-grid (.claude/scripts/ui/check-line-grid.mjs) が同じ関数を使う。
 // 本文の列 (div[data-slot=shell-main] を含む格子) の中で次を数える。
 // - outside-grid: パネルが格子の外にある (パネル自身の線が残り、隣と線を共有しない)
 // - mixed-cell: パネルを含むセルが文章・見出しも直に持つ (パネルを含むセルは余白を持たないので、文章が線に接する)

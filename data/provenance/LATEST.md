@@ -1,18 +1,18 @@
 # データ出典・再現性 (provenance) 棚卸し (LATEST)
 
-棚卸し日時: 2026-11-07T23:43:39.644Z
+棚卸し日時: 2026-11-14T04:01:19.021Z
 正典: `.claude/rules/data-provenance-standards.md`
 
 ## metric 再現性クラス分布
 - A (statsDataId 再取得可): **3079**
 - A' (機械ID付き external): **29**
 - B (fetcher依存・出典薄): **13**
-- C (手動抽出・provenance): **203**
+- C (手動抽出・provenance): **213**
 - D (出典不明・要是正): **0**
 
 ## 是正対象 (C欠落 + D): **0 件**
 
 
-## blog SVG lineage: total 2126 / 状態 {"both":2056,"jsonOnly":0,"neither":70}
+## blog SVG lineage: total 2125 / 状態 {"both":2055,"jsonOnly":0,"neither":70}
 
 是正は `/audit-provenance` skill 参照。fetcher コードから出典復元 → config backfill → `validate:config` 再実行。

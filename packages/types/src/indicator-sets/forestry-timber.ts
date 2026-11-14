@@ -23,7 +23,7 @@ export const FORESTRY_TIMBER_SET: IndicatorSet = {
     {
       "rankingKey": "artificial-forest-area",
       "shortLabel": "人工造林面積",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "forest-road-length",

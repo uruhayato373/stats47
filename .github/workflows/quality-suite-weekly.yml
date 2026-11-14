@@ -348,7 +348,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for observation in data/themes/charts/live-audit.json data/themes/quality.json data/themes/quality.definitions.json data/themes/quality.observations.json data/themes/quality.lastGoodObservations.json data/themes/portfolio.json data/themes/experiments.json data/themes/ci-followup.json data/themes/viewpoint-history.csv; do
+          # 品質監査の詳細は 1 MiB を超えると番号つきのファイルに分かれる (theme-quality-state.mjs)。増えた分・減った分ごと拾う
+          git add -- 'data/themes/quality.*.json'
+          for observation in data/themes/charts/live-audit.json data/themes/quality.json data/themes/portfolio.json data/themes/experiments.json data/themes/ci-followup.json data/themes/viewpoint-history.csv; do
             if [ -f "$observation" ]; then git add -- "$observation"; fi
           done
           if git diff --cached --quiet; then exit 0; fi
@@ -572,7 +574,8 @@ jobs:
         # (2026-09-23 の初回完了で git に 20MB 書き戻し、リポジトリ衛生の 1MB 上限を超えた)。
         id: shots
         if: always() && hashFiles('.local/r2/state/page-quality/latest.json') != ''
-        run: npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "state/page-quality/"
+        # latest.json・history.csv・index.json・screenshots/latest/ は R2 だけにある記録で、毎週置き換えるのが設計なので上書きを許す
+        run: npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --allow-authoritative-overwrite --prefix "state/page-quality/"
 
       - name: 🤖 Review screenshots (Claude・読み取り専用)
         id: review

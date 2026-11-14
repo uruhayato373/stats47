@@ -53,6 +53,8 @@ git commit --no-verify -m "message"
 
 新しいチェック項目を追加する場合は、`apps/web/scripts/pre-commit-checks.sh` を編集してください。
 
+`core.hooksPath` は本体の `.husky` の絶対パスなので、worktree の commit でも本体の `.husky/pre-commit` が走ります。本体の版は、commit する作業ツリーの `.husky/pre-commit` が自分と違えばそちらへ委ねるので、作業ツリー側の変更もその作業ツリーの commit で効きます (`husky-worktree-hook.test.cjs`)。委ねる処理そのものは、本体の作業ツリーに届いてから効きます。
+
 ---
 
 ## 関連ドキュメント

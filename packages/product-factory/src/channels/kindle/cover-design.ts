@@ -176,6 +176,16 @@ export const KINDLE_COVER_BACKGROUND_BY_ID: Readonly<Record<string, KindleCoverB
     width: 1600,
     height: 2560,
   },
+  // 書名を 3 行 (「47都市の」「食卓は」「似てきたのか」) に分けて描いた。上から続けて読むと主題になる (2026-11-14 照合)
+  "K-S1-14": {
+    status: "published",
+    r2Key: "media/kindle-cover-assets/K-S1-14/83620748306f/background.jpg",
+    sha256: "83620748306fbb2e4548eaeca6f98662bda6ac0badadfb0bf14b2eafd33aa5af",
+    bytes: 953398,
+    width: 1600,
+    height: 2560,
+    textBaked: { checkedText: ["47都市の食卓は似てきたのか", "家計調査で読む19年の変化", "stats47"], checkedAt: "2026-11-14" },
+  },
 };
 
 const KINDLE_COVER_REVIEW_STATUS_BY_ID: Readonly<Partial<Record<string, KindleCoverReviewStatus>>> = {
@@ -192,6 +202,7 @@ const KINDLE_COVER_REVIEW_STATUS_BY_ID: Readonly<Partial<Record<string, KindleCo
   "K-S1-11": "approved",
   "K-S1-12": "approved",
   "K-S1-13": "approved",
+  "K-S1-14": "approved",
 };
 
 /**
@@ -211,6 +222,9 @@ export const KINDLE_COVER_DESIGN_BY_ID: Readonly<Record<string, KindleCoverDesig
   "K-S1-10": d("issue-pop", "safety-environment", "orange-navy", ["犯罪", "労災", "公害", "災害", "防災"], "防災バッグ、盾、工事用ヘルメット、雨雲、避難所を日本地図上に整理して描く"),
   "K-S1-11": d("issue-pop", "culture-leisure", "purple-gold", ["文化施設", "スポーツ", "余暇時間", "読書", "旅行"], "本、ボール、音楽、博物館、旅行のモチーフを日本地図の周囲に明るく配置する"),
   "K-S1-12": d("issue-pop", "digital-life", "blue-orange", ["通信契約", "PC支出", "テレワーク", "メディア", "コンビニ"], "スマートフォン、ノートPC、電波塔、在宅勤務机、デジタルグラフを日本地図と結ぶ"),
+  "K-S1-14": d("issue-pop", "food-consumption", "coral-cream", ["47都市", "19年", "家計調査", "食卓", "地域差"], "日本地図の上に47都市の食卓の皿を並べ、昔と今の二つの食卓を左右に見比べる構図"),
+  "K-S1-15": d("issue-pop", "household-money", "navy-yellow", ["年収階級", "食料費", "品目", "世帯", "家計調査"], "年収の段を表す階段の上に、買い物かごと食卓の皿を段ごとに並べた構図"),
+  "K-S1-16": d("issue-pop", "food-consumption", "coral-cream", ["品目", "推移", "伸びた", "縮んだ", "家計調査"], "昔の買い物かごと今の買い物かごを左右に並べ、入っている品が入れ替わっている構図"),
   "K-S1-13": d("issue-pop", "migration-living", "blue-orange", ["家賃", "賃金", "子育て", "医療", "災害"], "引っ越しの段ボール、家の鍵、日本地図、書き込みのある比較表を机の上に置いた構図"),
 
   "K-S2-01": d("theme-databook-pop", "population-households", "blue-orange", ["総人口", "世帯", "出生", "死亡", "年齢構成"], "47都道府県の人口ピクトと世帯住宅、人口ピラミッドを日本地図の周囲に配置する"),
@@ -223,6 +237,7 @@ export const KINDLE_COVER_DESIGN_BY_ID: Readonly<Record<string, KindleCoverDesig
   "K-S2-08": d("theme-databook-pop", "retail-market", "coral-cream", ["人口商圏", "店舗", "消費", "地価", "競合"], "店舗、商圏サークル、買い物客、地価ピン、売上グラフを日本地図上に配置する"),
   "K-S2-09": d("theme-databook-pop", "industry-economy", "green-gold", ["産業構成", "事業所", "製造", "雇用", "地域経済"], "工場、事業所、物流、働く人、産業別グラフを日本地図の周囲に配置する"),
   "K-S2-10": d("theme-databook-pop", "safety-environment", "orange-navy", ["災害", "避難", "道路", "橋梁", "ライフライン"], "防災バッグ、避難所、道路、橋、ライフラインを日本地図上に整理して描く"),
+  "K-S2-12": d("theme-databook-pop", "ranking-discovery", "green-gold", ["総合スコア", "分野別", "強み", "弱み", "47都道府県"], "分野ごとの目盛りを持つ大きな計器と、指標のカードを束ねた束を机に並べた構図"),
   "K-S2-11": d("theme-databook-pop", "food-consumption", "coral-cream", ["収入", "支出", "食費", "光熱費", "貯蓄"], "家計簿、買い物かご、電気メーター、硬貨、貯金箱を日本地図の周囲に配置する"),
 
   "K-S3-01": d("region-pop", "regional-profile", "sky-coral", ["人口", "産業", "暮らし", "農業", "観光"], "北海道の輪郭を大きく見せ、雪原、農地、都市、観光を統計カードとして配置する"),
@@ -234,6 +249,7 @@ export const KINDLE_COVER_DESIGN_BY_ID: Readonly<Record<string, KindleCoverDesig
   "K-S3-07": d("region-pop", "regional-profile", "orange-navy", ["人口", "産業", "交通", "農業", "暮らし"], "四国4県の輪郭を強調し、橋、農業、都市、暮らしを統計カードとして配置する"),
   "K-S3-08": d("region-pop", "regional-profile", "coral-cream", ["人口", "産業", "観光", "農業", "暮らし"], "九州・沖縄8県の輪郭を強調し、火山、海、農業、都市、観光を統計カードとして配置する"),
 
+  "K-S4-02": d("ranking-pop", "ranking-discovery", "purple-gold", ["意外な1位", "県民性", "最下位", "定義", "47都道府県"], "表彰台の1位に意外な品物が載り、驚く吹き出しの形だけを周りに配置した構図"),
   "K-S4-01": d("ranking-pop", "ranking-discovery", "purple-gold", ["意外な1位", "最下位", "地域差", "全国平均", "分野横断"], "日本地図、金銀銅の表彰台、上昇下降グラフ、驚きを示す統計カードを華やかに配置する"),
 };
 

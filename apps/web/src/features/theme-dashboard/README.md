@@ -96,7 +96,7 @@ Each metric group's panel is chosen by its post-filter surviving metric count, n
 
 Regional scope and observed period appear next to each additional chart. Explicit national series are labeled in the legend even when a prefecture is selected. Arithmetic means describe the available prefectures rather than asserting that all 47 were observed.
 
-Navigation uses existing `nav_click` dimensions: `theme_section` (`theme-key:anchor`), `theme_region` (5-digit code or `all`), `theme_switcher` (destination theme key), alongside `theme_kpi_switcher` and `theme_evidence`. The weekly GA4 collector writes Japan-only rolling-28-day `pages-clean.csv` and `theme-navigation.csv`, each with `.meta.json` recording its period, country filter and fetch status. Failed metadata must block use of an older CSV. Recurring review and tasks remain in the theme portfolio state/backlog, not in this README.
+Navigation uses existing `nav_click` dimensions: `theme_section` (`theme-key:anchor`), `theme_region` (5-digit code or `all`), `theme_switcher` (destination theme key), alongside `theme_kpi_switcher`. (`theme_evidence` stopped on 2026-11-14 when the evidence-topics section was removed from theme pages; links to spatial analyses are one row counted as `geo_analysis_list`.) The weekly GA4 collector writes Japan-only rolling-28-day `pages-clean.csv` and `theme-navigation.csv`, each with `.meta.json` recording its period, country filter and fetch status. Failed metadata must block use of an older CSV. Recurring review and tasks remain in the theme portfolio state/backlog, not in this README.
 
 ## Chart Editorial Contract
 

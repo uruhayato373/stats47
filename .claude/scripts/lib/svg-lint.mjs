@@ -239,6 +239,24 @@ export function findImageTypeCopyDefects(svg) {
   return defects;
 }
 
+/**
+ * 型の画像 (幅 1080) の文字の下限。スマホのブログ本文では約 360px 幅 (1/3) で表示されるので、30 で画面上 10px になる
+ * (2026-11-14 オーナー決定・CHART-AXIS-READABILITY-01)。描画側の正本は data-cards/chart-theme.ts の TEMPLATE_MIN_FONT_SIZE。
+ */
+export const TEMPLATE_MIN_FONT_SIZE = 30;
+
+/** 型の画像で、下限より小さい文字 (text と tspan の font-size) を `<大きさ> <文字>` の形で返す */
+export function findTemplateFontFloorDefects(svg, floor = TEMPLATE_MIN_FONT_SIZE) {
+  const source = String(svg);
+  if (!/data-image-template="/.test(source)) return [];
+  const defects = [];
+  for (const m of source.matchAll(/<(text|tspan)\b[^>]*\bfont-size="([\d.]+)(?:px)?"[^>]*>([^<]*)/g)) {
+    const size = Number(m[2]);
+    if (size < floor) defects.push(`${size} ${decodeXmlEntities(m[3]).trim()}`);
+  }
+  return defects;
+}
+
 const texts = (svg) => [...String(svg).matchAll(/<text\b[^>]*>([^<]*)<\/text>/g)].map((m) => m[1]);
 
 /** 図の中の文字: 文字化けと、記事のラベルから紛れ込む矢印 */

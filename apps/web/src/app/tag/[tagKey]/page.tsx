@@ -8,6 +8,7 @@ import { PageShell, PageHeader, Breadcrumbs, PanelGrid } from '@/components/layo
 import { SurfaceCard } from '@/components/surface';
 
 import { AdRow, composeAdRows } from '@/features/ads';
+import { formatCardDate } from '@/features/blog/listing';
 import {
   listAllUniqueTags,
   listArticleSummariesByTagKey,
@@ -108,11 +109,14 @@ export default async function TagArticlesPage({ params }: PageProps) {
         eyebrow="タグ"
         title={tag}
         description={`「${tag}」タグが付いた都道府県統計ブログの記事 ${articles.length} 本を掲載しています。`}
-        stats={`全 ${articles.length} 記事`}
+        stats={`全 ${articles.length} 記事 ・ 並び順: 公開日の新しい順`}
       />
 
       <PanelGrid className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        {articles.map((article) => (
+        {articles.map((article) => {
+          // 並び順の基準 (公開日) を各カードに出す (HUB-LIST-FINDABILITY-01。日付が無く並び順が分からなかった)
+          const publishedDate = formatCardDate(article.publishedAt);
+          return (
           <Link
             key={article.slug}
             href={hrefFor('blog', { slug: article.slug })}
@@ -129,10 +133,16 @@ export default async function TagArticlesPage({ params }: PageProps) {
                     {normalizeUnitsInText(article.description)}
                   </p>
                 )}
+                {publishedDate && (
+                  <p className="text-xs text-muted-foreground">
+                    <time dateTime={article.publishedAt ?? undefined}>公開 {publishedDate}</time>
+                  </p>
+                )}
               </div>
             </SurfaceCard>
           </Link>
-        ))}
+          );
+        })}
       </PanelGrid>
 
       {/* 記事内広告（一覧グリッド後。slotId 未発行の間は非表示） */}

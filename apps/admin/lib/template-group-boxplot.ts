@@ -1,6 +1,6 @@
 import { niceTicks } from '../../../packages/types/src/numeric-ticks';
 import { BRAND } from '../../web/src/features/ogp/brand';
-import { LIGHT_THEME, mixColor, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
+import { TEMPLATE_MIN_FONT_SIZE, LIGHT_THEME, mixColor, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
 import { SAMPLE_FRAME, escapeXml, fitTitleSize, sampleBodyTop, sampleFrame, textWidth } from './template-sample-frame';
 
 /** One group's spread, already computed by the analysis: the whiskers end at min and max as given. */
@@ -17,7 +17,7 @@ export interface GroupBoxplotChart {
 
 const MAX_GROUPS = 8;
 const NAME_SIZE = 30;
-const TICK_SIZE = 28;
+const TICK_SIZE = TEMPLATE_MIN_FONT_SIZE;
 const BOX_HEIGHT = 56;
 const ROW_MAX_HEIGHT = 180;
 /** The band at the top of a row that holds the group's name and median. */
@@ -51,7 +51,7 @@ export function renderGroupBoxplotChart(chart: GroupBoxplotChart, theme: ChartTh
   const rows = groups.map((g, i) => {
     const y = top + i * rowHeight, boxTop = y + NAME_BAND + (rowHeight - NAME_BAND - BOX_HEIGHT) / 2, mid = boxTop + BOX_HEIGHT / 2;
     const wash = i % 2 === 0 ? `<rect x="${SAMPLE_FRAME.left}" y="${y}" width="${SAMPLE_FRAME.right - SAMPLE_FRAME.left}" height="${rowHeight}" fill="${mixColor(BRAND.primary, theme.paper, dark ? 0.86 : 0.94)}"/>` : '';
-    const nameSize = Math.min(NAME_SIZE, Math.floor(NAME_SIZE * (SAMPLE_FRAME.right - SAMPLE_FRAME.left - 220) / textWidth(g.label, NAME_SIZE)));
+    const nameSize = Math.max(TEMPLATE_MIN_FONT_SIZE, Math.min(NAME_SIZE, Math.floor(NAME_SIZE * (SAMPLE_FRAME.right - SAMPLE_FRAME.left - 220) / textWidth(g.label, NAME_SIZE))));
     return `<g data-group="${escapeXml(g.label)}" data-median="${g.median}">${wash}
       <text x="${SAMPLE_FRAME.left + 20}" y="${y + 42}" font-size="${nameSize}" font-weight="700">${escapeXml(g.label)}</text>
       <text x="${SAMPLE_FRAME.right - 20}" y="${y + 42}" text-anchor="end" font-size="${NAME_SIZE}" font-weight="700" fill="${color}">中央値 ${format(g.median)}</text>

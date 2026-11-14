@@ -759,7 +759,7 @@
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
-      "section": "traffic",
+      "section": "crime",
       "sortOrder": 20
     },
     {
@@ -1014,36 +1014,30 @@
   "sections": [
     {
       "key": "crime",
-      "title": "犯罪の認知と検挙",
-      "description": "主指標は人口千人当たりの刑法犯認知件数です。検挙率とは別の尺度であり、認知件数には届け出や把握状況も影響します。",
+      "title": "自分の県は犯罪や詐欺の被害に遭いやすいか、警察は足りているか",
+      "concern": "自分の住む県で犯罪が多発していないか、警察官の数や検挙の体制が十分か不安だ。",
       "metricGroupKeys": [
         "crime-1",
-        "crime-2"
+        "crime-2",
+        "crime-3",
+        "crime-4"
       ],
       "chartKeys": [
         "crime-count-arrest-rate-trend",
+        "traffic-accident-deaths-trend",
         "safety-crime-types-donut"
       ]
     },
     {
-      "key": "traffic",
-      "title": "交通事故の発生と人的被害",
-      "description": "主指標は人口10万人当たりの事故件数・死者数・負傷者数です。総件数・総人数の推移図と分けて確認します。",
-      "metricGroupKeys": [
-        "traffic-1",
-        "traffic-2"
-      ],
-      "chartKeys": [
-        "traffic-accident-deaths-trend"
-      ]
-    },
-    {
       "key": "fire-emergency",
-      "title": "火災と救急需要",
-      "description": "火災は人口10万人当たり、救急出動は人口千人当たりで比較します。火災死傷者の内訳は総人数です。",
+      "title": "火災で亡くなる人は多いか、救急や消防の態勢は十分か",
+      "concern": "火事や急病のとき、被害が大きくならないか、救急車や消防車が速やかに来てくれるか不安だ。",
       "metricGroupKeys": [
         "fire-emergency-1",
-        "fire-emergency-2"
+        "fire-emergency-2",
+        "fire-emergency-4",
+        "fire-emergency-5",
+        "fire-emergency-6"
       ],
       "chartKeys": [
         "fire-emergency-trend",
@@ -1052,66 +1046,45 @@
       ]
     },
     {
-      "key": "crime-safety",
-      "title": "地域の治安や犯罪の取り締まり状況はどうなっているか",
-      "concern": "自分の住む地域で犯罪が多発していないか、警察の防犯体制が整っているか不安だ。",
+      "key": "traffic",
+      "title": "交通事故で死傷する危険は高いか",
+      "concern": "毎日の通勤・通学や高齢の家族が交通事故に遭わないか心配だ。",
       "metricGroupKeys": [
-        "crime-safety-1"
-      ]
-    },
-    {
-      "key": "traffic-safety",
-      "title": "交通事故の発生率や死傷者の危険性は高いか",
-      "concern": "毎日の通勤・通学時や高齢の家族が交通事故に遭わないか心配だ。",
-      "metricGroupKeys": [
-        "traffic-safety-1"
-      ]
-    },
-    {
-      "key": "fire-and-emergency",
-      "title": "火災のリスクや消防・救急の態勢は十分か",
-      "concern": "火災発生時の被害や急病時に救急車や消防車が速やかに到着できるか不安だ。",
-      "metricGroupKeys": [
-        "fire-and-emergency-1",
-        "fire-and-emergency-2",
-        "fire-and-emergency-3"
-      ]
-    },
-    {
-      "key": "natural-disaster-impact",
-      "title": "自然災害による人的・物的被害や復旧費用はどれくらいか",
-      "concern": "大規模な地震や風水害が起きた際の人命や住まいへの被害が心配だ。",
-      "metricGroupKeys": [
-        "natural-disaster-impact-1",
-        "natural-disaster-impact-2",
-        "natural-disaster-impact-3",
-        "natural-disaster-impact-4"
-      ],
-      "chartKeys": [
-        "safety-natural-disaster-impact-composition-1",
-        "safety-natural-disaster-impact-composition-2"
+        "traffic-1",
+        "traffic-2",
+        "traffic-3"
       ]
     },
     {
       "key": "evacuation-and-disaster-prevention",
-      "title": "災害時の避難体制や要支援者の個別避難計画は整備されているか",
-      "concern": "災害発生時に津波からの避難場所や高齢者等の避難支援策があるか知りたい。",
+      "title": "災害のとき逃げる備えは整っているか",
+      "concern": "大地震や津波が起きたとき、高齢者など支援が要る人の避難計画や津波の避難先があるか知りたい。",
       "metricGroupKeys": [
         "evacuation-and-disaster-prevention-1",
         "evacuation-and-disaster-prevention-2",
-        "evacuation-and-disaster-prevention-3",
-        "evacuation-and-disaster-prevention-4"
+        "evacuation-and-disaster-prevention-3"
       ],
       "embeddedSectionKeys": [
         "shelter-applicability"
       ]
     },
     {
-      "key": "consumer-trouble-safety",
-      "title": "悪質商法や詐欺などの消費者トラブルの相談窓口は活用されているか",
-      "concern": "契約トラブルや悪質商法の被害に遭った際の相談実績を知りたい。",
+      "key": "natural-disaster-impact",
+      "title": "自然災害でどれくらいの被害や費用が出ているか",
+      "concern": "大規模な地震や風水害が起きたとき、人命や住まいへの被害と復旧の費用がどれくらいになるか心配だ。",
       "metricGroupKeys": [
-        "consumer-trouble-safety-1"
+        "natural-disaster-impact-1",
+        "natural-disaster-impact-2",
+        "natural-disaster-impact-3",
+        "natural-disaster-impact-4",
+        "natural-disaster-impact-5",
+        "natural-disaster-impact-6",
+        "natural-disaster-impact-7",
+        "natural-disaster-impact-8"
+      ],
+      "chartKeys": [
+        "safety-natural-disaster-impact-composition-1",
+        "safety-natural-disaster-impact-composition-2"
       ]
     }
   ],
@@ -1137,37 +1110,33 @@
       ]
     },
     {
-      "key": "traffic-1",
-      "title": "交通事故死者・負傷者数（人口10万人当たり）",
+      "key": "crime-3",
+      "title": "警察官数（人口千人当たり）",
       "rankingKeys": [
-        "traffic-accident-deaths-per-100k",
-        "traffic-accident-injuries-per-100k"
+        "police-officer-count-per-population"
       ],
       "defaultCheckedKeys": [
-        "traffic-accident-deaths-per-100k",
-        "traffic-accident-injuries-per-100k"
+        "police-officer-count-per-population"
       ]
     },
     {
-      "key": "traffic-2",
-      "title": "交通事故発生件数（人口10万人当たり）",
+      "key": "crime-4",
+      "title": "消費生活相談受付件数（年度）",
       "rankingKeys": [
-        "traffic-accident-count-per-population"
+        "consumer-consultation-accepted-cases"
       ],
       "defaultCheckedKeys": [
-        "traffic-accident-count-per-population"
+        "consumer-consultation-accepted-cases"
       ]
     },
     {
       "key": "fire-emergency-1",
-      "title": "人口当たりの火災・救急出動",
+      "title": "火災出火件数（人口10万人当たり）",
       "rankingKeys": [
-        "building-fire-count-per-100-thousand-people",
-        "annual-emergency-dispatches-per-1000"
+        "building-fire-count-per-100-thousand-people"
       ],
       "defaultCheckedKeys": [
-        "building-fire-count-per-100-thousand-people",
-        "annual-emergency-dispatches-per-1000"
+        "building-fire-count-per-100-thousand-people"
       ]
     },
     {
@@ -1181,38 +1150,20 @@
       ]
     },
     {
-      "key": "crime-safety-1",
-      "title": "警察官数（人口千人当たり）",
+      "key": "fire-emergency-4",
+      "title": "救急の出動件数と救急自動車数",
       "rankingKeys": [
-        "police-officer-count-per-population"
-      ],
-      "defaultCheckedKeys": [
-        "police-officer-count-per-population"
-      ]
-    },
-    {
-      "key": "traffic-safety-1",
-      "title": "高齢者事故",
-      "rankingKeys": [
-        "traffic-accident-casualties-elderly-65plus"
-      ],
-      "defaultCheckedKeys": [
-        "traffic-accident-casualties-elderly-65plus"
-      ]
-    },
-    {
-      "key": "fire-and-emergency-1",
-      "title": "救急自動車数（人口10万人当たり）",
-      "rankingKeys": [
+        "annual-emergency-dispatches-per-1000",
         "fire-department-emergency-car-count-per-100k"
       ],
       "defaultCheckedKeys": [
+        "annual-emergency-dispatches-per-1000",
         "fire-department-emergency-car-count-per-100k"
       ]
     },
     {
-      "key": "fire-and-emergency-2",
-      "title": "消防吏員数と消防ポンプ自動車等現有数の推移",
+      "key": "fire-emergency-5",
+      "title": "消防吏員数とポンプ自動車等の現有数",
       "rankingKeys": [
         "fire-department-member-count-per-100-thousand-people",
         "fire-department-pump-car-count-per-100-thousand-people"
@@ -1223,7 +1174,7 @@
       ]
     },
     {
-      "key": "fire-and-emergency-3",
+      "key": "fire-emergency-6",
       "title": "消防水利数",
       "rankingKeys": [
         "fire-department-water-count-per-100-thousand-people"
@@ -1233,51 +1184,35 @@
       ]
     },
     {
-      "key": "natural-disaster-impact-1",
-      "title": "自然災害による人的被害の内訳",
+      "key": "traffic-1",
+      "title": "交通事故死者数（人口10万人当たり）",
       "rankingKeys": [
-        "natural-disaster-deaths",
-        "natural-disaster-missing-persons",
-        "natural-disaster-injured-persons"
+        "traffic-accident-deaths-per-100k"
       ],
       "defaultCheckedKeys": [
-        "natural-disaster-deaths"
-      ],
-      "view": "tiles"
-    },
-    {
-      "key": "natural-disaster-impact-2",
-      "title": "自然災害による住家被害の内訳",
-      "rankingKeys": [
-        "natural-disaster-destroyed-houses",
-        "natural-disaster-half-destroyed-houses",
-        "natural-disaster-partially-damaged-houses"
-      ],
-      "defaultCheckedKeys": [
-        "natural-disaster-destroyed-houses"
-      ],
-      "view": "tiles"
-    },
-    {
-      "key": "natural-disaster-impact-3",
-      "title": "災害被害額（人口1人当たり）",
-      "rankingKeys": [
-        "disaster-damage-amount-per-person"
-      ],
-      "defaultCheckedKeys": [
-        "disaster-damage-amount-per-person"
+        "traffic-accident-deaths-per-100k"
       ]
     },
     {
-      "key": "natural-disaster-impact-4",
-      "title": "都道府県財政における災害復旧費と災害救助費の推移",
+      "key": "traffic-2",
+      "title": "人口10万人当たりの交通事故の負傷者数と発生件数",
       "rankingKeys": [
-        "disaster-recovery-expenses-prefecture",
-        "disaster-relief-expenses-prefecture"
+        "traffic-accident-injuries-per-100k",
+        "traffic-accident-count-per-population"
       ],
       "defaultCheckedKeys": [
-        "disaster-recovery-expenses-prefecture",
-        "disaster-relief-expenses-prefecture"
+        "traffic-accident-injuries-per-100k",
+        "traffic-accident-count-per-population"
+      ]
+    },
+    {
+      "key": "traffic-3",
+      "title": "高齢者事故",
+      "rankingKeys": [
+        "traffic-accident-casualties-elderly-65plus"
+      ],
+      "defaultCheckedKeys": [
+        "traffic-accident-casualties-elderly-65plus"
       ]
     },
     {
@@ -1292,16 +1227,6 @@
     },
     {
       "key": "evacuation-and-disaster-prevention-2",
-      "title": "避難行動要支援者名簿の掲載人数",
-      "rankingKeys": [
-        "individual-evacuation-plan-listed-persons"
-      ],
-      "defaultCheckedKeys": [
-        "individual-evacuation-plan-listed-persons"
-      ]
-    },
-    {
-      "key": "evacuation-and-disaster-prevention-3",
       "title": "個別避難計画が作成された人数",
       "rankingKeys": [
         "individual-evacuation-plan-covered-persons"
@@ -1311,8 +1236,8 @@
       ]
     },
     {
-      "key": "evacuation-and-disaster-prevention-4",
-      "title": "津波避難ビル数と津波避難タワー等数の推移",
+      "key": "evacuation-and-disaster-prevention-3",
+      "title": "津波避難ビルと津波避難タワー等の数",
       "rankingKeys": [
         "tsunami-evacuation-building-count",
         "tsunami-evacuation-tower-count"
@@ -1323,13 +1248,83 @@
       ]
     },
     {
-      "key": "consumer-trouble-safety-1",
-      "title": "消費生活相談受付件数（年度）",
+      "key": "natural-disaster-impact-1",
+      "title": "災害被害額（人口1人当たり）",
       "rankingKeys": [
-        "consumer-consultation-accepted-cases"
+        "disaster-damage-amount-per-person"
       ],
       "defaultCheckedKeys": [
-        "consumer-consultation-accepted-cases"
+        "disaster-damage-amount-per-person"
+      ]
+    },
+    {
+      "key": "natural-disaster-impact-2",
+      "title": "自然災害による死者数",
+      "rankingKeys": [
+        "natural-disaster-deaths"
+      ],
+      "defaultCheckedKeys": [
+        "natural-disaster-deaths"
+      ]
+    },
+    {
+      "key": "natural-disaster-impact-3",
+      "title": "自然災害による行方不明者数",
+      "rankingKeys": [
+        "natural-disaster-missing-persons"
+      ],
+      "defaultCheckedKeys": [
+        "natural-disaster-missing-persons"
+      ]
+    },
+    {
+      "key": "natural-disaster-impact-4",
+      "title": "自然災害による負傷者数",
+      "rankingKeys": [
+        "natural-disaster-injured-persons"
+      ],
+      "defaultCheckedKeys": [
+        "natural-disaster-injured-persons"
+      ]
+    },
+    {
+      "key": "natural-disaster-impact-5",
+      "title": "自然災害による全壊住家棟数",
+      "rankingKeys": [
+        "natural-disaster-destroyed-houses"
+      ],
+      "defaultCheckedKeys": [
+        "natural-disaster-destroyed-houses"
+      ]
+    },
+    {
+      "key": "natural-disaster-impact-6",
+      "title": "自然災害による半壊住家棟数",
+      "rankingKeys": [
+        "natural-disaster-half-destroyed-houses"
+      ],
+      "defaultCheckedKeys": [
+        "natural-disaster-half-destroyed-houses"
+      ]
+    },
+    {
+      "key": "natural-disaster-impact-7",
+      "title": "自然災害による一部破損住家棟数",
+      "rankingKeys": [
+        "natural-disaster-partially-damaged-houses"
+      ],
+      "defaultCheckedKeys": [
+        "natural-disaster-partially-damaged-houses"
+      ]
+    },
+    {
+      "key": "natural-disaster-impact-8",
+      "title": "災害救助費",
+      "rankingKeys": [
+        "disaster-relief-expenses-prefecture"
+      ],
+      "defaultCheckedKeys": [
+        "disaster-relief-expenses-prefecture"
       ]
     }
   ]

@@ -1,7 +1,7 @@
 /**
  * PSI 日次 digest 更新スクリプト
  *
- * 最新の psi-batch-*.json を読み、以下を更新する:
+ * 最新の data/psi/live/psi-batch-*.json (lib/latest-batch.mjs) を読み、以下を更新する:
  *   - data/psi/history.csv    : append-only の日次履歴（URL × strategy × 日）
  *   - data/psi/LATEST.md      : 人間向け最新レポート（前日比矢印 + 閾値違反強調）
  *
@@ -13,10 +13,11 @@
  *   node .claude/scripts/psi/psi-update-digest.mjs
  */
 
-import { readFileSync, readdirSync, writeFileSync, existsSync, appendFileSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, appendFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
+import { loadLatestPsiBatch } from "./lib/latest-batch.mjs";
 
 const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "..", "..", "..", "..");
 const BUDGETS_PATH = join(
@@ -115,14 +116,7 @@ function countViolations(result, budgets) {
 }
 
 function loadLatestBatch() {
-  const files = readdirSync(STATE_DIR)
-    .filter((f) => f.startsWith("psi-batch-") && f.endsWith(".json"))
-    .sort()
-    .reverse();
-  if (files.length === 0) throw new Error(`No psi-batch-*.json in ${STATE_DIR}`);
-  const latest = files[0];
-  const data = JSON.parse(readFileSync(join(STATE_DIR, latest), "utf-8"));
-  return { file: latest, results: data.results || [], generated_at: data.generated_at };
+  return loadLatestPsiBatch(STATE_DIR);
 }
 
 function csvEscape(v) {

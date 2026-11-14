@@ -3,7 +3,7 @@
   "archiveFormat": "aes-256-gcm-v1",
   "bucket": "stats47",
   "prefix": "archive/kindle-encrypted",
-  "generatedAt": "2026-11-04T01:47:10.021Z",
+  "generatedAt": "2026-11-13T22:51:22.832Z",
   "books": {
     "K-S1-01": {
       "id": "K-S1-01",
@@ -2399,6 +2399,129 @@
               "plainSize": 2611,
               "cipherSize": 2647,
               "key": "archive/kindle-encrypted/K-S1-13/v1-20261104-r8/d60ed0e8069a929a/review.json.s47enc"
+            }
+          ]
+        }
+      ]
+    },
+    "K-S1-14": {
+      "id": "K-S1-14",
+      "version": "v1-20261114-r3",
+      "latestRevision": "ab399d7bfecbd535",
+      "revisions": [
+        {
+          "revision": "c502f615bc71bc2d",
+          "version": "v1-20261114-r2",
+          "archivedAt": "2026-11-13T22:43:08.319Z",
+          "verifiedAt": "2026-11-13T22:43:51.978Z",
+          "remotePrefix": "archive/kindle-encrypted/K-S1-14/v1-20261114-r2/c502f615bc71bc2d",
+          "manifestSha256": "101e2b116a99c2bc9e394d9fdbb83405c63821a408968440917703efc69e5d18",
+          "files": [
+            {
+              "name": "book.epub",
+              "plainSha256": "7b5adcb3e44e44e2386fafebc333026412852f6b9b70c49126c8001116cf7963",
+              "cipherSha256": "40dd54feeb63a9cba13494c4f1bb2d2f5dfdb90f376cf22ded498e8e77763edc",
+              "plainSize": 5226030,
+              "cipherSize": 5226066,
+              "key": "archive/kindle-encrypted/K-S1-14/v1-20261114-r2/c502f615bc71bc2d/book.epub.s47enc"
+            },
+            {
+              "name": "cover.jpg",
+              "plainSha256": "a0962050bb9be4a628bd4e8c79711a3d93d5475f78f058c6f688ba954c841fc0",
+              "cipherSha256": "eac01eae535bfdbb0e4d3f885d79ee546b54cdb1ce8172dedbf205beefe8c6b2",
+              "plainSize": 956128,
+              "cipherSize": 956164,
+              "key": "archive/kindle-encrypted/K-S1-14/v1-20261114-r2/c502f615bc71bc2d/cover.jpg.s47enc"
+            },
+            {
+              "name": "cover.png",
+              "plainSha256": "1905b3b37c1dc3e8c5fac465ca2fd43086ef854954df292179d4ebde5b945dc4",
+              "cipherSha256": "59223b5a5e9d5355ccaed30987992c1efd470275776f398eaaad0679ebd69207",
+              "plainSize": 5188028,
+              "cipherSize": 5188064,
+              "key": "archive/kindle-encrypted/K-S1-14/v1-20261114-r2/c502f615bc71bc2d/cover.png.s47enc"
+            },
+            {
+              "name": "metadata.json",
+              "plainSha256": "3ea286e8ad9f6e970fce78f42044d840365bbd0c813303b8b89f1383009a2f40",
+              "cipherSha256": "6a9ae046a458dc24baf7a9ae6ce9802325c9b35bb07ac94101f4e46f15f74812",
+              "plainSize": 3281,
+              "cipherSize": 3317,
+              "key": "archive/kindle-encrypted/K-S1-14/v1-20261114-r2/c502f615bc71bc2d/metadata.json.s47enc"
+            },
+            {
+              "name": "READINESS.md",
+              "plainSha256": "9a47a875db2e4b91582aa172c7fe1c3c91f0e3875c89f1349612430bfbfe0267",
+              "cipherSha256": "67f3b8e54069b564a31204900bb3664af7006dc29ef7de4f5aabfec0e8ef7cb9",
+              "plainSize": 2017,
+              "cipherSize": 2053,
+              "key": "archive/kindle-encrypted/K-S1-14/v1-20261114-r2/c502f615bc71bc2d/READINESS.md.s47enc"
+            }
+          ]
+        },
+        {
+          "revision": "ab399d7bfecbd535",
+          "version": "v1-20261114-r3",
+          "archivedAt": "2026-11-13T22:51:16.598Z",
+          "verifiedAt": "2026-11-13T22:51:22.825Z",
+          "remotePrefix": "archive/kindle-encrypted/K-S1-14/v1-20261114-r3/ab399d7bfecbd535",
+          "manifestSha256": "70fbdfffd785783344849cbc36e3f6c13d0cc28e82e3e9a9d84b4d15ca1d42bd",
+          "files": [
+            {
+              "name": "book.epub",
+              "plainSha256": "769cf9c2e59f495d1451e7267e29d404a6403653e782657779514a6bb920dcb0",
+              "cipherSha256": "cf9a3e21956285445c18ffafa50386b07c072cb21e3afb249bf45da888f23c0a",
+              "plainSize": 5226029,
+              "cipherSize": 5226065,
+              "key": "archive/kindle-encrypted/K-S1-14/v1-20261114-r3/ab399d7bfecbd535/book.epub.s47enc"
+            },
+            {
+              "name": "cover.jpg",
+              "plainSha256": "a0962050bb9be4a628bd4e8c79711a3d93d5475f78f058c6f688ba954c841fc0",
+              "cipherSha256": "484bcb8232c966c97bdcedf09a9b1a3a1bafe3ef62dd1400617f5a899efb7faf",
+              "plainSize": 956128,
+              "cipherSize": 956164,
+              "key": "archive/kindle-encrypted/K-S1-14/v1-20261114-r3/ab399d7bfecbd535/cover.jpg.s47enc"
+            },
+            {
+              "name": "cover.png",
+              "plainSha256": "1905b3b37c1dc3e8c5fac465ca2fd43086ef854954df292179d4ebde5b945dc4",
+              "cipherSha256": "b1a0d86ae5b4032381f7c0026c2e8ed943ccd7d0ce836642534d90607528499f",
+              "plainSize": 5188028,
+              "cipherSize": 5188064,
+              "key": "archive/kindle-encrypted/K-S1-14/v1-20261114-r3/ab399d7bfecbd535/cover.png.s47enc"
+            },
+            {
+              "name": "metadata.json",
+              "plainSha256": "3226a218446accdf5e99d732a64c38978027afb32da6a5699a0fa4cc0a95691f",
+              "cipherSha256": "b4310fb1897b15737e445f44f60468670d33bf8af145ccdf0abb4d6afc774838",
+              "plainSize": 3281,
+              "cipherSize": 3317,
+              "key": "archive/kindle-encrypted/K-S1-14/v1-20261114-r3/ab399d7bfecbd535/metadata.json.s47enc"
+            },
+            {
+              "name": "READINESS.md",
+              "plainSha256": "0ec2adc5d8c0fab9d0cd0bf9026a93835b7f1a50bf641689061c49eebb30b9fc",
+              "cipherSha256": "bb41b894a56742bb85168b3c0b5e26b0163ab17616cc08f43d063556beaffe6b",
+              "plainSize": 2017,
+              "cipherSize": 2053,
+              "key": "archive/kindle-encrypted/K-S1-14/v1-20261114-r3/ab399d7bfecbd535/READINESS.md.s47enc"
+            },
+            {
+              "name": "review.md",
+              "plainSha256": "94d88fbc903b43b39861bd9f0c289a6cd51a92d7dbe900bc8d2b9d99b1bb3df7",
+              "cipherSha256": "74672498b76f2b7c57830896fea2ab36be724176fe8078b4ba8636b37d70ba28",
+              "plainSize": 1427,
+              "cipherSize": 1463,
+              "key": "archive/kindle-encrypted/K-S1-14/v1-20261114-r3/ab399d7bfecbd535/review.md.s47enc"
+            },
+            {
+              "name": "review.json",
+              "plainSha256": "c21d0a3b7e6ae542d28483c1e484e41b20ee13c10dbee6d926707f19c6cc7091",
+              "cipherSha256": "0ce2010a2019e89ffb75f13578e185d8f6659121752ecf82e8ca25775e0b1011",
+              "plainSize": 2873,
+              "cipherSize": 2909,
+              "key": "archive/kindle-encrypted/K-S1-14/v1-20261114-r3/ab399d7bfecbd535/review.json.s47enc"
             }
           ]
         }

@@ -13,13 +13,15 @@ export function ProductOverview({ product, purchaseProduct, preview = false }: {
   readonly purchaseProduct?: StorefrontProduct;
   readonly preview?: boolean;
 }) {
-  const Icon = product.channel === "kindle" ? BookOpen : Database;
+  const isKindle = product.channel === "kindle";
+  const Icon = isKindle ? BookOpen : Database;
+  const includedTitle = isKindle ? "この本の内容" : "含まれるもの";
 
   return (
     <section aria-label={purchaseProduct ? "商品内容と購入" : "改訂案の内容"} className="flex flex-col gap-8">
       <div className={`grid items-start gap-4${purchaseProduct ? " @sm:grid-cols-2" : ""}`}>
         <div className="flex min-w-0 flex-col gap-3">
-          <SectionHeader title={purchaseProduct ? "含まれるもの" : "改訂案に含まれるもの"} icon={<Icon aria-hidden="true" />} hideRule className="mb-0" />
+          <SectionHeader title={purchaseProduct ? includedTitle : "改訂案に含まれるもの"} icon={<Icon aria-hidden="true" />} hideRule className="mb-0" />
           <ul className="flex flex-col gap-2">
             {product.included.map((item) => (
               <li key={item} className="flex items-start gap-2 text-sm">

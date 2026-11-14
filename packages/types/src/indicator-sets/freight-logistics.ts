@@ -23,11 +23,31 @@ export const FREIGHT_LOGISTICS_SET: IndicatorSet = {
     {
       "rankingKey": "number-of-freight-cars",
       "shortLabel": "貨物車数",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "truck-operators",
       "shortLabel": "トラック事業者",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "main-road-length-per-km2",
+      "shortLabel": "主要道路実延長(面積あたり)",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "maritime-import-export-cargo",
+      "shortLabel": "海上出入貨物",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "port-count",
+      "shortLabel": "港湾の対象港数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "airport-count",
+      "shortLabel": "空港数",
       "role": "secondary"
     }
   ],

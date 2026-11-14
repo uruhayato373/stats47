@@ -48,7 +48,8 @@ test(`${files[1]}はgit書き戻しを週次集約CSV・ASP成果・集約state�
   ]);
   // 書き戻す成果は restore (consumer-paths の許可リスト) が書くものに限る。生 snapshot は含めない
   assert.doesNotMatch(outcomeBlock[1], /ga4-affiliate-\d|\.local\//);
-  assert.match(source, /diff-push-r2\.ts --prefix "state\/ads\/ga4-affiliate\/"/);
+  // 生 snapshot の push 先は state/ads/ga4-affiliate/ だけ (--prefix の前に --allow-* のフラグが入ってよい)
+  assert.match(source, /diff-push-r2\.ts (?:--[a-z-]+ )*--prefix "state\/ads\/ga4-affiliate\/"/);
   assert.doesNotMatch(source, /git push origin main/);
   assert.doesNotMatch(source, FORBIDDEN_AD_MUTATIONS);
 });

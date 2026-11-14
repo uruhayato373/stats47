@@ -72,9 +72,6 @@
     "UNTRACKED_DEBT:.claude/memory/feedback_backlog_ranking_key_audit.md:- 適切な代替が無い場合は `TODO: ranking_key 要見直し` 注釈を追加 (本 audit で 4 件 = 半導体 / 地震頻度 / 大学進学率 / インバウンド)": 1,
     "UNTRACKED_DEBT:.claude/scripts/lib/__tests__/check-maintenance-debt.test.cjs:const root = fixture(\"// FIXME: later\\n\"); t.after(() => fs.rmSync(root, { recursive: true, force: true }));": 1,
     "UNTRACKED_DEBT:.claude/scripts/lib/__tests__/check-maintenance-debt.test.cjs:const root = fixture(\"// TODO: later\\ngetDrizzle();\\n\"); t.after(() => fs.rmSync(root, { recursive: true, force: true }));": 1,
-    "UNTRACKED_DEBT:.github/workflows/migration-flow-annual.yml:# TODO Phase 2: e-Stat API から最新データ取得 → pref-net-{year}.ts 更新": 1,
-    "UNTRACKED_DEBT:.github/workflows/migration-flow-annual.yml:# TODO Phase 2: X 投稿 (Playwright session を CI で管理する設計が必要)": 1,
-    "UNTRACKED_DEBT:.github/workflows/migration-flow-weekly.yml:# TODO Phase 4: 既投稿チェック (週単位 idempotency)": 1,
     "UNTRACKED_DEBT:apps/web/src/components/organisms/README.md:// TODO: Fetch from API/DB": 1,
     "UNTRACKED_DEBT:packages/estat-api/src/stats-list/index.ts:// TODO: components ディレクトリが存在しない": 1
   }

@@ -101,7 +101,7 @@ export interface InfraSource {
   readonly retrievedAt: string;
 }
 
-/** 原典の属性名 */
+/** 原典の属性名。属性の台帳 `geo.ksj-attributes` の役割から組み立てる (`networks.ts`) */
 export interface InfraAttributeMap {
   /** 設置期間の開始年 */
   readonly start: string;

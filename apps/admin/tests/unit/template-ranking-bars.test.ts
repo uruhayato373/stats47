@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import sharp from 'sharp';
-import { RANKING_BAR_PLOT, rankBadgeFontSize, rankingBarRows, renderItemBarsChart, renderRankingBars } from '@/lib/template-ranking-bars';
+import { RANKING_BAR_PLOT, rankBadgeFontSize, rankBadgeRadius, rankingBarRows, renderItemBarsChart, renderRankingBars } from '@/lib/template-ranking-bars';
 import { RANKING_SAMPLE_METRIC, RANKING_SAMPLE_PRESENTATION } from '@/lib/template-ranking-data';
 import { resolveMetricColor } from '../../../remotion/src/features/data-cards/tile-scale';
 import { CHART_THEMES, toHex } from '../../../remotion/src/features/data-cards/chart-theme';
@@ -40,7 +40,7 @@ describe('ranking bar basic form', () => {
     expect(lower).not.toBe(color);
     // Ranks are badges, values sit right with their unit; the minimum keeps a visible marker.
     expect(svg).toMatch(/text-anchor="middle"[^>]*>1<\/text>/);
-    expect(svg).toContain('>36.0<tspan font-size="26" dx="4">°C</tspan>');
+    expect(svg).toContain('>36.0<tspan font-size="30" dx="4">°C</tspan>');
     expect(svg).toContain('>31.4<tspan');
     expect(svg).toContain('data-domain-min="31.4"');
     expect(svg).toContain('data-domain-max="36"');
@@ -79,11 +79,15 @@ describe('ranking bar basic form', () => {
     expect(svg).not.toContain('data-axis-break');
     expect(svg).not.toContain('0省略');
   });
-  it('keeps a rank of up to four digits inside its badge, leaving one and two digits as they were', () => {
+  it('keeps a rank of up to four digits inside its badge at the type\'s smallest text size, widening the badge instead of shrinking the rank', () => {
     // A municipal set (1,700 rows) gives four-digit ranks in the lower card (IMAGE-BAR-RANK-BADGE-01).
-    expect([1, 9, 10, 47].map(rankBadgeFontSize)).toEqual([30, 30, 26, 26]);
-    const badgeTextWidth = 27 * 2 - 8;
-    for (const rank of [100, 999, 1648, 9999]) expect(String(rank).length * 0.6 * rankBadgeFontSize(rank)).toBeLessThanOrEqual(badgeTextWidth);
+    // Ranks never drop below 30 (a phone shows the 1080px image at a third: CHART-AXIS-READABILITY-01).
+    expect([1, 9, 10, 47, 100, 1648].map(rankBadgeFontSize)).toEqual([30, 30, 30, 30, 30, 30]);
+    expect([1, 47].map(rankBadgeRadius)).toEqual([27, 27]);
+    for (const rank of [100, 999, 1648, 9999]) expect(String(rank).length * 0.58 * rankBadgeFontSize(rank)).toBeLessThanOrEqual(rankBadgeRadius(rank) * 2 - 6);
+    // The widest badge still fits its row (row height 84 less the 6px gap) and stays left of the names.
+    expect(rankBadgeRadius(9999) * 2).toBeLessThanOrEqual(78);
+    expect(25 + rankBadgeRadius(9999) * 2).toBeLessThan(RANKING_BAR_PLOT.left - 64);
     const rows = Array.from({ length: 1700 }, (_, i) => ({ name: '市' + (i + 1), value: 1700 - i }));
     const svg = renderItemBarsChart({ title: '市区町村', yearLabel: '2023年', unit: '百万円', source: 'e-Stat', presentation: RANKING_SAMPLE_PRESENTATION, rows, formatValue: (v) => String(v) });
     expect(svg).toContain(`font-size="${rankBadgeFontSize(1700)}" font-weight="700" fill="#FFFFFF">1700</text>`);

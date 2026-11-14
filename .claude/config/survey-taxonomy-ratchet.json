@@ -40,7 +40,7 @@
     }
   ],
   "theme": {
-    "minResolvedMetricGroups": 400,
+    "minResolvedMetricGroups": 412,
     "minMetricGroupCoveragePct": 100,
     "maxMissingLineageMetricGroups": 0,
     "minResolvedCharts": 79,
@@ -48,12 +48,12 @@
     "maxMissingLineageCharts": 0
   },
   "blog": {
-    "minCharts": 2123,
-    "minResolvedCharts": 1974,
+    "minCharts": 2279,
+    "minResolvedCharts": 2039,
     "minCoveragePct": 100,
     "maxUnresolvedCharts": 0,
     "maxMissingLineageCharts": 0,
-    "maxLegacyDataSourceSectionArticles": 58,
+    "maxLegacyDataSourceSectionArticles": 50,
     "maxSourcelessChartArticles": 0,
     "requireSnapshotSources": true
   },

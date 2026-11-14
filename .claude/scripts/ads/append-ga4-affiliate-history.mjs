@@ -17,7 +17,7 @@ import { fileURLToPath } from "node:url";
 
 import { datasetPath } from "../../../config/datasets.mjs";
 
-const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
+const ROOT = process.env.STATS47_SCAN_ROOT || path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const HISTORY = path.join(ROOT, datasetPath("ga4.affiliate-history"));
 const EXPERIMENT_HISTORY = path.join(ROOT, datasetPath("affiliate.experiment-history"));
 export const HEADER = "date,days,affiliate_vertical,link_position,impressions,clicks,ctr";

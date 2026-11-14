@@ -75,6 +75,14 @@ export function ProductDetail({ product, revision, preview = false }: {
           </div>}
           <ProductOverview product={edition.product} purchaseProduct={edition.preview ? undefined : product} preview={preview} />
           <ProductShowcase product={edition.product} />
+          {edition.product.tableOfContents?.length ? (
+          <section aria-label="目次" className="flex flex-col gap-3">
+            <SectionHeader title="目次" hideRule className="mb-0" />
+            <ol className="flex flex-col gap-2 text-sm leading-relaxed">
+              {edition.product.tableOfContents.map((chapter) => <li key={chapter}>{chapter}</li>)}
+            </ol>
+          </section>
+          ) : null}
           {edition.product.purchaseNotes?.length ? (
           <section aria-label={edition.preview ? "改訂案の範囲と注意点" : "購入前にご確認ください"} className="flex flex-col gap-3">
             <SectionHeader title={edition.preview ? "改訂案の範囲と注意点" : "購入前にご確認ください"} hideRule className="mb-0" />

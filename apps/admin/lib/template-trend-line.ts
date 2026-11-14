@@ -5,7 +5,7 @@ import { parseStatsValuesPayload } from '../../../packages/stats-r2/src/schemas'
 import { assertMetricPresentation, resolveNumericDomain, type MetricPresentation } from '../../../packages/types/src/metric-presentation';
 import { niceTicks } from '../../../packages/types/src/numeric-ticks';
 import { BRAND } from '../../web/src/features/ogp/brand';
-import { LIGHT_THEME, mixColor, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
+import { LIGHT_THEME, TEMPLATE_MIN_FONT_SIZE, mixColor, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
 import { SERIES_COLORS } from '../../../packages/svg-builder/src/shared/color';
 import { SAMPLE_FRAME, escapeXml, fitTitleSize, sampleBodyTop, sampleFrame, textWidth } from './template-sample-frame';
 
@@ -124,16 +124,16 @@ export function renderLineChart(chart: LineChart, theme: ChartTheme = LIGHT_THEM
   const firstPoints = series.map((s) => s.points.find((p) => p.value !== null));
   const startWidth = Math.max(...firstPoints.map((p) => textWidth(p ? format(p.value! * factor) : '', END_LABEL_SIZE)));
   const plot = {
-    left: SAMPLE_FRAME.left + (chart.startLabels ? startWidth : Math.max(...tickValues.map((t) => textWidth(tickFormat(t), 28)))) + 20,
+    left: SAMPLE_FRAME.left + (chart.startLabels ? startWidth : Math.max(...tickValues.map((t) => textWidth(tickFormat(t), TEMPLATE_MIN_FONT_SIZE)))) + 20,
     right: SAMPLE_FRAME.right - endWidth - 18, top, bottom: SAMPLE_FRAME.bodyBottom - 70,
   };
   const xAt = (x: string) => plot.left + (plot.right - plot.left) * position(x);
   const yAt = (value: number) => plot.bottom - (plot.bottom - plot.top) * (value - domain[0]) / (domain[1] - domain[0]);
   const grid = tickValues.map((tick) => {
     const y = yAt(tick / factor);
-    return `<line x1="${plot.left}" y1="${y}" x2="${plot.right}" y2="${y}" stroke="${theme.line}" stroke-width="1.5"/>${chart.startLabels ? '' : `<text x="${plot.left - 20}" y="${y + 10}" text-anchor="end" font-size="28" fill="${theme.muted}">${tickFormat(tick)}</text>`}`;
+    return `<line x1="${plot.left}" y1="${y}" x2="${plot.right}" y2="${y}" stroke="${theme.line}" stroke-width="1.5"/>${chart.startLabels ? '' : `<text x="${plot.left - 20}" y="${y + 10}" text-anchor="end" font-size="${TEMPLATE_MIN_FONT_SIZE}" fill="${theme.muted}">${tickFormat(tick)}</text>`}`;
   }).join('');
-  const labels = xLabels(xs).map((x) => `<text x="${xAt(x)}" y="${plot.bottom + 52}" text-anchor="middle" font-size="28" fill="${theme.muted}">${escapeXml(x.replace(/年度?$/, ''))}</text>`).join('');
+  const labels = xLabels(xs).map((x) => `<text x="${xAt(x)}" y="${plot.bottom + 52}" text-anchor="middle" font-size="${TEMPLATE_MIN_FONT_SIZE}" fill="${theme.muted}">${escapeXml(x.replace(/年度?$/, ''))}</text>`).join('');
   const dots = xs.length <= DOT_LIMIT;
   const lines = series.map((s, i) => {
     const color = colorOf(i);

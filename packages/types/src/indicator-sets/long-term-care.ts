@@ -34,6 +34,21 @@ export const LONG_TERM_CARE_SET: IndicatorSet = {
       "rankingKey": "nursing-home-residents-per-1000-65plus",
       "shortLabel": "老人ホーム在所者数（65歳以上人口千人当たり）",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "elderly-living-alone-rate",
+      "shortLabel": "65歳以上の一人暮らしの割合",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "nursing-home-staff-per-100k-65plus",
+      "shortLabel": "老人ホーム従事者数（65歳以上人口10万人当たり）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "care-worker-annual-income",
+      "shortLabel": "介護職員の平均年収",
+      "role": "secondary"
     }
   ],
   "keywords": [

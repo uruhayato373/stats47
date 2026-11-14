@@ -22,7 +22,7 @@ const DANGEROUS_PATTERNS = [
   { pattern: /git\s+clean\s+-fd/, reason: "git clean -fd は追跡されていないファイルを削除します" },
 
   // 並行エージェント / branch-workflow (コマンド先頭のみ照合し、commit メッセージ中の言及では止めない)
-  { pattern: /(?:^|[;&|(\n]\s*)git\s+add\s+(?:\S+\s+)*(?:-A|--all|\.)(?=\s|$|[;&|)])/, reason: "git add -A / --all / . は禁止です (並行エージェントの WIP 混入防止)。対象ファイルを明示して add してください" },
+  { pattern: /(?:^|[;&|(\n]\s*)git\s+add\s+(?:[^\s;&|()]+\s+)*(?:-A|--all|\.)(?=\s|$|[;&|)])/, reason: "git add -A / --all / . は禁止です (並行エージェントの WIP 混入防止)。対象ファイルを明示して add してください" },
   { pattern: /(?:^|[;&|(\n]\s*)git\s+push\b[^;&|\n]*\s(?:\S*:)?main(?=\s|$|[;&|)])/, reason: "main への直接 push は禁止です。develop→main は PR 経由のみ (.claude/rules/branch-workflow.md)" },
   { pattern: /(?:^|[;&|(\n]\s*)gh\s+pr\s+(?:merge\b|create\b[^;&|\n]*--base[=\s]+main(?=\s|$|[;&|)]))/, reason: "main へのマージは本番反映の判断で、オーナーの明示の指示が要ります。npm run release:status で状況を報告して確認してください。指示があるときは OWNER_APPROVED_RELEASE=1 を先頭に付けて実行します (.claude/rules/branch-workflow.md)" },
 
@@ -52,11 +52,15 @@ const ADVISORY_PATTERNS = [
     ].join("\n"),
   },
   {
-    pattern: /\b(diff-push-r2|push-r2-wrangler|push-generated-image-set|push-exact-r2-assets|delete-r2-prefix|r2-retention)\b/,
+    // スクリプト経由に加えて、区分表の止めを通らない直接コマンド (wrangler / aws s3) と、削除を伴う workflow の起動も拾う
+    pattern:
+      /\b(diff-push-r2|push-r2-wrangler|push-generated-image-set|push-exact-r2-assets|delete-r2-prefix|r2-retention|r2-cleanup-orphans|purge-cache-r2)\b|\bwrangler\s+r2\s+object\s+(put|delete)\b|\baws\s+s3\s+(cp|mv|rm|sync)\b|\bgh\s+workflow\s+run\b.*\b(r2-maintenance|cleanup-r2-sns-videos|r2-isr-gc)\b/,
     context: [
       "[r2-storage-design] R2 は remote が唯一の真実源。app/ 配下は URL 対応 snapshot 専用、手編集 JSON を SSOT にしない。",
-      "削除は r2-maintenance.yml の allowlist 経由のみ (dry-run 既定)。本番反映は確認してから。",
-      "正典: .claude/rules/r2-storage-design.md",
+      "承認なしでよい: 作り直せる生成物 (区分表で regenerable) の再生成と push、新しいキーの追加、dry-run、検査・再生成の workflow の起動。",
+      "オーナーの承認が要る: 正本 (authoritative・未登録の prefix を含む) の上書きと削除、削除を伴う workflow、公開状態の変更。",
+      "wrangler r2 object / aws s3 の直打ちは区分表の止めを通らないので使わず、diff-push-r2 などのスクリプトか workflow を使う。削除は r2-maintenance.yml の allowlist 経由のみ (dry-run 既定)。",
+      "正典: .claude/rules/r2-storage-design.md「書き込みの承認」",
     ].join("\n"),
   },
   {

@@ -114,6 +114,7 @@ function usage() {
   return `Usage:
   node .claude/scripts/source-vault/source-inventory.mjs build --profile <name>
   node .claude/scripts/source-vault/source-inventory.mjs build-all
+  node .claude/scripts/source-vault/source-inventory.mjs refresh --profile prefecture-deviation
   node .claude/scripts/source-vault/source-inventory.mjs validate --profile <name>
   node .claude/scripts/source-vault/source-inventory.mjs coverage --profile <name> [--check]
   node .claude/scripts/source-vault/source-inventory.mjs check-all`;
@@ -581,6 +582,74 @@ function resolvePrefectureDeviationOffsets(documents) {
   return offsets;
 }
 
+// prefecture-deviation のページ 1 件を分析企画で解決する。build と、OCR 作業領域なしで台帳を
+// 分析企画へ追随させる refresh / validate が同じ関数を使う。
+function prefectureDeviationPageItem({ id, source, processing, globalPage, analyses }) {
+  const analysis = analyses.find(
+    (entry) => globalPage >= entry.pages[0] && globalPage <= entry.pages[1]
+  );
+  if (!analysis) {
+    return {
+      id, source,
+      topicHint: `non-analysis page ${source.document} p.${source.page} (global p.${globalPage})`,
+      resolution: 'not-applicable',
+      reason: '章扉・図版のみ等で、分析・論点に属さないページ',
+      processing,
+    };
+  }
+  return {
+    id, source,
+    topicHint: analysis.id,
+    resolution: analysis.resolution,
+    reason: analysis.resolutionReason,
+    ...(analysis.primarySources?.[0] ? { primarySource: analysis.primarySources[0] } : {}),
+    mapping: {
+      metricKeys: analysis.metricKeys ?? [],
+      surveyIds: analysis.surveyIds ?? [],
+      geoScopes: analysis.geoScopes ?? [],
+      contentRoles: analysis.contentRoles ?? [],
+    },
+    processing,
+  };
+}
+
+// 確定済み台帳の document / page / processing はそのまま使い、分析企画だけを当て直す。
+// 分析企画 (analyses.json) を直したのに OCR 作業領域が無く build できず、台帳が古い接続先を
+// 持ち続けた (2026-10-13 の a32) ため、作業領域なしで決定的に再生成・検査できるようにする。
+function reapplyPrefectureDeviationAnalyses(items, analyses) {
+  const documents = [...new Set(items.map((item) => item.source.document))].map((id) => ({
+    id,
+    pages: items.filter((item) => item.source.document === id).length,
+  }));
+  const offsets = resolvePrefectureDeviationOffsets(documents);
+  return items.map((item) => prefectureDeviationPageItem({
+    id: item.id,
+    source: item.source,
+    processing: item.processing,
+    globalPage: offsets.get(item.source.document) + item.source.page,
+    analyses,
+  }));
+}
+
+async function refresh(profileName) {
+  const context = await loadContext(profileName);
+  if (context.profile.sourceKey !== 'prefecture-deviation') {
+    throw new Error(`refresh supports only prefecture-deviation, got ${context.profile.sourceKey}`);
+  }
+  const inventoryPath = path.join(context.outputDir, 'inventory.json');
+  const summaryPath = path.join(context.outputDir, 'summary.json');
+  const inventory = await readJson(inventoryPath);
+  const previous = await readJson(summaryPath);
+  const items = reapplyPrefectureDeviationAnalyses(
+    inventory.items,
+    await prefectureDeviationAnalyses()
+  );
+  await writeCompactJson(inventoryPath, { ...inventory, items });
+  await writeJson(summaryPath, summarize(profileName, context.profile, previous.input, items));
+  await validate(profileName);
+  return readJson(summaryPath);
+}
+
 async function editorialSources() {
   const root = path.join(PROJECT_ROOT, datasetDir('areas.editorial'));
   return Object.fromEntries(await Promise.all(PREFECTURES.map(async ([code]) => {
@@ -658,33 +727,13 @@ async function buildPageSource(context) {
       transcriptSha256: page.transcriptSha256,
     };
     if (context.profile.sourceKey === 'prefecture-deviation') {
-      const globalPage = prefectureDeviationOffsets.get(document.id) + page.page;
-      const analysis = prefectureDeviationAnalysesList.find(
-        (entry) => globalPage >= entry.pages[0] && globalPage <= entry.pages[1]
-      );
-      if (!analysis) {
-        return {
-          id, source,
-          topicHint: `non-analysis page ${document.id} p.${page.page} (global p.${globalPage})`,
-          resolution: 'not-applicable',
-          reason: '章扉・図版のみ等で、分析・論点に属さないページ',
-          processing,
-        };
-      }
-      return {
-        id, source,
-        topicHint: analysis.id,
-        resolution: analysis.resolution,
-        reason: analysis.resolutionReason,
-        ...(analysis.primarySources?.[0] ? { primarySource: analysis.primarySources[0] } : {}),
-        mapping: {
-          metricKeys: analysis.metricKeys ?? [],
-          surveyIds: analysis.surveyIds ?? [],
-          geoScopes: analysis.geoScopes ?? [],
-          contentRoles: analysis.contentRoles ?? [],
-        },
+      return prefectureDeviationPageItem({
+        id,
+        source,
         processing,
-      };
+        globalPage: prefectureDeviationOffsets.get(document.id) + page.page,
+        analyses: prefectureDeviationAnalysesList,
+      });
     }
     if (context.profile.sourceKey === 'claude-skills-guide') {
       const adoption = GUIDE_ADOPTIONS.get(page.page);
@@ -953,6 +1002,17 @@ async function validate(profileName) {
       errors.push(`absolute local path ${item.id}`);
     }
   }
+  if (context.profile.sourceKey === 'prefecture-deviation' && Array.isArray(inventory.items)) {
+    const expectedItems = reapplyPrefectureDeviationAnalyses(
+      inventory.items,
+      await prefectureDeviationAnalyses()
+    );
+    inventory.items.forEach((item, index) => {
+      if (JSON.stringify(item) !== JSON.stringify(expectedItems[index])) {
+        errors.push(`authored analysis drift ${item.id} (run: refresh --profile ${profileName})`);
+      }
+    });
+  }
   if (summary.itemCount !== inventory.items?.length) errors.push('summary itemCount');
   if (summary.resolvedCount !== inventory.items?.length) errors.push('summary resolvedCount');
   if (summary.resolutionCoverage !== 1) errors.push('summary resolutionCoverage');
@@ -1001,6 +1061,9 @@ async function main() {
   } else if (command === 'build-all') {
     result = [];
     for (const profileName of profileNames) result.push(await build(profileName));
+  } else if (command === 'refresh') {
+    if (!options.profile) throw new Error('refresh requires --profile');
+    result = await refresh(options.profile);
   } else if (command === 'validate') {
     if (!options.profile) throw new Error('validate requires --profile');
     result = await validate(options.profile);

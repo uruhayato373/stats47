@@ -5,11 +5,21 @@
  * 次回実行時はマニフェストと比較して差分のみ push する。
  * マニフェストで絞った後、R2 の一覧 (size と ETag) と照合し、R2 にある object と中身が同じ
  * ファイルは送らない。CI の runner はマニフェストが毎回空なので、送らない判定はこの照合が担う
- * (判定と出典: lib/diff-push-remote-match.ts)。照合できないときは従来どおり全件を送る。
+ * (判定と出典: lib/diff-push-remote-match.ts)。
+ *
+ * 止め (判定と送信の本体は diff-push-r2-core.ts、区分表は r2-key-classes.ts):
+ * - R2 の一覧が取れないときは送らずに非 0 で止まる。照合せずに全件を送るのは --allow-full-upload のときだけ。
+ * - R2 が唯一の正本 (authoritative・未登録を含む) の object を上書きする差分があれば、
+ *   --allow-authoritative-overwrite が無いかぎり key を列挙して非 0 で止まる。新しい key の追加は止めない。
+ *   CI (GITHUB_ACTIONS=true) では段階導入として既定は警告して続行し、R2_AUTHORITATIVE_GUARD=enforce で止める。
+ * - 書いた後に送った件数と、抜き取り (最大 20 件) の HEAD 読み戻し (サイズ・ETag) を照合する。
+ *   件数の不一致は常に止める。読み戻しの不一致は CI では既定で警告して続行し、R2_AUTHORITATIVE_GUARD=enforce で止める。
+ * - R2 から object を削除しない (ローカルから消えた key は manifest から外すだけ)。
  *
  * 使い方:
  *   npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix blog
  *   npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix blog --dry-run
+ *   npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/stats --allow-authoritative-overwrite
  *   npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts  # 全体
  */
 
@@ -21,11 +31,14 @@ import { ListObjectsV2Command, PutObjectCommand, S3Client } from "@aws-sdk/clien
 
 import { assertR2WriteAllowed } from "./_assert-ci-write";
 import {
-  remoteListPrefixes,
-  splitUnchangedOnRemote,
-  type RemoteObjectSummary,
-} from "./lib/diff-push-remote-match";
-import { assertDiffPushComplete } from "./lib/diff-push-result";
+  authoritativeOverwrites,
+  formatDiffPushSummary,
+  parseDiffPushFlags,
+  planDiffPush,
+  resolveAuthoritativeGuardMode,
+  runDiffPush,
+} from "./diff-push-r2-core";
+import { remoteListPrefixes, type RemoteObjectSummary } from "./lib/diff-push-remote-match";
 import { assertKsjPublicAssetsAllowed } from "./lib/ksj-publication-guard";
 import { assertBlogPublicAssetsAllowed, BLOG_INDEX_KEY, blogSnapshotWriteCondition } from './lib/blog-publication-guard';
 import { createS3ImageObjectStore } from '../image-pipeline';
@@ -59,6 +72,13 @@ interface ManifestEntry {
 
 type Manifest = Record<string, ManifestEntry>;
 
+interface LocalFile {
+  absolutePath: string;
+  key: string;
+  size: number;
+  mtime: number;
+}
+
 function getContentType(key: string): string {
   const ext = path.extname(key).toLowerCase();
   return CONTENT_TYPE_MAP[ext] ?? "application/octet-stream";
@@ -82,11 +102,8 @@ function saveManifest(prefix: string, manifest: Manifest): void {
   fs.writeFileSync(p, JSON.stringify(manifest, null, 2));
 }
 
-function collectLocalFiles(
-  dir: string,
-  baseDir: string
-): Array<{ absolutePath: string; key: string; size: number; mtime: number }> {
-  const results: Array<{ absolutePath: string; key: string; size: number; mtime: number }> = [];
+function collectLocalFiles(dir: string, baseDir: string): LocalFile[] {
+  const results: LocalFile[] = [];
   if (!fs.existsSync(dir)) return results;
 
   const entries = fs.readdirSync(dir, { withFileTypes: true });
@@ -130,10 +147,66 @@ async function listRemoteObjects(
   return remote;
 }
 
+function createS3ClientFromEnv(): S3Client | null {
+  const endpoint = process.env.R2_S3_ENDPOINT;
+  const accessKeyId = process.env.R2_ACCESS_KEY_ID;
+  const secretAccessKey = process.env.R2_SECRET_ACCESS_KEY;
+  if (!endpoint || !accessKeyId || !secretAccessKey) return null;
+  return new S3Client({ region: "auto", endpoint, credentials: { accessKeyId, secretAccessKey } });
+}
+
+const md5OfFile = (f: LocalFile): string =>
+  createHash("md5").update(fs.readFileSync(f.absolutePath)).digest("hex");
+
+/** dry-run: 認証があれば R2 を一覧して本番と同じ判定を出す (読み取りのみ)。無ければ manifest で代用する */
+async function printDryRun(prefix: string, toUpload: LocalFile[], removed: string[], manifest: Manifest,
+  flags: ReturnType<typeof parseDiffPushFlags>): Promise<void> {
+  const s3 = createS3ClientFromEnv();
+  let remote: Map<string, RemoteObjectSummary> | null = null;
+  let basis = "manifest (R2 と照合していない。実際に送る件数はこれ以下になる)";
+  if (s3) {
+    try {
+      remote = await listRemoteObjects(s3, remoteListPrefixes(prefix, toUpload.map((f) => f.key)));
+      basis = "R2 の一覧と照合";
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message.split("\n")[0] : String(e);
+      console.warn(`⚠ R2 の一覧を取れません: ${msg}。本番では --allow-full-upload が無いかぎり止まります`);
+    }
+  }
+  const plan = planDiffPush({
+    bucket: BUCKET,
+    candidates: toUpload,
+    removedKeys: removed,
+    remote,
+    md5Of: md5OfFile,
+    fallbackChange: (f) => (manifest[f.key] ? "CHANGED" : "NEW"),
+  });
+  console.log(`\n区分別の差分 (${basis}):`);
+  for (const line of formatDiffPushSummary(plan)) console.log(line);
+
+  const shown = plan.entries.filter((e) => e.change !== "UNCHANGED");
+  if (shown.length > 0) {
+    console.log("\n[アップロード対象]");
+    shown.slice(0, 30).forEach((e) => console.log(`  [${e.change}] (${e.class}) ${e.file.key} (${e.file.size} bytes)`));
+    if (shown.length > 30) console.log(`  ... 他 ${shown.length - 30} 件`);
+  }
+  if (removed.length > 0) {
+    console.log("\n[ローカル削除済み（R2 からは削除しない。リモートに残存の可能性あり）]");
+    removed.slice(0, 10).forEach((k) => console.log(`  ${k}`));
+    if (removed.length > 10) console.log(`  ... 他 ${removed.length - 10} 件`);
+  }
+  const overwrites = remote ? authoritativeOverwrites(plan) : [];
+  if (overwrites.length > 0 && !flags.allowAuthoritativeOverwrite) {
+    const outcome = resolveAuthoritativeGuardMode() === "enforce" ? "⛔ 本番では止まる" : "⚠ 本番では警告して続行 (CI の段階導入)";
+    console.log(`\n${outcome}: authoritative の上書き ${overwrites.length} 件 (--allow-authoritative-overwrite が必要)`);
+    overwrites.slice(0, 30).forEach((e) => console.log(`  [${e.change}] ${e.file.key}`));
+  }
+}
+
 async function main(): Promise<void> {
   const args = process.argv.slice(2);
   const dryRun = args.includes("--dry-run");
-  assertR2WriteAllowed({ op: "diff-push-r2 (R2 push)", dryRun });
+  const flags = parseDiffPushFlags(args);
   const prefixIdx = args.indexOf("--prefix");
   const prefix = prefixIdx !== -1 ? args[prefixIdx + 1]?.trim() ?? "" : "";
 
@@ -182,103 +255,84 @@ async function main(): Promise<void> {
   }
 
   if (dryRun) {
-    if (toUpload.length > 0) {
-      console.log("\n[アップロード対象] (dry-run は R2 と照合しない。実際に送る件数はこれ以下になる)");
-      toUpload.slice(0, 30).forEach((f) => {
-        const reason = !manifest[f.key] ? "NEW" : "CHANGED";
-        console.log(`  [${reason}] ${f.key} (${f.size} bytes)`);
-      });
-      if (toUpload.length > 30) console.log(`  ... 他 ${toUpload.length - 30} 件`);
-    }
-    if (removed.length > 0) {
-      console.log("\n[ローカル削除済み（リモートに残存の可能性あり）]");
-      removed.slice(0, 10).forEach((k) => console.log(`  ${k}`));
-      if (removed.length > 10) console.log(`  ... 他 ${removed.length - 10} 件`);
-    }
+    await printDryRun(prefix, toUpload, removed, manifest, flags);
     return;
   }
 
-  const endpoint = process.env.R2_S3_ENDPOINT;
-  const accessKeyId = process.env.R2_ACCESS_KEY_ID;
-  const secretAccessKey = process.env.R2_SECRET_ACCESS_KEY;
-  if (!endpoint || !accessKeyId || !secretAccessKey) {
+  // ローカルでは、送る候補がすべて Mac で作る prefix のときだけ通す (区分表 r2-key-classes.ts)。
+  // prefix 単位ではなく key 単位で引く (sns/ の中の sns/pref-silhouette/ は CI が書く)。
+  // 送る候補が 0 件 (manifest の掃除だけ) なら R2 に書かないので検査しない。
+  if (toUpload.length > 0) {
+    assertR2WriteAllowed({ op: "diff-push-r2 (R2 push)", targets: toUpload.map((f) => f.key) });
+  }
+
+  const s3 = createS3ClientFromEnv();
+  if (!s3) {
     console.error("エラー: R2_S3_ENDPOINT, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY が未設定です");
     process.exit(1);
   }
-  const s3 = new S3Client({ region: "auto", endpoint, credentials: { accessKeyId, secretAccessKey } });
+  const store = createS3ImageObjectStore(s3, BUCKET);
 
-  // R2 にある object と中身が同じファイルは送らない。一覧を取れないときは照合をやめて全件を送る
-  // (送らない側へは倒さない)。
   const updatedManifest = { ...manifest };
-  let uploadTargets = toUpload;
-  try {
-    const remote = await listRemoteObjects(s3, remoteListPrefixes(prefix, toUpload.map((f) => f.key)));
-    const split = splitUnchangedOnRemote(toUpload, remote, (f) =>
-      createHash("md5").update(fs.readFileSync(f.absolutePath)).digest("hex"));
-    uploadTargets = split.toUpload;
+  let blogBody: Buffer | null = null;
+  let blogCondition: Awaited<ReturnType<typeof blogSnapshotWriteCondition>> | null = null;
+
+  const result = await runDiffPush<LocalFile>({
+    bucket: BUCKET,
+    prefix,
+    candidates: toUpload,
+    removedKeys: removed,
+    flags,
+    authoritativeGuard: resolveAuthoritativeGuardMode(),
+    readbackGuard: resolveAuthoritativeGuardMode(),
+    concurrency: CONCURRENCY,
+    io: {
+      list: (prefixes) => listRemoteObjects(s3, prefixes),
+      md5Of: md5OfFile,
+      head: async (key) => {
+        const head = await store.head(key);
+        return head ? { contentLength: head.contentLength, etag: head.etag } : null;
+      },
+      put: async (f) => {
+        const body = f.key === BLOG_INDEX_KEY && blogBody ? blogBody : fs.readFileSync(f.absolutePath);
+        await s3.send(new PutObjectCommand({
+          Bucket: BUCKET,
+          Key: f.key,
+          Body: body,
+          ContentType: getContentType(f.key),
+          ...(f.key === BLOG_INDEX_KEY && blogCondition ? {
+            IfMatch: blogCondition.ifMatch, IfNoneMatch: blogCondition.ifNoneMatch,
+          } : {}),
+        }));
+      },
+    },
+    beforeUpload: async (targets) => {
+      const blogCandidate = targets.find((file) => file.key === BLOG_INDEX_KEY);
+      if (!blogCandidate) return;
+      blogBody = fs.readFileSync(blogCandidate.absolutePath);
+      blogCondition = await blogSnapshotWriteCondition(blogBody, store);
+    },
     // 次回の実行で照合を繰り返さないよう、R2 と同じだったファイルも送信済みとして記録する
-    for (const f of split.unchanged) updatedManifest[f.key] = { size: f.size, mtime: f.mtime };
-    console.log(`R2 と中身が同じ（送らない）: ${split.unchanged.length}`);
-    console.log(`送信する: ${uploadTargets.length}`);
-  } catch (e: unknown) {
-    const msg = e instanceof Error ? e.message.split("\n")[0] : String(e);
-    console.warn(`⚠ R2 の一覧を取れず照合できないため、アップロード対象の全件を送ります: ${msg}`);
-  }
-
-  const blogCandidate = uploadTargets.find((file) => file.key === BLOG_INDEX_KEY);
-  const blogBody = blogCandidate ? fs.readFileSync(blogCandidate.absolutePath) : null;
-  const blogCondition = blogBody
-    ? await blogSnapshotWriteCondition(blogBody, createS3ImageObjectStore(s3, BUCKET)) : null;
-
-  let success = 0;
-  let errors = 0;
-
-  for (let i = 0; i < uploadTargets.length; i += CONCURRENCY) {
-    const chunk = uploadTargets.slice(i, i + CONCURRENCY);
-    await Promise.all(
-      chunk.map(async (f) => {
-        try {
-          const body = f.key === BLOG_INDEX_KEY && blogBody ? blogBody : fs.readFileSync(f.absolutePath);
-          await s3.send(new PutObjectCommand({
-            Bucket: BUCKET,
-            Key: f.key,
-            Body: body,
-            ContentType: getContentType(f.key),
-            ...(f.key === BLOG_INDEX_KEY && blogCondition ? {
-              IfMatch: blogCondition.ifMatch, IfNoneMatch: blogCondition.ifNoneMatch,
-            } : {}),
-          }));
-          success++;
-          updatedManifest[f.key] = { size: f.size, mtime: f.mtime };
-        } catch (e: unknown) {
-          errors++;
-          const msg = e instanceof Error ? e.message.split("\n")[0] : String(e);
-          console.error(`FAIL: ${f.key} - ${msg}`);
-        }
-      })
-    );
-
-    const processed = Math.min(i + CONCURRENCY, uploadTargets.length);
-    if (processed === uploadTargets.length || i % 48 === 0) {
-      console.log(`Progress: ${processed} / ${uploadTargets.length} (success: ${success}, errors: ${errors})`);
-      saveManifest(prefix, updatedManifest);
-    }
-  }
+    onUnchanged: (f) => { updatedManifest[f.key] = { size: f.size, mtime: f.mtime }; },
+    onUploaded: (f) => { updatedManifest[f.key] = { size: f.size, mtime: f.mtime }; },
+    onProgress: (processed, total, success, errors) => {
+      if (processed === total || processed % 48 === 0) {
+        console.log(`Progress: ${processed} / ${total} (success: ${success}, errors: ${errors})`);
+        saveManifest(prefix, updatedManifest);
+      }
+    },
+  }).finally(() => saveManifest(prefix, updatedManifest));
 
   for (const k of removed) {
     delete updatedManifest[k];
   }
-
   saveManifest(prefix, updatedManifest);
 
   console.log("\n--- 完了 ---");
-  console.log(`アップロード成功: ${success}`);
-  console.log(`エラー: ${errors}`);
+  console.log(`アップロード成功: ${result.success}`);
+  console.log(`エラー: ${result.errors}`);
+  console.log(`読み戻し照合: ${result.readback.checked} 件 (不一致 ${result.readback.mismatches.length} 件・ETag を照合しなかった ${result.readback.etagSkipped} 件)`);
   console.log(`マニフェスト更新: ${getManifestPath(prefix)}`);
-
-  // 一部だけ書けた状態を exit 0 にすると、後続 producer が新旧混在の R2 を読み込む。
-  // 成功済み object は温存しつつ run 自体は必ず赤にして再実行を要求する。
-  assertDiffPushComplete({ attempted: uploadTargets.length, success, errors });
 }
 
 main().catch((err) => {

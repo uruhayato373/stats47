@@ -1,6 +1,6 @@
 import type { Topology } from 'topojson-specification';
 import { computeBuzzMapGeo } from '../../remotion/src/features/buzz-map/geo';
-import { LIGHT_THEME, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
+import { LIGHT_THEME, TEMPLATE_MIN_FONT_SIZE, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
 import { renderClassLegend, renderTopThree } from '../../remotion/src/features/data-cards/all47-svg';
 import { resolveTileScale } from '../../remotion/src/features/data-cards/tile-scale';
 import { areasOf, scopeAttributes, type AreaChart } from './template-area-scope';
@@ -62,7 +62,7 @@ export function renderAreaMapChart(chart: AreaChart, topology: Topology, theme: 
   const band = renderTopThree(entries, { x: SAMPLE_FRAME.left, top: BAND.top, width: BAND.width, rowGap: BAND.rowGap, unit: chart.unit, format, theme, heading: '上位3' })
     + renderClassLegend(scale, entries.map((row) => row.value), { right: SAMPLE_FRAME.right, bottom: BAND.legendBottom, format: scale.formatBoundary ?? format, countUnit: AREA_COUNT_UNIT, theme });
   const insetLabel = nationwide && geo.insetBox
-    ? `<text x="${geo.insetBox.x}" y="${geo.insetBox.y}" font-size="24" fill="${theme.muted}">離島（別位置・別縮尺）</text>` : '';
+    ? `<text x="${geo.insetBox.x}" y="${geo.insetBox.y}" font-size="${TEMPLATE_MIN_FONT_SIZE}" fill="${theme.muted}">離島（別位置・別縮尺）</text>` : '';
   return sampleFrame({
     title: chart.title, titleSize: fitTitleSize(chart.title), meta: `${chart.yearLabel} · 単位：${chart.unit}`, note: chart.note, source: chart.source,
     attributes: `data-image-template="choropleth" ${scopeAttributes(chart.scope)}`,

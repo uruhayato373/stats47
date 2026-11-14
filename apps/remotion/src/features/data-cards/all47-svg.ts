@@ -3,7 +3,7 @@ import { IMAGE_TILE_LAYOUT } from './tile-layout';
 import { prefectureShortName } from '@stats47/area/short-name';
 import { prefectureNameOf } from '@stats47/area';
 import { formatValueWithPrecision, resolveValuePrecision } from '@stats47/utils';
-import { LIGHT_THEME, outlineAttrs, type ChartTheme } from './chart-theme';
+import { LIGHT_THEME, TEMPLATE_MIN_FONT_SIZE, outlineAttrs, type ChartTheme } from './chart-theme';
 
 export interface All47Entry {
   areaCode: string;
@@ -54,7 +54,7 @@ const TILE_GAP = 4;
 // Top three go in the empty Sea of Japan area left of Hokkaido, above the Ishikawa row (site grid row 6).
 const TOP_PANEL = { rowLimit: 6, colLimit: 8, count: 3 } as const;
 // Legend rows (colour, range, count), shared with the real-shape map; a gradient bar only for a continuous scale.
-const LEGEND = { width: 330, rowHeight: 44, swatch: 30, labelSize: 24, barWidth: 440, barHeight: 22 } as const;
+const LEGEND = { width: 360, rowHeight: 46, swatch: 30, labelSize: TEMPLATE_MIN_FONT_SIZE, barWidth: 440, barHeight: 22 } as const;
 // Value column of the top-three panel, measured from the panel's left edge.
 const TOP_VALUE_RIGHT = 380;
 
@@ -91,10 +91,29 @@ const text = (
   weight = 700,
   anchor: 'start' | 'middle' | 'end' = 'start'
 ) =>
-  `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" font-size="${Math.min(size, maxWidth / Math.max(1, widthOf(s))).toFixed(1)}" font-weight="${weight}" fill="${color}"${anchor === 'start' ? '' : ` text-anchor="${anchor}"`}>${escape(s)}</text>`;
+  `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" font-size="${Math.max(TEMPLATE_MIN_FONT_SIZE, Math.min(size, maxWidth / Math.max(1, widthOf(s)))).toFixed(1)}" font-weight="${weight}" fill="${color}"${anchor === 'start' ? '' : ` text-anchor="${anchor}"`}>${escape(s)}</text>`;
+/** The city whose value a capital-city metric (家計調査) gives for a prefecture. Shared with the bar type so both name the same city. */
+export const capitalCityName = (areaCode: string) =>
+  areaCode === '13000' ? '東京区部' : PREF_CAPITAL_COORDS[areaCode.slice(0, 2)].name;
 const nameOf = (r: All47Entry, capitalCities?: boolean) => capitalCities
-  ? (r.areaCode === '13000' ? '東京区部' : PREF_CAPITAL_COORDS[r.areaCode.slice(0, 2)].name)
+  ? capitalCityName(r.areaCode)
   : prefectureShortName(r.areaName);
+/** Longest tile name that keeps the size of the other names; 「さいたま市」 (5) shrank to about 11px on a 1080px image. */
+const TILE_NAME_MAX_CHARS = 4;
+/**
+ * A tile's name. A one-column tile is about 64px wide in the 1080px image, which a phone shows at a third:
+ * two characters at the type's smallest size (30) is all that stays readable there, so one-column tiles
+ * take the first two characters (神奈川→神奈, 東京区部→東京), as the site's tile map does on narrow screens
+ * (AreaTileMap). Wider tiles (Hokkaido, Wakayama, Kagoshima) keep the full name. Capital-city maps keep
+ * the city's name, dropping 「市」 where it would not fit (the heading and legend already say 市).
+ */
+const tileNameOf = (r: All47Entry, columns: number, capitalCities?: boolean) => {
+  const name = nameOf(r, capitalCities);
+  if (columns > 1) return capitalCities && [...name].length > TILE_NAME_MAX_CHARS ? name.replace(/市$/, '') : name;
+  return [...(capitalCities ? name.replace(/市$/, '') : name)].slice(0, 2).join('');
+};
+/** Room a name or value needs around it inside a tile. */
+const TILE_TEXT_PAD = 4;
 
 function assertAll47(entries: All47Entry[]) {
   const rows = new Map(entries.map((r) => [Number(r.areaCode.slice(0, 2)), r]));
@@ -153,18 +172,24 @@ export function renderTileMapBody(entries: All47Entry[], opts: TileMapBodyOption
   const fmt = opts.formatValue ?? ((v: number) => formatValueWithPrecision(v, precision));
   const pitch = Math.min(opts.width / IMAGE_TILE_LAYOUT.cols, opts.height / IMAGE_TILE_LAYOUT.rows);
   const left = (opts.width - IMAGE_TILE_LAYOUT.cols * pitch) / 2;
-  const nameSize = Math.round(pitch * 0.27), valueSize = Math.round(pitch * 0.34);
-  const showValues = opts.showValues ?? true;
+  const nameSize = Math.max(TEMPLATE_MIN_FONT_SIZE, Math.round(pitch * 0.27));
+  const valueSize = Math.max(TEMPLATE_MIN_FONT_SIZE, Math.round(pitch * 0.34));
+  // A value goes under the name only when both lines fit the tile at a readable size. In the 1080px image the
+  // tiles are too small (64px), so the map shows names and colours; the legend and the top three carry the values.
+  const valuesFit = pitch - TILE_GAP >= nameSize + valueSize + 8 &&
+    entries.every((r) => widthOf(fmt(r.value)) * valueSize <= pitch - TILE_GAP - TILE_TEXT_PAD);
+  const showValues = (opts.showValues ?? true) && valuesFit;
   const svg = IMAGE_TILE_LAYOUT.cells.map(({ id, x, y, w, h }) => {
     const r = rows.get(id)!;
     const override = opts.tileOverride?.(r.areaCode);
     const fill = override?.fill ?? scale.colorAt(r.value), ink = textOn(fill);
     const width = w * pitch - TILE_GAP, height = h * pitch - TILE_GAP;
     const cx = width / 2, cy = height / 2;
-    const lines = override?.lines ?? (showValues ? [nameOf(r, opts.capitalCities), fmt(r.value)] : [nameOf(r, opts.capitalCities)]);
+    const lines = override?.lines ?? (showValues ? [tileNameOf(r, w, opts.capitalCities), fmt(r.value)] : [tileNameOf(r, w, opts.capitalCities)]);
+    const room = width - TILE_TEXT_PAD;
     const labels = lines.length === 1
-      ? text(lines[0], cx, cy + (override?.emphasis ? valueSize : nameSize) * 0.36, override?.emphasis ? valueSize * 1.3 : nameSize * 1.05, width - 8, ink, override?.emphasis ? 800 : 700, 'middle')
-      : text(lines[0], cx, cy - 3, nameSize, width - 8, ink, 700, 'middle') + text(lines[1], cx, cy + valueSize - 1, valueSize, width - 8, ink, 800, 'middle');
+      ? text(lines[0], cx, cy + (override?.emphasis ? valueSize : nameSize) * 0.36, override?.emphasis ? valueSize * 1.3 : nameSize * 1.05, room, ink, override?.emphasis ? 800 : 700, 'middle')
+      : text(lines[0], cx, cy - 3, nameSize, room, ink, 700, 'middle') + text(lines[1], cx, cy + valueSize - 1, valueSize, room, ink, 800, 'middle');
     return `<g transform="translate(${(left + x * pitch).toFixed(1)},${(y * pitch).toFixed(1)})" data-area="${r.areaCode}" data-value="${r.value}"><rect width="${width.toFixed(1)}" height="${height.toFixed(1)}" rx="6" fill="${fill}"${outlineAttrs(opts.theme ?? LIGHT_THEME)}/>${labels}</g>`;
   }).join('');
   return { svg, pitch, left, scale, format: fmt };
@@ -195,10 +220,10 @@ export function renderTopThree(
   const top = ranked.filter(({ rank }) => rank <= TOP_PANEL.count).slice(0, TOP_PANEL.count + 1);
   const { x, unit } = opts;
   return [
-    text(opts.heading ?? (opts.capitalCities ? '上位3市' : '上位3県'), x, opts.top + 24, 26, opts.width, muted, 700),
+    text(opts.heading ?? (opts.capitalCities ? '上位3市' : '上位3県'), x, opts.top + 24, TEMPLATE_MIN_FONT_SIZE, opts.width, muted, 700),
     ...top.map(({ r, rank }, i) => {
       const y = opts.top + 84 + i * opts.rowGap;
-      return `<g data-top="${rank}">${text(String(rank), x + 18, y, 34, 40, muted, 700, 'middle')}${text(nameOf(r, opts.capitalCities), x + 52, y, 40, 180, ink, 700)}${text(opts.format(r.value), x + TOP_VALUE_RIGHT - 4 - widthOf(unit) * 24, y, 44, 150, ink, 800, 'end')}${text(unit, x + TOP_VALUE_RIGHT, y, 24, widthOf(unit) * 24, muted, 700, 'end')}</g>`;
+      return `<g data-top="${rank}">${text(String(rank), x + 18, y, 34, 40, muted, 700, 'middle')}${text(nameOf(r, opts.capitalCities), x + 52, y, 40, 180, ink, 700)}${text(opts.format(r.value), x + TOP_VALUE_RIGHT - 4 - widthOf(unit) * TEMPLATE_MIN_FONT_SIZE, y, 44, 150, ink, 800, 'end')}${text(unit, x + TOP_VALUE_RIGHT, y, TEMPLATE_MIN_FONT_SIZE, widthOf(unit) * TEMPLATE_MIN_FONT_SIZE, muted, 700, 'end')}</g>`;
     }),
   ].join('');
 }
@@ -259,7 +284,7 @@ export function renderAll47TileSvg(
   const unit = opts.unit === 'l' ? 'L' : opts.unit;
   const topPanel = opts.panel
     ? [
-      text(opts.panel.heading, MAP.left, panelTop + 24, 26, panelWidth, theme.muted, 700),
+      text(opts.panel.heading, MAP.left, panelTop + 24, TEMPLATE_MIN_FONT_SIZE, panelWidth, theme.muted, 700),
       `<g data-panel="headline">${text(opts.panel.value, MAP.left, panelTop + 120, 92, panelWidth, opts.panel.valueColor ?? theme.ink, 800)}</g>`,
       opts.panel.caption ? text(opts.panel.caption, MAP.left, panelTop + 176, 30, panelWidth, theme.ink, 700) : '',
     ].join('')
@@ -274,10 +299,10 @@ export function renderAll47TileSvg(
   const meta = `${opts.year} · 単位：${unit}${scope}`;
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350" data-image-template="tile-map" data-theme="${theme.name}"><rect width="1080" height="1350" fill="${theme.paper}"/><g font-family="'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic',Meiryo,sans-serif">
     ${text(opts.title, 64, 120, 72, 952, theme.ink)}${text(meta, 64, 184, 32, 952, theme.muted, 400)}
-    ${opts.note ? text(opts.note, 64, 230, 28, 952, theme.muted, 400) : ''}
+    ${opts.note ? text(opts.note, 64, 230, TEMPLATE_MIN_FONT_SIZE, 952, theme.muted, 400) : ''}
     ${topPanel}
     ${tiles}
     ${legend}
-    ${opts.source ? text('出典：' + opts.source, 64, 1310, 26, 952, theme.muted, 400) : ''}
+    ${opts.source ? text('出典：' + opts.source, 64, 1310, TEMPLATE_MIN_FONT_SIZE, 952, theme.muted, 400) : ''}
   </g></svg>`;
 }

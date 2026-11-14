@@ -138,7 +138,7 @@ const lines = ['認証付き計測の最新試行。生データと認証状態�
   ...(salesLedger ? ['', salesLedger.status === 'failed'
     ? `販売台帳 (KDP ${salesLedger.month}): 書き込み失敗 (${salesLedger.code})。台帳は変更していない。`
     : `販売台帳 (KDP ${salesLedger.month}): 追加 ${salesLedger.added} 件・記録済み ${salesLedger.skipped} 件・食い違い ${salesLedger.conflicts.length} 件・円以外などで除外 ${salesLedger.excluded.length} 件${salesLedger.conflicts.length ? '。食い違いは上書きしていない。既存行と月次レポートを照合して直す' : ''}`] : []),
-  '', 'KDPは昨日の書籍別注文・KENP・電子書籍ロイヤリティ見積りと月次ロイヤリティを分離して取得する。月次を週次へ按分せず、入金・税引後純利益にはしない。afbは発生日/確定日を分けた28日成果で、両系列を足さず、報酬を純収益・入金にしない。提携状態は別の手動経路。ココナラ表示数は有料機能で欠測の場合null。',
+  '', 'KDPは昨日の書籍別注文・KENP・電子書籍ロイヤリティ見積りと月次ロイヤリティを分離して取得する。月次を週次へ按分せず、入金・税引後純利益にはしない。A8・楽天の提携状態は別の手動経路。',
 ];
 writeFileSync('/tmp/authenticated-measurement-summary.md', lines.join('\n') + '\n');
 console.log(JSON.stringify({ status: state.status, passed: sources.filter(s => s.status === 'pass').length, total: sources.length }));

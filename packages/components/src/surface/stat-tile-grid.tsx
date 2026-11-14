@@ -8,7 +8,9 @@ import { PanelGrid } from './panel-grid';
  * 数値タイルの格子 (部品の種類「数値タイルの格子」。2026-10-29)。数値タイル (StatTile) を並べる所はすべてこれを使う。
  *
  * 列の数は本文の幅 (コンテナクエリ) だけで決め、ページの側では指定させない:
- *   幅 480px 未満 = 1 列 / 480px 以上 = 2 列 / 768px 以上 = 4 列。
+ *   幅 768px 未満 = 2 列 / 768px 以上 = 4 列。
+ * スマホの幅でも 2 列にする (2026-11-14 オーナー決定)。1 列だと 1 指標のカードが縦に積まれ、テーマの県別ページは
+ * スマホの幅の中央値で約 6 画面、多いテーマは 12〜34 画面あった。幅 390px で 2 列にしても値と推移の図は収まる。
  * タイルの枚数では変えない (2026-10-29 オーナー決定「幅を 4 列にそろえる」)。1 枚・2 枚の章も同じ大きさのマスに入れ、
  * 残りのマスは白いセルで埋める。どのページ・どの章でも 1 マスの幅が同じになる。
  * 768px は県ページの本文 (約 844px) で 4 列、右レールのあるページの本文 (656px) で 2 列になる境界。
@@ -19,8 +21,8 @@ import { PanelGrid } from './panel-grid';
  * 仕様の正本は部品の台帳 data/design/components.json の stat-tile-grid。
  */
 
-/** 列の数 (幅の境界は @sm = 480px・@md = 768px。apps/web/src/app/globals.css の @custom-variant) */
-const COLUMN_CLASS = 'grid-cols-1 @sm:grid-cols-2 @md:grid-cols-4';
+/** 列の数 (幅の境界は @md = 768px。apps/web/src/app/globals.css の @custom-variant) */
+const COLUMN_CLASS = 'grid-cols-2 @md:grid-cols-4';
 
 /** 最終行の空きマスの数 (列数 cols で n 枚を並べたとき) */
 function remainder(n: number, cols: number): number {
@@ -32,7 +34,7 @@ export function statTileGridFillers(count: number): string[] {
   const two = remainder(count, 2);
   const four = remainder(count, 4);
   return Array.from({ length: Math.max(two, four) }, (_, i) =>
-    cn('hidden', i < two && '@sm:block', i < four ? '@md:block' : '@md:hidden')
+    cn(i < two ? 'block' : 'hidden', i < four ? '@md:block' : '@md:hidden')
   );
 }
 

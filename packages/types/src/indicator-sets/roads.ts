@@ -89,6 +89,21 @@ export const ROADS_SET: IndicatorSet = {
       "rankingKey": "road-tunnel-condition-iv-count",
       "shortLabel": "トンネルの緊急措置段階（Ⅳ）",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "main-road-length-per-km2",
+      "shortLabel": "主要道路実延長（総面積1km²当たり）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "municipal-road-paving-rate",
+      "shortLabel": "市町村道舗装率",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "traffic-accident-count-per-1000-km",
+      "shortLabel": "交通事故発生件数（道路1000km当たり）",
+      "role": "secondary"
     }
   ],
   "keywords": [

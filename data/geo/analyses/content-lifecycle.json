@@ -149,5 +149,22 @@
         "stopCondition": "800m直線距離を徒歩時間・実際の到達圏として誤読させる場合は公開しない"
       }
     }
+  },
+  "publicationGates": {
+    "common": [
+      "公式入力の版・利用条件・SHA-256を確認する",
+      "47都道府県のaggregateを欠損補完なしで生成する",
+      "canonical・記事・販売物の数値を同じR2 artifactから派生する"
+    ],
+    "spatialCross": [
+      "47県の途中artifact・lineage manifest・保存則をPASSする",
+      "context-onlyレイヤーを計算入力へ混入させない"
+    ],
+    "baseline": [
+      "単一指標の入口であり空間横断分析ではないと明示する"
+    ],
+    "closing": [
+      "無料ページは結論、有料物は再現手順・辞書・テンプレート・加工済み成果物を提供する"
+    ]
   }
 }

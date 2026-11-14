@@ -42,18 +42,17 @@
   "charts": [],
   "metricGroups": [
     {
-      "key": "waste-volume",
-      "title": "ごみの排出量・最終処分量",
+      "key": "waste-disposal-1",
+      "title": "ごみ排出量",
       "rankingKeys": [
-        "garbage-total-output",
-        "garbage-final-disposal"
+        "garbage-total-output"
       ],
       "defaultCheckedKeys": [
         "garbage-total-output"
       ]
     },
     {
-      "key": "recycling-rate",
+      "key": "waste-disposal-2",
       "title": "リサイクル率",
       "rankingKeys": [
         "waste-recycling-rate"
@@ -61,23 +60,34 @@
       "defaultCheckedKeys": [
         "waste-recycling-rate"
       ]
+    },
+    {
+      "key": "final-disposal-1",
+      "title": "最終処分量",
+      "rankingKeys": [
+        "garbage-final-disposal"
+      ],
+      "defaultCheckedKeys": [
+        "garbage-final-disposal"
+      ]
     }
   ],
   "sections": [
     {
       "key": "waste-disposal",
-      "title": "ごみの排出・処分量はどこで多いか",
-      "description": "2023年度の一般廃棄物を比較します。2024年度まで公表済みですが、このページの対象は2023年度です。産業廃棄物は含まず、県別総量には人口規模が影響します。排出量と最終処分量は処理段階が異なるため足し合わせません。",
+      "title": "この県のごみはどれくらい出て、どれだけ資源になっているか",
+      "concern": "自分の県のごみの量と、リサイクルに回っている割合を最初に知りたい。",
       "metricGroupKeys": [
-        "waste-volume"
+        "waste-disposal-1",
+        "waste-disposal-2"
       ]
     },
     {
-      "key": "resource-recovery",
-      "title": "資源化の割合はどこで高いか",
-      "description": "リサイクル率には集団回収量が含まれます。排出量に対する最終処分量の割合や、その補数とは一致しません。",
+      "key": "final-disposal",
+      "title": "埋め立てに回るごみは、これまでどう変わってきたか",
+      "concern": "処分場に埋め立てられるごみの量が増えているのか減っているのかを確かめたい。",
       "metricGroupKeys": [
-        "recycling-rate"
+        "final-disposal-1"
       ]
     }
   ],

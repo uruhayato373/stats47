@@ -1,6 +1,6 @@
 import { scaleLinear } from 'd3-scale';
 import { SERIES_COLORS } from '../../../packages/svg-builder/src/shared/color';
-import { LIGHT_THEME, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
+import { LIGHT_THEME, TEMPLATE_MIN_FONT_SIZE, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
 import { SAMPLE_FRAME, escapeXml, fitTitleSize, sampleBodyTop, sampleFrame, textWidth } from './template-sample-frame';
 
 /** Bars side by side: one group per category (a month, a prefecture), one bar per series in each. */
@@ -16,12 +16,12 @@ export interface GroupedBarChart {
 // Bars thinner than this cannot be told apart at phone width: split the chart or drop series instead.
 const MIN_BAR_WIDTH = 6;
 const GROUP_GAP = 10;
-const AXIS_LABEL_SIZE = 26;
-const TICK_SIZE = 28;
+const AXIS_LABEL_SIZE = TEMPLATE_MIN_FONT_SIZE;
+const TICK_SIZE = TEMPLATE_MIN_FONT_SIZE;
 const SWATCH = 26;
-const VALUE_SIZE = 28;
+const VALUE_SIZE = TEMPLATE_MIN_FONT_SIZE;
 // A value smaller than this cannot be read at phone width: bars thinner than it keep the tick axis instead.
-const VALUE_MIN_SIZE = 22;
+const VALUE_MIN_SIZE = TEMPLATE_MIN_FONT_SIZE;
 const VALUE_GAP = 8;
 // A value keeps this much clear of its neighbours' bars on both sides together.
 const VALUE_SIDE_ROOM = 4;

@@ -99,6 +99,26 @@ export const LOCAL_SERVICES_SET: IndicatorSet = {
       "rankingKey": "barber-beauty-salon-count",
       "shortLabel": "理容・美容所数",
       "role": "context"
+    },
+    {
+      "rankingKey": "public-bath-count-per-100k",
+      "shortLabel": "公衆浴場数（人口10万人当たり）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "barber-beauty-salon-count-per-100k",
+      "shortLabel": "理容・美容所数（人口10万人当たり）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "cleaning-shop-count-per-100k",
+      "shortLabel": "クリーニング業数（人口10万人当たり）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "convenience-store-count-per-100k",
+      "shortLabel": "コンビニエンスストア数（人口10万人当たり）",
+      "role": "secondary"
     }
   ],
   "keywords": [

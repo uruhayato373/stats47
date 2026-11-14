@@ -20,6 +20,7 @@
  *   [検証:cmd]         → verify (完了の決定的ゲート)
  *   [起票:YYYY-MM-DD]  → filed (鮮度測定)
  *   [期日:YYYY-MM-DD]  → due (★拡張。期限管理)
+ *   [待ち:承認] 等     → waits (★拡張。複数可。値は WAITS。いま止まっている理由)
  *   上記以外の最初の token → category (無ければ '未分類')
  *
  * stats47 拡張 (doboku との差分は 3 つだけ。他は doboku 実装と同一に保つ):
@@ -28,6 +29,9 @@
  *   2. `[期日:date]` / `[進行中]` token
  *   3. カードに startLine / endLine (1-indexed・両端含む) を持たせる — backlog-loop の
  *      行番号削除 (parse-backlog-core.cjs の removeLineRanges) が範囲を要るため
+ *
+ * 年間計画 annual.md (parseAnnual) は tier 見出しの代わりに `## YYYY-MM` の月見出しの下へ同じカード構文を置く。
+ * カードの形は parseBacklog と同じで、tier=null・month='YYYY-MM' になる。
  *
  * 未知トークンを沈黙させない: コロンを含む token はすべて kv として捕まえ、キーが語彙外なら
  * unknownKeys へ記録する。パースは寛容・リントは厳格 (検査は check-docs-governance が行う)。
@@ -46,6 +50,9 @@ const TODO_DIR = '.claude/todo';
  */
 const TODO_LAYER_FILES = ['backlog.md', 'weekly.md', 'monthly.md', 'improvements.md'];
 
+/** 年間計画 (`## YYYY-MM` の月見出しの下にカード)。無い間は読み手が空として扱う */
+const ANNUAL_FILE = 'annual.md';
+
 /** tier の実行優先順 (小さいほど先) */
 const TIER_ORDER = { high: 0, mid: 1, low: 2, hold: 3 };
 
@@ -62,6 +69,17 @@ const CANONICAL_CATEGORIES = [
 /** executor の語彙。自動処理が単独で回せるのは 'sweep' と '機械' のみ。 */
 const EXECUTORS = ['sweep', '機械', '対話', 'ユーザー', 'windows', '別環境'];
 
+/**
+ * 待ちの理由 `[待ち:X]` の語彙 (1 枚に複数付けてよい)。
+ *   承認 = オーナーの承認待ち / 時期 = その時期まで着手しない (年間計画 annual.md の置き場) /
+ *   観測 = 効果や計測の結果待ち (改善 improvements.md の置き場) / ログイン = 認証が要る作業待ち /
+ *   判断 = 方針の決定待ち
+ */
+const WAITS = ['承認', '時期', '観測', 'ログイン', '判断'];
+
+/** backlog に置かず別の層へ移す待ち → 移し先 (docs-governance が置き場違いを検査する) */
+const WAIT_PLACEMENT = { 時期: 'annual.md', 観測: 'improvements.md' };
+
 /** タスクの種類。tier=緊急度・category=ドメインとは直交する軸。 */
 const KINDS = ['不具合', '改善', '意思決定', '制作', '定期'];
 
@@ -71,6 +89,9 @@ const DEFECT_KIND = '不具合';
 /** タグ行の kv キー → カード側のフィールド名 (期日 は stats47 発の拡張・doboku にも移植済み) */
 // 領域 は stats47 拡張 (値の語彙は領域のマスタ data/business/domains.json と領域の台帳 business.domain-stances → strategy-lanes.cjs が検査する)
 const TAG_KEYS = { 種類: 'kind', 実行: 'executor', 検証: 'verify', 起票: 'filed', 期日: 'due', 領域: 'lane' };
+
+/** 複数値を取るタグキー → カード側の配列フィールド名 (同じキーを何度書いてもよい) */
+const MULTI_TAG_KEYS = { 待ち: 'waits' };
 
 /** この環境 (AI セッション / CI) が単独で消化できる executor */
 const SELF_EXECUTABLE = new Set(['sweep', '機械']);
@@ -122,6 +143,7 @@ function parseTagLine(raw) {
     filed: null,
     due: null,
     lane: null,
+    waits: [],
     unknownKeys: [],
     unknownCategories: [],
   };
@@ -132,6 +154,13 @@ function parseTagLine(raw) {
     // 全角コロンも受理する (日本語入力で現実に起きる)
     const kv = t.match(/^([^:：]+)[:：]\s*(.+)$/);
     if (kv) {
+      const multi = MULTI_TAG_KEYS[kv[1].trim()];
+      if (multi) {
+        // 語彙外の値もそのまま持つ (パースは寛容・リントは厳格。検査が WAITS と照合する)
+        const value = kv[2].trim();
+        if (!out[multi].includes(value)) out[multi].push(value);
+        continue;
+      }
       const field = TAG_KEYS[kv[1].trim()];
       if (field) out[field] = kv[2].trim();
       else out.unknownKeys.push({ key: kv[1].trim(), value: kv[2].trim(), raw: t });
@@ -152,21 +181,28 @@ function splitHeadingId(headingText) {
   return { id: null, title: headingText.trim() };
 }
 
+/** `## 🔴 …` を tier セクションとして読む (backlog の章立て) */
+function tierSection(headingLine) {
+  const tier = tierOf(headingLine);
+  return tier ? { tier } : null;
+}
+
+/** 年間計画の月見出し `## YYYY-MM` (後ろに説明を書いてよい) */
+const ANNUAL_MONTH_HEADING = /^##\s+(\d{4}-(?:0[1-9]|1[0-2]))(?![\d-])/;
+
+function monthSection(headingLine) {
+  const m = headingLine.match(ANNUAL_MONTH_HEADING);
+  return m ? { tier: null, month: m[1] } : null;
+}
+
 /**
- * backlog.md 本文をカード配列へ。
- *
- * @param {string} text backlog.md の中身
- * @returns {Array<{line:number,startLine:number,endLine:number,id:string|null,tier:string,
- *                  title:string,category:string,kind:string|null,codex:boolean,wip:boolean,
- *                  executor:string|null,verify:string|null,filed:string|null,due:string|null,lane:string|null,
- *                  hasTagLine:boolean,tokens:string[],extraCategories:string[],
- *                  unknownKeys:Array<{key:string,value:string,raw:string}>,
- *                  unknownCategories:string[],body:string}>}
+ * カード構文の共通パーサ。`##` 見出しを sectionOf で章として読み、章の中の `###` だけをカードにする。
+ * 章の値 (tier / month) はカードへそのまま写す。
  */
-function parseBacklog(text) {
+function parseCardSections(text, sectionOf) {
   const lines = String(text ?? '').replace(/\r\n/g, '\n').split('\n');
   const out = [];
-  let tier = null;
+  let section = null;
   let cur = null;
   const fence = fenceTracker();
   const flush = (endLineNo) => {
@@ -186,9 +222,10 @@ function parseBacklog(text) {
     if (fence(ln)) { if (cur) cur.bodyLines.push(ln); return; }
     if (/^###\s+/.test(ln)) {
       flush(lineNo - 1);
-      // tier セクションの外にある ### はカードにしない
-      if (tier) {
+      // 章の外にある ### はカードにしない
+      if (section) {
         const { id, title } = splitHeadingId(ln.replace(/^###\s+/, '').trim());
+        const { tier, ...rest } = section;
         cur = {
           line: lineNo,
           startLine: lineNo,
@@ -205,11 +242,13 @@ function parseBacklog(text) {
           filed: null,
           due: null,
           lane: null,
+          waits: [],
           hasTagLine: false,
           tokens: [],
           extraCategories: [],
           unknownKeys: [],
           unknownCategories: [],
+          ...rest,
           body: '',
           bodyLines: [],
         };
@@ -218,7 +257,7 @@ function parseBacklog(text) {
     }
     if (/^##\s+/.test(ln)) {
       flush(lineNo - 1);
-      tier = tierOf(ln);
+      section = sectionOf(ln);
       return;
     }
     if (!cur) return;
@@ -235,20 +274,100 @@ function parseBacklog(text) {
 }
 
 /**
+ * backlog.md 本文をカード配列へ。
+ *
+ * @param {string} text backlog.md の中身
+ * @returns {Array<{line:number,startLine:number,endLine:number,id:string|null,tier:string,
+ *                  title:string,category:string,kind:string|null,codex:boolean,wip:boolean,
+ *                  executor:string|null,verify:string|null,filed:string|null,due:string|null,lane:string|null,
+ *                  waits:string[],hasTagLine:boolean,tokens:string[],extraCategories:string[],
+ *                  unknownKeys:Array<{key:string,value:string,raw:string}>,
+ *                  unknownCategories:string[],body:string}>}
+ */
+function parseBacklog(text) {
+  return parseCardSections(text, tierSection);
+}
+
+/**
+ * 年間計画 annual.md をカード配列へ。frontmatter のあと `## YYYY-MM` の月見出しの下に backlog と同じ
+ * カード構文を置く。カードの形は parseBacklog と同じで、tier は null、month に月見出しの 'YYYY-MM' が入る。
+ * 月見出しでない `##` の下の `###` はカードにしない (findAnnualOrphanHeadings が拾う)。
+ *
+ * @param {string} text annual.md の中身
+ */
+function parseAnnual(text) {
+  return parseCardSections(text, monthSection);
+}
+
+function findSectionOrphans(text, sectionOf) {
+  const lines = String(text ?? '').replace(/\r\n/g, '\n').split('\n');
+  const out = [];
+  let section = null;
+  const fence = fenceTracker();
+  lines.forEach((ln, i) => {
+    if (fence(ln)) return;
+    if (/^##\s+/.test(ln) && !/^###/.test(ln)) { section = sectionOf(ln); return; }
+    if (/^###\s+/.test(ln) && !section) out.push({ line: i + 1, title: ln.replace(/^###\s+/, '').trim() });
+  });
+  return out;
+}
+
+/**
  * tier セクションの外に取り残された `###` (パーサーが黙って捨てる行) を返す。
  * 「見えていないタスク」の検出用。
  */
 function findOrphanHeadings(text) {
-  const lines = String(text ?? '').replace(/\r\n/g, '\n').split('\n');
-  const out = [];
-  let tier = null;
-  const fence = fenceTracker();
-  lines.forEach((ln, i) => {
-    if (fence(ln)) return;
-    if (/^##\s+/.test(ln) && !/^###/.test(ln)) { tier = tierOf(ln); return; }
-    if (/^###\s+/.test(ln) && !tier) out.push({ line: i + 1, title: ln.replace(/^###\s+/, '').trim() });
-  });
-  return out;
+  return findSectionOrphans(text, tierSection);
+}
+
+/** annual.md の月見出しの外に取り残された `###` を返す。 */
+function findAnnualOrphanHeadings(text) {
+  return findSectionOrphans(text, monthSection);
+}
+
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
+
+function isIsoDate(value) {
+  if (typeof value !== 'string' || !ISO_DATE.test(value)) return false;
+  const parsed = new Date(`${value}T00:00:00Z`);
+  return Number.isFinite(parsed.getTime()) && parsed.toISOString().slice(0, 10) === value;
+}
+
+/**
+ * カードを期日で分ける (純関数)。`due` = 期日が from〜to (両端含む)、`overdue` = 期日が from より前で
+ * 残っているもの。期日が無い・日付として読めないカードはどちらにも入れない (語彙は検査が見る)。
+ * どちらも期日の早い順。日付は引数で受け、現在時刻に依存しない。
+ *
+ * @template {{due:string|null}} T
+ * @param {T[]} cards
+ * @param {{from:string,to:string}} range YYYY-MM-DD
+ * @returns {{due:T[], overdue:T[]}}
+ */
+function partitionByDue(cards, { from, to }) {
+  if (!isIsoDate(from) || !isIsoDate(to)) throw new Error(`from / to は YYYY-MM-DD で渡す: ${from} / ${to}`);
+  if (from > to) throw new Error(`from が to より後: ${from} > ${to}`);
+  const dated = cards.filter((c) => isIsoDate(c.due));
+  /** @param {T} a @param {T} b */
+  const byDue = (a, b) => (String(a.due) < String(b.due) ? -1 : String(a.due) > String(b.due) ? 1 : 0);
+  return {
+    due: dated.filter((c) => String(c.due) >= from && String(c.due) <= to).sort(byDue),
+    overdue: dated.filter((c) => String(c.due) < from).sort(byDue),
+  };
+}
+
+/**
+ * backlog と年間計画のカードのうち、期日が from〜to に入るもの (due) と、期日が from より前で
+ * 残っているもの (overdue) を分けて返す。月次・週次計画が期日で引く入口。
+ * 各カードに source ('backlog' | 'annual') を足す (他のフィールドはパース結果のまま)。
+ *
+ * @param {{backlogText?:string, annualText?:string, from:string, to:string}} input
+ */
+function cardsDueWithin({ backlogText = '', annualText = '', from, to }) {
+  const cards = [
+    ...parseBacklog(backlogText).map((c) => ({ ...c, source: 'backlog' })),
+    ...parseAnnual(annualText).map((c) => ({ ...c, source: 'annual' })),
+  ];
+  return partitionByDue(cards, { from, to });
 }
 
 /**
@@ -327,18 +446,26 @@ module.exports = {
   TIER,
   TODO_DIR,
   TODO_LAYER_FILES,
+  ANNUAL_FILE,
   TIER_ORDER,
   CANONICAL_CATEGORIES,
   EXECUTORS,
   KINDS,
+  WAITS,
+  WAIT_PLACEMENT,
   DEFECT_KIND,
   TAG_KEYS,
+  MULTI_TAG_KEYS,
   SELF_EXECUTABLE,
   ID_PATTERN,
   fenceTracker,
   parseTagLine,
   splitHeadingId,
   parseBacklog,
+  parseAnnual,
   findOrphanHeadings,
+  findAnnualOrphanHeadings,
+  partitionByDue,
+  cardsDueWithin,
   pickTasks,
 };

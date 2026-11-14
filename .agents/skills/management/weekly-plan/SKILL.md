@@ -145,6 +145,15 @@ primary_agent: strategy-advisor
 - docs/02_実装計画/00_INDEX.md の現在地と、`.claude/todo/04`〜`06` の未完了タスク
 - 未着手の Issue 一覧（`gh issue list --state open --label enhancement`、PR で close される機能改修）+ .claude/todo/backlog.md の tier 見出し (🔴🟡🟢🟣) で優先度判定
 
+- **期日が今週に来るカード（必ず計画に載せる）**。backlog と年間計画 (`.claude/todo/annual.md`) の `[期日:]` を読む
+  ```bash
+  npm run backlog:waits -- due --week <YYYY-Www>
+  ```
+  → 期日が今週に入るカードと、期日を過ぎて残っているカードが、置き場と待ちの理由つきで出る。
+  → 年間計画のカード（時期・確認日を待っていたもの）は、今週実行するなら Must / Should に ID で載せる。契機がまだ来ていなければ、
+    年間計画のカードの `[期日:]` を次の再確認日へ延ばす（延ばした ID を計画の「今週やらないこと」に書く）。
+  → 期日を過ぎたカードは、今週やるか・期日を引き直すか・消すかを決める（`todo-standards.md` §5）。黙って持ち越さない。
+
 - 改善バックログ pending 一覧（**真実源**: `.claude/todo/improvements.md`）
   ```bash
   # Tier 1/2 の pending / in-progress を表示

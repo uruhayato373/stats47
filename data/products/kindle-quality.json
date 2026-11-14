@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-05T23:25:42.255Z",
+  "generatedAt": "2026-11-13T22:51:15.334Z",
   "baselineBookId": "K-S1-02",
   "summary": {
-    "books": 13,
-    "measured": 13,
+    "books": 14,
+    "measured": 14,
     "epubMissing": [],
     "flagsByCode": {
-      "long-chapter-without-figure": 48,
+      "long-chapter-without-figure": 62,
       "figure-without-text": 15,
       "data-chapter-without-full-table": 4
     },
@@ -31,6 +31,94 @@
       "figuresPer10kChars": 6.2,
       "figuresWithoutText": 2,
       "fullTables": 17,
+      "fullTableIndicators": [
+        {
+          "label": "1人当たり県民所得（平成27年基準）",
+          "period": "2021年度",
+          "unit": "千円"
+        },
+        {
+          "label": "家賃差引の参考額（月額）",
+          "period": "2024年",
+          "unit": "円"
+        },
+        {
+          "label": "可処分所得（二人以上の世帯のうち勤労者世帯）",
+          "period": "2024年",
+          "unit": "円"
+        },
+        {
+          "label": "消費者物価地域差指数（総合）",
+          "period": "2024年",
+          "unit": "全国=100"
+        },
+        {
+          "label": "実質可処分所得（物価補正後）",
+          "period": "2024年",
+          "unit": "円"
+        },
+        {
+          "label": "灯油消費支出額",
+          "period": "2024年",
+          "unit": "円"
+        },
+        {
+          "label": "暖房関連支出合計",
+          "period": "2024年",
+          "unit": "円"
+        },
+        {
+          "label": "暖房費負担率",
+          "period": "2024年",
+          "unit": "%"
+        },
+        {
+          "label": "金融資産残高（貯蓄現在高）（二人以上の世帯）（1世帯当たり）",
+          "period": "2019年",
+          "unit": "千円"
+        },
+        {
+          "label": "食料費割合",
+          "period": "2024年",
+          "unit": "%"
+        },
+        {
+          "label": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+          "period": "2024年",
+          "unit": "千円"
+        },
+        {
+          "label": "教養娯楽費割合（二人以上の世帯）",
+          "period": "2024年",
+          "unit": "%"
+        },
+        {
+          "label": "被服及び履物費割合（二人以上の世帯）",
+          "period": "2024年",
+          "unit": "%"
+        },
+        {
+          "label": "交通・通信費割合（二人以上の世帯）",
+          "period": "2024年",
+          "unit": "%"
+        },
+        {
+          "label": "民生費割合（都道府県財政）",
+          "period": "2022年度",
+          "unit": "%"
+        },
+        {
+          "label": "紅茶消費支出額",
+          "period": "2024年",
+          "unit": "円"
+        },
+        {
+          "label": "紅茶消費量",
+          "period": "2024年",
+          "unit": "g"
+        }
+      ],
+      "householdCityValues": true,
       "siteLinks": 10,
       "siteLinksWithUtm": 10,
       "flags": [
@@ -93,6 +181,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -105,6 +195,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -117,6 +209,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -129,6 +223,34 @@
           "rankingDatabookFigures": 0,
           "tables": 20,
           "fullTables": 5,
+          "fullTableIndicators": [
+            {
+              "label": "1人当たり県民所得（平成27年基準）",
+              "period": "2021年度",
+              "unit": "千円"
+            },
+            {
+              "label": "家賃差引の参考額（月額）",
+              "period": "2024年",
+              "unit": "円"
+            },
+            {
+              "label": "可処分所得（二人以上の世帯のうち勤労者世帯）",
+              "period": "2024年",
+              "unit": "円"
+            },
+            {
+              "label": "消費者物価地域差指数（総合）",
+              "period": "2024年",
+              "unit": "全国=100"
+            },
+            {
+              "label": "実質可処分所得（物価補正後）",
+              "period": "2024年",
+              "unit": "円"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -141,6 +263,24 @@
           "rankingDatabookFigures": 0,
           "tables": 12,
           "fullTables": 3,
+          "fullTableIndicators": [
+            {
+              "label": "灯油消費支出額",
+              "period": "2024年",
+              "unit": "円"
+            },
+            {
+              "label": "暖房関連支出合計",
+              "period": "2024年",
+              "unit": "円"
+            },
+            {
+              "label": "暖房費負担率",
+              "period": "2024年",
+              "unit": "%"
+            }
+          ],
+          "householdCityNotes": 1,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -153,6 +293,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -165,6 +307,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "金融資産残高（貯蓄現在高）（二人以上の世帯）（1世帯当たり）",
+              "period": "2019年",
+              "unit": "千円"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -177,6 +327,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "食料費割合",
+              "period": "2024年",
+              "unit": "%"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -189,6 +347,24 @@
           "rankingDatabookFigures": 0,
           "tables": 12,
           "fullTables": 3,
+          "fullTableIndicators": [
+            {
+              "label": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+              "period": "2024年",
+              "unit": "千円"
+            },
+            {
+              "label": "教養娯楽費割合（二人以上の世帯）",
+              "period": "2024年",
+              "unit": "%"
+            },
+            {
+              "label": "被服及び履物費割合（二人以上の世帯）",
+              "period": "2024年",
+              "unit": "%"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -201,6 +377,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "交通・通信費割合（二人以上の世帯）",
+              "period": "2024年",
+              "unit": "%"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -213,6 +397,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "民生費割合（都道府県財政）",
+              "period": "2022年度",
+              "unit": "%"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -225,6 +417,19 @@
           "rankingDatabookFigures": 0,
           "tables": 8,
           "fullTables": 2,
+          "fullTableIndicators": [
+            {
+              "label": "紅茶消費支出額",
+              "period": "2024年",
+              "unit": "円"
+            },
+            {
+              "label": "紅茶消費量",
+              "period": "2024年",
+              "unit": "g"
+            }
+          ],
+          "householdCityNotes": 2,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -237,6 +442,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -249,6 +456,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -261,6 +470,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 10,
           "siteLinksWithUtm": 10
         }
@@ -278,6 +489,39 @@
       "figuresPer10kChars": 4.2,
       "figuresWithoutText": 2,
       "fullTables": 6,
+      "fullTableIndicators": [
+        {
+          "label": "生うどん・そば消費量",
+          "period": "2024年",
+          "unit": "g"
+        },
+        {
+          "label": "中華そば消費支出額",
+          "period": "2024年",
+          "unit": "円"
+        },
+        {
+          "label": "みそ消費量",
+          "period": "2024年",
+          "unit": "g"
+        },
+        {
+          "label": "砂糖消費量",
+          "period": "2024年",
+          "unit": "g"
+        },
+        {
+          "label": "かに消費支出額",
+          "period": "2024年",
+          "unit": "円"
+        },
+        {
+          "label": "さば消費支出額",
+          "period": "2024年",
+          "unit": "円"
+        }
+      ],
+      "householdCityValues": true,
       "siteLinks": 6,
       "siteLinksWithUtm": 6,
       "flags": [
@@ -316,6 +560,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -328,6 +574,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -340,6 +588,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -352,6 +602,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -364,6 +616,19 @@
           "rankingDatabookFigures": 0,
           "tables": 8,
           "fullTables": 2,
+          "fullTableIndicators": [
+            {
+              "label": "生うどん・そば消費量",
+              "period": "2024年",
+              "unit": "g"
+            },
+            {
+              "label": "中華そば消費支出額",
+              "period": "2024年",
+              "unit": "円"
+            }
+          ],
+          "householdCityNotes": 2,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -376,6 +641,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "みそ消費量",
+              "period": "2024年",
+              "unit": "g"
+            }
+          ],
+          "householdCityNotes": 1,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -388,6 +661,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "砂糖消費量",
+              "period": "2024年",
+              "unit": "g"
+            }
+          ],
+          "householdCityNotes": 1,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -400,6 +681,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "かに消費支出額",
+              "period": "2024年",
+              "unit": "円"
+            }
+          ],
+          "householdCityNotes": 1,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -412,6 +701,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "さば消費支出額",
+              "period": "2024年",
+              "unit": "円"
+            }
+          ],
+          "householdCityNotes": 1,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -424,6 +721,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -436,6 +735,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -448,6 +749,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 6,
           "siteLinksWithUtm": 6
         }
@@ -465,6 +768,49 @@
       "figuresPer10kChars": 6,
       "figuresWithoutText": 2,
       "fullTables": 8,
+      "fullTableIndicators": [
+        {
+          "label": "未婚者割合（30～34歳・男）",
+          "period": "2020年",
+          "unit": "%"
+        },
+        {
+          "label": "65歳以上世帯員の単独世帯の割合",
+          "period": "2020年",
+          "unit": "%"
+        },
+        {
+          "label": "単独世帯割合",
+          "period": "2020年",
+          "unit": "%"
+        },
+        {
+          "label": "一般世帯の平均人員",
+          "period": "2020年",
+          "unit": "人"
+        },
+        {
+          "label": "共働き世帯割合",
+          "period": "2020年",
+          "unit": "%"
+        },
+        {
+          "label": "将来人口増減率（2020年→2050年）",
+          "period": "2050年",
+          "unit": "%"
+        },
+        {
+          "label": "社会増減率",
+          "period": "2019年",
+          "unit": "‰"
+        },
+        {
+          "label": "昼夜間人口比率",
+          "period": "2020年",
+          "unit": "%"
+        }
+      ],
+      "householdCityValues": false,
       "siteLinks": 6,
       "siteLinksWithUtm": 6,
       "flags": [
@@ -509,6 +855,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -521,6 +869,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -533,6 +883,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -545,6 +897,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -557,6 +911,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "未婚者割合（30～34歳・男）",
+              "period": "2020年",
+              "unit": "%"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -569,6 +931,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "65歳以上世帯員の単独世帯の割合",
+              "period": "2020年",
+              "unit": "%"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -581,6 +951,24 @@
           "rankingDatabookFigures": 0,
           "tables": 12,
           "fullTables": 3,
+          "fullTableIndicators": [
+            {
+              "label": "単独世帯割合",
+              "period": "2020年",
+              "unit": "%"
+            },
+            {
+              "label": "一般世帯の平均人員",
+              "period": "2020年",
+              "unit": "人"
+            },
+            {
+              "label": "共働き世帯割合",
+              "period": "2020年",
+              "unit": "%"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -593,6 +981,14 @@
           "rankingDatabookFigures": 0,
           "tables": 5,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "将来人口増減率（2020年→2050年）",
+              "period": "2050年",
+              "unit": "%"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -605,6 +1001,19 @@
           "rankingDatabookFigures": 0,
           "tables": 8,
           "fullTables": 2,
+          "fullTableIndicators": [
+            {
+              "label": "社会増減率",
+              "period": "2019年",
+              "unit": "‰"
+            },
+            {
+              "label": "昼夜間人口比率",
+              "period": "2020年",
+              "unit": "%"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -617,6 +1026,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -629,6 +1040,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -641,6 +1054,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 6,
           "siteLinksWithUtm": 6
         }
@@ -658,6 +1073,49 @@
       "figuresPer10kChars": 6.7,
       "figuresWithoutText": 0,
       "fullTables": 8,
+      "fullTableIndicators": [
+        {
+          "label": "健康寿命（男性）（日常生活に制限のない期間（男性））",
+          "period": "2022年",
+          "unit": "年"
+        },
+        {
+          "label": "自殺者数（人口10万人当たり）",
+          "period": "2023年",
+          "unit": "人"
+        },
+        {
+          "label": "介護老人福祉施設数（65歳以上人口10万人当たり）",
+          "period": "2023年",
+          "unit": "所"
+        },
+        {
+          "label": "老人ホーム定員数（65歳以上人口千人当たり）",
+          "period": "2023年",
+          "unit": "人"
+        },
+        {
+          "label": "老人ホーム従事者数（65歳以上人口10万人当たり）",
+          "period": "2023年",
+          "unit": "人"
+        },
+        {
+          "label": "一般病院病床利用率",
+          "period": "2023年",
+          "unit": "%"
+        },
+        {
+          "label": "化学工業出荷額",
+          "period": "2021年",
+          "unit": "億円"
+        },
+        {
+          "label": "化学工業比率",
+          "period": "2021年",
+          "unit": "%"
+        }
+      ],
+      "householdCityValues": false,
       "siteLinks": 6,
       "siteLinksWithUtm": 6,
       "flags": [
@@ -690,6 +1148,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -702,6 +1162,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -714,6 +1176,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -726,6 +1190,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -738,6 +1204,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "健康寿命（男性）（日常生活に制限のない期間（男性））",
+              "period": "2022年",
+              "unit": "年"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -750,6 +1224,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "自殺者数（人口10万人当たり）",
+              "period": "2023年",
+              "unit": "人"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -762,6 +1244,24 @@
           "rankingDatabookFigures": 0,
           "tables": 12,
           "fullTables": 3,
+          "fullTableIndicators": [
+            {
+              "label": "介護老人福祉施設数（65歳以上人口10万人当たり）",
+              "period": "2023年",
+              "unit": "所"
+            },
+            {
+              "label": "老人ホーム定員数（65歳以上人口千人当たり）",
+              "period": "2023年",
+              "unit": "人"
+            },
+            {
+              "label": "老人ホーム従事者数（65歳以上人口10万人当たり）",
+              "period": "2023年",
+              "unit": "人"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -774,6 +1274,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "一般病院病床利用率",
+              "period": "2023年",
+              "unit": "%"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -786,6 +1294,19 @@
           "rankingDatabookFigures": 0,
           "tables": 8,
           "fullTables": 2,
+          "fullTableIndicators": [
+            {
+              "label": "化学工業出荷額",
+              "period": "2021年",
+              "unit": "億円"
+            },
+            {
+              "label": "化学工業比率",
+              "period": "2021年",
+              "unit": "%"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -798,6 +1319,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -810,6 +1333,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -822,6 +1347,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 6,
           "siteLinksWithUtm": 6
         }
@@ -839,6 +1366,29 @@
       "figuresPer10kChars": 5.6,
       "figuresWithoutText": 0,
       "fullTables": 4,
+      "fullTableIndicators": [
+        {
+          "label": "児童1人当たり公立小学校費",
+          "period": "2022年度",
+          "unit": "千円"
+        },
+        {
+          "label": "小学校教育費（児童1人当たり）",
+          "period": "2022年度",
+          "unit": "円"
+        },
+        {
+          "label": "授業料等消費支出額",
+          "period": "2024年",
+          "unit": "円"
+        },
+        {
+          "label": "大学収容力指数",
+          "period": "2024年度",
+          "unit": "指数"
+        }
+      ],
+      "householdCityValues": true,
       "siteLinks": 6,
       "siteLinksWithUtm": 6,
       "flags": [
@@ -877,6 +1427,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -889,6 +1441,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -901,6 +1455,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -913,6 +1469,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -925,6 +1483,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "児童1人当たり公立小学校費",
+              "period": "2022年度",
+              "unit": "千円"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -937,6 +1503,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "小学校教育費（児童1人当たり）",
+              "period": "2022年度",
+              "unit": "円"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -949,6 +1523,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "授業料等消費支出額",
+              "period": "2024年",
+              "unit": "円"
+            }
+          ],
+          "householdCityNotes": 1,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -961,6 +1543,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "大学収容力指数",
+              "period": "2024年度",
+              "unit": "指数"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -973,6 +1563,8 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -985,6 +1577,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -997,6 +1591,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1009,6 +1605,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 6,
           "siteLinksWithUtm": 6
         }
@@ -1026,6 +1624,49 @@
       "figuresPer10kChars": 5.2,
       "figuresWithoutText": 0,
       "fullTables": 8,
+      "fullTableIndicators": [
+        {
+          "label": "財政力指数（都道府県財政）",
+          "period": "2022年度",
+          "unit": "指数"
+        },
+        {
+          "label": "経常収支比率（都道府県財政）",
+          "period": "2022年度",
+          "unit": "%"
+        },
+        {
+          "label": "実質公債費比率（都道府県財政）",
+          "period": "2022年度",
+          "unit": "%"
+        },
+        {
+          "label": "地方税割合（都道府県財政）",
+          "period": "2022年度",
+          "unit": "%"
+        },
+        {
+          "label": "地方交付税割合（都道府県財政）",
+          "period": "2022年度",
+          "unit": "%"
+        },
+        {
+          "label": "国庫支出金割合（都道府県財政）",
+          "period": "2022年度",
+          "unit": "%"
+        },
+        {
+          "label": "地方債現在高の割合（都道府県財政）",
+          "period": "2022年度",
+          "unit": "%"
+        },
+        {
+          "label": "将来負担比率（都道府県財政）",
+          "period": "2022年度",
+          "unit": "%"
+        }
+      ],
+      "householdCityValues": false,
       "siteLinks": 6,
       "siteLinksWithUtm": 6,
       "flags": [
@@ -1064,6 +1705,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1076,6 +1719,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1088,6 +1733,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1100,6 +1747,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1112,6 +1761,24 @@
           "rankingDatabookFigures": 0,
           "tables": 12,
           "fullTables": 3,
+          "fullTableIndicators": [
+            {
+              "label": "財政力指数（都道府県財政）",
+              "period": "2022年度",
+              "unit": "指数"
+            },
+            {
+              "label": "経常収支比率（都道府県財政）",
+              "period": "2022年度",
+              "unit": "%"
+            },
+            {
+              "label": "実質公債費比率（都道府県財政）",
+              "period": "2022年度",
+              "unit": "%"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1124,6 +1791,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1136,6 +1805,24 @@
           "rankingDatabookFigures": 0,
           "tables": 12,
           "fullTables": 3,
+          "fullTableIndicators": [
+            {
+              "label": "地方税割合（都道府県財政）",
+              "period": "2022年度",
+              "unit": "%"
+            },
+            {
+              "label": "地方交付税割合（都道府県財政）",
+              "period": "2022年度",
+              "unit": "%"
+            },
+            {
+              "label": "国庫支出金割合（都道府県財政）",
+              "period": "2022年度",
+              "unit": "%"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1148,6 +1835,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "地方債現在高の割合（都道府県財政）",
+              "period": "2022年度",
+              "unit": "%"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1160,6 +1855,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "将来負担比率（都道府県財政）",
+              "period": "2022年度",
+              "unit": "%"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1172,6 +1875,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1184,6 +1889,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1196,6 +1903,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 6,
           "siteLinksWithUtm": 6
         }
@@ -1213,6 +1922,34 @@
       "figuresPer10kChars": 5.1,
       "figuresWithoutText": 7,
       "fullTables": 5,
+      "fullTableIndicators": [
+        {
+          "label": "外国人延べ宿泊者数",
+          "period": "2024年",
+          "unit": "人泊"
+        },
+        {
+          "label": "台湾人宿泊者の全国シェア",
+          "period": "2024年",
+          "unit": "%"
+        },
+        {
+          "label": "外国人延べ宿泊者数が全宿泊に占める構成比",
+          "period": "2024年",
+          "unit": "%"
+        },
+        {
+          "label": "延べ宿泊者数",
+          "period": "2024年",
+          "unit": "人泊"
+        },
+        {
+          "label": "海外旅行の年間行動者率（15歳以上）",
+          "period": "2001年",
+          "unit": "%"
+        }
+      ],
+      "householdCityValues": false,
       "siteLinks": 6,
       "siteLinksWithUtm": 6,
       "flags": [
@@ -1263,6 +2000,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1275,6 +2014,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1287,6 +2028,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1299,6 +2042,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1311,6 +2056,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "外国人延べ宿泊者数",
+              "period": "2024年",
+              "unit": "人泊"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1323,6 +2076,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "台湾人宿泊者の全国シェア",
+              "period": "2024年",
+              "unit": "%"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1335,6 +2096,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "外国人延べ宿泊者数が全宿泊に占める構成比",
+              "period": "2024年",
+              "unit": "%"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1347,6 +2116,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "延べ宿泊者数",
+              "period": "2024年",
+              "unit": "人泊"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1359,6 +2136,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "海外旅行の年間行動者率（15歳以上）",
+              "period": "2001年",
+              "unit": "%"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1371,6 +2156,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1383,6 +2170,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1395,6 +2184,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 6,
           "siteLinksWithUtm": 6
         }
@@ -1412,6 +2203,39 @@
       "figuresPer10kChars": 4.7,
       "figuresWithoutText": 2,
       "fullTables": 6,
+      "fullTableIndicators": [
+        {
+          "label": "1人当たり最終エネルギー消費量",
+          "period": "2022年度",
+          "unit": "GJ"
+        },
+        {
+          "label": "太陽光を利用した発電機器のある住宅数",
+          "period": "2023年",
+          "unit": "戸"
+        },
+        {
+          "label": "電力需要量",
+          "period": "2023年度",
+          "unit": "Mwh"
+        },
+        {
+          "label": "都市ガス供給区域内世帯比率",
+          "period": "2016年度",
+          "unit": "%"
+        },
+        {
+          "label": "ガソリン販売量",
+          "period": "2023年度",
+          "unit": "KL"
+        },
+        {
+          "label": "給油所数（道路実延長100km当たり）",
+          "period": "2023年度",
+          "unit": "箇所"
+        }
+      ],
+      "householdCityValues": false,
       "siteLinks": 6,
       "siteLinksWithUtm": 6,
       "flags": [
@@ -1456,6 +2280,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1468,6 +2294,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1480,6 +2308,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1492,6 +2322,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1504,6 +2336,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "1人当たり最終エネルギー消費量",
+              "period": "2022年度",
+              "unit": "GJ"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1516,6 +2356,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "太陽光を利用した発電機器のある住宅数",
+              "period": "2023年",
+              "unit": "戸"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1528,6 +2376,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "電力需要量",
+              "period": "2023年度",
+              "unit": "Mwh"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1540,6 +2396,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "都市ガス供給区域内世帯比率",
+              "period": "2016年度",
+              "unit": "%"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1552,6 +2416,19 @@
           "rankingDatabookFigures": 0,
           "tables": 8,
           "fullTables": 2,
+          "fullTableIndicators": [
+            {
+              "label": "ガソリン販売量",
+              "period": "2023年度",
+              "unit": "KL"
+            },
+            {
+              "label": "給油所数（道路実延長100km当たり）",
+              "period": "2023年度",
+              "unit": "箇所"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1564,6 +2441,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1576,6 +2455,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1588,6 +2469,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 6,
           "siteLinksWithUtm": 6
         }
@@ -1605,6 +2488,34 @@
       "figuresPer10kChars": 6.1,
       "figuresWithoutText": 3,
       "fullTables": 5,
+      "fullTableIndicators": [
+        {
+          "label": "製造品出荷額等",
+          "period": "2023年度",
+          "unit": "百万円"
+        },
+        {
+          "label": "製造品出荷額等（従業者1人当たり）",
+          "period": "2023年度",
+          "unit": "万円"
+        },
+        {
+          "label": "従業者1～4人の事業所割合（民営）",
+          "period": "2021年度",
+          "unit": "%"
+        },
+        {
+          "label": "工業用水量",
+          "period": "2015年度",
+          "unit": "m3/日"
+        },
+        {
+          "label": "標準価格対前年平均変動率（商業地）",
+          "period": "2024年度",
+          "unit": "%"
+        }
+      ],
+      "householdCityValues": false,
       "siteLinks": 6,
       "siteLinksWithUtm": 6,
       "flags": [
@@ -1655,6 +2566,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1667,6 +2580,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1679,6 +2594,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1691,6 +2608,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1703,6 +2622,19 @@
           "rankingDatabookFigures": 0,
           "tables": 8,
           "fullTables": 2,
+          "fullTableIndicators": [
+            {
+              "label": "製造品出荷額等",
+              "period": "2023年度",
+              "unit": "百万円"
+            },
+            {
+              "label": "製造品出荷額等（従業者1人当たり）",
+              "period": "2023年度",
+              "unit": "万円"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1715,6 +2647,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1727,6 +2661,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "従業者1～4人の事業所割合（民営）",
+              "period": "2021年度",
+              "unit": "%"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1739,6 +2681,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "工業用水量",
+              "period": "2015年度",
+              "unit": "m3/日"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1751,6 +2701,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "標準価格対前年平均変動率（商業地）",
+              "period": "2024年度",
+              "unit": "%"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1763,6 +2721,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1775,6 +2735,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1787,6 +2749,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 6,
           "siteLinksWithUtm": 6
         }
@@ -1804,6 +2768,59 @@
       "figuresPer10kChars": 6.6,
       "figuresWithoutText": 1,
       "fullTables": 10,
+      "fullTableIndicators": [
+        {
+          "label": "窃盗犯認知件数（人口千人当たり）",
+          "period": "2023年度",
+          "unit": "件"
+        },
+        {
+          "label": "刑法犯検挙率",
+          "period": "2023年度",
+          "unit": "%"
+        },
+        {
+          "label": "労働災害発生の頻度",
+          "period": "2023年度",
+          "unit": "件/百万時間"
+        },
+        {
+          "label": "労働災害の重さの程度",
+          "period": "2023年度",
+          "unit": "日/千時間"
+        },
+        {
+          "label": "労働者災害補償保険給付平均支給額",
+          "period": "2023年度",
+          "unit": "千円"
+        },
+        {
+          "label": "労働者災害補償保険給付率",
+          "period": "2023年度",
+          "unit": "%"
+        },
+        {
+          "label": "公害苦情受付件数（人口10万人当たり）",
+          "period": "2023年度",
+          "unit": "件"
+        },
+        {
+          "label": "ごみのリサイクル率",
+          "period": "2023年度",
+          "unit": "%"
+        },
+        {
+          "label": "最終処分場残余容量",
+          "period": "2023年度",
+          "unit": "千m3"
+        },
+        {
+          "label": "火災・地震保険料消費支出額",
+          "period": "2024年",
+          "unit": "円"
+        }
+      ],
+      "householdCityValues": true,
       "siteLinks": 6,
       "siteLinksWithUtm": 6,
       "flags": [
@@ -1836,6 +2853,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1848,6 +2867,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1860,6 +2881,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1872,6 +2895,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1884,6 +2909,19 @@
           "rankingDatabookFigures": 0,
           "tables": 8,
           "fullTables": 2,
+          "fullTableIndicators": [
+            {
+              "label": "窃盗犯認知件数（人口千人当たり）",
+              "period": "2023年度",
+              "unit": "件"
+            },
+            {
+              "label": "刑法犯検挙率",
+              "period": "2023年度",
+              "unit": "%"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1896,6 +2934,29 @@
           "rankingDatabookFigures": 0,
           "tables": 16,
           "fullTables": 4,
+          "fullTableIndicators": [
+            {
+              "label": "労働災害発生の頻度",
+              "period": "2023年度",
+              "unit": "件/百万時間"
+            },
+            {
+              "label": "労働災害の重さの程度",
+              "period": "2023年度",
+              "unit": "日/千時間"
+            },
+            {
+              "label": "労働者災害補償保険給付平均支給額",
+              "period": "2023年度",
+              "unit": "千円"
+            },
+            {
+              "label": "労働者災害補償保険給付率",
+              "period": "2023年度",
+              "unit": "%"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1908,6 +2969,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "公害苦情受付件数（人口10万人当たり）",
+              "period": "2023年度",
+              "unit": "件"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1920,6 +2989,19 @@
           "rankingDatabookFigures": 0,
           "tables": 8,
           "fullTables": 2,
+          "fullTableIndicators": [
+            {
+              "label": "ごみのリサイクル率",
+              "period": "2023年度",
+              "unit": "%"
+            },
+            {
+              "label": "最終処分場残余容量",
+              "period": "2023年度",
+              "unit": "千m3"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1932,6 +3014,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "火災・地震保険料消費支出額",
+              "period": "2024年",
+              "unit": "円"
+            }
+          ],
+          "householdCityNotes": 1,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1944,6 +3034,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1956,6 +3048,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -1968,6 +3062,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 6,
           "siteLinksWithUtm": 6
         }
@@ -1985,6 +3081,64 @@
       "figuresPer10kChars": 5.1,
       "figuresWithoutText": 2,
       "fullTables": 11,
+      "fullTableIndicators": [
+        {
+          "label": "図書館数（人口10万人当たり）",
+          "period": "2021年度",
+          "unit": "館"
+        },
+        {
+          "label": "図書館館外貸出冊数（人口1人当たり）",
+          "period": "2020年度",
+          "unit": "冊"
+        },
+        {
+          "label": "博物館総数",
+          "period": "2015年度",
+          "unit": "館"
+        },
+        {
+          "label": "劇場、音楽堂等数",
+          "period": "2021年度",
+          "unit": "施設"
+        },
+        {
+          "label": "社会体育施設数（人口100万人当たり）",
+          "period": "2021年度",
+          "unit": "施設"
+        },
+        {
+          "label": "社会体育施設数",
+          "period": "2021年度",
+          "unit": "施設"
+        },
+        {
+          "label": "体育館数（公共）（人口100万人当たり）",
+          "period": "2021年度",
+          "unit": "施設"
+        },
+        {
+          "label": "ウォーキング・軽い体操の行動者率",
+          "period": "2021年度",
+          "unit": "%"
+        },
+        {
+          "label": "スポーツの年間行動者率（10歳以上）",
+          "period": "2021年度",
+          "unit": "%"
+        },
+        {
+          "label": "ゴルフの行動者率",
+          "period": "2021年度",
+          "unit": "%"
+        },
+        {
+          "label": "映画・演劇等入場料消費支出額",
+          "period": "2024年",
+          "unit": "円"
+        }
+      ],
+      "householdCityValues": true,
       "siteLinks": 5,
       "siteLinksWithUtm": 5,
       "flags": [
@@ -2023,6 +3177,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2035,6 +3191,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2047,6 +3205,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2059,6 +3219,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2071,6 +3233,29 @@
           "rankingDatabookFigures": 0,
           "tables": 16,
           "fullTables": 4,
+          "fullTableIndicators": [
+            {
+              "label": "図書館数（人口10万人当たり）",
+              "period": "2021年度",
+              "unit": "館"
+            },
+            {
+              "label": "図書館館外貸出冊数（人口1人当たり）",
+              "period": "2020年度",
+              "unit": "冊"
+            },
+            {
+              "label": "博物館総数",
+              "period": "2015年度",
+              "unit": "館"
+            },
+            {
+              "label": "劇場、音楽堂等数",
+              "period": "2021年度",
+              "unit": "施設"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2083,6 +3268,24 @@
           "rankingDatabookFigures": 0,
           "tables": 12,
           "fullTables": 3,
+          "fullTableIndicators": [
+            {
+              "label": "社会体育施設数（人口100万人当たり）",
+              "period": "2021年度",
+              "unit": "施設"
+            },
+            {
+              "label": "社会体育施設数",
+              "period": "2021年度",
+              "unit": "施設"
+            },
+            {
+              "label": "体育館数（公共）（人口100万人当たり）",
+              "period": "2021年度",
+              "unit": "施設"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2095,6 +3298,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "ウォーキング・軽い体操の行動者率",
+              "period": "2021年度",
+              "unit": "%"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2107,6 +3318,19 @@
           "rankingDatabookFigures": 0,
           "tables": 8,
           "fullTables": 2,
+          "fullTableIndicators": [
+            {
+              "label": "スポーツの年間行動者率（10歳以上）",
+              "period": "2021年度",
+              "unit": "%"
+            },
+            {
+              "label": "ゴルフの行動者率",
+              "period": "2021年度",
+              "unit": "%"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2119,6 +3343,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "映画・演劇等入場料消費支出額",
+              "period": "2024年",
+              "unit": "円"
+            }
+          ],
+          "householdCityNotes": 1,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2131,6 +3363,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2143,6 +3377,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2155,6 +3391,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 5,
           "siteLinksWithUtm": 5
         }
@@ -2172,6 +3410,39 @@
       "figuresPer10kChars": 5,
       "figuresWithoutText": 0,
       "fullTables": 6,
+      "fullTableIndicators": [
+        {
+          "label": "テレビ・ラジオ・新聞・雑誌の平均時間（有業者・男）",
+          "period": "2021年",
+          "unit": "分"
+        },
+        {
+          "label": "テレビ・ラジオ・新聞・雑誌の平均時間（有業者・女）",
+          "period": "2021年",
+          "unit": "分"
+        },
+        {
+          "label": "放送メディア利用時間の男女差（有業者）",
+          "period": "2021年",
+          "unit": "分"
+        },
+        {
+          "label": "携帯電話・PHS契約数（人口千人当たり）",
+          "period": "2023年度",
+          "unit": "契約"
+        },
+        {
+          "label": "パソコン消費支出額",
+          "period": "2024年",
+          "unit": "円"
+        },
+        {
+          "label": "コンビニエンスストア数（人口10万人当たり）",
+          "period": "2014年",
+          "unit": "所"
+        }
+      ],
+      "householdCityValues": true,
       "siteLinks": 6,
       "siteLinksWithUtm": 6,
       "flags": [
@@ -2210,6 +3481,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2222,6 +3495,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2234,6 +3509,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2246,6 +3523,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2258,6 +3537,24 @@
           "rankingDatabookFigures": 0,
           "tables": 12,
           "fullTables": 3,
+          "fullTableIndicators": [
+            {
+              "label": "テレビ・ラジオ・新聞・雑誌の平均時間（有業者・男）",
+              "period": "2021年",
+              "unit": "分"
+            },
+            {
+              "label": "テレビ・ラジオ・新聞・雑誌の平均時間（有業者・女）",
+              "period": "2021年",
+              "unit": "分"
+            },
+            {
+              "label": "放送メディア利用時間の男女差（有業者）",
+              "period": "2021年",
+              "unit": "分"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2270,6 +3567,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "携帯電話・PHS契約数（人口千人当たり）",
+              "period": "2023年度",
+              "unit": "契約"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2282,6 +3587,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "パソコン消費支出額",
+              "period": "2024年",
+              "unit": "円"
+            }
+          ],
+          "householdCityNotes": 1,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2294,6 +3607,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2306,6 +3621,14 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 1,
+          "fullTableIndicators": [
+            {
+              "label": "コンビニエンスストア数（人口10万人当たり）",
+              "period": "2014年",
+              "unit": "所"
+            }
+          ],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2318,6 +3641,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2330,6 +3655,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2342,6 +3669,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 6,
           "siteLinksWithUtm": 6
         }
@@ -2359,6 +3688,8 @@
       "figuresPer10kChars": 0,
       "figuresWithoutText": 0,
       "fullTables": 3,
+      "fullTableIndicators": [],
+      "householdCityValues": false,
       "siteLinks": 1,
       "siteLinksWithUtm": 1,
       "flags": [
@@ -2439,6 +3770,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2451,6 +3784,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2463,6 +3798,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2475,6 +3812,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2487,6 +3826,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2499,6 +3840,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2511,6 +3854,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2523,6 +3868,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2535,6 +3882,8 @@
           "rankingDatabookFigures": 0,
           "tables": 2,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2547,6 +3896,8 @@
           "rankingDatabookFigures": 0,
           "tables": 4,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2559,6 +3910,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2571,6 +3924,8 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2583,6 +3938,8 @@
           "rankingDatabookFigures": 0,
           "tables": 3,
           "fullTables": 3,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -2595,6 +3952,337 @@
           "rankingDatabookFigures": 0,
           "tables": 0,
           "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
+          "siteLinks": 1,
+          "siteLinksWithUtm": 1
+        }
+      ]
+    },
+    {
+      "id": "K-S1-14",
+      "status": "measured",
+      "title": "47都市の食卓は似てきたのか — 家計調査で読む19年の変化",
+      "epubPath": ".local/kindle-books/K-S1-14/v1-20261114-r3/book.epub",
+      "epubSha256": "769cf9c2e59f495d1451e7267e29d404a6403653e782657779514a6bb920dcb0",
+      "modified": "2026-11-13T22:50:37Z",
+      "chars": 36080,
+      "figures": 0,
+      "figuresPer10kChars": 0,
+      "figuresWithoutText": 0,
+      "fullTables": 0,
+      "fullTableIndicators": [],
+      "householdCityValues": false,
+      "siteLinks": 1,
+      "siteLinksWithUtm": 1,
+      "flags": [
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap001",
+          "chapterTitle": "はじめに — 「ご当地の食卓」は残っているのか",
+          "value": 1194
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap002",
+          "chapterTitle": "第1章 この本の数字の読み方",
+          "value": 1912
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap003",
+          "chapterTitle": "第2章 47都市の食卓は似てきた",
+          "value": 1645
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap004",
+          "chapterTitle": "第3章 違いが縮んだ品目、広がった品目",
+          "value": 1173
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap005",
+          "chapterTitle": "第4章 個性が残った都市、薄れた都市",
+          "value": 1448
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap006",
+          "chapterTitle": "第5章 北海道・東北の7都市",
+          "value": 3632
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap007",
+          "chapterTitle": "第6章 関東の7都市",
+          "value": 2800
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap008",
+          "chapterTitle": "第7章 中部の9都市",
+          "value": 4095
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap009",
+          "chapterTitle": "第8章 近畿の7都市",
+          "value": 2372
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap010",
+          "chapterTitle": "第9章 中国・四国の9都市",
+          "value": 4206
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap011",
+          "chapterTitle": "第10章 九州・沖縄の8都市",
+          "value": 3828
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap012",
+          "chapterTitle": "終章 — 似てきた食卓に、まだ残っている違い",
+          "value": 1058
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap013",
+          "chapterTitle": "出典と方法",
+          "value": 1262
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap014",
+          "chapterTitle": "付録 47都市の事実票",
+          "value": 4882
+        }
+      ],
+      "chapters": [
+        {
+          "id": "front",
+          "title": "47都市の食卓は似てきたのか — 家計調査で読む19年の変化",
+          "chars": 310,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap001",
+          "title": "はじめに — 「ご当地の食卓」は残っているのか",
+          "chars": 1194,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap002",
+          "title": "第1章 この本の数字の読み方",
+          "chars": 1912,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap003",
+          "title": "第2章 47都市の食卓は似てきた",
+          "chars": 1645,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap004",
+          "title": "第3章 違いが縮んだ品目、広がった品目",
+          "chars": 1173,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap005",
+          "title": "第4章 個性が残った都市、薄れた都市",
+          "chars": 1448,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap006",
+          "title": "第5章 北海道・東北の7都市",
+          "chars": 3632,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap007",
+          "title": "第6章 関東の7都市",
+          "chars": 2800,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap008",
+          "title": "第7章 中部の9都市",
+          "chars": 4095,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap009",
+          "title": "第8章 近畿の7都市",
+          "chars": 2372,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap010",
+          "title": "第9章 中国・四国の9都市",
+          "chars": 4206,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap011",
+          "title": "第10章 九州・沖縄の8都市",
+          "chars": 3828,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap012",
+          "title": "終章 — 似てきた食卓に、まだ残っている違い",
+          "chars": 1058,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap013",
+          "title": "出典と方法",
+          "chars": 1262,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap014",
+          "title": "付録 47都市の事実票",
+          "chars": 4882,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 4,
+          "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "sources",
+          "title": "出典と免責",
+          "chars": 263,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "fullTableIndicators": [],
+          "householdCityNotes": 0,
           "siteLinks": 1,
           "siteLinksWithUtm": 1
         }

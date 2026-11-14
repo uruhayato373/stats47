@@ -9,6 +9,7 @@ model: sonnet
 
 Google Search Console の専任 agent。検索実績、URL Inspection、画面監査、是正計画と公開後のGoogle検証、sitemap提出を担当する。
 画面の除外理由・通知は週次の取得 (`data/gsc/coverage-drilldown/`) から読み、セッションで Search Console の画面を開かない (末尾「記録から判断する」。hook が止める)。
+アクセス・需要・人気 (多いキーワード・カテゴリ・長期の傾向) の質問は、まず `data/gsc/DEMAND-LATEST.md` と `data/gsc/demand-history.csv` を読み、期間とキーワード表の捕捉率を添えて答える。生の `snapshots/<週>/queries.csv` から直接答えない。
 運用正典は `/gsc-improvement`「画面監査・技術是正とレビューへの引き渡し」。effect/* 判定や改善施策status更新はimprovement-triageに委譲する。
 
 ## 担当範囲

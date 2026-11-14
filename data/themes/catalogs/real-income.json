@@ -297,6 +297,34 @@
       "rankingKey": "current-liabilities-balance-multi-person-households-per-household",
       "shortLabel": "負債現在高（二人以上の世帯）",
       "role": "context"
+    },
+    {
+      "rankingKey": "avg-savings-rate-worker-households",
+      "shortLabel": "平均貯蓄率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「可処分所得 都道府県」で手取りを調べる読者に、その手取りのうち貯蓄に回る割合を、既にある平均消費性向と並べて見せる。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "cpi-change-rate-total",
+      "shortLabel": "物価上昇率(総合)",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「物価 都道府県」「生活費 ランキング」の検索に対し、いまの物価の地域差指数に足りない「前年からどれだけ上がったか」を県別に示す。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
     }
   ],
   "charts": [
@@ -400,7 +428,7 @@
       "dataSource": "ranking",
       "sortOrder": 10,
       "annotation": "全国を100とする同年の地域差です。前年比の物価上昇率ではありません。",
-      "section": "prices"
+      "section": "household-income"
     },
     {
       "componentKey": "real-income-cpi-breakdown-expenses",
@@ -430,7 +458,7 @@
       "dataSource": "ranking",
       "sortOrder": 20,
       "annotation": "現在配信している2024年の費目別比較です。",
-      "section": "prices"
+      "section": "household-income"
     },
     {
       "componentKey": "theme-real-income-actual-vs-disposable",
@@ -467,16 +495,6 @@
   "metricGroups": [
     {
       "key": "household-income-1",
-      "title": "実収入（勤労者世帯・1世帯当たり月額）",
-      "rankingKeys": [
-        "actual-income-worker-households-per-month"
-      ],
-      "defaultCheckedKeys": [
-        "actual-income-worker-households-per-month"
-      ]
-    },
-    {
-      "key": "household-income-2",
       "title": "可処分所得",
       "rankingKeys": [
         "disposable-income-worker-households"
@@ -486,8 +504,28 @@
       ]
     },
     {
-      "key": "purchasing-power",
-      "title": "物価補正後の購買力",
+      "key": "household-income-2",
+      "title": "実収入（勤労者世帯・1世帯当たり月額）",
+      "rankingKeys": [
+        "actual-income-worker-households-per-month"
+      ],
+      "defaultCheckedKeys": [
+        "actual-income-worker-households-per-month"
+      ]
+    },
+    {
+      "key": "household-income-3",
+      "title": "平均貯蓄率",
+      "rankingKeys": [
+        "avg-savings-rate-worker-households"
+      ],
+      "defaultCheckedKeys": [
+        "avg-savings-rate-worker-households"
+      ]
+    },
+    {
+      "key": "purchasing-power-1",
+      "title": "実質可処分所得",
       "rankingKeys": [
         "real-disposable-income"
       ],
@@ -496,13 +534,23 @@
       ]
     },
     {
-      "key": "after-rent",
-      "title": "家賃を差し引いた手残り",
+      "key": "purchasing-power-2",
+      "title": "家賃差引後の参考月額",
       "rankingKeys": [
         "disposable-income-after-rent"
       ],
       "defaultCheckedKeys": [
         "disposable-income-after-rent"
+      ]
+    },
+    {
+      "key": "prices-1",
+      "title": "物価上昇率(総合)",
+      "rankingKeys": [
+        "cpi-change-rate-total"
+      ],
+      "defaultCheckedKeys": [
+        "cpi-change-rate-total"
       ]
     },
     {
@@ -617,47 +665,41 @@
   "sections": [
     {
       "key": "household-income",
-      "title": "控除前後の月収",
-      "description": "県庁所在市の二人以上の勤労者世帯の月額を比較します。県全体や単身世帯の平均ではありません。実収入と可処分所得で表示単位・収録期間が異なる場合は、それぞれの表記を確認してください。",
+      "title": "手取りの月収は県でいくらか",
+      "concern": "可処分所得の県別の水準と、手取りのうち消費・貯蓄に回る割合を知りたい。",
       "metricGroupKeys": [
         "household-income-1",
-        "household-income-2"
+        "household-income-2",
+        "household-income-3"
       ],
       "chartKeys": [
-        "theme-real-income-actual-vs-disposable",
-        "real-income-household-composition"
+        "real-income-household-composition",
+        "real-income-cpi-breakdown",
+        "real-income-cpi-breakdown-expenses",
+        "theme-real-income-actual-vs-disposable"
       ]
     },
     {
       "key": "purchasing-power",
-      "title": "物価補正後の購買力",
-      "description": "可処分所得を地域の物価指数で補正した参考値です。個々の世帯の購買力を直接表すものではありません。",
+      "title": "物価と家賃を考えると手取りはどれだけ残るか",
+      "concern": "額面の手取りではなく、物価や家賃を踏まえた実質的な余裕を知りたい。",
       "metricGroupKeys": [
-        "purchasing-power"
-      ]
-    },
-    {
-      "key": "after-rent",
-      "title": "家賃を差し引いた手残り",
-      "description": "勤労者世帯の可処分所得から、二人以上の全世帯の年間家賃支出を12で割って差し引いた参考計算です。母集団が完全には一致せず、実際の平均的な手残りを示すものではありません。県庁所在市の市場家賃は別の関連指標です。",
-      "metricGroupKeys": [
-        "after-rent"
+        "purchasing-power-1",
+        "purchasing-power-2"
       ]
     },
     {
       "key": "prices",
-      "title": "物価条件を詳しく見る",
-      "description": "物価の総合指数は長期推移、費目別は収録年の比較として読みます。",
-      "metricGroupKeys": [],
-      "chartKeys": [
-        "real-income-cpi-breakdown",
-        "real-income-cpi-breakdown-expenses"
+      "title": "物価は県でどれだけ違い、どれだけ上がったか",
+      "concern": "自分の県の物価が全国と比べて高いか、直近でどれだけ上がったかを知りたい。",
+      "metricGroupKeys": [
+        "prices-1"
       ]
     },
     {
       "key": "household-consumption-expenditure",
-      "title": "毎月の生活費や消費支出はどれくらいかかっているか",
-      "concern": "地域ごとの物価や生活水準による消費支出の違いを把握したい。",
+      "title": "食費の重さと毎月の生活費は県でどれだけ違うか",
+      "concern": "生活費のうち食費の占める割合と、毎月の消費支出の水準を知りたい。",
       "metricGroupKeys": [
         "household-consumption-expenditure-1"
       ]

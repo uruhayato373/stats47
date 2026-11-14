@@ -218,15 +218,16 @@ export async function readTagsForArticlesFromR2(
 export async function readArticleSummariesByTagKeyFromR2(
   tagKey: string,
   limit = 10
-): Promise<Array<{ slug: string; title: string; description: string | null }>> {
+): Promise<Array<{ slug: string; title: string; description: string | null; publishedAt: string | null }>> {
   const snapshot = await loadSnapshot();
+  // 並べた基準 (公開日) も返し、タグの一覧のカードに日付を出す (HUB-LIST-FINDABILITY-01)
   return snapshot.articles
     .filter(
       (a) => a.published === true && a.tags.some((t) => t.tagKey === canonicalTagKey(tagKey))
     )
     .sort(compareByPublishedAtDesc)
     .slice(0, limit)
-    .map((a) => ({ slug: a.slug, title: a.title, description: a.description }));
+    .map((a) => ({ slug: a.slug, title: a.title, description: a.description, publishedAt: a.publishedAt ?? null }));
 }
 
 export async function readArticleSummariesByTagKeysFromR2(

@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-08T00:14:12.055Z",
-  "runId": "1794096591785",
+  "generatedAt": "2026-11-14T04:44:44.005Z",
+  "runId": "1794631279372",
   "sources": [
     {
       "source": "a8",
       "capability": "site-outcomes",
-      "observedAt": "2026-11-08T00:09:53.386Z",
+      "observedAt": "2026-11-14T04:41:22.083Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "1794096591785",
+      "runId": "1794631279372",
       "runAttempt": 1,
       "metricsAvailable": true,
       "inventoryAvailable": false,
@@ -18,8 +18,8 @@
       "relogin": null,
       "recovery": null,
       "evidence": {
-        "sha256": "fc37159a22bdf47b837447f87ebd14a77cb375be74f111699901bd6406a8c9df",
-        "bytes": 311500
+        "sha256": "ce341d0f1626def0b4a3b61097796bbfd9a7e18d48a86f44366759b4797f4705",
+        "bytes": 311527
       },
       "quality": null,
       "knownIncomplete": null,
@@ -28,11 +28,11 @@
     {
       "source": "note",
       "capability": "dashboard-metrics",
-      "observedAt": "2026-11-08T00:10:06.318Z",
+      "observedAt": "2026-11-14T04:41:56.846Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "1794096591785",
+      "runId": "1794631279372",
       "runAttempt": 1,
       "metricsAvailable": true,
       "inventoryAvailable": true,
@@ -40,40 +40,41 @@
       "relogin": null,
       "recovery": null,
       "evidence": {
-        "sha256": "1052b08cc70a0457e13942c0692b98618ebd715a642c3eb1399a3ad3fcfdad29",
-        "bytes": 2628512
+        "sha256": "300c3a2e570e55f3aa8042f361b47de3be82fc1b0eee25b44812c2b0b81ec650",
+        "bytes": 2623549
       },
       "quality": {
         "expectedRows": 439,
-        "observedRows": 439,
-        "missingRows": 0,
+        "observedRows": 438,
+        "missingRows": 1,
         "totalsMatched": true,
         "paginationComplete": true,
         "revenue": null,
         "revenueStatus": "verification_required",
         "revenueEvidenceAvailable": false
       },
-      "knownIncomplete": null,
+      "knownIncomplete": {
+        "code": "note_dashboard_row_hidden",
+        "missingRows": 1,
+        "acceptedBy": "owner-2026-09-27"
+      },
       "remaining": null
     },
     {
       "source": "gsc",
       "capability": "verified-coverage-export",
-      "observedAt": "2026-11-08T00:10:56.694Z",
+      "observedAt": null,
       "activated": true,
-      "status": "pass",
-      "code": null,
-      "runId": "1794096591785",
-      "runAttempt": 1,
-      "metricsAvailable": true,
+      "status": "failed",
+      "code": "runner_failed",
+      "runId": "1794631279372",
+      "runAttempt": null,
+      "metricsAvailable": false,
       "inventoryAvailable": false,
-      "collectionAttempted": true,
+      "collectionAttempted": null,
       "relogin": null,
       "recovery": null,
-      "evidence": {
-        "sha256": "bb586011d1749de75764d216fa1022fd9800cc1ced06a4704f0bc6e790dcc2da",
-        "bytes": 3868359
-      },
+      "evidence": null,
       "quality": null,
       "knownIncomplete": null,
       "remaining": null
@@ -81,11 +82,11 @@
     {
       "source": "kdp",
       "capability": "publication-daily-and-monthly-royalties",
-      "observedAt": "2026-11-08T00:12:10.238Z",
+      "observedAt": "2026-11-14T04:43:10.850Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "1794096591785",
+      "runId": "1794631279372",
       "runAttempt": 1,
       "metricsAvailable": true,
       "inventoryAvailable": false,
@@ -93,15 +94,15 @@
       "relogin": null,
       "recovery": null,
       "evidence": {
-        "sha256": "23b724c79dff8a5c3cf31054f8be730b2532b2007e5ab221033d2e7683f1efbd",
-        "bytes": 29480
+        "sha256": "119fc9c90488dfd3e1f90e9302d4df38f73ce4fdc543a831d800cce6f6db82b7",
+        "bytes": 29460
       },
       "quality": {
         "monthlyPeriod": "2026-09",
         "monthlyRows": 1,
         "monthlyComplete": true,
         "revenue": {
-          "date": "2026-11-07",
+          "date": "2026-11-13",
           "royaltyYen": 0,
           "paidOrders": 0
         },
@@ -121,7 +122,7 @@
               "refunds": 0,
               "evidencePath": "vault:kdp/monthly/month-8",
               "evidenceSha256": "fd7a5879f54fea7baa4ecf0ff8fef481d1605acb6016645e8cdb4b3206be7ded",
-              "recordedAt": "2026-11-08T00:12:10.238Z"
+              "recordedAt": "2026-11-14T04:43:10.850Z"
             }
           ],
           "excluded": [],
@@ -156,7 +157,7 @@
             ],
             "evidencePath": "vault:kdp/monthly/month-8",
             "evidenceSha256": "fd7a5879f54fea7baa4ecf0ff8fef481d1605acb6016645e8cdb4b3206be7ded",
-            "recordedAt": "2026-11-08T00:12:10.238Z"
+            "recordedAt": "2026-11-14T04:43:10.850Z"
           }
         }
       },
@@ -166,11 +167,11 @@
     {
       "source": "rakuten",
       "capability": "monthly-outcomes",
-      "observedAt": "2026-11-08T00:14:06.226Z",
+      "observedAt": "2026-11-14T04:44:36.423Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "1794096591785",
+      "runId": "1794631279372",
       "runAttempt": 1,
       "metricsAvailable": true,
       "inventoryAvailable": false,
@@ -178,7 +179,7 @@
       "relogin": null,
       "recovery": null,
       "evidence": {
-        "sha256": "6ee06f366a52bf214f334e066d7664bd554bed75e237251e55e5b82f3583d694",
+        "sha256": "2c185c725fbf4cb3ce6b3856452e915b913db8d5717dcffb6727e9d86e282ccf",
         "bytes": 1377
       },
       "quality": null,

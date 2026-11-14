@@ -2,7 +2,8 @@
  * PageSpeed Insights API 取得スクリプト
  *
  * config/psi-urls.txt を読み、mobile + desktop 両方で PSI を計測し、
- * data/psi/psi-batch-<ISO>.json に結果を保存する。
+ * data/psi/live/psi-batch-<ISO>.json (git 管理外) に結果を保存する。CI の psi job がこれを R2 state/psi/ へ出し
+ * (lib/state-publish.mjs)、手元では npm run state:pull -- psi で取る。
  *
  * 認証:
  *   PSI API v5 は公開エンドポイントだが、quota を上げるため PSI_API_KEY を使う。

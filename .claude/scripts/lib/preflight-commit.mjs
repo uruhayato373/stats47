@@ -455,9 +455,9 @@ const GATES = [
   },
   {
     name: "Env Registry",
-    why: "新規 process.env は .claude/config/env-registry.json への登録が必須",
+    why: "新規 process.env は config/env-registry.json への登録が必須",
     run: () => tryRun("node", [checker("check-env-registry.cjs")]),
-    hint: "検出された変数名を .claude/config/env-registry.json の variables へ追加する",
+    hint: "検出された変数名を config/env-registry.json の variables へ追加する",
   },
   {
     name: "Maintenance Debt",

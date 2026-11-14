@@ -345,9 +345,9 @@ evidenceTopics: [
 - `lensKey` は複数テーマで再利用できる安定した観点、`sourceKeys` は根拠資料である。白書名を lens にしない。
 - NotebookLM は論点・図表候補を抽出する補助。採択には公式 HTTPS URL、資料の実在、関連 route の実在が必要。
 - 1 topic = 1 問い。指標カードやチャートと同じ事実を再説明せず、関連ページへ進む理由を短く示す。
-- 公開 URL は増やさない。`/themes/*` 内から既存 ranking / theme / tag へ接続し、`nav_surface=theme_evidence` で計測する。
+- **テーマページには描画しない (2026-11-14 オーナー決定)。** 「白書・統計から見る論点」の節は 28 日のクリックがテーマ全体で 4 回 (閲覧 約 4,100・2026-W45) で、ページの約 600px を使っていたので外した。`evidenceTopics` は指標を選んだ根拠としてカタログに残し、validator の検査も続ける。計測の値 `theme_evidence` は過去の記録にだけ残る。
 - `relatedChartKeys` は同じ ThemeCatalog の実在 chart、ranking は active、theme は自己参照不可とする。
-- generator は読まない。UI は `ThemeEvidenceTopicsSection` が ThemeCatalog を直読みする。
+- generator は読まない。読者向けの UI も読まない (管理画面のカタログ監査だけが読む)。
 
 ---
 
@@ -465,7 +465,7 @@ harmRelevance: [
 | `charts.section`                                   | **テーマページでは未使用** (area ページの `AreaChartSection` のみ使用)                                                                                                 | —                                                                                                 |
 | `keywords`                                         | `<meta>` / 構造化データ                                                                                                                                                | theme utils                                                                                       |
 | `relatedArticleTagKeys`                            | 関連記事セクション + ネイティブアフィリ                                                                                                                                | `ThemeRelatedArticles`                                                                            |
-| `evidenceTopics`                                   | **「白書・統計から見る論点」**。公式資料から ranking / theme / tag へ周遊                                                                                              | `ThemeEvidenceTopicsSection` (`nav_surface=theme_evidence`)                                       |
+| `evidenceTopics`                                   | **UI 非表示** (2026-11-14 に「白書・統計から見る論点」の節を外した)。指標の選定の根拠として SSOT に保持 | —                                                                                                 |
 | `metrics` → 相関 (別途 R2)                          | **「このテーマと関連の深い指標」**。テーマ外の指標のうち、テーマ内指標と人口補正後の順位相関 \|r\|≥0.5 のもの最大 8 件。相関 workflow が `app/correlation/by-theme/<themeKey>.json` に事前計算 | `ThemeCorrelatedMetrics` (`nav_surface=theme_ranking`)                                            |
 | `rejectedCandidates`                               | UI 非表示 (再調査防止の記録のみ)                                                                                                                                       | —                                                                                                 |
 | (別途) EMBEDDED_SECTIONS                           | 埋め込み section。**半幅 2 カラム** = 人口移動フロー / 通勤フロー (ChartPanel 化・2026-08-04)、**全幅** = 駅乗降 / 高速道路 / 過疎×医療 / 日照 | `THEME_SECTION_REGISTRY` + `HALF_WIDTH_SECTIONS`                                                  |

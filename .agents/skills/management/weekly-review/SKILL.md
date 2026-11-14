@@ -106,6 +106,14 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
    消す前に、1 枚ずつ `node .claude/scripts/backlog-loop/record-backlog-outcome.mjs --id <ID> --class <割当表の class> --outcome completed --gate-commands "<本文にある検証コマンド>" --gate-pass --evidence "<完了の証拠の要約>" --title "<題>" --source-file .claude/todo/backlog.md` で実行台帳に記録する
    (統合・前提の消えたカードは class `stale`)。記録が無いまま消すと、どのカードをどの証拠で閉じたかが git の差分にしか残らない
    (2026-10-26〜11-13 に消えた 134 枚のうち 105 枚に記録が無かった)。
+7. **承認待ちをまとめて聞く (2026-11-14 オーナー決定)。** `npm run backlog:waits -- approvals` の表を、レビュー本文の
+   「オーナーへの確認」節にそのまま載せ、会話でも見せる。表は `[待ち:承認]` のカード (公開・本番反映・正本の上書きなど、
+   オーナーの可否を待つもの) で、1 枚ずつではなく一覧で可否をもらう。可と返ったカードは、その場で担当 agent が実行し、
+   完了したら 6 の手順で消す。否・保留のカードは理由を本文に 1 行書く。作り直せる生成物の R2 への push と、検査・再生成の
+   workflow の起動は承認が要らないので、この表を待たずに実行する (線引きは `todo-standards.md` §7)。
+8. **流入と流出を書く。** `npm run backlog:waits -- flow` の今週の起票数・閉じた数・総枚数を「計測→記録→改善サイクル」節に書く。
+   総枚数が目安を超えている週は、次週計画の Must に削減 (完了カードの削除・統合・期日超過の整理) を 1 つ入れる。
+   期日を過ぎたカード (`npm run backlog:waits -- due --week <YYYY-Www>`) は、今週やる・期日を引き直す・消すのどれかに決める。
 
 ## Phase 1: 実績収集
 
@@ -116,6 +124,7 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 | 開発 | `git log --since`、`git status --short` |
 | コンテンツ | R2 blog/ranking snapshot、topic/remediation queue |
 | 性能・流入 | GSC / GA4の確定7日summary、SNSの最新snapshot |
+| 検索の需要 | アクセス・需要・人気の質問はまず `data/gsc/DEMAND-LATEST.md` (長期は `demand-history.csv`) を読み、期間とキーワード表の捕捉率を添えて答える。生の `snapshots/<週>/queries.csv` から直接答えない |
 | 検索成長 | `npm run search-growth:status`、`npm run search-growth:next -- --limit 10` |
 | GSC画面監査・技術是正 | `data/gsc/ui-audits/`、`data/improvement/gsc-improvement/improvement-log.md`、`.claude/todo/backlog.md`。全除外理由・メッセージ・拡張の監査、本番反映、Google再検証を `.claude/skills/analytics/gsc-improvement/SKILL.md`「画面監査・技術是正とレビューへの引き渡し」に従って読む。新通知・監査から7日超・確認期日到達なら該当画面を再確認し、取得不可はBlockersへ |
 | NSM実験 | `.claude/skills/management/nsm-experiment/reference/` |

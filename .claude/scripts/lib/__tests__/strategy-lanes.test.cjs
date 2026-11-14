@@ -211,12 +211,25 @@ test('[kpi:] の無い施策・ツリーに無い id・領域表の未知 KPI �
 });
 
 test('上限超過と [target:] 欠落は DG080 warning、上限ちょうどは出さない', () => {
-  const row = (i, hasTarget = true) => ({ id: `R-${i}`, kpis: ['search-clicks'], hasTarget });
+  const row = (i, hasTarget = true, status = 'pending') => ({ id: `R-${i}`, kpis: ['search-clicks'], hasTarget, status });
   const at = Array.from({ length: MAX_ACTIVE_IMPROVEMENTS }, (_, i) => row(i));
   const audit = (rows) => auditKpiLinkage({ lanes: [], improvementRows: rows, kpiNodes: KPI_NODES, files: {} }).issues.map((i) => i.message);
   assert.deepStrictEqual(audit(at), []);
   assert.match(audit([...at, row('x')]).join(), /上限 \d+ 件を超えている/);
   assert.match(audit([row('y', false)]).join(), /\[target:\] の無い施策 1 件/);
+});
+
+test('DG080 の上限は pending / in-progress だけを数え、観測だけの effect/pending は数えない', () => {
+  const row = (i, status) => ({ id: `S-${i}`, kpis: ['search-clicks'], hasTarget: true, status });
+  const audit = (rows) => auditKpiLinkage({ lanes: [], improvementRows: rows, kpiNodes: KPI_NODES, files: {} }).issues.map((i) => i.message).join();
+  const working = Array.from({ length: MAX_ACTIVE_IMPROVEMENTS }, (_, i) => row(i, i % 2 ? 'in-progress' : 'pending'));
+  const observing = Array.from({ length: 3 }, (_, i) => row(`o${i}`, 'effect/pending'));
+  assert.doesNotMatch(audit([...working, ...observing]), /上限/, '観測待ちを足しても上限に掛からない');
+  assert.match(audit([...working, row('x', 'in-progress')]), /active 施策 \(pending \/ in-progress\) 6 件が上限 5 件/);
+  // 実ファイルの表からも Status を読んで数える
+  const md = ['## Tier 1', '', '| ID | タイトル | Status | Due | Owner | Metric |', '|---|---|---|---|---|---|',
+    ...Array.from({ length: 6 }, (_, i) => `| T-0${i} | 施策 [kpi: search-clicks] [target: +1] | ${i < 2 ? 'effect/pending' : 'pending'} | 2026-12-31 | a | m |`)].join('\n');
+  assert.doesNotMatch(audit(parseImprovementRows(md)), /上限/, 'pending 4 件 + effect/pending 2 件は上限内');
 });
 
 test('「効果判定エンジン対象外: 理由」の行は [target:] 欠落に数えない (計測サイクルと同じ判定)', () => {
@@ -329,4 +342,14 @@ test('DG080は登録済みtyped baselineだけをtarget欠落と区別する', (
   assert.deepStrictEqual(audit('ADSENSE-PLACEMENT-01', 'adsense', '再開baseline観測'), []);
   assert.equal(audit('ADSENSE-NEW-EXPERIMENT', 'adsense', 'baseline観測だからtarget不要').length, 1);
   assert.equal(audit('ADSENSE-PLACEMENT-01', 'gsc', 'baseline').length, 1);
+});
+
+test('年間計画 (annual.md) へ移したカードの ID も、週次の Must から領域を引ける', () => {
+  const annualText = ['## 2026-12', '', '### [WAIT-M-01] 公表を待つ', 'タグ: [インフラ・計測] [種類:改善] [実行:対話] [領域:計測] [待ち:時期] [期日:2026-12-15]', ''].join('\n');
+  const args = { stances: STANCES_DOC, backlogText: BACKLOG, improvementsText: IMPROVEMENTS, monthlyText: monthly('focus_domains: [計測]'), weeklyText: weekly(['- [ ] **公表** — `WAIT-M-01`']), kpiNodes: KPI_NODES };
+  const without = auditLaneAlignment(args);
+  assert.ok(without.issues.some((i) => i.code === 'DG077'), '年間計画を渡さなければ領域を引けない');
+  const withAnnual = auditLaneAlignment({ ...args, annualText });
+  assert.ok(!withAnnual.issues.some((i) => i.code === 'DG077'));
+  assert.deepStrictEqual(withAnnual.weekly[0].lanes, ['計測']);
 });

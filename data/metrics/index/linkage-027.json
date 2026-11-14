@@ -1776,6 +1776,194 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:water-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area:01000",
           "kind": "area"
         },
@@ -1978,9 +2166,15 @@
         {
           "pageId": "ranking:sewage-treatment-coverage-rate",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:water-services",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "water-services"
+      ]
     },
     {
       "metricKey": "sewerage-coverage-rate",
@@ -2003,6 +2197,468 @@
         },
         "derived": false,
         "configHash": "e11822faf387fd5d"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:01000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:sewerage-coverage-rate-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:sewerage-coverage-rate",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:environmental-quality",
+          "kind": "theme"
+        },
+        {
+          "pageId": "theme:water-services",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "environmental-quality",
+        "water-services"
+      ]
+    },
+    {
+      "metricKey": "sewerage-drainage-population",
+      "pageId": "ranking:sewerage-drainage-population",
+      "title": "下水道排水区域人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010108",
+          "filters": {
+            "cdCat01": "H540301"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010108",
+          "cdCat01": "H540301"
+        },
+        "derived": false,
+        "configHash": "dbc0fbea2e756e09"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:water-infrastructure-crisis",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:sewerage-drainage-population",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sewerage-penetration-rate-2012on",
+      "pageId": "ranking:sewerage-penetration-rate-2012on",
+      "title": "下水道普及率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010208",
+          "filters": {
+            "cdCat01": "#H0530401"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H0530401"
+        },
+        "derived": false,
+        "configHash": "be3d171cd65381c7"
       },
       "dependencies": [],
       "normalizationDependencies": [],
@@ -2196,87 +2852,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "blog:sewerage-coverage-rate-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:sewerage-coverage-rate",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:water-services",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "water-services"
-      ]
-    },
-    {
-      "metricKey": "sewerage-drainage-population",
-      "pageId": "ranking:sewerage-drainage-population",
-      "title": "下水道排水区域人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010108",
-          "filters": {
-            "cdCat01": "H540301"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010108",
-          "cdCat01": "H540301"
-        },
-        "derived": false,
-        "configHash": "dbc0fbea2e756e09"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:water-infrastructure-crisis",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:sewerage-drainage-population",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "sewerage-penetration-rate-2012on",
-      "pageId": "ranking:sewerage-penetration-rate-2012on",
-      "title": "下水道普及率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010208",
-          "filters": {
-            "cdCat01": "#H0530401"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010208",
-          "cdCat01": "#H0530401"
-        },
-        "derived": false,
-        "configHash": "be3d171cd65381c7"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
           "pageId": "blog:sewage-treatment-coverage-rate-vs-sewerage-penetration-rate",
           "kind": "blog"
         },
@@ -2295,9 +2870,15 @@
         {
           "pageId": "ranking:sewerage-penetration-rate-2012on",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:water-services",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "water-services"
+      ]
     },
     {
       "metricKey": "sewerage-penetration-rate-pre2011",

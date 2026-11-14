@@ -90,7 +90,7 @@
     {
       "rankingKey": "total-museum-count",
       "shortLabel": "博物館総数",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "社会教育調査 平成20年度 統計表 博物館調査（博物館）91「種類別博物館数（都道府県別）」（文部科学省）",
         "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0003021737",
@@ -189,10 +189,100 @@
       "rankingKey": "hobby-participation-rate-knitting",
       "shortLabel": "編み物・手芸の行動者率",
       "role": "context"
+    },
+    {
+      "rankingKey": "museum-count-per-million",
+      "shortLabel": "博物館数(人口100万人あたり)",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「博物館 数」「博物館 入館者数ランキング 日本」を調べる読者に、総数ではなく人口に対する博物館の多さを答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "library-books",
+      "shortLabel": "図書館蔵書数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "検索需要が最も大きい「図書館 蔵書数 ランキング」「図書館 蔵書数」に直接答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "library-registered-users",
+      "shortLabel": "図書館登録者数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「図書館 利用率 ランキング」「図書館 利用者数」に近い、図書館を実際に使う人の規模を貸出冊数と並べて示す。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "registered-museum-visitors",
+      "shortLabel": "登録博物館の入館者数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040439522&fileKind=0",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「博物館 入館者数ランキング 日本」「博物館 入場者数ランキング 日本」に、2023年度の登録博物館の入館者数で答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
     }
   ],
   "charts": [],
   "metricGroups": [
+    {
+      "key": "cultural-facilities-1",
+      "title": "博物館数(人口100万人あたり)",
+      "rankingKeys": [
+        "museum-count-per-million"
+      ],
+      "defaultCheckedKeys": [
+        "museum-count-per-million"
+      ]
+    },
+    {
+      "key": "cultural-facilities-2",
+      "title": "図書館の貸出冊数・蔵書数・登録者数の推移",
+      "rankingKeys": [
+        "library-lending-books",
+        "library-books",
+        "library-registered-users"
+      ],
+      "defaultCheckedKeys": [
+        "library-lending-books",
+        "library-books",
+        "library-registered-users"
+      ]
+    },
+    {
+      "key": "cultural-facilities-3",
+      "title": "登録博物館の入館者数",
+      "rankingKeys": [
+        "registered-museum-visitors"
+      ],
+      "defaultCheckedKeys": [
+        "registered-museum-visitors"
+      ]
+    },
     {
       "key": "cultural-participation-1",
       "title": "美術鑑賞の行動者率",
@@ -234,26 +324,6 @@
       ]
     },
     {
-      "key": "cultural-facilities-1",
-      "title": "図書館館外貸出冊数",
-      "rankingKeys": [
-        "library-lending-books"
-      ],
-      "defaultCheckedKeys": [
-        "library-lending-books"
-      ]
-    },
-    {
-      "key": "cultural-facilities-2",
-      "title": "博物館総数",
-      "rankingKeys": [
-        "total-museum-count"
-      ],
-      "defaultCheckedKeys": [
-        "total-museum-count"
-      ]
-    },
-    {
       "key": "leisure-and-relaxation-time-1",
       "title": "男性と女性の休養・くつろぎ時間",
       "rankingKeys": [
@@ -282,9 +352,19 @@
   ],
   "sections": [
     {
+      "key": "cultural-facilities",
+      "title": "図書館や博物館は、人口に対してどれだけあり、使われているか",
+      "concern": "身近な地域に図書館や博物館があり、実際に利用されているのかを知りたい。",
+      "metricGroupKeys": [
+        "cultural-facilities-1",
+        "cultural-facilities-2",
+        "cultural-facilities-3"
+      ]
+    },
+    {
       "key": "cultural-participation",
-      "title": "地域で文化芸術の鑑賞や制作活動に親しむ機会はあるか",
-      "concern": "日々の生活で美術鑑賞や舞台芸術、創作活動に親しむ機会があるか気になります。",
+      "title": "文化芸術を鑑賞したり制作したりする人はどれだけいるか",
+      "concern": "日々の生活で美術鑑賞や舞台芸術、創作活動に親しむ人がどれくらいいるのか気になる。",
       "metricGroupKeys": [
         "cultural-participation-1",
         "cultural-participation-2",
@@ -293,18 +373,9 @@
       ]
     },
     {
-      "key": "cultural-facilities",
-      "title": "博物館や図書館など身近な文化施設は充実しているか",
-      "concern": "身近な地域に博物館や図書館など文化に触れられる施設があるか不安です。",
-      "metricGroupKeys": [
-        "cultural-facilities-1",
-        "cultural-facilities-2"
-      ]
-    },
-    {
       "key": "leisure-and-relaxation-time",
-      "title": "趣味や娯楽、くつろぎ時間をどれくらい確保できているか",
-      "concern": "忙しい生活の中で趣味・娯楽や休養の時間を十分に確保できているか心配です。",
+      "title": "趣味や娯楽、くつろぎの時間をどれくらい確保できているか",
+      "concern": "忙しい生活の中で趣味・娯楽や休養の時間を十分に確保できているか心配だ。",
       "metricGroupKeys": [
         "leisure-and-relaxation-time-1",
         "leisure-and-relaxation-time-2"

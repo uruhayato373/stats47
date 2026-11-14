@@ -81,7 +81,7 @@ OAuth scope、必要ロールまで公式リファレンスとローカル `goog
 | custom dimension登録状況 | `.claude/rules/analytics-event-standards.md` |
 | code slot定義 | `apps/web/src/lib/google-adsense/constants.ts` |
 | AdSense report契約 | `.claude/scripts/metrics/lib/adsense-report-contract.mjs` |
-| secret / env名 | `.claude/config/env-registry.json` |
+| secret / env名 | `config/env-registry.json` |
 | 自動処理の索引 | `docs/01_技術設計/06_自動化インベントリ.md` |
 | 生成された監査state | `.claude/state/metrics/google-admin/` |
 
@@ -380,7 +380,7 @@ AdSense unit作成・改名は管理画面で人が行い、その後API invento
 
 ### Phase 5: 認証・文書ドリフトを整理する
 
-1. `.claude/config/env-registry.json`へ
+1. `config/env-registry.json`へ
    `GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON`をsecretとして追加する。
 2. active参照がない`GOOGLE_OAUTH_*`はcleanup候補として最終報告する。
    外部secretは削除しない。

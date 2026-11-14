@@ -37,13 +37,65 @@
         "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010103",
         "rationale": "同じ2015年基準で47県を確認した2011〜2021年度の付加価値を比較する。"
       }
+    },
+    {
+      "rankingKey": "employment-location-quotient-information-communication",
+      "shortLabel": "従業者特化係数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0004005665",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「東京都 情報通信産業」「情報通信事業 東京都」の検索に、総数ではなく全国比の集まり具合(全国並み=1)で答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "information-communication-industry-annual-income",
+      "shortLabel": "情報通信業の平均年収",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「情報通信・ITの仕事の年収は県でどう違うか」に、情報通信業で働く人の推計年収で答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "software-engineer-annual-income",
+      "shortLabel": "ソフトウェア作成者の平均年収",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「ソフトウェア 年収」「プログラマ 年収 中央値」の検索語に、職種で見た推計年収で答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
     }
   ],
   "charts": [],
   "metricGroups": [
     {
-      "key": "information-establishments",
-      "title": "情報通信業の事業所",
+      "key": "industry-locations-1",
+      "title": "従業者特化係数",
+      "rankingKeys": [
+        "employment-location-quotient-information-communication"
+      ],
+      "defaultCheckedKeys": [
+        "employment-location-quotient-information-communication"
+      ]
+    },
+    {
+      "key": "industry-locations-2",
+      "title": "事業所数",
       "rankingKeys": [
         "information-private-establishments"
       ],
@@ -52,8 +104,8 @@
       ]
     },
     {
-      "key": "information-employment",
-      "title": "情報通信業の従業者",
+      "key": "industry-locations-3",
+      "title": "従業者数",
       "rankingKeys": [
         "information-private-employees"
       ],
@@ -62,39 +114,55 @@
       ]
     },
     {
-      "key": "information-value-added",
-      "title": "情報通信業の付加価値",
+      "key": "industry-value-added-1",
+      "title": "県内総生産（名目・2015年基準）",
       "rankingKeys": [
         "gross-prefectural-product-information-communication-h27"
       ],
       "defaultCheckedKeys": [
         "gross-prefectural-product-information-communication-h27"
+      ]
+    },
+    {
+      "key": "industry-value-added-2",
+      "title": "情報通信業の平均年収",
+      "rankingKeys": [
+        "information-communication-industry-annual-income"
+      ],
+      "defaultCheckedKeys": [
+        "information-communication-industry-annual-income"
+      ]
+    },
+    {
+      "key": "industry-value-added-3",
+      "title": "ソフトウェア作成者の平均年収",
+      "rankingKeys": [
+        "software-engineer-annual-income"
+      ],
+      "defaultCheckedKeys": [
+        "software-engineer-annual-income"
       ]
     }
   ],
   "sections": [
     {
       "key": "industry-locations",
-      "title": "情報通信業の事業所はどこに集まるか",
-      "description": "2021年6月1日時点の民営事業所を所在地で比較します。企業本社の所在地に集約した企業数ではありません。",
+      "title": "情報通信業はどこに集まっているか",
+      "concern": "自分の県で情報通信業がどれくらい盛んか、東京への集中の中で県の強みはどこにあるかを知りたい。",
       "metricGroupKeys": [
-        "information-establishments"
-      ]
-    },
-    {
-      "key": "industry-workers",
-      "title": "情報通信業で働く人はどこに多いか",
-      "description": "2021年6月1日時点の民営事業所の従業者数です。2021年調査では対象名簿が拡充されているため、過去年との単純な増減率は示していません。",
-      "metricGroupKeys": [
-        "information-employment"
+        "industry-locations-1",
+        "industry-locations-2",
+        "industry-locations-3"
       ]
     },
     {
       "key": "industry-value-added",
-      "title": "情報通信業はどれだけの付加価値を生んでいるか",
-      "description": "2015年基準・名目県内総生産。情報通信業の生産額から中間投入を除いた付加価値。年度計であり企業売上高ではない。2021年6月1日の事業所従業者数で割算して生産性を作らない。採用窓は原典で47県を確認した2011〜2021年度。",
+      "title": "情報通信業はどれだけ稼ぎ、働く人の年収はどうか",
+      "concern": "情報通信業の付加価値の大きさと、そこで働く人・ソフトウェアの仕事の年収が県でどう違うかを知りたい。",
       "metricGroupKeys": [
-        "information-value-added"
+        "industry-value-added-1",
+        "industry-value-added-2",
+        "industry-value-added-3"
       ]
     }
   ],

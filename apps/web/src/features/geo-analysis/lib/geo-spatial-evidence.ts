@@ -130,14 +130,24 @@ function lowElevationAuditRows(
   ];
 }
 
+/**
+ * 1 万倍で持つ按分人口 (豪雪・土砂災害) を、数値タイルの値として人の単位に丸めて書く。
+ * 小数 4 桁のまま値に入れると「2,201,271.9866人」が幅 1280px の 4 列のマスに収まらず、末尾の「人」だけが
+ * 2 行目に折り返す (UI-FOLLOWUP-02)。丸め前の値は補足の内訳に残し、検算は丸め前の値で行う。
+ */
+function scaledPeopleValue(scaled: number): string {
+  return `${Math.round(scaled / 10000).toLocaleString('ja-JP')}人`;
+}
+
 export function spatialAuditRows(
   detail: GeoAnalysisPrefDetail
 ): SpatialAuditRow[] {
   if (detail.slug === 'population-landslide-exposure') {
-    if (detail.status !== 'available') return [{ label: '対象外', value: detail.reason }];
+    // 理由の文章は値 (24px) に入れず補足 (12px) に置く。値に入れると 1 枚が 5 行になる (UI-FOLLOWUP-02)
+    if (detail.status !== 'available') return [{ label: '土砂災害警戒区域の人口と施設', value: '対象外', meta: detail.reason }];
     const s=detail.summary, people=(v:number)=>(v/10000).toLocaleString('ja-JP',{maximumFractionDigits:4});
     return [
-      { label: '入力面外 + 警戒のみ + 特別 = 基準人口', value: `${people(s.totalScaled)}人`, meta: s.exclusiveScaled.map(people).join(' + ') },
+      { label: '入力面外 + 警戒のみ + 特別 = 基準人口', value: scaledPeopleValue(s.totalScaled), meta: s.exclusiveScaled.map(people).join(' + ') },
       { label: '市町村役場等：入力面外 + 警戒のみ + 特別 = 全施設', value: `${s.facilities.administrative.totalScaled}施設`, meta: s.facilities.administrative.exclusiveScaled.join(' + ') },
       { label: '公的集会施設：入力面外 + 警戒のみ + 特別 = 全施設', value: `${s.facilities.meeting.totalScaled}施設`, meta: s.facilities.meeting.exclusiveScaled.join(' + ') },
     ];
@@ -148,10 +158,10 @@ export function spatialAuditRows(
   if (detail.slug === 'population-snow-designation') {
     const s=detail.summary, people=(v:number)=>`${(v/10000).toLocaleString('ja-JP',{maximumFractionDigits:4})}人`;
     return [
-      {label:'区域外 + 通常豪雪 + 特別豪雪 = 基準人口',value:people(s.populationTotalScaled),meta:s.populationScaled.map(people).join(' + ')},
+      {label:'区域外 + 通常豪雪 + 特別豪雪 = 基準人口',value:scaledPeopleValue(s.populationTotalScaled),meta:s.populationScaled.map(people).join(' + ')},
       // 採る値は中心包含。格子全体が区域に入る人口 (全格子包含) と、区域に少しでも掛かる格子の人口 (一部交差) が下限と上限
-      {label:'指定区域の人口：中心包含（全格子包含 〜 一部交差）',value:people(s.populationScaled[1]+s.populationScaled[2]),meta:`全格子包含 ${people(s.lowerScaled[0])} 〜 一部交差 ${people(s.upperScaled[0])}`},
-      {label:'境界を横切る格子人口',value:people(s.boundaryScaled[0])},
+      {label:'指定区域の人口：中心包含（全格子包含 〜 一部交差）',value:scaledPeopleValue(s.populationScaled[1]+s.populationScaled[2]),meta:`全格子包含 ${people(s.lowerScaled[0])} 〜 一部交差 ${people(s.upperScaled[0])}`},
+      {label:'境界を横切る格子人口',value:scaledPeopleValue(s.boundaryScaled[0])},
       {label:'通常区域 + 特別区域 = 指定区域面積',value:`${s.designatedAreaKm2.toFixed(3)} km²`,meta:`${s.regularOnlyAreaKm2.toFixed(3)} + ${s.specialAreaKm2.toFixed(3)}`},
     ];
   }

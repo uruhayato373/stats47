@@ -3127,7 +3127,7 @@
       "key": "CloudflarePages",
       "title": "CloudflarePages",
       "href": "/tag/CloudflarePages",
-      "published": true
+      "published": false
     },
     {
       "id": "tag:t-3050c10e6d16",
@@ -5943,6 +5943,14 @@
       "key": "警察官数",
       "title": "警察官数",
       "href": "/tag/%E8%AD%A6%E5%AF%9F%E5%AE%98%E6%95%B0",
+      "published": true
+    },
+    {
+      "id": "tag:t-c06b1b297335",
+      "kind": "tag",
+      "key": "CloudflareWorkers",
+      "title": "CloudflareWorkers",
+      "href": "/tag/CloudflareWorkers",
       "published": true
     },
     {

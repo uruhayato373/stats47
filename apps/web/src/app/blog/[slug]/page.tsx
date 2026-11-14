@@ -1,5 +1,3 @@
-import { Suspense } from "react";
-
 import { notFound } from "next/navigation";
 
 import { fetchPrefectures } from "@stats47/area";
@@ -32,7 +30,7 @@ import {
     RelatedAmazonBook,
 } from "@/features/ads";
 import { resolveContentVertical } from "@/features/ads/constants/affiliate-category";
-import { applyBlogAffiliatePolicy, resolveBlogBannerInput } from "@/features/ads/constants/blog-affiliate-policy";
+import { resolveBlogBannerInput } from "@/features/ads/constants/blog-affiliate-policy";
 import { adRowTargets, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, migrateLegacyDataSourceSection } from "@/features/blog";
 import { blogR2Key } from "@/features/blog/r2-key";
 import {
@@ -161,13 +159,8 @@ export default async function BlogPostPage({ params }: PageProps) {
     // 解決順は **記事明示policy → 出典調査 → タグ** (`resolveContentVertical`)。
     //   家計調査の記事 (ブログ imp の 17%) は食文化タグで economy に落ち金融広告が出ていた。
     //   all.json の surveyIds 焼き込みで家計調査 → furusato、気象統計 → 広告なし、のように決める。
-    const affiliateInput = applyBlogAffiliatePolicy(slug, {
-        surveyIds: article.surveyIds,
-        tagKeys,
-    });
     // A8 のバナー・テキスト広告は、出典調査だけで furusato になる地域の食卓・特産品以外の記事には出さない
-    //   (ビール記事にふるさと納税ポータルが出ていた。2026-09-24)。楽天カードは affiliateInput のまま判定し、
-    //   主題の品目カードは残す。
+    //   (ビール記事にふるさと納税ポータルが出ていた。2026-09-24)。
     const bannerInput = resolveBlogBannerInput(
         slug,
         { surveyIds: article.surveyIds, tagKeys },

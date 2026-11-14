@@ -111,16 +111,21 @@ primary_agent: strategy-advisor
 
 1. 今月の重点領域を選んだら、その領域の台帳の `kpis` の id を重点ごとの **ゴール（月末に検証可能）** の指標にする。
    KPI 列が「—」の領域を重点にする場合は、計測の接続を構成タスクに入れる。
-2. **バックログの優先度を付け替える（毎月必須）**: `todo-curator` に棚卸し（期日超過・鮮度切れ・重複・分類待ちの提案）を依頼し、
+2. **今月に期日が来るカードを載せる（毎月必須）**: `npm run backlog:waits -- due --month <YYYY-MM>` で、backlog と年間計画
+   (`.claude/todo/annual.md`) のうち期日が今月に入るカードと期日超過を出す。今月の重点の構成タスクか「今月の期日もの」の節に
+   ID で載せ、どの週に扱うかを書く。来月以降に延ばすものは、年間計画の月見出しと `[期日:]` を移す。
+   あわせて `npm run backlog:waits -- flow` の総枚数が目安 (`docs-governance.json` の `todo.backlogTargetCards`) を超えていれば、
+   今月の重点の 1 つを「backlog を減らす」にするか、超えたまま進める理由を「現状サマリー」に書く。
+3. **バックログの優先度を付け替える（毎月必須）**: `todo-curator` に棚卸し（期日超過・鮮度切れ・重複・分類待ちの提案）を依頼し、
    その結果を見て 🔴 を付け替える。🔴 に残すのは「今月の重点領域で今月着手するもの」と `[種類:不具合]` で損失が出ているものだけで、
    上限 10 枚（`strategy-lanes.cjs` の `MAX_HIGH_TIER_CARDS`、`npm run docs:check` の DG081）に収める。
    それ以外と、起票から 30 日を過ぎた未着手の 🔴 は 🟡 へ下げるか、1 か月で終わる大きさに分割する。
    付け替えた枚数（🔴 何枚 → 何枚）を月次計画の「現状サマリー」に書く。
-3. **施策の棚卸し**: active 施策（improvements.md）が上限 5 件（`npm run docs:check` の DG080）を超えていれば、
+4. **施策の棚卸し**: active 施策（improvements.md）が上限 5 件（`npm run docs:check` の DG080）を超えていれば、
    重点領域の KPI に紐づかない施策から `improvement-triage` に判定・backlog 降格を依頼し、上限内に戻す。
    `[target:]` の無い施策は、根拠を付けて target を書くか backlog へ降格するかを決める（放置すると永久に判定できない）。
 
-4. **主イシューと仮説を見直す**: 管理画面 `/strategy/issue-map` と `data/business/issue-map.json` の `issue`・`storyline` を読み、前月の判定で主イシューや仮説が変わるかを確かめる。実測が仮説を崩していれば `.claude/rules/evidence-based-judgment.md` に従って台帳を更新し、根拠を月次計画の「現状サマリー」に 1 行で書く。4 型 × 3 収益源の構成を変えるときはオーナーの判断を取る。マップの中身は月次計画へ写さず、マスの ID で参照する。
+5. **主イシューと仮説を見直す**: 管理画面 `/strategy/issue-map` と `data/business/issue-map.json` の `issue`・`storyline` を読み、前月の判定で主イシューや仮説が変わるかを確かめる。実測が仮説を崩していれば `.claude/rules/evidence-based-judgment.md` に従って台帳を更新し、根拠を月次計画の「現状サマリー」に 1 行で書く。4 型 × 3 収益源の構成を変えるときはオーナーの判断を取る。マップの中身は月次計画へ写さず、マスの ID で参照する。
 
 ### Phase 3: 月次計画の組み立て
 

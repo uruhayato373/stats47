@@ -1,7 +1,7 @@
 // テンプレート (shadcndashboard/next-shadcn-dashboard@91deb102・Base UI) の badge.tsx をそのまま使う。変えたのは import 先 (相対パス) だけ。
 // 取り直すときは同じコミットの components/ui/ から写す (packages/ui-theme/README.md)。
 // lyra の cn-* 規則が別の値で上書きする素のクラス (rounded-xl・text-sm 等) は消してある (packages/ui-theme/README.md の差の一覧)。
-// lyra の値は cva の外 (<名前>Lyra) に書き、呼び出し側の className より後ろで合成する (scripts/ui-theme/inline-lyra.mjs)。
+// lyra の値は cva の外 (<名前>Lyra) に書き、呼び出し側の className より後ろで合成する (.claude/scripts/ui/inline-lyra.mjs)。
 import { mergeProps } from "@base-ui/react/merge-props"
 import { useRender } from "@base-ui/react/use-render"
 import { cva, type VariantProps } from "class-variance-authority"
@@ -30,7 +30,7 @@ const badgeClasses = cva(
     },
   }
 )
-// lyra:begin badgeClasses (scripts/ui-theme/inline-lyra.mjs が style-lyra.css から書く。手で直さない)
+// lyra:begin badgeClasses (.claude/scripts/ui/inline-lyra.mjs が style-lyra.css から書く。手で直さない)
 const badgeClassesLyra = cva("h-5 gap-1 rounded-md border border-transparent px-2 py-0.5 text-xs font-medium transition-all has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&>svg]:size-3!", {
   variants: {
     variant: {

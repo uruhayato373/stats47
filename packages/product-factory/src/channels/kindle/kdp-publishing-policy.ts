@@ -91,7 +91,7 @@ export const KDP_PORTFOLIO_POLICY = {
  * 4週実測後に1冊ずつ試す3パイロットの計15冊。S2/S3/S4の旧設計20冊は未承認。
  */
 export const KDP_PUBLICATION_PLAN = {
-  registeredCatalogCount: 33,
+  registeredCatalogCount: 38,
   approvedS1Count: 12,
   evidenceGatedPilotCount: 3,
   activePublicationTargetCount: 15,
@@ -124,13 +124,17 @@ export const KDP_PUBLICATION_PLAN = {
   pilots: [
     {
       ordinal: 1,
-      concept: "47県庁所在市の食卓・家計ガイド",
-      format: "1県1章",
+      // 当初の企画は「47県庁所在市の食卓・家計ガイド (1県1章)」。県別の食卓はサイトと note で無料公開済みだったので、
+      // 問いを「47都市の食卓は似てきたのか」に変えて K-S1-14 として出した (2026-11-14 オーナー承認。週次の判定は判定不能のまま)。
+      bookId: "K-S1-14",
+      concept: "47都市の食卓は似てきたのか (県庁所在市の19年の変化)",
+      format: "問いに答える読み物 + 47都市の事実票",
       plannedPreparationWeek: "2026-W40",
       earliestPublicationWeek: "2026-W41",
     },
     {
       ordinal: 2,
+      bookId: "K-S4-02",
       concept: "意外な1位ストーリー集",
       format: "見出し駆動の県民性ストーリー",
       plannedPreparationWeek: "2026-W44",
@@ -138,6 +142,7 @@ export const KDP_PUBLICATION_PLAN = {
     },
     {
       ordinal: 3,
+      bookId: "K-S2-12",
       concept: "47都道府県 総合スコアブック",
       format: "指標横断の合成スコア",
       plannedPreparationWeek: "2026-W48",
