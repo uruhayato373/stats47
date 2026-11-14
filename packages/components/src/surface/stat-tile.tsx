@@ -19,6 +19,24 @@ export const STAT_LABEL_CLASS = "text-sm leading-5 text-foreground";
 /** 値 (24px / 32px・600・等幅数字) */
 export const STAT_VALUE_CLASS = "text-2xl leading-8 font-semibold tabular-nums text-foreground";
 
+/**
+ * タイルの中の値は、タイルの幅が 12rem 以上のとき 24px / 32px、それ未満 (スマホの幅で 2 列に並べたときの 1 マス。2026-11-14) は
+ * 下の narrowValueClass の大きさにする。24px のままだと 9 桁の値 (113,039,852) が数字の途中で折り返す。
+ * タイルの外で STAT_VALUE_CLASS を使う所は変えない。
+ */
+const STAT_VALUE_WIDE_CLASS = "@[12rem]/stat-tile:text-2xl @[12rem]/stat-tile:leading-8";
+
+/**
+ * 幅の狭いタイルでの値の文字の大きさ。1 マスの中身は約 146px (幅 390px の画面で 2 列) なので、桁の多い値ほど小さくして
+ * 1 行に収める: 10 文字まで 20px、11〜12 文字 18px、13 文字以上 16px (等幅数字の実測。「113,039,852」は 11 文字)。
+ * 文字でない値 (部品) は 20px。
+ */
+function narrowValueClass(value: ReactNode): string {
+  const length = typeof value === "string" || typeof value === "number" ? String(value).length : 0;
+  const size = length >= 13 ? "text-base leading-7" : length >= 11 ? "text-lg leading-7" : "text-xl leading-7";
+  return `${size} ${STAT_VALUE_WIDE_CLASS}`;
+}
+
 /** 値の直後の単位 */
 export const STAT_UNIT_CLASS = "ml-1 text-sm font-normal text-muted-foreground";
 
@@ -60,7 +78,8 @@ export function StatTile({
 }: StatTileProps) {
   return (
     <SurfaceCard data-slot-kind="stat-tile" className={cn("gap-3", action ? "relative" : undefined, className)}>
-      <div className="flex items-start justify-between gap-3">
+      {/* 値の文字の大きさをタイルの幅で決めるためのコンテナ (narrowValueClass) */}
+      <div className="@container/stat-tile flex items-start justify-between gap-3">
         {/* 枠より長い数や式は途中で折り返す (wrap-anywhere)。付けないと桁の多い値が枠の外へはみ出す。呼び出し側で付け足さない */}
         <dl className="flex min-w-0 flex-col gap-1 wrap-anywhere">
           {/* 右上の操作は値の行の幅を削らないよう重ねて置き、名前の行だけその分を空ける */}
@@ -69,7 +88,7 @@ export function StatTile({
             {value === null ? (
               <span className="text-sm text-muted-foreground">—</span>
             ) : (
-              <span className={STAT_VALUE_CLASS}>
+              <span className={cn(STAT_VALUE_CLASS, narrowValueClass(value))}>
                 {value}
                 {unit ? <span className={STAT_UNIT_CLASS}>{unit}</span> : null}
               </span>

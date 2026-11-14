@@ -339,11 +339,11 @@ describe('ThemeMetricsDashboard — 連続する 1 指標カードのグリッ�
     const grids = container.querySelectorAll('[data-theme-panel-grid="compact"]');
     expect(grids).toHaveLength(2);
     const grid = grids[0] as HTMLElement;
-    // 数値タイルの格子 (StatTileGrid) で並べる: 列の数は部品が本文の幅で決め (1 / 2 / 4 列)、ページは指定しない。
+    // 数値タイルの格子 (StatTileGrid) で並べる: 列の数は部品が本文の幅で決め (2 / 4 列)、ページは指定しない。
     // 同じ行のカードは同じ高さに伸びる (items-start で縮めると、格子の地 (線の色) がカードの下に見えてしまう)
     expect(grid.querySelector('[data-slot-kind="stat-tile-grid"]')).not.toBeNull();
     const lineGrid = grid.querySelector('[data-slot="panel-grid"]') as HTMLElement;
-    expect(lineGrid).toHaveClass('grid', 'gap-px', 'grid-cols-1', '@sm:grid-cols-2');
+    expect(lineGrid).toHaveClass('grid', 'gap-px', 'grid-cols-2', '@md:grid-cols-4');
     expect(lineGrid).not.toHaveClass('items-start');
     expect(
       within(grid)
