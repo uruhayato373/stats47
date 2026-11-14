@@ -13,6 +13,7 @@
  *   --allow-authoritative-overwrite が無いかぎり key を列挙して非 0 で止まる。新しい key の追加は止めない。
  *   CI (GITHUB_ACTIONS=true) では段階導入として既定は警告して続行し、R2_AUTHORITATIVE_GUARD=enforce で止める。
  * - 書いた後に送った件数と、抜き取り (最大 20 件) の HEAD 読み戻し (サイズ・ETag) を照合する。
+ *   件数の不一致は常に止める。読み戻しの不一致は CI では既定で警告して続行し、R2_AUTHORITATIVE_GUARD=enforce で止める。
  * - R2 から object を削除しない (ローカルから消えた key は manifest から外すだけ)。
  *
  * 使い方:
@@ -283,6 +284,7 @@ async function main(): Promise<void> {
     removedKeys: removed,
     flags,
     authoritativeGuard: resolveAuthoritativeGuardMode(),
+    readbackGuard: resolveAuthoritativeGuardMode(),
     concurrency: CONCURRENCY,
     io: {
       list: (prefixes) => listRemoteObjects(s3, prefixes),
@@ -329,7 +331,7 @@ async function main(): Promise<void> {
   console.log("\n--- 完了 ---");
   console.log(`アップロード成功: ${result.success}`);
   console.log(`エラー: ${result.errors}`);
-  console.log(`読み戻し照合: ${result.readback.checked} 件`);
+  console.log(`読み戻し照合: ${result.readback.checked} 件 (不一致 ${result.readback.mismatches.length} 件・ETag を照合しなかった ${result.readback.etagSkipped} 件)`);
   console.log(`マニフェスト更新: ${getManifestPath(prefix)}`);
 }
 

@@ -8,6 +8,8 @@
  *     CI では段階導入として既定は警告して続行し、`R2_AUTHORITATIVE_GUARD=enforce` のときだけ止める
  *     (resolveAuthoritativeGuardMode)。ローカルでは常に止める。
  * (c) 書いた後、送った件数の一致と、抜き取り (既定 最大 20 件) の HEAD 読み戻し (サイズと ETag=MD5) を確かめる。
+ *     件数の不一致は常に止める。読み戻しの不一致は (b) と同じ段階導入で、CI の既定は警告して続行する
+ *     (R2_AUTHORITATIVE_GUARD=enforce で止める。ローカルは常に止める)。
  *
  * ETag と MD5 の関係: 1 回の PutObject で書いた object の ETag は本文の MD5 になる
  * (出典は lib/diff-push-remote-match.ts の冒頭。https://developers.cloudflare.com/r2/objects/upload-objects/#etags)。
@@ -194,13 +196,29 @@ export interface ReadbackTarget {
   md5: string;
 }
 
+/** multipart で書かれた object の ETag (`<hash>-<part 数>`)。本文の MD5 ではないので照合しない */
+const MULTIPART_ETAG = /^[0-9a-f]{32}-\d+$/;
+
+export interface ReadbackResult {
+  checked: number;
+  mismatches: string[];
+  /** ETag が multipart の形で、サイズだけを照合した件数 */
+  etagSkipped: number;
+}
+
+/**
+ * 抜き取った object を HEAD で読み戻し、サイズと ETag (=本文の MD5) を照合する。
+ * diff-push-r2 は 1 回の PutObject で送り multipart を使わないが、ETag が multipart の形で返ったときは
+ * MD5 と比べられないのでサイズだけを照合し、etagSkipped に数える。
+ */
 export async function verifyReadback(options: {
   targets: readonly ReadbackTarget[];
   head: (key: string) => Promise<ReadbackHead | null>;
   max?: number;
-}): Promise<{ checked: number; mismatches: string[] }> {
+}): Promise<ReadbackResult> {
   const sample = pickReadbackSample(options.targets, options.max ?? DEFAULT_READBACK_SAMPLE);
   const mismatches: string[] = [];
+  let etagSkipped = 0;
   for (const target of sample) {
     let head: ReadbackHead | null;
     try {
@@ -214,13 +232,15 @@ export async function verifyReadback(options: {
       continue;
     }
     const etag = (head.etag ?? "").replace(/^"|"$/g, "").toLowerCase();
-    if (head.contentLength !== target.size || etag !== target.md5.toLowerCase()) {
+    const isMultipart = MULTIPART_ETAG.test(etag);
+    if (isMultipart) etagSkipped += 1;
+    if (head.contentLength !== target.size || (!isMultipart && etag !== target.md5.toLowerCase())) {
       mismatches.push(
         `${target.key}: size ${head.contentLength}/${target.size} etag ${etag || "(なし)"}/${target.md5.toLowerCase()}`,
       );
     }
   }
-  return { checked: sample.length, mismatches };
+  return { checked: sample.length, mismatches, etagSkipped };
 }
 
 export interface DiffPushIo<T extends DiffPushFile> {
@@ -235,7 +255,7 @@ export interface DiffPushRunResult<T extends DiffPushFile> {
   attempted: number;
   success: number;
   errors: number;
-  readback: { checked: number; mismatches: string[] };
+  readback: ReadbackResult;
 }
 
 /**
@@ -253,6 +273,8 @@ export async function runDiffPush<T extends DiffPushFile>(options: {
   readbackMax?: number;
   /** 止め (b) の強さ。省略時は enforce (呼び元の CLI が resolveAuthoritativeGuardMode で決める) */
   authoritativeGuard?: AuthoritativeGuardMode;
+  /** 止め (c) の読み戻し不一致の強さ。省略時は enforce。件数の不一致はこの設定に関係なく常に止める */
+  readbackGuard?: AuthoritativeGuardMode;
   log?: (line: string) => void;
   /** 送信直前に送る対象を受け取る (blog 索引の条件付き PUT の準備など) */
   beforeUpload?: (targets: readonly T[]) => Promise<void>;
@@ -322,13 +344,23 @@ export async function runDiffPush<T extends DiffPushFile>(options: {
   const readbackTargets = pickReadbackSample(sorted, readbackMax)
     .map((f) => ({ key: f.key, size: f.size, md5: io.md5Of(f) }));
   const readback = await verifyReadback({ targets: readbackTargets, head: io.head, max: readbackMax });
+  const skippedNote = readback.etagSkipped > 0 ? ` (うち ETag が multipart の形でサイズだけ照合: ${readback.etagSkipped} 件)` : "";
   if (readback.mismatches.length > 0) {
-    throw new DiffPushGuardError(
-      [`書いた後の読み戻しが一致しません (${readback.mismatches.length}/${readback.checked} 件):`,
-        ...readback.mismatches.map((m) => `  ${m}`)].join("\n"),
-    );
+    const listed = readback.mismatches.map((m) => `  ${m}`);
+    if ((options.readbackGuard ?? "enforce") === "warn") {
+      // 段階導入: ETag=MD5 と HEAD の挙動を本物の R2 で確かめるまで、CI では書いた後に落とさず注釈で知らせる
+      log(`::warning title=R2 readback mismatch::書いた後の読み戻しが ${readback.mismatches.length}/${readback.checked} 件一致しません ` +
+        "(CI の段階導入で続行。止めるには R2_AUTHORITATIVE_GUARD=enforce)");
+      for (const line of listed) log(line);
+    } else {
+      throw new DiffPushGuardError(
+        [`書いた後の読み戻しが一致しません (${readback.mismatches.length}/${readback.checked} 件)${skippedNote}:`,
+          ...listed].join("\n"),
+      );
+    }
+  } else {
+    log(`読み戻し: ${readback.checked} 件を HEAD で照合し一致${skippedNote}`);
   }
-  log(`読み戻し: ${readback.checked} 件を HEAD で照合し一致`);
 
   return { plan, attempted: targets.length, success: uploaded.length, errors, readback };
 }

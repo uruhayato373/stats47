@@ -233,6 +233,53 @@ describe('(c) 書いた後の照合', () => {
   });
 });
 
+describe('(c) 段階導入: 読み戻しの不一致は CI では既定で警告して続行', () => {
+  const badEtag = () => ({ contentLength: 1, etag: '"00000000000000000000000000000000"' });
+  const runWith = (io: DiffPushIo<FakeFile>, env: NodeJS.ProcessEnv, log: (l: string) => void = quiet) => runDiffPush({
+    bucket: R2_PUBLIC_BUCKET, prefix: '', candidates: [file('app/ranking/a.json', '1')], flags: NO_FLAGS, io, log,
+    readbackGuard: resolveAuthoritativeGuardMode(env),
+  });
+
+  it('CI の既定は不一致の key を ::warning で列挙して続行する', async () => {
+    const lines: string[] = [];
+    const { io, puts } = fakeIo({ headOverride: badEtag });
+    const result = await runWith(io, { GITHUB_ACTIONS: 'true' }, (l) => lines.push(l));
+    expect(puts).toEqual(['app/ranking/a.json']);
+    expect(result.readback.mismatches).toHaveLength(1);
+    expect(lines.some((l) => l.startsWith('::warning title=R2 readback mismatch'))).toBe(true);
+    expect(lines.some((l) => l.includes('app/ranking/a.json: size 1/1 etag'))).toBe(true);
+  });
+
+  it('CI でも R2_AUTHORITATIVE_GUARD=enforce なら止まる', async () => {
+    const { io } = fakeIo({ headOverride: badEtag });
+    await expect(runWith(io, { GITHUB_ACTIONS: 'true', R2_AUTHORITATIVE_GUARD: 'enforce' }))
+      .rejects.toThrow(/読み戻しが一致しません/);
+  });
+
+  it('ローカルは常に止まる', async () => {
+    const { io } = fakeIo({ headOverride: badEtag });
+    await expect(runWith(io, { R2_AUTHORITATIVE_GUARD: 'warn' })).rejects.toThrow(/読み戻しが一致しません/);
+  });
+
+  it('送った件数の不一致は CI の既定 (warn) でも止まる', async () => {
+    const { io } = fakeIo({ putFails: () => true });
+    await expect(runWith(io, { GITHUB_ACTIONS: 'true' })).rejects.toThrow(/R2差分同期が不完全です/);
+  });
+
+  it('ETag が multipart の形ならサイズだけ照合し、照合しなかった件数を数える', async () => {
+    const lines: string[] = [];
+    const { io } = fakeIo({ headOverride: () => ({ contentLength: 1, etag: '"0123456789abcdef0123456789abcdef-3"' }) });
+    const result = await runWith(io, {}, (l) => lines.push(l));
+    expect(result.readback).toEqual({ checked: 1, mismatches: [], etagSkipped: 1 });
+    expect(lines.some((l) => l.includes('サイズだけ照合: 1 件'))).toBe(true);
+  });
+
+  it('ETag が multipart の形でもサイズが違えば不一致', async () => {
+    const { io } = fakeIo({ headOverride: () => ({ contentLength: 9, etag: '"0123456789abcdef0123456789abcdef-3"' }) });
+    await expect(runWith(io, {})).rejects.toThrow(/size 9\/1/);
+  });
+});
+
 describe('(d) 区分ごとの件数', () => {
   it('regenerable / authoritative ごとに NEW・CHANGED・削除・一致を数える', () => {
     const remote = new Map<string, RemoteObjectSummary>([

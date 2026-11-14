@@ -40,7 +40,8 @@ npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --dry-run
 |---|---|---|
 | R2 の一覧が取れない | 1 件も送らず非 0 | `--allow-full-upload` (照合せずに全件を送る) |
 | authoritative の上書き (CHANGED、一覧なしで判定不能のもの) | ローカルは key を列挙して非 0。CI (`GITHUB_ACTIONS=true`) は段階導入として既定で key を列挙する警告を出して続行し、`R2_AUTHORITATIVE_GUARD=enforce` のときだけ非 0。NEW は止めない | `--allow-authoritative-overwrite` |
-| 書いた後の件数不一致・抜き取り最大 20 件の HEAD (サイズ・ETag=MD5) 不一致 | 非 0 | なし |
+| 書いた後の件数不一致 | 非 0 (CI でも) | なし |
+| 抜き取り最大 20 件の HEAD (サイズ・ETag=MD5) 不一致 | ローカルは非 0。CI は既定で不一致の key を `::warning` で列挙して続行し、`R2_AUTHORITATIVE_GUARD=enforce` のときだけ非 0。ETag が multipart の形 (`<hash>-<n>`) ならサイズだけ照合し件数を出す | なし |
 
 dry-run は認証があれば R2 を一覧し、区分ごとの NEW・CHANGED・削除 (manifest のみ。R2 からは消さない) の件数と、
 本番で止まる key を出す。`_assert-ci-write.ts` は CI (`GITHUB_ACTIONS=true`) では常に通し、ローカルでは
