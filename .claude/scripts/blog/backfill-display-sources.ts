@@ -79,10 +79,11 @@ async function main(): Promise<void> {
         next = { ...next, displaySources: entry.displaySources };
       }
       const add = entry.charts?.[base]?.add;
-      if (add) next = { ...next, ...missingFields(source, add, `${slug}/${key}`) };
-      if (next === source || Object.keys(next).length === Object.keys(source).length) continue;
+      if (add) next = { ...next, ...missingFields(next, add, `${slug}/${key}`) };
+      if (JSON.stringify(next) === JSON.stringify(source)) continue;
       written++;
-      console.log(`  ${slug}/${key}  足す項目: ${Object.keys(next).filter((k) => !(k in source)).join(", ")}`);
+      const changed = Object.keys(next).filter((k) => JSON.stringify(next[k]) !== JSON.stringify(source[k]));
+      console.log(`  ${slug}/${key}  足す項目: ${changed.join(", ")}`);
       if (!APPLY) continue;
       writeFile(path.join(WORK_DIR, "_src", slug, key), original);
       writeFile(path.join(WORK_DIR, "out", slug, key), `${JSON.stringify(next, null, 2)}\n`);
