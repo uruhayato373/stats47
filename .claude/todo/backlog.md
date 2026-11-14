@@ -922,6 +922,7 @@ updated: 2026-11-01
   1. **再認証**: `auth_required` で止まっている取得元 (2026-W42 時点で gsc・kdp、10-19 にもしも) を `node .claude/scripts/measurement/refresh-session.mjs <source> --headed` で入れ直す。検証は `npm run measurement:status -- --check` と次の `data/measurement-cycle/latest.json` の kdp・gsc の freshness が pass であること。
   2. **パスワード経路の実証**: A8・もしも・楽天のパスワードでの自動ログインは未実証。セッション切れ時に `refresh-session.mjs <source> --headed` で確かめる。KDP は本棚が有効でも Reports 認証で止まることがあり、`latest.json` の `relogin` が `human_required` / `login_failed` なら人の再認証か Mac 側収集を検討する。
 - **完了条件**: Mac と Windows の両方で `/ops/auth` の「この PC」が全行「済」、CI 欄が「済」か「保管」。その後の authenticated-measurement で note・KDP の状態ファイルの `relogin` が `session_valid` か `relogged` になる (CI での再ログインは未実証)。
+- **追補 (2026-11-14・セッションの事前確認の初回の結果)**: Google の専用プロファイルに認証 cookie (SID / __Secure-1PSID) が無く「切れている」と出た (11-08 の GSC の取得は成功しているので、ログアウトかプロファイルの構造の違いかを次の週次の取得の前に確かめる)。`note.autologin-failed` の失敗印が残っている (11-08 の note の取得は成功しているので、古い印ならオーナーが消す)。楽天は SSO の認証 cookie を実機で確かめるまで期限を判定できない。日次の確認は launchd の登録がまだで、登録はオーナーが `cp scripts/scheduled/com.stats47.session-preflight.plist ~/Library/LaunchAgents/` と `launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.stats47.session-preflight.plist` を打つ。
 
 ### [NAV-CLICK-COVERAGE-01] サイト内リンクのクリックを既定で全件計測し、名前の無い導線を週次で減らす
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-25] [期日:2026-10-23] [領域:管理]
@@ -1796,7 +1797,7 @@ updated: 2026-11-01
 - **済 (2026-10-18)**: 本文に stats47 の KML ダウンロードの節を足し、有料カード 3 枚と GIS 入門のカードを外して H-02 のカードにした (PUT `free_body` の差し替えのみ、添付・画像は再アップロードなし)。R2 の原稿 (draft.md) も同じ差分で保存した。
 - **次**: ① 反映日 (2026-10-18) から 4 週の note → stats47 の送客 (`utm_source=note`) を測る ② 本文で配っている `総人口_2023.kml` の出典表記 (境界の国土数値情報) を確かめる ③ H-01 が公開されたら次に読む記事を H-01 にするか決める。
 - **再発の注意**: `update-published-navigation.mjs` を `--all-free` やこの記事の `--slug` で回すと、同じ無料マガジン (koumuin-gis) の有料記事カードを `chooseDatasetArticles` が付け直す。この記事を除外する仕組みは無いので、回す前に対象から外す。記事台帳の `nextBestArticle` もあわせて設定する。
-- **停止条件・禁止**: note の編集はオーナー承認と人手ログインの後。有料記事への導線は外すだけで、記事自体は消さない。
+- **停止条件・禁止**: note の編集はオーナー承認の後 (操作は保存済みセッションで agent が行う)。有料記事への導線は外すだけで、記事自体は消さない。
 - **完了条件**: 末尾の案内が替わり、4 週の note → stats47 の送客 (`utm_source=note`) を記録した。
 
 ### [NOTE-HOWTO-SERIES-01] 操作手順の連載 (H シリーズ) の 1・2 本目を書いて公開する
@@ -3283,7 +3284,7 @@ updated: 2026-11-01
   - **残り**:
   - **残 36本** (resume): catalog で `status:"draft"` の stats47-note 27 + koumuin-claude-code 9。`npx tsx -e 'import {NOTE_ARTICLES} from "./.claude/scripts/note/catalog/index.ts"; console.log(NOTE_ARTICLES.filter(a=>a.status==="draft"&&a.r2Body!==false&&a.vertical!=="product-sales").map(a=>a.vertical+"/"+a.key).join("\n"))'` で残スラッグを列挙。1本 ~5分・実 Chrome 占有・Bash 10分上限で1回2本程度。resume 可 (published は skip)。
   - **完了条件**: 公開済み記事が note.com 上でマガジンに束ねられ、新規投稿が catalog のカテゴリマガジンに自動で割り当たること。記事一括変更しない (1 マガジンずつ実証)。
-  - **停止条件 / 承認境界**: note.com への実反映 (マガジン作成・記事割当・新規公開) は outward-facing。人手ログイン + オーナー承認を経てから。SSOT は catalog git TS、note.com は反映先。
+  - **停止条件 / 承認境界**: note.com への実反映 (マガジン作成・記事割当・新規公開) は outward-facing。オーナー承認を経てから (操作は保存済みセッションで agent が行う)。SSOT は catalog git TS、note.com は反映先。
 
 ### [ISSUE-AXES-01] 問いの台帳の分析の軸を全件に付け、テーマ・県・ブログへ展開する
 
