@@ -2955,6 +2955,11 @@
     },
     {
       "from": "ranking:individual-evacuation-plan-coverage-rate",
+      "to": "theme:earthquake-exposure",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:individual-evacuation-plan-coverage-rate",
       "to": "theme:safety",
       "relation": "contains"
     },
@@ -3345,6 +3350,11 @@
     },
     {
       "from": "ranking:library-books",
+      "to": "theme:cultural-participation",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:library-books",
       "to": "theme:education-culture",
       "relation": "contains"
     },
@@ -3371,6 +3381,11 @@
     {
       "from": "ranking:library-registered-users",
       "to": "theme:community-participation",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:library-registered-users",
+      "to": "theme:cultural-participation",
       "relation": "contains"
     },
     {
@@ -3756,6 +3771,11 @@
     {
       "from": "ranking:municipality-count",
       "to": "theme:local-finance",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:museum-count-per-million",
+      "to": "theme:cultural-participation",
       "relation": "contains"
     },
     {
@@ -4164,6 +4184,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:per-capita-fixed-asset-tax-pref-municipal",
+      "to": "theme:land-property-market",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:per-capita-inhabitant-tax-pref-municipal",
       "to": "theme:local-finance",
       "relation": "contains"
@@ -4206,6 +4231,11 @@
     {
       "from": "ranking:personnel-expenditure-ratio-pref-finance",
       "to": "theme:local-finance",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:personnel-expenditure-ratio-pref-finance",
+      "to": "theme:local-government-digital",
       "relation": "contains"
     },
     {
@@ -4419,6 +4449,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:prefectural-general-administration-staff",
+      "to": "theme:local-government-digital",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:prefectural-manager-female-share",
       "to": "theme:gender-participation",
       "relation": "contains"
@@ -4466,6 +4501,11 @@
     {
       "from": "ranking:private-rent-consumption-expenditure",
       "to": "theme:real-income",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:private-rental-housing-rent-per-3-3m2",
+      "to": "theme:land-property-market",
       "relation": "contains"
     },
     {
@@ -4701,6 +4741,11 @@
     {
       "from": "ranking:regional-waste-co2-emissions-estimate",
       "to": "theme:regional-energy",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:registered-museum-visitors",
+      "to": "theme:cultural-participation",
       "relation": "contains"
     },
     {

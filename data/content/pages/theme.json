@@ -265,7 +265,11 @@
         "hobby-participation-rate-reading",
         "hobby-participation-rate-calligraphy",
         "hobby-participation-rate-tea-ceremony",
-        "hobby-participation-rate-knitting"
+        "hobby-participation-rate-knitting",
+        "museum-count-per-million",
+        "library-books",
+        "library-registered-users",
+        "registered-museum-visitors"
       ]
     },
     {
@@ -326,7 +330,8 @@
       "rankingKeys": [
         "earthquake-renovation-rate",
         "earthquake-retrofit-housing",
-        "fire-earthquake-insurance-consumption-expenditure"
+        "fire-earthquake-insurance-consumption-expenditure",
+        "individual-evacuation-plan-coverage-rate"
       ]
     },
     {
@@ -962,7 +967,9 @@
         "residential-official-land-median-price",
         "residential-official-land-point-count",
         "residential-land-price-change-rate",
-        "industrial-land-price-change-rate"
+        "industrial-land-price-change-rate",
+        "private-rental-housing-rent-per-3-3m2",
+        "per-capita-fixed-asset-tax-pref-municipal"
       ]
     },
     {
@@ -1126,7 +1133,9 @@
         "prefectural-recruitment-online-application-rate",
         "prefectural-auto-environment-tax-online-application-rate",
         "prefectural-auto-environment-tax-online-application-count",
-        "prefectural-auto-environment-tax-application-count"
+        "prefectural-auto-environment-tax-application-count",
+        "personnel-expenditure-ratio-pref-finance",
+        "prefectural-general-administration-staff"
       ]
     },
     {

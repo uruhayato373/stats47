@@ -24,6 +24,11 @@ export const EARTHQUAKE_EXPOSURE_SET: IndicatorSet = {
       "rankingKey": "fire-earthquake-insurance-consumption-expenditure",
       "shortLabel": "火災・地震保険料支出（県庁所在市・二人以上世帯・年額）",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "individual-evacuation-plan-coverage-rate",
+      "shortLabel": "個別避難計画の作成率",
+      "role": "secondary"
     }
   ],
   "keywords": [

@@ -49,6 +49,16 @@ export const LOCAL_GOVERNMENT_DIGITAL_SET: IndicatorSet = {
       "rankingKey": "prefectural-auto-environment-tax-application-count",
       "shortLabel": "環境性能割の申請総件数",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "personnel-expenditure-ratio-pref-finance",
+      "shortLabel": "人件費割合",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "prefectural-general-administration-staff",
+      "shortLabel": "一般行政部門職員数(都道府県)",
+      "role": "secondary"
     }
   ],
   "keywords": [

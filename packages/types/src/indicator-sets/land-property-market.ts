@@ -39,6 +39,16 @@ export const LAND_PROPERTY_MARKET_SET: IndicatorSet = {
       "rankingKey": "industrial-land-price-change-rate",
       "shortLabel": "標準価格変動率（工業地）",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "private-rental-housing-rent-per-3-3m2",
+      "shortLabel": "民営家賃(3.3㎡あたり月額)",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "per-capita-fixed-asset-tax-pref-municipal",
+      "shortLabel": "住民1人あたり固定資産税",
+      "role": "secondary"
     }
   ],
   "keywords": [

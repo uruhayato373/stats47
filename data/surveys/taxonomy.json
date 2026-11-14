@@ -261,11 +261,11 @@
   "theme": {
     "themes": 56,
     "metricGroups": {
-      "total": 541,
+      "total": 547,
       "byStatus": {
-        "resolved": 475,
+        "resolved": 480,
         "unresolved": 0,
-        "not-applicable": 66,
+        "not-applicable": 67,
         "missing-lineage": 0
       },
       "coveragePct": 100,
@@ -497,12 +497,15 @@
         "community-participation"
       ],
       "local-finance": [
+        "land-property-market",
         "local-finance",
+        "local-government-digital",
         "public-assistance",
         "safety"
       ],
       "local-gov-staffing-survey": [
         "local-finance",
+        "local-government-digital",
         "safety"
       ],
       "local-government-gender-equality-policy-status": [
@@ -542,6 +545,7 @@
         "regional-transport"
       ],
       "municipal-settlement-survey": [
+        "land-property-market",
         "local-finance"
       ],
       "national-cancer-registry": [
@@ -627,7 +631,9 @@
         "manufacturing"
       ],
       "prefectural-settlement-survey": [
+        "land-property-market",
         "local-finance",
+        "local-government-digital",
         "public-assistance",
         "safety"
       ],
@@ -648,6 +654,7 @@
       ],
       "retail-price-survey": [
         "consumer-prices",
+        "land-property-market",
         "real-income"
       ],
       "road-statistics": [
@@ -3811,7 +3818,9 @@
       "surveyId": "local-finance",
       "rankingCount": 132,
       "themeKeys": [
+        "land-property-market",
         "local-finance",
+        "local-government-digital",
         "public-assistance",
         "safety"
       ],
@@ -3864,6 +3873,7 @@
       "rankingCount": 8,
       "themeKeys": [
         "local-finance",
+        "local-government-digital",
         "safety"
       ],
       "blogSlugs": [
@@ -4010,6 +4020,7 @@
       "surveyId": "municipal-settlement-survey",
       "rankingCount": 29,
       "themeKeys": [
+        "land-property-market",
         "local-finance"
       ],
       "blogSlugs": [
@@ -4460,7 +4471,9 @@
       "surveyId": "prefectural-settlement-survey",
       "rankingCount": 121,
       "themeKeys": [
+        "land-property-market",
         "local-finance",
+        "local-government-digital",
         "public-assistance",
         "safety"
       ],
@@ -4579,6 +4592,7 @@
       "rankingCount": 14,
       "themeKeys": [
         "consumer-prices",
+        "land-property-market",
         "real-income"
       ],
       "blogSlugs": [
