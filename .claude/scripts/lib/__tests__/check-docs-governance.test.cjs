@@ -558,3 +558,154 @@ test("実リポジトリの機械契約が置き場の 3 検査を宣言して�
   assert.deepEqual(real.placement.scriptsRoot.allowedFiles, ["tsconfig.checkjs.json", "tsconfig.json"]);
   assert.deepEqual(real.placement.codeAdjacentDocs.roots, ["apps", "packages"]);
 });
+
+// ── 待ちの理由・年間計画・誰も持っていないカード (DG090〜DG093、2026-11-14)。
+// 意図: 「時期待ち」「観測待ち」のカードが backlog に混ざると、いつ再開するかが機械で読めず、
+// 月次・週次計画が期日で引けない。置き場 (年間計画・改善) と期日を検査で守らせる。
+function withAnnual(config, extra = {}) {
+  return {
+    ...config,
+    fixedDirectoriesOptional: { ".claude/todo": ["annual.md"] },
+    todo: { ...config.todo, annual: { file: ".claude/todo/annual.md", type: "annual-plan" }, ...extra },
+  };
+}
+
+function backlogWith(root, cards) {
+  write(root, ".claude/todo/backlog.md", markdown({ title: "Backlog", type: "backlog", body: `## 🔴 高\n\n${cards}` }));
+}
+
+const pick = (report, code) => report.findings.filter((item) => item.code === code);
+
+test("DG090: [待ち:時期]・[待ち:観測] は既定で warning、config で error に上げられる", (t) => {
+  const { root, config } = fixture(t);
+  backlogWith(root, `### [DOCS-FEATURE-01] Checker
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [待ち:時期] [待ち:承認] [期日:2026-12-01]
+
+### [DOCS-OBSERVE-01] Observe
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [待ち:観測] [期日:2026-12-01]
+
+### [DOCS-APPROVE-01] Approve
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [待ち:承認] [待ち:ログイン]`);
+  const warn = pick(inspectRepository({ root, config: withAnnual(config), now: "2026-07-30" }), "DG090");
+  assert.deepEqual(warn.map((item) => item.level), ["warning", "warning"]);
+  assert.match(warn.map((item) => item.message).join("\n"), /DOCS-FEATURE-01は\[待ち:時期\][\s\S]*annual\.md/);
+  assert.match(warn.map((item) => item.message).join("\n"), /DOCS-OBSERVE-01は\[待ち:観測\][\s\S]*improvements\.md/);
+  const strict = inspectRepository({ root, config: withAnnual(config, { waitPlacement: { severity: "error" } }), now: "2026-07-30" });
+  assert.deepEqual(pick(strict, "DG090").map((item) => item.level), ["error", "error"]);
+  const broken = inspectRepository({ root, config: withAnnual(config, { waitPlacement: { severity: "loud" } }), now: "2026-07-30" });
+  assert.ok(broken.errors.some((item) => item.code === "DG090" && /warning \/ error/.test(item.message)), "語彙外の重さは設定の誤り");
+});
+
+test("DG091: [待ち:時期]・[待ち:観測] なのに期日が無い (読めない) カードは error。承認待ちは期日不要", (t) => {
+  const { root, config } = fixture(t);
+  backlogWith(root, `### [DOCS-FEATURE-01] Checker
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [待ち:時期]
+
+### [DOCS-OBSERVE-01] Observe
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [待ち:観測] [期日:2026-02-30]
+
+### [DOCS-APPROVE-01] Approve
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [待ち:承認]`);
+  const errors = pick(inspectRepository({ root, config, now: "2026-07-30" }), "DG091");
+  assert.deepEqual(errors.map((item) => [item.level, item.message.split("は")[0]]), [
+    ["error", "DOCS-FEATURE-01"],
+    ["error", "DOCS-OBSERVE-01"],
+  ]);
+});
+
+test("[待ち:X] の語彙外の値は DG057 error", (t) => {
+  const { root, config } = fixture(t);
+  backlogWith(root, `### [DOCS-FEATURE-01] Checker
+タグ: [エージェント・SSOT] [種類:改善] [実行:sweep] [待ち:そのうち]`);
+  const report = inspectRepository({ root, config, now: "2026-07-30" });
+  assert.ok(report.errors.some((item) => item.code === "DG057" && /待ちが語彙外: そのうち/.test(item.message)));
+});
+
+const ANNUAL_OK = `## 2026-12
+
+### [DOCS-ANNUAL-01] 年末の作業
+タグ: [収益化] [種類:制作] [実行:対話] [待ち:時期] [期日:2026-12-20]`;
+
+test("年間計画: 無い間は黙って通り、置けば固定構成の一員として通る", (t) => {
+  const { root, config } = fixture(t);
+  const absent = inspectRepository({ root, config: withAnnual(config), now: "2026-07-30" });
+  assert.deepEqual([...absent.errors, ...absent.warnings], []);
+  write(root, ".claude/todo/annual.md", markdown({ title: "Annual", type: "annual-plan", body: ANNUAL_OK }));
+  const present = inspectRepository({ root, config: withAnnual(config), now: "2026-07-30" });
+  assert.deepEqual([...present.errors, ...present.warnings], []);
+  assert.equal(present.todoDefinitions, 4, "年間計画のカードも TODO 定義に数える");
+  // [mutation] 任意ファイルの許可が無ければ固定構成の外 (DG012) になる
+  const noOptional = inspectRepository({ root, config: { ...withAnnual(config), fixedDirectoriesOptional: {} }, now: "2026-07-30" });
+  assert.ok(noOptional.errors.some((item) => item.code === "DG012" && item.file.endsWith("annual.md")));
+});
+
+test("DG092: 年間計画は期日必須・ID 必須・月見出しの外は error、月の食い違いは warning、ID 重複は DG060", (t) => {
+  const { root, config } = fixture(t);
+  write(root, ".claude/todo/annual.md", markdown({
+    title: "Annual",
+    type: "weekly-plan",
+    body: `### [DOCS-ORPHAN-01] 月見出しの外
+
+## 2026-12
+
+### [DOCS-NODUE-01] 期日なし
+タグ: [収益化] [種類:制作] [実行:対話]
+
+### [DOCS-SHIFT-01] 月の食い違い
+タグ: [収益化] [種類:制作] [実行:対話] [期日:2027-01-10]
+
+### ID なし
+タグ: [収益化] [期日:2026-12-01]
+
+### [DOCS-FEATURE-01] backlog と重複
+タグ: [収益化] [謎キー:x] [期日:2026-12-02]`,
+  }));
+  const report = inspectRepository({ root, config: withAnnual(config), now: "2026-07-30" });
+  const dg092 = pick(report, "DG092").map((item) => `${item.level}:${item.message}`).join("\n");
+  assert.match(dg092, /error:frontmatter\.type は annual-plan: weekly-plan/);
+  assert.match(dg092, /error:月見出し[\s\S]*DOCS-ORPHAN-01/);
+  assert.match(dg092, /error:DOCS-NODUE-01に\[期日:YYYY-MM-DD\]が無い/);
+  assert.match(dg092, /error:L\d+ ID なしに\[ID\]が無い/);
+  assert.match(dg092, /warning:DOCS-SHIFT-01の期日 2027-01-10 が月見出し 2026-12 と食い違う/);
+  assert.ok(report.errors.some((item) => item.code === "DG060" && /DOCS-FEATURE-01/.test(item.message)), "backlog と同じ ID");
+  assert.ok(report.errors.some((item) => item.code === "DG056" && item.file.endsWith("annual.md")), "語彙の検査も同じ");
+});
+
+test("DG093: 起票 30 日超で誰も持っていないカードを集計 1 行で出す (古い順 5 件・🟣 と持ち主のあるカードは数えない)", (t) => {
+  const { root, config } = fixture(t);
+  const card = (id, tags) => `### [${id}] ${id}\nタグ: [エージェント・SSOT] [種類:改善] ${tags}\n`;
+  write(root, ".claude/todo/backlog.md", markdown({
+    title: "Backlog",
+    type: "backlog",
+    body: [
+      "## 🔴 高", "",
+      card("DOCS-FEATURE-01", "[実行:sweep] [起票:2026-01-01]"),
+      card("STALE-A-01", "[実行:対話] [起票:2026-06-01]"),
+      card("STALE-B-01", "[起票:2026-05-01]"),
+      card("STALE-C-01", "[実行:対話] [起票:2026-06-03]"),
+      card("STALE-D-01", "[実行:対話] [起票:2026-06-04]"),
+      card("STALE-E-01", "[実行:対話] [起票:2026-06-05]"),
+      card("STALE-F-01", "[実行:対話] [起票:2026-06-06]"),
+      card("FRESH-01", "[実行:対話] [起票:2026-06-30]"),
+      card("OWNER-01", "[実行:ユーザー] [起票:2026-01-01]"),
+      card("WIN-01", "[実行:windows] [起票:2026-01-01]"),
+      card("ELSE-01", "[実行:別環境] [起票:2026-01-01]"),
+      card("MACHINE-01", "[実行:機械] [起票:2026-01-01]"),
+      card("WIP-01", "[実行:対話] [進行中] [起票:2026-01-01]"),
+      card("WAIT-01", "[実行:対話] [待ち:承認] [起票:2026-01-01]"),
+      card("NOFILED-01", "[実行:対話]"),
+      "## 🟣 判断待ち", "",
+      card("HOLD-01", "[実行:対話] [起票:2026-01-01]"),
+    ].join("\n"),
+  }));
+  const found = pick(inspectRepository({ root, config, now: "2026-07-30" }), "DG093");
+  assert.equal(found.length, 1, "カードごとではなくファイル単位の 1 行");
+  assert.equal(found[0].level, "warning");
+  assert.match(found[0].message, /起票から 30 日を超え[\s\S]* 6 件 \(古い順: STALE-B-01 \(2026-05-01\) \/ STALE-A-01 \(2026-06-01\) \/ STALE-C-01 \(2026-06-03\) \/ STALE-D-01 \(2026-06-04\) \/ STALE-E-01 \(2026-06-05\)\)/);
+  assert.doesNotMatch(found[0].message, /FRESH-01|STALE-F-01|HOLD-01/);
+  // 境界: ちょうど 30 日は数えない
+  const exact = pick(inspectRepository({ root, config, now: "2026-07-01" }), "DG093");
+  assert.match(exact[0].message, / 1 件 \(古い順: STALE-B-01 \(2026-05-01\)\)/, "06-01 はちょうど 30 日で数えない");
+  const next = pick(inspectRepository({ root, config, now: "2026-07-02" }), "DG093");
+  assert.match(next[0].message, / 2 件 \(古い順: STALE-B-01 \(2026-05-01\) \/ STALE-A-01/, "31 日目から数える");
+});

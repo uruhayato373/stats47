@@ -9,6 +9,9 @@ import { fileURLToPath } from "node:url";
 
 import {
   AD_TRAFFIC_CONTEXT_OPTIONS,
+  CONSENT_COOKIE_NAME,
+  CONSENT_STORAGE_KEY,
+  declineCookieConsent,
   classifyAdTraffic,
   createAdTrafficTally,
   formatAdTrafficSummary,
@@ -185,6 +188,64 @@ test("撮影のスクリプトは、ページを開く前に通信の遮断を�
   assert.doesNotMatch(source, /--(?:no-block|allow-ad|skip-block|unblock)/);
 });
 
+// ── 同意を断った状態で開く (CONTENT-FOLLOWUP-01) ──────────────────────────────
+// 撮影は同意を断る印を Cookie (stats47_consent) にだけ書いていたが、gtag の同意は GoogleAnalytics.tsx が
+// localStorage (stats47_cookie_consent) から読むので、断ったことが gtag に届いていなかった。
+
+const WEB_ROOT = join(HERE, "..", "..", "..", "..", "apps", "web", "src", "lib", "analytics");
+
+test("同意を断る印の名前は、サイトの同意の帯と gtag が読む名前と同じ", () => {
+  const banner = readFileSync(join(WEB_ROOT, "components", "CookieConsentBanner.tsx"), "utf8");
+  const gtag = readFileSync(join(WEB_ROOT, "GoogleAnalytics.tsx"), "utf8");
+  assert.match(banner, new RegExp(`CONSENT_COOKIE_NAME = "${CONSENT_COOKIE_NAME}"`));
+  assert.match(banner, new RegExp(`CONSENT_LS_KEY = "${CONSENT_STORAGE_KEY}"`));
+  assert.ok(gtag.includes(`localStorage.getItem('${CONSENT_STORAGE_KEY}')`), "gtag が読む localStorage の名前が違う");
+});
+
+test("撮影のスクリプトは、ページを開く前に Cookie と localStorage の両方で同意を断る", () => {
+  const source = readFileSync(join(HERE, "..", "capture-ad-layout.ts"), "utf8");
+  const decline = source.indexOf("declineCookieConsent(context");
+  assert.ok(decline > 0, "declineCookieConsent(context, …) を呼んでいない");
+  assert.ok(decline < source.indexOf("context.newPage()"), "context.newPage() より前に断る");
+  // Cookie だけを書く旧い書き方に戻さない
+  assert.doesNotMatch(source, /addCookies\(\[\{ name: "stats47_consent"/);
+});
+
+test("実際のブラウザで、断った印が Cookie と localStorage の両方に入る", async (t) => {
+  let chromium;
+  try {
+    ({ chromium } = await import("playwright"));
+  } catch (error) {
+    t.skip(`playwright を読めない環境なので飛ばす: ${String(error.message).split("\n")[0]}`);
+    return;
+  }
+  const server = createServer((_req, res) => {
+    res.writeHead(200, { "content-type": "text/html; charset=utf-8" });
+    res.end("<!doctype html><html><body>page</body></html>");
+  });
+  await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
+  const baseUrl = `http://127.0.0.1:${server.address().port}`;
+  let browser;
+  try {
+    try {
+      browser = await chromium.launch({ headless: true });
+    } catch (error) {
+      t.skip(`Chromium を起動できない環境なので飛ばす: ${String(error.message).split("\n")[0]}`);
+      return;
+    }
+    const context = await browser.newContext();
+    await declineCookieConsent(context, baseUrl);
+    const page = await context.newPage();
+    await page.goto(`${baseUrl}/`);
+    const stored = await page.evaluate((key) => ({ ls: localStorage.getItem(key), cookie: document.cookie }), CONSENT_STORAGE_KEY);
+    assert.equal(stored.ls, "denied");
+    assert.match(stored.cookie, new RegExp(`${CONSENT_COOKIE_NAME}=denied`));
+  } finally {
+    await browser?.close();
+    await new Promise((resolve) => server.close(resolve));
+  }
+});
+
 // ── 実際のブラウザでの確認 (届いた要求をサーバー側で数える) ──────────────────────
 // すべての host を手元のサーバーへ向けるので、遮断が効いていなくても外へは出ない。
 
@@ -239,6 +300,17 @@ async function visitWithServer(chromium, { block }) {
   }
 }
 
+test("PR の workflow は、このテストを走らせる job で先に Chromium を入れる", () => {
+  // 入れないと下の実ブラウザの確認が CI で毎回 skip になり、遮断が壊れても緑のまま (CI-TOOLING-FOLLOWUP-03)
+  const workflow = readFileSync(join(HERE, "..", "..", "..", "..", ".github", "workflows", "pr-quality-check.yml"), "utf8");
+  const run = workflow.indexOf("node --test .claude/scripts/ads/__tests__/*.test.mjs");
+  assert.ok(run > 0, "pr-quality-check.yml で ads のテストを走らせる step を見つけられない");
+  const jobHeader = [...workflow.slice(0, run).matchAll(/\n  ([a-z][a-z0-9-]*):\n/g)].pop();
+  assert.ok(jobHeader, "ads のテストを走らせる job を見つけられない");
+  const job = workflow.slice(jobHeader.index, run);
+  assert.match(job, /npx playwright install (?:--with-deps )?chromium/, `${jobHeader[1]} の job が Chromium を入れていない`);
+});
+
 test("実際のブラウザで、遮断を差し込むと広告・計測の要求がサーバーに 1 件も届かない", async (t) => {
   let chromium;
   try {
@@ -246,6 +318,8 @@ test("実際のブラウザで、遮断を差し込むと広告・計測の要�
     const probe = await chromium.launch({ headless: true });
     await probe.close();
   } catch (error) {
+    // CI は Chromium を入れてから走らせるので、起動できないのは配線の壊れ。skip にせず落とす
+    if (process.env.CI) throw error;
     t.skip(`Chromium を起動できない環境なので飛ばす: ${String(error.message).split("\n")[0]}`);
     return;
   }

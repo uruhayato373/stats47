@@ -1,0 +1,39 @@
+{
+  "dataId": "N02",
+  "reference": {
+    "pageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N02-2025.html",
+    "specification": "KS-PS-N02-v3_1.pdf",
+    "dataVersion": "25",
+    "checkedAt": "2026-11-14",
+    "checkedScope": "データ詳細ページの属性情報の表と照合した。製品仕様書 PDF の本文とは照合していない"
+  },
+  "featureTypes": [
+    {
+      "key": "RailroadSection",
+      "label": "鉄道",
+      "attributes": [
+        { "name": "N02_001", "distributedName": "railwayType", "label": "鉄道区分", "role": "category", "valueType": "code", "codeList": "鉄道区分コード", "meaning": "鉄道路線の種類による区別" },
+        { "name": "N02_002", "distributedName": "serviceProviderType", "label": "事業者種別", "role": "category", "valueType": "code", "codeList": "事業者種別コード", "codeTable": "railway-operator", "meaning": "鉄道路線の事業者による区別" },
+        { "name": "N02_003", "distributedName": "lineName", "label": "路線名", "role": "name", "valueType": "string", "meaning": "鉄道路線の名称" },
+        { "name": "N02_004", "distributedName": "operatorName", "label": "運営会社", "role": "other", "valueType": "string", "meaning": "鉄道路線を運営する会社" }
+      ]
+    },
+    {
+      "key": "Station",
+      "label": "駅",
+      "attributes": [
+        { "name": "N02_001", "distributedName": "railwayType", "label": "鉄道区分", "role": "category", "valueType": "code", "codeList": "鉄道区分コード", "meaning": "鉄道路線の種類による区別" },
+        { "name": "N02_002", "distributedName": "serviceProviderType", "label": "事業者種別", "role": "category", "valueType": "code", "codeList": "事業者種別コード", "codeTable": "railway-operator", "meaning": "鉄道路線の事業者による区別" },
+        { "name": "N02_003", "distributedName": "lineName", "label": "路線名", "role": "other", "valueType": "string", "meaning": "鉄道路線の名称" },
+        { "name": "N02_004", "distributedName": "operatorName", "label": "運営会社", "role": "other", "valueType": "string", "meaning": "鉄道路線を運営する会社" },
+        { "name": "N02_005", "distributedName": "stationName", "label": "駅名", "role": "name", "valueType": "string", "meaning": "駅の名称" },
+        { "name": "N02_005c", "distributedName": "stationCode", "label": "駅コード", "role": "identifier", "valueType": "string", "meaning": "駅を緯度の降順に並べて付けた一意の番号" },
+        { "name": "N02_005g", "distributedName": "stationGroupCode", "label": "グループコード", "role": "identifier", "valueType": "string", "meaning": "300m 以内にある同じ名称の駅を 1 つのグループとし、グループの重心に最も近い駅の駅コード" }
+      ]
+    }
+  ],
+  "notes": [
+    "地物の種類の key はデータ詳細ページに書かれたシェープファイル名 (RailroadSection.shp・Station.shp) の語幹。",
+    "取り込み (converter.ts) が property-map.ts で属性名を英語の名前へ付け替えて配るので、配る名前を distributedName に持つ。単体 GIS ページと区分の台帳はこの名前で読む。"
+  ]
+}

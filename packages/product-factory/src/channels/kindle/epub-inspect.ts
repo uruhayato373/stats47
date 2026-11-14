@@ -81,6 +81,25 @@ export function figureSource(src: string): FigureSource {
   return "other";
 }
 
+/** 全県表の見出しから読んだ指標。period は「2022年度」のように本の表記のまま持つ。 */
+export interface FullTableIndicator {
+  readonly label: string;
+  readonly period: string;
+  readonly unit: string;
+}
+
+/**
+ * 全県表の見出し「全47都道府県の値：<指標>（<年>・<単位>）」(full-tables.ts) を指標・年・単位に分ける。
+ * KDP の紹介文に収録指標を実測から載せるために使う。型に合わない見出しは null (呼び出し側が数えない)。
+ */
+export function fullTableIndicator(heading: string): FullTableIndicator | null {
+  const match = heading.match(/^全47都道府県の値：(.+)（(\d{4}年度?)(?:・([^（）]+))?）$/);
+  return match ? { label: match[1], period: match[2], unit: match[3] ?? "" } : null;
+}
+
+/** 全県表の下の注記 (full-tables.ts)。家計調査の値が県全体でなく県庁所在市のものであることを示す。 */
+const HOUSEHOLD_CITY_NOTE = "家計調査の値は、各県の県庁所在市";
+
 /** 章 1 つ分の数字。図の直後の要素が段落でなければ「説明なし」と数える。 */
 export function chapterMetrics(body: string) {
   const figures = [...body.matchAll(/<figure\b[\s\S]*?<\/figure>\s*(<[a-z0-9]+)?/gi)];
@@ -98,6 +117,10 @@ export function chapterMetrics(body: string) {
       tables.filter((rows) => rows >= FULL_TABLE_ROWS).length,
       (body.match(/<h[2-4]\b[^>]*>全47都道府県の値/g) ?? []).length,
     ),
+    fullTableIndicators: [...body.matchAll(/<h[2-4]\b[^>]*>(全47都道府県の値[\s\S]*?)<\/h[2-4]>/g)]
+      .map((m) => fullTableIndicator(decodeEntities(stripTags(m[1])).replace(/\s+/g, " ").trim()))
+      .filter((indicator): indicator is FullTableIndicator => indicator !== null),
+    householdCityNotes: body.split(HOUSEHOLD_CITY_NOTE).length - 1,
     siteLinks: links.length,
     siteLinksWithUtm: links.filter((href) => /[?&]utm_source=/.test(href)).length,
   };

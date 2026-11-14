@@ -94,4 +94,37 @@ describe('ブログの図の描き直しの型', () => {
     expect(pref).toContain('>上位3県</text>');
     expect(pref).toContain('>北海道</text>');
   });
+
+  // CONTENT-FOLLOWUP-01: 家計調査の記事で、地図は市名なのに棒は県名で書いていた
+  it('県庁所在市の値の棒グラフは、見出しも行も市で書き、地図と名前をそろえる', () => {
+    const kakei = { key: 'x', subtitle: '二人以上の世帯', source: { kind: 'kakei-chousa', displayName: '家計調査' } };
+    const chart = ranking(article({ title: '大人用サンダル消費支出額', unit: '円' }), kakei);
+    const svg = renderRankingBarsChart(chart);
+    expect(svg).toContain('>上位5市</text>');
+    expect(svg).toContain('>下位5市</text>');
+    expect(svg).toContain('>札幌市</text>');
+    expect(svg).toContain('>那覇市</text>');
+    expect(svg).not.toMatch(/>(北海道|沖縄県|上位5県|下位5県)<\/text>/);
+    // 棒の行の名前は、同じデータのタイル地図の上位 3 の名前と同じ
+    const map = renderTileMapChart(chart);
+    for (const city of ['札幌市', '青森市', '盛岡市']) expect(map).toContain(`>${city}</text>`);
+    // 県の値の指標は県のまま
+    const pref = renderRankingBarsChart(ranking(article(), { key: 'x', source: { displayName: '地方財政状況調査' } }));
+    expect(pref).toContain('>上位5県</text>');
+    expect(pref).toContain('>北海道</text>');
+  });
+
+  // CONTENT-FOLLOWUP-01: 5 文字の「さいたま市」はタイルの幅に合わせて約 11px まで縮み、ほかの市より読みにくかった
+  it('県庁所在市のタイル地図で、長い市名もほかの市名と同じくらいの字の大きさで書く', () => {
+    const kakei = { key: 'x', subtitle: '二人以上の世帯', source: { kind: 'kakei-chousa', displayName: '家計調査' } };
+    const svg = renderTileMapChart(ranking(article({ title: '大人用サンダル消費支出額', unit: '円' }), kakei));
+    const nameSize = (code: string) => {
+      const tile = new RegExp(`data-area="${code}"[^>]*>.*?<text[^>]*font-size="([\\d.]+)"`).exec(svg);
+      if (!tile) throw Error(`タイル ${code} が無い`);
+      return Number(tile[1]);
+    };
+    // 4 文字の市名 (宇都宮市・名古屋市) の大きさを下回らない
+    const fourChars = Math.min(nameSize('09000'), nameSize('23000'));
+    expect(nameSize('11000')).toBeGreaterThanOrEqual(fourChars);
+  });
 });

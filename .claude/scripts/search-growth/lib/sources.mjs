@@ -16,6 +16,7 @@ import { freshnessForSource, FRESHNESS_STALE_DEFAULT_DAYS } from "./freshness.mj
 import { toPathKey, SITE_ORIGIN } from "./join-url.mjs";
 import { redactString } from "./redaction.mjs";
 import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
+import { findLatestPsiBatch } from "../../psi/lib/latest-batch.mjs";
 import { addDays, isoWeekRange } from '../../metrics/lib/periods.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -201,8 +202,8 @@ const PSI = {
   secretName: "PSI_API_KEY",
   liveScript: ".claude/scripts/psi/fetch-psi-audit.mjs",
   normalize(root, now) {
-    const dir = path.join(root, datasetDir("psi.batch"));
-    const file = newestFile(dir, /^psi-batch-.*\.json$/);
+    // 生 PSI は git 管理外の live/ (R2 state/psi/ の写し)。CI の別 job と手元は state:pull -- psi で取る
+    const file = findLatestPsiBatch(path.join(root, datasetDir("psi.batch")));
     if (!file) return { observedAt: null };
     const j = JSON.parse(fs.readFileSync(file, "utf8"));
     const observedAt = j.generated_at ?? fs.statSync(file).mtime.toISOString();

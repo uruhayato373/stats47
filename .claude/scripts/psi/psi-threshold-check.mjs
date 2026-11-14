@@ -1,7 +1,7 @@
 /**
  * PSI しきい値チェック
  *
- * data/psi/psi-batch-*.json の最新を読み、
+ * data/psi/live/psi-batch-*.json の最新 (lib/latest-batch.mjs) を読み、
  * .claude/skills/analytics/performance-improvement/budgets.json と比較して violations を出す。
  *
  * Usage:
@@ -14,10 +14,11 @@
  *   2 = 入力不備
  */
 
-import { readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { datasetDir } from "../../../config/datasets.mjs";
+import { loadLatestPsiBatch } from "./lib/latest-batch.mjs";
 
 const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "..", "..", "..", "..");
 const BUDGETS_PATH = join(
@@ -41,16 +42,7 @@ function loadBudgets() {
 }
 
 function loadLatestBatch() {
-  const files = readdirSync(STATE_DIR)
-    .filter((f) => f.startsWith("psi-batch-") && f.endsWith(".json"))
-    .sort()
-    .reverse();
-  if (files.length === 0) {
-    throw new Error(`No psi-batch-*.json files in ${STATE_DIR}`);
-  }
-  const latest = files[0];
-  const data = JSON.parse(readFileSync(join(STATE_DIR, latest), "utf-8"));
-  return { file: latest, results: data.results || [], generated_at: data.generated_at };
+  return loadLatestPsiBatch(STATE_DIR);
 }
 
 // URL → page_type 推定

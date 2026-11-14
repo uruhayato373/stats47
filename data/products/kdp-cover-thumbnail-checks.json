@@ -1,5 +1,160 @@
 {
   "schemaVersion": 1,
   "dataNote": "表紙を検索結果の大きさに縮めて目で確かめた記録。表紙の SHA-256 ごとに 1 件。書き手は node .claude/scripts/kdp/kdp-cover-thumbnail.mjs record。kdp-publish --commit は今の表紙の readable の記録を要求する。",
-  "books": {}
+  "books": {
+    "K-S1-14": {
+      "coverSha256": "a0962050bb9be4a628bd4e8c79711a3d93d5475f78f058c6f688ba954c841fc0",
+      "coverPath": ".local/kindle-books/K-S1-14/v1-20261114-r2/cover.jpg",
+      "heightsPx": [
+        120,
+        220
+      ],
+      "verdict": "readable",
+      "checkedAt": "2026-11-13",
+      "checkedBy": "Claude (120px・220px を目視、2026-11-14)"
+    },
+    "K-S1-01": {
+      "coverSha256": "7f2eb2364586816397663071ccee2e03fd93af86a7718d5c13e3b972ad38519b",
+      "coverPath": ".local/kindle-books/K-S1-01/v10-20261103-final/cover.jpg",
+      "heightsPx": [
+        120,
+        220
+      ],
+      "verdict": "readable",
+      "checkedAt": "2026-11-13",
+      "checkedBy": "Claude (120px を 13 冊並べて目視、2026-11-14)"
+    },
+    "K-S1-02": {
+      "coverSha256": "1fa05d52389fc65d325a82dcf20fb1a08f12ea60ea308649528151cc740edb5b",
+      "coverPath": ".local/kindle-books/K-S1-02/v7-20261103-final/cover.jpg",
+      "heightsPx": [
+        120,
+        220
+      ],
+      "verdict": "readable",
+      "checkedAt": "2026-11-13",
+      "checkedBy": "Claude (120px を 13 冊並べて目視、2026-11-14)"
+    },
+    "K-S1-03": {
+      "coverSha256": "e65a2c87fbcd9f4326bc27d939d19f28cc141b9825627b8f317583aae5492527",
+      "coverPath": ".local/kindle-books/K-S1-03/v8-20261103-final/cover.jpg",
+      "heightsPx": [
+        120,
+        220
+      ],
+      "verdict": "readable",
+      "checkedAt": "2026-11-13",
+      "checkedBy": "Claude (120px を 13 冊並べて目視、2026-11-14)"
+    },
+    "K-S1-04": {
+      "coverSha256": "b3fd59fe89c6bfe68cf9e6bb4d2ee551dd9ab044a1878ac02864f4956f9214d8",
+      "coverPath": ".local/kindle-books/K-S1-04/v9-20261103-final/cover.jpg",
+      "heightsPx": [
+        120,
+        220
+      ],
+      "verdict": "readable",
+      "checkedAt": "2026-11-13",
+      "checkedBy": "Claude (120px を 13 冊並べて目視、2026-11-14)"
+    },
+    "K-S1-05": {
+      "coverSha256": "8a28ea58876aaa678075f1c42b6b643bc8ba5b5a39a6ba43674b77580d06c5f1",
+      "coverPath": ".local/kindle-books/K-S1-05/v8-20261103-final/cover.jpg",
+      "heightsPx": [
+        120,
+        220
+      ],
+      "verdict": "readable",
+      "checkedAt": "2026-11-13",
+      "checkedBy": "Claude (120px を 13 冊並べて目視、2026-11-14)"
+    },
+    "K-S1-06": {
+      "coverSha256": "2e862f99c99979dd54949e25ba48a2053ac4ef0729062d50e2d92b52489cf1f3",
+      "coverPath": ".local/kindle-books/K-S1-06/v7-20261103-final/cover.jpg",
+      "heightsPx": [
+        120,
+        220
+      ],
+      "verdict": "readable",
+      "checkedAt": "2026-11-13",
+      "checkedBy": "Claude (120px を 13 冊並べて目視、2026-11-14)"
+    },
+    "K-S1-07": {
+      "coverSha256": "288c427b1f33386863318b7f57cfe653fcb512d801277ac5ee20e99a36b72132",
+      "coverPath": ".local/kindle-books/K-S1-07/v8-20261103-final/cover.jpg",
+      "heightsPx": [
+        120,
+        220
+      ],
+      "verdict": "readable",
+      "checkedAt": "2026-11-13",
+      "checkedBy": "Claude (120px を 13 冊並べて目視、2026-11-14)"
+    },
+    "K-S1-08": {
+      "coverSha256": "d7c8b00bbcd291f373328779ad71051414dd80600adcf8a9df1ab6dede1e68fa",
+      "coverPath": ".local/kindle-books/K-S1-08/v7-20261103-final/cover.jpg",
+      "heightsPx": [
+        120,
+        220
+      ],
+      "verdict": "readable",
+      "checkedAt": "2026-11-13",
+      "checkedBy": "Claude (120px を 13 冊並べて目視、2026-11-14)"
+    },
+    "K-S1-09": {
+      "coverSha256": "61a8ba6100b6796c3391bdc7e7b70bfb38ef77d43bd55757571a57a7f7f2239a",
+      "coverPath": ".local/kindle-books/K-S1-09/v9-20261103-final/cover.jpg",
+      "heightsPx": [
+        120,
+        220
+      ],
+      "verdict": "readable",
+      "checkedAt": "2026-11-13",
+      "checkedBy": "Claude (120px を 13 冊並べて目視、2026-11-14)"
+    },
+    "K-S1-10": {
+      "coverSha256": "02b08ed5e50019adc91efadb8835f8cd6f3be9811cbadd71f0de75e6c66da0ab",
+      "coverPath": ".local/kindle-books/K-S1-10/v7-20261103-final/cover.jpg",
+      "heightsPx": [
+        120,
+        220
+      ],
+      "verdict": "readable",
+      "checkedAt": "2026-11-13",
+      "checkedBy": "Claude (120px を 13 冊並べて目視、2026-11-14)"
+    },
+    "K-S1-11": {
+      "coverSha256": "ae775b08625cb3c11ce0c899e5d60260d87cb8da0367ba94708d8df1d8cf2b25",
+      "coverPath": ".local/kindle-books/K-S1-11/v7-20261103-final/cover.jpg",
+      "heightsPx": [
+        120,
+        220
+      ],
+      "verdict": "readable",
+      "checkedAt": "2026-11-13",
+      "checkedBy": "Claude (120px を 13 冊並べて目視、2026-11-14)"
+    },
+    "K-S1-12": {
+      "coverSha256": "330cb9c3a2626518b6f8cd51326edba1564a1c307b2ec1c20ffa0ddbfa089aa1",
+      "coverPath": ".local/kindle-books/K-S1-12/v7-20261103-final/cover.jpg",
+      "heightsPx": [
+        120,
+        220
+      ],
+      "verdict": "readable",
+      "checkedAt": "2026-11-13",
+      "checkedBy": "Claude (120px を 13 冊並べて目視、2026-11-14)"
+    },
+    "K-S1-13": {
+      "coverSha256": "f86338dd97febaa0f60ede51e06c92970d66953f44b70900af9077ceee2e84c8",
+      "coverPath": ".local/kindle-books/K-S1-13/v1-20261104-r8/cover.jpg",
+      "heightsPx": [
+        120,
+        220
+      ],
+      "verdict": "unreadable",
+      "checkedAt": "2026-11-13",
+      "checkedBy": "Claude (120px で主題はかろうじて読めるが小さく、副題は読めない。2026-11-14)"
+    }
+  }
 }

@@ -800,19 +800,31 @@
         "source": "vault memos/stats47_悩み起点リサーチ.md・data/products/sales-ledger.json",
         "note": "KDP 実売2冊 (¥254・¥159)、全冊セレクト未登録"
       },
-      "status": "proposed",
+      "status": "running",
       "created_at": "2026-10-28T03:14:01.495Z",
-      "started_at": null,
+      "started_at": "2026-11-04",
       "result": null,
       "learnings": null,
       "closed_at": null,
-      "actions": [],
-      "pending_user_actions": [],
-      "next_check_date": null,
+      "actions": [
+        "[done] 2026-11-04 K-S1-13 を KDP セレクト登録・70%・¥500 で出版 (登録期間 2026-11-03〜2027-02-01 PST、自動更新オン)",
+        "[done] 2026-11-12 から K-S1-05 がセレクト登録 (期間〜2027-02-10 PST、自動更新オフ)。2026-11-13 にオーナーが継続を決定し台帳を kuEnrolled:true に直した",
+        "[done] 2026-11-14 K-S1-14 をセレクト登録・70%・¥500 で公開申請",
+        "2026-12 の土曜の記録で 3 冊の 2026-11 の既読ページ (KENP) と販売を読み、未登録の既刊 11 冊と比べる"
+      ],
+      "pending_user_actions": [
+        "K-S1-05 の登録期間の終了 (2027-02-10 PST) までに、自動更新するかを決める (いまはオフ)"
+      ],
+      "next_check_date": "2026-12-05",
       "history": [
         {
           "date": "2026-10-28T03:14:01.495Z",
           "action": "proposed"
+        },
+        {
+          "date": "2026-11-14",
+          "action": "running",
+          "summary": "セレクト登録の本が K-S1-13・K-S1-05・K-S1-14 の 3 冊になった。測定は 2026-11 の月次レポートから。カード KDP-ROYALTY-RATE-CHECK-01 の完了に伴い、測定をこの実験へ移した。"
         }
       ],
       "card": "KDP-ROYALTY-RATE-CHECK-01",

@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { mergeKdpOperationalState, normalizeKdpStatus } from "../kdp-status.mjs";
+import { kdpSelectMismatch, mergeKdpOperationalState, normalizeKdpStatus } from "../kdp-status.mjs";
 import { pendingPredecessors } from "../kdp-publication-stage.mjs";
 
 test("KDPの日本語statusを運用状態へ正規化する", () => {
@@ -63,4 +63,16 @@ test("出版停止の対象は、新版が販売中の本の未停止の旧版�
   assert.deepEqual(pendingPredecessors({ ...listing, asin: edition.asin }), [], "現行と同じ ASIN は止めない");
   assert.deepEqual(pendingPredecessors({ ...listing, previousEditions: [{ ...edition, unpublishedAt: "2026-11-06T00:00:00.000Z" }] }), []);
   assert.deepEqual(pendingPredecessors({ ...listing, previousEditions: [{ ...edition, unpublishAfterReplacementLive: false }] }), []);
+});
+
+test("KDPセレクトは台帳と画面が一致したときだけ合格にする", () => {
+  assert.equal(kdpSelectMismatch(true, true), null);
+  assert.equal(kdpSelectMismatch(false, false), null);
+  assert.match(kdpSelectMismatch(true, false), /台帳は登録あり/);
+  // 2026-11-13 の K-S1-05: 台帳は未登録なのに KDP では登録済みだった。この向きを通すと独占条件の本を見逃す
+  assert.match(kdpSelectMismatch(false, true), /台帳は未登録/);
+  assert.match(kdpSelectMismatch(undefined, true), /台帳は未登録/);
+  // チェックボックスが見つからない (null) ときは、台帳が未登録でも一致と言わない
+  assert.match(kdpSelectMismatch(false, null), /読めない/);
+  assert.match(kdpSelectMismatch(true, null), /読めない/);
 });

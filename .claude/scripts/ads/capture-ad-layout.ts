@@ -35,6 +35,7 @@ import { adsenseUnitNames, unitOfEntry } from "./lib/ad-layout-ledger";
 import {
   AD_TRAFFIC_CONTEXT_OPTIONS,
   createAdTrafficTally,
+  declineCookieConsent,
   formatAdTrafficSummary,
   installAdTrafficBlock,
   requiresAdTrafficBlock,
@@ -457,8 +458,8 @@ async function main() {
         });
         // 最初の要求から止めるため、ページを開く前に差し込む
         if (adTraffic) await installAdTrafficBlock(context, adTraffic);
-        // Cookie 同意の帯 (sticky) が撮影の途中に重ならないよう、同意を断った状態で開く
-        await context.addCookies([{ name: "stats47_consent", value: "denied", url: opts.baseUrl }]);
+        // Cookie 同意の帯 (sticky) が撮影の途中に重ならず、gtag にも断ったことが届くよう、同意を断った状態で開く
+        await declineCookieConsent(context, opts.baseUrl);
         const base = { pageType, scope, label, url: path, viewport: viewport.id, width: viewport.width };
         try {
           const page = await context.newPage();

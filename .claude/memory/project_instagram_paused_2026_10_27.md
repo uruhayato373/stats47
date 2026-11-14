@@ -10,10 +10,10 @@ metadata:
 
 2026-10-27、オーナーが「Instagram は一旦全て削除」と指示し、範囲を確認すると「自動投稿も止める（コードは残す）」を選んだ。
 
-- GitHub の workflow を `gh workflow disable` で止めた (yml は未変更): `post-instagram-scheduled.yml` / `sns-port-bubble-daily.yml` / `migration-flow-weekly.yml` / `migration-flow-monthly.yml` / `migration-flow-annual.yml`。再開は `gh workflow enable <file>`
+- GitHub の workflow を `gh workflow disable` で止めた (yml は未変更): `post-instagram-scheduled.yml` / `sns-port-bubble-daily.yml` / `migration-flow-weekly.yml` / `migration-flow-monthly.yml` / `migration-flow-annual.yml`。再開は `gh workflow enable <file>`。migration-flow の 3 本は 2026-11-14 のオーナー決定「人の移動の動画は一旦やめる」で yml ごと削除した
 - 計測 `sns-metrics-weekly.yml` とトークン延長 `instagram-token-refresh.yml` は動かしたまま (投稿しない・再開時にトークン切れを避ける)
 - 未コミットだった Business Suite 予約の作業 (`schedule-business-suite.ts`・launchd plist/sh・post-from-schedule の印判定) は破棄。launchd は未登録だった
 
 **Why:** 2026-10-11 の継続判断 ([[feedback_portfolio_keep_decision_2026_10]]) を Instagram についてはオーナーが上書きした。
 
-**How to apply:** Instagram の投稿・予約を新しく作らない、無効化した workflow を勝手に enable しない。migration-flow の 3 本は Instagram 投稿用の workflow なので、移動データの他の用途で必要になったら投稿 step を外してから再開を相談する。関連: [[project_sns_reorg_2026_07]] [[project_instagram_graph_api_setup]]
+**How to apply:** Instagram の投稿・予約を新しく作らない、無効化した workflow を勝手に enable しない。migration-flow の 3 本は削除済みで、再開するときは git の履歴から戻す (`sns-content-standards.md` §2-4)。関連: [[project_sns_reorg_2026_07]] [[project_instagram_graph_api_setup]]

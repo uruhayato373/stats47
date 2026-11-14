@@ -59,7 +59,8 @@ jobs:
       - name: ☁️ Push to R2 (app/commute-flow)
         if: inputs.dry_run != 'true'
         run: |
-          npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/commute-flow
+          # app/commute-flow は区分表で正本扱い (文書に作り直せるとの記載なし)。取り込み直した値で更新するのが目的なので上書きを許す
+          npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --allow-authoritative-overwrite --prefix app/commute-flow
 
       - name: 🧹 Purge Workers Cache
         if: inputs.dry_run != 'true'

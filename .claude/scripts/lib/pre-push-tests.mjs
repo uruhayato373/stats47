@@ -61,7 +61,11 @@ function changedSinceRemote() {
 function run(label, command, args, cwd = ROOT) {
   console.log(`▶ ${label}`);
   // Windows の npx は npx.cmd で、shell なしでは起動できず status が null になる (出力なしで失敗扱いになっていた。2026-11-12)
-  const { status, error } = spawnSync(command, args, { cwd, stdio: "inherit", shell: process.platform === "win32" });
+  // hook の中では GIT_DIR などが本物のリポジトリを指す。これをテストへ渡すと、一時リポジトリのつもりの
+  // `git init --bare` や `git config` が本物の .git/config を書き換える (2026-11-14 に core.bare = true と
+  // [user] を書き込み、全作業ツリーの git が止まった)。テストには GIT_ で始まる変数を渡さない。
+  const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith("GIT_")));
+  const { status, error } = spawnSync(command, args, { cwd, env, stdio: "inherit", shell: process.platform === "win32" });
   if (error) console.error(`起動に失敗: ${command} (${error.message})`);
   return status === 0;
 }

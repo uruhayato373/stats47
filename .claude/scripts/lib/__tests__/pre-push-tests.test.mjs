@@ -118,3 +118,11 @@ test("backlog の変更を push するとき、docs:check が通れば通す", {
   const result = runPrePushWithBacklogChange(0);
   assert.equal(result.status, 0, result.stdout + result.stderr);
 });
+
+test("hook から起動するテストに GIT_ で始まる環境変数を渡さない (本物の .git/config を書き換えないため)", async () => {
+  const { readFileSync } = await import("node:fs");
+  const source = readFileSync(join(dirname(fileURLToPath(import.meta.url)), "..", "pre-push-tests.mjs"), "utf8");
+  const run = source.slice(source.indexOf("function run("), source.indexOf("\n}\n", source.indexOf("function run(")));
+  assert.match(run, /startsWith\("GIT_"\)/, "GIT_ の変数を取り除く処理が run() に無い");
+  assert.match(run, /spawnSync\(command, args, \{[^}]*\benv\b/, "取り除いた env を spawnSync に渡していない");
+});

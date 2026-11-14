@@ -99,3 +99,8 @@ commit は index に関係なく指定パスの作業ツリー内容だけを co
 - **問題**: Codexの作業登録が共有ガードへ届かず、既存のworktree回収処理はGitの削除拒否後にも削除へ進めた。
 - **原因**: ガードのIDがClaude入力に限定され、回収処理のcatchが「対象が存在するか」だけを判定していた。
 - **対策**: 共通CLI・Git common directoryで担当と一時メモを共有する。回収はGit登録が解除された場合だけ続け、未保存変更・メイン作業場所を実Git fixtureで保護する。手順は `.claude/rules/local-environment.md`「Codex / Claude の作業共有」、検証は `session-guard.test.cjs` / `remove-worktree.test.mjs`。
+
+**hook の中で走るテストが本物の .git/config を書き換える (2026-11-14)**:
+- **問題**: push の検査 (pre-push) の中で走ったテストが、一時リポジトリのつもりで `git init --bare` と `git config user.*` を実行し、本物の `.git/config` に `core.bare = true` と `[user] github-actions[bot]` を書き込んだ。本体と全作業ツリーの git が「must be run in a work tree」で止まった。
+- **原因**: hook の中では `GIT_DIR` などが本物のリポジトリを指す。テストが `{ ...process.env }` で子の git に渡すと、`cwd` に関係なく本物が対象になる。
+- **対策**: `pre-push-tests.mjs` の `run()` がテストに `GIT_` で始まる変数を渡さない (テストで固定)。git を起動するテストも `GIT_` を除いた env を渡す (`workflow-commit-back.test.cjs` の形)。症状が出たら `git config --file .git/config core.bare false` と、テストが書いた `[user]` 節の削除 (`--remove-section user`) で戻す。

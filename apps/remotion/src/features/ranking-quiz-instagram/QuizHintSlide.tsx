@@ -9,7 +9,7 @@ import { IG_FONT, IG_HEADLINE_STYLE, IG_SERIES, IgSeriesCard, IgSeriesFrame } fr
 
 import { toPrefCode, type RankingQuizSpec, type ResolvedRankingQuiz } from "./quiz";
 
-/** 地図下端とブランド行の間隔（ブランド行は下端から約 76px を占める） */
+/** 地図下端と出典行 (IgSeriesFooter) の間隔（出典行は下端から約 76px を占める） */
 const FOOTER_CLEARANCE = 90;
 
 const palette = IG_SERIES.quiz;

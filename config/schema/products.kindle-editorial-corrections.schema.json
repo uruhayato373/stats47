@@ -3,7 +3,7 @@
   "title": "Kindle 書籍版だけの本文の校訂",
   "description": "data/products/kindle/editorial-corrections.json の形状契約。Kindle 各冊の全章独立レビュー (review.md) を反映した書籍版だけの校訂。公開ブログの原本は書き換えない。corrections のキーがブログ記事の slug で、値は適用順の校訂の並び。before は R2 の article.md の逐語 (太字・リンク記法を含む)。1 回だけ現れることを correctBookArticle (packages/product-factory/src/channels/kindle/editorial-corrections.ts) が保証し、現れなければ生成を止める。同じ誤りは公開ブログにも残るので、サイト側は blog remediation で別途直す (backlog PRODUCT-SALES-READINESS-01)。追加・再生成は Google Drive stats47/Kindle原稿/_audit-diffs/book-fix.mjs (2026-11-08 に .local/kindle-audit から移した。使うときは手元へコピーする) が既存エントリを保持したまま行う (既存 3 件を落とした事故の再発防止)。before・after は正規表現・改行・引用符を含む逐語の文字列なので 1 文字も変えない。after が空の校訂は before の削除を表す。notes は記事 slug ごとの判断の記録 (置換元が見つからず外した件数など)。",
   "type": "object",
-  "required": ["corrections", "notes"],
+  "required": ["corrections", "sourceSections", "notes"],
   "additionalProperties": false,
   "properties": {
     "$schema": { "type": "string" },
@@ -25,6 +25,12 @@
           }
         }
       }
+    },
+    "sourceSections": {
+      "type": "object",
+      "description": "書籍版で持つ章末の旧「データ出典」節。キーはブログ記事の slug、値は R2 の article.md の末尾の節を直前の空行・区切り線ごと逐語で写したもの (migrate-data-source-sections.ts --kindle-freeze が作る)。ブログ本文の旧節は Web の出典一覧へ移して消すので、書籍は restoreBookSourceSection (fetch-content.ts) でこの節を本文へ戻してから corrections を当てる。校閲済みの原文なので手で直さない。書籍の出典の誤りは corrections で直す。",
+      "propertyNames": { "pattern": "^[a-z0-9][a-z0-9-]*$" },
+      "additionalProperties": { "type": "string", "pattern": "データ出典" }
     },
     "notes": {
       "type": "object",

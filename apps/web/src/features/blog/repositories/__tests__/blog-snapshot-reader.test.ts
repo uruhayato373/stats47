@@ -389,6 +389,22 @@ describe('readMetricPairArticlesFromR2', () => {
   });
 });
 
+describe('readArticleSummariesByTagKeyFromR2', () => {
+  // タグの記事一覧は「公開日の新しい順」と画面に出し、各カードに公開日を出す (HUB-LIST-FINDABILITY-01)。
+  // 並び順の基準を画面で確かめられるよう、並べた基準の値 (publishedAt) を一覧へ渡す
+  it('公開日の新しい順に並べ、各記事の公開日を返す', async () => {
+    const { readArticleSummariesByTagKeyFromR2 } = await importReader();
+
+    const articles = await readArticleSummariesByTagKeyFromR2('population', 3);
+
+    expect(articles).toEqual([
+      { slug: 'a5', title: 'a5 のタイトル', description: null, publishedAt: '2026-05-01' },
+      { slug: 'a4', title: 'a4 のタイトル', description: null, publishedAt: '2026-04-01' },
+      { slug: 'a3', title: 'a3 のタイトル', description: null, publishedAt: '2026-03-01' },
+    ]);
+  });
+});
+
 describe('readArticleSummariesByTagKeysFromR2', () => {
   it('複数タグを1回のsnapshot取得で集約し、タグ順・重複除去・上限を守る', async () => {
     loadSnapshot.mockResolvedValueOnce({

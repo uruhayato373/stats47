@@ -13,9 +13,9 @@
 測り直すとき:
 
 ```bash
-node scripts/ui-theme/measure-design-reference.mjs .local/design-reference --measure
-node scripts/ui-theme/measure-design-reference.mjs .local/stats47 --measure http://127.0.0.1:3200 assets/design-reference/stats47-baseline/2026-10-28/pages.json
-node scripts/ui-theme/compare-design-slots.mjs assets/design-reference/shadcndashboard/2026-10-28/measurements .local/stats47 1440
+node .claude/scripts/ui/measure-design-reference.mjs .local/design-reference --measure
+node .claude/scripts/ui/measure-design-reference.mjs .local/stats47 --measure http://127.0.0.1:3200 assets/design-reference/stats47-baseline/2026-10-28/pages.json
+node .claude/scripts/ui/compare-design-slots.mjs assets/design-reference/shadcndashboard/2026-10-28/measurements .local/stats47 1440
 ```
 
 見本サイトは更新されるので、測り直したら新しい日付の置き場に保存し、古い日付は残す (比べられるように)。

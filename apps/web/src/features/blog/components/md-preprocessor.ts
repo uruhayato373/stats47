@@ -143,8 +143,8 @@ export type LegacyDataSourceMigration = "none" | "removed" | "renamed";
  * - 計算方法・定義などを含む節 → 見出しを「データについて」に改名して残す (説明を失わない)
  *
  * 既存記事の本文は `.claude/scripts/blog/migrate-data-source-sections.ts` がこの関数で一括変換する。
- * ただし Kindle 書籍の章に使われている記事は、書籍の校正指示が本文の文字列に固定されているため
- * 本文を変えない。それらの記事でも同じ出典が二重表示されないよう、描画時にも同じ変換をかける
+ * Kindle 書籍の章に使われている記事は、書籍版の出典節 (products.kindle-editorial-corrections の sourceSections)
+ * から元の本文へ戻せる記事だけを移す。移していない記事でも同じ出典が二重表示されないよう、描画時にも同じ変換をかける
  * (移行済みの本文には節が無いので action は "none" になり、何も変わらない)。
  * 呼び出し側は記事の出典が 1 件以上あるときだけ使う (出典を解決できない記事は手書き節が唯一の表記)。
  */

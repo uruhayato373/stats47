@@ -412,7 +412,7 @@
       "resolutionReason": "書籍の例は東京23区だが、同じ問いは都道府県単位でも成立し、人口密度は総面積あたり・可住地面積あたり・人口集中地区あたりの既存指標がある。区単位の値は再取得しておらず、47県の比較に置き換えて使う",
       "metricKeys": [
         "population-density-per-km2-total-area",
-        "population-density-habitable",
+        "population-density-per-km2-inhabitable-area",
         "densely-inhabited-district-population-density"
       ],
       "surveyIds": [
@@ -429,21 +429,9 @@
       "primarySources": [
         {
           "organization": "総務省統計局",
-          "publicationOrDataset": "社会・人口統計体系 (人口密度・総面積)",
+          "publicationOrDataset": "社会・人口統計体系 (人口密度・総面積・可住地面積)",
           "datasetId": "0000010201",
           "url": "https://www.e-stat.go.jp/dbview?sid=0000010201",
-          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
-          "dataYears": [
-            "2020"
-          ],
-          "checkedAt": "2026-10-08",
-          "rights": "allowed"
-        },
-        {
-          "organization": "総務省統計局",
-          "publicationOrDataset": "社会・人口統計体系 (人口密度・可住地面積)",
-          "datasetId": "0000020301",
-          "url": "https://www.e-stat.go.jp/dbview?sid=0000020301",
           "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
           "dataYears": [
             "2020"
@@ -628,7 +616,7 @@
       "resolution": "combined-analysis",
       "resolutionReason": "書籍は店舗周辺の商圏が対象で、県単位では商圏範囲を表現できない。そのため県単位の人口密度・駅数・コンビニ店舗数の既存指標を掛け合わせる縮約版として扱い、書籍の分析そのものの再現とは言わない",
       "metricKeys": [
-        "population-density-habitable",
+        "population-density-per-km2-inhabitable-area",
         "railway-station-count",
         "convenience-store-count-per-100k"
       ],
@@ -645,9 +633,9 @@
       "primarySources": [
         {
           "organization": "総務省統計局",
-          "publicationOrDataset": "社会・人口統計体系 (人口密度・可住地面積)",
-          "datasetId": "0000020301",
-          "url": "https://www.e-stat.go.jp/dbview?sid=0000020301",
+          "publicationOrDataset": "社会・人口統計体系 (可住地面積1km2当たり人口密度・都道府県)",
+          "datasetId": "0000010201",
+          "url": "https://www.e-stat.go.jp/dbview?sid=0000010201",
           "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
           "dataYears": [
             "2020"
@@ -712,7 +700,6 @@
       "resolution": "reuse-existing-metric",
       "resolutionReason": "人流データは再取得できないが、国勢調査の昼夜間人口比率と昼間人口は既存指標にあり、昼間の人の集まり方を県単位で検証できる。人流データとの優劣は比較できないので、国勢調査側の限界の説明に限る",
       "metricKeys": [
-        "daytime-population-ratio",
         "day-time-population-ratio",
         "day-time-population"
       ],
@@ -850,8 +837,8 @@
       "metricKeys": [
         "old-population-index",
         "young-population-index",
-        "population-density-habitable",
-        "daytime-population-ratio"
+        "population-density-per-km2-inhabitable-area",
+        "day-time-population-ratio"
       ],
       "surveyIds": [
         "census"
@@ -1293,7 +1280,7 @@
       "resolution": "reuse-existing-metric",
       "resolutionReason": "人流データは継続的な47県系列ではなく再取得対象にしない。国勢調査の昼夜間人口比率と昼間人口は既存指標があり、従来型の指標側の地域差は検証できる。94〜95ページの論点と同じ指標を使う",
       "metricKeys": [
-        "daytime-population-ratio",
+        "day-time-population-ratio",
         "day-time-population"
       ],
       "surveyIds": [
@@ -1313,6 +1300,18 @@
           "publicationOrDataset": "国勢調査 昼夜間人口比率",
           "datasetId": "0003454499",
           "url": "https://www.e-stat.go.jp/dbview?sid=0003454499",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2020"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (昼夜間人口比率)",
+          "datasetId": "0000010101",
+          "url": "https://www.e-stat.go.jp/dbview?sid=0000010101",
           "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
           "dataYears": [
             "2020"

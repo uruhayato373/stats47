@@ -92,9 +92,19 @@ const text = (
   anchor: 'start' | 'middle' | 'end' = 'start'
 ) =>
   `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" font-size="${Math.min(size, maxWidth / Math.max(1, widthOf(s))).toFixed(1)}" font-weight="${weight}" fill="${color}"${anchor === 'start' ? '' : ` text-anchor="${anchor}"`}>${escape(s)}</text>`;
+/** The city whose value a capital-city metric (家計調査) gives for a prefecture. Shared with the bar type so both name the same city. */
+export const capitalCityName = (areaCode: string) =>
+  areaCode === '13000' ? '東京区部' : PREF_CAPITAL_COORDS[areaCode.slice(0, 2)].name;
 const nameOf = (r: All47Entry, capitalCities?: boolean) => capitalCities
-  ? (r.areaCode === '13000' ? '東京区部' : PREF_CAPITAL_COORDS[r.areaCode.slice(0, 2)].name)
+  ? capitalCityName(r.areaCode)
   : prefectureShortName(r.areaName);
+/** Longest tile name that keeps the size of the other names; 「さいたま市」 (5) shrank to about 11px on a 1080px image. */
+const TILE_NAME_MAX_CHARS = 4;
+/** A tile's name: a capital city too long for the tile drops its 「市」 (the heading and legend already say 市). */
+const tileNameOf = (r: All47Entry, capitalCities?: boolean) => {
+  const name = nameOf(r, capitalCities);
+  return capitalCities && [...name].length > TILE_NAME_MAX_CHARS ? name.replace(/市$/, '') : name;
+};
 
 function assertAll47(entries: All47Entry[]) {
   const rows = new Map(entries.map((r) => [Number(r.areaCode.slice(0, 2)), r]));
@@ -161,7 +171,7 @@ export function renderTileMapBody(entries: All47Entry[], opts: TileMapBodyOption
     const fill = override?.fill ?? scale.colorAt(r.value), ink = textOn(fill);
     const width = w * pitch - TILE_GAP, height = h * pitch - TILE_GAP;
     const cx = width / 2, cy = height / 2;
-    const lines = override?.lines ?? (showValues ? [nameOf(r, opts.capitalCities), fmt(r.value)] : [nameOf(r, opts.capitalCities)]);
+    const lines = override?.lines ?? (showValues ? [tileNameOf(r, opts.capitalCities), fmt(r.value)] : [tileNameOf(r, opts.capitalCities)]);
     const labels = lines.length === 1
       ? text(lines[0], cx, cy + (override?.emphasis ? valueSize : nameSize) * 0.36, override?.emphasis ? valueSize * 1.3 : nameSize * 1.05, width - 8, ink, override?.emphasis ? 800 : 700, 'middle')
       : text(lines[0], cx, cy - 3, nameSize, width - 8, ink, 700, 'middle') + text(lines[1], cx, cy + valueSize - 1, valueSize, width - 8, ink, 800, 'middle');

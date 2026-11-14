@@ -206,10 +206,12 @@ export function buildKdpWeeklyDecision(input: {
   weekNumber(input.week);
   const asOfDate = dateOnly(input.generatedAt);
   const rows = Object.entries(input.listings).map(([id, listing]) => ({ ...listing, id }));
-  const s1 = rows.filter((row) => row.id.startsWith("K-S1-"));
+  // パイロットは公開計画が本の ID で名指しした本。S1 の ID でもパイロットとして数える (K-S1-14)
+  const pilotIds: ReadonlySet<string> = new Set(KDP_PUBLICATION_PLAN.pilots.map((pilot) => pilot.bookId));
+  const s1 = rows.filter((row) => row.id.startsWith("K-S1-") && !pilotIds.has(row.id));
   const pilotRows = rows.filter(
     (row) =>
-      !row.id.startsWith("K-S1-") &&
+      (pilotIds.has(row.id) || !row.id.startsWith("K-S1-")) &&
       ((row.salesStartedAt && row.salesStartedAt >= KDP_PUBLICATION_PLAN.expansionProgramStartsAt) ||
         (row.lastSubmittedAt && dateOnly(row.lastSubmittedAt) >= KDP_PUBLICATION_PLAN.expansionProgramStartsAt) ||
         (row.status === "draft" && row.publicationStage === "verified")),
@@ -221,7 +223,7 @@ export function buildKdpWeeklyDecision(input: {
   const eligible = rows
     .filter(
       (row) =>
-        !row.id.startsWith("K-S1-") &&
+        (pilotIds.has(row.id) || !row.id.startsWith("K-S1-")) &&
         row.status === "draft" &&
         row.kdpStatus === "draft" &&
         row.publicationStage === "verified" &&

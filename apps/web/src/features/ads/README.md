@@ -4,6 +4,12 @@
 
 ## 概要
 
+> **現状 (2026-11-14)**: アフィリエイトは 2026-11-12 のオーナー決定で止めている。意図軸で広告を解決するサーバー側の入口
+> `features/ads/server.ts` (`resolveAffiliate*`・`AffiliateAdSlot`・`AreaBannerAd`) を読むページは 0 件で、ページは
+> client-safe の `index.ts` の部品 (`AdRow`・`composeAdRows`・`RailAdSlot`・`RelatedAmazonBook` 等) だけを使う。
+> 下の「広告解決フロー」「データベーススキーマ」「広告の追加・更新」は止める前と DB 時代の記述で、どのページでも動いていない。
+> 規約の正本は `.claude/rules/affiliate-ads-standards.md`。
+
 **完全DB管理方式**。`affiliate_ads` テーブルでテキスト広告・バナー広告を一元管理する。
 カテゴリマッピング（`CATEGORY_AFFILIATE_MAP` / `TAG_AFFILIATE_MAP`）とテーマカラー（`AFFILIATE_THEME`）は定数として維持。
 

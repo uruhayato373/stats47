@@ -140,7 +140,8 @@ jobs:
             const keys=[...new Set([...idx, process.argv[1]+".json", "latest.json"])].sort();
             fs.writeFileSync(process.argv[2], JSON.stringify(keys, null, 2)+"\n");
           ' "$DATE" "$STAGE/index.json"
-          npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "state/ads/ga4-affiliate/"
+          # 同じ日付の再実行では R2 だけにある日別の記録 (<date>.json) を取り直した値で置き換えるので上書きを許す
+          npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --allow-authoritative-overwrite --prefix "state/ads/ga4-affiliate/"
           # push成功だけでなく、公開read pathから日別/latestの同一bytesとindex登録を確認する。
           VERIFIED=false
           for ATTEMPT in 1 2 3; do

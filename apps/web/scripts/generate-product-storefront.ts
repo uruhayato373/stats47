@@ -20,7 +20,7 @@ import { ALL_PRODUCTS } from "../../../packages/product-factory/src/catalog/prod
 import { KINDLE_BOOKS } from "../../../packages/product-factory/src/channels/kindle/book-catalog";
 import { NOTE_PRODUCT_MAPPINGS } from "../../../packages/product-factory/src/channels/note/product-note-mapping";
 
-import { selectLiveKindleEdition, type KindleStorefrontListing } from "./lib/kindle-storefront";
+import { buildKindleStorefrontContent, selectLiveKindleEdition, type KindleStorefrontListing } from "./lib/kindle-storefront";
 import { readProductLanding } from "./lib/product-landing";
 
 import type { NoteArticle } from "../../../.claude/scripts/note/catalog/types";
@@ -69,12 +69,9 @@ function buildStorefrontProducts(): StorefrontProduct[] {
         channel: "kindle",
         channelLabel: "Kindle電子書籍",
         title: edition.title,
-        description: edition === listing ? book.concept :
-          "販売中の旧版です。新版は現在準備・審査中のため、リンク先の書名・版をご確認ください。",
         priceYen: edition.priceYen,
         externalUrl: `https://www.amazon.co.jp/dp/${edition.asin}`,
-        included: ["Kindle電子書籍", "固定時点の公的統計", "図表とテーマ解説"],
-        audience: ["地域差を読み物として知りたい方"],
+        ...buildKindleStorefrontContent(id, listing, edition, book),
         sourceBlogSlugs,
       }];
     });

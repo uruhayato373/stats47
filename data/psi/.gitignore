@@ -1,0 +1,4 @@
+# 生 PSI (psi-batch-<ts>.json) の正本は R2 state/psi/ (CI の fetch-metrics-weekly.yml psi job が push)。
+# 手元では npm run state:pull -- psi (--latest で最新だけ) で live/ に取得する。git には history.csv と LATEST.md だけを残す。
+live/
+psi-batch-*.json

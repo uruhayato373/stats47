@@ -1,7 +1,7 @@
 // テンプレート (shadcndashboard/next-shadcn-dashboard@91deb102・Base UI) の toggle.tsx をそのまま使う。変えたのは import 先 (相対パス) だけ。
 // 取り直すときは同じコミットの components/ui/ から写す (packages/ui-theme/README.md)。
 // lyra の cn-* 規則が別の値で上書きする素のクラス (rounded-xl・text-sm 等) は消してある (packages/ui-theme/README.md の差の一覧)。
-// lyra の値は cva の外 (<名前>Lyra) に書き、呼び出し側の className より後ろで合成する (scripts/ui-theme/inline-lyra.mjs)。
+// lyra の値は cva の外 (<名前>Lyra) に書き、呼び出し側の className より後ろで合成する (.claude/scripts/ui/inline-lyra.mjs)。
 "use client"
 
 import { Toggle as TogglePrimitive } from "@base-ui/react/toggle"
@@ -30,7 +30,7 @@ const toggleClasses = cva(
     },
   }
 )
-// lyra:begin toggleClasses (scripts/ui-theme/inline-lyra.mjs が style-lyra.css から書く。手で直さない)
+// lyra:begin toggleClasses (.claude/scripts/ui/inline-lyra.mjs が style-lyra.css から書く。手で直さない)
 const toggleClassesLyra = cva("hover:text-foreground aria-pressed:bg-muted focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive data-[state=on]:bg-muted gap-1 rounded-none text-xs font-medium transition-all [&_svg:not([class*='size-'])]:size-4", {
   variants: {
     variant: {

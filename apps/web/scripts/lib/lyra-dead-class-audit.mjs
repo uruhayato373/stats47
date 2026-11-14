@@ -2,7 +2,7 @@
  * 呼び出し側の className のうち、部品の lyra に負けて効いていないクラスを見つける (lyra-dead-caller-class)。
  *
  * なぜ要るか: テンプレート (lyra) の部品は、lyra の値を呼び出し側の className より後ろで合成する
- * (scripts/ui-theme/inline-lyra.mjs)。そのため lyra と同じ性質を決める呼び出し側のクラス
+ * (.claude/scripts/ui/inline-lyra.mjs)。そのため lyra と同じ性質を決める呼び出し側のクラス
  * (TableHead の text-right、Button の h-11、Skeleton の rounded-md など) は ! が無いと効かない。
  * 2026-10-28 の洗い出しで約 210 件あり、表の数値列の見出しが左寄せのまま・共有ボタンのブランド色が
  * 出ないなどの不具合になっていた (LYRA-DEAD-CALLER-CLASSES-01)。
@@ -17,7 +17,7 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 
-import { losesToLyra } from '../../../../scripts/ui-theme/inline-lyra.mjs';
+import { losesToLyra } from '../../../../.claude/scripts/ui/inline-lyra.mjs';
 
 const VARIANT_PROP = /(variant|size|orientation|side)(?:=|\s*:\s*)["']([^"']+)["']/g;
 const IMPORT = /import\s*(?:type\s*)?\{([^}]*)\}\s*from\s*["']([^"']+)["']/g;

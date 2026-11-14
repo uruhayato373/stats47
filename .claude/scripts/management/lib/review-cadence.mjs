@@ -23,7 +23,7 @@ import { join } from "node:path";
 import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 
 const require = createRequire(import.meta.url);
-const { parseBacklog } = require("../../lib/backlog-lib.cjs");
+const { parseBacklog, parseAnnual, ANNUAL_FILE } = require("../../lib/backlog-lib.cjs");
 
 export const WIRING_PATH = ".claude/config/review-wiring.json";
 /** 遡って欠落を探す週数・月数 (これより古い穴は追わない) */
@@ -140,6 +140,8 @@ export function listReviews(root, conf) {
 export function loadIdIndex(root) {
   const ids = new Set();
   for (const rel of TODO_FILES) for (const c of parseBacklog(readText(root, rel) ?? "")) if (c.id) ids.add(c.id);
+  // 時期待ちで年間計画へ移したカードも行き先として有効
+  for (const c of parseAnnual(readText(root, `.claude/todo/${ANNUAL_FILE}`) ?? "")) if (c.id) ids.add(c.id);
   // improvements.md の施策は `### [ID]` 見出しではなく表の 1 列目に ID を持つ
   for (const line of (readText(root, IMPROVEMENTS) ?? "").split("\n")) {
     const m = line.match(/^\|\s*([A-Z0-9]+(?:-[A-Z0-9]+)+)\s*\|/);
@@ -376,7 +378,7 @@ export function reviewCadence(root, now = new Date()) {
           code: "handoff-unrouted",
           file: r.path,
           message: `${conf.label} ${r.period} の「${conf.handoffSection}」で行き先が無い・不明な項目 ${bad.length} / ${r.handoff.length} 件`,
-          fix: `各項目の末尾に「${marker} <カード ID / EXP-NNN / #Issue / 定常 / 見送り>」を書く。カード ID は backlog / improvements に実在するもの`,
+          fix: `各項目の末尾に「${marker} <カード ID / EXP-NNN / #Issue / 定常 / 見送り>」を書く。カード ID は backlog / annual / improvements に実在するもの`,
           items: bad.map((h) => `${h.text.slice(0, 60)} (${h.problem})`),
         });
       }

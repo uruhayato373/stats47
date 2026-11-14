@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { checkRecord, expansionStatus, suggestTargets, validateExpansion } from '../lib/reference-expansion.mjs';
+import {
+  checkRecord, expansionStatus, loadAnalyses, loadChannelIndex, loadExpansion, suggestTargets, validateExpansion,
+} from '../lib/reference-expansion.mjs';
 
 const analysis = (over = {}) => ({
   id: 'book-2020-a01', sourceKey: 'book', edition: '2020', resolution: 'combined-analysis',
@@ -68,4 +70,10 @@ test('kindle records point at a book (kindle:<id>) and are done only when the bo
   assert.ok(checkRecord(rec({ channel: 'kindle', status: 'done', target: 'kindle:K-S1-02' }), a, kindleIndex).some((e) => e.includes('公開中でない')));
   assert.ok(checkRecord(rec({ channel: 'kindle', status: 'planned', target: 'blog:post' }), a, kindleIndex).some((e) => e.includes('ページ ID ではない')));
   assert.equal(states(expansionStatus([a], { records: [rec({ channel: 'kindle', target: 'kindle:K-S1-01' })] }, kindleIndex)).kindle, 'done');
+});
+
+test('実データ: ランキング・調査の採択企画は、公開中の指標・調査だけを指す (未公開の重複指標や調査の未接続を残さない)', () => {
+  const rows = expansionStatus(loadAnalyses(), loadExpansion(), loadChannelIndex());
+  const pending = rows.filter((r) => r.state === 'pending' && (r.channel === 'ranking' || r.channel === 'survey'));
+  assert.deepEqual(pending.map((r) => `${r.channel}:${r.analysis.id}`), []);
 });

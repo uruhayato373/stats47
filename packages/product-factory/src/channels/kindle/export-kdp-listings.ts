@@ -148,15 +148,22 @@ function buildDescription(concept: string): string {
 /** 承認済みの紹介文原稿。新版の免責文は promote-kdp-listing が冒頭に足す。 */
 function readApprovedCopy(id: string): { description: string; keywords: readonly string[] } | null {
   const copies = JSON.parse(readFileSync(join(REPO_ROOT, KDP_LISTING_COPY), "utf8")).books as Record<string, {
-    status: string; hook: string; points: string[]; forWhom: string[]; keywords: string[]; targetQueries: string[];
+    status: string; hook: string; points: string[]; forWhom: string[]; scopeNote?: string; keywords: string[]; targetQueries: string[];
   }>;
   const copy = copies[id];
   if (!copy || copy.status === "draft") return null;
   const quality = JSON.parse(readFileSync(join(REPO_ROOT, datasetPath("kindle.quality")), "utf8")) as {
-    books: { id: string; figures: number; fullTables: number }[];
+    books: {
+      id: string; figures: number; fullTables: number;
+      fullTableIndicators: { label: string; period: string; unit: string }[] | null; householdCityValues: boolean | null;
+    }[];
   };
-  const facts = quality.books.find((book) => book.id === id);
-  if (!facts) throw new Error(`${id}: kindle-quality.json に実測が無い`);
+  const measured = quality.books.find((book) => book.id === id);
+  if (!measured) throw new Error(`${id}: kindle-quality.json に実測が無い`);
+  // 指標の一覧を測っていない実測で組み立てると、紹介文からデータの範囲と指標が黙って落ちる
+  const { fullTableIndicators, householdCityValues } = measured;
+  if (!fullTableIndicators || householdCityValues === null) throw new Error(`${id}: 実測に指標の一覧が無い。kindle:quality --write で測り直す`);
+  const facts = { ...measured, fullTableIndicators, householdCityValues };
   return { description: renderListingDescription(copy, facts), keywords: copy.keywords };
 }
 

@@ -27,6 +27,7 @@
 - [product catalog contract](project_coconala_product_factory.md) — 商品定義・公開記録・納品版・販売準備を分ける
 - [note product rollout](project_note_product_rollout.md) — note 商品は固定 SHA の納品版から作る
 - [kindle publishing factory](project_kindle_publishing_factory.md) — EPUB3 生成・30% 書き下ろし必須・KDP は人手
+- [kdp bookshelf archived view](reference_kdp_bookshelf_archived_view.md) — 本棚の既定表示と検索はアーカイブ済みを出さない。口座に台帳外の本もある
 - [asp site attribution](project_asp_site_attribution.md) — 共用 ASP 口座のサイト帰属を assert
 - [affiliate banner text asymmetry](project_affiliate_banner_text_asymmetry.md) — text 広告は locationCode で弾かれる
 - [competitor indicator benchmark](project_competitor_indicator_benchmark.md) — 指標数は競合超え。課題は需要と CTR
@@ -63,7 +64,7 @@
 - [estat expansion pipeline](project_estat_expansion_pipeline_2026_07.md) — e-Stat 全展開は不可能。需要ファースト
 - [estat backfill lessons](project_estat_backfill_lessons.md) — backfill は UPSERT（他ソース年度を消さない）
 - [estat wage survey](reference_estat_wage_survey.md) — 賃金構造基本統計の表構造と登録キー
-- [kakei expansion gotchas](project_kakei_expansion_pipeline_gotchas.md) — 家計調査の地域コード写像と export の罠
+- [kakei expansion gotchas](project_kakei_expansion_pipeline_gotchas.md) — 家計調査の地域コード写像・export の罠・市別の長い系列の比べ方
 - [kakei marketing book](project_kakei_marketing_book_pipeline.md) — 家計調査の本を全ページ解決・企画台帳
 - [lens belongs to survey](feedback_lens_belongs_to_survey.md) — 切り口は本でなく調査の持ち物
 - [survey linkage ssot](project_survey_linkage_ssot.md) — ranking↔調査の紐付けの正本

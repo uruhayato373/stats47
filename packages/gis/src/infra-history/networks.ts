@@ -1,13 +1,43 @@
 import data from "../../../../data/geo/infra-history/networks.json";
+import {
+  findKsjFeatureTypeForEntry,
+  ksjAttributeByRole,
+  ksjPrefectureSource,
+  ksjPropertyName,
+  requireKsjAttributeByRole,
+} from "../mlit-ksj/attributes";
 import { findKsjClassification } from "../mlit-ksj/classifications";
 import { GIS_DATASETS_BY_ID, resolveKsjUsageTerms, type KsjDataId } from "../mlit-ksj/datasets";
 import { INFRA_PUBLICATION_REQUIRED_SCOPES } from "./types";
 import type { InfraAttributeMap, InfraNetworkDefinition, InfraNetworkKey, InfraSourceTerms } from "./types";
 
-/** 台帳の 1 件。種別の属性名 (`attributes.category`) と種別 (`categories`) は区分の台帳から結ぶので持たない */
-type InfraNetworkRecord = Omit<InfraNetworkDefinition, "categories" | "attributes"> & {
-  readonly attributes: Omit<InfraAttributeMap, "category">;
-};
+/**
+ * 台帳の 1 件。属性名 (`attributes`) は属性の台帳 `geo.ksj-attributes` の役割から、種別 (`categories`) と
+ * 種別の属性名は区分の台帳から結ぶので持たない
+ */
+type InfraNetworkRecord = Omit<InfraNetworkDefinition, "categories" | "attributes">;
+
+/**
+ * 原典の ZIP 内のファイル (`source.entry`) が当たる地物の種類の属性を、役割から引く。
+ * 種別の属性名は区分の台帳が引く属性 (属性の台帳でそのコード表を持つ属性と一致することをテストが固定する)
+ */
+function resolveInfraAttributes(source: InfraNetworkRecord["source"], categoryField: string): InfraAttributeMap {
+  const featureType = findKsjFeatureTypeForEntry(source.dataId, source.entry);
+  if (!featureType) throw new Error(`属性の台帳に ${source.dataId} の ${source.entry} の地物の種類がありません`);
+  const pick = (role: Parameters<typeof requireKsjAttributeByRole>[1], relationKind?: "main" | "additional") =>
+    ksjPropertyName(requireKsjAttributeByRole(featureType, role, { relationKind }));
+  const relationNote = ksjAttributeByRole(featureType, "relation", { relationKind: "additional" });
+  const prefectureSource = ksjPrefectureSource(featureType);
+  return {
+    start: pick("startYear"),
+    end: pick("endYear"),
+    name: pick("name"),
+    category: categoryField,
+    relation: pick("relation", "main"),
+    ...(relationNote ? { relationNote: ksjPropertyName(relationNote) } : {}),
+    ...(prefectureSource ? { prefectureSource } : {}),
+  };
+}
 
 /**
  * 交通網の変遷ページの台帳の読み込み口。
@@ -16,6 +46,7 @@ type InfraNetworkRecord = Omit<InfraNetworkDefinition, "categories" | "attribute
  * そこに置く。生成スクリプトは原典 ZIP の SHA が台帳と一致しなければ止まり、R2 publisher は `publication.status` が
  * `public-approved` でなければ `app/geo/history/<key>/` を拒否する (`ksj-publication-guard.ts`)。
  * 種別と色は区分の台帳 `geo.ksj-classifications` (単体 GIS ページと共有) から、原典の dataId で結ぶ。
+ * 属性名は属性の台帳 `geo.ksj-attributes` から、原典の ZIP 内のファイルが当たる地物の種類の役割で引く。
  *
  * 利用条件と公式ページの URL は台帳に書かず、GIS 台帳 `geo.ksj-datasets` (読み込み口 `mlit-ksj/datasets.ts`) の `usageTerms` と
  * `sourcePageUrl` から引く (`infraNetworkTerms` / `infraNetworkPageUrl`)。広告の有無もその利用条件から決める
@@ -26,12 +57,11 @@ export const INFRA_NETWORKS: readonly InfraNetworkDefinition[] = (data.networks 
   (network) => {
     const classification = findKsjClassification(network.source.dataId);
     if (!classification) throw new Error(`区分の台帳に ${network.source.dataId} がありません (交通網 ${network.key})`);
-    const { start, end, name, ...rest } = network.attributes;
     const { years, cautions, ...head } = network;
     return {
       ...head,
       key: network.key as InfraNetworkKey,
-      attributes: { start, end, name, category: classification.field, ...rest },
+      attributes: resolveInfraAttributes(network.source, classification.field),
       categories: classification.classes,
       years,
       cautions,

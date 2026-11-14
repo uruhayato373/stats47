@@ -21,6 +21,9 @@ import type {
 import { GEO_SOURCE_PAGES } from '../../../packages/data-configs/src/business-plan/geo-source-pages';
 import {
   CATALOG_KEY,
+  GEO_SOURCE_MAX_IN_FLIGHT,
+  createGeoSourceMetrics,
+  instrumentGeoSourceStore,
   mapGeoSourceBatch,
   buildExactPlan,
   candidateForGeoKey,
@@ -127,6 +130,120 @@ describe('Geo exact source publication', () => {
     expect(started).toBe(4);
     expect(settled).toBe(3);
     expect(active).toBe(0);
+  });
+  it('refills a free slot without waiting for the other three in-flight items', async () => {
+    let active = 0;
+    let activeWhenLastStarted = 0;
+    const results = await mapGeoSourceBatch([0, 1, 2, 3, 4], async (index) => {
+      active++;
+      if (index === 4) activeWhenLastStarted = active;
+      try {
+        await new Promise((resolve) =>
+          setTimeout(resolve, index === 0 ? 1 : 30)
+        );
+        return index * 10;
+      } finally {
+        active--;
+      }
+    });
+    // Item 4 must take item 0's slot while items 1-3 are still running.
+    expect(activeWhenLastStarted).toBe(4);
+    expect(results).toEqual([0, 10, 20, 30, 40]);
+  });
+  it('stops new dispatch after a failure and waits for every in-flight item', async () => {
+    const started: number[] = [];
+    let active = 0;
+    let settled = 0;
+    await expect(
+      mapGeoSourceBatch([0, 1, 2, 3, 4, 5, 6, 7], async (index) => {
+        started.push(index);
+        active++;
+        try {
+          if (index === 4) {
+            await new Promise((resolve) => setTimeout(resolve, 1));
+            throw Error('failed after refill');
+          }
+          await new Promise((resolve) =>
+            setTimeout(resolve, index === 0 ? 1 : 30)
+          );
+          settled++;
+        } finally {
+          active--;
+        }
+      })
+    ).rejects.toThrow('failed after refill');
+    // 0 finishes first and 4 takes its slot; 4 fails while 1-3 run, so 5-7 never start.
+    expect(started).toEqual([0, 1, 2, 3, 4]);
+    expect(settled).toBe(4);
+    expect(active).toBe(0);
+  });
+  it('records API calls, transferred bytes, maximum in-flight work and phase times', async () => {
+    const f = fixture();
+    f.write(gisKey, gzipSync(Buffer.from(JSON.stringify(topo))));
+    f.write(itemKey, {});
+    f.write(CATALOG_KEY, {});
+    const metrics = createGeoSourceMetrics();
+    const store = instrumentGeoSourceStore(f.store, metrics);
+    const plan = await buildExactPlan(
+      f.root,
+      [CATALOG_KEY, itemKey, gisKey],
+      ['W09'],
+      store,
+      metrics
+    );
+    vi.stubEnv('CI', 'true');
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (url: string) => {
+        const object = f.objects.get(new URL(url).pathname.slice(1));
+        return new Response(new Uint8Array(decoded(object!.body)));
+      })
+    );
+    const result = await executeGeoSourcePlan({
+      root: f.root,
+      plan,
+      store,
+      publicBase: 'https://example.test',
+      apply: true,
+      metrics,
+    });
+    const putBytes = plan.objects.reduce((n, o) => n + o.bytes, 0);
+    expect(metrics.api.put).toBe(f.writes.length);
+    expect(metrics.bytes.s3Put).toBe(putBytes);
+    expect(metrics.api.get).toBe(result.verified);
+    expect(metrics.bytes.s3Get).toBe(putBytes);
+    expect(metrics.api.publicGet).toBe(result.verified);
+    expect(metrics.bytes.publicGet).toBe(
+      plan.objects.reduce((n, o) => n + o.decodedBytes, 0)
+    );
+    expect(metrics.api.head).toBeGreaterThan(0);
+    expect(metrics.maxInFlight).toBeGreaterThan(0);
+    expect(metrics.maxInFlight).toBeLessThanOrEqual(GEO_SOURCE_MAX_IN_FLIGHT);
+    expect(Object.keys(metrics.phases)).toEqual([
+      'plan',
+      'preflight',
+      'publish-phase-0',
+      'publish-phase-1',
+      'publish-phase-2',
+      'publish-phase-3',
+    ]);
+    expect(Object.values(metrics.phases).every((ms) => ms >= 0)).toBe(true);
+  });
+  it('rejects a GIS key outside the selected repair scope before any write', async () => {
+    const f = fixture();
+    f.write(gisKey, topo);
+    const plan = await buildExactPlan(f.root, [gisKey], ['W09'], f.store);
+    vi.stubEnv('CI', 'true');
+    await expect(
+      executeGeoSourcePlan({
+        root: f.root,
+        plan: { ...plan, repairIds: ['A38'] },
+        store: f.store,
+        publicBase: 'https://example.test',
+        apply: true,
+      })
+    ).rejects.toThrow('Unselected repair key');
+    expect(f.writes).toEqual([]);
   });
   it('accepts the 13 reviewed repairs and rejects duplicates, unknown or unsafe scope', () => {
     expect(parseRepairIds('all')).toHaveLength(13);

@@ -2,7 +2,8 @@ import { z } from 'zod';
 import { SERIES_COLORS } from '../../../packages/svg-builder/src/shared/color';
 import { BRAND } from '../../web/src/features/ogp/brand';
 import type { StatsSchema } from '../../../packages/types/src';
-import { LIGHT_THEME, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
+import { niceTicks } from '../../../packages/types/src/numeric-ticks';
+import { LIGHT_THEME, mixColor, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
 import { SAMPLE_FRAME, escapeXml, fitTitleSize, sampleBodyTop, sampleFrame, textWidth } from './template-sample-frame';
 
 export const COMPOSITION_SAMPLE_SOURCE = {
@@ -125,6 +126,109 @@ export function renderStackedChart(chart: StackedChart, theme: ChartTheme = LIGH
     title: chart.title, titleSize: fitTitleSize(chart.title, 64), meta: chart.meta, note: chart.note, source: chart.source,
     attributes: `data-image-template="stacked-bar" data-normalized="${normalized}"`,
     body: bars + legend,
+    theme,
+  });
+}
+
+const AREA_MAX_X_LABELS = 7;
+const AREA_END_SIZE = 36;
+const AREA_END_GAP = 42;
+
+/** Move end labels apart, keeping their order, inside the plot's height. */
+function spreadEndLabels(ys: number[], top: number, bottom: number) {
+  const order = ys.map((y, i) => ({ y, i })).sort((a, b) => a.y - b.y);
+  order.forEach((item, n) => { if (n && item.y < order[n - 1].y + AREA_END_GAP) item.y = order[n - 1].y + AREA_END_GAP; });
+  const over = (order[order.length - 1]?.y ?? 0) - bottom;
+  if (over > 0) order.forEach((item) => { item.y -= over; });
+  order.forEach((item, n) => { if (item.y < top + n * AREA_END_GAP) item.y = top + n * AREA_END_GAP; });
+  const placed = [...ys];
+  order.forEach((item) => { placed[item.i] = item.y; });
+  return placed;
+}
+
+/**
+ * The stacked-bar type's area form (`data-form="area"`): a composition along time, one band per category
+ * stacked from the zero line in the categories' order, so the top edge is the total. `groups` are the periods,
+ * left to right. A missing or negative value stops the chart (a band is never interpolated across a gap).
+ * One legend above the plot lists the bands top to bottom, and each band's last value sits at its right end.
+ */
+export function renderStackedAreaChart(chart: StackedChart, theme: ChartTheme = LIGHT_THEME) {
+  const { groups, categories, normalized } = chart;
+  if (groups.length < 2) throw Error('積み上げ面には 2 つ以上の期間が要ります。');
+  if (categories.length < 2) throw Error('積み上げ面には 2 つ以上の区分が要ります。');
+  if (categories.some((c) => c.values.length !== groups.length || c.values.some((v) => v === null || !Number.isFinite(v) || v < 0)))
+    throw Error('積み上げ面の値に欠け・負の値があります。面を補間で埋めません。');
+  const totals = groups.map((_, g) => categories.reduce((sum, c) => sum + c.values[g]!, 0));
+  if (totals.some((total) => !(total > 0))) throw Error('積み上げ面の合計が0の期間があります。');
+  const shareOf = (value: number, g: number) => (normalized ? value / totals[g] * 100 : value);
+  // cumulative[c][g]: the top of band c at period g, on the value axis.
+  const cumulative: number[][] = [];
+  categories.forEach((c, i) => cumulative.push(groups.map((_, g) => (i ? cumulative[i - 1][g] : 0) + shareOf(c.values[g]!, g))));
+  const decimals = chart.decimals ?? 1;
+  const format = (value: number) => (normalized ? value.toFixed(1) + '%' : value.toLocaleString('en-US', { maximumFractionDigits: decimals }));
+  // The value axis ends on a tick at or above the largest total, so the top band sits under a labelled gridline.
+  const inner = niceTicks(0, Math.max(...totals), 5);
+  const tickStep = inner.length > 1 ? inner[1] - inner[0] : Math.max(...totals);
+  const ticks = normalized ? [0, 25, 50, 75, 100]
+    : Array.from({ length: Math.ceil(Math.max(...totals) / tickStep - 1e-9) + 1 }, (_, i) => Number((i * tickStep).toPrecision(12)));
+  const domainMax = ticks[ticks.length - 1];
+  const tickDecimals = Math.min(2, Math.max(0, ...ticks.map((t) => (String(t).split('.')[1] ?? '').length)));
+  const tickLabel = (t: number) => t.toLocaleString('en-US', { minimumFractionDigits: tickDecimals, maximumFractionDigits: tickDecimals }) + (normalized ? '%' : '');
+  const colorOf = (i: number) => SERIES_COLORS[i % SERIES_COLORS.length];
+  const textColorOf = (i: number) => (theme.name === 'dark' ? mixColor(colorOf(i), '#FFFFFF', 0.3) : colorOf(i));
+
+  // One legend above the plot, top band first so it reads in the order the bands are stacked.
+  const legendItems: string[] = [];
+  let legendX: number = SAMPLE_FRAME.left, legendY = sampleBodyTop(Boolean(chart.note)) + 24;
+  [...categories.keys()].reverse().forEach((i) => {
+    const label = categories[i].label;
+    const width = 50 + textWidth(label, 28) + 36;
+    if (legendX + width > SAMPLE_FRAME.right && legendX > SAMPLE_FRAME.left) { legendX = SAMPLE_FRAME.left; legendY += 48; }
+    legendItems.push(`<rect x="${legendX}" y="${legendY - 26}" width="34" height="34" rx="4" fill="${colorOf(i)}"/><text x="${legendX + 50}" y="${legendY}" font-size="28" fill="${theme.ink}">${escapeXml(label)}</text>`);
+    legendX += width;
+  });
+
+  const lastValues = categories.map((c) => format(shareOf(c.values[groups.length - 1]!, groups.length - 1)));
+  const endWidth = Math.max(...lastValues.map((v) => textWidth(v, AREA_END_SIZE)));
+  const plot = {
+    left: SAMPLE_FRAME.left + Math.max(...ticks.map((t) => textWidth(tickLabel(t), 28))) + 20,
+    right: SAMPLE_FRAME.right - endWidth - 18,
+    top: legendY + 80, bottom: SAMPLE_FRAME.bodyBottom - 70,
+  };
+  const xAt = (g: number) => plot.left + (plot.right - plot.left) * g / (groups.length - 1);
+  const yAt = (value: number) => plot.bottom - (plot.bottom - plot.top) * value / domainMax;
+  const point = (g: number, value: number) => `${xAt(g).toFixed(1)},${yAt(value).toFixed(1)}`;
+
+  const grid = ticks.map((t) => {
+    const y = yAt(t);
+    return `<line x1="${plot.left}" y1="${y.toFixed(1)}" x2="${plot.right}" y2="${y.toFixed(1)}" stroke="${theme.line}" stroke-width="1.5"/><text x="${plot.left - 20}" y="${(y + 10).toFixed(1)}" text-anchor="end" font-size="28" fill="${theme.muted}">${tickLabel(t)}</text>`;
+  }).join('');
+  const bands = categories.map((c, i) => {
+    const top = groups.map((_, g) => point(g, cumulative[i][g]));
+    const bottom = groups.map((_, g) => point(g, i ? cumulative[i - 1][g] : 0)).reverse();
+    return `<polygon data-category="${escapeXml(c.label)}" points="${[...top, ...bottom].join(' ')}" fill="${colorOf(i)}" stroke="${theme.paper}" stroke-width="1.5" stroke-linejoin="round"/>`;
+  }).join('');
+
+  // Thin the period labels to what fits the plot's width, always keeping the first and the last.
+  const labelWidth = Math.max(...groups.map((g) => textWidth(g, 28)));
+  const most = Math.max(2, Math.min(AREA_MAX_X_LABELS, Math.floor((plot.right - plot.left + labelWidth) / (labelWidth + 24))));
+  const step = Math.max(1, Math.ceil((groups.length - 1) / (most - 1)));
+  const kept = [...groups.keys()].filter((g) => g % step === 0 && groups.length - 1 - g >= step * 0.6);
+  const xLabels = [...kept, groups.length - 1].map((g) => {
+    const half = textWidth(groups[g], 28) / 2;
+    const x = Math.min(Math.max(xAt(g), SAMPLE_FRAME.left + half), SAMPLE_FRAME.right - half);
+    return `<text data-x-label="${escapeXml(groups[g])}" x="${x.toFixed(1)}" y="${plot.bottom + 52}" text-anchor="middle" font-size="28" fill="${theme.muted}">${escapeXml(groups[g])}</text>`;
+  }).join('');
+
+  const last = groups.length - 1;
+  const middles = categories.map((_, i) => (yAt(cumulative[i][last]) + yAt(i ? cumulative[i - 1][last] : 0)) / 2 + 13);
+  const endYs = spreadEndLabels(middles, plot.top, plot.bottom);
+  const ends = categories.map((_, i) => `<text x="${(plot.right + 18).toFixed(1)}" y="${endYs[i].toFixed(1)}" font-size="${AREA_END_SIZE}" font-weight="700" fill="${textColorOf(i)}">${lastValues[i]}</text>`).join('');
+
+  return sampleFrame({
+    title: chart.title, titleSize: fitTitleSize(chart.title, 64), meta: chart.meta, note: chart.note, source: chart.source,
+    attributes: `data-image-template="stacked-bar" data-form="area" data-normalized="${normalized}" data-periods="${groups.length}"`,
+    body: legendItems.join('') + grid + bands + xLabels + ends,
     theme,
   });
 }

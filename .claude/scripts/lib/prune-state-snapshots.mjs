@@ -30,11 +30,7 @@ export const RETENTION_POLICIES = Object.freeze({
     pattern: /^\d{4}-\d{2}-\d{2}\.jsonl$/,
     keep: 60,
   },
-  psi: {
-    directory: datasetDir("psi.batch"),
-    pattern: /^psi-batch-\d{4}-\d{2}-\d{2}T[\d-]+\.json$/,
-    keep: 1,
-  },
+  // psi の生 JSON は 2026-11-14 に R2 state/psi/ へ移した (git に置かないので寿命も持たない。lib/state-publish.mjs)
   gsc: {
     directory: datasetDir("gsc.url-inspection"),
     pattern: /^\d{4}-\d{2}-\d{2}\.csv$/,

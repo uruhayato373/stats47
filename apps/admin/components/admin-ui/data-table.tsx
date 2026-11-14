@@ -31,7 +31,8 @@ export const Row = TableRow;
 export function Cell({ nowrap, muted, className, ...props }: ComponentProps<typeof TableCell> & { nowrap?: boolean; muted?: boolean }) {
   return (
     <TableCell
-      className={cn(bodyCell, "align-top! whitespace-normal!", nowrap && "whitespace-nowrap", muted && "text-muted-foreground", className)}
+      // 折り返しの指定はどちらか 1 つだけ付ける。既定の whitespace-normal! (important) を付けたままだと nowrap が負ける (UI-FOLLOWUP-02)
+      className={cn(bodyCell, "align-top!", nowrap ? "whitespace-nowrap!" : "whitespace-normal!", muted && "text-muted-foreground", className)}
       {...props}
     />
   );

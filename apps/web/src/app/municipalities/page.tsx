@@ -31,6 +31,7 @@ import { SectionHeader } from '@/components/section';
 import { SurfaceLinkCard, SurfaceSection } from '@/components/surface';
 
 import { AdRow, composeAdRows, InFeedAdSlot } from '@/features/ads';
+import { groupThemesForListing } from '@/features/theme-dashboard/listing.server';
 import { ALL_THEMES } from '@/features/theme-dashboard/server';
 
 import { HUB_INCONTENT, MUNICIPALITIES_INDEX_INFEED } from '@/lib/google-adsense';
@@ -83,12 +84,15 @@ export default async function MunicipalitiesHubPage() {
   const entityCount = listPublishableMunicipalities(policy).length;
   const themes = Object.values(MUNICIPALITY_THEME_CATALOGS);
   // 公開中のテーマは都道府県のテーマ名のページ (対応する市区町村テーマの指標をまとめる。2026-10-31 IA-REGION-THEME-01)
-  const activeThemes = MUNICIPALITY_THEME_PAGE_SLUGS.flatMap((slug) => {
-    const prefectureTheme = ALL_THEMES.find((t) => t.themeKey === slug);
-    return prefectureTheme
-      ? [{ slug, title: prefectureTheme.title, metricKeys: municipalityMetricKeysForPrefectureTheme(slug) }]
-      : [];
-  });
+  // 並びは都道府県のテーマ一覧と同じ分野の順にする (HUB-LIST-FINDABILITY-01。手で書いた対応表の順に並んでいた)
+  const activeThemes = groupThemesForListing(
+    MUNICIPALITY_THEME_PAGE_SLUGS.flatMap((slug) => {
+      const prefectureTheme = ALL_THEMES.find((t) => t.themeKey === slug);
+      return prefectureTheme
+        ? [{ themeKey: slug, slug, title: prefectureTheme.title, metricKeys: municipalityMetricKeysForPrefectureTheme(slug) }]
+        : [];
+    })
+  ).flatMap((group) => group.themes.map((theme) => ({ ...theme, groupLabel: group.label })));
   const draftThemes = themes.filter((theme) => theme.status === 'draft');
   const prefectures = fetchPrefectures();
   // 広告の段: 公開中のテーマの後に AdSense 1 つを本文の幅いっぱい (上限 580px) に出す (2026-11-12 オーナー決定でアフィリエイトを止め、PR を外した)
@@ -183,6 +187,15 @@ export default async function MunicipalitiesHubPage() {
         />
       </div>
 
+      {/* 自分の市区町村を探す入口。右レールが本文の後ろへ積まれる幅では最下部にしか無かったので、本文の上にも置く (HUB-LIST-FINDABILITY-01) */}
+      <div className="rail:hidden">
+        <RailPrefectureCard
+          title="都道府県から市区町村を探す"
+          prefectures={prefectures}
+          moreLabel="都道府県一覧から探す →"
+        />
+      </div>
+
       <section aria-labelledby="municipality-active-themes">
         <div className="mb-3 flex items-baseline justify-between gap-4">
           <h2
@@ -192,7 +205,7 @@ export default async function MunicipalitiesHubPage() {
             公開中のテーマ
           </h2>
           <p className="text-xs text-muted-foreground">
-            {activeThemes.length}テーマ
+            {activeThemes.length}テーマ ・ 並び順: 都道府県のテーマ一覧と同じ分野の順
           </p>
         </div>
         <PanelGrid className="sm:grid-cols-2">
@@ -213,7 +226,7 @@ export default async function MunicipalitiesHubPage() {
                       {theme.title}
                     </h3>
                     <span className="shrink-0 text-xs text-muted-foreground">
-                      {metricTitles.length}指標
+                      {theme.groupLabel} ・ {metricTitles.length}指標
                     </span>
                   </div>
                   <p className="mt-2 line-clamp-2 text-[13px] leading-relaxed text-muted-foreground">

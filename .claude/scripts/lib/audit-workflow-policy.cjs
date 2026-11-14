@@ -6,7 +6,7 @@ const path = require('node:path');
 const YAML = require('yaml');
 
 const ROOT =
-  process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, '..', '..', '..');
+  process.env.STATS47_SCAN_ROOT || path.resolve(__dirname, '..', '..', '..');
 const WORKFLOW_ROOT = path.join(ROOT, '.github/workflows');
 const isStrict = process.argv.includes('--strict');
 const isJson = process.argv.includes('--json');

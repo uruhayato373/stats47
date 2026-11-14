@@ -14,8 +14,11 @@ const test = require("node:test");
 
 const HOOK = path.resolve(__dirname, "../../../hooks/check-unpushed-on-stop.js");
 
+// 親の git の環境変数 (pre-push の中で動くときの GIT_DIR など) を渡すと、一時リポジトリではなく本物のリポジトリを
+// `git init --bare` で bare に初期化し直してしまう (2026-11-14 に実際に起きた)。GIT_ で始まる変数は渡さない。
+const BASE_ENV = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith("GIT_")));
 function sh(cwd, args, env = {}) {
-  const r = spawnSync("git", args, { cwd, encoding: "utf8", env: { ...process.env, ...env } });
+  const r = spawnSync("git", args, { cwd, encoding: "utf8", env: { ...BASE_ENV, ...env } });
   assert.equal(r.status, 0, r.stderr);
   return r.stdout.trim();
 }
@@ -39,7 +42,7 @@ function fixture(t) {
     sh(repo, ["commit", "--allow-empty", "-m", msg, "--date", date], { GIT_COMMITTER_DATE: date, ...env });
   // 実行環境の CLAUDE_PROJECT_DIR を引き継がない (環境変数なしの経路を固定するため)
   const run = (cwd = repo, env = {}) => {
-    const childEnv = { ...process.env, ...env };
+    const childEnv = { ...BASE_ENV, ...env };
     if (!("CLAUDE_PROJECT_DIR" in env)) delete childEnv.CLAUDE_PROJECT_DIR;
     return spawnSync(process.execPath, [HOOK], {
       encoding: "utf8",

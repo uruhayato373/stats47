@@ -6,7 +6,10 @@
  *
  * 出力先: data/gsc/snapshots/<YYYY-Www>/
  *   - queries/pages/devices/countries/daily.csv … ローリング28日 (機会発見用)
- *   - summary.json … 確定7日 KPI (finalized7d/previous7d) + rolling28d の期間 metadata 付き summary
+ *   - queries-finalized7d.csv / pages-finalized7d.csv … 確定7日 (finalized7d) の明細。前週と重ならないので
+ *     カテゴリ別の前週比に使う (lib/gsc-demand.mjs。GSC-DEMAND-REPORT-01)
+ *   - summary.json … 確定7日 KPI (finalized7d/previous7d) + rolling28d の期間 metadata 付き summary。
+ *     details に明細の期間とキーワード表の捕捉率 (queries の clicks 合計 ÷ サイト全体の clicks) を持つ
  * 認証: ../lib/google-client.cjs (GOOGLE_SERVICE_ACCOUNT_KEY_JSON env または stats47-*.json)
  *
  * 期間契約 (.claude/skills/analytics/search-growth/reference/weekly-cycle-contract.md):
@@ -25,6 +28,7 @@ import {
 } from "./lib/auth.mjs";
 import { resolvePeriods } from "./lib/periods.mjs";
 import { buildGscSummary, SUMMARY_FILE } from "./lib/weekly-summary.mjs";
+import { PAGES_FINALIZED_FILE, QUERIES_FINALIZED_FILE, detailCoverage } from "./lib/gsc-demand.mjs";
 import { GSC_PROPERTY } from "../lib/site-config.cjs";
 import { createSearchConsoleClient } from "../lib/google-client.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
@@ -75,27 +79,52 @@ async function main() {
   const outDir = join(PROJECT_ROOT, datasetDir("gsc.snapshots"), week);
   mkdirSync(outDir, { recursive: true });
 
+  const fin = periods.finalized7d;
   const jobs = [
-    { dim: "query", file: "queries.csv" },
-    { dim: "page", file: "pages.csv" },
-    { dim: "device", file: "devices.csv" },
-    { dim: "country", file: "countries.csv" },
-    { dim: "date", file: "daily.csv" },
+    { dim: "query", file: "queries.csv", startDate, endDate },
+    { dim: "page", file: "pages.csv", startDate, endDate },
+    { dim: "device", file: "devices.csv", startDate, endDate },
+    { dim: "country", file: "countries.csv", startDate, endDate },
+    { dim: "date", file: "daily.csv", startDate, endDate },
+    { dim: "query", file: QUERIES_FINALIZED_FILE, startDate: fin.periodStart, endDate: fin.periodEnd },
+    { dim: "page", file: PAGES_FINALIZED_FILE, startDate: fin.periodStart, endDate: fin.periodEnd },
   ];
 
   const summaryLines = [];
-  let dailyRows = null;
+  /** @type {Record<string, any[]>} */
+  const rowsByFile = {};
   for (const job of jobs) {
-    const raw = await fetchAll(searchconsole, [job.dim], startDate, endDate);
+    const raw = await fetchAll(searchconsole, [job.dim], job.startDate, job.endDate);
     const normalized = normalize(raw, job.dim);
     const csv = toCsv(normalized, [job.dim, "clicks", "impressions", "ctr", "position"]);
     writeFileSync(join(outDir, job.file), csv);
-    summaryLines.push(`${job.file}: ${normalized.length} rows`);
-    if (job.dim === "date") dailyRows = normalized;
+    summaryLines.push(`${job.file}: ${normalized.length} rows (${job.startDate}..${job.endDate})`);
+    rowsByFile[job.file] = normalized;
   }
 
   // 確定7日 KPI summary (finalized7d/previous7d/rolling28d + 期間 metadata)
-  const summary = buildGscSummary({ week, dailyRows: dailyRows ?? [] });
+  const summary = buildGscSummary({ week, dailyRows: rowsByFile["daily.csv"] ?? [] });
+  // 明細の期間と捕捉率 (キーワード表はクリックの一部しか載らない。伏せられた検索語は推定で埋めない)
+  const siteClicks28d = (rowsByFile["daily.csv"] ?? []).reduce((s, r) => s + Number(r.clicks || 0), 0);
+  summary.details = {
+    rolling28d: detailCoverage({
+      periodStart: startDate,
+      periodEnd: endDate,
+      queryRows: rowsByFile["queries.csv"],
+      pageRows: rowsByFile["pages.csv"],
+      siteClicks: siteClicks28d,
+    }),
+    finalized7d: detailCoverage({
+      periodStart: fin.periodStart,
+      periodEnd: fin.periodEnd,
+      queryRows: rowsByFile[QUERIES_FINALIZED_FILE],
+      pageRows: rowsByFile[PAGES_FINALIZED_FILE],
+      siteClicks: summary.finalized7d.kpis.clicks,
+    }),
+  };
+  summaryLines.push(
+    `keyword capture: 28d ${summary.details.rolling28d.queryCaptureRate} / finalized7d ${summary.details.finalized7d.queryCaptureRate}`,
+  );
   writeFileSync(join(outDir, SUMMARY_FILE), JSON.stringify(summary, null, 2) + "\n");
   summaryLines.push(
     `${SUMMARY_FILE}: finalized7d ${summary.finalized7d.periodStart}..${summary.finalized7d.periodEnd} ` +
