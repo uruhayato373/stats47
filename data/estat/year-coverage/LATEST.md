@@ -1,7 +1,7 @@
 # e-Stat 年カバレッジ監査 (LATEST)
 
-- 生成: 2026-11-07T23:50:52.643Z
-- 対象母集団: 単年設定の active e-Stat metric 271 件 (今回確認 100 件)
+- 生成: 2026-11-14T04:11:48.327Z
+- 対象母集団: 単年設定の active e-Stat metric 270 件 (今回確認 100 件)
 - 判定: 都道府県1件 (北海道) をサンプルに `getStatsData` を実測し、値が non-null な年の件数を
   config の `years` と比較する。全 47 都道府県の精査ではなく代表 1 件によるスクリーニング
 
@@ -27,7 +27,7 @@
 - `bamboo-production` — config 14年 → e-Stat実在 22年 (1975-2002)
 - `charcoal-production` — config 32年 → e-Stat実在 33年 (1975-2007)
 - `child-consultation-center-cases-per-1000` — config 23年 → e-Stat実在 24年 (2000-2023)
-- `convenience-store-sales` — config 1年 → e-Stat実在 5年 (2021-2025)
+- `convenience-store-sales` — config 3年 → e-Stat実在 5年 (2021-2025)
 - `convenience-store-sales-monthly` — config 3年 → e-Stat実在 5年 (2021-2025)
 - `cpi-change-rate-excl-owner-rent` — config 49年 → e-Stat実在 50年 (1975-2024)
 - `factory-establishment-count` — config 24年 → e-Stat実在 26年 (1995-2020)
