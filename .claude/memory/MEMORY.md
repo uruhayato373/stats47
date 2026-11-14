@@ -183,8 +183,7 @@
 - [browser use cleanup](feedback_browser_use_cleanup.md) — browser-use の daemon は pkill で止める
 - [native chrome session export](feedback_native_chrome_session_export.md) — Google 認証の export は専用 profile のコピーで
 - [playwright profile dual os](feedback_playwright_profile_dual_os.md) — Playwright profile の root の決め方
-- [codex exec stdin](feedback_codex_exec_stdin.md) — codex exec は </dev/null で閉じる
-- [codex mcp model override](feedback_codex_mcp_model_override.md) — Codex MCP は model を上書きする
+- [codex exec stdin](feedback_codex_exec_stdin.md)・[codex mcp model override](feedback_codex_mcp_model_override.md) — codex exec は </dev/null で閉じる / Codex MCP は model を上書きする
 - [codex image registered route](feedback_codex_image_registered_route_only.md) — 画像生成は登録済み経路だけ
 - [workflow worktree base and deps](feedback_workflow_worktree_base_and_deps.md) — Workflow の worktree は古い起点で deps 無し
 - [tmp worktree lost on resume](feedback_tmp_worktree_lost_on_resume.md) — scratchpad の worktree は再開で消える

@@ -16,6 +16,12 @@ export interface EstatStatsDataResponse {
       // 他のパラメータは省略
     };
     STATISTICAL_DATA: {
+      RESULT_INF?: {
+        TOTAL_NUMBER: number | string;
+        FROM_NUMBER: number | string;
+        TO_NUMBER: number | string;
+        NEXT_KEY?: number | string;
+      };
       TABLE_INF: EstatTableInfo;
       CLASS_INF: EstatClassInfo;
       DATA_INF: {

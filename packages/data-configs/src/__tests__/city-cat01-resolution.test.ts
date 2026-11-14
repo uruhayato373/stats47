@@ -120,7 +120,7 @@ describe("市区町村の取得座標を観測値のrecipeへ保存", () => {
     ...extra,
   });
   const values = [{ "@area": "13101", "@time": "2020100000", $: "150" }];
-  const response = { values, raw: { totalNumber: 1, toNumber: 1 } };
+  const response = { values, raw: { totalNumber: 1, toNumber: 1 }, sources: [] };
 
   it("県表から対応する市区町村表へ変えた座標を残し、configHashは正準configと照合できる", async () => {
     const config = fixture();
@@ -137,7 +137,7 @@ describe("市区町村の取得座標を観測値のrecipeへ保存", () => {
 
   it("0件から指標名で再解決したcity cat01を実際の取得・recipeの双方に使う", async () => {
     const config = fixture();
-    const fetcher = vi.fn(async () => response).mockResolvedValueOnce({ values: [], raw: { totalNumber: 0, toNumber: 0 } });
+    const fetcher = vi.fn(async () => response).mockResolvedValueOnce({ values: [], raw: { totalNumber: 0, toNumber: 0 }, sources: [] });
     const resolver = vi.fn(async () => "#A03506");
     const fetched = await fetchCityData("unused", config, original, fetcher, resolver);
     expect(resolver).toHaveBeenCalledWith("unused", "0000010201", "0000020301", "#A03503");
@@ -156,7 +156,7 @@ describe("市区町村の取得座標を観測値のrecipeへ保存", () => {
     expect(payload.meta.recipe).toMatchObject({ estatParams: { statsDataId: citySource.statsDataId, cdCat01: "city-value", cdCat02: "total" },
       ops: { valueScale: 0.1 }, configHash: buildRecipe(config).configHash });
     expect(payload.rows[0].value).toBe(15);
-    fetcher.mockResolvedValueOnce({ values: [], raw: { totalNumber: 0, toNumber: 0 } });
+    fetcher.mockResolvedValueOnce({ values: [], raw: { totalNumber: 0, toNumber: 0 }, sources: [] });
     await fetchCityData("unused", config, original, fetcher, resolver);
     expect(resolver).not.toHaveBeenCalled();
   });

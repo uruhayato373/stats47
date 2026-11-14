@@ -5,6 +5,11 @@
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "exports": {
+    "./ingest": {
+      "types": "./src/ingest.ts",
+      "import": "./src/ingest.ts",
+      "require": "./src/ingest.ts"
+    },
     "./api": {
       "types": "./src/api.ts",
       "import": "./src/api.ts",
