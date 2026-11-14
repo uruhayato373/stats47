@@ -5854,10 +5854,15 @@
               "factor": 1
             }
           ],
-          "valueScale": 0.1
+          "valueScale": 0.1,
+          "sampleCount": {
+            "cdTab": "13,45",
+            "factor": 10,
+            "minimum": 10
+          }
         },
         "derived": true,
-        "configHash": "44bfc11557830ac6"
+        "configHash": "d1b2e988c2883b8b"
       },
       "dependencies": [],
       "normalizationDependencies": [],
@@ -6133,8 +6138,15 @@
           "cdCat02": "1133",
           "cdTab": "10,42"
         },
-        "derived": false,
-        "configHash": "67ba01be6a6705d9"
+        "ops": {
+          "sampleCount": {
+            "cdTab": "13,45",
+            "factor": 10,
+            "minimum": 10
+          }
+        },
+        "derived": true,
+        "configHash": "bcc52bc8e7df8663"
       },
       "dependencies": [],
       "normalizationDependencies": [],
@@ -6952,10 +6964,15 @@
               "factor": 1
             }
           ],
-          "valueScale": 0.1
+          "valueScale": 0.1,
+          "sampleCount": {
+            "cdTab": "13,45",
+            "factor": 10,
+            "minimum": 10
+          }
         },
         "derived": true,
-        "configHash": "7b0539006210bcdb"
+        "configHash": "b18bdd172d331876"
       },
       "dependencies": [],
       "normalizationDependencies": [],
@@ -8102,10 +8119,15 @@
               "factor": 1
             }
           ],
-          "valueScale": 0.1
+          "valueScale": 0.1,
+          "sampleCount": {
+            "cdTab": "13,45",
+            "factor": 10,
+            "minimum": 10
+          }
         },
         "derived": true,
-        "configHash": "a64c5b4dfb758ed6"
+        "configHash": "33bd1cc0eb981a9b"
       },
       "dependencies": [],
       "normalizationDependencies": [

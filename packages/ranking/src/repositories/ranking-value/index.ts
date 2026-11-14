@@ -6,6 +6,7 @@ export {
   readNationalTrendFromR2,
   readAllYearsNormalizedRankingValuesFromR2,
   readAllYearsRankingValuesFromR2,
+  readAllYearsRankingValuesWithReferencesFromR2,
   readNormalizedRankingValuesFromR2,
   readRankingValuesByPrefectureFromR2,
   readRankingValuesFromR2,

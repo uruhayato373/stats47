@@ -9020,10 +9020,15 @@
               "factor": 1
             }
           ],
-          "valueScale": 0.1
+          "valueScale": 0.1,
+          "sampleCount": {
+            "cdTab": "13,45",
+            "factor": 10,
+            "minimum": 10
+          }
         },
         "derived": true,
-        "configHash": "c3c7a6b30d94262c"
+        "configHash": "9e1faa4600a8f289"
       },
       "dependencies": [],
       "normalizationDependencies": [

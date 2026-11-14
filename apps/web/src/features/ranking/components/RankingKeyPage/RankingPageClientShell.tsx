@@ -55,6 +55,7 @@ export function RankingPageClientShell({
       rankingKey={rankingKey}
       rankingItem={model.rankingItem}
       rankingValues={model.rankingValues}
+      referenceValues={model.referenceValues}
       nationalAverageSeries={model.nationalAverageSeries}
       areaType={model.areaType}
       selectedYear={model.selectedYear}

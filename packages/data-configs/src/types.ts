@@ -69,6 +69,16 @@ export interface EstatSource {
    */
   tabCombination?: ReadonlyArray<{ cdTab: string; factor: number }>;
   /**
+   * 標本から推計した人数の表章項目。値と同じ (地域, 年) の人数を行に `sampleCount` として付け、
+   * `minimum` 人未満の県・年は順位から外して「参考値」にする (`sample-count.ts`)。
+   *
+   * 賃金構造基本統計調査の職種別の表 (0003445758) は、県ごとの推計労働者数が数十人の職種があり、
+   * 1 位・最下位が毎年入れ替わる (DATA-WAGE-TEACHER-COVERAGE-01。2026-11-14 オーナー決定)。
+   * `cdTab` は `tabCombination` と同じく年代違いのコードをカンマで並べられる。`factor` は表の単位を人へ
+   * 直す倍率 (「十人」なら 10)。
+   */
+  sampleCount?: SampleCountSpec;
+  /**
    * 指定した cat 軸のメンバーを**合算**して全体値にする。
    *
    * 総数コードが無い軸、または一部の県にしか総数が出ない軸のためのもの。
@@ -159,6 +169,15 @@ export interface EstatSource {
   displayName?: string;
   /** 出典 URL (UI リンク) */
   url?: string;
+}
+
+/** 推計の人数の取り方と、順位から外す下限 (`EstatSource.sampleCount`) */
+export interface SampleCountSpec {
+  cdTab: string;
+  /** 表の単位を人へ直す倍率 (「十人」なら 10) */
+  factor: number;
+  /** この人数未満の県・年は順位から外して参考値にする */
+  minimum: number;
 }
 
 export interface KakeiChousaSource {

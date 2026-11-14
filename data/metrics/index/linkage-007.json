@@ -1950,10 +1950,15 @@
               "factor": 1
             }
           ],
-          "valueScale": 0.1
+          "valueScale": 0.1,
+          "sampleCount": {
+            "cdTab": "13,45",
+            "factor": 10,
+            "minimum": 10
+          }
         },
         "derived": true,
-        "configHash": "80e9d31ef49f870d"
+        "configHash": "d0f29a75f9b51824"
       },
       "dependencies": [],
       "normalizationDependencies": [
