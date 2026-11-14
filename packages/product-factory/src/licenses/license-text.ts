@@ -18,14 +18,20 @@ function isLicenseId(id: string): id is LicenseId {
 function attributionLines(attribution: string, sources?: readonly SourceRow[]): string[] {
   if (!sources || sources.length === 0) return [`- ${attribution}`];
   const hasEstat = sources.some((s) => sourceOrigin(s) === "estat");
-  const others = new Map<string, string>();
-  for (const s of sources) if (sourceOrigin(s) === "other" && !others.has(s.surveyName)) others.set(s.surveyName, s.url);
+  // 同じ調査名で資料の URL が複数ある提供元 (年版・表ごとの資料) は、すべての URL を挙げる
+  const others = new Map<string, string[]>();
+  for (const s of sources) {
+    if (sourceOrigin(s) !== "other") continue;
+    const urls = others.get(s.surveyName) ?? [];
+    if (!urls.includes(s.url)) urls.push(s.url);
+    others.set(s.surveyName, urls);
+  }
   const lines: string[] = [];
   if (hasEstat) lines.push(others.size > 0 ? `- e-Stat の統計表を基にした指標：${attribution}` : `- ${attribution}`);
   if (others.size > 0) {
     lines.push(
       "- e-Stat 以外の提供元の指標は、SOURCES.csv の「調査名」「URL」に記載した提供元を出典として表示してください（提供元の数値を stats47 が加工・作成した旨を添えてください）。",
-      ...[...others].map(([name, url]) => `  - ${name}（${url}）`),
+      ...[...others].map(([name, urls]) => `  - ${name}（${urls.join("、")}）`),
     );
   }
   return lines;

@@ -267,7 +267,7 @@
         "crude-birth-rate"
       ],
       "templateIds": [],
-      "licenseId": "education",
+      "licenseId": "single-corporate",
       "supportLevel": "manual",
       "compatibility": [
         "PowerPoint 365 (Windows / Mac)",
@@ -314,7 +314,7 @@
         "private-rental-housing-rent-per-3-3m2"
       ],
       "templateIds": [],
-      "licenseId": "personal",
+      "licenseId": "single-corporate",
       "supportLevel": "manual",
       "compatibility": [
         "PowerPoint 365 (Windows / Mac)",
@@ -481,6 +481,7 @@
       "jobToBeDone": "資料・記事・SNS にそのまま貼れる地図・ランキング図版を入手する",
       "formats": [
         "pptx",
+        "csv",
         "svg",
         "png",
         "pdf"
