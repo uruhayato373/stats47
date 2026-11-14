@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-13",
+  "generatedAt": "2026-11-14",
   "themes": [
     {
       "themeKey": "aging-society",
@@ -9,7 +9,7 @@
       "reviewStatus": "reviewed",
       "reviewGate": "implemented-pending-release",
       "reviewDocRef": "data/themes/reviews/2026-10-06-theme-aging-society.md",
-      "latestDataYear": null,
+      "latestDataYear": "2025",
       "primaryMetricCount": 2,
       "secondaryMetricCount": 9,
       "contextMetricCount": 14,
@@ -65,32 +65,28 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "data/themes/reviews/2026-07-11-theme-aging-society.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 25,
-        "missingKeyList": [
-          "ratio-65-plus",
-          "aging-index",
-          "total-fertility-rate",
-          "crude-birth-rate",
-          "crude-death-rate",
-          "average-age-of-first-marriage-wife",
-          "population-growth-rate",
-          "natural-increase-rate",
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 25,
+        "oldestLatestDataYear": "2019",
+        "ageReviewKeys": [
           "social-increase-rate",
-          "dependent-population-index"
+          "household-ratio-with-65plus",
+          "single-person-household-old-population-ratio",
+          "elderly-living-alone-rate",
+          "elderly-couple-only-household-ratio",
+          "elderly-workers-ratio"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metrics28d": {
         "gsc": {
@@ -221,7 +217,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2025",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 10,
       "contextMetricCount": 0,
@@ -266,7 +262,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -307,25 +303,18 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 11,
-        "missingKeyList": [
-          "agricultural-output",
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 11,
+        "oldestLatestDataYear": "2014",
+        "ageReviewKeys": [
           "agricultural-output-per-employed-person",
           "agricultural-farm-count",
-          "core-agricultural-workers",
-          "cultivated-area",
-          "raw-milk-production",
-          "dairy-cattle-count",
-          "dairy-cattle-holdings",
-          "beef-cattle-count",
-          "pig-count"
+          "core-agricultural-workers"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -416,7 +405,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 7,
       "contextMetricCount": 1,
@@ -467,7 +456,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -508,24 +497,19 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 9,
-        "missingKeyList": [
-          "business-opening-rate",
-          "business-closure-rate",
-          "business-opening-establishments",
-          "business-closure-establishments",
-          "business-opening-base-establishments",
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 9,
+        "oldestLatestDataYear": "2021",
+        "ageReviewKeys": [
           "nonprimary-enterprises-count",
           "nonprimary-enterprises-under5-count",
           "nonprimary-enterprises-employees",
           "nonprimary-enterprises-under5-employees"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -623,7 +607,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2025",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 4,
       "contextMetricCount": 1,
@@ -668,7 +652,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -704,21 +688,18 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 6,
-        "missingKeyList": [
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 6,
+        "oldestLatestDataYear": "2020",
+        "ageReviewKeys": [
           "nursery-count-per-100k-0-5",
           "nursery-children-per-nursery-teacher",
-          "nursery-utilization-rate",
-          "certified-childcare-center-count-per-100k-0-5",
-          "childcare-applicants",
-          "nursery-waiting-children-count"
+          "nursery-utilization-rate"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -807,7 +788,7 @@
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-station-normal-and-observation-method-audit",
       "reviewDocRef": "data/themes/reviews/2026-07-13-theme-climate.md",
-      "latestDataYear": null,
+      "latestDataYear": "2025",
       "primaryMetricCount": 2,
       "secondaryMetricCount": 5,
       "contextMetricCount": 3,
@@ -858,32 +839,25 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "data/themes/reviews/2026-07-13-theme-climate.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 10,
-        "missingKeyList": [
-          "annual-sunshine-duration",
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 10,
+        "oldestLatestDataYear": "2007",
+        "ageReviewKeys": [
           "annual-clear-days",
-          "average-temperature",
-          "maximum-temperature",
-          "lowest-temperature",
-          "annual-precipitation",
-          "annual-precipitation-days",
           "annual-snow-days",
-          "maximum-snow-depth",
-          "heatstroke-emergency-transports"
+          "maximum-snow-depth"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 11
       },
       "metrics28d": {
         "gsc": {
@@ -1001,7 +975,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 2,
       "contextMetricCount": 2,
@@ -1052,7 +1026,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -1093,20 +1067,18 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 5,
-        "missingKeyList": [
-          "broadband-contract-count-excluding-39-4g",
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 5,
+        "oldestLatestDataYear": "2006",
+        "ageReviewKeys": [
           "broadband-service-contract-count",
-          "mobile-phone-contract-count-per-1000",
           "mobile-phone-ownership-multi-person-households-per-1000",
           "internet-usage-rate-10plus"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -1188,7 +1160,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2021",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 3,
       "contextMetricCount": 0,
@@ -1220,7 +1192,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -1261,19 +1233,19 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 4,
-        "missingKeyList": [
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 4,
+        "oldestLatestDataYear": "2019",
+        "ageReviewKeys": [
           "volunteer-activity-annual-participation-rate-10plus",
           "voter-turnout-governor",
           "library-registered-users",
           "community-building-volunteer-participation-rate-10plus"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 11
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -1355,7 +1327,7 @@
       "reviewStatus": "reviewed",
       "reviewGate": "local-verified",
       "reviewDocRef": "data/themes/reviews/2026-09-09-theme-construction-industry.md",
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 2,
       "secondaryMetricCount": 8,
       "contextMetricCount": 2,
@@ -1400,7 +1372,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-09",
       "evidenceRefs": [],
@@ -1441,25 +1413,21 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 12,
-        "missingKeyList": [
-          "prime-contractor-completed-construction",
-          "construction-industry-count",
-          "subcontractor-completed-construction",
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 12,
+        "oldestLatestDataYear": "2020",
+        "ageReviewKeys": [
           "construction-private-employees",
           "construction-employed-residents",
           "construction-employed-under30",
           "construction-employed-age30to54",
           "construction-employed-age55plus",
-          "construction-employed-female",
-          "architect-annual-income"
+          "construction-employed-female"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -1545,7 +1513,7 @@
       "reviewStatus": "reviewed",
       "reviewGate": "implemented-pending-release",
       "reviewDocRef": "data/themes/reviews/2026-10-07-theme-consumer-prices.md",
-      "latestDataYear": null,
+      "latestDataYear": "2025",
       "primaryMetricCount": 2,
       "secondaryMetricCount": 3,
       "contextMetricCount": 9,
@@ -1596,32 +1564,21 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "data/themes/reviews/2026-07-11-theme-consumer-prices.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 14,
+        "oldestLatestDataYear": "2024",
         "ageReviewKeys": [],
         "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 14,
-        "missingKeyList": [
-          "consumer-price-difference-index-overall",
-          "consumer-price-difference-index-overall-excl-rent",
-          "consumer-price-difference-index-food",
-          "consumer-price-difference-index-housing",
-          "consumer-price-difference-index-utilities",
-          "consumer-price-difference-index-education",
-          "consumer-price-difference-index-culture-recreation",
-          "consumer-price-difference-index-transport-communication",
-          "consumer-price-difference-index-healthcare",
-          "consumer-price-difference-index-clothing-footwear"
-        ],
-        "latestYearPrefCoverageMin": null
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metrics28d": {
         "gsc": {
@@ -1743,7 +1700,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2021",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 9,
       "contextMetricCount": 9,
@@ -1794,7 +1751,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -1835,13 +1792,10 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 19,
-        "missingKeyList": [
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 19,
+        "oldestLatestDataYear": "2015",
+        "ageReviewKeys": [
           "hobby-participation-rate-art-appreciation",
           "hobby-participation-rate-theater",
           "hobby-participation-rate-classical-music",
@@ -1851,9 +1805,21 @@
           "relaxation-avg-time-male",
           "relaxation-avg-time-female",
           "hobby-leisure-avg-time-employed-male",
-          "hobby-leisure-avg-time-employed-female"
+          "hobby-leisure-avg-time-employed-female",
+          "hobby-participation-rate-go",
+          "hobby-participation-rate-shogi",
+          "hobby-participation-rate-flower-arrangement",
+          "hobby-participation-rate-instrument",
+          "hobby-participation-rate-photography",
+          "hobby-participation-rate-reading",
+          "hobby-participation-rate-calligraphy",
+          "hobby-participation-rate-tea-ceremony",
+          "hobby-participation-rate-knitting"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -1933,7 +1899,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2021",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 7,
       "contextMetricCount": 8,
@@ -1978,7 +1944,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -2019,13 +1985,10 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 16,
-        "missingKeyList": [
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 16,
+        "oldestLatestDataYear": "2021",
+        "ageReviewKeys": [
           "sleep-avg-time-female",
           "sleep-avg-time-male",
           "housework-avg-time-female",
@@ -2035,9 +1998,18 @@
           "work-avg-time-employed-female",
           "work-avg-time-employed-male",
           "hobby-participation-rate-karaoke",
-          "hobby-participation-rate-video-games"
+          "hobby-participation-rate-video-games",
+          "hobby-participation-rate-pachinko",
+          "hobby-participation-rate-gardening",
+          "broadcast-media-time-all",
+          "meal-avg-time-female",
+          "meal-avg-time-male",
+          "primary-school-commute-time-weekday"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -2121,7 +2093,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 4,
       "contextMetricCount": 0,
@@ -2166,7 +2138,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -2202,20 +2174,18 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 5,
-        "missingKeyList": [
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 5,
+        "oldestLatestDataYear": "2011",
+        "ageReviewKeys": [
           "intellectual-disability-support-facility-count-per-1m",
           "intellectual-disability-support-facility-capacity-per-100k",
-          "intellectual-disability-support-facility-residents-per-100k",
-          "physical-disability-certificates-issued-per-1000",
-          "disabled-employment-rate"
+          "intellectual-disability-support-facility-residents-per-100k"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -2304,7 +2274,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2025",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 2,
       "contextMetricCount": 0,
@@ -2349,7 +2319,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -2385,18 +2355,16 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 3,
-        "missingKeyList": [
-          "earthquake-renovation-rate",
-          "earthquake-retrofit-housing",
-          "fire-earthquake-insurance-consumption-expenditure"
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 3,
+        "oldestLatestDataYear": "2008",
+        "ageReviewKeys": [
+          "earthquake-retrofit-housing"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -2476,7 +2444,7 @@
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-source-and-denominator-audit",
       "reviewDocRef": "data/themes/reviews/2026-07-12-theme-education-culture.md",
-      "latestDataYear": null,
+      "latestDataYear": "2025",
       "primaryMetricCount": 3,
       "secondaryMetricCount": 19,
       "contextMetricCount": 17,
@@ -2527,7 +2495,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": "学校教育/高等教育/社会教育の主問が複数同居。分割 + parent-hub 化 (theme-taxonomy-reorganization)",
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
@@ -2535,25 +2503,27 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/theme-taxonomy-reorganization.md#education-culture-split--parent-hub候補"
       ],
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 39,
-        "missingKeyList": [
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 39,
+        "oldestLatestDataYear": "2007",
+        "ageReviewKeys": [
           "library-count-per-million",
-          "elementary-school-count-per-100km2-habitable",
-          "junior-high-school-count-per-100km2-habitable",
-          "high-school-count-per-100km2-habitable",
           "public-hall-count-per-million",
           "final-education-university-graduate-school-ratio",
-          "in-pref-university-entrance-ratio-by-highschool-origin",
-          "university-count",
-          "elementary-school-count",
-          "junior-high-school-count"
+          "hobby-participation-rate-theater",
+          "study-participation-rate-business",
+          "library-books",
+          "library-lending-books",
+          "total-museum-count",
+          "art-museum-count",
+          "study-participation-rate-english",
+          "cram-school-establishment-count",
+          "education-cost-all-households"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metrics28d": {
         "gsc": {
@@ -2678,7 +2648,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 4,
       "contextMetricCount": 1,
@@ -2717,7 +2687,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -2748,21 +2718,17 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 6,
-        "missingKeyList": [
-          "pm25-general-station-compliance-rate",
-          "pm25-compliant-general-station-count",
-          "pm25-valid-general-station-count",
-          "pm25-general-station-count",
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 6,
+        "oldestLatestDataYear": "2019",
+        "ageReviewKeys": [
           "bod-pollution-load",
           "cod-pollution-load"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -2844,7 +2810,7 @@
       "reviewStatus": "reviewed",
       "reviewGate": "implemented-pending-release",
       "reviewDocRef": "data/themes/reviews/2026-10-06-theme-fishery-marine.md",
-      "latestDataYear": null,
+      "latestDataYear": "2026",
       "primaryMetricCount": 2,
       "secondaryMetricCount": 11,
       "contextMetricCount": 10,
@@ -2891,32 +2857,23 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "data/themes/reviews/2026-07-13-theme-fishery-marine.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 23,
-        "missingKeyList": [
-          "fish-catch",
-          "marine-fishery-catch",
-          "inland-fishery-catch",
-          "fishing-port-count-ksj",
-          "aquaculture-harvest",
-          "marine-aquaculture-harvest",
-          "inland-aquaculture-harvest",
-          "marine-fishery-aquaculture-output-value",
-          "marine-fishery-output-value",
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 23,
+        "oldestLatestDataYear": "2016",
+        "ageReviewKeys": [
           "fishery-output-value"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 2
       },
       "metrics28d": {
         "gsc": {
@@ -3038,7 +2995,7 @@
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-definition-and-source-audit",
       "reviewDocRef": "data/themes/reviews/2026-07-13-theme-foreign-residents.md",
-      "latestDataYear": null,
+      "latestDataYear": "2025",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 4,
       "contextMetricCount": 7,
@@ -3089,32 +3046,30 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "data/themes/reviews/2026-07-13-theme-foreign-residents.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 12,
-        "missingKeyList": [
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 12,
+        "oldestLatestDataYear": "2020",
+        "ageReviewKeys": [
           "foreign-resident-count-per-100k",
           "foreign-resident-count",
-          "resident-foreigner-population",
           "foreign-resident-count-china-per-100k",
           "foreign-resident-count-china",
           "foreign-resident-count-korea-per-100k",
           "foreign-resident-count-korea",
           "foreign-resident-count-usa-per-100k",
-          "foreign-resident-count-usa",
-          "total-overnight-guests-foreign"
+          "foreign-resident-count-usa"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metrics28d": {
         "gsc": {
@@ -3241,7 +3196,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2025",
       "primaryMetricCount": 2,
       "secondaryMetricCount": 12,
       "contextMetricCount": 1,
@@ -3292,7 +3247,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -3333,25 +3288,18 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 15,
-        "missingKeyList": [
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 15,
+        "oldestLatestDataYear": "2007",
+        "ageReviewKeys": [
           "woodland-area",
           "forest-area-ratio",
-          "artificial-forest-area",
-          "forest-road-length",
-          "roundwood-production-volume",
-          "roundwood-sugi-production-volume",
-          "roundwood-hinoki-production-volume",
-          "sawmill-count",
-          "sawnwood-shipment-volume",
-          "forestry-management-entities"
+          "artificial-forest-area"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -3444,7 +3392,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2023",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 3,
       "contextMetricCount": 0,
@@ -3495,7 +3443,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -3536,19 +3484,16 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 4,
-        "missingKeyList": [
-          "jr-freight-shipment",
-          "air-cargo-transport",
-          "number-of-freight-cars",
-          "truck-operators"
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 4,
+        "oldestLatestDataYear": "2008",
+        "ageReviewKeys": [
+          "number-of-freight-cars"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -3632,7 +3577,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2025",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 7,
       "contextMetricCount": 1,
@@ -3671,7 +3616,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -3712,24 +3657,19 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 9,
-        "missingKeyList": [
-          "gender-wage-gap",
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 9,
+        "oldestLatestDataYear": "2020",
+        "ageReviewKeys": [
           "labor-force-population-ratio-woman",
           "labor-force-population-ratio-man",
           "housework-avg-time-female",
-          "housework-avg-time-male",
-          "female-part-time-hourly-wage",
-          "prefectural-manager-female-share",
-          "prefectural-assembly-female-share",
-          "husband-childcare-rate"
+          "housework-avg-time-male"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -3811,7 +3751,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 2,
       "contextMetricCount": 0,
@@ -3849,7 +3789,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -3879,18 +3819,17 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 3,
-        "missingKeyList": [
-          "railway-station-count",
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 3,
+        "oldestLatestDataYear": "2013",
+        "ageReviewKeys": [
           "bus-operators",
           "commute-by-car"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -3972,7 +3911,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 9,
       "contextMetricCount": 10,
@@ -4023,7 +3962,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -4064,25 +4003,16 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 20,
-        "missingKeyList": [
-          "specific-health-checkup-participation-rate",
-          "specific-health-guidance-completion-rate",
-          "metabolic-syndrome-prevalence-among-checkup-recipients",
-          "health-checkup-recipients",
-          "dental-checkup-persons-per-1000",
-          "health-checkup-late-dinner-rate",
-          "health-checkup-breakfast-skipping-rate",
-          "vegetable-intake-male-age-adjusted",
-          "vegetable-intake-female-age-adjusted",
-          "salt-intake-male-age-adjusted"
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 20,
+        "oldestLatestDataYear": "2020",
+        "ageReviewKeys": [
+          "health-checkup-recipients"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 46
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -4168,7 +4098,7 @@
       "reviewStatus": "reviewed",
       "reviewGate": "proposal-ready",
       "reviewDocRef": "data/themes/reviews/2026-07-11-theme-healthcare.md",
-      "latestDataYear": null,
+      "latestDataYear": "2026",
       "primaryMetricCount": 3,
       "secondaryMetricCount": 34,
       "contextMetricCount": 22,
@@ -4219,32 +4149,26 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "data/themes/reviews/2026-07-11-theme-healthcare.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 59,
-        "missingKeyList": [
-          "physicians-in-medical-facilities-per-100k",
-          "nurses-in-medical-facilities-per-100k",
-          "general-hospital-count-per-100k",
-          "general-hospital-bed-count-per-100k",
-          "pharmacy-count-per-100k",
-          "national-medical-expense-per-person",
-          "general-hospital-avg-length-of-stay",
-          "general-hospital-bed-occupancy-rate",
-          "deaths-lifestyle-diseases-per-100k",
-          "deaths-diabetes-per-100k"
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 59,
+        "oldestLatestDataYear": "2020",
+        "ageReviewKeys": [
+          "average-life-expectancy-female-20",
+          "average-life-expectancy-female-65",
+          "life-expectancy-0-male",
+          "life-expectancy-0-female"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metrics28d": {
         "gsc": {
@@ -4378,7 +4302,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2025",
       "primaryMetricCount": 3,
       "secondaryMetricCount": 8,
       "contextMetricCount": 2,
@@ -4416,7 +4340,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -4452,25 +4376,22 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 13,
-        "missingKeyList": [
-          "household-savings-balance",
-          "household-securities-balance",
-          "household-debt-balance",
-          "household-housing-debt-balance",
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 13,
+        "oldestLatestDataYear": "2014",
+        "ageReviewKeys": [
           "financial-assets-balance-multi-person-households",
           "financial-debt-balance",
-          "avg-savings-rate-worker-households",
           "current-deposit-balance-ratio-multi-person-households",
           "current-life-insurance-balance-ratio-multi-person-households",
-          "current-securities-balance-ratio-multi-person-households"
+          "current-securities-balance-ratio-multi-person-households",
+          "housing-land-liabilities-ratio-multi-person-households",
+          "securities-balance"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -4554,7 +4475,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2025",
       "primaryMetricCount": 3,
       "secondaryMetricCount": 17,
       "contextMetricCount": 169,
@@ -4599,7 +4520,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-11-07",
       "evidenceRefs": [],
@@ -4640,25 +4561,14 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 189,
+        "oldestLatestDataYear": "2025",
         "ageReviewKeys": [],
         "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 189,
-        "missingKeyList": [
-          "dining-out-consumption-expenditure",
-          "food-expenditure-total",
-          "rice-consumption-expenditure",
-          "bread-consumption-quantity",
-          "confectionery-consumption-expenditure",
-          "beef-consumption-quantity",
-          "consumption-expenditure-total",
-          "engel-coefficient",
-          "fresh-seafood-consumption-quantity",
-          "fresh-vegetables-consumption-quantity"
-        ],
-        "latestYearPrefCoverageMin": null
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -4736,7 +4646,7 @@
       "reviewStatus": "reviewed",
       "reviewGate": "local-verified",
       "reviewDocRef": "data/themes/reviews/2026-09-09-theme-information-industry.md",
-      "latestDataYear": null,
+      "latestDataYear": "2021",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 2,
       "contextMetricCount": 0,
@@ -4781,7 +4691,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-09",
       "evidenceRefs": [],
@@ -4822,18 +4732,18 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 3,
-        "missingKeyList": [
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 3,
+        "oldestLatestDataYear": "2021",
+        "ageReviewKeys": [
           "information-private-establishments",
           "information-private-employees",
           "gross-prefectural-product-information-communication-h27"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -4913,7 +4823,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 6,
       "contextMetricCount": 0,
@@ -4952,7 +4862,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -4988,22 +4898,14 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 7,
+        "oldestLatestDataYear": "2024",
         "ageReviewKeys": [],
         "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 7,
-        "missingKeyList": [
-          "patent-application-count",
-          "patent-registration-count",
-          "patent-inventor-count",
-          "design-application-count",
-          "design-registration-count",
-          "trademark-application-count",
-          "trademark-registration-count"
-        ],
-        "latestYearPrefCoverageMin": null
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -5083,7 +4985,7 @@
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-definition-audit",
       "reviewDocRef": "data/themes/reviews/2026-07-11-theme-labor-mobility.md",
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 2,
       "secondaryMetricCount": 13,
       "contextMetricCount": 4,
@@ -5122,32 +5024,27 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "data/themes/reviews/2026-07-11-theme-labor-mobility.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 19,
-        "missingKeyList": [
-          "turnover-rate",
-          "job-change-rate",
-          "active-job-opening-ratio",
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 19,
+        "oldestLatestDataYear": "2020",
+        "ageReviewKeys": [
           "unemployment-rate",
           "employment-rate",
-          "telework-rate",
-          "side-job-rate",
-          "monthly-average-actual-working-hours-male",
-          "employment-mobility-rate",
-          "day-time-population-ratio"
+          "day-time-population-ratio",
+          "day-time-population",
+          "commuter-ratio-to-other-municipalities"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metrics28d": {
         "gsc": {
@@ -5272,7 +5169,7 @@
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-definition-audit",
       "reviewDocRef": "data/themes/reviews/2026-07-11-theme-labor-wages.md",
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 9,
       "contextMetricCount": 10,
@@ -5323,32 +5220,26 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "data/themes/reviews/2026-07-11-theme-labor-wages.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 20,
-        "missingKeyList": [
-          "minimum-wage-by-region",
-          "starting-salary-university",
-          "starting-salary-highschool",
-          "scheduled-salary-male",
-          "nurse-salary",
-          "gender-wage-gap",
-          "male-part-time-hourly-wage",
-          "female-part-time-hourly-wage",
-          "active-job-opening-ratio",
-          "unemployment-rate"
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 20,
+        "oldestLatestDataYear": "2020",
+        "ageReviewKeys": [
+          "unemployment-rate",
+          "employment-rate",
+          "employed-people-ratio",
+          "labor-force-population-ratio-woman"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metrics28d": {
         "gsc": {
@@ -5482,7 +5373,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2025",
       "primaryMetricCount": 2,
       "secondaryMetricCount": 3,
       "contextMetricCount": 1,
@@ -5527,7 +5418,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -5568,21 +5459,14 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 6,
+        "oldestLatestDataYear": "2024",
         "ageReviewKeys": [],
         "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 6,
-        "missingKeyList": [
-          "residential-land-transaction-median-price",
-          "residential-land-transaction-sample-count",
-          "residential-official-land-median-price",
-          "residential-official-land-point-count",
-          "residential-land-price-change-rate",
-          "industrial-land-price-change-rate"
-        ],
-        "latestYearPrefCoverageMin": null
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -5669,7 +5553,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2026",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 7,
       "contextMetricCount": 0,
@@ -5720,7 +5604,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -5761,23 +5645,14 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 8,
+        "oldestLatestDataYear": "2026",
         "ageReviewKeys": [],
         "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 8,
-        "missingKeyList": [
-          "landslide-warning-zone-count",
-          "landslide-special-warning-zone-count",
-          "debris-flow-warning-zone-count",
-          "debris-flow-special-warning-zone-count",
-          "steep-slope-warning-zone-count",
-          "steep-slope-special-warning-zone-count",
-          "landslip-warning-zone-count",
-          "landslip-special-warning-zone-count"
-        ],
-        "latestYearPrefCoverageMin": null
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -5859,7 +5734,7 @@
       "reviewStatus": "reviewed",
       "reviewGate": "proposal-ready",
       "reviewDocRef": "data/themes/reviews/2026-07-11-theme-living-housing.md",
-      "latestDataYear": null,
+      "latestDataYear": "2025",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 27,
       "contextMetricCount": 11,
@@ -5912,32 +5787,38 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "gaps",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "data/themes/reviews/2026-07-11-theme-living-housing.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 39,
-        "missingKeyList": [
-          "vacant-housing-ratio",
-          "owner-occupied-housing-ratio",
-          "floor-area-per-dwelling-owner",
-          "floor-area-per-dwelling-rented",
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 39,
+        "oldestLatestDataYear": "2019",
+        "ageReviewKeys": [
           "households",
           "nuclear-family-households-ratio",
           "elderly-couple-only-household-ratio",
           "single-person-household-old-population-ratio",
-          "population-density-per-km2-inhabitable-area",
-          "habitable-area-ratio"
+          "densely-inhabited-district-population-density",
+          "ratio-never-married-15-plus",
+          "single-person-household-ratio",
+          "single-households-age65plus-male",
+          "single-households-age65plus-female",
+          "average-persons-per-general-household",
+          "housing-land-debt-per-household",
+          "current-liabilities-balance-multi-person-households-per-household",
+          "three-generation-household-members",
+          "general-households"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 1,
+        "missingKeyList": [
+          "urban-parks"
+        ],
+        "latestYearPrefCoverageMin": 47
       },
       "metrics28d": {
         "gsc": {
@@ -6064,7 +5945,7 @@
       "reviewStatus": "reviewed",
       "reviewGate": "implemented-pending-release",
       "reviewDocRef": "data/themes/reviews/2026-10-06-theme-local-economy.md",
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 2,
       "secondaryMetricCount": 10,
       "contextMetricCount": 6,
@@ -6117,32 +5998,35 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "data/themes/reviews/2026-07-11-theme-local-economy.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 18,
-        "missingKeyList": [
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 18,
+        "oldestLatestDataYear": "2014",
+        "ageReviewKeys": [
           "total-production-in-the-prefecture",
-          "per-taxpayer-taxable-income",
           "per-capita-prefectural-income-h27",
           "employed-people-ratio-primary",
           "employed-people-ratio-secondary",
           "employed-people-ratio-tertiary",
           "number-of-establishments-economic-census-basic-survey",
-          "agricultural-output",
           "agricultural-employment-population",
-          "electricity-generation-capacity"
+          "employment-location-quotient-manufacturing",
+          "employment-location-quotient-information-communication",
+          "employment-location-quotient-health-welfare",
+          "enterprise-net-value-added-all-industries",
+          "private-establishment-net-value-added",
+          "unemployment-rate"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metrics28d": {
         "gsc": {
@@ -6276,7 +6160,7 @@
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-scope-composition-and-threshold-audit",
       "reviewDocRef": "data/themes/reviews/2026-07-13-theme-local-finance.md",
-      "latestDataYear": null,
+      "latestDataYear": "2026",
       "primaryMetricCount": 2,
       "secondaryMetricCount": 25,
       "contextMetricCount": 14,
@@ -6327,7 +6211,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": "流入増はOrganic Search起因ではない。56d GSC(W27-31)はclicks0/imp32で横ばい。週次GA4はW27→W28でpv92→183(+99%)、engagementRate0.615→0.165に急落。同週の site-wide channels は Direct sessions+55%(Organic Search+5%)・Direct bounceRate0.81(Organic Search0.376)。ページ単位のsource/medium実測はGA4 API未接続(GA4_PROPERTY_ID/GOOGLE_SERVICE_ACCOUNT_KEY_JSON 未設定)のためこの環境では取得不能。次回はpagePath×sessionDefaultChannelGroupのlive GA4クエリで/themes/local-financeを直接確認する。",
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
@@ -6337,25 +6221,14 @@
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv"
       ],
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 41,
+        "oldestLatestDataYear": "2022",
         "ageReviewKeys": [],
         "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 41,
-        "missingKeyList": [
-          "fiscal-strength-index-prefecture",
-          "current-balance-ratio",
-          "real-public-debt-service-ratio",
-          "future-burden-ratio",
-          "real-balance-ratio",
-          "local-tax-ratio-pref-finance",
-          "local-allocation-tax-ratio-pref-finance",
-          "national-treasury-disbursement-ratio-pref-finance",
-          "self-financing-ratio",
-          "per-capita-total-expenditure-pref-municipal"
-        ],
-        "latestYearPrefCoverageMin": null
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metrics28d": {
         "gsc": {
@@ -6482,7 +6355,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2023",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 6,
       "contextMetricCount": 1,
@@ -6527,7 +6400,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -6568,23 +6441,14 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 8,
+        "oldestLatestDataYear": "2022",
         "ageReviewKeys": [],
         "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 8,
-        "missingKeyList": [
-          "prefectural-dx-online-procedure-rate",
-          "prefectural-dx-online-procedure-count",
-          "prefectural-dx-applicable-procedure-count",
-          "prefectural-eltax-online-application-rate",
-          "prefectural-recruitment-online-application-rate",
-          "prefectural-auto-environment-tax-online-application-rate",
-          "prefectural-auto-environment-tax-online-application-count",
-          "prefectural-auto-environment-tax-application-count"
-        ],
-        "latestYearPrefCoverageMin": null
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -6662,7 +6526,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2025",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 12,
       "contextMetricCount": 5,
@@ -6713,7 +6577,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -6754,25 +6618,31 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 18,
-        "missingKeyList": [
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 18,
+        "oldestLatestDataYear": "2006",
+        "ageReviewKeys": [
           "restaurant-count-per-1000",
           "number-of-hotel-facilities",
           "number-of-hotel-rooms",
-          "personal-items-service-consumption-expenditure",
           "laundry-beauty-bath-industry-establishments",
           "laundry-beauty-bath-industry-employees",
           "laundry-beauty-bath-industry-revenue",
           "laundry-beauty-bath-industry-net-value-added",
           "media-production-establishments",
-          "media-production-employees"
+          "media-production-employees",
+          "media-production-revenue",
+          "media-production-net-value-added",
+          "amusement-industry-establishments",
+          "amusement-industry-employees",
+          "amusement-industry-revenue",
+          "amusement-industry-net-value-added",
+          "beauty-salon-count"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -6854,7 +6724,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 2,
       "secondaryMetricCount": 3,
       "contextMetricCount": 0,
@@ -6899,7 +6769,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -6935,20 +6805,14 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 5,
+        "oldestLatestDataYear": "2023",
         "ageReviewKeys": [],
         "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 5,
-        "missingKeyList": [
-          "long-term-care-certified-persons",
-          "nursing-care-insurance-benefit",
-          "nursing-home-count-per-100k-65plus",
-          "nursing-home-capacity-per-1000-65plus",
-          "nursing-home-residents-per-1000-65plus"
-        ],
-        "latestYearPrefCoverageMin": null
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -7039,7 +6903,7 @@
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-series-and-definition-audit",
       "reviewDocRef": "data/themes/reviews/2026-07-12-theme-manufacturing.md",
-      "latestDataYear": null,
+      "latestDataYear": "2025",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 8,
       "contextMetricCount": 4,
@@ -7090,32 +6954,24 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "data/themes/reviews/2026-07-12-theme-manufacturing.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 13,
-        "missingKeyList": [
-          "manufacturing-shipment-amount",
-          "manufacturing-industry-added-value",
-          "manufacturing-establishments",
-          "manufacturing-employees",
-          "manufacturing-establishment-site-area",
-          "manufacturing-shipment-amount-per-employee",
-          "manufacturing-shipment-amount-per-establishment",
-          "industrial-land-price-change-rate",
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 13,
+        "oldestLatestDataYear": "2015",
+        "ageReviewKeys": [
           "industrial-water-usage",
-          "food-manufacturing-establishments"
+          "factory-location-area-annual"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 42
       },
       "metrics28d": {
         "gsc": {
@@ -7244,7 +7100,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 4,
       "contextMetricCount": 1,
@@ -7289,7 +7145,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -7330,21 +7186,18 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 6,
-        "missingKeyList": [
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 6,
+        "oldestLatestDataYear": "2007",
+        "ageReviewKeys": [
           "woodland-area",
           "forest-area-ratio",
-          "artificial-forest-area",
-          "natural-environment-conservation-area",
-          "nature-park-area",
-          "national-quasi-national-park-visits"
+          "artificial-forest-area"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -7426,7 +7279,7 @@
       "reviewStatus": "reviewed",
       "reviewGate": "blocked-by-series-audit",
       "reviewDocRef": "data/themes/reviews/2026-07-11-theme-occupation-salary.md",
-      "latestDataYear": null,
+      "latestDataYear": "2023",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 7,
       "contextMetricCount": 31,
@@ -7477,32 +7330,21 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "data/themes/reviews/2026-07-11-theme-occupation-salary.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 39,
+        "oldestLatestDataYear": "2023",
         "ageReviewKeys": [],
         "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 39,
-        "missingKeyList": [
-          "doctor-annual-income",
-          "nurse-annual-income",
-          "pharmacist-annual-income",
-          "care-worker-annual-income",
-          "nursery-teacher-annual-income",
-          "midwife-annual-income",
-          "practical-nurse-annual-income",
-          "dental-hygienist-annual-income",
-          "dietitian-annual-income",
-          "physical-therapist-annual-income"
-        ],
-        "latestYearPrefCoverageMin": null
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 19
       },
       "metrics28d": {
         "gsc": {
@@ -7629,7 +7471,7 @@
       "reviewStatus": "reviewed",
       "reviewGate": "proposal-ready",
       "reviewDocRef": "data/themes/reviews/2026-07-11-theme-population-dynamics.md",
-      "latestDataYear": null,
+      "latestDataYear": "2050",
       "primaryMetricCount": 2,
       "secondaryMetricCount": 20,
       "contextMetricCount": 12,
@@ -7683,32 +7525,27 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "data/themes/reviews/2026-07-11-theme-population-dynamics.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 34,
-        "missingKeyList": [
-          "total-population",
-          "total-fertility-rate",
-          "moving-in-excess-rate",
-          "ratio-65-plus",
-          "population-growth-rate",
-          "natural-increase-rate",
-          "crude-birth-rate",
-          "crude-death-rate",
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 34,
+        "oldestLatestDataYear": "2019",
+        "ageReviewKeys": [
           "social-increase-rate",
-          "young-population-ratio"
+          "day-time-population-ratio",
+          "five-year-residence-same-address",
+          "five-year-residence-other-prefecture",
+          "sex-ratio-age-20-39"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metrics28d": {
         "gsc": {
@@ -7847,7 +7684,7 @@
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-table-dimension-scope-and-unit-audit",
       "reviewDocRef": "data/themes/reviews/2026-07-13-theme-ports.md",
-      "latestDataYear": null,
+      "latestDataYear": "2025",
       "primaryMetricCount": 2,
       "secondaryMetricCount": 3,
       "contextMetricCount": 4,
@@ -7892,31 +7729,21 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "data/themes/reviews/2026-07-13-theme-ports.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 9,
+        "oldestLatestDataYear": "2023",
         "ageReviewKeys": [],
         "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 9,
-        "missingKeyList": [
-          "port-cargo-total",
-          "port-cargo-export",
-          "port-cargo-import",
-          "port-container-count",
-          "maritime-import-export-cargo",
-          "port-inbound-ships",
-          "port-ships-tonnage",
-          "passenger-ship-transport",
-          "port-count"
-        ],
-        "latestYearPrefCoverageMin": null
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 39
       },
       "metrics28d": {
         "gsc": {
@@ -8018,7 +7845,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 4,
       "contextMetricCount": 0,
@@ -8069,7 +7896,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -8110,20 +7937,14 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 5,
+        "oldestLatestDataYear": "2022",
         "ageReviewKeys": [],
         "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 5,
-        "missingKeyList": [
-          "poverty-support-new-consultation-cases",
-          "persons-on-public-assistance-per-1000",
-          "households-on-public-assistance-per-1000",
-          "public-assistance-expenses-prefecture",
-          "public-assistance-facility-capacity-per-1000"
-        ],
-        "latestYearPrefCoverageMin": null
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -8209,7 +8030,7 @@
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-geography-coverage-and-series-audit",
       "reviewDocRef": "data/themes/reviews/2026-07-13-theme-railway.md",
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 3,
       "contextMetricCount": 1,
@@ -8254,27 +8075,21 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "data/themes/reviews/2026-07-13-theme-railway.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 5,
+        "oldestLatestDataYear": "2023",
         "ageReviewKeys": [],
         "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 5,
-        "missingKeyList": [
-          "railway-passengers",
-          "jr-passenger-transport",
-          "private-railway-passenger-transport",
-          "railway-station-count",
-          "jr-freight-shipment"
-        ],
-        "latestYearPrefCoverageMin": null
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metrics28d": {
         "gsc": {
@@ -8381,7 +8196,7 @@
       "reviewStatus": "reviewed",
       "reviewGate": "blocked-by-derived-metric-audit",
       "reviewDocRef": "data/themes/reviews/2026-07-11-theme-real-income.md",
-      "latestDataYear": null,
+      "latestDataYear": "2025",
       "primaryMetricCount": 2,
       "secondaryMetricCount": 5,
       "contextMetricCount": 21,
@@ -8435,32 +8250,27 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "data/themes/reviews/2026-07-11-theme-real-income.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 28,
-        "missingKeyList": [
-          "household-survey-food-expenditure",
-          "household-survey-housing-expenditure",
-          "household-survey-utilities-expenditure",
-          "household-survey-furniture-household-goods-expenditure",
-          "household-survey-clothing-footwear-expenditure",
-          "household-survey-healthcare-expenditure",
-          "household-survey-transport-communication-expenditure",
-          "household-survey-education-expenditure",
-          "household-survey-culture-recreation-expenditure",
-          "household-survey-other-expenditure"
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 28,
+        "oldestLatestDataYear": "2019",
+        "ageReviewKeys": [
+          "per-capita-prefectural-income-h27",
+          "annual-income-per-household",
+          "gini-coefficient-disposable-income",
+          "gini-coefficient-financial-assets",
+          "current-liabilities-balance-multi-person-households-per-household"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metrics28d": {
         "gsc": {
@@ -8582,7 +8392,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2026",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 15,
       "contextMetricCount": 1,
@@ -8627,7 +8437,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -8668,25 +8478,14 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 17,
+        "oldestLatestDataYear": "2022",
         "ageReviewKeys": [],
         "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 17,
-        "missingKeyList": [
-          "final-energy-consumption",
-          "final-energy-consumption-per-capita",
-          "electricity-demand",
-          "solar-panel-housing-rate",
-          "regional-industry-final-energy-consumption",
-          "regional-business-final-energy-consumption",
-          "regional-household-final-energy-consumption",
-          "regional-household-car-final-energy-consumption",
-          "fit-fip-installed-capacity",
-          "fit-fip-new-approved-installed-capacity"
-        ],
-        "latestYearPrefCoverageMin": null
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -8772,7 +8571,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 5,
       "contextMetricCount": 1,
@@ -8825,7 +8624,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -8866,22 +8665,21 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 7,
-        "missingKeyList": [
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 7,
+        "oldestLatestDataYear": "2013",
+        "ageReviewKeys": [
           "car-ownership-multi-person-households-per-1000",
           "commute-by-car",
           "commute-by-bus",
           "commute-by-train",
           "bus-operators",
-          "household-survey-transport-communication-expenditure",
           "commuters-total"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -8974,7 +8772,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2021",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 3,
       "contextMetricCount": 0,
@@ -9019,7 +8817,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -9060,19 +8858,19 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 4,
-        "missingKeyList": [
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 4,
+        "oldestLatestDataYear": "2021",
+        "ageReviewKeys": [
           "retail-establishments-by-prefecture",
           "retail-sales-area-by-class",
           "retail-sales-amount-by-prefecture",
           "retail-employees"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -9175,7 +8973,7 @@
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-definition-additivity-and-survey-year-audit",
       "reviewDocRef": "data/themes/reviews/2026-07-13-theme-roads.md",
-      "latestDataYear": null,
+      "latestDataYear": "2026",
       "primaryMetricCount": 2,
       "secondaryMetricCount": 9,
       "contextMetricCount": 5,
@@ -9226,32 +9024,23 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "data/themes/reviews/2026-07-13-theme-roads.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 16,
-        "missingKeyList": [
-          "road-total-length-with-expressway",
-          "road-expressway-length",
-          "road-total-length",
-          "road-national-route-length",
-          "road-prefectural-route-length",
-          "road-municipal-length",
-          "road-length-per-km2",
-          "main-road-paving-rate",
-          "average-road-traffic-volume",
-          "roadside-station-count"
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 16,
+        "oldestLatestDataYear": "2020",
+        "ageReviewKeys": [
+          "average-road-traffic-volume"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metrics28d": {
         "gsc": {
@@ -9358,7 +9147,7 @@
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-denominator-and-provenance-audit",
       "reviewDocRef": "data/themes/reviews/2026-07-12-theme-safety.md",
-      "latestDataYear": null,
+      "latestDataYear": "2026",
       "primaryMetricCount": 3,
       "secondaryMetricCount": 24,
       "contextMetricCount": 19,
@@ -9403,7 +9192,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": "治安/交通/火災の主問が複数同居。crime-safety/traffic-safety/fire-emergency への分割 + parent-hub 化 (theme-taxonomy-reorganization)",
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
@@ -9411,25 +9200,17 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/theme-taxonomy-reorganization.md#safety-split--parent-hub候補"
       ],
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 46,
-        "missingKeyList": [
-          "penal-code-offenses-recognized-per-1000",
-          "serious-crime-per-100k",
-          "criminal-recognition-count",
-          "violent-crime-per-100k",
-          "criminal-arrest-rate",
-          "intellectual-crime-per-100k",
-          "theft-offenses-recognized-per-1000",
-          "theft-criminal-arrest-rate",
-          "juvenile-criminal-arrest-person-per-population",
-          "drug-enforcement-arrest-count-per-population"
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 46,
+        "oldestLatestDataYear": "2014",
+        "ageReviewKeys": [
+          "flood-damage-general-assets",
+          "flood-affected-municipalities"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 40
       },
       "metrics28d": {
         "gsc": {
@@ -9554,7 +9335,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2023",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 5,
       "contextMetricCount": 6,
@@ -9605,7 +9386,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -9646,25 +9427,19 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 12,
-        "missingKeyList": [
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 12,
+        "oldestLatestDataYear": "2020",
+        "ageReviewKeys": [
           "single-mother-employment-rate",
           "single-father-employment-rate",
           "single-mother-households",
-          "single-father-households",
-          "single-mother-public-assistance-households",
-          "child-rearing-allowance-recipients",
-          "single-mother-households-income-under100",
-          "single-mother-households-income-100to199",
-          "single-mother-households-income-200to299",
-          "single-mother-households-income-300to399"
+          "single-father-households"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -9755,7 +9530,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2025",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 9,
       "contextMetricCount": 23,
@@ -9806,7 +9581,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -9847,25 +9622,27 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 33,
-        "missingKeyList": [
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 33,
+        "oldestLatestDataYear": "2021",
+        "ageReviewKeys": [
           "sports-annual-participation-rate-10plus",
           "hobby-participation-rate-sports-spectating",
           "community-sports-facility-count-per-million",
-          "sports-park-count",
-          "daily-steps-male-20to64-age-adjusted",
-          "daily-steps-female-20to64-age-adjusted",
-          "elementary-school-gymnasium-count",
-          "junior-high-school-gymnasium-count",
-          "elementary5-fitness-score-male",
-          "elementary5-fitness-score-female"
+          "swimming-pool-public",
+          "public-swimming-pool-count-per-million",
+          "public-gymnasium-count-per-million",
+          "baseball-field-public",
+          "sports-participation-rate-golf",
+          "sports-participation-rate-cycling",
+          "sports-participation-rate-skiing",
+          "sports-participation-rate-fishing",
+          "sports-participation-rate-hiking"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -9947,7 +9724,7 @@
       "reviewStatus": "reviewed",
       "reviewGate": "implemented-pending-release",
       "reviewDocRef": "data/themes/reviews/2026-10-07-theme-tourism.md",
-      "latestDataYear": null,
+      "latestDataYear": "2025",
       "primaryMetricCount": 3,
       "secondaryMetricCount": 4,
       "contextMetricCount": 11,
@@ -10000,32 +9777,29 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "data/themes/reviews/2026-07-12-theme-tourism.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
-        "ageReviewKeys": [],
-        "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 18,
-        "missingKeyList": [
-          "total-overnight-guests",
-          "room-utilization-rate",
-          "total-overnight-guests-foreign",
-          "actual-overnight-guests",
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 18,
+        "oldestLatestDataYear": "2007",
+        "ageReviewKeys": [
           "travel-participation-rate-domestic-tourism",
           "travel-participation-rate-overseas",
           "travel-participation-rate-overnight",
           "travel-participation-rate-day-trip",
-          "air-passenger-transport",
-          "number-of-simple-lodging-facilities"
+          "number-of-hotel-facilities",
+          "number-of-hotel-rooms",
+          "airport-count"
         ],
-        "latestYearPrefCoverageMin": null
+        "freshnessStatus": "requires-official-release-check",
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metrics28d": {
         "gsc": {
@@ -10145,7 +9919,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2023",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 1,
       "contextMetricCount": 0,
@@ -10190,7 +9964,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -10226,17 +10000,14 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 2,
+        "oldestLatestDataYear": "2023",
         "ageReviewKeys": [],
         "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 2,
-        "missingKeyList": [
-          "tsunami-evacuation-building-count",
-          "tsunami-evacuation-tower-count"
-        ],
-        "latestYearPrefCoverageMin": null
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 40
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -10318,7 +10089,7 @@
       "reviewStatus": "reviewed",
       "reviewGate": "local-verified",
       "reviewDocRef": "data/themes/reviews/2026-09-09-theme-waste-recycling.md",
-      "latestDataYear": null,
+      "latestDataYear": "2023",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 2,
       "contextMetricCount": 0,
@@ -10363,7 +10134,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-09",
       "evidenceRefs": [],
@@ -10404,18 +10175,14 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 3,
+        "oldestLatestDataYear": "2023",
         "ageReviewKeys": [],
         "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 3,
-        "missingKeyList": [
-          "garbage-total-output",
-          "waste-recycling-rate",
-          "garbage-final-disposal"
-        ],
-        "latestYearPrefCoverageMin": null
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {
@@ -10508,7 +10275,7 @@
       "reviewStatus": "review-missing",
       "reviewGate": null,
       "reviewDocRef": null,
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 3,
       "secondaryMetricCount": 6,
       "contextMetricCount": 0,
@@ -10553,7 +10320,7 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-10",
       "evidenceRefs": [],
@@ -10589,24 +10356,14 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-10-05T04:27:30.324Z",
-        "keysChecked": 0,
-        "oldestLatestDataYear": null,
+        "observedAt": "2026-11-14T01:41:40.292Z",
+        "keysChecked": 9,
+        "oldestLatestDataYear": "2022",
         "ageReviewKeys": [],
         "freshnessStatus": "requires-official-release-check",
-        "missingKeys": 9,
-        "missingKeyList": [
-          "public-water-pipe-aging-rate",
-          "public-water-pipe-renewal-rate",
-          "public-water-pipe-length",
-          "public-water-aged-pipe-length",
-          "public-water-renewed-pipe-length",
-          "water-supply-population-ratio-2012on",
-          "sewerage-coverage-rate",
-          "water-supply-annual-volume",
-          "water-supply-capacity"
-        ],
-        "latestYearPrefCoverageMin": null
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
       },
       "metricsAllRoutes": {
         "gsc": {

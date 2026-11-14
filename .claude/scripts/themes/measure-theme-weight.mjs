@@ -1,7 +1,16 @@
 #!/usr/bin/env node
 /**
  * テーマページの「重さ」を全テーマで測る (見える文字数・高さ・図や表やカードの数・最初の画面に何が入るか)。
- * 共通の UI を直す前後で同じ測り方を当てるための道具 (THEME-PAGE-REVIEW-01)。判定はせず、数えるだけ。
+ * 共通の UI を直す前後で同じ測り方を当てるための道具 (THEME-PAGE-REVIEW-01)。
+ *
+ * 重さ (高さ・文字数・図の数) は数えるだけで判定しない。読みやすさの品質基準 6 項目は違反として数える
+ * (各行の violations。0 件が目標):
+ *   few-first-screen-tiles … 最初の画面に数値のタイルが 2 個未満
+ *   broken-number          … 数字が途中で折り返している (タイルの値・表の数値のセル)
+ *   empty-tile             … 値の無いタイル (「—」) が出ている
+ *   overflow-x             … 横にはみ出している
+ *   narrow-first-column    … 表の 1 列目が 1 行 4 文字未満で折り返している
+ *   not-200                … ページが 200 を返さない (県別に出さないテーマは測らない)
  *
  * 測るのは 2 つのルート:
  *   - 県別 /areas/<県>/<テーマ> … 検索から入るのは主にこちら (検索の表示の 94%。2026-11-14)
@@ -13,7 +22,7 @@
  * 既定の出力は OS の一時領域の stats47-theme-weight/<日付>.json。前後の比較の基準として残す回は
  *   --out data/themes/ui-weight/<日付>.json (台帳 themes.ui-weight) を指定する。
  */
-import { mkdirSync, readdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -24,6 +33,15 @@ import { datasetDir } from "../../../config/datasets.mjs";
 import siteConfig from "../lib/site-config.cjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
+
+/** 県別ページに出さないテーマ (都道府県単位で集計できないインフラ系)。正本は公開サイトの設定で、ここに写しを持たない。 */
+function areaExcludedThemeKeys() {
+  const source = readFileSync(path.join(ROOT, "apps/web/src/features/theme-dashboard/config/area-theme-slugs.ts"), "utf8");
+  const block = source.match(/AREA_EXCLUDED_THEME_KEYS[^=]*=\s*new Set\(\[([^\]]*)\]/);
+  const keys = [...(block?.[1] ?? "").matchAll(/"([^"]+)"/g)].map((m) => m[1]);
+  if (keys.length === 0) throw new Error("area-theme-slugs.ts から県別に出さないテーマを読めない (書き方が変わった)");
+  return new Set(keys);
+}
 
 function parseArgs(argv) {
   const args = { baseUrl: siteConfig.SITE_ORIGIN, area: "13000", widths: [390, 1280], concurrency: 4, themes: null };
@@ -61,6 +79,39 @@ function measureInPage() {
   const kpiCards = all('[data-theme-component-type="kpi-card"]');
   const components = all("[data-theme-component-type]");
   const tables = all("table");
+  // 文字が何行に分かれて描かれているか (行の上端の位置の種類を数える)
+  const lineCount = (node) => {
+    const range = document.createRange();
+    range.selectNodeContents(node);
+    return new Set([...range.getClientRects()].filter((r) => r.width > 0).map((r) => Math.round(r.top))).size;
+  };
+  const tiles = all('[data-slot-kind="stat-tile"]');
+  const tileValue = (tile) => tile.querySelector("dl > dd > span");
+  const emptyTiles = tiles.filter((tile) => tileValue(tile)?.textContent.trim() === "—");
+  // タイルの値は「数字 + 単位」。数字の文字の節だけを見て、単位が次の行へ回るのは数えない
+  const brokenTileNumbers = tiles.filter((tile) => {
+    const number = [...(tileValue(tile)?.childNodes ?? [])].find((n) => n.nodeType === Node.TEXT_NODE && /\d/.test(n.textContent));
+    return number ? lineCount(number) > 1 : false;
+  });
+  const brokenCellNumbers = tables.flatMap((t) => [...t.querySelectorAll("tbody td")]).filter(
+    (cell) => visible(cell) && cell.children.length === 0 && /^[\d,.\-−+%]+$/.test(cell.textContent.trim()) && lineCount(cell) > 1,
+  );
+  const narrowFirstColumnRows = tables.flatMap((t) => [...t.querySelectorAll("tbody tr")]).filter((row) => {
+    const cell = row.querySelector("th, td");
+    if (!cell || !visible(cell)) return false;
+    const chars = cell.textContent.replace(/\s+/g, "").length;
+    const lines = lineCount(cell);
+    return lines > 1 && chars / lines < 4;
+  });
+  const overflowX = document.documentElement.scrollWidth - document.documentElement.clientWidth;
+  const firstScreenTiles = tiles.filter(inFirstScreen).length;
+  const violations = [
+    ...(firstScreenTiles < 2 ? ["few-first-screen-tiles"] : []),
+    ...(brokenTileNumbers.length + brokenCellNumbers.length > 0 ? ["broken-number"] : []),
+    ...(emptyTiles.length > 0 ? ["empty-tile"] : []),
+    ...(overflowX > 0 ? ["overflow-x"] : []),
+    ...(narrowFirstColumnRows.length > 0 ? ["narrow-first-column"] : []),
+  ];
   const firstScreenText = [...main.querySelectorAll("h1, h2, h3, p, li, td, th, dt, dd, span, a")]
     .filter((el) => el.children.length === 0 && inFirstScreen(el))
     .map((el) => el.textContent.trim())
@@ -82,7 +133,15 @@ function measureInPage() {
       kpiCards: kpiCards.filter(inFirstScreen).length,
       components: components.filter(inFirstScreen).length,
     },
-    overflowX: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+    overflowX,
+    quality: {
+      statTiles: tiles.length,
+      firstScreenTiles,
+      emptyTiles: emptyTiles.length,
+      brokenNumbers: brokenTileNumbers.length + brokenCellNumbers.length,
+      narrowFirstColumnRows: narrowFirstColumnRows.length,
+    },
+    violations,
   };
 }
 
@@ -92,12 +151,12 @@ async function measureOne(browser, url, width) {
   try {
     const response = await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 });
     const status = response?.status() ?? null;
-    if (status !== 200) return { status };
+    if (status !== 200) return { status, violations: ["not-200"] };
     // 図は後から描かれるので、通信が落ち着くまで待つ (落ち着かなくても測る)
     await page.waitForLoadState("networkidle", { timeout: 20000 }).catch(() => {});
     return { status, ...(await page.evaluate(measureInPage)) };
   } catch (error) {
-    return { status: null, error: String(error.message).slice(0, 120) };
+    return { status: null, error: String(error.message).slice(0, 120), violations: ["not-200"] };
   } finally {
     await context.close();
   }
@@ -106,9 +165,10 @@ async function measureOne(browser, url, width) {
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   const themes = (args.themes ?? readdirSync(path.join(ROOT, datasetDir("themes.catalogs"))).filter((f) => f.endsWith(".json")).map((f) => f.slice(0, -5))).sort();
+  const areaExcluded = areaExcludedThemeKeys();
   const jobs = themes.flatMap((themeKey) =>
     [
-      { route: "prefecture", url: `${args.baseUrl}/areas/${args.area}/${themeKey}` },
+      ...(areaExcluded.has(themeKey) ? [] : [{ route: "prefecture", url: `${args.baseUrl}/areas/${args.area}/${themeKey}` }]),
       { route: "national", url: `${args.baseUrl}/themes/${themeKey}` },
     ].flatMap((r) => args.widths.map((width) => ({ themeKey, width, ...r }))),
   );
@@ -129,7 +189,10 @@ async function main() {
   mkdirSync(path.dirname(args.out), { recursive: true });
   writeFileSync(args.out, `${JSON.stringify({ measuredAt: new Date().toISOString(), baseUrl: args.baseUrl, area: args.area, widths: args.widths, rows }, null, 2)}\n`);
   const failed = rows.filter((r) => r.status !== 200).length;
-  console.log(JSON.stringify({ out: args.out, pages: rows.length, failed }));
+  const violations = {};
+  for (const row of rows) for (const code of row.violations ?? []) violations[code] = (violations[code] ?? 0) + 1;
+  const pagesWithViolations = rows.filter((r) => (r.violations ?? []).length > 0).length;
+  console.log(JSON.stringify({ out: args.out, pages: rows.length, failed, pagesWithViolations, violations }));
 }
 
 main().catch((error) => {

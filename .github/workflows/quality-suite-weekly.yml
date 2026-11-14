@@ -348,7 +348,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for observation in data/themes/charts/live-audit.json data/themes/quality.json data/themes/quality.definitions.json data/themes/quality.observations.json data/themes/quality.lastGoodObservations.json data/themes/portfolio.json data/themes/experiments.json data/themes/ci-followup.json data/themes/viewpoint-history.csv; do
+          # 品質監査の詳細は 1 MiB を超えると番号つきのファイルに分かれる (theme-quality-state.mjs)。増えた分・減った分ごと拾う
+          git add -- 'data/themes/quality.*.json'
+          for observation in data/themes/charts/live-audit.json data/themes/quality.json data/themes/portfolio.json data/themes/experiments.json data/themes/ci-followup.json data/themes/viewpoint-history.csv; do
             if [ -f "$observation" ]; then git add -- "$observation"; fi
           done
           if git diff --cached --quiet; then exit 0; fi
