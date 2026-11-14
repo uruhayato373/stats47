@@ -1,0 +1,222 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-kakei-okayama",
+  "production": {
+    "id": "NCI-00090",
+    "policyId": "NCP-002",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "岡山県の家計\n家具・家事に注目",
+      "subline": "岡山市・2024年\n二人以上の世帯",
+      "subject": "添付は岡山県の主域輪郭を示す検証済みの参照画像で、編集対象ではない。1280×670相当の横長の完成カバーを新たに作る。右側に参照の県形を大きく、同じ北向き・縦横比・凹凸を忠実に維持して、濃紺または淡黄色の一枚の面と太い縁取りで主役にする。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けを一切加えない。生活の小物は輪郭と文字に重ならない右下に無地の小さな木製食器戸棚を小さく1点だけ。車両や家の中も完全に無人。窓は均一な淡い水色で、人影・頭・顔のような黒い形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、各行とも1280px換算で文字高65px以上を目安に大きくする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。 新版は輪郭の周囲と補足欄に余白を設け、背景の筆塗りを淡くし、県形・見出し・都市名を読み取りやすく配置する。",
+      "evidence": "https://note.com/stats47/n/ne788feae75bf 2026-10-15公開本文確認。岡山市の2024年・二人以上の世帯。十大費目の家具・家事用品は47市単純平均比1.27倍で最大の乖離。個別品目の食器戸棚は2.96倍。 比較の分母は家計調査の全国平均ではなく47県庁所在市の単純平均。カバーに倍率・順位・因果は載せず、費目への着目だけを示す。地図は岡山県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は岡山市であり県全域の観測図ではない。人物・キャラクターなし。 2026-10-23に公開APIの状態と都市名・対象年・世帯区分を照合。",
+      "dataScope": {
+        "place": "岡山市",
+        "year": "2024",
+        "households": "二人以上の世帯"
+      }
+    },
+    "titleCorrection": {
+      "generatedTitle": "岡山県の家計は何にお金が偏っているか ── 家具・家事用品が突出、暖房費は全国平均の4分の1",
+      "publishedTitle": "岡山県の家計は何にお金が偏っているか ── 家具・家事用品が突出、暖房費は47市平均の4分の1",
+      "reason": "2026-11-04に記事台帳の題名をnote公開中の題名へ揃えた。カバーの掲載文言と生成済み版は維持。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "19e10a812808d7eff665b4b08a2e98b2c03020f7483d4815075dc6ef0ff88603",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-okayama/revisions/19e10a812808d7eff665b4b08a2e98b2c03020f7483d4815075dc6ef0ff88603.png"
+      },
+      "bytes": 50259,
+      "id": "19e10a812808d7eff665b4b08a2e98b2c03020f7483d4815075dc6ef0ff88603",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:12.037Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312771645/rectangle_large_type_2_e28a7f0936baa8edac0888f327500fc3.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "19e10a812808d7eff665b4b08a2e98b2c03020f7483d4815075dc6ef0ff88603"
+      }
+    },
+    {
+      "sha256": "96202d0f22971e17a68c5c7aa28e646796dd9962e94a9cd77d74535a55095286",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-okayama/revisions/96202d0f22971e17a68c5c7aa28e646796dd9962e94a9cd77d74535a55095286.png"
+      },
+      "bytes": 113448,
+      "id": "96202d0f22971e17a68c5c7aa28e646796dd9962e94a9cd77d74535a55095286",
+      "kind": "candidate",
+      "version": "2026-10-02-household-r1",
+      "createdAt": "2026-10-02T03:18:38.812Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e58371129cca2b8e1f120de3bebfa97f2fb963da1960c12944d772630f7c4f00"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+        "reviewedAt": "2026-10-02T05:27:41.112Z"
+      },
+      "provenance": {
+        "renderer": "bold-note-cover",
+        "sourceUrl": "https://storage.stats47.jp/app/stats/furniture-household-expenditure-total/values.json",
+        "sourceSha256": "3e706d8cab495754c31acce3a3116251f669c2d20792f13485e89fc10fd82f45"
+      }
+    },
+    {
+      "sha256": "7e13a2d108c384ece5b7e25816a0d74c1c7119b1f07719684aaede79c41d2d74",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-okayama/revisions/7e13a2d108c384ece5b7e25816a0d74c1c7119b1f07719684aaede79c41d2d74.png"
+      },
+      "bytes": 101098,
+      "id": "7e13a2d108c384ece5b7e25816a0d74c1c7119b1f07719684aaede79c41d2d74",
+      "kind": "r2-archive",
+      "version": "legacy-r2-import-2026-10-02",
+      "createdAt": "2026-10-02T03:29:14.034Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Legacy R2 asset preserved; not adopted for note",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "legacy-public-r2",
+        "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-okayama/images/cover-1280x670.png",
+        "sourceSha256": "7e13a2d108c384ece5b7e25816a0d74c1c7119b1f07719684aaede79c41d2d74"
+      }
+    },
+    {
+      "sha256": "416ba2757c11247a05d9334a8db4572a9d2ab1aa1685183b58db468b7ab7ebc6",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-okayama/revisions/416ba2757c11247a05d9334a8db4572a9d2ab1aa1685183b58db468b7ab7ebc6.png"
+      },
+      "bytes": 58900,
+      "id": "416ba2757c11247a05d9334a8db4572a9d2ab1aa1685183b58db468b7ab7ebc6",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T06:11:52.440Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/319911190/rectangle_large_type_2_8889c282fa4961c702b272aad11e24bc.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "416ba2757c11247a05d9334a8db4572a9d2ab1aa1685183b58db468b7ab7ebc6"
+      }
+    },
+    {
+      "sha256": "ee9f11201efc87133078288dafdf8f9602cea1de9ac6be43224f8be956dbca9b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-okayama/revisions/ee9f11201efc87133078288dafdf8f9602cea1de9ac6be43224f8be956dbca9b.png"
+      },
+      "bytes": 1591995,
+      "id": "ee9f11201efc87133078288dafdf8f9602cea1de9ac6be43224f8be956dbca9b",
+      "kind": "candidate",
+      "version": "imagegen-category-contract-v1-20261015",
+      "createdAt": "2026-10-15T06:22:18.995Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "be838d3fbe24d910e00125839eed937e391538da56bec88f1df2de3511437267"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "NCI-00090: 原寸/320pxの文字・補足・人物なし・題材を個別確認済み。家計は検証済み県主域参照と対象市・2024年・二人以上の世帯を照合。2026-10-15ユーザーが今回10件の反映を指示。",
+        "reviewedAt": "2026-10-15T06:37:50.326Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "be838d3fbe24d910e00125839eed937e391538da56bec88f1df2de3511437267",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-okayama/inputs/be838d3fbe24d910e00125839eed937e391538da56bec88f1df2de3511437267.json"
+          },
+          "bytes": 13195
+        },
+        "production": {
+          "id": "NCI-00090",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "007da1da57621a99967f14e317b8690a11838373c4183e5118c6f0ce3fccf2d3"
+        }
+      }
+    },
+    {
+      "sha256": "d719c8fb87998abe7706a9151940ac10b790063574f612f0b27a550927d11f8c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-okayama/revisions/d719c8fb87998abe7706a9151940ac10b790063574f612f0b27a550927d11f8c.png"
+      },
+      "bytes": 1523180,
+      "id": "d719c8fb87998abe7706a9151940ac10b790063574f612f0b27a550927d11f8c",
+      "kind": "candidate",
+      "version": "pop-NCP-002-v3-2c9d8516819e",
+      "createdAt": "2026-10-23T08:00:35.512Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "a052b1a972b38318abe0abc20bb1174e0d9bd3a29a47cbf98ea27c4e5fbe547d"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "岡山県の輪郭、岡山市・2024年・二人以上の世帯、家具・家事と棚の題材を新旧比較。原寸と幅320pxで全文字を確認。",
+        "reviewedAt": "2026-10-23T08:04:40.047Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "a052b1a972b38318abe0abc20bb1174e0d9bd3a29a47cbf98ea27c4e5fbe547d",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-okayama/inputs/a052b1a972b38318abe0abc20bb1174e0d9bd3a29a47cbf98ea27c4e5fbe547d.json"
+          },
+          "bytes": 13438
+        },
+        "production": {
+          "id": "NCI-00090",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "2c9d8516819ecf86309e7a2726b2024f571a42949fb481bbf3d3d9cbbc72db03"
+        }
+      }
+    }
+  ]
+}

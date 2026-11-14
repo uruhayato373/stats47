@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/** Export only a named service's dedicated session; send through gh stdin, never stdout. */
+/** Export only a named service's dedicated session to a private local file for collect.mjs; never to stdout or off this machine. */
 import { existsSync, readFileSync, writeFileSync, mkdirSync, mkdtempSync, cpSync, rmSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { tmpdir } from 'node:os';
@@ -14,24 +14,24 @@ import { assertClosedNativeProfile } from './native-profile.mjs';
 
 const [sourceName, ...args] = process.argv.slice(2);
 if (!sourceName || args.includes('--help')) {
-  console.log('Usage: bootstrap-session.mjs SOURCE [--root PATH] [--from-profile | --login] [--reports] [--publish]\nExports a dedicated profile/state. --login opens a dedicated browser for HUMAN login. --reports selects the KDP Reports login (KDP only). --publish installs repository Secrets through stdin.');
+  console.log('Usage: bootstrap-session.mjs SOURCE [--root PATH] [--from-profile | --login] [--reports]\nExports a dedicated profile/state to .local/authenticated-measurement/SOURCE.bootstrap. --login opens a dedicated browser for HUMAN login. --reports selects the KDP Reports login (KDP only).');
   process.exit(0);
 }
 const source = sourceFor(sourceName);
-if (source.transport === 'api') throw new Error(`api_source_requires_secret: configure ${source.apiSecret}; browser session export cannot activate this source`);
 if (args.includes('--reports') && (sourceName !== 'kdp' || !args.includes('--login'))) throw new Error('reports_requires_kdp_login');
 // 自動操作のブラウザ (Playwright) を拒否するサービスは、普通の Chrome で専用プロファイルにログインし、閉じてから取り出す。
 // Google (gsc)
 const NATIVE_PROFILE_SOURCES = new Set(['gsc']);
-if (sourceName === 'gsc' && args.includes('--login')) throw new Error('google_login_requires_native_chrome: run google-admin/cli.mjs login, close that Chrome, then export with --from-profile --publish');
+if (sourceName === 'gsc' && args.includes('--login')) throw new Error('google_login_requires_native_chrome: run google-admin/cli.mjs login, close that Chrome, then export with --from-profile');
 const rootArg = args.indexOf('--root');
 const root = resolve(rootArg < 0 ? process.cwd() : args[rootArg + 1]);
-const publish = args.includes('--publish');
 const privateDir = join(root, '.local/authenticated-measurement');
 mkdirSync(privateDir, { recursive: true, mode: 0o700 });
 const keyFile = join(privateDir, 'vault-key');
 const repo = execFileSync('gh', ['repo', 'view', '--json', 'nameWithOwner', '--jq', '.nameWithOwner'], { encoding: 'utf8' }).trim();
 if (repo !== 'uruhayato373/stats47') throw new Error('unexpected_repository');
+// 保管庫の鍵の正本は最初に作った端末の鍵ファイル。CI が復元 (restore.mjs) に使う Secret が既にあるのに鍵ファイルが無い端末では、
+// 別の鍵を作らずに止める。Secrets は名前の一覧を読むだけで、書かない。
 const existingSecrets = JSON.parse(execFileSync('gh', ['secret', 'list', '--repo', repo, '--json', 'name'], { encoding: 'utf8' }));
 if (!existsSync(keyFile)) {
   if (existingSecrets.some(s => s.name === 'MEASUREMENT_VAULT_KEY')) throw new Error('vault_key_already_exists: use its original bootstrap machine; do not rotate blindly');
@@ -60,7 +60,7 @@ else {
       ...(nativeProfile ? { ignoreDefaultArgs: ['--password-store=basic', '--use-mock-keychain'] } : {}),
     });
     if (login) {
-      const urls = { a8: 'https://pub.a8.net/', moshimo: 'https://af.moshimo.com/af/shop/index', afb: 'https://www.afi-b.com/pa/',
+      const urls = { a8: 'https://pub.a8.net/',
         note: 'https://note.com/settings/account', gsc: 'https://search.google.com/search-console?resource_id=sc-domain%3Astats47.jp',
         kdp: 'https://kdp.amazon.co.jp/ja_JP/bookshelf',
         rakuten: 'https://affiliate.rakuten.co.jp/report/summary' };
@@ -87,12 +87,5 @@ if (sourceName === 'kdp') {
   bundle.account = { knownAsin: account.knownAsin };
 }
 const encoded = gzipSync(Buffer.from(JSON.stringify(bundle))).toString('base64');
-if (Buffer.byteLength(encoded) > 47000) throw new Error('session_exceeds_github_secret_limit');
 writeFileSync(join(privateDir, `${sourceName}.bootstrap`), encoded, { mode: 0o600 });
-if (publish) {
-  if (!existingSecrets.some(s => s.name === 'MEASUREMENT_VAULT_KEY')) {
-    execFileSync('gh', ['secret', 'set', 'MEASUREMENT_VAULT_KEY', '--repo', repo], { input: readFileSync(keyFile), stdio: ['pipe', 'pipe', 'pipe'] });
-  }
-  execFileSync('gh', ['secret', 'set', source.secret, '--repo', repo], { input: encoded, stdio: ['pipe', 'pipe', 'pipe'] });
-}
-console.log(JSON.stringify({ source: sourceName, secret: source.secret, configured: publish, cookies: bundle.state.cookies.length, bytes: Buffer.byteLength(encoded) }));
+console.log(JSON.stringify({ source: sourceName, cookies: bundle.state.cookies.length, bytes: Buffer.byteLength(encoded) }));

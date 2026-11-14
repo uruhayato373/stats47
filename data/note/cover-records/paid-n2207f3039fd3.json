@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "paid-n2207f3039fd3",
+  "production": {
+    "id": "NCI-00304",
+    "policyId": "NCP-007",
+    "policyVersion": 4,
+    "brief": {
+      "headline": "毎月の定型業務\n1コマンドで回す",
+      "subline": ".claude/skillsの作り方",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無地の手順書と無地のノートPC。操作画面に架空のコードや作業結果を描かない。左側に太い見出し、下に補足を太い帯で配置する。文字は指定全文のみ。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n2207f3039fd3 2026-10-23公開API本文照合。記事題名「.claude/skills で「毎月の定型業務」を 1 コマンド化する」。.claude/skillsと定型を本文で確認。カバーは本文の主題のみを示し、根拠のない数値・実績・保証を追加しない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "ca03b6bfe91a98fd7b09bd8f410929fd6d47f796647104b022834a6a0b474b95",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n2207f3039fd3/revisions/ca03b6bfe91a98fd7b09bd8f410929fd6d47f796647104b022834a6a0b474b95.png"
+      },
+      "bytes": 30009,
+      "id": "ca03b6bfe91a98fd7b09bd8f410929fd6d47f796647104b022834a6a0b474b95",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:18.292Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312772629/rectangle_large_type_2_e4c44360d6e379aec33748d82f17ac03.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "ca03b6bfe91a98fd7b09bd8f410929fd6d47f796647104b022834a6a0b474b95"
+      }
+    },
+    {
+      "sha256": "be0902f998a0f56b8eb22d76805bec752f86269723106ca087702f2b6a5b0c32",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n2207f3039fd3/revisions/be0902f998a0f56b8eb22d76805bec752f86269723106ca087702f2b6a5b0c32.png"
+      },
+      "bytes": 63774,
+      "id": "be0902f998a0f56b8eb22d76805bec752f86269723106ca087702f2b6a5b0c32",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:39:13.685Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "3d518acf72fc9b3198782592cac2802323358ea526e38573412fd696bd6e52bf"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出しとシリーズ名・話数・色でシリーズが区別できる",
+        "reviewedAt": "2026-10-11T11:48:43.960Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "3d518acf72fc9b3198782592cac2802323358ea526e38573412fd696bd6e52bf",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n2207f3039fd3/inputs/3d518acf72fc9b3198782592cac2802323358ea526e38573412fd696bd6e52bf.json"
+          },
+          "bytes": 1082
+        }
+      }
+    },
+    {
+      "sha256": "ec44f344c61ac8cb1d2435d6c0756b5b9f806b8f8474b8b82d196aefc2f7c087",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n2207f3039fd3/revisions/ec44f344c61ac8cb1d2435d6c0756b5b9f806b8f8474b8b82d196aefc2f7c087.png"
+      },
+      "bytes": 71382,
+      "id": "ec44f344c61ac8cb1d2435d6c0756b5b9f806b8f8474b8b82d196aefc2f7c087",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:55:00.846Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320331939/rectangle_large_type_2_15082c7132475b36685f2f9443ac4d86.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "ec44f344c61ac8cb1d2435d6c0756b5b9f806b8f8474b8b82d196aefc2f7c087"
+      }
+    },
+    {
+      "sha256": "30a22f27e5a3aaa1721d752dd9f793681507164849a509f7eb8cb0dec6e66317",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n2207f3039fd3/revisions/30a22f27e5a3aaa1721d752dd9f793681507164849a509f7eb8cb0dec6e66317.png"
+      },
+      "bytes": 27187,
+      "id": "30a22f27e5a3aaa1721d752dd9f793681507164849a509f7eb8cb0dec6e66317",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:04:30.658Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "beb3d100782854f6aaca24a58a90a3cf8c97ee771f5fc428b457c56a4ce34dfd"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.006/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:15:30.382Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "beb3d100782854f6aaca24a58a90a3cf8c97ee771f5fc428b457c56a4ce34dfd",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n2207f3039fd3/inputs/beb3d100782854f6aaca24a58a90a3cf8c97ee771f5fc428b457c56a4ce34dfd.json"
+          },
+          "bytes": 1082
+        }
+      }
+    },
+    {
+      "sha256": "2673ff9791903e9125290f65f702ffe62ed27ceaf12466b36c3cb1e863903628",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n2207f3039fd3/revisions/2673ff9791903e9125290f65f702ffe62ed27ceaf12466b36c3cb1e863903628.png"
+      },
+      "bytes": 1719093,
+      "id": "2673ff9791903e9125290f65f702ffe62ed27ceaf12466b36c3cb1e863903628",
+      "kind": "candidate",
+      "version": "pop-NCP-007-v4-ff1efaa486fb",
+      "createdAt": "2026-10-23T11:12:57.042Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "9c84d7200a6fc4e48cb63bdfd5a34f3a52b232bb4af8a31a0174c52bb21a9d48"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T11:15:07.604Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "9c84d7200a6fc4e48cb63bdfd5a34f3a52b232bb4af8a31a0174c52bb21a9d48",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n2207f3039fd3/inputs/9c84d7200a6fc4e48cb63bdfd5a34f3a52b232bb4af8a31a0174c52bb21a9d48.json"
+          },
+          "bytes": 9110
+        },
+        "production": {
+          "id": "NCI-00304",
+          "policyId": "NCP-007",
+          "policyVersion": 4,
+          "planSha256": "ff1efaa486fb40299d5448d9b261aefc34817b69daeab6ff825af1693fbbf33d"
+        }
+      }
+    }
+  ]
+}

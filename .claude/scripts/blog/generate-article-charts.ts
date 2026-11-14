@@ -22,7 +22,7 @@
  *   *-timeseries.json          → line chart (時系列・多系列対応)  [実装済み]
  *   *-scatter.json             → scatter chart (正方形・単色)      [実装済み]
  *   *-radar.json               → radar chart (720×720・正規化済み値) [実装済み]
- *   *-stacked.json             → stacked-bar (+ -mobile.svg)       [実装済み]
+ *   *-stacked.json             → stacked-bar (+ -mobile.svg)       [実装済み。"form": "area" は積み上げ面]
  *   *-summary-findings.json    → findings card (番号付き要点)     [実装済み]
  *   *-findings.json            → findings card (番号付き要点)     [実装済み]
  *
@@ -56,7 +56,7 @@ import { generateFindingsCardSvg } from '../../../packages/svg-builder/src/chart
 import { datasetPath } from '../../../config/datasets.mjs';
 import { getMetricConfig } from '../../../packages/data-configs/src/registry';
 // The shared 4:5 image types (bars / tile map), light and dark, same as note・X・Instagram.
-import { renderStackedChart } from '../../../apps/admin/lib/template-composition-stacked';
+import { renderStackedAreaChart, renderStackedChart } from '../../../apps/admin/lib/template-composition-stacked';
 import { renderGroupedBarsChart } from '../../../apps/admin/lib/template-grouped-bars';
 import { renderRadarChart } from '../../../apps/admin/lib/template-radar';
 import { renderItemBarsChart, renderRankingBarsChart } from '../../../apps/admin/lib/template-ranking-bars';
@@ -64,7 +64,7 @@ import { renderTileMapChart } from '../../../apps/admin/lib/template-ranking-til
 import { renderLineChart } from '../../../apps/admin/lib/template-trend-line';
 import { renderRelationshipScatterChart, unitLabel, type ScatterChart } from '../../../apps/admin/lib/template-relationship-scatter';
 import { CHART_THEMES } from '../../../apps/remotion/src/features/data-cards/chart-theme';
-import { chartSourceName, groupedBarChartFromArticleData, hasCyclicAxis, itemBarChartFromArticleData, lineChartFromArticleData, matchScatterAxis, metricKeysInSource, prefecturesNamedNear, radarChartFromArticleData, type ChartAxisRecord, rankingChartFromArticleData, scatterChartFromArticleData, sourceAxisYear, sourceNamesOf, stackedChartFromArticleData } from './lib/type-chart-input';
+import { chartSourceName, groupedBarChartFromArticleData, hasCyclicAxis, itemBarChartFromArticleData, lineChartFromArticleData, matchScatterAxis, metricKeysInSource, prefecturesNamedNear, radarChartFromArticleData, type ChartAxisRecord, rankingChartFromArticleData, scatterChartFromArticleData, sourceAxisYear, sourceNamesOf, stackedAreaChartFromArticleData, stackedChartFromArticleData, stackedFormOf } from './lib/type-chart-input';
 
 const __filename = fileURLToPath(import.meta.url);
 const TEMPLATE_IDS = new Set(
@@ -601,12 +601,12 @@ function typeRendererOf(baseName: string, type: string, parsed: unknown): ((them
     const ranking = rankingChartFromArticleData(parsed, { metric, prefCodeOf, prefNameOf: (code) => prefNameOf(code) });
     if (!('skip' in ranking)) {
       const render = type === 'bar' ? renderRankingBarsChart : renderTileMapChart;
-      return (theme) => render(ranking, theme);
+      return (theme) => render(withSource(ranking, parsed, baseName), theme);
     }
     // Not all 47: the map cannot be filled, and the bar's card takes any set of rows.
     const items = itemBarChartFromArticleData(parsed, { metric });
     if ('skip' in items) return { skip: `${ranking.skip}・${items.skip}` };
-    return (theme) => renderItemBarsChart(items, theme);
+    return (theme) => renderItemBarsChart(withSource(items, parsed, baseName), theme);
   }
   if (type === 'line') {
     if (hasCyclicAxis(parsed)) {
@@ -615,6 +615,10 @@ function typeRendererOf(baseName: string, type: string, parsed: unknown): ((them
     }
     const chart = lineChartFromArticleData(parsed);
     return 'skip' in chart ? chart : (theme) => renderLineChart(withSource(chart, parsed, baseName), theme);
+  }
+  if (type === 'stacked-bar' && stackedFormOf(parsed) === 'area') {
+    const chart = stackedAreaChartFromArticleData(parsed);
+    return 'skip' in chart ? chart : (theme) => renderStackedAreaChart(withSource(chart, parsed, baseName), theme);
   }
   if (type === 'stacked-bar') {
     const chart = stackedChartFromArticleData(parsed);

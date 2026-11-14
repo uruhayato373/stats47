@@ -21,6 +21,8 @@
  *   node .claude/scripts/themes/evaluate-theme-experiments.mjs --register '<json>'
  *     # 実験を登録する (手編集禁止の書き込み口)。json は themes.experiments の Schema のエントリ 1 件。
  *     # verdict は "pending" 固定で付与。evaluateAt 未設定 (デプロイ待ち) も許容 (--check は発火しない)。
+ *     # "metricScope":"all-routes" を付けると、観測を全国版 + 県別 + 市区町村別の合計 (portfolio の metricsAllRoutes) から読む。
+ *     # その場合は baseline も同じ範囲の値で登録する (範囲の違う値どうしは比べない)。
  *   node .claude/scripts/themes/evaluate-theme-experiments.mjs --update-baseline <id> '<json>'
  *   node .claude/scripts/themes/evaluate-theme-experiments.mjs --schedule <id> <YYYY-MM-DD>
  *     # デプロイ日を startedAt に設定し evaluateAt (d7/d28/d56 = +7/+28/+56 日) を機械算出する。
@@ -30,13 +32,11 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { addDays, jstDateOf } from "../metrics/lib/periods.mjs";
-import { datasetDir } from "../../../config/datasets.mjs";
+import { datasetPath } from "../../../config/datasets.mjs";
+import { themeStatePath } from "./theme-state-path.mjs";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const STATE_DIR = process.env.STATE_DIR || path.join(PROJECT_ROOT, datasetDir("themes.portfolio"));
-const PORTFOLIO = path.join(STATE_DIR, "portfolio.json");
-const EXPERIMENTS = path.join(STATE_DIR, "experiments.json");
+const PORTFOLIO = themeStatePath("themes.portfolio");
+const EXPERIMENTS = themeStatePath("themes.experiments");
 
 export const CHANGE_TYPES = new Set(["catalog-metrics", "catalog-charts", "copy", "structure", "merge", "split", "rename", "retire", "launch"]);
 export const VERDICTS = new Set(["pending", "launch-reviewed", "effect-full", "effect-partial", "effect-none", "effect-adverse", "insufficient-data", "aborted"]);
@@ -45,10 +45,20 @@ function load(file) {
   return JSON.parse(fs.readFileSync(file, "utf8"));
 }
 
-/** "gsc.clicks" のような KPI パスを portfolio の metrics から解決する (無ければ null) */
-function resolveKpi(theme, kpiPath, checkpoint) {
+export const METRIC_SCOPES = new Set(["theme-page", "all-routes"]);
+
+/**
+ * "gsc.clicks" のような KPI パスを portfolio の実績から解決する (無ければ null)。
+ * metricScope が "all-routes" の実験は、全国版・県別・市区町村別を合わせた値 (metricsAllRoutes) を読む。
+ * 検索の表示の 94% は県別ページにあり、全国版の 1 URL だけを数えると大半のテーマが標本不足になる (2026-11-14)。
+ * 基準 (baseline) も同じ範囲で測った値でなければ比べられないので、範囲は実験ごとに登録時に決め、後から変えない。
+ */
+function resolveKpi(theme, kpiPath, checkpoint, metricScope) {
   const [group, field] = String(kpiPath).split(".");
-  const m = (checkpoint === "d28" ? theme?.metrics28d ?? theme?.metrics : theme?.metrics)?.[group];
+  const source = metricScope === "all-routes"
+    ? (checkpoint === "d28" ? theme?.metricsAllRoutes28d : theme?.metricsAllRoutes)
+    : (checkpoint === "d28" ? theme?.metrics28d ?? theme?.metrics : theme?.metrics);
+  const m = source?.[group];
   return {
     value: Number.isFinite(m?.[field]) ? m[field] : null,
     status: m?.status ?? "missing",
@@ -132,7 +142,7 @@ export function observeCheckpoint(experiment, checkpoint, theme, observedAt) {
   };
   const observation = { observedAt, values: {} };
   for (const kpi of [experiment.primaryKpi, ...(experiment.guardrailKpis ?? [])].filter(Boolean)) {
-    observation.values[kpi] = resolveKpi(theme, kpi, checkpoint);
+    observation.values[kpi] = resolveKpi(theme, kpi, checkpoint, experiment.metricScope);
   }
   return { ...observation, ...assessCheckpoint(experiment, checkpoint, observation) };
 }
@@ -163,6 +173,7 @@ export function experimentIssues(e, { registration = false } = {}) {
     if (typeof e[key] !== "string" || !e[key].trim()) issues.push(`${key} 欠落`);
   if (!CHANGE_TYPES.has(e.changeType)) issues.push(`changeType 不正 (${e.changeType})`);
   if (!VERDICTS.has(e.verdict)) issues.push(`verdict 不正 (${e.verdict})`);
+  if (e.metricScope != null && !METRIC_SCOPES.has(e.metricScope)) issues.push(`metricScope 不正 (${e.metricScope})`);
   if (!Array.isArray(e.guardrailKpis ?? []) || !(e.guardrailKpis ?? []).every((k) => typeof k === "string" && /^(gsc|ga4|internalNav)\.[A-Za-z][A-Za-z0-9]*$/.test(k))) issues.push("guardrailKpis 不正");
   if (typeof e.primaryKpi === "string" && !/^(gsc|ga4|internalNav)\.[A-Za-z][A-Za-z0-9]*$/.test(e.primaryKpi)) issues.push("primaryKpi 不正");
   if (!Array.isArray(e.evidenceRefs ?? []) || !(e.evidenceRefs ?? []).every((r) => typeof r === "string" && r.trim())) issues.push("evidenceRefs 不正");
@@ -192,7 +203,7 @@ export function launchBaselineCandidate(experiment, observation) {
   const candidate = {
     sourceExperimentId: experiment.experimentId, sourceObservedAt: observation.observedAt,
     baselinePeriod: { from: primary.periodStart, to: primary.periodEnd }, baseline: {}, baselineScopes: {}, baselineStatuses: {},
-    evidenceRefs: [`${datasetDir("themes.portfolio")}/experiments.json#${experiment.experimentId}/d56/${observation.observedAt}`],
+    evidenceRefs: [`${datasetPath("themes.experiments")}#${experiment.experimentId}/d56/${observation.observedAt}`],
   };
   for (const [kpi, value] of Object.entries(observation.values)) {
     if (measurementLimits(value, kpi, experiment, 56, observation.observedAt, true).length
@@ -254,10 +265,10 @@ function main() {
     let patch;
     try { patch = JSON.parse(args[baselineIdx + 2]); }
     catch { reject("--update-baseline のJSONが不正"); }
-    const allowed = new Set(["baseline", "baselinePeriod", "baselineScopes", "baselineStatuses", "evidenceRefs"]);
+    const allowed = new Set(["baseline", "baselinePeriod", "baselineScopes", "baselineStatuses", "evidenceRefs", "metricScope"]);
     if (!patch || typeof patch !== "object" || Array.isArray(patch) || !Object.keys(patch).length
         || Object.keys(patch).some((key) => !allowed.has(key)))
-      reject("変更可能なのはbaseline・期間・scope・status・evidenceRefsだけ");
+      reject("変更可能なのはbaseline・期間・scope・status・evidenceRefs・metricScopeだけ");
     const next = { ...entry, ...patch };
     const issues = experimentIssues(next, { registration: true });
     if (issues.length) reject(issues.join("; "));

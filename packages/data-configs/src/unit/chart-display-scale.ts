@@ -8,8 +8,8 @@ import { formatUnitForDisplay } from "./unit-display";
  * すべて同じ単位で並べたいので、値ごとではなく**図ごとに 1 つ**の単位を選ぶ (値ごとに寄せる
  * `formatReadableMagnitude` は見出しや文中の 1 つの値用)。
  *
- * 決め方 (全 2,425 指標の最新年で実測して決めた。`data/metrics/chart-display-units.json`):
- * 1. 量の次元 (金額・人数・世帯・件数・戸数・重さ・面積・体積・電力・エネルギー) だけを寄せる。
+ * 決め方 (全 2,425 指標の最新年で実測して決めた。`data/metrics/display-units/ledger.json`):
+ * 1. 量の次元 (金額・人数・世帯・件数・戸数・重さ・面積・体積・電力・エネルギー・船の総トン数) だけを寄せる。
  *    割合・指数・分母つき・時間・長さ・温度は寄せない。単位を解釈できないものも寄せない
  *    (1 倍で済ませず、そのままの単位で出す)。
  * 2. 単位の先頭の数の接頭辞 (千・百万…) を外した語 (円・人・トン・ha…) に、万・億・兆を付け直す。
@@ -30,16 +30,16 @@ export interface ChartDisplayScale {
 
 /** 桁を寄せてよい「量」の次元。parseUnit の dimension 名。 */
 export const CHART_QUANTITY_DIMENSIONS: ReadonlySet<string> = new Set([
-  "currency", "people", "household", "count", "dwelling", "mass", "area", "volume", "power", "energy",
+  "currency", "people", "household", "count", "dwelling", "mass", "area", "volume", "power", "energy", "gross-tonnage",
 ]);
 /** 付け直す接頭辞。小さい順に試す。 */
 const CHART_PREFIXES = ["", "万", "億", "兆"] as const;
 const MAN_SERIES = new Set(["万", "億", "兆"]);
 /** 表示の最大値の上限 (5 桁)。0 に見える県が出るときだけ 6 桁まで。 */
 const MAX_SHOWN = 100_000;
-const MAX_SHOWN_FALLBACK = 1_000_000;
+export const MAX_SHOWN_FALLBACK = 1_000_000;
 /** 表示の最大値がこれ以上なら整数、未満なら小数 1 桁。 */
-const INTEGER_FROM = 1_000;
+export const INTEGER_FROM = 1_000;
 
 /** 単位の先頭の数の接頭辞と、残りの語。「千円」→ 千 / 円。接頭辞を外すと次元が変わる語は外さない。 */
 function splitNumericPrefix(unit: string): { prefix: string; word: string; multiplier: number } {

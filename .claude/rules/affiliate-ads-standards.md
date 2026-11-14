@@ -205,6 +205,10 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
 
 ## 4. 配置 & priority 規約
 
+> **現状 (2026-11-14)**: 下の表の解決は、どのページでも動いていない。解決の入口 `features/ads/server.ts` を読むページは 0 件
+> (`apps/web/src/app` と `components` を git grep で確認)。ranking・blog・survey などのページは意図軸のアフィリエイトを解決しない。
+> 表は戦略を練り直すときのための、止める前の配置の記録である。
+
 ### 解決 (`resolve-affiliate-ad.ts`)
 
 | ページ種別 | 解決キー |
@@ -580,7 +584,7 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 
 ### 規律
 
-成果取得のafbは公式APIを使う（[認証プロファイルのCI契約](../../docs/01_技術設計/07_Playwright認証プロファイル.md#ci-実行について)）。以下の同一headed process制約は提携・原稿等のブラウザ操作に適用し、成果APIへ持ち込まない。
+成果の取得元は A8 と楽天だけで、どちらも Mac が週次にログイン済みのセッションで読む (afb・もしもは 2026-10-19 に取得元から外した。`.claude/scripts/measurement/sources.mjs`)。以下の同一headed process制約は提携・原稿等のブラウザ操作に適用する。
 
 | 規律 | 手段 |
 |---|---|
@@ -740,7 +744,8 @@ banner 上位 1 + text 上位 2 で頭打ちだったため。
 ### 需要 × 供給の突合は機械が行う
 
 `.claude/scripts/ads/build-placement-map.mjs` が GSC ページ別実測 × 在庫 × 確定EPC を突合し
-`data/affiliate/placement-map-latest.json` を生成する (週次 cron `affiliate-dashboard-refresh.yml`)。
+`data/affiliate/placement-map-latest.json` (要約・1MB 未満) を生成する (週次 cron `affiliate-dashboard-refresh.yml`)。
+ページ別の明細 (約 6.7MB・リポジトリ衛生の上限 1MB 超) は git に置かず `.local/affiliate-placement-map/pages-latest.json` に分ける (CI では artifact)。
 **目視 JOIN で propose しない** — 再現性が無く見落とすため。判定は `lib/placement-map-core.mjs` (テスト付き)。
 
 出力の読み方:

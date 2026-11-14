@@ -156,10 +156,15 @@ test('件数が job timeout に収まる (1 次式 × 安全率 1.25)', () => {
 //   2026-08-21 に ai-content / blog の日次生成ループを削除したので、現在この条件を満たす
 //   workflow は backlog-loop だけ。**対象をファイル名で列挙せず base-action の利用で拾う**ので、
 //   将来 Claude workflow を足したら自動で検査対象に入る。
-test('★backlog-loop は日次で自動実行しない (2026-09-27 オーナー判断: 何を処理するかはセッションで決める)', () => {
+// 2026-09-27 に日次を止め (優先順位と無関係なカードが上から無人で処理された)、2026-11-14 に選定を直したうえで
+// 週 1 回の再開をオーナーが承認した。日次へ戻すのは別のオーナー判断なので、cron の本数と曜日を固定する。
+test('★backlog-loop の定期実行は週 1 回 (日曜 01:30 JST = 土曜 16:30 UTC) だけ', () => {
   const source = fs.readFileSync(path.join(ROOT, WORKFLOW), 'utf8');
-  assert.ok(!/^\s*schedule:/m.test(source), 'backlog-loop に schedule が戻っている');
+  const crons = [...source.matchAll(/- cron: "([^"]+)"/g)].map((m) => m[1]);
+  assert.deepEqual(crons, ['30 16 * * 6'], `backlog-loop の cron が週 1 回の枠でない: ${crons.join(' / ')}`);
   assert.ok(/workflow_dispatch:/.test(source), '手動起動の経路が無い');
+  // ファイル名は daily のまま (GitHub 側の有効/無効の状態がファイル名に結び付いている)。表示名は実態に合わせる
+  assert.match(source, /^name: .*Weekly/m, 'workflow の表示名が週次になっていない');
 });
 
 test('★Claude を使う workflow どうしが実時間で重ならない (利用枠の共有)', () => {
@@ -180,25 +185,43 @@ test('★Claude を使う workflow どうしが実時間で重ならない (利�
   assert.deepEqual(jobs['page-quality'].needs, ['theme'], 'page-quality の Claude が theme の Claude と同時に走る');
 
   const crons = (source) => [...source.matchAll(/- cron: "([^"]+)"/g)].map((m) => m[1]);
-  const startHour = (cron) => Number(cron.split(/\s+/)[1]);
   const timeoutOf = (source) =>
     Math.max(...[...source.matchAll(/timeout-minutes: (\d+)/g)].map((m) => Number(m[1])));
 
+  // 週次の cron どうしは曜日が違えば重ならない。曜日を見ずに時刻だけで比べると、金曜の quality-suite と
+  // 土曜の backlog-loop (どちらも 16 時台 UTC) を「重なる」と誤判定する。週の中の分で比べる。
+  const WEEK = 7 * 24 * 60;
+  const daysOf = (field) => {
+    if (field === '*') return [0, 1, 2, 3, 4, 5, 6];
+    return field.split(',').flatMap((part) => {
+      const [lo, hi] = part.split('-').map(Number);
+      const days = [];
+      for (let d = lo; d <= (hi ?? lo); d += 1) days.push(d % 7);
+      return days;
+    });
+  };
+  const startsOf = (cron) => {
+    const [minute, hour, dom, month, dow] = cron.split(/\s+/);
+    // 月の日・月で絞る cron (月次) は週の中で位置が決まらないので、毎日走るとみなす (安全側)
+    const days = dom !== '*' || month !== '*' ? daysOf('*') : daysOf(dow);
+    return days.map((d) => d * 24 * 60 + Number(hour) * 60 + Number(minute));
+  };
+
   const spans = [];
   for (const { file, source } of claudeWorkflows) {
-    const hours = timeoutOf(source) / 60;
+    const minutes = timeoutOf(source);
     for (const cron of crons(source)) {
-      const start = startHour(cron);
-      spans.push({ file, cron, start, end: start + hours });
+      for (const start of startsOf(cron)) spans.push({ file, cron, start, end: start + minutes });
     }
   }
+  const overlap = (x, y) =>
+    [-WEEK, 0, WEEK].some((shift) => x.start < y.end + shift && y.start + shift < x.end);
 
   for (let a = 0; a < spans.length; a += 1) {
     for (let b = a + 1; b < spans.length; b += 1) {
       if (spans[a].file === spans[b].file) continue;
-      const overlaps = spans[a].start < spans[b].end && spans[b].start < spans[a].end;
       assert.ok(
-        !overlaps,
+        !overlap(spans[a], spans[b]),
         `${spans[a].file} の ${spans[a].cron} と ${spans[b].file} の ${spans[b].cron} が実時間で重なる`,
       );
     }

@@ -2,6 +2,250 @@
   "generatedFrom": "collectThemeDataDependenciesWithProvenance(THEME_CATALOGS)",
   "totalMetricRefs": 266,
   "distinctMetricRefs": 250,
+  "minTrendYears": 5,
+  "trendCharts": [
+    {
+      "themeKey": "aging-society",
+      "componentKey": "theme-late-elderly-medical-expense-trend",
+      "title": "後期高齢者医療費（被保険者1人当たり）の推移",
+      "metricKeys": [
+        "late-elderly-medical-expense-per-insured"
+      ]
+    },
+    {
+      "themeKey": "consumer-prices",
+      "componentKey": "theme-cpi-heatmap",
+      "title": "費目別の物価地域差指数の推移",
+      "metricKeys": [
+        "consumer-price-difference-index-overall",
+        "consumer-price-difference-index-overall-excl-rent",
+        "consumer-price-difference-index-food",
+        "consumer-price-difference-index-housing",
+        "consumer-price-difference-index-utilities",
+        "consumer-price-difference-index-education",
+        "consumer-price-difference-index-culture-recreation",
+        "consumer-price-difference-index-transport-communication",
+        "consumer-price-difference-index-healthcare",
+        "consumer-price-difference-index-clothing-footwear",
+        "consumer-price-difference-index-furniture-household",
+        "consumer-price-difference-index-miscellaneous"
+      ]
+    },
+    {
+      "themeKey": "climate",
+      "componentKey": "theme-climate-temperature-extremes",
+      "title": "最高・最低気温の推移",
+      "metricKeys": [
+        "maximum-temperature",
+        "lowest-temperature"
+      ]
+    },
+    {
+      "themeKey": "education-culture",
+      "componentKey": "theme-edu-higher-education-trend",
+      "title": "大学入学者の県内入学割合の推移",
+      "metricKeys": [
+        "in-pref-university-entrance-ratio-by-highschool-origin"
+      ]
+    },
+    {
+      "themeKey": "fishery-marine",
+      "componentKey": "theme-fishery-output-trend-marine",
+      "title": "海面漁業産出額の長期推移",
+      "metricKeys": [
+        "marine-fishery-output-value"
+      ]
+    },
+    {
+      "themeKey": "foreign-residents",
+      "componentKey": "theme-foreign-total-trend",
+      "title": "外国人人口の推移（人口10万人当たり）",
+      "metricKeys": [
+        "foreign-resident-count-per-100k"
+      ]
+    },
+    {
+      "themeKey": "foreign-residents",
+      "componentKey": "theme-foreign-nationality-trend",
+      "title": "国籍別人口の推移（人口10万人当たり）",
+      "metricKeys": [
+        "foreign-resident-count-china-per-100k",
+        "foreign-resident-count-korea-per-100k"
+      ]
+    },
+    {
+      "themeKey": "healthcare",
+      "componentKey": "theme-health-supply-trend",
+      "title": "医療施設の医師数の推移（人口10万人当たり）",
+      "metricKeys": [
+        "physicians-in-medical-facilities-per-100k"
+      ]
+    },
+    {
+      "themeKey": "healthcare",
+      "componentKey": "theme-health-supply-trend-hospitals",
+      "title": "一般病院数の推移（人口10万人当たり）",
+      "metricKeys": [
+        "general-hospital-count-per-100k"
+      ]
+    },
+    {
+      "themeKey": "labor-mobility",
+      "componentKey": "theme-lm-employment-mobility-trend",
+      "title": "就業異動率の推移",
+      "metricKeys": [
+        "employment-mobility-rate"
+      ]
+    },
+    {
+      "themeKey": "living-housing",
+      "componentKey": "vacancy-ownership-rate-trend",
+      "title": "空き家率と持ち家率の推移",
+      "metricKeys": [
+        "vacant-housing-ratio",
+        "owner-occupied-housing-ratio"
+      ]
+    },
+    {
+      "themeKey": "living-housing",
+      "componentKey": "lh-household-structure-trend",
+      "title": "核家族世帯割合の推移",
+      "metricKeys": [
+        "nuclear-family-households-ratio"
+      ]
+    },
+    {
+      "themeKey": "manufacturing",
+      "componentKey": "manufacturing-establishments-employees-trend",
+      "title": "製造業の事業所数の推移",
+      "metricKeys": [
+        "manufacturing-establishments"
+      ]
+    },
+    {
+      "themeKey": "manufacturing",
+      "componentKey": "manufacturing-establishments-employees-trend-employees",
+      "title": "製造業の従業者数の推移",
+      "metricKeys": [
+        "manufacturing-employees"
+      ]
+    },
+    {
+      "themeKey": "manufacturing",
+      "componentKey": "manufacturing-shipment-value-trend",
+      "title": "製造品出荷額と付加価値額の推移",
+      "metricKeys": [
+        "manufacturing-shipment-amount",
+        "manufacturing-industry-added-value"
+      ]
+    },
+    {
+      "themeKey": "manufacturing",
+      "componentKey": "theme-manufacturing-labor-productivity",
+      "title": "従業者1人当たり出荷額の推移",
+      "metricKeys": [
+        "manufacturing-shipment-amount-per-employee"
+      ]
+    },
+    {
+      "themeKey": "manufacturing",
+      "componentKey": "theme-manufacturing-labor-productivity-establishment",
+      "title": "事業所当たり出荷額の推移",
+      "metricKeys": [
+        "manufacturing-shipment-amount-per-establishment"
+      ]
+    },
+    {
+      "themeKey": "ports",
+      "componentKey": "ports-cargo-trend",
+      "title": "輸出入 海上貨物量の推移",
+      "metricKeys": [
+        "port-cargo-export",
+        "port-cargo-import"
+      ]
+    },
+    {
+      "themeKey": "railway",
+      "componentKey": "railway-passenger-trend",
+      "title": "民鉄輸送人員の推移",
+      "metricKeys": [
+        "private-railway-passenger-transport"
+      ]
+    },
+    {
+      "themeKey": "railway",
+      "componentKey": "railway-freight-trend",
+      "title": "JR貨物発送量の推移",
+      "metricKeys": [
+        "jr-freight-shipment"
+      ]
+    },
+    {
+      "themeKey": "real-income",
+      "componentKey": "real-income-cpi-breakdown",
+      "title": "消費者物価地域差指数（総合）の推移",
+      "metricKeys": [
+        "consumer-price-difference-index-overall"
+      ]
+    },
+    {
+      "themeKey": "safety",
+      "componentKey": "crime-count-arrest-rate-trend",
+      "title": "刑法犯認知件数（人口千人当たり）と検挙率の推移",
+      "metricKeys": [
+        "penal-code-offenses-recognized-per-1000",
+        "criminal-arrest-rate"
+      ]
+    },
+    {
+      "themeKey": "safety",
+      "componentKey": "traffic-accident-deaths-trend",
+      "title": "交通事故 発生件数と負傷者数の推移",
+      "metricKeys": [
+        "traffic-accident-count",
+        "traffic-accident-injuries"
+      ]
+    },
+    {
+      "themeKey": "safety",
+      "componentKey": "fire-emergency-trend",
+      "title": "救急出動件数（人口千人当たり）の推移",
+      "metricKeys": [
+        "annual-emergency-dispatches-per-1000"
+      ]
+    },
+    {
+      "themeKey": "tourism",
+      "componentKey": "theme-tourism-hotel-supply-trend",
+      "title": "宿泊施設数と客室数の推移",
+      "metricKeys": [
+        "number-of-hotel-facilities",
+        "number-of-hotel-rooms"
+      ]
+    },
+    {
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-staple-trend",
+      "title": "米・食パン・他のパンの支出額の推移",
+      "metricKeys": [
+        "rice-consumption-expenditure",
+        "white-bread-consumption-expenditure",
+        "other-bread-consumption-expenditure"
+      ]
+    },
+    {
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-alcohol-trend",
+      "title": "酒類の支出額の推移",
+      "metricKeys": [
+        "beer-consumption-expenditure",
+        "happoshu-consumption-expenditure",
+        "sake-consumption-expenditure",
+        "wine-consumption-expenditure",
+        "shochu-consumption-expenditure"
+      ]
+    }
+  ],
   "metrics": [
     {
       "metricKey": "accommodation-consumption-expenditure",
@@ -89,7 +333,7 @@
       "componentKey": "theme-occ-service-trend",
       "componentType": "line-chart",
       "expectedUnit": "万円",
-      "expectedConfigHash": "1684e28e68ac51e9"
+      "expectedConfigHash": "7e81ee45bdca984c"
     },
     {
       "metricKey": "beer-consumption-expenditure",
@@ -201,7 +445,7 @@
       "componentKey": "theme-occ-medical-trend",
       "componentType": "line-chart",
       "expectedUnit": "万円",
-      "expectedConfigHash": "bce0f0808dd7357b"
+      "expectedConfigHash": "d1aceb9724c9d3f6"
     },
     {
       "metricKey": "carpenter-annual-income",
@@ -209,7 +453,7 @@
       "componentKey": "theme-occ-transport-trend",
       "componentType": "line-chart",
       "expectedUnit": "万円",
-      "expectedConfigHash": "a9acb4835081e684"
+      "expectedConfigHash": "f237deb652d992ad"
     },
     {
       "metricKey": "clam-consumption-expenditure",
@@ -361,7 +605,7 @@
       "componentKey": "theme-occ-service-trend",
       "componentType": "line-chart",
       "expectedUnit": "万円",
-      "expectedConfigHash": "c3c7a6b30d94262c"
+      "expectedConfigHash": "9e1faa4600a8f289"
     },
     {
       "metricKey": "criminal-arrest-rate",
@@ -465,7 +709,7 @@
       "componentKey": "theme-occ-medical-trend",
       "componentType": "line-chart",
       "expectedUnit": "万円",
-      "expectedConfigHash": "32ba461e0bd6e029"
+      "expectedConfigHash": "e6148375a7d83450"
     },
     {
       "metricKey": "domestic-package-tour-consumption-expenditure",
@@ -1081,7 +1325,7 @@
       "componentKey": "theme-occ-medical-trend",
       "componentType": "line-chart",
       "expectedUnit": "万円",
-      "expectedConfigHash": "44bfc11557830ac6"
+      "expectedConfigHash": "d1b2e988c2883b8b"
     },
     {
       "metricKey": "nursery-teacher-annual-income",
@@ -1089,7 +1333,7 @@
       "componentKey": "theme-occ-edu-trend",
       "componentType": "line-chart",
       "expectedUnit": "万円",
-      "expectedConfigHash": "7b0539006210bcdb"
+      "expectedConfigHash": "b18bdd172d331876"
     },
     {
       "metricKey": "other-bread-consumption-expenditure",
@@ -1385,7 +1629,7 @@
       "componentKey": "theme-occ-edu-trend",
       "componentType": "line-chart",
       "expectedUnit": "万円",
-      "expectedConfigHash": "031c0244cf12f5f7"
+      "expectedConfigHash": "53f15683b16debee"
     },
     {
       "metricKey": "sea-bream-consumption-quantity",
@@ -1401,7 +1645,7 @@
       "componentKey": "theme-occ-service-trend",
       "componentType": "line-chart",
       "expectedUnit": "万円",
-      "expectedConfigHash": "c45db1200eee616b"
+      "expectedConfigHash": "1ee990b763047232"
     },
     {
       "metricKey": "serious-crime-per-100k",
@@ -1497,7 +1741,7 @@
       "componentKey": "theme-occ-it-trend",
       "componentType": "line-chart",
       "expectedUnit": "万円",
-      "expectedConfigHash": "f00643aba840e510"
+      "expectedConfigHash": "f987cf3e60444f3d"
     },
     {
       "metricKey": "sports-spectating-consumption-expenditure",
@@ -1545,7 +1789,7 @@
       "componentKey": "theme-occ-it-trend",
       "componentType": "line-chart",
       "expectedUnit": "万円",
-      "expectedConfigHash": "a96fb1fc940918e7"
+      "expectedConfigHash": "3d2a783b2fcb262e"
     },
     {
       "metricKey": "table-salt-consumption-quantity",
@@ -1561,7 +1805,7 @@
       "componentKey": "theme-occ-transport-trend",
       "componentType": "line-chart",
       "expectedUnit": "万円",
-      "expectedConfigHash": "1e0920b525c46dda"
+      "expectedConfigHash": "49454428045204c3"
     },
     {
       "metricKey": "theft-offenses-recognized",
@@ -1905,7 +2149,7 @@
       "componentKey": "theme-occ-transport-trend",
       "componentType": "line-chart",
       "expectedUnit": "万円",
-      "expectedConfigHash": "8b54916f2f34d7a0"
+      "expectedConfigHash": "dab66a2ad799c5d5"
     },
     {
       "metricKey": "turnover-rate",
@@ -1921,7 +2165,7 @@
       "componentKey": "theme-occ-edu-trend",
       "componentType": "line-chart",
       "expectedUnit": "万円",
-      "expectedConfigHash": "b65036a86a06863b"
+      "expectedConfigHash": "05970f3f2aff6d72"
     },
     {
       "metricKey": "vacant-housing-excluding-rental-sale-secondary",

@@ -683,6 +683,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-01",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:01000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-01",
       "channel": "blog",
       "status": "done",
       "target": "blog:hokkaido-food-culture",
@@ -696,6 +704,14 @@
       "target": "note:a-kakei-hokkaido",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-02",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:02000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
     },
     {
       "analysis": "kakei-marketing-2015-a06-02",
@@ -715,6 +731,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-03",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:03000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-03",
       "channel": "blog",
       "status": "done",
       "target": "blog:iwate-food-culture",
@@ -728,6 +752,14 @@
       "target": "note:a-kakei-iwate",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-04",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:04000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
     },
     {
       "analysis": "kakei-marketing-2015-a06-04",
@@ -747,6 +779,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-05",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:05000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-05",
       "channel": "blog",
       "status": "done",
       "target": "blog:akita-food-culture",
@@ -760,6 +800,14 @@
       "target": "note:a-kakei-akita",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-06",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:06000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
     },
     {
       "analysis": "kakei-marketing-2015-a06-06",
@@ -779,6 +827,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-07",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:07000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-07",
       "channel": "blog",
       "status": "done",
       "target": "blog:fukushima-food-culture",
@@ -792,6 +848,14 @@
       "target": "note:a-kakei-fukushima",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-08",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:08000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
     },
     {
       "analysis": "kakei-marketing-2015-a06-08",
@@ -811,6 +875,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-09",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:09000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-09",
       "channel": "blog",
       "status": "done",
       "target": "blog:tochigi-food-culture",
@@ -824,6 +896,14 @@
       "target": "note:a-kakei-tochigi",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-10",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:10000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
     },
     {
       "analysis": "kakei-marketing-2015-a06-10",
@@ -843,6 +923,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-11",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:11000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-11",
       "channel": "blog",
       "status": "done",
       "target": "blog:saitama-food-culture",
@@ -856,6 +944,14 @@
       "target": "note:a-kakei-saitama",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-12",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:12000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
     },
     {
       "analysis": "kakei-marketing-2015-a06-12",
@@ -875,6 +971,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-13",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:13000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-13",
       "channel": "blog",
       "status": "done",
       "target": "blog:tokyo-food-culture",
@@ -888,6 +992,14 @@
       "target": "note:a-kakei-tokyo",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-14",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:14000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
     },
     {
       "analysis": "kakei-marketing-2015-a06-14",
@@ -907,6 +1019,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-15",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:15000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-15",
       "channel": "blog",
       "status": "done",
       "target": "blog:niigata-food-culture",
@@ -920,6 +1040,14 @@
       "target": "note:a-kakei-niigata",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-16",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:16000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
     },
     {
       "analysis": "kakei-marketing-2015-a06-16",
@@ -939,6 +1067,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-17",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:17000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-17",
       "channel": "blog",
       "status": "done",
       "target": "blog:ishikawa-food-culture",
@@ -952,6 +1088,14 @@
       "target": "note:a-kakei-ishikawa",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-18",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:18000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
     },
     {
       "analysis": "kakei-marketing-2015-a06-18",
@@ -971,6 +1115,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-19",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:19000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-19",
       "channel": "blog",
       "status": "done",
       "target": "blog:yamanashi-food-culture",
@@ -984,6 +1136,14 @@
       "target": "note:a-kakei-yamanashi",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-20",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:20000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
     },
     {
       "analysis": "kakei-marketing-2015-a06-20",
@@ -1003,6 +1163,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-21",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:21000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-21",
       "channel": "blog",
       "status": "done",
       "target": "blog:gifu-food-culture",
@@ -1016,6 +1184,14 @@
       "target": "note:a-kakei-gifu",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-22",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:22000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
     },
     {
       "analysis": "kakei-marketing-2015-a06-22",
@@ -1035,6 +1211,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-23",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:23000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-23",
       "channel": "blog",
       "status": "done",
       "target": "blog:aichi-food-culture",
@@ -1048,6 +1232,14 @@
       "target": "note:a-kakei-aichi",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-24",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:24000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
     },
     {
       "analysis": "kakei-marketing-2015-a06-24",
@@ -1067,6 +1259,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-25",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:25000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-25",
       "channel": "blog",
       "status": "done",
       "target": "blog:shiga-food-culture",
@@ -1080,6 +1280,14 @@
       "target": "note:a-kakei-shiga",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-26",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:26000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
     },
     {
       "analysis": "kakei-marketing-2015-a06-26",
@@ -1099,6 +1307,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-27",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:27000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-27",
       "channel": "blog",
       "status": "done",
       "target": "blog:osaka-food-culture",
@@ -1112,6 +1328,14 @@
       "target": "note:a-kakei-osaka",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-28",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:28000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
     },
     {
       "analysis": "kakei-marketing-2015-a06-28",
@@ -1131,6 +1355,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-29",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:29000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-29",
       "channel": "blog",
       "status": "done",
       "target": "blog:nara-food-culture",
@@ -1144,6 +1376,14 @@
       "target": "note:a-kakei-nara",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-30",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:30000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
     },
     {
       "analysis": "kakei-marketing-2015-a06-30",
@@ -1163,6 +1403,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-31",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:31000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-31",
       "channel": "blog",
       "status": "done",
       "target": "blog:tottori-food-culture",
@@ -1176,6 +1424,14 @@
       "target": "note:a-kakei-tottori",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-32",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:32000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
     },
     {
       "analysis": "kakei-marketing-2015-a06-32",
@@ -1195,6 +1451,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-33",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:33000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-33",
       "channel": "blog",
       "status": "done",
       "target": "blog:okayama-food-culture",
@@ -1208,6 +1472,14 @@
       "target": "note:a-kakei-okayama",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-34",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:34000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
     },
     {
       "analysis": "kakei-marketing-2015-a06-34",
@@ -1227,6 +1499,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-35",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:35000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-35",
       "channel": "blog",
       "status": "done",
       "target": "blog:yamaguchi-food-culture",
@@ -1240,6 +1520,14 @@
       "target": "note:a-kakei-yamaguchi",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-36",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:36000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
     },
     {
       "analysis": "kakei-marketing-2015-a06-36",
@@ -1259,6 +1547,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-37",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:37000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-37",
       "channel": "blog",
       "status": "done",
       "target": "blog:kagawa-food-culture",
@@ -1272,6 +1568,14 @@
       "target": "note:a-kakei-kagawa",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-38",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:38000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
     },
     {
       "analysis": "kakei-marketing-2015-a06-38",
@@ -1291,6 +1595,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-39",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:39000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-39",
       "channel": "blog",
       "status": "done",
       "target": "blog:kochi-food-culture",
@@ -1304,6 +1616,14 @@
       "target": "note:a-kakei-kochi",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-40",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:40000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
     },
     {
       "analysis": "kakei-marketing-2015-a06-40",
@@ -1323,6 +1643,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-41",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:41000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-41",
       "channel": "blog",
       "status": "done",
       "target": "blog:saga-food-culture",
@@ -1336,6 +1664,14 @@
       "target": "note:a-kakei-saga",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-42",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:42000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
     },
     {
       "analysis": "kakei-marketing-2015-a06-42",
@@ -1355,6 +1691,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-43",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:43000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-43",
       "channel": "blog",
       "status": "done",
       "target": "blog:kumamoto-food-culture",
@@ -1368,6 +1712,14 @@
       "target": "note:a-kakei-kumamoto",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-44",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:44000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
     },
     {
       "analysis": "kakei-marketing-2015-a06-44",
@@ -1387,6 +1739,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-45",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:45000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-45",
       "channel": "blog",
       "status": "done",
       "target": "blog:miyazaki-food-culture",
@@ -1403,6 +1763,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a06-46",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:46000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-46",
       "channel": "blog",
       "status": "done",
       "target": "blog:kagoshima-food-culture",
@@ -1416,6 +1784,14 @@
       "target": "note:a-kakei-kagoshima",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a06-47",
+      "channel": "area",
+      "status": "done",
+      "target": "area-theme:47000:household-food-spending",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "area-curator"
     },
     {
       "analysis": "kakei-marketing-2015-a06-47",
@@ -1872,6 +2248,14 @@
       "target": "note:b-ref-dev-a45",
       "decidedAt": "2026-10-14",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-deviation-2018-a45",
+      "channel": "theme",
+      "status": "declined",
+      "reason": "児童虐待相談対応件数は既存の 55 テーマに合うものが無く、児童福祉・子どものテーマを新設しないとオーナーが 2026-10-26 に判断済み (placement-decisions.json の theme / child-abuse-consultation-cases が rejected)。指標はランキングで公開している",
+      "decidedAt": "2026-11-13",
+      "decidedBy": "theme-designer"
     },
     {
       "analysis": "prefecture-deviation-2018-a49",

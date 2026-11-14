@@ -396,6 +396,19 @@ export function assertGeoLowElevationConservation(
     throw new Error('LowElevation detail/aggregate conservation failed');
 }
 
+/**
+ * 保存バイト列が「パースした値を JSON.stringify し直した結果 + 改行」と一致するか。
+ * Web 側の再直列化照合と同じ基準で、整数風キーの並びが JS と違う生成物を見つける。
+ */
+export function isCanonicalGeoJsonBody(
+  value: unknown,
+  body: Uint8Array,
+  pretty = false
+): boolean {
+  const expected = `${JSON.stringify(value, null, pretty ? 2 : undefined)}\n`;
+  return Buffer.from(body).toString('utf8') === expected;
+}
+
 /** 国勢調査2020の都道府県人口(manifest.censusReference)と県詳細の突合用。 */
 export function lowElevationCensusPopulation(
   manifest: GeoAnalysisEvidenceManifest,

@@ -1,0 +1,215 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-kakei-necktie-decline",
+  "production": {
+    "id": "NCI-00137",
+    "policyId": "NCP-005",
+    "policyVersion": 2,
+    "brief": {
+      "headline": "ネクタイの支出\nどう減った？",
+      "subline": "量と単価に分けて読む\n2000〜2024年・家計調査",
+      "subject": "緑と明るいクリーム、黄色のアクセント。右側に落ち着いた紺色の無地のネクタイを一本、白紙の家計ノートを一点。衣料品と記録の静物だけで内容を伝える。人形・マネキン・着用する人物や手を描かない。下降矢印・数値・折れ線を創作しない。人物・顔・人の手・動物・キャラクター・マスコット・擬人化は一切描かない。地図、架空の統計グラフ、数式、表彰台、順位図、製品ロゴ、指定外の文言を描かない。紙面・タグ・ラベルは完全な白紙。左側の大きな見出しと下の補足2行は、幅320pxでも明瞭に読める太さと大きさにし、四辺の余白を守る。",
+      "evidence": "https://note.com/stats47/n/ncbfe818867f4 2026-10-15公開本文確認。本文は全国・二人以上の世帯の2000〜2024年のネクタイ支出、数量、購入単価の分解。家計支出を市場全体の売上と同一視せず、減少理由の生活行動までは断定しない。 人物・キャラクターは使わない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "88407b84eb3a9457eaca16847ac69e20bc728d81a85cc61bf15d229dc672233c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-necktie-decline/revisions/88407b84eb3a9457eaca16847ac69e20bc728d81a85cc61bf15d229dc672233c.png"
+      },
+      "bytes": 42442,
+      "id": "88407b84eb3a9457eaca16847ac69e20bc728d81a85cc61bf15d229dc672233c",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:25.631Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312772406/rectangle_large_type_2_8d73657e8a72d0da995ce7dece509be7.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "88407b84eb3a9457eaca16847ac69e20bc728d81a85cc61bf15d229dc672233c"
+      }
+    },
+    {
+      "sha256": "98a4829e4dacc05415aa1cc9ea2924f370c8fc86b5f92b0dc92c82d056377e77",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-necktie-decline/revisions/98a4829e4dacc05415aa1cc9ea2924f370c8fc86b5f92b0dc92c82d056377e77.png"
+      },
+      "bytes": 82304,
+      "id": "98a4829e4dacc05415aa1cc9ea2924f370c8fc86b5f92b0dc92c82d056377e77",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:44:49.486Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "2211e75bc04013749cca947c0f86fa9723d52a9fbdb99f6d188d56813bcf24be"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で問いと記事固有の図(公開R2の記事画像)が確認できる",
+        "reviewedAt": "2026-10-11T11:50:54.136Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "2211e75bc04013749cca947c0f86fa9723d52a9fbdb99f6d188d56813bcf24be",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-necktie-decline/inputs/2211e75bc04013749cca947c0f86fa9723d52a9fbdb99f6d188d56813bcf24be.json"
+          },
+          "bytes": 1419
+        }
+      }
+    },
+    {
+      "sha256": "c4290c8aad55a2e1d2b494008de9aab7716d6d1dd8d23f02e969918b059675a9",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-necktie-decline/revisions/c4290c8aad55a2e1d2b494008de9aab7716d6d1dd8d23f02e969918b059675a9.png"
+      },
+      "bytes": 87814,
+      "id": "c4290c8aad55a2e1d2b494008de9aab7716d6d1dd8d23f02e969918b059675a9",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:55:50.935Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320302282/rectangle_large_type_2_ed21054a456e312ebfaea9cda0f76ec3.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "c4290c8aad55a2e1d2b494008de9aab7716d6d1dd8d23f02e969918b059675a9"
+      }
+    },
+    {
+      "sha256": "a2d23fbb5db573102c61e94cfb0fd9fa411835eceb8e24c7fc4a722d3bc0f812",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-necktie-decline/revisions/a2d23fbb5db573102c61e94cfb0fd9fa411835eceb8e24c7fc4a722d3bc0f812.png"
+      },
+      "bytes": 34869,
+      "id": "a2d23fbb5db573102c61e94cfb0fd9fa411835eceb8e24c7fc4a722d3bc0f812",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:10:40.277Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "f9158e408d10ecf1c2fad658b35c5e034e7dac92efa5241be41ec958063f2786"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.022/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:17:25.773Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "f9158e408d10ecf1c2fad658b35c5e034e7dac92efa5241be41ec958063f2786",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-necktie-decline/inputs/f9158e408d10ecf1c2fad658b35c5e034e7dac92efa5241be41ec958063f2786.json"
+          },
+          "bytes": 1419
+        }
+      }
+    },
+    {
+      "sha256": "5a0f402efd092f5da810946a67accdcdf06a36247dab43b248cac57ee83efe37",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-necktie-decline/revisions/5a0f402efd092f5da810946a67accdcdf06a36247dab43b248cac57ee83efe37.png"
+      },
+      "bytes": 76848,
+      "id": "5a0f402efd092f5da810946a67accdcdf06a36247dab43b248cac57ee83efe37",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T04:06:17.507Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323276971/rectangle_large_type_2_649b06e6f54a882cf07dcc86b289ac97.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "5a0f402efd092f5da810946a67accdcdf06a36247dab43b248cac57ee83efe37"
+      }
+    },
+    {
+      "sha256": "135ab21d96a940cca64a7cb2457d1e08440a6d79d1693c5d89666792dfc68383",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-necktie-decline/revisions/135ab21d96a940cca64a7cb2457d1e08440a6d79d1693c5d89666792dfc68383.png"
+      },
+      "bytes": 1871394,
+      "id": "135ab21d96a940cca64a7cb2457d1e08440a6d79d1693c5d89666792dfc68383",
+      "kind": "candidate",
+      "version": "imagegen-no-character-next10-20261015",
+      "createdAt": "2026-10-15T04:14:07.275Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "bfd19d43b0edb15dc3e25aa779e2f98dbffb0b46fffe67b0b05872f9e1734e1f"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "人物・キャラクターなし。原寸と320pxで指定全文・対象年・地域・世帯区分・補足の可読性・文字切れ・重なりを確認済み。制作原本と目視記録のSHAを照合。管理画面の修正前後10件を提示し、2026-10-15にユーザーが表示中10件の反映を指示。",
+        "reviewedAt": "2026-10-15T04:29:07.509Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "bfd19d43b0edb15dc3e25aa779e2f98dbffb0b46fffe67b0b05872f9e1734e1f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-necktie-decline/inputs/bfd19d43b0edb15dc3e25aa779e2f98dbffb0b46fffe67b0b05872f9e1734e1f.json"
+          },
+          "bytes": 9133
+        },
+        "production": {
+          "id": "NCI-00137",
+          "policyId": "NCP-005",
+          "policyVersion": 2,
+          "planSha256": "a0b694b6e313f4998062a63546a2464c2a4366c31e5374ed0678b732a8010ee7"
+        }
+      }
+    }
+  ]
+}

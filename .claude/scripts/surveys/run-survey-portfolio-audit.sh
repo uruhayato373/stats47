@@ -2,7 +2,7 @@
 # run-survey-portfolio-audit.sh — survey ポートフォリオの継続監査コマンド (月次/四半期・PR-4)
 #
 # build (機械項目再導出: 紐付け監査 + R2 all.json + survey-editorial.ts) → aggregate (56d 実測) →
-# validate (判定規律 + drift) → 実験期日チェック → drift サマリ (git HEAD との差分) を一括実行する。
+# validate (形と ID の実在 = check-datasets / 判定規律 + drift = validator) → 実験期日チェック → drift サマリ (git HEAD との差分) を一括実行する。
 # 破壊的変更はしない (state の再導出のみ。R2 push / deploy / surveys.json・editorial 編集は行わない)。
 #
 # Usage: bash .claude/scripts/surveys/run-survey-portfolio-audit.sh
@@ -18,7 +18,9 @@ npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts --compare-r2 | tail
 echo "── 3/6 aggregate (56d 実測: GSC/GA4 非重複 2 窓) ──"
 npx tsx .claude/scripts/surveys/aggregate-survey-metrics.ts
 
-echo "── 4/6 validate (判定規律 + editorial drift) ──"
+echo "── 4/6 validate (形・調査 ID の実在 → 判定規律 + editorial drift) ──"
+# 列挙の値と調査 ID の実在は Schema と台帳の refs だけが持つ (validator は意味の検査だけ)
+node .claude/scripts/lib/check-datasets.mjs
 npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts
 
 echo "── 5/6 実験期日チェック ──"

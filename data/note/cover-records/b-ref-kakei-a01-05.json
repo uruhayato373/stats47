@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-kakei-a01-05",
+  "production": {
+    "id": "NCI-00171",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "予備校代の差は\n年収で101倍",
+      "subline": "大学と塾への支出を10年前と比較",
+      "subject": "無文字の参考書の束と、小さな目覚まし時計を大きく描く。時計の文字盤に数字を入れない。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/ncfb6a1c35121 本文確認2026-11-04。タイトルどおり予備校代の差は第Ⅴ階級と第Ⅰ階級で101倍。家計調査の年収5階級の比較で、10年で差が広がった。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "cfb6e7c2f1180f3d7b94e3d816e23a2c90b775eb98c951cac64c366be7900e47",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a01-05/revisions/cfb6e7c2f1180f3d7b94e3d816e23a2c90b775eb98c951cac64c366be7900e47.png"
+      },
+      "bytes": 45951,
+      "id": "cfb6e7c2f1180f3d7b94e3d816e23a2c90b775eb98c951cac64c366be7900e47",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:10:50.511Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "36b26a1b1b8af240920b0f084c41c83a43c54294065ff3dd0607b1fcf621acce"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:40.623Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "36b26a1b1b8af240920b0f084c41c83a43c54294065ff3dd0607b1fcf621acce",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a01-05/inputs/36b26a1b1b8af240920b0f084c41c83a43c54294065ff3dd0607b1fcf621acce.json"
+          },
+          "bytes": 1307
+        }
+      }
+    },
+    {
+      "sha256": "dde5a5e4a52e5a4e2ba53b64c938d670bce0e8ee05f19db376d92bcabd4f7ec5",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a01-05/revisions/dde5a5e4a52e5a4e2ba53b64c938d670bce0e8ee05f19db376d92bcabd4f7ec5.png"
+      },
+      "bytes": 109138,
+      "id": "dde5a5e4a52e5a4e2ba53b64c938d670bce0e8ee05f19db376d92bcabd4f7ec5",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:22:18.130Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324081321/rectangle_large_type_2_d6c29dfdb64f72b037b7c802d3fe3271.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "dde5a5e4a52e5a4e2ba53b64c938d670bce0e8ee05f19db376d92bcabd4f7ec5"
+      }
+    },
+    {
+      "sha256": "7a08e34179a09e0abbf287907df90334bd6ce14308e3472e28c98e8db1d166bb",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-kakei-a01-05/revisions/7a08e34179a09e0abbf287907df90334bd6ce14308e3472e28c98e8db1d166bb.png"
+      },
+      "bytes": 1814106,
+      "id": "7a08e34179a09e0abbf287907df90334bd6ce14308e3472e28c98e8db1d166bb",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-b781e0d741e5",
+      "createdAt": "2026-11-04T01:22:14.753Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "93e9874d30d3198c605f1fcb116e858944436966a3ca4513f1c44ffbfa6b1aa5"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:23:32.248Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "93e9874d30d3198c605f1fcb116e858944436966a3ca4513f1c44ffbfa6b1aa5",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-kakei-a01-05/inputs/93e9874d30d3198c605f1fcb116e858944436966a3ca4513f1c44ffbfa6b1aa5.json"
+          },
+          "bytes": 8277
+        },
+        "production": {
+          "id": "NCI-00171",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "b781e0d741e506a89502a7627f7c067dacb6670c6ceb1090b3734d29392bb368"
+        }
+      }
+    }
+  ]
+}

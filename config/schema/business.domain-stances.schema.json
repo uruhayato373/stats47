@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "領域と構え",
+  "description": "data/business/domain-stances.json の形状契約。領域の id・表示名は data/business/domains.json、KPI の定義は data/business-plan/plan/metrics.json が持ち、ここへ写さない。",
+  "type": "object",
+  "required": ["schemaVersion", "lanes"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "description": { "type": "string" },
+    "lanes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["domain", "order", "stance", "aim", "gate", "improvementMetrics", "kpis"],
+        "additionalProperties": false,
+        "properties": {
+          "domain": { "type": "string", "pattern": "^[a-z0-9-]+$", "description": "領域の id (data/business/domains.json)" },
+          "order": { "type": "integer", "minimum": 1, "description": "優先順位 (小さいほど先)" },
+          "stance": { "enum": ["攻める", "維持", "凍結"] },
+          "aim": { "type": "string", "minLength": 1, "description": "今の狙い" },
+          "gate": { "type": "string", "minLength": 1, "description": "構えを変える条件" },
+          "improvementMetrics": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 },
+            "uniqueItems": true,
+            "description": "improvements.md の Metric 列の値のうち、この領域に属するもの"
+          },
+          "kpis": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+            "uniqueItems": true,
+            "description": "この領域が動かす KPI の id (data/business-plan/plan/metrics.json)"
+          }
+        }
+      }
+    }
+  }
+}

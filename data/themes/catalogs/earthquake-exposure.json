@@ -34,6 +34,20 @@
         "surveyedAt": "2026-09-09",
         "rationale": "火災・地震保険料支出（県庁所在市・二人以上世帯・年額）を都道府県別の実値として比較する。"
       }
+    },
+    {
+      "rankingKey": "individual-evacuation-plan-coverage-rate",
+      "shortLabel": "個別避難計画の作成率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.bousai.go.jp/taisaku/hisaisyagyousei/pdf/r8chosa1.pdf",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「個別避難計画 作成率・策定率」と検索する読者の、要支援者の避難計画が自分の県でどこまで作られているかという問いに答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
     }
   ],
   "charts": [],
@@ -49,6 +63,16 @@
       ]
     },
     {
+      "key": "housing-earthquake-resistance-2",
+      "title": "個別避難計画の作成率",
+      "rankingKeys": [
+        "individual-evacuation-plan-coverage-rate"
+      ],
+      "defaultCheckedKeys": [
+        "individual-evacuation-plan-coverage-rate"
+      ]
+    },
+    {
       "key": "earthquake-retrofit-past-performance-1",
       "title": "耐震工事をした住宅数（持ち家）",
       "rankingKeys": [
@@ -59,7 +83,7 @@
       ]
     },
     {
-      "key": "fire-earthquake-insurance-spending-1",
+      "key": "earthquake-retrofit-past-performance-2",
       "title": "火災・地震保険料支出（県庁所在市・二人以上世帯・年額）",
       "rankingKeys": [
         "fire-earthquake-insurance-consumption-expenditure"
@@ -72,10 +96,11 @@
   "sections": [
     {
       "key": "housing-earthquake-resistance",
-      "title": "住宅の耐震化や改修工事は進んでいるか",
-      "concern": "大地震に備えて自宅の耐震補強や改修工事が十分に行われているか不安です。",
+      "title": "自分の県は、住宅の耐震改修や避難の備えをどこまで進めているか",
+      "concern": "大地震に備えて、自宅の耐震補強や要支援者の避難計画がどれくらい進んでいるか不安です。",
       "metricGroupKeys": [
-        "housing-earthquake-resistance-1"
+        "housing-earthquake-resistance-1",
+        "housing-earthquake-resistance-2"
       ],
       "embeddedSectionKeys": [
         "earthquake-population"
@@ -83,18 +108,11 @@
     },
     {
       "key": "earthquake-retrofit-past-performance",
-      "title": "持ち家の耐震工事の実績はどれくらいあるか",
-      "concern": "過去にどれくらいの持ち家で耐震工事が行われてきたか実績が気になります。",
+      "title": "耐震工事の実績や保険の支出は、どれくらい積み上がってきたか",
+      "concern": "過去にどれくらいの持ち家で耐震工事が行われ、被災時の損失に備える保険料にどれくらい支出してきたかが気になります。",
       "metricGroupKeys": [
-        "earthquake-retrofit-past-performance-1"
-      ]
-    },
-    {
-      "key": "fire-earthquake-insurance-spending",
-      "title": "地震や火災への金銭的な備えはどれくらいされているか",
-      "concern": "被災時の経済的損失に備える保険料負担や備えの推移が気になります。",
-      "metricGroupKeys": [
-        "fire-earthquake-insurance-spending-1"
+        "earthquake-retrofit-past-performance-1",
+        "earthquake-retrofit-past-performance-2"
       ]
     }
   ],

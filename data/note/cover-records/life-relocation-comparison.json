@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "life-relocation-comparison",
+  "production": {
+    "id": "NCI-00294",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

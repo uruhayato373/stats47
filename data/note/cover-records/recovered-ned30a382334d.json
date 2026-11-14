@@ -1,0 +1,229 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-ned30a382334d",
+  "production": {
+    "id": "NCI-00481",
+    "policyId": "NCP-004",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "人口10万人あたり大学数\n1位は京都府",
+      "subline": "2024年・大学の設置数",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人の大学校舎の模型と無地の本を描く。大学名や人物は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/ned30a382334d 2026-10-23公開API本文照合。記事題名「【2024年版】都道府県「大学数」ランキング｜京都が東京を抑えて1位の理由」。本文中の「京都府」「2024」「人口10万人」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "e5570b7b45f50d68923138b01fe5f87ac405e72d4719830acc48b78406e6e0c3",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-ned30a382334d/revisions/e5570b7b45f50d68923138b01fe5f87ac405e72d4719830acc48b78406e6e0c3.png"
+      },
+      "bytes": 52597,
+      "id": "e5570b7b45f50d68923138b01fe5f87ac405e72d4719830acc48b78406e6e0c3",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:42.422Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312775150/rectangle_large_type_2_329477ba2f4aec445faf5972eb3995ee.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "e5570b7b45f50d68923138b01fe5f87ac405e72d4719830acc48b78406e6e0c3"
+      }
+    },
+    {
+      "sha256": "6abb2d6931a8b710f005fedf082e0300e147673b27973322c40d6e6010baa29b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-ned30a382334d/revisions/6abb2d6931a8b710f005fedf082e0300e147673b27973322c40d6e6010baa29b.png"
+      },
+      "bytes": 94716,
+      "id": "6abb2d6931a8b710f005fedf082e0300e147673b27973322c40d6e6010baa29b",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:44:19.526Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "d4a8e09ef2ea7e508bd3a525b39dc8dd53b3d9de21468ab21d07c66f02c10e4b"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で主題・年・記事題名の順位/値/格差が読める。地図は値を持たない背景",
+        "reviewedAt": "2026-10-11T11:50:43.138Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "d4a8e09ef2ea7e508bd3a525b39dc8dd53b3d9de21468ab21d07c66f02c10e4b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-ned30a382334d/inputs/d4a8e09ef2ea7e508bd3a525b39dc8dd53b3d9de21468ab21d07c66f02c10e4b.json"
+          },
+          "bytes": 1299
+        }
+      }
+    },
+    {
+      "sha256": "5e29f778c0f273891876ea7191a5809ac4500aa53d4d4983b55e382d4e890295",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-ned30a382334d/revisions/5e29f778c0f273891876ea7191a5809ac4500aa53d4d4983b55e382d4e890295.png"
+      },
+      "bytes": 65544,
+      "id": "5e29f778c0f273891876ea7191a5809ac4500aa53d4d4983b55e382d4e890295",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:55:47.091Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320258628/rectangle_large_type_2_e7b16811bb2559690b26548fb59adc26.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "5e29f778c0f273891876ea7191a5809ac4500aa53d4d4983b55e382d4e890295"
+      }
+    },
+    {
+      "sha256": "a781eb4553105c9ca6229a89abf812555a1c6436b9b74f2e277f5ba1482c47e8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-ned30a382334d/revisions/a781eb4553105c9ca6229a89abf812555a1c6436b9b74f2e277f5ba1482c47e8.png"
+      },
+      "bytes": 41609,
+      "id": "a781eb4553105c9ca6229a89abf812555a1c6436b9b74f2e277f5ba1482c47e8",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:10:00.557Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ccdad287c788fc640ad19075172cc88987b9947d9aa5c48629ef7ddca00ec018"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.009/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:17:16.250Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "ccdad287c788fc640ad19075172cc88987b9947d9aa5c48629ef7ddca00ec018",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-ned30a382334d/inputs/ccdad287c788fc640ad19075172cc88987b9947d9aa5c48629ef7ddca00ec018.json"
+          },
+          "bytes": 1299
+        }
+      }
+    },
+    {
+      "sha256": "97cad6183bafa3e1b9448c62a9a165dd9addd55aac0b7b9a885a68f3c59ab81b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-ned30a382334d/revisions/97cad6183bafa3e1b9448c62a9a165dd9addd55aac0b7b9a885a68f3c59ab81b.png"
+      },
+      "bytes": 88918,
+      "id": "97cad6183bafa3e1b9448c62a9a165dd9addd55aac0b7b9a885a68f3c59ab81b",
+      "kind": "candidate",
+      "version": "2026-10-11-truecolor-v3b",
+      "createdAt": "2026-10-11T12:34:25.008Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "f383e74bfe0358171cd44c29798520f6e4072e73db72fa594f4d3ee2c7076021"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "フルカラー再発行版。目視合格した確認版との平均画素差0.009/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:37:47.710Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "f383e74bfe0358171cd44c29798520f6e4072e73db72fa594f4d3ee2c7076021",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-ned30a382334d/inputs/f383e74bfe0358171cd44c29798520f6e4072e73db72fa594f4d3ee2c7076021.json"
+          },
+          "bytes": 1299
+        }
+      }
+    },
+    {
+      "sha256": "528ee6c938e598e77a99aafbb4a75d8361b04ec316b7fe2861be03236d20449d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-ned30a382334d/revisions/528ee6c938e598e77a99aafbb4a75d8361b04ec316b7fe2861be03236d20449d.png"
+      },
+      "bytes": 1917385,
+      "id": "528ee6c938e598e77a99aafbb4a75d8361b04ec316b7fe2861be03236d20449d",
+      "kind": "candidate",
+      "version": "pop-NCP-004-v3-79cfbb8ddbc9",
+      "createdAt": "2026-10-23T13:37:27.201Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "8d9f80cf36fbebe24cba18d4fef3e2c7b79d919d7eae6db00cf3c1fe2dcb037b"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T13:39:48.323Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "8d9f80cf36fbebe24cba18d4fef3e2c7b79d919d7eae6db00cf3c1fe2dcb037b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-ned30a382334d/inputs/8d9f80cf36fbebe24cba18d4fef3e2c7b79d919d7eae6db00cf3c1fe2dcb037b.json"
+          },
+          "bytes": 8816
+        },
+        "production": {
+          "id": "NCI-00481",
+          "policyId": "NCP-004",
+          "policyVersion": 3,
+          "planSha256": "79cfbb8ddbc917d551f467ed72376e2068da836e4a1f13ed0665be505288c9aa"
+        }
+      }
+    }
+  ]
+}

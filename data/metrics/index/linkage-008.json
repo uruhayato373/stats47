@@ -99,15 +99,209 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:business-demography",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:small-business-dominance-map",
           "kind": "blog"
         },
         {
           "pageId": "ranking:establishment-ratio-1-4-employees-private",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:business-demography",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "business-demography"
+      ]
     },
     {
       "metricKey": "establishment-ratio-10-29-employees-private",
@@ -1271,10 +1465,7 @@
         "configHash": "43f988c4cb742c97"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:farm-household-expenditure-per-month",
@@ -1306,10 +1497,7 @@
         "configHash": "59579dce2989fa51"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:female-lecture-prefecture-gap",
@@ -3484,10 +3672,7 @@
         "configHash": "110479dc26111c67"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-assets-debt",
@@ -3717,10 +3902,7 @@
         "configHash": "9107cba9f84a68c2"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:household-assets-debt",
@@ -4421,10 +4603,7 @@
         "configHash": "8d8a8d34cf6783e7"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:fire-damage-casualties-per-accident",
@@ -4686,10 +4865,7 @@
         "configHash": "0100bc627dc39c69"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:fire-damage-household-count-per-100-building-fires",
@@ -4954,10 +5130,7 @@
         "configHash": "f481d7b0fd54dd43"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:fire-department-branch-count-per-100-km2",
@@ -4989,10 +5162,7 @@
         "configHash": "fdbcb9823a0088b5"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:firefighting-capacity-gap",
@@ -5028,10 +5198,7 @@
         "configHash": "b37530b85753e62b"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:fire-department-dispatch-count-per-100-thousand-people",
@@ -5063,10 +5230,7 @@
         "configHash": "ae26e71485b891af"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:safety",
@@ -5327,10 +5491,7 @@
         "configHash": "795b78a4dd85824f"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:safety",
@@ -5560,10 +5721,7 @@
         "configHash": "2bab9f992f4c134e"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:safety",
@@ -5793,10 +5951,7 @@
         "configHash": "e0197a2fe5d866ac"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "area-theme:01000:safety",
@@ -6481,10 +6636,7 @@
         "configHash": "e314bbb33a7f42f8"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:fire-related-personnel-count-per-100k",
@@ -7268,6 +7420,10 @@
       "consumers": [
         {
           "pageId": "blog:miyagi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:nagasaki-food-culture",
           "kind": "blog"
         },
         {

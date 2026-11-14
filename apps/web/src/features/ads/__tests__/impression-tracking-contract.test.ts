@@ -1,3 +1,4 @@
+// @vitest-environment node
 /**
  * アフィリエイト広告コンポーネントの **impression 計装カバレッジ契約**。
  *

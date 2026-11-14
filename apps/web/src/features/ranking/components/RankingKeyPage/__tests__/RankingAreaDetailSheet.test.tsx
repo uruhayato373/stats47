@@ -34,6 +34,22 @@ const ITEM = {
 } as RankingItem;
 
 describe('RankingAreaDetailSheet', () => {
+  it('表示単位を渡すと、表と詳細パネルが同じ換算後の値と単位を出す', () => {
+    const values = [value('13000', '東京都', 14_236_627), value('14000', '神奈川県', 9_193_922), value('31000', '鳥取県', 531_000)];
+    const valueDisplay = { unit: '万人', factor: 0.0001, precision: 0 };
+    const { unmount } = render(<RankingDataTable rankingValues={values} rankingItem={ITEM} valueDisplay={valueDisplay} />);
+    // 14,236,627 人は 1,424 万人。順位は元の値のまま
+    expect(screen.getByText('1,424')).toBeInTheDocument();
+    expect(screen.getByText('53')).toBeInTheDocument();
+    expect(screen.getAllByText('万人').length).toBe(3);
+    expect(screen.queryByText('14,236,627')).toBeNull();
+    unmount();
+
+    render(<RankingAreaDetailSheet rankingItem={ITEM} rows={buildRankingRows(values)} areaCode="14000" onAreaChange={() => {}} valueDisplay={valueDisplay} />);
+    expect(screen.getByText('919')).toBeInTheDocument();
+    expect(screen.getByText('万人')).toBeInTheDocument();
+  });
+
   it('開いた県の順位・値と、県のページへの計測付きリンクを出す', () => {
     render(
       <RankingAreaDetailSheet rankingItem={ITEM} rows={buildRankingRows(VALUES)} areaCode="14000" onAreaChange={() => {}} />

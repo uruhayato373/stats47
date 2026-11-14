@@ -3,7 +3,7 @@
  * SNS Weekly Report Generator (data portion)
  *
  * data/sns/metric-snapshots/ から週次データを読み、
- * .claude/skills/sns/sns-weekly-report/reference/reports/YYYY-Www.md に
+ * data/sns/weekly-reports/YYYY-Www.md (台帳 sns.weekly-reports) に
  * プラットフォーム別サマリ + 上位投稿表を生成。
  *
  * AI 分析・next action のコメントは `/sns-weekly-report` skill 経由で追記する設計
@@ -20,6 +20,7 @@ import { writeFileSync, existsSync, mkdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -160,7 +161,7 @@ function main() {
 
   const body = reportData + "\n" + reportTop + "\n" + aiPlaceholder;
 
-  const outDir = path.join(PROJECT_ROOT, ".claude/skills/sns/sns-weekly-report/reference/reports");
+  const outDir = path.join(PROJECT_ROOT, datasetDir("sns.weekly-reports"));
   if (!existsSync(outDir)) mkdirSync(outDir, { recursive: true });
   const outPath = path.join(outDir, `${weekId}.md`);
 

@@ -197,7 +197,9 @@ source.json に表示用の出典を明示する:
   (指標の抽出は `extractBlogChartSourceReferences`、年は `year`) と本文の `/ranking/` リンクから
   `rankingRefs: [{ rankingKey, year? }]` を作り、`app/blog/all.json` に逆引き `rankingArticleIndex`
   (rankingKey → slug) を焼く (`article-ranking-refs.ts`)。用途は 2 つ: 指標 → 記事の回遊と、図の年が指標の最新年より
-  古い記事の検出 (`build-stale-data-years.mjs`、週次レビューの `npm run weekly:audits` の blog-remediation)。同じ指標を複数の年で描いた記事は
+  古い記事の検出 (`build-stale-data-years.mjs`、週次レビューの `npm run weekly:audits` の blog-remediation)。同じスクリプトが
+  統計の公表暦 (カタログの `surveys.release-calendar`、判定は `lib/release-calendar.mjs`) とも突き合わせ、公表済みの年より古い年のままの
+  記事を `stale-data-years.{json,md}` の `releaseDue` に出す (指標の取り込みが先なら `ingest-metric`、記事の更新だけなら `refresh-article`)。同じ指標を複数の年で描いた記事は
   最も古い年を残す。古い記事は是正キューの `data-refresh` レーンに入り、`refresh-article-data-years.mjs` が
   `kind: "ranking"` の図 (data JSON が fetch-ranking-data-r2.mjs の形のもの) を最新年で作り直す
   (source.json に `refreshedFromYear` を残す。判定は `lib/refresh-chart-year.mjs`)。2 指標の散布図
@@ -454,7 +456,6 @@ YYYY-MM-DD-<method>[-<batch>]
 | `project_blog_brushup_risk_2026_05_25.md` | brushup の FAIL/WARN リスクと factual-check 実装状態 | factual-check 検出力測定後 |
 | `feedback_bulk_blog_publish_isr_404.md`   | bulk publish の ISR 404 リスク                       | 該当現象観測時             |
 | `feedback_evidence_based_judgment`        | 実証ベース判定ルールの参照                           | 判定方針変更時             |
-| `feedback_skill_schema_drift`             | SKILL.md と実 schema 乖離リスク                      | schema migration 時        |
 
 ### State (機械向け真実源)
 
@@ -472,7 +473,7 @@ YYYY-MM-DD-<method>[-<batch>]
 
 1. **改善ログの section ID と auto-brushup-history.json の wave_id が一致しているか** (`jq '[.entries[].wave_id] | unique' data/blog/auto-brushup-history.json` で一覧)
 2. **auto memory が実装と一致しているか** (個別 memory の `description` を読み、現状確認)
-3. **SKILL.md が実装と乖離していないか** (`feedback_skill_schema_drift` の警告に該当しないか)
+3. **SKILL.md が実装と乖離していないか** (SKILL.md が参照するテーブル・ファイル・スクリプトが今も実在するか)
 4. **改善ログの section が「単一施策 = 1 section」になっているか** (重複対応の場合は `predecessor_wave` / `successor_wave` で明示)
 
 混乱の兆候:

@@ -110,7 +110,10 @@ export function ValueTable({ columns, rows, ariaLabel, caption, scrollRegion = f
               const attrs = isCellObject(cell) ? cell.attrs : undefined;
               const className = cn(column.align === 'left' && 'text-left!', column.className);
               return column.rowHeader ? (
-                <TableHead key={column.key} scope="row" className={cn('whitespace-normal!', className)} {...attrs}>
+                // 行の見出しは折り返せるが、幅は 6 文字ぶんを下限にする。数値の列 (折り返さない) が多い表をスマホ幅に置くと、
+                // 下限が無い見出しの列だけが 40px ほどに潰れて 2〜3 文字ごとに折り返す (2026-11-14 の計測)。
+                // 収まらない分は表の外枠の横スクロールが受ける。列の className で上書きできる
+                <TableHead key={column.key} scope="row" className={cn('min-w-24 whitespace-normal!', className)} {...attrs}>
                   {content}
                 </TableHead>
               ) : (

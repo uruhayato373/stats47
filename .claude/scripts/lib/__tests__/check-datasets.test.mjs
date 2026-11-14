@@ -4,9 +4,10 @@
  * (未宣言・重なり・空の行・語彙外・寿命の不一致を見逃すと、台帳が置き場の正本として機能しない)。
  */
 import assert from "node:assert/strict";
-import { execFileSync } from "node:child_process";
-import { existsSync, readFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { execFileSync, spawnSync } from "node:child_process";
+import { copyFileSync, existsSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join, resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
@@ -52,6 +53,79 @@ test("実リポジトリの追跡ファイルは台帳と矛盾しない", () =>
   assert.deepEqual(result.errors, []);
 });
 
+test("[mutation] skill の reference/{reviews,audits}/ に監査・レビューの全文を置くと未宣言で落ちる (置き場は data/<領域>/)", () => {
+  // 2026-11-14 DOCS-GOVERNANCE-GAPS-01。テーマ 36 件・調査 4 件・SEO 監査 1 件の全文が検査の外に溜まっていた。
+  // 旧置き場と、まだ無い skill の同じ名前の置き場の両方が、台帳に行が無いので落ちることを固定する
+  // 旧置き場は RETIRED の宣言から組み立てる (このファイルに直書きすると、旧置き場の参照の検査に自分が掛かる)
+  const moved = RETIRED.filter((r) => r.since === "2026-11-14" && /\/reference\/(reviews|audits)$/.test(r.from)).map((r) => r.from);
+  assert.equal(moved.length, 5, "テーマ・調査の reviews / audits と SEO 監査の audits の 5 か所");
+  const planted = [...moved.map((dir) => `${dir}/2026-11-14-planted.md`), ".claude/skills/dev/some-new-skill/reference/reviews/first-review.md"];
+  const files = execFileSync("git", ["-C", ROOT, "ls-files", "-z"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 })
+    .split("\0")
+    .filter(Boolean);
+  const result = checkDatasets({
+    datasets: DATASETS,
+    files: [...files.filter((f) => !planted.includes(f)), ...planted],
+    governed: GOVERNED,
+    ignoredNames: IGNORED_NAMES,
+    kinds: KINDS,
+    targets: TARGETS,
+    domainIds,
+    retention: RETENTION_POLICIES,
+  });
+  for (const file of planted) assert.ok(result.errors.includes(`未宣言: ${file}`), `未宣言で落ちない: ${file}`);
+  // skill の reference/ のほかのファイル (手順・契約) は範囲に入れない
+  assert.ok(!GOVERNED.some((re) => re.test(".claude/skills/theme/manage-theme-portfolio/reference/theme-proposal-format.md")));
+});
+
+test("[mutation] skill の reference/reports/ に定期レポートを置くと未宣言で落ちる (置き場は data/<取得元>/)", () => {
+  // 2026-11-14 DOCS-GOVERNANCE-GAPS-01。SNS の週次レポート・競合の定点観測・X とブログの勝ち要因のレポートを
+  // skill の reference/reports/ に書いていて、docs-vs-issues.md (定期レポートは data/<取得元>/) と食い違っていた。
+  // 旧置き場は RETIRED の宣言から組み立てる (このファイルに直書きすると、旧置き場の参照の検査に自分が掛かる)
+  const moved = RETIRED.filter((r) => r.since === "2026-11-14" && /\/reference\/reports$/.test(r.from));
+  assert.equal(moved.length, 4, "SNS の週次・競合の定点観測・X の勝ち要因・ブログの勝ち要因の 4 か所");
+  const planted = [...moved.map((r) => `${r.from}/2026-11-14.md`), ".claude/skills/dev/some-new-skill/reference/reports/2026-W46.md"];
+  const files = execFileSync("git", ["-C", ROOT, "ls-files", "-z"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 })
+    .split("\0")
+    .filter(Boolean);
+  const result = checkDatasets({
+    datasets: DATASETS,
+    files: [...files.filter((f) => !planted.includes(f)), ...planted],
+    governed: GOVERNED,
+    ignoredNames: IGNORED_NAMES,
+    kinds: KINDS,
+    targets: TARGETS,
+    domainIds,
+    retention: RETENTION_POLICIES,
+  });
+  for (const file of planted) assert.ok(result.errors.includes(`未宣言: ${file}`), `未宣言で落ちない: ${file}`);
+  // 移した先はカタログの行で、書き手と読み手が id で引ける
+  const destinations = {
+    "sns.weekly-reports": "data/sns/weekly-reports",
+    "sns.competitor-scans": "data/sns/competitor-scans",
+    "sns.x-winning-pattern-reports": "data/sns/x-winning-pattern-reports",
+    "blog.winning-pattern-reports": "data/blog/winning-pattern-reports",
+  };
+  assert.deepEqual(moved.map((r) => r.to).sort(), Object.values(destinations).sort());
+  for (const [id, dir] of Object.entries(destinations)) assert.equal(datasetDir(id), dir);
+});
+
+test("X の勝ち要因レポートは書き手 2 つが別の名前で書き、同じ日に両方を回しても上書きしない", () => {
+  // analyze-x-winning-patterns.mjs の月次レポートと /x-viral-research の Phase 4 は種類の違うレポートを同じ置き場に書く。
+  // 名前が日付だけだと、同じ日に両方を実行すると後の方が前の方を上書きする。
+  const row = DATASETS.find((x) => x.id === "sns.x-winning-pattern-reports");
+  const re = patternToRegExp(row.path);
+  const dir = datasetDir("sns.x-winning-pattern-reports");
+  const script = readFileSync(resolve(ROOT, ".claude/scripts/sns/analyze-x-winning-patterns.mjs"), "utf8");
+  const skill = readFileSync(resolve(ROOT, ".claude/skills/sns/x-viral-research/SKILL.md"), "utf8");
+  const scriptName = /`\$\{today\}(-[a-z-]+)\.md`/.exec(script)?.[1];
+  const skillName = /x-winning-pattern-reports\/YYYY-MM-DD(-[a-z-]+)\.md/.exec(skill)?.[1];
+  assert.ok(scriptName, "analyze-x-winning-patterns.mjs は日付の後ろに種類の名前を付けて書く");
+  assert.ok(skillName, "x-viral-research の Phase 4 は日付の後ろに種類の名前を付けて書く");
+  assert.notEqual(scriptName, skillName);
+  for (const name of [scriptName, skillName]) assert.ok(re.test(`${dir}/2026-11-14${name}.md`), `台帳の行に当たらない: ${name}`);
+});
+
 test("可変部分は決めた形だけに当たる", () => {
   assert.ok(patternToRegExp("a/{date}.json").test("a/2026-10-06.json"));
   assert.ok(!patternToRegExp("a/{date}.json").test("a/2026-W41.json"));
@@ -79,6 +153,20 @@ test("2 行に当たるファイルは重なりで落ちる", () => {
 test("どのファイルにも当たらない行は落ちる (planned は通す)", () => {
   const r = run([ds("a", "data/x.json"), ds("b", "data/y.json", { planned: true })], []);
   assert.deepEqual(r.errors, ["どのファイルにも当たらない: a (data/x.json)"]);
+});
+
+test("planned の行が追跡ファイルに当たっていれば落ちる (件数があるのに「まだ 1 件も無い」と宣言した食い違い)", () => {
+  const r = run([ds("a", "data/x/{**}", { planned: true })], ["data/x/1.json"]);
+  assert.deepEqual(r.errors, ["planned なのに追跡ファイルが 1 件ある (planned を外す): a (data/x/{**})"]);
+  assert.deepEqual(run([ds("a", "data/x/{**}", { planned: true })], ["data/x/.gitkeep"]).errors, []);
+});
+
+test("transient の行 (CI が消費して消す依頼・公開待ち) は 0 件でも 1 件以上でも通す", () => {
+  // 依頼や公開待ちは普段 0 件で、cloud セッションが push した直後だけ 1 件以上ある。planned だと push の commit が止まり、
+  // 何も付けないと消費した後に止まる (2026-11-14 DIR-PLACEMENT-CLEANUP-01)
+  assert.deepEqual(run([ds("a", "data/x-requests.json", { transient: true })], []).errors, []);
+  assert.deepEqual(run([ds("a", "data/x/{**}", { transient: true })], ["data/x/1.json", "data/x/2.json"]).errors, []);
+  assert.match(run([ds("a", "data/x/{**}", { transient: true, planned: true })], []).errors.join(), /transient と planned は同時に付けない/);
 });
 
 test("語彙外の kind / target / 領域と id の重複は落ちる", () => {
@@ -485,14 +573,17 @@ test("where の値の配列はどれかに一致する行、unless は合う行�
 });
 
 test("[mutation] 投稿台帳: 指標を指す投稿の参照切れは error、warn は投稿済みの ranking の content_key だけ", () => {
-  const files = ["data/sns/posts.json"];
+  const catalogPath = datasetPath("sns.x-catalog");
+  const files = ["data/sns/posts.json", catalogPath];
   const doc = JSON.parse(readFileSync(resolve(ROOT, "data/sns/posts.json"), "utf8"));
-  const rows = DATASETS.filter((d) => d.id === "sns.posts");
+  const catalog = JSON.parse(readFileSync(resolve(ROOT, catalogPath), "utf8"));
+  const rows = DATASETS.filter((d) => d.id === "sns.posts" || d.id === "sns.x-catalog").map((d) => (d.id === "sns.x-catalog" ? { ...d, refs: [] } : d));
   const run = () =>
-    checkRefs({ datasets: rows, files, readJson: () => doc, readText: (p) => readFileSync(resolve(ROOT, p), "utf8"), registries: REGISTRIES });
+    checkRefs({ datasets: rows, files, readJson: (p) => (p === catalogPath ? catalog : doc), readText: (p) => readFileSync(resolve(ROOT, p), "utf8"), registries: REGISTRIES });
   const clean = run();
   assert.deepEqual(clean.errors, []);
   for (const w of clean.warnings) assert.match(w, /posts\[\]\.content_key=.* が registry:ranking-content-keys に無い$/);
+  assert.deepEqual(clean.warnings, [], "YouTube・note の key は別の体系なので、ranking-content-keys と照合しない");
   const byId = new Map(doc.posts.map((p) => [p.id, p]));
   for (const w of clean.warnings) {
     const post = byId.get(Number(w.match(/\(id=(\d+)\)/)[1]));
@@ -518,6 +609,34 @@ test("[mutation] 投稿台帳: 指標を指す投稿の参照切れは error、w
   assert.equal(run().warnings.length, clean.warnings.length, "旧 slug は 301 先の指標へ届くので warn を増やさない");
   posted.content_key = before;
   assert.deepEqual(run().errors, [], "戻すと通る");
+});
+
+test("[mutation] 投稿台帳: X・Threads の投稿の template は sns.x-catalog の templates[].id に無いと error (他媒体の template は対象外。下書きも対象)", () => {
+  const catalogPath = datasetPath("sns.x-catalog");
+  const files = ["data/sns/posts.json", catalogPath];
+  const doc = JSON.parse(readFileSync(resolve(ROOT, "data/sns/posts.json"), "utf8"));
+  const catalog = JSON.parse(readFileSync(resolve(ROOT, catalogPath), "utf8"));
+  const rows = DATASETS.filter((d) => d.id === "sns.posts" || d.id === "sns.x-catalog").map((d) => (d.id === "sns.x-catalog" ? { ...d, refs: [] } : d));
+  const run = () =>
+    checkRefs({
+      datasets: rows, files, readJson: (p) => (p === catalogPath ? catalog : doc),
+      readText: (p) => readFileSync(resolve(ROOT, p), "utf8"), registries: REGISTRIES,
+    });
+  const templateErrors = () => run().errors.filter((e) => e.includes("posts[].template="));
+  assert.deepEqual(templateErrors(), [], "現状の台帳は X・Threads の template がすべてカタログにある");
+  const x = doc.posts.find((p) => p.platform === "x" && p.template && p.status !== "draft");
+  const draft = doc.posts.find((p) => p.platform === "x" && p.status === "draft" && p.template);
+  const ig = doc.posts.find((p) => p.platform === "instagram" && p.template && !catalog.templates.some((t) => t.id === p.template));
+  assert.ok(x && ig, "fixture: X の投稿と、カタログに無い template を持つ Instagram の投稿が実台帳にある");
+  const saved = x.template;
+  x.template = "no-such-template";
+  assert.ok(templateErrors().some((e) => e.includes(`(id=${x.id}) の posts[].template=no-such-template が sns.x-catalog の templates[].id に無い`)), templateErrors().join("\n"));
+  x.template = saved;
+  const draftSaved = draft.template;
+  draft.template = "no-such-template";
+  assert.ok(templateErrors().some((e) => e.includes(`(id=${draft.id}) の posts[].template=no-such-template が sns.x-catalog の templates[].id に無い`)), "下書きも止める (素材の取り込みは型が無ければ template を空にし、domain 名を入れない)");
+  draft.template = draftSaved;
+  assert.deepEqual(templateErrors(), [], "戻すと通る (Instagram の ranking・area-carousel などはカタログに無くても error にしない)");
 });
 
 test("[mutation] KDP の status・kdpStatus・publicationStage の組み合わせを schema が固定する (2026-10-27)", () => {
@@ -661,4 +780,122 @@ test("git grep の出力は CRLF の行も読む (Windows の作業ツリーで�
 test("実リポジトリの問いの台帳は、文章 (dataNote) に e-Stat の表 ID を書いていない", () => {
   const issues = JSON.parse(readFileSync(resolve(ROOT, datasetPath("content.issues")), "utf8")).issues;
   assert.deepEqual(issues.filter((i) => /[0-9]{10}/.test(i.dataNote ?? "")).map((i) => i.id), []);
+});
+
+// ── 調査ポートフォリオ: 列挙と ID の実在の持ち主は Schema と refs だけ (2026-11-14 SURVEY-PORTFOLIO-VALIDATOR-DEDUPE-01) ──
+const SURVEY_STATE_IDS = ["surveys.portfolio", "surveys.experiments"];
+const SURVEY_VALIDATOR = ".claude/scripts/surveys/validate-survey-portfolio.ts";
+const SURVEY_EVALUATOR = ".claude/scripts/surveys/evaluate-survey-experiments.mjs";
+const SURVEY_BUILDER = ".claude/scripts/surveys/build-survey-portfolio.ts";
+
+test("[mutation] 調査ポートフォリオと実験台帳の語彙外の値は Schema が、調査 ID の参照切れは refs が落とす", () => {
+  const portfolioPath = datasetPath("surveys.portfolio");
+  const experimentsPath = datasetPath("surveys.experiments");
+  const masterPath = datasetPath("surveys.master");
+  const files = [portfolioPath, experimentsPath, masterPath];
+  const store = Object.fromEntries(files.map((f) => [f, JSON.parse(readFileSync(resolve(ROOT, f), "utf8"))]));
+  const rows = DATASETS.filter((d) => [...SURVEY_STATE_IDS, "surveys.master"].includes(d.id));
+  const readJson = (p) => store[p] ?? JSON.parse(readFileSync(resolve(ROOT, p), "utf8"));
+  const schemaErrors = () => checkSchemas({ datasets: rows, files, readJson, exists: (p) => existsSync(resolve(ROOT, p)) });
+  const refErrors = () => checkRefs({ datasets: rows, files, readJson, readText: (p) => readFileSync(resolve(ROOT, p), "utf8"), registries: REGISTRIES }).errors;
+  assert.deepEqual(schemaErrors(), []);
+  assert.deepEqual(refErrors(), []);
+
+  const survey = store[portfolioPath].surveys[0];
+  const experiment = store[experimentsPath].experiments[0];
+  assert.ok(experiment, "実験台帳に 1 件以上ある (無ければこの検査は実験側を見ていない)");
+  const mutations = [
+    [survey, "lifecycleStatus", /surveys\.portfolio: .* が schema に合わない/],
+    [survey, "editorialStatus", /surveys\.portfolio: .* が schema に合わない/],
+    [survey, "linkageStatus", /surveys\.portfolio: .* が schema に合わない/],
+    [survey.metrics.gsc, "status", /surveys\.portfolio: .* が schema に合わない/],
+    [experiment, "verdict", /surveys\.experiments: .* が schema に合わない/],
+    [experiment, "changeType", /surveys\.experiments: .* が schema に合わない/],
+  ];
+  for (const [target, field, expected] of mutations) {
+    const original = target[field];
+    target[field] = "no-such-value";
+    assert.match(schemaErrors().join("\n"), expected, `${field} の語彙外の値を Schema が落とす`);
+    target[field] = original;
+  }
+  for (const [target, id] of [[survey, "surveys.portfolio"], [experiment, "surveys.experiments"]]) {
+    const original = target.surveyId;
+    target.surveyId = "no-such-survey";
+    assert.match(refErrors().join("\n"), new RegExp(`参照切れ: ${id.replace(".", "\\.")} .*surveyId=no-such-survey が surveys\\.master の`), `${id} の調査 ID の参照切れを refs が落とす`);
+    target.surveyId = original;
+  }
+  assert.deepEqual(schemaErrors(), [], "戻すと通る (赤は書き換えた値が理由)");
+  assert.deepEqual(refErrors(), []);
+});
+
+test("調査ポートフォリオの検証スクリプトと実験の判定スクリプトは、Schema の列挙と refs の ID の実在を二重に持たない", () => {
+  // コメントを除いたコードだけを見る (判定の規律の説明に値の名前が出るのは構わない)
+  const codeOf = (file) => readFileSync(resolve(ROOT, file), "utf8")
+    .replace(/\/\*[\s\S]*?\*\//g, "")
+    .replace(/(^|\s)\/\/.*$/gm, "$1");
+  const code = codeOf(SURVEY_VALIDATOR);
+  const enums = [];
+  const walk = (node, trail) => {
+    if (Array.isArray(node)) return node.forEach((child, i) => walk(child, `${trail}[${i}]`));
+    if (!node || typeof node !== "object") return;
+    if (Array.isArray(node.enum)) enums.push({ trail, values: node.enum });
+    for (const [key, child] of Object.entries(node)) if (key !== "enum") walk(child, `${trail}.${key}`);
+  };
+  for (const id of SURVEY_STATE_IDS) walk(JSON.parse(readFileSync(resolve(ROOT, DATASETS.find((d) => d.id === id).schema), "utf8")), id);
+  assert.ok(enums.length >= 6, `Schema から列挙を ${enums.length} 個しか読めていない (lifecycle・linkage・editorial・計測の状態・verdict・changeType)`);
+  // 実験の判定スクリプトは verdict の値の集合を自前で持っていた (Schema に値を足しても --verdict が受け付けない。CI-TOOLING-FOLLOWUP-02)
+  for (const file of [SURVEY_VALIDATOR, SURVEY_EVALUATOR]) {
+    const source = codeOf(file);
+    const duplicated = enums.filter(({ values }) => values.every((value) => source.includes(`"${value}"`) || source.includes(`'${value}'`)));
+    assert.deepEqual(duplicated.map((e) => e.trail), [], `Schema の列挙の全部の値を ${file} が文字列で持っている (列挙は Schema だけが持つ。部分集合を使う意味の検査は構わない)`);
+  }
+  assert.doesNotMatch(code, /masterIds\.has\(/, "調査 ID の実在は refs (surveys[].surveyId・experiments[].surveyId → surveys.master) だけが持つ");
+});
+
+/** 実物の portfolio と実験台帳を一時ディレクトリへ写し、書き込み口のスクリプトをそこへ向けて動かす */
+function surveyStateCopy(t) {
+  const dir = mkdtempSync(join(tmpdir(), "stats47-survey-state-"));
+  t.after(() => rmSync(dir, { recursive: true, force: true }));
+  for (const [id, name] of [["surveys.portfolio", "portfolio.json"], ["surveys.experiments", "experiments.json"]]) copyFileSync(resolve(ROOT, datasetPath(id)), join(dir, name));
+  const run = (command, args) => spawnSync(command, args, { cwd: ROOT, encoding: "utf8", env: { ...process.env, STATE_DIR: dir } });
+  return { dir, run, read: (name) => readFileSync(join(dir, name), "utf8") };
+}
+
+test("build-survey-portfolio.ts の --set は、Schema の語彙に無い値を portfolio.json へ書かない", (t) => {
+  const state = surveyStateCopy(t);
+  const before = state.read("portfolio.json");
+  const surveyId = JSON.parse(before).surveys[0].surveyId;
+  const set = (...args) => state.run(process.execPath, ["--import", "tsx", SURVEY_BUILDER, "--set", surveyId, ...args]);
+  for (const [option, field] of [["--lifecycle", "lifecycleStatus"], ["--editorial", "editorialStatus"]]) {
+    const result = set(option, "no-such-value");
+    assert.equal(result.status, 1, `${option} no-such-value が通った: ${result.stdout}${result.stderr}`);
+    assert.match(result.stderr, new RegExp(`${option} no-such-value は ${field} の語彙に無い`));
+    assert.equal(state.read("portfolio.json"), before, `${option} の語彙外の値で portfolio.json が書き換わった`);
+  }
+  // --next-review は Schema の date (YYYY-MM-DD) で、暦に無い日付も書かない (CI-TOOLING-FOLLOWUP-03)
+  for (const value of ["next-month", "2026/12/01", "2026-13-01", "2026-02-30"]) {
+    const result = set("--next-review", value);
+    assert.equal(result.status, 1, `--next-review ${value} が通った: ${result.stdout}${result.stderr}`);
+    assert.match(result.stderr, /--next-review .* は YYYY-MM-DD の日付ではない/);
+    assert.equal(state.read("portfolio.json"), before, `--next-review ${value} で portfolio.json が書き換わった`);
+  }
+  const ok = set("--lifecycle", "improve", "--next-review", "2026-12-01");
+  assert.equal(ok.status, 0, ok.stderr);
+  const written = JSON.parse(state.read("portfolio.json")).surveys[0];
+  assert.equal(written.lifecycleStatus, "improve", "語彙にある値は書く");
+  assert.equal(written.nextReviewAt, "2026-12-01", "暦にある日付は書く");
+});
+
+test("evaluate-survey-experiments.mjs の --verdict は、Schema の verdict の語彙 (pending を除く) だけを受け付ける", (t) => {
+  const state = surveyStateCopy(t);
+  const before = state.read("experiments.json");
+  const experimentId = JSON.parse(before).experiments[0].experimentId;
+  const schema = JSON.parse(readFileSync(resolve(ROOT, DATASETS.find((d) => d.id === "surveys.experiments").schema), "utf8"));
+  const settable = schema.properties.experiments.items.properties.verdict.enum.filter((value) => value !== "pending");
+  for (const verdict of ["no-such-value", "pending"]) {
+    const result = state.run(process.execPath, [SURVEY_EVALUATOR, "--verdict", experimentId, verdict]);
+    assert.equal(result.status, 1, `--verdict ${verdict} が通った`);
+    assert.ok(result.stderr.includes(`(${settable.join("|")})`), `受け付ける値の一覧が Schema と違う: ${result.stderr}`);
+    assert.equal(state.read("experiments.json"), before);
+  }
 });

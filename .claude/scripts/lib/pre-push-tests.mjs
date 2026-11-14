@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * push の前に、変更に関係するテストだけを走らせる (.husky/pre-push)。
+ * push の前に、変更に関係するテストと、文書の変更なら docs:check を走らせる (.husky/pre-push)。
  *
  * PR の CI で落ちると、直して走り直すまで 10 分以上待つ。手元の 1 分で見つかるものはここで止める。
  * 全件は CI が持つので、ここは関係するものだけを選ぶ。対象が多すぎるときは CI に任せて通す。
@@ -17,6 +17,15 @@ const MAX_NODE_TESTS = 40;
 const MAX_VITEST_FILES = 30;
 const MIN_STEM = 4;
 const WORKSPACES = ["apps/admin", "apps/web"];
+
+// 文書ガバナンス (npm run docs:check) の対象。apps/web/scripts/pre-commit-checks.sh の STAGED_DOCS と同じ範囲に保つ。
+const DOCS_CHECK_PATHS =
+  /^(docs\/|\.claude\/todo\/|data\/business\/(domain-stances|domains)\.json$|CLAUDE\.md$|AGENTS\.md$|\.claude\/(config\/docs-governance\.json|rules\/docs-vs-issues\.md|skills\/management\/maintain-docs\/|scripts\/lib\/check-docs-(governance|links)\.cjs|scripts\/lib\/__tests__\/check-docs-(governance|links)\.test\.cjs)|package\.json$)/;
+
+/** 変更に文書ガバナンスの対象が含まれるか。pre-commit を通らずに入った backlog の DG057 違反を push の前に止める */
+export function needsDocsCheck(changed) {
+  return changed.some((path) => DOCS_CHECK_PATHS.test(path));
+}
 
 const stemOf = (path) => basename(path).replace(/\.test\.[cm]?[jt]s$/, "").replace(/\.[^.]+$/, "");
 
@@ -52,7 +61,11 @@ function changedSinceRemote() {
 function run(label, command, args, cwd = ROOT) {
   console.log(`▶ ${label}`);
   // Windows の npx は npx.cmd で、shell なしでは起動できず status が null になる (出力なしで失敗扱いになっていた。2026-11-12)
-  const { status, error } = spawnSync(command, args, { cwd, stdio: "inherit", shell: process.platform === "win32" });
+  // hook の中では GIT_DIR などが本物のリポジトリを指す。これをテストへ渡すと、一時リポジトリのつもりの
+  // `git init --bare` や `git config` が本物の .git/config を書き換える (2026-11-14 に core.bare = true と
+  // [user] を書き込み、全作業ツリーの git が止まった)。テストには GIT_ で始まる変数を渡さない。
+  const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith("GIT_")));
+  const { status, error } = spawnSync(command, args, { cwd, env, stdio: "inherit", shell: process.platform === "win32" });
   if (error) console.error(`起動に失敗: ${command} (${error.message})`);
   return status === 0;
 }
@@ -71,7 +84,8 @@ function main() {
     if (sources.length > MAX_VITEST_FILES) console.log(`${workspace} の変更が ${sources.length} 件あるので CI に任せる`);
     else ok = run(`${workspace} の関係するテスト`, "npx", ["vitest", "related", "--run", "--passWithNoTests", ...sources], join(ROOT, workspace)) && ok;
   }
-  if (!ok) console.error(`❌ テストが失敗しました。${relative(ROOT, fileURLToPath(import.meta.url))} を飛ばすときは git push --no-verify`);
+  if (needsDocsCheck(changed)) ok = run("文書ガバナンス (npm run docs:check)", "npm", ["run", "docs:check"]) && ok;
+  if (!ok) console.error(`❌ 検査が失敗しました。${relative(ROOT, fileURLToPath(import.meta.url))} を飛ばすときは git push --no-verify`);
   return ok ? 0 : 1;
 }
 

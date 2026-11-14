@@ -23,7 +23,7 @@ import { RankingMapChartClient } from "../RankingMapChart/RankingMapChartClient"
 import { RankingAreaDetailSheet } from "./RankingAreaDetailSheet";
 
 
-import type { RankingItem, RankingValue } from "@stats47/ranking";
+import type { RankingItem, RankingValue, RankingValueDisplay } from "@stats47/ranking";
 
 type VisualizationTab = "map" | "table";
 
@@ -72,6 +72,8 @@ interface RankingVisualizationSectionProps {
      * URL の ?pref を使わない (テーマの過疎×医療は、押した県の重なりの地図をパネルの下に開く)
      */
     onSelectArea?: (areaCode: string | null) => void;
+    /** ページが決めた表示単位。地図・表・県の詳細が同じ単位・倍率・小数桁で値を書く */
+    valueDisplay?: RankingValueDisplay | null;
 }
 
 /**
@@ -94,6 +96,7 @@ export function RankingVisualizationSection({
     title,
     highlightAreaCode = null,
     onSelectArea,
+    valueDisplay,
 }: RankingVisualizationSectionProps) {
     const [activeTab, setActiveTab] = useState<VisualizationTab>("map");
     const unitLabel = areaType === "city" ? "市区町村" : "都道府県";
@@ -183,6 +186,7 @@ export function RankingVisualizationSection({
                             mapClassName="h-full"
                             selectedPrefectureCode={detailAreaCode ?? highlightAreaCode}
                             onPrefectureClick={(code) => openDetail(code, "map")}
+                            valueDisplay={valueDisplay}
                         />
                     </div>
                     <div className={panelClassName(activeTab === "table", "px-2.5 py-2 @min-[640px]/viz:border-l")}>
@@ -192,6 +196,7 @@ export function RankingVisualizationSection({
                             bare
                             onSelectArea={areaType === "prefecture" ? (code) => openDetail(code, "table") : undefined}
                             selectedAreaCode={detailAreaCode ?? highlightAreaCode}
+                            valueDisplay={valueDisplay}
                         />
                     </div>
                 </div>
@@ -202,6 +207,7 @@ export function RankingVisualizationSection({
                     rows={detailRows}
                     areaCode={detailAreaCode}
                     onAreaChange={(code, via) => openDetail(code, via === "step" ? "detail_sheet" : "table")}
+                    valueDisplay={valueDisplay}
                 />
             )}
         </ChartPanel>

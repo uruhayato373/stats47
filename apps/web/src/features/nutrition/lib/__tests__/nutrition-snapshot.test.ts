@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { lookupArea } from '@stats47/area';
 import { NUTRITION_SOURCE } from '@stats47/data-configs/theme-catalog';
 import { describe, expect, it } from 'vitest';

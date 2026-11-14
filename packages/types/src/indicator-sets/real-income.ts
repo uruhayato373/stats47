@@ -149,6 +149,16 @@ export const REAL_INCOME_SET: IndicatorSet = {
       "rankingKey": "current-liabilities-balance-multi-person-households-per-household",
       "shortLabel": "負債現在高（二人以上の世帯）",
       "role": "context"
+    },
+    {
+      "rankingKey": "avg-savings-rate-worker-households",
+      "shortLabel": "平均貯蓄率",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "cpi-change-rate-total",
+      "shortLabel": "物価上昇率(総合)",
+      "role": "secondary"
     }
   ],
   "keywords": [

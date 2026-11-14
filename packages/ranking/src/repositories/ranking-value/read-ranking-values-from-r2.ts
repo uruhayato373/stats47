@@ -5,7 +5,7 @@ import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
 
-import type { RankingValue } from "../../types";
+import type { RankingReferenceValue, RankingValue } from "../../types";
 import {
   rankingNationalTrendPath,
   rankingNormalizedValuesKeyPath,
@@ -19,18 +19,6 @@ import {
 } from "../schemas/ranking-values.schemas";
 import { readRankingItemFromR2 } from "../ranking-item";
 
-const STALE_AFTER_DAYS = 90;
-
-function warnIfStale(generatedAt: string, rankingKey: string, areaType: string): void {
-  const ageDays = (Date.now() - new Date(generatedAt).getTime()) / (1000 * 60 * 60 * 24);
-  if (ageDays > STALE_AFTER_DAYS) {
-    logger.warn(
-      { rankingKey, areaType, generatedAt, ageDays: Math.round(ageDays) },
-      `ranking-values snapshot が ${STALE_AFTER_DAYS} 日以上古い`,
-    );
-  }
-}
-
 async function loadRankingValuesForKey(
   rankingKey: string,
   areaType: string,
@@ -43,9 +31,10 @@ async function loadRankingValuesForKey(
     return null;
   }
 
-  const snapshot = parseRankingValuesKeySnapshot(data);
-  warnIfStale(snapshot.generatedAt, rankingKey, areaType);
-  return snapshot;
+  // generatedAt の古さは警告しない。この時刻は「中身が最後に変わった生成の時刻」で、前回配信と同じ中身なら
+  // 引き継がれる (generate-ranking-values.ts)。年次の統計は 1 年近く変わらないのが正常な状態。
+  // 配信が正典より遅れていないかは週次の audit-ranking-data-integrity (年の整合・正規化の鮮度) が見る。
+  return parseRankingValuesKeySnapshot(data);
 }
 
 /**
@@ -106,19 +95,33 @@ export async function readAllYearsRankingValuesFromR2(
   rankingKey: string,
   areaType: AreaType,
 ): Promise<Result<RankingValue[], Error>> {
+  const result = await readAllYearsRankingValuesWithReferencesFromR2(rankingKey, areaType);
+  return result.success ? ok(result.data.values) : result;
+}
+
+/**
+ * 全年度の ranking_values と、順位から外した参考値 (推計の人数が下限未満) を 1 fetch で取得する。
+ * 参考値はランキングページだけが表で別に示す (DATA-WAGE-TEACHER-COVERAGE-01)。
+ */
+export async function readAllYearsRankingValuesWithReferencesFromR2(
+  rankingKey: string,
+  areaType: AreaType,
+): Promise<Result<{ values: RankingValue[]; referenceValues: RankingReferenceValue[] }, Error>> {
   if (process.env.NEXT_PHASE === "phase-production-build") {
-    return ok([]);
+    return ok({ values: [], referenceValues: [] });
   }
 
   try {
     const snapshot = await loadRankingValuesForKey(rankingKey, areaType);
-    if (!snapshot) return ok([]);
+    if (!snapshot) return ok({ values: [], referenceValues: [] });
 
-    const all: RankingValue[] = [];
+    const values: RankingValue[] = [];
+    const referenceValues: RankingReferenceValue[] = [];
     for (const partition of snapshot.partitions) {
-      all.push(...partition.values);
+      values.push(...partition.values);
+      referenceValues.push(...(partition.referenceValues ?? []));
     }
-    return ok(all);
+    return ok({ values, referenceValues });
   } catch (error) {
     logger.error(
       { rankingKey, areaType, error: error instanceof Error ? error.message : String(error) },

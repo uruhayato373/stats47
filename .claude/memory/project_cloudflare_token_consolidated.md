@@ -7,7 +7,7 @@ originSessionId: c8f7304c-235d-4e27-ad61-b3075b33f5a5
 2026-04-26 整理: 散乱していた Cloudflare API token (mac×2, windows, 20251216, R2 Account Token×3, orange-sea-f334) を全削除し「stats47」1 個に集約した。
 
 **stats47 トークン権限**:
-- Account → D1 → Edit
+- Account → D1 → Edit (2026-11-14 時点で使い手が無い。下の Why)
 - Account → Workers R2 Storage → Edit
 - Account → Cloudflare Pages → Edit
 - Account → Account Settings → Read
@@ -15,7 +15,7 @@ originSessionId: c8f7304c-235d-4e27-ad61-b3075b33f5a5
 **含まれていない権限** (2026-05-17 確認):
 - ❌ Zone → Cache Purge — `/purge-cdn` (`packages/r2-storage/src/scripts/purge-cache.ts`) を実行すると 401 Authentication error。CDN キャッシュパージは **Cloudflare ダッシュボード手動** (Caching > Configuration > Purge Cache > Custom Purge) で行う必要あり。CI/agent 自動パージを実現したい場合は token に Cache Purge 権限を追加する
 
-**Why**: Phase 9 P2-A の sync-known-keys workflow が D1 Read を必要とするため、既存「D1 Write」のみだと 7403 で失敗。トークン管理を簡素化するため整理時に Edit に拡張。
+**Why**: 2026-04 の時点では Phase 9 P2-A の sync-known-keys workflow が D1 Read を必要とし、既存「D1 Write」のみだと 7403 で失敗したので、整理時に Edit に拡張した。2026-11-14 時点では完全 DB レスで、`sync-known-keys.yml` は無く、`apps/web/wrangler.toml` に D1 binding も無いので、D1 の権限を使う workflow とアプリは無い (`.github/` に D1 の CLI 呼び出しが無いことを 2026-11-14 に git grep で確認。手動の `packages/database/scripts/seed-to-d1-sql.ts` の案内文は残る)。使用量の取得 (`.claude/scripts/cloudflare/fetch-usage.mjs`) は GraphQL Analytics API の account データセットを読むだけで、要るのは Account Analytics Read である ([公式 2026-11-14 取得](https://developers.cloudflare.com/analytics/graphql-api/getting-started/authentication/api-token-auth/))。D1 Edit を外すかはトークンの設定変更なのでオーナーが決める。
 
 **How to apply**:
 - ローカル開発: `.env.local` の `CLOUDFLARE_API_TOKEN` がこのトークン

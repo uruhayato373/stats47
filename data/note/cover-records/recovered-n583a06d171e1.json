@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n583a06d171e1",
+  "production": {
+    "id": "NCI-00423",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "華道をした人\n1位は島根県",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無文字の花器に挿した季節の花を描く。人物や手は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n583a06d171e1 2026-10-23公開API本文照合。記事題名「【2021年版】華道をした人が多い県は？ 1位は島根県｜都道府県ランキング」。本文中の「島根県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "bb1be40c1dd1062413d521d4109d27901e3c98dd0aeb6a47b828ab141afe0968",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n583a06d171e1/revisions/bb1be40c1dd1062413d521d4109d27901e3c98dd0aeb6a47b828ab141afe0968.png"
+      },
+      "bytes": 37337,
+      "id": "bb1be40c1dd1062413d521d4109d27901e3c98dd0aeb6a47b828ab141afe0968",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:11.084Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312774111/rectangle_large_type_2_9712269ab6090afdb4b0818cb8b67bbf.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "bb1be40c1dd1062413d521d4109d27901e3c98dd0aeb6a47b828ab141afe0968"
+      }
+    },
+    {
+      "sha256": "446f2dfa1f498034494f2ba3efc9cf66e0b0cfcd032affbe0e9f4c335dc3ed16",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n583a06d171e1/revisions/446f2dfa1f498034494f2ba3efc9cf66e0b0cfcd032affbe0e9f4c335dc3ed16.png"
+      },
+      "bytes": 110393,
+      "id": "446f2dfa1f498034494f2ba3efc9cf66e0b0cfcd032affbe0e9f4c335dc3ed16",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:15:30.211Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "a8b7d2f045b0280360be3c93221fb1e0eddf920cb18ca72392242815bda6f0bb"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/hobby-participation-rate-flower-arrangement/values.json",
+        "sourceSha256": "6305412926600ac4d2b1c42c5c7f75dccd2ceb28cc844691a2df002d2ebc38c3",
+        "input": {
+          "sha256": "a8b7d2f045b0280360be3c93221fb1e0eddf920cb18ca72392242815bda6f0bb",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n583a06d171e1/inputs/a8b7d2f045b0280360be3c93221fb1e0eddf920cb18ca72392242815bda6f0bb.json"
+          },
+          "bytes": 6522
+        }
+      }
+    },
+    {
+      "sha256": "26075f3a1a8e7d398e77e35c2caf175d0d121d6d8b8cc3fddfb45ddad3d3339a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n583a06d171e1/revisions/26075f3a1a8e7d398e77e35c2caf175d0d121d6d8b8cc3fddfb45ddad3d3339a.png"
+      },
+      "bytes": 1843408,
+      "id": "26075f3a1a8e7d398e77e35c2caf175d0d121d6d8b8cc3fddfb45ddad3d3339a",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-5bb6257da709",
+      "createdAt": "2026-10-23T13:08:27.928Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "9465252b1fd58538d9547bbded3b7812bddfc5b2371abd2c6f07effbc22c8e31"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T13:10:30.746Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "9465252b1fd58538d9547bbded3b7812bddfc5b2371abd2c6f07effbc22c8e31",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n583a06d171e1/inputs/9465252b1fd58538d9547bbded3b7812bddfc5b2371abd2c6f07effbc22c8e31.json"
+          },
+          "bytes": 8642
+        },
+        "production": {
+          "id": "NCI-00423",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "5bb6257da709321f66deaeb53740616efc8199e53c05a5c02284fd7d47d7a125"
+        }
+      }
+    }
+  ]
+}

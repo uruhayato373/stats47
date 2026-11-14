@@ -207,7 +207,7 @@ function makeMdComponents(
             const nodeChildren = node?.children ?? [];
             const hasBlockElement =
                 nodeChildren.length > 0 &&
-                nodeChildren.every((c) => c.type === "element" && (c.tagName === "img" || c.tagName === "ad-slot" || c.tagName === "data-source" || c.tagName === "source-link" || c.tagName === "affiliate-banner" || c.tagName === "affiliate-text" || c.tagName === "site-link"));
+                nodeChildren.every((c) => c.type === "element" && (c.tagName === "img" || c.tagName === "ad-slot" || c.tagName === "ad-row" || c.tagName === "data-source" || c.tagName === "source-link" || c.tagName === "affiliate-banner" || c.tagName === "affiliate-text" || c.tagName === "site-link"));
             if (hasBlockElement) return <>{children}</>;
             return (
                 // Zenn 準拠: 行間 1.9 / 連続段落間 24px (p+p{margin-top:1.5em} の移植)

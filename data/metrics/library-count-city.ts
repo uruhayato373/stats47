@@ -21,7 +21,7 @@ export const libraryCountCity: MetricConfig = {
     "from": 1995,
     "to": 2021,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",

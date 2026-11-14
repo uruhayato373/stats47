@@ -63,6 +63,35 @@ describe("resolveNavClick", () => {
       expect(resolveNavClick(root.querySelector(`#${id}`), LOCATION)).toBeNull();
     }
   });
+
+  it("行き先の無いボタン代わりのリンク (href=\"#\"。地図の拡大・縮小など) は、導線名が無ければ送らない", () => {
+    // Leaflet の拡大・縮小は <a href="#" role="button">。押してもページは移らないのに、
+    // 今いるページへの移動として unlabeled で数えていた (2026-11-14 に /geo の各分析ページの HTML で確認)
+    const root = dom(
+      '<a id="zoom" class="leaflet-control-zoom-in" href="#" role="button"><span>+</span></a>' +
+        '<nav data-nav-surface="blog_toc"><a id="named" href="#">先頭へ</a></nav>' +
+        '<a id="self" href="/ranking/foo">このページ</a>',
+    );
+    expect(resolveNavClick(root.querySelector("#zoom span"), LOCATION)).toBeNull();
+    // 導線名が付いていれば、目次と同じく数える
+    expect(resolveNavClick(root.querySelector("#named"), LOCATION)?.surface).toBe("blog_toc");
+    // パスで書かれた今のページへのリンクは、これまでどおり数える
+    expect(resolveNavClick(root.querySelector("#self"), LOCATION)?.surface).toBe("unlabeled");
+  });
+
+  it("/api/ へのリンク (CSV のダウンロードなど) はページの移動ではないので送らない", () => {
+    // 2026-W44 の nav-click-surfaces.csv で unlabeled × api が 705 件あった。サイト内で <a href> が /api/ を指すのは
+    // DataUsageCard のダウンロードで、これは csv_download で数えている (CONTENT-FOLLOWUP-01)
+    const root = dom(
+      '<a id="csv" href="/api/ranking/foo/download?format=csv&amp;basis=original">ダウンロード</a>' +
+        '<nav data-nav-surface="ranking_data"><a id="named" href="/api/ranking/foo/download?format=csv">CSV</a></nav>' +
+        '<a id="apis" href="/apis-guide">API の案内</a>',
+    );
+    expect(resolveNavClick(root.querySelector("#csv"), LOCATION)).toBeNull();
+    expect(resolveNavClick(root.querySelector("#named"), LOCATION)).toBeNull();
+    // 「/api」で始まる別のページは数える
+    expect(resolveNavClick(root.querySelector("#apis"), LOCATION)?.label).toBe("apis-guide");
+  });
 });
 
 describe("NavClickTracker", () => {

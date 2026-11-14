@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-final-energy-consumption-per-capita",
+  "production": {
+    "id": "NCI-00058",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "1人当たりの\n最終エネルギー消費",
+      "subline": "多い県は大分県\n2022年・GJで比較",
+      "subject": "右側に文字・数字のない簡素なエネルギーメーターを1点だけ大きく描く。特定の燃料・電力だけの消費と誤認させない。人物・キャラクター・地図・グラフ・メーター数値・ロゴを描かない。",
+      "evidence": "公開本文を確認。2022年の1人当たり最終エネルギー消費量は大分県308.84GJで1位、埼玉県63.32GJで47位。県全体の消費総量や電力需要量ではない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "e02e851f7153b2261cea099ba14f5547855a159dbb8e28a903a5ca53720321e5",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-final-energy-consumption-per-capita/revisions/e02e851f7153b2261cea099ba14f5547855a159dbb8e28a903a5ca53720321e5.png"
+      },
+      "bytes": 65603,
+      "id": "e02e851f7153b2261cea099ba14f5547855a159dbb8e28a903a5ca53720321e5",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:53.400Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312770918/rectangle_large_type_2_fd7e7afc4772cc9fd99897131129b80e.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "e02e851f7153b2261cea099ba14f5547855a159dbb8e28a903a5ca53720321e5"
+      }
+    },
+    {
+      "sha256": "f986f9fbb180ba550c04b3e6c13c50de7db4eb11e10e1ffda71c5be8aec25747",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-final-energy-consumption-per-capita/revisions/f986f9fbb180ba550c04b3e6c13c50de7db4eb11e10e1ffda71c5be8aec25747.png"
+      },
+      "bytes": 119369,
+      "id": "f986f9fbb180ba550c04b3e6c13c50de7db4eb11e10e1ffda71c5be8aec25747",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:19:16.703Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ce56bddaaede91efbb2c5e8ad94cdd67b98d9685a9681b05f6cfb48416c86e76"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.842Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/final-energy-consumption-per-capita/values.json",
+        "sourceSha256": "5ff55e70c62c3e1b8dbe99ebbb5e21c570dfc8dd15ee472d87cfb3bdea8b986e",
+        "input": {
+          "sha256": "ce56bddaaede91efbb2c5e8ad94cdd67b98d9685a9681b05f6cfb48416c86e76",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-final-energy-consumption-per-capita/inputs/ce56bddaaede91efbb2c5e8ad94cdd67b98d9685a9681b05f6cfb48416c86e76.json"
+          },
+          "bytes": 7702
+        }
+      }
+    },
+    {
+      "sha256": "0c024aafd8ffc427eb0617e6a37fb17f017ac20084515fef5530200978e52f0d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-final-energy-consumption-per-capita/revisions/0c024aafd8ffc427eb0617e6a37fb17f017ac20084515fef5530200978e52f0d.png"
+      },
+      "bytes": 1823265,
+      "id": "0c024aafd8ffc427eb0617e6a37fb17f017ac20084515fef5530200978e52f0d",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-b8d62a256102",
+      "createdAt": "2026-10-23T05:45:21.340Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "5d87c73233a79fb9d1df36fcf8e6f45c56eb71923683e01b8184722f285b0288"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "本文の2022年・1人当たり最終エネルギー消費量、大分県1位と一致。総量との区別も明瞭。原寸・320pxで文字と無数値メーターを確認。",
+        "reviewedAt": "2026-10-23T05:49:16.435Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "5d87c73233a79fb9d1df36fcf8e6f45c56eb71923683e01b8184722f285b0288",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-final-energy-consumption-per-capita/inputs/5d87c73233a79fb9d1df36fcf8e6f45c56eb71923683e01b8184722f285b0288.json"
+          },
+          "bytes": 8045
+        },
+        "production": {
+          "id": "NCI-00058",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "b8d62a25610267a79a60114ffa4672fef217794fc5b028aec2dbc02b9d577973"
+        }
+      }
+    }
+  ]
+}

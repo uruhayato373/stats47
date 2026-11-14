@@ -28,7 +28,7 @@
     {
       "rankingKey": "number-of-freight-cars",
       "shortLabel": "貨物車数",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "128テーマ実現性調査・全体展開",
         "surveyedAt": "2026-09-09",
@@ -44,12 +44,78 @@
         "surveyedAt": "2026-09-09",
         "rationale": "トラック事業者を都道府県別の実値として比較する。"
       }
+    },
+    {
+      "rankingKey": "main-road-length-per-km2",
+      "shortLabel": "主要道路実延長(面積あたり)",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「道路密度」「道路実延長とは」など道路基盤の検索に対し、トラック輸送の基盤を総面積1km²あたりの密度で県どうし比べられる。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "maritime-import-export-cargo",
+      "shortLabel": "海上出入貨物",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「港湾 取扱貨物量ランキング 日本」「港が多い都道府県」に答える海運の貨物量で、現カタログに無い海の輸送を足す。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "port-count",
+      "shortLabel": "港湾の対象港数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://laws.e-gov.go.jp/api/2/law_data/326M50000800013_20250101_506M60000800108",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「港が多い都道府県」「港の数 ランキング」に直接答える県別の港数を示す。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "airport-count",
+      "shortLabel": "空港数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://nlftp.mlit.go.jp/ksj/index.html",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「空港がない都道府県」「空港がない県 理由」に答える県別の空港数を示し、航空貨物量の背景にする。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
     }
   ],
   "charts": [],
   "metricGroups": [
     {
       "key": "road-freight-and-operators-1",
+      "title": "主要道路実延長(面積あたり)",
+      "rankingKeys": [
+        "main-road-length-per-km2"
+      ],
+      "defaultCheckedKeys": [
+        "main-road-length-per-km2"
+      ]
+    },
+    {
+      "key": "road-freight-and-operators-2",
       "title": "トラック事業者",
       "rankingKeys": [
         "truck-operators"
@@ -59,17 +125,27 @@
       ]
     },
     {
-      "key": "road-freight-and-operators-2",
-      "title": "貨物車数",
+      "key": "rail-freight-transport-1",
+      "title": "港湾の対象港数",
       "rankingKeys": [
-        "number-of-freight-cars"
+        "port-count"
       ],
       "defaultCheckedKeys": [
-        "number-of-freight-cars"
+        "port-count"
       ]
     },
     {
-      "key": "rail-freight-transport-1",
+      "key": "rail-freight-transport-2",
+      "title": "海上出入貨物",
+      "rankingKeys": [
+        "maritime-import-export-cargo"
+      ],
+      "defaultCheckedKeys": [
+        "maritime-import-export-cargo"
+      ]
+    },
+    {
+      "key": "rail-freight-transport-3",
       "title": "JR貨物発送量",
       "rankingKeys": [
         "jr-freight-shipment"
@@ -80,6 +156,16 @@
     },
     {
       "key": "air-cargo-transportation-1",
+      "title": "空港数",
+      "rankingKeys": [
+        "airport-count"
+      ],
+      "defaultCheckedKeys": [
+        "airport-count"
+      ]
+    },
+    {
+      "key": "air-cargo-transportation-2",
       "title": "航空貨物輸送量",
       "rankingKeys": [
         "air-cargo-transport"
@@ -92,8 +178,8 @@
   "sections": [
     {
       "key": "road-freight-and-operators",
-      "title": "トラック事業者や貨物車両の供給体制は維持されているか",
-      "concern": "物流の2024年問題や人手不足の中で道路貨物を担う事業者や車両が十分か不安です。",
+      "title": "トラックが走る道路の密度と事業者数は県でどれだけ違うか",
+      "concern": "道路貨物の基盤となる道路網の厚みとトラック事業者の数が、住む県でどれだけ違うか気になります。",
       "metricGroupKeys": [
         "road-freight-and-operators-1",
         "road-freight-and-operators-2"
@@ -104,18 +190,21 @@
     },
     {
       "key": "rail-freight-transport",
-      "title": "モーダルシフトを支える鉄道貨物輸送の利用は進んでいるか",
-      "concern": "環境負荷軽減やドライバー不足に対応する鉄道貨物の活用が進んでいるか気になります。",
+      "title": "港と鉄道の貨物拠点はどこにあるか",
+      "concern": "海運と鉄道貨物の拠点が自分の県にあるのか、貨物の量はどう動いてきたかが気になります。",
       "metricGroupKeys": [
-        "rail-freight-transport-1"
+        "rail-freight-transport-1",
+        "rail-freight-transport-2",
+        "rail-freight-transport-3"
       ]
     },
     {
       "key": "air-cargo-transportation",
-      "title": "緊急・高付加価値品を運ぶ航空貨物輸送の拠点機能はあるか",
-      "concern": "スピードが求められる高価格帯製品や緊急物資の航空輸送能力が気になります。",
+      "title": "空港はあるか、航空貨物はどれだけ扱っているか",
+      "concern": "空港の有無と航空貨物の取扱量が県でどう違うか、空港のない県はどこかが気になります。",
       "metricGroupKeys": [
-        "air-cargo-transportation-1"
+        "air-cargo-transportation-1",
+        "air-cargo-transportation-2"
       ]
     }
   ],

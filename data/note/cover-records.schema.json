@@ -1,0 +1,376 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "stats47 note cover records",
+  "description": "data/note/cover-records/<articleKey>.json の形の契約。1 記事 1 ファイルで、その記事のカバーの制作内容 (production: 制作 ID・方針・コピー・題材・根拠) と版の記録 (revisions: 候補・公開画像の保全・旧 R2 の保全を登録順に) を持つ。ファイル名と articleKey は一致し、正本 data/note/cover-assets.json に同じ記事の行がある。制作内容も版も無い記事はファイルを作らない。読み書きは .claude/scripts/note/lib/cover-assets.mjs だけが行う。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "articleKey",
+    "revisions"
+  ],
+  "anyOf": [
+    {
+      "required": [
+        "production"
+      ]
+    },
+    {
+      "properties": {
+        "revisions": {
+          "minItems": 1
+        }
+      }
+    }
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "articleKey": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+    },
+    "production": {
+      "$ref": "#/definitions/production"
+    },
+    "revisions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/revision"
+      }
+    }
+  },
+  "definitions": {
+    "nullableId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "production": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "policyId",
+        "policyVersion",
+        "brief"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^NCI-[0-9]{5}$"
+        },
+        "policyId": {
+          "type": "string",
+          "pattern": "^NCP-[0-9]{3}$"
+        },
+        "policyVersion": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "titleCorrection": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["generatedTitle", "publishedTitle", "reason"],
+          "properties": {
+            "generatedTitle": { "type": "string", "minLength": 1 },
+            "publishedTitle": { "type": "string", "minLength": 1 },
+            "reason": { "type": "string", "minLength": 1 }
+          }
+        },
+        "brief": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "required": [
+            "headline",
+            "subline",
+            "subject",
+            "evidence"
+          ],
+          "properties": {
+            "headline": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64
+            },
+            "subline": {
+              "type": "string",
+              "maxLength": 100
+            },
+            "subject": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1000
+            },
+            "evidence": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            },
+            "dataScope": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "place",
+                "year",
+                "households"
+              ],
+              "properties": {
+                "place": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 30
+                },
+                "year": {
+                  "type": "string",
+                  "pattern": "^[12][0-9]{3}$"
+                },
+                "households": {
+                  "const": "二人以上の世帯"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "productionReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "policyId",
+        "policyVersion",
+        "planSha256"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^NCI-[0-9]{5}$"
+        },
+        "policyId": {
+          "type": "string",
+          "pattern": "^NCP-[0-9]{3}$"
+        },
+        "policyVersion": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "planSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "revision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "version",
+        "createdAt",
+        "storage",
+        "sha256",
+        "bytes",
+        "width",
+        "height",
+        "review",
+        "provenance"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "kind": {
+          "enum": [
+            "candidate",
+            "published-original",
+            "r2-archive"
+          ]
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 16777216
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "quality": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "textBounds",
+            "textOverlap",
+            "evidenceSha256"
+          ],
+          "properties": {
+            "textBounds": {
+              "enum": [
+                "pass"
+              ]
+            },
+            "textOverlap": {
+              "enum": [
+                "pass"
+              ]
+            },
+            "evidenceSha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          }
+        },
+        "storage": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "provider",
+            "bucket",
+            "key"
+          ],
+          "properties": {
+            "provider": {
+              "const": "r2-private"
+            },
+            "bucket": {
+              "const": "stats47-private"
+            },
+            "key": {
+              "type": "string",
+              "pattern": "^note/covers/[A-Za-z0-9_-]+/revisions/[a-f0-9]{64}\\.png$"
+            }
+          }
+        },
+        "review": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "reason",
+            "reviewedAt"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "pending",
+                "pass",
+                "needs-revision",
+                "not-required"
+              ]
+            },
+            "reason": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "reviewedAt": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "date-time"
+            }
+          }
+        },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "renderer",
+            "sourceUrl",
+            "sourceSha256"
+          ],
+          "properties": {
+            "renderer": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "sourceUrl": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^https://"
+            },
+            "sourceSha256": {
+              "$ref": "#/definitions/nullableId"
+            },
+            "production": {
+              "$ref": "#/definitions/productionReference"
+            },
+            "input": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "sha256",
+                "bytes",
+                "storage"
+              ],
+              "properties": {
+                "sha256": {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                "bytes": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 16777216
+                },
+                "storage": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "provider",
+                    "bucket",
+                    "key"
+                  ],
+                  "properties": {
+                    "provider": {
+                      "const": "r2-private"
+                    },
+                    "bucket": {
+                      "const": "stats47-private"
+                    },
+                    "key": {
+                      "type": "string",
+                      "pattern": "^note/covers/[A-Za-z0-9_-]+/inputs/[a-f0-9]{64}\\.json$"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

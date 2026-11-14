@@ -1,5 +1,3 @@
-import { Suspense } from "react";
-
 import { notFound } from "next/navigation";
 
 import { fetchPrefectures } from "@stats47/area";
@@ -14,6 +12,7 @@ import {
 import { CATEGORIES } from "@stats47/data-configs";
 import { contentTagIds, resolveContentTag } from '@stats47/data-configs/content';
 import { hrefFor } from "@stats47/data-configs/content/href";
+import { normalizeUnitsInText } from "@stats47/data-configs/unit";
 
 import Link from "@/components/atoms/SiteLink";
 import { ArticleShell, CURRENT_ITEM_CLASS, PanelGrid } from "@/components/layout";
@@ -31,7 +30,7 @@ import {
     RelatedAmazonBook,
 } from "@/features/ads";
 import { resolveContentVertical } from "@/features/ads/constants/affiliate-category";
-import { applyBlogAffiliatePolicy, resolveBlogBannerInput } from "@/features/ads/constants/blog-affiliate-policy";
+import { resolveBlogBannerInput } from "@/features/ads/constants/blog-affiliate-policy";
 import { adRowTargets, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, migrateLegacyDataSourceSection } from "@/features/blog";
 import { blogR2Key } from "@/features/blog/r2-key";
 import {
@@ -127,10 +126,15 @@ export default async function BlogPostPage({ params }: PageProps) {
     // 手書きの旧「データ出典」節は DataSourceList と重複するので、描画時にも一括移行と同じ変換
     // (引用だけなら除去 / 説明を含めば「データについて」へ改名) をかける。Kindle 書籍の章に使う記事は
     // 本文を変えられないので、この変換が恒久的に表示をそろえる。出典を解決できない記事は手書き節を残す。
-    const renderedArticle =
-        dataSources.length > 0
-            ? { ...article, content: migrateLegacyDataSourceSection(article.content).content }
-            : article;
+    // 題と本文は、数字の直後の全角の単位 (「96.6％」) を表示時に半角へそろえる。記事に埋め込むランキングのカードや
+    // 一覧の単位は半角で書くので、原稿のままだと同じページに ％ と % が並ぶ (原稿と R2 は書き換えない。UNIT-NOTATION-FORMAT-01)
+    const renderedArticle = {
+        ...article,
+        title: normalizeUnitsInText(article.title),
+        content: normalizeUnitsInText(
+            dataSources.length > 0 ? migrateLegacyDataSourceSection(article.content).content : article.content
+        ),
+    };
 
     // 記事本文中の /blog/{slug} リンクからスラッグを抽出し、DB からタイトルを取得
     const blogLinkSlugs = [...article.content.matchAll(/\]\(\/blog\/([a-z0-9-]+)\)/g)]
@@ -155,13 +159,8 @@ export default async function BlogPostPage({ params }: PageProps) {
     // 解決順は **記事明示policy → 出典調査 → タグ** (`resolveContentVertical`)。
     //   家計調査の記事 (ブログ imp の 17%) は食文化タグで economy に落ち金融広告が出ていた。
     //   all.json の surveyIds 焼き込みで家計調査 → furusato、気象統計 → 広告なし、のように決める。
-    const affiliateInput = applyBlogAffiliatePolicy(slug, {
-        surveyIds: article.surveyIds,
-        tagKeys,
-    });
     // A8 のバナー・テキスト広告は、出典調査だけで furusato になる地域の食卓・特産品以外の記事には出さない
-    //   (ビール記事にふるさと納税ポータルが出ていた。2026-09-24)。楽天カードは affiliateInput のまま判定し、
-    //   主題の品目カードは残す。
+    //   (ビール記事にふるさと納税ポータルが出ていた。2026-09-24)。
     const bannerInput = resolveBlogBannerInput(
         slug,
         { surveyIds: article.surveyIds, tagKeys },
@@ -328,7 +327,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                             {/* 現在の記事名はどの幅でも出し、長い題は 1 行で省略する (Breadcrumbs と同じクラス) */}
                             <BreadcrumbSeparator />
                             <BreadcrumbItem className={CURRENT_ITEM_CLASS}>
-                                <BreadcrumbPage>{article.title}</BreadcrumbPage>
+                                <BreadcrumbPage>{renderedArticle.title}</BreadcrumbPage>
                             </BreadcrumbItem>
                         </BreadcrumbList>
                     </Breadcrumb>
@@ -343,9 +342,9 @@ export default async function BlogPostPage({ params }: PageProps) {
                                     <p>stats47 データジャーナル / 統計で読む地域ニュース</p>
                                     <p>PRを含む場合があります</p>
                                 </div>
-                                <h1 className="article-title mb-3 text-xl font-semibold text-foreground sm:text-2xl">{article.title}</h1>
+                                <h1 className="article-title mb-3 text-xl font-semibold text-foreground sm:text-2xl">{renderedArticle.title}</h1>
                                 {article.frontmatter.subtitle && (
-                                    <p className="mb-3 text-sm text-muted-foreground sm:text-base">{article.frontmatter.subtitle}</p>
+                                    <p className="mb-3 text-sm text-muted-foreground sm:text-base">{normalizeUnitsInText(article.frontmatter.subtitle)}</p>
                                 )}
                                 {articleTagData.length > 0 && (
                                     <div className="mb-3 flex flex-wrap items-center gap-2">

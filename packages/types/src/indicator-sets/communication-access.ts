@@ -34,6 +34,26 @@ export const COMMUNICATION_ACCESS_SET: IndicatorSet = {
       "rankingKey": "internet-usage-rate-10plus",
       "shortLabel": "インターネットの利用行動者率",
       "role": "context"
+    },
+    {
+      "rankingKey": "public-phone-count-per-1000",
+      "shortLabel": "公衆電話設置台数（人口千人当たり）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "internet-fee-consumption-expenditure",
+      "shortLabel": "インターネット接続料（1世帯の年間支出）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "mobile-phone-bill-consumption-expenditure",
+      "shortLabel": "携帯電話通信料（1世帯の年間支出）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "pc-ownership-multi-person-households-per-1000",
+      "shortLabel": "パソコン所有数量（二人以上世帯千世帯当たり）",
+      "role": "secondary"
     }
   ],
   "keywords": [

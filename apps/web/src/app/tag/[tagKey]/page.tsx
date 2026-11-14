@@ -1,13 +1,14 @@
 import { notFound } from 'next/navigation';
 
 import { hrefFor } from '@stats47/data-configs/content/href';
-import { normalizePercentInText } from "@stats47/data-configs/unit";
+import { normalizeUnitsInText } from "@stats47/data-configs/unit";
 
 import Link from '@/components/atoms/SiteLink';
 import { PageShell, PageHeader, Breadcrumbs, PanelGrid } from '@/components/layout';
 import { SurfaceCard } from '@/components/surface';
 
 import { AdRow, composeAdRows } from '@/features/ads';
+import { formatCardDate } from '@/features/blog/listing';
 import {
   listAllUniqueTags,
   listArticleSummariesByTagKey,
@@ -108,11 +109,14 @@ export default async function TagArticlesPage({ params }: PageProps) {
         eyebrow="タグ"
         title={tag}
         description={`「${tag}」タグが付いた都道府県統計ブログの記事 ${articles.length} 本を掲載しています。`}
-        stats={`全 ${articles.length} 記事`}
+        stats={`全 ${articles.length} 記事 ・ 並び順: 公開日の新しい順`}
       />
 
       <PanelGrid className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        {articles.map((article) => (
+        {articles.map((article) => {
+          // 並び順の基準 (公開日) を各カードに出す (HUB-LIST-FINDABILITY-01。日付が無く並び順が分からなかった)
+          const publishedDate = formatCardDate(article.publishedAt);
+          return (
           <Link
             key={article.slug}
             href={hrefFor('blog', { slug: article.slug })}
@@ -122,17 +126,23 @@ export default async function TagArticlesPage({ params }: PageProps) {
               {/* カード下部に続く情報が無いので区切り線は引かない (2026-10-04 週次 UI 検査) */}
               <div className="flex flex-col items-start gap-2 px-4 py-3">
                 <h3 className="text-lg font-semibold leading-snug transition-colors group-hover:text-primary">
-                  {article.title}
+                  {normalizeUnitsInText(article.title)}
                 </h3>
                 {article.description && (
                   <p className="text-sm text-muted-foreground line-clamp-2">
-                    {normalizePercentInText(article.description)}
+                    {normalizeUnitsInText(article.description)}
+                  </p>
+                )}
+                {publishedDate && (
+                  <p className="text-xs text-muted-foreground">
+                    <time dateTime={article.publishedAt ?? undefined}>公開 {publishedDate}</time>
                   </p>
                 )}
               </div>
             </SurfaceCard>
           </Link>
-        ))}
+          );
+        })}
       </PanelGrid>
 
       {/* 記事内広告（一覧グリッド後。slotId 未発行の間は非表示） */}

@@ -2,7 +2,7 @@
 title: Playwright認証プロファイル
 type: technical-design
 status: adopted
-updated: 2026-09-30
+updated: 2026-11-14
 ---
 
 # Playwright認証プロファイル
@@ -17,10 +17,10 @@ Playwright を使う運用スクリプトのログイン状態、アカウント
 - 認証失敗を自動再登録や別アカウントで回避しない。人が headed browser で復旧する。
 - 例外: A8 / もしも / KDP の計測ログインと X の予約投稿用ログインだけは、オーナー承認 (A8・もしも 2026-09-26、KDP 2026-09-27、X 2026-09-30) により Mac 上で macOS キーチェーンの ID/PW による再ログインを 1 回だけ許す (`.claude/scripts/measurement/refresh-session.mjs`)。失敗・2FA・CAPTCHA は突破せず失敗印を残して停止し、人が確認して印を消すまで再試行しない。ID/PW を CI・git・ログへ置かない。KDP は本棚 → 既知 ASIN の口座照合 → Reports の順に通し、Amazon の 2FA (`/ap/mfa`)・追加確認 (`/ap/cvf`)・CAPTCHA が出たら同じく停止する。「ログインしたままにする」を付けて 2FA の再要求を減らすが、毎回 2FA を求められる口座では自動化できない。
   - **資格情報の読み口 (2026-09-28)**: `.claude/scripts/measurement/credential-store.mjs` が唯一の入口。Mac はキーチェーン、Windows は資格情報マネージャー (`cmdkey /generic:stats47-measurement-<source> /user:<ID> /pass` で登録。Win32 `CredRead` を PowerShell 5.1 から読むので追加モジュール不要)、それ以外 (CI) は読まない。サービス名は両 OS で同じ。直接読む書き方は `credential-store-contract.test.mjs` が止める。Bitwarden 等の外部サービスは使わない (オーナー判断)。
-  - **資格情報の正本と CI 再ログイン (2026-10-01 オーナー決定)**: ログインが必要な全サービスの一覧・自動ログインの可否・CI 許可は `.claude/config/auth-credentials.json` が正本 (ID/PW は書かない)。この PC と CI の登録状況は管理画面 `/ops` の「ログインと資格情報」で見る (登録の有無と ID だけを読み、パスワードは読まない)。**note・ココナラ・KDP・A8・もしもは CI もパスワードを使う** (A8・もしもは同日追加。doboku-note と共用の口座なので、CI の入り直しが失敗したら人が新しいセッションを渡すまで再試行しない。afb・X・Google は Secrets に保管するだけ)。**楽天アフィリエイト (2026-10-01)**: 成果 API が無いので、`rakuten-report.mjs` がログイン済みセッションで管理画面と同じ JSON (`/api/report/monthly?overview=1`・`/api/report/reward`) を読み `rakuten-results.json` に当月・前月を書く。CI はセッションが無ければ Secrets `STATS47_AUTH_RAKUTEN_*` で初回ログインして作る (保管庫の鍵が Mac にしか無く、Windows から seed を渡せないため): GitHub Secrets `STATS47_AUTH_<SERVICE>_USER` / `_PASSWORD` (KDP は任意で `_TOTP`) を `authenticated-measurement.yml` が該当 source の collect step にだけ渡し、`collect.mjs` がセッション切れ・停止中のときに `refresh-session.mjs --ci` で 1 回だけ入り直す。成功した state は新しい世代として vault に保存し停止を解除する。失敗 (2FA・CAPTCHA・ID/PW 不一致) は `auth-recovery` に `reloginFailedAt` を残し、人が新しいセッションを渡すまで再試行しない。照合テストは `__tests__/auth-credential-ssot.test.mjs`。
+  - **資格情報の正本 (2026-10-01 オーナー決定)**: ログインが必要な全サービスの一覧と自動ログインの可否は `.claude/config/auth-credentials.json` が正本 (ID/PW は書かない)。この PC の登録状況は管理画面 `/ops/auth`「ログインと資格情報」で見る (登録の有無と ID だけを読み、パスワードは読まない)。ログインは Mac だけが持ち、CI と GitHub Secrets には ID・パスワード・セッションを置かない (2026-10-20 オーナー判断。下の「Macでの認証付き計測」)。**楽天アフィリエイト (2026-10-01)**: 成果 API が無いので、`rakuten-report.mjs` がログイン済みセッションで管理画面と同じ JSON (`/api/report/monthly?overview=1`・`/api/report/reward`) を読み `rakuten-results.json` に当月・前月を書く。照合テストは `__tests__/auth-credential-ssot.test.mjs`。
   - **2FA は認証アプリ方式 (TOTP) だけ自動化する**: `stats47-measurement-<source>-totp` に秘密鍵 (base32) を登録した口座だけ、`/ap/mfa` の画面でコードを計算して 1 回入力する (RFC 6238 の試験値でテスト済み)。SMS / メールのコード、追加確認 (`/ap/cvf`)、CAPTCHA は従来どおり停止する。Amazon の MFA 画面のセレクタは実機未確認で、外れた場合も停止する。
-  - **同時に 2 台でログインしない**: 下の state 共用の理由と同じく、定期的な自動ログインは 1 台 (現状 Mac の launchd) だけにする。Windows で `refresh-session.mjs` を使うのは、Mac の定期実行を止めているときか、手動で 1 回だけ回すときに限る。
-- A8 / もしもの state (`playwright-{a8,moshimo}-state.json`) は stats47 と doboku-note で共用する (2026-09-26)。実体は `~/.local/share/asp-sessions/{a8,moshimo}-state.json` (mode 600) で、両リポジトリの `.local/` にはそこへの symlink を置く。ログインするのは stats47 の launchd (`refresh-session.mjs`) だけで、doboku-note は読むだけにする (同じ口座へ別々にログインすると互いのセッションを切る恐れがある)。新しいマシンでは symlink を張り直す。state を rename で置き換える書き方は symlink を壊すので使わない。
+  - **同時に 2 台でログインしない**: 下の state 共用の理由と同じく、自動ログインは 1 台 (現状は Mac で、週次レビューの最初にオーナーが手で回す `npm run weekly:collect` の `refresh-session.mjs`。2026-11-08 に launchd の自動起動はやめた) だけにする。Windows で `refresh-session.mjs` を使うのは、Mac で回せない週に手動で 1 回だけ回すときに限る。
+- A8 / もしもの state (`playwright-{a8,moshimo}-state.json`) は stats47 と doboku-note で共用する (2026-09-26)。実体は `~/.local/share/asp-sessions/{a8,moshimo}-state.json` (mode 600) で、両リポジトリの `.local/` にはそこへの symlink を置く。ログインするのは stats47 の Mac の `refresh-session.mjs` (`npm run weekly:collect` の 1 段目) だけで、doboku-note は読むだけにする (同じ口座へ別々にログインすると互いのセッションを切る恐れがある)。新しいマシンでは symlink を張り直す。state を rename で置き換える書き方は symlink を壊すので使わない。
 - 2FA、CAPTCHA、税務・銀行情報、規約同意は人の操作として残す。
 - 実行後は `.claude/rules/browser-use-cleanup.md` に従い browser / daemon / tab を閉じる。
 
@@ -44,93 +44,75 @@ product code、対応format、scope、必要roleまで確認する。
 | Amazon KDP の出品 | 無い（Amazon が公開 API を提供していない） | Playwright |
 | note の記事投稿 | 公式 API 無し。非公開エンドポイントは note が保証せず規約・アカウントリスクがある | Playwright |
 | A8 の提携申請・広告コード取得 | メディア側の該当 API は見当たらない（A8 の公開 API は広告主・ASP 事業者向けの成果確定／成果連携） | Playwright |
-| afb 成果データ取得 | [公式の成果情報API](https://www.afi-b.com/guide/api-linkage/)と[仕様書](https://drive.google.com/file/d/1-k9l9QA16sNhSzxtX7LK1A2szQx25OY7/view)（2023-12-25版、2026-09-21確認） | `AFB_API_KEY` Secretで公式APIを使う。成果取得ではCookieを移送しない。提携操作は別のローカル経路 |
+| afb 成果データ取得 | [公式の成果情報API](https://www.afi-b.com/guide/api-linkage/)と[仕様書](https://drive.google.com/file/d/1-k9l9QA16sNhSzxtX7LK1A2szQx25OY7/view)（2023-12-25版、2026-09-21確認） | 2026-10-19 に A8・楽天へ集約し、stats47 では成果を取得していない。再開するなら Cookie ではなく公式 API を使う。提携操作は別のローカル経路 |
 | もしも | **未確認**（推測で「無い」と書かない） | 現状 Playwright |
 
 ### CI 実行について
 
-> **2026-10-20 撤去 (オーナー判断)**: 認証付き計測の CI 実行 (`authenticated-measurement.yml`) と、その補完起動 (`catch-up.mjs`) を撤去した。
-> ログインは週 1 回この Mac だけが持ち、土曜 07:00 の `measurement-session-refresh.sh` → `measurement-collect-local.sh` が取得する。
-> 以下の Secrets・CI 再ログイン・artifact・補完起動の記述は旧仕様で、残っている CI 専用のコードとあわせて `MEASUREMENT-MAC-DIRECT-01` で削除する。
-> 保管庫 (vault)・restore・取得範囲・鮮度の記述は Mac の取得にもそのまま当てはまる (鮮度は `MEASUREMENT_MAX_AGE_MS` = 8 日)。
-
-**Playwright 自体は CI で動く。** `pr-quality-check.yml` と `post-deploy-smoke.yml` が `ubuntu-latest`（GitHub ホストランナー）で実行している。ただし認証済みセッションを登録しても、別環境への移送可否・Reports等の追加認証・取得内容の完全性はサービス別に検証が必要。ログイン成功だけでCI収集可能とは判定しない。
+**Playwright 自体は CI で動く。** `pr-quality-check.yml` と `post-deploy-smoke.yml` が `ubuntu-latest`（GitHub ホストランナー）で実行している。ただし**ログインが要る取得は CI で行わない** (2026-10-20 オーナー判断)。認証付き計測の CI 実行 (`authenticated-measurement.yml`)・補完起動・CI 再ログインと、セッション・ID/PW を持たせていた Secrets は撤去した。セッションを CI へ移送すると KDP などが毎回入り直しを求めて失敗し、そのたびにオーナーの手が止まっていたためである。
 
 - **セルフホストランナーは本 repo では使えない。** stats47 は PUBLIC で、GitHub 公式が「セルフホストランナーは private repository のみ推奨。public repository の fork が危険なコードをランナー上で実行しうる」と警告している。
-- 認証済みセッションはサービス別にdomain allowlistで絞り、圧縮storageStateを`MEASUREMENT_SESSION_<SOURCE>` Secretsへ登録する。Cookieはread-only権限ではなくアカウント操作権限を持ちうるため、実行対象を固定済みの読み取りcollectorに限定する。public repositoryのgit・artifact・ログへstateを出さない。
-- セッションは期限切れするため、この経路でも初回作成と期限切れ時の再作成は人の操作として残る。
+- CI に残るのは、Mac が保管庫へ書いた証跡を読む復元 (`restore.mjs`。`affiliate-ga4-weekly.yml` と `fetch-metrics-weekly.yml`) だけで、そのための Secret は `MEASUREMENT_VAULT_KEY` と R2 の資格情報である。CI は保管庫へ書かない (`vault.mjs` が Mac の定期実行以外の書き込みを止める)。
 
-**採択した運用目標（2026-09-21 オーナー合意）**: 通常の取得・保存・記録照合・異常検知はCIで行い、提供元が本人認証を要求した時だけオーナーが対応する。完全な本人操作ゼロを完了条件にはしない。再認証待ちは該当sourceだけを停止し、他sourceの収集を継続する。新しい本人認証の公開後も取得・保存・記録の一致を確認するまで復旧とはしない。
+### Macでの認証付き計測
 
-この合意は運用目標の承認であって、認証の復旧や継続取得の実証ではない。欠測を0に置換せず、初回成功だけで継続運用完了にしない。有料環境の新設・外部への問い合わせ送信・アカウント設定変更は別途承認を要し、2FA/CAPTCHAの自動突破や拒否済み認証での再接続反復は行わない。残る受入条件は`.claude/todo/backlog.md`の`AUTHENTICATED-MEASUREMENT-ACTIVATION-01`で管理する。
+ログインが要る取得元 (A8・楽天・note・GSC の画面・KDP) は、毎週土曜の週次レビューの最初に Mac が取得する。`npm run weekly:collect` の 1 段目 `scripts/scheduled/measurement-session-refresh.sh` がログインを保ち直し、続けて `measurement-collect-local.sh` が定期実行専用の clone で取得して develop へ記録する。周期と、セッション中のエージェントが記録から読む決まりは `.claude/rules/recorded-measurement-first.md` が正典。
 
-`authenticated-measurement.yml`が毎週木曜JST18:20に (2026-10-20 に日次から週次へ。`.claude/rules/recorded-measurement-first.md`) GitHub hosted Ubuntu + Playwright Chromium + Xvfbで実行する。
-`main`/`develop`だけを許可し、PR/forkではSecrets付きcollectorを起動しない。投稿・申請・出版・振込・設定変更は対象外。
-初回のdevelop workflow変更pushでも起動するが、schedule有効化にはmainへの反映が必要。
+- ログインとセッションは Mac の専用 profile だけが持つ。`bootstrap-session.mjs` が profile から取り出した state を取得元の domain allowlist で絞って `.local/authenticated-measurement/<source>.bootstrap` (mode 600) に置き、`collect.mjs` がそれを一時 Playwright context へ読み込む。state を git・ログ・GitHub Secrets・保管庫へ出さない。
+- Cookie は read-only 権限ではなくアカウント操作権限を持ちうるため、実行対象を固定済みの読み取り collector に限定する。投稿・申請・出版・振込・設定変更は対象外。
+- 提供元が本人認証を要求した取得元は、その週は判定不能にする。土曜のレビューの場でオーナーが入り直して取り直すか、次の週を待つ。2FA/CAPTCHA の自動突破や、拒否された認証での再接続の反復は行わない。他の取得元は独立して継続する。
+- 欠測を 0 に置換せず、初回成功だけで継続運用完了にしない。
 
 | 対象 | 固定の読み取り範囲 | 完了と混同しないもの |
 |---|---|---|
-| もしも | site ID照合後の期間別成果 | 帰属不明・確定待ちを確定収益にしない |
 | A8 | 口座照合、サイト別月次CSV、reject検査 | 複数サイト共用口座の全体値をstats47にしない。個別案件EPCは別契約 |
-| afb | 公式APIでstats47の直近28日成果を発生日/確定日別に取得。要求site IDと全行のsite IDを照合 | 両系列は重なるため足さない。承認/未承認/却下を分離し、報酬を純収益・入金にしない。提携状態はCIの取得対象外 |
+| 楽天 | 管理画面と同じ JSON の当月・前月の成果 | 報酬を純収益・入金にしない |
 | note | 帰属・期間・全ページ・合計・公開カタログ・カバーの照合 | 欠落記事はnull。不完全データを全件成功にしない |
 | GSC | property照合、概要と5分類の詳細CSV。ZIP内カテゴリ・件数・URLのサイト帰属をingestで照合 | APIの検索パフォーマンスとは別経路。概要CSVの成功を詳細CSV成功にしない。UI exportの上限は各分類1,000行 |
 | KDP | known ASINで口座照合、登録書籍の出版状態、昨日の注文/KENP/電子書籍ロイヤリティ見積り、月別の電子書籍/KENPロイヤリティ | Reportsは別認証。現版/旧版ASINと著者名を照合し共用口座の他サイト書籍を除外。月次ロイヤリティを入金・税引後利益・週次純収益にしない |
 
+もしも・afb は 2026-10-19 に A8・楽天へ集約し、取得元から外した。
+
 保存先はprivate bucket `stats47-private` の `operations/authenticated-measurement/<source>/`。
 `MEASUREMENT_VAULT_KEY`によるAES-256-GCMでobject addressごとに認証し、PUT後GETの一致を検証する。
-`session.enc`（更新済み認証）、`latest-attempt.enc`、`latest-success.enc`と、UTC日付の剰余による
+`latest-attempt.enc`、`latest-success.enc`と、UTC日付の剰余による
 `runs/day-0..29.enc`（30日分の循環slot）を保持する。KDPの月次だけは`kdp/monthly/month-0..23.enc`に原本XLSX・正規化結果・SHAを24報告月の循環slotとして別保管する（税務帳簿の保存契約ではない）。無制限に履歴を増やさず、公開custom domainへ置かない。
-認証拒否は固定`auth-recovery.enc`へ本人認証世代と失敗時刻を記録する。同じ世代・古い世代ではブラウザを開かず、`collectionAttempted:false`と`recovery:awaiting_reauthentication`を記録する。待機証跡は固定`latest-blocked.enc`に分離し、最後に実際の画面で失敗した日の証跡を待機ログで上書きしない。新しい本人認証の公開後に次回CIで再開し、自動refreshや時間経過だけでは解除しない。他sourceは独立して継続する。
-vault keyはR2 credentialsとは別Secret。初回端末の`.local/authenticated-measurement/vault-key`を保持し、
+セッションは保管庫へ置かない。ブラウザを開く前に止まった試行 (セッションを取り出せない等) の証跡は固定`latest-blocked.enc`に分離し、最後に実際の画面で失敗した日の証跡を上書きしない。
+vault keyはR2 credentialsとは別。初回端末の`.local/authenticated-measurement/vault-key`を保持し、
 紛失時に無断でrotateしない。認証・生データの漏洩時は本書のSecurity incidentに従う。
 
 gitに残すのは`data/authenticated/latest.json`の対象別成否・時刻・固定理由・証跡hashだけ。
-失敗は固定`authenticated-measurement-alert`へupsertし全対象復旧でcloseする。別系統の週次レビューの CI の健全性 (`weekly:audits` の ci-health)
+失敗は固定`authenticated-measurement-alert`のIssueへupsertし全対象復旧でcloseする (`measurement-collect-local.sh`)。別系統の週次レビューの CI の健全性 (`weekly:audits` の ci-health)
 も鮮度を確認する。週次summary/reviewもこの状態を読み、古い成功や未取得を実測0にしない。
-さらに同監視は認証付き計測の初回未発火・古いscheduleを予定時刻から6時間の猶予で検知する（GitHubの起動時刻保証ではなく運用上の検知猶予）。push/manualの成功でschedule異常を消さない。翌朝の既存health実行で、期限超過かつ同期間のrun・進行中runが無い場合だけ固定workflowをmainへcatch-up dispatchする。`data/ci/authenticated-catchup.json`の予定枠をContents APIのSHA比較で先に予約し、API一覧への反映遅延やPOST応答喪失でも同じ枠を再送しない。予約/dispatch失敗は監視Issueへ残し、成功した補完起動もschedule成功とは呼ばない。GitHub全体の停止は同じ基盤の監視では解消できず、外部監視は別の承認・設計が必要。
-収集範囲（capability）・対象source・実行ID・観測時刻が一致しないstatusは成功にしない。
-再実行は同名artifactが残り、download側の同名除去が古い結果を選ぶことがある。対処はartifact名`authenticated-status-<source>-<runAttempt>`と中のファイル名`<source>-<runAttempt>.json`の両方を分離し、集約で最大attemptを選ぶこと。ファイル名だけの変更では未解決。最新attemptが失敗・不正なら古い成功に戻さず、収集jobの失敗中は警告をcloseしない（2026-09-21 CI `35560007703` attempts 3/4のdownloadログとgit記録の不一致で確認、回帰テスト追加）。
-afbは`site-conversion-outcomes`だけを受理し、旧`partnership-status`成功では成果取得を充足しない。
-公式APIは本日から30日以内の参照に限られるため、前日までの28日を毎日2回（発生日/確定日）取得する。
-partner IDは`affiliate-asp.json`の`asps.afb.api`、site IDは同設定の既存`sites.stats47`を使う。
-全行の帰属・成果ID重複・基準日・承認状態・報酬数値・レスポンス形式を検証し、APIエラーを空配列にしない。
-HTTP成功時のJSON本文は配列として扱う。2026-09-21の実応答は`[]`で、仕様表の`response`を外側のJSONキーとは扱わない。エラーobject・不明な形式は停止する。非ゼロ明細の形式は公式仕様に基づくfixtureで検証し、実データが出た時も同じgateを通す。
-`restore.mjs afb`は正規化成果だけを`.local/authenticated-measurement/restored/afb.json`へ復元する。
-APIキーはオーナー承認を得てGitHub Actions Secret `AFB_API_KEY`へ登録し、git・ログ・artifact・vaultへ書かない。
-認証エラーはキーと公式設定を照合する。Cookie再ログインへのfallbackや無断再発行はしない。
-復元側もcapabilityを照合する。人間ログイン時刻を`bootstrapCapturedAt`として保持し、古いログイン由来のCI更新が新しいSecretを上書き選択しない。世代情報のない旧sessionはSecretより優先しない。
-KDPはknown ASINで本棚の口座を照合後、全書籍の状態巡回より先にReports認証を確認する。巡回後の日次・月次Reports取得と検査まで成功して初めて認証更新を保存する。本棚だけ成功した試行でReports未認証のsessionを保存しない。本人ログインの`--reports`もEnterだけではexportせず、Reportsの表示を確認する。
+収集範囲（capability）・対象source・実行ID・観測時刻が一致しないstatusは成功にしない。同じ実行に複数の試行があれば最大の試行番号を選び、それが失敗・不正なら古い成功に戻さない。
+復元側もcapabilityを照合する。
+KDPはknown ASINで本棚の口座を照合後、全書籍の状態巡回より先にReports認証を確認する。本人ログインの`--reports`もEnterだけではexportせず、Reportsの表示を確認する。
 Reportsの遷移直後のURLだけでは認証失敗と断定しない。実画面の「昨日」tabを最大30秒待ち、表示と`https://kdpreports.amazon.co.jp`の完全一致を確認する。待機後もsign-inなら`auth_required`で停止し、初期redirectの有無・最終origin/path・password欄の表示有無だけを暗号化証跡へ記録する。URL query・Cookie・入力値は診断へ含めず、フォーム送信・認証保護の回避は行わない。成功時も初期redirectの有無を記録し、待機処理が成功原因だったかを証拠で区別する。
-認証の継続利用は初回成功だけで完了としない。検証中は同じログイン由来のstateをローカルprobeとCIで並行使用せず、CIを直列に2回実行し、更新済みprivate R2 sessionを次のrunnerで再利用できることを確認する。再ログイン要求を受けたstateを加工したり、認証保護を無効化して継続しない。
+再ログイン要求を受けたstateを加工したり、認証保護を無効化して継続しない。
 KDPの昨日値は速報値で、注文等はマーケットプレイス現地日付、KENPはUTC。正規化は各recordの`dateBasis`に保持する（[公式Dashboard](https://kdp.amazon.com/en_US/help/topic/GX7EGDFGS9CZCA2F)、2026-09-21確認）。遅延や再集計がありうるため、日次値の単純合算で確定週次売上を作らない。確定収益の元資料は毎月15日前後に作成される[月別のロイヤリティ](https://kdp.amazon.co.jp/ja_JP/help/topic/G200641190)。ASIN・通貨別の月次収益であり、共有口座の支払い総額や週次純収益にそのまま転記しない。
 月次collectorはJST15日以降は前月、14日までは前々月を要求し、実画面の選択月・総収益の`N/A`不在・ダウンロード名・全sheetの販売期間と列を照合する。日付だけで確定とは判定せず、未発行や形式変更なら停止する。現版/旧版ASINと著者を照合し、未写像のstats47書籍・重複・注文数と返品数の不整合を拒否する。通貨を合算せず、KU端数と返品の負額を保持する。Prime Readingボーナス・入金・税引後利益は対象外。未観測の書籍を0埋めせず、`sales-ledger`の週次純収益へ自動転記しない。
 日本語の電子書籍/KENPの2sheetを実機契約とし、紙書籍・未知のボーナス等の新sheetは黙って捨てずschema errorにする。原本はprivate R2だけに残し、`restore.mjs kdp`は日次・月次を分離した正規化`status.json`だけを`.local/authenticated-measurement/restored/kdp.json`へ復元する。旧日次のみのcapabilityは月次取得の成功に流用しない。
-過去月は`node .claude/scripts/measurement/restore.mjs kdp --month YYYY-MM`で正規化結果だけを`restored/kdp-monthly-YYYY-MM.json`へ復元する。月の一致と原本SHAを再検査し、循環slotが別月へ上書き済みなら停止する。履歴復元には最新試行の48時間鮮度を要求しないが、現在の収集成功や認証有効性を証明するものではなく、最新結果を上書きしない。
-もしも/A8はaffiliate週次、GSCはcoverage週次がprivate R2からallowlist化した入力だけを復元する。
-初回成功後は最新試行の失敗・48時間超で復元を止め、古いgit入力へのfallbackはしない。
-noteだけは`node .claude/scripts/measurement/restore.mjs note --inventory-only`で棚卸し専用の`restored/note-inventory.json`を復元できる。記事行の欠落以外に異常が無く、帰属・全ページ・合計・24時間鮮度・カバー照合・集合・null保持・最新試行の証跡SHAが一致した場合だけ`inventoryAvailable:true`とする。全体は`report_incomplete`・`metricsAvailable:false`のまま、通常の復元先は更新せず、全件KPI・効果判定には使わない。復元結果の全行も`baselineEligible:false`に固定する。カバー監査に無い欠測記事もplaceholderで保持し、unknown/investigateにする。
+過去月は`node .claude/scripts/measurement/restore.mjs kdp --month YYYY-MM`で正規化結果だけを`restored/kdp-monthly-YYYY-MM.json`へ復元する。月の一致と原本SHAを再検査し、循環slotが別月へ上書き済みなら停止する。履歴復元には最新試行の鮮度を要求しないが、現在の収集成功や認証有効性を証明するものではなく、最新結果を上書きしない。
+A8・楽天はaffiliate週次、GSCはcoverage週次がprivate R2からallowlist化した入力だけを復元する。
+初回成功後は最新試行の失敗・鮮度切れ (`MEASUREMENT_MAX_AGE_MS` = 8 日超) で復元を止め、古いgit入力へのfallbackはしない。
+noteだけは`node .claude/scripts/measurement/restore.mjs note --inventory-only`で棚卸し専用の`restored/note-inventory.json`を復元できる。記事行の欠落以外に異常が無く、帰属・全ページ・合計・鮮度・カバー照合・集合・null保持・最新試行の証跡SHAが一致した場合だけ`inventoryAvailable:true`とする。全体は`report_incomplete`・`metricsAvailable:false`のまま、通常の復元先は更新せず、全件KPI・効果判定には使わない。復元結果の全行も`baselineEligible:false`に固定する。カバー監査に無い欠測記事もplaceholderで保持し、unknown/investigateにする。
 
 ```bash
-# ログイン済み専用profile/stateをSecretsへ送る（gh authが必要）。値はstdinで送り表示しない。
-npm run measurement:bootstrap -- note --publish
-# 初回/期限切れは専用ブラウザを開き、人がログイン・2FAを完了する。
-npm run measurement:bootstrap -- moshimo --login --publish
-# KDP本棚とは別のReports認証（本棚へのログインも必要）
-npm run measurement:bootstrap -- kdp --login --reports --publish
-# Googleは通常Chromeの専用profileで本人ログイン後、その専用Chromeを終了してexportする。
+# 週次の取得 (ログインの保ち直し → 取得 → develop への記録)。土曜の週次レビューの最初に回す。
+npm run weekly:collect
+# 切れた取得元に本人が入り直す (2FA を含め、開いたブラウザで最大 10 分待つ。KDP は Reports の認証まで待つ)
+node .claude/scripts/measurement/refresh-session.mjs kdp --wait-human
+# Googleは通常Chromeの専用profileで本人ログイン後、その専用Chromeを終了する。取得時に profile から取り出す。
 node .claude/scripts/google-admin/cli.mjs login
-npm run measurement:bootstrap -- gsc --from-profile --publish
-# 保存stateではなくprofileを使う場合
-npm run measurement:bootstrap -- moshimo --from-profile --publish
+# 入り直したあと、ログインの保ち直しと取得だけをやり直す
+bash scripts/scheduled/measurement-session-refresh.sh
 npm run measurement:status -- --check
 npm run measurement:test
 ```
 
-worktreeから既存profileを更新する場合だけ`--root /path/to/main-checkout`を指定する。同じprofileの別processは閉じる。
-bootstrapはセッション移送であり、取得成功の証明ではない。次のCIでaccount assertと実レポートを確認する。
+worktreeから既存profileを使う場合だけ、`bootstrap-session.mjs`に`--root /path/to/main-checkout`を指定する (`collect-local.mjs`は`--main-root`で渡す)。同じprofileの別processは閉じる。
+profile からの取り出しはセッションの受け渡しであり、取得成功の証明ではない。取得でaccount assertと実レポートを確認する。
 Googleの通常Chrome profileは一時コピーからexportし、Playwrightの`--password-store=basic` / `--use-mock-keychain`を除外してOSの暗号化方式を維持する。元profileをテスト用既定値で直接開かない。これは保存方式の互換性対策であり、認証拒否・CAPTCHAを回避するものではない。
-Cloudflare Browser Runへ置き換えてもログイン・2FA・Cookieの期限は解消しないため、まず既存CLIを再利用する。
 
 ### Playwright でも取得できないもの（提供側が封じた機能）
 
@@ -154,8 +136,9 @@ MCP が有用なのは**セレクタ確定の探索工程**である。実機を
 
 | `.local/` 配下                                        | サービス             | 主な利用箇所                                                            | 固定契約                                                |
 | ----------------------------------------------------- | -------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------- |
-| `playwright-x-profile/`                               | X                    | `.claude/skills/sns/publish-x/`、`.claude/skills/sns/update-x-profile/` | `--expect-account` で handle を照合。切れたら `refresh-session.mjs x` (キーチェーン `stats47-measurement-x`、launchd 毎日) が Playwright 同梱 Chromium で 1 回だけ再ログインする。Chrome 本体で開かない (Cookie の暗号化方式が変わる)。state は CI へ渡さない |
+| `playwright-x-profile/`                               | X                    | `.claude/skills/sns/publish-x/`、`.claude/skills/sns/update-x-profile/` | `--expect-account` で handle を照合。切れたら `refresh-session.mjs x` (キーチェーン `stats47-measurement-x`。土曜の週次の取得 `weekly:collect` の最初と、必要なときに) が Playwright 同梱 Chromium で 1 回だけ再ログインする。Chrome 本体で開かない (Cookie の暗号化方式が変わる)。state は CI へ渡さない |
 | `playwright-ig-profile/`                              | Instagram            | `.claude/scripts/sns/delete-instagram-posts.ts`                         | headed login を保持                                     |
+| `playwright-threads-profile/` | Threads | `.claude/skills/sns/publish-threads/` | ログインはオーナーが行う (自動ログインの経路は無い)。期限は日次の事前確認が `sessionid` で見る |
 | `playwright-a8-profile/` + `playwright-a8-state.json` | A8.net               | `.claude/skills/ads/scout-asp/scripts/`、`.claude/scripts/ads/`         | storage state の再注入を併用                            |
 | `playwright-moshimo-profile/`                         | もしもアフィリエイト | `.claude/scripts/ads/`                                                  | `config/affiliate-asp.json` の site ID を照合   |
 | `playwright-afb-profile/`                             | afb                  | `.claude/scripts/ads/`                                                  | login から完了まで同一 headed process                   |
@@ -200,6 +183,23 @@ GA4 Admin API、AdSense read API、CIの承認境界、設定変更のallowlist�
 このため browser 操作は原則として main checkout から実行する。別 OS または別 clone で動かす場合は、空 profile を正しい profile と誤認していないか、対象 script の `PROFILE_ROOT` / `PROFILE_DIR` を先に確認する。
 
 profile path の実装を統一する変更は、全サービスを一括置換せず、account assertion とログイン復旧をサービス単位で検証する。
+
+## agent が使ってよい範囲 (2026-11-14 オーナー決定)
+
+「ログインが要る」ことを理由に作業を止めない。止める理由になるのは、サービス側の制約で人の操作が要るときだけである。
+
+| 操作 | agent | 根拠 |
+|---|---|---|
+| 保存済みセッション (profile / storage state) での画面操作 | 実行してよい。先に `npm run measurement:status -- --preflight --json` で、そのサービスが `usable` かを確かめる | 値を読まずに済む |
+| セッションが切れたときの再ログイン 1 回 | `refresh-session.mjs <src>` を実行してよい。キーチェーンを読むのはこのスクリプトで、agent は ID・パスワードの値を読まない・出力しない・入力しない | 自動ログインの承認範囲 (本文書「原則」) |
+| 2 段階認証・CAPTCHA・追加確認・失敗印 `.autologin-failed` | 止めて、`refresh-session.mjs <src> --wait-human` をオーナーへ渡す。迂回しない | 人の確認が要る |
+| 税務・銀行・規約同意・資格情報の登録 | 行わない (オーナーの作業) | 本文書「禁止事項」 |
+
+- セッションが使えても、公開・送信・申請・出品などの外へ出る操作は、従来どおりオーナーの承認が要る (`todo-standards.md` §7)。
+  カードには `[待ち:承認]` を付け、`[待ち:ログイン]` は上の表の下 2 行に当たるときだけ付ける。
+- 計測値を読むための管理画面は、従来どおり土曜の記録から読む (`recorded-measurement-first.md`。hook が止める)。
+- 期限の事前確認は launchd の日次 (`scripts/scheduled/com.stats47.session-preflight.plist`) が行い、期限が近い・切れている・
+  失敗印ありを通知する。状態は管理画面 `/ops/auth` の「保存済みセッション」に出る。cookie の期限は上限で、提供元が先に切ることはある。
 
 ## ログイン復旧
 

@@ -92,7 +92,9 @@
       "metricKeys": [
         "academic-achievement-test-average-rate"
       ],
-      "surveyIds": [],
+      "surveyIds": [
+        "academic-achievement-survey"
+      ],
       "geoScopes": [
         "prefecture-set"
       ],

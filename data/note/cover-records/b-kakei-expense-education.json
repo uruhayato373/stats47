@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-kakei-expense-education",
+  "production": {
+    "id": "NCI-00509",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "教育費の県差は\n8.7倍か、4.2倍か",
+      "subline": "1年の順位を信じすぎないために",
+      "subject": "無地の表紙の教科書を積み、その横に鉛筆と砂時計を置く。人物・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。本や紙に文字・数字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "本文確認2026-11-05。教育費の1位と47位の倍率は2024年8.7倍、2025年6.0倍、2021〜2025年の5年平均4.2倍。1年の値には調査の振れが強く混ざる。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "d55bf3448c3ef8609d2debdc992cb5fa10e3a2f951e2ecc7b01ec2420beaa53f",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-expense-education/revisions/d55bf3448c3ef8609d2debdc992cb5fa10e3a2f951e2ecc7b01ec2420beaa53f.png"
+      },
+      "bytes": 1961424,
+      "id": "d55bf3448c3ef8609d2debdc992cb5fa10e3a2f951e2ecc7b01ec2420beaa53f",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-6f21355184fb",
+      "createdAt": "2026-11-04T23:07:51.567Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "1beeb375c62cbc7ad471d9c1b4c5286d2ec8107b77062aae493d71a21fceaaf4"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸と幅320pxで全文・題材を確認。誤字・追加文字・文字切れ・重なりなし、人物と架空の図なし、本文の問いに一致",
+        "reviewedAt": "2026-11-04T23:07:55.449Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "1beeb375c62cbc7ad471d9c1b4c5286d2ec8107b77062aae493d71a21fceaaf4",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-expense-education/inputs/1beeb375c62cbc7ad471d9c1b4c5286d2ec8107b77062aae493d71a21fceaaf4.json"
+          },
+          "bytes": 8520
+        },
+        "production": {
+          "id": "NCI-00509",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "6f21355184fb5c2d51bc2068c4e9e433ae2c1ebe7d2c22c798b1a014c71f63e1"
+        }
+      }
+    },
+    {
+      "sha256": "1856206b963d8e2baaad7e0496fa2cb919ff881735469916bc607910594cf9a8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-expense-education/revisions/1856206b963d8e2baaad7e0496fa2cb919ff881735469916bc607910594cf9a8.png"
+      },
+      "bytes": 502566,
+      "id": "1856206b963d8e2baaad7e0496fa2cb919ff881735469916bc607910594cf9a8",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-04T23:39:16.381Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/332356324/rectangle_large_type_2_aea2fb42072643eff6d48148544586ae.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "1856206b963d8e2baaad7e0496fa2cb919ff881735469916bc607910594cf9a8"
+      }
+    }
+  ]
+}

@@ -102,6 +102,8 @@ class×model の成功率を出し、`guards` を通ったときだけ policy �
 | **completed と記録したのに行が残る** (順序を逆にする) | 同上。この run は push まで到達しないので、**実装差分も ledger もまとめて破棄される**。だから prompt は「消してから記録する」順序で、消せなければ `deferred` に落とす (2026-08-20 に 16 分・$16.21 を失った) |
 | 処理対象外の ID を巻き込む削除 | 同上 (`removal-out-of-queue`) |
 | ledger の直接編集 | CLI 経由のみ (agent の禁止事項に明記)。直接編集は証拠の捏造 |
+| 並行した記録で先の記録が消える | `record-backlog-outcome.mjs` がロックファイルで 1 プロセスずつに絞り、一時ファイルからの rename で書く |
+| 割当表に無い class の記録 | 同 CLI が `backlog-routing-policy.json` の `classes` に無い名前を拒否する |
 | improvements / memory / learned への write | verify の `FORBIDDEN_PATH_PATTERNS` |
 | `.env` 等の秘密 | 同上 + workflow の `disallowedTools` |
 | owner 待ちの自動処理 | `preClassify` が needs-owner へ固定 |
@@ -114,12 +116,20 @@ class×model の成功率を出し、`guards` を通ったときだけ policy �
 
 ---
 
-## 4.5 CI ループ (`backlog-loop-daily.yml`・手動起動のみ)
+## 4.5 CI ループ (`backlog-loop-daily.yml`・週 1 回)
 
-**2026-09-27 オーナー判断で日次の自動実行 (JST 01:30) を止めた。** 何を処理するかは対話セッションで
-`.claude/todo/backlog.md` の優先順位を見て一緒に決める。この workflow は手動で回すときだけ使う
-(GitHub 側でも無効化済み。使う前に `gh workflow enable backlog-loop-daily.yml` が要る)。
-自動起票される `GSC-COV-*` / `UI-FIX-*` / `YEAR-COV-*` カードも、セッションで選んだときに処理する。
+**経緯**: 2026-09-27 にオーナー判断で日次の自動実行 (JST 01:30) を止めた。理由は、優先順位と無関係なカードが上から無人で
+処理されたこと。2026-11-14 に、選び方を直したうえで週 1 回 (日曜 01:30 JST・土曜の週次レビューの後) の再開をオーナーが承認した。
+GitHub 側の有効化 (`gh workflow enable backlog-loop-daily.yml`) はオーナーの操作で、main に出るまで新しい schedule は効かない
+(年間計画のカード `BACKLOG-LOOP-WEEKLY-ENABLE-01`)。
+
+**対象と順番** (`queue-core.cjs`。確認は `node .claude/scripts/backlog-loop/build-backlog-queue.mjs --dry-run`):
+
+- 対象は、`[実行:sweep]` か `[実行:機械]` を宣言し、`[待ち:X]` が 1 つも無く、`[進行中]` でも 🟣 でもないカードだけ。
+  待ちのあるカード・対話のカード・年間計画 (`annual.md`) のカードは処理しない。
+- 並び順は、種類が不具合 → 今月の重点領域 (`monthly.md` の `focus_domains`) → tier (🔴→🟡→🟢) → 起票日の古い順 → ID。
+  選んだ理由は queue の `selection.reason` に入り、実行役が ledger の evidence の先頭に書く。
+- 重点領域が読めないときは警告を出す (黙って全部を重点外にしない)。
 
 無人で回す場合の本体。`.claude/prompts/ci/backlog-loop-routine.md` を sonnet に渡し、
 **verify → リポジトリゲート → push** の順で進む。どこかで落ちたら push しない
@@ -128,7 +138,7 @@ class×model の成功率を出し、`guards` を通ったときだけ policy �
 
 | 項目 | 値 | 理由 |
 |---|---|---|
-| 枠 | なし (手動起動のみ。2026-09-27 まで `30 16 * * *`) | 手動で回すときも blog / ai-content と同じ Max 枠を共有するので実時間で重ねない |
+| 枠 | `30 16 * * 6` (日曜 01:30 JST・週 1 回。2026-09-27 まで日次 `30 16 * * *`) | blog / ai-content と同じ Max 枠を共有するので実時間で重ねない |
 | 件数 | 2 (timeout 60 分) | 予算式 `(固定 15 + 件数 × 15) × 1.25 ≤ timeout`。**件数より枠で増やす** (ai-content が limit 10 で timeout に当たり 0 件になった実測がある) |
 | run 本体のモデル | sonnet 固定 | base-action の `--model` は run 全体に効く。難物だけ Agent tool で `model: fable` へ委譲する |
 | draft-pr class | この run では着手しない | `impl-large` / `indicator-expansion` は `skipped` で記録 (quarantine を増やさない) |

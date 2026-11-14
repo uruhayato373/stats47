@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { formatReadableMagnitude, formatUnitForDisplay, normalizePercentInText } from "../unit-display";
+import { formatReadableMagnitude, formatUnitForDisplay, normalizeUnitsInText } from "../unit-display";
 
 // 2026-09-25 UI 全面点検: 全角の単位が「h a」「k g」と離れて見え、％と%・m2 と m² が混在していた
 describe("formatUnitForDisplay", () => {
@@ -28,11 +28,43 @@ describe("formatUnitForDisplay", () => {
   });
 });
 
-describe("normalizePercentInText", () => {
+describe("normalizeUnitsInText", () => {
   it("数字の直後の全角％だけを半角にし、ほかの全角文字は残す", () => {
-    expect(normalizePercentInText("全体の約14.35％です（推計）")).toBe("全体の約14.35%です（推計）");
-    expect(normalizePercentInText("100 ％になる")).toBe("100%になる");
-    expect(normalizePercentInText("％の表記")).toBe("％の表記");
+    expect(normalizeUnitsInText("全体の約14.35％です（推計）")).toBe("全体の約14.35%です（推計）");
+    expect(normalizeUnitsInText("100 ％になる")).toBe("100%になる");
+    expect(normalizeUnitsInText("％の表記")).toBe("％の表記");
+  });
+
+  // CONTENT-FOLLOWUP-01: 本文の「単位は％です」が数字に続かないので残り、同じ記事の「96.6%」と混在していた
+  it("単位を宣言する「単位は％」「単位：％」も、数字の後と同じ半角にする", () => {
+    expect(normalizeUnitsInText("2024年の値で、単位は％です。")).toBe("2024年の値で、単位は%です。");
+    expect(normalizeUnitsInText("単位は％ポイントです")).toBe("単位は%ポイントです");
+    expect(normalizeUnitsInText("（単位：％）")).toBe("（単位：%）");
+    // 単位の宣言でない全角の％は残す
+    expect(normalizeUnitsInText("％表示の値")).toBe("％表示の値");
+  });
+
+  // 2026-11-14: AI 解説の「8,569ｈａ」が表の「8,569ha」と並び、FAQ の「46％」が表の「46%」と混在していた
+  it("数字の直後の全角の英字の単位を半角にする", () => {
+    expect(normalizeUnitsInText("最大値と最小値の差は8,569ｈａで、最大は")).toBe("最大値と最小値の差は8,569haで、最大は");
+    expect(normalizeUnitsInText("1人あたり 12.5 ｋｇ を消費")).toBe("1人あたり 12.5 kg を消費");
+  });
+
+  // 2026-11-14: AI 解説が「1,091.78km2」「21,771千m3」と書き、同じページの表は「km²」「千m³」だった
+  it("数字の直後の面積・体積の単位は指数を上付きにする (千・万の接頭辞をはさんでもよい)", () => {
+    expect(normalizeUnitsInText("最も広いのは東京都で、1,091.78km2となっています")).toBe("最も広いのは東京都で、1,091.78km²となっています");
+    expect(normalizeUnitsInText("東京都で21,771千m3です。徳島県は57千ｍ3")).toBe("東京都で21,771千m³です。徳島県は57千m³");
+    expect(normalizeUnitsInText("家賃は3.3m2当たり")).toBe("家賃は3.3m²当たり");
+  });
+
+  it("数字の直後でない m2・型番のような英数字は変えない", () => {
+    expect(normalizeUnitsInText("総面積km2当たり")).toBe("総面積km2当たり");
+    expect(normalizeUnitsInText("国道12km20m地点")).toBe("国道12km20m地点");
+  });
+
+  it("数字に続かない全角の英字と、全角の括弧・句読点は変えない", () => {
+    expect(normalizeUnitsInText("ＧＤＰは3年で（約）１割増")).toBe("ＧＤＰは3年で（約）１割増");
+    expect(normalizeUnitsInText("")).toBe("");
   });
 });
 

@@ -1,0 +1,260 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-kakei-advancement-employment",
+  "production": {
+    "id": "NCI-00133",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "進学率だけで\n進路は読める？",
+      "subline": "進学と就職を合わせて見る\n2023年度・学校基本調査",
+      "subject": "緑とクリーム、明るい黄色。右側に白紙の開いた本と無地の仕事用かばんを大きく一点ずつ、同じ高さの机に並べる。進学と就職という選択肢を静物で伝え、優劣を表す段差・天秤・分岐図・矢印を足さない。人物・顔・人の手・動物・キャラクター・マスコット・擬人化は一切描かない。地図、架空の統計グラフ、数式、表彰台、順位図、製品ロゴ、指定外の文言を描かない。紙面・タグ・ラベル・器具の目盛りは完全な無文字。左側の見出しと補足2行を、幅320pxでも読める太さと大きさにし、四辺の余白を守る。",
+      "evidence": "https://note.com/stats47/n/n2d53f8a5fbb8 2026-10-15公開本文確認。公開本文は2023年度の学校基本調査。進学率と卒業者に占める就職者割合を同じ分母で比較し、単独の進学率で教育水準を評価しない読み方を説明。合算は独自指数で、公的な教育水準や就職内定率ではない。カバーに率・順位・指数値・優劣は載せない。 人物・キャラクターは使わない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "527c41854ff04930d336a81bc856696a624d4dfd3f47c416542ab4ffed3dea41",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-advancement-employment/revisions/527c41854ff04930d336a81bc856696a624d4dfd3f47c416542ab4ffed3dea41.png"
+      },
+      "bytes": 38262,
+      "id": "527c41854ff04930d336a81bc856696a624d4dfd3f47c416542ab4ffed3dea41",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:22.650Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312772317/rectangle_large_type_2_d7e3452446181671883e1db01739aa81.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "527c41854ff04930d336a81bc856696a624d4dfd3f47c416542ab4ffed3dea41"
+      }
+    },
+    {
+      "sha256": "1f7ef05e40066b5cd6d3f782fd455ae8996b22d6368e28be5f8bb451c8d1b17b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-advancement-employment/revisions/1f7ef05e40066b5cd6d3f782fd455ae8996b22d6368e28be5f8bb451c8d1b17b.png"
+      },
+      "bytes": 79492,
+      "id": "1f7ef05e40066b5cd6d3f782fd455ae8996b22d6368e28be5f8bb451c8d1b17b",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:44:36.539Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "dfaf3e40aea533b5aa0208753a39eda4dff2b056636ea86fc84a7a68f28501d6"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で問いと記事固有の図(公開R2の記事画像)が確認できる",
+        "reviewedAt": "2026-10-11T11:50:48.453Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "dfaf3e40aea533b5aa0208753a39eda4dff2b056636ea86fc84a7a68f28501d6",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-advancement-employment/inputs/dfaf3e40aea533b5aa0208753a39eda4dff2b056636ea86fc84a7a68f28501d6.json"
+          },
+          "bytes": 1348
+        }
+      }
+    },
+    {
+      "sha256": "e9fe7fb22f5bb6a195bc0510d0e4fada0879a2e68b78502d63efbdad7f41b112",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-advancement-employment/revisions/e9fe7fb22f5bb6a195bc0510d0e4fada0879a2e68b78502d63efbdad7f41b112.png"
+      },
+      "bytes": 82797,
+      "id": "e9fe7fb22f5bb6a195bc0510d0e4fada0879a2e68b78502d63efbdad7f41b112",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:55:48.992Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320302110/rectangle_large_type_2_52a2bfa0b9e35f63887b63a9620016c5.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "e9fe7fb22f5bb6a195bc0510d0e4fada0879a2e68b78502d63efbdad7f41b112"
+      }
+    },
+    {
+      "sha256": "779828db94ec80dcc071341569320dcf4b80bad64397ebcb3a7a97a3696cc0ce",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-advancement-employment/revisions/779828db94ec80dcc071341569320dcf4b80bad64397ebcb3a7a97a3696cc0ce.png"
+      },
+      "bytes": 34052,
+      "id": "779828db94ec80dcc071341569320dcf4b80bad64397ebcb3a7a97a3696cc0ce",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:10:25.691Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e011ad3250a1ccf04185cae3518dc5570a2eb7ca0b14c4c6259fd69ddfd88e34"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.022/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:17:21.290Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "e011ad3250a1ccf04185cae3518dc5570a2eb7ca0b14c4c6259fd69ddfd88e34",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-advancement-employment/inputs/e011ad3250a1ccf04185cae3518dc5570a2eb7ca0b14c4c6259fd69ddfd88e34.json"
+          },
+          "bytes": 1348
+        }
+      }
+    },
+    {
+      "sha256": "d1bec3d9a000569180ce41ff24ac54e936b97bb3196879073e1c38966f31c078",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-advancement-employment/revisions/d1bec3d9a000569180ce41ff24ac54e936b97bb3196879073e1c38966f31c078.png"
+      },
+      "bytes": 53854,
+      "id": "d1bec3d9a000569180ce41ff24ac54e936b97bb3196879073e1c38966f31c078",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T05:01:19.952Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323276816/rectangle_large_type_2_47878f48eddbc57e528ffd35ec3e68c6.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "d1bec3d9a000569180ce41ff24ac54e936b97bb3196879073e1c38966f31c078"
+      }
+    },
+    {
+      "sha256": "b75479b8b2c907f7839e5f7106c279aa086f0fc62cd5166ba0ed3f60668d753d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-advancement-employment/revisions/b75479b8b2c907f7839e5f7106c279aa086f0fc62cd5166ba0ed3f60668d753d.png"
+      },
+      "bytes": 2105235,
+      "id": "b75479b8b2c907f7839e5f7106c279aa086f0fc62cd5166ba0ed3f60668d753d",
+      "kind": "candidate",
+      "version": "imagegen-no-character-next10-02-20261015",
+      "createdAt": "2026-10-15T05:09:42.368Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "19774a7b27210ec0430e79db3efbb2e23f1761d75295ae0a882cbfb74631edad"
+      },
+      "review": {
+        "status": "pending",
+        "reason": null,
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "19774a7b27210ec0430e79db3efbb2e23f1761d75295ae0a882cbfb74631edad",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-advancement-employment/inputs/19774a7b27210ec0430e79db3efbb2e23f1761d75295ae0a882cbfb74631edad.json"
+          },
+          "bytes": 9133
+        },
+        "production": {
+          "id": "NCI-00133",
+          "policyId": "NCP-005",
+          "policyVersion": 2,
+          "planSha256": "de720167c0cb12e5f0e3b37a3ebbdf09326c7169a28535677541e467d13ab706"
+        }
+      }
+    },
+    {
+      "sha256": "218107cd2a37de75704ed32fa5bf7dc91296670a625a833f02ea21bec757c32e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-kakei-advancement-employment/revisions/218107cd2a37de75704ed32fa5bf7dc91296670a625a833f02ea21bec757c32e.png"
+      },
+      "bytes": 1885873,
+      "id": "218107cd2a37de75704ed32fa5bf7dc91296670a625a833f02ea21bec757c32e",
+      "kind": "candidate",
+      "version": "imagegen-category-contract-v1-20261015",
+      "createdAt": "2026-10-15T05:44:48.897Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "85be095ce75899c11968b4f1d9277318e69bfdc65c34a7f415251657578f458f"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "NCI-00133: 原寸/320pxの文字・補足・人物なし・題材を個別確認済み。家計は検証済み県主域参照と対象市・2024年・二人以上の世帯を照合。2026-10-15ユーザーが今回10件の反映を指示。",
+        "reviewedAt": "2026-10-15T05:54:57.010Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "85be095ce75899c11968b4f1d9277318e69bfdc65c34a7f415251657578f458f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-kakei-advancement-employment/inputs/85be095ce75899c11968b4f1d9277318e69bfdc65c34a7f415251657578f458f.json"
+          },
+          "bytes": 10157
+        },
+        "production": {
+          "id": "NCI-00133",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "070bcdd8be92292dda97f1e778916783c61db4905536d1ce4aeec2a035510c9f"
+        }
+      }
+    }
+  ]
+}

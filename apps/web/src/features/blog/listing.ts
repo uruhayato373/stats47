@@ -8,6 +8,7 @@
  * root barrel (`./index`) は互換性のため残す。
  */
 export { BlogArticleGrid } from './components/blog-article-grid';
+export { formatCardDate } from './utils/format-card-date';
 export {
   BlogNavigationCards,
   selectPopularBlogTags,

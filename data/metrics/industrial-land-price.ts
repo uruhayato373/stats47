@@ -25,7 +25,7 @@ export const industrialLandPrice: MetricConfig = {
     "from": 2005,
     "to": 2005,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "calculation": {
     "isCalculated": false,
     "normalizationOptions": [

@@ -1,5 +1,5 @@
 import type { RankingItem } from "./ranking-item";
-import type { RankingValue } from "./ranking-value";
+import type { RankingReferenceValue, RankingValue } from "./ranking-value";
 
 /**
  * データ出所 (survey 等)。完全DBレス Phase F で `sources` schema 型から relocate。
@@ -143,6 +143,8 @@ export interface RankingValuesKeySnapshot {
     yearCode: string;
     count: number;
     values: RankingValue[];
+    /** 順位から外した参考値 (推計の人数が下限未満)。無い年は省く */
+    referenceValues?: RankingReferenceValue[];
   }>;
 }
 

@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { GEO_LAYERS } from '@stats47/data-configs/business-plan';
 import { describe, expect, it } from 'vitest';
 

@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { fetchPrefectures, REGIONS } from "@stats47/area";
 import { describe, it, expect } from "vitest";
 

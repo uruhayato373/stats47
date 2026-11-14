@@ -24,7 +24,8 @@ const { emptyLedger, normalizeLedger, recordAttempt, OUTCOMES } = require('./led
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../../..');
-const LEDGER_PATH = path.join(ROOT, '.claude/state/backlog-loop/ledger.json');
+// テストは一時ファイルを台帳として渡す (実物の台帳に試し書きをしないため)
+const LEDGER_PATH = process.env.BACKLOG_LEDGER_PATH ?? path.join(ROOT, '.claude/state/backlog-loop/ledger.json');
 const POLICY_PATH = path.join(ROOT, '.claude/config/backlog-routing-policy.json');
 
 function getArg(flag, fallback = null) {
@@ -34,6 +35,49 @@ function getArg(flag, fallback = null) {
   return v && !v.startsWith('--') ? v : fallback;
 }
 const hasFlag = (flag) => process.argv.includes(flag);
+
+const LOCK_WAIT_MS = 15_000;
+const LOCK_STALE_MS = 30_000;
+const LOCK_RETRY_MS = 25;
+
+/**
+ * 台帳の「読む → 足す → 書く」を 1 プロセスずつに絞る。
+ * 並行して呼ぶと後から書いた側が先の記録を上書きして消す (2026-10-26 以降に消えたカード 134 枚のうち
+ * 105 枚に記録が無かった原因の 1 つ)。落ちたプロセスの残したロックは LOCK_STALE_MS で捨てる。
+ */
+function withLedgerLock(fn) {
+  const lockPath = `${LEDGER_PATH}.lock`;
+  fs.mkdirSync(path.dirname(LEDGER_PATH), { recursive: true });
+  const deadline = Date.now() + LOCK_WAIT_MS;
+  const sleeper = new Int32Array(new SharedArrayBuffer(4));
+  for (;;) {
+    try {
+      fs.closeSync(fs.openSync(lockPath, 'wx'));
+      break;
+    } catch (error) {
+      if (error.code !== 'EEXIST') throw error;
+      let ageMs = 0;
+      try {
+        ageMs = Date.now() - fs.statSync(lockPath).mtimeMs;
+      } catch {
+        continue; // 他のプロセスが今ちょうど外した
+      }
+      if (ageMs > LOCK_STALE_MS) {
+        fs.rmSync(lockPath, { force: true });
+        continue;
+      }
+      if (Date.now() > deadline) {
+        throw new Error(`台帳のロックを ${LOCK_WAIT_MS}ms 待っても取れない: ${lockPath}`);
+      }
+      Atomics.wait(sleeper, 0, 0, LOCK_RETRY_MS);
+    }
+  }
+  try {
+    return fn();
+  } finally {
+    fs.rmSync(lockPath, { force: true });
+  }
+}
 
 export function main() {
   const id = getArg('--id');
@@ -67,6 +111,17 @@ export function main() {
   }
 
   const policy = JSON.parse(fs.readFileSync(POLICY_PATH, 'utf8'));
+  // class は学習 (class×model の成功率) の集計キーなので、割当表に無い名前を台帳へ入れない
+  const knownClasses = Object.keys(policy.classes ?? {});
+  if (!knownClasses.includes(className)) {
+    console.error(`❌ --class は ${knownClasses.join('|')} のいずれか (受領: ${className})`);
+    process.exit(1);
+  }
+
+  return withLedgerLock(() => recordLocked({ id, className, outcome, gateCommands, gatePass, policy }));
+}
+
+function recordLocked({ id, className, outcome, gateCommands, gatePass, policy }) {
   const raw = fs.existsSync(LEDGER_PATH) ? JSON.parse(fs.readFileSync(LEDGER_PATH, 'utf8')) : emptyLedger();
   const { ledger, recovered } = normalizeLedger(raw);
   if (recovered && fs.existsSync(LEDGER_PATH)) {
@@ -103,8 +158,10 @@ export function main() {
     policy.limits?.quarantineThreshold,
   );
 
-  fs.mkdirSync(path.dirname(LEDGER_PATH), { recursive: true });
-  fs.writeFileSync(LEDGER_PATH, `${JSON.stringify(next, null, 2)}\n`);
+  // 書きかけの台帳を他の読み手に見せない (同じディレクトリの一時ファイルから rename)
+  const tmpPath = `${LEDGER_PATH}.${process.pid}.tmp`;
+  fs.writeFileSync(tmpPath, `${JSON.stringify(next, null, 2)}\n`);
+  fs.renameSync(tmpPath, LEDGER_PATH);
 
   console.log(`[ledger] ${id} → ${outcome} (status=${item.status}, attempts=${item.attempts.length})`);
   if (quarantined) {

@@ -37,10 +37,10 @@ test('入力が昇順でも値の降順を維持し、reverse配色で順位を�
   const rows = Array.from({ length: 12 }, (_, i) => ({ pref: `県${i}`, value: i - 6 }));
   // 負の値を含む棒は 1 列の図だけを出し、Instagram 用の縦長は作らない (generate-article-charts の isSignedBar)
   for (const svg of render(t, rows, { reverse: true }, [''])) {
-    // 1 列の図は順位を「1位 県11」の形で書く
-    const rankLabels = [...svg.matchAll(/>(\d+)位 県\d+<\/text>/g)].map((match) => Number(match[1]));
-    assert.deepEqual(rankLabels, [1, 2, 3, 4, 5, 8, 9, 10, 11, 12]);
-    assert.ok(svg.includes('>1位 県11</text>') && svg.includes('>12位 県0</text>'));
+    // 型の画像は順位の数字と県名を別の要素で書く (25be2d4d9 以降)。順位は上から、県名は同じ順に並ぶ
+    assert.deepEqual(rankBadges(svg), [1, 2, 3, 4, 5, 8, 9, 10, 11, 12]);
+    const prefs = [...svg.matchAll(/>(県\d+)<\/text>/g)].map((match) => match[1]);
+    assert.deepEqual(prefs, ['県11', '県10', '県9', '県8', '県7', '県4', '県3', '県2', '県1', '県0']);
   }
 });
 

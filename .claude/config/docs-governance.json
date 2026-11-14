@@ -76,6 +76,11 @@
       "weekly.md"
     ]
   },
+  "fixedDirectoriesOptional": {
+    ".claude/todo": [
+      "annual.md"
+    ]
+  },
   "governedDirectories": [
     "docs/00_プロジェクト管理",
     "docs/01_技術設計",
@@ -136,6 +141,33 @@
     "docs/31_note記事原稿",
     "assets/page-heroes"
   ],
+  "placement": {
+    "nestedAgentDirectories": {
+      "parents": [
+        "apps",
+        "packages"
+      ],
+      "name": ".claude"
+    },
+    "scriptsRoot": {
+      "directory": ".claude/scripts",
+      "allowedFiles": [
+        "tsconfig.checkjs.json",
+        "tsconfig.json"
+      ]
+    },
+    "codeAdjacentDocs": {
+      "roots": [
+        "apps",
+        "packages"
+      ],
+      "allowedUppercaseNames": [
+        "README.md",
+        "AGENTS.md",
+        "CLAUDE.md"
+      ]
+    }
+  },
   "freshness": [
     {
       "file": ".claude/todo/monthly.md",
@@ -176,11 +208,25 @@
       ".claude/todo/improvements.md",
       ".claude/todo/backlog.md"
     ],
+    "annual": {
+      "file": ".claude/todo/annual.md",
+      "type": "annual-plan"
+    },
+    "waitPlacement": {
+      "severity": "error"
+    },
+    "untriagedMaxAgeDays": 30,
+    "backlogTargetCards": 200,
     "idPattern": "^[A-Z0-9]+(?:-[A-Z0-9]+)+$",
     "allowedImprovementStatuses": [
       "pending",
       "in-progress",
       "effect/pending"
-    ]
+    ],
+    "sizeBudget": {
+      "maxFileBytes": 1048576,
+      "warnFileRatio": 0.9,
+      "maxCardBytes": 8192
+    }
   }
 }

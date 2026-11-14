@@ -260,6 +260,17 @@ const { showTooltip, showStackedTooltip, hideTooltip, updateTooltipPosition } = 
 - フルサイズ: `packages/visualization` の各 Props 型に従う
 - 軸・軸タイトル・SVG 内凡例を描く D3 チャートは、描画 effect の末尾で `fitSvgViewBox(svg, width, height)`（`packages/visualization/src/d3/utils/fit-svg-viewbox.ts`）を必ず呼び、はみ出したテキスト分だけ viewBox を広げる。比率マージンの調整で見切れを直さない（契約テスト `fit-svg-viewbox.test.tsx` が未呼び出しを検出する）
 
+### 文字の大きさ (縮小表示でも画面上で 10px 以上)
+
+固定幅の viewBox を `w-full` で縮める図は、スマホの幅 (表示幅 約 293〜340px) で 12 の文字が約 5px になる。
+SVG の中の文字 (軸の目盛り・単位・ラベル) は、画面上で 10px を下回らせない。
+
+- 表示幅は `useReadableFontSize(図を囲む要素の ref, viewBox の幅, 等倍の文字サイズ)` (`@stats47/visualization`) で測り、返った文字サイズ (viewBox 単位) で描く。下限は `MIN_READABLE_TEXT_PX` (11。`fitSvgViewBox` が viewBox を広げる分の余裕を含む)。固定の `font-size` を書かない
+- 文字を大きくした分の余白は文字サイズから決める (`leftMarginForTickLabels` / `rightMarginForTickLabels` / `bottomMarginForTickLabels` / `topMarginForAxisUnit`)。上下の余白は viewBox を縦に伸ばして足し、プロット領域の高さを削らない。左右は viewBox を広げず描画領域を詰める (広げると表示倍率が下がり文字が小さくなる)
+- 時系列の横軸の目盛りは `fitCategoryAxis` で選ぶ。5 年ごとを基本に、ラベルの幅と位置から重なるときは 10 年・20 年と等間隔のまま広げ、両端の年ラベルがはみ出すときは描画領域の左右を詰める。各チャートに「5 年ごと」の間引きを手書きしない
+- 縦軸の頭には単位を出す (`text.axis-unit`)。目盛りの文字に単位が入っている 100% 積み上げだけは出さない
+- 対応済み: `LineChart` / `StackedAreaChart` / `MixedChart` / `DistributionHistogram` / `HubSankey` (狭い幅では名前と値を 2 行に分ける) / `HorizontalDivergingBarChart` (行の高さと左右の余白を文字サイズから決める) / `CategoryHeatmap` (年の目盛りは重なる分を等間隔に間引き、セルに値が入らない幅ではツールチップに任せる)。viewBox を表示幅に合わせて等倍で描く `MiniCharts` は年のラベルを 10px で描く。契約テストは `readable-axis-text.test.tsx` (visualization) と `readable-chart-text.test.tsx` (web)
+
 ### アクセシビリティ
 
 - SVG に必ず `role="img"` と `aria-label` を付与
@@ -312,6 +323,7 @@ const { showTooltip, showStackedTooltip, hideTooltip, updateTooltipPosition } = 
 
 | 日付 | 変更内容 |
 |---|---|
+| 2026-11-14 | 縮小表示でも画面上で 10px 以上にする文字サイズの契約 (`useReadableFontSize`・`fitCategoryAxis`・縦軸の単位) を追加 |
 | 2026-09-15 | 単位解決・短縮軸・共通ツールチップの表示契約と機械検査を追加 |
 | 2026-06-17 | 全コンポーネントをカタログ化（3層構造・SSoT確立）。`features/stat-charts/` → `components/stat-charts/` 移行記録 |
 | 2026-06 | 初版作成（MiniCharts・ChartCard・基本ルール） |

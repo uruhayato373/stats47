@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it } from 'vitest';
 
 import { buildGeoStationAccessMapModel } from '../build-geo-station-access-map-model';

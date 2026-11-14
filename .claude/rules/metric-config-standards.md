@@ -22,7 +22,7 @@ paths:
 | field                           | 役割                                          | 入れてよい                                 | 入れてはいけない                                              |
 | ------------------------------- | --------------------------------------------- | ------------------------------------------ | ------------------------------------------------------------- |
 | `title` (必須)                  | 正準なランキング名 (h1)                       | 指標の名前                                 | **年** (2018年)・**注釈** (※/調査対象外)・subtitle の繰り返し |
-| `subtitle?`                     | 同名指標を区別する短い定義補足                | 「乳用牛(めす)の飼養頭数合計」等の区別子   | title と同一/包含 (冗長)・注釈(※)                             |
+| `subtitle?`                     | 同名指標を区別する短い定義補足                | 「乳用牛(めす)の飼養頭数合計」等の区別子   | title と同一/包含 (冗長)・注釈(※)・調査方法 (対象の都市・世帯・期間) |
 | `note?`                         | データの注意書き / methodology                | 「内陸県は漁港がなく調査対象外 (0で表示)」 | 定義・名前                                                    |
 | `description?`                  | 指標の定義・説明 (散文。「統計の定義」カード) | 出典・定義文                               | 注釈(※)・SEO 文                                               |
 | `category` (必須)               | e-Stat 機械分類 (17 軸)                       | `CategoryKey` の 17 キーのいずれか         | 17 軸外のキー (型 union でブロック)                           |
@@ -142,7 +142,7 @@ ThemeCatalog の `annotation` は系列断絶・母集団差など、その char
 
 | レベル                               | 対象                                                                                                                                                                                                                                          | 挙動   |
 | ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
-| **error** (CI/pre-commit をブロック) | 無効 category キー / title 年混入 (`title-year`) / title 注釈(※)混入 (`title-note`) / subtitle が注釈(※) (`subtitle-note`) / subtitle が title と冗長 (`subtitle-redundant`) / unit 空・「‐」(`unit`) / 重複 title に区別子なし (`dup-title`) / seoTitle・seoDescription の数字の直後の「‐」(`seo-unit-dash`) / 換算単位の「‐/…」= 割合・指数への人口・面積換算 (`normalization-unit-dash`) | exit 1 |
+| **error** (CI/pre-commit をブロック) | 無効 category キー / title 年混入 (`title-year`) / title 注釈(※)混入 (`title-note`) / subtitle が注釈(※) (`subtitle-note`) / subtitle が title と冗長 (`subtitle-redundant`) / subtitle が調査方法の定型文「都道府県庁所在市の二人以上世帯の年間…」で始まる (`subtitle-survey-method`。調査方法は `note` へ) / unit 空・「‐」(`unit`) / 重複 title に区別子なし (`dup-title`) / seoTitle・seoDescription の数字の直後の「‐」(`seo-unit-dash`) / 換算単位の「‐/…」= 割合・指数への人口・面積換算 (`normalization-unit-dash`) | exit 1 |
 | **warn** (表示のみ)                  | 現在は該当チェックなし (将来の段階的 cleanup 用に tier を温存)                                                                                                                                                                                | exit 0 |
 
 > **2026-06 昇格済**: 旧 warn だった 5 系統 (title-year/title-note・subtitle-note/redundant・unit・dup-title) は Phase 3 のデータ是正で warn=0 を達成 → **error に昇格**。量産時の再混入を CI/pre-commit でブロックする。新規 cleanup を warn から始めたい場合のみ warn tier を再利用する。
@@ -221,6 +221,25 @@ npm run sync:estat-years --workspace=@stats47/data-configs
 ```
 
 警告 (warn) を新たに増やさない。注釈は `note` に、年は `years` に、区別は `subtitle` に置く。
+
+## SSDS の `yearFormat` は出典の期間から決める (2026-11-14)
+
+社会・人口統計体系 (SSDS) の表は時間軸の表示がどれも「◯年度」だが、中身は国勢調査 (10月1日)・犯罪統計 (暦年計)・
+家計調査 (暦年平均) のように暦年の項目が多い。生成器が全指標に `yearFormat: "fiscal"` を固定で書いていて
+「2020年度」と表示されていたので (2026-10-21 に 410 指標を是正)、区切りは e-Stat の定義から決める。
+
+- 根拠は「統計項目の定義」の「時点又は期間」と「指標計算式」の基礎項目。控えは
+  `data/estat/ssds-year-format/definitions.json` (`npm run estat:ssds-year-format:build` で取り直す)。
+- 判定は `.claude/scripts/estat/lib/ssds-year-format.mjs`。年度の項目 (年度計・年度間・3月31日 など) を 1 つでも含めば
+  fiscal、すべて暦年の項目 (暦年計・暦年平均・12月31日・10月1日、または年で呼ぶ調査) なら calendar、それ以外は決めない。
+- `gen-ssds-configs.mjs` はこの判定で `yearFormat` を書き、決まらない spec は書かずに止まる。
+- `npm run estat:ssds-year-format:check` (preflight・PR の CI) が全 SSDS 指標を突き合わせ、食い違いを error にする。
+  根拠は `npx tsx .claude/scripts/estat/check-ssds-year-format.ts --explain <key>`。
+- 人の判断は `data/estat/ssds-year-format/decisions.json`: 期間で決まらない調査の年の呼び方 (`surveyNaming`。一次資料で
+  確かめたものだけ)・定義ページの誤りの上書き (`itemOverrides`)・市区町村の指標のうち、同じ符号の都道府県の指標と
+  同じ定義だと項目名で確かめた符号 (`cityIndicators`。指標計算式のページは都道府県の指標のものなので、確かめた符号にだけ
+  当てはめる)・判定できない指標の一覧 (`undetermined`。縮小専用で、件数の上限 `UNDETERMINED_CEILING` は一覧の件数と同じにする)。
+  判定できない指標を、年度か暦年のどちらかへ一括で倒さない。
 
 ## 分類軸は必ず 1 系列に絞る（形状ゲート）
 
@@ -547,6 +566,12 @@ ranking は異なる）。いずれにせよ **200 にはならない**ので、
 > 2026-07-27 事故: 上記ステップ 2 (`app/ranking/<key>/values.json` 生成) が Phase 6 (2026-05-27) の
 > D1→R2 移行時に writer 不在のまま 2 ヶ月間欠落し、既存ランキングは stale 配信・新規 67 metric は
 > 空ページのまま sitemap 掲載されていた。「isActive:true + item.json だけで公開完了」とも思い込まないこと。
+>
+> **手動投入 metric (`fetcherKey:"manual"`) の値を R2 へ上げる経路 (2026-11-13)**: `data-refresh.yml` は e-Stat の指標しか扱わない。
+> 省庁の xlsx / CSV / PDF から作る指標は、取り込みスクリプト (`.claude/scripts/themes/ingest-*.mjs`) を
+> `external-metric-ingest.yml` に登録し、CI の中で原典から取り直して `app/stats/<key>/values.json` へ上げる (既定は dry run)。
+> 順序は「指標定義を `isActive: false` で main へ入れる → workflow で値を上げる → `isActive: true` にする」。
+> 先に公開にすると、値の無いランキングページが配信される。
 >
 > **手動投入 metric (`fetcherKey:"manual"`) の追加落とし穴**: rank を計算するのは `page-data-batch` だが、
 > 手動投入はこの経路を通らないため **`app/stats` の行が rank を持たない**。values writer 側で正典と

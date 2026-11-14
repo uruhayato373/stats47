@@ -5,7 +5,7 @@ import { dirname, join } from "node:path";
 import { test } from "node:test";
 
 import { appendRun } from "../../metrics/record-monthly-job.mjs";
-import { classifyRoute, handoffPlanWeek, parseRoutes, reviewCadence, reviewRun, weekRange, weeksOfMonth } from "../lib/review-cadence.mjs";
+import { classifyRoute, handoffPlanWeek, loadIdIndex, parseRoutes, reviewCadence, reviewRun, weekRange, weeksOfMonth } from "../lib/review-cadence.mjs";
 
 // 実リポジトリの state に依存しないよう、配線の正本と台帳を持つ小さなリポジトリを毎回組み立てる。
 const WEEKLY_SECTIONS = ["サマリー", "計画 vs 実績", "来週への申し送り"];
@@ -271,6 +271,16 @@ test("回ごとの判定: 期限前・未実施・不足あり・実施できた
   assert.ok(w40.options.some((o) => o.key === "2026-W41"));
 });
 
+// 意図: 競合の定点観測のレポートは data/sns/competitor-scans/ (台帳 sns.competitor-scans) に置く。skill の reference/ を
+// 読んだままだと、/competitor-scan が新しい置き場へ書いても月次の実施状況が「レポートなし」のままになる
+test("月次の定点観測は台帳の置き場から対象月のレポートを読む", () => {
+  const root = fixture();
+  const scanStep = () => reviewRun(root, "monthly", "2026-09", at("2026-10-05")).steps.find((x) => x.label === "月次の定点観測");
+  assert.equal(scanStep().state, "missing");
+  write(root, "data/sns/competitor-scans/2026-09-01.md", "# 競合の定点観測\n");
+  assert.deepEqual({ state: scanStep().state, note: scanStep().note }, { state: "done", note: "data/sns/competitor-scans/2026-09-01.md" });
+});
+
 // 意図: 月次 workflow は結果を Workflow Summary にしか残さなかった。記録は月ごとに 1 件 (再実行は上書き) で、
 // 今月分が failed・実行日 + 猶予を過ぎても無いときだけ毎朝のガードが error にする
 test("月次ジョブの記録: 同じ月は上書き・新しい順", () => {
@@ -291,4 +301,13 @@ test("月次ジョブ: 今月分が failed、または実行日 + 猶予を過�
   assert.deepEqual(day5.findings.filter((f) => f.code.startsWith("monthly-job")).map((f) => f.code), ["monthly-job-failed"]);
   const day13 = reviewCadence(root, at("2026-10-13"));
   assert.deepEqual(day13.findings.filter((f) => f.code.startsWith("monthly-job")).map((f) => f.code).sort(), ["monthly-job-failed", "monthly-job-missing"]);
+});
+
+test("年間計画 (annual.md) へ移した時期待ちのカードも、申し送りの行き先として実在すると見なす", () => {
+  const root = mkdtempSync(join(tmpdir(), "cadence-annual-"));
+  write(root, ".claude/todo/backlog.md", "## 🟡 中\n\n### [LIVE-CARD-01] 生きているカード\nタグ: [収益化]\n");
+  write(root, ".claude/todo/annual.md", "---\ntype: annual-plan\n---\n\n## 2026-12\n\n### [WAIT-CARD-01] 公表を待つカード\nタグ: [収益化] [待ち:時期] [期日:2026-12-15]\n");
+  const ids = loadIdIndex(root);
+  assert.equal(ids.has("LIVE-CARD-01"), true);
+  assert.equal(ids.has("WAIT-CARD-01"), true);
 });

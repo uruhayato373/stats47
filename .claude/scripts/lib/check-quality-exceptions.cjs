@@ -6,7 +6,7 @@ const path = require('node:path');
 const childProcess = require('node:child_process');
 const YAML = require('yaml');
 
-const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, '../../..');
+const ROOT = process.env.STATS47_SCAN_ROOT || path.resolve(__dirname, '../../..');
 const REGISTRY = '.claude/config/quality-exceptions.json';
 const TEXT_EXT = /\.(?:[cm]?[jt]sx?)$/;
 const EXCLUDED_DIRS = new Set(['node_modules', 'dist', '.next', '.local', 'coverage']);
@@ -76,7 +76,7 @@ function collectQualityExceptions() {
 
   const renderContract = path.join(
     ROOT,
-    'packages/visualization/src/shared/__tests__/helpers/render-test-contract.ts',
+    'packages/visualization/src/shared/__tests__/helpers/render-test-contract.mts',
   );
   const renderSource = fs.readFileSync(renderContract, 'utf8');
   const list = renderSource.match(/OPT_IN_RENDER_TEST_FILES\s*=\s*\[([\s\S]*?)\]\s*as const/)?.[1] || '';
@@ -114,10 +114,15 @@ function auditExceptionRegistry(entries, actual, now = new Date()) {
 
 /**
  * 前回との比較だけに使うキー。vitest 設定の拡張子変更 (vitest.config.ts → .mts、2026-10-26 VITE-CONFIG-ESM-WARN-01) は
- * 同じ設定ファイルの改名なので、例外の追加と数えない。件数の増加はこのキーでも従来どおり止める。
+ * 同じ設定ファイルの改名なので、例外の追加と数えない。render-test-contract の .ts → .mts
+ * (同カード・vitest 設定が import して CommonJS 警告を出していたため) も同じ扱い。
+ * 件数の増加はこのキーでも従来どおり止める。
  */
 function growthKey(entry) {
-  return inventoryKey({ ...entry, path: String(entry.path).replace(/vitest\.config\.[cm]?ts$/, 'vitest.config.ts') });
+  const normalized = String(entry.path)
+    .replace(/vitest\.config\.[cm]?ts$/, 'vitest.config.ts')
+    .replace(/render-test-contract\.[cm]?ts$/, 'render-test-contract.ts');
+  return inventoryKey({ ...entry, path: normalized });
 }
 
 function auditRegistryGrowth(current, previous) {

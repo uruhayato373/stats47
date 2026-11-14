@@ -6,8 +6,8 @@
  * ビルド時は R2 に到達できないため、sitemap.ts はこの git 定数を読む。
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
- * 最終生成日: 2026-11-11
- * 件数: blog 861 / tag 74 / survey 149
+ * 最終生成日: 2026-11-14
+ * 件数: blog 852 / tag 74 / survey 149
  */
 
 export interface SitemapBlogEntry {
@@ -72,7 +72,6 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "bean-sprouts-consumption-quantity-prefecture-gap", lastModified: "2026-09-01" },
   { slug: "beans-consumption-expenditure-prefecture-gap", lastModified: "2026-11-04" },
   { slug: "bed-consumption-expenditure-prefecture-gap", lastModified: "2026-11-04" },
-  { slug: "beef-consumption-prefecture-gap", lastModified: "2026-06-13" },
   { slug: "beef-consumption-quantity", lastModified: "2026-06-07" },
   { slug: "beef-consumption-quantity-vs-municipal-road-paving-rate", lastModified: "2026-08-29" },
   { slug: "beef-consumption-quantity-vs-unmarried-ratio-male-45-49", lastModified: "2026-08-29" },
@@ -335,7 +334,6 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "gasoline-consumption-quantity-vs-single-mother-employment", lastModified: "2026-11-04" },
   { slug: "gasoline-expenditure-ranking", lastModified: "2026-07-10" },
   { slug: "general-bed-utilization-pressure-map", lastModified: "2026-03-29" },
-  { slug: "general-hospital-bed-occupancy-rate", lastModified: "2026-06-14" },
   { slug: "general-households-prefecture-gap", lastModified: "2026-08-29" },
   { slug: "general-perinatal-center-count-prefecture-gap", lastModified: "2026-10-28" },
   { slug: "geothermal-power-plant-count-prefecture-gap", lastModified: "2026-09-02" },
@@ -420,7 +418,6 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "inflation-rate-prefecture-gap", lastModified: "2026-03-09" },
   { slug: "inflow-population-ratio-prefecture-gap", lastModified: "2026-05-17" },
   { slug: "information-communication-coefficient-ranking", lastModified: "2026-09-05" },
-  { slug: "inpatient-rate-aging-burden", lastModified: "2026-03-29" },
   { slug: "inpatient-rate-prefecture-gap", lastModified: "2026-05-17" },
   { slug: "insecticide-consumption-expenditure-prefecture-gap", lastModified: "2026-11-04" },
   { slug: "instant-noodles-consumption-prefecture-gap", lastModified: "2026-05-31" },
@@ -546,7 +543,6 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "national-treasury-disbursement-prefecture-prefecture-gap", lastModified: "2026-10-28" },
   { slug: "natto-child-weight-correlation", lastModified: "2026-07-12" },
   { slug: "natto-consumption-east-west-divide", lastModified: "2026-03-29" },
-  { slug: "natto-consumption-expenditure", lastModified: "2026-06-14" },
   { slug: "natto-production-vs-consumption", lastModified: "2026-07-19" },
   { slug: "natural-increase-rate-prefecture-gap", lastModified: "2026-08-29" },
   { slug: "necktie-stockings-market-shrink", lastModified: "2026-09-05" },
@@ -736,7 +732,6 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "smartphone-ownership-prefecture-gap", lastModified: "2026-05-31" },
   { slug: "soba-udon-dining-consumption-expenditure-prefecture-gap", lastModified: "2026-08-29" },
   { slug: "social-expenses-group-consumption-expenditure-prefecture-gap", lastModified: "2026-11-04" },
-  { slug: "software-engineer-income-gap", lastModified: "2026-06-02" },
   { slug: "software-engineer-salary-prefecture-gap", lastModified: "2026-06-02" },
   { slug: "solar-panel-housing-prefecture-gap", lastModified: "2026-05-31" },
   { slug: "solar-power-housing-prefecture-gap", lastModified: "2026-10-28" },
@@ -778,7 +773,6 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "taxi-driver-income-prefecture-gap", lastModified: "2026-05-31" },
   { slug: "taxi-fare-consumption-expenditure-prefecture-gap", lastModified: "2026-10-28" },
   { slug: "tea-drink-consumption-expenditure-prefecture-gap", lastModified: "2026-11-04" },
-  { slug: "telework-gap-tokyo-6x", lastModified: "2026-03-29" },
   { slug: "telework-rate-tokyo-gap", lastModified: "2026-05-29" },
   { slug: "temperature-extremes-map", lastModified: "2026-03-09" },
   { slug: "tempura-fry-consumption-expenditure-prefecture-gap", lastModified: "2026-09-02" },
@@ -794,7 +788,6 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "tokyo-food-culture", lastModified: "2026-07-10" },
   { slug: "toothbrush-consumption-expenditure-prefecture-gap", lastModified: "2026-10-28" },
   { slug: "toothpaste-consumption-expenditure-prefecture-gap", lastModified: "2026-10-28" },
-  { slug: "total-fertility-rate", lastModified: "2026-06-08" },
   { slug: "tottori-food-culture", lastModified: "2026-07-10" },
   { slug: "towns-villages-larger-than-cities", lastModified: "2026-07-16" },
   { slug: "toyama-food-culture", lastModified: "2026-07-10" },
@@ -838,7 +831,6 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "vacant-houses-population-decline", lastModified: "2026-11-06" },
   { slug: "vacant-housing-aging-correlation", lastModified: "2026-07-09" },
   { slug: "vacant-housing-rate-vs-dependent-population-index", lastModified: "2026-08-30" },
-  { slug: "vacant-housing-rate-vs-standard-price-change-rate-commercial", lastModified: "2026-08-30" },
   { slug: "vacant-housing-vs-aging", lastModified: "2026-07-12" },
   { slug: "vacant-housing-vs-land-price", lastModified: "2026-07-12" },
   { slug: "vacant-housing-vs-welfare-commissioner", lastModified: "2026-07-12" },
@@ -862,7 +854,6 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "welfare-expenses-squeeze", lastModified: "2026-03-06" },
   { slug: "western-clothing-group-consumption-expenditure-prefecture", lastModified: "2026-11-04" },
   { slug: "western-food-dining-consumption-expenditure-prefecture-gap", lastModified: "2026-10-28" },
-  { slug: "wheat-flour-consumption-food-culture-gap", lastModified: "2026-06-07" },
   { slug: "wheat-flour-consumption-prefecture", lastModified: "2026-05-17" },
   { slug: "wheat-flour-expenditure-vs-quantity", lastModified: "2026-06-07" },
   { slug: "whisky-consumption-prefecture-gap", lastModified: "2026-05-17" },
@@ -887,7 +878,6 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
 ];
 
 export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
-  { tagKey: "2024年", lastModified: "2026-06-13" },
   { tagKey: "ClaudeCode", lastModified: "2026-06-14" },
   { tagKey: "D3", lastModified: "2026-06-14" },
   { tagKey: "IT", lastModified: "2026-06-02" },
@@ -904,7 +894,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "住宅", lastModified: "2026-11-06" },
   { tagKey: "健康", lastModified: "2026-08-28" },
   { tagKey: "共働き", lastModified: "2026-08-28" },
-  { tagKey: "出生率", lastModified: "2026-06-08" },
+  { tagKey: "出生率", lastModified: "2026-05-17" },
   { tagKey: "労働", lastModified: "2026-06-15" },
   { tagKey: "北海道", lastModified: "2026-10-09" },
   { tagKey: "医療", lastModified: "2026-10-23" },
@@ -957,6 +947,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "都道府県ランキング", lastModified: "2026-11-09" },
   { tagKey: "都道府県別", lastModified: "2026-08-30" },
   { tagKey: "都道府県格差", lastModified: "2026-07-10" },
+  { tagKey: "食品消費", lastModified: "2026-11-09" },
   { tagKey: "食文化", lastModified: "2026-09-05" },
   { tagKey: "食生活", lastModified: "2026-11-09" },
   { tagKey: "食費", lastModified: "2026-11-09" },

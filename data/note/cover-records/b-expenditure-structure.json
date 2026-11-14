@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-expenditure-structure",
+  "production": {
+    "id": "NCI-00129",
+    "policyId": "NCP-005",
+    "policyVersion": 2,
+    "brief": {
+      "headline": "県のお金は\n何に使う？",
+      "subline": "教育・産業・農林水産\n2022年度の歳出を比較",
+      "subject": "開いた大きな予算のノートと、学校・工場・稲穂を示すシンプルな挿絵をひとまとまりにする。文字のない小さな建物の模型として描き、架空の金額・割合・グラフは置かない。緑・クリーム・黄色の太い文字帯。人物は不要。",
+      "evidence": "https://note.com/stats47/n/ne19e85f088bf 本文確認2026-10-14。本文は2022年度の都道府県歳出構造。教育費・商工費・農林水産業費の3項目を比較。割合を自治体の価値判断や絶対額と混同しない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "95eb14f3c011243364e66efe852e3daa7f1a95bf981d9ff597c0a87a52caa4ef",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-expenditure-structure/revisions/95eb14f3c011243364e66efe852e3daa7f1a95bf981d9ff597c0a87a52caa4ef.png"
+      },
+      "bytes": 45920,
+      "id": "95eb14f3c011243364e66efe852e3daa7f1a95bf981d9ff597c0a87a52caa4ef",
+      "kind": "candidate",
+      "version": "2026-10-12-drafts",
+      "createdAt": "2026-10-12T00:52:52.314Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "592c3f927ebd9316ffe6810f6ac41b922c1ba5641b387eefaf2b60b5eac9190c"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出し・記事の事実・図(または値を持たない背景地図)が読める。登録前の確認版とSHA一致",
+        "reviewedAt": "2026-10-12T00:54:07.224Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "592c3f927ebd9316ffe6810f6ac41b922c1ba5641b387eefaf2b60b5eac9190c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-expenditure-structure/inputs/592c3f927ebd9316ffe6810f6ac41b922c1ba5641b387eefaf2b60b5eac9190c.json"
+          },
+          "bytes": 1230
+        }
+      }
+    },
+    {
+      "sha256": "31d452f4d565cc012f42769403bf4160590434f28d33d455171d6037f3c98ae8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-expenditure-structure/revisions/31d452f4d565cc012f42769403bf4160590434f28d33d455171d6037f3c98ae8.png"
+      },
+      "bytes": 67938,
+      "id": "31d452f4d565cc012f42769403bf4160590434f28d33d455171d6037f3c98ae8",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-14T01:08:30.234Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323535516/rectangle_large_type_2_6aefdfa1b057372b6167c885463d24b3.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "31d452f4d565cc012f42769403bf4160590434f28d33d455171d6037f3c98ae8"
+      }
+    },
+    {
+      "sha256": "752b2d95725679ab73a7464b6dee9012e7c556b9e3081d3c723416da83b11f59",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-expenditure-structure/revisions/752b2d95725679ab73a7464b6dee9012e7c556b9e3081d3c723416da83b11f59.png"
+      },
+      "bytes": 2099550,
+      "id": "752b2d95725679ab73a7464b6dee9012e7c556b9e3081d3c723416da83b11f59",
+      "kind": "candidate",
+      "version": "imagegen-pop-v2-recent-six-20261014",
+      "createdAt": "2026-10-14T01:09:48.412Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "2ddd565687bc955c38ae09c9a808a1a118bf70127ec277831e360ae01b2f63e8"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸・幅320pxの目視と転記・文字切れ・重なりを確認済み。2026-10-14ユーザーがこの6件の公開カバー更新を指示。",
+        "reviewedAt": "2026-10-14T01:42:29.844Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "2ddd565687bc955c38ae09c9a808a1a118bf70127ec277831e360ae01b2f63e8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-expenditure-structure/inputs/2ddd565687bc955c38ae09c9a808a1a118bf70127ec277831e360ae01b2f63e8.json"
+          },
+          "bytes": 7919
+        },
+        "production": {
+          "id": "NCI-00129",
+          "policyId": "NCP-005",
+          "policyVersion": 2,
+          "planSha256": "1f13b4a42a7420570f349c71bd77761c9263d34f44adbfef581a07db33de24af"
+        }
+      }
+    }
+  ]
+}

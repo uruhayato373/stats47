@@ -23,6 +23,10 @@ export default defineConfig({
     // project-root / posts-store はモジュール変数にキャッシュするため、テストは
     // vi.resetModules() で都度読み直す。ファイル間の汚染を避けるべく isolate を明示 (既定 true)。
     isolate: true,
+    // 高負荷 (tsc・dev サーバーと並行) では初回 import の変換に数秒かかり、既定 5 秒で
+    // lib/server 系が落ちた。120 秒で全件通ることを実測済み (tests/unit/vitest-config-timeout.test.ts)。
+    testTimeout: 120_000,
+    hookTimeout: 120_000,
   },
   resolve: {
     alias: {

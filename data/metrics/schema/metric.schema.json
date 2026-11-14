@@ -123,6 +123,26 @@
                 "additionalProperties": false
               }
             },
+            "sampleCount": {
+              "type": "object",
+              "properties": {
+                "cdTab": {
+                  "type": "string"
+                },
+                "factor": {
+                  "type": "number"
+                },
+                "minimum": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "cdTab",
+                "factor",
+                "minimum"
+              ],
+              "additionalProperties": false
+            },
             "axisSum": {
               "type": "object",
               "properties": {
@@ -451,6 +471,26 @@
             ],
             "additionalProperties": false
           }
+        },
+        "sampleCount": {
+          "type": "object",
+          "properties": {
+            "cdTab": {
+              "type": "string"
+            },
+            "factor": {
+              "type": "number"
+            },
+            "minimum": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "cdTab",
+            "factor",
+            "minimum"
+          ],
+          "additionalProperties": false
         },
         "axisSum": {
           "type": "object",

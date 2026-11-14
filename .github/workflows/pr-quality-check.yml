@@ -137,10 +137,13 @@ jobs:
             .claude/scripts/lib/__tests__/check-domains.test.cjs \
             .claude/scripts/lib/__tests__/check-datasets.test.mjs \
             .claude/scripts/sns/__tests__/x-direct-ledger.test.cjs \
+            .claude/scripts/lib/__tests__/x-catalog.test.cjs \
             .claude/scripts/lib/__tests__/check-money-unit-audit.test.cjs \
             .claude/scripts/lib/__tests__/check-quality-exceptions.test.cjs \
             .claude/scripts/lib/__tests__/check-quality-warning-ratchet.test.cjs \
             .claude/scripts/lib/__tests__/check-render-ci-contract.test.cjs \
+            .claude/scripts/lib/__tests__/check-runtime-budget.test.cjs \
+            .claude/scripts/lib/__tests__/check-scan-root.test.cjs \
             .claude/scripts/lib/__tests__/scheduled-audit-propagation.test.cjs \
             .claude/scripts/lib/__tests__/check-local-registry.test.mjs \
             .claude/scripts/lib/__tests__/local-resources.test.mjs
@@ -152,9 +155,17 @@ jobs:
           node .claude/scripts/lib/check-render-ci-contract.cjs --base origin/main
         continue-on-error: false
 
+      - name: 🧪 Claude Scripts Lib Contracts
+        # .claude/scripts/lib/__tests__ のうち、ほかのどの step・script も名前で走らせていないテスト
+        # (無いと pre-push の「変更したテストだけ」でしか走らない)。漏れは lib-tests-wiring.test.cjs が止める
+        run: npm run test:claude-lib-contracts
+        continue-on-error: false
+
       - name: Metric and Content Identity Contracts
         run: |
           npx tsx packages/data-configs/scripts/check-metric-contract.ts
+          # 家計の分析単位の台帳と、公開ページ・指標の実物との照合 (metrics:check の後半。KAKEI-CATALOG-CI-01)
+          npx tsx packages/data-configs/scripts/check-kakei-analysis-catalog.ts
           npm run content:check
           node .claude/scripts/content-types/check-content-types.mjs
           npm run test:issue-graph
@@ -211,7 +222,10 @@ jobs:
       - name: 🎨 Lyra Inline Check
         # lyra の規則 (style-lyra.css) の部品の className への書き込み漏れと cn-* の組み立てを止める
         # (pre-commit と同一)。正典: packages/ui-theme/README.md
-        run: npm run ui-theme:lyra:test
+        # 書き込み漏れの検査本体 (--check) を直に呼ぶ。台帳 lyra-inline の checker として配線が辿れる
+        run: |
+          npm run ui-theme:lyra:test
+          node --import tsx .claude/scripts/ui/inline-lyra.mjs --check
         continue-on-error: false
 
       - name: 🃏 Card Census Guard
@@ -302,6 +316,14 @@ jobs:
         run: node .claude/scripts/lib/check-repo-hygiene.cjs --baseline
         continue-on-error: false
 
+      - name: 🧠 Memory Index Size Guard
+        # 記憶の索引 MEMORY.md が起動時の読み込み上限 (24,400 バイト・200 行) を超えると、
+        # 末尾 (新しい記憶) から読み込まれなくなる。上限の数値は検査スクリプトの定数が唯一の置き場。
+        run: |
+          node --test .claude/scripts/lib/__tests__/check-memory-index-size.test.cjs
+          node .claude/scripts/lib/check-memory-index-size.cjs
+        continue-on-error: false
+
       - name: 🧩 Checker Wiring Regression Guard
         # check/audit/validate/verify/lint/guard 系scriptの新規未配線を検出。
         # 既存の未配線候補はbaselineで許容し、新規悪化だけを止める。
@@ -340,7 +362,7 @@ jobs:
 
       - name: 🔐 Environment Registry Guard
         # 値は読まず、コード/workflowが参照するenv名と公開区分だけを検査。
-        # 新規envは `.claude/config/env-registry.json` への登録を必須にする。
+        # 新規envは `config/env-registry.json` への登録を必須にする。
         run: node .claude/scripts/lib/check-env-registry.cjs
         continue-on-error: false
 
@@ -448,7 +470,8 @@ jobs:
     name: Contract Tests
     needs: changes
     # CI-SPEED-STATIC-GATES-SPLIT-01 (2026-09-18): 旧 Static Gates 65 step 直列 (実測 486 秒) から分離。
-    # tooling 自身の `node --test` 自己検査群。最重は Workflow Commit-back Contract Gate (115 秒)。
+    # tooling 自身の `node --test` 自己検査群。旧最重の Workflow Commit-back Contract Gate (115 秒) は
+    # 重い契約を差分連動の step へ分けて 1 秒になった (2026-11-13 の 5 run 実測)。現在の最重は Image Generation Pipeline (30〜41 秒)。
     # job を分けるのは並列化と「1 run で複数の失敗を報告する」ため (PR #974 は fail-fast で 1 件ずつ露出し 6 回目で通った)。
     # step 単位の continue-on-error は使わない: check-checker-wiring.cjs が fail-open と分類し registry の blocking と矛盾する。
     # git 履歴を使う step は無いので shallow checkout。
@@ -508,11 +531,17 @@ jobs:
         # ラチェット 1 つの赤で無関係な queue まで commit されない型 (是正ループが 17 日停止)。
         # sync-snapshots は同じ「成果を落とす」型を 2 つ抱えていた (2026-08-17):
         # 1 task の失敗で末尾 push に到達しない型と、timeout で push が途中打ち切られる型。
-        run: npm run test:workflow-commit-back
+        # 末尾の行は step の経過秒を予算 (.claude/config/check-runtime-budgets.json の ciSteps) と突き合わせる。
+        run: |
+          npm run test:workflow-commit-back
+          node .claude/scripts/lib/check-runtime-budget.cjs --ci-step workflow-commit-back --elapsed-sec "$SECONDS"
 
       - name: 🔁 Scoped Workflow Contract Gate (差分連動)
-        # ranking-scoped-workflow.test.mjs は sync-snapshots / generate-ogp-images の bash step を
-        # シム付きで実際に実行する (69 test・実測 76 秒 = 旧 Static Gates 最重 step の大半)。
+        # ranking-scoped-workflow.test.mjs と data-refresh-scoped-workflow.test.mjs は sync-snapshots /
+        # generate-ogp-images / data-refresh の bash step をシム付きで実際に実行する。
+        # 2026-09-18 は ranking の 1 ファイル 69 test で実測 76 秒だった。2026-11-13 の run 43368836421 では
+        # 3 ファイル 141 test (ranking 86・data-refresh 49・r2-overlay-server 6) で 194 秒かかっている
+        # (手元で 1 ファイルずつ測ると ranking 106 秒・data-refresh 64 秒・r2-overlay-server 1 秒未満)。
         # 依存は workflow YAML とテスト自身だけなので、それらが変わった PR だけ走らせる
         # (CI-SPEED-STATIC-GATES-HEAVY-STEPS-01)。全数は週次 quality-suite-weekly.yml が担う。
         if: needs.changes.outputs.workflow_contracts == 'true'
@@ -581,6 +610,7 @@ jobs:
         run: |
           npm run type-check:image-pipeline
           npm run test:image-pipeline
+          node .claude/scripts/lib/check-runtime-budget.cjs --ci-step image-generation-pipeline --elapsed-sec "$SECONDS"
         continue-on-error: false
 
       - name: 🗾 Japan Zue Evidence Inventory Gate
@@ -617,10 +647,12 @@ jobs:
           node --test .claude/scripts/blog/lib/__tests__/topic-queue-spurious-core.test.mjs
           node .claude/scripts/lib/__tests__/quality-gate.svg-gates.test.mjs
           node --test .claude/scripts/lib/__tests__/quality-gate.claim-gates.test.mjs
+          node --test .claude/scripts/lib/__tests__/quality-gate.revise-patterns.test.mjs
           node --test .claude/scripts/lib/__tests__/quality-gate.q-numbers.test.mjs
           node --test .claude/scripts/lib/__tests__/chart-provenance.test.mjs
           node --test .claude/scripts/blog/lib/__tests__/source-repair-core.test.mjs
           node --test .claude/scripts/blog/lib/__tests__/stale-data-years.test.mjs
+          node --test .claude/scripts/blog/lib/__tests__/release-calendar.test.mjs
           node --test .claude/scripts/blog/lib/__tests__/refresh-chart-year.test.mjs
           node --test .claude/scripts/blog/lib/__tests__/ranking-year-label.test.mjs
           node --test .claude/scripts/lib/__tests__/latest-partition.test.mjs
@@ -716,7 +748,8 @@ jobs:
   catalog-gates:
     name: Catalog Gates
     # CI-SPEED-STATIC-GATES-SPLIT-01 (2026-09-18): 旧 Static Gates から分離した data-configs SSOT 検証と portfolio state。
-    # `npx tsx` が 2,000 件超の metric registry を読む step 群 (SEO Meta Factual 46 秒 / Theme Portfolio State 23 秒)。
+    # `npx tsx` が 2,000 件超の metric registry を読む step 群
+    # (2026-11-13 の 5 run 実測: SEO Meta Factual 19〜24 秒 / Theme Portfolio State 27〜41 秒)。
     # git 履歴を使う step は無いので shallow checkout。
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -757,7 +790,13 @@ jobs:
           npm run theme:quality:test
           # 原典抽出の Python 部品 (文化財の検索結果・橋梁点検の年差)。property-prices は原典が無いと skip を明示する
           npm run theme:py:test
+          node .claude/scripts/lib/check-runtime-budget.cjs --ci-step theme-portfolio-state --elapsed-sec "$SECONDS"
         continue-on-error: false
+
+      - name: 🌐 Install Playwright Chromium
+        # ad-traffic-block.test.mjs の実ブラウザの確認 (広告・計測の通信を遮断できるか) 用。
+        # 入れないと CI で毎回 skip になる。テストは CI で Chromium を起動できなければ落ちる (CI-TOOLING-FOLLOWUP-03)
+        run: npx playwright install --with-deps chromium
 
       - name: 📊 Affiliate Compliance / Operations Guard
         # 直接配置台帳の構造検証 + compliance/operations 判定コアの fixture テスト。
@@ -773,10 +812,11 @@ jobs:
         continue-on-error: false
 
       - name: 📋 Survey Portfolio State Guard
-        # survey ポートフォリオ state の schema + 判定規律 (surveys.json 双方向一致・
+        # survey ポートフォリオ state の判定規律 (surveys.json の調査が portfolio に全部ある・
         # survey-editorial.ts との drift・orphan/linkage 整合・根拠なし merge/retire 禁止・
         # 重複実験防止・推測値混入防止) を検証。読み取り専用で破壊的変更なし
-        # (本文生成・R2 push・deploy は行わない)。形: カタログの surveys.portfolio・surveys.experiments (Schema)
+        # (本文生成・R2 push・deploy は行わない)。形 (列挙の値) と調査 ID の実在は、カタログの
+        # surveys.portfolio・surveys.experiments の Schema と refs を check-datasets が検査する
         run: npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts
         continue-on-error: false
 
@@ -844,6 +884,15 @@ jobs:
           npm run estat:kakei-classification:check
         continue-on-error: false
 
+      - name: 🗓️ SSDS Year Format Gate
+        run: |
+          # 社会・人口統計体系の指標の yearFormat (暦年 / 年度) が、e-Stat の定義の「時点又は期間」から決めた区切りと一致することを担保。
+          # 生成器が全指標に fiscal を固定で書き、国勢調査・犯罪統計などが「2020年度」と表示されていた再発防止 (2026-10-21)。
+          # 正本: data/estat/ssds-year-format/{definitions,decisions}.json (控えの生成: .claude/scripts/estat/build-ssds-definitions.mjs)
+          npm run estat:ssds-year-format:test
+          npm run estat:ssds-year-format:check
+        continue-on-error: false
+
       - name: 🧾 Kakei Ledger Gate
         run: |
           # 家計調査の台帳 (data/estat/kakei-ledger/ledger.json) が今の metric config・採否判断と一致することを担保。
@@ -891,6 +940,7 @@ jobs:
           # R2 の公開 URL を読むだけ (認証不要・書き込みなし)。
           # 規約: .claude/todo/backlog.md SEO-META-FACTUAL-GATE-01
           npx tsx packages/data-configs/scripts/audit-seo-meta-facts.ts --fail-on-new
+          node .claude/scripts/lib/check-runtime-budget.cjs --ci-step seo-meta-factual --elapsed-sec "$SECONDS"
         continue-on-error: false
 
       - name: 🔗 Survey Master Coverage Gate
@@ -1265,6 +1315,12 @@ jobs:
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: npm ci
 
+      # この job の Build は next build だけで、OpenNext の Build (workers:build) を通らない。OpenNext が
+      # Next.js のサポート期限だけで Build を拒否する条件は next build では落ちないので、デプロイと同じ検査を
+      # ここでも走らせ、main へ入る前に赤にする (CI-TOOLING-FOLLOWUP-01。位置は metric-release-order.test.mjs が固定)。
+      - name: Check build preconditions
+        run: node .github/scripts/check-build-preconditions.mjs
+
       # 指標の入力を変えていない PR は生成を省き、中継が本番の値を返す (実測 4.2 分。判定は plan-deploy-scope.mjs)
       - name: Generate metric metadata for this PR
         if: needs.changes.outputs.metric_metadata == 'true'
@@ -1489,6 +1545,15 @@ jobs:
           kill "$(cat /tmp/pr-e2e-next.pid)" 2>/dev/null || true
           kill "$(cat /tmp/pr-e2e-r2-overlay.pid)" 2>/dev/null || true
 
+      - name: 📎 Collect server logs for the report
+        # job のログは tail だけで、流れた後は読めない。next start の例外と R2 中継の upstream error を
+        # 全文のまま artifact へ残す (E2E-FAILURE-EVIDENCE-01)。Playwright の webServer は reuseExistingServer で
+        # 使われず stdout を持たないので、サーバーの出力はこの 2 ファイルだけが正本。
+        if: always()
+        run: |
+          mkdir -p apps/web/server-logs
+          cp /tmp/pr-e2e-next.log /tmp/pr-e2e-r2-overlay.log apps/web/server-logs/ 2>/dev/null || true
+
       - name: 📊 Upload Playwright report
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
@@ -1497,6 +1562,7 @@ jobs:
           path: |
             apps/web/playwright-report/
             apps/web/test-results/
+            apps/web/server-logs/
           if-no-files-found: ignore
           retention-days: 30
 

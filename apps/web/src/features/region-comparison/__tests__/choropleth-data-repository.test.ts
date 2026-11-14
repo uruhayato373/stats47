@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it } from "vitest";
 
 import { PREF_CODE_TO_ROMAJI } from "../repositories/choropleth-data-repository";

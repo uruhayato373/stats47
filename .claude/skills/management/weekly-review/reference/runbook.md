@@ -27,7 +27,7 @@ primary_agent: strategy-advisor
 Phase 1 の並列収集より前に、NSM（週間エンゲージドセッション数）の週次スナップショットを生成する。
 
 ```bash
-node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
+node .claude/scripts/metrics/snapshot-weekly-metrics.mjs [YYYY-Www]
 ```
 
 - 出力先: `data/nsm/weekly-snapshots/YYYY-Www.json`
@@ -536,7 +536,7 @@ node -e 'const q=require("./data/blog/remediation-queue.json");console.log(q.sum
 node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→featureSignals + 順位交絡統制
 ```
 
-- 最新 `.claude/skills/blog/analyze-winning-patterns/reference/reports/<date>.md` の
+- 最新 `data/blog/winning-pattern-reports/<date>.md` の
   **robust かつ confidence hi/mid** のシグナルを 1-2 行で記載。
 - **robust な勝ちパターンのみ** `.claude/rules/blog-quality-standards.md` への書き戻しを検討 (定性裏取り後、`evidence-based-judgment.md` 準拠)。weakened/confounded は書き戻さない。
 
@@ -633,8 +633,8 @@ snapshot の `manifest.json` が `status: error` の週は本節の数値を書�
 
 - **毎週土曜に実行**する想定 (土曜 02:00 の計測の後。認証付き計測はレビューの最初に `npm run weekly:collect` で手で取る。計測 state の作り直し・施策の記録・週次要約はレビューの中で行う)。`/weekly-plan` (来週分) は依頼範囲に含まれる場合だけレビュー後に実行する
 - `.claude/todo/weekly.md` が存在しない、または対象週と異なる場合でも、git log ベースで実績を収集する
-- 週次レビュー履歴は本skill referenceへ蓄積し、批判的レビュー全文は蓄積しない
-- `/weekly-plan` の Phase 1 Track D が前週のskill referenceレビューを参照する
+- 週次レビュー履歴は `data/reviews/weekly/` へ蓄積し、批判的レビュー全文は蓄積しない
+- `/weekly-plan` の Phase 1 Track D が前週のレビュー (`data/reviews/weekly/`) を参照する
 
 ## 保存先 / TODO (.claude/todo/)
 
@@ -695,4 +695,4 @@ snapshot の `manifest.json` が `status: error` の週は本節の数値を書�
 - `docs/60_運用ログ/weekly-metrics/` — snapshot CSV で代替（2026-04-17 削除）
 - DB `seo_tracking` / `seo_actions` テーブル — 完全DBレス化で廃止。施策SSOTは`.claude/todo/improvements.md`
 - 旧GitHub Issue中心のimprovement運用 — `.claude/todo/improvements.md` + 各skillの`reference/improvement-log.md`へ移行
-- GitHub Issues `weekly-plan` / `weekly-review` ラベル — ファイル運用へ移行済み。計画は `.claude/todo/`、レビューは本skill reference
+- GitHub Issues `weekly-plan` / `weekly-review` ラベル — ファイル運用へ移行済み。計画は `.claude/todo/`、レビューは `data/reviews/weekly/`

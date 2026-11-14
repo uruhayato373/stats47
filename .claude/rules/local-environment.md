@@ -16,17 +16,32 @@ paths:
 ```
 apps/
   web/       Next.js (Cloudflare Pages) — 公開サイト
+  admin/     Next.js — ローカルの管理画面 (`npm run admin`)。台帳・計画・原稿・公開状態を読む
   remotion/  Remotion — 動画・SNS 投稿画像生成（Instagram/X/note）
   ges/       Google Earth Studio — 47都道府県旋回動画の生成・自動化
 packages/
-  database/        Drizzle schema (型ソース) + テスト基盤 + 使い捨てビルドキャッシュ操作 (永続 D1 なし)
-  types/           共通型定義
-  visualization/   D3.js チャートコンポーネント
-  components/      shadcn/ui ベース共通 UI
-  estat-api/       e-Stat API クライアント
-  ranking/         ランキング計算ロジック
-  r2-storage/      Cloudflare R2 アクセス
-  utils/           汎用ユーティリティ
+  database/           Drizzle schema (型ソース) + テスト基盤 + 使い捨てビルドキャッシュ操作 (永続 D1 なし)
+  types/              共通型定義
+  data-configs/       指標・テーマ・事業計画などの型と読み込み口 (`data/` の台帳を import する)
+  stats-r2/           R2 の観測値の型・読み手・schema
+  r2-storage/         Cloudflare R2 アクセス
+  estat-api/          e-Stat API クライアント
+  gis/                GIS (国土数値情報) の取得・変換
+  ranking/            ランキング計算ロジック
+  correlation/        相関の計算と選定
+  area/               都道府県・市区町村の地域データ
+  area-profile/       地域プロファイルの型とユーティリティ
+  category/           e-Stat 機械分類 (17 軸) とサイドバーの分類
+  ai-content/         AI 生成コンテンツの型
+  visualization/      D3.js チャートコンポーネント
+  svg-builder/        静的 SVG チャートの生成
+  components/         shadcn/ui ベース共通 UI
+  ui-theme/           色・角丸トークンと部品のスタイル (CSS だけ)
+  migration-flow/     人口移動リール (Remotion の部品)
+  station-passengers/ 駅乗降客数リール (Remotion の部品)
+  product-factory/    データパックと Kindle 書籍のカタログ・生成・検証
+  logger/             ログ出力
+  utils/              汎用ユーティリティ
 ```
 
 ## ストレージ
@@ -38,10 +53,10 @@ packages/
 - **R2 読み取り (標準)**: ビルド/集計スクリプトは **公開 URL 経由**で R2 を読める →
   `R2_PUBLIC_FETCH_URL=https://storage.stats47.jp`（GET のみ・list 不可）+ `NODE_OPTIONS='--conditions react-server'`。
 
-## R2 読み書き — ローカル / CI 両方から remote R2 が唯一の真実源
+## R2 読み書き — remote R2 が唯一の真実源
 
-**読み取り・書き込みともにローカルから remote R2 へ直接可能。ローカル R2 ミラー (`.local/r2`) は廃止。**
-`_assert-ci-write.ts` はデフォルト許可に変更済み。ローカル書き込み時は `console.warn` を出すだけで続行する。
+**読み取りはローカルから可能。書き込みは CI の workflow が既定で、ローカルから書けるのは Mac で実体を作る prefix だけ** (区分表の `origin: "mac"`)。
+それ以外は `_assert-ci-write.ts` が止める (`ALLOW_LOCAL_R2_WRITE=1` で明示的に通す)。ローカル R2 ミラー (`.local/r2`) は廃止。承認の線引きは `r2-storage-design.md`「書き込みの承認」。
 
 - **読み取り (標準)**: `R2_PUBLIC_FETCH_URL=https://storage.stats47.jp`（GET のみ・list 不可・認証不要）
 - **書き込み (ローカル)**: `.env.local` に R2 S3 creds (`R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` / `R2_S3_ENDPOINT`) または `wrangler login` 認証が必要。S3 creds はユーザーが Cloudflare ダッシュボードで発行する。
@@ -323,7 +338,7 @@ git checkout -- AGENTS.md .claude/design-system/SSOT.md
 |---|---|---|
 | dotfiles | `git clone <dotfiles> $env:USERPROFILE\dotfiles; node $env:USERPROFILE\dotfiles\bin\link.mjs --host windows` | `git clone <dotfiles> ~/dotfiles && node ~/dotfiles/bin/link.mjs --host mac` |
 | stats47 | `git clone -c core.symlinks=true --filter=blob:none <stats47>` | `git clone --filter=blob:none <stats47>` |
-| memory | `node .claude/scripts/setup-memory-symlink.mjs` (junction) | 同左 (symlink) |
+| memory | `node .claude/scripts/lib/setup-memory-symlink.mjs` (junction) | 同左 (symlink) |
 | hooks | `git config core.hooksPath .husky` | 同左 |
 | 一時領域 | `C:\tmp` (`STATS47_WORKTREE_ROOT`) | `~/tmp` (`/tmp` は 3 日で掃除される) |
 | 定期掃除 | `scripts/scheduled/local-resources.ps1 -Action Install` | `bash scripts/scheduled/local-resources.sh install` |

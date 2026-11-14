@@ -27,6 +27,24 @@
         "hook": { "description": "読者の悩みから始める冒頭の段落。", "type": "string", "minLength": 40, "maxLength": 200 },
         "points": { "description": "読み終えて分かること。", "type": "array", "minItems": 3, "maxItems": 5, "items": { "type": "string", "minLength": 8 } },
         "forWhom": { "description": "想定読者。", "type": "array", "minItems": 2, "maxItems": 3, "items": { "type": "string", "minLength": 6 } },
+        "scopeNote": {
+          "description": "家計調査以外で、県全体でない値 (県庁所在市で調べた値など) を載せる本の断り書き。【データの範囲】の末尾に入る。機械では測れないので、別エージェントが EPUB の本文と照合する。",
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 120
+        },
+        "scopeLead": {
+          "description": "【データの範囲】の 1 文目 (比較の単位) を差し替える。県庁所在市を比べる本など、既定の「比較の単位は都道府県です」が当てはまらない本だけに書く。",
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 160
+        },
+        "dataSourceLine": {
+          "description": "【データについて】の末尾の 1 文 (収録年と定義は指標ごとに異なる) を差し替える。1 つの統計で年をそろえた本だけに書く。",
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 120
+        },
         "keywords": { "description": "KDP のキーワード 7 枠。", "type": "array", "minItems": 7, "maxItems": 7, "items": { "type": "string", "minLength": 2, "maxLength": 50 } },
         "targetQueries": { "description": "検索順位を定点観測する検索語。", "type": "array", "minItems": 3, "maxItems": 8, "items": { "type": "string", "minLength": 2 } },
         "review": {

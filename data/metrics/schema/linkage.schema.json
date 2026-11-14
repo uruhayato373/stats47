@@ -194,6 +194,26 @@
                   "valueScale": {
                     "type": "number"
                   },
+                  "sampleCount": {
+                    "type": "object",
+                    "properties": {
+                      "cdTab": {
+                        "type": "string"
+                      },
+                      "factor": {
+                        "type": "number"
+                      },
+                      "minimum": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "cdTab",
+                      "factor",
+                      "minimum"
+                    ],
+                    "additionalProperties": false
+                  },
                   "areaAxis": {
                     "type": "object",
                     "properties": {

@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it } from 'vitest';
 
 import { MIN_TREND_YEARS, nationalSeriesName, resolveMetricTrend, shouldFetchMetricTrend } from '../metric-trend';

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "tables": [
+    {
+      "statsDataId": "0003445758",
+      "title": "令和２年以降 一般_都道府県別_職種（特掲）DB",
+      "statCode": "00450091",
+      "catalogVersion": "2024-11-27",
+      "catalogSha256": "c461cec5578da9b646cb69fe8f4801db9f5392f3fb1dbbb10ac4d029fc11f65f",
+      "fetchedAt": "2026-11-14T07:53:53.018Z",
+      "fileCount": 48,
+      "rowCount": 511488,
+      "maxRowsPerFile": 20880,
+      "gzipBytes": 3060785,
+      "uncompressedBytes": 55897220,
+      "catalogReportedRows": 383616,
+      "warnings": [
+        "Catalog OVERALL_TOTAL_NUMBER differs from complete live partitions: 511488/383616"
+      ],
+      "depth": 2,
+      "partitionAxes": [
+        "tab",
+        "cat01"
+      ],
+      "rowLimit": 50000,
+      "manifestKey": "estat-tables/0003445758/manifest.json",
+      "manifestSha256": "2abff7a09cf82a916d80cd0dd04f2c961a209c305d19344fe4bbbccfbfe5e411",
+      "status": "pushed",
+      "bucket": "stats47-private"
+    }
+  ]
+}

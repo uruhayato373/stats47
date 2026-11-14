@@ -1,0 +1,200 @@
+{
+ "statsDataId": "0003000807",
+ "title": "用途分類 用途分類（総数） 全国",
+ "statName": "家計調査",
+ "govOrg": "総務省",
+ "surveyDate": null,
+ "overallTotalNumber": 11791,
+ "dimensions": [
+  {
+   "id": "tab",
+   "name": "表章項目",
+   "valueCount": 1,
+   "sampleValues": [
+    {
+     "code": "01",
+     "name": "金額",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat01",
+   "name": "用途分類",
+   "valueCount": 238,
+   "sampleValues": [
+    {
+     "code": "001",
+     "name": "世帯数分布（抽出率調整）",
+     "unit": "一万分比"
+    },
+    {
+     "code": "002",
+     "name": "集計世帯数",
+     "unit": "世帯"
+    },
+    {
+     "code": "003",
+     "name": "世帯人員",
+     "unit": "人"
+    },
+    {
+     "code": "007",
+     "name": "有業人員",
+     "unit": "人"
+    },
+    {
+     "code": "009",
+     "name": "世帯主の年齢",
+     "unit": "歳"
+    },
+    {
+     "code": "011",
+     "name": "持家率",
+     "unit": "％"
+    },
+    {
+     "code": "015",
+     "name": "家賃・地代を支払っている世帯の割合",
+     "unit": "％"
+    },
+    {
+     "code": "018",
+     "name": "受取",
+     "unit": "円"
+    },
+    {
+     "code": "019",
+     "name": "実収入",
+     "unit": "円"
+    },
+    {
+     "code": "020",
+     "name": "経常収入",
+     "unit": "円"
+    },
+    {
+     "code": "021",
+     "name": "勤め先収入",
+     "unit": "円"
+    },
+    {
+     "code": "022",
+     "name": "世帯主収入",
+     "unit": "円"
+    }
+   ],
+   "hasTotal": true
+  },
+  {
+   "id": "cat02",
+   "name": "世帯区分",
+   "valueCount": 4,
+   "sampleValues": [
+    {
+     "code": "11",
+     "name": "総世帯",
+     "unit": null
+    },
+    {
+     "code": "12",
+     "name": "勤労者世帯",
+     "unit": null
+    },
+    {
+     "code": "13",
+     "name": "勤労者以外の世帯",
+     "unit": null
+    },
+    {
+     "code": "14",
+     "name": "無職世帯",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "area",
+   "name": "地域区分",
+   "valueCount": 1,
+   "sampleValues": [
+    {
+     "code": "00000",
+     "name": "全国",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "time",
+   "name": "時間軸（年次）",
+   "valueCount": 19,
+   "sampleValues": [
+    {
+     "code": "2007000000",
+     "name": "2007年",
+     "unit": null
+    },
+    {
+     "code": "2008000000",
+     "name": "2008年",
+     "unit": null
+    },
+    {
+     "code": "2009000000",
+     "name": "2009年",
+     "unit": null
+    },
+    {
+     "code": "2010000000",
+     "name": "2010年",
+     "unit": null
+    },
+    {
+     "code": "2011000000",
+     "name": "2011年",
+     "unit": null
+    },
+    {
+     "code": "2012000000",
+     "name": "2012年",
+     "unit": null
+    },
+    {
+     "code": "2013000000",
+     "name": "2013年",
+     "unit": null
+    },
+    {
+     "code": "2014000000",
+     "name": "2014年",
+     "unit": null
+    },
+    {
+     "code": "2015000000",
+     "name": "2015年",
+     "unit": null
+    },
+    {
+     "code": "2016000000",
+     "name": "2016年",
+     "unit": null
+    },
+    {
+     "code": "2017000000",
+     "name": "2017年",
+     "unit": null
+    },
+    {
+     "code": "2018000000",
+     "name": "2018年",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  }
+ ]
+}

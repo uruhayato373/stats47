@@ -2,16 +2,13 @@ import "server-only";
 
 import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
 import { THEME_CATALOGS, type CatalogMetricGroup } from "@stats47/data-configs/theme-catalog";
-import {
-  readAllYearsRankingValuesFromR2,
-  readRankingItemFromR2,
-  readRankingValuesFromR2,
-} from "@stats47/ranking/server";
+import { readRankingValuesFromR2 } from "@stats47/ranking/server";
 import { readJapanSeries } from "@stats47/stats-r2/readers";
 import { isOk, type AreaType } from "@stats47/types";
 
 import { logger } from "@/lib/logger";
 
+import { readThemePrefectureValues, readThemeRankingItem, readWithOneRetry } from "./theme-ranking-readers";
 import { themeYearLabel } from "./theme-year-label";
 
 import type { ThemeConfig, ThemeIndicatorData } from "../types";
@@ -51,10 +48,41 @@ function buildNationalSeries(
 }
 
 /**
+ * 1 回の loadThemeData が R2 へ同時に投げる取得の上限 (定義・値・全国の系列を通した合計)。
+ *
+ * 指標ごとの取得を上限なしで一斉に投げると、指標の多いテーマ (家計の食料支出は 189 指標 = 567 取得) で
+ * 開発サーバーの取得が数件 `fetch failed` (ECONNRESET) で落ち、その指標がページから黙って消えた (2026-11-03)。
+ * 24 は開発サーバーで /areas/28000/household-food-spending を開く時間を測って選んだ (2026-11-14。
+ * 上限なし 9.9〜10.8 秒 / 6 本 13.2〜13.3 秒 / 12 本 9.1〜9.3 秒 / 24 本 7.6〜7.9 秒)。
+ */
+const R2_FETCH_CONCURRENCY = 24;
+
+/** 同時に走らせる数を max までに絞る実行器。空きが出たら、待っている順に次を始める。 */
+function createLimiter(max: number) {
+  let active = 0;
+  const waiting: (() => void)[] = [];
+  return async function run<T>(task: () => Promise<T>): Promise<T> {
+    // 満杯のときは枠を譲り受けるまで待つ (譲る側は active を減らさないので、上限を超える瞬間が無い)
+    if (active >= max) await new Promise<void>((resolve) => waiting.push(resolve));
+    else active += 1;
+    try {
+      return await task();
+    } finally {
+      const next = waiting.shift();
+      if (next) next();
+      else active -= 1;
+    }
+  };
+}
+
+/**
  * テーマダッシュボード用のデータを一括取得
  *
  * 全指標の RankingItem 定義 + R2 ranking values + TopoJSON を並列取得し、
  * indicatorDataMap として返す。tabIndicators がある場合はそのキーもマージして取得する。
+ * R2 への取得は同時に R2_FETCH_CONCURRENCY 本までに絞り、失敗した定義と値は 1 回だけ取り直す。
+ * 定義と都道府県の値は theme-ranking-readers.ts の読み取りを通し、題を作る段 (readThemeLeadFact) が同じリクエストで
+ * 読んだ指標を読み直さない。
  *
  * ★データ source は R2 の `app/ranking/<key>/values.json` のみ (e-Stat ライブ取得はしない)。
  *   e-Stat ライブ取得は Cloudflare Workers ランタイムで失敗し本番で error fallback を招いたため、
@@ -75,10 +103,12 @@ export async function loadThemeData(
   const tabKeys = theme.tabIndicators?.map((t) => t.rankingKey) ?? [];
   const allKeys = [...new Set([...theme.rankingKeys, ...tabKeys])];
 
+  const limit = createLimiter(R2_FETCH_CONCURRENCY);
+
   // 1. 全指標の RankingItem 定義を並列取得
   const rankingItemResults = await Promise.all(
     allKeys.map((key) =>
-      readRankingItemFromR2(key, areaType).catch((error) => {
+      limit(() => readThemeRankingItem(key, areaType)).catch((error) => {
         logger.error({ error, key, areaType }, "テーマダッシュボード: RankingItem取得失敗");
         return null;
       })
@@ -110,7 +140,7 @@ export async function loadThemeData(
 
     // city: R2 から直接読む (e-Stat 経由しない。全国行は無いため平均にフォールバック)
     if (areaType === "city") {
-      return readRankingValuesFromR2(key, "city", yearCode)
+      return limit(() => readWithOneRetry(() => readRankingValuesFromR2(key, "city", yearCode)))
         .then((result) => {
           const values = isOk(result) ? result.data : [];
           return { key, values, nationalValue: undefined as number | undefined, nationalSeries: undefined as { year: number; value: number }[] | undefined };
@@ -124,7 +154,7 @@ export async function loadThemeData(
     // prefecture: R2 から全年度を 1 read (e-Stat ライブ取得しない。/ranking/* と同一 source)。
     // current 年の values + 全国(県平均)トレンドを構築。全国行は無いため nationalValue は undefined
     // (ThemeMetricsDashboard が未選択時に県平均へフォールバックする)。
-    return readAllYearsRankingValuesFromR2(key, "prefecture")
+    return limit(() => readThemePrefectureValues(key))
       .then((result) => {
         const all = isOk(result) ? result.data : [];
         const ny = yearCode.slice(0, 4);
@@ -145,10 +175,10 @@ export async function loadThemeData(
   });
 
   // 公式の全国の系列 (app/japan/<key>/series.json)。全国のページの値と推移に使う。47 県の平均は全国と呼ばない
-  // (2026-10-31。無い指標は null で、全国のページは値を出さない)
+  // (2026-10-31。無い指標は null で、全国のページは値を出さない)。取り直しは読み取りの側が 3 回まで行う
   const japanPromise = Promise.all(
     validItems.map(({ key }) =>
-      readJapanSeries(key)
+      limit(() => readJapanSeries(key))
         .then((artifact) => [key, artifact] as const)
         .catch(() => [key, null] as const)
     )

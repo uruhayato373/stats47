@@ -116,7 +116,7 @@
           2023,
           2024
         ],
-        "retrievedAt": "2026-11-13T01:31:06.628Z",
+        "retrievedAt": "2026-11-14T10:09:42.986Z",
         "tableTitle": "品目分類 品目分類（2025年改定）（総数：金額） / 品目分類 品目分類（2025年改定）（総数：数量）",
         "rows": 282,
         "areas": 47,
@@ -156,7 +156,7 @@
             "status": "ok"
           }
         ],
-        "inputSha256": "e6499aced8adab35dcf1ce0557e4eefa8cac2aec8c17da232b27e3acdaa61449"
+        "inputSha256": "1d50029b04beb3a3a5c83f447c905432f81bbfd350a256da0e8e383d56426f43"
       }
     ],
     "results": 12,
@@ -173,12 +173,12 @@
       },
       {
         "file": "analysis.xlsx",
-        "sha256": "0181a7e11332bb6940d54902d7ec8c49786792ea5b4eeeb93e1e832c7b3435fd",
+        "sha256": "95b3f60a1652c5b07aaf61beaec35fea268c828f7c44f5df6f8bb05ef64603be",
         "bytes": 17498
       },
       {
         "file": "SOURCES.csv",
-        "sha256": "3a66aca4ab7c4c2bd0dade31edef2d7317ed4e6b6fe2ae27f759962e95a8a262",
+        "sha256": "16a6d800facff5c4cd004ff6ac62c93e2e98d0f3b1064ee89e60a9f1445d77aa",
         "bytes": 1457
       },
       {
@@ -208,22 +208,22 @@
       },
       {
         "file": "images/beef-expenditure-trend.png",
-        "sha256": "430eb225cc74941054b375bae3bfb022085507a3808ee39f14382e8f270acf83",
-        "bytes": 96457
+        "sha256": "144c7ae79ddbd28fdac51bc3fc473406eda374c3597ea2d9b9718fbba0c9acf7",
+        "bytes": 100433
       },
       {
         "file": "images/beef-quantity-trend.png",
-        "sha256": "ffb6f3f7bcf43ff0fb266434c41249929969da78ab1c86592ed27a0a572aea87",
-        "bytes": 104534
+        "sha256": "4e043f6a783fd1df52737276c4997917d44e04adcaf4321f227164c98d607d52",
+        "bytes": 107408
       },
       {
         "file": "images/analysis-file-preview.png",
-        "sha256": "1ed4fc306c08db6ea246726f3c10be7a4a92113f76cd7b457e491bcb7fded528",
-        "bytes": 110029
+        "sha256": "fe8f00f26dd6863f46b2655558041ef85df7774190a47fc789d8ce1ceefce95a",
+        "bytes": 111117
       },
       {
         "file": "inputs/capital-city-beef.json",
-        "sha256": "e6499aced8adab35dcf1ce0557e4eefa8cac2aec8c17da232b27e3acdaa61449",
+        "sha256": "1d50029b04beb3a3a5c83f447c905432f81bbfd350a256da0e8e383d56426f43",
         "bytes": 1121303
       },
       {
@@ -233,8 +233,8 @@
       },
       {
         "file": "analysis-pack.zip",
-        "sha256": "5dd7a31dc53e7690b64894f9b0300a4d3b029d5c69a0f1c0ba305a348d54ba85",
-        "bytes": 298817
+        "sha256": "f722bc653103842af0bcb294845eca64cd418327da7cb6a4622474f1c1ea7e55",
+        "bytes": 305919
       }
     ]
   },

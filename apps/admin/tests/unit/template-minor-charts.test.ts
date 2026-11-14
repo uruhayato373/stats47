@@ -38,7 +38,7 @@ describe('使用例の少ない統計図の見本', () => {
     const svg = renderCompositionPie(liquor());
     expect(svg.match(/<path data-category="/g)).toHaveLength(8);
     for (const label of labels) expect(svg.split(`>${label}</text>`).length - 1).toBe(1);
-    const legendShares = [...svg.matchAll(/text-anchor="end" font-size="26" font-weight="700">([\d.]+)%</g)].map((m) => Number(m[1]));
+    const legendShares = [...svg.matchAll(/text-anchor="end" font-size="30" font-weight="700">([\d.]+)%</g)].map((m) => Number(m[1]));
     expect(legendShares).toHaveLength(8);
     expect(Math.abs(legendShares.reduce((a, b) => a + b, 0) - 100)).toBeLessThan(0.5);
     expect(svg).toContain('>2018年度</text>');

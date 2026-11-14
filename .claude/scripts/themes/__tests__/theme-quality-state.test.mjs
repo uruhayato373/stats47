@@ -20,8 +20,39 @@ test("expanded audits retain every observation and definition below the tracked 
   writeThemeQualityState(file, source);
   assert.deepEqual(readThemeQualityState(file), source);
   for (const name of fs.readdirSync(path.dirname(file))) assert.ok(fs.statSync(path.join(path.dirname(file), name)).size <= 1_048_576);
+});
+
+test("a part that outgrows the limit is split into shards instead of refusing the write", (t) => {
+  // 2026-10-05 以降、観測が 1 MiB を超えて書き込みを拒否し、品質が全テーマ「不明」のまま 6 週間止まった
+  const file = fixture(t);
+  const dir = path.dirname(file);
+  const rows = Array.from({ length: 1300 }, (_, i) => ({ key: `metric-${i}`, evidence: "x".repeat(450) }));
+  const grown = { schemaVersion: 1, definitions: rows, observations: [...rows, ...rows, ...rows], lastGoodObservations: rows, findings: [] };
+  writeThemeQualityState(file, grown);
+  assert.deepEqual(readThemeQualityState(file), grown);
+  assert.ok(fs.existsSync(path.join(dir, "quality.observations.2.json")));
+  for (const name of fs.readdirSync(dir)) assert.ok(fs.statSync(path.join(dir, name)).size <= 1_048_576, name);
+
+  // 分けたファイルの 1 つが欠けたら読まない
+  const second = path.join(dir, "quality.observations.2.json");
+  const saved = fs.readFileSync(second);
+  fs.writeFileSync(second, "[]\n");
+  assert.throws(() => readThemeQualityState(file), /checksum mismatch/);
+  fs.writeFileSync(second, saved);
+
+  // 小さくなったら、余った番号のファイルを残さない
+  const shrunk = { ...grown, observations: rows };
+  writeThemeQualityState(file, shrunk);
+  assert.deepEqual(readThemeQualityState(file), shrunk);
+  assert.deepEqual(fs.readdirSync(dir).filter((name) => /\.\d+\.json$/.test(name)), []);
+});
+
+test("a single row larger than the limit is rejected before the previous baseline is touched", (t) => {
+  const file = fixture(t);
+  const source = { schemaVersion: 1, definitions: [], observations: [{ key: "a" }], lastGoodObservations: [], findings: [] };
+  writeThemeQualityState(file, source);
   const before = fs.readFileSync(file, "utf8");
-  assert.throws(() => writeThemeQualityState(file, { ...source, observations: [...rows, ...rows] }), /exceeds 1 MiB/);
+  assert.throws(() => writeThemeQualityState(file, { ...source, observations: [{ key: "b", evidence: "x".repeat(1_100_000) }] }), /exceeds 1 MiB/);
   assert.equal(fs.readFileSync(file, "utf8"), before);
   assert.deepEqual(readThemeQualityState(file), source);
 });

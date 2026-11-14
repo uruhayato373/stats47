@@ -81,6 +81,8 @@ export function createOverlayServer({ upstream, localDir = LOCAL_DIR, snapshotDi
         const value = upstreamRes.headers.get(name);
         if (value) headers[name] = value;
       }
+      // 接続失敗 (下の catch) だけでなく、R2 が 5xx を返した取り次ぎも残す。E2E が落ちた原因の調査で読む (E2E-FAILURE-EVIDENCE-01)
+      if (upstreamRes.status >= 500) log(`upstream ${upstreamRes.status} ${urlPath}`);
       res.writeHead(upstreamRes.status, headers);
       res.end(req.method === "HEAD" ? undefined : Buffer.from(await upstreamRes.arrayBuffer()));
     } catch (error) {

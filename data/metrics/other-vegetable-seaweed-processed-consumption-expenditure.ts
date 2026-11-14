@@ -4,7 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const otherVegetableSeaweedProcessedConsumptionExpenditure: MetricConfig = {
   "key": "other-vegetable-seaweed-processed-consumption-expenditure",
   "title": "他の野菜・海藻加工品のその他消費支出額",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間他の野菜・海藻加工品のその他消費支出額",
+  "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。",
   "unit": "円",
   "category": "economy",
   "source": {

@@ -86,6 +86,16 @@ describe('buildRecipe — 宣言演算 (derived)', () => {
     ]);
   });
 
+  it('★推計の人数の宣言 (sampleCount) は hash に効き、読み側でも失われない (DATA-WAGE-TEACHER-COVERAGE-01)', () => {
+    const base = { kind: 'estat' as const, statsDataId: '0003445758', cdCat02: '1192', tabCombination: [{ cdTab: '08,40', factor: 12 }] };
+    const sampleCount = { cdTab: '13,45', factor: 10, minimum: 10 };
+    const without = buildRecipe(metric(base));
+    const withCount = buildRecipe(metric({ ...base, sampleCount }));
+    // 順位と参考値が変わるので、宣言を足した指標は再取得の対象になる
+    expect(withCount.configHash).not.toBe(without.configHash);
+    expect(withCount.ops?.sampleCount).toEqual(sampleCount);
+    expect(parseRecipe(JSON.parse(JSON.stringify(withCount)))?.ops?.sampleCount).toEqual(sampleCount);
+  });
   it('axisSum の codes は整列される (順序は意味を持たない)', () => {
     const r = buildRecipe(
       metric({

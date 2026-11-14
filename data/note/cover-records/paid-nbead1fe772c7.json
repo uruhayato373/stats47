@@ -1,0 +1,229 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "paid-nbead1fe772c7",
+  "production": {
+    "id": "NCI-00335",
+    "policyId": "NCP-007",
+    "policyVersion": 4,
+    "brief": {
+      "headline": "MCP接続を\n架空環境で試す",
+      "subline": "LGWAN想定の実験手順",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に閉じた架空環境を示す無地のノートPCと無地の文書。実在の庁内システムや実接続・承認済みの表示は描かない。左側に太い見出し、下に補足を太い帯で配置する。文字は指定全文のみ。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/nbead1fe772c7 2026-10-23公開API本文照合。記事題名「MCP server を庁内システムにつなぐ実験 (架空 LGWAN 想定)」。架空とLGWANを本文で確認。カバーは本文の主題のみを示し、根拠のない数値・実績・保証を追加しない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "9969488b18dd15795bb567e1e422ea9e039f1cbdda1b59d1b11c590496d1a9ca",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-nbead1fe772c7/revisions/9969488b18dd15795bb567e1e422ea9e039f1cbdda1b59d1b11c590496d1a9ca.png"
+      },
+      "bytes": 60195,
+      "id": "9969488b18dd15795bb567e1e422ea9e039f1cbdda1b59d1b11c590496d1a9ca",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:36.272Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312773277/rectangle_large_type_2_b7ba0490f24460a4e74a3b239a846d0b.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "9969488b18dd15795bb567e1e422ea9e039f1cbdda1b59d1b11c590496d1a9ca"
+      }
+    },
+    {
+      "sha256": "ae0b054f21faf3f6482be5e06f5817141b02794f516401282f63d3c9e2016e0b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-nbead1fe772c7/revisions/ae0b054f21faf3f6482be5e06f5817141b02794f516401282f63d3c9e2016e0b.png"
+      },
+      "bytes": 60249,
+      "id": "ae0b054f21faf3f6482be5e06f5817141b02794f516401282f63d3c9e2016e0b",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:40:57.726Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "a51f7990a2c7b3dd75ee8bd0a3367d38a50c12686f35dbf54c6318505ecd0093"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出しとシリーズ名・話数・色でシリーズが区別できる",
+        "reviewedAt": "2026-10-11T11:49:21.011Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "a51f7990a2c7b3dd75ee8bd0a3367d38a50c12686f35dbf54c6318505ecd0093",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-nbead1fe772c7/inputs/a51f7990a2c7b3dd75ee8bd0a3367d38a50c12686f35dbf54c6318505ecd0093.json"
+          },
+          "bytes": 1046
+        }
+      }
+    },
+    {
+      "sha256": "b13612e2fab86ba61c399ca808bc9e4f2e5b77c3595f75b493cbd8b4a7ca5bb1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-nbead1fe772c7/revisions/b13612e2fab86ba61c399ca808bc9e4f2e5b77c3595f75b493cbd8b4a7ca5bb1.png"
+      },
+      "bytes": 55334,
+      "id": "b13612e2fab86ba61c399ca808bc9e4f2e5b77c3595f75b493cbd8b4a7ca5bb1",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:55:20.563Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320332124/rectangle_large_type_2_1c526f28ee9ab79a3686cbaa7b75bd9b.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "b13612e2fab86ba61c399ca808bc9e4f2e5b77c3595f75b493cbd8b4a7ca5bb1"
+      }
+    },
+    {
+      "sha256": "3ebffe11cc9557199e419f941082857e71ff039e16eb6586683aece94997c80c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-nbead1fe772c7/revisions/3ebffe11cc9557199e419f941082857e71ff039e16eb6586683aece94997c80c.png"
+      },
+      "bytes": 25537,
+      "id": "3ebffe11cc9557199e419f941082857e71ff039e16eb6586683aece94997c80c",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:06:34.090Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "c9b4fb288024327edca9d8f739e9fc9ab221888c4902d517e645c6a711ac713d"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.006/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:16:07.889Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "c9b4fb288024327edca9d8f739e9fc9ab221888c4902d517e645c6a711ac713d",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-nbead1fe772c7/inputs/c9b4fb288024327edca9d8f739e9fc9ab221888c4902d517e645c6a711ac713d.json"
+          },
+          "bytes": 1046
+        }
+      }
+    },
+    {
+      "sha256": "ddc0281379f8317c6f80e52a73c1793d9601a785ac3effdb3624baadf8c62f04",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-nbead1fe772c7/revisions/ddc0281379f8317c6f80e52a73c1793d9601a785ac3effdb3624baadf8c62f04.png"
+      },
+      "bytes": 56057,
+      "id": "ddc0281379f8317c6f80e52a73c1793d9601a785ac3effdb3624baadf8c62f04",
+      "kind": "candidate",
+      "version": "2026-10-11-truecolor-v3b",
+      "createdAt": "2026-10-11T12:29:24.744Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "f3fadda63cd82d1ab26db96222775210a3c9b4d12ea5a6e181a3b886bcbbcdd4"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "フルカラー再発行版。目視合格した確認版との平均画素差0.006/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:36:35.469Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "f3fadda63cd82d1ab26db96222775210a3c9b4d12ea5a6e181a3b886bcbbcdd4",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-nbead1fe772c7/inputs/f3fadda63cd82d1ab26db96222775210a3c9b4d12ea5a6e181a3b886bcbbcdd4.json"
+          },
+          "bytes": 1046
+        }
+      }
+    },
+    {
+      "sha256": "1b21da243f3cab5d17f539f877be7c4c4e337d30c175b79d7009a2aec66bf3c8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-nbead1fe772c7/revisions/1b21da243f3cab5d17f539f877be7c4c4e337d30c175b79d7009a2aec66bf3c8.png"
+      },
+      "bytes": 1905839,
+      "id": "1b21da243f3cab5d17f539f877be7c4c4e337d30c175b79d7009a2aec66bf3c8",
+      "kind": "candidate",
+      "version": "pop-NCP-007-v4-61e241832d2c",
+      "createdAt": "2026-10-23T11:12:49.362Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "88c9e0352d30ac3316e6873300da5167585ab31606978841b1457db5db8ebe40"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T11:14:57.927Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "88c9e0352d30ac3316e6873300da5167585ab31606978841b1457db5db8ebe40",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-nbead1fe772c7/inputs/88c9e0352d30ac3316e6873300da5167585ab31606978841b1457db5db8ebe40.json"
+          },
+          "bytes": 9125
+        },
+        "production": {
+          "id": "NCI-00335",
+          "policyId": "NCP-007",
+          "policyVersion": 4,
+          "planSha256": "61e241832d2c5e9c82a2a7a78ae7cdeeb61260dd50f66e6a0a84de403d0ce44a"
+        }
+      }
+    }
+  ]
+}

@@ -34,6 +34,62 @@
         "surveyedAt": "2026-09-09",
         "rationale": "自家用車通勤・通学者数を都道府県別の実値として比較する。"
       }
+    },
+    {
+      "rankingKey": "roadside-station-count",
+      "shortLabel": "道の駅数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.mlit.go.jp/road/Michi-no-Eki/list.html",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「道の駅 多い県」「道の駅数 全国 ランキング」(週 70〜98 回) と検索される、道の駅がどの県に多いかに答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "airport-count",
+      "shortLabel": "空港数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://nlftp.mlit.go.jp/ksj/index.html",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「空港がない都道府県」「九州 空港 ない 県」「岐阜 空港」と検索される、空港のない県・多い県はどこかに答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "commute-by-bus",
+      "shortLabel": "乗合バス通勤・通学者数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「車通勤 割合」を知りたい読者が、車の通勤者数と乗合バスの通勤者数を同じ 2010・2020 年で並べて公共交通との差を見られるようにする。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "commuter-ratio-to-other-municipalities",
+      "shortLabel": "他市区町村への通勤者比率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「車通勤 割合」「東京 車通勤 割合」を調べる読者に、通勤・通学の章で総量ではなく割合として、他の市区町村へ移動して働く人の比率を示す。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
     }
   ],
   "charts": [],
@@ -49,6 +105,16 @@
       ]
     },
     {
+      "key": "railway-access-2",
+      "title": "道の駅数",
+      "rankingKeys": [
+        "roadside-station-count"
+      ],
+      "defaultCheckedKeys": [
+        "roadside-station-count"
+      ]
+    },
+    {
       "key": "bus-transportation-1",
       "title": "バス事業者数",
       "rankingKeys": [
@@ -59,23 +125,46 @@
       ]
     },
     {
-      "key": "car-dependent-commute-1",
-      "title": "自家用車通勤・通学者数",
+      "key": "bus-transportation-2",
+      "title": "空港数",
       "rankingKeys": [
-        "commute-by-car"
+        "airport-count"
       ],
       "defaultCheckedKeys": [
-        "commute-by-car"
+        "airport-count"
+      ]
+    },
+    {
+      "key": "car-dependent-commute-1",
+      "title": "他市区町村への通勤者比率",
+      "rankingKeys": [
+        "commuter-ratio-to-other-municipalities"
+      ],
+      "defaultCheckedKeys": [
+        "commuter-ratio-to-other-municipalities"
+      ]
+    },
+    {
+      "key": "car-dependent-commute-2",
+      "title": "車と乗合バスの通勤・通学者数",
+      "rankingKeys": [
+        "commute-by-car",
+        "commute-by-bus"
+      ],
+      "defaultCheckedKeys": [
+        "commute-by-car",
+        "commute-by-bus"
       ]
     }
   ],
   "sections": [
     {
       "key": "railway-access",
-      "title": "地域の鉄道駅や鉄道網は移動手段として機能しているか",
-      "concern": "ローカル線の減便や廃線が進み地域外への移動手段が失われないか不安です。",
+      "title": "駅・道の駅・道路は身近にどれだけあるか",
+      "concern": "駅や道の駅が近くにあるか、駅が遠い地域で車の移動に使える道路がどれだけあるかを知りたい。",
       "metricGroupKeys": [
-        "railway-access-1"
+        "railway-access-1",
+        "railway-access-2"
       ],
       "embeddedSectionKeys": [
         "geo-station-access",
@@ -84,18 +173,20 @@
     },
     {
       "key": "bus-transportation",
-      "title": "日常の移動を支える路線バスや事業者は維持されているか",
-      "concern": "バス事業者の減少や路線廃止により身近な移動手段がなくなるか心配です。",
+      "title": "バス事業者や空港はどれだけあるか",
+      "concern": "日常のバスや遠出に使う空港が、住む県にどれだけあるかを知りたい。",
       "metricGroupKeys": [
-        "bus-transportation-1"
+        "bus-transportation-1",
+        "bus-transportation-2"
       ]
     },
     {
       "key": "car-dependent-commute",
-      "title": "通勤・通学における自家用車依存や車に乗れない人の移動環境はどうか",
-      "concern": "自家用車への依存度が高まり車を運転できない高齢者等の移動が心配です。",
+      "title": "通勤・通学は車と公共交通のどちらで動いているか",
+      "concern": "車に乗れない人を含め、通勤・通学で車やバスにどれだけ頼っているかを知りたい。",
       "metricGroupKeys": [
-        "car-dependent-commute-1"
+        "car-dependent-commute-1",
+        "car-dependent-commute-2"
       ]
     }
   ],

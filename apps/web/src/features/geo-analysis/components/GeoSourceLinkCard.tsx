@@ -1,5 +1,7 @@
 import { SurfaceLinkCard } from '@/components/surface';
 
+import { navSurfaceProps } from '@/lib/analytics/events';
+
 import { GeoSourceThumbnail } from './GeoSourceThumbnail';
 
 export function GeoSourceLinkCard({
@@ -22,6 +24,7 @@ export function GeoSourceLinkCard({
       prefetch={false}
       href={`/geo/datasets/${dataId}`}
       data-geo-source-card={dataId}
+      {...navSurfaceProps('geo_layer_list')}
       className={`group flex h-full min-w-0 overflow-hidden p-0 focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-primary ${compact ? '' : 'sm:flex-col'}`}
     >
       {label && (

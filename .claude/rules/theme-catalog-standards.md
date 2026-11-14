@@ -345,9 +345,9 @@ evidenceTopics: [
 - `lensKey` は複数テーマで再利用できる安定した観点、`sourceKeys` は根拠資料である。白書名を lens にしない。
 - NotebookLM は論点・図表候補を抽出する補助。採択には公式 HTTPS URL、資料の実在、関連 route の実在が必要。
 - 1 topic = 1 問い。指標カードやチャートと同じ事実を再説明せず、関連ページへ進む理由を短く示す。
-- 公開 URL は増やさない。`/themes/*` 内から既存 ranking / theme / tag へ接続し、`nav_surface=theme_evidence` で計測する。
+- **テーマページには描画しない (2026-11-14 オーナー決定)。** 「白書・統計から見る論点」の節は 28 日のクリックがテーマ全体で 4 回 (閲覧 約 4,100・2026-W45) で、ページの約 600px を使っていたので外した。`evidenceTopics` は指標を選んだ根拠としてカタログに残し、validator の検査も続ける。計測の値 `theme_evidence` は過去の記録にだけ残る。
 - `relatedChartKeys` は同じ ThemeCatalog の実在 chart、ranking は active、theme は自己参照不可とする。
-- generator は読まない。UI は `ThemeEvidenceTopicsSection` が ThemeCatalog を直読みする。
+- generator は読まない。読者向けの UI も読まない (管理画面のカタログ監査だけが読む)。
 
 ---
 
@@ -411,6 +411,7 @@ harmRelevance: [
 | **error (adoptionCriteria)**   | `[adoption-criteria]` ADOPTION_CRITERIA 外の値                                                                                                                                                                                                                                        |
 | **error (selection evidence)** | `[selection-code-mismatch]` 統計指標コードが metric config の cdCat01 と不一致 / `[selection-boilerplate]` adoptionCriteria 付きなのに定型文が残る / `[selection-source-required]` https sourceUrl・ISO surveyedAt が無い / `[selection-criteria-all]` 5 基準全部列挙 (§4「機械検査」・2026-09-16 新設) |
 | **warn (chart-temporal-fit)**  | `[chart-temporal-fit]` line-chart が参照する指標の `years` が1年しかない (推移を描けない・チャート型の再検討候補。2026-09-15新設・実測13件・誤検知の余地が無い確実な不整合のみ検出するため warn のまま運用する)                                                                          |
+| **live 監査 (trend-years-short)** | 週次の `theme-chart-live-audit.mjs` が、タイトルに「推移」を含む図が描く指標の R2 観測年数を `MIN_TREND_YEARS` (5・正典は `display-semantics/index.ts`・依存ミラーへ写す) と比べ、満たない指標を error にする (2026-11-14 新設。実測は全 27 図が 9 年以上で 0 件。年数が足りない指標は図の題を「比較」等にするか、数値タイルに替える) |
 
 ---
 
@@ -464,7 +465,7 @@ harmRelevance: [
 | `charts.section`                                   | **テーマページでは未使用** (area ページの `AreaChartSection` のみ使用)                                                                                                 | —                                                                                                 |
 | `keywords`                                         | `<meta>` / 構造化データ                                                                                                                                                | theme utils                                                                                       |
 | `relatedArticleTagKeys`                            | 関連記事セクション + ネイティブアフィリ                                                                                                                                | `ThemeRelatedArticles`                                                                            |
-| `evidenceTopics`                                   | **「白書・統計から見る論点」**。公式資料から ranking / theme / tag へ周遊                                                                                              | `ThemeEvidenceTopicsSection` (`nav_surface=theme_evidence`)                                       |
+| `evidenceTopics`                                   | **UI 非表示** (2026-11-14 に「白書・統計から見る論点」の節を外した)。指標の選定の根拠として SSOT に保持 | —                                                                                                 |
 | `metrics` → 相関 (別途 R2)                          | **「このテーマと関連の深い指標」**。テーマ外の指標のうち、テーマ内指標と人口補正後の順位相関 \|r\|≥0.5 のもの最大 8 件。相関 workflow が `app/correlation/by-theme/<themeKey>.json` に事前計算 | `ThemeCorrelatedMetrics` (`nav_surface=theme_ranking`)                                            |
 | `rejectedCandidates`                               | UI 非表示 (再調査防止の記録のみ)                                                                                                                                       | —                                                                                                 |
 | (別途) EMBEDDED_SECTIONS                           | 埋め込み section。**半幅 2 カラム** = 人口移動フロー / 通勤フロー (ChartPanel 化・2026-08-04)、**全幅** = 駅乗降 / 高速道路 / 過疎×医療 / 日照 | `THEME_SECTION_REGISTRY` + `HALF_WIDTH_SECTIONS`                                                  |

@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "21-disaster-sns-multilang",
+  "production": {
+    "id": "NCI-00036",
+    "policyId": "NCP-007",
+    "policyVersion": 4,
+    "brief": {
+      "headline": "災害時のSNS発信文を\n多言語化",
+      "subline": "Claude Codeで下書きする手順",
+      "subject": "黄色い防災ラジオと懐中電灯、ノートPCを大きく描く。実務カテゴリの机上の資料構図。青と明るい黄色の暖かい手描き。画面・紙・道具の表面は無文字。実在UI・製品ロゴ・グラフ・地図は描かない。人物・顔・手・動物は描かない。",
+      "evidence": "https://note.com/stats47/n/nf01a62d2dc16 本文確認2026-11-04。災害時のSNS発信文の多言語化の手順。機械翻訳の確認は人が行う。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "de93a4eb0106a183d0b8afaa4db68d2e1cb102efd2acda8fcea9bb759a91a305",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/21-disaster-sns-multilang/revisions/de93a4eb0106a183d0b8afaa4db68d2e1cb102efd2acda8fcea9bb759a91a305.png"
+      },
+      "bytes": 115606,
+      "id": "de93a4eb0106a183d0b8afaa4db68d2e1cb102efd2acda8fcea9bb759a91a305",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:38.915Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/293007478/rectangle_large_type_2_0e1d9a6ce7974d54c7af10a6e46fede8.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "de93a4eb0106a183d0b8afaa4db68d2e1cb102efd2acda8fcea9bb759a91a305"
+      }
+    },
+    {
+      "sha256": "90e7cc5682405a396d9d30bc90ea218ae361f909f53192314ae19c39931d37b2",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/21-disaster-sns-multilang/revisions/90e7cc5682405a396d9d30bc90ea218ae361f909f53192314ae19c39931d37b2.png"
+      },
+      "bytes": 58426,
+      "id": "90e7cc5682405a396d9d30bc90ea218ae361f909f53192314ae19c39931d37b2",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:46:18.200Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "0403e6ac9c2c2c40fc8c24e36bb39d6e047b000dd204b5c22eac4bb7b46b6a49"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出しとシリーズ名・話数・色でシリーズが区別できる",
+        "reviewedAt": "2026-10-11T11:51:28.260Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "0403e6ac9c2c2c40fc8c24e36bb39d6e047b000dd204b5c22eac4bb7b46b6a49",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/21-disaster-sns-multilang/inputs/0403e6ac9c2c2c40fc8c24e36bb39d6e047b000dd204b5c22eac4bb7b46b6a49.json"
+          },
+          "bytes": 1076
+        }
+      }
+    },
+    {
+      "sha256": "088cc9f9e7a5f0012e7f7277e58e792ba129fa0028076b9eba27727e70648a26",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/21-disaster-sns-multilang/revisions/088cc9f9e7a5f0012e7f7277e58e792ba129fa0028076b9eba27727e70648a26.png"
+      },
+      "bytes": 96723,
+      "id": "088cc9f9e7a5f0012e7f7277e58e792ba129fa0028076b9eba27727e70648a26",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:56:02.560Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320331749/rectangle_large_type_2_69485a013f9e62de1007154ccda0c3db.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "088cc9f9e7a5f0012e7f7277e58e792ba129fa0028076b9eba27727e70648a26"
+      }
+    },
+    {
+      "sha256": "4b5572637ceabeaca48d369cf06c844249fc5c3a2c0445a92e08674145af02a3",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/21-disaster-sns-multilang/revisions/4b5572637ceabeaca48d369cf06c844249fc5c3a2c0445a92e08674145af02a3.png"
+      },
+      "bytes": 23700,
+      "id": "4b5572637ceabeaca48d369cf06c844249fc5c3a2c0445a92e08674145af02a3",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:11:54.942Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "606971c8512c77d0fa32aa758c12fc131f66a7bec143baae5860e74db235520d"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.005/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:17:47.216Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "606971c8512c77d0fa32aa758c12fc131f66a7bec143baae5860e74db235520d",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/21-disaster-sns-multilang/inputs/606971c8512c77d0fa32aa758c12fc131f66a7bec143baae5860e74db235520d.json"
+          },
+          "bytes": 1076
+        }
+      }
+    },
+    {
+      "sha256": "2a9d1a3234ff8d9a5cf03bbc92276d22bc7da98ac7338d7880745e4456ec1162",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/21-disaster-sns-multilang/revisions/2a9d1a3234ff8d9a5cf03bbc92276d22bc7da98ac7338d7880745e4456ec1162.png"
+      },
+      "bytes": 1944173,
+      "id": "2a9d1a3234ff8d9a5cf03bbc92276d22bc7da98ac7338d7880745e4456ec1162",
+      "kind": "candidate",
+      "version": "pop-NCP-007-v4-658bc5b71419",
+      "createdAt": "2026-11-04T00:55:13.359Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "f0a566427b028bbf27193f8940696af4453778323c04ff15bdee238ad0d12c01"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:56:50.139Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "f0a566427b028bbf27193f8940696af4453778323c04ff15bdee238ad0d12c01",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/21-disaster-sns-multilang/inputs/f0a566427b028bbf27193f8940696af4453778323c04ff15bdee238ad0d12c01.json"
+          },
+          "bytes": 8630
+        },
+        "production": {
+          "id": "NCI-00036",
+          "policyId": "NCP-007",
+          "policyVersion": 4,
+          "planSha256": "658bc5b714192d6a3da5ea5ae5484660cc06d5903531d6b14300d51c42e2f33b"
+        }
+      }
+    }
+  ]
+}

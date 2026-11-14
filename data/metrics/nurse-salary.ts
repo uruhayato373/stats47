@@ -1,4 +1,5 @@
 import { DEFAULT_METRIC_PRESENTATION } from "./defaults/presentation";
+import { WAGE_STRUCTURE_COVERAGE_NOTE, WAGE_STRUCTURE_SAMPLE_COUNT } from "./defaults/wage-structure-coverage";
 import type { MetricConfig } from "../../packages/data-configs/src/types";
 
 export const nurseSalary: MetricConfig = {
@@ -6,12 +7,14 @@ export const nurseSalary: MetricConfig = {
   "title": "看護師の所定内給与（月額）",
   "subtitle": "看護師の所定内給与額",
   "description": "賃金構造基本統計調査における看護師の所定内給与額（月額）です。時間外等の超過労働給与額や年間賞与は含まず、年収や手取り額ではありません。",
+  "note": WAGE_STRUCTURE_COVERAGE_NOTE,
   "unit": "千円",
   "category": "laborwage",
   "source": {
     "kind": "estat",
     "statsDataId": "0003445758",
     "cdTab": "10,42",
+    "sampleCount": WAGE_STRUCTURE_SAMPLE_COUNT,
     "cdCat01": "01",
     "cdCat02": "1133",
     "displayName": "賃金構造基本統計調査",

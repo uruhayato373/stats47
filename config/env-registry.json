@@ -1,0 +1,1372 @@
+{
+  "version": 1,
+  "description": "Environment variable names and exposure classes. Values must never be stored here.",
+  "variables": [
+    {
+      "name": "APPDATA",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "CHROME_PATH",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NLM_NOTEBOOK",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NOTE_BU_CDP",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NOTE_COVER_BROWSER",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NOTE_COVER_PNG",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "XDG_CONFIG_HOME",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NODE_EXTRA_CA_CERTS",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "DISPLAY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "MEASUREMENT_BROWSER_SOURCE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "MEASUREMENT_BROWSER_STATE_PATH",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "MEASUREMENT_BROWSER_OUTPUT_STATE_PATH",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "MEASUREMENT_VAULT_KEY",
+      "visibility": "secret",
+      "contexts": [
+        "secret",
+        "process"
+      ]
+    },
+    {
+      "name": "MEASUREMENT_VAULT_WRITER",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "MEASUREMENT_SOURCES",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "ACCESSIBILITY_BASELINE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "AD_SLOT_PREVIEW",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ],
+      "note": "1 で開発サーバーのアフィリエイト在庫を全ての意図軸の代わりの広告に置き換え、広告枠の配置をローカルで確かめる (npm run dev:web:ad-preview)。本番のビルドでは働かない"
+    },
+    {
+      "name": "BLOG_PREVIEW_R2_URL",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ],
+      "note": "npm run blog:preview が開発サーバーへ渡す。下書きを重ねるサーバーの URL で、R2 の読み先をここへ向ける。本番には無い"
+    },
+    {
+      "name": "BLOG_PREVIEW_SLUG",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ],
+      "note": "npm run blog:preview が開発サーバーへ渡す。公開記事の一覧に無くても確認できる下書きの slug。本番には無い"
+    },
+    {
+      "name": "ANALYZE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "ANGLE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "ANTHROPIC_API_KEY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "ASSET_POLICY_BASELINE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "AUTH_SECRET",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "BASE_URL",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "BLOG_DIR",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "BROWSER_USE_BIN",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "CATALOG_INDEX",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "CHECKER_WIRING_BASELINE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "CHECK_RUNTIME_CONFIG",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "CHROME",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "CI",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "CLAUDE_CLI_BIN",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "CLAUDE_CODE_OAUTH_TOKEN",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "CLAUDE_PROJECT_DIR",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "CLAUDE_CODE_SESSION_ID",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "CLAUDE_SESSION_ID",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "CLOUDFLARE_ACCOUNT_ID",
+      "visibility": "server",
+      "contexts": [
+        "process",
+        "variable"
+      ]
+    },
+    {
+      "name": "CLOUDFLARE_API_TOKEN",
+      "visibility": "secret",
+      "contexts": [
+        "process",
+        "secret"
+      ]
+    },
+    {
+      "name": "CLOUDFLARE_R2_ACCESS_KEY_ID",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "CLOUDFLARE_R2_BUCKET_NAME",
+      "visibility": "server",
+      "contexts": [
+        "process",
+        "variable"
+      ]
+    },
+    {
+      "name": "CLOUDFLARE_R2_SECRET_ACCESS_KEY",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "CLOUDFLARE_WORKERS",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "CLOUDFLARE_ZONE_ID",
+      "visibility": "server",
+      "contexts": [
+        "process",
+        "variable"
+      ]
+    },
+    {
+      "name": "CODEX_THREAD_ID",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "CONTENT_KEY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "D1_DATABASE_ID",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "DB_LOCAL",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "DOCS_GOVERNANCE_CONFIG",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "DOCS_GOVERNANCE_NOW",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "DOCS_GOVERNANCE_ROOT",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "DOCS_LINKS_BASELINE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "DOCS_LINKS_CACHE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "DRAFT_DELETE_PATHS",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "DRY_RUN",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "BACKLOG_LEDGER_PATH",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "ENV_REGISTRY_PATH",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "ESTAT_APP_ID",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "ESTAT_SNAPSHOT_ONLY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ],
+      "description": "非秘密のサーバー側実行フラグ。1 のとき切片が未転送・未登録、または非対応形状でも live e-Stat API (getStatsData/getMetaInfo) へ戻らず失敗させる。未設定では移行中の API 併存を許可する。",
+      "usedBy": [
+        "packages/data-configs/scripts/lib/estat-table-reader.ts",
+        "packages/data-configs/scripts/page-data-batch.ts",
+        "packages/data-configs/scripts/verify-table-snapshot-equivalence.ts"
+      ]
+    },
+    {
+      "name": "EXPANSION_QUEUE_NOW",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "EXPECTED_EMBEDS",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "EXPECTED_PRICE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "EXPECTED_TITLE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "FREE_PROBE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "GA4_PROPERTY_ID",
+      "visibility": "server",
+      "contexts": [
+        "process",
+        "variable"
+      ]
+    },
+    {
+      "name": "GA4_SNAPSHOT_DIR",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "GEMINI_API_KEY",
+      "visibility": "server",
+      "contexts": [
+        "process",
+        "secret"
+      ]
+    },
+    {
+      "name": "GEMINI_TEXT_MODEL",
+      "visibility": "workflow",
+      "contexts": [
+        "variable"
+      ]
+    },
+    {
+      "name": "GH_SECRETS_PAT",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "GITHUB_ACTIONS",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "GITHUB_OUTPUT",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "GITHUB_REPOSITORY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "GITHUB_RUN_ATTEMPT",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "GITHUB_RUN_ID",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "GITHUB_SERVER_URL",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "GITHUB_STEP_SUMMARY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "GITHUB_TOKEN",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON",
+      "visibility": "secret",
+      "contexts": [
+        "process",
+        "secret"
+      ]
+    },
+    {
+      "name": "GOOGLE_ADSENSE_ACCOUNT_ID",
+      "visibility": "server",
+      "contexts": [
+        "process",
+        "variable"
+      ]
+    },
+    {
+      "name": "GOOGLE_ADSENSE_CLIENT_ID",
+      "visibility": "server",
+      "contexts": [
+        "process",
+        "variable"
+      ]
+    },
+    {
+      "name": "GOOGLE_ADSENSE_CLIENT_SECRET",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "GOOGLE_ADSENSE_REFRESH_TOKEN",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "GOOGLE_API_KEY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "GOOGLE_OAUTH_CLIENT_ID",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "GOOGLE_OAUTH_CLIENT_SECRET",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "GOOGLE_OAUTH_REFRESH_TOKEN",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "GOOGLE_SERVICE_ACCOUNT_KEY_JSON",
+      "visibility": "secret",
+      "contexts": [
+        "process",
+        "secret"
+      ]
+    },
+    {
+      "name": "GSC_SNAPSHOT_DIR",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "HTTPS_PROXY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "HTTP_PROXY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "IG_DRY_RUN",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "IG_FORCE_DATE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "IG_FORCE_TIME",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "IG_PUBLIC_R2_BASE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "IG_SCHEDULE_FILE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "IG_TOKEN_OUT",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "IMPROVEMENT_BACKLOG_PATH",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "IMPROVEMENT_TODAY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ],
+      "note": "overdue 判定の「今日」を固定する (fixture 検証用)。未指定なら実時刻。秘匿値ではない"
+    },
+    {
+      "name": "INSTAGRAM_ACCESS_TOKEN",
+      "visibility": "secret",
+      "contexts": [
+        "process",
+        "secret"
+      ]
+    },
+    {
+      "name": "INSTAGRAM_BUSINESS_ACCOUNT_ID",
+      "visibility": "server",
+      "contexts": [
+        "process",
+        "variable"
+      ]
+    },
+    {
+      "name": "KDP_PROFILE_ROOT",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "KINDLE_ARCHIVE_BUCKET",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "KINDLE_ARCHIVE_KEY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "LOCAL_DB_PATH",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "LOCAL_DB_ROOT",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "LOG_LEVEL",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "MAINTENANCE_DEBT_BASELINE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "MAINTENANCE_DEBT_CACHE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "MAX_THINKING_TOKENS",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "META_PAGE_ACCESS_TOKEN",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "MIN_BODY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "MLIT_API_KEY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_DIST_DIR",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PHASE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG",
+      "visibility": "public",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_BASE_URL",
+      "visibility": "public",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_BASE_URL_PRODUCTION",
+      "visibility": "public",
+      "contexts": [
+        "variable"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_ENV",
+      "visibility": "public",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_ESTAT_APP_ID",
+      "visibility": "public",
+      "contexts": [
+        "process",
+        "variable"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_ESTAT_MAX_RETRIES",
+      "visibility": "public",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_ESTAT_RATE_LIMIT_PER_MINUTE",
+      "visibility": "public",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_ESTAT_REQUEST_TIMEOUT_MS",
+      "visibility": "public",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_ESTAT_RETRY_DELAY_MS",
+      "visibility": "public",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_GA_MEASUREMENT_ID",
+      "visibility": "public",
+      "contexts": [
+        "process",
+        "variable"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED",
+      "visibility": "public",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_KOMUIN_AI_GUIDE_URL",
+      "visibility": "public",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_R2_GEOSHAPE_URL",
+      "visibility": "public",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_R2_PUBLIC_URL",
+      "visibility": "public",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_RAKUTEN_AFFILIATE_ID",
+      "visibility": "public",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_TECH_SCHOOL_AFFILIATE_URL",
+      "visibility": "public",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_RUNTIME",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_SKIP_BUILD_TYPECHECK",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NIMG",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NODE_ENV",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NODE_OPTIONS",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NOTE_KEY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NO_PROXY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "OFFICIAL_THEME_PYTHON",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "OGP_DEBUG",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "PAID_PROBE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "PATH",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "PDF_TEXT_BIN",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "PLAYWRIGHT_TEST_BASE_URL",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "PORT",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "POST_ID",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "PSI_API_KEY",
+      "visibility": "secret",
+      "contexts": [
+        "process",
+        "secret"
+      ]
+    },
+    {
+      "name": "PUBLISHED_DELETE_PATHS",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "PWSH_PATH",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "QUALITY_GATES_REGISTRY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "R2_ACCESS_KEY_ID",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "R2_DEV_GATEWAY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "R2_DEV_GATEWAY_CACHE_SECONDS",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "R2_DEV_GATEWAY_PORT",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "R2_DEV_GATEWAY_UPSTREAM",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "R2_PRIVATE_BUCKET_NAME",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "R2_PUBLIC_FETCH_URL",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "R2_S3_ENDPOINT",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "EFFECT_VERDICT_CLOSED_WAVES",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "R2_STAGING_DIR",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "R2_SECRET_ACCESS_KEY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "RANKING_KEYS",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "REFRESH_METRIC",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "REPO_HYGIENE_BASELINE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "REPO_HYGIENE_MAX_BYTES",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "ROUTE_CONTRACT_BASELINE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "RUN_RENDER_TESTS",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "SCRATCHPAD",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "SITE_ORIGIN",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "SNS_METRICS_REPO_ROOT",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "SNS_R2_BASE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "SOURCE_REPAIR_PAYLOAD_B64",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ],
+      "note": "regenerate-blog-svgs source-repair の一時入力。値はGitHub Actions input由来で永続保存しない"
+    },
+    {
+      "name": "STATE_DIR",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "STATS47_COVERAGE_SPLIT",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "STATS47_PROJECT_ROOT",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "STATS47_SCAN_ROOT",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ],
+      "note": "検査スクリプト (.claude/scripts/lib の check-*.cjs・preflight-commit.mjs・audit-workflow-policy.cjs) と、ルートを決める state-pull.mjs・remove-worktree.mjs・append-ga4-affiliate-history.mjs・audit-note-image-assets.mjs が扱うルートの上書き。テストの fixture 用で、既定はスクリプト自身の作業ツリー。CLAUDE_PROJECT_DIR は読まない"
+    },
+    {
+      "name": "SURVEYS_JSON",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "SURVEY_STATE_MAX_AGE_DAYS",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ],
+      "note": "survey portfolio / linkage 監査 state の鮮度上限日数 (既定 35)。validate-survey-portfolio.ts が読む"
+    },
+    {
+      "name": "TSC_CONCURRENCY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "THREADS_ACCESS_TOKEN",
+      "visibility": "secret",
+      "contexts": [
+        "process",
+        "secret"
+      ],
+      "note": "Threads 長期アクセストークン (60 日)。post-threads-scheduled.yml が使い、threads-token-refresh.yml が週次で更新する"
+    },
+    {
+      "name": "THREADS_FORCE_NOW",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ],
+      "note": "テスト用: threads/post-from-schedule.cjs の現在時刻を ISO 日時で固定する (--now と同じ)"
+    },
+    {
+      "name": "THREADS_TOKEN_OUT",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ],
+      "note": "threads/refresh-token-ci.cjs が新トークンを書き出すファイルパス (既定 /tmp/threads-new-token.txt)"
+    },
+    {
+      "name": "THREADS_USER_ID",
+      "visibility": "secret",
+      "contexts": [
+        "process",
+        "secret"
+      ],
+      "note": "Threads のユーザー ID。投稿 API のパス /{threads-user-id}/threads に使う"
+    },
+    {
+      "name": "USER",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "VALUE_FORMAT_BASELINE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "VITEST",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "WEB_DEV_BUNDLER",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "WEB_DEV_HOST",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "WORKER_CACHE_PURGE_SECRET",
+      "visibility": "secret",
+      "contexts": [
+        "process",
+        "secret"
+      ]
+    },
+    {
+      "name": "XXX",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "ATTACH_NAME",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    }
+  ]
+}

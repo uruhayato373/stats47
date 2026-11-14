@@ -5,6 +5,7 @@
 export {
   getSurveyEditorialContent,
   requiredSurveyReaderQuestionCount,
+  type SurveyCycle,
   type SurveyEditorialContent,
   type SurveyReaderQuestion,
 } from '@stats47/data-configs/survey-editorial';

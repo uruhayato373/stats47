@@ -6826,6 +6826,9 @@
         "データ",
         "ノウハウ"
       ],
+      "books": [
+        "K-S1-15"
+      ],
       "sensitive": false,
       "status": "active",
       "axes": {
@@ -7272,6 +7275,9 @@
       "revenue": [
         "広告",
         "データ"
+      ],
+      "books": [
+        "K-S1-16"
       ],
       "sensitive": false,
       "status": "active",
@@ -10268,6 +10274,38 @@
             },
             {
               "metric": "shochu-consumption-expenditure"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K11",
+      "level": "major",
+      "question": "この 19 年で、47 の県庁所在市の食卓は似てきたのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "primaryTheme": "theme:household-food-spending",
+      "dataNote": "家計調査 品目別の支出額 (県庁所在市・二人以上の世帯、2007〜2025 年)。品目の支出額を食料費に占める割合に直し、47 市の間のばらつき (変動係数) と市ごとの平均からの離れ方を、3 年平均どうし (2007〜09 年と 2023〜25 年) で比べる",
+      "pitfall": "県庁所在市の二人以上の世帯の値で、県全体ではない。1 市あたり約 100 世帯の標本で、単年の順位は食料費の合計でも 20 位以上動く。金額のままだと市の食料費の水準が品目の順位をまとめて動かすので、食料費に占める割合で比べる。数字で言えるのは何が似てきたかまでで、理由は別の資料が要る。2025 年 1 月に品目分類が改定され (切り口台帳 kakei-chousa の注記)、直近の 3 年に改定の年が入るので、分割・統合・名称変更の品目は接続を確かめてから比べる",
+      "queries": [],
+      "revenue": [
+        "広告",
+        "データ"
+      ],
+      "books": [
+        "K-S1-14"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "47 市の間の食卓の違いの大きさ",
+          "pattern": "change",
+          "data": [
+            {
+              "metric": "food-expenditure-total"
             }
           ]
         }

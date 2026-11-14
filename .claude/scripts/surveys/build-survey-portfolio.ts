@@ -31,17 +31,16 @@ import { fileURLToPath } from "node:url";
 
 import { getSurveyEditorialContent } from "../../../apps/web/src/features/survey/survey-editorial";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
-import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
+import { DATASETS, datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const STATE_DIR = path.join(PROJECT_ROOT, datasetDir("surveys.portfolio"));
-const REVIEW_DIR = path.join(
-  PROJECT_ROOT,
-  ".claude/skills/survey/manage-survey-portfolio/reference/reviews",
-);
-const PORTFOLIO = path.join(STATE_DIR, "portfolio.json");
-const EXPERIMENTS = path.join(STATE_DIR, "experiments.json");
+const REVIEW_DIR = path.join(PROJECT_ROOT, datasetDir("surveys.reviews"));
+// STATE_DIR はテストが一時ディレクトリへ向けるための上書き (evaluate-survey-experiments.mjs・validate-survey-portfolio.ts と同じ)。
+// 既定はカタログの id で引く
+const STATE_DIR = process.env.STATE_DIR || path.join(PROJECT_ROOT, datasetDir("surveys.portfolio"));
+const PORTFOLIO = path.join(STATE_DIR, path.basename(datasetPath("surveys.portfolio")));
+const EXPERIMENTS = path.join(STATE_DIR, path.basename(datasetPath("surveys.experiments")));
 const SURVEYS_JSON = path.join(PROJECT_ROOT, datasetPath("surveys.master"));
 const AUDIT_SCRIPT = "packages/ranking/src/scripts/audit-survey-linkage.ts";
 const R2_ALL_URL = `${R2_PUBLIC_BASE_URL}/app/survey/all.json`;
@@ -112,7 +111,7 @@ function findReviewDoc(surveyId: string): { ref: string; date: string | null } |
   const src = fs.readFileSync(path.join(REVIEW_DIR, f), "utf8");
   const date = src.match(/^date:\s*(\S+)/m)?.[1] ?? f.slice(0, 10);
   return {
-    ref: `.claude/skills/survey/manage-survey-portfolio/reference/reviews/${f}`,
+    ref: `${datasetDir("surveys.reviews")}/${f}`,
     date,
   };
 }
@@ -238,6 +237,21 @@ function getOpt(args: string[], name: string): string | undefined {
   return i >= 0 ? args[i + 1] : undefined;
 }
 
+/** Schema の date (YYYY-MM-DD) の形で、かつ暦にある日付か (2026-02-30 のような値を書かない) */
+function isCalendarDate(value: string): boolean {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const date = new Date(`${value}T00:00:00Z`);
+  return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value;
+}
+
+/** 意味項目の語彙。正本は portfolio の Schema の enum で、ここに値を写さない */
+function vocabulary(field: "lifecycleStatus" | "editorialStatus"): string[] {
+  const schemaPath = DATASETS.find((d) => d.id === "surveys.portfolio")?.schema;
+  if (!schemaPath) throw new Error("カタログの surveys.portfolio に schema が無い");
+  const schema = JSON.parse(fs.readFileSync(path.join(PROJECT_ROOT, schemaPath), "utf8"));
+  return schema.properties.surveys.items.properties[field].enum;
+}
+
 async function main() {
   fs.mkdirSync(STATE_DIR, { recursive: true });
   const pf = load<Portfolio>(PORTFOLIO, {
@@ -258,14 +272,25 @@ async function main() {
       process.exit(1);
     }
     const lc = getOpt(args, "--lifecycle");
-    if (lc) entry.lifecycleStatus = lc;
     const ed = getOpt(args, "--editorial");
+    // 語彙外の値は書く前に止める (書いてしまうと、commit の check-datasets まで誰も気づかない)
+    for (const [option, field, value] of [["--lifecycle", "lifecycleStatus", lc], ["--editorial", "editorialStatus", ed]] as const) {
+      if (value && !vocabulary(field).includes(value)) {
+        console.error(`✗ ${option} ${value} は ${field} の語彙に無い (${vocabulary(field).join("|")})`);
+        process.exit(1);
+      }
+    }
+    const nr = getOpt(args, "--next-review");
+    if (nr && !isCalendarDate(nr)) {
+      console.error(`✗ --next-review ${nr} は YYYY-MM-DD の日付ではない (暦に無い日付も書かない)`);
+      process.exit(1);
+    }
+    if (lc) entry.lifecycleStatus = lc;
     if (ed) entry.editorialStatus = ed;
     const hyp = getOpt(args, "--hypothesis");
     if (hyp) entry.currentHypothesis = hyp;
     const ev = getOpt(args, "--add-evidence");
     if (ev && !entry.evidenceRefs.includes(ev)) entry.evidenceRefs.push(ev);
-    const nr = getOpt(args, "--next-review");
     if (nr) entry.nextReviewAt = nr;
     console.log(
       `set: ${id} lifecycle=${entry.lifecycleStatus} editorial=${entry.editorialStatus} evidence=${entry.evidenceRefs.length}`,

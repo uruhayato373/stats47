@@ -202,9 +202,16 @@ describe("人口移動の共通県選択と男女・年齢・相手県", () => {
         .querySelector("[data-area-code]")
         ?.getAttribute("data-area-code"),
     ).toBe("13000");
-    expect(screen.getByRole("table").querySelectorAll("tbody tr[data-counterpart-code]")).toHaveLength(
-      46,
+    // 県のページは移動の多い相手県の上位 10 県だけを並べ、計はすべての相手県の計のまま (2026-11-14)
+    const tokyo = selectMigrationView(migration, "13000", "0", "000", "all")!;
+    const shown = [...screen.getByRole("table").querySelectorAll("tbody tr[data-counterpart-code]")];
+    expect(shown).toHaveLength(10);
+    const flows = shown.map((row) => Number(row.querySelector("[data-inbound]")?.getAttribute("data-inbound")) + Number(row.querySelector("[data-outbound]")?.getAttribute("data-outbound")));
+    expect(flows).toEqual([...flows].sort((a, b) => b - a));
+    expect(Math.min(...flows)).toBeGreaterThanOrEqual(
+      [...tokyo.rows].map((r) => r.inbound + r.outbound).sort((a, b) => b - a)[9],
     );
+    expect(container.querySelector("[data-total-inbound]")?.getAttribute("data-total-inbound")).toBe(String(tokyo.total.inbound));
     expect(
       container.querySelector('[data-counterpart-code="13000"]'),
     ).toBeNull();
@@ -253,8 +260,9 @@ describe("人口移動の共通県選択と男女・年齢・相手県", () => {
     );
     await choose("相手の都道府県", "東京都");
     fireEvent.click(screen.getByRole("button", { name: "東京へ切替" }));
+    // すべての相手県の表示に戻る (並べるのは移動の多い上位 10 県)
     expect(screen.getByRole("table").querySelectorAll("tbody tr[data-counterpart-code]")).toHaveLength(
-      46,
+      10,
     );
     expect(
       screen.getByRole("combobox", { name: "相手の都道府県" }).textContent,

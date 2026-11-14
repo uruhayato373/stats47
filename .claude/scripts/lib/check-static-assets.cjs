@@ -16,7 +16,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 
-const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..", "..");
+const ROOT = process.env.STATS47_SCAN_ROOT || path.resolve(__dirname, "..", "..", "..");
 const WEB_ROOT = path.join(ROOT, "apps/web");
 const PUBLIC_ROOT = path.join(WEB_ROOT, "public");
 const MANIFEST_PATH = path.join(WEB_ROOT, "src/app/manifest.ts");

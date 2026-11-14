@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n97bd102186c6",
+  "production": {
+    "id": "NCI-00445",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "ボウリングをした人\n1位は沖縄県",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人のボウリングレーンに置かれた無地のボールと白いピンを描く。人・手は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n97bd102186c6 2026-10-23公開API本文照合。記事題名「【2021年版】ボウリングをした人が多い県は？ 1位は沖縄県｜都道府県ランキング」。本文中の「沖縄県」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "6e86ec0bbcc7b367dc084915c810b89f6eead759b7486ccf37bc883500bce85a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n97bd102186c6/revisions/6e86ec0bbcc7b367dc084915c810b89f6eead759b7486ccf37bc883500bce85a.png"
+      },
+      "bytes": 83313,
+      "id": "6e86ec0bbcc7b367dc084915c810b89f6eead759b7486ccf37bc883500bce85a",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:23.943Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312774472/rectangle_large_type_2_db32e05ac49bb0feffa09d89e4e48e0d.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "6e86ec0bbcc7b367dc084915c810b89f6eead759b7486ccf37bc883500bce85a"
+      }
+    },
+    {
+      "sha256": "bb0d0c6d134f6b426459981865949d03db07c0123f4dd803011e82d629e3b692",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n97bd102186c6/revisions/bb0d0c6d134f6b426459981865949d03db07c0123f4dd803011e82d629e3b692.png"
+      },
+      "bytes": 118196,
+      "id": "bb0d0c6d134f6b426459981865949d03db07c0123f4dd803011e82d629e3b692",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:16:30.889Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "cbac6ffc82bd97c18c92f3863f0226386a23c206dc57b75c52511ab37726236f"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/sports-participation-rate-bowling/values.json",
+        "sourceSha256": "c80259e1808f7ba7adaa6d0ce3a320322735767ab690e8a0a0e399b0ae240ca8",
+        "input": {
+          "sha256": "cbac6ffc82bd97c18c92f3863f0226386a23c206dc57b75c52511ab37726236f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n97bd102186c6/inputs/cbac6ffc82bd97c18c92f3863f0226386a23c206dc57b75c52511ab37726236f.json"
+          },
+          "bytes": 6520
+        }
+      }
+    },
+    {
+      "sha256": "70743dbd1fbc4c24e42d0a7622aeba380e6f6436ca069a3c5e8dce815fa81d5e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n97bd102186c6/revisions/70743dbd1fbc4c24e42d0a7622aeba380e6f6436ca069a3c5e8dce815fa81d5e.png"
+      },
+      "bytes": 1865546,
+      "id": "70743dbd1fbc4c24e42d0a7622aeba380e6f6436ca069a3c5e8dce815fa81d5e",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-d42325b0fb1a",
+      "createdAt": "2026-10-23T14:38:05.262Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "b79f11dbcb95e20cfd660e6bcbc45ea3e8ea39ae46f70a57f223a05dca55ef9d"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00461は東京都と兵庫県の同率首位。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T14:40:11.843Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "b79f11dbcb95e20cfd660e6bcbc45ea3e8ea39ae46f70a57f223a05dca55ef9d",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n97bd102186c6/inputs/b79f11dbcb95e20cfd660e6bcbc45ea3e8ea39ae46f70a57f223a05dca55ef9d.json"
+          },
+          "bytes": 8818
+        },
+        "production": {
+          "id": "NCI-00445",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "d42325b0fb1aec2817a1b35e7352f50865de3f44773d02be1250684e01b9adbc"
+        }
+      }
+    }
+  ]
+}

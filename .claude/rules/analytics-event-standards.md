@@ -320,6 +320,31 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > 「県内の市町村ランキング」) に `municipality_prefecture` を付けた (`MunicipalityPrefectureLinks` / 県ページの `RailLinksCard`)。
 > 送信は共通のクリック監視だけが行う。`nav_label` は県名または指標名。登録済み `nav_surface` の**値追加**で新しい custom dimension は無い。
 >
+> **nav_surface の値追加 (2026-11-14・Geo への導線、NAV-CLICK-COVERAGE-01、未デプロイ)**: 10-20〜10-31 の導線名なし 4,530 件のうち
+> 行き先が geo のものが 1,085 件あった。開発サーバーの `/geo` 配下 19 ページの HTML で数えると、`/geo` へのリンクのうち導線名の無いものは
+> 639 本で、ページ本文のリンクのほぼすべてだった。次の 5 つを付け、同じ 19 ページで 7 本 (本文中の単発のリンク) まで減らした。
+> `geo_analysis_list` = 分析ページへの入口 (`/geo` のカード `GeoAnalysisCards`・県別比較への入口、分析ページ末尾の「関連する地域分析」、
+> `/geo/method`・`/geo/data-catalog`・`/geo/history` の一覧、`/geo/compare` の問いのカード `GeoDecisionExplorer`、単体 GIS の「このデータを重ねて読む」)。
+> `geo_pref_table` = 県別の表から県の地図・検算データへ (`GeoCrossAnalysisArticle`・`GeoPublicFacilitySummary`・交通網の変遷 `InfraHistoryExplorer`)。
+> `geo_evidence` = 検算・途中データ・方法への導線 (`GeoSpatialEvidenceExplorer` の地図の下の 3 本、`GeoContentPublicationSection`、土砂災害・豪雪・公共施設の要約の下)。
+> `geo_layer_list` = 単体 GIS への入口 (`GeoLayerCards`・`GeoSourceLinkCard`・分析ページの「まず単体で見る」)。
+> `geo_map_control` = 地図の表示の切り替え (`/geo/map` の範囲・背景・重ねるもの、交通網の変遷の範囲)。クエリやパスが変わるリンクなので数えるが、ページを読み進める回遊とは分けて読む。
+> 送信は共通のクリック監視だけが行う。`nav_label` は記事カード型 (`ArticleTeaserCard`) だけ題名、ほかは行き先のページ種別 (`geo`)。
+> 土砂災害・豪雪・公共施設の要約はテーマページにも出るので、同じ値がテーマページからも送られる (ページの path で分かれる)。
+> 導線名が付いたので、分析ページの「一次資料と判定方法」(`#methods`。同じページ内の移動) も `geo_evidence` で数えるようになる。
+> 登録済み `nav_surface` の**値追加**で新しい custom dimension は無い。
+>
+> **行き先の無いリンクを送らない (2026-11-14・NAV-CLICK-COVERAGE-01、未デプロイ)**: Leaflet の地図の拡大・縮小は `<a href="#" role="button">` で、
+> 押してもページは移らない。共通のクリック監視は `href="#"` を今いるページへの移動と解釈し、`unlabeled` (ラベルは今いるページの種別) で送っていた
+> (`#見出し` は送らない規則だったが、`#` だけだと URL の hash が空になり規則を通り抜けた)。`href` が `#` で始まるリンクは、導線名が無ければ送らないようにした。
+> Leaflet の地図は Geo の分析・単体 GIS のほか他のページ種別にもあるので、**デプロイ日を境に `unlabeled` が減る**。どれだけ減るかは未計測:
+> 2026-W44 の記録では `unlabeled` × `geo` が 1,959 件、同じ 28 日の geo → geo のページ移動 (`internal-transitions.csv`) が 196 件で、
+> ページ移動を伴わないクリックが多いこととは整合するが、拡大・縮小の件数そのものは `nav_href` 別の集計を取っていないので分からない。
+> **[仮説]** `unlabeled` × `geo` の多くは地図の拡大・縮小だった。**検証コマンド**: デプロイ前の期間で
+> `node .claude/scripts/metrics/ga4-query.mjs --start 2026-10-20 --end 2026-10-31 --dims customEvent:nav_surface,customEvent:nav_href,pagePath --metrics eventCount --filter 'eventName==nav_click' --japan`
+> を取り、`unlabeled` のうち `nav_href` が `pagePath` と同じ行の件数を数える (`nav_href` が GA4 に未登録で取れなければ、デプロイ後 2 週の `nav-click-surfaces.csv` の `unlabeled` × `geo` で読む)。
+> **検証期日**: デプロイから 2 週後の土曜の週次計測。**期日後の判定**: 同じ行が `unlabeled` × `geo` の半分以上なら仮説を支持、2 割未満なら棄却して、残った `unlabeled` を `nav_href` 別に読み直す。
+>
 > **nav_surface の値追加 (2026-09-01・市区町村可視化)**: 市区町村ランキングの県内コロプレス
 > 地図で自治体をクリックして市区町村ページへ遷移する導線に `municipalities_map`、
 > 市区町村テーマ一覧 (`/municipalities/themes/*`) のカードクリックに `municipalities_theme` を
@@ -327,6 +352,9 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > 呼び出し元は `RankingMapChartClient` (市区町村の地図。`areaHrefs` と `navSurface` を渡したとき。2026-10-30 に市区町村専用の地図から置き換え) / `TrackedMunicipalityThemeCard`
 > (`apps/web/src/features/municipalities/components/`)。地図・ヒストグラムの hover は
 > 計測しない (新 dimension 登録 = owner 工程が要るため。クリック導線で回遊判定は成立する)。
+>
+> **nav_surface の送信終了 (2026-11-14)**: テーマページの「白書・統計から見る論点」の節を外したので、`theme_evidence` は反映日以降は送られない
+> (過去の記録には残る)。同じ日に「空間分析」のカードを分析の名前のリンク 1 行に替え、`geo_analysis_list` で数える (登録済みの値)。
 >
 > **nav_surface の値追加 (2026-08-24・evidence lens)**: ThemeCatalog の白書・統計論点から
 > ranking / theme / tag へ進む内部導線に `theme_evidence` を追加した。登録済みの

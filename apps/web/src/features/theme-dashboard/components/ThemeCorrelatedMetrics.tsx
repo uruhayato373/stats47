@@ -36,8 +36,10 @@ export async function ThemeCorrelatedMetrics({ themeKey }: ThemeCorrelatedMetric
       <ValueTable
         ariaLabel="このテーマと関連の深い指標"
         columns={[
-          { key: "metric", header: "指標", rowHeader: true },
-          { key: "via", header: "相関の相手 (テーマ内の指標)", align: "left" },
+          // スマホ幅では 2 列とも折り返す。相手の列を 1 行に保つと、指標の列が 2〜3 文字ごとに折り返して読めない
+          // (2026-11-14 の計測で全 56 テーマが該当)。指標の列は 1 行 8 文字ぶんの幅を下限にする
+          { key: "metric", header: "指標", rowHeader: true, className: "min-w-32" },
+          { key: "via", header: "相関の相手 (テーマ内の指標)", align: "left", className: "whitespace-normal!" },
           { key: "r", header: "順位相関" },
         ]}
         rows={result.data.map((item) => ({

@@ -200,6 +200,10 @@
       "ageDays": 30
     },
     {
+      "path": ".local/affiliate-placement-map",
+      "ageDays": 30
+    },
+    {
       "path": ".local/gsi-pni",
       "ageDays": 30
     },
@@ -454,6 +458,11 @@
   ],
   "localRegistry": [
     {
+      "pattern": "estat-tables",
+      "kind": "state",
+      "why": "e-Stat の版付き切片と manifest の取得・private R2 転送待ち作業領域。未転送の固定版は API 更新後に再現できないため年齢だけでは消さない。R2 転送後に manifest と全切片の SHA を照合し、台帳が pushed になった表のローカル写しは削除する。正本は private R2 と git の table-snapshots 台帳。"
+    },
+    {
       "pattern": "playwright-*-profile",
       "kind": "auth",
       "why": "ログイン済みブラウザ。refresh-session が playwright-${source}-profile で開く"
@@ -517,6 +526,11 @@
       "pattern": "sns-review",
       "kind": "state",
       "why": "予約中 SNS 画像の週次確認の最新結果"
+    },
+    {
+      "pattern": "session-preflight",
+      "kind": "state",
+      "why": "保存済みセッションの日次の事前確認の最新結果 (session-preflight.sh が上書き。管理画面 /ops/auth が読む)"
     },
     {
       "pattern": "note-card-repair-journal.json",

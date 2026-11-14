@@ -10,6 +10,12 @@ describe("KDP publication plan", () => {
     );
   });
 
+  it("names every pilot by a catalog book id", () => {
+    const ids = new Set(KINDLE_BOOKS.map((book) => book.id));
+    expect(KDP_PUBLICATION_PLAN.pilots.map((pilot) => pilot.bookId).filter((id) => !ids.has(id))).toEqual([]);
+    expect(new Set(KDP_PUBLICATION_PLAN.pilots.map((pilot) => pilot.bookId)).size).toBe(KDP_PUBLICATION_PLAN.pilots.length);
+  });
+
   it("publishes at most one new book per week and measures each cohort for four weeks", () => {
     expect(KDP_PUBLICATION_PLAN.maxNewPublicationsPerWeek).toBe(1);
     expect(KDP_PUBLICATION_PLAN.cohortMeasurementWeeks).toBe(4);

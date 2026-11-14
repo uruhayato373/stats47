@@ -22,7 +22,7 @@ import {
   KNOWN_MUNICIPALITY_RANKING_KEYS,
   isMunicipalityPrefectureRankingKey,
   isMunicipalityThemePageSlug,
-} from '@stats47/data-configs/geo-scope';
+} from '@stats47/data-configs/geo-scope/edge-keys';
 
 import { isPublishableCity } from '@/features/area-profile/constants/publishable-cities';
 
@@ -158,6 +158,10 @@ export const UrlPolicy = {
   japan: {
     isKnown: (slug: string): boolean => KNOWN_JAPAN_SLUGS.has(slug),
   },
+  // URL 原則 (2026-11-13 オーナー決定): サーバーが描き分ける違いはパスで表す。`?` はサイト内検索だけ。
+  // 検索に出さない画面操作の状態 (ページ送り・自治体名検索) は URL に載せない。
+  // 旧クエリ (?pref= / ?q= / ?page=) は middleware が 301 で畳む。クエリを読むページは
+  // `__tests__/search-params-contract.test.ts` の許可リストで固定している (縮小専用)。
   municipality: {
     // 「全国の市区町村を比べる」ページの slug (都道府県のテーマ名。2026-10-31 IA-REGION-THEME-01)
     isKnownTheme: (slug: string): boolean => isMunicipalityThemePageSlug(slug),

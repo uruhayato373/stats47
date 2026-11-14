@@ -1,23 +1,15 @@
 import type { ComponentProps } from 'react';
 
 import { hrefFor } from '@stats47/data-configs/content/href';
-import { normalizePercentInText } from "@stats47/data-configs/unit";
+import { normalizeUnitsInText } from "@stats47/data-configs/unit";
 
 import { ArticleTeaserCard, CardGrid } from '@/components/surface';
 
 import { blogThumbnailUrl } from '@/lib/metadata/ogp-image';
 
-import type { Article } from '../types';
+import { formatCardDate } from '../utils';
 
-/** ISO 文字列を YYYY.MM.DD へ整形。無効値は null。 */
-function formatCardDate(iso: string | null): string | null {
-  if (!iso) return null;
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return null;
-  const mm = String(d.getMonth() + 1).padStart(2, '0');
-  const dd = String(d.getDate()).padStart(2, '0');
-  return `${d.getFullYear()}.${mm}.${dd}`;
-}
+import type { Article } from '../types';
 
 interface BlogArticleGridProps {
   articles: Article[];
@@ -48,7 +40,7 @@ export function BlogArticleGrid({ articles, insertAfter }: BlogArticleGridProps)
               lightSrc: blogThumbnailUrl(article.slug, 'light'),
               darkSrc: blogThumbnailUrl(article.slug, 'dark'),
             }}
-            description={article.description ? normalizePercentInText(article.description) : undefined}
+            description={article.description ? normalizeUnitsInText(article.description) : undefined}
             meta={
               cardDate ? (
                 <time dateTime={article.updatedAt ?? article.publishedAt ?? undefined}>更新 {cardDate}</time>

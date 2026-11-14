@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 
 // 完全DBレス: repository は R2 snapshot を読む。snapshot reader と logger をモックして

@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { GEO_SOURCE_PAGES } from '@stats47/data-configs/business-plan';
 import { GIS_DATASETS_BY_ID, getKsjLicensePolicy } from '@stats47/gis/mlit-ksj';
 import { describe, expect, it } from 'vitest';

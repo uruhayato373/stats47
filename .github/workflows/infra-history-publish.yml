@@ -7,15 +7,11 @@ name: Infra history publish
 # - 生成は保存則 (県の合計 + 未帰属 = 全国) が通らなければ止まる
 # - 反映は push-exact-r2-assets.ts の網ごとの prefix + 拡張子だけ。ksj-publication-guard が
 #   台帳で公開可 (isInfraNetworkPublishable) の網だけを通す。SHA が一致する object は送らない
-# - 起動は 2 通り。新しい workflow は main に入るまで手で起動できないので、develop へ依頼の JSON
-#   (data/infra-history-publish-requests.json) を push すると動く。apply=false は dry-run で反映の計画を
-#   出すだけで R2 を書かない。dry-run を見てオーナーが承認したら apply=true を push する (requestedAt を毎回変える)
+# - 起動は手動 (workflow_dispatch) だけ。apply=false は dry-run で反映の計画を出すだけで R2 を書かない。
+#   dry-run を見てオーナーが承認したら apply=true で起動する。main に入る前の起動口だった依頼の JSON
+#   (data/ 直下) は 2026-11-03 の反映で役目を終え、消費して消す処理が無かったので 2026-11-14 に依頼と push の起動を外した
 
 on:
-  push:
-    branches: [develop]
-    paths:
-      - 'data/infra-history-publish-requests.json'
   workflow_dispatch:
     inputs:
       apply:
@@ -51,12 +47,7 @@ jobs:
       - run: npm ci
       - name: Resolve apply
         id: mode
-        run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "apply=${{ inputs.apply }}" >> "$GITHUB_OUTPUT"
-          else
-            echo "apply=$(node -e "process.stdout.write(String(require('./data/infra-history-publish-requests.json').apply === true))")" >> "$GITHUB_OUTPUT"
-          fi
+        run: echo "apply=${{ inputs.apply }}" >> "$GITHUB_OUTPUT"
       - name: Build infra history (official ZIPs, SHA check, conservation)
         run: node --import tsx packages/gis/src/infra-history/scripts/build-infra-history.ts --network all
       - name: Build expressway joints

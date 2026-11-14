@@ -10,6 +10,8 @@ import {
   buildReverseCandidates,
   suggestTargetRankingKeys,
   eligibleAdsForPage,
+  splitPlacementMapOutput,
+  PLACEMENT_MAP_PAGES_DETAIL_PATH,
 } from "../lib/placement-map-core.mjs";
 import { loadAffiliateMaps, loadInventory, rankingContentFromSnapshot, articleContentFromSnapshot, surveyKeysFromRows } from "../build-placement-map.mjs";
 
@@ -429,4 +431,29 @@ test("2 文字一致は採らない (日本語ではノイズが多すぎる)", 
   // 「レンタカー」と「訳アリ不動産買取」は 2-gram では偶然繋がりうるが 3 文字では繋がらない
   const s = suggestTargetRankingKeys("訳アリ不動産買取専門店", { "rental-car": "レンタカー利用料" });
   assert.deepEqual(s, []);
+});
+
+test("ページ別の明細は git に置く要約から分け、要約は 1MB (リポジトリ衛生の上限) に収まる", () => {
+  // 実測 (2026-11-13) では pages だけで 6.7MB。ページ数 × 在庫数に比例して膨らむので、件数で分ける。
+  const ads = Array.from({ length: 16 }, (_, i) => ({ id: `ad-${i}`, programRef: `a8:s${i}`, vertical: "economy", adType: "banner", sourceStep: "category:x" }));
+  const pages = Array.from({ length: 6000 }, (_, i) => ({
+    url: `https://stats47.jp/ranking/key-${i}`,
+    type: "ranking",
+    key: `key-${i}`,
+    gsc: { imp: i, clicks: 1 },
+    intent: { verticals: ["economy"], reason: "category:x" },
+    eligible: { status: "eligible", ads, adCount: ads.length },
+  }));
+  const out = { generatedAt: "2026-11-13T00:00:00.000Z", gscWeek: "2026-W44", demand: { byType: {} }, gaps: [], pages };
+
+  const { summary, pagesDetail } = splitPlacementMapOutput(out);
+
+  assert.equal("pages" in summary, false, "要約に pages を残さない");
+  assert.deepEqual(summary.pagesDetail, { path: PLACEMENT_MAP_PAGES_DETAIL_PATH, count: 6000, storedIn: "local-only" });
+  assert.equal(summary.generatedAt, out.generatedAt);
+  assert.equal(summary.gscWeek, "2026-W44");
+  assert.equal(pagesDetail.generatedAt, out.generatedAt);
+  assert.equal(pagesDetail.pages.length, 6000);
+  assert.ok(JSON.stringify(out).length > 1_048_576, "分割前は上限を超える (この試験が分割の必要性を示す)");
+  assert.ok(JSON.stringify(summary, null, 2).length < 1_048_576, "分割後の要約は 1MB 未満");
 });

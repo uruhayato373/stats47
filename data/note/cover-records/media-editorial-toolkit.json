@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "media-editorial-toolkit",
+  "production": {
+    "id": "NCI-00296",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

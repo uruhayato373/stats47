@@ -4,7 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const womensCoatConsumptionQuantity: MetricConfig = {
   "key": "womens-coat-consumption-quantity",
   "title": "婦人用コート購入数量",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間婦人用コート購入数量",
+  "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。",
   "unit": "着",
   "category": "economy",
   "source": {

@@ -12,7 +12,7 @@
 | Warm node_modules cache (`cache-node-modules.yml`)  | `package-lock.json` の main push、毎週月曜6時JST、手動 | default branch scope に node_modules キャッシュを置き、PR / develop の全 job の `npm ci` (実測 105〜122 秒/job) を skip させる |
 | Security Scan                                       | PR/Push、毎週日曜0時、手動                         | npm audit、CodeQL分析                                                                                                                                                                                           |
 | Ranking AI Content / Gemini (`ai-content-gemini-daily.yml`) | 毎日7時15分JST、手動 | 課金無効の専用 Gemini API key で既定3件を structured 生成。決定的監査 + 別リクエスト critic 通過分だけ publish workflow を明示 dispatch。件数・通過率・token を state へ記録 |
-| Backlog Loop Daily (`backlog-loop-daily.yml`)       | 毎日1時30分JST、手動、request push                 | .claude/todo の 05/01/06 を分類して処理し、**機械ゲートを通した証拠が台帳にあるものだけ**行削除する。verify が「行削除 ⇔ ledger の gate.pass」を突合し、宣言だけの完了を落とす                                     |
+| Backlog Loop Weekly (`backlog-loop-daily.yml`)      | 毎週日曜1時30分JST、手動、request push (GitHub 側は 2026-09-27 から無効。再開はオーナーの `gh workflow enable`) | `.claude/todo/backlog.md` のうち `[実行:sweep\|機械]` を宣言し `[待ち:X]` の無いカードを、不具合 → 今月の重点領域 → tier → 起票日の順に選んで処理し、**機械ゲートを通した証拠が台帳にあるものだけ**行削除する。verify が「行削除 ⇔ ledger の gate.pass」を突合し、宣言だけの完了を落とす。ファイル名は GitHub 側の無効化の状態と結び付くので daily のまま |
 | Backlog Routing Policy (`backlog-routing-policy-weekly.yml`) | 手動のみ (2026-10-26 に定期実行を外した。バックログ自動処理を再開するときに戻す) | ledger と Claude usage の直近28日実測を評価し、minSamples を満たす policy 差分と prompt-evals だけを develop へ提案する。agent frontmatter と日次件数は変更しない |
 | Regenerate Blog SVGs (`regenerate-blog-svgs.yml`)   | 手動                                               | `all` は既存JSONから全チャートを再描画。`scatter-canonical` は散布図を一次ソース照合後に正規化。`source-repair` は公開SVG・manifest・taxonomy・安全なkeyを検証し、既存`source.json`は期待SHA一致時だけCAS更新、欠落`source/data.json`は新規作成してblog調査索引も再生成。dry-run後、明示keyだけR2へ反映 |
 | Publish storage robots.txt (`publish-storage-robots.yml`) | 手動 | `storage.stats47.jp` (R2 の公開バケット) のルートに robots.txt を置く。JSON・地理データのクロールを止め、画像は止めない。原本は `packages/r2-storage/src/storage-host/robots.txt`。既定は dry-run |
@@ -22,6 +22,7 @@
 | Affiliate metrics (`affiliate-ga4-weekly.yml`) | 毎週日曜22時JST、手動 | GA4 schema v3、二層portfolio、operations、pilot readinessを生成してartifact化。候補提示までで広告変更・winner・pushをしない |
 | GSC Operations Cycle (`gsc-operations-cycle-weekly.yml`) | 毎週日曜20時30分JST (土曜のレビュー・来週の計画の後)、手動 | 最新GSC snapshotに対する週次レビュー、候補のapprove/dismiss、翌週計画、月次GSC欄、effect verdictの接続を決定的に監査。異常は固定`gsc-cycle-alert` Issueへupsertし、回復時に自動Close |
 | KSJ aggregate ingest (`ksj-aggregate-ingest.yml`) | 手動 | KSJの元データをCI内で再取得し、都道府県帰属の未解決0・47県ゲート後に集計`app/stats`だけをR2へ公開。元GIS / TopoJSONは公開しない |
+| External metric ingest (`external-metric-ingest.yml`) | 手動 | e-Stat 以外の出典 (省庁の xlsx / CSV / PDF) の指標を CI 内で原典から取り直し、`app/stats/<metric>/values.json` だけを R2 へ上げる。原典の SHA・表の形・47 県を検査し、報告に載ったキー以外は上げない。既定は dry run で、`dry_run` に `false` を入れたときだけ書く。指標は `isActive: false` で main に入れてから実行し、値を上げたあとに公開にする |
 
 テーマは `quality-suite-weekly.yml` の theme job が毎週土曜01:00 JSTに、公開R2と構成、全テーマのPC/mobile画面を監査する
 (2026-10-26 に毎日の期日確認から変更。未観測d7/d28/d56は次の土曜に拾う)。手動実行でも監査する。
@@ -56,7 +57,7 @@ Repository Variables に置く。Workflow では前者を `secrets.*`、後者�
 
 | Secret                    | 用途                                                                                                                                                            | 形式                                                      |
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| `CLOUDFLARE_API_TOKEN`       | Cloudflareデプロイ認証                                                                                                                                          | 40文字の英数字（Workers Scripts、D1、R2の編集権限が必要） |
+| `CLOUDFLARE_API_TOKEN`       | Cloudflareデプロイ認証                                                                                                                                          | 40文字の英数字（Workers Scripts と R2 の編集権限が必要。デプロイは D1 を使わないので D1 の編集権限は要らない） |
 | `AUTH_SECRET`                | NextAuth認証シークレット                                                                                                                                        | 32文字以上のランダム文字列                                |
 | `WORKER_CACHE_PURGE_SECRET`  | R2公開後にWorkers Cacheを全体/tag purgeする内部APIのBearer認証。deploy時に同名Worker secretへ同期する                                                           | `openssl rand -hex 32`。Variable やログへ出さない         |
 | `CLAUDE_CODE_OAUTH_TOKEN`    | `backlog-loop-daily.yml` の Claude Code 認証。ローカルで `claude setup-token` を実行して発行し、Repository Secret に登録する | OAuth token。Variable やログへ出さない                    |
@@ -138,38 +139,42 @@ Static gateは常に実行する。その他は変更パスを決定的に分類
 
 ### Production環境デプロイ
 
-**トリガー**: `main` ブランチへのPush
+**トリガー**: `main` ブランチへのPush、または手動実行（`workflow_dispatch`。コード変更なしで buildId を更新したいとき）
+
+最初に `Plan deploy` job が、この push が本番に関係するパスを含むかを `.claude/scripts/lib/plan-deploy-scope.mjs` で判定する。
+関係しないパスだけの push はデプロイせず、判断できないときと手動実行はデプロイする
+（正典: `.claude/rules/branch-workflow.md`「デプロイの要否」）。
+
+デプロイする場合は `Deploy` job が次の 16 段を順に実行する。R2 へ書くので `r2-write` の同時実行枠に入り、制限時間は 40 分。
 
 1. 📥 リポジトリをチェックアウト
-2. 🟢 Node.js 20をセットアップ
+2. 🟢 Node.js 22をセットアップ（Wrangler 4.123+ が Node.js 22 以上を要求する）
 3. 📦 依存関係をインストール（`npm ci`）
-4. 🔐 **Cloudflare認証確認**
+4. 🧪 **ビルドの前提を検査**: `node .github/scripts/check-build-preconditions.mjs`
+   - スナップショットの中身と関係なく後の段を落とす条件を、R2 への反映より前に検査する
+5. 🔐 **Cloudflare認証確認**
    - API Tokenの形式チェック（40文字の英数字）
    - Account IDの形式チェック（32文字の16進数）
    - `npx wrangler whoami` で認証テスト
-5. 🔨 **ビルド**: `npm run workers:build`
+6. 🧮 **指標スナップショットを生成して検証**
+   - ランキング・市区町村ランキング・市区町村データブック・マスタ・page-components を `.local/r2` に生成
+   - `npm run metrics:verify-snapshots` と、反映するキーの一覧（SHA-256 付き）の作成
+7. 📤 **検証済みスナップショットを R2 へ反映**（`push-exact-r2-assets.ts`。中身が変わったファイルだけを送る）
+   - ビルドが R2 の新しいスナップショットを読むので、ビルドより前に置く
+8. 🔨 **ビルド**: `npm run workers:build`（`apps/web`）
    - 環境変数: `NEXT_PUBLIC_ENV=production`
-   - Production用のベースURL、GA測定IDを設定
-6. ✅ OpenNextビルド検証（`.open-next/` ディレクトリ確認）
-7. 📤 **Cloudflare Workersへデプロイ**
-   - Production環境: `stats47`
-   - D1データベース: `stats47_static`
-8. 🏥 **ヘルスチェック**
-   - デプロイされたURLへアクセス確認
-   - HTTPステータスコード200を確認
+   - Production用のベースURL、GA測定ID、ビルド時に R2 を読むための S3 互換 API の認証情報を設定
+9. ✅ OpenNextビルド検証（`.open-next/` の必須ファイルと `wrangler.toml` の入口を確認）
+10. 🛡️ **デプロイ前ゲート**: `check-prerender-notfound.sh` が prerender された SSG ページの notFound 固着を検出
+11. 🔐 Production の Worker に secret を設定（`wrangler secret put`）
+12. 🚀 **Cloudflare Workersへデプロイ**: `wrangler deploy --env production`
+13. 🧹 **Workers Cache をリセット**: `reset-worker-cache-after-deploy.sh`
+14. 🔥 キャッシュをウォーム（`warm-cache.sh`。失敗してもデプロイは失敗にしない）
+15. 🔎 **スモークテスト**: `smoke-test-routes.sh` が各 route の代表 URL を内容で検査
+16. 🗺️ **sitemap index の整合性**: `check-sitemap-index.sh`
 
-### エリアデータアップロード
-
-**ワークフロー**: `upload-area-data.yml`
-**トリガー**: `main` ブランチへのPush（`data/mock/area/**` または `scripts/upload-area-data.ts` の変更時）
-
-1. 📥 リポジトリをチェックアウト
-2. 🟢 Node.js 20をセットアップ
-3. 📦 依存関係をインストール
-4. 🔍 エリアデータの変更をチェック
-5. 📤 R2へアップロード（変更がある場合のみ）
-   - Production: `stats47-area-data`
-6. ✅ アップロード検証
+永続の D1 データベースは使わない（完全 DB レス。正典: `docs/01_技術設計/02_データアーキテクチャ.md`）。
+前提の検査と認証を R2 への反映より前に、反映をビルドより前に置く順序は `.claude/scripts/lib/__tests__/metric-release-order.test.mjs` が固定する。
 
 ## トラブルシューティング
 
@@ -249,9 +254,14 @@ npm run workers:build
    - Account - Workers Scripts - Read
    - Account - Workers Scripts - Edit
    - Account - Account - Read
-   - Account - D1 - Edit
    - Account - R2 - Edit
 3. GitHub Settings > Secrets で `CLOUDFLARE_API_TOKEN` を更新
+
+D1 の編集権限は要らない。`apps/web/wrangler.toml` は D1 の binding を持たず、`.github/` と各 `package.json` の scripts に
+`wrangler d1` の呼び出しは見つからない (2026-11-14 に検索)。
+同じトークンを使う日次の使用量監視 (`cloudflare-usage-daily.yml` の `.claude/scripts/cloudflare/fetch-usage.mjs`) は
+D1 の使用量を GraphQL Analytics API で読むので、トークンを作り直すときは、このスクリプトの冒頭に書いてある読み取り権限
+(Account Analytics・Workers Scripts・D1 の Read) も付ける。
 
 #### API Token形式エラー
 
@@ -334,7 +344,6 @@ GitHub Actionsのキャッシュが古い場合:
 
 ### デプロイ前
 
-- [ ] D1データベースマイグレーション実行済み（必要な場合）
 - [ ] 環境変数が設定済み（GitHub Secrets / Repository Variables）
 - [ ] ロールバックプランを準備
 - [ ] 関係者への通知済み（本番デプロイの場合）

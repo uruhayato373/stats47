@@ -1,26 +1,21 @@
 /**
- * x-catalog.cjs — X 投稿カタログの機械参照口 (SSOT: sns-content-standards.md)
+ * x-catalog.cjs — X 投稿カタログの機械参照口 (正本: 台帳 sns.x-catalog)
  *
- * `.claude/rules/sns-content-standards.md` の §1 quota / §2-0 templates /
- * §2-8 affinity / §2-9 imagekinds を、HTML コメントアンカーで区切られた領域から
- * 決定的にパースする。人間はカタログ (md) を編集し、スクリプトは本モジュール経由で読む
- * (手編集 JSON を SSOT にしない = chart-component-standards.md 方式)。
+ * X の投稿上限 (quota)・キャプションの型 (templates)・カテゴリと切り口の相性 (affinity)・
+ * 添付できる画像種 (imageKinds) を、台帳 sns.x-catalog (置き場はカタログ config/datasets.mjs が決める) から読む。
+ * 値を変えるときは台帳を編集する。`.claude/rules/sns-content-standards.md` は項目の意味と改訂の手順だけを持ち、
+ * このモジュールは rule の Markdown を読まない (2026-11-14 X-CATALOG-RULES-PARSE-01。以前は rule の表をパースしていた)。
  *
- * アンカー:
- *   <!-- x-catalog:quota:start -->      ... <!-- x-catalog:quota:end -->      (KEY=VALUE の code block)
- *   <!-- x-catalog:templates:start -->  ... <!-- x-catalog:templates:end -->  (markdown table)
- *   <!-- x-catalog:affinity:start -->   ... <!-- x-catalog:affinity:end -->   (markdown table)
- *   <!-- x-catalog:imagekinds:start --> ... <!-- x-catalog:imagekinds:end --> (markdown table)
- *
- * パース不能 (アンカー欠落・行数ゼロ等) は throw する (サイレント既定値を返さない)。
+ * 読むたびに台帳の形の契約 (JSON Schema) で検証し、合わなければ throw する (サイレント既定値を返さない)。
  *
  * API:
  *   getQuota()       → { dailyMax, weeklyTargetMin, weeklyTargetMax }
  *   getTemplates()   → [{ template, structure, imageKind, charMax, bestTime, use }]
  *   getAffinity()    → { <category>: { 結論, 理由, 体験, 反論, 数字, ハウツー } }
- *   getImageKinds()  → [{ imageKind, size, generator, outPath, note }]
+ *   getImageKinds()  → [{ imageKind, size, generator, outPath, note }]  (画像なしの種類は size・generator・outPath が null)
  *   getTemplate(id)  → 1件 (無ければ null)
  *   getImageKind(id) → 1件 (無ければ null)
+ *   createCatalog(filePath) → 上と同じ関数を、別の置き場の台帳に対して返す (テスト用)
  *
  * CLI:
  *   node .claude/scripts/lib/x-catalog.cjs --check   # 自己検証 (exit 0/1)
@@ -30,205 +25,104 @@
 const fs = require("node:fs");
 const path = require("node:path");
 
-const RULES_PATH = path.resolve(
-  __dirname,
-  "../../rules/sns-content-standards.md",
-);
+const { datasetPath } = require("../../../config/datasets.mjs");
+const { assertDatasetShape } = require("./dataset-shape.mjs");
 
-function readRules() {
-  return fs.readFileSync(RULES_PATH, "utf8");
-}
-
-/** アンカー間のテキストを取り出す。欠落は throw。 */
-function extractBlock(md, name) {
-  const start = `<!-- x-catalog:${name}:start -->`;
-  const end = `<!-- x-catalog:${name}:end -->`;
-  const si = md.indexOf(start);
-  const ei = md.indexOf(end);
-  if (si < 0 || ei < 0 || ei < si) {
-    throw new Error(
-      `[x-catalog] アンカー '${name}' が ${RULES_PATH} に見つかりません (start=${si}, end=${ei})`,
-    );
-  }
-  return md.slice(si + start.length, ei);
-}
-
-/** markdown テーブルをパースし、ヘッダ行をキーにしたオブジェクト配列を返す。 */
-function parseTable(block, name) {
-  const lines = block
-    .split("\n")
-    .map((l) => l.trim())
-    .filter((l) => l.startsWith("|"));
-  if (lines.length < 3) {
-    throw new Error(
-      `[x-catalog] テーブル '${name}' の行が不足 (見出し + 区切り + データ ≥1 が必要, got ${lines.length})`,
-    );
-  }
-  const splitRow = (l) =>
-    l
-      .replace(/^\|/, "")
-      .replace(/\|$/, "")
-      .split("|")
-      .map((c) => c.trim());
-  const header = splitRow(lines[0]);
-  // lines[1] は区切り行 (|---|---|)。データは lines[2] 以降。
-  const rows = [];
-  for (let i = 2; i < lines.length; i++) {
-    const cells = splitRow(lines[i]);
-    if (cells.length !== header.length) {
-      throw new Error(
-        `[x-catalog] テーブル '${name}' の列数不一致 (header=${header.length}, row=${cells.length}): ${lines[i]}`,
-      );
-    }
-    const obj = {};
-    header.forEach((h, j) => {
-      obj[h] = cells[j];
-    });
-    rows.push(obj);
-  }
-  return rows;
-}
-
-/** `id` セル内のバッククォート装飾を除去して素の id にする。 */
-function unwrapCode(s) {
-  return s.replace(/`/g, "").trim();
-}
-
-function getQuota() {
-  const block = extractBlock(readRules(), "quota");
-  const kv = {};
-  for (const line of block.split("\n")) {
-    const m = line.match(/^\s*([A-Z_]+)\s*=\s*(\d+)\s*$/);
-    if (m) kv[m[1]] = Number(m[2]);
-  }
-  const required = ["X_DAILY_MAX", "X_WEEKLY_TARGET_MIN", "X_WEEKLY_TARGET_MAX"];
-  for (const k of required) {
-    if (!(k in kv)) {
-      throw new Error(`[x-catalog] quota に ${k} がありません`);
-    }
-  }
-  return {
-    dailyMax: kv.X_DAILY_MAX,
-    weeklyTargetMin: kv.X_WEEKLY_TARGET_MIN,
-    weeklyTargetMax: kv.X_WEEKLY_TARGET_MAX,
-  };
-}
-
-function getTemplates() {
-  const rows = parseTable(extractBlock(readRules(), "templates"), "templates");
-  return rows.map((r) => ({
-    template: unwrapCode(r.template),
-    structure: r.structure,
-    imageKind: unwrapCode(r.image_kind),
-    charMax: Number(r.char_max),
-    bestTime: unwrapCode(r.best_time),
-    use: r["用途"] ?? "",
-  }));
-}
-
-function getAffinity() {
-  const rows = parseTable(extractBlock(readRules(), "affinity"), "affinity");
-  const out = {};
-  for (const r of rows) {
-    const cat = unwrapCode(r.category);
-    out[cat] = {
-      結論: r["結論"],
-      理由: r["理由"],
-      体験: r["体験"],
-      反論: r["反論"],
-      数字: r["数字"],
-      ハウツー: r["ハウツー"],
-    };
-  }
-  return out;
-}
-
-function getImageKinds() {
-  const rows = parseTable(
-    extractBlock(readRules(), "imagekinds"),
-    "imagekinds",
-  );
-  return rows.map((r) => ({
-    imageKind: unwrapCode(r.image_kind),
-    size: r.size,
-    generator: r.generator,
-    outPath: unwrapCode(r.out_path),
-    note: r["備考"] ?? "",
-  }));
-}
-
-function getTemplate(id) {
-  return getTemplates().find((t) => t.template === id) ?? null;
-}
-
-function getImageKind(id) {
-  return getImageKinds().find((k) => k.imageKind === id) ?? null;
-}
+const DATASET_ID = "sns.x-catalog";
+const PROJECT_ROOT = path.resolve(__dirname, "../../..");
+const CATALOG_PATH = path.join(PROJECT_ROOT, datasetPath(DATASET_ID));
 
 /**
- * 自己検証: 全カタログをパースし、期待する形と最低件数を確認する。
- * lint フェーズ冒頭で必ず呼ぶ (md ドリフト・アンカー欠落を早期検出)。
- * 成功で { ok: true, ... } を返し、失敗は throw。
+ * @typedef {{ dailyMax: number, weeklyTargetMin: number, weeklyTargetMax: number }} XQuota
+ * @typedef {{ template: string, structure: string, imageKind: string, charMax: number, bestTime: string, use: string }} XTemplate
+ * @typedef {{ imageKind: string, size: string | null, generator: string | null, outPath: string | null, note: string }} XImageKind
  */
-function selfCheck() {
-  const quota = getQuota();
-  if (quota.dailyMax < 1 || quota.weeklyTargetMin < 1) {
-    throw new Error(`[x-catalog] quota 値が不正: ${JSON.stringify(quota)}`);
+
+/** @param {string} filePath 台帳 sns.x-catalog と同じ形の JSON */
+function createCatalog(filePath) {
+  /** 台帳を読み、形の契約で検証して返す。合わなければ throw */
+  function load() {
+    const doc = JSON.parse(fs.readFileSync(filePath, "utf8"));
+    assertDatasetShape(DATASET_ID, doc);
+    return doc;
   }
-  if (quota.weeklyTargetMax < quota.weeklyTargetMin) {
-    throw new Error(
-      `[x-catalog] weeklyTargetMax(${quota.weeklyTargetMax}) < min(${quota.weeklyTargetMin})`,
-    );
+
+  /** @returns {XQuota} */
+  function getQuota() {
+    return load().quota;
   }
-  const templates = getTemplates();
-  if (templates.length < 3) {
-    throw new Error(`[x-catalog] templates が少なすぎ: ${templates.length}`);
+
+  /** @returns {XTemplate[]} */
+  function getTemplates() {
+    return load().templates.map(({ id, ...rest }) => ({ template: id, ...rest }));
   }
-  const imageKinds = getImageKinds();
-  const kindIds = new Set(imageKinds.map((k) => k.imageKind));
-  for (const t of templates) {
-    if (!t.template) throw new Error(`[x-catalog] template id 空: ${JSON.stringify(t)}`);
-    if (!Number.isFinite(t.charMax) || t.charMax < 1) {
-      throw new Error(`[x-catalog] ${t.template} の char_max が不正: ${t.charMax}`);
-    }
-    if (!kindIds.has(t.imageKind)) {
+
+  /** @returns {Record<string, Record<string, string>>} */
+  function getAffinity() {
+    return load().affinity;
+  }
+
+  /** @returns {XImageKind[]} */
+  function getImageKinds() {
+    return load().imageKinds.map(({ id, ...rest }) => ({ imageKind: id, ...rest }));
+  }
+
+  /** @param {string} id */
+  function getTemplate(id) {
+    return getTemplates().find((t) => t.template === id) ?? null;
+  }
+
+  /** @param {string} id */
+  function getImageKind(id) {
+    return getImageKinds().find((k) => k.imageKind === id) ?? null;
+  }
+
+  /**
+   * 自己検証: 形の契約では表せない整合 (上限の大小・テンプレが指す画像種の実在) を確かめる。
+   * lint フェーズ冒頭で必ず呼ぶ。成功で { ok: true, ... } を返し、失敗は throw。
+   */
+  function selfCheck() {
+    const quota = getQuota();
+    if (quota.weeklyTargetMax < quota.weeklyTargetMin) {
       throw new Error(
-        `[x-catalog] template '${t.template}' の image_kind '${t.imageKind}' が §2-9 に無い`,
+        `[x-catalog] weeklyTargetMax(${quota.weeklyTargetMax}) < min(${quota.weeklyTargetMin})`,
       );
     }
+    const templates = getTemplates();
+    const imageKinds = getImageKinds();
+    const kindIds = new Set(imageKinds.map((k) => k.imageKind));
+    for (const t of templates) {
+      if (!kindIds.has(t.imageKind)) {
+        throw new Error(
+          `[x-catalog] template '${t.template}' の imageKind '${t.imageKind}' が imageKinds に無い`,
+        );
+      }
+    }
+    return {
+      ok: true,
+      quota,
+      templateCount: templates.length,
+      imageKindCount: imageKinds.length,
+      affinityCategoryCount: Object.keys(getAffinity()).length,
+    };
   }
-  const affinity = getAffinity();
-  if (Object.keys(affinity).length < 10) {
-    throw new Error(
-      `[x-catalog] affinity カテゴリが少なすぎ: ${Object.keys(affinity).length}`,
-    );
-  }
-  return {
-    ok: true,
-    quota,
-    templateCount: templates.length,
-    imageKindCount: imageKinds.length,
-    affinityCategoryCount: Object.keys(affinity).length,
-  };
+
+  return { getQuota, getTemplates, getAffinity, getImageKinds, getTemplate, getImageKind, selfCheck };
 }
 
 module.exports = {
-  RULES_PATH,
-  getQuota,
-  getTemplates,
-  getAffinity,
-  getImageKinds,
-  getTemplate,
-  getImageKind,
-  selfCheck,
+  CATALOG_PATH,
+  createCatalog,
+  ...createCatalog(CATALOG_PATH),
 };
 
 // ---------- CLI ----------
 if (require.main === module) {
+  const catalog = module.exports;
   const arg = process.argv[2];
   try {
     if (arg === "--check") {
-      const r = selfCheck();
+      const r = catalog.selfCheck();
       console.log(
         `[x-catalog] OK — templates=${r.templateCount} imageKinds=${r.imageKindCount} ` +
           `affinity=${r.affinityCategoryCount} quota=${JSON.stringify(r.quota)}`,
@@ -238,10 +132,10 @@ if (require.main === module) {
       console.log(
         JSON.stringify(
           {
-            quota: getQuota(),
-            templates: getTemplates(),
-            affinity: getAffinity(),
-            imageKinds: getImageKinds(),
+            quota: catalog.getQuota(),
+            templates: catalog.getTemplates(),
+            affinity: catalog.getAffinity(),
+            imageKinds: catalog.getImageKinds(),
           },
           null,
           2,
@@ -253,7 +147,7 @@ if (require.main === module) {
       process.exit(1);
     }
   } catch (e) {
-    console.error(e.message);
+    console.error(e instanceof Error ? e.message : e);
     process.exit(1);
   }
 }

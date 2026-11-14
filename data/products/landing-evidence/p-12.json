@@ -91,123 +91,123 @@
       {
         "productId": "P-01",
         "version": "analysis-20261112",
-        "manifestSha256": "c0bdad82937505b5955605e380ddcf88d5aa7a62be89b93300ac35cb48bc1b5b"
+        "manifestSha256": "8d7b5a200cb2b44fd4ae4fd6e31ecff1ef6963c41d0eb88334a1c1499ab6bce2"
       },
       {
         "productId": "P-02",
         "version": "analysis-20261113",
-        "manifestSha256": "b96934f39129abedff48ee0bf6be9068f5bbc03bd4c04e3176977fcb798867e3"
+        "manifestSha256": "eec6d48c54ef24d1a3e7b5b90d24577e5dcd1cf1e4390ce293ce3f89fd2ed5d5"
       },
       {
         "productId": "P-03",
         "version": "analysis-20261113",
-        "manifestSha256": "d25f7a209e5ac9b04d073e076886cbe8237cfd584cea5df85bc131357f9b241b"
+        "manifestSha256": "be065c4fc694b042d7d9ba06b0e146c4d873db7da99eb58ab565e62918d92583"
       },
       {
         "productId": "P-04",
         "version": "analysis-20261112",
-        "manifestSha256": "1855b9e8ecee5936e0a3ee62203b75b0841dd1b789449c2e95a761a0127eea83"
+        "manifestSha256": "5ad7ed73b2034cac266792efb9259dbb404e3019da4bbdaa6d9ec4e9f11ce76f"
       },
       {
         "productId": "P-05",
         "version": "analysis-20261112",
-        "manifestSha256": "62d1fe45d851b195e9ce5063fc522924efb9e91c5b738aca155167f7e2e2eaca"
+        "manifestSha256": "0bc66a4e969e069b4e16a1bd9026e78ed40d51b1692b61fa20f225e8263e90a8"
       },
       {
         "productId": "P-06",
         "version": "analysis-20261112",
-        "manifestSha256": "74e6a8c990fc57acb5898c606e292bfe2426a62652911fda76c28e90a9cd60f6"
+        "manifestSha256": "cec6e2e9fbc3c4cec0533e7e3b790e92c2b3805d95383554a65c624d3f42277e"
       },
       {
         "productId": "P-07",
         "version": "analysis-20261113",
-        "manifestSha256": "e563ba60ffb75859ed6f69db2d08e581cb146fd984b6563e97e8d26bca717541"
+        "manifestSha256": "7dc0010f525f348d7024a0f3d3ac470ba7fe89856e71b7d3b456f2a718e57b87"
       },
       {
         "productId": "P-08",
         "version": "analysis-20261112",
-        "manifestSha256": "c53adc0934228b981e8545b46fda8e7fd863f5b092f58f65b0029686344336a1"
+        "manifestSha256": "4dea8fe4fc067df4accca94f60b7e46ebc65fe59d7d8e20b7e23ef15f9057d01"
       },
       {
         "productId": "P-09",
         "version": "analysis-20261113",
-        "manifestSha256": "1a39089f490fb5031309583f6cc4061ae63171bbcdd9179990c2b397fb4b6905"
+        "manifestSha256": "70e581e18da88077f7b9fabe165d03486b5e18db8b62a093bf4bba524d2f3991"
       },
       {
         "productId": "P-10",
         "version": "analysis-20261113",
-        "manifestSha256": "2a391f9f29f754609a74f379abf6900520dd1b30fa85898e718bc6265e2c8d44"
+        "manifestSha256": "a03c4ad35031967be42e9e2ba535ece13ac1e95c32fea41dc999171128beba15"
       },
       {
         "productId": "P-14",
         "version": "analysis-20261113",
-        "manifestSha256": "2270013ce4971aae5d0ea1e0c964df0ef909b794568e635d57e163503005ae81"
+        "manifestSha256": "969a88d95e09217b3e92e4b63b8b609e410cf26f762c9146c305f14d2199cc52"
       }
     ],
     "files": [
       {
         "file": "images/p-01-national-municipality-change.png",
-        "sha256": "4fc956c77a1d8a2369d0cf1e17033e0a76317967ef1f34e406d6d250bf18a0c3",
-        "bytes": 218802
+        "sha256": "1e91efbcdefdb71cbd3e7972d80bfadf85e6c89e094afd56f7cee3063f86d613",
+        "bytes": 222994
       },
       {
         "file": "images/p-02-national-municipal-outcommuters.png",
-        "sha256": "2ee15e54a77a3535a73801faa4a5c4651a2212580699e540ccec08594c3d9ed9",
-        "bytes": 184167
+        "sha256": "b992c51dad82fd6cc89d0182865020f926fcddaa110dd5f4bc022396caafbee4",
+        "bytes": 187867
       },
       {
         "file": "images/p-03-tokyo-overnight-stays-trend.png",
-        "sha256": "9d8d7f90f519f65b7dcd4e2d0a65718818dc82708f4cd630f68a152e5de2336c",
-        "bytes": 109004
+        "sha256": "81a2f7c10540f93179f02c22d1ad8bb37fe90464c5b064a7ec9e4a2c80ea780d",
+        "bytes": 110177
       },
       {
         "file": "images/p-04-national-municipal-fiscal-strength.png",
-        "sha256": "51efcee6d167d84760a84585bfc0d782a2f7bf5ad7cf2c84a3db70034074916f",
-        "bytes": 209013
+        "sha256": "bdafc746ba6a91308561479b4e21fe1e3ec2ad22a2674e1e4d6aa30c64fa09a0",
+        "bytes": 213952
       },
       {
         "file": "images/p-05-national-clinics-per-population.png",
-        "sha256": "2f870ae1b11f43915f47e4f6a03a54487f9bb99f3a87cc8dae30173bc6dd9219",
-        "bytes": 196374
+        "sha256": "15141bdad911c852ad7fff8e493913f142b4ba8b965137ff956c98a2d5b573e2",
+        "bytes": 201389
       },
       {
         "file": "images/p-06-national-pupils-per-teacher.png",
-        "sha256": "eaf13706a1eccefc3ba42ed7da5db3b7fc58bcc87ddf6bfb58f484c95901c7a0",
-        "bytes": 243089
+        "sha256": "923df9d572b9b365ebdb950aa21424531fda1cda89c66610158c64c68be1e963",
+        "bytes": 249465
       },
       {
         "file": "images/p-07-municipal-vacancy-share-trend.png",
-        "sha256": "1f3ac3b6df5bf1ab338154067664e6b9d9e6fd571023671c08a69ae4be7bf895",
-        "bytes": 102187
+        "sha256": "581456024025298c0ed9372973864446552017280473eed7a303bb7c766f532f",
+        "bytes": 107189
       },
       {
         "file": "images/p-08-national-municipal-sales-scale.png",
-        "sha256": "cebda4fa57d15ec78e1c55543b2ee3d42e8b0e111c859dbdd8d709ed2f66c37f",
-        "bytes": 159567
+        "sha256": "1b96bccf4072b43a58c5d3a9f4448c5e493e570a1ec1c327c01097b7039bc425",
+        "bytes": 163397
       },
       {
         "file": "images/p-09-prefecture-manufacturing-scale-2023.png",
-        "sha256": "9230751f3ba0df420bda956707930e8cff8df590bca214435c869282a8147926",
-        "bytes": 167810
+        "sha256": "7675fd6b26d1a7d5d4fe134e3ca03df59c66f3623201564170d70ec31505e3d3",
+        "bytes": 165943
       },
       {
         "file": "images/p-10-national-garbage-collection-population.png",
-        "sha256": "da4b6a3fdfc8add975dc0c23a7233196013e93f0afa4515732f4b50caf899b89",
-        "bytes": 173518
+        "sha256": "4150e113c6787f11dc89d76a786171f45020183942bd88fab511392a8c921c05",
+        "bytes": 177829
       },
       {
         "file": "images/p-14-beef-expenditure-trend.png",
-        "sha256": "430eb225cc74941054b375bae3bfb022085507a3808ee39f14382e8f270acf83",
-        "bytes": 96457
+        "sha256": "144c7ae79ddbd28fdac51bc3fc473406eda374c3597ea2d9b9718fbba0c9acf7",
+        "bytes": 100433
       },
       {
         "file": "packs/P-01.zip",
-        "sha256": "39d5044c22af86278d4d18b0a7c7af6a93fef7179600bfc41e08c39ac53d9417",
-        "bytes": 4879395
+        "sha256": "94127a8b719365f76284ebbc391a4a4d07844cc68b898e2459831dcf285bad23",
+        "bytes": 4933400
       },
       {
         "file": "sources/P-01/SOURCES.csv",
-        "sha256": "d97c5f1b99ca2d734d4ed55b8f899dfac8262b4aad7c51b602c04d81ff40d413",
+        "sha256": "4f45826111d209389a4e886cca9dc59fdfc9886a84ccb8a7cdd26e9b6b030681",
         "bytes": 9604
       },
       {
@@ -227,12 +227,12 @@
       },
       {
         "file": "packs/P-02.zip",
-        "sha256": "06b15c949ca62f6be760f6b397597a3032a11d788539ea68dd08d46e79eea643",
-        "bytes": 837458
+        "sha256": "41e5d107c9e7a698b57bd37b561cb6d0c3e95747ce20e6f638ec13e367452578",
+        "bytes": 847064
       },
       {
         "file": "sources/P-02/SOURCES.csv",
-        "sha256": "f3e58331438c71c5de3a430cbe605a647fe9dec3ca41fffdaa482b6533849c16",
+        "sha256": "ade1acc8c776488c39d4a28574c8a435f8b450e82efde49998986e6561f76e09",
         "bytes": 721
       },
       {
@@ -252,12 +252,12 @@
       },
       {
         "file": "packs/P-03.zip",
-        "sha256": "fd47aa27575d01872cd59cb04e1caa913a32647c889a72d66946f941033adf84",
-        "bytes": 311347
+        "sha256": "bc89909c513f26ca24857e2a15c8286bed9d8f2e3833bab2503faa95bec25ce6",
+        "bytes": 317765
       },
       {
         "file": "sources/P-03/SOURCES.csv",
-        "sha256": "e8aec077df5e016ddd156b27d7dff8f23ab8d7cc51c42fe28d39db7d6cd3e393",
+        "sha256": "e05548699268fcf16120785c9bfbc14c9ee486a26b82c5716608add0e37242af",
         "bytes": 1494
       },
       {
@@ -277,12 +277,12 @@
       },
       {
         "file": "packs/P-04.zip",
-        "sha256": "3dde4b3b80f3b79507019f895c169eccc95cd5d3ddc3a690ea4fd53e2313c6ad",
-        "bytes": 13320844
+        "sha256": "32cbfd52e90573c8e4bc13faa7783085e077d6a39f8e0b0f28610be91b856be9",
+        "bytes": 13316758
       },
       {
         "file": "sources/P-04/SOURCES.csv",
-        "sha256": "8310384a8ff665b4557e3f0f72e71444fc00a35511765ec487946e6cf569ef6e",
+        "sha256": "35f4eb2fe2f6efc128be225d6d5de528670c66f193125e724c3c7cde52c5739f",
         "bytes": 16286
       },
       {
@@ -302,12 +302,12 @@
       },
       {
         "file": "packs/P-05.zip",
-        "sha256": "eeb5c54467d793ab3dc5743b86e3023bb9d3fb40d2be5afc7b0acf698bf3d224",
-        "bytes": 1913734
+        "sha256": "eae590629ce175a168b0d6ea95790221b19411cfebe9cf81d4ef3af397f73df3",
+        "bytes": 1928025
       },
       {
         "file": "sources/P-05/SOURCES.csv",
-        "sha256": "724597fae9a976affe3fcece7839c3d43368242b7a3c39dc51fc0f57b5cee469",
+        "sha256": "f8959175d8e63e783d2b0820cee13468dff3177c2587cbe80960ee9838617159",
         "bytes": 2051
       },
       {
@@ -327,18 +327,18 @@
       },
       {
         "file": "packs/P-06.zip",
-        "sha256": "27d751a52c9ffdb7e39d8a573b9ec8696928eba7a1f07292b66b55d1ed72e9af",
-        "bytes": 2747791
+        "sha256": "82c17a31683fd1010276443e272eb0e0936735d74ef89be99ee0624e4f329485",
+        "bytes": 2764786
       },
       {
         "file": "sources/P-06/SOURCES.csv",
-        "sha256": "7828a011c93f01d20865b27fd3b2bb1eb45041897f8b05d703f02aadb251945d",
+        "sha256": "ec79370047891c926ecbd8ec36b05e971eec6ade71a4ccec6d1e7b98f9aca931",
         "bytes": 1920
       },
       {
         "file": "sources/P-06/LICENSE-ja.txt",
-        "sha256": "c589640218b52c9748c3e88f8d19ec7bbde84abffe443970c1665c324b1fda1d",
-        "bytes": 1275
+        "sha256": "07eb760b739ab2c84ce33c7f3fdfaeee5f9f3118dc8efdbc36fccbc0767d4f29",
+        "bytes": 1265
       },
       {
         "file": "sources/P-06/analysis-plan.json",
@@ -352,18 +352,18 @@
       },
       {
         "file": "packs/P-07.zip",
-        "sha256": "4d616799840a6489cec5320e0d41842e53feebb81a0deffc042e92fd104e97f8",
-        "bytes": 830528
+        "sha256": "b3a00662680cb5d6bef5ecd770181085525e67e377eec56b68c317e97349e287",
+        "bytes": 839507
       },
       {
         "file": "sources/P-07/SOURCES.csv",
-        "sha256": "824c704d01c03914bd4163db77c1fd11f2401a8f146b6256bf9e733974d41e5a",
+        "sha256": "e9ab5eff38d442865297bcfabcb7cc4806df004692e2dce7875cdd2529448f2c",
         "bytes": 1459
       },
       {
         "file": "sources/P-07/LICENSE-ja.txt",
-        "sha256": "e629830d1370dff4298e4e5a90e14312fcd5b87647450d6ca972fefa6dc7d93a",
-        "bytes": 1233
+        "sha256": "07eb760b739ab2c84ce33c7f3fdfaeee5f9f3118dc8efdbc36fccbc0767d4f29",
+        "bytes": 1265
       },
       {
         "file": "sources/P-07/analysis-plan.json",
@@ -377,12 +377,12 @@
       },
       {
         "file": "packs/P-08.zip",
-        "sha256": "5a6d1c7546168abf73d965fcad2cf6bf65dd3e6b1760a91487f38b374039e119",
-        "bytes": 1266010
+        "sha256": "895d2184b225a672ccb4c5c29f42f4dd9fec9395733f0730060b4f2ebb16044f",
+        "bytes": 1274024
       },
       {
         "file": "sources/P-08/SOURCES.csv",
-        "sha256": "5e3b9094e387fdb080d106172fb710edc6a5e0b8f61f413bf0f7f9e53b3dbeec",
+        "sha256": "937698244b1bbf8089c214debc1b27cc92ad006e0bc78bc308862c117689afd1",
         "bytes": 1393
       },
       {
@@ -402,12 +402,12 @@
       },
       {
         "file": "packs/P-09.zip",
-        "sha256": "e22c21688a6c1a961f2ef0a8f307aeea7e9261539eb898ca6be3aafa04ffaa74",
-        "bytes": 365494
+        "sha256": "a478aa0ee746e7f969fe5a10c58647a79945bcb81b982112898bf1559d47a2d1",
+        "bytes": 368634
       },
       {
         "file": "sources/P-09/SOURCES.csv",
-        "sha256": "e5d1a71141e12c6d3ca741fbe447e02a1db8ab341251239a6d82cb9a18ec2638",
+        "sha256": "d94f5ffbce175d8b7d1e6d5ef6bbc1cf11b9cc974239e580533566c33bcc8250",
         "bytes": 759
       },
       {
@@ -427,12 +427,12 @@
       },
       {
         "file": "packs/P-10.zip",
-        "sha256": "063a89c256b737f543a4ce5b88b90b768ce515141cd3dac8445860e96d556f3f",
-        "bytes": 1088841
+        "sha256": "a7aab7fd2c99c7b8a166e90f194b32563666455809ada3f87bfb24ce95c8dd39",
+        "bytes": 1099902
       },
       {
         "file": "sources/P-10/SOURCES.csv",
-        "sha256": "7f8aee75e0e615dceb7de982c0726bc1e046d1409b24e69ac2af0b336c213dab",
+        "sha256": "fead29fb2efe9474c8bdc883c04d9aad49131202f6a0390b532953b34baaf287",
         "bytes": 829
       },
       {
@@ -452,12 +452,12 @@
       },
       {
         "file": "packs/P-14.zip",
-        "sha256": "5dd7a31dc53e7690b64894f9b0300a4d3b029d5c69a0f1c0ba305a348d54ba85",
-        "bytes": 298817
+        "sha256": "f722bc653103842af0bcb294845eca64cd418327da7cb6a4622474f1c1ea7e55",
+        "bytes": 305919
       },
       {
         "file": "sources/P-14/SOURCES.csv",
-        "sha256": "3a66aca4ab7c4c2bd0dade31edef2d7317ed4e6b6fe2ae27f759962e95a8a262",
+        "sha256": "16a6d800facff5c4cd004ff6ac62c93e2e98d0f3b1064ee89e60a9f1445d77aa",
         "bytes": 1457
       },
       {
@@ -482,7 +482,7 @@
       },
       {
         "file": "dependencies.json",
-        "sha256": "139199b479cb2fe463a0bab88d33566778ebedee062308540a912d3803ae3527",
+        "sha256": "3373471eba200967d56535f87800bd287008a005a8a01d6998e530fc5fbe533d",
         "bytes": 1752
       },
       {
@@ -497,13 +497,13 @@
       },
       {
         "file": "analysis-pack.zip",
-        "sha256": "fcc43eb30ccc978255dc662ebb43a9562d48c14cc938df0525aee3d6d1a7238c",
-        "bytes": 28004005
+        "sha256": "b0dd3786245ca37a1bbcbec30e39328abf6b63a52f7a6d577488fff0ee997373",
+        "bytes": 28178733
       },
       {
         "file": "preview-product.json",
-        "sha256": "d3be1484a503dac1d64e0272485f91387df62900b1ba8500d8cf5ded4809678f",
-        "bytes": 14428
+        "sha256": "bee85401d2206b8290b2ca3fde3a12c24f8c22c2b8689b6b048565f09d7a7920",
+        "bytes": 14449
       }
     ]
   },

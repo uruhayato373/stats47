@@ -2,16 +2,15 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readBookshelfState } from '../../kdp/lib/kdp-flow.mjs';
 import { randomBytes } from 'node:crypto';
-import { existsSync, mkdtempSync, mkdirSync, readFileSync, writeFileSync, rmSync } from 'node:fs';
+import { existsSync, mkdtempSync, mkdirSync, readFileSync, readdirSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { resolve, join } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import yaml from 'js-yaml';
-import { SOURCES, scopedState, sourceFor, failureCode, selectSessionBundle } from '../sources.mjs';
+import { SOURCES, scopedState, sourceFor, failureCode } from '../sources.mjs';
 import { encrypt, decrypt, BUCKET } from '../vault.mjs';
 import { consumerPath, validateAttempt } from '../consumer-paths.mjs';
 import { measurementHealth } from '../health.mjs';
-import { AFFILIATE_ASP } from '../../../../config/paths.mjs';
 import ExcelJS from 'exceljs';
 import { kdpAsinMap, parseKdpReport, openKdpReports } from '../kdp-reports.mjs';
 import { openCoverageReason } from '../../gsc/export-coverage-playwright.mjs';
@@ -63,19 +62,6 @@ test('native Google session export preserves the OS keychain and original profil
   assert.match(code, /google_login_requires_native_chrome/);
   assert.doesNotMatch(code, /AutomationControlled|--enable-automation|navigator\.webdriver/);
   assert.match(code, /reports_requires_kdp_login/);
-});
-
-test('a later refresh from an old login cannot overwrite a new human login', () => {
-  const seed = { capturedAt: '2026-09-21T02:18:49Z', state: 'new-login' };
-  const legacy = { capturedAt: '2026-09-21T02:30:00Z', state: 'old-login' };
-  assert.equal(selectSessionBundle(seed, legacy).state, 'new-login');
-  const oldGeneration = { ...legacy, bootstrapCapturedAt: '2026-09-20T00:00:00Z' };
-  assert.equal(selectSessionBundle(seed, oldGeneration).state, 'new-login');
-  const sameGeneration = { ...legacy, bootstrapCapturedAt: seed.capturedAt, state: 'valid-refresh' };
-  assert.equal(selectSessionBundle(seed, sameGeneration).state, 'valid-refresh');
-  assert.equal(selectSessionBundle(seed, null).bootstrapCapturedAt, seed.capturedAt);
-  assert.equal(selectSessionBundle(null, sameGeneration).state, 'valid-refresh');
-  assert.equal(selectSessionBundle(null, null), null);
 });
 
 function kdpFixture() {
@@ -169,10 +155,12 @@ test('KDP rejects malformed, wrong-day, unmapped, duplicate and foreign observat
   assert.throws(()=>kdpAsinMap({ ...kdpListings, other: { author:'stats47',asin:'B0HF17SQ9N' } }));
 });
 
-test('moshimo human login opens the same home as the collector', () => {
-  const config = JSON.parse(readFileSync(resolve(AFFILIATE_ASP), 'utf8')).asps.moshimo;
+test('human login opens a page for every collected source and none for sources removed from collection', () => {
+  // もしも・afb は 2026-10-19 に取得元から外した。sourceFor が unknown_source で止めるので、ログイン先の表に残しても使われない
   const bootstrap = readFileSync(resolve('.claude/scripts/measurement/bootstrap-session.mjs'), 'utf8');
-  assert.ok(bootstrap.includes(`moshimo: '${config.baseUrl}${config.homePath}'`));
+  for (const name of Object.keys(SOURCES)) assert.match(bootstrap, new RegExp(`\\b${name}: 'https://`), name);
+  for (const name of ['moshimo', 'afb']) assert.doesNotMatch(bootstrap, new RegExp(`\\b${name}: 'https://`), name);
+  assert.throws(() => sourceFor('moshimo'), /unknown_source/);
 });
 
 test('session export strips other services and rejects lookalike hosts', () => {
@@ -306,7 +294,8 @@ test('rerun artifacts select the latest attempt and never resurrect an older suc
   } finally { rmSync(temp, { recursive: true, force: true }); }
 });
 
-test('KDP auth recovery requires human Reports login instead of re-exporting stale state', () => {
+// 意図: 認証切れの案内は、今ある手順 (Mac で本人が入り直して取り直す) だけを指す。撤去した「Secrets へ送る」手順を案内しない。
+test('KDP auth recovery points to a human login on the Mac instead of re-exporting stale state', () => {
   const temp = mkdtempSync(join(tmpdir(), 'stats47-kdp-recovery-test-'));
   try {
     const input = join(temp, 'input'); mkdirSync(input);
@@ -317,11 +306,11 @@ test('KDP auth recovery requires human Reports login instead of re-exporting sta
       cwd: temp, env: { ...process.env, GITHUB_RUN_ID: 'kdp-recovery', GITHUB_RUN_ATTEMPT: '2' },
     });
     const summary = readFileSync('/tmp/authenticated-measurement-summary.md', 'utf8');
-    assert.match(summary, /bootstrap-session\.mjs kdp --login --reports --publish/);
-    assert.doesNotMatch(summary, /bootstrap-session\.mjs kdp --publish/);
+    assert.match(summary, /refresh-session\.mjs kdp --wait-human/);
+    assert.match(summary, /measurement-session-refresh\.sh で取り直す/);
+    assert.doesNotMatch(summary, /--publish|Secret|CI/);
     assert.match(summary, /再ログインを反復せず停止/);
-    // CI 再ログインの結果 (Reports で 2FA を求められた等) は CI ログだけでなく state に残す。
-    // 再ログインしなかった source は null で、結果を推測で埋めない
+    // relogin の欄は記録の形として残す。値を書かなかった取得元は null で、結果を推測で埋めない
     const sources = JSON.parse(readFileSync(join(temp, 'data/authenticated/latest.json'))).sources;
     assert.equal(sources.find(s => s.source === 'kdp').relogin, 'human_required');
     assert.equal(sources.find(s => s.source === 'a8').relogin, null);
@@ -371,24 +360,41 @@ test('a partial run keeps the rows of sources it did not collect and still recor
   } finally { rmSync(temp, { recursive: true, force: true }); }
 });
 
-test('Mac direct collection writes evidence to the vault but never touches CI-only session state', () => {
-  const collect = readFileSync('.claude/scripts/measurement/collect.mjs', 'utf8');
-  assert.match(collect, /const vaultWrites = !local \|\| process\.argv\.includes\('--vault'\);/);
-  // 保管庫のセッション・認証停止の記録は CI だけが書く (Mac のセッションの正本は専用プロファイル)
-  for (const needle of ['writeVault(`${name}/session`', 'writeVault(`${name}/auth-recovery`']) {
-    let index = collect.indexOf(needle);
-    assert.ok(index >= 0, needle);
-    for (; index >= 0; index = collect.indexOf(needle, index + 1)) {
-      // ciLogin は !local && CI の資格情報があるときだけ真
-      assert.match(collect.slice(Math.max(0, index - 1600), index), /!local|ciLogin/, `${needle} は CI だけが書く`);
-    }
+// 意図 (2026-10-20 オーナー判断・MEASUREMENT-MAC-DIRECT-01): ログインと取得は Mac だけが持つ。CI がセッションや
+// ID/PW を受け取る入口 (Secrets の名前・CI 再ログイン・Secrets への送信) を残すと、撤去した経路を誰かが
+// 再び配線できてしまうので、入口そのものが無いことを固定する。
+test('no CI-only entry point for sessions or credentials remains', () => {
+  const ciOnly = /MEASUREMENT_SESSION|STATS47_AUTH_|AFB_API_KEY|ciLogin|ciRelogin|readCiCredential|ciCredential|ciStored|ciSecrets|auth:ci-secret|set-ci-secret|auth-recovery\.mjs|gh', \['secret'|"gh", \["secret"/;
+  const dir = '.claude/scripts/measurement';
+  const files = [
+    ...readdirSync(dir).filter((file) => file.endsWith('.mjs')).map((file) => join(dir, file)),
+    'package.json', 'config/env-registry.json', '.claude/config/auth-credentials.json',
+    'apps/admin/app/ops/auth/page.tsx', 'apps/admin/lib/server/auth-credentials.ts',
+    'docs/01_技術設計/07_Playwright認証プロファイル.md',
+  ];
+  // bootstrap-session.mjs は保管庫の鍵を二重に作らないために Secrets の名前の一覧だけを読む (値は読めず、書かない)
+  const allowed = (file, line) => file.endsWith('bootstrap-session.mjs') && /gh', \['secret', 'list'/.test(line);
+  const hits = files.flatMap((file) => readFileSync(file, 'utf8').split('\n')
+    .flatMap((line, index) => (ciOnly.test(line) && !allowed(file, line) ? [`${file}:${index + 1}`] : [])));
+  assert.deepEqual(hits, []);
+  for (const removed of ['set-ci-secret.mjs', 'auth-recovery.mjs', '__tests__/auth-recovery.test.mjs']) {
+    assert.equal(existsSync(join(dir, removed)), false, `${removed} は CI 専用だった`);
   }
+  for (const script of ['refresh-session.mjs', 'bootstrap-session.mjs', 'collect.mjs', 'collect-local.mjs']) {
+    assert.doesNotMatch(readFileSync(join(dir, script), 'utf8'), /--publish|'--ci'|GITHUB_ACTIONS/, `${script} は Secrets へ送らず、CI の分岐を持たない`);
+  }
+});
+
+test('Mac direct collection reads the session from the Mac profile and writes only evidence to the vault', () => {
+  const collect = readFileSync('.claude/scripts/measurement/collect.mjs', 'utf8');
+  assert.match(collect, /const vaultWrites = process\.argv\.includes\('--vault'\);/);
+  // セッションの正本は Mac の専用プロファイル。保管庫へはセッションも認証停止の記録も書かず、保管庫から読みもしない
+  assert.doesNotMatch(collect, /\/session`|\/auth-recovery`|readVault/);
   const runner = readFileSync('.claude/scripts/measurement/collect-local.mjs', 'utf8');
-  assert.match(runner, /'--local', '--vault'/);
+  assert.match(runner, /\[name, '--vault'\]/);
   assert.match(runner, /MEASUREMENT_VAULT_WRITER: 'mac'/);
   const vault = readFileSync('.claude/scripts/measurement/vault.mjs', 'utf8');
-  assert.match(vault, /!process\.env\.GITHUB_ACTIONS && process\.env\.MEASUREMENT_VAULT_WRITER !== 'mac'\) throw new Error\('vault_write_ci_only'\)/);
-  assert.doesNotMatch(runner, /--publish/, 'Mac の取得は Secrets へ送らない');
+  assert.match(vault, /if \(process\.env\.MEASUREMENT_VAULT_WRITER !== 'mac'\) throw new Error\('vault_write_mac_only'\)/);
   const shell = readFileSync('scripts/scheduled/measurement-collect-local.sh', 'utf8');
   const commit = shell.split('\n').find((line) => /git .*commit/.test(line));
   assert.ok(commit, '記録コミットがある');

@@ -18,16 +18,30 @@
  *
  *   node .claude/scripts/lib/sync-codex-mirror.cjs            # 生成 (差分があるものだけ書く・不要物は消す)
  *   node .claude/scripts/lib/sync-codex-mirror.cjs --check    # ドリフトがあれば一覧を出して exit 1 (CI / E11)
+ *   node .claude/scripts/lib/sync-codex-mirror.cjs --root <dir>   # 別のルートを対象にする (テストの fixture 用)
  */
 
 const fs = require("node:fs");
 const path = require("node:path");
 
-const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..", "..");
-const SKILLS_SRC = path.join(ROOT, ".claude/skills");
-const SKILLS_DST = path.join(ROOT, ".agents/skills");
-const AGENTS_SRC = path.join(ROOT, ".claude/agents");
-const AGENTS_DST = path.join(ROOT, ".codex/agents");
+// ルートは、このスクリプトが置かれている作業ツリー。CLAUDE_PROJECT_DIR は読まない: worktree のセッションでは
+// その変数が元の作業ツリーを指すので、ルートにすると再生成が別の作業ツリーへ書き込む (CI-TOOLING-FOLLOWUP-01)。
+// 別のルート (テストの fixture・整合性検査が見ているルート) は --root <dir> か setRoot() で明示する。
+/** @type {string} */ let ROOT;
+/** @type {string} */ let SKILLS_SRC;
+/** @type {string} */ let SKILLS_DST;
+/** @type {string} */ let AGENTS_SRC;
+/** @type {string} */ let AGENTS_DST;
+
+/** @param {string} root */
+function setRoot(root) {
+  ROOT = path.resolve(root);
+  SKILLS_SRC = path.join(ROOT, ".claude/skills");
+  SKILLS_DST = path.join(ROOT, ".agents/skills");
+  AGENTS_SRC = path.join(ROOT, ".claude/agents");
+  AGENTS_DST = path.join(ROOT, ".codex/agents");
+}
+setRoot(path.resolve(__dirname, "..", "..", ".."));
 
 // 指示ではないデータ。mirror に含めない (Codex は .claude 側の絶対パスで読む)。
 const DATA_DIR_NAMES = new Set(["snapshots", "reviews", "weekly-snapshots"]);
@@ -202,6 +216,15 @@ function apply(actions) {
 
 function main(argv = process.argv.slice(2)) {
   const check = argv.includes("--check");
+  const rootAt = argv.indexOf("--root");
+  if (rootAt >= 0) {
+    const root = argv[rootAt + 1];
+    if (!root || root.startsWith("--")) {
+      console.error("✗ --root にはルートのディレクトリを渡す");
+      return 2;
+    }
+    setRoot(root);
+  }
   const actions = [...planSkills(), ...planAgents()];
   const stale = actions.filter((a) => a.op === "delete").length;
   const writes = actions.length - stale;
@@ -221,4 +244,4 @@ function main(argv = process.argv.slice(2)) {
 }
 
 if (require.main === module) process.exit(main());
-module.exports = { planSkills, planAgents, renderAgentToml, parseFrontmatter, tomlMultiline };
+module.exports = { planSkills, planAgents, renderAgentToml, parseFrontmatter, tomlMultiline, setRoot };

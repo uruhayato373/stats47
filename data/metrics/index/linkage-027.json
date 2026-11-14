@@ -2,6 +2,1170 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "secondary-industry-establishment-ratio-census",
+      "pageId": "ranking:secondary-industry-establishment-ratio-census",
+      "title": "第2次産業事業所数構成比",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010203",
+          "filters": {
+            "cdCat01": "#C02102"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010203",
+          "cdCat01": "#C02102"
+        },
+        "derived": false,
+        "configHash": "0d7929147b59a3a7"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:secondary-industry-establishment-ratio-census",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "secondary-industry-workers",
+      "pageId": null,
+      "title": "第2次産業就業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020206",
+          "filters": {
+            "cdCat01": "F2211"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020206",
+          "cdCat01": "F2211"
+        },
+        "derived": false,
+        "configHash": "09489cf18b37eba2"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:secondary-industry-workers",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor-wages",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:secondary-industry-workers",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "securities-balance",
+      "pageId": "ranking:securities-balance",
+      "title": "有価証券保有額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010112",
+          "filters": {
+            "cdCat01": "L430104"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010112",
+          "cdCat01": "L430104"
+        },
+        "derived": false,
+        "configHash": "4f30d2defd585709"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:securities-balance",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-assets-debt",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "household-assets-debt"
+      ]
+    },
+    {
+      "metricKey": "security-guard-annual-income",
+      "pageId": "ranking:security-guard-annual-income",
+      "title": "警備員の平均年収",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003445758",
+          "filters": {
+            "cdCat01": "01",
+            "cdCat02": "1453"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003445758",
+          "cdCat01": "01",
+          "cdCat02": "1453"
+        },
+        "ops": {
+          "tabCombination": [
+            {
+              "cdTab": "08,40",
+              "factor": 12
+            },
+            {
+              "cdTab": "12,44",
+              "factor": 1
+            }
+          ],
+          "valueScale": 0.1,
+          "sampleCount": {
+            "cdTab": "13,45",
+            "factor": 10,
+            "minimum": 10
+          }
+        },
+        "derived": true,
+        "configHash": "1ee990b763047232"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:security-guard-annual-income",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:occupation-salary",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "occupation-salary"
+      ]
+    },
+    {
+      "metricKey": "seismic-retrofit-owner-houses-since-2014",
+      "pageId": null,
+      "title": "耐震改修工事をした持ち家数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020208",
+          "filters": {
+            "cdCat01": "H227005"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020208",
+          "cdCat01": "H227005"
+        },
+        "derived": false,
+        "configHash": "d5936c83d32cb5d8"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:seismic-retrofit-owner-houses-since-2014",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:living-housing",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:seismic-retrofit-owner-houses-since-2014",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "seismic-retrofit-owner-houses-since-2019",
+      "pageId": null,
+      "title": "耐震改修工事をした持ち家数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020208",
+          "filters": {
+            "cdCat01": "H227006"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020208",
+          "cdCat01": "H227006"
+        },
+        "derived": false,
+        "configHash": "6e02ccb099d19da3"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:seismic-retrofit-owner-houses-since-2019",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:living-housing",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:seismic-retrofit-owner-houses-since-2019",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "self-employed-and-family-workers",
+      "pageId": null,
+      "title": "自営業主及び家族従業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020206",
+          "filters": {
+            "cdCat01": "F2406"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020206",
+          "cdCat01": "F2406"
+        },
+        "derived": false,
+        "configHash": "e6b16b53613aead0"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:self-employed-and-family-workers",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor-wages",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:self-employed-and-family-workers",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "self-employed-without-employees",
+      "pageId": null,
+      "title": "雇人のない業主数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020206",
+          "filters": {
+            "cdCat01": "F2404"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020206",
+          "cdCat01": "F2404"
+        },
+        "derived": false,
+        "configHash": "635d7c75b3ae4bca"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:self-employed-without-employees",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor-wages",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:self-employed-without-employees",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "self-financing-ratio",
+      "pageId": "ranking:self-financing-ratio",
+      "title": "自主財源の割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010204",
+          "filters": {
+            "cdCat01": "#D0120101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010204",
+          "cdCat01": "#D0120101"
+        },
+        "derived": false,
+        "configHash": "b47210c43f19e02f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area:01000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:02000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:03000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:04000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:05000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:06000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:07000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:08000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:09000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:10000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:11000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:12000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:13000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:14000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:15000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:16000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:17000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:18000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:19000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:20000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:21000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:22000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:23000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:24000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:25000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:26000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:27000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:28000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:29000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:30000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:31000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:32000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:33000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:34000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:35000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:36000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:37000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:38000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:39000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:40000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:41000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:42000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:43000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:44000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:45000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:46000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:47000",
+          "kind": "area"
+        },
+        {
+          "pageId": "blog:fiscal-self-reliance-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:self-financing-ratio-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:self-financing-ratio",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:local-finance",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "local-finance"
+      ]
+    },
+    {
+      "metricKey": "self-service-store-count",
+      "pageId": "ranking:self-service-store-count",
+      "title": "セルフサービス事業所数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010108",
+          "filters": {
+            "cdCat01": "H6105"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010108",
+          "cdCat01": "H6105"
+        },
+        "derived": false,
+        "configHash": "9350228d04a2f68e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:self-service-store-count",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "self-service-store-count-per-100k",
       "pageId": "ranking:self-service-store-count-per-100k",
       "title": "セルフサービス事業所数",
@@ -24,10 +1188,7 @@
         "configHash": "7ada335ab90fad65"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:self-service-store-count-per-100k",
@@ -133,10 +1294,7 @@
         "configHash": "cb49963d82e33bca"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:senior-recreation-home-count-per-100k-65plus",
@@ -168,10 +1326,7 @@
         "configHash": "3882297ae0ad66d5"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:senior-recreation-home-staff-per-100k-65plus",
@@ -251,10 +1406,7 @@
         "configHash": "8c2d16701a8bedf3"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:senior-welfare-center-count-per-100k-65plus",
@@ -286,10 +1438,7 @@
         "configHash": "3bca056fb5493310"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:senior-welfare-center-staff-per-100k-65plus",
@@ -632,6 +1781,194 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:water-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area:01000",
           "kind": "area"
         },
@@ -834,9 +2171,15 @@
         {
           "pageId": "ranking:sewage-treatment-coverage-rate",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:water-services",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "water-services"
+      ]
     },
     {
       "metricKey": "sewerage-coverage-rate",
@@ -859,6 +2202,468 @@
         },
         "derived": false,
         "configHash": "e11822faf387fd5d"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:01000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:sewerage-coverage-rate-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:sewerage-coverage-rate",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:environmental-quality",
+          "kind": "theme"
+        },
+        {
+          "pageId": "theme:water-services",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "environmental-quality",
+        "water-services"
+      ]
+    },
+    {
+      "metricKey": "sewerage-drainage-population",
+      "pageId": "ranking:sewerage-drainage-population",
+      "title": "下水道排水区域人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010108",
+          "filters": {
+            "cdCat01": "H540301"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010108",
+          "cdCat01": "H540301"
+        },
+        "derived": false,
+        "configHash": "dbc0fbea2e756e09"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:water-infrastructure-crisis",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:sewerage-drainage-population",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sewerage-penetration-rate-2012on",
+      "pageId": "ranking:sewerage-penetration-rate-2012on",
+      "title": "下水道普及率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010208",
+          "filters": {
+            "cdCat01": "#H0530401"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H0530401"
+        },
+        "derived": false,
+        "configHash": "be3d171cd65381c7"
       },
       "dependencies": [],
       "normalizationDependencies": [],
@@ -1052,87 +2857,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "blog:sewerage-coverage-rate-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:sewerage-coverage-rate",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:water-services",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "water-services"
-      ]
-    },
-    {
-      "metricKey": "sewerage-drainage-population",
-      "pageId": "ranking:sewerage-drainage-population",
-      "title": "下水道排水区域人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010108",
-          "filters": {
-            "cdCat01": "H540301"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010108",
-          "cdCat01": "H540301"
-        },
-        "derived": false,
-        "configHash": "dbc0fbea2e756e09"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:water-infrastructure-crisis",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:sewerage-drainage-population",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "sewerage-penetration-rate-2012on",
-      "pageId": "ranking:sewerage-penetration-rate-2012on",
-      "title": "下水道普及率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010208",
-          "filters": {
-            "cdCat01": "#H0530401"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010208",
-          "cdCat01": "#H0530401"
-        },
-        "derived": false,
-        "configHash": "be3d171cd65381c7"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
           "pageId": "blog:sewage-treatment-coverage-rate-vs-sewerage-penetration-rate",
           "kind": "blog"
         },
@@ -1151,9 +2875,15 @@
         {
           "pageId": "ranking:sewerage-penetration-rate-2012on",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:water-services",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "water-services"
+      ]
     },
     {
       "metricKey": "sewerage-penetration-rate-pre2011",
@@ -2343,11 +4073,35 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:hiroshima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:hokkaido-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:okayama-food-culture",
           "kind": "blog"
         },
         {
+          "pageId": "blog:shimane-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:tokyo-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamagata-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamanashi-food-culture",
           "kind": "blog"
         },
         {
@@ -2388,11 +4142,35 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:hiroshima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:hokkaido-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:okayama-food-culture",
           "kind": "blog"
         },
         {
+          "pageId": "blog:shimane-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:tokyo-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamagata-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamanashi-food-culture",
           "kind": "blog"
         },
         {
@@ -2445,6 +4223,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:yamaguchi-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:shimeji-consumption-expenditure",
           "kind": "ranking"
         }
@@ -2486,7 +4268,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:ehime-food-culture",
+          "pageId": "blog:nagano-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamaguchi-food-culture",
           "kind": "blog"
         },
         {
@@ -2760,6 +4546,14 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:fukuoka-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kagoshima-food-culture",
           "kind": "blog"
         },
@@ -2781,6 +4575,10 @@
         },
         {
           "pageId": "blog:shochu-expenditure-vs-sake-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:wine-expenditure-ranking",
           "kind": "blog"
         },
         {
@@ -3023,15 +4821,19 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:fukuoka-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kagoshima-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:miyazaki-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:oita-food-culture",
           "kind": "blog"
         },
         {
@@ -3322,6 +5124,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:oita-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:shrimp-consumption-expenditure",
           "kind": "ranking"
         },
@@ -3364,6 +5170,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:oita-food-culture",
+          "kind": "blog"
+        },
         {
           "pageId": "blog:shrimp-consumption-quantity-prefecture-gap",
           "kind": "blog"
@@ -3887,10 +5697,7 @@
         "configHash": "d9fb7ace7736ecdd"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:simple-life-insurance-contract-amount-per-contract",
@@ -3957,10 +5764,7 @@
         "configHash": "b918fb70a0040593"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:simple-life-insurance-contract-count-per-population",
@@ -8396,10 +10200,7 @@
         "configHash": "8fcc72e2c4bda209"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:bread-consumption-expenditure-vs-site-area-per-dwelling",
@@ -9184,10 +10985,7 @@
         "configHash": "fff155e3eb471cb4"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:smartphone-ownership-prefecture-gap",
@@ -10552,850 +12350,6 @@
         },
         {
           "pageId": "ranking:social-sports-facility",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "social-welfare-expenditure-ratio-pref-finance",
-      "pageId": "ranking:social-welfare-expenditure-ratio-pref-finance",
-      "title": "社会福祉費割合",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010204",
-          "filters": {
-            "cdCat01": "#D0310401"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010204",
-          "cdCat01": "#D0310401"
-        },
-        "derived": false,
-        "configHash": "3446f78cbabe2b37"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:social-welfare-expenditure-ratio-pref-finance",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "social-welfare-expense-municipal",
-      "pageId": null,
-      "title": "社会福祉費",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020204",
-          "filters": {
-            "cdCat01": "D3203031"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020204",
-          "cdCat01": "D3203031"
-        },
-        "derived": false,
-        "configHash": "ccb885df0d92d552"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:social-welfare-expense-municipal",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:local-finance",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:social-welfare-expense-municipal",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "social-welfare-expenses-prefecture",
-      "pageId": "ranking:social-welfare-expenses-prefecture",
-      "title": "社会福祉費",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010104",
-          "filters": {
-            "cdCat01": "D3103031"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D3103031"
-        },
-        "derived": false,
-        "configHash": "e548ead264ef31e5"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:social-welfare-expenses-prefecture",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "software-engineer-annual-income",
-      "pageId": "ranking:software-engineer-annual-income",
-      "title": "ソフトウェア作成者の平均年収",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003445758",
-          "filters": {
-            "cdCat01": "01",
-            "cdCat02": "1104"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003445758",
-          "cdCat01": "01",
-          "cdCat02": "1104"
-        },
-        "ops": {
-          "tabCombination": [
-            {
-              "cdTab": "08,40",
-              "factor": 12
-            },
-            {
-              "cdTab": "12,44",
-              "factor": 1
-            }
-          ],
-          "valueScale": 0.1
-        },
-        "derived": true,
-        "configHash": "f00643aba840e510"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:engineer-telework-prefecture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:engineer-vs-professions-income",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:prefecture-salary-gap-career",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:software-engineer-income-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:software-engineer-salary-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:system-consultant-income-ranking",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:working-hours-overtime-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:software-engineer-annual-income",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:occupation-salary",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "occupation-salary"
-      ]
-    },
-    {
-      "metricKey": "solar-panel-housing-rate",
-      "pageId": "ranking:solar-panel-housing-rate",
-      "title": "太陽光発電機のある住宅率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004021642",
-          "filters": {
-            "cdCat01": "0",
-            "cdCat02": "0",
-            "cdCat03": "0",
-            "cdCat04": "0"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004021642",
-          "cdCat01": "0",
-          "cdCat02": "0",
-          "cdCat03": "0",
-          "cdCat04": "0"
-        },
-        "ops": {
-          "axisRatio": {
-            "axis": "cat05",
-            "numeratorCodes": [
-              "21"
-            ],
-            "denominatorCodes": [
-              "21",
-              "22"
-            ]
-          }
-        },
-        "derived": true,
-        "configHash": "a240c69c10f56def"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:regional-energy",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:solar-panel-housing-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:sunshine-solar-housing-correlation",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:solar-panel-housing-rate",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:regional-energy",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "regional-energy"
-      ]
-    },
-    {
-      "metricKey": "solar-power-housing",
-      "pageId": "ranking:solar-power-housing",
-      "title": "太陽光を利用した発電機器のある住宅数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010108",
-          "filters": {
-            "cdCat01": "H2281"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010108",
-          "cdCat01": "H2281"
-        },
-        "derived": false,
-        "configHash": "60b809463d108b01"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:energy-consumption-structure-shift",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:renewable-energy-regional-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:solar-power-housing-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "municipality-ranking:solar-power-housing",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:living-housing",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:solar-power-housing",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "solar-water-heater-dwellings",
-      "pageId": null,
-      "title": "太陽熱温水機器等のある住宅数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020208",
-          "filters": {
-            "cdCat01": "H2280"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020208",
-          "cdCat01": "H2280"
-        },
-        "derived": false,
-        "configHash": "2d3f4d63e717fbd4"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:solar-water-heater-dwellings",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:living-housing",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:solar-water-heater-dwellings",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "sole-proprietor-operating-profit",
-      "pageId": "ranking:sole-proprietor-operating-profit",
-      "title": "個人企業の営業利益",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003421679",
-          "filters": {
-            "cdTab": "260",
-            "cdCat01": "0"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003421679",
-          "cdCat01": "0",
-          "cdTab": "260"
-        },
-        "ops": {
-          "valueScale": 0.1
-        },
-        "derived": true,
-        "configHash": "6c2e37b41d65f66f"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:sole-proprietor-operating-profit",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "sole-proprietor-sales",
-      "pageId": "ranking:sole-proprietor-sales",
-      "title": "個人企業の売上高",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003421679",
-          "filters": {
-            "cdTab": "100",
-            "cdCat01": "0"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003421679",
-          "cdCat01": "0",
-          "cdTab": "100"
-        },
-        "ops": {
-          "valueScale": 0.1
-        },
-        "derived": true,
-        "configHash": "bef3b9fb05bfab14"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:sole-proprietor-sales-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:sole-proprietor-sales",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "sole-proprietor-sales-per-worker",
-      "pageId": "ranking:sole-proprietor-sales-per-worker",
-      "title": "個人企業の従業者1人当たり売上高",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003421679",
-          "filters": {
-            "cdTab": "460",
-            "cdCat01": "0"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003421679",
-          "cdCat01": "0",
-          "cdTab": "460"
-        },
-        "ops": {
-          "valueScale": 0.1
-        },
-        "derived": true,
-        "configHash": "170ecbbec3ede639"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:sole-proprietor-sales-per-worker",
           "kind": "ranking"
         }
       ],

@@ -1,0 +1,196 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-total-overnight-guests",
+  "production": {
+    "id": "NCI-00125",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "延べ宿泊者数\n多い県は？",
+      "subline": "1位は東京都\n2024年・人泊で比較",
+      "subject": "水色と明るい黄色、濃紺の大きな文字を使う温かい手描きのカバー。右側に整えられた宿泊室のベッドを1台だけ大きく描き、実在のホテルや特定県の風景にはしない。左側に問いを2行、下に補足を太い帯で2行。「延べ」「人泊」を正確に描く。人物・顔・手・動物・キャラクター・マスコット・擬人化、地図・グラフ・表彰台・メダル・ホテル名・部屋番号・時計の数字・商品ロゴ・指定外の文字と数字を描かない。",
+      "evidence": "https://storage.stats47.jp/note/stats47-note/a-total-overnight-guests/draft.md の公開本文を2026-10-23に確認。2024年の宿泊旅行統計調査、全施設タイプ合計の延べ宿泊者数。東京都91,633,100人泊で1位、徳島県1,701,370人泊で47位。旅行者の実人数・施設数・客室稼働率と混同しないため、見出しに「延べ」、補足に「人泊」を明記する。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "dfdbcf280fbd79a42ca9d81d6ccea3ae5036cf6c6956f392511496ced8d0a7e0",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-total-overnight-guests/revisions/dfdbcf280fbd79a42ca9d81d6ccea3ae5036cf6c6956f392511496ced8d0a7e0.png"
+      },
+      "bytes": 80849,
+      "id": "dfdbcf280fbd79a42ca9d81d6ccea3ae5036cf6c6956f392511496ced8d0a7e0",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:49.024Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312772180/rectangle_large_type_2_077e75e948fc571ba3ab265a06077c68.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "dfdbcf280fbd79a42ca9d81d6ccea3ae5036cf6c6956f392511496ced8d0a7e0"
+      }
+    },
+    {
+      "sha256": "97a443fb80c8d9b9fa608592ea42a42491ae82a5948d404b644116129e7c53f4",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-total-overnight-guests/revisions/97a443fb80c8d9b9fa608592ea42a42491ae82a5948d404b644116129e7c53f4.png"
+      },
+      "bytes": 115775,
+      "id": "97a443fb80c8d9b9fa608592ea42a42491ae82a5948d404b644116129e7c53f4",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:18:42.084Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "a2b1ba0b751ce3e96915f36c53e05d16ba483ae6120be0617a8d4afbe0dc426f"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/total-overnight-guests/values.json",
+        "sourceSha256": "0214f597c83a7219bb0f44c23f011e6fead9c6a17061af83bb68f4412fca8d72",
+        "input": {
+          "sha256": "a2b1ba0b751ce3e96915f36c53e05d16ba483ae6120be0617a8d4afbe0dc426f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-total-overnight-guests/inputs/a2b1ba0b751ce3e96915f36c53e05d16ba483ae6120be0617a8d4afbe0dc426f.json"
+          },
+          "bytes": 7591
+        }
+      }
+    },
+    {
+      "sha256": "0c9050737eab6ce034652629d2731e92f16b3fd26d38889db8b6789c00da387a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-total-overnight-guests/revisions/0c9050737eab6ce034652629d2731e92f16b3fd26d38889db8b6789c00da387a.png"
+      },
+      "bytes": 78615,
+      "id": "0c9050737eab6ce034652629d2731e92f16b3fd26d38889db8b6789c00da387a",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T02:51:59.093Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320191038/rectangle_large_type_2_760a6c3679c7bdf7f4878a1cb26762a2.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "0c9050737eab6ce034652629d2731e92f16b3fd26d38889db8b6789c00da387a"
+      }
+    },
+    {
+      "sha256": "dd178490b098f1ddc17c6af7750ac3ff955032be1c04de2e563ff72766603daf",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-total-overnight-guests/revisions/dd178490b098f1ddc17c6af7750ac3ff955032be1c04de2e563ff72766603daf.png"
+      },
+      "bytes": 1807287,
+      "id": "dd178490b098f1ddc17c6af7750ac3ff955032be1c04de2e563ff72766603daf",
+      "kind": "candidate",
+      "version": "imagegen-no-character-ranking3-20261015",
+      "createdAt": "2026-10-15T02:52:48.988Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "5fab2532fe83549a1dacbb87027b4ebd58559a466ca7b3cfc75aaca81d0bf47c"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "人物・キャラクターなし。原寸と320pxで指定全文・年次・1位・比較対象・補足の可読性・切れ・重なりを確認済み。管理画面の前後比較を提示し、2026-10-15にユーザーが表示中3件の反映を指示。",
+        "reviewedAt": "2026-10-15T03:48:36.942Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "5fab2532fe83549a1dacbb87027b4ebd58559a466ca7b3cfc75aaca81d0bf47c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-total-overnight-guests/inputs/5fab2532fe83549a1dacbb87027b4ebd58559a466ca7b3cfc75aaca81d0bf47c.json"
+          },
+          "bytes": 8863
+        },
+        "production": {
+          "id": "NCI-00125",
+          "policyId": "NCP-003",
+          "policyVersion": 2,
+          "planSha256": "6c09499f9c6f8458546b0d400ba0f040413e902c4cf43057339a73181c72d099"
+        }
+      }
+    },
+    {
+      "sha256": "79f4bf818d0552c02efaa63adc6b4b87068962bdaada8f03996ce39beaac2bde",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-total-overnight-guests/revisions/79f4bf818d0552c02efaa63adc6b4b87068962bdaada8f03996ce39beaac2bde.png"
+      },
+      "bytes": 1637948,
+      "id": "79f4bf818d0552c02efaa63adc6b4b87068962bdaada8f03996ce39beaac2bde",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-bc3ba783e639",
+      "createdAt": "2026-10-23T05:18:32.787Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "5acbdd6b9bc838d83823ec1134df1d4460c10a1b96c5660886846f2ed3fc6b3f"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "旧版と新版を比較。新画像はベッドを主役に統一し、延べ宿泊者数・2024年・人泊・東京都1位を原寸と幅320pxで確認。人物やホテル名なし。",
+        "reviewedAt": "2026-10-23T05:19:51.752Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "5acbdd6b9bc838d83823ec1134df1d4460c10a1b96c5660886846f2ed3fc6b3f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-total-overnight-guests/inputs/5acbdd6b9bc838d83823ec1134df1d4460c10a1b96c5660886846f2ed3fc6b3f.json"
+          },
+          "bytes": 8784
+        },
+        "production": {
+          "id": "NCI-00125",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "bc3ba783e639fdc7ca8ece186312b41a32aaa3e0832d50a457b06e7db9e93e62"
+        }
+      }
+    }
+  ]
+}

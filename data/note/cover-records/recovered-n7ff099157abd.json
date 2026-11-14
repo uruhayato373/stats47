@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n7ff099157abd",
+  "production": {
+    "id": "NCI-00437",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "ジョギング・マラソン\n1位は東京都",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人のランニングコースに無地のランニングシューズとストップウォッチを描く。人・脚・手は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n7ff099157abd 2026-10-23公開API本文照合。記事題名「【2021年版】ジョギング・マラソンをした人が多い県は？ 1位は東京都｜都道府県ランキング」。本文中の「東京都」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "4ab9ac7476901280c6d80a91f12d0e0e0904713d2823fb9d5058d0a7b895bfab",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n7ff099157abd/revisions/4ab9ac7476901280c6d80a91f12d0e0e0904713d2823fb9d5058d0a7b895bfab.png"
+      },
+      "bytes": 59567,
+      "id": "4ab9ac7476901280c6d80a91f12d0e0e0904713d2823fb9d5058d0a7b895bfab",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:19.267Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312774331/rectangle_large_type_2_689d648b44955da96feabdcbdc8137df.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "4ab9ac7476901280c6d80a91f12d0e0e0904713d2823fb9d5058d0a7b895bfab"
+      }
+    },
+    {
+      "sha256": "0eb0c496d6e1269191a1b2339ddf6c9d72f812e9502fabab10454b59dd22c879",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n7ff099157abd/revisions/0eb0c496d6e1269191a1b2339ddf6c9d72f812e9502fabab10454b59dd22c879.png"
+      },
+      "bytes": 120323,
+      "id": "0eb0c496d6e1269191a1b2339ddf6c9d72f812e9502fabab10454b59dd22c879",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:16:13.911Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "d98714ea544bcf859c662c1d33d34cefa0c6f9cd298709f58fc3d6c83dffd174"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/sports-participation-rate-jogging/values.json",
+        "sourceSha256": "ec450e7fc6dc5db65b305842ea558e9055b97e7393ab2560f8f21e36ab86bb65",
+        "input": {
+          "sha256": "d98714ea544bcf859c662c1d33d34cefa0c6f9cd298709f58fc3d6c83dffd174",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n7ff099157abd/inputs/d98714ea544bcf859c662c1d33d34cefa0c6f9cd298709f58fc3d6c83dffd174.json"
+          },
+          "bytes": 6636
+        }
+      }
+    },
+    {
+      "sha256": "65d859e71cde06aeb07c9044cbf05981121f7a268cd1d8debf5500bd80e98348",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n7ff099157abd/revisions/65d859e71cde06aeb07c9044cbf05981121f7a268cd1d8debf5500bd80e98348.png"
+      },
+      "bytes": 1868029,
+      "id": "65d859e71cde06aeb07c9044cbf05981121f7a268cd1d8debf5500bd80e98348",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-9840bd49fe57",
+      "createdAt": "2026-10-23T14:37:10.052Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "79432e83af507ee7d5aa6a6d038bbaf92935b1779336e2ac896b3f67459f23b6"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00461は東京都と兵庫県の同率首位。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T14:39:30.822Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "79432e83af507ee7d5aa6a6d038bbaf92935b1779336e2ac896b3f67459f23b6",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n7ff099157abd/inputs/79432e83af507ee7d5aa6a6d038bbaf92935b1779336e2ac896b3f67459f23b6.json"
+          },
+          "bytes": 8914
+        },
+        "production": {
+          "id": "NCI-00437",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "9840bd49fe57defd4f70431cd590be7bb1bca150f7676a92439424dca6f00455"
+        }
+      }
+    }
+  ]
+}

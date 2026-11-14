@@ -14,22 +14,31 @@ NC='\033[0m' # No Color
 # エラーカウント
 ERROR_COUNT=0
 
+# スクリプトのディレクトリを取得
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+WEB_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+# 段ごとの所要時間 (CI-SPEED-PRECOMMIT-TRIM-01)。`stage "名前"` が前の段を閉じて次の段を始め、
+# 終了時 (exit 1 の経路を含む) に重い順の内訳を出す。検査を足すときは段を切る:
+# 1 つの段で node / npm run / npx を 2 本起動すると、内訳を見てもどちらが重いのか分からない
+# (pre-commit-guard-paths.test.cjs が止める)。
+. "$SCRIPT_DIR/pre-commit-stage-timer.sh"
+trap stage_summary EXIT
+
 # ステージ済みパスは一度取得し、一時ファイルの掃除で index が変わった場合だけ再取得する。
 refresh_staged_paths() {
 PRECOMMIT_PATHS_0=$(git diff --cached --name-only --diff-filter=ACM)
 PRECOMMIT_PATHS_1=$(git diff --cached --name-only)
 PRECOMMIT_PATHS_2=$(git diff --cached --name-only --diff-filter=ACMRD)
 }
+stage "staged パスの取得"
 refresh_staged_paths
-
-# スクリプトのディレクトリを取得
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-WEB_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 # 1. TypeScript型チェック
 # 通常commitでは実行しない。web全体を読むため単一ファイル変更でも約1分かかり、
 # 編集の反復を止める。main PRの必須CIと週次full suiteが全体を検査する。
 # ローカルで明示確認したい場合だけ PRECOMMIT_FULL_TYPECHECK=1 を付ける。
+stage "apps/web の型チェック (type-check)"
 echo -e "${GREEN}📐 TypeScript型チェック...${NC}"
 STAGED_WEB_TSFILES=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E '^apps/web/.*\.(ts|tsx)$' | grep -v '^apps/web/scripts/' || true)
 if [ -n "$STAGED_WEB_TSFILES" ] && [ "${PRECOMMIT_FULL_TYPECHECK:-0}" = "1" ]; then
@@ -52,6 +61,7 @@ fi
 #       exclude に scripts/**/* を持つため **scripts 配下を一切見ない**。
 #       sync-rakuten-catalog.ts の import 漏れが 9 日間見つからなかったのがこれ
 #       (2026-08-13 是正)。対象ディレクトリの正典は package.json の type-check:scripts。
+stage "scripts の型チェック (type-check:scripts)"
 echo -e "${GREEN}📐 scripts の型チェック...${NC}"
 REPO_ROOT_FOR_SCRIPTS="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 STAGED_SCRIPT_TSFILES=$(printf '%s\n' "$PRECOMMIT_PATHS_0" \
@@ -74,6 +84,7 @@ GUARD_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 # 2.2 sync-snapshots の task ドリフト (2026-08-05 の calculated-stats 書き忘れの再発防止)
 # run.sh に task を足しても動くので CI は緑のまま、task の存在と実行順を人と agent が
 # 読む面 (SKILL.md の task 表) だけが欠落する。両者を 1:1 に保つ。
+stage "sync-snapshots task ドリフト"
 if printf '%s\n' "$PRECOMMIT_PATHS_1" | grep -q "^.claude/skills/db/sync-snapshots/"; then
   echo -e "${GREEN}🔁 sync-snapshots task ドリフト...${NC}"
   if ! node "$GUARD_ROOT/.claude/scripts/lib/check-sync-snapshots-tasks.cjs"; then
@@ -85,6 +96,7 @@ fi
 # 2.2b GIS 台帳の参照整合 (2026-10-29)。KSJ 台帳 (geo.ksj-datasets) を親表に、技術設定・公式利用条件・GIS 一覧・単体ページ・
 # 指標の ksjDataId・交通網の変遷の台帳が存在しない dataId を指していないかを R2 なしで検査する。
 # geo:check-data-catalog は R2 の在庫まで読むため手動で、台帳どうしのずれを commit 前に止める手段が無かった。
+stage "GIS 台帳の参照整合 (vitest)"
 if printf '%s\n' "$PRECOMMIT_PATHS_1" | grep -qE "^(packages/gis/src/(mlit-ksj|infra-history)/|packages/data-configs/src/(business-plan/geo-|registry\.ts)|data/metrics/|data/geo/(ksj|analyses|source-pages|infra-history)/|data/open-data/)"; then
   echo -e "${GREEN}🗂️  GIS 台帳の参照整合...${NC}"
   if ! (cd "$GUARD_ROOT/packages/gis" && npx vitest run src/mlit-ksj/__tests__/dataset-references.test.ts > /tmp/gis-dataset-references.log 2>&1); then
@@ -99,8 +111,10 @@ fi
 # 2.1b ドキュメントガバナンス
 # 文書の固定構成、frontmatter、TODO ID、実装計画INDEX、Claude/Codex共通SSOT、
 # 削除・移動後の参照悪化を、文書関連差分があるcommitだけ検査する。
+# 領域と構えの台帳・領域のマスタは DG073〜083 の入力なので、同じ検査に掛ける。
+stage "ドキュメントガバナンス (docs:check)"
 STAGED_DOCS=$(printf '%s\n' "$PRECOMMIT_PATHS_0"RD | grep -E \
-  '^(docs/|\.claude/todo/|CLAUDE\.md$|AGENTS\.md$|\.claude/(config/docs-governance\.json|rules/docs-vs-issues\.md|skills/management/maintain-docs/|scripts/lib/check-docs-(governance|links)\.cjs|scripts/lib/__tests__/check-docs-(governance|links)\.test\.cjs)|package\.json$)' || true)
+  '^(docs/|\.claude/todo/|data/business/(domain-stances|domains)\.json$|CLAUDE\.md$|AGENTS\.md$|\.claude/(config/docs-governance\.json|rules/docs-vs-issues\.md|skills/management/maintain-docs/|scripts/lib/check-docs-(governance|links)\.cjs|scripts/lib/__tests__/check-docs-(governance|links)\.test\.cjs)|package\.json$)' || true)
 if [ -n "$STAGED_DOCS" ]; then
   echo -e "${GREEN}📚 ドキュメントガバナンスチェック...${NC}"
   if ! (cd "$GUARD_ROOT" && npm run docs:check); then
@@ -113,6 +127,7 @@ if [ -n "$STAGED_DOCS" ]; then
 fi
 
 # 4 types of content: every article, note and post must resolve to a type before it is committed.
+stage "コンテンツの型 (content-types:check)"
 if printf '%s\n' "$PRECOMMIT_PATHS_2" | grep -qE '^(contents/blog/|data/note/articles\.json$|data/sns/posts\.json$|data/content/content-types\.json$|\.claude/scripts/content-types/)'; then
   if ! (cd "$GUARD_ROOT" && npm run content-types:check); then
     echo "コンテンツの型が決まっていません (.claude/rules/content-type-standards.md)"
@@ -122,7 +137,19 @@ fi
 
 # Canonical metric and content contracts: reject schema, ID and generated-index drift.
 if printf '%s\n' "$PRECOMMIT_PATHS_2" | grep -qE '^(data/(metrics|metric-sources|themes|content|categories|ads)/|data/surveys/(master|analysis-units|editorial)/|data/site/url-history/|data/geo/(ksj|analyses|source-pages|infra-history)/|data/open-data/|data/municipalities/catalog/|data/areas/|data/products/(packs|kindle)/|data/note/series\.json$|data/blog/ledger/|data/business-plan/plan/|data/source-inventory/(policies/|japan-zue/[^/]+\.json$)|data/ranking/hooks/|data/data-quality/allowlists/|packages/(data-configs|types)/|apps/web/scripts/(sync-content-catalog|validate-content-catalog|lib/blog-article-ledger)\.ts$|package\.json$)'; then
-  if ! (cd "$GUARD_ROOT" && npm run build:category-keys --workspace=@stats47/data-configs -- --check && npm run metrics:check && npm run content:check); then
+  # 3 本は最初の失敗で残りを走らせない。段を分けるのは、どれが重いのかを内訳に残すため。
+  METRIC_CONTRACT_OK=1
+  stage "metric 契約: カテゴリ key (build:category-keys --check)"
+  (cd "$GUARD_ROOT" && npm run build:category-keys --workspace=@stats47/data-configs -- --check) || METRIC_CONTRACT_OK=0
+  if [ "$METRIC_CONTRACT_OK" = 1 ]; then
+    stage "metric 契約: metrics:check"
+    (cd "$GUARD_ROOT" && npm run metrics:check) || METRIC_CONTRACT_OK=0
+  fi
+  if [ "$METRIC_CONTRACT_OK" = 1 ]; then
+    stage "metric 契約: content:check"
+    (cd "$GUARD_ROOT" && npm run content:check) || METRIC_CONTRACT_OK=0
+  fi
+  if [ "$METRIC_CONTRACT_OK" = 0 ]; then
     echo "Metric/content identity contract failed"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
@@ -131,6 +158,7 @@ fi
 # 2.1c file:// URL の文字列連結ガード
 # `file://${process.argv[1]}` は Windows で必ず不一致になり、ESM のエントリポイント
 # 判定なら main() が呼ばれないまま exit 0 で終わる (失敗ではなく無言の no-op)。
+stage "file:// URL ガード"
 STAGED_JS=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E \
   '^(\.claude/scripts/|apps/|packages/|scripts/).*\.(js|cjs|mjs|ts|tsx|mts|cts)$' || true)
 if [ -n "$STAGED_JS" ]; then
@@ -148,6 +176,7 @@ fi
 # 状態で dispatch すると **main の古い config で再生成され、しかも成功する** (R2 の
 # generatedAt も更新されるので失敗に見えない)。2026-08-17 に婚姻率・離婚率の seoTitle で
 # 実際に踏み、2026-07-14 と同じ事故を繰り返した。正典: .claude/skills/db/sync-snapshots/SKILL.md
+stage "dispatch request の main 反映順"
 STAGED_DISPATCH=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E \
   '^data/workflow-dispatch-requests\.json$' || true)
 if [ -n "$STAGED_DISPATCH" ]; then
@@ -165,12 +194,15 @@ fi
 # 検査スクリプトを CI の blocking gate につながないまま push すると、Develop Quality Gate が
 # [NON_BLOCKING_GATE] / [MISSING_GATE_TRIGGER] で落ちる (2026-10-10 に check-post-trace.mjs で踏んだ)。
 # 全体を読むので約 9 秒かかる。検査スクリプト (名前の判定は check-checker-wiring.cjs の CHECKER_NAME と同じ)
-# か workflow を staged にした commit だけで走らせる。
+# か workflow を staged にした commit だけで走らせる。--staged で index に入っているファイルだけを見て、
+# staged の検査スクリプトと staged の workflow から辿れる指摘だけを判定する (PRECOMMIT-WIRING-STAGED-SCOPE-01:
+# 並行する作業者の未追跡の作りかけで無関係な commit が止まっていた)。全体の判定は CI が持つ。
+stage "検査スクリプトの CI 配線 (check-checker-wiring)"
 STAGED_CHECKER_WIRING=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E \
   '(^|/)([^/]*[-_.])?(check|audit|validate|verify|lint|guard)([-_.][^/]*)?\.(c?js|mjs|ts|sh|py)$|^\.github/workflows/[^/]+\.ya?ml$' || true)
 if [ -n "$STAGED_CHECKER_WIRING" ]; then
   echo -e "${GREEN}🔌 検査スクリプトの CI 配線...${NC}"
-  if ! node "$GUARD_ROOT/.claude/scripts/lib/check-checker-wiring.cjs" --baseline; then
+  if ! node "$GUARD_ROOT/.claude/scripts/lib/check-checker-wiring.cjs" --baseline --staged; then
     echo -e "${RED}❌ CI の blocking gate につながっていない検査スクリプトがあります。${NC}"
     echo -e "${YELLOW}💡 workflow か preflight から blocking で呼ぶ (詳細は上の出力)${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
@@ -184,6 +216,7 @@ fi
 # (repo の package.json はどれも "type": "module" を持たない)。フォールバック無しだと
 # path.resolve が ERR_INVALID_ARG_TYPE で落ちる。2026-08-16 に purge-worker-cache.ts が
 # これで blog-auto-publish と楽天同期の Workers Cache purge を失敗させていた。
+stage "import.meta.dirname ガード"
 if [ -n "$STAGED_JS" ]; then
   echo -e "${GREEN}📁 import.meta.dirname ガード...${NC}"
   if ! node "$GUARD_ROOT/.claude/scripts/lib/check-import-meta-dirname-guard.cjs"; then
@@ -206,32 +239,52 @@ fi
 STAGED_ANY=$(printf '%s\n' "$PRECOMMIT_PATHS_0" || true)
 if [ -n "$STAGED_ANY" ]; then
   echo -e "${GREEN}🔐 環境変数レジストリ・資産ポリシー・保守負債ガード...${NC}"
+  stage "環境変数レジストリ (check-env-registry)"
   if ! node "$GUARD_ROOT/.claude/scripts/lib/check-env-registry.cjs"; then
-    echo -e "${RED}❌ 未登録の環境変数があります。.claude/config/env-registry.json に登録してください。${NC}"
+    echo -e "${RED}❌ 未登録の環境変数があります。config/env-registry.json に登録してください。${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
+  stage "画像資産ポリシー (check-asset-policy)"
   if ! node "$GUARD_ROOT/.claude/scripts/lib/check-asset-policy.cjs" --baseline; then
     echo -e "${RED}❌ 画像資産ポリシー違反 (重複画像・寸法・容量など)。${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
+  stage "置き場の台帳 (check-datasets)"
   if ! node "$GUARD_ROOT/.claude/scripts/lib/check-datasets.mjs"; then
     echo -e "${RED}❌ 置き場の台帳違反 (台帳に無い記録・旧置き場の参照・画像の置き場違反・コードの data/ 直書き)。.claude/rules/data-storage.md を参照。${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
+  stage "教材の展開記録 (reference-expansion check)"
   if ! node "$GUARD_ROOT/.claude/scripts/source-vault/reference-expansion.mjs" check; then
     echo -e "${RED}❌ 教材の展開記録の契約違反 (企画・展開先・ページ ID・公開状態)。.claude/rules/reference-source-standards.md「分析企画の展開」を参照。${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
-  if ! node "$GUARD_ROOT/.claude/scripts/note/audit-note-image-assets.mjs" || ! node "$GUARD_ROOT/.claude/scripts/note/cover-assets.mjs" validate \
-    || ! (cd "$GUARD_ROOT" && node --import tsx .claude/scripts/note/cover-production.ts validate >/dev/null) \
-    || ! (cd "$GUARD_ROOT" && node --import tsx .claude/scripts/note/catalog/generate-note-catalog.ts --check >/dev/null); then
+  # 4 本は最初の失敗で残りを走らせない。段を分けるのは、どれが重いのかを内訳に残すため。
+  NOTE_ASSETS_OK=1
+  stage "note: 画像の追跡 (audit-note-image-assets)"
+  node "$GUARD_ROOT/.claude/scripts/note/audit-note-image-assets.mjs" || NOTE_ASSETS_OK=0
+  if [ "$NOTE_ASSETS_OK" = 1 ]; then
+    stage "note: カバー台帳 (cover-assets validate)"
+    node "$GUARD_ROOT/.claude/scripts/note/cover-assets.mjs" validate || NOTE_ASSETS_OK=0
+  fi
+  if [ "$NOTE_ASSETS_OK" = 1 ]; then
+    stage "note: カバー制作 (cover-production validate)"
+    (cd "$GUARD_ROOT" && node --import tsx .claude/scripts/note/cover-production.ts validate >/dev/null) || NOTE_ASSETS_OK=0
+  fi
+  if [ "$NOTE_ASSETS_OK" = 1 ]; then
+    stage "note: 記事の索引 (generate-note-catalog --check)"
+    (cd "$GUARD_ROOT" && node --import tsx .claude/scripts/note/catalog/generate-note-catalog.ts --check >/dev/null) || NOTE_ASSETS_OK=0
+  fi
+  if [ "$NOTE_ASSETS_OK" = 0 ]; then
     echo -e "${RED}❌ note の台帳・資産の契約違反 (docs/31 の追跡・カバー台帳・記事台帳から生成した索引のずれ)。.claude/rules/note-image-assets.md を参照。${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
+  stage "管理画面の UI 負債 (check-admin-ui-debt)"
   if ! node "$GUARD_ROOT/.claude/scripts/admin-ui/check-admin-ui-debt.mjs"; then
     echo -e "${RED}❌ 管理画面の UI 契約違反 (生のカード・<table>・style などの増加)。.claude/rules/admin-ui.md を参照。${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
+  stage "保守負債 (check-maintenance-debt)"
   if ! node "$GUARD_ROOT/.claude/scripts/lib/check-maintenance-debt.cjs" --baseline; then
     # ★判定は行単位。legacy / deprecated と同じ行に削除条件を書く (別行だと素通りしない)
     echo -e "${RED}❌ 無根拠な TODO/legacy/deprecated。削除条件を legacy と同じ行に書いてください。${NC}"
@@ -241,18 +294,21 @@ fi
 
 # 2.1.1 画像生成差分/publish policy ガード
 # workflow / planner / manifest / publisher の変更時だけ、CI と同じ fail-closed policy を先行実行する。
+stage "画像 pipeline: workflow policy (audit-workflow-policy)"
 STAGED_IMAGE_PIPELINE=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E \
-  '^(\.github/workflows/.*\.ya?ml|\.claude/scripts/(lib/(audit-workflow-policy\.cjs|__tests__/audit-workflow-policy\.test\.cjs)|sns/(prepare-buzz-map-batch\.ts|lib/buzz-map-batch-core\.mjs))|apps/web/scripts/(generate-(ogp-images|blog-thumbnails(-cloud)?)\.ts|manage-blog-codex-backgrounds\.ts|data/(image-generator-registry|blog-(ogp-visual|codex-background)-catalog)\.ts|lib/(image-generation-manifest|image-generation-r2-inspector|blog-image-generation|blog-image-render|blog-ogp-visual|blog-thumbnail-render|blog-codex-background-workflow|ranking-(ogp-fallback|thumbnail)-render|satori-image-render|gemini-image-client)\.ts|lib/__tests__/(image-generation-manifest|image-pipeline-source-policy|blog-ogp-visual|blog-codex-background-catalog|gemini-image-client)\.test\.ts)|assets/(ogp/ogp-bg-brand-(dark|light)\.jpg|blog/codex-backgrounds/.*\.jpg)|packages/(r2-storage/src/(image-pipeline\.ts|scripts/(push-(generated-image-set|exact-r2-assets(-core)?)\.ts|__tests__/push-(generated-image-set|exact-r2-assets)\.test\.ts))|types/src/(image-generation-manifest\.ts|index\.ts))|package\.json)$' || true)
+  '^(\.github/workflows/.*\.ya?ml|\.claude/scripts/(lib/(audit-workflow-policy\.cjs|__tests__/audit-workflow-policy\.test\.cjs)|sns/(prepare-buzz-map-batch\.ts|lib/buzz-map-batch-core\.mjs))|apps/web/scripts/(generate-(ogp-images|blog-thumbnails(-cloud)?)\.ts|manage-blog-codex-backgrounds\.ts|data/(image-generator-registry|blog-(ogp-visual|codex-background)-catalog)\.ts|lib/(image-generation-manifest|image-generation-r2-inspector|blog-image-generation|blog-image-render|blog-ogp-visual|blog-thumbnail-render|blog-codex-background-workflow|ranking-ogp-fallback-render|satori-image-render|gemini-image-client|blog-background-status|blog-fullbleed-background)\.ts|lib/__tests__/(image-generation-manifest|image-pipeline-source-policy|blog-ogp-visual|blog-codex-background-catalog|gemini-image-client|blog-background-status|blog-background-gate|blog-fullbleed-background)\.test\.ts)|assets/(ogp/ogp-bg-brand-(dark|light)\.jpg|blog/codex-backgrounds/.*\.jpg)|packages/(r2-storage/src/(image-pipeline\.ts|scripts/(push-(generated-image-set|exact-r2-assets(-core)?)\.ts|__tests__/push-(generated-image-set|exact-r2-assets)\.test\.ts))|types/src/(image-generation-manifest\.ts|index\.ts))|package\.json)$' || true)
 if [ -n "$STAGED_IMAGE_PIPELINE" ]; then
   echo -e "${GREEN}🖼️  画像生成 pipeline policy チェック...${NC}"
   if ! node "$GUARD_ROOT/.claude/scripts/lib/audit-workflow-policy.cjs" --strict; then
     echo -e "${RED}❌ 画像の全件強制生成・prefix push・best-effort write が検出されました。${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
+  stage "画像 pipeline: 契約テスト (test:image-pipeline)"
   if ! (cd "$GUARD_ROOT" && npm run test:image-pipeline); then
     echo -e "${RED}❌ 画像fingerprint / exact publisherの契約テストが失敗しました。${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
+  stage "画像 pipeline: 型チェック (type-check:image-pipeline)"
   if ! (cd "$GUARD_ROOT" && npm run type-check:image-pipeline); then
     echo -e "${RED}❌ 画像generator / publisherの型チェックが失敗しました。${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
@@ -263,6 +319,7 @@ fi
 # 背景: import/order は CI (Code Quality Check) でのみ検出され、ローカルで気付けず CI を1サイクル無駄にしていた
 # (2026-06-23 deploy 時に発生)。staged ファイルだけを eslint にかけて高速に事前検出する。
 # Next.js 16 で `next lint` が廃止されたので eslint を直接呼ぶ (CI の develop-quality-gate と同じ方式)。
+stage "ESLint (staged の apps/web)"
 echo -e "${GREEN}🧹 ESLint (staged ファイル)...${NC}"
 STAGED_WEB_TS=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E '^apps/web/src/.*\.(ts|tsx)$' || true)
 if [ -n "$STAGED_WEB_TS" ]; then
@@ -280,6 +337,7 @@ else
 fi
 
 # 3. 一時ファイル自動クリーンアップ
+stage "一時ファイルの掃除"
 echo -e "${GREEN}🗑️  一時ファイルチェック...${NC}"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 
@@ -317,9 +375,11 @@ fi
 
 # 4. ファイルサイズチェック
 if [ "${PRECOMMIT_INDEX_CHANGED:-0}" = 1 ]; then refresh_staged_paths; fi
+stage "commit 共通静的検査 (preflight-commit --commit-static)"
 if ! node "$GUARD_ROOT/.claude/scripts/lib/preflight-commit.mjs" --commit-static; then
   ERROR_COUNT=$((ERROR_COUNT + 1))
 fi
+stage "ファイルサイズ・命名規則"
 echo -e "${GREEN}📏 ファイルサイズチェック...${NC}"
 MAX_FILE_SIZE=1048576 # 1MB
 LARGE_FILES=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | while read file; do
@@ -374,6 +434,7 @@ else
 fi
 
 # 6. セキュリティチェック - 依存関係の脆弱性
+stage "依存関係の脆弱性 (npm audit)"
 echo -e "${GREEN}🔒 依存関係の脆弱性チェック...${NC}"
 if ! printf '%s\n' "$PRECOMMIT_PATHS_2" | grep -Eq '(^|/)(package(-lock)?\.json|npm-shrinkwrap\.json)$'; then
   echo -e "${GREEN}✅ 依存関係変更なし。脆弱性検査はCI・定期検査で実行${NC}"
@@ -387,6 +448,7 @@ else
 fi
 
 # 7. シークレット漏洩チェック（簡易版）
+stage "シークレット漏洩チェック"
 echo -e "${GREEN}🔐 シークレット漏洩チェック...${NC}"
 STAGED_FILES=$(printf '%s\n' "$PRECOMMIT_PATHS_0")
 SECRET_PATTERNS=(
@@ -401,6 +463,7 @@ SECRET_PATTERNS=(
 # 除外するファイルパターン（環境変数名のみを含むファイル）
 EXCLUDE_PATTERNS=(
   ".*/database/actions/restore\.ts"  # 環境変数名のみを含むファイル
+  "^\.claude/scripts/note/__tests__/cover-assets\.test\.mjs$"  # テストが書く偽の wrangler 設定 (oauth_token = "old-test-token" など) だけ
 )
 
 FOUND_SECRETS=false
@@ -444,6 +507,7 @@ if [ "$FOUND_SECRETS" = false ]; then
 fi
 
 # 8. ブログ記事の Factual cross-check (2026-05-25 追加)
+stage "ブログ記事 factual cross-check"
 echo -e "${GREEN}📊 ブログ記事 factual cross-check...${NC}"
 STAGED_ARTICLES=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^contents/blog/[^/]+/article\.md$" || true)
 
@@ -489,6 +553,7 @@ if [ -n "$STAGED_ARTICLES" ]; then
   # 薄い記事 (charCount<3000 / internalLinks<3 / H2<4 / 手書きの出典節 / NG word 等) を
   # public 公開前にコミット段階で止める。published: false の作業中ドラフトは対象外。
   # 経緯: GSC高インプレ10記事を published: true の薄い状態で投入した再発防止 (factual gate のみで素通りした)。
+  stage "ブログ記事 構造品質ゲート (quality-gate)"
   echo -e "${GREEN}🧱 ブログ記事 構造品質ゲート (published のみ)...${NC}"
   QUALITY_FAILED=0
   QUALITY_CHECKED=0
@@ -546,6 +611,7 @@ fi
 
 # 6.7 アフィリエイト広告のサイズ規約チェック (.claude/rules/affiliate-ads-standards.md §サイズ)
 #     広告の台帳 (affiliate.ads) か読み込み口 affiliate-ads-data.ts が staged のとき、canonical/legacy 以外のサイズ混入を弾く。
+stage "アフィリエイト サイズ規約 (audit-affiliate-inventory)"
 STAGED_AFFILIATE=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^(apps/web/scripts/affiliate-ads-data\.ts|data/affiliate/ledger/ads\.json)$" || true)
 
 if [ -n "$STAGED_AFFILIATE" ]; then
@@ -563,6 +629,7 @@ fi
 # 6.8 直接配置アフィリエイト台帳の構造チェック (/audit-affiliate-compliance)
 #     直貼りの台帳 (affiliate.direct-placements) か読み込み口 affiliate-direct-placements-data.ts が staged のとき、
 #     ID 重複・URL scheme・配置形式の構造 error を弾く (ネットワーク不要。本文突合は週次 CI が --live で実行)。
+stage "直接配置アフィリエイト 構造 (audit-affiliate-compliance)"
 STAGED_DIRECT_AFFILIATE=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^(apps/web/scripts/affiliate-direct-placements-data\.ts|data/affiliate/ledger/direct-placements\.json)$" || true)
 
 if [ -n "$STAGED_DIRECT_AFFILIATE" ]; then
@@ -593,6 +660,7 @@ fi
 # 変更したファイルを名指ししているカードがあれば知らせる。カードが古いまま残ると
 # 別 PC が解決済みの問題に着手する (2026-08-21 に同一セッションで 2 回やった)。
 # 止めない — カードを触る必要が無いこともあるため。
+stage "backlog カードの鮮度リマインダ (check-card-freshness)"
 node "$PROJECT_ROOT/.claude/scripts/lib/check-card-freshness.cjs" 2>/dev/null || true
 
 # エラーがある場合はコミットを拒否

@@ -85,7 +85,7 @@ NSM（週間エンゲージドセッション数）
   - `.claude/skills/analytics/fetch-gsc-data/` — GSC snapshot + ad hoc
   - `.claude/skills/analytics/fetch-ga4-data/` — GA4 snapshot + ad hoc
   - `.claude/scripts/lib/metrics-reader.mjs` — NSM 統合計算
-  - `.claude/scripts/snapshot-weekly-metrics.mjs` — 週次 JSON snapshot 保存
+  - `.claude/scripts/metrics/snapshot-weekly-metrics.mjs` — 週次 JSON snapshot 保存
 - **週次スナップショット**: `data/nsm/weekly-snapshots/YYYY-Www.json`
 - **改善ログ**:
   - `data/improvement/gsc-improvement/improvement-log.md`

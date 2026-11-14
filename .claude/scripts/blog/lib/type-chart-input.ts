@@ -26,10 +26,21 @@ export interface ArticleMetric {
   visualization?: unknown;
   category?: string;
   display?: { conversionFactor?: number; decimalPlaces?: number };
+  /** 'fiscal' reads 「2022年度」, 'calendar' 「2022年」 (the metric's definition, not the article's subtitle). */
+  yearFormat?: string;
+  /** The metric's source; `kind` tells the survey, `displayName` is the short name an image shows. */
+  source?: { kind?: string; displayName?: string };
 }
 type Row = { value?: unknown; areaCode?: unknown; area_code?: unknown; pref?: unknown; areaName?: unknown; label?: unknown; name?: unknown };
 
 const MIGRATION_METRIC_KEY = 'population-migration-inter-prefecture';
+const CAPITAL_CITY_SCOPE = '県庁所在市';
+/**
+ * Values of the household survey (家計調査) are those of each prefecture's capital city. The metric states
+ * that in its note; its subtitle only tells same-named metrics apart, so the scope is read from the source.
+ */
+const isCapitalCityScope = (metric?: ArticleMetric) =>
+  metric?.source?.kind === 'kakei-chousa' || (typeof metric?.subtitle === 'string' && metric.subtitle.includes(CAPITAL_CITY_SCOPE));
 const SEQUENTIAL_DEFAULTS = {
   domain: { mode: 'extent' }, classification: { method: 'continuous' },
   trendDomain: { mode: 'extent' }, comparisonDomain: { mode: 'extent' },
@@ -81,17 +92,22 @@ export function rankingChartFromArticleData(
     area_name: opts.prefNameOf(it.code),
     value: it.value,
   }));
-  const title = (text(data.title) || text(data.label) || opts.metric?.title || '').replace(/ランキング$/, '');
+  // 「…ランキング（2024年）」: the bar type adds 「ランキング」 itself and the line under the title carries the year.
+  const written = text(data.title) || text(data.label) || opts.metric?.title || '';
+  const title = written.replace(TITLE_YEAR, '').replace(/ランキング$/, '').trim();
   // The subtitle carries the label as shown (「2022年度」); otherwise the year is a calendar year.
   const subtitleYear = /^\d{4}年度?$/.exec(text(data.subtitle))?.[0];
   // Without a year the subtitle is the only condition the data states, and it takes the year's place.
-  const yearLabel = subtitleYear ?? (/^\d{4}$/.test(text(data.year)) ? `${text(data.year)}年` : text(data.subtitle));
+  const yearLabel = subtitleYear ?? (/^\d{4}$/.test(text(data.year)) ? `${text(data.year)}年` : TITLE_YEAR.exec(written)?.[1] ?? text(data.subtitle));
   if (!title) return { skip: '図の名前がデータに無い' };
+  const subtitle = text(opts.metric?.subtitle);
+  // A subtitle that already names the capital cities is enough; otherwise the scope is added in one word.
+  const scope = isCapitalCityScope(opts.metric) && !subtitle.includes(CAPITAL_CITY_SCOPE) ? CAPITAL_CITY_SCOPE : '';
   return {
     title,
-    yearLabel,
-    source: text(data.source),
-    note: text(opts.metric?.subtitle) || undefined,
+    yearLabel: yearLabelOf(yearLabel, opts.metric),
+    source: text(data.source) || metricSourceName(opts.metric),
+    note: [subtitle, scope].filter(Boolean).join('・') || undefined,
     presentation: presentationOf(data, opts.metric),
     rows,
     baseAreaCode: baseCode ? `${baseCode}000` : undefined,
@@ -114,8 +130,8 @@ export function itemBarChartFromArticleData(parsed: unknown, opts: { metric?: Ar
   const named = splitTitle((text(data.title) || text(data.label) || opts.metric?.title || '').replace(/ランキング$/, ''));
   if (!named.title) return { skip: '図の名前がデータに無い' };
   return {
-    title: named.title, note: named.condition || undefined, source: text(data.source),
-    yearLabel: /^\d{4}$/.test(text(data.year)) ? `${text(data.year)}年` : text(data.subtitle),
+    title: named.title, note: named.condition || undefined, source: text(data.source) || metricSourceName(opts.metric),
+    yearLabel: yearLabelOf(/^\d{4}$/.test(text(data.year)) ? `${text(data.year)}年` : text(data.subtitle), opts.metric),
     presentation: presentationOf(data, opts.metric), rows,
     ...chartValueLabels(text(data.unit), rows.map((row) => row.value)),
   };
@@ -137,6 +153,18 @@ export function radarChartFromArticleData(parsed: unknown, manifest: Record<stri
 }
 
 const text = (v: unknown) => (typeof v === 'string' ? v.trim() : '');
+/** A year in brackets closing a title: 「教養娯楽費割合ランキング（2024年）」. */
+const TITLE_YEAR = /[\s　]*[（(](\d{4}年度?)[)）]$/;
+const metricSourceName = (metric?: ArticleMetric) => text((metric?.source as { displayName?: unknown } | undefined)?.displayName);
+/**
+ * A bare year as the metric's definition reads it: article data written before 2026-11 says 「2021年」 for
+ * fiscal metrics. Other labels (a condition, a range) and charts without a metric stay as written.
+ */
+function yearLabelOf(label: string, metric?: ArticleMetric) {
+  const year = /^(\d{4})年度?$/.exec(label)?.[1];
+  if (!year || (metric?.yearFormat !== 'fiscal' && metric?.yearFormat !== 'calendar')) return label;
+  return metric.yearFormat === 'fiscal' ? `${year}年度` : `${year}年`;
+}
 const numberOr = (v: unknown) => (typeof v === 'number' && Number.isFinite(v) ? v : null);
 const TITLE_MAX_CHARS = 21;
 const REDUNDANT_CONDITION = /\d{4}\s*[-–〜~]\s*\d{4}|\svs\s/;
@@ -205,11 +233,16 @@ export function areaChartFromArticleData(parsed: unknown, scope: AreaScope | und
   };
 }
 
-/** True when the x labels are not years: a cycle such as twelve months, which a line would read as a trend. */
+/**
+ * A label that opens with its year is a point in time: 「2024」「2024年度」, and a quarter or month under a
+ * two-digit year (「24年1Q」「24年10月」). A class of years (「10年未満」) has no digit after 年 and stays a category.
+ */
+const DATED_LABEL = /^(?:\d{4}|\d{2}年\d)/;
+/** True when the x labels carry no year: a cycle such as twelve months, which a line would read as a trend. */
 export function hasCyclicAxis(parsed: unknown) {
   const series = articleSeries(parsed);
   if ('skip' in series) return false;
-  return series.some((s) => s.points.some((p) => !/^\d{4}/.test(p.x)));
+  return series.some((s) => s.points.some((p) => !DATED_LABEL.test(p.x)));
 }
 
 /** Article json with non-year categories → the grouped bars. */
@@ -223,6 +256,28 @@ export function groupedBarChartFromArticleData(parsed: unknown): GroupedBarChart
   };
 }
 
+/** A quarter written as the article data writes it: 「24年1Q」 (two-digit year) or 「2024年1Q」. */
+const QUARTER_LABEL = /^(\d{2}|\d{4})年([1-4])Q$/;
+/** Two-digit years at or above this are of the 1900s (「98年1Q」); below it, of the 2000s. */
+const TWO_DIGIT_CENTURY_PIVOT = 50;
+
+/** The period under the title: 「2017–2024年」 from years, 「2017年1Q–2026年3Q」 from quarters, else none. */
+function periodOf(xs: string[]): string {
+  if (!xs.length) return '';
+  const quarters = xs.map((x) => QUARTER_LABEL.exec(x));
+  if (quarters.every((m) => m !== null)) {
+    const keys = quarters.map((m) => {
+      const written = Number(m![1]);
+      const year = m![1].length === 4 ? written : written + (written >= TWO_DIGIT_CENTURY_PIVOT ? 1900 : 2000);
+      return { year, quarter: Number(m![2]) };
+    }).sort((a, b) => a.year - b.year || a.quarter - b.quarter);
+    const first = keys[0], last = keys[keys.length - 1];
+    return `${first.year}年${first.quarter}Q–${last.year}年${last.quarter}Q`;
+  }
+  const years = xs.map((x) => /^\d{4}/.exec(x)?.[0]).filter(Boolean).map(Number);
+  return years.length === xs.length ? `${Math.min(...years)}–${Math.max(...years)}年` : '';
+}
+
 /** Article line json → the line type. Too many lines to tell apart stay a reason to fix the data. */
 export function lineChartFromArticleData(parsed: unknown, opts: { maxSeries?: number } = {}): LineChart | { skip: string } {
   const data = (Array.isArray(parsed) ? {} : parsed) as Record<string, unknown>;
@@ -232,13 +287,11 @@ export function lineChartFromArticleData(parsed: unknown, opts: { maxSeries?: nu
   if (series.length > (opts.maxSeries ?? 8)) return { skip: `系列が多すぎる (${series.length})` };
   const named = splitTitle(text(data.title) || '推移');
   const xs = [...new Set(series.flatMap((s) => s.points.map((p) => p.x)))];
-  const years = xs.map((x) => /^\d{4}/.exec(x)?.[0]).filter(Boolean).map(Number);
-  const period = years.length === xs.length && years.length ? `${Math.min(...years)}–${Math.max(...years)}年` : '';
   const unit = text(data.unit);
   const values = series.flatMap((s) => s.points.flatMap((p) => (p.value === null ? [] : [p.value])));
   return {
     title: named.title,
-    meta: [period, unit && `単位：${unit}`].filter(Boolean).join(' · ') || text(data.subtitle),
+    meta: [periodOf(xs), unit && `単位：${unit}`].filter(Boolean).join(' · ') || text(data.subtitle),
     note: named.condition || undefined,
     source: text(data.source),
     series, decimals: decimalsIn(values),
@@ -276,7 +329,27 @@ export function stackedChartFromArticleData(parsed: unknown): StackedChart | { s
   };
 }
 
-type ScatterMetric = ArticleMetric & { source?: { displayName?: string } };
+/** The stacked json's form: `"form": "area"` draws the stacked-bar type as stacked areas along time. */
+export function stackedFormOf(parsed: unknown): 'area' | 'bar' {
+  return parsed && typeof parsed === 'object' && (parsed as { form?: unknown }).form === 'area' ? 'area' : 'bar';
+}
+
+/**
+ * Article stacked json with `"form": "area"` → the stacked-bar type's area form. The bars' names are the
+ * periods, so the condition line carries the first and last period. A missing value stops the chart.
+ */
+export function stackedAreaChartFromArticleData(parsed: unknown): StackedChart | { skip: string } {
+  const chart = stackedChartFromArticleData(parsed);
+  if ('skip' in chart) return chart;
+  if (chart.groups.length < 2 || chart.categories.length < 2) return { skip: '積み上げ面には 2 つ以上の期間と区分が要る' };
+  if (chart.categories.some((c) => c.values.some((v) => v === null || v < 0))) return { skip: '欠けた値か負の値がある (面を補間で埋めない)' };
+  const period = `${chart.groups[0]}–${chart.groups[chart.groups.length - 1]}`;
+  // A 100% chart shows shares, whatever unit the values were written in.
+  const unit = chart.normalized ? '%' : chart.unit;
+  return { ...chart, meta: [period, unit && `単位：${unit}`].filter(Boolean).join(' · ') };
+}
+
+type ScatterMetric = ArticleMetric & { source?: { kind?: string; displayName?: string } };
 type ValuesRow = { areaCode: string; yearCode: string; yearName?: string; value: number | null };
 
 const decimalsOf = (v: number) => (String(v).split('.')[1] ?? '').length;
@@ -431,9 +504,10 @@ export function scatterChartFromArticleData(
   // Only what changes the reading of the number: the denominator, the capital-city scope, a school grade or sex.
   const basis = (m: ScatterMetric | undefined, label: string) => {
     const subtitle = text(m?.subtitle);
-    if (subtitle.includes('県庁所在市')) return '県庁所在市';
+    if (isCapitalCityScope(m)) return CAPITAL_CITY_SCOPE;
     // Inside the label's brackets only: 一人当たり in the metric's own name is not a separate basis.
-    const per = /[^（(・、\s]*(?:当たり|あたり|に占める)/.exec(`${subtitle} ${label.replace(/^[^（(]*/, '')}`)?.[0];
+    // A bracket closed before the phrase (家計調査（二人以上世帯）の調査世帯に占める…) is not part of the denominator.
+    const per = /[^（(）)・、\s]*(?:当たり|あたり|に占める)/.exec(`${subtitle} ${label.replace(/^[^（(]*/, '')}`)?.[0].replace(/^の/, '');
     if (per) return per;
     return /(?:小学|中学|高校)\d年|男子|女子/.test(subtitle) && subtitle.length <= 10 ? subtitle : '';
   };

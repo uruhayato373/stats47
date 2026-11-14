@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-local-tax-vs-allocation-tax",
+  "production": {
+    "id": "NCI-00140",
+    "policyId": "NCP-005",
+    "policyVersion": 2,
+    "brief": {
+      "headline": "県の収入\n税金と交付税",
+      "subline": "地方税と地方交付税を比較\n2022年度のデータ",
+      "subject": "緑とクリームと明るい黄色。小さな市役所の建物と、二つの無地の封筒を右側に大きく組み合わせ、自治体に届くお金を親しみやすく連想させる挿絵。封筒は緑と黄色で同じ大きさにし、税や交付税の量的な比率を示さない。封筒・看板・資料に文字、数字、記号、グラフを描かない。札束、優劣の人物表情、県境地図は描かない。",
+      "evidence": "https://note.com/stats47/n/ne8f39a64c5f0 2026-10-15公開本文確認。2022年度の都道府県の歳入に占める地方税と地方交付税の割合の比較。交付税受給を悪い状態として表現せず、自前税収だけで行政全体を賄う等の断定をカバーへ追加しない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "6783bbae9611ff52334d5c0bfb8c621a4764d125f5b5b9cb2908f901a9f41f67",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-local-tax-vs-allocation-tax/revisions/6783bbae9611ff52334d5c0bfb8c621a4764d125f5b5b9cb2908f901a9f41f67.png"
+      },
+      "bytes": 46177,
+      "id": "6783bbae9611ff52334d5c0bfb8c621a4764d125f5b5b9cb2908f901a9f41f67",
+      "kind": "candidate",
+      "version": "2026-10-12-drafts",
+      "createdAt": "2026-10-12T00:53:02.955Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "8fcb2b87ad5fe897e16caa0bd34f2375ab21af3d39b974736d12b521e9b05b6e"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出し・記事の事実・図(または値を持たない背景地図)が読める。登録前の確認版とSHA一致",
+        "reviewedAt": "2026-10-12T00:54:20.855Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "8fcb2b87ad5fe897e16caa0bd34f2375ab21af3d39b974736d12b521e9b05b6e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-local-tax-vs-allocation-tax/inputs/8fcb2b87ad5fe897e16caa0bd34f2375ab21af3d39b974736d12b521e9b05b6e.json"
+          },
+          "bytes": 1265
+        }
+      }
+    },
+    {
+      "sha256": "4c14346cf642bdfff144a5c262311d7e01657197f5fe4530770629b6a5c3f2d8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-local-tax-vs-allocation-tax/revisions/4c14346cf642bdfff144a5c262311d7e01657197f5fe4530770629b6a5c3f2d8.png"
+      },
+      "bytes": 93545,
+      "id": "4c14346cf642bdfff144a5c262311d7e01657197f5fe4530770629b6a5c3f2d8",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T01:14:33.227Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323538704/rectangle_large_type_2_8f9ffa96570f77f94b700cbae88a9fa3.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "4c14346cf642bdfff144a5c262311d7e01657197f5fe4530770629b6a5c3f2d8"
+      }
+    },
+    {
+      "sha256": "afc7f675fe5e981895a979812a332ed8643967bfea8dbcca106d897578ebd5ce",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-local-tax-vs-allocation-tax/revisions/afc7f675fe5e981895a979812a332ed8643967bfea8dbcca106d897578ebd5ce.png"
+      },
+      "bytes": 1760415,
+      "id": "afc7f675fe5e981895a979812a332ed8643967bfea8dbcca106d897578ebd5ce",
+      "kind": "candidate",
+      "version": "imagegen-pop-v2-third-six-20261015",
+      "createdAt": "2026-10-15T01:24:56.558Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "4bc61258886a4580f78c76157f82f5ce4113f0bc85a10492869059a265a8745d"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸・320pxで掲載全文と補足文の可読性、切れ・重なり・追加文字を確認済み。管理画面の修正前後比較を提示し、2026-10-15にユーザーがこの6件の反映を指示。",
+        "reviewedAt": "2026-10-15T01:44:59.655Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "4bc61258886a4580f78c76157f82f5ce4113f0bc85a10492869059a265a8745d",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-local-tax-vs-allocation-tax/inputs/4bc61258886a4580f78c76157f82f5ce4113f0bc85a10492869059a265a8745d.json"
+          },
+          "bytes": 8261
+        },
+        "production": {
+          "id": "NCI-00140",
+          "policyId": "NCP-005",
+          "policyVersion": 2,
+          "planSha256": "b9fab8fb503c235917ae1113d2bfc0d18e0b3389736c197bb6f51ba8d22cf55f"
+        }
+      }
+    }
+  ]
+}

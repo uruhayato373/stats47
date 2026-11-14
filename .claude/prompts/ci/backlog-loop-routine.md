@@ -61,7 +61,7 @@ class ごとの gate は正典の表に従う。**gate は宣言ではなく実�
 node .claude/scripts/backlog-loop/record-backlog-outcome.mjs \
   --id <ID> --class <class> --outcome <completed|failed|deferred|skipped> \
   --model sonnet [--gate-commands "..." --gate-pass] [--fail-reason "..."] \
-  --evidence "何を根拠にそう判定したか (≤280字)"
+  --evidence "<queue の selection.reason> / 何を根拠にそう判定したか (≤280字)"
 ```
 
 `completed` は `--gate-commands` と `--gate-pass` の両方が必須。CLI が無ければ exit 1 で弾く。

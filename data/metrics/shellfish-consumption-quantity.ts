@@ -4,8 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const shellfishConsumptionQuantity: MetricConfig = {
   "key": "shellfish-consumption-quantity",
   "title": "貝類消費量",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間貝類消費量（合計）",
-  "note": "値は都道府県庁所在市（二人以上世帯）のもので、県全体の値ではない。貝類の加工品は含まない。",
+  "subtitle": "合計",
+  "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。貝類の加工品は含まない。",
   "description": "家計調査（二人以上の世帯）の貝類 5 品目（あさり・しじみ・かき・ほたて貝・他の貝）の年間購入数量を合算した値。",
   "unit": "g",
   "category": "economy",

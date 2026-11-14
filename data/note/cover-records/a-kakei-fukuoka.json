@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-kakei-fukuoka",
+  "production": {
+    "id": "NCI-00066",
+    "policyId": "NCP-002",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "福岡県の家計\n交通・通信に注目",
+      "subline": "福岡市・2024年\n二人以上の世帯",
+      "subject": "添付は福岡県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無文字の定期券の模型を小さく1点だけ。家や車の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+      "evidence": "https://note.com/stats47/n/nb7cfd81af156 2026-10-23公開API本文照合。福岡市の2024年・二人以上の世帯の家計調査。交通・通信0.80倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は福岡県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は福岡市であり県全域の観測図ではない。人物・キャラクターなし。",
+      "dataScope": {
+        "place": "福岡市",
+        "year": "2024",
+        "households": "二人以上の世帯"
+      }
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "b48507fb03157484038d62a25e3c9b4000d173bc6ef9475e2f1a05df12e60c1a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-fukuoka/revisions/b48507fb03157484038d62a25e3c9b4000d173bc6ef9475e2f1a05df12e60c1a.png"
+      },
+      "bytes": 60890,
+      "id": "b48507fb03157484038d62a25e3c9b4000d173bc6ef9475e2f1a05df12e60c1a",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:58.929Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312771153/rectangle_large_type_2_47d22d3e41cce44b0bf368cebe175447.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "b48507fb03157484038d62a25e3c9b4000d173bc6ef9475e2f1a05df12e60c1a"
+      }
+    },
+    {
+      "sha256": "10774f512d02a6297bde61e899529d01146bc0a9a0f476c677440a3023672c47",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-fukuoka/revisions/10774f512d02a6297bde61e899529d01146bc0a9a0f476c677440a3023672c47.png"
+      },
+      "bytes": 106142,
+      "id": "10774f512d02a6297bde61e899529d01146bc0a9a0f476c677440a3023672c47",
+      "kind": "candidate",
+      "version": "2026-10-02-household-r1",
+      "createdAt": "2026-10-02T03:17:55.774Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "23a51bd48c2179ed3e7af309c4fe50f9323a0046be5726af736e11901d674c35"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+        "reviewedAt": "2026-10-02T05:27:41.111Z"
+      },
+      "provenance": {
+        "renderer": "bold-note-cover",
+        "sourceUrl": "https://storage.stats47.jp/app/stats/transport-communication-expenditure-total/values.json",
+        "sourceSha256": "05bc5256a35560cef8d78d1eaa97b2a6aad48561fef8e246b00beb1ffcacc30a"
+      }
+    },
+    {
+      "sha256": "f739b68da03203495ff24535a256f69b8c0b29eaee5c0f0d3204690afa878e3b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-fukuoka/revisions/f739b68da03203495ff24535a256f69b8c0b29eaee5c0f0d3204690afa878e3b.png"
+      },
+      "bytes": 98486,
+      "id": "f739b68da03203495ff24535a256f69b8c0b29eaee5c0f0d3204690afa878e3b",
+      "kind": "r2-archive",
+      "version": "legacy-r2-import-2026-10-02",
+      "createdAt": "2026-10-02T03:28:22.958Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Legacy R2 asset preserved; not adopted for note",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "legacy-public-r2",
+        "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-fukuoka/images/cover-1280x670.png",
+        "sourceSha256": "f739b68da03203495ff24535a256f69b8c0b29eaee5c0f0d3204690afa878e3b"
+      }
+    },
+    {
+      "sha256": "ae14fa1ca11e6980d6a0da54a7ce39480b7299e4192125d19df05912c420a68b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-fukuoka/revisions/ae14fa1ca11e6980d6a0da54a7ce39480b7299e4192125d19df05912c420a68b.png"
+      },
+      "bytes": 1592095,
+      "id": "ae14fa1ca11e6980d6a0da54a7ce39480b7299e4192125d19df05912c420a68b",
+      "kind": "candidate",
+      "version": "pop-NCP-002-v3-79c0ed494fbe",
+      "createdAt": "2026-10-23T10:11:15.162Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "5d0c6df004433b0809b38669035b821328e25d4e193559363aceb464ef47cdd8"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の福岡市・2024年・二人以上の世帯と県輪郭、全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T10:13:50.605Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "5d0c6df004433b0809b38669035b821328e25d4e193559363aceb464ef47cdd8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-fukuoka/inputs/5d0c6df004433b0809b38669035b821328e25d4e193559363aceb464ef47cdd8.json"
+          },
+          "bytes": 13063
+        },
+        "production": {
+          "id": "NCI-00066",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "79c0ed494fbef8874c6a26d52c3e80081de3df0e78eba2a473c262adb7d8d7a1"
+        }
+      }
+    }
+  ]
+}

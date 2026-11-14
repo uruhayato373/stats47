@@ -9,6 +9,8 @@ import { SurfaceCard, SurfaceSection } from '@/components/surface';
 
 import { GeoAnalysisTracker } from '@/features/geo-analysis';
 
+import { navSurfaceProps } from '@/lib/analytics/events';
+
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -49,7 +51,7 @@ export default function GeoMethodPage() {
         title="今回使う3つの空間処理"
         description="同じ地図に見えても、問いごとに演算と近似条件が違います。"
       />
-      <PanelGrid className="md:grid-cols-3">
+      <PanelGrid className="md:grid-cols-3" {...navSurfaceProps('geo_analysis_list')}>
         {crossAnalyses.map((analysis) => (
           <SurfaceCard key={analysis.slug} className="p-5">
             <p className="text-xs font-semibold text-primary">

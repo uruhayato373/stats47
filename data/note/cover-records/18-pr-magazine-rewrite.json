@@ -1,0 +1,215 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "18-pr-magazine-rewrite",
+  "production": {
+    "id": "NCI-00033",
+    "policyId": "NCP-007",
+    "policyVersion": 4,
+    "brief": {
+      "headline": "広報誌の原稿を\nリライト",
+      "subline": "読みやすさをスコア化",
+      "subject": "無文字の冊子を開いて置き、赤鉛筆と小さな目盛りのメーターを添えて大きく描く。メーターに数字を入れない。実務カテゴリの机上の資料構図。青と明るい黄色の暖かい手描き。画面・紙・道具の表面は無文字。実在UI・製品ロゴ・グラフ・地図は描かない。人物・顔・手・動物は描かない。",
+      "evidence": "https://note.com/stats47/n/nef4df902db37 本文確認2026-11-04。広報誌の原稿の読みやすさをスコア化してリライトする記事。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "6ed3303049f42682cb4bbd909c36f4312f01595d90736eb1ef73762de84a5c60",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/18-pr-magazine-rewrite/revisions/6ed3303049f42682cb4bbd909c36f4312f01595d90736eb1ef73762de84a5c60.png"
+      },
+      "bytes": 116588,
+      "id": "6ed3303049f42682cb4bbd909c36f4312f01595d90736eb1ef73762de84a5c60",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:37.368Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/293006473/rectangle_large_type_2_45ef6d24dba51811372f1f4e947ce5b4.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "6ed3303049f42682cb4bbd909c36f4312f01595d90736eb1ef73762de84a5c60"
+      }
+    },
+    {
+      "sha256": "3c0ed34e1ea620cf52732ebed0bf0bec1880b980b6ebdd58465c803eeafac680",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/18-pr-magazine-rewrite/revisions/3c0ed34e1ea620cf52732ebed0bf0bec1880b980b6ebdd58465c803eeafac680.png"
+      },
+      "bytes": 65490,
+      "id": "3c0ed34e1ea620cf52732ebed0bf0bec1880b980b6ebdd58465c803eeafac680",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:46:07.267Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "a0f92cad34cb395079f2122495b2b3c1362d4e915a57e64e300983066261fb5c"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出しとシリーズ名・話数・色でシリーズが区別できる",
+        "reviewedAt": "2026-10-11T11:51:24.800Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "a0f92cad34cb395079f2122495b2b3c1362d4e915a57e64e300983066261fb5c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/18-pr-magazine-rewrite/inputs/a0f92cad34cb395079f2122495b2b3c1362d4e915a57e64e300983066261fb5c.json"
+          },
+          "bytes": 1115
+        }
+      }
+    },
+    {
+      "sha256": "5c9228ea1a9e8efa0f1fd258c5c262879036e86dcf0152ea30884b56cb037ddf",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/18-pr-magazine-rewrite/revisions/5c9228ea1a9e8efa0f1fd258c5c262879036e86dcf0152ea30884b56cb037ddf.png"
+      },
+      "bytes": 65521,
+      "id": "5c9228ea1a9e8efa0f1fd258c5c262879036e86dcf0152ea30884b56cb037ddf",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:56:00.624Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320331578/rectangle_large_type_2_0296e39d311b1c787ccad9ea6da50b8e.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "5c9228ea1a9e8efa0f1fd258c5c262879036e86dcf0152ea30884b56cb037ddf"
+      }
+    },
+    {
+      "sha256": "54b8bbccb2cd09045440635c267a2d68f606409896e6ca7b05623a7957432a69",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/18-pr-magazine-rewrite/revisions/54b8bbccb2cd09045440635c267a2d68f606409896e6ca7b05623a7957432a69.png"
+      },
+      "bytes": 28574,
+      "id": "54b8bbccb2cd09045440635c267a2d68f606409896e6ca7b05623a7957432a69",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:11:37.013Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "c90980b05781334461f723e4228acf57c0a2c1e49aa49c646e18ca5cd3ed64a1"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.007/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:17:43.572Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "c90980b05781334461f723e4228acf57c0a2c1e49aa49c646e18ca5cd3ed64a1",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/18-pr-magazine-rewrite/inputs/c90980b05781334461f723e4228acf57c0a2c1e49aa49c646e18ca5cd3ed64a1.json"
+          },
+          "bytes": 1115
+        }
+      }
+    },
+    {
+      "sha256": "b3dda2d939b1318b453521144ad32ed0009567b640d94ae2633299976890b053",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/18-pr-magazine-rewrite/revisions/b3dda2d939b1318b453521144ad32ed0009567b640d94ae2633299976890b053.png"
+      },
+      "bytes": 2219440,
+      "id": "b3dda2d939b1318b453521144ad32ed0009567b640d94ae2633299976890b053",
+      "kind": "candidate",
+      "version": "pop-NCP-007-v4-46dc77ff66bb",
+      "createdAt": "2026-11-04T00:42:38.298Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "7336d709feb32a7dcf70c9b78b16bf42605c157c05580bf647b3729176b098da"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:43:45.513Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "7336d709feb32a7dcf70c9b78b16bf42605c157c05580bf647b3729176b098da",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/18-pr-magazine-rewrite/inputs/7336d709feb32a7dcf70c9b78b16bf42605c157c05580bf647b3729176b098da.json"
+          },
+          "bytes": 8741
+        },
+        "production": {
+          "id": "NCI-00033",
+          "policyId": "NCP-007",
+          "policyVersion": 4,
+          "planSha256": "46dc77ff66bb334f0cf904b05973a672684b289edf8b25626148303da51c82ac"
+        }
+      }
+    },
+    {
+      "sha256": "6b321a58d69e90ac78df3c4f1e574f1e834013060b12ef530879932b6f43d548",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/18-pr-magazine-rewrite/revisions/6b321a58d69e90ac78df3c4f1e574f1e834013060b12ef530879932b6f43d548.png"
+      },
+      "bytes": 440660,
+      "id": "6b321a58d69e90ac78df3c4f1e574f1e834013060b12ef530879932b6f43d548",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-04T00:46:28.938Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/332002930/rectangle_large_type_2_3a4e34a8de40c53f41c5db3c25acba82.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "6b321a58d69e90ac78df3c4f1e574f1e834013060b12ef530879932b6f43d548"
+      }
+    }
+  ]
+}

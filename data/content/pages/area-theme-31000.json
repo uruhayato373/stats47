@@ -73,7 +73,9 @@
         "nonprimary-enterprises-count",
         "nonprimary-enterprises-under5-count",
         "nonprimary-enterprises-employees",
-        "nonprimary-enterprises-under5-employees"
+        "nonprimary-enterprises-under5-employees",
+        "establishment-ratio-1-4-employees-private",
+        "employee-ratio-1-4-employee-establishments-private"
       ]
     },
     {
@@ -89,7 +91,9 @@
         "nursery-utilization-rate",
         "certified-childcare-center-count-per-100k-0-5",
         "childcare-applicants",
-        "nursery-waiting-children-count"
+        "nursery-waiting-children-count",
+        "childcare-employment-rate",
+        "nursery-teacher-annual-income"
       ]
     },
     {
@@ -124,7 +128,11 @@
         "broadband-service-contract-count",
         "mobile-phone-contract-count-per-1000",
         "mobile-phone-ownership-multi-person-households-per-1000",
-        "internet-usage-rate-10plus"
+        "internet-usage-rate-10plus",
+        "public-phone-count-per-1000",
+        "internet-fee-consumption-expenditure",
+        "mobile-phone-bill-consumption-expenditure",
+        "pc-ownership-multi-person-households-per-1000"
       ]
     },
     {
@@ -138,7 +146,11 @@
         "volunteer-activity-annual-participation-rate-10plus",
         "voter-turnout-governor",
         "library-registered-users",
-        "community-building-volunteer-participation-rate-10plus"
+        "community-building-volunteer-participation-rate-10plus",
+        "library-books",
+        "library-lending-books",
+        "voter-turnout-mayor",
+        "voter-turnout-pref-assembly"
       ]
     },
     {
@@ -160,7 +172,10 @@
         "construction-employed-female",
         "architect-annual-income",
         "public-construction-contract-count",
-        "public-construction-contract-amount"
+        "public-construction-contract-amount",
+        "carpenter-annual-income",
+        "electrician-annual-income",
+        "new-housing-starts"
       ]
     },
     {
@@ -213,7 +228,11 @@
         "hobby-participation-rate-reading",
         "hobby-participation-rate-calligraphy",
         "hobby-participation-rate-tea-ceremony",
-        "hobby-participation-rate-knitting"
+        "hobby-participation-rate-knitting",
+        "museum-count-per-million",
+        "library-books",
+        "library-registered-users",
+        "registered-museum-visitors"
       ]
     },
     {
@@ -239,7 +258,12 @@
         "broadcast-media-time-all",
         "meal-avg-time-female",
         "meal-avg-time-male",
-        "primary-school-commute-time-weekday"
+        "primary-school-commute-time-weekday",
+        "monthly-average-actual-working-hours-male",
+        "monthly-average-actual-working-hours-female",
+        "employees-weekly-hours-60plus-rate",
+        "relaxation-avg-time-female",
+        "relaxation-avg-time-male"
       ]
     },
     {
@@ -254,7 +278,9 @@
         "intellectual-disability-support-facility-capacity-per-100k",
         "intellectual-disability-support-facility-residents-per-100k",
         "physical-disability-certificates-issued-per-1000",
-        "disabled-employment-rate"
+        "disabled-employment-rate",
+        "treatment-rate-mental-disorder-outpatient",
+        "treatment-rate-mental-disorder-inpatient"
       ]
     },
     {
@@ -267,7 +293,8 @@
       "rankingKeys": [
         "earthquake-renovation-rate",
         "earthquake-retrofit-housing",
-        "fire-earthquake-insurance-consumption-expenditure"
+        "fire-earthquake-insurance-consumption-expenditure",
+        "individual-evacuation-plan-coverage-rate"
       ]
     },
     {
@@ -332,7 +359,10 @@
         "pm25-valid-general-station-count",
         "pm25-general-station-count",
         "bod-pollution-load",
-        "cod-pollution-load"
+        "cod-pollution-load",
+        "pollution-complaints-received-per-100k",
+        "ss-pollution-load",
+        "sewerage-coverage-rate"
       ]
     },
     {
@@ -426,7 +456,11 @@
         "jr-freight-shipment",
         "air-cargo-transport",
         "number-of-freight-cars",
-        "truck-operators"
+        "truck-operators",
+        "main-road-length-per-km2",
+        "maritime-import-export-cargo",
+        "port-count",
+        "airport-count"
       ]
     },
     {
@@ -445,7 +479,8 @@
         "female-part-time-hourly-wage",
         "prefectural-manager-female-share",
         "prefectural-assembly-female-share",
-        "husband-childcare-rate"
+        "husband-childcare-rate",
+        "dual-income-household-ratio"
       ]
     },
     {
@@ -458,7 +493,11 @@
       "rankingKeys": [
         "railway-station-count",
         "bus-operators",
-        "commute-by-car"
+        "commute-by-car",
+        "roadside-station-count",
+        "airport-count",
+        "commute-by-bus",
+        "commuter-ratio-to-other-municipalities"
       ]
     },
     {
@@ -792,7 +831,10 @@
       "rankingKeys": [
         "information-private-establishments",
         "information-private-employees",
-        "gross-prefectural-product-information-communication-h27"
+        "gross-prefectural-product-information-communication-h27",
+        "employment-location-quotient-information-communication",
+        "information-communication-industry-annual-income",
+        "software-engineer-annual-income"
       ]
     },
     {
@@ -884,7 +926,9 @@
         "residential-official-land-median-price",
         "residential-official-land-point-count",
         "residential-land-price-change-rate",
-        "industrial-land-price-change-rate"
+        "industrial-land-price-change-rate",
+        "private-rental-housing-rent-per-3-3m2",
+        "per-capita-fixed-asset-tax-pref-municipal"
       ]
     },
     {
@@ -1048,7 +1092,9 @@
         "prefectural-recruitment-online-application-rate",
         "prefectural-auto-environment-tax-online-application-rate",
         "prefectural-auto-environment-tax-online-application-count",
-        "prefectural-auto-environment-tax-application-count"
+        "prefectural-auto-environment-tax-application-count",
+        "personnel-expenditure-ratio-pref-finance",
+        "prefectural-general-administration-staff"
       ]
     },
     {
@@ -1076,7 +1122,11 @@
         "amusement-industry-revenue",
         "amusement-industry-net-value-added",
         "beauty-salon-count",
-        "barber-beauty-salon-count"
+        "barber-beauty-salon-count",
+        "public-bath-count-per-100k",
+        "barber-beauty-salon-count-per-100k",
+        "cleaning-shop-count-per-100k",
+        "convenience-store-count-per-100k"
       ]
     },
     {
@@ -1091,7 +1141,10 @@
         "nursing-care-insurance-benefit",
         "nursing-home-count-per-100k-65plus",
         "nursing-home-capacity-per-1000-65plus",
-        "nursing-home-residents-per-1000-65plus"
+        "nursing-home-residents-per-1000-65plus",
+        "elderly-living-alone-rate",
+        "nursing-home-staff-per-100k-65plus",
+        "care-worker-annual-income"
       ]
     },
     {
@@ -1276,7 +1329,9 @@
         "gini-coefficient-disposable-income",
         "gini-coefficient-financial-assets",
         "consumption-expenditure-multi-person-households-per-month",
-        "current-liabilities-balance-multi-person-households-per-household"
+        "current-liabilities-balance-multi-person-households-per-household",
+        "avg-savings-rate-worker-households",
+        "cpi-change-rate-total"
       ]
     },
     {
@@ -1303,7 +1358,11 @@
         "regional-business-co2-emissions-estimate",
         "regional-household-co2-emissions-estimate",
         "regional-transport-co2-emissions-estimate",
-        "regional-waste-co2-emissions-estimate"
+        "regional-waste-co2-emissions-estimate",
+        "electricity-consumption-quantity",
+        "gasoline-consumption-quantity",
+        "electricity-generation-capacity",
+        "wind-power-capacity"
       ]
     },
     {
@@ -1320,7 +1379,12 @@
         "commute-by-train",
         "bus-operators",
         "household-survey-transport-communication-expenditure",
-        "commuters-total"
+        "commuters-total",
+        "gasoline-consumption-quantity",
+        "automobile-related-group-consumption-expenditure",
+        "bus-fare-consumption-expenditure",
+        "taxi-driver-annual-income",
+        "bus-driver-annual-income"
       ]
     },
     {
@@ -1334,7 +1398,11 @@
         "retail-establishments-by-prefecture",
         "retail-sales-area-by-class",
         "retail-sales-amount-by-prefecture",
-        "retail-employees"
+        "retail-employees",
+        "department-supermarket-count-per-100k",
+        "convenience-store-count-commercial",
+        "annual-sales-amount-per-establishment",
+        "annual-sales-amount-per-employee"
       ]
     },
     {
@@ -1455,7 +1523,10 @@
         "junior-high-club-per100-swimming",
         "junior-high-club-per100-table-tennis",
         "junior-high-club-per100-track-and-field",
-        "junior-high-club-per100-volleyball"
+        "junior-high-club-per100-volleyball",
+        "golf-course-public",
+        "private-sports-facility",
+        "sports-park-count-per-100km2"
       ]
     },
     {
@@ -1495,7 +1566,8 @@
       "published": true,
       "rankingKeys": [
         "tsunami-evacuation-building-count",
-        "tsunami-evacuation-tower-count"
+        "tsunami-evacuation-tower-count",
+        "individual-evacuation-plan-coverage-rate"
       ]
     },
     {
@@ -1527,7 +1599,9 @@
         "water-supply-population-ratio-2012on",
         "sewerage-coverage-rate",
         "water-supply-annual-volume",
-        "water-supply-capacity"
+        "water-supply-capacity",
+        "sewage-treatment-coverage-rate",
+        "sewerage-penetration-rate-2012on"
       ]
     }
   ]

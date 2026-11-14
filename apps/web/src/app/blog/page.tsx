@@ -132,6 +132,7 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
       <PageHeader
         title="統計ブログ"
         description="都道府県データを、ランキングや時系列で読み解く記事一覧です"
+        stats="並び順: 公開日の新しい順 (カードの日付は最終更新日)"
       />
 
       <SectionHeader

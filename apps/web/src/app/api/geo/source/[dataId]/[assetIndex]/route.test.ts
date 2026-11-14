@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { gzipSync, gunzipSync } from 'node:zlib';
 
 import { getR2Client } from '@stats47/r2-storage/server';

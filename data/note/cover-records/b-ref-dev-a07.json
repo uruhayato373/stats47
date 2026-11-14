@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-dev-a07",
+  "production": {
+    "id": "NCI-00147",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "学力と待機児童\n47都道府県を比較",
+      "subline": "並び順の関係はほぼなし",
+      "subject": "開いた無文字のノートと鉛筆、園児用の黄色い帽子を大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/nb43e69201497 本文確認2026-11-04。全国学力調査2025年の平均正答率と2024年の待機児童数。順位相関係数0.05で並び順にほとんど関係がない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "2adc5ac3cdb56fcfe07935c299612f98de1061948d6d7791d69a1d179073436f",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a07/revisions/2adc5ac3cdb56fcfe07935c299612f98de1061948d6d7791d69a1d179073436f.png"
+      },
+      "bytes": 34346,
+      "id": "2adc5ac3cdb56fcfe07935c299612f98de1061948d6d7791d69a1d179073436f",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:06:29.073Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "a5bfa61e05af6d9778d5be851aff628b4c375218a51fe117422ccf9c988498ca"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:05.934Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "a5bfa61e05af6d9778d5be851aff628b4c375218a51fe117422ccf9c988498ca",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a07/inputs/a5bfa61e05af6d9778d5be851aff628b4c375218a51fe117422ccf9c988498ca.json"
+          },
+          "bytes": 1315
+        }
+      }
+    },
+    {
+      "sha256": "70a208e99f0a6e298ccea14372c698c2a973d01959cfef49fc1d1a04a0202dfc",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a07/revisions/70a208e99f0a6e298ccea14372c698c2a973d01959cfef49fc1d1a04a0202dfc.png"
+      },
+      "bytes": 89845,
+      "id": "70a208e99f0a6e298ccea14372c698c2a973d01959cfef49fc1d1a04a0202dfc",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:35.113Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324046238/rectangle_large_type_2_54e1781dff92d36c28d76baee174bca4.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "70a208e99f0a6e298ccea14372c698c2a973d01959cfef49fc1d1a04a0202dfc"
+      }
+    },
+    {
+      "sha256": "a75cbf488fb923c2dff1b9217ceccd03e2505b54152c43000a12830cedde9bb5",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a07/revisions/a75cbf488fb923c2dff1b9217ceccd03e2505b54152c43000a12830cedde9bb5.png"
+      },
+      "bytes": 1892263,
+      "id": "a75cbf488fb923c2dff1b9217ceccd03e2505b54152c43000a12830cedde9bb5",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-51fd86923296",
+      "createdAt": "2026-11-03T23:14:23.649Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "775ff9293fb47ce8ef26d86aada02481b889c9c046ce85019ac60be25808c909"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:05:16.587Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "775ff9293fb47ce8ef26d86aada02481b889c9c046ce85019ac60be25808c909",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a07/inputs/775ff9293fb47ce8ef26d86aada02481b889c9c046ce85019ac60be25808c909.json"
+          },
+          "bytes": 8213
+        },
+        "production": {
+          "id": "NCI-00147",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "51fd86923296f43451df2335b0198d23aa441ec0caa8d7a6bee5a25305aa5c63"
+        }
+      }
+    }
+  ]
+}

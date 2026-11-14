@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const financialDebtBalance: MetricConfig = {
   "key": "financial-debt-balance",
   "title": "金融負債残高",
+  "subtitle": "二人以上の世帯の1世帯当たり",
   "unit": "千円",
   "category": "economy",
   "source": {
@@ -29,27 +30,13 @@ export const financialDebtBalance: MetricConfig = {
   },
   "display": {
     "conversionFactor": 0.1,
-    "decimalPlaces": 0,
+    "decimalPlaces": 1,
     "displayUnit": "万円",
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "千円/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "千円/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
+    // 1 世帯当たりの平均なので人口・面積当たりへの換算は意味が無い (METRIC-HOUSEHOLD-ASSET-SUBTITLE-01)
+    "normalizationOptions": [],
   },
   "groupKey": "household-finance",
   "seoTitle": "金融負債残高ランキング都道府県【2019年】｜1位神奈川県（9,304千円）",

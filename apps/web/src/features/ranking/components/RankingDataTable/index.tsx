@@ -8,7 +8,7 @@ import { useMemo } from "react";
 import { DataTable, cn, ChartPanel } from "@stats47/components";
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
-import { type RankingItem, type RankingValue } from "@stats47/ranking";
+import { type RankingItem, type RankingValue, type RankingValueDisplay } from "@stats47/ranking";
 import { ColumnDef } from "@tanstack/react-table";
 import { Table as TableIcon } from "lucide-react";
 
@@ -23,6 +23,7 @@ import {
 } from "../../utils/compute-ranking-header-stats";
 
 import { buildRankingRows, type RankingDataRow } from "./ranking-rows";
+
 
 import type { StatsSchema } from "@stats47/types";
 
@@ -49,6 +50,8 @@ interface Props {
   onSelectArea?: (areaCode: string) => void;
   /** 詳細パネルで開いている県 (行に地の色を付ける) */
   selectedAreaCode?: string | null;
+  /** ページが決めた表示単位。渡すと値の列をこの単位・倍率・小数桁で書く (順位と偏差値は元の値から求める) */
+  valueDisplay?: RankingValueDisplay | null;
 }
 
 /**
@@ -71,6 +74,7 @@ export function RankingDataTable({
   bare = false,
   onSelectArea,
   selectedAreaCode,
+  valueDisplay,
 }: Props) {
   // 順位と偏差値を付けた行 (県の詳細パネルと同じ計算)
   const processedData = useMemo(() => buildRankingRows(rankingValues), [rankingValues]);
@@ -78,13 +82,14 @@ export function RankingDataTable({
   // カラム定義
   // 桁数は 47 県の値から 1 度だけ決める。値ごとに整形すると 60.4 と 44 が混ざり、
   // ヘッダー (formatRankingValue) とも食い違う (旧実装で実際に起きていた)
-  const precision = useMemo(
+  const dataPrecision = useMemo(
     () =>
       resolveRankingPrecision(
         processedData.map((d) => d.value).filter((v): v is number => v !== null),
       ),
     [processedData],
   );
+  const precision = valueDisplay?.precision ?? dataPrecision;
 
   const columns = useMemo<ColumnDef<RankingDataRow>[]>(
     () => [
@@ -140,10 +145,10 @@ export function RankingDataTable({
         header: () => <div className="text-right">値</div>,
         meta: { width: `${RANKING_TABLE_COLUMN_WIDTHS.value}px` },
         cell: ({ row }) => {
-          const unit = formatUnitForDisplay(rankingItem?.unit || processedData[0]?.unit || "");
+          const unit = valueDisplay?.unit ?? formatUnitForDisplay(rankingItem?.unit || processedData[0]?.unit || "");
           return (
             <div className="text-right tabular-nums whitespace-nowrap">
-              {formatRankingValue(row.getValue<number>("value"), precision)}
+              {formatRankingValue(row.getValue<number>("value"), precision, valueDisplay?.factor)}
               {unit && (
                 <span className="text-xs text-muted-foreground ml-1">{formatUnitForDisplay(unit)}</span>
               )}
@@ -165,7 +170,7 @@ export function RankingDataTable({
         },
       },
     ],
-    [rankingItem, processedData, precision, onSelectArea]
+    [rankingItem, processedData, precision, onSelectArea, valueDisplay]
   );
 
   if (!rankingValues || processedData.length === 0) {

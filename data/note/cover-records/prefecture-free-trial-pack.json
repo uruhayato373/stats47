@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "prefecture-free-trial-pack",
+  "production": {
+    "id": "NCI-00365",
+    "policyId": "NCP-006",
+    "policyVersion": 2,
+    "brief": {
+      "headline": "都道府県データ\n無料で試せます",
+      "subline": "総人口2024年・47都道府県\nCSV・PDF・地図PNG",
+      "subject": "青緑と明るい黄色。大きな整理された資料フォルダと、白い紙の見本セットを右側に。紙の中身は無文字の穏やかな線のみで、具体的な地図・グラフ・表・実在UIは描かない。PC、ExcelやPowerPointのロゴ、人物を描かない。無料サンプルの明るい商品案内。",
+      "evidence": "https://note.com/stats47/n/n584098246188 公開本文を2026-10-14確認。総人口2024年、47地域、CSV、PDF、県別地図PNGと出典台帳・利用許諾を収録。ExcelとPowerPointは同梱しない。カバーに架空の中身を描かない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "7d0c0ea57b7298e833e0639bc91db89aec83adc8ca9864672148c0b9b1be3d0e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/prefecture-free-trial-pack/revisions/7d0c0ea57b7298e833e0639bc91db89aec83adc8ca9864672148c0b9b1be3d0e.png"
+      },
+      "bytes": 32506,
+      "id": "7d0c0ea57b7298e833e0639bc91db89aec83adc8ca9864672148c0b9b1be3d0e",
+      "kind": "candidate",
+      "version": "2026-10-12-packs",
+      "createdAt": "2026-10-12T07:11:26.953Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "23526704762074550493370a6d2cc4d9fecd735d3a91d660ce40908f1687d75a"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "r4の指標数で作り直し。320px相当で見出し・指標数・パック実データの県別地図が読める。確認版とSHA一致",
+        "reviewedAt": "2026-10-12T07:47:02.505Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "23526704762074550493370a6d2cc4d9fecd735d3a91d660ce40908f1687d75a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-free-trial-pack/inputs/23526704762074550493370a6d2cc4d9fecd735d3a91d660ce40908f1687d75a.json"
+          },
+          "bytes": 1160
+        }
+      }
+    },
+    {
+      "sha256": "e76f1847ea0e80986a30c00b29914f11a78411a7cb584a05fa0e8eeddfe31f15",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/prefecture-free-trial-pack/revisions/e76f1847ea0e80986a30c00b29914f11a78411a7cb584a05fa0e8eeddfe31f15.png"
+      },
+      "bytes": 60252,
+      "id": "e76f1847ea0e80986a30c00b29914f11a78411a7cb584a05fa0e8eeddfe31f15",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-14T08:41:40.022Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323582997/rectangle_large_type_2_5e2ef1a4957b93a52e9ce683c39b315b.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "e76f1847ea0e80986a30c00b29914f11a78411a7cb584a05fa0e8eeddfe31f15"
+      }
+    },
+    {
+      "sha256": "baafc29190d659b55e256b1a3163298fc6b12a6df0042ec292f81036dc1b6616",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/prefecture-free-trial-pack/revisions/baafc29190d659b55e256b1a3163298fc6b12a6df0042ec292f81036dc1b6616.png"
+      },
+      "bytes": 1769454,
+      "id": "baafc29190d659b55e256b1a3163298fc6b12a6df0042ec292f81036dc1b6616",
+      "kind": "candidate",
+      "version": "imagegen-pop-v2-next-six-20261014",
+      "createdAt": "2026-10-14T08:58:04.365Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e8c94292371144128b12c9de0b3e2ec0bf7c7c959f35644de6d31fe36a32c411"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "2026-10-14に原寸と幅320px、管理画面の修正前後で確認済み。2026-10-15ユーザーがこの6件の公開反映を指示。",
+        "reviewedAt": "2026-10-15T00:44:28.581Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "e8c94292371144128b12c9de0b3e2ec0bf7c7c959f35644de6d31fe36a32c411",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-free-trial-pack/inputs/e8c94292371144128b12c9de0b3e2ec0bf7c7c959f35644de6d31fe36a32c411.json"
+          },
+          "bytes": 8364
+        },
+        "production": {
+          "id": "NCI-00365",
+          "policyId": "NCP-006",
+          "policyVersion": 2,
+          "planSha256": "2d1b98f4b9a1c380ea6a0205e28cebcd444fa694b0a01bb34dde3538d4794410"
+        }
+      }
+    }
+  ]
+}

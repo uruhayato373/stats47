@@ -9,6 +9,8 @@ import { SurfaceSection, ValueTable, type ValueTableColumn } from '@/components/
 
 import { isGeoCrossAnalysisSlug, loadGeoAnalysisSnapshot } from '@/features/geo-analysis';
 
+import { navSurfaceProps } from '@/lib/analytics/events';
+
 import type { Metadata } from 'next';
 
 // 固定パスでもR2を実行時に読む。ビルド時の取得失敗を出典欠落のまま固定しない。
@@ -66,7 +68,7 @@ export default async function GeoDataCatalogPage() {
         /></div>
         <p className="mt-3 text-xs text-muted-foreground">上記資料をもとにstats47が空間判定・集計・表示加工。結果生成日 {snapshot.generatedAt.slice(0, 10)}。</p>
       </> : <p role="status" className="mt-4 text-sm text-muted-foreground">配信データの版を確認できません。原典と計算手法は分析の方法ページを参照してください。</p>}
-      <div className="mt-4 flex flex-wrap gap-4 text-sm"><Link href={'/geo/' + spec.slug} className="text-primary underline">地図と判定結果</Link><Link href="/geo/method" className="text-primary underline">計算方法と限界</Link></div>
+      <div className="mt-4 flex flex-wrap gap-4 text-sm" {...navSurfaceProps('geo_analysis_list')}><Link href={'/geo/' + spec.slug} className="text-primary underline">地図と判定結果</Link><Link href="/geo/method" className="text-primary underline">計算方法と限界</Link></div>
     </SurfaceSection>)}</div>
     <SurfaceSection className="mt-6"><SectionHeader title="背景地図は計算とは別" hideRule />
       <p className="text-sm leading-relaxed text-muted-foreground">地図の背景は国土地理院の淡色タイルをリアルタイムで読み込み、stats47が地点・人口メッシュ・判定結果を重ねています。背景の道路や地形は分析計算には使わず、配布データにも含めません。</p>

@@ -39,6 +39,16 @@ export const CHILDCARE_SERVICES_SET: IndicatorSet = {
       "rankingKey": "nursery-waiting-children-count",
       "shortLabel": "保育所等利用待機児童数",
       "role": "context"
+    },
+    {
+      "rankingKey": "childcare-employment-rate",
+      "shortLabel": "育児をしている人の就業率",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "nursery-teacher-annual-income",
+      "shortLabel": "保育士の平均年収",
+      "role": "secondary"
     }
   ],
   "keywords": [

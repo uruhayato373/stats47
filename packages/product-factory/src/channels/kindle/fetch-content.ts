@@ -4,7 +4,8 @@
  * 出典メタ (title/description/tags) は frontmatter から取り出し、書籍の出典一覧に使う。
  */
 import sharp from "sharp";
-import { correctBookArticle } from "./editorial-corrections";
+import type { DataSourceEntry } from "@stats47/data-configs/data-source";
+import { KINDLE_SOURCE_SECTIONS, correctBookArticle } from "./editorial-corrections";
 import { correctBookFigure } from "./figure-corrections";
 import { fullTablesForArticle, insertBeforeSources } from "./full-tables";
 import { SITE } from "@stats47/data-configs";
@@ -109,45 +110,113 @@ export function stripWebNavigation(body: string): string {
     .join("\n");
 }
 
+/** ブログ本文の旧「データ出典」見出し。判定はブログの一括移行 (md-preprocessor の migrateLegacyDataSourceSection) と同じ。 */
+const LEGACY_SOURCE_HEADING = /^(#{2,4})[ \t]*データ出典[ \t]*$/;
+/** 一括移行が説明を含む節に付ける見出し (md-preprocessor の LEGACY_DATA_SOURCE_NOTES_HEADING)。 */
+const MIGRATED_NOTES_HEADING = "データについて";
+
 /**
- * サイトの出典カード `<data-source label=".." year="..">` を、章に「データ出典」見出しが無いときだけ
- * 章末の「## データ出典」に起こす。見出しがある章は本文が出典を書いているので、カードは
- * md-to-xhtml が落とす (2026-09-19 K-S1-11 F00537: sports-participation-map に出典節が無かった)。
+ * ブログ本文の末尾の旧「データ出典」節を、直前の空行と区切り線ごと取り出す (書籍版で持つ節の記録用)。
+ * 本文 = 節より前の本文 + "\n" + 戻り値、が成り立つ。節が無ければ undefined。
+ * 書籍の章に使う 64 記事では、旧節はどれも本文の最後の節だった (2026-11-14 実測)。
  */
-export function appendDataSourceSection(body: string): string {
+export function extractLegacySourceSection(body: string): string | undefined {
+  const lines = body.split("\n");
+  const start = lines.findIndex((line) => LEGACY_SOURCE_HEADING.test(line.trimEnd()));
+  if (start < 0) return undefined;
+  let head = start;
+  while (head > 0 && lines[head - 1].trim() === "") head--;
+  if (head > 0 && /^-{3,}\s*$/.test(lines[head - 1])) head--;
+  while (head > 0 && lines[head - 1].trim() === "") head--;
+  return body.slice(lines.slice(0, head).join("\n").length + 1);
+}
+
+/**
+ * 書籍版で持つ「データ出典」節 (台帳 `products.kindle-editorial-corrections` の sourceSections) を章の本文へ戻す。
+ * ブログ本文の手書き節は Web の出典一覧 (DataSourceList) へ移すため本文から消えるが、書籍の校正指示は
+ * 校閲済みの節の文字列に当たるので、節は書籍の側で持つ。ブログ本文の状態によらず同じ章になる:
+ *   - 本文がまだ節を持つ → そのまま
+ *   - 一括移行で見出しが「データについて」に改名された → 見出しを戻す
+ *   - 一括移行で節ごと消えた → 末尾に足す
+ */
+export function restoreBookSourceSection(body: string, section: string | undefined): string {
+  if (!section) return body;
+  if (body.split("\n").some((line) => LEGACY_SOURCE_HEADING.test(line.trimEnd()))) return body;
+  const lines = section.split("\n");
+  const start = lines.findIndex((line) => LEGACY_SOURCE_HEADING.test(line.trimEnd()));
+  const level = start < 0 ? undefined : LEGACY_SOURCE_HEADING.exec(lines[start].trimEnd())?.[1];
+  const renamed = level
+    ? [...lines.slice(0, start), `${level} ${MIGRATED_NOTES_HEADING}`, ...lines.slice(start + 1)].join("\n")
+    : section;
+  if (renamed !== section && body.endsWith(renamed)) return `${body.slice(0, body.length - renamed.length)}${section}`;
+  return `${body.replace(/\n*$/, "\n")}${section}`;
+}
+
+/** 出典 1 行の書式。`<data-source>` カードから起こした行 (「総務省 家計調査」) と同じく「組織 調査名」にする。 */
+function formatSnapshotSource(entry: DataSourceEntry): string {
+  const name = entry.organization ? `${entry.organization} ${entry.label}` : entry.label;
+  return entry.note ? `${entry.note}: ${name}` : name;
+}
+
+/**
+ * 章に「データ出典」見出しが無いとき、章末の「## データ出典」を起こす。材料の優先順:
+ *   1. サイトの出典カード `<data-source label=".." year="..">` (年を持ち、校閲済みの章が使っている)
+ *   2. `app/blog/all.json` の記事の `sources` (DataSourceEntry。Web の出典一覧と同じもの)
+ * 見出しがある章は本文が出典を書いているので、カードは md-to-xhtml が落とす
+ * (2026-09-19 K-S1-11 F00537: sports-participation-map に出典節が無かった)。
+ */
+export function appendDataSourceSection(body: string, sources: readonly DataSourceEntry[] = []): string {
   // 見出しの深さは記事により ##〜#### (2026-09-19 K-S1-09 G01: manufacturing-aichi-dominance は ###)。
   if (/^#{2,4}\s*(データ)?出典/m.test(body)) return body;
-  const seen = new Set<string>();
-  const items: string[] = [];
+  const lines: string[] = [];
   for (const m of body.matchAll(/<data-source\b([^>]*)>/g)) {
     const attrs = m[1];
     const label = attrs.match(/\blabel="([^"]*)"/)?.[1]?.trim();
     if (!label) continue;
     const year = attrs.match(/\byear="([^"]*)"/)?.[1]?.trim();
-    const line = year ? `${label}（${year}）` : label;
-    if (seen.has(line)) continue;
-    seen.add(line);
-    items.push(`- ${line}`);
+    lines.push(year ? `${label}（${year}）` : label);
   }
+  if (lines.length === 0) lines.push(...sources.map(formatSnapshotSource));
+  const items = [...new Set(lines)].map((line) => `- ${line}`);
   if (items.length === 0) return body;
   return `${body.replace(/\s+$/, "")}\n\n## データ出典\n\n${items.join("\n")}\n`;
 }
 
-let publishedSlugs: Promise<ReadonlySet<string>> | undefined;
+interface BlogSnapshot {
+  readonly publishedSlugs: ReadonlySet<string>;
+  readonly sourcesBySlug: ReadonlyMap<string, readonly DataSourceEntry[]>;
+}
+
+let blogSnapshot: Promise<BlogSnapshot> | undefined;
+
+/** R2 `app/blog/all.json` を 1 回だけ取得して使い回す。 */
+function fetchBlogSnapshot(): Promise<BlogSnapshot> {
+  blogSnapshot ??= (async () => {
+    const res = await fetch(`${R2_BASE}/app/blog/all.json`);
+    if (!res.ok) throw new Error(`R2 fetch 失敗 (${res.status}): app/blog/all.json`);
+    const json = (await res.json()) as {
+      articles?: { slug: string; published?: boolean; sources?: DataSourceEntry[] }[];
+    };
+    const articles = json.articles ?? [];
+    return {
+      publishedSlugs: new Set(articles.filter((a) => a.published !== false).map((a) => a.slug)),
+      sourcesBySlug: new Map(articles.map((a) => [a.slug, a.sources ?? []])),
+    };
+  })();
+  return blogSnapshot;
+}
 
 /**
  * 公開中 (published !== false) の blog slug 集合。出典一覧に URL を出してよい記事を決める。
  * 未公開 slug は `/blog/<slug>` が 410 を返す (2026-09-19 K-S1-11 N30: sports-participation-map)。
- * 真実源は R2 `app/blog/all.json`。1 回だけ取得して使い回す。
  */
-export function fetchPublishedSlugSet(): Promise<ReadonlySet<string>> {
-  publishedSlugs ??= (async () => {
-    const res = await fetch(`${R2_BASE}/app/blog/all.json`);
-    if (!res.ok) throw new Error(`R2 fetch 失敗 (${res.status}): app/blog/all.json`);
-    const json = (await res.json()) as { articles?: { slug: string; published?: boolean }[] };
-    return new Set((json.articles ?? []).filter((a) => a.published !== false).map((a) => a.slug));
-  })();
-  return publishedSlugs;
+export async function fetchPublishedSlugSet(): Promise<ReadonlySet<string>> {
+  return (await fetchBlogSnapshot()).publishedSlugs;
+}
+
+/** 記事ごとの出典 (Web の出典一覧と同じ `sources`)。章末の「データ出典」の材料にする。 */
+export async function fetchBlogSourcesBySlug(): Promise<ReadonlyMap<string, readonly DataSourceEntry[]>> {
+  return (await fetchBlogSnapshot()).sourcesBySlug;
 }
 
 /**
@@ -156,19 +225,26 @@ export function fetchPublishedSlugSet(): Promise<ReadonlySet<string>> {
  */
 export async function fetchBlogArticle(
   slug: string,
-  options: { readonly fullTables?: boolean; readonly seenTables?: Set<string> } = {},
+  options: {
+    readonly fullTables?: boolean;
+    readonly seenTables?: Set<string>;
+    /** all.json の記事の sources。本文に出典節も出典カードも無い章の「データ出典」の材料。 */
+    readonly dataSources?: readonly DataSourceEntry[];
+  } = {},
 ): Promise<FetchedArticle> {
   const res = await fetch(`${R2_BASE}/app/blog/${slug}/article.md`);
   if (!res.ok) throw new Error(`R2 fetch 失敗 (${res.status}): app/blog/${slug}/article.md`);
   const md = await res.text();
   const { fm, body: originalBody } = parseFrontmatter(md);
+  // 書籍版で持つ出典節を先に戻す。校正指示は節を含む校閲済みの本文に当たる (restoreBookSourceSection)。
+  const reviewedBody = restoreBookSourceSection(originalBody, KINDLE_SOURCE_SECTIONS[slug]);
   // 回遊行の除去は「本記事の…」を書き換える前に行う (書き換え後は行頭の語が変わり検出できない)。
-  const base = rewriteWebSelfReference(stripWebNavigation(correctBookArticle(slug, originalBody)));
+  const base = rewriteWebSelfReference(stripWebNavigation(correctBookArticle(slug, reviewedBody)));
   // 全県表 (full-tables.ts) は図と同じデータから作り、出典の見出しの前に入れる。本ごとに catalog の fullTables で有効にする
   const tables = options.fullTables
     ? await fullTablesForArticle(slug, [...base.matchAll(/!\[[^\]]*\]\(data\/([a-z0-9-]+)\.svg\)/gi)].map((m) => m[1]), options.seenTables, base)
     : "";
-  const body = appendDataSourceSection(insertBeforeSources(base, tables));
+  const body = appendDataSourceSection(insertBeforeSources(base, tables), options.dataSources);
   if (!body.trim()) throw new Error(`Empty blog body: ${slug}`);
 
   const images: FetchedImage[] = [];

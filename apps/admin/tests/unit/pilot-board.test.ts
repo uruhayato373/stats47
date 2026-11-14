@@ -69,6 +69,25 @@ describe("pilot 判定ボード", () => {
     expect(row.stateNote).toContain("既読ページ (KENP): 台帳に列が無い");
   });
 
+  it("判定日を過ぎた判定不能の pilot は judgeOverdue で見分けられ、判定日より前の判定不能と区別する", () => {
+    const spec = (start: string): PilotSpec => ({
+      id: "kdp",
+      title: "KDP",
+      route: "コンテンツ販売",
+      card: "KDP-EXPANSION-01",
+      schedule: { kind: "window", start, startEvidence: "4週窓", windowDays: 28 },
+      metrics: [{ label: "既読ページ (KENP)", kind: "unrecorded", reason: "台帳に列が無い" }],
+    });
+    const [past, future] = buildPilotBoard([spec("2026-08-30"), spec("2026-10-20")], BASE);
+    expect(past).toMatchObject({ state: "no-data", judgeDate: "2026-09-27", judgeOverdue: true });
+    expect(future).toMatchObject({ state: "no-data", judgeDate: "2026-11-17", judgeOverdue: false });
+  });
+
+  it("開始日が無い pilot は判定日が無いので judgeOverdue にしない", () => {
+    const spec: PilotSpec = { ...blogProduct, schedule: { kind: "window", start: null, startEvidence: "未選定", windowDays: 28 } };
+    expect(buildPilotBoard([spec], BASE)[0].judgeOverdue).toBe(false);
+  });
+
   it("note の記録が無ければ判定不能、古ければ記録が古いと出す。判定日は improvements の Due から引く", () => {
     const spec: PilotSpec = {
       id: "note-fiscal",

@@ -22,6 +22,7 @@ import { readFileSync, writeFileSync, existsSync, readdirSync, mkdirSync } from 
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { datasetDir } from "../../../config/datasets.mjs";
+import { estimateWorkersCostUsd } from "./threshold-check.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -78,6 +79,9 @@ export function daysInRange({ start, end }) {
   return Math.round((Date.parse(`${end}T00:00:00Z`) - Date.parse(`${start}T00:00:00Z`)) / 86_400_000) + 1;
 }
 
+// CPU 合計を数値にしてよい最低の網羅率 (サイクル日数に対する CPU 値のある日数)。足りなければ unknown
+export const MIN_CPU_COVERAGE_RATIO = 0.8;
+
 export function isCoverageComplete(daysCovered, daysExpected) {
   return daysExpected > 0 && daysCovered / daysExpected >= MIN_COVERAGE_RATIO;
 }
@@ -125,11 +129,15 @@ export function resolvePreviousAggregate({ prevCycle, prevSnapshots, prevDaysExp
   };
 }
 
-function aggregate(dates) {
-  return aggregateSnapshots(readDailySnapshots(dates));
+function aggregate(dates, daysExpected) {
+  return aggregateSnapshots(readDailySnapshots(dates), { daysExpected });
 }
 
-export function aggregateSnapshots(snapshots) {
+/**
+ * daysExpected を渡すと、CPU 値のある日数が daysExpected の MIN_CPU_COVERAGE_RATIO 以上のとき合計を数値にする
+ * (値のある日の合計。欠けた日は含まない)。省略時は従来どおり全日分そろったときだけ。
+ */
+export function aggregateSnapshots(snapshots, { daysExpected } = {}) {
   const agg = {
     d1: { readQueries: 0, writeQueries: 0, rowsRead: 0, rowsWritten: 0 },
     // totalCpuTimeUs は全日分の CPU 合計が揃ったときだけ数値。1 日でも欠ければ null (部分和を合計と見せない)
@@ -165,7 +173,10 @@ export function aggregateSnapshots(snapshots) {
       agg.r2_storage.latestObjects = s.r2_storage.totalObjects || agg.r2_storage.latestObjects;
     }
   }
-  if (snapshots.length > 0 && agg.workers.cpuDaysCovered === snapshots.length) {
+  const cpuEnough = daysExpected === undefined
+    ? snapshots.length > 0 && agg.workers.cpuDaysCovered === snapshots.length
+    : daysExpected > 0 && agg.workers.cpuDaysCovered / daysExpected >= MIN_CPU_COVERAGE_RATIO;
+  if (cpuEnough) {
     agg.workers.totalCpuTimeUs = cpuSum;
   }
   return agg;
@@ -177,6 +188,10 @@ function fmtNum(n) {
   if (n >= 1e6) return `${(n / 1e6).toFixed(2)}M`;
   if (n >= 1e3) return `${(n / 1e3).toFixed(1)}K`;
   return n.toFixed(0);
+}
+
+function fmtUsd(n) {
+  return typeof n === "number" ? `$${n.toFixed(2)}` : "—";
 }
 
 function fmtBytes(n) {
@@ -193,12 +208,20 @@ function compareToBudgets(agg) {
   return evaluateBudgets(budgets, agg);
 }
 
-export function evaluateBudgets(budgets, agg) {
+/**
+ * invoiceUsd: 請求書の実額があれば渡す (最優先)。無ければ日次 CPU 合計からの推定額 (税別) を
+ * total_cost_usd_monthly に入れ、cost_basis に "estimate" を残す。
+ */
+export function evaluateBudgets(budgets, agg, { invoiceUsd = null } = {}) {
   const cpuUs = agg.workers.totalCpuTimeUs;
+  const cpuMs = typeof cpuUs === "number" ? cpuUs / 1000 : null;
+  const costBasis = typeof invoiceUsd === "number" ? "invoice" : cpuMs === null ? null : "estimate";
+  const totalCost = costBasis === "invoice" ? invoiceUsd : cpuMs === null ? null : estimateWorkersCostUsd(cpuMs);
   const valueOf = {
     d1_rows_read: agg.d1.rowsRead,
     d1_rows_written: agg.d1.rowsWritten,
-    workers_cpu_ms: typeof cpuUs === "number" ? cpuUs / 1000 : null,
+    workers_cpu_ms: cpuMs,
+    total_cost_usd_monthly: totalCost,
     workers_requests: agg.workers.totalRequests,
     r2_class_a_operations: agg.r2_operations.classA,
     r2_class_b_operations: agg.r2_operations.classB,
@@ -210,7 +233,9 @@ export function evaluateBudgets(budgets, agg) {
       : actual >= b.error_threshold ? "error"
       : actual >= b.warning_threshold ? "warning"
       : "ok";
-    return { ...b, actual, status };
+    return b.metric_key === "total_cost_usd_monthly"
+      ? { ...b, actual, status, cost_basis: costBasis }
+      : { ...b, actual, status };
   });
 }
 
@@ -268,9 +293,13 @@ export function buildIssueBody(cycle, range, agg, comparisons, previous, coverag
   lines.push(`|---|---:|---:|---:|---|`);
   for (const c of comparisons) {
     const isBytes = c.metric_key.includes("bytes");
-    const f = isBytes ? fmtBytes : fmtNum;
+    const isUsd = c.metric_key.includes("usd");
+    const f = isBytes ? fmtBytes : isUsd ? fmtUsd : fmtNum;
     const icon = c.status === "error" ? "🔴" : c.status === "warning" ? "🟡" : c.status === "ok" ? "🟢" : "⚪";
-    lines.push(`| ${c.metric_key} | ${f(c.actual)} | ${f(c.warning_threshold)} | ${f(c.error_threshold)} | ${icon} ${c.status} |`);
+    const label = c.cost_basis === "estimate"
+      ? `${c.metric_key} (推定 (日次 CPU 合計から算出・税別))`
+      : c.metric_key;
+    lines.push(`| ${label} | ${f(c.actual)} | ${f(c.warning_threshold)} | ${f(c.error_threshold)} | ${icon} ${c.status} |`);
   }
   lines.push("");
 
@@ -326,8 +355,8 @@ function main() {
     process.exit(1);
   }
 
-  const agg = aggregate(dates);
   const daysExpected = daysInRange(range);
+  const agg = aggregate(dates, daysExpected);
   const coverage = { daysCovered: dates.length, daysExpected, complete: isCoverageComplete(dates.length, daysExpected) };
   // 当月の日次が欠けている月は予算判定もしない (部分和を ok と誤判定しない)
   const comparisons = coverage.complete

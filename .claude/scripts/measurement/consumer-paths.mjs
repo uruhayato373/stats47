@@ -3,8 +3,6 @@ import { sourceFor, MEASUREMENT_MAX_AGE_MS } from './sources.mjs';
 import { createHash } from 'node:crypto';
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 export function consumerPath(name, path) {
-  if (name === 'afb' && /^\.local\/authenticated-measurement\/afb-\d+\/outcomes\.json$/.test(path)) return '.local/authenticated-measurement/restored/afb.json';
-  if (name === 'moshimo' && path === datasetPath("moshimo.results")) return path;
   if (name === 'rakuten' && path === datasetPath("rakuten.results")) return path;
   if (name === 'a8' && /^data\/affiliate\/a8-(results|report-log|ui-last-run)\.json$/.test(path)) return path;
   // Observation targets belong to the current queue builder, not a report snapshot.

@@ -1103,10 +1103,15 @@
               "factor": 1
             }
           ],
-          "valueScale": 0.1
+          "valueScale": 0.1,
+          "sampleCount": {
+            "cdTab": "13,45",
+            "factor": 10,
+            "minimum": 10
+          }
         },
         "derived": true,
-        "configHash": "a087939306f50064"
+        "configHash": "03e7f426e4919f69"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -1623,10 +1628,7 @@
         "configHash": "5c303a84ac9648f7"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:auto-liability-insurance-amount-received-per-payment",
@@ -1667,10 +1669,15 @@
               "factor": 1
             }
           ],
-          "valueScale": 0.1
+          "valueScale": 0.1,
+          "sampleCount": {
+            "cdTab": "13,45",
+            "factor": 10,
+            "minimum": 10
+          }
         },
         "derived": true,
-        "configHash": "f755322f86f80058"
+        "configHash": "5ed038ea35e0ae15"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -2191,15 +2198,209 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:automobile-related-group-consumption-expenditure-prefecture",
           "kind": "blog"
         },
         {
           "pageId": "ranking:automobile-related-group-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:regional-transport",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "regional-transport"
+      ]
     },
     {
       "metricKey": "average-age-of-first-marriage-husband",
@@ -5719,10 +5920,7 @@
         "configHash": "83995a1bf902b784"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:hospital-bed-utilization-map",
@@ -5758,10 +5956,7 @@
         "configHash": "fefa69c2308c4b49"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:avg-daily-inpatients-psychiatric-hospital-per-100k",
@@ -5793,10 +5988,7 @@
         "configHash": "dd56a82465dd90e7"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:avg-daily-outpatients-general-hospital-per-100k",
@@ -5828,10 +6020,7 @@
         "configHash": "0ebe8d1542db32ca"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:avg-daily-outpatients-psychiatric-hospital-per-100k",
@@ -7041,7 +7230,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:01000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:02000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7049,7 +7246,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:03000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:04000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7057,7 +7262,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:05000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:06000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7065,7 +7278,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:07000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:08000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7073,7 +7294,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:09000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:10000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7081,7 +7310,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:11000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:12000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7089,7 +7326,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:13000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:14000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7097,7 +7342,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:15000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:16000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7105,7 +7358,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:17000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:18000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7113,7 +7374,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:19000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:20000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7121,7 +7390,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:21000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:22000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7129,7 +7406,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:23000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:24000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7137,7 +7422,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:25000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:26000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7145,7 +7438,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:27000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:28000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7153,7 +7454,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:29000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:30000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7161,7 +7470,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:31000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:32000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7169,7 +7486,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:33000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:34000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7177,7 +7502,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:35000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:36000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7185,7 +7518,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:37000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:38000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7193,7 +7534,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:39000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:40000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7201,7 +7550,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:41000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:42000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7209,7 +7566,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:43000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:44000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7217,11 +7582,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:45000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:46000:household-assets-debt",
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:46000:real-income",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:47000:household-assets-debt",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:real-income",
           "kind": "area-theme"
         },
         {
@@ -7243,10 +7620,15 @@
         {
           "pageId": "theme:household-assets-debt",
           "kind": "theme"
+        },
+        {
+          "pageId": "theme:real-income",
+          "kind": "theme"
         }
       ],
       "themes": [
-        "household-assets-debt"
+        "household-assets-debt",
+        "real-income"
       ]
     },
     {
@@ -7430,19 +7812,7 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:akita-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:fukushima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:hokkaido-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:ishikawa-food-culture",
           "kind": "blog"
         },
         {
@@ -7454,7 +7824,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:nagano-food-culture",
+          "pageId": "blog:nara-food-culture",
           "kind": "blog"
         },
         {
@@ -7466,7 +7836,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:shimane-food-culture",
+          "pageId": "blog:shizuoka-food-culture",
           "kind": "blog"
         },
         {
@@ -7519,18 +7889,6 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:akita-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:hokkaido-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:ishikawa-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:kanagawa-food-culture",
           "kind": "blog"
         },
@@ -7539,7 +7897,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:nagano-food-culture",
+          "pageId": "blog:nara-food-culture",
           "kind": "blog"
         },
         {
@@ -7551,7 +7909,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:shimane-food-culture",
+          "pageId": "blog:shizuoka-food-culture",
           "kind": "blog"
         },
         {
@@ -7604,7 +7962,15 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:banana-consumption-quantity",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:chiba-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tottori-food-culture",
           "kind": "blog"
         },
         {
@@ -7837,6 +8203,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:tottori-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:banana-consumption-quantity",
           "kind": "ranking"
         },
@@ -7872,10 +8242,7 @@
         "configHash": "db16b8120f2333d9"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:bank-deposit-balance-shikoku-anomaly",
@@ -7994,10 +8361,15 @@
               "factor": 1
             }
           ],
-          "valueScale": 0.1
+          "valueScale": 0.1,
+          "sampleCount": {
+            "cdTab": "13,45",
+            "factor": 10,
+            "minimum": 10
+          }
         },
         "derived": true,
-        "configHash": "1684e28e68ac51e9"
+        "configHash": "7e81ee45bdca984c"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -8458,11 +8830,196 @@
         "configHash": "90d92f5e15204601"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "area-theme:01000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:local-services",
+          "kind": "area-theme"
+        },
         {
           "pageId": "area:01000",
           "kind": "area"
@@ -8658,9 +9215,15 @@
         {
           "pageId": "ranking:barber-beauty-salon-count-per-100k",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:local-services",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "local-services"
+      ]
     },
     {
       "metricKey": "barber-shop-count",
@@ -9186,7 +9749,11 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:kagoshima-food-culture",
+          "pageId": "blog:fukuoka-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {
@@ -9194,7 +9761,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:nagasaki-food-culture",
+          "pageId": "blog:miyazaki-food-culture",
           "kind": "blog"
         },
         {
@@ -9203,6 +9770,10 @@
         },
         {
           "pageId": "blog:shimane-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokushima-food-culture",
           "kind": "blog"
         },
         {
@@ -9435,7 +10006,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:kagoshima-food-culture",
+          "pageId": "blog:fukuoka-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {
@@ -9443,7 +10018,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:nagasaki-food-culture",
+          "pageId": "blog:miyazaki-food-culture",
           "kind": "blog"
         },
         {
@@ -9452,6 +10027,10 @@
         },
         {
           "pageId": "blog:shimane-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokushima-food-culture",
           "kind": "blog"
         },
         {
@@ -10638,14 +11217,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:hiroshima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kumamoto-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:kyoto-food-culture",
           "kind": "blog"
         },
@@ -10663,6 +11234,10 @@
         },
         {
           "pageId": "blog:shiga-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yakiniku-spending-prefecture-gap",
           "kind": "blog"
         },
         {
@@ -11113,14 +11688,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:hiroshima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kumamoto-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:kyoto-food-culture",
           "kind": "blog"
         },
@@ -11130,10 +11697,6 @@
         },
         {
           "pageId": "blog:mie-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:nara-food-culture",
           "kind": "blog"
         },
         {
@@ -11400,11 +11963,19 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:shochu-consumption-prefecture-gap",
           "kind": "blog"
         },
         {
           "pageId": "blog:tobacco-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamagata-food-culture",
           "kind": "blog"
         },
         {
@@ -11639,11 +12210,15 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "blog:hiroshima-food-culture",
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:shochu-consumption-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamagata-food-culture",
           "kind": "blog"
         },
         {

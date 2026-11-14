@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-11-06T22:39:29.976Z",
+ "generatedAt": "2026-11-13T23:04:10.130Z",
  "doctrine": "計測ゲート付き需要ファースト。公開→GSC実測→流入が付いたカテゴリのみ深掘り (thin-content回避)。",
  "summary": {
-  "totalCandidates": 3787,
+  "totalCandidates": 3786,
   "byStatus": {
-   "candidate": 3787
+   "candidate": 3786
   },
-  "addablePending": 2341,
+  "addablePending": 2340,
   "categoryTraffic": {}
  },
  "queue": [
@@ -26988,21 +26988,6 @@
    "subtitleHint": null,
    "category": "educationsports",
    "unit": "人",
-   "key": null,
-   "status": "candidate",
-   "score": 2,
-   "fine": false,
-   "gsc": null,
-   "priority": 2
-  },
-  {
-   "id": "0000010108|H6108",
-   "statsDataId": "0000010108",
-   "cdCat01": "H6108",
-   "title": "クリーニング業数",
-   "subtitleHint": null,
-   "category": "infrastructure",
-   "unit": "施設",
    "key": null,
    "status": "candidate",
    "score": 2,

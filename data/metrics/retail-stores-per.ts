@@ -21,7 +21,7 @@ export const retailStoresPer: MetricConfig = {
     "from": 2006,
     "to": 2006,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateBlues",
@@ -33,22 +33,6 @@ export const retailStoresPer: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "店/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "店/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "groupKey": "retail-stores-per",
   "seoTitle": "小売店数ランキング市区町村【2006年】｜1位東京都 千代田区（86.65店）",

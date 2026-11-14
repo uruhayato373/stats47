@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-inc-a05",
+  "production": {
+    "id": "NCI-00166",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "年収の高い県は\n物差しで変わる",
+      "subline": "賃金・所得など5指標を比較",
+      "subject": "形の違う5本の無文字の物差しを並べて大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/nbaf2ff8914a3 本文確認2026-11-04。賃金・県民所得・課税所得・世帯収入など5指標の比較。東京都は5指標のうち4指標で1位。物差しに数字を入れない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "4a38e69dbbe2eff476d09b9298a4763224acdcfb2a046af3061615e658cfeed5",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-inc-a05/revisions/4a38e69dbbe2eff476d09b9298a4763224acdcfb2a046af3061615e658cfeed5.png"
+      },
+      "bytes": 41019,
+      "id": "4a38e69dbbe2eff476d09b9298a4763224acdcfb2a046af3061615e658cfeed5",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:05:28.651Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "f68aee226b29a184861d398b97e70dc2129c9f98f0c1fe28c553400dc7c096df"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:34.681Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "f68aee226b29a184861d398b97e70dc2129c9f98f0c1fe28c553400dc7c096df",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-inc-a05/inputs/f68aee226b29a184861d398b97e70dc2129c9f98f0c1fe28c553400dc7c096df.json"
+          },
+          "bytes": 1362
+        }
+      }
+    },
+    {
+      "sha256": "e5aa2e3206508c9fd15f157b9105e6f3a8519345c5d76ae7438ac6f8f02eaa2b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-inc-a05/revisions/e5aa2e3206508c9fd15f157b9105e6f3a8519345c5d76ae7438ac6f8f02eaa2b.png"
+      },
+      "bytes": 67605,
+      "id": "e5aa2e3206508c9fd15f157b9105e6f3a8519345c5d76ae7438ac6f8f02eaa2b",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:24.231Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324075818/rectangle_large_type_2_b546afa8e7fd984bb188c49e3b6ab672.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "e5aa2e3206508c9fd15f157b9105e6f3a8519345c5d76ae7438ac6f8f02eaa2b"
+      }
+    },
+    {
+      "sha256": "22a6f9c010a456cc0609387b55cc522f67dac96020ebf2902647d84b4f13181f",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-inc-a05/revisions/22a6f9c010a456cc0609387b55cc522f67dac96020ebf2902647d84b4f13181f.png"
+      },
+      "bytes": 1830273,
+      "id": "22a6f9c010a456cc0609387b55cc522f67dac96020ebf2902647d84b4f13181f",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-6fecf465e70f",
+      "createdAt": "2026-11-04T01:08:37.480Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "4363450cf0504494632e386fb86d636a7611fad2b1132264dbbc9ad7a368964c"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:10:29.513Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "4363450cf0504494632e386fb86d636a7611fad2b1132264dbbc9ad7a368964c",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-inc-a05/inputs/4363450cf0504494632e386fb86d636a7611fad2b1132264dbbc9ad7a368964c.json"
+          },
+          "bytes": 8203
+        },
+        "production": {
+          "id": "NCI-00166",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "6fecf465e70f6884dcec6bd2b2446b820fe8f43308745661b17fc6a2c098f8ac"
+        }
+      }
+    }
+  ]
+}

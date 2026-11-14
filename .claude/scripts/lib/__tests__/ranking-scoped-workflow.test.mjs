@@ -18,7 +18,7 @@ const generation = step(sync, "sync", "Regenerate snapshots").run;
 const imageGeneration = step(images, "generate", "Generate images").run;
 const imageScopeStep = step(sync, "sync", "Validate explicit ranking image scope");
 const imageScopeValidation = imageScopeStep?.run ?? "";
-const syncImageStep = step(sync, "sync-ranking-keys", "Generate changed ranking OGP/cards");
+const syncImageStep = step(sync, "sync-ranking-keys", "Generate changed ranking OGP");
 
 function run(script, overrides = {}, fixture = {}) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ranking-scope-test-"));
@@ -132,8 +132,8 @@ test("a failed PUT stops the scope and remains a failure", () => {
   assert.equal(pushes(result.calls).length, 1);
 });
 
-test("ranking OGP and cards receive only the explicit key array", () => {
-  for (const type of ["ranking", "ranking-cards"]) {
+test("ranking OGP receives only the explicit key array", () => {
+  for (const type of ["ranking"]) {
     const result = run(imageGeneration, { IMAGE_TYPE: type });
     assert.equal(result.status, 0, result.stderr);
     const generate = result.calls.find((args) => args.some((arg) => arg.endsWith("generate-ogp-images.ts")));
@@ -171,12 +171,12 @@ test("image-only scope is distinct and validated before staging or any snapshot 
 });
 
 for (const task of ["ranking-items", "master", ""]) {
-  test(`explicit image scope selects both image types for ${task || "all tasks"}`, () => {
+  test(`explicit image scope selects the ranking OGP type for ${task || "all tasks"}`, () => {
     const result = run(`${imageScopeValidation}\n${syncImageStep.run}`, { SNAPSHOT_TASK: task });
     assert.equal(result.status, 0, result.stderr);
     const generated = result.calls.filter(args => args.some(arg => arg.endsWith("generate-ogp-images.ts")));
-    assert.equal(generated.length, 2);
-    assert.deepEqual(generated.map(args => args[args.indexOf("--type") + 1]), ["ranking", "ranking-cards"]);
+    assert.equal(generated.length, 1);
+    assert.deepEqual(generated.map(args => args[args.indexOf("--type") + 1]), ["ranking"]);
     for (const args of generated) {
       assert.deepEqual(args.slice(args.indexOf("--key")), ["--key", "total-population,clothing-footwear-expenditure-total"]);
       assert.equal(args[args.indexOf("--max-generate") + 1], "50");
@@ -184,7 +184,6 @@ for (const task of ["ranking-items", "master", ""]) {
     const published = result.calls.filter(args => args.some(arg => arg.endsWith("push-generated-image-set.ts")));
     assert.deepEqual(published.map(args => args.slice(-2)), [
       ["--plan", ".local/image-generation-publish-plan-ranking.json"],
-      ["--plan", ".local/image-generation-publish-plan-ranking-cards.json"],
     ]);
     assert.equal(pushes(result.calls).length, 0, "image scope does not enter the ranking-values data writer");
   });
@@ -197,7 +196,7 @@ test("image scope accepts the full 50-key boundary as one CSV argument", () => {
   const result = run(`${imageScopeValidation}\n${syncImageStep.run}`, { RANKING_KEYS: keys.join(","), SNAPSHOT_TASK: "master" });
   assert.equal(result.status, 0, result.stderr);
   const generated = result.calls.filter(args => args.some(arg => arg.endsWith("generate-ogp-images.ts")));
-  assert.equal(generated.length, 2);
+  assert.equal(generated.length, 1);
   for (const args of generated) assert.deepEqual(args.slice(-2), ["--key", keys.join(",")]);
 });
 
@@ -226,7 +225,7 @@ test("empty image scope retains default known self-heal and does not restrict un
   const result = run(syncImageStep.run, { RANKING_KEYS: "" });
   assert.equal(result.status, 0, result.stderr);
   const generated = result.calls.filter(args => args.some(arg => arg.endsWith("generate-ogp-images.ts")));
-  assert.equal(generated.length, 2);
+  assert.equal(generated.length, 1);
   for (const args of generated) assert.deepEqual(args.slice(-6), ["--source", "known", "--limit", "50", "--max-generate", "50"]);
 });
 
@@ -235,8 +234,19 @@ for (const fixture of [{ imageGenerationFails: true }, { imagePlanMissing: true 
     const result = run(syncImageStep.run, {}, fixture);
     assert.notEqual(result.status, 0);
     const generated = result.calls.filter(args => args.some(arg => arg.endsWith("generate-ogp-images.ts")));
-    assert.equal(generated.length, 1, "failure stops before the second image type");
+    assert.equal(generated.length, 1, "failure stops after the first image type");
     const published = result.calls.filter(args => args.some(arg => arg.endsWith("push-generated-image-set.ts")));
     assert.equal(published.length, fixture.imagePushFails ? 1 : 0);
   });
 }
+
+// RANKING-CARD-WEBP-UNUSED-01: app/ranking/<key>/thumbnail-{light,dark}.webp は 2026-07-12 (15248a33e1) に
+// 最後の読み手 (survey ページの baseThumbnailUrl) が消えてから表示面を持たない。生成・週次修復・監査へ戻さない。
+test("no workflow generates or audits the unused ranking-cards image type", () => {
+  const dir = path.join(root, ".github/workflows");
+  const offenders = fs.readdirSync(dir)
+    .filter((name) => name.endsWith(".yml"))
+    .filter((name) => /ranking-cards/.test(fs.readFileSync(path.join(dir, name), "utf8")));
+  assert.deepEqual(offenders, []);
+  assert.ok(!images.on.workflow_dispatch.inputs.type.options.includes("ranking-cards"));
+});

@@ -228,7 +228,7 @@
     {
       "rankingKey": "university-professor-annual-income",
       "shortLabel": "大学教授",
-      "role": "context",
+      "role": "secondary",
       "selection": {
         "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
         "sourceUrl": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",
@@ -239,7 +239,7 @@
     {
       "rankingKey": "associate-professor-annual-income",
       "shortLabel": "大学准教授",
-      "role": "context",
+      "role": "secondary",
       "selection": {
         "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
         "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
@@ -305,7 +305,7 @@
     {
       "rankingKey": "carpenter-annual-income",
       "shortLabel": "大工",
-      "role": "context",
+      "role": "secondary",
       "selection": {
         "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
         "sourceUrl": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",
@@ -426,7 +426,7 @@
     {
       "rankingKey": "dentist-annual-income",
       "shortLabel": "歯科医師",
-      "role": "context",
+      "role": "secondary",
       "selection": {
         "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
         "sourceUrl": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",
@@ -612,56 +612,121 @@
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
-      "section": "services",
+      "section": "medical-care",
       "sortOrder": 50
     }
   ],
   "metricGroups": [
     {
-      "key": "medical-care",
-      "title": "医療・介護",
+      "key": "medical-care-1",
+      "title": "医師",
       "rankingKeys": [
-        "doctor-annual-income",
-        "nurse-annual-income",
-        "care-worker-annual-income"
+        "doctor-annual-income"
       ],
       "defaultCheckedKeys": [
-        "doctor-annual-income",
+        "doctor-annual-income"
+      ]
+    },
+    {
+      "key": "medical-care-2",
+      "title": "看護師",
+      "rankingKeys": [
+        "nurse-annual-income"
+      ],
+      "defaultCheckedKeys": [
         "nurse-annual-income"
       ]
     },
     {
-      "key": "education",
-      "title": "教育・保育",
+      "key": "medical-care-3",
+      "title": "介護職員",
       "rankingKeys": [
-        "school-teacher-annual-income",
+        "care-worker-annual-income"
+      ],
+      "defaultCheckedKeys": [
+        "care-worker-annual-income"
+      ]
+    },
+    {
+      "key": "medical-care-4",
+      "title": "歯科医師",
+      "rankingKeys": [
+        "dentist-annual-income"
+      ],
+      "defaultCheckedKeys": [
+        "dentist-annual-income"
+      ]
+    },
+    {
+      "key": "education-1",
+      "title": "小中学校教員",
+      "rankingKeys": [
+        "school-teacher-annual-income"
+      ],
+      "defaultCheckedKeys": [
+        "school-teacher-annual-income"
+      ]
+    },
+    {
+      "key": "education-2",
+      "title": "保育士",
+      "rankingKeys": [
         "nursery-teacher-annual-income"
       ],
       "defaultCheckedKeys": [
-        "school-teacher-annual-income",
         "nursery-teacher-annual-income"
       ]
     },
     {
-      "key": "it-professional",
-      "title": "IT・専門職",
+      "key": "education-3",
+      "title": "大学教授と准教授の年収の推移",
+      "rankingKeys": [
+        "university-professor-annual-income",
+        "associate-professor-annual-income"
+      ],
+      "defaultCheckedKeys": [
+        "university-professor-annual-income",
+        "associate-professor-annual-income"
+      ]
+    },
+    {
+      "key": "transport-construction-1",
+      "title": "営業用大型貨物自動車運転者",
+      "rankingKeys": [
+        "truck-driver-annual-income"
+      ],
+      "defaultCheckedKeys": [
+        "truck-driver-annual-income"
+      ]
+    },
+    {
+      "key": "transport-construction-2",
+      "title": "タクシー運転手",
+      "rankingKeys": [
+        "taxi-driver-annual-income"
+      ],
+      "defaultCheckedKeys": [
+        "taxi-driver-annual-income"
+      ]
+    },
+    {
+      "key": "transport-construction-3",
+      "title": "大工",
+      "rankingKeys": [
+        "carpenter-annual-income"
+      ],
+      "defaultCheckedKeys": [
+        "carpenter-annual-income"
+      ]
+    },
+    {
+      "key": "it-professional-1",
+      "title": "ソフトウェア作成者",
       "rankingKeys": [
         "software-engineer-annual-income"
       ],
       "defaultCheckedKeys": [
         "software-engineer-annual-income"
-      ]
-    },
-    {
-      "key": "transport-construction",
-      "title": "運輸・建設",
-      "rankingKeys": [
-        "truck-driver-annual-income",
-        "taxi-driver-annual-income"
-      ],
-      "defaultCheckedKeys": [
-        "truck-driver-annual-income",
-        "taxi-driver-annual-income"
       ]
     }
   ],
@@ -726,55 +791,54 @@
   "sections": [
     {
       "key": "medical-care",
-      "title": "医療・介護",
-      "description": "同じ調査年の職業別平均年収です。経験年数や勤務先の構成を揃えた比較ではありません。",
+      "title": "医師・看護師・介護職員の年収は県でどれくらい違うか",
+      "concern": "自分の県で医療・介護の仕事に就いたとき、年収がほかの県と比べてどの位置にあるかを知りたい。",
       "metricGroupKeys": [
-        "medical-care"
+        "medical-care-1",
+        "medical-care-2",
+        "medical-care-3",
+        "medical-care-4"
       ],
       "chartKeys": [
-        "theme-occ-medical-trend"
+        "theme-occ-medical-trend",
+        "theme-occ-service-trend"
       ]
     },
     {
       "key": "education",
-      "title": "教育・保育",
-      "description": "教育・保育職の平均年収を同じ年で比較します。非公表の県は0として扱いません。",
+      "title": "教員・保育士・大学教員の年収は県でどれくらい違うか",
+      "concern": "教員や保育士、大学教員の年収が県によってどれくらい違うかを知りたい。",
       "metricGroupKeys": [
-        "education"
+        "education-1",
+        "education-2",
+        "education-3"
       ],
       "chartKeys": [
         "theme-occ-edu-trend"
       ]
     },
     {
-      "key": "it-professional",
-      "title": "IT・専門職",
-      "description": "IT・専門職の平均年収を比較します。職種の集計範囲は指標の出典で確認できます。",
-      "metricGroupKeys": [
-        "it-professional"
-      ],
-      "chartKeys": [
-        "theme-occ-it-trend"
-      ]
-    },
-    {
       "key": "transport-construction",
-      "title": "運輸・建設",
-      "description": "運輸と建設の職種を分けて読みます。非公表や欠測を平均年収0とは扱いません。",
+      "title": "運転手・大工の年収は県でどれくらい違うか",
+      "concern": "運輸や建設の現場職の年収が、県によってどれくらい違うかを知りたい。",
       "metricGroupKeys": [
-        "transport-construction"
+        "transport-construction-1",
+        "transport-construction-2",
+        "transport-construction-3"
       ],
       "chartKeys": [
         "theme-occ-transport-trend"
       ]
     },
     {
-      "key": "services",
-      "title": "サービスと全職種",
-      "description": "サービス職を比較します。他の職種は関連指標の索引から確認できます。",
-      "metricGroupKeys": [],
+      "key": "it-professional",
+      "title": "IT・専門職の年収は県でどれくらい違うか",
+      "concern": "ソフトウェア作成者など専門職の年収が、県によってどれくらい違うかを知りたい。",
+      "metricGroupKeys": [
+        "it-professional-1"
+      ],
       "chartKeys": [
-        "theme-occ-service-trend"
+        "theme-occ-it-trend"
       ]
     }
   ]

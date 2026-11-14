@@ -1,0 +1,750 @@
+{
+  "schemaVersion": 1,
+  "surveyNaming": [
+    {
+      "survey": "賃金構造基本統計調査",
+      "yearFormat": "calendar",
+      "evidence": "カード SSDS-YEARFORMAT-SOURCE-01 の判定の手順 ③ (2026-10-21 に e-Stat の統計表一覧 API getStatsList の表題で確認した記録)。期間は 6月中・6月30日"
+    },
+    {
+      "survey": "経済センサス-基礎調査",
+      "yearFormat": "calendar",
+      "evidence": "カード SSDS-YEARFORMAT-SOURCE-01 の判定の手順 ③ (2026-10-21 に e-Stat の統計表一覧 API getStatsList の表題で確認した記録)。2026-11-14 に e-Stat の統計表一覧ページでも表題「令和元年経済センサス‐基礎調査」を確認 (https://www.e-stat.go.jp/stat-search/files?toukei=00200552)"
+    },
+    {
+      "survey": "経済センサス-活動調査",
+      "yearFormat": "calendar",
+      "evidence": "カード SSDS-YEARFORMAT-SOURCE-01 の判定の手順 ③ (2026-10-21 に e-Stat の統計表一覧 API getStatsList の表題で確認した記録)。2026-11-14 に e-Stat の統計表一覧ページでも表題「平成28年経済センサス‐活動調査」を確認 (https://www.e-stat.go.jp/stat-search/files?toukei=00200553)"
+    },
+    {
+      "survey": "経済構造実態調査",
+      "yearFormat": "calendar",
+      "evidence": "カード SSDS-YEARFORMAT-SOURCE-01 の判定の手順 ③ (2026-10-21 に e-Stat の統計表一覧 API getStatsList の表題で確認した記録)。2026-11-14 に e-Stat の統計表一覧ページでも表題「2025年経済構造実態調査（産業横断調査）」を確認 (https://www.e-stat.go.jp/stat-search/files?layout=datalist&toukei=00200555)"
+    },
+    {
+      "survey": "事業所・企業統計調査",
+      "yearFormat": "calendar",
+      "evidence": "カード SSDS-YEARFORMAT-SOURCE-01 の判定の手順 ③ (2026-10-21 に e-Stat の統計表一覧 API getStatsList の表題で確認した記録)。2026-11-14 に e-Stat の統計表一覧ページでも表題「平成18年事業所・企業統計調査」を確認 (https://www.e-stat.go.jp/stat-search/files?toukei=00200551)"
+    },
+    {
+      "survey": "国民生活基礎調査",
+      "yearFormat": "calendar",
+      "evidence": "カード SSDS-YEARFORMAT-SOURCE-01 の判定の手順 ③ (2026-10-21 に e-Stat の統計表一覧 API getStatsList の表題で確認した記録)。2026-11-14 に e-Stat の統計表一覧ページでも表題「平成30年国民生活基礎調査」を確認 (https://www.e-stat.go.jp/stat-search/files?toukei=00450061)"
+    },
+    {
+      "survey": "農林業センサス",
+      "yearFormat": "calendar",
+      "evidence": "カード SSDS-YEARFORMAT-SOURCE-01 の判定の手順 ③ (2026-10-21 に e-Stat の統計表一覧 API getStatsList の表題で確認した記録)。2026-11-14 に e-Stat の統計表一覧ページでも表題「2005年農林業センサス」を確認 (https://www.e-stat.go.jp/stat-search/files?toukei=00500209)"
+    },
+    {
+      "survey": "漁業センサス",
+      "yearFormat": "calendar",
+      "evidence": "カード SSDS-YEARFORMAT-SOURCE-01 の判定の手順 ③ (2026-10-21 に e-Stat の統計表一覧 API getStatsList の表題で確認した記録)"
+    },
+    {
+      "survey": "社会生活基本調査",
+      "yearFormat": "calendar",
+      "evidence": "カード SSDS-YEARFORMAT-SOURCE-01 の判定の手順 ③ (2026-10-21 に e-Stat の統計表一覧 API getStatsList の表題で確認した記録)。2026-11-14 に e-Stat の統計表一覧ページでも表題「平成28年社会生活基本調査」を確認 (https://www.e-stat.go.jp/stat-search/files?toukei=00200533)"
+    },
+    {
+      "survey": "学校基本調査",
+      "yearFormat": "fiscal",
+      "evidence": "2026-11-14 に e-Stat の統計表一覧ページで提供分類「令和７年度」「令和６年度」(昭和23年度まで年度の呼び方) を確認 (https://www.e-stat.go.jp/stat-search/files?toukei=00400001&tstat=000001011528&page=1)。同じページの「調査年で絞込み」は「2025年」と年で表記するが、調査の表題は年度。期間は 5月1日・3月"
+    },
+    {
+      "survey": "学校保健統計調査",
+      "yearFormat": "fiscal",
+      "evidence": "2026-11-14 に e-Stat の統計表一覧ページで提供分類「令和７年度」「令和６年度」と、調査年の絞り込み「2025年度」を確認 (https://www.e-stat.go.jp/stat-search/files?toukei=00400002&tstat=000001011648&page=1)。期間は 4月～6月中の任意の日"
+    },
+    {
+      "survey": "児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査",
+      "yearFormat": "fiscal",
+      "evidence": "2026-11-14 に e-Stat の統計表一覧ページで提供分類「令和６年度」と表題「児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査結果(令和６年度)」を確認 (https://www.e-stat.go.jp/stat-search/files?toukei=00400304&tstat=000001112655&page=1)。定義の欄では学校基本調査と並ぶ (期間は 5月1日)"
+    },
+    {
+      "survey": "建設工事施工統計調査",
+      "yearFormat": "fiscal",
+      "evidence": "2026-11-14 に e-Stat の統計表一覧ページで提供分類「年度次」と、調査年の絞り込みが「2024年度」から「2004年度」まですべて年度であることを確認 (https://www.e-stat.go.jp/stat-search/files?toukei=00600130&tstat=000001015810&page=1。政府統計名は建設工事受注動態統計調査、提供統計名が建設工事施工統計調査)。期間は 決算期までの1年間"
+    },
+    {
+      "survey": "都道府県地価調査",
+      "yearFormat": "calendar",
+      "evidence": "2026-11-14 に国土交通省の都道府県地価調査のページで表題「令和８年都道府県地価調査」「令和７年都道府県地価調査」(年で呼ぶ) を確認 (https://www.mlit.go.jp/totikensangyo/totikensangyo_fr4_000044.html)。期間は 7月1日"
+    }
+  ],
+  "itemOverrides": [
+    {
+      "code": "H2101",
+      "yearFormat": "calendar",
+      "reason": "定義ページ H (https://www.e-stat.go.jp/koumoku/koumoku_teigi/H、2026-11-14 取得) は畳数別住宅数 H2101〜H2108 の期間を「年度計」と書くが、同じ節の定義は住宅・土地統計調査の「居住室の畳数別住宅数」で、同調査のほかの 280 項目の期間はすべて「10月1日」。調査時点の住宅数なので暦年として扱う"
+    },
+    {
+      "code": "H2102",
+      "yearFormat": "calendar",
+      "reason": "定義ページ H (https://www.e-stat.go.jp/koumoku/koumoku_teigi/H、2026-11-14 取得) は畳数別住宅数 H2101〜H2108 の期間を「年度計」と書くが、同じ節の定義は住宅・土地統計調査の「居住室の畳数別住宅数」で、同調査のほかの 280 項目の期間はすべて「10月1日」。調査時点の住宅数なので暦年として扱う"
+    },
+    {
+      "code": "H2103",
+      "yearFormat": "calendar",
+      "reason": "定義ページ H (https://www.e-stat.go.jp/koumoku/koumoku_teigi/H、2026-11-14 取得) は畳数別住宅数 H2101〜H2108 の期間を「年度計」と書くが、同じ節の定義は住宅・土地統計調査の「居住室の畳数別住宅数」で、同調査のほかの 280 項目の期間はすべて「10月1日」。調査時点の住宅数なので暦年として扱う"
+    },
+    {
+      "code": "H2104",
+      "yearFormat": "calendar",
+      "reason": "定義ページ H (https://www.e-stat.go.jp/koumoku/koumoku_teigi/H、2026-11-14 取得) は畳数別住宅数 H2101〜H2108 の期間を「年度計」と書くが、同じ節の定義は住宅・土地統計調査の「居住室の畳数別住宅数」で、同調査のほかの 280 項目の期間はすべて「10月1日」。調査時点の住宅数なので暦年として扱う"
+    },
+    {
+      "code": "H2105",
+      "yearFormat": "calendar",
+      "reason": "定義ページ H (https://www.e-stat.go.jp/koumoku/koumoku_teigi/H、2026-11-14 取得) は畳数別住宅数 H2101〜H2108 の期間を「年度計」と書くが、同じ節の定義は住宅・土地統計調査の「居住室の畳数別住宅数」で、同調査のほかの 280 項目の期間はすべて「10月1日」。調査時点の住宅数なので暦年として扱う"
+    },
+    {
+      "code": "H2106",
+      "yearFormat": "calendar",
+      "reason": "定義ページ H (https://www.e-stat.go.jp/koumoku/koumoku_teigi/H、2026-11-14 取得) は畳数別住宅数 H2101〜H2108 の期間を「年度計」と書くが、同じ節の定義は住宅・土地統計調査の「居住室の畳数別住宅数」で、同調査のほかの 280 項目の期間はすべて「10月1日」。調査時点の住宅数なので暦年として扱う"
+    },
+    {
+      "code": "H2107",
+      "yearFormat": "calendar",
+      "reason": "定義ページ H (https://www.e-stat.go.jp/koumoku/koumoku_teigi/H、2026-11-14 取得) は畳数別住宅数 H2101〜H2108 の期間を「年度計」と書くが、同じ節の定義は住宅・土地統計調査の「居住室の畳数別住宅数」で、同調査のほかの 280 項目の期間はすべて「10月1日」。調査時点の住宅数なので暦年として扱う"
+    },
+    {
+      "code": "H2108",
+      "yearFormat": "calendar",
+      "reason": "定義ページ H (https://www.e-stat.go.jp/koumoku/koumoku_teigi/H、2026-11-14 取得) は畳数別住宅数 H2101〜H2108 の期間を「年度計」と書くが、同じ節の定義は住宅・土地統計調査の「居住室の畳数別住宅数」で、同調査のほかの 280 項目の期間はすべて「10月1日」。調査時点の住宅数なので暦年として扱う"
+    }
+  ],
+  "cityIndicators": [
+    {
+      "code": "#A01202",
+      "name": "可住地面積１km2当たり人口密度",
+      "evidence": "2026-11-14 に e-Stat の統計表の公開ページ (https://www.e-stat.go.jp/stat-search/database?statdisp_id=0000020301) で市区町村の表の項目名を確認。指標計算式のページ (https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/A) の同じ符号の項目名「可住地面積1k㎡当たり人口密度」(計算式 総人口／可住地面積 A1101/B1103) と比べた結果: 数字・括弧の全角と半角、km2 と k㎡ の表記だけが違う"
+    },
+    {
+      "code": "#A01601",
+      "name": "外国人人口（人口10万人当たり）",
+      "evidence": "2026-11-14 に e-Stat の統計表の公開ページ (https://www.e-stat.go.jp/stat-search/database?statdisp_id=0000020301) で市区町村の表の項目名を確認。指標計算式のページ (https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/A) の同じ符号の項目名「外国人人口（人口10万人当たり）」(計算式 外国人人口／総人口 A1700/A1101) と比べた結果: 同じ"
+    },
+    {
+      "code": "#A03506",
+      "name": "65歳以上人口割合",
+      "evidence": "2026-11-14 に e-Stat の統計表の公開ページ (https://www.e-stat.go.jp/stat-search/database?statdisp_id=0000020301) で市区町村の表の項目名を確認。指標計算式のページ (https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/A) の同じ符号の項目名「65歳以上人口割合」(計算式 65歳以上人口／総人口 A1303/A1101) と比べた結果: 同じ"
+    },
+    {
+      "code": "#D02206",
+      "name": "課税対象所得（納税義務者1人当たり）",
+      "evidence": "2026-11-14 に e-Stat の統計表の公開ページ (https://www.e-stat.go.jp/stat-search/database?statdisp_id=0000020304) で市区町村の表の項目名を確認。指標計算式のページ (https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/D) の同じ符号の項目名「課税対象所得（納税義務者1人当たり）」(計算式 課税対象所得／納税義務者数（所得割） C120110/C120120) と比べた結果: 同じ"
+    },
+    {
+      "code": "#D02213",
+      "name": "標準財政規模（市町村財政）",
+      "evidence": "2026-11-14 に e-Stat の統計表の公開ページ (https://www.e-stat.go.jp/stat-search/database?statdisp_id=0000020304) で市区町村の表の項目名を確認。指標計算式のページ (https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/D) の同じ符号の項目名「標準財政規模（市町村財政）」(計算式 標準財政規模（市町村財政） D2213) と比べた結果: 同じ"
+    },
+    {
+      "code": "#D02214",
+      "name": "実質赤字比率（市町村財政）",
+      "evidence": "2026-11-14 に e-Stat の統計表の公開ページ (https://www.e-stat.go.jp/stat-search/database?statdisp_id=0000020304) で市区町村の表の項目名を確認。指標計算式のページ (https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/D) の同じ符号の項目名「実質赤字比率（市町村財政）」(計算式 実質赤字比率（市町村財政） D2214) と比べた結果: 同じ"
+    },
+    {
+      "code": "#D02215",
+      "name": "連結実質赤字比率（市町村財政）",
+      "evidence": "2026-11-14 に e-Stat の統計表の公開ページ (https://www.e-stat.go.jp/stat-search/database?statdisp_id=0000020304) で市区町村の表の項目名を確認。指標計算式のページ (https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/D) の同じ符号の項目名「連結実質赤字比率（市町村財政）」(計算式 連結実質赤字比率（市町村財政） D2215) と比べた結果: 同じ"
+    },
+    {
+      "code": "#H02103",
+      "name": "１住宅当たりの延べ面積",
+      "evidence": "2026-11-14 に e-Stat の統計表の公開ページ (https://www.e-stat.go.jp/stat-search/database?statdisp_id=0000020308) で市区町村の表の項目名を確認。指標計算式のページ (https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/H) の同じ符号の項目名「1住宅当たりの延べ面積」(計算式 1住宅当たり延べ面積 H2130) と比べた結果: 数字・括弧の全角と半角、km2 と k㎡ の表記だけが違う"
+    },
+    {
+      "code": "#H06101",
+      "name": "小売店数（事業所・企業統計調査結果）（人口千人当たり）",
+      "evidence": "2026-11-14 に e-Stat の統計表の公開ページ (https://www.e-stat.go.jp/stat-search/database?statdisp_id=0000020308) で市区町村の表の項目名を確認。指標計算式のページ (https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/H) の同じ符号の項目名「小売店数(事業所・企業統計調査結果)（人口千人当たり）」(計算式 小売店数（飲食店を除く）（事業所・企業統計調査結果）／総人口 H6101/A1101) と比べた結果: 数字・括弧の全角と半角、km2 と k㎡ の表記だけが違う"
+    },
+    {
+      "code": "#H06107",
+      "name": "飲食店数（事業所・企業統計調査結果）（人口千人当たり）",
+      "evidence": "2026-11-14 に e-Stat の統計表の公開ページ (https://www.e-stat.go.jp/stat-search/database?statdisp_id=0000020308) で市区町村の表の項目名を確認。指標計算式のページ (https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/H) の同じ符号の項目名「飲食店数(事業所・企業統計調査結果）（人口千人当たり）」(計算式 飲食店数（事業所・企業統計調査結果）／総人口 H6102/A1101) と比べた結果: 数字・括弧の全角と半角、km2 と k㎡ の表記だけが違う"
+    },
+    {
+      "code": "#H06109",
+      "name": "大型小売店数（事業所・企業統計調査結果）（人口10万人当たり）",
+      "evidence": "2026-11-14 に e-Stat の統計表の公開ページ (https://www.e-stat.go.jp/stat-search/database?statdisp_id=0000020308) で市区町村の表の項目名を確認。指標計算式のページ (https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/H) の同じ符号の項目名「大型小売店数(事業所・企業統計調査結果）（人口10万人当たり）」(計算式 大型小売店数（事業所・企業統計調査結果）／総人口 H6103/A1101) と比べた結果: 数字・括弧の全角と半角、km2 と k㎡ の表記だけが違う"
+    },
+    {
+      "code": "#H06111",
+      "name": "百貨店数（事業所・企業統計調査結果）（人口10万人当たり）",
+      "evidence": "2026-11-14 に e-Stat の統計表の公開ページ (https://www.e-stat.go.jp/stat-search/database?statdisp_id=0000020308) で市区町村の表の項目名を確認。指標計算式のページ (https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/H) の同じ符号の項目名「百貨店数(事業所・企業統計調査結果）（人口10万人当たり）」(計算式 百貨店数（事業所・企業統計調査結果）／総人口 H6104/A1101) と比べた結果: 数字・括弧の全角と半角、km2 と k㎡ の表記だけが違う"
+    },
+    {
+      "code": "#I0910103",
+      "name": "一般病院数（人口10万人当たり）",
+      "evidence": "2026-11-14 に e-Stat の統計表の公開ページ (https://www.e-stat.go.jp/stat-search/database?statdisp_id=0000020309) で市区町村の表の項目名を確認。指標計算式のページ (https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/I) の同じ符号の項目名「一般病院数（人口10万人当たり）」(計算式 一般病院数／総人口 I510120/A1101) と比べた結果: 同じ"
+    },
+    {
+      "code": "#J02205",
+      "name": "介護老人福祉施設（詳細票）（65歳以上人口10万人当たり）",
+      "evidence": "2026-11-14 に e-Stat の統計表の公開ページ (https://www.e-stat.go.jp/stat-search/database?statdisp_id=0000020310) で市区町村の表の項目名を確認。指標計算式のページ (https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/J) の同じ符号の項目名「介護老人福祉施設数（65歳以上人口10万人当たり）」(計算式 介護老人福祉施設数（詳細票）／65歳以上人口 J230121/A1303) と比べた結果: 都道府県の指標の項目名は「詳細票」を書かないが、計算式が「介護老人福祉施設数（詳細票）／65歳以上人口」で、市区町村の項目名の「詳細票」「65歳以上人口10万人当たり」と同じ定義"
+    },
+    {
+      "code": "#J02206",
+      "name": "介護老人福祉施設（基本票）（65歳以上人口10万人当たり）",
+      "evidence": "2026-11-14 に e-Stat の統計表の公開ページ (https://www.e-stat.go.jp/stat-search/database?statdisp_id=0000020310) で市区町村の表の項目名を確認。指標計算式のページ (https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/J) の同じ符号の項目名「介護老人福祉施設数(基本票)（65歳以上人口10万人当たり）」(計算式 介護老人福祉施設数（基本票）／65歳以上人口 J230127/A1303) と比べた結果: 「施設」と「施設数」、括弧の全角・半角の表記だけが違い、計算式「介護老人福祉施設数（基本票）／65歳以上人口」と同じ定義"
+    },
+    {
+      "code": "#K04101",
+      "name": "交通事故発生件数（人口10万人当たり）",
+      "evidence": "2026-11-14 に e-Stat の統計表の公開ページ (https://www.e-stat.go.jp/stat-search/database?statdisp_id=0000020311) で市区町村の表の項目名を確認。指標計算式のページ (https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/K) の同じ符号の項目名「交通事故発生件数（人口10万人当たり）」(計算式 交通事故発生件数／総人口 K3101/A1101) と比べた結果: 同じ"
+    },
+    {
+      "code": "#K06101",
+      "name": "刑法犯認知件数（人口千人当たり）",
+      "evidence": "2026-11-14 に e-Stat の統計表の公開ページ (https://www.e-stat.go.jp/stat-search/database?statdisp_id=0000020311) で市区町村の表の項目名を確認。指標計算式のページ (https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/K) の同じ符号の項目名「刑法犯認知件数（人口千人当たり）」(計算式 刑法犯認知件数／総人口 K4201/A1101) と比べた結果: 同じ"
+    }
+  ],
+  "undetermined": [
+    {
+      "key": "abandoned-cultivated-land-area",
+      "reason": "C3109 期間「センサス実施年の2月1日」(農業構造統計（農林業センサス、世界農林業センサス）) は年度か暦年か決まらない"
+    },
+    {
+      "key": "agricultural-employment-population",
+      "reason": "C310410 期間「センサス 実施年の 2月1日」(農林業センサス、農業センサス) は年度か暦年か決まらない"
+    },
+    {
+      "key": "agricultural-income-ratio",
+      "reason": "L210101 期間「年計」(農業経営統計調査) は年度か暦年か決まらない、L2100 期間「年計」(農業経営統計調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "agricultural-output-per-employed-person",
+      "reason": "C310410 期間「センサス 実施年の 2月1日」(農林業センサス、農業センサス) は年度か暦年か決まらない"
+    },
+    {
+      "key": "annual-income-per-household",
+      "reason": "L7610 期間「調査前年11月～調査年10月」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "annual-minimum-relative-humidity",
+      "reason": "B4112 期間「年間」(過去の気象データ) は年度か暦年か決まらない"
+    },
+    {
+      "key": "assessed-residential-land-area",
+      "reason": "B120103 期間「1月1日」(固定資産の価格等の概要調書（土地）) は年度か暦年か決まらない"
+    },
+    {
+      "key": "average-life-expectancy-female-20",
+      "reason": "I1202 期間「─」(完全生命表、都道府県別生命表、市区町村別生命表) は年度か暦年か決まらない"
+    },
+    {
+      "key": "average-life-expectancy-female-65",
+      "reason": "I1502 期間「─」(完全生命表、都道府県別生命表、市区町村別生命表) は年度か暦年か決まらない"
+    },
+    {
+      "key": "average-life-expectancy-male",
+      "reason": "I1201 期間「─」(完全生命表、都道府県別生命表、市区町村別生命表) は年度か暦年か決まらない"
+    },
+    {
+      "key": "average-propensity-to-consume-of-farm-households",
+      "reason": "L2203 期間「年間」(農業経営統計調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "average-road-traffic-volume",
+      "reason": "H7160 期間「－」(全国道路・街路交通情勢調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "car-ownership-multi-person-households-per-1000",
+      "reason": "L5108 期間「10月31日」(全国消費実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "core-agricultural-workers",
+      "reason": "C310510 期間「センサス 実施年の 2月1日」(農林業センサス、農業センサス) は年度か暦年か決まらない"
+    },
+    {
+      "key": "cultivated-area",
+      "reason": "C3107 期間「7月15日」(耕地及び作付面積統計) は年度か暦年か決まらない"
+    },
+    {
+      "key": "cultivated-land-area-per-household",
+      "reason": "C3107 期間「7月15日」(耕地及び作付面積統計) は年度か暦年か決まらない"
+    },
+    {
+      "key": "cultivated-land-area-ratio",
+      "reason": "C3107 期間「7月15日」(耕地及び作付面積統計) は年度か暦年か決まらない"
+    },
+    {
+      "key": "current-deposit-balance-ratio-multi-person-households",
+      "reason": "L730102 期間「10月末日」(全国家計構造調査) は年度か暦年か決まらない、L730101 期間「10月末日」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "current-liabilities-balance-multi-person-households-per-household",
+      "reason": "L740101 期間「10月末日」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "current-life-insurance-balance-ratio-multi-person-households",
+      "reason": "L730103 期間「10月末日」(全国家計構造調査) は年度か暦年か決まらない、L730101 期間「10月末日」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "current-savings-balance-multi-person-households",
+      "reason": "L430101 期間「11月30日」(全国消費実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "current-securities-balance-ratio-multi-person-households",
+      "reason": "L730104 期間「10月末日」(全国家計構造調査) は年度か暦年か決まらない、L730101 期間「10月末日」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "education-department-staff",
+      "reason": "D1204 期間「4月1日」(地方公共団体定員管理調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "elderly-on-public-assistance-per-1000-65plus",
+      "reason": "J110702 期間「7月31日」(被保護者調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "farm-household-expenditure-per-month",
+      "reason": "L2201 期間「年計」(農業経営統計調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "financial-assets-balance-multi-person-households",
+      "reason": "L730101 期間「10月末日」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "financial-debt-balance",
+      "reason": "L740101 期間「10月末日」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "fire-department-branch-count-per-100-km2",
+      "reason": "K1104 期間「4月1日」(消防白書) は年度か暦年か決まらない"
+    },
+    {
+      "key": "fire-department-count-per-100-km2",
+      "reason": "K1101 期間「4月1日」(消防白書) は年度か暦年か決まらない"
+    },
+    {
+      "key": "fire-department-emergency-car-count-per-100k",
+      "reason": "K1209 期間「4月1日」(救急・救助の現況) は年度か暦年か決まらない"
+    },
+    {
+      "key": "fire-department-employees",
+      "reason": "D1203 期間「4月1日」(地方公共団体定員管理調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "fire-department-member-count-per-100-thousand-people",
+      "reason": "K1103 期間「4月1日」(消防年報) は年度か暦年か決まらない"
+    },
+    {
+      "key": "fire-department-pump-car-count-per-100-thousand-people",
+      "reason": "K1106 期間「4月1日」(消防年報) は年度か暦年か決まらない"
+    },
+    {
+      "key": "fire-department-water-count-per-100-thousand-people",
+      "reason": "K1107 期間「4月1日」(消防年報) は年度か暦年か決まらない"
+    },
+    {
+      "key": "fire-related-personnel-count-per-100k",
+      "reason": "K1103 期間「4月1日」(消防年報) は年度か暦年か決まらない、K1105 期間「4月1日」(消防白書) は年度か暦年か決まらない"
+    },
+    {
+      "key": "foreign-resident-population",
+      "reason": "A2201 期間「1月1日」(住民基本台帳に基づく人口、人口動態及び世帯数調査（住民基本台帳人口要覧）) は年度か暦年か決まらない"
+    },
+    {
+      "key": "frequency-of-occupational-accidents",
+      "reason": "F8101 期間「年間」(労働災害動向調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "garbage-collection-population",
+      "reason": "H5608 期間「―」(一般廃棄物処理事業実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "high-school-new-graduates-employment-rate",
+      "reason": "F3322 期間「6月末日までの計」(新規学卒者（高校・中学）の職業紹介状況) は年度か暦年か決まらない、F3302 期間「6月末日までの計」(新規学卒者（高校・中学）の職業紹介状況) は年度か暦年か決まらない"
+    },
+    {
+      "key": "high-school-new-graduates-job-opening-ratio",
+      "reason": "F3312 期間「6月末日までの計」(新規学卒者（高校・中学）の職業紹介状況) は年度か暦年か決まらない、F3302 期間「6月末日までの計」(新規学卒者（高校・中学）の職業紹介状況) は年度か暦年か決まらない"
+    },
+    {
+      "key": "home-helper-users-per-office",
+      "reason": "J230156 期間「9月」(介護サービス施設・事業所調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "household-head-annual-income-per-household",
+      "reason": "L761101 期間「調査前年11月～調査年10月」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "household-survey-clothing-footwear-expenditure",
+      "reason": "L720105 期間「2か月平均」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "household-survey-consumption-expenditure",
+      "reason": "L7201 期間「2か月平均」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "household-survey-culture-recreation-expenditure",
+      "reason": "L720109 期間「2か月平均」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "household-survey-education-expenditure",
+      "reason": "L720108 期間「2か月平均」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "household-survey-food-expenditure",
+      "reason": "L720101 期間「2か月平均」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "household-survey-furniture-household-goods-expenditure",
+      "reason": "L720104 期間「2か月平均」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "household-survey-healthcare-expenditure",
+      "reason": "L720106 期間「2か月平均」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "household-survey-housing-expenditure",
+      "reason": "L720102 期間「2か月平均」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "household-survey-other-expenditure",
+      "reason": "L720110 期間「2か月平均」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "household-survey-transport-communication-expenditure",
+      "reason": "L720107 期間「2か月平均」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "household-survey-utilities-expenditure",
+      "reason": "L720103 期間「2か月平均」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "housing-land-liabilities-ratio-multi-person-households",
+      "reason": "L740102 期間「10月末日」(全国家計構造調査) は年度か暦年か決まらない、L740101 期間「10月末日」(全国家計構造調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "japanese-entries",
+      "reason": "A5201 期間「前年10月から当年9月」(人口推計) は年度か暦年か決まらない"
+    },
+    {
+      "key": "kei-car-count",
+      "reason": "H7207 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "kindergarten-education-diffusion-rate",
+      "reason": "指標 #E0910101 が指標計算式のページに無い"
+    },
+    {
+      "key": "land-productivity-per-ha",
+      "reason": "C3107 期間「7月15日」(耕地及び作付面積統計) は年度か暦年か決まらない"
+    },
+    {
+      "key": "life-expectancy-0-female",
+      "reason": "I1102 期間「─」(完全生命表、都道府県別生命表、市区町村別生命表) は年度か暦年か決まらない"
+    },
+    {
+      "key": "life-expectancy-0-male",
+      "reason": "I1101 期間「─」(完全生命表、都道府県別生命表、市区町村別生命表) は年度か暦年か決まらない"
+    },
+    {
+      "key": "life-expectancy-65-male",
+      "reason": "I1501 期間「─」(完全生命表、都道府県別生命表、市区町村別生命表) は年度か暦年か決まらない"
+    },
+    {
+      "key": "life-expectancy-at-birth-female",
+      "reason": "I1102 期間「─」(完全生命表、都道府県別生命表、市区町村別生命表) は年度か暦年か決まらない"
+    },
+    {
+      "key": "life-expectancy-at-birth-male",
+      "reason": "I1101 期間「─」(完全生命表、都道府県別生命表、市区町村別生命表) は年度か暦年か決まらない"
+    },
+    {
+      "key": "light-and-small-special-vehicle-count",
+      "reason": "H7210 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "lowest-temperature",
+      "reason": "B4103 期間「年間」(調査名なし) は年度か暦年か決まらない"
+    },
+    {
+      "key": "maximum-snow-depth",
+      "reason": "B4110 期間「寒候期」(調査名なし) は年度か暦年か決まらない"
+    },
+    {
+      "key": "maximum-temperature",
+      "reason": "B4102 期間「年間」(調査名なし) は年度か暦年か決まらない"
+    },
+    {
+      "key": "microwave-ownership-multi-person-households-per-1000",
+      "reason": "L5103 期間「10月31日」(全国消費実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "migrant-worker-ratio-sales-farm",
+      "reason": "C310612 期間「センサス 実施年の 2月1日」(農林業センサス、農業センサス、農業構造動態調査報告書) は年度か暦年か決まらない、C310410 期間「センサス 実施年の 2月1日」(農林業センサス、農業センサス) は年度か暦年か決まらない"
+    },
+    {
+      "key": "minicar-count",
+      "reason": "H720904 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "mobile-phone-ownership-multi-person-households-per-1000",
+      "reason": "L5112 期間「10月31日」(全国消費実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "moped-count",
+      "reason": "H7209 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "moped-count-50-90cc",
+      "reason": "H720902 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "moped-count-50cc-or-less",
+      "reason": "H720901 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "moped-count-over-90cc",
+      "reason": "H720903 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "motorcycle-count",
+      "reason": "H7208 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "municipal-general-administration-staff",
+      "reason": "D1202 期間「4月1日」(地方公共団体定員管理調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "municipality-count",
+      "reason": "D110101 期間「4月1日」(全国地方公共団体コード) は年度か暦年か決まらない"
+    },
+    {
+      "key": "night-soil-treatment-population-ratio",
+      "reason": "H550701 期間「―」(一般廃棄物処理事業実態調査) は年度か暦年か決まらない、A2301 期間「1月1日」(住民基本台帳に基づく人口、人口動態及び世帯数調査（住民基本台帳人口要覧）) は年度か暦年か決まらない"
+    },
+    {
+      "key": "night-soil-treatment-volume",
+      "reason": "H5509 期間「―」(一般廃棄物処理事業実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "non-agricultural-income-ratio",
+      "reason": "L210102 期間「年計」(農業経営統計調査) は年度か暦年か決まらない、L2100 期間「年計」(農業経営統計調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "non-flush-toilet-population-city",
+      "reason": "H550701 期間「―」(一般廃棄物処理事業実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "number-of-individual-fishery-management",
+      "reason": "C312301 期間「調査前年の 11月～調査 年10月」(調査名なし) は年度か暦年か決まらない"
+    },
+    {
+      "key": "nursery-education-diffusion-rate",
+      "reason": "指標 #E0910102 が指標計算式のページに無い"
+    },
+    {
+      "key": "nursery-waiting-children-count",
+      "reason": "J250502 期間「4月1日」(保育所等関連状況取りまとめ) は年度か暦年か決まらない"
+    },
+    {
+      "key": "nursing-home-residents-per-1000-65plus",
+      "reason": "J230125 期間「9月30日 24時」(介護サービス施設・事業所調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "pc-ownership-multi-person-households-per-1000",
+      "reason": "L5114 期間「10月31日」(全国消費実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "per-taxpayer-income",
+      "reason": "C120110 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない、C120120 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "per-taxpayer-taxable-income",
+      "reason": "C120110 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない、C120120 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "piano-ownership-multi-person-households-per-1000",
+      "reason": "L5107 期間「10月31日」(全国消費実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "police-department-staff",
+      "reason": "D1205 期間「4月1日」(地方公共団体定員管理調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "police-officer-count",
+      "reason": "K4102 期間「4月1日」(地方公共団体定員管理調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "police-officer-count-per-population",
+      "reason": "K4102 期間「4月1日」(地方公共団体定員管理調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "prefectural-general-administration-staff",
+      "reason": "D1201 期間「4月1日」(地方公共団体定員管理調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "public-enterprise-accounting-staff",
+      "reason": "D1206 期間「4月1日」(地方公共団体定員管理調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "resident-registry-households-japanese",
+      "reason": "A7103 期間「1月1日」(住民基本台帳に基づく人口、人口動態及び世帯数調査（住民基本台帳人口要覧）) は年度か暦年か決まらない"
+    },
+    {
+      "key": "resident-registry-population-japanese",
+      "reason": "A2101 期間「1月1日」(国勢調査、人口推計) は年度か暦年か決まらない"
+    },
+    {
+      "key": "resident-registry-population-japanese-female",
+      "reason": "A210102 期間「1月1日」(国勢調査、人口推計) は年度か暦年か決まらない"
+    },
+    {
+      "key": "resident-registry-population-japanese-male",
+      "reason": "A210101 期間「1月1日」(国勢調査、人口推計) は年度か暦年か決まらない"
+    },
+    {
+      "key": "resident-registry-population-total",
+      "reason": "A2301 期間「1月1日」(住民基本台帳に基づく人口、人口動態及び世帯数調査（住民基本台帳人口要覧）) は年度か暦年か決まらない"
+    },
+    {
+      "key": "room-aircon-ownership-multi-person-households-per-1000",
+      "reason": "L5104 期間「10月31日」(全国消費実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "sanitation-total-population",
+      "reason": "H5507 期間「―」(一般廃棄物処理事業実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "savings-deposit-balance",
+      "reason": "L430102 期間「11月30日」(全国消費実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "securities-balance",
+      "reason": "L430104 期間「11月30日」(全国消費実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "septic-tank-flush-rate",
+      "reason": "H5508 期間「―」(一般廃棄物処理事業実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "small-scale-farm-households",
+      "reason": "C310234 期間「センサス 実施年の 2月1日」(農林業センサス、農業センサス) は年度か暦年か決まらない"
+    },
+    {
+      "key": "smartphone-ownership-multi-person-households-per-1000",
+      "reason": "L5122 期間「10月31日」(全国消費実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "social-increase",
+      "reason": "A5302 期間「前年10月から当年9月」(人口推計) は年度か暦年か決まらない"
+    },
+    {
+      "key": "social-increase-rate",
+      "reason": "A5301 期間「前年10月から当年9月」(人口推計) は年度か暦年か決まらない"
+    },
+    {
+      "key": "specified-small-moped-count",
+      "reason": "H720905 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "stereo-cd-md-radio-ownership-multi-person-households-per-1000",
+      "reason": "L5116 期間「10月31日」(全国消費実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "tablet-ownership-multi-person-households-per-1000",
+      "reason": "L5121 期間「10月31日」(全国消費実態調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "taxable-income-total",
+      "reason": "C120110 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "taxpayer-count-equal",
+      "reason": "C120130 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "taxpayer-count-income",
+      "reason": "C120120 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "taxpayer-ratio-per-pref-resident",
+      "reason": "C120120 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "three-wheeled-light-vehicle-count",
+      "reason": "H721002 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "total-area-prefecture-ratio",
+      "reason": "市区町村の指標 #B01101 の項目名は「総面積（都道府県面積に占める割合）」で、同じ符号の都道府県の指標「面積割合（全国面積に占める割合）」と分母が違う (2026-11-14 に https://www.e-stat.go.jp/stat-search/database?statdisp_id=0000020302 で確認)。市区町村の指標の計算式は公開されていないので、都道府県の計算式を当てはめず、cityIndicators にも足さない"
+    },
+    {
+      "key": "total-assessed-land-area",
+      "reason": "B1201 期間「1月1日」(固定資産の価格等の概要調書（土地）) は年度か暦年か決まらない"
+    },
+    {
+      "key": "total-assessed-land-area-ratio",
+      "reason": "B1201 期間「1月1日」(固定資産の価格等の概要調書（土地）) は年度か暦年か決まらない"
+    },
+    {
+      "key": "total-assessed-land-area-ratio-field",
+      "reason": "B120102 期間「1月1日」(固定資産の価格等の概要調書（土地）) は年度か暦年か決まらない、B1201 期間「1月1日」(固定資産の価格等の概要調書（土地）) は年度か暦年か決まらない"
+    },
+    {
+      "key": "total-assessed-land-area-ratio-paddy",
+      "reason": "B120101 期間「1月1日」(固定資産の価格等の概要調書（土地）) は年度か暦年か決まらない、B1201 期間「1月1日」(固定資産の価格等の概要調書（土地）) は年度か暦年か決まらない"
+    },
+    {
+      "key": "total-assessed-land-area-ratio-residential",
+      "reason": "B120103 期間「1月1日」(固定資産の価格等の概要調書（土地）) は年度か暦年か決まらない、B1201 期間「1月1日」(固定資産の価格等の概要調書（土地）) は年度か暦年か決まらない"
+    },
+    {
+      "key": "total-farm-household-income",
+      "reason": "L2100 期間「年計」(農業経営統計調査) は年度か暦年か決まらない"
+    },
+    {
+      "key": "two-wheeled-light-vehicle-count",
+      "reason": "H721001 期間「7月1日」(市町村税課税状況等の調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "vehicle-kilometers-traveled",
+      "reason": "H7150 期間「4月1日」(道路交通センサス) は年度か暦年か決まらない"
+    },
+    {
+      "key": "voter-list-registrants",
+      "reason": "D1212 期間「9月1日」(選挙人名簿及び在外選挙人名簿登録者数) は年度か暦年か決まらない"
+    },
+    {
+      "key": "voter-turnout-city-assembly",
+      "reason": "G6307 期間「選挙期日」(地方選挙結果調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "voter-turnout-council-district",
+      "reason": "G6304 期間「選挙期日」(衆議院議員総選挙 最高裁判所裁判官国民審査結果調、参議院議員通常選挙結果調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "voter-turnout-council-proportional",
+      "reason": "G6303 期間「選挙期日」(衆議院議員総選挙 最高裁判所裁判官国民審査結果調、参議院議員通常選挙結果調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "voter-turnout-governor",
+      "reason": "G6306 期間「選挙期日」(地方選挙結果調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "voter-turnout-house-proportional",
+      "reason": "G6302 期間「選挙期日」(衆議院議員総選挙 最高裁判所裁判官国民審査結果調、参議院議員通常選挙結果調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "voter-turnout-house-single",
+      "reason": "G6301 期間「選挙期日」(衆議院議員総選挙 最高裁判所裁判官国民審査結果調、参議院議員通常選挙結果調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "voter-turnout-mayor",
+      "reason": "G6308 期間「選挙期日」(地方選挙結果調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "voter-turnout-pref-assembly",
+      "reason": "G6305 期間「選挙期日」(地方選挙結果調) は年度か暦年か決まらない"
+    },
+    {
+      "key": "work-accident-severity",
+      "reason": "F8102 期間「年間」(労働災害動向調査) は年度か暦年か決まらない"
+    }
+  ]
+}

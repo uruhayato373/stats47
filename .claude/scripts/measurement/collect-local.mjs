@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 /**
- * collect-local.mjs — 認証付き計測を Mac で直接取得する入口 (2026-10-19。GitHub Actions の
- * authenticated-measurement.yml の collect + record の summarize 段に当たる)。
+ * collect-local.mjs — 認証付き計測を Mac で直接取得する入口 (2026-10-19。取得はこの入口だけで、CI では取得しない)。
  *
- * 取得元ごとに、Mac の専用プロファイルからセッションを取り出し (bootstrap-session.mjs。Secrets へは送らない)、
- * collect.mjs --local --vault で取得して証跡を private R2 の保管庫へ書き、最後に summarize.mjs で
+ * 取得元ごとに、Mac の専用プロファイルからセッションを取り出し (bootstrap-session.mjs。この Mac の外へは送らない)、
+ * collect.mjs --vault で取得して証跡を private R2 の保管庫へ書き、最後に summarize.mjs で
  * data/authenticated/{latest,revenue-history}.json と販売台帳を更新する。git への記録は呼び元
  * (scripts/scheduled/measurement-collect-local.sh) が定期実行専用の clone で行う。
  *
@@ -36,9 +35,9 @@ for (const key of ['MEASUREMENT_VAULT_KEY', 'R2_S3_ENDPOINT', 'R2_ACCESS_KEY_ID'
   if (!process.env[key]) throw new Error(`env_missing: ${key}`);
 }
 
-// summarize.mjs は実行番号で今回の結果だけを選ぶ (CI の GITHUB_RUN_ID と同じ役割)。
+// summarize.mjs は実行番号 (GITHUB_RUN_ID の名前で渡す) で今回の結果だけを選ぶ。
 const runId = String(Date.now());
-// 保管庫への書き込みは CI と Mac の定期実行だけに許す (vault.mjs)
+// 保管庫への書き込みは Mac の定期実行だけに許す (vault.mjs)
 // MEASUREMENT_SOURCES: 一部の取得元だけを取り直したとき、取らなかった取得元の記録を消さない (summarize.mjs)
 const env = { ...process.env, GITHUB_RUN_ID: runId, GITHUB_RUN_ATTEMPT: '1', MEASUREMENT_VAULT_WRITER: 'mac', MEASUREMENT_SOURCES: names.join(',') };
 const publicDir = join(ROOT, '.local/authenticated-ci-public');
@@ -50,7 +49,7 @@ const lastLine = text => String(text ?? '').trim().split('\n').pop();
 
 for (const name of names) {
   const source = SOURCES[name];
-  const collectArgs = [name, '--local', '--vault'];
+  const collectArgs = [name, '--vault'];
   if (source.transport !== 'api') {
     // 取り出せなければ collect.mjs を動かさない。summarize.mjs が「結果なし」として失敗に数える。
     const boot = node('.claude/scripts/measurement/bootstrap-session.mjs', [name, '--root', MAIN_ROOT], 180000);

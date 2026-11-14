@@ -29,6 +29,7 @@ import { datasetPath } from "../../../config/datasets.mjs";
 import { KNOWN_RANKING_KEYS } from "../../ranking/src/config/known-ranking-keys";
 import { METRICS_REGISTRY } from "../src/registry";
 import { resolveChartDisplayScale, type ChartDisplayScale } from "../src/unit/chart-display-scale";
+import { auditAuthoredDisplay, type MetricDisplayInput } from "../src/unit/metric-display-scale";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 export const LEDGER_PATH = resolve(ROOT, datasetPath("metrics.display-units"));
@@ -171,6 +172,27 @@ export function checkLedger(ledger: DisplayUnitLedger, activeKeys: Iterable<stri
   return { errors, warnings };
 }
 
+/**
+ * 指標の定義が書いた表示単位 (`display.displayUnit`) を、台帳の最新年の最大・最小に照らす。
+ * 台帳に値がまだ無い指標 (未公開・港湾別) は検査しない。問題は「[種類] キー: …」で返す。
+ */
+export function checkAuthoredDisplays(ledger: DisplayUnitLedger, metrics: Iterable<MetricDisplayInput & { key: string }>): string[] {
+  const byKey = new Map(ledger.rows.map((r) => [r.key, r]));
+  const errors: string[] = [];
+  for (const metric of metrics) {
+    const row = byKey.get(metric.key);
+    if (!metric.display?.displayUnit || !row || row.max === null) continue;
+    // 単位を直して再取り込みを待つ指標は、台帳の最大・最小が古い単位の値なので照らさない ([unit-changed] の警告が出る)
+    if ((metric.unit ?? "") !== row.unit) continue;
+    const problems = auditAuthoredDisplay(metric, {
+      max: Math.max(Math.abs(row.max), Math.abs(row.min ?? 0)), minNonZeroAbs: row.minNonZeroAbs,
+      ruleFactor: row.factor, ruleDecimals: row.decimals, ruleRescales: row.reason === "rescaled",
+    });
+    for (const problem of problems) errors.push(problem.replace(/^(\[[a-z-]+\]) /, `$1 ${metric.key}: `));
+  }
+  return errors.sort();
+}
+
 async function main() {
   if (!process.argv.includes("--check")) return build(process.argv.includes("--offline"));
   const ledger = JSON.parse(readFileSync(LEDGER_PATH, "utf8")) as DisplayUnitLedger;
@@ -183,6 +205,12 @@ async function main() {
   if (errors.length) {
     console.error(`[display-units] 台帳が規則と食い違う ${errors.length} 件 (規則を変えたなら --offline で当て直す):`);
     for (const e of errors.slice(0, 30)) console.error("  " + e);
+    process.exit(1);
+  }
+  const displayErrors = checkAuthoredDisplays(ledger, Object.values(METRICS_REGISTRY));
+  if (displayErrors.length) {
+    console.error(`[display-units] 指標の定義の表示単位 (display) が最新年の値に合わない ${displayErrors.length} 件 (その指標の定義の display を直す):`);
+    for (const e of displayErrors) console.error("  " + e);
     process.exit(1);
   }
   console.log(`[display-units] ✓ 台帳 ${ledger.rows.length} 指標と設定・規則が一致`);

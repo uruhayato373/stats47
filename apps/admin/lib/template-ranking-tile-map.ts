@@ -2,7 +2,7 @@ import { renderAll47TileSvg } from '../../remotion/src/features/data-cards/all47
 import { resolveTileScale } from '../../remotion/src/features/data-cards/tile-scale';
 import { LIGHT_THEME, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
 import { rankingRows } from './template-ranking-bars';
-import { assertRankingRows, sampleRankingChart, type RankingChart } from './template-ranking-data';
+import { assertRankingRows, isCapitalCityChart, sampleRankingChart, type RankingChart } from './template-ranking-data';
 
 export const RANKING_TILE_MAP_SAMPLE_ID = 'maximum-temperature-tile-map';
 
@@ -20,6 +20,10 @@ export function renderTileMapChart(chart: RankingChart, theme: ChartTheme = LIGH
   if (!scale) throw Error('タイルマップの配色を解決できません。');
   return renderAll47TileSvg(
     rows.map((row) => ({ areaCode: row.area_code, areaName: row.area_name, value: row.value })),
-    { title: chart.title, year: chart.yearLabel, unit: chart.unit, source: chart.source, note: chart.note, scale, formatValue: chart.formatValue, theme, baseAreaCode: chart.baseAreaCode }
+    {
+      title: chart.title, year: chart.yearLabel, unit: chart.unit, source: chart.source, note: chart.note, scale, formatValue: chart.formatValue, theme, baseAreaCode: chart.baseAreaCode,
+      // Values of the prefectural capitals (the condition line says so) read by city: heading, tiles and legend counts.
+      capitalCities: isCapitalCityChart(chart),
+    }
   );
 }

@@ -108,6 +108,7 @@ jobs:
             data/affiliate/compliance-latest.json
             data/affiliate/relevance-latest.json
             data/affiliate/placement-map-latest.json
+            .local/affiliate-placement-map/pages-latest.json
             data/affiliate/affiliate-portfolio-latest.json
           retention-days: 30
 

@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-nf0fc2a7eb326",
+  "production": {
+    "id": "NCI-00484",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "家政・家事を学んだ人\n1位は京都府",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無地の家事学習ノートと裁縫用具、家計の無文字メモを描く。人物・手は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/nf0fc2a7eb326 2026-10-23公開API本文照合。記事題名「【2021年版】家政・家事をした人が多い県は？ 1位は京都府｜都道府県ランキング」。本文中の「京都府」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "7fc72f07663b38b3cf80aa6f4291019c188238dd15bf4483be9e26e598e29c82",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nf0fc2a7eb326/revisions/7fc72f07663b38b3cf80aa6f4291019c188238dd15bf4483be9e26e598e29c82.png"
+      },
+      "bytes": 83156,
+      "id": "7fc72f07663b38b3cf80aa6f4291019c188238dd15bf4483be9e26e598e29c82",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:44.405Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312775285/rectangle_large_type_2_ce2321d3506ec2dc542e338a96c12801.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "7fc72f07663b38b3cf80aa6f4291019c188238dd15bf4483be9e26e598e29c82"
+      }
+    },
+    {
+      "sha256": "b54f9d817227ba1cf3bd969af7bf1c568b027d507435e1626d90953eadd3975d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nf0fc2a7eb326/revisions/b54f9d817227ba1cf3bd969af7bf1c568b027d507435e1626d90953eadd3975d.png"
+      },
+      "bytes": 116085,
+      "id": "b54f9d817227ba1cf3bd969af7bf1c568b027d507435e1626d90953eadd3975d",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:18:20.936Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "6181e51927789bdd5f7cdb234b79c93c2375ab5c9f551d62d5bab6a8918919db"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/study-participation-rate-home-economics/values.json",
+        "sourceSha256": "76ac407e51360c3574428eca8e0bf5774926602dd0ed41d10f96fedd8277fe63",
+        "input": {
+          "sha256": "6181e51927789bdd5f7cdb234b79c93c2375ab5c9f551d62d5bab6a8918919db",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-nf0fc2a7eb326/inputs/6181e51927789bdd5f7cdb234b79c93c2375ab5c9f551d62d5bab6a8918919db.json"
+          },
+          "bytes": 6602
+        }
+      }
+    },
+    {
+      "sha256": "89625ffeaedcc2c477471118f23df3beb6c7474a8e7daccd69b35971a14b3d60",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-nf0fc2a7eb326/revisions/89625ffeaedcc2c477471118f23df3beb6c7474a8e7daccd69b35971a14b3d60.png"
+      },
+      "bytes": 1737477,
+      "id": "89625ffeaedcc2c477471118f23df3beb6c7474a8e7daccd69b35971a14b3d60",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-017d835dfe2b",
+      "createdAt": "2026-10-23T13:37:51.339Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "44913ac451e845d1bcf410d24b3d0ca549e649d776b33b8bf1fef1adf6d52dd8"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T13:40:11.278Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "44913ac451e845d1bcf410d24b3d0ca549e649d776b33b8bf1fef1adf6d52dd8",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-nf0fc2a7eb326/inputs/44913ac451e845d1bcf410d24b3d0ca549e649d776b33b8bf1fef1adf6d52dd8.json"
+          },
+          "bytes": 8740
+        },
+        "production": {
+          "id": "NCI-00484",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "017d835dfe2b88be21d67e55513f210264be1893bfee72d41263b93d3f29b648"
+        }
+      }
+    }
+  ]
+}

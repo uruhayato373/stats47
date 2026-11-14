@@ -5,7 +5,7 @@ import { resolveMetricColor } from '../../remotion/src/features/data-cards/tile-
 import { rankingRows } from './template-ranking-bars';
 import { RANKING_SAMPLE_METRIC, RANKING_SAMPLE_PRESENTATION, RANKING_SAMPLE_YEAR, rankingSampleLabels } from './template-ranking-data';
 import { compositionSampleRows } from './template-composition-stacked';
-import { LIGHT_THEME, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
+import { TEMPLATE_MIN_FONT_SIZE, LIGHT_THEME, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
 import { SAMPLE_FRAME, escapeXml, fitTitleSize, sampleBodyTop, sampleFrame } from './template-sample-frame';
 
 const LIQUOR = { title: '酒類別の販売数量構成比', source: '国税庁「酒のしおり」' } as const;
@@ -72,7 +72,7 @@ export function renderDistributionBoxplot(raw: unknown) {
   }).join('');
   const statRow = stats.map((s, i) => {
     const x = SAMPLE_FRAME.left + i * ((SAMPLE_FRAME.right - SAMPLE_FRAME.left) / stats.length);
-    return `<text x="${x}" y="${SAMPLE_FRAME.bodyBottom - 110}" font-size="26" fill="${BRAND.muted}">${s.name}</text><text x="${x}" y="${SAMPLE_FRAME.bodyBottom - 60}" font-size="40" font-weight="700">${label.formatValue(s.value)}</text>`;
+    return `<text x="${x}" y="${SAMPLE_FRAME.bodyBottom - 110}" font-size="${TEMPLATE_MIN_FONT_SIZE}" fill="${BRAND.muted}">${s.name}</text><text x="${x}" y="${SAMPLE_FRAME.bodyBottom - 60}" font-size="40" font-weight="700">${label.formatValue(s.value)}</text>`;
   }).join('');
   const body = `
     <line x1="${xAt(whisker.lo)}" y1="${mid}" x2="${xAt(q1)}" y2="${mid}" stroke="${color}" stroke-width="4"/>
@@ -82,7 +82,7 @@ export function renderDistributionBoxplot(raw: unknown) {
     <rect data-box="true" x="${xAt(q1)}" y="${box.y}" width="${xAt(q3) - xAt(q1)}" height="${box.h}" rx="8" fill="${color}" fill-opacity="0.18" stroke="${color}" stroke-width="4"/>
     <line x1="${xAt(median)}" y1="${box.y}" x2="${xAt(median)}" y2="${box.y + box.h}" stroke="${color}" stroke-width="8"/>
     ${outlierMarks}
-    <text x="${SAMPLE_FRAME.left}" y="${dotsTop - 20}" font-size="28" font-weight="700" fill="${BRAND.muted}">47都道府県の値</text>
+    <text x="${SAMPLE_FRAME.left}" y="${dotsTop - 20}" font-size="${TEMPLATE_MIN_FONT_SIZE}" font-weight="700" fill="${BRAND.muted}">47都道府県の値</text>
     ${dots}
     <line x1="${axis.left}" y1="${dotsTop + 244}" x2="${axis.right}" y2="${dotsTop + 244}" stroke="${BRAND.line}" stroke-width="2"/>
     ${statRow}`;
@@ -135,7 +135,7 @@ export function renderDonutChart(chart: DonutChart, theme: ChartTheme = LIGHT_TH
   const legendTop = center.y + radius.outer + 70, column = (SAMPLE_FRAME.right - SAMPLE_FRAME.left) / 2;
   const legend = categories.map(({ label, value }, i) => {
     const x = SAMPLE_FRAME.left + (i % 2) * column, y = legendTop + Math.floor(i / 2) * 60;
-    return `<rect x="${x}" y="${y}" width="32" height="32" rx="4" fill="${SERIES_COLORS[i % SERIES_COLORS.length]}"/><text x="${x + 46}" y="${y + 26}" font-size="${Math.min(26, (column - 46 - 130) / label.length).toFixed(1)}">${escapeXml(label)}</text><text x="${x + column - 24}" y="${y + 26}" text-anchor="end" font-size="26" font-weight="700">${shareText(value)}</text>`;
+    return `<rect x="${x}" y="${y}" width="32" height="32" rx="4" fill="${SERIES_COLORS[i % SERIES_COLORS.length]}"/><text x="${x + 46}" y="${y + 26}" font-size="${Math.max(TEMPLATE_MIN_FONT_SIZE, Math.min(TEMPLATE_MIN_FONT_SIZE, (column - 46 - 130) / label.length)).toFixed(1)}">${escapeXml(label)}</text><text x="${x + column - 24}" y="${y + 26}" text-anchor="end" font-size="${TEMPLATE_MIN_FONT_SIZE}" font-weight="700">${shareText(value)}</text>`;
   }).join('');
   return sampleFrame({
     title: chart.title, titleSize: fitTitleSize(chart.title, 64), meta: chart.meta, note: chart.note, source: chart.source,

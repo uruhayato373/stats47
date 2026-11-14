@@ -1,7 +1,7 @@
 {
   "version": 1,
   "_doc": "backlog の DOMAIN-* カードで作成。形は土木ノート (doboku-note リポジトリ) の領域モデルに揃える。共通事業方針には載せず、両リポジトリが同じ形のものを別々に持つ (2026-10-26 オーナー判断・DOMAIN-SHARED-POLICY-01)",
-  "description": "事業の領域（ドメイン）の正本。管理画面のサイドメニューの並びはここから描く。文書は documents（パス接頭辞。長い一致が優先）で領域に解決する。構え・KPI・重点は持たない（収益化戦略の表が持つ）。",
+  "description": "事業の領域（ドメイン）の正本。管理画面のサイドメニューの並びはここから描く。文書は documents（パス接頭辞。長い一致が優先）で領域に解決する。構え・KPI・狙いは持たない（領域の台帳 data/business/domain-stances.json が持つ）。",
   "domains": [
     {
       "id": "strategy",
@@ -25,8 +25,9 @@
       "id": "plan",
       "label": "計画",
       "role": "決める",
-      "manages": "月間・週間・バックログ・効果測定中の施策",
+      "manages": "年間・月間・週間・バックログ・効果測定中の施策",
       "nav": [
+        { "label": "年間計画", "href": "/todo?f=annual", "kind": "actions" },
         { "label": "今月の計画", "href": "/todo?f=monthly", "kind": "actions" },
         { "label": "今週の計画", "href": "/todo?f=weekly", "kind": "actions" },
         { "label": "実行バックログ", "href": "/todo", "kind": "actions" },
@@ -109,6 +110,7 @@
         { "label": "Geo 分析", "href": "/data/geo", "kind": "inventory" },
         { "label": "月次データの台帳", "href": "/data/monthly", "kind": "inventory" },
         { "label": "内訳の台帳", "href": "/data/compositions", "kind": "inventory" },
+        { "label": "外部データの台帳", "href": "/data/open-data", "kind": "inventory" },
         { "label": "調査カタログ", "href": "/research", "kind": "inventory" },
         { "label": "カタログ監査", "href": "/quality/catalog-audit", "kind": "results" },
         { "label": "指標を選ぶ視点", "href": "/quality/theme-viewpoints", "kind": "results" }
@@ -125,7 +127,8 @@
         { "label": "CI ワークフロー", "href": "/ops/workflows", "kind": "results" },
         { "label": "Mac の定期実行", "href": "/ops/mac-schedule", "kind": "results" },
         { "label": "エージェントとモデル", "href": "/ops/agents", "kind": "inventory" },
-        { "label": "ログインと資格情報", "href": "/ops/auth", "kind": "results" }
+        { "label": "ログインと資格情報", "href": "/ops/auth", "kind": "results" },
+        { "label": "MCP の接続状況", "href": "/ops/mcp", "kind": "results" }
       ]
     }
   ],

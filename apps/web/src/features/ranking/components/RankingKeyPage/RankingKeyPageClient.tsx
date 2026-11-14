@@ -4,8 +4,10 @@ import { useMemo } from "react";
 
 import {
     type RankingItem,
+    type RankingReferenceValue,
     type RankingValue,
     buildRankingDisplayInfo,
+    resolveRankingValueDisplay,
 } from "@stats47/ranking";
 
 import { ArticleShell, PanelGrid } from "@/components/layout";
@@ -31,6 +33,7 @@ import { RankingYearSelector } from "../RankingPageHeader/RankingYearSelector";
 
 import { RankingBasisSwitcher, type RankingBasisMember } from "./RankingBasisSwitcher";
 import { RankingPageContentSections, type RankingPageSections } from "./RankingPageContentSections";
+import { RankingSampleCountNote } from "./RankingSampleCountNote";
 import { RankingVisualizationDetails } from "./RankingVisualizationDetails";
 import { RankingVisualizationSection } from "./RankingVisualizationSection";
 import { useRankingPageState } from "./useRankingPageState";
@@ -43,6 +46,8 @@ interface RankingKeyPageClientProps {
     rankingKey: string;
     rankingItem: RankingItem;
     rankingValues: RankingValue[];
+    /** 推計の人数が少なく順位から外した県・年 (全年。推計の人数を持たない指標は空) */
+    referenceValues?: RankingReferenceValue[];
     /** サーバーが全年 values から畳んだ総数ベースの全国平均系列 */
     nationalAverageSeries: NationalAveragePoint[];
     areaType?: AreaType;
@@ -58,12 +63,15 @@ interface RankingKeyPageClientProps {
     breadcrumb?: React.ReactNode;
     /** 同じ指標の市区町村ページへのリンク (既存の関連付けからサーバーで解決) */
     municipalityLink?: React.ReactNode;
+    /** 見出しの最新年が古いかを測る基準の年 (西暦)。サーバーが描画時に決めて渡す */
+    nowYear: number;
 }
 
 export function RankingKeyPageClient({
     rankingKey,
     rankingItem,
     rankingValues: initialRankingValues,
+    referenceValues = [],
     nationalAverageSeries: initialNationalAverageSeries,
     areaType = "prefecture",
     selectedYear,
@@ -73,6 +81,7 @@ export function RankingKeyPageClient({
     groupMembers = [],
     breadcrumb,
     municipalityLink,
+    nowYear,
 }: RankingKeyPageClientProps) {
     const {
         activeRankingItem,
@@ -101,6 +110,15 @@ export function RankingKeyPageClient({
 
     const presentedItem = useMemo(() => resolveRankingPresentation(activeRankingItem, normalizationType ?? null), [activeRankingItem, normalizationType]);
     const displayInfo = buildRankingDisplayInfo(presentedItem);
+    // 表示単位 (万円・億円) はここで 1 回だけ決め、上位と下位・推移・地図・表・県の詳細へ同じ値を渡す。
+    // 人口あたり・面積あたりの値は選んだ計算方法の単位で配信されるので換算しない。市区町村は値の幅が広く、
+    // 都道府県向けに書いた表示単位では小さい町村が 0 に丸まるので、元の単位のまま出す。
+    const valueDisplay = useMemo(
+        () => normalizationType || currentAreaType !== "prefecture"
+            ? null
+            : resolveRankingValueDisplay(activeRankingItem, rankingValues.map((v) => v.value)),
+        [normalizationType, currentAreaType, activeRankingItem, rankingValues],
+    );
 
     const shareText = useMemo(() => {
         const top = rankingValues.find((v) => v.rank === 1);
@@ -155,6 +173,22 @@ export function RankingKeyPageClient({
         : null;
     const dataNote = configNote ?? subtitleNote;
 
+    // 推計の人数と参考値 (DATA-WAGE-TEACHER-COVERAGE-01)。人口あたり等の換算や市区町村では出さない
+    const hasSampleCounts =
+        !normalizationType &&
+        currentAreaType === "prefecture" &&
+        (referenceValues.length > 0 || rankingValues.some((v) => typeof v.sampleCount === "number"));
+    const sampleCountNote = hasSampleCounts ? (
+        <RankingSampleCountNote
+            rankingValues={rankingValues}
+            referenceValues={referenceValues}
+            yearCode={currentYear}
+            yearName={latestYearName}
+            unit={displayInfo.unit}
+            valueDisplay={valueDisplay}
+        />
+    ) : null;
+
     // 右レール: ブログ詳細ページ (/blog/[slug]) と同じ構成に統一。
     // ArticleShell の右レールは shell コンテナ 988px 以上で表示する (本文 656px を保つ境界)。
     // ラッパーもブログと同じ非 sticky の <aside> に揃える。
@@ -177,6 +211,8 @@ export function RankingKeyPageClient({
                 metricTitle={displayInfo.title}
                 areaType={currentAreaType}
                 updatedAt={activeRankingItem.updatedAt}
+                latestYear={activeRankingItem.latestYear}
+                nowYear={nowYear}
             />
             <RankingHeaderControls
                 normalizationOptions={rankingItem.calculation?.normalizationOptions}
@@ -210,6 +246,7 @@ export function RankingKeyPageClient({
                         nationalAverageSeries={nationalAverageSeries}
                         areaType={currentAreaType}
                         yearName={latestYearName}
+                        valueDisplay={valueDisplay}
                     />
                     <RankingVisualizationSection
                         rankingItem={presentedItem}
@@ -218,9 +255,15 @@ export function RankingKeyPageClient({
                         areaType={currentAreaType}
                         headerActions={headerActions}
                         cardFooter={
-                            definitionDetail && <RankingVisualizationDetails description={definitionDetail} />
+                            (definitionDetail || sampleCountNote) && (
+                                <>
+                                    {definitionDetail && <RankingVisualizationDetails description={definitionDetail} />}
+                                    {sampleCountNote}
+                                </>
+                            )
                         }
                         isPending={isPending}
+                        valueDisplay={valueDisplay}
                     />
                 </PanelGrid>
 

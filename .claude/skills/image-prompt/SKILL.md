@@ -28,7 +28,7 @@ co_agents: [x-strategist, blog-editor, note-manager, sns-renderer]
 ## note記事カバーの専用経路（全カテゴリ・新規記事・差し替え共通）
 
 `--use-case note-header` はこの節を使い、以下の43種テンプレート選定へ進まない。
-方針は `data/note/cover-policies.json` の8カテゴリの最新版、記事の制作IDと入力は `data/note/cover-assets.json`。
+方針は `data/note/cover-policies.json` の8カテゴリの最新版、記事の制作IDと入力は `data/note/cover-records/<key>.json` (候補・採用の参照は `data/note/cover-assets.json`)。
 本文を読んでコピー・題材・根拠を管理画面へ保存し、`note:cover-production export` で確定した `imagePrompt` を取得する。
 新記事は記事台帳へ登録後、`generate-note-catalog.ts --apply` で制作IDも同期する。分類できない記事は停止し、既存分類の判断を整える。
 

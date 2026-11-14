@@ -53,8 +53,8 @@ describe("ライセンス (products.licenses)", () => {
 });
 
 describe("Kindle 書籍 (products.kindle-books)", () => {
-  it("S1 13 冊・S2 11 冊・S3 8 冊・S4 1 冊の 33 冊で、台帳の並びが KINDLE_BOOKS の並び", () => {
-    const expected = [...range("K-S1-", 1, 13), ...range("K-S2-", 1, 11), ...range("K-S3-", 1, 8), "K-S4-01"];
+  it("S1 16 冊・S2 12 冊・S3 8 冊・S4 2 冊の 38 冊 (構想中の候補を含む) で、台帳の並びが KINDLE_BOOKS の並び", () => {
+    const expected = [...range("K-S1-", 1, 16), ...range("K-S2-", 1, 12), ...range("K-S3-", 1, 8), ...range("K-S4-", 1, 2)];
     expect(KINDLE_BOOKS.map((b) => b.id)).toEqual(expected);
     expect([...BOOK_BY_ID.keys()]).toEqual(expected);
     expect(new Set(KINDLE_BOOKS.map((b) => b.series))).toEqual(EXPECTED_SERIES);
@@ -71,7 +71,7 @@ describe("Kindle 書籍 (products.kindle-books)", () => {
         expect(ch.rankingKeys!.length, b.id).toBeGreaterThan(0);
       }
     }
-    // S2 11 冊 + S3 8 冊 + S4 1 冊が、それぞれ ranking の章を 1 つ持つ
+    // S2・S3・S4 の各冊が、それぞれ ranking の章を 1 つ持つ
     const rankingBooks = KINDLE_BOOKS.filter((b) => b.chapters.some((c) => c.source === "ranking")).map((b) => b.id);
     expect(rankingBooks).toEqual(Object.keys(BOOK_RANKING_KEYS));
   });

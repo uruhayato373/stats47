@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-dev-a15",
+  "production": {
+    "id": "NCI-00152",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "世帯の貯蓄1位は\n東京都",
+      "subline": "47都道府県を比較\n2014年の値",
+      "subject": "丸い壺型の陶器の貯金箱と、積んだ硬貨、無文字のノートを大きく描く。動物の形の貯金箱にしない。硬貨に文字や数字を入れない。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n4c5a416b43be 本文確認2026-11-04。複数人世帯の貯蓄現在高。最新で取り出せた年が2014年なので年を明記する。東京都が最多、沖縄県が最少。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "3df00754bdb8ec79dfb6a1afdf80e38e91b8916533a611be7a0504041f50520a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a15/revisions/3df00754bdb8ec79dfb6a1afdf80e38e91b8916533a611be7a0504041f50520a.png"
+      },
+      "bytes": 33780,
+      "id": "3df00754bdb8ec79dfb6a1afdf80e38e91b8916533a611be7a0504041f50520a",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:06:51.428Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "a7fdee71976f6033d086de3decb82fc3d3aff92d32dc93c482486cd1cac9756a"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:14.201Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "a7fdee71976f6033d086de3decb82fc3d3aff92d32dc93c482486cd1cac9756a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a15/inputs/a7fdee71976f6033d086de3decb82fc3d3aff92d32dc93c482486cd1cac9756a.json"
+          },
+          "bytes": 1353
+        }
+      }
+    },
+    {
+      "sha256": "c0d14ab0dd5e5fc415cb6e870c7d30d5ae8a2a6f2a012938088a37b91abd2388",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a15/revisions/c0d14ab0dd5e5fc415cb6e870c7d30d5ae8a2a6f2a012938088a37b91abd2388.png"
+      },
+      "bytes": 56234,
+      "id": "c0d14ab0dd5e5fc415cb6e870c7d30d5ae8a2a6f2a012938088a37b91abd2388",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:37.875Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324056427/rectangle_large_type_2_159f89cad0c47a7f5ecbe18bfd7381d8.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "c0d14ab0dd5e5fc415cb6e870c7d30d5ae8a2a6f2a012938088a37b91abd2388"
+      }
+    },
+    {
+      "sha256": "3b8aee8b9fbda346041a7e756dc2f279d314f321790d2456835070c6cb9a2086",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a15/revisions/3b8aee8b9fbda346041a7e756dc2f279d314f321790d2456835070c6cb9a2086.png"
+      },
+      "bytes": 2040484,
+      "id": "3b8aee8b9fbda346041a7e756dc2f279d314f321790d2456835070c6cb9a2086",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-a7125d84b55a",
+      "createdAt": "2026-11-03T23:15:16.818Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "45492071ee6ea23e3166f7e449c9c703ff0bcedc6fd79d14c6d724b6ce880fb4"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:05:35.460Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "45492071ee6ea23e3166f7e449c9c703ff0bcedc6fd79d14c6d724b6ce880fb4",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a15/inputs/45492071ee6ea23e3166f7e449c9c703ff0bcedc6fd79d14c6d724b6ce880fb4.json"
+          },
+          "bytes": 8349
+        },
+        "production": {
+          "id": "NCI-00152",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "a7125d84b55af1a1a05aec502ab2ff7d207ea981a666e3ba709f96ab91ca3578"
+        }
+      }
+    }
+  ]
+}

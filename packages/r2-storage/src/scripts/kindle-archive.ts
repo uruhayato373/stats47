@@ -236,7 +236,7 @@ async function pushBook(id: string, state: ArchiveState, encryptionKey: Buffer):
     manifest = existing;
     console.log(`[archive] ${id} ${revision}: R2に同一revisionあり`);
   } else {
-    assertR2WriteAllowed({ op: `Kindle archive ${id}` });
+    assertR2WriteAllowed({ op: `Kindle archive ${id}`, bucket: BUCKET, targets: [`${remotePrefix}/`] });
     const archivedAt = new Date().toISOString();
     const files: KindleArchiveFile[] = [];
     for (const file of plainFiles) {

@@ -38,11 +38,17 @@ def sha(b): return hashlib.sha256(b).hexdigest()
 def official_key(url):
     """Identifier of the official distribution file (host + path). Not an R2 key: the raw ZIPs are not stored in R2."""
     return url.split('://', 1)[1]
+def js_key_order(keys):
+    """JS orders integer-like keys (canonical array indices, e.g. '10000', not '01000') first in ascending
+    order, then the rest in insertion order. Python keeps insertion order for all of them."""
+    def index(k): return int(k) if re.fullmatch(r'0|[1-9]\d{0,9}', k) and int(k) < 4294967295 else None
+    ints = sorted((k for k in keys if index(k) is not None), key=index)
+    return ints + [k for k in keys if index(k) is None]
 def js_canonical(x):
-    """Integral floats -> ints so the bytes equal JS JSON.stringify of the parsed value (0.0 -> 0).
+    """Integral floats -> ints and JS key order, so the bytes equal JS JSON.stringify of the parsed value (0.0 -> 0).
     The Web loader re-serialises with JSON.stringify and compares SHA-256/bytes with the manifest."""
     if isinstance(x, float) and x.is_integer(): return int(x)
-    if isinstance(x, dict): return {k: js_canonical(v) for k, v in x.items()}
+    if isinstance(x, dict): return {k: js_canonical(x[k]) for k in js_key_order(list(x))}
     if isinstance(x, (list, tuple)): return [js_canonical(v) for v in x]
     return x
 def encode(x, pretty=False):

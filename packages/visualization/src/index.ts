@@ -12,3 +12,5 @@ export * from "./d3/constants";
 export * from "./d3/hooks";
 export * from "./d3/utils";
 
+// 縮小表示でも読める文字サイズの計算 (apps/web の React 描画の SVG が D3 の図と同じ下限を使う)
+export { estimateTextWidth, MIN_READABLE_TEXT_PX, readableFontSize } from "./shared/layout";

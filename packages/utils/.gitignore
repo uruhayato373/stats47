@@ -1,0 +1,2 @@
+# tsc の出力 (npm run build / composite の tsbuildinfo)。src が正本なので追跡しない。
+dist/

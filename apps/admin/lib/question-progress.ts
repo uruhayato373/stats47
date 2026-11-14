@@ -9,7 +9,7 @@ import { listFigureDestinations } from "../../../.claude/scripts/issues/issue-gr
  * 有料 note の列は同じページを経由する関係で、問いから企画した商品とは限らない。問いから企画した商品は `products` が直接指す。
  */
 
-export type QuestionIssue = { id: string; level: "major" | "minor"; question: string; status: "active" | "dropped"; sensitive?: boolean; products?: string[] };
+export type QuestionIssue = { id: string; level: "major" | "minor"; question: string; status: "active" | "dropped"; sensitive?: boolean; products?: string[]; books?: string[] };
 export type QuestionLink = { issue: string; page: string; role: "answers" | "evidence" };
 export type QuestionAnalysis = { id: string; issue: string; status: string };
 export type QuestionDestination = { channel: string; status: string; page?: string; postId?: number; slug?: string };
@@ -90,7 +90,7 @@ export function buildQuestionProgress(input: ProgressInput): QuestionProgress {
       relatedNotes: notes.length,
       relatedPosts: related.size - notes.length,
       relatedPaidNotes: notes.filter((id) => paidNoteIds.has(id)).length,
-      products: issue.products?.length ?? 0,
+      products: (issue.products?.length ?? 0) + (issue.books?.length ?? 0),
     };
   });
 

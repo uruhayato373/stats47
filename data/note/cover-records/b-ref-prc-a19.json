@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-prc-a19",
+  "production": {
+    "id": "NCI-00202",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "食事の時間が\n長い県は？",
+      "subline": "1日の食事時間を男女別に比較",
+      "subject": "湯気の立つ味噌汁と茶碗、箸の並んだ食卓を大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n43512fd5645e 本文確認2026-11-04。社会生活基本調査の1日の食事時間。女性は山梨県109分、秋田県、長野県が上位。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "4057db1638f5af6d182cfe3bc4bcf2f67527daa75b1a9bf2c00ee3c791af7a11",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a19/revisions/4057db1638f5af6d182cfe3bc4bcf2f67527daa75b1a9bf2c00ee3c791af7a11.png"
+      },
+      "bytes": 34273,
+      "id": "4057db1638f5af6d182cfe3bc4bcf2f67527daa75b1a9bf2c00ee3c791af7a11",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:08:26.041Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "79c72f09720522b0c006ece0ec4492668fd3f6eb4b185495bf2135c0f71d6d03"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:13:25.929Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "79c72f09720522b0c006ece0ec4492668fd3f6eb4b185495bf2135c0f71d6d03",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a19/inputs/79c72f09720522b0c006ece0ec4492668fd3f6eb4b185495bf2135c0f71d6d03.json"
+          },
+          "bytes": 1317
+        }
+      }
+    },
+    {
+      "sha256": "7d067de70b320b22d7d8073fa735f6e893cd21f81bd39e75ce9627c6ee21ef03",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a19/revisions/7d067de70b320b22d7d8073fa735f6e893cd21f81bd39e75ce9627c6ee21ef03.png"
+      },
+      "bytes": 59290,
+      "id": "7d067de70b320b22d7d8073fa735f6e893cd21f81bd39e75ce9627c6ee21ef03",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:54.036Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324163680/rectangle_large_type_2_8e5f6e6c53b2f327781350b653d1e295.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "7d067de70b320b22d7d8073fa735f6e893cd21f81bd39e75ce9627c6ee21ef03"
+      }
+    },
+    {
+      "sha256": "3c8056ab261e64428c221ddba1acc8533923bd22b8cbd8cf0eb4a610bc6b0744",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a19/revisions/3c8056ab261e64428c221ddba1acc8533923bd22b8cbd8cf0eb4a610bc6b0744.png"
+      },
+      "bytes": 1871526,
+      "id": "3c8056ab261e64428c221ddba1acc8533923bd22b8cbd8cf0eb4a610bc6b0744",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-1a2e98e5e514",
+      "createdAt": "2026-11-04T01:53:56.198Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "306feda8f8038483af37b8ee4466ce8a125f23b6567fb45a5518c9b0eb87005b"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:55:21.880Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "306feda8f8038483af37b8ee4466ce8a125f23b6567fb45a5518c9b0eb87005b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a19/inputs/306feda8f8038483af37b8ee4466ce8a125f23b6567fb45a5518c9b0eb87005b.json"
+          },
+          "bytes": 8114
+        },
+        "production": {
+          "id": "NCI-00202",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "1a2e98e5e514d40524de75900a5191f34d5eda7fbb124adc98ca0d58316c0433"
+        }
+      }
+    }
+  ]
+}

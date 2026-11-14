@@ -83,6 +83,55 @@ test('prefecture-deviation inventory resolves per authored analysis, not a right
   );
 });
 
+test('prefecture-deviation inventory follows the authored analyses and reaches only active metrics', async () => {
+  // 2026-10-13 に a32 の指標を H27年基準 (per-capita-prefectural-income-h27) へ差し替えたが、
+  // OCR 作業領域が無く台帳を作り直せなかったため、管理画面 /content/references は非公開の
+  // prefectural-income-per-capita を接続先として出し続けた。分析企画を正本とし、台帳がずれたら止める。
+  const dir = path.join(STATE_ROOT, 'prefecture-deviation/2018');
+  const inventory = JSON.parse(await readFile(path.join(dir, 'inventory.json'), 'utf8'));
+  const { analyses } = JSON.parse(await readFile(path.join(dir, 'analyses.json'), 'utf8'));
+  const byId = new Map(analyses.map((analysis) => [analysis.id, analysis]));
+  const production = new Set(['reuse-existing-metric', 'new-metric', 'combined-analysis']);
+  const reached = new Set();
+  for (const item of inventory.items) {
+    const analysis = byId.get(item.topicHint);
+    if (!analysis) {
+      assert.equal(item.resolution, 'not-applicable', `${item.id} is outside analyses`);
+      continue;
+    }
+    reached.add(analysis.id);
+    assert.equal(item.resolution, analysis.resolution, `${item.id} resolution`);
+    assert.equal(item.reason, analysis.resolutionReason, `${item.id} reason`);
+    assert.deepEqual(item.primarySource, analysis.primarySources[0], `${item.id} primarySource`);
+    assert.deepEqual(
+      item.mapping,
+      {
+        metricKeys: analysis.metricKeys,
+        surveyIds: analysis.surveyIds,
+        geoScopes: analysis.geoScopes,
+        contentRoles: analysis.contentRoles,
+      },
+      `${item.id} mapping drifted from ${analysis.id}`
+    );
+  }
+  assert.equal(reached.size, analyses.length, 'every analysis owns at least one page');
+
+  const productionAnalyses = analyses.filter((analysis) => production.has(analysis.resolution));
+  assert.ok(productionAnalyses.length > 0);
+  for (const analysis of productionAnalyses) {
+    assert.ok(analysis.metricKeys.length > 0, `${analysis.id} has no metric connection`);
+  }
+  const keys = new Set(
+    inventory.items
+      .filter((item) => production.has(item.resolution))
+      .flatMap((item) => item.mapping.metricKeys)
+  );
+  for (const key of keys) {
+    const body = await readFile(path.join(PROJECT_ROOT, 'data/metrics', `${key}.ts`), 'utf8');
+    assert.match(body, /["']?isActive["']?\s*:\s*true/, `${key} is not an active metric`);
+  }
+});
+
 const FULL_COVERAGE_ANALYSES_PROFILES = [
   'amusement-shop-density/unknown',
   'average-income-ranking/unknown',

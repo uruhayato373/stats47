@@ -3,13 +3,15 @@
 import { useEffect, useMemo, useRef, useState, type MouseEvent as ReactMouseEvent } from "react";
 
 import { Button } from "@stats47/components/atoms/ui/button";
-import { formatValueWithPrecision, resolveValuePrecision } from "@stats47/utils";
+import { resolveValuePrecision } from "@stats47/utils";
 import { resolveChoroplethScale, type MapDataPoint, type MapVisualizationConfig } from "@stats47/visualization/d3";
 import { select } from "d3-selection";
 import { zoom, zoomIdentity, zoomTransform, type ZoomBehavior } from "d3-zoom";
 import { Minus, Plus } from "lucide-react";
 
 import { GEO_SVG_MAP } from "@/components/charts/geo-topology";
+
+import { formatRankingValue } from "../../utils/compute-ranking-header-stats";
 
 import type { MapShapes } from "./map-shapes";
 
@@ -31,6 +33,8 @@ interface Props extends MapShapes {
   colorConfig: MapVisualizationConfig;
   unit?: string;
   decimalPlaces?: number;
+  /** 表示単位への倍率。色は元の値で決め、ホバーと基準の文字だけに掛ける (unit はこの倍率の単位で渡す) */
+  conversionFactor?: number;
   borderColor: string;
   selectedCode?: string | null;
   onAreaClick?: (code: string) => void;
@@ -41,7 +45,7 @@ interface Props extends MapShapes {
  * ページのスクロールを奪わないよう、ホイールは Ctrl / ⌘ を押したときだけ、タッチは 2 本指だけでズームし、
  * 拡大中は 1 本指で動かせる。形が多いので、ホバーと選択は別の層に描いて全部の形を描き直さない。
  */
-export function RankingSvgMap({ shapes, insetLine, data, colorConfig, unit = "", decimalPlaces, borderColor, selectedCode, onAreaClick }: Props) {
+export function RankingSvgMap({ shapes, insetLine, data, colorConfig, unit = "", decimalPlaces, conversionFactor = 1, borderColor, selectedCode, onAreaClick }: Props) {
   const [scale, setScale] = useState<Scale | null>(null);
   const [hover, setHover] = useState<Hover | null>(null);
   const [zoomed, setZoomed] = useState(false);
@@ -180,7 +184,7 @@ export function RankingSvgMap({ shapes, insetLine, data, colorConfig, unit = "",
           }}
         >
           <span className="font-medium">{hovered.name}</span>{" "}
-          {hoveredValue === undefined ? "データなし" : `${formatValueWithPrecision(hoveredValue, precision)}${unit ? ` ${unit}` : ""}`}
+          {hoveredValue === undefined ? "データなし" : `${formatRankingValue(hoveredValue, precision, conversionFactor)}${unit ? ` ${unit}` : ""}`}
         </div>
       )}
       <div className="absolute bottom-2 right-2 z-500 flex items-center gap-1">
@@ -201,7 +205,7 @@ export function RankingSvgMap({ shapes, insetLine, data, colorConfig, unit = "",
       </div>
       {midpoint !== undefined && (
         <p className="absolute bottom-2 left-2 z-500 rounded-sm bg-background/90 px-1.5 py-0.5 text-xs text-muted-foreground">
-          基準 {formatValueWithPrecision(midpoint, precision)}
+          基準 {formatRankingValue(midpoint, precision, conversionFactor)}
           {unit ? ` ${unit}` : ""}
         </p>
       )}

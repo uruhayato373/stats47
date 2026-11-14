@@ -2,7 +2,7 @@
  * KDP の紹介文とキーワードの組み立てと監査 (2026-11-06 オーナー依頼。正典 kindle-publishing-standards.md)。
  *
  * 紹介文は定型文の差し替えではなく、読者の悩み・読み終えて分かること・想定読者・収録内容を本ごとに持つ。
- * 図と全県表の数は実際の EPUB を測った kindle-quality.json から入れ、手で書かない。
+ * 図と全県表の数、全県表のある指標の一覧 (指標・年・単位) は実際の EPUB を測った kindle-quality.json から入れ、手で書かない。
  * 禁止事項は KDP のメタデータ指針 (https://kdp.amazon.com/en_US/help/topic/G201097560、2026-11-06 確認)、
  * キーワードの規則は https://kdp.amazon.com/en_US/help/topic/G201298500 (同日確認) に合わせる。
  */
@@ -43,8 +43,41 @@ function contentsLine(facts) {
   const parts = [];
   if (facts.figures > 0) parts.push(`図 ${facts.figures} 点`);
   if (facts.fullTables > 0) parts.push(`47 都道府県の全県表 ${facts.fullTables} 表`);
+  // 図も全県表も無い本 (K-S1-14) は、実測した本文の字数を載せる
+  if (parts.length === 0 && facts.chars > 0) parts.push(`本文 ${facts.chars.toLocaleString("ja-JP")} 字`);
   if (parts.length === 0) throw new Error("収録内容の実測が無い");
   return `${parts.join("、")}を収録しています。`;
+}
+
+/**
+ * 比較の単位。全冊が都道府県単位の本で、市区町村ごとの一覧は無い (2026-11-13 オーナー依頼: どの粒度のデータかを紹介文で分かるようにする)。
+ * 家計調査の値を載せる本は、県全体でなく県庁所在市の値であることを足す (EPUB の全県表の注記を測った householdCityValues)。
+ * 世帯の種類 (二人以上の世帯・勤労者世帯) は指標ごとに違うので、この文には書かない (2026-11-13 の照合で K-S1-01 の勤労者世帯の 4 表と食い違った)。
+ * 家計調査以外で県全体でない値を載せる本は、原稿の scopeNote に書く (K-S1-13 の家賃。機械では測れないので別エージェントが本文と照合する)。
+ */
+export function dataScopeBlock(facts, copy = {}) {
+  // 県庁所在市を比べる本 (K-S1-14) のように単位が違う本は、原稿の scopeLead で 1 文目を差し替える
+  const lines = [copy.scopeLead ?? "比較の単位は都道府県です。47都道府県を並べて比べます。市区町村ごとの順位や一覧は収録していません。"];
+  if (facts.householdCityValues) lines.push("家計調査の指標は、県全体ではなく、各県の県庁所在市（東京都は区部）の世帯を調べた値です。");
+  if (copy.scopeNote) lines.push(copy.scopeNote);
+  return `【データの範囲】\n${lines.join("")}`;
+}
+
+const INDICATOR_HEADING = "【全県の値を表で収録している指標】";
+
+/** 全県表のある指標の一覧 (指標・年・単位)。EPUB の見出しを測った fullTableIndicators から作り、手で書かない。無い本は出さない。 */
+export function indicatorBlock(facts) {
+  const indicators = facts.fullTableIndicators ?? [];
+  if (indicators.length === 0) return "";
+  const line = ({ label, period, unit }) => `・${label}（${period}${unit ? `・${unit}` : ""}）`;
+  return `${INDICATOR_HEADING}\n${indicators.map(line).join("\n")}`;
+}
+
+const DATA_BLOCK_TAIL = "収録年と定義は指標ごとに異なり、巻末の出典にまとめています。";
+
+/** 【データについて】。1 つの統計で年をそろえた本 (K-S1-14) は、原稿の dataSourceLine で末尾の 1 文を差し替える。 */
+export function dataBlock(copy = {}) {
+  return copy.dataSourceLine ? LISTING_DATA_BLOCK.replace(DATA_BLOCK_TAIL, copy.dataSourceLine) : LISTING_DATA_BLOCK;
 }
 
 export function renderListingDescription(copy, facts, disclaimer = "") {
@@ -52,9 +85,11 @@ export function renderListingDescription(copy, facts, disclaimer = "") {
     disclaimer,
     copy.hook,
     `【この本で分かること】\n${copy.points.map((point) => `・${point}`).join("\n")}`,
+    dataScopeBlock(facts, copy),
+    indicatorBlock(facts),
     `【こんな方に】\n${copy.forWhom.map((reader) => `・${reader}`).join("\n")}`,
     `【収録内容】\n${contentsLine(facts)}`,
-    LISTING_DATA_BLOCK,
+    dataBlock(copy),
   ].filter(Boolean).join("\n\n");
 }
 
@@ -121,6 +156,16 @@ export function auditListingCopy(id, books, bookText) {
   } else {
     if (entry.facts.epubPath !== listing.epubPath) errors.push("実測の版が台帳の EPUB と違う。kindle:quality --write で測り直す");
     if (!description.includes(contentsLine(entry.facts))) errors.push("収録内容が実測と一致しない");
+    if (!Array.isArray(entry.facts.fullTableIndicators) || typeof entry.facts.householdCityValues !== "boolean") {
+      errors.push("実測に指標の一覧が無い。kindle:quality --write で測り直す");
+    } else {
+      // ブロックの終わり (空行) まで照合する。前方一致だと、実測に無い 1 文や 1 行が後ろに足されていても通る
+      const indicators = indicatorBlock(entry.facts);
+      if (!description.includes(`${dataScopeBlock(entry.facts, copy)}\n\n`)) errors.push("データの範囲が実測と一致しない");
+      if (indicators ? !description.includes(`${indicators}\n\n`) : description.includes(INDICATOR_HEADING)) {
+        errors.push("収録している指標が実測と一致しない");
+      }
+    }
   }
 
   const dataRatio = compact(LISTING_DATA_BLOCK).length / compact(description).length;

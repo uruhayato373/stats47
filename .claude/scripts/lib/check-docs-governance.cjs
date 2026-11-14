@@ -24,7 +24,7 @@ const strategyLanes = require("./strategy-lanes.cjs");
 
 const DEFAULT_ROOT =
   process.env.DOCS_GOVERNANCE_ROOT ||
-  process.env.CLAUDE_PROJECT_DIR ||
+  process.env.STATS47_SCAN_ROOT ||
   path.resolve(__dirname, "..", "..", "..");
 const DEFAULT_CONFIG =
   process.env.DOCS_GOVERNANCE_CONFIG ||
@@ -387,6 +387,163 @@ function fixImplementationPlanIndex(root, config) {
   return false;
 }
 
+/**
+ * 検査の外に溜まる置き場 (DG087〜089)。契約は config.placement。無いリポジトリでは検査しない。
+ *
+ * 2026-11-13 の棚卸しで、どの検査にも掛からない場所に文書とスクリプトが溜まっていた:
+ * 済んだ修正の記録や古い計画がコードの隣に README 以外の名前で残り (SCHEMA.md・PLAN.md・DARK_MODE_FIX.md・
+ * TESTING_STRATEGY.md)、`.claude/scripts/` の直下に領域へ入れていないスクリプトが増えていた。
+ *   DG087 アプリ・パッケージの下に `.claude/` を作らない (手順・規約・状態はリポジトリ直下の `.claude/` だけ)
+ *   DG088 `.claude/scripts/` の直下は許可リストのファイルだけ (スクリプトは `<領域>/` に置く。縮小専用)
+ *   DG089 `apps/`・`packages/` の Markdown で名前が英大文字だけのものは README.md・AGENTS.md・CLAUDE.md だけ
+ *         (設計と契約はコードの隣の README か docs/01_技術設計 へ統合する。原稿などの小文字名は対象外)
+ */
+function checkPlacement(root, config, add) {
+  const placement = config.placement;
+  if (!placement) return;
+
+  const nested = placement.nestedAgentDirectories;
+  if (nested) {
+    for (const parent of nested.parents) {
+      let entries = [];
+      try {
+        entries = fs.readdirSync(path.join(root, parent), { withFileTypes: true });
+      } catch {
+        continue;
+      }
+      for (const entry of entries.filter((item) => item.isDirectory())) {
+        for (const absolute of walk(path.join(root, parent, entry.name, nested.name))) {
+          add(
+            "error",
+            "DG087",
+            relative(root, absolute),
+            `${parent}/*/${nested.name}/ にファイルを置かない。手順・規約・状態はリポジトリ直下の ${nested.name}/ に置く`,
+          );
+        }
+      }
+    }
+  }
+
+  const scriptsRoot = placement.scriptsRoot;
+  if (scriptsRoot) {
+    const allowed = new Set(scriptsRoot.allowedFiles);
+    let entries = [];
+    try {
+      entries = fs.readdirSync(path.join(root, scriptsRoot.directory), { withFileTypes: true });
+    } catch {
+      entries = [];
+    }
+    const actual = entries.filter((entry) => entry.isFile() && !entry.name.startsWith(".")).map((entry) => entry.name);
+    for (const name of actual.filter((item) => !allowed.has(item)).sort()) {
+      add(
+        "error",
+        "DG088",
+        `${scriptsRoot.directory}/${name}`,
+        `${scriptsRoot.directory}/ の直下にファイルを置かない。<領域>/ のディレクトリに置く (.claude/rules/skill-code-placement.md)`,
+      );
+    }
+    for (const name of [...allowed].filter((item) => !actual.includes(item)).sort()) {
+      add(
+        "error",
+        "DG088",
+        `${scriptsRoot.directory}/${name}`,
+        "placement.scriptsRoot.allowedFiles に無いファイルが載っている。移すか消したら行も消す (縮小専用)",
+      );
+    }
+  }
+
+  const adjacent = placement.codeAdjacentDocs;
+  if (adjacent) {
+    const allowedNames = new Set(adjacent.allowedUppercaseNames);
+    for (const directory of adjacent.roots) {
+      for (const absolute of walk(path.join(root, directory))) {
+        const name = path.basename(absolute);
+        if (!/^[A-Z][A-Z0-9_-]*\.md$/.test(name) || allowedNames.has(name)) continue;
+        add(
+          "error",
+          "DG089",
+          relative(root, absolute),
+          `${directory}/ に置く文書は ${adjacent.allowedUppercaseNames.join("・")} だけ。設計と契約はコードの隣の README.md か docs/01_技術設計 へ統合し、済んだ計画と修正の記録は消す`,
+        );
+      }
+    }
+  }
+}
+
+/** DG093 の既定: 起票からこの日数を超えて誰も持っていないカードを集計で知らせる (config.todo.untriagedMaxAgeDays で上書き) */
+const DEFAULT_UNTRIAGED_MAX_AGE_DAYS = 30;
+/** 外の人・別の環境が持っている executor (待ちが明示されている) */
+const EXTERNAL_EXECUTORS = new Set(["ユーザー", "windows", "別環境"]);
+
+/** config の重さ (warning / warn / error) を finding の level へ。語彙外は null */
+function severityLevel(value, fallback) {
+  if (value === undefined || value === null) return fallback;
+  if (value === "error") return "error";
+  if (value === "warning" || value === "warn") return "warning";
+  return null;
+}
+
+/**
+ * 誰も持っていない古いカードか (DG093)。外部作業 ([実行:ユーザー|windows|別環境])・[進行中]・[待ち:]・
+ * 自動処理 ([実行:sweep|機械]) のどれかがあれば持ち主がいる。🟣 (判断待ちの tier) と起票日の無いカードは数えない。
+ */
+function isUntriagedStale(card, now, maxAgeDays) {
+  if (card.tier === "hold" || card.wip || card.waits.length > 0) return false;
+  if (card.executor && (EXTERNAL_EXECUTORS.has(card.executor) || backlogLib.SELF_EXECUTABLE.has(card.executor))) return false;
+  if (!isIsoDate(card.filed ?? "")) return false;
+  return daysBetween(card.filed, now) > maxAgeDays;
+}
+
+/** カードのタグ語彙 (DG056 未知キー / DG057 語彙外の値)。backlog と年間計画で共通 */
+function checkCardVocabulary(card, label, file, add) {
+  for (const unknown of card.unknownKeys) {
+    add("error", "DG056", file, `${label}のタグキーが語彙外: [${unknown.raw}]`);
+  }
+  if (card.executor && !backlogLib.EXECUTORS.includes(card.executor)) {
+    add("error", "DG057", file, `${label}の実行が語彙外: ${card.executor}`);
+  }
+  if (card.kind && !backlogLib.KINDS.includes(card.kind)) {
+    add("error", "DG057", file, `${label}の種類が語彙外: ${card.kind}`);
+  }
+  for (const wait of card.waits.filter((value) => !backlogLib.WAITS.includes(value))) {
+    add("error", "DG057", file, `${label}の待ちが語彙外: ${wait} (${backlogLib.WAITS.join(" / ")})`);
+  }
+}
+
+/**
+ * 年間計画 (DG092)。カードは `## YYYY-MM` の月見出しの下に置き、[ID] と [期日:] が必須。
+ * ID の重複は backlog・improvements と同じ DG060 で見る (todoDefinitions へ足す)。
+ * 月見出しと期日の月が食い違うものは warning (どちらかの書き間違い)。
+ */
+function checkAnnualPlan({ root, config, annualFile, frontmatter, todoDefinitions, add }) {
+  const expectedType = config.todo.annual.type;
+  const actualType = frontmatter?.values.type;
+  if (expectedType && frontmatter?.exists && actualType !== expectedType) {
+    add("error", "DG092", annualFile, `frontmatter.type は ${expectedType}: ${actualType ?? "(なし)"}`);
+  }
+  const text = readText(path.join(root, annualFile));
+  for (const orphan of backlogLib.findAnnualOrphanHeadings(text)) {
+    add("error", "DG092", annualFile, `月見出し (## YYYY-MM) の外の見出しはカードにならない (L${orphan.line}: ${orphan.title})`);
+  }
+  for (const card of backlogLib.parseAnnual(text)) {
+    const label = card.id ?? `L${card.line} ${card.title}`;
+    if (card.id) {
+      todoDefinitions.push({ id: card.id, file: annualFile });
+      if (!new RegExp(config.todo.idPattern).test(card.id)) {
+        add("error", "DG050", annualFile, `TODO ID形式が不正: ${card.id}`);
+      }
+    } else {
+      add("error", "DG092", annualFile, `${label}に[ID]が無い (### [ID] タスク名)`);
+    }
+    checkCardVocabulary(card, label, annualFile, add);
+    if (!isIsoDate(card.due ?? "")) {
+      add("error", "DG092", annualFile, `${label}に[期日:YYYY-MM-DD]が無い${card.due ? ` (読めない値: ${card.due})` : ""}。年間計画は期日で月次・週次へ引く`);
+    } else if (card.due.slice(0, 7) !== card.month) {
+      add("warning", "DG092", annualFile, `${label}の期日 ${card.due} が月見出し ${card.month} と食い違う`);
+    }
+  }
+}
+
 function inspectRepository({
   root = DEFAULT_ROOT,
   config = loadConfig(root),
@@ -467,7 +624,9 @@ function inspectRepository({
       .map((entry) => entry.name)
       .sort();
     const expected = [...expectedNames].sort();
-    for (const name of actual.filter((name) => !expected.includes(name))) {
+    // 置いてもよいが、無くてもよいファイル (例: 年間計画 annual.md は作るまで無い)
+    const optional = config.fixedDirectoriesOptional?.[directory] ?? [];
+    for (const name of actual.filter((name) => !expected.includes(name) && !optional.includes(name))) {
       add("error", "DG012", `${directory}/${name}`, "固定構成にないファイル。既存SSOTへ統合する");
     }
     for (const name of expected.filter((name) => !actual.includes(name))) {
@@ -606,7 +765,10 @@ function inspectRepository({
   // 実装計画: 命名、backlog参照、INDEX生成ブロック
   const planPattern = new RegExp(config.naming.implementationPlanPattern);
   const plans = getImplementationPlans(root, config);
-  const todoIds = collectTodoIds(config.todo.files.map((file) => readText(path.join(root, file))).join("\n"));
+  const annualFile = config.todo.annual?.file ?? null;
+  const todoIds = collectTodoIds(
+    [...config.todo.files, ...(annualFile ? [annualFile] : [])].map((file) => readText(path.join(root, file))).join("\n"),
+  );
   for (const plan of plans) {
     if (!planPattern.test(plan.name)) {
       add("error", "DG040", plan.file, "実装計画のファイル名がNN_日本語名.md形式ではない");
@@ -674,6 +836,11 @@ function inspectRepository({
   // 分類待ち (タグ・実行・種類の欠落) は**ファイル単位の集計 warning** に畳む —
   // カードごとに warning を出すと移行直後に数十行が並び、週次 --fail-on-warn の
   // 信号 (Due 超過等) が埋もれるため。
+  const waitPlacementLevel = severityLevel(config.todo.waitPlacement?.severity, "warning");
+  if (waitPlacementLevel === null) {
+    add("error", "DG090", DEFAULT_CONFIG, `todo.waitPlacement.severity は warning / error: ${config.todo.waitPlacement?.severity}`);
+  }
+  const untriagedMaxAgeDays = config.todo.untriagedMaxAgeDays ?? DEFAULT_UNTRIAGED_MAX_AGE_DAYS;
   for (const todoFile of config.todo.files.slice(1)) {
     const text = readText(path.join(root, todoFile));
     const cards = backlogLib.parseBacklog(text);
@@ -688,6 +855,7 @@ function inspectRepository({
     }
 
     let untagged = 0;
+    const untriagedStale = [];
     let noExecutor = 0;
     let noKind = 0;
     let noId = 0;
@@ -701,15 +869,7 @@ function inspectRepository({
         noId += 1;
       }
       const label = card.id ?? `L${card.line} ${card.title}`;
-      for (const unknown of card.unknownKeys) {
-        add("error", "DG056", todoFile, `${label}のタグキーが語彙外: [${unknown.raw}]`);
-      }
-      if (card.executor && !backlogLib.EXECUTORS.includes(card.executor)) {
-        add("error", "DG057", todoFile, `${label}の実行が語彙外: ${card.executor}`);
-      }
-      if (card.kind && !backlogLib.KINDS.includes(card.kind)) {
-        add("error", "DG057", todoFile, `${label}の種類が語彙外: ${card.kind}`);
-      }
+      checkCardVocabulary(card, label, todoFile, add);
       if (card.kind === "定期") {
         add(
           "error",
@@ -718,9 +878,25 @@ function inspectRepository({
           `${label}は反復タスクのためbacklogへ置けない。workflow / skill + stateへ移し、週次・月次はID参照だけにする`,
         );
       }
-      for (const category of card.unknownCategories) {
-        add("error", "DG057", todoFile, `${label}のカテゴリが語彙外: ${category}`);
+      // 待ちの理由のうち、backlog に置かないもの (時期 → 年間計画 / 観測 → 改善)。DG090 は移行が済むまで
+      // config の todo.waitPlacement.severity (既定 warning) で重さを決め、DG091 の期日欠落は常に error
+      for (const wait of card.waits.filter((value) => value in backlogLib.WAIT_PLACEMENT)) {
+        add(
+          waitPlacementLevel,
+          "DG090",
+          todoFile,
+          `${label}は[待ち:${wait}]なので backlog に置かない。${backlogLib.WAIT_PLACEMENT[wait]} へ移す`,
+        );
+        if (!isIsoDate(card.due ?? "")) {
+          add(
+            "error",
+            "DG091",
+            todoFile,
+            `${label}は[待ち:${wait}]なのに[期日:YYYY-MM-DD]が無い${card.due ? ` (読めない値: ${card.due})` : ""}。いつ再開・判定するかを期日で書く`,
+          );
+        }
       }
+      if (isUntriagedStale(card, now, untriagedMaxAgeDays)) untriagedStale.push(card);
       if (!card.hasTagLine) untagged += 1;
       else if (!card.executor) noExecutor += 1;
       if (!card.kind) noKind += 1;
@@ -738,6 +914,58 @@ function inspectRepository({
     if (noKind > 0) {
       add("warning", "DG059", todoFile, `種類なし ${noKind} 件 / 全 ${cards.length} カード`);
     }
+    if (untriagedStale.length > 0) {
+      const oldest = [...untriagedStale]
+        .sort((a, b) => a.filed.localeCompare(b.filed) || a.line - b.line)
+        .slice(0, 5)
+        .map((card) => `${card.id ?? `L${card.line}`} (${card.filed})`);
+      add(
+        "warning",
+        "DG093",
+        todoFile,
+        `起票から ${untriagedMaxAgeDays} 日を超え、担当の外部作業・[進行中]・[待ち:]・自動処理のどれも無いカード ${untriagedStale.length} 件 (古い順: ${oldest.join(" / ")})。着手するか、待ちの理由を付けるか、消す`,
+      );
+    }
+
+    // 大きさ。リポジトリは 1 ファイルの上限 (check-repo-hygiene) を超えると作業ツリー全体のコミットが止まる。
+    // 超えてから気づくと、起票した人でなく次にコミットする全員が止まるので、近づいた時点で知らせる
+    // (2026-11-13 に backlog.md が上限に達し、別のセッションのコミットが 3 回止まった)。
+    const budget = config.todo.sizeBudget;
+    if (budget) {
+      const fileBytes = Buffer.byteLength(text);
+      if (fileBytes >= budget.maxFileBytes * budget.warnFileRatio) {
+        add(
+          "warning",
+          "DG085",
+          todoFile,
+          `${fileBytes} バイトで、1 ファイルの上限 ${budget.maxFileBytes} バイトの ${Math.floor((fileBytes / budget.maxFileBytes) * 100)}%。超えると全コミットが止まる。完了済みのカードを消すか、済んだ作業の経緯を本文から削る`,
+        );
+      }
+      const lines = text.split("\n");
+      const large = cards
+        .map((card) => ({
+          label: card.id ?? `L${card.line}`,
+          bytes: Buffer.byteLength(lines.slice(card.startLine - 1, card.endLine).join("\n")),
+        }))
+        .filter((card) => card.bytes > budget.maxCardBytes)
+        .sort((a, b) => b.bytes - a.bytes);
+      if (large.length > 0) {
+        add(
+          "warning",
+          "DG086",
+          todoFile,
+          `${budget.maxCardBytes} バイトを超えるカード ${large.length} 枚 (大きい順: ${large
+            .slice(0, 3)
+            .map((card) => `${card.label} ${card.bytes}`)
+            .join(" / ")})。カードには未完了の行動だけを書き、経緯は git に任せる`,
+        );
+      }
+    }
+  }
+
+  // 年間計画 (annual.md)。月見出しの下に backlog と同じカード構文を置く。ファイルが無い間は検査しない
+  if (annualFile && fs.existsSync(path.join(root, annualFile))) {
+    checkAnnualPlan({ root, config, annualFile, frontmatter: frontmatters.get(annualFile), todoDefinitions, add });
   }
 
   // 月次・週次は TODO のコピー先ではなく、既存 ID を選ぶ計画ビュー。
@@ -755,7 +983,7 @@ function inspectRepository({
   }
 
   // 領域と構え (収益化戦略の優先順位表) → 月次 focus_domains → 週次 Must → backlog [領域:] の配線と、計画の規律 (DG081/082)。
-  // 判定規則は strategy-lanes.cjs、領域の語彙は収益化戦略の表だけが持つ。
+  // 判定規則は strategy-lanes.cjs、領域の構えは台帳 business.domain-stances だけが持つ。
   for (const issue of strategyLanes.laneBoard(root, now).issues) {
     add(issue.level, issue.code, issue.file, issue.message);
   }
@@ -795,6 +1023,7 @@ function inspectRepository({
   }
 
   checkAlwaysLoadedInstructions(root, config, add);
+  checkPlacement(root, config, add);
 
   findings.sort((a, b) =>
     `${a.level}:${a.code}:${a.file}:${a.message}`.localeCompare(
@@ -873,6 +1102,7 @@ module.exports = {
   fixImplementationPlanIndex,
   inspectRepository,
   isIsoDate,
+  isUntriagedStale,
   isoWeek,
   loadConfig,
   parseFrontmatter,

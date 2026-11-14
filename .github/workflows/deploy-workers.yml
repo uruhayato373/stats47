@@ -70,46 +70,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # 指標スナップショットは毎回生成して反映する (2026-10-10)。中身が前回配信と同じファイルは
-      # バイト列も同じになる (生成時刻を引き継ぐ。packages/r2-storage/src/lib/operations/stable-snapshot.ts) ので、
-      # 反映は SHA が一致した分を送らず、変わった分だけになる。以前は直前の push との差分で反映を省いていたため、
-      # 反映が途中で止まった次のデプロイがそれを補わなかった (DEPLOY-METRIC-RELEASE-TIMEOUT-01)。
-      - name: Generate and verify metric release snapshots
-        env:
-          R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
-        run: |
-          npx tsx -r ./packages/ranking/src/scripts/setup-cli.js packages/ranking/src/scripts/generate-ranking-items.ts --stage-dir .local/r2
-          npx tsx packages/ranking/src/scripts/generate-municipality-ranking.ts --all-published --source-base https://storage.stats47.jp --output-root .local/r2
-          npx tsx packages/ranking/src/scripts/generate-city-databooks.ts --source-base https://storage.stats47.jp --input-root .local/r2 --output-root .local/r2
-          npx tsx -r ./packages/ranking/src/scripts/setup-cli.js packages/ranking/src/scripts/export-master-snapshots.ts --staged-metrics
-          npx tsx -r ./packages/ranking/src/scripts/setup-cli.js apps/web/scripts/export-page-components-snapshot.ts
-          npm run metrics:verify-snapshots
-          node --input-type=module -e '
-            import fs from "node:fs";
-            import path from "node:path";
-            import {createHash} from "node:crypto";
-            import {RELEASE_KEY_PATTERN as allowed} from "./.github/scripts/metric-release-paths.mjs";
-            const root = ".local/r2";
-            const files = fs.readdirSync(root, {recursive:true}).map(key => String(key).split(path.sep).join("/")).filter(key => allowed.test(key)).sort().map(key => {
-              const body = fs.readFileSync(path.join(root, key));
-              JSON.parse(body.toString("utf8"));
-              return {key, bytes:body.length, sha256:createHash("sha256").update(body).digest("hex")};
-            });
-            if (!files.some(file => file.key === "app/home/featured.json") || !files.some(file => file.key === "app/ranking-items/all.json")) throw new Error("Missing release metadata");
-            const body = JSON.stringify({schemaVersion:1,status:"staged-unpublished",files});
-            fs.writeFileSync(".local/metric-release-plan.json", body);
-            fs.writeFileSync(".local/metric-release-plan.sha256", createHash("sha256").update(body).digest("hex"));
-            console.log("Verified exact release scope: " + files.length + " JSON files");
-          '
-
-      - name: Publish verified metric snapshots before app build
-        env:
-          R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
-          R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
-          R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
-          CLOUDFLARE_R2_BUCKET_NAME: stats47
-        run: |
-          npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts --manifest .local/metric-release-plan.json --manifest-sha256 "$(cat .local/metric-release-plan.sha256)" --concurrency 16
+      # Build は R2 の新しいスナップショットを読む (prebuild の検索 index が app/ranking-items/all.json を読み、
+      # generateStaticParams・sitemap も R2 を読む) ので、反映は Build より前に置く。その代わり、スナップショットの
+      # 中身と関係なく後の段を落とす条件 (OpenNext の Next.js サポート期限の判定・Cloudflare の認証) は、反映より前の
+      # ここで検査する。2026-10-21 (run 39589689158) に反映の後の Build がサポート期限の判定だけで落ち、次のデプロイまで
+      # 約 1 時間、旧版のアプリが新しいスナップショットを読んだ (DEPLOY-R2-AHEAD-OF-APP-01)。
+      # 順序は metric-release-order.test.mjs が固定する。
+      - name: Check build preconditions before publishing snapshots
+        run: node .github/scripts/check-build-preconditions.mjs
 
       - name: 🔐 Verify Cloudflare authentication
         # wrangler は apps/web の依存で、npm はルートへ巻き上げないことがある (2026-10-28 にルートで not found)
@@ -166,13 +134,54 @@ jobs:
             echo "      - Account - Workers Scripts - Read"
             echo "      - Account - Workers Scripts - Edit"
             echo "      - Account - Account - Read"
-            echo "      - Account - D1 - Edit"
             echo "      - Account - R2 - Edit"
             echo "   3. GitHub Secrets で CLOUDFLARE_API_TOKEN を更新"
+            echo "   デプロイは D1 を使わないので D1 の編集権限は要らない。同じトークンを使う監視の権限は .github/workflows/README.md"
             exit 1
           fi
 
           echo "✅ 認証確認完了"
+
+      # 指標スナップショットは毎回生成して反映する (2026-10-10)。中身が前回配信と同じファイルは
+      # バイト列も同じになる (生成時刻を引き継ぐ。packages/r2-storage/src/lib/operations/stable-snapshot.ts) ので、
+      # 反映は SHA が一致した分を送らず、変わった分だけになる。以前は直前の push との差分で反映を省いていたため、
+      # 反映が途中で止まった次のデプロイがそれを補わなかった (DEPLOY-METRIC-RELEASE-TIMEOUT-01)。
+      - name: Generate and verify metric release snapshots
+        env:
+          R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+        run: |
+          npx tsx -r ./packages/ranking/src/scripts/setup-cli.js packages/ranking/src/scripts/generate-ranking-items.ts --stage-dir .local/r2
+          npx tsx packages/ranking/src/scripts/generate-municipality-ranking.ts --all-published --source-base https://storage.stats47.jp --output-root .local/r2
+          npx tsx packages/ranking/src/scripts/generate-city-databooks.ts --source-base https://storage.stats47.jp --input-root .local/r2 --output-root .local/r2
+          npx tsx -r ./packages/ranking/src/scripts/setup-cli.js packages/ranking/src/scripts/export-master-snapshots.ts --staged-metrics
+          npx tsx -r ./packages/ranking/src/scripts/setup-cli.js apps/web/scripts/export-page-components-snapshot.ts
+          npm run metrics:verify-snapshots
+          node --input-type=module -e '
+            import fs from "node:fs";
+            import path from "node:path";
+            import {createHash} from "node:crypto";
+            import {RELEASE_KEY_PATTERN as allowed} from "./.github/scripts/metric-release-paths.mjs";
+            const root = ".local/r2";
+            const files = fs.readdirSync(root, {recursive:true}).map(key => String(key).split(path.sep).join("/")).filter(key => allowed.test(key)).sort().map(key => {
+              const body = fs.readFileSync(path.join(root, key));
+              JSON.parse(body.toString("utf8"));
+              return {key, bytes:body.length, sha256:createHash("sha256").update(body).digest("hex")};
+            });
+            if (!files.some(file => file.key === "app/home/featured.json") || !files.some(file => file.key === "app/ranking-items/all.json")) throw new Error("Missing release metadata");
+            const body = JSON.stringify({schemaVersion:1,status:"staged-unpublished",files});
+            fs.writeFileSync(".local/metric-release-plan.json", body);
+            fs.writeFileSync(".local/metric-release-plan.sha256", createHash("sha256").update(body).digest("hex"));
+            console.log("Verified exact release scope: " + files.length + " JSON files");
+          '
+
+      - name: Publish verified metric snapshots before app build
+        env:
+          R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+          R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+          CLOUDFLARE_R2_BUCKET_NAME: stats47
+        run: |
+          npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts --manifest .local/metric-release-plan.json --manifest-sha256 "$(cat .local/metric-release-plan.sha256)" --concurrency 16
 
       - name: Build
         working-directory: apps/web

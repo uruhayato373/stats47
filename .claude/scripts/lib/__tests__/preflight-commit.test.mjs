@@ -72,7 +72,7 @@ test("Windowsではnpm/npxのCLI本体をNodeから直接実行する", () => {
 function runPreflight(projectDir) {
   return spawnSync(process.execPath, [PREFLIGHT], {
     encoding: "utf8",
-    env: { ...process.env, CLAUDE_PROJECT_DIR: projectDir },
+    env: { ...process.env, STATS47_SCAN_ROOT: projectDir },
   });
 }
 
@@ -85,7 +85,7 @@ function runPreflight(projectDir) {
 function tempProject(files = {}) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "stats47-preflight-"));
   const seeded = {
-    ".claude/config/env-registry.json": `${JSON.stringify({ version: 1, variables: [] }, null, 2)}\n`,
+    "config/env-registry.json": `${JSON.stringify({ version: 1, variables: [] }, null, 2)}\n`,
     ...files,
   };
   for (const [rel, content] of Object.entries(seeded)) {
@@ -233,6 +233,8 @@ test("--pr は所要時間を測る runtime-budget を並列実行に混ぜな�
   assert.ok(!names.has("runtime-budget"), "runtime-budget が並列の --pr に入っている");
   const workflow = fs.readFileSync(path.join(ROOT, ".github/workflows/pr-quality-check.yml"), "utf8");
   assert.match(workflow, /run: node \.claude\/scripts\/lib\/check-runtime-budget\.cjs/, "CI の単独 step が無いと予算検査がどこでも走らなくなる");
+  // 予算検査自身のテストは pre-push (変更したテストだけ) でしか走っていなかった (CI-TOOLING-FOLLOWUP-02)
+  assert.match(workflow, /node --test[^\n]*(?:\\\n[^\n]*)*__tests__\/check-runtime-budget\.test\.cjs/, "予算検査のテスト (check-runtime-budget.test.cjs) を CI のどの step も実行していない");
 });
 
 test("--pr は networkOrSecrets が none でない registry gate を既定で実行しない (--with-network で opt-in)", () => {

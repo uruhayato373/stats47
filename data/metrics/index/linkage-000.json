@@ -303,10 +303,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:spinach-consumption-ranking",
-          "kind": "blog"
-        },
-        {
           "pageId": "ranking:academic-achievement-test-average-rate",
           "kind": "ranking"
         },
@@ -1047,10 +1043,15 @@
               "factor": 1
             }
           ],
-          "valueScale": 0.1
+          "valueScale": 0.1,
+          "sampleCount": {
+            "cdTab": "13,45",
+            "factor": 10,
+            "minimum": 10
+          }
         },
         "derived": true,
-        "configHash": "3ea9f034c16e419f"
+        "configHash": "bfec839338f70546"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -2668,10 +2669,7 @@
         "configHash": "4d2760217bfec406"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:adult-class-lecture-count-per-million",
@@ -6075,7 +6073,23 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:01000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:01000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -6083,7 +6097,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:03000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:03000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -6091,7 +6121,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:05000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:05000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -6099,7 +6145,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:07000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:07000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -6107,7 +6169,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:09000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:09000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -6115,7 +6193,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:11000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:11000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -6123,7 +6217,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:13000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:13000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -6131,7 +6241,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:15000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:15000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -6139,7 +6265,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:17000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:17000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -6147,7 +6289,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:19000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:19000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -6155,7 +6313,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:21000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:21000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -6163,7 +6337,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:23000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:23000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -6171,7 +6361,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:25000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:25000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -6179,7 +6385,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:27000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:27000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -6187,7 +6409,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:29000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:29000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -6195,7 +6433,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:31000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:31000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -6203,7 +6457,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:33000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:33000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -6211,7 +6481,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:35000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:35000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -6219,7 +6505,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:37000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:37000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -6227,7 +6529,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:39000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:39000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -6235,7 +6553,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:41000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:41000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -6243,7 +6577,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:43000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:43000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -6251,11 +6601,35 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:45000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:45000:tourism",
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:46000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:geographic-access",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:46000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:freight-logistics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:geographic-access",
           "kind": "area-theme"
         },
         {
@@ -6279,11 +6653,21 @@
           "kind": "ranking"
         },
         {
+          "pageId": "theme:freight-logistics",
+          "kind": "theme"
+        },
+        {
+          "pageId": "theme:geographic-access",
+          "kind": "theme"
+        },
+        {
           "pageId": "theme:tourism",
           "kind": "theme"
         }
       ],
       "themes": [
+        "freight-logistics",
+        "geographic-access",
         "tourism"
       ]
     },
@@ -11689,10 +12073,7 @@
         "configHash": "d1b111aafa875131"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:tuna-consumption-quantity-vs-annual-new-inpatients-general",
@@ -11728,10 +12109,7 @@
         "configHash": "455d5943ed3d27f4"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:annual-new-inpatients-psychiatric-hospital-per-100k",
@@ -12538,11 +12916,196 @@
         "configHash": "30b168619017f056"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "area-theme:01000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:retail-commerce",
+          "kind": "area-theme"
+        },
         {
           "pageId": "blog:commercial-sales-productivity-gap",
           "kind": "blog"
@@ -12558,9 +13121,15 @@
         {
           "pageId": "ranking:annual-sales-amount-per-employee",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:retail-commerce",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "retail-commerce"
+      ]
     },
     {
       "metricKey": "annual-sales-amount-per-establishment",
@@ -12585,11 +13154,196 @@
         "configHash": "26df453fb8c43dd8"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "area-theme:01000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:retail-commerce",
+          "kind": "area-theme"
+        },
         {
           "pageId": "blog:commercial-sales-productivity-gap",
           "kind": "blog"
@@ -12609,9 +13363,15 @@
         {
           "pageId": "ranking:annual-sales-amount-per-establishment",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:retail-commerce",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "retail-commerce"
+      ]
     },
     {
       "metricKey": "annual-snow-days",
@@ -13448,10 +14208,7 @@
         "configHash": "0e382aa54aec3f96"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:apparel-retail-store-count-per-1000",
@@ -13579,7 +14336,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:nagasaki-food-culture",
+          "pageId": "blog:miyazaki-food-culture",
           "kind": "blog"
         },
         {
@@ -13808,6 +14565,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:banana-consumption-quantity",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
@@ -13816,7 +14577,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:nagasaki-food-culture",
+          "pageId": "blog:miyazaki-food-culture",
           "kind": "blog"
         },
         {
@@ -14134,10 +14895,15 @@
               "factor": 1
             }
           ],
-          "valueScale": 0.1
+          "valueScale": 0.1,
+          "sampleCount": {
+            "cdTab": "13,45",
+            "factor": 10,
+            "minimum": 10
+          }
         },
         "derived": true,
-        "configHash": "bcb62ae21ab21ad9"
+        "configHash": "bc7ab0e186e3455c"
       },
       "dependencies": [],
       "normalizationDependencies": [

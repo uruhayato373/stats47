@@ -17,7 +17,8 @@ agent (`survey-curator`) / 人間はこれに従う。2026-07-12 に旧 survey �
 
 > **実装済み SSOT**: survey 編集情報はカタログの `surveys.editorial` (JSON + Schema。読み込みは `packages/data-configs/src/survey-editorial.ts`)
 > (`summary` / `whatYouCanLearn[]` / `readerQuestions[]{question,rankingKey}` / `caveats[]` / `relatedArticleSlugs[]` /
-> `areaLabel` (ハブ冒頭の地域の表記。都市別の値を集める調査だけ書く) / `relatedHubs[]{surveyKey,label}` (同じ調査の別ハブ))。
+> `areaLabel` (ハブ冒頭の地域の表記。都市別の値を集める調査だけ書く) /
+> `surveyCycle{intervalYears,anchorYear}` (毎年でない調査の実施周期。ハブ冒頭の最新年を実施年から出す。国勢調査は 5 年ごと))。
 > `readerQuestions` の rankingKey は、ハブの代表ランキングとランキングページの「同じ調査のランキング」でも最優先に並ぶ (2026-11-02)。
 > **同じ調査の別 ID は 1 つのハブにまとめる**: 指標の紐付けで ID が分かれていても (家計調査は品目別 `kakei-chousa` と社会・人口統計体系経由の
 > `household-survey`)、読者にとって 1 つの調査ならハブは 1 つにする。表は `packages/data-configs/src/content/href.ts` の `SURVEY_HUB_ALIASES`
@@ -89,7 +90,7 @@ surveys.editorial (カタログの ID)  ← survey 編集情報の SSOT
   ├─ whatYouCanLearn[]
   ├─ readerQuestions[] { question, rankingKey }
   ├─ caveats[]
-  ├─ areaLabel / relatedHubs[]
+  ├─ areaLabel / surveyCycle
   └─ relatedArticleSlugs[]
 
 data/surveys/lenses/<surveyId>.json  ← 調査の切り口台帳 (下の「調査の切り口台帳」)
@@ -149,7 +150,7 @@ R2 app/survey/<id>/items.json
   単位が測っているものと合う (食品は消費量、耐久財などは購入数量)。誤読しやすい品目に定義の注記がある (`kakei-definition-reading`)。
   「同じ調査のランキング」が編集の `readerQuestions` を先に出す。
 - **テーマ** (`/themes/<key>`): 切り口のチャネルに `theme` があるとき、その指標が ThemeCatalog に入っている。全国集計 (`national`) の切り口を県の地図にしない。
-- **調査ハブ** (`/survey/<key>`): 地域の表記 (`areaLabel`)・読者の問い・注意点が台帳の `readerQuestion`・`caveats` と食い違わない。同じ調査の別ハブ (`relatedHubs`) へ行ける。
+- **調査ハブ** (`/survey/<key>`): 地域の表記 (`areaLabel`)・読者の問い・注意点が台帳の `readerQuestion`・`caveats` と食い違わない。同じ調査の別 ID は 1 つのハブにまとまり (`SURVEY_HUB_ALIASES`)、別名の URL はそのハブへ 301 する。
 - **導線**: ランキング → 調査ハブ → 関連記事 → ランキングの往復がどれも実在するページへ届く (soft 404 は `audit-site-links.mjs` で見る)。
   切り口の記事 (ブログ) が、その指標のランキングの関連記事に出る (`rankingArticleIndex`)。
 - **UI**: 代表カードのフック文が値と単位を取り違えない。スマホ幅 (375px) で題・単位・注記が切れない。
@@ -160,7 +161,7 @@ R2 app/survey/<id>/items.json
 
 - 75 調査を一括で長文化せず、**1 survey (census) で実証 → GSC 実測が基準を満たした場合だけ横展開**する。
 - 横展開順は推測で固定せず、`data/surveys/portfolio.json` (editorial-candidate の優先順位) の GSC 実測を使う
-  (初回監査の証跡: `.claude/skills/survey/manage-survey-portfolio/reference/audits/2026-07-11-survey-portfolio-audit.md`)。
+  (初回監査の証跡: `data/surveys/audits/2026-07-11-survey-portfolio-audit.md`)。
 - 判定 (デプロイ4〜8週後・baseline 比): CTR +30% 以上かつ impressions 100 以上 / クラスター clicks +20% 以上 /
   平均順位 2 以上改善 or 11-20位→Top10 / 内部遷移 GA4 で発生 / 品質 (誤出典・数値不一致・soft404・重複canonical) 0。
   母数不足なら `effect/none` と断定せず計測期間を延長する。

@@ -3,7 +3,7 @@ name: 🗂️ Sync Snapshots → R2
 # git TS (data/page-components, affiliate-ads 等) / article.md / R2 観測値を入力に
 # 配信 snapshot を再生成し R2 (app/) に push する手動 workflow。完全DBレス (doc12)。
 #
-# R2 書き込みはこの CI / クラウド専用 (ローカルからの push は _assert-ci-write ガードで停止)。
+# R2 書き込みはこの CI 専用 (_assert-ci-write は GITHUB_ACTIONS=true で通し、ローカルからの push は止める)。
 # ローカルは公開 URL 経由の読み取り専用。
 #
 # 使い方: Actions タブ → この workflow → Run workflow。
@@ -54,8 +54,9 @@ jobs:
   sync:
     # ★45 分ではフル run が構造的に完走できない (2026-08-17 に run 32006827498 で実測)。
     #   内訳: 全 task の生成に 30 分 (うち master 7.6 分 / area-profile 15 分) + 末尾 push 21 分
-    #   (14,033 件 / 実測 11.2 files/s) = 約 52 分。runner の manifest は毎回空なので
-    #   「アップロード対象」は常に全件になる (差分 push という名前だが CI ではフル push)。
+    #   (14,033 件 / 実測 11.2 files/s) = 約 52 分。runner の manifest は毎回空なので、当時は
+    #   「アップロード対象」が常に全件になっていた。2026-11-14 の 3b10a0410 から diff-push-r2.ts は
+    #   R2 の一覧の size・ETag を手元の size・MD5 と照合し、中身が同じファイルは送らない。
     #   45 分だと push が 9,416/14,033 で cancel され、書けた snapshot の 1/3 が届かないまま
     #   runner ごと破棄される (run.sh の「失敗しても push する」修正では救えない打ち切られ方)。
     #   120 分は data 成長ぶんの余裕込み。ハングの検知手段としては残す。
@@ -139,7 +140,7 @@ jobs:
           done
           echo "staged $count specialty webp → .local/r2/app/areas/**/specialty/"
 
-      # snapshot 再生成 → R2 push。CI では CI=true が立つため run.sh の push が実行される。
+      # snapshot 再生成 → R2 push。Actions では GITHUB_ACTIONS=true が立つため run.sh の push と diff-push-r2 の書き込みガードが通る。
       #
       # ★NODE_ENV=production 必須 (2026-07-27 障害の再発防止・data-refresh.yml と同じ理由):
       #   run.sh の TSX ラッパ (packages/ranking/src/scripts/setup-cli.js) は NODE_ENV 未設定なら
@@ -255,14 +256,18 @@ jobs:
           npm run content:sync -- --from-r2
           npx tsx apps/web/scripts/sync-content-catalog.ts --check
           npx tsx apps/web/scripts/validate-content-catalog.ts
+          # 指標の逆引き (data/metrics/index) はページの索引から作る。記事の指標が変わった回に作り直さないと
+          # develop の metrics:check が古い逆引きで落ちる (BLOG-LEDGER-PUBLISH-SYNC-01)
+          npm run metrics:build-index
 
-      # 新規 ranking の OGP/カード を即生成 (KNOWN 確定直後・source=known で新キーも拾う)。
+      # 新規 ranking の OGP を即生成 (KNOWN 確定直後・source=known で新キーも拾う)。
       # 未生成だと og:image が 404 になるため公開時に先回りする。欠落分のみ生成 (self-heal)。
       # 通常の新規key数に合わせて1回50件に制限する。初回manifest移行は
       # timeoutの長いgenerate-ogp-images.ymlを反復し、この短いPR jobへ持ち込まない。
-      # ranking_image_keys 指定時は検証済みキーだけを両画像typeへ渡す。snapshot自体の対象は変えない。
+      # ranking_image_keys 指定時は検証済みキーだけを ranking OGP へ渡す。snapshot自体の対象は変えない。
+      # ranking カード WebP は読み手が無いため生成を止めた (RANKING-CARD-WEBP-UNUSED-01)。
       # 生成・publish失敗はkeys PRも止め、画像なしrankingの公開を防ぐ。
-      - name: 🖼 Generate changed ranking OGP/cards
+      - name: 🖼 Generate changed ranking OGP
         env:
           RANKING_KEYS: ${{ inputs.ranking_image_keys }}
           R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
@@ -276,7 +281,7 @@ jobs:
           SC="apps/web/scripts/generate-ogp-images.ts"
           ARGS=(--source known --limit 50 --max-generate 50)
           [ -n "$RANKING_KEYS" ] && ARGS+=(--key "$RANKING_KEYS")
-          for TYPE in ranking ranking-cards; do
+          for TYPE in ranking; do
             npx tsx --tsconfig "$TSC" "$SC" --type "$TYPE" "${ARGS[@]}"
             PLAN=".local/image-generation-publish-plan-${TYPE}.json"
             test -f "$PLAN" || { echo "exact publish plan が生成されませんでした: $TYPE"; exit 1; }
@@ -297,11 +302,12 @@ jobs:
             apps/web/src/config/unpublished-blog-slugs.ts
             apps/web/src/config/sitemap-blog-entries.ts
           )
-          # KNOWN と R2 のブログの一覧から作るもの (ブログの記事台帳と、そこから作るページ索引)。キーではないので件数の増減には数えない
+          # KNOWN と R2 のブログの一覧から作るもの (ブログの記事台帳と、そこから作るページ索引・指標の逆引き)。キーではないので件数の増減には数えない
           DERIVED_FILES=(
             data/blog/ledger
             data/content/entities.json
             data/content/pages
+            data/metrics/index
             packages/data-configs/src/prominence/ranking-prominence.generated.ts
           )
           # 生成器はキーが同じでも先頭コメントの「最終生成日」を書き換える。その 1 行だけの差分では

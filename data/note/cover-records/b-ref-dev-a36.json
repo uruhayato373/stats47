@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-dev-a36",
+  "production": {
+    "id": "NCI-00159",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "住める土地と森林\n47都道府県を比較",
+      "subline": "可住地と森林の割合",
+      "subject": "緑の山の模型と、ふもとの小さな家々の模型をひとつの台に載せて大きく描く。地図にしない。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/nc406259524da 本文確認2026-11-04。可住地面積割合は大阪府が1位、森林面積割合は高知県が1位。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "5fec0d394bfb23f278745c09fbe54bc3bb618f0f1871f71dd40fd9aa581572fa",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a36/revisions/5fec0d394bfb23f278745c09fbe54bc3bb618f0f1871f71dd40fd9aa581572fa.png"
+      },
+      "bytes": 35632,
+      "id": "5fec0d394bfb23f278745c09fbe54bc3bb618f0f1871f71dd40fd9aa581572fa",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:07:17.785Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "310661985feec2c839b5e08c7441cf250c6f49f4f3fec192b73d5d28dbf4826e"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:24.674Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "310661985feec2c839b5e08c7441cf250c6f49f4f3fec192b73d5d28dbf4826e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a36/inputs/310661985feec2c839b5e08c7441cf250c6f49f4f3fec192b73d5d28dbf4826e.json"
+          },
+          "bytes": 1284
+        }
+      }
+    },
+    {
+      "sha256": "20e127261ae4c2269c3ce7c5ecd9b3ed207fe6bf14b506ebb673d2ecb1b2aa02",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a36/revisions/20e127261ae4c2269c3ce7c5ecd9b3ed207fe6bf14b506ebb673d2ecb1b2aa02.png"
+      },
+      "bytes": 55666,
+      "id": "20e127261ae4c2269c3ce7c5ecd9b3ed207fe6bf14b506ebb673d2ecb1b2aa02",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:42.317Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324067490/rectangle_large_type_2_58fce9ea5b41662ba15a67033cc08215.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "20e127261ae4c2269c3ce7c5ecd9b3ed207fe6bf14b506ebb673d2ecb1b2aa02"
+      }
+    },
+    {
+      "sha256": "d12baaf8823ad2d082096cd37a9c56d76359f4bb161f49e3547c010e87c81e8b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a36/revisions/d12baaf8823ad2d082096cd37a9c56d76359f4bb161f49e3547c010e87c81e8b.png"
+      },
+      "bytes": 1980633,
+      "id": "d12baaf8823ad2d082096cd37a9c56d76359f4bb161f49e3547c010e87c81e8b",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-c2bac8a2a01a",
+      "createdAt": "2026-11-04T00:56:31.980Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "f1c57a56410b89d0fe79d94afe5852d4d7ef8c75c81975325a264792b42ce69e"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:57:21.405Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "f1c57a56410b89d0fe79d94afe5852d4d7ef8c75c81975325a264792b42ce69e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a36/inputs/f1c57a56410b89d0fe79d94afe5852d4d7ef8c75c81975325a264792b42ce69e.json"
+          },
+          "bytes": 8220
+        },
+        "production": {
+          "id": "NCI-00159",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "c2bac8a2a01a1cfa0a6491e05b4c72f48fa3076fd3f0eaca9e283ae4067ecd8a"
+        }
+      }
+    }
+  ]
+}

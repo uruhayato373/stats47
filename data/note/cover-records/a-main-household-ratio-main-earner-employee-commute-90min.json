@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-main-household-ratio-main-earner-employee-commute-90min",
+  "production": {
+    "id": "NCI-00499",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "通勤90分以上の\n世帯割合は？",
+      "subline": "1位は埼玉県\n2023年・主世帯千世帯対",
+      "subject": "右側に文字や数字のない腕時計を1点だけ大きく描く。人の平均通勤時間ではなく、通勤90分以上の主世帯の割合を扱う。人物・手・顔・キャラクター・交通機関・駅名・路線図・地図・グラフ・架空の数値を描かない。",
+      "evidence": "公開本文と data/metrics/main-household-ratio-main-earner-employee-commute-90min.ts を確認。2023年、家計を主に支える者が雇用者で通勤時間1時間30分以上の主世帯の割合（主世帯千世帯対）。埼玉県33.9が1位、沖縄県2.6が47位。平均通勤時間や世帯実数ではない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "880506d5b6b83a070bce37284e2a713c8be3f392d748a0d3d369b3594f4ca50f",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-main-household-ratio-main-earner-employee-commute-90min/revisions/880506d5b6b83a070bce37284e2a713c8be3f392d748a0d3d369b3594f4ca50f.png"
+      },
+      "bytes": 2219160,
+      "id": "880506d5b6b83a070bce37284e2a713c8be3f392d748a0d3d369b3594f4ca50f",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-b1b78bc1d377",
+      "createdAt": "2026-10-15T12:50:55.134Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ed5f9a9eb662f3850aa9f8520f80ec281577faee2440cc448a56744f95e06941"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "imagegen 完成画像。原寸・幅320px・正規化後で全掲載文言・題材・人物なしを確認し、確認した画像とSHA一致 (2026-10-15)",
+        "reviewedAt": "2026-10-15T12:50:59.153Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "ed5f9a9eb662f3850aa9f8520f80ec281577faee2440cc448a56744f95e06941",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-main-household-ratio-main-earner-employee-commute-90min/inputs/ed5f9a9eb662f3850aa9f8520f80ec281577faee2440cc448a56744f95e06941.json"
+          },
+          "bytes": 9650
+        },
+        "production": {
+          "id": "NCI-00499",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "b1b78bc1d37702695f94ffc06595a94040b52121272e244f77c019e0562e1a95"
+        }
+      }
+    },
+    {
+      "sha256": "4e3150fb1da9cb42c357769a9a9cc6e1de466a8c8f43cfa4002598f59bf76217",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-main-household-ratio-main-earner-employee-commute-90min/revisions/4e3150fb1da9cb42c357769a9a9cc6e1de466a8c8f43cfa4002598f59bf76217.png"
+      },
+      "bytes": 1829446,
+      "id": "4e3150fb1da9cb42c357769a9a9cc6e1de466a8c8f43cfa4002598f59bf76217",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-9f9c4882de36",
+      "createdAt": "2026-10-23T05:44:34.906Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ec1df0196ffcc12f9fed9b172c808aea2acddb930ee20827ef35f01346aa3b5e"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "本文と指標を照合。旧版は世帯数と誤読される表現、新版は通勤90分以上の主世帯割合を明示。原寸・320pxで文字と腕時計を確認。",
+        "reviewedAt": "2026-10-23T05:46:21.579Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "ec1df0196ffcc12f9fed9b172c808aea2acddb930ee20827ef35f01346aa3b5e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-main-household-ratio-main-earner-employee-commute-90min/inputs/ec1df0196ffcc12f9fed9b172c808aea2acddb930ee20827ef35f01346aa3b5e.json"
+          },
+          "bytes": 8301
+        },
+        "production": {
+          "id": "NCI-00499",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "9f9c4882de360075e9860965fdefdf075d21ccca619800853e0cc67a4c388cf9"
+        }
+      }
+    }
+  ]
+}

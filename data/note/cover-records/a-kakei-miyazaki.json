@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-kakei-miyazaki",
+  "production": {
+    "id": "NCI-00084",
+    "policyId": "NCP-002",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "宮崎県の家計\n教育費に注目",
+      "subline": "宮崎市・2024年\n二人以上の世帯",
+      "subject": "添付は宮崎県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無文字の学習ノートを小さく1点だけ。車両や家の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+      "evidence": "https://note.com/stats47/n/n7f0be4fef37c 2026-10-23公開API本文照合。宮崎市の2024年・二人以上の世帯の家計調査。教育0.61倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は宮崎県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は宮崎市であり県全域の観測図ではない。人物・キャラクターなし。",
+      "dataScope": {
+        "place": "宮崎市",
+        "year": "2024",
+        "households": "二人以上の世帯"
+      }
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "d4e8bb44becb5a8830f1729cb845be991f762ee3512e09d39b22fe2687403f97",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-miyazaki/revisions/d4e8bb44becb5a8830f1729cb845be991f762ee3512e09d39b22fe2687403f97.png"
+      },
+      "bytes": 51276,
+      "id": "d4e8bb44becb5a8830f1729cb845be991f762ee3512e09d39b22fe2687403f97",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:08.769Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312771544/rectangle_large_type_2_e048bd1e482533c33d69c649ac650b97.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "d4e8bb44becb5a8830f1729cb845be991f762ee3512e09d39b22fe2687403f97"
+      }
+    },
+    {
+      "sha256": "1645e9b9388e281269396fad619caec750ae269f1563d9b5ba279e32d003b366",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-miyazaki/revisions/1645e9b9388e281269396fad619caec750ae269f1563d9b5ba279e32d003b366.png"
+      },
+      "bytes": 101897,
+      "id": "1645e9b9388e281269396fad619caec750ae269f1563d9b5ba279e32d003b366",
+      "kind": "candidate",
+      "version": "2026-10-02-household-r1",
+      "createdAt": "2026-10-02T03:18:29.270Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "13505a67154ff49b083f99cff19ded0a8dd69f3c74cff6ba20c7b2aaa03a154a"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+        "reviewedAt": "2026-10-02T05:27:41.112Z"
+      },
+      "provenance": {
+        "renderer": "bold-note-cover",
+        "sourceUrl": "https://storage.stats47.jp/app/stats/education-expenditure-total/values.json",
+        "sourceSha256": "8fff1a0bc37d5de9718095212fd0c25c9122a0f48bacc30d3cf6da912b8c9ab9"
+      }
+    },
+    {
+      "sha256": "985a1c775728b93e5ccf12a70ce8290613a4ce17b3d6a92fbd7bcb2b37d2098e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-miyazaki/revisions/985a1c775728b93e5ccf12a70ce8290613a4ce17b3d6a92fbd7bcb2b37d2098e.png"
+      },
+      "bytes": 98079,
+      "id": "985a1c775728b93e5ccf12a70ce8290613a4ce17b3d6a92fbd7bcb2b37d2098e",
+      "kind": "r2-archive",
+      "version": "legacy-r2-import-2026-10-02",
+      "createdAt": "2026-10-02T03:29:00.504Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Legacy R2 asset preserved; not adopted for note",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "legacy-public-r2",
+        "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-miyazaki/images/cover-1280x670.png",
+        "sourceSha256": "985a1c775728b93e5ccf12a70ce8290613a4ce17b3d6a92fbd7bcb2b37d2098e"
+      }
+    },
+    {
+      "sha256": "70ce233bed0d40ff26c471e44dd14604a0a3a0ff12153f4ebc3b8c17aad4dc14",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-miyazaki/revisions/70ce233bed0d40ff26c471e44dd14604a0a3a0ff12153f4ebc3b8c17aad4dc14.png"
+      },
+      "bytes": 1518279,
+      "id": "70ce233bed0d40ff26c471e44dd14604a0a3a0ff12153f4ebc3b8c17aad4dc14",
+      "kind": "candidate",
+      "version": "pop-NCP-002-v3-6c8bc2f66340",
+      "createdAt": "2026-10-23T09:02:43.593Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "3621a8d2ea29495c0a6270ea50ae15e790a0e11352de53815fe9853ff9f9cab9"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "宮崎県の主域輪郭と宮崎市・2024年・二人以上の世帯、教育費と無文字ノートを新旧比較。原寸と幅320pxで全掲載文字を確認。",
+        "reviewedAt": "2026-10-23T09:05:36.033Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "3621a8d2ea29495c0a6270ea50ae15e790a0e11352de53815fe9853ff9f9cab9",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-miyazaki/inputs/3621a8d2ea29495c0a6270ea50ae15e790a0e11352de53815fe9853ff9f9cab9.json"
+          },
+          "bytes": 12897
+        },
+        "production": {
+          "id": "NCI-00084",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "6c8bc2f663408cf945a9712574220136dab4c1bce756f9e49ba9a99b947aae74"
+        }
+      }
+    }
+  ]
+}

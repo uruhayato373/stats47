@@ -1,194 +1,199 @@
 # Memory Index
-- [data refresh cancel mismatch](feedback_data_refresh_cancel_mismatch.md) — Data Refresh を最終同期中に止めると item だけ新しい年になり画面が空になる。止めたら公開データ監査と範囲指定の再実行
-- [codex exec stdin](feedback_codex_exec_stdin.md) — 背景実行の codex exec は標準入力待ちで無言で止まる。</dev/null で閉じ、公開前記事は --article を渡す
-- [r2-write pending replaced](feedback_r2_write_pending_replaced.md) — r2-write の待機は 1 本だけ。後の run が待機中を cancelled にする。完了を待って次を起動する
-- [chart ledger read first](feedback_chart_ledger_read_first.md) — 図のデータ欠けを語る前に台帳を読む。形の合格は値の正しさを保証しない。型の見た目は見本を見せてから全件へ
-- [note profile launch](feedback_note_profile_launch.md) — note の専用プロファイルは素の Chrome で開かず Playwright 経由で起動する。401 なら保存済みセッションを確認してオーナーへ
 
-- [next eslint unpatched braces](feedback_next_eslint_unpatched_braces.md) — Next ESLint経由の未修正bracesは限定overrideで除去。実際のページ検出・lint・auditとクリーンinstallで検証する
+## 働き方・オーナーの好み
+- [reply in japanese](feedback_reply_in_japanese.md) — 返答は常に日本語
+- [periodic progress reports](feedback_periodic_progress_reports.md) — 長い作業は約5分おきに実測で進捗を伝える
+- [bypass permissions](feedback_bypass_permissions.md) — Agent は確認なしで最後まで処理
+- [autonomous execution](feedback_autonomous_execution.md) — スキル実行は確認不要で自動処理
+- [agent output contract](feedback_agent_output_contract.md)・[codex delegation](feedback_codex_delegation_token_saving.md) — Agent prompt 冒頭に Task Capsule と OUTPUT FORMAT。読み取りの確認・調査は Codex に分担
+- [commit in batches](feedback_commit_in_batches.md) — 修正を重ねる間は毎回コミットせず、まとまりで 1 回
+- [no deploy per iteration](feedback_no_deploy_per_iteration.md) — 指示なしに main へ出さない。本番は 1 日 1 回
+- [release squash skip token](feedback_release_squash_skip_token.md) — squash 本文の skip-ci 印で本番デプロイが起動しない。マージ後に run を確認
+- [batch production builds](feedback_batch_production_builds.md) — 本番ビルドは修正ごとに回さず節目に 1 回
+- [file backlog as you go](feedback_file_backlog_as_you_go.md) — 範囲外の課題は見つけた時点で backlog へ
+- [portfolio keep decision](feedback_portfolio_keep_decision_2026_10.md) — SNS・テーマ・Geo・商品は継続。簡素化は系統内の是正で
+- [business vs content issues](feedback_business_vs_content_issues.md) — 事業イシューと問いの台帳を混ぜない
+- [content four types](feedback_content_four_types.md) — 全コンテンツは 4 型のどれか。未分類で作らない
+- [reference ui measure live](feedback_reference_ui_measure_live.md) — 見本 UI は実物の computed style を測ってから
+- [kindle check by agent](feedback_kindle_check_by_agent.md) — Kindle の表示確認はオーナーに頼まず自分で撮る
+- [permission grant owner only](feedback_permission_grant_owner_only.md) — GA4/GCP の権限付与は最後をオーナーへ
 
-- [chart-image-copy.md](../rules/chart-image-copy.md) — 画像内の冗長説明を別の型で再追加しない。note・サイト・X・Instagram共通の最小テキスト規約とPNG生成前の検査を使う（同じユーザー指摘の再発防止）
+## 事業・収益化
+- [monetization contract](project_monetization_contract.md) — AdSense の現行と口座・本線は行政実務向け商品。ほかは正本への参照
+- [affiliate strategy](affiliate-strategy.md) — 広告の停止・文脈・重複・可視 1 秒の検証
+- [business plan adaptation](project_business_plan_adaptation_contract.md) — 外部事業計画は 25 章の適合差分で取り込む
+- [product ledger](project_product_ledger.md) — 商品の判断・価格実験の台帳。12-30 判定まで価格固定
+- [coconala withdrawal](project_coconala_withdrawal.md) — 2026-10-19 撤退、11-08 に台帳と自動化を削除
+- [product catalog contract](project_coconala_product_factory.md) — 商品定義・公開記録・納品版・販売準備を分ける
+- [note product rollout](project_note_product_rollout.md) — note 商品は固定 SHA の納品版から作る
+- [kindle publishing factory](project_kindle_publishing_factory.md) — EPUB3 生成・30% 書き下ろし必須・KDP は人手
+- [kdp bookshelf archived view](reference_kdp_bookshelf_archived_view.md) — 本棚の既定表示と検索はアーカイブ済みを出さない。口座に台帳外の本もある
+- [asp site attribution](project_asp_site_attribution.md) — 共用 ASP 口座のサイト帰属を assert
+- [affiliate banner text asymmetry](project_affiliate_banner_text_asymmetry.md) — text 広告は locationCode で弾かれる
+- [competitor indicator benchmark](project_competitor_indicator_benchmark.md) — 指標数は競合超え。課題は需要と CTR
+- [competitor riskmap jp](project_competitor_riskmap_jp.md) — SNS 直接競合 @riskmap.jp
 
-- [sns title unicode hydration](feedback_sns_title_unicode_hydration.md) — SNS見本名の文字数制限で絵文字を分断するとSSRとブラウザが不一致になる。明示題名を優先し、本文はコードポイント単位で短縮する
+## 計測・分析
+- [measurement weekly recorded first](feedback_measurement_weekly_recorded_first.md) — ログイン計測は土曜の記録から読む
+- [measurement cycle ci](project_measurement_cycle_ci.md) — 土曜 CI 計測→Mac 認証計測→レビュー
+- [review cadence wiring](project_review_cadence_wiring.md) — 週次・月次レビューの配線と判定
+- [ga4 setup](project_ga4_setup.md) — GA4 のイベント・Consent Mode
+- [ga4 double pageview](feedback_ga4_double_pageview.md) — SPA の手動 page_view と拡張計測の二重計測
+- [ga4 history unreliable wow](feedback_ga4_history_unreliable_wow.md) — WoW は GA4 でなく GSC clicks で
+- [ga4 journey referrer](feedback_ga4_journey_referrer_over_navclick.md) — 回遊は nav_click でなく referrer で読む
+- [gsc export false positive](feedback_gsc_export_false_positive.md) — GSC の ZIP は内容・件数・帰属まで照合
+- [gsc coverage remediation loop](project_gsc_coverage_remediation_loop.md) — カバレッジ是正。入力週の鮮度を fail-closed で
+- [gsc coverage drilldown](project_gsc_coverage_drilldown.md) — 6 種別の drilldown CSV を週次集約
+- [lcp optimization](feedback_lcp_optimization.md) — LCP は要素の特定が先
+- [scan pending improvements](reference_scan_pending_improvements.md) — 改善ログから pending を抽出するスクリプト
+- [model usage cycle](project_model_usage_cycle.md) — モデル/effort 最適化と canary
+- [weekly plan content over sns](feedback_weekly_plan_content_over_sns.md) — 週次 Must は記事と SEO、SNS は下げる
+- [analysis question drift](feedback_analysis_question_drift.md) — 分析は台帳の問いの語で答える
+- [analysis refute mandatory tests](feedback_analysis_refute_mandatory_tests.md) — 反証は計算手順つきの必須試験に
 
-- [remotion resolved slide props](feedback_remotion_resolved_slide_props.md) — Remotionカルーセルは各slideでselectCompositionを解決し、3枚のSHAが異なることを検査する
+## データ・e-Stat・R2
+- [authored ledgers in data](feedback_authored_ledgers_in_data.md) — 判断して書く台帳は data/ に JSON+Schema
+- [r2 writes ci only](project_r2_writes_ci_only.md) — remote R2 が唯一の正本。ローカルミラーなし
+- [r2-write pending replaced](feedback_r2_write_pending_replaced.md) — r2-write の待機は 1 本だけ
+- [data refresh cancel mismatch](feedback_data_refresh_cancel_mismatch.md) — 同期中に止めると画面が空。監査と再実行
+- [check ci job scope](feedback_check_ci_job_scope_before_launch.md) — 長い CI は起動前に範囲と所要を確認
+- [sync snapshots checks out main](feedback_sync_snapshots_checks_out_main.md) — sync-snapshots は main を checkout する
+- [sync-snapshots task names](feedback_sync_snapshots_task_names.md) — カテゴリ一覧は only=master
+- [snapshot gap audit first](feedback_snapshot_gap_audit_first.md) — 欠落に見えたら生成側の関数で 1 件確かめる
+- [local r2 overlay](feedback_local_r2_overlay_for_generated_snapshots.md) — 手元生成 snapshot は r2-overlay-server で見る
+- [estat expansion pipeline](project_estat_expansion_pipeline_2026_07.md) — e-Stat 全展開は不可能。需要ファースト
+- [estat backfill lessons](project_estat_backfill_lessons.md) — backfill は UPSERT（他ソース年度を消さない）
+- [estat wage survey](reference_estat_wage_survey.md) — 賃金構造基本統計の表構造と登録キー
+- [kakei expansion gotchas](project_kakei_expansion_pipeline_gotchas.md) — 家計調査の地域コード写像・export の罠・市別の長い系列の比べ方
+- [kakei marketing book](project_kakei_marketing_book_pipeline.md) — 家計調査の本を全ページ解決・企画台帳
+- [lens belongs to survey](feedback_lens_belongs_to_survey.md) — 切り口は本でなく調査の持ち物
+- [survey linkage ssot](project_survey_linkage_ssot.md) — ranking↔調査の紐付けの正本
+- [ssds denominator evidence](feedback_ssds_denominator_evidence.md) — SSDS の分母は公式算式で確定
+- [metric display state](feedback_metric_display_state.md) — 計算方法・年・地域は表示状態を一括確定
+- [ranking publish pipeline gap](project_ranking_publish_pipeline_gap.md) — 公開は isActive 以外に KNOWN・R2・OGP が要る
+- [ranking download onthefly](project_ranking_download_onthefly.md) — ダウンロードは route でその場生成
+- [backlog ranking key audit](feedback_backlog_ranking_key_audit.md) — backlog の ranking_key は実在確認してから
+- [theme selection backfill](project_theme_selection_backfill_pipeline.md) — テーマ選定の夜間 backfill と決定的 gate
+- [theme indicator research](feedback_theme_indicator_research_pattern.md) — テーマ指標は一次資料と e-Stat ID を同時に解決
+- [source vault layout](project_source_vault_expanded_layout.md) — 参考文献は Drive の版フォルダへ展開配置
+- [listmodels not proof](feedback_listmodels_is_not_proof_of_usable.md) — API の一覧は使える証拠でない。1 回叩く
 
-- [note image assets contract](project_note_image_assets_contract.md) — note画像契約。カバーはdata/note JSON+Schema・private R2のSHA版。ランキング画像はchart-data+render-specから再生成
-- [note article ledger](project_note_article_ledger.md) — note記事は台帳data/note/articles.json+本文はR2だけ(有料はprivate)。docs/31はgitignoreの作業場、note:article checkout/save
-- [authored ledgers in data](feedback_authored_ledgers_in_data.md) — 判断して書く台帳はdata/かconfig/にJSON+Schemaで置きdatasets.mjsへ登録。packages/だと検査と担当の視界外 (教材の企画376件)
+## サイト (Next.js・UI)
+- [generatestaticparams r2 notfound](feedback_generatestaticparams_r2_notfound_stuck.md) — R2 依存 route に gSP を付けると notFound 固着
+- [nextjs ssg cookies](feedback_nextjs_ssg_cookies.md) — layout 配下で cookies() を呼ぶと SSG 崩れ
+- [home pure ssg r2 empty](feedback_home_pure_ssg_r2_empty.md) — トップは force-dynamic
+- [workers env r2 skip](feedback_cloudflare_workers_env_r2_skip.md) — 本番で空なら CLOUDFLARE_WORKERS の R2 skip を疑う
+- [workers self fetch](feedback_workers_self_fetch_unbundle.md) — 自ドメイン fetch は ASSETS binding で
+- [sticky aside max h](feedback_sticky_aside_max_h.md) — grid 内 sticky aside は max-h と overflow 必須
+- [page semantic dedup](feedback_page_semantic_dedup_contract.md) — 同じ意味の UI の描画担当を 1 つに
+- [no feature specific components](feedback_no_feature_specific_components.md) — 専用部品を作らず既存部品 1 つ
+- [hand synced duplication](feedback_hand_synced_duplication.md) — 手で同期する二重管理は必ずずれる
+- [client barrel heavy deps](feedback_client_barrel_heavy_deps.md) — dev が遅いときは barrel 経由の重い依存
+- [dev server web only](feedback_dev_server_web_only.md) — dev は npm run dev:web
+- [dev streaming hidden dom](feedback_dev_streaming_hidden_dom_copies.md) — localhost の DOM は hidden の写しで 2 倍に見える
+- [geo question first](feedback_geo_question_first.md) — 地域分析は問い→型→見せ方で設計
+- [geo source initial display](feedback_geo_source_initial_display.md) — GIS は操作前の初期表示も検証
+- [geo mesh evidence](feedback_geo_mesh_evidence_integrity.md) — 途中地図はメッシュ境界と丸め前で検証
+- [geo publication boundary](feedback_geo_publication_boundary.md) — Geo は全入力集合と途中 artifact を必須
+- [recurrence guard scripts](project_recurrence_guard_scripts.md) — 過去事故由来の guard 一覧
+- [page quality ui review](project_page_quality_ui_review.md) — 週次ページ品質とスクショ確認
+- [city choropleth design](project_city_choropleth_design.md) — 市区町村コロプレスの設計結論
+- [sankey landing views](project_sankey_landing_views.md) — Sankey 着地ビュー
+- [theme dashboard enhancement](project_theme_dashboard_enhancement.md) — テーマページ強化計画
+- [careerdata expansion](project_careerdata_expansion.md) — CareerData.jp 展開
+- [redesign bundle](project_redesign_bundle.md) — リデザイン案の取込と /apply-redesign
+- [bundled CJS dataset paths](feedback_bundled_cjs_dataset_paths.md) — 管理画面の CJS は __dirname が /ROOT
 
-- [model usage cycle](project_model_usage_cycle.md) — モデル/effort最適化サイクル。agentはeffort未指定でセッションのxhighを継承、別名sonnet/opusの解決先はCLI版次第(2.1.280未満はOpus 5.5不可)、canaryは採点器ごと検証
-- [gsc export false positive](feedback_gsc_export_false_positive.md) — GSC理由行の非表示クリック失敗は概要ZIPの偽成功を生む。概要+5詳細の内容・件数・帰属とcapabilityを照合
-- [native chrome session export](feedback_native_chrome_session_export.md) — Google認証exportはOS keychain互換を保った専用profileの一時コピーで行い、元profileをテスト既定値で開かない
-- [monetization contract](project_monetization_contract.md) — 収益化の判断。AdSenseは10/11に手動枠で再開・10/13に改善サイクルの凍結解除(ad-yield接続)、NSMは週次収益、アフィ評価は確定収益/1,000 viewable imp、本線は行政実務向け商品
-- [theme selection backfill pipeline](project_theme_selection_backfill_pipeline.md) — ThemeCatalog selection の夜間 backfill。モデルは JSON だけ返し、決定的 gate が catalogs/<key>.json に書く。PDF は pdftotext で照合
-- [note product card ssot](feedback_note_product_card_ssot.md) — note商品カードはマガジンでなく実商品SSOTから解決。生成/修正は同一関数共有、regenerate-cardはカード不在時no-op。OGP再登録のURLキャッシュは画像版と採用画像照合で防ぐ
-- [note ins img heading placement bug](project_note_ins_img_heading_placement_bug.md) — ins_imgは見出し直前アンカーで画像が見出し直後にずれる未解決バグ。盲目修正は悪化した実例あり
-- [geo source initial display](feedback_geo_source_initial_display.md) — GISは操作前の地図表示・区画切替・一覧リンクによる移動を検証。代表区画を選んだ後のPASSだけで初期表示を完了扱いしない
-- [ai content headless claude batch](project_ai_content_headless_claude_batch.md) — 個別ai-content改善はheadless author+critic。大規模構造補完は決定的backfill + 境界サンプル意味レビューへ分離。枠枯渇・スロットリング・rebase競合の罠
-- [geo mesh evidence integrity](feedback_geo_mesh_evidence_integrity.md) — Geo途中地図はメッシュコード境界・判定へ寄与する点・丸め前保存則で検証。都道府県bbox/表示値だけでは離島と境界で誤る
-- [geo publication boundary](feedback_geo_publication_boundary.md) — Geoは空間演算・全入力集合・途中artifactを必須化。保存則だけでは洪水107入力の欠落を検出できず、生成・R2・外部公開を別ゲートで検証する
-- [business plan adaptation contract](project_business_plan_adaptation_contract.md) — 外部事業計画は全面採用せず25章の適合差分を型付きSSOT化。管理画面・owner/skill・週次state・CIが同じcatalogを読み、DBレス逆行と未計測の成果扱いを拒否
-- [kindle publishing factory](project_kindle_publishing_factory.md) — Kindle出版ファクトリー(product-factory kindleチャネル)。EPUB3生成・32冊カタログ・30%書き下ろし必須。KDPアップロードは人間工程。正典kindle-publishing-standards.md
-- [coconala withdrawal](project_coconala_withdrawal.md) — 2026-10-19 撤退、11-08 に出品台帳・自動化・agentを削除。note の納品版は note-pack-deliveries.json
-- [coconala product factory](project_coconala_product_factory.md) — 商品設計・公開記録・固定納品版・販売準備を分離。件数はTSとproducts:reportを参照。改訂版上書き・監査による公開state変更を禁止
-- [note product rollout](project_note_product_rollout.md) — 現行パックからnote variantを導出。_delivery固定SHAで非公開revisionを生成し、薄い準備原稿と販売準備完了を区別
-- [periodic progress reports](feedback_periodic_progress_reports.md) — 長時間のsubagent/workflow中は聞かれる前に約4-5分間隔で実測ベース進捗報告を自発的に(2026-07-17指摘)
-- [exit code not via pipe](feedback_exit_code_not_via_pipe.md) — 検証exit codeを`| tail`越しで測ると常に0(全PASS誤認)。直接実行orPIPESTATUS。全PASSなら1件壊して検証器を検証
-- [ci foreign tree overlay](feedback_ci_foreign_tree_overlay.md) — CI が main で生成して develop へコピーすると main の遅れ分の state を巻き戻す (2026-10-04)。blob と run の headSha で判定 (findForeignTreeRestore)
-- [hand synced duplication](feedback_hand_synced_duplication.md) — 「追加時は両方を更新」のコメントで担保する二重管理は必ずドリフトする。件数/idは単一ソースから導出。2026-08-20にsitemap indexでcities1080URLが2か月未提出
-- [page semantic dedup contract](feedback_page_semantic_dedup_contract.md) — 同じ意味のUIを別部品が描画すると単体テストは両方通る。ページ合成のcanonical ownerを1つにし、feature全体のrenderer数を契約テストで固定する
-- [no feature specific components](feedback_no_feature_specific_components.md) — 専用の部品は作らない・残さない。既存の部品を 1 つだけ使い、使われない部品は knip で 0 になるまで消す (2026-10-30)
-- [mutation test passes wrongly](feedback_mutation_test_passes_wrongly.md) — ミューテーションでも「間違った理由で赤/緑」になる。probeが除外語彙に当たっていないか・赤の理由がクラッシュでないかを毎回読む
-- [develop had no ci gate](feedback_develop_had_no_ci_gate.md) — develop pushは長らく無検査で壊れが次のマージ担当に回っていた。2026-08-20にdevelop-quality-gate.yml + npm run preflightで是正
-- [debt baseline shrink only](feedback_debt_baseline_shrink_only.md) — maintenance-debt baselineは縮小専用(2026-07-14)。CI --ratchet-checkが増加拒否。新規debtは実修正かルール修正のみ
-- [workflow arg vector quoted](feedback_workflow_arg_vector_quoted.md) — CI workflowの可変引数列はbash配列("${ARGS[@]}")。文字列連結は1トークン化(2026-07-14に6workflow regression)。ガード=ARG_VECTOR_QUOTED
-- [estat expansion pipeline 2026 07](project_estat_expansion_pipeline_2026_07.md) — e-Stat全展開は不可能(生候補17万)。需要ファースト拡充ループ。発見入口はR2 estat-catalogで絞らず出口だけ絞る
-- [docs reorg todo handoffs](project_docs_reorg_todo_handoffs.md) — TODO真実源=.claude/todo/{inbox,01_改善,02_機能,03_指標バックログ}.md。2026-07-22に一時ハンドオフ文書廃止。完了文書はarchive禁止・git rm
-- [kakei expansion pipeline gotchas](project_kakei_expansion_pipeline_gotchas.md) — 家計調査拡充の罠: @area=県庁所在市コード→NN000写像 / master exportはNODE_ENV=production必須
-- [sns gallery and ig cron fix](project_sns_gallery_and_ig_cron_fix.md) — 統合メディアコンソール(`npm run admin`→localhost:4747、apps/admin)。/snsは画像付きID台帳・下書き本文編集。IG自動投稿の空振りcron修正。正典sns-content-standards.md §5.5
-- [survey linkage ssot](project_survey_linkage_ssot.md) — ranking↔調査の紐付け SSOT (2026-07-06)。item.json に surveyIds を焼き込む。管理は survey-curator と /audit-survey-linkage
-- [blog topic queue seo expansion](project_blog_topic_queue_seo_expansion.md) — 新規ブログの「次に何を書くか」は topic-queue.json (build-topic-queue.mjs・型 8 種・/plan-article-queue)。戦略正典 docs/02_実装計画/15
-- [theme indicator research pattern](feedback_theme_indicator_research_pattern.md) — テーマ指標調査は同一セッションで一次資料/e-Stat IDを解決。未解決候補は保存せず、tool回数を証拠にしない
-- [sns reorg 2026 07](project_sns_reorg_2026_07.md) — SNS/Remotion整理+SSOT化。正典=sns-content-standards.md、投稿台帳=posts.json。YouTubeは2026-08-23から通常動画3本のmaster-first pilot、TikTok撤退。専任agent/OAuthは成功判定まで復活させない
-- [x post url integrity](feedback_x_post_url_integrity.md) — Xのposted判定は予約時刻/旧台帳日付で推定せず、自アカウントのstatus URLと本文一致を証拠にする。中央store gateでURLなしpostedを拒否
-- [react to news pipeline](project_react_to_news_pipeline.md) — 時事ネタを即 SNS へ (2026-07-02)。find-metrics (同義語の発見索引) + quick-still (指標 key→画像+caption) + /react-to-news
-- [generatestaticparams r2 notfound stuck](feedback_generatestaticparams_r2_notfound_stuck.md) — R2依存動的routeにgenerateStaticParamsを付けるとbuild時R2不可でnotFound固着。撤去しrevalidateのみ。正典nextjs-ssg-preservation.md
-- [ai content remediation queue](project_ai_content_remediation_queue.md) — ranking AIは9/8に2,166件done・残0を全量実測。追加12件R2 SHA一致、TS/KNOWN/R2/queue集合差分0。非阻害警告・意味レビュー範囲・課金条件は別記。canonical入力の回帰テストあり
-- [blog svg lineage enforcement](project_blog_svg_lineage_enforcement.md) — ブログSVG「1画像=1設定ファイル」、source.jsonとquality-gate。9/7に同値同順位を修正し、lead変更時は背景も再生成する契約を確認。正典blog-data-schema.md §1.7
-- [commit in batches](feedback_commit_in_batches.md) — 確認で修正を重ねる間は毎回コミットしない。まとまりで 1 回
-- [no deploy per iteration](feedback_no_deploy_per_iteration.md) — オーナーの指示なしに develop→main の PR を開かない・マージしない (hook が止める)。本番に効く変更は 1 日 1 回。状況は release:status
-- [cloudflare workers env r2 skip](feedback_cloudflare_workers_env_r2_skip.md) — 本番でテーマ/home featuredが空→wrangler.tomlのCLOUDFLARE_WORKERS="true"でR2読みskipを疑う。テーマはR2 values.json+force-dynamic
-- [dev server web only](feedback_dev_server_web_only.md) — dev は npm run dev:web。常駐は background + Ready の polling。R2 URL と S3 変数の継承を確かめてから画面監査。正典 local-environment.md
-- [blog auto publish reconcile limits](project_blog_auto_publish_reconcile_limits.md) — blog公開の背景未生成skipは本文staging前に実行。通信・SHA・生成失敗は停止。reconcileは未公開+改稿、上限撤廃済み。contents/blog=ephemeral outbox
-- [fetch origin before implementing](feedback_fetch_origin_before_implementing.md) — 実装前にgit fetch+origin/main vs ローカルHEAD diff。並行セッション同日pushでstale→重複実装事故(2026-06-14 PR#479)。施策IDを既存検索
-- [home pure ssg r2 empty](feedback_home_pure_ssg_r2_empty.md) — トップ/は純SSGでビルド時R2読めず空焼き込み→修正はforce-dynamic(#478)。revalidateは本OpenNext構成で無効。build envにR2 URL足すとgenerateStaticParams爆発で不採用
-- [blog remediation loop](project_blog_remediation_loop.md) — ブログ品質を順次是正。次に直す記事=remediation-queue.json(統合スコア/must-fix)。週次Mustで消化、critic PASS必須。記事アーキタイプA-E+図あたり字数gate
-- [gsc coverage remediation loop](project_gsc_coverage_remediation_loop.md) — GSCカバレッジ是正ループ。404大半は意図的。入力週の鮮度をfail-closedで検証し、生成日を観測日にしない
-- [consistency audit mechanism](project_consistency_audit_mechanism.md) — agent/skill/scriptドリフトとOpus 5 prompt契約(model/Output/owner/委譲上限)をStop/PR/週次で検査。解除は--mark-auditedかcommit
-- [blog brushup dbless scaffold](project_blog_brushup_dbless_scaffold.md) — brushupのDBレス落とし穴。R2 values直fetch、rank=0で再計算、NG_PATTERNが旧title遡及blocker、publish-blogは直列dispatch、未参照費目json残す
-- [blog mass rewrite lessons](project_blog_mass_rewrite_lessons.md) — ブログ大量リライト: である調は copula 置換禁止で article-writer 必須、1 バッチ 15-20 本、進捗 SSOT は remediation-queue
-- [ranking publish pipeline gap](project_ranking_publish_pipeline_gap.md) — ranking公開はisActive:trueだけ不足。KNOWN/SITEMAP/R2 values/OGPが必要。画像のbounded batchは新規manifest欠落を旧manifest移行より優先（2026-08-26のOGP 404再発防止）
-- [estat backfill lessons](project_estat_backfill_lessons.md) — e-Stat backfillはUPSERT必須 (DELETE+INSERTで他ソース年度喪失)
-- [blog brushup risk 2026 05 25](project_blog_brushup_risk_2026_05_25.md) — AI auto-brushupは13%FAIL+27%WARN。quality-gate.mjsは形式のみでfactual不足。data/*.jsonと本文数値の突合step必須
-- [blog publish cloud first](project_blog_publish_cloud_first.md) — ブログ公開はpublish-blog.yml(contents/blog→CI→R2)。新規workflowは--ref develop、直列ディスパッチ必須
-- [sns 10k roadmap](project_sns_10k_roadmap.md) — SNS 10K戦略(2026-05-24)。IG 10Kを9ヶ月、Xは1-2K維持。数字対比・意外性で引く/IG Reels集中
-- [weekly plan content over sns](feedback_weekly_plan_content_over_sns.md) — 週次計画のMustは記事公開・SEOに集約。SNS/noteはShould以下に降格
-- [weekly review article status from db](feedback_weekly_review_article_status_from_db.md) — 週次レビューの記事公開判定はarticlesテーブルが真実源。git/backlogだけだと誤判定
-- [station passengers](project_station_passengers.md) — 駅別乗降客数(S12)PR#328マージ済+47連結YouTube(wjLQCiuEeNI)public公開済
-- [voicevox setup](reference_voicevox_setup.md) — VOICEVOX engine(CPU版)ローカル起動。CLIのみで127.0.0.1:50021
-- [redesign bundle](project_redesign_bundle.md) — Claude Designリデザイン11ページ×4案取込済。/apply-redesign、ranking=D案Phase1完了
-- [affiliate-strategy](affiliate-strategy.md) — 広告の停止・文脈・同一案件重複・連続可視1秒の検証、楽天返礼品分類
-- [city choropleth design](project_city_choropleth_design.md) — 市区町村コロプレス切替の設計結論(既存スキーマ・ドリルダウン方式)
-- [ga4 setup](project_ga4_setup.md) — GA4設定状況(カスタムイベント・Consent Mode・管理画面)
-- [estat wage survey](reference_estat_wage_survey.md) — 賃金構造基本統計調査(0003445758)の職種別年収データ構造・登録済みキー
-- [theme dashboard enhancement](project_theme_dashboard_enhancement.md) — テーマページ強化計画(右パネルチャート・エージェント設計)
-- [careerdata expansion](project_careerdata_expansion.md) — CareerData.jp展開(新テーマ2・職種47化・ブログ6本・旧テーブル14年マージ完了)
-- [bypass permissions](feedback_bypass_permissions.md) — AgentはbypassPermissionsモード、確認なしで最後まで処理
-- [autonomous execution](feedback_autonomous_execution.md) — スキル実行時は確認不要で自動処理。Sonnetでも実行可能な精度を維持
-- [note publish automation](feedback_note_publish_automation.md) — note.com自動投稿は「全本文1回ClipboardEvent paste」が唯一の確定動作。Profile 1+browser-use cleanup必須
-- [note publish flow 2026 06](project_note_publish_flow_2026_06.md) — note.comエディタの公開手順(editor-helpers.sh)とgotchas。保存場所は台帳+R2
-- [port ranking 2023](project_port_ranking_2023.md) — 入港船舶総トン数ランキング(40県、1位神奈川・124倍格差)
-- [note cover overlap validator](project_note_cover_overlap_validator.md) — note cover SVGのCJKテキスト重なり検証スクリプト(生成・編集後は必ず通す)
-- [recurrence guard scripts](project_recurrence_guard_scripts.md) — 過去事故由来guard一覧。レールは内側カード幅も全境界で測る。単一選択は共通化し個別実装をAST検査で止める。カードのgapと子marginの重複・左右余白の不一致は実寸で検査する
-- [publish x ui 2026 04](project_publish_x_ui_2026_04.md) — publish-xの2026-04 UI対応(24時間制select、DOM click必須、posted_at JST変換)
-- [youtube shadowban recovery 2026 04](project_youtube_shadowban_recovery_2026_04.md) — Issue#88 2026-05-16 CLOSED。17本public復元済、daily audit verdictはlikely-shadowban継続、SUGGESTED_VIDEO 0
-- [instagram paused 2026 10 27](project_instagram_paused_2026_10_27.md) — 2026-10-27 Instagram 自動投稿を停止。投稿 workflow 5 本を disabled_manually (yml は残置)、計測とトークン延長は継続。勝手に enable しない
-- [instagram graph api setup](project_instagram_graph_api_setup.md) — Instagram Graph APIセットアップ完了(2026-04-25)。stats47jp・トークン60日・business_discovery不可
-- [lcp optimization](feedback_lcp_optimization.md) — LCP改善はLCP要素の特定が先。HTML削減もpreloadもJS描画依存要素には効かない(EXP-002/003)
-- [browser use cleanup](feedback_browser_use_cleanup.md) — browser-useの`close`はpageだけ。daemonは`pkill -KILL -f "browser_use.skill_cli.daemon"`必須
-- [gsc coverage drilldown](project_gsc_coverage_drilldown.md) — GSC 6種別Coverage Drilldown CSVを週次でdata/gsc/coverage-drilldown/に集約
-- [cloudflare token consolidated](project_cloudflare_token_consolidated.md) — Cloudflare API tokenは「stats47」1個に集約(D1/R2/Pages/Account Settings)
-- [github actions pr creation](feedback_github_actions_pr_creation.md) — ActionsがPR作成するにはrepo permission設定必要(gh APIで設定可)
-- [cloud github api mcp only](feedback_cloud_github_api_mcp_only.md) — クラウドは`gh`無し。`curl`+$GITHUB_TOKENはHTTP 200で"GitHub access is not enabled"を返し無言失敗(background agentでは空ファイル)。GitHub操作は`mcp__github__*`のみ
-- [ci cancelled looks like failure](feedback_ci_cancelled_looks_like_failure.md) — 後続pushがconcurrencyで古いrunをcancel→全job cancelledでfailureと見分けがつかない。conclusionを見てsupersededなら新runを待つ(ログを読まない)
-- [competitor riskmap jp](project_competitor_riskmap_jp.md) — SNS直接競合@riskmap.jp(治安/災害/心霊系Reel、1本1-2万いいね)
-- [competitor indicator benchmark](project_competitor_indicator_benchmark.md) — Web競合指標数(2026-07-11): stats47 2,141本でtodo-ran/uub超え「数の劣後」解消。ボトルネックは需要+CTR(41%が12週ゼロ表示)。e-Stat全展開は低ROI。需要ファースト
-- [sns competitor search](feedback_sns_competitor_search.md) — SNS競合検索は統計/ランキングだけでなくテーマ別名乗り(リスク/格差/ご当地)も併走
-- [sns growth emotion themes](feedback_sns_growth_emotion_themes.md) — SNS伸長は感情喚起が主因。stats47は信頼性×網羅性×Web送客で差別化(煽り合戦に入らない)
-- [agent output contract](feedback_agent_output_contract.md) — Agent起動はprompt冒頭でTask Capsule+OUTPUT FORMAT。モデル/委譲SSOT=model-prompting.md
-- [nextjs ssg cookies](feedback_nextjs_ssg_cookies.md) — layout配下Server Componentでcookies()/headers()呼ぶとSSG崩れ500(EXP-004/005で2度)。正典nextjs-ssg-preservation.md
-- [skill schema drift](feedback_skill_schema_drift.md) — SKILL.mdが現行schemaに未追従あり。indicators→metrics, observations→stats_prefecture, push-rはdiff-push-r2.tsのみ
-- [backlog ranking key audit](feedback_backlog_ranking_key_audit.md) — backlogのranking_keyはAI生成名で実在metricと乖離。実行前にmetrics.key実在チェック
-- [bulk blog publish isr 404](feedback_bulk_blog_publish_isr_404.md) — sync-snapshots --only blogの順序でISR 404キャッシュ。連続curlで復活、残りはCloudflare手動パージ
-- [scan pending improvements](reference_scan_pending_improvements.md) — scan-pending-improvements.mjs(改善ログからpending抽出、weekly-plan/triage共用)
-- [note internal link breaks on publish](project_note_internal_link_breaks_on_publish.md) — note記事の../slug/draft.md内部リンクは公開後切れる。note URL化必要、対応表=data/note/note-published-urls.json
-- [ga4 history unreliable wow](feedback_ga4_history_unreliable_wow.md) — GA4 history.csvのpageviewsはlast28d/bot混入。WoWはGSC clicksを使う
-- [ga4 journey referrer over navclick](feedback_ga4_journey_referrer_over_navclick.md) — 回遊はnav_clickでなく週次internal-transitions.csv(referrer)で読む(theme→ranking実44/nav3)。GSC 0の流入増はBingを疑う
-- [measurement weekly recorded first](feedback_measurement_weekly_recorded_first.md) — ログインが要る計測は土曜朝の週次だけが取得。セッションではブラウザで取りに行かず記録から判断し、古ければ判定不能と書く (2026-10-20)
-- [measurement cycle ci](project_measurement_cycle_ci.md) — 計測→記録→改善。土曜 02:00 CI 計測→07:00 Mac 認証付き計測→レビュー内で state 作り直し・triage・週次要約 (2026-10-26 に無人 triage と週次要約 workflow を撤去し、週次監査 11 本も `npm run weekly:audits` へ)。ローカルの作り直しは GA4_PROPERTY_ID を site-config から補う
-- [review cadence wiring](project_review_cadence_wiring.md) — 週次・月次レビューの配線(2026-10-01)。週次は土曜期限、正本review-wiring.json・判定review-cadence.mjsを各所が共有。月次の申し送りは「→ 振り分け:」必須
-- [r2 s3 token expired 2026 05 29](project_r2_s3_token_expired_2026_05_29.md) — R2 S3トークン(.env.local)401失効。※ローカル再発行は原則不要(R2書込CI専用化)
-- [sync snapshots checks out main](feedback_sync_snapshots_checks_out_main.md) — sync-snapshots は --ref に関係なく main を checkout する。develop の git TS 変更はマージ後に流す (success と出るので気づけない)
-- [r2 writes ci only](project_r2_writes_ci_only.md) — 2026-06-20: ローカル/CI両方からremote R2読み書き可。remoteが唯一の真実源。ローカルミラー廃止。ローカル書込はR2 S3 creds要
-- [ranking download onthefly](project_ranking_download_onthefly.md) — ranking downloadはオンザフライ生成(route)。事前bakeは23K files/timeoutで不採用。iconv-lite SJISはWorkers動作確認済
-- [check why removed before reviving](feedback_check_why_removed_before_reviving.md) — 削除済みコード復活前に削除理由をgit log/docs確認。スケール処理は単一サンプル成功でOKとしない
-- [env local ci consolidation](project_env_local_ci_consolidation.md) — .env.local秘匿値をCI専任に削減(2026-05-29)。YouTube OAuth/自動uploadは撤去済みのまま。2026-08-23の通常動画pilotはStudio手動運用
-- [shared working copy git race](feedback_shared_working_copy_git_race.md) — 2セッションが同一working copy/.git共有でgitレース(index/HEAD奪い合い)。回避はworktree分離
-- [sankey landing views](project_sankey_landing_views.md) — Sankey着地ビュー。migration(#393)/finance(#396)本番稼働、共通HubSankey。通勤はPhase 2(statsDataId 0003454526)
-- [sticky aside max h](feedback_sticky_aside_max_h.md) — CSS Grid(items-start)内sticky asideにmax-h-[calc(100vh-5.5rem)]+overflow必須。削除でフッター非表示(2度踏んだ)
-- [workers self fetch unbundle](feedback_workers_self_fetch_unbundle.md) — OpenNext Workersで静的アセット外す時、自ドメインfetchはdegrade(self-fetch)。ASSETS binding使う。デプロイ+スモークで検証
-- [note paid landing patch](project_note_paid_landing_patch.md) — 公開済みnote有料記事の無料部分はeditorを使わずPUTパッチで直す(所有者APIが全文・separator=最後の無料要素id・画像はpresigned S3 post)。添付制限に掛からず38商品を同日是正。specの数値は本文実在ゲート
-- [note attachment upload limits](project_note_attachment_upload_limits.md) — note添付uploadは1日10回/アカウント(画像は別枠)。有料記事の添付再upload flowはdry runを繰り返さず1回で通す。ins_fileはUL直前anchor禁止・逆順挿入・非画像input選択
-- [note update mode learnings](project_note_update_mode_learnings.md) — カバーはv3詳細eyecatchで監査、画像専用CLIで更新（本文再公開不要）。制作TS/GIS/Satori・保全hash・変更journal。本文updateのeval-click・有料境界・temp profileの注意点
-- [asp site attribution](project_asp_site_attribution.md) — 3 ASP共用口座のサイト帰属assert。A8成果はsite-rows限定、afb成果APIはsite指定＋JSON配列（空応答を実測）、Cookie移送と分離
-- [playwright profile dual os](feedback_playwright_profile_dual_os.md) — Playwrightプロファイルのrootは「Mac本体が実在すればそこ、無ければファイル位置由来のrepo root」。Mac直書きはWindowsで静かに再ログイン、cwdは分裂
-- [windows script portability](feedback_windows_script_portability.md) — Windowsで落ちる型: URL().pathnameの先頭スラッシュ/npxのspawn/Macパス直書き/パス区切りの比較 (path.joinの\とTS解決の/。台帳は/に揃える・replaceAllはlib es2021未満で不可)
-- [affiliate banner text asymmetry](project_affiliate_banner_text_asymmetry.md) — banner解決はlocationCodeを見ないがtext解決は見る。textをblog-bottomに置くと両経路から弾かれ永久に非表示。本文インラインもsidebar-bottomを再利用する
-- [source vault expanded layout](project_source_vault_expanded_layout.md) — 参考文献 vault は 2026-09-10 から Drive の版フォルダへ展開配置 (PDF・pages・md・figures)。マウント自動解決・差分 upload と readback
-- [kakei marketing book pipeline](project_kakei_marketing_book_pipeline.md) — 『マーケティングに使える「家計調査」』を source-vault で保全・全 307 ページ解決。企画 analyses.json・展開記録 expansion.json
-- [lens belongs to survey](feedback_lens_belongs_to_survey.md) — 切り口は本でなく調査の持ち物。data/surveys/lenses/<調査ID>.json が正本、本の問いは lensIds で結ぶ
+## ブログ・ランキング解説
+- [blog publish cloud first](project_blog_publish_cloud_first.md) — 公開は publish-blog.yml、直列ディスパッチ
+- [blog auto publish reconcile](project_blog_auto_publish_reconcile_limits.md) — 公開の skip と停止の条件
+- [bulk blog publish isr 404](feedback_bulk_blog_publish_isr_404.md)・[blog revise isr stale entry](feedback_blog_revise_isr_stale_entry.md) — 一括公開の ISR 404 / 改稿の公開前に本番ページを取得しない
+- [blog remediation loop](project_blog_remediation_loop.md) — 品質是正の順は remediation-queue
+- [blog mass rewrite lessons](project_blog_mass_rewrite_lessons.md) — 大量リライトは 15〜20 本ずつ
+- [blog brushup risk](project_blog_brushup_risk_2026_05_25.md) — 自動 brushup は本文数値の突合が要る
+- [blog brushup dbless](project_blog_brushup_dbless_scaffold.md) — brushup の DB レスの落とし穴
+- [blog svg lineage](project_blog_svg_lineage_enforcement.md) — 1 画像 = 1 設定ファイル
+- [blog topic queue](project_blog_topic_queue_seo_expansion.md) — 次に書く記事は topic-queue.json
+- [blog background codex only](feedback_blog_background_codex_only.md) — 背景は Codex で作り git に置く
+- [blog photo thumbnail](project_blog_photo_thumbnail.md) — 新規サムネイルは写真風・旧経路は触らない
+- [chart ledger read first](feedback_chart_ledger_read_first.md) — 図の欠けを語る前に台帳を読む
+- [chart image copy](../rules/chart-image-copy.md) — 画像内の説明文を最小にする規約
+- [stat image type ledger](feedback_stat_image_type_ledger_first.md) — 統計画像は描く前に型を引く
+- [ai content remediation](project_ai_content_remediation_queue.md) — ranking AI 解説は全量 done
+- [ai content headless batch](project_ai_content_headless_claude_batch.md) — 個別改善は headless author+critic
 
-- [ssds denominator evidence](feedback_ssds_denominator_evidence.md) — SSDSの素unitは実数の証拠ではない。公式算式で分母を確定しsubtitle/labelへ保持、二重正規化禁止。
-- [proxy preload for fetch scripts](proxy-preload-for-fetch-scripts.md) — 会社PCで素のfetch()のscriptを無改修で通す node --import 手法
-- [two-machine local footprint 2026-09](project_two_machine_local_footprint_2026-09.md) — dotfiles/mirror/state:pull の運用ポインタ、この Windows PC の pre-commit 12 分・vitest フレーク・preflight 環境要因
-- [worktree junction deletes target](feedback_worktree_junction_deletes_target.md) — worktree に node_modules の junction を張ると worktree remove --force が本体の node_modules を消す (2026-09-16)。先に cmd /c rmdir で外す
-- [worktree symlinked node modules resolve main](feedback_worktree_symlinked_node_modules_resolve_main.md) — worktree の node_modules を丸ごと本体へ symlink する、または node_modules が無いと @stats47/* が本体を指し、型検査や pre-commit の索引検査が狂う。@stats47 だけ worktree へ張り直す
-- [cloud session workflow dispatch 403](feedback_cloud_session_workflow_dispatch_403.md) — クラウドセッションのGitHub MCPはworkflow_dispatchが403。data/workflow-dispatch-requests.jsonをdevelopへpushすればproxyが代理起動する
-- [review agent ran cloud write](feedback_review_agent_ran_cloud_write.md) — 記事のコード例を確かめるsubagentが環境のCLOUDFLARE_API_TOKENでwrangler r2 object put --remoteを実行(403)。手順解説の検証を頼むpromptに外部へ書くコマンドの禁止を書く
-- [x scheduled bulk delete](feedback_x_scheduled_bulk_delete.md) — X予約の一括削除は描画中の7〜8件しか消えない。台帳キーで選択→削除→読み直しを残件0まで繰り返す
-- [sns scheduling limits](project_sns_scheduling_limits.md) — X予約は重み付き280(日本語=2・URL=23)でlint char_maxより厳しい。Threads Web予約は同時25件まで(残りはTHREADS-TOPUP-01で補充)
-- [page quality ui review](project_page_quality_ui_review.md) — 週次ページ品質=全URL静的+代表7幅スクショ+Claude確認。生データはR2 state/page-quality/(git禁止)。SNS予約画像はMac launchd週次
-- [ga4 double pageview](feedback_ga4_double_pageview.md) — SPA の手動 page_view と GA4 拡張計測の履歴変更 page_view が二重計測 (2026-09-26 是正)。変更時は本番 /g/collect を実測
-- [permission grant owner only](feedback_permission_grant_owner_only.md) — GA4/GCP の権限付与は Claude 実行不可 (安全チェック)。準備まで Claude、最後はオーナー。GA4 アクセス管理 UI が止まる時は APIs Explorer
-- [backlog card move fence aware](feedback_backlog_card_move_fence_aware.md) — backlog カード移動は正規表現の「\n## 」で切るとフェンス内見出しで途中切断。フェンス対応の分割+本文一致検証
-- [reply in japanese](feedback_reply_in_japanese.md) — 返答は常に日本語。長い作業の途中で英語に切り替わり何度も言い直させた (2026-09-30)
-- [note hashtag api quirks](feedback_note_hashtag_api_quirks.md) — noteタグ: 同一秒タグは順不同(集合で照合)・大小文字を既存タグに書換・α等は黙って削除・限定公開無料記事はPUT本文が全文でライン位置が公開範囲
-- [workflow policy comment import](feedback_workflow_policy_comment_import.md) — audit-workflow-policy はコメント内の `from "x"` も依存と数え SCRIPT_RUN_WITHOUT_INSTALL を誤検出する。共通モジュールの使用例は散文で書く
-- [help flag runs script](feedback_help_flag_runs_script.md) — 自作スクリプトの多くは --help を無視して本処理を実行する (2026-10-06 に blog outbox を誤生成)。確認は node --check / tsc / import のみの 1 行で
-- [blog background codex only](feedback_blog_background_codex_only.md) — ブログ背景は Codex (generate-blog-images Mode A・送り箱は --article) で git に置く。Gemini で作り直さない。課金や公開を起こす依頼ファイルはコードの commit と別 push にする
-- [codex blocked on windows proxy](feedback_codex_blocked_on_windows_proxy.md) — 会社PCのCodexはプロキシで一時的に503になることがある。再試行で通る。題名を変える前に背景を確かめる
-- [file backlog as you go](feedback_file_backlog_as_you_go.md) — 長い作業では範囲外の課題を見つけた時点で backlog へ起票しながら進める。既存カード検索→追記優先、CI 待ち中の起票コミットはマージ後に push
-- [metric display state](feedback_metric_display_state.md) — 計算方法/年/地域は観測値・単位・系列・配色を一括確定。SSOT移行はCLI/索引/配信まで検査し、途中停止したmetadata反映は全件の完了を確認
-- [zsh word splitting](feedback_zsh_word_splitting.md) — Bash ツールは zsh。未クォート変数が単語に分かれず for/set -- が 1 要素で進む。${=var} か while read、反復後に件数を照合
-- [portfolio keep decision 2026 10](feedback_portfolio_keep_decision_2026_10.md) — 2026-10-11 オーナー判断: SNS・テーマ/Geo/調査・商品は継続。簡素化は系統撤退でなく系統内の未使用・誤報・失敗の是正で行う。消す前に importer を全 workspace で数える
-- [note editor autosave drafts](feedback_note_editor_autosave_drafts.md) — noteエディタは操作を自動保存して下書きを作る。選択確認前にDeleteしない・編集途中で長く待たない。大量操作で公開APIが403
-- [windows npm install rolldown binding](feedback_windows_npm_install_rolldown_binding.md) — Windows用Rolldown任意依存のlock欠落。2026-10-20修復済み。再発時は親と同版のlock metadataを照合する
-- [dev streaming hidden dom copies](feedback_dev_streaming_hidden_dom_copies.md) — localhost の DOM 検査は hidden の `body > div[id^="S:"]` に本文の写しが残り件数が 2 倍に見える。可視の木 `body > div.relative` に絞って数える
-- [run full web tests before push](feedback_run_full_web_tests_before_push.md) — 部品・route の変更や別ブランチの取り込み後は、触れた workspace の vitest 全件を push 前に。部分実行で既存テストを見落とし CI を赤にした (2026-10-21 web・10-25 admin)
-- [business vs content issues](feedback_business_vs_content_issues.md) — 事業イシューマップと問いの台帳は台帳・画面・語彙を混ぜない (2026-11-06 オーナー判断)
-- [content four types](feedback_content_four_types.md) — 全コンテンツは4型のどれかに属する。未分類で作らない。正本content-types.json・題名の「なぜ」だけで論文型にしない (2026-11-06)
-- [ci speed is wait time](feedback_ci_speed_wait_time.md) — リポは PUBLIC で分数は無料。CI 短縮は人の待ち時間で測る。重複に見えても並列なら待ちは増えない。遅い工程は毎回理由を読んでから触る (2026-11-06)
-- [typecheck scripts cache](feedback_typecheck_scripts_cache.md) — type-check:scripts の差分キャッシュは barrel 経由の新しい型エラーを隠す。push 前は .local/tsbuildinfo を消して回す (2026-10-30 PR #1200)
-- [client barrel heavy deps](feedback_client_barrel_heavy_deps.md) — dev が遅い・メモリ再起動は R2 より先に barrel 経由の重い依存 (registry・全テーマ定義・GIS 処理) を疑う。境界テスト 2 本で固定。dev は Turbopack が既定 (2026-10-21)
-- [codex mcp model override](feedback_codex_mcp_model_override.md) — Codex MCP が既定 gpt-6-sol で 400 (ChatGPT アカウント未対応)。呼び出しの model を gpt-6-astra で上書きすると画像生成が通る
-- [reference ui measure live](feedback_reference_ui_measure_live.md) — 見本 UI の URL を渡されたら実物デモの computed style (角丸・余白・フォント・色) を測ってから設計。似た公式テンプレで代用しない (2026-10-27 管理画面で 2 度指摘)
-- [workflow worktree base and deps](feedback_workflow_worktree_base_and_deps.md) — Workflow の worktree は古いコミットから切られ node_modules も無い。prompt に起点 SHA の付け替えと @stats47 だけ張る手順を書き、取り込みは cherry-pick
-- [batch production builds](feedback_batch_production_builds.md) — 本番ビルド (10 分) を修正ごとに回さない。dev で確かめ、本番は節目に 1 回でまとめて検査。dev が壊れていたら先に dev を直す
-- [bundled CJS dataset paths](feedback_bundled_cjs_dataset_paths.md) — 管理画面の CJS は __dirname が /ROOT になる。台帳の実体解決を仮想パスとアプリ cwd で検査し、対象アプリのビルドも確認する
-- [local r2 overlay for generated snapshots](feedback_local_r2_overlay_for_generated_snapshots.md) — 手元生成の R2 snapshot を localhost で見るときは .github/scripts/r2-overlay-server.mjs を使う (自作しない)。R2_S3_ENDPOINT を空に
-- [check ci job scope before launch](feedback_check_ci_job_scope_before_launch.md) — 長い CI ジョブは起動前に作り直す範囲と前回の所要時間を確かめる。data-refresh は snapshot_scope=auto (all を明示しない)。2026-10-28 に 8 指標で 75 分浪費
-- [test and ci wait budget](feedback_test_and_ci_wait_budget.md) — 開発中は vitest related で触った範囲だけ。web 全件 (約10分) は develop 直前の 1 回。CI は push 後に待たずに次へ進む
-- [geo question first](feedback_geo_question_first.md) — 地域分析の組み合わせページは問い→分析の型→見せ方で設計する。表示できるものを並べるのは検索対象外の道具の仕事 (2026-10-29 に 2 回指摘)
-- [product ledger](project_product_ledger.md) — 商品の判断・価格実験の台帳 (2026-11-04)。実験は 12-30 判定まで価格を変えない。戦略への質問は NotebookLM「stats47 商品戦略」
-- [delete branch on merge unsafe](feedback_delete_branch_on_merge_unsafe.md) — develop は保護なし。リポジトリの自動削除をオンにすると develop→main のマージで develop が消える
-- [kindle check by agent](feedback_kindle_check_by_agent.md) — Kindle の表示確認はオーナーに頼まず capture-pages.mjs --all で撮って画像を読む (2026-11-04 指摘)
-- [windows remotion render](feedback_windows_remotion_render.md) — WindowsのRemotion描画はrspackとcompositorのWindows用部品を手元へ展開しChromeを指定。npm ciで消える
-- [analysis question drift](feedback_analysis_question_drift.md) — 分析は台帳の問いの語で答え、恒等式を分け切り、重なりを等分しない。審査のPASSは問いへの答えを保証しない
-- [codex image registered route only](feedback_codex_image_registered_route_only.md) — Codex の画像生成は試作でも登録済み経路だけ。MCP 直呼びは検査で止まらないので呼ぶ前に routes を確認
-- [blog photo thumbnail](project_blog_photo_thumbnail.md) — ブログ新規サムネイルは全面の写真風。人物・場所なし。旧経路の版を上げると全記事の指紋が変わるので触らない
-- [analysis refute mandatory tests](feedback_analysis_refute_mandatory_tests.md) — 反証は観点でなく計算手順つきの必須試験にする。誤った結論の fixture で検出を確かめる
-- [snapshot gap audit first](feedback_snapshot_gap_audit_first.md) — 検査の「本番データの欠落」は比較の誤りのことがある。再生成の前に生成側の関数で 1 件確かめる
-- [tmp worktree lost on resume](feedback_tmp_worktree_lost_on_resume.md) — scratchpad の worktree はセッション再開で消える。worktree はリポジトリ内に置き節目ごとにコミット
-- [stat image type ledger first](feedback_stat_image_type_ledger_first.md) — 統計の画像は描く前に image-templates.json で型を引く。商品の見本も例外にしない
-- [sync-snapshots task names](feedback_sync_snapshots_task_names.md) — カテゴリ一覧を作るのは only=master。ranking-items は別物。起動前に SKILL.md の task 表と承認対象を照合
+## SNS・note
+- [sns reorg](project_sns_reorg_2026_07.md) — SNS の正典と投稿台帳。YouTube は手動 pilot
+- [sns growth emotion themes](feedback_sns_growth_emotion_themes.md) — 伸びは感情喚起。信頼性で差別化
+- [sns competitor search](feedback_sns_competitor_search.md) — 競合検索はテーマ別の名乗りも
+- [sns gallery console](project_sns_gallery_and_ig_cron_fix.md) — 管理コンソール npm run admin
+- [sns scheduling limits](project_sns_scheduling_limits.md) — X 予約の文字数と Threads の予約上限
+- [sns title unicode hydration](feedback_sns_title_unicode_hydration.md) — 絵文字の分断で hydration 不一致
+- [remotion resolved slide props](feedback_remotion_resolved_slide_props.md) — カルーセルは slide ごとに解決
+- [react to news](project_react_to_news_pipeline.md) — 時事ネタを即 SNS へ
+- [x post url integrity](feedback_x_post_url_integrity.md) — posted 判定は status URL と本文一致で
+- [x scheduled bulk delete](feedback_x_scheduled_bulk_delete.md) — X 予約の一括削除は残 0 まで繰り返す
+- [publish x ui](project_publish_x_ui_2026_04.md) — publish-x の UI 対応
+- [instagram paused](project_instagram_paused_2026_10_27.md) — IG 自動投稿は停止中。勝手に enable しない。[IG 10K 戦略](project_sns_10k_roadmap.md) も停止中は実行しない
+- [instagram graph api](project_instagram_graph_api_setup.md) — IG Graph API の設定
+- [note article ledger](project_note_article_ledger.md) — note 記事は台帳 + R2
+- [note image assets](project_note_image_assets_contract.md) — note 画像の契約
+- [note product card ssot](feedback_note_product_card_ssot.md) — 商品カードは実商品の正本から
+- [note publish automation](feedback_note_publish_automation.md) — 本文は 1 回の paste で入れる
+- [note publish flow](project_note_publish_flow_2026_06.md) — エディタの公開手順
+- [note profile launch](feedback_note_profile_launch.md) — note 用 profile は Playwright で起動
+- [note editor autosave](feedback_note_editor_autosave_drafts.md) — エディタは操作を自動保存する
+- [note hashtag api quirks](feedback_note_hashtag_api_quirks.md) — タグの順不同・書換・削除
+- [note paid landing patch](project_note_paid_landing_patch.md) — 有料記事の無料部分は PUT で直す
+- [note attachment limits](project_note_attachment_upload_limits.md) — 添付 upload は 1 日 10 回
+- [note update mode](project_note_update_mode_learnings.md) — カバーと本文の更新の手順
+- [note ins img bug](project_note_ins_img_heading_placement_bug.md) — 画像が見出し直後にずれる未解決バグ
+- [note internal link breaks](project_note_internal_link_breaks_on_publish.md) — 内部リンクは note URL に
+- [note cover overlap](project_note_cover_overlap_validator.md) — カバー SVG の文字重なり検査
+- [voicevox setup](reference_voicevox_setup.md) — VOICEVOX のローカル起動
+
+## CI・git・開発環境
+- [fetch origin first](feedback_fetch_origin_before_implementing.md) — 実装前に fetch と origin との差分確認
+- [shared working copy git race](feedback_shared_working_copy_git_race.md) — 同じ作業ツリーの同時作業は worktree で分ける
+- [develop had no ci gate](feedback_develop_had_no_ci_gate.md) — develop の検査ゲートと preflight
+- [run full web tests](feedback_run_full_web_tests_before_push.md) — 部品・route を変えたら push 前に vitest 全件
+- [test and ci wait budget](feedback_test_and_ci_wait_budget.md) — 開発中は related、全件は develop 前に 1 回
+- [ci speed is wait time](feedback_ci_speed_wait_time.md) — CI 短縮は人の待ち時間で測る
+- [ci cancelled looks like failure](feedback_ci_cancelled_looks_like_failure.md) — cancel は失敗に見える
+- [ci foreign tree overlay](feedback_ci_foreign_tree_overlay.md) — main で生成して develop へ写すと巻き戻る
+- [typecheck scripts cache](feedback_typecheck_scripts_cache.md) — 差分キャッシュが型エラーを隠す
+- [debt baseline shrink only](feedback_debt_baseline_shrink_only.md) — 負債の baseline は縮小専用
+- [exit code not via pipe](feedback_exit_code_not_via_pipe.md) — pipe 越しの exit code は常に 0
+- [mutation test passes wrongly](feedback_mutation_test_passes_wrongly.md) — 赤/緑の理由を毎回読む
+- [workflow arg vector quoted](feedback_workflow_arg_vector_quoted.md) — workflow の引数列は bash 配列で
+- [workflow policy comment import](feedback_workflow_policy_comment_import.md) — コメント内の import も依存と数えられる
+- [help flag runs script](feedback_help_flag_runs_script.md) — 自作スクリプトは --help で本処理が走る
+- [check why removed](feedback_check_why_removed_before_reviving.md) — 復活の前に削除理由を確認
+- [consistency audit](project_consistency_audit_mechanism.md) — agent/skill/script のドリフト検査
+- [delete branch on merge unsafe](feedback_delete_branch_on_merge_unsafe.md) — 自動削除をオンにすると develop が消える
+- [github actions pr creation](feedback_github_actions_pr_creation.md) — Actions の PR 作成には権限設定が要る
+- [cloud github api mcp only](feedback_cloud_github_api_mcp_only.md) — クラウドでは GitHub 操作は MCP だけ
+- [cloud workflow dispatch 403](feedback_cloud_session_workflow_dispatch_403.md) — クラウドの dispatch は依頼ファイル経由
+- [review agent ran cloud write](feedback_review_agent_ran_cloud_write.md) — 検証 agent に外部書込の禁止を書く
+- [cloudflare token](project_cloudflare_token_consolidated.md) — Cloudflare token は 1 個に集約
+- [env local ci consolidation](project_env_local_ci_consolidation.md) — 秘匿値は CI 専任
+- [backlog card move fence aware](feedback_backlog_card_move_fence_aware.md) — カード移動はフェンス対応で分割
+- [next eslint unpatched braces](feedback_next_eslint_unpatched_braces.md) — braces の脆弱性は限定 override で
+- [zsh word splitting](feedback_zsh_word_splitting.md) — Bash ツールは zsh。未クォート変数が分かれない
+- [browser use cleanup](feedback_browser_use_cleanup.md) — browser-use の daemon は pkill で止める
+- [native chrome session export](feedback_native_chrome_session_export.md) — Google 認証の export は専用 profile のコピーで
+- [playwright profile dual os](feedback_playwright_profile_dual_os.md) — Playwright profile の root の決め方
+- [codex exec stdin](feedback_codex_exec_stdin.md)・[codex mcp model override](feedback_codex_mcp_model_override.md) — codex exec は </dev/null で閉じる / Codex MCP は model を上書きする
+- [codex image registered route](feedback_codex_image_registered_route_only.md) — 画像生成は登録済み経路だけ
+- [workflow worktree base and deps](feedback_workflow_worktree_base_and_deps.md) — Workflow の worktree は古い起点で deps 無し
+- [tmp worktree lost on resume](feedback_tmp_worktree_lost_on_resume.md) — scratchpad の worktree は再開で消える
+- [worktree junction deletes target](feedback_worktree_junction_deletes_target.md) — junction の worktree remove が本体を消す
+- [worktree node modules resolve main](feedback_worktree_symlinked_node_modules_resolve_main.md) — @stats47 だけ worktree へ張る
+
+## Windows・会社 PC
+- [windows script portability](feedback_windows_script_portability.md) — Windows で落ちる書き方
+- [windows npm rolldown binding](feedback_windows_npm_install_rolldown_binding.md) — Rolldown の lock 欠落
+- [windows remotion render](feedback_windows_remotion_render.md) — Windows の Remotion 描画の準備
+- [codex blocked on windows proxy](feedback_codex_blocked_on_windows_proxy.md) — 会社 PC の Codex は一時 503
+- [proxy preload for fetch](proxy-preload-for-fetch-scripts.md) — 会社 PC で fetch を通す node --import
+- [two machine local footprint](project_two_machine_local_footprint_2026-09.md) — 2 台運用の dotfiles と mirror

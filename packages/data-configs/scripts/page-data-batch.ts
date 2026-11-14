@@ -1,3 +1,5 @@
+import { readSnapshot, sourceEvidence, assertLiveEstatAllowed, type SourceEvidence } from "./lib/estat-table-reader.js";
+import { conversionFactor } from "../src/unit/unit-semantics.js";
 import { prefToCityStatsDataId } from "../src/ssds/entity-source";
 import { PREFECTURE_CAPITAL_CITIES } from "@stats47/area";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
@@ -49,6 +51,7 @@ import { applyValueScale } from "../src/money-unit.js";
 import { fillMissingTimeFromSurveyDate } from "../src/estat-time.js";
 import { mergeSupplementalValues } from "../src/supplemental-values.js";
 import { applyValueCorrections } from "../src/value-corrections";
+import { applySampleCounts, sampleCountKey } from "../src/sample-count";
 import { relabelYearNames, type YearNamedRow } from "../src/year-names";
 import {
   combineLinear,
@@ -69,7 +72,7 @@ import {
   type ShapeSummary,
   type ShapeViolation,
 } from "../src/shape-gate.js";
-import type { KakeiChousaSource, MetricConfig, SourceConfig } from "../src/types.js";
+import type { KakeiChousaSource, MetricConfig, SampleCountSpec, SourceConfig } from "../src/types.js";
 
 // known-broken は「公開済みの欠陥を認知している」だけなので新規書き込みを許可しない。
 // legitimate は統計の定義上正しい形であり、重症度ラチェットの範囲内なら書き込んでよい。
@@ -177,6 +180,7 @@ interface EstatFetchResult {
   values: EstatValue[];
   /** RESULT_INF。総数が取得数を上回っていれば打ち切られている */
   raw: { totalNumber: number; toNumber: number };
+  sources: SourceEvidence[];
 }
 
 /**
@@ -199,10 +203,12 @@ async function fetchEstatCombination(
   let totalNumber = 0;
   let toNumber = 0;
   const order: string[] = [];
+  const sources: SourceEvidence[] = [];
   const meta = new Map<string, { area: string; time: string }>();
 
   for (const { cdTab, factor } of combination) {
     const part = await fetchEstatData(appId, { ...config, cdTab, tabCombination: undefined });
+    sources.push(...part.sources);
     totalNumber += part.raw.totalNumber;
     toNumber += part.raw.toNumber;
     const byKey = new Map<string, string>();
@@ -233,7 +239,7 @@ async function fetchEstatCombination(
     return { "@area": area, "@time": time, $: toEstatValue(combined) };
   });
 
-  return { values, raw: { totalNumber, toNumber } };
+  return { values, raw: { totalNumber, toNumber }, sources };
 }
 
 /**
@@ -260,6 +266,7 @@ interface AxisMemberSum {
   order: string[];
   meta: Map<string, { area: string; time: string }>;
   raw: { totalNumber: number; toNumber: number };
+  sources: SourceEvidence[];
 }
 
 /**
@@ -282,6 +289,7 @@ async function sumAxisMembers(
   let totalNumber = 0;
   let toNumber = 0;
   const order: string[] = [];
+  const sources: SourceEvidence[] = [];
   const meta = new Map<string, { area: string; time: string }>();
 
   for (const code of codes) {
@@ -291,6 +299,7 @@ async function sumAxisMembers(
       axisSum: undefined,
       axisRatio: undefined,
     });
+    sources.push(...part.sources);
     totalNumber += part.raw.totalNumber;
     toNumber += part.raw.toNumber;
     const byKey = new Map<string, string>();
@@ -318,7 +327,7 @@ async function sumAxisMembers(
     );
   }
 
-  return { byKey, order, meta, raw: { totalNumber, toNumber } };
+  return { byKey, order, meta, raw: { totalNumber, toNumber }, sources };
 }
 
 async function fetchEstatAxisSum(
@@ -326,7 +335,7 @@ async function fetchEstatAxisSum(
   config: Extract<SourceConfig, { kind: "estat" }>,
   axisSum: NonNullable<Extract<SourceConfig, { kind: "estat" }>["axisSum"]>,
 ): Promise<EstatFetchResult> {
-  const { byKey, order, meta, raw } = await sumAxisMembers(
+  const { byKey, order, meta, raw, sources } = await sumAxisMembers(
     appId,
     config,
     axisSum.axis,
@@ -339,7 +348,7 @@ async function fetchEstatAxisSum(
     return { "@area": area, "@time": time, $: toEstatValue(sum === null ? null : round1(sum)) };
   });
 
-  return { values, raw };
+  return { values, raw, sources };
 }
 
 /**
@@ -382,6 +391,7 @@ async function fetchEstatAxisRatio(
 
   return {
     values,
+    sources: [...numerator.sources, ...denominator.sources],
     raw: {
       totalNumber: numerator.raw.totalNumber + denominator.raw.totalNumber,
       toNumber: numerator.raw.toNumber + denominator.raw.toNumber,
@@ -400,7 +410,8 @@ async function fetchAxisMembers(
   statsDataId: string,
   axis: EstatAxisName,
 ): Promise<{ members: AreaAxisMember[]; surveyYear: string | null; hasTimeAxis: boolean }> {
-  const params = new URLSearchParams({ appId, lang: "J", statsDataId });
+  assertLiveEstatAllowed(statsDataId);
+  const params = new URLSearchParams({ appId: appId || readAppId(), lang: "J", statsDataId });
   const res = await fetch(`https://api.e-stat.go.jp/rest/3.0/app/json/getMetaInfo?${params}`);
   if (!res.ok) throw new Error(`e-Stat getMetaInfo HTTP ${res.status}`);
   const json = (await res.json()) as Record<string, any>;
@@ -498,6 +509,7 @@ async function fetchEstatAreaAxis(
   config: Extract<SourceConfig, { kind: "estat" }>,
   areaAxis: NonNullable<Extract<SourceConfig, { kind: "estat" }>["areaAxis"]>,
 ): Promise<EstatFetchResult> {
+  console.warn(`[estat-api] ${config.statsDataId}: areaAxis requires live classification metadata; snapshot fallback not yet supported`);
   const { members, surveyYear, hasTimeAxis } = await fetchAxisMembers(
     appId,
     config.statsDataId,
@@ -524,7 +536,7 @@ async function fetchEstatAreaAxis(
   }
 
   // 対象軸は pin せずに取得する (pin すると 1 県分しか返らない)
-  const fetched = await fetchEstatData(appId, { ...config, areaAxis: undefined });
+  const fetched = await fetchEstatData(appId, { ...config, areaAxis: undefined }, true);
   const attr = `@${areaAxis.axis}` as const;
 
   const values: EstatValue[] = [];
@@ -540,12 +552,13 @@ async function fetchEstatAreaAxis(
     });
   }
 
-  return { values, raw: fetched.raw };
+  return { values, raw: fetched.raw, sources: fetched.sources };
 }
 
-async function fetchEstatData(
+export async function fetchEstatData(
   appId: string,
   config: Extract<SourceConfig, { kind: "estat" }>,
+  forceApi = false,
 ): Promise<EstatFetchResult> {
   if (config.tabCombination && config.tabCombination.length > 0) {
     return fetchEstatCombination(appId, config, config.tabCombination);
@@ -559,22 +572,34 @@ async function fetchEstatData(
   if (config.areaAxis) {
     return fetchEstatAreaAxis(appId, config, config.areaAxis);
   }
-  const params = new URLSearchParams({
-    appId,
-    statsDataId: config.statsDataId,
-    limit: String(ESTAT_LIMIT),
-  });
-  if (config.cdCat01) params.set("cdCat01", config.cdCat01);
-  if (config.cdCat02) params.set("cdCat02", config.cdCat02);
-  if (config.cdCat03) params.set("cdCat03", config.cdCat03);
-  // 4 軸目以降と表章項目 (tab)。絞り忘れると同じ県が複数行になり rank が通し番号化する
-  if (config.cdCat04) params.set("cdCat04", config.cdCat04);
-  if (config.cdCat05) params.set("cdCat05", config.cdCat05);
-  if (config.cdTab) params.set("cdTab", config.cdTab);
-  const url = `https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?${params}`;
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`e-Stat HTTP ${res.status}`);
-  const json = (await res.json()) as Record<string, unknown>;
+  const snapshot = forceApi ? null : await readSnapshot(config);
+  let json: Record<string, unknown>;
+  const sources: SourceEvidence[] = [];
+  if (snapshot) {
+    json = snapshot.response;
+    sources.push(snapshot.source);
+  } else {
+    assertLiveEstatAllowed(config.statsDataId);
+    const source: SourceEvidence = { kind: "estat-api", statsDataId: config.statsDataId, catalogVersion: null, sliceKeys: [], manifestSha256: null };
+    sources.push(source);
+    console.log(`[estat-api] ${config.statsDataId}: ${forceApi ? "unsupported snapshot shape" : "no pushed snapshot"}`);
+    const params = new URLSearchParams({
+      appId: appId || readAppId(),
+      statsDataId: config.statsDataId,
+      limit: String(ESTAT_LIMIT),
+    });
+    if (config.cdCat01) params.set("cdCat01", config.cdCat01);
+    if (config.cdCat02) params.set("cdCat02", config.cdCat02);
+    if (config.cdCat03) params.set("cdCat03", config.cdCat03);
+    // 4 軸目以降と表章項目 (tab)。絞り忘れると同じ県が複数行になり rank が通し番号化する
+    if (config.cdCat04) params.set("cdCat04", config.cdCat04);
+    if (config.cdCat05) params.set("cdCat05", config.cdCat05);
+    if (config.cdTab) params.set("cdTab", config.cdTab);
+    const url = `https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?${params}`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`e-Stat HTTP ${res.status}`);
+    json = (await res.json()) as Record<string, unknown>;
+  }
   const getStatsData = json.GET_STATS_DATA as Record<string, unknown> | undefined;
 
   // ★RESULT.STATUS を見る。HTTP 200 でもアプリケーションレベルのエラー
@@ -587,7 +612,7 @@ async function fetchEstatData(
   // axisSum のようにメンバーごとに叩く経路では、一部メンバーが空なのは正常なこともある
   // (港湾調査の入港船舶表は cdCat01=100/cdCat02=100 では外国航路にデータが無い)。
   if (statusCode === 1) {
-    return { values: [], raw: { totalNumber: 0, toNumber: 0 } };
+    return { values: [], raw: { totalNumber: 0, toNumber: 0 }, sources };
   }
   if (statusCode !== 0) {
     throw new Error(
@@ -640,9 +665,9 @@ async function fetchEstatData(
   // 商業動態統計のように 1 年あたり 年計1 + 四半期4 + 月次12 を同居させる表があり、
   // extractYearCode で 4 桁年へ正規化すると同じ年に 17 行が潰れて重複する。
   if (config.timeScope === "annual") {
-    return { values: values.filter((v) => /^\d{4}0{6}$/.test(String(v["@time"] ?? ""))), raw };
+    return { values: values.filter((v) => /^\d{4}0{6}$/.test(String(v["@time"] ?? ""))), raw, sources };
   }
-  return { values, raw };
+  return { values, raw, sources };
 }
 
 /**
@@ -858,6 +883,10 @@ interface ShapedRow {
   unit: string;
   rank: number | null;
   prefectureCode?: string;
+  /** 推計の人数 (`source.sampleCount` を宣言した指標だけ) */
+  sampleCount?: number | null;
+  /** 推計の人数が下限未満で順位から外した行 (ページでは参考値として示す) */
+  reference?: boolean;
 }
 
 /** 年ごとに value 降順で rank を付与 (1=最大値)。null は rank null。同値は同順位 (競争順位)。 */
@@ -869,7 +898,8 @@ function assignRanks(rows: ShapedRow[]): void {
   }
   for (const group of byYear.values()) {
     const ranked = group
-      .filter((r) => r.value != null)
+      // 推計の人数が少ない県・年 (参考値) は順位を持たせない (DATA-WAGE-TEACHER-COVERAGE-01)
+      .filter((r) => r.value != null && !r.reference)
       .sort((a, b) => (b.value as number) - (a.value as number));
     let prevValue: number | null = null;
     let prevRank = 0;
@@ -898,6 +928,8 @@ interface WrittenStatsMeta {
   areaCount: number;
   generatedAt: string;
   recipe: MetricRecipe;
+  source?: SourceEvidence & { inputs?: SourceEvidence[] };
+  sampleCount?: { kind: "estimated-workers"; unit: "人"; referenceBelow: number; cdTab: string };
 }
 
 /** meta を組み立てる共通処理 */
@@ -925,11 +957,43 @@ function valueScaleOf(config: MetricConfig): number | undefined {
   return config.source.kind === "estat" ? config.source.valueScale : undefined;
 }
 
+/**
+ * 推計の人数の表章項目を取り、(地域, 年) → 表の単位の人数にする (`source.sampleCount`)。
+ * 年代違いのコードを並べた cdTab が同じ年に 2 つ値を返したら、定義が重なっているので止める (tabCombination と同じ)。
+ */
+export async function fetchSampleCounts(
+  appId: string,
+  src: Extract<SourceConfig, { kind: "estat" }>,
+  spec: SampleCountSpec | undefined = src.sampleCount,
+) {
+  if (!spec) return null;
+  const part = await fetchEstatData(appId, { ...src, cdTab: spec.cdTab, tabCombination: undefined, sampleCount: undefined });
+  const counts = new Map<string, number | null>();
+  for (const v of part.values) {
+    const key = sampleCountKey(v["@area"], v["@time"]);
+    if (counts.has(key)) {
+      throw new Error(`sampleCount の cdTab "${spec.cdTab}" が ${key} に複数の値を返した (年代違いのコードが同じ年に重なっている)`);
+    }
+    const factor = conversionFactor(v["@unit"], "人");
+    if (factor === null || factor !== spec.factor) throw new Error(`sampleCount unit/factor mismatch: ${v["@unit"]}/${spec.factor}`);
+    const raw = parseEstatValue(v.$);
+    if (raw !== null && raw < 0) throw new Error(`Negative estimated-worker count: ${key}`);
+    // Keep source units here: applySampleCounts performs the declared conversion exactly once.
+    counts.set(key, raw);
+  }
+  return Object.assign(counts, { sources: part.sources });
+}
+
 /** 取得 raw values → StatsValues 構造 (prefecture)。areaName/unit/yearName/rank を付与し本番投入可能形に。 */
-function shapeForPrefecture(config: MetricConfig, values: EstatValue[]) {
+export function shapeForPrefecture(
+  config: MetricConfig,
+  values: EstatValue[],
+  sample?: { counts: ReadonlyMap<string, number | null>; spec: SampleCountSpec },
+  source?: WrittenStatsMeta["source"],
+) {
   const masters = loadAreaMasters();
   const scale = valueScaleOf(config);
-  const rows: ShapedRow[] = values
+  const shaped: ShapedRow[] = values
     .filter((v) => isPrefCode5(v["@area"]) && inYearRange(v["@time"].slice(0, 4), config))
     .map((v) => {
       const yearCode = v["@time"].slice(0, 4);
@@ -948,8 +1012,14 @@ function shapeForPrefecture(config: MetricConfig, values: EstatValue[]) {
         ? a.areaCode.localeCompare(b.areaCode)
         : a.yearCode.localeCompare(b.yearCode),
     );
+  const rows = sample ? applySampleCounts(shaped, sample.counts, sample.spec) : shaped;
   assignRanks(rows);
-  return { metricKey: config.key, entityKind: "prefecture" as const, rows, meta: buildMeta(config, rows) };
+  const meta = buildMeta(config, rows);
+  if (source) meta.source = source;
+  if (sample) {
+    meta.sampleCount = { kind: "estimated-workers", unit: "人", referenceBelow: sample.spec.minimum, cdTab: sample.spec.cdTab };
+  }
+  return { metricKey: config.key, entityKind: "prefecture" as const, rows, meta };
 }
 
 /** 取得 raw values → StatsValues 構造 (city)。areaName(市区町村マスタ join)/unit/yearName/rank を付与。 */
@@ -1090,7 +1160,7 @@ async function readPublishedCoverage(
  * `supplementalSources` の年を別表から取り、主出典の取得結果へ合流させる。
  * 県と市で同じ補完表を使うので、1 回の processOne の中では取得を共有する。
  */
-async function applySupplements(
+export async function applySupplements(
   appId: string,
   config: MetricConfig,
   fetched: EstatFetchResult,
@@ -1112,7 +1182,7 @@ async function applySupplements(
       const cacheKey = JSON.stringify(s.source);
       if (!cache.has(cacheKey)) cache.set(cacheKey, fetchEstatData(appId, { ...s.source }));
       const result = await cache.get(cacheKey)!;
-      return { years: s.years, values: result.values, raw: result.raw };
+      return { years: s.years, values: result.values, raw: result.raw, sources: result.sources };
     }),
   );
 
@@ -1126,6 +1196,7 @@ async function applySupplements(
   }
   return {
     values: merged.values,
+    sources: [...fetched.sources, ...batches.flatMap((b) => b.sources)],
     raw: batches.reduce(
       (acc, b) => ({
         totalNumber: acc.totalNumber + b.raw.totalNumber,
@@ -1308,7 +1379,11 @@ export async function processOne(
       );
       const values =
         config.source.kind === "kakei-chousa" ? remapKakeiAreas(fetched.values) : fetched.values;
-      const payload = shapeForPrefecture(config, values);
+      const sampleSpec = config.source.kind === "estat" ? config.source.sampleCount : undefined;
+      const counts = sampleSpec ? await fetchSampleCounts(appId, src, sampleSpec) : null;
+      const sample = sampleSpec && counts ? { counts, spec: sampleSpec } : undefined;
+      const payload = shapeForPrefecture(config, values, sample, sourceEvidence([...fetched.sources, ...(counts?.sources ?? [])]));
+      if (sample) notes.push(`reference=${payload.rows.filter((r) => r.reference).length}`);
       const notEmpty = await gateEmpty("prefecture", values.length, payload.rows.length, "values.json");
       // 0 件なら形状は見ない (expected-empty の担当。二重に鳴らさない)
       const shapeOk = notEmpty
@@ -1334,6 +1409,7 @@ export async function processOne(
         const fetched = await applySupplements(appId, config, city, supplementCache, notes, "city");
         const values = fetched.values;
         const payload = shapeForCity(config, values, city.source);
+        payload.meta.source = sourceEvidence(fetched.sources);
         const notEmpty = await gateEmpty("city", values.length, payload.rows.length, "cities.json");
         const shapeOk = notEmpty
           ? await gateShape("city", payload, fetched.raw, "cities.json")
@@ -1375,7 +1451,7 @@ export async function processOne(
 
 async function main() {
   const args = parseArgs();
-  const appId = readAppId();
+  const appId = ""; // Resolve credentials only on the live API branch.
   const all = listAllMetrics();
   console.log(`[batch] registry size: ${all.length}`);
 
@@ -1540,7 +1616,7 @@ async function main() {
 //   純粋関数をテストから import しただけで全 metric の取り込みが始まってしまい、
 //   e-Stat へ数千リクエストを投げかけた。import は副作用を持ってはいけない。
 const invokedDirectly = process.argv[1]
-  ? resolve(process.argv[1]).includes("page-data-batch")
+  ? resolve(process.argv[1]) === fileURLToPath(import.meta.url)
   : false;
 
 if (invokedDirectly) {

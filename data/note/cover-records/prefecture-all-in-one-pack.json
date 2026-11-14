@@ -1,0 +1,165 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "prefecture-all-in-one-pack",
+  "production": {
+    "id": "NCI-00362",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "2,073指標の\n総合データ集",
+      "subline": "47都道府県・年次固定",
+      "subject": "机上に整理したデータ集の紙束、表計算シートのタブ、資料ファイルを描く。収録物の用途が分かる実務資料の構図。架空の統計グラフや行政界地図、読めない細字、人物は描かない。",
+      "evidence": "P-12 v4-20261024-mac-r2 の READINESS と ZIP 読み戻しで、47都道府県・2,073指標、CSV・Excel・PowerPoint・PDF・地図SVG/PNG・出典/許諾文を確認。原稿の収録内容と一致。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "2c445fab6e80776e065042aaa1ac2c8a82b8e382e48c67726aa266923a58ed14",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/prefecture-all-in-one-pack/revisions/2c445fab6e80776e065042aaa1ac2c8a82b8e382e48c67726aa266923a58ed14.png"
+      },
+      "bytes": 35981,
+      "id": "2c445fab6e80776e065042aaa1ac2c8a82b8e382e48c67726aa266923a58ed14",
+      "kind": "candidate",
+      "version": "2026-10-12-packs",
+      "createdAt": "2026-10-12T07:11:22.823Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "d8d5969e910c6f5072203142ba1c5a56adb8b2b314839be39271f9385d5b2fea"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出し・指標数・パック実データの県別地図が読める。登録前の確認版とSHA一致",
+        "reviewedAt": "2026-10-12T07:11:45.576Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "d8d5969e910c6f5072203142ba1c5a56adb8b2b314839be39271f9385d5b2fea",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-all-in-one-pack/inputs/d8d5969e910c6f5072203142ba1c5a56adb8b2b314839be39271f9385d5b2fea.json"
+          },
+          "bytes": 1160
+        }
+      }
+    },
+    {
+      "sha256": "934c5ab8cde75646c1b6a3345e87a50ab2bff08d497a649a9101d87b82b883f6",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/prefecture-all-in-one-pack/revisions/934c5ab8cde75646c1b6a3345e87a50ab2bff08d497a649a9101d87b82b883f6.png"
+      },
+      "bytes": 35434,
+      "id": "934c5ab8cde75646c1b6a3345e87a50ab2bff08d497a649a9101d87b82b883f6",
+      "kind": "candidate",
+      "version": "2026-10-12-packs-r4",
+      "createdAt": "2026-10-12T07:46:38.765Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "089f59f61943c5ce3787959a8c0104e2ff066abe1e8cc742856bf0493772e1e1"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "r4の指標数で作り直し。320px相当で見出し・指標数・パック実データの県別地図が読める。確認版とSHA一致",
+        "reviewedAt": "2026-10-12T07:47:01.214Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "089f59f61943c5ce3787959a8c0104e2ff066abe1e8cc742856bf0493772e1e1",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-all-in-one-pack/inputs/089f59f61943c5ce3787959a8c0104e2ff066abe1e8cc742856bf0493772e1e1.json"
+          },
+          "bytes": 1160
+        }
+      }
+    },
+    {
+      "sha256": "e3e31cd787b751986aef136885ac86bea87fe9d61b922f7bde3b5e801a5d33a4",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/prefecture-all-in-one-pack/revisions/e3e31cd787b751986aef136885ac86bea87fe9d61b922f7bde3b5e801a5d33a4.png"
+      },
+      "bytes": 1692049,
+      "id": "e3e31cd787b751986aef136885ac86bea87fe9d61b922f7bde3b5e801a5d33a4",
+      "kind": "candidate",
+      "version": "pop-NCP-006-v3-421be49e7b6a",
+      "createdAt": "2026-10-24T09:58:59.432Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "781b84f0ef73a59de77deb497f6286a1e9872ab59d424bc73677273bcd0b9b13"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "原寸と幅320pxで指定5文言を確認。誤字・欠字・文字切れ・重なりなし。資料束と汎用の表計算画面は用途に一致し、人物・地図・架空の統計値なし。",
+        "reviewedAt": "2026-10-24T10:00:17.622Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "781b84f0ef73a59de77deb497f6286a1e9872ab59d424bc73677273bcd0b9b13",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/prefecture-all-in-one-pack/inputs/781b84f0ef73a59de77deb497f6286a1e9872ab59d424bc73677273bcd0b9b13.json"
+          },
+          "bytes": 8008
+        },
+        "production": {
+          "id": "NCI-00362",
+          "policyId": "NCP-006",
+          "policyVersion": 3,
+          "planSha256": "421be49e7b6a784dffd39d792f03c1c9886b3b1d6bb93bd8627dec263c9ee54a"
+        }
+      }
+    },
+    {
+      "sha256": "ed96c4636e8d3710e3e9eedb3f0f6561fbb41359617a0e40f99ef8fae0b3ac6d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/prefecture-all-in-one-pack/revisions/ed96c4636e8d3710e3e9eedb3f0f6561fbb41359617a0e40f99ef8fae0b3ac6d.png"
+      },
+      "bytes": 398698,
+      "id": "ed96c4636e8d3710e3e9eedb3f0f6561fbb41359617a0e40f99ef8fae0b3ac6d",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-24T16:13:57.262Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/328107046/rectangle_large_type_2_d4ce8094a03256212de666e8621e2d15.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "ed96c4636e8d3710e3e9eedb3f0f6561fbb41359617a0e40f99ef8fae0b3ac6d"
+      }
+    }
+  ]
+}

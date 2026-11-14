@@ -33,22 +33,6 @@ export const nationalPensionEnrolleesType1Per10002059: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "人/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "人/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "seoTitle": "第1号国民年金被保険者数ランキング都道府県【2022年】｜1位沖縄県（303.6人）",
   "seoDescription": "2022年の第1号国民年金被保険者数の都道府県別ランキング。1位沖縄県（303.6人）、最下位島根県（189.4人）で1.6倍の格差。地図やグラフで47都道府県を比較。",

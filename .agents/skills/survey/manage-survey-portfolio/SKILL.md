@@ -43,7 +43,7 @@ node .claude/scripts/surveys/evaluate-survey-experiments.mjs --verdict <id> <ver
 ```
 
 - cadence: **週次レビューの `npm run weekly:audits` (survey-taxonomy) で再導出、四半期で監査レポート**
-  (`reference/audits/YYYY-MM-DD-survey-portfolio-audit.md`) を必須とする。CI (`pr-quality-check.yml` の
+  (`data/surveys/audits/YYYY-MM-DD-survey-portfolio-audit.md`) を必須とする。CI (`pr-quality-check.yml` の
   Survey Portfolio State Guard) は schema/drift/orphan/linkage の検証のみで、本文生成・R2 push・deploy をしない。
 
 ## 手順 (audit)
@@ -54,7 +54,7 @@ node .claude/scripts/surveys/evaluate-survey-experiments.mjs --verdict <id> <ver
    # 内部で audit-survey-linkage.ts --json を実行 (itemCount/orphan は監査実測値の転記) +
    # R2 app/survey/all.json fetch (activeItemCount / r2-drift 検知) +
    # 調査ハブの本文の台帳 (`surveys.editorial`) import (editorialContentExists / readerQuestionCount) +
-   # reference/reviews/YYYY-MM-DD-survey-<surveyId>.md 対応付け (lastReviewedAt / evidenceRefs)
+   # data/surveys/reviews/YYYY-MM-DD-survey-<surveyId>.md 対応付け (lastReviewedAt / evidenceRefs)
    ```
 2. **実測集計**: `npx tsx .claude/scripts/surveys/aggregate-survey-metrics.ts` — GSC / GA4 pages.csv
    の `/survey/<id>` 行を 56d (非重複 2 窓) で合算。**行が無い = 表示 0 の実測として measured-low の
@@ -62,10 +62,11 @@ node .claude/scripts/surveys/evaluate-survey-experiments.mjs --verdict <id> <ver
    `survey-navigation.csv` の `survey_ranking` を同じ56日で集計し、20 clicks 未満は measured-low。
    2窓のどちらかが欠ければゼロ推定せず insufficient-data とする。
 3. **検証**: `npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts` が green であること
-   (drift・根拠なし判定・重複実験・state 35日超 stale は validator が弾く)。
+   (drift・根拠なし判定・重複実験・state 35日超 stale は validator が弾く)。列挙の値と調査 ID の実在は
+   Schema と台帳の refs が持つので、`npm run check-datasets` も通す。
 4. **差分レポート**: lifecycle/editorial の変更・r2-drift・orphan・insufficient-data の一覧を
    agent の OUTPUT FORMAT で報告。四半期監査時は
-   `reference/audits/YYYY-MM-DD-survey-portfolio-audit.md` に保存。
+   `data/surveys/audits/YYYY-MM-DD-survey-portfolio-audit.md` に保存。
 
 ## 編集ハブ化の選別 (evaluate)
 
@@ -79,7 +80,7 @@ npx tsx .claude/scripts/surveys/build-survey-portfolio.ts --set <surveyId> \
 ```
 
 編集ハブの実装フローは `.claude/rules/survey-content-standards.md` (1 survey ずつ実証・一括長文化禁止)。
-実装前に `reference/reviews/YYYY-MM-DD-survey-<surveyId>.md` の事前監査 (query 実測・在庫構造・
+実装前に `data/surveys/reviews/YYYY-MM-DD-survey-<surveyId>.md` の事前監査 (query 実測・在庫構造・
 既存記事との重複・受入条件) を書き、editorialStatus を audit-ready に上げてから着手する。
 
 ## 実験管理 (experiment)
@@ -97,7 +98,8 @@ npx tsx .claude/scripts/surveys/build-survey-portfolio.ts --add-experiment /tmp/
 ## 検証 (毎回必須)
 
 ```bash
-npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts   # schema + 判定規律 + drift
+npm run check-datasets                                         # 形 (Schema の列挙) + 調査 ID の実在 (refs)
+npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts   # 判定規律 + drift + 鮮度 (意味の検査)
 npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts   # 紐付け実測 (数値の根拠)
 npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check # 横断taxonomy freshness/ratchet
 npx vitest run apps/web/src/features/survey/survey-editorial.test.ts --root apps/web  # editorial 変更時

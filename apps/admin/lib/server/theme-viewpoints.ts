@@ -12,7 +12,7 @@ import {
 import fs from "node:fs";
 import path from "node:path";
 
-import { datasetDir } from "../../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 import { THEME_SELECTION_VIEWPOINTS } from "../../../../config/paths.mjs";
 import { projectRoot } from "./project-root";
 import { cached, fileExists, readJson, readText, TTL } from "./state-io";
@@ -62,12 +62,22 @@ export interface ViewpointHitRow extends ViewpointHit {
   themeTitle: string;
 }
 
-/** 次に見直すテーマの候補 1 行。並べ方は「検索の表示回数が多い順」で、点数は付けない (根拠を列で見せる)。 */
+/** テーマの採点表の 1 行。並べ方は「検索の表示回数が多い順」で、点数は付けない (根拠を列で見せる)。 */
 export interface ViewpointCandidateRow {
   key: string;
   title: string;
-  /** 最新の GSC 週次スナップショット (28 日) の /themes/<key> の表示回数。行が無ければ null */
+  /**
+   * 全ルート込み (全国版 + 県別 + 市区町村別) の直近 28 日の検索の表示回数。集計が無ければ null。
+   * 表示の 94% は県別ページにあるので、全国版の 1 URL だけでは需要を読み違える (2026-11-14)
+   */
   impressions: number | null;
+  clicks: number | null;
+  /** クリック率 (0〜1)。表示が無ければ null */
+  ctr: number | null;
+  /** 週次の品質監査の判定 (ok・gaps・stale・unknown)。一覧表に無ければ null */
+  dataQuality: string | null;
+  /** 読みやすさの品質基準の違反の種類 (直近の計測。県別と全国版・スマホ幅とデスクトップ幅の合算)。計測が無ければ null */
+  uiViolations: string[] | null;
   fixHits: number;
   reviewHits: number;
   /** 最新の提案文書の日付と status。無ければ null */
@@ -87,6 +97,8 @@ export interface ViewpointTrend {
 export interface ThemeViewpointSummary {
   /** 表示回数を読んだ GSC スナップショットの週 (無ければ null) */
   gscWeek: string | null;
+  /** 読みやすさの品質基準を測った日 (data/themes/ui-weight/ の最新。無ければ null) */
+  uiMeasuredOn: string | null;
   themeCount: number;
   primaryAndSecondaryCount: number;
   criteria: ViewpointCriterionRow[];
@@ -96,29 +108,42 @@ export interface ThemeViewpointSummary {
   trend: ViewpointTrend;
 }
 
-const REVIEWS_DIR = ".claude/skills/theme/manage-theme-portfolio/reference/reviews";
+const REVIEWS_DIR = datasetDir("themes.reviews");
 const TREND_WEEKS = 8;
 /** 承認待ちとみなす提案の新しさ。これより古い proposal-ready は放置された提案として、候補に戻す */
 const PROPOSAL_FRESH_DAYS = 30;
-const THEME_PAGE = /^https:\/\/stats47\.jp\/themes\/([a-z0-9-]+)\/?$/;
 
-/** 最新週の pages.csv から /themes/<key> の 28 日表示回数を読む */
-function latestThemeImpressions(): { week: string | null; byTheme: Map<string, number> } {
-  const dir = datasetDir("gsc.snapshots");
+type PortfolioTheme = {
+  themeKey: string;
+  dataQualityStatus?: string;
+  metricsAllRoutes28d?: { gsc?: { weeks?: string[]; impressions?: number; clicks?: number; ctr?: number } };
+};
+
+/** テーマの一覧表 (themes.portfolio) から、全ルート込みの直近 28 日の検索の実績と品質の判定を読む */
+function portfolioByTheme(): { week: string | null; byTheme: Map<string, PortfolioTheme> } {
+  const rel = datasetPath("themes.portfolio");
+  if (!fileExists(rel)) return { week: null, byTheme: new Map() };
+  const themes = readJson<{ themes: PortfolioTheme[] }>(rel).themes;
+  const week = themes.map((t) => t.metricsAllRoutes28d?.gsc?.weeks?.at(-1)).find(Boolean) ?? null;
+  return { week, byTheme: new Map(themes.map((t) => [t.themeKey, t])) };
+}
+
+/** 読みやすさの品質基準の直近の計測 (measure-theme-weight.mjs) から、テーマごとの違反の種類を読む */
+function latestUiViolations(): { measuredOn: string | null; byTheme: Map<string, string[]> } {
+  const dir = datasetDir("themes.ui-weight");
   const abs = path.join(projectRoot(), dir);
-  const weeks = fs.existsSync(abs) ? fs.readdirSync(abs).filter((w) => /^\d{4}-W\d{2}$/.test(w)).sort() : [];
-  for (const week of weeks.reverse()) {
-    const rel = path.join(dir, week, "pages.csv");
-    if (!fileExists(rel)) continue;
-    const byTheme = new Map<string, number>();
-    for (const line of readText(rel).trim().split(/\r?\n/).slice(1)) {
-      const [page, , impressions] = line.split(",");
-      const key = page.match(THEME_PAGE)?.[1];
-      if (key) byTheme.set(key, (byTheme.get(key) ?? 0) + Number(impressions));
-    }
-    return { week, byTheme };
+  const latest = fs.existsSync(abs) ? fs.readdirSync(abs).filter((f) => /^\d{4}-\d{2}-\d{2}\.json$/.test(f)).sort().at(-1) : undefined;
+  if (!latest) return { measuredOn: null, byTheme: new Map() };
+  const rows = readJson<{ rows: Array<{ themeKey: string; violations?: string[] }> }>(path.join(dir, latest)).rows;
+  // 品質基準を数える前の古い計測 (violations を持たない) は「計測なし」として扱う
+  if (!rows.some((r) => Array.isArray(r.violations))) return { measuredOn: null, byTheme: new Map() };
+  const byTheme = new Map<string, Set<string>>();
+  for (const r of rows) {
+    const set = byTheme.get(r.themeKey) ?? new Set<string>();
+    for (const code of r.violations ?? []) set.add(code);
+    byTheme.set(r.themeKey, set);
   }
-  return { week: null, byTheme: new Map() };
+  return { measuredOn: latest.slice(0, -5), byTheme: new Map([...byTheme].map(([key, set]) => [key, [...set].sort()])) };
 }
 
 function isInFlight(review: { date: string; status: string } | null, today: string): boolean {
@@ -144,8 +169,8 @@ function latestReviews(): Map<string, { date: string; status: string }> {
   return latest;
 }
 
-function readTrend(themesDir: string): ViewpointTrend {
-  const rel = path.join(themesDir, "viewpoint-history.csv");
+function readTrend(): ViewpointTrend {
+  const rel = datasetPath("themes.viewpoint-history");
   if (!fileExists(rel)) return { weeks: [], byRule: {} };
   const rows = readText(rel).trim().split(/\r?\n/).slice(1).map((line) => line.split(","));
   const weeks = [...new Set(rows.map(([week]) => week))].sort().slice(-TREND_WEEKS);
@@ -186,12 +211,13 @@ function buildSummary(): ThemeViewpointSummary {
   });
 
   const severity = new Map(config.rules.map((r) => [r.id, r.severity]));
-  const themesDir = datasetDir("themes.portfolio");
-  const readState = <T,>(file: string, empty: T): T =>
-    fileExists(path.join(themesDir, file)) ? readJson<T>(path.join(themesDir, file)) : empty;
-  const gsc = latestThemeImpressions();
+  const portfolio = portfolioByTheme();
+  const ui = latestUiViolations();
   const today = new Date().toISOString().slice(0, 10);
-  const experiments = readState<{ experiments: Experiment[] }>("experiments.json", { experiments: [] });
+  const experimentsPath = datasetPath("themes.experiments");
+  const experiments = fileExists(experimentsPath)
+    ? readJson<{ experiments: Experiment[] }>(experimentsPath)
+    : { experiments: [] };
   const pendingUntil = new Map<string, string>();
   for (const e of experiments.experiments) {
     const d56 = e.evaluateAt?.d56;
@@ -210,7 +236,11 @@ function buildSummary(): ThemeViewpointSummary {
       return {
         key: c.key,
         title: c.title,
-        impressions: gsc.byTheme.get(c.key) ?? null,
+        impressions: portfolio.byTheme.get(c.key)?.metricsAllRoutes28d?.gsc?.impressions ?? null,
+        clicks: portfolio.byTheme.get(c.key)?.metricsAllRoutes28d?.gsc?.clicks ?? null,
+        ctr: portfolio.byTheme.get(c.key)?.metricsAllRoutes28d?.gsc?.ctr ?? null,
+        dataQuality: portfolio.byTheme.get(c.key)?.dataQualityStatus ?? null,
+        uiViolations: ui.measuredOn ? (ui.byTheme.get(c.key) ?? []) : null,
         fixHits: count("fix"),
         reviewHits: count("review"),
         latestReview,
@@ -221,9 +251,10 @@ function buildSummary(): ThemeViewpointSummary {
     .sort((a, b) => Number(a.inFlight) - Number(b.inFlight) || (b.impressions ?? -1) - (a.impressions ?? -1) || b.fixHits - a.fixHits);
 
   return {
-    gscWeek: gsc.week,
+    gscWeek: portfolio.week,
+    uiMeasuredOn: ui.measuredOn,
     candidates,
-    trend: readTrend(themesDir),
+    trend: readTrend(),
     themeCount: catalogs.length,
     primaryAndSecondaryCount: catalogs.reduce(
       (n, c) => n + c.metrics.filter((m) => m.role !== "context").length,

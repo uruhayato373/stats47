@@ -131,3 +131,75 @@ test("別path segment末尾のdocsをルートdocs参照と誤認しない", (t)
   assert.equal(result.status, 0, result.stderr);
   assert.deepEqual(JSON.parse(result.stdout).broken, []);
 });
+
+function writeMd(fixture, relPath, body) {
+  const abs = path.join(fixture.fixtureRoot, relPath);
+  fs.mkdirSync(path.dirname(abs), { recursive: true });
+  fs.writeFileSync(abs, body);
+}
+
+test("実在しない相対リンクを、書かれた文書の場所を基準に解決して検出する", (t) => {
+  const fixture = createFixture();
+  t.after(() => fs.rmSync(fixture.fixtureRoot, { recursive: true, force: true }));
+  fs.writeFileSync(path.join(fixture.fixtureRoot, "docs/missing-known.md"), "# restored\n");
+  writeMd(fixture, "docs/sub/page.md", "[todo](todo/todo-standards.md)\n");
+
+  const result = runChecker(fixture, ["--json"]);
+  const output = JSON.parse(result.stdout);
+
+  assert.equal(result.status, 1);
+  assert.deepEqual(output.broken, [
+    { ref: "docs/sub/todo/todo-standards.md", referrers: ["docs/sub/page.md"] },
+  ]);
+});
+
+test("実在する相対リンクは文書の場所基準で解決でき、anchor・title・親ディレクトリ参照も通る", (t) => {
+  const fixture = createFixture();
+  t.after(() => fs.rmSync(fixture.fixtureRoot, { recursive: true, force: true }));
+  fs.writeFileSync(path.join(fixture.fixtureRoot, "docs/missing-known.md"), "# restored\n");
+  writeMd(fixture, "docs/sub/page.md", "[a](./sibling.md#h) [b](../existing.md \"title\") [c](<../existing.md>)\n");
+  writeMd(fixture, "docs/sub/sibling.md", "# sibling\n");
+
+  const result = runChecker(fixture, ["--json"]);
+
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(JSON.parse(result.stdout).broken, []);
+});
+
+test("URL・anchor・ルート絶対・コードブロック内・md以外のリンクは相対リンク検査の対象にしない", (t) => {
+  const fixture = createFixture();
+  t.after(() => fs.rmSync(fixture.fixtureRoot, { recursive: true, force: true }));
+  fs.writeFileSync(path.join(fixture.fixtureRoot, "docs/missing-known.md"), "# restored\n");
+  writeMd(
+    fixture,
+    "docs/sub/page.md",
+    [
+      "[u](https://example.com/x.md) [m](mailto:a@b.md) [h](#anchor) [r](/abs/none.md) [i](img.png)",
+      "`[inline](gone-inline.md)`",
+      "```md",
+      "[fenced](gone-fenced.md)",
+      "```",
+      "",
+    ].join("\n"),
+  );
+
+  const result = runChecker(fixture, ["--json"]);
+
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(JSON.parse(result.stdout).broken, []);
+});
+
+test("symlink は実体の場所で検査し、リンク側の場所を基準に相対リンクを誤解決しない", (t) => {
+  const fixture = createFixture();
+  t.after(() => fs.rmSync(fixture.fixtureRoot, { recursive: true, force: true }));
+  fs.writeFileSync(path.join(fixture.fixtureRoot, "docs/missing-known.md"), "# restored\n");
+  writeMd(fixture, "docs/real/a.md", "[b](./b.md)\n");
+  writeMd(fixture, "docs/real/b.md", "# b\n");
+  fs.mkdirSync(path.join(fixture.fixtureRoot, ".claude/alias"), { recursive: true });
+  fs.symlinkSync("../../docs/real/a.md", path.join(fixture.fixtureRoot, ".claude/alias/a.md"));
+
+  const result = runChecker(fixture, ["--json"]);
+
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(JSON.parse(result.stdout).broken, []);
+});

@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "10-claude-skills-routinize",
+  "production": {
+    "id": "NCI-00022",
+    "policyId": "NCP-007",
+    "policyVersion": 4,
+    "brief": {
+      "headline": "月次のe-Stat集計を\n1コマンド化",
+      "subline": "定型業務をスキルにする設計",
+      "subject": "卓上カレンダーを無文字にして、大きな実行ボタンのような丸いスイッチとノートPCを大きく描く。カレンダーに数字を入れない。実務カテゴリの机上の資料構図。青と明るい黄色の暖かい手描き。画面・紙・道具の表面は無文字。実在UI・製品ロゴ・グラフ・地図は描かない。人物・顔・手・動物は描かない。",
+      "evidence": "https://note.com/stats47/n/n53c16adaf2c7 本文確認2026-11-04。月次のe-Stat集計を.claude/skillsで定型化する設計。時間短縮の数値はカバーに書かない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "262a0ce9b619cbb7d17175fe24d7c151f38ec65063290256a3d087503c201ac4",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/10-claude-skills-routinize/revisions/262a0ce9b619cbb7d17175fe24d7c151f38ec65063290256a3d087503c201ac4.png"
+      },
+      "bytes": 122347,
+      "id": "262a0ce9b619cbb7d17175fe24d7c151f38ec65063290256a3d087503c201ac4",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:46.869Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/293011415/rectangle_large_type_2_b81dc814175e0cb04a39a5487a598ba6.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "262a0ce9b619cbb7d17175fe24d7c151f38ec65063290256a3d087503c201ac4"
+      }
+    },
+    {
+      "sha256": "b76d210d1a0076f0ea2d691de6fc4e2dde343cd40b526e8402fb7a11983dc668",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/10-claude-skills-routinize/revisions/b76d210d1a0076f0ea2d691de6fc4e2dde343cd40b526e8402fb7a11983dc668.png"
+      },
+      "bytes": 57462,
+      "id": "b76d210d1a0076f0ea2d691de6fc4e2dde343cd40b526e8402fb7a11983dc668",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:47:13.868Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "5c0c260abb6f893b2112ef8da10dc6e381ece830b90e4d8e0d42bfafda74e144"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出しとシリーズ名・話数・色でシリーズが区別できる",
+        "reviewedAt": "2026-10-11T11:51:45.880Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "5c0c260abb6f893b2112ef8da10dc6e381ece830b90e4d8e0d42bfafda74e144",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/10-claude-skills-routinize/inputs/5c0c260abb6f893b2112ef8da10dc6e381ece830b90e4d8e0d42bfafda74e144.json"
+          },
+          "bytes": 1114
+        }
+      }
+    },
+    {
+      "sha256": "a572e6b35299f4ddcea743a2244b1c7d62c6b0550bd1676e62414166af8aea8d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/10-claude-skills-routinize/revisions/a572e6b35299f4ddcea743a2244b1c7d62c6b0550bd1676e62414166af8aea8d.png"
+      },
+      "bytes": 72828,
+      "id": "a572e6b35299f4ddcea743a2244b1c7d62c6b0550bd1676e62414166af8aea8d",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:56:10.222Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320329661/rectangle_large_type_2_cafa3648337f80b0adcd61622ebcc8c9.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "a572e6b35299f4ddcea743a2244b1c7d62c6b0550bd1676e62414166af8aea8d"
+      }
+    },
+    {
+      "sha256": "04f84a7bb3bdbc97b8e0fcb5250c1badd4878d4d5587ca9fa032873716b50456",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/10-claude-skills-routinize/revisions/04f84a7bb3bdbc97b8e0fcb5250c1badd4878d4d5587ca9fa032873716b50456.png"
+      },
+      "bytes": 23600,
+      "id": "04f84a7bb3bdbc97b8e0fcb5250c1badd4878d4d5587ca9fa032873716b50456",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:12:27.606Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "fcbe7a7992461ab5325e62b34849329a14783e88812e33c52c4ea19ae2cba6df"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.005/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:17:59.025Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "fcbe7a7992461ab5325e62b34849329a14783e88812e33c52c4ea19ae2cba6df",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/10-claude-skills-routinize/inputs/fcbe7a7992461ab5325e62b34849329a14783e88812e33c52c4ea19ae2cba6df.json"
+          },
+          "bytes": 1114
+        }
+      }
+    },
+    {
+      "sha256": "b3144122e72a969108cb077373181f9c7f2fa980e7b904306dd8197554f2ef5d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/10-claude-skills-routinize/revisions/b3144122e72a969108cb077373181f9c7f2fa980e7b904306dd8197554f2ef5d.png"
+      },
+      "bytes": 1912569,
+      "id": "b3144122e72a969108cb077373181f9c7f2fa980e7b904306dd8197554f2ef5d",
+      "kind": "candidate",
+      "version": "pop-NCP-007-v4-8cb9c60df28a",
+      "createdAt": "2026-11-04T00:30:53.678Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "b94137bf1c80ade7375abcd9fdafc9800d15e6e2645649d4a81af2fe08d880b0"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:31:42.277Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "b94137bf1c80ade7375abcd9fdafc9800d15e6e2645649d4a81af2fe08d880b0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/10-claude-skills-routinize/inputs/b94137bf1c80ade7375abcd9fdafc9800d15e6e2645649d4a81af2fe08d880b0.json"
+          },
+          "bytes": 8940
+        },
+        "production": {
+          "id": "NCI-00022",
+          "policyId": "NCP-007",
+          "policyVersion": 4,
+          "planSha256": "8cb9c60df28a3b4eb199e6022c8bdfeca4b3ae3d09e43c8effadefd1ffd4bf67"
+        }
+      }
+    }
+  ]
+}

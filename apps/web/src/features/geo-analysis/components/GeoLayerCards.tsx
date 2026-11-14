@@ -34,6 +34,7 @@ export async function GeoLayerCards() {
           <ArticleTeaserCard
             key={layer.slug}
             href={`/geo/layers/${layer.slug}`}
+            navSurface="geo_layer_list"
             media={
               preview ? (
                 <GeoCardPreviewSvg

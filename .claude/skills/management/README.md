@@ -185,7 +185,7 @@ npm run docs:check
 
 ## 出力先早見表
 
-現在計画は `.claude/todo/`、戦略判断は既存SSOT、agent用履歴はskill referenceへ分離する。
+現在計画は `.claude/todo/`、戦略判断は既存SSOT、agent用の週次・月次レビューの履歴は `data/reviews/` へ分離する。
 
 | スキル | 出力先 | frontmatter type |
 |---|---|---|

@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 import { THEME_INDICATOR_SETS } from '@stats47/types';
 import { describe, it, expect } from 'vitest';

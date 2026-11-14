@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 /**
- * refresh-session.mjs — A8 / もしも / KDP / note の専用プロファイルのログインを Mac 上で保ち、CI へ渡す。
+ * refresh-session.mjs — A8 / もしも / KDP / note / 楽天 / X の専用プロファイルのログインを Mac 上で保つ。
  *
  * 流れ: 専用プロファイルで管理画面を開く → 切れていれば OS の資格情報ストア (Mac = キーチェーン、Windows = 資格情報
- * マネージャー。`credential-store.mjs`) の ID/PW で 1 回だけログインする → state を保存 → `bootstrap-session.mjs SOURCE --publish` で CI の Secret を更新する。
- * 新しい世代の Secret は auth-recovery.mjs の停止 (拒否済み世代) を解除する。
+ * マネージャー。`credential-store.mjs`) の ID/PW で 1 回だけログインする → state を `.local/` に保存する。
+ * ログインと state はこの Mac の中だけで使い、CI へは渡さない (2026-10-20 オーナー判断)。取得は `collect-local.mjs`。
  *
  * state は stats47 と doboku-note で共用する。`.local/playwright-{a8,moshimo}-state.json` は
  * `~/.local/share/asp-sessions/` への symlink (docs/01_技術設計/07_Playwright認証プロファイル.md)。
@@ -28,7 +28,7 @@
  * どこかで 2FA (/ap/mfa)・追加確認 (/ap/cvf)・CAPTCHA が出たら human_required で止める。
  * 「ログインしたままにする」を付けて 2FA の再要求を減らす。2FA が毎回出る口座では自動化できない。
  *
- * Usage: refresh-session.mjs SOURCE... [--publish] [--headed] [--wait-human]
+ * Usage: refresh-session.mjs SOURCE... [--headed] [--wait-human]
  *   --wait-human: 資格情報ストアを使わず、開いたブラウザで人がログインするのを最大 10 分待つ
  */
 import { existsSync, readFileSync, writeFileSync, rmSync, mkdirSync } from 'node:fs';
@@ -56,7 +56,7 @@ export const LOGIN = {
     loggedIn: (url) => /af\.moshimo\.com\/af\/shop\//.test(url) && !/\/login|signin/i.test(url),
   },
   // note (2026-09-30): ログイン自体は長期セッションで保たれる。売上 API はパスワードの再確認を通した
-  // セッションでだけ答え、再確認は約 30 分で切れるので、CI の収集を起動する直前に毎回ここで通す。
+  // セッションでだけ答え、再確認は約 30 分で切れるので、取得 (collect-local.mjs) の直前に毎回ここで通す。
   // 再確認画面はパスワード欄だけ (ID 欄が無い) なので user は存在しないセレクタにして入力を飛ばす。
   // ログイン自体が切れていたら (パスワードとメールの両方を求められる) human_required で止まる。
   note: {
@@ -67,15 +67,6 @@ export const LOGIN = {
     submit: 'button:has-text("確認して続ける")',
     loggedIn: (url) => /note\.com\/dashboard\/salesmanage/.test(url),
     challengeUrl: /note\.com\/login/,
-    // CI (--ci) はセッション自体の切れを通常のログイン画面で入り直す。セレクタは doboku-note が 2026-09-28 に DOM で確認したもの
-    ci: {
-      loginUrl: 'https://note.com/login',
-      checkUrl: 'https://note.com/dashboard',
-      user: 'input[name=login]',
-      password: 'input[name=password]',
-      submit: 'button[type=submit]',
-      loggedIn: (url) => /^https:\/\/(editor\.)?note\.com\//.test(url) && !/\/login|\/signup/.test(url),
-    },
   },
   // 楽天アフィリエイト (2026-10-01 追加): 楽天 ID の SSO。ID → 次へ (#cta001) → パスワード → 次へ/ログイン の 2 段階。
   // ID 画面は 2026-10-01 に公開画面で確認。パスワード画面のボタンは ID を入れないと出ないため未確認で、
@@ -96,7 +87,7 @@ export const LOGIN = {
   },
   // X (2026-09-30 オーナー判断で追加): 予約投稿 (publish-x) の専用プロファイルのログインを保つ。
   // publish-x は Playwright 同梱の Chromium でこのプロファイルを開くので、ここも同じブラウザで開く
-  // (Chrome 本体で開くと Cookie の暗号化方式が変わりログインが壊れうる)。X の投稿は Mac だけなので state は CI へ渡さない。
+  // (Chrome 本体で開くと Cookie の暗号化方式が変わりログインが壊れうる)。ログインは専用プロファイルに残るので state は書き出さない。
   // ユーザー名の後に「電話番号またはユーザー名」の追加確認が出たら突破せず human_required で止める。
   x: {
     loginUrl: 'https://x.com/i/flow/login',
@@ -135,7 +126,8 @@ export function classifyLoginOutcome(source, { url, hasPassword, hasChallenge })
   return 'login_failed';
 }
 
-function notify(message) {
+/** macOS の通知 (Mac 以外は標準エラー)。session-preflight.mjs の日次確認も使う */
+export function notify(message) {
   if (process.platform !== 'darwin') { console.error(`[stats47 計測ログイン] ${message}`); return; }
   try { execFileSync('osascript', ['-e', `display notification ${JSON.stringify(message.replace(/[\u0000-\u001f]+/g, ' ').slice(0, 200))} with title "stats47 計測ログイン"`]); } catch { /* 通知は補助 */ }
 }
@@ -202,9 +194,9 @@ export async function passTotpIfOffered(page, conf, cred) {
 }
 
 /**
- * KDP だけの後段: 既知 ASIN で口座を照合し (別口座のセッションを CI へ渡さない)、Reports の認証も通す。
+ * KDP だけの後段: 既知 ASIN で口座を照合し (別口座のセッションで取得しない)、Reports の認証も通す。
  * Reports で再ログインを求められたら同じ資格情報で 1 回だけ送信し、それでも通らなければ止める。
- * 送信して通ったときだけ reauthenticated: true を返す (呼び側はそれを新しい世代として扱う)。
+ * 送信して通ったときだけ reauthenticated: true を返す。
  */
 async function afterKdpLogin(page, cred, { waitHuman = false } = {}) {
   const { assertAccount } = await import('../kdp/lib/kdp-session.mjs');
@@ -240,7 +232,7 @@ async function afterKdpLogin(page, cred, { waitHuman = false } = {}) {
   }
 }
 
-export async function refresh(source, { root, publish, headed, waitHuman, chromiumImpl = null }) {
+export async function refresh(source, { root, headed, waitHuman, chromiumImpl = null }) {
   const chromium = chromiumImpl ?? (await import('playwright')).chromium;
   const conf = LOGIN[source];
   const privateDir = join(root, '.local/authenticated-measurement');
@@ -317,92 +309,27 @@ export async function refresh(source, { root, publish, headed, waitHuman, chromi
         return { source, ...after };
       }
     }
-    // X のログインは専用プロファイルそのものに残る。CI へ渡す state は作らない
+    // X のログインは専用プロファイルそのものに残るので、state は書き出さない
     if (!conf.localOnly) writeFileSync(statePath, JSON.stringify(scopedState(source, await context.storageState({ indexedDB: true }))), { mode: 0o600 });
   } finally {
     await context.close();
   }
-  if (publish && !conf.localOnly) {
-    execFileSync(process.execPath, [join(root, '.claude/scripts/measurement/bootstrap-session.mjs'), source, '--root', root, '--publish'],
-      { stdio: ['ignore', 'pipe', 'inherit'] });
-  }
   if (waitHuman) rmSync(failMark, { force: true });
-  return { source, status: 'ok', loggedInBy, published: publish };
-}
-
-/**
- * CI 専用 (--ci): 復元した state でログイン済みか確かめ、切れていたら Secrets の ID/PW で 1 回だけ入り直す。
- * KDP は本棚がログイン済みでも Reports まで確かめ、Reports で求められたときだけ入り直す。
- * 入り直せたときだけ outPath へ state を書く (relogged: true)。2FA/CAPTCHA は突破せず human_required を返す。
- * 失敗後の再試行抑止は呼び側 (collect.mjs) が vault の auth-recovery に記録して行う。
- */
-export async function ciRelogin(source, { statePath, outPath }) {
-  const base = LOGIN[source];
-  const conf = { ...base, ...base.ci };
-  const cred = readCredential(source);
-  if (!cred) return { source, status: 'no_credential' };
-  const { chromium } = await import('playwright');
-  const browser = await chromium.launch({ headless: !conf.headed, args: ['--disable-blink-features=AutomationControlled'] });
-  try {
-    const context = await browser.newContext({ ...(existsSync(statePath) ? { storageState: statePath } : {}),
-      locale: 'ja-JP', timezoneId: 'Asia/Tokyo', viewport: { width: 1280, height: 900 } });
-    const page = await context.newPage();
-    await page.goto(conf.checkUrl, { waitUntil: 'domcontentloaded', timeout: 60000 }).catch(() => {});
-    await page.waitForTimeout(3000);
-    if (conf.loggedIn(page.url()) && !(await pageSignals(page)).hasPassword) {
-      if (source !== 'kdp') return { source, status: 'ok', relogged: false };
-      // KDP は本棚と Reports の認証が別。本棚だけ見て session_valid を返していたため、Reports で拒否された世代の
-      // 停止が解けず、2026-09-30 から毎回入り直さずにスキップしていた。Reports まで開き、求められたら 1 回だけ入り直す
-      const reports = await afterKdpLogin(page, cred);
-      if (reports.status !== 'ok') return { source, status: reports.status };
-      if (!reports.reauthenticated) return { source, status: 'ok', relogged: false };
-    } else {
-      await page.goto(conf.loginUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
-      await submitCredential(page, conf, cred);
-      await passTotpIfOffered(page, conf, cred);
-      await settleOnCheckUrl(page, conf);
-      const signals = await pageSignals(page);
-      const url = page.url();
-      const status = conf.loggedIn(url) && !signals.hasPassword ? 'ok'
-        : signals.hasChallenge || conf.challengeUrl?.test(url) ? 'human_required' : 'login_failed';
-      if (status !== 'ok') return { source, status };
-      if (source === 'kdp') {
-        const after = await afterKdpLogin(page, cred);
-        if (after.status !== 'ok') return { source, status: after.status };
-      }
-    }
-    writeFileSync(outPath, JSON.stringify(scopedState(source, await context.storageState({ indexedDB: true }))), { mode: 0o600 });
-    return { source, status: 'ok', relogged: true };
-  } finally {
-    await browser.close();
-  }
-}
-
-if (process.argv[1] === fileURLToPath(import.meta.url) && process.argv.includes('--ci')) {
-  // Usage: refresh-session.mjs SOURCE --ci --state IN --out OUT  (GitHub Actions 専用。出力は固定のコードだけ)
-  const args = process.argv.slice(2);
-  const source = args[0];
-  const valueOf = (flag) => args[args.indexOf(flag) + 1];
-  const result = process.env.GITHUB_ACTIONS === 'true' && LOGIN[source]
-    ? await ciRelogin(source, { statePath: valueOf('--state'), outPath: valueOf('--out') })
-      .catch((e) => ({ source, status: /Timeout/.test(String(e?.message)) ? 'timeout' : 'error' }))
-    : { source, status: 'unsupported' };
-  console.log(JSON.stringify(result));
-  process.exit(result.status === 'ok' ? 0 : 1);
+  return { source, status: 'ok', loggedInBy };
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const args = process.argv.slice(2);
   const sources = args.filter((a) => !a.startsWith('--'));
   if (!sources.length || args.includes('--help')) {
-    console.log('Usage: refresh-session.mjs SOURCE... [--publish] [--headed] [--wait-human]  (SOURCE: a8 | moshimo | kdp | note | x | rakuten)');
+    console.log('Usage: refresh-session.mjs SOURCE... [--headed] [--wait-human]  (SOURCE: a8 | moshimo | kdp | note | x | rakuten)');
     process.exit(0);
   }
   const root = fileURLToPath(new URL('../../../', import.meta.url));
   let failed = false;
   for (const source of sources) {
     if (!LOGIN[source]) throw new Error(`unsupported_source: ${source}`);
-    const result = await refresh(source, { root, publish: args.includes('--publish'), headed: args.includes('--headed'), waitHuman: args.includes('--wait-human') })
+    const result = await refresh(source, { root, headed: args.includes('--headed'), waitHuman: args.includes('--wait-human') })
       .catch((e) => ({ source, status: 'error', reason: String(e.message).slice(0, 160) }));
     console.log(JSON.stringify(result));
     if (result.status !== 'ok') {

@@ -43,7 +43,7 @@ const HISTORY_COLUMNS = [
  */
 function readKpiInputs() {
   const read = (rel) => (existsSync(join(PROJECT_ROOT, rel)) ? readFileSync(join(PROJECT_ROOT, rel), "utf8") : "");
-  const { lanes } = strategyLanes.parseLanes(read(strategyLanes.STRATEGY_DOC));
+  const { lanes } = strategyLanes.readLanes(PROJECT_ROOT);
   const focusLanes = new Set(strategyLanes.parseFocusLanes(read(".claude/todo/monthly.md")) ?? []);
   return {
     nodes: strategyLanes.readKpiNodes(PROJECT_ROOT),

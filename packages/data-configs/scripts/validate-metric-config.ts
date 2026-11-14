@@ -11,7 +11,8 @@ import { METRIC_DEFINITIONS_DIR } from '../../../config/paths.mjs';
  * 2 段階の重大度:
  *   - error (exit 1 / CI・pre-commit をブロック):
  *       無効 category キー / title への年混入・注釈(※)混入 /
- *       subtitle が注釈(※)・title と冗長 / unit が空・"‐" / 重複 title に区別子なし /
+ *       subtitle が注釈(※)・title と冗長・調査方法の定型文 (subtitle-survey-method) /
+ *       unit が空・"‐" / 重複 title に区別子なし /
  *       seoTitle・seoDescription の数字の直後の "‐" (seo-unit-dash)。
  *       換算単位 normalizationOptions[].unit の「‐/…」(normalization-unit-dash)。
  *       家計調査 (kakei-chousa) の指標の normalizationOptions (kakei-normalization)。
@@ -41,6 +42,8 @@ import {
   validateThemeMetricContentCoverage,
 } from '../src/theme-catalog';
 import { findDigitDashPlaceholders } from '../src/seo-meta-facts';
+import { isSurveyMethodSubtitle } from '../src/survey-method-subtitle';
+import { displayUnitKeepsDenominator } from '../src/unit/metric-display-scale';
 import { conversionFactor, parseUnit, scalePrefixMultiplier } from '../src/unit/unit-semantics';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -261,6 +264,11 @@ function main() {
       errors.push(
         `[subtitle-redundant] ${r.file}: subtitle が title と冗長 「${s.slice(0, 30)}」`
       );
+    } else if (isSurveyMethodSubtitle(s)) {
+      // 上の包含の許容をすり抜ける形: 調査方法の書き出し + title など。家計調査の 825 件がこの形だった。
+      errors.push(
+        `[subtitle-survey-method] ${r.file}: subtitle が調査方法の定型文 「${s.slice(0, 30)}」 (調査方法は note へ。subtitle は区別子だけ)`
+      );
     }
   }
 
@@ -363,6 +371,10 @@ function main() {
     if (!display.displayUnit) {
       if (factor !== 1) errors.push(`[display-factor] ${r.file}: display.conversionFactor ${factor} に displayUnit が無い。何の単位に直すのかを書く`);
       continue;
+    }
+    // 表示単位が「何あたり」を落とすと、1 日あたりの量がためた量として読まれる (2026-11-14 の監査: m³/日→m³・台/12h→台 の 3 件)
+    if (!displayUnitKeepsDenominator(r.unit, display.displayUnit)) {
+      errors.push(`[display-denominator] ${r.file}: 「${r.unit}→${display.displayUnit}」は「/」より後ろ (何あたり) が元の単位と違う。分母を残すか displayUnit を消す`);
     }
     // 解釈できない単位でも、表示単位が「万」「億」を前に付けただけ (TEU→万TEU) なら接頭辞の倍率で検算できる
     const unit = (r.unit ?? '').normalize('NFKC').trim(), shown = display.displayUnit.normalize('NFKC').trim();

@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n523b6fbeabdf",
+  "production": {
+    "id": "NCI-00418",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "野球をした人\n1位は広島県",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバー。無人の野球場に無文字の硬式野球ボールとバットとグローブを描く。選手・人・手・チーム名は描かない。左に太い見出し。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n523b6fbeabdf 2026-10-24公開API本文照合。記事題名「【2021年版】野球をした人が多い県は？ 1位は広島県｜都道府県ランキング」。本文中の 広島県、2021、10歳以上 を確認。主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "275598cf5b6664d1e602b64725aebf42420c956d44f42a4a6dc551a17169a4ef",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n523b6fbeabdf/revisions/275598cf5b6664d1e602b64725aebf42420c956d44f42a4a6dc551a17169a4ef.png"
+      },
+      "bytes": 62631,
+      "id": "275598cf5b6664d1e602b64725aebf42420c956d44f42a4a6dc551a17169a4ef",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:08.624Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312774054/rectangle_large_type_2_0bb7d6c4e76891ae8586f2b2675c8834.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "275598cf5b6664d1e602b64725aebf42420c956d44f42a4a6dc551a17169a4ef"
+      }
+    },
+    {
+      "sha256": "ab100c8e55ba0ba1d975000c6092b8250788bcaed2433229a2f06089f40a48f6",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n523b6fbeabdf/revisions/ab100c8e55ba0ba1d975000c6092b8250788bcaed2433229a2f06089f40a48f6.png"
+      },
+      "bytes": 113794,
+      "id": "ab100c8e55ba0ba1d975000c6092b8250788bcaed2433229a2f06089f40a48f6",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:15:21.561Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "259e6d615074a153b2b3c626d5464889d58d920df8593850e25c922e15e1452a"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/sports-participation-rate-baseball/values.json",
+        "sourceSha256": "e91d857fc828088c4640b1d6dff6b534038e8aed788af4a202e658ecf5aa2b8c",
+        "input": {
+          "sha256": "259e6d615074a153b2b3c626d5464889d58d920df8593850e25c922e15e1452a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n523b6fbeabdf/inputs/259e6d615074a153b2b3c626d5464889d58d920df8593850e25c922e15e1452a.json"
+          },
+          "bytes": 6491
+        }
+      }
+    },
+    {
+      "sha256": "075057b487d3ad5631c0fa97f97de4bffe6fd3e5bb019cc316c7b5716c310437",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n523b6fbeabdf/revisions/075057b487d3ad5631c0fa97f97de4bffe6fd3e5bb019cc316c7b5716c310437.png"
+      },
+      "bytes": 1777272,
+      "id": "075057b487d3ad5631c0fa97f97de4bffe6fd3e5bb019cc316c7b5716c310437",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-33615ca5484d",
+      "createdAt": "2026-10-23T15:07:38.431Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "6a5a8322a4caea55e291ba5e89abff954239f20f497801372d3a4e38848dc403"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の種目・2021年・10歳以上・首位県と掲載文字を原寸/320px、管理画面の新旧比較で確認。",
+        "reviewedAt": "2026-10-23T15:09:15.201Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "6a5a8322a4caea55e291ba5e89abff954239f20f497801372d3a4e38848dc403",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n523b6fbeabdf/inputs/6a5a8322a4caea55e291ba5e89abff954239f20f497801372d3a4e38848dc403.json"
+          },
+          "bytes": 8466
+        },
+        "production": {
+          "id": "NCI-00418",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "33615ca5484d08641ecca2de5434a405984a280390ec071fc7bfca157a569d6e"
+        }
+      }
+    }
+  ]
+}

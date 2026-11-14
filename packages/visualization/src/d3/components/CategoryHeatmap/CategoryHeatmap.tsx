@@ -4,10 +4,14 @@ import { resolveColorEncoding } from '@stats47/types';
 import { cn } from "@stats47/components";
 import { select, scaleBand, interpolateRgb } from "d3";
 import { useEffect, useRef } from "react";
-import { computeChartLayout, computeMarginsByRatio } from "../../../shared/layout";
+import { computeChartLayout, computeMarginsByRatio, estimateTextWidth, thinTickLabels } from "../../../shared/layout";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
+import { useReadableFontSize } from "../../hooks/useReadableFontSize";
 import type { CategoryHeatmapProps } from "./types";
 import { fitSvgViewBox } from "../../utils/fit-svg-viewbox";
+
+/** 等倍表示の文字サイズ (viewBox 単位) */
+const BASE_FONT_SIZE = 10;
 
 /**
  * CategoryHeatmap — 年×品目のヒートマップ
@@ -26,6 +30,7 @@ export function CategoryHeatmap({
   className,
 }: CategoryHeatmapProps) {
   const svgRef = useRef<SVGSVGElement>(null);
+  const plotRef = useRef<HTMLDivElement>(null);
   const { showTooltip, hideTooltip, updateTooltipPosition } = useD3Tooltip();
 
   const marginsByRatio = computeMarginsByRatio(width, height, {
@@ -42,9 +47,22 @@ export function CategoryHeatmap({
     marginLeft: marginsByRatio.marginLeft,
   });
 
-  const { innerWidth, innerHeight, marginTop, marginLeft } = layout;
   const xLabels = [...new Set(data.map((item) => item.x))];
   const yLabels = [...new Set(data.map((item) => item.y))];
+
+  // 縮小表示でも画面上で読める文字サイズ (viewBox 単位)。等倍以上なら従来の 10 のまま
+  // (2026-11-14 CHART-AXIS-READABILITY-01。375px で 3.9px だった)
+  const fontSize = useReadableFontSize(plotRef, width, BASE_FONT_SIZE);
+  // 品目名が左端で切れない左余白と、年のラベルが上端で切れない上余白を文字サイズから決める
+  const marginLeft = Math.max(
+    layout.marginLeft,
+    Math.ceil(Math.max(0, ...yLabels.map((label) => estimateTextWidth(label, fontSize))) + 10),
+  );
+  const marginTop = Math.max(layout.marginTop, Math.ceil(fontSize * 1.5));
+  const innerWidth = width - marginLeft - layout.marginRight;
+  // 行の高さが文字より低いときは viewBox を縦に伸ばす (品目名を重ねない)
+  const innerHeight = Math.max(layout.innerHeight, yLabels.length * fontSize * 1.4);
+  const drawHeight = marginTop + innerHeight + layout.marginBottom;
   const accessibleLabel = [
     "カテゴリヒートマップ",
     `横軸: ${xLabels.join("、")}`,
@@ -87,16 +105,24 @@ export function CategoryHeatmap({
       .append("g")
       .attr("transform", `translate(${marginLeft},${marginTop})`);
 
-    // X軸ラベル（上部、年）
+    // X軸ラベル（上部、年）。文字を大きくして重なるときは等間隔に間引く (最新の年は残す)
+    const xTickLabels = thinTickLabels(
+      xLabels.map((label) => ({
+        value: label,
+        label: label.replace("年", ""),
+        position: x(label)! + x.bandwidth() / 2,
+      })),
+      fontSize,
+    ).map((tick) => tick.value);
     g.append("g")
       .selectAll("text")
-      .data(xLabels)
+      .data(xTickLabels)
       .join("text")
       .attr("x", (d) => x(d)! + x.bandwidth() / 2)
       .attr("y", -4)
       .attr("text-anchor", "middle")
       .attr("fill", "hsl(var(--muted-foreground))")
-      .attr("font-size", "9px")
+      .attr("font-size", fontSize)
       .text((d) => d.replace("年", ""));
 
     // Y軸ラベル（左側、品目）
@@ -109,7 +135,7 @@ export function CategoryHeatmap({
       .attr("dy", "0.35em")
       .attr("text-anchor", "end")
       .attr("fill", "hsl(var(--foreground))")
-      .attr("font-size", "10px")
+      .attr("font-size", fontSize)
       .text((d) => d);
 
     // セル
@@ -140,8 +166,9 @@ export function CategoryHeatmap({
         hideTooltip();
       });
 
-    // セル内に値テキスト（セルが十分大きい場合のみ）
-    if (x.bandwidth() >= 28 && y.bandwidth() >= 18) {
+    // セル内に値テキスト。読める大きさの文字が入るときだけ書き、入らない狭い幅ではツールチップに任せる
+    const widestCellText = Math.max(0, ...data.map((d) => estimateTextWidth(d.value.toFixed(1), fontSize)));
+    if (x.bandwidth() >= widestCellText + 4 && y.bandwidth() >= fontSize * 1.2) {
       g.selectAll(".cell-text")
         .data(data)
         .join("text")
@@ -154,12 +181,12 @@ export function CategoryHeatmap({
           const t = Math.abs((d.value - baseline) / maxDeviation);
           return t > 0.6 ? "#fff" : "hsl(var(--foreground))";
         })
-        .attr("font-size", "8px")
+        .attr("font-size", fontSize)
         .text((d) => d.value.toFixed(1));
     }
 
-    fitSvgViewBox(svgRef.current, width, height);
-  }, [data, baseline, positiveColor, negativeColor, unit, width, height, innerWidth, innerHeight, marginTop, marginLeft, showTooltip, hideTooltip, updateTooltipPosition]);
+    fitSvgViewBox(svgRef.current, width, drawHeight);
+  }, [data, baseline, positiveColor, negativeColor, unit, width, drawHeight, fontSize, innerWidth, innerHeight, marginTop, marginLeft, showTooltip, hideTooltip, updateTooltipPosition]);
 
   if (data.length === 0) {
     return (
@@ -170,12 +197,12 @@ export function CategoryHeatmap({
   }
 
   return (
-    <div className={cn("relative", className)}>
+    <div ref={plotRef} className={cn("relative", className)}>
       <svg
         ref={svgRef}
         width="100%"
         height="100%"
-        viewBox={`0 0 ${width} ${height}`}
+        viewBox={`0 0 ${width} ${drawHeight}`}
         preserveAspectRatio="xMidYMid meet"
         role="img"
         aria-label={accessibleLabel}

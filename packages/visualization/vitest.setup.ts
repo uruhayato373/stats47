@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { installDeterministicDomEnvironment } from "./src/shared/__tests__/helpers/render-test-contract";
+import { installDeterministicDomEnvironment } from "./src/shared/__tests__/helpers/render-test-contract.mts";
 
 if (process.env.RUN_RENDER_TESTS === "1") {
   installDeterministicDomEnvironment();

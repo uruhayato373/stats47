@@ -1,0 +1,262 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-kakei-yamanashi",
+  "production": {
+    "id": "NCI-00106",
+    "policyId": "NCP-002",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "山梨県の家計\n交通費に注目",
+      "subline": "甲府市・2024年\n二人以上の世帯",
+      "subject": "添付画像は編集対象ではなく、山梨県の地理輪郭を示す検証済みの参照素材。完成画像は横長1280×670相当で新たに作る。右側に参照の県主域輪郭を大きく、縦横比・凹凸・北向きを忠実に保って描き、切り絵のような淡黄色または青緑の明快な面と濃紺の縁取りで主役にする。県形を別物に描き換えたり、回転・反転・県境・島・データ塗り分けを追加しない。生活の題材は輪郭と重ならない右下の小さな無地の小さな乗用車模型一点だけ。人物・顔・手・動物・キャラクター・擬人化なし。指定外の文字や数字・ロゴ・図表は描かず、補足2行も見出しに近い太さで大きく読みやすくする。 新版は輪郭の周囲に余白を広くとり、淡いクリーム色の背景にして、県形を最も目立つ位置へ置く。 新版は輪郭の周囲に余白を広くとり、淡いクリーム色の背景にして、県形を最も目立つ位置へ置く。",
+      "evidence": "https://note.com/stats47/n/n3416a225e0c6 2026-10-15公開本文確認。公開本文は甲府市の2024年・二人以上の世帯。十大費目で交通・通信が47県庁所在市単純平均比1.16倍で最大の乖離。個別品目の自動車教習など交通費を取り上げている。県全体へ一般化せず倍率・順位・因果をカバーに載せない。 人物・キャラクターは使わない。 新方針: 地図は山梨県の主域（遠隔離島省略）の地域識別用。家計の観測対象は甲府市であり、県全域の観測図ではない。 2026-10-23再確認。 2026-10-23に記事台帳と既存の本文確認記録を照合。",
+      "dataScope": {
+        "place": "甲府市",
+        "year": "2024",
+        "households": "二人以上の世帯"
+      }
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "572e917e14c9d5af63639969a88c14badaffc32628ec6df32326f18a769eae03",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-yamanashi/revisions/572e917e14c9d5af63639969a88c14badaffc32628ec6df32326f18a769eae03.png"
+      },
+      "bytes": 49758,
+      "id": "572e917e14c9d5af63639969a88c14badaffc32628ec6df32326f18a769eae03",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:20.448Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312771997/rectangle_large_type_2_58ba1cd435399339671b316a7d773657.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "572e917e14c9d5af63639969a88c14badaffc32628ec6df32326f18a769eae03"
+      }
+    },
+    {
+      "sha256": "ea7ba38023ab48e6b41e02a61d6d8f35d585567fd8428b9969c191c7d31ae56c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-yamanashi/revisions/ea7ba38023ab48e6b41e02a61d6d8f35d585567fd8428b9969c191c7d31ae56c.png"
+      },
+      "bytes": 102345,
+      "id": "ea7ba38023ab48e6b41e02a61d6d8f35d585567fd8428b9969c191c7d31ae56c",
+      "kind": "candidate",
+      "version": "2026-10-02-household-r1",
+      "createdAt": "2026-10-02T03:19:09.773Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "b157133d7fde15ebb145cf93d25fb4ff60138935345e48c2727b4b6406c6f591"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+        "reviewedAt": "2026-10-02T05:27:41.112Z"
+      },
+      "provenance": {
+        "renderer": "bold-note-cover",
+        "sourceUrl": "https://storage.stats47.jp/app/stats/transport-communication-expenditure-total/values.json",
+        "sourceSha256": "05bc5256a35560cef8d78d1eaa97b2a6aad48561fef8e246b00beb1ffcacc30a"
+      }
+    },
+    {
+      "sha256": "b0c1f3553f21ce66371f8022bf1d16faaa351329d1b59992377893a0d9d9a681",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-yamanashi/revisions/b0c1f3553f21ce66371f8022bf1d16faaa351329d1b59992377893a0d9d9a681.png"
+      },
+      "bytes": 101728,
+      "id": "b0c1f3553f21ce66371f8022bf1d16faaa351329d1b59992377893a0d9d9a681",
+      "kind": "r2-archive",
+      "version": "legacy-r2-import-2026-10-02",
+      "createdAt": "2026-10-02T03:29:51.338Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Legacy R2 asset preserved; not adopted for note",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "legacy-public-r2",
+        "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-yamanashi/images/cover-1280x670.png",
+        "sourceSha256": "b0c1f3553f21ce66371f8022bf1d16faaa351329d1b59992377893a0d9d9a681"
+      }
+    },
+    {
+      "sha256": "c4dee88c16511458f7d5c7449a7d25a158d8738614e1c6737d4aad27234f03be",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-yamanashi/revisions/c4dee88c16511458f7d5c7449a7d25a158d8738614e1c6737d4aad27234f03be.png"
+      },
+      "bytes": 66035,
+      "id": "c4dee88c16511458f7d5c7449a7d25a158d8738614e1c6737d4aad27234f03be",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T05:01:17.058Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/319911941/rectangle_large_type_2_6fb501ebc2f89a987b86f85053ef7e24.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "c4dee88c16511458f7d5c7449a7d25a158d8738614e1c6737d4aad27234f03be"
+      }
+    },
+    {
+      "sha256": "913c24accdedbc77091b06f0d61ad262cfb73251751460041779eab1701b84bd",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-yamanashi/revisions/913c24accdedbc77091b06f0d61ad262cfb73251751460041779eab1701b84bd.png"
+      },
+      "bytes": 1948753,
+      "id": "913c24accdedbc77091b06f0d61ad262cfb73251751460041779eab1701b84bd",
+      "kind": "candidate",
+      "version": "imagegen-no-character-next10-02-20261015",
+      "createdAt": "2026-10-15T05:10:04.830Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "71d5bb2015c756c06b22b570814abd16ba019f80de6d3571ce4bd91e54c2ee8d"
+      },
+      "review": {
+        "status": "pending",
+        "reason": null,
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "71d5bb2015c756c06b22b570814abd16ba019f80de6d3571ce4bd91e54c2ee8d",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-yamanashi/inputs/71d5bb2015c756c06b22b570814abd16ba019f80de6d3571ce4bd91e54c2ee8d.json"
+          },
+          "bytes": 8988
+        },
+        "production": {
+          "id": "NCI-00106",
+          "policyId": "NCP-002",
+          "policyVersion": 2,
+          "planSha256": "cc314c9a5c98285777924523348e45f1b153236a6504f033384e8d2860f67e55"
+        }
+      }
+    },
+    {
+      "sha256": "d1711190c9cb22501fdcc35e69a2cd1257d31a78002cba6e4a118fadfba2e5de",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-yamanashi/revisions/d1711190c9cb22501fdcc35e69a2cd1257d31a78002cba6e4a118fadfba2e5de.png"
+      },
+      "bytes": 1496686,
+      "id": "d1711190c9cb22501fdcc35e69a2cd1257d31a78002cba6e4a118fadfba2e5de",
+      "kind": "candidate",
+      "version": "imagegen-category-contract-v1-20261015",
+      "createdAt": "2026-10-15T05:45:12.115Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "913a1ead784f544213f6c62c265215df8caafbd71221d86651c7d3d8534ee8df"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "NCI-00106: 原寸/320pxの文字・補足・人物なし・題材を個別確認済み。家計は検証済み県主域参照と対象市・2024年・二人以上の世帯を照合。2026-10-15ユーザーが今回10件の反映を指示。",
+        "reviewedAt": "2026-10-15T05:55:22.252Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "913a1ead784f544213f6c62c265215df8caafbd71221d86651c7d3d8534ee8df",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-yamanashi/inputs/913a1ead784f544213f6c62c265215df8caafbd71221d86651c7d3d8534ee8df.json"
+          },
+          "bytes": 12728
+        },
+        "production": {
+          "id": "NCI-00106",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "c0778423da05d11054c8b56a875b498b6135ae331b5414fb655307cea8b100b1"
+        }
+      }
+    },
+    {
+      "sha256": "7ca4ae9ceb3c41a55d048885b51848b813bd201eef46e206a48ed778298c3030",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-yamanashi/revisions/7ca4ae9ceb3c41a55d048885b51848b813bd201eef46e206a48ed778298c3030.png"
+      },
+      "bytes": 1388268,
+      "id": "7ca4ae9ceb3c41a55d048885b51848b813bd201eef46e206a48ed778298c3030",
+      "kind": "candidate",
+      "version": "pop-NCP-002-v3-c5495b0a32dc",
+      "createdAt": "2026-10-23T07:06:38.194Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "2be94a88da5711e1ce5817512e9bc3b2ae8f7065da92b8102429dafe5c96d012"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "山梨県主域の輪郭、甲府市・2024年・二人以上の世帯、交通費の題材を新旧比較。原寸と幅320pxで文字と県形を確認。",
+        "reviewedAt": "2026-10-23T07:11:26.609Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "2be94a88da5711e1ce5817512e9bc3b2ae8f7065da92b8102429dafe5c96d012",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-yamanashi/inputs/2be94a88da5711e1ce5817512e9bc3b2ae8f7065da92b8102429dafe5c96d012.json"
+          },
+          "bytes": 12794
+        },
+        "production": {
+          "id": "NCI-00106",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "c5495b0a32dc4699a8993db459ec16c2e912dd8f151a8a500605302e21452c89"
+        }
+      }
+    }
+  ]
+}

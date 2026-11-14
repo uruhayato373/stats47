@@ -6,7 +6,12 @@
  *
  * 認証:
  *   .env.local の CLOUDFLARE_API_TOKEN と CLOUDFLARE_ACCOUNT_ID を使用。
- *   token は Account Analytics:Read + Workers Scripts:Read + D1:Read 等が必要。
+ *   R2 / Workers / D1 の使用量は GraphQL Analytics API の account データセットで、token に要るのは
+ *   Account → Account Analytics → Read である (D1:Read は要らない)。出典 (2026-11-14 取得):
+ *   https://developers.cloudflare.com/analytics/graphql-api/getting-started/authentication/api-token-auth/
+ *   https://developers.cloudflare.com/d1/observability/metrics-analytics/ (同じ API を読む D1 の insights コマンドも Account Analytics Read を要求する)
+ *   Googlebot 集計の zone 検索 (GET /zones) は Zone → Zone → Read が要る
+ *   (https://developers.cloudflare.com/api/resources/zones/methods/list/)。無ければ googlebot だけ unavailable を記録する。
  *
  * Usage:
  *   node .claude/scripts/cloudflare/fetch-usage.mjs

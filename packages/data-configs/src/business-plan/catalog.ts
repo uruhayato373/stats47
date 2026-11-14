@@ -1,3 +1,4 @@
+import catalogData from '../../../../data/business-plan/plan/catalog.json';
 import decisionsData from '../../../../data/business-plan/plan/decisions.json';
 import documentsData from '../../../../data/business-plan/plan/documents.json';
 import eventsData from '../../../../data/business-plan/plan/events.json';
@@ -22,7 +23,7 @@ import type {
 } from './types';
 
 /**
- * 事業計画カタログの読み込み口。記録の正本は台帳 `business-plan.documents`・`business-plan.decisions`・
+ * 事業計画カタログの読み込み口。記録の正本は台帳 `business-plan.catalog` (計画の ID・版・原本・ビジョン・原則・収益の層・重点テーマ)・`business-plan.documents`・`business-plan.decisions`・
  * `business-plan.metrics`・`business-plan.events`・`business-plan.initiatives`・`business-plan.pilot-specs`
  * (data/business-plan/plan/ の JSON + Schema)。ここは型を付けて export し、BUSINESS_PLAN_2026 を組み立てるだけ。
  */
@@ -63,40 +64,10 @@ export const BUSINESS_PLAN_PILOT_SPECS =
   pilotSpecsData.pilotSpecs as readonly BusinessPlanPilotSpec[];
 
 export const BUSINESS_PLAN_2026: BusinessPlanCatalog = {
-  id: 'stats47-business-plan-2026',
-  version: '2026-09-01.1',
-  source: {
-    title: 'stats47 2.0 超具体的 事業計画書',
-    subtitle: 'GIS × AI × 地域データによるstats47事業拡張計画',
-    sourcePath:
-      '/Users/minamidaisuke/Downloads/stats47_2_business_plan_2026.docx',
-    sourceSha256:
-      '04f678551e1395a2033d8d6e34e7b6029932792f61e9dd178aedaa690de510c8',
-    sourcePages: 35,
-    sourceCheckedAt: '2026-08-28',
-    planPeriod: '2026-09〜2027-08',
-    note: '売上・CVR・アクセス目標は予測ではなく意思決定用の仮説。原本はローカル参考資料であり、正典は本カタログと既存docs。',
-  },
-  vision:
-    'ランキングを入口に、地図で理解し、データを資産化し、AIで探し、需要が確認できた領域を法人価値へつなぐ。',
-  tagline: '日本の地域データを、探す・比べる・分析する。',
-  principles: [
-    '新ブランドを作らずstats47を拡張する',
-    '最初の90日はSaaSを作らない',
-    '市区町村ページを機械的に量産しない',
-    '計算と空間処理は決定論的に行う',
-    '無料で結論、有料で再現性・解像度・時短を提供する',
-    '一次資料・方法・限界・AI利用を開示する',
-  ],
-  revenueLayers: ['集客', '商用意図', '知識・データ販売', '継続課金', '法人'],
-  priorityThemes: [
-    '人口・未来',
-    '住まい・移住',
-    '防災',
-    '医療・生活利便',
-    '交通・都市構造',
-    '地域経済・商圏',
-  ],
+  ...(catalogData as Pick<
+    BusinessPlanCatalog,
+    'id' | 'version' | 'source' | 'vision' | 'tagline' | 'principles' | 'revenueLayers' | 'priorityThemes'
+  >),
   decisions: BUSINESS_PLAN_DECISIONS,
   documents: BUSINESS_PLAN_DOCUMENTS,
   metrics: BUSINESS_PLAN_METRICS,

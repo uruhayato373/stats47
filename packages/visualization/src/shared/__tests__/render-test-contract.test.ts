@@ -8,7 +8,7 @@ import {
   OPT_IN_RENDER_TEST_FILES,
   prepareSvgForDeterministicRender,
   renderTestExcludes,
-} from "./helpers/render-test-contract";
+} from "./helpers/render-test-contract.mts";
 
 describe("opt-in render suite inventory", () => {
   it("既存7 filesを固定し、全fileが実在する", () => {

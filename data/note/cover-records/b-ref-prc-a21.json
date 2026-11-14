@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-prc-a21",
+  "production": {
+    "id": "NCI-00204",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "1日の時間の使い方\n47都道府県を比較",
+      "subline": "家事・仕事・睡眠の地域差",
+      "subject": "文字盤の数字がない丸い掛け時計と、畳んだタオル、枕を大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n0442a497809e 本文確認2026-11-04。社会生活基本調査の1日の時間配分。女性の家事時間は奈良県、女性有業者の仕事時間は青森県が最長。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "d5ee1b609410481d0dfb128b9b93b73568bddc7f1fb3df6039c4e6772c02502b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a21/revisions/d5ee1b609410481d0dfb128b9b93b73568bddc7f1fb3df6039c4e6772c02502b.png"
+      },
+      "bytes": 34101,
+      "id": "d5ee1b609410481d0dfb128b9b93b73568bddc7f1fb3df6039c4e6772c02502b",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:08:34.600Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "b3fc1e4748e808d5ec7a45e147890ad823ccfe34fabff767e4e35a4535b2e245"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:13:29.098Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "b3fc1e4748e808d5ec7a45e147890ad823ccfe34fabff767e4e35a4535b2e245",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a21/inputs/b3fc1e4748e808d5ec7a45e147890ad823ccfe34fabff767e4e35a4535b2e245.json"
+          },
+          "bytes": 1334
+        }
+      }
+    },
+    {
+      "sha256": "bd66ee9b9b3e081c23131dff77d42444283478f08354da72ccd53dd85c5eaab1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a21/revisions/bd66ee9b9b3e081c23131dff77d42444283478f08354da72ccd53dd85c5eaab1.png"
+      },
+      "bytes": 86650,
+      "id": "bd66ee9b9b3e081c23131dff77d42444283478f08354da72ccd53dd85c5eaab1",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:56.356Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324166065/rectangle_large_type_2_fca4cf6c0bcca9f7cfab2cb657fcdd92.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "bd66ee9b9b3e081c23131dff77d42444283478f08354da72ccd53dd85c5eaab1"
+      }
+    },
+    {
+      "sha256": "6937685165cdf4e71a16137cdf8529067f79239192247760bbcddf33ce2d10bb",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a21/revisions/6937685165cdf4e71a16137cdf8529067f79239192247760bbcddf33ce2d10bb.png"
+      },
+      "bytes": 1883150,
+      "id": "6937685165cdf4e71a16137cdf8529067f79239192247760bbcddf33ce2d10bb",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-cbff45f83adb",
+      "createdAt": "2026-11-04T01:54:14.560Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "2186eb8f30d3cece9011689ed07b4f79904e3d47cda853e1ec283f0f010ad66a"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:55:28.801Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "2186eb8f30d3cece9011689ed07b4f79904e3d47cda853e1ec283f0f010ad66a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a21/inputs/2186eb8f30d3cece9011689ed07b4f79904e3d47cda853e1ec283f0f010ad66a.json"
+          },
+          "bytes": 8281
+        },
+        "production": {
+          "id": "NCI-00204",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "cbff45f83adbec5be723e6d71fd358a1aa5e9e1f396b555014d6b399a13e17eb"
+        }
+      }
+    }
+  ]
+}

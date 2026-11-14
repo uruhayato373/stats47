@@ -4,7 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const driedMackerelConsumptionQuantity: MetricConfig = {
   "key": "dried-mackerel-consumption-quantity",
   "title": "干しあじ消費量",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間干しあじ消費量",
+  "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。",
   "unit": "g",
   "category": "economy",
   "source": {

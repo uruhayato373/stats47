@@ -86,7 +86,7 @@
           2022,
           2023
         ],
-        "retrievedAt": "2026-11-13T01:27:44.784Z",
+        "retrievedAt": "2026-11-14T10:09:29.018Z",
         "tableTitle": "Ｃ　経済基盤",
         "rows": 94,
         "areas": 47,
@@ -115,7 +115,7 @@
             "status": "ok"
           }
         ],
-        "inputSha256": "7d017ec4567a3c0b172ae15d1fc88d891bf5fee6829362cb816c1bac0d294e7c"
+        "inputSha256": "4c305afff4a7dc7a62c0d1fdfe7e5e818876d11d3c35782955c1c2829f27ea97"
       }
     ],
     "results": 51,
@@ -132,12 +132,12 @@
       },
       {
         "file": "analysis.xlsx",
-        "sha256": "0478da2ec6cd081bf47e60739fc67a01e72c690ef28c8f2a81087d85b2160800",
-        "bytes": 13071
+        "sha256": "20d5ee1cde76c157fe8c1dab38f6e9c650a46b4fc1d58de8df858e4753c33eca",
+        "bytes": 13070
       },
       {
         "file": "SOURCES.csv",
-        "sha256": "e5d1a71141e12c6d3ca741fbe447e02a1db8ab341251239a6d82cb9a18ec2638",
+        "sha256": "d94f5ffbce175d8b7d1e6d5ef6bbc1cf11b9cc974239e580533566c33bcc8250",
         "bytes": 759
       },
       {
@@ -167,22 +167,22 @@
       },
       {
         "file": "images/prefecture-manufacturing-scale-2023.png",
-        "sha256": "9230751f3ba0df420bda956707930e8cff8df590bca214435c869282a8147926",
-        "bytes": 167810
+        "sha256": "7675fd6b26d1a7d5d4fe134e3ca03df59c66f3623201564170d70ec31505e3d3",
+        "bytes": 165943
       },
       {
         "file": "images/prefecture-manufacturing-trend.png",
-        "sha256": "745b66824cf18210917127da9a0c1bedc004b7c05c9b30ec06cfdb4e4c93ba2f",
-        "bytes": 102860
+        "sha256": "8fdccae89a034ef0cd70124fd6992d261966bb8f2ac2a033594e5fb199870a0b",
+        "bytes": 104070
       },
       {
         "file": "images/analysis-file-preview.png",
-        "sha256": "2351855d323ad27a822f99898e04e01ab61c9000b199080ce2f0a2284c41879f",
-        "bytes": 116527
+        "sha256": "3567f8c5dfd77b745ec620f059ed445f5594915b381331545320b700667f5058",
+        "bytes": 119189
       },
       {
         "file": "inputs/prefecture-manufacturing.json",
-        "sha256": "7d017ec4567a3c0b172ae15d1fc88d891bf5fee6829362cb816c1bac0d294e7c",
+        "sha256": "4c305afff4a7dc7a62c0d1fdfe7e5e818876d11d3c35782955c1c2829f27ea97",
         "bytes": 893994
       },
       {
@@ -192,8 +192,8 @@
       },
       {
         "file": "analysis-pack.zip",
-        "sha256": "e22c21688a6c1a961f2ef0a8f307aeea7e9261539eb898ca6be3aafa04ffaa74",
-        "bytes": 365494
+        "sha256": "a478aa0ee746e7f969fe5a10c58647a79945bcb81b982112898bf1559d47a2d1",
+        "bytes": 368634
       }
     ]
   },

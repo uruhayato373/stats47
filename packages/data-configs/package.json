@@ -2,6 +2,7 @@
   "name": "@stats47/data-configs",
   "version": "1.0.0",
   "private": true,
+  "sideEffects": false,
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "exports": {
@@ -119,6 +120,11 @@
       "types": "./src/geo-scope/index.ts",
       "import": "./src/geo-scope/index.ts",
       "require": "./src/geo-scope/index.ts"
+    },
+    "./geo-scope/edge-keys": {
+      "types": "./src/geo-scope/edge-keys.ts",
+      "import": "./src/geo-scope/edge-keys.ts",
+      "require": "./src/geo-scope/edge-keys.ts"
     },
     "./geo-scope/scope-theme-map": {
       "types": "./src/geo-scope/scope-theme-map.ts",

@@ -40,6 +40,7 @@ const metricLabel: Record<MetricStatus, string> = { ok: "記録あり", waiting:
 export default function PilotBoardPage() {
   const board = pilotBoard();
   const count = (s: PilotState) => board.rows.filter((r) => r.state === s).length;
+  const overdueNoData = board.rows.filter((r) => r.state === "no-data" && r.judgeOverdue).length;
 
   return (
     <>
@@ -55,7 +56,7 @@ export default function PilotBoardPage() {
       <Grid min="sm">
         <StatCard label="計測中" icon={<TimerIcon />} value={String(count("measuring"))} sub={`今日 ${board.today}`} tone="good" />
         <StatCard label="判定待ち" icon={<HourglassIcon />} value={String(count("due"))} sub="判定日を過ぎた" tone={count("due") ? "warn" : "good"} />
-        <StatCard label="判定不能" icon={<CircleHelpIcon />} value={String(count("no-data"))} sub="記録なし・古い記録" tone={count("no-data") ? "bad" : "good"} />
+        <StatCard label="判定不能" icon={<CircleHelpIcon />} value={String(count("no-data"))} sub={overdueNoData ? `うち ${overdueNoData} 件は判定日を過ぎた` : "記録なし・古い記録"} tone={count("no-data") ? "bad" : "good"} />
         <StatCard label="未開始・保留" icon={<CirclePauseIcon />} value={String(count("not-started") + count("paused"))} sub="開始日なし / 実験台帳で保留" tone="neutral" />
       </Grid>
 
@@ -72,6 +73,7 @@ export default function PilotBoardPage() {
               <Cell>
                 <div className="flex min-w-40 flex-col gap-1">
                   <StatusBadge tone={stateTone[row.state]}>{stateLabel[row.state]}</StatusBadge>
+                  {row.state === "no-data" && row.judgeOverdue ? <StatusBadge tone="warn">判定日を過ぎた</StatusBadge> : null}
                   <div className="text-xs text-muted-foreground">{row.stateNote}</div>
                 </div>
               </Cell>

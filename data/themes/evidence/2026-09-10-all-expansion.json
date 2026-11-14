@@ -6068,7 +6068,65 @@
       "sourceReceipts": ".local/verification/themes/earthquake-housing-source/source-receipts.json",
       "adoptedPublicKeys": [],
       "inferenceBoundary": "住宅推計の作成法は公式に存在するが原格子値は今回の確認経路で未取得。全建物・世帯数・PLATEAU掲載区域を住宅全体へ代用しない。",
-      "notClaimed": "住宅格子データがどこにも公開されていないという一般的な不存在証明ではない。"
+      "notClaimed": "住宅格子データがどこにも公開されていないという一般的な不存在証明ではない。",
+      "housingSourceInvestigation": {
+        "investigatedAt": "2026-11-14",
+        "backlogId": "THEME-EXPANSION-IMPLEMENT-01",
+        "conclusion": "住宅戸数を直接数える全国空間原典は、今回確認した公式ページの範囲では確保できなかった。候補105の住宅部分は未充足を維持し、採用指標と章への接続・空間集計は実装していない。",
+        "candidates": [
+          {
+            "name": "令和2年国勢調査に関する地域メッシュ統計（表「住宅の所有及び建て方」）",
+            "provider": "総務省統計局（e-Stat 統計GIS）",
+            "urls": [
+              "https://www.stat.go.jp/data/mesh/pdf/r2kokusei.pdf",
+              "https://www.stat.go.jp/data/mesh/pdf/r2gaiyo.pdf",
+              "https://www.e-stat.go.jp/gis/statmap-search?type=1"
+            ],
+            "version": "令和2年（2020年）国勢調査、世界測地系（JGD2000及びJGD2011）",
+            "coverage": "対象地域は全国。編成区画は基準地域メッシュ（約1km）・2分の1（約500m）・4分の1（約250m）",
+            "unit": "世帯。項目は「住宅に住む一般世帯数」と、その持ち家・借家別、一戸建・長屋建・共同住宅（階数別）別、居住階別の世帯数",
+            "housingDefinition": "住宅の戸数ではなく、住宅に住む一般世帯の数である。空き家・建築時期・耐震性の項目は編成項目一覧に無い",
+            "suppression": "一定規模以下の地域メッシュでは、男女別人口・世帯総数・一般世帯・一般世帯人員以外の項目が秘匿される（資料の注2）。住宅の項目は秘匿の対象である",
+            "terms": "引用・転載時の出典表記の依頼（例: 出典「令和2年国勢調査に関する地域メッシュ統計」（総務省統計局））を資料で確認した。e-Stat 利用規約の個別確認と、J-SHIS 結合後の公開可否の判断は未実施",
+            "verdict": "not-adopted-as-housing-count",
+            "reason": "単位が世帯であり、停止条件（一般世帯を住宅戸数の代用にしない）に当たる。再現できる原典ではあるが、住宅戸数の原典ではない"
+          },
+          {
+            "name": "住宅・土地統計調査",
+            "provider": "総務省統計局（e-Stat）",
+            "urls": [
+              "https://www.e-stat.go.jp/statistics/00200522"
+            ],
+            "coverage": "公表の地域単位は全国・都道府県・市・区・人口1万5千人以上の町村が中心（検索結果の要約で確認）",
+            "verdict": "no-mesh-found",
+            "reason": "住宅数・建築時期は持つが、メッシュ集計の提供は今回確認した範囲に見つからなかった。県・市単位の値は既存の県別指標で扱い済みで、J-SHIS メッシュとの空間対応には使えない"
+          },
+          {
+            "name": "J-SHIS API 一覧",
+            "provider": "防災科学技術研究所",
+            "urls": [
+              "https://www.j-shis.bosai.go.jp/api-list",
+              "https://www.j-shis.bosai.go.jp/category/opencat/api"
+            ],
+            "coverage": "250mメッシュの地震ハザード、表層地盤、深部地下構造、断層、地すべり地形、被害地震検索、地震ハザードカルテ",
+            "verdict": "no-housing-item-found",
+            "reason": "一覧の名称に建物・住宅・世帯の項目が無い。個別 API の詳細ページと、ダウンロード提供物は今回未確認"
+          }
+        ],
+        "notSubstituted": [
+          "人口総数",
+          "一般世帯数・住宅に住む一般世帯数",
+          "建物棟数（RESAS 等の建物件数は建物であって住宅ではなく、出典の版も未確認）",
+          "PLATEAU 等の部分カバレッジ"
+        ],
+        "unverified": [
+          "e-Stat 統計GIS の画面で、住宅・土地統計調査にメッシュ区画の選択肢があるか（動的画面で今回は確認できていない）",
+          "J-SHIS の個別 API・ダウンロード提供物に住宅・建物の項目があるか",
+          "総務省統計局・防災科学技術研究所への提供有無の照会（外部への連絡は許可されていないため未実施）"
+        ],
+        "notClaimed": "住宅の全国メッシュデータがどこにも存在しないという断定ではない。確認した公式ページの範囲に見つからなかったという記録である。",
+        "resumeWhen": "住宅戸数または建築時期別住宅数を全国メッシュで公式提供する原典が見つかる、または theme-designer が「住宅に住む世帯」を世帯と明示した別指標として採用する判断をしたとき"
+      }
     },
     "next253Profiles": {
       "status": "superseded-by-final-tsunami29-candidate",

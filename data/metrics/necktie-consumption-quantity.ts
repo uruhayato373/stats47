@@ -4,8 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const necktieConsumptionQuantity: MetricConfig = {
   "key": "necktie-consumption-quantity",
   "title": "ネクタイ購入数量",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間ネクタイ購入数量",
-  "note": "2025年1月の品目分類改定でネクタイは「他の被服のその他」(品目番号659) に統合されたため、この指標は2024年が最終の値 (総務省「収支項目分類及びその内容例示」2025年改定)",
+  "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。2025年1月の品目分類改定でネクタイは「他の被服のその他」(品目番号659) に統合されたため、この指標は2024年が最終の値 (総務省「収支項目分類及びその内容例示」2025年改定)",
   "unit": "本",
   "category": "economy",
   "source": {

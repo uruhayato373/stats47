@@ -63,7 +63,8 @@ export function prepareMaterial(root, material) {
     post_type: material.platform === 'x' ? 'original' : mainFiles.some(file => file.endsWith('.mp4')) ? 'reel' : material.platform === 'instagram' && mainFiles.length > 1 ? 'carousel' : 'image',
     status: 'draft', caption, scheduled_at: null,
     media_path: previewOnly ? null : mainFiles[0] ?? null,
-    template: draft?.template ?? material.domain,
+    // 型が無い素材は空にする。domain 名 (ranking・buzz-map) を仮に入れると X カタログの templates[].id と食い違う
+    template: draft?.template ?? null,
     metric_keys: JSON.stringify(draft?.metricKeys ?? card?.metricKeys ?? (material.domain === 'ranking' ? [material.content_key] : [])),
     approval: { state: 'pending' }, material_keys: [materialKey(material)],
     planning: {

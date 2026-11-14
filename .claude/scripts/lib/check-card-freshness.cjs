@@ -34,7 +34,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { execFileSync } = require("node:child_process");
 
-const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "../../..");
+const ROOT = process.env.STATS47_SCAN_ROOT || path.resolve(__dirname, "../../..");
 const BACKLOG = path.join(ROOT, ".claude/todo/backlog.md");
 
 /** 拡張子つき = ファイル。ディレクトリ言及は雑音になるので採らない。 */

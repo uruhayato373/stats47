@@ -17,6 +17,8 @@ import Link from '@/components/atoms/SiteLink';
 import { SectionHeader } from '@/components/section';
 import { SurfaceSection, ValueTable } from '@/components/surface';
 
+import { navSurfaceProps } from '@/lib/analytics/events';
+
 import {
   PUBLIC_FACILITY_BAND_LABELS,
   PUBLIC_FACILITY_GROUPS,
@@ -171,6 +173,7 @@ export function GeoPublicFacilitySummary({
                   key="area"
                   className="inline-flex min-h-11 items-center text-primary underline"
                   href={hrefFor('geo-stage', { analysisSlug: slug, prefCode: to2DigitPrefCode(row.areaCode), stage: 'overlap' })}
+                  {...navSurfaceProps('geo_pref_table')}
                 >
                   {row.areaName}
                 </Link>
@@ -186,6 +189,7 @@ export function GeoPublicFacilitySummary({
                 key="audit"
                 className="inline-flex min-h-11 items-center text-primary underline"
                 href={`/geo/data/${slug}/${to2DigitPrefCode(row.areaCode)}`}
+                {...navSurfaceProps('geo_pref_table')}
               >
                 地点・検算
               </Link>,
@@ -200,6 +204,7 @@ export function GeoPublicFacilitySummary({
       <nav
         aria-label="公共施設アクセスの出典"
         className="mt-3 flex flex-wrap gap-4 text-sm text-primary underline"
+        {...navSurfaceProps('geo_evidence')}
       >
         <Link href={hrefFor('geo', { analysisSlug: slug })}>分析詳細</Link>
         <Link href={`${hrefFor('geo', { analysisSlug: slug })}#methods`}>一次資料・取得記録・判定方法</Link>

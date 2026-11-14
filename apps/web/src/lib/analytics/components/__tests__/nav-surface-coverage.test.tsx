@@ -6,6 +6,9 @@
 import { render } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
+import { GeoContentPublicationSection } from "@/features/geo-analysis/components/GeoContentPublicationSection";
+import { GeoSourceLinkCard } from "@/features/geo-analysis/components/GeoSourceLinkCard";
+import { manifestFixture } from "@/features/geo-analysis/lib/__tests__/geo-manifest-fixture";
 import { CategoryRankingTable } from "@/features/ranking/components/CategoryRankingList/CategoryRankingListClient";
 import { CorrelationSectionClient } from "@/features/ranking/components/CorrelationSection/CorrelationSectionClient";
 
@@ -72,5 +75,30 @@ describe("導線名を付けた部品", () => {
     const rankingLinks = [...container.querySelectorAll('a[href="/ranking/bar"]')];
     expect(rankingLinks.length).toBe(1);
     expect(resolveNavClick(rankingLinks[0], LOCATION)?.surface).toBe("category_ranking_list");
+  });
+
+  // Geo への導線 (2026-11-14)。10-20〜10-31 の導線名なし 4,530 件のうち行き先が geo のものが 1,085 件あり、
+  // 開発サーバーの HTML で数えると /geo のページ本文のリンクはほぼすべて導線名を持っていなかった
+  it("単体 GIS へのカードのリンクは geo_layer_list で送る", () => {
+    const { container } = render(<GeoSourceLinkCard dataId="A52" name="砂防指定地" version="2023" />);
+    expect(surfacesOf(container)).toEqual(["geo_layer_list"]);
+  });
+
+  it("分析ページの「再現・検証データ」のサイト内リンクは geo_evidence で送り、外部の JSON は送らない", () => {
+    const { container } = render(
+      <GeoContentPublicationSection
+        slug="population-flood-risk"
+        prefCode2="28"
+        manifest={manifestFixture("population-flood-risk")}
+      />,
+    );
+    const internal = [...container.querySelectorAll('a[href^="/geo/"]')];
+    expect(internal.length).toBeGreaterThanOrEqual(3);
+    expect(new Set(internal.map((anchor) => resolveNavClick(anchor, LOCATION)?.surface))).toEqual(
+      new Set(["geo_evidence"]),
+    );
+    const external = [...container.querySelectorAll('a[href^="http"]')];
+    expect(external.length).toBeGreaterThanOrEqual(1);
+    expect(external.every((anchor) => resolveNavClick(anchor, LOCATION) === null)).toBe(true);
   });
 });

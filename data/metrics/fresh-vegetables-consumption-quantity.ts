@@ -4,8 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const freshVegetablesConsumptionQuantity: MetricConfig = {
   "key": "fresh-vegetables-consumption-quantity",
   "title": "生鮮野菜消費量",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間生鮮野菜消費量（合計）",
-  "note": "値は都道府県庁所在市（二人以上世帯）のもので、県全体の値ではない。品目別の購入数量を足し上げた値で、乾物・海藻・漬物などの加工品は含まない。",
+  "subtitle": "合計",
+  "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。品目別の購入数量を足し上げた値で、乾物・海藻・漬物などの加工品は含まない。",
   "description": "家計調査（二人以上の世帯）の生鮮野菜 29 品目（葉茎菜・根菜・果菜・きのこ類・他の野菜）の年間購入数量を合算した値。",
   "unit": "g",
   "category": "economy",

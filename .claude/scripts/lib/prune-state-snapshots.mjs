@@ -30,11 +30,7 @@ export const RETENTION_POLICIES = Object.freeze({
     pattern: /^\d{4}-\d{2}-\d{2}\.jsonl$/,
     keep: 60,
   },
-  psi: {
-    directory: datasetDir("psi.batch"),
-    pattern: /^psi-batch-\d{4}-\d{2}-\d{2}T[\d-]+\.json$/,
-    keep: 1,
-  },
+  // psi の生 JSON は 2026-11-14 に R2 state/psi/ へ移した (git に置かないので寿命も持たない。lib/state-publish.mjs)
   gsc: {
     directory: datasetDir("gsc.url-inspection"),
     pattern: /^\d{4}-\d{2}-\d{2}\.csv$/,
@@ -54,6 +50,12 @@ export const RETENTION_POLICIES = Object.freeze({
     directory: datasetDir("cloudflare.snapshots"),
     pattern: /^\d{4}-\d{2}-\d{2}\.json$/,
     keep: 30,
+  },
+  // テーマページの重さの計測。共通の UI を直す前後を比べるので、直近 12 回 (計測した日だけファイルができる) を残す
+  "theme-ui-weight": {
+    directory: datasetDir("themes.ui-weight"),
+    pattern: /^\d{4}-\d{2}-\d{2}\.json$/,
+    keep: 12,
   },
   "page-quality": {
     directory: `${datasetDir("page-quality.metrics")}/snapshots`,
@@ -153,7 +155,7 @@ export const RETENTION_POLICIES = Object.freeze({
   },
   // page-components-audit.cjs が書く area/theme 責務分離の棚卸しレポート (手動・不定期)。直近 8 回分を残す。
   "seo-audit-area-theme": {
-    directory: ".claude/skills/analytics/seo-audit/reference/audits",
+    directory: datasetDir("seo.area-theme-audits"),
     pattern: /^\d{4}-\d{2}-\d{2}-area-theme-audit\.md$/,
     keep: 8,
   },

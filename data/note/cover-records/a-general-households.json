@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-general-households",
+  "production": {
+    "id": "NCI-00059",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "一般世帯数\n多い県は東京都",
+      "subline": "2020年・世帯数で比較",
+      "subject": "1280×670相当の横長完成カバー。右側に文字・数字のないシンプルな家の模型を1点。世帯数の総数を示すので、家族構成や世帯の人数を暗示する人物は描かない。 大きな単一モチーフを描き、人物・顔・手・動物・キャラクター・マスコットは一切描かない。文字は指定全文のみ。上部にカテゴリ名、左に見出し、下に補足を太い帯で配置。幅320pxでも全文読める大きさに。",
+      "evidence": "https://note.com/stats47/n/nd93084c0cb0c 2026-10-23公開API本文照合。東京都722万世帯で1位、鳥取県22万世帯で47位。2020年の一般世帯の総数で、施設等の世帯を除く。 カバーは数値・因果を追加せず、対象年・単位・1位だけを示す。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "7f67d9ef3ba3107227407c5e524ac6f89e30f3b7724ed4bff1c59e4662070c06",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-general-households/revisions/7f67d9ef3ba3107227407c5e524ac6f89e30f3b7724ed4bff1c59e4662070c06.png"
+      },
+      "bytes": 31025,
+      "id": "7f67d9ef3ba3107227407c5e524ac6f89e30f3b7724ed4bff1c59e4662070c06",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:11.840Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312770927/rectangle_large_type_2_901cbafb01c0169d62bed15d81fd0db0.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "7f67d9ef3ba3107227407c5e524ac6f89e30f3b7724ed4bff1c59e4662070c06"
+      }
+    },
+    {
+      "sha256": "74d6672e9ca6a617271b3071fd52acb3c7af7a9bc9df33b01c05c893062431e9",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-general-households/revisions/74d6672e9ca6a617271b3071fd52acb3c7af7a9bc9df33b01c05c893062431e9.png"
+      },
+      "bytes": 114334,
+      "id": "74d6672e9ca6a617271b3071fd52acb3c7af7a9bc9df33b01c05c893062431e9",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:13:30.346Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "ae6a73c6367c6e1e824a107b61087e20702a468dc613da636999dda0c683b522"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.840Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/general-households/values.json",
+        "sourceSha256": "b8f4c0749a31d026e41b1c6412d94aa4749adccfe35db15d68586c28c5dec789",
+        "input": {
+          "sha256": "ae6a73c6367c6e1e824a107b61087e20702a468dc613da636999dda0c683b522",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-general-households/inputs/ae6a73c6367c6e1e824a107b61087e20702a468dc613da636999dda0c683b522.json"
+          },
+          "bytes": 7296
+        }
+      }
+    },
+    {
+      "sha256": "a02229f336d113b18d3bc618186006472c929c5cf08b3d78104cdc1e9a61a3ac",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-general-households/revisions/a02229f336d113b18d3bc618186006472c929c5cf08b3d78104cdc1e9a61a3ac.png"
+      },
+      "bytes": 1540455,
+      "id": "a02229f336d113b18d3bc618186006472c929c5cf08b3d78104cdc1e9a61a3ac",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-8e437019b1a8",
+      "createdAt": "2026-10-23T10:12:24.072Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "47d17c2cb38e2efc16184df3aacb4bc7327a335a85f373250508054c2808444e"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T10:14:31.222Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "47d17c2cb38e2efc16184df3aacb4bc7327a335a85f373250508054c2808444e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-general-households/inputs/47d17c2cb38e2efc16184df3aacb4bc7327a335a85f373250508054c2808444e.json"
+          },
+          "bytes": 8461
+        },
+        "production": {
+          "id": "NCI-00059",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "8e437019b1a834cd32a78f8a901bb1629165d418d0b024858e4412cbbf5c6d2e"
+        }
+      }
+    }
+  ]
+}

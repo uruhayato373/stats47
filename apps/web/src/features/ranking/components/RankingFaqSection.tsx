@@ -1,3 +1,5 @@
+import { normalizeUnitsInText } from "@stats47/data-configs/unit";
+
 import { FaqSection } from "@/components/content";
 
 interface FaqItem {
@@ -47,8 +49,14 @@ export function RankingFaqSection({ faqJson, rankingName }: RankingFaqSectionPro
     return null;
   }
 
-  const items = parseFaqContent(parsed);
-  if (!items) return null;
+  const parsedItems = parseFaqContent(parsed);
+  if (!parsedItems) return null;
+  // 見える Q&A (FaqSection が単位の表記を半角にそろえる) と JSON-LD を同じ文字にする
+  const items = parsedItems.map((item) => ({
+    ...item,
+    question: normalizeUnitsInText(item.question),
+    answer: normalizeUnitsInText(item.answer),
+  }));
 
   const jsonLd = {
     "@context": "https://schema.org",

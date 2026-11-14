@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { HOME_FEATURED_PROMINENCE } from "@stats47/data-configs/ranking-prominence";
 import { describe, expect, it } from "vitest";
 

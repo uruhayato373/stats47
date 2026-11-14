@@ -8,7 +8,8 @@
       "license": "cc-by-4.0-partial",
       "stats47Category": "agriculture",
       "isRankingTarget": false,
-      "latestVersion": "15"
+      "latestVersion": "15",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A12.html"
     },
     "A13": {
       "name": "森林地域",
@@ -18,7 +19,8 @@
       "license": "cc-by-4.0-partial",
       "stats47Category": "agriculture",
       "isRankingTarget": false,
-      "latestVersion": "15"
+      "latestVersion": "15",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A13-2015.html"
     },
     "C23": {
       "name": "海岸線",
@@ -28,7 +30,8 @@
       "license": "non-commercial",
       "stats47Category": null,
       "isRankingTarget": false,
-      "latestVersion": "06"
+      "latestVersion": "06",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-C23.html"
     },
     "G04-a": {
       "name": "標高・傾斜度3次メッシュ",
@@ -83,6 +86,7 @@
       "stats47Category": null,
       "isRankingTarget": false,
       "latestVersion": "14",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-W01.html",
       "rankingConfig": [
         {
           "rankingKey": "dam-count",
@@ -102,7 +106,8 @@
       "license": "non-commercial",
       "stats47Category": null,
       "isRankingTarget": false,
-      "latestVersion": "09"
+      "latestVersion": "09",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-W05.html"
     },
     "W09": {
       "name": "湖沼",
@@ -133,7 +138,8 @@
       "license": "cc-by-4.0-partial",
       "stats47Category": "safetyenvironment",
       "isRankingTarget": false,
-      "latestVersion": "15"
+      "latestVersion": "15",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A10-2015.html"
     },
     "A16": {
       "name": "DID人口集中地区",
@@ -143,7 +149,8 @@
       "license": "commercial-ok",
       "stats47Category": "population",
       "isRankingTarget": false,
-      "latestVersion": "20"
+      "latestVersion": "20",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A16-2020.html"
     },
     "A17": {
       "name": "過疎地域",
@@ -153,7 +160,8 @@
       "license": "commercial-ok",
       "stats47Category": "population",
       "isRankingTarget": false,
-      "latestVersion": "17"
+      "latestVersion": "17",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A17-2017.html"
     },
     "A22": {
       "name": "豪雪地帯",
@@ -163,7 +171,8 @@
       "license": "commercial-ok",
       "stats47Category": "landweather",
       "isRankingTarget": false,
-      "latestVersion": "16"
+      "latestVersion": "16",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A22-2016.html"
     },
     "A27": {
       "name": "小学校区",
@@ -173,7 +182,8 @@
       "license": "cc-by-4.0-partial",
       "stats47Category": "educationsports",
       "isRankingTarget": false,
-      "latestVersion": "16"
+      "latestVersion": "16",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A27-2023.html"
     },
     "A29": {
       "name": "用途地域",
@@ -183,7 +193,8 @@
       "license": "cc-by-4.0-partial",
       "stats47Category": "infrastructure",
       "isRankingTarget": false,
-      "latestVersion": "19"
+      "latestVersion": "19",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A29-2019.html"
     },
     "A31b": {
       "name": "洪水浸水想定区域",
@@ -193,7 +204,8 @@
       "license": "cc-by-4.0",
       "stats47Category": "safetyenvironment",
       "isRankingTarget": false,
-      "latestVersion": "25"
+      "latestVersion": "25",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A31b-2025.html"
     },
     "A32": {
       "name": "中学校区",
@@ -203,7 +215,8 @@
       "license": "cc-by-4.0-partial",
       "stats47Category": "educationsports",
       "isRankingTarget": false,
-      "latestVersion": "16"
+      "latestVersion": "16",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A32-2023.html"
     },
     "A33": {
       "name": "土砂災害警戒区域",
@@ -213,7 +226,8 @@
       "license": "cc-by-4.0-partial",
       "stats47Category": "safetyenvironment",
       "isRankingTarget": false,
-      "latestVersion": "23"
+      "latestVersion": "23",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A33-2024.html"
     },
     "A38": {
       "name": "医療圏",
@@ -223,7 +237,8 @@
       "license": "cc-by-4.0",
       "stats47Category": "socialsecurity",
       "isRankingTarget": false,
-      "latestVersion": "20"
+      "latestVersion": "20",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A38-2020.html"
     },
     "A40": {
       "name": "津波浸水想定",
@@ -233,7 +248,8 @@
       "license": "cc-by-4.0-partial",
       "stats47Category": "safetyenvironment",
       "isRankingTarget": false,
-      "latestVersion": "23"
+      "latestVersion": "23",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A40-2024.html"
     },
     "N03": {
       "name": "行政区域",
@@ -243,7 +259,8 @@
       "license": "cc-by-4.0",
       "stats47Category": null,
       "isRankingTarget": false,
-      "latestVersion": "20250101"
+      "latestVersion": "20250101",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2025.html"
     },
     "P03": {
       "name": "発電施設",
@@ -254,6 +271,7 @@
       "stats47Category": "energy",
       "isRankingTarget": false,
       "latestVersion": "13",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P03.html",
       "rankingConfig": [
         {
           "rankingKey": "nuclear-power-plant-count",
@@ -338,7 +356,8 @@
       "license": "cc-by-4.0",
       "stats47Category": "socialsecurity",
       "isRankingTarget": false,
-      "latestVersion": "20"
+      "latestVersion": "20",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html"
     },
     "P05": {
       "name": "市町村役場等・公的集会施設",
@@ -359,7 +378,8 @@
       "license": "cc-by-4.0",
       "stats47Category": "infrastructure",
       "isRankingTarget": false,
-      "latestVersion": "22"
+      "latestVersion": "22",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P11-2022.html"
     },
     "P12": {
       "name": "観光資源",
@@ -370,6 +390,7 @@
       "stats47Category": "tourism",
       "isRankingTarget": false,
       "latestVersion": "14",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P12-2014.html",
       "rankingConfig": [
         {
           "rankingKey": "tourism-resource-count",
@@ -392,7 +413,8 @@
       "license": "non-commercial",
       "stats47Category": "infrastructure",
       "isRankingTarget": false,
-      "latestVersion": "11"
+      "latestVersion": "11",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P13.html"
     },
     "P14": {
       "name": "福祉施設",
@@ -402,7 +424,8 @@
       "license": "cc-by-4.0-partial",
       "stats47Category": "socialsecurity",
       "isRankingTarget": false,
-      "latestVersion": "23"
+      "latestVersion": "23",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P14-2023.html"
     },
     "P17": {
       "name": "消防署",
@@ -412,7 +435,8 @@
       "license": "non-commercial",
       "stats47Category": "safetyenvironment",
       "isRankingTarget": false,
-      "latestVersion": "12"
+      "latestVersion": "12",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P17.html"
     },
     "P18": {
       "name": "警察署",
@@ -422,7 +446,8 @@
       "license": "non-commercial",
       "stats47Category": "safetyenvironment",
       "isRankingTarget": false,
-      "latestVersion": "12"
+      "latestVersion": "12",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P18.html"
     },
     "P29": {
       "name": "学校",
@@ -432,7 +457,8 @@
       "license": "cc-by-4.0",
       "stats47Category": "educationsports",
       "isRankingTarget": false,
-      "latestVersion": "23"
+      "latestVersion": "23",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P29-2023.html"
     },
     "P35": {
       "name": "道の駅",
@@ -442,7 +468,8 @@
       "license": "non-commercial",
       "stats47Category": "tourism",
       "isRankingTarget": false,
-      "latestVersion": "18"
+      "latestVersion": "18",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P35.html"
     },
     "P36": {
       "name": "高速バス停留所",
@@ -452,7 +479,8 @@
       "license": "cc-by-4.0",
       "stats47Category": "infrastructure",
       "isRankingTarget": false,
-      "latestVersion": "23"
+      "latestVersion": "23",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P36-2023.html"
     },
     "C02": {
       "name": "港湾",
@@ -462,7 +490,8 @@
       "license": "non-commercial",
       "stats47Category": "infrastructure",
       "isRankingTarget": false,
-      "latestVersion": "08"
+      "latestVersion": "08",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-C02-2014.html"
     },
     "C09": {
       "name": "漁港",
@@ -472,7 +501,8 @@
       "license": "non-commercial",
       "stats47Category": "agriculture",
       "isRankingTarget": false,
-      "latestVersion": "06"
+      "latestVersion": "06",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-C09.html"
     },
     "C28": {
       "name": "空港",
@@ -567,7 +597,8 @@
       "license": "cc-by-4.0",
       "stats47Category": "infrastructure",
       "isRankingTarget": false,
-      "latestVersion": "22"
+      "latestVersion": "22",
+      "sourcePageUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N07-2022.html"
     },
     "S12": {
       "name": "駅別乗降客数",
@@ -914,7 +945,7 @@
       "category": "statistics",
       "geometryType": "mesh",
       "coverage": "prefecture",
-      "license": "commercial-ok",
+      "license": "cc-by-4.0",
       "stats47Category": "population",
       "isRankingTarget": false,
       "latestVersion": "24",

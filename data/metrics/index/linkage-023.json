@@ -2,6 +2,561 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "port-ships-total",
+      "pageId": null,
+      "title": "入港船舶隻数（合計）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003130814",
+          "filters": {}
+        }
+      ],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "statsDataId": "0003130814"
+        },
+        "fetcherKey": "estat",
+        "configHash": "324d4b22d3f231bd"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:port-ships-total",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "port-vehicle-ferry",
+      "pageId": "ranking:port-vehicle-ferry",
+      "title": "自動車航送車両台数（港湾統計）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003130796",
+          "filters": {
+            "cdCat01": "100",
+            "cdCat02": "100"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003130796",
+          "cdCat01": "100",
+          "cdCat02": "100"
+        },
+        "derived": false,
+        "configHash": "b34fe3ef85d9725c"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:port-vehicle-ferry",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "port-vehicle-ferry-car",
+      "pageId": null,
+      "title": "フェリー輸送車両（乗用車）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003131104",
+          "filters": {}
+        }
+      ],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "statsDataId": "0003131104"
+        },
+        "fetcherKey": "estat",
+        "configHash": "09ef42fb2c89e134"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:port-vehicle-ferry-car",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "port-vehicle-ferry-total",
+      "pageId": null,
+      "title": "フェリー輸送車両（合計）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003131104",
+          "filters": {}
+        }
+      ],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "statsDataId": "0003131104"
+        },
+        "fetcherKey": "estat",
+        "configHash": "09ef42fb2c89e134"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:port-vehicle-ferry-total",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "port-vehicle-ferry-truck",
+      "pageId": null,
+      "title": "フェリー輸送車両（トラック）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003131104",
+          "filters": {}
+        }
+      ],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "statsDataId": "0003131104"
+        },
+        "fetcherKey": "estat",
+        "configHash": "09ef42fb2c89e134"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:port-vehicle-ferry-truck",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "post-office-bank-within-500m-household-ratio",
+      "pageId": null,
+      "title": "郵便局・銀行まで500m未満の世帯の割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004025627",
+          "filters": {
+            "cdTab": "13-2023",
+            "cdCat01": "00"
+          }
+        },
+        {
+          "role": "city",
+          "statsDataId": "0004025627",
+          "filters": {
+            "cdTab": "13-2023",
+            "cdCat01": "00"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004025627",
+          "cdCat01": "00",
+          "cdTab": "13-2023"
+        },
+        "ops": {
+          "axisRatio": {
+            "axis": "cat02",
+            "numeratorCodes": [
+              "1",
+              "2",
+              "3"
+            ],
+            "denominatorCodes": [
+              "0"
+            ]
+          }
+        },
+        "derived": true,
+        "configHash": "76e67fc4fccd6117"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:post-office-bank-within-500m-household-ratio",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:living-housing",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:post-office-bank-within-500m-household-ratio",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "post-office-count",
+      "pageId": "ranking:post-office-count",
+      "title": "郵便局数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010108",
+          "filters": {
+            "cdCat01": "H7501"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010108",
+          "cdCat01": "H7501"
+        },
+        "derived": false,
+        "configHash": "d210439a21e103f9"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:swimming-pool-public-vs-post-office-count",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:post-office-count",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "post-office-count-per-100km2",
+      "pageId": "ranking:post-office-count-per-100km2",
+      "title": "郵便局数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010208",
+          "filters": {
+            "cdCat01": "#H06302"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H06302"
+        },
+        "derived": false,
+        "configHash": "c75bcb5a1aadfcf1"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area:01000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:02000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:03000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:04000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:05000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:06000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:07000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:08000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:09000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:10000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:11000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:12000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:13000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:14000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:15000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:16000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:17000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:18000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:19000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:20000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:21000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:22000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:23000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:24000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:25000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:26000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:27000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:28000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:29000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:30000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:31000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:32000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:33000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:34000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:35000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:36000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:37000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:38000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:39000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:40000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:41000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:42000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:43000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:44000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:45000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:46000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:47000",
+          "kind": "area"
+        },
+        {
+          "pageId": "blog:post-office-last-window",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:post-office-count-per-100km2",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "postage-consumption-expenditure",
+      "pageId": "ranking:postage-consumption-expenditure",
+      "title": "郵便料消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "070300010",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "070300010",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "8dd4944bc8032e34"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:postage-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "postal-savings-balance",
+      "pageId": "ranking:postal-savings-balance",
+      "title": "郵便貯金残高",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010103",
+          "filters": {
+            "cdCat01": "C360120"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010103",
+          "cdCat01": "C360120"
+        },
+        "derived": false,
+        "configHash": "6a36ac41479cef6a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:postal-savings-balance",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "postal-savings-balance-per-capita",
       "pageId": "ranking:postal-savings-balance-per-capita",
       "title": "郵便貯金残高",
@@ -24,10 +579,7 @@
         "configHash": "7864d0cb995976dc"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:postal-savings-balance-per-capita",
@@ -296,11 +848,11 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "blog:banana-consumption-quantity",
+          "pageId": "blog:potato-consumption-quantity",
           "kind": "blog"
         },
         {
-          "pageId": "blog:potato-consumption-quantity",
+          "pageId": "blog:taro-consumption-quantity-prefecture-gap",
           "kind": "blog"
         },
         {
@@ -681,10 +1233,15 @@
               "factor": 1
             }
           ],
-          "valueScale": 0.1
+          "valueScale": 0.1,
+          "sampleCount": {
+            "cdTab": "13,45",
+            "factor": 10,
+            "minimum": 10
+          }
         },
         "derived": true,
-        "configHash": "22e84f34cb7d26c7"
+        "configHash": "f6807093da118592"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -2963,7 +3520,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:01000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:02000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -2971,7 +3536,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:03000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:04000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -2979,7 +3552,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:05000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:06000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -2987,7 +3568,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:07000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:08000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -2995,7 +3584,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:09000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:10000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3003,7 +3600,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:11000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:12000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3011,7 +3616,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:13000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:14000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3019,7 +3632,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:15000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:16000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3027,7 +3648,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:17000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:18000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3035,7 +3664,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:19000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:20000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3043,7 +3680,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:21000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:22000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3051,7 +3696,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:23000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:24000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3059,7 +3712,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:25000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:26000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3067,7 +3728,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:27000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:28000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3075,7 +3744,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:29000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:30000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3083,7 +3760,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:31000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:32000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3091,7 +3776,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:33000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:34000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3099,7 +3792,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:35000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:36000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3107,7 +3808,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:37000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:38000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3115,7 +3824,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:39000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:40000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3123,7 +3840,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:41000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:42000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3131,7 +3856,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:43000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:44000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3139,11 +3872,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:45000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:46000:local-finance",
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:46000:local-government-digital",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:47000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:local-government-digital",
           "kind": "area-theme"
         },
         {
@@ -3153,10 +3898,15 @@
         {
           "pageId": "theme:local-finance",
           "kind": "theme"
+        },
+        {
+          "pageId": "theme:local-government-digital",
+          "kind": "theme"
         }
       ],
       "themes": [
-        "local-finance"
+        "local-finance",
+        "local-government-digital"
       ]
     },
     {
@@ -6264,10 +7014,7 @@
         "configHash": "e86b06cbd1c4d270"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:private-life-insurance-amount-per-contract",
@@ -6299,10 +7046,7 @@
         "configHash": "4765c6b58af82dfe"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:private-life-insurance-contract-amount-per-household",
@@ -6369,10 +7113,7 @@
         "configHash": "9748bcf7c360337c"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:private-life-insurance-contracts-per-1000",
@@ -6913,7 +7654,15 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:01000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -6921,7 +7670,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:03000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:03000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -6929,7 +7686,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:05000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:05000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -6937,7 +7702,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:07000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:07000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -6945,7 +7718,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:09000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:09000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -6953,7 +7734,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:11000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:11000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -6961,7 +7750,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:13000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:13000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -6969,7 +7766,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:15000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:15000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -6977,7 +7782,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:17000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:17000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -6985,7 +7798,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:19000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:19000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -6993,7 +7814,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:21000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:21000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7001,7 +7830,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:23000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:23000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7009,7 +7846,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:25000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:25000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7017,7 +7862,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:27000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:27000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7025,7 +7878,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:29000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:29000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7033,7 +7894,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:31000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:31000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7041,7 +7910,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:33000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:33000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7049,7 +7926,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:35000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:35000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7057,7 +7942,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:37000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:37000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7065,7 +7958,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:39000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:39000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7073,7 +7974,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:41000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:41000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7081,7 +7990,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:43000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:43000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7089,11 +8006,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:45000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:45000:real-income",
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:46000:land-property-market",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:46000:real-income",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:land-property-market",
           "kind": "area-theme"
         },
         {
@@ -7121,11 +8050,16 @@
           "kind": "ranking"
         },
         {
+          "pageId": "theme:land-property-market",
+          "kind": "theme"
+        },
+        {
           "pageId": "theme:real-income",
           "kind": "theme"
         }
       ],
       "themes": [
+        "land-property-market",
         "real-income"
       ]
     },
@@ -7230,11 +8164,205 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "ranking:private-sports-facility",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:sports-participation",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "sports-participation"
+      ]
     },
     {
       "metricKey": "private-university-consumption-expenditure",
@@ -7914,386 +9042,6 @@
         },
         {
           "pageId": "ranking:projected-population-2025",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "projected-population-2025-city",
-      "pageId": null,
-      "title": "将来推計人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020201",
-          "filters": {
-            "cdCat01": "A191002"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020201",
-          "cdCat01": "A191002"
-        },
-        "derived": false,
-        "configHash": "b4977a8a7515d029"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:projected-population-2025-city",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:population-dynamics",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:projected-population-2025-city",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "projected-population-2030",
-      "pageId": null,
-      "title": "将来推計人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010201",
-          "filters": {
-            "cdCat01": "#A0191003"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010201",
-          "cdCat01": "#A0191003"
-        },
-        "derived": false,
-        "configHash": "03acc69b64a1759c"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:projected-population-2030",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "ranking:projected-population-2030",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "projected-population-2030-city",
-      "pageId": null,
-      "title": "将来推計人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020201",
-          "filters": {
-            "cdCat01": "A191003"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020201",
-          "cdCat01": "A191003"
-        },
-        "derived": false,
-        "configHash": "334a6903d62d86f8"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:projected-population-2030-city",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:population-dynamics",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:projected-population-2030-city",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "projected-population-2035",
-      "pageId": null,
-      "title": "将来推計人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010201",
-          "filters": {
-            "cdCat01": "#A0191004"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010201",
-          "cdCat01": "#A0191004"
-        },
-        "derived": false,
-        "configHash": "90b2f4505f6f7ecb"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:projected-population-2035",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "ranking:projected-population-2035",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "projected-population-2035-city",
-      "pageId": null,
-      "title": "将来推計人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020201",
-          "filters": {
-            "cdCat01": "A191004"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020201",
-          "cdCat01": "A191004"
-        },
-        "derived": false,
-        "configHash": "c4050974eded9fc7"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:projected-population-2035-city",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:population-dynamics",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:projected-population-2035-city",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "projected-population-2040",
-      "pageId": null,
-      "title": "将来推計人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010201",
-          "filters": {
-            "cdCat01": "#A0191005"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010201",
-          "cdCat01": "#A0191005"
-        },
-        "derived": false,
-        "configHash": "fa1b8d1121bfed16"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:projected-population-2040",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "ranking:projected-population-2040",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "projected-population-2040-city",
-      "pageId": null,
-      "title": "将来推計人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020201",
-          "filters": {
-            "cdCat01": "A191005"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020201",
-          "cdCat01": "A191005"
-        },
-        "derived": false,
-        "configHash": "942163ed42678b96"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:projected-population-2040-city",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:population-dynamics",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:projected-population-2040-city",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "projected-population-2045",
-      "pageId": null,
-      "title": "将来推計人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010201",
-          "filters": {
-            "cdCat01": "#A0191006"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010201",
-          "cdCat01": "#A0191006"
-        },
-        "derived": false,
-        "configHash": "804488465849487d"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:projected-population-2045",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "ranking:projected-population-2045",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "projected-population-2045-city",
-      "pageId": null,
-      "title": "将来推計人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020201",
-          "filters": {
-            "cdCat01": "A191006"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020201",
-          "cdCat01": "A191006"
-        },
-        "derived": false,
-        "configHash": "0f92516e501dba1d"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:projected-population-2045-city",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:population-dynamics",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:projected-population-2045-city",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "projected-population-2050",
-      "pageId": null,
-      "title": "将来推計人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010201",
-          "filters": {
-            "cdCat01": "#A0191007"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010201",
-          "cdCat01": "#A0191007"
-        },
-        "derived": false,
-        "configHash": "f06cbe1fbdf03828"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:projected-population-2050",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "ranking:projected-population-2050",
           "kind": "ranking"
         }
       ],

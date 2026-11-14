@@ -2,6 +2,983 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "study-participation-rate-home-economics",
+      "pageId": "ranking:study-participation-rate-home-economics",
+      "title": "家政・家事の行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456245",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "4"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456245",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "4"
+        },
+        "derived": false,
+        "configHash": "f990f409371838b6"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:study-participation-rate-home-economics",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "study-participation-rate-nursing-care",
+      "pageId": "ranking:study-participation-rate-nursing-care",
+      "title": "介護関係の行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456245",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "3"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456245",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "3"
+        },
+        "derived": false,
+        "configHash": "552015ee9ae025a9"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:study-participation-rate-nursing-care",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "study-participation-rate-other-language",
+      "pageId": "ranking:study-participation-rate-other-language",
+      "title": "英語以外の外国語学習の行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456245",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "12"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456245",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "12"
+        },
+        "derived": false,
+        "configHash": "b455a4422c5d1c91"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:study-participation-rate-other-language",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "subcontractor-completed-construction",
+      "pageId": "ranking:subcontractor-completed-construction",
+      "title": "下請完成工事高",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010103",
+          "filters": {
+            "cdCat01": "C3305"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010103",
+          "cdCat01": "C3305"
+        },
+        "derived": false,
+        "configHash": "e6e9959ed0258569"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:subcontractor-completed-construction",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:construction-industry",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "construction-industry"
+      ]
+    },
+    {
+      "metricKey": "subsidies-expense-municipal",
+      "pageId": null,
+      "title": "補助費等",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020204",
+          "filters": {
+            "cdCat01": "D320405"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020204",
+          "cdCat01": "D320405"
+        },
+        "derived": false,
+        "configHash": "6599cf413ea03e26"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:subsidies-expense-municipal",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:local-finance",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:subsidies-expense-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "subsidy-expenses-prefecture",
+      "pageId": "ranking:subsidy-expenses-prefecture",
+      "title": "補助費等",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D310405"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D310405"
+        },
+        "derived": false,
+        "configHash": "fb28185aab4a8489"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:subsidy-expenses-prefecture",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "subsistence-farm-households",
+      "pageId": null,
+      "title": "自給的農家数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020203",
+          "filters": {
+            "cdCat01": "C310202"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020203",
+          "cdCat01": "C310202"
+        },
+        "derived": false,
+        "configHash": "599cf0657080e3aa"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:subsistence-farm-households",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:agriculture-production",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:forestry-timber",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:subsistence-farm-households",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sugar-consumption-expenditure",
+      "pageId": "ranking:sugar-consumption-expenditure",
+      "title": "砂糖消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "010720040",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "010720040",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "7d4e8f3e945cf9e9"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:kagawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shimane-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:sugar-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sugar-consumption-quantity",
+      "pageId": "ranking:sugar-consumption-quantity",
+      "title": "砂糖消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023606",
+          "filters": {
+            "cdCat01": "010720040",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023606",
+          "cdCat01": "010720040",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "312f2f9b74fb1b44"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:kagawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shimane-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:sugar-consumption-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:sugar-consumption-quantity",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-food-spending",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "household-food-spending"
+      ]
+    },
+    {
+      "metricKey": "suicide-count",
+      "pageId": "ranking:suicide-count",
+      "title": "自殺者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010109",
+          "filters": {
+            "cdCat01": "I9108"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010109",
+          "cdCat01": "I9108"
+        },
+        "derived": false,
+        "configHash": "2c5cf2331b8af758"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:suicide-rate-aging-nexus",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:suicide-count",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:healthcare",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "healthcare"
+      ]
+    },
+    {
       "metricKey": "suicide-count-65plus",
       "pageId": "ranking:suicide-count-65plus",
       "title": "65歳以上の自殺者数",
@@ -950,6 +1927,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:textbook-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:supplementary-education-group-consumption-expenditure",
           "kind": "ranking"
         }
@@ -1283,15 +2264,19 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kagoshima-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:nara-food-culture",
+          "pageId": "blog:miyazaki-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:shiga-food-culture",
+          "pageId": "blog:nara-food-culture",
           "kind": "blog"
         },
         {
@@ -1300,10 +2285,6 @@
         },
         {
           "pageId": "blog:tokushima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:toyama-food-culture",
           "kind": "blog"
         },
         {
@@ -1348,7 +2329,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:kagoshima-food-culture",
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:miyazaki-food-culture",
           "kind": "blog"
         },
         {
@@ -1356,19 +2341,15 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:shiga-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:sweet-potato-expenditure-ranking",
           "kind": "blog"
         },
         {
-          "pageId": "blog:tokushima-food-culture",
+          "pageId": "blog:taro-consumption-quantity-prefecture-gap",
           "kind": "blog"
         },
         {
-          "pageId": "blog:toyama-food-culture",
+          "pageId": "blog:tokushima-food-culture",
           "kind": "blog"
         },
         {
@@ -1655,10 +2636,15 @@
               "factor": 1
             }
           ],
-          "valueScale": 0.1
+          "valueScale": 0.1,
+          "sampleCount": {
+            "cdTab": "13,45",
+            "factor": 10,
+            "minimum": 10
+          }
         },
         "derived": true,
-        "configHash": "a96fb1fc940918e7"
+        "configHash": "3d2a783b2fcb262e"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -1922,7 +2908,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:ishikawa-food-culture",
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {
@@ -1930,11 +2916,19 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:miyazaki-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:okinawa-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:saitama-food-culture",
+          "pageId": "blog:shimane-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamaguchi-food-culture",
           "kind": "blog"
         },
         {
@@ -2167,7 +3161,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:ishikawa-food-culture",
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {
@@ -2175,15 +3169,23 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:miyazaki-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:okinawa-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:saitama-food-culture",
+          "pageId": "blog:shimane-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:table-salt-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamaguchi-food-culture",
           "kind": "blog"
         },
         {
@@ -2259,10 +3261,7 @@
         "configHash": "36d29f720104fab1"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:tablet-ownership-multi-person-households-per-1000",
@@ -2388,19 +3387,15 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:miyazaki-food-culture",
+          "pageId": "blog:gifu-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kumamoto-food-culture",
           "kind": "blog"
         },
         {
           "pageId": "blog:niigata-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:shizuoka-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:toyama-food-culture",
           "kind": "blog"
         },
         {
@@ -2453,7 +3448,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:miyazaki-food-culture",
+          "pageId": "blog:gifu-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kumamoto-food-culture",
           "kind": "blog"
         },
         {
@@ -2461,15 +3460,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:shizuoka-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:taro-consumption-quantity-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:toyama-food-culture",
           "kind": "blog"
         },
         {
@@ -2553,10 +3544,7 @@
         "configHash": "aed32101664b4812"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "blog:dual-income-household-ratio-vs-tatami-per-dwelling-owner",
@@ -2607,10 +3595,7 @@
         "configHash": "bdf28f96ad292bd5"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "municipality-ranking:tatami-per-dwelling-rented",
@@ -3001,10 +3986,15 @@
               "factor": 1
             }
           ],
-          "valueScale": 0.1
+          "valueScale": 0.1,
+          "sampleCount": {
+            "cdTab": "13,45",
+            "factor": 10,
+            "minimum": 10
+          }
         },
         "derived": true,
-        "configHash": "1e0920b525c46dda"
+        "configHash": "49454428045204c3"
       },
       "dependencies": [],
       "normalizationDependencies": [],
@@ -3014,7 +4004,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:01000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:02000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -3022,7 +4020,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:03000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:04000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -3030,7 +4036,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:05000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:06000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -3038,7 +4052,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:07000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:08000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -3046,7 +4068,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:09000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:10000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -3054,7 +4084,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:11000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:12000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -3062,7 +4100,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:13000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:14000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -3070,7 +4116,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:15000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:16000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -3078,7 +4132,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:17000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:18000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -3086,7 +4148,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:19000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:20000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -3094,7 +4164,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:21000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:22000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -3102,7 +4180,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:23000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:24000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -3110,7 +4196,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:25000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:26000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -3118,7 +4212,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:27000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:28000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -3126,7 +4228,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:29000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:30000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -3134,7 +4244,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:31000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:32000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -3142,7 +4260,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:33000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:34000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -3150,7 +4276,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:35000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:36000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -3158,7 +4292,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:37000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:38000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -3166,7 +4308,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:39000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:40000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -3174,7 +4324,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:41000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:42000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -3182,7 +4340,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:43000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:44000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -3190,11 +4356,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:45000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:46000:occupation-salary",
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:46000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:47000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:regional-transport",
           "kind": "area-theme"
         },
         {
@@ -3216,10 +4394,15 @@
         {
           "pageId": "theme:occupation-salary",
           "kind": "theme"
+        },
+        {
+          "pageId": "theme:regional-transport",
+          "kind": "theme"
         }
       ],
       "themes": [
-        "occupation-salary"
+        "occupation-salary",
+        "regional-transport"
       ]
     },
     {
@@ -3919,10 +5102,7 @@
         "configHash": "beaea5c9e1b39d52"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:telephone-subscription-count-per-1000",
@@ -5128,10 +6308,7 @@
         "configHash": "06c4c10dd6255f22"
       },
       "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
+      "normalizationDependencies": [],
       "consumers": [
         {
           "pageId": "ranking:tertiary-industry-employees-per-establishment",
@@ -6997,386 +8174,6 @@
       ],
       "themes": [
         "aging-society"
-      ]
-    },
-    {
-      "metricKey": "theme-population-pyramid-60-64-male",
-      "pageId": null,
-      "title": "5歳階級別人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010101",
-          "filters": {
-            "cdCat01": "A121301"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010101",
-          "cdCat01": "A121301"
-        },
-        "derived": false,
-        "configHash": "6bbb7a61c63944f2"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:theme-population-pyramid-60-64-male",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:aging-society",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "aging-society"
-      ]
-    },
-    {
-      "metricKey": "theme-population-pyramid-65-69-female",
-      "pageId": null,
-      "title": "5歳階級別人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010101",
-          "filters": {
-            "cdCat01": "A121402"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010101",
-          "cdCat01": "A121402"
-        },
-        "derived": false,
-        "configHash": "3cd3e4edfad116de"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:theme-population-pyramid-65-69-female",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:aging-society",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "aging-society"
-      ]
-    },
-    {
-      "metricKey": "theme-population-pyramid-65-69-male",
-      "pageId": null,
-      "title": "5歳階級別人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010101",
-          "filters": {
-            "cdCat01": "A121401"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010101",
-          "cdCat01": "A121401"
-        },
-        "derived": false,
-        "configHash": "be8d275e22d06945"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:theme-population-pyramid-65-69-male",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:aging-society",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "aging-society"
-      ]
-    },
-    {
-      "metricKey": "theme-population-pyramid-70-74-female",
-      "pageId": null,
-      "title": "5歳階級別人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010101",
-          "filters": {
-            "cdCat01": "A121502"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010101",
-          "cdCat01": "A121502"
-        },
-        "derived": false,
-        "configHash": "9ee4761c27b48e2f"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:theme-population-pyramid-70-74-female",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:aging-society",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "aging-society"
-      ]
-    },
-    {
-      "metricKey": "theme-population-pyramid-70-74-male",
-      "pageId": null,
-      "title": "5歳階級別人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010101",
-          "filters": {
-            "cdCat01": "A121501"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010101",
-          "cdCat01": "A121501"
-        },
-        "derived": false,
-        "configHash": "6023bc1fb2b1f8d4"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:theme-population-pyramid-70-74-male",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:aging-society",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "aging-society"
-      ]
-    },
-    {
-      "metricKey": "theme-population-pyramid-75-79-female",
-      "pageId": null,
-      "title": "5歳階級別人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010101",
-          "filters": {
-            "cdCat01": "A121602"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010101",
-          "cdCat01": "A121602"
-        },
-        "derived": false,
-        "configHash": "9d61767769727b2c"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:theme-population-pyramid-75-79-female",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:aging-society",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "aging-society"
-      ]
-    },
-    {
-      "metricKey": "theme-population-pyramid-75-79-male",
-      "pageId": null,
-      "title": "5歳階級別人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010101",
-          "filters": {
-            "cdCat01": "A121601"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010101",
-          "cdCat01": "A121601"
-        },
-        "derived": false,
-        "configHash": "7636b1b44e3a5717"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:theme-population-pyramid-75-79-male",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:aging-society",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "aging-society"
-      ]
-    },
-    {
-      "metricKey": "theme-population-pyramid-80-plus-female",
-      "pageId": null,
-      "title": "5歳階級別人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010101",
-          "filters": {
-            "cdCat01": "A141802"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010101",
-          "cdCat01": "A141802"
-        },
-        "derived": false,
-        "configHash": "c6051b0342365458"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:theme-population-pyramid-80-plus-female",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:aging-society",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "aging-society"
-      ]
-    },
-    {
-      "metricKey": "theme-population-pyramid-80-plus-male",
-      "pageId": null,
-      "title": "5歳階級別人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010101",
-          "filters": {
-            "cdCat01": "A141801"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010101",
-          "cdCat01": "A141801"
-        },
-        "derived": false,
-        "configHash": "9c2592e0cfc92f8b"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:theme-population-pyramid-80-plus-male",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:aging-society",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "aging-society"
-      ]
-    },
-    {
-      "metricKey": "theme-prostitution-crime-recognition-count",
-      "pageId": null,
-      "title": "風俗犯認知件数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010111",
-          "filters": {
-            "cdCat01": "K420105"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010111",
-          "cdCat01": "K420105"
-        },
-        "derived": false,
-        "configHash": "c3df864847c5623b"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:theme-prostitution-crime-recognition-count",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:safety",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "safety"
       ]
     }
   ]

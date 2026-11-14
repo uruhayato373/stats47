@@ -287,10 +287,15 @@
               "factor": 1
             }
           ],
-          "valueScale": 0.1
+          "valueScale": 0.1,
+          "sampleCount": {
+            "cdTab": "13,45",
+            "factor": 10,
+            "minimum": 10
+          }
         },
         "derived": true,
-        "configHash": "c68329cc8d3e9877"
+        "configHash": "8aae052b4d70c522"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -728,10 +733,15 @@
               "factor": 1
             }
           ],
-          "valueScale": 0.1
+          "valueScale": 0.1,
+          "sampleCount": {
+            "cdTab": "13,45",
+            "factor": 10,
+            "minimum": 10
+          }
         },
         "derived": true,
-        "configHash": "eb309145a11cceca"
+        "configHash": "228cdf181872d123"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -1159,11 +1169,19 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:coffee-shop-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:dining-out-expenditure-ranking",
           "kind": "blog"
         },
         {
           "pageId": "blog:movie-theater-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yakiniku-spending-prefecture-gap",
           "kind": "blog"
         },
         {
@@ -3642,10 +3660,15 @@
               "factor": 1
             }
           ],
-          "valueScale": 0.1
+          "valueScale": 0.1,
+          "sampleCount": {
+            "cdTab": "13,45",
+            "factor": 10,
+            "minimum": 10
+          }
         },
         "derived": true,
-        "configHash": "32ba461e0bd6e029"
+        "configHash": "e6148375a7d83450"
       },
       "dependencies": [],
       "normalizationDependencies": [],
@@ -4923,11 +4946,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:kumamoto-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:yamanashi-food-culture",
+          "pageId": "blog:nagano-food-culture",
           "kind": "blog"
         },
         {
@@ -4972,11 +4991,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:kumamoto-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:yamanashi-food-culture",
+          "pageId": "blog:nagano-food-culture",
           "kind": "blog"
         },
         {
@@ -5062,6 +5077,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:ibaraki-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kanagawa-food-culture",
           "kind": "blog"
         },
@@ -5070,7 +5089,15 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:miyazaki-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:nagano-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:nara-food-culture",
           "kind": "blog"
         },
         {
@@ -5127,6 +5154,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:ibaraki-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kanagawa-food-culture",
           "kind": "blog"
         },
@@ -5135,7 +5166,15 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:miyazaki-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:nagano-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:nara-food-culture",
           "kind": "blog"
         },
         {
@@ -5233,15 +5272,7 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:aichi-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:chiba-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:fukuoka-food-culture",
           "kind": "blog"
         },
         {
@@ -5249,7 +5280,15 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:hokkaido-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:hyogo-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {
@@ -5257,15 +5296,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:miyagi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:miyazaki-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:nagasaki-food-culture",
+          "pageId": "blog:kumamoto-food-culture",
           "kind": "blog"
         },
         {
@@ -5281,7 +5312,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:yamaguchi-food-culture",
+          "pageId": "blog:tokushima-food-culture",
           "kind": "blog"
         },
         {
@@ -5322,15 +5353,7 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:aichi-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:chiba-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:fukuoka-food-culture",
           "kind": "blog"
         },
         {
@@ -5338,7 +5361,15 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:hokkaido-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:hyogo-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:iwate-food-culture",
           "kind": "blog"
         },
         {
@@ -5346,19 +5377,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:miyagi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:miyazaki-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:nagasaki-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:oita-food-culture",
+          "pageId": "blog:kumamoto-food-culture",
           "kind": "blog"
         },
         {
@@ -5370,7 +5389,7 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:yamaguchi-food-culture",
+          "pageId": "blog:tokushima-food-culture",
           "kind": "blog"
         },
         {
@@ -5448,6 +5467,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:akita-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:dried-udon-soba-consumption-expenditure-prefecture-gap",
           "kind": "blog"
         },
@@ -5464,11 +5487,11 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:nara-food-culture",
+          "pageId": "blog:tokushima-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:tokushima-food-culture",
+          "pageId": "blog:toyama-food-culture",
           "kind": "blog"
         },
         {
@@ -5509,6 +5532,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:akita-food-culture",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:ehime-food-culture",
           "kind": "blog"
         },
@@ -5525,11 +5552,15 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:nara-food-culture",
+          "pageId": "blog:tokushima-food-culture",
           "kind": "blog"
         },
         {
-          "pageId": "blog:tokushima-food-culture",
+          "pageId": "blog:toyama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:udon-soba-food-culture-prefecture-map",
           "kind": "blog"
         },
         {
@@ -6098,6 +6129,194 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:gender-participation",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:dual-income-house-size",
           "kind": "blog"
         },
@@ -6140,9 +6359,15 @@
         {
           "pageId": "ranking:dual-income-household-ratio",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:gender-participation",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "gender-participation"
+      ]
     },
     {
       "metricKey": "dwelling-per-floor-area",
@@ -8876,6 +9101,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:textbook-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:education-expenditure-total",
           "kind": "ranking"
         }
@@ -9162,18 +9391,6 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "blog:aichi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:akita-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:gifu-food-culture",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:kyoto-food-culture",
           "kind": "blog"
         },
@@ -9222,18 +9439,6 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
-        {
-          "pageId": "blog:aichi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:akita-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:gifu-food-culture",
-          "kind": "blog"
-        },
         {
           "pageId": "blog:kyoto-food-culture",
           "kind": "blog"

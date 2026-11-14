@@ -23,17 +23,23 @@ export interface LinkRowNavItem {
  * タブ (TabsList) の見た目にせず、テンプレートの Button (ghost・sm) を並べる。現在地だけ outline。
  * 狭い幅でも 1 行に保ち、はみ出す分は横スクロールにする。右端のフェードで続きがあることを示し、
  * 列の末尾に同じ幅の余白 (pr-8) を置いて、最後まで送ると最後の項目がフェードの外に出るようにする。
+ * 項目の多い目次 (県の節) は `wrap` で折り返し、送らなくても全項目が表示領域に入るようにする
+ * (幅 375px の 1 行では 18 件のうち 3 件しか入らなかった。AREA-TOC-MOBILE-01)。
+ * リンクの高さは Button sm の 28px。スマホの幅 (sm 未満) と指で押す端末 (pointer: coarse) は最小の高さを 44px にして、タップ領域の目安を満たす
+ * (リンクの行 LINK_ROW_SIZE_CLASS と同じ決まり。折り返す目次は行間が 4px なので、高さを足さないと上下の行を押し間違える)。
  * JS を持たない。
  */
 export const LINK_ROW_SCROLL_CLASS = 'overflow-x-auto [scrollbar-width:none]';
 export const LINK_ROW_LIST_CLASS = 'flex w-max items-center gap-1 pr-8';
 const LINK_ROW_FADE_CLASS =
   'pointer-events-none absolute inset-y-0 right-0 w-8 bg-linear-to-l from-background';
+const LINK_ROW_WRAP_CLASS = 'flex w-full min-w-0 flex-wrap items-center gap-1';
 
 export function linkRowItemClass(current = false) {
   return cn(
     buttonVariants({ variant: current ? 'outline' : 'ghost', size: 'sm' }),
-    'shrink-0',
+    // 幅 640px 以上のタッチ端末 (タブレット) も指で押すので、pointer: coarse でも 44px にする (UI-FOLLOWUP-02)
+    'shrink-0 max-sm:min-h-11 pointer-coarse:min-h-11',
     !current && 'text-muted-foreground'
   );
 }
@@ -42,13 +48,23 @@ export function linkRowItemClass(current = false) {
 export function LinkRowFrame({
   label,
   className,
+  wrap = false,
   children,
 }: {
   /** nav の名前 (読み上げ用) */
   label: string;
   className?: string;
+  /** 1 行に保たず折り返す (横スクロールとフェードを持たない)。項目の多い目次に使う */
+  wrap?: boolean;
   children: ReactNode;
 }) {
+  if (wrap) {
+    return (
+      <nav aria-label={label} className={cn(LINK_ROW_WRAP_CLASS, className)}>
+        {children}
+      </nav>
+    );
+  }
   return (
     <nav aria-label={label} className={cn('relative w-full min-w-0', className)}>
       <div className={LINK_ROW_SCROLL_CLASS}>
@@ -63,15 +79,18 @@ export function LinkRowNav({
   label,
   items,
   className,
+  wrap,
 }: {
   /** nav の名前 (読み上げ用) */
   label: string;
   items: readonly LinkRowNavItem[];
   className?: string;
+  /** 1 行に保たず折り返す (LinkRowFrame の wrap) */
+  wrap?: boolean;
 }) {
   if (items.length === 0) return null;
   return (
-    <LinkRowFrame label={label} className={className}>
+    <LinkRowFrame label={label} className={className} wrap={wrap}>
       {items.map((item) => (
         <Link
           key={item.key}

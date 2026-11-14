@@ -69,7 +69,7 @@
       ]
     },
     {
-      "key": "public-assistance-households-and-budget-1",
+      "key": "public-assistance-recipient-trend-2",
       "title": "生活保護被保護実世帯数（月平均・一般世帯千世帯当たり）",
       "rankingKeys": [
         "households-on-public-assistance-per-1000"
@@ -79,7 +79,7 @@
       ]
     },
     {
-      "key": "public-assistance-households-and-budget-2",
+      "key": "public-assistance-households-and-budget-1",
       "title": "生活保護費（都道府県財政）",
       "rankingKeys": [
         "public-assistance-expenses-prefecture"
@@ -112,33 +112,33 @@
   "sections": [
     {
       "key": "public-assistance-recipient-trend",
-      "title": "生活保護を受ける住民の割合はどのように推移しているか",
-      "concern": "地域で経済的に困窮し生活保護を必要とする人が増えているのか不安だ。",
+      "title": "生活保護を受けている人や世帯の割合は、自分の県でどのくらいか",
+      "concern": "自分の県で生活保護を受ける人や世帯がどのくらいの割合で、全国と比べて多いのか少ないのかを知りたい。",
       "metricGroupKeys": [
-        "public-assistance-recipient-trend-1"
+        "public-assistance-recipient-trend-1",
+        "public-assistance-recipient-trend-2"
       ]
     },
     {
       "key": "public-assistance-households-and-budget",
-      "title": "生活保護世帯の割合や自治体の財政負担はどのくらいか",
-      "concern": "生活保護を受給する世帯の多さや自治体財政への影響を知りたい。",
+      "title": "生活保護費はどのように推移してきたか",
+      "concern": "生活保護にかかる費用が県の財政の中でどう変わってきたのか知りたい。",
       "metricGroupKeys": [
-        "public-assistance-households-and-budget-1",
-        "public-assistance-households-and-budget-2"
+        "public-assistance-households-and-budget-1"
       ]
     },
     {
       "key": "poverty-support-consultation",
-      "title": "生活保護に至る前の生活困窮に関する相談はどれくらいあるか",
-      "concern": "生活困窮者のセーフティネットとなる相談窓口が機能しているか気になる。",
+      "title": "生活保護に至る前の生活困窮の相談はどれくらい受け付けられているか",
+      "concern": "生活保護の手前で相談できる窓口がどれくらい使われているのか気になる。",
       "metricGroupKeys": [
         "poverty-support-consultation-1"
       ]
     },
     {
       "key": "public-assistance-facility-capacity",
-      "title": "受給者を支援する保護施設の受け入れ容量は十分か",
-      "concern": "施設入所が必要な受給者が適切に保護施設を利用できているか知りたい。",
+      "title": "受給者が入れる保護施設の定員はどう推移してきたか",
+      "concern": "施設への入所が必要な受給者に対して、保護施設の定員がどれくらいあるのか知りたい。",
       "metricGroupKeys": [
         "public-assistance-facility-capacity-1"
       ]

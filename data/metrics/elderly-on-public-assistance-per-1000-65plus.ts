@@ -33,22 +33,6 @@ export const elderlyOnPublicAssistancePer100065plus: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "人/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "人/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "seoTitle": "生活保護被保護高齢者数ランキング都道府県【2022年】｜1位沖縄県（61.8人）",
   "seoDescription": "2022年の生活保護被保護高齢者数の都道府県別ランキング。1位沖縄県（61.8人）、最下位富山県（6.8人）で9.1倍の格差。地図やグラフで47都道府県を比較。",

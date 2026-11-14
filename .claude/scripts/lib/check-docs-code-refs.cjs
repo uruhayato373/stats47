@@ -137,7 +137,7 @@ function findStaleRefs(root) {
 module.exports = { findStaleRefs, checkLine, buildIndex };
 
 if (require.main === module) {
-  const root = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..", "..");
+  const root = process.env.STATS47_SCAN_ROOT || path.resolve(__dirname, "..", "..", "..");
   const findings = findStaleRefs(root);
   if (process.argv.includes("--json")) {
     console.log(JSON.stringify({ findings }, null, 2));

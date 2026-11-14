@@ -44,9 +44,9 @@ stats47 の SNS 競合を**テーマ別の名乗りで巡回**し、フォロワ
    - X: アカウント検索 + 上記名乗り軸でハッシュタグ/キーワード検索
    - Instagram: business_discovery は不可 (memory `project_instagram_graph_api_setup`)。ハッシュタグ・手動巡回
 2. **各競合について記録**: handle / フォロワー数 (取得日) / 直近投稿頻度 / 直近で伸びた投稿 (テーマ・エンゲージ) / フォーマット
-3. **前回スキャンとの差分**: `reference/reports/*.md` の最新とフォロワー増減・新規競合をdiff
+3. **前回スキャンとの差分**: `data/sns/competitor-scans/*.md` の最新とフォロワー増減・新規競合をdiff
 4. **stats47 への示唆**: 取りこぼしている題材・フォーマット・名乗り軸を 3-5 個 (煽り追随ではなく信頼性×網羅性で差別化できる切り口)
-5. **レポート出力**: `.claude/skills/sns/competitor-scan/reference/reports/YYYY-MM-DD.md`
+5. **レポート出力**: `data/sns/competitor-scans/YYYY-MM-DD.md` (台帳 `sns.competitor-scans`)
 6. **TODO化**: 採択した未完了策だけを `.claude/todo/improvements.md` へID付きで追加
 
 ## 出力フォーマット
@@ -74,13 +74,13 @@ tags: [competitor]
 
 ## カタログ (§2) への反映 (★人間承認ゲート)
 
-競合の示唆を X 投稿カタログ (`sns-content-standards.md` §2-0 template / §2-8 相性 / §2-9 画像) に
-反映するときは、**§2-10 の承認手順に従う** (思いつきで rules を書き換えない):
+競合の示唆を X 投稿カタログ (台帳 `sns.x-catalog` の templates / affinity / imageKinds。意味は `sns-content-standards.md` §2-0 / §2-8 / §2-9) に
+反映するときは、**§2-10 の承認手順に従う** (思いつきで台帳を書き換えない):
 
 1. 本スキルのレポート「stats47 への示唆」から、カタログのどの行をどう変えるかを具体化する
    (例:「competitor が『◯◯県あるある』で伸びている → §2-8 で population×体験を ○→◎ に上げる」)。
-2. x-strategist が **diff 提案**として提示する (どのテーブルのどのセルを変えるか)。
-3. **ユーザーが承認してから** rules を編集し、`node .claude/scripts/lib/x-catalog.cjs --check` を通す。
+2. x-strategist が **diff 提案**として提示する (台帳のどの項目のどの値を変えるか)。
+3. **ユーザーが承認してから**台帳 `data/sns/x-catalog.json` を編集し、`node .claude/scripts/lib/x-catalog.cjs --check` と `npm run check-datasets` を通す。
 4. 反映後は `analyze-x-winning-patterns` の実測で効果を検証する (`evidence-based-judgment.md`)。
 
 ## やらないこと (意図的)
@@ -93,5 +93,5 @@ tags: [competitor]
 ## 関連
 
 - チャネル戦略・差別化軸: `.claude/rules/sns-content-standards.md` §0
-- 競合 memory: `project_competitor_riskmap_jp` / `feedback_sns_competitor_search` / `project_competitor_indicator_benchmark` / `reference_competitor_research_label`
+- 競合 memory: `project_competitor_riskmap_jp` / `feedback_sns_competitor_search` / `project_competitor_indicator_benchmark`
 - 週次運用への組み込み: `/sns-weekly-plan` Step 2

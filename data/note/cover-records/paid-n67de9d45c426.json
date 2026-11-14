@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "paid-n67de9d45c426",
+  "production": {
+    "id": "NCI-00314",
+    "policyId": "NCP-004",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "働く男性の趣味時間\n茨城県と大阪府",
+      "subline": "2021年・両県が同率1位",
+      "subject": "横長1280×670相当の完成カバー。紫と黄色。右に同じ大きさの無文字の趣味ノート2冊と無地の時計模型。同率1位の2県を対等に描く。人物・顔・手・架空の統計図なし。左側に太い見出し、下部に補足を独立した広い帯として置く。指定の全文・カテゴリ名と発行元stats47だけを載せる。幅320pxでも補足・カテゴリ名・署名まで明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・架空のグラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n67de9d45c426 2026-10-24公開API本文照合。記事題名「【2021年】趣味・娯楽時間ランキング！1位は茨城・大阪、最下位は沖縄・鹿児島で1.4倍の格差」。本文中の 2021年、仕事を持つ男性、茨城県、大阪府、55分 を確認。主題・対象年・分母・比較県を示し、因果・効能・新しい数値を加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "fceff5ee449ce7b1ccfce5505457e56940c69759e8e11a04a2f27f1659c62c6b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n67de9d45c426/revisions/fceff5ee449ce7b1ccfce5505457e56940c69759e8e11a04a2f27f1659c62c6b.png"
+      },
+      "bytes": 41158,
+      "id": "fceff5ee449ce7b1ccfce5505457e56940c69759e8e11a04a2f27f1659c62c6b",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:24.737Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312772875/rectangle_large_type_2_be02d3cf500dc7ed999bff99b70d9ec2.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "fceff5ee449ce7b1ccfce5505457e56940c69759e8e11a04a2f27f1659c62c6b"
+      }
+    },
+    {
+      "sha256": "f27a2af72ec0b61786d48c7acd75a4f8728c7038f41a32d3f06026eb7836e83e",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n67de9d45c426/revisions/f27a2af72ec0b61786d48c7acd75a4f8728c7038f41a32d3f06026eb7836e83e.png"
+      },
+      "bytes": 98864,
+      "id": "f27a2af72ec0b61786d48c7acd75a4f8728c7038f41a32d3f06026eb7836e83e",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:39:47.875Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "00f374680f43c9571b3375cba4bfb5593d0a59cc05147437bfbc76edcbb32413"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で主題・年・記事題名の順位/値/格差が読める。地図は値を持たない背景",
+        "reviewedAt": "2026-10-11T11:48:56.708Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "00f374680f43c9571b3375cba4bfb5593d0a59cc05147437bfbc76edcbb32413",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n67de9d45c426/inputs/00f374680f43c9571b3375cba4bfb5593d0a59cc05147437bfbc76edcbb32413.json"
+          },
+          "bytes": 1363
+        }
+      }
+    },
+    {
+      "sha256": "7905153790165762549fb929d300b00d81858a9f60d4834faeab2271cc7e8249",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n67de9d45c426/revisions/7905153790165762549fb929d300b00d81858a9f60d4834faeab2271cc7e8249.png"
+      },
+      "bytes": 89868,
+      "id": "7905153790165762549fb929d300b00d81858a9f60d4834faeab2271cc7e8249",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:55:08.915Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320256300/rectangle_large_type_2_231ae82d865d6ef886caf557fada4c1e.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "7905153790165762549fb929d300b00d81858a9f60d4834faeab2271cc7e8249"
+      }
+    },
+    {
+      "sha256": "ebc4b4626ddfb81c51a9e7f71a1f580d13a958b617c7fef46535f860a1eb674c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n67de9d45c426/revisions/ebc4b4626ddfb81c51a9e7f71a1f580d13a958b617c7fef46535f860a1eb674c.png"
+      },
+      "bytes": 44002,
+      "id": "ebc4b4626ddfb81c51a9e7f71a1f580d13a958b617c7fef46535f860a1eb674c",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:05:15.107Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "01893fda4e490d6543bfc4697234a5c3ea258b6ef7f192c942b6e0f7b613f677"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "256色減色版。320px相当で目視合格した2026-10-11-category-v1との平均画素差0.009/255で見た目は同一",
+        "reviewedAt": "2026-10-11T12:15:43.307Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "01893fda4e490d6543bfc4697234a5c3ea258b6ef7f192c942b6e0f7b613f677",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n67de9d45c426/inputs/01893fda4e490d6543bfc4697234a5c3ea258b6ef7f192c942b6e0f7b613f677.json"
+          },
+          "bytes": 1363
+        }
+      }
+    },
+    {
+      "sha256": "da4b681c4d3c38d247a00f48597174a4d0f53df21a3072e55504f3faa8b84bad",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/paid-n67de9d45c426/revisions/da4b681c4d3c38d247a00f48597174a4d0f53df21a3072e55504f3faa8b84bad.png"
+      },
+      "bytes": 1752633,
+      "id": "da4b681c4d3c38d247a00f48597174a4d0f53df21a3072e55504f3faa8b84bad",
+      "kind": "candidate",
+      "version": "pop-NCP-004-v3-af5dd571230f",
+      "createdAt": "2026-10-23T16:40:24.137Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "704b6a416ce7fd8c3e7ffed5f3572141f9508789452c7a1cb4512b96c3f52908"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の主題・対象範囲・比較県、全掲載文字、無人の題材、署名を原寸/320pxで目視し、管理画面で公開旧版と新候補を比較。茨城と大阪の同率1位を明示。",
+        "reviewedAt": "2026-10-23T16:42:53.237Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "704b6a416ce7fd8c3e7ffed5f3572141f9508789452c7a1cb4512b96c3f52908",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/paid-n67de9d45c426/inputs/704b6a416ce7fd8c3e7ffed5f3572141f9508789452c7a1cb4512b96c3f52908.json"
+          },
+          "bytes": 9178
+        },
+        "production": {
+          "id": "NCI-00314",
+          "policyId": "NCP-004",
+          "policyVersion": 3,
+          "planSha256": "af5dd571230f937699577004023a11c33553c5744a32b6768c1e15f75c9525a7"
+        }
+      }
+    }
+  ]
+}

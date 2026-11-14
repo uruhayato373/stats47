@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "recovered-n250b7aab145f",
+  "production": {
+    "id": "NCI-00396",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "スキー・スノーボード\n1位は北海道",
+      "subline": "2021年・10歳以上",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人の雪山に置いたスキー板とスノーボードを描く。スキーヤー・人物・動物は描かない。左に太い見出し、下に補足を太い帯で配置する。指定の全文と発行元stats47だけを載せる。幅320pxでも全行を明瞭に読める大きさにする。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n250b7aab145f 2026-10-23公開API本文照合。記事題名「【2021年版】スキー・スノーボードをした人が多い県は？ 1位は北海道｜都道府県ランキング」。本文中の「北海道」「2021」「10歳以上」を確認。カバーは主題、対象年・集計範囲、掲載順位のみ示し、因果・効能・新しい数値は加えない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "389cda2b777d8130996643f9c72f11b26abcbabc6429746ca3a8c13d9ea73f1c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n250b7aab145f/revisions/389cda2b777d8130996643f9c72f11b26abcbabc6429746ca3a8c13d9ea73f1c.png"
+      },
+      "bytes": 107590,
+      "id": "389cda2b777d8130996643f9c72f11b26abcbabc6429746ca3a8c13d9ea73f1c",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:55.236Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312773739/rectangle_large_type_2_2eb89505d2c59c2f468d72157d3f9d8e.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "389cda2b777d8130996643f9c72f11b26abcbabc6429746ca3a8c13d9ea73f1c"
+      }
+    },
+    {
+      "sha256": "8805dace712e04220dbf03b47896da5f998a48d7ae030d1bce9bc4c1e3ec3d08",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n250b7aab145f/revisions/8805dace712e04220dbf03b47896da5f998a48d7ae030d1bce9bc4c1e3ec3d08.png"
+      },
+      "bytes": 117308,
+      "id": "8805dace712e04220dbf03b47896da5f998a48d7ae030d1bce9bc4c1e3ec3d08",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:14:24.758Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "79131e3b36fe56d8b8a7deb65980b448907a4c2e6cb4db28e95662d90f3237c9"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.841Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/sports-participation-rate-skiing/values.json",
+        "sourceSha256": "5635fe8ce90caefb464893c7996a618efa3354c02f944bdd4e979845ad7d42b4",
+        "input": {
+          "sha256": "79131e3b36fe56d8b8a7deb65980b448907a4c2e6cb4db28e95662d90f3237c9",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n250b7aab145f/inputs/79131e3b36fe56d8b8a7deb65980b448907a4c2e6cb4db28e95662d90f3237c9.json"
+          },
+          "bytes": 6595
+        }
+      }
+    },
+    {
+      "sha256": "e378036fa72a79486033932178d1f1482bdf3b2f68833d4fd507fccf8e74eaeb",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/recovered-n250b7aab145f/revisions/e378036fa72a79486033932178d1f1482bdf3b2f68833d4fd507fccf8e74eaeb.png"
+      },
+      "bytes": 1761178,
+      "id": "e378036fa72a79486033932178d1f1482bdf3b2f68833d4fd507fccf8e74eaeb",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-672dfac5d00e",
+      "createdAt": "2026-10-23T14:08:10.046Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "25b09d37db7293a1326484151641b180036e7a8f65658891e01c3e32dc8fe911"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・年齢・首位県と全掲載文字を原寸/320pxで確認。NCI-00436は2001年・15歳以上、NCI-00450は山形県と長野県の同率首位。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T14:09:53.823Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "25b09d37db7293a1326484151641b180036e7a8f65658891e01c3e32dc8fe911",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/recovered-n250b7aab145f/inputs/25b09d37db7293a1326484151641b180036e7a8f65658891e01c3e32dc8fe911.json"
+          },
+          "bytes": 8830
+        },
+        "production": {
+          "id": "NCI-00396",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "672dfac5d00e7b197eee38eae14bc6e893f0985322ede1e59fc45b10159ac1a4"
+        }
+      }
+    }
+  ]
+}

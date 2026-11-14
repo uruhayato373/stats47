@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-prc-a17",
+  "production": {
+    "id": "NCI-00200",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "陸上競技場と\n野球場の数",
+      "subline": "47都道府県を比較",
+      "subject": "陸上のスターティングブロックと、野球のグローブ、白いボールを大きく描く。ボールに文字を入れない。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n30dc733b8419 本文確認2026-11-04。陸上競技場は北海道90施設が最多。陸上競技場と野球場の施設数の比較。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "2939d648133e5ad7baf2a96978bdcda5eb4d696a0687493a1827f954f10dd39a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a17/revisions/2939d648133e5ad7baf2a96978bdcda5eb4d696a0687493a1827f954f10dd39a.png"
+      },
+      "bytes": 37074,
+      "id": "2939d648133e5ad7baf2a96978bdcda5eb4d696a0687493a1827f954f10dd39a",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:08:18.141Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e25187cb872e6e37e52c3939ecca9aa68a45ef047869d615b47756f648a3d81b"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:13:22.997Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "e25187cb872e6e37e52c3939ecca9aa68a45ef047869d615b47756f648a3d81b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a17/inputs/e25187cb872e6e37e52c3939ecca9aa68a45ef047869d615b47756f648a3d81b.json"
+          },
+          "bytes": 1301
+        }
+      }
+    },
+    {
+      "sha256": "307632b6e56a6fbf74924b244a133fadf779b86cbd75a83d1e43afe6483c0fde",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a17/revisions/307632b6e56a6fbf74924b244a133fadf779b86cbd75a83d1e43afe6483c0fde.png"
+      },
+      "bytes": 98602,
+      "id": "307632b6e56a6fbf74924b244a133fadf779b86cbd75a83d1e43afe6483c0fde",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:52.919Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324161407/rectangle_large_type_2_dd369533a10fe2fb7078b70f94b48176.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "307632b6e56a6fbf74924b244a133fadf779b86cbd75a83d1e43afe6483c0fde"
+      }
+    },
+    {
+      "sha256": "98de29c6c4d7806691968e9df6259246232afcdd465ab40f44a418ae10e663a1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a17/revisions/98de29c6c4d7806691968e9df6259246232afcdd465ab40f44a418ae10e663a1.png"
+      },
+      "bytes": 1876777,
+      "id": "98de29c6c4d7806691968e9df6259246232afcdd465ab40f44a418ae10e663a1",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-53857a0c95f8",
+      "createdAt": "2026-11-04T01:53:39.224Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "bfcdec4365380efba204566ccf4cfa3b4d3fdde202dbb0d4099ab54d21ac4314"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:55:13.844Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "bfcdec4365380efba204566ccf4cfa3b4d3fdde202dbb0d4099ab54d21ac4314",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a17/inputs/bfcdec4365380efba204566ccf4cfa3b4d3fdde202dbb0d4099ab54d21ac4314.json"
+          },
+          "bytes": 8163
+        },
+        "production": {
+          "id": "NCI-00200",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "53857a0c95f8c7a69f4590e15eeaa85e377536651c4ad41cddbe2524a1ba46ee"
+        }
+      }
+    }
+  ]
+}

@@ -11,7 +11,7 @@ import { useCallback, useRef } from 'react';
 
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { formatValueWithPrecision } from '@stats47/utils';
-import { useD3Tooltip } from '@stats47/visualization';
+import { estimateTextWidth, useD3Tooltip, useReadableFontSize } from '@stats47/visualization';
 
 export interface DistributionHistogramBin {
   x0: number;
@@ -36,13 +36,29 @@ interface Props {
 }
 
 const WIDTH = 640;
-const HEIGHT = 170;
 const PAD_X = 12;
-const PAD_TOP = 16;
-const PAD_BOTTOM = 34;
 const PLOT_WIDTH = WIDTH - PAD_X * 2;
-const PLOT_HEIGHT = HEIGHT - PAD_TOP - PAD_BOTTOM;
-const BASELINE = PAD_TOP + PLOT_HEIGHT;
+const PLOT_HEIGHT = 120;
+/** 等倍表示での文字サイズ (viewBox 単位)。縮小表示では画面上で読める大きさまで上げる */
+const BASE_FONT_SIZE = 10;
+/** 基線から端のラベルの上端までに空ける高さ (ラグの縦ティック 10 + 余白) */
+const RUG_SPACE = 14;
+/** 中央値のラベルと線・端の間隔 */
+const LABEL_GAP = 4;
+
+/**
+ * 文字サイズから上下の余白を決める。文字を大きくした分だけ viewBox を縦に伸ばし、棒の高さは変えない。
+ * 基準の文字 (10) では従来の余白 (上 16・下 34、viewBox 640×170) になる。
+ */
+function histogramLayout(fontSize: number) {
+  const padTop = fontSize + 6;
+  // 端のラベルのベースラインから下端まで (文字の下に出る部分が切れない高さ)
+  const labelDescent = Math.max(6, Math.ceil(fontSize * 0.3));
+  const padBottom = Math.max(34, Math.ceil(RUG_SPACE + fontSize * 0.85 + labelDescent));
+  const baseline = padTop + PLOT_HEIGHT;
+  const height = baseline + padBottom;
+  return { padTop, baseline, height, edgeLabelY: height - labelDescent };
+}
 
 const BAR_FILL = 'hsl(var(--primary) / 0.3)';
 const BAR_FILL_PREF = 'hsl(var(--primary))';
@@ -92,6 +108,9 @@ export function DistributionHistogram({
   const unit = formatUnitForDisplay(rawUnit);
   const svgRef = useRef<SVGSVGElement>(null);
   const { showStackedTooltip, hideTooltip } = useD3Tooltip();
+  // 幅 640 の viewBox をスマホの幅に縮めると 10 の文字が約 4px になる。表示幅から文字サイズを逆算する
+  const fontSize = useReadableFontSize(svgRef, WIDTH, BASE_FONT_SIZE);
+  const { padTop, baseline, height: viewHeight, edgeLabelY } = histogramLayout(fontSize);
 
   const maxCount = Math.max(1, ...bins.map((bin) => bin.count));
   const slot = PLOT_WIDTH / Math.max(1, bins.length);
@@ -125,10 +144,15 @@ export function DistributionHistogram({
 
   if (bins.length === 0) return null;
 
+  const medianLabel = `中央値 ${formatValueWithPrecision(median, precision)}${unit}`;
+  // 中央値が右寄りのときはラベルを線の左へ回す (右端で切らない)
+  const medianLabelOnLeft =
+    medianX + LABEL_GAP + estimateTextWidth(medianLabel, fontSize) > WIDTH - PAD_X;
+
   return (
     <svg
       ref={svgRef}
-      viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
+      viewBox={`0 0 ${WIDTH} ${viewHeight}`}
       width="100%"
       role="img"
       aria-label={ariaLabel}
@@ -142,7 +166,7 @@ export function DistributionHistogram({
           <rect
             key={`bar-${index}`}
             x={PAD_X + slot * index + (slot - barWidth) / 2}
-            y={BASELINE - height}
+            y={baseline - height}
             width={barWidth}
             height={height}
             fill={bin.countInPref > 0 ? BAR_FILL_PREF : BAR_FILL}
@@ -157,8 +181,8 @@ export function DistributionHistogram({
           key={`rug-${index}`}
           x1={valueToX(value, bins)}
           x2={valueToX(value, bins)}
-          y1={BASELINE + 2}
-          y2={BASELINE + 10}
+          y1={baseline + 2}
+          y2={baseline + 10}
           stroke={RUG_STROKE}
           strokeWidth={1.5}
         />
@@ -168,40 +192,40 @@ export function DistributionHistogram({
       <line
         x1={medianX}
         x2={medianX}
-        y1={PAD_TOP - 4}
-        y2={BASELINE}
+        y1={padTop - 4}
+        y2={baseline}
         stroke={MEDIAN_STROKE}
         strokeWidth={1}
         strokeDasharray="4 3"
         opacity={0.6}
       />
       <text
-        x={medianX + 4}
-        y={PAD_TOP + 6}
-        fontSize={10}
+        x={medianLabelOnLeft ? medianX - LABEL_GAP : medianX + LABEL_GAP}
+        y={padTop + 6}
+        fontSize={fontSize}
         fill={LABEL_FILL}
+        textAnchor={medianLabelOnLeft ? 'end' : 'start'}
       >
-        中央値 {formatValueWithPrecision(median, precision)}
-        {unit}
+        {medianLabel}
       </text>
 
       {/* 基線と端ラベル */}
       <line
         x1={PAD_X}
         x2={PAD_X + PLOT_WIDTH}
-        y1={BASELINE}
-        y2={BASELINE}
+        y1={baseline}
+        y2={baseline}
         stroke={AXIS_STROKE}
       />
-      <text x={PAD_X} y={HEIGHT - 6} fontSize={10} fill={LABEL_FILL}>
+      <text x={PAD_X} y={edgeLabelY} fontSize={fontSize} fill={LABEL_FILL} textAnchor="start">
         {bins[0].isUnderflow
           ? `${compactFormat.format(bins[0].x1)}${unit} 未満`
           : `${compactFormat.format(bins[0].x0)}${unit}`}
       </text>
       <text
         x={PAD_X + PLOT_WIDTH}
-        y={HEIGHT - 6}
-        fontSize={10}
+        y={edgeLabelY}
+        fontSize={fontSize}
         fill={LABEL_FILL}
         textAnchor="end"
       >

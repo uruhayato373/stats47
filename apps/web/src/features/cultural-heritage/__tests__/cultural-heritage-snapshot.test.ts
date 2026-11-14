@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { createHash, webcrypto } from 'node:crypto';
 import { TextEncoder as NodeTextEncoder } from 'node:util';
 

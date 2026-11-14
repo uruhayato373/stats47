@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-prc-a45",
+  "production": {
+    "id": "NCI-00227",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "パンの購入量\n1位は大阪市",
+      "subline": "近畿の市が上位に並ぶ",
+      "subject": "焼き立ての食パン、クロワッサン、丸パンを木の板に載せて大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/nadef03ea09ad 本文確認2026-11-04。パンの購入量は大阪市が最多で近畿の市が上位に並ぶ。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "97f20ee42e87a0ef5d8e2927b6318249aa945ebd82db7e448a60e99fd767bc00",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a45/revisions/97f20ee42e87a0ef5d8e2927b6318249aa945ebd82db7e448a60e99fd767bc00.png"
+      },
+      "bytes": 38848,
+      "id": "97f20ee42e87a0ef5d8e2927b6318249aa945ebd82db7e448a60e99fd767bc00",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:09:59.723Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "fedd66ae5e73661e775dff0e10aeabbdda2e4cb16845da766a0be7ebd27c64ce"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:14:00.225Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "fedd66ae5e73661e775dff0e10aeabbdda2e4cb16845da766a0be7ebd27c64ce",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a45/inputs/fedd66ae5e73661e775dff0e10aeabbdda2e4cb16845da766a0be7ebd27c64ce.json"
+          },
+          "bytes": 1314
+        }
+      }
+    },
+    {
+      "sha256": "5a6211f904aa4da594faeaac02df1e0a825435e872f2a47603a4500293587549",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a45/revisions/5a6211f904aa4da594faeaac02df1e0a825435e872f2a47603a4500293587549.png"
+      },
+      "bytes": 90417,
+      "id": "5a6211f904aa4da594faeaac02df1e0a825435e872f2a47603a4500293587549",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:22:11.937Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324189918/rectangle_large_type_2_0fda3a95dc1e8e897090ad38931e2d45.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "5a6211f904aa4da594faeaac02df1e0a825435e872f2a47603a4500293587549"
+      }
+    },
+    {
+      "sha256": "a3167f49390c4ae1b5725d5e43c8e5a70ff7416e2e7bc1fd44905774f15af9b4",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a45/revisions/a3167f49390c4ae1b5725d5e43c8e5a70ff7416e2e7bc1fd44905774f15af9b4.png"
+      },
+      "bytes": 1859566,
+      "id": "a3167f49390c4ae1b5725d5e43c8e5a70ff7416e2e7bc1fd44905774f15af9b4",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-35c2a03a39ea",
+      "createdAt": "2026-11-04T02:21:18.624Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "46adca7ed4c53418425fab0b12be772e9ee933146fe61473ea804e858414d40e"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T02:23:51.265Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "46adca7ed4c53418425fab0b12be772e9ee933146fe61473ea804e858414d40e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a45/inputs/46adca7ed4c53418425fab0b12be772e9ee933146fe61473ea804e858414d40e.json"
+          },
+          "bytes": 8110
+        },
+        "production": {
+          "id": "NCI-00227",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "35c2a03a39ea03f5b2c726a26290db3e688f5a9fcf0a0801f8c2eb97fc9d8f0b"
+        }
+      }
+    }
+  ]
+}

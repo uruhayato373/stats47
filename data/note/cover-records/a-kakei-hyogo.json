@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-kakei-hyogo",
+  "production": {
+    "id": "NCI-00072",
+    "policyId": "NCP-002",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "兵庫県の家計\n交通・通信に注目",
+      "subline": "神戸市・2024年\n二人以上の世帯",
+      "subject": "添付は兵庫県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無文字の定期券の模型を小さく1点だけ。車両や家の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+      "evidence": "https://note.com/stats47/n/n6f5ab18ba6ff 2026-10-23公開API本文照合。神戸市の2024年・二人以上の世帯の家計調査。交通・通信0.73倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は兵庫県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は神戸市であり県全域の観測図ではない。人物・キャラクターなし。",
+      "dataScope": {
+        "place": "神戸市",
+        "year": "2024",
+        "households": "二人以上の世帯"
+      }
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "2459a4c19047193e3319c60e1405f36afebec296854c0c8530d36a6cf186cd6c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-hyogo/revisions/2459a4c19047193e3319c60e1405f36afebec296854c0c8530d36a6cf186cd6c.png"
+      },
+      "bytes": 66101,
+      "id": "2459a4c19047193e3319c60e1405f36afebec296854c0c8530d36a6cf186cd6c",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:01.373Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312771237/rectangle_large_type_2_1c52cac47a7b1859a2a1be84f78fbb1c.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "2459a4c19047193e3319c60e1405f36afebec296854c0c8530d36a6cf186cd6c"
+      }
+    },
+    {
+      "sha256": "f5b9e70905d777e9655bbb5bbe4573dc7d9745a9d9c7cee4e18eaae45bdc4e1a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-hyogo/revisions/f5b9e70905d777e9655bbb5bbe4573dc7d9745a9d9c7cee4e18eaae45bdc4e1a.png"
+      },
+      "bytes": 104778,
+      "id": "f5b9e70905d777e9655bbb5bbe4573dc7d9745a9d9c7cee4e18eaae45bdc4e1a",
+      "kind": "candidate",
+      "version": "2026-10-02-household-r1",
+      "createdAt": "2026-10-02T03:18:04.487Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "7e9b525ade4530f26a2d9c8752b40fdfa76db5a745a43341b814efb01659af6b"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+        "reviewedAt": "2026-10-02T05:27:41.112Z"
+      },
+      "provenance": {
+        "renderer": "bold-note-cover",
+        "sourceUrl": "https://storage.stats47.jp/app/stats/transport-communication-expenditure-total/values.json",
+        "sourceSha256": "05bc5256a35560cef8d78d1eaa97b2a6aad48561fef8e246b00beb1ffcacc30a"
+      }
+    },
+    {
+      "sha256": "771929c9770205ab38351ae9cf80117b5002062455f2d01b0d34630505f124b3",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-hyogo/revisions/771929c9770205ab38351ae9cf80117b5002062455f2d01b0d34630505f124b3.png"
+      },
+      "bytes": 109540,
+      "id": "771929c9770205ab38351ae9cf80117b5002062455f2d01b0d34630505f124b3",
+      "kind": "r2-archive",
+      "version": "legacy-r2-import-2026-10-02",
+      "createdAt": "2026-10-02T03:28:33.013Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Legacy R2 asset preserved; not adopted for note",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "legacy-public-r2",
+        "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-hyogo/images/cover-1280x670.png",
+        "sourceSha256": "771929c9770205ab38351ae9cf80117b5002062455f2d01b0d34630505f124b3"
+      }
+    },
+    {
+      "sha256": "d5dccfba948e4a89a74cebfdc88f353dc02f744164ecf4d29dbb0469a8e20642",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-hyogo/revisions/d5dccfba948e4a89a74cebfdc88f353dc02f744164ecf4d29dbb0469a8e20642.png"
+      },
+      "bytes": 1525695,
+      "id": "d5dccfba948e4a89a74cebfdc88f353dc02f744164ecf4d29dbb0469a8e20642",
+      "kind": "candidate",
+      "version": "pop-NCP-002-v3-afbdd536d2dd",
+      "createdAt": "2026-10-23T09:32:00.916Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e6699255d9dc2a62cb1213a8c04fd8547c5172b08288e6d5a38aa090dbdb3a05"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の神戸市・2024年・二人以上の世帯と県輪郭、全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T09:47:20.708Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "e6699255d9dc2a62cb1213a8c04fd8547c5172b08288e6d5a38aa090dbdb3a05",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-hyogo/inputs/e6699255d9dc2a62cb1213a8c04fd8547c5172b08288e6d5a38aa090dbdb3a05.json"
+          },
+          "bytes": 12981
+        },
+        "production": {
+          "id": "NCI-00072",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "afbdd536d2dd349fcbe0e19269b3ff91b89ce317ed7243cd41b461d3d8741425"
+        }
+      }
+    }
+  ]
+}

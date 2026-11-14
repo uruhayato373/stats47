@@ -211,7 +211,50 @@ export function lintImageTypeSvg(filename, svg) {
   if (/<svg[^>]*data-scope="municipality"/.test(String(svg)) && !/<svg[^>]*data-ward-mode="(?:merged|split)"/.test(String(svg)))
     errors.push(`市区町村の型の画像に統合か分割かの印が無い (data-ward-mode) (${path_base(filename)})`);
   if (imageTemplateOf(svg) === 'scatter') errors.push(...scatterTypeErrors(filename, svg));
-  return { errors, warnings: [] };
+  // 2026-11-03 の描き直しの図が公開中に残る間は数えるだけにする (公開は止めない)。型は 2026-11-14 に直した
+  const warnings = findImageTypeCopyDefects(svg).map((defect) => `${defect} (${path_base(filename)})`);
+  return { errors, warnings };
+}
+
+// 型の枠 (apps/admin/lib/template-sample-frame.ts の SAMPLE_FRAME): 題は x=64・y=120 から右端 1016 まで
+const TYPE_TITLE = /<text x="64(?:\.0)?" y="120(?:\.0)?" font-size="([\d.]+)"[^>]*>([^<]+)<\/text>/;
+const TYPE_FRAME_RIGHT = 1016;
+const TYPE_TITLE_TOLERANCE_PX = 2;
+
+/**
+ * 型の画像の文字の欠け: 出典名の無い「出典：」だけの行と、枠の右端を越える題。
+ * 題の幅は推定 (全角 1em・半角 0.55em) なので、わずかな超過は数えない。
+ * @param {string} svg
+ * @returns {string[]}
+ */
+export function findImageTypeCopyDefects(svg) {
+  const defects = [];
+  if (/<text\b[^>]*>出典[：:]\s*<\/text>/.test(String(svg))) defects.push('型の画像の出典の行に出典名が無い');
+  const title = TYPE_TITLE.exec(String(svg));
+  if (title) {
+    const right = 64 + estimateTextUnits(decodeXmlEntities(title[2])) * Number(title[1]);
+    if (right > TYPE_FRAME_RIGHT + TYPE_TITLE_TOLERANCE_PX)
+      defects.push(`型の画像の題が枠の右端を越える (${title[1]}px・推定 ${Math.round(right)} > ${TYPE_FRAME_RIGHT}): ${title[2]}`);
+  }
+  return defects;
+}
+
+/**
+ * 型の画像 (幅 1080) の文字の下限。スマホのブログ本文では約 360px 幅 (1/3) で表示されるので、30 で画面上 10px になる
+ * (2026-11-14 オーナー決定・CHART-AXIS-READABILITY-01)。描画側の正本は data-cards/chart-theme.ts の TEMPLATE_MIN_FONT_SIZE。
+ */
+export const TEMPLATE_MIN_FONT_SIZE = 30;
+
+/** 型の画像で、下限より小さい文字 (text と tspan の font-size) を `<大きさ> <文字>` の形で返す */
+export function findTemplateFontFloorDefects(svg, floor = TEMPLATE_MIN_FONT_SIZE) {
+  const source = String(svg);
+  if (!/data-image-template="/.test(source)) return [];
+  const defects = [];
+  for (const m of source.matchAll(/<(text|tspan)\b[^>]*\bfont-size="([\d.]+)(?:px)?"[^>]*>([^<]*)/g)) {
+    const size = Number(m[2]);
+    if (size < floor) defects.push(`${size} ${decodeXmlEntities(m[3]).trim()}`);
+  }
+  return defects;
 }
 
 const texts = (svg) => [...String(svg).matchAll(/<text\b[^>]*>([^<]*)<\/text>/g)].map((m) => m[1]);

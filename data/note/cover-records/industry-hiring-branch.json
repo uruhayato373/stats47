@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "industry-hiring-branch",
+  "production": {
+    "id": "NCI-00284",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": null
+  },
+  "revisions": []
+}

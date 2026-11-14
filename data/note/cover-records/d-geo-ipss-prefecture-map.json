@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "d-geo-ipss-prefecture-map",
+  "production": {
+    "id": "NCI-00244",
+    "policyId": "NCP-006",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "将来人口データ\n地図用に整える",
+      "subline": "47都道府県・2050年推計\nコード・辞書・検算付き",
+      "subject": "データ整備カテゴリの成果物を示す机上の静物。青緑と黄色、クリームの紙。左に主見出し2行、右に無文字のファイルフォルダー1冊と無文字の辞書のような資料冊子1冊だけ。閉じた表紙・まっさらな紙で用途を示す。地図・県境・市町村・グラフ・架空の実データ・コード・商品ファイルの本数や数値・行政UIは一切描かない。実物商品の画像と誤認させない温かなイラスト。補足2行を大きな全幅帯に。1280×670相当、約1.91:1の横長。主見出しは濃紺の極太文字で大きく、補足は下部の太い帯に各行を1280px換算で高さ64px程度以上で入れる。上部のカテゴリ名も読みやすく、文字の四辺は余白を保つ。指定外の文字・数字・URL・ロゴ・細かな図表は入れない。道具の表面・紙・画面はすべて無文字。人物・顔・手・動物・キャラクター・擬人化は一切描かない。",
+      "evidence": "https://note.com/stats47/n/n137cfc540d23 2026-10-15公開無料部分と掲載タイトル確認。有料部分は再利用の手順、データ辞書、SHA-256、47行等の検算を提供。対象は47都道府県、2020年基準の2050年人口増減率の推計。市町村データや境界ポリゴンの同梱、地価等との空間交差分析は含まれない。予測を確実な未来とせず、カバーに分析結果や架空の収録内容を描かない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "350e4f6125db7ddadab47f5833d460bb951f8b412c4c7191088b9b6f4bd80438",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-geo-ipss-prefecture-map/revisions/350e4f6125db7ddadab47f5833d460bb951f8b412c4c7191088b9b6f4bd80438.png"
+      },
+      "bytes": 34321,
+      "id": "350e4f6125db7ddadab47f5833d460bb951f8b412c4c7191088b9b6f4bd80438",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:04.244Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312772458/rectangle_large_type_2_6da4e1818ff77fe196a5cf2f444d69a9.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "350e4f6125db7ddadab47f5833d460bb951f8b412c4c7191088b9b6f4bd80438"
+      }
+    },
+    {
+      "sha256": "403b7089d01257e7a6823ab07c59d127d730efa01d86b5330f680738514ab540",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-geo-ipss-prefecture-map/revisions/403b7089d01257e7a6823ab07c59d127d730efa01d86b5330f680738514ab540.png"
+      },
+      "bytes": 38329,
+      "id": "403b7089d01257e7a6823ab07c59d127d730efa01d86b5330f680738514ab540",
+      "kind": "candidate",
+      "version": "2026-10-11-palette-v2",
+      "createdAt": "2026-10-11T12:04:00.817Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "4b59ee4d208934a6245f66f3f0f2dfa9274a51d5f495565fc1f1c1e690002e58"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出し・記事の分析結果の県別地図または記事図が確認できる(平均画素差0.027/255で確認版と同一)",
+        "reviewedAt": "2026-10-11T12:18:06.231Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "4b59ee4d208934a6245f66f3f0f2dfa9274a51d5f495565fc1f1c1e690002e58",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-geo-ipss-prefecture-map/inputs/4b59ee4d208934a6245f66f3f0f2dfa9274a51d5f495565fc1f1c1e690002e58.json"
+          },
+          "bytes": 1380
+        }
+      }
+    },
+    {
+      "sha256": "58383cf69e823ae920069c0d09588945876a451608230f6150280bb8789319c4",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-geo-ipss-prefecture-map/revisions/58383cf69e823ae920069c0d09588945876a451608230f6150280bb8789319c4.png"
+      },
+      "bytes": 71177,
+      "id": "58383cf69e823ae920069c0d09588945876a451608230f6150280bb8789319c4",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T07:08:20.765Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323277062/rectangle_large_type_2_bae95ef8b526f36e61bea24e2037cb84.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "58383cf69e823ae920069c0d09588945876a451608230f6150280bb8789319c4"
+      }
+    },
+    {
+      "sha256": "65212bed11bee5f9fb5f1315f2e1a4111c5bfd993ae6e258253e508baffad081",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/d-geo-ipss-prefecture-map/revisions/65212bed11bee5f9fb5f1315f2e1a4111c5bfd993ae6e258253e508baffad081.png"
+      },
+      "bytes": 1647602,
+      "id": "65212bed11bee5f9fb5f1315f2e1a4111c5bfd993ae6e258253e508baffad081",
+      "kind": "candidate",
+      "version": "imagegen-multicategory-pilot-20261015",
+      "createdAt": "2026-10-15T07:10:36.727Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "8d8628ccd7dd3dc025bfe3a3291c1e797b9faef1be4eca5523956a7598f6f298"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "NCI-00244: 6カテゴリ試作の原寸/320pxの指定全文・補足・人物なし・題材とカテゴリ固有条件を個別確認済み。dataset-geo。2026-10-15ユーザーが表示中10件のnote反映を指示。候補SHA 65212bed11bee5f9fb5f1315f2e1a4111c5bfd993ae6e258253e508baffad081。",
+        "reviewedAt": "2026-10-15T07:23:15.640Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "8d8628ccd7dd3dc025bfe3a3291c1e797b9faef1be4eca5523956a7598f6f298",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/d-geo-ipss-prefecture-map/inputs/8d8628ccd7dd3dc025bfe3a3291c1e797b9faef1be4eca5523956a7598f6f298.json"
+          },
+          "bytes": 10942
+        },
+        "production": {
+          "id": "NCI-00244",
+          "policyId": "NCP-006",
+          "policyVersion": 3,
+          "planSha256": "25efe132a3ea6a09113303b88084a28a4a94e129c54d4ee0f150848b15b0c10c"
+        }
+      }
+    }
+  ]
+}

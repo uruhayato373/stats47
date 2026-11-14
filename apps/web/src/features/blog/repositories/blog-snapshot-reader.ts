@@ -1,5 +1,7 @@
 import 'server-only';
 
+import { cache } from 'react';
+
 import { resolveContentTag } from '@stats47/data-configs/content';
 import { createSnapshotReader } from '@stats47/r2-storage/server';
 
@@ -32,7 +34,15 @@ const readSnapshot = createSnapshotReader<BlogSnapshot, BlogSnapshot>({
   },
 });
 
-async function loadSnapshot(): Promise<BlogSnapshot> {
+/**
+ * 同じリクエストの中では 1 回だけ読む (React の cache() はリクエストごとに記憶を捨てる)。
+ *
+ * 記事のページは 1 回の描画でこのファイルの読み取りを 6 つ以上呼び、そのたびに snapshot 全体の取得・JSON の解析・
+ * 終了記事の除外・タグの正規化を繰り返していた (CF-RENDER-CPU-01)。上の「module-level キャッシュは持たない」は
+ * 変えていない。次のリクエストは必ず R2 を読み直す。失敗も同じリクエストの中では共有する (読み取りごとに取り直さない)。
+ * 返す snapshot は読み取りの間で共有するので、配列や記事を書き換えない (並べ替えは filter・map の後の新しい配列に行う)。
+ */
+const loadSnapshot = cache(async (): Promise<BlogSnapshot> => {
   // R2/CDN の旧索引が残っていても恒久終了記事への導線を復活させない。
   const snapshot = excludeGoneBlogArticles(await readSnapshot());
   const counts = new Map<string, number>();
@@ -48,7 +58,7 @@ async function loadSnapshot(): Promise<BlogSnapshot> {
       return { ...article, tags: [...tags.values()] };
     });
   return { ...snapshot, articles, tagMeta: [...counts].map(([tagKey, articleCount]) => ({ tagKey, articleCount })) };
-}
+});
 
 const canonicalTagKey = (value: string) => resolveContentTag(value)?.key ?? value;
 
@@ -208,15 +218,16 @@ export async function readTagsForArticlesFromR2(
 export async function readArticleSummariesByTagKeyFromR2(
   tagKey: string,
   limit = 10
-): Promise<Array<{ slug: string; title: string; description: string | null }>> {
+): Promise<Array<{ slug: string; title: string; description: string | null; publishedAt: string | null }>> {
   const snapshot = await loadSnapshot();
+  // 並べた基準 (公開日) も返し、タグの一覧のカードに日付を出す (HUB-LIST-FINDABILITY-01)
   return snapshot.articles
     .filter(
       (a) => a.published === true && a.tags.some((t) => t.tagKey === canonicalTagKey(tagKey))
     )
     .sort(compareByPublishedAtDesc)
     .slice(0, limit)
-    .map((a) => ({ slug: a.slug, title: a.title, description: a.description }));
+    .map((a) => ({ slug: a.slug, title: a.title, description: a.description, publishedAt: a.publishedAt ?? null }));
 }
 
 export async function readArticleSummariesByTagKeysFromR2(

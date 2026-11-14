@@ -165,6 +165,9 @@ export const PAGE_TEMPLATES: readonly PageTemplate[] = [
       { id: "products", url: "/products", why: "商品一覧" },
       { id: "product-item", url: "/products/data-p-01", why: "商品詳細" },
       { id: "about", url: "/about", why: "固定ページ" },
+      { id: "privacy", url: "/privacy", why: "固定ページ (文章だけの本文の列)" },
+      { id: "terms", url: "/terms", why: "固定ページ (文章だけの本文の列)" },
+      { id: "search", url: "/search?q=%E4%BA%BA%E5%8F%A3", why: "検索結果 (カードを並べるだけで線の格子から外れた実績がある。LINE-GRID-COLUMN-01)" },
     ],
     changedPathGlobs: [
       "apps/web/src/app/tag/**",

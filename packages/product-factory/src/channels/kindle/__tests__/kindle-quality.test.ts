@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { chapterMetrics, figureSource, type EpubChapter } from "../epub-inspect";
+import { chapterMetrics, figureSource, fullTableIndicator, type EpubChapter } from "../epub-inspect";
 import { bookQuality, chapterFlags, qualitySummary } from "../kindle-quality";
 
 function chapter(id: string, body: string): EpubChapter {
@@ -29,6 +29,35 @@ describe("kindle-quality (KINDLE-QUALITY-LOOP-01 の機械の検査)", () => {
     expect(chapterFlags(chapter("c3", `${FIGURE}<p>説明</p>${FULL_TABLE}`))).toEqual([]);
     // 短い章 (序・あとがき) は図が無くても印を付けない
     expect(chapterFlags(chapter("c4", "<p>短い</p>"))).toEqual([]);
+  });
+
+  it("全県表の見出しから指標・年・単位を読み、家計調査の県庁所在市の注記の有無を本ごとに出す", () => {
+    // 指標名に括弧があっても、最後の括弧だけを年と単位として読む
+    expect(fullTableIndicator("全47都道府県の値：小学校教育費（児童1人当たり）（2022年度・円）")).toEqual({
+      label: "小学校教育費（児童1人当たり）", period: "2022年度", unit: "円",
+    });
+    expect(fullTableIndicator("全47都道府県の値：大学収容力指数（2024年）")).toEqual({ label: "大学収容力指数", period: "2024年", unit: "" });
+    expect(fullTableIndicator("表1 家賃・通勤・気温")).toBeNull();
+    const table = (heading: string, note = "") => `<h3>${heading}</h3>${FULL_TABLE}<p>順位は値の大きい順です。${note}</p>`;
+    const book = bookQuality({
+      id: "K-S1-02", epubPath: "x.epub", epubSha256: "a",
+      parsed: {
+        title: "t", modified: null,
+        chapters: [
+          chapter("c1", table("全47都道府県の値：米の購入数量（2024年・kg）", "家計調査の値は、各県の県庁所在市（東京都は区部）の二人以上の世帯のものです。")),
+          chapter("c2", table("全47都道府県の値：外食費の割合（2023年度・％）")),
+        ],
+      },
+    });
+    expect(book.fullTableIndicators).toEqual([
+      { label: "米の購入数量", period: "2024年", unit: "kg" },
+      { label: "外食費の割合", period: "2023年度", unit: "％" },
+    ]);
+    expect(book.householdCityValues).toBe(true);
+    expect(bookQuality({ id: "K-S1-03", epubPath: "x.epub", epubSha256: "a", parsed: { title: "t", modified: null, chapters: [chapter("c", table("表1 家賃"))] } }))
+      .toMatchObject({ fullTableIndicators: [], householdCityValues: false, fullTables: 1 });
+    // EPUB の無い本は空の一覧にせず null (欠測を「指標なし」にしない)
+    expect(bookQuality({ id: "K-S1-04", epubPath: null, epubSha256: null, parsed: null })).toMatchObject({ fullTableIndicators: null, householdCityValues: null });
   });
 
   it("サイトへのリンクが無い本・UTM の無いリンクがある本に印を付ける", () => {

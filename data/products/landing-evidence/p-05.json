@@ -114,7 +114,7 @@
         "years": [
           2020
         ],
-        "retrievedAt": "2026-11-12T06:04:51.856Z",
+        "retrievedAt": "2026-11-14T10:08:30.412Z",
         "tableTitle": "Ｉ　健康・医療 / Ａ　人口・世帯",
         "rows": 5223,
         "areas": 1741,
@@ -132,7 +132,7 @@
             "status": "ok"
           }
         ],
-        "inputSha256": "926041e4346aac2a127436f49e2228542cc75e74e538155a3108b5ed67bce587"
+        "inputSha256": "5ec878491af6f6f63201f43b891e1a7a05e36e351463180c0ef6c9dcced6f5f4"
       }
     ],
     "results": 1799,
@@ -149,12 +149,12 @@
       },
       {
         "file": "analysis.xlsx",
-        "sha256": "5a4f74a0dfe59f5fe7a067605c399cb547d42b9023aae1d7b825e86192ce28b4",
-        "bytes": 275052
+        "sha256": "579f846cc11bf23bbf0d056c75182954eba96cac1443bd27a5b61fe6d60ed9cf",
+        "bytes": 275051
       },
       {
         "file": "SOURCES.csv",
-        "sha256": "724597fae9a976affe3fcece7839c3d43368242b7a3c39dc51fc0f57b5cee469",
+        "sha256": "f8959175d8e63e783d2b0820cee13468dff3177c2587cbe80960ee9838617159",
         "bytes": 2051
       },
       {
@@ -184,32 +184,32 @@
       },
       {
         "file": "images/national-clinics-per-population.png",
-        "sha256": "2f870ae1b11f43915f47e4f6a03a54487f9bb99f3a87cc8dae30173bc6dd9219",
-        "bytes": 196374
+        "sha256": "15141bdad911c852ad7fff8e493913f142b4ba8b965137ff956c98a2d5b573e2",
+        "bytes": 201389
       },
       {
         "file": "images/clinics-per-population.png",
-        "sha256": "b96ede4457bca9a27c91c269265f9273368d849d700b856dafc743cad6e63f82",
-        "bytes": 167830
+        "sha256": "2b5a19835ded390eb63eac09fe6900066b1c02c48f250db3fc19758ae105bced",
+        "bytes": 170456
       },
       {
         "file": "images/municipal-clinic-count.png",
-        "sha256": "9a9295490a9e5f12632ecc8adfeeb41baa6fe571f7988488b1edb6d8c919c55a",
-        "bytes": 161375
+        "sha256": "d9fb5320fc58ad8e02b1563a83f860a14cdb154c3f4808ddd3234c13f50ffb7b",
+        "bytes": 163287
       },
       {
         "file": "images/elderly-population-share.png",
-        "sha256": "a6870f27a16ae4c83fa216e093ca1f5fffa570e53ed63a83d8961b54f92a80c5",
-        "bytes": 163013
+        "sha256": "1e7b1f2e22dfc6abc48f7c7cd117e32de83f09de496206cc07a192a140dcd990",
+        "bytes": 163315
       },
       {
         "file": "images/analysis-file-preview.png",
-        "sha256": "75518d348652bdb576babf548865f323351e40e8a49a2af641ebd154029f894c",
-        "bytes": 118566
+        "sha256": "3ed795e0ae9d56c89511966643cd6698902f843c24512fea370d6aa3d6fc83a1",
+        "bytes": 121652
       },
       {
         "file": "inputs/municipal-health.json",
-        "sha256": "926041e4346aac2a127436f49e2228542cc75e74e538155a3108b5ed67bce587",
+        "sha256": "5ec878491af6f6f63201f43b891e1a7a05e36e351463180c0ef6c9dcced6f5f4",
         "bytes": 35613332
       },
       {
@@ -219,8 +219,8 @@
       },
       {
         "file": "analysis-pack.zip",
-        "sha256": "eeb5c54467d793ab3dc5743b86e3023bb9d3fb40d2be5afc7b0acf698bf3d224",
-        "bytes": 1913734
+        "sha256": "eae590629ce175a168b0d6ea95790221b19411cfebe9cf81d4ef3af397f73df3",
+        "bytes": 1928025
       }
     ]
   },

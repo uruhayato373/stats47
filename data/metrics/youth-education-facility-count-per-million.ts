@@ -49,22 +49,6 @@ export const youthEducationFacilityCountPerMillion: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "所/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 1,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "所/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "seoTitle": "青少年教育施設数ランキング都道府県【2021年】｜1位鳥取県（20所）",
   "seoDescription": "2021年の青少年教育施設数の都道府県別ランキング。1位鳥取県（20所）、最下位埼玉県（2.5所）で8.0倍の格差。地図やグラフで47都道府県を比較。",

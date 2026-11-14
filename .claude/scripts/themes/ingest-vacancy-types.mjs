@@ -7,12 +7,17 @@ import { createRequire } from 'node:module';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
+import { require as tsxRequire } from 'tsx/cjs/api';
 const require = createRequire(import.meta.url);
 const prefectures = require('../lib/prefectures.cjs').PREFECTURES;
-const { buildRecipe } = require('../../../packages/data-configs/src/recipe.ts');
+// .ts は tsx 経由で読む (素の node は index.ts の拡張子なし import を解決できない)
+const { buildRecipe } = tsxRequire(
+  '../../../packages/data-configs/src/recipe.ts',
+  import.meta.url
+);
 const {
   parseStatsValuesPayload,
-} = require('../../../packages/stats-r2/src/schemas.ts');
+} = tsxRequire('../../../packages/stats-r2/src/schemas.ts', import.meta.url);
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 const sha = (v) => createHash('sha256').update(v).digest('hex');
 export const SOURCE_SHA =

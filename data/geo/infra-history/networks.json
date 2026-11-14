@@ -38,13 +38,6 @@
         },
         "blockedReason": null
       },
-      "attributes": {
-        "start": "N06_002",
-        "end": "N06_003",
-        "name": "N06_007",
-        "relation": "N06_004",
-        "relationNote": "N06_011"
-      },
       "years": {
         "first": 1962,
         "last": 2024
@@ -92,13 +85,6 @@
           "recordedBy": "owner (Claude が聞き取って記録)"
         },
         "blockedReason": null
-      },
-      "attributes": {
-        "start": "N05_005b",
-        "end": "N05_005e",
-        "name": "N05_002",
-        "relation": "N05_006",
-        "relationNote": "N05_010"
       },
       "years": {
         "first": 1950,
@@ -149,16 +135,6 @@
           "recordedBy": "Claude (公式ページを確認)"
         },
         "blockedReason": null
-      },
-      "attributes": {
-        "start": "N08_014",
-        "end": "N08_015",
-        "name": "N08_003",
-        "relation": "N08_016",
-        "prefectureSource": {
-          "kind": "muniCode",
-          "field": "N08_001"
-        }
       },
       "years": {
         "first": 1952,

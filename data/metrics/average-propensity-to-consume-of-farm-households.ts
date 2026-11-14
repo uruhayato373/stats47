@@ -31,7 +31,7 @@ export const averagePropensityToConsumeOfFarmHouseholds: MetricConfig = {
       2003,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateGreens",

@@ -146,9 +146,13 @@ run 32006827498 では push が `Progress: 9,416 / 14,033 (errors: 0)` で cance
 打ち切られた run から外挿していた旧値 (生成 30 分 + push 21 分 = 52 分 / 11.2 files/s) より
 実際は遅い。**見積りは完走 run のこの値を使う。**
 
-**「差分 push」という名前だが CI ではフル push になる。** manifest (`.local/r2-manifest/`) は
-runner ローカルなので毎回空 (`マニフェスト記録済み: 0`) で、アップロード対象は常に全件になる。
-manifest を持ち越して push 件数を減らす案は未着手 (`SYNC-SNAPSHOTS-MANIFEST-CARRY-01`)。
+**上の push 時間は、全件を送っていた時期の値。** manifest (`.local/r2-manifest/`) は
+runner ローカルなので毎回空 (`マニフェスト記録済み: 0`) で、ログの「アップロード対象」は常に全件になる。
+そのあと `diff-push-r2.ts` が R2 の一覧 (size と ETag) と照合し、中身が同じファイルは送らない
+(ログの「R2 と中身が同じ（送らない）」「送信する」が実際の件数。一覧を取れないときは全件を送る)。
+`app/ranking/<key>/values.json` は観測値が変わらなければ `generatedAt` を引き継いで同じバイト列になる
+(`[values] 時刻を引き継いだ=…` の行)。照合を入れた後の push 時間は本番の全件実行でまだ測っていない
+(`R2-VALUES-REUPLOAD-01`)。
 
 ## 使い方 (ローカル = 生成のみ / push は CI)
 

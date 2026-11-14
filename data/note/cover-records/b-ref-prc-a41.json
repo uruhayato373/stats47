@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-prc-a41",
+  "production": {
+    "id": "NCI-00223",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "お酒の販売量を\n46都道府県で比較",
+      "subline": "清酒は新潟県・焼酎は鹿児島県",
+      "subject": "無文字のとっくりとおちょこ、ラベルのない瓶を大きく描く。補足の帯と署名は別々に配置し、帯の中に区切り線や記号を入れない。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n9c53c03f6b32 本文確認2026-11-04。成人1人あたりの酒類販売量。全体は東京都が最多、清酒は新潟県、焼酎は鹿児島県。本文の対象は46都道府県。飲酒を勧めない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "317589792d38641c8369ca81b3a7eba609a93d480a44a46fd118e787d93a8028",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a41/revisions/317589792d38641c8369ca81b3a7eba609a93d480a44a46fd118e787d93a8028.png"
+      },
+      "bytes": 46172,
+      "id": "317589792d38641c8369ca81b3a7eba609a93d480a44a46fd118e787d93a8028",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:10:19.189Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "2d24c33e5f5a80262ae8ab5ade0bf00d5010533186301d01e98c77b138b3d7c0"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:13:54.097Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "2d24c33e5f5a80262ae8ab5ade0bf00d5010533186301d01e98c77b138b3d7c0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a41/inputs/2d24c33e5f5a80262ae8ab5ade0bf00d5010533186301d01e98c77b138b3d7c0.json"
+          },
+          "bytes": 1209
+        }
+      }
+    },
+    {
+      "sha256": "984b6273281c94251d06023e3f490e490792a507d4e6fcae727b11849954876a",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a41/revisions/984b6273281c94251d06023e3f490e490792a507d4e6fcae727b11849954876a.png"
+      },
+      "bytes": 75609,
+      "id": "984b6273281c94251d06023e3f490e490792a507d4e6fcae727b11849954876a",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:22:13.526Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324184929/rectangle_large_type_2_26f9674ed9540c2d79fe3da8c3c9c639.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "984b6273281c94251d06023e3f490e490792a507d4e6fcae727b11849954876a"
+      }
+    },
+    {
+      "sha256": "1041ad6fcbcb0ec3c0c107746206cad584d9492505a7a76b55fe04813e49e364",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a41/revisions/1041ad6fcbcb0ec3c0c107746206cad584d9492505a7a76b55fe04813e49e364.png"
+      },
+      "bytes": 1952679,
+      "id": "1041ad6fcbcb0ec3c0c107746206cad584d9492505a7a76b55fe04813e49e364",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-853f2eeabd3f",
+      "createdAt": "2026-11-04T02:34:00.939Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "28bae81137d38af35aa5f1a9e1f488c94bfda8de2b194120dd06a73ad9797d1f"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T02:35:28.835Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "28bae81137d38af35aa5f1a9e1f488c94bfda8de2b194120dd06a73ad9797d1f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a41/inputs/28bae81137d38af35aa5f1a9e1f488c94bfda8de2b194120dd06a73ad9797d1f.json"
+          },
+          "bytes": 8478
+        },
+        "production": {
+          "id": "NCI-00223",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "853f2eeabd3f0502da051ea0edcaacea511e3f498ad4cee26eca850d56f04f66"
+        }
+      }
+    }
+  ]
+}

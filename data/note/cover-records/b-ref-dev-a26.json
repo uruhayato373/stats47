@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-dev-a26",
+  "production": {
+    "id": "NCI-00156",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "熱中症の死亡数\n47都道府県を比較",
+      "subline": "実数の比較で人口当たりではない",
+      "subject": "麦わら帽子、水筒、タオルを大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/ncc1cf723e8a4 本文確認2026-11-04。熱中症による死亡数を比較。東京都が最多の424人。人口の多い県で実数が大きくなる点に配慮し、県の良し悪しを示さない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "04f8c5d3046f2f46d22170c415481c49c152c51b3653a7caa3f2f8c02afbb9a1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a26/revisions/04f8c5d3046f2f46d22170c415481c49c152c51b3653a7caa3f2f8c02afbb9a1.png"
+      },
+      "bytes": 36314,
+      "id": "04f8c5d3046f2f46d22170c415481c49c152c51b3653a7caa3f2f8c02afbb9a1",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:07:09.226Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "af10bb62075a5ec1c1a09cc5ad623baf5f9fc35ebdf795780d4681d716081efa"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:12:20.174Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "af10bb62075a5ec1c1a09cc5ad623baf5f9fc35ebdf795780d4681d716081efa",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a26/inputs/af10bb62075a5ec1c1a09cc5ad623baf5f9fc35ebdf795780d4681d716081efa.json"
+          },
+          "bytes": 1294
+        }
+      }
+    },
+    {
+      "sha256": "e0e7424040f8c76791422341df8064ba2fa70df46ab38e1b0747729c33ac9d56",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a26/revisions/e0e7424040f8c76791422341df8064ba2fa70df46ab38e1b0747729c33ac9d56.png"
+      },
+      "bytes": 46850,
+      "id": "e0e7424040f8c76791422341df8064ba2fa70df46ab38e1b0747729c33ac9d56",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:40.536Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324063567/rectangle_large_type_2_c21d123ed990797d19e7e718dac5487f.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "e0e7424040f8c76791422341df8064ba2fa70df46ab38e1b0747729c33ac9d56"
+      }
+    },
+    {
+      "sha256": "fa5bdeb1b832b43081caefc1714784dd54284e406fda5540fc1c234b1dbaf568",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-dev-a26/revisions/fa5bdeb1b832b43081caefc1714784dd54284e406fda5540fc1c234b1dbaf568.png"
+      },
+      "bytes": 1932960,
+      "id": "fa5bdeb1b832b43081caefc1714784dd54284e406fda5540fc1c234b1dbaf568",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-be4b6f15ea00",
+      "createdAt": "2026-11-04T00:56:01.836Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "9af47baa9c80ab8296464dfb00a4729fc97f0075c950da5e7187e987731db9b0"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:57:11.130Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "9af47baa9c80ab8296464dfb00a4729fc97f0075c950da5e7187e987731db9b0",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-dev-a26/inputs/9af47baa9c80ab8296464dfb00a4729fc97f0075c950da5e7187e987731db9b0.json"
+          },
+          "bytes": 8207
+        },
+        "production": {
+          "id": "NCI-00156",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "be4b6f15ea00114d2d8f4e00b60233e9ea83420059d61dc64a3d6334de14d23c"
+        }
+      }
+    }
+  ]
+}

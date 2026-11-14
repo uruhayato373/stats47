@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { buildPopulationPyramidSeriesRefs } from "@stats47/data-configs/theme-catalog";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 

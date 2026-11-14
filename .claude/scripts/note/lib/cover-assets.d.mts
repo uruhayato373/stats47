@@ -23,6 +23,9 @@ export const COVER_ROOT: string;
 export function renameCoverFile(source: string, destination: string): Promise<void>;
 export function assertCoverGenerationType(type: string): void;
 export const COVER_LEDGER_PATH: string;
+export const COVER_RECORDS_DIR: string;
+/** Repository-relative path -> file text: one record file per article that has production or revisions, then the main file. */
+export function coverLedgerFiles(ledger: CoverLedger): Record<string, string>;
 export function coverSha(bytes: Uint8Array | string): string;
 export function coverAssetKey(key: string, sha: string): string;
 export function coverInputKey(key: string, sha: string): string;

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T23:50:52.643Z",
+  "generatedAt": "2026-11-14T04:11:48.327Z",
   "results": {
     "abandoned-cultivated-land-area": {
       "key": "abandoned-cultivated-land-area",
@@ -236,7 +236,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-11-06T23:16:00.429Z"
+      "checkedAt": "2026-11-14T04:11:43.865Z"
     },
     "adult-class-lecture-count-per-million": {
       "key": "adult-class-lecture-count-per-million",
@@ -770,7 +770,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-11-06T23:16:01.442Z"
+      "checkedAt": "2026-11-14T04:11:44.990Z"
     },
     "amusement-industry-establishments": {
       "key": "amusement-industry-establishments",
@@ -781,7 +781,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-11-06T23:16:02.378Z"
+      "checkedAt": "2026-11-14T04:11:45.817Z"
     },
     "anma-massage-count": {
       "key": "anma-massage-count",
@@ -929,7 +929,7 @@
         "2019"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-11-06T23:16:04.665Z"
+      "checkedAt": "2026-11-14T04:11:47.227Z"
     },
     "annual-minimum-relative-humidity": {
       "key": "annual-minimum-relative-humidity",
@@ -1326,7 +1326,7 @@
         "2015"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-11-06T23:16:05.581Z"
+      "checkedAt": "2026-11-14T04:11:48.021Z"
     },
     "area-ratio-of-total": {
       "key": "area-ratio-of-total",
@@ -1603,7 +1603,7 @@
       "estatNonNullYears": null,
       "availableYearCodes": [],
       "verdict": "fetch-failed",
-      "checkedAt": "2026-10-30T23:13:29.948Z"
+      "checkedAt": "2026-11-14T04:11:07.039Z"
     },
     "autolock-apartment-rate": {
       "key": "autolock-apartment-rate",
@@ -4846,7 +4846,7 @@
       "estatNonNullYears": null,
       "availableYearCodes": [],
       "verdict": "fetch-failed",
-      "checkedAt": "2026-10-30T23:13:30.704Z"
+      "checkedAt": "2026-11-14T04:11:07.710Z"
     },
     "community-building-volunteer-participation-rate-10plus": {
       "key": "community-building-volunteer-participation-rate-10plus",
@@ -5439,7 +5439,7 @@
     "convenience-store-sales": {
       "key": "convenience-store-sales",
       "statsDataId": "0004032502",
-      "configYears": 1,
+      "configYears": 3,
       "estatNonNullYears": 5,
       "availableYearCodes": [
         "2021",
@@ -5901,7 +5901,7 @@
       "estatNonNullYears": null,
       "availableYearCodes": [],
       "verdict": "fetch-failed",
-      "checkedAt": "2026-10-30T23:13:31.318Z"
+      "checkedAt": "2026-11-14T04:11:08.471Z"
     },
     "dwellings-built-2016-2020": {
       "key": "dwellings-built-2016-2020",
@@ -5910,7 +5910,7 @@
       "estatNonNullYears": null,
       "availableYearCodes": [],
       "verdict": "fetch-failed",
-      "checkedAt": "2026-10-30T23:13:31.921Z"
+      "checkedAt": "2026-11-14T04:11:09.103Z"
     },
     "dwellings-built-2021-2023-sep": {
       "key": "dwellings-built-2021-2023-sep",
@@ -5919,7 +5919,7 @@
       "estatNonNullYears": null,
       "availableYearCodes": [],
       "verdict": "fetch-failed",
-      "checkedAt": "2026-10-30T23:13:32.557Z"
+      "checkedAt": "2026-11-14T04:11:09.799Z"
     },
     "earthquake-renovation-rate": {
       "key": "earthquake-renovation-rate",
@@ -6103,7 +6103,7 @@
       "estatNonNullYears": null,
       "availableYearCodes": [],
       "verdict": "fetch-failed",
-      "checkedAt": "2026-10-30T23:13:33.278Z"
+      "checkedAt": "2026-11-14T04:11:10.437Z"
     },
     "elderly-general-worker-old-population-ratio": {
       "key": "elderly-general-worker-old-population-ratio",
@@ -7770,7 +7770,7 @@
       "estatNonNullYears": null,
       "availableYearCodes": [],
       "verdict": "fetch-failed",
-      "checkedAt": "2026-10-30T23:13:33.936Z"
+      "checkedAt": "2026-11-14T04:11:11.044Z"
     },
     "household-ratio-main-earner-employee-commute-90min": {
       "key": "household-ratio-main-earner-employee-commute-90min",
@@ -8050,7 +8050,7 @@
       "estatNonNullYears": null,
       "availableYearCodes": [],
       "verdict": "fetch-failed",
-      "checkedAt": "2026-10-30T23:13:34.513Z"
+      "checkedAt": "2026-11-14T04:11:11.834Z"
     },
     "intellectual-disability-support-facility-staff-per-100k": {
       "key": "intellectual-disability-support-facility-staff-per-100k",
@@ -8419,7 +8419,7 @@
       "estatNonNullYears": null,
       "availableYearCodes": [],
       "verdict": "fetch-failed",
-      "checkedAt": "2026-10-30T23:13:35.131Z"
+      "checkedAt": "2026-11-14T04:11:12.606Z"
     },
     "nursery-within-500m-young-child-household-ratio": {
       "key": "nursery-within-500m-young-child-household-ratio",
@@ -8450,7 +8450,7 @@
       "estatNonNullYears": null,
       "availableYearCodes": [],
       "verdict": "fetch-failed",
-      "checkedAt": "2026-10-30T23:13:35.727Z"
+      "checkedAt": "2026-11-14T04:11:13.208Z"
     },
     "outpatient-rate-per-100k": {
       "key": "outpatient-rate-per-100k",
@@ -8521,7 +8521,7 @@
       "estatNonNullYears": null,
       "availableYearCodes": [],
       "verdict": "fetch-failed",
-      "checkedAt": "2026-10-30T23:13:36.345Z"
+      "checkedAt": "2026-11-14T04:11:13.787Z"
     },
     "public-hall-count": {
       "key": "public-hall-count",
@@ -8740,7 +8740,7 @@
       "estatNonNullYears": null,
       "availableYearCodes": [],
       "verdict": "fetch-failed",
-      "checkedAt": "2026-10-30T23:13:36.960Z"
+      "checkedAt": "2026-11-14T04:11:14.444Z"
     },
     "seismic-retrofit-owner-houses-since-2019": {
       "key": "seismic-retrofit-owner-houses-since-2019",
@@ -8749,7 +8749,7 @@
       "estatNonNullYears": null,
       "availableYearCodes": [],
       "verdict": "fetch-failed",
-      "checkedAt": "2026-10-30T23:13:37.578Z"
+      "checkedAt": "2026-11-14T04:11:15.173Z"
     },
     "sewage-treatment-coverage-rate": {
       "key": "sewage-treatment-coverage-rate",
@@ -8925,7 +8925,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:51.695Z"
+      "checkedAt": "2026-11-14T04:10:23.039Z"
     },
     "smartphone-usage-time-by-age": {
       "key": "smartphone-usage-time-by-age",
@@ -8936,7 +8936,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:52.888Z"
+      "checkedAt": "2026-11-14T04:10:24.102Z"
     },
     "solar-panel-housing-rate": {
       "key": "solar-panel-housing-rate",
@@ -8947,7 +8947,7 @@
         "2023"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:54.369Z"
+      "checkedAt": "2026-11-14T04:10:25.292Z"
     },
     "specified-small-moped-count": {
       "key": "specified-small-moped-count",
@@ -8956,7 +8956,7 @@
       "estatNonNullYears": null,
       "availableYearCodes": [],
       "verdict": "fetch-failed",
-      "checkedAt": "2026-10-30T23:13:38.121Z"
+      "checkedAt": "2026-11-14T04:11:15.719Z"
     },
     "sports-facility-count": {
       "key": "sports-facility-count",
@@ -8967,7 +8967,7 @@
         "2015"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:55.567Z"
+      "checkedAt": "2026-11-14T04:10:26.111Z"
     },
     "sports-participation-rate-badminton": {
       "key": "sports-participation-rate-badminton",
@@ -8978,7 +8978,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:56.954Z"
+      "checkedAt": "2026-11-14T04:10:26.992Z"
     },
     "sports-participation-rate-baseball": {
       "key": "sports-participation-rate-baseball",
@@ -8989,7 +8989,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:57.936Z"
+      "checkedAt": "2026-11-14T04:10:27.951Z"
     },
     "sports-participation-rate-basketball": {
       "key": "sports-participation-rate-basketball",
@@ -9000,7 +9000,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:58.772Z"
+      "checkedAt": "2026-11-14T04:10:28.952Z"
     },
     "sports-participation-rate-bowling": {
       "key": "sports-participation-rate-bowling",
@@ -9011,7 +9011,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:12:59.706Z"
+      "checkedAt": "2026-11-14T04:10:29.706Z"
     },
     "sports-participation-rate-cycling": {
       "key": "sports-participation-rate-cycling",
@@ -9022,7 +9022,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:00.525Z"
+      "checkedAt": "2026-11-14T04:10:30.529Z"
     },
     "sports-participation-rate-fishing": {
       "key": "sports-participation-rate-fishing",
@@ -9033,7 +9033,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:01.467Z"
+      "checkedAt": "2026-11-14T04:10:31.599Z"
     },
     "sports-participation-rate-golf": {
       "key": "sports-participation-rate-golf",
@@ -9044,7 +9044,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:02.271Z"
+      "checkedAt": "2026-11-14T04:10:32.679Z"
     },
     "sports-participation-rate-ground-golf": {
       "key": "sports-participation-rate-ground-golf",
@@ -9055,7 +9055,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:03.249Z"
+      "checkedAt": "2026-11-14T04:10:33.629Z"
     },
     "sports-participation-rate-gym-training": {
       "key": "sports-participation-rate-gym-training",
@@ -9066,7 +9066,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:04.010Z"
+      "checkedAt": "2026-11-14T04:10:34.423Z"
     },
     "sports-participation-rate-hiking": {
       "key": "sports-participation-rate-hiking",
@@ -9077,7 +9077,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:04.940Z"
+      "checkedAt": "2026-11-14T04:10:35.160Z"
     },
     "sports-participation-rate-jogging": {
       "key": "sports-participation-rate-jogging",
@@ -9088,7 +9088,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:05.844Z"
+      "checkedAt": "2026-11-14T04:10:36.102Z"
     },
     "sports-participation-rate-judo": {
       "key": "sports-participation-rate-judo",
@@ -9099,7 +9099,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:06.851Z"
+      "checkedAt": "2026-11-14T04:10:36.883Z"
     },
     "sports-participation-rate-kendo": {
       "key": "sports-participation-rate-kendo",
@@ -9110,7 +9110,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:07.576Z"
+      "checkedAt": "2026-11-14T04:10:37.845Z"
     },
     "sports-participation-rate-skiing": {
       "key": "sports-participation-rate-skiing",
@@ -9121,7 +9121,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:08.395Z"
+      "checkedAt": "2026-11-14T04:10:38.928Z"
     },
     "sports-participation-rate-soccer": {
       "key": "sports-participation-rate-soccer",
@@ -9132,7 +9132,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:09.118Z"
+      "checkedAt": "2026-11-14T04:10:40.289Z"
     },
     "sports-participation-rate-softball": {
       "key": "sports-participation-rate-softball",
@@ -9143,7 +9143,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:10.066Z"
+      "checkedAt": "2026-11-14T04:10:41.460Z"
     },
     "sports-participation-rate-swimming": {
       "key": "sports-participation-rate-swimming",
@@ -9154,7 +9154,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:10.817Z"
+      "checkedAt": "2026-11-14T04:10:42.283Z"
     },
     "sports-participation-rate-table-tennis": {
       "key": "sports-participation-rate-table-tennis",
@@ -9165,7 +9165,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:11.868Z"
+      "checkedAt": "2026-11-14T04:10:43.504Z"
     },
     "sports-participation-rate-tennis": {
       "key": "sports-participation-rate-tennis",
@@ -9176,7 +9176,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:12.705Z"
+      "checkedAt": "2026-11-14T04:10:44.595Z"
     },
     "sports-participation-rate-volleyball": {
       "key": "sports-participation-rate-volleyball",
@@ -9187,7 +9187,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:13.504Z"
+      "checkedAt": "2026-11-14T04:10:46.196Z"
     },
     "sports-participation-rate-walking": {
       "key": "sports-participation-rate-walking",
@@ -9198,7 +9198,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:14.297Z"
+      "checkedAt": "2026-11-14T04:10:47.171Z"
     },
     "sports-participation-rate-yoga": {
       "key": "sports-participation-rate-yoga",
@@ -9209,7 +9209,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:15.032Z"
+      "checkedAt": "2026-11-14T04:10:48.266Z"
     },
     "station-within-1km-household-ratio": {
       "key": "station-within-1km-household-ratio",
@@ -9231,7 +9231,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:15.971Z"
+      "checkedAt": "2026-11-14T04:10:50.093Z"
     },
     "study-participation-rate-arts-culture": {
       "key": "study-participation-rate-arts-culture",
@@ -9242,7 +9242,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:16.797Z"
+      "checkedAt": "2026-11-14T04:10:51.051Z"
     },
     "study-participation-rate-business": {
       "key": "study-participation-rate-business",
@@ -9253,7 +9253,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:17.791Z"
+      "checkedAt": "2026-11-14T04:10:52.113Z"
     },
     "study-participation-rate-business-skills": {
       "key": "study-participation-rate-business-skills",
@@ -9264,7 +9264,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:19.040Z"
+      "checkedAt": "2026-11-14T04:10:53.635Z"
     },
     "study-participation-rate-computer": {
       "key": "study-participation-rate-computer",
@@ -9275,7 +9275,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:19.909Z"
+      "checkedAt": "2026-11-14T04:10:54.605Z"
     },
     "study-participation-rate-english": {
       "key": "study-participation-rate-english",
@@ -9286,7 +9286,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:21.017Z"
+      "checkedAt": "2026-11-14T04:10:55.463Z"
     },
     "study-participation-rate-foreign-language": {
       "key": "study-participation-rate-foreign-language",
@@ -9297,7 +9297,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:21.703Z"
+      "checkedAt": "2026-11-14T04:10:56.454Z"
     },
     "study-participation-rate-home-economics": {
       "key": "study-participation-rate-home-economics",
@@ -9308,7 +9308,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:22.510Z"
+      "checkedAt": "2026-11-14T04:10:57.472Z"
     },
     "study-participation-rate-nursing-care": {
       "key": "study-participation-rate-nursing-care",
@@ -9319,7 +9319,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:23.254Z"
+      "checkedAt": "2026-11-14T04:10:58.470Z"
     },
     "study-participation-rate-other-language": {
       "key": "study-participation-rate-other-language",
@@ -9330,7 +9330,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:23.979Z"
+      "checkedAt": "2026-11-14T04:10:59.310Z"
     },
     "tablet-ownership-multi-person-households-per-1000": {
       "key": "tablet-ownership-multi-person-households-per-1000",
@@ -9341,7 +9341,7 @@
         "2014"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:25.310Z"
+      "checkedAt": "2026-11-14T04:11:01.118Z"
     },
     "telework-rate": {
       "key": "telework-rate",
@@ -9352,7 +9352,7 @@
         "2022"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:26.111Z"
+      "checkedAt": "2026-11-14T04:11:02.353Z"
     },
     "three-generation-household-members": {
       "key": "three-generation-household-members",
@@ -9363,7 +9363,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:26.772Z"
+      "checkedAt": "2026-11-14T04:11:03.053Z"
     },
     "total-area-prefecture-ratio": {
       "key": "total-area-prefecture-ratio",
@@ -9383,7 +9383,7 @@
         "2015"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:27.542Z"
+      "checkedAt": "2026-11-14T04:11:03.950Z"
     },
     "travel-participation-rate-day-trip": {
       "key": "travel-participation-rate-day-trip",
@@ -9394,7 +9394,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:28.502Z"
+      "checkedAt": "2026-11-14T04:11:05.230Z"
     },
     "travel-participation-rate-domestic": {
       "key": "travel-participation-rate-domestic",
@@ -9405,7 +9405,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:29.356Z"
+      "checkedAt": "2026-11-14T04:11:06.332Z"
     },
     "travel-participation-rate-domestic-tourism": {
       "key": "travel-participation-rate-domestic-tourism",
@@ -9416,7 +9416,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:39.434Z"
+      "checkedAt": "2026-11-14T04:11:16.607Z"
     },
     "travel-participation-rate-homecoming": {
       "key": "travel-participation-rate-homecoming",
@@ -9427,7 +9427,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:40.312Z"
+      "checkedAt": "2026-11-14T04:11:17.637Z"
     },
     "travel-participation-rate-overnight": {
       "key": "travel-participation-rate-overnight",
@@ -9438,7 +9438,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:41.276Z"
+      "checkedAt": "2026-11-14T04:11:18.578Z"
     },
     "travel-participation-rate-overseas": {
       "key": "travel-participation-rate-overseas",
@@ -9449,7 +9449,7 @@
         "2021"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-30T23:13:42.189Z"
+      "checkedAt": "2026-11-14T04:11:19.538Z"
     },
     "treatment-rate-arthrosis-inpatient": {
       "key": "treatment-rate-arthrosis-inpatient",
@@ -9458,7 +9458,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-10-30T23:13:42.801Z"
+      "checkedAt": "2026-11-14T04:11:20.269Z"
     },
     "treatment-rate-arthrosis-outpatient": {
       "key": "treatment-rate-arthrosis-outpatient",
@@ -9467,7 +9467,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-10-30T23:13:43.877Z"
+      "checkedAt": "2026-11-14T04:11:21.082Z"
     },
     "treatment-rate-asthma-inpatient": {
       "key": "treatment-rate-asthma-inpatient",
@@ -9476,7 +9476,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-10-30T23:13:44.651Z"
+      "checkedAt": "2026-11-14T04:11:21.857Z"
     },
     "treatment-rate-asthma-outpatient": {
       "key": "treatment-rate-asthma-outpatient",
@@ -9485,7 +9485,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-10-30T23:13:45.238Z"
+      "checkedAt": "2026-11-14T04:11:22.776Z"
     },
     "treatment-rate-cancer-inpatient": {
       "key": "treatment-rate-cancer-inpatient",
@@ -9494,7 +9494,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-10-30T23:13:45.930Z"
+      "checkedAt": "2026-11-14T04:11:23.428Z"
     },
     "treatment-rate-cancer-outpatient": {
       "key": "treatment-rate-cancer-outpatient",
@@ -9503,7 +9503,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-10-30T23:13:46.407Z"
+      "checkedAt": "2026-11-14T04:11:23.926Z"
     },
     "treatment-rate-cerebrovascular-inpatient": {
       "key": "treatment-rate-cerebrovascular-inpatient",
@@ -9512,7 +9512,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-10-30T23:13:46.987Z"
+      "checkedAt": "2026-11-14T04:11:24.709Z"
     },
     "treatment-rate-cerebrovascular-outpatient": {
       "key": "treatment-rate-cerebrovascular-outpatient",
@@ -9521,7 +9521,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-10-30T23:13:47.465Z"
+      "checkedAt": "2026-11-14T04:11:25.447Z"
     },
     "treatment-rate-circulatory-inpatient": {
       "key": "treatment-rate-circulatory-inpatient",
@@ -9530,7 +9530,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-10-30T23:13:48.068Z"
+      "checkedAt": "2026-11-14T04:11:26.144Z"
     },
     "treatment-rate-circulatory-outpatient": {
       "key": "treatment-rate-circulatory-outpatient",
@@ -9539,7 +9539,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-10-30T23:13:48.537Z"
+      "checkedAt": "2026-11-14T04:11:26.862Z"
     },
     "treatment-rate-diabetes-inpatient": {
       "key": "treatment-rate-diabetes-inpatient",
@@ -9548,7 +9548,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-10-30T23:13:49.059Z"
+      "checkedAt": "2026-11-14T04:11:27.505Z"
     },
     "treatment-rate-diabetes-outpatient": {
       "key": "treatment-rate-diabetes-outpatient",
@@ -9557,7 +9557,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-11-06T23:15:44.682Z"
+      "checkedAt": "2026-11-14T04:11:28.186Z"
     },
     "treatment-rate-hypertension-inpatient": {
       "key": "treatment-rate-hypertension-inpatient",
@@ -9566,7 +9566,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-11-06T23:15:45.222Z"
+      "checkedAt": "2026-11-14T04:11:28.843Z"
     },
     "treatment-rate-hypertension-outpatient": {
       "key": "treatment-rate-hypertension-outpatient",
@@ -9575,7 +9575,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-11-06T23:15:45.757Z"
+      "checkedAt": "2026-11-14T04:11:29.615Z"
     },
     "treatment-rate-mental-disorder-inpatient": {
       "key": "treatment-rate-mental-disorder-inpatient",
@@ -9584,7 +9584,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-11-06T23:15:46.370Z"
+      "checkedAt": "2026-11-14T04:11:30.290Z"
     },
     "treatment-rate-mental-disorder-outpatient": {
       "key": "treatment-rate-mental-disorder-outpatient",
@@ -9593,7 +9593,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-11-06T23:15:46.854Z"
+      "checkedAt": "2026-11-14T04:11:30.827Z"
     },
     "treatment-rate-mood-disorder-inpatient": {
       "key": "treatment-rate-mood-disorder-inpatient",
@@ -9602,7 +9602,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-11-06T23:15:47.625Z"
+      "checkedAt": "2026-11-14T04:11:31.336Z"
     },
     "treatment-rate-mood-disorder-outpatient": {
       "key": "treatment-rate-mood-disorder-outpatient",
@@ -9611,7 +9611,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-11-06T23:15:48.203Z"
+      "checkedAt": "2026-11-14T04:11:32.043Z"
     },
     "treatment-rate-musculoskeletal-inpatient": {
       "key": "treatment-rate-musculoskeletal-inpatient",
@@ -9620,7 +9620,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-11-06T23:15:48.736Z"
+      "checkedAt": "2026-11-14T04:11:32.593Z"
     },
     "treatment-rate-musculoskeletal-outpatient": {
       "key": "treatment-rate-musculoskeletal-outpatient",
@@ -9629,7 +9629,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-11-06T23:15:49.276Z"
+      "checkedAt": "2026-11-14T04:11:33.117Z"
     },
     "treatment-rate-neurosis-inpatient": {
       "key": "treatment-rate-neurosis-inpatient",
@@ -9638,7 +9638,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-11-06T23:15:50.029Z"
+      "checkedAt": "2026-11-14T04:11:33.799Z"
     },
     "treatment-rate-neurosis-outpatient": {
       "key": "treatment-rate-neurosis-outpatient",
@@ -9647,7 +9647,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-11-06T23:15:50.842Z"
+      "checkedAt": "2026-11-14T04:11:34.360Z"
     },
     "treatment-rate-osteoporosis-inpatient": {
       "key": "treatment-rate-osteoporosis-inpatient",
@@ -9656,7 +9656,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-11-06T23:15:51.342Z"
+      "checkedAt": "2026-11-14T04:11:34.990Z"
     },
     "treatment-rate-osteoporosis-outpatient": {
       "key": "treatment-rate-osteoporosis-outpatient",
@@ -9665,7 +9665,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-11-06T23:15:51.998Z"
+      "checkedAt": "2026-11-14T04:11:35.602Z"
     },
     "treatment-rate-schizophrenia-inpatient": {
       "key": "treatment-rate-schizophrenia-inpatient",
@@ -9674,7 +9674,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-11-06T23:15:52.481Z"
+      "checkedAt": "2026-11-14T04:11:36.214Z"
     },
     "treatment-rate-schizophrenia-outpatient": {
       "key": "treatment-rate-schizophrenia-outpatient",
@@ -9683,7 +9683,7 @@
       "estatNonNullYears": 0,
       "availableYearCodes": [],
       "verdict": "no-sample-values",
-      "checkedAt": "2026-11-06T23:15:53.016Z"
+      "checkedAt": "2026-11-14T04:11:36.724Z"
     },
     "vacant-housing-excluding-rental-sale-secondary": {
       "key": "vacant-housing-excluding-rental-sale-secondary",
@@ -9694,7 +9694,7 @@
         "2023"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-11-06T23:15:53.863Z"
+      "checkedAt": "2026-11-14T04:11:37.583Z"
     },
     "vacant-housing-for-rent": {
       "key": "vacant-housing-for-rent",
@@ -9705,7 +9705,7 @@
         "2023"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-11-06T23:15:54.414Z"
+      "checkedAt": "2026-11-14T04:11:38.236Z"
     },
     "vacant-housing-for-sale": {
       "key": "vacant-housing-for-sale",
@@ -9716,7 +9716,7 @@
         "2023"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-11-06T23:15:55.092Z"
+      "checkedAt": "2026-11-14T04:11:38.857Z"
     },
     "vacant-housing-rate": {
       "key": "vacant-housing-rate",
@@ -9727,7 +9727,7 @@
         "2023"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-11-06T23:15:55.742Z"
+      "checkedAt": "2026-11-14T04:11:39.472Z"
     },
     "vacant-housing-rate-excluding-rental-sale-secondary": {
       "key": "vacant-housing-rate-excluding-rental-sale-secondary",
@@ -9760,7 +9760,7 @@
         "2023"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-11-06T23:15:56.368Z"
+      "checkedAt": "2026-11-14T04:11:39.967Z"
     },
     "vaccination-recipients-disease": {
       "key": "vaccination-recipients-disease",
@@ -9771,7 +9771,7 @@
         "2020"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-11-06T23:15:57.215Z"
+      "checkedAt": "2026-11-14T04:11:40.571Z"
     },
     "vegetable-cultivation-area": {
       "key": "vegetable-cultivation-area",
@@ -9782,7 +9782,7 @@
         "2019"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-11-06T23:15:57.988Z"
+      "checkedAt": "2026-11-14T04:11:41.206Z"
     },
     "wooden-housing-ratio": {
       "key": "wooden-housing-ratio",
@@ -9793,7 +9793,7 @@
         "2023"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-11-06T23:15:58.989Z"
+      "checkedAt": "2026-11-14T04:11:41.854Z"
     },
     "zoo-count": {
       "key": "zoo-count",
@@ -9804,7 +9804,7 @@
         "2015"
       ],
       "verdict": "confirmed-single-year",
-      "checkedAt": "2026-11-06T23:15:59.664Z"
+      "checkedAt": "2026-11-14T04:11:43.060Z"
     }
   }
 }

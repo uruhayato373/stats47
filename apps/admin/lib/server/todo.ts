@@ -30,6 +30,9 @@ type LibCard = {
   verify: string | null;
   filed: string | null;
   due: string | null;
+  waits: string[];
+  /** 年間計画の月見出し (YYYY-MM)。backlog のカードには無い */
+  month?: string;
   codex: boolean;
   wip: boolean;
   hasTagLine: boolean;
@@ -39,10 +42,13 @@ type LibCard = {
 type BacklogLib = {
   TODO_DIR: string;
   TODO_LAYER_FILES: string[];
+  ANNUAL_FILE: string;
   TIER: Record<string, Tier>;
   KINDS: string[];
   EXECUTORS: string[];
+  WAITS: string[];
   parseBacklog: (text: string) => LibCard[];
+  parseAnnual: (text: string) => LibCard[];
 };
 
 let cachedLib: BacklogLib | null = null;
@@ -56,17 +62,17 @@ function lib(): BacklogLib {
 }
 
 export type Tier = "high" | "mid" | "low" | "hold";
-export type LayerId = "backlog" | "weekly" | "monthly" | "improvements";
+export type LayerId = "backlog" | "weekly" | "monthly" | "improvements" | "annual";
 
 interface LayerMeta {
   id: LayerId;
   label: string;
-  mode: "backlog" | "sections" | "improvements";
+  mode: "backlog" | "annual" | "sections" | "improvements";
   /** sections モードでカードとして拾う見出しレベル */
   level?: number;
 }
 
-/** 表示メタだけを持つ。「どのファイルが層か」は backlog-lib の TODO_LAYER_FILES が真実源。 */
+/** 表示メタだけを持つ。「どのファイルが層か」は backlog-lib の TODO_LAYER_FILES と ANNUAL_FILE が真実源。 */
 const LAYER_META: Record<string, LayerMeta> = {
   "backlog.md": { id: "backlog", label: "実行バックログ", mode: "backlog" },
   "weekly.md": { id: "weekly", label: "今週", mode: "sections", level: 2 },
@@ -76,6 +82,7 @@ const LAYER_META: Record<string, LayerMeta> = {
     label: "効果測定・改善",
     mode: "improvements",
   },
+  "annual.md": { id: "annual", label: "年間計画", mode: "annual" },
 };
 
 export interface TodoCard {
@@ -93,6 +100,10 @@ export interface TodoCard {
   verify: string | null;
   filed: string | null;
   due: string | null;
+  /** いま着手できない理由 ([待ち:X]・複数可)。空なら着手できる */
+  waits: string[];
+  /** 年間計画の月見出し (YYYY-MM)。年間計画以外は null */
+  month: string | null;
   codex: boolean;
   wip: boolean;
   body: string;
@@ -123,12 +134,13 @@ export interface TodoLayerSummary {
 
 export interface TodoBoard {
   layers: TodoLayerSummary[];
-  /** backlog / weekly / monthly のカード (improvements は表なので rows 側) */
+  /** backlog / annual / weekly / monthly のカード (improvements は表なので rows 側) */
   items: TodoCard[];
   improvements: ImprovementRow[];
   /** ファセットの語彙 (宣言順で固定 — 件数順にすると押すたびに並びが動く) */
   kinds: string[];
   executors: string[];
+  waits: string[];
   error?: string;
 }
 
@@ -181,6 +193,8 @@ function parseSections(
         verify: null,
         filed: null,
         due: null,
+        waits: [],
+        month: null,
         codex: false,
         wip: false,
         body: "",
@@ -225,7 +239,8 @@ export function todoBoard(): TodoBoard {
     const items: TodoCard[] = [];
     let improvements: ImprovementRow[] = [];
 
-    for (const file of l.TODO_LAYER_FILES) {
+    // 年間計画は層の一覧 (TODO_LAYER_FILES = docs-governance の層) とは別の定数で持つので、画面の層として後ろに足す
+    for (const file of [...l.TODO_LAYER_FILES, l.ANNUAL_FILE]) {
       const meta = LAYER_META[file];
       // 層を増やしたのに表示メタを足し忘れたら、黙って 1 タブ消えるのではなく起動時に落とす
       if (!meta) throw new Error(`${l.TODO_DIR}/${file} の表示メタが未定義 (LAYER_META に追加する)`);
@@ -237,8 +252,9 @@ export function todoBoard(): TodoBoard {
       }
       const md = fs.readFileSync(abs, "utf8");
       let count = 0;
-      if (meta.mode === "backlog") {
-        const cards = l.parseBacklog(md).map((c) => ({
+      if (meta.mode === "backlog" || meta.mode === "annual") {
+        const parsed = meta.mode === "backlog" ? l.parseBacklog(md) : l.parseAnnual(md);
+        const cards = parsed.map((c) => ({
           layer: meta.id,
           layerLabel: meta.label,
           path: rel,
@@ -252,6 +268,8 @@ export function todoBoard(): TodoBoard {
           verify: c.verify,
           filed: c.filed,
           due: c.due,
+          waits: c.waits,
+          month: c.month ?? null,
           codex: c.codex,
           wip: c.wip,
           body: c.body,
@@ -277,7 +295,7 @@ export function todoBoard(): TodoBoard {
       });
     }
 
-    return { layers, items, improvements, kinds: l.KINDS, executors: l.EXECUTORS };
+    return { layers, items, improvements, kinds: l.KINDS, executors: l.EXECUTORS, waits: l.WAITS };
   } catch (e) {
     return {
       layers: [],
@@ -285,6 +303,7 @@ export function todoBoard(): TodoBoard {
       improvements: [],
       kinds: [],
       executors: [],
+      waits: [],
       error: e instanceof Error ? e.message : String(e),
     };
   }

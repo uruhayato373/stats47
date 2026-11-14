@@ -1,0 +1,196 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-vacant-housing-rate",
+  "production": {
+    "id": "NCI-00126",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "空き家率が\n高い県は？",
+      "subline": "1位は徳島県\n2023年のデータ",
+      "subject": "右側に窓と玄関が閉じた汎用の戸建て住宅を1軒だけ描く。建物は清潔で中立的な表現。人物・キャラクター・鍵・地図・グラフ・廃墟や衰退を示す演出・住宅ロゴ・追加文字を入れない。",
+      "evidence": "公開済み記事の本文とR2観測値に基づく。2023年の住宅・土地統計調査で、空き家率は総住宅数に占める空き家数の割合。徳島県21.3%が47都道府県中1位、埼玉県9.3%が47位。住宅戸数や空き家の原因、地域の衰退を示す絵にはしない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "6dc9cf5e666420f87cdc3392064830168560d02bb2c46da5c563f6854ed67cda",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-vacant-housing-rate/revisions/6dc9cf5e666420f87cdc3392064830168560d02bb2c46da5c563f6854ed67cda.png"
+      },
+      "bytes": 66835,
+      "id": "6dc9cf5e666420f87cdc3392064830168560d02bb2c46da5c563f6854ed67cda",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:51.084Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312772210/rectangle_large_type_2_6448e009c8c4c99cbfcfb17fe35480db.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "6dc9cf5e666420f87cdc3392064830168560d02bb2c46da5c563f6854ed67cda"
+      }
+    },
+    {
+      "sha256": "310d30db5349b8f1fe87d65b78f8a2d924e746ab958eef4b8f1a2034a2640d1b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-vacant-housing-rate/revisions/310d30db5349b8f1fe87d65b78f8a2d924e746ab958eef4b8f1a2034a2640d1b.png"
+      },
+      "bytes": 114421,
+      "id": "310d30db5349b8f1fe87d65b78f8a2d924e746ab958eef4b8f1a2034a2640d1b",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:18:50.089Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "a229b056edb296d50420311b4321f74ce059c482f39f620b80b07f9ecb48a637"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.842Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/vacant-housing-rate/values.json",
+        "sourceSha256": "9d413510fd3debcbd34bd03372ce5ee794e8c9d6d4bb29bc5bbdb51b60b0c1de",
+        "input": {
+          "sha256": "a229b056edb296d50420311b4321f74ce059c482f39f620b80b07f9ecb48a637",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-vacant-housing-rate/inputs/a229b056edb296d50420311b4321f74ce059c482f39f620b80b07f9ecb48a637.json"
+          },
+          "bytes": 7401
+        }
+      }
+    },
+    {
+      "sha256": "4675283933be0694e437f0e49aea825ebb376c7cc4bbd5ca76d3c0a42c9ceae1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-vacant-housing-rate/revisions/4675283933be0694e437f0e49aea825ebb376c7cc4bbd5ca76d3c0a42c9ceae1.png"
+      },
+      "bytes": 78202,
+      "id": "4675283933be0694e437f0e49aea825ebb376c7cc4bbd5ca76d3c0a42c9ceae1",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-15T02:51:59.031Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320191070/rectangle_large_type_2_ea6e02e9f8331056bbccd38cecc7b19c.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "4675283933be0694e437f0e49aea825ebb376c7cc4bbd5ca76d3c0a42c9ceae1"
+      }
+    },
+    {
+      "sha256": "8525f539cc7498e213bd4cda65675b3647e2c6f926a247a535f9719169d09b70",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-vacant-housing-rate/revisions/8525f539cc7498e213bd4cda65675b3647e2c6f926a247a535f9719169d09b70.png"
+      },
+      "bytes": 1975992,
+      "id": "8525f539cc7498e213bd4cda65675b3647e2c6f926a247a535f9719169d09b70",
+      "kind": "candidate",
+      "version": "imagegen-no-character-ranking3-20261015",
+      "createdAt": "2026-10-15T02:52:40.131Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "e11254fed35297a97704ff9a6ac9ce40166a0d1fe1e3fc305bcb9f7272c41214"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "人物・キャラクターなし。原寸と320pxで指定全文・年次・1位・比較対象・補足の可読性・切れ・重なりを確認済み。管理画面の前後比較を提示し、2026-10-15にユーザーが表示中3件の反映を指示。",
+        "reviewedAt": "2026-10-15T03:48:29.805Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "e11254fed35297a97704ff9a6ac9ce40166a0d1fe1e3fc305bcb9f7272c41214",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-vacant-housing-rate/inputs/e11254fed35297a97704ff9a6ac9ce40166a0d1fe1e3fc305bcb9f7272c41214.json"
+          },
+          "bytes": 8763
+        },
+        "production": {
+          "id": "NCI-00126",
+          "policyId": "NCP-003",
+          "policyVersion": 2,
+          "planSha256": "5a45b8b4a8539e53d4045de6568778e103dc19966bdf4f979e58021c61fa50ee"
+        }
+      }
+    },
+    {
+      "sha256": "c1179a033d9a47150930966beed78d61c0bdab523493112e77d99dcfb470e6f2",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-vacant-housing-rate/revisions/c1179a033d9a47150930966beed78d61c0bdab523493112e77d99dcfb470e6f2.png"
+      },
+      "bytes": 1783960,
+      "id": "c1179a033d9a47150930966beed78d61c0bdab523493112e77d99dcfb470e6f2",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-64b8974628b1",
+      "createdAt": "2026-10-23T05:18:54.411Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "4d123e74fd8ef20de8a6bce2a09319d406eb295b37b71ca801247a3674e6564e"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "旧版と新版を比較。鍵を除いて中立的な住宅1軒に統一。空き家率・2023年・徳島県1位は本文と一致。原寸と幅320pxで文言、人物なし、余白を確認。",
+        "reviewedAt": "2026-10-23T05:20:31.125Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "4d123e74fd8ef20de8a6bce2a09319d406eb295b37b71ca801247a3674e6564e",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-vacant-housing-rate/inputs/4d123e74fd8ef20de8a6bce2a09319d406eb295b37b71ca801247a3674e6564e.json"
+          },
+          "bytes": 8043
+        },
+        "production": {
+          "id": "NCI-00126",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "64b8974628b19a9b8ba80586ce400342619bc0431c272e1f1a88f91efcf781a9"
+        }
+      }
+    }
+  ]
+}

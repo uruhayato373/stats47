@@ -145,6 +145,15 @@ primary_agent: strategy-advisor
 - docs/02_実装計画/00_INDEX.md の現在地と、`.claude/todo/04`〜`06` の未完了タスク
 - 未着手の Issue 一覧（`gh issue list --state open --label enhancement`、PR で close される機能改修）+ .claude/todo/backlog.md の tier 見出し (🔴🟡🟢🟣) で優先度判定
 
+- **期日が今週に来るカード（必ず計画に載せる）**。backlog と年間計画 (`.claude/todo/annual.md`) の `[期日:]` を読む
+  ```bash
+  npm run backlog:waits -- due --week <YYYY-Www>
+  ```
+  → 期日が今週に入るカードと、期日を過ぎて残っているカードが、置き場と待ちの理由つきで出る。
+  → 年間計画のカード（時期・確認日を待っていたもの）は、今週実行するなら Must / Should に ID で載せる。契機がまだ来ていなければ、
+    年間計画のカードの `[期日:]` を次の再確認日へ延ばす（延ばした ID を計画の「今週やらないこと」に書く）。
+  → 期日を過ぎたカードは、今週やるか・期日を引き直すか・消すかを決める（`todo-standards.md` §5）。黙って持ち越さない。
+
 - 改善バックログ pending 一覧（**真実源**: `.claude/todo/improvements.md`）
   ```bash
   # Tier 1/2 の pending / in-progress を表示
@@ -284,7 +293,7 @@ continue 中の実験の measure 実行予定は Must 候補に加える。
   上位 3 枚のどれも Must に入らない週は `npm run docs:check` の DG083 が警告する。例外は損失の出ている `[種類:不具合]` を入れた週だけ。
   オーナー作業の 🔴 は Must ではなく計画末尾の「オーナー作業」節に並べ、何を決めて・何をしてほしいかを 1 行で書く
 - 未達の繰り返しタスク or 収益直結 or 期限付き
-- 各タスクに: 理由, 成功基準, 推定工数(S/M/L), 該当スキル, **動かす KPI の id**（参照する improvements 行の `[kpi:]`、backlog カードなら領域表の KPI 列）
+- 各タスクに: 理由, 成功基準, 推定工数(S/M/L), 該当スキル, **動かす KPI の id**（参照する improvements 行の `[kpi:]`、backlog カードなら領域の台帳 `data/business/domain-stances.json` の `kpis`）
 - ガードレール KPI が悪化している週は、その是正を重点より先に Must に入れる
 - 「重点領域の KPI なのに施策が 0 件」が出ている週は、その KPI を動かす施策の起票（`[kpi:]` と根拠のある `[target:]` 付き）を Must 候補にする
 
@@ -333,7 +342,7 @@ tags: []
 ---
 ```
 
-作成後、ファイルパスを報告する。前週のskill referenceレビューから引用した場合は、本文に対象週を明記する。
+作成後、ファイルパスを報告する。前週のレビュー (`data/reviews/weekly/`) から引用した場合は、本文に対象週を明記する。
 
 保存後に次週接続ゲートを実行する。
 
@@ -362,7 +371,7 @@ tags: []
 - **Sprint**: Sprint N (Week X/Y)
 
 ## 前週の申し送り
-<!-- skill referenceの前週レビュー「来週への申し送り」から引用 -->
+<!-- `data/reviews/weekly/` の前週レビュー「来週への申し送り」から引用 -->
 
 ## 今月の重点（月次計画より）
 <!-- `monthly.md` の focus_themes を参照。今週の Must はこの重点から優先選択する。 -->

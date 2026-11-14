@@ -16,13 +16,21 @@ export function formatUnitForDisplay(unit: string | null | undefined): string {
 }
 
 /**
- * 文章 (AI 解説・FAQ などの生成文) の中で、数字の直後に付いた全角「％」だけを半角「%」にそろえる。
- * 同じページの表やカードは formatUnitForDisplay で「%」に畳むため、本文だけ「％」だと混在して見える
- * (2026-10-04 週次 UI 検査 unit_symbol_mixing)。R2 の生成文は書き換えず、表示時だけ整える。
- * 数字に続かない「％」(「％表示」等の語) と、ほかの全角文字は変えない。
+ * 文章 (AI 解説・FAQ・記事の本文や題・注記) の中で、数字の直後に付いた単位の表記を、表やカードと同じ書き方にそろえる。
+ * 同じページの表やカードは formatUnitForDisplay で「%」「ha」「km²」と書くため、本文だけ「％」「ｈａ」「km2」だと混在して見える
+ * (2026-10-04 週次 UI 検査 unit_symbol_mixing。2026-11-14 に ％ だけでなく全角の英字の単位と面積・体積の指数へ広げた)。
+ * R2 の生成文や記事の原稿は書き換えず、表示時だけ整える。
+ *
+ * 変えるのは数字の直後 (千・万などの接頭辞をはさんでもよい) だけ: 全角の ％ → %、全角の英字 → 半角、m2・km2・m3 → m²・km²・m³。
+ * 単位を宣言する「単位は％」「単位：％」も同じ % にする (数字に続かないので残り、同じ記事の「96.6%」と混在していた。2026-11-14)。
+ * それ以外の数字に続かない全角文字 (「％表示」「ＧＤＰ」「総面積km2当たり」)、全角の数字・括弧・句読点は変えない。
  */
-export function normalizePercentInText(text: string): string {
-  return text.replace(/(\d)\s*％/g, "$1%");
+export function normalizeUnitsInText(text: string): string {
+  return text
+    .replace(/(\d)\s*％/g, "$1%")
+    .replace(/(単位\s*(?:は|：|:)\s*)％/g, "$1%")
+    .replace(/(\d\s*[百千万億]*)([ａ-ｚＡ-Ｚ]+)/g, (_, head: string, letters: string) => `${head}${letters.normalize("NFKC")}`)
+    .replace(/(\d\s*[百千万億]*(?:k|c)?m)([23])(?![0-9A-Za-z])/g, (_, head: string, power: string) => `${head}${power === "2" ? "²" : "³"}`);
 }
 
 /** 万・億・兆で桁を寄せてよい次元。面積 (ha→m²) や質量 (t→g) は基底単位で書くと読みにくくなるので寄せない。 */

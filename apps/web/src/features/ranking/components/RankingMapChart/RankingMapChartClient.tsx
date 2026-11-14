@@ -35,7 +35,7 @@ import { useTheme } from "@/hooks/useTheme";
 
 import { buildMapShapes } from "./map-shapes";
 
-import type { RankingItem, RankingValue } from "@stats47/ranking";
+import type { RankingItem, RankingValue, RankingValueDisplay } from "@stats47/ranking";
 import type { Topology } from "topojson-specification";
 
 
@@ -89,6 +89,8 @@ interface Props {
   areaHrefs?: Readonly<Record<string, string>>;
   /** 移るときのクリック計測の導線名 */
   navSurface?: NavSurface;
+  /** ページが決めた表示単位 (表と同じ値)。渡すとホバーと基準の文字をこの単位・倍率・小数桁で書く。色は元の値で決める */
+  valueDisplay?: RankingValueDisplay | null;
 }
 
 /**
@@ -115,6 +117,7 @@ export function RankingMapChartClient({
   fitExcludeCodes,
   areaHrefs,
   navSurface,
+  valueDisplay,
 }: Props) {
   const router = useRouter();
   const { theme } = useTheme();
@@ -224,8 +227,11 @@ export function RankingMapChartClient({
                   {...mapShapes}
                   data={filteredData}
                   colorConfig={mapConfig}
-                  unit={formatUnitForDisplay(rankingItem.unit)}
-                  decimalPlaces={rankingItem.valueDisplay?.decimalPlaces}
+                  unit={valueDisplay?.unit ?? formatUnitForDisplay(rankingItem.unit)}
+                  // 表示単位が無ければ表 (RankingDataTable) と同じく観測値の桁で書く (RankingSvgMap が resolveValuePrecision で決める)。
+                  // 定義の decimalPlaces を使うと、同じ県の値の桁が地図と表で食い違う (UI-FOLLOWUP-02)
+                  decimalPlaces={valueDisplay?.precision}
+                  conversionFactor={valueDisplay?.factor}
                   borderColor={getLeafletBorderColor(theme)}
                   selectedCode={areaType === "prefecture" ? selectedPrefectureCode : undefined}
                   onAreaClick={areaHrefs ? handleAreaNavigate : areaType === "prefecture" ? handlePrefectureClick : undefined}

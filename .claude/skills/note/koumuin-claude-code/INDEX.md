@@ -38,7 +38,7 @@ tags: [koumuin, claude-code, draft-index]
 ## 親計画
 
 - 戦略プラン: `~/.claude/plans/claude-code-note-cosmic-lerdorf.md`
-- ネタ草案: [../../30_note記事企画/backlog/koumuin-claude-code/ideas.md](../../30_note記事企画/backlog/koumuin-claude-code/ideas.md)
+- ネタ草案: [docs/30_note記事企画/backlog/koumuin-claude-code/ideas.md](../../../../docs/30_note記事企画/backlog/koumuin-claude-code/ideas.md)
 
 ## Phase 進捗
 
@@ -273,6 +273,6 @@ done
 ## 関連
 
 - 親プラン: `~/.claude/plans/claude-code-note-cosmic-lerdorf.md`
-- 既存 stats47 note 戦略: [../note戦略.md](../note戦略.md)
+- 既存 stats47 note 戦略: [docs/30_note記事企画/note戦略.md](../../../../docs/30_note記事企画/note戦略.md)
 - 既存 publish-note スキル: `.claude/skills/note/publish-note/`
 - 既存 fetch-note-metrics: `.claude/skills/analytics/fetch-note-metrics/`

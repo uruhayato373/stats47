@@ -56,7 +56,7 @@ describe('2 時点の変化 (スロープ)', () => {
     const svg = renderLineChart(chart);
     expect(svg).toContain('data-form="slope"');
     for (const value of ['11.2', '10.4', '15.3', '19.8']) expect(svg).toContain(`>${value}</text>`);
-    expect(svg.match(/text-anchor="end" font-size="28"/g)).toBeNull();
-    expect(renderLineChart({ ...chart, startLabels: undefined })).toMatch(/text-anchor="end" font-size="28"/);
+    expect(svg.match(/text-anchor="end" font-size="30"/g)).toBeNull();
+    expect(renderLineChart({ ...chart, startLabels: undefined })).toMatch(/text-anchor="end" font-size="30"/);
   });
 });

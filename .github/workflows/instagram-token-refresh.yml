@@ -3,7 +3,7 @@ name: 🔄 Instagram token refresh (weekly)
 # IGAA 長期トークン（約60日失効）を ig_refresh_token で延長し、
 # GitHub Secret INSTAGRAM_ACCESS_TOKEN を自動更新する。
 # これにより IG 投稿/計測の全 workflow（post-instagram-scheduled / sns-metrics-weekly /
-# migration-flow-* / sns-port-bubble-daily / instagram-mf-day2）のトークン寿命を一元管理する。
+# sns-port-bubble-daily / instagram-mf-day2）のトークン寿命を一元管理する。
 #
 # 前提: secrets.GH_SECRETS_PAT に「Secrets: Read and write」権限の fine-grained PAT
 #       （または classic PAT の repo scope）を登録しておくこと。

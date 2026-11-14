@@ -1,4 +1,4 @@
-import { LIGHT_THEME, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
+import { LIGHT_THEME, TEMPLATE_MIN_FONT_SIZE, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
 
 /**
  * One 4:5 frame shared by every statistical sample: title, one condition line, an optional
@@ -24,7 +24,7 @@ export function fitTitleSize(title: string, largest = 72) {
   return Math.max(TITLE_MIN_SIZE, Math.min(largest, Math.floor(largest * width / textWidth(title, largest))));
 }
 
-const LINE_MIN_SIZE = 24;
+const LINE_MIN_SIZE = TEMPLATE_MIN_FONT_SIZE;
 /** A condition line's size: its usual size, smaller only when the line would run off the frame. */
 const fitLine = (line: string, size: number) => Math.max(LINE_MIN_SIZE, Math.min(size, Math.floor(size * (SAMPLE_FRAME.right - SAMPLE_FRAME.left) / textWidth(line, size))));
 
@@ -35,14 +35,14 @@ export function sampleFrame(options: {
   title: string; titleSize?: number; meta: string; note?: string; source: string;
   body: string; ariaLabel?: string; attributes?: string; theme?: ChartTheme;
 }) {
-  const { title, titleSize = 72, meta, note, source, body, ariaLabel = title, attributes = '', theme = LIGHT_THEME } = options;
+  const { title, titleSize = fitTitleSize(title), meta, note, source, body, ariaLabel = title, attributes = '', theme = LIGHT_THEME } = options;
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${SAMPLE_FRAME.width}" height="${SAMPLE_FRAME.height}" viewBox="0 0 ${SAMPLE_FRAME.width} ${SAMPLE_FRAME.height}" role="img" aria-label="${escapeXml(ariaLabel)}" data-theme="${theme.name}"${attributes ? ' ' + attributes : ''}>
     <rect width="${SAMPLE_FRAME.width}" height="${SAMPLE_FRAME.height}" fill="${theme.paper}"/>
     <g font-family="${FONT}" fill="${theme.ink}">
       <text x="${SAMPLE_FRAME.left}" y="${TITLE_Y}" font-size="${titleSize}" font-weight="700">${escapeXml(title)}</text>
       <text x="${SAMPLE_FRAME.left}" y="${META_Y}" font-size="${fitLine(meta, 32)}" fill="${theme.muted}">${escapeXml(meta)}</text>
-      ${note ? `<text x="${SAMPLE_FRAME.left}" y="${NOTE_Y}" font-size="${fitLine(note, 28)}" fill="${theme.muted}">${escapeXml(note)}</text>` : ''}
+      ${note ? `<text x="${SAMPLE_FRAME.left}" y="${NOTE_Y}" font-size="${fitLine(note, TEMPLATE_MIN_FONT_SIZE)}" fill="${theme.muted}">${escapeXml(note)}</text>` : ''}
       ${body}
-      ${source ? `<text x="${SAMPLE_FRAME.left}" y="1310" font-size="26" fill="${theme.muted}">出典：${escapeXml(source)}</text>` : ''}
+      ${source ? `<text x="${SAMPLE_FRAME.left}" y="1310" font-size="${TEMPLATE_MIN_FONT_SIZE}" fill="${theme.muted}">出典：${escapeXml(source)}</text>` : ''}
     </g></svg>`;
 }

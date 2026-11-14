@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "04-excel-download-and-parse",
+  "production": {
+    "id": "NCI-00009",
+    "policyId": "NCP-007",
+    "policyVersion": 4,
+    "brief": {
+      "headline": "e-StatのExcelを\n整形する",
+      "subline": "多シート・セル結合・元号西暦",
+      "subject": "重ねた表計算の紙の束と、定規、鉛筆を大きく描く。紙の表は無文字の罫線だけにする。実務カテゴリの机上の資料構図。青と明るい黄色の暖かい手描き。画面・紙・道具の表面は無文字。実在UI・製品ロゴ・グラフ・地図は描かない。人物・顔・手・動物は描かない。",
+      "evidence": "https://note.com/stats47/n/n23262330a5e5 本文確認2026-11-04。e-StatのExcel/CSVをClaude Codeで整形し、多シート・セル結合・元号西暦を処理する記事。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "72a38f11ea9e78990dcf6febd7c0b8d6b0f45f029d54cbfac4ff9c43ba5cfe22",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/04-excel-download-and-parse/revisions/72a38f11ea9e78990dcf6febd7c0b8d6b0f45f029d54cbfac4ff9c43ba5cfe22.png"
+      },
+      "bytes": 109508,
+      "id": "72a38f11ea9e78990dcf6febd7c0b8d6b0f45f029d54cbfac4ff9c43ba5cfe22",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:13:43.789Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/293009010/rectangle_large_type_2_81ddfbc5aa45da7bf269204cb24e44a3.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "72a38f11ea9e78990dcf6febd7c0b8d6b0f45f029d54cbfac4ff9c43ba5cfe22"
+      }
+    },
+    {
+      "sha256": "efc681f26a8886dec132e1c88adfa47a76e11daff743e9fd04f7ae23c3ae0eb8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/04-excel-download-and-parse/revisions/efc681f26a8886dec132e1c88adfa47a76e11daff743e9fd04f7ae23c3ae0eb8.png"
+      },
+      "bytes": 57988,
+      "id": "efc681f26a8886dec132e1c88adfa47a76e11daff743e9fd04f7ae23c3ae0eb8",
+      "kind": "candidate",
+      "version": "2026-10-11-category-v1",
+      "createdAt": "2026-10-11T11:46:51.775Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "d87f9c49b8bada88353014daaa355cc82e49e9076ffefd2409c77d606af642b3"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出しとシリーズ名・話数・色でシリーズが区別できる",
+        "reviewedAt": "2026-10-11T11:51:38.940Z"
+      },
+      "provenance": {
+        "renderer": "series-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "d87f9c49b8bada88353014daaa355cc82e49e9076ffefd2409c77d606af642b3",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/04-excel-download-and-parse/inputs/d87f9c49b8bada88353014daaa355cc82e49e9076ffefd2409c77d606af642b3.json"
+          },
+          "bytes": 1089
+        }
+      }
+    },
+    {
+      "sha256": "682f61e0aa6ac1ea34c85291732167371068ee7609cb9cf2b9c732a5a382ee6d",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/04-excel-download-and-parse/revisions/682f61e0aa6ac1ea34c85291732167371068ee7609cb9cf2b9c732a5a382ee6d.png"
+      },
+      "bytes": 63572,
+      "id": "682f61e0aa6ac1ea34c85291732167371068ee7609cb9cf2b9c732a5a382ee6d",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-11T11:56:06.923Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/320329202/rectangle_large_type_2_73d95430cca1321739912b11534e5df1.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "682f61e0aa6ac1ea34c85291732167371068ee7609cb9cf2b9c732a5a382ee6d"
+      }
+    },
+    {
+      "sha256": "77fbae31230eec781e0524f78b3286eb7610ee1f361fb0ada1cb21d6732eba81",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/04-excel-download-and-parse/revisions/77fbae31230eec781e0524f78b3286eb7610ee1f361fb0ada1cb21d6732eba81.png"
+      },
+      "bytes": 1756375,
+      "id": "77fbae31230eec781e0524f78b3286eb7610ee1f361fb0ada1cb21d6732eba81",
+      "kind": "candidate",
+      "version": "pop-NCP-007-v4-a0a74f013d75",
+      "createdAt": "2026-11-04T00:17:21.207Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "21465bf39af1e0e8586ef73b32a19230135265cea6b274322b93bdc32c239e59"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T00:18:20.760Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "21465bf39af1e0e8586ef73b32a19230135265cea6b274322b93bdc32c239e59",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/04-excel-download-and-parse/inputs/21465bf39af1e0e8586ef73b32a19230135265cea6b274322b93bdc32c239e59.json"
+          },
+          "bytes": 8768
+        },
+        "production": {
+          "id": "NCI-00009",
+          "policyId": "NCP-007",
+          "policyVersion": 4,
+          "planSha256": "a0a74f013d7512d44a107895f3840f5f5d63a93ec5db5ac72c4ec09d28dc4d80"
+        }
+      }
+    }
+  ]
+}

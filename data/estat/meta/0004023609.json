@@ -1,0 +1,258 @@
+{
+ "statsDataId": "0004023609",
+ "title": "品目分類 品目分類（2025年改定）（世帯主の年齢階級：金額）",
+ "statName": "家計調査",
+ "govOrg": "総務省",
+ "surveyDate": null,
+ "overallTotalNumber": 321782,
+ "dimensions": [
+  {
+   "id": "tab",
+   "name": "表章項目",
+   "valueCount": 1,
+   "sampleValues": [
+    {
+     "code": "01",
+     "name": "金額",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat01",
+   "name": "品目分類（2025年改定）",
+   "valueCount": 689,
+   "sampleValues": [
+    {
+     "code": "000100000",
+     "name": "世帯数分布(抽出率調整)",
+     "unit": "一万分比"
+    },
+    {
+     "code": "000200000",
+     "name": "集計世帯数",
+     "unit": "世帯"
+    },
+    {
+     "code": "000300000",
+     "name": "世帯人員",
+     "unit": "人"
+    },
+    {
+     "code": "000400000",
+     "name": "18歳未満人員",
+     "unit": "人"
+    },
+    {
+     "code": "000500000",
+     "name": "65歳以上人員",
+     "unit": "人"
+    },
+    {
+     "code": "000600000",
+     "name": "65歳以上無職者人員",
+     "unit": "人"
+    },
+    {
+     "code": "000700000",
+     "name": "有業人員",
+     "unit": "人"
+    },
+    {
+     "code": "000800000",
+     "name": "世帯主の年齢",
+     "unit": "歳"
+    },
+    {
+     "code": "000900000",
+     "name": "持家率",
+     "unit": "％"
+    },
+    {
+     "code": "001000000",
+     "name": "家賃・地代を支払っている世帯の割合",
+     "unit": "％"
+    },
+    {
+     "code": "001100000",
+     "name": "消費支出",
+     "unit": "円"
+    },
+    {
+     "code": "010000000",
+     "name": "1 食料",
+     "unit": "円"
+    }
+   ],
+   "hasTotal": true
+  },
+  {
+   "id": "cat02",
+   "name": "世帯区分（年次－二人以上の世帯）",
+   "valueCount": 2,
+   "sampleValues": [
+    {
+     "code": "03",
+     "name": "二人以上の世帯（2000年～）",
+     "unit": null
+    },
+    {
+     "code": "04",
+     "name": "二人以上の世帯のうち勤労者世帯（2000年～）",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat03",
+   "name": "世帯主の年齢階級",
+   "valueCount": 12,
+   "sampleValues": [
+    {
+     "code": "A00",
+     "name": "平均",
+     "unit": null
+    },
+    {
+     "code": "430",
+     "name": "29歳以下",
+     "unit": null
+    },
+    {
+     "code": "303",
+     "name": "30～39歳",
+     "unit": null
+    },
+    {
+     "code": "304",
+     "name": "40～49歳",
+     "unit": null
+    },
+    {
+     "code": "305",
+     "name": "50～59歳",
+     "unit": null
+    },
+    {
+     "code": "306",
+     "name": "60～69歳",
+     "unit": null
+    },
+    {
+     "code": "570",
+     "name": "70歳以上",
+     "unit": null
+    },
+    {
+     "code": "590",
+     "name": "25～34歳",
+     "unit": null
+    },
+    {
+     "code": "600",
+     "name": "35～44歳",
+     "unit": null
+    },
+    {
+     "code": "610",
+     "name": "45～54歳",
+     "unit": null
+    },
+    {
+     "code": "620",
+     "name": "55～64歳",
+     "unit": null
+    },
+    {
+     "code": "565",
+     "name": "65歳以上",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "area",
+   "name": "地域区分",
+   "valueCount": 1,
+   "sampleValues": [
+    {
+     "code": "00000",
+     "name": "全国",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "time",
+   "name": "時間軸（年次）",
+   "valueCount": 26,
+   "sampleValues": [
+    {
+     "code": "2000000000",
+     "name": "2000年",
+     "unit": null
+    },
+    {
+     "code": "2001000000",
+     "name": "2001年",
+     "unit": null
+    },
+    {
+     "code": "2002000000",
+     "name": "2002年",
+     "unit": null
+    },
+    {
+     "code": "2003000000",
+     "name": "2003年",
+     "unit": null
+    },
+    {
+     "code": "2004000000",
+     "name": "2004年",
+     "unit": null
+    },
+    {
+     "code": "2005000000",
+     "name": "2005年",
+     "unit": null
+    },
+    {
+     "code": "2006000000",
+     "name": "2006年",
+     "unit": null
+    },
+    {
+     "code": "2007000000",
+     "name": "2007年",
+     "unit": null
+    },
+    {
+     "code": "2008000000",
+     "name": "2008年",
+     "unit": null
+    },
+    {
+     "code": "2009000000",
+     "name": "2009年",
+     "unit": null
+    },
+    {
+     "code": "2010000000",
+     "name": "2010年",
+     "unit": null
+    },
+    {
+     "code": "2011000000",
+     "name": "2011年",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  }
+ ]
+}

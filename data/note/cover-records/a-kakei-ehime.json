@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-kakei-ehime",
+  "production": {
+    "id": "NCI-00064",
+    "policyId": "NCP-002",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "愛媛県の家計\n教養娯楽に注目",
+      "subline": "松山市・2024年\n二人以上の世帯",
+      "subject": "添付は愛媛県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無文字の閉じた本の模型を小さく1点だけ。家や車の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+      "evidence": "https://note.com/stats47/n/nb627534c8b66 2026-10-23公開API本文照合。松山市の2024年・二人以上の世帯の家計調査。教養娯楽0.77倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は愛媛県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は松山市であり県全域の観測図ではない。人物・キャラクターなし。",
+      "dataScope": {
+        "place": "松山市",
+        "year": "2024",
+        "households": "二人以上の世帯"
+      }
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "96b3e9ecbc2e86c42a28a263504d257d735573854741e7e5ef843ad766f95859",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-ehime/revisions/96b3e9ecbc2e86c42a28a263504d257d735573854741e7e5ef843ad766f95859.png"
+      },
+      "bytes": 80291,
+      "id": "96b3e9ecbc2e86c42a28a263504d257d735573854741e7e5ef843ad766f95859",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:57.866Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312771112/rectangle_large_type_2_c9204acf0a89d60034588942e7c0856c.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "96b3e9ecbc2e86c42a28a263504d257d735573854741e7e5ef843ad766f95859"
+      }
+    },
+    {
+      "sha256": "c15c6fd53cdc4af8226b7316a25bf1d06b168b3b3293666b8a751a0ec2f3aa5b",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-ehime/revisions/c15c6fd53cdc4af8226b7316a25bf1d06b168b3b3293666b8a751a0ec2f3aa5b.png"
+      },
+      "bytes": 124529,
+      "id": "c15c6fd53cdc4af8226b7316a25bf1d06b168b3b3293666b8a751a0ec2f3aa5b",
+      "kind": "candidate",
+      "version": "2026-10-02-household-r1",
+      "createdAt": "2026-10-02T03:17:49.995Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "de18c2f95f19b71537a1aff239e014ebc2726ddf325d0531b7ff5b0afa092350"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+        "reviewedAt": "2026-10-02T05:27:41.111Z"
+      },
+      "provenance": {
+        "renderer": "bold-note-cover",
+        "sourceUrl": "https://storage.stats47.jp/app/stats/culture-recreation-expenditure-total/values.json",
+        "sourceSha256": "2cc1a149e48bef7af14da21499f536c747d58f456d51ea9a92437214a7062e7f"
+      }
+    },
+    {
+      "sha256": "eb0c9bd6b4333ce7ccd7aa8e1ac86d0a29b93ac82fdcc848b50592ae925067c7",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-ehime/revisions/eb0c9bd6b4333ce7ccd7aa8e1ac86d0a29b93ac82fdcc848b50592ae925067c7.png"
+      },
+      "bytes": 108431,
+      "id": "eb0c9bd6b4333ce7ccd7aa8e1ac86d0a29b93ac82fdcc848b50592ae925067c7",
+      "kind": "r2-archive",
+      "version": "legacy-r2-import-2026-10-02",
+      "createdAt": "2026-10-02T03:28:18.614Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Legacy R2 asset preserved; not adopted for note",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "legacy-public-r2",
+        "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-ehime/images/cover-1280x670.png",
+        "sourceSha256": "eb0c9bd6b4333ce7ccd7aa8e1ac86d0a29b93ac82fdcc848b50592ae925067c7"
+      }
+    },
+    {
+      "sha256": "23cb614ab26ba2ffb632a75328e1abd0520d605ec6abefa5f871a3e9370d2fc2",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-ehime/revisions/23cb614ab26ba2ffb632a75328e1abd0520d605ec6abefa5f871a3e9370d2fc2.png"
+      },
+      "bytes": 1708543,
+      "id": "23cb614ab26ba2ffb632a75328e1abd0520d605ec6abefa5f871a3e9370d2fc2",
+      "kind": "candidate",
+      "version": "pop-NCP-002-v3-ca193b9ec441",
+      "createdAt": "2026-10-23T10:11:34.611Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "fed37c2b8c8b561fa6528bfb6798b4d13f7f85624a2fbd6b49e65698340eafe1"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の松山市・2024年・二人以上の世帯と県輪郭、全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T10:14:05.489Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "fed37c2b8c8b561fa6528bfb6798b4d13f7f85624a2fbd6b49e65698340eafe1",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-ehime/inputs/fed37c2b8c8b561fa6528bfb6798b4d13f7f85624a2fbd6b49e65698340eafe1.json"
+          },
+          "bytes": 12942
+        },
+        "production": {
+          "id": "NCI-00064",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "ca193b9ec441d16e9994cf26c94cdb3e28e0eacb2e8859f4a341922b0c97efca"
+        }
+      }
+    }
+  ]
+}

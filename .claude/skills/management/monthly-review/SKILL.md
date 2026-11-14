@@ -47,7 +47,7 @@ node .claude/scripts/management/check-review-cadence.mjs
 | NSM 改善実験 | `data/business/experiments.json` の `status` と `next_check_date`。対象月までに期日が来た running / proposed |
 | 事業計画 | `data/business-plan/latest.json` の `nextActions` と開始ゲート |
 | 月次の自動処理 | `data/ci/monthly-jobs` の各ジョブ (`ksj-catalog`・`estat-catalog`・`ctr-improvement`・`cloudflare-snapshot`) の対象月の記録。`status` (ok / skipped / failed)・`runUrl`・`summary` (CTR は改善候補の本文) を読む。Cloudflare の費用の中身は `data/cloudflare/monthly-snapshots` (請求サイクル開始月の名前) |
-| 月次の定点観測 | `/competitor-scan` の `.claude/skills/sns/competitor-scan/reference/reports` (対象月の日付のレポート)、X の勝ちパターンの月次レポート |
+| 月次の定点観測 | `/competitor-scan` の `data/sns/competitor-scans` (対象月の日付のレポート)、X の勝ちパターンの月次レポート |
 | 開いているアラート | `gh issue list --label auto-generated --state open` (横断監視 #763 を含む) |
 | GSC の月次接続 | `node .claude/scripts/gsc/audit-operations-cycle.mjs --stage monthly` |
 | GSC画面監査・技術是正 | `data/gsc/ui-audits/`、`data/improvement/gsc-improvement/improvement-log.md`、`.claude/todo/backlog.md`。対象月の監査・修正・本番確認・Google再検証を読み、月末以降の観測は後続確認として分ける。全理由・メッセージ・拡張の月次画面点検は `.claude/skills/analytics/gsc-improvement/SKILL.md`「画面監査・技術是正とレビューへの引き渡し」に従う |
@@ -59,7 +59,7 @@ node .claude/scripts/management/check-review-cadence.mjs
 2. **KPI ツリーの判定**: 重点レーンの駆動 KPI について、月内の週次推移と、4 週前 (窓が重ならない週) との比較を書き、
    動いた・動かなかったを 1 文で判定する。値が `not-connected` / `missing` / `stale` / `degraded` の KPI は 0 と読まず、
    理由を書いて「課題・ブロッカー」へ入れる。NSM (週次収益) の判定不能週を 0 円と書かない。
-   領域表 (収益化戦略 §5) の「構えを変える条件」を満たした領域があれば、来月への申し送りに改訂提案として書く。
+   領域の台帳 `data/business/domain-stances.json` の「構えを変える条件」(`gate`) を満たした領域があれば、来月への申し送りに改訂提案として書く。
 3. **週次レビューの総括**: 週ごとの Must 達成比、2 週以上続いた未達、週次の申し送りがカード ID に結ばれた割合
    (`check-review-cadence.mjs --json` の `reviews.weekly[].routed`) を表にする。
 4. **施策の効果判定**: 対象月の verdict を full / partial / none / adverse / pending ごとに数え、pending は効いている

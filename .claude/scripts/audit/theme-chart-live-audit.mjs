@@ -35,9 +35,11 @@ import { pathToFileURL } from "node:url";
 import {
   classifyNational,
   inspectStatsPayload,
+  inspectTrendYears,
   isFiniteEstatValue,
   parseAuditLimit,
   parseDependencyMirror,
+  parseTrendChartMirror,
   summarizeAudit,
 } from "./theme-chart-live-audit-core.mjs";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
@@ -95,7 +97,7 @@ function loadExpectedDependencies() {
       `依存ミラーを読めません: ${DEPENDENCY_MIRROR}; ${String(error).slice(0, 120)}`,
     );
   }
-  return parseDependencyMirror(raw);
+  return { ...parseDependencyMirror(raw), ...parseTrendChartMirror(raw) };
 }
 
 function resolveR2PublicBase() {
@@ -174,7 +176,7 @@ async function inspectR2(metric, dispatcher, publicBase, staged) {
 async function main() {
   const { json, limit, staged } = parseArgs();
   const dispatcher = resolveDispatcher();
-  const { metrics: allMetrics, distinctExpected } =
+  const { metrics: allMetrics, distinctExpected, trendCharts, minTrendYears } =
     loadExpectedDependencies();
   const allDependencies = allMetrics.map((metric) => ({ kind: 'r2', ...metric }));
   const partial = limit !== null && limit < allDependencies.length;
@@ -204,6 +206,15 @@ async function main() {
     }
     // 公開ストレージへの連続読み取りを間隔を置いて行う。
     await new Promise((r) => setTimeout(r, 250));
+  }
+
+  // 「推移」と題した図は、描く指標の観測年が最低点数に満たなければ落とす (DISPLAY-SEMANTICS-FOLLOWUP-01)。
+  // 2〜4 点では線にならず、値と年を読めば足りる (apps/web の MIN_TREND_YEARS と同じ基準)。
+  const trendViolations = inspectTrendYears({ trendCharts, minTrendYears, results });
+  for (const v of trendViolations) {
+    errors.push(
+      `[trend-years-short] ${v.where} (R2 ${v.metricKey}): 「${v.title}」の観測年が ${v.yearCount} 件で、最低 ${v.minTrendYears} 件に満たない`,
+    );
   }
 
   for (const [title, list] of [
@@ -239,6 +250,7 @@ async function main() {
           coverageOk: summary.coverageOk,
           errorCount: errors.length,
           warnCount: areaCoverageWarns.length,
+          trendYearsShortCount: trendViolations.length,
           areaCoverageWarningCount: areaCoverageWarns.length,
           results,
         },

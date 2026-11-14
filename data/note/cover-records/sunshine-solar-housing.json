@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "sunshine-solar-housing",
+  "production": {
+    "id": "NCI-00495",
+    "policyId": "NCP-004",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "日照時間と\n住宅の太陽光普及率",
+      "subline": "順位は一致する？\n2024年と2023年の比較",
+      "subject": "右側に文字のない太陽と、屋根に太陽光パネルのある無人の戸建て住宅を一組で大きく描く。日照時間と住宅の設備普及率を比較する記事。発電量・因果・順位を暗示する図や架空のグラフ、人物、キャラクター、地図、指定外の数字や文字は描かない。",
+      "evidence": "https://note.com/stats47/n/n2fffce0e2320 公開本文を2026-10-14確認。年間日照時間2024年と太陽光発電機のある住宅割合2023年。発電量や設備容量ではなく、全住宅に対する普及率。単純な因果や経済効果はカバーで主張しない。 2026-10-23再確認。 2026-10-23再確認。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "dd4206923c377b17e147d67d7e74f9734d891f802e87765aa8fa9efdfbd8a798",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/sunshine-solar-housing/revisions/dd4206923c377b17e147d67d7e74f9734d891f802e87765aa8fa9efdfbd8a798.png"
+      },
+      "bytes": 47894,
+      "id": "dd4206923c377b17e147d67d7e74f9734d891f802e87765aa8fa9efdfbd8a798",
+      "kind": "candidate",
+      "version": "2026-10-12-drafts",
+      "createdAt": "2026-10-12T00:53:46.847Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "5297ca327121f6ee24c2b60a3e1af810a4243817354dfd6e3ab32d48442aa19b"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px相当で見出し・記事の事実・図(または値を持たない背景地図)が読める。登録前の確認版とSHA一致",
+        "reviewedAt": "2026-10-12T00:54:41.071Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "5297ca327121f6ee24c2b60a3e1af810a4243817354dfd6e3ab32d48442aa19b",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/sunshine-solar-housing/inputs/5297ca327121f6ee24c2b60a3e1af810a4243817354dfd6e3ab32d48442aa19b.json"
+          },
+          "bytes": 1317
+        }
+      }
+    },
+    {
+      "sha256": "10138fde56cc7c7f3ae1ffd2c1eaac779121f12c958fcd048cc3f5be45c8b41c",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/sunshine-solar-housing/revisions/10138fde56cc7c7f3ae1ffd2c1eaac779121f12c958fcd048cc3f5be45c8b41c.png"
+      },
+      "bytes": 69931,
+      "id": "10138fde56cc7c7f3ae1ffd2c1eaac779121f12c958fcd048cc3f5be45c8b41c",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-14T08:41:38.975Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/323552395/rectangle_large_type_2_53b922153ce0e0bf052c4a944e01d5c4.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "10138fde56cc7c7f3ae1ffd2c1eaac779121f12c958fcd048cc3f5be45c8b41c"
+      }
+    },
+    {
+      "sha256": "94d65eaa38b5e68c0665e2417fcb170c7a79610043de152cb2b137fc3408f5c1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/sunshine-solar-housing/revisions/94d65eaa38b5e68c0665e2417fcb170c7a79610043de152cb2b137fc3408f5c1.png"
+      },
+      "bytes": 1951491,
+      "id": "94d65eaa38b5e68c0665e2417fcb170c7a79610043de152cb2b137fc3408f5c1",
+      "kind": "candidate",
+      "version": "imagegen-pop-v2-next-six-20261014",
+      "createdAt": "2026-10-14T08:58:21.091Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "cb27b0107725722c2d677d4896da77be86c87a032fcb45754fbbd953808d8a6f"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "2026-10-14に原寸と幅320px、管理画面の修正前後で確認済み。2026-10-15ユーザーがこの6件の公開反映を指示。",
+        "reviewedAt": "2026-10-15T00:44:36.445Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "cb27b0107725722c2d677d4896da77be86c87a032fcb45754fbbd953808d8a6f",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/sunshine-solar-housing/inputs/cb27b0107725722c2d677d4896da77be86c87a032fcb45754fbbd953808d8a6f.json"
+          },
+          "bytes": 8002
+        },
+        "production": {
+          "id": "NCI-00495",
+          "policyId": "NCP-004",
+          "policyVersion": 2,
+          "planSha256": "7e0baa8f684f5bf7ae227f95b7cb2b97ab81d52991967cbe27117ecd3df6dea1"
+        }
+      }
+    },
+    {
+      "sha256": "eeede2e6635e8e9c7648a37b7cb22bf5c1c799a0ab886aee4b7b8a61361f24f0",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/sunshine-solar-housing/revisions/eeede2e6635e8e9c7648a37b7cb22bf5c1c799a0ab886aee4b7b8a61361f24f0.png"
+      },
+      "bytes": 1911170,
+      "id": "eeede2e6635e8e9c7648a37b7cb22bf5c1c799a0ab886aee4b7b8a61361f24f0",
+      "kind": "candidate",
+      "version": "pop-NCP-004-v3-78c2af7ed64a",
+      "createdAt": "2026-10-23T07:06:13.167Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "fe7df710d058358d7881a889ecd3c83c0f99c6d92b5b5d080b6b47196b195888"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "本文の2024年日照時間と2023年住宅太陽光普及率に一致。新旧を管理画面で比較し、原寸と幅320pxで全掲載文字・太陽と住宅の題材を確認。",
+        "reviewedAt": "2026-10-23T07:08:37.689Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "fe7df710d058358d7881a889ecd3c83c0f99c6d92b5b5d080b6b47196b195888",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/sunshine-solar-housing/inputs/fe7df710d058358d7881a889ecd3c83c0f99c6d92b5b5d080b6b47196b195888.json"
+          },
+          "bytes": 8393
+        },
+        "production": {
+          "id": "NCI-00495",
+          "policyId": "NCP-004",
+          "policyVersion": 3,
+          "planSha256": "78c2af7ed64a7e560b1db4096a37d1777ae4259207299cfdbbc1ab2063cf292a"
+        }
+      }
+    }
+  ]
+}

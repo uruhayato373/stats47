@@ -4,7 +4,7 @@
     {
       "keyword": "40代 未婚 割合 日本 国勢調査",
       "targetPath": "/survey/census",
-      "status": "observing",
+      "status": "active",
       "actions": [
         {
           "date": "2026-09-13",
@@ -36,7 +36,7 @@
           ]
         }
       ],
-      "nextReviewDate": "2026-09-20",
+      "nextReviewDate": null,
       "reviews": [
         {
           "date": "2026-09-20",
@@ -1863,8 +1863,92 @@
             "windowDays": 7
           },
           "snapshotHash": "a2003d13107580a955df4fbddaba760232d3317ace10bf312967f6fafca8257a"
+        },
+        {
+          "date": "2026-11-13",
+          "outcome": "insufficient-data",
+          "reason": "query-page-not-reported",
+          "period": {
+            "periodStart": "2026-11-04",
+            "periodEnd": "2026-11-10",
+            "windowDays": 7
+          },
+          "snapshotHash": "026f69e772586fb12bda9035096dda9aafcd844624cc7cf2b5fee9d7b3d08c7c"
+        },
+        {
+          "date": "2026-11-13",
+          "outcome": "insufficient-data",
+          "reason": "query-page-not-reported",
+          "period": {
+            "periodStart": "2026-11-04",
+            "periodEnd": "2026-11-10",
+            "windowDays": 7
+          },
+          "snapshotHash": "a2dc20c4bf8134a16c27c296eea04559d6140b69ec23013f4a6872eac99ab7f6"
+        },
+        {
+          "date": "2026-11-13",
+          "outcome": "insufficient-data",
+          "reason": "query-page-not-reported",
+          "period": {
+            "periodStart": "2026-11-04",
+            "periodEnd": "2026-11-10",
+            "windowDays": 7
+          },
+          "snapshotHash": "107582edb8bf573e69658e70ad27d309b9786e350c21282e008da506a1d21e3e"
+        },
+        {
+          "date": "2026-11-13",
+          "outcome": "insufficient-data",
+          "reason": "query-page-not-reported",
+          "period": {
+            "periodStart": "2026-11-04",
+            "periodEnd": "2026-11-10",
+            "windowDays": 7
+          },
+          "snapshotHash": "87374e82a97f9427a5508066abbe19021f7799b5005dbd3f830d91609f6f88e0"
+        },
+        {
+          "date": "2026-11-13",
+          "outcome": "insufficient-data",
+          "reason": "query-page-not-reported",
+          "period": {
+            "periodStart": "2026-11-04",
+            "periodEnd": "2026-11-10",
+            "windowDays": 7
+          },
+          "snapshotHash": "49d33b7488fb6de9e49c46d4887d49d7807b1c9c45f91b1b5cc3cf8513b69dcb"
+        },
+        {
+          "date": "2026-11-13",
+          "outcome": "insufficient-data",
+          "reason": "query-page-not-reported",
+          "period": {
+            "periodStart": "2026-11-04",
+            "periodEnd": "2026-11-10",
+            "windowDays": 7
+          },
+          "snapshotHash": "95eb5dc8f0b626182c666773c59b634e6887ba8e54ab83ee03a8b262041334d6"
+        },
+        {
+          "date": "2026-11-14",
+          "outcome": "insufficient-data",
+          "reason": "closed-query-page-never-reported",
+          "note": "判定日 2026-09-20 を過ぎても Search Console にこの検索語とページの組の実績が出ず、161 回とも判定できなかった (2026-09-23〜2026-11-13)。国勢調査のページの指標の紐付けの修正 (7d417cfbc) を本番へ出すため、効果は判定不能として観測を閉じる (2026-11-14 オーナー承認)。",
+          "before": 4.385786802030457,
+          "after": null,
+          "attribution": "observed-change-only"
         }
-      ]
+      ],
+      "lastReview": {
+        "date": "2026-11-14",
+        "outcome": "insufficient-data",
+        "reason": "closed-query-page-never-reported",
+        "note": "判定日 2026-09-20 を過ぎても Search Console にこの検索語とページの組の実績が出ず、161 回とも判定できなかった (2026-09-23〜2026-11-13)。国勢調査のページの指標の紐付けの修正 (7d417cfbc) を本番へ出すため、効果は判定不能として観測を閉じる (2026-11-14 オーナー承認)。",
+        "before": 4.385786802030457,
+        "after": null,
+        "attribution": "observed-change-only"
+      }
     }
   ]
 }

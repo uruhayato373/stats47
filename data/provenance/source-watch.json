@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-07T23:43:42.400Z",
+  "checkedAt": "2026-11-14T04:01:46.626Z",
   "noUrl": [
     "disposable-income-after-rent",
     "engel-coefficient",
@@ -11,7 +11,7 @@
       "hash": "3ef4f2c7d94e627b",
       "latestYear": 2054,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "breast-cancer-asr75-mortality-female"
@@ -21,7 +21,7 @@
       "hash": "6c76a4b916d07035",
       "latestYear": 2025,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "healthy-life-expectancy-female",
@@ -32,7 +32,7 @@
       "hash": "47d4036653405a9f",
       "latestYear": 2019,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "junior-high-club-per100-badminton",
@@ -51,7 +51,7 @@
       "hash": "749ddf8ddab4729b",
       "latestYear": 2025,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "residential-official-land-median-price",
@@ -62,7 +62,7 @@
       "hash": "3023a5f0c990ec76",
       "latestYear": 2025,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "railway-passengers"
@@ -72,7 +72,7 @@
       "hash": "5694d088e15e5a13",
       "latestYear": 2070,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "low-elevation-population-ratio-5m"
@@ -82,7 +82,7 @@
       "hash": "4511dbe41369b17b",
       "latestYear": 2026,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "airport-count",
@@ -94,7 +94,7 @@
       "hash": "2954faa73f47c04c",
       "latestYear": 2023,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "regional-business-co2-emissions-estimate",
@@ -109,7 +109,7 @@
       "hash": "fbeecff591499123",
       "latestYear": 2025,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": "2026-11-06T23:06:07.546Z",
       "metrics": [
         "tsunami-evacuation-building-count",
@@ -120,7 +120,7 @@
       "hash": "5cc7dd5ea34d2b5b",
       "latestYear": 2026,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "individual-evacuation-plan-coverage-rate",
@@ -132,7 +132,7 @@
       "hash": "8e1b9460b29d630c",
       "latestYear": 2026,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "prefecture-designated-cultural-property-count"
@@ -142,7 +142,7 @@
       "hash": "b9d339d0914d3022",
       "latestYear": 2026,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "buried-cultural-property-specialist-count"
@@ -152,7 +152,7 @@
       "hash": "e135bbd65fdff2af",
       "latestYear": 2024,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "prefectural-cultural-property-protection-expenditure"
@@ -162,7 +162,7 @@
       "hash": "0c8fee5ee481b30e",
       "latestYear": 2025,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "consumer-consultation-accepted-cases"
@@ -172,7 +172,7 @@
       "hash": "3ad44b9c92aa1c65",
       "latestYear": 2025,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "childcare-applicants",
@@ -180,21 +180,21 @@
       ]
     },
     "https://www.digital.go.jp/resources/data_local_governments": {
-      "hash": "f0eea46b6b79ac27",
+      "hash": "8e46b68813367395",
       "latestYear": 2026,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
-      "changedAt": null,
+      "checkedAt": "2026-11-14T04:01:46.626Z",
+      "changedAt": "2026-11-14T04:01:46.626Z",
       "metrics": [
         "opendata-adoption-rate-municipalities"
       ]
     },
     "https://www.digital.go.jp/resources/govdashboard/watersupply": {
-      "hash": "d4ee9af5760e9b5d",
+      "hash": "02d381ce6db4bbf8",
       "latestYear": 2026,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
-      "changedAt": null,
+      "checkedAt": "2026-11-14T04:01:46.626Z",
+      "changedAt": "2026-11-14T04:01:46.626Z",
       "metrics": [
         "public-water-aged-pipe-length",
         "public-water-pipe-aging-rate",
@@ -207,7 +207,7 @@
       "hash": "91a1d0cd7b4c1355",
       "latestYear": 2025,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": "2026-11-06T23:06:07.546Z",
       "metrics": [
         "private-establishment-net-value-added"
@@ -217,7 +217,7 @@
       "hash": "73e3b565333fe4b4",
       "latestYear": 2023,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": "2026-11-06T23:06:07.546Z",
       "metrics": [
         "port-container-tonnage"
@@ -227,7 +227,7 @@
       "hash": "99f0767b55f12e7c",
       "latestYear": 2023,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": "2026-11-06T23:06:07.546Z",
       "metrics": [
         "port-passengers-boarding",
@@ -238,7 +238,7 @@
       "hash": "5acd8c7cb577b5a8",
       "latestYear": 2023,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": "2026-11-06T23:06:07.546Z",
       "metrics": [
         "port-cargo-coastal-in",
@@ -249,7 +249,7 @@
       "hash": "6d736466eaf82862",
       "latestYear": 2023,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": "2026-11-06T23:06:07.546Z",
       "metrics": [
         "port-ships-total"
@@ -259,7 +259,7 @@
       "hash": "d073d691ea0d10f9",
       "latestYear": 2023,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": "2026-11-06T23:06:07.546Z",
       "metrics": [
         "port-vehicle-ferry-car",
@@ -271,7 +271,7 @@
       "hash": "a5354825e86c3049",
       "latestYear": 2021,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": "2026-11-06T23:06:07.546Z",
       "metrics": [
         "employment-location-quotient-health-welfare",
@@ -283,7 +283,7 @@
       "hash": "2c0744bfb80b2c54",
       "latestYear": 2021,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": "2026-11-06T23:06:07.546Z",
       "metrics": [
         "amusement-industry-net-value-added",
@@ -299,7 +299,7 @@
       "hash": "74bc641be8757c73",
       "latestYear": 2023,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": "2026-11-06T23:06:07.546Z",
       "metrics": [
         "delivery-hospital-count"
@@ -309,7 +309,7 @@
       "hash": "5052d9e36bad4a31",
       "latestYear": 2023,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": "2026-11-06T23:06:07.546Z",
       "metrics": [
         "delivery-clinic-count"
@@ -319,7 +319,7 @@
       "hash": "3573a8fbb4757325",
       "latestYear": null,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": "2026-11-06T23:06:07.546Z",
       "metrics": [
         "forestry-mushroom-output-value",
@@ -331,7 +331,7 @@
       "hash": "feb52d5d60991482",
       "latestYear": null,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "roundwood-hinoki-production-volume",
@@ -343,7 +343,7 @@
       "hash": "6c9e36f0765eea47",
       "latestYear": null,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "sawmill-count"
@@ -353,7 +353,7 @@
       "hash": "06741629db890774",
       "latestYear": null,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "sawnwood-shipment-volume"
@@ -363,7 +363,7 @@
       "hash": "ab06a99a88d5b0ac",
       "latestYear": null,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "forestry-management-entities"
@@ -373,7 +373,7 @@
       "hash": "0a2c8713b7a1077c",
       "latestYear": null,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "forestry-hired-workers"
@@ -383,7 +383,7 @@
       "hash": "6b9e32348b4af097",
       "latestYear": null,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "forestry-internal-workers"
@@ -393,7 +393,7 @@
       "hash": "dd4b2c47bbf6c0b1",
       "latestYear": null,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "medical-physicians-age-40-59",
@@ -405,7 +405,7 @@
       "hash": "01686b273eb73729",
       "latestYear": null,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "medical-physicians-emergency-medicine",
@@ -417,7 +417,7 @@
       "hash": "a385a247bd2bcba1",
       "latestYear": null,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "raw-milk-production"
@@ -427,7 +427,7 @@
       "hash": "3eabc1bdd04928de",
       "latestYear": 2024,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": "2026-11-06T23:06:07.546Z",
       "metrics": [
         "regional-business-final-energy-consumption",
@@ -440,7 +440,7 @@
       "hash": "e9e144f9764225df",
       "latestYear": 2024,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": "2026-11-06T23:06:07.546Z",
       "metrics": [
         "agricultural-output"
@@ -450,7 +450,7 @@
       "hash": "674d52f5ac6aa472",
       "latestYear": 2025,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": "2026-11-06T23:06:07.546Z",
       "metrics": [
         "prefectural-public-building-floor-area"
@@ -460,7 +460,7 @@
       "hash": "b673108dd263237f",
       "latestYear": 2025,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": "2026-11-06T23:06:07.546Z",
       "metrics": [
         "food-manufacturing-employees",
@@ -469,11 +469,11 @@
       ]
     },
     "https://www.e-stat.go.jp/stat-search/files?toukei=00450223": {
-      "hash": "32f6721d5e1d2175",
+      "hash": "c7d99f7d707907a5",
       "latestYear": 2026,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
-      "changedAt": "2026-11-06T23:06:07.546Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
+      "changedAt": "2026-11-14T04:01:46.626Z",
       "metrics": [
         "business-closure-establishments",
         "business-closure-rate",
@@ -486,7 +486,7 @@
       "hash": "a988f016a7d86051",
       "latestYear": 2019,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "pm25-compliant-general-station-count",
@@ -499,7 +499,7 @@
       "hash": "eaf0700851b7be22",
       "latestYear": null,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "national-quasi-national-park-visits"
@@ -509,7 +509,7 @@
       "hash": "bf02596453a51ef4",
       "latestYear": 2025,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "heatstroke-emergency-transports"
@@ -519,7 +519,7 @@
       "hash": "d1ed24d1eca08617",
       "latestYear": 2025,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "natural-disaster-deaths",
@@ -534,7 +534,7 @@
       "hash": "011de7c18ab94081",
       "latestYear": 2025,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "ambulance-hospital-arrival-time",
@@ -550,7 +550,7 @@
       "hash": "a6ad2fe01b1c4208",
       "latestYear": null,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "fit-fip-installed-capacity",
@@ -562,7 +562,7 @@
       "hash": "336c180dd50f50d9",
       "latestYear": 2026,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "prefectural-assembly-female-share",
@@ -573,7 +573,7 @@
       "hash": "f11936df8545eb3c",
       "latestYear": 2070,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "future-population-change-rate-2050",
@@ -584,7 +584,7 @@
       "hash": "c645502d806884ee",
       "latestYear": null,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "fishing-port-count-ksj"
@@ -594,7 +594,7 @@
       "hash": "b6c64d877816461b",
       "latestYear": 2026,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "beef-cattle-count",
@@ -607,7 +607,7 @@
       "hash": "fc588aeb569e2b0b",
       "latestYear": 2025,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "public-school-closures-cumulative"
@@ -617,7 +617,7 @@
       "hash": "f5f2e846a1ed9c72",
       "latestYear": 2026,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "designated-museum-visitors",
@@ -629,7 +629,7 @@
       "hash": "dd6e9ce2c1289c9e",
       "latestYear": 2024,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "athletics-stadium-count-public",
@@ -641,7 +641,7 @@
       "hash": "2c45e40d4d2bff32",
       "latestYear": 2025,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "elementary5-fitness-score-female",
@@ -654,7 +654,7 @@
       "hash": "ff87172adb1246c4",
       "latestYear": null,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "salt-intake-female-age-adjusted",
@@ -667,7 +667,7 @@
       "hash": "95efcf4dc8500954",
       "latestYear": null,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "health-checkup-breakfast-skipping-rate",
@@ -678,7 +678,7 @@
       "hash": "b7e0a26d3a0e2659",
       "latestYear": 2019,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "metabolic-syndrome-prevalence-among-checkup-recipients",
@@ -690,7 +690,7 @@
       "hash": "2680752ae6220936",
       "latestYear": 2026,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "foreign-employing-establishment-count",
@@ -701,18 +701,18 @@
       "hash": "127e125821e0447e",
       "latestYear": 2026,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "poverty-support-new-consultation-cases"
       ]
     },
     "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000186912.html": {
-      "hash": "e20f73d52564ed83",
+      "hash": "7e7e2ad104e1022c",
       "latestYear": 2023,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
-      "changedAt": null,
+      "checkedAt": "2026-11-14T04:01:46.626Z",
+      "changedAt": "2026-11-14T04:01:46.626Z",
       "metrics": [
         "general-perinatal-center-count",
         "regional-perinatal-center-count"
@@ -722,7 +722,7 @@
       "hash": "d53d970e17e5b69a",
       "latestYear": null,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "bmi-female-40to69-age-adjusted",
@@ -736,7 +736,7 @@
       "hash": "6b20112ee127caef",
       "latestYear": 2023,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "new-cancer-incidence-count"
@@ -746,7 +746,7 @@
       "hash": "a3eff683b5a31b5d",
       "latestYear": null,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "long-term-care-certified-persons"
@@ -756,7 +756,7 @@
       "hash": "efcef2f36399b503",
       "latestYear": 2011,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "home-medical-visit-cases",
@@ -767,7 +767,7 @@
       "hash": "7e1c05cdfc40f256",
       "latestYear": null,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "municipal-mental-health-consultation-extended-persons"
@@ -777,7 +777,7 @@
       "hash": "762425f2d8054eb8",
       "latestYear": 2013,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "heatstroke-deaths"
@@ -787,7 +787,7 @@
       "hash": "0cf87862f229d209",
       "latestYear": null,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "k6-known-score-estimated-persons-12plus",
@@ -799,7 +799,7 @@
       "hash": "c38b2f9fd2335684",
       "latestYear": 2018,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "port-count"
@@ -809,7 +809,7 @@
       "hash": "fd3b0b9cae5b34a7",
       "latestYear": 2026,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "inbound-travel-consumption-by-destination",
@@ -821,7 +821,7 @@
       "hash": "1be6bd339469bb7a",
       "latestYear": 2026,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "domestic-travel-consumption-by-destination"
@@ -831,7 +831,7 @@
       "hash": "e0679b3a45b108b1",
       "latestYear": 2026,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "debris-flow-special-warning-zone-count",
@@ -848,7 +848,7 @@
       "hash": "ad6a97bb61d6f395",
       "latestYear": 2026,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "roadside-station-count"
@@ -858,7 +858,7 @@
       "hash": "6e6790acf2b6c1d7",
       "latestYear": 2025,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "road-bridge-condition-iii-count",
@@ -873,7 +873,7 @@
       "hash": "7816655134927201",
       "latestYear": 2025,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "academic-achievement-test-average-rate",
@@ -887,7 +887,7 @@
       "hash": "e168c2191a09c45d",
       "latestYear": 2025,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "alcohol-sales-per-adult-beer",
@@ -902,7 +902,7 @@
       "hash": "8298734b2ea9e446",
       "latestYear": null,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "residential-land-transaction-median-price",
@@ -913,7 +913,7 @@
       "hash": "3fed719190554a1e",
       "latestYear": 2022,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "financial-literacy-correct-rate"
@@ -923,7 +923,7 @@
       "hash": "6a55fc06620abd02",
       "latestYear": 2026,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "prefectural-auto-environment-tax-application-count",
@@ -940,7 +940,7 @@
       "hash": "4f13298353c2b846",
       "latestYear": 2025,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "avg-age-admin-prefecture",
@@ -959,7 +959,7 @@
       "hash": "bb080a0975d72c4c",
       "latestYear": 2026,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "furusato-donation-amount-prefecture",
@@ -975,18 +975,18 @@
       "hash": "0cac82144092e0e5",
       "latestYear": 2022,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "sex-ratio-age-20-39"
       ]
     },
     "https://www.zen-koutairen.com/statistics/": {
-      "hash": "f44a346d9cc3bbfa",
-      "latestYear": 2026,
+      "hash": "214e985d08aa5576",
+      "latestYear": 2027,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
-      "changedAt": null,
+      "checkedAt": "2026-11-14T04:01:46.626Z",
+      "changedAt": "2026-11-14T04:01:46.626Z",
       "metrics": [
         "high-school-club-per100-rugby-male"
       ]
@@ -995,7 +995,7 @@
       "hash": "6a665c809be7c13c",
       "latestYear": 2026,
       "status": 200,
-      "checkedAt": "2026-11-07T23:43:42.400Z",
+      "checkedAt": "2026-11-14T04:01:46.626Z",
       "changedAt": null,
       "metrics": [
         "pachinko-shop-density-per-10k"

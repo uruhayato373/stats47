@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-prc-a43",
+  "production": {
+    "id": "NCI-00225",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "納豆への支出は\n東西で違う？",
+      "subline": "福島市が最多・和歌山市が最少",
+      "subject": "わらに包んだ納豆と、かき混ぜた納豆の小鉢、箸を大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n245947d339bc 本文確認2026-11-04。納豆への支出は福島市が最多、和歌山市が最少。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "6cc94e619c6fb3d3cd1da147b1e815f2a22b0fbf08ced7544945e2fe50ac6e26",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a43/revisions/6cc94e619c6fb3d3cd1da147b1e815f2a22b0fbf08ced7544945e2fe50ac6e26.png"
+      },
+      "bytes": 34899,
+      "id": "6cc94e619c6fb3d3cd1da147b1e815f2a22b0fbf08ced7544945e2fe50ac6e26",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:09:50.829Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "1c77ec6ababf2e93e08fa7b93d44543cac7689f6b4b3d4f91083d00207be7454"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:13:57.055Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "1c77ec6ababf2e93e08fa7b93d44543cac7689f6b4b3d4f91083d00207be7454",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a43/inputs/1c77ec6ababf2e93e08fa7b93d44543cac7689f6b4b3d4f91083d00207be7454.json"
+          },
+          "bytes": 1286
+        }
+      }
+    },
+    {
+      "sha256": "c1344a482c366a0f79a7750d316887ba599888ba5df0b9e163f38b2cd8279da0",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a43/revisions/c1344a482c366a0f79a7750d316887ba599888ba5df0b9e163f38b2cd8279da0.png"
+      },
+      "bytes": 58360,
+      "id": "c1344a482c366a0f79a7750d316887ba599888ba5df0b9e163f38b2cd8279da0",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:22:09.782Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324187430/rectangle_large_type_2_9c37342bd40dae5d3720c275ea76816b.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "c1344a482c366a0f79a7750d316887ba599888ba5df0b9e163f38b2cd8279da0"
+      }
+    },
+    {
+      "sha256": "7f3f93b682d7de6929b7f93bcd8cc95967b9b24d132d2a5589f1ab9fdcd04895",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a43/revisions/7f3f93b682d7de6929b7f93bcd8cc95967b9b24d132d2a5589f1ab9fdcd04895.png"
+      },
+      "bytes": 1885493,
+      "id": "7f3f93b682d7de6929b7f93bcd8cc95967b9b24d132d2a5589f1ab9fdcd04895",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-3f7a616ad22f",
+      "createdAt": "2026-11-04T02:20:59.278Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "afc8253bbf2cf3d0a97b7f3c6bedae55567ed10e86126a1fac14704d1051dc89"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T02:23:44.622Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "afc8253bbf2cf3d0a97b7f3c6bedae55567ed10e86126a1fac14704d1051dc89",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a43/inputs/afc8253bbf2cf3d0a97b7f3c6bedae55567ed10e86126a1fac14704d1051dc89.json"
+          },
+          "bytes": 8136
+        },
+        "production": {
+          "id": "NCI-00225",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "3f7a616ad22faff64a0410728751c3d0ddf340b16b100855d53c88f5c2208b10"
+        }
+      }
+    }
+  ]
+}

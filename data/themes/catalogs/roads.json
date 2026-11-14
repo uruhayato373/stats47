@@ -215,6 +215,48 @@
         "surveyedAt": "2026-09-09",
         "rationale": "トンネルの緊急措置段階（Ⅳ）を既存テーマの独立章へ追加する。"
       }
+    },
+    {
+      "rankingKey": "main-road-length-per-km2",
+      "shortLabel": "主要道路実延長（総面積1km²当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「国道・高速など幹線の長さの順位」に、全道路の密度とは別に幹線だけの密度で答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "municipal-road-paving-rate",
+      "shortLabel": "市町村道舗装率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「道路舗装率 ランキング」に対し、主要道路の舗装率だけでなく身近な市町村道の舗装率も並べて答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "traffic-accident-count-per-1000-km",
+      "shortLabel": "交通事故発生件数（道路1000km当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「交通事故が多い・少ない県はどこか」に、道路の長さで割った事故件数で答え、総量だけの章に割合を加える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
     }
   ],
   "charts": [
@@ -374,34 +416,20 @@
   "sections": [
     {
       "key": "road-stock",
-      "title": "道路ストックの規模と密度",
-      "description": "道路総延長と総面積1km²当たり道路実延長を分けて比較します。総延長は高速道路を含み、密度の分母は可住地面積ではなく総面積です。",
+      "title": "道路は県の広さに対してどれだけあり、どこまで舗装されているか",
+      "concern": "自分の県の道路は他県と比べて多いのか、整っているのかを知りたい。",
       "metricGroupKeys": [
-        "road-stock",
-        "road-density"
+        "road-stock-1",
+        "road-stock-2",
+        "road-stock-3",
+        "road-stock-4",
+        "road-stock-5"
       ],
       "chartKeys": [
         "roads-length-trend"
-      ]
-    },
-    {
-      "key": "expressways",
-      "title": "高速道路ネットワーク",
-      "description": "高速道路は道路総延長の一部です。両者を足して道路全体の長さにはできません。",
-      "metricGroupKeys": [
-        "expressways"
       ],
       "embeddedSectionKeys": [
         "highway"
-      ]
-    },
-    {
-      "key": "condition-use",
-      "title": "整備水準と利用状況",
-      "description": "舗装率と交通量は整備状態と利用状況の別の側面です。",
-      "metricGroupKeys": [
-        "condition-use-1",
-        "condition-use-2"
       ]
     },
     {
@@ -410,7 +438,8 @@
       "concern": "身近にある道路橋が老朽化し崩落や通行止めの危険がないか不安だ。",
       "metricGroupKeys": [
         "road-bridge-maintenance-1",
-        "road-bridge-maintenance-2"
+        "road-bridge-maintenance-2",
+        "road-bridge-maintenance-3"
       ],
       "chartKeys": [
         "roads-road-bridge-maintenance-composition-2"
@@ -425,26 +454,26 @@
       "concern": "山間部などのトンネルの老朽化が進み安全に通行できるか心配だ。",
       "metricGroupKeys": [
         "road-tunnel-maintenance-1",
-        "road-tunnel-maintenance-2"
+        "road-tunnel-maintenance-2",
+        "road-tunnel-maintenance-3"
       ],
       "chartKeys": [
         "roads-road-tunnel-maintenance-composition-2"
+      ]
+    },
+    {
+      "key": "condition-use",
+      "title": "道路は多く使われているか、道路あたりの事故は多いか",
+      "concern": "自分の県の道路の混み具合と、道路での事故の起きやすさを知りたい。",
+      "metricGroupKeys": [
+        "condition-use-1",
+        "condition-use-2"
       ]
     }
   ],
   "metricGroups": [
     {
-      "key": "road-stock",
-      "title": "道路総延長",
-      "rankingKeys": [
-        "road-total-length-with-expressway"
-      ],
-      "defaultCheckedKeys": [
-        "road-total-length-with-expressway"
-      ]
-    },
-    {
-      "key": "road-density",
+      "key": "road-stock-1",
       "title": "道路実延長（総面積1km²当たり）",
       "rankingKeys": [
         "road-length-per-km2"
@@ -454,17 +483,17 @@
       ]
     },
     {
-      "key": "expressways",
-      "title": "高速道路ネットワーク",
+      "key": "road-stock-2",
+      "title": "主要道路実延長（総面積1km²当たり）",
       "rankingKeys": [
-        "road-expressway-length"
+        "main-road-length-per-km2"
       ],
       "defaultCheckedKeys": [
-        "road-expressway-length"
+        "main-road-length-per-km2"
       ]
     },
     {
-      "key": "condition-use-1",
+      "key": "road-stock-3",
       "title": "主要道路舗装率",
       "rankingKeys": [
         "main-road-paving-rate"
@@ -474,13 +503,25 @@
       ]
     },
     {
-      "key": "condition-use-2",
-      "title": "道路平均交通量（昼間12時間）",
+      "key": "road-stock-4",
+      "title": "市町村道舗装率",
       "rankingKeys": [
-        "average-road-traffic-volume"
+        "municipal-road-paving-rate"
       ],
       "defaultCheckedKeys": [
-        "average-road-traffic-volume"
+        "municipal-road-paving-rate"
+      ]
+    },
+    {
+      "key": "road-stock-5",
+      "title": "道路総延長と高速道路延長の推移",
+      "rankingKeys": [
+        "road-total-length-with-expressway",
+        "road-expressway-length"
+      ],
+      "defaultCheckedKeys": [
+        "road-total-length-with-expressway",
+        "road-expressway-length"
       ]
     },
     {
@@ -495,15 +536,23 @@
     },
     {
       "key": "road-bridge-maintenance-2",
-      "title": "措置が必要な道路橋の内訳",
+      "title": "道路橋の早期措置段階（Ⅲ）",
       "rankingKeys": [
-        "road-bridge-condition-iii-count",
-        "road-bridge-condition-iv-count"
+        "road-bridge-condition-iii-count"
       ],
       "defaultCheckedKeys": [
         "road-bridge-condition-iii-count"
+      ]
+    },
+    {
+      "key": "road-bridge-maintenance-3",
+      "title": "道路橋の緊急措置段階（Ⅳ）",
+      "rankingKeys": [
+        "road-bridge-condition-iv-count"
       ],
-      "view": "tiles"
+      "defaultCheckedKeys": [
+        "road-bridge-condition-iv-count"
+      ]
     },
     {
       "key": "road-tunnel-maintenance-1",
@@ -517,15 +566,43 @@
     },
     {
       "key": "road-tunnel-maintenance-2",
-      "title": "措置が必要なトンネルの内訳",
+      "title": "トンネルの早期措置段階（Ⅲ）",
       "rankingKeys": [
-        "road-tunnel-condition-iii-count",
-        "road-tunnel-condition-iv-count"
+        "road-tunnel-condition-iii-count"
       ],
       "defaultCheckedKeys": [
         "road-tunnel-condition-iii-count"
+      ]
+    },
+    {
+      "key": "road-tunnel-maintenance-3",
+      "title": "トンネルの緊急措置段階（Ⅳ）",
+      "rankingKeys": [
+        "road-tunnel-condition-iv-count"
       ],
-      "view": "tiles"
+      "defaultCheckedKeys": [
+        "road-tunnel-condition-iv-count"
+      ]
+    },
+    {
+      "key": "condition-use-1",
+      "title": "交通事故発生件数（道路1000km当たり）",
+      "rankingKeys": [
+        "traffic-accident-count-per-1000-km"
+      ],
+      "defaultCheckedKeys": [
+        "traffic-accident-count-per-1000-km"
+      ]
+    },
+    {
+      "key": "condition-use-2",
+      "title": "道路平均交通量（昼間12時間）",
+      "rankingKeys": [
+        "average-road-traffic-volume"
+      ],
+      "defaultCheckedKeys": [
+        "average-road-traffic-volume"
+      ]
     }
   ]
 }

@@ -80,4 +80,4 @@ Phase A-B の抽出で出現頻度が高ければ Phase E で migration 検討:
 - スキル: `.claude/skills/analytics/whitepaper-chart-inventory/SKILL.md`
 - TEMPLATE: `./TEMPLATE.md`
 - 白書 SSOT: `.claude/skills/blog/brushup-blog-article/SKILL.md`
-- nlm CLI wrapper: `.claude/scripts/notebooklm-cross-query.mjs`
+- nlm CLI wrapper: `.claude/scripts/notebooklm/notebooklm-cross-query.mjs`

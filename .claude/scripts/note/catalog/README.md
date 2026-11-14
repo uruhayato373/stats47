@@ -13,9 +13,9 @@ note の全記事 (公開済み + 下書き) を、**記事 ID (key) の台帳 1
 | マガジン定義 (名称 / 有料無料 / 束ねる vertical / URL / 商品導線) | `data/note/magazines.json` | git の JSON + `magazines.schema.json` |
 | 本文と画像 (draft.md・SVG・PNG・chart-data.json など記事ディレクトリの全ファイル) | **無料 = 公開 R2・有料 = private R2** の `<r2Path>/` | R2 |
 | 保存の履歴 (ファイル名→SHA のマニフェスト・上書き前の旧ファイル) | private R2 `note-archive/manifests/<key>/<sha>.json`・`note-archive/blobs/<sha>` | R2 (不変) |
-| カバー画像 (候補 / 採用 / 公開の対応) | private R2 + `data/note/cover-assets.json` | 下の「公開カバー」 |
+| カバー画像 (候補 / 採用 / 公開の対応) | private R2 + `data/note/cover-assets.json` (版の記録は `data/note/cover-records/<key>.json`) | 下の「公開カバー」 |
 | カバーのカテゴリ方針・プロンプト (`NCP-*` と版) | `data/note/cover-policies.json` + Schema | git の JSON |
-| 記事の制作ID (`NCI-*`)・コピー・題材・根拠 | `data/note/cover-assets.json` の `production` | 画像台帳に統合 |
+| 記事の制作ID (`NCI-*`)・コピー・題材・根拠 | `data/note/cover-records/<key>.json` の `production` | 画像台帳に統合 (読み書きは `lib/cover-assets.mjs`) |
 | 有料記事の無料部分の文言 | `data/note/paid-landing/<key>.json` + `paid-landing.schema.json` | git の JSON |
 | 公開 URL の索引・下書き索引 | (派生) `data/note/note-published-urls.json`・`note-draft-index.json` | `generate-note-catalog.ts` が台帳から作る |
 
@@ -60,7 +60,7 @@ npm run note:article -- adopt <key>                # 台帳の外で R2 に置�
 | 派生インデックスが台帳と一致 | `npm run note:catalog:check` | PR・pre-commit |
 | docs/31 に追跡ファイルが無い | `npm run note:images:audit` | PR・pre-commit |
 | 公開 R2 の本文・生成 AI 背景の実在 | `npm run note:images:audit -- --verify-r2` | 週次 (週次レビューの `npm run weekly:audits` の note-circulation) |
-| 台帳と R2 (private を含む) の照合 | `npm run note:article -- verify` | ローカル (R2 の S3 認証が要る) |
+| 台帳と R2 (private を含む) の照合 | `npm run note:article -- verify` | 週次 (note-circulation の `ledger-r2-verify`・Mac の `.env.local` の S3 認証)。`--deep` は手で回す |
 | 保存・衝突・退避の仕組み | `npm run note:article:test` | PR |
 
 `validate-note-catalog.ts` の規則: **error** は key 重複 / 未登録マガジンキー / マガジンの vertical 不一致 / published なのに noteUrl 無し、
@@ -174,7 +174,8 @@ noteへの差し替えは下の既存公開工程を使う。候補ごとの目�
 
 ## 公開カバーの制作と差し替え
 
-画像の正本は非公開R2、台帳は `data/note/cover-assets.json`、形の契約は同ディレクトリのJSON Schema。
+画像の正本は非公開R2、台帳は `data/note/cover-assets.json` (候補・採用・公開の参照) と記事ごとの
+`data/note/cover-records/<key>.json` (制作内容と版の記録)、形の契約は同ディレクトリのJSON Schema。
 公開済み記事もドラフトも記事keyで結び、タイトルや分類は記事台帳から読む。
 管理画面の `/content/note/covers` と `/ops/image-library` は共通台帳を読む。特定PCのPNGや絶対パスに依存しない。
 
@@ -211,12 +212,14 @@ note ランキング記事の**リライトを楽にする**ため、記事ご�
 チャート再生成・数値検算ができる。
 
 - **新規記事**: `post-note-ranking` の Step 7.5 が作業コピーに `data-provenance.json` を生成し、`note:article save` で R2 へ保存する。
-- **既存記事の backfill**: `node .claude/scripts/note/catalog/backfill-note-data-provenance.mjs`
+- **既存記事の backfill**: `node .claude/scripts/note/catalog/backfill-note-data-provenance.mjs [--limit N] [--slug a,b]`
+  - 対象は記事台帳の stats47-note。記事のファイル一覧は台帳の `body.manifest` が指す private R2 のマニフェスト
+    (`note-archive/manifests/<key>/<sha>.json`) から、`draft.md` は台帳の `body.store` のバケットから読む (R2 の認証が要る。`note:article checkout` と同じ)。
   - slug (`a-<key>`) + draft.md の `stats47.jp/ranking/<key>` リンク + values.json の rank1/47 値照合で
-    rankingKey/年を**決定的に導出** (捏造しない)。`.local/r2/note/<vertical>/<slug>/data-provenance.json` に staging。
-  - 分類: `confirmed` (rank1+47 一致) / `partial` (D 系など一部不一致・要目視) / `no-chart` / `no-r2`。
-  - **実測 (2026-07-15)**: stats47-note 187 件中 confirmed 8 / partial 4 / no-chart 16 / **no-r2 159**。
-    no-r2 159 は `recovered-*` = note.com URL 回収スタブで **R2 記事本体が無く provenance を貼れない**
-    (published index の実態。カタログ+backfill で初めて可視化)。実 backfill 対象は R2 本体を持つ生成記事。
-- **R2 反映**: backfill の staging を記事の作業コピーへ置き、`note:article save <key>` で保存する
-  (台帳のマニフェストが更新される。`diff-push-r2` で記事本文を直接書かない。旧 `manifest.json` 依存は NOTE-PROVENANCE-BACKFILL-MANIFEST-01)。
+    rankingKey/年を**決定的に導出** (捏造しない)。
+  - 分類: `confirmed` (rank1+47 一致) / `partial` (D 系など一部不一致・要目視) / `ambiguous` / `no-chart` / `no-r2` (本文を R2 に保存していない)。
+  - **実測 (2026-07-15・旧 `manifest.json` を読んでいた版)**: stats47-note 187 件中 confirmed 8 / partial 4 / no-chart 16 / **no-r2 159**。
+    no-r2 159 は `recovered-*` = note.com URL 回収スタブで **R2 記事本体が無く provenance を貼れない**。実 backfill 対象は R2 本体を持つ生成記事。
+- **R2 反映**: backfill は R2 へ書かない。`confirmed`・`partial` の記事は作業コピー (`docs/31_note記事原稿/<key>/`) に保存済みの全ファイルを取り出し、
+  `data-provenance.json` を足す。末尾に出る `npm run note:article -- save <key...>` で保存する (台帳のマニフェストが更新される。`diff-push-r2` で記事本文を直接書かない)。
+  作業コピーに未保存の変更がある記事には置かず (`local-modified`)、保存済みと同じ内容なら作業コピーを作らない (`unchanged`)。

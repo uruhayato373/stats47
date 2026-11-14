@@ -12,6 +12,18 @@ export function normalizeKdpStatus(label) {
   return "unknown";
 }
 
+/**
+ * 台帳の kuEnrolled と、価格画面の「KDP セレクトに本を登録する」の状態が食い違う理由を返す (一致なら null)。
+ * 台帳が未登録で画面が登録ありの向きも止める。2026-11-13 に K-S1-05 がこの向きで食い違い、
+ * 台帳が登録ありの本しか画面を読まない検査では検出できなかった。画面から読めないときも一致と言わない。
+ */
+export function kdpSelectMismatch(ledgerEnrolled, screenChecked) {
+  if (screenChecked !== true && screenChecked !== false) return "KDP セレクトの状態を画面から読めない";
+  if (ledgerEnrolled === true && !screenChecked) return "KDP セレクトが未登録 (台帳は登録あり)";
+  if (ledgerEnrolled !== true && screenChecked) return "KDP セレクトに登録されている (台帳は未登録)";
+  return null;
+}
+
 export function mergeKdpOperationalState(listing, shelf, checkedAt = new Date().toISOString()) {
   const kdpStatusLabel = String(shelf?.status || "不明");
   const kdpStatus = normalizeKdpStatus(kdpStatusLabel);

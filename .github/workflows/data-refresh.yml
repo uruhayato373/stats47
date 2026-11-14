@@ -21,7 +21,7 @@ name: 🔄 Data Refresh (e-Stat → R2)
 #   (page-data-batch / export-master-snapshots / generate-ranking-items / area-profile は
 #   いずれも R2 + git TS 直結)。SSOT は git TS と R2 のみ。
 #
-# R2 書き込みはこの CI / クラウド専用 (_assert-ci-write ガードでローカル push は停止)。
+# R2 書き込みはこの CI 専用 (_assert-ci-write は GITHUB_ACTIONS=true で通し、ローカルの app/stats への push は止める)。
 #
 # 動作確認: workflow_dispatch + dry_run=true で fetch のみ実行し、その後 dry_run=false で
 #   1 metric (例 metric=japanese-population) を実 push 確認してから schedule を信頼すること。
@@ -330,7 +330,8 @@ jobs:
             '
             IFS=',' read -r -a KEYS <<< "$REFRESH_METRIC"
             for KEY in "${KEYS[@]}"; do
-              npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "app/stats/$KEY/"
+              # app/stats は観測値の唯一の正本。e-Stat から取り直した値で更新するのがこの workflow の目的なので上書きを許す
+              npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --allow-authoritative-overwrite --prefix "app/stats/$KEY/"
             done
           elif [ "$SNAPSHOT_SCOPE" = "municipality" ]; then
             test "$BATCH_OUTCOME" = "success" || { echo 'Scoped fetch failed; no observations published' >&2; exit 1; }
@@ -348,14 +349,16 @@ jobs:
             '
             IFS=',' read -r -a KEYS <<< "$REFRESH_METRIC"
             for KEY in "${KEYS[@]}"; do
-              npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "app/stats/$KEY/"
+              # app/stats は観測値の唯一の正本。e-Stat から取り直した値で更新するのがこの workflow の目的なので上書きを許す
+              npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --allow-authoritative-overwrite --prefix "app/stats/$KEY/"
             done
           else
-            npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/stats
+            # app/stats は観測値の唯一の正本。全指標を取り直した値で更新するのがこの workflow の目的なので上書きを許す
+            npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --allow-authoritative-overwrite --prefix app/stats
           fi
 
       # 派生 snapshot (master / ranking-values / area-profile 等) を git TS + 更新済観測値から
-      # 再生成 → R2 push (run.sh は CI=true で push する)。
+      # 再生成 → R2 push (run.sh は GITHUB_ACTIONS=true で push し、diff-push-r2 の書き込みガードも同じ変数で通る)。
       # ※ correlation task は 2026-06-14 に復活済 (R2 観測値 → 使い捨て :memory: SQLite の
       #   エフェメラル producer)。上の「廃止済」記述は stale だったので 2026-07-31 に是正した。
       #

@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-prc-a48",
+  "production": {
+    "id": "NCI-00229",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "関東7都県の\n1位と47位",
+      "subline": "全国で上位・下位に入る指標",
+      "subject": "木の棚に色違いの無文字のノート7冊を立てて並べ、手前に開いた無文字の手帳と鉛筆を置く。緑とクリーム色の雑誌挿絵。地図・グラフ・順位の図・数字は描かない。人物・手は描かない。",
+      "evidence": "https://note.com/stats47/n/ndc76fe819d05 2026-11-04公開本文確認。茨城・栃木・群馬・埼玉・千葉・東京・神奈川の7都県について、全国上位10位以内と下位10位以内の指標を3件ずつ選んだ記事。東京都は宿泊者数・世帯数等で1位、合計特殊出生率等で47位。順位は値の大きい順で良し悪しではない。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "a8f89383f58fd2a26376372fb489064bcd93f82a0565bfa37d1438cc45c94277",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a48/revisions/a8f89383f58fd2a26376372fb489064bcd93f82a0565bfa37d1438cc45c94277.png"
+      },
+      "bytes": 41264,
+      "id": "a8f89383f58fd2a26376372fb489064bcd93f82a0565bfa37d1438cc45c94277",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:10:30.553Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "a19b93a944562285c3d4432e08fe042ab7a604987a673342712f214b6ea0dee4"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:14:03.429Z"
+      },
+      "provenance": {
+        "renderer": "ranking-story-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "a19b93a944562285c3d4432e08fe042ab7a604987a673342712f214b6ea0dee4",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a48/inputs/a19b93a944562285c3d4432e08fe042ab7a604987a673342712f214b6ea0dee4.json"
+          },
+          "bytes": 1178
+        }
+      }
+    },
+    {
+      "sha256": "3bcac051b34fcfb6ce6ef26e4ab448bd76a890da9baa3afd354e64b375df3dae",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a48/revisions/3bcac051b34fcfb6ce6ef26e4ab448bd76a890da9baa3afd354e64b375df3dae.png"
+      },
+      "bytes": 51734,
+      "id": "3bcac051b34fcfb6ce6ef26e4ab448bd76a890da9baa3afd354e64b375df3dae",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:22:14.992Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324192255/rectangle_large_type_2_efa7f65ce3bf3c6ab919e06a3c5c5109.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "3bcac051b34fcfb6ce6ef26e4ab448bd76a890da9baa3afd354e64b375df3dae"
+      }
+    },
+    {
+      "sha256": "1f96708ec12a4aa561416a69322d05a41c4ee4f2507e7168fa3904b3261140dc",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a48/revisions/1f96708ec12a4aa561416a69322d05a41c4ee4f2507e7168fa3904b3261140dc.png"
+      },
+      "bytes": 1991397,
+      "id": "1f96708ec12a4aa561416a69322d05a41c4ee4f2507e7168fa3904b3261140dc",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-d76a5abfdf73",
+      "createdAt": "2026-11-03T22:53:23.938Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "42e76b6748fd29f508d69c5f6ca45256b93c589121458c407f4080ab06fdea49"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に旧版との比較画像で方向を承認。原寸・幅320pxの全文と題材を確認した版",
+        "reviewedAt": "2026-11-03T22:59:07.157Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "42e76b6748fd29f508d69c5f6ca45256b93c589121458c407f4080ab06fdea49",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a48/inputs/42e76b6748fd29f508d69c5f6ca45256b93c589121458c407f4080ab06fdea49.json"
+          },
+          "bytes": 8295
+        },
+        "production": {
+          "id": "NCI-00229",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "d76a5abfdf73a578e34575bc1eb1c6b793800c19cfbf3d07482a54b09dce7a6c"
+        }
+      }
+    }
+  ]
+}

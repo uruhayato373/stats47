@@ -43,6 +43,7 @@ import {
 } from './reference';
 import { referenceExpansionPlans } from '../server/reference-expansion-plans';
 import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
+import { readCoverLedger } from '../../../../.claude/scripts/note/lib/cover-assets.mjs';
 
 function areaDatabookMetricKeys(): string[] {
   return AREA_DATABOOK_TEMPLATE.sections.flatMap((section) =>
@@ -417,9 +418,8 @@ export function loadContentOperations(
   const noteDraftIndex = ContentNoteDraftIndex.parse(
     readJson(root, datasetPath("note.draft-index"))
   );
-  const noteCoverAssets = readJson(root, datasetPath("note.cover-assets")) as {
-    articles: Array<{ articleKey: string; approvedRevisionId: string | null; production?: { id?: string | null } }>;
-  };
+  // 制作 ID は記事ごとの記録 (note.cover-records) にあるので、正本と結んで読む
+  const noteCoverAssets = readCoverLedger(root);
   const inventories = REFERENCE_SOURCE_POLICIES.flatMap((policy) => {
     const raw = readOptionalJson(root, policy.statePath);
     if (!raw) return [];

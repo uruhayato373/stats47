@@ -44,22 +44,88 @@
         "surveyedAt": "2026-09-09",
         "rationale": "小売業従業者数を都道府県別の実値として比較する。"
       }
+    },
+    {
+      "rankingKey": "department-supermarket-count-per-100k",
+      "shortLabel": "百貨店・総合スーパー数(人口10万人あたり)",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「都道府県 百貨店 数ランキング」「百貨店のない県」と調べる読者に、人口の多さに左右されない人口10万人あたりの値で答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "convenience-store-count-commercial",
+      "shortLabel": "コンビニ店舗数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.meti.go.jp/statistics/tyo/syoudou/",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「コンビニ店舗数 都道府県」「コンビニが多い・少ない県」と調べる読者に、最新 2024 年の店舗数で答える(人口10万人あたりへの換算は指標の定義にある)。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "annual-sales-amount-per-establishment",
+      "shortLabel": "商業の1事業所あたり年間商品販売額",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「年間商品販売額」「○○県 小売」と調べる読者に、人口の多さに左右されない 1 事業所あたりの販売の規模で答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "annual-sales-amount-per-employee",
+      "shortLabel": "商業の従業者1人あたり年間商品販売額",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "小売・商業で働く人の多さだけでなく、1 人あたりでどれだけ売っているかを知りたい読者に、従業者 1 人あたりの販売額で答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
     }
   ],
   "charts": [],
   "metricGroups": [
     {
-      "key": "retail-market-scale-1",
-      "title": "小売業年間商品販売額",
+      "key": "retail-store-convenience-1",
+      "title": "百貨店・総合スーパー数(人口10万人あたり)",
       "rankingKeys": [
-        "retail-sales-amount-by-prefecture"
+        "department-supermarket-count-per-100k"
       ],
       "defaultCheckedKeys": [
-        "retail-sales-amount-by-prefecture"
+        "department-supermarket-count-per-100k"
       ]
     },
     {
-      "key": "retail-store-convenience-1",
+      "key": "retail-store-convenience-2",
+      "title": "コンビニ店舗数",
+      "rankingKeys": [
+        "convenience-store-count-commercial"
+      ],
+      "defaultCheckedKeys": [
+        "convenience-store-count-commercial"
+      ]
+    },
+    {
+      "key": "retail-store-convenience-3",
       "title": "小売業事業所数",
       "rankingKeys": [
         "retail-establishments-by-prefecture"
@@ -69,7 +135,27 @@
       ]
     },
     {
-      "key": "retail-sales-space-1",
+      "key": "retail-market-scale-1",
+      "title": "商業の1事業所あたり年間商品販売額",
+      "rankingKeys": [
+        "annual-sales-amount-per-establishment"
+      ],
+      "defaultCheckedKeys": [
+        "annual-sales-amount-per-establishment"
+      ]
+    },
+    {
+      "key": "retail-market-scale-2",
+      "title": "小売業年間商品販売額",
+      "rankingKeys": [
+        "retail-sales-amount-by-prefecture"
+      ],
+      "defaultCheckedKeys": [
+        "retail-sales-amount-by-prefecture"
+      ]
+    },
+    {
+      "key": "retail-market-scale-3",
       "title": "小売業売場面積",
       "rankingKeys": [
         "retail-sales-area-by-class"
@@ -80,6 +166,16 @@
     },
     {
       "key": "retail-employment-opportunities-1",
+      "title": "商業の従業者1人あたり年間商品販売額",
+      "rankingKeys": [
+        "annual-sales-amount-per-employee"
+      ],
+      "defaultCheckedKeys": [
+        "annual-sales-amount-per-employee"
+      ]
+    },
+    {
+      "key": "retail-employment-opportunities-2",
       "title": "小売業従業者数",
       "rankingKeys": [
         "retail-employees"
@@ -91,35 +187,32 @@
   ],
   "sections": [
     {
-      "key": "retail-market-scale",
-      "title": "地域での買い物の市場規模や年間売り上げはどれくらい大きいか",
-      "concern": "居住地域や出店を考える地域で買い物の市場規模や商業の活気があるか知りたい。",
-      "metricGroupKeys": [
-        "retail-market-scale-1"
-      ]
-    },
-    {
       "key": "retail-store-convenience",
-      "title": "日常生活で買い物がしやすい店舗数は確保されているか",
-      "concern": "身近な場所に買い物が楽しめる店舗や事業所が十分にあるか知りたい。",
+      "title": "買い物ができる店は、人口に対して身近にあるか",
+      "concern": "百貨店やコンビニなど、日常の買い物ができる店が自分の県に十分あるか知りたい。",
       "metricGroupKeys": [
-        "retail-store-convenience-1"
+        "retail-store-convenience-1",
+        "retail-store-convenience-2",
+        "retail-store-convenience-3"
       ]
     },
     {
-      "key": "retail-sales-space",
-      "title": "大規模な売り場や充実した商業施設はあるか",
-      "concern": "大型ショッピングモールなど広い売り場を持つ商業施設があるか知りたい。",
+      "key": "retail-market-scale",
+      "title": "小売・商業の売り上げと売場は、どれくらいの規模か",
+      "concern": "居住地域や出店を考える県で、1 事業所あたりの販売の大きさと、小売業全体の売り上げ・売場の広さを知りたい。",
       "metricGroupKeys": [
-        "retail-sales-space-1"
+        "retail-market-scale-1",
+        "retail-market-scale-2",
+        "retail-market-scale-3"
       ]
     },
     {
       "key": "retail-employment-opportunities",
-      "title": "小売業での雇用機会や働く場所は豊富にあるか",
-      "concern": "地域内で販売職や店舗スタッフなどの雇用の受け皿があるか確かめたい。",
+      "title": "小売・商業で働く人は多く、1人あたりでどれだけ売っているか",
+      "concern": "販売職や店舗スタッフの働き口の多さと、従業者 1 人あたりの販売額を知りたい。",
       "metricGroupKeys": [
-        "retail-employment-opportunities-1"
+        "retail-employment-opportunities-1",
+        "retail-employment-opportunities-2"
       ]
     }
   ],

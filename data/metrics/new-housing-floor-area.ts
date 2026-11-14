@@ -30,7 +30,7 @@ export const newHousingFloorArea: MetricConfig = {
   },
   "display": {
     "conversionFactor": 0.0001,
-    "decimalPlaces": 0,
+    "decimalPlaces": 1,
     "displayUnit": "万m2",
   },
   "calculation": {

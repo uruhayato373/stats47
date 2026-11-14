@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "b-ref-prc-a22",
+  "production": {
+    "id": "NCI-00205",
+    "policyId": "NCP-005",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "鉄道で通う東京\n車で通う愛知",
+      "subline": "通勤・通学の交通手段を比較",
+      "subject": "電車の模型と車の模型を線路と道路の模型の上に並べて大きく描く。人物・顔・手・動物は描かない。グラフ・地図・金額・順位の図は描かない。器や紙に文字を入れない。緑とクリーム色の雑誌挿絵。",
+      "evidence": "https://note.com/stats47/n/n30a08f7ac737 本文確認2026-11-04。国勢調査の通勤・通学の交通手段。鉄道は東京都、車は愛知県が最多。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "430b2e3449582a6c7d0be647b07e0915126a2b8ae51dfab5b70a1d49b152e208",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a22/revisions/430b2e3449582a6c7d0be647b07e0915126a2b8ae51dfab5b70a1d49b152e208.png"
+      },
+      "bytes": 38758,
+      "id": "430b2e3449582a6c7d0be647b07e0915126a2b8ae51dfab5b70a1d49b152e208",
+      "kind": "candidate",
+      "version": "ref-2026-10-13",
+      "createdAt": "2026-10-13T12:08:38.416Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "bea552672b4d6910381c69d5337448d5b6f66739bc347b80bf998836c083c015"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で見出し・図・説明文が読め、文字の切れ・重なりなし。登録版は確認した描画とSHA一致 (2026-10-13)",
+        "reviewedAt": "2026-10-13T12:13:30.574Z"
+      },
+      "provenance": {
+        "renderer": "figure-note-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "bea552672b4d6910381c69d5337448d5b6f66739bc347b80bf998836c083c015",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a22/inputs/bea552672b4d6910381c69d5337448d5b6f66739bc347b80bf998836c083c015.json"
+          },
+          "bytes": 1353
+        }
+      }
+    },
+    {
+      "sha256": "0f16a15d44c7a494cfdf0f68bd4f42a76ca809c6d8c935890ea7f6defe84ea8f",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a22/revisions/0f16a15d44c7a494cfdf0f68bd4f42a76ca809c6d8c935890ea7f6defe84ea8f.png"
+      },
+      "bytes": 50895,
+      "id": "0f16a15d44c7a494cfdf0f68bd4f42a76ca809c6d8c935890ea7f6defe84ea8f",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-11-03T22:21:56.739Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/324167535/rectangle_large_type_2_dbd4b65b172f02e959c2cef00f054f46.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "0f16a15d44c7a494cfdf0f68bd4f42a76ca809c6d8c935890ea7f6defe84ea8f"
+      }
+    },
+    {
+      "sha256": "cb9ff5ab86168caf74b2112966f123efdc9cd4bfa5423c350b09520c7cff98ae",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/b-ref-prc-a22/revisions/cb9ff5ab86168caf74b2112966f123efdc9cd4bfa5423c350b09520c7cff98ae.png"
+      },
+      "bytes": 1964152,
+      "id": "cb9ff5ab86168caf74b2112966f123efdc9cd4bfa5423c350b09520c7cff98ae",
+      "kind": "candidate",
+      "version": "pop-NCP-005-v3-04f4cf458e9c",
+      "createdAt": "2026-11-04T01:54:23.424Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "f9817e390cc7f89e1cad5ec6f47d09f06acd17636e167be3b179ce55c13c45c1"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "オーナーが2026-11-04に一括進行を承認。原寸・幅320pxで全文と題材を確認した版",
+        "reviewedAt": "2026-11-04T01:55:32.614Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "f9817e390cc7f89e1cad5ec6f47d09f06acd17636e167be3b179ce55c13c45c1",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/b-ref-prc-a22/inputs/f9817e390cc7f89e1cad5ec6f47d09f06acd17636e167be3b179ce55c13c45c1.json"
+          },
+          "bytes": 8168
+        },
+        "production": {
+          "id": "NCI-00205",
+          "policyId": "NCP-005",
+          "policyVersion": 3,
+          "planSha256": "04f4cf458e9c6a7438914743db135e3f0859c63a5ef1154addeb967ab1ba6792"
+        }
+      }
+    }
+  ]
+}

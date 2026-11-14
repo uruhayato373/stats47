@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "description": "領域ごとの構え・狙い・構えを変える条件・改善 Metric・KPI。優先順位の正本で、月次の重点 (focus_domains)・週次 Must・backlog の [領域:] はここの領域と構えに従う。領域そのもの (id・表示名・メニュー) は data/business/domains.json が持つ。",
+  "lanes": [
+    {
+      "domain": "ops",
+      "order": 1,
+      "stance": "攻める",
+      "aim": "A8 確定成果・GA4 アフィリエイト・CTA の計器を戻し、週次収益（NSM）を数字で言える状態にする。CI・コスト・性能・セキュリティは損失が出ている不具合を直す",
+      "gate": "週次収益の内訳（アフィリエイト発生額・商品実売）が4週続けて取得できたら維持へ",
+      "improvementMetrics": [
+        "ga4",
+        "performance",
+        "cloudflare-cost",
+        "cost",
+        "security"
+      ],
+      "kpis": [
+        "measurement-freshness",
+        "site-health",
+        "operating-cost"
+      ]
+    },
+    {
+      "domain": "product",
+      "order": 2,
+      "stance": "攻める",
+      "aim": "2026-11 の重点（オーナー決定 2026-10-28）。市区町村の加工済みデータを1商品売る（`MUNI-DATA-PRODUCT-PILOT-01`・打ち手台帳 EXP-007）。`ADMIN-STAT-PILOT-01` の1業務の採否、ノウハウ商品（`KNOWHOW-PRODUCT-PILOT-01`）は並行してよい",
+      "gate": "行政資料 pilot が Stop なら維持。Go で実売2件なら横展開と販売面（note 等）を再審議する",
+      "improvementMetrics": [
+        "note"
+      ],
+      "kpis": [
+        "work-context-sessions",
+        "paid-purchases"
+      ]
+    },
+    {
+      "domain": "data",
+      "order": 3,
+      "stance": "攻める",
+      "aim": "取得失敗・欠損している公開指標の処置を決め、公開値の誤りと欠けをなくす。ランキングは需要ファーストの拡充だけ、テーマは55テーマの d28 判定（10-09）後に新設を判断する",
+      "gate": "処置が未決の指標が0件になったら維持へ",
+      "improvementMetrics": [
+        "data-quality",
+        "theme-quality"
+      ],
+      "kpis": [
+        "data-quality-pass-rate",
+        "search-clicks"
+      ]
+    },
+    {
+      "domain": "affiliate",
+      "order": 4,
+      "stance": "維持",
+      "aim": "既存アフィリエイト配置の効果判定を終える。枠と案件は増やさない。AdSense は 2026-10-11 に手動枠で再開済みで、配置は `/adsense-improvement` の判定で変える",
+      "gate": "管理が維持へ移り、配置の効果判定が1件以上確定したら攻めるを検討する",
+      "improvementMetrics": [
+        "affiliate"
+      ],
+      "kpis": [
+        "affiliate-yield",
+        "ad-yield"
+      ]
+    },
+    {
+      "domain": "site",
+      "order": 5,
+      "stance": "攻める",
+      "aim": "2026-11 の重点（オーナー変更 2026-11-01）。月¥1万（AdSense）に向けて PV を伸ばす。既存の検索流入が大きい家計調査を起点に、上位品目の年次値、調査ハブ・テーマ・ランキング・ブログの説明と文脈リンクを整える（`CONTENT-KAKEI-EXPANSION-01`・`KAKEI-EXPANSION-02`）。子育ての市区町村ランキング（EXP-008）は次の月次判断へ送る。CTR 改善（`SEO-CTR-CANDIDATES-01`）と食の雑学（`CONTENT-FOOD-TRIVIA-01`）は検索需要と重複を確かめてから選ぶ。月15〜20本の上限と需要確認は守る。進み具合は `site-pageviews` を T1〜T4 と「広告収益との換算」（マーケティング戦略）の里程標で見る",
+      "gate": "2026-12-31 の判定（`PV-100K-LEVERS-01`）で里程標を大きく下回り、打ち手の効果も出ていなければ維持へ戻す",
+      "improvementMetrics": [
+        "gsc",
+        "indexing",
+        "content"
+      ],
+      "kpis": [
+        "search-clicks",
+        "site-pageviews",
+        "site-circulation-rate"
+      ]
+    },
+    {
+      "domain": "sns",
+      "order": 6,
+      "stance": "維持",
+      "aim": "予約済みの運用と不具合修正だけ。新しい媒体や量産はしない",
+      "gate": "サイト送客または収益への寄与を計測で示せたら攻めるを検討する",
+      "improvementMetrics": [
+        "brand"
+      ],
+      "kpis": []
+    },
+    {
+      "domain": "strategy",
+      "order": 7,
+      "stance": "維持",
+      "aim": "週次・月次の判断と事業計画の更新を続ける",
+      "gate": "変えない（常に維持）",
+      "improvementMetrics": [],
+      "kpis": []
+    },
+    {
+      "domain": "plan",
+      "order": 8,
+      "stance": "維持",
+      "aim": "月間・週間・バックログ・効果測定の運用を続ける",
+      "gate": "変えない（常に維持）",
+      "improvementMetrics": [],
+      "kpis": []
+    },
+    {
+      "domain": "content",
+      "order": 9,
+      "stance": "維持",
+      "aim": "4 つの型の展開状況と、問いから配信までの止まりを管理画面で見えるようにする。量産はしない",
+      "gate": "分類と配線が終わり、量産の判断材料が揃ったら月次計画で見直す",
+      "improvementMetrics": [],
+      "kpis": []
+    }
+  ]
+}

@@ -4,8 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const informationCommunicationExpenditure: MetricConfig = {
   "key": "information-communication-expenditure",
   "title": "情報通信関係費",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間支出額（固定電話通信料・移動電話通信料・NHK放送受信料・ケーブルテレビ受信料・他の受信料の合計）",
-  "note": "インターネット接続料は含まない（家計調査の品目分類で通信料と分離されているため）",
+  "subtitle": "固定電話通信料・移動電話通信料・NHK放送受信料・ケーブルテレビ受信料・他の受信料の合計",
+  "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。インターネット接続料は含まない（家計調査の品目分類で通信料と分離されているため）",
   "description": "家計調査（二人以上の世帯）の固定電話通信料、移動電話通信料、NHK放送受信料、ケーブルテレビ受信料、他の受信料の5品目の年間支出額を合算した値。情報通信係数（本項目÷消費支出）の分子。",
   "unit": "円",
   "category": "ict",

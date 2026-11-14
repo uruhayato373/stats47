@@ -33,11 +33,10 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { experimentIssues, assessCheckpoint, latestObservation } from "./evaluate-theme-experiments.mjs";
-import { datasetDir } from "../../../config/datasets.mjs";
+import { themeStatePath } from "./theme-state-path.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const STATE_DIR = process.env.STATE_DIR || path.join(PROJECT_ROOT, datasetDir("themes.portfolio"));
 const CATALOG_INDEX =
   process.env.CATALOG_INDEX || path.join(PROJECT_ROOT, "packages/data-configs/src/theme-catalog/index.ts");
 const jsonMode = process.argv.includes("--json");
@@ -89,8 +88,8 @@ function catalogKeys() {
   }
 }
 
-function loadJson(file) {
-  const p = path.join(STATE_DIR, file);
+function loadJson(id) {
+  const p = themeStatePath(id);
   if (!fs.existsSync(p)) return { data: null, exists: false };
   try {
     return { data: JSON.parse(fs.readFileSync(p, "utf8")), exists: true };
@@ -211,8 +210,8 @@ function validateExperiments(ex) {
 }
 
 // ---------- main ----------
-const pf = loadJson("portfolio.json");
-const ex = loadJson("experiments.json");
+const pf = loadJson("themes.portfolio");
+const ex = loadJson("themes.experiments");
 
 if (pf.parseError) v("P0", `portfolio.json parse 失敗: ${pf.parseError}`);
 if (ex.parseError) v("E0", `experiments.json parse 失敗: ${ex.parseError}`);
@@ -221,7 +220,7 @@ if (ex.data) validateExperiments(ex.data);
 
 const skipped = !pf.exists && !ex.exists;
 const result = {
-  stateDir: STATE_DIR,
+  stateDir: path.dirname(themeStatePath("themes.portfolio")),
   portfolioExists: pf.exists,
   experimentsExists: ex.exists,
   themes: pf.data?.themes?.length ?? 0,

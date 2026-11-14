@@ -22,7 +22,6 @@ on:
           - products
           - themes
           - default
-          - ranking-cards
           - pref-silhouette
           - blog
           - geo-thumbnails
@@ -39,7 +38,7 @@ on:
         type: boolean
         default: false
       ranking_keys:
-        description: 'ranking / ranking-cards のみ: 対象キーのカンマ区切り (最大50件)'
+        description: 'ranking のみ: 対象キーのカンマ区切り (最大50件)'
         required: false
         default: ''
       staged_asset_id:
@@ -104,7 +103,7 @@ jobs:
           FLAGS=(--max-generate 500)
           if [ -n "$IMAGE_LIMIT" ]; then FLAGS+=(--limit "$IMAGE_LIMIT"); fi
           if [ -n "$RANKING_KEYS" ]; then
-            [[ "$TYPE" = "ranking" || "$TYPE" = "ranking-cards" ]] || { echo 'ranking_keys requires ranking or ranking-cards'; exit 1; }
+            [[ "$TYPE" = "ranking" ]] || { echo 'ranking_keys requires ranking'; exit 1; }
             test -z "$BLOG_SLUGS" || { echo 'ranking_keys and slugs cannot be combined'; exit 1; }
             npx tsx -e '
               import { getMetricConfig } from "@stats47/data-configs";

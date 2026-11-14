@@ -234,6 +234,26 @@ jobs:
           if-no-files-found: ignore
           retention-days: 14
 
+  # ブラウザ向けの全 "use client" ファイルから、全指標 registry・全テーマ定義・GIS 原典処理への値の import の経路を数える
+  # (CLIENT-GRAPH-AUDIT-01)。境界テストは列挙した入口しか見ないので、新しい部品からできた経路をここで拾う。
+  client-graph:
+    name: Client bundle graph audit
+    if: ${{ github.event_name == 'schedule' || inputs.only == 'all' || inputs.only == 'checks' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Setup Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+      - name: Count client files that reach heavy dependencies
+        run: node .claude/scripts/audit/client-graph-audit.mjs
+
   # テーマの全量監査 (旧 theme-chart-audit-weekly.yml)。未観測の d7/d28/d56 は次の土曜に拾う。
   # 新規/変化した異常だけ theme-alert Issue を更新し、同じ警告は再通知しない。
   theme:
@@ -328,7 +348,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for observation in data/themes/charts/live-audit.json data/themes/quality.json data/themes/quality.definitions.json data/themes/quality.observations.json data/themes/quality.lastGoodObservations.json data/themes/portfolio.json data/themes/experiments.json data/themes/ci-followup.json data/themes/viewpoint-history.csv; do
+          # 品質監査の詳細は 1 MiB を超えると番号つきのファイルに分かれる (theme-quality-state.mjs)。増えた分・減った分ごと拾う
+          git add -- 'data/themes/quality.*.json'
+          for observation in data/themes/charts/live-audit.json data/themes/quality.json data/themes/portfolio.json data/themes/experiments.json data/themes/ci-followup.json data/themes/viewpoint-history.csv; do
             if [ -f "$observation" ]; then git add -- "$observation"; fi
           done
           if git diff --cached --quiet; then exit 0; fi
@@ -552,7 +574,8 @@ jobs:
         # (2026-09-23 の初回完了で git に 20MB 書き戻し、リポジトリ衛生の 1MB 上限を超えた)。
         id: shots
         if: always() && hashFiles('.local/r2/state/page-quality/latest.json') != ''
-        run: npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "state/page-quality/"
+        # latest.json・history.csv・index.json・screenshots/latest/ は R2 だけにある記録で、毎週置き換えるのが設計なので上書きを許す
+        run: npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --allow-authoritative-overwrite --prefix "state/page-quality/"
 
       - name: 🤖 Review screenshots (Claude・読み取り専用)
         id: review
@@ -752,7 +775,7 @@ jobs:
         run: |
           TSC="apps/web/scripts/tsconfig.ogp.json"
           SC="apps/web/scripts/generate-ogp-images.ts"
-          for TYPE in ranking ranking-cards areas pref-silhouette products themes default; do
+          for TYPE in ranking areas pref-silhouette products themes default; do
             echo "=== self-heal $TYPE ==="
             npx tsx --tsconfig "$TSC" "$SC" --type "$TYPE" --limit "$MAX_GENERATE" --max-generate "$MAX_GENERATE"
             PLAN=".local/image-generation-publish-plan-${TYPE}.json"
@@ -777,7 +800,7 @@ jobs:
           STATUS=0
           TSC="apps/web/scripts/tsconfig.ogp.json"
           SC="apps/web/scripts/generate-ogp-images.ts"
-          for TYPE in ranking ranking-cards areas pref-silhouette products themes default; do
+          for TYPE in ranking areas pref-silhouette products themes default; do
             npx tsx --tsconfig "$TSC" "$SC" --type "$TYPE" --audit \
               2>&1 | tee -a /tmp/ogp-freshness-audit.log
             [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
@@ -865,7 +888,7 @@ jobs:
   report:
     name: Update weekly quality alert
     if: ${{ always() && (github.event_name == 'schedule' || inputs.only == 'all' || inputs.only == 'checks') }}
-    needs: [type-check, tests, admin-e2e, web-e2e, render]
+    needs: [type-check, tests, admin-e2e, web-e2e, render, client-graph]
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -877,13 +900,14 @@ jobs:
           ADMIN_RESULT: ${{ needs.admin-e2e.result }}
           E2E_RESULT: ${{ needs.web-e2e.result }}
           RENDER_RESULT: ${{ needs.render.result }}
+          CLIENT_GRAPH_RESULT: ${{ needs.client-graph.result }}
         run: |
           TITLE="[Quality Alert] 週次フル検査に失敗があります"
           # この job は checkout しないので、gh には必ず --repo を渡す。無いと "not a git repository" で落ち、
           # 失敗が Issue にならず誰にも知らされない (2026-09-20 に実際にそうなった)
           gh label create quality-suite-alert --repo "$GITHUB_REPOSITORY" --description "週次フル品質検査" --color b60205 --force
           existing=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --label quality-suite-alert --json number --jq '.[0].number // empty')
-          if [ "$TYPE_RESULT" = success ] && [ "$TEST_RESULT" = success ] && [ "$ADMIN_RESULT" = success ] && [ "$E2E_RESULT" = success ] && [ "$RENDER_RESULT" = success ]; then
+          if [ "$TYPE_RESULT" = success ] && [ "$TEST_RESULT" = success ] && [ "$ADMIN_RESULT" = success ] && [ "$E2E_RESULT" = success ] && [ "$RENDER_RESULT" = success ] && [ "$CLIENT_GRAPH_RESULT" = success ]; then
             if [ -n "$existing" ]; then
               gh issue close "$existing" --repo "$GITHUB_REPOSITORY" --reason completed --comment "週次フル検査が正常に戻りました。"
             fi
@@ -897,6 +921,7 @@ jobs:
           - Admin build・全E2E: $ADMIN_RESULT
           - Webビルド・全E2E: $E2E_RESULT
           - 共有チャートの golden PNG 比較: $RENDER_RESULT
+          - ブラウザ向け部品から重い依存への経路: $CLIENT_GRAPH_RESULT
           - 実行: https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
 
           同じ障害ではこのIssueを更新し、全検査の回復時に自動で閉じます。

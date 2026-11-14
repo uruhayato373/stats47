@@ -8,7 +8,7 @@ name: 💴 Publish Affiliate Ads → R2
 # 検知して publish することで、クラウド / web 実行環境でも git push だけで広告反映が完結する。
 #
 # 仕組み: sync-snapshots の実績ある run.sh を `--only affiliate-ads` で再利用 (export → R2 push)。
-# R2 書き込みは CI 専用 (run.sh 内 _assert-ci-write ガードは CI=true で通過)。
+# R2 書き込みは CI 専用 (run.sh 内 _assert-ci-write ガードは GITHUB_ACTIONS=true で通過)。
 
 on:
   workflow_dispatch:

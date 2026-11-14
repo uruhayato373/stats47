@@ -1,10 +1,7 @@
-import { Suspense } from 'react';
-
 import { notFound } from 'next/navigation';
 
 import { fetchPrefectures } from '@stats47/area';
 import { cn } from '@stats47/components';
-import { Button } from '@stats47/components/atoms/ui/button';
 import { getMetricConfig } from '@stats47/data-configs';
 import { hrefFor } from "@stats47/data-configs/content/href";
 import {
@@ -21,7 +18,6 @@ import {
   municipalityRankingDisplayTitle,
 } from '@stats47/ranking';
 import { formatValueWithPrecision } from '@stats47/utils';
-import { ChevronDown } from 'lucide-react';
 
 import Link from '@/components/atoms/SiteLink';
 import { DistributionHistogram } from '@/components/charts/DistributionHistogram';
@@ -37,13 +33,13 @@ import { RelatedContentNavigation } from '@/features/content-navigation/RelatedC
 import {
   MunicipalityNationalMap,
   MunicipalityRankingCommentary,
+  MunicipalityRankingExplorer,
   MunicipalityRankingViewTracker,
   binMunicipalityValues,
   buildMunicipalityDatasetStructuredData,
   filterMunicipalityRanking,
 } from '@/features/municipalities';
 import {
-  MunicipalityRankingMapSection,
   getComparableMunicipalityCodes,
   getSpecialWardCodes,
   readMunicipalityRanking,
@@ -68,27 +64,14 @@ interface Params {
   rankingKey: string;
 }
 
-type SearchParams = Record<string, string | string[] | undefined>;
+// 1 指標 1 URL の HTML を 1 日キャッシュする (2026-11-13)。以前は県・ページ・自治体名のクエリで描き分ける
+// 毎回描画のページで、クローラーが 47 県とページ送りのリンクを総なめにするたびに 1.5〜2 秒の描画が走っていた。
+// 県の違いは県別のパス、ページ送りと自治体名の検索はクライアントの部品が担い、URL に載せない。
+// R2 を読む動的 route なので generateStaticParams は付けない (nextjs-ssg-preservation.md)
+export const revalidate = 86400;
 
-export const dynamic = 'force-dynamic';
-
-function first(value: string | string[] | undefined): string {
-  return Array.isArray(value) ? (value[0] ?? '') : (value ?? '');
-}
-
-function pageHref(
-  rankingKey: string,
-  query: string,
-  prefectureCode: string,
-  page: number
-): string {
-  const params = new URLSearchParams();
-  if (query) params.set('q', query);
-  if (prefectureCode) params.set('pref', prefectureCode);
-  if (page > 1) params.set('page', String(page));
-  const suffix = params.toString();
-  return `/municipalities/ranking/${rankingKey}${suffix ? `?${suffix}` : ''}`;
-}
+/** サーバーが HTML に出す上位の件数 (検索エンジンに読ませる一覧)。51 位以下は利用者の操作で読む */
+const INITIAL_ROWS = 50;
 
 export async function generateMetadata({
   params,
@@ -110,15 +93,10 @@ export async function generateMetadata({
 
 export default async function MunicipalityRankingPage({
   params,
-  searchParams,
 }: {
   params: Promise<Params>;
-  searchParams: Promise<SearchParams>;
 }) {
-  const [{ rankingKey }, queryParams] = await Promise.all([
-    params,
-    searchParams,
-  ]);
+  const { rankingKey } = await params;
   if (!KNOWN_MUNICIPALITY_RANKING_KEYS.has(rankingKey)) notFound();
   const [{ item, values: snapshot }, aiContent] = await Promise.all([
     readMunicipalityRanking(rankingKey),
@@ -153,24 +131,13 @@ export default async function MunicipalityRankingPage({
     specialWardCodes: getSpecialWardCodes(),
     absentValueReason: getMetricConfig(rankingKey)?.absentValueReason,
   });
-  const query = first(queryParams.q).trim();
-  const prefectureCode = first(queryParams.pref);
-  const requestedPage = Number.parseInt(first(queryParams.page) || '1', 10);
-  const filtered = filterMunicipalityRanking(snapshot.values, {
-    query,
-    prefectureCode,
-    page: requestedPage,
-    pageSize: 50,
-  });
-  const distribution = binMunicipalityValues(snapshot.values, {
-    prefectureCode: prefectureCode || undefined,
-  });
+  // 全国版は常に全国の上位 (1 ページ目) だけを HTML に出す。絞り込みと 51 位以下は MunicipalityRankingExplorer
+  const topRows = filterMunicipalityRanking(snapshot.values, { pageSize: INITIAL_ROWS }).rows;
+  const prefectures = fetchPrefectures();
+  const distribution = binMunicipalityValues(snapshot.values);
   const median = distribution?.median;
   const minimum = distribution?.min;
   const maximum = distribution?.max;
-  const prefName = prefectureCode
-    ? fetchPrefectures().find((p) => p.prefCode === prefectureCode)?.prefName
-    : undefined;
   // 小数桁はデータセット全体から 1 度だけ解決した precision で揃える
   // (max 単独指定だと 44.0 が 44 になり同じ表内で桁が混ざる。blog-svg-chart-standards §数値の桁揃え)
   const precision = distribution?.precision ?? 0;
@@ -192,11 +159,23 @@ export default async function MunicipalityRankingPage({
     [MUNICIPALITY_AFTER_MAP, MUNICIPALITY_AFTER_TABLE],
     [],
   );
-  // 右レール (2026-11-12 オーナー決定): 都道府県のランキングと同じ右レール付きの枠にする。1440px で本文が 1,131px に広がり、
-  // 3 列の順位の表が間延びしていた。並びは都道府県のランキングに合わせ「関連 → AdSense → 都道府県のカード → 追従する 300×600」。
-  // 都道府県のカードは全指標で出す (県別のページがある指標はそのページへ、無い指標はこのページの県の絞り込みへ)。
-  // 2 つの広告の間に必ず内容が入る。狭い幅では右レールは本文の下に積まれ、右レールの AdSense は出ない (RailAdSlot は本文の横にあるときだけ)
+  // 右レール (2026-11-12 オーナー決定): 都道府県のランキングと同じ右レール付きの枠にする。並びは「関連 → AdSense → 都道府県のカード → 追従する 300×600」。
+  // 都道府県のカードは全指標で出し、2 つの広告の間に必ず内容が入るようにする (オーナー決定)。行き先は、県別のページがある指標は
+  // そのページ (パス)、無い指標はその県のページ (/areas/<県>。県内の市区町村の一覧がある)。
+  // 2026-11-13: 以前は県別のページが無い指標でこのページの ?pref= へ結び、クローラーが 47 県分の描画を起こしていた。
+  // クエリ付きのリンクは出さない。県での絞り込みは本文の MunicipalityRankingExplorer が URL を変えずに行う。
+  // 狭い幅では右レールは本文の下に積まれ、右レールの AdSense は出ない (RailAdSlot は本文の横にあるときだけ)
   const hasPrefectureRankings = isMunicipalityPrefectureRankingKey(item.rankingKey);
+  const prefectureLinks = prefectures.map((prefecture) => ({
+    id: prefecture.prefCode,
+    label: prefecture.prefName,
+    href: hasPrefectureRankings
+      ? hrefFor('municipality-pref-ranking', {
+          rankingKey: item.rankingKey,
+          prefCode: prefecture.prefCode,
+        })
+      : hrefFor('area', { areaCode: prefecture.prefCode }),
+  }));
   const rail = (
     <>
       <RelatedContentNavigation
@@ -211,20 +190,10 @@ export default async function MunicipalityRankingPage({
         title={
           hasPrefectureRankings
             ? `都道府県別の${municipalityRankingDisplayTitle(item)}ランキング`
-            : '都道府県で絞り込む'
+            : '都道府県から市区町村を探す'
         }
         layout="chips"
-        items={fetchPrefectures().map((prefecture) => ({
-          id: prefecture.prefCode,
-          label: prefecture.prefName,
-          active: prefecture.prefCode === prefectureCode,
-          href: hasPrefectureRankings
-            ? hrefFor('municipality-pref-ranking', {
-                rankingKey: item.rankingKey,
-                prefCode: prefecture.prefCode,
-              })
-            : pageHref(item.rankingKey, '', prefecture.prefCode, 1),
-        }))}
+        items={prefectureLinks}
         trackingSurface="municipality_prefecture"
       />
       <RailAdSlot slot={MUNICIPALITY_RAIL_STICKY} sticky />
@@ -294,52 +263,26 @@ export default async function MunicipalityRankingPage({
 
       {distribution && (
         <section aria-label="全国分布" className="mt-5">
-          <SectionHeader
-            title="全国分布"
-            action={prefName ? `縦線 = ${prefName}の各自治体` : undefined}
-            hideRule
-            className="mb-0"
-          />
+          <SectionHeader title="全国分布" hideRule className="mb-0" />
           <div className="mt-2 border border-border p-2">
             <DistributionHistogram
               bins={distribution.bins}
               median={distribution.median}
               precision={distribution.precision}
               unit={snapshot.unit}
-              prefLabel={prefName}
-              prefValues={distribution.prefValues}
               ariaLabel={`${municipalityRankingDisplayTitle(item)}の全国分布ヒストグラム`}
             />
           </div>
         </section>
       )}
 
-      {!prefectureCode && (
-        <MunicipalityNationalMap
-          title={item.title}
-          visualization={item.visualization}
-          unit={snapshot.unit}
-          decimalPlaces={precision}
-          values={snapshot.values.map((v) => ({ areaCode: v.areaCode, value: v.value }))}
-        />
-      )}
-
-      {prefectureCode && (
-        <Suspense
-          fallback={
-            <div className="mt-5 h-72 animate-pulse bg-muted/40" aria-hidden />
-          }
-        >
-          <MunicipalityRankingMapSection
-            title={item.title}
-            visualization={item.visualization}
-            unit={snapshot.unit}
-            decimalPlaces={precision}
-            prefectureCode={prefectureCode}
-            values={snapshot.values}
-          />
-        </Suspense>
-      )}
+      <MunicipalityNationalMap
+        title={item.title}
+        visualization={item.visualization}
+        unit={snapshot.unit}
+        decimalPlaces={precision}
+        values={snapshot.values.map((v) => ({ areaCode: v.areaCode, value: v.value }))}
+      />
 
       {rowAfterMap.length > 0 && (
         <div className="mt-8">
@@ -364,79 +307,22 @@ export default async function MunicipalityRankingPage({
         </p>
       )}
 
-      <form
-        method="get"
-        className="mt-5 grid gap-3 border-y border-border py-4 sm:grid-cols-[1fr_14rem_auto]"
+      <MunicipalityRankingExplorer
+        rankingKey={item.rankingKey}
+        yearCode={snapshot.yearCode}
+        unit={snapshot.unit}
+        precision={precision}
+        total={snapshot.values.length}
+        initialCount={topRows.length}
+        prefectures={prefectures.map(({ prefCode, prefName }) => ({ prefCode, prefName }))}
       >
-        <label
-          htmlFor="municipality-query"
-          className="text-xs font-medium text-muted-foreground"
-        >
-          自治体名
-          <input
-            id="municipality-query"
-            type="search"
-            name="q"
-            defaultValue={query}
-            placeholder="例：神戸市"
-            className="mt-1 h-10 w-full border border-input bg-background px-3 text-sm text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50"
-          />
-        </label>
-        <label
-          htmlFor="municipality-prefecture"
-          className="text-xs font-medium text-muted-foreground"
-        >
-          都道府県
-          <span className="relative block">
-            <select
-              id="municipality-prefecture"
-              name="pref"
-              defaultValue={prefectureCode}
-              className="mt-1 h-10 w-full appearance-none border border-input bg-background px-3 pr-9 text-sm text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50"
-            >
-              <option value="">すべて</option>
-              {fetchPrefectures().map((prefecture) => (
-                <option key={prefecture.prefCode} value={prefecture.prefCode}>
-                  {prefecture.prefName}
-                </option>
-              ))}
-            </select>
-            <ChevronDown
-              className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
-              aria-hidden
-            />
-          </span>
-        </label>
-        <Button type="submit" className="self-end">
-          絞り込む
-        </Button>
-      </form>
-
-      <div className="mt-4 flex items-end justify-between gap-4">
-        <p className="text-sm text-muted-foreground">
-          {filtered.total.toLocaleString('ja-JP')}件
-          {filtered.pageCount > 1
-            ? `・${filtered.page}/${filtered.pageCount}ページ`
-            : ''}
-        </p>
-        {(query || prefectureCode) && (
-          <Link
-            href={hrefFor("municipality-ranking", { rankingKey: item.rankingKey })}
-            className="text-xs text-primary hover:underline"
-          >
-            条件を解除
-          </Link>
-        )}
-      </div>
-
-      <div className="mt-2 overflow-x-auto border border-border">
         <ValueTable
           columns={[
             { key: 'rank', header: '順位', className: 'w-20' },
             { key: 'area', header: '市区町村', rowHeader: true, align: 'left' },
             { key: 'value', header: '値' },
           ]}
-          rows={filtered.rows.map((row) => ({
+          rows={topRows.map((row) => ({
             key: row.areaCode,
             cells: [
               `${row.rank}位`,
@@ -448,48 +334,7 @@ export default async function MunicipalityRankingPage({
             ],
           }))}
         />
-        {filtered.rows.length === 0 && (
-          <p className="p-6 text-center text-sm text-muted-foreground">
-            該当する自治体はありません。
-          </p>
-        )}
-      </div>
-
-      {filtered.pageCount > 1 && (
-        <nav
-          aria-label="ランキングのページ"
-          className="mt-4 flex items-center justify-between text-sm"
-        >
-          {filtered.page > 1 ? (
-            <Link
-              href={pageHref(
-                item.rankingKey,
-                query,
-                prefectureCode,
-                filtered.page - 1
-              )}
-              className="text-primary hover:underline"
-            >
-              ← 前へ
-            </Link>
-          ) : (
-            <span />
-          )}
-          {filtered.page < filtered.pageCount && (
-            <Link
-              href={pageHref(
-                item.rankingKey,
-                query,
-                prefectureCode,
-                filtered.page + 1
-              )}
-              className="text-primary hover:underline"
-            >
-              次へ →
-            </Link>
-          )}
-        </nav>
-      )}
+      </MunicipalityRankingExplorer>
 
       {rowAfterTable.length > 0 && (
         <div className="mt-8">

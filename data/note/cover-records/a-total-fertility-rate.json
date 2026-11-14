@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-total-fertility-rate",
+  "production": {
+    "id": "NCI-00124",
+    "policyId": "NCP-003",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "合計特殊出生率\n高い県は沖縄県",
+      "subline": "2023年・女性1人あたり",
+      "subject": "1280×670相当の横長完成カバーを新たに生成。右側に無人で空のベビーベッドを小さく1点。赤ちゃん・人物・顔・手・人口ピラミッドは描かない。出生数の総量と誤認させない。 左に太い見出し、下に補足の太い帯。文字は指定全文のみ。幅320pxでも全行が明瞭に読める大きさ。人物・顔・手・動物・キャラクター・マスコット・擬人化・地図・グラフ・表彰台・余分な文字や数値は一切描かない。",
+      "evidence": "https://note.com/stats47/n/nf4b16d26f6e8 2026-10-23公開API本文照合。沖縄県は1.6で1位。年齢別出生率を合計した指標で出生数の総量ではない。 カバーは数値・因果を追加せず、対象年・単位・首位県だけを示す。"
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "8adf26713877ade4b45c62f686b876a4d49601a969b5ea6bc7884b5f2345d084",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-total-fertility-rate/revisions/8adf26713877ade4b45c62f686b876a4d49601a969b5ea6bc7884b5f2345d084.png"
+      },
+      "bytes": 93487,
+      "id": "8adf26713877ade4b45c62f686b876a4d49601a969b5ea6bc7884b5f2345d084",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:11:14.081Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312772170/rectangle_large_type_2_56b8eaf14db4f79eaf536bca4932647a.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "8adf26713877ade4b45c62f686b876a4d49601a969b5ea6bc7884b5f2345d084"
+      }
+    },
+    {
+      "sha256": "a031fd67b72cd8b1585fc160b02bac558a5f52bc45c7b4b6b6930526125902a9",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-total-fertility-rate/revisions/a031fd67b72cd8b1585fc160b02bac558a5f52bc45c7b4b6b6930526125902a9.png"
+      },
+      "bytes": 112302,
+      "id": "a031fd67b72cd8b1585fc160b02bac558a5f52bc45c7b4b6b6930526125902a9",
+      "kind": "candidate",
+      "version": "2026-10-02-ranking-question-v1",
+      "createdAt": "2026-10-02T08:13:51.189Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "50541b9bc8df33a4b0dc3744011c46b9cba067ddc937639be564ea63afc7d7b7"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "320px一覧・代表原寸を確認。対象年/47県/単位/全同率1位一致、凡例なし。文字範囲・重なり検査とprivate R2画像/固定入力のSHA読戻しがPASS。",
+        "reviewedAt": "2026-10-02T08:20:06.840Z"
+      },
+      "provenance": {
+        "renderer": "question-ranking-note-cover-v1",
+        "sourceUrl": "https://storage.stats47.jp/app/ranking/total-fertility-rate/values.json",
+        "sourceSha256": "f340579faefed13425977e4287777235dbf9e61c0bb8ea52f11dce6ff2cc5301",
+        "input": {
+          "sha256": "50541b9bc8df33a4b0dc3744011c46b9cba067ddc937639be564ea63afc7d7b7",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-total-fertility-rate/inputs/50541b9bc8df33a4b0dc3744011c46b9cba067ddc937639be564ea63afc7d7b7.json"
+          },
+          "bytes": 7417
+        }
+      }
+    },
+    {
+      "sha256": "7090eccd95b8cedd97fe3dd2d27e9cb954322da97b35af54981953732f4ea1a8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-total-fertility-rate/revisions/7090eccd95b8cedd97fe3dd2d27e9cb954322da97b35af54981953732f4ea1a8.png"
+      },
+      "bytes": 1727930,
+      "id": "7090eccd95b8cedd97fe3dd2d27e9cb954322da97b35af54981953732f4ea1a8",
+      "kind": "candidate",
+      "version": "pop-NCP-003-v3-f202db4c6471",
+      "createdAt": "2026-10-23T10:42:31.237Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "d314c48e962dde162e5f2a0ed979afed1e6d93c99433f5ee602492581c153c0a"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の指標・年・単位・首位県と全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T10:44:23.948Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "d314c48e962dde162e5f2a0ed979afed1e6d93c99433f5ee602492581c153c0a",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-total-fertility-rate/inputs/d314c48e962dde162e5f2a0ed979afed1e6d93c99433f5ee602492581c153c0a.json"
+          },
+          "bytes": 8559
+        },
+        "production": {
+          "id": "NCI-00124",
+          "policyId": "NCP-003",
+          "policyVersion": 3,
+          "planSha256": "f202db4c6471c2ab44d43861b135b1ee3a9c2b406d7b45057e946cbe53129ef7"
+        }
+      }
+    }
+  ]
+}

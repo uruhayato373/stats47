@@ -3,7 +3,7 @@ import { isOk } from "@stats47/types";
 
 import type { AreaType } from "@/features/area";
 import { findCategoryByKey } from "@/features/category/server";
-import { readRankingItemsByCategory } from "@/features/ranking/server";
+import { rankingTop1Value, readRankingItemsByCategory } from "@/features/ranking/server";
 
 import { RankingSidebarClient } from "./RankingSidebarClient";
 import { MAX_SIDEBAR_ITEMS, selectSidebarItems } from "./select-sidebar-items";
@@ -70,18 +70,22 @@ export async function RankingSidebarContainer({
     // カテゴリ全件 (最大 137 件 / 135KB) を props に載せると RSC payload へ
     // そのまま直列化される (2026-08-05 監査: ranking HTML 非圧縮 1,287,062 bytes)。
     const sidebarItems = selectSidebarItems(
-        items.map((item) => ({
-            rankingKey: item.rankingKey,
-            areaType: "prefecture" as const,
-            title: item.title,
-            readerLabel: item.readerLabel,
-            subtitle: item.subtitle,
-            demographicAttr: item.demographicAttr,
-            normalizationBasis: item.normalizationBasis,
-            groupKey: item.groupKey,
-            top1: item.top1 ?? null,
-            unit: item.unit,
-        })),
+        items.map((item) => {
+            // 1 位の値はランキングのページと同じ表示単位で書く (「270,584,874千円」でなく「2,706億円」。2026-11-14)
+            const top1Value = rankingTop1Value(item);
+            return {
+                rankingKey: item.rankingKey,
+                areaType: "prefecture" as const,
+                title: item.title,
+                readerLabel: item.readerLabel,
+                subtitle: item.subtitle,
+                demographicAttr: item.demographicAttr,
+                normalizationBasis: item.normalizationBasis,
+                groupKey: item.groupKey,
+                top1: item.top1 ? { ...item.top1, value: top1Value?.value ?? item.top1.value } : null,
+                unit: top1Value?.unit ?? item.unit,
+            };
+        }),
         rankingKey,
         areaType,
         MAX_SIDEBAR_ITEMS

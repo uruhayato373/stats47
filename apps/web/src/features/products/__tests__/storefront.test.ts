@@ -1,3 +1,4 @@
+// @vitest-environment node
 import fs from "node:fs";
 import path from "node:path";
 
@@ -34,6 +35,23 @@ describe("product storefront", () => {
       expect(product.showcase?.filter((section) => section.kind === "chart").map((section) => section.heading))
         .toEqual(source.examples.map((example: { heading: string }) => example.heading));
       expect(product.showcase?.some((section) => section.kind === "file")).toBe(true);
+    }
+  });
+
+  it("全商品が固有の内容紹介・収録内容を持ち、定型文だけのカードが無い", () => {
+    const included = STOREFRONT_PRODUCTS.map((product) => JSON.stringify(product.included));
+    const descriptions = STOREFRONT_PRODUCTS.map((product) => product.description);
+    expect(new Set(included).size).toBe(STOREFRONT_PRODUCTS.length);
+    expect(new Set(descriptions).size).toBe(STOREFRONT_PRODUCTS.length);
+    expect(descriptions.filter((text) => /販売中の旧版です。新版は/.test(text))).toEqual([]);
+    const listings = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../../../../../data/products/kdp/listings.json"), "utf8")).listings;
+    const books = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../../../../../data/products/kindle/books.json"), "utf8")).books;
+    const kindle = STOREFRONT_PRODUCTS.filter((product) => product.channel === "kindle");
+    expect(new Set(kindle.map((product) => JSON.stringify(product.audience))).size).toBe(kindle.length);
+    for (const product of kindle) {
+      // 収録内容は販売先に掲示した紹介文、目次は出品した本の章と一致させる
+      expect(listings[product.id].description).toContain(product.included[0]);
+      expect(product.tableOfContents).toEqual(books[product.id].chapters.map((chapter: { title: string }) => chapter.title));
     }
   });
 

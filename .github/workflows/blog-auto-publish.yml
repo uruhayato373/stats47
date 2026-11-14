@@ -188,7 +188,8 @@ jobs:
             # manifest の楽観ロックを自分自身で壊すため、画像セット確定後に同期する。
             # 上書きの前後で本文の版を private R2 (blog-archive/<slug>/<sha>.md) に退避する (読み戻して SHA を照合)
             node .claude/scripts/blog/archive-blog-articles.mjs --slugs "$SLUG"
-            npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "app/blog/$SLUG"
+            # 再公開は R2 が正本の本文 (article.md・data/*.json) を置き換える。直前の行で旧版を blog-archive に退避済みなので上書きを許す
+            npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --allow-authoritative-overwrite --prefix "app/blog/$SLUG"
             node .claude/scripts/blog/archive-blog-articles.mjs --file "$A" --slug "$SLUG"
             PUBLISHED="$PUBLISHED $SLUG"
             echo "✅ $SLUG published"
@@ -266,19 +267,47 @@ jobs:
           else
             echo "::warning::known-tag-keys の再生成に失敗 (公開自体は成功。次の sync-snapshots で追随する)"
           fi
+          # 未公開だった記事を再公開した回は、未公開の slug の一覧 (middleware が 410 を返す) からその slug を外す。
+          # 外さないと公開した記事が 410 のまま塞がり、PR の Known Tag Keys Gate も --check で落ちる。
+          # 下の content:sync はこの一覧を読んで台帳の状態を決めるので、その前に作り直す。
+          if (cd apps/web && NODE_OPTIONS='--conditions react-server' npx tsx scripts/generate-unpublished-blog-slugs.ts); then
+            git add apps/web/src/config/unpublished-blog-slugs.ts || true
+          else
+            echo "::warning::unpublished-blog-slugs の再生成に失敗 (公開自体は成功。次の sync-snapshots で追随する)"
+          fi
+          # 記事台帳・ページの索引・指標の逆引きも同じコミットで追随させる (BLOG-LEDGER-PUBLISH-SYNC-01)。
+          # タグの索引 (data/content/pages/tag.json) は上で進めた known-tag-keys から作るので、キーだけを進めると
+          # 食い違って develop の content:check が落ちる (2026-11-13 に 3 タグで発生)。逆引き (data/metrics/index) は
+          # ページの索引から作るので、索引を進めたら作り直さないと metrics:check が落ちる。
+          # git add は作り直しが最後まで通ったときだけ。途中で落ちた書きかけは載せない。
+          if NODE_OPTIONS='--conditions react-server' npm run content:sync -- --from-r2; then
+            git add data/blog/ledger data/content/entities.json data/content/pages
+            if npm run metrics:build-index; then
+              git add data/metrics/index
+            else
+              echo "::warning::指標の逆引き (data/metrics/index) の作り直しに失敗 (公開自体は成功。develop の metrics:check が落ちるので、上のログの原因を直して npm run metrics:build-index を流す)"
+            fi
+          else
+            echo "::warning::記事台帳とページの索引の作り直しに失敗 (公開自体は成功。タグのキーが進んだ回は develop の content:check が落ちるので、上のログの原因を直して npm run content:sync -- --from-r2 を流す)"
+          fi
           if git diff --cached --quiet; then
             echo "削除対象なし (contents/blog に公開済みドラフトの取り残しなし)"; exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -q -m "chore(blog): outbox 掃除 + sitemap snapshot 追随 [skip ci] -${REMOVED}"
-          # 他 workflow の push と競合しても落ちないよう rebase してから push (最大3回)
+          # 他 workflow の push と競合しても落ちないよう rebase してから push (最大3回)。
+          # content:sync は書き戻しに含めない外部公開物の索引 (data/content/external.json) も書くので、
+          # 作業ツリーに残った差分で pull が止まらないよう --autostash を付ける。
+          PUSHED=false
           for i in 1 2 3; do
-            if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
-              echo "✅ outbox cleanup pushed:${REMOVED}"; break
+            if git pull --rebase --autostash --quiet origin develop && git push origin HEAD:develop; then
+              echo "✅ outbox cleanup pushed:${REMOVED}"; PUSHED=true; break
             fi
             echo "push retry $i (concurrent push?)"; sleep 3
           done
+          # 3 回とも通らなければ step を落とす。成功で終わると、R2 には公開済みなのに develop の outbox と台帳が古いまま気づけない
+          [ "$PUSHED" = true ] || { echo "::error::書き戻しの push が 3 回とも失敗した (R2 への公開は済んでいる。develop の outbox・sitemap・タグのキー・記事台帳・索引は古いまま。上のログで pull と push が落ちた理由を確かめる)"; exit 1; }
 
       - name: 📝 Summary
         if: always()

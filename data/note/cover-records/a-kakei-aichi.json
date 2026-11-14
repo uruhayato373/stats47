@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "articleKey": "a-kakei-aichi",
+  "production": {
+    "id": "NCI-00060",
+    "policyId": "NCP-002",
+    "policyVersion": 3,
+    "brief": {
+      "headline": "愛知県の家計\n住まいに注目",
+      "subline": "名古屋市・2024年\n二人以上の世帯",
+      "subject": "添付は愛知県の主域輪郭を示す検証済み参照画像で、編集対象ではない。1280×670相当の横長完成カバーを新たに作る。右側に参照の県形を大きく配置し、北向き・縦横比・凹凸を忠実に維持する。濃紺の単色面と太い淡黄色の縁取りで見せる。回転・反転・別県・県境・新しい島・市町村境・穴・統計塗り分けは加えない。生活の小物は輪郭と文字に重ならない右下に無人の小さな家の模型を小さく1点だけ。家や車の中も完全に無人。窓は均一な淡い水色で、人影や顔のような形を描かない。人物・顔・手・動物・キャラクター・マスコット・擬人化は一切なし。背景はオレンジ・黄色・クリームの淡い抽象的な筆塗りだけ。山・果物・花・ランドマーク・追加の生活用品は描かない。文字は指定全文のみ。補足2行は同じ幅の太い帯2本に置き、幅320pxでも各行を明瞭に読める大きさにする。ラベル・窓・本の表紙・ノートなど指定外の場所は完全に無文字。輪郭の周囲と補足欄に余白を残す。",
+      "evidence": "https://note.com/stats47/n/nda72a0bed2c4 2026-10-23公開API本文照合。名古屋市の2024年・二人以上の世帯の家計調査。住居0.64倍を本文で確認。比較の基準は47都道府県庁所在市の単純平均であり、家計調査の全国平均ではない。カバーは倍率・順位・因果を載せず、費目への着目だけを示す。地図は愛知県の最大ポリゴンの主域輪郭（遠隔離島省略）で地域を示す記号。観測対象は名古屋市であり県全域の観測図ではない。人物・キャラクターなし。",
+      "dataScope": {
+        "place": "名古屋市",
+        "year": "2024",
+        "households": "二人以上の世帯"
+      }
+    }
+  },
+  "revisions": [
+    {
+      "sha256": "41b4674445286a13fd6e7f4e087c18573af89b373068725de67e04e6275f1cd8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-aichi/revisions/41b4674445286a13fd6e7f4e087c18573af89b373068725de67e04e6275f1cd8.png"
+      },
+      "bytes": 53378,
+      "id": "41b4674445286a13fd6e7f4e087c18573af89b373068725de67e04e6275f1cd8",
+      "kind": "published-original",
+      "version": "public-cover-archive",
+      "createdAt": "2026-10-02T03:12:54.292Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Existing public image preserved",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": null,
+        "sourceUrl": "https://assets.st-note.com/production/uploads/images/312770047/rectangle_large_type_2_eaa8194e8992dc5aa637f4d55163c999.png?fit=bounds&quality=85&width=1280",
+        "sourceSha256": "41b4674445286a13fd6e7f4e087c18573af89b373068725de67e04e6275f1cd8"
+      }
+    },
+    {
+      "sha256": "ff284bb8eebea85feee7229520506c4bea980dbb794b2140008a8219cc85ffb1",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-aichi/revisions/ff284bb8eebea85feee7229520506c4bea980dbb794b2140008a8219cc85ffb1.png"
+      },
+      "bytes": 125136,
+      "id": "ff284bb8eebea85feee7229520506c4bea980dbb794b2140008a8219cc85ffb1",
+      "kind": "candidate",
+      "version": "2026-10-02-household-r1",
+      "createdAt": "2026-10-02T03:17:41.944Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "8f74a686b27c0df5b2cb584c7e4eeb647f08834d7989c88455b2a9c12d0f230a"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+        "reviewedAt": "2026-10-02T05:27:41.105Z"
+      },
+      "provenance": {
+        "renderer": "bold-note-cover",
+        "sourceUrl": "https://storage.stats47.jp/app/stats/housing-expenditure-total/values.json",
+        "sourceSha256": "5d5e5bf90081c0d39a47f286cb71c2134fdff0c4142931100f0756859e788672"
+      }
+    },
+    {
+      "sha256": "6ddb616811942fba83d6b2d07dbfa0ef9f1bd97590ed2eec63d0472640aa6351",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-aichi/revisions/6ddb616811942fba83d6b2d07dbfa0ef9f1bd97590ed2eec63d0472640aa6351.png"
+      },
+      "bytes": 102049,
+      "id": "6ddb616811942fba83d6b2d07dbfa0ef9f1bd97590ed2eec63d0472640aa6351",
+      "kind": "r2-archive",
+      "version": "legacy-r2-import-2026-10-02",
+      "createdAt": "2026-10-02T03:28:06.245Z",
+      "width": 1280,
+      "height": 670,
+      "review": {
+        "status": "not-required",
+        "reason": "Legacy R2 asset preserved; not adopted for note",
+        "reviewedAt": null
+      },
+      "provenance": {
+        "renderer": "legacy-public-r2",
+        "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-aichi/images/cover-1280x670.png",
+        "sourceSha256": "6ddb616811942fba83d6b2d07dbfa0ef9f1bd97590ed2eec63d0472640aa6351"
+      }
+    },
+    {
+      "sha256": "09dc436ce96fe1ccb6465f76e1b4684386c71245e8761e29db76f7e2fb485fc8",
+      "storage": {
+        "provider": "r2-private",
+        "bucket": "stats47-private",
+        "key": "note/covers/a-kakei-aichi/revisions/09dc436ce96fe1ccb6465f76e1b4684386c71245e8761e29db76f7e2fb485fc8.png"
+      },
+      "bytes": 1523795,
+      "id": "09dc436ce96fe1ccb6465f76e1b4684386c71245e8761e29db76f7e2fb485fc8",
+      "kind": "candidate",
+      "version": "pop-NCP-002-v3-6fabdc263af0",
+      "createdAt": "2026-10-23T10:12:16.618Z",
+      "width": 1280,
+      "height": 670,
+      "quality": {
+        "textBounds": "pass",
+        "textOverlap": "pass",
+        "evidenceSha256": "a31adc140d78651c744e03d7950f09b0175b15540656af06e824bc033a06561d"
+      },
+      "review": {
+        "status": "pass",
+        "reason": "公開本文の名古屋市・2024年・二人以上の世帯と県輪郭、全掲載文字を原寸/320pxで確認。管理画面の新旧比較で採用可。",
+        "reviewedAt": "2026-10-23T10:14:26.653Z"
+      },
+      "provenance": {
+        "renderer": "note-imagegen-cover-v1",
+        "sourceUrl": null,
+        "sourceSha256": null,
+        "input": {
+          "sha256": "a31adc140d78651c744e03d7950f09b0175b15540656af06e824bc033a06561d",
+          "storage": {
+            "provider": "r2-private",
+            "bucket": "stats47-private",
+            "key": "note/covers/a-kakei-aichi/inputs/a31adc140d78651c744e03d7950f09b0175b15540656af06e824bc033a06561d.json"
+          },
+          "bytes": 12933
+        },
+        "production": {
+          "id": "NCI-00060",
+          "policyId": "NCP-002",
+          "policyVersion": 3,
+          "planSha256": "6fabdc263af093fd6fc2ee500c722aac185ad68862566cf4b0fe6f8be3e9ef89"
+        }
+      }
+    }
+  ]
+}

@@ -110,6 +110,9 @@ const SOURCES: Record<ContentChannelDTO, string> = {
     `packages/product-factory/src/channels/kindle/book-catalog.ts + ${KDP_LISTINGS}`,
 };
 
+/** KDP の出品定義を持つべき Kindle の制作状態 (export-kdp-listings.ts が提案を作る範囲と同じ) */
+const KINDLE_LISTABLE_STATUSES = new Set(["generated", "published"]);
+
 const KDP_BLOCKED_ACTIONS = new Map([
   ["blocked-thin", "本文量の不足を是正して再検証"],
   ["blocked-design", "編集設計を完了して再検証"],
@@ -214,7 +217,9 @@ export function buildContentOperations(
       });
     }
   }
-  for (const id of buildIds) {
+  // 出品定義を求めるのは EPUB ができた本だけ (export-kdp-listings.ts と同じ境界)。企画段階 (idea) の本には出品する物が無い
+  for (const { id, status } of input.kindleBuildBooks) {
+    if (!KINDLE_LISTABLE_STATUSES.has(status)) continue;
     if (!listingIds.has(id)) {
       findings.push({
         severity: "error",

@@ -6,7 +6,7 @@
  * 2026-09-27 (AREA-HIGHLIGHTS-SSOT-01): 選定は Web の県ページと同じ selectAreaHighlights
  * (packages/area-profile/src/highlights) を使い、入力は R2 `app/areas/<code>/databook.json` だけにした。
  * values.json / item.json からの順位・ラベルの自前再計算は廃止。databook.json が旧版 (schemaVersion < 2、
- * 「特徴」のメタ無し) なら fail-closed で止まる (R2 の再生成が必要)。
+ * 「特徴」のメタ無し) なら fail-closed で止まる (R2 の再生成が必要)。3 以降は任意項目の追加なので止めない。
  *
  * fail-closed: どちらかのグループが3件未満、または出典・年が欠落した項目があれば非ゼロ終了しファイルを書かない。
  *
@@ -22,7 +22,6 @@ import { dirname, join } from "node:path";
 
 import { selectAreaHighlights } from "../../../packages/area-profile/src/highlights/select-area-highlights.ts";
 import {
-  AREA_DATABOOK_SCHEMA_VERSION,
   parseAreaDatabookSnapshot,
   type AreaDatabookSnapshot,
 } from "../../../packages/area-profile/src/types/databook-snapshot.ts";
@@ -32,6 +31,7 @@ import {
   buildCoverHook,
   buildCoverTeaser,
   buildScopeNote,
+  databookTooOldMessage,
   normalizePrefCode,
   toAreaCarouselItem,
   validateGroup,
@@ -85,10 +85,9 @@ async function main() {
   const scopeNoteText = buildScopeNote(pref2, capital.name);
 
   const { databook, sourceKey } = await loadDatabook(pref5, databookPath);
-  if ((databook.schemaVersion ?? 1) < AREA_DATABOOK_SCHEMA_VERSION) {
-    console.error(
-      `✗ databook.json が旧版です (schemaVersion ${databook.schemaVersion ?? 1})。R2 の databook.json を再生成するか --databook でローカル生成物を渡してください。`,
-    );
+  const tooOld = databookTooOldMessage(databook);
+  if (tooOld) {
+    console.error(tooOld);
     process.exit(1);
   }
   const areaName = databook.areaName;

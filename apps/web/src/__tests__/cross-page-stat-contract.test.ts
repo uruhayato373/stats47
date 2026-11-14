@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { toDisplayEntry } from "@stats47/ranking/utils";
 import { describe, expect, it } from "vitest";
 

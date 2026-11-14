@@ -90,7 +90,7 @@ session一覧が0でもOSプロセスが残る事例を確認した。OSのPID�
 
 週次 (土曜) の無人収集は Mac の`measurement-collect-local.sh`から同じCLIを呼ぶ (2026-10-20 に CI から移した)。専用note profileの
 storageStateを一時Playwright contextへ読み込み、account/期間/全件ゲートをそのまま適用する。
-生データ・不完全な試行・更新セッションは暗号化private R2、git/artifactには固定コードの成否だけを保存する。
-認証更新は`npm run measurement:bootstrap -- note --login --publish`。詳細は
-[`Playwright認証プロファイル`](../../../../../docs/01_技術設計/07_Playwright認証プロファイル.md#ci-実行について)。
+生データ・不完全な試行は暗号化private R2、gitには固定コードの成否だけを保存する。セッションはMacの専用profileだけが持つ。
+認証更新は`node .claude/scripts/measurement/refresh-session.mjs note --wait-human`。詳細は
+[`Playwright認証プロファイル`](../../../../../docs/01_技術設計/07_Playwright認証プロファイル.md#macでの認証付き計測)。
 実験の開始は自動登録しない。

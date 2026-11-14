@@ -42,6 +42,14 @@ jobs:
     if: ${{ github.event_name == 'schedule' || inputs.only == 'psi' || inputs.only == 'all' }}
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    # 生 PSI (psi-batch-<ts>.json) は git に足さず R2 state/psi/ へ出す (diff-push-r2.ts の S3 認証は sync-snapshots.yml と同じ導出)。
+    # git には history.csv と LATEST.md だけを commit-back する。手元では npm run state:pull -- psi で live/ に取る。
+    env:
+      R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+      R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+      R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+      CLOUDFLARE_R2_BUCKET_NAME: stats47
+      R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
     steps:
       # 計測も develop の上で行う。以前は main で計測して .claude/state/metrics/psi/ を develop へ上書きコピーしており、
       # main が develop より遅れている間は前日までの history 行と prune の削除を毎日失っていた
@@ -69,10 +77,6 @@ jobs:
       - name: 📝 Update history.csv and LATEST.md
         run: npm run psi-audit:digest
 
-      - name: 🧹 Retain latest raw PSI snapshot
-        # 長期比較は history.csv がSSOT。生JSONは最新1件だけ残し、Git履歴から復元可能にする。
-        run: node .claude/scripts/lib/prune-state-snapshots.mjs --scope psi
-
       - name: 🔍 Threshold check
         id: check
         run: |
@@ -94,12 +98,38 @@ jobs:
             echo "PSI report not generated" >> "$GITHUB_STEP_SUMMARY"
           fi
 
+      # 閾値アラートは上の check が CI 内の生 JSON を直接読むので、R2 に書けなくても起票の経路は止まらない。
+      # 書けなかった回は下で生 JSON を artifact に残し、job の最後で失敗させる (緑のまま記録が抜けないように)。
+      - name: ☁️ Publish raw PSI to R2 state/psi/
+        id: r2
+        run: |
+          set -uo pipefail
+          shopt -s nullglob
+          FILES=(data/psi/live/psi-batch-*.json)
+          # 失敗しても後段の commit-back と起票を止めない。結果は published で渡し、最後の step で job を落とす
+          if node .claude/scripts/lib/state-publish.mjs prepare psi "${FILES[@]}" \
+            && npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "state/psi/" \
+            && node .claude/scripts/lib/state-publish.mjs verify psi; then
+            echo "published=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "published=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::生 PSI を R2 state/psi/ へ出せなかった"
+          fi
+
+      - name: 🗄 Keep raw PSI as artifact (R2 publish failed)
+        if: always() && steps.r2.outputs.published != 'true'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: psi-raw-${{ github.run_id }}
+          path: data/psi/live/
+          retention-days: 30
+
       - name: 📤 Publish to develop branch
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add data/psi
+          git add data/psi/history.csv data/psi/LATEST.md
           if git diff --cached --quiet; then
             echo "No PSI changes to publish"
             exit 0
@@ -185,6 +215,12 @@ jobs:
                 --comment "PSIの最新計測がしきい値内へ復旧したため自動Closeします。"
             done
 
+      - name: 🚦 Fail when raw PSI did not reach R2
+        if: always() && steps.r2.outputs.published != 'true'
+        run: |
+          echo "::error::生 PSI を R2 state/psi/ へ出せなかった。artifact psi-raw-${{ github.run_id }} に残した"
+          exit 1
+
   # URL Inspection。週次計測の「Sync coverage queue with URL Inspection」がこの結果を読み、両方が
   # 是正キューとバックログを書き換えるので、同時に走らせず計測より先に終える
   url-inspection:
@@ -248,6 +284,9 @@ jobs:
           git add data/gsc/coverage-remediation/
           git add .claude/todo/backlog.md
           git add data/gsc/coverage-drilldown/*/coverage-live-observe-urls.csv 2>/dev/null || true
+          # ボットのコミットは pre-commit を通らない。1MB 超のファイルが develop に入ると全員のコミットが止まる
+          # (backlog.md は 2026-11-13 に上限に達した)。quality-suite-weekly.yml と同じく、stage したファイルだけを検査する
+          node .claude/scripts/lib/check-repo-hygiene.cjs --staged --baseline
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
@@ -380,7 +419,7 @@ jobs:
           GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
         continue-on-error: true
         # metrics-reader.mjs は google-client.cjs 経由で env の鍵をメモリで読む (鍵ファイルを書き出さない)
-        run: node .claude/scripts/snapshot-weekly-metrics.mjs ${{ steps.week.outputs.week }} --force
+        run: node .claude/scripts/metrics/snapshot-weekly-metrics.mjs ${{ steps.week.outputs.week }} --force
 
       - name: 📄 Write GitHub Step Summary
         if: always()

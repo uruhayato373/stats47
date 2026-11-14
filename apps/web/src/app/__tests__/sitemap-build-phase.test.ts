@@ -1,3 +1,4 @@
+// @vitest-environment node
 /**
  * ビルド条件 (NEXT_PHASE=phase-production-build) での sitemap 実物検証。
  *

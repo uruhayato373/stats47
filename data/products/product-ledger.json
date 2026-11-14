@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "asOf": "2026-11-08",
+  "asOf": "2026-11-14",
   "notePeriod": {
     "start": "2026-10-11",
     "end": "2026-11-07"
@@ -10,10 +10,10 @@
       "id": "data-pack-theme",
       "name": "テーマ別データ集",
       "stance": "price-test",
-      "products": 13,
+      "products": 12,
       "priceMinYen": 980,
       "priceMaxYen": 980,
-      "pageViews": 149,
+      "pageViews": 139,
       "salesYen": 0,
       "nextReviewOn": "2026-12-30",
       "reviewDue": false
@@ -22,10 +22,10 @@
       "id": "data-pack-all",
       "name": "総合集",
       "stance": "price-test",
-      "products": 1,
-      "priceMinYen": 2980,
+      "products": 2,
+      "priceMinYen": 1980,
       "priceMaxYen": 2980,
-      "pageViews": 21,
+      "pageViews": 31,
       "salesYen": 0,
       "nextReviewOn": "2026-12-30",
       "reviewDue": false
@@ -96,6 +96,12 @@
       "id": "PRICE-DATA-PACK-2026-11",
       "status": "running",
       "reviewOn": "2026-12-30",
+      "due": false
+    },
+    {
+      "id": "PRICE-MUNI-INDUSTRY-2026-11",
+      "status": "running",
+      "reviewOn": "2027-01-05",
       "due": false
     }
   ],
@@ -2129,15 +2135,19 @@
     {
       "channel": "note",
       "key": "muni-manufacturing-shipment-data",
-      "title": "市区町村別 製造品出荷額等 1980〜2023年 CSV＋境界GeoJSON（1,719自治体・最新境域の時系列）",
-      "line": "data-pack-theme",
+      "title": "市区町村別 製造品出荷額等 1980〜2023年＋業種別 CSV＋境界GeoJSON（1,719自治体・最新境域の時系列）",
+      "line": "data-pack-all",
       "status": "published",
-      "priceYen": 980,
-      "netPerSaleYen": 837,
+      "priceYen": 1980,
+      "netPerSaleYen": 1692,
       "pageViews": 10,
       "salesYen": 0,
       "unitsSold": null,
-      "lastPriceChange": null
+      "lastPriceChange": {
+        "fromYen": 980,
+        "toYen": 1980,
+        "appliedAt": "2026-11-10T08:14:04.413Z"
+      }
     },
     {
       "channel": "kdp",

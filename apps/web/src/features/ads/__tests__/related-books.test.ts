@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it, vi, afterEach } from "vitest";
 
 import { buildAmazonUrl, CATEGORY_BOOKS } from "../constants/related-books";
