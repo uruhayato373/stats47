@@ -175,9 +175,56 @@ describe('検算の行は結果を値に、内訳の式を補足に分ける', (
       },
     } as unknown as GeoAnalysisPrefDetail);
     for (const row of rows) expect(row.value, row.label).not.toMatch(FORMULA);
-    expect(rows[0]).toMatchObject({ value: '6.0005人', meta: '1人 + 2人 + 3.0005人' });
-    expect(rows[1]).toMatchObject({ value: '5.0005人', meta: '全格子包含 4人 〜 一部交差 6.0005人' });
+    // 値 (24px) は人の単位に丸め、丸め前の小数 4 桁は補足の内訳に残す (UI-FOLLOWUP-02)
+    expect(rows[0]).toMatchObject({ value: '6人', meta: '1人 + 2人 + 3.0005人' });
+    expect(rows[1]).toMatchObject({ value: '5人', meta: '全格子包含 4人 〜 一部交差 6.0005人' });
     expect(rows[1]!.label).toContain('中心包含');
     expect(rows[3]).toMatchObject({ value: '3.750 km²', meta: '1.500 + 2.250' });
+  });
+
+  // UI-FOLLOWUP-02: 新潟県の基準人口は「2,201,271.9866人」で、幅 1280px の 4 列のマスでは末尾の「人」だけが
+  // 2 行目に折り返していた。値は小数を持たない人数にし、丸め前の値は補足の内訳で確かめられるようにする
+  it('豪雪・土砂災害: 値の人数は小数を持たず、補足の内訳に丸め前の小数を残す', () => {
+    const snow = spatialAuditRows({
+      slug: 'population-snow-designation',
+      summary: {
+        populationScaled: [45_765_395, 13_817_497_141, 8_149_457_330],
+        populationTotalScaled: 22_012_719_866,
+        lowerScaled: [21_669_086_022, 0],
+        upperScaled: [22_012_719_866, 0],
+        boundaryScaled: [343_633_844, 0],
+        regularOnlyAreaKm2: 3812.938,
+        specialAreaKm2: 8747.606,
+        designatedAreaKm2: 12560.544,
+      },
+    } as unknown as GeoAnalysisPrefDetail);
+    expect(snow[0]).toMatchObject({ value: '2,201,272人', meta: '4,576.5395人 + 1,381,749.7141人 + 814,945.733人' });
+    expect(snow[2]).toMatchObject({ value: '34,363人' });
+    const landslide = spatialAuditRows({
+      slug: 'population-landslide-exposure',
+      status: 'available',
+      summary: {
+        totalScaled: 22_012_719_866,
+        exclusiveScaled: [45_765_395, 13_817_497_141, 8_149_457_330],
+        facilities: {
+          administrative: { totalScaled: 3, exclusiveScaled: [1, 1, 1] },
+          meeting: { totalScaled: 2, exclusiveScaled: [1, 0, 1] },
+        },
+      },
+    } as unknown as GeoAnalysisPrefDetail);
+    expect(landslide[0]).toMatchObject({ value: '2,201,272人', meta: '4,576.5395 + 1,381,749.7141 + 814,945.733' });
+    for (const row of [...snow, ...landslide]) expect(row.value, row.label).not.toMatch(/\d\.\d+人$/);
+  });
+
+  // UI-FOLLOWUP-02: 土砂災害が対象外の県 (京都府) は、理由の文章を値 (24px) に入れていて 1 枚が 5 行になっていた。
+  // 値は「対象外」の短い語にし、理由は補足 (12px) に置く
+  it('土砂災害が対象外の県は、値を「対象外」にして理由を補足に置く', () => {
+    const reason = '京都府 A33-25 は商用利用不可。曝露値は算出・配信対象外。';
+    const rows = spatialAuditRows({
+      slug: 'population-landslide-exposure',
+      status: 'excluded',
+      reason,
+    } as unknown as GeoAnalysisPrefDetail);
+    expect(rows).toEqual([{ label: '土砂災害警戒区域の人口と施設', value: '対象外', meta: reason }]);
   });
 });

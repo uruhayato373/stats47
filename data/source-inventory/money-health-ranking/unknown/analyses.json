@@ -344,7 +344,9 @@
       "metricKeys": [
         "financial-literacy-correct-rate"
       ],
-      "surveyIds": [],
+      "surveyIds": [
+        "financial-literacy-survey"
+      ],
       "geoScopes": [
         "prefecture-set"
       ],

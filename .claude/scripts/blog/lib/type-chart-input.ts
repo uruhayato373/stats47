@@ -329,6 +329,26 @@ export function stackedChartFromArticleData(parsed: unknown): StackedChart | { s
   };
 }
 
+/** The stacked json's form: `"form": "area"` draws the stacked-bar type as stacked areas along time. */
+export function stackedFormOf(parsed: unknown): 'area' | 'bar' {
+  return parsed && typeof parsed === 'object' && (parsed as { form?: unknown }).form === 'area' ? 'area' : 'bar';
+}
+
+/**
+ * Article stacked json with `"form": "area"` → the stacked-bar type's area form. The bars' names are the
+ * periods, so the condition line carries the first and last period. A missing value stops the chart.
+ */
+export function stackedAreaChartFromArticleData(parsed: unknown): StackedChart | { skip: string } {
+  const chart = stackedChartFromArticleData(parsed);
+  if ('skip' in chart) return chart;
+  if (chart.groups.length < 2 || chart.categories.length < 2) return { skip: '積み上げ面には 2 つ以上の期間と区分が要る' };
+  if (chart.categories.some((c) => c.values.some((v) => v === null || v < 0))) return { skip: '欠けた値か負の値がある (面を補間で埋めない)' };
+  const period = `${chart.groups[0]}–${chart.groups[chart.groups.length - 1]}`;
+  // A 100% chart shows shares, whatever unit the values were written in.
+  const unit = chart.normalized ? '%' : chart.unit;
+  return { ...chart, meta: [period, unit && `単位：${unit}`].filter(Boolean).join(' · ') };
+}
+
 type ScatterMetric = ArticleMetric & { source?: { kind?: string; displayName?: string } };
 type ValuesRow = { areaCode: string; yearCode: string; yearName?: string; value: number | null };
 

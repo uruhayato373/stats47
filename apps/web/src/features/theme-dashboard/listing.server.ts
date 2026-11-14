@@ -12,3 +12,4 @@ import "server-only";
  */
 export { ALL_THEMES } from "./config/all-themes";
 export { AREA_THEMES } from "./config/area-theme-slugs";
+export { groupThemesForListing } from "./lib/group-themes-for-listing";
