@@ -46,3 +46,5 @@
 {"key":"ea350866dde4e47a","date":"2026-11-14","slug":"telework-rate-tokyo-gap","mode":"expert","verdict":"REVISE","severity":"MAJOR","type":"value","summary":"副業の節の「下位5県も宮崎・大分・青森・静岡・福岡と、テレワーク下位とは一致しません」は、青森が両方の下位 5 に入っているので誤り。"}
 {"key":"5f86ced46378fe64","date":"2026-11-14","slug":"telework-rate-tokyo-gap","mode":"expert","verdict":"REVISE","severity":"MAJOR","type":"correlation","summary":"「データが裏切る直感」「別々の現象として扱うべき証拠」は強すぎる。"}
 {"key":"29e7be3345cd2b6c","date":"2026-11-14","slug":"telework-rate-tokyo-gap","mode":"expert","verdict":"REVISE","severity":"MAJOR","type":"causal","summary":"比較節の「副業や転職はどの県にも一定の割合で起きるのに対し、テレワークは…条件に強く左右されるため地域差が大きく出ると読める」は、根拠のない原因づけ。"}
+{"key":"4bc6e486d0311d81","date":"2026-11-14","slug":"inpatient-rate-prefecture-gap","mode":"expert","verdict":"REVISE","severity":"BLOCK","type":"causal","summary":"「どちらが原因かは決められない」(病床数の節) と、後段の断定が食い違う。"}
+{"key":"73b734e43ba8cc2b","date":"2026-11-14","slug":"inpatient-rate-prefecture-gap","mode":"expert","verdict":"REVISE","severity":"MAJOR","type":"region","summary":"題の「西高東低」と冒頭の「なぜ西日本ばかりが入院の多い県になるのか」が、地方別の値で支えられない。"}
