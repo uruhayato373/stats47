@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "total-fertility-rate",
+  "year": "2023",
+  "unit": "（人）",
+  "label": "合計特殊出生率",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/total-fertility-rate/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug fertility-rate-prefecture-gap --keys total-fertility-rate --data-name fertility-rate-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-06-23T05:16:47.643Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

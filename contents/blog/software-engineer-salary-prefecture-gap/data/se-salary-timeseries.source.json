@@ -1,0 +1,10 @@
+{
+  "kind": "derived",
+  "rankingKey": "software-engineer-annual-income",
+  "year": "2020-2023",
+  "unit": "万円",
+  "label": "ソフトウェア作成者の平均年収の推移",
+  "source": "r2:app/ranking/software-engineer-annual-income/values.json",
+  "transform": "全4パーティション(2020-2023年)から京都府・東京都の値と47都道府県の中央値(値の昇順で24番目)を年ごとに抽出した3系列の折れ線。値は小数1桁に丸める",
+  "upstream": "metric config (packages/data-configs) → e-Stat 賃金構造基本統計調査 → R2 app/ranking"
+}
