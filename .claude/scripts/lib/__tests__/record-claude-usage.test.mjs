@@ -162,7 +162,10 @@ test('列を足す前のヘッダはヘッダ行だけ新しくし、既存デ�
 test('CI 記録スクリプトは job のブランチと作業ツリーに触れず、記録の commit だけを develop へ push する', async () => {
   const { execFileSync } = await import('node:child_process');
   const dir = tmp();
-  const git = (cwd, ...args) => execFileSync('git', args, { cwd, encoding: 'utf8', env: { ...process.env, GIT_AUTHOR_NAME: 't', GIT_AUTHOR_EMAIL: 't@t', GIT_COMMITTER_NAME: 't', GIT_COMMITTER_EMAIL: 't@t' } }).trim();
+  // 親の git の環境変数 (pre-push の中で動くときの GIT_DIR など) を渡すと、一時リポジトリではなく本物のリポジトリを
+  // `git init --bare` で bare に初期化し直してしまう (2026-11-14 に実際に起きた)。GIT_ で始まる変数は渡さない。
+  const baseEnv = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith('GIT_')));
+  const git = (cwd, ...args) => execFileSync('git', args, { cwd, encoding: 'utf8', env: { ...baseEnv, GIT_AUTHOR_NAME: 't', GIT_AUTHOR_EMAIL: 't@t', GIT_COMMITTER_NAME: 't', GIT_COMMITTER_EMAIL: 't@t' } }).trim();
   try {
     const origin = path.join(dir, 'origin.git');
     const work = path.join(dir, 'work');
@@ -186,7 +189,7 @@ test('CI 記録スクリプトは job のブランチと作業ツリーに触れ
     const exec = path.join(dir, 'exec.json');
     fs.writeFileSync(exec, JSON.stringify([{ type: 'system', subtype: 'init', model: 'claude-sonnet-5-5' }, resultEntry()]));
 
-    execFileSync('bash', ['.claude/scripts/lib/record-claude-usage-ci.sh', exec, 'demo', '1', '1', 'high'], { cwd: work, env: { ...process.env, GITHUB_RUN_ID: '555' }, encoding: 'utf8' });
+    execFileSync('bash', ['.claude/scripts/lib/record-claude-usage-ci.sh', exec, 'demo', '1', '1', 'high'], { cwd: work, env: { ...baseEnv, GITHUB_RUN_ID: '555' }, encoding: 'utf8' });
 
     assert.equal(git(work, 'branch', '--show-current'), 'feature-pr', 'job のブランチはそのまま');
     assert.ok(fs.existsSync(path.join(work, 'wip.txt')), '未追跡ファイルを stash に置き去りにしない');
