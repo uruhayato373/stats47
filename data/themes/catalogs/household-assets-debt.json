@@ -129,25 +129,35 @@
   "charts": [],
   "metricGroups": [
     {
-      "key": "capital-city-savings",
-      "title": "貯蓄現在高と有価証券（県庁所在市）",
+      "key": "capital-city-savings-debt-1",
+      "title": "貯蓄現在高（県庁所在市）",
       "rankingKeys": [
-        "household-savings-balance",
-        "household-securities-balance"
+        "household-savings-balance"
       ],
       "defaultCheckedKeys": [
         "household-savings-balance"
       ]
     },
     {
-      "key": "capital-city-debt",
-      "title": "負債現在高と住宅・土地のための負債（県庁所在市）",
+      "key": "capital-city-savings-debt-2",
+      "title": "負債現在高（県庁所在市）",
       "rankingKeys": [
-        "household-debt-balance",
-        "household-housing-debt-balance"
+        "household-debt-balance"
       ],
       "defaultCheckedKeys": [
         "household-debt-balance"
+      ]
+    },
+    {
+      "key": "capital-city-savings-debt-3",
+      "title": "有価証券と住宅・土地のための負債は毎年どう動いているか",
+      "rankingKeys": [
+        "household-securities-balance",
+        "household-housing-debt-balance"
+      ],
+      "defaultCheckedKeys": [
+        "household-securities-balance",
+        "household-housing-debt-balance"
       ]
     },
     {
@@ -223,26 +233,9 @@
   ],
   "sections": [
     {
-      "key": "capital-city-savings-debt",
-      "title": "県庁所在市の貯蓄と負債は毎年どう違うか",
-      "description": "家計調査の貯蓄・負債編 (二人以上の世帯) の県庁所在市の値で、県全体の値ではありません。平均値なので一部の高額世帯に引っ張られます。",
-      "metricGroupKeys": [
-        "capital-city-savings",
-        "capital-city-debt"
-      ]
-    },
-    {
-      "key": "savings-rate-trend",
-      "title": "勤労者世帯の貯蓄割合はどのように変化しているか",
-      "concern": "将来への備えとして収入のうちどれくらいを貯蓄に回せているか気になります。",
-      "metricGroupKeys": [
-        "savings-rate-trend-1"
-      ]
-    },
-    {
       "key": "financial-assets-and-portfolio",
-      "title": "家計の金融資産残高やその運用内訳はどうなっているか",
-      "concern": "地域の平均的な貯蓄額や預貯金・有価証券などの資産構成割合が気になります。",
+      "title": "県全体の貯蓄の平均額と、その持ち方はどうなっているか",
+      "concern": "自分の県の金融資産の平均額と、預貯金・生命保険・有価証券のどれで持っているかが気になります。",
       "metricGroupKeys": [
         "financial-assets-and-portfolio-1",
         "financial-assets-and-portfolio-2",
@@ -251,21 +244,33 @@
       ]
     },
     {
-      "key": "financial-debt-and-housing-loans",
-      "title": "家計の負債規模や住宅・土地による借入金の負担はどれくらいか",
-      "concern": "住宅ローンなどの負債が家計を圧迫していないかや地域差が気になります。",
+      "key": "capital-city-savings-debt",
+      "title": "自分の県庁所在市の貯蓄と負債はいくらか",
+      "concern": "自分の地域の世帯がどれくらい貯蓄し、どれくらい借金を抱えているかが気になります。",
       "metricGroupKeys": [
-        "financial-debt-and-housing-loans-1",
-        "financial-debt-and-housing-loans-2"
+        "capital-city-savings-debt-1",
+        "capital-city-savings-debt-2",
+        "capital-city-savings-debt-3"
+      ],
+      "embeddedSectionKeys": [
+        "kakei-axis-household-assets-debt"
       ]
     },
     {
-      "key": "household-assets-debt-household-types",
-      "title": "収入や世帯の形で貯蓄と負債はどう違うか",
-      "description": "全国の年間収入などの分類別の値です。各図の世帯区分を確かめてください。県庁所在市の値や全国の推移とは集計の軸が違います。県のページでは出しません。",
-      "metricGroupKeys": [],
-      "embeddedSectionKeys": [
-        "kakei-axis-household-assets-debt"
+      "key": "savings-rate-trend",
+      "title": "収入のうち貯蓄に回せている割合はどれくらいか",
+      "concern": "将来への備えとして、収入のうちどれくらいを貯蓄に回せているかが気になります。",
+      "metricGroupKeys": [
+        "savings-rate-trend-1"
+      ]
+    },
+    {
+      "key": "financial-debt-and-housing-loans",
+      "title": "県全体の負債の平均額と、住宅・土地の借入の重さはどれくらいか",
+      "concern": "住宅ローンなどの借金が家計にどれくらい重いか、地域でどう違うかが気になります。",
+      "metricGroupKeys": [
+        "financial-debt-and-housing-loans-1",
+        "financial-debt-and-housing-loans-2"
       ]
     }
   ],

@@ -73,7 +73,9 @@
         "nonprimary-enterprises-count",
         "nonprimary-enterprises-under5-count",
         "nonprimary-enterprises-employees",
-        "nonprimary-enterprises-under5-employees"
+        "nonprimary-enterprises-under5-employees",
+        "establishment-ratio-1-4-employees-private",
+        "employee-ratio-1-4-employee-establishments-private"
       ]
     },
     {
@@ -160,7 +162,10 @@
         "construction-employed-female",
         "architect-annual-income",
         "public-construction-contract-count",
-        "public-construction-contract-amount"
+        "public-construction-contract-amount",
+        "carpenter-annual-income",
+        "electrician-annual-income",
+        "new-housing-starts"
       ]
     },
     {
@@ -239,7 +244,12 @@
         "broadcast-media-time-all",
         "meal-avg-time-female",
         "meal-avg-time-male",
-        "primary-school-commute-time-weekday"
+        "primary-school-commute-time-weekday",
+        "monthly-average-actual-working-hours-male",
+        "monthly-average-actual-working-hours-female",
+        "employees-weekly-hours-60plus-rate",
+        "relaxation-avg-time-female",
+        "relaxation-avg-time-male"
       ]
     },
     {
@@ -254,7 +264,9 @@
         "intellectual-disability-support-facility-capacity-per-100k",
         "intellectual-disability-support-facility-residents-per-100k",
         "physical-disability-certificates-issued-per-1000",
-        "disabled-employment-rate"
+        "disabled-employment-rate",
+        "treatment-rate-mental-disorder-outpatient",
+        "treatment-rate-mental-disorder-inpatient"
       ]
     },
     {
@@ -445,7 +457,8 @@
         "female-part-time-hourly-wage",
         "prefectural-manager-female-share",
         "prefectural-assembly-female-share",
-        "husband-childcare-rate"
+        "husband-childcare-rate",
+        "dual-income-household-ratio"
       ]
     },
     {
@@ -1076,7 +1089,11 @@
         "amusement-industry-revenue",
         "amusement-industry-net-value-added",
         "beauty-salon-count",
-        "barber-beauty-salon-count"
+        "barber-beauty-salon-count",
+        "public-bath-count-per-100k",
+        "barber-beauty-salon-count-per-100k",
+        "cleaning-shop-count-per-100k",
+        "convenience-store-count-per-100k"
       ]
     },
     {
@@ -1091,7 +1108,10 @@
         "nursing-care-insurance-benefit",
         "nursing-home-count-per-100k-65plus",
         "nursing-home-capacity-per-1000-65plus",
-        "nursing-home-residents-per-1000-65plus"
+        "nursing-home-residents-per-1000-65plus",
+        "elderly-living-alone-rate",
+        "nursing-home-staff-per-100k-65plus",
+        "care-worker-annual-income"
       ]
     },
     {
@@ -1303,7 +1323,11 @@
         "regional-business-co2-emissions-estimate",
         "regional-household-co2-emissions-estimate",
         "regional-transport-co2-emissions-estimate",
-        "regional-waste-co2-emissions-estimate"
+        "regional-waste-co2-emissions-estimate",
+        "electricity-consumption-quantity",
+        "gasoline-consumption-quantity",
+        "electricity-generation-capacity",
+        "wind-power-capacity"
       ]
     },
     {
@@ -1320,7 +1344,12 @@
         "commute-by-train",
         "bus-operators",
         "household-survey-transport-communication-expenditure",
-        "commuters-total"
+        "commuters-total",
+        "gasoline-consumption-quantity",
+        "automobile-related-group-consumption-expenditure",
+        "bus-fare-consumption-expenditure",
+        "taxi-driver-annual-income",
+        "bus-driver-annual-income"
       ]
     },
     {
@@ -1334,7 +1363,11 @@
         "retail-establishments-by-prefecture",
         "retail-sales-area-by-class",
         "retail-sales-amount-by-prefecture",
-        "retail-employees"
+        "retail-employees",
+        "department-supermarket-count-per-100k",
+        "convenience-store-count-commercial",
+        "annual-sales-amount-per-establishment",
+        "annual-sales-amount-per-employee"
       ]
     },
     {
@@ -1455,7 +1488,10 @@
         "junior-high-club-per100-swimming",
         "junior-high-club-per100-table-tennis",
         "junior-high-club-per100-track-and-field",
-        "junior-high-club-per100-volleyball"
+        "junior-high-club-per100-volleyball",
+        "golf-course-public",
+        "private-sports-facility",
+        "sports-park-count-per-100km2"
       ]
     },
     {
@@ -1495,7 +1531,8 @@
       "published": true,
       "rankingKeys": [
         "tsunami-evacuation-building-count",
-        "tsunami-evacuation-tower-count"
+        "tsunami-evacuation-tower-count",
+        "individual-evacuation-plan-coverage-rate"
       ]
     },
     {
@@ -1527,7 +1564,9 @@
         "water-supply-population-ratio-2012on",
         "sewerage-coverage-rate",
         "water-supply-annual-volume",
-        "water-supply-capacity"
+        "water-supply-capacity",
+        "sewage-treatment-coverage-rate",
+        "sewerage-penetration-rate-2012on"
       ]
     }
   ]

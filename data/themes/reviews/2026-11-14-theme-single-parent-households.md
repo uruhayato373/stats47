@@ -1,7 +1,7 @@
 ---
 type: theme-catalog-review
 date: 2026-11-14
-status: proposal-ready
+status: implemented-pending-release
 theme: single-parent-households
 supersedes: null
 tags: [theme-catalog, proposal, theme-page-review]
@@ -84,9 +84,18 @@ tags: [theme-catalog, proposal, theme-page-review]
 - 検証: `npm run validate:catalog --workspace=@stats47/data-configs` (error 0・warning を増やさない)、`measure-theme-weight.mjs --themes single-parent-households` で品質基準 6 項目。
 - 実験: 公開日に `THEME-STRUCTURE-<公開日>-single-parent-households` を `metricScope: all-routes` で登録する。
 
+## 実装した構成 (カタログの現在の形)
+
+| 順 | 章 (key) | カード |
+|---|---|---|
+| 1 | ひとり親は働いているか、母と父で違いはあるか (`single-parent-employment-rate`) | 母子世帯の母の就業割合（労働状態不詳を除く）、父子世帯の父の就業割合（労働状態不詳を除く） |
+| 2 | 母子世帯・父子世帯は増えているか、減っているか (`single-parent-households-trend`) | 母子世帯数・父子世帯数 |
+| 3 | 生活保護や児童扶養手当を受ける家庭はどれくらいか (`single-mother-public-assistance`) | 生活保護を受ける母子世帯数（年度平均）・児童扶養手当受給者数（年度末） |
+
+見せ方 (推移・数値・構成比) は `apply-design.ts` がデータの形 (年の数・単位) に合わせて決め直した。
+
 ## 採用決定
 
-ユーザー承認待ち。判断が要る点:
-
-1. 章の順と見出しを上の表のとおりに変えてよいか。
-2. 足したい指標の候補のうち、取り込みを進めるものはあるか。
+2026-11-14 オーナー承認。
+実装: branch `claude/theme-review-stage4-w1`。`apply-design.ts --approved single-parent-households` でカタログへ適用し、`validate:catalog` は error 0・warning の増減なし。
+公開日に実験を `metricScope: all-routes` で登録する。足したい指標の候補のうち未採用のものは上の表に残す。

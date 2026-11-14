@@ -604,6 +604,16 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:annual-sales-amount-per-employee",
+      "to": "theme:retail-commerce",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:annual-sales-amount-per-establishment",
+      "to": "theme:retail-commerce",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:annual-snow-days",
       "to": "theme:climate",
       "relation": "contains"
@@ -666,6 +676,11 @@
     {
       "from": "ranking:auto-mechanic-annual-income",
       "to": "theme:occupation-salary",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:automobile-related-group-consumption-expenditure",
+      "to": "theme:regional-transport",
       "relation": "contains"
     },
     {
@@ -736,6 +751,11 @@
     {
       "from": "ranking:barber-beautician-annual-income",
       "to": "theme:occupation-salary",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:barber-beauty-salon-count-per-100k",
+      "to": "theme:local-services",
       "relation": "contains"
     },
     {
@@ -899,6 +919,16 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:bus-driver-annual-income",
+      "to": "theme:regional-transport",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:bus-fare-consumption-expenditure",
+      "to": "theme:regional-transport",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:bus-operators",
       "to": "theme:geographic-access",
       "relation": "contains"
@@ -980,7 +1010,17 @@
     },
     {
       "from": "ranking:care-worker-annual-income",
+      "to": "theme:long-term-care",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:care-worker-annual-income",
       "to": "theme:occupation-salary",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:carpenter-annual-income",
+      "to": "theme:construction-industry",
       "relation": "contains"
     },
     {
@@ -1046,6 +1086,11 @@
     {
       "from": "ranking:clam-consumption-expenditure",
       "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:cleaning-shop-count-per-100k",
+      "to": "theme:local-services",
       "relation": "contains"
     },
     {
@@ -1261,6 +1306,16 @@
     {
       "from": "ranking:contact-lens-consumption-expenditure",
       "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:convenience-store-count-commercial",
+      "to": "theme:retail-commerce",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:convenience-store-count-per-100k",
+      "to": "theme:local-services",
       "relation": "contains"
     },
     {
@@ -1504,6 +1559,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:department-supermarket-count-per-100k",
+      "to": "theme:retail-commerce",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:dependent-population-index",
       "to": "theme:aging-society",
       "relation": "contains"
@@ -1609,6 +1669,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:dual-income-household-ratio",
+      "to": "theme:gender-participation",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:earthquake-renovation-rate",
       "to": "theme:earthquake-exposure",
       "relation": "contains"
@@ -1654,13 +1719,28 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:elderly-living-alone-rate",
+      "to": "theme:long-term-care",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:elderly-workers-ratio",
       "to": "theme:aging-society",
       "relation": "contains"
     },
     {
       "from": "ranking:electrician-annual-income",
+      "to": "theme:construction-industry",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:electrician-annual-income",
       "to": "theme:occupation-salary",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:electricity-consumption-quantity",
+      "to": "theme:regional-energy",
       "relation": "contains"
     },
     {
@@ -1671,6 +1751,11 @@
     {
       "from": "ranking:electricity-generation-capacity",
       "to": "theme:local-economy",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:electricity-generation-capacity",
+      "to": "theme:regional-energy",
       "relation": "contains"
     },
     {
@@ -1749,8 +1834,18 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:employee-ratio-1-4-employee-establishments-private",
+      "to": "theme:business-demography",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:employees-weekly-hours-60plus-count",
       "to": "theme:labor-mobility",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:employees-weekly-hours-60plus-rate",
+      "to": "theme:daily-time-use",
       "relation": "contains"
     },
     {
@@ -1796,6 +1891,11 @@
     {
       "from": "ranking:enterprise-net-value-added-all-industries",
       "to": "theme:local-economy",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:establishment-ratio-1-4-employees-private",
+      "to": "theme:business-demography",
       "relation": "contains"
     },
     {
@@ -2254,6 +2354,16 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:gasoline-consumption-quantity",
+      "to": "theme:regional-energy",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:gasoline-consumption-quantity",
+      "to": "theme:regional-transport",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:gender-wage-gap",
       "to": "theme:gender-participation",
       "relation": "contains"
@@ -2301,6 +2411,11 @@
     {
       "from": "ranking:gini-coefficient-financial-assets",
       "to": "theme:real-income",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:golf-course-public",
+      "to": "theme:sports-participation",
       "relation": "contains"
     },
     {
@@ -2791,6 +2906,11 @@
     {
       "from": "ranking:individual-evacuation-plan-coverage-rate",
       "to": "theme:safety",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:individual-evacuation-plan-coverage-rate",
+      "to": "theme:tsunami-exposure",
       "relation": "contains"
     },
     {
@@ -3490,7 +3610,17 @@
     },
     {
       "from": "ranking:monthly-average-actual-working-hours-female",
+      "to": "theme:daily-time-use",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:monthly-average-actual-working-hours-female",
       "to": "theme:labor-mobility",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:monthly-average-actual-working-hours-male",
+      "to": "theme:daily-time-use",
       "relation": "contains"
     },
     {
@@ -3641,6 +3771,11 @@
     {
       "from": "ranking:new-condo-starts",
       "to": "theme:living-housing",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:new-housing-starts",
+      "to": "theme:construction-industry",
       "relation": "contains"
     },
     {
@@ -3810,6 +3945,11 @@
     },
     {
       "from": "ranking:nursing-home-residents-per-1000-65plus",
+      "to": "theme:long-term-care",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:nursing-home-staff-per-100k-65plus",
       "to": "theme:long-term-care",
       "relation": "contains"
     },
@@ -4224,6 +4364,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:private-sports-facility",
+      "to": "theme:sports-participation",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:private-university-consumption-expenditure",
       "to": "theme:household-food-spending",
       "relation": "contains"
@@ -4241,6 +4386,11 @@
     {
       "from": "ranking:public-assistance-facility-capacity-per-1000",
       "to": "theme:public-assistance",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:public-bath-count-per-100k",
+      "to": "theme:local-services",
       "relation": "contains"
     },
     {
@@ -4459,8 +4609,18 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:relaxation-avg-time-female",
+      "to": "theme:daily-time-use",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:relaxation-avg-time-male",
       "to": "theme:cultural-participation",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:relaxation-avg-time-male",
+      "to": "theme:daily-time-use",
       "relation": "contains"
     },
     {
@@ -4734,7 +4894,17 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:sewage-treatment-coverage-rate",
+      "to": "theme:water-services",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:sewerage-coverage-rate",
+      "to": "theme:water-services",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:sewerage-penetration-rate-2012on",
       "to": "theme:water-services",
       "relation": "contains"
     },
@@ -4934,6 +5104,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:sports-park-count-per-100km2",
+      "to": "theme:sports-participation",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:sports-park-count",
       "to": "theme:sports-participation",
       "relation": "contains"
@@ -5061,6 +5236,11 @@
     {
       "from": "ranking:taxi-driver-annual-income",
       "to": "theme:occupation-salary",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:taxi-driver-annual-income",
+      "to": "theme:regional-transport",
       "relation": "contains"
     },
     {
@@ -5439,6 +5619,16 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:treatment-rate-mental-disorder-inpatient",
+      "to": "theme:disability-support",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:treatment-rate-mental-disorder-outpatient",
+      "to": "theme:disability-support",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:treatment-rate-mood-disorder-outpatient",
       "to": "theme:healthcare",
       "relation": "contains"
@@ -5666,6 +5856,11 @@
     {
       "from": "ranking:white-bread-consumption-quantity",
       "to": "theme:household-food-spending",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:wind-power-capacity",
+      "to": "theme:regional-energy",
       "relation": "contains"
     },
     {

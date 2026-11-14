@@ -8817,6 +8817,194 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:convenience-store-count-commercial-prefecture-gap",
           "kind": "blog"
         },
@@ -8827,9 +9015,15 @@
         {
           "pageId": "ranking:convenience-store-count-commercial",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:retail-commerce",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "retail-commerce"
+      ]
     },
     {
       "metricKey": "convenience-store-count-per-100k",
@@ -8857,6 +9051,194 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:local-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:convenience-store-density-map",
           "kind": "blog"
         },
@@ -8867,9 +9249,15 @@
         {
           "pageId": "ranking:convenience-store-count-per-100k",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:local-services",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "local-services"
+      ]
     },
     {
       "metricKey": "convenience-store-sales",

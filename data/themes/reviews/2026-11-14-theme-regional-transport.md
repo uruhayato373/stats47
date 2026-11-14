@@ -1,7 +1,7 @@
 ---
 type: theme-catalog-review
 date: 2026-11-14
-status: proposal-ready
+status: implemented-pending-release
 theme: regional-transport
 supersedes: null
 tags: [theme-catalog, proposal, theme-page-review]
@@ -85,9 +85,49 @@ tags: [theme-catalog, proposal, theme-page-review]
 - 検証: `npm run validate:catalog --workspace=@stats47/data-configs` (error 0・warning を増やさない)、`measure-theme-weight.mjs --themes regional-transport` で品質基準 6 項目。
 - 実験: 公開日に `THEME-STRUCTURE-<公開日>-regional-transport` を `metricScope: all-routes` で登録する。
 
+## 出し直した設計 (2026-11-14)
+
+上の案は次の問題があったので、設計し直した: 先頭のタイルが 2014 年止まりの自動車所有数量になり、通勤の 3 指標は人数で「車通勤の割合」の検索に答えていなかった。
+
+先頭の章を、2025 年まであるガソリン消費量と自動車等関係費(いずれも世帯の値)の 2 つの stat から始め、2014 年止まりの自動車所有数量は最後の「長期の背景」章に移した。人数の通勤 3 指標は、世帯あたりの指標と同じ章に並べ、総量だけの章にならないようにした。バス事業者(2013 年止まり)も長期の章に回し、バス代と運転者の年収を足して公共交通の章を作り直した。
+
+### 足した指標 (登録済みの指標をカタログに載せた。role は secondary)
+
+| 指標 | rankingKey | 年 | 答える問い |
+|---|---|---|---|
+| ガソリン消費量（県庁所在市・二人以上世帯の年間値） | `gasoline-consumption-quantity` | 2007〜2025 | 「ガソリン消費量」「ガソリン 消費量」と検索する読者の、車に頼る暮らしの度合いを県で比べたいという問いに答える。 |
+| 自動車等関係費（県庁所在市・二人以上世帯の年間値） | `automobile-related-group-consumption-expenditure` | 2000〜2025 | 「車の維持費は県で違うのか」という問いに、世帯の自動車関係の支出額(2025年まで)で答える。 |
+| バス代（県庁所在市・二人以上世帯の年間値） | `bus-fare-consumption-expenditure` | 2000〜2025 | 「1年間に使うバス代が最も高い都道府県は」のような、バス利用の費用を県で比べたい問いに答える。 |
+| タクシー運転者の平均年収 | `taxi-driver-annual-income` | 2020〜2023 | 「タクシー運転手 年収 都道府県別」と検索する読者の、公共交通の担い手の収入を県で比べたい問いに答える。 |
+| バス運転者の平均年収 | `bus-driver-annual-income` | 2020〜2023 | バスの運転者の年収を県で比べたいという、公共交通の担い手の問いに、タクシー運転者と並べて答える。 |
+
+設計の agent が確かめたこと・確かめていないこと:
+
+- 読んだ: data/themes/catalogs/regional-transport.json (指標 7 件 = primary 1・secondary 5・context 1、charts は空、章 4 つ)。いまのカタログの非 context 指標 6 件は全て章のブロックに入れ、drop は空。同じ rankingKey は 2 つのブロックに入れていない
+- 読んだ: research/regional-transport.json と proposals/regional-transport.json。前の案は先頭に car-ownership-multi-person-households-per-1000 (最新 2014) を置いていたことを確認
+- inventory.json の metricInfo で確認: commute-by-car/bus/train は 2010・2020 の 2 年(単位は人)、bus-operators は 1975〜2013 の 39 年、car-ownership は 1979〜2014 の 8 年、household-survey-transport-communication-expenditure は 2019・2024 の 2 年
+- data/metrics/*.ts を実読して確認: gasoline-consumption-quantity (2007〜2025・単位 l・isActive true)、automobile-related-group-consumption-expenditure と bus-fare-consumption-expenditure (どちらも 2000〜2025・円・isActive true)、taxi-driver-annual-income と bus-driver-annual-income (どちらも 2020〜2023・万円・isActive true)。sourceUrl は各定義ファイルの source.url をそのまま写した(家計調査 3 件は e-stat の同じ一覧 URL、運転者年収 2 件は厚生労働省の賃金構造基本統計調査の URL)
+- テーマ内の trend は全て 2 年以上の指標: 通勤 3 指標 (人・1 単位)、交通・通信支出 (円)、運転者年収 2 指標 (万円・4 年)、自動車所有 (台)、バス事業者 (社)。1 ブロックは最大 3 指標・単位 2 種以内。composition は使っていない
+- 第 1 章の先頭 2 ブロックは stat で、最新年はどちらも 2025 年。どちらも県庁所在市の二人以上世帯の年間値で、世帯の支出・購入量を比べる指標。第 1 章に 2015 年以前が最新の指標は無い
+- 他テーマとの重複確認: data/themes/catalogs を走査し、gasoline-consumption-quantity は household-food-spending で context、taxi-driver-annual-income は occupation-salary で secondary、bus-driver-annual-income は occupation-salary で context。他テーマの primary を抱え込んでいない。commuter-ratio-to-other-municipalities は labor-mobility の secondary で、車通勤の割合そのものでもないため採らなかった
+- selection.json の scale-vs-rate を確認: 総量の通勤 3 指標とバス事業者は、それぞれ世帯あたりの指標(ガソリン・自動車等関係費、バス代)と同じ章に置いた
+- 車通勤の割合そのものは載せていない: commute-by-car と commuters-total は登録済みだが、割合として登録された指標が無く、新規の計算指標の登録はこの作業の範囲外。通勤 3 指標は人数のまま、読者が検索する車通勤の割合への答えにはなっていない
+- 未確認: 家計調査の 3 指標(ガソリン・自動車等関係費・バス代)が 1 世帯あたりであること。定義ファイルに「県庁所在市(二人以上世帯)の年間値」とあるのを根拠にした。章の表示では県全体の値でない注記が要る
+- 未確認: R2 の実データに 2025 年の値が 47 都道府県そろっているか(定義ファイルの years だけを根拠にした)。未確認: 各県で第 1 章の stat が空にならないか
+- 未確認: 通勤 3 指標を trend の線にしたとき 2 点だけの線として読みやすいか(2 年 = 2010・2020 の 2 点)。未確認: タクシー・バス運転者の年収が「担い手は足りているか」の問いに答える十分な根拠になるか(収入の比較に留まり、人数の充足は示さない)
+
+## 実装した構成 (カタログの現在の形)
+
+| 順 | 章 (key) | カード |
+|---|---|---|
+| 1 | ガソリンや車の費用、通勤の手段から見て、車にどれくらい頼る暮らしか (`car-dependency`) | ガソリン消費量（県庁所在市・二人以上世帯の年間値）、自動車等関係費（県庁所在市・二人以上世帯の年間値）、自家用車通勤・通学者数・乗合バス通勤・通学者数・鉄道・電車通勤・通学者数 |
+| 2 | バスやタクシーを支える費用と担い手はどうなっているか (`public-transport-cost`) | バス代（県庁所在市・二人以上世帯の年間値）、交通・通信支出（二人以上世帯・10〜11月の月平均）、タクシー運転者の平均年収・バス運転者の平均年収 |
+| 3 | 自動車の所有とバス事業者は長い期間でどう変わったか (2014年まで) (`long-run-background`) | 自動車所有数量（二人以上世帯千世帯当たり）、バス事業者 |
+
+見せ方 (推移・数値・構成比) は `apply-design.ts` がデータの形 (年の数・単位) に合わせて決め直した。
+
 ## 採用決定
 
-ユーザー承認待ち。判断が要る点:
-
-1. 章の順と見出しを上の表のとおりに変えてよいか。
-2. 足したい指標の候補のうち、取り込みを進めるものはあるか。
+2026-11-14 オーナーの指示 (出し直しが要る案は設計し直して自動で承認とする) により、出し直した設計を採用。
+実装: branch `claude/theme-review-stage4-w1`。`apply-design.ts --approved regional-transport` でカタログへ適用し、`validate:catalog` は error 0・warning の増減なし。
+公開日に実験を `metricScope: all-routes` で登録する。足したい指標の候補のうち未採用のものは上の表に残す。

@@ -1,7 +1,7 @@
 ---
 type: theme-catalog-review
 date: 2026-11-14
-status: proposal-ready
+status: implemented-pending-release
 theme: household-assets-debt
 supersedes: null
 tags: [theme-catalog, proposal, theme-page-review]
@@ -87,9 +87,21 @@ tags: [theme-catalog, proposal, theme-page-review]
 - 検証: `npm run validate:catalog --workspace=@stats47/data-configs` (error 0・warning を増やさない)、`measure-theme-weight.mjs --themes household-assets-debt` で品質基準 6 項目。
 - 実験: 公開日に `THEME-STRUCTURE-<公開日>-household-assets-debt` を `metricScope: all-routes` で登録する。
 
+## 実装した構成 (カタログの現在の形)
+
+| 順 | 章 (key) | カード |
+|---|---|---|
+| 1 | 自分の県庁所在市の貯蓄と負債はいくらか (`capital-city-savings-debt`) | 貯蓄現在高（県庁所在市）、負債現在高（県庁所在市）、有価証券の現在高（県庁所在市）・住宅・土地のための負債（県庁所在市） |
+| 2 | 収入のうち貯蓄に回せている割合はどれくらいか (`savings-rate-trend`) | 平均貯蓄率（勤労者世帯） |
+| 3 | 県全体の貯蓄の平均額と、その持ち方はどうなっているか (`financial-assets-and-portfolio`) | 金融資産残高（貯蓄現在高・二人以上世帯1世帯当たり）、預貯金が金融資産に占める割合、生命保険などが金融資産に占める割合、有価証券が金融資産に占める割合 |
+| 4 | 県全体の負債の平均額と、住宅・土地の借入の重さはどれくらいか (`financial-debt-and-housing-loans`) | 金融負債残高（二人以上世帯）、住宅・土地負債が金融負債に占める割合 |
+
+見せ方 (推移・数値・構成比) は `apply-design.ts` がデータの形 (年の数・単位) に合わせて決め直した。
+
 ## 採用決定
 
-ユーザー承認待ち。判断が要る点:
+2026-11-14 オーナー承認。
+実装: branch `claude/theme-review-stage4-w1`。`apply-design.ts --approved household-assets-debt` でカタログへ適用し、`validate:catalog` は error 0・warning の増減なし。
+公開日に実験を `metricScope: all-routes` で登録する。足したい指標の候補のうち未採用のものは上の表に残す。
 
-1. 章の順と見出しを上の表のとおりに変えてよいか。
-2. 足したい指標の候補のうち、取り込みを進めるものはあるか。
+追記 (2026-11-14): 手元の計測で、全国版の最初の画面から数値が消えていた (先頭の章が県庁所在市の指標で、全国の値が無いため)。全国の値を持つ章 `financial-assets-and-portfolio` を先頭に移した。全国版・県別とも品質基準の違反は 0。

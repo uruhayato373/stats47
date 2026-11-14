@@ -54,6 +54,11 @@ export const GENDER_PARTICIPATION_SET: IndicatorSet = {
       "rankingKey": "husband-childcare-rate",
       "shortLabel": "夫の育児参加率",
       "role": "context"
+    },
+    {
+      "rankingKey": "dual-income-household-ratio",
+      "shortLabel": "共働き世帯割合",
+      "role": "secondary"
     }
   ],
   "keywords": [

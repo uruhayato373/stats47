@@ -2188,15 +2188,209 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:regional-transport",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:automobile-related-group-consumption-expenditure-prefecture",
           "kind": "blog"
         },
         {
           "pageId": "ranking:automobile-related-group-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:regional-transport",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "regional-transport"
+      ]
     },
     {
       "metricKey": "average-age-of-first-marriage-husband",
@@ -8431,6 +8625,194 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:local-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:local-services",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area:01000",
           "kind": "area"
         },
@@ -8625,9 +9007,15 @@
         {
           "pageId": "ranking:barber-beauty-salon-count-per-100k",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:local-services",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "local-services"
+      ]
     },
     {
       "metricKey": "barber-shop-count",

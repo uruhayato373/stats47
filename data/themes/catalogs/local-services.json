@@ -276,34 +276,98 @@
       "rankingKey": "barber-beauty-salon-count",
       "shortLabel": "理容・美容所数",
       "role": "context"
+    },
+    {
+      "rankingKey": "public-bath-count-per-100k",
+      "shortLabel": "公衆浴場数（人口10万人当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「銭湯の数が人口比で最も多い県」など銭湯の人口比を問う検索（2026-W45 で表示合計約1,272回）に直接答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "barber-beauty-salon-count-per-100k",
+      "shortLabel": "理容・美容所数（人口10万人当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「美容院 数 全国 ランキング」など理美容所の多さを問う検索に、現在の総量だけの指標を人口あたりで補って答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "cleaning-shop-count-per-100k",
+      "shortLabel": "クリーニング業数（人口10万人当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "洗濯業の多さを人口あたりで見る問いに答え、事業所数（総量）の人口差を補う（検索需要は未確認）。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "convenience-store-count-per-100k",
+      "shortLabel": "コンビニエンスストア数（人口10万人当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "GSC の検索語 (2026-W45) と THEME-PAGE-REVIEW-01 の調査",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-11-14",
+        "rationale": "「コンビニ店舗数 都道府県」など、コンビニが多い・少ない県を問う検索（表示合計約659回）に答える。",
+        "adoptionCriteria": [
+          "readerValue"
+        ]
+      }
     }
   ],
   "charts": [],
   "metricGroups": [
     {
-      "key": "eating-out-and-accommodation-1",
-      "title": "飲食店数（人口千人当たり）",
-      "rankingKeys": [
-        "restaurant-count-per-1000"
-      ],
-      "defaultCheckedKeys": [
-        "restaurant-count-per-1000"
-      ]
-    },
-    {
-      "key": "eating-out-and-accommodation-2",
-      "title": "ホテル営業施設数と客室数の推移",
-      "rankingKeys": [
-        "number-of-hotel-facilities",
-        "number-of-hotel-rooms"
-      ],
-      "defaultCheckedKeys": [
-        "number-of-hotel-facilities",
-        "number-of-hotel-rooms"
-      ]
-    },
-    {
       "key": "living-related-services-1",
+      "title": "公衆浴場数（人口10万人当たり）",
+      "rankingKeys": [
+        "public-bath-count-per-100k"
+      ],
+      "defaultCheckedKeys": [
+        "public-bath-count-per-100k"
+      ]
+    },
+    {
+      "key": "living-related-services-2",
+      "title": "理容・美容所数（人口10万人当たり）",
+      "rankingKeys": [
+        "barber-beauty-salon-count-per-100k"
+      ],
+      "defaultCheckedKeys": [
+        "barber-beauty-salon-count-per-100k"
+      ]
+    },
+    {
+      "key": "living-related-services-3",
+      "title": "クリーニング業数（人口10万人当たり）",
+      "rankingKeys": [
+        "cleaning-shop-count-per-100k"
+      ],
+      "defaultCheckedKeys": [
+        "cleaning-shop-count-per-100k"
+      ]
+    },
+    {
+      "key": "living-related-services-4",
       "title": "洗濯・理容・美容・浴場業の事業所数",
       "rankingKeys": [
         "laundry-beauty-bath-industry-establishments"
@@ -313,7 +377,7 @@
       ]
     },
     {
-      "key": "living-related-services-2",
+      "key": "living-related-services-5",
       "title": "洗濯・理容・美容・浴場業の従業者数",
       "rankingKeys": [
         "laundry-beauty-bath-industry-employees"
@@ -323,7 +387,7 @@
       ]
     },
     {
-      "key": "living-related-services-3",
+      "key": "living-related-services-6",
       "title": "洗濯・理容・美容・浴場業の企業売上高",
       "rankingKeys": [
         "laundry-beauty-bath-industry-revenue"
@@ -333,7 +397,7 @@
       ]
     },
     {
-      "key": "living-related-services-4",
+      "key": "living-related-services-7",
       "title": "洗濯・理容・美容・浴場業の企業純付加価値額",
       "rankingKeys": [
         "laundry-beauty-bath-industry-net-value-added"
@@ -343,43 +407,15 @@
       ]
     },
     {
-      "key": "media-and-information-production-1",
-      "title": "映像・音声・文字情報制作業の事業所数",
+      "key": "eating-out-and-accommodation-1",
+      "title": "飲食店とコンビニは人口あたりで増えたか",
       "rankingKeys": [
-        "media-production-establishments"
+        "restaurant-count-per-1000",
+        "convenience-store-count-per-100k"
       ],
       "defaultCheckedKeys": [
-        "media-production-establishments"
-      ]
-    },
-    {
-      "key": "media-and-information-production-2",
-      "title": "映像・音声・文字情報制作業の従業者数",
-      "rankingKeys": [
-        "media-production-employees"
-      ],
-      "defaultCheckedKeys": [
-        "media-production-employees"
-      ]
-    },
-    {
-      "key": "media-and-information-production-3",
-      "title": "映像・音声・文字情報制作業の企業売上高",
-      "rankingKeys": [
-        "media-production-revenue"
-      ],
-      "defaultCheckedKeys": [
-        "media-production-revenue"
-      ]
-    },
-    {
-      "key": "media-and-information-production-4",
-      "title": "映像・音声・文字情報制作業の企業純付加価値額",
-      "rankingKeys": [
-        "media-production-net-value-added"
-      ],
-      "defaultCheckedKeys": [
-        "media-production-net-value-added"
+        "restaurant-count-per-1000",
+        "convenience-store-count-per-100k"
       ]
     },
     {
@@ -421,49 +457,84 @@
       "defaultCheckedKeys": [
         "amusement-industry-net-value-added"
       ]
+    },
+    {
+      "key": "amusement-and-recreation-5",
+      "title": "映像・音声・文字情報制作業の事業所数",
+      "rankingKeys": [
+        "media-production-establishments"
+      ],
+      "defaultCheckedKeys": [
+        "media-production-establishments"
+      ]
+    },
+    {
+      "key": "amusement-and-recreation-6",
+      "title": "映像・音声・文字情報制作業の従業者数",
+      "rankingKeys": [
+        "media-production-employees"
+      ],
+      "defaultCheckedKeys": [
+        "media-production-employees"
+      ]
+    },
+    {
+      "key": "amusement-and-recreation-7",
+      "title": "映像・音声・文字情報制作業の企業売上高",
+      "rankingKeys": [
+        "media-production-revenue"
+      ],
+      "defaultCheckedKeys": [
+        "media-production-revenue"
+      ]
+    },
+    {
+      "key": "amusement-and-recreation-8",
+      "title": "映像・音声・文字情報制作業の企業純付加価値額",
+      "rankingKeys": [
+        "media-production-net-value-added"
+      ],
+      "defaultCheckedKeys": [
+        "media-production-net-value-added"
+      ]
     }
   ],
   "sections": [
     {
-      "key": "eating-out-and-accommodation",
-      "title": "飲食店や宿泊施設など街の賑わいや観光を支える基盤はあるか",
-      "concern": "外食や旅行・滞在のしやすさ、地域の賑わいを生む基盤が整っているか気になります。",
-      "metricGroupKeys": [
-        "eating-out-and-accommodation-1",
-        "eating-out-and-accommodation-2"
-      ]
-    },
-    {
       "key": "living-related-services",
-      "title": "理美容や洗濯など身近な生活サービスの提供体制は維持されているか",
-      "concern": "日常の身近な生活衛生サービスの維持や地域での事業規模・雇用が気になります。",
+      "title": "銭湯や理容・美容室、クリーニング店は人口あたりでどの県に多いか",
+      "concern": "身近な生活サービスの店が自分の県に十分あるのか、人口あたりで全国と比べたい。",
       "metricGroupKeys": [
         "living-related-services-1",
         "living-related-services-2",
         "living-related-services-3",
-        "living-related-services-4"
+        "living-related-services-4",
+        "living-related-services-5",
+        "living-related-services-6",
+        "living-related-services-7"
       ]
     },
     {
-      "key": "media-and-information-production",
-      "title": "コンテンツ制作や出版など地域の情報発信・文化産業の規模はどうか",
-      "concern": "地域からの情報発信や映像・出版等クリエイティブ分野の雇用が十分か気になります。",
+      "key": "eating-out-and-accommodation",
+      "title": "飲食店やコンビニは人口あたりでどれくらいあり、ホテルはどれだけあるか",
+      "concern": "外食や買い物、泊まる場所が身近にそろっているか、人口あたりの店の数の推移とあわせて知りたい。",
       "metricGroupKeys": [
-        "media-and-information-production-1",
-        "media-and-information-production-2",
-        "media-and-information-production-3",
-        "media-and-information-production-4"
+        "eating-out-and-accommodation-1"
       ]
     },
     {
       "key": "amusement-and-recreation",
-      "title": "余暇や休日を楽しむ娯楽・レジャー産業の規模はどれくらいあるか",
-      "concern": "身近に楽しめる娯楽施設やレジャー産業がもたらす雇用・経済規模が気になります。",
+      "title": "映画や娯楽、映像制作の産業はどれくらいの規模か",
+      "concern": "身近な娯楽を楽しむ人の割合と、娯楽業・映像制作業の事業所・雇用・売上の規模が気になる。",
       "metricGroupKeys": [
         "amusement-and-recreation-1",
         "amusement-and-recreation-2",
         "amusement-and-recreation-3",
-        "amusement-and-recreation-4"
+        "amusement-and-recreation-4",
+        "amusement-and-recreation-5",
+        "amusement-and-recreation-6",
+        "amusement-and-recreation-7",
+        "amusement-and-recreation-8"
       ]
     }
   ],

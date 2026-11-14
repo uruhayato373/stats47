@@ -1093,7 +1093,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:01000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:02000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -1101,7 +1109,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:03000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:04000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -1109,7 +1125,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:05000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:06000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -1117,7 +1141,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:07000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:08000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -1125,7 +1157,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:09000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:10000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -1133,7 +1173,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:11000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:12000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -1141,7 +1189,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:13000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:14000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -1149,7 +1205,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:15000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:16000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -1157,7 +1221,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:17000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:18000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -1165,7 +1237,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:19000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:20000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -1173,7 +1253,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:21000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:22000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -1181,7 +1269,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:23000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:24000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -1189,7 +1285,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:25000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:26000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -1197,7 +1301,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:27000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:28000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -1205,7 +1317,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:29000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:30000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -1213,7 +1333,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:31000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:32000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -1221,7 +1349,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:33000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:34000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -1229,7 +1365,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:35000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:36000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -1237,7 +1381,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:37000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:38000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -1245,7 +1397,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:39000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:40000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -1253,7 +1413,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:41000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:42000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -1261,7 +1429,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:43000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:44000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -1269,11 +1445,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:45000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:46000:aging-society",
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:46000:long-term-care",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:47000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:long-term-care",
           "kind": "area-theme"
         },
         {
@@ -1283,10 +1471,15 @@
         {
           "pageId": "theme:aging-society",
           "kind": "theme"
+        },
+        {
+          "pageId": "theme:long-term-care",
+          "kind": "theme"
         }
       ],
       "themes": [
-        "aging-society"
+        "aging-society",
+        "long-term-care"
       ]
     },
     {
@@ -1962,7 +2155,15 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:01000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -1970,7 +2171,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:03000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:03000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -1978,7 +2187,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:05000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:05000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -1986,7 +2203,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:07000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:07000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -1994,7 +2219,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:09000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:09000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -2002,7 +2235,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:11000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:11000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -2010,7 +2251,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:13000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:13000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -2018,7 +2267,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:15000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:15000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -2026,7 +2283,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:17000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:17000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -2034,7 +2299,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:19000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:19000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -2042,7 +2315,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:21000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:21000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -2050,7 +2331,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:23000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:23000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -2058,7 +2347,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:25000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:25000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -2066,7 +2363,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:27000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:27000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -2074,7 +2379,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:29000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:29000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -2082,7 +2395,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:31000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:31000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -2090,7 +2411,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:33000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:33000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -2098,7 +2427,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:35000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:35000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -2106,7 +2443,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:37000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:37000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -2114,7 +2459,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:39000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:39000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -2122,7 +2475,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:41000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:41000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -2130,7 +2491,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:43000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:43000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -2138,11 +2507,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:45000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:45000:occupation-salary",
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:46000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:46000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:construction-industry",
           "kind": "area-theme"
         },
         {
@@ -2154,11 +2535,16 @@
           "kind": "ranking"
         },
         {
+          "pageId": "theme:construction-industry",
+          "kind": "theme"
+        },
+        {
           "pageId": "theme:occupation-salary",
           "kind": "theme"
         }
       ],
       "themes": [
+        "construction-industry",
         "occupation-salary"
       ]
     },
@@ -2238,15 +2624,209 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:electricity-consumption-quantity-prefecture-gap",
           "kind": "blog"
         },
         {
           "pageId": "ranking:electricity-consumption-quantity",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:regional-energy",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "regional-energy"
+      ]
     },
     {
       "metricKey": "electricity-demand",
@@ -2522,7 +3102,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:01000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:02000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:regional-energy",
           "kind": "area-theme"
         },
         {
@@ -2530,7 +3118,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:03000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:04000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:regional-energy",
           "kind": "area-theme"
         },
         {
@@ -2538,7 +3134,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:05000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:06000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:regional-energy",
           "kind": "area-theme"
         },
         {
@@ -2546,7 +3150,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:07000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:08000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:regional-energy",
           "kind": "area-theme"
         },
         {
@@ -2554,7 +3166,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:09000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:10000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:regional-energy",
           "kind": "area-theme"
         },
         {
@@ -2562,7 +3182,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:11000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:12000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:regional-energy",
           "kind": "area-theme"
         },
         {
@@ -2570,7 +3198,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:13000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:14000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:regional-energy",
           "kind": "area-theme"
         },
         {
@@ -2578,7 +3214,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:15000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:16000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:regional-energy",
           "kind": "area-theme"
         },
         {
@@ -2586,7 +3230,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:17000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:18000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:regional-energy",
           "kind": "area-theme"
         },
         {
@@ -2594,7 +3246,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:19000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:20000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:regional-energy",
           "kind": "area-theme"
         },
         {
@@ -2602,7 +3262,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:21000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:22000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:regional-energy",
           "kind": "area-theme"
         },
         {
@@ -2610,7 +3278,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:23000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:24000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:regional-energy",
           "kind": "area-theme"
         },
         {
@@ -2618,7 +3294,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:25000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:26000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:regional-energy",
           "kind": "area-theme"
         },
         {
@@ -2626,7 +3310,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:27000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:28000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:regional-energy",
           "kind": "area-theme"
         },
         {
@@ -2634,7 +3326,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:29000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:30000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:regional-energy",
           "kind": "area-theme"
         },
         {
@@ -2642,7 +3342,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:31000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:32000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:regional-energy",
           "kind": "area-theme"
         },
         {
@@ -2650,7 +3358,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:33000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:34000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:regional-energy",
           "kind": "area-theme"
         },
         {
@@ -2658,7 +3374,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:35000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:36000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:regional-energy",
           "kind": "area-theme"
         },
         {
@@ -2666,7 +3390,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:37000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:38000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:regional-energy",
           "kind": "area-theme"
         },
         {
@@ -2674,7 +3406,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:39000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:40000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:regional-energy",
           "kind": "area-theme"
         },
         {
@@ -2682,7 +3422,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:41000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:42000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:regional-energy",
           "kind": "area-theme"
         },
         {
@@ -2690,7 +3438,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:43000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:44000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:regional-energy",
           "kind": "area-theme"
         },
         {
@@ -2698,11 +3454,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:45000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:46000:local-economy",
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:46000:regional-energy",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:47000:local-economy",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:regional-energy",
           "kind": "area-theme"
         },
         {
@@ -2720,10 +3488,15 @@
         {
           "pageId": "theme:local-economy",
           "kind": "theme"
+        },
+        {
+          "pageId": "theme:regional-energy",
+          "kind": "theme"
         }
       ],
       "themes": [
-        "local-economy"
+        "local-economy",
+        "regional-energy"
       ]
     },
     {
@@ -7365,15 +8138,209 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:business-demography",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:business-demography",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:small-business-dominance-map",
           "kind": "blog"
         },
         {
           "pageId": "ranking:employee-ratio-1-4-employee-establishments-private",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:business-demography",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "business-demography"
+      ]
     },
     {
       "metricKey": "employee-ratio-10-29-employee-establishments-private",
@@ -8046,7 +9013,15 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "area-theme:01000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:01000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -8054,7 +9029,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:03000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:03000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -8062,7 +9045,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:05000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:05000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -8070,7 +9061,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:07000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:07000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -8078,7 +9077,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:09000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:09000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -8086,7 +9093,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:11000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:11000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -8094,7 +9109,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:13000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:13000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -8102,7 +9125,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:15000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:15000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -8110,7 +9141,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:17000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:17000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -8118,7 +9157,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:19000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:19000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -8126,7 +9173,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:21000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:21000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -8134,7 +9189,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:23000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:23000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -8142,7 +9205,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:25000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:25000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -8150,7 +9221,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:27000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:27000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -8158,7 +9237,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:29000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:29000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -8166,7 +9253,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:31000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:31000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -8174,7 +9269,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:33000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:33000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -8182,7 +9285,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:35000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:35000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -8190,7 +9301,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:37000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:37000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -8198,7 +9317,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:39000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:39000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -8206,7 +9333,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:41000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:41000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -8214,7 +9349,15 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:43000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:43000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -8222,11 +9365,23 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:45000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:45000:labor-mobility",
           "kind": "area-theme"
         },
         {
+          "pageId": "area-theme:46000:daily-time-use",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "area-theme:46000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:daily-time-use",
           "kind": "area-theme"
         },
         {
@@ -8238,11 +9393,16 @@
           "kind": "ranking"
         },
         {
+          "pageId": "theme:daily-time-use",
+          "kind": "theme"
+        },
+        {
           "pageId": "theme:labor-mobility",
           "kind": "theme"
         }
       ],
       "themes": [
+        "daily-time-use",
         "labor-mobility"
       ]
     },

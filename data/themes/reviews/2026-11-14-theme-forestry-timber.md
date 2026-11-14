@@ -1,7 +1,7 @@
 ---
 type: theme-catalog-review
 date: 2026-11-14
-status: proposal-ready
+status: implemented-pending-release
 theme: forestry-timber
 supersedes: null
 tags: [theme-catalog, proposal, theme-page-review]
@@ -86,9 +86,19 @@ tags: [theme-catalog, proposal, theme-page-review]
 - 検証: `npm run validate:catalog --workspace=@stats47/data-configs` (error 0・warning を増やさない)、`measure-theme-weight.mjs --themes forestry-timber` で品質基準 6 項目。
 - 実験: 公開日に `THEME-STRUCTURE-<公開日>-forestry-timber` を `metricScope: all-routes` で登録する。
 
+## 実装した構成 (カタログの現在の形)
+
+| 順 | 章 (key) | カード |
+|---|---|---|
+| 1 | 林業が盛んな県はどこか(産出額・素材生産量) (`timber-production-and-output`) | 林業産出額（2024年確報）、素材生産量（2024年確報）、木材生産産出額（2024年確報）、栽培きのこ類産出額（2024年確報）、すぎの素材生産量、ひのきの素材生産量 |
+| 2 | 自分の県の森林面積や林道は全国でどのくらいか (`forest-resources-and-roads`) | 森林面積、林野面積割合、林道延長 |
+| 3 | 伐採された木材を加工・出荷する製材の体制はどうなっているか (`lumber-processing-industry`) | 製材工場数（7.5kW以上）、製材品出荷量 |
+| 4 | 林業を担う経営体や雇用者はどのくらいいるか (`forestry-workforce-and-entities`) | 林業経営体数（2025年調査）、林業経営体の雇用者数（2025年調査） |
+
+見せ方 (推移・数値・構成比) は `apply-design.ts` がデータの形 (年の数・単位) に合わせて決め直した。
+
 ## 採用決定
 
-ユーザー承認待ち。判断が要る点:
-
-1. 章の順と見出しを上の表のとおりに変えてよいか。
-2. 足したい指標の候補のうち、取り込みを進めるものはあるか。
+2026-11-14 オーナー承認。
+実装: branch `claude/theme-review-stage4-w1`。`apply-design.ts --approved forestry-timber` でカタログへ適用し、`validate:catalog` は error 0・warning の増減なし。
+公開日に実験を `metricScope: all-routes` で登録する。足したい指標の候補のうち未採用のものは上の表に残す。

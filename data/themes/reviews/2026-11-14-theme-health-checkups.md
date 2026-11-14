@@ -1,7 +1,7 @@
 ---
 type: theme-catalog-review
 date: 2026-11-14
-status: proposal-ready
+status: implemented-pending-release
 theme: health-checkups
 supersedes: null
 tags: [theme-catalog, proposal, theme-page-review]
@@ -82,9 +82,19 @@ tags: [theme-catalog, proposal, theme-page-review]
 - 検証: `npm run validate:catalog --workspace=@stats47/data-configs` (error 0・warning を増やさない)、`measure-theme-weight.mjs --themes health-checkups` で品質基準 6 項目。
 - 実験: 公開日に `THEME-STRUCTURE-<公開日>-health-checkups` を `metricScope: all-routes` で登録する。
 
+## 実装した構成 (カタログの現在の形)
+
+| 順 | 章 (key) | カード |
+|---|---|---|
+| 1 | 自分の県の特定健診受診率とメタボ該当割合は、全国でどのくらいか (`health-checkup-and-metabolic`) | 特定健診受診率（県別推計対象者が分母）、特定健診受診者のメタボ該当割合、特定保健指導実施率 |
+| 2 | 歯科健診は人口に対してどのくらい受けられているか (`dental-health-checkup`) | 歯科健診受診延人員（人口千人当たり） |
+| 3 | 遅い夕食や朝食抜きなど、日々の食生活の乱れはどのくらいあるか (`eating-lifestyle-habits`) | 就寝前2時間以内の夕食が週3回以上、朝食を抜くことが週3回以上 |
+| 4 | 野菜と食塩の摂取量は、男女でどのくらい違うか (`vegetable-and-salt-intake`) | 男性の野菜摂取量（年齢調整）、女性の野菜摂取量（年齢調整）、男性の食塩摂取量（年齢調整）、女性の食塩摂取量（年齢調整） |
+
+見せ方 (推移・数値・構成比) は `apply-design.ts` がデータの形 (年の数・単位) に合わせて決め直した。
+
 ## 採用決定
 
-ユーザー承認待ち。判断が要る点:
-
-1. 章の順と見出しを上の表のとおりに変えてよいか。
-2. 足したい指標の候補のうち、取り込みを進めるものはあるか。
+2026-11-14 オーナー承認。
+実装: branch `claude/theme-review-stage4-w1`。`apply-design.ts --approved health-checkups` でカタログへ適用し、`validate:catalog` は error 0・warning の増減なし。
+公開日に実験を `metricScope: all-routes` で登録する。足したい指標の候補のうち未採用のものは上の表に残す。

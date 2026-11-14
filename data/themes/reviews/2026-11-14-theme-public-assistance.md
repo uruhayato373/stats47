@@ -1,7 +1,7 @@
 ---
 type: theme-catalog-review
 date: 2026-11-14
-status: proposal-ready
+status: implemented-pending-release
 theme: public-assistance
 supersedes: null
 tags: [theme-catalog, proposal, theme-page-review]
@@ -84,9 +84,19 @@ tags: [theme-catalog, proposal, theme-page-review]
 - 検証: `npm run validate:catalog --workspace=@stats47/data-configs` (error 0・warning を増やさない)、`measure-theme-weight.mjs --themes public-assistance` で品質基準 6 項目。
 - 実験: 公開日に `THEME-STRUCTURE-<公開日>-public-assistance` を `metricScope: all-routes` で登録する。
 
+## 実装した構成 (カタログの現在の形)
+
+| 順 | 章 (key) | カード |
+|---|---|---|
+| 1 | 生活保護を受けている人や世帯の割合は、自分の県でどのくらいか (`public-assistance-recipient-trend`) | 生活保護被保護実人員（月平均・人口千人当たり）、生活保護被保護実世帯数（月平均・一般世帯千世帯当たり） |
+| 2 | 生活保護費はどのように推移してきたか (`public-assistance-households-and-budget`) | 生活保護費（都道府県財政） |
+| 3 | 生活保護に至る前の生活困窮の相談はどれくらい受け付けられているか (`poverty-support-consultation`) | 生活困窮者支援の新規相談受付件数 |
+| 4 | 受給者が入れる保護施設の定員はどう推移してきたか (`public-assistance-facility-capacity`) | 保護施設定員数（被保護実人員千人当たり） |
+
+見せ方 (推移・数値・構成比) は `apply-design.ts` がデータの形 (年の数・単位) に合わせて決め直した。
+
 ## 採用決定
 
-ユーザー承認待ち。判断が要る点:
-
-1. 章の順と見出しを上の表のとおりに変えてよいか。
-2. 足したい指標の候補のうち、取り込みを進めるものはあるか。
+2026-11-14 オーナー承認。
+実装: branch `claude/theme-review-stage4-w1`。`apply-design.ts --approved public-assistance` でカタログへ適用し、`validate:catalog` は error 0・warning の増減なし。
+公開日に実験を `metricScope: all-routes` で登録する。足したい指標の候補のうち未採用のものは上の表に残す。

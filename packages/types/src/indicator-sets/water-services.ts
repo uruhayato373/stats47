@@ -54,6 +54,16 @@ export const WATER_SERVICES_SET: IndicatorSet = {
       "rankingKey": "water-supply-capacity",
       "shortLabel": "上水道施設能力",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "sewage-treatment-coverage-rate",
+      "shortLabel": "汚水処理人口普及率",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "sewerage-penetration-rate-2012on",
+      "shortLabel": "下水道普及率 (2012年以降の系列)",
+      "role": "secondary"
     }
   ],
   "keywords": [

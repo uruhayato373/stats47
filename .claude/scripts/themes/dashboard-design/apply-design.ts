@@ -13,7 +13,8 @@
  * 既存のチャート・埋め込み・考察の章は、指標が最も重なる章へ移す (人が個別に作った図は残す)。単位の混ざった構成比・
  * 単年の推移のチャートだけを外す。完全に同じ指標の折れ線とカードは描画側 (chartDuplicatesMetrics) が 1 つにまとめる。
  *
- * 使い方: npx tsx .claude/scripts/themes/dashboard-design/apply-design.ts [--write] [theme ...]
+ * 使い方: npx tsx .claude/scripts/themes/dashboard-design/apply-design.ts [--write] [--approved] [theme ...]
+ *   --approved: 人が問いを決めた章も設計案で組み直す (オーナーが提案文書を承認したテーマだけ)
  *   入力: .local/theme-design/inventory.json (build-inventory.ts) と .local/theme-design/proposals/<theme>.json
  */
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
@@ -54,6 +55,9 @@ const COMPOSITION_REJECTS: { theme: string; keysIncluding: string; reason: strin
 
 const args = process.argv.slice(2);
 const write = args.includes("--write");
+// 人が問いを決めた章も、設計案の章へ組み直す。オーナーが提案文書 (data/themes/reviews/) を承認したテーマにだけ付ける
+// (2026-11-14。付けないときは従来どおり、機械で足した章だけを組み直す)
+const approved = args.includes("--approved");
 const only = args.filter((a) => !a.startsWith("--"));
 const inventory = JSON.parse(readFileSync(resolve(WORK_DIR, "inventory.json"), "utf8")) as {
   metricInfo: Record<string, MetricInfo>;
@@ -174,8 +178,9 @@ function applyTheme(themeKey: string, stripOnly = false): string[] {
     (sec.chartKeys ?? []).length > 0 &&
     (sec.chartKeys ?? []).every((k: string) => markdownKeys.has(k));
   const textSections = oldSections.filter(isText);
-  const humanSections = oldSections.filter((sec) => !isText(sec) && (stripOnly || !isAutoSectionKey(sec.key)));
-  const autoSections = oldSections.filter((sec) => !isText(sec) && !stripOnly && isAutoSectionKey(sec.key));
+  const rebuild = (sec: Record<string, any>) => !stripOnly && (approved || isAutoSectionKey(sec.key));
+  const humanSections = oldSections.filter((sec) => !isText(sec) && !rebuild(sec));
+  const autoSections = oldSections.filter((sec) => !isText(sec) && rebuild(sec));
 
   // 人の章のカードは残す (比較の設定だけ外す)
   const groups: Record<string, any>[] = [];

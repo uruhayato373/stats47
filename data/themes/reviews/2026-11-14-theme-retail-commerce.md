@@ -1,7 +1,7 @@
 ---
 type: theme-catalog-review
 date: 2026-11-14
-status: proposal-ready
+status: implemented-pending-release
 theme: retail-commerce
 supersedes: null
 tags: [theme-catalog, proposal, theme-page-review]
@@ -85,9 +85,47 @@ tags: [theme-catalog, proposal, theme-page-review]
 - 検証: `npm run validate:catalog --workspace=@stats47/data-configs` (error 0・warning を増やさない)、`measure-theme-weight.mjs --themes retail-commerce` で品質基準 6 項目。
 - 実験: 公開日に `THEME-STRUCTURE-<公開日>-retail-commerce` を `metricScope: all-routes` で登録する。
 
+## 出し直した設計 (2026-11-14)
+
+上の案は次の問題があったので、設計し直した: 4 指標とも総量で人口の多い県が大きくなるだけだった。1 章に 1 指標しか無い章が 2 つあった。
+
+先頭の章を、人口あたりの百貨店・総合スーパー数 (2021年) と最新 2024 年のコンビニ店舗数にし、事業所数は同じ章の後ろへ回した。総量だけだった販売額・売場面積・従業者数の章には、1 事業所あたり・従業者 1 人あたりの販売額を足して、総量が単独で並ばないようにした。1 指標だけの 2 章 (売場面積・従業者数) は近い章にまとめ、章は 4 から 3 に減らした。
+
+### 足した指標 (登録済みの指標をカタログに載せた。role は secondary)
+
+| 指標 | rankingKey | 年 | 答える問い |
+|---|---|---|---|
+| 百貨店・総合スーパー数(人口10万人あたり) | `department-supermarket-count-per-100k` | 2009〜2021 | 「都道府県 百貨店 数ランキング」「百貨店のない県」と調べる読者に、人口の多さに左右されない人口10万人あたりの値で答える。 |
+| コンビニ店舗数 | `convenience-store-count-commercial` | 2022〜2024 | 「コンビニ店舗数 都道府県」「コンビニが多い・少ない県」と調べる読者に、最新 2024 年の店舗数で答える(人口10万人あたりへの換算は指標の定義にある)。 |
+| 商業の1事業所あたり年間商品販売額 | `annual-sales-amount-per-establishment` | 1975〜2022 | 「年間商品販売額」「○○県 小売」と調べる読者に、人口の多さに左右されない 1 事業所あたりの販売の規模で答える。 |
+| 商業の従業者1人あたり年間商品販売額 | `annual-sales-amount-per-employee` | 1975〜2022 | 小売・商業で働く人の多さだけでなく、1 人あたりでどれだけ売っているかを知りたい読者に、従業者 1 人あたりの販売額で答える。 |
+
+設計の agent が確かめたこと・確かめていないこと:
+
+- 読んだ: data/themes/catalogs/retail-commerce.json。対象の指標は 4 件 (事業所数・売場面積・販売額・従業者数) すべて role が primary か secondary で、context は無い。4 件とも章のブロックに入れた。
+- 読んだ: .local/theme-design/inventory.json の metricInfo。いまの 4 指標はすべて years=1 (2021年のみ) と確認したので、すべて stat にし、trend には入れていない。
+- 読んだ: data/metrics/<key>.ts。追加する 4 指標 (department-supermarket-count-per-100k, convenience-store-count-commercial, annual-sales-amount-per-establishment, annual-sales-amount-per-employee) と、いまの 4 指標は実在し、すべて isActive: true。yearsFrom / yearsTo と sourceUrl は各定義ファイルから写した。
+- 確認: 先頭の章の先頭 2 ブロックは stat で、最新年は 2021 年 (百貨店・総合スーパー数/人口10万人あたり) と 2024 年 (コンビニ店舗数)。どちらも 2020 年以降。先頭の章に 2015 年以前が最新の指標は置いていない。
+- 確認: 登録済みのコンビニ店舗数 (convenience-store-count-per-100k) は最新が 2014 年、百貨店数 (department-store-count-per-100k) は最新が 2006 年で、古いので追加も採用もしなかった。コンビニは最新 2024 年の convenience-store-count-commercial を使う。
+- 確認: 「商業」の 2 指標が卸売業を含むことは、retail-employees の note の「卸売業を含む商業従業者総数」という書き方から読んだ。ブロックの見出しは「商業の…」とし、「小売業の…」とは書いていない。統計表そのものは開いていない。
+- 確認: composition は使っていない。足すと全体になる組を、定義ファイルでも統計表でも確かめられなかったため。同じ rankingKey を 2 つのブロックに入れていない。章の description はすべて空文字。
+- 未確認: convenience-store-count-commercial の値は店舗の総数。定義ファイルに per_population (人口10万人あたり) の換算オプションがあることは確認したが、テーマページのカードがその換算を出すかは確認していない。出さないなら、先頭の章の人口あたりの指標は百貨店・総合スーパー数だけになる。
+- 未確認: annual-sales-amount-per-establishment と annual-sales-amount-per-employee は 1975〜2022 年の 20 年あるが、商業統計から経済センサスへ調査が変わる境目で系列が切れるかは確認していない。そのため trend にせず stat にした。
+- 未確認: 2 つの 「1 事業所/従業者 1 人あたり」の指標が卸売業の大きい県 (東京など) で高く出るかどうかは、データを開いて見ていない。見出しや章の説明には書いていない。
+- 未確認: e-Stat の API と R2 の実データは見ていない。調査の結果に書かれた GSC の検索語 (コンビニ・百貨店・年間商品販売額) は、調査ファイルの記述を信じて使った。
+
+## 実装した構成 (カタログの現在の形)
+
+| 順 | 章 (key) | カード |
+|---|---|---|
+| 1 | 買い物ができる店は、人口に対して身近にあるか (`retail-store-convenience`) | 百貨店・総合スーパー数(人口10万人あたり)、コンビニ店舗数、小売業事業所数 |
+| 2 | 小売・商業の売り上げと売場は、どれくらいの規模か (`retail-market-scale`) | 商業の1事業所あたり年間商品販売額、小売業年間商品販売額、小売業売場面積 |
+| 3 | 小売・商業で働く人は多く、1人あたりでどれだけ売っているか (`retail-employment-opportunities`) | 商業の従業者1人あたり年間商品販売額、小売業従業者数 |
+
+見せ方 (推移・数値・構成比) は `apply-design.ts` がデータの形 (年の数・単位) に合わせて決め直した。
+
 ## 採用決定
 
-ユーザー承認待ち。判断が要る点:
-
-1. 章の順と見出しを上の表のとおりに変えてよいか。
-2. 足したい指標の候補のうち、取り込みを進めるものはあるか。
+2026-11-14 オーナーの指示 (出し直しが要る案は設計し直して自動で承認とする) により、出し直した設計を採用。
+実装: branch `claude/theme-review-stage4-w1`。`apply-design.ts --approved retail-commerce` でカタログへ適用し、`validate:catalog` は error 0・warning の増減なし。
+公開日に実験を `metricScope: all-routes` で登録する。足したい指標の候補のうち未採用のものは上の表に残す。

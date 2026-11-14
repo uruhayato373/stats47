@@ -717,15 +717,209 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:disability-support",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "blog:treatment-rate-mental-disorder-inpatient-prefecture-gap",
           "kind": "blog"
         },
         {
           "pageId": "ranking:treatment-rate-mental-disorder-inpatient",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:disability-support",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "disability-support"
+      ]
     },
     {
       "metricKey": "treatment-rate-mental-disorder-outpatient",
@@ -764,11 +958,205 @@
       ],
       "consumers": [
         {
+          "pageId": "area-theme:01000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:disability-support",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:disability-support",
+          "kind": "area-theme"
+        },
+        {
           "pageId": "ranking:treatment-rate-mental-disorder-outpatient",
           "kind": "ranking"
+        },
+        {
+          "pageId": "theme:disability-support",
+          "kind": "theme"
         }
       ],
-      "themes": []
+      "themes": [
+        "disability-support"
+      ]
     },
     {
       "metricKey": "treatment-rate-mood-disorder-inpatient",

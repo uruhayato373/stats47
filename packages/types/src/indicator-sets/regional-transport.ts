@@ -44,6 +44,31 @@ export const REGIONAL_TRANSPORT_SET: IndicatorSet = {
       "rankingKey": "commuters-total",
       "shortLabel": "自宅外通勤・通学者数",
       "role": "context"
+    },
+    {
+      "rankingKey": "gasoline-consumption-quantity",
+      "shortLabel": "ガソリン消費量（県庁所在市・二人以上世帯の年間値）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "automobile-related-group-consumption-expenditure",
+      "shortLabel": "自動車等関係費（県庁所在市・二人以上世帯の年間値）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "bus-fare-consumption-expenditure",
+      "shortLabel": "バス代（県庁所在市・二人以上世帯の年間値）",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "taxi-driver-annual-income",
+      "shortLabel": "タクシー運転者の平均年収",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "bus-driver-annual-income",
+      "shortLabel": "バス運転者の平均年収",
+      "role": "secondary"
     }
   ],
   "keywords": [

@@ -1,7 +1,7 @@
 ---
 type: theme-catalog-review
 date: 2026-11-14
-status: proposal-ready
+status: implemented-pending-release
 theme: regional-energy
 supersedes: null
 tags: [theme-catalog, proposal, theme-page-review]
@@ -86,10 +86,49 @@ tags: [theme-catalog, proposal, theme-page-review]
 - 検証: `npm run validate:catalog --workspace=@stats47/data-configs` (error 0・warning を増やさない)、`measure-theme-weight.mjs --themes regional-energy` で品質基準 6 項目。
 - 実験: 公開日に `THEME-STRUCTURE-<公開日>-regional-energy` を `metricScope: all-routes` で登録する。
 
+## 出し直した設計 (2026-11-14)
+
+上の案は次の問題があったので、設計し直した: 部門別の指標を構成比にする案だったが、足すと合計になるかを確かめていなかった。
+
+部門別のエネルギー消費 4 指標は、統計の対象が営業用輸送等を含まないと各指標の note に明記されており全体にならないので構成比をやめて数値カードにした。CO₂ の部門別は取り込みスクリプトで合計＝5 部門の和を確かめたが、5 つ目の一般廃棄物焼却が context で章に載せられないため 4 部門では全体にならず、構成比をやめて数値カードにした。章を 4 から 3 に減らし、CO₂ と部門別を 1 章にまとめて世帯あたりの電気・ガソリン(率)と並べ、先頭の章は 1 人当たり(2022 年)を最初に置いた。構成比は、合計＝新規認定分＋移行認定分と確かめた FIT・FIP の 2 指標だけに残した。
+
+### 足した指標 (登録済みの指標をカタログに載せた。role は secondary)
+
+| 指標 | rankingKey | 年 | 答える問い |
+|---|---|---|---|
+| 電気使用量(世帯あたり・県庁所在市) | `electricity-consumption-quantity` | 2007〜2025 | 「京都の年間消費電力量」のように、自分の県の家庭が電気をどれくらい使うかを世帯あたりの値で知りたい読者に答える。 |
+| ガソリン消費量(世帯あたり・県庁所在市) | `gasoline-consumption-quantity` | 2007〜2025 | 「ガソリン消費量」「ガソリン使用量」と検索する読者に、自分の県の世帯がガソリンをどれくらい使うかを世帯あたりの値で答える。 |
+| 発電電力量 | `electricity-generation-capacity` | 2016〜2023 | 電力需要量と同じ年・同じ単位で並べ、「自分の県は電気を使う量と作る量のどちらが多いか」を知りたい読者に答える。 |
+| 風力発電導入量(設備容量) | `wind-power-capacity` | 2010〜2017 | 「風力発電 都道府県 ランキング」「風力発電 多い県」と検索する読者に、県ごとの風力の設備容量を示す(登録の系列は 2017 年までなので年を明示して置く)。 |
+
+設計の agent が確かめたこと・確かめていないこと:
+
+- 読んだ: data/themes/catalogs/regional-energy.json(指標・既存 3 チャート・4 章)、.local/theme-design/proposals と research の regional-energy.json、inventory.json の metricInfo、data/themes/viewpoints/selection.json、theme-catalog-standards.md §3、apply-design.ts(normalizeBlock・visible 判定・COMPOSITION_REJECTS)
+- 確認: 最初の章の 1〜2 ブロック目は final-energy-consumption-per-capita と final-energy-consumption で、inventory の期間はどちらも 2007〜2022 年(2020 年以降)。3 ブロック目の電力需要量・発電電力量は 2016〜2023 年。
+- 確認: 4 つの addMetrics は data/metrics に実在し isActive: true(electricity-consumption-quantity と gasoline-consumption-quantity は 2007〜2025、electricity-generation-capacity は 2016〜2023、wind-power-capacity は 2010〜2017)。sourceUrl と years は各定義ファイルの値を写した。
+- 確認: FIT・FIP の構成比は fit-fip-installed-capacity の provenance(extraction に新規認定分と移行認定分の合算と記載)と ingest-energy-emissions.mjs の合計＝部分の和の検査で、合計＝新規＋移行を確かめた。単位は 3 指標とも kW、年は 2026 で同一。
+- 確認: 部門別のエネルギー消費 4 指標(産業・業務他・家庭・家庭乗用車)は各 note に「営業用輸送等を含む全国全体のエネルギー消費ではない」とあり、運輸は家庭乗用車のみ。足して全体になる組と確かめられないので stat にした。
+- 確認: CO₂ は ingest-energy-emissions.mjs の検査で排出量合計＝産業＋業務＋家庭＋運輸＋一般廃棄物焼却(各市区町村・誤差 1e-6)。ただし一般廃棄物焼却は catalog で role: context で、apply-design.ts は context を構成比から除くため、4 部門だけでは全体にならず stat にした。
+- 確認: いまのカタログの context 以外の 16 指標(final-energy-consumption、per-capita、electricity-demand、solar-panel-housing-rate、部門別エネルギー 4、FIT 3、CO₂ 合計と 4 部門)はすべて 3 章のどれかに 1 回だけ入れた。重複なし。drop は空。regional-waste-co2-emissions-estimate は context のまま触らない。
+- 確認: trend のブロックは 1 つで 2 指標・単位 1 種(MWh、Ｍｗｈ は全角の表記違い)・どちらも 2 年以上。単年の指標は trend に入れていない。章の数は 4 から 3 に減り、どの章も 3 ブロック以上、description は空文字。
+- 確認: 総量だけの章はない。1 章目は 1 人当たり、2 章目は世帯あたりの電気・ガソリン(率)、3 章目は住宅率を含む。
+- 未確認: electricity-consumption-quantity と gasoline-consumption-quantity が R2 に 47 県分そろっているか(inventory はカタログ外の指標を持たないため)。値は県庁所在市の二人以上世帯の年間値で、県全体ではない(note による)。ブロックの題にその旨を入れた。
+- 未確認: wind-power-capacity の R2 上の年数と 47 県の欠け(定義の years は 2010〜2017 で 2 章目の最新年が古い)。先頭の章ではなく最後の章に置いた。
+- 未確認: 2 章の 11 ブロックはどれも 1 指標の stat で、見た目の長さは画面で見ていない。必要なら CO₂ を別章に戻せるが、その章には率の指標が無く制約 2 に反するため、この案ではまとめた。
+- 補足: 一般廃棄物焼却を secondary に格上げして addMetrics に入れれば CO₂ 5 部門の構成比は成立する(上記の検査で合計＝5 部門の和)。ただし今回は「context を構成比に混ぜない」を優先して見送った。
+
+## 実装した構成 (カタログの現在の形)
+
+| 順 | 章 (key) | カード |
+|---|---|---|
+| 1 | 自分の県はエネルギーや電気をどれくらい使っているか (`energy-consumption-scale`) | 1人当たり最終エネルギー消費量、最終エネルギー消費量、電力需要量・発電電力量 |
+| 2 | 家庭や産業はエネルギーとCO₂をどれだけ使い、出しているか (`sector-energy-breakdown`) | 電気使用量(世帯あたり・県庁所在市)、ガソリン消費量(世帯あたり・県庁所在市)、産業部門の最終エネルギー消費量、業務他部門の最終エネルギー消費量、家庭部門の最終エネルギー消費量、家庭乗用車の最終エネルギー消費量、地域のCO₂排出量推計・合計、産業部門のCO₂推計、業務その他部門のCO₂推計、家庭部門のCO₂推計、運輸部門のCO₂推計（航空を除く） |
+| 3 | 再生可能エネルギーや太陽光発電は、どれだけ導入されているか (`renewable-energy-adoption`) | 太陽光発電機のある住宅率、FIT・FIP導入設備容量の合計、制度開始後の新規認定分の導入容量・旧制度から移行した設備の導入容量、風力発電導入量(設備容量) |
+
+見せ方 (推移・数値・構成比) は `apply-design.ts` がデータの形 (年の数・単位) に合わせて決め直した。
+
 ## 採用決定
 
-ユーザー承認待ち。判断が要る点:
-
-1. 章の順と見出しを上の表のとおりに変えてよいか。
-2. 全指標の一覧だけにある 1 指標をカードへ引き上げてよいか (カードが 17 → 17 指標になる)。
-3. 足したい指標の候補のうち、取り込みを進めるものはあるか。
+2026-11-14 オーナーの指示 (出し直しが要る案は設計し直して自動で承認とする) により、出し直した設計を採用。
+実装: branch `claude/theme-review-stage4-w1`。`apply-design.ts --approved regional-energy` でカタログへ適用し、`validate:catalog` は error 0・warning の増減なし。
+公開日に実験を `metricScope: all-routes` で登録する。足したい指標の候補のうち未採用のものは上の表に残す。
