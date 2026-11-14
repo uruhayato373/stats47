@@ -1,0 +1,268 @@
+{
+ "statsDataId": "0002070011",
+ "title": "用途分類 用途分類（世帯主の年齢階級別）",
+ "statName": "家計調査",
+ "govOrg": "総務省",
+ "surveyDate": null,
+ "overallTotalNumber": 327111,
+ "dimensions": [
+  {
+   "id": "tab",
+   "name": "表章項目",
+   "valueCount": 1,
+   "sampleValues": [
+    {
+     "code": "01",
+     "name": "金額",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat01",
+   "name": "用途分類",
+   "valueCount": 265,
+   "sampleValues": [
+    {
+     "code": "001",
+     "name": "世帯数分布（抽出率調整）",
+     "unit": "一万分比"
+    },
+    {
+     "code": "002",
+     "name": "集計世帯数",
+     "unit": "世帯"
+    },
+    {
+     "code": "003",
+     "name": "世帯人員",
+     "unit": "人"
+    },
+    {
+     "code": "004",
+     "name": "18歳未満人員",
+     "unit": "人"
+    },
+    {
+     "code": "005",
+     "name": "65歳以上人員",
+     "unit": "人"
+    },
+    {
+     "code": "006",
+     "name": "65歳以上無職者人員",
+     "unit": "人"
+    },
+    {
+     "code": "007",
+     "name": "有業人員",
+     "unit": "人"
+    },
+    {
+     "code": "008",
+     "name": "世帯主の配偶者のうち女の有業率",
+     "unit": "％"
+    },
+    {
+     "code": "009",
+     "name": "世帯主の年齢",
+     "unit": "歳"
+    },
+    {
+     "code": "011",
+     "name": "持家率",
+     "unit": "％"
+    },
+    {
+     "code": "012",
+     "name": "平均畳数（持家）",
+     "unit": "畳"
+    },
+    {
+     "code": "013",
+     "name": "持家で住宅ローンを支払っている世帯の割合",
+     "unit": "％"
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat02",
+   "name": "世帯区分（年次－二人以上の世帯）",
+   "valueCount": 4,
+   "sampleValues": [
+    {
+     "code": "03",
+     "name": "二人以上の世帯（2000年～）",
+     "unit": null
+    },
+    {
+     "code": "04",
+     "name": "二人以上の世帯のうち勤労者世帯（2000年～）",
+     "unit": null
+    },
+    {
+     "code": "01",
+     "name": "二人以上の世帯（農林漁家世帯を除く）（1985年～2007年,2017年）",
+     "unit": null
+    },
+    {
+     "code": "02",
+     "name": "二人以上の世帯のうち勤労者世帯（農林漁家世帯を除く）（1985年～2007年,2017年）",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat03",
+   "name": "世帯主の年齢階級",
+   "valueCount": 18,
+   "sampleValues": [
+    {
+     "code": "A00",
+     "name": "平均",
+     "unit": null
+    },
+    {
+     "code": "425",
+     "name": "24歳以下",
+     "unit": null
+    },
+    {
+     "code": "435",
+     "name": "34歳以下",
+     "unit": null
+    },
+    {
+     "code": "205",
+     "name": "25～29歳",
+     "unit": null
+    },
+    {
+     "code": "206",
+     "name": "30～34歳",
+     "unit": null
+    },
+    {
+     "code": "207",
+     "name": "35～39歳",
+     "unit": null
+    },
+    {
+     "code": "208",
+     "name": "40～44歳",
+     "unit": null
+    },
+    {
+     "code": "209",
+     "name": "45～49歳",
+     "unit": null
+    },
+    {
+     "code": "210",
+     "name": "50～54歳",
+     "unit": null
+    },
+    {
+     "code": "211",
+     "name": "55～59歳",
+     "unit": null
+    },
+    {
+     "code": "212",
+     "name": "60～64歳",
+     "unit": null
+    },
+    {
+     "code": "213",
+     "name": "65～69歳",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "area",
+   "name": "地域区分",
+   "valueCount": 1,
+   "sampleValues": [
+    {
+     "code": "00000",
+     "name": "全国",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "time",
+   "name": "時間軸（年次）",
+   "valueCount": 41,
+   "sampleValues": [
+    {
+     "code": "1985000000",
+     "name": "1985年",
+     "unit": null
+    },
+    {
+     "code": "1986000000",
+     "name": "1986年",
+     "unit": null
+    },
+    {
+     "code": "1987000000",
+     "name": "1987年",
+     "unit": null
+    },
+    {
+     "code": "1988000000",
+     "name": "1988年",
+     "unit": null
+    },
+    {
+     "code": "1989000000",
+     "name": "1989年",
+     "unit": null
+    },
+    {
+     "code": "1990000000",
+     "name": "1990年",
+     "unit": null
+    },
+    {
+     "code": "1991000000",
+     "name": "1991年",
+     "unit": null
+    },
+    {
+     "code": "1992000000",
+     "name": "1992年",
+     "unit": null
+    },
+    {
+     "code": "1993000000",
+     "name": "1993年",
+     "unit": null
+    },
+    {
+     "code": "1994000000",
+     "name": "1994年",
+     "unit": null
+    },
+    {
+     "code": "1995000000",
+     "name": "1995年",
+     "unit": null
+    },
+    {
+     "code": "1996000000",
+     "name": "1996年",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  }
+ ]
+}

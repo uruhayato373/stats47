@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-14T04:21:18.037Z",
+  "generatedAt": "2026-11-14T08:35:50.270Z",
   "masterSurveyCount": 152,
   "ranking": {
     "metrics": 2750,
@@ -774,472 +774,16 @@
   },
   "blog": {
     "articles": 861,
-    "charts": 2279,
-    "applicableCharts": 2130,
+    "charts": 2280,
+    "applicableCharts": 2131,
     "byStatus": {
-      "resolved": 2039,
-      "unresolved": 91,
+      "resolved": 2131,
+      "unresolved": 0,
       "not-applicable": 149,
       "missing-lineage": 0
     },
-    "coveragePct": 95.73,
-    "unresolvedCharts": [
-      {
-        "slug": "beer-happoshu-liquor-tax-steps-household-response",
-        "base": "liquor-tax-steps-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "beer-happoshu-liquor-tax-steps-household-response",
-        "base": "window-2020-unit-price-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "beer-happoshu-liquor-tax-steps-household-response",
-        "base": "window-2020-quantity-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "beer-happoshu-liquor-tax-steps-household-response",
-        "base": "window-2020-quantity-two-year-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "beer-happoshu-liquor-tax-steps-household-response",
-        "base": "window-2023-unit-price-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "beer-happoshu-liquor-tax-steps-household-response",
-        "base": "window-2023-quantity-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "beer-happoshu-liquor-tax-steps-household-response",
-        "base": "window-2023-quantity-two-year-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "beer-happoshu-liquor-tax-steps-household-response",
-        "base": "tax-step-vs-usual-noise-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "beer-happoshu-liquor-tax-steps-household-response",
-        "base": "jan-aug-2026-quantity-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "education-spending-income-quintile-decade",
-        "base": "education-period-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "education-spending-income-quintile-decade",
-        "base": "education-quintile-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "education-spending-income-quintile-decade",
-        "base": "education-composition-stacked",
-        "status": "unresolved"
-      },
-      {
-        "slug": "education-spending-income-quintile-decade",
-        "base": "tuition-items-period-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "education-spending-income-quintile-decade",
-        "base": "tuition-timing-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "education-spending-income-quintile-decade",
-        "base": "preschool-monthly-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "education-spending-income-quintile-decade",
-        "base": "education-change-by-item-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "education-spending-income-quintile-decade",
-        "base": "children-under18-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "education-spending-income-quintile-decade",
-        "base": "householder-age-period-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "education-spending-income-quintile-decade",
-        "base": "tutoring-per-child-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "education-spending-income-quintile-decade",
-        "base": "national-advancement-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "engel-coefficient-living-standard-myth",
-        "base": "engel-quintile-bars",
-        "status": "unresolved"
-      },
-      {
-        "slug": "engel-coefficient-living-standard-myth",
-        "base": "engel-decile-bars",
-        "status": "unresolved"
-      },
-      {
-        "slug": "engel-coefficient-living-standard-myth",
-        "base": "engel-yen-stacked",
-        "status": "unresolved"
-      },
-      {
-        "slug": "engel-coefficient-living-standard-myth",
-        "base": "engel-axes-range-bars",
-        "status": "unresolved"
-      },
-      {
-        "slug": "engel-coefficient-living-standard-myth",
-        "base": "engel-age-bars",
-        "status": "unresolved"
-      },
-      {
-        "slug": "engel-coefficient-living-standard-myth",
-        "base": "savings-age-bars",
-        "status": "unresolved"
-      },
-      {
-        "slug": "engel-coefficient-living-standard-myth",
-        "base": "engel-eating-out-bars",
-        "status": "unresolved"
-      },
-      {
-        "slug": "engel-coefficient-rise-hardship-2025",
-        "base": "engel-coefficient-lines",
-        "status": "unresolved"
-      },
-      {
-        "slug": "engel-coefficient-rise-hardship-2025",
-        "base": "engel-food-breakdown-stacked",
-        "status": "unresolved"
-      },
-      {
-        "slug": "engel-coefficient-rise-hardship-2025",
-        "base": "engel-age-lines",
-        "status": "unresolved"
-      },
-      {
-        "slug": "engel-coefficient-rise-hardship-2025",
-        "base": "engel-age-composition-stacked",
-        "status": "unresolved"
-      },
-      {
-        "slug": "engel-coefficient-rise-hardship-2025",
-        "base": "engel-age-2025-bars",
-        "status": "unresolved"
-      },
-      {
-        "slug": "engel-coefficient-rise-hardship-2025",
-        "base": "engel-quintile-bars",
-        "status": "unresolved"
-      },
-      {
-        "slug": "engel-coefficient-rise-hardship-2025",
-        "base": "engel-household-type-bars",
-        "status": "unresolved"
-      },
-      {
-        "slug": "household-spending-25-years-bought-less-bought-more",
-        "base": "householder-age-share-stacked",
-        "status": "unresolved"
-      },
-      {
-        "slug": "household-spending-25-years-bought-less-bought-more",
-        "base": "age-mix-fixed-comparison-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "household-spending-before-after-inflation",
-        "base": "engel-trend-context",
-        "status": "unresolved"
-      },
-      {
-        "slug": "household-spending-seasons-and-tax-hike-swings",
-        "base": "category-monthly-pattern-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "household-spending-seasons-and-tax-hike-swings",
-        "base": "seasonal-peak-ranking",
-        "status": "unresolved"
-      },
-      {
-        "slug": "household-spending-seasons-and-tax-hike-swings",
-        "base": "item-monthly-pattern-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "household-spending-seasons-and-tax-hike-swings",
-        "base": "peak-month-by-year-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "household-spending-seasons-and-tax-hike-swings",
-        "base": "tax-2014-yoy-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "household-spending-seasons-and-tax-hike-swings",
-        "base": "tax-2019-yoy-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "household-spending-seasons-and-tax-hike-swings",
-        "base": "durable-goods-tax-months-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "household-spending-seasons-and-tax-hike-swings",
-        "base": "tax-rush-by-category-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "household-spending-seasons-and-tax-hike-swings",
-        "base": "tax-rush-durable-items-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "household-spending-seasons-and-tax-hike-swings",
-        "base": "tax-rush-vs-usual-noise-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "income-quintile-high-income-sales-check",
-        "base": "screening-funnel-quintile",
-        "status": "unresolved"
-      },
-      {
-        "slug": "income-quintile-high-income-sales-check",
-        "base": "composition-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "income-quintile-high-income-sales-check",
-        "base": "high-ratio-items-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "income-quintile-high-income-sales-check",
-        "base": "example-items-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "income-quintile-high-income-sales-check",
-        "base": "amount-index-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "income-quintile-high-income-sales-check",
-        "base": "yearly-ratio-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "income-quintile-high-income-sales-check",
-        "base": "low-ratio-items-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "income-quintile-share-shift",
-        "base": "income-share-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "income-quintile-share-shift",
-        "base": "income-level-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "income-quintile-share-shift",
-        "base": "income-share-decade-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "income-quintile-share-shift",
-        "base": "income-splice-check-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "income-quintile-share-shift",
-        "base": "sample-households-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "income-quintile-share-shift",
-        "base": "income-ratio-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "income-quintile-share-shift",
-        "base": "household-size-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "income-quintile-share-shift",
-        "base": "worker-q5-concepts-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "income-quintile-share-shift",
-        "base": "householder-age-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "income-quintile-share-shift",
-        "base": "earners-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "income-quintile-share-shift",
-        "base": "elderly-members-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "income-quintile-share-shift",
-        "base": "income-vs-consumption-stacked",
-        "status": "unresolved"
-      },
-      {
-        "slug": "kakei-number-one-city-rotation",
-        "base": "leader-count-bars",
-        "status": "unresolved"
-      },
-      {
-        "slug": "kakei-number-one-city-rotation",
-        "base": "gap-churn-bars",
-        "status": "unresolved"
-      },
-      {
-        "slug": "kakei-number-one-city-rotation",
-        "base": "category-churn-bars",
-        "status": "unresolved"
-      },
-      {
-        "slug": "kakei-number-one-city-rotation",
-        "base": "stability-bars",
-        "status": "unresolved"
-      },
-      {
-        "slug": "kakei-number-one-city-rotation",
-        "base": "firmness-bars",
-        "status": "unresolved"
-      },
-      {
-        "slug": "kakei-number-one-city-rotation",
-        "base": "rank-agreement-bars",
-        "status": "unresolved"
-      },
-      {
-        "slug": "kakei-number-one-city-rotation",
-        "base": "yearly-churn-lines",
-        "status": "unresolved"
-      },
-      {
-        "slug": "kakei-number-one-city-rotation",
-        "base": "new-leader-prior-bars",
-        "status": "unresolved"
-      },
-      {
-        "slug": "kakei-number-one-city-rotation",
-        "base": "city-leader-bars",
-        "status": "unresolved"
-      },
-      {
-        "slug": "kakei-number-one-city-rotation",
-        "base": "case-gap-bars",
-        "status": "unresolved"
-      },
-      {
-        "slug": "single-household-spending-differences",
-        "base": "household-category-share-composition",
-        "status": "unresolved"
-      },
-      {
-        "slug": "single-household-spending-differences",
-        "base": "household-per-person-ratio-ranking",
-        "status": "unresolved"
-      },
-      {
-        "slug": "single-household-spending-differences",
-        "base": "household-size-per-person-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "single-household-spending-differences",
-        "base": "household-food-share-composition",
-        "status": "unresolved"
-      },
-      {
-        "slug": "single-household-spending-differences",
-        "base": "household-more-items-ranking",
-        "status": "unresolved"
-      },
-      {
-        "slug": "single-household-spending-differences",
-        "base": "household-less-items-ranking",
-        "status": "unresolved"
-      },
-      {
-        "slug": "single-household-spending-differences",
-        "base": "household-workers-items-ranking",
-        "status": "unresolved"
-      },
-      {
-        "slug": "single-household-spending-differences",
-        "base": "household-eating-out-share-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "single-household-spending-differences",
-        "base": "household-rent-share-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "single-household-spending-differences",
-        "base": "single-age-sex-composition",
-        "status": "unresolved"
-      },
-      {
-        "slug": "university-advancement-rate-definitions",
-        "base": "definition-rates-2024-ranking",
-        "status": "unresolved"
-      },
-      {
-        "slug": "university-advancement-rate-definitions",
-        "base": "denominators-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "university-advancement-rate-definitions",
-        "base": "rates-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "university-advancement-rate-definitions",
-        "base": "non-current-share-timeseries",
-        "status": "unresolved"
-      },
-      {
-        "slug": "university-advancement-rate-definitions",
-        "base": "revision-gap-timeseries",
-        "status": "unresolved"
-      }
-    ],
+    "coveragePct": 100,
+    "unresolvedCharts": [],
     "snapshotSchemaVersion": 2,
     "dataSources": {
       "legacySectionArticles": [
@@ -1260,7 +804,6 @@
         "future-burden-ratio-extreme-gap",
         "gasoline-car-society-map",
         "heating-cost-vs-disposable-income",
-        "hospital-bed-utilization-map",
         "household-spending-prefecture-gap",
         "household-structure-transformation",
         "ict-media-consumption-gender-gap",
@@ -1416,6 +959,7 @@
         "ict-digital-divide-composite-analysis",
         "inbound-by-nationality-regional-preference",
         "inflow-population-ratio-prefecture-gap",
+        "inpatient-rate-prefecture-gap",
         "international-cooperation-volunteer-map",
         "it-industry-concentration",
         "library-museum-cultural-capital",
@@ -1447,6 +991,7 @@
         "safe-driving-5-features",
         "sex-ratio-total-prefecture-gap",
         "suicide-rate-aging-nexus",
+        "telework-rate-tokyo-gap",
         "towns-villages-larger-than-cities",
         "traffic-accident-deaths-regional-risk",
         "train-commuters-prefecture-gap",
@@ -1813,8 +1358,10 @@
         "drinking-out-consumption-expenditure-prefecture-gap",
         "earthquake-insurance-prefecture-gap",
         "education-expenditure-total-prefecture-gap",
+        "education-spending-income-quintile-decade",
         "ehime-food-culture",
         "electricity-consumption-quantity-prefecture-gap",
+        "engel-coefficient-living-standard-myth",
         "engel-coefficient-prefecture-ranking",
         "engel-coefficient-rise-hardship-2025",
         "engel-coefficient-vs-prefectural-income",
@@ -1872,6 +1419,7 @@
         "household-durables-group-consumption-expenditure-prefecture",
         "household-spending-25-years-bought-less-bought-more",
         "household-spending-before-after-inflation",
+        "household-spending-seasons-and-tax-hike-swings",
         "household-utensils-group-consumption-expenditure-prefecture",
         "housing-repairs-group-consumption-expenditure-prefecture-gap",
         "hyogo-food-culture",
@@ -1885,12 +1433,14 @@
         "income-quintile-dining",
         "income-quintile-education",
         "income-quintile-food-gap",
+        "income-quintile-high-income-sales-check",
         "income-quintile-lesson",
         "income-quintile-luxury-ranking",
         "income-quintile-medical-health",
         "income-quintile-overview",
         "income-quintile-recreation-services",
         "income-quintile-regressive",
+        "income-quintile-share-shift",
         "income-quintile-travel",
         "information-communication-coefficient-ranking",
         "insecticide-consumption-expenditure-prefecture-gap",
@@ -2022,6 +1572,7 @@
         "shochu-expenditure-vs-sake-ranking",
         "shrimp-consumption-quantity-prefecture-gap",
         "shumai-consumption-expenditure-vs-main-household-ratio-main",
+        "single-household-spending-differences",
         "soba-udon-dining-consumption-expenditure-prefecture-gap",
         "social-expenses-group-consumption-expenditure-prefecture-gap",
         "soy-sauce-consumption-expenditure-prefecture-gap",
@@ -2195,6 +1746,7 @@
         "emergency-hospital-general-clinic-count-per-100k-prefecture",
         "general-hospital-bed-occupancy-rate",
         "hospital-bed-utilization-map",
+        "inpatient-rate-prefecture-gap",
         "livable-prefecture-composite-ranking",
         "municipalities-without-general-hospitals",
         "psychiatric-bed-count-vs-elementary-school-count",
@@ -2334,6 +1886,7 @@
         "half-population-elderly-municipalities",
         "household-structure-daytime-population-gap",
         "ict-digital-divide-composite-analysis",
+        "inpatient-rate-prefecture-gap",
         "it-industry-concentration",
         "library-museum-cultural-capital",
         "local-production-local-consumption-meat",
@@ -2507,6 +2060,7 @@
       "school-basic-survey": [
         "advancement-plus-employment-rate-prefecture",
         "bread-consumption-expenditure-vs-high-school-advancement",
+        "education-spending-income-quintile-decade",
         "elementary-school-children-count",
         "elementary-school-teachers-prefecture-gap",
         "garbage-total-output",
@@ -2961,6 +2515,7 @@
         "ict-digital-divide-composite-analysis",
         "inbound-by-nationality-regional-preference",
         "inflow-population-ratio-prefecture-gap",
+        "inpatient-rate-prefecture-gap",
         "international-cooperation-volunteer-map",
         "it-industry-concentration",
         "library-museum-cultural-capital",
@@ -2992,6 +2547,7 @@
         "safe-driving-5-features",
         "sex-ratio-total-prefecture-gap",
         "suicide-rate-aging-nexus",
+        "telework-rate-tokyo-gap",
         "towns-villages-larger-than-cities",
         "traffic-accident-deaths-regional-risk",
         "train-commuters-prefecture-gap",
@@ -3711,8 +3267,10 @@
         "drinking-out-consumption-expenditure-prefecture-gap",
         "earthquake-insurance-prefecture-gap",
         "education-expenditure-total-prefecture-gap",
+        "education-spending-income-quintile-decade",
         "ehime-food-culture",
         "electricity-consumption-quantity-prefecture-gap",
+        "engel-coefficient-living-standard-myth",
         "engel-coefficient-prefecture-ranking",
         "engel-coefficient-rise-hardship-2025",
         "engel-coefficient-vs-prefectural-income",
@@ -3770,6 +3328,7 @@
         "household-durables-group-consumption-expenditure-prefecture",
         "household-spending-25-years-bought-less-bought-more",
         "household-spending-before-after-inflation",
+        "household-spending-seasons-and-tax-hike-swings",
         "household-utensils-group-consumption-expenditure-prefecture",
         "housing-repairs-group-consumption-expenditure-prefecture-gap",
         "hyogo-food-culture",
@@ -3783,12 +3342,14 @@
         "income-quintile-dining",
         "income-quintile-education",
         "income-quintile-food-gap",
+        "income-quintile-high-income-sales-check",
         "income-quintile-lesson",
         "income-quintile-luxury-ranking",
         "income-quintile-medical-health",
         "income-quintile-overview",
         "income-quintile-recreation-services",
         "income-quintile-regressive",
+        "income-quintile-share-shift",
         "income-quintile-travel",
         "information-communication-coefficient-ranking",
         "insecticide-consumption-expenditure-prefecture-gap",
@@ -3920,6 +3481,7 @@
         "shochu-expenditure-vs-sake-ranking",
         "shrimp-consumption-quantity-prefecture-gap",
         "shumai-consumption-expenditure-vs-main-household-ratio-main",
+        "single-household-spending-differences",
         "soba-udon-dining-consumption-expenditure-prefecture-gap",
         "social-expenses-group-consumption-expenditure-prefecture-gap",
         "soy-sauce-consumption-expenditure-prefecture-gap",
@@ -4231,6 +3793,7 @@
         "emergency-hospital-general-clinic-count-per-100k-prefecture",
         "general-hospital-bed-occupancy-rate",
         "hospital-bed-utilization-map",
+        "inpatient-rate-prefecture-gap",
         "livable-prefecture-composite-ranking",
         "municipalities-without-general-hospitals",
         "psychiatric-bed-count-vs-elementary-school-count",
@@ -4564,6 +4127,7 @@
         "half-population-elderly-municipalities",
         "household-structure-daytime-population-gap",
         "ict-digital-divide-composite-analysis",
+        "inpatient-rate-prefecture-gap",
         "it-industry-concentration",
         "library-museum-cultural-capital",
         "local-production-local-consumption-meat",
@@ -4870,6 +4434,7 @@
       "blogSlugs": [
         "advancement-plus-employment-rate-prefecture",
         "bread-consumption-expenditure-vs-high-school-advancement",
+        "education-spending-income-quintile-decade",
         "elementary-school-children-count",
         "elementary-school-teachers-prefecture-gap",
         "garbage-total-output",
