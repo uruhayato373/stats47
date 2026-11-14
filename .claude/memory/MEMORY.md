@@ -5,8 +5,7 @@
 - [periodic progress reports](feedback_periodic_progress_reports.md) — 長い作業は約5分おきに実測で進捗を伝える
 - [bypass permissions](feedback_bypass_permissions.md) — Agent は確認なしで最後まで処理
 - [autonomous execution](feedback_autonomous_execution.md) — スキル実行は確認不要で自動処理
-- [codex delegation token saving](feedback_codex_delegation_token_saving.md) — トークン節約のため読み取りの確認・調査は Codex に分担
-- [agent output contract](feedback_agent_output_contract.md) — Agent prompt 冒頭に Task Capsule と OUTPUT FORMAT
+- [agent output contract](feedback_agent_output_contract.md)・[codex delegation](feedback_codex_delegation_token_saving.md) — Agent prompt 冒頭に Task Capsule と OUTPUT FORMAT。読み取りの確認・調査は Codex に分担
 - [commit in batches](feedback_commit_in_batches.md) — 修正を重ねる間は毎回コミットせず、まとまりで 1 回
 - [no deploy per iteration](feedback_no_deploy_per_iteration.md) — 指示なしに main へ出さない。本番は 1 日 1 回
 - [release squash skip token](feedback_release_squash_skip_token.md) — squash 本文の skip-ci 印で本番デプロイが起動しない。マージ後に run を確認
