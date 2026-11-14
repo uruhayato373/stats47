@@ -142,6 +142,8 @@ const RETENTION_TARGETS: RetentionTarget[] = [
 ];
 
 /**
+ * 上書き可否 (regenerable / authoritative) と書く場所 (ci / mac) の区分は隣の `r2-key-classes.ts` が持つ。
+ *
  * 絶対に削除しない prefix。RETENTION_TARGETS がこれらと重なれば起動時に落とす。
  * (配信データ・再生成コストの高い派生物・正典が保持を明示しているもの)
  */

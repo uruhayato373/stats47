@@ -51,7 +51,7 @@ async function main(): Promise<void> {
       return;
     }
     config({ path: resolve(PROJECT_ROOT, '.env.local') });
-    assertR2WriteAllowed({ op: 'push-exact-r2-manifest', dryRun });
+    assertR2WriteAllowed({ op: 'push-exact-r2-manifest', dryRun, targets: manifest.files.map((file) => file.key) });
     const store = createS3ImageObjectStoreFromEnv();
     if (!store) throw new Error('R2 S3 authentication is required');
     const result = await publishExactR2Manifest({
@@ -66,8 +66,9 @@ async function main(): Promise<void> {
   }
   const { selection, dryRun } = parseExactAssetArgs(process.argv.slice(2));
   config({ path: resolve(PROJECT_ROOT, '.env.local') });
-  assertR2WriteAllowed({ op: 'push-exact-r2-assets', dryRun });
   const candidates = resolveExactAssetCandidates(PROJECT_ROOT, selection);
+  // ローカルでは Mac で作る prefix (sns/・media/note-backgrounds/ など) の key だけを通す (r2-key-classes.ts)
+  assertR2WriteAllowed({ op: 'push-exact-r2-assets', dryRun, targets: candidates.map((candidate) => candidate.key) });
   const store = createS3ImageObjectStoreFromEnv();
   if (!store) {
     throw new Error(
