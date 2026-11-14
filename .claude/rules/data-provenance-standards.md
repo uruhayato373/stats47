@@ -31,6 +31,9 @@ stats47 の全データ (metric / blog / theme / area / open-data) について�
 | **C: 手動抽出** | `external` + `fetcherKey:"manual"` (PDF/xlsx/HTML 由来) | provenance 9点セット | **必須** (無いと復元不能) |
 | **D: 出典不明** | `fetcherKey:"unknown"` / TODO resourceId / calculated で親参照が config に無い | 無し | **新規投入禁止**。既存は是正対象 |
 
+クラス A' には、open-data の取得定義 (`data/open-data/fetch/recipes.json`) と非公開 R2 の原本 manifest に記録した
+SHA-256 によって、同じ原本を再取得・照合できるものも含める。
+
 ---
 
 ## 2. provenance 9点セット (クラス C 必須・手本 = ambulance)
@@ -62,7 +65,7 @@ stats47 の全データ (metric / blog / theme / area / open-data) について�
 | blog SVG/data | R2 `app/blog/<slug>/data/<base>.source.json` (3点セット) | `quality-gate.mjs` の `svgLineageMissing` (blocker) / `build-lineage-queue.mjs` | 全量棚卸しの定期実行 |
 | theme catalog | `selection` (proposedBy/sourceUrl/surveyedAt/rationale) | `validate-theme-catalog.ts` の `no-selection` (warn) | selection backfill |
 | area-databook | editorial の `sourceUrl`+`accessedAt` | `validate-area-databook.ts` (error 済・良好) | — |
-| open-data-catalog | catalog の `verifiedFromUrls`/`commercialUse` | `validate-open-data-catalog.ts` (error 済・良好) | 到達性 cron |
+| open-data-catalog | catalog の `verifiedFromUrls`/`commercialUse` に加え、取得定義は `data/open-data/fetch/recipes.json`、原本 manifest の要約は `data/open-data/snapshots/` に記録する。 | `validate-open-data-catalog.ts` (error 済・良好) | 到達性 cron |
 | ranking ai-content | 生成プロンプト規約 (数値の書き方) | `audit-ai-content.mjs` | 数値出典は metric 側に依存 |
 
 ---

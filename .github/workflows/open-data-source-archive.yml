@@ -1,0 +1,113 @@
+name: Open data source archive (private R2)
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'dataset:<id> / source:<sourceId> / all'
+        required: true
+        default: 'dataset:mhlw-medical-hospitals'
+        type: string
+      dry_run:
+        description: 'false のときだけ原本を取得して非公開 R2 に保存する'
+        required: false
+        default: 'true'
+        type: choice
+        options: ['true', 'false']
+
+permissions:
+  contents: write
+  pull-requests: read
+
+concurrency:
+  group: r2-write
+  cancel-in-progress: false
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: Setup Node
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check release and read latest snapshot ledger
+        if: inputs.dry_run == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          test "$(gh pr list --base main --head develop --state open --json number --jq length)" = 0
+          git fetch origin develop
+          # main supplies code/recipes; develop holds the latest verified archival ledger.
+          git restore --source origin/develop --worktree -- data/open-data/snapshots/
+
+      - name: Validate and fetch
+        env:
+          TARGET: ${{ inputs.target }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          node --test .claude/scripts/open-data/__tests__/*.test.mjs
+          npm run validate:open-data-catalog --workspace packages/data-configs
+          case "$TARGET" in
+            all) args=(--all) ;;
+            dataset:*) args=(--dataset "${TARGET#dataset:}") ;;
+            source:*) args=(--source "${TARGET#source:}") ;;
+            *) echo 'Expected dataset:<id>, source:<id> or all'; exit 1 ;;
+          esac
+          if [ "$DRY_RUN" = false ]; then args+=(--apply); else args+=(--dry-run); fi
+          node .claude/scripts/open-data/fetch-source.mjs "${args[@]}"
+
+      - name: Push explicit keys to private bucket and verify every SHA by GET
+        if: inputs.dry_run == 'false'
+        env:
+          R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+          R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+        run: |
+          export CLOUDFLARE_R2_BUCKET_NAME="$(node -p 'require("./packages/types/src/site.json").r2PrivateBucket')"
+          node --import tsx .claude/scripts/open-data/lib/publish.mjs
+
+      - name: Checkout develop for snapshot commit-back
+        if: inputs.dry_run == 'false'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+          fetch-depth: 0
+          path: .local/verification/open-data/writeback
+
+      - name: Record verified snapshots on develop
+        if: inputs.dry_run == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node .claude/scripts/open-data/lib/merge-snapshots.mjs .local/verification/open-data/writeback
+          cd .local/verification/open-data/writeback
+          git add -- data/open-data/snapshots/
+          if git diff --cached --quiet; then exit 0; fi
+          test "$(gh pr list --base main --head develop --state open --json number --jq length)" = 0
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'chore(open-data): record verified private source snapshots [skip ci]'
+          git pull --rebase --autostash origin develop
+          git push origin develop
+
+      - name: Retain verification reports
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: open-data-source-archive
+          path: .local/verification/open-data/*.json
+          if-no-files-found: warn
+          retention-days: 14

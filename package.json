@@ -2,6 +2,9 @@
   "name": "stats47-monorepo",
   "private": true,
   "scripts": {
+    "open-data:fetch": "node .claude/scripts/open-data/fetch-source.mjs",
+    "open-data:normalize": "node .claude/scripts/open-data/normalize-source.mjs",
+    "open-data:test": "node --test .claude/scripts/open-data/__tests__/*.test.mjs",
     "policy:sync": "node .claude/shared-policy/sync.mjs --sync",
     "policy:check": "node .claude/shared-policy/sync.mjs --check",
     "check-local-data": "node .claude/shared-policy/check-local-data.mjs",

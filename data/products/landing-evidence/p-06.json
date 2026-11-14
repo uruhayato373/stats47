@@ -114,7 +114,7 @@
         "years": [
           2024
         ],
-        "retrievedAt": "2026-11-12T06:05:32.396Z",
+        "retrievedAt": "2026-11-14T10:09:05.091Z",
         "tableTitle": "Ｅ　教育",
         "rows": 5223,
         "areas": 1741,
@@ -132,7 +132,7 @@
             "status": "ok"
           }
         ],
-        "inputSha256": "7dac83538db9cc0d9fef0b95d4071e132a9e32453a3f50e97923e0ef5cc1f3f9"
+        "inputSha256": "def2a04431da6579928f88ec51570d8759f712cb5d1270d956dbf91af8bb2790"
       }
     ],
     "results": 1799,
@@ -149,18 +149,18 @@
       },
       {
         "file": "analysis.xlsx",
-        "sha256": "88713c86570a9f0452b5bd4083f8559630ae9bdd0808cd135f922732fe82e0c2",
-        "bytes": 264158
+        "sha256": "0dc6a63cec7daa7972e88fbecf4ac5ea8e189b133ea1a41b729b5164b3746b38",
+        "bytes": 264159
       },
       {
         "file": "SOURCES.csv",
-        "sha256": "7828a011c93f01d20865b27fd3b2bb1eb45041897f8b05d703f02aadb251945d",
+        "sha256": "ec79370047891c926ecbd8ec36b05e971eec6ade71a4ccec6d1e7b98f9aca931",
         "bytes": 1920
       },
       {
         "file": "LICENSE-ja.txt",
-        "sha256": "c589640218b52c9748c3e88f8d19ec7bbde84abffe443970c1665c324b1fda1d",
-        "bytes": 1275
+        "sha256": "07eb760b739ab2c84ce33c7f3fdfaeee5f9f3118dc8efdbc36fccbc0767d4f29",
+        "bytes": 1265
       },
       {
         "file": "analysis-plan.json",
@@ -184,32 +184,32 @@
       },
       {
         "file": "images/national-pupils-per-teacher.png",
-        "sha256": "eaf13706a1eccefc3ba42ed7da5db3b7fc58bcc87ddf6bfb58f484c95901c7a0",
-        "bytes": 243089
+        "sha256": "923df9d572b9b365ebdb950aa21424531fda1cda89c66610158c64c68be1e963",
+        "bytes": 249465
       },
       {
         "file": "images/pupils-per-teacher.png",
-        "sha256": "e09add56a50341d721fcbcf7ea7b0af54904e518f9a42faf219788baa070ef3c",
-        "bytes": 186060
+        "sha256": "dc50bd591d5142d1ee9af3e23104cf96dcf19c96c9d9cf77ce641265f16808c8",
+        "bytes": 191040
       },
       {
         "file": "images/municipal-pupil-count.png",
-        "sha256": "5d2a467be87f9589dd1d54b15d4e6260badafdf75a4db20f2e11fd6f95ba523a",
-        "bytes": 156924
+        "sha256": "483bfae6bb61ad7d65a4a627d8f560d235501cf35ed6857796aea4bee6226729",
+        "bytes": 155609
       },
       {
         "file": "images/pupils-per-school.png",
-        "sha256": "8c55dba402200e03e2d5fc307678e81a32f42014a238e186463f74baba58b112",
-        "bytes": 157429
+        "sha256": "cb05abeb1befcd2e98cbc5bb41bddcffdac2958fb820a0bd89c4b8190c45ea7a",
+        "bytes": 159993
       },
       {
         "file": "images/analysis-file-preview.png",
-        "sha256": "9ef19cfe7057df12b401c6dce4f93a41f2033255028bb2e6a9d46c6246cdc133",
-        "bytes": 114986
+        "sha256": "f7c0f86fd13ad4331da2f1153f5b515b584d6d46eb19f3868de64c23ad0dd101",
+        "bytes": 118267
       },
       {
         "file": "inputs/municipal-schools.json",
-        "sha256": "7dac83538db9cc0d9fef0b95d4071e132a9e32453a3f50e97923e0ef5cc1f3f9",
+        "sha256": "def2a04431da6579928f88ec51570d8759f712cb5d1270d956dbf91af8bb2790",
         "bytes": 74038873
       },
       {
@@ -219,8 +219,8 @@
       },
       {
         "file": "analysis-pack.zip",
-        "sha256": "27d751a52c9ffdb7e39d8a573b9ec8696928eba7a1f07292b66b55d1ed72e9af",
-        "bytes": 2747791
+        "sha256": "82c17a31683fd1010276443e272eb0e0936735d74ef89be99ee0624e4f329485",
+        "bytes": 2764786
       }
     ]
   },

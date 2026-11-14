@@ -12,7 +12,9 @@ import { promisify } from 'node:util';
 import { HttpsProxyAgent } from 'https-proxy-agent';
 import { S3Client, HeadObjectCommand, GetObjectCommand, PutObjectCommand, DeleteObjectCommand, ListObjectsV2Command } from '@aws-sdk/client-s3';
 import { fileURLToPath } from 'node:url';
-const REPO_ROOT = fileURLToPath(new URL('../../../../../', import.meta.url));
+// new URL('<dir>/', import.meta.url) は Turbopack (管理画面のビルド) がファイルの読み込みとして解決しようとして落ちる。
+// cover-assets.mjs の COVER_ROOT と同じく path で求める (2026-11-14)
+const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../../..');
 const LIMIT = 16 * 1024 * 1024;
 // R2's REST gateway advertises 1,200 requests / 300 seconds; bulk jobs leave headroom.
 export const R2_BULK_REQUEST_INTERVAL_MS = 350;

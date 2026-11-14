@@ -110,7 +110,7 @@
           2018,
           2023
         ],
-        "retrievedAt": "2026-11-13T01:27:27.928Z",
+        "retrievedAt": "2026-11-14T10:09:16.972Z",
         "tableTitle": "Ｈ　居住",
         "rows": 10446,
         "areas": 1741,
@@ -150,7 +150,7 @@
             "status": "warn"
           }
         ],
-        "inputSha256": "61a159c989278ea48ee75c6ed7138d1c2448eccb1db4d6a07518bb2de139746c"
+        "inputSha256": "cf805d16844b5b3b30ec360153e1fed523bacf51cdec53c3dc3b685dc2b62232"
       }
     ],
     "results": 8,
@@ -167,18 +167,18 @@
       },
       {
         "file": "analysis.xlsx",
-        "sha256": "5b7d69f89fd05d1870637ef31698154d317a4dc3fd26f8783ffc53e49e53db61",
-        "bytes": 335441
+        "sha256": "37292f98579f8045cbbfa99768b4d0d396a8ffc3e35346b627789ce863c8eb40",
+        "bytes": 335440
       },
       {
         "file": "SOURCES.csv",
-        "sha256": "824c704d01c03914bd4163db77c1fd11f2401a8f146b6256bf9e733974d41e5a",
+        "sha256": "e9ab5eff38d442865297bcfabcb7cc4806df004692e2dce7875cdd2529448f2c",
         "bytes": 1459
       },
       {
         "file": "LICENSE-ja.txt",
-        "sha256": "e629830d1370dff4298e4e5a90e14312fcd5b87647450d6ca972fefa6dc7d93a",
-        "bytes": 1233
+        "sha256": "07eb760b739ab2c84ce33c7f3fdfaeee5f9f3118dc8efdbc36fccbc0767d4f29",
+        "bytes": 1265
       },
       {
         "file": "analysis-plan.json",
@@ -202,22 +202,22 @@
       },
       {
         "file": "images/municipal-vacancy-share-trend.png",
-        "sha256": "1f3ac3b6df5bf1ab338154067664e6b9d9e6fd571023671c08a69ae4be7bf895",
-        "bytes": 102187
+        "sha256": "581456024025298c0ed9372973864446552017280473eed7a303bb7c766f532f",
+        "bytes": 107189
       },
       {
         "file": "images/municipal-vacancy-share-2023.png",
-        "sha256": "879c080c5274829ae9665c3719c7aecc644cfd9e959099646fac192c46ed8ec6",
-        "bytes": 75536
+        "sha256": "00b31c2a65c2ab11164c7a60c80c1abcb75f7355dce15725529392de405089e3",
+        "bytes": 76920
       },
       {
         "file": "images/analysis-file-preview.png",
-        "sha256": "f6102173c3eedcd6550c8998f4129bf59c66138c4a1f6dcac4702dfd21f4ff1b",
-        "bytes": 121718
+        "sha256": "c29f5b22e9fa4071e84a4bcf99842fdaad31fb7f2285a4ad951ce9d9045a1033",
+        "bytes": 124205
       },
       {
         "file": "inputs/municipal-housing-stock.json",
-        "sha256": "61a159c989278ea48ee75c6ed7138d1c2448eccb1db4d6a07518bb2de139746c",
+        "sha256": "cf805d16844b5b3b30ec360153e1fed523bacf51cdec53c3dc3b685dc2b62232",
         "bytes": 8403248
       },
       {
@@ -227,8 +227,8 @@
       },
       {
         "file": "analysis-pack.zip",
-        "sha256": "4d616799840a6489cec5320e0d41842e53feebb81a0deffc042e92fd104e97f8",
-        "bytes": 830528
+        "sha256": "b3a00662680cb5d6bef5ecd770181085525e67e377eec56b68c317e97349e287",
+        "bytes": 839507
       }
     ]
   },

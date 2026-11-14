@@ -87,7 +87,7 @@
           2020,
           2023
         ],
-        "retrievedAt": "2026-11-13T01:27:50.760Z",
+        "retrievedAt": "2026-11-14T10:09:36.369Z",
         "tableTitle": "Ｈ　居住",
         "rows": 5223,
         "areas": 1741,
@@ -127,7 +127,7 @@
             "status": "ok"
           }
         ],
-        "inputSha256": "453f4f68da8e52eba1bf86e4e1ea8ebbd8e4d4aff601a6bc4e63db7a79920de4"
+        "inputSha256": "90c5e7bc46132d3a03f12e5b70bf82eeb4605a1b1d4966df0a27bb7c002150c3"
       }
     ],
     "results": 1747,
@@ -144,12 +144,12 @@
       },
       {
         "file": "analysis.xlsx",
-        "sha256": "52b03910a866426daa4bf57fa6d6f3bb46e62c248bb0955028bceaa413084ae0",
-        "bytes": 258038
+        "sha256": "cbc939a9ac436db5a13fb83181886e53cb19b9c725a5f6cb24f51f547a10b7ba",
+        "bytes": 258037
       },
       {
         "file": "SOURCES.csv",
-        "sha256": "7f8aee75e0e615dceb7de982c0726bc1e046d1409b24e69ac2af0b336c213dab",
+        "sha256": "fead29fb2efe9474c8bdc883c04d9aad49131202f6a0390b532953b34baaf287",
         "bytes": 829
       },
       {
@@ -179,33 +179,33 @@
       },
       {
         "file": "images/national-garbage-collection-population.png",
-        "sha256": "da4b6a3fdfc8add975dc0c23a7233196013e93f0afa4515732f4b50caf899b89",
-        "bytes": 173518
+        "sha256": "4150e113c6787f11dc89d76a786171f45020183942bd88fab511392a8c921c05",
+        "bytes": 177829
       },
       {
         "file": "images/municipal-garbage-collection-trend.png",
-        "sha256": "0ae5b93ca01b1d5f351bbdd77ec515db36c9e0410f10ccfdb81e85e742181b08",
-        "bytes": 104189
+        "sha256": "3c402389cf1704da04b90ec51f6b465272c5f0d6ac0e42fdd205a6db3a73c89a",
+        "bytes": 106307
       },
       {
         "file": "images/analysis-file-preview.png",
-        "sha256": "5a438897129ca0ed9c0be07bbc3b270b785266da1b3016d9135fbe52dde565b8",
-        "bytes": 123792
+        "sha256": "82e675b3fcf3933586bba3596cf9de4472db3ac37af2c88e21fdf883622bc0c9",
+        "bytes": 126709
       },
       {
         "file": "inputs/municipal-garbage-collection.json",
-        "sha256": "453f4f68da8e52eba1bf86e4e1ea8ebbd8e4d4aff601a6bc4e63db7a79920de4",
+        "sha256": "90c5e7bc46132d3a03f12e5b70bf82eeb4605a1b1d4966df0a27bb7c002150c3",
         "bytes": 15314103
       },
       {
         "file": "preview-product.json",
-        "sha256": "0a8840c37b137502de1569f1c1f9108665f71e9e13bb2dd528248b2b8ee1d052",
-        "bytes": 4898
+        "sha256": "ae4efbec12e2e12586f6b39c60911130c0c14730638a80f572eb1b413e34b3dc",
+        "bytes": 4970
       },
       {
         "file": "analysis-pack.zip",
-        "sha256": "063a89c256b737f543a4ce5b88b90b768ce515141cd3dac8445860e96d556f3f",
-        "bytes": 1088841
+        "sha256": "a7aab7fd2c99c7b8a166e90f194b32563666455809ada3f87bfb24ce95c8dd39",
+        "bytes": 1099902
       }
     ]
   },

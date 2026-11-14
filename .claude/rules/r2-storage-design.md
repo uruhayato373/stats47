@@ -39,6 +39,9 @@ paths:
 R2 の key は、区分表 `packages/r2-storage/src/scripts/r2-key-classes.ts` の `R2_KEY_CLASSES` で 2 つに分ける
 (`classifyR2Key(bucket, key)` で引く。表に無い key は安全側で正本として扱う)。区分の一覧はこの文書に写さない。
 
+非公開バケットの `open-data/raw/` は CI が原本を保存する正本であり、上書きと削除にはオーナーの承認が要る。
+`open-data/normalized/` は保存した原本と取得定義から再生成できる。
+
 | 区分 | 意味 | 例 | 承認 |
 |---|---|---|---|
 | `regenerable` | git と観測値から作り直せる生成物。間違えても再生成で戻る | `app/` の snapshot・OGP・ISR キャッシュ・`estat-api/` のキャッシュ | **不要**。agent は再生成と push、workflow の起動を承認なしで行ってよい |

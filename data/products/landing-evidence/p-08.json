@@ -108,7 +108,7 @@
         "years": [
           2020
         ],
-        "retrievedAt": "2026-11-12T06:05:43.700Z",
+        "retrievedAt": "2026-11-14T10:09:23.700Z",
         "tableTitle": "Ｃ　経済基盤 / Ａ　人口・世帯",
         "rows": 3482,
         "areas": 1741,
@@ -126,7 +126,7 @@
             "status": "ok"
           }
         ],
-        "inputSha256": "908bafa581c4d9f955898c1319e8e2c0ed6fd6b15d562ce5c35283b8f2fd46fb"
+        "inputSha256": "b70701dd7dd17d372c32de782437b2745469b82647bea47cf8bbedf4c1e283c4"
       }
     ],
     "results": 1787,
@@ -143,12 +143,12 @@
       },
       {
         "file": "analysis.xlsx",
-        "sha256": "dcc758736197b400994219ae007661e0880196be0ba43ea7a81e87513dd36d4b",
+        "sha256": "69f4b63ce8c9817509a6e550254bf37cc09845e125966e8dddf28e478161582c",
         "bytes": 208160
       },
       {
         "file": "SOURCES.csv",
-        "sha256": "5e3b9094e387fdb080d106172fb710edc6a5e0b8f61f413bf0f7f9e53b3dbeec",
+        "sha256": "937698244b1bbf8089c214debc1b27cc92ad006e0bc78bc308862c117689afd1",
         "bytes": 1393
       },
       {
@@ -178,38 +178,38 @@
       },
       {
         "file": "images/national-municipal-sales-scale.png",
-        "sha256": "cebda4fa57d15ec78e1c55543b2ee3d42e8b0e111c859dbdd8d709ed2f66c37f",
-        "bytes": 159567
+        "sha256": "1b96bccf4072b43a58c5d3a9f4448c5e493e570a1ec1c327c01097b7039bc425",
+        "bytes": 163397
       },
       {
         "file": "images/municipal-sales-scale.png",
-        "sha256": "12cdaeab72a45d652cd3f8a52c15a743964a721b84b5b9b91c68d7aca62b29c0",
-        "bytes": 169965
+        "sha256": "58e4cff5ded764684be1fa57fd4bee8ae33e9c2101b5f7e430ebe65afe709b74",
+        "bytes": 168444
       },
       {
         "file": "images/municipal-sales-per-resident.png",
-        "sha256": "69d39a9e1ec60505123fe18d1dbffe7da6ade0db0c5d040663b102b394dde18c",
-        "bytes": 154555
+        "sha256": "af63c90faddc4b2e3f0e8758aa161ca0c725bfdf785e0290488ab58329d2a0d5",
+        "bytes": 155905
       },
       {
         "file": "images/analysis-file-preview.png",
-        "sha256": "f5120e8dcd5f8c7265e7d17abd180b2fb2962fe4ff3a6c2e390a9c83bf9d7141",
-        "bytes": 124405
+        "sha256": "f683f3a7404340d52fe7de36d66b6b1ebb9e80efe224e5f0958d4b60d1fa923c",
+        "bytes": 127472
       },
       {
         "file": "inputs/municipal-commerce.json",
-        "sha256": "908bafa581c4d9f955898c1319e8e2c0ed6fd6b15d562ce5c35283b8f2fd46fb",
+        "sha256": "b70701dd7dd17d372c32de782437b2745469b82647bea47cf8bbedf4c1e283c4",
         "bytes": 14391044
       },
       {
         "file": "preview-product.json",
-        "sha256": "f1635388fdc06b8eddbac36b37e65cf1003e64420c0a6d3c349e744a7a5e4056",
-        "bytes": 6461
+        "sha256": "07512185dead53078dfcfe1c08362e74633824f19da0356dbf42763d44d5dca5",
+        "bytes": 6416
       },
       {
         "file": "analysis-pack.zip",
-        "sha256": "5a6d1c7546168abf73d965fcad2cf6bf65dd3e6b1760a91487f38b374039e119",
-        "bytes": 1266010
+        "sha256": "895d2184b225a672ccb4c5c29f42f4dd9fec9395733f0730060b4f2ebb16044f",
+        "bytes": 1274024
       }
     ]
   },
