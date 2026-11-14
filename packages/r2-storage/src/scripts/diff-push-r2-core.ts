@@ -5,6 +5,8 @@
  * (a) R2 の一覧が取れないときは送らずに止める。全件を送るのは `--allow-full-upload` のときだけ。
  * (b) authoritative (未登録を含む) の key を上書きする差分 (CHANGED、一覧が無く上書きか判定できない UNKNOWN) は、
  *     `--allow-authoritative-overwrite` が無ければ key を列挙して止める。新しい key (NEW) は止めない。
+ *     CI では段階導入として既定は警告して続行し、`R2_AUTHORITATIVE_GUARD=enforce` のときだけ止める
+ *     (resolveAuthoritativeGuardMode)。ローカルでは常に止める。
  * (c) 書いた後、送った件数の一致と、抜き取り (既定 最大 20 件) の HEAD 読み戻し (サイズと ETag=MD5) を確かめる。
  *
  * ETag と MD5 の関係: 1 回の PutObject で書いた object の ETag は本文の MD5 になる
@@ -102,9 +104,26 @@ export function authoritativeOverwrites<T extends DiffPushFile>(plan: DiffPushPl
   );
 }
 
+/**
+ * 止め (b) の強さ。段階導入のため、CI では既定を「警告して続行」にする。
+ * - ローカル (GITHUB_ACTIONS が true 以外): 常に enforce
+ * - CI: `R2_AUTHORITATIVE_GUARD=enforce` のときだけ enforce、それ以外は warn
+ *
+ * 理由: 定期実行は main の workflow 定義で動き、develop のスクリプトを使うものがある。main の YAML に
+ * `--allow-authoritative-overwrite` が入る前に止めると、意図した正本の更新 (data-refresh 等) が落ちる。
+ */
+export type AuthoritativeGuardMode = "enforce" | "warn";
+
+export function resolveAuthoritativeGuardMode(env: NodeJS.ProcessEnv = process.env): AuthoritativeGuardMode {
+  if (env.GITHUB_ACTIONS !== "true") return "enforce";
+  return env.R2_AUTHORITATIVE_GUARD === "enforce" ? "enforce" : "warn";
+}
+
 export function assertNoAuthoritativeOverwrite<T extends DiffPushFile>(
   plan: DiffPushPlan<T>,
   allow: boolean,
+  mode: AuthoritativeGuardMode = "enforce",
+  log: (line: string) => void = (line) => console.warn(line),
 ): void {
   if (allow) return;
   const hits = authoritativeOverwrites(plan);
@@ -112,6 +131,13 @@ export function assertNoAuthoritativeOverwrite<T extends DiffPushFile>(
   const listed = hits.slice(0, 50).map((e) =>
     `  [${e.change}] ${e.file.key}${e.registered ? "" : " (区分表に未登録)"}`);
   if (hits.length > 50) listed.push(`  ... 他 ${hits.length - 50} 件`);
+  if (mode === "warn") {
+    // GitHub Actions の注釈として run の要約に出す。本文の key 一覧はログに続けて出す
+    log(`::warning title=R2 authoritative overwrite::R2 が唯一の正本の object を ${hits.length} 件上書きします ` +
+      "(CI の段階導入で続行。止めるには R2_AUTHORITATIVE_GUARD=enforce、意図した更新なら --allow-authoritative-overwrite)");
+    for (const line of listed) log(line);
+    return;
+  }
   throw new DiffPushGuardError(
     [
       `R2 が唯一の正本 (authoritative) の object を上書きする差分が ${hits.length} 件あるため送信を止めました。`,
@@ -225,6 +251,8 @@ export async function runDiffPush<T extends DiffPushFile>(options: {
   io: DiffPushIo<T>;
   concurrency?: number;
   readbackMax?: number;
+  /** 止め (b) の強さ。省略時は enforce (呼び元の CLI が resolveAuthoritativeGuardMode で決める) */
+  authoritativeGuard?: AuthoritativeGuardMode;
   log?: (line: string) => void;
   /** 送信直前に送る対象を受け取る (blog 索引の条件付き PUT の準備など) */
   beforeUpload?: (targets: readonly T[]) => Promise<void>;
@@ -259,7 +287,7 @@ export async function runDiffPush<T extends DiffPushFile>(options: {
   });
   log("区分別の差分:");
   for (const line of formatDiffPushSummary(plan)) log(line);
-  assertNoAuthoritativeOverwrite(plan, flags.allowAuthoritativeOverwrite);
+  assertNoAuthoritativeOverwrite(plan, flags.allowAuthoritativeOverwrite, options.authoritativeGuard ?? "enforce", log);
 
   for (const e of plan.entries) if (e.change === "UNCHANGED") options.onUnchanged?.(e.file);
   const targets = plan.entries.filter((e) => e.change !== "UNCHANGED").map((e) => e.file);

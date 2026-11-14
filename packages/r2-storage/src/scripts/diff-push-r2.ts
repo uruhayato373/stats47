@@ -11,6 +11,7 @@
  * - R2 の一覧が取れないときは送らずに非 0 で止まる。照合せずに全件を送るのは --allow-full-upload のときだけ。
  * - R2 が唯一の正本 (authoritative・未登録を含む) の object を上書きする差分があれば、
  *   --allow-authoritative-overwrite が無いかぎり key を列挙して非 0 で止まる。新しい key の追加は止めない。
+ *   CI (GITHUB_ACTIONS=true) では段階導入として既定は警告して続行し、R2_AUTHORITATIVE_GUARD=enforce で止める。
  * - 書いた後に送った件数と、抜き取り (最大 20 件) の HEAD 読み戻し (サイズ・ETag) を照合する。
  * - R2 から object を削除しない (ローカルから消えた key は manifest から外すだけ)。
  *
@@ -33,6 +34,7 @@ import {
   formatDiffPushSummary,
   parseDiffPushFlags,
   planDiffPush,
+  resolveAuthoritativeGuardMode,
   runDiffPush,
 } from "./diff-push-r2-core";
 import { remoteListPrefixes, type RemoteObjectSummary } from "./lib/diff-push-remote-match";
@@ -194,7 +196,8 @@ async function printDryRun(prefix: string, toUpload: LocalFile[], removed: strin
   }
   const overwrites = remote ? authoritativeOverwrites(plan) : [];
   if (overwrites.length > 0 && !flags.allowAuthoritativeOverwrite) {
-    console.log(`\n⛔ 本番では止まる: authoritative の上書き ${overwrites.length} 件 (--allow-authoritative-overwrite が必要)`);
+    const outcome = resolveAuthoritativeGuardMode() === "enforce" ? "⛔ 本番では止まる" : "⚠ 本番では警告して続行 (CI の段階導入)";
+    console.log(`\n${outcome}: authoritative の上書き ${overwrites.length} 件 (--allow-authoritative-overwrite が必要)`);
     overwrites.slice(0, 30).forEach((e) => console.log(`  [${e.change}] ${e.file.key}`));
   }
 }
@@ -279,6 +282,7 @@ async function main(): Promise<void> {
     candidates: toUpload,
     removedKeys: removed,
     flags,
+    authoritativeGuard: resolveAuthoritativeGuardMode(),
     concurrency: CONCURRENCY,
     io: {
       list: (prefixes) => listRemoteObjects(s3, prefixes),

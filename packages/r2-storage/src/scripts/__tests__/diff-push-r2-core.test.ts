@@ -7,6 +7,7 @@ import {
   parseDiffPushFlags,
   pickReadbackSample,
   planDiffPush,
+  resolveAuthoritativeGuardMode,
   runDiffPush,
   summarizeDiffPushPlan,
   type DiffPushFlags,
@@ -131,6 +132,60 @@ describe('(b) authoritative の上書き', () => {
     const { io, puts } = fakeIo({ remote: { 'app/stats/a/values.json': 'old' } });
     await run([file('app/stats/a/values.json', 'new')], io, { ...NO_FLAGS, allowAuthoritativeOverwrite: true });
     expect(puts).toEqual(['app/stats/a/values.json']);
+  });
+});
+
+describe('(b) 段階導入: CI では既定で警告して続行', () => {
+  it('ローカル (GITHUB_ACTIONS なし) は R2_AUTHORITATIVE_GUARD に関係なく enforce', () => {
+    expect(resolveAuthoritativeGuardMode({})).toBe('enforce');
+    expect(resolveAuthoritativeGuardMode({ R2_AUTHORITATIVE_GUARD: 'warn' })).toBe('enforce');
+    expect(resolveAuthoritativeGuardMode({ CI: 'true' })).toBe('enforce');
+  });
+
+  it('CI の既定は warn、R2_AUTHORITATIVE_GUARD=enforce のときだけ enforce', () => {
+    expect(resolveAuthoritativeGuardMode({ GITHUB_ACTIONS: 'true' })).toBe('warn');
+    expect(resolveAuthoritativeGuardMode({ GITHUB_ACTIONS: 'true', R2_AUTHORITATIVE_GUARD: 'enforce' })).toBe('enforce');
+  });
+
+  it('warn では key を列挙する警告を出して上書きを送る', async () => {
+    const { io, puts } = fakeIo({ remote: { 'app/stats/a/values.json': 'old' } });
+    const lines: string[] = [];
+    await runDiffPush({
+      bucket: R2_PUBLIC_BUCKET, prefix: '', candidates: [file('app/stats/a/values.json', 'new')],
+      flags: NO_FLAGS, io, authoritativeGuard: resolveAuthoritativeGuardMode({ GITHUB_ACTIONS: 'true' }),
+      log: (line) => lines.push(line),
+    });
+    expect(puts).toEqual(['app/stats/a/values.json']);
+    expect(lines.some((l) => l.startsWith('::warning') && l.includes('1 件上書き'))).toBe(true);
+    expect(lines).toContain('  [CHANGED] app/stats/a/values.json');
+  });
+
+  it('CI でも enforce なら止まり、1 件も送らない', async () => {
+    const { io, puts } = fakeIo({ remote: { 'app/stats/a/values.json': 'old' } });
+    await expect(runDiffPush({
+      bucket: R2_PUBLIC_BUCKET, prefix: '', candidates: [file('app/stats/a/values.json', 'new')],
+      flags: NO_FLAGS, io, log: quiet,
+      authoritativeGuard: resolveAuthoritativeGuardMode({ GITHUB_ACTIONS: 'true', R2_AUTHORITATIVE_GUARD: 'enforce' }),
+    })).rejects.toThrow(DiffPushGuardError);
+    expect(puts).toEqual([]);
+  });
+
+  it('ローカルの解決結果では止まる', async () => {
+    const { io, puts } = fakeIo({ remote: { 'app/stats/a/values.json': 'old' } });
+    await expect(runDiffPush({
+      bucket: R2_PUBLIC_BUCKET, prefix: '', candidates: [file('app/stats/a/values.json', 'new')],
+      flags: NO_FLAGS, io, log: quiet, authoritativeGuard: resolveAuthoritativeGuardMode({}),
+    })).rejects.toThrow(/--allow-authoritative-overwrite/);
+    expect(puts).toEqual([]);
+  });
+
+  it('warn でも一覧が取れないときの止め (a) は効く', async () => {
+    const { io, puts } = fakeIo({ listFails: true });
+    await expect(runDiffPush({
+      bucket: R2_PUBLIC_BUCKET, prefix: '', candidates: [file('app/ranking/a.json', '1')],
+      flags: NO_FLAGS, io, log: quiet, authoritativeGuard: 'warn',
+    })).rejects.toThrow(/--allow-full-upload/);
+    expect(puts).toEqual([]);
   });
 });
 
