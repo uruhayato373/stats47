@@ -1,87 +1,31 @@
-// e-Stat API (getStatsList / getMetaInfo) の薄い fetch 層。
-// 素 fetch + 独自ヘルパーで完結させる (packages/estat-api は logger/R2 依存が重く
-// .claude/scripts では避ける方針 — 既存の fetch-estat-meta.mjs 等と同じ)。
-import { config } from "dotenv";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+// Catalog adapters retain their public shapes; transport and credentials use the ingestion entry.
+import { createRequire } from "node:module";
 import { ProxyAgent } from "undici";
-import { ESTAT_STATS_LIST_URL, ESTAT_META_INFO_URL, ESTAT_STATS_DATA_URL } from "./endpoints.cjs";
-
-// URL 定数の正本は endpoints.cjs (副作用なし)。api.mjs 経由でも読めるよう再 export する。
-export { ESTAT_STATS_LIST_URL, ESTAT_META_INFO_URL, ESTAT_STATS_DATA_URL };
-
-const __filename = fileURLToPath(import.meta.url);
-const PROJECT_ROOT = path.resolve(path.dirname(__filename), "..", "..", "..", "..");
-
-// CI の注入値を優先し、ローカルでは既存の設定ファイルを順に読む。
-config({ path: path.join(PROJECT_ROOT, ".env.local"), quiet: true });
-config({ path: path.join(PROJECT_ROOT, "apps/web/.env.development"), quiet: true });
-
-const LIST_URL = ESTAT_STATS_LIST_URL;
-const META_URL = ESTAT_META_INFO_URL;
+const require = createRequire(import.meta.url);
+const { require: tsRequire } = require("tsx/cjs/api");
+const { createEstatRequestClient, resolveEstatAppId } = tsRequire("../../../../packages/estat-api/src/ingest.ts", import.meta.url);
+export { ESTAT_STATS_LIST_URL, ESTAT_META_INFO_URL, ESTAT_STATS_DATA_URL } from "./endpoints.cjs";
+export const getAppId = resolveEstatAppId;
+export const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const LIST_BATCH_SIZE = 10000;
-const RETRY_COUNT = 3;
-const RETRY_BASE_DELAY_MS = 1000;
-
-export function getAppId() {
-  const appId = process.env.NEXT_PUBLIC_ESTAT_APP_ID;
-  if (!appId) {
-    throw new Error("NEXT_PUBLIC_ESTAT_APP_ID が未設定 (CI: Repository Variable / ローカル: apps/web/.env.development または .env.local)");
-  }
-  return appId;
-}
-
-/** @returns {any} Node の fetch (undici) が受け付ける dispatcher は DOM の RequestInit の型に無いので any で返す */
-function fetchOpts() {
+let proxyAgent;
+function request(appId) {
   const proxyUrl = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
-  return proxyUrl ? { dispatcher: new ProxyAgent(proxyUrl) } : {};
+  if (proxyUrl) proxyAgent ??= new ProxyAgent(proxyUrl);
+  return createEstatRequestClient({ appId, fetch: (url, options) =>
+    globalThis.fetch(url, { ...options, ...(proxyUrl ? { dispatcher: proxyAgent } : {}) }) });
 }
 
-export function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-async function withRetry(fn, label) {
-  let lastErr;
-  for (let attempt = 1; attempt <= RETRY_COUNT; attempt++) {
-    try {
-      return await fn();
-    } catch (e) {
-      lastErr = e;
-      if (attempt < RETRY_COUNT) await sleep(RETRY_BASE_DELAY_MS * 2 ** (attempt - 1));
-    }
-  }
-  throw new Error(`${label} failed after ${RETRY_COUNT} attempts: ${lastErr?.message ?? lastErr}`);
-}
-
-/**
- * getStatsList を 1 ページ取得する。生の TABLE_INF 配列と NEXT_KEY を返す。
- * collectArea が null なら絞らない (集計地域区分が「該当なし」の表も含む全表)。
- */
 export async function fetchStatsListPage(collectArea, startPosition, appId = getAppId()) {
-  return withRetry(async () => {
-    const params = new URLSearchParams({
-      appId,
-      lang: "J",
-      limit: String(LIST_BATCH_SIZE),
-      startPosition: String(startPosition),
-    });
-    if (collectArea != null) params.set("collectArea", String(collectArea));
-    const res = await fetch(`${LIST_URL}?${params.toString()}`, fetchOpts());
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const json = await res.json();
-    const datalist = json?.GET_STATS_LIST?.DATALIST_INF;
-    if (!datalist) {
-      const errMsg = json?.GET_STATS_LIST?.RESULT?.ERROR_MSG;
-      if (errMsg && /該当するデータが存在しません|該当データはありませんでした/.test(errMsg)) {
-        return { tables: [], total: 0, nextKey: null };
-      }
-      throw new Error(`unexpected response: ${JSON.stringify(json).slice(0, 200)}`);
-    }
-    const raw = datalist.TABLE_INF;
-    const tables = raw ? (Array.isArray(raw) ? raw : [raw]) : [];
-    return { tables, total: datalist.NUMBER, nextKey: datalist.RESULT_INF?.NEXT_KEY ?? null };
-  }, `getStatsList(collectArea=${collectArea}, startPosition=${startPosition})`);
+  const json = await request(appId)("GET_STATS_LIST", { lang: "J", limit: LIST_BATCH_SIZE,
+    startPosition, ...(collectArea == null ? {} : { collectArea: String(collectArea) }) });
+  const root = json?.GET_STATS_LIST;
+  if (Number(root?.RESULT?.STATUS) === 1) return { tables: [], total: 0, nextKey: null };
+  const datalist = root?.DATALIST_INF;
+  if (Number(root?.RESULT?.STATUS) !== 0 || !datalist) throw new Error("Invalid getStatsList response");
+  const raw = datalist.TABLE_INF;
+  return { tables: raw ? (Array.isArray(raw) ? raw : [raw]) : [],
+    total: datalist.NUMBER, nextKey: datalist.RESULT_INF?.NEXT_KEY ?? null };
 }
 
 /**
@@ -101,39 +45,27 @@ export async function listAllTables(collectArea, { delayMs = 300, onPage } = {})
     rows.push(...tables);
     if (onPage) onPage({ collectArea, count: rows.length, page: tables.length });
     if (tables.length === 0 || !nextKey) break;
-    startPosition = nextKey;
+    const next = Number(nextKey);
+    if (!Number.isSafeInteger(next) || next <= startPosition) throw new Error("Invalid/non-advancing NEXT_KEY");
+    startPosition = next;
     await sleep(delayMs);
   }
   return { rows, total };
 }
 
-/** getMetaInfo を 1 件取得する。エラー時は例外を投げる (呼び出し側で manifest.failed に記録する) */
 export async function fetchMetaInfo(statsDataId, appId = getAppId()) {
-  return withRetry(async () => {
-    const params = new URLSearchParams({ appId, lang: "J", statsDataId });
-    const res = await fetch(`${META_URL}?${params.toString()}`, fetchOpts());
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const json = await res.json();
-    const result = json?.GET_META_INFO?.RESULT;
-    if (result && Number(result.STATUS) !== 0 && !json?.GET_META_INFO?.METADATA_INF) {
-      throw new Error(result.ERROR_MSG ?? `STATUS ${result.STATUS}`);
-    }
-    if (!json?.GET_META_INFO?.METADATA_INF) throw new Error("no METADATA_INF in response");
-    return json;
-  }, `getMetaInfo(${statsDataId})`);
+  const json = await request(appId)("GET_META_INFO", { lang: "J", statsDataId });
+  if (Number(json?.GET_META_INFO?.RESULT?.STATUS) !== 0 || !json?.GET_META_INFO?.METADATA_INF) {
+    throw new Error("Invalid getMetaInfo response");
+  }
+  return json;
 }
 
-/** 指定座標の観測値を取得する。メタデータ取得と同じ appId・proxy・エラー処理を使う。 */
+/** Page adapter: existing callers that paginate retain their NEXT_KEY contract. */
 export async function fetchStatsData(params, appId = getAppId()) {
-  return withRetry(async () => {
-    const query = new URLSearchParams({ appId, lang: "J", ...params });
-    const res = await fetch(`${ESTAT_STATS_DATA_URL}?${query.toString()}`, fetchOpts());
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const json = await res.json();
-    const result = json?.GET_STATS_DATA?.RESULT;
-    if (Number(result?.STATUS) !== 0 || !json?.GET_STATS_DATA?.STATISTICAL_DATA) {
-      throw new Error(result?.ERROR_MSG ?? `STATUS ${result?.STATUS ?? "unknown"}`);
-    }
-    return json;
-  }, `getStatsData(${params.statsDataId})`);
+  const json = await request(appId)("GET_STATS_DATA", { lang: "J", ...params });
+  if (Number(json?.GET_STATS_DATA?.RESULT?.STATUS) !== 0 || !json?.GET_STATS_DATA?.STATISTICAL_DATA) {
+    throw new Error("Invalid getStatsData response");
+  }
+  return json;
 }

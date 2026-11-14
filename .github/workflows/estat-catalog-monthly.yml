@@ -82,6 +82,9 @@ jobs:
       - name: 📦 Install deps
         run: npm ci
 
+      - name: Check shared e-Stat entrypoint
+        run: node packages/data-configs/scripts/check-estat-entrypoint.mjs
+
       - name: 📚 Run catalog crawl
         env:
           META_STAT_CODES: ${{ github.event.inputs.meta_stat_codes || '00200561' }}

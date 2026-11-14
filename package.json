@@ -283,7 +283,7 @@
     "analysis:frame": "tsx .claude/scripts/analysis/analysis-frame.ts",
     "test:analysis-frame": "node --test .claude/scripts/analysis/__tests__/analysis-frame.test.mjs .claude/scripts/analysis/__tests__/analysis-draft.test.mjs",
     "metrics:verify-snapshots": "tsx packages/ranking/src/scripts/verify-metric-presentation-snapshots.ts",
-    "metrics:check": "npm run metrics:check --workspace packages/data-configs",
+    "metrics:check": "npm run metrics:check --workspace packages/data-configs && node packages/data-configs/scripts/check-estat-entrypoint.mjs",
     "metrics:build-index": "npm run metrics:build-index --workspace packages/data-configs",
     "metrics:regen-derived": "bash .claude/scripts/metrics/regen-derived.sh",
     "media:check": "node .claude/scripts/media/check-workspace.mjs",

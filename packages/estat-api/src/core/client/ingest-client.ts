@@ -4,21 +4,23 @@ import { fileURLToPath } from "node:url";
 import { ESTAT_API, ESTAT_ENDPOINTS } from "../config/index";
 import { EstatApiError } from "../errors/index";
 import { executeWithRetry } from "../utils/retry";
-import { buildRequestParams } from "../../stats-data/repositories/api/build-request-params";
 import type { EstatStatsDataResponse, EstatValue, GetStatsDataParams } from "../../stats-data/types";
 
 export const ESTAT_PAGE_LIMIT = 100_000;
 export const ESTAT_MAX_CONCURRENCY = 4;
-const ENV_FILE = fileURLToPath(new URL("../../../../../apps/web/.env.development", import.meta.url));
+const ENV_FILES = ["../../../../../.env.local", "../../../../../apps/web/.env.development"]
+  .map((path) => fileURLToPath(new URL(path, import.meta.url)));
 
-export function resolveEstatAppId(env: NodeJS.ProcessEnv = process.env, envFile = ENV_FILE): string {
+export function resolveEstatAppId(env: NodeJS.ProcessEnv = process.env, envFile?: string): string {
   if (env.NEXT_PUBLIC_ESTAT_APP_ID?.trim()) return env.NEXT_PUBLIC_ESTAT_APP_ID.trim();
-  let text: string;
-  try { text = readFileSync(envFile, "utf8"); } catch { throw new Error("NEXT_PUBLIC_ESTAT_APP_ID is absent from env and apps/web/.env.development"); }
-  const match = text.match(/^\s*(?:export\s+)?NEXT_PUBLIC_ESTAT_APP_ID\s*=\s*(?:"([^"\r\n]*)"|'([^'\r\n]*)'|([^#\r\n]*))/m);
-  const id = (match?.[1] ?? match?.[2] ?? match?.[3])?.trim();
-  if (!id) throw new Error("NEXT_PUBLIC_ESTAT_APP_ID is absent from apps/web/.env.development");
-  return id;
+  for (const file of envFile ? [envFile] : ENV_FILES) {
+    let text: string;
+    try { text = readFileSync(file, "utf8"); } catch { continue; }
+    const match = text.match(/^\s*(?:export\s+)?NEXT_PUBLIC_ESTAT_APP_ID\s*=\s*(?:"([^"\r\n]*)"|'([^'\r\n]*)'|([^#\r\n]*))/m);
+    const id = (match?.[1] ?? match?.[2] ?? match?.[3])?.trim();
+    if (id) return id;
+  }
+  throw new Error("NEXT_PUBLIC_ESTAT_APP_ID is absent from env and local configuration");
 }
 
 // Shared across clients, including retry attempts. A released slot is handed directly to its waiter.
@@ -64,16 +66,48 @@ export interface EstatIngestClient {
   fetchAll(params: GetStatsDataParams): Promise<IngestResult>;
 }
 
-export function createEstatIngestClient(options: {
+export interface EstatRequestOptions {
   appId?: string;
   fetch?: typeof fetch;
   maxRetries?: number;
   initialDelay?: number;
-} = {}): EstatIngestClient {
+}
+
+/** Single transport for ingestion, catalog pages and metadata. No import-time I/O. */
+export function createEstatRequestClient(options: EstatRequestOptions = {}) {
   const appId = options.appId ?? resolveEstatAppId();
   if (!appId.trim()) throw new Error("Empty e-Stat app ID");
   const transport = options.fetch ?? globalThis.fetch;
-  const endpoint = `${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS.GET_STATS_DATA}`;
+  return async (endpoint: keyof typeof ESTAT_ENDPOINTS, params: Record<string, string | number | undefined>, onAttempt?: () => void) => {
+    if (!(endpoint in ESTAT_ENDPOINTS)) throw new Error("Unknown e-Stat endpoint");
+    if (Object.keys(params).some((key) => /^(app_?id|application_?id)$/i.test(key))) throw new Error("Credentials must use client options");
+    const url = new URL(`${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS[endpoint]}`);
+    for (const [key, value] of Object.entries(params)) if (value !== undefined) url.searchParams.set(key, String(value));
+    if (params.limit !== undefined) {
+      const limit = Number(params.limit);
+      if (!Number.isInteger(limit) || limit < 1) throw new Error("Invalid page limit");
+      url.searchParams.set("limit", String(Math.min(limit, ESTAT_PAGE_LIMIT)));
+    }
+    url.searchParams.set("appId", appId);
+    return executeWithRetry(() => withRequestSlot(async () => {
+      onAttempt?.();
+      let response: Response;
+      try { response = await transport(url, { method: "GET", redirect: "error", signal: AbortSignal.timeout(120_000) }); }
+      catch { throw new EstatApiError("e-Stat network/timeout failure", "NETWORK"); }
+      if (!response.ok) throw new EstatApiError(`e-Stat HTTP ${response.status}`, "HTTP", undefined, response.status);
+      let raw: unknown;
+      try { raw = await response.json(); } catch { throw new Error("Malformed e-Stat JSON"); }
+      return record(removeCredentials(raw, appId));
+    }), {
+      maxRetries: options.maxRetries ?? 3, initialDelay: options.initialDelay ?? 2000,
+      isRetryable: (error) => error instanceof EstatApiError &&
+        (error.code === "NETWORK" || error.statusCode === 429 || (error.statusCode !== undefined && error.statusCode >= 500)),
+    });
+  };
+}
+
+export function createEstatIngestClient(options: EstatRequestOptions = {}): EstatIngestClient {
+  const request = createEstatRequestClient(options);
 
   return {
     async fetchAll(input) {
@@ -98,23 +132,7 @@ export function createEstatIngestClient(options: {
       while (true) {
         if (seen.has(startPosition)) throw new Error("Repeated NEXT_KEY");
         seen.add(startPosition);
-        const page = await executeWithRetry(() => withRequestSlot(async () => {
-          const requestParams = buildRequestParams({ ...params, startPosition }, appId);
-          const url = new URL(endpoint);
-          for (const [key, value] of Object.entries(requestParams)) if (value !== undefined) url.searchParams.set(key, String(value));
-          let response: Response;
-          requestCount++;
-          try { response = await transport(url, { method: "GET", redirect: "error", signal: AbortSignal.timeout(120_000) }); }
-          catch { throw new EstatApiError("e-Stat network/timeout failure", "NETWORK"); }
-          if (!response.ok) throw new EstatApiError(`e-Stat HTTP ${response.status}`, "HTTP", undefined, response.status);
-          let raw: unknown;
-          try { raw = await response.json(); } catch { throw new Error("Malformed e-Stat JSON"); }
-          return record(removeCredentials(raw, appId));
-        }), {
-          maxRetries: options.maxRetries ?? 3, initialDelay: options.initialDelay ?? 2000,
-          isRetryable: (error) => error instanceof EstatApiError &&
-            (error.code === "NETWORK" || error.statusCode === 429 || (error.statusCode !== undefined && error.statusCode >= 500)),
-        });
+        const page = await request("GET_STATS_DATA", { dataFormat: ESTAT_API.DATA_FORMAT, ...params, startPosition }, () => { requestCount++; });
         const root = record(page.GET_STATS_DATA);
         const status = integer(record(root.RESULT).STATUS, "STATUS");
         if (status === 1 && !first) return { params, response: null, rowCount: 0, requestCount };

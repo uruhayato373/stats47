@@ -37,7 +37,7 @@ name: 🔄 Data Refresh (e-Stat → R2)
 # request file 形式 (data/data-refresh-requests.json):
 #   { "metric": "vacant-housing-rate,wooden-housing-ratio", "since": "", "dryRun": false,
 #     "migrateLegacyRecipes": false, "snapshotScope": "auto" }
-#   - metric: 空なら全 metric (2,295 件・60 分では終わらない可能性があるので通常は指定する)
+#   - metric: 空なら更新表と configHash 差分のある有効指標を自動選択する
 #   - snapshotScope: 変えたのが市区町村の値だけなら、都道府県の値も持つ指標でも municipality を指定する (auto は全範囲に倒す)
 #   - dryRun: true = fetch と形状検証のみ (R2 に書かない)
 #   - allowEmpty: 0 件 fatal を警告に落とす key (カンマ区切り)。★下記の注意を読むこと
@@ -60,7 +60,7 @@ on:
   workflow_dispatch:
     inputs:
       metric:
-        description: "更新する metric key (空なら全 metric)"
+        description: "更新する metric key (空なら更新表・configHash 差分を自動選択)"
         required: false
         default: ""
       snapshot_scope:

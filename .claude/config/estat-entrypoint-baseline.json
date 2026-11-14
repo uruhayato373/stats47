@@ -1,0 +1,351 @@
+{
+  "version": 1,
+  "policy": "縮小専用。パス・出現数の追加は禁止。移行時に対応する例外を削除する。HEAD・親commit・origin/developとのmerge-baseにある許可数からの増加は自動検査する。--baseで比較基準を追加できる。",
+  "exceptions": {
+    ".claude/config/quality-gates.json": {
+      "url": 0,
+      "appId": 1,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    ".claude/hooks/pre-bash-safety.js": {
+      "url": 0,
+      "appId": 1,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    ".claude/scripts/blog/audit-chart-provenance.mjs": {
+      "url": 0,
+      "appId": 4,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    ".claude/scripts/blog/fetch-kakei-monthly.mjs": {
+      "url": 0,
+      "appId": 4,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    ".claude/scripts/blog/fetch-quintile-data.ts": {
+      "url": 0,
+      "appId": 2,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    ".claude/scripts/blog/rerender-scatter-canonical.mts": {
+      "url": 1,
+      "appId": 5,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    ".claude/scripts/estat/backfill-stats-prefecture.cjs": {
+      "url": 0,
+      "appId": 2,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    ".claude/scripts/lib/__tests__/estat-catalog.test.mjs": {
+      "url": 0,
+      "appId": 2,
+      "reason": "既存のテスト・モックが旧クライアントと環境注入を検証するため。新規利用は追加せず入口移行時に縮小する。"
+    },
+    ".claude/scripts/management/ingest-indicator.mjs": {
+      "url": 0,
+      "appId": 2,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    ".claude/scripts/management/weekly-audits/blog-remediation.sh": {
+      "url": 0,
+      "appId": 4,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    ".claude/scripts/management/weekly-audits/estat-ssds.sh": {
+      "url": 0,
+      "appId": 4,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    ".claude/scripts/management/weekly-audits/estat-year-coverage.sh": {
+      "url": 0,
+      "appId": 5,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    ".claude/scripts/note/reference/build-reference-note-age.ts": {
+      "url": 0,
+      "appId": 2,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    ".claude/scripts/note/reference/build-reference-note-quintile.ts": {
+      "url": 0,
+      "appId": 2,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    ".claude/scripts/note/reference/lib/estat-denominator.ts": {
+      "url": 1,
+      "appId": 1,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    ".claude/scripts/products/build-muni-data-product.mjs": {
+      "url": 1,
+      "appId": 4,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    ".claude/scripts/themes/ingest-construction-enterprise.mjs": {
+      "url": 0,
+      "appId": 2,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    ".claude/scripts/themes/ingest-cultural-industry.mjs": {
+      "url": 0,
+      "appId": 2,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    ".claude/scripts/themes/ingest-employment-community.mjs": {
+      "url": 5,
+      "appId": 2,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    ".claude/scripts/themes/ingest-forestry-medical-core.mjs": {
+      "url": 0,
+      "appId": 2,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    ".claude/scripts/themes/ingest-industry-core.mjs": {
+      "url": 0,
+      "appId": 4,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    ".claude/scripts/themes/ingest-perinatal-heritage.mjs": {
+      "url": 2,
+      "appId": 2,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    ".claude/scripts/themes/ingest-population-core.mjs": {
+      "url": 0,
+      "appId": 2,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    ".claude/scripts/themes/ingest-retail-employees.mjs": {
+      "url": 1,
+      "appId": 0,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    ".claude/scripts/themes/ingest-singleparent-nutrition.mjs": {
+      "url": 0,
+      "appId": 2,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    ".claude/scripts/themes/population-core-pins.mjs": {
+      "url": 4,
+      "appId": 0,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    ".claude/scripts/themes/verify-theme-expansion.mjs": {
+      "url": 0,
+      "appId": 5,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    ".github/workflows/commute-flow-ingest.yml": {
+      "url": 0,
+      "appId": 3,
+      "reason": "CI の既存変数注入。共通入口へ渡す公開 app ID の配線を維持するため。"
+    },
+    ".github/workflows/data-refresh.yml": {
+      "url": 0,
+      "appId": 2,
+      "reason": "CI の既存変数注入。共通入口へ渡す公開 app ID の配線を維持するため。"
+    },
+    ".github/workflows/deploy-workers.yml": {
+      "url": 0,
+      "appId": 2,
+      "reason": "CI の既存変数注入。共通入口へ渡す公開 app ID の配線を維持するため。"
+    },
+    ".github/workflows/estat-catalog-monthly.yml": {
+      "url": 0,
+      "appId": 2,
+      "reason": "CI の既存変数注入。共通入口へ渡す公開 app ID の配線を維持するため。"
+    },
+    ".github/workflows/estat-muni-industry.yml": {
+      "url": 0,
+      "appId": 2,
+      "reason": "CI の既存変数注入。共通入口へ渡す公開 app ID の配線を維持するため。"
+    },
+    ".github/workflows/estat-ssds-enum.yml": {
+      "url": 0,
+      "appId": 2,
+      "reason": "CI の既存変数注入。共通入口へ渡す公開 app ID の配線を維持するため。"
+    },
+    ".github/workflows/kakei-axis-charts.yml": {
+      "url": 0,
+      "appId": 2,
+      "reason": "CI の既存変数注入。共通入口へ渡す公開 app ID の配線を維持するため。"
+    },
+    ".github/workflows/muni-data-symbols.yml": {
+      "url": 0,
+      "appId": 2,
+      "reason": "CI の既存変数注入。共通入口へ渡す公開 app ID の配線を維持するため。"
+    },
+    ".github/workflows/pr-quality-check.yml": {
+      "url": 0,
+      "appId": 4,
+      "reason": "CI の既存変数注入。共通入口へ渡す公開 app ID の配線を維持するため。"
+    },
+    ".github/workflows/quality-suite-weekly.yml": {
+      "url": 0,
+      "appId": 2,
+      "reason": "CI の既存変数注入。共通入口へ渡す公開 app ID の配線を維持するため。"
+    },
+    ".github/workflows/regenerate-blog-svgs.yml": {
+      "url": 0,
+      "appId": 2,
+      "reason": "CI の既存変数注入。共通入口へ渡す公開 app ID の配線を維持するため。"
+    },
+    ".github/workflows/seo-keyword-cycle-daily.yml": {
+      "url": 0,
+      "appId": 2,
+      "reason": "CI の既存変数注入。共通入口へ渡す公開 app ID の配線を維持するため。"
+    },
+    ".github/workflows/sync-snapshots.yml": {
+      "url": 0,
+      "appId": 2,
+      "reason": "CI の既存変数注入。共通入口へ渡す公開 app ID の配線を維持するため。"
+    },
+    "apps/remotion/scripts/fetch-municipality-net.ts": {
+      "url": 1,
+      "appId": 2,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    "apps/web/env.local.example": {
+      "url": 0,
+      "appId": 3,
+      "reason": "今回対象外のライブチャート用設定・環境検証。ライブ経路の別途移行まで維持する。"
+    },
+    "apps/web/scripts/validate-env.ts": {
+      "url": 0,
+      "appId": 2,
+      "reason": "今回対象外のライブチャート用設定・環境検証。ライブ経路の別途移行まで維持する。"
+    },
+    "apps/web/src/lib/__tests__/env-validation.test.ts": {
+      "url": 0,
+      "appId": 8,
+      "reason": "既存のテスト・モックが旧クライアントと環境注入を検証するため。新規利用は追加せず入口移行時に縮小する。"
+    },
+    "apps/web/src/lib/env-validation.ts": {
+      "url": 0,
+      "appId": 2,
+      "reason": "今回対象外のライブチャート用設定・環境検証。ライブ経路の別途移行まで維持する。"
+    },
+    "apps/web/wrangler.toml": {
+      "url": 0,
+      "appId": 1,
+      "reason": "今回対象外のライブチャート用設定・環境検証。ライブ経路の別途移行まで維持する。"
+    },
+    "config/env-registry.json": {
+      "url": 0,
+      "appId": 2,
+      "reason": "環境変数名の登録台帳。値の解決は行わない。"
+    },
+    "packages/data-configs/scripts/audit-money-unit-scale.ts": {
+      "url": 1,
+      "appId": 4,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    "packages/data-configs/scripts/build-estat-availability.ts": {
+      "url": 1,
+      "appId": 0,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    "packages/data-configs/scripts/diagnose-unpinned-axes.ts": {
+      "url": 1,
+      "appId": 5,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    "packages/data-configs/scripts/ingest-commute-flow.ts": {
+      "url": 1,
+      "appId": 3,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    "packages/data-configs/scripts/page-data-batch.ts": {
+      "url": 2,
+      "appId": 4,
+      "reason": "今回の変更許可は指標選択まわりのみ。既存の areaAxis メタ取得と app ID 解決は旧経路として維持し、別途入口へ移行するときに縮小する。"
+    },
+    "packages/data-configs/scripts/refresh-official-theme-data.ts": {
+      "url": 1,
+      "appId": 4,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    "packages/estat-api/src/core/client/__tests__/http-client.test.ts": {
+      "url": 2,
+      "appId": 0,
+      "reason": "既存のテスト・モックが旧クライアントと環境注入を検証するため。新規利用は追加せず入口移行時に縮小する。"
+    },
+    "packages/estat-api/src/core/client/__tests__/ingest-client.test.ts": {
+      "url": 1,
+      "appId": 2,
+      "reason": "既存のテスト・モックが旧クライアントと環境注入を検証するため。新規利用は追加せず入口移行時に縮小する。"
+    },
+    "packages/estat-api/src/meta-info/__tests__/repositories/api/build-request-params.test.ts": {
+      "url": 0,
+      "appId": 1,
+      "reason": "既存のテスト・モックが旧クライアントと環境注入を検証するため。新規利用は追加せず入口移行時に縮小する。"
+    },
+    "packages/estat-api/src/meta-info/__tests__/repositories/api/fetch-from-api.test.ts": {
+      "url": 0,
+      "appId": 1,
+      "reason": "既存のテスト・モックが旧クライアントと環境注入を検証するため。新規利用は追加せず入口移行時に縮小する。"
+    },
+    "packages/estat-api/src/meta-info/__tests__/repositories/api/manual-download.test.ts": {
+      "url": 0,
+      "appId": 7,
+      "reason": "既存のテスト・モックが旧クライアントと環境注入を検証するため。新規利用は追加せず入口移行時に縮小する。"
+    },
+    "packages/estat-api/src/meta-info/repositories/api/build-request-params.ts": {
+      "url": 0,
+      "appId": 2,
+      "reason": "ライブチャート用の既存クライアント・補助コマンド。キャッシュ経路の別途移行まで維持する。"
+    },
+    "packages/estat-api/src/scripts/warm-cache.ts": {
+      "url": 0,
+      "appId": 1,
+      "reason": "ライブチャート用の既存クライアント・補助コマンド。キャッシュ経路の別途移行まで維持する。"
+    },
+    "packages/estat-api/src/stats-data/__tests__/repositories/api/manual-download.test.ts": {
+      "url": 0,
+      "appId": 3,
+      "reason": "既存のテスト・モックが旧クライアントと環境注入を検証するため。新規利用は追加せず入口移行時に縮小する。"
+    },
+    "packages/estat-api/src/stats-data/repositories/api/build-request-params.ts": {
+      "url": 0,
+      "appId": 2,
+      "reason": "ライブチャート用の既存クライアント・補助コマンド。キャッシュ経路の別途移行まで維持する。"
+    },
+    "packages/estat-api/src/stats-list/services/__tests__/fetcher.test.ts": {
+      "url": 1,
+      "appId": 1,
+      "reason": "既存のテスト・モックが旧クライアントと環境注入を検証するため。新規利用は追加せず入口移行時に縮小する。"
+    },
+    "packages/estat-api/src/stats-list/services/fetcher.ts": {
+      "url": 0,
+      "appId": 2,
+      "reason": "ライブチャート用の既存クライアント・補助コマンド。キャッシュ経路の別途移行まで維持する。"
+    },
+    "packages/estat-api/vitest.config.mts": {
+      "url": 0,
+      "appId": 1,
+      "reason": "既存のテスト・モックが旧クライアントと環境注入を検証するため。新規利用は追加せず入口移行時に縮小する。"
+    },
+    "packages/product-factory/src/data/verified-product-labels.ts": {
+      "url": 1,
+      "appId": 0,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    "packages/ranking/src/scripts/audit-estat-year-coverage.ts": {
+      "url": 1,
+      "appId": 3,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    "packages/stats-r2/src/scripts/generate-japan-series.ts": {
+      "url": 0,
+      "appId": 6,
+      "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
+    },
+    "vitest.config.mts": {
+      "url": 0,
+      "appId": 1,
+      "reason": "既存のテスト・モックが旧クライアントと環境注入を検証するため。新規利用は追加せず入口移行時に縮小する。"
+    }
+  }
+}

@@ -275,9 +275,11 @@ export function parseSnapshotArgs(args: string[]) {
   let out = DEFAULT_OUT;
   let dryRun = false;
   let push = false;
+  let checkUpdates = false;
   let allowAuthoritativeOverwrite = false;
   for (let i = 0; i < args.length; i++) {
-    if (args[i] === "--dry-run") dryRun = true;
+    if (args[i] === "--check-updates") checkUpdates = true;
+    else if (args[i] === "--dry-run") dryRun = true;
     else if (args[i] === "--push") push = true;
     else if (args[i] === "--allow-authoritative-overwrite") allowAuthoritativeOverwrite = true;
     else if (args[i] === "--out" && args[i + 1] && !args[i + 1].startsWith("--")) out = resolve(args[++i]);
@@ -287,13 +289,20 @@ export function parseSnapshotArgs(args: string[]) {
       if (tables.length === start) throw new Error("--table requires an ID");
     } else throw new Error(`Unknown/incomplete option: ${args[i]}`);
   }
-  if (!tables.length || tables.some((id) => !/^\d{10}$/.test(id))) throw new Error("--table requires 10-digit table IDs");
+  if (checkUpdates && args.length !== 1) throw new Error("--check-updates cannot be combined with acquisition options");
+  if ((!checkUpdates && !tables.length) || tables.some((id) => !/^\d{10}$/.test(id))) throw new Error("--table requires 10-digit table IDs");
   if (allowAuthoritativeOverwrite && !push) throw new Error("--allow-authoritative-overwrite requires --push");
-  return { tables: [...new Set(tables)], out, dryRun, push, allowAuthoritativeOverwrite };
+  return { tables: [...new Set(tables)], out, dryRun, push, allowAuthoritativeOverwrite, checkUpdates };
 }
 
 async function main() {
   const args = parseSnapshotArgs(process.argv.slice(2));
+  if (args.checkUpdates) {
+    const { checkTableUpdates } = await import("./estat-refresh-selection.js");
+    const { listAllMetrics } = await import("../src/registry.js");
+    console.log(JSON.stringify(await checkTableUpdates(listAllMetrics()), null, 2));
+    return;
+  }
   if (args.push) {
     // Native ESM import: the plain-JS transport uses an import-only proxy dependency.
     const { createR2Store, R2_BULK_REQUEST_INTERVAL_MS } = await import(new URL("../../r2-storage/src/lib/clients/private-r2-store.mjs", import.meta.url).href) as
