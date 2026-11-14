@@ -1,19 +1,20 @@
 /** Manual migration audit: legitimate upstream revisions can differ from published values.
- * node --import tsx packages/data-configs/scripts/verify-table-snapshot-equivalence.ts --table <id> [--out <dir>]
+ * node --import tsx packages/data-configs/scripts/verify-table-snapshot-equivalence.ts --table <id> [--out <dir>] [--mark-verified]
  * Remote reads only. Generates local artifacts, never calls live e-Stat. Classification: quality-gates.json.
  */
-import { createHash } from "node:crypto";
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { createHash, randomUUID } from "node:crypto";
+import { mkdirSync, readFileSync, writeFileSync, renameSync, rmSync } from "node:fs";
 import { resolve } from "node:path";
 import { tmpdir } from "node:os";
 import { datasetPath } from "../../../config/datasets.mjs";
+import { assertDatasetShape } from "../../../.claude/scripts/lib/dataset-shape.mjs";
 import { fileURLToPath } from "node:url";
 import { isDeepStrictEqual } from "node:util";
 import { SITE } from "@stats47/types";
 import { listAllMetrics } from "../src/registry.js";
 import { processOne, cityEstatSource, kakeiEstatSource } from "./page-data-batch.js";
 import type { MetricConfig } from "../src/types.js";
-import type { SnapshotEntry, SourceEvidence } from "./lib/estat-table-reader.js";
+import { createSnapshotReader, withSnapshotReader, type SnapshotEntry, type SourceEvidence } from "./lib/estat-table-reader.js";
 type Row = Record<string, unknown> & { areaCode: string; yearCode: string; sampleCount?: number | null; isReference?: boolean; reference?: boolean };
 interface Payload { metricKey: string; entityKind: string; rows: Row[]; meta: Record<string, unknown> }
 const hash = (raw: string) => createHash("sha256").update(raw).digest("hex");
@@ -48,7 +49,7 @@ export interface AuditTarget { config: MetricConfig; entity: Entity }
 export function selectTableSnapshotTargets(table: string, entries: readonly Pick<SnapshotEntry, "statsDataId" | "status">[], metrics: readonly MetricConfig[]): AuditTarget[] {
   if (!/^\d{10}$/.test(table)) throw new Error("--table must be a 10-digit statsDataId");
   const matches = entries.filter((entry) => entry.statsDataId === table);
-  if (matches.length !== 1 || matches[0].status !== "pushed") throw new Error(`Table must have exactly one pushed ledger entry: ${table}`);
+  if (matches.length !== 1 || !["pushed", "verified"].includes(matches[0].status)) throw new Error(`Table must have exactly one pushed ledger entry (or verified): ${table}`);
   const targets: AuditTarget[] = [];
   for (const config of metrics) {
     if (config.isActive === false || config.source.kind === "calculated") continue;
@@ -68,8 +69,10 @@ export function selectTableSnapshotTargets(table: string, entries: readonly Pick
 export function parseAuditArgs(argv: readonly string[]) {
   let table: string | undefined;
   let out: string | undefined;
+  let markVerified = false;
   for (let i = 0; i < argv.length; i++) {
     const flag = argv[i];
+    if (flag === "--mark-verified" && !markVerified) { markVerified = true; continue; }
     if ((flag !== "--table" && flag !== "--out") || !argv[i + 1] || argv[i + 1].startsWith("--")) throw new Error(`Invalid argument: ${flag}`);
     if (flag === "--table") {
       if (table) throw new Error("Specify one --table per run");
@@ -79,8 +82,8 @@ export function parseAuditArgs(argv: readonly string[]) {
       out = argv[++i];
     }
   }
-  if (!table || !/^\d{10}$/.test(table)) throw new Error("Usage: verify-table-snapshot-equivalence.ts --table <10-digit id> [--out <directory>]");
-  return { table, out: resolve(out ?? resolve(tmpdir(), "stats47-table-snapshot-equivalence", table)) };
+  if (!table || !/^\d{10}$/.test(table)) throw new Error("Usage: verify-table-snapshot-equivalence.ts --table <10-digit id> [--out <directory>] [--mark-verified]");
+  return { table, markVerified, out: resolve(out ?? resolve(tmpdir(), "stats47-table-snapshot-equivalence", table)) };
 }
 
 /** No stale local artifact or mixed live-API input may be reported as a snapshot comparison. */
@@ -95,8 +98,41 @@ export function assertSnapshotPayload(payload: Payload, target: AuditTarget, ent
   }
 }
 
+/** Audit all transferred inputs of a metric together, avoiding circular verification dependencies.
+ * The in-memory copies are scoped by withSnapshotReader; normal ingestion and the ledger stay unchanged.
+ * Manifest/slice integrity is still checked for every input. Only the requested table can be marked below.
+ */
+export function createVerificationReader(entries: readonly SnapshotEntry[], get: (key: string) => Promise<Buffer | null>) {
+  return createSnapshotReader(entries.map((entry) => entry.status === "pushed" ? { ...entry, status: "verified" } : entry), get);
+}
+
+export interface VerificationSummary {
+  statsDataId: string; catalogVersion: string; manifestSha256: string;
+  targetArtifacts: number; comparedArtifacts: number; matched: number; different: number; errors: number;
+}
+
+/** Fail closed on partial/error/different results and on a ledger replaced during the audit. */
+export function markSnapshotVerified(ledgerPath: string, result: VerificationSummary): boolean {
+  if (!Number.isSafeInteger(result.targetArtifacts) || result.targetArtifacts < 1 ||
+      result.comparedArtifacts !== result.targetArtifacts || result.matched !== result.targetArtifacts || result.different !== 0 || result.errors !== 0) return false;
+  const ledger = JSON.parse(readFileSync(ledgerPath, "utf8")) as { tables: SnapshotEntry[] };
+  assertDatasetShape("estat.table-snapshots", ledger);
+  const matches = ledger.tables.filter((entry) => entry.statsDataId === result.statsDataId);
+  if (matches.length !== 1 || !["pushed", "verified"].includes(matches[0].status) ||
+      matches[0].manifestSha256 !== result.manifestSha256 || matches[0].catalogVersion !== result.catalogVersion) throw new Error("Verified result/ledger mismatch");
+  if (matches[0].status === "verified") return true;
+  matches[0].status = "verified";
+  assertDatasetShape("estat.table-snapshots", ledger);
+  const temporary = `${ledgerPath}.${randomUUID()}.tmp`;
+  try {
+    writeFileSync(temporary, JSON.stringify(ledger, null, 2) + "\n", { flag: "wx" });
+    renameSync(temporary, ledgerPath);
+  } finally { rmSync(temporary, { force: true }); }
+  return true;
+}
+
 async function main() {
-  const { table, out } = parseAuditArgs(process.argv.slice(2));
+  const { table, out, markVerified } = parseAuditArgs(process.argv.slice(2));
   const ledger = JSON.parse(readFileSync(datasetPath("estat.table-snapshots"), "utf8")) as { tables: SnapshotEntry[] };
   const targets = selectTableSnapshotTargets(table, ledger.tables, listAllMetrics());
   const entry = ledger.tables.find((item) => item.statsDataId === table)!;
@@ -111,6 +147,10 @@ async function main() {
     if (url.origin !== publicOrigin || method !== "GET") throw new Error(`Audit prohibits request: ${url.origin}`);
     return originalFetch(input, init);
   };
+  const { createR2Store, R2_BULK_REQUEST_INTERVAL_MS } = await import(new URL("../../r2-storage/src/lib/clients/private-r2-store.mjs", import.meta.url).href) as
+    typeof import("../../r2-storage/src/lib/clients/private-r2-store.mjs");
+  const store = createR2Store({ bucket: "stats47-private", minimumRequestIntervalMs: R2_BULK_REQUEST_INTERVAL_MS });
+  const reader = createVerificationReader(ledger.tables, (key) => store.get(key));
   const comparisons = [];
   const samples = [];
   const errors = [];
@@ -120,7 +160,7 @@ async function main() {
     try {
       const startedAt = new Date();
       // Scope generation to the entity referencing this table. Registry objects remain unchanged.
-      const result = await processOne({ ...config, entities: [entity] }, "", false);
+      const result = await withSnapshotReader(reader, () => processOne({ ...config, entities: [entity] }, "", false));
       if (!result.ok) throw new Error(result.message);
       const payload = JSON.parse(readFileSync(resolve(root, `.local/r2/app/stats/${config.key}/${artifact}`), "utf8")) as Payload;
       assertSnapshotPayload(payload, target, entry, startedAt);
@@ -133,7 +173,7 @@ async function main() {
       writeFileSync(publicPath, raw);
       const published = JSON.parse(raw) as Payload;
       const compared = compareValues(payload, published);
-      comparisons.push({ metricKey: config.key, entity, ...compared, source: payload.meta.source, publicMeta: published.meta,
+      comparisons.push({ metricKey: config.key, entity, ...compared, source: payload.meta.source, localMeta: payload.meta, publicMeta: published.meta,
         publicEvidence: { url, retrievedAt: new Date().toISOString(), sha256: hash(raw), etag: response.headers.get("etag"), lastModified: response.headers.get("last-modified"), path: publicPath } });
       // Estimated-worker annotations are optional outside wage tables; never assume particular tab codes or depth.
       if (payload.meta.sampleCount) {
@@ -163,6 +203,7 @@ async function main() {
   writeFileSync(resolve(out, "table-snapshot-equivalence.json"), JSON.stringify({ ...summary, comparisons, failures: errors }, null, 2) + "\n");
   writeFileSync(resolve(out, "table-snapshot-sample-counts.json"), JSON.stringify({ ...summary,
     kind: "estimated-workers", unit: "人", note: "人数の注記がある指標だけを集計。欠測は合計に含めず別掲。推計値であり調査回答者数ではない。指標間の重複を含むため指標間の総和には使わない。", rows: samples }, null, 2) + "\n");
+  if (markVerified) markSnapshotVerified(datasetPath("estat.table-snapshots"), summary);
   console.log(JSON.stringify(summary));
   if (summary.different || summary.errors) process.exitCode = 1;
 }

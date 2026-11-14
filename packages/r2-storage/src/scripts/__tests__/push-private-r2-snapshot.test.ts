@@ -48,6 +48,41 @@ describe("private snapshot push", () => {
     await pushPrivateR2Snapshot({ objects, manifestKey, store });
     expect(calls.slice(2)).toEqual([`HEAD ${manifestKey}`, `PUT ${dataKey}`, `HEAD ${dataKey}`, `PUT ${manifestKey}`, `HEAD ${manifestKey}`]);
   });
+  it("bounds parallel operations at four and verifies every slice before writing the manifest", async () => {
+    const { store, calls } = fixture();
+    const slices = Array.from({ length: 9 }, (_, i) => ({ key: `estat-tables/0003445758/data/tab=${i}.json.gz`, bytes: Buffer.from(`data${i}`) }));
+    let active = 0, maximum = 0;
+    const get = store.get;
+    store.get = async (key) => {
+      active++; maximum = Math.max(maximum, active);
+      await new Promise((resolve) => setTimeout(resolve, 1));
+      active--; return get(key);
+    };
+    await pushPrivateR2Snapshot({ objects: [objects[0], ...slices], manifestKey, store });
+    expect(maximum).toBe(4);
+    const firstPut = calls.findIndex((call) => call.startsWith("PUT"));
+    expect(calls.slice(0, firstPut).filter((call) => call.startsWith("GET"))).toHaveLength(10);
+    const manifestPut = calls.indexOf(`PUT ${manifestKey}`);
+    for (const slice of slices) expect(calls.indexOf(`HEAD ${slice.key}`)).toBeLessThan(manifestPut);
+  });
+  it("settles started writes after a slice failure and never publishes its manifest", async () => {
+    const { store, calls } = fixture();
+    const slices = Array.from({ length: 8 }, (_, i) => ({ key: `estat-tables/0003445758/data/tab=${i}.json.gz`, bytes: Buffer.from(`data${i}`) }));
+    let active = 0;
+    const put = store.put;
+    store.put = async (key, bytes, options) => {
+      active++;
+      try {
+        if (key === slices[0].key) throw new Error("slice failed");
+        await new Promise((resolve) => setTimeout(resolve, 5));
+        await put(key, bytes, options);
+      } finally { active--; }
+    };
+    await expect(pushPrivateR2Snapshot({ objects: [...slices, objects[0]], manifestKey, store })).rejects.toThrow("slice failed");
+    expect(active).toBe(0);
+    expect(calls).not.toContain(`PUT ${manifestKey}`);
+    expect(calls.filter((call) => call.startsWith("PUT"))).toHaveLength(3);
+  });
   it("permits changed objects only with explicit overwrite flag", async () => {
     const { store, remote } = fixture([[dataKey, Buffer.from("older")]]);
     await pushPrivateR2Snapshot({ objects, manifestKey, store, allowAuthoritativeOverwrite: true });

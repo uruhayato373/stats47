@@ -18,6 +18,14 @@ WindowsのSVG復元は `path.basename()` を使う。`split('/')` はWindows区�
 
 **認証の期限切れ**: 保存済みOAuth tokenを読むだけでは、時間が経つとprivate画像が502になることを実測した。`cover-storage.mjs`は期限前に非対話のWrangler更新を行い、同時画像取得は1回の更新を共有し、更新後のtokenを毎回読み直す。子プロセスもTLS検証を有効にし、Windowsの公開CAファイルは更新後に削除する。失効などで更新不能なら停止して接続案内を出す。並行12読取・token変更・更新失敗をfixtureで検査し、実際の期限切れからの再取得も確認済み。
 
+**2026-11-14 共通private R2クライアントの期限境界**:
+- **問題**: 長時間の表転送が、認証の実際の失効前に `session expired` で止まった。
+- **原因**: 共通クライアントは残り30秒で更新を要求するが、Wranglerの `whoami` はまだ有効なtokenを更新しない。その結果、更新後の検査でも残り30秒以内となり、更新不能と誤判定した。
+- **対策**: `packages/r2-storage/src/lib/clients/private-r2-store.mjs` の共有更新Promiseで、期限直前なら実際の期限+1秒まで待って既存の非対話更新を実行する。同時要求も同じ更新を待つ。GETのHTTP500は502/503/504と同じ上限付き再試行に含め、書き込みは単独再試行しない。表転送の再開はCLIの全キー事前照合を通し、同じSHAをスキップして未保存キーだけ追加する。
+- **証拠**: `private-r2-store.test.ts` の期限20秒前・同時2要求のfake timer検査、`push-private-r2-snapshot.test.ts` の既存キー保護と失敗時の完了待ち、note `cover-assets.test.mjs` の回帰検査。実際の期限後の読み取りでも非対話更新の成功を確認した。
+
+同日の大量転送では、4並列でもR2 RESTの事前照合がHTTP429で止まった。応答ヘッダー `RateLimit-Policy: "rtwo_gw_apigw";q=1200;w=300` で300秒あたり1,200要求と確認した。並列数だけで要求頻度を管理しない。表の転送・一致検査CLIは共通クライアントのbulk間隔 (350ms) を指定し、GETの429はサーバーの待機秒数に従って上限2回だけ再試行する。書き込みの単独再試行はしない。通常の画像読み取りは既定の間隔を変えず、bulkだけに適用する。fake timerで並行GET/PUTの開始間隔、429の待機・上限・書き込み非再試行を検査する。
+
 - (2026-10-13 以降は docs/31 を git に置かないので、PNG の追跡・予算の話は過去の経緯。記事の画像は R2 に保存される → [[project_note_article_ledger]]) 当時の整理: 追跡PNG 682枚→104枚(product-salesのみ)。SVG由来(家計・koumuin)は `npm run note:images:regen -- --slug <dir>`、ランキング記事(a-<key> 15本)は `node .claude/scripts/note/render-ranking-images.mjs <key>` で作り直す。後者は `chart-data.json`(unit追加済み)+`render-spec.json`(SHA・テンプレート版)が根拠。テンプレートを変えたら `note-render-spec.mjs` の `NOTE_RENDER_TEMPLATE_VERSION` を上げる。
 - ランキング画像は note専用テンプレート(`apps/remotion/src/features/ranking-note/`)。色は値でなく順位で決める(外れ値1県で他が同色になるため)。ranking-x共有部品は変えず、RankingBoxplotにopt-in propだけ足した。
 - 「画像はGoogle Drive」は採らなかった。重さの主因が再生成可能PNGで、R2 outbox(sync-note-r2)とDBレス方針もあるため。

@@ -14,6 +14,8 @@ import { S3Client, HeadObjectCommand, GetObjectCommand, PutObjectCommand, Delete
 import { fileURLToPath } from 'node:url';
 const REPO_ROOT = fileURLToPath(new URL('../../../../../', import.meta.url));
 const LIMIT = 16 * 1024 * 1024;
+// R2's REST gateway advertises 1,200 requests / 300 seconds; bulk jobs leave headroom.
+export const R2_BULK_REQUEST_INTERVAL_MS = 350;
 const pendingRefreshes = new Map();
 const runFile = promisify(execFile);
 
@@ -58,7 +60,7 @@ export function wranglerConfigFile({ platform = process.platform, env = process.
   return path.join(base, 'config/default.toml');
 }
 
-/** Renew only the existing session, non-interactively. Concurrent image reads share one renewal. */
+/** Renew only the existing session, non-interactively. Concurrent requests share one renewal. */
 export function wranglerTokenProvider(config, renew = renewWranglerSession) {
   function credential() {
     const auth = fs.readFileSync(config, 'utf8');
@@ -66,14 +68,20 @@ export function wranglerTokenProvider(config, renew = renewWranglerSession) {
     if (!token) throw Error('private R2 authentication unavailable');
     const oauth = /^oauth_token\s*=/m.test(auth);
     const expires = Date.parse(/^expiration_time\s*=\s*"([^"]+)"/m.exec(auth)?.[1] ?? '');
-    return { token, expired: oauth && (!Number.isFinite(expires) || expires <= Date.now() + 30000) };
+    return { token, expires, expired: oauth && (!Number.isFinite(expires) || expires <= Date.now() + 30000) };
   }
   return async function token() {
     const current = credential();
     if (current.expired) {
       let pending = pendingRefreshes.get(config);
       if (!pending) {
-        pending = Promise.resolve().then(renew).finally(() => pendingRefreshes.delete(config));
+        pending = Promise.resolve().then(async () => {
+          // `whoami` may leave a still-valid token unchanged. Wait out the 30-second safety
+          // window before asking Wrangler to refresh, instead of rejecting that valid token.
+          const delay = current.expires - Date.now() + 1000;
+          if (Number.isFinite(delay) && delay > 0) await new Promise((resolve) => setTimeout(resolve, delay));
+          await renew();
+        }).finally(() => pendingRefreshes.delete(config));
         pendingRefreshes.set(config, pending);
       }
       try { await pending; } catch (error) {
@@ -107,7 +115,16 @@ export async function retryRemoteRead(read, method = 'GET', wait = (ms) => new P
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
       const result = await read();
-      if (method !== 'GET' || ![502, 503, 504].includes(result.status) || attempt === 2) return result;
+      if (method === 'GET' && result.status === 429 && attempt < 2) {
+        const header = result.headers?.['retry-after'];
+        const seconds = typeof header === 'string' && /^\d+$/.test(header) ? Number(header) : NaN;
+        const reset = /(?:^|;)\s*t=(\d+)/.exec(String(result.headers?.ratelimit ?? ''));
+        const delay = Number.isFinite(seconds) ? seconds * 1000 : reset ? Number(reset[1]) * 1000 : NaN;
+        if (!Number.isSafeInteger(delay) || delay < 0 || delay > 3_600_000) return result; // No guessed or overflowing wait.
+        await wait(Math.max(1000, delay));
+        continue;
+      }
+      if (method !== 'GET' || ![500, 502, 503, 504].includes(result.status) || attempt === 2) return result;
     } catch (error) {
       if (method !== 'GET' || attempt === 2 ||
         (!['ECONNRESET', 'ETIMEDOUT', 'EPIPE', 'ECONNABORTED'].includes(error.code)
@@ -117,7 +134,10 @@ export async function retryRemoteRead(read, method = 'GET', wait = (ms) => new P
   }
 }
 export function request(url, options = {}) {
-  return retryRemoteRead(() => requestOnce(url, options), options.method ?? 'GET');
+  return retryRemoteRead(async () => {
+    await options.beforeRequest?.();
+    return requestOnce(url, options);
+  }, options.method ?? 'GET');
 }
 function requestOnce(url, { method = 'GET', body, headers = {}, maxBytes = LIMIT } = {}) {
   return new Promise((resolve, reject) => {
@@ -150,8 +170,9 @@ export const r2ContentType = (key) => CONTENT_TYPES[path.extname(key).toLowerCas
  * One R2 bucket. writeOnce refuses to replace an existing object (covers and archives are immutable).
  * Listing needs S3 credentials; the Wrangler fallback can read, write and delete single objects only.
  */
-export function createR2Store({ bucket, writeOnce = false, maxBytes = LIMIT }) {
+export function createR2Store({ bucket, writeOnce = false, maxBytes = LIMIT, minimumRequestIntervalMs = 0 }) {
   if (!Number.isSafeInteger(maxBytes) || maxBytes < 1) throw Error('R2 read size limit must be a positive integer');
+  if (!Number.isSafeInteger(minimumRequestIntervalMs) || minimumRequestIntervalMs < 0) throw Error('Invalid R2 request interval');
   const endpoint = process.env.R2_S3_ENDPOINT;
   const accessKeyId = process.env.R2_ACCESS_KEY_ID;
   const secretAccessKey = process.env.R2_SECRET_ACCESS_KEY;
@@ -203,11 +224,19 @@ export function createR2Store({ bucket, writeOnce = false, maxBytes = LIMIT }) {
   const config = wranglerConfigFile();
   if (!fs.existsSync(config)) throw Error('R2 authentication unavailable (S3 or wrangler login required)');
   const token = wranglerTokenProvider(config);
+  let nextRequestAt = 0;
+  const beforeRequest = async () => {
+    if (!minimumRequestIntervalMs) return;
+    const now = Date.now();
+    const start = Math.max(now, nextRequestAt);
+    nextRequestAt = start + minimumRequestIntervalMs;
+    if (start > now) await new Promise((resolve) => setTimeout(resolve, start - now));
+  };
   // Authorization is confined to the Cloudflare API; never persisted in the ledger or returned to the UI.
   let account = process.env.CLOUDFLARE_ACCOUNT_ID;
   async function api(resource, options = {}) {
     return request(`https://api.cloudflare.com/client/v4${resource}`, {
-      maxBytes, ...options, headers: { ...options.headers, authorization: `Bearer ${await token()}` },
+      maxBytes, ...options, beforeRequest, headers: { ...options.headers, authorization: `Bearer ${await token()}` },
     });
   }
   async function objectPath(key) {

@@ -830,6 +830,7 @@ updated: 2026-11-01
 
 - **済み (2026-11-13・`3d5c87fd9`)**: e-Stat `0004032502` は年計・四半期・月次を 1 つの表に持ち、`timeScope` 未指定のため 2025 年 1 月の月間値 (東京都 155,869 百万円) を年の値として採っていた。単位と換算 0.01 は正しい。`source.timeScope` を `annual`、年を台帳の年計の範囲 2022〜2024 に直した。
 - **残り (R2 への書き込みが要る)**: main へ入った後に CI で再取り込みする。配信中の値はそれまで月間値のまま。再取り込み後に、表示単位の台帳 (`data/metrics/display-units/ledger.json`・週次生成) と、値を含む SEO 文字列を作り直す (`seo-meta-facts` のゲートは R2 の配信値と照合するので、それまで値を載せられない)。
+- **再観測 (2026-11-15)**: 表切片との一致検査で、公開2025年度の47県値が原表の `2025000101` (2025年1月) と全件一致。現在の `timeScope: annual` は2022〜2024年の141行を生成し、公開値との共通年がない。表更新日2026-01-15は公開値生成日2026-11-05より前なので、版更新ではなく既知の取り出し条件差として表 `0004032502` は `pushed` に保留。原表の年計名は「年」だが生成物は「年度」のため、再取り込み前に年名も確認する。再現: `node --import tsx packages/data-configs/scripts/verify-table-snapshot-equivalence.ts --table 0004032502 --mark-verified`。
 - **あわせて確かめる**: 百貨店・スーパー販売額 (`department-supermarket-sales`・`0004032493`) は台帳で 2025 年が 20 県分しか無い。同じ取り出し条件の問題かは未確認。
 - **完了条件**: 配信中の値が年計になり、値・単位・説明・SEO 文字列が一致している。
 
@@ -3507,6 +3508,7 @@ updated: 2026-11-01
 - **残り**:
   ① `private-life-insurance-contracts-per-1000` は通信の失敗で未取り込み。取り込み直しの依頼は `b7a0c6181` で `data/data-refresh-requests.json` に積んだので、反映を確かめる。
   ② 取り込み中に `employment-insurance-daily-receipt-rate` (単位 %) の最大値が 1,545.5 → 5,025 に増えた (allowlist は legitimate で通過。中身は未確認)。
+  2026-11-14 再観測: `node --import tsx packages/data-configs/scripts/verify-table-snapshot-equivalence.ts --table 0000010206 --mark-verified` は形状検査で出力を作らず、同指標の読み取りが `ENOENT`。公開1,081行 (1990〜2023年) と切片からの再生成1,692行 (1975〜2023年) は共有行すべて一致し、差は追加611行だけ。石川県1979年の5,025%がallowlistの観測最大1,545.5%を超える。年範囲と日雇受給率の定義を確認するまで形状検査を迂回せず、表台帳は `pushed` に留める。
   ③ `LATEST.md` の「e-Stat に無い年がある」13 件と「台帳なし・取得失敗・打ち切り・重複行」1 件 (`convenience-store-sales` の `timeScope` 未指定) を解く。年の問題より取り出し条件の問題が多い (職業別年収は設定 2010 年〜だが条件 0003445758 は 2020 年〜など)。
   ④ 単年の旧監査 (`audit-estat-year-coverage.ts` と `YEAR-COV-*` の自動起票・`assert-year-coverage-batch.ts`) は一部の県だけの年の判断にしか使わなくなったので、backlog-loop とのつながりを外して廃止するかを決める。
   ⑤ 市区町村の値 (`cities.json`) も台帳の差分の対象に載せるかを決める (今は報告だけ。ページへの配線の残りは `YEARS-DOWNSTREAM-FOLLOW-01`)。
