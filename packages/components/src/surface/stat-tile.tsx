@@ -30,9 +30,12 @@ const STAT_VALUE_WIDE_CLASS = "@[12rem]/stat-tile:text-2xl @[12rem]/stat-tile:le
  * 幅の狭いタイルでの値の文字の大きさ。1 マスの中身は約 146px (幅 390px の画面で 2 列) なので、桁の多い値ほど小さくして
  * 1 行に収める: 10 文字まで 20px、11〜12 文字 18px、13 文字以上 16px (等幅数字の実測。「113,039,852」は 11 文字)。
  * 文字でない値 (部品) は 20px。
+ * 15 文字以上 (丸める前の検算の値「14,047,593.9969」など) は 14px にし、幅の広いタイルでも 24px に戻さず 16px に留める
+ * (24px だと 4 列の 1 マスでも数字の途中で折り返す)。
  */
 function narrowValueClass(value: ReactNode): string {
   const length = typeof value === "string" || typeof value === "number" ? String(value).length : 0;
+  if (length >= 15) return "text-sm leading-7 @[12rem]/stat-tile:text-base";
   const size = length >= 13 ? "text-base leading-7" : length >= 11 ? "text-lg leading-7" : "text-xl leading-7";
   return `${size} ${STAT_VALUE_WIDE_CLASS}`;
 }

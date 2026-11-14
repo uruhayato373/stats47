@@ -19,7 +19,7 @@
  *
  * 使い方:
  *   node .claude/scripts/themes/measure-theme-weight.mjs [--base-url <既定は本番>] [--area 13000]
- *     [--widths 390,1280] [--themes a,b,c] [--concurrency 4] [--out <file>]
+ *     [--widths 390,1280] [--themes a,b,c] [--concurrency 4] [--timeout 60000] [--out <file>]
  * 既定の出力は OS の一時領域の stats47-theme-weight/<日付>.json。前後の比較の基準として残す回は
  *   --out data/themes/ui-weight/<日付>.json (台帳 themes.ui-weight) を指定する。
  */
@@ -45,7 +45,7 @@ function areaExcludedThemeKeys() {
 }
 
 function parseArgs(argv) {
-  const args = { baseUrl: siteConfig.SITE_ORIGIN, area: "13000", widths: [390, 1280], concurrency: 4, themes: null };
+  const args = { baseUrl: siteConfig.SITE_ORIGIN, area: "13000", widths: [390, 1280], concurrency: 4, themes: null, timeout: 60000 };
   const rest = [...argv];
   while (rest.length) {
     const a = rest.shift();
@@ -55,6 +55,8 @@ function parseArgs(argv) {
     else if (a === "--themes") args.themes = rest.shift().split(",");
     else if (a === "--concurrency") args.concurrency = Number(rest.shift());
     else if (a === "--out") args.out = rest.shift();
+    // 手元の開発サーバーは初回のコンパイルが遅い。時間切れを「ページが開かない」と数えないよう延ばせる
+    else if (a === "--timeout") args.timeout = Number(rest.shift());
     else throw new Error(`不明な引数: ${a}`);
   }
   args.out ??= path.join(tmpdir(), "stats47-theme-weight", `${new Date().toISOString().slice(0, 10)}.json`);
@@ -89,19 +91,42 @@ function measureInPage() {
   const tiles = all('[data-slot-kind="stat-tile"]');
   const tileValue = (tile) => tile.querySelector("dl > dd > span");
   const emptyTiles = tiles.filter((tile) => tileValue(tile)?.textContent.trim() === "—");
+  // 文字の節の中で、数字の並び (桁区切り・小数点を含む) の途中で行が変わっているか。
+  // 「1,611 / 95」が空白で改行するのは数えない (数字は割れていない)
+  const breaksInsideNumber = (textNode) => {
+    const text = textNode.textContent;
+    const topOf = (i) => {
+      const range = document.createRange();
+      range.setStart(textNode, i);
+      range.setEnd(textNode, i + 1);
+      const rect = range.getClientRects()[0];
+      return rect ? Math.round(rect.top) : null;
+    };
+    for (let i = 1; i < text.length; i += 1) {
+      if (!/[\d,.]/.test(text[i - 1]) || !/[\d,.]/.test(text[i])) continue;
+      const a = topOf(i - 1), b = topOf(i);
+      if (a !== null && b !== null && a !== b) return true;
+    }
+    return false;
+  };
+  const textNodesOf = (el) => [...el.childNodes].filter((n) => n.nodeType === Node.TEXT_NODE && /\d/.test(n.textContent));
   // タイルの値は「数字 + 単位」。数字の文字の節だけを見て、単位が次の行へ回るのは数えない
-  const brokenTileNumbers = tiles.filter((tile) => {
-    const number = [...(tileValue(tile)?.childNodes ?? [])].find((n) => n.nodeType === Node.TEXT_NODE && /\d/.test(n.textContent));
-    return number ? lineCount(number) > 1 : false;
-  });
+  const brokenTileNumbers = tiles.filter((tile) => textNodesOf(tileValue(tile) ?? tile.ownerDocument.createElement("i")).some(breaksInsideNumber));
   const brokenCellNumbers = tables.flatMap((t) => [...t.querySelectorAll("tbody td")]).filter(
-    (cell) => visible(cell) && cell.children.length === 0 && /^[\d,.\-−+%]+$/.test(cell.textContent.trim()) && lineCount(cell) > 1,
+    (cell) => visible(cell) && cell.children.length === 0 && textNodesOf(cell).some(breaksInsideNumber),
   );
+  // 1 列目の「名前」が 1 行 4 文字未満で折り返しているか。名前の下に小さく添えた補足 (<small class="block"> の年・県名) は
+  // 意図した 2 段目なので数えない
   const narrowFirstColumnRows = tables.flatMap((t) => [...t.querySelectorAll("tbody tr")]).filter((row) => {
     const cell = row.querySelector("th, td");
     if (!cell || !visible(cell)) return false;
-    const chars = cell.textContent.replace(/\s+/g, "").length;
-    const lines = lineCount(cell);
+    const name = [...cell.childNodes].filter((n) => !(n.nodeType === Node.ELEMENT_NODE && n.tagName === "SMALL"));
+    const chars = name.map((n) => n.textContent).join("").replace(/\s+/g, "").length;
+    if (chars === 0) return false;
+    const range = document.createRange();
+    range.setStartBefore(name[0]);
+    range.setEndAfter(name[name.length - 1]);
+    const lines = new Set([...range.getClientRects()].filter((r) => r.width > 0).map((r) => Math.round(r.top))).size;
     return lines > 1 && chars / lines < 4;
   });
   const overflowX = document.documentElement.scrollWidth - document.documentElement.clientWidth;
@@ -147,11 +172,11 @@ function measureInPage() {
   };
 }
 
-async function measureOne(browser, url, width) {
+async function measureOne(browser, url, width, timeout) {
   const context = await browser.newContext({ viewport: { width, height: width < 700 ? 844 : 900 }, locale: "ja-JP" });
   const page = await context.newPage();
   try {
-    const response = await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 });
+    const response = await page.goto(url, { waitUntil: "domcontentloaded", timeout });
     const status = response?.status() ?? null;
     if (status !== 200) return { status, violations: ["not-200"] };
     // 図は後から描かれるので、通信が落ち着くまで待つ (落ち着かなくても測る)
@@ -181,7 +206,7 @@ async function main() {
     Array.from({ length: Math.min(args.concurrency, jobs.length) }, async () => {
       while (next < jobs.length) {
         const job = jobs[next++];
-        rows.push({ themeKey: job.themeKey, route: job.route, width: job.width, ...(await measureOne(browser, job.url, job.width)) });
+        rows.push({ themeKey: job.themeKey, route: job.route, width: job.width, ...(await measureOne(browser, job.url, job.width, args.timeout)) });
         if (rows.length % 20 === 0) console.error(`${rows.length}/${jobs.length}`);
       }
     }),
