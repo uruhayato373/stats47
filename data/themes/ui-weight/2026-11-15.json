@@ -1,0 +1,6619 @@
+{
+  "measuredAt": "2026-11-14T23:08:58.239Z",
+  "baseUrl": "https://stats47.jp",
+  "area": "13000",
+  "widths": [
+    390,
+    1280
+  ],
+  "rows": [
+    {
+      "themeKey": "aging-society",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 6733,
+      "screens": 8,
+      "textChars": 2012,
+      "h2": 10,
+      "charts": 1,
+      "kpiCards": 3,
+      "components": 6,
+      "tables": 3,
+      "tableRows": 26,
+      "firstScreen": {
+        "textChars": 313,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 5,
+        "firstScreenTiles": 1,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-first-screen-tiles"
+      ]
+    },
+    {
+      "themeKey": "aging-society",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 6080,
+      "screens": 6.8,
+      "textChars": 2012,
+      "h2": 10,
+      "charts": 1,
+      "kpiCards": 3,
+      "components": 6,
+      "tables": 3,
+      "tableRows": 26,
+      "firstScreen": {
+        "textChars": 377,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 5,
+        "firstScreenTiles": 1,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-first-screen-tiles"
+      ]
+    },
+    {
+      "themeKey": "aging-society",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 7973,
+      "screens": 9.4,
+      "textChars": 2286,
+      "h2": 12,
+      "charts": 3,
+      "kpiCards": 7,
+      "components": 12,
+      "tables": 2,
+      "tableRows": 16,
+      "firstScreen": {
+        "textChars": 260,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 11,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "aging-society",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 7334,
+      "screens": 8.1,
+      "textChars": 2349,
+      "h2": 12,
+      "charts": 3,
+      "kpiCards": 7,
+      "components": 12,
+      "tables": 2,
+      "tableRows": 16,
+      "firstScreen": {
+        "textChars": 383,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 11,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "agriculture-production",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 3016,
+      "screens": 3.6,
+      "textChars": 638,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 4,
+      "components": 4,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 170,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 4,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "agriculture-production",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 2157,
+      "screens": 2.4,
+      "textChars": 638,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 4,
+      "components": 4,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 192,
+        "charts": 0,
+        "kpiCards": 4,
+        "components": 4
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 4,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "agriculture-production",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 4377,
+      "screens": 5.2,
+      "textChars": 975,
+      "h2": 8,
+      "charts": 0,
+      "kpiCards": 10,
+      "components": 10,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 233,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 11,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "agriculture-production",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 3398,
+      "screens": 3.8,
+      "textChars": 1000,
+      "h2": 8,
+      "charts": 0,
+      "kpiCards": 10,
+      "components": 10,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 233,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 11,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "business-demography",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 2180,
+      "screens": 2.6,
+      "textChars": 613,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 4,
+      "components": 4,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 250,
+        "charts": 0,
+        "kpiCards": 4,
+        "components": 4
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 4,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "business-demography",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 2251,
+      "screens": 2.5,
+      "textChars": 613,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 4,
+      "components": 4,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 336,
+        "charts": 0,
+        "kpiCards": 4,
+        "components": 4
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 4,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "business-demography",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 3498,
+      "screens": 4.1,
+      "textChars": 880,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 9,
+      "components": 9,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 213,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 10,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "business-demography",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 3418,
+      "screens": 3.8,
+      "textChars": 920,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 9,
+      "components": 9,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 213,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 10,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "childcare-services",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 3131,
+      "screens": 3.7,
+      "textChars": 708,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 4,
+      "components": 4,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 159,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 4,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "childcare-services",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 2248,
+      "screens": 2.5,
+      "textChars": 708,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 4,
+      "components": 4,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 258,
+        "charts": 0,
+        "kpiCards": 4,
+        "components": 4
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 4,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "childcare-services",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 3595,
+      "screens": 4.3,
+      "textChars": 834,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 7,
+      "components": 7,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 222,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 7,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "childcare-services",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 2706,
+      "screens": 3,
+      "textChars": 854,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 7,
+      "components": 7,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 353,
+        "charts": 0,
+        "kpiCards": 5,
+        "components": 5
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 7,
+        "firstScreenTiles": 5,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "climate",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 3688,
+      "screens": 4.4,
+      "textChars": 1588,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 0,
+      "components": 0,
+      "tables": 2,
+      "tableRows": 9,
+      "firstScreen": {
+        "textChars": 621,
+        "charts": 0,
+        "kpiCards": 0,
+        "components": 0
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 0,
+        "firstScreenTiles": 0,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-tiles-available"
+      ]
+    },
+    {
+      "themeKey": "climate",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 3102,
+      "screens": 3.4,
+      "textChars": 1716,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 0,
+      "components": 0,
+      "tables": 2,
+      "tableRows": 9,
+      "firstScreen": {
+        "textChars": 932,
+        "charts": 0,
+        "kpiCards": 0,
+        "components": 0
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 0,
+        "firstScreenTiles": 0,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-tiles-available"
+      ]
+    },
+    {
+      "themeKey": "climate",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 7846,
+      "screens": 9.3,
+      "textChars": 2671,
+      "h2": 13,
+      "charts": 1,
+      "kpiCards": 7,
+      "components": 8,
+      "tables": 2,
+      "tableRows": 9,
+      "firstScreen": {
+        "textChars": 145,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 11,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "climate",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 6804,
+      "screens": 7.6,
+      "textChars": 2723,
+      "h2": 13,
+      "charts": 1,
+      "kpiCards": 7,
+      "components": 8,
+      "tables": 2,
+      "tableRows": 9,
+      "firstScreen": {
+        "textChars": 155,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 11,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "communication-access",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 2995,
+      "screens": 3.5,
+      "textChars": 807,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 3,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 228,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 3,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "communication-access",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 2097,
+      "screens": 2.3,
+      "textChars": 807,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 3,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 247,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 3,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "communication-access",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 4084,
+      "screens": 4.8,
+      "textChars": 997,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 6,
+      "components": 6,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 271,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 7,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "communication-access",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 3272,
+      "screens": 3.6,
+      "textChars": 1025,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 6,
+      "components": 6,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 301,
+        "charts": 0,
+        "kpiCards": 4,
+        "components": 4
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 7,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "community-participation",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 3680,
+      "screens": 4.4,
+      "textChars": 957,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 4,
+      "components": 4,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 208,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 5,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "community-participation",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 2961,
+      "screens": 3.3,
+      "textChars": 975,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 4,
+      "components": 4,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 197,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 5,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "community-participation",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 3956,
+      "screens": 4.7,
+      "textChars": 998,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 5,
+      "components": 5,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 222,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 6,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "community-participation",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 3132,
+      "screens": 3.5,
+      "textChars": 1025,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 5,
+      "components": 5,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 222,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 6,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "construction-industry",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 3991,
+      "screens": 4.7,
+      "textChars": 1045,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 7,
+      "components": 7,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 171,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 8,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "construction-industry",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 3200,
+      "screens": 3.6,
+      "textChars": 1045,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 7,
+      "components": 7,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 148,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 8,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "construction-industry",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 5238,
+      "screens": 6.2,
+      "textChars": 1223,
+      "h2": 8,
+      "charts": 1,
+      "kpiCards": 10,
+      "components": 11,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 243,
+        "charts": 0,
+        "kpiCards": 4,
+        "components": 4
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 11,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "construction-industry",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 4147,
+      "screens": 4.6,
+      "textChars": 1253,
+      "h2": 8,
+      "charts": 1,
+      "kpiCards": 10,
+      "components": 11,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 317,
+        "charts": 0,
+        "kpiCards": 5,
+        "components": 5
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 11,
+        "firstScreenTiles": 6,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "consumer-prices",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 3212,
+      "screens": 3.8,
+      "textChars": 784,
+      "h2": 7,
+      "charts": 2,
+      "kpiCards": 0,
+      "components": 3,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 149,
+        "charts": 2,
+        "kpiCards": 0,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 0,
+        "firstScreenTiles": 0,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-tiles-available"
+      ]
+    },
+    {
+      "themeKey": "consumer-prices",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 2515,
+      "screens": 2.8,
+      "textChars": 784,
+      "h2": 7,
+      "charts": 2,
+      "kpiCards": 0,
+      "components": 3,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 157,
+        "charts": 2,
+        "kpiCards": 0,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 0,
+        "firstScreenTiles": 0,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-tiles-available"
+      ]
+    },
+    {
+      "themeKey": "consumer-prices",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 5607,
+      "screens": 6.6,
+      "textChars": 1369,
+      "h2": 10,
+      "charts": 2,
+      "kpiCards": 4,
+      "components": 7,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 235,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 7,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "consumer-prices",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 5493,
+      "screens": 6.1,
+      "textChars": 2164,
+      "h2": 10,
+      "charts": 2,
+      "kpiCards": 4,
+      "components": 7,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 219,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 7,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "cultural-participation",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 4275,
+      "screens": 5.1,
+      "textChars": 1039,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 7,
+      "components": 7,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 202,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 10,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "cultural-participation",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 3872,
+      "screens": 4.3,
+      "textChars": 1088,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 7,
+      "components": 7,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 202,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 10,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "cultural-participation",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 4756,
+      "screens": 5.6,
+      "textChars": 1175,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 9,
+      "components": 9,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 225,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 13,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "cultural-participation",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 4136,
+      "screens": 4.6,
+      "textChars": 1207,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 9,
+      "components": 9,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 245,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 13,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "daily-time-use",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 5185,
+      "screens": 6.1,
+      "textChars": 1072,
+      "h2": 8,
+      "charts": 0,
+      "kpiCards": 7,
+      "components": 7,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 181,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 11,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "daily-time-use",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 5065,
+      "screens": 5.6,
+      "textChars": 1078,
+      "h2": 8,
+      "charts": 0,
+      "kpiCards": 7,
+      "components": 7,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 196,
+        "charts": 0,
+        "kpiCards": 4,
+        "components": 4
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 11,
+        "firstScreenTiles": 5,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "daily-time-use",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 5362,
+      "screens": 6.4,
+      "textChars": 1204,
+      "h2": 8,
+      "charts": 0,
+      "kpiCards": 8,
+      "components": 8,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 227,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 13,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "daily-time-use",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 5441,
+      "screens": 6,
+      "textChars": 1211,
+      "h2": 8,
+      "charts": 0,
+      "kpiCards": 8,
+      "components": 8,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 227,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 13,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "disability-support",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 2957,
+      "screens": 3.5,
+      "textChars": 799,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 3,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 210,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 5,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "disability-support",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 3021,
+      "screens": 3.4,
+      "textChars": 811,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 3,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 238,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 5,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "disability-support",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 3102,
+      "screens": 3.7,
+      "textChars": 883,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 5,
+      "components": 5,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 264,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 7,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "disability-support",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 2951,
+      "screens": 3.3,
+      "textChars": 908,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 5,
+      "components": 5,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 354,
+        "charts": 0,
+        "kpiCards": 5,
+        "components": 5
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 7,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "earthquake-exposure",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 2960,
+      "screens": 3.5,
+      "textChars": 1102,
+      "h2": 5,
+      "charts": 0,
+      "kpiCards": 0,
+      "components": 0,
+      "tables": 2,
+      "tableRows": 16,
+      "firstScreen": {
+        "textChars": 169,
+        "charts": 0,
+        "kpiCards": 0,
+        "components": 0
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 0,
+        "firstScreenTiles": 0,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-tiles-available"
+      ]
+    },
+    {
+      "themeKey": "earthquake-exposure",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 2413,
+      "screens": 2.7,
+      "textChars": 1102,
+      "h2": 5,
+      "charts": 0,
+      "kpiCards": 0,
+      "components": 0,
+      "tables": 2,
+      "tableRows": 16,
+      "firstScreen": {
+        "textChars": 202,
+        "charts": 0,
+        "kpiCards": 0,
+        "components": 0
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 0,
+        "firstScreenTiles": 0,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-tiles-available"
+      ]
+    },
+    {
+      "themeKey": "earthquake-exposure",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 3388,
+      "screens": 4,
+      "textChars": 1185,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 4,
+      "components": 4,
+      "tables": 2,
+      "tableRows": 16,
+      "firstScreen": {
+        "textChars": 242,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 4,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "earthquake-exposure",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 2762,
+      "screens": 3.1,
+      "textChars": 1185,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 4,
+      "components": 4,
+      "tables": 2,
+      "tableRows": 16,
+      "firstScreen": {
+        "textChars": 261,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 4,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "education-culture",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 8970,
+      "screens": 10.6,
+      "textChars": 2896,
+      "h2": 12,
+      "charts": 2,
+      "kpiCards": 16,
+      "components": 18,
+      "tables": 3,
+      "tableRows": 18,
+      "firstScreen": {
+        "textChars": 265,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 20,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "education-culture",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 8115,
+      "screens": 9,
+      "textChars": 2951,
+      "h2": 12,
+      "charts": 2,
+      "kpiCards": 16,
+      "components": 18,
+      "tables": 3,
+      "tableRows": 18,
+      "firstScreen": {
+        "textChars": 265,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 20,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "education-culture",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 9287,
+      "screens": 11,
+      "textChars": 2977,
+      "h2": 12,
+      "charts": 2,
+      "kpiCards": 16,
+      "components": 18,
+      "tables": 3,
+      "tableRows": 22,
+      "firstScreen": {
+        "textChars": 265,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 20,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "education-culture",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 8315,
+      "screens": 9.2,
+      "textChars": 3044,
+      "h2": 12,
+      "charts": 2,
+      "kpiCards": 16,
+      "components": 18,
+      "tables": 3,
+      "tableRows": 22,
+      "firstScreen": {
+        "textChars": 265,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 20,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "environmental-quality",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 2685,
+      "screens": 3.2,
+      "textChars": 694,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 1,
+      "components": 1,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 257,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 1,
+        "firstScreenTiles": 1,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-tiles-available"
+      ]
+    },
+    {
+      "themeKey": "environmental-quality",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 1891,
+      "screens": 2.1,
+      "textChars": 694,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 1,
+      "components": 1,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 326,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 1,
+        "firstScreenTiles": 1,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-tiles-available"
+      ]
+    },
+    {
+      "themeKey": "environmental-quality",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 3513,
+      "screens": 4.2,
+      "textChars": 926,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 6,
+      "components": 6,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 262,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 8,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "environmental-quality",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 2604,
+      "screens": 2.9,
+      "textChars": 932,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 6,
+      "components": 6,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 336,
+        "charts": 0,
+        "kpiCards": 6,
+        "components": 6
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 8,
+        "firstScreenTiles": 5,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "fishery-marine",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 4659,
+      "screens": 5.5,
+      "textChars": 876,
+      "h2": 8,
+      "charts": 0,
+      "kpiCards": 5,
+      "components": 5,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 117,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 8,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "fishery-marine",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 4546,
+      "screens": 5.1,
+      "textChars": 940,
+      "h2": 8,
+      "charts": 0,
+      "kpiCards": 5,
+      "components": 5,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 102,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 8,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "fishery-marine",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 5202,
+      "screens": 6.2,
+      "textChars": 986,
+      "h2": 9,
+      "charts": 1,
+      "kpiCards": 6,
+      "components": 7,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 145,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 9,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "fishery-marine",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 4914,
+      "screens": 5.5,
+      "textChars": 1058,
+      "h2": 9,
+      "charts": 1,
+      "kpiCards": 6,
+      "components": 7,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 154,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 9,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "foreign-residents",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 2905,
+      "screens": 3.4,
+      "textChars": 645,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 2,
+      "components": 2,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 99,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 3,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "foreign-residents",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 2474,
+      "screens": 2.7,
+      "textChars": 654,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 2,
+      "components": 2,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 99,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 3,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "foreign-residents",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 3949,
+      "screens": 4.7,
+      "textChars": 793,
+      "h2": 8,
+      "charts": 0,
+      "kpiCards": 4,
+      "components": 4,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 166,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 5,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "foreign-residents",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 3418,
+      "screens": 3.8,
+      "textChars": 830,
+      "h2": 8,
+      "charts": 0,
+      "kpiCards": 4,
+      "components": 4,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 192,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 5,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "forestry-timber",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 2516,
+      "screens": 3,
+      "textChars": 534,
+      "h2": 5,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 3,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 113,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 3,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "forestry-timber",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 1985,
+      "screens": 2.2,
+      "textChars": 534,
+      "h2": 5,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 3,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 244,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 3,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "forestry-timber",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 3945,
+      "screens": 4.7,
+      "textChars": 957,
+      "h2": 8,
+      "charts": 0,
+      "kpiCards": 13,
+      "components": 13,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 349,
+        "charts": 0,
+        "kpiCards": 6,
+        "components": 6
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 13,
+        "firstScreenTiles": 6,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "forestry-timber",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 3208,
+      "screens": 3.6,
+      "textChars": 979,
+      "h2": 8,
+      "charts": 0,
+      "kpiCards": 13,
+      "components": 13,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 428,
+        "charts": 0,
+        "kpiCards": 9,
+        "components": 9
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 13,
+        "firstScreenTiles": 9,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "freight-logistics",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 4217,
+      "screens": 5,
+      "textChars": 1182,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 5,
+      "components": 5,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 245,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 5,
+        "firstScreenTiles": 1,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-first-screen-tiles"
+      ]
+    },
+    {
+      "themeKey": "freight-logistics",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 3113,
+      "screens": 3.5,
+      "textChars": 1207,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 5,
+      "components": 5,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 600,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 5,
+        "firstScreenTiles": 1,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-first-screen-tiles"
+      ]
+    },
+    {
+      "themeKey": "freight-logistics",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 4659,
+      "screens": 5.5,
+      "textChars": 1680,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 7,
+      "components": 7,
+      "tables": 2,
+      "tableRows": 56,
+      "firstScreen": {
+        "textChars": 219,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 7,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "freight-logistics",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 3443,
+      "screens": 3.8,
+      "textChars": 1705,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 7,
+      "components": 7,
+      "tables": 2,
+      "tableRows": 56,
+      "firstScreen": {
+        "textChars": 259,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 7,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "gender-participation",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 3438,
+      "screens": 4.1,
+      "textChars": 771,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 3,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 154,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 5,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "gender-participation",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 2992,
+      "screens": 3.3,
+      "textChars": 791,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 3,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 148,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 5,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "gender-participation",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 4125,
+      "screens": 4.9,
+      "textChars": 970,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 7,
+      "components": 7,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 239,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 9,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "gender-participation",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 3654,
+      "screens": 4.1,
+      "textChars": 995,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 7,
+      "components": 7,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 239,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 9,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "geographic-access",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 5075,
+      "screens": 6,
+      "textChars": 1692,
+      "h2": 9,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 3,
+      "tables": 2,
+      "tableRows": 13,
+      "firstScreen": {
+        "textChars": 358,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 4,
+        "firstScreenTiles": 1,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-first-screen-tiles"
+      ]
+    },
+    {
+      "themeKey": "geographic-access",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 4005,
+      "screens": 4.5,
+      "textChars": 1728,
+      "h2": 9,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 3,
+      "tables": 2,
+      "tableRows": 13,
+      "firstScreen": {
+        "textChars": 467,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 4,
+        "firstScreenTiles": 1,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-first-screen-tiles"
+      ]
+    },
+    {
+      "themeKey": "geographic-access",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 8996,
+      "screens": 10.7,
+      "textChars": 3448,
+      "h2": 11,
+      "charts": 0,
+      "kpiCards": 6,
+      "components": 6,
+      "tables": 3,
+      "tableRows": 14,
+      "firstScreen": {
+        "textChars": 243,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 16,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "geographic-access",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 7082,
+      "screens": 7.9,
+      "textChars": 3448,
+      "h2": 11,
+      "charts": 0,
+      "kpiCards": 6,
+      "components": 6,
+      "tables": 3,
+      "tableRows": 14,
+      "firstScreen": {
+        "textChars": 244,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 16,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "health-checkups",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 3100,
+      "screens": 3.7,
+      "textChars": 1069,
+      "h2": 5,
+      "charts": 0,
+      "kpiCards": 0,
+      "components": 0,
+      "tables": 2,
+      "tableRows": 12,
+      "firstScreen": {
+        "textChars": 311,
+        "charts": 0,
+        "kpiCards": 0,
+        "components": 0
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 0,
+        "firstScreenTiles": 0,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-tiles-available"
+      ]
+    },
+    {
+      "themeKey": "health-checkups",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 2153,
+      "screens": 2.4,
+      "textChars": 1069,
+      "h2": 5,
+      "charts": 0,
+      "kpiCards": 0,
+      "components": 0,
+      "tables": 2,
+      "tableRows": 12,
+      "firstScreen": {
+        "textChars": 529,
+        "charts": 0,
+        "kpiCards": 0,
+        "components": 0
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 0,
+        "firstScreenTiles": 0,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-tiles-available"
+      ]
+    },
+    {
+      "themeKey": "health-checkups",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 4748,
+      "screens": 5.6,
+      "textChars": 1520,
+      "h2": 8,
+      "charts": 0,
+      "kpiCards": 10,
+      "components": 10,
+      "tables": 2,
+      "tableRows": 12,
+      "firstScreen": {
+        "textChars": 293,
+        "charts": 0,
+        "kpiCards": 4,
+        "components": 4
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 10,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "health-checkups",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 3460,
+      "screens": 3.8,
+      "textChars": 1522,
+      "h2": 8,
+      "charts": 0,
+      "kpiCards": 10,
+      "components": 10,
+      "tables": 2,
+      "tableRows": 12,
+      "firstScreen": {
+        "textChars": 327,
+        "charts": 0,
+        "kpiCards": 4,
+        "components": 4
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 10,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "healthcare",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 9316,
+      "screens": 11,
+      "textChars": 2515,
+      "h2": 13,
+      "charts": 0,
+      "kpiCards": 8,
+      "components": 10,
+      "tables": 3,
+      "tableRows": 69,
+      "firstScreen": {
+        "textChars": 203,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 9,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "healthcare",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 8606,
+      "screens": 9.6,
+      "textChars": 2515,
+      "h2": 13,
+      "charts": 0,
+      "kpiCards": 8,
+      "components": 10,
+      "tables": 3,
+      "tableRows": 69,
+      "firstScreen": {
+        "textChars": 180,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 9,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "healthcare",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 13194,
+      "screens": 15.6,
+      "textChars": 4009,
+      "h2": 18,
+      "charts": 4,
+      "kpiCards": 26,
+      "components": 32,
+      "tables": 3,
+      "tableRows": 69,
+      "firstScreen": {
+        "textChars": 341,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 29,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "healthcare",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 12449,
+      "screens": 13.8,
+      "textChars": 4052,
+      "h2": 18,
+      "charts": 4,
+      "kpiCards": 26,
+      "components": 32,
+      "tables": 3,
+      "tableRows": 69,
+      "firstScreen": {
+        "textChars": 320,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 29,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "household-assets-debt",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 5536,
+      "screens": 6.6,
+      "textChars": 1657,
+      "h2": 8,
+      "charts": 0,
+      "kpiCards": 7,
+      "components": 7,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 270,
+        "charts": 0,
+        "kpiCards": 4,
+        "components": 4
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 7,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "household-assets-debt",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 4010,
+      "screens": 4.5,
+      "textChars": 1657,
+      "h2": 8,
+      "charts": 0,
+      "kpiCards": 7,
+      "components": 7,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 318,
+        "charts": 0,
+        "kpiCards": 4,
+        "components": 4
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 7,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "household-assets-debt",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 4480,
+      "screens": 5.3,
+      "textChars": 1083,
+      "h2": 8,
+      "charts": 0,
+      "kpiCards": 10,
+      "components": 10,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 337,
+        "charts": 0,
+        "kpiCards": 6,
+        "components": 6
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 11,
+        "firstScreenTiles": 6,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "household-assets-debt",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 3688,
+      "screens": 4.1,
+      "textChars": 1104,
+      "h2": 8,
+      "charts": 0,
+      "kpiCards": 10,
+      "components": 10,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 400,
+        "charts": 0,
+        "kpiCards": 7,
+        "components": 7
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 11,
+        "firstScreenTiles": 8,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "household-food-spending",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 14798,
+      "screens": 17.5,
+      "textChars": 5245,
+      "h2": 17,
+      "charts": 0,
+      "kpiCards": 5,
+      "components": 6,
+      "tables": 18,
+      "tableRows": 61,
+      "firstScreen": {
+        "textChars": 410,
+        "charts": 0,
+        "kpiCards": 4,
+        "components": 4
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 5,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "household-food-spending",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 11607,
+      "screens": 12.9,
+      "textChars": 5219,
+      "h2": 17,
+      "charts": 0,
+      "kpiCards": 5,
+      "components": 6,
+      "tables": 18,
+      "tableRows": 61,
+      "firstScreen": {
+        "textChars": 412,
+        "charts": 0,
+        "kpiCards": 4,
+        "components": 4
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 5,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "household-food-spending",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 25988,
+      "screens": 30.8,
+      "textChars": 10446,
+      "h2": 20,
+      "charts": 20,
+      "kpiCards": 49,
+      "components": 70,
+      "tables": 28,
+      "tableRows": 148,
+      "firstScreen": {
+        "textChars": 460,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 49,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "household-food-spending",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 19497,
+      "screens": 21.7,
+      "textChars": 10595,
+      "h2": 20,
+      "charts": 20,
+      "kpiCards": 49,
+      "components": 70,
+      "tables": 28,
+      "tableRows": 148,
+      "firstScreen": {
+        "textChars": 646,
+        "charts": 0,
+        "kpiCards": 7,
+        "components": 7
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 49,
+        "firstScreenTiles": 7,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "information-industry",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 2863,
+      "screens": 3.4,
+      "textChars": 745,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 3,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 149,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 3,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "information-industry",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 2025,
+      "screens": 2.3,
+      "textChars": 745,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 3,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 216,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 3,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "information-industry",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 3095,
+      "screens": 3.7,
+      "textChars": 806,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 6,
+      "components": 6,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 231,
+        "charts": 0,
+        "kpiCards": 5,
+        "components": 5
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 6,
+        "firstScreenTiles": 5,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "information-industry",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 1956,
+      "screens": 2.2,
+      "textChars": 806,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 6,
+      "components": 6,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 321,
+        "charts": 0,
+        "kpiCards": 6,
+        "components": 6
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 6,
+        "firstScreenTiles": 6,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "innovation-patents",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 3165,
+      "screens": 3.7,
+      "textChars": 787,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 5,
+      "components": 5,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 202,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 7,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "innovation-patents",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 3120,
+      "screens": 3.5,
+      "textChars": 787,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 5,
+      "components": 5,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 229,
+        "charts": 0,
+        "kpiCards": 4,
+        "components": 4
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 7,
+        "firstScreenTiles": 5,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "innovation-patents",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 3175,
+      "screens": 3.8,
+      "textChars": 811,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 5,
+      "components": 5,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 227,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 7,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "innovation-patents",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 3050,
+      "screens": 3.4,
+      "textChars": 863,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 5,
+      "components": 5,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 299,
+        "charts": 0,
+        "kpiCards": 4,
+        "components": 4
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 7,
+        "firstScreenTiles": 5,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "labor-mobility",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 6627,
+      "screens": 7.9,
+      "textChars": 1464,
+      "h2": 10,
+      "charts": 0,
+      "kpiCards": 6,
+      "components": 8,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 214,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 7,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "labor-mobility",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 4903,
+      "screens": 5.4,
+      "textChars": 1490,
+      "h2": 10,
+      "charts": 0,
+      "kpiCards": 6,
+      "components": 8,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 248,
+        "charts": 0,
+        "kpiCards": 4,
+        "components": 4
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 7,
+        "firstScreenTiles": 5,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "labor-mobility",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 6772,
+      "screens": 8,
+      "textChars": 1817,
+      "h2": 12,
+      "charts": 0,
+      "kpiCards": 14,
+      "components": 16,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 268,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 16,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "labor-mobility",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 5574,
+      "screens": 6.2,
+      "textChars": 1863,
+      "h2": 12,
+      "charts": 0,
+      "kpiCards": 14,
+      "components": 16,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 344,
+        "charts": 0,
+        "kpiCards": 4,
+        "components": 4
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 16,
+        "firstScreenTiles": 5,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "labor-wages",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 4853,
+      "screens": 5.8,
+      "textChars": 1068,
+      "h2": 9,
+      "charts": 0,
+      "kpiCards": 4,
+      "components": 6,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 146,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 6,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "labor-wages",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 4413,
+      "screens": 4.9,
+      "textChars": 1080,
+      "h2": 9,
+      "charts": 0,
+      "kpiCards": 4,
+      "components": 6,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 146,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 6,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "labor-wages",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 5255,
+      "screens": 6.2,
+      "textChars": 1226,
+      "h2": 9,
+      "charts": 0,
+      "kpiCards": 7,
+      "components": 9,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 187,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 10,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "labor-wages",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 4990,
+      "screens": 5.5,
+      "textChars": 1251,
+      "h2": 9,
+      "charts": 0,
+      "kpiCards": 7,
+      "components": 9,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 187,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 10,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "land-property-market",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 3025,
+      "screens": 3.6,
+      "textChars": 843,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 1,
+      "components": 1,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 182,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 1,
+        "firstScreenTiles": 1,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-tiles-available"
+      ]
+    },
+    {
+      "themeKey": "land-property-market",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 2113,
+      "screens": 2.3,
+      "textChars": 843,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 1,
+      "components": 1,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 249,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 1,
+        "firstScreenTiles": 1,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-tiles-available"
+      ]
+    },
+    {
+      "themeKey": "land-property-market",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 3553,
+      "screens": 4.2,
+      "textChars": 989,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 6,
+      "components": 6,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 244,
+        "charts": 0,
+        "kpiCards": 4,
+        "components": 4
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 7,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "land-property-market",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 2609,
+      "screens": 2.9,
+      "textChars": 1018,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 6,
+      "components": 6,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 329,
+        "charts": 0,
+        "kpiCards": 6,
+        "components": 6
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 7,
+        "firstScreenTiles": 7,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "landslide-exposure",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 6670,
+      "screens": 7.9,
+      "textChars": 6385,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 0,
+      "components": 0,
+      "tables": 2,
+      "tableRows": 9,
+      "firstScreen": {
+        "textChars": 465,
+        "charts": 0,
+        "kpiCards": 0,
+        "components": 0
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 0,
+        "firstScreenTiles": 0,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-tiles-available"
+      ]
+    },
+    {
+      "themeKey": "landslide-exposure",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 4031,
+      "screens": 4.5,
+      "textChars": 6385,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 0,
+      "components": 0,
+      "tables": 2,
+      "tableRows": 9,
+      "firstScreen": {
+        "textChars": 1006,
+        "charts": 0,
+        "kpiCards": 0,
+        "components": 0
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 0,
+        "firstScreenTiles": 0,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-tiles-available"
+      ]
+    },
+    {
+      "themeKey": "landslide-exposure",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 7092,
+      "screens": 8.4,
+      "textChars": 3239,
+      "h2": 9,
+      "charts": 2,
+      "kpiCards": 2,
+      "components": 4,
+      "tables": 4,
+      "tableRows": 15,
+      "firstScreen": {
+        "textChars": 264,
+        "charts": 1,
+        "kpiCards": 2,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 2,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 2
+      },
+      "violations": [
+        "narrow-first-column"
+      ]
+    },
+    {
+      "themeKey": "landslide-exposure",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 5618,
+      "screens": 6.2,
+      "textChars": 3239,
+      "h2": 9,
+      "charts": 2,
+      "kpiCards": 2,
+      "components": 4,
+      "tables": 4,
+      "tableRows": 15,
+      "firstScreen": {
+        "textChars": 280,
+        "charts": 1,
+        "kpiCards": 2,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 2,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 1
+      },
+      "violations": [
+        "narrow-first-column"
+      ]
+    },
+    {
+      "themeKey": "living-housing",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 6082,
+      "screens": 7.2,
+      "textChars": 1595,
+      "h2": 9,
+      "charts": 0,
+      "kpiCards": 4,
+      "components": 6,
+      "tables": 2,
+      "tableRows": 26,
+      "firstScreen": {
+        "textChars": 150,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 5,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "living-housing",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 5359,
+      "screens": 6,
+      "textChars": 1601,
+      "h2": 9,
+      "charts": 0,
+      "kpiCards": 4,
+      "components": 6,
+      "tables": 2,
+      "tableRows": 26,
+      "firstScreen": {
+        "textChars": 138,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 5,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "living-housing",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 9372,
+      "screens": 11.1,
+      "textChars": 2536,
+      "h2": 13,
+      "charts": 2,
+      "kpiCards": 16,
+      "components": 20,
+      "tables": 2,
+      "tableRows": 26,
+      "firstScreen": {
+        "textChars": 263,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 21,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "living-housing",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 9026,
+      "screens": 10,
+      "textChars": 2564,
+      "h2": 13,
+      "charts": 2,
+      "kpiCards": 16,
+      "components": 20,
+      "tables": 2,
+      "tableRows": 26,
+      "firstScreen": {
+        "textChars": 263,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 21,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "local-economy",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 4654,
+      "screens": 5.5,
+      "textChars": 1666,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 2,
+      "components": 3,
+      "tables": 2,
+      "tableRows": 26,
+      "firstScreen": {
+        "textChars": 204,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 2,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "local-economy",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 3612,
+      "screens": 4,
+      "textChars": 1666,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 2,
+      "components": 3,
+      "tables": 2,
+      "tableRows": 26,
+      "firstScreen": {
+        "textChars": 253,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 2,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "local-economy",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 6717,
+      "screens": 8,
+      "textChars": 2061,
+      "h2": 9,
+      "charts": 0,
+      "kpiCards": 10,
+      "components": 11,
+      "tables": 2,
+      "tableRows": 26,
+      "firstScreen": {
+        "textChars": 239,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 12,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "local-economy",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 5274,
+      "screens": 5.9,
+      "textChars": 2086,
+      "h2": 9,
+      "charts": 0,
+      "kpiCards": 10,
+      "components": 11,
+      "tables": 2,
+      "tableRows": 26,
+      "firstScreen": {
+        "textChars": 327,
+        "charts": 0,
+        "kpiCards": 4,
+        "components": 4
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 12,
+        "firstScreenTiles": 6,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "local-finance",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 4147,
+      "screens": 4.9,
+      "textChars": 1050,
+      "h2": 8,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 3,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 201,
+        "charts": 0,
+        "kpiCards": 0,
+        "components": 0
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 3,
+        "firstScreenTiles": 0,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-first-screen-tiles"
+      ]
+    },
+    {
+      "themeKey": "local-finance",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 3565,
+      "screens": 4,
+      "textChars": 1050,
+      "h2": 8,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 3,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 201,
+        "charts": 0,
+        "kpiCards": 0,
+        "components": 0
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 3,
+        "firstScreenTiles": 0,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-first-screen-tiles"
+      ]
+    },
+    {
+      "themeKey": "local-finance",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 8195,
+      "screens": 9.7,
+      "textChars": 2197,
+      "h2": 13,
+      "charts": 4,
+      "kpiCards": 27,
+      "components": 27,
+      "tables": 2,
+      "tableRows": 11,
+      "firstScreen": {
+        "textChars": 229,
+        "charts": 0,
+        "kpiCards": 0,
+        "components": 0
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 30,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "local-finance",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 5794,
+      "screens": 6.4,
+      "textChars": 2224,
+      "h2": 13,
+      "charts": 4,
+      "kpiCards": 27,
+      "components": 27,
+      "tables": 2,
+      "tableRows": 11,
+      "firstScreen": {
+        "textChars": 321,
+        "charts": 4,
+        "kpiCards": 4,
+        "components": 4
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 30,
+        "firstScreenTiles": 7,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "local-government-digital",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 1923,
+      "screens": 2.3,
+      "textChars": 501,
+      "h2": 5,
+      "charts": 0,
+      "kpiCards": 1,
+      "components": 1,
+      "tables": 1,
+      "tableRows": 5,
+      "firstScreen": {
+        "textChars": 189,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 1,
+        "firstScreenTiles": 1,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-tiles-available"
+      ]
+    },
+    {
+      "themeKey": "local-government-digital",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 2033,
+      "screens": 2.3,
+      "textChars": 501,
+      "h2": 5,
+      "charts": 0,
+      "kpiCards": 1,
+      "components": 1,
+      "tables": 1,
+      "tableRows": 5,
+      "firstScreen": {
+        "textChars": 298,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 1,
+        "firstScreenTiles": 1,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-tiles-available"
+      ]
+    },
+    {
+      "themeKey": "local-government-digital",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 2714,
+      "screens": 3.2,
+      "textChars": 805,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 9,
+      "components": 9,
+      "tables": 1,
+      "tableRows": 5,
+      "firstScreen": {
+        "textChars": 289,
+        "charts": 0,
+        "kpiCards": 6,
+        "components": 6
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 9,
+        "firstScreenTiles": 6,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "local-government-digital",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 2814,
+      "screens": 3.1,
+      "textChars": 831,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 9,
+      "components": 9,
+      "tables": 1,
+      "tableRows": 5,
+      "firstScreen": {
+        "textChars": 343,
+        "charts": 0,
+        "kpiCards": 7,
+        "components": 7
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 9,
+        "firstScreenTiles": 7,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "local-services",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 3328,
+      "screens": 3.9,
+      "textChars": 916,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 7,
+      "components": 7,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 257,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 7,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "local-services",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 2588,
+      "screens": 2.9,
+      "textChars": 942,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 7,
+      "components": 7,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 269,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 7,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "local-services",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 4668,
+      "screens": 5.5,
+      "textChars": 1365,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 16,
+      "components": 16,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 286,
+        "charts": 0,
+        "kpiCards": 4,
+        "components": 4
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 17,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "local-services",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 3169,
+      "screens": 3.5,
+      "textChars": 1397,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 16,
+      "components": 16,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 466,
+        "charts": 0,
+        "kpiCards": 8,
+        "components": 8
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 17,
+        "firstScreenTiles": 9,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "long-term-care",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 3321,
+      "screens": 3.9,
+      "textChars": 832,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 4,
+      "components": 4,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 183,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 4,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "long-term-care",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 2340,
+      "screens": 2.6,
+      "textChars": 832,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 4,
+      "components": 4,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 279,
+        "charts": 0,
+        "kpiCards": 4,
+        "components": 4
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 4,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "long-term-care",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 4164,
+      "screens": 4.9,
+      "textChars": 1009,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 8,
+      "components": 8,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 253,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 8,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "long-term-care",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 2868,
+      "screens": 3.2,
+      "textChars": 1034,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 8,
+      "components": 8,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 426,
+        "charts": 0,
+        "kpiCards": 6,
+        "components": 6
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 8,
+        "firstScreenTiles": 6,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "manufacturing",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 4753,
+      "screens": 5.6,
+      "textChars": 1276,
+      "h2": 8,
+      "charts": 0,
+      "kpiCards": 4,
+      "components": 4,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 203,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 5,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "manufacturing",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 4101,
+      "screens": 4.6,
+      "textChars": 1325,
+      "h2": 8,
+      "charts": 0,
+      "kpiCards": 4,
+      "components": 4,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 129,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 5,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "manufacturing",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 5587,
+      "screens": 6.6,
+      "textChars": 1629,
+      "h2": 10,
+      "charts": 1,
+      "kpiCards": 7,
+      "components": 8,
+      "tables": 2,
+      "tableRows": 9,
+      "firstScreen": {
+        "textChars": 238,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 8,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "manufacturing",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 4853,
+      "screens": 5.4,
+      "textChars": 1700,
+      "h2": 10,
+      "charts": 1,
+      "kpiCards": 7,
+      "components": 8,
+      "tables": 2,
+      "tableRows": 9,
+      "firstScreen": {
+        "textChars": 198,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 8,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "natural-environment",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 2420,
+      "screens": 2.9,
+      "textChars": 606,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 3,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 186,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 4,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "natural-environment",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 2756,
+      "screens": 3.1,
+      "textChars": 638,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 3,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 186,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 4,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "natural-environment",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 2913,
+      "screens": 3.5,
+      "textChars": 702,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 4,
+      "components": 4,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 252,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 5,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "natural-environment",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 3213,
+      "screens": 3.6,
+      "textChars": 759,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 4,
+      "components": 4,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 274,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 5,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "occupation-salary",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 2322,
+      "screens": 2.8,
+      "textChars": 527,
+      "h2": 3,
+      "charts": 0,
+      "kpiCards": 0,
+      "components": 0,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 247,
+        "charts": 0,
+        "kpiCards": 0,
+        "components": 0
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 0,
+        "firstScreenTiles": 0,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-tiles-available"
+      ]
+    },
+    {
+      "themeKey": "occupation-salary",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 1566,
+      "screens": 1.7,
+      "textChars": 550,
+      "h2": 3,
+      "charts": 0,
+      "kpiCards": 0,
+      "components": 0,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 382,
+        "charts": 0,
+        "kpiCards": 0,
+        "components": 0
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 0,
+        "firstScreenTiles": 0,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-tiles-available"
+      ]
+    },
+    {
+      "themeKey": "occupation-salary",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 5594,
+      "screens": 6.6,
+      "textChars": 1361,
+      "h2": 8,
+      "charts": 5,
+      "kpiCards": 11,
+      "components": 16,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 240,
+        "charts": 1,
+        "kpiCards": 4,
+        "components": 5
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 12,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "occupation-salary",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 4842,
+      "screens": 5.4,
+      "textChars": 1384,
+      "h2": 8,
+      "charts": 5,
+      "kpiCards": 11,
+      "components": 16,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 348,
+        "charts": 2,
+        "kpiCards": 7,
+        "components": 9
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 12,
+        "firstScreenTiles": 6,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "population-dynamics",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 7320,
+      "screens": 8.7,
+      "textChars": 2151,
+      "h2": 10,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 5,
+      "tables": 3,
+      "tableRows": 17,
+      "firstScreen": {
+        "textChars": 267,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 3,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "population-dynamics",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 5480,
+      "screens": 6.1,
+      "textChars": 2151,
+      "h2": 10,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 5,
+      "tables": 3,
+      "tableRows": 17,
+      "firstScreen": {
+        "textChars": 281,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 3,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "population-dynamics",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 10460,
+      "screens": 12.4,
+      "textChars": 3329,
+      "h2": 12,
+      "charts": 4,
+      "kpiCards": 12,
+      "components": 18,
+      "tables": 3,
+      "tableRows": 27,
+      "firstScreen": {
+        "textChars": 340,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 15,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "population-dynamics",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 8770,
+      "screens": 9.7,
+      "textChars": 3421,
+      "h2": 12,
+      "charts": 4,
+      "kpiCards": 12,
+      "components": 18,
+      "tables": 3,
+      "tableRows": 27,
+      "firstScreen": {
+        "textChars": 365,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 15,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "ports",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 2881,
+      "screens": 3.4,
+      "textChars": 812,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 4,
+      "components": 4,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 155,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 5,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "ports",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 2870,
+      "screens": 3.2,
+      "textChars": 812,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 4,
+      "components": 4,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 211,
+        "charts": 0,
+        "kpiCards": 4,
+        "components": 4
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 5,
+        "firstScreenTiles": 5,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "public-assistance",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 2974,
+      "screens": 3.5,
+      "textChars": 757,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 4,
+      "components": 4,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 237,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 4,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "public-assistance",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 3086,
+      "screens": 3.4,
+      "textChars": 757,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 4,
+      "components": 4,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 239,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 4,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "public-assistance",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 3548,
+      "screens": 4.2,
+      "textChars": 851,
+      "h2": 8,
+      "charts": 0,
+      "kpiCards": 5,
+      "components": 5,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 296,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 5,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "public-assistance",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 3544,
+      "screens": 3.9,
+      "textChars": 851,
+      "h2": 8,
+      "charts": 0,
+      "kpiCards": 5,
+      "components": 5,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 316,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 5,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "railway",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 4718,
+      "screens": 5.6,
+      "textChars": 1360,
+      "h2": 8,
+      "charts": 1,
+      "kpiCards": 5,
+      "components": 6,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 194,
+        "charts": 1,
+        "kpiCards": 2,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 7,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "railway",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 4730,
+      "screens": 5.3,
+      "textChars": 1372,
+      "h2": 8,
+      "charts": 1,
+      "kpiCards": 5,
+      "components": 6,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 194,
+        "charts": 1,
+        "kpiCards": 2,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 7,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "real-income",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 2785,
+      "screens": 3.3,
+      "textChars": 640,
+      "h2": 5,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 3,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 104,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 3,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "real-income",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 1941,
+      "screens": 2.2,
+      "textChars": 640,
+      "h2": 5,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 3,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 253,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 3,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "real-income",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 5474,
+      "screens": 6.5,
+      "textChars": 1301,
+      "h2": 9,
+      "charts": 3,
+      "kpiCards": 9,
+      "components": 12,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 238,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 9,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "real-income",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 4309,
+      "screens": 4.8,
+      "textChars": 1326,
+      "h2": 9,
+      "charts": 3,
+      "kpiCards": 9,
+      "components": 12,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 316,
+        "charts": 2,
+        "kpiCards": 3,
+        "components": 5
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 9,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "regional-energy",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 2649,
+      "screens": 3.1,
+      "textChars": 602,
+      "h2": 5,
+      "charts": 0,
+      "kpiCards": 1,
+      "components": 1,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 191,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 1,
+        "firstScreenTiles": 1,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-tiles-available"
+      ]
+    },
+    {
+      "themeKey": "regional-energy",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 1851,
+      "screens": 2.1,
+      "textChars": 602,
+      "h2": 5,
+      "charts": 0,
+      "kpiCards": 1,
+      "components": 1,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 286,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 1,
+        "firstScreenTiles": 1,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-tiles-available"
+      ]
+    },
+    {
+      "themeKey": "regional-energy",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 5718,
+      "screens": 6.8,
+      "textChars": 1527,
+      "h2": 7,
+      "charts": 3,
+      "kpiCards": 9,
+      "components": 12,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 233,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 10,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "regional-energy",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 4158,
+      "screens": 4.6,
+      "textChars": 1527,
+      "h2": 7,
+      "charts": 3,
+      "kpiCards": 9,
+      "components": 12,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 233,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 10,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "regional-transport",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 4051,
+      "screens": 4.8,
+      "textChars": 955,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 5,
+      "components": 5,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 231,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 7,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "regional-transport",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 3206,
+      "screens": 3.6,
+      "textChars": 997,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 5,
+      "components": 5,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 238,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 7,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "regional-transport",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 4493,
+      "screens": 5.3,
+      "textChars": 1171,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 8,
+      "components": 8,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 285,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 11,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "regional-transport",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 3770,
+      "screens": 4.2,
+      "textChars": 1191,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 8,
+      "components": 8,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 330,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 11,
+        "firstScreenTiles": 5,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "retail-commerce",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 3423,
+      "screens": 4.1,
+      "textChars": 960,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 4,
+      "components": 4,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 261,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 4,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "retail-commerce",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 2770,
+      "screens": 3.1,
+      "textChars": 977,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 4,
+      "components": 4,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 297,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 4,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "retail-commerce",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 4219,
+      "screens": 5,
+      "textChars": 1084,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 8,
+      "components": 8,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 244,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 8,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "retail-commerce",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 2953,
+      "screens": 3.3,
+      "textChars": 1101,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 8,
+      "components": 8,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 362,
+        "charts": 0,
+        "kpiCards": 6,
+        "components": 6
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 8,
+        "firstScreenTiles": 6,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "roads",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 9035,
+      "screens": 10.7,
+      "textChars": 3307,
+      "h2": 10,
+      "charts": 2,
+      "kpiCards": 9,
+      "components": 11,
+      "tables": 3,
+      "tableRows": 62,
+      "firstScreen": {
+        "textChars": 272,
+        "charts": 0,
+        "kpiCards": 4,
+        "components": 4
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 11,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "roads",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 8162,
+      "screens": 9.1,
+      "textChars": 3307,
+      "h2": 10,
+      "charts": 2,
+      "kpiCards": 9,
+      "components": 11,
+      "tables": 3,
+      "tableRows": 62,
+      "firstScreen": {
+        "textChars": 332,
+        "charts": 0,
+        "kpiCards": 5,
+        "components": 5
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 11,
+        "firstScreenTiles": 6,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "safety",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 6799,
+      "screens": 8.1,
+      "textChars": 1940,
+      "h2": 9,
+      "charts": 0,
+      "kpiCards": 10,
+      "components": 10,
+      "tables": 3,
+      "tableRows": 19,
+      "firstScreen": {
+        "textChars": 232,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 11,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "safety",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 5498,
+      "screens": 6.1,
+      "textChars": 1994,
+      "h2": 9,
+      "charts": 0,
+      "kpiCards": 10,
+      "components": 10,
+      "tables": 3,
+      "tableRows": 19,
+      "firstScreen": {
+        "textChars": 288,
+        "charts": 0,
+        "kpiCards": 6,
+        "components": 6
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 11,
+        "firstScreenTiles": 6,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "safety",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 10399,
+      "screens": 12.3,
+      "textChars": 3063,
+      "h2": 9,
+      "charts": 7,
+      "kpiCards": 16,
+      "components": 23,
+      "tables": 3,
+      "tableRows": 19,
+      "firstScreen": {
+        "textChars": 304,
+        "charts": 0,
+        "kpiCards": 4,
+        "components": 4
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 20,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "safety",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 8918,
+      "screens": 9.9,
+      "textChars": 3168,
+      "h2": 9,
+      "charts": 7,
+      "kpiCards": 16,
+      "components": 23,
+      "tables": 3,
+      "tableRows": 19,
+      "firstScreen": {
+        "textChars": 418,
+        "charts": 3,
+        "kpiCards": 4,
+        "components": 7
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 20,
+        "firstScreenTiles": 4,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "single-parent-households",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 2651,
+      "screens": 3.1,
+      "textChars": 774,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 2,
+      "components": 2,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 182,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 4,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "single-parent-households",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 3109,
+      "screens": 3.5,
+      "textChars": 794,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 2,
+      "components": 2,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 154,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 4,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "single-parent-households",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 3746,
+      "screens": 4.4,
+      "textChars": 1065,
+      "h2": 7,
+      "charts": 1,
+      "kpiCards": 4,
+      "components": 5,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 227,
+        "charts": 1,
+        "kpiCards": 2,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 6,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "single-parent-households",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 4109,
+      "screens": 4.6,
+      "textChars": 1168,
+      "h2": 7,
+      "charts": 1,
+      "kpiCards": 4,
+      "components": 5,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 294,
+        "charts": 1,
+        "kpiCards": 2,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 6,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "sports-participation",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 3561,
+      "screens": 4.2,
+      "textChars": 1136,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 2,
+      "components": 2,
+      "tables": 2,
+      "tableRows": 10,
+      "firstScreen": {
+        "textChars": 218,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 2,
+        "firstScreenTiles": 1,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-first-screen-tiles"
+      ]
+    },
+    {
+      "themeKey": "sports-participation",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 2562,
+      "screens": 2.8,
+      "textChars": 1136,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 2,
+      "components": 2,
+      "tables": 2,
+      "tableRows": 10,
+      "firstScreen": {
+        "textChars": 416,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 2,
+        "firstScreenTiles": 1,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-first-screen-tiles"
+      ]
+    },
+    {
+      "themeKey": "sports-participation",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 4909,
+      "screens": 5.8,
+      "textChars": 1531,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 12,
+      "components": 12,
+      "tables": 2,
+      "tableRows": 10,
+      "firstScreen": {
+        "textChars": 279,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 13,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "sports-participation",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 3666,
+      "screens": 4.1,
+      "textChars": 1531,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 12,
+      "components": 12,
+      "tables": 2,
+      "tableRows": 10,
+      "firstScreen": {
+        "textChars": 526,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 13,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "tourism",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 5687,
+      "screens": 6.7,
+      "textChars": 4987,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 3,
+      "tables": 3,
+      "tableRows": 200,
+      "firstScreen": {
+        "textChars": 144,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 4,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "tourism",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 4731,
+      "screens": 5.3,
+      "textChars": 4993,
+      "h2": 7,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 3,
+      "tables": 3,
+      "tableRows": 200,
+      "firstScreen": {
+        "textChars": 128,
+        "charts": 0,
+        "kpiCards": 1,
+        "components": 1
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 4,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "tourism",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 6758,
+      "screens": 8,
+      "textChars": 2155,
+      "h2": 9,
+      "charts": 1,
+      "kpiCards": 7,
+      "components": 8,
+      "tables": 3,
+      "tableRows": 22,
+      "firstScreen": {
+        "textChars": 184,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 8,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "tourism",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 5865,
+      "screens": 6.5,
+      "textChars": 2168,
+      "h2": 9,
+      "charts": 1,
+      "kpiCards": 7,
+      "components": 8,
+      "tables": 3,
+      "tableRows": 22,
+      "firstScreen": {
+        "textChars": 184,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 8,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "tsunami-exposure",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 2703,
+      "screens": 3.2,
+      "textChars": 735,
+      "h2": 5,
+      "charts": 0,
+      "kpiCards": 0,
+      "components": 0,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 158,
+        "charts": 0,
+        "kpiCards": 0,
+        "components": 0
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 0,
+        "firstScreenTiles": 0,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-tiles-available"
+      ]
+    },
+    {
+      "themeKey": "tsunami-exposure",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 2359,
+      "screens": 2.6,
+      "textChars": 735,
+      "h2": 5,
+      "charts": 0,
+      "kpiCards": 0,
+      "components": 0,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 658,
+        "charts": 0,
+        "kpiCards": 0,
+        "components": 0
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 0,
+        "firstScreenTiles": 0,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": [
+        "few-tiles-available"
+      ]
+    },
+    {
+      "themeKey": "tsunami-exposure",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 3035,
+      "screens": 3.6,
+      "textChars": 1232,
+      "h2": 5,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 3,
+      "tables": 2,
+      "tableRows": 19,
+      "firstScreen": {
+        "textChars": 369,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 3,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "tsunami-exposure",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 2843,
+      "screens": 3.2,
+      "textChars": 1232,
+      "h2": 5,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 3,
+      "tables": 2,
+      "tableRows": 19,
+      "firstScreen": {
+        "textChars": 487,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 3,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "waste-recycling",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 2736,
+      "screens": 3.2,
+      "textChars": 644,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 3,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 172,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 3,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "waste-recycling",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 2101,
+      "screens": 2.3,
+      "textChars": 644,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 3,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 185,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 3,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "waste-recycling",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 2713,
+      "screens": 3.2,
+      "textChars": 631,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 3,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 215,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 3,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "waste-recycling",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 2032,
+      "screens": 2.3,
+      "textChars": 631,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 3,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 228,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 3,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "water-services",
+      "route": "national",
+      "width": 390,
+      "status": 200,
+      "height": 3319,
+      "screens": 3.9,
+      "textChars": 853,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 3,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 190,
+        "charts": 0,
+        "kpiCards": 2,
+        "components": 2
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 4,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "water-services",
+      "route": "national",
+      "width": 1280,
+      "status": 200,
+      "height": 2762,
+      "screens": 3.1,
+      "textChars": 853,
+      "h2": 6,
+      "charts": 0,
+      "kpiCards": 3,
+      "components": 3,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 207,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 4,
+        "firstScreenTiles": 2,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "water-services",
+      "route": "prefecture",
+      "width": 390,
+      "status": 200,
+      "height": 4766,
+      "screens": 5.6,
+      "textChars": 1133,
+      "h2": 8,
+      "charts": 0,
+      "kpiCards": 10,
+      "components": 10,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 258,
+        "charts": 0,
+        "kpiCards": 3,
+        "components": 3
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 11,
+        "firstScreenTiles": 3,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    },
+    {
+      "themeKey": "water-services",
+      "route": "prefecture",
+      "width": 1280,
+      "status": 200,
+      "height": 3821,
+      "screens": 4.2,
+      "textChars": 1168,
+      "h2": 8,
+      "charts": 0,
+      "kpiCards": 10,
+      "components": 10,
+      "tables": 1,
+      "tableRows": 8,
+      "firstScreen": {
+        "textChars": 379,
+        "charts": 0,
+        "kpiCards": 6,
+        "components": 6
+      },
+      "overflowX": 0,
+      "quality": {
+        "statTiles": 11,
+        "firstScreenTiles": 6,
+        "emptyTiles": 0,
+        "brokenNumbers": 0,
+        "narrowFirstColumnRows": 0
+      },
+      "violations": []
+    }
+  ]
+}
