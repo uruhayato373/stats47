@@ -216,7 +216,7 @@ describe("物価の図 — 縮小表示でも読める文字", () => {
     // 年の目盛りは重ならないよう間引き、最新の年は残す
     const yearLabels = [...narrow.querySelectorAll("text")].map((node) => node.textContent).filter((t) => /^\d{4}$/.test(t ?? ""));
     expect(yearLabels.length).toBeLessThan(years.length);
-    expect(yearLabels.at(-1)).toBe("2025");
+    expect(yearLabels[yearLabels.length - 1]).toBe("2025");
     // PC の幅 (1280px の画面で表示幅 950px) ではセルに値を書く
     reportContainerWidth(950);
     const full = render(<CategoryHeatmap data={data} baseline={100} />).container;
