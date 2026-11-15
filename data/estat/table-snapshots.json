@@ -51,7 +51,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0000010101/manifest.json",
       "manifestSha256": "de00501faaf37d1a8cd3e444859a1e702a4f6437763175f1c6fa5f5c0b6835dd",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -382,7 +382,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0000010201/manifest.json",
       "manifestSha256": "6f4f20d8906460f991e224fc9b9cb47b86deb8666b1ce5a380f2e2603ca580c1",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -2394,7 +2394,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0004026104/manifest.json",
       "manifestSha256": "ec16e12cec74f2396f5530eadcf671c3db759cb0d7f20cb4b75af0c172e80715",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -2416,7 +2416,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0004026105/manifest.json",
       "manifestSha256": "b9a02385910bd0ca13d29954ab53da4ea40c6fc66c6812be9e07a243db306561",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -3592,7 +3592,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0004065933/manifest.json",
       "manifestSha256": "d61e30d7cc29a18f8eda4b367167eeb74535579570eaa1a501bf865d71038edb",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {

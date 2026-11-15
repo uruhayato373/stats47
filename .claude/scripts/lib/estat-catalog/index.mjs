@@ -13,13 +13,16 @@ export const MAX_ATTEMPTS = 5;
  * @param {object} p.manifest 直前の manifest ({ failed, quarantined })
  * @param {number[]} p.metaScope meta を取る collectArea (例 [2,3]。0 = 該当なし)
  * @param {string[]} [p.metaStatCodes] collectArea に関係なく meta を取る調査コード (例 家計調査 "00200561")
+ * @param {string[]} [p.metaTableIds] collectArea に関係なく meta を取る表 (指標が参照する表。表の写しが目録を要る)
  * @param {number} [p.maxMeta] 今回 fetch する上限件数
  */
-export function buildPlan({ existingTables, freshRows, manifest, metaScope, metaStatCodes = [], maxMeta = Infinity }) {
+export function buildPlan({ existingTables, freshRows, manifest, metaScope, metaStatCodes = [], metaTableIds = [], maxMeta = Infinity }) {
   const existingById = new Map(existingTables.map((t) => [t.statsDataId, t]));
   const statCodes = new Set(metaStatCodes);
+  const tableIds = new Set(metaTableIds);
   const inScope = (row) =>
-    (row.collectAreas ?? [row.collectArea]).some((ca) => metaScope.includes(Number(ca))) || statCodes.has(row.statCode);
+    (row.collectAreas ?? [row.collectArea]).some((ca) => metaScope.includes(Number(ca))) ||
+    statCodes.has(row.statCode) || tableIds.has(row.statsDataId);
   const quarantined = new Set((manifest.quarantined ?? []).map((q) => q.id));
   const failedById = new Map((manifest.failed ?? []).map((f) => [f.id, f]));
 

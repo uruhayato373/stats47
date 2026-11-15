@@ -140,7 +140,11 @@ async function cmdRun(args) {
   console.log(`既存索引: ${existingTables.length} 件 (${surveysIndex.length} 調査)`);
 
   // --- 差分 plan ---
-  const plan = buildPlan({ existingTables, freshRows, manifest, metaScope, metaStatCodes, maxMeta });
+  // 指標が参照する表は、集計地域区分に関係なく目録を取る (表の写し・areaAxis が目録を読む。2026-11-15)
+  const metaTableIds = [...new Set(loadMetricLinkage(path.join(PROJECT_ROOT, METRIC_LINKAGE_DIR))
+    .flatMap((entry) => entry.sources.map((source) => source.statsDataId).filter(Boolean)))];
+  console.log(`指標が参照する表: ${metaTableIds.length} 件 (目録の取得対象に含める)`);
+  const plan = buildPlan({ existingTables, freshRows, manifest, metaScope, metaStatCodes, metaTableIds, maxMeta });
   console.log(
     `plan: new=${plan.newRows.length} updated=${plan.updatedRows.length} ` +
       `retry=${plan.retryRows.length} removed=${plan.removedIds.length} toFetchMeta=${plan.toFetchMeta.length}`,

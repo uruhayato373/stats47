@@ -148,6 +148,13 @@ test("buildPlan: 区分を複数持つ表は、どれか 1 つが metaScope に�
   assert.deepEqual(plan.toFetchMeta.map((r) => r.statsDataId), ["A"]);
 });
 
+test("buildPlan: 指標が参照する表は、区分が範囲外でも meta の無い既存表を含めて取る", () => {
+  const fresh = new Map([["A", row("A", { collectArea: "1" })], ["B", row("B", { collectArea: "1" })], ["C", row("C", { collectArea: "1" })]]);
+  const existing = [{ ...row("B", { collectArea: "1" }) }, { ...row("C", { collectArea: "1" }) }];
+  const plan = buildPlan({ existingTables: existing, freshRows: fresh, manifest: {}, metaScope: [2, 3], metaTableIds: ["A", "B"] });
+  assert.deepEqual(plan.toFetchMeta.map((r) => r.statsDataId).sort(), ["A", "B"]);
+});
+
 test("classifyTimeKind: 名称の末尾から年次/年度/月次を判定する", () => {
   assert.equal(classifyTimeKind("2023年"), "calendar-year");
   assert.equal(classifyTimeKind("2023年度"), "fiscal-year");

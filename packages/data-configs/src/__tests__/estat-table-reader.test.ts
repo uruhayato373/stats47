@@ -10,6 +10,7 @@ import { fetchEstatData, fetchSampleCounts, shapeForPrefecture, applySupplements
 import { compareValues, selectTableSnapshotTargets, parseAuditArgs, assertSnapshotPayload, markSnapshotVerified, createVerificationReader } from "../../scripts/verify-table-snapshot-equivalence.js";
 import { makeSliceKey, type Axis } from "../../../estat-api/src/stats-data/utils/table-partitions.js";
 import { listAllMetrics } from "../registry.js";
+import { PREFECTURES } from "../area-axis.js";
 import type { MetricConfig, SourceConfig } from "../types.js";
 
 const table = "0003445758";
@@ -197,14 +198,32 @@ describe("verified table source selection (offline)", () => {
     const result = await withSnapshotReader(f.reader, () => fetchEstatData("", { ...source, cdCat03: "a", cdCat04: "b", cdCat05: "c,d" }));
     expect(result.values.map((v) => v.$)).toEqual(["1", "2"]);
   });
-  it("areaAxis reports why it needs the legacy path; snapshot-only mode blocks that live request", async () => {
+  it("areaAxis with a snapshot maps prefectures from the same catalog version, without live e-Stat", async () => {
     vi.stubEnv("ESTAT_SNAPSHOT_ONLY", "1");
-    const warning = vi.spyOn(console, "warn").mockImplementation(() => {});
+    const rows = PREFECTURES.map((p, i) => row("08", String(i + 1), { "@area": "00000", "@cat03": String(i + 1) }));
+    const f = fixture(rows);
+    const meta = (updated: string) => ({ response: { GET_META_INFO: { METADATA_INF: { TABLE_INF: { UPDATED_DATE: updated, SURVEY_DATE: 2022 },
+      CLASS_INF: { CLASS_OBJ: [{ "@id": "cat03", CLASS: [{ "@code": "0", "@name": "全国" }, ...PREFECTURES.map((p, i) => ({ "@code": String(i + 1), "@name": p.name }))] }, { "@id": "time" }] } } } } });
+    const network = vi.fn(async (url: string) => {
+      if (!String(url).includes("/estat-catalog/meta/")) throw new Error("Network prohibited");
+      return new Response(JSON.stringify(meta("2024-11-27")));
+    });
+    vi.stubGlobal("fetch", network);
+    const areaSource = { ...source, areaAxis: { axis: "cat03" as const, scheme: "name" as const } };
+    const result = await withSnapshotReader(f.reader, () => fetchEstatData("", areaSource));
+    expect(result.values).toHaveLength(47);
+    expect(result.values.find((v) => v["@cat03"] === "13")?.["@area"]).toBe(PREFECTURES[12].code);
+    expect(sourceEvidence(result.sources)?.kind).toBe("estat-table-snapshot");
+    network.mockImplementation(async () => new Response(JSON.stringify(meta("2025-01-01"))));
+    await expect(withSnapshotReader(f.reader, () => fetchEstatData("", areaSource))).rejects.toThrow(/differs from snapshot/);
+  });
+  it("areaAxis without a snapshot still needs live metadata; snapshot-only mode blocks it", async () => {
+    vi.stubEnv("ESTAT_SNAPSHOT_ONLY", "1");
     const network = vi.fn(); vi.stubGlobal("fetch", network);
     const config = listAllMetrics().find((m) => m.source.kind === "estat" && m.source.areaAxis);
     if (!config || config.source.kind !== "estat") throw new Error("Missing areaAxis fixture");
-    await expect(fetchEstatData("", config.source)).rejects.toThrow("Live e-Stat disabled");
-    expect(warning).toHaveBeenCalledWith(expect.stringContaining("areaAxis requires live classification metadata"));
+    const areaSource = config.source;
+    await expect(withSnapshotReader(fixture([row("08", "1")], 1, "verified", "0000000001").reader, () => fetchEstatData("", areaSource))).rejects.toThrow("Live e-Stat disabled");
     expect(network).not.toHaveBeenCalled();
   });
   it("sample count rejects ambiguous coordinates and unknown units instead of inventing people", async () => {

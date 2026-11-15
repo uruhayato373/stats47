@@ -430,17 +430,44 @@ async function fetchAxisMembers(
   const res = await fetch(`https://api.e-stat.go.jp/rest/3.0/app/json/getMetaInfo?${params}`);
   if (!res.ok) throw new Error(`e-Stat getMetaInfo HTTP ${res.status}`);
   const json = (await res.json()) as Record<string, any>;
+  return axisMembersFromMeta(json, statsDataId, axis);
+}
+
+/** getMetaInfo の応答 (live でもカタログの写しでも同じ形) から軸のメンバーと調査年を読む。 */
+export function axisMembersFromMeta(
+  json: Record<string, any>,
+  statsDataId: string,
+  axis: EstatAxisName,
+): { members: AreaAxisMember[]; surveyYear: string | null; hasTimeAxis: boolean; updatedDate: string | null } {
   const metadata = json?.GET_META_INFO?.METADATA_INF;
   const objs = metadata?.CLASS_INF?.CLASS_OBJ;
   const list = Array.isArray(objs) ? objs : objs ? [objs] : [];
   const target = list.find((o: any) => String(o["@id"]) === axis);
   if (!target) throw new Error(`getMetaInfo に軸 ${axis} が無い (statsDataId=${statsDataId})`);
   const cls = Array.isArray(target.CLASS) ? target.CLASS : target.CLASS ? [target.CLASS] : [];
+  const updated = metadata?.TABLE_INF?.UPDATED_DATE;
   return {
     members: cls.map((c: any) => ({ code: String(c["@code"]), name: String(c["@name"]) })),
     surveyYear: surveyYearFromDate(metadata?.TABLE_INF?.SURVEY_DATE),
     hasTimeAxis: list.some((o: any) => String(o["@id"]) === "time"),
+    updatedDate: typeof updated === "string" ? updated : typeof updated?.$ === "string" ? updated.$ : null,
   };
+}
+
+/**
+ * 値を表の写しから読んだときは、分類軸のメンバーも同じ版のカタログの目録 (estat-catalog/meta) から読む。
+ * 目録の版 (UPDATED_DATE) が写しの版と違えば、別の版の名前で写像しないよう止める。
+ */
+async function catalogAxisMembers(statsDataId: string, axis: EstatAxisName, catalogVersion: string | null) {
+  const { SITE } = await import("@stats47/types");
+  const res = await fetch(`${SITE.r2PublicBaseUrl.replace(/\/+$/, "")}/estat-catalog/meta/${statsDataId}.json`, { redirect: "error" });
+  if (!res.ok) throw new Error(`Catalog meta ${statsDataId}: HTTP ${res.status}`);
+  const envelope = (await res.json()) as { response?: Record<string, any> };
+  const result = axisMembersFromMeta(envelope.response ?? {}, statsDataId, axis);
+  if (catalogVersion !== null && result.updatedDate !== catalogVersion) {
+    throw new Error(`Catalog meta ${statsDataId} version ${result.updatedDate} differs from snapshot ${catalogVersion}`);
+  }
+  return result;
 }
 
 /**
@@ -500,11 +527,10 @@ async function resolveCityCat01(
   cityStatsDataId: string,
   prefCat01: string,
 ): Promise<string | null> {
+  // 分類名は目録 (estat-catalog/meta) から読む。目録に無い表だけ live の getMetaInfo に頼る
+  const members = (id: string) => catalogAxisMembers(id, "cat01", null).catch(() => fetchAxisMembers(appId, id, "cat01"));
   try {
-    const [prefMeta, cityMeta] = await Promise.all([
-      fetchAxisMembers(appId, prefStatsDataId, "cat01"),
-      fetchAxisMembers(appId, cityStatsDataId, "cat01"),
-    ]);
+    const [prefMeta, cityMeta] = await Promise.all([members(prefStatsDataId), members(cityStatsDataId)]);
     return resolveCat01ByName(prefMeta.members, cityMeta.members, prefCat01);
   } catch {
     return null;
@@ -524,12 +550,12 @@ async function fetchEstatAreaAxis(
   config: Extract<SourceConfig, { kind: "estat" }>,
   areaAxis: NonNullable<Extract<SourceConfig, { kind: "estat" }>["areaAxis"]>,
 ): Promise<EstatFetchResult> {
-  console.warn(`[estat-api] ${config.statsDataId}: areaAxis requires live classification metadata; snapshot fallback not yet supported`);
-  const { members, surveyYear, hasTimeAxis } = await fetchAxisMembers(
-    appId,
-    config.statsDataId,
-    areaAxis.axis,
-  );
+  // 対象軸は pin せずに取得する (pin すると 1 県分しか返らない)。写しがあれば写しから読む
+  const fetched = await fetchEstatData(appId, { ...config, areaAxis: undefined });
+  const snapshotSource = fetched.sources.find((source) => source.kind === "estat-table-snapshot");
+  const { members, surveyYear, hasTimeAxis } = snapshotSource?.catalogVersion
+    ? await catalogAxisMembers(config.statsDataId, areaAxis.axis, snapshotSource.catalogVersion)
+    : await fetchAxisMembers(appId, config.statsDataId, areaAxis.axis);
   const mapping = resolveAreaAxis(members, areaAxis.scheme);
 
   // time 軸が無い表は値に @time が付かないので、調査年をメタから補う。
@@ -550,8 +576,6 @@ async function fetchEstatAreaAxis(
     );
   }
 
-  // 対象軸は pin せずに取得する (pin すると 1 県分しか返らない)
-  const fetched = await fetchEstatData(appId, { ...config, areaAxis: undefined }, true);
   const attr = `@${areaAxis.axis}` as const;
 
   const values: EstatValue[] = [];
