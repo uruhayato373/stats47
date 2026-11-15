@@ -26,6 +26,8 @@ export function isSource(path) {
   if (/^\.env(?:\.|$)/.test(basename(path)) || /(?:^|\/)node_modules\//.test(path)) return false;
   // JSON under data/state is recorded evidence, not executable configuration. TS metrics remain checked.
   if (/^(data|\.claude\/(?:state|memory))\//.test(path) && !/\.[cm]?[jt]sx?$/.test(path)) return false;
+  // Records and mirrors that only name keys: blog data/lineage (contents/), static public files, generated agent mirrors.
+  if (/^(contents\/|apps\/[^/]+\/public\/|\.codex\/|\.agents\/)/.test(path)) return false;
   return /\.(?:[cm]?[jt]sx?|json|ya?ml|toml|sh|py|example)$/.test(path) && !/(?:package-lock|npm-shrinkwrap)\.json$/.test(path);
 }
 
