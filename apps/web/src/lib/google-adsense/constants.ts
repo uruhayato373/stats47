@@ -276,7 +276,9 @@ export const HUB_INCONTENT: AdSlotConfig = {
  * ランキング末尾とそれ以外の末尾を別ユニットで計測する。
  * 2026-10-31: RANKING_PAGE_FOOTER と同じ理由で関連コンテンツ型 (2005202370) をやめ、2026-11-03 に
  * この配置専用の表示広告ユニットを作った。
- * AdSense ユニット: stats47-content-footer-rect（ディスプレイ / 固定 300×250）
+ * 2026-11-15: 市区町村のページ末 (CityPageFooter) も本文の幅いっぱい (上限 580px。台帳の adsense-body-responsive) にした。
+ * 固定 300×250 で出すのは検索のページ末 (FooterAdSlot) だけ。
+ * AdSense ユニット: stats47-content-footer-rect（ディスプレイ / 管理画面では固定 300×250 で作成）
  */
 export const CONTENT_FOOTER: AdSlotConfig = {
   slotId: "6994459114",

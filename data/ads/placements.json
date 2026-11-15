@@ -748,11 +748,13 @@
         ]
       },
       {
-        "slot": "adsense-footer",
+        "slot": "adsense-body-responsive",
         "region": "body",
         "position": "関連記事の後・市区町村の一覧の前 (県のバナーは 2026-11-13 に外した)",
         "source": "apps/web/src/features/area-profile/components/CityPageFooter.tsx",
-        "marker": "slotBox={adSlotBox(\"adsense-footer\")}"
+        "marker": "slotBox={adSlotBox(\"adsense-body-responsive\")}",
+        "adsenseSlot": "CONTENT_FOOTER",
+        "condition": "AdSense 1 つを本文の幅いっぱい (上限 580px) に出す。2026-11-15 に固定 300×250 から替えた (AdSense の最適化案。backlog ADSENSE-FORMAT-EXPERIMENT-01)"
       }
     ],
     "ranking-index": [
