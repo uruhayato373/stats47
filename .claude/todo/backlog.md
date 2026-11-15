@@ -1283,6 +1283,8 @@ updated: 2026-11-01
 - **影響**: GSC の除外理由の内訳はその時点の書き出しなので、W46 の土曜の分は後から取り直せない。サイト内リンク監査は 132 ページを走査した時点の結果しか無い。
 - **次**: ① 上の検証 ② 取得の失敗時に例外の本体 (末尾の行でなく最初の行) を `message` に残す ③ 専用 clone の Node の版を対話のシェルと揃えるか、require の経路を直す。
 - **完了条件**: `npm run weekly:collect` で GSC の取得元が pass になり、internal-links が例外なしで走り切る。
+- **済み (2026-11-15・develop)**: 次の ② は済み (`collect-local.mjs` が bootstrap・collect の失敗時に stderr の末尾 20 行を `message` に残す。次に GSC が落ちれば例外の本体が `measurement-collect-local.log` で読める)。③ のうち `prefectures.cjs` は `config/datasets.mjs` を require せず、カタログの行の文字列から置き場を読む形に直した。ただし手元の Node は v22.23.3 で、v20.19.0 での元のエラーは再現できていない (require(esm) を無効にした起動で代わりに確かめた)。専用 clone の v20.19.0 は `package.json` の engines (>=22) を満たしていない。
+- **残り**: ① 2026-11-21 の `weekly:collect` で internal-links が走り切るかを読む ② GSC が再び落ちたら、記録された例外の本体から原因を決める ③ `.claude/scripts/lib` には `datasets.mjs` を require する cjs がほかに 4 本ある (`sns-posts-store.cjs`・`sns-metrics-store.cjs`・`x-catalog.cjs`・`strategy-lanes.cjs`)。同じ例外になるかは [仮説] で、専用 clone の Node を v22 に上げれば不要になる。先に Node の版を揃えるかをオーナーが決める。
 
 ### [REVIEW-CADENCE-HANDOFF-PARSE-01] 週次レビューの申し送りの検査が、行き先の括弧の中の「、」で文を切る
 タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/management/__tests__/] [起票:2026-11-14] [領域:管理]
@@ -1311,6 +1313,7 @@ updated: 2026-11-01
 - **観測 (2026-11-14)**: `data/adsense/LATEST.md` の確定 7 日の節に開始日・終了日が無く、週次 snapshot (`data/nsm/weekly-snapshots/`) の `ranges.adsense` も null。週次レビューが AdSense の金額をどの 7 日のものか示せない。
 - **次**: 取得スクリプトが使った期間を LATEST.md と snapshot の `ranges.adsense` に書く。
 - **完了条件**: 次の週次 snapshot で `ranges.adsense` に開始日と終了日が入っている。
+- **済み (2026-11-15・develop)**: `computeWeekRanges` (`.claude/scripts/lib/metrics-reader.mjs`) が `adsense` の期間を返し、`update-history-csv.mjs` が LATEST.md に期間の行を書く。記録は作り直していないので、次の週次 snapshot (2026-11-21) で完了条件を読んでこのカードを消す。
 
 ### [BLOG-PUBLIC-REVIEW-MD-CLEANUP-01] 公開 R2 に残る過去記事の review.md (審査結果) を消す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-29] [領域:サイト]
@@ -2627,6 +2630,7 @@ updated: 2026-11-01
   ① KDP の再ログイン (10-31 の取得は `auth_required`)。そのあと CI の KDP 月次取得で台帳に行が自動で増えることを確かめる。
   ② 既読ページ (2026-10-27 オーナー決定): 2026-08〜10 の分を KDP の月次レポートから一度だけ埋め、以降は自動記録に乗せる。`data/business/pilot-board.json` の KDP の「既読ページ」指標 (今は `unrecorded`) を台帳から読む形に変える (`KDP-EXPANSION-01` の pilot 判定がこれで判定不能になっている)。
   ③ 月次の対象月が進まない (2026-11-15 観測): 11-08 と 11-14 の取得はどちらも `monthlyPeriod: "2026-09"` で、保管庫キー `kdp/monthly/month-8`・sha256 も同じだった (`data/authenticated/latest.json` の `sources[kdp].quality.salesLedger`)。10 月の月次が KDP 側にまだ無いのか、`.claude/scripts/measurement/kdp-monthly-reports.mjs` が古い月を選んでいるのかは確かめていない。次の土曜の取得の後に `monthlyPeriod` を読み、2026-10 になっていなければ月の選び方をコードで確かめる。
+  ④ conflict の原因は直した (2026-11-15・develop): 11-08 と 11-14 の取得が `action_required` になったのは、2026-09 の範囲 (22 冊) に 11-04 発売の `K-S1-13` が混ざって書籍の集合が食い違ったため。`kdp-monthly-reports.mjs` が期間末より後に発売した本を範囲から外すようにし、実台帳の 8 月・9 月の範囲 (各 22 冊) と一致することを確かめた。2026-11-21 の取得で `salesLedger` が conflict でなくなることを読む。`packages/product-factory/src/sales/cli.ts` の `recordKdpCoverage` (古いレポートの補完) は同じ絞り込みを持たないので、補完を使うときは新刊が過去の月に入らないかを確かめる。
 - **停止条件**: 生のレポート (全アカウントの行を含む) と個人情報を公開リポジトリに置かない。stats47 の ASIN 以外の行を台帳に入れない (`kdp-reports.mjs` の `kdpAsinMap` と同じ照合を使う)。
 - **完了条件**: マージ後の CI の KDP 月次取得のあとに、明細のある本の行が台帳へ自動で増え (明細の無い本は行を作らない)、`products:sales -- validate` が PASS し、週次の KPI ツリーで `paid-purchases` の KDP 分が判定不能でなくなる。
 
