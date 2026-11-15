@@ -2,16 +2,17 @@
   "schemaVersion": 1,
   "summary": {
     "articles": 439,
-    "figures": 1341,
+    "figures": 1339,
     "byValueCheck": {
       "no-data-figure": 261,
       "unmapped": 1,
-      "match": 39,
+      "match": 40,
       "body-match": 117,
-      "body-differs": 4,
+      "year-gone": 1,
       "no-year": 1,
       "product-sample": 2,
-      "product-untyped": 14
+      "product-untyped": 14,
+      "body-differs": 2
     }
   },
   "articles": [
@@ -1244,7 +1245,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-match"
+      "valueCheck": "year-gone"
     },
     {
       "key": "a-current-liabilities-balance-multi-person-households-per-household",
@@ -3148,11 +3149,7 @@
           "kind": "ranking-boxplot"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 1,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「滋賀...10位」 → data: volunteer-activity-annual-participation-rate-10plus=4位"
-      ]
+      "valueCheck": "match"
     },
     {
       "key": "a-volunteer-activity-annual-participation-rate-15plus",
@@ -7688,24 +7685,16 @@
       "year": "2019",
       "figures": [
         {
-          "file": "images/image-01.png",
+          "file": "images/choropleth-map-1080x1080.png",
           "kind": "ranking-map"
         },
         {
-          "file": "images/image-02.png",
-          "kind": "diagram"
-        },
-        {
-          "file": "images/image-03.png",
-          "kind": "diagram"
-        },
-        {
-          "file": "images/image-04.png",
-          "kind": "diagram"
-        },
-        {
-          "file": "images/image-05.png",
+          "file": "images/chart-x-1200x630.png",
           "kind": "ranking-bar"
+        },
+        {
+          "file": "images/boxplot-1200x630.png",
+          "kind": "ranking-boxplot"
         }
       ],
       "valueCheck": "body-differs",
@@ -9482,11 +9471,7 @@
           "kind": "diagram"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 1,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「滋賀...10位」 → data: volunteer-activity-annual-participation-rate-10plus=4位"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "recovered-nf962c6702b93",

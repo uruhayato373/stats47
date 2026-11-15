@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "catalogTables": 227309,
+    "catalogTables": 227534,
     "monthlyTables": 8695,
     "surveys": 48
   },
@@ -68,7 +68,7 @@
       "govOrg": "総務省",
       "tables": 61,
       "prefectureTables": 0,
-      "latestUpdate": "2026-10-30",
+      "latestUpdate": "2026-11-10",
       "pinned": []
     },
     {
@@ -131,7 +131,7 @@
       "govOrg": "国土交通省",
       "tables": 33,
       "prefectureTables": 2,
-      "latestUpdate": "2026-09-17",
+      "latestUpdate": "2026-11-12",
       "pinned": []
     },
     {
@@ -178,17 +178,17 @@
       "govOrg": "総務省",
       "tables": 18,
       "prefectureTables": 0,
-      "latestUpdate": "2026-10-09",
+      "latestUpdate": "2026-11-10",
       "pinned": [
         {
           "statsDataId": "0004023601",
           "title": "品目分類 品目分類（2025年改定）（総数：金額）",
-          "updatedDate": "2026-10-09"
+          "updatedDate": "2026-11-10"
         },
         {
           "statsDataId": "0004023602",
           "title": "品目分類 品目分類（2025年改定）（総数：数量）",
-          "updatedDate": "2026-10-09"
+          "updatedDate": "2026-11-10"
         }
       ]
     },
@@ -317,7 +317,7 @@
       "govOrg": "法務省",
       "tables": 6,
       "prefectureTables": 0,
-      "latestUpdate": "2026-10-07",
+      "latestUpdate": "2026-11-06",
       "pinned": []
     },
     {
@@ -326,7 +326,7 @@
       "govOrg": "法務省",
       "tables": 6,
       "prefectureTables": 0,
-      "latestUpdate": "2026-09-28",
+      "latestUpdate": "2026-11-06",
       "pinned": []
     },
     {
@@ -353,7 +353,7 @@
       "govOrg": "国土交通省",
       "tables": 5,
       "prefectureTables": 0,
-      "latestUpdate": "2026-10-20",
+      "latestUpdate": "2026-11-11",
       "pinned": []
     },
     {
@@ -371,7 +371,7 @@
       "govOrg": "法務省",
       "tables": 4,
       "prefectureTables": 0,
-      "latestUpdate": "2026-10-26",
+      "latestUpdate": "2026-11-12",
       "pinned": []
     },
     {
@@ -425,7 +425,7 @@
       "govOrg": "法務省",
       "tables": 2,
       "prefectureTables": 0,
-      "latestUpdate": "2026-10-26",
+      "latestUpdate": "2026-11-12",
       "pinned": []
     },
     {
@@ -434,7 +434,7 @@
       "govOrg": "法務省",
       "tables": 2,
       "prefectureTables": 0,
-      "latestUpdate": "2026-10-16",
+      "latestUpdate": "2026-11-06",
       "pinned": []
     },
     {

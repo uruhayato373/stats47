@@ -1259,30 +1259,27 @@
     {
       "datasetId": "yokohama-opendata-portal",
       "fetch": {
-        "type": "http-file",
-        "urls": [
-          "https://data.city.yokohama.lg.jp/api/3/action/package_list"
-        ]
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-15 オーナー判断: 特定の都市・都道府県だけのオープンデータは取得・展開の対象から外す (47 県・全市区町村を同じ形で並べる用途に合わない)。"
       },
       "version": "initial"
     },
     {
       "datasetId": "osaka-odpo-catalog",
       "fetch": {
-        "type": "http-file",
-        "urls": [
-          "https://data.bodik.jp/api/3/action/package_list"
-        ]
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-15 オーナー判断: 特定の都市・都道府県だけのオープンデータは取得・展開の対象から外す (47 県・全市区町村を同じ形で並べる用途に合わない)。"
       },
       "version": "initial"
     },
     {
       "datasetId": "tokyo-open-data-api-catalog",
       "fetch": {
-        "type": "http-file",
-        "urls": [
-          "https://catalog.data.metro.tokyo.lg.jp/api/3/action/package_list"
-        ]
+        "type": "skip",
+        "reason": "other",
+        "note": "2026-11-15 オーナー判断: 特定の都市・都道府県だけのオープンデータは取得・展開の対象から外す (47 県・全市区町村を同じ形で並べる用途に合わない)。"
       },
       "version": "initial"
     },
