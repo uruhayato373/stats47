@@ -1,4 +1,6 @@
 #!/usr/bin/env tsx
+// Keep the 45s download and original bytes for source hashing.
+import { resolveEstatAppId, ESTAT_API, ESTAT_ENDPOINTS } from "../../estat-api/src/ingest.js";
 import { rankingR2Key, statsR2Key } from "@stats47/r2-storage/keys";
 /**
  * Official releases newer than SSDS → local stats + ranking staging. Never uploads.
@@ -56,13 +58,7 @@ function assertNotTrackedOutput(path: string): void {
 }
 
 function readAppId(): string {
-  const value = process.env.NEXT_PUBLIC_ESTAT_APP_ID ?? process.env.ESTAT_APP_ID;
-  if (value) return value;
-  const env = join(REPO_ROOT, ".env.local");
-  const line = existsSync(env) ? readFileSync(env, "utf8").split("\n").find((entry) => entry.startsWith("NEXT_PUBLIC_ESTAT_APP_ID=")) : undefined;
-  const id = line?.split("=").slice(1).join("=").trim().replace(/^["']|["']$/g, "");
-  if (!id) throw new Error("Set NEXT_PUBLIC_ESTAT_APP_ID or pass --history-estat-json with an official API response");
-  return id;
+  return resolveEstatAppId(process.env, join(REPO_ROOT, ".env.local"), { legacyEnv: "nullish" });
 }
 
 async function main(): Promise<void> {
@@ -99,7 +95,7 @@ async function main(): Promise<void> {
     const query = new URLSearchParams({ appId: offline ? "unused" : readAppId(),
       statsDataId: AGRICULTURAL_OUTPUT_RELEASE.history.statsDataId,
       cdCat01: AGRICULTURAL_OUTPUT_RELEASE.history.cdCat01, limit: "100000" });
-    historyPath = (await acquire(`https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?${query}`, "agricultural-history.json")).path;
+    historyPath = (await acquire(`${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS.GET_STATS_DATA}?${query}`, "agricultural-history.json")).path;
   }
   const historyRaw = await readFile(historyPath, "utf8");
   const history = parseAgriculturalHistory(JSON.parse(historyRaw));

@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+// Keep the existing raw response/status handling for symbol recovery.
+import { resolveEstatAppId } from "../lib/estat-catalog/api.mjs";
+import { ESTAT_STATS_DATA_URL } from "../lib/estat-catalog/endpoints.cjs";
 import { R2_PUBLIC_ORIGIN, statsR2Key } from '../lib/r2-keys.mjs';
 /**
  * 市区町村データ商品を作る: 最新境域の時系列 CSV + 結合用 GeoJSON + README + 検算表。
@@ -37,7 +40,7 @@ import { datasetPath } from '../../../config/datasets.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 const R2_BASE = R2_PUBLIC_ORIGIN;
-const ESTAT_API = 'https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData';
+const ESTAT_API = ESTAT_STATS_DATA_URL;
 const BOUNDARY_URL = (pref) =>
   `https://www.e-stat.go.jp/gis/statmap-search/data?dlserveyId=A002005212020&code=${pref}&coordSys=1&format=shape&downloadType=5&datum=2011`;
 const WATER_HCODE = 8154;
@@ -203,7 +206,7 @@ const [cities, prefs] = await Promise.all([
   fetchJson(`${R2_BASE}/${statsR2Key(args.metric, "prefecture")}`),
 ]);
 
-const appId = process.env.ESTAT_APP_ID || process.env.NEXT_PUBLIC_ESTAT_APP_ID || '';
+const appId = resolveEstatAppId(process.env, false, { legacyEnv: "first" }) || '';
 const symbolsPath = join(cacheDir, `estat-symbols-${args.metric}.json`);
 if (args['symbols-only'] && !appId) throw new Error('--symbols-only は e-Stat の appId が要る');
 let estat = null;

@@ -1,3 +1,5 @@
+// Keep single-attempt HTTP errors and the original JSON error message.
+import { ESTAT_API, ESTAT_ENDPOINTS } from "../../estat-api/src/ingest.js";
 /**
  * build-estat-availability — e-Stat の実在年の台帳を作り、metric config の `years` との差分を報告する。
  *
@@ -120,7 +122,7 @@ async function fetchTableInfo(
   statsDataId: string,
 ): Promise<Pick<EstatAvailabilityTable, "statName" | "title" | "updatedDate">> {
   const params = new URLSearchParams({ appId, statsDataId, limit: "1", metaGetFlg: "N" });
-  const res = await fetch(`https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?${params}`);
+  const res = await fetch(`${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS.GET_STATS_DATA}?${params}`);
   if (!res.ok) throw new Error(`e-Stat HTTP ${res.status}`);
   const json = (await res.json()) as {
     GET_STATS_DATA?: {

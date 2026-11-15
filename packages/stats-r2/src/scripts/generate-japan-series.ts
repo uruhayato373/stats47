@@ -1,3 +1,5 @@
+// Keep the 60s timeout, proxy and existing page/error handling.
+import { resolveEstatAppId, ESTAT_API, ESTAT_ENDPOINTS } from "../../../estat-api/src/ingest.js";
 /**
  * 日本全国値 artifact (`app/japan/<metric>/series.json`) を生成する
  * (GEO-SCOPE-SEPARATION-01 WP3)。
@@ -37,7 +39,7 @@ import {
   JAPAN_NATIONAL_AREA_CODE,
 } from "@stats47/data-configs/geo-scope";
 import type { BuildJapanSeriesResult } from "@stats47/data-configs/geo-scope";
-import { convertToStatsSchema, ESTAT_API, formatStatsData } from "@stats47/estat-api";
+import { convertToStatsSchema, formatStatsData } from "@stats47/estat-api";
 import type { EstatStatsDataResponse } from "@stats47/estat-api";
 import { SITE } from "@stats47/types";
 
@@ -69,15 +71,7 @@ function hash64(input: string): string {
 }
 
 function resolveAppId(): string {
-  if (process.env.NEXT_PUBLIC_ESTAT_APP_ID) return process.env.NEXT_PUBLIC_ESTAT_APP_ID;
-  try {
-    const env = readFileSync(resolve(REPO_ROOT, "apps/web/.env.development"), "utf8");
-    const m = env.match(/^NEXT_PUBLIC_ESTAT_APP_ID=(.+)$/m);
-    if (m) return m[1].trim().replace(/^["']|["']$/g, "");
-  } catch {
-    // fall through
-  }
-  throw new Error("NEXT_PUBLIC_ESTAT_APP_ID が解決できません");
+  return resolveEstatAppId(process.env, resolve(REPO_ROOT, "apps/web/.env.development"));
 }
 
 /** 自前 e-Stat fetch (server-only 回避)。企業プロキシは自動検出。 */
@@ -144,7 +138,7 @@ export async function fetchEstatRaw(
     const query = new URLSearchParams({
       appId, statsDataId, limit: "100000", startPosition: String(startPosition), ...axes,
     });
-    const url = `${ESTAT_API.BASE_URL}/app/json/getStatsData?${query}`;
+    const url = `${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS.GET_STATS_DATA}?${query}`;
     const fetchOptions: RequestInit & { dispatcher?: unknown } = {
       signal: AbortSignal.timeout(60_000),
     };

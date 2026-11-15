@@ -14,6 +14,8 @@ vi.mock("../../../core/client/http-client", () => ({
   executeHttpRequest: vi.fn(),
 }));
 
+vi.mock("../../../ingest", () => ({ resolveEstatAppId: () => "test-app-id" }));
+
 // 設定をモック
 vi.mock("../../../core/config", () => ({
   ESTAT_API: {
@@ -24,7 +26,6 @@ vi.mock("../../../core/config", () => ({
   ESTAT_API_CONFIG: {
     REQUEST_TIMEOUT_MS: 1000,
   },
-  ESTAT_APP_ID: "test-app-id",
   ESTAT_ENDPOINTS: {
     GET_STATS_LIST: "/json/getStatsList",
   },

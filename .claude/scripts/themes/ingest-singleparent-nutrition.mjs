@@ -1,3 +1,5 @@
+// Keep the 60s raw-byte download for source hashes and original HTTP/error handling.
+import { resolveEstatAppId } from "../lib/estat-catalog/api.mjs";
 import { statsR2Key } from "../lib/r2-keys.mjs";
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -438,7 +440,7 @@ export function extractNdb(workbook,question){
 }
 async function load(source,directory){
  const path=resolve(directory,source.file);let bytes;
- try{bytes=await readFile(path);}catch(e){if(e.code!=='ENOENT')throw e;let url=source.url;if(source.kind==='api'){const appId=process.env.NEXT_PUBLIC_ESTAT_APP_ID||process.env.ESTAT_APP_ID;assert.ok(appId,'e-Stat app ID required for uncached source');const u=new URL(ESTAT_STATS_DATA_URL);u.search=new URLSearchParams({appId,lang:'J',...source.parameters}).toString();url=u;}let r;try{r=await fetch(url,{signal:AbortSignal.timeout(60000)});}catch{throw Error('Source GET failed: '+source.group);}assert.ok(r.ok,'Source HTTP '+r.status);bytes=Buffer.from(await r.arrayBuffer());}
+ try{bytes=await readFile(path);}catch(e){if(e.code!=='ENOENT')throw e;let url=source.url;if(source.kind==='api'){const appId=resolveEstatAppId(process.env, false, { legacyEnv: "fallback" });assert.ok(appId,'e-Stat app ID required for uncached source');const u=new URL(ESTAT_STATS_DATA_URL);u.search=new URLSearchParams({appId,lang:'J',...source.parameters}).toString();url=u;}let r;try{r=await fetch(url,{signal:AbortSignal.timeout(60000)});}catch{throw Error('Source GET failed: '+source.group);}assert.ok(r.ok,'Source HTTP '+r.status);bytes=Buffer.from(await r.arrayBuffer());}
  if(source.kind==='api'){const raw=JSON.parse(bytes);assert.equal(Number(raw.GET_STATS_DATA?.RESULT?.STATUS),0);assert.equal(sha(JSON.stringify(raw.GET_STATS_DATA.STATISTICAL_DATA)),source.statisticalDataSha256,'API data or metadata changed');}else assert.equal(sha(bytes),source.sha256,'Official file changed');
  await mkdir(directory,{recursive:true});await writeFile(path,bytes);return {bytes,path,actualResponseSha256:sha(bytes)};
 }

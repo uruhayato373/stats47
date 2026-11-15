@@ -1,3 +1,5 @@
+// Parse JSON even on non-2xx responses, preserving the existing diagnostic payload.
+import { resolveEstatAppId, ESTAT_API, ESTAT_ENDPOINTS } from "../../../packages/estat-api/src/ingest.js";
 import { isCityAreaCode } from "@stats47/area";
 /**
  * e-Stat から市区町村別の転入超過数（純移動）を取得し、47 都道府県ごとに
@@ -31,12 +33,7 @@ const STATS_DATA_ID = "0003419945";
 const YEAR = Number(process.argv[2] ?? "2025");
 
 function readAppId(): string {
-  const line = readFileSync(resolve(REPO_ROOT, ".env.local"), "utf8")
-    .split("\n")
-    .find((l) => l.startsWith("NEXT_PUBLIC_ESTAT_APP_ID="));
-  const id = line?.split("=").slice(1).join("=").trim().replace(/^["']|["']$/g, "");
-  if (!id) throw new Error("NEXT_PUBLIC_ESTAT_APP_ID が見つかりません");
-  return id;
+  return resolveEstatAppId({}, resolve(REPO_ROOT, ".env.local"));
 }
 
 /** 市区町村コード（5 桁・末尾 000 でない・県コード 01-47） */
@@ -52,7 +49,7 @@ interface EstatValue {
 async function main() {
   const appId = readAppId();
   const url =
-    `https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData` +
+    `${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS.GET_STATS_DATA}` +
     `?appId=${appId}&statsDataId=${STATS_DATA_ID}` +
     `&cdCat01=000` + // 年齢=総数
     `&cdCat02=0` + // 性別=総数

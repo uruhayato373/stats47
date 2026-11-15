@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// Keep the 60s raw-byte download for source hashes and original HTTP/error handling.
+import { resolveEstatAppId } from "../lib/estat-catalog/api.mjs";
 import { statsR2Key } from "../lib/r2-keys.mjs";
 /** Official forestry/medical sources -> canonical payloads. Remote writes are unsupported. */
 import assert from 'node:assert/strict';
@@ -1078,10 +1080,10 @@ async function sourceBytes(src, dir, isApi = false) {
     if (e.code !== 'ENOENT') throw e;
     let url = src.url;
     if (isApi) {
-      assert.ok(process.env.NEXT_PUBLIC_ESTAT_APP_ID, 'e-Stat appId required');
+      assert.ok(resolveEstatAppId(process.env, false), 'e-Stat appId required');
       url = new URL(ESTAT_STATS_DATA_URL);
       url.search = new URLSearchParams({
-        appId: process.env.NEXT_PUBLIC_ESTAT_APP_ID,
+        appId: resolveEstatAppId(process.env, false),
         lang: 'J',
         ...src.parameters,
       });

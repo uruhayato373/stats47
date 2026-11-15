@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { resolveEstatAppId } from "../lib/estat-catalog/api.mjs";
 import { extractYearCode } from "../lib/year-code.mjs";
 // Compatibility: malformed time prefixes retain the previous slice result.
 import fs from 'node:fs';
@@ -37,7 +38,7 @@ if (process.argv.includes('--check')) {
   console.log(JSON.stringify({ candidates: catalog.themes.length, verifiedCodes: report.series.filter((row) => row.status === 'verified').length, firstBatch: catalog.firstBatch?.length ?? 0, errors }, null, 2));
   process.exitCode = errors.length ? 1 : 0;
 } else {
-  const appId = process.env.NEXT_PUBLIC_ESTAT_APP_ID || process.env.ESTAT_APP_ID;
+  const appId = resolveEstatAppId(process.env, false, { legacyEnv: "fallback" });
   if (!appId) throw new Error('NEXT_PUBLIC_ESTAT_APP_ID or ESTAT_APP_ID is required');
   const requestedCodes = [...new Set(catalog.themes.flatMap(explicitIndicatorCodes))].sort();
   const artifactsArg = process.argv.indexOf('--artifacts');

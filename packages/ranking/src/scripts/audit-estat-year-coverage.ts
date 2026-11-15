@@ -1,3 +1,5 @@
+// Keep the 20s timeout, proxy and null-on-failure pagination contract.
+import { resolveEstatAppId, ESTAT_API, ESTAT_ENDPOINTS } from "../../../estat-api/src/ingest.js";
 import { extractYearCode } from "@stats47/estat-api/api";
 // Compatibility: malformed time prefixes retain the previous slice result.
 import { isPrefectureAreaCode } from "@stats47/area";
@@ -98,18 +100,7 @@ async function getProxyDispatcher(): Promise<unknown | null> {
  * — 公開 ID・git tracked・秘密ではない)。
  */
 function readAppId(): string | null {
-  if (process.env.NEXT_PUBLIC_ESTAT_APP_ID) return process.env.NEXT_PUBLIC_ESTAT_APP_ID;
-  for (const rel of [".env.local", "apps/web/.env.development"]) {
-    const envPath = path.join(PROJECT_ROOT, rel);
-    if (!fs.existsSync(envPath)) continue;
-    const line = fs
-      .readFileSync(envPath, "utf8")
-      .split("\n")
-      .find((l) => l.startsWith("NEXT_PUBLIC_ESTAT_APP_ID="));
-    const id = line?.split("=").slice(1).join("=").trim().replace(/^["']|["']$/g, "");
-    if (id) return id;
-  }
-  return null;
+  try { return resolveEstatAppId(); } catch { return null; }
 }
 
 /** 10桁の e-Stat time コードを4桁年へ (packages/estat-api の extractYearCode と同じ判定)。 */
@@ -313,7 +304,7 @@ async function fetchValues(
       ...(startPosition ? { startPosition } : {}),
       ...(estatParams as unknown as Record<string, string>),
     });
-    const url = `https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?${params.toString()}`;
+    const url = `${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS.GET_STATS_DATA}?${params.toString()}`;
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 20_000);
     try {

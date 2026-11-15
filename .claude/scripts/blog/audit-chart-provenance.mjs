@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// Keep the three-attempt/20s probe and its true/false fallback semantics.
+import { resolveEstatAppId } from "../lib/estat-catalog/api.mjs";
 import { rankingR2Key, statsR2Key, STATS_R2_PREFIX } from '../lib/r2-keys.mjs';
 /**
  * audit-chart-provenance.mjs — ブログチャートの出典 (source.json) が
@@ -98,7 +100,7 @@ const STAGED = args.includes('--staged');
 const LIMIT = args.includes('--limit')
   ? Number(args[args.indexOf('--limit') + 1])
   : null;
-const ESTAT_APP_ID = process.env.NEXT_PUBLIC_ESTAT_APP_ID || '';
+const estatAppId = resolveEstatAppId(process.env, false) || '';
 const log = (m) => !JSON_OUT && console.log(m);
 
 /**
@@ -145,9 +147,9 @@ async function exists(url) {
   }
 }
 async function eStatTableExists(statsDataId) {
-  if (!ESTAT_APP_ID) return true;
+  if (!estatAppId) return true;
   const url = new URL(ESTAT_META_INFO_URL);
-  url.searchParams.set('appId', ESTAT_APP_ID);
+  url.searchParams.set('appId', estatAppId);
   url.searchParams.set('statsDataId', statsDataId);
   url.searchParams.set('lang', 'J');
   for (let attempt = 1; attempt <= 3; attempt += 1) {

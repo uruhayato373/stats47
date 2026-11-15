@@ -1,3 +1,6 @@
+// Keep the 60s raw-byte download for source hashes and original HTTP/error handling.
+import { resolveEstatAppId } from "../lib/estat-catalog/api.mjs";
+import { ESTAT_STATS_DATA_URL } from "../lib/estat-catalog/endpoints.cjs";
 import { statsR2Key } from "../lib/r2-keys.mjs";
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -59,7 +62,7 @@ export const SOURCES = {
   },
   "0004024872": {
     "filename": "0004024872-getStatsData.json",
-    "url": "https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData",
+    "url": ESTAT_STATS_DATA_URL,
     "sha256": "26d174a9ae9d7fd3993de2647d35144a4002c31f391925d0cbae0963353236d4",
     "parameters": {
       "statsDataId": "0004024872",
@@ -73,7 +76,7 @@ export const SOURCES = {
   },
   "0004024910": {
     "filename": "0004024910-getStatsData.json",
-    "url": "https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData",
+    "url": ESTAT_STATS_DATA_URL,
     "sha256": "9c193f88d59aa6861b5b6e07b19a9f8d3d72f49715b8d66557f13c5b7f79bb77",
     "parameters": {
       "statsDataId": "0004024910",
@@ -254,7 +257,7 @@ async function readSource(spec, dir) {
     if (error.code !== 'ENOENT') throw error;
     const url = new URL(spec.url);
     if (spec.parameters) {
-      const appId = process.env.NEXT_PUBLIC_ESTAT_APP_ID || process.env.ESTAT_APP_ID;
+      const appId = resolveEstatAppId(process.env, false, { legacyEnv: "fallback" });
       assert.ok(appId, 'Missing e-Stat credential; use --env-file=apps/web/.env.development');
       for (const [k, v] of Object.entries({ ...spec.parameters, appId })) url.searchParams.set(k, String(v));
     }

@@ -1,3 +1,5 @@
+// Keep single-attempt HTTP errors and the original JSON error message.
+import { resolveEstatAppId, ESTAT_API, ESTAT_ENDPOINTS } from "../../estat-api/src/ingest.js";
 import { extractYearCode } from "@stats47/estat-api/api";
 // Compatibility: malformed time prefixes retain the previous slice result.
 import { isPrefectureAreaCode } from "@stats47/area";
@@ -70,7 +72,7 @@ async function fetchStatsData(appId: string): Promise<{
     statsDataId: STATS_DATA_ID,
     limit: "100000", // e-Stat getStatsData の上限
   });
-  const url = `https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?${params}`;
+  const url = `${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS.GET_STATS_DATA}?${params}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`e-Stat HTTP ${res.status}`);
   const json = (await res.json()) as EstatResponse;
@@ -167,7 +169,7 @@ interface FocusFile {
 }
 
 async function main(): Promise<void> {
-  const appId = process.env.NEXT_PUBLIC_ESTAT_APP_ID;
+  const appId = resolveEstatAppId(process.env, false);
   if (!appId) throw new Error("NEXT_PUBLIC_ESTAT_APP_ID 未設定 (CI で実行してください)");
 
   console.log(`fetching e-Stat ${STATS_DATA_ID} …`);

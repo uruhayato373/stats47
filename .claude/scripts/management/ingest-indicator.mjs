@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { resolveEstatAppId } from "../lib/estat-catalog/api.mjs";
 import { isPrefectureAreaCode } from "../lib/prefectures.cjs";
 // 1 つ以上の e-Stat candidate を recipe (query/prefSource) ベースで取得・登録する。
 // SKILL.md (.claude/skills/management/expand-indicators/SKILL.md) から呼ばれる。
@@ -35,7 +36,7 @@ import { PREF_NAMES } from "../lib/prefectures.cjs";
 const PROJECT_ROOT = path.resolve(import.meta.dirname, "../../..");
 config({ path: path.resolve(PROJECT_ROOT, ".env.local") });
 
-const APP_ID = process.env.NEXT_PUBLIC_ESTAT_APP_ID;
+const APP_ID = resolveEstatAppId(process.env, false);
 if (!APP_ID) {
   console.error("NEXT_PUBLIC_ESTAT_APP_ID is not set in .env.local");
   process.exit(1);

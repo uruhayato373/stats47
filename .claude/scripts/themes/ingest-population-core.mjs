@@ -1,3 +1,5 @@
+// Keep the 60s raw-byte download for source hashes and original HTTP/error handling.
+import { resolveEstatAppId } from "../lib/estat-catalog/api.mjs";
 import { statsR2Key } from "../lib/r2-keys.mjs";
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -476,7 +478,7 @@ async function source(s, dir) {
   } catch (e) {
     if (e.code !== 'ENOENT') throw e;
     const appId =
-      process.env.NEXT_PUBLIC_ESTAT_APP_ID || process.env.ESTAT_APP_ID;
+      resolveEstatAppId(process.env, false, { legacyEnv: "fallback" });
     assert.ok(appId, 'e-Stat appId required');
     const u = new URL(s.url);
     u.search = new URLSearchParams({ appId, lang: 'J', ...s.parameters });

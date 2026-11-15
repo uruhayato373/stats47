@@ -1,4 +1,5 @@
-import { ESTAT_API, ESTAT_APP_ID } from "../../../core/config";
+import { ESTAT_API, resolveEstatAppId } from "../../../ingest";
+const appIdFromEnv = resolveEstatAppId(process.env, false);
 
 /**
  * e-Stat API リクエストパラメータを構築
@@ -9,7 +10,7 @@ import { ESTAT_API, ESTAT_APP_ID } from "../../../core/config";
  */
 export function buildRequestParams(
   params: Record<string, unknown>,
-  appId: string = ESTAT_APP_ID
+  appId: string = appIdFromEnv
 ): Record<string, unknown> {
   return {
     appId,

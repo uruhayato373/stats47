@@ -1,3 +1,4 @@
+import { resolveEstatAppId } from "../../estat-api/src/ingest.js";
 /**
  * page-data-batch — TS-config 駆動の e-Stat → R2 直行バッチ
  *
@@ -34,14 +35,13 @@
  *
  * 取得・整形・書き込みの本体は packages/data-configs/src/ingest/ にある。このファイルは CLI と再 export だけ。
  */
-import { readFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { statsR2Key } from "@stats47/r2-storage/keys";
 import { datasetDir } from "../../../config/datasets.mjs";
 import { listAllMetrics } from "../src/registry.js";
 import type { MetricConfig } from "../src/types.js";
-import { REPO_ROOT, setAppIdReader, type Args } from "../src/ingest/batch-context.js";
+import { setAppIdReader, type Args } from "../src/ingest/batch-context.js";
 import { filterActiveRefreshTargets, getR2FileMtime, processOne } from "../src/ingest/process-one.js";
 export { classifyIngestShape, filterActiveRefreshTargets, processOne } from "../src/ingest/process-one.js";
 export { fetchEstatData } from "../src/ingest/estat-fetch.js";
@@ -85,20 +85,7 @@ export function parseBatchArgs(argv = process.argv.slice(2)): Args {
   return out;
 }
 export function readAppId(): string {
-  // クラウド環境では env を直接注入 (.env.local ファイルは無い) ため process.env を優先
-  if (process.env.NEXT_PUBLIC_ESTAT_APP_ID) {
-    return process.env.NEXT_PUBLIC_ESTAT_APP_ID;
-  }
-  for (const envFile of [".env.local", "apps/web/.env.development"]) {
-    const envPath = resolve(REPO_ROOT, envFile);
-    if (!existsSync(envPath)) continue;
-    const line = readFileSync(envPath, "utf8")
-      .split("\n")
-      .find((l) => l.startsWith("NEXT_PUBLIC_ESTAT_APP_ID="));
-    const id = line?.split("=").slice(1).join("=").trim().replace(/^["']|["']$/g, "");
-    if (id) return id;
-  }
-  throw new Error("NEXT_PUBLIC_ESTAT_APP_ID not set (process.env, .env.local, apps/web/.env.development)");
+  return resolveEstatAppId();
 }
 async function main() {
   const args = parseBatchArgs();

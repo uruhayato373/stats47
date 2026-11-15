@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { ESTAT_STATS_DATA_URL } from "../lib/estat-catalog/endpoints.cjs";
 import { statsR2Key } from "../lib/r2-keys.mjs";
 /** SSDS C350302 only. Raw source is private; only --write-local writes canonical values. */
 import assert from 'node:assert/strict';
@@ -239,7 +240,7 @@ export async function main() {
     metricKey: KEY,
     source: {
       url: 'https://www.e-stat.go.jp/dbview?sid=0000010103',
-      apiEndpoint: 'https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData',
+      apiEndpoint: ESTAT_STATS_DATA_URL,
       parameters: receipt.parameters,
       sha256: SOURCE_SHA,
       bytes: SOURCE_BYTES,

@@ -23,11 +23,7 @@ require("dotenv").config({
 });
 const Database = require("better-sqlite3");
 
-const APP_ID = process.env.NEXT_PUBLIC_ESTAT_APP_ID;
-if (!APP_ID) {
-  console.error("NEXT_PUBLIC_ESTAT_APP_ID required");
-  process.exit(1);
-}
+let APP_ID;
 
 const D1_PATH = path.resolve(
   __dirname,
@@ -226,6 +222,12 @@ async function processMetric(db, metricKey, opts) {
 }
 
 async function main() {
+  const { resolveEstatAppId } = await import("../lib/estat-catalog/api.mjs");
+  APP_ID = resolveEstatAppId(process.env, false);
+  if (!APP_ID) {
+    console.error("e-Stat app ID required");
+    process.exit(1);
+  }
   const opts = parseArgs();
   const db = new Database(D1_PATH);
   const results = [];

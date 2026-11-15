@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// Keep single-attempt HTTP handling and the unmodified API error payload.
+import { resolveEstatAppId } from "../lib/estat-catalog/api.mjs";
 import { extractYearCode } from "../lib/year-code.mjs";
 // Compatibility: malformed time prefixes retain the previous slice result.
 /**
@@ -81,11 +83,7 @@ if (LAYOUT === "months-by-year" && (ITEMS.length !== 1 || YEARS.length < 2)) {
 }
 
 function appId() {
-  if (process.env.NEXT_PUBLIC_ESTAT_APP_ID) return process.env.NEXT_PUBLIC_ESTAT_APP_ID;
-  const env = fs.readFileSync(path.join(PROJECT_ROOT, "apps/web/.env.development"), "utf8");
-  const m = env.match(/NEXT_PUBLIC_ESTAT_APP_ID=\s*"?([^"\n]+)"?/);
-  if (!m) throw new Error("NEXT_PUBLIC_ESTAT_APP_ID が無い");
-  return m[1].trim();
+  return resolveEstatAppId(process.env, path.join(PROJECT_ROOT, "apps/web/.env.development"));
 }
 
 async function fetchItem(src, code) {

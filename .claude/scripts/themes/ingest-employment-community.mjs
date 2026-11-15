@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// Keep the 60s raw-byte download for source hashes and original HTTP/error handling.
+import { resolveEstatAppId } from "../lib/estat-catalog/api.mjs";
 import { statsR2Key } from "../lib/r2-keys.mjs";
 /** Pinned official e-Stat sources -> six canonical metrics. Run from repository root. No remote writes. */
 import assert from 'node:assert/strict';
@@ -36,7 +38,7 @@ export const SOURCES = [
       cdCat04: '222',
       limit: '100000',
     },
-    url: 'https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?lang=J&statsDataId=0004008518&cdTab=001-2022&cdCat01=0&cdCat02=00&cdCat03=0%2C1%2C2%2C3%2C4&cdCat04=222&limit=100000',
+    url: `${ESTAT_STATS_DATA_URL}?lang=J&statsDataId=0004008518&cdTab=001-2022&cdCat01=0&cdCat02=00&cdCat03=0%2C1%2C2%2C3%2C4&cdCat04=222&limit=100000`,
     rawSha256:
       'e6488df1a52f42254e877cc1457b82261e6a30c2dea1338090515d04bcc837e6',
     statisticalDataSha256:
@@ -83,7 +85,7 @@ export const SOURCES = [
       cdCat04: '22',
       limit: '100000',
     },
-    url: 'https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?lang=J&statsDataId=0004008493&cdTab=001-2022&cdCat01=0&cdCat03=0&cdCat04=22&limit=100000',
+    url: `${ESTAT_STATS_DATA_URL}?lang=J&statsDataId=0004008493&cdTab=001-2022&cdCat01=0&cdCat03=0&cdCat04=22&limit=100000`,
     rawSha256:
       'c92b8565efed320b72d5025427b25ee68e502c8d93b730830c70126fa215925f',
     statisticalDataSha256:
@@ -171,7 +173,7 @@ export const SOURCES = [
       cdCat04: '00,06',
       limit: '10000',
     },
-    url: 'https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?lang=J&statsDataId=0003455937&cdTab=202110A09B08&cdCat01=0&cdCat02=99000&cdCat03=0&cdCat04=00%2C06&limit=10000',
+    url: `${ESTAT_STATS_DATA_URL}?lang=J&statsDataId=0003455937&cdTab=202110A09B08&cdCat01=0&cdCat02=99000&cdCat03=0&cdCat04=00%2C06&limit=10000`,
     rawSha256:
       '5f4d706269ad2054afff30e8e1684d2967043bc0342ea593e8baf5ff95607029',
     statisticalDataSha256:
@@ -214,7 +216,7 @@ export const SOURCES = [
       cdCat03: '0',
       limit: '10000',
     },
-    url: 'https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?lang=J&statsDataId=0003455936&cdCat01=0&cdCat02=99000&cdCat03=0&limit=10000',
+    url: `${ESTAT_STATS_DATA_URL}?lang=J&statsDataId=0003455936&cdCat01=0&cdCat02=99000&cdCat03=0&limit=10000`,
     rawSha256:
       'b3aba69e44d54f503a53d17c5e7565b74b075b66f437a021582c2fbebcc918d8',
     statisticalDataSha256:
@@ -254,7 +256,7 @@ export const SOURCES = [
       cdCat04: '00,06',
       limit: '10000',
     },
-    url: 'https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?lang=J&statsDataId=0003455935&cdTab=202112A11&cdCat01=0&cdCat02=99000&cdCat03=0&cdCat04=00%2C06&limit=10000',
+    url: `${ESTAT_STATS_DATA_URL}?lang=J&statsDataId=0003455935&cdTab=202112A11&cdCat01=0&cdCat02=99000&cdCat03=0&cdCat04=00%2C06&limit=10000`,
     rawSha256:
       'bbe8e9398223fd0a9b50cc10055779947266f86b93ac5aea2a31573b4dab2a0d',
     statisticalDataSha256:
@@ -1033,7 +1035,7 @@ async function acquireApi(source, directory) {
   } catch (e) {
     if (e.code !== 'ENOENT') throw e;
     const appId =
-      process.env.NEXT_PUBLIC_ESTAT_APP_ID ?? process.env.ESTAT_APP_ID;
+      resolveEstatAppId(process.env, false, { legacyEnv: "nullish" });
     assert.ok(appId, 'e-Stat credential required');
     const url = new URL(ESTAT_STATS_DATA_URL);
     url.search = new URLSearchParams({

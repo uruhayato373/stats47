@@ -1,3 +1,5 @@
+// Keep the 60s raw-byte download for source hashes and original HTTP/error handling.
+import { resolveEstatAppId } from "../lib/estat-catalog/api.mjs";
 import { statsR2Key } from "../lib/r2-keys.mjs";
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -179,7 +181,7 @@ async function fetchSource(source, dir) {
   const path = resolve(dir, source.filename); let bytes;
   try { bytes = await readFile(path); } catch (error) {
     if (error.code !== 'ENOENT') throw error;
-    const appId = process.env.NEXT_PUBLIC_ESTAT_APP_ID || process.env.ESTAT_APP_ID;
+    const appId = resolveEstatAppId(process.env, false, { legacyEnv: "fallback" });
     assert.ok(appId, 'e-Stat key required for uncached source');
     const url = new URL(ESTAT_STATS_DATA_URL);
     url.search = new URLSearchParams({ appId, lang: 'J', ...source.parameters }).toString();

@@ -11,8 +11,16 @@ export const ESTAT_MAX_CONCURRENCY = 4;
 const ENV_FILES = ["../../../../../.env.local", "../../../../../apps/web/.env.development"]
   .map((path) => fileURLToPath(new URL(path, import.meta.url)));
 
-export function resolveEstatAppId(env: NodeJS.ProcessEnv = process.env, envFile?: string): string {
-  if (env.NEXT_PUBLIC_ESTAT_APP_ID?.trim()) return env.NEXT_PUBLIC_ESTAT_APP_ID.trim();
+export function resolveEstatAppId(env: NodeJS.ProcessEnv = process.env, envFile?: string | false,
+  options: { legacyEnv?: "fallback" | "first" | "nullish" } = {},
+): string {
+  const primary = env.NEXT_PUBLIC_ESTAT_APP_ID;
+  const value = options.legacyEnv === "first" ? env.ESTAT_APP_ID || primary
+    : options.legacyEnv === "nullish" ? primary ?? env.ESTAT_APP_ID
+    : options.legacyEnv === "fallback" ? primary || env.ESTAT_APP_ID : primary;
+  // Environment-only callers retain their own missing-ID handling and raw value.
+  if (envFile === false) return value ?? "";
+  if (value?.trim()) return value.trim();
   for (const file of envFile ? [envFile] : ENV_FILES) {
     let text: string;
     try { text = readFileSync(file, "utf8"); } catch { continue; }

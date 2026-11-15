@@ -1,4 +1,6 @@
 #!/usr/bin/env tsx
+// Keep the existing raw-response and Blocked error contract.
+import { resolveEstatAppId, ESTAT_API, ESTAT_ENDPOINTS } from "../../../../packages/estat-api/src/ingest.js";
 import { extractYearCode } from "@stats47/estat-api/api";
 // Compatibility: malformed time prefixes retain the previous slice result.
 import { rankingR2Key } from '../../lib/r2-keys.mjs';
@@ -15,7 +17,7 @@ import path from 'node:path';
 import { renderReferenceBarSvg, REFERENCE_FIGURE_RENDERER_VERSION } from './lib/figure-renderer';
 import { writeReferenceFigure } from './lib/figure-files';
 import { R2_PUBLIC_BASE_URL } from '../../lib/site-config.cjs';
-import { ESTAT_STATS_DATA_URL } from '../../lib/estat-catalog/endpoints.cjs';
+const ESTAT_STATS_DATA_URL = `${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS.GET_STATS_DATA}`;
 import { loadAnalyses } from '../../source-vault/lib/reference-expansion.mjs';
 import { type Analysis, articleKeyOf, fmt, mergeWritten, registerArticle } from './build-reference-note';
 
@@ -37,9 +39,7 @@ const arg = (name: string) => (process.argv.includes(name) ? process.argv[proces
 const round = (v: number, d: number) => Math.round(v * 10 ** d) / 10 ** d;
 
 function appId() {
-  const m = readFileSync(path.join(ROOT, 'apps/web/.env.development'), 'utf8').match(/NEXT_PUBLIC_ESTAT_APP_ID=(\S+)/);
-  if (!m) throw new Error('NEXT_PUBLIC_ESTAT_APP_ID が apps/web/.env.development に無い');
-  return m[1];
+  return resolveEstatAppId({}, path.join(ROOT, 'apps/web/.env.development'));
 }
 
 async function estat(table: string, codes: string[], year: string) {
