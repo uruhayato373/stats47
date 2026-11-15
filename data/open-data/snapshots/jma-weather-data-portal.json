@@ -1,0 +1,42 @@
+{
+  "datasetId": "jma-weather-data-portal",
+  "versions": [
+    {
+      "schemaVersion": 1,
+      "datasetId": "jma-weather-data-portal",
+      "version": "initial",
+      "sha256": "bb6283938e4afc69062a2a5c1c4b2adedfe4db2dbbb22c906806aacf234da88c",
+      "recipeSha256": "91fcf4c65c2e16a8349dd70173dc509960572a9635e310cd481965adb9073644",
+      "retrievedAt": "2026-11-15T00:32:49.557Z",
+      "license": {
+        "name": "公共データ利用規約 (第1.0版)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.jma.go.jp/jma/kishou/info/coment.html"
+      },
+      "files": [
+        {
+          "key": "open-data/raw/jma-weather-data-portal/initial/0001.zip",
+          "url": "https://www.jma.go.jp/jma/kishou/know/amedas/ame_master.zip",
+          "sha256": "2374836f9f7fbf884d92f49defb9ea166abd60abe075914bcf7720947af33596",
+          "bytes": 53494,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:32:48.125Z"
+        },
+        {
+          "key": "open-data/raw/jma-weather-data-portal/initial/0002.zip",
+          "url": "https://www.jma.go.jp/jma/kishou/know/amedas/snow_master.zip",
+          "sha256": "e7ed978cce0fe166e82e6f093b54bd03738b1b132cdb5091b34bcbf879153ba8",
+          "bytes": 12572,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:32:49.557Z"
+        }
+      ],
+      "manifestKey": "open-data/raw/jma-weather-data-portal/initial/manifest.json",
+      "manifestSha256": "0a9bc10350e47f1cad41d5d9c4e99370ec3b299ae2925be815da671a0b0ff1ae",
+      "bytes": 66066,
+      "status": "archived"
+    }
+  ]
+}

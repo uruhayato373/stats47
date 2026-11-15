@@ -16,7 +16,7 @@ export function bucketLabel(bucket: string): string {
 }
 
 export function formatKeyClassTable(rules: readonly R2KeyClassRule[] = R2_KEY_CLASSES): string {
-  const cell = (s: string) => s.replace(/\|/g, "\\|");
+  const cell = (s: string) => s.replace(/\\/g, "\\\\").replace(/\|/g, "\\|");
   const lines = [
     "| bucket | prefix | 区分 | 書き手 | 何のデータか |",
     "|---|---|---|---|---|",

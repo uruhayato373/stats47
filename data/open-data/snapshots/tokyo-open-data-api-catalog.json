@@ -1,0 +1,34 @@
+{
+  "datasetId": "tokyo-open-data-api-catalog",
+  "versions": [
+    {
+      "schemaVersion": 1,
+      "datasetId": "tokyo-open-data-api-catalog",
+      "version": "initial",
+      "sha256": "fe6ce9b9101ba1d56032450b5d192cad9b292c30b47e6e0a94285842a2715248",
+      "recipeSha256": "a1afee60106c84a41c01555e4d82fa4127882d4ca64567f7227c3de8ffc54dd5",
+      "retrievedAt": "2026-11-15T00:17:11.277Z",
+      "license": {
+        "name": "東京都オープンデータ 利用規約 (未取得)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://portal.data.metro.tokyo.lg.jp/"
+      },
+      "files": [
+        {
+          "key": "open-data/raw/tokyo-open-data-api-catalog/initial/0001.bin",
+          "url": "https://catalog.data.metro.tokyo.lg.jp/api/3/action/package_list",
+          "sha256": "9451d3a6ad21ced6745039b69716360eb0f8f4d392959eac54cdc03f47c99446",
+          "bytes": 215038,
+          "contentType": "application/json;charset=utf-8",
+          "retrievedAt": "2026-11-15T00:17:11.276Z"
+        }
+      ],
+      "manifestKey": "open-data/raw/tokyo-open-data-api-catalog/initial/manifest.json",
+      "manifestSha256": "8a80eadb3ceef378b9ee07f8b5887a34acfaac67060d3ed640f677acdbe1e4ea",
+      "bytes": 215038,
+      "status": "archived"
+    }
+  ]
+}

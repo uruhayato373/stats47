@@ -1,0 +1,58 @@
+{
+  "datasetId": "jma-bousai-xml-feed",
+  "versions": [
+    {
+      "schemaVersion": 1,
+      "datasetId": "jma-bousai-xml-feed",
+      "version": "initial",
+      "sha256": "a1794f5ce96a1822b865ae53b135aa6f7d0b532f24bd481c7f95876a7e3e24ab",
+      "recipeSha256": "9e9feebebcfd83de08d642287ef37a0b8e56e649a4beb1959cd8fba175d036e0",
+      "retrievedAt": "2026-11-15T00:12:26.892Z",
+      "license": {
+        "name": "公共データ利用規約 (第1.0版)(気象庁サイト規約。XMLページでは再利用条件の明記なし)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.jma.go.jp/jma/kishou/info/coment.html"
+      },
+      "files": [
+        {
+          "key": "open-data/raw/jma-bousai-xml-feed/initial/0001.xml",
+          "url": "https://www.data.jma.go.jp/developer/xml/feed/regular.xml",
+          "sha256": "a57bbf00ad0e92d0547687de363bccdfdf898d4caa4a192dc37d6da96c8cbf25",
+          "bytes": 176822,
+          "contentType": "text/xml",
+          "retrievedAt": "2026-11-15T00:12:24.014Z"
+        },
+        {
+          "key": "open-data/raw/jma-bousai-xml-feed/initial/0002.xml",
+          "url": "https://www.data.jma.go.jp/developer/xml/feed/extra.xml",
+          "sha256": "f6893d4bd82a51fae2d4aac8283934ffe2620943aaaef598492960f4a8c58b40",
+          "bytes": 119376,
+          "contentType": "text/xml",
+          "retrievedAt": "2026-11-15T00:12:24.899Z"
+        },
+        {
+          "key": "open-data/raw/jma-bousai-xml-feed/initial/0003.xml",
+          "url": "https://www.data.jma.go.jp/developer/xml/feed/eqvol.xml",
+          "sha256": "2e371159ccbd4e50fe9447d78143a680eb3bd9f790f60f654642809a2de22234",
+          "bytes": 20384,
+          "contentType": "text/xml",
+          "retrievedAt": "2026-11-15T00:12:25.893Z"
+        },
+        {
+          "key": "open-data/raw/jma-bousai-xml-feed/initial/0004.xml",
+          "url": "https://www.data.jma.go.jp/developer/xml/feed/other.xml",
+          "sha256": "524993b47ef6366be90a56c9ea183ba0734d4e01100b62a77d5e142fe6204b3f",
+          "bytes": 19210,
+          "contentType": "text/xml",
+          "retrievedAt": "2026-11-15T00:12:26.891Z"
+        }
+      ],
+      "manifestKey": "open-data/raw/jma-bousai-xml-feed/initial/manifest.json",
+      "manifestSha256": "6ff7dbb40b19923f37a73696b6b7214584b3ab00133cbdf4d21ab0c8d39473e5",
+      "bytes": 335792,
+      "status": "archived"
+    }
+  ]
+}
