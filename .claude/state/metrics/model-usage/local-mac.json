@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-12T21:44:00.975Z",
+  "generatedAt": "2026-11-15T04:19:03.312Z",
   "platform": "mac",
   "pricing": {
     "source": "https://platform.claude.com/docs/en/about-claude/pricing",
     "observedAt": "2026-10-02"
   },
   "scan": {
-    "dirs": 7,
-    "transcripts": 44,
+    "dirs": 9,
+    "transcripts": 146,
     "skipped": 0,
     "weeks": [
       "2026-W29",
@@ -763,18 +763,52 @@
       "week": "2026-W46",
       "scope": "main",
       "agentType": "(main)",
+      "model": "claude-fable-5-2",
+      "effort": "high",
+      "runs": 1,
+      "calls": 646,
+      "tokens": {
+        "input": 1292,
+        "output": 737665,
+        "cacheWrite5m": 0,
+        "cacheWrite1h": 3668522,
+        "cacheRead": 305183578
+      },
+      "costUsd": null
+    },
+    {
+      "week": "2026-W46",
+      "scope": "main",
+      "agentType": "(main)",
+      "model": "claude-fable-5-2",
+      "effort": "medium",
+      "runs": 3,
+      "calls": 204,
+      "tokens": {
+        "input": 408,
+        "output": 206601,
+        "cacheWrite5m": 0,
+        "cacheWrite1h": 2581828,
+        "cacheRead": 81055631
+      },
+      "costUsd": null
+    },
+    {
+      "week": "2026-W46",
+      "scope": "main",
+      "agentType": "(main)",
       "model": "claude-opus-5-5",
       "effort": "high",
       "runs": 0,
-      "calls": 51,
+      "calls": 42,
       "tokens": {
-        "input": 102,
-        "output": 26362,
+        "input": 84,
+        "output": 32081,
         "cacheWrite5m": 0,
-        "cacheWrite1h": 517222,
-        "cacheRead": 21708691
+        "cacheWrite1h": 310467,
+        "cacheRead": 14018570
       },
-      "costUsd": 9.0072
+      "costUsd": 5.9294
     },
     {
       "week": "2026-W46",
@@ -782,16 +816,84 @@
       "agentType": "(main)",
       "model": "claude-opus-5-5",
       "effort": "medium",
-      "runs": 2,
-      "calls": 1381,
+      "runs": 0,
+      "calls": 1050,
       "tokens": {
-        "input": 2762,
-        "output": 880325,
+        "input": 2100,
+        "output": 576900,
         "cacheWrite5m": 0,
-        "cacheWrite1h": 3700309,
-        "cacheRead": 686567853
+        "cacheWrite1h": 3849290,
+        "cacheRead": 414802986
       },
-      "costUsd": 184.5336
+      "costUsd": 125.3013
+    },
+    {
+      "week": "2026-W46",
+      "scope": "main",
+      "agentType": "(main)",
+      "model": "claude-opus-5",
+      "effort": "medium",
+      "runs": 0,
+      "calls": 64,
+      "tokens": {
+        "input": 128,
+        "output": 82534,
+        "cacheWrite5m": 0,
+        "cacheWrite1h": 372586,
+        "cacheRead": 19140339
+      },
+      "costUsd": 15.36
+    },
+    {
+      "week": "2026-W46",
+      "scope": "sub",
+      "agentType": "affiliate-manager",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "runs": 1,
+      "calls": 7,
+      "tokens": {
+        "input": 14,
+        "output": 2465,
+        "cacheWrite5m": 71509,
+        "cacheWrite1h": 0,
+        "cacheRead": 638716
+      },
+      "costUsd": 0.3312
+    },
+    {
+      "week": "2026-W46",
+      "scope": "sub",
+      "agentType": "blog-critic",
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "runs": 17,
+      "calls": 130,
+      "tokens": {
+        "input": 298,
+        "output": 79081,
+        "cacheWrite5m": 2285492,
+        "cacheWrite1h": 0,
+        "cacheRead": 14058576
+      },
+      "costUsd": 15.822
+    },
+    {
+      "week": "2026-W46",
+      "scope": "sub",
+      "agentType": "blog-critic",
+      "model": "claude-sonnet-5-5",
+      "effort": "high",
+      "runs": 43,
+      "calls": 350,
+      "tokens": {
+        "input": 732,
+        "output": 397738,
+        "cacheWrite5m": 4454638,
+        "cacheWrite1h": 0,
+        "cacheRead": 39034249
+      },
+      "costUsd": 22.9223
     },
     {
       "week": "2026-W46",
@@ -799,16 +901,169 @@
       "agentType": "Explore",
       "model": "claude-opus-5-5",
       "effort": "medium",
-      "runs": 1,
-      "calls": 33,
+      "runs": 9,
+      "calls": 286,
       "tokens": {
-        "input": 66,
-        "output": 17445,
-        "cacheWrite5m": 105568,
+        "input": 584,
+        "output": 140418,
+        "cacheWrite5m": 1141145,
         "cacheWrite1h": 0,
-        "cacheRead": 2560249
+        "cacheRead": 30250901
       },
-      "costUsd": 1.3891
+      "costUsd": 14.5666
+    },
+    {
+      "week": "2026-W46",
+      "scope": "sub",
+      "agentType": "general-purpose",
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "runs": 12,
+      "calls": 1369,
+      "tokens": {
+        "input": 2884,
+        "output": 1017150,
+        "cacheWrite5m": 8174083,
+        "cacheWrite1h": 0,
+        "cacheRead": 355532388
+      },
+      "costUsd": 132.3314
+    },
+    {
+      "week": "2026-W46",
+      "scope": "sub",
+      "agentType": "general-purpose",
+      "model": "claude-opus-5-5",
+      "effort": "medium",
+      "runs": 3,
+      "calls": 61,
+      "tokens": {
+        "input": 122,
+        "output": 100398,
+        "cacheWrite5m": 402185,
+        "cacheWrite1h": 0,
+        "cacheRead": 8038558
+      },
+      "costUsd": 5.6271
+    },
+    {
+      "week": "2026-W46",
+      "scope": "sub",
+      "agentType": "general-purpose",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "runs": 10,
+      "calls": 149,
+      "tokens": {
+        "input": 306,
+        "output": 201346,
+        "cacheWrite5m": 1731051,
+        "cacheWrite1h": 0,
+        "cacheRead": 18796464
+      },
+      "costUsd": 10.101
+    },
+    {
+      "week": "2026-W46",
+      "scope": "sub",
+      "agentType": "improvement-triage",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "runs": 1,
+      "calls": 5,
+      "tokens": {
+        "input": 10,
+        "output": 2073,
+        "cacheWrite5m": 72000,
+        "cacheWrite1h": 0,
+        "cacheRead": 441065
+      },
+      "costUsd": 0.289
+    },
+    {
+      "week": "2026-W46",
+      "scope": "sub",
+      "agentType": "note-manager",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "runs": 1,
+      "calls": 43,
+      "tokens": {
+        "input": 86,
+        "output": 19294,
+        "cacheWrite5m": 174083,
+        "cacheWrite1h": 0,
+        "cacheRead": 5725575
+      },
+      "costUsd": 1.7734
+    },
+    {
+      "week": "2026-W46",
+      "scope": "sub",
+      "agentType": "Plan",
+      "model": "claude-fable-5-2",
+      "effort": "high",
+      "runs": 1,
+      "calls": 46,
+      "tokens": {
+        "input": 96,
+        "output": 46200,
+        "cacheWrite5m": 211810,
+        "cacheWrite1h": 0,
+        "cacheRead": 6852424
+      },
+      "costUsd": null
+    },
+    {
+      "week": "2026-W46",
+      "scope": "sub",
+      "agentType": "strategy-advisor",
+      "model": "claude-opus-5-5",
+      "effort": "medium",
+      "runs": 1,
+      "calls": 39,
+      "tokens": {
+        "input": 82,
+        "output": 54665,
+        "cacheWrite5m": 322206,
+        "cacheWrite1h": 0,
+        "cacheRead": 9431204
+      },
+      "costUsd": 4.5909
+    },
+    {
+      "week": "2026-W46",
+      "scope": "sub",
+      "agentType": "unknown",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "runs": 1,
+      "calls": 8,
+      "tokens": {
+        "input": 16,
+        "output": 4301,
+        "cacheWrite5m": 7298,
+        "cacheWrite1h": 0,
+        "cacheRead": 1514648
+      },
+      "costUsd": 0.3642
+    },
+    {
+      "week": "2026-W46",
+      "scope": "sub",
+      "agentType": "web-fetch",
+      "model": "claude-haiku-5-5",
+      "effort": "medium",
+      "runs": 1,
+      "calls": 4,
+      "tokens": {
+        "input": 8,
+        "output": 42137,
+        "cacheWrite5m": 80242,
+        "cacheWrite1h": 0,
+        "cacheRead": 92174
+      },
+      "costUsd": null
     }
   ]
 }

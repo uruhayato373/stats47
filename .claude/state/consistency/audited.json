@@ -1,9 +1,17 @@
 {
-  "hash": "678ae75c5b94de8e5b29a92ca4e30ee849e1cf6c3220c1072bed49d598539191",
-  "audited_at": "2026-11-12T21:44:54",
+  "hash": "dbfa7e98d537e1045580c0b69efd2e7def3651857e111f476e6ab6c5ef7d5f80",
+  "audited_at": "2026-11-13T23:47:14",
   "files": [
-    ".claude/rules/affiliate-ads-standards.md",
-    ".claude/scripts/ads/capture-ad-layout.ts",
-    ".claude/scripts/lib/check-ad-placement.cjs"
+    ".agents/skills/analytics/cloudflare-cost-improvement/SKILL.md",
+    ".agents/skills/content/manage-issue-ledger/SKILL.md",
+    ".claude/rules/kindle-publishing-standards.md",
+    ".claude/scripts/kdp/kdp-listing-copy.mjs",
+    ".claude/scripts/kdp/lib/__tests__/kdp-listing-copy.test.mjs",
+    ".claude/scripts/kdp/lib/__tests__/kdp-status.test.mjs",
+    ".claude/scripts/kdp/lib/kdp-flow.mjs",
+    ".claude/scripts/kdp/lib/kdp-listing-copy.d.mts",
+    ".claude/scripts/kdp/lib/kdp-listing-copy.mjs",
+    ".claude/scripts/kdp/lib/kdp-status.mjs",
+    ".claude/skills/content/manage-issue-ledger/SKILL.md"
   ]
 }

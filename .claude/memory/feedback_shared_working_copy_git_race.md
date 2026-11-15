@@ -104,3 +104,7 @@ commit は index に関係なく指定パスの作業ツリー内容だけを co
 - **問題**: push の検査 (pre-push) の中で走ったテストが、一時リポジトリのつもりで `git init --bare` と `git config user.*` を実行し、本物の `.git/config` に `core.bare = true` と `[user] github-actions[bot]` を書き込んだ。本体と全作業ツリーの git が「must be run in a work tree」で止まった。
 - **原因**: hook の中では `GIT_DIR` などが本物のリポジトリを指す。テストが `{ ...process.env }` で子の git に渡すと、`cwd` に関係なく本物が対象になる。
 - **対策**: `pre-push-tests.mjs` の `run()` がテストに `GIT_` で始まる変数を渡さない (テストで固定)。git を起動するテストも `GIT_` を除いた env を渡す (`workflow-commit-back.test.cjs` の形)。症状が出たら `git config --file .git/config core.bare false` と、テストが書いた `[user]` 節の削除 (`--remove-section user`) で戻す。
+
+**実行中の Workflow の実行役へ SendMessage しない (2026-11-14)**:
+- **問題**: backlog 掃除の第 5 波で、作業中の実行役 (REFERENCE-EXPANSION-SITE-01) にオーナー決定を SendMessage で送ると、workflow とは別に同じ agent が「再開」され、2 体が同じ worktree へ同時に書いた。`expansion.json` が 2 回巻き戻り、workflow 側は決定を知らずにコミットし、再開側が amend で上書きした。
+- **対策**: 実行中の実行役には送らない。まだ始まっていないカードなら見立てのファイルに書き、始まっているカードなら結果を受け取ってから次の書き直しかコミットで反映する。
