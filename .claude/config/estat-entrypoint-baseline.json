@@ -258,9 +258,9 @@
       "reason": "今回対象外の既存取得・検証スクリプトまたは出典URL。共通入口への個別移行で縮小する。"
     },
     "packages/data-configs/scripts/page-data-batch.ts": {
-      "url": 2,
+      "url": 0,
       "appId": 4,
-      "reason": "今回の変更許可は指標選択まわりのみ。既存の areaAxis メタ取得と app ID 解決は旧経路として維持し、別途入口へ移行するときに縮小する。"
+      "reason": "CLI の app ID の解決 (readAppId) だけが残る。取得は src/ingest へ移し、URL は共通の定数を使う"
     },
     "packages/data-configs/scripts/refresh-official-theme-data.ts": {
       "url": 1,
