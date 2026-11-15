@@ -103,7 +103,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0000010103/manifest.json",
       "manifestSha256": "a19fd8edd67869c747d184be45f7b4fc1c1f02da040fca75180fd9c8707a08c6",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -554,7 +554,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0000010208/manifest.json",
       "manifestSha256": "a25cf61b499c0e13a7e63d2196a5a84427fec558d378e5804a4091c8b767d5ab",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -579,7 +579,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0000010209/manifest.json",
       "manifestSha256": "5894f68d3c554dffe619e37bd86a0715c6f49be6cdc853d67b9e0da6c36bb496",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -654,7 +654,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0000010212/manifest.json",
       "manifestSha256": "ba85fe06a6f48d68361a738cdf740baf70e03663da5afc3570b562f6c39d8823",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -723,7 +723,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0003238633/manifest.json",
       "manifestSha256": "754c8ac1b2d45282431a7da74e4ba37c38c9045ed4409dc6dd604011c588dafc",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -2746,7 +2746,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0004032502/manifest.json",
       "manifestSha256": "12254d62c544a7cc9402b19d7e127dacdb833e610226120b10b1e642cb18132c",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -2815,7 +2815,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0002070003/manifest.json",
       "manifestSha256": "12c81c909fca14c48159ea9dde3d01102a6e16c1143e9a474cc5f25453d7087e",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -2915,7 +2915,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0004023605/manifest.json",
       "manifestSha256": "deedf1fdf6124f7248b527f8600ccf98ba977dc4fca31f43b543e3fda79b4ae9",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -2987,7 +2987,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0000020207/manifest.json",
       "manifestSha256": "6e018250aa394989e66ba285dccca3ce69c92b577de6ce2dc15d69fd55f823b0",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -3012,7 +3012,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0000020301/manifest.json",
       "manifestSha256": "b34eea41b495df1b8b533c7f64cdd0fa9872aa66dc6dd29aba62a5831961c741",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -3037,7 +3037,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0000020308/manifest.json",
       "manifestSha256": "87be8cb512b12e0cc6ae51a9f5a2d616552efffca8d35dfc94ce2b8683927086",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -3059,7 +3059,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0000020311/manifest.json",
       "manifestSha256": "d948728281b9f744181fc27a2bacebc83836392ff166871f926cf0101f283638",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -3667,7 +3667,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0000020309/manifest.json",
       "manifestSha256": "6e634f37708f6ff48c908b7ee37ca3b9c97012cb034d99d9ccaa3966e8600412",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -3842,7 +3842,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0000020203/manifest.json",
       "manifestSha256": "0d67c65fac8ead96ce0aef56f5fc5cb507d90f607d7ed0c0a62d606b18c705e2",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -3867,6 +3867,118 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0000020208/manifest.json",
       "manifestSha256": "79a88108560795d581603327234cccb920130dc7c31abfc2b660996084bd86b6",
+      "status": "verified",
+      "bucket": "stats47-private"
+    },
+    {
+      "statsDataId": "0003441258",
+      "title": "地域別価格差 10大費目別消費者物価地域差指数 （全国平均＝100）－全国，地方，都道府県，都道府県庁所在市及び政令指定都市（2013年～）",
+      "statCode": "00200571",
+      "catalogVersion": "2026-09-18",
+      "catalogSha256": "250d81d64733e272a9cd56b633b8536c6624dbb9d019486e7c7ee717cac1ff02",
+      "fetchedAt": "2026-11-15T01:58:55.831Z",
+      "fileCount": 1,
+      "rowCount": 16524,
+      "maxRowsPerFile": 16524,
+      "gzipBytes": 76586,
+      "uncompressedBytes": 1315675,
+      "catalogReportedRows": 15204,
+      "warnings": [
+        "Catalog OVERALL_TOTAL_NUMBER differs from complete live partitions: 16524/15204"
+      ],
+      "depth": 0,
+      "partitionAxes": [],
+      "rowLimit": 50000,
+      "manifestKey": "estat-tables/0003441258/manifest.json",
+      "manifestSha256": "571b3049d843760612897f180ce3f5425307f0ca3261a425851c51d7aea05bd5",
+      "status": "verified",
+      "bucket": "stats47-private"
+    },
+    {
+      "statsDataId": "0003216642",
+      "title": "海面漁業の部 大海区都道府県振興局別統計　魚種別漁獲量",
+      "statCode": "00500216",
+      "catalogVersion": "2024-03-13",
+      "catalogSha256": "1e8caa21b285a5ec2a2484030d279ec60cb8f57ab0008ef944bc227e85f43d81",
+      "fetchedAt": "2026-11-15T01:59:21.355Z",
+      "fileCount": 1,
+      "rowCount": 6468,
+      "maxRowsPerFile": 6468,
+      "gzipBytes": 36598,
+      "uncompressedBytes": 380763,
+      "catalogReportedRows": 6468,
+      "warnings": [],
+      "depth": 0,
+      "partitionAxes": [],
+      "rowLimit": 50000,
+      "manifestKey": "estat-tables/0003216642/manifest.json",
+      "manifestSha256": "1d97de83f8c3def5c24b41d6ecca1222293523d243ee89cbcbed760b3cbb4ba9",
+      "status": "verified",
+      "bucket": "stats47-private"
+    },
+    {
+      "statsDataId": "0003322129",
+      "title": "海面漁業の部 大海区都道府県振興局別統計　魚種別漁獲量",
+      "statCode": "00500216",
+      "catalogVersion": "2024-03-13",
+      "catalogSha256": "44cd90c92b291cc7c9fc1f92c470374b5e94a07d1f6346b5e778628a054d3ac2",
+      "fetchedAt": "2026-11-15T01:59:33.921Z",
+      "fileCount": 1,
+      "rowCount": 6468,
+      "maxRowsPerFile": 6468,
+      "gzipBytes": 36408,
+      "uncompressedBytes": 365778,
+      "catalogReportedRows": 6468,
+      "warnings": [],
+      "depth": 0,
+      "partitionAxes": [],
+      "rowLimit": 50000,
+      "manifestKey": "estat-tables/0003322129/manifest.json",
+      "manifestSha256": "febd6448485a969fae4cb2b1a5becbb917fede3243f98282d56775f569987072",
+      "status": "verified",
+      "bucket": "stats47-private"
+    },
+    {
+      "statsDataId": "0001803958",
+      "title": "海面漁業の部 大海区都道府県振興局別統計　魚種別漁獲量",
+      "statCode": "00500216",
+      "catalogVersion": "2024-03-13",
+      "catalogSha256": "776ed1b15c458164f951e690dcfbe70ef805bc602453223152715ccf26bcb551",
+      "fetchedAt": "2026-11-15T01:59:45.056Z",
+      "fileCount": 1,
+      "rowCount": 6468,
+      "maxRowsPerFile": 6468,
+      "gzipBytes": 34459,
+      "uncompressedBytes": 357469,
+      "catalogReportedRows": 6468,
+      "warnings": [],
+      "depth": 0,
+      "partitionAxes": [],
+      "rowLimit": 50000,
+      "manifestKey": "estat-tables/0001803958/manifest.json",
+      "manifestSha256": "026331721dcd2e0b6bc4dbb0852cee702f679841b1ee27e0e57553d0a1f7cc8e",
+      "status": "verified",
+      "bucket": "stats47-private"
+    },
+    {
+      "statsDataId": "0004043248",
+      "title": "海面漁業の部 大海区都道府県振興局別統計　魚種別漁獲量",
+      "statCode": "00500216",
+      "catalogVersion": "2026-04-15",
+      "catalogSha256": "ed082d777aa45ac94af5d333ede5d074527a60a00ec9e1a93e0da467c9d6f9d3",
+      "fetchedAt": "2026-11-15T01:59:56.056Z",
+      "fileCount": 1,
+      "rowCount": 6699,
+      "maxRowsPerFile": 6699,
+      "gzipBytes": 35359,
+      "uncompressedBytes": 382880,
+      "catalogReportedRows": 6699,
+      "warnings": [],
+      "depth": 0,
+      "partitionAxes": [],
+      "rowLimit": 50000,
+      "manifestKey": "estat-tables/0004043248/manifest.json",
+      "manifestSha256": "20f635037272ba0de01b3e1803668386adbaf39ffced8bf610f3e94635086b02",
       "status": "verified",
       "bucket": "stats47-private"
     }
