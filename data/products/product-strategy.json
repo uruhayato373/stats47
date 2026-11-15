@@ -139,7 +139,8 @@
         "channel": "kdp",
         "status": [
           "withdrawn",
-          "blocked-design"
+          "blocked-design",
+          "previous_unpublished"
         ]
       }
     }
