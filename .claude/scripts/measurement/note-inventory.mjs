@@ -69,3 +69,12 @@ export function acceptedNoteGap(snapshot, cover) {
   if (coverage.paginationComplete !== true || coverage.totalsMatched !== true) return null;
   return { code: 'note_dashboard_row_hidden', missingRows: missing, acceptedBy: 'owner-2026-09-27' };
 }
+
+/**
+ * 単独の取得 (note の fetch-note-metrics.mjs) の終了コード。認証付き計測 (collect.mjs) と同じ許容 (acceptedNoteGap) を共有し、
+ * 許容済みの欠けだけの取得を失敗 (2) に数えない。許容していない欠けは従来どおり 2 にする。
+ */
+export function noteMetricsExitCode(snapshot, cover) {
+  if (snapshot?.status === 'pass' && cover?.status === 'pass') return 0;
+  return acceptedNoteGap(snapshot, cover) ? 0 : 2;
+}

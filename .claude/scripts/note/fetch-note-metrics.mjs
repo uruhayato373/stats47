@@ -9,6 +9,7 @@ import { fileURLToPath } from "node:url";
 import { extractDashboardDom, collectDashboardPages } from "./lib/dashboard-dom.mjs";
 import { buildDashboardSnapshot, buildCoverMetricsReport, coverMetricsCsv, defaultPeriod, validatePeriod } from "./lib/dashboard-metrics.mjs";
 import { measurementContext, unattended, markMeasurementAuthenticated } from '../measurement/browser-session.mjs';
+import { acceptedNoteGap, noteMetricsExitCode } from '../measurement/note-inventory.mjs';
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
@@ -152,5 +153,7 @@ writeJson("latest.json", snapshot); // latest attempt, including failures; never
 writeJson("cover-metrics-latest.json", joined);
 writeAtomic("cover-metrics-latest.csv", coverMetricsCsv(joined));
 console.log(JSON.stringify({ status: snapshot.status, period: snapshot.period, coverage: snapshot.coverage,
-  totals: snapshot.totals, issues: snapshot.issues, coverJoin: joined.status, coverIssues: joined.issues, outputDir }, null, 2));
-process.exitCode = snapshot.status === "pass" && joined.status === "pass" ? 0 : 2;
+  totals: snapshot.totals, issues: snapshot.issues, coverJoin: joined.status, coverIssues: joined.issues,
+  knownIncomplete: acceptedNoteGap(snapshot, joined), outputDir }, null, 2));
+// 認証付き計測が受け入れている既知の欠け (acceptedNoteGap) だけなら失敗に数えない。それ以外は従来どおり 2
+process.exitCode = noteMetricsExitCode(snapshot, joined);
