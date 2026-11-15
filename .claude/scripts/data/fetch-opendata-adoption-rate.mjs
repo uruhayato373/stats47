@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { R2_PUBLIC_ORIGIN, statsR2Key } from "../lib/r2-keys.mjs";
 /**
  * オープンデータ取組済み市区町村の割合 (都道府県別) の投入スクリプト。
  *
@@ -19,7 +20,6 @@
  * 実行: node .claude/scripts/data/fetch-opendata-adoption-rate.mjs
  * 正典: .claude/rules/data-provenance-standards.md
  */
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 import { PREF_NAMES, PREF_AREA_CODES, fetchBuffer, fetchJson, writeStatsValues, roundTo } from "./lib/stats-values-writer.mjs";
 
 const LANDING_URL = "https://www.digital.go.jp/resources/data_local_governments";
@@ -27,7 +27,7 @@ const ORIGIN = "https://www.digital.go.jp";
 const AS_OF_LABEL = "令和8年(2026年)6月30日時点";
 const PUBLISHED_ADOPTED_TOTAL = 1617; // 公表資料 (PPTX) 「1,617/1,788 自治体」
 const PUBLISHED_DENOMINATOR_TOTAL = 1788; // 47都道府県 + 1,741市区町村
-const DENOM_URL = `${R2_PUBLIC_BASE_URL}/app/stats/municipality-count/values.json`;
+const DENOM_URL = `${R2_PUBLIC_ORIGIN}/${statsR2Key("municipality-count", "prefecture")}`;
 const DENOM_YEAR = "2024";
 const METRIC_KEY = "opendata-adoption-rate-municipalities";
 

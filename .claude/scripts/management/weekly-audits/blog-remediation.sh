@@ -6,11 +6,8 @@
 # 散布図は JSON からの再生成と byte 一致も確かめる。今週直す記事の上位 10 件を最後に出す (レビューの「コンテンツ」が読む)。
 set -uo pipefail
 cd "$(dirname "$0")/../../../.."
-export R2_PUBLIC_FETCH_URL="${R2_PUBLIC_FETCH_URL:-https://storage.stats47.jp}"
-if [ -z "${NEXT_PUBLIC_ESTAT_APP_ID:-}" ]; then
-  NEXT_PUBLIC_ESTAT_APP_ID=$(sed -n 's/^NEXT_PUBLIC_ESTAT_APP_ID=//p' apps/web/.env.development | head -1)
-  export NEXT_PUBLIC_ESTAT_APP_ID
-fi
+export R2_PUBLIC_FETCH_URL="${R2_PUBLIC_FETCH_URL:-$(node --input-type=module -e 'import { R2_PUBLIC_ORIGIN } from "./.claude/scripts/lib/r2-keys.mjs"; process.stdout.write(R2_PUBLIC_ORIGIN)')}"
+export NEXT_PUBLIC_ESTAT_APP_ID="$(node --input-type=module -e 'import { getAppId } from "./.claude/scripts/lib/estat-catalog/api.mjs"; process.stdout.write(getAppId(process.env, "apps/web/.env.development"))')"
 failed=()
 node .claude/scripts/blog/build-stale-data-years.mjs || echo "warning: 図の年の古さの一覧の作り直しに失敗"
 npx tsx .claude/scripts/blog/audit-chart-axes.ts || echo "warning: 図の値の検査に失敗"

@@ -1,3 +1,4 @@
+import { statsR2Key } from '@stats47/r2-storage/keys';
 /* eslint-disable no-console -- This local command reports what it wrote. */
 /**
  * 型の最終確認の画面 (/ops/image-templates/review) が読む見本を作る。
@@ -100,7 +101,7 @@ const AREA_METRIC = 'total-population';
 const AREA_YEAR = '2020';
 async function areaInputs() {
   const metric = getMetricConfig(AREA_METRIC)!;
-  const rows = parseStatsValuesPayload(await json(`app/stats/${AREA_METRIC}/cities.json`)).rows.filter((row) => row.yearCode === AREA_YEAR);
+  const rows = parseStatsValuesPayload(await json(statsR2Key(AREA_METRIC, 'city'))).rows.filter((row) => row.yearCode === AREA_YEAR);
   const chartOf = (scope: AreaScope) => resolveAreaChart({
     title: `${metric.title}`, yearLabel: `${AREA_YEAR}年`, unit: rows[0].unit ?? metric.unit, source: metricSource(AREA_METRIC) ?? '',
     presentation: metricPresentation(metric, scope.level === 'municipality' && scope.wardMode === 'split' ? 'municipality-split' : 'municipality-merged'), scope, values: rows.map((row) => ({ areaCode: row.areaCode, value: row.value })),
@@ -114,7 +115,7 @@ const TREEMAP_YEAR = '2023';
 async function treemapSample(id: string, label: string) {
   const metric = getMetricConfig(TREEMAP_METRIC)!;
   const areas = areasOf({ level: 'municipality', wardMode: 'merged', within: { kind: 'prefecture', prefCode: '23' } });
-  const rows = parseStatsValuesPayload(await json(`app/stats/${TREEMAP_METRIC}/cities.json`)).rows
+  const rows = parseStatsValuesPayload(await json(statsR2Key(TREEMAP_METRIC, 'city'))).rows
     .filter((row) => row.yearCode === TREEMAP_YEAR && areas.has(row.areaCode));
   if (rows.length !== areas.size || rows.some((row) => !(Number(row.value) > 0))) throw Error(`${TREEMAP_METRIC}: 愛知県の ${areas.size} 市町村の値がそろっていない (${rows.length} 行)`);
   return both(id, label, (theme) => renderTreemapChart({
@@ -180,14 +181,14 @@ async function sankeySample(id: string, label: string) {
 async function main() {
   for (const file of fs.existsSync(OUT) ? fs.readdirSync(OUT) : []) fs.rmSync(path.join(OUT, file));
   fs.mkdirSync(OUT, { recursive: true });
-  const input = rankingInputFromStats(await json('app/stats/maximum-temperature/values.json'));
+  const input = rankingInputFromStats(await json(statsR2Key('maximum-temperature', 'prefecture')));
   const ranking = sampleRankingChart({ data: rankingRows(input) });
   const liquor = await json(blog('alcohol-prefecture-map', 'liquor-type-breakdown'));
   const changeInput = { item: await json(CHANGE_SAMPLE_SOURCES.item.key), values: await json(CHANGE_SAMPLE_SOURCES.values.key) };
   const change = { light: await renderTileChangeSample(changeInput), dark: await renderTileChangeSample(changeInput, CHART_THEMES.dark) };
   const { chartOf, merged, split } = await areaInputs();
   const inPrefecture = (wardMode: 'merged' | 'split'): AreaScope => ({ level: 'municipality', wardMode, within: { kind: 'prefecture', prefCode: '14' } });
-  const pairs = (await json(`app/stats/population-migration-inter-prefecture/migration-flow-${MIGRATION_YEAR}.json`)).rows as MigrationPair[];
+  const pairs = (await json(statsR2Key('population-migration-inter-prefecture', 'migration-flow', MIGRATION_YEAR))).rows as MigrationPair[];
   const chordHead = { meta: `${MIGRATION_YEAR}年 · 単位：人`, source: MIGRATION_SOURCE };
   const netMoves = (name: string, code: string) => ({
     title: `${name}の転入超過の内訳`, meta: `${MIGRATION_YEAR}年 · 地方別 · 単位：人`, source: MIGRATION_SOURCE,

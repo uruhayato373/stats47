@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { statsR2Key } from '../lib/r2-keys.mjs';
 /**
  * rebuild-scatter-data.mjs — 点データ (json) を失った散布図を、指標と年の指定から R2 の観測値で作り直す。
  *
@@ -64,7 +65,7 @@ async function main(argv) {
   if (!out) throw new Error('--out <dir> が要る');
   const rowsCache = new Map();
   const load = async ([key, year]) => {
-    if (!rowsCache.has(key)) rowsCache.set(key, JSON.parse(await getText(`${R2}/app/stats/${key}/values.json`)).rows);
+    if (!rowsCache.has(key)) rowsCache.set(key, JSON.parse(await getText(`${R2}/${statsR2Key(key, "prefecture")}`)).rows);
     return yearValues(rowsCache.get(key), key, year);
   };
   const payload = [];

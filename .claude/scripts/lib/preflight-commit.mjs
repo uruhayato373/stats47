@@ -270,6 +270,18 @@ export const PR_GATES = [
     hint: "同スクリプトを --check なしで実行",
   },
   {
+    name: "R2 Keys Mirror",
+    why: "R2 のキーの正典と鏡のずれ",
+    run: () => tryRun("npx", ["tsx", "packages/r2-storage/scripts/generate-r2-keys-mirror.ts", "--check"]),
+    hint: "同スクリプトを --check なしで実行",
+  },
+  {
+    name: "Year Code Mirror",
+    why: "e-Stat 年コードの正典と鏡のずれ",
+    run: () => tryRun("node", ["--import", "tsx", "packages/data-configs/scripts/generate-year-code-mirror.ts", "--check"]),
+    hint: "同スクリプトを --check なしで実行",
+  },
+  {
     name: "Unit Semantics Mirror",
     why: "単位セマンティクスの正典と鏡のずれ",
     run: () => tryRun("npx", ["tsx", "packages/data-configs/scripts/generate-unit-semantics-mirror.ts", "--check"]),

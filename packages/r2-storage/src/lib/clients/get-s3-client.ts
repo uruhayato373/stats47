@@ -1,4 +1,5 @@
-import { S3Client } from "@aws-sdk/client-s3";
+import { createR2S3Client } from "./r2-s3-client.mjs";
+import { type S3Client } from "@aws-sdk/client-s3";
 
 let cachedClient: S3Client | null = null;
 
@@ -13,11 +14,7 @@ export function getS3Client(): S3Client {
     throw new Error("R2_S3_ENDPOINT, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY が未設定です");
   }
 
-  cachedClient = new S3Client({
-    region: "auto",
-    endpoint,
-    credentials: { accessKeyId, secretAccessKey },
-  });
+  cachedClient = createR2S3Client();
 
   return cachedClient;
 }

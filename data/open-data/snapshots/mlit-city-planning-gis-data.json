@@ -1,0 +1,1154 @@
+{
+  "datasetId": "mlit-city-planning-gis-data",
+  "versions": [
+    {
+      "schemaVersion": 1,
+      "datasetId": "mlit-city-planning-gis-data",
+      "version": "initial",
+      "sha256": "572d8b5262936d97665593fe7100c9afaec0489a984bf797f41d20219f59f011",
+      "recipeSha256": "5e4f154ef1f58d63ccf6c7f782ac70cfcaffe9b2d967d8929fac95b8477a5571",
+      "retrievedAt": "2026-11-15T06:07:36.917Z",
+      "license": {
+        "name": "公共データ利用規約 (第1.0版) (PDL1.0) (国土交通省サイト)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.mlit.go.jp/links/terms-of-use.html"
+      },
+      "files": [
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0001.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752712.zip",
+          "sha256": "99229f2ea352cf7f83e5004939d2e2d5756a2750e050abd888b6457bb1c16cc1",
+          "bytes": 17999880,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:04:29.904Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0002.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752713.zip",
+          "sha256": "ccef1241cb4f0c3f9846af1a497cb29ddf72509b35e2a2bbd0a626cc8080155d",
+          "bytes": 6154491,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:04:31.114Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0003.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752714.zip",
+          "sha256": "bab4f81c521ee63a76c1148ed3848622cec9ac631b16087d44a318e26ed49829",
+          "bytes": 9130246,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:04:31.195Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0004.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752715.zip",
+          "sha256": "e1c05356c09a9259b9fdbc2a27970f3509645e443047edc8c8d52370d51c13e3",
+          "bytes": 12983981,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:04:33.457Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0005.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752717.zip",
+          "sha256": "02e3e60d724a3db0ebb087387d06364aa9181e7b115ae50d6f3038d244404c86",
+          "bytes": 4314981,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:04:34.574Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0006.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752721.zip",
+          "sha256": "84754bb753c2ef20554abd54829f015a101932c542f41868e81213815642f386",
+          "bytes": 5067167,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:04:34.646Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0007.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752723.zip",
+          "sha256": "910dfade9b23b43b0530432e04a53505e423394135fa89768abc14694e9cdf9e",
+          "bytes": 11234380,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:04:35.673Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0008.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752726.zip",
+          "sha256": "f1b8104730d28092c13d2068de8fa1e5e86c55d8b4059e2fc695a5ae8062c21e",
+          "bytes": 18916634,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:04:38.082Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0009.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752727.zip",
+          "sha256": "23a771a3d3cdd936fc76571c6e9b0e0788c01f5ebd89d197db55c6913f7afb57",
+          "bytes": 8979778,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:04:39.339Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0010.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752728.zip",
+          "sha256": "12767b28740f8b3b151413453a34b52b9ed9291e2ad02e0c05fb9aecd529133c",
+          "bytes": 11318643,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:04:40.638Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0011.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752729.zip",
+          "sha256": "6c952c72ad0ae8066a2aac7f6ce1cc89a8412b1aee43bfc470ca8881e3d31bff",
+          "bytes": 21887371,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:04:42.285Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0012.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752730.zip",
+          "sha256": "4cb918cabb50e9a71d51ba08555c2c8114f49e5b516da02bfbabe75024947299",
+          "bytes": 25634579,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:04:43.955Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0013.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752732.zip",
+          "sha256": "e7495279394794347f99b096252bdf5e5264b4eba3f3d886eca59ecbe6238133",
+          "bytes": 36502445,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:04:44.168Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0014.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752733.zip",
+          "sha256": "6690de2de28d09faf945528f8731261ac81926f5817abf89f9812446f9b6bffd",
+          "bytes": 37093611,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:04:46.929Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0015.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752734.zip",
+          "sha256": "53fa484778b73d73b3949c69c05e821bd8918662fcde422a0bd702ef14d3cef9",
+          "bytes": 10154286,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:04:48.215Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0016.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752735.zip",
+          "sha256": "986be71d53f82e7f57220ab5b6ba5cb3f38726042c3c06f3ea1d16453c62ee2e",
+          "bytes": 4279818,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:04:49.350Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0017.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752736.zip",
+          "sha256": "ecf075d2f620dba8ba3d062888565f90f953106cec8c391402fa0a42037efe68",
+          "bytes": 6185149,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:04:50.492Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0018.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752737.zip",
+          "sha256": "369d449dd490d72fad0755eec4066f5ad5953cc457c65003b59723f650be667a",
+          "bytes": 3520053,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:04:51.608Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0019.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752738.zip",
+          "sha256": "331e78316013d37ad0816887702f0ed7c16ff77b864d04dde51a812c8ab90a1b",
+          "bytes": 2978757,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:04:52.628Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0020.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752741.zip",
+          "sha256": "76e773e0e0a9f74752106892c029d5894ac3e09de501c35eb8d89ac5c383cc76",
+          "bytes": 12502625,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:04:53.979Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0021.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752742.zip",
+          "sha256": "3d9adb1a83771d83bd16c805d73d32ee6735bde0ef6392bbe68bbea3fb8e4e4c",
+          "bytes": 14102069,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:04:54.084Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0022.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752743.zip",
+          "sha256": "17aff0ee0e51316045f5ac77c98c096f65dfa158a934c8671911e9f326008c8b",
+          "bytes": 20413557,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:04:55.113Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0023.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752744.zip",
+          "sha256": "af85e7db86b8d826ded3d0fe7b6b2a22c1769b317fd0532cc0279ae51c6eab43",
+          "bytes": 29689867,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:04:56.200Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0024.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752745.zip",
+          "sha256": "8661b56c59c067153e0020c558a828402e5b4be58a139f040f9b706dfa448cd8",
+          "bytes": 10365173,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:04:58.325Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0025.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752746.zip",
+          "sha256": "304c6053c68c16fdd215ac3cb16785ecfcd76faf3b89343108d0672637d808c6",
+          "bytes": 10065278,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:04:59.566Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0026.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752747.zip",
+          "sha256": "6680b255e81db14d3093bd9ecc96baaa6b3ba1e69edc87f80b8ad6c58f27e913",
+          "bytes": 14381527,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:00.937Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0027.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752749.zip",
+          "sha256": "65e4be39c4be956a47319eefc15a82e1142becf7725c7deb29fd9e69567a0663",
+          "bytes": 26023571,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:02.708Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0028.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752750.zip",
+          "sha256": "fce66014d3fa87c6f988eff995ec5cc4c582bfa6a581f80dd41e826cdf6a5920",
+          "bytes": 27995124,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:04.481Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0029.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752751.zip",
+          "sha256": "20a481f55cdb4c664885d448f55d16fa1f1fb3816fced20325ed74808a8858f9",
+          "bytes": 10686857,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:05.786Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0030.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752753.zip",
+          "sha256": "8e38f704434a380325f018c955b9b72717967df180ad60812afcccdaad7acda3",
+          "bytes": 5278923,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:06.896Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0031.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752754.zip",
+          "sha256": "619a06150bf9cd207b2ea881cc07577f060ef9a7157971c5f78a782bcd3987ca",
+          "bytes": 1758117,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:07.909Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0032.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752757.zip",
+          "sha256": "e9da52e17ca0fbb819af4ab8da7933f7f6f4836cda50449931caab79d2cb0ff9",
+          "bytes": 4510058,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:09.036Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0033.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752758.zip",
+          "sha256": "9cc027d2e572e4a895a27ab2f5b654cde323a251208dec3c153fd36d9190e52a",
+          "bytes": 10056438,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:10.264Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0034.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752759.zip",
+          "sha256": "7136cbc8477233c77865f7d64fd78389492329fc953d5231b763bed3cc1c02cb",
+          "bytes": 23338820,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:11.928Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0035.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752761.zip",
+          "sha256": "87c03736d89ca56f8399376b7468cb527802e075c0b81717f6872f07bad609f4",
+          "bytes": 16339070,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:12.048Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0036.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752762.zip",
+          "sha256": "c9858ca093319693847f0b32af7d4cbf318057803cac1e49fcce7c07d3b0bcee",
+          "bytes": 4165536,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:14.039Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0037.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752763.zip",
+          "sha256": "86c2e4f3be773e87d43ca8fb601e10153705260fe5e8a60b7d4ee2133d39ebe9",
+          "bytes": 4952987,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:15.205Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0038.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752764.zip",
+          "sha256": "d7e4d2be0079513908cb36cb58e97c465500141cc21fe6b97d08ee74cdb2bfc6",
+          "bytes": 6942228,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:16.446Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0039.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752765.zip",
+          "sha256": "b0474a50bfc7bc9c857ce2f72d27103bec186ea64c03ef1850c341af211b7590",
+          "bytes": 4773484,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:17.562Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0040.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752766.zip",
+          "sha256": "9becf4438b7f22a0738f50a350b1cfeb494c444d665bd48a701af959e25e422f",
+          "bytes": 25517418,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:17.746Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0041.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752768.zip",
+          "sha256": "23c480f11fa9d60af53e86625b2adf59b36448cfbe972268d8fe851996e47037",
+          "bytes": 4889865,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:19.650Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0042.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752769.zip",
+          "sha256": "559289d76be899f38c1a70557a35334077e32aa80c852a175248662626590d4f",
+          "bytes": 16529018,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:21.080Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0043.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752770.zip",
+          "sha256": "b51830a215eb9827bb3e1ccf76c579fafa298a9fa341ff2e90a3dda944aa9428",
+          "bytes": 7186805,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:22.296Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0044.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752771.zip",
+          "sha256": "77d432b213b5394db349d3a64a5f4b1432e407026ea4bfc68647affa144f94ec",
+          "bytes": 7699482,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:23.483Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0045.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752773.zip",
+          "sha256": "78e862b93579f69e79a6356e42e2dcb1880135ec04a05a5b72ef94fdc709e724",
+          "bytes": 12195848,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:24.776Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0046.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752774.zip",
+          "sha256": "c785a8c678995df2c522983b4d46e2f02c431a56557c31f779f32ef181ba2e00",
+          "bytes": 9890575,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:26.118Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0047.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752778.zip",
+          "sha256": "6c42a9a09e019fa868a5a043a2811254ff35e61b5f5693bdeba00b9b68d9815e",
+          "bytes": 16489520,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:27.550Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0048.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752779.zip",
+          "sha256": "15af6d573c9d5856a8923c4428bc35aa55c6676bb3d388ada1cacee81754707a",
+          "bytes": 6127580,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:28.682Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0049.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752780.zip",
+          "sha256": "ac46166bddf9c4af609f9b7b04533226270f438fa18c7582e3a7c4cffbfc612c",
+          "bytes": 8284608,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:29.896Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0050.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752781.zip",
+          "sha256": "2fe4fe1e702a93c953155e33c2cffee69a0b22d4fc7e5305ad66abb3f88a0f83",
+          "bytes": 13484685,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:31.221Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0051.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752783.zip",
+          "sha256": "684ec1da7d825570afdac90d2cef19fdac35b9eb15ce828fad94c43d2ae42f89",
+          "bytes": 4296970,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:32.342Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0052.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752784.zip",
+          "sha256": "c37ee23b5d6d7bc553ae410dca874d0b0e5b73febccfb2e66ddd92e3d306a53b",
+          "bytes": 4419241,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:33.436Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0053.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752785.zip",
+          "sha256": "862063d7365d1b4a6247a75035f8d6dae1649df058d74f3dff4f558590a763f5",
+          "bytes": 11518881,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:34.725Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0054.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752786.zip",
+          "sha256": "07269d36bd02f649e2cd0c40812f984bbcb4fd3ab0a152de3a542f8eb616feb4",
+          "bytes": 19989444,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:36.252Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0055.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752787.zip",
+          "sha256": "ca32d36b4752f902622ff1ec640bcb4c979c5cda2fc79aa9dd04c85a4f28b292",
+          "bytes": 9000359,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:37.495Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0056.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752789.zip",
+          "sha256": "3afb9db9cd1f4011f46c613dfcea8af8fa1a75a33813d52b3596bdd20cd593f5",
+          "bytes": 11682294,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:38.826Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0057.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752790.zip",
+          "sha256": "f628f016d4640fb0750972bc8284e339a95eecc84301dcbca189c304e4434b35",
+          "bytes": 22102600,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:40.361Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0058.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752791.zip",
+          "sha256": "c53862681ba16962b5fef24d04a4135ba4b37720c17e8b266ff8fddb3c636363",
+          "bytes": 25265231,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:42.088Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0059.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752792.zip",
+          "sha256": "86202b863fd1004b8e52e39d79c80ade086ebbce6c1d2658d1a23ea339086f1f",
+          "bytes": 43569989,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:44.214Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0060.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752793.zip",
+          "sha256": "c7410e45f0ff36d02b815abb543a389e1c9d6d51f37ca2b6795f07e05510b1da",
+          "bytes": 42700342,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:46.454Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0061.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752794.zip",
+          "sha256": "512f111c11b39c626f8c5b17838d9e2869a3dc4145b2a5bedc8208ae0a2d4342",
+          "bytes": 10539419,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:47.771Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0062.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752795.zip",
+          "sha256": "fb5a919acbfa152a12a72dd48082ea842700e55f97dca1ab7c6d09d81ef06993",
+          "bytes": 4034266,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:48.865Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0063.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752796.zip",
+          "sha256": "ea34b28d2c3a712a5a105c298c41b3c33efd338afe1d1581665eeba0419f49d7",
+          "bytes": 6228721,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:49.997Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0064.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752797.zip",
+          "sha256": "e15fc2076754fde0ad6a34d78d9f3cdf264a2c15b5b37a33dbd3e60669338803",
+          "bytes": 3498940,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:51.075Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0065.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752798.zip",
+          "sha256": "5ee9f55dbb3f2f467f07d2fe58b2354825050dedd394e3af86ef8ca1f93fd4f2",
+          "bytes": 3100853,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:52.077Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0066.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752799.zip",
+          "sha256": "9903045294625c425f4037d7e8bf62cfe01124873c000a9e47fb3ebace82bfa8",
+          "bytes": 13108957,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:53.390Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0067.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752800.zip",
+          "sha256": "89ddc0960741a3529ef3a2b567d5d692c53916f2f89a63b7bc322851aaeda831",
+          "bytes": 14716159,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:54.793Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0068.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752801.zip",
+          "sha256": "7316b88a84a2cd5becf884674f690f8bd8f0b637a67684c2ff9f4f5e9321177e",
+          "bytes": 20855670,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:56.379Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0069.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752802.zip",
+          "sha256": "61dd880048b09cd29d5876c195a563c0cf06160df56dbd37bfcd683fee9d8f9a",
+          "bytes": 28700536,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:58.146Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0070.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752803.zip",
+          "sha256": "faf9d03d8f69d1dffb1be58a896e881bee5a7e3d20c8089b7b4560f4fe7287cb",
+          "bytes": 10210069,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:05:59.353Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0071.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752804.zip",
+          "sha256": "5319c14928239dd2b0d30e36e3077de13321aad33c448129e508a691a164f2ab",
+          "bytes": 10851488,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:00.640Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0072.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752805.zip",
+          "sha256": "6c77b730609b9e9ac5b79734657e94469da0880cf5949b343a2efd8cbe3cdbf5",
+          "bytes": 15845382,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:02.078Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0073.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752806.zip",
+          "sha256": "7df650967287b399335f9103e8a8ce4f967b7fa871fa7749e66798acc6fd98e1",
+          "bytes": 29357391,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:03.849Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0074.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752807.zip",
+          "sha256": "20061eadd03e6d7eec7a731df6ee6319bb6a0740e296ff7258e6d871efe5e664",
+          "bytes": 29936454,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:05.617Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0075.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752808.zip",
+          "sha256": "9944f74ffadb6ac3f9f24cb3b96fa6f46715718c6cfa47c710c8dc9a7ab3c233",
+          "bytes": 11595329,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:06.961Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0076.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752809.zip",
+          "sha256": "9ca8b3a215c1db71bfeac4951eafbed07745452ce9d588d37fb974b6abcc1f27",
+          "bytes": 5159371,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:08.095Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0077.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752810.zip",
+          "sha256": "9bc03da614137a380772b0ecde6bac25771403bfc26cf7466519e39ddcaa1baf",
+          "bytes": 1381632,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:08.974Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0078.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752811.zip",
+          "sha256": "3c0fe30945970933092d2bb365e372d0d42dd19f7ddc62cd6845d668a79ce4d8",
+          "bytes": 3880674,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:10.215Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0079.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752812.zip",
+          "sha256": "d828008a2ec51900c24e65e2e18c6bc76dd33722a50485514b269c1ee6fea869",
+          "bytes": 10538629,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:11.559Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0080.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752813.zip",
+          "sha256": "47bc0917d3ffbc892a4517050d7a78113157098f66a893fc9f9c3dc54cf1f1f6",
+          "bytes": 27100152,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:13.273Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0081.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752814.zip",
+          "sha256": "480fbbcba629cc21f036274ea34ffccedb6563cf1eeaff15340299f1a12c5b74",
+          "bytes": 17412284,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:14.800Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0082.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752815.zip",
+          "sha256": "0c5b3417fcd9c6641ed45945a6b73a0682ecceaaf93def2d2b2fa42ae9a7682b",
+          "bytes": 4048062,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:15.901Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0083.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752816.zip",
+          "sha256": "6608224eba98fd8162365ce45af656643a5148e79ff6a0601e3e05de4a55b86b",
+          "bytes": 4975411,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:17.006Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0084.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752817.zip",
+          "sha256": "3d16095182c2b989e5f40827d23bfcc337464e884e852cb4e29fa6ec648a7a18",
+          "bytes": 7179614,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:18.228Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0085.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752818.zip",
+          "sha256": "254cae5d6937dfbfab2fe97cfae8c05f7b64f3f3474076ba5e18d17b73168b77",
+          "bytes": 5102860,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:19.327Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0086.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752819.zip",
+          "sha256": "f64be34dcd2cbc42617eeaef0ad022b1ca3a1e9e7abe0d036df8a9e8fd228a92",
+          "bytes": 27033534,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:21.080Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0087.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752820.zip",
+          "sha256": "3947040b8476d4172cf9e56946d5e7d4a128c269310a731b773c78baa6fac7c9",
+          "bytes": 4811603,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:22.272Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0088.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752821.zip",
+          "sha256": "fb31eaefbdddc02e7e6a0e011d3f70c4c6df722d08a49d612addcf2154a279f1",
+          "bytes": 19121457,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:23.759Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0089.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752822.zip",
+          "sha256": "a0aeb6f1902b048152f5ab36d2df5a987a9f4d1341edb89a8447821767d10450",
+          "bytes": 7169481,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:24.968Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0090.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752823.zip",
+          "sha256": "1f104d57576583d88dd408be2b2d6b5d492e1ed932a1a27eaf6daec2a137fb84",
+          "bytes": 7783203,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:26.174Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0091.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752824.zip",
+          "sha256": "6bf0fc9a3623624d4b605c9df8559ae0771db8607933fab5e990bfed66483117",
+          "bytes": 6817728,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:27.380Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0092.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752825.zip",
+          "sha256": "072fcfec7d8f8c7c78c14e81e36e02298f2aa33cb113aab69d2b38631c4e471f",
+          "bytes": 13614238,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:28.794Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0093.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752826.zip",
+          "sha256": "e1e1963e5546f343fe628a7252560572411064d412df3cf72aa378964e8dca09",
+          "bytes": 9684971,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:30.025Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0094.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001752839.zip",
+          "sha256": "222c8bbbeb432fbbdc8f152cdfa0199487d885c274121db1d5c679ce7115ea0b",
+          "bytes": 7362278,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:31.220Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0095.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904008.zip",
+          "sha256": "d2147701afac5a67f3f024a8cf7dacf6f45a0547fa29b49e7044882b944a5e29",
+          "bytes": 22240891,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:32.723Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0096.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904009.zip",
+          "sha256": "0c56131e2a62927c62ef6c5c024bb0b86ba464ecb478efda4aa30316e2696eb7",
+          "bytes": 7289076,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:33.960Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0097.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904010.zip",
+          "sha256": "722763798ce391211547f7acd6a97fa2d6174f7258f150e2f0b82da83dad9993",
+          "bytes": 11336594,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:35.250Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0098.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904011.zip",
+          "sha256": "a70b4bf8bd8101f1cfa18725eeada806f83e8234c8be7077d8f6a05d1678884e",
+          "bytes": 16949959,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:36.657Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0099.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904012.zip",
+          "sha256": "4b71578dec616ef275dd841d2601702c83ac0ed3db76b1ea99f235959c0fc384",
+          "bytes": 5413396,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:37.772Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0100.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904013.zip",
+          "sha256": "a265dae82d1a3f870a8e4d5a56722c5cb5d7ebb02e0e750c09704d9c231f80f6",
+          "bytes": 6380247,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:38.935Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0101.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904014.zip",
+          "sha256": "f13c4f9d7fbb2b014a2fd349e7d10048c45f64ce45379312ae2f7bb5c118dfca",
+          "bytes": 14425689,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:40.369Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0102.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904015.zip",
+          "sha256": "53559c6d14f3b7c53f12cbec4dfed7e7c7fb156184d1ff34188815eb64b2f80d",
+          "bytes": 24833550,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:42.087Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0103.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904016.zip",
+          "sha256": "2c0782212b36a2f9d949c0484f5e81ec24df434105ae91fdd171113ed7e4ab90",
+          "bytes": 11297421,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:43.449Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0104.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904017.zip",
+          "sha256": "539ae502e94938a6f32aa1c13ad98b05035f98261f6b5563ad059f84eb13eb1d",
+          "bytes": 15118154,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:44.896Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0105.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904018.zip",
+          "sha256": "2264cf2366b348b8a607644f45c40136edb39df8d9b5edb20f5e2ef6c6ad9432",
+          "bytes": 28532962,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:46.625Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0106.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904019.zip",
+          "sha256": "17ebd7764cc2f8295e4b20e3b1640ad1c74bfdf6863ddd9e4743ab0a0006ca83",
+          "bytes": 34388646,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:48.457Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0107.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904020.zip",
+          "sha256": "f55c26ae044060e0f11a10e2e458ff5eadb0aa9837a6855ee5397dbe30784952",
+          "bytes": 46862319,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:48.770Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0108.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904021.zip",
+          "sha256": "80feb4b09cca2a0933e20e5631a5b092b3843b1a5925c431245515e28c7e1ba2",
+          "bytes": 50416227,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:51.794Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0109.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904022.zip",
+          "sha256": "f52bad25e6b2dce3181e1a29cdf82d2ea209d74be924bc83e5965c4e34d72703",
+          "bytes": 13300409,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:53.123Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0110.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904023.zip",
+          "sha256": "d20f985cf14fef8e63f65aae3f2fd308cb42e33613fb9cfcccae4cdcb69e0523",
+          "bytes": 5209693,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:54.286Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0111.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904024.zip",
+          "sha256": "15e044116d7a9858678a44e2874e627b6441a509837e533754e4072e86dc7004",
+          "bytes": 7798369,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:55.518Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0112.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904025.zip",
+          "sha256": "42ba202e34aabc9d955bb507df95a82f0293fb9b0a57acaf170b9e3179e5f638",
+          "bytes": 4183174,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:56.604Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0113.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904026.zip",
+          "sha256": "a4d7255874d0da4ebce6e21937b71b93ca050d4447e6073a6b041e11b1e46f1f",
+          "bytes": 3860455,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:57.738Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0114.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904027.zip",
+          "sha256": "d283cb5ecc03f30f8f314c52d3cdcb5aad2246cfca38035f3b51784ff575a5a0",
+          "bytes": 16745872,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:06:58.667Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0115.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904028.zip",
+          "sha256": "a4f0a04474063d330ec211a5f00e246c95fc2d73d642ae43cd3fcee3b9cde983",
+          "bytes": 18284483,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:07:00.263Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0116.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904029.zip",
+          "sha256": "e64024b1f84e0b0031be1e42f236b5968595ead371913a575061e4ed44dadbd3",
+          "bytes": 26107947,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:07:01.938Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0117.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904030.zip",
+          "sha256": "df0704fe2c3255c930bd4b814ad2589473d36709c21db88aae96f4110ad644bc",
+          "bytes": 38445664,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:07:04.033Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0118.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904031.zip",
+          "sha256": "563f1e8a428088ef5eeb99604376fa8e01213d400acb4f18a087726127e05cce",
+          "bytes": 13201290,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:07:05.316Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0119.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904032.zip",
+          "sha256": "1a894c1983703c8cf79f2e3cad704248090cd7a0828b9b3d08e2195d46d548be",
+          "bytes": 13010921,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:07:06.645Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0120.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904033.zip",
+          "sha256": "c75d72a2e3b07167a48c2db7b694714447ed8c3f85058b9f5d565ae695797128",
+          "bytes": 18855218,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:07:08.152Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0121.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904034.zip",
+          "sha256": "7a29fd7476c33b1792ceae0d234e9035f9a9733ec8a9bef88221b86f3024102d",
+          "bytes": 35093554,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:07:10.094Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0122.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904035.zip",
+          "sha256": "6b20a8bd7db0acbb822c4806a45ce413f39f315482cc1016f7d83ea0ec7dede4",
+          "bytes": 36850945,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:07:12.034Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0123.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904037.zip",
+          "sha256": "62c7a749b5e1cd814bc17efc8be269b8c77beb4096a0a625b0c3cf400b65f0ad",
+          "bytes": 14168654,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:07:13.355Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0124.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904038.zip",
+          "sha256": "ab02ed276502d5c399b0ac3b405ca47142472a496825f127aa883c2d878125df",
+          "bytes": 6419402,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:07:14.477Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0125.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904039.zip",
+          "sha256": "0c29be125ccbb27bfa35543fa7d7f6c581ebb5761845789b4f7ee5d6f9d08750",
+          "bytes": 1951519,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:07:15.470Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0126.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904040.zip",
+          "sha256": "0fe4721711c916dbf62dff722f33869a2e38c79ed7d37d8de9315ae55869687a",
+          "bytes": 5819147,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:07:16.606Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0127.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904041.zip",
+          "sha256": "8d55b91ee7dcd00e49589592e61726478cbb8d4ee32bf290f352514adc2fca7f",
+          "bytes": 12114113,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:07:17.910Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0128.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904042.zip",
+          "sha256": "46bd78b1cbc9b569336db4b0805d536c83a4a7535a921acd5c5083446acdd980",
+          "bytes": 31581051,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:07:19.738Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0129.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904043.zip",
+          "sha256": "8917012ac3f780bbd111f9ba33af8292548d59cb62fddcd3c5c4fa008a35e3a3",
+          "bytes": 21542613,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:07:21.292Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0130.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904044.zip",
+          "sha256": "3ce75bf4033399f75be18e9bdfc734449e6095d97c21e62d127513b50ee82b6f",
+          "bytes": 4836439,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:07:22.395Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0131.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904045.zip",
+          "sha256": "befef49963b1f9a06f9dd8fb927fabda0ce4f25b03d18689799d9bc98e9b3427",
+          "bytes": 6376855,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:07:23.521Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0132.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904046.zip",
+          "sha256": "6fa42e23d13eb76e41ba4bcf611cbee290ec9af935f73a20f6ac35b3cdbf18ba",
+          "bytes": 8619597,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:07:24.732Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0133.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904047.zip",
+          "sha256": "af0a52e16b0a86a7d48e573ea14c0a5ce14143c137b9e6c26884f0d32953a2ea",
+          "bytes": 5877504,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:07:25.864Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0134.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904048.zip",
+          "sha256": "d7b37503a26fc3c12f93295c10c057f7ee008567dc040e52c9dbf84fd90787ac",
+          "bytes": 34253395,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:07:27.780Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0135.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904049.zip",
+          "sha256": "2cbe212ae4ee0e6fb884053107f248ef046b17b9538fa55f3bebeddfb62dd55f",
+          "bytes": 6458081,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:07:28.948Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0136.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904050.zip",
+          "sha256": "39182de1af85ed4831379a7d1291e217cf1404ad060237796b15e3fb40901292",
+          "bytes": 22011218,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:07:30.510Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0137.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904051.zip",
+          "sha256": "b832b0a9b8a2d352ec788479ddeed575a150a4ffe953d8ac9f769e8eae36f0cb",
+          "bytes": 9482667,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:07:31.748Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0138.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904052.zip",
+          "sha256": "563f3a05a51ef3cbe27376662976cc353e0c496f5ebf0d686a84672ec7c37c4b",
+          "bytes": 9909033,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:07:33.002Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0139.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904053.zip",
+          "sha256": "d64a935fd811c21c0d54a858350a54946bf0791bd01d58ffd034930117297ea0",
+          "bytes": 8403605,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:07:34.193Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0140.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904054.zip",
+          "sha256": "2c2b869651de30567d7c63760f0e0dd280dc50e29f7cea3b595ae307775eda5b",
+          "bytes": 15813242,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:07:35.608Z"
+        },
+        {
+          "key": "open-data/raw/mlit-city-planning-gis-data/initial/0141.zip",
+          "url": "https://www.mlit.go.jp/toshi/tosiko/content/001904055.zip",
+          "sha256": "c3e3ebf035115b2ef29138813e5c1eccf2444dba71e8f5f706c2e613baa0aa2a",
+          "bytes": 11641557,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T06:07:36.916Z"
+        }
+      ],
+      "manifestKey": "open-data/raw/mlit-city-planning-gis-data/initial/manifest.json",
+      "manifestSha256": "8db82b905dbb879be3c59aa6e1c6fa7feff5315859796ff5484223afb585d16c",
+      "bytes": 2021987947,
+      "status": "archived"
+    }
+  ]
+}

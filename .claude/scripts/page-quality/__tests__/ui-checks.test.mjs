@@ -1,3 +1,4 @@
+import { R2_PUBLIC_ORIGIN } from "../../lib/r2-keys.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { chromium } from "playwright";
@@ -43,17 +44,17 @@ test("「データ出典」見出しが 2 つ並ぶ (本文の手書き節 + Dat
 
 test("画像確認の対象は自サイトと R2 の <img> だけで、ASP の計測画像・_next・data URI・代替のある <source> は含めない", () => {
   const html = `<html><body>
-    <img src="https://storage.stats47.jp/app/blog/sample/data/map.svg">
-    <picture><source media="(max-width: 639px)" srcset="https://storage.stats47.jp/app/blog/sample/data/map-mobile.svg 1x"><img src="/images/hero.png"></picture>
+    <img src="${R2_PUBLIC_ORIGIN}/app/blog/sample/data/map.svg">
+    <picture><source media="(max-width: 639px)" srcset="${R2_PUBLIC_ORIGIN}/app/blog/sample/data/map-mobile.svg 1x"><img src="/images/hero.png"></picture>
     <img src="https://www10.a8.net/0.gif?a8mat=xxx">
     <img src="https://thumbnail.image.rakuten.co.jp/x.jpg">
     <img src="/_next/image?url=%2Fimages%2Fa.png&w=640&q=75">
     <img src="data:image/png;base64,AAAA">
-    <img src="https://storage.stats47.jp/app/blog/sample/data/map.svg#frag">
+    <img src="${R2_PUBLIC_ORIGIN}/app/blog/sample/data/map.svg#frag">
   </body></html>`;
   assert.deepEqual(analyzeHtml(html, BASE).image_urls.sort(), [
     "https://stats47.jp/images/hero.png",
-    "https://storage.stats47.jp/app/blog/sample/data/map.svg",
+    `${R2_PUBLIC_ORIGIN}/app/blog/sample/data/map.svg`,
   ]);
 });
 
@@ -64,8 +65,8 @@ test("代替表示のある特産品画像の欠落は degraded_images に分け
       path: "/areas/07000",
       metrics: {},
       image_urls: [
-        "https://storage.stats47.jp/app/areas/07000/specialty/nameko.webp",
-        "https://storage.stats47.jp/app/areas/07000/ogp/ogp.png",
+        `${R2_PUBLIC_ORIGIN}/app/areas/07000/specialty/nameko.webp`,
+        `${R2_PUBLIC_ORIGIN}/app/areas/07000/ogp/ogp.png`,
       ],
     },
   ];
@@ -73,8 +74,8 @@ test("代替表示のある特産品画像の欠落は degraded_images に分け
   assert.equal(results[0].metrics.broken_images, 1);
   assert.equal(results[0].metrics.degraded_images, 1);
   assert.deepEqual(results[0].ui_findings, [
-    "broken_image: https://storage.stats47.jp/app/areas/07000/ogp/ogp.png (HTTP 404)",
-    "degraded_image: https://storage.stats47.jp/app/areas/07000/specialty/nameko.webp (HTTP 404)",
+    `broken_image: ${R2_PUBLIC_ORIGIN}/app/areas/07000/ogp/ogp.png (HTTP 404)`,
+    `degraded_image: ${R2_PUBLIC_ORIGIN}/app/areas/07000/specialty/nameko.webp (HTTP 404)`,
   ]);
 });
 

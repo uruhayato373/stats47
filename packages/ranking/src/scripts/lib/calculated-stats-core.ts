@@ -1,3 +1,4 @@
+import { extractYearCode } from "@stats47/estat-api/api";
 /**
  * 計算型 metric (`fetcherKey:"calculated"`) の正典 `app/stats/<key>/values.json` を
  * 分子・分母から導出する純関数。
@@ -43,9 +44,8 @@ export function inYearRange(yearCode: string, config: MetricConfig): boolean {
   if (!Number.isFinite(y)) return false;
   const spec = config.years;
   if (spec === "all" || spec == null) return true;
-  const to4 = (n: number): number => (n > 9999 ? Number(String(n).slice(0, 4)) : n);
-  if ("years" in spec) return spec.years.map(to4).includes(y);
-  return y >= to4(spec.from) && y <= to4(spec.to);
+  if ("years" in spec) return spec.years.map((n) => (n > 9999 ? Number(/^\d{4}/.test(String(n)) ? extractYearCode(String(n)) : String(n).slice(0, 4)) : n)).includes(y);
+  return y >= (spec.from > 9999 ? Number(/^\d{4}/.test(String(spec.from)) ? extractYearCode(String(spec.from)) : String(spec.from).slice(0, 4)) : spec.from) && y <= (spec.to > 9999 ? Number(/^\d{4}/.test(String(spec.to)) ? extractYearCode(String(spec.to)) : String(spec.to).slice(0, 4)) : spec.to);
 }
 
 /**

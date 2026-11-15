@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+const { extractYearCode } = require("../lib/year-code.mjs");
+// Compatibility: malformed time prefixes retain the previous slice result.
 /**
  * e-Stat 候補 metric の年度カバレッジを実 API で確認する。
  *
@@ -51,7 +53,7 @@ function extractYears(json) {
   const dataTimes = [...new Set(values.map((v) => v["@time"]))];
 
   const yearsFromCode = (codes) =>
-    [...new Set(codes.map((c) => c.slice(0, 4)))].sort();
+    [...new Set(codes.map((c) => (typeof c === "string" && /^\d{4}/.test(c) ? extractYearCode(c) : c.slice(0, 4))))].sort();
 
   return {
     years: yearsFromCode(dataTimes),

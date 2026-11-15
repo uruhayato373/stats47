@@ -2,6 +2,149 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "secondary-employed-people-ratio-tertiary",
+      "pageId": "ranking:secondary-employed-people-ratio-tertiary",
+      "title": "第2次・第3次産業就業者比率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010206",
+          "filters": {
+            "cdCat01": "#F01204"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010206",
+          "cdCat01": "#F01204"
+        },
+        "derived": false,
+        "configHash": "0ad4be542f4ca2cf"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:secondary-employed-people-ratio-tertiary",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor-wages",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:secondary-employed-people-ratio-tertiary",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "secondary-industry-employees-per-establishment",
+      "pageId": "ranking:secondary-industry-employees-per-establishment",
+      "title": "第2次産業従業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010203",
+          "filters": {
+            "cdCat01": "#C03305"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010203",
+          "cdCat01": "#C03305"
+        },
+        "derived": false,
+        "configHash": "f1566d86debe59e1"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:secondary-industry-employees-per-establishment",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "secondary-industry-employees-per-establishment-census",
+      "pageId": "ranking:secondary-industry-employees-per-establishment-census",
+      "title": "第2次産業従業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010203",
+          "filters": {
+            "cdCat01": "#C03303"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010203",
+          "cdCat01": "#C03303"
+        },
+        "derived": false,
+        "configHash": "e1dba23c4b124087"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:secondary-industry-employees-per-establishment-census",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "secondary-industry-establishment-ratio",
+      "pageId": "ranking:secondary-industry-establishment-ratio",
+      "title": "第2次産業事業所数構成比",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010203",
+          "filters": {
+            "cdCat01": "#C02104"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010203",
+          "cdCat01": "#C02104"
+        },
+        "derived": false,
+        "configHash": "a08b6b1e714cae5d"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:small-business-dominance-map",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:secondary-industry-establishment-ratio",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "secondary-industry-establishment-ratio-census",
       "pageId": "ranking:secondary-industry-establishment-ratio-census",
       "title": "第2次産業事業所数構成比",
@@ -5647,10 +5790,6 @@
         {
           "pageId": "area-theme:47000:labor-wages",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:telework-gap-tokyo-6x",
-          "kind": "blog"
         },
         {
           "pageId": "blog:telework-rate-tokyo-gap",
@@ -11812,544 +11951,6 @@
       "consumers": [
         {
           "pageId": "ranking:social-expense-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "social-expenses-group-consumption-expenditure",
-      "pageId": "ranking:social-expenses-group-consumption-expenditure",
-      "title": "交際費消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "100300000",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "100300000",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "642de60a79a70d49"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:social-expenses-group-consumption-expenditure-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:social-expenses-group-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "social-increase",
-      "pageId": "ranking:social-increase",
-      "title": "社会増減数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010101",
-          "filters": {
-            "cdCat01": "A5302"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010101",
-          "cdCat01": "A5302"
-        },
-        "derived": false,
-        "configHash": "e56618b7ff694c24"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:social-increase",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "social-increase-rate",
-      "pageId": "ranking:social-increase-rate",
-      "title": "社会増減率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010101",
-          "filters": {
-            "cdCat01": "A5301"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010101",
-          "cdCat01": "A5301"
-        },
-        "derived": false,
-        "configHash": "dcc3c1f4d22d988f"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:01000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:aging-society",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:population-dynamics",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:population-migration-tokyo-concentration",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:social-increase-rate",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:aging-society",
-          "kind": "theme"
-        },
-        {
-          "pageId": "theme:population-dynamics",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "aging-society",
-        "population-dynamics"
-      ]
-    },
-    {
-      "metricKey": "social-sports-facility",
-      "pageId": "ranking:social-sports-facility",
-      "title": "社会体育施設数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010107",
-          "filters": {
-            "cdCat01": "G3102"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010107",
-          "cdCat01": "G3102"
-        },
-        "derived": false,
-        "configHash": "4e879bb744720af4"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:sports-facility-regional-divide",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:social-sports-facility",
           "kind": "ranking"
         }
       ],

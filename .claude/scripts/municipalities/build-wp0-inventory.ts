@@ -1,3 +1,4 @@
+import { statsR2Key } from '../lib/r2-keys.mjs';
 /**
  * build-wp0-inventory — 市区町村スコープ分離 WP0 の read-only 棚卸し (doc 44 §WP0)
  * ---------------------------------------------------------------------------
@@ -185,7 +186,7 @@ async function main() {
     for (const key of candidates) {
       if (checked >= limit) break;
       checked++;
-      const r = await getJson(`app/stats/${key}/cities.json`);
+      const r = await getJson(statsR2Key(key, "city"));
       if (r.status !== "ok") {
         artifacts[key] = { availability: r.status, reason: r.status === "undetermined" ? r.reason : null };
         continue;

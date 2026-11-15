@@ -1,3 +1,4 @@
+import { rankingR2Key } from "@stats47/r2-storage/keys";
 import "dotenv/config";
 
 /**
@@ -149,7 +150,7 @@ async function buildAllowedLinks(
 ): Promise<{ href: string; label: string }[]> {
   const links: { href: string; label: string }[] = [];
   try {
-    const res = await fetch(`${R2}/app/ranking/${rankingKey}/item.json`);
+    const res = await fetch(`${R2}/${rankingR2Key(rankingKey, "item")}`);
     if (res.ok) {
       const json = (await res.json()) as {
         item?: { categoryKey?: string };

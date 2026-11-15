@@ -1,4 +1,8 @@
 import type { IncomingHttpHeaders } from "node:http";
+import type { S3Client } from "@aws-sdk/client-s3";
+
+/** Bucket selection remains on the caller's S3 commands. */
+export function createR2S3Client(options?: { bucket?: string }): S3Client;
 
 export interface PrivateR2Store {
   bucket: string;

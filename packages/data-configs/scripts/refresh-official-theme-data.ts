@@ -1,4 +1,7 @@
 #!/usr/bin/env tsx
+// Keep the 45s download and original bytes for source hashing.
+import { resolveEstatAppId, ESTAT_API, ESTAT_ENDPOINTS } from "../../estat-api/src/ingest.js";
+import { rankingR2Key, statsR2Key } from "@stats47/r2-storage/keys";
 /**
  * Official releases newer than SSDS → local stats + ranking staging. Never uploads.
  *
@@ -55,13 +58,7 @@ function assertNotTrackedOutput(path: string): void {
 }
 
 function readAppId(): string {
-  const value = process.env.NEXT_PUBLIC_ESTAT_APP_ID ?? process.env.ESTAT_APP_ID;
-  if (value) return value;
-  const env = join(REPO_ROOT, ".env.local");
-  const line = existsSync(env) ? readFileSync(env, "utf8").split("\n").find((entry) => entry.startsWith("NEXT_PUBLIC_ESTAT_APP_ID=")) : undefined;
-  const id = line?.split("=").slice(1).join("=").trim().replace(/^["']|["']$/g, "");
-  if (!id) throw new Error("Set NEXT_PUBLIC_ESTAT_APP_ID or pass --history-estat-json with an official API response");
-  return id;
+  return resolveEstatAppId(process.env, join(REPO_ROOT, ".env.local"), { legacyEnv: "nullish" });
 }
 
 async function main(): Promise<void> {
@@ -98,15 +95,15 @@ async function main(): Promise<void> {
     const query = new URLSearchParams({ appId: offline ? "unused" : readAppId(),
       statsDataId: AGRICULTURAL_OUTPUT_RELEASE.history.statsDataId,
       cdCat01: AGRICULTURAL_OUTPUT_RELEASE.history.cdCat01, limit: "100000" });
-    historyPath = (await acquire(`https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?${query}`, "agricultural-history.json")).path;
+    historyPath = (await acquire(`${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS.GET_STATS_DATA}?${query}`, "agricultural-history.json")).path;
   }
   const historyRaw = await readFile(historyPath, "utf8");
   const history = parseAgriculturalHistory(JSON.parse(historyRaw));
   const prior = new Map<string, StatsValuesPayload>();
   for (const metric of METRICS) {
-    const stagedPath = join(stageDir, "app/stats", metric.key, "values.json");
+    const stagedPath = join(stageDir, statsR2Key(metric.key, "prefecture"));
     const path = existsSync(stagedPath) ? stagedPath : (await acquire(
-      `${SITE.r2PublicBaseUrl}/app/stats/${metric.key}/values.json`, `${metric.key}-existing.json`,
+      `${SITE.r2PublicBaseUrl}/${statsR2Key(metric.key, "prefecture")}`, `${metric.key}-existing.json`,
     )).path;
     const existing = parseStatsValuesPayload(JSON.parse(await readFile(path, "utf8")));
     if (existing.metricKey !== metric.key || existing.entityKind !== "prefecture") throw new Error("Existing stats identity mismatch");
@@ -151,8 +148,8 @@ async function main(): Promise<void> {
     if (ranking.partitions.reduce((sum, part) => sum + part.count, 0) !== rows.length) throw new Error("Ranking generation removed observations");
     const statsText = JSON.stringify(stats);
     const rankingText = JSON.stringify(ranking);
-    pending.push({ path: join(stageDir, "app/stats", metric.key, "values.json"), text: statsText },
-      { path: join(stageDir, "app/ranking", metric.key, "values.json"), text: rankingText });
+    pending.push({ path: join(stageDir, statsR2Key(metric.key, "prefecture")), text: statsText },
+      { path: join(stageDir, rankingR2Key(metric.key, "values")), text: rankingText });
     manifest.push({ key: metric.key, years, rowCount: rows.length, previousRowCount: existing.rows.length,
       previousRecipe: existing.meta.recipe, recipe, previousValuesMatched: existing.rows.length,
       source: isAgriculture ? { url: AGRICULTURAL_OUTPUT_RELEASE.sourceUrl, sha256: workbook.sha256,

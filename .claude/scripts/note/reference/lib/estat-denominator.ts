@@ -1,3 +1,5 @@
+// Parse JSON even on non-2xx responses, as before; the shared request client rejects them.
+import { resolveEstatAppId, ESTAT_API, ESTAT_ENDPOINTS } from "../../../../../packages/estat-api/src/ingest.js";
 /**
  * 指標の表示名に分母 (「人口100万人当たり」など) が無いとき、e-Stat の項目名から分母を補う。
  * ランキングの表示名は分母を落としているものがある (博物館数 = 人口100万人当たりなのに「博物館数」「館」)。
@@ -9,14 +11,15 @@ import path from 'node:path';
 import { datasetDir } from '../../../../../config/datasets.mjs';
 
 const ROOT = path.resolve(__dirname, '../../../../..');
-const META_API = 'https://api.e-stat.go.jp/rest/3.0/app/json/getMetaInfo';
+const META_API = `${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS.GET_META_INFO}`;
 const cache = new Map<string, Map<string, string>>();
 
 type Recipe = { kind?: string; estatParams?: { statsDataId?: string; cdCat01?: string } } | undefined;
 
 function appId() {
-  const env = readFileSync(path.join(ROOT, 'apps/web/.env.development'), 'utf8');
-  return env.match(/NEXT_PUBLIC_ESTAT_APP_ID=(\S+)/)?.[1] ?? null;
+  const file = path.join(ROOT, 'apps/web/.env.development');
+  readFileSync(file, 'utf8'); // Missing/unreadable source files still throw.
+  try { return resolveEstatAppId({}, file); } catch { return null; }
 }
 
 async function cat01Names(statsDataId: string): Promise<Map<string, string>> {

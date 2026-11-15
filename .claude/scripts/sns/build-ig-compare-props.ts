@@ -1,4 +1,5 @@
 #!/usr/bin/env tsx
+import { rankingR2Key } from '../lib/r2-keys.mjs';
 /**
  * build-ig-compare-props.ts — 2都道府県の候補プールから、Instagram「県どうしの比較」
  * カルーセル (金枠。正典 .claude/rules/sns-content-standards.md §2-3c「県どうしの比較」) の
@@ -110,7 +111,7 @@ interface ItemMeta {
 }
 
 async function fetchItemMeta(rankingKey: string, sourceKeys: Set<string>): Promise<ItemMeta | null> {
-  const url = `${PUBLIC_URL}/app/ranking/${rankingKey}/item.json`;
+  const url = `${PUBLIC_URL}/${rankingR2Key(rankingKey, "item")}`;
   try {
     const payload = await fetchJson<RankingItemPayload>(url);
     sourceKeys.add(url);
@@ -145,7 +146,7 @@ async function fetchLatestDuelPair(
   minYear: number,
   sourceKeys: Set<string>,
 ): Promise<DuelPair | null> {
-  const url = `${PUBLIC_URL}/app/ranking/${rankingKey}/values.json`;
+  const url = `${PUBLIC_URL}/${rankingR2Key(rankingKey, "values")}`;
   let payload: RankingValuesPayload;
   try {
     payload = await fetchJson<RankingValuesPayload>(url);

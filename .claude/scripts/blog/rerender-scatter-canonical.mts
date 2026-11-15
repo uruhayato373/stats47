@@ -1,4 +1,7 @@
 #!/usr/bin/env -S npx tsx
+// Keep the existing response/error handling; the shared JSON client redacts response fields.
+import { resolveEstatAppId, ESTAT_API, ESTAT_ENDPOINTS } from "../../../packages/estat-api/src/ingest.js";
+import { rankingR2Key } from '../lib/r2-keys.mjs';
 /**
  * rerender-scatter-canonical.mts — scatter カタログの正方形・単色統一 (720×720)。
  *
@@ -57,7 +60,7 @@ const KEY_FILE_ARG = (() => {
   const i = args.indexOf('--key-file');
   return i >= 0 ? args[i + 1] : null;
 })();
-const ESTAT_APP_ID = process.env.NEXT_PUBLIC_ESTAT_APP_ID || '';
+const estatAppId = resolveEstatAppId(process.env, false) || '';
 const LODGING_2024_XLSX =
   'https://www.mlit.go.jp/kankocho/content/002026764.xlsx';
 const CHINA_SCATTER =
@@ -143,16 +146,16 @@ function pointFingerprint(data: any): string {
 }
 
 async function fetchEstatValues(params: Record<string, string>): Promise<any> {
-  if (!ESTAT_APP_ID) {
+  if (!estatAppId) {
     throw new Error(
       'NEXT_PUBLIC_ESTAT_APP_ID が未設定のため欠損scatterを一次ソースから復元できません'
     );
   }
   const url = new URL(
-    'https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData'
+    `${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS.GET_STATS_DATA}`
   );
   for (const [key, value] of Object.entries({
-    appId: ESTAT_APP_ID,
+    appId: estatAppId,
     lang: 'J',
     metaGetFlg: 'Y',
     cntGetFlg: 'N',
@@ -203,7 +206,7 @@ async function rankingValueMap(
   rankingKey: string,
   yearCode: string
 ): Promise<Map<string, { areaName: string; value: number }>> {
-  const ranking = await fj(`${R2}/app/ranking/${rankingKey}/values.json`);
+  const ranking = await fj(`${R2}/${rankingR2Key(rankingKey, "values")}`);
   const partition = asArray<any>(ranking?.partitions).find(
     (item) => String(item?.yearCode) === yearCode
   );
@@ -385,7 +388,7 @@ async function repairChinaScatter(): Promise<Repair> {
 
 async function repairSemiconductorScatter(): Promise<Repair> {
   const ranking = await fj(
-    `${R2}/app/ranking/manufacturing-shipment-amount/values.json`
+    `${R2}/${rankingR2Key("manufacturing-shipment-amount", "values")}`
   );
   const partition = asArray<any>(ranking?.partitions).find(
     (item) => String(item?.yearCode) === '2023'
@@ -448,7 +451,7 @@ async function repairSemiconductorScatter(): Promise<Repair> {
       inputs: [
         {
           rankingKey: 'manufacturing-shipment-amount',
-          source: 'r2:app/ranking/manufacturing-shipment-amount/values.json',
+          source: `r2:${rankingR2Key("manufacturing-shipment-amount", "values")}`,
           year: '2023',
           label: '製造品出荷額等',
         },
@@ -553,7 +556,7 @@ async function rebuildNurseScatter(
         {
           rankingKey: 'avg-salary-all-prefecture',
           year: '2023',
-          source: 'r2:app/ranking/avg-salary-all-prefecture/values.json',
+          source: `r2:${rankingR2Key("avg-salary-all-prefecture", "values")}`,
         },
         {
           statsDataId: '0003445758',

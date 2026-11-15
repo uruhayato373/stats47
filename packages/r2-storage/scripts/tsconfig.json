@@ -1,0 +1,12 @@
+{
+  // CI / 運用が動かすスクリプトの型検査。親 tsconfig は include が src だけなので、
+  // ここを作らないと**このディレクトリは一度も型検査されない**。
+  // 実例: apps/web/scripts/sync-rakuten-catalog.ts の import 漏れが 9 日間検出されず、
+  // 日次同期が毎日 11 分走ってから ReferenceError で全損していた (2026-08-13 是正)。
+  // 契約: .claude/scripts/lib/__tests__/scripts-type-check-coverage.test.cjs
+  "extends": "../tsconfig.json",
+  // 親は declaration + outDir でビルド用。ここは検査だけなので生成物を出さない
+  "compilerOptions": { "noEmit": true, "declaration": false, "composite": false },
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
+}

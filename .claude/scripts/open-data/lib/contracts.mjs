@@ -54,6 +54,14 @@ export function validateRecipes(doc) {
       if (tables.has(table.table)) throw Error(`Duplicate table: ${table.table}`);
       tables.add(table.table);
       if (new Set(table.areas.map((a) => a.level)).size !== table.areas.length) throw Error('Duplicate area level');
+      for (const filter of table.where ?? []) if (filter.matches !== undefined) new RegExp(filter.matches);
+      for (const rule of Object.values(table.metadataColumns ?? {})) new RegExp(rule.pattern);
+      for (const area of table.areas) for (const part of area.compose ?? [area]) {
+        if (part.capture) new RegExp(part.capture);
+      }
+      if (table.xlsx?.columns && new Set(Object.values(table.xlsx.columns)).size !== Object.keys(table.xlsx.columns).length) throw Error('Duplicate XLSX column position');
+      if (table.xlsx && (table.xlsx.dataStartRow <= Math.max(...[table.xlsx.headerRow].flat())
+        || table.xlsx.dataEndRow !== undefined && table.xlsx.dataEndRow < table.xlsx.dataStartRow)) throw Error('Invalid XLSX row range');
     }
   }
   return doc;

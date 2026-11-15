@@ -11,30 +11,7 @@ import type { EntityKind, MetricRecipe } from "@stats47/data-configs";
  * - port stats:       `app/stats/<metric>/ports.json`            (全年 × 全港)
  * - migration-flow:   `app/stats/<metric>/migration-flow-<year>.json` (year 単位)
  */
-export const STATS_R2_PREFIX = "app/stats";
-
-export function statsR2Key(
-  metricKey: string,
-  entityKind: EntityKind,
-  year?: number,
-): string {
-  switch (entityKind) {
-    case "prefecture":
-      return `${STATS_R2_PREFIX}/${metricKey}/values.json`;
-    case "city":
-      return `${STATS_R2_PREFIX}/${metricKey}/cities.json`;
-    case "port":
-      return `${STATS_R2_PREFIX}/${metricKey}/ports.json`;
-    case "migration-flow":
-      if (year == null)
-        throw new Error("migration-flow requires year parameter");
-      return `${STATS_R2_PREFIX}/${metricKey}/migration-flow-${year}.json`;
-    default: {
-      const _exhaustive: never = entityKind;
-      throw new Error(`unknown entity kind: ${_exhaustive}`);
-    }
-  }
-}
+export { STATS_R2_PREFIX, statsR2Key } from "@stats47/r2-storage/keys";
 
 /** prefecture / city / port 共通: 1 観測 1 row */
 export interface SingleEntityRow extends Pick<StatsSchema, 'areaCode' | 'areaName' | 'yearCode' | 'yearName' | 'value'> {

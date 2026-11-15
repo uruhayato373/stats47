@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { statsR2Key } from "../lib/r2-keys.mjs";
 /** Pinned 2024 vital statistics: mother's age and birth order. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -328,7 +329,7 @@ export async function main() {
       },
     });
     files.push({
-      key: 'app/stats/' + key + '/values.json',
+      key: statsR2Key(key, "prefecture"),
       metricKey: key,
       rowCount: 47,
       content: Buffer.from(JSON.stringify(payload)),

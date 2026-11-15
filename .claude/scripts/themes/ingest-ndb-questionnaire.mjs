@@ -1,8 +1,9 @@
+import { statsR2Key } from "../lib/r2-keys.mjs";
 /**
  * 第 11 回 NDB オープンデータ「特定健診 標準的な質問票」の都道府県別表から、設問ごとの回答割合を取り込む。
  *
  * 使い方: node --import tsx .claude/scripts/themes/ingest-ndb-questionnaire.mjs [--write-local]
- *   --write-local を付けると .local/r2/app/stats/<key>/values.json に書く (R2 へは上げない)。
+ *   --write-local を付けると 観測値の置き場 に書く (R2 へは上げない)。
  *
  * 出典の zip と各 xlsx の SHA-256 は指標定義 (data/metrics/<key>.ts の source.config) が持つ。
  * このスクリプトが持つのは「どの設問の、どの選択肢を数えるか」だけ (QUESTIONS)。
@@ -15,7 +16,7 @@
  *
  * 質問 15・17 (遅い夕食・朝食欠食) は ingest-singleparent-nutrition.mjs が同じ zip から取り込んでいる。
  *
- * 公開の順序: 指標定義は isActive: false で登録する → このスクリプトで値を作る → R2 の app/stats/<key>/ へ上げる →
+ * 公開の順序: 指標定義は isActive: false で登録する → このスクリプトで値を作る → R2 の観測値の置き場 へ上げる →
  * isActive: true にする。先に true にすると、値の無いランキングページが配信される (.claude/rules/metric-config-standards.md
  * 「isActive:true ≠ 本番公開」)。R2 へ上げるのは .github/workflows/external-metric-ingest.yml (ingest: ndb-questionnaire)。
  */
@@ -228,7 +229,7 @@ async function main() {
       },
     });
     const content = JSON.stringify(payload);
-    files.push({ key: `app/stats/${key}/values.json`, content, sha256: sha(content) });
+    files.push({ key: statsR2Key(key, "prefecture"), content, sha256: sha(content) });
     const sorted = [...rows].sort((a, b) => b.value - a.value);
     series.push({
       metricKey: key,

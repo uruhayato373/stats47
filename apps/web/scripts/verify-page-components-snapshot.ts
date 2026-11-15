@@ -10,6 +10,8 @@
 
 import { readdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
+
+import { rankingR2Key } from '@stats47/r2-storage/keys';
 import { SITE } from "@stats47/types";
 
 const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
@@ -55,7 +57,7 @@ function buildChecks(): Check[] {
     const key = file.replace(/\.json$/, "");
     checks.push({
       label: `ranking-page-cards/${key}`,
-      url: `${PUBLIC_URL}/app/ranking/${encodeURIComponent(key)}/page-cards.json`,
+      url: `${PUBLIC_URL}/${rankingR2Key(encodeURIComponent(key), 'page-cards')}`,
       local: readFileSync(resolve(rpcDir, file), "utf8"),
     });
   }

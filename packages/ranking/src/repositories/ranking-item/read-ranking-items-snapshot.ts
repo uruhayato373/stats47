@@ -1,3 +1,4 @@
+import { RANKING_R2_PREFIX, rankingR2Key } from "@stats47/r2-storage/keys";
 import "server-only";
 
 import { logger } from "@stats47/logger/server";
@@ -272,10 +273,10 @@ async function enumerateRankingItemKeys(areaType?: AreaType): Promise<string[]> 
   }
 
   const knownItemKeys = new Set(
-    [...KNOWN_RANKING_KEYS].map((key) => `app/ranking/${key}/item.json`),
+    [...KNOWN_RANKING_KEYS].map((key) => rankingR2Key(key, "item")),
   );
   try {
-    const allKeys = await listFromR2("app/ranking/");
+    const allKeys = await listFromR2(`${RANKING_R2_PREFIX}/`);
     const itemKeys = allKeys.filter((k) =>
       /^app\/ranking\/[^/]+\/item\.json$/.test(k) && knownItemKeys.has(k),
     );
@@ -284,7 +285,7 @@ async function enumerateRankingItemKeys(areaType?: AreaType): Promise<string[]> 
     // R2 list 不可 (公開URL専用環境) → git 列挙フォールバックへ
   }
 
-  return [...KNOWN_RANKING_KEYS].map((key) => `app/ranking/${key}/item.json`);
+  return [...KNOWN_RANKING_KEYS].map((key) => rankingR2Key(key, "item"));
 }
 
 export async function readRankingItemByKeyAndAreaTypeFromR2(

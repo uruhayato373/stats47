@@ -2,6 +2,520 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "pm25-general-station-count",
+      "pageId": "ranking:pm25-general-station-count",
+      "title": "PM2.5の一般環境大気測定局数",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.env.go.jp/content/000406532.pdf"
+        },
+        "fetcherKey": "manual",
+        "configHash": "2f717c4b81fc6e7c"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:pm25-general-station-count",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:environmental-quality",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "environmental-quality"
+      ]
+    },
+    {
+      "metricKey": "pm25-valid-general-station-count",
+      "pageId": "ranking:pm25-valid-general-station-count",
+      "title": "PM2.5の有効な一般環境大気測定局数",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.env.go.jp/content/000406532.pdf"
+        },
+        "fetcherKey": "manual",
+        "configHash": "2f717c4b81fc6e7c"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:environmental-quality",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:pm25-valid-general-station-count",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:environmental-quality",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "environmental-quality"
+      ]
+    },
+    {
+      "metricKey": "pneumonia-death-count",
+      "pageId": "ranking:pneumonia-death-count",
+      "title": "肺炎による死亡者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003412078",
+          "filters": {
+            "cdCat01": "00100",
+            "cdCat02": "00100",
+            "cdCat03": "10200"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003412078",
+          "cdCat01": "00100",
+          "cdCat02": "00100",
+          "cdCat03": "10200"
+        },
+        "derived": false,
+        "configHash": "42affb92c31f7cd5"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:pneumonia-death-count",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "pneumonia-death-rate",
+      "pageId": "ranking:pneumonia-death-rate",
+      "title": "肺炎による死亡者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003411663",
+          "filters": {
+            "cdCat01": "10200"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003411663",
+          "cdCat01": "10200"
+        },
+        "derived": false,
+        "configHash": "7db88b46a0174fcd"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:pneumonia-death-rate-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:pneumonia-death-rate",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "pocket-money-group-consumption-expenditure",
       "pageId": "ranking:pocket-money-group-consumption-expenditure",
       "title": "こづかい(使途不明)消費支出額",
@@ -5583,10 +6097,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "blog:beef-consumption-prefecture-gap",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:chicken-consumption-prefecture-gap",
           "kind": "blog"
         },
@@ -6208,157 +6718,6 @@
       "consumers": [
         {
           "pageId": "ranking:port-inbound-ships",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:ports",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "ports"
-      ]
-    },
-    {
-      "metricKey": "port-passengers-boarding",
-      "pageId": null,
-      "title": "旅客数（乗込）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003130801",
-          "filters": {}
-        }
-      ],
-      "recipe": {
-        "kind": "external",
-        "derived": false,
-        "refetch": {
-          "statsDataId": "0003130801"
-        },
-        "fetcherKey": "estat",
-        "configHash": "a9b52514a8ef4b17"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:port-passengers-boarding",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "port-passengers-landing",
-      "pageId": null,
-      "title": "旅客数（上陸）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003130801",
-          "filters": {}
-        }
-      ],
-      "recipe": {
-        "kind": "external",
-        "derived": false,
-        "refetch": {
-          "statsDataId": "0003130801"
-        },
-        "fetcherKey": "estat",
-        "configHash": "a9b52514a8ef4b17"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:port-passengers-landing",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "port-passengers-total",
-      "pageId": null,
-      "title": "港湾旅客数（港湾統計）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003130737",
-          "filters": {
-            "cdCat01": "100",
-            "cdCat02": "100"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003130737",
-          "cdCat01": "100",
-          "cdCat02": "100"
-        },
-        "derived": false,
-        "configHash": "e2cd495a5ed85bb9"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:port-passengers-total",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "port-ships-tonnage",
-      "pageId": "ranking:port-ships-tonnage",
-      "title": "入港船舶総トン数（港湾統計）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003130773",
-          "filters": {
-            "cdTab": "130",
-            "cdCat01": "100",
-            "cdCat02": "100"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003130773",
-          "cdCat01": "100",
-          "cdCat02": "100",
-          "cdTab": "130"
-        },
-        "ops": {
-          "axisSum": {
-            "axis": "cat03",
-            "codes": [
-              "110",
-              "120"
-            ]
-          }
-        },
-        "derived": true,
-        "configHash": "a8fe55383a3df623"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:port-ships-tonnage",
           "kind": "ranking"
         },
         {

@@ -1,0 +1,34 @@
+{
+  "datasetId": "aist-seamless-geology-v2",
+  "versions": [
+    {
+      "schemaVersion": 1,
+      "datasetId": "aist-seamless-geology-v2",
+      "version": "initial",
+      "sha256": "67f838bc2f0fbb67f74b8faa7b699dfaf49bf347189e138756ceb2ad542ba18a",
+      "recipeSha256": "e70ec42c9349a2b1583ea74764065d624963db137f0d656636c450caa72baeeb",
+      "retrievedAt": "2026-11-15T05:40:29.326Z",
+      "license": {
+        "name": "政府標準利用規約 (第2.0版) 互換、出典表示必須",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://gbank.gsj.jp/seamless/agreement.html"
+      },
+      "files": [
+        {
+          "key": "open-data/raw/aist-seamless-geology-v2/initial/0001.zip",
+          "url": "https://gbank.gsj.jp/seamless/download/seamlessV2.zip",
+          "sha256": "e2b31d0e062dd78c9f3a7030bb98f9e336b9c9b749ddb49802a5a1457006674f",
+          "bytes": 267527356,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:40:29.326Z"
+        }
+      ],
+      "manifestKey": "open-data/raw/aist-seamless-geology-v2/initial/manifest.json",
+      "manifestSha256": "4c5c5891a4c0ffcc5b1a0df9f421eee432d836efa906deeadc591038c778580c",
+      "bytes": 267527356,
+      "status": "archived"
+    }
+  ]
+}

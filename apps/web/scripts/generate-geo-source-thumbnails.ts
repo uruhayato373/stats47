@@ -5,10 +5,12 @@ import { dirname, join } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 
 import { GIS_DATASETS_BY_ID, getKsjLicensePolicy } from '@stats47/gis/mlit-ksj';
+import { R2_PUBLIC_ORIGIN } from '@stats47/r2-storage/keys';
 import { readPrefectureFeatures } from '@stats47/visualization/server';
 import sharp from 'sharp';
 import { feature } from 'topojson-client';
 
+import { datasetDir } from "../../../config/datasets.mjs";
 import {
   parseGeoSourceCatalog,
   parseGeoSourceItem,
@@ -41,7 +43,6 @@ import type {
 } from '@stats47/types';
 import type { Feature, FeatureCollection } from 'geojson';
 import type { GeometryObject, Topology } from 'topojson-specification';
-import { datasetDir } from "../../../config/datasets.mjs";
 
 const root = process.cwd();
 const stageRoot = '.local/image-staging/geo-thumbnails';
@@ -53,7 +54,7 @@ const requested = process.argv.includes('--ids')
   : null;
 const makePlan = process.argv.includes('--plan');
 const publicBase =
-  process.env.R2_PUBLIC_FETCH_URL ?? 'https://storage.stats47.jp';
+  process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_ORIGIN;
 const stagePath = (key: string) => join(root, stageRoot, key);
 const save = (file: string, content: string | Buffer) => {
   mkdirSync(dirname(file), { recursive: true });

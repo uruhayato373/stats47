@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { rankingR2Key } from '../lib/r2-keys.mjs';
 /**
  * restore-ranking-from-svg.mjs — neither(json/source.json 消失=絵だけ) の ranking SVG を
  * SSOT(R2 app/ranking) から再生成して 3点セット(json/source.json/columns+portrait svg)に戻す。
@@ -161,7 +162,7 @@ function resolveCandidates(slug, base, articleMd, svgTitleText) {
 // ---------- SSOT 照合 (scale 対応) ----------
 async function fj(u) { const r = await fetch(u); if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }
 async function ssotPartitions(key) {
-  const v = await fj(`${R2}/app/ranking/${key}/values.json`);
+  const v = await fj(`${R2}/${rankingR2Key(key, "values")}`);
   return (v.partitions || []).map((p) => ({ year: p.yearCode, values: p.values, unit: (p.values?.[0]?.unit) || "" }));
 }
 // 正気な単位換算のみ (円↔千円↔万円: ×1000/1e4、%↔比率: ×100/0.01、人↔千人: ×0.001 等)。

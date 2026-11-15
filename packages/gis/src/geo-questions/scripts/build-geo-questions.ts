@@ -1,3 +1,4 @@
+import { statsR2Key } from "@stats47/r2-storage/keys";
 /**
  * 問いのページ (試作) の計算。4 つの問いについて、空間演算で市区町村・県を組に分け、組ごとの推移を出す。
  * 出力は `.local/r2/app/geo/questions/<slug>.json`。R2 へは書かない。
@@ -95,7 +96,7 @@ type Rows = { rows: { areaCode: string; areaName: string; yearCode: string; valu
 
 /** 市区町村 × 年の値 (行政区の行は除く: 名前が「県 市 区」の 3 語) */
 async function loadCitySeries(metricKey: string): Promise<{ byCode: Map<string, Map<number, number>>; names: Map<string, string> }> {
-  const payload = await fetchJson<Rows>(`${R2_PUBLIC}/app/stats/${metricKey}/cities.json`);
+  const payload = await fetchJson<Rows>(`${R2_PUBLIC}/${statsR2Key(metricKey, "city")}`);
   const byCode = new Map<string, Map<number, number>>();
   const names = new Map<string, string>();
   for (const row of payload.rows) {
@@ -325,7 +326,7 @@ async function main(): Promise<void> {
     const any = entry?.total[yearIndex] ?? 0;
     groupOfPref.set(pref, major > 0 ? "major" : any > 0 ? "local" : "none");
   }
-  const guests = await fetchJson<Rows>(`${R2_PUBLIC}/app/stats/actual-overnight-guests/values.json`);
+  const guests = await fetchJson<Rows>(`${R2_PUBLIC}/${statsR2Key("actual-overnight-guests", "prefecture")}`);
   const guestSeries = new Map<string, Map<number, number>>();
   const prefNames = new Map<string, string>();
   for (const row of guests.rows) {

@@ -483,7 +483,13 @@ export const DATASETS = [
   d("moshimo.results", "data/affiliate/moshimo-results.json", "state", "affiliate", "data", "もしもアフィリエイトの成果"),
   d("rakuten.results", "data/affiliate/rakuten-results.json", "state", "affiliate", "data", "楽天アフィリエイトの成果", { schema: "config/schema/rakuten.results.schema.json" }),
   d("revenue.authenticated", "data/authenticated/latest.json", "state", "strategy", "data", "認証付き計測 (土曜の Mac) の取得元ごとの最新の成否", { schema: "config/schema/revenue.authenticated.schema.json" }),
-  d("revenue.authenticated-history", "data/authenticated/revenue-history.json", "series", "strategy", "data", "認証付き計測が取る売上の推移", { schema: "config/schema/revenue.authenticated-history.schema.json" }),
+  d("revenue.daily", "data/revenue/daily/{name}.json", "ledger", "strategy", "data", "収益の明細 (日 × 商品 × 種類。<チャネル>-<年月>.json)。週・月・年の集計の正本", {
+    planned: true,
+    schema: "config/schema/revenue.daily.schema.json",
+    refs: [{ field: "rows[].productId", where: { channel: "kdp" }, to: "kdp.listings", key: "listings.$keys" }],
+  }),
+  d("revenue.rollup", "data/revenue/rollup/{name}.json", "state", "strategy", "data", "収益の週・月・年の集計 (明細から revenue-rollup.mjs が作る生成物。手で編集しない)", { planned: true }),
+  d("revenue.authenticated-history","data/authenticated/revenue-history.json", "series", "strategy", "data", "認証付き計測が取る売上の推移", { schema: "config/schema/revenue.authenticated-history.schema.json" }),
   d("business.measurement-cycle", "data/measurement-cycle/latest.json", "state", "strategy", "data", "週次の計測→記録→改善サイクルのまとめ", { schema: "config/schema/business.measurement-cycle.schema.json" }),
   d("business.measurement-cycle-summary", "data/measurement-cycle/LATEST.md", "report", "strategy", "data", "週次サイクルのまとめの要約"),
   d("business.measurement-cycle-history", "data/measurement-cycle/history.csv", "series", "strategy", "data", "週次サイクルの推移"),
@@ -941,11 +947,13 @@ export const DATASETS = [
       { field: "versions[].datasetId", to: "open-data.datasets", key: "datasets[].id" },
     ],
   }),
-  d("open-data.expansion", "data/open-data/expansion.json", "ledger", "data", "data", "正規化表から公開指標への対応 (段1は空)", {
+  d("open-data.expansion", "data/open-data/expansion.json", "ledger", "data", "data", "正規化表の展開先別 planned / rejected / blocked と再現可能な slice・重複判定", {
     schema: "config/schema/open-data.expansion.schema.json",
     refs: [
-      { field: "entries[].datasetId", to: "open-data.fetch-recipes", key: "recipes[].datasetId" },
-      { field: "entries[].metricKey", to: "registry:metrics" },
+      { field: "candidates[].datasetId", to: "open-data.fetch-recipes", key: "recipes[].datasetId" },
+      // metricKey は未作成の予定キー。既存キーとの衝突は専用 validator で拒否する。
+      { field: "candidates[].denominator", to: "registry:metrics" },
+      { field: "candidates[].duplicateOf", to: "registry:metrics" },
     ],
   }),
   d("open-data.prefecture-statistics", "data/open-data/prefecture-statistics/resources.json", "ledger", "data", "data", "都道府県が公式に公開する統計ポータル・ダッシュボード・年鑑のリンク (県名は持たず読み込み口が県のマスタで結ぶ)。読み込みは packages/data-configs/src/prefecture-statistics-catalog/index.ts", {

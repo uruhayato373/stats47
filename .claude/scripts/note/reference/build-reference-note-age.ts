@@ -1,4 +1,9 @@
 #!/usr/bin/env tsx
+// Keep the existing raw-response and Blocked error contract.
+import { resolveEstatAppId, ESTAT_API, ESTAT_ENDPOINTS } from "../../../../packages/estat-api/src/ingest.js";
+import { extractYearCode } from "@stats47/estat-api/api";
+// Compatibility: malformed time prefixes retain the previous slice result.
+import { rankingR2Key } from '../../lib/r2-keys.mjs';
 /**
  * 教材の分析企画のうち「世帯主の年齢によって家計がどう違うか」を問うもの (kakei-marketing a04-02) を、
  * 家計調査の世帯主の年齢階級別 (全国・二人以上の世帯・e-Stat 金額 0003348238 / 数量 0003348237) から
@@ -12,7 +17,7 @@ import path from 'node:path';
 import { renderReferenceBarSvg, REFERENCE_FIGURE_RENDERER_VERSION } from './lib/figure-renderer';
 import { writeReferenceFigure } from './lib/figure-files';
 import { R2_PUBLIC_BASE_URL } from '../../lib/site-config.cjs';
-import { ESTAT_STATS_DATA_URL } from '../../lib/estat-catalog/endpoints.cjs';
+const ESTAT_STATS_DATA_URL = `${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS.GET_STATS_DATA}`;
 import { loadAnalyses } from '../../source-vault/lib/reference-expansion.mjs';
 import { type Analysis, articleKeyOf, fmt, mergeWritten, registerArticle } from './build-reference-note';
 
@@ -34,9 +39,7 @@ const arg = (name: string) => (process.argv.includes(name) ? process.argv[proces
 const round = (v: number, d: number) => Math.round(v * 10 ** d) / 10 ** d;
 
 function appId() {
-  const m = readFileSync(path.join(ROOT, 'apps/web/.env.development'), 'utf8').match(/NEXT_PUBLIC_ESTAT_APP_ID=(\S+)/);
-  if (!m) throw new Error('NEXT_PUBLIC_ESTAT_APP_ID が apps/web/.env.development に無い');
-  return m[1];
+  return resolveEstatAppId({}, path.join(ROOT, 'apps/web/.env.development'));
 }
 
 async function estat(table: string, codes: string[], year: string) {
@@ -54,7 +57,7 @@ async function latestYear() {
   const qs = new URLSearchParams({ appId: appId(), statsDataId: AMOUNT_TABLE, cdCat01: CONSUMPTION, cdCat02: TWO_PERSON, cdCat03: 'A00' });
   const json = await (await fetch(`${ESTAT_STATS_DATA_URL}?${qs}`)).json();
   return ([].concat(json?.GET_STATS_DATA?.STATISTICAL_DATA?.DATA_INF?.VALUE ?? []) as Record<string, string>[])
-    .map((v) => v['@time'].slice(0, 4)).sort().at(-1)!;
+    .map((v) => (typeof v['@time'] === "string" && /^\d{4}/.test(v['@time']) ? extractYearCode(v['@time']) : v['@time'].slice(0, 4))).sort().at(-1)!;
 }
 
 async function chart(dir: string, file: string, title: string, unit: string, values: number[], year: string) {
@@ -68,7 +71,7 @@ async function build(a: Analysis) {
   const year = await latestYear();
   const items: { key: string; code: string; label: string }[] = [];
   for (const k of a.metricKeys) {
-    const res = await fetch(`${R2}/app/ranking/${k}/item.json`);
+    const res = await fetch(`${R2}/${rankingR2Key(k, "item")}`);
     if (!res.ok) continue;
     const { item } = await res.json();
     const code = item.sourceConfig?.recipe?.kind === 'kakei-chousa' ? item.sourceConfig.recipe.estatParams?.cdCat01 : null;

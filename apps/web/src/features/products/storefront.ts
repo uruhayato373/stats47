@@ -20,6 +20,10 @@ const BLOG_DATA_PRODUCTS: Readonly<
     productSlug: "data-p-04",
     useCase: "議会答弁や類似団体との比較資料で、県別の財政指標をExcelで編集したい方へ。",
   },
+  "assembly-answer-chatgpt-5steps": {
+    productSlug: "data-p-04",
+    useCase: "議会答弁の根拠として、他県との財政指標の比較をExcelで確認したい方へ。",
+  },
   "aging-solo-living-crisis": {
     productSlug: "data-p-05",
     useCase: "介護保険事業支援計画などの現状分析で、高齢化・介護の県別比較をExcelで使いたい方へ。",
@@ -100,6 +104,8 @@ export function findDataProductForRanking(
 /** 市区町村ランキングの key → 同じ指標の時系列を売るデータ商品。 */
 const MUNICIPALITY_DATA_PRODUCTS: Readonly<Record<string, string>> = {
   "manufacturing-shipment-amount": "data-muni-manufacturing",
+  // 同じ値を持つ重複指標。どちらへ寄せるかの判断 (MUNI-DATA-DEDUP-01) が出るまでのつなぎ
+  "manufacturing-shipment": "data-muni-manufacturing",
 };
 
 /** 市区町村ランキングの読者へ案内する、同じ指標のデータ商品。無ければ null。 */

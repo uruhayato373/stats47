@@ -35,6 +35,8 @@ stats47 の全データ (metric / blog / theme / area / open-data) について�
 
 クラス A' には、open-data の取得定義 (`data/open-data/fetch/recipes.json`) と非公開 R2 の原本 manifest に記録した
 SHA-256 によって、同じ原本を再取得・照合できるものも含める。
+`source.config.provenance.openData` に `{ datasetId, version, table, candidate: { metricKey, channel: "prefecture-ranking" } }` を記録し、展開台帳の候補を一意に参照する。
+復元は `node .claude/scripts/open-data/ingest-metric.mjs --metric <key> --write-local --out <report>`（手元の原本・分母だけで動かす場合は `--local-source`）で、原本・正規化表・分母のSHAと47県の検算を通してから観測値を書く。
 
 ---
 

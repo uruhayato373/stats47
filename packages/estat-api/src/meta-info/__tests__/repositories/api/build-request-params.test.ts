@@ -2,8 +2,8 @@ import { describe, expect, it, vi } from "vitest";
 import { buildRequestParams } from "../../../repositories/api/build-request-params";
 
 // coreモジュールのモック
-vi.mock("../../../../core", () => ({
-  ESTAT_APP_ID: "test-app-id",
+vi.mock("../../../../ingest", () => ({
+  resolveEstatAppId: () => "test-app-id",
   ESTAT_API: {
     DEFAULT_LANG: "J",
     DATA_FORMAT: "J",

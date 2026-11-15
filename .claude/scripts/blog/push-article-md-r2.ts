@@ -22,7 +22,8 @@
  * `backfill-display-sources.ts` の出力)。それ以外のファイルは対象にしない。
  */
 
-import { GetObjectCommand, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { createR2S3Client } from "../../../packages/r2-storage/src/lib/clients/r2-s3-client.mjs";
+import { GetObjectCommand, PutObjectCommand, type S3Client } from "@aws-sdk/client-s3";
 import { config } from "dotenv";
 import { execFileSync } from "child_process";
 import * as fs from "fs";
@@ -63,7 +64,7 @@ function getClient(): S3Client {
       "R2 S3 認証情報が不足しています (.env.local の R2_S3_ENDPOINT / R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY)",
     );
   }
-  return new S3Client({ region: "auto", endpoint, credentials: { accessKeyId, secretAccessKey } });
+  return createR2S3Client();
 }
 
 async function streamToString(body: unknown): Promise<string> {

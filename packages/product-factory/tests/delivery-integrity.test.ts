@@ -242,8 +242,9 @@ describe("不具合4: 47 県すべて同値の列は 1 つにまとめる", () =
     expect(kept.mergedRankingKeys).toEqual(["retail-store-count-alt"]);
   });
 
-  it("同値の統合と権利要確認の除外を経た P-12 の指標数は 2491", () => {
-    expect(p12.length).toBe(2491);
+  it("同値の統合と権利要確認の除外を経た P-12 の指標数は 2496", () => {
+    // 2026-11-15: 公開された 6 指標 (快晴日数・雪日数・竹材生産量・工業団地内立地率・工場立地敷地面積・水害道路被害額) が加わった (オーナー了承)
+    expect(p12.length).toBe(2496);
   });
 
   it("実際に書き出した data.csv の指標列・SOURCES 行・PowerPoint 指標数が同じ数で揃い、重複列が無い", async () => {

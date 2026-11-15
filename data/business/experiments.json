@@ -598,7 +598,8 @@
       "closed_at": null,
       "actions": [
         "2026-11-04 note 有料記事 (¥980) 公開 https://note.com/stats47/n/n5d86476e9c73",
-        "2026-11-04 市区町村ランキング (manufacturing-shipment-amount) に商品ページへの案内を設置 (e08614740f, PR #1219)"
+        "2026-11-04 市区町村ランキング (manufacturing-shipment-amount) に商品ページへの案内を設置 (e08614740f, PR #1219)",
+        "2026-11-10 価格実験 PRICE-MUNI-INDUSTRY-2026-11 (data/products/price-history.json) が価格を ¥980 から ¥1,980 に上げ、業種別の表・無料部分・題名を同時に変えた。6 週の窓 (11-04〜12-16) のうち ¥980 で売っていたのは 11-04〜11-09 の 6 日だけで、その間は閲覧 10・売上 ¥0。12-16 の判定は ¥1,980 の版の実測として読み、¥980 の仮説の検証とは書かない"
       ],
       "pending_user_actions": [],
       "next_check_date": "2026-12-16",
@@ -947,23 +948,26 @@
           ]
         }
       ],
-      "status": "proposed",
+      "status": "running",
       "created_at": "2026-11-03T05:00:00.000Z",
-      "started_at": null,
+      "started_at": "2026-11-14T10:36:29.000Z",
       "result": null,
       "learnings": null,
       "closed_at": null,
-      "actions": [],
-      "pending_user_actions": [
-        "GA4 に custom dimension product_destination・product_id とキーイベント product_click を作る (承認付き API か管理画面)",
-        "KDP の再ログイン (refresh-session.mjs kdp --wait-human)",
-        "develop → main のマージと本番デプロイ。デプロイ日を started_at にし、6週後を next_check_date にする"
+      "actions": [
+        "2026-11-15 群の外の記事 assembly-answer-chatgpt-5steps にも P-04 の案内 (blog_product) を足した (develop。本番反映日は反映時に追記する)。集計 (.claude/scripts/metrics/lib/journey-ga4-reports.mjs) は product_id × link_position で記事のパスを持たないので、反映日以降の blog_product × P-04 の表示とクリックには、workplace-blog-10 の 10 記事のほかにこの記事の分が加わる。判定のときは GA4 の pagePath で分けて読むか、この記事を群に含めたと明記する (どちらにするかはオーナーが決める)"
       ],
-      "next_check_date": null,
+      "pending_user_actions": [],
+      "next_check_date": "2026-12-26",
       "history": [
         {
           "date": "2026-11-03T05:00:00.000Z",
           "action": "proposed"
+        },
+        {
+          "date": "2026-11-15T02:00:00.000Z",
+          "action": "started",
+          "summary": "本番反映 #1272 (2026-11-14) で計測コードが main に入り、GA4 の設定 (11-03)・KDP の再ログイン (11-14) と合わせて前提が揃った。オーナー承認 (2026-11-15)"
         }
       ],
       "card": "PRODUCT-REFERRAL-MEASURE-01",

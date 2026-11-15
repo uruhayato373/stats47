@@ -5657,7 +5657,7 @@
     {
       "metricKey": "convenience-store-sales",
       "grain": "prefecture",
-      "year": "2025",
+      "year": "2024",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {

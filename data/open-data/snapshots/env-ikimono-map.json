@@ -1,0 +1,66 @@
+{
+  "datasetId": "env-ikimono-map",
+  "versions": [
+    {
+      "schemaVersion": 1,
+      "datasetId": "env-ikimono-map",
+      "version": "initial",
+      "sha256": "0573b516e8229ae58707c68dbc898185ec5feb36f45054d872fe52c86613802a",
+      "recipeSha256": "93f1d9c0fe6d350c13fd8a00970d08340e032663973c0605cb4b2b535ee69973",
+      "retrievedAt": "2026-11-15T04:34:44.617Z",
+      "license": {
+        "name": "生物多様性センター利用規約 (権利表記なしは公共データ利用規約 第1.0版に準拠)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.biodic.go.jp/copyright/terms_of_service.html"
+      },
+      "files": [
+        {
+          "key": "open-data/raw/env-ikimono-map/initial/0001.zip",
+          "url": "https://www.biodic.go.jp/shapedata/do/do02.zip",
+          "sha256": "1128d96f24e6c1864244d26f1eab511e55982ee5e1c44d2304e0225493bc593f",
+          "bytes": 2993179,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T04:34:40.620Z"
+        },
+        {
+          "key": "open-data/raw/env-ikimono-map/initial/0002.zip",
+          "url": "https://www.biodic.go.jp/shapedata/do/do03.zip",
+          "sha256": "4322e2173a33189531108956fe7cba30a2b3e096425a2e7dd9a42b40796053fc",
+          "bytes": 1028685,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T04:34:41.998Z"
+        },
+        {
+          "key": "open-data/raw/env-ikimono-map/initial/0003.zip",
+          "url": "https://www.biodic.go.jp/shapedata/do/do04.zip",
+          "sha256": "1179e0a60f1cfc04ca399a14b801b103455d02b1fdb9e9561a29dcb6f72d778d",
+          "bytes": 2088351,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T04:34:43.412Z"
+        },
+        {
+          "key": "open-data/raw/env-ikimono-map/initial/0004.zip",
+          "url": "https://www.biodic.go.jp/shapedata/do/do05.zip",
+          "sha256": "5aadecb5bd1499c8a1a1fd8bd724a801e516b6911609365450fb0b0cb2836597",
+          "bytes": 2364009,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T04:34:43.733Z"
+        },
+        {
+          "key": "open-data/raw/env-ikimono-map/initial/0005.zip",
+          "url": "https://www.biodic.go.jp/shapedata/do/do06.zip",
+          "sha256": "555a237d1f164f98a73fc60730bd1d3c8b95bd4e22c80930c5d909f44ef741dc",
+          "bytes": 182327,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T04:34:44.617Z"
+        }
+      ],
+      "manifestKey": "open-data/raw/env-ikimono-map/initial/manifest.json",
+      "manifestSha256": "38aa6365dbf98e9e85e3b94ae3e30deb5d0f9fdce94ee0c099c5c211f16e708e",
+      "bytes": 8656551,
+      "status": "archived"
+    }
+  ]
+}

@@ -1,9 +1,10 @@
+import { createR2S3Client } from "./lib/clients/r2-s3-client.mjs";
 import {
   DeleteObjectCommand,
   GetObjectCommand,
   HeadObjectCommand,
   PutObjectCommand,
-  S3Client,
+  type S3Client,
 } from '@aws-sdk/client-s3';
 import { SITE } from '@stats47/types';
 
@@ -120,10 +121,6 @@ export function createS3ImageObjectStoreFromEnv(): ImageObjectStore | null {
   const secretAccessKey = process.env.R2_SECRET_ACCESS_KEY;
   if (!endpoint || !accessKeyId || !secretAccessKey) return null;
   const bucket = process.env.CLOUDFLARE_R2_BUCKET_NAME ?? SITE.r2Bucket;
-  const client = new S3Client({
-    region: 'auto',
-    endpoint,
-    credentials: { accessKeyId, secretAccessKey },
-  });
+  const client = createR2S3Client();
   return createS3ImageObjectStore(client, bucket);
 }

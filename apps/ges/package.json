@@ -8,6 +8,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@stats47/area": "*",
     "better-sqlite3": "^11.0.0"
   },
   "devDependencies": {

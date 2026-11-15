@@ -1,4 +1,16 @@
 #!/usr/bin/env tsx
+import {
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from 'node:fs';
+import { dirname, join, resolve, sep } from 'node:path';
+
+import { createElement as h } from 'react';
+
+import { rankingR2Key, RANKING_R2_PREFIX } from '@stats47/r2-storage/keys';
 /**
  * 静的画像 (OGP / リンクカード / note カバー) を Satori (Node) でレンダリングして
  * `.local/image-staging/<type>/<key>` に書き出す。R2 反映は生成された exact
@@ -29,18 +41,15 @@
  * 生成後の push はログに出る exact plan だけを画像専用 publisher へ渡す。
  */
 
-import {
-  existsSync,
-  mkdirSync,
-  readFileSync,
-  rmSync,
-  writeFileSync,
-} from 'node:fs';
-import { dirname, join, resolve, sep } from 'node:path';
 
-import { createElement as h } from 'react';
 
+import { SITE as SITE_IDENTITY } from '@stats47/types';
 import { config as loadEnv } from 'dotenv';
+
+import { assertCoverGenerationType } from '../../../.claude/scripts/note/lib/cover-assets.mjs';
+import { datasetPath } from "../../../config/datasets.mjs";
+import { STOREFRONT_PRODUCTS } from '../src/features/products/storefront';
+import { ALL_THEMES } from '../src/features/theme-dashboard/config/all-themes';
 
 import {
   IMAGE_GENERATOR_SPECS,
@@ -52,11 +61,8 @@ import {
   PREF_CARD_RATIOS,
   PREF_CARD_RATIO_KEYS,
 } from './data/pref-silhouette-tokens';
+import { buildExternalCard } from './lib/external-card-render';
 import { isSafeNoteSlug } from './lib/image-entity-policy';
-import {
-  buildProductOgpElement,
-  resolveProductBackground,
-} from './lib/product-ogp-render';
 import {
   buildImageGenerationManifest,
   calculateRendererHash,
@@ -68,18 +74,17 @@ import {
   type ImageGenerationPlan,
 } from './lib/image-generation-manifest';
 import { createImageGenerationInspector } from './lib/image-generation-r2-inspector';
+import { prefNameOf } from './lib/pref-silhouette-render';
+import {
+  buildProductOgpElement,
+  resolveProductBackground,
+} from './lib/product-ogp-render';
+import { fetchPublicImageInput } from './lib/public-image-input';
 import { selectRankingImagePartition } from './lib/ranking-image-year';
 import { resolveRankingOgpSource } from './lib/ranking-ogp-source';
-import { STOREFRONT_PRODUCTS } from '../src/features/products/storefront';
-import { ALL_THEMES } from '../src/features/theme-dashboard/config/all-themes';
-import { buildExternalCard } from './lib/external-card-render';
-import { prefNameOf } from './lib/pref-silhouette-render';
-import { fetchPublicImageInput } from './lib/public-image-input';
 
 import type { StorefrontProduct } from '../src/features/products/types';
-import { assertCoverGenerationType } from '../../../.claude/scripts/note/lib/cover-assets.mjs';
-import { SITE as SITE_IDENTITY } from '@stats47/types';
-import { datasetPath } from "../../../config/datasets.mjs";
+
 
 const PUBLIC_URL =
   process.env.R2_PUBLIC_FETCH_URL ?? SITE_IDENTITY.r2PublicBaseUrl;
@@ -331,7 +336,7 @@ interface ValuesRaw {
 
 async function buildRankingOgpData(key: string) {
   const itemPayload = await fetchRequiredJson<RankingItemRaw>(
-    `${PUBLIC_URL}/app/ranking/${key}/item.json`
+    `${PUBLIC_URL}/${rankingR2Key(key, 'item')}`
   );
   const it = itemPayload?.item;
   if (!it?.title && !it?.rankingName) {
@@ -341,7 +346,7 @@ async function buildRankingOgpData(key: string) {
   const unit = it.unit ?? '';
   const source = resolveRankingOgpSource(it);
   const values = await fetchRequiredJson<ValuesRaw>(
-    `${PUBLIC_URL}/app/ranking/${key}/values.json`
+    `${PUBLIC_URL}/${rankingR2Key(key, 'values')}`
   );
   const { partition, yearCode: latestYear, yearName: latestYearName } =
     selectRankingImagePartition(it, values?.partitions ?? []);
@@ -490,7 +495,7 @@ async function main() {
     if (opts.type === 'ranking') {
       return [
         {
-          key: `app/ranking/${id}/ogp/ogp.png`,
+          key: rankingR2Key(id, 'ogp-image'),
           variant: 'ogp',
           contentType: 'image/png' as const,
           width: 1200,
@@ -545,7 +550,7 @@ async function main() {
 
   const manifestKeyFor = (id: string): string => {
     if (opts.type === 'themes' || opts.type === 'default') return `app/${opts.type}/${id}/ogp/generation.json`;
-    if (opts.type === 'ranking') return `app/ranking/${id}/ogp/generation.json`;
+    if (opts.type === 'ranking') return rankingR2Key(id, 'ogp-generation');
     if (opts.type === 'areas') return `app/areas/${id}/ogp/generation.json`;
     if (opts.type === 'pref-silhouette')
       return `sns/pref-silhouette/${id}/generation.json`;
@@ -796,8 +801,8 @@ async function main() {
         metadata = {
           year: built.latestYear,
           source: {
-            item: `app/ranking/${id}/item.json`,
-            values: `app/ranking/${id}/values.json`,
+            item: rankingR2Key(id, 'item'),
+            values: rankingR2Key(id, 'values'),
           },
         };
       } else if (opts.type === 'themes' || opts.type === 'default') {
@@ -921,7 +926,7 @@ async function main() {
           ? 'sns/pref-silhouette'
           : opts.type === 'products'
             ? 'app/products'
-            : 'app/ranking';
+            : RANKING_R2_PREFIX;
   console.log(`staging: ${stageRoot}/${prefix}`);
   console.log(`publish plan: ${publishPlanPath}`);
   console.log(

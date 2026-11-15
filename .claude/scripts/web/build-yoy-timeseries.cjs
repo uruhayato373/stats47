@@ -40,10 +40,11 @@ function parseArgs() {
   return opts;
 }
 
-function buildOne({ metricKey, output }) {
+async function buildOne({ metricKey, output }) {
+  const { rankingR2Key } = await import('../lib/r2-keys.mjs');
   const sourcePath = path.join(
     PROJECT_ROOT,
-    `.local/r2/app/ranking/${metricKey}/values.json`,
+    `.local/r2/${rankingR2Key(metricKey, "values")}`,
   );
   const outPath = path.isAbsolute(output) ? output : path.join(PROJECT_ROOT, output);
 
@@ -154,7 +155,7 @@ function buildOne({ metricKey, output }) {
   const out = {
     generatedAt: new Date().toISOString(),
     source: {
-      file: `app/ranking/${metricKey}/values.json`,
+      file: rankingR2Key(metricKey, "values"),
       sourceGeneratedAt: raw.generatedAt,
     },
     metricKey,
@@ -182,7 +183,7 @@ function buildOne({ metricKey, output }) {
   };
 }
 
-function main() {
+async function main() {
   const opts = parseArgs();
 
   let jobs;
@@ -200,7 +201,7 @@ function main() {
   const results = [];
   for (const j of jobs) {
     try {
-      const r = buildOne(j);
+      const r = await buildOne(j);
       results.push({ ok: true, ...r });
       console.log(
         `✓ ${r.metricKey}: ${r.frameCount}年 [${r.yearRange[0]}-${r.yearRange[1]}] maxAbs=±${r.maxAbsPercent}% size=${r.sizeKB}KB${r.skipped.length ? ` skipped=${r.skipped.join(",")}` : ""}`,

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { rankingR2Key } from '../lib/r2-keys.mjs';
 /** Rebuild the image index from published page catalogs, exact generation manifests and article references. */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -92,8 +93,7 @@ await Promise.all(Array.from({length:8},async()=>{while(queue.length){
   item.catalogBasis=item.basis;
   if(page.kind==='blog'){const result=await blog(item);item.indexComplete=result.body;}
   else if(page.kind==='ranking'){
-    const base='app/ranking/'+item.key;
-    await manifest(item,base+'/ogp/generation.json',[{key:base+'/ogp/ogp.png',usage:'ogp',templateId:'ogp'}],'ranking-ogp');
+    await manifest(item,rankingR2Key(item.key, 'ogp-generation'),[{key:rankingR2Key(item.key, 'ogp-image'),usage:'ogp',templateId:'ogp'}],'ranking-ogp');
     item.indexComplete=true;
   }else if(page.kind==='area'){
     const base='app/areas/'+item.key;await manifest(item,base+'/ogp/generation.json',[{key:base+'/ogp/ogp.png',usage:'ogp',templateId:'ogp'}],'areas-ogp');item.indexComplete=true;

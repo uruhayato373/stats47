@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { rankingR2Key } from '../lib/r2-keys.mjs';
 /**
  * note の県別家計記事 (a-kakei-<pref>) 用 evidence-data.json + 裏付けチャート JSON を作る。
  *
@@ -82,7 +83,7 @@ export function computeRanks(values) {
 
 /** ranking key の最新年データを { year, title, unit, rows } で返す。R2 に無ければ null。 */
 async function fetchRankingLatest(key) {
-  const values = await fetchJson(`${R2}/app/ranking/${key}/values.json`);
+  const values = await fetchJson(`${R2}/${rankingR2Key(key, "values")}`);
   if (!values) return null;
   // 最新年は yearCode の最大で選ぶ (values.json の並びに頼らない)
   const partition = latestPartition(values.partitions);
@@ -92,7 +93,7 @@ async function fetchRankingLatest(key) {
 
   let title = key;
   let unit = rows[0]?.unit || "";
-  const item = await fetchJson(`${R2}/app/ranking/${key}/item.json`);
+  const item = await fetchJson(`${R2}/${rankingR2Key(key, "item")}`);
   if (item?.item) {
     title = item.item.title || item.item.rankingName || title;
     unit = item.item.unit || unit;

@@ -1,4 +1,5 @@
 #!/usr/bin/env -S npx tsx
+import { rankingR2Key } from "@stats47/r2-storage/keys";
 /**
  * 書籍の書き下ろし章に書かれた数値を SSOT と突合する監査。
  *
@@ -96,7 +97,7 @@ async function buildTruth(metricKeys: string[]): Promise<{ series: TruthSeries[]
   await Promise.all(
     metricKeys.map(async (key) => {
       try {
-        const res = await fetch(`${R2}/app/ranking/${key}/values.json`);
+        const res = await fetch(`${R2}/${rankingR2Key(key, "values")}`);
         if (!res.ok) {
           missing.push(key);
           return;

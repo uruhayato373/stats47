@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import ExcelJS from 'exceljs';
-import { kdpAsinMap } from './kdp-reports.mjs';
+import { kdpAsinMap, kdpBookIdsPublishedBy } from './kdp-reports.mjs';
 
 // Observed from the Japanese August 2026 export on 2026-09-21.
 // https://kdp.amazon.co.jp/ja_JP/help/topic/G200641190
@@ -94,9 +94,12 @@ export function parseKdpMonthlyReport(workbook, listings, month) {
       kenpRoyalty: rows.filter(r => r.kind === 'monthly-kenp-royalty').reduce((n, r) => n + r.amount, 0),
       totalRoyalty: rows.reduce((n, r) => n + r.amount, 0) };
   });
+  const periodEnd = new Date(Date.UTC(year, number, 0)).toISOString().slice(0, 10);
+  // 期間末より後に発売した書籍は、その月のレポートが数えた範囲に入れない (入れると台帳の既存の範囲と食い違う)
+  const published = new Set(kdpBookIdsPublishedBy(listings, periodEnd));
   return { schemaVersion: 1, status: 'collected', scope: 'stats47-exact-asin', finality: 'finalized-monthly-royalty',
-    period: { month, start: `${month}-01`, end: new Date(Date.UTC(year, number, 0)).toISOString().slice(0, 10), basis: 'provider-report-month' },
-    records, totals, coverage: { complete: true, mappedAsins: asins.size, mappedBookIds: [...new Set(asins.values())].sort(), includedRows: records.length, excludedRows, zeroFilled: false },
+    period: { month, start: `${month}-01`, end: periodEnd, basis: 'provider-report-month' },
+    records, totals, coverage: { complete: true, mappedAsins: asins.size, mappedBookIds: [...new Set(asins.values())].filter(id => published.has(id)).sort(), includedRows: records.length, excludedRows, zeroFilled: false },
     limitations: ['月次ロイヤリティであり入金・税引後利益・週次純収益ではない', '通貨を換算・合算せず、KU端数も元明細の精度を保持する', 'Prime Readingボーナスはこのレポートに含まれない', '明細の無い書籍を0件で補完しない'] };
 }
 

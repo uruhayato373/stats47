@@ -1,3 +1,4 @@
+import { rankingR2Key } from '@stats47/r2-storage/keys';
 /**
  * 静的 OGP 画像 (R2 事前生成) の URL 解決。
  *
@@ -41,7 +42,7 @@ export const ogpImageKeys = {
   theme: (key: string) => `app/themes/${key}/ogp/ogp.png`,
   default: () => 'app/default/stats47/ogp/ogp.png',
   blog: (slug: string) => blogR2Key(slug, "ogp/ogp.png"),
-  ranking: (rankingKey: string) => `app/ranking/${rankingKey}/ogp/ogp.png`,
+  ranking: (rankingKey: string) => rankingR2Key(rankingKey, 'ogp-image'),
   area: (areaCode: string) => `app/areas/${areaCode}/ogp/ogp.png`,
   product: (slug: string) => `app/products/${slug}/ogp/ogp.png`,
 } as const;

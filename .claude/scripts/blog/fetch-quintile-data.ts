@@ -1,4 +1,8 @@
 #!/usr/bin/env -S npx tsx
+// Keep single-attempt HTTP handling and the unmodified API error payload.
+import { resolveEstatAppId, ESTAT_API, ESTAT_ENDPOINTS } from "../../../packages/estat-api/src/ingest.js";
+import { extractYearCode } from "@stats47/estat-api/api";
+// Compatibility: malformed time prefixes retain the previous slice result.
 /**
  * fetch-quintile-data.ts
  * 家計調査「年間収入五分位階級別（全国）」を e-Stat から取得し、ブログ記事用の
@@ -19,7 +23,8 @@
 
 import * as fs from "node:fs";
 import * as path from "node:path";
-import { ESTAT_STATS_DATA_URL, ESTAT_META_INFO_URL } from "../lib/estat-catalog/endpoints.cjs";
+const ESTAT_STATS_DATA_URL = `${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS.GET_STATS_DATA}`;
+const ESTAT_META_INFO_URL = `${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS.GET_META_INFO}`;
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 // 品目分類2025年改定・年間収入五分位・金額。2024年以前の値は旧表 0003348240 (2020年改定) と同じコード・同じ値で接続している
@@ -29,10 +34,7 @@ const CAT02_TWO_PERSON = "03"; // 二人以上の世帯（2000年～）
 const QUINTILE_SOURCE = "家計調査";
 
 function getAppId(): string {
-  const env = fs.readFileSync(path.join(PROJECT_ROOT, "apps/web/.env.development"), "utf8");
-  const m = env.match(/NEXT_PUBLIC_ESTAT_APP_ID=(\S+)/);
-  if (!m) throw new Error("NEXT_PUBLIC_ESTAT_APP_ID not found in apps/web/.env.development");
-  return m[1];
+  return resolveEstatAppId({}, path.join(PROJECT_ROOT, "apps/web/.env.development"));
 }
 const APP_ID = getAppId();
 
@@ -141,7 +143,7 @@ async function runLine() {
   const series = seriesCodes.map((code) => {
     const pts = values
       .filter((v) => v["@cat03"] === code)
-      .map((v) => ({ year: Number(String(v["@time"]).slice(0, 4)), value: Number(v["$"]) }))
+      .map((v) => ({ year: Number((/^\d{4}/.test(String(v["@time"])) ? extractYearCode(String(v["@time"])) : String(v["@time"]).slice(0, 4))), value: Number(v["$"]) }))
       .filter((p) => p.year >= from && Number.isFinite(p.value))
       .sort((a, b) => a.year - b.year);
     return { label: QUINTILE_LABELS[code], data: pts };

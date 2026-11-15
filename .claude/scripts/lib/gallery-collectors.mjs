@@ -1,3 +1,4 @@
+import { rankingR2Key } from './r2-keys.mjs';
 /**
  * メディア資産の列挙 collector (共有ライブラリ)
  *
@@ -248,7 +249,7 @@ export async function buildTab(tab, opts) {
         source: "r2-static",
         aspect: "1.91:1",
         r2KeyPattern: `app/ranking/<key>/ogp/ogp.png`,
-        entries: keys.map((k) => r2OgpEntry(k, `app/ranking/${k}/ogp/ogp.png`, `${site}/ranking/${k}`, r2)),
+        entries: keys.map((k) => r2OgpEntry(k, rankingR2Key(k, "ogp-image"), `${site}/ranking/${k}`, r2)),
       };
     }
     case "theme-ogp": {

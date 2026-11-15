@@ -74,6 +74,8 @@ describe("product storefront", () => {
       priceYen: 1980,
       externalUrl: "https://note.com/stats47/n/n5d86476e9c73",
     });
+    // 重複指標 manufacturing-shipment も同じ商品へ案内する (MUNI-DATA-DEDUP-01 の判断が出るまで)
+    expect(findDataProductForMunicipalityRanking("manufacturing-shipment")?.id).toBe("MUNI-MANUFACTURING");
     expect(findDataProductForMunicipalityRanking("total-population")).toBeNull();
   });
   it("CSV を業務に使う人へ、ランキングの分野に合うデータ集を返す", () => {
@@ -86,6 +88,7 @@ describe("product storefront", () => {
   it("職場から読まれる記事に、読者の仕事に合う販売中のデータ集と用途文を対応させる", () => {
     const cases = [
       ["local-tax-revenue-gap", "P-04"],
+      ["assembly-answer-chatgpt-5steps", "P-04"],
       ["aging-solo-living-crisis", "P-05"],
       ["farmland-crisis-abandoned-land", "P-09"],
       ["water-sewage-crisis", "P-10"],

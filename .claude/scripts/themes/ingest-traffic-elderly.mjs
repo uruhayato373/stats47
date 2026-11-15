@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { statsR2Key } from "../lib/r2-keys.mjs";
 /** Verify the existing series against official 2024 data and preserve its history. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -138,7 +139,7 @@ const report = {
   sourceRows: rows,
   files: [
     {
-      key: 'app/stats/' + key + '/values.json',
+      key: statsR2Key(key, "prefecture"),
       sha256: sha(content),
       bytes: content.length,
       rowCount: 1833,

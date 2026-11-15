@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { R2_PUBLIC_ORIGIN, RANKING_R2_PREFIX } from "../lib/r2-keys.mjs";
 /**
  * build-ai-content-queue.mjs — ranking ai-content 是正キュー (状態付き SSOT) を R2 + GSC から再導出する。
  *
@@ -58,12 +59,11 @@ import { checkValueHealth, latestPartition } from "./lib/value-health.mjs";
 import { applyYearFreshness } from "./lib/year-freshness.mjs";
 import { loadFailureState, quarantinedKeys } from "./record-generation-outcome.mjs";
 import { isAnchorRow } from "../gsc/analyze-ctr-seesaw.mjs";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..", "..", "..");
-const R2_PUBLIC = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
+const R2_PUBLIC = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_ORIGIN;
 const GSC_SNAP_DIR = join(ROOT, datasetDir("gsc.snapshots"));
 const STATE_DIR = join(ROOT, datasetDir("ai-content.remediation"));
 const QUEUE_JSON = join(STATE_DIR, "remediation-queue.json");
@@ -131,7 +131,7 @@ function parseRankingKeysFromGsc(csvPath) {
 }
 
 async function fetchAiContent(key) {
-  const url = `${R2_PUBLIC}/app/ranking/${encodeURIComponent(key)}/ai-content.json?cb=${Date.now()}`;
+  const url = `${R2_PUBLIC}/${RANKING_R2_PREFIX}/${encodeURIComponent(key)}/ai-content.json?cb=${Date.now()}`;
   try {
     const res = await fetch(url);
     if (res.status === 404) return { present: false, row: null };
@@ -152,7 +152,7 @@ async function fetchAiContent(key) {
  * 「壊れている」は区別する。
  */
 async function fetchValueHealth(key) {
-  const url = `${R2_PUBLIC}/app/ranking/${encodeURIComponent(key)}/values.json?cb=${Date.now()}`;
+  const url = `${R2_PUBLIC}/${RANKING_R2_PREFIX}/${encodeURIComponent(key)}/values.json?cb=${Date.now()}`;
   try {
     const res = await fetch(url);
     if (res.status === 404) {

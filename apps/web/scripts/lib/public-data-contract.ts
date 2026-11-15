@@ -1,3 +1,4 @@
+import { rankingR2Key } from '@stats47/r2-storage/keys';
 export type PublicDataAreaType = 'national' | 'prefecture' | 'city' | 'port';
 
 export interface RankingContractExpectation {
@@ -332,8 +333,8 @@ async function auditRanking(
   expectation: RankingContractExpectation
 ): Promise<RankingOutcome> {
   const encodedKey = encodeURIComponent(expectation.rankingKey);
-  const itemResource = `app/ranking/${encodedKey}/item.json`;
-  const valuesResource = `app/ranking/${encodedKey}/values.json`;
+  const itemResource = rankingR2Key(encodedKey, 'item');
+  const valuesResource = rankingR2Key(encodedKey, 'values');
   const itemResult = await fetchJson(fetcher, `${baseUrl}/${itemResource}`);
   if (itemResult.failure) {
     return {

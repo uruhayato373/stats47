@@ -1,3 +1,4 @@
+import { rankingR2Key } from "@stats47/r2-storage/keys";
 /**
  * 完全DBレス検証 (2.1): 計算型 ranking (per_capita/ratio/subtraction) を R2-native な
  * calculateRankingValues で再計算し、配信中の app/ranking/<key>/values.json と突合する。
@@ -55,7 +56,7 @@ async function main() {
     if (!yearCode) continue;
 
     const computed = await calculateRankingValues(item as RankingItem, yearCode);
-    const served = await fetchFromR2AsJson<ServedSnapshot>(`app/ranking/${key}/values.json`);
+    const served = await fetchFromR2AsJson<ServedSnapshot>(rankingR2Key(key, "values"));
     const servedPartition =
       served?.partitions?.find((p) => p.yearCode === yearCode) ?? served?.partitions?.[0];
     const servedValues = servedPartition?.values ?? [];

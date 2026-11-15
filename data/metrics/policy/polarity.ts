@@ -317,6 +317,7 @@ export const METRIC_POLARITY: Readonly<Record<string, PolarityEntry>> = {
   "health-checkup-weight-gain-10kg-rate": { polarity: "neutral", evidence: "20歳の時から体重が10kg以上増えたという回答の割合。20歳時の体格や現在の体格を含まず、年齢調整もしていないので、肥満の多さや地域の良否へ直結させない。" },
   "heatstroke-deaths": { polarity: "higher-is-worse", evidence: "人口動態統計（確定数）で熱中症を死因とする死亡数であり、死亡の増加を望ましいとは扱わない。人口で割らない実数のため人口規模の影響を含み、県の対策の優劣は示さない。" },
   "heatstroke-emergency-transports": { polarity: "higher-is-worse", evidence: "消防庁が熱中症として集計した救急搬送は健康被害による搬送で、件数増は被害負担の増加を示す。" },
+  "heatstroke-emergency-transports-per-100k": { polarity: "higher-is-worse", evidence: "熱中症の救急搬送は健康被害による搬送で、人口当たりが多いほど被害負担が重い (heatstroke-emergency-transports と同じ向き)。" },
   "high-school-club-per100-rugby-male": { polarity: "neutral", evidence: "高校男子100人あたりのラグビー部員数は競技の普及と部活動の選択を表し、部員の多寡を生徒の健康や学校の優劣とはしない。" },
   "home-medical-visit-cases": { polarity: "neutral", evidence: "医療施設による訪問診療件数は在宅医療需要と提供体制の双方を反映し、未充足需要や患者の改善成果を直接示さない。" },
   "home-nursing-visit-cases": { polarity: "neutral", evidence: "病院・診療所の訪問看護指導件数は療養需要と支援提供をともに反映し、看護成果や全訪問看護の充足率ではない。" },
@@ -504,6 +505,9 @@ export const METRIC_POLARITY: Readonly<Record<string, PolarityEntry>> = {
   "vegetable-intake-male-age-adjusted": { polarity: "higher-is-better", evidence: "成人男性の年齢調整平均野菜摂取量は健康日本21の摂取増加の方向に沿う。個人の疾病予防効果や上限のない増量は断定しない。" },
   // 全国学力・学習状況調査 平均正答率
   "academic-achievement-test-average-rate": { polarity: "higher-is-better", evidence: "学力調査の平均正答率は到達度そのもので、高いほど良い (争いのない事象)" },
+  "national-assessment-elementary-mathematics-correct-rate": { polarity: "higher-is-better", evidence: "学力調査の教科別の平均正答率は到達度そのもので、高いほど良い (争いのない事象)" },
+  "national-assessment-junior-high-mathematics-correct-rate": { polarity: "higher-is-better", evidence: "学力調査の教科別の平均正答率は到達度そのもので、高いほど良い (争いのない事象)" },
+  "national-assessment-junior-high-self-esteem-rate": { polarity: "higher-is-better", evidence: "国の学力・学習状況調査が自己肯定感の肯定的回答として集計する設問 (「自分には、よいところがあると思う」に当てはまる・どちらかといえば当てはまる) で、高いほど良い。" },
   // 救急搬送 病院収容所要時間
   "ambulance-hospital-arrival-time": { polarity: "higher-is-worse", evidence: "救急搬送の所要時間は長いほど悪い (争いのない事象)" },
   // BOD汚濁負荷量 / 生化学的酸素要求量（BOD）の汚濁負荷量
@@ -618,6 +622,7 @@ export const METRIC_POLARITY: Readonly<Record<string, PolarityEntry>> = {
   "traffic-accident-count-per-1000-km": { polarity: "higher-is-worse", evidence: "交通事故の発生・死傷は多いほど悪い (争いのない事象)" },
   // 交通事故発生件数 / 人口当たり
   "traffic-accident-count-per-population": { polarity: "higher-is-worse", evidence: "交通事故の発生・死傷は多いほど悪い (争いのない事象)" },
+  "traffic-accidents-party-a-age-75-plus-per-100k": { polarity: "higher-is-worse", evidence: "交通事故の発生は多いほど悪い (争いのない事象)。第 1 当事者が 75 歳以上の事故の人口当たり件数" },
   // 交通事故死者数 / 事故100件当たり
   "traffic-accident-deaths-per-100-accidents": { polarity: "higher-is-worse", evidence: "死亡は多いほど悪い (争いのない事象)" },
   // 交通事故死者数 / 人口10万人当たり

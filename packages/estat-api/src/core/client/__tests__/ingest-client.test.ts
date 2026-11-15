@@ -20,7 +20,16 @@ describe("Node ingestion entry", () => {
     try {
       const file = join(dir, ".env");
       writeFileSync(file, "export NEXT_PUBLIC_ESTAT_APP_ID='file-id' # comment\n");
-      expect(resolveEstatAppId({ NEXT_PUBLIC_ESTAT_APP_ID: " env-id " }, file)).toBe("env-id");
+      const environment = { NEXT_PUBLIC_ESTAT_APP_ID: " env-id " };
+      expect(resolveEstatAppId(environment, file)).toBe("env-id");
+      expect(resolveEstatAppId(environment, false)).toBe(" env-id ");
+      expect(resolveEstatAppId({}, false)).toBe("");
+      const key = Object.keys(environment)[0];
+      const legacy = { ...environment, [key.replace("NEXT_PUBLIC_", "")]: "legacy-id" };
+      expect(resolveEstatAppId(legacy, false, { legacyEnv: "first" })).toBe("legacy-id");
+      expect(resolveEstatAppId(legacy, false, { legacyEnv: "fallback" })).toBe(" env-id ");
+      expect(resolveEstatAppId({ ...legacy, [key]: "" }, false, { legacyEnv: "fallback" })).toBe("legacy-id");
+      expect(resolveEstatAppId({ ...legacy, [key]: "" }, false, { legacyEnv: "nullish" })).toBe("");
       expect(resolveEstatAppId({}, file)).toBe("file-id");
       expect(() => resolveEstatAppId({}, join(dir, "missing"))).toThrow(/absent/);
     } finally { rmSync(dir, { recursive: true }); }

@@ -1,3 +1,4 @@
+import { ESTAT_STATS_DATA_URL } from "../lib/estat-catalog/endpoints.cjs";
 export const SOURCES = [
   {
     kind: 'getStatsData',
@@ -11,7 +12,7 @@ export const SOURCES = [
       lvArea: '1-2',
       limit: '100000',
     },
-    url: 'https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData',
+    url: ESTAT_STATS_DATA_URL,
     sha256: 'fbc37c8096c66b2147761f2c9085e36bcd39f6eac99d2804560fecc376629a63',
     bytes: 13563951,
     fetchedAt: '2026-09-10T12:05:20.671Z',
@@ -30,7 +31,7 @@ export const SOURCES = [
       lvArea: '1-2',
       limit: '100000',
     },
-    url: 'https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData',
+    url: ESTAT_STATS_DATA_URL,
     sha256: '0b6c9a802bc61491d45fa91c3ed27f0cac8ffaf30108fc3d0c7c4e0b0a2c35d5',
     bytes: 5467606,
     fetchedAt: '2026-09-10T12:05:26.955Z',
@@ -49,7 +50,7 @@ export const SOURCES = [
       lvArea: '1-2',
       limit: '100000',
     },
-    url: 'https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData',
+    url: ESTAT_STATS_DATA_URL,
     sha256: '9e6cb5e6762932e74f80b133d1b1bbba42d910caf55b1d8b61eeb973b7000828',
     bytes: 443130,
     fetchedAt: '2026-09-10T12:05:29.621Z',
@@ -67,7 +68,7 @@ export const SOURCES = [
       lvArea: '1-2',
       limit: '100000',
     },
-    url: 'https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData',
+    url: ESTAT_STATS_DATA_URL,
     sha256: 'a25ed9cd8e5a3521df9240f1de103f7fe83dfb8241f7a88366846cfcdc1763a5',
     bytes: 357995,
     fetchedAt: '2026-09-10T12:05:30.819Z',

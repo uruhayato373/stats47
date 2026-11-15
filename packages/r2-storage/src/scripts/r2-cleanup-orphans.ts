@@ -1,11 +1,11 @@
 /**
  * R2 orphan cleaner: manifest にないキーをリモート R2 から削除する
  */
+import { createR2S3Client } from "../lib/clients/r2-s3-client.mjs";
 import { config } from "dotenv";
 import * as fs from "fs";
 import * as path from "path";
 import {
-  S3Client,
   ListObjectsV2Command,
   DeleteObjectsCommand,
 } from "@aws-sdk/client-s3";
@@ -19,14 +19,7 @@ const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME || SITE.r2Bucket;
 const MANIFEST_PATH = path.resolve(__dirname, "../../../..", ".local/r2-manifest/_all.json");
 const DRY_RUN = process.argv.includes("--dry-run");
 
-const s3 = new S3Client({
-  region: "auto",
-  endpoint: process.env.R2_S3_ENDPOINT!,
-  credentials: {
-    accessKeyId: process.env.R2_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.R2_SECRET_ACCESS_KEY!,
-  },
-});
+const s3 = createR2S3Client();
 
 async function listAllR2Keys(): Promise<string[]> {
   const keys: string[] = [];

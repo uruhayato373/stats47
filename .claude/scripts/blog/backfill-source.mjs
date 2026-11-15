@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { rankingR2Key } from '../lib/r2-keys.mjs';
 /**
  * backfill-source.mjs — source-backfill 復元: 既存 data/<base>.json があり source.json が無い SVG に
  * 出典 manifest (source.json) を後付けする (1画像=1設定ファイルの徹底, §1.7)。
@@ -20,7 +21,6 @@ import { datasetDir } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
-const RANK = `${R2}/app/ranking`;
 const STAGE = path.join(PROJECT_ROOT, ".local/r2/app/blog");
 const LIMIT = process.argv.includes("--limit") ? Number(process.argv[process.argv.indexOf("--limit") + 1]) : null;
 // 自動採用は 0.95 以上のみ。0.8-0.95 は相関する別指標への偽陽性リスク (例: 婚姻率 json が
@@ -67,7 +67,7 @@ function matchRate(jsonMap, ssotVals) {
   return n >= 3 ? ok / n : 0;
 }
 async function ssotPartitions(key) {
-  const v = await fj(`${RANK}/${key}/values.json`);
+  const v = await fj(`${R2}/${rankingR2Key(key, "values")}`);
   return (v.partitions || []).map((p) => ({ year: p.yearCode, values: p.values }));
 }
 /** scatter(2軸): points[{label,x,y}] を x/y 別の県→値マップに分解 (短縮名キー。matchRate が県サフィックス吸収) */
@@ -109,7 +109,7 @@ function deriveSourceFromJson(json, dataFile, chartType) {
     unit: json.unit || json.rankings?.unit,
     label: json.title || json.label || json.rankings?.label,
   };
-  if (rankingKey) return { kind: "ranking", rankingKey, source: `r2:app/ranking/${rankingKey}/values.json`, upstream: "metric config → e-Stat → R2 app/ranking", ...common };
+  if (rankingKey) return { kind: "ranking", rankingKey, source: `r2:${rankingR2Key(rankingKey, "values")}`, upstream: "metric config → e-Stat → R2 app/ranking", ...common };
   if (json.derived) return { kind: "derived", formula: json.derived, ...common };
   return { kind: chartType === "summary" ? "authored" : (chartType || "unknown"), incomplete: true, note: "出自(rankingKey/derived)が data json に無い。SSOTを特定して補完すること", ...common };
 }
@@ -149,7 +149,7 @@ async function main() {
           write({
             kind: "scatter", xKey: bx.key, yKey: by.key, year: bx.year,
             xLabel: sm.xLabel, yLabel: sm.yLabel, xUnit: sm.xUnit, yUnit: sm.yUnit,
-            source: [`r2:app/ranking/${bx.key}/values.json`, `r2:app/ranking/${by.key}/values.json`],
+            source: [`r2:${rankingR2Key(bx.key, "values")}`, `r2:${rankingR2Key(by.key, "values")}`],
             upstream: "metric config → e-Stat → R2 app/ranking (x軸/y軸の2指標)",
             verifiedMatchRate: Math.round(rate * 100), generatedBy: "backfill-source.mjs",
             note: "source-backfill(scatter): x/y値をSSOTと照合しxKey/yKeyを確定",
@@ -167,7 +167,7 @@ async function main() {
           write({
             kind: "ranking", rankingKey: best.key, year: best.year, unit, label,
             transform: "all47 (svg-builder が上位5+下位5を抽出)",
-            source: `r2:app/ranking/${best.key}/values.json`,
+            source: `r2:${rankingR2Key(best.key, "values")}`,
             upstream: "metric config → e-Stat → R2 app/ranking",
             restore: `node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug ${t.slug} --keys ${best.key} --data-name ${t.base}`,
             verifiedMatchRate: Math.round(best.rate * 100), generatedBy: "backfill-source.mjs",

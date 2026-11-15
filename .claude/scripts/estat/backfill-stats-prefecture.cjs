@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const { isPrefectureAreaCode } = require("../lib/prefectures.cjs");
 /**
  * 既存 metric の D1 stats_prefecture を e-Stat から全年度バックフィル。
  *
@@ -22,11 +23,7 @@ require("dotenv").config({
 });
 const Database = require("better-sqlite3");
 
-const APP_ID = process.env.NEXT_PUBLIC_ESTAT_APP_ID;
-if (!APP_ID) {
-  console.error("NEXT_PUBLIC_ESTAT_APP_ID required");
-  process.exit(1);
-}
+let APP_ID;
 
 const D1_PATH = path.resolve(
   __dirname,
@@ -46,7 +43,6 @@ const PRIORITY = [
   "total-overnight-guests-foreign",
 ];
 
-const PREF_AREA_RE = /^(0[1-9]|[1-3]\d|4[0-7])000$/;
 
 function parseArgs() {
   const args = process.argv.slice(2);
@@ -118,7 +114,7 @@ function pickValuesByYear(stat, areaMap, timeMap) {
   const byYear = new Map();
   for (const v of values) {
     const areaCode = v["@area"];
-    if (!PREF_AREA_RE.test(areaCode)) continue;
+    if (!isPrefectureAreaCode(areaCode)) continue;
     const yearCode = v["@time"];
     const num = Number(v.$);
     if (!isFinite(num)) continue;
@@ -226,6 +222,12 @@ async function processMetric(db, metricKey, opts) {
 }
 
 async function main() {
+  const { resolveEstatAppId } = await import("../lib/estat-catalog/api.mjs");
+  APP_ID = resolveEstatAppId(process.env, false);
+  if (!APP_ID) {
+    console.error("e-Stat app ID required");
+    process.exit(1);
+  }
   const opts = parseArgs();
   const db = new Database(D1_PATH);
   const results = [];

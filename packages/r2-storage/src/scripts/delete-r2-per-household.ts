@@ -1,3 +1,4 @@
+import { RANKING_R2_PREFIX } from "../keys";
 import { deleteMultipleFromR2, listFromR2 } from "../lib/index";
 import { assertR2WriteAllowed } from "./_assert-ci-write";
 
@@ -9,7 +10,7 @@ async function main() {
   }
 
   console.log("Listing app/ranking/ keys...");
-  const all = await listFromR2("app/ranking/");
+  const all = await listFromR2(`${RANKING_R2_PREFIX}/`);
   const targets = all.filter((k) => k.endsWith("values-per_household.json"));
 
   console.log(`Found: ${targets.length} files`);

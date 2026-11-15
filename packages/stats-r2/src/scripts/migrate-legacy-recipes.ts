@@ -1,3 +1,4 @@
+import { statsR2Key } from "@stats47/r2-storage/keys";
 /**
  * Recipe 導入前の公開 stats payload に、行を変えず config recipe を追加する一回限りの移行。
  *
@@ -28,7 +29,7 @@ function configureProxy(): void {
 }
 
 async function fetchPayload(key: string): Promise<unknown> {
-  const url = `${R2_BASE}/app/stats/${key}/values.json`;
+  const url = `${R2_BASE}/${statsR2Key(key, "prefecture")}`;
   const response = await fetch(url);
   if (!response.ok) throw new Error(`${key}: fetch failed (HTTP ${response.status})`);
   return await response.json();

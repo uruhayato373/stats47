@@ -6,7 +6,7 @@
 # cron でなくなったので、自分自身の失敗を連続失敗に数えて緑に戻れない問題 (2026-08-13〜10-25 に成功 0 回) は起きない。
 set -uo pipefail
 cd "$(dirname "$0")/../../../.."
-export R2_PUBLIC_FETCH_URL="${R2_PUBLIC_FETCH_URL:-https://storage.stats47.jp}"
+export R2_PUBLIC_FETCH_URL="${R2_PUBLIC_FETCH_URL:-$(node --input-type=module -e 'import { R2_PUBLIC_ORIGIN } from "./.claude/scripts/lib/r2-keys.mjs"; process.stdout.write(R2_PUBLIC_ORIGIN)')}"
 failed=()
 run() { local name="$1"; shift; echo "=== $name ==="; "$@" || failed+=("$name"); }
 run workflow-health node .claude/scripts/ci/audit-workflow-health.mjs --min-streak "${MIN_STREAK:-2}"

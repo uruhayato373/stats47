@@ -1,0 +1,562 @@
+{
+  "datasetId": "maff-shuraku-card",
+  "versions": [
+    {
+      "schemaVersion": 1,
+      "datasetId": "maff-shuraku-card",
+      "version": "2025",
+      "sha256": "61435f4ccd8e9e847c84591fa83a1a38d662e8cfc9e8c5b697fb25c781066bd3",
+      "recipeSha256": "6fb6c8a9127804073a9f253bcebfded90e39ae2462ad643500911c0b400b166e",
+      "retrievedAt": "2026-11-15T05:54:03.378Z",
+      "license": {
+        "name": "政府標準利用規約 (PDL 1.0)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.maff.go.jp/j/use/link.html"
+      },
+      "files": [
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0001.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA0001_2025_2025_00.xlsx",
+          "sha256": "ebaa0479e5131c559f8d82cd93861565c6ab3ffa97a9e7341df5c79a62fc77d4",
+          "bytes": 20364519,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:51:48.826Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0002.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA0002_2025_2025_00.xlsx",
+          "sha256": "33279e50d59d03920febc87a465f280e548479ec85da8f09fcc54329b4241f59",
+          "bytes": 19859902,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:51:50.959Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0003.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA1009_2025_2025_00.xlsx",
+          "sha256": "d2e25dae6d51beb564cc785f4abc3873971e7c3f4e3d885026e2af0577e7220b",
+          "bytes": 19804284,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:51:53.255Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0004.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA1011_2025_2025_00.xlsx",
+          "sha256": "243580ae05dce15c16de611b2d13bbfdcd98720a870224ad2af7f46bd316f996",
+          "bytes": 19278104,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:51:55.457Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0005.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA1012_2025_2025_00.xlsx",
+          "sha256": "8588620cdc46e4b06a496aea5c236befb3d2838a96a94fbac4774cbf32997c89",
+          "bytes": 19433471,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:51:57.763Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0006.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA1014_2025_2025_01.xlsx",
+          "sha256": "ff1eb3042dd151decad332d0b25259783517f946f0678a0205e913ea8d3dbf3b",
+          "bytes": 19716455,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:51:59.957Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0007.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA1014_2025_2025_02.xlsx",
+          "sha256": "7332e6f73d3f03e1dad6dfd9f1466780a088d0a717c3e85be0d97f6d7a3dc5f2",
+          "bytes": 17658749,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:52:02.094Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0008.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA1019_2025_2025_00.xlsx",
+          "sha256": "1dc167ff6202d37ef57285bbf67f2dd05297e840485fde347cf0c0654b574cc6",
+          "bytes": 17547695,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:52:04.253Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0009.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA1024_2025_2025_00.xlsx",
+          "sha256": "e492b149df69408b9f303a7b50f0dea4890941bbbf8bea050d0b1f4e7042ba23",
+          "bytes": 25360107,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:52:06.750Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0010.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA1025_2025_2025_00.xlsx",
+          "sha256": "7b4c32ba26aac3066b650de83904f5462464408308d8e70164656b9812a3a0a0",
+          "bytes": 19900383,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:52:09.080Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0011.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA1026_2025_2025_00.xlsx",
+          "sha256": "a6809d053876652be709ff6343f012a20fa37f6a68164e6a5949cab9f306f37e",
+          "bytes": 20217258,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:52:11.339Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0012.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA1037_2025_2025_00.xlsx",
+          "sha256": "ea2c7cdbb012aea2b84975ea0c0510ede49141c8a56c0e459e3064f7cab93005",
+          "bytes": 15140251,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:52:11.934Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0013.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA1040_2025_2025_00.xlsx",
+          "sha256": "f7493d2367b3d178ec42bb6cd09f998cffebad90f95e4681fca39b823d68865a",
+          "bytes": 14725498,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:52:14.383Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0014.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA1055_2025_2025_00.xlsx",
+          "sha256": "5318f3f103a9344b25b8bf70bff9f75fb402ed7684d840a86ab91e526e4d4770",
+          "bytes": 13670830,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:52:16.453Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0015.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA1059_2025_2025_00.xlsx",
+          "sha256": "feb842fe583c170afd6abdbeffb9b872ae56e4c976a49bf7b1a91de77dc47792",
+          "bytes": 15172829,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:52:18.525Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0016.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA1062_2025_2025_00.xlsx",
+          "sha256": "98153665582b4fd87c6695f058d0a8e2da21c65b4539024413b67d9fd2152957",
+          "bytes": 15783172,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:52:20.554Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0017.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA1065_2025_2025_00.xlsx",
+          "sha256": "3333f43ef26adee59756c2fb08f4dc85f29e00ae0b6e62abea2fa45650316f27",
+          "bytes": 20965244,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:52:22.926Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0018.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA1066_2025_2025_00.xlsx",
+          "sha256": "8c296a4b53a73db15e24f07804e97f4deb286228248d4d14404b5dccd012c45f",
+          "bytes": 20920813,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:52:25.129Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0019.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA1067_2025_2025_00.xlsx",
+          "sha256": "fd5e619bdd901c4e88101bd60a56b0c996e08754046d672526930f4a0fa5ea2c",
+          "bytes": 17403046,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:52:27.214Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0020.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA1090_2025_2025_00.xlsx",
+          "sha256": "4aa39f3f65ec4f0330d60325b79c9c7dc1ea7850e71f4337f25a7220d6a616a3",
+          "bytes": 17155255,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:52:29.339Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0021.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA1107_2025_2025_00.xlsx",
+          "sha256": "ce466f72854e1dfa920d92e2858f804a6bc9fb17dd97adbf133d6e0ed98f9d8d",
+          "bytes": 16082030,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:52:31.479Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0022.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA1111_2025_2025_00.xlsx",
+          "sha256": "94c6dd20060bf5b9fd9e61510b8b60cd35bfbe6f2240aa80cab1f9bf21376930",
+          "bytes": 19941719,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:52:33.698Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0023.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA1112_2025_2025_00.xlsx",
+          "sha256": "bdfaba14e56718f296166d8c6646788ae8979c372b6bf64199edb6f7db7bc678",
+          "bytes": 27312550,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:52:36.367Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0024.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA1113_2025_2025_00.xlsx",
+          "sha256": "0a62b0ce53a5b46f9da4792535ada8bbee3e3e40028058caed8314426d616079",
+          "bytes": 13409840,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:52:38.309Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0025.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA1114_2025_2025_00.xlsx",
+          "sha256": "8f2edf468d52c8e2e47ced4ddaf41c437889230b13014ae11dec4c051a1c206d",
+          "bytes": 16124241,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:52:38.881Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0026.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA1115_2025_2025_00.xlsx",
+          "sha256": "c787f658e6c83747a4faff067cfcb3977a6e60333929bb2e7dd8b866a58ccd37",
+          "bytes": 21594611,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:52:41.596Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0027.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA1116_2025_2025_00.xlsx",
+          "sha256": "bfd29a484a9704443b7ee7b4356ce27ef102d1a809e261bd146a929c921aaa8e",
+          "bytes": 16920273,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:52:43.664Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0028.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA1117_2025_2025_00.xlsx",
+          "sha256": "b3a9b793a04073a4f43ba9dc887e1c7654a11bfc488248fb6d49bdefff9132c3",
+          "bytes": 16823805,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:52:45.776Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0029.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA1118_2025_2025_01.xlsx",
+          "sha256": "134a0577860d149ae2539da19b865ed4bfab3e1cbbec2d3dd923fcdb2c80026e",
+          "bytes": 21029144,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:52:48.084Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0030.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA1118_2025_2025_02.xlsx",
+          "sha256": "28273d1b26f56fba757bbd904e5695316ba9e90ba30b8bf19a68a433feaac544",
+          "bytes": 18759632,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:52:50.361Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0031.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA4001_2025_2025_00.xlsx",
+          "sha256": "914524e54b7cde9e81d9cd7ff11056c7546a8524154077f5a4cd4ecbb8574e91",
+          "bytes": 16342493,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:52:52.402Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0032.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA4002_2025_2025_01.xlsx",
+          "sha256": "7290cbde4665fe984faf69e1211468c1df96a029029663bc71022dd6711402f8",
+          "bytes": 21859985,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:52:54.808Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0033.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA4002_2025_2025_02.xlsx",
+          "sha256": "031f96e4f781cd519215002b877682b886c8d1ec35b6958e0341ad3338c55884",
+          "bytes": 19480686,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:52:55.432Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0034.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA4003_2025_2025_01.xlsx",
+          "sha256": "f9ff71e9b386ef448a6da67e9dd76b74bfb86071dc9914b47d6404c494a22c21",
+          "bytes": 21326170,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:52:58.088Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0035.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA4003_2025_2025_02.xlsx",
+          "sha256": "8761d1237ceec7241c6ec155554138c32b90774ca0fdd7b7ca46752acd595cbb",
+          "bytes": 18748919,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:00.335Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0036.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA4004_2025_2025_00.xlsx",
+          "sha256": "8184cd3099d4e132367f92719a058a99e4a4717f46974bafc391e8d41ea59a77",
+          "bytes": 17182211,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:02.500Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0037.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA4005_2025_2025_00.xlsx",
+          "sha256": "2869587cefc8411e7180c0f75723699136648d34fe937fd326bb2d11e26ea278",
+          "bytes": 14881889,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:04.500Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0038.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA4006_2025_2025_00.xlsx",
+          "sha256": "dcf72063c4e6ccd8f72573ad46d2910394167b90c77522b9e8c5fc20fcd73ab5",
+          "bytes": 15680485,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:06.581Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0039.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA5194_2025_2025_00.xlsx",
+          "sha256": "934fc689b4ed43ce57ce83e02b23b48958f1bd70a7d6ee1d23347cc9f9530da3",
+          "bytes": 12023314,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:08.461Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0040.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA5200_2025_2025_00.xlsx",
+          "sha256": "40d277f508d80a6687f240aa51f3fad091e2e1e90f184e2d8c3c84ce8866a72c",
+          "bytes": 12701924,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:09.030Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0041.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA6001_2025_2025_00.xlsx",
+          "sha256": "c9cf8248dba5a2eb8f71d3f688f1e7b37047858b9024a8973191a931b57dda26",
+          "bytes": 12633460,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:11.310Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0042.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA6002_2025_2025_00.xlsx",
+          "sha256": "f0d182ad6f907f3fcabb8eeb297858be0b5ae2e34381d83c05c5d0e733c6a9d3",
+          "bytes": 14501220,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:13.279Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0043.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA6003_2025_2025_00.xlsx",
+          "sha256": "9421a7fa4707ce13d573a20a64e7a602af82f9286ac2096fa03f01cd95a90731",
+          "bytes": 14488858,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:14.094Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0044.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA7001_2025_2025_00.xlsx",
+          "sha256": "5c7938858a958b47b5527a64a06b7cb0c2d7a002b11b6f2ab88f5c5cf8951707",
+          "bytes": 21017302,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:16.622Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0045.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA7002_2025_2025_00.xlsx",
+          "sha256": "83b180457314c6d983a1f2f6e80f9461e5ede30646db26b4ac526a0e07ef3c52",
+          "bytes": 12738332,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:18.485Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0046.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA7003_2025_2025_00.xlsx",
+          "sha256": "b9e129617725d5d1e8504403e93bad8f2b95fdab06d1ab4caabf3e3a723d08ba",
+          "bytes": 21253411,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:20.815Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0047.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA7004_2025_2025_00.xlsx",
+          "sha256": "2372af63aea6ccdf6ad2cdaa491deafbfd7823eb598a26fed1da1478b7b96a67",
+          "bytes": 11271583,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:22.686Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0048.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA7005_2025_2025_00.xlsx",
+          "sha256": "8cb35353ae5c5a3d022c924f0f72a2df6e39afe924f1c1a374e001b4007bf5e1",
+          "bytes": 18936162,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:24.816Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0049.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA7006_2025_2025_00.xlsx",
+          "sha256": "dacb37ac1fd4f12fadb9e1d72c4271aefc8e1d54b8de5441bbd8aaed57f84d67",
+          "bytes": 13484641,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:26.687Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0050.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA7007_2025_2025_00.xlsx",
+          "sha256": "337aab7730b3ea27263acc2e93ba9b5dd66dbad12cca90c0a9eb39602585bf28",
+          "bytes": 15159401,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:28.639Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0051.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA7008_2025_2025_00.xlsx",
+          "sha256": "f91ce2e7bc55320b8473e9214fd55b27ca1bb09d33ea4534d6602d3eda86dc2b",
+          "bytes": 18652642,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:30.828Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0052.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA7009_2025_2025_00.xlsx",
+          "sha256": "5e51f905d7016d3da823c8d6459bef0b0e29ab3b4b7346ed238d49ee84ca8990",
+          "bytes": 16366253,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:32.958Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0053.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA7012_2025_2025_00.xlsx",
+          "sha256": "3a88f498f0e0819e40bdfa05e91e4eec850e83f314b76c8295f07a164c75aa1f",
+          "bytes": 16174592,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:35.027Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0054.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA7013_2025_2025_00.xlsx",
+          "sha256": "e0d584c6486b4ac997a46ccf3c09b2abddeaf16cbd3727579ecd72e828acd311",
+          "bytes": 15593141,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:37.081Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0055.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA7014_2025_2025_00.xlsx",
+          "sha256": "c8a39833d419e6aa32d3bb3b4a1bed51d00d39a76f9b7950788a35ff80b6e2f4",
+          "bytes": 17228962,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:39.164Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0056.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA7015_2025_2025_00.xlsx",
+          "sha256": "89908c464f3433a7a095b4ce5b0fd81e7e9309a64cf6ce600859db87b6ca4268",
+          "bytes": 15520697,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:41.205Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0057.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA7016_2025_2025_00.xlsx",
+          "sha256": "a9158645df4c2895c67f2e475ad6b0ea105490fd6debb76548ff55679f3dadbe",
+          "bytes": 11888128,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:43.067Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0058.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA8001_2025_2025_00.xlsx",
+          "sha256": "6812a13565031cd300ef8e19302314278cc8d98254116e8199cdeaaaca03fb28",
+          "bytes": 18427419,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:45.277Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0059.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA8002_2025_2025_00.xlsx",
+          "sha256": "09ce2beb075697c3ee0edd8685d3d99ce3ccbd13813a82aa6e73f541e355bb4b",
+          "bytes": 15652001,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:47.269Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0060.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA8003_2025_2025_00.xlsx",
+          "sha256": "71584e7e384bde3ca6247cb940296b8defb28d6b8fafecce846c1f36228fcdb6",
+          "bytes": 15611466,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:49.348Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0061.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA8004_2025_2025_00.xlsx",
+          "sha256": "0963ac63cc6785860a8d9a874e5ced49f837432ad9f6038d34829a29d650684e",
+          "bytes": 15243732,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:51.350Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0062.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA8005_2025_2025_00.xlsx",
+          "sha256": "2580488e162b92b2a491c73c886e22de7acb2d41b61fd8f50cafed39d0f39707",
+          "bytes": 13474177,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:53.351Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0063.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA8006_2025_2025_00.xlsx",
+          "sha256": "5c77ccde9df6817ec403bb331d66c0616b4426fb93673ab722bfd70284def41b",
+          "bytes": 15649549,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:55.435Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0064.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA8007_2025_2025_00.xlsx",
+          "sha256": "80db4a4365ff9d16768f76e3c2123e45c36b27986fd0c017974391ec11e9a47a",
+          "bytes": 15642578,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:57.437Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0065.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA8008_2025_2025_00.xlsx",
+          "sha256": "002a910d61a76bd954051df70fb4c2e8dd5f2757d524692a9f861228b7e302b7",
+          "bytes": 16685364,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:53:59.477Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0066.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA8009_2025_2025_00.xlsx",
+          "sha256": "9e18c24bfec0c295a7a3c31a21a6d1403db0da755ad5a12f13650e47a7b0ed92",
+          "bytes": 10528723,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:54:01.246Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-card/2025/0067.xlsx",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/2025/SA8010_2025_2025_00.xlsx",
+          "sha256": "ab6e45d6e49090fb8d18ff8658f3c3ab130e5a8c1ae2136aa6846d191d3a3ccc",
+          "bytes": 16214145,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T05:54:03.377Z"
+        }
+      ],
+      "manifestKey": "open-data/raw/maff-shuraku-card/2025/manifest.json",
+      "manifestSha256": "c5ef63bf39dd500feb4ae14418e0c50d060820865b8332a85695daae47a683d9",
+      "bytes": 1148341725,
+      "status": "archived"
+    }
+  ]
+}

@@ -1,4 +1,8 @@
 #!/usr/bin/env node
+// Keep single-attempt HTTP handling and the unmodified API error payload.
+import { resolveEstatAppId } from "../lib/estat-catalog/api.mjs";
+import { extractYearCode } from "../lib/year-code.mjs";
+// Compatibility: malformed time prefixes retain the previous slice result.
 /**
  * fetch-kakei-monthly.mjs — 家計調査 (全国・二人以上の世帯) の月次品目データと消費者物価指数 (CPI) から
  * 型C (時系列変化) 記事の折れ線 data JSON を作る接地器。
@@ -79,11 +83,7 @@ if (LAYOUT === "months-by-year" && (ITEMS.length !== 1 || YEARS.length < 2)) {
 }
 
 function appId() {
-  if (process.env.NEXT_PUBLIC_ESTAT_APP_ID) return process.env.NEXT_PUBLIC_ESTAT_APP_ID;
-  const env = fs.readFileSync(path.join(PROJECT_ROOT, "apps/web/.env.development"), "utf8");
-  const m = env.match(/NEXT_PUBLIC_ESTAT_APP_ID=\s*"?([^"\n]+)"?/);
-  if (!m) throw new Error("NEXT_PUBLIC_ESTAT_APP_ID が無い");
-  return m[1].trim();
+  return resolveEstatAppId(process.env, path.join(PROJECT_ROOT, "apps/web/.env.development"));
 }
 
 async function fetchItem(src, code) {
@@ -116,7 +116,7 @@ async function fetchItem(src, code) {
       const t = String(v["@time"]);
       const mm = t.slice(-2);
       if (mm === "00") return null; // 年・年度の行は使わない (月次だけ)
-      return { ym: `${t.slice(0, 4)}-${mm}`, value: /^-?[0-9.]+$/.test(v["$"]) ? Number(v["$"]) : null, unit: v["@unit"] || "" };
+      return { ym: `${(typeof t === "string" && /^\d{4}/.test(t) ? extractYearCode(t) : t.slice(0, 4))}-${mm}`, value: /^-?[0-9.]+$/.test(v["$"]) ? Number(v["$"]) : null, unit: v["@unit"] || "" };
     })
     .filter(Boolean)
     .sort((a, b) => a.ym.localeCompare(b.ym));

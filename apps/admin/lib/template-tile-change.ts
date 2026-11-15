@@ -1,3 +1,4 @@
+import { rankingR2Key } from '@stats47/r2-storage/keys';
 import { buildDataCard } from '../../../.claude/scripts/sns/lib/data-card-input';
 import type { ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
 import { renderTileChangeSvg } from '../../remotion/src/features/data-cards/TileChange';
@@ -6,13 +7,13 @@ import { renderTileChangeSvg } from '../../remotion/src/features/data-cards/Tile
 export const CHANGE_SAMPLE_SOURCES = {
   item: {
     bucket: 'stats47',
-    key: 'app/ranking/total-population/item.json',
+    key: rankingR2Key('total-population', 'item'),
     sha256: '3c4bc4801f767300e662d17102b736a8fa8fd14b14db5eba492bec6eeeaf9457',
     bytes: 4540,
   },
   values: {
     bucket: 'stats47',
-    key: 'app/ranking/total-population/values.json',
+    key: rankingR2Key('total-population', 'values'),
     sha256: '714a966447bc54788fd8b88a0efd8dc73a897f06e39cf6b15bce9451a4fe8d12',
     bytes: 426167,
   },

@@ -1,3 +1,4 @@
+import { isPrefectureAreaCode } from "@stats47/area";
 /**
  * validate-area-databook — AreaDatabookTemplate + AREA_EDITORIALS の内整合を検証する lint。
  *
@@ -29,7 +30,6 @@ const STRICT = process.argv.includes("--strict");
 const VALID_CHART_TYPES = new Set<string>(AREA_DATABOOK_CHART_TYPES);
 const KEBAB = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
-const AREA_CODE = /^(0[1-9]|[1-3][0-9]|4[0-7])000$/;
 
 function metricExists(key: string): boolean {
   return Object.prototype.hasOwnProperty.call(METRICS_REGISTRY, key);
@@ -139,7 +139,7 @@ function main() {
   const editorials = Object.entries(AREA_EDITORIALS);
   for (const [code, ed] of editorials) {
     const tag = `editorial ${code}`;
-    if (code !== ed.areaCode || !AREA_CODE.test(code)) {
+    if (code !== ed.areaCode || !isPrefectureAreaCode(code)) {
       errors.push(`[editorial-code] ${tag}: areaCode 不正 ("${ed.areaCode}")`);
     }
     if (ed.specialties.length < 5 || ed.specialties.length > 9) {

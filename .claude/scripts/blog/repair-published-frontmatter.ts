@@ -1,3 +1,4 @@
+import { R2_PUBLIC_ORIGIN } from '../lib/r2-keys.mjs';
 /** Restore the malformed description of one previously published article; preserve all body bytes. */
 import { createHash } from 'node:crypto';
 import fs from 'node:fs/promises';
@@ -12,7 +13,7 @@ const sha = (value: string) => createHash('sha256').update(value).digest('hex');
 
 async function main() {
   await fs.mkdir(path.join(output, 'out'), { recursive: true });
-  const response = await fetch(`https://storage.stats47.jp/app/blog/${slug}/article.md`, { cache: 'no-store', signal: AbortSignal.timeout(30000) });
+  const response = await fetch(`${R2_PUBLIC_ORIGIN}/app/blog/${slug}/article.md`, { cache: 'no-store', signal: AbortSignal.timeout(30000) });
   if (!response.ok) throw new Error(`Article HTTP ${response.status}`);
   const original = await response.text();
   const corrected = original.replace(/^description:\s*"(.*)"\s*$/m, (_, value: string) => `description: ${JSON.stringify(value)}`);

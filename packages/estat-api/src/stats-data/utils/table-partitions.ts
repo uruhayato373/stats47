@@ -74,8 +74,12 @@ export function countSlices(axes: readonly Axis[], prefDim: string | null = null
   };
 }
 
+/** Inclusive `cdAreaFrom`/`cdAreaTo` request range; whole prefectures only (owner decision 2026-11-15). */
+export interface AreaRange { from: string; to: string; codeCount: number }
+
 /** Preserve CLASS_OBJ order and literal codes (including leading zeroes and '#'). */
-export function makeSliceKey(statsDataId: string, axes: readonly Axis[], codes: Record<string, string>, depth: number, prefDim: string | null = null): string {
+export function makeSliceKey(statsDataId: string, axes: readonly Axis[], codes: Record<string, string>, depth: number, prefDim: string | null = null,
+  areaRange: AreaRange | null = null): string {
   if (!/^\d{10}$/.test(statsDataId)) throw new Error("Invalid statsDataId");
   const eligible = countSlices(axes, prefDim).sliceAxes;
   if (!Number.isInteger(depth) || depth < 0 || depth > eligible.length) throw new Error("Invalid partition depth");
@@ -87,6 +91,10 @@ export function makeSliceKey(statsDataId: string, axes: readonly Axis[], codes: 
     if (!axes.find((axis) => axis.id === id)?.codes.includes(code)) throw new Error(`Unknown code: ${id}=${code}`);
     return `${id}=${code}`;
   });
+  if (areaRange) {
+    if (!/^\d{5}$/.test(areaRange.from) || !/^\d{5}$/.test(areaRange.to) || areaRange.from > areaRange.to) throw new Error("Invalid area range");
+    parts.push(`area=${areaRange.from}-${areaRange.to}`);
+  }
   return `estat-tables/${statsDataId}/data/${parts.length ? parts.join("/") : "all"}.json.gz`;
 }
 
@@ -103,6 +111,35 @@ export function planTablePartitions(axes: readonly Axis[], prefDim: string | nul
     depth++;
     maxRowsPerFileEstimate = counts.rowCountEstimate / fileCount;
   }
-  return { depth, partitionAxes: eligible.slice(0, depth).map((axis) => axis.id),
-    rowLimit, fileCount, maxRowsPerFileEstimate, fitsRowLimit: maxRowsPerFileEstimate <= rowLimit };
+  const base = { depth, partitionAxes: eligible.slice(0, depth).map((axis) => axis.id), rowLimit };
+  if (maxRowsPerFileEstimate <= rowLimit || counts.regionAxes.join() !== "area") {
+    return { ...base, fileCount, maxRowsPerFileEstimate, fitsRowLimit: maxRowsPerFileEstimate <= rowLimit };
+  }
+  // Every non-region axis is exhausted: pack whole prefectures (first two code digits) in code order.
+  const areaRanges = packAreaRanges(axes.find((axis) => axis.id === "area")!.codes, maxRowsPerFileEstimate / counts.regionCount, rowLimit);
+  if (!areaRanges) return { ...base, fileCount, maxRowsPerFileEstimate, fitsRowLimit: false };
+  const rowsPerArea = maxRowsPerFileEstimate / counts.regionCount;
+  const largest = Math.max(...areaRanges.map((range) => range.codeCount)) * rowsPerArea;
+  return { ...base, fileCount: safeProduct([fileCount, areaRanges.length]), maxRowsPerFileEstimate: largest,
+    fitsRowLimit: largest <= rowLimit, areaRanges };
+}
+
+/** Null when codes are not 5-digit or one prefecture alone exceeds the limit. */
+export function packAreaRanges(codes: readonly string[], rowsPerArea: number, rowLimit: number): AreaRange[] | null {
+  const sorted = [...new Set(codes)].sort();
+  if (sorted.some((code) => !/^\d{5}$/.test(code))) return null;
+  const prefectures = new Map<string, string[]>();
+  for (const code of sorted) prefectures.set(code.slice(0, 2), [...prefectures.get(code.slice(0, 2)) ?? [], code]);
+  const ranges: AreaRange[] = [];
+  let current: string[] = [];
+  for (const group of prefectures.values()) {
+    if (group.length * rowsPerArea > rowLimit) return null;
+    if (current.length && (current.length + group.length) * rowsPerArea > rowLimit) {
+      ranges.push({ from: current[0], to: current[current.length - 1], codeCount: current.length });
+      current = [];
+    }
+    current = [...current, ...group];
+  }
+  if (current.length) ranges.push({ from: current[0], to: current[current.length - 1], codeCount: current.length });
+  return ranges;
 }

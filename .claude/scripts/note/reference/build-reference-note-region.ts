@@ -1,4 +1,5 @@
 #!/usr/bin/env tsx
+import { rankingR2Key } from '../../lib/r2-keys.mjs';
 /**
  * 教材の分析企画のうち「地方ごとに各県の全体像を組み立てられるか」を問うもの (prefecture-ranking-consumption の a47〜a52) を、
  * R2 の県データブック (app/areas/<code>/databook.json) から note 記事の作業コピーにする。
@@ -92,7 +93,7 @@ async function build(a: Analysis) {
     const { top, bottom } = selectAreaHighlights(databook, { perGroup: PER_GROUP });
     // 県データブックの表示名は分母を落としていることがあるので、ランキングの取得設定から e-Stat の項目名で補う
     for (const h of [...top, ...bottom]) {
-      const item = await fetch(`${R2}/app/ranking/${h.rankingKey}/item.json`);
+      const item = await fetch(`${R2}/${rankingR2Key(h.rankingKey, "item")}`);
       if (item.ok) h.label = await qualifyLabel(h.label, (await item.json()).item?.sourceConfig?.recipe);
     }
     prefs.push({ areaCode: code, areaName: databook.areaName, top, bottom });

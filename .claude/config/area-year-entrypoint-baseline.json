@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "policy": "縮小専用。パス・出現数の追加は禁止。HEAD・親commit・origin/developとのmerge-baseからの増加を検査する。--baseで比較基準を追加できる。",
+  "exceptions": {
+    ".claude/scripts/data/__tests__/fetch-japanese-instruction-students.test.mjs": {
+      "prefCheck": 0,
+      "cityCheck": 0,
+      "yearCheck": 0,
+      "prefectureNames": 1,
+      "reason": "テストfixtureの独立した期待値を維持"
+    },
+    "apps/admin/tests/unit/template-ranking-tile-map.test.ts": {
+      "prefCheck": 0,
+      "cityCheck": 0,
+      "yearCheck": 0,
+      "prefectureNames": 1,
+      "reason": "テストfixtureの独立した期待値を維持"
+    },
+    "apps/admin/tests/unit/template-relationship-scatter.test.ts": {
+      "prefCheck": 0,
+      "cityCheck": 0,
+      "yearCheck": 0,
+      "prefectureNames": 1,
+      "reason": "テストfixtureの独立した期待値を維持"
+    },
+    "apps/remotion/src/utils/preview-data-bar-chart-race.ts": {
+      "prefCheck": 0,
+      "cityCheck": 0,
+      "yearCheck": 0,
+      "prefectureNames": 50,
+      "reason": "ユーザー指定の除外対象: Remotion preview fixtureを維持"
+    },
+    "apps/remotion/src/utils/preview-data-correlation.ts": {
+      "prefCheck": 0,
+      "cityCheck": 0,
+      "yearCheck": 0,
+      "prefectureNames": 1,
+      "reason": "ユーザー指定の除外対象: Remotion preview fixtureを維持"
+    },
+    "apps/remotion/src/utils/preview-data.ts": {
+      "prefCheck": 0,
+      "cityCheck": 0,
+      "yearCheck": 0,
+      "prefectureNames": 1,
+      "reason": "ユーザー指定の除外対象: Remotion preview fixtureを維持"
+    },
+    "packages/ai-content/src/services/__tests__/blog-article-materials.test.ts": {
+      "prefCheck": 0,
+      "cityCheck": 0,
+      "yearCheck": 0,
+      "prefectureNames": 1,
+      "reason": "テストfixtureの独立した期待値を維持"
+    },
+    "packages/svg-builder/src/charts/__tests__/choropleth.gate.test.ts": {
+      "prefCheck": 0,
+      "cityCheck": 0,
+      "yearCheck": 0,
+      "prefectureNames": 1,
+      "reason": "テストfixtureの独立した期待値を維持"
+    },
+    "packages/svg-builder/src/charts/__tests__/choropleth.highlight.test.ts": {
+      "prefCheck": 0,
+      "cityCheck": 0,
+      "yearCheck": 0,
+      "prefectureNames": 1,
+      "reason": "テストfixtureの独立した期待値を維持"
+    },
+    "packages/svg-builder/src/charts/__tests__/choropleth.tile-label.test.ts": {
+      "prefCheck": 0,
+      "cityCheck": 0,
+      "yearCheck": 0,
+      "prefectureNames": 1,
+      "reason": "テストfixtureの独立した期待値を維持"
+    },
+    "packages/svg-builder/src/charts/__tests__/text-layout.gate.test.ts": {
+      "prefCheck": 0,
+      "cityCheck": 0,
+      "yearCheck": 0,
+      "prefectureNames": 1,
+      "reason": "テストfixtureの独立した期待値を維持"
+    },
+    "packages/visualization/src/d3/constants/tile-grid-layout.ts": {
+      "prefCheck": 0,
+      "cityCheck": 0,
+      "yearCheck": 0,
+      "prefectureNames": 1,
+      "reason": "ユーザー指定の除外対象: 地図の配置順を維持"
+    }
+  }
+}

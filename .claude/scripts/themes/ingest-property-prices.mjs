@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { statsR2Key } from "../lib/r2-keys.mjs";
 /** Recompute public CSV inputs before writing four series and their distribution. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -42,7 +43,7 @@ export async function main() {
       assert.equal(row.unit, metric.unit);assert.equal(row.yearCode, source.year);
     }
     const payload = parseStatsValuesPayload({ metricKey: metric.key, entityKind: 'prefecture', rows, meta: { generatedAt, rowCount: 47, areaCount: 47, yearRange: ['2025','2025'], recipe: buildRecipe(config) } });
-    return { key: 'app/stats/' + metric.key + '/values.json', content: Buffer.from(JSON.stringify(payload)), rowCount: 47 };
+    return { key: statsR2Key(metric.key, "prefecture"), content: Buffer.from(JSON.stringify(payload)), rowCount: 47 };
   });
   const audit = JSON.parse(await readFile(resolve(o['source-dir'], 'aggregate-audit.json'), 'utf8'));
   assert.equal(audit.pass, true);

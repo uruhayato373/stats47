@@ -1,4 +1,5 @@
 #!/usr/bin/env tsx
+import { statsR2Key } from "@stats47/r2-storage/keys";
 import { metricPresentation } from '@stats47/data-configs/color-policy';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -164,7 +165,7 @@ async function generateForKey(
   }
 
   const payload = (await fetchCitiesPayload(
-    `${r2Base}/app/stats/${encodeURIComponent(rankingKey)}/cities.json`
+    `${r2Base}/${statsR2Key(encodeURIComponent(rankingKey), "city")}`
   )) as StatsPayload;
   if (payload.metricKey !== rankingKey || payload.entityKind !== 'city') {
     throw new Error(

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { rankingR2Key } from '../lib/r2-keys.mjs';
 /**
  * resolve-scatter-axes.mjs — scatter の x/y 軸を SSOT key へ明示対応づけし、値照合(≥0.95)で
  * 確定した時だけ kind:scatter の source.json を書く (1画像=1設定ファイルの徹底, §1.7)。
@@ -63,7 +64,7 @@ function axisMap(json, field) {
   return m;
 }
 async function ssotPartitions(key) {
-  const v = await fj(`${R2}/app/ranking/${key}/values.json`);
+  const v = await fj(`${R2}/${rankingR2Key(key, "values")}`);
   return (v.partitions || []).map((p) => ({ year: p.yearCode, values: p.values }));
 }
 function matchRate(jsonMap, ssotVals) {
@@ -112,7 +113,7 @@ async function main() {
       ...(rx.derived ? { xDerived: rx.derived } : {}),
       ...(ry.derived ? { yDerived: ry.derived } : {}),
       year,
-      source: [c.x.key && `r2:app/ranking/${c.x.key}/values.json`, c.y.key && `r2:app/ranking/${c.y.key}/values.json`].filter(Boolean),
+      source: [c.x.key && `r2:${rankingR2Key(c.x.key, "values")}`, c.y.key && `r2:${rankingR2Key(c.y.key, "values")}`].filter(Boolean),
       upstream: "metric config → e-Stat → R2 app/ranking (x軸/y軸の2指標)",
       verifiedMatchRate: Math.round(Math.min(rx.derived ? 1 : rx.rate, ry.derived ? 1 : ry.rate) * 100),
       generatedBy: "resolve-scatter-axes.mjs",
@@ -140,7 +141,7 @@ async function main() {
     fs.writeFileSync(path.join(dir, `${c.base}.source.json`), JSON.stringify({
       kind: "ranking", rankingKey: c.key, year: best.year, unit: c.unit, label: c.label,
       transform: `raw値 ÷${c.scale} (記事は${c.unit}表記) + 上位5下位5抽出`,
-      source: `r2:app/ranking/${c.key}/values.json`,
+      source: `r2:${rankingR2Key(c.key, "values")}`,
       upstream: "metric config → e-Stat → R2 app/ranking",
       restore: `node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug ${c.slug} --keys ${c.key} --data-name ${c.base}`,
       verifiedMatchRate: Math.round(best.rate * 100), generatedBy: "resolve-scatter-axes.mjs",
@@ -178,7 +179,7 @@ async function main() {
     fs.writeFileSync(path.join(dir, `${c.base}.source.json`), JSON.stringify({
       kind: "derived", formula: c.formula, numeratorKey: c.numKey, denominatorKey: c.denKey,
       year: best.year, unit: c.unit, label: c.label,
-      source: [`r2:app/ranking/${c.numKey}/values.json`, `r2:app/ranking/${c.denKey}/values.json`],
+      source: [`r2:${rankingR2Key(c.numKey, "values")}`, `r2:${rankingR2Key(c.denKey, "values")}`],
       upstream: "metric config → e-Stat → R2 app/ranking (分子/分母の2指標をエフェメラル計算)",
       verifiedMatchRate: Math.round(best.rate * 100), generatedBy: "resolve-scatter-axes.mjs",
       note: "派生: numKey/denKey×K を各県再計算し json 値と照合して式を確定",

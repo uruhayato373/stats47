@@ -14,7 +14,7 @@
  *   1. ランディングページ (2022年) から統計表の一括 xlsx の直リンクを解決して取得
  *   2. 比較表(1)から 47 都道府県の正答率 + 全国平均 を抽出
  *   3. 検算: 47 都道府県シートの「合計(25問)」行の都道府県値と、全国値(全国平均) が比較表の値と一致 (許容 0.001)
- *   4. .local/r2/app/stats/<key>/values.json へ書き出し (小数第2位)
+ *   4. 観測値の置き場 へ書き出し (小数第2位)
  *
  * 実行: node .claude/scripts/data/fetch-financial-literacy-correct-rate.mjs
  * 正典: .claude/rules/data-provenance-standards.md

@@ -6,7 +6,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { gzipSync } from "node:zlib";
 import { createEstatIngestClient, ESTAT_MAX_CONCURRENCY, planTablePartitions, readAxes, makeSliceKey,
-  type Axis, type EstatIngestClient, type IngestResult } from "../../estat-api/src/ingest.js";
+  type AreaRange, type Axis, type EstatIngestClient, type IngestResult } from "../../estat-api/src/ingest.js";
 import { ESTAT_API_VERSION, type StatsDataCacheEnvelope } from "../../estat-api/src/stats-data/repositories/cache/envelope.js";
 import type { GetStatsDataParams, EstatValue } from "../../estat-api/src/stats-data/types/index.js";
 import { collectReferences } from "./estat-table-inventory.js";
@@ -74,9 +74,17 @@ function* combinations(axes: readonly Axis[], depth: number, selected: Record<st
   for (const code of axis.codes) yield* combinations(remaining, depth - 1, { ...selected, [axis.id]: code });
 }
 
-function queryFor(statsDataId: string, codes: Record<string, string>): GetStatsDataParams {
+function queryFor(statsDataId: string, codes: Record<string, string>, areaRange: AreaRange | null = null): GetStatsDataParams {
   return { statsDataId, ...Object.fromEntries(Object.entries(codes).map(([axis, code]) =>
-    [axis === "tab" ? "cdTab" : `cdCat${axis.slice(3)}`, code])) };
+    [axis === "tab" ? "cdTab" : `cdCat${axis.slice(3)}`, code])),
+    ...(areaRange ? { cdAreaFrom: areaRange.from, cdAreaTo: areaRange.to } : {}) };
+}
+
+function* requests(axes: readonly Axis[], partition: ReturnType<typeof planTablePartitions>) {
+  const ranges: (AreaRange | null)[] = "areaRanges" in partition && partition.areaRanges ? partition.areaRanges : [null];
+  for (const codes of combinations(axes.filter((axis) => partition.partitionAxes.includes(axis.id)), partition.depth)) {
+    for (const areaRange of ranges) yield { codes, areaRange };
+  }
 }
 
 export interface SnapshotFile {
@@ -131,16 +139,16 @@ export async function writeTableSnapshot(meta: TableMetadata, outDir: string, cl
   const emptyPartitions: TableSnapshotManifest["emptyPartitions"] = [];
   let requestCount = 0;
   let failed: unknown;
-  const iterator = combinations(meta.axes.filter((axis) => partition.partitionAxes.includes(axis.id)), partition.depth);
+  const iterator = requests(meta.axes, partition);
   try {
     await Promise.all(Array.from({ length: Math.min(ESTAT_MAX_CONCURRENCY, partition.fileCount) }, async () => {
       while (!failed) {
         const item = iterator.next();
         if (item.done) return;
         try {
-          const codes = item.value;
-          const key = makeSliceKey(meta.statsDataId, meta.axes, codes, partition.depth, meta.prefDim);
-          const result = await client.fetchAll(queryFor(meta.statsDataId, codes));
+          const { codes, areaRange } = item.value;
+          const key = makeSliceKey(meta.statsDataId, meta.axes, codes, partition.depth, meta.prefDim, areaRange);
+          const result = await client.fetchAll(queryFor(meta.statsDataId, codes, areaRange));
           requestCount += result.requestCount;
           if (!result.response) { emptyPartitions.push({ key, params: result.params }); continue; }
           const data = result.response.GET_STATS_DATA.STATISTICAL_DATA;
@@ -153,6 +161,7 @@ export async function writeTableSnapshot(meta: TableMetadata, outDir: string, cl
               const code = row[`@${axis.id}` as keyof EstatValue];
               if (!code || !axis.codes.includes(code)) throw new Error(`Unexpected coordinate: ${axis.id}=${code}`);
               if (codes[axis.id] !== undefined && codes[axis.id] !== code) throw new Error("Response escaped partition filter");
+              if (areaRange && axis.id === "area" && (code < areaRange.from || code > areaRange.to)) throw new Error("Response escaped area range");
               return code;
             }).join("\u0000");
             if (coordinates.has(coordinate)) throw new Error("Duplicate VALUE coordinate");

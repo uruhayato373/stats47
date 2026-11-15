@@ -1,0 +1,778 @@
+{
+  "datasetId": "nier-gakuryoku-achievement",
+  "versions": [
+    {
+      "schemaVersion": 1,
+      "datasetId": "nier-gakuryoku-achievement",
+      "version": "2025",
+      "sha256": "22c72a4ddc3cba536bc2c4ca07f852b057a381667d3f9eeb3df885845eec4fe3",
+      "recipeSha256": "4b5372ad1373c185a67a561c973003c074a424037adf4b7ae3f259883ace48c1",
+      "retrievedAt": "2026-11-15T04:19:31.980Z",
+      "license": {
+        "name": "文部科学省ウェブサイト利用規約 (政府標準利用規約2.0・CC BY 4.0 互換。NIER著作権ページが同規約に従う旨明記)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.mext.go.jp/b_menu/1351168.htm"
+      },
+      "files": [
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0001.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/01_hokkaido/01m_25qs.xlsx",
+          "sha256": "d80f3a6f7745c0434e5e6006fb794857757509c038fde1a397c6f56f63da0859",
+          "bytes": 59394,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:17:59.511Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0002.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/01_hokkaido/01p_25q.xlsx",
+          "sha256": "f1bf48bba65ff60f174911d2025608afc36391bf2bf411cfdf64cbc367d86b64",
+          "bytes": 54648,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:17:59.816Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0003.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/02_aomori/02m_25qs.xlsx",
+          "sha256": "a479c7f740d1fec2ce3cc24cd338b9b8865e0a6887fbf7d9df490eb3bc6364e2",
+          "bytes": 59416,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:00.989Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0004.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/02_aomori/02p_25q.xlsx",
+          "sha256": "68aecda3528c7f5350288f553a309c74527472c4b60750e9d0d1899417c8820c",
+          "bytes": 54627,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:01.986Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0005.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/03_iwate/03m_25qs.xlsx",
+          "sha256": "e405eea504d901273a0ebf576ccc7037660189257a909a73ab45c0e57a90e2af",
+          "bytes": 59437,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:03.159Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0006.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/03_iwate/03p_25q.xlsx",
+          "sha256": "7f4ab7fa4df27dba6f3fabe1abf85646bd8ea40f87971a8057b6dd20c1fdd418",
+          "bytes": 54645,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:03.985Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0007.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/04_miyagi/04m_25qs.xlsx",
+          "sha256": "2b851d406a5b33d74259f122a14281d3885b8a9359e5060e3814439ea193d481",
+          "bytes": 59424,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:04.986Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0008.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/04_miyagi/04p_25q.xlsx",
+          "sha256": "3c3883b2fe95dd13812ff7b0b2c823d8bf2bfc23f62cd1a93677f812eca0cbfb",
+          "bytes": 54676,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:05.986Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0009.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/05_akita/05m_25qs.xlsx",
+          "sha256": "0e8d84b15cbcddd7432fdb3b451e9ac530c2037295b66b2ee94df80e717d3f0b",
+          "bytes": 59398,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:07.159Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0010.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/05_akita/05p_25q.xlsx",
+          "sha256": "d0858ade8f67306bc6f73dc60671f58d9767b350426d583fd0110be3f2946773",
+          "bytes": 54622,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:07.988Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0011.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/06_yamagata/06m_25qs.xlsx",
+          "sha256": "24ecd0ba01ac9c8d7781e538462b83c463a682fe53489f87002fdc5d4069925d",
+          "bytes": 59413,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:08.987Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0012.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/06_yamagata/06p_25q.xlsx",
+          "sha256": "ea40ce8c68804fd830b2a5312e0ce49c2c647230eb9ef773c6cfe4aeacc82fce",
+          "bytes": 54628,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:09.986Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0013.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/07_fukushima/07m_25qs.xlsx",
+          "sha256": "1577bb165e333a9e89f08b2300a0c5ad70eda9c5a7261660b63ba65f9b10a9a5",
+          "bytes": 59454,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:11.160Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0014.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/07_fukushima/07p_25q.xlsx",
+          "sha256": "c45977a853eeb79bdb8947db2b9bf910f023797607a094d278b2735f0bd61f8f",
+          "bytes": 54681,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:11.986Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0015.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/08_ibaraki/08m_25qs.xlsx",
+          "sha256": "15c578b2fd2fcb8a7013844f17d2a70ddacd7bbd9ef1b2bc1c6abc913f716be8",
+          "bytes": 59427,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:12.985Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0016.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/08_ibaraki/08p_25q.xlsx",
+          "sha256": "ff9c38320169759f217de7b9ba52988bbed8327b96ed0d8c030c8e55e3fc3fff",
+          "bytes": 54635,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:13.986Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0017.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/09_tochigi/09m_25qs.xlsx",
+          "sha256": "2af6d33a1bef88ee2cf0894b794b01af9cb4687cf754673d1d77a3fec189ea0b",
+          "bytes": 59380,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:15.159Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0018.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/09_tochigi/09p_25q.xlsx",
+          "sha256": "6f1119a5aaa88b8447ff9aa4e3ea0f06bd114526b5227972b29240a3d822d0f5",
+          "bytes": 54638,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:15.986Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0019.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/10_gunma/10m_25qs.xlsx",
+          "sha256": "09fdbc0dcde221c45d70596bcf57445754a34f2a187f38c393f9b2dd5638c360",
+          "bytes": 59398,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:16.987Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0020.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/10_gunma/10p_25q.xlsx",
+          "sha256": "ae33ffd60a3629ef494822336b08680245ce70d940f9db47b09ef365c9c6d312",
+          "bytes": 54628,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:17.988Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0021.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/11_saitama/11m_25qs.xlsx",
+          "sha256": "33b02e40ab73cc351ae102e62069c1899c003a33ec4c9ec14667b1d4fb2792fc",
+          "bytes": 59423,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:19.162Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0022.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/11_saitama/11p_25q.xlsx",
+          "sha256": "95135ca885e948497413dcb858d66facdba64b17e12209aa8d5e1595f469d656",
+          "bytes": 54660,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:19.989Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0023.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/12_chiba/12m_25qs.xlsx",
+          "sha256": "f9f4acc9096fde04e056054e8ec689f4ddc65ed6066331a0ed2436bdf43d6079",
+          "bytes": 59438,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:20.990Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0024.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/12_chiba/12p_25q.xlsx",
+          "sha256": "c4ce5c5a2547d266af8e82f888c77fbc5c4c7b1c04737421959bac5c0c6f68b2",
+          "bytes": 54609,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:21.990Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0025.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/13_tokyo/13m_25qs.xlsx",
+          "sha256": "e38bbb499a7db661db1687cd1ee49d1f63024f2c2d1d93f6ccae9e6feece58f3",
+          "bytes": 59429,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:23.163Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0026.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/13_tokyo/13p_25q.xlsx",
+          "sha256": "9ea771b35b9eb8cf84ed885452da56f5ab2c6688df92195299314e73e6e7d568",
+          "bytes": 54670,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:23.990Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0027.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/14_kanagawa/14m_25qs.xlsx",
+          "sha256": "71589a7dd2ed5819f14f43dd53913478673a5ebe2188da8a85cef520ffa50a13",
+          "bytes": 59443,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:24.991Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0028.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/14_kanagawa/14p_25q.xlsx",
+          "sha256": "1385539532f35ebacb16907764ebe911bb8c4b6af0db14140f0a082f3680601b",
+          "bytes": 54654,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:25.992Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0029.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/15_niigata/15m_25qs.xlsx",
+          "sha256": "0fd0655c99901aebb82dfc598d4ca54203842dcd3702b1697513cd0baaa09a0e",
+          "bytes": 59417,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:27.164Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0030.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/15_niigata/15p_25q.xlsx",
+          "sha256": "fccf397fb4091e1d2c8c05bac0333811008f36d107757bbb4a981509df3fd05f",
+          "bytes": 54664,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:27.993Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0031.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/16_toyama/16m_25qs.xlsx",
+          "sha256": "040bc18e0310b9e71efab617a176c268cd6d8f620eadc3ec03e92efc29e4b1bf",
+          "bytes": 59381,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:28.993Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0032.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/16_toyama/16p_25q.xlsx",
+          "sha256": "5611fcf0d37ae23a05c3f42e5c35b0b1c8c084e09724baf42ad83a5d611cd8f4",
+          "bytes": 54637,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:29.991Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0033.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/17_ishikawa/17m_25qs.xlsx",
+          "sha256": "7b828f406526e0726af3e3d25b31fecf8f6e72aa91c1090c7841c60c431bc83e",
+          "bytes": 59405,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:31.166Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0034.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/17_ishikawa/17p_25q.xlsx",
+          "sha256": "08ef786543957db63b7eed76e3d808dea95513fe44a85b06487d27091d2d24c8",
+          "bytes": 54647,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:31.995Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0035.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/18_fukui/18m_25qs.xlsx",
+          "sha256": "6ad57166ab898e64f0c012022fe8f3b0f0dbc937aa6f60940097d5b33534b348",
+          "bytes": 59417,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:32.991Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0036.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/18_fukui/18p_25q.xlsx",
+          "sha256": "5569334cf2aa2701b843189a3d5edb60059dd2a8e998718f5d54b581867af45c",
+          "bytes": 54644,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:33.990Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0037.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/19_yamanashi/19m_25qs.xlsx",
+          "sha256": "c5241795fcef70cc99316c5020bedf7ebf1cb48fc84a77c666ccd9c2c825af21",
+          "bytes": 59466,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:35.165Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0038.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/19_yamanashi/19p_25q.xlsx",
+          "sha256": "8ffe243d5a8bfc9a9af213044872688a655de93dcc7654d92731b057f603c122",
+          "bytes": 54648,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:35.991Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0039.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/20_nagano/20m_25qs.xlsx",
+          "sha256": "968391832305cfe6d8042bc161e1961d1a870a3cc406971d6cdf83e95aaabdcf",
+          "bytes": 59440,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:36.989Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0040.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/20_nagano/20p_25q.xlsx",
+          "sha256": "1adb8692c33f293cf85a9ae70c28eb452dc76186219dd93e7ae11e2548ebebc2",
+          "bytes": 54637,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:37.989Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0041.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/21_gifu/21m_25qs.xlsx",
+          "sha256": "9ce200d90643620f1c4043ebbe6c213c7b44d40ff83f06e59fa5e192f4d902d2",
+          "bytes": 59437,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:39.164Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0042.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/21_gifu/21p_25q.xlsx",
+          "sha256": "d00d420c06a9c2204fe63bc7259e25ce7488a3f48155f03b96e7b5081da8294d",
+          "bytes": 54650,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:39.990Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0043.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/22_shizuoka/22m_25qs.xlsx",
+          "sha256": "7fcc63a46c150f2546447d5fb14fe37bd0dc13314201e0ca56bb451375c9b34e",
+          "bytes": 59455,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:40.989Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0044.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/22_shizuoka/22p_25q.xlsx",
+          "sha256": "4f6332657b2f5a9982682fb0ab0c71be9f7423a61e3bf4e8a42ab225cf74bed7",
+          "bytes": 54657,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:41.989Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0045.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/23_aichi/23m_25qs.xlsx",
+          "sha256": "792a5f412a414b1de3b63caf2c54faaaa793e9d27ee46a0637736dd5b1d9720f",
+          "bytes": 59418,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:43.162Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0046.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/23_aichi/23p_25q.xlsx",
+          "sha256": "d14cc33000cb831a1b8e0e8c56da923e065fa4eb006f550d9c03a751d3d577c0",
+          "bytes": 54629,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:43.990Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0047.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/24_mie/24m_25qs.xlsx",
+          "sha256": "dbdb6cefc3f593d2e22dd1647084954dce5b2d9b5fed7857a8fa11e5df38d95e",
+          "bytes": 59454,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:44.990Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0048.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/24_mie/24p_25q.xlsx",
+          "sha256": "e7d81fe4418e6b568e7385a5e768fba9a828d821e311b15280f2a73ccf71a887",
+          "bytes": 54645,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:45.989Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0049.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/25_shiga/25m_25qs.xlsx",
+          "sha256": "3c7f0c24eb7c1b98d09cb840701d9a732f51e029a9c5c021ba58f2ee1373e7b0",
+          "bytes": 59437,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:47.160Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0050.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/25_shiga/25p_25q.xlsx",
+          "sha256": "4a83a93eb99f2cd416b7593691255df6083bb864314ce12667dfd516ee7c3c86",
+          "bytes": 54663,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:47.988Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0051.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/26_kyoto/26m_25qs.xlsx",
+          "sha256": "9d6a9b5f2d2daf33abaeef64ebffacb2ff0962f54530a85dd9a83e42677b85ba",
+          "bytes": 59391,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:48.987Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0052.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/26_kyoto/26p_25q.xlsx",
+          "sha256": "7c76caa5672c54d1a95c1602abfe88342b94ca6fd8889bfa2f3c58e0614a4a29",
+          "bytes": 54666,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:49.987Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0053.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/27_osaka/27m_25qs.xlsx",
+          "sha256": "2ccffe22d268daaecab9a327b222aeca929275e261cfde937f1aeefcf054b04d",
+          "bytes": 59414,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:51.159Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0054.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/27_osaka/27p_25q.xlsx",
+          "sha256": "b267a0565f3511eec3b2fadd7799ad7b8760a01c713f7ca1aacc4557edf0019f",
+          "bytes": 54650,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:51.984Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0055.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/28_hyougo/28m_25qs.xlsx",
+          "sha256": "01bd8381fe121c5ff3a3442b7f2c3be60561a075f2bb9521513ecd781944e450",
+          "bytes": 59396,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:52.984Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0056.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/28_hyougo/28p_25q.xlsx",
+          "sha256": "ec209fa0f66287499ac98c8adf9d200ea9dcda4e2ae4d21b748b214e59492f00",
+          "bytes": 54642,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:53.982Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0057.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/29_nara/29m_25qs.xlsx",
+          "sha256": "fa4899fb5ac888624f196899534d5544ed128bff3efd608d85a1cc934ea3b987",
+          "bytes": 59422,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:55.154Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0058.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/29_nara/29p_25q.xlsx",
+          "sha256": "b411b5772883e4de38972e39aed4d0f9f1edc20e923fcf47f5bb79587b2fb67c",
+          "bytes": 54620,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:55.981Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0059.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/30_wakayama/30m_25qs.xlsx",
+          "sha256": "bb77f33f1887ec52988cec41ef4d09955e89d1d389b6a597f70a3bb2f81dedbf",
+          "bytes": 59429,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:56.983Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0060.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/30_wakayama/30p_25q.xlsx",
+          "sha256": "68ecc979b5cdd67598abefb68ec8515cd0cf2a8b3fbabff12fab88e72e033e83",
+          "bytes": 54636,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:57.980Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0061.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/31_tottori/31m_25qs.xlsx",
+          "sha256": "d3a789f559a1806cf6d6fa7293300a6e79781f66868425944286ece76c7bbc86",
+          "bytes": 59429,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:59.152Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0062.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/31_tottori/31p_25q.xlsx",
+          "sha256": "9c5fcbd5bd96c517de9d2eb6881d635a41219560281cdec960ed1b69cbc826fb",
+          "bytes": 54633,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:18:59.981Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0063.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/32_shimane/32m_25qs.xlsx",
+          "sha256": "d1626ceeab9fa4c23ca876da3aa6e6af1ae3fded30590ce2426db2ddb9cf1d31",
+          "bytes": 59456,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:00.978Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0064.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/32_shimane/32p_25q.xlsx",
+          "sha256": "221671cbefd6ec74580259256eedcd27d58d01bbd5811255dc487c2b9ab32bc4",
+          "bytes": 54635,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:01.979Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0065.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/33_okayama/33m_25qs.xlsx",
+          "sha256": "0f37166483c6a9332c7030a57e371676820193eb024153ec4d3d673282f95546",
+          "bytes": 59387,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:03.153Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0066.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/33_okayama/33p_25q.xlsx",
+          "sha256": "42cbc4b0d89c15f510eac20e44dff378067aba0c6ede42bb871bc6bb2b82ecd3",
+          "bytes": 54633,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:03.979Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0067.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/34_hiroshima/34m_25qs.xlsx",
+          "sha256": "64dd29fed1fbc6279a072c81aaa53e28d4cc6c1e77c2dd2f97010623dc4b9b8b",
+          "bytes": 59431,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:04.980Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0068.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/34_hiroshima/34p_25q.xlsx",
+          "sha256": "2615e998a3d2dff07eb7ef7b8ce521b82916bf0b80046e6ab2b1e66e307571cb",
+          "bytes": 54635,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:05.982Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0069.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/35_yamaguchi/35m_25qs.xlsx",
+          "sha256": "10071179640e0db9dce5ad94af83aec2ce5ed923621cacfd180909e3e8266b2c",
+          "bytes": 59434,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:07.153Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0070.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/35_yamaguchi/35p_25q.xlsx",
+          "sha256": "dbb18610fdf0a655a219ee23bc2d995263f285f393330272364108c7b079255b",
+          "bytes": 54652,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:07.979Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0071.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/36_tokushima/36m_25qs.xlsx",
+          "sha256": "b929edb9d9417758189874d9f0b8781268f71aa08656b302bf02e157712a7b87",
+          "bytes": 59389,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:08.981Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0072.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/36_tokushima/36p_25q.xlsx",
+          "sha256": "122be7eeeb7a2027c33a399ebdd4944289ca9be02451bfe4deb72db2be67adee",
+          "bytes": 54663,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:09.978Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0073.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/37_kagawa/37m_25qs.xlsx",
+          "sha256": "dfe54bf1cf0ca56515c034389599b122e14a5a124c119c60a78407f6f509b8b7",
+          "bytes": 59425,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:11.152Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0074.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/37_kagawa/37p_25q.xlsx",
+          "sha256": "c98b48ff11bf4013ded9b1e308bf3c4bf625820f49e48be44ef0908e19f88736",
+          "bytes": 54633,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:11.978Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0075.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/38_ehime/38m_25qs.xlsx",
+          "sha256": "e525edb093020ebdb86147797fa3ed222fef5264285bd4dcba6bb6d4358b8ced",
+          "bytes": 59432,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:12.979Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0076.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/38_ehime/38p_25q.xlsx",
+          "sha256": "dd0a6832540c6db98ff2e137e8d9afb0f282feeafd9d2dcd776f00ade1518bb1",
+          "bytes": 54636,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:13.981Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0077.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/39_kouchi/39m_25qs.xlsx",
+          "sha256": "1d02e90ac2d8967481112473be243a2ab1664b3d47be2b2a537b3e972ce1db1b",
+          "bytes": 59445,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:15.153Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0078.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/39_kouchi/39p_25q.xlsx",
+          "sha256": "9c4ab0c9389a970c194f5aff40d148bc0df68f31dde44dd6a6915790248619a3",
+          "bytes": 54651,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:15.980Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0079.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/40_fukuoka/40m_25qs.xlsx",
+          "sha256": "eb7c0357adc68e5163bf05776107c3c664fa6badbc00aa201847bd1b64ea0171",
+          "bytes": 59405,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:16.981Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0080.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/40_fukuoka/40p_25q.xlsx",
+          "sha256": "c23c235600b41015b1469809ecc94166969ef32c7f377a37d2c765db045a58c8",
+          "bytes": 54632,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:17.979Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0081.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/41_saga/41m_25qs.xlsx",
+          "sha256": "4d75e5da56695fec3a133ab8b7f4e7d953bdfdc90c3391fc06c86da1dd0e4468",
+          "bytes": 59428,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:19.153Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0082.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/41_saga/41p_25q.xlsx",
+          "sha256": "72aefbc0632ef23bdd8593dd24e762744564ab4642ffdfb2896de5d0084214bb",
+          "bytes": 54639,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:19.981Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0083.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/42_nagasaki/42m_25qs.xlsx",
+          "sha256": "0a31c3a5d53f6fc735ff4661e24a2f2b0c061b46a14d50dd62de289705a797a0",
+          "bytes": 59424,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:20.981Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0084.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/42_nagasaki/42p_25q.xlsx",
+          "sha256": "ac0405bf25575fdc80a7b1e4b0bb6d7ad3a578030817e4384affd3f0938f5caa",
+          "bytes": 54631,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:21.981Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0085.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/43_kumamoto/43m_25qs.xlsx",
+          "sha256": "f29a256384a11d6861df3c2a3116bbe665db4615da2d15eb1c73d2791eba0415",
+          "bytes": 59416,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:23.153Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0086.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/43_kumamoto/43p_25q.xlsx",
+          "sha256": "53951c9b4f0af4c4db7831a23e74e1bc9769a7becad49799a740b4528047e178",
+          "bytes": 54656,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:23.981Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0087.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/44_ohita/44m_25qs.xlsx",
+          "sha256": "409c12ca2041023d6eb40fc7a2ab6ae5fe7902f38376ae6f4e099b666108e3e4",
+          "bytes": 59434,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:24.978Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0088.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/44_ohita/44p_25q.xlsx",
+          "sha256": "ba9efeb28f27e80535cdb5426ad59dc78ec6fa200f6c02f3ac5088f300312082",
+          "bytes": 54646,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:25.979Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0089.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/45_miyazaki/45m_25qs.xlsx",
+          "sha256": "81d0bbab667e298edcab698201268a20dc9319a8b417dd9eccc507ee440134b7",
+          "bytes": 59420,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:27.154Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0090.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/45_miyazaki/45p_25q.xlsx",
+          "sha256": "a5c22e57ea1f0df115895848162b77b7b3896b925af3d3b928228ba04ebbce67",
+          "bytes": 54644,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:27.980Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0091.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/46_kagoshima/46m_25qs.xlsx",
+          "sha256": "24ba594196884e84dd738629ec2c78a5e86f4c1b577b9e67be2dc73c4ccf5aa1",
+          "bytes": 59452,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:28.983Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0092.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/46_kagoshima/46p_25q.xlsx",
+          "sha256": "492e5d86c98be31f9b124d5331eee829e93a8ad6149db84882e7fbf4f1fcca92",
+          "bytes": 54663,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:29.981Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0093.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/47_okinawa/47m_25qs.xlsx",
+          "sha256": "da2d910be28163cbea3899d07c7a595ef22e6166af2248efa072f4523ad3dad9",
+          "bytes": 59426,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:31.153Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-achievement/2025/0094.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/47_okinawa/47p_25q.xlsx",
+          "sha256": "299bd690b1969f69b3f3091abd019aec1a87a64595043018a3745abdde1220f6",
+          "bytes": 54660,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:19:31.979Z"
+        }
+      ],
+      "manifestKey": "open-data/raw/nier-gakuryoku-achievement/2025/manifest.json",
+      "manifestSha256": "739129d0396ee4f0b60f169821649617312097c2ff82dc4954662f79df20c130",
+      "bytes": 5361184,
+      "status": "archived"
+    }
+  ]
+}

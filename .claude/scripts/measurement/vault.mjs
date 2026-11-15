@@ -1,5 +1,6 @@
+import { createR2S3Client } from "../../../packages/r2-storage/src/lib/clients/r2-s3-client.mjs";
 import { createCipheriv, createDecipheriv, createHash, randomBytes } from 'node:crypto';
-import { S3Client, GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3';
+import { GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3';
 import { R2_PRIVATE_BUCKET } from '../lib/site-config.cjs';
 
 export const BUCKET = R2_PRIVATE_BUCKET;
@@ -25,9 +26,7 @@ export function decrypt(bytes, key, address) {
   return Buffer.concat([decipher.update(bytes.subarray(28)), decipher.final()]);
 }
 function client() {
-  return new S3Client({ region: 'auto', endpoint: process.env.R2_S3_ENDPOINT, credentials: {
-    accessKeyId: process.env.R2_ACCESS_KEY_ID, secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
-  } });
+  return createR2S3Client();
 }
 function objectKey(key) {
   if (!/^[a-z0-9][a-z0-9/_.-]+$/.test(key) || key.includes('..')) throw new Error('vault_invalid_key');

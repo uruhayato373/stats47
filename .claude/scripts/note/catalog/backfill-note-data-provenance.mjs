@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { rankingR2Key } from '../../lib/r2-keys.mjs';
 /**
  * note ランキング記事に「データ復元マニフェスト」(data-provenance.json) を後付けする backfill。
  *
@@ -184,8 +185,8 @@ export async function backfillArticle(article, { stores, known, fetchValues, roo
     rankingKey: best.key,
     year: best.year,
     charts,
-    source: `r2:app/ranking/${best.key}/values.json`,
-    restore: `curl -sf ${R2}/app/ranking/${best.key}/values.json`,
+    source: `r2:${rankingR2Key(best.key, "values")}`,
+    restore: `curl -sf ${R2}/${rankingR2Key(best.key, "values")}`,
     verifiedMatch: { rank1: best.match1, rank47: best.match47, year: best.year },
     generatedBy: "backfill-note-data-provenance.mjs",
     note: "データ本体は stats47 R2 が SSOT。本ファイルは復元マニフェスト (コピーではない)。",
@@ -234,7 +235,7 @@ async function main() {
     backfillArticle(article, {
       stores: hasStoredBody(article) ? createArticleStores(article) : null,
       known,
-      fetchValues: (key) => fetchJson(`${R2}/app/ranking/${key}/values.json`),
+      fetchValues: (key) => fetchJson(`${R2}/${rankingR2Key(key, "values")}`),
       root: ROOT,
     }),
   );

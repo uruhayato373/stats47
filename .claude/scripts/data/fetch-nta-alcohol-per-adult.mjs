@@ -19,7 +19,7 @@
  *      - 公表「合計」が14区分の和と一致 / 全国計(Kl)の公表値が46県の和と一致
  *   4. 検算 (令和4年度=2022年度、2024年版): 量の元表を持たないため、各県の「合計」=14区分の和 (許容 0.02L) と
  *      全国平均が県の最小〜最大の範囲内であることを確認
- *   5. .local/r2/app/stats/<key>/values.json へ書き出し (3桁丸め)
+ *   5. 観測値の置き場 へ書き出し (3桁丸め)
  *
  * 実行: node .claude/scripts/data/fetch-nta-alcohol-per-adult.mjs
  * 正典: .claude/rules/data-provenance-standards.md

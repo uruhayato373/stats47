@@ -1,3 +1,4 @@
+import { statsR2Key } from "../lib/r2-keys.mjs";
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { execFile } from 'node:child_process';
@@ -118,7 +119,7 @@ async function main() {
     assert.equal(config.unit, field === 'rate' ? '%' : '局');
     const rows = result.rows.flatMap((row) => row.values.map((entry) => ({ areaCode: row.areaCode, areaName: row.areaName, yearCode: String(entry.year), yearName: `${entry.year}年度`, value: entry[field], unit: config.unit })));
     const payload = parseStatsValuesPayload({ metricKey: key, entityKind: 'prefecture', rows, meta: { generatedAt, rowCount: 141, areaCount: 47, yearRange: ['2022', '2024'], recipe: buildRecipe(config) } });
-    return { key: `app/stats/${key}/values.json`, metricKey: key, bytes: JSON.stringify(payload) };
+    return { key: statsR2Key(key, "prefecture"), metricKey: key, bytes: JSON.stringify(payload) };
   });
   const files = [];
   for (const payload of payloads) {

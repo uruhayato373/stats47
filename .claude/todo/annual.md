@@ -23,7 +23,7 @@ updated: 2026-11-14
   3. 概要zipに「確認」列があれば `ingest-gsc-export.py` に足す。
   4. KPIの値が6,729 / 8,706と同じ桁で `data/measurement-cycle/LATEST.md` に出るかを確かめる。
   5. 送信済みビューの理由別ドリルダウンも週次の取得に足す。
-- **効果観測の登録 (improvementsの枠待ち)**: activeが5 / 5で空きが無い。枠が空いたら `improvement-triage` で `GSC-THEME-POST-EFFECT-01` (`[kpi: operating-cost]`・`[target: -262 requests]`・期日2026-11-18、基準は11-10〜11-11の24時間のテーマPOST 262件、観測は `data/cloudflare/snapshots/<日付>.json` の `googlebot`) と `GSC-SUBMITTED-INDEX-EFFECT-01` (`[kpi: index-coverage-rate]`・targetなし・期日2026-12-09、基準は登録6,729・未登録1,977) を足す。最短は11-14のnote取得の後に `NOTE-FISCAL-PEER-SALES-01` を判定して閉じること。詳細は `data/improvement/gsc-improvement/improvement-log.md`。
+- **効果観測の登録 (improvementsの枠待ち)**: activeが5 / 5で空きが無い。枠が空いたら `improvement-triage` で `GSC-THEME-POST-EFFECT-01` (`[kpi: operating-cost]`・`[target: -262 requests]`・期日2026-11-18、基準は11-10〜11-11の24時間のテーマPOST 262件、観測は `data/cloudflare/snapshots/<日付>.json` の `googlebot`) と `GSC-SUBMITTED-INDEX-EFFECT-01` (`[kpi: index-coverage-rate]`・targetなし・期日2026-12-09、基準は登録6,729・未登録1,977) を足す。`NOTE-FISCAL-PEER-SALES-01` は11-15に判定不能で、期日を12-07へ延ばしたため枠は空かない。最短は `RELATED-ARTICLES-EFFECT-01` など他の施策を判定して閉じること。詳細は `data/improvement/gsc-improvement/improvement-log.md`。
 - **元の順序の残り**: sourceごとに観測日・取得日・母集団・標本数・欠測を照合し、最新coverageを既存CSV/manifest gateで取り込むか部分UI監査 (`data/gsc/ui-audits/2026-10-16.json`) を補助証拠に留めるかを決める。HTTP/sitemap collectorの出力との接続を検証して既存キューを保持したまま再構築し、修正版のmain週次CIで新queueとsourceの取得範囲を照合する。集計期間はsearch-growthのObservationと元summaryで照合し、週フォルダ名から推定しない。owner は gsc-analyst。
 - **停止条件**: UI例示を全件データと扱わない。欠測を0で埋めない。認証情報を監査JSONへ保存しない。古い入力で新しい状態を巻き戻さない。pendingを母集団の違う旧件数と単純比較しない。
 - **完了条件**: 各sourceの鮮度・取得範囲・成功/部分成功/欠測が追跡でき、キュー更新の前後差分とgate結果が残る。source未取得を成功扱いしない。
@@ -180,6 +180,34 @@ updated: 2026-11-14
 - **確認**: 最初の run で、処理した 2 件が queue の先頭と一致し、ledger の evidence に選んだ理由が入っている。先頭に並ぶ 2026-10-11 起票の UI-FIX-* 9 枚が、その後の週次の監査で出し直されていない古い指摘なら、先に閉じる。
 - **完了条件**: 週次の run が 2 週続けて成功し、処理したカードが優先順位どおりである。
 
+### [SEO-KEYWORD-EDITABLE-PATH-01] キーワード改善サイクルが ranking / themes の定義ファイルを見つけられず、改善案を自動適用できない
+タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [起票:2026-10-19] [領域:サイト] [期日:2026-11-21] [待ち:観測]
+
+- **経緯**: `.claude/scripts/search-growth/keyword-cycle.mjs` の `editableFile()` が古い置き場 (`packages/data-configs/src/{metrics,theme-catalog}/<key>.ts`) を探していたため、`/ranking/*`・`/themes/*` 向けの改善案はすべて `editableFile: null` の提案だけの PR になっていた。実際の定義は ranking が `data/metrics/<key>.ts`、テーマが `data/themes/catalogs/<key>.json`。
+- **済み (2026-10-19)**: `editableFile()` を現在の置き場へ直し、テスト (`keyword-cycle.test.mjs` の 3 件) を足した。
+- **残り**: main へ入った後の `seo-keyword-cycle-daily` で、ranking 向けの案が `editableFile` 付きで出るかを確かめてからカードを削除する。テーマは JSON なので、置換処理が JSON を扱えるかも確かめる。
+- **禁止**: 自動適用の対象を広げる目的で、検査や `validate:config` を緩めない。
+- **完了条件**: `/ranking/general-hospital-count` と既存テーマ 1 件で `editableFile()` が実在ファイルを返すテストが通り、次回の `seo-keyword-cycle-daily` で ranking 向けの案が `editableFile` 付きで出る。
+- **本番反映 (2026-11-15・#1275)**: 次の `seo-keyword-cycle-daily` (土曜 06:00 JST、2026-11-21) の結果で、ranking 向けの案が `editableFile` 付きで出るかを確かめる。
+
+### [GSC-DEMAND-REPORT-01] 「何にアクセスが集まっているか」に記録 1 枚で答えられるよう、GSC 記録をカテゴリ別・長期で集計して残す
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-29] [領域:管理] [期日:2026-11-29] [待ち:観測]
+
+- **済み (2026-11-14・c4d00304e)**: 長期の集計 data/gsc/demand-history.csv (重ならない 28 日窓 7 個) と、需要の要約 DEMAND-LATEST.md を作りました。どちらも metrics:digest が毎週作り直します。確定 7 日の明細を保存する取得処理も実装済みです。
+- **残り**: main への反映後、週次 CI (fetch-metrics-weekly) が、確定 7 日の明細 queries-finalized7d.csv と pages-finalized7d.csv を保存するかを確かめます。あわせて、summary.json の details に、期間と捕捉率が入るかを確かめます。2 週続けて保存された後、DEMAND-LATEST.md の「3. 前週比」にカテゴリ別の表が出て、data/gsc/demand-weekly.csv ができることを確かめます。demand-weekly.csv ができたら、config/datasets.mjs の gsc.demand-weekly から planned を外します。
+- **完了条件**: 連続する 2 週の snapshot に確定 7 日の明細がそろい、DEMAND-LATEST.md にカテゴリ別の前週比の表が出ていること。demand-weekly.csv が台帳に planned なしで登録され、npm run check-datasets が通ること。
+- **本番反映 (2026-11-15・#1275)**: 11-21・11-28 の週次 CI (fetch-metrics-weekly) で確定 7 日の明細が 2 週続けて保存されたかを 2026-11-29 に確かめる。
+
+### [SNS-WEEKLY-REPORT-MIRROR-01] SNS 週次レポートの workflow が Codex ミラーのリンクを足さず develop の品質ゲートを落とす
+タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/lib/check-agent-skill-consistency.cjs --no-orphan] [起票:2026-10-26] [期日:2026-11-16] [待ち:観測]
+
+- **症状**: `sns-weekly-report.yml` はレポートだけを `git add` し、`.agents/` のミラーのリンクが入らない。W43 (`2df9acbe6`) で整合性検査 E12 が出て品質ゲート run 40251621046 が失敗した (`467802415` で手で直した)。
+- **次**: 書き戻しの前に `node .claude/scripts/lib/sync-codex-mirror.cjs` を実行し、`.agents/skills/sns/sns-weekly-report/reference/reports` も `git add` に入れる。
+- **完了条件**: 手動起動でレポートとリンクが同じコミットに入り、次の品質ゲートで E12 が出ない。
+- **2026-10-26 実装 (develop・main 未反映)**: 書き戻しの前に `sync-codex-mirror.cjs` を実行し、`.agents/` のレポートの置き場も `git add` に入れた。手元の `sync-codex-mirror --check` と整合性検査 (`--no-orphan`) は通る。workflow の変更は main へ反映されるまで動かないので、完了条件 (手動起動でレポートとリンクが同じコミットに入る) は main 反映後の次の起動で確かめる。
+- **前提の変化 (2026-11-14・`550309b88`)**: レポートは skill の配下を出て `data/sns/weekly-reports/` に入り、workflow は Codex 用ミラーの再生成と `.agents/` の git add をしなくなった。完了条件は「手動起動でレポートが `data/sns/weekly-reports/` に入り、次の品質ゲートで E12 が出ない」に読み替える。
+- **本番反映 (2026-11-15・#1275)**: 次の `sns-weekly-report` (日曜 21:00 JST、2026-11-15) の run で、レポートが `data/sns/weekly-reports/` に入り、その後の品質ゲートで E12 が出ないかを 2026-11-16 に確かめる。
+
 ## 2026-12
 
 ### [THEME-PAGE-REVIEW-HELD-01] 測定中の実験がある 17 テーマの提案を、判定を踏まえて採否を決めて実装する
@@ -227,6 +255,7 @@ updated: 2026-11-14
 - **子カード (実行順)**: 🔴 `MUNI-DATA-LICENSE-CHECK-01` (販売条件) → 売って計測 (2026-11-04 に note ¥980 で販売開始・ランキングに案内。6 週の計測は `data/business/experiments.json` の EXP-007 が running で持つ。判定日 2026-12-16。週次で案内のクリックと note の販売数を読み、判定日に本カードの基準で続ける・変える・止めるを決める)。次の候補 🟢 `MUNI-PEER-DATASET-01` (EXP-012) は本カードの判定後。
 - **次 (実行順)**: ① 製造品出荷額の市区町村データを最新境域へ組み替えた時系列と、結合済み GeoJSON を作る (既存の cities 指標と ETL を使う。出典・年次・組替の注記を付ける) ② 価格と販売面 (stats47 の note) を決める ③ 該当ページに「このデータを CSV＋地図データで」の1行 CTA を置き、`nav_click` で計測する ④ オーナー承認と人手ログインで公開し、6週の CTA クリックと販売を販売台帳 (`npm run products:sales --workspace=@stats47/product-factory`) に記録する。
 - **データ完成 (2026-11-04)**: `node --import tsx .claude/scripts/products/build-muni-data-product.mjs --metric manufacturing-shipment-amount --skip-geo` で `.local/muni-data-products/manufacturing-shipment-amount/` に CSV (1,719 自治体 × 44 年 = 75,636 行)・区の別表 (8,536 行)・検算表・README・境界 GeoJSON (1,719 地物) がある。全国合計は 2,068 件の照合で未説明の差 0 件、2023 年の差は 0.02%。e-Stat の記号は CI (`muni-data-symbols.yml`) で取り込み済みで、X 1,801・− 2,473、R2 との値の差 0 件、統計表は 0000020203。頂点の 5% 間引きは見た目で決めた暫定値で、県境の隙間の量は測っていない。公開リポジトリなので販売物を CI の artifact に載せない。2 テーマ目は specs に 1 件足す。
+- **価格変更との混在 (2026-11-15 記録)**: 2026-11-10 に価格実験 `PRICE-MUNI-INDUSTRY-2026-11` (`data/products/price-history.json`、判定 2027-01-05) が ¥980 を ¥1,980 に上げ、業種別の表・無料部分・題名も同時に変えた。¥980 で売ったのは 11-04〜11-09 の 6 日だけ (閲覧 10・売上 ¥0)。12-16 の判定は ¥1,980 の版の実測として読み、下の基準の「価格を 1 回だけ変えて再判定」は既に使ったものと数える。
 - **判定 (6週)**: CTA クリック率2%以上 (28日でおよそ8クリック) かつ販売3件以上なら、2テーマ目 (財政指標) へ進む。1〜2件なら価格かテーマを1回だけ変えて再判定する。0件ならデータ販売は止め、同じデータを無料配布 (被リンク・権威) に回す。
 - **台帳**: `data/business/experiments.json` の EXP-007。
 - **関係**: `KNOWHOW-PRODUCT-PILOT-01` と並行して出してよい (収益化戦略 §7)。行政の業務向けデータ商品は `ADMIN-STAT-PILOT-01`、市区町村ページの拡大は `MUNI-RANKING-EXPANSION-01`。
@@ -260,6 +289,27 @@ updated: 2026-11-14
 - **やること**: 11-15 から 12-15 までの 1 か月、workflow ごとの実行時間 (run の `updatedAt - createdAt` の合計) を `gh run list` で集計し、非公開プランの無料枠・超過単価と比べる。測るだけで、公開範囲は変えない。
 - **停止条件**: 測定の途中で公開範囲を変えない。実行時間の合計だけを根拠に決めず、公開リポジトリであることに頼っている点 (README・OSS 表記・外部の参照) の洗い出しも同じ判断で行う。
 - **完了条件**: workflow 別の月間実行時間の表と、非公開にした場合の月額の見積もり (単価の出典付き) が残り、非公開にする/しないをオーナーが決めている。
+
+### [RANKING-MAKING-OF-LINK-01] 閲覧の多い雑学ランキングに「このランキングの作り方」の 1 行を置き、ノウハウ記事への導線を測る
+タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-10-07] [領域:商品] [期日:2026-12-13] [待ち:観測]
+
+- **経緯**: `KNOWHOW-PRODUCT-PILOT-01` の「雑学の読者から拾う導線」案 (a)。「年収1000万円」のような事実でない収益の主張の代わりに、作り方への興味という事実に基づく入口を試す。
+- **済み (2026-10-19・未デプロイ)**: ①② を実装した。GSC 2026-W41 の 28 日クリック上位の食の雑学 5 件 (納豆支出・米数量・カップ麺支出・アイスクリーム支出・緑茶数量) の出典の欄の下に `/blog/cc-estat-01-setup` への 1 行を置いた (`RankingMakingOfLink.tsx`、対象は `RANKING_MAKING_OF_KEYS`)。クリックは共通の監視が `nav_surface=ranking_making_of` で数える。
+- **次**: まとめての本番デプロイのあと、③ 4 週のクリック数と、連載から note の有料ノウハウへの遷移を記録する。
+- **停止条件**: 広告のように見せない (PR 表記の要らない、サイト自身の記事への 1 行に留める)。全ランキングに一括で出さない。
+- **完了条件**: 4 週の導線クリック数が記録され、続ける・広げる・やめるの判断が `KNOWHOW-PRODUCT-PILOT-01` に書かれている。
+- **本番反映 (2026-11-15・#1275)**: 納豆の支出のページに `/blog/cc-estat-01-setup` への 1 行が出ていることを Googlebot UA で確認した。4 週のクリック数は 2026-12-13 に読む。
+
+### [RELATED-ARTICLES-BASELINE-01] 共通化した大画像の関連記事を計測し、画像サイズの次の比較を判断する
+タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-11-12] [領域:サイト] [期日:2026-12-13] [待ち:観測]
+
+- **実装記録 (2026-11-12)**: 県・ランキング・テーマの本文を `features/content-navigation/RelatedArticles` に統一。見出し「関連記事」、大画像の `ArticleTeaserCard` と共通 `CardGrid`、表示形式 `related-articles-large-v1`。選定条件は従来どおり。ローカル確認段階で、本番の計測開始日は未確定。
+- **計測契約**: `nav_impression` はカードの 50% 以上が前面タブで連続 1 秒見えたら、ページ表示中のカードごとに 1 回。`nav_click` は共通クリック監視で送り、`nav_label=blog:<slug>`、`nav_surface=area_blog/ranking_blog/theme_blog`、`card_variant` を突合する。ランキング・テーマの旧ラベルは題名だったため、そのまま前後比較しない。短時間のクリックや同じカードの複数クリックは分子に入るので、クリック数/有効表示数はユニーク利用者のクリック確率ではない。
+- **記録先**: 既存の週次 GA4 取得が `data/ga4/snapshots/<週>/related-articles.csv` と `.meta.json` に Japan-only・28 日の記録を保存する。日付・ページ・端末・記事・表示形式ごとの eventCount。重複する週の 28 日値を足さない。新しい認証・管理画面操作は不要。
+- **再開条件・実行順**: ① 通常の本番反映時に反映日をここへ記録 ② 最初の週次取得で metadata 成功と表示/クリックの識別を確認 ③ 反映後だけの 28 日間について、記事別・ページ種別・端末別に表示数とクリック数/有効表示数を記録 ④ 小画像を試す必要があるか判断し、試す場合は共通部品だけを変更して表示形式の版を更新する。
+- **停止条件**: metadata の失敗・分母欠損・標本不足は効果不明とし、0% や大画像の勝利と扱わない。県とランキングは掲載記事・読者が異なるため、単純な差を画像サイズの効果にしない。
+- **完了条件**: 大画像の基準値と限界を記録し、維持または条件をそろえた次の比較を判断する。遷移後の閲読は既存 `read-progress` / `internal-transitions` を補助情報とし、関連記事経由だけの因果効果とは断定しない。
+- **本番反映日 (2026-11-15・#1275)**: 計測の開始日はこの日。最初の週次取得 (11-21) で metadata と表示・クリックの識別を確かめ、反映後だけの 28 日間は 2026-12-13 に読む。
 
 ## 2027-01
 

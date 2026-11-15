@@ -1,3 +1,5 @@
+// Keep HTTP failures as MetaDump error records instead of throwing.
+import { resolveEstatAppId, ESTAT_API, ESTAT_ENDPOINTS } from "../../estat-api/src/ingest.js";
 /**
  * diagnose-unpinned-axes — 形状が壊れた metric について「絞り忘れた分類軸」を機械的に列挙する。
  *
@@ -133,13 +135,7 @@ function parseArgs(): Args {
 }
 
 function readAppId(): string | null {
-  if (process.env.NEXT_PUBLIC_ESTAT_APP_ID) return process.env.NEXT_PUBLIC_ESTAT_APP_ID;
-  const envPath = resolve(REPO_ROOT, ".env.local");
-  if (!existsSync(envPath)) return null;
-  const line = readFileSync(envPath, "utf8")
-    .split("\n")
-    .find((l) => l.startsWith("NEXT_PUBLIC_ESTAT_APP_ID="));
-  return line?.split("=").slice(1).join("=").trim().replace(/^["']|["']$/g, "") ?? null;
+  try { return resolveEstatAppId(process.env, resolve(REPO_ROOT, ".env.local")); } catch { return null; }
 }
 
 function asArray<T>(x: T | T[] | undefined | null): T[] {
@@ -150,7 +146,7 @@ function asArray<T>(x: T | T[] | undefined | null): T[] {
 /** getMetaInfo を叩いて fetch-estat-meta.mjs と同じ形にして保存する */
 async function fetchMeta(statsDataId: string, appId: string): Promise<MetaDump> {
   const params = new URLSearchParams({ appId, lang: "J", statsDataId });
-  const res = await fetch(`https://api.e-stat.go.jp/rest/3.0/app/json/getMetaInfo?${params}`);
+  const res = await fetch(`${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS.GET_META_INFO}?${params}`);
   if (!res.ok) return { statsDataId, error: `HTTP ${res.status}` };
   const json = (await res.json()) as Record<string, any>;
   const meta = json?.GET_META_INFO?.METADATA_INF;

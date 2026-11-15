@@ -1,3 +1,4 @@
+import { statsR2Key } from '@stats47/r2-storage/keys';
 import { metricPresentation } from '../../../packages/data-configs/src/color-policy';
 import { engelCoefficient } from '../../../data/metrics/engel-coefficient';
 import { foodExpenditureTotal } from '../../../data/metrics/food-expenditure-total';
@@ -13,7 +14,7 @@ export const TREND_SAMPLE_METRIC = engelCoefficient;
 export const TREND_SAMPLE_ID = 'engel-trend';
 export const TREND_SAMPLE_FRAME = { width: 1080, height: 1350 } as const;
 export const TREND_SAMPLE_SOURCE = {
-  bucket: 'stats47', key: 'app/stats/engel-coefficient/values.json',
+  bucket: 'stats47', key: statsR2Key('engel-coefficient', 'prefecture'),
   sha256: '963476e9a6c482ec195ea6f6f327f13e49d2278155872c67f8bab0d5c5e152b2', bytes: 100930,
 } as const;
 export const TREND_SAMPLE_SERIES = { areaCode: '23000', name: '名古屋市', from: 2007, to: 2024 } as const;

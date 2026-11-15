@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { rankingR2Key } from '../lib/r2-keys.mjs';
 /**
  * refresh-article-data-years.mjs — 公開記事の図のデータを、指標の最新年で取り直す。
  *
@@ -148,7 +149,7 @@ async function main() {
   const valuesByKey = new Map();
   const loadValues = async (key) => {
     if (valuesByKey.has(key)) return valuesByKey.get(key);
-    const body = await fetchR2(`app/ranking/${key}/values.json`);
+    const body = await fetchR2(rankingR2Key(key, "values"));
     valuesByKey.set(key, body ? JSON.parse(body.toString("utf8")) : null);
     return valuesByKey.get(key);
   };

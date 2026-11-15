@@ -1,0 +1,1567 @@
+{
+  "version": 1,
+  "policy": "縮小専用。パス・出現数の追加は禁止。HEAD・親commit・origin/developとのmerge-baseからの増加を検査する。--baseで比較基準を追加できる。",
+  "exceptions": {
+    ".claude/hooks/check-local-db.js": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
+    },
+    ".claude/scripts/ads/__tests__/ad-traffic-block.test.mjs": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 4,
+      "s3Client": 0,
+      "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
+    },
+    ".claude/scripts/analysis/__tests__/analysis-draft.test.mjs": {
+      "stats": 3,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    ".claude/scripts/audit/__tests__/theme-chart-live-audit.test.mjs": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    ".claude/scripts/blog/audit-published-blog.mjs": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/scripts/blog/build-article-data-from-r2.mjs": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/scripts/blog/build-kakei-quantity-price.mjs": {
+      "stats": 3,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/scripts/blog/build-svg-gallery.mjs": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/scripts/blog/build-topic-queue.mjs": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/scripts/blog/fetch-migration-flow.mjs": {
+      "stats": 2,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/scripts/blog/find-chart-metric.mjs": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/scripts/blog/find-kakei-stale-title-values.mjs": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/scripts/blog/generate-article-charts.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/scripts/blog/prune-published-outbox.mjs": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/scripts/blog/regenerate-tile-maps.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/scripts/gsc/__tests__/test_ingest_gsc_export.py": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
+    },
+    ".claude/scripts/instagram/post-from-schedule.cjs": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/scripts/lib/__tests__/chart-provenance.test.mjs": {
+      "stats": 13,
+      "ranking": 2,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
+    },
+    ".claude/scripts/lib/__tests__/check-maintenance-debt.test.cjs": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
+    },
+    ".claude/scripts/lib/__tests__/data-refresh-scoped-workflow.test.mjs": {
+      "stats": 10,
+      "ranking": 7,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
+    },
+    ".claude/scripts/lib/__tests__/metric-release-order.test.mjs": {
+      "stats": 1,
+      "ranking": 2,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
+    },
+    ".claude/scripts/lib/__tests__/r2-overlay-server.test.mjs": {
+      "stats": 13,
+      "ranking": 5,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
+    },
+    ".claude/scripts/lib/__tests__/ranking-scoped-workflow.test.mjs": {
+      "stats": 0,
+      "ranking": 4,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
+    },
+    ".claude/scripts/lib/__tests__/sync-snapshots-run-contract.test.mjs": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
+    },
+    ".claude/scripts/lib/__tests__/threads-core.test.cjs": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 3,
+      "s3Client": 0,
+      "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
+    },
+    ".claude/scripts/lib/check-r2-route-ssg.cjs": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/scripts/lib/gallery-collectors.mjs": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/scripts/lib/latest-partition.mjs": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/scripts/media/__tests__/workspace.test.mjs": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 8,
+      "s3Client": 0,
+      "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
+    },
+    ".claude/scripts/municipalities/build-wp0-inventory.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/scripts/note/__tests__/image-assets-audit.test.mjs": {
+      "stats": 2,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
+    },
+    ".claude/scripts/note/build-note-figure-ledger.mjs": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/scripts/note/catalog/backfill-note-data-provenance.mjs": {
+      "stats": 0,
+      "ranking": 3,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/scripts/ogp/build-image-gallery.mjs": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/scripts/page-quality/__tests__/templates.test.mjs": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    ".claude/scripts/page-quality/templates.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "R2 キーではなくアプリのソースファイルのパス"
+    },
+    ".claude/scripts/ranking/check-active-r2-coverage.mjs": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/scripts/sns/build-buzz-map-spec.ts": {
+      "stats": 2,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/scripts/sns/build-ig-compare-props.ts": {
+      "stats": 0,
+      "ranking": 3,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/scripts/sns/build-ig-correlation-props.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/scripts/sns/build-ig-map-props.ts": {
+      "stats": 0,
+      "ranking": 2,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/scripts/sns/quick-still.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/scripts/themes/__tests__/verify-external-ingest.test.mjs": {
+      "stats": 3,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    ".claude/scripts/threads/post-from-schedule.cjs": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/scripts/web/build-yoy-timeseries.cjs": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/skills/db/sync-snapshots/run.sh": {
+      "stats": 2,
+      "ranking": 2,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
+    },
+    ".claude/workflows/blog-mass-rewrite.js": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "作業指示プロンプト内の復元コマンド・参照パス"
+    },
+    ".github/scripts/smoke-test-routes.sh": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "配信を疎通確認する shell スクリプトは TS を直接 import できない"
+    },
+    ".github/workflows/affiliate-ga4-weekly.yml": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/ai-content-gemini-daily.yml": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/blog-auto-publish.yml": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 2,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/blog-data-source-migration.yml": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/commute-flow-ingest.yml": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/correlation-refresh.yml": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/data-refresh.yml": {
+      "stats": 4,
+      "ranking": 4,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/deploy-workers.yml": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 3,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/estat-catalog-monthly.yml": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/external-metric-ingest.yml": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/fetch-metrics-weekly.yml": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 3,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/generate-ogp-images.yml": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/geo-source-publish.yml": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/infra-history-publish.yml": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/kakei-axis-charts.yml": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/ksj-aggregate-ingest.yml": {
+      "stats": 3,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/ledgers-weekly.yml": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/note-figure-ledger-weekly.yml": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/pr-quality-check.yml": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 6,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/publish-affiliate-ads.yml": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/publish-ai-content.yml": {
+      "stats": 0,
+      "ranking": 2,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/publish-blog.yml": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/publish-storage-robots.yml": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 4,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/purge-cdn.yml": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 2,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/quality-suite-weekly.yml": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 4,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/ranking-ogp-new-keys.yml": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/regenerate-blog-svgs.yml": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/seo-keyword-cycle-daily.yml": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 2,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/sns-port-bubble-daily.yml": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    ".github/workflows/sync-snapshots.yml": {
+      "stats": 0,
+      "ranking": 2,
+      "origin": 3,
+      "s3Client": 0,
+      "reason": "workflow の YAML 設定・shell ステップは TS を直接 import できない"
+    },
+    "apps/admin/tests/unit/template-ranking-presentation.test.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "apps/admin/tests/unit/template-relationship-scatter.test.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "apps/admin/tests/unit/template-statistical-samples.test.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "apps/remotion/scripts/exporters/migration-flow.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
+    },
+    "apps/remotion/src/fixtures/area-carousel-sample.json": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "プレビュー用の固定 JSON fixture に保存した出典 URL・キー"
+    },
+    "apps/remotion/src/fixtures/compare-carousel-sample.json": {
+      "stats": 0,
+      "ranking": 112,
+      "origin": 112,
+      "s3Client": 0,
+      "reason": "プレビュー用の固定 JSON fixture に保存した出典 URL・キー"
+    },
+    "apps/remotion/src/fixtures/correlation-carousel-sample.json": {
+      "stats": 0,
+      "ranking": 2,
+      "origin": 2,
+      "s3Client": 0,
+      "reason": "プレビュー用の固定 JSON fixture に保存した出典 URL・キー"
+    },
+    "apps/remotion/src/fixtures/map-carousel-sample.json": {
+      "stats": 0,
+      "ranking": 2,
+      "origin": 2,
+      "s3Client": 0,
+      "reason": "プレビュー用の固定 JSON fixture に保存した出典 URL・キー"
+    },
+    "apps/remotion/src/fixtures/ranking-quiz-sample.json": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "プレビュー用の固定 JSON fixture に保存した出典 URL・キー"
+    },
+    "apps/web/next.config.ts": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "next.config は Next の読み込みで動き、workspace の TS を import しない (画像の許可ホストの宣言)"
+    },
+    "apps/web/scripts/export-blog-snapshot.ts": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
+    },
+    "apps/web/scripts/export-migration-flow-r2.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
+    },
+    "apps/web/scripts/export-ranking-page-cards-snapshot.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
+    },
+    "apps/web/scripts/export-yoy-timeseries.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
+    },
+    "apps/web/scripts/extract-page-components-from-r2.ts": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
+    },
+    "apps/web/scripts/generate-finance-flow.ts": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
+    },
+    "apps/web/scripts/generate-known-ranking-keys.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 2,
+      "s3Client": 0,
+      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
+    },
+    "apps/web/scripts/lib/__tests__/image-generation-manifest.test.ts": {
+      "stats": 0,
+      "ranking": 9,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "apps/web/scripts/lib/__tests__/product-ogp-render.test.ts": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "apps/web/scripts/lib/__tests__/public-data-contract.test.ts": {
+      "stats": 0,
+      "ranking": 8,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "apps/web/scripts/lib/__tests__/public-image-input.test.ts": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 3,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "apps/web/scripts/lib/__tests__/rail-contract-audit.test.ts": {
+      "stats": 0,
+      "ranking": 2,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "apps/web/scripts/lib/__tests__/search-index-r2-env.test.ts": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "apps/web/scripts/lib/product-ogp-render.ts": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "画像の生成器の指紋 (image-generator-registry の rendererSources) に入るファイル。入口を import すると全商品の OGP を作り直すことになるので直書きのまま"
+    },
+    "apps/web/src/__tests__/href-builder-ratchet.test.ts": {
+      "stats": 0,
+      "ranking": 2,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "apps/web/src/app/__tests__/rail-contract-structure.test.ts": {
+      "stats": 0,
+      "ranking": 2,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "apps/web/src/app/api/flow/[feature]/[code]/route.ts": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
+    },
+    "apps/web/src/app/api/geo/history/[network]/[...file]/route.ts": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
+    },
+    "apps/web/src/app/api/geo/source/[dataId]/[assetIndex]/route.test.ts": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 2,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "apps/web/src/app/api/geo/thumbnail/[dataId]/[variant]/route.test.ts": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 2,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "apps/web/src/app/api/mf-topo/[code]/route.ts": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
+    },
+    "apps/web/src/app/api/municipalities/ranking/[rankingKey]/route.ts": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
+    },
+    "apps/web/src/app/api/station-passengers/[...slug]/route.ts": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
+    },
+    "apps/web/src/app/api/themes/[theme]/[file]/route.ts": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
+    },
+    "apps/web/src/app/ranking/__tests__/page-structure.test.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "apps/web/src/app/ranking/[rankingKey]/page.tsx": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
+    },
+    "apps/web/src/components/layout/page-heroes.ts": {
+      "stats": 0,
+      "ranking": 2,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "表示数値の根拠を記録した出典説明文字列"
+    },
+    "apps/web/src/config/known-ranking-keys.ts": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
+    },
+    "apps/web/src/features/area-profile/utils/__tests__/generate-area-metadata.test.ts": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "apps/web/src/features/blog/services/article-ranking-refs.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
+    },
+    "apps/web/src/features/blog/utils/__tests__/generate-blog-metadata.test.ts": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "apps/web/src/features/home-portal/components/__tests__/PortalSections.test.tsx": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "apps/web/src/features/ranking/actions/normalization-types.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
+    },
+    "apps/web/src/features/ranking/utils/__tests__/generate-meta-data.test.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "apps/web/src/features/ranking/utils/generate-meta-data.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
+    },
+    "apps/web/src/features/theme-dashboard/actions/fetch-metric-timeseries.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
+    },
+    "apps/web/src/features/theme-dashboard/lib/load-theme-data.ts": {
+      "stats": 0,
+      "ranking": 2,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
+    },
+    "apps/web/src/features/theme-dashboard/lib/theme-ranking-readers.ts": {
+      "stats": 0,
+      "ranking": 2,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
+    },
+    "apps/web/src/middleware.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "R2 キーではなくアプリのソースファイルのパス"
+    },
+    "apps/web/wrangler.toml": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 2,
+      "s3Client": 0,
+      "reason": "Workers の配信環境変数を宣言する TOML 設定"
+    },
+    "config/datasets.mjs": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
+    },
+    "config/schema/products.pack-datasets.schema.json": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "JSON Schema の description に記したデータ出典の説明"
+    },
+    "config/schema/themes.japan-derived-metrics.schema.json": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "JSON Schema の description に記したデータ出典の説明"
+    },
+    "config/schema/themes.portfolio.schema.json": {
+      "stats": 0,
+      "ranking": 2,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "JSON Schema の description に記したデータ出典の説明"
+    },
+    "data/metrics/low-elevation-population-ratio-5m.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "指標の計算根拠・復元コマンドを記録した説明文字列"
+    },
+    "data/metrics/nursery-waiting-children-rate.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "指標の計算根拠・復元コマンドを記録した説明文字列"
+    },
+    "data/metrics/pachinko-shop-density-per-10k.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "指標の計算根拠・復元コマンドを記録した説明文字列"
+    },
+    "packages/ai-content/src/scripts/build-input.ts": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ai-content/src/scripts/generate-parallel.ts": {
+      "stats": 0,
+      "ranking": 6,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ai-content/src/scripts/list-pending.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ai-content/src/scripts/verify-inputs.ts": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/correlation/src/scripts/build-correlation-snapshot.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/data-configs/scripts/__tests__/estat-refresh-cli.test.mjs": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "packages/data-configs/scripts/build-chart-display-units.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/data-configs/scripts/ingest-childcare-waiting-rate.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/data-configs/scripts/ingest-nier-achievement.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/data-configs/scripts/page-data-batch.ts": {
+      "stats": 3,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/data-configs/scripts/scan-stats-shape.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/data-configs/scripts/shrink-shape-allowlist.ts": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/data-configs/src/__tests__/estat-refresh-selection.test.ts": {
+      "stats": 2,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "packages/data-configs/src/expected-empty.ts": {
+      "stats": 1,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/data-configs/src/geo-scope/build-japan-series.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/data-configs/src/geo-scope/japan-derived-metrics.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/data-configs/src/recipe.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/data-configs/src/theme-catalog/stat-series-ref.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/database/src/schema/index.ts": {
+      "stats": 2,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/gis/src/geo-analysis/low-elevation-population-overlay.py": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/gis/src/geo-questions/scripts/build-geo-questions.ts": {
+      "stats": 2,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/gis/src/mlit-ksj/__tests__/license-policy.test.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "packages/gis/src/mlit-ksj/ksj-stats-core.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/gis/src/mlit-ksj/scripts/generate-ksj-stats-values.ts": {
+      "stats": 2,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/product-factory/scripts/build-cover-background.mts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/product-factory/src/catalog/types.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/product-factory/src/channels/kindle/ai-content-composer.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/product-factory/src/channels/kindle/full-tables.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/product-factory/src/channels/kindle/ranking-databook.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/product-factory/src/channels/kindle/types.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/product-factory/src/data/load-ranking-values.ts": {
+      "stats": 0,
+      "ranking": 2,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/product-factory/src/data/pack-snapshot.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/r2-storage/src/lib/operations/__tests__/fetch-priority.test.ts": {
+      "stats": 3,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "packages/r2-storage/src/lib/operations/__tests__/safe-r2-key.test.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "packages/r2-storage/src/lib/operations/fetch.ts": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/r2-storage/src/scripts/__tests__/assert-ci-write.test.ts": {
+      "stats": 6,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "packages/r2-storage/src/scripts/__tests__/compress-r2-topojson.test.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "packages/r2-storage/src/scripts/__tests__/diff-push-r2-core.test.ts": {
+      "stats": 19,
+      "ranking": 22,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "packages/r2-storage/src/scripts/__tests__/push-exact-r2-assets.test.ts": {
+      "stats": 2,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "packages/r2-storage/src/scripts/__tests__/push-exact-r2-manifest.test.ts": {
+      "stats": 0,
+      "ranking": 4,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "packages/r2-storage/src/scripts/__tests__/push-generated-image-set.test.ts": {
+      "stats": 0,
+      "ranking": 22,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "packages/r2-storage/src/scripts/__tests__/r2-key-classes.test.ts": {
+      "stats": 1,
+      "ranking": 4,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "packages/r2-storage/src/scripts/delete-r2-per-household.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/r2-storage/src/scripts/lib/__tests__/diff-push-remote-match.test.ts": {
+      "stats": 1,
+      "ranking": 5,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "packages/r2-storage/src/scripts/lib/__tests__/ksj-publication-guard.test.ts": {
+      "stats": 6,
+      "ranking": 4,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "packages/r2-storage/src/scripts/lib/__tests__/license-retention.test.ts": {
+      "stats": 4,
+      "ranking": 5,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "packages/r2-storage/src/scripts/lib/ksj-publication-guard.ts": {
+      "stats": 4,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Exact namespace/key literals are the subject of publication validation."
+    },
+    "packages/r2-storage/src/scripts/purge-cache.ts": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 2,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/r2-storage/src/scripts/push-exact-r2-manifest-core.ts": {
+      "stats": 1,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Exact namespace/key literals are the subject of publication validation."
+    },
+    "packages/r2-storage/src/scripts/r2-retention.ts": {
+      "stats": 0,
+      "ranking": 2,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ranking/scripts/verify-calculated-rankings.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ranking/src/builders/build-ranking-item-from-metric.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ranking/src/config/known-ranking-keys.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ranking/src/exporters/index.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ranking/src/exporters/ranking-item-metadata-refresh.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ranking/src/exporters/ranking-item-seo-refresh.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ranking/src/exporters/ranking-items-per-url-snapshot.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ranking/src/municipalities/build-city-databooks.ts": {
+      "stats": 2,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ranking/src/municipalities/municipality-ai-content.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ranking/src/repositories/ranking-item/__tests__/exclude-gone-keys.test.ts": {
+      "stats": 0,
+      "ranking": 2,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "packages/ranking/src/repositories/ranking-value/__tests__/read-normalized-ranking-values.test.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "packages/ranking/src/repositories/ranking-value/list-ranking-values-all-years.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ranking/src/repositories/ranking-value/list-ranking-values.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ranking/src/repositories/ranking-value/read-ranking-values-from-r2.ts": {
+      "stats": 0,
+      "ranking": 3,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ranking/src/repositories/ranking-value/upsert-ranking-values.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ranking/src/repositories/schemas/ranking-values.schemas.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ranking/src/scripts/__tests__/generate-municipality-ranking.test.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "packages/ranking/src/scripts/__tests__/generate-ranking-normalized-values.test.ts": {
+      "stats": 0,
+      "ranking": 2,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "packages/ranking/src/scripts/__tests__/generate-ranking-values.test.ts": {
+      "stats": 0,
+      "ranking": 3,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "packages/ranking/src/scripts/audit-ranking-data-integrity.ts": {
+      "stats": 3,
+      "ranking": 5,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ranking/src/scripts/export-master-snapshots.ts": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ranking/src/scripts/generate-calculated-stats.ts": {
+      "stats": 2,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ranking/src/scripts/generate-city-databooks.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ranking/src/scripts/generate-ranking-items.ts": {
+      "stats": 2,
+      "ranking": 1,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ranking/src/scripts/generate-ranking-normalized-values.ts": {
+      "stats": 2,
+      "ranking": 4,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ranking/src/scripts/generate-ranking-values.ts": {
+      "stats": 3,
+      "ranking": 3,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ranking/src/scripts/lib/calculated-stats-core.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ranking/src/scripts/refresh-item-metadata.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ranking/src/scripts/refresh-item-seo.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ranking/src/services/__tests__/compute-normalization.test.ts": {
+      "stats": 0,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "packages/ranking/src/services/get-ranking-download-series.ts": {
+      "stats": 1,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ranking/src/survey/__tests__/survey-taxonomy.test.ts": {
+      "stats": 2,
+      "ranking": 2,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "キー・URL契約を検査するテストの固定入力・期待値"
+    },
+    "packages/ranking/src/types/city-databook.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ranking/src/types/snapshot.ts": {
+      "stats": 0,
+      "ranking": 6,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/ranking/src/utils/resolve-national-figure.ts": {
+      "stats": 1,
+      "ranking": 1,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/stats-r2/src/scripts/export-stats-to-r2.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/stats-r2/src/types.ts": {
+      "stats": 7,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
+    },
+    "packages/types/src/site.json": {
+      "stats": 0,
+      "ranking": 0,
+      "origin": 1,
+      "s3Client": 0,
+      "reason": "Public origin SSOT consumed by R2_PUBLIC_ORIGIN; cannot import its consumer."
+    }
+  }
+}

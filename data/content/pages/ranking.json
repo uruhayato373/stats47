@@ -9498,6 +9498,14 @@
       "published": true
     },
     {
+      "id": "ranking:heatstroke-emergency-transports-per-100k",
+      "kind": "ranking",
+      "key": "heatstroke-emergency-transports-per-100k",
+      "title": "熱中症救急搬送人員",
+      "href": "/ranking/heatstroke-emergency-transports-per-100k",
+      "published": false
+    },
+    {
       "id": "ranking:high-school-advancement-rate",
       "kind": "ranking",
       "key": "high-school-advancement-rate",
@@ -13866,6 +13874,14 @@
       "published": true
     },
     {
+      "id": "ranking:national-assessment-elementary-mathematics-correct-rate",
+      "kind": "ranking",
+      "key": "national-assessment-elementary-mathematics-correct-rate",
+      "title": "小学生の算数平均正答率",
+      "href": "/ranking/national-assessment-elementary-mathematics-correct-rate",
+      "published": false
+    },
+    {
       "id": "ranking:national-assessment-elementary-reading-like-rate",
       "kind": "ranking",
       "key": "national-assessment-elementary-reading-like-rate",
@@ -13888,6 +13904,22 @@
       "title": "学習塾・家庭教師で教わっている小学生の割合",
       "href": "/ranking/national-assessment-elementary-tutoring-rate",
       "published": true
+    },
+    {
+      "id": "ranking:national-assessment-junior-high-mathematics-correct-rate",
+      "kind": "ranking",
+      "key": "national-assessment-junior-high-mathematics-correct-rate",
+      "title": "中学生の数学平均正答率",
+      "href": "/ranking/national-assessment-junior-high-mathematics-correct-rate",
+      "published": false
+    },
+    {
+      "id": "ranking:national-assessment-junior-high-self-esteem-rate",
+      "kind": "ranking",
+      "key": "national-assessment-junior-high-self-esteem-rate",
+      "title": "自分によいところがあると思う中学生の割合",
+      "href": "/ranking/national-assessment-junior-high-self-esteem-rate",
+      "published": false
     },
     {
       "id": "ranking:national-health-insurance-benefits",
@@ -24575,6 +24607,14 @@
       "key": "traffic-accident-per-100k",
       "title": "交通事故発生件数（人口10万人当たり）",
       "href": "/ranking/traffic-accident-per-100k",
+      "published": false
+    },
+    {
+      "id": "ranking:traffic-accidents-party-a-age-75-plus-per-100k",
+      "kind": "ranking",
+      "key": "traffic-accidents-party-a-age-75-plus-per-100k",
+      "title": "第1当事者が75歳以上の交通事故発生件数",
+      "href": "/ranking/traffic-accidents-party-a-age-75-plus-per-100k",
       "published": false
     },
     {

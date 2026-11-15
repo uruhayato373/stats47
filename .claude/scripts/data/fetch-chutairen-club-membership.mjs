@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { R2_PUBLIC_ORIGIN, statsR2Key } from "../lib/r2-keys.mjs";
 /**
  * 中学部活動 100人あたり部員数 (競技別) の投入スクリプト。
  *
@@ -16,7 +17,7 @@
  *      および全国計 (PDF巻末「総合計」行、本スクリプトにハードコード) と突合 (検算)
  *   4. 検算に通った競技のみ、男女合算値を求め、中学校生徒数 (既存 metric
  *      junior-high-school-students-count, R2 app/stats, 2024年度) で「100人あたり」に換算
- *   5. .local/r2/app/stats/<key>/values.json に競技ごとに書き出し
+ *   5. 観測値の置き場 に競技ごとに書き出し
  *      (本番反映は diff-push-r2.ts で別途行う。本スクリプトは書き出しのみ)
  *
  * 実行: node .claude/scripts/data/fetch-chutairen-club-membership.mjs
@@ -29,7 +30,6 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import os from "node:os";
 import { execFileSync } from "node:child_process";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 import { PREF_NAMES, PREF_AREA_CODES } from "../lib/prefectures.cjs";
 import { resolveMetricRecipe } from "./lib/stats-values-writer.mjs";
 
@@ -40,7 +40,7 @@ const PDF_URL = PDF_BASE + encodeURIComponent(PDF_FILENAME);
 const PUBLICATION_INDEX_URL = "https://nippon-chutairen.or.jp/data/result/";
 const ACCESSED_AT = "2026-07-20";
 
-const DENOM_URL = `${R2_PUBLIC_BASE_URL}/app/stats/junior-high-school-students-count/values.json`;
+const DENOM_URL = `${R2_PUBLIC_ORIGIN}/${statsR2Key("junior-high-school-students-count", "prefecture")}`;
 const DENOM_YEAR = "2024"; // 学校基本調査(令和6年度)。中体連調査(令和7年6月時点)と最大1年ズレるが
 // 都道府県別中学生数の直近R2値としてこれを使う (provenance に明記)。
 

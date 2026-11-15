@@ -9,7 +9,7 @@ import { join } from "node:path";
 import { createEstatIngestClient } from "../../../estat-api/src/ingest.js";
 import { parseSnapshotArgs, writeTableSnapshot, readSnapshotForPush, markSnapshotPushed, registerLocalSnapshot, type TableMetadata } from "../estat-table-snapshot.js";
 
-import { collectReferences, countSlices, makeSliceKey, measureSample, readAxes, planTablePartitions, type Axis } from "../estat-table-inventory.js";
+import { collectReferences, countSlices, makeSliceKey, measureSample, readAxes, planTablePartitions, packAreaRanges, type Axis } from "../estat-table-inventory.js";
 
 const axis = (id: string, codes: string[]): Axis => ({ id, codes, name: id });
 
@@ -218,6 +218,48 @@ test("深さ1ではtabだけを要求し、残りの軸を行に残した2ファ
     assert.equal(manifest.fileCount, 2);
     assert.deepEqual(manifest.files.map((file) => file.key), ["estat-tables/0003445758/data/tab=08.json.gz", "estat-tables/0003445758/data/tab=13.json.gz"]);
     assert(queries.every((query) => !query.searchParams.has("cdArea") && !query.searchParams.has("cdTime")));
+  } finally { await rm(dir, { recursive: true, force: true }); }
+});
+
+test("地域×時間が上限を超えるareaの表は、都道府県を割らずにコード順の範囲へ詰める", () => {
+  const areas = ["01100", "01202", "02201", "13101", "13102", "13103", "47201"];
+  const axes = [axis("tab", ["1"]), axis("cat01", ["A", "B"]), axis("area", areas), axis("time", ["2020", "2021"])];
+  const plan = planTablePartitions(axes, null, 6);
+  assert.equal(plan.depth, 2);
+  assert.equal(plan.fitsRowLimit, true);
+  // 01+02 = 3 codes x 2 years = 6 rows; 13 alone is 6 rows; 47 is 2 rows.
+  assert.deepEqual("areaRanges" in plan && plan.areaRanges, [
+    { from: "01100", to: "02201", codeCount: 3 }, { from: "13101", to: "13103", codeCount: 3 }, { from: "47201", to: "47201", codeCount: 1 }]);
+  assert.equal(plan.fileCount, 6);
+  assert.equal(makeSliceKey("0000020201", axes, { tab: "1", cat01: "A" }, 2, null, { from: "13101", to: "13103", codeCount: 3 }),
+    "estat-tables/0000020201/data/tab=1/cat01=A/area=13101-13103.json.gz");
+  // One prefecture alone over the limit stays an owner decision, not a split prefecture.
+  assert.equal(planTablePartitions(axes, null, 5).fitsRowLimit, false);
+  assert.equal(packAreaRanges(["1A000"], 1, 10), null);
+});
+
+test("地域範囲の要求はcdAreaFrom/Toで出し、範囲外の行を返されたら保存しない", async () => {
+  const dir = await mkdtemp(join(tmpdir(), "estat-area-range-test-"));
+  const meta: TableMetadata = { ...snapshotMeta(), statsDataId: "0003445758", prefDim: null, reportedRows: null,
+    axes: [axis("tab", ["08"]), axis("area", ["01100", "02201", "13101"]), axis("time", Array.from({ length: 20_000 }, (_, i) => String(i)))] };
+  const page = (areas: string[]) => ({ GET_STATS_DATA: { RESULT: { STATUS: 0 }, PARAMETER: {},
+    STATISTICAL_DATA: { TABLE_INF: { "@id": "0003445758", UPDATED_DATE: meta.updatedDate }, CLASS_INF: { CLASS_OBJ: [] },
+      RESULT_INF: { TOTAL_NUMBER: areas.length, FROM_NUMBER: 1, TO_NUMBER: areas.length },
+      DATA_INF: { VALUE: areas.map((area) => ({ "@tab": "08", "@area": area, "@time": "0", $: "1" })) } } } });
+  const queries: URL[] = [];
+  const client = createEstatIngestClient({ appId: "test-secret", fetch: async (url) => {
+    const query = new URL(String(url)); queries.push(query);
+    const from = query.searchParams.get("cdAreaFrom")!; const to = query.searchParams.get("cdAreaTo")!;
+    return new Response(JSON.stringify(page(meta.axes[1].codes.filter((code) => code >= from && code <= to))));
+  } });
+  try {
+    const manifest = await writeTableSnapshot(meta, dir, client);
+    // 01+02 = 40,000 rows fit one file; adding 13 would exceed 50,000.
+    assert.deepEqual(manifest.files.map((file) => file.key), ["estat-tables/0003445758/data/tab=08/area=01100-02201.json.gz",
+      "estat-tables/0003445758/data/tab=08/area=13101-13101.json.gz"]);
+    assert(queries.every((query) => query.searchParams.has("cdAreaFrom") && !query.searchParams.has("cdArea")));
+    const escaping = createEstatIngestClient({ appId: "test-secret", fetch: async () => new Response(JSON.stringify(page(["13101"]))) });
+    await assert.rejects(writeTableSnapshot({ ...meta, statsDataId: "0003445759" }, dir, escaping), /mismatch|escaped/);
   } finally { await rm(dir, { recursive: true, force: true }); }
 });
 

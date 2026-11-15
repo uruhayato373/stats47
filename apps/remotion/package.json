@@ -20,6 +20,7 @@
     "@stats47/area": "*",
     "@stats47/components": "*",
     "@stats47/ranking": "*",
+    "@stats47/r2-storage": "*",
     "@stats47/types": "*",
     "@stats47/ui-theme": "*",
     "@stats47/utils": "*",

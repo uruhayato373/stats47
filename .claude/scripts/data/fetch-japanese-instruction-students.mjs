@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { statsR2Key } from "../lib/r2-keys.mjs";
 
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
@@ -95,7 +96,7 @@ async function main() {
       const rankedRows = rows.map((row) => ({ ...row, rank: rankByCode.get(row.areaCode) }));
       const outputPath = path.join(
         PROJECT_ROOT,
-        ".local/r2/app/stats/students-requiring-japanese-instruction/values.json",
+        `.local/r2/${statsR2Key("students-requiring-japanese-instruction", "prefecture")}`,
       );
       mkdirSync(path.dirname(outputPath), { recursive: true });
       writeFileSync(outputPath, `${JSON.stringify({

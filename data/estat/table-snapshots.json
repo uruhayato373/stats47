@@ -51,7 +51,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0000010101/manifest.json",
       "manifestSha256": "de00501faaf37d1a8cd3e444859a1e702a4f6437763175f1c6fa5f5c0b6835dd",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -103,7 +103,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0000010103/manifest.json",
       "manifestSha256": "a19fd8edd67869c747d184be45f7b4fc1c1f02da040fca75180fd9c8707a08c6",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -382,7 +382,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0000010201/manifest.json",
       "manifestSha256": "6f4f20d8906460f991e224fc9b9cb47b86deb8666b1ce5a380f2e2603ca580c1",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -554,7 +554,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0000010208/manifest.json",
       "manifestSha256": "a25cf61b499c0e13a7e63d2196a5a84427fec558d378e5804a4091c8b767d5ab",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -579,7 +579,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0000010209/manifest.json",
       "manifestSha256": "5894f68d3c554dffe619e37bd86a0715c6f49be6cdc853d67b9e0da6c36bb496",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -654,7 +654,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0000010212/manifest.json",
       "manifestSha256": "ba85fe06a6f48d68361a738cdf740baf70e03663da5afc3570b562f6c39d8823",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -723,7 +723,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0003238633/manifest.json",
       "manifestSha256": "754c8ac1b2d45282431a7da74e4ba37c38c9045ed4409dc6dd604011c588dafc",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -1902,30 +1902,6 @@
       "bucket": "stats47-private"
     },
     {
-      "statsDataId": "0004006330",
-      "title": "企業産業(中分類)、単一・複数(2区分)別企業等数、事業所数、従業者数、売上（収入）金額、費用総額、主な費用項目、粗付加価値額、純付加価値額、設備投資額、１企業当たり売上（収入）金額、１企業当たり粗付加価値額及び純付加価値額－全国、都道府県",
-      "statCode": "00200553",
-      "catalogVersion": "2026-09-30",
-      "catalogSha256": "e0eed5bcd3fb965648b53ce901c49398434361b50ee0982b7e253f30b8c624ed",
-      "fetchedAt": "2026-11-14T12:55:07.259Z",
-      "fileCount": 19,
-      "rowCount": 355680,
-      "maxRowsPerFile": 18720,
-      "gzipBytes": 2403746,
-      "uncompressedBytes": 40815955,
-      "catalogReportedRows": 355680,
-      "warnings": [],
-      "depth": 1,
-      "partitionAxes": [
-        "tab"
-      ],
-      "rowLimit": 50000,
-      "manifestKey": "estat-tables/0004006330/manifest.json",
-      "manifestSha256": "cf298544fa9f71d1f07f2af794e721e855b98cd261d45f66a59c359f33a343d9",
-      "status": "pushed",
-      "bucket": "stats47-private"
-    },
-    {
       "statsDataId": "0004008436",
       "title": "男女、産業、テレワーク実施の有無・頻度、テレワーク実施の場所、経営組織・従業上の地位・雇用形態別人口（有業者）－全国、都道府県、政令指定都市、県庁所在都市、人口30万以上の市",
       "statCode": "00200532",
@@ -2394,7 +2370,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0004026104/manifest.json",
       "manifestSha256": "ec16e12cec74f2396f5530eadcf671c3db759cb0d7f20cb4b75af0c172e80715",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -2416,7 +2392,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0004026105/manifest.json",
       "manifestSha256": "b9a02385910bd0ca13d29954ab53da4ea40c6fc66c6812be9e07a243db306561",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -2746,7 +2722,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0004032502/manifest.json",
       "manifestSha256": "12254d62c544a7cc9402b19d7e127dacdb833e610226120b10b1e642cb18132c",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -2815,7 +2791,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0002070003/manifest.json",
       "manifestSha256": "12c81c909fca14c48159ea9dde3d01102a6e16c1143e9a474cc5f25453d7087e",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -2915,7 +2891,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0004023605/manifest.json",
       "manifestSha256": "deedf1fdf6124f7248b527f8600ccf98ba977dc4fca31f43b543e3fda79b4ae9",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -2987,7 +2963,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0000020207/manifest.json",
       "manifestSha256": "6e018250aa394989e66ba285dccca3ce69c92b577de6ce2dc15d69fd55f823b0",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -3012,7 +2988,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0000020301/manifest.json",
       "manifestSha256": "b34eea41b495df1b8b533c7f64cdd0fa9872aa66dc6dd29aba62a5831961c741",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -3037,7 +3013,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0000020308/manifest.json",
       "manifestSha256": "87be8cb512b12e0cc6ae51a9f5a2d616552efffca8d35dfc94ce2b8683927086",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -3059,7 +3035,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0000020311/manifest.json",
       "manifestSha256": "d948728281b9f744181fc27a2bacebc83836392ff166871f926cf0101f283638",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -3544,7 +3520,7 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0004065881/manifest.json",
       "manifestSha256": "b684baf72a3d9fa302184be0de9ab00ebd795b66aa49ac5182e57e2ec81fe4c0",
-      "status": "pushed",
+      "status": "verified",
       "bucket": "stats47-private"
     },
     {
@@ -3592,7 +3568,394 @@
       "rowLimit": 50000,
       "manifestKey": "estat-tables/0004065933/manifest.json",
       "manifestSha256": "d61e30d7cc29a18f8eda4b367167eeb74535579570eaa1a501bf865d71038edb",
-      "status": "pushed",
+      "status": "verified",
+      "bucket": "stats47-private"
+    },
+    {
+      "statsDataId": "0000020302",
+      "title": "Ｂ　自然環境",
+      "statCode": "00200502",
+      "catalogVersion": "2026-06-19",
+      "catalogSha256": "3dcc79c34f4dae52600dba7d3f37e63ec890265c34e1377f587f64d7228888b6",
+      "fetchedAt": "2026-11-14T23:09:29.054Z",
+      "fileCount": 4,
+      "rowCount": 168344,
+      "maxRowsPerFile": 49632,
+      "gzipBytes": 718704,
+      "uncompressedBytes": 16836035,
+      "catalogReportedRows": 168344,
+      "warnings": [],
+      "depth": 2,
+      "partitionAxes": [
+        "tab",
+        "cat01"
+      ],
+      "rowLimit": 50000,
+      "manifestKey": "estat-tables/0000020302/manifest.json",
+      "manifestSha256": "a17ee44beb383b25b97366ffaa6b77d089e20416c665559698a462424d2c5c2e",
+      "status": "verified",
+      "bucket": "stats47-private"
+    },
+    {
+      "statsDataId": "0000020304",
+      "title": "Ｄ　行政基盤",
+      "statCode": "00200502",
+      "catalogVersion": "2026-06-19",
+      "catalogSha256": "730032dc47442dd6b5956941e07fd0dc1a835e6e8b38d27e638cc86b3c4b08df",
+      "fetchedAt": "2026-11-14T23:10:26.259Z",
+      "fileCount": 8,
+      "rowCount": 122432,
+      "maxRowsPerFile": 48520,
+      "gzipBytes": 843705,
+      "uncompressedBytes": 13031931,
+      "catalogReportedRows": 122432,
+      "warnings": [],
+      "depth": 2,
+      "partitionAxes": [
+        "tab",
+        "cat01"
+      ],
+      "rowLimit": 50000,
+      "manifestKey": "estat-tables/0000020304/manifest.json",
+      "manifestSha256": "4ba9776aa88037c19d8384d634b06995e837a2a5ff390a410dd551d9077a9dbd",
+      "status": "verified",
+      "bucket": "stats47-private"
+    },
+    {
+      "statsDataId": "0000020309",
+      "title": "Ｉ　健康・医療",
+      "statCode": "00200502",
+      "catalogVersion": "2026-06-19",
+      "catalogSha256": "5c5e84069f1473d2e39b6e69d37cfc7ef20af163ba552b4983d4d3ff01e0a54a",
+      "fetchedAt": "2026-11-14T23:11:03.404Z",
+      "fileCount": 8,
+      "rowCount": 198952,
+      "maxRowsPerFile": 48504,
+      "gzipBytes": 1060478,
+      "uncompressedBytes": 21082453,
+      "catalogReportedRows": 198952,
+      "warnings": [],
+      "depth": 2,
+      "partitionAxes": [
+        "tab",
+        "cat01"
+      ],
+      "rowLimit": 50000,
+      "manifestKey": "estat-tables/0000020309/manifest.json",
+      "manifestSha256": "6e634f37708f6ff48c908b7ee37ca3b9c97012cb034d99d9ccaa3966e8600412",
+      "status": "verified",
+      "bucket": "stats47-private"
+    },
+    {
+      "statsDataId": "0000020202",
+      "title": "Ｂ　自然環境",
+      "statCode": "00200502",
+      "catalogVersion": "2026-06-19",
+      "catalogSha256": "3455447238a610bd94896d9ae81f1fc90d3ebcdd0f6b14f04ba069a6b0cba5c6",
+      "fetchedAt": "2026-11-14T23:11:56.143Z",
+      "fileCount": 18,
+      "rowCount": 414705,
+      "maxRowsPerFile": 46451,
+      "gzipBytes": 2394370,
+      "uncompressedBytes": 42636719,
+      "catalogReportedRows": 414705,
+      "warnings": [],
+      "depth": 2,
+      "partitionAxes": [
+        "tab",
+        "cat01"
+      ],
+      "rowLimit": 50000,
+      "manifestKey": "estat-tables/0000020202/manifest.json",
+      "manifestSha256": "3674f02e76d755cee100174aac77d916172ac05b37819cea68d57e7f7769b5e7",
+      "status": "verified",
+      "bucket": "stats47-private"
+    },
+    {
+      "statsDataId": "0000020209",
+      "title": "Ｉ　健康・医療",
+      "statCode": "00200502",
+      "catalogVersion": "2026-06-19",
+      "catalogSha256": "f49b78094f1c487eaecabefd7832ee52208bfd5839f7fc81960b00942e22b94b",
+      "fetchedAt": "2026-11-14T23:13:42.210Z",
+      "fileCount": 42,
+      "rowCount": 806832,
+      "maxRowsPerFile": 49524,
+      "gzipBytes": 3923091,
+      "uncompressedBytes": 80900171,
+      "catalogReportedRows": 806832,
+      "warnings": [],
+      "depth": 2,
+      "partitionAxes": [
+        "tab",
+        "cat01"
+      ],
+      "rowLimit": 50000,
+      "manifestKey": "estat-tables/0000020209/manifest.json",
+      "manifestSha256": "753160401fa5ae3105f1a4f6917c018bd9dbb15f98ede48bceae4222a4a5fe25",
+      "status": "verified",
+      "bucket": "stats47-private"
+    },
+    {
+      "statsDataId": "0000020205",
+      "title": "Ｅ　教育",
+      "statCode": "00200502",
+      "catalogVersion": "2026-06-19",
+      "catalogSha256": "746a8e5c2841293ad3c8025291476b24e1545c11c0b606ec420eeebcc81680ae",
+      "fetchedAt": "2026-11-14T23:24:49.575Z",
+      "fileCount": 44,
+      "rowCount": 966833,
+      "maxRowsPerFile": 47502,
+      "gzipBytes": 5261503,
+      "uncompressedBytes": 94972557,
+      "catalogReportedRows": 966833,
+      "warnings": [],
+      "depth": 2,
+      "partitionAxes": [
+        "tab",
+        "cat01"
+      ],
+      "rowLimit": 50000,
+      "manifestKey": "estat-tables/0000020205/manifest.json",
+      "manifestSha256": "cc6a10c849ce86f3db0fdc9412d679ec88cdf769c937c63e1c5ad4242700593b",
+      "status": "verified",
+      "bucket": "stats47-private"
+    },
+    {
+      "statsDataId": "0000020210",
+      "title": "Ｊ　福祉・社会保障",
+      "statCode": "00200502",
+      "catalogVersion": "2026-06-19",
+      "catalogSha256": "34e75d973349f002475ab95416628903150fa9351c1e3b869dd0d8b7b8255a02",
+      "fetchedAt": "2026-11-14T23:27:17.532Z",
+      "fileCount": 122,
+      "rowCount": 1541258,
+      "maxRowsPerFile": 49527,
+      "gzipBytes": 8578203,
+      "uncompressedBytes": 156913356,
+      "catalogReportedRows": 1541258,
+      "warnings": [],
+      "depth": 2,
+      "partitionAxes": [
+        "tab",
+        "cat01"
+      ],
+      "rowLimit": 50000,
+      "manifestKey": "estat-tables/0000020210/manifest.json",
+      "manifestSha256": "a709257a972d41384fd38881b1ebc80b747ce31ef287c53a1436435217171ba0",
+      "status": "verified",
+      "bucket": "stats47-private"
+    },
+    {
+      "statsDataId": "0000020204",
+      "title": "Ｄ　行政基盤",
+      "statCode": "00200502",
+      "catalogVersion": "2026-06-19",
+      "catalogSha256": "685c1f39c922217900be4c6473c9c9a5eb5791677641ed3b4108de12fab04eea",
+      "fetchedAt": "2026-11-14T23:32:46.926Z",
+      "fileCount": 174,
+      "rowCount": 3715096,
+      "maxRowsPerFile": 45388,
+      "gzipBytes": 28123146,
+      "uncompressedBytes": 391716768,
+      "catalogReportedRows": 3715096,
+      "warnings": [],
+      "depth": 2,
+      "partitionAxes": [
+        "tab",
+        "cat01"
+      ],
+      "rowLimit": 50000,
+      "manifestKey": "estat-tables/0000020204/manifest.json",
+      "manifestSha256": "b2d8bb80379f30a0e8033e9001e59c319f7a7e6724c3eaa4baf83de309617b92",
+      "status": "verified",
+      "bucket": "stats47-private"
+    },
+    {
+      "statsDataId": "0000020201",
+      "title": "Ａ　人口・世帯",
+      "statCode": "00200502",
+      "catalogVersion": "2026-06-19",
+      "catalogSha256": "100d8c1c277627eed9abfd83c65b855715df71fab35a94bb7f2d800ffb36e184",
+      "fetchedAt": "2026-11-14T23:40:23.571Z",
+      "fileCount": 268,
+      "rowCount": 1890825,
+      "maxRowsPerFile": 46443,
+      "gzipBytes": 15223573,
+      "uncompressedBytes": 206232994,
+      "catalogReportedRows": 1890825,
+      "warnings": [],
+      "depth": 2,
+      "partitionAxes": [
+        "tab",
+        "cat01"
+      ],
+      "rowLimit": 50000,
+      "manifestKey": "estat-tables/0000020201/manifest.json",
+      "manifestSha256": "a3bf7517f43473585bc230af3c07be936c8c1e4ec3a8dbcce9993a17c747d6a2",
+      "status": "verified",
+      "bucket": "stats47-private"
+    },
+    {
+      "statsDataId": "0000020203",
+      "title": "Ｃ　経済基盤",
+      "statCode": "00200502",
+      "catalogVersion": "2026-06-19",
+      "catalogSha256": "0a004fb2f11cbf9f83387b9df173ac2d214bc62f33512cad2a4728391a90dd20",
+      "fetchedAt": "2026-11-14T23:50:59.536Z",
+      "fileCount": 398,
+      "rowCount": 1923226,
+      "maxRowsPerFile": 47502,
+      "gzipBytes": 16801738,
+      "uncompressedBytes": 226257263,
+      "catalogReportedRows": 1923226,
+      "warnings": [],
+      "depth": 2,
+      "partitionAxes": [
+        "tab",
+        "cat01"
+      ],
+      "rowLimit": 50000,
+      "manifestKey": "estat-tables/0000020203/manifest.json",
+      "manifestSha256": "0d67c65fac8ead96ce0aef56f5fc5cb507d90f607d7ed0c0a62d606b18c705e2",
+      "status": "verified",
+      "bucket": "stats47-private"
+    },
+    {
+      "statsDataId": "0000020208",
+      "title": "Ｈ　居住",
+      "statCode": "00200502",
+      "catalogVersion": "2026-06-19",
+      "catalogSha256": "b168e94d170db398eccbe1949e4152d6eaa9940f8f99756de18704f449f77f45",
+      "fetchedAt": "2026-11-15T00:21:56.394Z",
+      "fileCount": 464,
+      "rowCount": 3362659,
+      "maxRowsPerFile": 41202,
+      "gzipBytes": 23409141,
+      "uncompressedBytes": 368078477,
+      "catalogReportedRows": 3362659,
+      "warnings": [],
+      "depth": 2,
+      "partitionAxes": [
+        "tab",
+        "cat01"
+      ],
+      "rowLimit": 50000,
+      "manifestKey": "estat-tables/0000020208/manifest.json",
+      "manifestSha256": "79a88108560795d581603327234cccb920130dc7c31abfc2b660996084bd86b6",
+      "status": "verified",
+      "bucket": "stats47-private"
+    },
+    {
+      "statsDataId": "0003441258",
+      "title": "地域別価格差 10大費目別消費者物価地域差指数 （全国平均＝100）－全国，地方，都道府県，都道府県庁所在市及び政令指定都市（2013年～）",
+      "statCode": "00200571",
+      "catalogVersion": "2026-09-18",
+      "catalogSha256": "250d81d64733e272a9cd56b633b8536c6624dbb9d019486e7c7ee717cac1ff02",
+      "fetchedAt": "2026-11-15T01:58:55.831Z",
+      "fileCount": 1,
+      "rowCount": 16524,
+      "maxRowsPerFile": 16524,
+      "gzipBytes": 76586,
+      "uncompressedBytes": 1315675,
+      "catalogReportedRows": 15204,
+      "warnings": [
+        "Catalog OVERALL_TOTAL_NUMBER differs from complete live partitions: 16524/15204"
+      ],
+      "depth": 0,
+      "partitionAxes": [],
+      "rowLimit": 50000,
+      "manifestKey": "estat-tables/0003441258/manifest.json",
+      "manifestSha256": "571b3049d843760612897f180ce3f5425307f0ca3261a425851c51d7aea05bd5",
+      "status": "verified",
+      "bucket": "stats47-private"
+    },
+    {
+      "statsDataId": "0003216642",
+      "title": "海面漁業の部 大海区都道府県振興局別統計　魚種別漁獲量",
+      "statCode": "00500216",
+      "catalogVersion": "2024-03-13",
+      "catalogSha256": "1e8caa21b285a5ec2a2484030d279ec60cb8f57ab0008ef944bc227e85f43d81",
+      "fetchedAt": "2026-11-15T01:59:21.355Z",
+      "fileCount": 1,
+      "rowCount": 6468,
+      "maxRowsPerFile": 6468,
+      "gzipBytes": 36598,
+      "uncompressedBytes": 380763,
+      "catalogReportedRows": 6468,
+      "warnings": [],
+      "depth": 0,
+      "partitionAxes": [],
+      "rowLimit": 50000,
+      "manifestKey": "estat-tables/0003216642/manifest.json",
+      "manifestSha256": "1d97de83f8c3def5c24b41d6ecca1222293523d243ee89cbcbed760b3cbb4ba9",
+      "status": "verified",
+      "bucket": "stats47-private"
+    },
+    {
+      "statsDataId": "0003322129",
+      "title": "海面漁業の部 大海区都道府県振興局別統計　魚種別漁獲量",
+      "statCode": "00500216",
+      "catalogVersion": "2024-03-13",
+      "catalogSha256": "44cd90c92b291cc7c9fc1f92c470374b5e94a07d1f6346b5e778628a054d3ac2",
+      "fetchedAt": "2026-11-15T01:59:33.921Z",
+      "fileCount": 1,
+      "rowCount": 6468,
+      "maxRowsPerFile": 6468,
+      "gzipBytes": 36408,
+      "uncompressedBytes": 365778,
+      "catalogReportedRows": 6468,
+      "warnings": [],
+      "depth": 0,
+      "partitionAxes": [],
+      "rowLimit": 50000,
+      "manifestKey": "estat-tables/0003322129/manifest.json",
+      "manifestSha256": "febd6448485a969fae4cb2b1a5becbb917fede3243f98282d56775f569987072",
+      "status": "verified",
+      "bucket": "stats47-private"
+    },
+    {
+      "statsDataId": "0001803958",
+      "title": "海面漁業の部 大海区都道府県振興局別統計　魚種別漁獲量",
+      "statCode": "00500216",
+      "catalogVersion": "2024-03-13",
+      "catalogSha256": "776ed1b15c458164f951e690dcfbe70ef805bc602453223152715ccf26bcb551",
+      "fetchedAt": "2026-11-15T01:59:45.056Z",
+      "fileCount": 1,
+      "rowCount": 6468,
+      "maxRowsPerFile": 6468,
+      "gzipBytes": 34459,
+      "uncompressedBytes": 357469,
+      "catalogReportedRows": 6468,
+      "warnings": [],
+      "depth": 0,
+      "partitionAxes": [],
+      "rowLimit": 50000,
+      "manifestKey": "estat-tables/0001803958/manifest.json",
+      "manifestSha256": "026331721dcd2e0b6bc4dbb0852cee702f679841b1ee27e0e57553d0a1f7cc8e",
+      "status": "verified",
+      "bucket": "stats47-private"
+    },
+    {
+      "statsDataId": "0004043248",
+      "title": "海面漁業の部 大海区都道府県振興局別統計　魚種別漁獲量",
+      "statCode": "00500216",
+      "catalogVersion": "2026-04-15",
+      "catalogSha256": "ed082d777aa45ac94af5d333ede5d074527a60a00ec9e1a93e0da467c9d6f9d3",
+      "fetchedAt": "2026-11-15T01:59:56.056Z",
+      "fileCount": 1,
+      "rowCount": 6699,
+      "maxRowsPerFile": 6699,
+      "gzipBytes": 35359,
+      "uncompressedBytes": 382880,
+      "catalogReportedRows": 6699,
+      "warnings": [],
+      "depth": 0,
+      "partitionAxes": [],
+      "rowLimit": 50000,
+      "manifestKey": "estat-tables/0004043248/manifest.json",
+      "manifestSha256": "20f635037272ba0de01b3e1803668386adbaf39ffced8bf610f3e94635086b02",
+      "status": "verified",
       "bucket": "stats47-private"
     }
   ]

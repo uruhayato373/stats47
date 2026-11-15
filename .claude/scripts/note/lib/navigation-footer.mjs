@@ -132,6 +132,19 @@ function escapeRegExp(value) {
   return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
+/**
+ * URL が「その URL 自身」として現れる箇所だけに一致する。`/ranking/food-expenditure` が
+ * `/ranking/food-expenditure-ratio-…` や置換先の `/ranking/food-expenditure-total` の前方一致として
+ * 拾われないよう、直後にパスの続きの文字が来る箇所を除く (query・hash・引用符・空白は URL の終わり)。
+ */
+function exactUrlPattern(url) {
+  return new RegExp(`${escapeRegExp(url)}(?![A-Za-z0-9_~%/-])`, "g");
+}
+
+export function includesExactUrl(body, url) {
+  return exactUrlPattern(url).test(String(body));
+}
+
 function figureByDataSrcPattern(url) {
   const rootSlash = new URL(url).pathname === '/' ? '\\/?' : '';
   return new RegExp(`<figure\\b[^>]*\\bdata-src="${escapeRegExp(url)}${rootSlash}(?:\\?s47_ogp=[a-f0-9]{12})?"[^>]*>[\\s\\S]*?<\\/figure>`, "g");
@@ -191,7 +204,7 @@ export function applyPublishedLinkRepairs(
     const toUrl = assertCleanCardUrl(repair.toUrl, "stats47.jp");
 
     if (repair.mode === "replace-url") {
-      output = output.replaceAll(fromUrl, toUrl);
+      output = output.replace(exactUrlPattern(fromUrl), () => toUrl);
     } else if (repair.mode === "replace-card") {
       output = output.replace(figureByDataSrcPattern(fromUrl), (figure) => {
         const id = figure.match(/\\b(?:name|id)="([^"]+)"/)?.[1] || idFactory();
@@ -208,7 +221,7 @@ export function applyPublishedLinkRepairs(
       throw new Error(`未対応の公開リンク修復 mode: ${repair.mode}`);
     }
 
-    const alreadyCompliant = before.includes(toUrl) && !before.includes(fromUrl);
+    const alreadyCompliant = includesExactUrl(before, toUrl) && !includesExactUrl(before, fromUrl);
     if (output === before && !alreadyCompliant) {
       throw new Error(`公開本文に修復元URLが見つかりません: ${fromUrl}`);
     }

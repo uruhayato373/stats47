@@ -1,3 +1,4 @@
+import { R2_PUBLIC_ORIGIN } from '../../lib/r2-keys.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -267,7 +268,7 @@ test('management and static galleries use the same ledger and never guess old R2
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'cover-gallery-test-'));
   try {
     await updateCoverLedger(l => { l.articles.push(emptyCoverArticle(catalog[0])); observe(l); addCoverRevision(l.articles[0], revision(), { candidate: true }); }, root);
-    const options = { projectRoot: root, site: 'https://stats47.jp', r2: 'https://storage.stats47.jp' };
+    const options = { projectRoot: root, site: 'https://stats47.jp', r2: R2_PUBLIC_ORIGIN };
     const publicGallery = await buildTab('note-cover', options); const admin = await buildTab('note-cover', { ...options, privateNoteCovers: true });
     assert.equal(publicGallery.entries[0].images[0].url, 'https://assets.st-note.com/cover.png');
     assert.equal(admin.entries[0].images[1].url, `/note-cover/a-kakei-aichi?revision=${revision().id}`);

@@ -63,7 +63,7 @@ test('観測値の都道府県の値以外の場所は上げない', () => {
     'gis/mlit-ksj/N03/values.json',
   ]) {
     const { report, read } = staged(payload(), {}, key);
-    assert.throws(() => verifyIngestReport(report, read), /outside app\/stats/, key);
+    assert.throws(() => verifyIngestReport(report, read), /outside prefecture observation storage/, key);
   }
 });
 

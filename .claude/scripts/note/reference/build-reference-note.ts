@@ -1,4 +1,5 @@
 #!/usr/bin/env tsx
+import { rankingR2Key, statsR2Key } from '../../lib/r2-keys.mjs';
 /**
  * 教材 (参考文献) の分析企画 1 件から、note 記事の作業コピー一式を R2 の観測値だけで決定的に作る。
  * 規約: .claude/rules/reference-source-standards.md「分析企画の展開」・.claude/scripts/note/catalog/README.md
@@ -135,8 +136,8 @@ export function spearman(a: Ranked[], b: Ranked[]): { rho: number; n: number } {
 }
 
 async function loadMetric(key: string): Promise<Metric> {
-  const { item } = await fetchJson<{ item: Item & { isActive?: boolean } }>(`${R2}/app/ranking/${key}/item.json`);
-  const { rows } = await fetchJson<{ rows: Row[] }>(`${R2}/app/stats/${key}/values.json`);
+  const { item } = await fetchJson<{ item: Item & { isActive?: boolean } }>(`${R2}/${rankingR2Key(key, "item")}`);
+  const { rows } = await fetchJson<{ rows: Row[] }>(`${R2}/${statsR2Key(key, "prefecture")}`);
   const byYear = new Map<string, Row[]>();
   for (const r of rows) {
     if (!/^\d{2}000$/.test(r.areaCode) || r.areaCode === '00000' || !Number.isFinite(r.value)) continue;
@@ -393,7 +394,7 @@ async function build(a: Analysis) {
   }, null, 2)}\n`);
   writeFileSync(path.join(dir, 'data-provenance.json'), `${JSON.stringify({
     analysisId: a.id,
-    inputs: metrics.map((m) => ({ rankingKey: m.key, year: m.year, r2: [`app/ranking/${m.key}/item.json`, `app/stats/${m.key}/values.json`], source: m.source })),
+    inputs: metrics.map((m) => ({ rankingKey: m.key, year: m.year, r2: [`${rankingR2Key(m.key, "item")}`, `${statsR2Key(m.key, "prefecture")}`], source: m.source })),
     primarySources: a.primarySources ?? [],
     restore: `npx tsx .claude/scripts/note/reference/build-reference-note.ts --analysis ${a.id}`,
     images: metrics.filter((m) => m.summary.count === 47).map((m) => ({ file: `images/${m.key}.png`, generator: '.claude/scripts/note/reference/lib/figure-renderer.ts', rendererVersion: REFERENCE_FIGURE_RENDERER_VERSION, rankingKey: m.key, year: m.year })),

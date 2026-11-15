@@ -76,6 +76,7 @@
 - [theme selection backfill](project_theme_selection_backfill_pipeline.md) — テーマ選定の夜間 backfill と決定的 gate
 - [theme indicator research](feedback_theme_indicator_research_pattern.md) — テーマ指標は一次資料と e-Stat ID を同時に解決
 - [source vault layout](project_source_vault_expanded_layout.md) — 参考文献は Drive の版フォルダへ展開配置
+- [open data skip local portals](feedback_open_data_skip_local_portals.md) — 特定の市・県だけのオープンデータは取得・展開しない
 - [listmodels not proof](feedback_listmodels_is_not_proof_of_usable.md) — API の一覧は使える証拠でない。1 回叩く
 
 ## サイト (Next.js・UI)
@@ -154,8 +155,7 @@
 
 ## CI・git・開発環境
 - [fetch origin first](feedback_fetch_origin_before_implementing.md) — 実装前に fetch と origin との差分確認
-- [shared working copy git race](feedback_shared_working_copy_git_race.md) — 同じ作業ツリーの同時作業は worktree で分ける
-- [develop had no ci gate](feedback_develop_had_no_ci_gate.md) — develop の検査ゲートと preflight
+- [shared working copy git race](feedback_shared_working_copy_git_race.md) — 同じ作業ツリーの同時作業は worktree で分ける- [develop had no ci gate](feedback_develop_had_no_ci_gate.md) — develop の検査ゲートと preflight
 - [run full web tests](feedback_run_full_web_tests_before_push.md) — 部品・route を変えたら push 前に vitest 全件
 - [test and ci wait budget](feedback_test_and_ci_wait_budget.md) — 開発中は related、全件は develop 前に 1 回
 - [ci speed is wait time](feedback_ci_speed_wait_time.md) — CI 短縮は人の待ち時間で測る
@@ -163,6 +163,7 @@
 - [ci foreign tree overlay](feedback_ci_foreign_tree_overlay.md) — main で生成して develop へ写すと巻き戻る
 - [typecheck scripts cache](feedback_typecheck_scripts_cache.md) — 差分キャッシュが型エラーを隠す
 - [debt baseline shrink only](feedback_debt_baseline_shrink_only.md) — 負債の baseline は縮小専用
+- [gh api rate budget](feedback_gh_api_rate_budget.md) — gh run watch は --interval 60、状態は runs API でまとめて取る
 - [exit code not via pipe](feedback_exit_code_not_via_pipe.md) — pipe 越しの exit code は常に 0
 - [mutation test passes wrongly](feedback_mutation_test_passes_wrongly.md) — 赤/緑の理由を毎回読む
 - [workflow arg vector quoted](feedback_workflow_arg_vector_quoted.md) — workflow の引数列は bash 配列で

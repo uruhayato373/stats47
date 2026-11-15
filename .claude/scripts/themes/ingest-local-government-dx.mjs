@@ -1,3 +1,4 @@
+import { statsR2Key } from "../lib/r2-keys.mjs";
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
@@ -134,7 +135,7 @@ async function main() {
     assert.equal(config.yearFormat, snapshot ? 'calendar' : 'fiscal');
     const payload = parseStatsValuesPayload({ metricKey: key, entityKind: 'prefecture', rows: values.map((row) => ({ ...row, unit: config.unit, yearCode: year, yearName: snapshot ? '2023年4月1日調査時点' : `${year}年度` })), meta: { generatedAt, rowCount: 47, areaCount: 47, yearRange: [year, year], recipe: buildRecipe(config) } });
     const bytes = JSON.stringify(payload);
-    const relative = `app/stats/${key}/values.json`;
+    const relative = statsR2Key(key, "prefecture");
     files.push({ key: relative, metricKey: key, sha256: sha(bytes), sourceMatchedRows: 47 });
     if (options['write-local']) {
       const path = resolve(root, '.local/r2', relative);

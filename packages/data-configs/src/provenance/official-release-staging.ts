@@ -1,3 +1,5 @@
+import { extractYearCode } from "@stats47/estat-api/api";
+// Compatibility: malformed time prefixes retain the previous slice result.
 import { fetchPrefectures } from "@stats47/area";
 import type { SingleEntityRow } from "../../../stats-r2/src/types";
 import { classifyShape, PREFECTURE_COUNT, summarizeShape } from "../shape-gate";
@@ -79,7 +81,7 @@ export function parseAgriculturalHistory(raw: unknown): SingleEntityRow[] {
       throw new Error("Agricultural history: unexpected geographic scope");
     }
     if (!/^\d{4}100000$/.test(value["@time"])) throw new Error("Agricultural history: expected calendar-year observations");
-    const yearCode = value["@time"].slice(0, 4);
+    const yearCode = (typeof value["@time"] === "string" && /^\d{4}/.test(value["@time"]) ? extractYearCode(value["@time"]) : value["@time"].slice(0, 4));
     // Later SSDS revisions must be explicitly adopted instead of overwriting the reviewed source.
     if (Number(yearCode) > spec.to || Number(yearCode) < spec.from) continue;
     if (!/^\d+(?:\.\d+)?$/.test(value.$)) throw new Error("Agricultural history: missing/non-numeric value");

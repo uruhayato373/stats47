@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { statsR2Key } from '../lib/r2-keys.mjs';
 /**
  * note の公開記事を全件、公開ページの実物から機械採点する read-only 監査。note へは書かない。ログインも要らない。
  * 判定は lib/published-audit.mjs。既存のカード監査・本文の図の台帳の結果も記事ごとの点数へまとめる。
@@ -68,7 +69,7 @@ const cardIssues = new Map(readJson(`${LATEST_DIR}/card-visibility-latest.json`)
 const latestYearCache = new Map();
 function latestYearOf(rankingKey) {
   if (!latestYearCache.has(rankingKey)) {
-    latestYearCache.set(rankingKey, fetchRetry(`${R2}/app/stats/${rankingKey}/values.json`).then((text) => {
+    latestYearCache.set(rankingKey, fetchRetry(`${R2}/${statsR2Key(rankingKey, "prefecture")}`).then((text) => {
       const years = text ? JSON.parse(text).rows.map((row) => Number(String(row.year ?? row.yearCode ?? '').slice(0, 4))).filter(Boolean) : [];
       return years.length > 0 ? Math.max(...years) : null;
     }));

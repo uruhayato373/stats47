@@ -1,3 +1,4 @@
+import { statsR2Key } from "@stats47/r2-storage/keys";
 /**
  * 全国学力・学習状況調査 (国立教育政策研究所 NIER) の都道府県別 factsheet xlsx から
  * 「小学校 国語・算数 / 中学校 国語・数学 の平均正答率の単純平均」を作り
@@ -134,7 +135,7 @@ async function main() {
   const bottom = ranked.slice(-3).map((r) => `${r.areaName} ${r.value}`).join(" / ");
   console.log(`上位: ${top}\n下位: ${bottom}`);
   if (dryRun) { console.log("[dry-run] 書き込みなし"); return; }
-  const outPath = resolve(R2_LOCAL, `app/stats/${METRIC_KEY}/values.json`);
+  const outPath = resolve(R2_LOCAL, statsR2Key(METRIC_KEY, "prefecture"));
   mkdirSync(dirname(outPath), { recursive: true });
   writeFileSync(outPath, JSON.stringify(payload));
   console.log(`wrote ${outPath} (${rows.length} rows)`);

@@ -1,4 +1,5 @@
 #!/usr/bin/env tsx
+import { statsR2Key } from "@stats47/r2-storage/keys";
 import { existsSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -86,7 +87,7 @@ async function main(): Promise<void> {
 
   const [rankings, population] = await Promise.all([
     readRankings(inputRoot, sourceBase),
-    fetchCitiesPayload(`${sourceBase}/app/stats/${CITY_DATABOOK_POPULATION_METRIC_KEY}/cities.json`) as Promise<{
+    fetchCitiesPayload(`${sourceBase}/${statsR2Key(CITY_DATABOOK_POPULATION_METRIC_KEY, "city")}`) as Promise<{
       rows: CityPopulationHistoryRow[];
     }>,
   ]);
@@ -106,7 +107,7 @@ async function main(): Promise<void> {
   const headlineObservations = new Map<string, CityPopulationHistoryRow[]>([[CITY_DATABOOK_POPULATION_METRIC_KEY, population.rows]]);
   for (const key of CITY_DATABOOK_LAYOUT.headlineMetricKeys) {
     if (headlineObservations.has(key)) continue;
-    const payload = (await fetchCitiesPayload(`${sourceBase}/app/stats/${key}/cities.json`)) as { rows: CityPopulationHistoryRow[] };
+    const payload = (await fetchCitiesPayload(`${sourceBase}/${statsR2Key(key, "city")}`)) as { rows: CityPopulationHistoryRow[] };
     headlineObservations.set(key, payload.rows);
   }
   const wardBreakdowns = buildWardBreakdowns({

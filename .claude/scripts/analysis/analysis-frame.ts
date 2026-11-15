@@ -13,7 +13,7 @@ import { join } from "node:path";
 
 import { buildMunicipalityEntityPolicy, listPublishableMunicipalities } from "@stats47/area";
 
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { R2_PUBLIC_ORIGIN, statsR2Key } from "@stats47/r2-storage/keys";
 import { buildFrame, checkCoverage, checkReliability, checkTotal, checkYears, columnOf, indexRows, latestYear, summarize } from "./analysis-frame-core.mjs";
 
 interface SpecMetric {
@@ -44,13 +44,13 @@ if (!specPath) {
 }
 const spec: Spec = JSON.parse(readFileSync(specPath, "utf8"));
 const dataDir = arg("--data-dir");
-const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
+const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_ORIGIN;
 
 async function readRows(key: string, file: "cities" | "values"): Promise<Array<Record<string, unknown>> | null> {
   const local = dataDir ? join(dataDir, `${key}.${file}.json`) : null;
   if (local && existsSync(local)) return JSON.parse(readFileSync(local, "utf8")).rows;
   if (dataDir) return null;
-  const res = await fetch(`${R2_BASE}/app/stats/${key}/${file}.json`);
+  const res = await fetch(`${R2_BASE}/${statsR2Key(key, file === "cities" ? "city" : "prefecture")}`);
   if (res.status === 404) return null;
   if (!res.ok) throw new Error(`${key}/${file}: HTTP ${res.status}`);
   return (await res.json()).rows;

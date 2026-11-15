@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { rankingR2Key } from '../lib/r2-keys.mjs';
 /**
  * check-active-r2-coverage.mjs — 「isActive:true なのに R2 に配信 snapshot が無い」公開漏れ検出
  *
@@ -66,7 +67,7 @@ async function worker() {
   while (idx < list.length) {
     const key = list[idx++];
     try {
-      const res = await fetch(`${R2_PUBLIC}/app/ranking/${key}/item.json`, {
+      const res = await fetch(`${R2_PUBLIC}/${rankingR2Key(key, "item")}`, {
         method: "HEAD",
         signal: AbortSignal.timeout(15_000),
       });

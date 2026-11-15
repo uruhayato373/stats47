@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { statsR2Key } from "../lib/r2-keys.mjs";
 /** Official ENV/CFA county series. Run from repository root; only --write-local stages canonical values. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -955,7 +956,7 @@ async function main() {
     assert.equal(payload.rows.length, 47);
     assert.equal(new Set(payload.rows.map((r) => r.areaCode)).size, 47);
     files.push({
-      key: `app/stats/${f.key}/values.json`,
+      key: statsR2Key(f.key, "prefecture"),
       content: JSON.stringify(payload),
       metricKey: f.key,
       rowCount: 47,

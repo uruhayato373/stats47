@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { statsR2Key } from '../lib/r2-keys.mjs';
 /**
  * note の県別家計記事 (a-kakei-<pref>) 用 chart-data.json を作る。
  *
@@ -39,7 +40,7 @@ async function fetchValues(key) {
     const raw = JSON.parse(fs.readFileSync(local, "utf8"));
     return Array.isArray(raw) ? raw : raw.rows;
   }
-  const res = await fetch(`${R2}/app/stats/${key}/values.json`);
+  const res = await fetch(`${R2}/${statsR2Key(key, "prefecture")}`);
   if (!res.ok) return null;
   const raw = await res.json();
   return Array.isArray(raw) ? raw : raw.rows;

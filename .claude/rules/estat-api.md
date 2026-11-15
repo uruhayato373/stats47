@@ -16,6 +16,7 @@ paths:
   - R2 キャッシュキーが `statsDataId` + `cdCat01` 等で決まるため、年度範囲パラメータの違いでキャッシュが分断され、同じデータが複数キャッシュされる
   - 全年度取得→メモリフィルタの方がキャッシュヒット率が高く、API 呼び出し回数を最小化できる
 - **`cdArea`（地域コード指定）を使わない。** 全都道府県を一括取得し、`areaCode` でフィルタする。理由は同上（47都道府県でキャッシュを共有）
+  - 例外: 表の写し (`estat-table-snapshot.ts`) は、地域と年以外の軸で最も細かく分けても 1 ファイル 5 万行を超える表に限り、都道府県を割らない `cdAreaFrom`/`cdAreaTo` の範囲で要求を分ける (2026-11-15 オーナー決定。範囲は `planTablePartitions` の `areaRanges` が決め、キーは `area=<from>-<to>`)
 - **地域コードは5桁（`01000`〜`47000`）に統一。** 2桁→5桁の正規化は不要な設計とする
 
 ## e-Stat に「無い」データ（再調査防止・2026-06 確認）
@@ -66,7 +67,7 @@ metric の title・subtitle・note やブログ本文で品目の範囲を書く
 ## 関連
 
 - **e-Statメタデータ完全カタログ** (全国/都道府県/市区町村のstatsDataId+分類コード+年次+エリア種別を月次でR2保有): 初回のみ`catalog.mjs pull`、以後`node --import tsx .claude/scripts/estat/catalog.mjs search <語>`。統計表の存在確認は生API呼び出しの前にこちらを先に引く。設計 `docs/02_実装計画/48_e-Statカタログ実装仕様.md`
-- e-Stat API クライアント: `packages/estat-api/`
+- e-Stat API クライアント: `packages/estat-api/` (呼び出しの入口は TS が `src/ingest.ts`、素の node が `.claude/scripts/lib/estat-catalog/api.mjs`。URL と app ID の直書きは `check-estat-entrypoint.mjs` が止める)
 - 正準ユーティリティ: `packages/estat-api/src/stats-data/utils/extract-year-code.ts`（`extractYearCode`）
 - year lint: `packages/data-configs/scripts/validate-metric-years.ts`（`npm run validate:years`）
 - **metric config 構造規約 (category 17 軸 / title・subtitle・note・description の役割)**: `.claude/rules/metric-config-standards.md`（lint: `npm run validate:config`）

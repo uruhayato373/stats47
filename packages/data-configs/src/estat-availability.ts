@@ -1,3 +1,4 @@
+import { extractYearCode } from "@stats47/estat-api/api";
 /**
  * e-Stat の実在年の台帳 (`data/estat/availability/tables/<statsDataId>.json`) の型と、
  * metric config の `years` と台帳を突き合わせる純粋関数。
@@ -89,10 +90,9 @@ export function availabilityQueryKey(
 export function expandYearSpec(spec: YearSpec): number[] | null {
   if (spec === 'all') return null;
   // フルタイムコード (例 2009100000) が混ざる config があるので 4 桁へ寄せる (inYearRange と同じ)
-  const to4 = (n: number): number => (n > 9999 ? Number(String(n).slice(0, 4)) : n);
-  if ('years' in spec) return [...new Set(spec.years.map(to4))].sort((a, b) => a - b);
+  if ('years' in spec) return [...new Set(spec.years.map((n) => (n > 9999 ? Number(/^\d{4}/.test(String(n)) ? extractYearCode(String(n)) : String(n).slice(0, 4)) : n)))].sort((a, b) => a - b);
   const out: number[] = [];
-  for (let y = to4(spec.from); y <= to4(spec.to); y++) out.push(y);
+  for (let y = (spec.from > 9999 ? Number(/^\d{4}/.test(String(spec.from)) ? extractYearCode(String(spec.from)) : String(spec.from).slice(0, 4)) : spec.from); y <= (spec.to > 9999 ? Number(/^\d{4}/.test(String(spec.to)) ? extractYearCode(String(spec.to)) : String(spec.to).slice(0, 4)) : spec.to); y++) out.push(y);
   return out;
 }
 

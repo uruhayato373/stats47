@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { statsR2Key } from "../lib/r2-keys.mjs";
 /** Official care, medical, cancer and adult-steps sources; only --write-local stages R2. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -927,7 +928,7 @@ export async function main() {
     });
     const content = JSON.stringify(payload);
     files.push({
-      key: `app/stats/${f.key}/values.json`,
+      key: statsR2Key(f.key, "prefecture"),
       metricKey: f.key,
       rowCount: 47,
       sha256: sha(content),

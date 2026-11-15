@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { statsR2Key } from "../lib/r2-keys.mjs";
 /** Official prefectural public-property stock; only --write-local stages canonical values. */
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
@@ -596,7 +597,7 @@ async function main() {
     },
   });
   const body = Buffer.from(JSON.stringify(payload) + "\n");
-  const key = "app/stats/" + FIELD.key + "/values.json";
+  const key = statsR2Key(FIELD.key, "prefecture");
   const report = {
     status: o["write-local"]
       ? "source-verified-staged"

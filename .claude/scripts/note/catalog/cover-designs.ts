@@ -1,3 +1,4 @@
+import { statsR2Key } from '../../lib/r2-keys.mjs';
 import { REFERENCE_COVER_EXTRA, REFERENCE_COVER_HEADLINES } from './reference-cover-copy';
 import { REFERENCE_COVER_FIGURES } from './reference-cover-figures';
 /** noteカバーの制作判断。実測値は入力JSON、地図は既存GIS、画像は派生物。 */
@@ -549,7 +550,7 @@ export type DatasetCoverFigure =
   // pack-csv: a column of the pack's own data.csv (local .local/data-packs build) drawn as a choropleth.
   | { kind: 'pack-csv'; source: string; column: string; caption: string };
 export const DATASET_COVER_FIGURES: Record<string, DatasetCoverFigure> = {
-  'd-geo-ipss-prefecture-map': { kind: 'stats-values', source: 'app/stats/future-population-change-rate-2050/values.json', year: '2050', invert: true,
+  'd-geo-ipss-prefecture-map': { kind: 'stats-values', source: statsR2Key("future-population-change-rate-2050", "prefecture"), year: '2050', invert: true,
     caption: '2050年の人口増減率（2020年比）濃いほど減少' },
   'd-geo-flood-population-mesh': { kind: 'geo-item', source: 'app/geo/population-flood-risk/item.json', metric: 'floodExposureShare2050',
     caption: '2050年 浸水想定区域の人口比率 濃いほど高い' },

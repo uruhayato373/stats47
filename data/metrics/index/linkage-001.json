@@ -6746,10 +6746,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:software-engineer-income-gap",
-          "kind": "blog"
-        },
-        {
           "pageId": "ranking:avg-salary-all-prefecture",
           "kind": "ranking"
         }
@@ -11213,10 +11209,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "blog:beef-consumption-prefecture-gap",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:kyoto-food-culture",
           "kind": "blog"
         },
@@ -11662,10 +11654,6 @@
         {
           "pageId": "area:47000",
           "kind": "area"
-        },
-        {
-          "pageId": "blog:beef-consumption-prefecture-gap",
-          "kind": "blog"
         },
         {
           "pageId": "blog:beef-consumption-quantity",

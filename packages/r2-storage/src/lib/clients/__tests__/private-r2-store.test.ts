@@ -3,10 +3,28 @@ import fs from "node:fs";
 import https from "node:https";
 import { EventEmitter } from "node:events";
 import { S3Client, HeadObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
-import { createR2Store, retryRemoteRead, wranglerTokenProvider } from "../private-r2-store.mjs";
+import { createR2S3Client, createR2Store, retryRemoteRead, wranglerTokenProvider } from "../private-r2-store.mjs";
 
 afterEach(() => { vi.useRealTimers(); vi.restoreAllMocks(); vi.unstubAllEnvs(); });
 describe("shared Node R2 transport", () => {
+  it("creates S3 clients with the existing environment and five adaptive attempts", async () => {
+    vi.stubEnv("R2_S3_ENDPOINT", "https://example.test");
+    vi.stubEnv("R2_ACCESS_KEY_ID", "test-access");
+    vi.stubEnv("R2_SECRET_ACCESS_KEY", "test-secret");
+    const send = vi.spyOn(S3Client.prototype, "send").mockResolvedValue({} as never);
+    const client = createR2S3Client({ bucket: "test-bucket" });
+    try {
+      expect(await client.config.maxAttempts()).toBe(5);
+      expect(client.config.retryMode).toBe("adaptive");
+      expect((await client.config.retryStrategy()).mode).toBe("adaptive");
+      expect(await client.config.region()).toBe("auto");
+      expect(await client.config.endpoint?.()).toMatchObject({ hostname: "example.test" });
+      expect(await client.config.credentials()).toMatchObject({
+        accessKeyId: "test-access", secretAccessKey: "test-secret",
+      });
+      expect(send).not.toHaveBeenCalled();
+    } finally { client.destroy(); }
+  });
   it("waits through the near-expiry window and shares one actual refresh", async () => {
     vi.useFakeTimers();
     const now = Date.parse("2026-11-14T00:00:00Z");

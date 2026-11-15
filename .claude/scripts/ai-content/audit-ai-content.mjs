@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { R2_PUBLIC_ORIGIN, RANKING_R2_PREFIX } from "../lib/r2-keys.mjs";
 /**
  * ai-content 決定的監査ゲート (ranking ページの 考察/地域傾向/FAQ/県別解説)
  *
@@ -42,9 +43,8 @@ import {
   findOutOfRangeNumbers,
   findPrefectureMismatches,
 } from "./lib/number-audit.mjs";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
-const R2_PUBLIC = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
+const R2_PUBLIC = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_ORIGIN;
 
 // --- ルール定数 (プロンプトと同期。変更時は ranking-content-prompt.ts も確認) ---
 const NG_WORDS = ["ワースト", "ベスト", "激減", "急増", "衝撃"];
@@ -279,7 +279,7 @@ export async function loadRow({ key, file }) {
     return JSON.parse(fs.readFileSync(file, "utf8"));
   }
   if (!key) throw new Error("rankingKey または --file <path> を指定してください");
-  const url = `${R2_PUBLIC}/app/ranking/${encodeURIComponent(key)}/ai-content.json`;
+  const url = `${R2_PUBLIC}/${RANKING_R2_PREFIX}/${encodeURIComponent(key)}/ai-content.json`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`R2 取得失敗 ${res.status}: ${url}`);
   return res.json();
@@ -294,7 +294,7 @@ export async function loadRow({ key, file }) {
  */
 export async function loadValueContext({ key, yearCode }) {
   if (!key) return null;
-  const url = `${R2_PUBLIC}/app/ranking/${encodeURIComponent(key)}/values.json`;
+  const url = `${R2_PUBLIC}/${RANKING_R2_PREFIX}/${encodeURIComponent(key)}/values.json`;
   const res = await fetch(url).catch(() => null);
   if (!res || !res.ok) return null;
   const doc = await res.json().catch(() => null);

@@ -1,5 +1,6 @@
+import { isPrefectureAreaCode } from "../lib/prefectures.cjs";
 /**
- * 外部指標の取り込みスクリプトが手元に書いた値 (.local/r2/app/stats/<key>/values.json) を、R2 へ上げる前に検査する。
+ * 外部指標の取り込みスクリプトが手元に書いた値 (観測値の置き場) を、R2 へ上げる前に検査する。
  * external-metric-ingest.yml が、取り込みの直後・R2 への反映の直前に呼ぶ。
  *
  * 使い方: node .claude/scripts/themes/verify-external-ingest.mjs --report <取り込みの報告 JSON> [--keys-out <ファイル>]
@@ -20,7 +21,6 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 const PREFECTURE_COUNT = 47;
 /** このスクリプトが上げてよい場所。観測値の都道府県の値だけ */
 const KEY_PATTERN = /^app\/stats\/([a-z0-9]+(?:-[a-z0-9]+)*)\/values\.json$/;
-const PREFECTURE_CODE = /^(0[1-9]|[1-3][0-9]|4[0-7])000$/;
 
 const sha = (bytes) => createHash('sha256').update(bytes).digest('hex');
 
@@ -40,7 +40,7 @@ export function verifyIngestReport(report, read) {
 
   for (const file of report.files) {
     const matched = KEY_PATTERN.exec(file.key);
-    assert.ok(matched, `key is outside app/stats/<metric>/values.json: ${file.key}`);
+    assert.ok(matched, `key is outside prefecture observation storage: ${file.key}`);
     const metricKey = matched[1];
     const bytes = read(file.key);
     assert.equal(sha(bytes), file.sha256, `staged file differs from the ingest report: ${file.key}`);
@@ -53,7 +53,7 @@ export function verifyIngestReport(report, read) {
 
     const byYear = new Map();
     for (const row of payload.rows) {
-      assert.match(String(row.areaCode), PREFECTURE_CODE, `invalid prefecture code: ${file.key} ${row.areaCode}`);
+      assert.ok(isPrefectureAreaCode(String(row.areaCode)), `invalid prefecture code: ${file.key} ${row.areaCode}`);
       assert.match(String(row.yearCode), /^\d{4}$/, `yearCode must be 4 digits: ${file.key} ${row.yearCode}`);
       assert.ok(typeof row.value === 'number' && Number.isFinite(row.value), `non-finite value: ${file.key} ${row.areaCode}`);
       assert.ok(typeof row.unit === 'string' && row.unit.length > 0, `unit is missing: ${file.key}`);

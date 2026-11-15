@@ -1,3 +1,5 @@
+import { resolveEstatAppId } from "../../ingest";
+const appIdFromEnv = resolveEstatAppId(process.env, false);
 /**
  * e-Stat統計表リスト取得クラス
  * 責務: API通信とエラーハンドリング
@@ -8,7 +10,6 @@ import { executeHttpRequest } from "../../core/client/http-client";
 import {
     ESTAT_API,
     ESTAT_API_CONFIG,
-    ESTAT_APP_ID,
     ESTAT_ENDPOINTS,
 } from "../../core/config";
 import {
@@ -174,7 +175,7 @@ export class EstatStatsListFetcher {
       );
       const startTime = Date.now();
 
-      const requestParams = composeRequestParams(params, ESTAT_APP_ID);
+      const requestParams = composeRequestParams(params, appIdFromEnv);
       logger.debug({ requestParams }, "Fetcher: composeRequestParams後のパラメータ");
       logger.debug(
         {

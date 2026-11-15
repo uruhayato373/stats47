@@ -17,12 +17,12 @@
     }
   },
   "scripts": {
-    "export:snapshot": "NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.stats47.jp tsx src/scripts/export-snapshot.ts",
+    "export:snapshot": "NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=$(node --import tsx --input-type=module -e 'import { R2_PUBLIC_ORIGIN } from \"@stats47/r2-storage/keys\"; process.stdout.write(R2_PUBLIC_ORIGIN)') tsx src/scripts/export-snapshot.ts",
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
     "type-check": "tsc --noEmit",
-    "check:highlights": "NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.stats47.jp tsx src/scripts/check-highlights.ts"
+    "check:highlights": "NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=$(node --import tsx --input-type=module -e 'import { R2_PUBLIC_ORIGIN } from \"@stats47/r2-storage/keys\"; process.stdout.write(R2_PUBLIC_ORIGIN)') tsx src/scripts/check-highlights.ts"
   },
   "dependencies": {
     "@stats47/data-configs": "*",

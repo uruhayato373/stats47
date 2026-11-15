@@ -13,7 +13,7 @@
  *   1. e-Stat のファイルダウンロード (statInfId) から3回分の xlsx を取得
  *   2. 「陸上競技場」シートの 都道府県行(47) x 「公共スポーツ施設/計」列を抽出 ('-' は0)
  *   3. 検算 (各回): 47県の合計 == 「総数」行の公共計 / 各県で 公共計 = 公立社会教育施設付帯 + 社会体育施設
- *   4. .local/r2/app/stats/<key>/values.json へ書き出し
+ *   4. 観測値の置き場 へ書き出し
  *
  * 実行: node .claude/scripts/data/fetch-sports-facility-athletics-stadium.mjs
  * 正典: .claude/rules/data-provenance-standards.md

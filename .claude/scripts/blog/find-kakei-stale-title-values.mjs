@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { rankingR2Key } from '../lib/r2-keys.mjs';
 /**
  * 家計調査に紐づく公開ブログのうち、題 (title / seoTitle) の「県名 + 数値」が最新年ではなく過去の年の値と
  * 一致する記事を一覧する。家計調査の年次値を 2025 年へ更新したあとも、題に 2024 年の値が残っていた (2026-11-02 実測 138 本)。
@@ -61,7 +62,7 @@ async function main() {
     if (!kakeiKeys.has(key)) continue;
     const candidates = slugs.map((slug) => bySlug.get(slug)).filter(Boolean);
     if (!candidates.some((a) => titleNumbers(`${a.title} ${a.seoTitle ?? ""}`).length)) continue;
-    const values = await fetchJson(`app/ranking/${key}/values.json`);
+    const values = await fetchJson(rankingR2Key(key, "values"));
     if (!values?.partitions?.length) continue;
     const latest = values.partitions.map((p) => p.yearCode).sort().at(-1);
     for (const article of candidates) {

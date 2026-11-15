@@ -2,6 +2,158 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "theme-population-pyramid-50-54-male",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A121101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A121101"
+        },
+        "derived": false,
+        "configHash": "f42a335b49700510"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-50-54-male",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-55-59-female",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A121202"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A121202"
+        },
+        "derived": false,
+        "configHash": "e1636a935edcc308"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-55-59-female",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-55-59-male",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A121201"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A121201"
+        },
+        "derived": false,
+        "configHash": "8de49f307aee3763"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-55-59-male",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-60-64-female",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A121302"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A121302"
+        },
+        "derived": false,
+        "configHash": "1cd43ae20bcdb739"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-60-64-female",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
       "metricKey": "theme-population-pyramid-60-64-male",
       "pageId": null,
       "title": "5歳階級別人口",
@@ -2878,10 +3030,6 @@
         },
         {
           "pageId": "blog:marriage-divorce-okinawa",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:total-fertility-rate",
           "kind": "blog"
         },
         {
@@ -8611,6 +8759,30 @@
       "themes": []
     },
     {
+      "metricKey": "traffic-accidents-party-a-age-75-plus-per-100k",
+      "pageId": null,
+      "title": "第1当事者が75歳以上の交通事故発生件数",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.npa.go.jp/publications/statistics/koutsuu/opendata/2025/honhyo_2025.csv"
+        },
+        "fetcherKey": "manual",
+        "configHash": "21188b08ebcacbe3"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:traffic-accidents-party-a-age-75-plus-per-100k",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "traffic-safety-grant-municipal",
       "pageId": null,
       "title": "交通安全対策特別交付金",
@@ -10280,599 +10452,6 @@
         },
         {
           "pageId": "ranking:travel-participation-rate-homecoming",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "travel-participation-rate-overnight",
-      "pageId": "ranking:travel-participation-rate-overnight",
-      "title": "旅行（1泊2日以上）の行動者率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003456093",
-          "filters": {
-            "cdCat01": "0",
-            "cdCat02": "0",
-            "cdCat03": "2"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003456093",
-          "cdCat01": "0",
-          "cdCat02": "0",
-          "cdCat03": "2"
-        },
-        "derived": false,
-        "configHash": "b291efd4c577fce7"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:travel-behavior-gender-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:travel-participation-rate-overnight",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:tourism",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "tourism"
-      ]
-    },
-    {
-      "metricKey": "travel-participation-rate-overseas",
-      "pageId": "ranking:travel-participation-rate-overseas",
-      "title": "海外観光旅行の行動者率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003456093",
-          "filters": {
-            "cdCat01": "0",
-            "cdCat02": "0",
-            "cdCat03": "22"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003456093",
-          "cdCat01": "0",
-          "cdCat02": "0",
-          "cdCat03": "22"
-        },
-        "derived": false,
-        "configHash": "04025b7461ce2f8f"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:tourism",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:travel-participation-rate-overseas",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:tourism",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "tourism"
-      ]
-    },
-    {
-      "metricKey": "treatment-rate-arthrosis-inpatient",
-      "pageId": "ranking:treatment-rate-arthrosis-inpatient",
-      "title": "関節症の受療率（入院）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004026105",
-          "filters": {
-            "cdCat01": "44",
-            "cdCat03": "1"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004026105",
-          "cdCat01": "44",
-          "cdCat03": "1"
-        },
-        "ops": {
-          "areaAxis": {
-            "axis": "cat02",
-            "scheme": "seq-pref"
-          }
-        },
-        "derived": true,
-        "configHash": "a95d243e1d15679d"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:treatment-rate-arthrosis-inpatient",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "treatment-rate-arthrosis-outpatient",
-      "pageId": "ranking:treatment-rate-arthrosis-outpatient",
-      "title": "関節症の受療率（外来）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004026105",
-          "filters": {
-            "cdCat01": "44",
-            "cdCat03": "4"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004026105",
-          "cdCat01": "44",
-          "cdCat03": "4"
-        },
-        "ops": {
-          "areaAxis": {
-            "axis": "cat02",
-            "scheme": "seq-pref"
-          }
-        },
-        "derived": true,
-        "configHash": "35954083d77e5174"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:treatment-rate-arthrosis-outpatient",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "treatment-rate-asthma-inpatient",
-      "pageId": "ranking:treatment-rate-asthma-inpatient",
-      "title": "喘息の受療率（入院）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004026105",
-          "filters": {
-            "cdCat01": "34",
-            "cdCat03": "1"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004026105",
-          "cdCat01": "34",
-          "cdCat03": "1"
-        },
-        "ops": {
-          "areaAxis": {
-            "axis": "cat02",
-            "scheme": "seq-pref"
-          }
-        },
-        "derived": true,
-        "configHash": "90d6061f51e3e7cc"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:treatment-rate-asthma-inpatient",
           "kind": "ranking"
         }
       ],

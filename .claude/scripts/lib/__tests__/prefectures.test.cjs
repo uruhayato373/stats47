@@ -43,3 +43,21 @@ test("どちらの場所にも台帳が無ければ空配列を返さず停止�
     fs.rmdirSync(directory);
   }
 });
+
+test("ESM を require() しない: require(esm) を無効にした Node でも読める (Node 20.19 の ERR_REQUIRE_CYCLE_MODULE の再発防止)", () => {
+  const { execFileSync } = require("node:child_process");
+  const out = execFileSync(
+    process.execPath,
+    ["--no-experimental-require-module", "-e", `console.log(require(${JSON.stringify(filename)}).PREF_AREA_CODES.length)`],
+    { cwd: root, encoding: "utf8" },
+  );
+  assert.equal(out.trim(), "47");
+  assert.doesNotMatch(source, /require\([^)]*\.mjs["']\)/);
+});
+
+test("カタログの areas.prefectures の行が指す台帳を読む (datasetPath と同じ場所)", async () => {
+  const { datasetPath } = await import("../../../../config/datasets.mjs");
+  const loaded = load(path.dirname(filename), root);
+  const fromCatalog = JSON.parse(fs.readFileSync(path.join(root, datasetPath("areas.prefectures")), "utf8"));
+  assert.equal(JSON.stringify(loaded.PREFECTURES), JSON.stringify(fromCatalog));
+});

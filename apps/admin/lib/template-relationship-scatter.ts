@@ -1,3 +1,4 @@
+import { statsR2Key } from '@stats47/r2-storage/keys';
 import { metricPresentation } from '../../../packages/data-configs/src/color-policy';
 import { averageTemperature } from '../../../data/metrics/average-temperature';
 import { keroseneConsumptionQuantity } from '../../../data/metrics/kerosene-consumption-quantity';
@@ -17,11 +18,11 @@ export const RELATIONSHIP_SAMPLE_YEAR = '2024';
 export const RELATIONSHIP_SAMPLE_METRICS = { x: averageTemperature, y: keroseneConsumptionQuantity } as const;
 export const RELATIONSHIP_SAMPLE_SOURCES = {
   x: {
-    bucket: 'stats47', key: 'app/stats/average-temperature/values.json',
+    bucket: 'stats47', key: statsR2Key('average-temperature', 'prefecture'),
     sha256: '1085cc00b6564b5211de8ba6e927d68f58f93e66721300b184ec891d5e7f64f2', bytes: 279380,
   },
   y: {
-    bucket: 'stats47', key: 'app/stats/kerosene-consumption-quantity/values.json',
+    bucket: 'stats47', key: statsR2Key('kerosene-consumption-quantity', 'prefecture'),
     sha256: '37760c8c8de1eb22b19bfa8c66d3fa2e54c6c923d5cf08f8fbba72186bc24c52', bytes: 107073,
   },
 } as const;

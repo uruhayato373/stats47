@@ -1,3 +1,4 @@
+import { rankingR2Key } from "@stats47/r2-storage/keys";
 /**
  * R2 (公開 URL) から ranking 観測値を取得するリーダ。
  * `app/ranking/<key>/values.json` の最新フル 47 県 partition を返す。
@@ -83,7 +84,7 @@ export async function fetchRankingValues(
   rankingKey: string,
   deps: { fetchImpl?: typeof fetch; sleep?: (ms: number) => Promise<void> } = {},
 ): Promise<FetchedValues> {
-  const payload = await fetchValuesPayload(`${R2_BASE}/app/ranking/${rankingKey}/values.json`, rankingKey, deps);
+  const payload = await fetchValuesPayload(`${R2_BASE}/${rankingR2Key(rankingKey, "values")}`, rankingKey, deps);
   const full = payload.partitions
     .filter((p) => p.values.length >= 47)
     .slice()

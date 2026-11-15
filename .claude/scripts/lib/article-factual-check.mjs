@@ -1,3 +1,4 @@
+import { PREF_NAMES as OFFICIAL_PREF_NAMES } from "./prefectures.cjs";
 /**
  * article-factual-check.mjs
  *
@@ -31,16 +32,7 @@ import path from "node:path";
 // 定数 export
 // ============================================================================
 
-export const PREF_NAMES = [
-  "北海道", "青森", "岩手", "宮城", "秋田", "山形", "福島",
-  "茨城", "栃木", "群馬", "埼玉", "千葉", "東京", "神奈川",
-  "新潟", "富山", "石川", "福井", "山梨", "長野",
-  "岐阜", "静岡", "愛知", "三重",
-  "滋賀", "京都", "大阪", "兵庫", "奈良", "和歌山",
-  "鳥取", "島根", "岡山", "広島", "山口",
-  "徳島", "香川", "愛媛", "高知",
-  "福岡", "佐賀", "長崎", "熊本", "大分", "宮崎", "鹿児島", "沖縄",
-];
+export const PREF_NAMES = OFFICIAL_PREF_NAMES.map((name) => name.replace(/[都府県]$/, ""));
 
 // rank-gap/change 表現 (絶対 rank ではない) — 「28位もの乖離」「N位転落」等は skip
 export const RANK_CONTEXT_SKIP = /(?:もの)?(?:乖離|差(?:が|を|に|は|の|・|、|\s)|の差|格差|落ち|下落|転落|上昇|アップ|ダウン|上昇分|低下分|改善|悪化)/;

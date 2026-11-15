@@ -1191,6 +1191,7 @@ import { heaterConsumptionExpenditure } from "../../../data/metrics/heater-consu
 import { heaterConsumptionQuantity } from "../../../data/metrics/heater-consumption-quantity";
 import { heatingCoolingAppliancesGroupConsumptionExpenditure } from "../../../data/metrics/heating-cooling-appliances-group-consumption-expenditure";
 import { heatstrokeDeaths } from "../../../data/metrics/heatstroke-deaths";
+import { heatstrokeEmergencyTransportsPer100k } from "../../../data/metrics/heatstroke-emergency-transports-per-100k";
 import { heatstrokeEmergencyTransports } from "../../../data/metrics/heatstroke-emergency-transports";
 import { highSchoolAdvancementRate } from "../../../data/metrics/high-school-advancement-rate";
 import { highSchoolClubPer100RugbyMale } from "../../../data/metrics/high-school-club-per100-rugby-male";
@@ -1738,9 +1739,12 @@ import { museumLikeFacilityVisitors } from "../../../data/metrics/museum-like-fa
 import { musicLessonConsumptionExpenditure } from "../../../data/metrics/music-lesson-consumption-expenditure";
 import { musicalInstrumentConsumptionExpenditure } from "../../../data/metrics/musical-instrument-consumption-expenditure";
 import { nationalAssessmentElementaryBreakfastRate } from "../../../data/metrics/national-assessment-elementary-breakfast-rate";
+import { nationalAssessmentElementaryMathematicsCorrectRate } from "../../../data/metrics/national-assessment-elementary-mathematics-correct-rate";
 import { nationalAssessmentElementaryReadingLikeRate } from "../../../data/metrics/national-assessment-elementary-reading-like-rate";
 import { nationalAssessmentElementaryStudy1hPlusRate } from "../../../data/metrics/national-assessment-elementary-study-1h-plus-rate";
 import { nationalAssessmentElementaryTutoringRate } from "../../../data/metrics/national-assessment-elementary-tutoring-rate";
+import { nationalAssessmentJuniorHighMathematicsCorrectRate } from "../../../data/metrics/national-assessment-junior-high-mathematics-correct-rate";
+import { nationalAssessmentJuniorHighSelfEsteemRate } from "../../../data/metrics/national-assessment-junior-high-self-esteem-rate";
 import { nationalHealthInsuranceBenefits } from "../../../data/metrics/national-health-insurance-benefits";
 import { nationalHealthInsuranceEnrolleesPer1000 } from "../../../data/metrics/national-health-insurance-enrollees-per-1000";
 import { nationalHealthInsuranceMedicalExpensePerPerson } from "../../../data/metrics/national-health-insurance-medical-expense-per-person";
@@ -3077,6 +3081,7 @@ import { trafficAccidentDeathsPer100k } from "../../../data/metrics/traffic-acci
 import { trafficAccidentInjuriesPer100k } from "../../../data/metrics/traffic-accident-injuries-per-100k";
 import { trafficAccidentInjuries } from "../../../data/metrics/traffic-accident-injuries";
 import { trafficAccidentPer100k } from "../../../data/metrics/traffic-accident-per-100k";
+import { trafficAccidentsPartyAAge75PlusPer100k } from "../../../data/metrics/traffic-accidents-party-a-age-75-plus-per-100k";
 import { trafficSafetyGrantMunicipal } from "../../../data/metrics/traffic-safety-grant-municipal";
 import { trafficSafetySpecialGrantPrefecture } from "../../../data/metrics/traffic-safety-special-grant-prefecture";
 import { trainCommuterPassConsumptionExpenditure } from "../../../data/metrics/train-commuter-pass-consumption-expenditure";
@@ -4529,6 +4534,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "heater-consumption-quantity": heaterConsumptionQuantity,
   "heating-cooling-appliances-group-consumption-expenditure": heatingCoolingAppliancesGroupConsumptionExpenditure,
   "heatstroke-deaths": heatstrokeDeaths,
+  "heatstroke-emergency-transports-per-100k": heatstrokeEmergencyTransportsPer100k,
   "heatstroke-emergency-transports": heatstrokeEmergencyTransports,
   "high-school-advancement-rate": highSchoolAdvancementRate,
   "high-school-club-per100-rugby-male": highSchoolClubPer100RugbyMale,
@@ -5076,9 +5082,12 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "music-lesson-consumption-expenditure": musicLessonConsumptionExpenditure,
   "musical-instrument-consumption-expenditure": musicalInstrumentConsumptionExpenditure,
   "national-assessment-elementary-breakfast-rate": nationalAssessmentElementaryBreakfastRate,
+  "national-assessment-elementary-mathematics-correct-rate": nationalAssessmentElementaryMathematicsCorrectRate,
   "national-assessment-elementary-reading-like-rate": nationalAssessmentElementaryReadingLikeRate,
   "national-assessment-elementary-study-1h-plus-rate": nationalAssessmentElementaryStudy1hPlusRate,
   "national-assessment-elementary-tutoring-rate": nationalAssessmentElementaryTutoringRate,
+  "national-assessment-junior-high-mathematics-correct-rate": nationalAssessmentJuniorHighMathematicsCorrectRate,
+  "national-assessment-junior-high-self-esteem-rate": nationalAssessmentJuniorHighSelfEsteemRate,
   "national-health-insurance-benefits": nationalHealthInsuranceBenefits,
   "national-health-insurance-enrollees-per-1000": nationalHealthInsuranceEnrolleesPer1000,
   "national-health-insurance-medical-expense-per-person": nationalHealthInsuranceMedicalExpensePerPerson,
@@ -6415,6 +6424,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "traffic-accident-injuries-per-100k": trafficAccidentInjuriesPer100k,
   "traffic-accident-injuries": trafficAccidentInjuries,
   "traffic-accident-per-100k": trafficAccidentPer100k,
+  "traffic-accidents-party-a-age-75-plus-per-100k": trafficAccidentsPartyAAge75PlusPer100k,
   "traffic-safety-grant-municipal": trafficSafetyGrantMunicipal,
   "traffic-safety-special-grant-prefecture": trafficSafetySpecialGrantPrefecture,
   "train-commuter-pass-consumption-expenditure": trainCommuterPassConsumptionExpenditure,

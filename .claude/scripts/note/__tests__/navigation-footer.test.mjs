@@ -6,6 +6,7 @@ import {
   applyPublishedLinkRepairs,
   applyVisibleNavigationBeforeSeparator,
   assertCleanCardUrl,
+  includesExactUrl,
   buildNoteProductCardUrl,
   canonicalizeNoteEditorBody,
   externalCard,
@@ -212,6 +213,28 @@ test("published link repair replaces every exact legacy URL", () => {
   assert.equal(result.changed, true);
   assert.doesNotMatch(result.body, /ranking\/population/);
   assert.match(result.body, /ranking\/total-population/);
+});
+
+test("published link repair leaves longer URLs that only share the prefix", () => {
+  // 2026-11-13 の実例: d-engel-coefficient-income の本文は置換元を前方一致で含む別の正常なリンクを 6 か所持つ。
+  const body = '<p><a href="https://stats47.jp/ranking/food-expenditure">食料費</a>'
+    + '<a href="https://stats47.jp/ranking/food-expenditure?s47_ogp=863bf50747b3">カード</a>'
+    + '<a href="https://stats47.jp/ranking/food-expenditure-ratio-multi-person-households">エンゲル係数</a></p>';
+  const repairs = [{
+    mode: "replace-url",
+    fromUrl: "https://stats47.jp/ranking/food-expenditure",
+    toUrl: "https://stats47.jp/ranking/food-expenditure-total",
+  }];
+  const result = applyPublishedLinkRepairs(body, repairs);
+  assert.equal(result.changed, true);
+  assert.match(result.body, /href="https:\/\/stats47\.jp\/ranking\/food-expenditure-total"/);
+  assert.match(result.body, /food-expenditure-total\?s47_ogp=863bf50747b3/);
+  assert.match(result.body, /food-expenditure-ratio-multi-person-households"/);
+  assert.doesNotMatch(result.body, /food-expenditure-total-ratio/);
+  // 置換先が置換元を前方一致で含んでも、直した後の本文は「修復済み」と読める (流し直しで止まらない)。
+  assert.equal(includesExactUrl(result.body, repairs[0].fromUrl), false);
+  assert.equal(includesExactUrl(result.body, repairs[0].toUrl), true);
+  assert.equal(applyPublishedLinkRepairs(result.body, repairs).changed, false);
 });
 
 test("published card repair removes stale embed metadata and keeps a clean link", () => {

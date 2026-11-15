@@ -5,18 +5,19 @@
  *   npm run analysis:inventory -- --terms 製造,工業 --level city [--check-r2] [--out <json>]
  *
  * data/metrics/*.ts の key・title・subtitle・description が語に当たる指標を、粒度・年・公開状態・出典つきで並べる。
- * --check-r2 は公開 R2 の app/stats/<key>/cities.json (prefecture は prefectures.json) を読むだけで、書かない。
+ * --check-r2 は公開 R2 の観測値の置き場 (prefecture は prefectures.json) を読むだけで、書かない。
  */
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { R2_PUBLIC_ORIGIN, STATS_R2_PREFIX } from "../lib/r2-keys.mjs";
 import { parseArgs } from "node:util";
 
 import { datasetDir } from "../../../config/datasets.mjs";
 import { parseMetric, selectMetrics, summarizeRows } from "./analysis-inventory-core.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
-const R2_PUBLIC = "https://storage.stats47.jp/app/stats";
+const R2_PUBLIC = `${R2_PUBLIC_ORIGIN}/${STATS_R2_PREFIX}`;
 
 const { values } = parseArgs({
   options: {

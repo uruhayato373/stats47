@@ -74,6 +74,28 @@ function getPublicR2Base(): string | null {
   return base ? base.replace(/\/+$/, "") : null;
 }
 
+const PUBLIC_READ_MAX_RETRIES = 2;
+const PUBLIC_READ_MAX_WAIT_MS = 30_000;
+
+// Keep Node-only private transport dependencies out of this public/Workers reader.
+async function fetchPublicWithRetry(url: URL): Promise<Response> {
+  for (let attempt = 0; ; attempt++) {
+    const response = await fetch(url, { redirect: "error" });
+    if (![429, 503].includes(response.status) || attempt === PUBLIC_READ_MAX_RETRIES) {
+      return response;
+    }
+    const retryAfter = response.headers.get("retry-after")?.trim();
+    const serverDelay = retryAfter
+      ? /^\d+$/.test(retryAfter) ? Number(retryAfter) * 1000 : Date.parse(retryAfter) - Date.now()
+      : NaN;
+    const delay = Number.isFinite(serverDelay)
+      ? Math.min(PUBLIC_READ_MAX_WAIT_MS, Math.max(0, serverDelay))
+      : 300 * (attempt + 1);
+    await response.body?.cancel();
+    await new Promise((resolve) => setTimeout(resolve, delay));
+  }
+}
+
 async function fetchFromPublicUrl(base: string, key: string): Promise<Buffer | null> {
   // Keep authority under deployment configuration; the object key only supplies path segments.
   const url = new URL(base);
@@ -82,7 +104,7 @@ async function fetchFromPublicUrl(base: string, key: string): Promise<Buffer | n
   }
   const prefix = url.pathname.endsWith("/") ? url.pathname : `${url.pathname}/`;
   url.pathname = prefix + key.split("/").map(encodeURIComponent).join("/");
-  const res = await fetch(url, { redirect: "error" });
+  const res = await fetchPublicWithRetry(url);
   if (res.status === 404) return null;
   if (!res.ok) {
     throw new Error(`公開 R2 URL 取得に失敗 (HTTP ${res.status}): ${url}`);

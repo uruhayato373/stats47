@@ -1,3 +1,5 @@
+import { extractYearCode } from "@stats47/estat-api/api";
+// Compatibility: malformed time prefixes retain the previous slice result.
 /**
  * `MetricConfig.supplementalSources` の合流規則 (page-data-batch が使う純関数)。
  *
@@ -24,7 +26,7 @@ export interface MergedValues<V extends MergeableValue> {
   overlapYears: string[];
 }
 
-const yearOf = (v: MergeableValue): string => v["@time"].slice(0, 4);
+const yearOf = (v: MergeableValue): string => (typeof v["@time"] === "string" && /^\d{4}/.test(v["@time"]) ? extractYearCode(v["@time"]) : v["@time"].slice(0, 4));
 
 export function mergeSupplementalValues<V extends MergeableValue>(
   primary: readonly V[],

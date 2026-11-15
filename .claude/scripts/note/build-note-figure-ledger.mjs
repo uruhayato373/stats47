@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { rankingR2Key, statsR2Key } from '../lib/r2-keys.mjs';
 /**
  * build-note-figure-ledger.mjs — 公開済み note 記事の本文の図を台帳にし、今の R2 の値と照らす。
  *
@@ -192,7 +193,7 @@ export function yearOfBody(markdown, availableYears) {
 async function bodyClaimIssues(draft, rankingKey, rows, reviewed) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'note-figure-'));
   try {
-    const item = await fetchWithRetry(`${R2}/app/ranking/${rankingKey}/item.json`);
+    const item = await fetchWithRetry(`${R2}/${rankingR2Key(rankingKey, "item")}`);
     const label = (item ? JSON.parse(item).title : null) ?? rankingKey;
     const sorted = [...rows].sort((a, b) => b.value - a.value);
     const data = sorted.map((r) => ({ areaName: r.areaName, rank: sorted.findIndex((o) => o.value === r.value) + 1, value: r.value, label, unit: r.unit ?? '' }));
@@ -208,7 +209,7 @@ async function bodyClaimIssues(draft, rankingKey, rows, reviewed) {
 
 const valuesCache = new Map();
 const prefectureRows = (key) => {
-  if (!valuesCache.has(key)) valuesCache.set(key, fetchWithRetry(`${R2}/app/stats/${key}/values.json`).then((text) => (text ? JSON.parse(text).rows : null)));
+  if (!valuesCache.has(key)) valuesCache.set(key, fetchWithRetry(`${R2}/${statsR2Key(key, "prefecture")}`).then((text) => (text ? JSON.parse(text).rows : null)));
   return valuesCache.get(key).then((rows) => (rows ?? []).filter((r) => r.value !== null && /^\d{2}000$/.test(r.areaCode) && r.areaCode !== '00000'));
 };
 

@@ -10,6 +10,7 @@ import { fetchEstatData, fetchSampleCounts, shapeForPrefecture, applySupplements
 import { compareValues, selectTableSnapshotTargets, parseAuditArgs, assertSnapshotPayload, markSnapshotVerified, createVerificationReader } from "../../scripts/verify-table-snapshot-equivalence.js";
 import { makeSliceKey, type Axis } from "../../../estat-api/src/stats-data/utils/table-partitions.js";
 import { listAllMetrics } from "../registry.js";
+import { PREFECTURES } from "../area-axis.js";
 import type { MetricConfig, SourceConfig } from "../types.js";
 
 const table = "0003445758";
@@ -102,6 +103,34 @@ describe("verified table source selection (offline)", () => {
     expect(result.sources[0].sliceKeys).toEqual([]);
     expect(f.get).toHaveBeenCalledTimes(1);
   });
+  it("area-range slices are all read and rows outside a file's cdAreaFrom/To are rejected", async () => {
+    const ranges = [{ from: "01000", to: "01999", codeCount: 1 }, { from: "13000", to: "13999", codeCount: 1 }];
+    const build = (secondArea: string) => {
+      const bytes = new Map<string, Buffer>();
+      const files = ranges.map((range, i) => {
+        const key = `estat-tables/${table}/data/tab=08/area=${range.from}-${range.to}.json.gz`;
+        const values = [row("08", String(i + 1), { "@area": i === 0 ? "01000" : secondArea })];
+        const raw = Buffer.from(JSON.stringify({ cachedAt: "2026-11-15T00:00:00Z", apiVersion: "3.0",
+          params: { statsDataId: table, cdTab: "08", cdAreaFrom: range.from, cdAreaTo: range.to },
+          response: { GET_STATS_DATA: { RESULT: { STATUS: 0 }, STATISTICAL_DATA: { TABLE_INF: { "@id": table }, DATA_INF: { VALUE: values } } } } }));
+        const compressed = gzipSync(raw);
+        bytes.set(key, compressed);
+        return { key, rowCount: 1, bytes: compressed.length, uncompressedBytes: raw.length, sha256: hash(compressed) };
+      });
+      const manifest = { schemaVersion: 1, statsDataId: table, catalogVersion: "2024-11-27",
+        partition: { depth: 1, partitionAxes: ["tab"], fileCount: 2, areaRanges: ranges }, files, emptyPartitions: [], fileCount: 2, rowCount: 2 };
+      const manifestKey = `estat-tables/${table}/manifest.json`;
+      const manifestBytes = Buffer.from(JSON.stringify(manifest));
+      bytes.set(manifestKey, manifestBytes);
+      const entry: SnapshotEntry = { statsDataId: table, status: "verified", catalogVersion: "2024-11-27", manifestKey, manifestSha256: hash(manifestBytes),
+        depth: 1, partitionAxes: ["tab"], fileCount: 2, rowCount: 2, bucket: "stats47-private" };
+      return createSnapshotReader([entry], async (key) => bytes.get(key) ?? null);
+    };
+    const result = await withSnapshotReader(build("13000"), () => fetchEstatData("", source));
+    expect(result.values.map((v) => v["@area"])).toEqual(["01000", "13000"]);
+    expect(result.sources[0].sliceKeys).toHaveLength(2);
+    await expect(withSnapshotReader(build("27000"), () => fetchEstatData("", source))).rejects.toThrow(/mismatch/);
+  });
   it("annual income uses declared worker tabs, applies scaling once and excludes reference rows from ranks", async () => {
     const f = fixture([row("08", "300"), row("12", "500"), row("13", "0", { "@unit": "十人" }),
       row("40", "310", { "@time": "2023000000" }), row("44", "600", { "@time": "2023000000" }), row("45", "2", { "@time": "2023000000", "@unit": "十人" })], 2);
@@ -169,14 +198,32 @@ describe("verified table source selection (offline)", () => {
     const result = await withSnapshotReader(f.reader, () => fetchEstatData("", { ...source, cdCat03: "a", cdCat04: "b", cdCat05: "c,d" }));
     expect(result.values.map((v) => v.$)).toEqual(["1", "2"]);
   });
-  it("areaAxis reports why it needs the legacy path; snapshot-only mode blocks that live request", async () => {
+  it("areaAxis with a snapshot maps prefectures from the same catalog version, without live e-Stat", async () => {
     vi.stubEnv("ESTAT_SNAPSHOT_ONLY", "1");
-    const warning = vi.spyOn(console, "warn").mockImplementation(() => {});
+    const rows = PREFECTURES.map((p, i) => row("08", String(i + 1), { "@area": "00000", "@cat03": String(i + 1) }));
+    const f = fixture(rows);
+    const meta = (updated: string) => ({ response: { GET_META_INFO: { METADATA_INF: { TABLE_INF: { UPDATED_DATE: updated, SURVEY_DATE: 2022 },
+      CLASS_INF: { CLASS_OBJ: [{ "@id": "cat03", CLASS: [{ "@code": "0", "@name": "全国" }, ...PREFECTURES.map((p, i) => ({ "@code": String(i + 1), "@name": p.name }))] }, { "@id": "time" }] } } } } });
+    const network = vi.fn(async (url: string) => {
+      if (!String(url).includes("/estat-catalog/meta/")) throw new Error("Network prohibited");
+      return new Response(JSON.stringify(meta("2024-11-27")));
+    });
+    vi.stubGlobal("fetch", network);
+    const areaSource = { ...source, areaAxis: { axis: "cat03" as const, scheme: "name" as const } };
+    const result = await withSnapshotReader(f.reader, () => fetchEstatData("", areaSource));
+    expect(result.values).toHaveLength(47);
+    expect(result.values.find((v) => v["@cat03"] === "13")?.["@area"]).toBe(PREFECTURES[12].code);
+    expect(sourceEvidence(result.sources)?.kind).toBe("estat-table-snapshot");
+    network.mockImplementation(async () => new Response(JSON.stringify(meta("2025-01-01"))));
+    await expect(withSnapshotReader(f.reader, () => fetchEstatData("", areaSource))).rejects.toThrow(/differs from snapshot/);
+  });
+  it("areaAxis without a snapshot still needs live metadata; snapshot-only mode blocks it", async () => {
+    vi.stubEnv("ESTAT_SNAPSHOT_ONLY", "1");
     const network = vi.fn(); vi.stubGlobal("fetch", network);
     const config = listAllMetrics().find((m) => m.source.kind === "estat" && m.source.areaAxis);
     if (!config || config.source.kind !== "estat") throw new Error("Missing areaAxis fixture");
-    await expect(fetchEstatData("", config.source)).rejects.toThrow("Live e-Stat disabled");
-    expect(warning).toHaveBeenCalledWith(expect.stringContaining("areaAxis requires live classification metadata"));
+    const areaSource = config.source;
+    await expect(withSnapshotReader(fixture([row("08", "1")], 1, "verified", "0000000001").reader, () => fetchEstatData("", areaSource))).rejects.toThrow("Live e-Stat disabled");
     expect(network).not.toHaveBeenCalled();
   });
   it("sample count rejects ambiguous coordinates and unknown units instead of inventing people", async () => {

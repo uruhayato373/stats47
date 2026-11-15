@@ -2,6 +2,370 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "retail-sales-area-by-class",
+      "pageId": "ranking:retail-sales-area-by-class",
+      "title": "小売業売場面積（経済センサス活動調査・小売計）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004003261",
+          "filters": {
+            "cdTab": "704-2021",
+            "cdCat01": "I2",
+            "cdCat02": "00"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004003261",
+          "cdCat01": "I2",
+          "cdCat02": "00",
+          "cdTab": "704-2021"
+        },
+        "derived": false,
+        "configHash": "ec1a2cc0a440bf53"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:retail-establishments-by-prefecture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:retail-sales-area-by-class",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:retail-commerce",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "retail-commerce"
+      ]
+    },
+    {
+      "metricKey": "retail-store-count",
+      "pageId": "ranking:retail-store-count",
+      "title": "小売店数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010108",
+          "filters": {
+            "cdCat01": "H6130"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010108",
+          "cdCat01": "H6130"
+        },
+        "derived": false,
+        "configHash": "ffdca0b56fc527ae"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:retail-store-count-vs-nurses-per-100k-population",
+          "kind": "blog"
+        },
+        {
+          "pageId": "municipality-ranking:retail-store-count",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:retail-commerce",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:retail-store-count",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "retail-store-count-alt",
+      "pageId": "ranking:retail-store-count-alt",
+      "title": "小売店数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010108",
+          "filters": {
+            "cdCat01": "H6130"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010108",
+          "cdCat01": "H6130"
+        },
+        "derived": false,
+        "configHash": "ffdca0b56fc527ae"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:retail-store-count-alt",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "ranking:retail-store-count-alt",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "retail-store-count-per-1000",
+      "pageId": "ranking:retail-store-count-per-1000",
+      "title": "小売店数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010208",
+          "filters": {
+            "cdCat01": "#H06101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H06101"
+        },
+        "derived": false,
+        "configHash": "bde1b3c732055d6c"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:convenience-store-density-map",
+          "kind": "blog"
+        },
+        {
+          "pageId": "municipality-ranking:retail-store-count-per-1000",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:retail-commerce",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:retail-store-count-per-1000",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "retail-store-count-per-1000-alt",
       "pageId": null,
       "title": "小売店数",
@@ -9699,149 +10063,6 @@
       "consumers": [
         {
           "pageId": "ranking:secondary-education-school-count-per-100k-12-17",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "secondary-employed-people-ratio-tertiary",
-      "pageId": "ranking:secondary-employed-people-ratio-tertiary",
-      "title": "第2次・第3次産業就業者比率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010206",
-          "filters": {
-            "cdCat01": "#F01204"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010206",
-          "cdCat01": "#F01204"
-        },
-        "derived": false,
-        "configHash": "0ad4be542f4ca2cf"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:secondary-employed-people-ratio-tertiary",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:labor-wages",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:secondary-employed-people-ratio-tertiary",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "secondary-industry-employees-per-establishment",
-      "pageId": "ranking:secondary-industry-employees-per-establishment",
-      "title": "第2次産業従業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010203",
-          "filters": {
-            "cdCat01": "#C03305"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010203",
-          "cdCat01": "#C03305"
-        },
-        "derived": false,
-        "configHash": "f1566d86debe59e1"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:secondary-industry-employees-per-establishment",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "secondary-industry-employees-per-establishment-census",
-      "pageId": "ranking:secondary-industry-employees-per-establishment-census",
-      "title": "第2次産業従業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010203",
-          "filters": {
-            "cdCat01": "#C03303"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010203",
-          "cdCat01": "#C03303"
-        },
-        "derived": false,
-        "configHash": "e1dba23c4b124087"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:secondary-industry-employees-per-establishment-census",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "secondary-industry-establishment-ratio",
-      "pageId": "ranking:secondary-industry-establishment-ratio",
-      "title": "第2次産業事業所数構成比",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010203",
-          "filters": {
-            "cdCat01": "#C02104"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010203",
-          "cdCat01": "#C02104"
-        },
-        "derived": false,
-        "configHash": "a08b6b1e714cae5d"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:small-business-dominance-map",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:secondary-industry-establishment-ratio",
           "kind": "ranking"
         }
       ],

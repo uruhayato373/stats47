@@ -1,3 +1,4 @@
+import { rankingR2Key } from "@stats47/r2-storage/keys";
 /**
  * ranking 章の本文を R2 の ai-content から組み立てる (書籍の「中身」の中核)。
  *
@@ -73,7 +74,7 @@ function parseNested<T>(raw: unknown, pick: (o: Record<string, unknown>) => T | 
 export async function fetchRankingAiContent(rankingKey: string): Promise<AiContent | null> {
   let raw: RawAiContent;
   try {
-    const res = await fetch(`${R2}/app/ranking/${rankingKey}/ai-content.json`);
+    const res = await fetch(`${R2}/${rankingR2Key(rankingKey, "ai-content")}`);
     if (!res.ok) return null;
     raw = (await res.json()) as RawAiContent;
   } catch {

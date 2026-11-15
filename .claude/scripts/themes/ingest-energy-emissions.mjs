@@ -1,3 +1,4 @@
+import { statsR2Key } from "../lib/r2-keys.mjs";
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
@@ -221,7 +222,7 @@ export function buildOutputs(extracted,registry,generatedAt) {
     const sourceRows=extracted[group].rows;assert.equal(sourceRows.length,47);
     const rows=sourceRows.map(({areaCode,areaName,values},i)=>{assert.equal(areaCode,prefectures[i].prefCode);assert.equal(areaName,prefectures[i].prefName);return{areaCode,areaName,value:finite(values[key],key),unit,yearCode:year,yearName};});
     const payload=parseStatsValuesPayload({metricKey:key,entityKind:'prefecture',rows,meta:{generatedAt,rowCount:47,areaCount:47,yearRange:[year,year],recipe:buildRecipe(config)}});
-    const content=JSON.stringify(payload);return{key:`app/stats/${key}/values.json`,metricKey:key,sha256:sha(content),sourceMatchedRows:rows.length,content};
+    const content=JSON.stringify(payload);return{key:statsR2Key(key, "prefecture"),metricKey:key,sha256:sha(content),sourceMatchedRows:rows.length,content};
   });
 }
 async function main() {

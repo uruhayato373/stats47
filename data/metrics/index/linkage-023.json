@@ -2,6 +2,157 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "port-passengers-boarding",
+      "pageId": null,
+      "title": "旅客数（乗込）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003130801",
+          "filters": {}
+        }
+      ],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "statsDataId": "0003130801"
+        },
+        "fetcherKey": "estat",
+        "configHash": "a9b52514a8ef4b17"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:port-passengers-boarding",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "port-passengers-landing",
+      "pageId": null,
+      "title": "旅客数（上陸）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003130801",
+          "filters": {}
+        }
+      ],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "statsDataId": "0003130801"
+        },
+        "fetcherKey": "estat",
+        "configHash": "a9b52514a8ef4b17"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:port-passengers-landing",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "port-passengers-total",
+      "pageId": null,
+      "title": "港湾旅客数（港湾統計）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003130737",
+          "filters": {
+            "cdCat01": "100",
+            "cdCat02": "100"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003130737",
+          "cdCat01": "100",
+          "cdCat02": "100"
+        },
+        "derived": false,
+        "configHash": "e2cd495a5ed85bb9"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:port-passengers-total",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "port-ships-tonnage",
+      "pageId": "ranking:port-ships-tonnage",
+      "title": "入港船舶総トン数（港湾統計）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003130773",
+          "filters": {
+            "cdTab": "130",
+            "cdCat01": "100",
+            "cdCat02": "100"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003130773",
+          "cdCat01": "100",
+          "cdCat02": "100",
+          "cdTab": "130"
+        },
+        "ops": {
+          "axisSum": {
+            "axis": "cat03",
+            "codes": [
+              "110",
+              "120"
+            ]
+          }
+        },
+        "derived": true,
+        "configHash": "a8fe55383a3df623"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:port-ships-tonnage",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:ports",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "ports"
+      ]
+    },
+    {
       "metricKey": "port-ships-total",
       "pageId": null,
       "title": "入港船舶隻数（合計）",
@@ -8890,158 +9041,6 @@
         },
         {
           "pageId": "ranking:professional-services-private-establishments",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "professional-services-private-net-value-added",
-      "pageId": null,
-      "title": "業種別の純付加価値額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020203",
-          "filters": {
-            "cdCat01": "C620116"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020203",
-          "cdCat01": "C620116"
-        },
-        "derived": false,
-        "configHash": "23e433250fa68e9a"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:professional-services-private-net-value-added",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:local-economy",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:professional-services-private-net-value-added",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "professional-services-private-sales",
-      "pageId": null,
-      "title": "売上金額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020203",
-          "filters": {
-            "cdCat01": "C610116"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020203",
-          "cdCat01": "C610116"
-        },
-        "derived": false,
-        "configHash": "6fb533d2f504cfe5"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:professional-services-private-sales",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:local-economy",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:professional-services-private-sales",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "projected-population-2020",
-      "pageId": null,
-      "title": "将来推計人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010201",
-          "filters": {
-            "cdCat01": "#A0191001"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010201",
-          "cdCat01": "#A0191001"
-        },
-        "derived": false,
-        "configHash": "3a8c69fd0f96822a"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:projected-population-2020",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "ranking:projected-population-2020",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "projected-population-2025",
-      "pageId": null,
-      "title": "将来推計人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010201",
-          "filters": {
-            "cdCat01": "#A0191002"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010201",
-          "cdCat01": "#A0191002"
-        },
-        "derived": false,
-        "configHash": "d85d1be20918d701"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:projected-population-2025",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "ranking:projected-population-2025",
           "kind": "ranking"
         }
       ],

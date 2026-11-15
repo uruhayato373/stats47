@@ -1,0 +1,34 @@
+{
+  "datasetId": "gsi-evacuation-sites",
+  "versions": [
+    {
+      "schemaVersion": 1,
+      "datasetId": "gsi-evacuation-sites",
+      "version": "initial",
+      "sha256": "0320c1e5462e1a16bb6cab07704381557cb65d3fdd160afb787714d6d842590d",
+      "recipeSha256": "ceed937775e522fe9e6f9075e20707547d1b282a6bb51fde178745729e57ab70",
+      "retrievedAt": "2026-11-15T04:37:48.493Z",
+      "license": {
+        "name": "国土地理院コンテンツ利用規約 + 個別確認事項",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.gsi.go.jp/bousaichiri/hinanbasho.html"
+      },
+      "files": [
+        {
+          "key": "open-data/raw/gsi-evacuation-sites/initial/0001.csv",
+          "url": "https://hinanmap.gsi.go.jp/hinanjocp/defaultFtpData/csv/mergeFromCity_2.csv",
+          "sha256": "8c3d26bbb87183a2166667623f70d34886892252feac3495ebabb94cb3c5e370",
+          "bytes": 17010486,
+          "contentType": "text/csv",
+          "retrievedAt": "2026-11-15T04:37:48.492Z"
+        }
+      ],
+      "manifestKey": "open-data/raw/gsi-evacuation-sites/initial/manifest.json",
+      "manifestSha256": "a09c5593e7c9df8cfc191204f37c6eb69695f01bf3e1d0069d27bef7891921cc",
+      "bytes": 17010486,
+      "status": "archived"
+    }
+  ]
+}

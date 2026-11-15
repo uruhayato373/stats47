@@ -1,3 +1,6 @@
+// Keep the 60s raw-byte download for source hashes and original HTTP/error handling.
+import { resolveEstatAppId } from "../lib/estat-catalog/api.mjs";
+import { statsR2Key } from "../lib/r2-keys.mjs";
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
@@ -178,7 +181,7 @@ async function fetchSource(source, dir) {
   const path = resolve(dir, source.filename); let bytes;
   try { bytes = await readFile(path); } catch (error) {
     if (error.code !== 'ENOENT') throw error;
-    const appId = process.env.NEXT_PUBLIC_ESTAT_APP_ID || process.env.ESTAT_APP_ID;
+    const appId = resolveEstatAppId(process.env, false, { legacyEnv: "fallback" });
     assert.ok(appId, 'e-Stat key required for uncached source');
     const url = new URL(ESTAT_STATS_DATA_URL);
     url.search = new URLSearchParams({ appId, lang: 'J', ...source.parameters }).toString();
@@ -211,7 +214,7 @@ async function main() {
     const data = loaded.get(field.id);
     const rows = prefectures.map(p => ({ areaCode: p.prefCode, areaName: p.prefName, value: data.get(p.prefCode, field.industry, field.tab), unit: field.unit, yearCode: String(field.year), yearName: field.financial ? '2020年（2021年調査）' : '2021年6月1日現在' }));
     const payload = parseStatsValuesPayload({ metricKey: field.key, entityKind: 'prefecture', rows, meta: { generatedAt, rowCount: 47, areaCount: 47, yearRange: [String(field.year), String(field.year)], recipe: buildRecipe(config) } });
-    const content = JSON.stringify(payload); files.push({ key: `app/stats/${field.key}/values.json`, metricKey: field.key, sha256: sha(content), content, sourceMatchedRows: 47, national: data.get('00000', field.industry, field.tab) });
+    const content = JSON.stringify(payload); files.push({ key: statsR2Key(field.key, "prefecture"), metricKey: field.key, sha256: sha(content), content, sourceMatchedRows: 47, national: data.get('00000', field.industry, field.tab) });
   }
   if (options['write-local']) for (const file of files) { const p = resolve(root, '.local/r2', file.key); await mkdir(dirname(p), { recursive: true }); await writeFile(p, file.content); }
   const report = { generatedAt, status: options['write-local'] ? 'source-verified-staged' : 'source-verified', sources: SOURCES, definitions: DEFINITIONS, checks: Object.fromEntries([...loaded].map(([id, data]) => [id, { ...data.checks, rawSha256: data.rawSha256 }])), files: files.map(({ content, ...file }) => file), limitations: ['事業所・雇用は2021年事業所所在地別、経理は2020年実績を企業本所所在地へ集計。異なる母集団を割り算しない。', '中分類41と80は文化産業全体ではない。金額は百万円未満を丸めた公表値。'] };

@@ -1,3 +1,8 @@
+// Keep the 20s timeout, proxy and null-on-failure pagination contract.
+import { resolveEstatAppId, ESTAT_API, ESTAT_ENDPOINTS } from "../../../estat-api/src/ingest.js";
+import { extractYearCode } from "@stats47/estat-api/api";
+// Compatibility: malformed time prefixes retain the previous slice result.
+import { isPrefectureAreaCode } from "@stats47/area";
 import { METRIC_DEFINITIONS_DIR } from '../../../../config/paths.mjs';
 /**
  * audit-estat-year-coverage — 単年設定 (`years.from === years.to` 等) の metric config が、
@@ -95,24 +100,13 @@ async function getProxyDispatcher(): Promise<unknown | null> {
  * — 公開 ID・git tracked・秘密ではない)。
  */
 function readAppId(): string | null {
-  if (process.env.NEXT_PUBLIC_ESTAT_APP_ID) return process.env.NEXT_PUBLIC_ESTAT_APP_ID;
-  for (const rel of [".env.local", "apps/web/.env.development"]) {
-    const envPath = path.join(PROJECT_ROOT, rel);
-    if (!fs.existsSync(envPath)) continue;
-    const line = fs
-      .readFileSync(envPath, "utf8")
-      .split("\n")
-      .find((l) => l.startsWith("NEXT_PUBLIC_ESTAT_APP_ID="));
-    const id = line?.split("=").slice(1).join("=").trim().replace(/^["']|["']$/g, "");
-    if (id) return id;
-  }
-  return null;
+  try { return resolveEstatAppId(); } catch { return null; }
 }
 
 /** 10桁の e-Stat time コードを4桁年へ (packages/estat-api の extractYearCode と同じ判定)。 */
 function toYearCode(timeCode: string): string | null {
   if (typeof timeCode !== "string" || timeCode.length < 4) return null;
-  const year = timeCode.slice(0, 4);
+  const year = extractYearCode(timeCode);
   return /^\d{4}$/.test(year) ? year : null;
 }
 
@@ -175,7 +169,6 @@ export function isObservedValue(value: unknown): boolean {
   return !["", "-", "…", "***", "x", "X"].includes(text);
 }
 
-const PREFECTURE_AREA = /^(0[1-9]|[1-3]\d|4[0-7])000$/;
 
 /** getStatsData の VALUE から、年ごとに実データがある都道府県の数を数える (全国・市区町村は数えない) */
 export function countPrefecturesByYear(values: Array<Record<string, unknown>>): Record<string, number> {
@@ -183,7 +176,7 @@ export function countPrefecturesByYear(values: Array<Record<string, unknown>>): 
   for (const v of values) {
     const area = v["@area"];
     const time = v["@time"];
-    if (typeof area !== "string" || !PREFECTURE_AREA.test(area)) continue;
+    if (typeof area !== "string" || !isPrefectureAreaCode(area)) continue;
     if (typeof time !== "string" || !isObservedValue(v["$"])) continue;
     const yearCode = toYearCode(time);
     if (!yearCode) continue;
@@ -311,7 +304,7 @@ async function fetchValues(
       ...(startPosition ? { startPosition } : {}),
       ...(estatParams as unknown as Record<string, string>),
     });
-    const url = `https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?${params.toString()}`;
+    const url = `${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS.GET_STATS_DATA}?${params.toString()}`;
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 20_000);
     try {

@@ -5,6 +5,7 @@ const require = createRequire(import.meta.url);
 const { require: tsRequire } = require("tsx/cjs/api");
 const { createEstatRequestClient, resolveEstatAppId } = tsRequire("../../../../packages/estat-api/src/ingest.ts", import.meta.url);
 export { ESTAT_STATS_LIST_URL, ESTAT_META_INFO_URL, ESTAT_STATS_DATA_URL } from "./endpoints.cjs";
+export { resolveEstatAppId };
 export const getAppId = resolveEstatAppId;
 export const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const LIST_BATCH_SIZE = 10000;

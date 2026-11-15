@@ -2,6 +2,43 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "lesson-fees-group-consumption-expenditure",
+      "pageId": "ranking:lesson-fees-group-consumption-expenditure",
+      "title": "月謝類消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "090430000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "090430000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "0220f762bd4fe881"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:lesson-fees-group-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "lettuce-consumption-expenditure",
       "pageId": "ranking:lettuce-consumption-expenditure",
       "title": "レタス消費支出額",
@@ -14064,41 +14101,6 @@
       "themes": [
         "household-food-spending"
       ]
-    },
-    {
-      "metricKey": "material-production",
-      "pageId": "ranking:material-production",
-      "title": "素材生産量",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010103",
-          "filters": {
-            "cdCat01": "C3110"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010103",
-          "cdCat01": "C3110"
-        },
-        "derived": false,
-        "configHash": "80e3b6dafcac3259"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:material-production",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
     }
   ]
 }

@@ -1,3 +1,4 @@
+import { statsR2Key } from '../lib/r2-keys.mjs';
 /**
  * audit-chart-axes.ts — 公開中のブログ散布図を「値」で検査する。
  *
@@ -59,7 +60,7 @@ const blogFile = async (slug: string, name: string) => {
 const valuesCache = new Map<string, Promise<unknown[] | null>>();
 const valuesOf = (key: string) => {
   if (!valuesCache.has(key)) {
-    valuesCache.set(key, fetchText(`${R2}/app/stats/${key}/values.json`).then((t) => (t ? JSON.parse(t).rows ?? null : null)));
+    valuesCache.set(key, fetchText(`${R2}/${statsR2Key(key, "prefecture")}`).then((t) => (t ? JSON.parse(t).rows ?? null : null)));
   }
   return valuesCache.get(key)!;
 };

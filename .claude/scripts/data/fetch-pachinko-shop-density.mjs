@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { PREFECTURES } from "../lib/prefectures.cjs";
+import { R2_PUBLIC_ORIGIN, statsR2Key } from "../lib/r2-keys.mjs";
 /**
  * 遊技店密度 (ぱちんこ店舗数 人口1万人あたり) の投入スクリプト。
  *
@@ -10,7 +12,7 @@
  *   1. 全日遊連の年次HTML表を fetch し、都道府県別ぱちんこ店舗数を抽出
  *   2. 地方ブロック計・全国合計 (6,464軒) と突合して検算 (不一致なら投入中止)
  *   3. 既存 metric (japanese-population, R2 app/stats) の 2024年値で人口1万人あたりに換算
- *   4. .local/r2/app/stats/pachinko-shop-density-per-10k/values.json に書き出し
+ *   4. 観測値の置き場 に書き出し
  *      (本番反映は diff-push-r2.ts で別途行う。本スクリプトは書き出しのみ)
  *
  * 実行: node .claude/scripts/data/fetch-pachinko-shop-density.mjs
@@ -21,11 +23,10 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 import { resolveMetricRecipe } from "./lib/stats-values-writer.mjs";
 
 const REPORT_URL = "https://www.zennichiyuren.or.jp/material/report/8.html";
-const POP_URL = `${R2_PUBLIC_BASE_URL}/app/stats/japanese-population/values.json`;
+const POP_URL = `${R2_PUBLIC_ORIGIN}/${statsR2Key("japanese-population", "prefecture")}`;
 const POP_YEAR = "2024";
 const METRIC_KEY = "pachinko-shop-density-per-10k";
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
@@ -37,55 +38,7 @@ const OUT_PATH = path.join(
 );
 
 // areaCode 順 (01000〜47000) = 全日遊連表のブロック順 (北海道/東北6/東京/関東10/中部6/近畿6/中国5/四国4/九州8) と一致
-const AREA_ORDER = [
-  ["01000", "北海道"],
-  ["02000", "青森"],
-  ["03000", "岩手"],
-  ["04000", "宮城"],
-  ["05000", "秋田"],
-  ["06000", "山形"],
-  ["07000", "福島"],
-  ["08000", "茨城"],
-  ["09000", "栃木"],
-  ["10000", "群馬"],
-  ["11000", "埼玉"],
-  ["12000", "千葉"],
-  ["13000", "東京"],
-  ["14000", "神奈川"],
-  ["15000", "新潟"],
-  ["16000", "富山"],
-  ["17000", "石川"],
-  ["18000", "福井"],
-  ["19000", "山梨"],
-  ["20000", "長野"],
-  ["21000", "岐阜"],
-  ["22000", "静岡"],
-  ["23000", "愛知"],
-  ["24000", "三重"],
-  ["25000", "滋賀"],
-  ["26000", "京都"],
-  ["27000", "大阪"],
-  ["28000", "兵庫"],
-  ["29000", "奈良"],
-  ["30000", "和歌山"],
-  ["31000", "鳥取"],
-  ["32000", "島根"],
-  ["33000", "岡山"],
-  ["34000", "広島"],
-  ["35000", "山口"],
-  ["36000", "徳島"],
-  ["37000", "香川"],
-  ["38000", "愛媛"],
-  ["39000", "高知"],
-  ["40000", "福岡"],
-  ["41000", "佐賀"],
-  ["42000", "長崎"],
-  ["43000", "熊本"],
-  ["44000", "大分"],
-  ["45000", "宮崎"],
-  ["46000", "鹿児島"],
-  ["47000", "沖縄"],
-];
+const AREA_ORDER = PREFECTURES.map((p) => [p.prefCode, p.prefName.replace(/[都府県]$/, "")]);
 
 // 都道府県別ぱちんこ店舗数 (全日遊連 2025年報告表・2025-12-31現在)。
 // HTML の <td>県名</td><td>店舗数</td>...行 から手動抽出 (抽出手順は README コメント参照)。

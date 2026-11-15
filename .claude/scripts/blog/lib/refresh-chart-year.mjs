@@ -1,3 +1,4 @@
+import { isPrefectureAreaCode } from "../../lib/prefectures.cjs";
 /**
  * ブログの図を指標の最新年で取り直すための純粋関数 (refresh-article-data-years.mjs が使う)。
  *
@@ -171,7 +172,6 @@ const SCATTER_POINT_FIELDS = new Set([...SCATTER_POINT_LABEL_FIELDS, "code", "ar
 /** 値が一致したとみなす点の割合。丸めた値の図も通り、別の指標・年は通らない。 */
 const AXIS_MATCH_MIN_RATE = 0.95;
 
-const PREFECTURE_AREA_CODE = /^(0[1-9]|[1-3]\d|4[0-7])000$/;
 
 const isScatterShaped = (data) =>
   Boolean(data) &&
@@ -242,7 +242,7 @@ export function prefecturePartitions(values) {
       year: yearOf(p.yearCode),
       byName: new Map(
         (p.values ?? [])
-          .filter((v) => PREFECTURE_AREA_CODE.test(String(v.areaCode)) && Number.isFinite(v.value))
+          .filter((v) => isPrefectureAreaCode(String(v.areaCode)) && Number.isFinite(v.value))
           .map((v) => [prefKey(v.areaName), { value: v.value, areaCode: String(v.areaCode), areaName: v.areaName }]),
       ),
     }))
