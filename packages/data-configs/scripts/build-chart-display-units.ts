@@ -1,3 +1,4 @@
+import { rankingR2Key } from "@stats47/r2-storage/keys";
 /**
  * build-chart-display-units — 全ランキングの「図の表示単位」台帳を作る・確かめる。
  *
@@ -77,7 +78,7 @@ async function readRow(key: string): Promise<DisplayUnitRow> {
   const metric = METRICS_REGISTRY[key];
   const base = { key, title: metric?.title ?? "", unit: metric?.unit ?? "" };
   try {
-    const res = await fetch(`${PUBLIC_BASE}/app/ranking/${key}/values.json`);
+    const res = await fetch(`${PUBLIC_BASE}/${rankingR2Key(key, "values")}`);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const json = (await res.json()) as { partitions?: { yearCode: string; values?: { value: unknown; unit?: string }[] }[] };
     const latest = (json.partitions ?? [])

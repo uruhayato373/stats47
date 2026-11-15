@@ -1,4 +1,5 @@
 #!/usr/bin/env tsx
+import { statsR2Key } from "@stats47/r2-storage/keys";
 /** Pinned official law → NEW isolated local staging; no remote writer. */
 import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
@@ -111,7 +112,7 @@ async function main() {
         '国土交通省みなと一覧の県別掲載区分を集計上採用。法令上の共同港の所属を変更しない。',
     },
   };
-  const statsDir = path.join(out, 'app/stats/port-count');
+  const statsDir = path.dirname(path.join(out, statsR2Key("port-count", "prefecture")));
   const evidenceDir = path.join(out, 'evidence');
   mkdirSync(statsDir, { recursive: true });
   mkdirSync(evidenceDir);

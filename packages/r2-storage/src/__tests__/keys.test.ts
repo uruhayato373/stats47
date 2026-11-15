@@ -58,3 +58,20 @@ describe("observation R2 keys", () => {
     expect(() => statsR2Key("m", "invalid")).toThrow("unknown entity kind: invalid");
   });
 });
+
+
+describe("ranking download filenames", () => {
+  it("preserves every basis, format and encoding combination", () => {
+    for (const basis of ["original", "per_population", "per_area", "per_household", "all-bases"]) {
+      for (const format of ["csv", "json"] as const) {
+        for (const encoding of ["utf8", "sjis"] as const) {
+          const suffix = basis === "original" ? "" : `-${basis.replace(/_/g, "-")}`;
+          const filename = `values${suffix}${encoding === "sjis" ? ".sjis" : ""}.${format}`;
+          expect(rankingR2Key("population", "download", { basis, format, encoding }))
+            .toBe(["app", "ranking", "population", "downloads", filename].join("/"));
+        }
+      }
+    }
+    expect(() => rankingR2Key("population", "download")).toThrow("download requires options");
+  });
+});

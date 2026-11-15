@@ -1,3 +1,4 @@
+import { statsR2Key } from "@stats47/r2-storage/keys";
 /**
  * scan-stats-shape — R2 の正典 `app/stats/<key>/values.json` を全件走査し、形状違反を報告する。
  *
@@ -147,7 +148,7 @@ async function main(): Promise<void> {
   }
 
   const rows = await mapPool(configs, args.concurrency, async (config): Promise<ScanRow> => {
-    const res = await fetchJson(`app/stats/${config.key}/values.json`);
+    const res = await fetchJson(statsR2Key(config.key, "prefecture"));
     if (res.status === 0) return { key: config.key, status: "unreachable", violations: [] };
     if (res.status !== 200 || !res.body) return { key: config.key, status: "missing", violations: [] };
 

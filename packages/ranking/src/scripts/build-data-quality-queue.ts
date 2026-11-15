@@ -1,3 +1,4 @@
+import { rankingR2Key } from "@stats47/r2-storage/keys";
 /**
  * build-data-quality-queue — 既存の週次監査の結果を全 active metric のデータ品質キューへまとめる。
  * DATA-QUALITY-LOOP-01 ①②。新しい監査ではなく、次の 2 つの監査の出力を読むだけの集約器。
@@ -51,7 +52,7 @@ function readJson<T>(p: string): T | null {
 
 async function fetchItemYears(key: string): Promise<string[] | null> {
   try {
-    const res = await fetch(`${R2_BASE}/app/ranking/${key}/item.json`);
+    const res = await fetch(`${R2_BASE}/${rankingR2Key(key, "item")}`);
     if (!res.ok) return null;
     const body = (await res.json()) as { item?: { availableYears?: Array<{ yearCode?: string }> } };
     return (body.item?.availableYears ?? []).map((y) => y.yearCode ?? "").filter((y) => /^\d{4}/.test(y));

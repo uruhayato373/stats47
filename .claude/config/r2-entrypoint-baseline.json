@@ -1057,56 +1057,35 @@
       "ranking": 0,
       "origin": 1,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    "packages/ai-content/src/scripts/generate-blog-article.ts": {
-      "stats": 0,
-      "ranking": 1,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ai-content/src/scripts/generate-parallel.ts": {
       "stats": 0,
       "ranking": 6,
       "origin": 1,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ai-content/src/scripts/list-pending.ts": {
       "stats": 0,
       "ranking": 1,
       "origin": 1,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ai-content/src/scripts/verify-inputs.ts": {
       "stats": 0,
       "ranking": 0,
       "origin": 1,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    "packages/ai-content/src/types/snapshot.ts": {
-      "stats": 0,
-      "ranking": 1,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    "packages/area-profile/package.json": {
-      "stats": 0,
-      "ranking": 0,
-      "origin": 2,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/correlation/src/scripts/build-correlation-snapshot.ts": {
       "stats": 1,
       "ranking": 0,
       "origin": 1,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/data-configs/scripts/__tests__/estat-refresh-cli.test.mjs": {
       "stats": 1,
@@ -1115,82 +1094,47 @@
       "s3Client": 0,
       "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
     },
-    "packages/data-configs/scripts/audit-reingest-queue.ts": {
-      "stats": 1,
+    "packages/data-configs/scripts/build-chart-display-units.ts": {
+      "stats": 0,
       "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    "packages/data-configs/scripts/audit-seo-meta-facts.ts": {
-      "stats": 1,
-      "ranking": 0,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    "packages/data-configs/scripts/build-chart-display-units.ts": {
-      "stats": 0,
-      "ranking": 2,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    "packages/data-configs/scripts/estat-refresh-selection.ts": {
-      "stats": 1,
-      "ranking": 0,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/data-configs/scripts/ingest-childcare-waiting-rate.ts": {
-      "stats": 2,
+      "stats": 1,
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/data-configs/scripts/ingest-nier-achievement.ts": {
-      "stats": 2,
+      "stats": 1,
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/data-configs/scripts/page-data-batch.ts": {
-      "stats": 10,
+      "stats": 3,
       "ranking": 0,
       "origin": 1,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
-    "packages/data-configs/scripts/refresh-official-theme-data.ts": {
+    "packages/data-configs/scripts/scan-stats-shape.ts": {
       "stats": 1,
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    "packages/data-configs/scripts/scan-stats-shape.ts": {
-      "stats": 2,
-      "ranking": 0,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/data-configs/scripts/shrink-shape-allowlist.ts": {
       "stats": 0,
       "ranking": 0,
       "origin": 1,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    "packages/data-configs/scripts/verify-table-snapshot-equivalence.ts": {
-      "stats": 2,
-      "ranking": 0,
-      "origin": 1,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/data-configs/src/__tests__/estat-refresh-selection.test.ts": {
       "stats": 2,
@@ -1204,56 +1148,56 @@
       "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/data-configs/src/geo-scope/build-japan-series.ts": {
       "stats": 1,
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/data-configs/src/geo-scope/japan-derived-metrics.ts": {
       "stats": 1,
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/data-configs/src/recipe.ts": {
       "stats": 1,
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/data-configs/src/theme-catalog/stat-series-ref.ts": {
       "stats": 0,
       "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/database/src/schema/index.ts": {
       "stats": 2,
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/gis/src/geo-analysis/low-elevation-population-overlay.py": {
       "stats": 1,
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/gis/src/geo-questions/scripts/build-geo-questions.ts": {
-      "stats": 4,
+      "stats": 2,
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/gis/src/mlit-ksj/__tests__/license-policy.test.ts": {
       "stats": 1,
@@ -1267,98 +1211,70 @@
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/gis/src/mlit-ksj/scripts/generate-ksj-stats-values.ts": {
-      "stats": 4,
+      "stats": 2,
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
-    "packages/gis/src/official-counts/generate-designated-ports.ts": {
-      "stats": 1,
-      "ranking": 0,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    "packages/product-factory/scripts/audit-book-facts.mts": {
+    "packages/product-factory/scripts/build-cover-background.mts": {
       "stats": 0,
       "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    "packages/product-factory/scripts/build-cover-background.mts": {
-      "stats": 0,
-      "ranking": 2,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/product-factory/src/catalog/types.ts": {
       "stats": 0,
       "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    "packages/product-factory/src/channels/geo/cli.ts": {
-      "stats": 1,
-      "ranking": 0,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/product-factory/src/channels/kindle/ai-content-composer.ts": {
       "stats": 0,
-      "ranking": 2,
+      "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/product-factory/src/channels/kindle/full-tables.ts": {
       "stats": 0,
       "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/product-factory/src/channels/kindle/ranking-databook.ts": {
       "stats": 0,
-      "ranking": 2,
+      "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/product-factory/src/channels/kindle/types.ts": {
       "stats": 0,
       "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/product-factory/src/data/load-ranking-values.ts": {
       "stats": 0,
-      "ranking": 3,
+      "ranking": 2,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    "packages/product-factory/src/data/metric-source.ts": {
-      "stats": 0,
-      "ranking": 1,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/product-factory/src/data/pack-snapshot.ts": {
       "stats": 0,
       "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/r2-storage/src/lib/operations/__tests__/fetch-priority.test.ts": {
       "stats": 3,
@@ -1379,7 +1295,7 @@
       "ranking": 0,
       "origin": 1,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/r2-storage/src/scripts/__tests__/assert-ci-write.test.ts": {
       "stats": 6,
@@ -1432,10 +1348,10 @@
     },
     "packages/r2-storage/src/scripts/delete-r2-per-household.ts": {
       "stats": 0,
-      "ranking": 2,
+      "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/r2-storage/src/scripts/lib/__tests__/diff-push-remote-match.test.ts": {
       "stats": 1,
@@ -1463,109 +1379,95 @@
       "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Exact namespace/key literals are the subject of publication validation."
     },
     "packages/r2-storage/src/scripts/purge-cache.ts": {
       "stats": 0,
       "ranking": 0,
       "origin": 2,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    "packages/r2-storage/src/scripts/purge-isr-routes.ts": {
-      "stats": 0,
-      "ranking": 0,
-      "origin": 0,
-      "s3Client": 1,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/r2-storage/src/scripts/push-exact-r2-manifest-core.ts": {
       "stats": 1,
       "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Exact namespace/key literals are the subject of publication validation."
     },
     "packages/r2-storage/src/scripts/r2-retention.ts": {
-      "stats": 1,
-      "ranking": 3,
+      "stats": 0,
+      "ranking": 2,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ranking/scripts/verify-calculated-rankings.ts": {
       "stats": 0,
-      "ranking": 2,
+      "ranking": 1,
       "origin": 1,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ranking/src/builders/build-ranking-item-from-metric.ts": {
       "stats": 1,
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ranking/src/config/known-ranking-keys.ts": {
       "stats": 0,
       "ranking": 1,
       "origin": 1,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ranking/src/exporters/index.ts": {
       "stats": 0,
       "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ranking/src/exporters/ranking-item-metadata-refresh.ts": {
       "stats": 0,
       "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ranking/src/exporters/ranking-item-seo-refresh.ts": {
       "stats": 0,
       "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ranking/src/exporters/ranking-items-per-url-snapshot.ts": {
       "stats": 0,
       "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ranking/src/municipalities/build-city-databooks.ts": {
       "stats": 2,
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ranking/src/municipalities/municipality-ai-content.ts": {
       "stats": 0,
       "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ranking/src/repositories/ranking-item/__tests__/exclude-gone-keys.test.ts": {
       "stats": 0,
       "ranking": 2,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    "packages/ranking/src/repositories/ranking-item/read-ranking-items-snapshot.ts": {
-      "stats": 0,
-      "ranking": 3,
       "origin": 0,
       "s3Client": 0,
       "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
@@ -1582,35 +1484,35 @@
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ranking/src/repositories/ranking-value/list-ranking-values.ts": {
       "stats": 1,
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ranking/src/repositories/ranking-value/read-ranking-values-from-r2.ts": {
       "stats": 0,
       "ranking": 3,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ranking/src/repositories/ranking-value/upsert-ranking-values.ts": {
       "stats": 1,
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ranking/src/repositories/schemas/ranking-values.schemas.ts": {
       "stats": 0,
       "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ranking/src/scripts/__tests__/generate-municipality-ranking.test.ts": {
       "stats": 1,
@@ -1634,102 +1536,74 @@
       "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
     },
     "packages/ranking/src/scripts/audit-ranking-data-integrity.ts": {
-      "stats": 5,
-      "ranking": 9,
+      "stats": 3,
+      "ranking": 5,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    "packages/ranking/src/scripts/audit-survey-linkage.ts": {
-      "stats": 0,
-      "ranking": 1,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    "packages/ranking/src/scripts/build-data-quality-queue.ts": {
-      "stats": 0,
-      "ranking": 1,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ranking/src/scripts/export-master-snapshots.ts": {
       "stats": 0,
       "ranking": 0,
       "origin": 1,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ranking/src/scripts/generate-calculated-stats.ts": {
       "stats": 2,
       "ranking": 0,
       "origin": 1,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ranking/src/scripts/generate-city-databooks.ts": {
-      "stats": 3,
-      "ranking": 0,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    "packages/ranking/src/scripts/generate-municipality-ranking.ts": {
       "stats": 1,
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ranking/src/scripts/generate-ranking-items.ts": {
       "stats": 2,
       "ranking": 1,
       "origin": 1,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ranking/src/scripts/generate-ranking-normalized-values.ts": {
       "stats": 2,
       "ranking": 4,
       "origin": 1,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ranking/src/scripts/generate-ranking-values.ts": {
       "stats": 3,
       "ranking": 3,
       "origin": 1,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ranking/src/scripts/lib/calculated-stats-core.ts": {
       "stats": 1,
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ranking/src/scripts/refresh-item-metadata.ts": {
       "stats": 0,
       "ranking": 1,
       "origin": 1,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ranking/src/scripts/refresh-item-seo.ts": {
       "stats": 0,
       "ranking": 1,
       "origin": 1,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    "packages/ranking/src/scripts/verify-metric-presentation-snapshots.ts": {
-      "stats": 0,
-      "ranking": 2,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ranking/src/services/__tests__/compute-normalization.test.ts": {
       "stats": 0,
@@ -1743,7 +1617,7 @@
       "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ranking/src/survey/__tests__/survey-taxonomy.test.ts": {
       "stats": 2,
@@ -1757,49 +1631,42 @@
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ranking/src/types/snapshot.ts": {
       "stats": 0,
-      "ranking": 11,
+      "ranking": 6,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/ranking/src/utils/resolve-national-figure.ts": {
       "stats": 1,
       "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/stats-r2/src/scripts/export-stats-to-r2.ts": {
       "stats": 1,
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    "packages/stats-r2/src/scripts/migrate-legacy-recipes.ts": {
-      "stats": 1,
-      "ranking": 0,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/stats-r2/src/types.ts": {
       "stats": 7,
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
     "packages/types/src/site.json": {
       "stats": 0,
       "ranking": 0,
       "origin": 1,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Public origin SSOT consumed by R2_PUBLIC_ORIGIN; cannot import its consumer."
     }
   }
 }

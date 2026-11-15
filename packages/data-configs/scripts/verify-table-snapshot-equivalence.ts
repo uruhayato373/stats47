@@ -1,3 +1,4 @@
+import { R2_PUBLIC_ORIGIN, statsR2Key } from "@stats47/r2-storage/keys";
 /** Manual migration audit: legitimate upstream revisions can differ from published values.
  * node --import tsx packages/data-configs/scripts/verify-table-snapshot-equivalence.ts --table <id> [--out <dir>] [--mark-verified]
  * Remote reads only. Generates local artifacts, never calls live e-Stat. Classification: quality-gates.json.
@@ -162,9 +163,9 @@ async function main() {
       // Scope generation to the entity referencing this table. Registry objects remain unchanged.
       const result = await withSnapshotReader(reader, () => processOne({ ...config, entities: [entity] }, "", false));
       if (!result.ok) throw new Error(result.message);
-      const payload = JSON.parse(readFileSync(resolve(root, `.local/r2/app/stats/${config.key}/${artifact}`), "utf8")) as Payload;
+      const payload = JSON.parse(readFileSync(resolve(root, `.local/r2/${statsR2Key(config.key, entity)}`), "utf8")) as Payload;
       assertSnapshotPayload(payload, target, entry, startedAt);
-      const url = `https://storage.stats47.jp/app/stats/${config.key}/${artifact}`;
+      const url = `${R2_PUBLIC_ORIGIN}/${statsR2Key(config.key, entity)}`;
       const response = await fetch(url);
       if (!response.ok) throw new Error(`Public baseline HTTP ${response.status}`);
       const raw = await response.text();

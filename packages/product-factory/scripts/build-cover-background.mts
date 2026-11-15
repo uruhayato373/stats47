@@ -1,4 +1,5 @@
 #!/usr/bin/env -S npx tsx
+import { rankingR2Key } from "@stats47/r2-storage/keys";
 /**
  * 書籍カバー背景を **実際の日本地図 + 実データ** から決定的に生成する。
  *
@@ -107,7 +108,7 @@ async function fetchValues(
   metric: string,
   year?: string,
 ): Promise<{ rows: ValueRow[]; year: string; unit: string }> {
-  const url = `${R2}/app/ranking/${metric}/values.json`;
+  const url = `${R2}/${rankingR2Key(metric, "values")}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`SSOT を取得できない: ${url} (HTTP ${res.status})`);
   const json = (await res.json()) as {

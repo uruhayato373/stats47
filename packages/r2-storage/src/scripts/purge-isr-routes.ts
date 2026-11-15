@@ -29,13 +29,14 @@ import {
   DeleteObjectCommand,
   HeadObjectCommand,
   ListObjectsV2Command,
-  S3Client,
+  type S3Client,
 } from "@aws-sdk/client-s3";
 import { config } from "dotenv";
 import * as crypto from "crypto";
 import * as fs from "fs";
 import * as path from "path";
 
+import { createR2S3Client } from "../lib/clients/r2-s3-client.mjs";
 import { assertR2WriteAllowed } from "./_assert-ci-write";
 import { SITE } from "@stats47/types";
 
@@ -52,12 +53,12 @@ function getClient(): S3Client {
   if (!endpoint || !accessKeyId || !secretAccessKey) {
     throw new Error("R2 S3 認証情報が不足 (.env.local: R2_S3_ENDPOINT / R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY)");
   }
-  return new S3Client({
-    region: "auto",
-    endpoint,
-    credentials: { accessKeyId, secretAccessKey },
-    requestHandler: { requestTimeout: 20000 },
-  });
+  const client = createR2S3Client();
+  const handler = client.config.requestHandler;
+  if ("updateHttpClientConfig" in handler && typeof handler.updateHttpClientConfig === "function") {
+    handler.updateHttpClientConfig("requestTimeout", 20000);
+  }
+  return client;
 }
 
 /** OpenNext の computeCacheKey と同じ導出 (sha256(route) を buildId 配下に置く) */

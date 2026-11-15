@@ -19,14 +19,22 @@ const RANKING_KINDS = [
     "thumbnail",
     "ogp-image",
     "ogp-generation",
+    "download",
 ];
-export function rankingR2Key(rankingKey, kind) {
+export function rankingR2Key(rankingKey, kind, download) {
     if (typeof rankingKey !== "string" || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(rankingKey)) {
         throw new Error(`Invalid ranking key segment: ${rankingKey}`);
     }
     // Plain-node callers do not have the TypeScript union guard.
     if (!RANKING_KINDS.includes(kind)) {
         throw new Error(`Invalid ranking R2 kind: ${kind}`);
+    }
+    if (kind === "download") {
+        if (!download)
+            throw new Error("download requires options");
+        const basisSuffix = download.basis === "original" ? "" : `-${download.basis.replace(/_/g, "-")}`;
+        const encodingSuffix = download.encoding === "sjis" ? ".sjis" : "";
+        return `${RANKING_R2_PREFIX}/${rankingKey}/downloads/values${basisSuffix}${encodingSuffix}.${download.format}`;
     }
     const filename = kind === "ogp-image" ? "ogp/ogp.png"
         : kind === "ogp-generation" ? "ogp/generation.json" : `${kind}.json`;

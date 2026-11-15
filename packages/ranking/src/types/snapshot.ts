@@ -1,3 +1,4 @@
+import { RANKING_R2_PREFIX, rankingR2Key } from "@stats47/r2-storage/keys";
 import type { RankingItem } from "./ranking-item";
 import type { RankingReferenceValue, RankingValue } from "./ranking-value";
 
@@ -40,7 +41,9 @@ export function categoryItemsKeyPath(categoryKey: string): string {
   return `app/category/${encodeURIComponent(categoryKey)}/items.json`;
 }
 export function rankingItemKeyPath(rankingKey: string): string {
-  return `app/ranking/${encodeURIComponent(rankingKey)}/item.json`;
+  return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(rankingKey)
+    ? rankingR2Key(rankingKey, "item")
+    : `${RANKING_R2_PREFIX}/${encodeURIComponent(rankingKey)}/item.json`;
 }
 export function surveyItemsKeyPath(surveyId: string): string {
   return `app/survey/${encodeURIComponent(surveyId)}/items.json`;
@@ -152,7 +155,9 @@ export function rankingValuesKeyPath(
   rankingKey: string,
   _areaType?: string,
 ): string {
-  return `app/ranking/${encodeURIComponent(rankingKey)}/values.json`;
+  return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(rankingKey)
+    ? rankingR2Key(rankingKey, "values")
+    : `${RANKING_R2_PREFIX}/${encodeURIComponent(rankingKey)}/values.json`;
 }
 
 /**
@@ -165,8 +170,11 @@ export function rankingNormalizedValuesKeyPath(
   rankingKey: string,
   normType: string,
 ): string {
+  if (/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(rankingKey) && normType === "per_population") return rankingR2Key(rankingKey, "values-per-population");
+  if (/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(rankingKey) && normType === "per_area") return rankingR2Key(rankingKey, "values-per-area");
+  if (/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(rankingKey) && normType === "per_household") return rankingR2Key(rankingKey, "values-per-household");
   const suffix = normType.replace(/_/g, "-");
-  return `app/ranking/${encodeURIComponent(rankingKey)}/values-${suffix}.json`;
+  return `${RANKING_R2_PREFIX}/${encodeURIComponent(rankingKey)}/values-${suffix}.json`;
 }
 
 /** 全国時系列の基準 (original = 素の値 / per_* = 正規化後) */
@@ -206,7 +214,9 @@ export interface RankingNationalTrendSnapshot {
 }
 
 export function rankingNationalTrendPath(rankingKey: string): string {
-  return `app/ranking/${encodeURIComponent(rankingKey)}/national-trend.json`;
+  return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(rankingKey)
+    ? rankingR2Key(rankingKey, "national-trend")
+    : `${RANKING_R2_PREFIX}/${encodeURIComponent(rankingKey)}/national-trend.json`;
 }
 
 /**
@@ -227,9 +237,12 @@ export function rankingDownloadKeyPath(
   format: "csv" | "json",
   encoding: "utf8" | "sjis" = "utf8",
 ): string {
+  if (/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(rankingKey)) {
+    return rankingR2Key(rankingKey, "download", { basis, format, encoding });
+  }
   const basisSuffix = basis === "original" ? "" : `-${basis.replace(/_/g, "-")}`;
   const encodingSuffix = encoding === "sjis" ? ".sjis" : "";
-  return `app/ranking/${encodeURIComponent(rankingKey)}/downloads/values${basisSuffix}${encodingSuffix}.${format}`;
+  return `${RANKING_R2_PREFIX}/${encodeURIComponent(rankingKey)}/downloads/values${basisSuffix}${encodingSuffix}.${format}`;
 }
 
 /** @deprecated rankingValuesKeyPath を使用してください */

@@ -1,3 +1,4 @@
+import { rankingR2Key, statsR2Key } from "@stats47/r2-storage/keys";
 import { datasetDir } from "../../../../config/datasets.mjs";
 /**
  * audit-ranking-data-integrity — ranking 配信 (R2) の実データ整合性を live 実測で監査する。
@@ -556,9 +557,9 @@ async function main() {
       .filter((t): t is NormType => (NORM_TYPES as readonly string[]).includes(t ?? ""));
 
     const [itemRes, valuesRes, statsRes] = await Promise.all([
-      fetchJson<ItemJson>(`app/ranking/${key}/item.json`),
-      fetchJson<ValuesJson>(`app/ranking/${key}/values.json`),
-      fetchJson<StatsValuesJson>(`app/stats/${key}/values.json`),
+      fetchJson<ItemJson>(rankingR2Key(key, "item")),
+      fetchJson<ValuesJson>(rankingR2Key(key, "values")),
+      fetchJson<StatsValuesJson>(statsR2Key(key, "prefecture")),
     ]);
 
     // --- (i) 正典 app/stats ---
@@ -692,9 +693,9 @@ async function main() {
     const baseGeneratedAt = valuesRes.body.generatedAt;
 
     const [trendRes, ...normRes] = await Promise.all([
-      fetchJson<NationalTrendJson>(`app/ranking/${key}/national-trend.json`),
+      fetchJson<NationalTrendJson>(rankingR2Key(key, "national-trend")),
       ...declaredTypes.map((t) =>
-        fetchJson<ValuesJson>(`app/ranking/${key}/values-${t.replace(/_/g, "-")}.json`),
+        fetchJson<ValuesJson>(rankingR2Key(key, t === "per_population" ? "values-per-population" : "values-per-area")),
       ),
     ]);
 
@@ -770,7 +771,7 @@ async function main() {
     const yearsOf = async (depKey: string): Promise<Set<string> | null> => {
       const cached = statsYearSets.get(depKey);
       if (cached) return cached;
-      const res = await fetchJson<StatsValuesJson>(`app/stats/${depKey}/values.json`);
+      const res = await fetchJson<StatsValuesJson>(statsR2Key(depKey, "prefecture"));
       if (res.status !== 200 || !res.body?.rows) return null;
       const set = yearCodesOf(res.body.rows);
       statsYearSets.set(depKey, set);

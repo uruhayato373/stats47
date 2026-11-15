@@ -1,5 +1,8 @@
+import { RANKING_R2_PREFIX, rankingR2Key } from "@stats47/r2-storage/keys";
 export function aiContentKeyPath(rankingKey: string): string {
-  return `app/ranking/${encodeURIComponent(rankingKey)}/ai-content.json`;
+  return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(rankingKey)
+    ? rankingR2Key(rankingKey, "ai-content")
+    : `${RANKING_R2_PREFIX}/${encodeURIComponent(rankingKey)}/ai-content.json`;
 }
 
 export interface AiContentSnapshotRow {

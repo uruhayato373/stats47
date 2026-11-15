@@ -1,3 +1,4 @@
+import { RANKING_R2_PREFIX, STATS_R2_PREFIX } from "../keys";
 /**
  * R2 保持ポリシーの実行 (移行済み旧 prefix の棚卸しと削除)。
  *
@@ -157,13 +158,13 @@ const RETENTION_TARGETS: RetentionTarget[] = [
  * (配信データ・再生成コストの高い派生物・正典が保持を明示しているもの)
  */
 const PROTECTED_PREFIXES = [
-  "app/ranking/",
+  `${RANKING_R2_PREFIX}/`,
   "app/ranking-items/",
   "app/blog/",
   "app/areas/",
   "app/survey/",
   "app/category/",
-  "app/stats/",
+  `${STATS_R2_PREFIX}/`,
   "app/correlation/",
   "app/home/",
   "app/page-components/",

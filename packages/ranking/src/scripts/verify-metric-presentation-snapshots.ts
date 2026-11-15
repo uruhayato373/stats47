@@ -1,4 +1,5 @@
 #!/usr/bin/env tsx
+import { RANKING_R2_PREFIX, rankingR2Key } from "@stats47/r2-storage/keys";
 import fs from 'node:fs';
 import path from 'node:path';
 import { getMetricConfig } from '@stats47/data-configs';
@@ -33,12 +34,12 @@ if (!home.count) throw new Error('Home featured metadata is empty');
 for (const item of home.items)
   checkPresentation(item.rankingKey, item.visualization);
 let prefectures = 0;
-for (const dir of fs.readdirSync(path.join(root, 'app/ranking'), {
+for (const dir of fs.readdirSync(path.join(root, RANKING_R2_PREFIX), {
   withFileTypes: true,
 })) {
   if (!dir.isDirectory()) continue;
   const { item } = parseRankingItemSnapshot(
-    read(`app/ranking/${dir.name}/item.json`)
+    read(rankingR2Key(dir.name, "item"))
   );
   if (item.rankingKey !== dir.name)
     throw new Error(`Ranking identity mismatch: ${dir.name}`);
@@ -48,7 +49,7 @@ for (const dir of fs.readdirSync(path.join(root, 'app/ranking'), {
 for (const item of all.items) {
   checkPresentation(item.rankingKey, item.visualization);
   const individual = parseRankingItemSnapshot(
-    read(`app/ranking/${item.rankingKey}/item.json`)
+    read(rankingR2Key(item.rankingKey, "item"))
   ).item;
   if (JSON.stringify(item) !== JSON.stringify(individual))
     throw new Error(

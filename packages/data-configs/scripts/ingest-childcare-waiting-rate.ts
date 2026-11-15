@@ -1,3 +1,4 @@
+import { statsR2Key } from "@stats47/r2-storage/keys";
 /**
  * 市区町村の保育所等利用待機児童率 (nursery-waiting-children-rate) の手動取り込み。年 1 回。
  *
@@ -117,7 +118,7 @@ async function main() {
     console.log("[dry-run] 書き込みなし (R2 へも送らない)");
     return;
   }
-  const outPath = resolve(REPO_ROOT, `.local/r2/app/stats/${METRIC_KEY}/cities.json`);
+  const outPath = resolve(REPO_ROOT, `.local/r2/${statsR2Key(METRIC_KEY, "city")}`);
   mkdirSync(dirname(outPath), { recursive: true });
   writeFileSync(outPath, JSON.stringify(payload));
   console.log(`wrote ${outPath} (${rows.length} rows)。R2 への反映は別工程(承認後)`);

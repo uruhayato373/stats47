@@ -1,3 +1,4 @@
+import { rankingR2Key } from "@stats47/r2-storage/keys";
 /**
  * metric config (指標定義) から SOURCES.csv の 1 行を導く。出典は指標定義の取得元が唯一の真実で、
  * 手で書いた固定文言を使わない。
@@ -133,7 +134,7 @@ function periodTerm(from: unknown, to: unknown): string {
  * 算出指標は親指標の名前・指標キーと演算子・期間の換算・倍率まで書く。主出典以外の年 (補完出典) の行は抽出だけを書く。
  */
 export function describeTransform(cfg: Cfg, key: string, year: string, registry: MetricRegistry): string {
-  const base = `都道府県別・基準年（${year}）を stats47 が R2 (app/ranking/${key}/values.json) から抽出。`;
+  const base = `都道府県別・基準年（${year}）を stats47 が R2 (${rankingR2Key(key, "values")}) から抽出。`;
   if (effectiveSource(cfg, year) !== asRecord(cfg.source)) return base;
   const ops = buildRecipe(cfg as unknown as MetricConfig).ops;
   if (!ops) return base;

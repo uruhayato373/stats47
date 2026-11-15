@@ -1,3 +1,4 @@
+import { rankingR2Key } from "@stats47/r2-storage/keys";
 /**
  * audit-survey-linkage — ranking ↔ 統計調査 (survey) 紐付けの決定的監査。
  *
@@ -106,7 +107,7 @@ async function compareR2(
   let matched = 0;
   await mapPool(targets, 16, async (m) => {
     try {
-      const res = await fetch(`${R2_BASE}/app/ranking/${m.key}/item.json`);
+      const res = await fetch(`${R2_BASE}/${rankingR2Key(m.key, "item")}`);
       if (res.status === 404) {
         missingItemJson.push(m.key);
         return;

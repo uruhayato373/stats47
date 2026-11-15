@@ -1,3 +1,4 @@
+import { rankingR2Key, statsR2Key } from "@stats47/r2-storage/keys";
 import { METRIC_DEFINITIONS_DIR } from '../../../config/paths.mjs';
 /**
  * audit-reingest-queue — 「config は直っているのに配信データが古いまま」の metric を列挙する。
@@ -112,7 +113,7 @@ function collectConfigModifiedAt(): Map<string, string> {
  * 知るには十分。正典 (app/stats) を先に見て、無ければ配信 (app/ranking) を見る。
  */
 async function dataWrittenAt(key: string): Promise<string | null> {
-  for (const p of [`app/stats/${key}/values.json`, `app/ranking/${key}/values.json`]) {
+  for (const p of [statsR2Key(key, "prefecture"), rankingR2Key(key, "values")]) {
     try {
       const res = await fetch(`${R2}/${p}`, { method: "HEAD" });
       if (!res.ok) continue;

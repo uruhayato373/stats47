@@ -1,4 +1,5 @@
 #!/usr/bin/env tsx
+import { rankingR2Key, statsR2Key } from "@stats47/r2-storage/keys";
 /**
  * Official releases newer than SSDS → local stats + ranking staging. Never uploads.
  *
@@ -104,9 +105,9 @@ async function main(): Promise<void> {
   const history = parseAgriculturalHistory(JSON.parse(historyRaw));
   const prior = new Map<string, StatsValuesPayload>();
   for (const metric of METRICS) {
-    const stagedPath = join(stageDir, "app/stats", metric.key, "values.json");
+    const stagedPath = join(stageDir, statsR2Key(metric.key, "prefecture"));
     const path = existsSync(stagedPath) ? stagedPath : (await acquire(
-      `${SITE.r2PublicBaseUrl}/app/stats/${metric.key}/values.json`, `${metric.key}-existing.json`,
+      `${SITE.r2PublicBaseUrl}/${statsR2Key(metric.key, "prefecture")}`, `${metric.key}-existing.json`,
     )).path;
     const existing = parseStatsValuesPayload(JSON.parse(await readFile(path, "utf8")));
     if (existing.metricKey !== metric.key || existing.entityKind !== "prefecture") throw new Error("Existing stats identity mismatch");
@@ -151,8 +152,8 @@ async function main(): Promise<void> {
     if (ranking.partitions.reduce((sum, part) => sum + part.count, 0) !== rows.length) throw new Error("Ranking generation removed observations");
     const statsText = JSON.stringify(stats);
     const rankingText = JSON.stringify(ranking);
-    pending.push({ path: join(stageDir, "app/stats", metric.key, "values.json"), text: statsText },
-      { path: join(stageDir, "app/ranking", metric.key, "values.json"), text: rankingText });
+    pending.push({ path: join(stageDir, statsR2Key(metric.key, "prefecture")), text: statsText },
+      { path: join(stageDir, rankingR2Key(metric.key, "values")), text: rankingText });
     manifest.push({ key: metric.key, years, rowCount: rows.length, previousRowCount: existing.rows.length,
       previousRecipe: existing.meta.recipe, recipe, previousValuesMatched: existing.rows.length,
       source: isAgriculture ? { url: AGRICULTURAL_OUTPUT_RELEASE.sourceUrl, sha256: workbook.sha256,

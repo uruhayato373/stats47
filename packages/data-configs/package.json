@@ -221,7 +221,8 @@
   },
   "dependencies": {
     "@stats47/area": "*",
-    "@stats47/types": "*"
+    "@stats47/types": "*",
+    "@stats47/r2-storage": "*"
   },
   "devDependencies": {
     "better-sqlite3": "^12.6.2",

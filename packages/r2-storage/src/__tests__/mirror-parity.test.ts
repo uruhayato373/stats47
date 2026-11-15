@@ -47,3 +47,17 @@ it("keeps observation keys and errors identical in the mirror", () => {
   }
   expect(() => mirror.statsR2Key("m", "invalid")).toThrow("unknown entity kind: invalid");
 });
+
+
+it("keeps download variants identical in the mirror", () => {
+  for (const basis of ["original", "per_population", "per_area", "per_household", "all-bases"]) {
+    for (const format of ["csv", "json"] as const) {
+      for (const encoding of ["utf8", "sjis"] as const) {
+        const options = { basis, format, encoding };
+        expect(mirror.rankingR2Key("population", "download", options))
+          .toBe(canonical.rankingR2Key("population", "download", options));
+      }
+    }
+  }
+  expect(() => mirror.rankingR2Key("population", "download")).toThrow("download requires options");
+});

@@ -1,3 +1,4 @@
+import { statsR2Key } from "@stats47/r2-storage/keys";
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
@@ -108,7 +109,7 @@ async function loadAggregate(item: PipelineItem): Promise<{ source: string; valu
     return { source: item.aggregateKey, value: JSON.parse(fs.readFileSync(local, 'utf8')) };
   }
   const rankingKey = item.metricKeys[0];
-  const source = `app/stats/${rankingKey}/values.json`;
+  const source = statsR2Key(rankingKey, "prefecture");
   const response = await fetch(`${remoteBase}/${source}`);
   if (!response.ok) throw new Error(`baseline fetch failed: ${response.status} ${source}`);
   return { source, value: await response.json() as Record<string, unknown> };

@@ -1,3 +1,4 @@
+import { rankingR2Key } from "@stats47/r2-storage/keys";
 /**
  * データブック型 (S2/S4) の ranking 章生成。
  * R2 `app/ranking/<key>/values.json` の観測値を取得し、上位5+下位5 の横棒カード SVG (svg-builder) を
@@ -185,7 +186,7 @@ export async function buildRankingSection(
       title,
       year: fetched.year,
       unit,
-      rawUrl: `${process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl}/app/ranking/${rankingKey}/values.json`,
+      rawUrl: `${process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl}/${rankingR2Key(rankingKey, "values")}`,
       canonicalUrl: `${SITE.origin}/ranking/${rankingKey}`,
       source: (cfg.source ?? {}) as Record<string, unknown>,
       observedAreas: n,

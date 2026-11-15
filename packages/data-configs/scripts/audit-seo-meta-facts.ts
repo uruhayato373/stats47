@@ -1,3 +1,4 @@
+import { statsR2Key } from "@stats47/r2-storage/keys";
 /**
  * `seoTitle` / `seoDescription` の事実主張を R2 の観測値と全数突合する。
  *
@@ -108,9 +109,9 @@ async function fetchStats(
   entities: MetricConfig["entities"],
 ): Promise<StatsFetch> {
   const isCityOnly = entities.includes("city") && !entities.includes("prefecture");
-  const file = isCityOnly ? "cities.json" : "values.json";
+  const entity = isCityOnly ? "city" : "prefecture";
   for (let attempt = 0; ; attempt++) {
-    const res = await fetch(`${R2}/app/stats/${key}/${file}`).catch(() => null);
+    const res = await fetch(`${R2}/${statsR2Key(key, entity)}`).catch(() => null);
     // R2 にまだ無い指標。取得の失敗ではない
     if (res?.status === HTTP_NOT_FOUND) return { rows: null, failed: false };
     const payload = res?.ok

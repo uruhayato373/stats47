@@ -1,3 +1,4 @@
+import { statsR2Key } from "@stats47/r2-storage/keys";
 import { readSnapshot, sourceEvidence, assertLiveEstatAllowed, type SourceEvidence } from "./lib/estat-table-reader.js";
 import { conversionFactor } from "../src/unit/unit-semantics.js";
 import { prefToCityStatsDataId } from "../src/ssds/entity-source";
@@ -1128,11 +1129,11 @@ interface ProcessResult {
  * 取得できない (未設定 / 404 / ネットワーク断) 場合は null を返し、
  * regression ではなく first-empty として扱わせる (誤って「破壊」と誇張しない)。
  */
-async function readPublishedRowCount(key: string, artifact: string): Promise<number | null> {
+async function readPublishedRowCount(key: string, entity: "prefecture" | "city"): Promise<number | null> {
   const base = process.env.R2_PUBLIC_FETCH_URL;
   if (!base) return null;
   try {
-    const res = await fetch(`${base}/app/stats/${key}/${artifact}`);
+    const res = await fetch(`${base}/${statsR2Key(key, entity)}`);
     if (!res.ok) return null;
     const json = (await res.json()) as { meta?: { rowCount?: number }; rows?: unknown[] };
     return json.meta?.rowCount ?? json.rows?.length ?? null;
@@ -1148,12 +1149,12 @@ async function readPublishedRowCount(key: string, artifact: string): Promise<num
 async function relabelPublishedYearNames(config: MetricConfig): Promise<number> {
   const base = process.env.R2_PUBLIC_FETCH_URL;
   if (!base || !config.entities.includes("prefecture")) return 0;
-  const res = await fetch(`${base}/app/stats/${config.key}/values.json`);
+  const res = await fetch(`${base}/${statsR2Key(config.key, "prefecture")}`);
   if (!res.ok) return 0;
   const payload = (await res.json()) as { rows: YearNamedRow[] };
   const { rows, relabeled } = relabelYearNames(payload.rows, config.yearFormat);
   if (relabeled === 0) return 0;
-  const outPath = resolve(R2_LOCAL, `app/stats/${config.key}/values.json`);
+  const outPath = resolve(R2_LOCAL, statsR2Key(config.key, "prefecture"));
   mkdirSync(dirname(outPath), { recursive: true });
   writeFileSync(outPath, JSON.stringify({ ...payload, rows }));
   return relabeled;
@@ -1169,12 +1170,12 @@ async function relabelPublishedYearNames(config: MetricConfig): Promise<number> 
  */
 async function readPublishedCoverage(
   key: string,
-  artifact: string,
+  entity: "prefecture" | "city",
 ): Promise<Pick<ShapeSummary, "perYearAreaCount"> | null> {
   const base = process.env.R2_PUBLIC_FETCH_URL;
   if (!base) return null;
   try {
-    const res = await fetch(`${base}/app/stats/${key}/${artifact}`);
+    const res = await fetch(`${base}/${statsR2Key(key, entity)}`);
     if (!res.ok) return null;
     const json = (await res.json()) as { rows?: { areaCode: string; yearCode: string }[] };
     if (!json.rows) return null;
@@ -1306,7 +1307,6 @@ export async function processOne(
       entity: "prefecture" | "city",
       payload: { rows: ShapedRow[] },
       raw: { totalNumber: number; toNumber: number },
-      artifact: string,
     ): Promise<boolean> {
       const summary = summarizeShape(payload.rows);
 
@@ -1315,7 +1315,7 @@ export async function processOne(
       const hasShortfall =
         entity === "prefecture" &&
         Object.values(summary.perYearAreaCount).some((n) => n < PREFECTURE_COUNT);
-      const priorSummary = hasShortfall ? await readPublishedCoverage(config.key, artifact) : null;
+      const priorSummary = hasShortfall ? await readPublishedCoverage(config.key, entity) : null;
 
       const violations = classifyIngestShape({
         key: config.key,
@@ -1386,7 +1386,6 @@ export async function processOne(
       entity: "prefecture" | "city",
       rawCount: number,
       rowCount: number,
-      artifact: string,
     ): Promise<boolean> {
       if (rowCount > 0) {
         // allowlist に残っているのに復活した場合を知らせる (fatal にはしない)
@@ -1396,7 +1395,7 @@ export async function processOne(
         if (revived.outcome === "stale-allowlist") console.warn(`  [stale-allowlist] ${revived.message}`);
         return true;
       }
-      const priorRowCount = await readPublishedRowCount(config.key, artifact);
+      const priorRowCount = await readPublishedRowCount(config.key, entity);
       const verdict = classifyEmptyOutcome({
         key: config.key, entity, rawCount, rowCount,
         priorRowCount, now: new Date(), cliAllowed: allowEmpty,
@@ -1423,14 +1422,14 @@ export async function processOne(
       const sample = sampleSpec && counts ? { counts, spec: sampleSpec } : undefined;
       const payload = shapeForPrefecture(config, values, sample, sourceEvidence([...fetched.sources, ...(counts?.sources ?? [])]));
       if (sample) notes.push(`reference=${payload.rows.filter((r) => r.reference).length}`);
-      const notEmpty = await gateEmpty("prefecture", values.length, payload.rows.length, "values.json");
+      const notEmpty = await gateEmpty("prefecture", values.length, payload.rows.length);
       // 0 件なら形状は見ない (expected-empty の担当。二重に鳴らさない)
       const shapeOk = notEmpty
-        ? await gateShape("prefecture", payload, fetched.raw, "values.json")
+        ? await gateShape("prefecture", payload, fetched.raw)
         : true;
       const writable = notEmpty && shapeOk;
       if (!dryRun && writable) {
-        const outPath = resolve(R2_LOCAL, `app/stats/${config.key}/values.json`);
+        const outPath = resolve(R2_LOCAL, statsR2Key(config.key, "prefecture"));
         mkdirSync(dirname(outPath), { recursive: true });
         writeFileSync(outPath, JSON.stringify(payload));
       }
@@ -1449,13 +1448,13 @@ export async function processOne(
         const values = fetched.values;
         const payload = shapeForCity(config, values, city.source);
         payload.meta.source = sourceEvidence(fetched.sources);
-        const notEmpty = await gateEmpty("city", values.length, payload.rows.length, "cities.json");
+        const notEmpty = await gateEmpty("city", values.length, payload.rows.length);
         const shapeOk = notEmpty
-          ? await gateShape("city", payload, fetched.raw, "cities.json")
+          ? await gateShape("city", payload, fetched.raw)
           : true;
         const writable = notEmpty && shapeOk;
         if (!dryRun && writable) {
-          const outPath = resolve(R2_LOCAL, `app/stats/${config.key}/cities.json`);
+          const outPath = resolve(R2_LOCAL, statsR2Key(config.key, "city"));
           mkdirSync(dirname(outPath), { recursive: true });
           writeFileSync(outPath, JSON.stringify(payload));
         }
@@ -1527,7 +1526,7 @@ async function main() {
   if (args.since) {
     const sinceMs = new Date(args.since).getTime();
     targets = targets.filter((c) => {
-      const mtime = getR2FileMtime(`app/stats/${c.key}/values.json`);
+      const mtime = getR2FileMtime(statsR2Key(c.key, "prefecture"));
       return mtime == null || mtime < sinceMs;
     });
   }

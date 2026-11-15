@@ -1,3 +1,4 @@
+import { statsR2Key } from "@stats47/r2-storage/keys";
 /** Read-only refresh planning. No e-Stat requests, snapshot writes or credentials. */
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -114,7 +115,7 @@ export async function selectRefreshMetrics(metrics: readonly MetricConfig[], opt
   await Promise.all(Array.from({ length: Math.min(4, active.length) }, async () => {
     while (next < active.length) {
       const metric = active[next++];
-      const value = await readJson(`app/stats/${metric.key}/values.json`);
+      const value = await readJson(statsR2Key(metric.key, "prefecture"));
       let storedConfigHash: string | null = null;
       if (value !== null) {
         const meta = object(value).meta;

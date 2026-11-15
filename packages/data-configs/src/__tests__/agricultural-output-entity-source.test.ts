@@ -1,10 +1,15 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { processOne } from '../../scripts/page-data-batch';
+import { createSnapshotReader, withSnapshotReader } from '../../scripts/lib/estat-table-reader';
 import { agriculturalOutput } from '../../../../data/metrics/agricultural-output';
 import { resolveMetricSource } from '../source-for-entity';
 
 afterEach(() => vi.unstubAllGlobals());
+
+// このテストは市表を e-Stat から取る経路を見る。台帳で市表が verified になっても写しを読まないよう、空の読み手を使う。
+const noSnapshots = createSnapshotReader([], async () => null);
+const run = (...args: Parameters<typeof processOne>) => withSnapshotReader(noSnapshots, () => processOne(...args));
 
 function mockValues(values: Record<string, string>[]) {
   const fetcher = vi.fn(async (_url: string) => new Response(JSON.stringify({
@@ -36,7 +41,7 @@ describe('農業産出額の県2024更新と既存市区町村系列の両立', 
       { '@area': '01100', '@time': '2023000000', '@unit': '百万円', $: '1200' },
     ]);
     const before = structuredClone(agriculturalOutput);
-    const result = await processOne(agriculturalOutput, 'test-app-id', true);
+    const result = await run(agriculturalOutput, 'test-app-id', true);
     expect(result).toMatchObject({ ok: true, rows: 1, message: 'would write city=1' });
     expect(fetcher).toHaveBeenCalledTimes(1);
     const url = new URL(fetcher.mock.calls[0][0] as string);
@@ -47,14 +52,14 @@ describe('農業産出額の県2024更新と既存市区町村系列の両立', 
 
   it('県だけを更新する実行で市表を取得せず、manual県表をe-Statへ誤変換しない', async () => {
     const fetcher = mockValues([]);
-    const result = await processOne({ ...agriculturalOutput, entities: ['prefecture'] }, 'test-app-id', true);
+    const result = await run({ ...agriculturalOutput, entities: ['prefecture'] }, 'test-app-id', true);
     expect(result.status).toBe('skip');
     expect(fetcher).not.toHaveBeenCalled();
   });
 
   it('市表の代わりに県payloadが返った場合は0件として停止する', async () => {
     mockValues([{ '@area': '01000', '@time': '2023000000', '@unit': '百万円', $: '1347800' }]);
-    const result = await processOne(agriculturalOutput, 'test-app-id', true);
+    const result = await run(agriculturalOutput, 'test-app-id', true);
     expect(result.rows).toBe(0);
     expect(result.ok).toBe(false);
     expect(result.status).toBe('empty');

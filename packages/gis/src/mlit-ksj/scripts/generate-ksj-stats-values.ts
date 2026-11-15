@@ -1,4 +1,5 @@
 #!/usr/bin/env tsx
+import { statsR2Key } from "@stats47/r2-storage/keys";
 /**
  * KSJ 由来ランキングの正典 `app/stats/<metric>/values.json` を再生成する。
  *
@@ -169,7 +170,7 @@ async function readCurrentPayload(
   metricKey: string,
 ): Promise<StatsValuesPayload | null> {
   const res = await fetch(
-    `${PUBLIC_R2}/app/stats/${metricKey}/values.json`,
+    `${PUBLIC_R2}/${statsR2Key(metricKey, "prefecture")}`,
   ).catch(() => null);
   if (!res || !res.ok) return null;
   return (await res.json()) as StatsValuesPayload;
@@ -201,7 +202,7 @@ async function main(): Promise<void> {
     assertKsjPublicStructuredOutputAllowed({
       dataId: target.dataId,
       license: target.license,
-      output: `app/stats/${target.metricKey}/values.json`,
+      output: statsR2Key(target.metricKey, "prefecture"),
     });
   }
 
@@ -300,9 +301,7 @@ async function main(): Promise<void> {
 
     const outPath = path.join(
       args.outDir,
-      "app/stats",
-      t.metricKey,
-      "values.json",
+      statsR2Key(t.metricKey, "prefecture"),
     );
     fs.mkdirSync(path.dirname(outPath), { recursive: true });
     fs.writeFileSync(outPath, JSON.stringify(payload));
