@@ -921,6 +921,14 @@ jobs:
           npx tsx packages/data-configs/scripts/generate-unit-semantics-mirror.ts --check
         continue-on-error: false
 
+      - name: 🗝️ R2 Keys Mirror Gate
+        run: |
+          # R2 のキーの正典は packages/r2-storage/src/keys.ts。.claude/scripts/lib/r2-keys.mjs はその自動生成 (素の node 実行用)。
+          npx tsx packages/r2-storage/scripts/generate-r2-keys-mirror.ts --check
+          # 入口 (keys.ts・鏡・r2-key-classes・接続の部品) の外での R2 のキー・公開 URL・S3 クライアントの直書きを止める (縮小専用)
+          node packages/r2-storage/scripts/check-r2-entrypoint.mjs
+        continue-on-error: false
+
       - name: 🎨 Colorscheme Policy Gate
         run: |
           # コロプレス配色の決定規則と極性 SSOT を担保。

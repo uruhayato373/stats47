@@ -1,5 +1,6 @@
 import type { StatsSchema } from '@stats47/types';
 import type { EntityKind, MetricRecipe } from "@stats47/data-configs";
+import { STATS_R2_PREFIX } from "@stats47/r2-storage/keys";
 
 /**
  * R2 keypath constants for stats data (Phase 6 architecture).
@@ -11,7 +12,7 @@ import type { EntityKind, MetricRecipe } from "@stats47/data-configs";
  * - port stats:       `app/stats/<metric>/ports.json`            (全年 × 全港)
  * - migration-flow:   `app/stats/<metric>/migration-flow-<year>.json` (year 単位)
  */
-export const STATS_R2_PREFIX = "app/stats";
+export { STATS_R2_PREFIX };
 
 export function statsR2Key(
   metricKey: string,

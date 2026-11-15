@@ -5,6 +5,11 @@
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "exports": {
+    "./keys": {
+      "types": "./src/keys.ts",
+      "import": "./src/keys.ts",
+      "require": "./src/keys.ts"
+    },
     ".": {
       "types": "./src/index.ts",
       "import": "./src/index.ts",
