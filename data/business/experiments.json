@@ -954,7 +954,9 @@
       "result": null,
       "learnings": null,
       "closed_at": null,
-      "actions": [],
+      "actions": [
+        "2026-11-15 群の外の記事 assembly-answer-chatgpt-5steps にも P-04 の案内 (blog_product) を足した (develop。本番反映日は反映時に追記する)。集計 (.claude/scripts/metrics/lib/journey-ga4-reports.mjs) は product_id × link_position で記事のパスを持たないので、反映日以降の blog_product × P-04 の表示とクリックには、workplace-blog-10 の 10 記事のほかにこの記事の分が加わる。判定のときは GA4 の pagePath で分けて読むか、この記事を群に含めたと明記する (どちらにするかはオーナーが決める)"
+      ],
       "pending_user_actions": [],
       "next_check_date": "2026-12-26",
       "history": [
