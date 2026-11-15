@@ -1,0 +1,34 @@
+{
+  "datasetId": "mhlw-covid19-open-data",
+  "versions": [
+    {
+      "schemaVersion": 1,
+      "datasetId": "mhlw-covid19-open-data",
+      "version": "initial",
+      "sha256": "14356f76f3893123b5620fe2583f69b4048d3a8dbddf3b6d1ceeac3fc357f3e8",
+      "recipeSha256": "b18e6fce4b75dec1510fbc466f60cbb1ba39feaeac8e25b226b55ebbaa6f079d",
+      "retrievedAt": "2026-11-15T00:19:32.501Z",
+      "license": {
+        "name": "公共データ利用規約 (PDL1.0)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.mhlw.go.jp/chosakuken/index.html"
+      },
+      "files": [
+        {
+          "key": "open-data/raw/mhlw-covid19-open-data/initial/0001.csv",
+          "url": "https://covid19.mhlw.go.jp/public/opendata/newly_confirmed_cases_daily.csv",
+          "sha256": "6493df56c3b46ee15bae36e69de1c176562e8535efd95b0aa15452d61e6ad9d7",
+          "bytes": 202245,
+          "contentType": "application/octet-stream",
+          "retrievedAt": "2026-11-15T00:19:32.500Z"
+        }
+      ],
+      "manifestKey": "open-data/raw/mhlw-covid19-open-data/initial/manifest.json",
+      "manifestSha256": "1139ed41eb07d48f5408c0d93008e3747c0adaff46c0174fa57ad923dd7cdefa",
+      "bytes": 202245,
+      "status": "archived"
+    }
+  ]
+}
