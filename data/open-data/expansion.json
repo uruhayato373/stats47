@@ -41,17 +41,27 @@
         "timeAggregation": "none"
       },
       "channel": "prefecture-ranking",
-      "status": "blocked",
-      "title": "人口10万人当たり病院数",
+      "status": "rejected",
+      "title": "医療情報ネット登録病院数（人口10万人当たり）",
       "unit": "施設/10万人",
       "aggregation": {
         "type": "per-100k",
         "denominatorTime": "2025"
       },
-      "reason": "2026年6月の施設登録数を直前の2025年総人口で割る候補。ローカルに人口観測値がなく47県の率を検算できない。既存指標がある場合は、より新しい一次行政資料への差し替えとして母集団の整合も確認する。",
+      "reason": "47県の率は検算済みだが、既存 general-hospital-count-per-100k (医療施設調査) と同じ病院の人口当たりで、市区町村の病院数の比の中央値は 1.000 (1,426 地域・r=.9944)。登録施設の別指標として並べると同じ値のランキングが 2 本になるので作らない (2026-11-15 Claude 判断)。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
-      "denominator": "total-population"
+      "decidedBy": "claude (2026-11-15 再判定)",
+      "denominator": "total-population",
+      "verification": {
+        "tableSha256": "b55babc804e0a871de3d476af4bcc902498dfa47832e0c6691fe8f1bbe73a8f5",
+        "rowCount": 47,
+        "areaCount": 47,
+        "min": 3.426176554467179,
+        "max": 18.356159269238187,
+        "denominatorTime": "2025",
+        "denominatorSha256": "c2b7682fd0fd7f511d468ebe6a5a1e8e82fcf22101676ad84618cb101e4ad521"
+      },
+      "metricKey": "medical-info-registered-hospitals-per-100k"
     },
     {
       "datasetId": "mhlw-medical-hospitals",
@@ -68,16 +78,23 @@
         "timeAggregation": "none"
       },
       "channel": "municipality-ranking",
-      "status": "blocked",
+      "status": "rejected",
       "title": "病院数",
       "unit": "施設",
       "aggregation": {
         "type": "identity"
       },
-      "reason": "値がある自治体は1428。2026年の一次行政資料による既存市区町村指標の差し替え候補だが、municipalities.catalog の自治体集合と無記録・ゼロの区別を確認するまで停止。 機械照合: hospital-count-city の名前「病院数」・単位「施設」・出典「社会・人口統計体系（市区町村データ・廃置分合処理済）」・地域粒度 municipality が同概念（人口補正は title/subtitle も照合）。",
+      "reason": "医療情報ネットの登録施設票の件数と既存SSDSの医療施設調査の施設数は収録母集団が異なり、同一系列への差し替えは採用しない（既存最新2023年→新2026年、3年差）。同地域1426件でr=0.994401、新/旧中央値=1.000000（旧0除外2件）、最大絶対差=10.000000施設（09201: 32→22.000000）、最大相対差=100.0000％（13219）、新のみ2・旧のみ485地域は比較から除外し、無記録を0補完しない。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
-      "duplicateOf": "hospital-count-city"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
+      "duplicateOf": "hospital-count-city",
+      "verification": {
+        "tableSha256": "b55babc804e0a871de3d476af4bcc902498dfa47832e0c6691fe8f1bbe73a8f5",
+        "rowCount": 1428,
+        "areaCount": 1428,
+        "min": 1,
+        "max": 76
+      }
     },
     {
       "datasetId": "mhlw-medical-clinics",
@@ -125,16 +142,23 @@
         "timeAggregation": "none"
       },
       "channel": "prefecture-ranking",
-      "status": "blocked",
+      "status": "rejected",
       "title": "一般診療所数",
       "unit": "施設",
       "aggregation": {
         "type": "identity"
       },
-      "reason": "2026年6月の医療情報ネットという一次行政資料による既存SSDS指標の差し替え候補。医療施設調査・衛生行政報告例との収録施設範囲を照合するまで停止する。 機械照合: general-clinic-count の名前「一般診療所数（総数）」・単位「施設」・出典「社会・人口統計体系」・地域粒度 prefecture が同概念（人口補正は title/subtitle も照合）。",
+      "reason": "医療情報ネットの登録施設票の件数と既存SSDSの医療施設調査の施設数は収録母集団が異なり、同一系列への差し替えは採用しない（既存最新2023年→新2026年、3年差）。同地域47件でr=0.993316、新/旧中央値=0.769904（旧0除外0件）、最大絶対差=2284.000000施設（13000: 14894→12610.000000）、最大相対差=71.5517％（47000）、新のみ0・旧のみ0地域は比較から除外し、無記録を0補完しない。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
-      "duplicateOf": "general-clinic-count"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
+      "duplicateOf": "general-clinic-count",
+      "verification": {
+        "tableSha256": "318bb116fb04dc9a03af903e0ca9e0ad05e50c1b8cea39de21d1866c56a65468",
+        "rowCount": 1140,
+        "areaCount": 47,
+        "min": 264,
+        "max": 12610
+      }
     },
     {
       "datasetId": "mhlw-medical-clinics",
@@ -182,18 +206,27 @@
         "timeAggregation": "none"
       },
       "channel": "prefecture-ranking",
-      "status": "blocked",
+      "status": "rejected",
       "title": "人口10万人当たり一般診療所数",
       "unit": "施設/10万人",
       "aggregation": {
         "type": "per-100k",
         "denominatorTime": "2025"
       },
-      "reason": "2026年6月の施設登録数を直前の2025年総人口で割る候補。ローカルに人口観測値がなく47県の率を検算できない。既存指標がある場合は、より新しい一次行政資料への差し替えとして母集団の整合も確認する。 機械照合: general-clinic-count-per-100k の名前「一般診療所数（人口10万人当たり）」・単位「施設」・出典「社会・人口統計体系」・地域粒度 prefecture が同概念（人口補正は title/subtitle も照合）。",
+      "reason": "医療情報ネットの登録施設票の件数と既存SSDSの医療施設調査の施設数は収録母集団が異なり、同一系列への差し替えは採用しない（既存最新2023年→新2026年、3年差）。同地域47件でr=0.803281、新/旧中央値=0.781339（旧0除外0件）、最大絶対差=51.943194施設/10万人（26000: 98.1→46.156806）、最大相対差=71.5167％（47000）、新のみ0・旧のみ0地域は比較から除外し、無記録を0補完しない、分母は最寄りの2025年総人口（分子2026年との差1年、47地域の分母欠落0）。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
       "denominator": "total-population",
-      "duplicateOf": "general-clinic-count-per-100k"
+      "duplicateOf": "general-clinic-count-per-100k",
+      "verification": {
+        "tableSha256": "318bb116fb04dc9a03af903e0ca9e0ad05e50c1b8cea39de21d1866c56a65468",
+        "rowCount": 1140,
+        "areaCount": 47,
+        "min": 18.001456481478957,
+        "max": 97.31477992071707,
+        "denominatorTime": "2025",
+        "denominatorSha256": "c2b7682fd0fd7f511d468ebe6a5a1e8e82fcf22101676ad84618cb101e4ad521"
+      }
     },
     {
       "datasetId": "mhlw-medical-clinics",
@@ -241,16 +274,23 @@
         "timeAggregation": "none"
       },
       "channel": "municipality-ranking",
-      "status": "blocked",
+      "status": "rejected",
       "title": "一般診療所数",
       "unit": "施設",
       "aggregation": {
         "type": "identity"
       },
-      "reason": "値がある自治体は1817。2026年の一次行政資料による既存市区町村指標の差し替え候補だが、municipalities.catalog の自治体集合と無記録・ゼロの区別を確認するまで停止。 機械照合: general-clinic-count の名前「一般診療所数（総数）」・単位「施設」・出典「社会・人口統計体系」・地域粒度 municipality が同概念（人口補正は title/subtitle も照合）。",
+      "reason": "医療情報ネットの登録施設票の件数と既存SSDSの医療施設調査の施設数は収録母集団が異なり、同一系列への差し替えは採用しない（既存最新2023年→新2026年、3年差）。同地域1815件でr=0.988666、新/旧中央値=0.720000（旧0除外0件）、最大絶対差=278.000000施設（46201: 538→260.000000）、最大相対差=90.9091％（17461）、新のみ2・旧のみ96地域は比較から除外し、無記録を0補完しない。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
-      "duplicateOf": "general-clinic-count"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
+      "duplicateOf": "general-clinic-count",
+      "verification": {
+        "tableSha256": "318bb116fb04dc9a03af903e0ca9e0ad05e50c1b8cea39de21d1866c56a65468",
+        "rowCount": 7374,
+        "areaCount": 1817,
+        "min": 1,
+        "max": 843
+      }
     },
     {
       "datasetId": "mhlw-medical-dental-clinics",
@@ -267,16 +307,23 @@
         "timeAggregation": "none"
       },
       "channel": "prefecture-ranking",
-      "status": "blocked",
+      "status": "rejected",
       "title": "歯科診療所数",
       "unit": "施設",
       "aggregation": {
         "type": "identity"
       },
-      "reason": "2026年6月の医療情報ネットという一次行政資料による既存SSDS指標の差し替え候補。医療施設調査・衛生行政報告例との収録施設範囲を照合するまで停止する。 機械照合: dental-clinic-count の名前「歯科診療所数（総数）」・単位「施設」・出典「社会・人口統計体系」・地域粒度 prefecture が同概念（人口補正は title/subtitle も照合）。",
+      "reason": "医療情報ネットの登録施設票の件数と既存SSDSの医療施設調査の施設数は収録母集団が異なり、同一系列への差し替えは採用しない（既存最新2023年→新2026年、3年差）。同地域47件でr=0.993237、新/旧中央値=0.896414（旧0除外0件）、最大絶対差=2132.000000施設（13000: 10608→8476.000000）、最大相対差=82.3627％（47000）、新のみ0・旧のみ0地域は比較から除外し、無記録を0補完しない。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
-      "duplicateOf": "dental-clinic-count"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
+      "duplicateOf": "dental-clinic-count",
+      "verification": {
+        "tableSha256": "bd1ece9a8b423c567bfc41039bfd323a8344b3f70052638588d96df5a7748c2e",
+        "rowCount": 47,
+        "areaCount": 47,
+        "min": 106,
+        "max": 8476
+      }
     },
     {
       "datasetId": "mhlw-medical-dental-clinics",
@@ -293,18 +340,27 @@
         "timeAggregation": "none"
       },
       "channel": "prefecture-ranking",
-      "status": "blocked",
+      "status": "rejected",
       "title": "人口10万人当たり歯科診療所数",
       "unit": "施設/10万人",
       "aggregation": {
         "type": "per-100k",
         "denominatorTime": "2025"
       },
-      "reason": "2026年6月の施設登録数を直前の2025年総人口で割る候補。ローカルに人口観測値がなく47県の率を検算できない。既存指標がある場合は、より新しい一次行政資料への差し替えとして母集団の整合も確認する。 機械照合: dental-clinic-count-per-100k の名前「歯科診療所数（人口10万人当たり）」・単位「施設」・出典「社会・人口統計体系」・地域粒度 prefecture が同概念（人口補正は title/subtitle も照合）。",
+      "reason": "医療情報ネットの登録施設票の件数と既存SSDSの医療施設調査の施設数は収録母集団が異なり、同一系列への差し替えは採用しない（既存最新2023年→新2026年、3年差）。同地域47件でr=0.589436、新/旧中央値=0.907908（旧0除外0件）、最大絶対差=34.821002施設/10万人（26000: 49.3→14.478998）、最大相対差=82.3280％（47000）、新のみ0・旧のみ0地域は比較から除外し、無記録を0補完しない、分母は最寄りの2025年総人口（分子2026年との差1年、47地域の分母欠落0）。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
       "denominator": "total-population",
-      "duplicateOf": "dental-clinic-count-per-100k"
+      "duplicateOf": "dental-clinic-count-per-100k",
+      "verification": {
+        "tableSha256": "bd1ece9a8b423c567bfc41039bfd323a8344b3f70052638588d96df5a7748c2e",
+        "rowCount": 47,
+        "areaCount": 47,
+        "min": 7.22785752665443,
+        "max": 59.536574218036336,
+        "denominatorTime": "2025",
+        "denominatorSha256": "c2b7682fd0fd7f511d468ebe6a5a1e8e82fcf22101676ad84618cb101e4ad521"
+      }
     },
     {
       "datasetId": "mhlw-medical-dental-clinics",
@@ -321,16 +377,23 @@
         "timeAggregation": "none"
       },
       "channel": "municipality-ranking",
-      "status": "blocked",
+      "status": "rejected",
       "title": "歯科診療所数",
       "unit": "施設",
       "aggregation": {
         "type": "identity"
       },
-      "reason": "値がある自治体は1767。2026年の一次行政資料による既存市区町村指標の差し替え候補だが、municipalities.catalog の自治体集合と無記録・ゼロの区別を確認するまで停止。 機械照合: dental-clinic-count の名前「歯科診療所数（総数）」・単位「施設」・出典「社会・人口統計体系」・地域粒度 municipality が同概念（人口補正は title/subtitle も照合）。",
+      "reason": "医療情報ネットの登録施設票の件数と既存SSDSの医療施設調査の施設数は収録母集団が異なり、同一系列への差し替えは採用しない（既存最新2023年→新2026年、3年差）。同地域1765件でr=0.985698、新/旧中央値=0.900000（旧0除外7件）、最大絶対差=199.000000施設（46201: 362→163.000000）、最大相対差=100.0000％（01370）、新のみ2・旧のみ146地域は比較から除外し、無記録を0補完しない。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
-      "duplicateOf": "dental-clinic-count"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
+      "duplicateOf": "dental-clinic-count",
+      "verification": {
+        "tableSha256": "bd1ece9a8b423c567bfc41039bfd323a8344b3f70052638588d96df5a7748c2e",
+        "rowCount": 1767,
+        "areaCount": 1767,
+        "min": 1,
+        "max": 593
+      }
     },
     {
       "datasetId": "mhlw-medical-maternity-homes",
@@ -430,16 +493,23 @@
         "timeAggregation": "none"
       },
       "channel": "prefecture-ranking",
-      "status": "blocked",
+      "status": "rejected",
       "title": "薬局数",
       "unit": "施設",
       "aggregation": {
         "type": "identity"
       },
-      "reason": "2026年6月の医療情報ネットという一次行政資料による既存SSDS指標の差し替え候補。医療施設調査・衛生行政報告例との収録施設範囲を照合するまで停止する。 機械照合: pharmacy-count の名前「都道府県別 薬局数」・単位「所」・出典「社会・人口統計体系」・地域粒度 prefecture が同概念（人口補正は title/subtitle も照合）。",
+      "reason": "医療情報ネットの登録施設票の件数と既存SSDSの衛生行政報告例の薬局数は収録母集団が異なり、同一系列への差し替えは採用しない（既存最新2023年→新2026年、3年差）。同地域47件でr=0.999194、新/旧中央値=0.992054（旧0除外0件）、最大絶対差=362.000000施設（13000: 7117→6755.000000）、最大相対差=17.1280％（47000）、新のみ0・旧のみ0地域は比較から除外し、無記録を0補完しない。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
-      "duplicateOf": "pharmacy-count"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
+      "duplicateOf": "pharmacy-count",
+      "verification": {
+        "tableSha256": "a02e60ae7c1a18e8307101eb74f8fa02fbe2a97efcd4231cba6ba526b6555d7a",
+        "rowCount": 141,
+        "areaCount": 47,
+        "min": 264,
+        "max": 6755
+      }
     },
     {
       "datasetId": "mhlw-medical-pharmacies",
@@ -462,18 +532,27 @@
         "timeAggregation": "none"
       },
       "channel": "prefecture-ranking",
-      "status": "blocked",
+      "status": "rejected",
       "title": "人口10万人当たり薬局数",
       "unit": "施設/10万人",
       "aggregation": {
         "type": "per-100k",
         "denominatorTime": "2025"
       },
-      "reason": "2026年6月の施設登録数を直前の2025年総人口で割る候補。ローカルに人口観測値がなく47県の率を検算できない。既存指標がある場合は、より新しい一次行政資料への差し替えとして母集団の整合も確認する。 機械照合: pharmacy-count-per-100k の名前「人口10万人あたり薬局数」・単位「所」・出典「社会・人口統計体系」・地域粒度 prefecture が同概念（人口補正は title/subtitle も照合）。",
+      "reason": "医療情報ネットの登録施設票の件数と既存SSDSの衛生行政報告例の薬局数は収録母集団が異なり、同一系列への差し替えは採用しない（既存最新2023年→新2026年、3年差）。同地域47件でr=0.954040、新/旧中央値=1.012107（旧0除外0件）、最大絶対差=6.738266施設/10万人（47000: 39.4→32.661734）、最大相対差=17.1022％（47000）、新のみ0・旧のみ0地域は比較から除外し、無記録を0補完しない、分母は最寄りの2025年総人口（分子2026年との差1年、47地域の分母欠落0）。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
       "denominator": "total-population",
-      "duplicateOf": "pharmacy-count-per-100k"
+      "duplicateOf": "pharmacy-count-per-100k",
+      "verification": {
+        "tableSha256": "a02e60ae7c1a18e8307101eb74f8fa02fbe2a97efcd4231cba6ba526b6555d7a",
+        "rowCount": 141,
+        "areaCount": 47,
+        "min": 32.66173354025917,
+        "max": 65.18871362649433,
+        "denominatorTime": "2025",
+        "denominatorSha256": "c2b7682fd0fd7f511d468ebe6a5a1e8e82fcf22101676ad84618cb101e4ad521"
+      }
     },
     {
       "datasetId": "mhlw-medical-clinics",
@@ -516,10 +595,19 @@
         "type": "per-100k",
         "denominatorTime": "2025"
       },
-      "reason": "毎週・第1〜5週の日曜休診フラグがすべて0でも実診療時間の存在は証明しない。空欄も0扱いできず、診療時間表との照合と2025年人口観測値が必要。",
+      "reason": "日曜休診フラグ6項目がすべて0の施設を集計し、分母は最寄りの2025年総人口（分子2026年との差1年、47地域の分母欠落0）で47県の率は1.476472〜51.056026施設/10万人。0が診療時間の存在を示す定義資料と施設別の日曜診療時間の照合がなく、空欄と0は区別して日曜診療の判断をblockedに保つ。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
-      "denominator": "total-population"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
+      "denominator": "total-population",
+      "verification": {
+        "tableSha256": "318bb116fb04dc9a03af903e0ca9e0ad05e50c1b8cea39de21d1866c56a65468",
+        "rowCount": 47,
+        "areaCount": 47,
+        "min": 1.4764724121129795,
+        "max": 51.05602617402811,
+        "denominatorTime": "2025",
+        "denominatorSha256": "c2b7682fd0fd7f511d468ebe6a5a1e8e82fcf22101676ad84618cb101e4ad521"
+      }
     },
     {
       "datasetId": "mhlw-medical-clinics",
@@ -562,11 +650,20 @@
         "type": "per-100k",
         "denominatorTime": "2025"
       },
-      "reason": "日曜の受診先を比較する用途は healthcare に合うが、休診フラグだけで診療中と判定できず停止。",
+      "reason": "日曜休診フラグ6項目がすべて0の施設を集計し、分母は最寄りの2025年総人口（分子2026年との差1年、47地域の分母欠落0）で47県の率は1.476472〜51.056026施設/10万人。0が診療時間の存在を示す定義資料と施設別の日曜診療時間の照合がなく、空欄と0は区別して日曜診療の判断をblockedに保つ。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
       "denominator": "total-population",
-      "target": "healthcare"
+      "target": "healthcare",
+      "verification": {
+        "tableSha256": "318bb116fb04dc9a03af903e0ca9e0ad05e50c1b8cea39de21d1866c56a65468",
+        "rowCount": 47,
+        "areaCount": 47,
+        "min": 1.4764724121129795,
+        "max": 51.05602617402811,
+        "denominatorTime": "2025",
+        "denominatorSha256": "c2b7682fd0fd7f511d468ebe6a5a1e8e82fcf22101676ad84618cb101e4ad521"
+      }
     },
     {
       "datasetId": "mhlw-medical-clinics",
@@ -609,11 +706,20 @@
         "type": "per-100k",
         "denominatorTime": "2025"
       },
-      "reason": "県データブックの医療施設欄への候補。日曜診療の定義と分母の検証が済むまで停止。",
+      "reason": "日曜休診フラグ6項目がすべて0の施設を集計し、分母は最寄りの2025年総人口（分子2026年との差1年、47地域の分母欠落0）で47県の率は1.476472〜51.056026施設/10万人。0が診療時間の存在を示す定義資料と施設別の日曜診療時間の照合がなく、空欄と0は区別して日曜診療の判断をblockedに保つ。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
       "denominator": "total-population",
-      "target": "education-facility"
+      "target": "education-facility",
+      "verification": {
+        "tableSha256": "318bb116fb04dc9a03af903e0ca9e0ad05e50c1b8cea39de21d1866c56a65468",
+        "rowCount": 47,
+        "areaCount": 47,
+        "min": 1.4764724121129795,
+        "max": 51.05602617402811,
+        "denominatorTime": "2025",
+        "denominatorSha256": "c2b7682fd0fd7f511d468ebe6a5a1e8e82fcf22101676ad84618cb101e4ad521"
+      }
     },
     {
       "datasetId": "mhlw-medical-pharmacies",
@@ -641,10 +747,19 @@
         "type": "per-100k",
         "denominatorTime": "2025"
       },
-      "reason": "sundayBusiness=1 の47県の施設数を2025年総人口で補正する。人口観測値がローカルにないため率の47県検算を完了できない。空欄は営業とみなさない。",
+      "reason": "営業日（日）=1の施設を集計し、分母は最寄りの2025年総人口（分子2026年との差1年、47地域の分母欠落0）で47県の率は1.179213〜5.969269施設/10万人。追加資料に薬局票の0・1・空欄の公式定義および定期週・営業時間との対応がなく、空欄を営業に含めず定義資料との照合までblockedに保つ。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
-      "denominator": "total-population"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
+      "denominator": "total-population",
+      "verification": {
+        "tableSha256": "a02e60ae7c1a18e8307101eb74f8fa02fbe2a97efcd4231cba6ba526b6555d7a",
+        "rowCount": 47,
+        "areaCount": 47,
+        "min": 1.1792128361247922,
+        "max": 5.969268558764704,
+        "denominatorTime": "2025",
+        "denominatorSha256": "c2b7682fd0fd7f511d468ebe6a5a1e8e82fcf22101676ad84618cb101e4ad521"
+      }
     },
     {
       "datasetId": "mhlw-medical-pharmacies",
@@ -672,11 +787,20 @@
         "type": "per-100k",
         "denominatorTime": "2025"
       },
-      "reason": "日曜の薬局へのアクセスは healthcare に合うが、2025年人口の観測値不足で率を検算できない。",
+      "reason": "営業日（日）=1の施設を集計し、分母は最寄りの2025年総人口（分子2026年との差1年、47地域の分母欠落0）で47県の率は1.179213〜5.969269施設/10万人。追加資料に薬局票の0・1・空欄の公式定義および定期週・営業時間との対応がなく、空欄を営業に含めず定義資料との照合までblockedに保つ。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
       "denominator": "total-population",
-      "target": "healthcare"
+      "target": "healthcare",
+      "verification": {
+        "tableSha256": "a02e60ae7c1a18e8307101eb74f8fa02fbe2a97efcd4231cba6ba526b6555d7a",
+        "rowCount": 47,
+        "areaCount": 47,
+        "min": 1.1792128361247922,
+        "max": 5.969268558764704,
+        "denominatorTime": "2025",
+        "denominatorSha256": "c2b7682fd0fd7f511d468ebe6a5a1e8e82fcf22101676ad84618cb101e4ad521"
+      }
     },
     {
       "datasetId": "mhlw-medical-pharmacies",
@@ -704,11 +828,20 @@
         "type": "per-100k",
         "denominatorTime": "2025"
       },
-      "reason": "県データブックの医療施設の人口補正比較に合うが、人口観測値の取得後に再判定する。",
+      "reason": "営業日（日）=1の施設を集計し、分母は最寄りの2025年総人口（分子2026年との差1年、47地域の分母欠落0）で47県の率は1.179213〜5.969269施設/10万人。追加資料に薬局票の0・1・空欄の公式定義および定期週・営業時間との対応がなく、空欄を営業に含めず定義資料との照合までblockedに保つ。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
       "denominator": "total-population",
-      "target": "education-facility"
+      "target": "education-facility",
+      "verification": {
+        "tableSha256": "a02e60ae7c1a18e8307101eb74f8fa02fbe2a97efcd4231cba6ba526b6555d7a",
+        "rowCount": 47,
+        "areaCount": 47,
+        "min": 1.1792128361247922,
+        "max": 5.969268558764704,
+        "denominatorTime": "2025",
+        "denominatorSha256": "c2b7682fd0fd7f511d468ebe6a5a1e8e82fcf22101676ad84618cb101e4ad521"
+      }
     },
     {
       "datasetId": "nier-gakuryoku-achievement",
@@ -978,15 +1111,23 @@
         "timeAggregation": "none"
       },
       "channel": "prefecture-ranking",
-      "status": "blocked",
+      "status": "planned",
       "title": "自分によいところがあると思う小学生の割合",
       "unit": "％",
       "aggregation": {
         "type": "identity"
       },
-      "reason": "47県の回答1・2の合計は計算可能だが、正規化表と手元の集計xlsxには選択肢の文言がなく、1・2が肯定回答であることを機械で確定できない。質問紙の選択肢対応を固定してから再判定する。割合は公表済みのため人口を分母にしない。",
+      "reason": "令和7年度質問紙の設問(5)で1＝当てはまる、2＝どちらかといえば当てはまると確認（定義: https://www.nier.go.jp/25chousa/pdf/25shitsumonchousa_shou_jidou.pdf）。公表済み割合の1＋2を合計し47県・94行で85.0〜89.7％、人口を分母にしない肯定回答率としてplannedにする。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
+      "verification": {
+        "tableSha256": "fcfd12a73be86e6edea1a2c5525460cfbaaa3e19bc86774432ffa55447b40686",
+        "rowCount": 94,
+        "areaCount": 47,
+        "min": 85,
+        "max": 89.7
+      },
+      "metricKey": "national-assessment-elementary-self-esteem-rate"
     },
     {
       "datasetId": "nier-gakuryoku-lifestyle",
@@ -1014,16 +1155,24 @@
         "timeAggregation": "none"
       },
       "channel": "theme",
-      "status": "blocked",
+      "status": "planned",
       "title": "自分によいところがあると思う小学生の割合",
       "unit": "％",
       "aggregation": {
         "type": "identity"
       },
-      "reason": "学校生活の自己認識を補完する候補だが、回答1・2の意味の確認が済むまで停止。",
+      "reason": "令和7年度質問紙の設問(5)で1＝当てはまる、2＝どちらかといえば当てはまると確認（定義: https://www.nier.go.jp/25chousa/pdf/25shitsumonchousa_shou_jidou.pdf）。公表済み割合の1＋2を合計し47県・94行で85.0〜89.7％、人口を分母にしない肯定回答率としてplannedにする。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
-      "target": "education-culture"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
+      "target": "education-culture",
+      "verification": {
+        "tableSha256": "fcfd12a73be86e6edea1a2c5525460cfbaaa3e19bc86774432ffa55447b40686",
+        "rowCount": 94,
+        "areaCount": 47,
+        "min": 85,
+        "max": 89.7
+      },
+      "metricKey": "national-assessment-elementary-self-esteem-rate"
     },
     {
       "datasetId": "nier-gakuryoku-lifestyle",
@@ -1051,15 +1200,23 @@
         "timeAggregation": "none"
       },
       "channel": "prefecture-ranking",
-      "status": "blocked",
+      "status": "planned",
       "title": "将来の夢や目標を持つ小学生の割合",
       "unit": "％",
       "aggregation": {
         "type": "identity"
       },
-      "reason": "47県の回答1・2の合計は計算可能だが、正規化表と手元の集計xlsxには選択肢の文言がなく、1・2が肯定回答であることを機械で確定できない。質問紙の選択肢対応を固定してから再判定する。割合は公表済みのため人口を分母にしない。",
+      "reason": "令和7年度質問紙の設問(7)で1＝当てはまる、2＝どちらかといえば当てはまると確認（定義: https://www.nier.go.jp/25chousa/pdf/25shitsumonchousa_shou_jidou.pdf）。公表済み割合の1＋2を合計し47県・94行で80.6〜88.5％、人口を分母にしない肯定回答率としてplannedにする。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
+      "verification": {
+        "tableSha256": "fcfd12a73be86e6edea1a2c5525460cfbaaa3e19bc86774432ffa55447b40686",
+        "rowCount": 94,
+        "areaCount": 47,
+        "min": 80.6,
+        "max": 88.5
+      },
+      "metricKey": "national-assessment-elementary-future-goal-rate"
     },
     {
       "datasetId": "nier-gakuryoku-lifestyle",
@@ -1087,15 +1244,23 @@
         "timeAggregation": "none"
       },
       "channel": "prefecture-ranking",
-      "status": "blocked",
+      "status": "planned",
       "title": "学校に行くのが楽しいと思う小学生の割合",
       "unit": "％",
       "aggregation": {
         "type": "identity"
       },
-      "reason": "47県の回答1・2の合計は計算可能だが、正規化表と手元の集計xlsxには選択肢の文言がなく、1・2が肯定回答であることを機械で確定できない。質問紙の選択肢対応を固定してから再判定する。割合は公表済みのため人口を分母にしない。",
+      "reason": "令和7年度質問紙の設問(12)で1＝当てはまる、2＝どちらかといえば当てはまると確認（定義: https://www.nier.go.jp/25chousa/pdf/25shitsumonchousa_shou_jidou.pdf）。公表済み割合の1＋2を合計し47県・94行で83.6〜91.5％、人口を分母にしない肯定回答率としてplannedにする。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
+      "verification": {
+        "tableSha256": "fcfd12a73be86e6edea1a2c5525460cfbaaa3e19bc86774432ffa55447b40686",
+        "rowCount": 94,
+        "areaCount": 47,
+        "min": 83.6,
+        "max": 91.5
+      },
+      "metricKey": "national-assessment-elementary-school-enjoyment-rate"
     },
     {
       "datasetId": "nier-gakuryoku-lifestyle",
@@ -1123,15 +1288,23 @@
         "timeAggregation": "none"
       },
       "channel": "prefecture-ranking",
-      "status": "blocked",
+      "status": "planned",
       "title": "友達関係に満足する小学生の割合",
       "unit": "％",
       "aggregation": {
         "type": "identity"
       },
-      "reason": "47県の回答1・2の合計は計算可能だが、正規化表と手元の集計xlsxには選択肢の文言がなく、1・2が肯定回答であることを機械で確定できない。質問紙の選択肢対応を固定してから再判定する。割合は公表済みのため人口を分母にしない。",
+      "reason": "令和7年度質問紙の設問(14)で1＝当てはまる、2＝どちらかといえば当てはまると確認（定義: https://www.nier.go.jp/25chousa/pdf/25shitsumonchousa_shou_jidou.pdf）。公表済み割合の1＋2を合計し47県・94行で90.1〜94.3％、人口を分母にしない肯定回答率としてplannedにする。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
+      "verification": {
+        "tableSha256": "fcfd12a73be86e6edea1a2c5525460cfbaaa3e19bc86774432ffa55447b40686",
+        "rowCount": 94,
+        "areaCount": 47,
+        "min": 90.1,
+        "max": 94.30000000000001
+      },
+      "metricKey": "national-assessment-elementary-friendship-satisfaction-rate"
     },
     {
       "datasetId": "nier-gakuryoku-lifestyle",
@@ -1159,15 +1332,23 @@
         "timeAggregation": "none"
       },
       "channel": "prefecture-ranking",
-      "status": "blocked",
+      "status": "planned",
       "title": "自分によいところがあると思う中学生の割合",
       "unit": "％",
       "aggregation": {
         "type": "identity"
       },
-      "reason": "47県の回答1・2の合計は計算可能だが、正規化表と手元の集計xlsxには選択肢の文言がなく、1・2が肯定回答であることを機械で確定できない。質問紙の選択肢対応を固定してから再判定する。割合は公表済みのため人口を分母にしない。",
+      "reason": "令和7年度質問紙の設問(5)で1＝当てはまる、2＝どちらかといえば当てはまると確認（定義: https://www.nier.go.jp/25chousa/pdf/25shitsumonchousa_chuu_seito.pdf）。公表済み割合の1＋2を合計し47県・94行で82.6〜89.3％、人口を分母にしない肯定回答率としてplannedにする。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
+      "verification": {
+        "tableSha256": "d6e5af51eeb256a4b266e8f1db3b6edfa428eecc35967d5888266b03f6d07005",
+        "rowCount": 94,
+        "areaCount": 47,
+        "min": 82.6,
+        "max": 89.3
+      },
+      "metricKey": "national-assessment-junior-high-self-esteem-rate"
     },
     {
       "datasetId": "nier-gakuryoku-lifestyle",
@@ -1195,16 +1376,24 @@
         "timeAggregation": "none"
       },
       "channel": "theme",
-      "status": "blocked",
+      "status": "planned",
       "title": "自分によいところがあると思う中学生の割合",
       "unit": "％",
       "aggregation": {
         "type": "identity"
       },
-      "reason": "学校生活の自己認識を補完する候補だが、回答1・2の意味の確認が済むまで停止。",
+      "reason": "令和7年度質問紙の設問(5)で1＝当てはまる、2＝どちらかといえば当てはまると確認（定義: https://www.nier.go.jp/25chousa/pdf/25shitsumonchousa_chuu_seito.pdf）。公表済み割合の1＋2を合計し47県・94行で82.6〜89.3％、人口を分母にしない肯定回答率としてplannedにする。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
-      "target": "education-culture"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
+      "target": "education-culture",
+      "verification": {
+        "tableSha256": "d6e5af51eeb256a4b266e8f1db3b6edfa428eecc35967d5888266b03f6d07005",
+        "rowCount": 94,
+        "areaCount": 47,
+        "min": 82.6,
+        "max": 89.3
+      },
+      "metricKey": "national-assessment-junior-high-self-esteem-rate"
     },
     {
       "datasetId": "nier-gakuryoku-lifestyle",
@@ -1232,15 +1421,23 @@
         "timeAggregation": "none"
       },
       "channel": "prefecture-ranking",
-      "status": "blocked",
+      "status": "planned",
       "title": "将来の夢や目標を持つ中学生の割合",
       "unit": "％",
       "aggregation": {
         "type": "identity"
       },
-      "reason": "47県の回答1・2の合計は計算可能だが、正規化表と手元の集計xlsxには選択肢の文言がなく、1・2が肯定回答であることを機械で確定できない。質問紙の選択肢対応を固定してから再判定する。割合は公表済みのため人口を分母にしない。",
+      "reason": "令和7年度質問紙の設問(7)で1＝当てはまる、2＝どちらかといえば当てはまると確認（定義: https://www.nier.go.jp/25chousa/pdf/25shitsumonchousa_chuu_seito.pdf）。公表済み割合の1＋2を合計し47県・94行で64.2〜74.8％、人口を分母にしない肯定回答率としてplannedにする。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
+      "verification": {
+        "tableSha256": "d6e5af51eeb256a4b266e8f1db3b6edfa428eecc35967d5888266b03f6d07005",
+        "rowCount": 94,
+        "areaCount": 47,
+        "min": 64.19999999999999,
+        "max": 74.8
+      },
+      "metricKey": "national-assessment-junior-high-future-goal-rate"
     },
     {
       "datasetId": "nier-gakuryoku-lifestyle",
@@ -1268,15 +1465,23 @@
         "timeAggregation": "none"
       },
       "channel": "prefecture-ranking",
-      "status": "blocked",
+      "status": "planned",
       "title": "学校に行くのが楽しいと思う中学生の割合",
       "unit": "％",
       "aggregation": {
         "type": "identity"
       },
-      "reason": "47県の回答1・2の合計は計算可能だが、正規化表と手元の集計xlsxには選択肢の文言がなく、1・2が肯定回答であることを機械で確定できない。質問紙の選択肢対応を固定してから再判定する。割合は公表済みのため人口を分母にしない。",
+      "reason": "令和7年度質問紙の設問(12)で1＝当てはまる、2＝どちらかといえば当てはまると確認（定義: https://www.nier.go.jp/25chousa/pdf/25shitsumonchousa_chuu_seito.pdf）。公表済み割合の1＋2を合計し47県・94行で82.3〜89.6％、人口を分母にしない肯定回答率としてplannedにする。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
+      "verification": {
+        "tableSha256": "d6e5af51eeb256a4b266e8f1db3b6edfa428eecc35967d5888266b03f6d07005",
+        "rowCount": 94,
+        "areaCount": 47,
+        "min": 82.3,
+        "max": 89.6
+      },
+      "metricKey": "national-assessment-junior-high-school-enjoyment-rate"
     },
     {
       "datasetId": "nier-gakuryoku-lifestyle",
@@ -1304,15 +1509,23 @@
         "timeAggregation": "none"
       },
       "channel": "prefecture-ranking",
-      "status": "blocked",
+      "status": "planned",
       "title": "友達関係に満足する中学生の割合",
       "unit": "％",
       "aggregation": {
         "type": "identity"
       },
-      "reason": "47県の回答1・2の合計は計算可能だが、正規化表と手元の集計xlsxには選択肢の文言がなく、1・2が肯定回答であることを機械で確定できない。質問紙の選択肢対応を固定してから再判定する。割合は公表済みのため人口を分母にしない。",
+      "reason": "令和7年度質問紙の設問(14)で1＝当てはまる、2＝どちらかといえば当てはまると確認（定義: https://www.nier.go.jp/25chousa/pdf/25shitsumonchousa_chuu_seito.pdf）。公表済み割合の1＋2を合計し47県・94行で89.6〜93.0％、人口を分母にしない肯定回答率としてplannedにする。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
+      "verification": {
+        "tableSha256": "d6e5af51eeb256a4b266e8f1db3b6edfa428eecc35967d5888266b03f6d07005",
+        "rowCount": 94,
+        "areaCount": 47,
+        "min": 89.6,
+        "max": 93
+      },
+      "metricKey": "national-assessment-junior-high-friendship-satisfaction-rate"
     },
     {
       "datasetId": "nier-gakuryoku-lifestyle",
@@ -1679,17 +1892,27 @@
         "timeAggregation": "sum"
       },
       "channel": "prefecture-ranking",
-      "status": "blocked",
+      "status": "planned",
       "title": "熱中症救急搬送人員（人口10万人当たり）",
       "unit": "人/10万人",
       "aggregation": {
         "type": "per-100k",
-        "denominatorTime": "2024"
+        "denominatorTime": "2025"
       },
-      "reason": "153日×47県の期間合計を対象期間直前の2024年総人口で補正する。分母の観測値がローカルにないため率を検算できない。搬送地ベースなので発症率とは呼ばない。",
+      "reason": "2025年5〜9月の153日×47県の合計100510人は公開中の2025年搬送人員と47県すべて一致し、分母は最寄りの2025年総人口（分子2025年との差0年、47地域の分母欠落0）で54.079206〜128.396539人/10万人を検算した。搬送地ベースの救急搬送率としてplannedにし、住民の発症率とは呼ばない。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
-      "denominator": "total-population"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
+      "denominator": "total-population",
+      "verification": {
+        "tableSha256": "93f8055279f4436f5c47fc13fa5edbcef6c466ca3c1ee6cb7419fb541d3c1f14",
+        "rowCount": 7191,
+        "areaCount": 47,
+        "min": 54.07920580574862,
+        "max": 128.3965390536376,
+        "denominatorTime": "2025",
+        "denominatorSha256": "c2b7682fd0fd7f511d468ebe6a5a1e8e82fcf22101676ad84618cb101e4ad521"
+      },
+      "metricKey": "heatstroke-emergency-transports-per-100k"
     },
     {
       "datasetId": "fdma-heatstroke-emergency-transports",
@@ -1733,18 +1956,28 @@
         "timeAggregation": "sum"
       },
       "channel": "theme",
-      "status": "blocked",
+      "status": "planned",
       "title": "熱中症救急搬送人員（人口10万人当たり）",
       "unit": "人/10万人",
       "aggregation": {
         "type": "per-100k",
-        "denominatorTime": "2024"
+        "denominatorTime": "2025"
       },
-      "reason": "safety の救急搬送・健康被害に合うが、2024年人口の取得と47県の率の検算が必要。",
+      "reason": "2025年5〜9月の153日×47県の合計100510人は公開中の2025年搬送人員と47県すべて一致し、分母は最寄りの2025年総人口（分子2025年との差0年、47地域の分母欠落0）で54.079206〜128.396539人/10万人を検算した。搬送地ベースの救急搬送率としてplannedにし、住民の発症率とは呼ばない。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
       "denominator": "total-population",
-      "target": "safety"
+      "target": "safety",
+      "verification": {
+        "tableSha256": "93f8055279f4436f5c47fc13fa5edbcef6c466ca3c1ee6cb7419fb541d3c1f14",
+        "rowCount": 7191,
+        "areaCount": 47,
+        "min": 54.07920580574862,
+        "max": 128.3965390536376,
+        "denominatorTime": "2025",
+        "denominatorSha256": "c2b7682fd0fd7f511d468ebe6a5a1e8e82fcf22101676ad84618cb101e4ad521"
+      },
+      "metricKey": "heatstroke-emergency-transports-per-100k"
     },
     {
       "datasetId": "fdma-heatstroke-emergency-transports",
@@ -1762,18 +1995,28 @@
         "timeAggregation": "sum"
       },
       "channel": "area",
-      "status": "blocked",
+      "status": "planned",
       "title": "熱中症救急搬送人員（人口10万人当たり）",
       "unit": "人/10万人",
       "aggregation": {
         "type": "per-100k",
-        "denominatorTime": "2024"
+        "denominatorTime": "2025"
       },
-      "reason": "県データブックの安全・くらしに合うが、2024年人口の取得と47県の率の検算が必要。",
+      "reason": "2025年5〜9月の153日×47県の合計100510人は公開中の2025年搬送人員と47県すべて一致し、分母は最寄りの2025年総人口（分子2025年との差0年、47地域の分母欠落0）で54.079206〜128.396539人/10万人を検算した。搬送地ベースの救急搬送率としてplannedにし、住民の発症率とは呼ばない。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
       "denominator": "total-population",
-      "target": "safety-living"
+      "target": "safety-living",
+      "verification": {
+        "tableSha256": "93f8055279f4436f5c47fc13fa5edbcef6c466ca3c1ee6cb7419fb541d3c1f14",
+        "rowCount": 7191,
+        "areaCount": 47,
+        "min": 54.07920580574862,
+        "max": 128.3965390536376,
+        "denominatorTime": "2025",
+        "denominatorSha256": "c2b7682fd0fd7f511d468ebe6a5a1e8e82fcf22101676ad84618cb101e4ad521"
+      },
+      "metricKey": "heatstroke-emergency-transports-per-100k"
     },
     {
       "datasetId": "mhlw-covid19-open-data",
@@ -1960,9 +2203,9 @@
         "scale": 100,
         "denominatorTime": "2021"
       },
-      "reason": "分母は同じ表・2021年度・同性範囲の全検査階層（質問票は「はい＋いいえ」）の回答者合計が必要。対応する既存の分母指標キーがなく、total-population や別健診の受診者数では代用しない。既存NDB指標は2023年度なので更新版の確保も必要。",
+      "reason": "2021年度・男女計の同表全7検査階層を分母に検算すると47県で26.403149〜40.290076％（分子33758〜986918人、分母124474〜3497550人）。同母集団の分母指標キーが未登録で、今回追加の総人口・医療施設・事故の観測値では代用できず、既存2023年度系列より古いためblockedを維持する。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment"
     },
     {
       "datasetId": "ndb-open-data",
@@ -2001,9 +2244,9 @@
         "scale": 100,
         "denominatorTime": "2021"
       },
-      "reason": "health-checkups の検査・服薬状況に合うが、同母集団の分母キーが未登録で2021年度と既存2023年度の時点も異なる。",
+      "reason": "2021年度・男女計の同表全7検査階層を分母に検算すると47県で26.403149〜40.290076％（分子33758〜986918人、分母124474〜3497550人）。同母集団の分母指標キーが未登録で、今回追加の総人口・医療施設・事故の観測値では代用できず、既存2023年度系列より古いためblockedを維持する。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
       "target": "health-checkups"
     },
     {
@@ -2080,9 +2323,9 @@
         "scale": 100,
         "denominatorTime": "2021"
       },
-      "reason": "分母は同じ表・2021年度・同性範囲の全検査階層（質問票は「はい＋いいえ」）の回答者合計が必要。対応する既存の分母指標キーがなく、total-population や別健診の受診者数では代用しない。既存NDB指標は2023年度なので更新版の確保も必要。",
+      "reason": "2021年度・男女計の同表全6検査階層を分母に検算すると47県で6.110940〜9.228459％（分子4902〜183925人、分母74600〜3009766人）。同母集団の分母指標キーが未登録で、今回追加の総人口・医療施設・事故の観測値では代用できず、既存2023年度系列より古いためblockedを維持する。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment"
     },
     {
       "datasetId": "ndb-open-data",
@@ -2120,9 +2363,9 @@
         "scale": 100,
         "denominatorTime": "2021"
       },
-      "reason": "health-checkups の検査・服薬状況に合うが、同母集団の分母キーが未登録で2021年度と既存2023年度の時点も異なる。",
+      "reason": "2021年度・男女計の同表全6検査階層を分母に検算すると47県で6.110940〜9.228459％（分子4902〜183925人、分母74600〜3009766人）。同母集団の分母指標キーが未登録で、今回追加の総人口・医療施設・事故の観測値では代用できず、既存2023年度系列より古いためblockedを維持する。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
       "target": "health-checkups"
     },
     {
@@ -2195,9 +2438,9 @@
         "scale": 100,
         "denominatorTime": "2021"
       },
-      "reason": "分母は同じ表・2021年度・同性範囲の全検査階層（質問票は「はい＋いいえ」）の回答者合計が必要。対応する既存の分母指標キーがなく、total-population や別健診の受診者数では代用しない。既存NDB指標は2023年度なので更新版の確保も必要。",
+      "reason": "2021年度・男女計の同表「はい＋いいえ」を分母に検算すると47県で4.984682〜7.920240％（分子6998〜174344人、分母124472〜3497595人）。同母集団の分母指標キーが未登録で、今回追加の総人口・医療施設・事故の観測値では代用できず、既存2023年度系列より古いためblockedを維持する。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment"
     },
     {
       "datasetId": "ndb-open-data",
@@ -2233,9 +2476,9 @@
         "scale": 100,
         "denominatorTime": "2021"
       },
-      "reason": "health-checkups の検査・服薬状況に合うが、同母集団の分母キーが未登録で2021年度と既存2023年度の時点も異なる。",
+      "reason": "2021年度・男女計の同表「はい＋いいえ」を分母に検算すると47県で4.984682〜7.920240％（分子6998〜174344人、分母124472〜3497595人）。同母集団の分母指標キーが未登録で、今回追加の総人口・医療施設・事故の観測値では代用できず、既存2023年度系列より古いためblockedを維持する。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
       "target": "health-checkups"
     },
     {
@@ -2308,9 +2551,9 @@
         "scale": 100,
         "denominatorTime": "2021"
       },
-      "reason": "分母は同じ表・2021年度・同性範囲の全検査階層（質問票は「はい＋いいえ」）の回答者合計が必要。対応する既存の分母指標キーがなく、total-population や別健診の受診者数では代用しない。既存NDB指標は2023年度なので更新版の確保も必要。",
+      "reason": "2021年度・男女計の同表「はい＋いいえ」を分母に検算すると47県で13.365459〜19.611483％（分子18911〜493973人、分母124473〜3497589人）。同母集団の分母指標キーが未登録で、今回追加の総人口・医療施設・事故の観測値では代用できず、既存2023年度系列より古いためblockedを維持する。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment"
     },
     {
       "datasetId": "ndb-open-data",
@@ -2346,9 +2589,9 @@
         "scale": 100,
         "denominatorTime": "2021"
       },
-      "reason": "health-checkups の検査・服薬状況に合うが、同母集団の分母キーが未登録で2021年度と既存2023年度の時点も異なる。",
+      "reason": "2021年度・男女計の同表「はい＋いいえ」を分母に検算すると47県で13.365459〜19.611483％（分子18911〜493973人、分母124473〜3497589人）。同母集団の分母指標キーが未登録で、今回追加の総人口・医療施設・事故の観測値では代用できず、既存2023年度系列より古いためblockedを維持する。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
       "target": "health-checkups"
     },
     {
@@ -2394,10 +2637,17 @@
       "aggregation": {
         "type": "identity"
       },
-      "reason": "2025年の警察庁一次個票からの総計は既存SSDS交通事故件数の更新・差し替え候補。二つの正規化表は同じ本票の別集計なので足し合わせず、既存系列との定義・総数一致を先に確認する。 機械照合: traffic-accident-count の名前「交通事故発生件数（総数）」・単位「件」・出典「社会・人口統計体系」・地域粒度 prefecture が同概念（人口補正は title/subtitle も照合）。",
+      "reason": "差し替え候補: 既存最新 2024 → 新 2025、1年差、同地域47件でr=0.999073、新/旧中央値=0.994220（旧0除外0件）、最大絶対差=1105.000000件（40000: 18473→17368.000000）、最大相対差=15.3257％（46000）。本票は死亡・負傷事故（事故内容1・2、定義: https://www.npa.go.jp/publications/statistics/koutsuu/opendata/2025/codebook_2025.xlsx）で既存の人身事故件数と一致し、状況別・当事者別の集計は全地域で一致（全国287023件）するため公開系列の差し替え判断までblockedを維持し、新のみ0・旧のみ0地域は比較から除外し、無記録を0補完しない。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
-      "duplicateOf": "traffic-accident-count"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
+      "duplicateOf": "traffic-accident-count",
+      "verification": {
+        "tableSha256": "9de6f73a80843601847f588db2dcd9d5a5cac2bce86a35275bccab617974c8e2",
+        "rowCount": 2679,
+        "areaCount": 47,
+        "min": 548,
+        "max": 30176
+      }
     },
     {
       "datasetId": "npa-traffic-accident-opendata",
@@ -2443,11 +2693,20 @@
         "type": "per-100k",
         "denominatorTime": "2025"
       },
-      "reason": "警察庁2025年一次個票による既存SSDS人口10万人当たり件数の差し替え候補。分母は2025年総人口で固定するが、ローカル人口観測値がなく未検算。 機械照合: traffic-accident-count-per-population の名前「交通事故発生件数（人口10万人当たり）」・単位「件」・出典「社会・人口統計体系」・地域粒度 prefecture が同概念（人口補正は title/subtitle も照合）。",
+      "reason": "差し替え候補: 既存最新 2024 → 新 2025、1年差、同地域47件でr=0.989602、新/旧中央値=1.008688（旧0除外0件）、最大絶対差=30.085128件/10万人（41000: 332.9→302.814872）、最大相対差=16.1402％（03000）。本票は死亡・負傷事故（事故内容1・2、定義: https://www.npa.go.jp/publications/statistics/koutsuu/opendata/2025/codebook_2025.xlsx）で既存の人身事故件数と一致し、状況別・当事者別の集計は全地域で一致（全国287023件）するため公開系列の差し替え判断までblockedを維持し、新のみ0・旧のみ0地域は比較から除外し、無記録を0補完しない、分母は最寄りの2025年総人口（分子2025年との差0年、47地域の分母欠落0）。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
       "denominator": "total-population",
-      "duplicateOf": "traffic-accident-count-per-population"
+      "duplicateOf": "traffic-accident-count-per-population",
+      "verification": {
+        "tableSha256": "9de6f73a80843601847f588db2dcd9d5a5cac2bce86a35275bccab617974c8e2",
+        "rowCount": 2679,
+        "areaCount": 47,
+        "min": 104.76549162354011,
+        "max": 487.4234565638441,
+        "denominatorTime": "2025",
+        "denominatorSha256": "c2b7682fd0fd7f511d468ebe6a5a1e8e82fcf22101676ad84618cb101e4ad521"
+      }
     },
     {
       "datasetId": "npa-traffic-accident-opendata",
@@ -2492,10 +2751,17 @@
       "aggregation": {
         "type": "identity"
       },
-      "reason": "値のある市区町村は1823。2025年一次個票は既存SSDS市区町村系列の差し替え候補だが、自治体台帳との対応・無事故と欠測の識別を検証してから更新する。 機械照合: traffic-accident-count の名前「交通事故発生件数（総数）」・単位「件」・出典「社会・人口統計体系」・地域粒度 municipality が同概念（人口補正は title/subtitle も照合）。",
+      "reason": "差し替え候補: 既存最新 2009 → 新 2025、16年差、同地域1809件でr=0.936177、新/旧中央値=0.344828（旧0除外6件）、最大絶対差=4030.000000件（37201: 5462→1432.000000）、最大相対差=350.0000％（13363）。本票は死亡・負傷事故（事故内容1・2、定義: https://www.npa.go.jp/publications/statistics/koutsuu/opendata/2025/codebook_2025.xlsx）で既存の人身事故件数と一致し、状況別・当事者別の集計は全地域で一致（全国287023件）するため公開系列の差し替え判断までblockedを維持し、新のみ14・旧のみ90地域は比較から除外し、無記録を0補完しない。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
-      "duplicateOf": "traffic-accident-count"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
+      "duplicateOf": "traffic-accident-count",
+      "verification": {
+        "tableSha256": "9de6f73a80843601847f588db2dcd9d5a5cac2bce86a35275bccab617974c8e2",
+        "rowCount": 31078,
+        "areaCount": 1823,
+        "min": 1,
+        "max": 4124
+      }
     },
     {
       "datasetId": "npa-traffic-accident-opendata",
@@ -2541,11 +2807,20 @@
         "type": "per-100k",
         "denominatorTime": "2025"
       },
-      "reason": "既存SSDS市区町村率の2025年一次資料への差し替え候補。自治体集合と2025年の自治体別総人口の観測値が必要。 機械照合: traffic-accident-count-per-population の名前「交通事故発生件数（人口10万人当たり）」・単位「件」・出典「社会・人口統計体系」・地域粒度 municipality が同概念（人口補正は title/subtitle も照合）。",
+      "reason": "差し替え候補: 既存最新 2005 → 新 2025、20年差、同地域1784件でr=0.673781、新/旧中央値=0.310270（旧0除外1件）、最大絶対差=3653.866818件/10万人（13101: 4550.2→896.333182）、最大相対差=330.9416％（43425）。本票は死亡・負傷事故（事故内容1・2、定義: https://www.npa.go.jp/publications/statistics/koutsuu/opendata/2025/codebook_2025.xlsx）で既存の人身事故件数と一致し、状況別・当事者別の集計は全地域で一致（全国287023件）するため公開系列の差し替え判断までblockedを維持し、新のみ39・旧のみ90地域は比較から除外し、無記録を0補完しない、分母は最寄りの2025年総人口（分子2025年との差0年、1823地域の分母欠落0）。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
       "denominator": "total-population",
-      "duplicateOf": "traffic-accident-count-per-population"
+      "duplicateOf": "traffic-accident-count-per-population",
+      "verification": {
+        "tableSha256": "9de6f73a80843601847f588db2dcd9d5a5cac2bce86a35275bccab617974c8e2",
+        "rowCount": 31078,
+        "areaCount": 1823,
+        "min": 10.152284263959391,
+        "max": 2324.263038548753,
+        "denominatorTime": "2025",
+        "denominatorSha256": "0992fc382a017f0730be86a745bc3493a9bce0b39ca4a7192f9aaae48491b6e4"
+      }
     },
     {
       "datasetId": "npa-traffic-accident-opendata",
@@ -2644,10 +2919,17 @@
       "aggregation": {
         "type": "identity"
       },
-      "reason": "2025年の警察庁一次個票からの総計は既存SSDS交通事故件数の更新・差し替え候補。二つの正規化表は同じ本票の別集計なので足し合わせず、既存系列との定義・総数一致を先に確認する。 機械照合: traffic-accident-count の名前「交通事故発生件数（総数）」・単位「件」・出典「社会・人口統計体系」・地域粒度 prefecture が同概念（人口補正は title/subtitle も照合）。",
+      "reason": "差し替え候補: 既存最新 2024 → 新 2025、1年差、同地域47件でr=0.999073、新/旧中央値=0.994220（旧0除外0件）、最大絶対差=1105.000000件（40000: 18473→17368.000000）、最大相対差=15.3257％（46000）。本票は死亡・負傷事故（事故内容1・2、定義: https://www.npa.go.jp/publications/statistics/koutsuu/opendata/2025/codebook_2025.xlsx）で既存の人身事故件数と一致し、状況別・当事者別の集計は全地域で一致（全国287023件）するため公開系列の差し替え判断までblockedを維持し、新のみ0・旧のみ0地域は比較から除外し、無記録を0補完しない。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
-      "duplicateOf": "traffic-accident-count"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
+      "duplicateOf": "traffic-accident-count",
+      "verification": {
+        "tableSha256": "e8a15f080ed2c22ee868b45112b998e4679e2877070978f1cb5c81c1b276ea6f",
+        "rowCount": 21183,
+        "areaCount": 47,
+        "min": 548,
+        "max": 30176
+      }
     },
     {
       "datasetId": "npa-traffic-accident-opendata",
@@ -2747,11 +3029,20 @@
         "type": "per-100k",
         "denominatorTime": "2025"
       },
-      "reason": "警察庁2025年一次個票による既存SSDS人口10万人当たり件数の差し替え候補。分母は2025年総人口で固定するが、ローカル人口観測値がなく未検算。 機械照合: traffic-accident-count-per-population の名前「交通事故発生件数（人口10万人当たり）」・単位「件」・出典「社会・人口統計体系」・地域粒度 prefecture が同概念（人口補正は title/subtitle も照合）。",
+      "reason": "差し替え候補: 既存最新 2024 → 新 2025、1年差、同地域47件でr=0.989602、新/旧中央値=1.008688（旧0除外0件）、最大絶対差=30.085128件/10万人（41000: 332.9→302.814872）、最大相対差=16.1402％（03000）。本票は死亡・負傷事故（事故内容1・2、定義: https://www.npa.go.jp/publications/statistics/koutsuu/opendata/2025/codebook_2025.xlsx）で既存の人身事故件数と一致し、状況別・当事者別の集計は全地域で一致（全国287023件）するため公開系列の差し替え判断までblockedを維持し、新のみ0・旧のみ0地域は比較から除外し、無記録を0補完しない、分母は最寄りの2025年総人口（分子2025年との差0年、47地域の分母欠落0）。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
       "denominator": "total-population",
-      "duplicateOf": "traffic-accident-count-per-population"
+      "duplicateOf": "traffic-accident-count-per-population",
+      "verification": {
+        "tableSha256": "e8a15f080ed2c22ee868b45112b998e4679e2877070978f1cb5c81c1b276ea6f",
+        "rowCount": 21183,
+        "areaCount": 47,
+        "min": 104.76549162354011,
+        "max": 487.4234565638441,
+        "denominatorTime": "2025",
+        "denominatorSha256": "c2b7682fd0fd7f511d468ebe6a5a1e8e82fcf22101676ad84618cb101e4ad521"
+      }
     },
     {
       "datasetId": "npa-traffic-accident-opendata",
@@ -2850,10 +3141,17 @@
       "aggregation": {
         "type": "identity"
       },
-      "reason": "値のある市区町村は1823。2025年一次個票は既存SSDS市区町村系列の差し替え候補だが、自治体台帳との対応・無事故と欠測の識別を検証してから更新する。 機械照合: traffic-accident-count の名前「交通事故発生件数（総数）」・単位「件」・出典「社会・人口統計体系」・地域粒度 municipality が同概念（人口補正は title/subtitle も照合）。",
+      "reason": "差し替え候補: 既存最新 2009 → 新 2025、16年差、同地域1809件でr=0.936177、新/旧中央値=0.344828（旧0除外6件）、最大絶対差=4030.000000件（37201: 5462→1432.000000）、最大相対差=350.0000％（13363）。本票は死亡・負傷事故（事故内容1・2、定義: https://www.npa.go.jp/publications/statistics/koutsuu/opendata/2025/codebook_2025.xlsx）で既存の人身事故件数と一致し、状況別・当事者別の集計は全地域で一致（全国287023件）するため公開系列の差し替え判断までblockedを維持し、新のみ14・旧のみ90地域は比較から除外し、無記録を0補完しない。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
-      "duplicateOf": "traffic-accident-count"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
+      "duplicateOf": "traffic-accident-count",
+      "verification": {
+        "tableSha256": "e8a15f080ed2c22ee868b45112b998e4679e2877070978f1cb5c81c1b276ea6f",
+        "rowCount": 119263,
+        "areaCount": 1823,
+        "min": 1,
+        "max": 4124
+      }
     },
     {
       "datasetId": "npa-traffic-accident-opendata",
@@ -2953,11 +3251,20 @@
         "type": "per-100k",
         "denominatorTime": "2025"
       },
-      "reason": "既存SSDS市区町村率の2025年一次資料への差し替え候補。自治体集合と2025年の自治体別総人口の観測値が必要。 機械照合: traffic-accident-count-per-population の名前「交通事故発生件数（人口10万人当たり）」・単位「件」・出典「社会・人口統計体系」・地域粒度 municipality が同概念（人口補正は title/subtitle も照合）。",
+      "reason": "差し替え候補: 既存最新 2005 → 新 2025、20年差、同地域1784件でr=0.673781、新/旧中央値=0.310270（旧0除外1件）、最大絶対差=3653.866818件/10万人（13101: 4550.2→896.333182）、最大相対差=330.9416％（43425）。本票は死亡・負傷事故（事故内容1・2、定義: https://www.npa.go.jp/publications/statistics/koutsuu/opendata/2025/codebook_2025.xlsx）で既存の人身事故件数と一致し、状況別・当事者別の集計は全地域で一致（全国287023件）するため公開系列の差し替え判断までblockedを維持し、新のみ39・旧のみ90地域は比較から除外し、無記録を0補完しない、分母は最寄りの2025年総人口（分子2025年との差0年、1823地域の分母欠落0）。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
       "denominator": "total-population",
-      "duplicateOf": "traffic-accident-count-per-population"
+      "duplicateOf": "traffic-accident-count-per-population",
+      "verification": {
+        "tableSha256": "e8a15f080ed2c22ee868b45112b998e4679e2877070978f1cb5c81c1b276ea6f",
+        "rowCount": 119263,
+        "areaCount": 1823,
+        "min": 10.152284263959391,
+        "max": 2324.263038548753,
+        "denominatorTime": "2025",
+        "denominatorSha256": "0992fc382a017f0730be86a745bc3493a9bce0b39ca4a7192f9aaae48491b6e4"
+      }
     },
     {
       "datasetId": "npa-traffic-accident-opendata",
@@ -2989,20 +3296,33 @@
           "value": "2025"
         },
         "dimensionAggregation": "sum",
-        "timeAggregation": "none"
+        "timeAggregation": "none",
+        "zeroAreaCodes": [
+          "47000"
+        ]
       },
       "channel": "prefecture-ranking",
-      "status": "blocked",
-      "title": "天候コード5の交通事故発生件数（人口10万人当たり）",
+      "status": "planned",
+      "title": "降雪時（雪・みぞれ・ひょう）の交通事故発生件数（人口10万人当たり）",
       "unit": "件/10万人",
       "aggregation": {
         "type": "per-100k",
         "denominatorTime": "2025"
       },
-      "reason": "天候コード5に絞る形は再現可能だが公式コード表が未保存で天候名を確定できない。2025年人口観測値も不足している。",
+      "reason": "天候5＝雪・みぞれ・ひょう（定義: https://www.npa.go.jp/publications/statistics/koutsuu/opendata/2025/codebook_2025.xlsx）で、原本287023件と2集計の総数が一致し、沖縄2709件の天候1〜4に対し5は0件なので47000のみ明示ゼロとする。分母は最寄りの2025年総人口（分子2025年との差0年、47地域の分母欠落0）で47県0〜26.907267件/10万人（選択393行・3495事故）を検算しplannedにする。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
-      "denominator": "total-population"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
+      "denominator": "total-population",
+      "verification": {
+        "tableSha256": "9de6f73a80843601847f588db2dcd9d5a5cac2bce86a35275bccab617974c8e2",
+        "rowCount": 393,
+        "areaCount": 47,
+        "min": 0,
+        "max": 26.907266675199057,
+        "denominatorTime": "2025",
+        "denominatorSha256": "c2b7682fd0fd7f511d468ebe6a5a1e8e82fcf22101676ad84618cb101e4ad521"
+      },
+      "metricKey": "snow-weather-traffic-accidents-per-100k"
     },
     {
       "datasetId": "npa-traffic-accident-opendata",
@@ -3088,17 +3408,27 @@
         "timeAggregation": "none"
       },
       "channel": "prefecture-ranking",
-      "status": "blocked",
-      "title": "当事者A年齢コード75の交通事故発生件数（人口10万人当たり）",
+      "status": "planned",
+      "title": "当事者Aが75歳以上の交通事故発生件数（総人口10万人当たり）",
       "unit": "件/10万人",
       "aggregation": {
         "type": "per-100k",
         "denominatorTime": "2025"
       },
-      "reason": "年齢コード75の公式定義を手元で確認できない。対象年齢人口を分母とするにはコード定義と既存の年齢人口キーとの対応が必要で、総人口補正の仮案を停止する。",
+      "reason": "当事者Aの年齢75＝75歳以上、当事者種別には歩行者も含む（定義: https://www.npa.go.jp/publications/statistics/koutsuu/opendata/2025/codebook_2025.xlsx）。分母は最寄りの2025年総人口（分子2025年との差0年、47地域の分母欠落0）で47県14.310997〜51.287988件/10万人を検算し、75歳以上人口の事故率や高齢運転者の事故率と区別した総人口当たり件数としてplannedにする。",
       "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
-      "denominator": "total-population"
+      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
+      "denominator": "total-population",
+      "verification": {
+        "tableSha256": "e8a15f080ed2c22ee868b45112b998e4679e2877070978f1cb5c81c1b276ea6f",
+        "rowCount": 2292,
+        "areaCount": 47,
+        "min": 14.310997047164276,
+        "max": 51.28798767802076,
+        "denominatorTime": "2025",
+        "denominatorSha256": "c2b7682fd0fd7f511d468ebe6a5a1e8e82fcf22101676ad84618cb101e4ad521"
+      },
+      "metricKey": "traffic-accidents-party-a-age-75-plus-per-100k"
     },
     {
       "datasetId": "fdma-heatstroke-emergency-transports",

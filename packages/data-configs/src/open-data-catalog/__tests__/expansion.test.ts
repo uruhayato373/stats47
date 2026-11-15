@@ -12,7 +12,7 @@ import { PREFECTURE_AREA_CODES } from "../../../../area/src/constants/prefecture
 import { normalizeOpenDataArea } from "../normalized-table";
 import type { OpenDataNormalizedTable } from "../normalized-table";
 import type { OpenDataFetchRecipe } from "../fetch-recipe";
-import { evaluateExpansionCandidate, findExpansionDuplicates, validateOpenDataExpansion } from "../expansion";
+import { evaluateExpansionCandidate, findExpansionDuplicates, selectExpansionDenominator, validateOpenDataExpansion } from "../expansion";
 import type { OpenDataExpansion, OpenDataExpansionCandidate } from "../expansion";
 
 const root = fileURLToPath(new URL("../../../../../", import.meta.url));
@@ -28,7 +28,7 @@ const context = {
   themeIds: new Set(fs.readdirSync(path.join(root, "data/themes/catalogs")).filter((f) => f.endsWith(".json")).map((f) => f.slice(0, -5))),
   areaIds: new Set(areaTemplate.sections.map((s) => s.sectionKey)),
 };
-const planned = expansion.candidates.find((c) => c.status === "planned")!;
+const planned = expansion.candidates.find((c) => c.metricKey === "national-assessment-elementary-japanese-correct-rate")!;
 const validate = (candidate: OpenDataExpansionCandidate) => validateOpenDataExpansion({ schemaVersion: 1, candidates: [candidate] }, context);
 const fixture: OpenDataNormalizedTable = {
   datasetId: planned.datasetId, table: planned.table, version: planned.slice.version,
@@ -109,6 +109,31 @@ describe("open-data expansion decisions", () => {
 });
 
 describe("reproducible 47-prefecture calculations", () => {
+  it("selects the nearest published population year and refuses wrong identity, units and duplicate rows", () => {
+    const candidate = { ...planned, denominator: "total-population", aggregation: { type: "per-100k" as const, denominatorTime: "2025" } };
+    const row = { areaCode: "01000", yearCode: "2025", value: 1000, unit: "人" };
+    const snapshot = { metricKey: "total-population", entityKind: "prefecture", rows: [{ ...row, yearCode: "2024", value: 900 }, row] };
+    expect(selectExpansionDenominator(candidate, snapshot).get("01000")).toBe(1000);
+    expect(() => selectExpansionDenominator({ ...candidate, aggregation: { ...candidate.aggregation, denominatorTime: "2024" } }, snapshot)).toThrow("最も近い");
+    expect(() => selectExpansionDenominator(candidate, { ...snapshot, entityKind: "city" })).toThrow("地域粒度");
+    expect(() => selectExpansionDenominator(candidate, { ...snapshot, metricKey: "other" })).toThrow("指標");
+    expect(() => selectExpansionDenominator(candidate, { ...snapshot, rows: [row, row] })).toThrow("重複");
+    expect(() => selectExpansionDenominator(candidate, { ...snapshot, rows: [{ ...row, unit: "千人" }] })).toThrow("単位");
+    for (const value of [null, 0, -1, NaN]) expect(selectExpansionDenominator(candidate, { ...snapshot, rows: [{ ...row, value }] }).size).toBe(0);
+    expect(validate({ ...candidate, verification: planned.verification }).join()).toContain("分母時点とsha256");
+  });
+
+  it("only fills explicitly confirmed empty count groups, never a missing region or an observed value", () => {
+    const candidate = { ...planned, unit: "件", slice: { ...planned.slice, dims: { weather: ["5"] }, zeroAreaCodes: ["47000"] } };
+    const rows = fixture.rows.map((r) => ({ ...r, dims: { weather: r.areaCode === "47000" ? "1" : "5" }, unit: "件" }));
+    expect(evaluateExpansionCandidate(candidate, { ...fixture, rows })).toEqual({ rowCount: 46, areaCount: 47, min: 0, max: 46 });
+    expect(() => evaluateExpansionCandidate({ ...candidate, slice: { ...candidate.slice, zeroAreaCodes: undefined } }, { ...fixture, rows })).toThrow("47県");
+    expect(() => evaluateExpansionCandidate(candidate, { ...fixture, rows: rows.slice(0, -1) })).toThrow("明示ゼロ");
+    expect(() => evaluateExpansionCandidate({ ...candidate, slice: { ...candidate.slice, zeroAreaCodes: ["01000"] } }, { ...fixture, rows })).toThrow("明示ゼロ");
+    expect(validate(candidate).join()).toContain("件数集計表");
+    expect(validateSchema({ schemaVersion: 1, candidates: [{ ...candidate, slice: { ...candidate.slice, zeroAreaCodes: ["47000", "47000"] } }] })).toBe(false);
+  });
+
   it("computes count and range, rejects missing/wrong areas and duplicate observations", () => {
     expect(evaluateExpansionCandidate(planned, fixture)).toEqual({ rowCount: 47, areaCount: 47, min: 1, max: 47 });
     expect(() => evaluateExpansionCandidate(planned, { ...fixture, rows: fixture.rows.slice(1) })).toThrow("47県");

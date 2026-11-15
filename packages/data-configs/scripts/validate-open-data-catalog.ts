@@ -10,6 +10,7 @@ import path from "node:path";
 import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
+import { statsR2Key } from "@stats47/r2-storage/keys";
 import Ajv from "ajv";
 import recipeSchema from "../../../config/schema/open-data.fetch-recipes.schema.json";
 import snapshotSchema from "../../../config/schema/open-data.snapshots.schema.json";
@@ -18,6 +19,7 @@ import type { OpenDataFetchRecipe, OpenDataSnapshot, OpenDataExpansion, OpenData
 import {
   validateOpenDataExpansion,
   evaluateExpansionCandidate,
+  selectExpansionDenominator,
   OPEN_DATA_SOURCES,
   OPEN_DATASETS,
   OPEN_DATA_SOURCE_KINDS,
@@ -251,7 +253,7 @@ if (expansion) {
   if (!fs.existsSync(normalizedRoot)) warns.push("expansion: ローカル正規化表なし。47県の再計算は未実施 (保存済み検証記録のみ検査)");
   else {
     const cache = new Map<string, { table: OpenDataNormalizedTable; sha256: string }>();
-    for (const candidate of expansion.candidates.filter((c) => c.status === "planned")) {
+    for (const candidate of expansion.candidates.filter((c) => c.status === "planned" || c.verification)) {
       const file = path.join(normalizedRoot, candidate.datasetId, candidate.slice.version, `${candidate.table}.json`);
       try {
         let input = cache.get(file);
@@ -260,10 +262,23 @@ if (expansion) {
           input = { table: JSON.parse(bytes.toString()) as OpenDataNormalizedTable, sha256: createHash("sha256").update(bytes).digest("hex") };
           cache.set(file, input);
         }
-        const result = evaluateExpansionCandidate(candidate, input.table);
         const saved = candidate.verification;
+        let denominator: ReadonlyMap<string, number> | undefined;
+        if (candidate.aggregation.type !== "identity") {
+          // 公開 R2 の観測値の写しを、公開 R2 と同じキーで .local/r2/ に置く (statsR2Key)。
+          const entity = candidate.slice.areaLevel === "municipality" ? "city" : "prefecture";
+          const denominatorFile = path.join(root, ".local/r2", statsR2Key(candidate.denominator ?? "", entity));
+          if (!fs.existsSync(denominatorFile)) {
+            warns.push(`expansion:${candidate.datasetId}/${candidate.table}: 分母の写し ${path.relative(root, denominatorFile)} が無いので再計算を省略`);
+            continue;
+          }
+          const bytes = fs.readFileSync(denominatorFile);
+          if (saved?.denominatorSha256 !== createHash("sha256").update(bytes).digest("hex")) throw Error("分母sha256が検証記録と不一致");
+          denominator = selectExpansionDenominator(candidate, JSON.parse(bytes.toString()));
+        }
+        const result = evaluateExpansionCandidate(candidate, input.table, denominator);
         if (!saved || saved.tableSha256 !== input.sha256 || saved.rowCount !== result.rowCount || saved.areaCount !== result.areaCount || Math.abs(saved.min - result.min) > 1e-9 || Math.abs(saved.max - result.max) > 1e-9) throw Error("検証記録と再計算結果が不一致");
-        if (candidate.channel === "prefecture-ranking") console.log(`expansion ${candidate.metricKey}: ${result.areaCount}県 / ${result.rowCount}行 / ${result.min.toFixed(4)}〜${result.max.toFixed(4)} ${candidate.unit}`);
+        if (candidate.channel === "prefecture-ranking") console.log(`expansion ${candidate.metricKey ?? candidate.title} [${candidate.status}]: ${result.areaCount}県 / ${result.rowCount}行 / ${result.min.toFixed(4)}〜${result.max.toFixed(4)} ${candidate.unit}`);
       } catch (error) {
         errors.push(`expansion:${candidate.datasetId}/${candidate.table}: ${error instanceof Error ? error.message : String(error)}`);
       }

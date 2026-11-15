@@ -12,6 +12,8 @@ export interface OpenDataExpansionSlice {
   readonly time: { readonly kind: "point"; readonly value: string } | { readonly kind: "range"; readonly start: string; readonly end: string };
   readonly dimensionAggregation: "none" | "sum";
   readonly timeAggregation: "none" | "sum" | "max";
+  /** Explicit empty groups in a count table; raw-source confirmation belongs in reason. */
+  readonly zeroAreaCodes?: readonly string[];
 }
 interface OpenDataExpansionFields {
   readonly datasetId: string;
@@ -28,7 +30,7 @@ interface OpenDataExpansionFields {
   readonly decidedAt: string;
   readonly decidedBy: string;
   /** Review evidence, not a second copy of the 47 observations. */
-  readonly verification?: { readonly tableSha256: string; readonly rowCount: number; readonly areaCount: number; readonly min: number; readonly max: number };
+  readonly verification?: { readonly tableSha256: string; readonly rowCount: number; readonly areaCount: number; readonly min: number; readonly max: number; readonly denominatorTime?: string; readonly denominatorSha256?: string };
 }
 /** Planned metric keys are future identifiers, never existing metric references. */
 export type OpenDataExpansionCandidate = OpenDataExpansionFields & (
@@ -102,6 +104,7 @@ export function validateOpenDataExpansion(
     const fail = (message: string) => errors.push(`${owner}: ${message}`);
     const recipe = context.recipes.find((r) => r.datasetId === c.datasetId);
     if (!recipe?.normalize?.tables.some((t) => t.table === c.table)) fail("正規化表が recipe.normalize にありません");
+    if (c.slice.zeroAreaCodes?.length && (recipe?.normalize?.tables.find((t) => t.table === c.table)?.aggregation !== "count" || c.slice.time.kind !== "point")) fail("明示ゼロは単時点の件数集計表だけに指定できます");
     if (!c.reason.trim()) fail("reason が空です");
     if (!c.decidedBy.trim() || !/^\d{4}-\d{2}-\d{2}$/.test(c.decidedAt) || !Number.isFinite(Date.parse(c.decidedAt)) || new Date(c.decidedAt).toISOString().slice(0, 10) !== c.decidedAt) fail("判断者または判断日が不正です");
     if (c.aggregation.type === "identity" && (c.aggregation.scale !== undefined || c.aggregation.denominatorTime)) fail("そのままの値に倍率や分母時点は指定できません");
@@ -112,6 +115,7 @@ export function validateOpenDataExpansion(
     if (c.denominator && !context.existingMetricKeys.has(c.denominator)) fail(`未知の denominator ${c.denominator}`);
     if (c.denominator && c.aggregation.type === "identity") fail("そのままの値に denominator は指定できません");
     if (c.duplicateOf && !context.existingMetricKeys.has(c.duplicateOf)) fail(`未知の duplicateOf ${c.duplicateOf}`);
+    if (c.verification && c.aggregation.type !== "identity" && (c.verification.denominatorTime !== c.aggregation.denominatorTime || !/^[a-f0-9]{64}$/.test(c.verification.denominatorSha256 ?? ""))) fail("率の検証記録に分母時点とsha256が必要です");
     if (c.channel === "theme" && (!c.target || !context.themeIds.has(c.target))) fail("未知の theme target");
     if (c.channel === "area" && (!c.target || !context.areaIds.has(c.target))) fail("未知の area target");
     const duplicates = findExpansionDuplicates(c, context.metrics);
@@ -137,6 +141,30 @@ export function validateOpenDataExpansion(
   return errors;
 }
 
+/** Published snapshot selection: null is not zero, years and geography never fall back silently. */
+export function selectExpansionDenominator(candidate: OpenDataExpansionCandidate, snapshot: {
+  readonly metricKey: string;
+  readonly entityKind: string;
+  readonly rows: readonly { readonly areaCode: string; readonly yearCode: string; readonly value: number | null; readonly unit: string }[];
+}): ReadonlyMap<string, number> {
+  const entity = candidate.slice.areaLevel === "prefecture" ? "prefecture" : "city";
+  if (snapshot.metricKey !== candidate.denominator || snapshot.entityKind !== entity) throw Error("分母の指標/地域粒度が一致しません");
+  const numeratorYear = Number((candidate.slice.time.kind === "point" ? candidate.slice.time.value : candidate.slice.time.end).slice(0, 4));
+  const years = [...new Set(snapshot.rows.map((r) => r.yearCode))];
+  if (!years.length || years.some((y) => !/^\d{4}$/.test(y)) || !Number.isFinite(numeratorYear)) throw Error("分母の年が不正です");
+  const nearest = years.sort((a, b) => Math.abs(Number(a) - numeratorYear) - Math.abs(Number(b) - numeratorYear) || Number(a) - Number(b))[0];
+  if (candidate.aggregation.denominatorTime !== nearest) throw Error("分母時点が分子に最も近い公開年ではありません");
+  const values = new Map<string, number>();
+  const seen = new Set<string>();
+  for (const row of snapshot.rows.filter((r) => r.yearCode === nearest)) {
+    if (seen.has(row.areaCode)) throw Error("分母の地域・年が重複しています");
+    seen.add(row.areaCode);
+    if (candidate.aggregation.type === "per-100k" && row.unit !== "人") throw Error("人口分母の単位が人ではありません");
+    if (row.value !== null && Number.isFinite(row.value) && row.value > 0) values.set(row.areaCode, row.value);
+  }
+  return values;
+}
+
 function dateKey(value: string): string {
   const parts = /^(\d{4})[-/](\d{1,2})[-/](\d{1,2})$/.exec(value);
   if (!parts) throw Error(`日付が不正です: ${value}`);
@@ -145,7 +173,7 @@ function dateKey(value: string): string {
   return date;
 }
 
-/** Pure, offline reproduction. Missing rows are never filled with zero. */
+/** Pure, offline reproduction. Only explicitly confirmed empty count groups become zero. */
 export function evaluateExpansionCandidate(
   candidate: OpenDataExpansionCandidate,
   table: OpenDataNormalizedTable,
@@ -178,6 +206,13 @@ export function evaluateExpansionCandidate(
     const times = byArea.get(row.areaCode) ?? new Map<string, number[]>();
     const values = times.get(rowTime) ?? [];
     values.push(row.value); times.set(rowTime, values); byArea.set(row.areaCode, times);
+  }
+  for (const area of slice.zeroAreaCodes ?? []) {
+    if (time.kind !== "point" || !/^(人|件|施設|所)$/.test(rows[0].unit)
+      || table.rows.some((r) => !Number.isInteger(r.value) || r.value < 0)
+      || byArea.has(area)
+      || !table.rows.some((r) => r.areaLevel === slice.areaLevel && r.time === time.value && r.areaCode === area)) throw Error("明示ゼロの地域に選択行があるか、同時点の件数集計による裏付けがありません");
+    byArea.set(area, new Map([[time.value, [0]]]));
   }
   if (slice.areaLevel === "prefecture" && (byArea.size !== PREFECTURE_AREA_CODES.length || PREFECTURE_AREA_CODES.some((code) => !byArea.has(code)))) throw Error("47県が揃っていません");
   const results: number[] = [];
