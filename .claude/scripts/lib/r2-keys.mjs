@@ -13,6 +13,10 @@ const RANKING_KINDS = [
     "values-per-population",
     "values-per-area",
     "national-trend",
+    "ai-content",
+    "page-cards",
+    "values-per-household",
+    "thumbnail",
 ];
 export function rankingR2Key(rankingKey, kind) {
     if (typeof rankingKey !== "string" || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(rankingKey)) {
@@ -23,4 +27,22 @@ export function rankingR2Key(rankingKey, kind) {
         throw new Error(`Invalid ranking R2 kind: ${kind}`);
     }
     return `${RANKING_R2_PREFIX}/${rankingKey}/${kind}.json`;
+}
+export function statsR2Key(metricKey, entityKind, year) {
+    switch (entityKind) {
+        case "prefecture":
+            return `${STATS_R2_PREFIX}/${metricKey}/values.json`;
+        case "city":
+            return `${STATS_R2_PREFIX}/${metricKey}/cities.json`;
+        case "port":
+            return `${STATS_R2_PREFIX}/${metricKey}/ports.json`;
+        case "migration-flow":
+            if (year == null)
+                throw new Error("migration-flow requires year parameter");
+            return `${STATS_R2_PREFIX}/${metricKey}/migration-flow-${year}.json`;
+        default: {
+            const _exhaustive = entityKind;
+            throw new Error(`unknown entity kind: ${_exhaustive}`);
+        }
+    }
 }

@@ -1,3 +1,4 @@
+import { statsR2Key } from "../lib/r2-keys.mjs";
 import assert from 'node:assert/strict';
 import { execFile } from 'node:child_process';
 import { createHash } from 'node:crypto';
@@ -148,7 +149,7 @@ async function main() {
     assert.equal(config.yearFormat, 'calendar');
     assert.equal(config.unit, '棟');
     const rows = results.flatMap((result) => result.rows.map(({ values, sourceRow, ...row }) => ({ ...row, value: values[index], unit: config.unit })));
-    const relative = `app/stats/${key}/values.json`;
+    const relative = statsR2Key(key, "prefecture");
     const path = resolve(root, '.local/r2', relative);
     let previous = [];
     try { previous = parseStatsValuesPayload(JSON.parse(await readFile(path, 'utf8'))).rows; } catch (error) { if (error.code !== 'ENOENT') throw error; }

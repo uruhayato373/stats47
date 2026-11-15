@@ -6,7 +6,7 @@
 # 散布図は JSON からの再生成と byte 一致も確かめる。今週直す記事の上位 10 件を最後に出す (レビューの「コンテンツ」が読む)。
 set -uo pipefail
 cd "$(dirname "$0")/../../../.."
-export R2_PUBLIC_FETCH_URL="${R2_PUBLIC_FETCH_URL:-https://storage.stats47.jp}"
+export R2_PUBLIC_FETCH_URL="${R2_PUBLIC_FETCH_URL:-$(node --input-type=module -e 'import { R2_PUBLIC_ORIGIN } from "./.claude/scripts/lib/r2-keys.mjs"; process.stdout.write(R2_PUBLIC_ORIGIN)')}"
 if [ -z "${NEXT_PUBLIC_ESTAT_APP_ID:-}" ]; then
   NEXT_PUBLIC_ESTAT_APP_ID=$(sed -n 's/^NEXT_PUBLIC_ESTAT_APP_ID=//p' apps/web/.env.development | head -1)
   export NEXT_PUBLIC_ESTAT_APP_ID

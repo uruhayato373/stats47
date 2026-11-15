@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { statsR2Key } from "../lib/r2-keys.mjs";
 /** Pinned official welfare consultation sources. R2 writes require --write-local. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -1037,7 +1038,7 @@ export function makePayloads(
     });
     const content = JSON.stringify(payload);
     return {
-      key: `app/stats/${f.key}/values.json`,
+      key: statsR2Key(f.key, "prefecture"),
       metricKey: f.key,
       rowCount: 47,
       sha256: sha(content),

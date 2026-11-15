@@ -237,3 +237,11 @@ describe("parseJapanSeriesArtifact (GEO-SCOPE-SEPARATION-01 WP3)", () => {
     ).toThrow("meta.configHash must be a string");
   });
 });
+
+
+it("re-exports the canonical observation key builder", async () => {
+  const legacy = await import("../types");
+  const canonical = await import("@stats47/r2-storage/keys");
+  expect(legacy.statsR2Key).toBe(canonical.statsR2Key);
+  expect(legacy.STATS_R2_PREFIX).toBe(canonical.STATS_R2_PREFIX);
+});

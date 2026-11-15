@@ -1,3 +1,4 @@
+import { statsR2Key } from "../lib/r2-keys.mjs";
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
@@ -152,7 +153,7 @@ async function main() {
       assert.equal(config.calculation.numeratorKey, key === KEY.openingRate ? KEY.opening : KEY.closure);
       assert.equal(config.calculation.scaleFactor, 100);
     }
-    const relative = `app/stats/${key}/values.json`;
+    const relative = statsR2Key(key, "prefecture");
     const path = resolve(root, '.local/r2', relative);
     let previous = [];
     try { previous = parseStatsValuesPayload(JSON.parse(await readFile(path, 'utf8'))).rows; } catch (error) { if (error.code !== 'ENOENT') throw error; }

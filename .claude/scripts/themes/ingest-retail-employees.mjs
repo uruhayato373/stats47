@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { statsR2Key } from "../lib/r2-keys.mjs";
 /** SSDS C350302 only. Raw source is private; only --write-local writes canonical values. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -224,7 +225,7 @@ export async function main() {
     .METRICS_REGISTRY[KEY];
   const generatedAt = new Date().toISOString();
   const payload = buildRetailPayload(result, config, generatedAt);
-  const key = `app/stats/${KEY}/values.json`,
+  const key = statsR2Key(KEY, "prefecture"),
     content = Buffer.from(JSON.stringify(payload));
   if (o['write-local']) {
     const target = resolve(root, '.local/r2', key);

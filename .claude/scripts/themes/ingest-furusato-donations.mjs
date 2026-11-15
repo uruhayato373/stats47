@@ -1,3 +1,4 @@
+import { statsR2Key } from "../lib/r2-keys.mjs";
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
@@ -154,7 +155,7 @@ async function main() {
     assert.ok(config?.isActive && config.source.kind === 'external' && config.source.config.provenance.url.endsWith(SOURCES[isDeduction ? 2 : 0].file));
     const payload = parseStatsValuesPayload({ metricKey: key, entityKind: 'prefecture', rows: (isDeduction ? deductions : result.rows).map((row) => ({ areaCode: row.areaCode, areaName: row.areaName, yearCode: year, yearName: `${year}年度${isDeduction ? '課税' : ''}`, value: row.values[key], unit: config.unit })), meta: { generatedAt, rowCount: 47, areaCount: 47, yearRange: [year, year], recipe: buildRecipe(config) } });
     const bytes = JSON.stringify(payload);
-    const relative = `app/stats/${key}/values.json`;
+    const relative = statsR2Key(key, "prefecture");
     files.push({ key: relative, metricKey: key, sha256: sha(bytes), sourceMatchedRows: 47 });
     if (options['write-local']) {
       const path = resolve(root, '.local/r2', relative);

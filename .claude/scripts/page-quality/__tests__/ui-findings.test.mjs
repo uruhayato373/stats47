@@ -1,3 +1,4 @@
+import { R2_PUBLIC_ORIGIN } from "../../lib/r2-keys.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
@@ -230,7 +231,7 @@ test("pending をページの種類ごとに 1 枚のカードにし、開いて
     queue,
     openIds: ["UI-FIX-CATEGORY-20260927"],
     today: "2026-10-04",
-    screenshotBaseUrl: "https://storage.stats47.jp",
+    screenshotBaseUrl: R2_PUBLIC_ORIGIN,
   });
   assert.deepEqual(cards.map((c) => c.id), ["UI-FIX-HOME-20261004"]);
   assert.deepEqual(cards[0].keys, ["machine|https://stats47.jp/|overlapping_tap_targets"]);
@@ -244,7 +245,7 @@ test("variants のカードが開いていても代表URLのカードは止め�
     queue: [rep, variant],
     openIds: ["UI-FIX-RANKING-OLD-2YEARS-20260927"],
     today: "2026-10-04",
-    screenshotBaseUrl: "https://storage.stats47.jp",
+    screenshotBaseUrl: R2_PUBLIC_ORIGIN,
   });
   assert.deepEqual(cards.map((c) => c.id), ["UI-FIX-RANKING-20261004"]);
   const blocked = planUiCards({ queue: [rep, variant], openIds: ["UI-FIX-RANKING-20260927"], today: "2026-10-04", screenshotBaseUrl: "x" });
@@ -252,7 +253,7 @@ test("variants のカードが開いていても代表URLのカードは止め�
 });
 
 test("起票したカードはバックログのパーサーで ID・sweep 実行・検証コマンドが読める", () => {
-  const [card] = planUiCards({ queue: [finding()], openIds: [], today: "2026-10-04", screenshotBaseUrl: "https://storage.stats47.jp" });
+  const [card] = planUiCards({ queue: [finding()], openIds: [], today: "2026-10-04", screenshotBaseUrl: R2_PUBLIC_ORIGIN });
   const backlog = "# backlog\n\n## 🔴 急ぎ\n\n## 🟡 通常\n\n### [OTHER-01] 既存\n\nタグ: [種類:改善] [実行:対話]\n";
   const { text, inserted } = insertCards(backlog, [card]);
   assert.deepEqual(inserted, [card.id]);
@@ -285,11 +286,11 @@ test("週次監査が同期と起票を行い、週次と backlog-loop の両方
 test("チャートの文字の指摘を含むカードには、種類ごとの振り分け手順を書く", () => {
   const blog = finding({ key: "machine|https://stats47.jp/blog/beer|blog_svg_text_issues", metric_key: "blog_svg_text_issues", template: "blog-detail" });
   const d3 = finding({ key: "machine|https://stats47.jp/areas/13000|chart_text_issues", metric_key: "chart_text_issues", template: "area" });
-  const [blogCard] = planUiCards({ queue: [blog], openIds: [], today: "2026-10-04", screenshotBaseUrl: "https://storage.stats47.jp" });
+  const [blogCard] = planUiCards({ queue: [blog], openIds: [], today: "2026-10-04", screenshotBaseUrl: R2_PUBLIC_ORIGIN });
   assert.match(blogCard.markdown, /plan-svg-text-fix\.ts @data\/page-quality\/backlog-batches\/UI-FIX-BLOG-DETAIL-20261004\.txt/);
   assert.match(blogCard.markdown, /regen-fixes.*オーナー承認.*\[実行:ユーザー\]/);
   assert.match(blogCard.markdown, /generator-fix.*packages\/svg-builder/);
-  const [areaCard] = planUiCards({ queue: [d3], openIds: [], today: "2026-10-04", screenshotBaseUrl: "https://storage.stats47.jp" });
+  const [areaCard] = planUiCards({ queue: [d3], openIds: [], today: "2026-10-04", screenshotBaseUrl: R2_PUBLIC_ORIGIN });
   assert.match(areaCard.markdown, /packages\/visualization\/src\/d3\/components/);
   assert.doesNotMatch(areaCard.markdown, /plan-svg-text-fix/);
   // チャート以外の指摘だけのカードには足さない

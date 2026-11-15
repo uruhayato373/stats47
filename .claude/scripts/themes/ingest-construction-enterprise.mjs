@@ -1,3 +1,4 @@
+import { statsR2Key } from "../lib/r2-keys.mjs";
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
@@ -309,7 +310,7 @@ async function main() {
     const rows=extracted.rows.map(r=>({...r,unit:config.unit,yearCode:String(year),yearName}));
     const payload=parseStatsValuesPayload({metricKey:key,entityKind:'prefecture',rows,meta:{generatedAt,rowCount:47,areaCount:47,yearRange:[String(year),String(year)],recipe:buildRecipe(config)}});
     const content=JSON.stringify(payload);
-    files.push({key:`app/stats/${key}/values.json`,metricKey:key,content,sha256:sha(content),source:{...source,actualResponseSha256},national:extracted.national,unit:config.unit,year,yearName,checks:validated.checks});
+    files.push({key:statsR2Key(key, "prefecture"),metricKey:key,content,sha256:sha(content),source:{...source,actualResponseSha256},national:extracted.national,unit:config.unit,year,yearName,checks:validated.checks});
   }
   // All sources, series and canonical schemas must validate before any local R2 write.
   if(options['write-local'])for(const f of files){const destination=resolve(root,'.local/r2',f.key);await mkdir(dirname(destination),{recursive:true});await writeFile(destination,f.content);}

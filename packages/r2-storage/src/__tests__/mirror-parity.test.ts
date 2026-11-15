@@ -13,7 +13,7 @@ describe("R2 key mirror parity", () => {
 
   it("returns identical keys for all kinds and valid segment boundaries", () => {
     for (const key of ["population", "population-2025", "x", "2025", "a-1-b"]) {
-      for (const kind of ["item", "values", "values-per-population", "values-per-area", "national-trend"] as const) {
+      for (const kind of ["item", "values", "values-per-population", "values-per-area", "national-trend", "ai-content", "page-cards", "values-per-household", "thumbnail"] as const) {
         expect(mirror.rankingR2Key(key, kind)).toBe(canonical.rankingR2Key(key, kind));
       }
     }
@@ -31,4 +31,19 @@ describe("R2 key mirror parity", () => {
       expect(expected).toMatch(/^Error: Invalid ranking/);
     }
   });
+});
+
+
+it("keeps observation keys and errors identical in the mirror", () => {
+  for (const metric of ["population", "legacy_key/path", ""]) {
+    for (const entity of ["prefecture", "city", "port", "migration-flow"] as const) {
+      for (const year of [undefined, 0, 2025]) {
+        const outcome = (fn: typeof canonical.statsR2Key) => {
+          try { return fn(metric, entity, year); } catch (error) { return String(error); }
+        };
+        expect(outcome(mirror.statsR2Key)).toBe(outcome(canonical.statsR2Key));
+      }
+    }
+  }
+  expect(() => mirror.statsR2Key("m", "invalid")).toThrow("unknown entity kind: invalid");
 });

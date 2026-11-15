@@ -16,7 +16,7 @@
  *      - 47 都道府県 x 全年が欠測なく揃う
  *      - 同ブックの順位表シート asr75rank と、全年・47県の値と並びが完全一致
  *      - 全国値が各年の県別最小〜最大の範囲内、かつ県単純平均との差が 10% 以内
- *   5. .local/r2/app/stats/<key>/values.json へ書き出し (2桁丸め)
+ *   5. 観測値の置き場 へ書き出し (2桁丸め)
  *
  * 実行: node .claude/scripts/data/fetch-cancer-asr75-breast.mjs
  * 正典: .claude/rules/data-provenance-standards.md

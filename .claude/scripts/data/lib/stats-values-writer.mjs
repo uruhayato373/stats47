@@ -1,5 +1,5 @@
 /**
- * 手動投入 (fetcherKey:"manual") metric の観測値を `.local/r2/app/stats/<key>/values.json` へ書く共通部品。
+ * 手動投入 (fetcherKey:"manual") metric の観測値を 観測値の置き場 へ書く共通部品。
  *
  * - 行の形・rank 規則は page-data-batch / fetch-chutairen-club-membership.mjs と揃える
  *   (value 降順・同値同順位・年ごとに rank を振る)。

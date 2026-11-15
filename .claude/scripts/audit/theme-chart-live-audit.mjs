@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { R2_PUBLIC_ORIGIN, statsR2Key } from "../lib/r2-keys.mjs";
 /**
  * theme-chart-live-audit — テーマページの全チャート依存を R2 配信値で live 実測する。
  *
@@ -42,7 +43,6 @@ import {
   parseTrendChartMirror,
   summarizeAudit,
 } from "./theme-chart-live-audit-core.mjs";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 
 export { classifyNational, isFiniteEstatValue } from "./theme-chart-live-audit-core.mjs";
@@ -112,7 +112,7 @@ function resolveR2PublicBase() {
   } catch {
     // 公開配信URLは非secret。環境ファイルが無いCIでも既定値でread-only監査を続ける。
   }
-  return R2_PUBLIC_BASE_URL;
+  return R2_PUBLIC_ORIGIN;
 }
 
 /**
@@ -160,7 +160,7 @@ async function inspectR2(metric, dispatcher, publicBase, staged) {
     }
   }
   const { res, error } = await fetchWithRetry(
-    `${publicBase}/app/stats/${encodeURIComponent(metric.metricKey)}/values.json`,
+    `${publicBase}/${statsR2Key(encodeURIComponent(metric.metricKey), "prefecture")}`,
     dispatcher,
   );
   if (error) return { ...error, source: "public-r2" };
@@ -272,7 +272,7 @@ async function main() {
   if (errors.length > 0) {
     console.error(`\n❌ ${errors.length} 件のチャート依存が実データ契約を満たしません`);
     for (const e of errors) console.error("   " + e);
-    console.error("\n是正: MetricConfig と app/stats/<metric>/values.json の生成・配信状態を一致させる");
+    console.error("\n是正: MetricConfig と観測値の生成・配信状態を一致させる");
     console.error("規約: .claude/rules/theme-catalog-standards.md");
     process.exit(1);
   }

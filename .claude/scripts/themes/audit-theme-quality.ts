@@ -11,7 +11,7 @@ import { getMetricConfig } from "../../../packages/data-configs/src/registry";
 import { buildRecipe } from "../../../packages/data-configs/src/recipe";
 import { inspectThemePayload, compareThemeObservation, selectLastGoodObservations, inspectThemeStructure, inspectChartYears, summarizeThemeFindings } from "./theme-quality-core.mjs";
 import { readThemeQualityState, writeThemeQualityState } from "./theme-quality-state.mjs";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { R2_PUBLIC_ORIGIN } from "@stats47/r2-storage/keys";
 import { datasetPath } from "../../../config/datasets.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
@@ -30,7 +30,7 @@ type Observation = ReturnType<typeof inspectThemePayload> & { namespace: string;
 type Previous = { observations?: Observation[]; lastGoodObservations?: Observation[]; findings?: Finding[]; summary?: Record<string, unknown> };
 
 async function fetchObservation(key: string, namespace: string): Promise<Observation> {
-  const base = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
+  const base = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_ORIGIN;
   const url = `${base.replace(/\/+$/, "")}/app/${namespace}/${key}/values.json`;
   const observedAt = new Date().toISOString();
   const stagedDir = option("--staged-dir", "");
@@ -63,7 +63,7 @@ async function fetchObservation(key: string, namespace: string): Promise<Observa
 async function main() {
   const output = path.resolve(option("--json", DEFAULT_OUTPUT));
   const offline = argv.includes("--offline");
-  const preview = ["localhost", "127.0.0.1", "[::1]"].includes(new URL(process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL).hostname);
+  const preview = ["localhost", "127.0.0.1", "[::1]"].includes(new URL(process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_ORIGIN).hostname);
   const staged = argv.includes("--staged-dir") || preview;
   if ((offline || staged) && (!argv.includes("--json") || output === DEFAULT_OUTPUT)) {
     throw new Error("Offline/staged audits require a separate --json output; the live baseline must be preserved");

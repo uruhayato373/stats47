@@ -1,3 +1,4 @@
+import { statsR2Key } from "../lib/r2-keys.mjs";
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
@@ -274,7 +275,7 @@ async function main() {
     const ranks = competitionRanks(rows);
     const payload = parseStatsValuesPayload({ metricKey: d.key, entityKind: 'prefecture', rows: rows.map(({ sourceRow, sourceColumn, ...row }) => ({ ...row, unit: d.unit, yearCode: String(d.year), yearName: d.yearName, rank: ranks.get(row.areaCode) })), meta: { generatedAt, rowCount: 47, areaCount: 47, yearRange: [String(d.year), String(d.year)], recipe: buildRecipe(config) } });
     const content = JSON.stringify(payload);
-    files.push({ key: `app/stats/${d.key}/values.json`, metricKey: d.key, content, sha256: sha(content), source: d.source, sourceCells: rows.map(({ value, ...row }) => row), year: d.year, yearName: d.yearName, unit: d.unit, verification });
+    files.push({ key: statsR2Key(d.key, "prefecture"), metricKey: d.key, content, sha256: sha(content), source: d.source, sourceCells: rows.map(({ value, ...row }) => row), year: d.year, yearName: d.yearName, unit: d.unit, verification });
   }
   // Validate every requested series before staging any local canonical file.
   if (options['write-local']) for (const file of files) {

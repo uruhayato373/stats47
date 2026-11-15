@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { R2_PUBLIC_ORIGIN, statsR2Key } from "../lib/r2-keys.mjs";
 /**
  * 遊技店密度 (ぱちんこ店舗数 人口1万人あたり) の投入スクリプト。
  *
@@ -10,7 +11,7 @@
  *   1. 全日遊連の年次HTML表を fetch し、都道府県別ぱちんこ店舗数を抽出
  *   2. 地方ブロック計・全国合計 (6,464軒) と突合して検算 (不一致なら投入中止)
  *   3. 既存 metric (japanese-population, R2 app/stats) の 2024年値で人口1万人あたりに換算
- *   4. .local/r2/app/stats/pachinko-shop-density-per-10k/values.json に書き出し
+ *   4. 観測値の置き場 に書き出し
  *      (本番反映は diff-push-r2.ts で別途行う。本スクリプトは書き出しのみ)
  *
  * 実行: node .claude/scripts/data/fetch-pachinko-shop-density.mjs
@@ -21,11 +22,10 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 import { resolveMetricRecipe } from "./lib/stats-values-writer.mjs";
 
 const REPORT_URL = "https://www.zennichiyuren.or.jp/material/report/8.html";
-const POP_URL = `${R2_PUBLIC_BASE_URL}/app/stats/japanese-population/values.json`;
+const POP_URL = `${R2_PUBLIC_ORIGIN}/${statsR2Key("japanese-population", "prefecture")}`;
 const POP_YEAR = "2024";
 const METRIC_KEY = "pachinko-shop-density-per-10k";
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");

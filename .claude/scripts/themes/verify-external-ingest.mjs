@@ -1,5 +1,5 @@
 /**
- * 外部指標の取り込みスクリプトが手元に書いた値 (.local/r2/app/stats/<key>/values.json) を、R2 へ上げる前に検査する。
+ * 外部指標の取り込みスクリプトが手元に書いた値 (観測値の置き場) を、R2 へ上げる前に検査する。
  * external-metric-ingest.yml が、取り込みの直後・R2 への反映の直前に呼ぶ。
  *
  * 使い方: node .claude/scripts/themes/verify-external-ingest.mjs --report <取り込みの報告 JSON> [--keys-out <ファイル>]
@@ -40,7 +40,7 @@ export function verifyIngestReport(report, read) {
 
   for (const file of report.files) {
     const matched = KEY_PATTERN.exec(file.key);
-    assert.ok(matched, `key is outside app/stats/<metric>/values.json: ${file.key}`);
+    assert.ok(matched, `key is outside prefecture observation storage: ${file.key}`);
     const metricKey = matched[1];
     const bytes = read(file.key);
     assert.equal(sha(bytes), file.sha256, `staged file differs from the ingest report: ${file.key}`);

@@ -5,7 +5,7 @@
 # 出力: data/ranking/integrity-audit.json・data/data-quality/ (データ品質キュー。レビューの Phase 1 が読む)
 set -uo pipefail
 cd "$(dirname "$0")/../../../.."
-export R2_PUBLIC_FETCH_URL="${R2_PUBLIC_FETCH_URL:-https://storage.stats47.jp}"
+export R2_PUBLIC_FETCH_URL="${R2_PUBLIC_FETCH_URL:-$(node --input-type=module -e 'import { R2_PUBLIC_ORIGIN } from "./.claude/scripts/lib/r2-keys.mjs"; process.stdout.write(R2_PUBLIC_ORIGIN)')}"
 failed=()
 mkdir -p data/ranking
 npx tsx packages/ranking/src/scripts/audit-ranking-data-integrity.ts --json data/ranking/integrity-audit.json || failed+=("ranking-integrity")

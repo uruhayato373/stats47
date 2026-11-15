@@ -1,3 +1,4 @@
+import { R2_PUBLIC_ORIGIN } from "../../lib/r2-keys.mjs";
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { createHash } from 'node:crypto';
@@ -20,7 +21,7 @@ test('an upstream body failure returns 502 and keeps staged data available', { t
       key, bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex'),
     }] }));
     const mock = join(dir, 'mock-upstream.mjs');
-    await writeFile(mock, `globalThis.fetch = async (url) => url === 'https://storage.stats47.jp/categories/all.json'
+    await writeFile(mock, `globalThis.fetch = async (url) => url === '${R2_PUBLIC_ORIGIN}/categories/all.json'
       ? new Response(JSON.stringify({ categories: [{ categoryKey: 'population' }] }))
       : new Response(new ReadableStream({
       start(controller) {

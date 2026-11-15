@@ -1,3 +1,4 @@
+import { statsR2Key } from "../lib/r2-keys.mjs";
 /**
  * 分析の結果と図の台帳から、記事の図のデータと出典を組み立てる純粋関数。
  * 値は結果の JSON からだけ読み、ここで丸めも補完もしない。ファイルの読み書きは analysis-draft.ts が持つ。
@@ -118,10 +119,10 @@ export function buildChartData(figure, built, result) {
 /** 図の出典。指標は分析の spec から導くので、台帳に写しを持たない */
 export function buildChartSource({ figure, spec, generatedBy, result }) {
   const { chart, scope } = figure;
-  const file = scope === "municipality" ? "cities.json" : "values.json";
+  const entity = scope === "municipality" ? "city" : "prefecture";
   return {
     kind: "derived",
-    source: spec.metrics.map((m) => `r2:app/stats/${m.key}/${file}`).join(" + "),
+    source: spec.metrics.map((m) => `r2:${statsR2Key(m.key, entity)}`).join(" + "),
     transform: chart.transform,
     generatedBy,
     ...(scope === "municipality" ? { areaScope: { level: "municipality", wardMode: "merged", within: { kind: "nation" } } } : {}),

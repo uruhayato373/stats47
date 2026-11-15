@@ -137,7 +137,7 @@ export function inspectTrendYears({ trendCharts, minTrendYears, results }) {
   return violations;
 }
 
-/** R2 `app/stats/<metric>/values.json` の表示契約を検査する。 */
+/** R2 の観測値の表示契約を検査する。 */
 export function inspectStatsPayload(payload, metric) {
   if (!isPlainObject(payload)) return { status: "malformed-json", detail: "root is not an object" };
   if (payload.metricKey !== metric.metricKey) {

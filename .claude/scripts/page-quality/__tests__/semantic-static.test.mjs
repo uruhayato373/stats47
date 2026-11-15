@@ -1,3 +1,4 @@
+import { R2_PUBLIC_ORIGIN } from "../../lib/r2-keys.mjs";
 // 表示の意味の検査 (SITE-DISPLAY-SEMANTICS-AUDIT-01 層 2・層 3)。
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -130,7 +131,7 @@ test("表示の意味の違反は UI 指摘キューに machine の指摘とし�
     agentReviewed: false,
   });
   assert.equal(queue[0].status, "pending");
-  const [card] = planUiCards({ queue, openIds: [], today: "2026-10-04", screenshotBaseUrl: "https://storage.stats47.jp" });
+  const [card] = planUiCards({ queue, openIds: [], today: "2026-10-04", screenshotBaseUrl: R2_PUBLIC_ORIGIN });
   assert.match(card.markdown, /表示の意味 \(定義単位で直す\)/);
 });
 

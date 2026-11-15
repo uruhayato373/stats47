@@ -1,3 +1,4 @@
+import { statsR2Key } from "../lib/r2-keys.mjs";
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFile, writeFile, mkdir, realpath } from 'node:fs/promises';
@@ -610,7 +611,7 @@ async function main() {
       },
     });
     files.push({
-      key: `app/stats/${c.key}/values.json`,
+      key: statsR2Key(c.key, "prefecture"),
       metricKey: c.key,
       rowCount: 47,
       content: JSON.stringify(payload),

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { statsR2Key } from "../lib/r2-keys.mjs";
 /** Intended: .claude/scripts/themes/ingest-water-pipe-maintenance.mjs. */
 import assert from 'node:assert/strict';
 import { realpathSync } from 'node:fs';
@@ -467,7 +468,7 @@ export async function main() {
       },
     });
     files.push({
-      key: `app/stats/${m.key}/values.json`,
+      key: statsR2Key(m.key, "prefecture"),
       metricKey: m.key,
       rows,
       content: Buffer.from(JSON.stringify(payload)),

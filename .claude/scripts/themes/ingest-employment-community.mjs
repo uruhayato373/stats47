@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { statsR2Key } from "../lib/r2-keys.mjs";
 /** Pinned official e-Stat sources -> six canonical metrics. Run from repository root. No remote writes. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -1184,7 +1185,7 @@ async function main() {
       },
     });
     files.push({
-      key: `app/stats/${field.key}/values.json`,
+      key: statsR2Key(field.key, "prefecture"),
       metricKey: field.key,
       rowCount: 47,
       content: JSON.stringify(payload),

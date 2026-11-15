@@ -2,7 +2,7 @@
 /**
  * 厚生労働省「熱中症による死亡数 人口動態統計(確定数)より」の「都道府県別にみた熱中症による死亡数の
  * 年次推移(平成25年〜令和6年)」xlsx から、都道府県別の熱中症死亡数 (総数) を取り出して
- * `.local/r2/app/stats/heatstroke-deaths/values.json` へ書く。
+ * 観測値の置き場 へ書く。
  *
  * 出典: https://www.mhlw.go.jp/toukei/saikin/hw/jinkou/tokusyu/necchusho24/index.html
  *   実ファイル: .../necchusho24/xls/R06necchusho.xlsx (SHA-256 固定) シート「都道府県別」

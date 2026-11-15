@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { statsR2Key } from "../lib/r2-keys.mjs";
 /** Official sources -> canonical R2 payloads. No remote writes. All local R2 writes require --write-local. */
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
@@ -136,7 +137,7 @@ async function main(){
    else value=loaded.get(f.family).get(p.prefCode,f.industry,f.tab);
    rows.push({areaCode:p.prefCode,areaName:p.prefName,value,unit:f.unit,yearCode:String(y),yearName:f.yearFormat==='fiscal'?`${y}年度`:y===2020?`${y}年（2021年調査）`:y===2021?'2021年6月1日現在':'2024年（確報）'});
   }
-  const payload=parseStatsValuesPayload({metricKey:f.key,entityKind:'prefecture',rows,meta:{generatedAt,rowCount:rows.length,areaCount:47,yearRange:[String(Math.min(...years)),String(Math.max(...years))],recipe:buildRecipe(config)}}),content=JSON.stringify(payload);files.push({key:`app/stats/${f.key}/values.json`,metricKey:f.key,sha256:sha(content),rowCount:rows.length,content});
+  const payload=parseStatsValuesPayload({metricKey:f.key,entityKind:'prefecture',rows,meta:{generatedAt,rowCount:rows.length,areaCount:47,yearRange:[String(Math.min(...years)),String(Math.max(...years))],recipe:buildRecipe(config)}}),content=JSON.stringify(payload);files.push({key:statsR2Key(f.key, "prefecture"),metricKey:f.key,sha256:sha(content),rowCount:rows.length,content});
  }
  const snapshot=specializationSnapshot(est,generatedAt),content=JSON.stringify(snapshot);files.push({key:'app/themes/local-economy/specialization.json',sha256:sha(content),rowCount:47*18,content});
  if(o['write-local'])for(const file of files){const path=resolve(root,'.local/r2',file.key);await mkdir(dirname(path),{recursive:true});await writeFile(path,file.content);}

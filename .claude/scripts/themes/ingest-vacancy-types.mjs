@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { statsR2Key } from "../lib/r2-keys.mjs";
 /** 2023 housing census, final table 34-1. Preserve rounded estimates. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -247,7 +248,7 @@ export async function main() {
       },
     });
     return {
-      key: 'app/stats/' + field.key + '/values.json',
+      key: statsR2Key(field.key, "prefecture"),
       content: JSON.stringify(payload),
     };
   });

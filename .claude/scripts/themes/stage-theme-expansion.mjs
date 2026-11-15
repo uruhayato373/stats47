@@ -1,3 +1,4 @@
+import { R2_PUBLIC_ORIGIN, rankingR2Key, statsR2Key } from "../lib/r2-keys.mjs";
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
@@ -10,7 +11,6 @@ import {
   explicitIndicatorCodes,
   inspectLocalMetricCoverage,
 } from './theme-expansion-core.mjs';
-import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 // Local preparation only: canonical builders produce the release files; no upload capability.
@@ -161,7 +161,7 @@ for (const response of artifacts.filter(
   }
 }
 async function publicJson(key) {
-  const response = await fetch(`${R2_PUBLIC_BASE_URL}/${key}`, {
+  const response = await fetch(`${R2_PUBLIC_ORIGIN}/${key}`, {
     signal: AbortSignal.timeout(30000),
   });
   if (!response.ok) throw new Error(`Public ${key}: HTTP ${response.status}`);
@@ -172,7 +172,7 @@ for (const batch of batches) {
     const key = metric.metricKey;
     const config = METRICS_REGISTRY[key];
     if (!config?.isActive) throw new Error(`Unregistered metric: ${key}`);
-    const statsKey = `app/stats/${key}/values.json`;
+    const statsKey = statsR2Key(key, "prefecture");
     // Newly registered metrics are ingested by page-data-batch, which applies the shared shape gate.
     // Existing observations come from public SSOT and keep all historical years.
     const input = metric.proposedMetricKey
@@ -229,8 +229,8 @@ for (const batch of batches) {
       },
     });
     outputs.set(statsKey, payload);
-    outputs.set(`app/ranking/${key}/values.json`, ranking);
-    outputs.set(`app/ranking/${key}/item.json`, {
+    outputs.set(rankingR2Key(key, "values"), ranking);
+    outputs.set(rankingR2Key(key, "item"), {
       generatedAt: observedAt,
       item,
     });
@@ -299,7 +299,7 @@ for (const key of options['local-metrics']?.split(',') ?? []) {
     manifest.metrics.some((metric) => metric.metricKey === key)
   )
     throw new Error(`Invalid/duplicate local metric: ${key}`);
-  const statsKey = `app/stats/${key}/values.json`;
+  const statsKey = statsR2Key(key, "prefecture");
   const payload = parseStatsValuesPayload(
     JSON.parse(await readFile(resolve(stage, statsKey), 'utf8'))
   );
@@ -357,8 +357,8 @@ for (const key of options['local-metrics']?.split(',') ?? []) {
     },
   });
   outputs.set(statsKey, payload);
-  outputs.set(`app/ranking/${key}/values.json`, ranking);
-  outputs.set(`app/ranking/${key}/item.json`, {
+  outputs.set(rankingR2Key(key, "values"), ranking);
+  outputs.set(rankingR2Key(key, "item"), {
     generatedAt: observedAt,
     item,
   });
@@ -780,7 +780,7 @@ if (options['property-prices']) {
     const stats = parseStatsValuesPayload(
       JSON.parse(
         await readFile(
-          resolve(stage, `app/stats/${metric.key}/values.json`),
+          resolve(stage, statsR2Key(metric.key, "prefecture")),
           'utf8'
         )
       )
@@ -831,7 +831,7 @@ if (options['physical-activity']) {
     const stats = parseStatsValuesPayload(
       JSON.parse(
         await readFile(
-          resolve(stage, `app/stats/${metric.key}/values.json`),
+          resolve(stage, statsR2Key(metric.key, "prefecture")),
           'utf8'
         )
       )
@@ -933,7 +933,7 @@ if (options['population-core']) {
   const expected = new Set(
     metrics.flatMap(([key, keys]) => [
       key,
-      ...keys.map((metric) => `app/stats/${metric}/values.json`),
+      ...keys.map((metric) => statsR2Key(metric, "prefecture")),
     ])
   );
   if (
@@ -968,7 +968,7 @@ if (options['population-core']) {
     }
     for (const metricKey of keys) {
       const stats = parseStatsValuesPayload(
-        JSON.parse(files.get(`app/stats/${metricKey}/values.json`))
+        JSON.parse(files.get(statsR2Key(metricKey, "prefecture")))
       );
       if (stats.metricKey !== metricKey || stats.rows.length !== 47)
         throw new Error(`Population ranking shape mismatch: ${metricKey}`);
@@ -1049,7 +1049,7 @@ if (options['medical-workforce']) {
     const stats = parseStatsValuesPayload(
       JSON.parse(
         await readFile(
-          resolve(stage, `app/stats/${metricKey}/values.json`),
+          resolve(stage, statsR2Key(metricKey, "prefecture")),
           'utf8'
         )
       )
@@ -1169,7 +1169,7 @@ if (options['industry-specialization']) {
     const stats = parseStatsValuesPayload(
       JSON.parse(
         await readFile(
-          resolve(stage, `app/stats/${metricKey}/values.json`),
+          resolve(stage, statsR2Key(metricKey, "prefecture")),
           'utf8'
         )
       )
@@ -1305,7 +1305,7 @@ if (options.nutrition) {
     const stats = parseStatsValuesPayload(
       JSON.parse(
         await readFile(
-          resolve(stage, `app/stats/${metric.key}/values.json`),
+          resolve(stage, statsR2Key(metric.key, "prefecture")),
           'utf8'
         )
       )
@@ -1374,7 +1374,7 @@ if (options['repair-laspeyres-unit']) {
   const config = METRICS_REGISTRY[key];
   if (config.unit !== '指数' || config.display?.conversionFactor !== 1)
     throw new Error('Unexpected Laspeyres unit config');
-  const statsKey = `app/stats/${key}/values.json`;
+  const statsKey = statsR2Key(key, "prefecture");
   const source = parseStatsValuesPayload(await publicJson(statsKey));
   if (
     source.metricKey !== key ||
@@ -1409,7 +1409,7 @@ if (options['repair-laspeyres-unit']) {
   });
   outputs.set(statsKey, payload);
   outputs.set(
-    `app/ranking/${key}/values.json`,
+    rankingR2Key(key, "values"),
     RankingValuesKeySnapshotSchema.parse({
       generatedAt: observedAt,
       rankingKey: key,
@@ -1417,7 +1417,7 @@ if (options['repair-laspeyres-unit']) {
       partitions,
     })
   );
-  outputs.set(`app/ranking/${key}/item.json`, {
+  outputs.set(rankingR2Key(key, "item"), {
     generatedAt: observedAt,
     item,
   });
@@ -1449,7 +1449,7 @@ for (const key of options['refresh-items']?.split(',') ?? []) {
   if (!config?.isActive || !config.entities.includes('prefecture'))
     throw new Error(`Invalid refresh metric: ${key}`);
   const payload = parseStatsValuesPayload(
-    await publicJson(`app/stats/${key}/values.json`)
+    await publicJson(statsR2Key(key, "prefecture"))
   );
   if (payload.metricKey !== key || payload.entityKind !== 'prefecture')
     throw new Error(`Wrong refresh identity: ${key}`);
@@ -1464,7 +1464,7 @@ for (const key of options['refresh-items']?.split(',') ?? []) {
       latestTop: deriveFeaturedTop(partitions[0].values),
     },
   });
-  outputs.set(`app/ranking/${key}/item.json`, {
+  outputs.set(rankingR2Key(key, "item"), {
     generatedAt: observedAt,
     item,
   });
@@ -1486,10 +1486,10 @@ const byKey = new Map(inventory.items.map((item) => [item.rankingKey, item]));
 for (const metric of manifest.metrics)
   byKey.set(
     metric.metricKey,
-    outputs.get(`app/ranking/${metric.metricKey}/item.json`).item
+    outputs.get(rankingR2Key(metric.metricKey, "item")).item
   );
 for (const key of refreshedItems)
-  byKey.set(key, outputs.get(`app/ranking/${key}/item.json`).item);
+  byKey.set(key, outputs.get(rankingR2Key(key, "item")).item);
 outputs.set(inventoryKey, {
   ...inventory,
   generatedAt: observedAt,

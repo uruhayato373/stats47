@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { statsR2Key } from "../lib/r2-keys.mjs";
 /** Official forestry/medical sources -> canonical payloads. Remote writes are unsupported. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -1195,7 +1196,7 @@ async function main() {
       }),
       content = JSON.stringify(payload);
     files.push({
-      key: `app/stats/${f.key}/values.json`,
+      key: statsR2Key(f.key, "prefecture"),
       metricKey: f.key,
       sha256: sha(content),
       rowCount: 47,

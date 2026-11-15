@@ -1,3 +1,4 @@
+import { statsR2Key } from "../lib/r2-keys.mjs";
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
@@ -190,7 +191,7 @@ async function main() {
     const rows = output.rows.map(({ areaCode, areaName, value }) => ({ areaCode, areaName, value, unit: output.unit, yearCode: extracted.year, yearName: extracted.yearName }));
     const payload = parseStatsValuesPayload({ metricKey: config.key, entityKind: 'prefecture', rows, meta: { generatedAt, rowCount: 47, areaCount: 47, yearRange: [extracted.year, extracted.year], recipe: buildRecipe(config) } });
     const content = JSON.stringify(payload);
-    return { key: `app/stats/${config.key}/values.json`, metricKey: config.key, sha256: sha(content), sourceMatchedRows: 47, content };
+    return { key: statsR2Key(config.key, "prefecture"), metricKey: config.key, sha256: sha(content), sourceMatchedRows: 47, content };
   });
   if (options['write-local']) for (const file of files) { const destination = resolve(root, '.local/r2', file.key); await mkdir(dirname(destination), { recursive: true }); await writeFile(destination, file.content); }
   const report = { generatedAt, status: options['write-local'] ? 'source-verified-staged' : 'source-verified', sources: SOURCES, inboundVisits: { nationalUnweightedSample: inboundVisits.nationalUnweightedSample, rows: inboundVisits.rows, comparison: 'Weighted visits differ from unweighted samples. Cross-prefecture duplicates retained.' }, year: extracted.year, metrics: extracted.outputs.map(({ rows, ...rest }) => rest), files: files.map(({ content, ...file }) => file), limitation: '日本人と訪日外国人は異なる標本調査の訪問地推計。全目的・宿泊日帰り込み、県間交通費を除外。訪日外国人はクルーズ客を除く。県内所得・地域への還元率・経済波及効果ではない。全国総額との一致は要求しない。' };

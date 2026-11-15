@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { statsR2Key } from "../lib/r2-keys.mjs";
 /** 2025 final raw-milk annual production; never writes remotely. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -243,7 +244,7 @@ export async function main() {
     },
   });
   const content = JSON.stringify(payload),
-    key = 'app/stats/raw-milk-production/values.json';
+    key = statsR2Key("raw-milk-production", "prefecture");
   if (o['write-local']) {
     const path = resolve(root, '.local/r2', key);
     await mkdir(dirname(path), { recursive: true });

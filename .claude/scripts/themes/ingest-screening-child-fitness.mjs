@@ -1,3 +1,4 @@
+import { statsR2Key } from "../lib/r2-keys.mjs";
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
@@ -201,7 +202,7 @@ export function buildOutputs(extracted, registry, generatedAt) {
     assert.deepEqual(config.years, { from: Number(year), to: Number(year) });
     const rows = extracted[group].rows.map(({ areaCode, areaName, values }) => ({ areaCode, areaName, value: values[key], unit, yearCode: year, yearName: `${year}年度` }));
     const payload = parseStatsValuesPayload({ metricKey: key, entityKind: 'prefecture', rows, meta: { generatedAt, rowCount: 47, areaCount: 47, yearRange: [year, year], recipe: buildRecipe(config) } });
-    const content = JSON.stringify(payload); return { key: `app/stats/${key}/values.json`, metricKey: key, sha256: sha(content), sourceMatchedRows: rows.length, content };
+    const content = JSON.stringify(payload); return { key: statsR2Key(key, "prefecture"), metricKey: key, sha256: sha(content), sourceMatchedRows: rows.length, content };
   });
 }
 async function main() {

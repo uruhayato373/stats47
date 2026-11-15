@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { statsR2Key } from "../lib/r2-keys.mjs";
 /** 2019 household housing/land debt, table 4-1. No regional averaging. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -194,7 +195,7 @@ export async function main() {
       recipe: buildRecipe(config),
     },
   });
-  const key = 'app/stats/' + KEY + '/values.json',
+  const key = statsR2Key(KEY, "prefecture"),
     content = JSON.stringify(payload);
   if (o['write-local']) {
     const path = resolve(root, '.local/r2', key);
