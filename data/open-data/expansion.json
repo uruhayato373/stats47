@@ -1,3 +1,3513 @@
 {
-  "entries": []
+  "schemaVersion": 1,
+  "candidates": [
+    {
+      "datasetId": "mhlw-medical-hospitals",
+      "table": "hospital-count",
+      "slice": {
+        "version": "2026-06-01",
+        "areaLevel": "prefecture",
+        "dims": {},
+        "time": {
+          "kind": "point",
+          "value": "2026-06-01"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "rejected",
+      "title": "病院数",
+      "unit": "施設",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "病院総数は精神科を含み一般病院数とは定義が異なる。件数だけは規模比較になるため採らない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "mhlw-medical-hospitals",
+      "table": "hospital-count",
+      "slice": {
+        "version": "2026-06-01",
+        "areaLevel": "prefecture",
+        "dims": {},
+        "time": {
+          "kind": "point",
+          "value": "2026-06-01"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "人口10万人当たり病院数",
+      "unit": "施設/10万人",
+      "aggregation": {
+        "type": "per-100k",
+        "denominatorTime": "2025"
+      },
+      "reason": "2026年6月の施設登録数を直前の2025年総人口で割る候補。ローカルに人口観測値がなく47県の率を検算できない。既存指標がある場合は、より新しい一次行政資料への差し替えとして母集団の整合も確認する。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "denominator": "total-population"
+    },
+    {
+      "datasetId": "mhlw-medical-hospitals",
+      "table": "hospital-count",
+      "slice": {
+        "version": "2026-06-01",
+        "areaLevel": "municipality",
+        "dims": {},
+        "time": {
+          "kind": "point",
+          "value": "2026-06-01"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "municipality-ranking",
+      "status": "blocked",
+      "title": "病院数",
+      "unit": "施設",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "値がある自治体は1428。2026年の一次行政資料による既存市区町村指標の差し替え候補だが、municipalities.catalog の自治体集合と無記録・ゼロの区別を確認するまで停止。 機械照合: hospital-count-city の名前「病院数」・単位「施設」・出典「社会・人口統計体系（市区町村データ・廃置分合処理済）」・地域粒度 municipality が同概念（人口補正は title/subtitle も照合）。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "duplicateOf": "hospital-count-city"
+    },
+    {
+      "datasetId": "mhlw-medical-clinics",
+      "table": "clinic-count-by-sunday-closure",
+      "slice": {
+        "version": "2026-06-01",
+        "areaLevel": "prefecture",
+        "dims": {
+          "sundayRegularClosure": [
+            "",
+            "0",
+            "1"
+          ],
+          "sundayWeek1Closure": [
+            "",
+            "0",
+            "1"
+          ],
+          "sundayWeek2Closure": [
+            "",
+            "0",
+            "1"
+          ],
+          "sundayWeek3Closure": [
+            "",
+            "0",
+            "1"
+          ],
+          "sundayWeek4Closure": [
+            "",
+            "0",
+            "1"
+          ],
+          "sundayWeek5Closure": [
+            "",
+            "0",
+            "1"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2026-06-01"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "一般診療所数",
+      "unit": "施設",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "2026年6月の医療情報ネットという一次行政資料による既存SSDS指標の差し替え候補。医療施設調査・衛生行政報告例との収録施設範囲を照合するまで停止する。 機械照合: general-clinic-count の名前「一般診療所数（総数）」・単位「施設」・出典「社会・人口統計体系」・地域粒度 prefecture が同概念（人口補正は title/subtitle も照合）。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "duplicateOf": "general-clinic-count"
+    },
+    {
+      "datasetId": "mhlw-medical-clinics",
+      "table": "clinic-count-by-sunday-closure",
+      "slice": {
+        "version": "2026-06-01",
+        "areaLevel": "prefecture",
+        "dims": {
+          "sundayRegularClosure": [
+            "",
+            "0",
+            "1"
+          ],
+          "sundayWeek1Closure": [
+            "",
+            "0",
+            "1"
+          ],
+          "sundayWeek2Closure": [
+            "",
+            "0",
+            "1"
+          ],
+          "sundayWeek3Closure": [
+            "",
+            "0",
+            "1"
+          ],
+          "sundayWeek4Closure": [
+            "",
+            "0",
+            "1"
+          ],
+          "sundayWeek5Closure": [
+            "",
+            "0",
+            "1"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2026-06-01"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "人口10万人当たり一般診療所数",
+      "unit": "施設/10万人",
+      "aggregation": {
+        "type": "per-100k",
+        "denominatorTime": "2025"
+      },
+      "reason": "2026年6月の施設登録数を直前の2025年総人口で割る候補。ローカルに人口観測値がなく47県の率を検算できない。既存指標がある場合は、より新しい一次行政資料への差し替えとして母集団の整合も確認する。 機械照合: general-clinic-count-per-100k の名前「一般診療所数（人口10万人当たり）」・単位「施設」・出典「社会・人口統計体系」・地域粒度 prefecture が同概念（人口補正は title/subtitle も照合）。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "denominator": "total-population",
+      "duplicateOf": "general-clinic-count-per-100k"
+    },
+    {
+      "datasetId": "mhlw-medical-clinics",
+      "table": "clinic-count-by-sunday-closure",
+      "slice": {
+        "version": "2026-06-01",
+        "areaLevel": "municipality",
+        "dims": {
+          "sundayRegularClosure": [
+            "",
+            "0",
+            "1"
+          ],
+          "sundayWeek1Closure": [
+            "",
+            "0",
+            "1"
+          ],
+          "sundayWeek2Closure": [
+            "",
+            "0",
+            "1"
+          ],
+          "sundayWeek3Closure": [
+            "",
+            "0",
+            "1"
+          ],
+          "sundayWeek4Closure": [
+            "",
+            "0",
+            "1"
+          ],
+          "sundayWeek5Closure": [
+            "",
+            "0",
+            "1"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2026-06-01"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "municipality-ranking",
+      "status": "blocked",
+      "title": "一般診療所数",
+      "unit": "施設",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "値がある自治体は1817。2026年の一次行政資料による既存市区町村指標の差し替え候補だが、municipalities.catalog の自治体集合と無記録・ゼロの区別を確認するまで停止。 機械照合: general-clinic-count の名前「一般診療所数（総数）」・単位「施設」・出典「社会・人口統計体系」・地域粒度 municipality が同概念（人口補正は title/subtitle も照合）。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "duplicateOf": "general-clinic-count"
+    },
+    {
+      "datasetId": "mhlw-medical-dental-clinics",
+      "table": "dental-clinic-count",
+      "slice": {
+        "version": "2026-06-01",
+        "areaLevel": "prefecture",
+        "dims": {},
+        "time": {
+          "kind": "point",
+          "value": "2026-06-01"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "歯科診療所数",
+      "unit": "施設",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "2026年6月の医療情報ネットという一次行政資料による既存SSDS指標の差し替え候補。医療施設調査・衛生行政報告例との収録施設範囲を照合するまで停止する。 機械照合: dental-clinic-count の名前「歯科診療所数（総数）」・単位「施設」・出典「社会・人口統計体系」・地域粒度 prefecture が同概念（人口補正は title/subtitle も照合）。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "duplicateOf": "dental-clinic-count"
+    },
+    {
+      "datasetId": "mhlw-medical-dental-clinics",
+      "table": "dental-clinic-count",
+      "slice": {
+        "version": "2026-06-01",
+        "areaLevel": "prefecture",
+        "dims": {},
+        "time": {
+          "kind": "point",
+          "value": "2026-06-01"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "人口10万人当たり歯科診療所数",
+      "unit": "施設/10万人",
+      "aggregation": {
+        "type": "per-100k",
+        "denominatorTime": "2025"
+      },
+      "reason": "2026年6月の施設登録数を直前の2025年総人口で割る候補。ローカルに人口観測値がなく47県の率を検算できない。既存指標がある場合は、より新しい一次行政資料への差し替えとして母集団の整合も確認する。 機械照合: dental-clinic-count-per-100k の名前「歯科診療所数（人口10万人当たり）」・単位「施設」・出典「社会・人口統計体系」・地域粒度 prefecture が同概念（人口補正は title/subtitle も照合）。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "denominator": "total-population",
+      "duplicateOf": "dental-clinic-count-per-100k"
+    },
+    {
+      "datasetId": "mhlw-medical-dental-clinics",
+      "table": "dental-clinic-count",
+      "slice": {
+        "version": "2026-06-01",
+        "areaLevel": "municipality",
+        "dims": {},
+        "time": {
+          "kind": "point",
+          "value": "2026-06-01"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "municipality-ranking",
+      "status": "blocked",
+      "title": "歯科診療所数",
+      "unit": "施設",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "値がある自治体は1767。2026年の一次行政資料による既存市区町村指標の差し替え候補だが、municipalities.catalog の自治体集合と無記録・ゼロの区別を確認するまで停止。 機械照合: dental-clinic-count の名前「歯科診療所数（総数）」・単位「施設」・出典「社会・人口統計体系」・地域粒度 municipality が同概念（人口補正は title/subtitle も照合）。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "duplicateOf": "dental-clinic-count"
+    },
+    {
+      "datasetId": "mhlw-medical-maternity-homes",
+      "table": "maternity-home-count",
+      "slice": {
+        "version": "2026-06-01",
+        "areaLevel": "prefecture",
+        "dims": {},
+        "time": {
+          "kind": "point",
+          "value": "2026-06-01"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "rejected",
+      "title": "助産所数",
+      "unit": "施設",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "県行は45県のみで、欠けた2県をゼロ補完できない。件数だけでは人口規模の比較になる。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "mhlw-medical-maternity-homes",
+      "table": "maternity-home-count",
+      "slice": {
+        "version": "2026-06-01",
+        "areaLevel": "prefecture",
+        "dims": {},
+        "time": {
+          "kind": "point",
+          "value": "2026-06-01"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "rejected",
+      "title": "人口10万人当たり助産所数",
+      "unit": "施設/10万人",
+      "aggregation": {
+        "type": "per-100k",
+        "denominatorTime": "2025"
+      },
+      "reason": "45県のみで47県比較不可。未記載をゼロとみなさない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "denominator": "total-population"
+    },
+    {
+      "datasetId": "mhlw-medical-maternity-homes",
+      "table": "maternity-home-count",
+      "slice": {
+        "version": "2026-06-01",
+        "areaLevel": "municipality",
+        "dims": {},
+        "time": {
+          "kind": "point",
+          "value": "2026-06-01"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "municipality-ranking",
+      "status": "rejected",
+      "title": "助産所数",
+      "unit": "施設",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "値がある自治体は740のみ。未登録と施設ゼロを識別できず全国自治体ランキングには疎すぎる。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "mhlw-medical-pharmacies",
+      "table": "pharmacy-count-by-sunday-business",
+      "slice": {
+        "version": "2026-06-01",
+        "areaLevel": "prefecture",
+        "dims": {
+          "sundayBusiness": [
+            "",
+            "0",
+            "1"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2026-06-01"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "薬局数",
+      "unit": "施設",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "2026年6月の医療情報ネットという一次行政資料による既存SSDS指標の差し替え候補。医療施設調査・衛生行政報告例との収録施設範囲を照合するまで停止する。 機械照合: pharmacy-count の名前「都道府県別 薬局数」・単位「所」・出典「社会・人口統計体系」・地域粒度 prefecture が同概念（人口補正は title/subtitle も照合）。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "duplicateOf": "pharmacy-count"
+    },
+    {
+      "datasetId": "mhlw-medical-pharmacies",
+      "table": "pharmacy-count-by-sunday-business",
+      "slice": {
+        "version": "2026-06-01",
+        "areaLevel": "prefecture",
+        "dims": {
+          "sundayBusiness": [
+            "",
+            "0",
+            "1"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2026-06-01"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "人口10万人当たり薬局数",
+      "unit": "施設/10万人",
+      "aggregation": {
+        "type": "per-100k",
+        "denominatorTime": "2025"
+      },
+      "reason": "2026年6月の施設登録数を直前の2025年総人口で割る候補。ローカルに人口観測値がなく47県の率を検算できない。既存指標がある場合は、より新しい一次行政資料への差し替えとして母集団の整合も確認する。 機械照合: pharmacy-count-per-100k の名前「人口10万人あたり薬局数」・単位「所」・出典「社会・人口統計体系」・地域粒度 prefecture が同概念（人口補正は title/subtitle も照合）。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "denominator": "total-population",
+      "duplicateOf": "pharmacy-count-per-100k"
+    },
+    {
+      "datasetId": "mhlw-medical-clinics",
+      "table": "clinic-count-by-sunday-closure",
+      "slice": {
+        "version": "2026-06-01",
+        "areaLevel": "prefecture",
+        "dims": {
+          "sundayRegularClosure": [
+            "0"
+          ],
+          "sundayWeek1Closure": [
+            "0"
+          ],
+          "sundayWeek2Closure": [
+            "0"
+          ],
+          "sundayWeek3Closure": [
+            "0"
+          ],
+          "sundayWeek4Closure": [
+            "0"
+          ],
+          "sundayWeek5Closure": [
+            "0"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2026-06-01"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "日曜休診フラグがすべて0の診療所数（人口10万人当たり）",
+      "unit": "施設/10万人",
+      "aggregation": {
+        "type": "per-100k",
+        "denominatorTime": "2025"
+      },
+      "reason": "毎週・第1〜5週の日曜休診フラグがすべて0でも実診療時間の存在は証明しない。空欄も0扱いできず、診療時間表との照合と2025年人口観測値が必要。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "denominator": "total-population"
+    },
+    {
+      "datasetId": "mhlw-medical-clinics",
+      "table": "clinic-count-by-sunday-closure",
+      "slice": {
+        "version": "2026-06-01",
+        "areaLevel": "prefecture",
+        "dims": {
+          "sundayRegularClosure": [
+            "0"
+          ],
+          "sundayWeek1Closure": [
+            "0"
+          ],
+          "sundayWeek2Closure": [
+            "0"
+          ],
+          "sundayWeek3Closure": [
+            "0"
+          ],
+          "sundayWeek4Closure": [
+            "0"
+          ],
+          "sundayWeek5Closure": [
+            "0"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2026-06-01"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "theme",
+      "status": "blocked",
+      "title": "日曜休診フラグがすべて0の診療所数（人口10万人当たり）",
+      "unit": "施設/10万人",
+      "aggregation": {
+        "type": "per-100k",
+        "denominatorTime": "2025"
+      },
+      "reason": "日曜の受診先を比較する用途は healthcare に合うが、休診フラグだけで診療中と判定できず停止。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "denominator": "total-population",
+      "target": "healthcare"
+    },
+    {
+      "datasetId": "mhlw-medical-clinics",
+      "table": "clinic-count-by-sunday-closure",
+      "slice": {
+        "version": "2026-06-01",
+        "areaLevel": "prefecture",
+        "dims": {
+          "sundayRegularClosure": [
+            "0"
+          ],
+          "sundayWeek1Closure": [
+            "0"
+          ],
+          "sundayWeek2Closure": [
+            "0"
+          ],
+          "sundayWeek3Closure": [
+            "0"
+          ],
+          "sundayWeek4Closure": [
+            "0"
+          ],
+          "sundayWeek5Closure": [
+            "0"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2026-06-01"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "area",
+      "status": "blocked",
+      "title": "日曜休診フラグがすべて0の診療所数（人口10万人当たり）",
+      "unit": "施設/10万人",
+      "aggregation": {
+        "type": "per-100k",
+        "denominatorTime": "2025"
+      },
+      "reason": "県データブックの医療施設欄への候補。日曜診療の定義と分母の検証が済むまで停止。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "denominator": "total-population",
+      "target": "education-facility"
+    },
+    {
+      "datasetId": "mhlw-medical-pharmacies",
+      "table": "pharmacy-count-by-sunday-business",
+      "slice": {
+        "version": "2026-06-01",
+        "areaLevel": "prefecture",
+        "dims": {
+          "sundayBusiness": [
+            "1"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2026-06-01"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "日曜営業薬局数（人口10万人当たり）",
+      "unit": "施設/10万人",
+      "aggregation": {
+        "type": "per-100k",
+        "denominatorTime": "2025"
+      },
+      "reason": "sundayBusiness=1 の47県の施設数を2025年総人口で補正する。人口観測値がローカルにないため率の47県検算を完了できない。空欄は営業とみなさない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "denominator": "total-population"
+    },
+    {
+      "datasetId": "mhlw-medical-pharmacies",
+      "table": "pharmacy-count-by-sunday-business",
+      "slice": {
+        "version": "2026-06-01",
+        "areaLevel": "prefecture",
+        "dims": {
+          "sundayBusiness": [
+            "1"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2026-06-01"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "theme",
+      "status": "blocked",
+      "title": "日曜営業薬局数（人口10万人当たり）",
+      "unit": "施設/10万人",
+      "aggregation": {
+        "type": "per-100k",
+        "denominatorTime": "2025"
+      },
+      "reason": "日曜の薬局へのアクセスは healthcare に合うが、2025年人口の観測値不足で率を検算できない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "denominator": "total-population",
+      "target": "healthcare"
+    },
+    {
+      "datasetId": "mhlw-medical-pharmacies",
+      "table": "pharmacy-count-by-sunday-business",
+      "slice": {
+        "version": "2026-06-01",
+        "areaLevel": "prefecture",
+        "dims": {
+          "sundayBusiness": [
+            "1"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2026-06-01"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "area",
+      "status": "blocked",
+      "title": "日曜営業薬局数（人口10万人当たり）",
+      "unit": "施設/10万人",
+      "aggregation": {
+        "type": "per-100k",
+        "denominatorTime": "2025"
+      },
+      "reason": "県データブックの医療施設の人口補正比較に合うが、人口観測値の取得後に再判定する。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "denominator": "total-population",
+      "target": "education-facility"
+    },
+    {
+      "datasetId": "nier-gakuryoku-achievement",
+      "table": "primary-achievement",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "prefecture",
+        "dims": {
+          "grade": [
+            "小学6年"
+          ],
+          "subject": [
+            "国語"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "planned",
+      "title": "小学生の国語平均正答率",
+      "unit": "％",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "同年度・同学年・同教科の公立校47県を直接比較できる。既存 academic-achievement-test-average-rate は小中4教科の単純平均であり、教科別とは定義が異なる。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "metricKey": "national-assessment-elementary-japanese-correct-rate",
+      "verification": {
+        "tableSha256": "face3941ad59346af66f56d05c7d6579430b8214dd0d5a8d7ae7b111a2c6effd",
+        "rowCount": 47,
+        "areaCount": 47,
+        "min": 64,
+        "max": 71
+      }
+    },
+    {
+      "datasetId": "nier-gakuryoku-achievement",
+      "table": "primary-achievement",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "prefecture",
+        "dims": {
+          "grade": [
+            "小学6年"
+          ],
+          "subject": [
+            "算数"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "planned",
+      "title": "小学生の算数平均正答率",
+      "unit": "％",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "同年度・同学年・同教科の公立校47県を直接比較できる。既存 academic-achievement-test-average-rate は小中4教科の単純平均であり、教科別とは定義が異なる。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "metricKey": "national-assessment-elementary-mathematics-correct-rate",
+      "verification": {
+        "tableSha256": "face3941ad59346af66f56d05c7d6579430b8214dd0d5a8d7ae7b111a2c6effd",
+        "rowCount": 47,
+        "areaCount": 47,
+        "min": 51,
+        "max": 64
+      }
+    },
+    {
+      "datasetId": "nier-gakuryoku-achievement",
+      "table": "primary-achievement",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "prefecture",
+        "dims": {
+          "grade": [
+            "小学6年"
+          ],
+          "subject": [
+            "算数"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "theme",
+      "status": "planned",
+      "title": "小学生の算数平均正答率",
+      "unit": "％",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "education-culture の学校教育を教科別の到達度で補完できる。年度・学年を固定し、公立校の比較として扱う。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "metricKey": "national-assessment-elementary-mathematics-correct-rate",
+      "verification": {
+        "tableSha256": "face3941ad59346af66f56d05c7d6579430b8214dd0d5a8d7ae7b111a2c6effd",
+        "rowCount": 47,
+        "areaCount": 47,
+        "min": 51,
+        "max": 64
+      },
+      "target": "education-culture"
+    },
+    {
+      "datasetId": "nier-gakuryoku-achievement",
+      "table": "junior-achievement",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "prefecture",
+        "dims": {
+          "grade": [
+            "中学3年"
+          ],
+          "subject": [
+            "国語"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "planned",
+      "title": "中学生の国語平均正答率",
+      "unit": "％",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "同年度・同学年・同教科の公立校47県を直接比較できる。既存 academic-achievement-test-average-rate は小中4教科の単純平均であり、教科別とは定義が異なる。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "metricKey": "national-assessment-junior-high-japanese-correct-rate",
+      "verification": {
+        "tableSha256": "2c7f76a8a1c372e37457a8370d1ef1a331005335594130caff124b0e49c5933e",
+        "rowCount": 47,
+        "areaCount": 47,
+        "min": 49,
+        "max": 57
+      }
+    },
+    {
+      "datasetId": "nier-gakuryoku-achievement",
+      "table": "junior-achievement",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "prefecture",
+        "dims": {
+          "grade": [
+            "中学3年"
+          ],
+          "subject": [
+            "数学"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "planned",
+      "title": "中学生の数学平均正答率",
+      "unit": "％",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "同年度・同学年・同教科の公立校47県を直接比較できる。既存 academic-achievement-test-average-rate は小中4教科の単純平均であり、教科別とは定義が異なる。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "metricKey": "national-assessment-junior-high-mathematics-correct-rate",
+      "verification": {
+        "tableSha256": "2c7f76a8a1c372e37457a8370d1ef1a331005335594130caff124b0e49c5933e",
+        "rowCount": 47,
+        "areaCount": 47,
+        "min": 38,
+        "max": 54
+      }
+    },
+    {
+      "datasetId": "nier-gakuryoku-achievement",
+      "table": "junior-achievement",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "prefecture",
+        "dims": {
+          "grade": [
+            "中学3年"
+          ],
+          "subject": [
+            "数学"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "theme",
+      "status": "planned",
+      "title": "中学生の数学平均正答率",
+      "unit": "％",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "education-culture の学校教育を教科別の到達度で補完できる。年度・学年を固定し、公立校の比較として扱う。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "metricKey": "national-assessment-junior-high-mathematics-correct-rate",
+      "verification": {
+        "tableSha256": "2c7f76a8a1c372e37457a8370d1ef1a331005335594130caff124b0e49c5933e",
+        "rowCount": 47,
+        "areaCount": 47,
+        "min": 38,
+        "max": 54
+      },
+      "target": "education-culture"
+    },
+    {
+      "datasetId": "nier-gakuryoku-lifestyle",
+      "table": "primary-lifestyle-response-rates",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "prefecture",
+        "dims": {
+          "grade": [
+            "小学6年"
+          ],
+          "question": [
+            "自分には、よいところがあると思いますか"
+          ],
+          "answer": [
+            "1",
+            "2"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "自分によいところがあると思う小学生の割合",
+      "unit": "％",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "47県の回答1・2の合計は計算可能だが、正規化表と手元の集計xlsxには選択肢の文言がなく、1・2が肯定回答であることを機械で確定できない。質問紙の選択肢対応を固定してから再判定する。割合は公表済みのため人口を分母にしない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "nier-gakuryoku-lifestyle",
+      "table": "primary-lifestyle-response-rates",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "prefecture",
+        "dims": {
+          "grade": [
+            "小学6年"
+          ],
+          "question": [
+            "自分には、よいところがあると思いますか"
+          ],
+          "answer": [
+            "1",
+            "2"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "theme",
+      "status": "blocked",
+      "title": "自分によいところがあると思う小学生の割合",
+      "unit": "％",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "学校生活の自己認識を補完する候補だが、回答1・2の意味の確認が済むまで停止。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "target": "education-culture"
+    },
+    {
+      "datasetId": "nier-gakuryoku-lifestyle",
+      "table": "primary-lifestyle-response-rates",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "prefecture",
+        "dims": {
+          "grade": [
+            "小学6年"
+          ],
+          "question": [
+            "将来の夢や目標を持っていますか"
+          ],
+          "answer": [
+            "1",
+            "2"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "将来の夢や目標を持つ小学生の割合",
+      "unit": "％",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "47県の回答1・2の合計は計算可能だが、正規化表と手元の集計xlsxには選択肢の文言がなく、1・2が肯定回答であることを機械で確定できない。質問紙の選択肢対応を固定してから再判定する。割合は公表済みのため人口を分母にしない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "nier-gakuryoku-lifestyle",
+      "table": "primary-lifestyle-response-rates",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "prefecture",
+        "dims": {
+          "grade": [
+            "小学6年"
+          ],
+          "question": [
+            "学校に行くのは楽しいと思いますか"
+          ],
+          "answer": [
+            "1",
+            "2"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "学校に行くのが楽しいと思う小学生の割合",
+      "unit": "％",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "47県の回答1・2の合計は計算可能だが、正規化表と手元の集計xlsxには選択肢の文言がなく、1・2が肯定回答であることを機械で確定できない。質問紙の選択肢対応を固定してから再判定する。割合は公表済みのため人口を分母にしない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "nier-gakuryoku-lifestyle",
+      "table": "primary-lifestyle-response-rates",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "prefecture",
+        "dims": {
+          "grade": [
+            "小学6年"
+          ],
+          "question": [
+            "友達関係に満足していますか"
+          ],
+          "answer": [
+            "1",
+            "2"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "友達関係に満足する小学生の割合",
+      "unit": "％",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "47県の回答1・2の合計は計算可能だが、正規化表と手元の集計xlsxには選択肢の文言がなく、1・2が肯定回答であることを機械で確定できない。質問紙の選択肢対応を固定してから再判定する。割合は公表済みのため人口を分母にしない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "nier-gakuryoku-lifestyle",
+      "table": "junior-lifestyle-response-rates",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "prefecture",
+        "dims": {
+          "grade": [
+            "中学3年"
+          ],
+          "question": [
+            "自分には、よいところがあると思いますか"
+          ],
+          "answer": [
+            "1",
+            "2"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "自分によいところがあると思う中学生の割合",
+      "unit": "％",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "47県の回答1・2の合計は計算可能だが、正規化表と手元の集計xlsxには選択肢の文言がなく、1・2が肯定回答であることを機械で確定できない。質問紙の選択肢対応を固定してから再判定する。割合は公表済みのため人口を分母にしない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "nier-gakuryoku-lifestyle",
+      "table": "junior-lifestyle-response-rates",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "prefecture",
+        "dims": {
+          "grade": [
+            "中学3年"
+          ],
+          "question": [
+            "自分には、よいところがあると思いますか"
+          ],
+          "answer": [
+            "1",
+            "2"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "theme",
+      "status": "blocked",
+      "title": "自分によいところがあると思う中学生の割合",
+      "unit": "％",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "学校生活の自己認識を補完する候補だが、回答1・2の意味の確認が済むまで停止。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "target": "education-culture"
+    },
+    {
+      "datasetId": "nier-gakuryoku-lifestyle",
+      "table": "junior-lifestyle-response-rates",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "prefecture",
+        "dims": {
+          "grade": [
+            "中学3年"
+          ],
+          "question": [
+            "将来の夢や目標を持っていますか"
+          ],
+          "answer": [
+            "1",
+            "2"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "将来の夢や目標を持つ中学生の割合",
+      "unit": "％",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "47県の回答1・2の合計は計算可能だが、正規化表と手元の集計xlsxには選択肢の文言がなく、1・2が肯定回答であることを機械で確定できない。質問紙の選択肢対応を固定してから再判定する。割合は公表済みのため人口を分母にしない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "nier-gakuryoku-lifestyle",
+      "table": "junior-lifestyle-response-rates",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "prefecture",
+        "dims": {
+          "grade": [
+            "中学3年"
+          ],
+          "question": [
+            "学校に行くのは楽しいと思いますか"
+          ],
+          "answer": [
+            "1",
+            "2"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "学校に行くのが楽しいと思う中学生の割合",
+      "unit": "％",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "47県の回答1・2の合計は計算可能だが、正規化表と手元の集計xlsxには選択肢の文言がなく、1・2が肯定回答であることを機械で確定できない。質問紙の選択肢対応を固定してから再判定する。割合は公表済みのため人口を分母にしない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "nier-gakuryoku-lifestyle",
+      "table": "junior-lifestyle-response-rates",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "prefecture",
+        "dims": {
+          "grade": [
+            "中学3年"
+          ],
+          "question": [
+            "友達関係に満足していますか"
+          ],
+          "answer": [
+            "1",
+            "2"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "友達関係に満足する中学生の割合",
+      "unit": "％",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "47県の回答1・2の合計は計算可能だが、正規化表と手元の集計xlsxには選択肢の文言がなく、1・2が肯定回答であることを機械で確定できない。質問紙の選択肢対応を固定してから再判定する。割合は公表済みのため人口を分母にしない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "nier-gakuryoku-lifestyle",
+      "table": "primary-lifestyle-response-rates",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "prefecture",
+        "dims": {
+          "answer": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "その他",
+            "無回答"
+          ],
+          "grade": [
+            "小学6年"
+          ],
+          "question": [
+            "友達関係に満足していますか",
+            "学校に行くのは楽しいと思いますか",
+            "将来の夢や目標を持っていますか",
+            "自分には、よいところがあると思いますか"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "area",
+      "status": "rejected",
+      "title": "児童の生活意識の県データブック掲載",
+      "unit": "％",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "既存 education-facility は学校・医療等の施設比較であり、生活意識の質問票を入れる区分として自然ではない。新しい区分は作らない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "target": "education-facility"
+    },
+    {
+      "datasetId": "mlit-road-census-r3",
+      "table": "road-congestion",
+      "slice": {
+        "version": "2023-06-30",
+        "areaLevel": "prefecture",
+        "dims": {
+          "coverage": [
+            "交通量推定不能区間を含まない"
+          ],
+          "roadType": [
+            "一般道路計"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2021"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "planned",
+      "title": "一般道路の混雑度",
+      "unit": "比",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "令和3年度道路交通センサスの一般道路計で47県・同時点が揃う。交通量の単純件数ではなく道路の利用状況を比較できる。2021年の構造比較に限定し現在値と表現しない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "metricKey": "road-traffic-congestion",
+      "verification": {
+        "tableSha256": "c47acc58c77629f5647dd40cf2d9bd8207cfb00379f7cd54ab620d304d42d230",
+        "rowCount": 47,
+        "areaCount": 47,
+        "min": 0.39,
+        "max": 0.91
+      }
+    },
+    {
+      "datasetId": "mlit-road-census-r3",
+      "table": "road-congestion",
+      "slice": {
+        "version": "2023-06-30",
+        "areaLevel": "prefecture",
+        "dims": {
+          "coverage": [
+            "交通量推定不能区間を含まない"
+          ],
+          "roadType": [
+            "一般道路計"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2021"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "theme",
+      "status": "planned",
+      "title": "一般道路の混雑度",
+      "unit": "比",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "roads の道路利用・物流条件を補完する。2021年のセンサス値として他年の指標と区別して表示する。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "metricKey": "road-traffic-congestion",
+      "verification": {
+        "tableSha256": "c47acc58c77629f5647dd40cf2d9bd8207cfb00379f7cd54ab620d304d42d230",
+        "rowCount": 47,
+        "areaCount": 47,
+        "min": 0.39,
+        "max": 0.91
+      },
+      "target": "roads"
+    },
+    {
+      "datasetId": "mlit-road-census-r3",
+      "table": "road-congestion",
+      "slice": {
+        "version": "2023-06-30",
+        "areaLevel": "prefecture",
+        "dims": {
+          "coverage": [
+            "交通量推定不能区間を含まない"
+          ],
+          "roadType": [
+            "一般道路計"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2021"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "area",
+      "status": "planned",
+      "title": "一般道路の混雑度",
+      "unit": "比",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "暮らしの移動条件を混雑度で補完する。47県共通の一般道路計・2021年と明記する。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "metricKey": "road-traffic-congestion",
+      "verification": {
+        "tableSha256": "c47acc58c77629f5647dd40cf2d9bd8207cfb00379f7cd54ab620d304d42d230",
+        "rowCount": 47,
+        "areaCount": 47,
+        "min": 0.39,
+        "max": 0.91
+      },
+      "target": "civic-living"
+    },
+    {
+      "datasetId": "mlit-road-census-r3",
+      "table": "heavy-vehicle-share",
+      "slice": {
+        "version": "2023-06-30",
+        "areaLevel": "prefecture",
+        "dims": {
+          "coverage": [
+            "交通量推定不能区間を含まない"
+          ],
+          "roadType": [
+            "一般道路計"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2021"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "planned",
+      "title": "一般道路の12時間大型車混入率",
+      "unit": "％",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "令和3年度道路交通センサスの一般道路計で47県・同時点が揃う。交通量の単純件数ではなく道路の利用状況を比較できる。2021年の構造比較に限定し現在値と表現しない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "metricKey": "road-heavy-vehicle-share",
+      "verification": {
+        "tableSha256": "cd3a8a3b2079397ee2a64782f5317a1523dfa69ebfd7b317a2986cf3eed735e7",
+        "rowCount": 47,
+        "areaCount": 47,
+        "min": 7.4,
+        "max": 19.6
+      }
+    },
+    {
+      "datasetId": "mlit-road-census-r3",
+      "table": "heavy-vehicle-share",
+      "slice": {
+        "version": "2023-06-30",
+        "areaLevel": "prefecture",
+        "dims": {
+          "coverage": [
+            "交通量推定不能区間を含まない"
+          ],
+          "roadType": [
+            "一般道路計"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2021"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "theme",
+      "status": "planned",
+      "title": "一般道路の12時間大型車混入率",
+      "unit": "％",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "freight-logistics の道路利用・物流条件を補完する。2021年のセンサス値として他年の指標と区別して表示する。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "metricKey": "road-heavy-vehicle-share",
+      "verification": {
+        "tableSha256": "cd3a8a3b2079397ee2a64782f5317a1523dfa69ebfd7b317a2986cf3eed735e7",
+        "rowCount": 47,
+        "areaCount": 47,
+        "min": 7.4,
+        "max": 19.6
+      },
+      "target": "freight-logistics"
+    },
+    {
+      "datasetId": "mlit-road-census-r3",
+      "table": "peak-travel-speed",
+      "slice": {
+        "version": "2023-06-30",
+        "areaLevel": "prefecture",
+        "dims": {
+          "roadType": [
+            "一般道路計"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2021"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "planned",
+      "title": "一般道路の混雑時旅行速度",
+      "unit": "km/h",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "令和3年度道路交通センサスの一般道路計で47県・同時点が揃う。交通量の単純件数ではなく道路の利用状況を比較できる。2021年の構造比較に限定し現在値と表現しない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "metricKey": "road-peak-travel-speed",
+      "verification": {
+        "tableSha256": "177ca25f3c35ec911deada7c3a3b5f9fc9a31bc88d20c0c091763c60554c64dc",
+        "rowCount": 47,
+        "areaCount": 47,
+        "min": 15.5,
+        "max": 46.1
+      }
+    },
+    {
+      "datasetId": "mlit-road-census-r3",
+      "table": "peak-travel-speed",
+      "slice": {
+        "version": "2023-06-30",
+        "areaLevel": "prefecture",
+        "dims": {
+          "roadType": [
+            "一般道路計"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2021"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "theme",
+      "status": "planned",
+      "title": "一般道路の混雑時旅行速度",
+      "unit": "km/h",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "roads の道路利用・物流条件を補完する。2021年のセンサス値として他年の指標と区別して表示する。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "metricKey": "road-peak-travel-speed",
+      "verification": {
+        "tableSha256": "177ca25f3c35ec911deada7c3a3b5f9fc9a31bc88d20c0c091763c60554c64dc",
+        "rowCount": 47,
+        "areaCount": 47,
+        "min": 15.5,
+        "max": 46.1
+      },
+      "target": "roads"
+    },
+    {
+      "datasetId": "fdma-heatstroke-emergency-transports",
+      "table": "heatstroke-transports-daily",
+      "slice": {
+        "version": "2025-10-29",
+        "areaLevel": "prefecture",
+        "dims": {},
+        "time": {
+          "kind": "range",
+          "start": "2025-05-01",
+          "end": "2025-09-30"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "sum"
+      },
+      "channel": "prefecture-ranking",
+      "status": "rejected",
+      "title": "熱中症救急搬送人員",
+      "unit": "人",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "2025年5〜9月の期間合計は既存の消防庁確定値と同じ概念・同期間であり、再登録しない。件数だけのランキングも追加しない。 機械照合: heatstroke-emergency-transports の名前「熱中症救急搬送人員（2025年5〜9月）」・単位「人」・出典「消防庁「熱中症による救急搬送状況」」・地域粒度 prefecture が同概念（人口補正は title/subtitle も照合）。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "duplicateOf": "heatstroke-emergency-transports"
+    },
+    {
+      "datasetId": "fdma-heatstroke-emergency-transports",
+      "table": "heatstroke-transports-daily",
+      "slice": {
+        "version": "2025-10-29",
+        "areaLevel": "prefecture",
+        "dims": {},
+        "time": {
+          "kind": "range",
+          "start": "2025-05-01",
+          "end": "2025-09-30"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "sum"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "熱中症救急搬送人員（人口10万人当たり）",
+      "unit": "人/10万人",
+      "aggregation": {
+        "type": "per-100k",
+        "denominatorTime": "2024"
+      },
+      "reason": "153日×47県の期間合計を対象期間直前の2024年総人口で補正する。分母の観測値がローカルにないため率を検算できない。搬送地ベースなので発症率とは呼ばない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "denominator": "total-population"
+    },
+    {
+      "datasetId": "fdma-heatstroke-emergency-transports",
+      "table": "heatstroke-transports-daily",
+      "slice": {
+        "version": "2025-10-29",
+        "areaLevel": "prefecture",
+        "dims": {},
+        "time": {
+          "kind": "range",
+          "start": "2025-05-01",
+          "end": "2025-09-30"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "rejected",
+      "title": "日別の熱中症救急搬送人員",
+      "unit": "人",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "153日をそのまま並べる県ランキングは時点が一つに定まらない。採用単位は5〜9月の期間合計とする。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "fdma-heatstroke-emergency-transports",
+      "table": "heatstroke-transports-daily",
+      "slice": {
+        "version": "2025-10-29",
+        "areaLevel": "prefecture",
+        "dims": {},
+        "time": {
+          "kind": "range",
+          "start": "2025-05-01",
+          "end": "2025-09-30"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "sum"
+      },
+      "channel": "theme",
+      "status": "blocked",
+      "title": "熱中症救急搬送人員（人口10万人当たり）",
+      "unit": "人/10万人",
+      "aggregation": {
+        "type": "per-100k",
+        "denominatorTime": "2024"
+      },
+      "reason": "safety の救急搬送・健康被害に合うが、2024年人口の取得と47県の率の検算が必要。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "denominator": "total-population",
+      "target": "safety"
+    },
+    {
+      "datasetId": "fdma-heatstroke-emergency-transports",
+      "table": "heatstroke-transports-daily",
+      "slice": {
+        "version": "2025-10-29",
+        "areaLevel": "prefecture",
+        "dims": {},
+        "time": {
+          "kind": "range",
+          "start": "2025-05-01",
+          "end": "2025-09-30"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "sum"
+      },
+      "channel": "area",
+      "status": "blocked",
+      "title": "熱中症救急搬送人員（人口10万人当たり）",
+      "unit": "人/10万人",
+      "aggregation": {
+        "type": "per-100k",
+        "denominatorTime": "2024"
+      },
+      "reason": "県データブックの安全・くらしに合うが、2024年人口の取得と47県の率の検算が必要。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "denominator": "total-population",
+      "target": "safety-living"
+    },
+    {
+      "datasetId": "mhlw-covid19-open-data",
+      "table": "newly-confirmed-cases-daily",
+      "slice": {
+        "version": "initial",
+        "areaLevel": "prefecture",
+        "dims": {},
+        "time": {
+          "kind": "range",
+          "start": "2020-01-16",
+          "end": "2023-05-08"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "rejected",
+      "title": "日別の新規陽性者数",
+      "unit": "人",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "2020-01-16〜2023-05-08の履歴で更新が終了している。日次のままは同一時点のランキングにせず、検査・報告制度の変化も区別する。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "mhlw-covid19-open-data",
+      "table": "newly-confirmed-cases-daily",
+      "slice": {
+        "version": "initial",
+        "areaLevel": "prefecture",
+        "dims": {},
+        "time": {
+          "kind": "range",
+          "start": "2022-01-01",
+          "end": "2022-12-31"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "sum"
+      },
+      "channel": "prefecture-ranking",
+      "status": "rejected",
+      "title": "新規陽性者数の年間合計",
+      "unit": "人",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "2022年の365日を集計しても人口規模に依存する人数であり、そのままのランキングを増やさない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "mhlw-covid19-open-data",
+      "table": "newly-confirmed-cases-daily",
+      "slice": {
+        "version": "initial",
+        "areaLevel": "prefecture",
+        "dims": {},
+        "time": {
+          "kind": "range",
+          "start": "2022-01-01",
+          "end": "2022-12-31"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "sum"
+      },
+      "channel": "prefecture-ranking",
+      "status": "rejected",
+      "title": "新規陽性者数の年間合計（人口10万人当たり）",
+      "unit": "人/10万人",
+      "aggregation": {
+        "type": "per-100k",
+        "denominatorTime": "2022"
+      },
+      "reason": "2022年の歴史集計に限定できるが、2023年5月で終了した全数把握系列を現行の地域医療指標にしない。人口補正だけでは検査・届出制度の地域差を解消できない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "denominator": "total-population"
+    },
+    {
+      "datasetId": "mhlw-covid19-open-data",
+      "table": "newly-confirmed-cases-daily",
+      "slice": {
+        "version": "initial",
+        "areaLevel": "prefecture",
+        "dims": {},
+        "time": {
+          "kind": "range",
+          "start": "2022-01-01",
+          "end": "2022-12-31"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "sum"
+      },
+      "channel": "theme",
+      "status": "rejected",
+      "title": "新規陽性者数の年間合計（人口10万人当たり）",
+      "unit": "人/10万人",
+      "aggregation": {
+        "type": "per-100k",
+        "denominatorTime": "2022"
+      },
+      "reason": "2023年5月で終了した陽性者全数把握を現在の healthcare の指標と混在させない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "denominator": "total-population",
+      "target": "healthcare"
+    },
+    {
+      "datasetId": "ndb-open-data",
+      "table": "bmi-distribution",
+      "slice": {
+        "version": "9th",
+        "areaLevel": "prefecture",
+        "dims": {
+          "category": [
+            "25.0以上30.0未満",
+            "30.0以上35.0未満",
+            "35.0以上40.0未満",
+            "40.0以上"
+          ],
+          "sex": [
+            "女",
+            "男"
+          ],
+          "test": [
+            "BMI"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2021"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "rejected",
+      "title": "特定健診受診者のBMI25以上の人数",
+      "unit": "人",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "NDB第9回の2021年度・男女計の人数であり、受診者規模の比較になる。一般人口を分母にすると健診受診者における割合とは異なるため採らない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "ndb-open-data",
+      "table": "bmi-distribution",
+      "slice": {
+        "version": "9th",
+        "areaLevel": "prefecture",
+        "dims": {
+          "category": [
+            "25.0以上30.0未満",
+            "30.0以上35.0未満",
+            "35.0以上40.0未満",
+            "40.0以上"
+          ],
+          "sex": [
+            "女",
+            "男"
+          ],
+          "test": [
+            "BMI"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2021"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "特定健診受診者のBMI25以上の割合",
+      "unit": "％",
+      "aggregation": {
+        "type": "divide",
+        "scale": 100,
+        "denominatorTime": "2021"
+      },
+      "reason": "分母は同じ表・2021年度・同性範囲の全検査階層（質問票は「はい＋いいえ」）の回答者合計が必要。対応する既存の分母指標キーがなく、total-population や別健診の受診者数では代用しない。既存NDB指標は2023年度なので更新版の確保も必要。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "ndb-open-data",
+      "table": "bmi-distribution",
+      "slice": {
+        "version": "9th",
+        "areaLevel": "prefecture",
+        "dims": {
+          "category": [
+            "25.0以上30.0未満",
+            "30.0以上35.0未満",
+            "35.0以上40.0未満",
+            "40.0以上"
+          ],
+          "sex": [
+            "女",
+            "男"
+          ],
+          "test": [
+            "BMI"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2021"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "theme",
+      "status": "blocked",
+      "title": "特定健診受診者のBMI25以上の割合",
+      "unit": "％",
+      "aggregation": {
+        "type": "divide",
+        "scale": 100,
+        "denominatorTime": "2021"
+      },
+      "reason": "health-checkups の検査・服薬状況に合うが、同母集団の分母キーが未登録で2021年度と既存2023年度の時点も異なる。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "target": "health-checkups"
+    },
+    {
+      "datasetId": "ndb-open-data",
+      "table": "hba1c-distribution",
+      "slice": {
+        "version": "9th",
+        "areaLevel": "prefecture",
+        "dims": {
+          "category": [
+            "6.5以上8.0未満",
+            "8.0以上8.4未満",
+            "8.4以上"
+          ],
+          "sex": [
+            "女",
+            "男"
+          ],
+          "test": [
+            "HbA1c"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2021"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "rejected",
+      "title": "特定健診受診者のHbA1c6.5%以上の人数",
+      "unit": "人",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "NDB第9回の2021年度・男女計の人数であり、受診者規模の比較になる。一般人口を分母にすると健診受診者における割合とは異なるため採らない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "ndb-open-data",
+      "table": "hba1c-distribution",
+      "slice": {
+        "version": "9th",
+        "areaLevel": "prefecture",
+        "dims": {
+          "category": [
+            "6.5以上8.0未満",
+            "8.0以上8.4未満",
+            "8.4以上"
+          ],
+          "sex": [
+            "女",
+            "男"
+          ],
+          "test": [
+            "HbA1c"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2021"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "特定健診受診者のHbA1c6.5%以上の割合",
+      "unit": "％",
+      "aggregation": {
+        "type": "divide",
+        "scale": 100,
+        "denominatorTime": "2021"
+      },
+      "reason": "分母は同じ表・2021年度・同性範囲の全検査階層（質問票は「はい＋いいえ」）の回答者合計が必要。対応する既存の分母指標キーがなく、total-population や別健診の受診者数では代用しない。既存NDB指標は2023年度なので更新版の確保も必要。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "ndb-open-data",
+      "table": "hba1c-distribution",
+      "slice": {
+        "version": "9th",
+        "areaLevel": "prefecture",
+        "dims": {
+          "category": [
+            "6.5以上8.0未満",
+            "8.0以上8.4未満",
+            "8.4以上"
+          ],
+          "sex": [
+            "女",
+            "男"
+          ],
+          "test": [
+            "HbA1c"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2021"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "theme",
+      "status": "blocked",
+      "title": "特定健診受診者のHbA1c6.5%以上の割合",
+      "unit": "％",
+      "aggregation": {
+        "type": "divide",
+        "scale": 100,
+        "denominatorTime": "2021"
+      },
+      "reason": "health-checkups の検査・服薬状況に合うが、同母集団の分母キーが未登録で2021年度と既存2023年度の時点も異なる。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "target": "health-checkups"
+    },
+    {
+      "datasetId": "ndb-open-data",
+      "table": "glucose-medication-responses",
+      "slice": {
+        "version": "9th",
+        "areaLevel": "prefecture",
+        "dims": {
+          "category": [
+            "はい"
+          ],
+          "question": [
+            "血糖を下げる薬又はインスリン注射の使用"
+          ],
+          "sex": [
+            "女",
+            "男"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2021"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "rejected",
+      "title": "血糖を下げる薬又はインスリン注射を使っている人の人数",
+      "unit": "人",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "NDB第9回の2021年度・男女計の人数であり、受診者規模の比較になる。一般人口を分母にすると健診受診者における割合とは異なるため採らない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "ndb-open-data",
+      "table": "glucose-medication-responses",
+      "slice": {
+        "version": "9th",
+        "areaLevel": "prefecture",
+        "dims": {
+          "category": [
+            "はい"
+          ],
+          "question": [
+            "血糖を下げる薬又はインスリン注射の使用"
+          ],
+          "sex": [
+            "女",
+            "男"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2021"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "血糖を下げる薬又はインスリン注射を使っている人の割合",
+      "unit": "％",
+      "aggregation": {
+        "type": "divide",
+        "scale": 100,
+        "denominatorTime": "2021"
+      },
+      "reason": "分母は同じ表・2021年度・同性範囲の全検査階層（質問票は「はい＋いいえ」）の回答者合計が必要。対応する既存の分母指標キーがなく、total-population や別健診の受診者数では代用しない。既存NDB指標は2023年度なので更新版の確保も必要。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "ndb-open-data",
+      "table": "glucose-medication-responses",
+      "slice": {
+        "version": "9th",
+        "areaLevel": "prefecture",
+        "dims": {
+          "category": [
+            "はい"
+          ],
+          "question": [
+            "血糖を下げる薬又はインスリン注射の使用"
+          ],
+          "sex": [
+            "女",
+            "男"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2021"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "theme",
+      "status": "blocked",
+      "title": "血糖を下げる薬又はインスリン注射を使っている人の割合",
+      "unit": "％",
+      "aggregation": {
+        "type": "divide",
+        "scale": 100,
+        "denominatorTime": "2021"
+      },
+      "reason": "health-checkups の検査・服薬状況に合うが、同母集団の分母キーが未登録で2021年度と既存2023年度の時点も異なる。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "target": "health-checkups"
+    },
+    {
+      "datasetId": "ndb-open-data",
+      "table": "lipid-medication-responses",
+      "slice": {
+        "version": "9th",
+        "areaLevel": "prefecture",
+        "dims": {
+          "category": [
+            "はい"
+          ],
+          "question": [
+            "コレステロールや中性脂肪を下げる薬の使用"
+          ],
+          "sex": [
+            "女",
+            "男"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2021"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "rejected",
+      "title": "コレステロールや中性脂肪を下げる薬を使っている人の人数",
+      "unit": "人",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "NDB第9回の2021年度・男女計の人数であり、受診者規模の比較になる。一般人口を分母にすると健診受診者における割合とは異なるため採らない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "ndb-open-data",
+      "table": "lipid-medication-responses",
+      "slice": {
+        "version": "9th",
+        "areaLevel": "prefecture",
+        "dims": {
+          "category": [
+            "はい"
+          ],
+          "question": [
+            "コレステロールや中性脂肪を下げる薬の使用"
+          ],
+          "sex": [
+            "女",
+            "男"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2021"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "コレステロールや中性脂肪を下げる薬を使っている人の割合",
+      "unit": "％",
+      "aggregation": {
+        "type": "divide",
+        "scale": 100,
+        "denominatorTime": "2021"
+      },
+      "reason": "分母は同じ表・2021年度・同性範囲の全検査階層（質問票は「はい＋いいえ」）の回答者合計が必要。対応する既存の分母指標キーがなく、total-population や別健診の受診者数では代用しない。既存NDB指標は2023年度なので更新版の確保も必要。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "ndb-open-data",
+      "table": "lipid-medication-responses",
+      "slice": {
+        "version": "9th",
+        "areaLevel": "prefecture",
+        "dims": {
+          "category": [
+            "はい"
+          ],
+          "question": [
+            "コレステロールや中性脂肪を下げる薬の使用"
+          ],
+          "sex": [
+            "女",
+            "男"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2021"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "theme",
+      "status": "blocked",
+      "title": "コレステロールや中性脂肪を下げる薬を使っている人の割合",
+      "unit": "％",
+      "aggregation": {
+        "type": "divide",
+        "scale": 100,
+        "denominatorTime": "2021"
+      },
+      "reason": "health-checkups の検査・服薬状況に合うが、同母集団の分母キーが未登録で2021年度と既存2023年度の時点も異なる。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "target": "health-checkups"
+    },
+    {
+      "datasetId": "npa-traffic-accident-opendata",
+      "table": "accident-count-by-circumstances",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "prefecture",
+        "dims": {
+          "accidentType": [
+            "01",
+            "21",
+            "41",
+            "61"
+          ],
+          "daylight": [
+            "11",
+            "12",
+            "13",
+            "21",
+            "22",
+            "23"
+          ],
+          "weather": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "交通事故発生件数",
+      "unit": "件",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "2025年の警察庁一次個票からの総計は既存SSDS交通事故件数の更新・差し替え候補。二つの正規化表は同じ本票の別集計なので足し合わせず、既存系列との定義・総数一致を先に確認する。 機械照合: traffic-accident-count の名前「交通事故発生件数（総数）」・単位「件」・出典「社会・人口統計体系」・地域粒度 prefecture が同概念（人口補正は title/subtitle も照合）。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "duplicateOf": "traffic-accident-count"
+    },
+    {
+      "datasetId": "npa-traffic-accident-opendata",
+      "table": "accident-count-by-circumstances",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "prefecture",
+        "dims": {
+          "accidentType": [
+            "01",
+            "21",
+            "41",
+            "61"
+          ],
+          "daylight": [
+            "11",
+            "12",
+            "13",
+            "21",
+            "22",
+            "23"
+          ],
+          "weather": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "交通事故発生件数（人口10万人当たり）",
+      "unit": "件/10万人",
+      "aggregation": {
+        "type": "per-100k",
+        "denominatorTime": "2025"
+      },
+      "reason": "警察庁2025年一次個票による既存SSDS人口10万人当たり件数の差し替え候補。分母は2025年総人口で固定するが、ローカル人口観測値がなく未検算。 機械照合: traffic-accident-count-per-population の名前「交通事故発生件数（人口10万人当たり）」・単位「件」・出典「社会・人口統計体系」・地域粒度 prefecture が同概念（人口補正は title/subtitle も照合）。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "denominator": "total-population",
+      "duplicateOf": "traffic-accident-count-per-population"
+    },
+    {
+      "datasetId": "npa-traffic-accident-opendata",
+      "table": "accident-count-by-circumstances",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "municipality",
+        "dims": {
+          "accidentType": [
+            "01",
+            "21",
+            "41",
+            "61"
+          ],
+          "daylight": [
+            "11",
+            "12",
+            "13",
+            "21",
+            "22",
+            "23"
+          ],
+          "weather": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "municipality-ranking",
+      "status": "blocked",
+      "title": "交通事故発生件数",
+      "unit": "件",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "値のある市区町村は1823。2025年一次個票は既存SSDS市区町村系列の差し替え候補だが、自治体台帳との対応・無事故と欠測の識別を検証してから更新する。 機械照合: traffic-accident-count の名前「交通事故発生件数（総数）」・単位「件」・出典「社会・人口統計体系」・地域粒度 municipality が同概念（人口補正は title/subtitle も照合）。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "duplicateOf": "traffic-accident-count"
+    },
+    {
+      "datasetId": "npa-traffic-accident-opendata",
+      "table": "accident-count-by-circumstances",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "municipality",
+        "dims": {
+          "accidentType": [
+            "01",
+            "21",
+            "41",
+            "61"
+          ],
+          "daylight": [
+            "11",
+            "12",
+            "13",
+            "21",
+            "22",
+            "23"
+          ],
+          "weather": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "municipality-ranking",
+      "status": "blocked",
+      "title": "交通事故発生件数（人口10万人当たり）",
+      "unit": "件/10万人",
+      "aggregation": {
+        "type": "per-100k",
+        "denominatorTime": "2025"
+      },
+      "reason": "既存SSDS市区町村率の2025年一次資料への差し替え候補。自治体集合と2025年の自治体別総人口の観測値が必要。 機械照合: traffic-accident-count-per-population の名前「交通事故発生件数（人口10万人当たり）」・単位「件」・出典「社会・人口統計体系」・地域粒度 municipality が同概念（人口補正は title/subtitle も照合）。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "denominator": "total-population",
+      "duplicateOf": "traffic-accident-count-per-population"
+    },
+    {
+      "datasetId": "npa-traffic-accident-opendata",
+      "table": "accident-count-by-participants",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "prefecture",
+        "dims": {
+          "ageGroupA": [
+            "00",
+            "01",
+            "25",
+            "35",
+            "45",
+            "55",
+            "65",
+            "75"
+          ],
+          "participantA": [
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "07",
+            "11",
+            "12",
+            "13",
+            "14",
+            "17",
+            "21",
+            "22",
+            "23",
+            "24",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "41",
+            "42",
+            "43",
+            "51",
+            "52",
+            "59",
+            "61",
+            "75",
+            "76"
+          ],
+          "participantB": [
+            "00",
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "07",
+            "11",
+            "12",
+            "13",
+            "14",
+            "17",
+            "21",
+            "22",
+            "23",
+            "24",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "41",
+            "42",
+            "43",
+            "51",
+            "52",
+            "59",
+            "61",
+            "75",
+            "76"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "交通事故発生件数",
+      "unit": "件",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "2025年の警察庁一次個票からの総計は既存SSDS交通事故件数の更新・差し替え候補。二つの正規化表は同じ本票の別集計なので足し合わせず、既存系列との定義・総数一致を先に確認する。 機械照合: traffic-accident-count の名前「交通事故発生件数（総数）」・単位「件」・出典「社会・人口統計体系」・地域粒度 prefecture が同概念（人口補正は title/subtitle も照合）。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "duplicateOf": "traffic-accident-count"
+    },
+    {
+      "datasetId": "npa-traffic-accident-opendata",
+      "table": "accident-count-by-participants",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "prefecture",
+        "dims": {
+          "ageGroupA": [
+            "00",
+            "01",
+            "25",
+            "35",
+            "45",
+            "55",
+            "65",
+            "75"
+          ],
+          "participantA": [
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "07",
+            "11",
+            "12",
+            "13",
+            "14",
+            "17",
+            "21",
+            "22",
+            "23",
+            "24",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "41",
+            "42",
+            "43",
+            "51",
+            "52",
+            "59",
+            "61",
+            "75",
+            "76"
+          ],
+          "participantB": [
+            "00",
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "07",
+            "11",
+            "12",
+            "13",
+            "14",
+            "17",
+            "21",
+            "22",
+            "23",
+            "24",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "41",
+            "42",
+            "43",
+            "51",
+            "52",
+            "59",
+            "61",
+            "75",
+            "76"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "交通事故発生件数（人口10万人当たり）",
+      "unit": "件/10万人",
+      "aggregation": {
+        "type": "per-100k",
+        "denominatorTime": "2025"
+      },
+      "reason": "警察庁2025年一次個票による既存SSDS人口10万人当たり件数の差し替え候補。分母は2025年総人口で固定するが、ローカル人口観測値がなく未検算。 機械照合: traffic-accident-count-per-population の名前「交通事故発生件数（人口10万人当たり）」・単位「件」・出典「社会・人口統計体系」・地域粒度 prefecture が同概念（人口補正は title/subtitle も照合）。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "denominator": "total-population",
+      "duplicateOf": "traffic-accident-count-per-population"
+    },
+    {
+      "datasetId": "npa-traffic-accident-opendata",
+      "table": "accident-count-by-participants",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "municipality",
+        "dims": {
+          "ageGroupA": [
+            "00",
+            "01",
+            "25",
+            "35",
+            "45",
+            "55",
+            "65",
+            "75"
+          ],
+          "participantA": [
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "07",
+            "11",
+            "12",
+            "13",
+            "14",
+            "17",
+            "21",
+            "22",
+            "23",
+            "24",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "41",
+            "42",
+            "43",
+            "51",
+            "52",
+            "59",
+            "61",
+            "75",
+            "76"
+          ],
+          "participantB": [
+            "00",
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "07",
+            "11",
+            "12",
+            "13",
+            "14",
+            "17",
+            "21",
+            "22",
+            "23",
+            "24",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "41",
+            "42",
+            "43",
+            "51",
+            "52",
+            "59",
+            "61",
+            "75",
+            "76"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "municipality-ranking",
+      "status": "blocked",
+      "title": "交通事故発生件数",
+      "unit": "件",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "値のある市区町村は1823。2025年一次個票は既存SSDS市区町村系列の差し替え候補だが、自治体台帳との対応・無事故と欠測の識別を検証してから更新する。 機械照合: traffic-accident-count の名前「交通事故発生件数（総数）」・単位「件」・出典「社会・人口統計体系」・地域粒度 municipality が同概念（人口補正は title/subtitle も照合）。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "duplicateOf": "traffic-accident-count"
+    },
+    {
+      "datasetId": "npa-traffic-accident-opendata",
+      "table": "accident-count-by-participants",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "municipality",
+        "dims": {
+          "ageGroupA": [
+            "00",
+            "01",
+            "25",
+            "35",
+            "45",
+            "55",
+            "65",
+            "75"
+          ],
+          "participantA": [
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "07",
+            "11",
+            "12",
+            "13",
+            "14",
+            "17",
+            "21",
+            "22",
+            "23",
+            "24",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "41",
+            "42",
+            "43",
+            "51",
+            "52",
+            "59",
+            "61",
+            "75",
+            "76"
+          ],
+          "participantB": [
+            "00",
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "07",
+            "11",
+            "12",
+            "13",
+            "14",
+            "17",
+            "21",
+            "22",
+            "23",
+            "24",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "41",
+            "42",
+            "43",
+            "51",
+            "52",
+            "59",
+            "61",
+            "75",
+            "76"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "municipality-ranking",
+      "status": "blocked",
+      "title": "交通事故発生件数（人口10万人当たり）",
+      "unit": "件/10万人",
+      "aggregation": {
+        "type": "per-100k",
+        "denominatorTime": "2025"
+      },
+      "reason": "既存SSDS市区町村率の2025年一次資料への差し替え候補。自治体集合と2025年の自治体別総人口の観測値が必要。 機械照合: traffic-accident-count-per-population の名前「交通事故発生件数（人口10万人当たり）」・単位「件」・出典「社会・人口統計体系」・地域粒度 municipality が同概念（人口補正は title/subtitle も照合）。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "denominator": "total-population",
+      "duplicateOf": "traffic-accident-count-per-population"
+    },
+    {
+      "datasetId": "npa-traffic-accident-opendata",
+      "table": "accident-count-by-circumstances",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "prefecture",
+        "dims": {
+          "weather": [
+            "5"
+          ],
+          "daylight": [
+            "11",
+            "12",
+            "13",
+            "21",
+            "22",
+            "23"
+          ],
+          "accidentType": [
+            "01",
+            "21",
+            "41",
+            "61"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "天候コード5の交通事故発生件数（人口10万人当たり）",
+      "unit": "件/10万人",
+      "aggregation": {
+        "type": "per-100k",
+        "denominatorTime": "2025"
+      },
+      "reason": "天候コード5に絞る形は再現可能だが公式コード表が未保存で天候名を確定できない。2025年人口観測値も不足している。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "denominator": "total-population"
+    },
+    {
+      "datasetId": "npa-traffic-accident-opendata",
+      "table": "accident-count-by-participants",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "prefecture",
+        "dims": {
+          "ageGroupA": [
+            "75"
+          ],
+          "participantA": [
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "07",
+            "11",
+            "12",
+            "13",
+            "14",
+            "17",
+            "21",
+            "22",
+            "23",
+            "24",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "41",
+            "42",
+            "43",
+            "51",
+            "52",
+            "59",
+            "61",
+            "75",
+            "76"
+          ],
+          "participantB": [
+            "00",
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "07",
+            "11",
+            "12",
+            "13",
+            "14",
+            "17",
+            "21",
+            "22",
+            "23",
+            "24",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "41",
+            "42",
+            "43",
+            "51",
+            "52",
+            "59",
+            "61",
+            "75",
+            "76"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "当事者A年齢コード75の交通事故発生件数（人口10万人当たり）",
+      "unit": "件/10万人",
+      "aggregation": {
+        "type": "per-100k",
+        "denominatorTime": "2025"
+      },
+      "reason": "年齢コード75の公式定義を手元で確認できない。対象年齢人口を分母とするにはコード定義と既存の年齢人口キーとの対応が必要で、総人口補正の仮案を停止する。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit",
+      "denominator": "total-population"
+    },
+    {
+      "datasetId": "fdma-heatstroke-emergency-transports",
+      "table": "heatstroke-transports-daily",
+      "slice": {
+        "version": "2025-10-29",
+        "areaLevel": "prefecture",
+        "dims": {},
+        "time": {
+          "kind": "point",
+          "value": "2025-05-01"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "gis",
+      "status": "rejected",
+      "title": "地域集計表のGISレイヤー化",
+      "unit": "人",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "今回の正規化表は地域コード付き集計で、座標・道路区間形状・施設位置を保持していない。既存GISレイヤーに接続する入力と空間演算の系譜がなく、この表から新しいGIS分析を作らない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "mhlw-covid19-open-data",
+      "table": "newly-confirmed-cases-daily",
+      "slice": {
+        "version": "initial",
+        "areaLevel": "prefecture",
+        "dims": {},
+        "time": {
+          "kind": "point",
+          "value": "2020/1/16"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "gis",
+      "status": "rejected",
+      "title": "地域集計表のGISレイヤー化",
+      "unit": "人",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "今回の正規化表は地域コード付き集計で、座標・道路区間形状・施設位置を保持していない。既存GISレイヤーに接続する入力と空間演算の系譜がなく、この表から新しいGIS分析を作らない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "mhlw-medical-clinics",
+      "table": "clinic-count-by-sunday-closure",
+      "slice": {
+        "version": "2026-06-01",
+        "areaLevel": "prefecture",
+        "dims": {
+          "sundayRegularClosure": [
+            "",
+            "0",
+            "1"
+          ],
+          "sundayWeek1Closure": [
+            "",
+            "0",
+            "1"
+          ],
+          "sundayWeek2Closure": [
+            "",
+            "0",
+            "1"
+          ],
+          "sundayWeek3Closure": [
+            "",
+            "0",
+            "1"
+          ],
+          "sundayWeek4Closure": [
+            "",
+            "0",
+            "1"
+          ],
+          "sundayWeek5Closure": [
+            "",
+            "0",
+            "1"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2026-06-01"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "gis",
+      "status": "rejected",
+      "title": "地域集計表のGISレイヤー化",
+      "unit": "施設",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "今回の正規化表は地域コード付き集計で、座標・道路区間形状・施設位置を保持していない。既存GISレイヤーに接続する入力と空間演算の系譜がなく、この表から新しいGIS分析を作らない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "mhlw-medical-dental-clinics",
+      "table": "dental-clinic-count",
+      "slice": {
+        "version": "2026-06-01",
+        "areaLevel": "prefecture",
+        "dims": {},
+        "time": {
+          "kind": "point",
+          "value": "2026-06-01"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "gis",
+      "status": "rejected",
+      "title": "地域集計表のGISレイヤー化",
+      "unit": "施設",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "今回の正規化表は地域コード付き集計で、座標・道路区間形状・施設位置を保持していない。既存GISレイヤーに接続する入力と空間演算の系譜がなく、この表から新しいGIS分析を作らない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "mhlw-medical-hospitals",
+      "table": "hospital-count",
+      "slice": {
+        "version": "2026-06-01",
+        "areaLevel": "prefecture",
+        "dims": {},
+        "time": {
+          "kind": "point",
+          "value": "2026-06-01"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "gis",
+      "status": "rejected",
+      "title": "地域集計表のGISレイヤー化",
+      "unit": "施設",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "今回の正規化表は地域コード付き集計で、座標・道路区間形状・施設位置を保持していない。既存GISレイヤーに接続する入力と空間演算の系譜がなく、この表から新しいGIS分析を作らない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "mhlw-medical-maternity-homes",
+      "table": "maternity-home-count",
+      "slice": {
+        "version": "2026-06-01",
+        "areaLevel": "prefecture",
+        "dims": {},
+        "time": {
+          "kind": "point",
+          "value": "2026-06-01"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "gis",
+      "status": "rejected",
+      "title": "地域集計表のGISレイヤー化",
+      "unit": "施設",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "今回の正規化表は地域コード付き集計で、座標・道路区間形状・施設位置を保持していない。既存GISレイヤーに接続する入力と空間演算の系譜がなく、この表から新しいGIS分析を作らない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "mhlw-medical-pharmacies",
+      "table": "pharmacy-count-by-sunday-business",
+      "slice": {
+        "version": "2026-06-01",
+        "areaLevel": "prefecture",
+        "dims": {
+          "sundayBusiness": [
+            "",
+            "0",
+            "1"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2026-06-01"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "gis",
+      "status": "rejected",
+      "title": "地域集計表のGISレイヤー化",
+      "unit": "施設",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "今回の正規化表は地域コード付き集計で、座標・道路区間形状・施設位置を保持していない。既存GISレイヤーに接続する入力と空間演算の系譜がなく、この表から新しいGIS分析を作らない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "mlit-road-census-r3",
+      "table": "heavy-vehicle-share",
+      "slice": {
+        "version": "2023-06-30",
+        "areaLevel": "prefecture",
+        "dims": {
+          "coverage": [
+            "交通量推定不能区間を含まない"
+          ],
+          "roadType": [
+            "一般道路計"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2021"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "gis",
+      "status": "rejected",
+      "title": "地域集計表のGISレイヤー化",
+      "unit": "％",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "今回の正規化表は地域コード付き集計で、座標・道路区間形状・施設位置を保持していない。既存GISレイヤーに接続する入力と空間演算の系譜がなく、この表から新しいGIS分析を作らない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "ndb-open-data",
+      "table": "bmi-distribution",
+      "slice": {
+        "version": "9th",
+        "areaLevel": "prefecture",
+        "dims": {
+          "category": [
+            "18.5以上20.0未満",
+            "18.5未満",
+            "20.0以上25.0未満",
+            "25.0以上30.0未満",
+            "30.0以上35.0未満",
+            "35.0以上40.0未満",
+            "40.0以上"
+          ],
+          "sex": [
+            "女",
+            "男"
+          ],
+          "test": [
+            "BMI"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2021"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "gis",
+      "status": "rejected",
+      "title": "地域集計表のGISレイヤー化",
+      "unit": "人",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "今回の正規化表は地域コード付き集計で、座標・道路区間形状・施設位置を保持していない。既存GISレイヤーに接続する入力と空間演算の系譜がなく、この表から新しいGIS分析を作らない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "nier-gakuryoku-achievement",
+      "table": "junior-achievement",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "prefecture",
+        "dims": {
+          "grade": [
+            "中学3年"
+          ],
+          "subject": [
+            "国語",
+            "数学"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "gis",
+      "status": "rejected",
+      "title": "地域集計表のGISレイヤー化",
+      "unit": "％",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "今回の正規化表は地域コード付き集計で、座標・道路区間形状・施設位置を保持していない。既存GISレイヤーに接続する入力と空間演算の系譜がなく、この表から新しいGIS分析を作らない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "nier-gakuryoku-lifestyle",
+      "table": "junior-lifestyle-response-rates",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "prefecture",
+        "dims": {
+          "answer": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "その他",
+            "無回答"
+          ],
+          "grade": [
+            "中学3年"
+          ],
+          "question": [
+            "友達関係に満足していますか",
+            "学校に行くのは楽しいと思いますか",
+            "将来の夢や目標を持っていますか",
+            "自分には、よいところがあると思いますか"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "gis",
+      "status": "rejected",
+      "title": "地域集計表のGISレイヤー化",
+      "unit": "％",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "今回の正規化表は地域コード付き集計で、座標・道路区間形状・施設位置を保持していない。既存GISレイヤーに接続する入力と空間演算の系譜がなく、この表から新しいGIS分析を作らない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "npa-traffic-accident-opendata",
+      "table": "accident-count-by-circumstances",
+      "slice": {
+        "version": "2025",
+        "areaLevel": "prefecture",
+        "dims": {
+          "accidentType": [
+            "01",
+            "21",
+            "41",
+            "61"
+          ],
+          "daylight": [
+            "11",
+            "12",
+            "13",
+            "21",
+            "22",
+            "23"
+          ],
+          "weather": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2025"
+        },
+        "dimensionAggregation": "sum",
+        "timeAggregation": "none"
+      },
+      "channel": "gis",
+      "status": "rejected",
+      "title": "地域集計表のGISレイヤー化",
+      "unit": "件",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "今回の正規化表は地域コード付き集計で、座標・道路区間形状・施設位置を保持していない。既存GISレイヤーに接続する入力と空間演算の系譜がなく、この表から新しいGIS分析を作らない。",
+      "decidedAt": "2026-11-15",
+      "decidedBy": "codex / local normalized-table and metric-registry audit"
+    }
+  ]
 }

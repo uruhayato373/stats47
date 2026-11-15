@@ -941,11 +941,13 @@ export const DATASETS = [
       { field: "versions[].datasetId", to: "open-data.datasets", key: "datasets[].id" },
     ],
   }),
-  d("open-data.expansion", "data/open-data/expansion.json", "ledger", "data", "data", "正規化表から公開指標への対応 (段1は空)", {
+  d("open-data.expansion", "data/open-data/expansion.json", "ledger", "data", "data", "正規化表の展開先別 planned / rejected / blocked と再現可能な slice・重複判定", {
     schema: "config/schema/open-data.expansion.schema.json",
     refs: [
-      { field: "entries[].datasetId", to: "open-data.fetch-recipes", key: "recipes[].datasetId" },
-      { field: "entries[].metricKey", to: "registry:metrics" },
+      { field: "candidates[].datasetId", to: "open-data.fetch-recipes", key: "recipes[].datasetId" },
+      // metricKey は未作成の予定キー。既存キーとの衝突は専用 validator で拒否する。
+      { field: "candidates[].denominator", to: "registry:metrics" },
+      { field: "candidates[].duplicateOf", to: "registry:metrics" },
     ],
   }),
   d("open-data.prefecture-statistics", "data/open-data/prefecture-statistics/resources.json", "ledger", "data", "data", "都道府県が公式に公開する統計ポータル・ダッシュボード・年鑑のリンク (県名は持たず読み込み口が県のマスタで結ぶ)。読み込みは packages/data-configs/src/prefecture-statistics-catalog/index.ts", {

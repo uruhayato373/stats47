@@ -7,14 +7,17 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 import Ajv from "ajv";
 import recipeSchema from "../../../config/schema/open-data.fetch-recipes.schema.json";
 import snapshotSchema from "../../../config/schema/open-data.snapshots.schema.json";
 import expansionSchema from "../../../config/schema/open-data.expansion.schema.json";
-import type { OpenDataFetchRecipe, OpenDataSnapshot, OpenDataExpansion } from "../src/open-data-catalog";
+import type { OpenDataFetchRecipe, OpenDataSnapshot, OpenDataExpansion, OpenDataNormalizedTable } from "../src/open-data-catalog";
 import {
+  validateOpenDataExpansion,
+  evaluateExpansionCandidate,
   OPEN_DATA_SOURCES,
   OPEN_DATASETS,
   OPEN_DATA_SOURCE_KINDS,
@@ -236,10 +239,36 @@ for (const file of fs.readdirSync(snapshotsDir).filter((name) => name.endsWith("
   }
 }
 const expansion = readLedger<OpenDataExpansion>(path.join(root, datasetPath("open-data.expansion")), expansionSchema);
-for (const entry of expansion?.entries ?? []) {
-  const recipe = recipes.find((r) => r.datasetId === entry.datasetId);
-  if (!recipe?.normalize?.tables.some((t) => t.table === entry.table)) errors.push(`expansion:${entry.datasetId}: 正規化表がありません`);
-  if (!(entry.metricKey in METRICS_REGISTRY)) errors.push(`expansion:${entry.datasetId}: 未知の metricKey ${entry.metricKey}`);
+if (expansion) {
+  const metrics = Object.values(METRICS_REGISTRY);
+  const themeIds = new Set(fs.readdirSync(path.join(root, datasetDir("themes.catalogs"))).filter((f) => f.endsWith(".json")).map((f) => JSON.parse(fs.readFileSync(path.join(root, datasetDir("themes.catalogs"), f), "utf8")).key as string));
+  const areaTemplate = JSON.parse(fs.readFileSync(path.join(root, datasetPath("areas.databook-template")), "utf8")) as { sections: { sectionKey: string }[] };
+  // Include filenames too: a not-yet-registered definition must still reserve its key.
+  const existingMetricKeys = new Set([...Object.keys(METRICS_REGISTRY), ...fs.readdirSync(path.join(root, datasetDir("metrics.definitions"))).filter((f) => f.endsWith(".ts")).map((f) => f.slice(0, -3))]);
+  errors.push(...validateOpenDataExpansion(expansion, { recipes, metrics, existingMetricKeys, themeIds, areaIds: new Set(areaTemplate.sections.map((s) => s.sectionKey)) }));
+  const normalizedRoot = path.join(root, ".local/r2/open-data/normalized");
+  // CI without the R2 working copy checks contracts and recorded evidence only; never fetch it.
+  if (!fs.existsSync(normalizedRoot)) warns.push("expansion: ローカル正規化表なし。47県の再計算は未実施 (保存済み検証記録のみ検査)");
+  else {
+    const cache = new Map<string, { table: OpenDataNormalizedTable; sha256: string }>();
+    for (const candidate of expansion.candidates.filter((c) => c.status === "planned")) {
+      const file = path.join(normalizedRoot, candidate.datasetId, candidate.slice.version, `${candidate.table}.json`);
+      try {
+        let input = cache.get(file);
+        if (!input) {
+          const bytes = fs.readFileSync(file);
+          input = { table: JSON.parse(bytes.toString()) as OpenDataNormalizedTable, sha256: createHash("sha256").update(bytes).digest("hex") };
+          cache.set(file, input);
+        }
+        const result = evaluateExpansionCandidate(candidate, input.table);
+        const saved = candidate.verification;
+        if (!saved || saved.tableSha256 !== input.sha256 || saved.rowCount !== result.rowCount || saved.areaCount !== result.areaCount || Math.abs(saved.min - result.min) > 1e-9 || Math.abs(saved.max - result.max) > 1e-9) throw Error("検証記録と再計算結果が不一致");
+        if (candidate.channel === "prefecture-ranking") console.log(`expansion ${candidate.metricKey}: ${result.areaCount}県 / ${result.rowCount}行 / ${result.min.toFixed(4)}〜${result.max.toFixed(4)} ${candidate.unit}`);
+      } catch (error) {
+        errors.push(`expansion:${candidate.datasetId}/${candidate.table}: ${error instanceof Error ? error.message : String(error)}`);
+      }
+    }
+  }
 }
 
 // ── 結果 ────────────────────────────────────────────────────────────────────

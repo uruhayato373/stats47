@@ -22,8 +22,8 @@ describe("open data archive contracts", () => {
       rows: [{ ...normalizeOpenDataArea("prefecture", "01"), time: "2026", dims: {}, value: 1, unit: "施設" }],
       provenance: { manifestKey: "key", manifestSha256: "sha", recipeSha256: "sha" },
     };
-    const expansion: OpenDataExpansion = { entries: [] };
+    const expansion: OpenDataExpansion = { schemaVersion: 1, candidates: [] };
     expect(table.rows[0].value).toBe(1);
-    expect(expansion.entries).toEqual([]);
+    expect(expansion.candidates).toEqual([]);
   });
 });
