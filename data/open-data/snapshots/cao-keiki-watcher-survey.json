@@ -1,0 +1,42 @@
+{
+  "datasetId": "cao-keiki-watcher-survey",
+  "versions": [
+    {
+      "schemaVersion": 1,
+      "datasetId": "cao-keiki-watcher-survey",
+      "version": "2026-11-10",
+      "sha256": "47fbf6d970ff2f719eef12b23e80f322d8a23d2bdc273f7bd465d8ef976d04e2",
+      "recipeSha256": "c7f1e6a123aa3ee7d0d8b4fa710efb1e3f1892ea630162b8cecf2fb4de5e813b",
+      "retrievedAt": "2026-11-15T00:24:39.413Z",
+      "license": {
+        "name": "公共データ利用規約 (PDL1.0)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.cao.go.jp/notice/rule.html"
+      },
+      "files": [
+        {
+          "key": "open-data/raw/cao-keiki-watcher-survey/2026-11-10/0001.csv",
+          "url": "https://www5.cao.go.jp/keizai3/2026/1110watcher/watcher4.csv",
+          "sha256": "f51b139c3cfedc7acc2c04f4f777d02d2db85d320f698df7bc1f47364f0579b6",
+          "bytes": 205387,
+          "contentType": "text/csv",
+          "retrievedAt": "2026-11-15T00:24:38.930Z"
+        },
+        {
+          "key": "open-data/raw/cao-keiki-watcher-survey/2026-11-10/0002.csv",
+          "url": "https://www5.cao.go.jp/keizai3/2026/1110watcher/watcher5.csv",
+          "sha256": "fa6f365a0ed2640b2b3057a6af4f6d6ab902df8d130332c04fe29080fc5b5d38",
+          "bytes": 206616,
+          "contentType": "text/csv",
+          "retrievedAt": "2026-11-15T00:24:39.413Z"
+        }
+      ],
+      "manifestKey": "open-data/raw/cao-keiki-watcher-survey/2026-11-10/manifest.json",
+      "manifestSha256": "054eab27f8cc394ef4201c84d319c8dbe00e5da6b51181ddca8163fcbce53cf3",
+      "bytes": 412003,
+      "status": "archived"
+    }
+  ]
+}
