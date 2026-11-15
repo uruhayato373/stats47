@@ -11,9 +11,23 @@
  *       (旧 { decision } 形式は deprecated のため 2026-07-03 に現行スキーマへ更新)
  */
 
+/**
+ * rm -rf の対象がすべて Claude の一時領域 (セッションの scratchpad・タスク出力) の配下なら true。
+ * それ以外の絶対パスと ~ は従来どおり止める。".." を含む対象は通さない (CI-TOOLING-FOLLOWUP-02 の案 a)。
+ */
+const CLAUDE_TEMP_ROOT = /^\/(?:private\/)?tmp\/claude-[^/\s]+\/\S+$/;
+function rmTargetsAllInClaudeTemp(command) {
+  const segments = command.split(/&&|\|\||[;|\n]/).filter((s) => /\brm\s+-rf\s/.test(s));
+  return segments.every((segment) => {
+    const targets = segment.replace(/^[\s\S]*?\brm\s+-rf\s+/, "").trim().split(/\s+/).filter(Boolean);
+    const absolute = targets.filter((t) => t.startsWith("/") || t.startsWith("~"));
+    return absolute.every((t) => CLAUDE_TEMP_ROOT.test(t) && !t.split("/").includes(".."));
+  });
+}
+
 const DANGEROUS_PATTERNS = [
   // データ損失
-  { pattern: /rm\s+-rf\s+[\/~]/, reason: "rm -rf でルートまたはホームを削除しようとしています" },
+  { pattern: /rm\s+-rf\s+[\/~]/, allow: rmTargetsAllInClaudeTemp, reason: "rm -rf でルートまたはホームを削除しようとしています" },
   { pattern: /git\s+push\s+--force(?!-with-lease)/, reason: "git push --force はリモート履歴を破壊します (--force-with-lease は許可)" },
   { pattern: /git\s+reset\s+--hard/, reason: "git reset --hard は未コミット変更を破棄します" },
   { pattern: /DROP\s+TABLE/i, reason: "DROP TABLE はデータを完全に削除します" },
@@ -83,8 +97,8 @@ async function main() {
     const { tool_input } = JSON.parse(input);
     const command = tool_input?.command || "";
 
-    for (const { pattern, reason } of DANGEROUS_PATTERNS) {
-      if (pattern.test(command)) {
+    for (const { pattern, allow, reason } of DANGEROUS_PATTERNS) {
+      if (pattern.test(command) && !allow?.(command)) {
         console.log(
           JSON.stringify({
             hookSpecificOutput: {

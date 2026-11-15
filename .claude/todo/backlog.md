@@ -120,7 +120,7 @@ updated: 2026-11-01
 - **基準 (本番・2026-11-14・`data/themes/ui-weight/2026-11-14.json`)**: 218 ページ中 135 ページに違反。表の 1 列目が読めない 56 テーマ (スマホ幅)・最初の画面に数値が少ない 16 テーマ (主に全国版)・値の無いタイル 3 テーマ。採点表は管理画面 `/quality/theme-viewpoints`。
 - **済み (段 1)**: 全ルート込みの集計、品質基準の計測、品質の監査の復旧 (記録が 1 MiB を超えて書けなくなっていたのを分割して書く形に直した)、実験の判定の整理 (判定待ち 55 → 10。残りは期日が 12 月初めの構成変更)、採点表。済み (段 2 の一部): 数値タイルのスマホ幅 2 列化、白書の論点の節の撤去、空間分析の入口のリンク 1 行化。
 - **次**:
-  1. 段 2 共通の UI の残り: 本番に出た後に本番で全 56 テーマを測り直して基準と比べる (`measure-theme-weight.mjs --out data/themes/ui-weight/<日付>.json`)、市区町村のテーマと地域分析のページの表示確認、骨組みの契約テスト。値の単位・値の無いタイル・読めない表・県間移動の表は済み。手元の全 56 テーマの計測 (2026-11-14) で、違反のあるページは 218 中 135 → 50 (うち 22 は出せる数値が無い全国版 = データの穴)。その後に数字の折り返しと検算の表を直し、該当テーマの測り直しで数字の折り返し・横のはみ出し・値の無いタイルは 0。残るのは「最初の画面に数値が少ない」6 テーマ (高齢化・地震・地理的アクセス・地方財政・スポーツ・津波の全国版か県別。段 4 で数値タイルのある章を先頭にする) と、土砂災害の県別の集計表で県名のボタンが 2 行になる 1〜2 行。**見出しの直下に主指標の値を並べる「要点のタイル」は入れない (2026-11-14 オーナー決定)**。同じ値が本文に 2 回出るため (2026-10-30 に「主なデータ」の節を外したのと同じ理由)。最初の画面に数値が入らないテーマは、段 4 の指標の見直しで数値タイルのある章を先頭にする。`THEME-DASHBOARD-TEXT-TRIM-01`・`THEME-SINGLE-CARD-BUNDLE-01` をこの中で進める。
+  1. 段 2 共通の UI の残り: 市区町村のテーマと地域分析のページの表示確認、骨組みの契約テスト。**本番の測り直し (2026-11-15・`data/themes/ui-weight/2026-11-15.json`)**: 違反のあるページは 218 中 135 → 34。表の 1 列目が読めない 114 → 2 (土砂災害の県別)・値の無いタイル 6 → 0・200 以外 0 (計測中に 1 ページが一時的に 503、測り直して 200 の値に差し替えた)。残るのは、出せる数値が無い全国版 11 テーマ 22 ページ (気候・物価・地震・環境・健診・地価・土砂災害・自治体のデジタル化・職業別の賃金・エネルギー・津波) と、最初の画面の数値が 1 つの全国版 5 テーマ 10 ページ (高齢化・貨物と物流・地理的アクセス・地方財政・スポーツ)。ページの高さはスマホ幅で全国版 −4.5%・県別 −4.6%。値の単位・値の無いタイル・読めない表・県間移動の表は済み。手元の全 56 テーマの計測 (2026-11-14) で、違反のあるページは 218 中 135 → 50 (うち 22 は出せる数値が無い全国版 = データの穴)。その後に数字の折り返しと検算の表を直し、該当テーマの測り直しで数字の折り返し・横のはみ出し・値の無いタイルは 0。残るのは「最初の画面に数値が少ない」6 テーマ (高齢化・地震・地理的アクセス・地方財政・スポーツ・津波の全国版か県別。段 4 で数値タイルのある章を先頭にする) と、土砂災害の県別の集計表で県名のボタンが 2 行になる 1〜2 行。**見出しの直下に主指標の値を並べる「要点のタイル」は入れない (2026-11-14 オーナー決定)**。同じ値が本文に 2 回出るため (2026-10-30 に「主なデータ」の節を外したのと同じ理由)。最初の画面に数値が入らないテーマは、段 4 の指標の見直しで数値タイルのある章を先頭にする。`THEME-DASHBOARD-TEXT-TRIM-01`・`THEME-SINGLE-CARD-BUNDLE-01` をこの中で進める。
   2. 段 3 検索の題と説明文: **題はいま変えない**。題・説明文は 2026-11-12 21:54 の本番デプロイで全テーマ共通の仕組みに統一済み (`THEME-SEO-UNIFY-01`) で、同カードが 4 週の測定中は題を変えないと決めている。対象 13 テーマの低いクリック率は変更前 (〜11-05) の数字。この変更を 13 テーマぶん、全ルート込みの実験 `THEME-COPY-20261112-<テーマ>` として登録した (d28 = 12-10、d56 = 2027-01-07)。12-10 に暫定の結果を見て、中央値に届かないテーマだけ題の語を直す。
      - 検索語の所見 (GSC 2026-10-09〜11-05・`gsc-query.mjs --dims query --filter 'page*=/<テーマ>'`): 県別ページに来るのは「県名 + 具体的な語」(「新潟県 気候」「北海道 物価」「高知県 gdp」「鳥取県 高齢化率」「財政力指数 新潟県」「広島県 土砂災害警戒区域」「長野県 森林面積」)。8〜10 位に出て押されていない。題のテーマ名が検索語と違うテーマがある (地域経済 → 検索語は「gdp」、物価・消費 → 「物価」、自然環境 → 「森林面積」)。題を直すときは、テーマ名でなく検索語に出る語を先頭に置く。
   3. 段 4 指標の見直し: Workflow で 1 回 5 テーマ (調査 `theme-researcher` → 設計 `theme-designer`。agent はファイルを書かない)。案は機械で検査し (実在しない指標・重複・別のテーマの主指標・出典の URL・調査の紐付け・`validate:catalog`・カタログのテスト)、通ったものを `apply-design.ts --approved` で適用して、提案文書 (`data/themes/reviews/2026-11-14-theme-<key>.md`・`implemented-pending-release`) を残す (2026-11-14 オーナー指示: 提案は基本的に承認、出し直しは設計し直して自動で承認)。**済み (38 テーマ)**: 測定中の実験が無いテーマを組み直し、登録済みの指標 87 件を副指標として載せた。手元の計測で違反のあるページは 146 中 87 → 22 (16 は全国の値が無い全国版、6 は全国版で最初の画面の数値が 1 つ: 貨物と物流・地理的アクセス・スポーツ)。県別・スマホ幅の最初の画面の数値は 24 テーマで増えた。**残り**: 実験のある 17 テーマは提案文書だけを作り、カタログは変えていない。実装は実験の判定の後で、年間の予定の `THEME-PAGE-REVIEW-HELD-01` (期日 12-10) が持つ。「食卓と家計の支出」は 189 指標を表と数値タイルで手作りしたテーマなので、機械の組み直しの対象から外した。公開日に、組み直したテーマの実験を `metricScope: all-routes` で登録する。費用の実績は 1 回 (agent 10 体) で約 107〜120 万トークン。
@@ -665,10 +665,11 @@ updated: 2026-11-01
 - **完了の判定**: 新しい問いが、人の指示なしで下書きと審査まで進み、`published: false` で止まる。M01 の失敗を再現した入力で、書く前に止まる。
 
 ### [H01-VACANT-ARTICLE-PUBLISH-01] H01 と M01 の記事を公開し、図の台帳と X の下書きを進める
-タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run issues:figures] [起票:2026-11-06] [領域:サイト] [待ち:承認]
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run issues:figures] [起票:2026-11-06] [領域:サイト]
 
 - **起点**: 記事 `vacant-houses-population-decline` と `manufacturing-strength-factory-size` は `contents/blog` に `published: false` で入っている。背景画像は 2026-11-06 に Codex で生成して取り込み済み。M01 は既存記事 `manufacturing-productivity` の更新をやめて新しい記事にした (既存記事は図データの欠落など過去の負債を直さないと再公開できない)。
-- **次**: ① オーナーが下書き全文を確認する ② `published: true` にして develop へ push する ③ `npm run content:sync -- --from-r2` のあと、`figures.json` の `slug` を `page` へ置き換える ④ X の下書き 1195・1196 をオーナーの承認へ回す。
+- **済み (2026-11-15)**: 2 本は本番で公開済み (HTTP 200)。図の台帳 `data/content/figures.json` の 8 行の行き先を `slug` から公開ページ (`blog:<slug>`・published) へ置き換えた。
+- **次**: X の下書き 1195・1196 はオーナー承認済み (2026-11-15) だが、画像が未作成で管理画面の段階は「画像準備待ち」。図 `M01-gap-steps-bars`・`H01-vacancy-rate-trend` から X 用の画像を作り、`assets` に記録してから予約へ回す。`H01-vacancy-rate-trend` の行き先 `municipality-ranking:vacant-housing-ratio` (planned) は、ページに図を置くかを決める。
 - **完了条件**: 2 本が本番で公開され、`issues:figures` の記事の行が消え、X の投稿の状態が台帳と一致している。
 
 ### [NOTE-PLAYWRIGHT-DIALOG-CRASH-01] note 公開中の Playwright 起動スクリプトがダイアログ処理の競合でブラウザごと落ちる
@@ -1268,6 +1269,51 @@ updated: 2026-11-01
 - **次**: 判断の後、前処理に取得失敗の許容を足し、2 テストに固定データの有無の判定を入れる (約 1 時間)。Build Check の R2 読み取り件数と所要の測定は未着手。
 - **完了条件**: 公開 R2 が不調でも、関係の無い PR の必須チェックが落ちない。
 
+### [QUALITY-SUITE-WEEKLY-RED-01] 週次フル品質検査 (main) が 3 週続けて失敗している
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-14] [領域:サイト]
+
+- **観測 (2026-11-14)**: `quality-suite-weekly.yml` の main の run が 10-30 (`41122877579`)・11-06 (`42295351706`)・11-13 (`43513853562`) の 3 回とも failure (Issue #1202)。11-13 の run で落ちた job は 4 つ。① Full unit tests and coverage: 2995 件中 2 件が `Test timed out in 10000ms` (`population-profile-ui.test.tsx` の「全47県・3男女・21年齢の県間in/out…」、`bridge-inspection-age-ui.test.tsx` の「全国→全47県→全国で7帯…」) ② Full web build and E2E: 10 件 (`blog-detail.spec.ts` 4 件・`blog-list.spec.ts` 3 件・`comparison.spec.ts:45`・`header-navigation.spec.ts:41`・`:95`) が `element(s) not found` / `toBeVisible() failed` ③ Theme quality audit: exit code 1 (落ちた検査の行は未特定) ④ OGP image audit: `Fatal: R2 fetch failed: …/app/blog/gloves-consumption-expenditure-prefecture-gap/article.md`。原因は未調査で、10-30・11-06 の run が同じ job・同じテストで落ちたかも未確認。
+- **再現**: `gh run view 43513853562 --log-failed`。手元では `npm run test --workspace apps/web -- population-profile-ui bridge-inspection-age-ui`。
+- **次**: ① 3 回の run の失敗 job とテスト名を並べ、毎回落ちるものと 1 回だけのものを分ける ② 毎回落ちるものから、job ごとに原因を実証して直す (公開 R2 の取得失敗が絡むものは `CI-LIVE-R2-TEST-FLAKE-01` と重なるかを先に確かめる) ③ 落ちた E2E の artifact でサーバーの例外が読めるかを確かめる (`E2E-FAILURE-EVIDENCE-01` の残り)。
+- **完了条件**: main の `quality-suite-weekly` が 1 回 success になり、Issue #1202 が自動で閉じる。
+
+### [WEEKLY-COLLECT-NODE20-FAIL-01] 週次の取得で GSC 画面の取得とサイト内リンク監査がスクリプトの例外で落ちる
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-14] [領域:管理]
+
+- **観測 (2026-11-14)**: `npm run weekly:collect` の 2 か所が、ログインと無関係の例外で落ちた。① 認証付き計測の GSC: `{"source":"gsc","status":"failed","step":"bootstrap","message":"Node.js v20.19.0"}` (12:31 と取り直しの 13:44 の 2 回とも。`~/Library/Logs/stats47/measurement-collect-local.log`)。message には例外の末尾の行しか残っておらず、例外の本体は読めない。② 週次監査の internal-links: `Error [ERR_REQUIRE_CYCLE_MODULE]: Cannot require() ES Module …/stats47-measurement/config/datasets.mjs in a cycle. (from …/.claude/scripts/lib/prefectures.cjs)` (`.local/weekly-audits/2026-11-14/internal-links.log`)。対話のシェルの Node は v22.23.3、取得の専用 clone で動いた Node は v20.19.0。同じ日の `npm run measurement:status` は gsc を「切れている (認証 cookie が無い)」と表示し、復旧に `node .claude/scripts/google-admin/cli.mjs login` を示している。GSC の失敗が例外なのかログイン切れなのかは、例外の本体が残っていないので切り分けられていない。
+- **[仮説]** 2 件とも、専用 clone が Node v20 で動き、CJS から `config/datasets.mjs` を require する経路が v20 で通らない。検証コマンド: `cd ~/stats47-measurement && node -v && node -e "require('./.claude/scripts/lib/prefectures.cjs')"` を v20 と v22 で実行して比べる。検証期日: 2026-11-21 (次の週次の取得の前)。v22 で通り v20 で落ちれば仮説を支持、両方で落ちれば循環 import そのものを直す。
+- **影響**: GSC の除外理由の内訳はその時点の書き出しなので、W46 の土曜の分は後から取り直せない。サイト内リンク監査は 132 ページを走査した時点の結果しか無い。
+- **次**: ① 上の検証 ② 取得の失敗時に例外の本体 (末尾の行でなく最初の行) を `message` に残す ③ 専用 clone の Node の版を対話のシェルと揃えるか、require の経路を直す。
+- **完了条件**: `npm run weekly:collect` で GSC の取得元が pass になり、internal-links が例外なしで走り切る。
+
+### [REVIEW-CADENCE-HANDOFF-PARSE-01] 週次レビューの申し送りの検査が、行き先の括弧の中の「、」で文を切る
+タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/management/__tests__/] [起票:2026-11-14] [領域:管理]
+
+- **観測 (2026-11-14)**: 2026-W45 のレビューを書いたとき、`check-review-cadence.mjs` が申し送り 3 件を「行き先不明」と判定した。「→ 振り分け: 見送り (理由…、…)」のように括弧の中に「、」があると、後半を別の行き先として読んで不正にする。レビュー側の書き方を変えて通したので、検査は直っていない。
+- **次**: 3 件の元の書き方を fixture にしたテストを足し (直す前に落ちることを確かめる)、括弧の中では区切らないようにする。
+- **完了条件**: 括弧の中に「、」を含む「見送り (理由)」が 1 つの行き先として通り、テストが固定している。
+
+### [EXP-011-MONTHLY-MISMATCH-01] KDP セレクトの実験 EXP-011 が running なのに、月次計画は「今月やらないこと」に挙げている
+タグ: [収益化] [種類:意思決定] [実行:対話] [待ち:判断] [起票:2026-11-14] [領域:商品]
+
+- **観測 (2026-11-14)**: 実験の台帳 (experiments.json) では EXP-011 が running (2026-11-04 開始)。`.claude/todo/monthly.md` 111 行は「KDP セレクト (EXP-011) と KDP の新規公開」を、販売数・KENP が台帳に入るまで判断できないものとして今月やらないことに挙げている (`KDP-LEDGER-AUTO-01`)。
+- **選択肢**: (a) 実験を続け、月次計画の行を「EXP-011 は観測だけ続ける」に直す / (b) 実験を止め、台帳を paused にする。
+- **完了条件**: 台帳と月次計画が同じ状態を指している。
+
+### [GSC-COVERAGE-TOTALS-DUP-ROW-01] GSC カバレッジ履歴の W45 行が W44 行と全列同じ
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-14] [領域:サイト]
+
+- **観測 (2026-11-14)**: `data/gsc/coverage-totals-history.csv` の `2026-W45,2026-11-08` の行が、`2026-W44,2026-10-31` の行と 10 列すべて同じ値 (404 が 12653、登録済み 7069 など)。11-08 の認証付き取得が新しい書き出しを読んだのか、前回の書き出しを別の週の名前で写したのかは未確認。同じ値のまま前週差を出すと「変化なし」と読める。
+- **次**: 11-08 の取得の入力 (`data/gsc/coverage-drilldown/` の当日の書き出しの日付と、履歴へ行を足すスクリプトの週の決め方) を読み、独立した観測かを確かめる。写しなら、書き出しの日付が前の行と同じときは行を足さないようにする。
+- **完了条件**: W45 の行が独立した観測と確認できるか、写しの行を足さない検査が入っている。
+
+### [ADSENSE-LATEST-PERIOD-01] AdSense の週次要約に確定 7 日の期間の日付が無い
+タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-11-14] [領域:サイト]
+
+- **観測 (2026-11-14)**: `data/adsense/LATEST.md` の確定 7 日の節に開始日・終了日が無く、週次 snapshot (`data/nsm/weekly-snapshots/`) の `ranges.adsense` も null。週次レビューが AdSense の金額をどの 7 日のものか示せない。
+- **次**: 取得スクリプトが使った期間を LATEST.md と snapshot の `ranges.adsense` に書く。
+- **完了条件**: 次の週次 snapshot で `ranges.adsense` に開始日と終了日が入っている。
+
 ### [BLOG-PUBLIC-REVIEW-MD-CLEANUP-01] 公開 R2 に残る過去記事の review.md (審査結果) を消す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-29] [領域:サイト]
 
@@ -1777,9 +1823,12 @@ updated: 2026-11-01
 - **完了条件**: 12 本それぞれに開始日・面・位置・4 週の表示/クリック/成約 (または到達率)・続行/停止が記録され、絞った構成が `02_収益化戦略.md` §3 と `improvements.md` へ渡っている。12-31 の `PV-PLAN-REVIEW-2026Q4-01` で見直す。
 
 ### [NOTE-CIRCULATION-LINK-FIX-01] note 公開記事のリンク切れ 5 件と導線の欠けを直す
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-18] [領域:SNS] [待ち:承認]
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-18] [領域:SNS] [待ち:ログイン]
 
 - **事象**: note 回遊の週次監査 (`npm run weekly:audits -- --only note-circulation`) でリンク切れ (`broken_site_link`)・http リンク・リダイレクト・無料部分のマガジン導線の欠け (`missing_magazine_link_in_free_body`)・カード前後の余分な空段落 (47記事・175件、`data/note/card-visibility-latest.json`) が出ている。明細は `data/note/evidence/note-circulation-audit-2026-10-30.json`。
+- **済み (2026-11-15・オーナー承認)**: 置換表の切れたリンクは公開本文ですべて置換済み (11-15 の監査で broken_site_link 0 件、10-30 は 4 件)。`12-fiscal-peer-comparison` の http リンクを https へ直した。`update-published-navigation.mjs` にフッターを足さずリンクだけ直す `--repairs-only` を足した (テスト付き)。
+- **残り (note の 403 が解けてから)**: 次の 7 件を `node .claude/scripts/note/update-published-navigation.mjs --slug <key> --repair-redirects --repairs-only --commit` で直す: `d-kakei-spending-personality` (中華麺を外食のラーメン `ramen-dining-consumption-expenditure` へ。記事台帳に積み済み)・`13-fiscal-peer-no-code` (http)・`c-engel-food-gap`・`c-kita-kanto-fiscal`・`c-tokyo-vs-osaka-fiscal`・`d-education-income-gap`・`recovered-n03844512d58a`。後ろの 5 件はカード画像の検証ガード (`Verified source image bytes changed`) で PUT 前に止まった。[仮説] `ogp.inventory` の `link-card-rollout.json` の画像ハッシュが古い。検証: 同じコマンドをもう一度実行し、ガードの出力にある期待と実際の SHA を比べる。
+- **判断**: `d-kakei-spending-personality` の `frozen-gyoza` は置換先の `gyoza-frozen-consumption-expenditure` の定義が「冷凍品を除く」で意味が逆。冷凍ぎょうざの指標は無いので、リンクを外すか文を直すかを決める (リンクを外す機能はスクリプトに無い)。
 - **置換案 (2026-11-01・オーナー確認待ち。置換先は 11-01 に本番で HTTP 200 を確認)**:
   | 記事 | 切れたリンク → 置換案 | 注意 |
   |---|---|---|
@@ -2114,10 +2163,10 @@ updated: 2026-11-01
 - **完了条件**: 6 図が 5 点以上の推移か数値タイルになり、validateChartTemporalFit が `MIN_TREND_YEARS` 未満を warn し、`npm run preflight:pr` と `npm run validate:catalog --workspace=@stats47/data-configs` が通る。
 
 ### [CI-TOOLING-FOLLOWUP-02] CI と検査の道具に残る穴 (第 3 波の実行で見つけた分)
-タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-11-14] [待ち:承認] [待ち:判断]
+タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-11-14] [待ち:判断]
 
 - **済み (2026-11-14・4d4f27027)**: 1 (check-runtime-budget.test.cjs を PR の CI に配線)、2 (check-*.cjs 28 本と preflight-commit.mjs が CLAUDE_PROJECT_DIR をルートにしない。fixture 用の上書きは STATS47_SCAN_ROOT)、3 (audit-seo-meta-facts.ts の --fail-on-new は R2 の取得の失敗で終了コード 1。404 は通す)、5 (stat-tile-grid-owns-columns は StatTileGrid の中のタイルを数えない)、7 (verdict の語彙を Schema から引く。--set は語彙外の --lifecycle / --editorial を書かない) を、直す前に落ちるテスト付きで直した。4 は workflow のコメントの実測値を現状 (3 ファイル 141 test・run 43368836421 で 194 秒) に直した。
-- **残り (承認)**: `.claude/hooks/pre-bash-safety.js` の `/rm\s+-rf\s+[\/~]/` は、絶対パスで始まる rm -rf をすべて「ルートまたはホームを削除しようとしています」と止める。Bash の拒否条件を緩める変更なので、オーナーが承認してから直す。選択肢は 2 つある。(a) セッションの scratchpad と OS の一時ディレクトリ (`/private/tmp/claude-*`・`os.tmpdir()`) の配下を名指しした場合だけ通す。(b) 対象が `/`・`~`・`$HOME` とその直下 1 階層のときだけ止める。推奨は (a) で、根拠は、通す範囲が一時領域に限られ、リポジトリやホームの中の絶対パスは今までどおり止まること。直すときは `.claude/scripts/lib/__tests__/pre-bash-safety-release.test.cjs` に、scratchpad 配下は通り `rm -rf /`・`rm -rf ~`・`rm -rf /Users/<名前>` は止まるテストを先に足す。承認までの回避策は、対象の親ディレクトリへ cd してから相対パスで `rm -r` すること。
+- **済み (2026-11-15・オーナー承認)**: `pre-bash-safety.js` の rm -rf の止めを案 (a) で直した。対象がすべて Claude の一時領域 (`/private/tmp/claude-*`・`/tmp/claude-*`) の配下なら通し、`..` を含む対象・ルート・ホーム・その他の絶対パスは従来どおり止める。`pre-bash-safety-release.test.cjs` に直す前に落ちるテストを足した。
 - **残り (判断)**: Scoped Workflow Contract Gate (`npm run test:scoped-workflow-contracts`) は 2026-09-18 の 1 ファイル 69 test・76 秒から、3 ファイル 141 test・194 秒 (run 43368836421) に増えた。手元で 1 ファイルずつ測ると ranking-scoped-workflow 106 秒 (86 test)・data-refresh-scoped-workflow 64 秒 (49 test)・r2-overlay-server 1 秒未満で、増加は対象のテストが増えた分と対応する。選択肢は 3 つある。(a) 差分連動の step (workflow とテスト自身が変わった PR だけ走る) なので現状を受け入れる。(b) `.claude/config/check-runtime-budgets.json` の ciSteps に予算を登録して、これ以上の増加を止める。ただし ciSteps は「常に走る 4 step の合計 100 秒以下」をテストが固定しているので、差分連動の step を別枠にする変更が要る。(c) ranking-scoped-workflow.test.mjs を 2 ファイルに分け、node --test のファイル並列で壁時計を縮める。推奨は (b) で、根拠は、所要時間が 2.5 倍になるまで誰も気づかなかった原因が、この step に予算の検査が無いことにあるため。
 - **完了条件**: 6 は、scratchpad 配下の rm -rf が通り、ルートとホームの削除は止まることを固定するテストがある。4 は、選んだ案がこのカードに書いてあり、(b) か (c) を選んだ場合は、直す前に落ちて直した後に通る検査がある。
 

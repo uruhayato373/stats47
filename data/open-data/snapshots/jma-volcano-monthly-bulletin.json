@@ -1,0 +1,858 @@
+{
+  "datasetId": "jma-volcano-monthly-bulletin",
+  "versions": [
+    {
+      "schemaVersion": 1,
+      "datasetId": "jma-volcano-monthly-bulletin",
+      "version": "2008-2016",
+      "sha256": "94b6215b2be75e6ca01f03aa2b6911f365c09c9ea20f213ba5cc852a0f9793b4",
+      "recipeSha256": "c8f2b388914fff9e0974eed4db12203073a0f48c8a8acb1d516292035d16145e",
+      "retrievedAt": "2026-11-15T00:38:27.438Z",
+      "license": {
+        "name": "気象庁ホームページ利用規約 (公共データ利用規約 第1.0版。火山月報ページ自体に条件の記載なし)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.jma.go.jp/jma/kishou/info/coment.html"
+      },
+      "files": [
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0001.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En200801.zip",
+          "sha256": "94aa1743a61c3f36991d88cd17aa94f40f0cd403b3a124b2a6968cbbf1aee517",
+          "bytes": 3981,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:36:44.731Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0002.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En200802.zip",
+          "sha256": "ce0534adffbb06381594a7e792d2ee1fe1f52e184dba488d580a3d25732c341b",
+          "bytes": 3733,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:36:45.437Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0003.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En200803.zip",
+          "sha256": "131f82e7498b578d4a9fb40b41024acdd1ccf54ab8e643049add0d3e43a5aabc",
+          "bytes": 4061,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:36:46.437Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0004.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En200804.zip",
+          "sha256": "106273f0b0927c84540e8913f2a92cd922896f53eb7df772d6412932259c6d25",
+          "bytes": 3943,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:36:47.440Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0005.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En200805.zip",
+          "sha256": "c614148727d545747699a2ebcdb5b3892799b6c84d71e849f90c4317e2598ce3",
+          "bytes": 3899,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:36:48.443Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0006.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En200806.zip",
+          "sha256": "898b0058caf4a1963931b1870b29dca862d58496c41b09b197eb270ebf39a0e9",
+          "bytes": 3944,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:36:49.440Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0007.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En200807.zip",
+          "sha256": "aa0e920ff7ccf0c4b13d938cd25d55d21ae23de16b443a71eec3a57e3a50cc3d",
+          "bytes": 3732,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:36:50.437Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0008.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En200808.zip",
+          "sha256": "8567582cb87caf07f0940902dc209bbf5e70b61e500003de1f61b3bff94ba058",
+          "bytes": 4191,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:36:51.440Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0009.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En200809.zip",
+          "sha256": "d471ee210301224529386d18cd455b23f46e14d8508f0513937d06207f7b5e2e",
+          "bytes": 4182,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:36:52.440Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0010.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En200810.zip",
+          "sha256": "3a4380185f1908df4addee93d548d3a662197862054b3243f056b7df6ae2b2a6",
+          "bytes": 4553,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:36:53.437Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0011.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En200811.zip",
+          "sha256": "8b12b77f22150e7e3c02fced5df1387d94429e45a1b4f42d043e183ab543bf19",
+          "bytes": 4317,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:36:54.439Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0012.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En200812.zip",
+          "sha256": "0621131a3f08acdcabdd21e78477839e068da1ce5b9de5ac1de1d41054bfaa9c",
+          "bytes": 4397,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:36:55.438Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0013.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En200901.zip",
+          "sha256": "f41a1499aa23bd9cd70aaf67072b7d5c43354defe61149c0ee5ad4ec1015e420",
+          "bytes": 4854,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:36:56.440Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0014.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En200902.zip",
+          "sha256": "121789a21a43e4a427e1bd11cb7cc6758f3d366870280ad9fb990f2fcb4a777f",
+          "bytes": 4224,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:36:57.443Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0015.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En200903.zip",
+          "sha256": "583fe3563839a03235f6c0ffe07dacd67924a06b2c136a01b95e3eafe7d83346",
+          "bytes": 4654,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:36:58.441Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0016.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En200904.zip",
+          "sha256": "af88ae34319976b47b5076caca37eeae429ebe5dd8753794a01f178b10942cf0",
+          "bytes": 4396,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:36:59.440Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0017.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En200905.zip",
+          "sha256": "8ac87e68d082a5a6a538180f2565c3c0ef724386884e821b7b02b65a309d5245",
+          "bytes": 4339,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:00.439Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0018.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En200906.zip",
+          "sha256": "fcf04d7347d340ec772b16123a7b6eefe2ca832fbf5a2e2ddedc4e9c27b98399",
+          "bytes": 4346,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:01.440Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0019.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En200907.zip",
+          "sha256": "a4e132a2704ac5185e201af70b7dc1c32c4d96c12e7c169e4b9b3c68d7ea44e3",
+          "bytes": 4604,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:02.445Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0020.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En200908.zip",
+          "sha256": "3f5f1727ac799e3c8dc30a13524b42f8e3329206e56e43ab6a8d75777c019e34",
+          "bytes": 4421,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:03.441Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0021.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En200909.zip",
+          "sha256": "1143113803d89cedd2b429612e0c992b771205cdc45443f4eee8faa3dda11388",
+          "bytes": 4334,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:04.441Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0022.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En200910.zip",
+          "sha256": "8873b59b664ca5e842a1d01abca92aea21933ca9144232814186b959759571e2",
+          "bytes": 4549,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:05.451Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0023.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En200911.zip",
+          "sha256": "7406ae7848872b2c3a1c0d0e9512dae8789d37375a57fc7e6399b36d0d6ca934",
+          "bytes": 4336,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:06.444Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0024.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En200912.zip",
+          "sha256": "d8021e13cc5c70d7bbfa5ae4cc343c81adf52a12d55e3fd5923ae15df6d682f0",
+          "bytes": 4567,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:07.444Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0025.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201001.zip",
+          "sha256": "3d57d5bb92dd7b681cc2c8736ac60d69741e7fb6076369d274e7067baae61819",
+          "bytes": 4607,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:08.444Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0026.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201002.zip",
+          "sha256": "1e8c8b981bd21a18aa70f1d8e832b5f7d2a778b541e02d452f845e65eb470a3f",
+          "bytes": 4440,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:09.449Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0027.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201003.zip",
+          "sha256": "9380b8dae3803fd658716551ba441e39056bac73af17f28307aeeb011fddc0bd",
+          "bytes": 4524,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:10.446Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0028.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201004.zip",
+          "sha256": "9f6a3a80fc9840588b3f54aab91d8e247a3168f72ccc8253ac3e47c7e1a02244",
+          "bytes": 4352,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:11.446Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0029.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201005.zip",
+          "sha256": "0343b010e7d0bc18b3350d851c3f630e3a85af7fe136192537ddcb39d38f41bd",
+          "bytes": 4375,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:12.443Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0030.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201006.zip",
+          "sha256": "6f4f43defe9c50dacfe57a25f20913551dd441e32c1d36dfdacc382fc08d32d4",
+          "bytes": 4502,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:13.446Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0031.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201007.zip",
+          "sha256": "edfde9efd84e28c72574002104341f3e74d1fc325a3ec7eea310758a588ad486",
+          "bytes": 4462,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:14.446Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0032.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201008.zip",
+          "sha256": "409cb48d64e94a03d95a5215a2a0b2333c638de8abe96db254cd36ee4cdcad92",
+          "bytes": 4748,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:15.446Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0033.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201009.zip",
+          "sha256": "df5874f20dff4f9b916c900b7d6d10e4caac25b6399c72f469c85f41346b1043",
+          "bytes": 5097,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:16.444Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0034.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201010.zip",
+          "sha256": "97453e1add61ba778ff7409e4e768dcc2a1baab21e4ca4c35a35a73670fcff09",
+          "bytes": 5149,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:17.447Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0035.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201011.zip",
+          "sha256": "75e30e0e0244a58a858a23acba70a65bfd6693f291d581c5a247009466d44a2f",
+          "bytes": 5265,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:18.446Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0036.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201012.zip",
+          "sha256": "7f0670efa92a45c983a2fdf357f33866892061b97c2d9232e6b2aa83b5e86756",
+          "bytes": 5528,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:19.447Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0037.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201101.zip",
+          "sha256": "f39418172e51685d52f7b32a1f13b244fde0a6574cff755da1f9eecb69e81904",
+          "bytes": 5953,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:20.444Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0038.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201102.zip",
+          "sha256": "3428f2a9ed2de1d9afaa64b9972d6b20241a2c7643e08994a7475eb803affd30",
+          "bytes": 5645,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:21.446Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0039.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201103.zip",
+          "sha256": "83591d10d09d06990e4f7a4485f1e8acd89ba087c62b5ba3a0e7a126c700d071",
+          "bytes": 6560,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:22.445Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0040.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201104.zip",
+          "sha256": "151a294fd6b8c28d28f2d3a3f05afdce0226faf13f53ec0020e585d89ad704d8",
+          "bytes": 6274,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:23.444Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0041.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201105.zip",
+          "sha256": "35b1edfa85c93a342ee966a8b6bd70bc198b314771d1cb470ede01ef3f8ccc23",
+          "bytes": 6163,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:24.444Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0042.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201106.zip",
+          "sha256": "9c6c84ec67e151cea52094728885f4a3661ed224944d4e811ed4f2d0d8cb55dd",
+          "bytes": 5968,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:25.442Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0043.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201107.zip",
+          "sha256": "cd54151c0aa883afc65e52204f3554efb3d519532c15c9317276d7cad6d7eabb",
+          "bytes": 6049,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:26.448Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0044.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201108.zip",
+          "sha256": "ccdede933da12d900e86f86184012af498daf1596f07feb8ad331c34bfe7b33e",
+          "bytes": 5834,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:27.443Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0045.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201109.zip",
+          "sha256": "74dce94e442dba378c6c8bf9cd2c3c10a653f50d511da93e1587c6ee0ca8eb7c",
+          "bytes": 5885,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:28.444Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0046.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201110.zip",
+          "sha256": "b0585e72958082f0dab89061c4ea502145f1010912d900b88647b92dfa497780",
+          "bytes": 6095,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:29.447Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0047.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201111.zip",
+          "sha256": "6c0088c4fea814153ffbb896203f5ee0d3fa3ad82e29132dfe0cba510774a008",
+          "bytes": 5964,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:30.444Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0048.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201112.zip",
+          "sha256": "f4088ef48be9e6172c83c879e5e8f131a9deff91c26c87210fe339f410f787b5",
+          "bytes": 6782,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:31.446Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0049.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201201.zip",
+          "sha256": "09b76b36422b7971f3f1eb618d724bb3c82211c67e5d1c9c3fc67fc709fe10d8",
+          "bytes": 6208,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:32.447Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0050.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201202.zip",
+          "sha256": "0ff7edf6a54db0f7a5e67e721da3c8dadfa4f3081a735b7128d180d3f31bc914",
+          "bytes": 5238,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:33.442Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0051.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201203.zip",
+          "sha256": "8be14ffc90b8215a8f589c3d44cf7e76e6cfd7a7e2b79bb6b74682aed4f70d21",
+          "bytes": 5474,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:34.442Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0052.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201204.zip",
+          "sha256": "f1ebe15c7f82a58f8bd4430fcb9282b8e144a04c3eb85402e4ca2c70a91bab12",
+          "bytes": 5473,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:35.447Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0053.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201205.zip",
+          "sha256": "4c66d8fc3b100de8640019f4d616b0786416c9d6e24653e278309cf880c7568e",
+          "bytes": 5700,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:36.446Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0054.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201206.zip",
+          "sha256": "af5ce3d1ad474f59c224b7cba9d21e23ecfc02836dfb2f3bf136e4d367e99096",
+          "bytes": 5231,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:37.448Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0055.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201207.zip",
+          "sha256": "365b66dccf797b645548ec9ed6269dacbf57f62a53c38a772e57a3d173063a11",
+          "bytes": 5386,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:38.445Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0056.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201208.zip",
+          "sha256": "d785cdba306a638b19a49c78ae08c423cd757c0ae3633624999fc020600bb20f",
+          "bytes": 5460,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:39.448Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0057.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201209.zip",
+          "sha256": "b582e06a44800cdf817ad598229af01be8c37fbf155940aeeb0c21ff4b819cd9",
+          "bytes": 5347,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:40.443Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0058.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201210.zip",
+          "sha256": "d00627490a90e45f2d69e12b0620bfe8223fc574d90eac041030f63308069ca6",
+          "bytes": 5439,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:41.443Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0059.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201211.zip",
+          "sha256": "27b4a3ff726aa3ba6875a3c9e8c2caea4c0b72a999db09b226837d0080bf71c3",
+          "bytes": 5296,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:42.448Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0060.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201212.zip",
+          "sha256": "02e809175d0ffe4bf85286e16801a1d059da35deef347dbcbb428c22a419779e",
+          "bytes": 5334,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:43.444Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0061.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201301.zip",
+          "sha256": "3f580fa885196632213738d2d2f6c120e6111a911f8f86a90f0aee9fee303b8f",
+          "bytes": 5371,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:44.446Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0062.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201302.zip",
+          "sha256": "2721079048f48ddbcaeb345a35270a7789955ade9ac89672e989bee67c3889c5",
+          "bytes": 5374,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:45.443Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0063.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201303.zip",
+          "sha256": "463305acf1a55318371b135d403cb880a3ca1168a584e5e51622deb6f9d86a14",
+          "bytes": 5778,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:46.443Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0064.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201304.zip",
+          "sha256": "6f4890962dd1c297216c3a9aaf34a1c8ecc64be442025a1838ba27833cb29239",
+          "bytes": 5426,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:47.442Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0065.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201305.zip",
+          "sha256": "c5efbd4595a71a1e8bf11f192e73c3542d7853c899fae01b82b3bbfcff51e302",
+          "bytes": 5554,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:48.444Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0066.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201306.zip",
+          "sha256": "a8f6819986d3ad5d54361a57ab9e36730d800266589f9690f9427e0a4627d592",
+          "bytes": 5360,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:49.446Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0067.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201307.zip",
+          "sha256": "5d396a2d11264061cb91eea8268c929b9dadfdf0c0a4cd4f83767827b065e4e4",
+          "bytes": 5767,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:50.442Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0068.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201308.zip",
+          "sha256": "54f5ebf4fb0d7bba65898e311ddb13d8b89a51967bc0402add44e45a22817e32",
+          "bytes": 5877,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:51.447Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0069.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201309.zip",
+          "sha256": "92d4a92f59f10e93556821dd97bdb1f40de50cb43e5fc6ab60f32292a89e65a3",
+          "bytes": 5610,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:52.445Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0070.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201310.zip",
+          "sha256": "7aa0b9f3cac976f5db37f055e0f5292a65d098e52af7a5e7cb8cce8b596c9da4",
+          "bytes": 5704,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:53.442Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0071.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201311.zip",
+          "sha256": "21ed16bd426d669487d4c1e956de6d6e84e69d480846c921af70bc5a88209051",
+          "bytes": 5473,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:54.444Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0072.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201312.zip",
+          "sha256": "1f9096b2dabd30682d664ac2952afce9c1b1a8f59e8902cb5929ae96816b9b5e",
+          "bytes": 6272,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:55.448Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0073.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201401.zip",
+          "sha256": "38c0ff036623ec6af8262981cda304322dbc7278a23315900847102ed8e351cc",
+          "bytes": 6398,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:56.445Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0074.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201402.zip",
+          "sha256": "4771576cede49faf958a4a34c83721ba2aa7b6b69fbf3c91e922029f33e32c4e",
+          "bytes": 5961,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:57.445Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0075.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201403.zip",
+          "sha256": "ee6ef32431d1e8109aee04c3b9a30924baf14a095dbddbc82dd17dde6fb56628",
+          "bytes": 6510,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:58.444Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0076.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201404.zip",
+          "sha256": "5148e9fb6fa6240d6736cea3f2a18625af538dc240db1d34c52e5e0e33900481",
+          "bytes": 6152,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:37:59.446Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0077.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201405.zip",
+          "sha256": "43feb9a2c2aaeddefddc665a7206a60a641b0ceab83f7a6e9033d2f4fbd00fa2",
+          "bytes": 6425,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:38:00.443Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0078.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201406.zip",
+          "sha256": "4472086b5ef66e0e4d483cad4e0982e553b0719cbb2bfcf88fe00af3d27121d9",
+          "bytes": 6432,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:38:01.445Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0079.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201407.zip",
+          "sha256": "9af6d0095d7ef1b22029a18282a080ad59385b633066ddc3f6ac91afdd49a113",
+          "bytes": 6489,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:38:02.443Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0080.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201408.zip",
+          "sha256": "522e6da910d59e8891026e47c8caede569e129f2b4ebda313ad14a5e318d9041",
+          "bytes": 6231,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:38:03.445Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0081.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201409.zip",
+          "sha256": "5418686b902280c6251e6467af446d27dd9d2478f5b561012cee259f9ec74dc6",
+          "bytes": 6380,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:38:04.442Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0082.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201410.zip",
+          "sha256": "e3813947b8f73b5336332f598d80b13895179713a7eadd2a33cb59d67361ed0c",
+          "bytes": 6354,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:38:05.440Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0083.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201411.zip",
+          "sha256": "545facd15c2b67903a1e1e652ed3aeeb1c429b4a2fed2c47bd983a767afcc4ca",
+          "bytes": 6225,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:38:06.442Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0084.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201412.zip",
+          "sha256": "4adffcc46c0063e5ea08e5f8e0033f360c495ffd4382ae93e34350b03c1cd12a",
+          "bytes": 6397,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:38:07.443Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0085.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201501.zip",
+          "sha256": "9f953928dd32e6670e035dd9c8fea9f24be7e71d3f79e2f9a7b41ec7a1fa9d59",
+          "bytes": 6416,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:38:08.450Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0086.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201502.zip",
+          "sha256": "be86048db52ec12b42698512b7e3ad7b1ef5244f2a83180810c3dd2fea9b8141",
+          "bytes": 5976,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:38:09.443Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0087.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201503.zip",
+          "sha256": "f7d2069ccd3731cc590b11c84b04082c0a7f5e8f645a501af80599ecbece1435",
+          "bytes": 6437,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:38:10.441Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0088.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201504.zip",
+          "sha256": "cb49e1dfbbd54566510723f717d9816dfa8ac111e5f856b436c5453cb10ffaad",
+          "bytes": 6394,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:38:11.442Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0089.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201505.zip",
+          "sha256": "c48c618738b5fa1a5a56e4b46b641fc266f773b3cbe4f41404c7792fc7ed65a3",
+          "bytes": 6738,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:38:12.443Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0090.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201506.zip",
+          "sha256": "417a3abb3b606468be1dae536b63e5d64f8f7d9efa30c667ec977b2981648ad3",
+          "bytes": 6566,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:38:13.446Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0091.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201507.zip",
+          "sha256": "d64cd618b29c5d3e663f91641cb5980d88377cbed924a8d72e30871f48534066",
+          "bytes": 6663,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:38:14.442Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0092.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201508.zip",
+          "sha256": "a29b26d7ecc5653f624363f55960b97463040587440e05246c51eda037143f46",
+          "bytes": 6284,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:38:15.438Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0093.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201509.zip",
+          "sha256": "fb0d1dca992729dc67bb3aac180c368f15be7eb073c850bb280d430eb07b4fc2",
+          "bytes": 6310,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:38:16.437Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0094.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201510.zip",
+          "sha256": "9b6f3dae40fd34a84c754c6d3f12a5f4d1f46a0abbd4b911ea0e93658f29305b",
+          "bytes": 6110,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:38:17.440Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0095.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201511.zip",
+          "sha256": "1459a139f43cca5ae01852bf40b2b28ed93c51712ca50b695f2aba75dc9415bb",
+          "bytes": 5892,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:38:18.438Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0096.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201512.zip",
+          "sha256": "88007824ada4221f04ca8d3c695a34328935beb3feb54e13f7a9555de689540b",
+          "bytes": 6055,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:38:19.439Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0097.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201601.zip",
+          "sha256": "e28888c6d2c60c9d77acb0ed36c33f11702da3a6f1d90803e9b79256953648b4",
+          "bytes": 6031,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:38:20.437Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0098.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201602.zip",
+          "sha256": "51058909406930eda6989aaca1a705ef8a56aa73be32eed9dedbc4c847a967eb",
+          "bytes": 5746,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:38:21.440Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0099.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201603.zip",
+          "sha256": "ab7422835e56035d303b6dfb290ad05fbdde631de1962e0b0a529aa35cf9a846",
+          "bytes": 6002,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:38:22.438Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0100.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201604.zip",
+          "sha256": "907badafbd7d060e4cb82f8be16b64bc8be1c353a8a9d8a16ad5faf289a14236",
+          "bytes": 6038,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:38:23.437Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0101.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201605.zip",
+          "sha256": "8342a6afea53f629a2b20daca51f831d3c3064be2458004c8123444e033fe460",
+          "bytes": 5563,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:38:24.441Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0102.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201606.zip",
+          "sha256": "9cd4d82fc358a109b7b634ab1e9f4821e01b2526d76f12ffedb29a88b11d1541",
+          "bytes": 5227,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:38:25.437Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0103.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201607.zip",
+          "sha256": "1bc682800aa255c3e17dce2ccce6ec65cf4f8dbf68236684415b48aa667e1fb1",
+          "bytes": 5263,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:38:26.439Z"
+        },
+        {
+          "key": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/0104.zip",
+          "url": "https://ds.data.jma.go.jp/svd/vois/data/filing/bulletin/data/veq/En201608.zip",
+          "sha256": "34c8b3bd277f1210bb2d80c1ccd944786441dfd8e2bbf30a935ef8cb54cba99c",
+          "bytes": 4998,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T00:38:27.438Z"
+        }
+      ],
+      "manifestKey": "open-data/raw/jma-volcano-monthly-bulletin/2008-2016/manifest.json",
+      "manifestSha256": "44eab74c0535eb7032f9428f11f4132146a62346e4ba528526fef5f67d9ca954",
+      "bytes": 562593,
+      "status": "archived"
+    }
+  ]
+}

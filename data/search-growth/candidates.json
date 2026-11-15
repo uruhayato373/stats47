@@ -588,7 +588,7 @@
       "id": "ctr-opportunity::/blog/middle-school-height-east-west-puzzle",
       "url": "/blog/middle-school-height-east-west-puzzle",
       "type": "ctr-opportunity",
-      "status": "pending",
+      "status": "approved",
       "score": 0.0762,
       "scoreBreakdown": {
         "impact": 0.68,
@@ -675,7 +675,9 @@
       ],
       "expectedMetric": "CTR 0.24% → 期待 2.2% 帯",
       "suggestedVerification": "seoTitle/description の curiosity gap 改修後、4/8 週で GSC CTR を再計測 (1 件ずつ query 確認・一括 rewrite 禁止)",
-      "externalActionFlag": false
+      "externalActionFlag": false,
+      "approvedAt": "2026-11-15T00:40:59.625Z",
+      "approvedWeek": "2026-W46"
     },
     {
       "id": "ctr-opportunity::/blog/municipality-count-prefecture-gap",
@@ -3008,7 +3010,7 @@
       "id": "ctr-opportunity::/survey/care-service-facility-survey",
       "url": "/survey/care-service-facility-survey",
       "type": "ctr-opportunity",
-      "status": "pending",
+      "status": "approved",
       "score": 0.0594,
       "scoreBreakdown": {
         "impact": 0.5304,
@@ -3095,7 +3097,9 @@
       ],
       "expectedMetric": "CTR 0.21% → 期待 1.9% 帯",
       "suggestedVerification": "seoTitle/description の curiosity gap 改修後、4/8 週で GSC CTR を再計測 (1 件ずつ query 確認・一括 rewrite 禁止)",
-      "externalActionFlag": false
+      "externalActionFlag": false,
+      "approvedAt": "2026-11-15T00:40:59.943Z",
+      "approvedWeek": "2026-W46"
     },
     {
       "id": "ctr-opportunity::/areas/02000/cities/02203",

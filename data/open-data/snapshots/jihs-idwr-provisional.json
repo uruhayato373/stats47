@@ -1,0 +1,74 @@
+{
+  "datasetId": "jihs-idwr-provisional",
+  "versions": [
+    {
+      "schemaVersion": 1,
+      "datasetId": "jihs-idwr-provisional",
+      "version": "2026-w44",
+      "sha256": "96f49de8286b575dcafabeb40a94cc52ac1fb5faab8825856d7a4c3e6d353df8",
+      "recipeSha256": "a89ea10cd2819a247f1e08271399e5d231732823aafa37fd3007bc9d0e90d127",
+      "retrievedAt": "2026-11-15T00:21:50.709Z",
+      "license": {
+        "name": "JIHS 利用規約 (未取得)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://id-info.jihs.go.jp/surveillance/idwr/index.html"
+      },
+      "files": [
+        {
+          "key": "open-data/raw/jihs-idwr-provisional/2026-w44/0001.csv",
+          "url": "https://id-info.jihs.go.jp/surveillance/idwr/provisional/2026/44/2026-44-animal.csv",
+          "sha256": "1d2052abbc78873158c7046b4cee1f6196925fdd0086817fe03b06aa3b1d05a9",
+          "bytes": 3284,
+          "contentType": "text/csv",
+          "retrievedAt": "2026-11-15T00:21:46.518Z"
+        },
+        {
+          "key": "open-data/raw/jihs-idwr-provisional/2026-w44/0002.csv",
+          "url": "https://id-info.jihs.go.jp/surveillance/idwr/provisional/2026/44/2026-44-ari.csv",
+          "sha256": "921e08277c62fc85c967e63594719ad5dc25a4effb3a872fa7bd16b1767c5ffc",
+          "bytes": 1040,
+          "contentType": "text/csv",
+          "retrievedAt": "2026-11-15T00:21:46.724Z"
+        },
+        {
+          "key": "open-data/raw/jihs-idwr-provisional/2026-w44/0003.csv",
+          "url": "https://id-info.jihs.go.jp/surveillance/idwr/provisional/2026/44/2026-44-teiten-ruiseki.csv",
+          "sha256": "626382f9c80adaaa7c5aa3c6983e5c4a3c2693a6f51a6670798a5bbcbcf99ccf",
+          "bytes": 9421,
+          "contentType": "text/csv",
+          "retrievedAt": "2026-11-15T00:21:47.703Z"
+        },
+        {
+          "key": "open-data/raw/jihs-idwr-provisional/2026-w44/0004.csv",
+          "url": "https://id-info.jihs.go.jp/surveillance/idwr/provisional/2026/44/2026-44-teiten-tougai.csv",
+          "sha256": "d769c562f846c43ae84e71f2130bdde8bf18a76dd5cb608025c8b9f9611a00da",
+          "bytes": 299591,
+          "contentType": "text/csv",
+          "retrievedAt": "2026-11-15T00:21:49.137Z"
+        },
+        {
+          "key": "open-data/raw/jihs-idwr-provisional/2026-w44/0005.csv",
+          "url": "https://id-info.jihs.go.jp/surveillance/idwr/provisional/2026/44/2026-44-teiten.csv",
+          "sha256": "d6b3f3ba40366495aacdddc25a8b78acfe0dcc2e1d653c3a6be8c06e983f30bb",
+          "bytes": 11240,
+          "contentType": "text/csv",
+          "retrievedAt": "2026-11-15T00:21:49.719Z"
+        },
+        {
+          "key": "open-data/raw/jihs-idwr-provisional/2026-w44/0006.csv",
+          "url": "https://id-info.jihs.go.jp/surveillance/idwr/provisional/2026/44/2026-44-zensu.csv",
+          "sha256": "a611a925af11906f60e90f9b74bccb8b5e8a8654635c43f17f45b5c34537cd1b",
+          "bytes": 20685,
+          "contentType": "text/csv",
+          "retrievedAt": "2026-11-15T00:21:50.709Z"
+        }
+      ],
+      "manifestKey": "open-data/raw/jihs-idwr-provisional/2026-w44/manifest.json",
+      "manifestSha256": "45bddfba3ea972aa5ff08c28c7e1d5633ee6c76fb656162fbcac65ace484afb3",
+      "bytes": 345261,
+      "status": "archived"
+    }
+  ]
+}
