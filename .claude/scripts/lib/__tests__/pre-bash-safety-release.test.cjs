@@ -45,3 +45,27 @@ test("読み取りと develop 宛ての PR は止めない", () => {
   assert.equal(denied("gh pr list --base main"), false);
   assert.equal(denied("gh pr create --draft --base develop --head x"), false);
 });
+
+test("rm -rf はルート・ホームとその中を止め、Claude の一時領域の配下だけを通す (CI-TOOLING-FOLLOWUP-02 の案 a)", () => {
+  const rmrf = (target) => ["rm", "-rf", target].join(" ");
+  for (const command of [
+    rmrf("/"),
+    rmrf("~"),
+    rmrf("~/stats47"),
+    rmrf("/Users/someone"),
+    rmrf("/Users/someone/stats47/data"),
+    rmrf("/private/tmp"),
+    rmrf("/private/tmp/claude-501/../../etc"),
+    `${rmrf("/private/tmp/claude-501/x")} /Users/someone`,
+  ]) {
+    assert.equal(denied(command), true, command);
+  }
+  for (const command of [
+    rmrf("/private/tmp/claude-501/-Users-x/abc/scratchpad/wt"),
+    rmrf("/tmp/claude-501/scratchpad/out"),
+    `cd /x && ${rmrf("/private/tmp/claude-501/a")} /private/tmp/claude-501/b`,
+    rmrf("build"),
+  ]) {
+    assert.equal(denied(command), false, command);
+  }
+});

@@ -2159,10 +2159,10 @@ updated: 2026-11-01
 - **完了条件**: 6 図が 5 点以上の推移か数値タイルになり、validateChartTemporalFit が `MIN_TREND_YEARS` 未満を warn し、`npm run preflight:pr` と `npm run validate:catalog --workspace=@stats47/data-configs` が通る。
 
 ### [CI-TOOLING-FOLLOWUP-02] CI と検査の道具に残る穴 (第 3 波の実行で見つけた分)
-タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-11-14] [待ち:承認] [待ち:判断]
+タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-11-14] [待ち:判断]
 
 - **済み (2026-11-14・4d4f27027)**: 1 (check-runtime-budget.test.cjs を PR の CI に配線)、2 (check-*.cjs 28 本と preflight-commit.mjs が CLAUDE_PROJECT_DIR をルートにしない。fixture 用の上書きは STATS47_SCAN_ROOT)、3 (audit-seo-meta-facts.ts の --fail-on-new は R2 の取得の失敗で終了コード 1。404 は通す)、5 (stat-tile-grid-owns-columns は StatTileGrid の中のタイルを数えない)、7 (verdict の語彙を Schema から引く。--set は語彙外の --lifecycle / --editorial を書かない) を、直す前に落ちるテスト付きで直した。4 は workflow のコメントの実測値を現状 (3 ファイル 141 test・run 43368836421 で 194 秒) に直した。
-- **残り (承認)**: `.claude/hooks/pre-bash-safety.js` の `/rm\s+-rf\s+[\/~]/` は、絶対パスで始まる rm -rf をすべて「ルートまたはホームを削除しようとしています」と止める。Bash の拒否条件を緩める変更なので、オーナーが承認してから直す。選択肢は 2 つある。(a) セッションの scratchpad と OS の一時ディレクトリ (`/private/tmp/claude-*`・`os.tmpdir()`) の配下を名指しした場合だけ通す。(b) 対象が `/`・`~`・`$HOME` とその直下 1 階層のときだけ止める。推奨は (a) で、根拠は、通す範囲が一時領域に限られ、リポジトリやホームの中の絶対パスは今までどおり止まること。直すときは `.claude/scripts/lib/__tests__/pre-bash-safety-release.test.cjs` に、scratchpad 配下は通り `rm -rf /`・`rm -rf ~`・`rm -rf /Users/<名前>` は止まるテストを先に足す。承認までの回避策は、対象の親ディレクトリへ cd してから相対パスで `rm -r` すること。
+- **済み (2026-11-15・オーナー承認)**: `pre-bash-safety.js` の rm -rf の止めを案 (a) で直した。対象がすべて Claude の一時領域 (`/private/tmp/claude-*`・`/tmp/claude-*`) の配下なら通し、`..` を含む対象・ルート・ホーム・その他の絶対パスは従来どおり止める。`pre-bash-safety-release.test.cjs` に直す前に落ちるテストを足した。
 - **残り (判断)**: Scoped Workflow Contract Gate (`npm run test:scoped-workflow-contracts`) は 2026-09-18 の 1 ファイル 69 test・76 秒から、3 ファイル 141 test・194 秒 (run 43368836421) に増えた。手元で 1 ファイルずつ測ると ranking-scoped-workflow 106 秒 (86 test)・data-refresh-scoped-workflow 64 秒 (49 test)・r2-overlay-server 1 秒未満で、増加は対象のテストが増えた分と対応する。選択肢は 3 つある。(a) 差分連動の step (workflow とテスト自身が変わった PR だけ走る) なので現状を受け入れる。(b) `.claude/config/check-runtime-budgets.json` の ciSteps に予算を登録して、これ以上の増加を止める。ただし ciSteps は「常に走る 4 step の合計 100 秒以下」をテストが固定しているので、差分連動の step を別枠にする変更が要る。(c) ranking-scoped-workflow.test.mjs を 2 ファイルに分け、node --test のファイル並列で壁時計を縮める。推奨は (b) で、根拠は、所要時間が 2.5 倍になるまで誰も気づかなかった原因が、この step に予算の検査が無いことにあるため。
 - **完了条件**: 6 は、scratchpad 配下の rm -rf が通り、ルートとホームの削除は止まることを固定するテストがある。4 は、選んだ案がこのカードに書いてあり、(b) か (c) を選んだ場合は、直す前に落ちて直した後に通る検査がある。
 
