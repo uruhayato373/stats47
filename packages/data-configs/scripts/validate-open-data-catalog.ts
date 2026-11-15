@@ -18,6 +18,7 @@ import expansionSchema from "../../../config/schema/open-data.expansion.schema.j
 import type { OpenDataFetchRecipe, OpenDataSnapshot, OpenDataExpansion, OpenDataNormalizedTable } from "../src/open-data-catalog";
 import {
   validateOpenDataExpansion,
+  findExpansionDuplicates,
   evaluateExpansionCandidate,
   selectExpansionDenominator,
   OPEN_DATA_SOURCES,
@@ -247,7 +248,25 @@ if (expansion) {
   const areaTemplate = JSON.parse(fs.readFileSync(path.join(root, datasetPath("areas.databook-template")), "utf8")) as { sections: { sectionKey: string }[] };
   // Include filenames too: a not-yet-registered definition must still reserve its key.
   const existingMetricKeys = new Set([...Object.keys(METRICS_REGISTRY), ...fs.readdirSync(path.join(root, datasetDir("metrics.definitions"))).filter((f) => f.endsWith(".ts")).map((f) => f.slice(0, -3))]);
-  errors.push(...validateOpenDataExpansion(expansion, { recipes, metrics, existingMetricKeys, themeIds, areaIds: new Set(areaTemplate.sections.map((s) => s.sectionKey)) }));
+  // A planned candidate may already have its own inactive definition, before observations/publication.
+  // Only an explicit, exact provenance binding exempts that key from collision checks.
+  const stagedKeys = new Set(metrics.filter((metric) => {
+    if (metric.isActive !== false || metric.source.kind !== "external") return false;
+    const provenance = metric.source.config.provenance as { openData?: { datasetId?: string; version?: string; table?: string; candidate?: { metricKey?: string; channel?: string } } } | undefined;
+    const ref = provenance?.openData;
+    if (ref?.candidate?.metricKey !== metric.key || ref.candidate.channel !== "prefecture-ranking") return false;
+    const matches = expansion.candidates.filter((c) => c.metricKey === metric.key && c.channel === ref.candidate?.channel);
+    return matches.length === 1 && matches[0].status === "planned" && matches[0].datasetId === ref.datasetId
+      && matches[0].table === ref.table && matches[0].slice.version === ref.version;
+  }).map((metric) => metric.key));
+  for (const candidate of expansion.candidates) {
+    const otherStaged = metrics.filter((m) => stagedKeys.has(m.key) && m.key !== candidate.metricKey);
+    const duplicates = findExpansionDuplicates(candidate, otherStaged);
+    if (duplicates.length) errors.push(`expansion:${candidate.metricKey ?? candidate.title}: 別の非公開定義との重複: ${duplicates.map((m) => m.key).join(", ")}`);
+  }
+  errors.push(...validateOpenDataExpansion(expansion, { recipes, metrics: metrics.filter((m) => !stagedKeys.has(m.key)),
+    existingMetricKeys: new Set([...existingMetricKeys].filter((key) => !stagedKeys.has(key))),
+    themeIds, areaIds: new Set(areaTemplate.sections.map((s) => s.sectionKey)) }));
   const normalizedRoot = path.join(root, ".local/r2/open-data/normalized");
   // CI without the R2 working copy checks contracts and recorded evidence only; never fetch it.
   if (!fs.existsSync(normalizedRoot)) warns.push("expansion: ローカル正規化表なし。47県の再計算は未実施 (保存済み検証記録のみ検査)");
@@ -255,6 +274,10 @@ if (expansion) {
     const cache = new Map<string, { table: OpenDataNormalizedTable; sha256: string }>();
     for (const candidate of expansion.candidates.filter((c) => c.status === "planned" || c.verification)) {
       const file = path.join(normalizedRoot, candidate.datasetId, candidate.slice.version, `${candidate.table}.json`);
+      if (!fs.existsSync(file)) {
+        warns.push(`expansion:${candidate.datasetId}/${candidate.table}: 正規化表の写し ${path.relative(root, file)} が無いので再計算を省略`);
+        continue;
+      }
       try {
         let input = cache.get(file);
         if (!input) {

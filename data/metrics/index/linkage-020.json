@@ -2,6 +2,158 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "other-miscellaneous-group-consumption-expenditure",
+      "pageId": "ranking:other-miscellaneous-group-consumption-expenditure",
+      "title": "他の諸雑費消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "100150000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "100150000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "860c08d73c356798"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:other-miscellaneous-group-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-mushroom-consumption-expenditure",
+      "pageId": "ranking:other-mushroom-consumption-expenditure",
+      "title": "他のきのこ消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "010513100",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "010513100",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "5e3b23d91dbaf0f2"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:other-mushroom-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:other-mushroom-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-mushroom-consumption-quantity",
+      "pageId": "ranking:other-mushroom-consumption-quantity",
+      "title": "他のきのこ消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023606",
+          "filters": {
+            "cdCat01": "010513100",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023606",
+          "cdCat01": "010513100",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "1f81d148353044db"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:other-mushroom-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-non-savings-insurance-consumption-expenditure",
+      "pageId": "ranking:other-non-savings-insurance-consumption-expenditure",
+      "title": "他の非貯蓄型保険料消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "100150070",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "100150070",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "97ba54e0e845e7d3"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:other-non-savings-insurance-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "other-noodle-dining-consumption-expenditure",
       "pageId": "ranking:other-noodle-dining-consumption-expenditure",
       "title": "他の麺類外食消費支出額",
@@ -5576,162 +5728,6 @@
       "themes": [
         "innovation-patents"
       ]
-    },
-    {
-      "metricKey": "patient-receiving-rate-by-age",
-      "pageId": null,
-      "title": "受療率（性年齢別総数・入院総数）（患者調査）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004026104",
-          "filters": {
-            "cdCat01": "1",
-            "cdCat02": "1",
-            "cdCat04": "1"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004026104",
-          "cdCat01": "1",
-          "cdCat02": "1",
-          "cdCat04": "1"
-        },
-        "ops": {
-          "areaAxis": {
-            "axis": "cat03",
-            "scheme": "seq-pref"
-          }
-        },
-        "derived": true,
-        "configHash": "1779d53ce4fd235f"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:patient-receiving-rate-by-age",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "patient-receiving-rate-by-disease",
-      "pageId": null,
-      "title": "受療率（総数・入院総数）（患者調査）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004026105",
-          "filters": {
-            "cdCat01": "1",
-            "cdCat03": "1"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004026105",
-          "cdCat01": "1",
-          "cdCat03": "1"
-        },
-        "ops": {
-          "areaAxis": {
-            "axis": "cat02",
-            "scheme": "seq-pref"
-          }
-        },
-        "derived": true,
-        "configHash": "a139010d0c024168"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:patient-receiving-rate-by-disease",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "paved-road-main-length",
-      "pageId": "ranking:paved-road-main-length",
-      "title": "舗装道路実延長（主要道路）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010108",
-          "filters": {
-            "cdCat01": "H7121"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010108",
-          "cdCat01": "H7121"
-        },
-        "derived": false,
-        "configHash": "eae79f0c3250796f"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "blog:campsite-public-vs-paved-road-main-length",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:paved-road-main-length",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "paved-road-municipal-length",
-      "pageId": "ranking:paved-road-municipal-length",
-      "title": "舗装道路実延長（市町村道）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010108",
-          "filters": {
-            "cdCat01": "H7122"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010108",
-          "cdCat01": "H7122"
-        },
-        "derived": false,
-        "configHash": "965fc94f3d77d364"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:paved-road-municipal-length",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
     }
   ]
 }

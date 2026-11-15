@@ -2,6 +2,43 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "housing-expenditure-total",
+      "pageId": "ranking:housing-expenditure-total",
+      "title": "住居費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "020000000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "020000000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "fdb223c46ad02a9f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:housing-expenditure-total",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "housing-expense-municipal",
       "pageId": null,
       "title": "住宅費",
@@ -11565,38 +11602,6 @@
       "consumers": [
         {
           "pageId": "ranking:judo-therapist-rate",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "junior-college-capacity-index",
-      "pageId": "ranking:junior-college-capacity-index",
-      "title": "短期大学収容力指数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010205",
-          "filters": {
-            "cdCat01": "#E0610201"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010205",
-          "cdCat01": "#E0610201"
-        },
-        "derived": false,
-        "configHash": "a845acf1e8ac0fea"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:junior-college-capacity-index",
           "kind": "ranking"
         }
       ],

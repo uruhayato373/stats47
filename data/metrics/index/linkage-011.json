@@ -7774,6 +7774,30 @@
       ]
     },
     {
+      "metricKey": "heatstroke-emergency-transports-per-100k",
+      "pageId": null,
+      "title": "熱中症救急搬送人員",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.fdma.go.jp/disaster/heatstroke/items/heatstroke003_data_r7.xlsx"
+        },
+        "fetcherKey": "manual",
+        "configHash": "ef29d38d38a5d366"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:heatstroke-emergency-transports-per-100k",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "high-school-advancement-rate",
       "pageId": "ranking:high-school-advancement-rate",
       "title": "高等学校卒業者の進学率",
@@ -9381,46 +9405,6 @@
       "consumers": [
         {
           "pageId": "ranking:high-school-new-graduates-job-opening-ratio",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "high-school-students",
-      "pageId": null,
-      "title": "高等学校生徒数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020205",
-          "filters": {
-            "cdCat01": "E4501"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020205",
-          "cdCat01": "E4501"
-        },
-        "derived": false,
-        "configHash": "2484f7ed2257262e"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:high-school-students",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:education-culture",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:high-school-students",
           "kind": "ranking"
         }
       ],

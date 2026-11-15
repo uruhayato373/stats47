@@ -2,6 +2,544 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "social-expenses-group-consumption-expenditure",
+      "pageId": "ranking:social-expenses-group-consumption-expenditure",
+      "title": "交際費消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "100300000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "100300000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "642de60a79a70d49"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:social-expenses-group-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:social-expenses-group-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "social-increase",
+      "pageId": "ranking:social-increase",
+      "title": "社会増減数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A5302"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A5302"
+        },
+        "derived": false,
+        "configHash": "e56618b7ff694c24"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:social-increase",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "social-increase-rate",
+      "pageId": "ranking:social-increase-rate",
+      "title": "社会増減率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A5301"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A5301"
+        },
+        "derived": false,
+        "configHash": "dcc3c1f4d22d988f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:01000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:aging-society",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:population-dynamics",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:population-migration-tokyo-concentration",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:social-increase-rate",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        },
+        {
+          "pageId": "theme:population-dynamics",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society",
+        "population-dynamics"
+      ]
+    },
+    {
+      "metricKey": "social-sports-facility",
+      "pageId": "ranking:social-sports-facility",
+      "title": "社会体育施設数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010107",
+          "filters": {
+            "cdCat01": "G3102"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010107",
+          "cdCat01": "G3102"
+        },
+        "derived": false,
+        "configHash": "4e879bb744720af4"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:sports-facility-regional-divide",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:social-sports-facility",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "social-welfare-expenditure-ratio-pref-finance",
       "pageId": "ranking:social-welfare-expenditure-ratio-pref-finance",
       "title": "社会福祉費割合",
@@ -8808,344 +9346,6 @@
       "themes": [
         "education-culture"
       ]
-    },
-    {
-      "metricKey": "study-participation-rate-business-skills",
-      "pageId": "ranking:study-participation-rate-business-skills",
-      "title": "商業実務・ビジネス関係（情報処理除く）の行動者率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003456245",
-          "filters": {
-            "cdCat01": "0",
-            "cdCat02": "99000",
-            "cdCat03": "22"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003456245",
-          "cdCat01": "0",
-          "cdCat02": "99000",
-          "cdCat03": "22"
-        },
-        "derived": false,
-        "configHash": "13687bffb7e528fa"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:study-participation-rate-business-skills",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "study-participation-rate-computer",
-      "pageId": "ranking:study-participation-rate-computer",
-      "title": "パソコンなどの情報処理の行動者率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003456245",
-          "filters": {
-            "cdCat01": "0",
-            "cdCat02": "99000",
-            "cdCat03": "21"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003456245",
-          "cdCat01": "0",
-          "cdCat02": "99000",
-          "cdCat03": "21"
-        },
-        "derived": false,
-        "configHash": "2f5846b4fafaea57"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:study-participation-rate-computer",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "study-participation-rate-english",
-      "pageId": "ranking:study-participation-rate-english",
-      "title": "英語学習の行動者率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003456245",
-          "filters": {
-            "cdCat01": "0",
-            "cdCat02": "99000",
-            "cdCat03": "11"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003456245",
-          "cdCat01": "0",
-          "cdCat02": "99000",
-          "cdCat03": "11"
-        },
-        "derived": false,
-        "configHash": "b8be993901db5374"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:education-culture",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:study-participation-rate-english",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:education-culture",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "education-culture"
-      ]
-    },
-    {
-      "metricKey": "study-participation-rate-foreign-language",
-      "pageId": "ranking:study-participation-rate-foreign-language",
-      "title": "外国語学習の行動者率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003456245",
-          "filters": {
-            "cdCat01": "0",
-            "cdCat02": "99000",
-            "cdCat03": "1"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003456245",
-          "cdCat01": "0",
-          "cdCat02": "99000",
-          "cdCat03": "1"
-        },
-        "derived": false,
-        "configHash": "7bb7a81c55678f47"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:study-participation-rate-foreign-language",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
     }
   ]
 }

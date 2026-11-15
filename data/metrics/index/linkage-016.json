@@ -2,6 +2,41 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "material-production",
+      "pageId": "ranking:material-production",
+      "title": "素材生産量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010103",
+          "filters": {
+            "cdCat01": "C3110"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010103",
+          "cdCat01": "C3110"
+        },
+        "derived": false,
+        "configHash": "80e3b6dafcac3259"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:material-production",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "maternal-child-health-guidance",
       "pageId": "ranking:maternal-child-health-guidance",
       "title": "妊産婦・乳幼児保健指導延人員（都道府県別）",
@@ -10415,41 +10450,6 @@
         "daily-time-use",
         "labor-mobility"
       ]
-    },
-    {
-      "metricKey": "monthly-average-actual-working-hours-female-pre2019",
-      "pageId": "ranking:monthly-average-actual-working-hours-female-pre2019",
-      "title": "月間平均実労働時間数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010206",
-          "filters": {
-            "cdCat01": "#F0610102"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010206",
-          "cdCat01": "#F0610102"
-        },
-        "derived": false,
-        "configHash": "6c72ec21fab1fd2a"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:monthly-average-actual-working-hours-female-pre2019",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
     }
   ]
 }

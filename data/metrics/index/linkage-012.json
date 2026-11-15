@@ -2,6 +2,46 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "high-school-students",
+      "pageId": null,
+      "title": "高等学校生徒数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020205",
+          "filters": {
+            "cdCat01": "E4501"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020205",
+          "cdCat01": "E4501"
+        },
+        "derived": false,
+        "configHash": "2484f7ed2257262e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:high-school-students",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:education-culture",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:high-school-students",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "high-school-students-per-teacher",
       "pageId": "ranking:high-school-students-per-teacher",
       "title": "高等学校生徒数",
@@ -15507,43 +15547,6 @@
       "consumers": [
         {
           "pageId": "ranking:housing-expenditure-ratio-multi-person-households",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "housing-expenditure-total",
-      "pageId": "ranking:housing-expenditure-total",
-      "title": "住居費",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "020000000",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "020000000",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "fdb223c46ad02a9f"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:housing-expenditure-total",
           "kind": "ranking"
         }
       ],

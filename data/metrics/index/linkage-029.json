@@ -2,6 +2,344 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "study-participation-rate-business-skills",
+      "pageId": "ranking:study-participation-rate-business-skills",
+      "title": "商業実務・ビジネス関係（情報処理除く）の行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456245",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "22"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456245",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "22"
+        },
+        "derived": false,
+        "configHash": "13687bffb7e528fa"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:study-participation-rate-business-skills",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "study-participation-rate-computer",
+      "pageId": "ranking:study-participation-rate-computer",
+      "title": "パソコンなどの情報処理の行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456245",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "21"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456245",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "21"
+        },
+        "derived": false,
+        "configHash": "2f5846b4fafaea57"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:study-participation-rate-computer",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "study-participation-rate-english",
+      "pageId": "ranking:study-participation-rate-english",
+      "title": "英語学習の行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456245",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "11"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456245",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "11"
+        },
+        "derived": false,
+        "configHash": "b8be993901db5374"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:study-participation-rate-english",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:education-culture",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "education-culture"
+      ]
+    },
+    {
+      "metricKey": "study-participation-rate-foreign-language",
+      "pageId": "ranking:study-participation-rate-foreign-language",
+      "title": "外国語学習の行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456245",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "1"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456245",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "1"
+        },
+        "derived": false,
+        "configHash": "7bb7a81c55678f47"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:study-participation-rate-foreign-language",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "study-participation-rate-home-economics",
       "pageId": "ranking:study-participation-rate-home-economics",
       "title": "家政・家事の行動者率",
@@ -8005,158 +8343,6 @@
       "consumers": [
         {
           "pageId": "ranking:theme-population-pyramid-50-54-female",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:aging-society",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "aging-society"
-      ]
-    },
-    {
-      "metricKey": "theme-population-pyramid-50-54-male",
-      "pageId": null,
-      "title": "5歳階級別人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010101",
-          "filters": {
-            "cdCat01": "A121101"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010101",
-          "cdCat01": "A121101"
-        },
-        "derived": false,
-        "configHash": "f42a335b49700510"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:theme-population-pyramid-50-54-male",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:aging-society",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "aging-society"
-      ]
-    },
-    {
-      "metricKey": "theme-population-pyramid-55-59-female",
-      "pageId": null,
-      "title": "5歳階級別人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010101",
-          "filters": {
-            "cdCat01": "A121202"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010101",
-          "cdCat01": "A121202"
-        },
-        "derived": false,
-        "configHash": "e1636a935edcc308"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:theme-population-pyramid-55-59-female",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:aging-society",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "aging-society"
-      ]
-    },
-    {
-      "metricKey": "theme-population-pyramid-55-59-male",
-      "pageId": null,
-      "title": "5歳階級別人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010101",
-          "filters": {
-            "cdCat01": "A121201"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010101",
-          "cdCat01": "A121201"
-        },
-        "derived": false,
-        "configHash": "8de49f307aee3763"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:theme-population-pyramid-55-59-male",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:aging-society",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "aging-society"
-      ]
-    },
-    {
-      "metricKey": "theme-population-pyramid-60-64-female",
-      "pageId": null,
-      "title": "5歳階級別人口",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010101",
-          "filters": {
-            "cdCat01": "A121302"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010101",
-          "cdCat01": "A121302"
-        },
-        "derived": false,
-        "configHash": "1cd43ae20bcdb739"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:theme-population-pyramid-60-64-female",
           "kind": "ranking"
         },
         {
