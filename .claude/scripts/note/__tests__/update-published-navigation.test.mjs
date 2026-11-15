@@ -176,3 +176,11 @@ test("a paid magazine (tutorial series) never gets dataset cards", () => {
   const [plan] = buildPlans(source, new Map(), { magazine: "mag-kakei" });
   assert.deepEqual(plan.footer.datasets, []);
 });
+
+test("--repairs-only はフッターを足さず、リンク修復の計画だけを作る", () => {
+  const repair = { fromUrl: "https://stats47.jp/ranking/a", toUrl: "https://stats47.jp/ranking/b" };
+  const withFooter = buildPlans(baseSource({ publishedLinkRepairs: [repair] }), new Map(), { slug: "article-a" });
+  const repairsOnly = buildPlans(baseSource({ publishedLinkRepairs: [repair] }), new Map(), { slug: "article-a", repairsOnly: true });
+  assert.ok(withFooter[0]?.footer, "--repairs-only なしでは --slug の記事にフッターが付く (比較の基準)");
+  assert.equal(repairsOnly[0]?.footer ?? null, null);
+});

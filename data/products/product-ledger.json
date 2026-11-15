@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "asOf": "2026-11-14",
+  "asOf": "2026-11-15",
   "notePeriod": {
-    "start": "2026-10-11",
-    "end": "2026-11-07"
+    "start": "2026-10-17",
+    "end": "2026-11-13"
   },
   "lines": [
     {
@@ -13,7 +13,7 @@
       "products": 12,
       "priceMinYen": 980,
       "priceMaxYen": 980,
-      "pageViews": 139,
+      "pageViews": 149,
       "salesYen": 0,
       "nextReviewOn": "2026-12-30",
       "reviewDue": false
@@ -25,7 +25,7 @@
       "products": 2,
       "priceMinYen": 1980,
       "priceMaxYen": 2980,
-      "pageViews": 31,
+      "pageViews": 48,
       "salesYen": 0,
       "nextReviewOn": "2026-12-30",
       "reviewDue": false
@@ -37,7 +37,7 @@
       "products": 11,
       "priceMinYen": 980,
       "priceMaxYen": 2980,
-      "pageViews": 76,
+      "pageViews": 70,
       "salesYen": 0,
       "nextReviewOn": "2026-12-30",
       "reviewDue": false
@@ -49,7 +49,7 @@
       "products": 73,
       "priceMinYen": 200,
       "priceMaxYen": 500,
-      "pageViews": 367,
+      "pageViews": 359,
       "salesYen": 0,
       "nextReviewOn": "2026-12-30",
       "reviewDue": false
@@ -70,7 +70,7 @@
       "id": "kdp-live",
       "name": "Kindle 販売中",
       "stance": "keep",
-      "products": 4,
+      "products": 5,
       "priceMinYen": 500,
       "priceMaxYen": 800,
       "pageViews": null,
@@ -82,11 +82,11 @@
       "id": "kdp-stopped",
       "name": "Kindle 取り下げ・保留",
       "stance": "hold",
-      "products": 20,
+      "products": 29,
       "priceMinYen": 500,
       "priceMaxYen": 1000,
       "pageViews": null,
-      "salesYen": 159,
+      "salesYen": 413,
       "nextReviewOn": "2026-12-30",
       "reviewDue": false
     }
@@ -105,17 +105,7 @@
       "due": false
     }
   ],
-  "unassigned": [
-    "kdp:K-S1-01",
-    "kdp:K-S1-02",
-    "kdp:K-S1-05",
-    "kdp:K-S1-07",
-    "kdp:K-S1-08",
-    "kdp:K-S1-09",
-    "kdp:K-S1-10",
-    "kdp:K-S1-11",
-    "kdp:K-S1-12"
-  ],
+  "unassigned": [],
   "products": [
     {
       "channel": "note",
@@ -125,7 +115,7 @@
       "status": "published",
       "priceYen": 1980,
       "netPerSaleYen": 1692,
-      "pageViews": 6,
+      "pageViews": 3,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -151,7 +141,7 @@
       "status": "published",
       "priceYen": 2980,
       "netPerSaleYen": 2547,
-      "pageViews": 3,
+      "pageViews": 2,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -164,7 +154,7 @@
       "status": "published",
       "priceYen": 1980,
       "netPerSaleYen": 1692,
-      "pageViews": 15,
+      "pageViews": 16,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -177,7 +167,7 @@
       "status": "published",
       "priceYen": 2980,
       "netPerSaleYen": 2547,
-      "pageViews": 2,
+      "pageViews": 1,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -190,7 +180,7 @@
       "status": "published",
       "priceYen": 1980,
       "netPerSaleYen": 1692,
-      "pageViews": 5,
+      "pageViews": 6,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -242,7 +232,7 @@
       "status": "published",
       "priceYen": 2980,
       "netPerSaleYen": 2547,
-      "pageViews": 6,
+      "pageViews": 5,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -320,7 +310,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 6,
+      "pageViews": 8,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -333,7 +323,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 1,
+      "pageViews": 0,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -346,8 +336,8 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 1,
-      "salesYen": 0,
+      "pageViews": null,
+      "salesYen": null,
       "unitsSold": null,
       "lastPriceChange": null
     },
@@ -359,7 +349,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 11,
+      "pageViews": 13,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -372,7 +362,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 1,
+      "pageViews": 0,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -398,7 +388,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 1,
+      "pageViews": 0,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -411,7 +401,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 5,
+      "pageViews": 4,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -437,7 +427,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 9,
+      "pageViews": 3,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -450,7 +440,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 3,
+      "pageViews": 1,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -463,7 +453,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 11,
+      "pageViews": 9,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -515,7 +505,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 7,
+      "pageViews": 4,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -567,7 +557,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 4,
+      "pageViews": 1,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -580,7 +570,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 4,
+      "pageViews": 5,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -593,7 +583,7 @@
       "status": "published",
       "priceYen": 500,
       "netPerSaleYen": 427,
-      "pageViews": 5,
+      "pageViews": 9,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -606,7 +596,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 18,
+      "pageViews": 14,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -632,7 +622,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 24,
+      "pageViews": 22,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -645,7 +635,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 0,
+      "pageViews": 1,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -658,7 +648,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 1,
+      "pageViews": 2,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -671,7 +661,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 0,
+      "pageViews": 1,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -710,7 +700,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 5,
+      "pageViews": 4,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -749,7 +739,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 1,
+      "pageViews": 2,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -762,7 +752,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 7,
+      "pageViews": 5,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -775,7 +765,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 1,
+      "pageViews": 2,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -827,7 +817,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 4,
+      "pageViews": 3,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -840,7 +830,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 10,
+      "pageViews": 7,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -866,7 +856,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 9,
+      "pageViews": 8,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -892,7 +882,7 @@
       "status": "published",
       "priceYen": 2980,
       "netPerSaleYen": 2547,
-      "pageViews": 3,
+      "pageViews": 1,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -905,7 +895,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 14,
+      "pageViews": 15,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -944,7 +934,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 5,
+      "pageViews": 6,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -957,7 +947,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 13,
+      "pageViews": 16,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -983,7 +973,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 39,
+      "pageViews": 44,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -1009,7 +999,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 48,
+      "pageViews": 47,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -1022,7 +1012,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 2,
+      "pageViews": 3,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -1061,7 +1051,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 2,
+      "pageViews": 3,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -1074,7 +1064,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 0,
+      "pageViews": 1,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -1113,7 +1103,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 11,
+      "pageViews": 10,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -1243,7 +1233,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 9,
+      "pageViews": 11,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -1256,7 +1246,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 1,
+      "pageViews": 0,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -1269,7 +1259,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 3,
+      "pageViews": 4,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -1936,7 +1926,7 @@
       "status": "published",
       "priceYen": 980,
       "netPerSaleYen": 837,
-      "pageViews": 12,
+      "pageViews": 13,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
@@ -1970,7 +1960,7 @@
       "status": "published",
       "priceYen": 980,
       "netPerSaleYen": 837,
-      "pageViews": 26,
+      "pageViews": 27,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
@@ -2004,7 +1994,7 @@
       "status": "published",
       "priceYen": 980,
       "netPerSaleYen": 837,
-      "pageViews": 7,
+      "pageViews": 8,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
@@ -2038,7 +2028,7 @@
       "status": "published",
       "priceYen": 980,
       "netPerSaleYen": 837,
-      "pageViews": 3,
+      "pageViews": 5,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
@@ -2106,7 +2096,7 @@
       "status": "published",
       "priceYen": 2980,
       "netPerSaleYen": 2547,
-      "pageViews": 21,
+      "pageViews": 23,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
@@ -2123,7 +2113,7 @@
       "status": "published",
       "priceYen": 980,
       "netPerSaleYen": 837,
-      "pageViews": 11,
+      "pageViews": 16,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
@@ -2140,7 +2130,7 @@
       "status": "published",
       "priceYen": 1980,
       "netPerSaleYen": 1692,
-      "pageViews": 10,
+      "pageViews": 25,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
@@ -2153,7 +2143,7 @@
       "channel": "kdp",
       "key": "K-S1-01",
       "title": "年収が高い県は、暮らしも豊かなのか",
-      "line": null,
+      "line": "kdp-stopped",
       "status": "previous_unpublished",
       "priceYen": 800,
       "netPerSaleYen": null,
@@ -2166,7 +2156,7 @@
       "channel": "kdp",
       "key": "K-S1-02",
       "title": "食卓の支出と購入数量 — 家計調査の地域差を読む",
-      "line": null,
+      "line": "kdp-stopped",
       "status": "previous_unpublished",
       "priceYen": 800,
       "netPerSaleYen": null,
@@ -2205,7 +2195,7 @@
       "channel": "kdp",
       "key": "K-S1-05",
       "title": "教育と子育ての地図 — 教育費・進学率・子育て指標",
-      "line": null,
+      "line": "kdp-stopped",
       "status": "previous_unpublished",
       "priceYen": 800,
       "netPerSaleYen": null,
@@ -2231,7 +2221,7 @@
       "channel": "kdp",
       "key": "K-S1-07",
       "title": "観光とインバウンドの地図 — 宿泊・国籍・回復",
-      "line": null,
+      "line": "kdp-stopped",
       "status": "previous_unpublished",
       "priceYen": 800,
       "netPerSaleYen": null,
@@ -2244,7 +2234,7 @@
       "channel": "kdp",
       "key": "K-S1-08",
       "title": "エネルギーとインフラの地図 — 電力・再エネ・ガス",
-      "line": null,
+      "line": "kdp-stopped",
       "status": "previous_unpublished",
       "priceYen": 800,
       "netPerSaleYen": null,
@@ -2257,7 +2247,7 @@
       "channel": "kdp",
       "key": "K-S1-09",
       "title": "産業と地域経済の地図 — 製造・中小・地価",
-      "line": null,
+      "line": "kdp-stopped",
       "status": "previous_unpublished",
       "priceYen": 800,
       "netPerSaleYen": null,
@@ -2270,7 +2260,7 @@
       "channel": "kdp",
       "key": "K-S1-10",
       "title": "安全と環境の地図 — 犯罪・労災・公害・防災",
-      "line": null,
+      "line": "kdp-stopped",
       "status": "previous_unpublished",
       "priceYen": 500,
       "netPerSaleYen": null,
@@ -2283,7 +2273,7 @@
       "channel": "kdp",
       "key": "K-S1-11",
       "title": "文化・スポーツ・余暇の地図",
-      "line": null,
+      "line": "kdp-stopped",
       "status": "previous_unpublished",
       "priceYen": 500,
       "netPerSaleYen": null,
@@ -2296,7 +2286,7 @@
       "channel": "kdp",
       "key": "K-S1-12",
       "title": "デジタル生活の地図 — 通信・PC・テレワーク",
-      "line": null,
+      "line": "kdp-stopped",
       "status": "previous_unpublished",
       "priceYen": 500,
       "netPerSaleYen": null,
@@ -2311,6 +2301,19 @@
       "title": "住む県の選び方 — 統計で比べる5つの条件",
       "line": "kdp-live",
       "status": "live",
+      "priceYen": 500,
+      "netPerSaleYen": null,
+      "pageViews": null,
+      "salesYen": 0,
+      "unitsSold": 0,
+      "lastPriceChange": null
+    },
+    {
+      "channel": "kdp",
+      "key": "K-S1-14",
+      "title": "47都市の食卓は似てきたのか — 家計調査で読む19年の変化",
+      "line": "kdp-live",
+      "status": "submitted",
       "priceYen": 500,
       "netPerSaleYen": null,
       "pageViews": null,
