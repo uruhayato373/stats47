@@ -1,212 +1,227 @@
 ---
 title: 今週の計画
 type: weekly-plan
-week: 2026-W46
-date: 2026-11-09
-updated: 2026-11-11
+week: 2026-W47
+date: 2026-11-14
+updated: 2026-11-14
 status: active
 tags: []
 ---
 
-# 2026-W46 今週の計画
+# 2026-W47 今週の計画
 
-期間: 2026-11-09（月）〜 2026-11-15（日）。11 月の 2 週目。
-入力は W44 のレビュー (`data/reviews/weekly/2026-W44.md`、11-08) と W45 の計画の残り、`monthly.md` の重点。
-W45 のレビューは 11-14（土）に書く。今週の計画は月曜に書いたので、土曜にはレビューのあと W47 の計画を続けて書く。
+期間: 2026-11-16（月）〜 2026-11-22（日）。11 月の 3 週目。
+入力は W45 のレビュー (`data/reviews/weekly/2026-W45.md`、11-14) と、11-14 時点の W46 の計画の状態、`monthly.md` の重点。
+W46 のレビューは 11-21（土）に書き、続けて W48 の計画を書く。
 
 ## 週
 
-- **ISO Week**: 2026-W46
-- **期間**: 2026-11-09 〜 2026-11-15
-- **Sprint**: 2026-11 の Week 2
+- **ISO Week**: 2026-W47
+- **期間**: 2026-11-16 〜 2026-11-22
+- **Sprint**: 2026-11 の Week 3
 
 ## 前週の申し送り
 
-W44 のレビューの「来週への申し送り」16 件を照合した。
+W45 のレビューの「来週への申し送り」32 件を照合した。
 
-| 申し送り | 振り分け | W46 での扱い |
+| 申し送り | 振り分け | W47 での扱い |
 |---|---|---|
-| 手で回す週次の取得の 2 回目で、KDP の取り直しなしに 5/5 そろうか | `MEASUREMENT-MAC-DIRECT-01` | **Must 3** (11-14) |
-| `--wait-human` の売上レポート側の修正をコミットし、次のログイン切れで確かめる | `MEASUREMENT-MAC-DIRECT-01` | コミットは済み (`14e7b70c4`)。実地の確認はログインが切れた週に行う |
-| 販売台帳の取り込みが conflict (衝突 0 件) と判定される理由 | `KDP-LEDGER-AUTO-01` | Should 3 |
-| 商品群に入らない KDP の本 9 冊 | `KDP-LEDGER-AUTO-01` | Should 3 |
-| ページ UI の確認の読み残し 63 画面 | `PAGE-UI-REVIEW-COVERAGE-01` | 見送り (重点外。損失は観測されていない) |
-| ページ品質の error 164 件 | `PAGE-QUALITY-ERRORS-01` | 見送り (同上) |
-| `ai-content-gemini-daily` の 6 回連続失敗 | `AI-CONTENT-GEMINI-KEY-01` | オーナー作業 (日次公開の承認と変数) |
-| `quality-suite-weekly` と `affiliate-ga4-weekly` の連続失敗 | #1202 | Could 2 |
-| ブログの図の chart-axes が 3 件 | `CHART-AXIS-READABILITY-01` | 見送り (家計調査の書き直しで触れる図だけ直す) |
-| note の回遊の error 24 件と商品カードの HTTP 403 | `NOTE-CIRCULATION-LINK-FIX-01` | オーナー作業 (置換案の確認。W45 に作成済み) |
-| 調査紐付けの ratchet 下限 (2,124 → 2,123) | 定常 | 11-14 の週次監査で再確認 |
-| 撤退済みココナラの古いテスト | 見送り | 11-08 に解消済み |
-| 🔴 12 枚を上限 10 へ | 定常 | 下の「🔴 の扱い」 |
-| search-growth の保留候補の承認・却下 | 定常 | オーナー作業 |
-| 実装計画 4 本 (43・44・45・47) に受け皿のカードが無い | 定常 | 見送り (月次レビューで扱う) |
-| X の投稿が 3 週続けて 0 件 | 見送り | 見送り (SNS は 2026-10-23 のオーナー判断で後回し) |
+| GSC 画面の取得と internal-links が例外で落ちる | `WEEKLY-COLLECT-NODE20-FAIL-01` | **Must 1** (11-21 の取得の前) |
+| 2 週続けて残った計測の Must を降格する | `MEASUREMENT-MAC-DIRECT-01` | 定常 (11-21 の取得のあとに完了条件を読む。Must には再掲しない) |
+| KDP の販売台帳の取り込みが conflict | `KDP-LEDGER-AUTO-01` | Should 2 |
+| 商品群に入らない KDP の本 9 冊 | `CONTENT-FOLLOWUP-01` | オーナー作業 |
+| note の自動ログイン失敗の印 | `AUTH-CREDENTIAL-REGISTER-01` | オーナー作業 |
+| 財政比較 note 2 本の判定 (期限 11-09 を超過) | `NOTE-FISCAL-PEER-SALES-01` | 改善ログの節 (判定不能として improvement-triage へ) |
+| AdSense のベースラインの判定 | `ADSENSE-PLACEMENT-01` | 改善ログの節 |
+| AdSense の確定 7 日の期間の日付 | `ADSENSE-LATEST-PERIOD-01` | Could 2 (`[実行:sweep]`) |
+| 送信済みビューの記録の最初の行 | `GSC-SOURCE-FRESHNESS-01` | 定常 (11-21 の取得の後。Must 1 が前提) |
+| カバレッジ履歴の W45 行が W44 行と同値 | `GSC-COVERAGE-TOTALS-DUP-ROW-01` | Should 3 |
+| `quality-suite-weekly` の 3 週連続の失敗 | `QUALITY-SUITE-WEEKLY-RED-01` | Should 1 |
+| `affiliate-ga4-weekly` の 4 回連続の失敗 | #1207 | 見送り (アフィリエイトは維持の領域。Should 1 の調べで同じ原因が見つかったときだけ扱う) |
+| ranking-integrity の「違反あり」 | `RANKING-INTEGRITY-AUDIT-FLAKE-01` | 見送り (重点外。11-21 の監査で再び出たらログを読む) |
+| note の回遊の errors 20 件 | #1149 | 見送り (置換案はオーナーの確認待ち `NOTE-CIRCULATION-LINK-FIX-01`) |
+| 家計調査の記事で有料 note のカードが無い | #1064 | 見送り (SNS の領域。Must 2 の家計調査の点検で該当記事を一覧に入れる) |
+| 参照されない docs 4 件 | `DOCS-GOVERNANCE-GAPS-01` | 見送り (重点外) |
+| ブログの是正キューの pending 537 件 | `BLOG-REMEDIATION-PROOF-01` | 見送り (全型一律の是正は今月しない) |
+| 調査分類の S6 警告 3 件 | `SURVEY-PAGES-01` | 見送り (survey-curator の運用) |
+| ページ UI の high の指摘 2 件 | `UI-FIX-GEO-ANALYSIS-LAYER-20261114` ほか | Could 1 |
+| ページ UI の読み残し 63 画面 | `PAGE-UI-REVIEW-COVERAGE-01` | 見送り (重点外。損失は観測されていない) |
+| 🔴 の 1 番目が 2 週進まない | `THEME-DASHBOARD-TEXT-TRIM-01` | **Must 3** (1 週で届く段に分割) |
+| Workers CPU の比較が 3 週持ち越し | `CF-CPU-SURGE-01` | Could 3 (進まなければ 11-21 のレビューで `CF-CPU-URL-01` へ寄せるかをオーナーに諮る) |
+| Cloudflare の API トークンの権限 | `GSC-USER-ACTIONS-01` | オーナー作業 |
+| search-growth の保留候補 3 件 | 定常 | オーナー作業 |
+| ASP の台帳登録 | 定常 | オーナー作業 |
+| 事業イシューマップの判定日を過ぎた 2 マス | 定常 | オーナーの承認の後に W46 のレビューで反映 |
+| backlog 367 枚と期日超過 30 枚の仕分け | 定常 | 定常 (下の節) |
+| `site-pageviews`・`work-context-sessions` に施策が 0 件 | 定常 | 11 月の月次レビューで判断 |
+| 月次計画と EXP-011 の状態の食い違い | 定常 | 月次計画の見直しで直す |
+| EXP-006 の人の作業 2 件 | EXP-006 | オーナー作業 |
+| PSI の週次 snapshot の `PSI_API_KEY` 未設定 | 見送り | 受け皿のカードが無い (起票待ち) |
+| X の投稿と指標が無い | 見送り | 見送り (SNS は 2026-10-23 のオーナー判断で後回し) |
 
 ## 今月の重点（月次計画より）
 
 - **重点テーマ**: 家計調査の年次更新と回遊 (サイト) / 製造品出荷額のデータ商品を note で売る (商品)（→ `monthly.md`）
-- **月次の想定より進んでいること**: W45 のうちに、商品は 11-04 に note で ¥980 で公開し、市区町村ランキングに案内を置いた (月次では W47〜W48 の予定)。家計調査は上位 5 品目を 2025 年表へ更新して main へ入れ (PR #1205)、記事 81 本を公開した (11-05)。
-- **今週この重点で進めること**: 商品は実験の台帳を running にして 6 週の計測を始める。家計調査は、題に 2024 年の値が残る記事のうち流入の多いものを 2025 年の値へ書き直す。
+- **今週この重点で進めること**: 月次の配分では W47 は「家計調査の費目別の導線とテーマ・ブログを localhost で確かめる」週。11-13 までに題に旧年の値が残る記事 109 本の書き直しと公開が済んだので、残りは W48 の一括の本番反映の対象を確定させること。商品は EXP-007 が running で、判定日 12-16 まで観測を続ける (新しい作業はしない)。
 
-## 前週の振り返り (W45)
+## 前週の振り返り (W46)
 
-W45 のレビューは 11-14 に書く。ここでは計画の checkbox と backlog カードの記録から状態を拾う。
+W46 は 11-15 まで続く。11-14 時点の checkbox とカードの記録から拾った。
 
 | タスク | 分類 | 状態 | メモ |
 |---|---|---|---|
-| 土曜の認証付き計測の記録を develop に届ける `MEASUREMENT-MAC-DIRECT-01` | Must | 一部 | 11-07 の自動取得は失敗。11-08 に自動起動をやめて手で回し、KDP に入り直して 5/5 を記録した (`1eeb28bd3`) |
-| 県別ランキングの観測と title の目標値の引き渡し `MUNI-PREF-RANKING-OBS-01` | Must | 完了 | 11-01 |
-| 待機児童率の指標と R2 反映 `MUNI-KOSODATE-METRICS-01` | Must | 完了 | 11-01 |
-| 家計調査の検索入口の棚卸し `CONTENT-KAKEI-EXPANSION-01` | Should | 別の形で完了 | 一覧の形ではなく、到達の実測 `data/surveys/kakei-coverage.json` (11-04) と上位 5 品目の更新で置き換わった。今週は持ち越さない |
-| Gemini 無料枠の 1 件確認 | Should | 完了 | run `41271164945` |
-| 製造品出荷額の下調べ `MUNI-DATA-PRODUCT-BUILD-01` | Should | 完了 | 11-04 にデータ完成・note 公開まで進んだ |
-| Workers CPU の比較 `CF-CPU-SURGE-01` | Should | 未達 | 反映前の窓が 2 日しかなく判定できない。検証期日 11-14 |
-| KDP の販売台帳の自動記録 `KDP-LEDGER-AUTO-01` | Should | 未達 | 11-08 に取得は通ったが、取り込みが conflict 判定 |
-| 導線名なしの割合 / note の回遊の置換案 | Could | 完了 | 11-01 |
+| 製造品出荷額の実験を running にする `MUNI-DATA-PRODUCT-PILOT-01` | Must | 完了 | 11-09。EXP-007 は開始 11-04・判定日 12-16 |
+| 家計調査の題に 2024 年の値が残る記事の書き直し `KAKEI-EXPANSION-02` | Must | 完了 | 6 本の目標を超え、109 本を書き直して 11-13 までに公開した (blog-critic の再審査で全本 PASS) |
+| 手で回す週次の取得の 2 回目と CI 専用のコードの削除 `MEASUREMENT-MAC-DIRECT-01` | Must | 一部 | CI 専用のコードは 11-14 に撤去した (`13071e5ef`)。11-14 の取得は KDP にオーナーの再認証が要り、GSC は例外で失敗した |
+| 製造品出荷額の 2 指標の重複 `MUNI-DATA-DEDUP-01` | Should | 一部 | 11-14 に原因を調べた。解消の方針はオーナーの判断待ち |
+| 家計調査の全国時系列・収入別の図 `KAKEI-MULTIAXIS-01` | Should | 未確認 | カードに 11-09 以降の記録が無い |
+| KDP の販売台帳の取り込み `KDP-LEDGER-AUTO-01` | Should | 未達 | `products:sales -- validate` は未実行 |
+| Workers CPU の `_rsc` の割合 `CF-CPU-SURGE-01` | Could | 未達 | 記録なし |
+| `quality-suite-weekly` の失敗の原因 (#1202) | Could | 一部 | 11-14 に 3 回の run の落ちた job を `QUALITY-SUITE-WEEKLY-RED-01` へ書いた。原因は未調査 |
 
-**パターン分析**: Must の残り 1 件は、計測の不具合の直し方そのものが変わった (自動 → 手動) ため。
-一方で W45 も計画外の作業が多い (11-02〜11-08 の非 merge コミット 356 件)。ただし今回は重点の 2 テーマの前倒しが中心で、W44 の「重点外のテーマページの作り直し」とは性質が違う。
-変わらないのは、計画にない作業が進み計画の checkbox が更新されない点。今週は Must を重点の次の段に合わせ、計画外の作業は 11-14 のレビューで数える。
+**パターン分析**: W45 は Must 2/3、W46 は 11-14 時点で 2/3。両週とも残ったのは計測の Must で、原因は毎週違う (自動起動の失敗 → KDP の再認証と GSC の例外)。計測の Must は「取得が 1 回通る」を完了条件にしていたため、取得のどこか 1 か所が落ちると週ごと未達になる。今週は GSC の例外という 1 つの不具合に絞って Must にし、計測のカードそのものは土曜の確認へ降格した。
+KDP の販売台帳 (`KDP-LEDGER-AUTO-01`) は W45・W46 と Should で 2 週続けて未達、Workers CPU (`CF-CPU-SURGE-01`) は W43 から 3 週持ち越している。
 
 ## 現状サマリー
 
-数値は W44 の計測 (`data/measurement-cycle/latest.json`、11-08 作り直し) による。
+数値は W45 の計測 (`data/measurement-cycle/LATEST.md`、11-14 作り直し) による。
 
 | 指標 | 現在値 | 比較・目標 |
 |---|---:|---|
-| GSC clicks (確定 7 日 10-23〜10-29) | 5,042 | 前 7 日比 +21.9% |
-| ★ 検索クリック (GSC rolling28d) | 16,701 | 4 週前 (W40) 11,023、W52 目標 20,000 |
-| ★ ページビュー (GA4 Japan 確定 7 日 × 4 週) | 52,955 | W40 43,907、W52 目標 79,000 |
-| ★ サイト内回遊率 (ブログ→ランキング) | 10.1% | W40 8.2% |
-| ★ 業務文脈の着地セッション | 4,800 | W40 3,560 |
-| 週次収益 (NSM) | 判定不能 (5 週連続) | AdSense ¥313。KDP・note は週の値が欠ける |
-| 計測の鮮度 | 11/11 | 11-08 に KDP へ入り直した後。`npm run measurement:status` で 5 取得元とも pass (11-09) |
-| データ品質ゲート通過率 | 100.0% | 11-06 |
-| 公開記事数 | W44 2 本 | W45 は家計調査 81 本 (11-05) |
-| SNS 投稿 (W44) | Threads 12 / Instagram 1 / X 0 | SNS は後回し |
-| GSC運用サイクル | review-input FAIL 0 / plan FAIL 1 | review-input (11-09) は WARN 1 (`ADSENSE-PLACEMENT-01` のベースライン 3/4 週・判定 11-13)。plan の検査 (`audit-operations-cycle.mjs --stage plan --strict`、11-09) は `snapshot-freshness` が FAIL (最新 W44・期待 W45 以上)。W45 の GSC snapshot は 11-14 (土) の週次取得で作られる予定で、11-08 の値が確定する前に手で取らない。11-14 の取得後に同じ検査を再実行する |
-| KDP公開ゲート | measure | 下の節 |
-| 本番未反映 | 本番に効く 142 件 | `npm run release:status` (11-09)。開いている PR なし |
+| GSC clicks (確定 7 日 10-30〜11-05) | 5,512 | 前 7 日比 +9.3% |
+| ★ 検索クリック (GSC rolling28d) | 18,592 | 4 週前 (W41) 12,263、W52 目標 20,000 |
+| ★ ページビュー (GA4 Japan 確定 7 日 × 4 週) | 56,533 | W41 44,662、W52 目標 79,000 |
+| ★ サイト内回遊率 (ブログ→ランキング) | 9.5% | W41 8.6% |
+| ★ 業務文脈の着地セッション | 4,717 | W41 3,828 |
+| 週次収益 (NSM) | 判定不能 (6 週連続) | AdSense ¥461。KDP・note は週の値が欠ける |
+| 計測の鮮度 | 10/11 (degraded) | gsc が runner_failed。Must 1 で是正 |
+| データ品質ゲート通過率 | 100.0% (2,595/2,596) | 監査 11-14 |
+| インデックス登録率 | missing | 送信済みビューの記録が未作成 |
+| 公開記事数 | 家計調査の書き直し 109 本 (W46) | W45 は送り箱へ 81 本 |
+| SNS 投稿 | X・Threads は記録なし | SNS は後回し |
+| GSC運用サイクル | review-input FAIL 0 / WARN 1 | `submitted-view-freshness` (送信済みビューの初回の記録待ち) |
+| KDP公開ゲート | observe | 下の節 |
+| backlog | 367 枚 / 目安 200 | 期日超過 30 枚 |
 
 ## トレンド機会
 
-今回は Track E (はてな・Google News・Yahoo の RSS) を取得していない。今週の Must は 11 月の重点で埋まっており、時事の記事化は計画しない。
+今回は Track E (はてな・Google News・Yahoo の RSS) を取得していない。今週の Must は 11 月の重点と計測の是正で埋まっており、時事の記事化は計画しない。
 
 ## 前週からの持ち越し
 
-- [ ] **Workers CPU の比較と引き渡し** — 元: W45 Should (`CF-CPU-SURGE-01`) → 今週 Could 1
-- [ ] **KDP の販売台帳の自動記録の確認** — 元: W45 Should (`KDP-LEDGER-AUTO-01`) → 今週 Should 3
-- 家計調査の検索入口の棚卸し (`CONTENT-KAKEI-EXPANSION-01`) は別の形で済んだので持ち越さない (上の振り返り)
+- [ ] **手で回す週次の取得の 2 回目** — 元: W46 Must 3 (`MEASUREMENT-MAC-DIRECT-01`) → 2 週連続で残ったので Must から降格し、定常の 11-21 の確認にする。今週の Must 1 は原因の不具合 (`WEEKLY-COLLECT-NODE20-FAIL-01`) に絞った
+- [ ] **製造品出荷額の 2 指標の重複** — 元: W46 Should (`MUNI-DATA-DEDUP-01`) → オーナー作業 (解消の方針の判断)
+- [ ] **家計調査の全国時系列・収入別の図** — 元: W46 Should (`KAKEI-MULTIAXIS-01`) → 今週は Must 2 の点検に含める
+- [ ] **KDP の販売台帳の取り込み** — 元: W46 Should (`KDP-LEDGER-AUTO-01`) → 今週 Should 2
+- [ ] **Workers CPU の `_rsc` の割合** — 元: W46 Could (`CF-CPU-SURGE-01`) → 今週 Could 3
+- [ ] **`quality-suite-weekly` の失敗の原因** — 元: W46 Could (#1202) → 今週 Should 1 (`QUALITY-SUITE-WEEKLY-RED-01`)
+
+持ち越しが 6 件あるので、今週の Must は 1 週で届く完了条件に切り、Should・Could は落としてよい順に並べた。
 
 ## 改善ログ pending (今週着手対象)
 
 | Tier | Metric | ID | Status | Due | Owner |
 |---|---|---|---|---|---|
 | 1 | adsense | ADSENSE-PLACEMENT-01 | pending | 2026-11-14 | claude |
-| 2 | gsc | MUNI-PREF-RANKING-OBS-01 | effect/pending | 2026-11-26 | claude |
+| 2 | note | NOTE-FISCAL-PEER-SALES-01 | pending | 2026-11-09 | claude |
 | 2 | ga4 | RELATED-ARTICLES-EFFECT-01 | effect/pending | 2026-11-17 | claude |
+| 2 | gsc-manual | MUNI-PAGE-SEO-01 | pending | 2026-11-21 | claude |
+| 1 | gsc | MUNI-PREF-RANKING-OBS-01 | effect/pending | 2026-11-26 | claude |
+| 1 | cloudflare | CF-CPU-URL-01 | pending | 2026-11-27 | claude |
 
-`ADSENSE-PLACEMENT-01` は 11-13 以降に再開後 4 週のベースラインを判定する (W45 分は 11-14 の取得で入る)。配置の変更は判定のあと、人間承認済みの 1 件だけ。
+- `ADSENSE-PLACEMENT-01`: ベースライン 4/4 週 (W42〜W45) がそろった。4 週の間に表示広告の固定化 (10-31) と自動広告のアンカー (11-04) が入っているので、配置の効果としては読まない。improvement-triage が判定を記録し、配置の変更は人間承認済みの 1 件だけにする。
+- `NOTE-FISCAL-PEER-SALES-01`: 期限 11-09 を過ぎた。note の売上の記録が 10-17 で止まっているので、手順どおり判定不能とし、次の期日 12-07 を improvement-triage が置く。
+- `RELATED-ARTICLES-EFFECT-01`: 11-17 に W44〜W46 を改善ログの再現コマンドで取り、W40〜W42 の範囲 (2.90〜3.76%) と比べる。
+- `MUNI-PAGE-SEO-01`: 11-21 以降に改善ログの検証コマンドで差の差を取る。
 
 ## 今週のタスク
 
 ### Must（絶対達成、3件）
 
-- [x] **製造品出荷額の商品の実験を running にし、6 週の計測を始める** [S] — `MUNI-DATA-PRODUCT-PILOT-01`（商品領域・KPI `paid-purchases`）。
-  note の公開 (11-04) は済んだが、実験の台帳 `data/business/experiments.json` の EXP-007 は proposed のまま、開始日と判定日も無い (11-09 確認)。月次のゴールの「EXP-007 が running で判定日が入っている」を満たしていない。
-  ① ランキングページの 1 行の案内が本番に出ているかを確かめる (develop にあって本番に無いなら、開始日はデプロイ日にする)
-  ② EXP-007 を running にし、開始日と 6 週の判定日 (カードの 2026-12-16 か、本番に出た日から 6 週) を入れる
-  ③ 週次で読むもの (案内の `nav_click`・note の販売数) と、その取得元を台帳かカードに 1 行で書く。
-  完了条件: `node .claude/scripts/lib/experiments-state.mjs active` に EXP-007 が running で出て、判定日が入っている。
-  **結果 (2026-11-09)**: ① 案内は 11-04 の PR #1219 (main 13:11 JST) で本番に出ていた。本番の `/municipalities/ranking/manufacturing-shipment-amount` が HTTP 200 で `/products/data-muni-manufacturing` へのリンクを持つ (curl で確認)。② EXP-007 を running にし、開始日 2026-11-04・判定日 2026-12-16 を入れた。③ 週次で読むもの (案内のクリック = GA4 の nav_click / product_click、販売数 = 販売台帳の note 行) を EXP-007 の `measurement` に書いた。6 週の観測は実験台帳が持つので、🔴 の `MUNI-DATA-PRODUCT-SALE-01` は消した。
-- [ ] **家計調査の記事のうち、題に 2024 年の値が残り流入の多い 6 本を 2025 年の値へ書き直す** [M] — `KAKEI-EXPANSION-02`（データ領域）/ `CONTENT-KAKEI-EXPANSION-01`（サイト領域）。
-  上位 5 品目のランキングは 2025 年になったが、題 (title / seoTitle) に 2024 年の値が残る記事が 138 本ある。題と順位が食い違うと、検索から来た読者が混乱する。
-  今週は流入の多い 6 本 (チョコレート・すし・緑茶・即席麺・清酒・牛肉。一覧は `node .claude/scripts/blog/find-kakei-stale-title-values.mjs`) に絞り、題・本文・図をランキングの 2025 年の値にそろえる。
-  1 本ずつ article-writer → `quality-gate` → blog-critic PASS の順に通す。ランキングの値が 2025 年になっていない品目は書き直さない (カードの停止条件)。
-  完了条件: 6 本が critic PASS で公開の送り箱に入り、`find-kakei-stale-title-values.mjs` の件数が 6 本分減っている。
-- [ ] **手で回す週次の取得の 2 回目を通し、CI 専用のコードを消す** [M] — `MEASUREMENT-MAC-DIRECT-01`（🔴 1 番目・管理領域・KPI `measurement-freshness`）。
-  ① 11-14（土）に `npm run weekly:collect` を回し、KDP に入り直さずに 5/5 そろうかを記録する (そろわなければ、どの段で止まったかをカードに書く)
-  ② ① が通ったら、カードの「次 2」の CI 専用コード (`collect.mjs` の CI 分岐・`refresh-session.mjs --ci/--publish`・`set-ci-secret.mjs`・`auth-recovery.mjs` ほか) を削除し、`npm run measurement:test` を通す。
-  完了条件: 11-14 の記録コミットが develop にあり、`npm run measurement:status` が全行 pass で、CI 専用コードが削除されテストが通っている。① が通らなければ ② は行わず、Must は「一部」と記録する。
+- [ ] **週次の取得で GSC 画面の取得と internal-links が例外で落ちる件を直す** [S] — `WEEKLY-COLLECT-NODE20-FAIL-01`（管理領域・不具合・KPI `measurement-freshness`）。
+  ガードレールの計測の鮮度が 11/11 から 10/11 に下がった。GSC の除外理由の内訳はその時点の書き出しなので、落ちた週の分は後から取れない。
+  ① カードの仮説を検証する: `cd ~/stats47-measurement && node -v && node -e "require('./.claude/scripts/lib/prefectures.cjs')"` を v20 と v22 で実行して比べる
+  ② 取得の失敗時に例外の本体 (最初の行) を `message` に残す
+  ③ ① の結果に従い、専用 clone の Node の版を揃えるか require の経路を直す。直したら専用 clone で internal-links だけを手で回して例外が出ないことを確かめる。
+  ①〜③ は 11-20（金）までに済ませる。完了条件: 11-21（土）の `npm run weekly:collect` で GSC の取得元が pass になり、internal-links が例外なしで走り切る。GSC がログイン切れで落ちた場合は、例外ではないことが ② の記録で分かれば Must は完了とし、ログインはオーナー作業に回す。
+- [ ] **家計調査の変更面を localhost で点検し、W48 の一括の本番反映の対象を確定させる** [M] — `CONTENT-KAKEI-EXPANSION-01`（🔴 2 番目・サイト領域・KPI `search-clicks`・`site-circulation-rate`）。
+  月次計画の W47 の段。題の書き直し (109 本) は済んだので、次は公開した変更を本番に出す前の点検。
+  ① カードの「反映待ち」5 項目 (697 件の item.json の再生成・相関 snapshot の再計算・エンゲル係数のテーマ表示・ハブ名の再出力・「読み解く記事」の題) ごとに、反映の手段 (sync-snapshots の task 名・workflow) と承認の要否を一覧にする
+  ② 調査ハブ → テーマ → ランキング → ブログの代表 URL を 10 件選び、localhost (`npm run dev:web`) で対象世帯・地域・期間・単位・出典と次の導線があるかを確かめる。全国時系列・収入別の図 (`KAKEI-MULTIAXIS-01`) の載る面を含める
+  ③ 有料 note のカードが無い家計調査の記事 (#1064 の `b-kakei-expense-*`) を一覧に加える。
+  完了条件: カードに ①②③ の一覧と、代表 10 URL の確認結果 (合格・要修正) が書かれ、W48 に出す変更の範囲が決まっている。本番反映・R2 の正本の更新はこの Must に含めない (オーナー承認)。
+- [ ] **[分割] テーマページの表を上位・下位の数行に畳み、3 テーマで見える文字と高さを測る** [M] — `THEME-DASHBOARD-TEXT-TRIM-01`（🔴 1 番目・サイト領域・KPI `site-pageviews`）。
+  W45・W46 と Must に入らず 2 週進まなかったので、カードの「次」の ① と ③ だけを切り出す。
+  ① データの表を上位・下位の数行だけ見せ、残りは「全件を見る」で開く (HTML には残す)。共通の部品で直し、テーマごとの専用部品は作らない
+  ③ `/themes/living-housing` ほか 2 テーマで、変更の前後の見える文字と高さを同じ測り方で測る。
+  完了条件: 3 テーマの前後の値がカードに書かれ、関連の vitest が通っている。本番反映は W48 の一括に含める。② の説明の Sheet への移動・④ の格子の扱いは次の週へ残す。
 
 ### Should（できればやる、3件）
 
-- [ ] **製造品出荷額の 2 指標が同じ値になっている件を正す** [S] — `MUNI-DATA-DEDUP-01`（データ領域・不具合）。
-  月次では W46。商品の出典の表 ID を確定させるため。① どちらの表から値を取ったかを取得経路で確かめる ② 片方を止めるか取り直すかを決める。R2 への反映はオーナーの承認後なので、今週は ①② と承認依頼まで。
-- [ ] **家計調査の全国時系列・収入別の図を本番へ出す準備をする** [M] — `KAKEI-MULTIAXIS-01`（サイト領域）。
-  `CONTENT-KAKEI-EXPANSION-01` の「予定の 6 表」の残り: data-refresh で 9 指標を取り込み値が範囲に収まるかを確かめ、`kakei-axis-charts` を publish=true で回す。各図に対象世帯・期間・単位・出典があることを localhost で確かめる。本番反映は W48 にまとめる。
-- [ ] **KDP の販売台帳の取り込みが conflict になる理由を確かめ、9 冊を商品群に入れる** [S] — `KDP-LEDGER-AUTO-01`（管理領域）。
-  11-08 の取得は通ったが、取り込みが衝突 0 件で conflict と判定され、商品の台帳は「どの商品群にも入らない本 9 冊」で作り直せなかった。週次収益が 5 週続けて判定不能な理由の 1 つ。
-  完了条件: `npm run products:sales --workspace=@stats47/product-factory -- validate` が PASS する。
+- [ ] **`quality-suite-weekly` の 3 回の失敗を、毎回落ちるものと 1 回だけのものに分ける** [S] — `QUALITY-SUITE-WEEKLY-RED-01`（サイト領域・不具合）。カードの「次」の ①。毎回落ちる job が分かれば、②の原因の実証に進む。`affiliate-ga4-weekly` (#1207) と同じ原因が見つかったときだけ併せて扱う。
+- [ ] **KDP の販売台帳の取り込みが conflict になる理由を確かめる** [S] — `KDP-LEDGER-AUTO-01`（管理領域）。W45・W46 と Should で残った。今週は `npm run products:sales --workspace=@stats47/product-factory -- validate` を実行し、conflict の判定に使われた行をカードに書くところまで。直せない理由がオーナーの判断 (既読ページの埋め方など) なら、判断の依頼を書いて閉じる。3 週目も進まなければ W48 の計画では 🟡 の扱いに下げる。
+- [ ] **GSC カバレッジ履歴の W45 行が W44 行と同値の件を確かめる** [S] — `GSC-COVERAGE-TOTALS-DUP-ROW-01`（サイト領域・不具合）。11-08 の取得の入力と、履歴に行を足すスクリプトの週の決め方を読み、独立した観測か写しかをカードに書く。
 
-### Could（余力があれば、2件）
+### Could（余力があれば、3件）
 
-- [ ] **Workers CPU の `_rsc` の割合を Observability で取り直す** [S] — `CF-CPU-SURGE-01`（管理領域・不具合）。検証期日 11-14。反映前の窓が 2 日しかない問題は残るので、`_rsc` が減ったかどうかだけを確かめ、目標値が置けなければ効果観測の引き渡しはしない。
-- [ ] **`quality-suite-weekly` と `affiliate-ga4-weekly` の連続失敗の原因を読む** [S] — Issue #1202（管理領域・不具合）。ログを読み、原因と直し方を Issue に書くところまで。
+- [ ] **ページ UI の high の指摘 2 件を直す** [S] — `UI-FIX-GEO-ANALYSIS-LAYER-20261114` / `UI-FIX-PREFECTURE-DETAIL-HOKKAIDO-20261114`（サイト領域・不具合）。外国語の広告が画面上部を覆う件と、北海道の表の「全国順位」列が切れる件。
+- [ ] **AdSense の確定 7 日の期間の日付を週次の要約に入れる** [S] — `ADSENSE-LATEST-PERIOD-01`（サイト領域）。`[実行:sweep]` なので backlog-loop に任せてもよい。
+- [ ] **Workers CPU の `_rsc` の割合を Observability で取り直す** [S] — `CF-CPU-SURGE-01`（管理領域・不具合）。W43 から 3 週持ち越し、期日 10-30 を過ぎている。11-21 のレビューまでに進まなければ、`CF-CPU-URL-01` の効果観測に寄せてカードを閉じるかをオーナーに諮る。
 
 ### 定常
 
-- 11-13 以降: `ADSENSE-PLACEMENT-01` の 4 週のベースラインを判定する (11-14 の取得で W45 分が入ってから)。 判定の前に読むこと: この 4 週の間に、表示広告の固定化 (10-31)・自動広告のアンカーの適用 (11-04) とその後の拡大・広告インテントのブログでの開始 (11-11) が入っており、「配置を変えない 4 週」にはなっていない (`ADSENSE-FORMAT-EXPERIMENT-01`・`ADSENSE-OVERLAY-AB-01` の 11-11 の実測)。
-- 11-12 以降: `GSC-CRAWL-WASTE-01` — Googlebot の POST を 24 時間で数え、11-11 の基準 (県×テーマとテーマで 262 件) と比べる。
-- 11-14（土）: `npm run weekly:collect` → `/weekly-review 2026-W45` → `/weekly-plan 2026-W47` を続けて行う。
-- 11-14（土）の取得の後: `GSC-SOURCE-FRESHNESS-01` — `data/gsc/coverage-submitted-history.csv` に最初の行が入り、登録済みが 6,729 と同じ桁かを確かめる。入ったら `review-wiring.json` の週次・月次の入力に足す。概要の export に検証の状態の列があるかも見る。
-- 11-14（土）のレビューで: `ADSENSE-OVERLAY-AB-01` — AdSense の管理画面で、広告インテントの「リンクを既存のテキストに挿入」がオフのままかを読む (オンなら `isAdIntentAllowedPath` を常に false に戻す)。`data/adsense/history-formats.csv` で自動広告の形式別の収益を読む。
-- 11-12 の本番反映の後: `ADSENSE-OVERLAY-AB-01` — Cookie 同意の帯が、本番の広告インテントのアンカーと重ならないことを実測する。
-- 11-25 以降 (W48 の計画へ送る): `GSC-MESSAGE-TRIAGE-01`・`GSC-SITEMAP-LASTMOD-01` — GSC の検証 5 件の結果と、ランキングの `lastmod` の出所 (`all.json` の `updatedAt` が次の生成で動かないか) を読む。
-- ブログの全型一律の是正・新規生成は今週の Must にしない。家計調査の書き直しを優先する。
-- 期日 11-13・11-15 のアフィリエイトのカード 2 枚は、領域が「維持」なので今週は扱わない (11-14 のレビューで期日を置き直す)。
-
-### 🔴 の扱い
-
-🔴 は 11-09 の朝に 12 枚で上限 10 を超えていた。下げずに片付ける方針で、11-09 のうちに 4 枚を完了して消した (8 枚)。
-`KDP-OLD-EDITIONS-UNPUBLISH-01` (旧版 9 冊が HTTP 404)・`MUNI-DATA-PRODUCT-SALE-01` (EXP-007 を running へ)・
-`IMAGE-ROUTES-CATEGORY-CODEX-01` (カテゴリ画像を Codex の経路へ)・`KDP-LISTING-WIRING-01` (紹介文の CI と公開の検査・表紙の縮小確認。
-表紙の「47都道府県」の扱いは判断待ちの `KDP-COVER-47PREF-DECISION-01` へ分けた)。
-残る 8 枚のうち、オーナーの承認が無いと終わらないのは `PRODUCT-REFERRAL-MEASURE-01` (本番反映)・`IA-REGION-THEME-01` (全国テーマの R2 push とデプロイ)・
-`AI-CONTENT-GEMINI-KEY-01` (日次量産の起動)・`DATA-PACK-BUNDLE-01` (note の添付の差し替え)・`KDP-LISTING-COPY-01` (KDP の反映と 4 週の記録)。
+- 11-17: `RELATED-ARTICLES-EFFECT-01` の判定 (改善ログの手順)。
+- 11-21 以降: `MUNI-PAGE-SEO-01` の判定。同じ期日の `MUNI-CITY-PAGE-SNIPPET-01`・`MUNI-TITLE-MAGNITUDE-01` (年間計画) は、この判定の結果を見てから着手するかを決める。
+- 11-21（土）: `npm run weekly:collect` → `/weekly-review 2026-W46` → `/weekly-plan 2026-W48` を続けて行う。
+- 11-21（土）の取得の後: `MEASUREMENT-MAC-DIRECT-01` の完了条件 (記録コミットが develop にあり、`npm run measurement:status` に stale と失敗が無い) を読む。満たせばカードを閉じ、満たさなければ落ちた段だけを新しいカードに分ける。
+- 11-21（土）の取得の後: `GSC-SOURCE-FRESHNESS-01` — `coverage-submitted-history.csv` に最初の行が入り、登録済みが 6,729 と同じ桁かを確かめる (Must 1 が前提)。
+- **backlog の削減** (総枚数 367 / 目安 200、Phase 0b の決まり): 期日を過ぎた 30 枚 (`npm run backlog:waits -- due --week 2026-W47`) を、今週やる・期日を引き直す・消すに 1 枚ずつ決める。消すカードは完了の証拠か統合先があるものだけで、実行台帳に記録してから消す。削減を受け持つカードは backlog に無いので、ここで定常として扱う。
+- 今週が期日の年間計画のカード: `CI-LEAD-TIME-01` (11-20・本番反映が前提なので、反映が無ければ期日を延ばす)、`MINIMUM-WAGE-2026-01` (11-21・データ領域で重点外。公表の確認だけ行い、取り込みは 12 月の月次で判断)、`THEME-CPI-503-01`・`UI-FOLLOWUP-01` (11-21・観測。11-21 の週次監査の結果で判定)。期日の引き直しは年間計画の編集なので todo-curator に依頼する。
+- ブログの全型一律の是正・新規生成は今週の Must にしない。
 
 ## オーナー作業
 
-- **本番への反映**: develop に本番に効く変更が 142 件たまっている (`npm run release:status`、11-09)。家計調査・商品の案内・商品の計測 (`PRODUCT-REFERRAL-MEASURE-01`) を含む。出すかどうか、出すならいつかを決めてほしい。商品の 6 週の計測の開始日はこれで決まる。
-- **`AI-CONTENT-GEMINI-KEY-01`**: 1 件確認は PASS 済み。日次の量産を起動する (repository variable `GEMINI_FREE_TIER_VERIFIED=true`) かを決めてほしい。起動しない間は日次の cron が失敗を続ける。
-- **`NOTE-CIRCULATION-LINK-FIX-01`**: note の公開済み記事のリンク切れ 13 件の置換案 (カードの表) の確認。意味が変わるおそれのある 4 件とホテルの記事 1 件は判断が要る。
-- **search-growth の保留候補** (crawled-not-indexed 5 件ほか) の承認か却下。
-- **KDP の公開ゲート**: K-S1-02 の月次の販売が 4 週の窓をはみ出し、需要あり・なしを判定できない。窓の中の需要として扱うかを決めてほしい (下の節)。
-- **`R2-STORAGE-01`**: R2 の保存量 (43 GB) の保持方針。
+- **GSC の画面のログイン**: Must 1 の結果、例外ではなくログイン切れと分かった場合に `node .claude/scripts/google-admin/cli.mjs login` で入り直してほしい。
+- **`AUTH-CREDENTIAL-REGISTER-01`**: note の自動ログイン失敗の印 (`.local/authenticated-measurement/note.autologin-failed`、10-22 から) を確かめて消してほしい。消えないと note の売上が週次で判定不能のまま。
+- **`CONTENT-FOLLOWUP-01`**: 商品群に入らない KDP の本 9 冊 (K-S1-01・02・05・07・08・09・10・11・12) を、商品群に入れるか台帳から外すかを決めてほしい。
+- **`MUNI-DATA-DEDUP-01`**: 製造品出荷額の重複指標の解消の方針 (市区町村だけの重複指標を止めて amount 側へ寄せるか) を決めてほしい。
+- **`GSC-USER-ACTIONS-01`**: Cloudflare の API トークンにゾーンの analytics の読み取り権限を足してほしい (Googlebot の集計が unavailable)。
+- **作業ツリーの git の衝突**: 4 ファイルの衝突と `stash@{0}` の扱いを決めてほしい (11-14 の取り込みの残り)。
+- **承認待ちの一覧** (W45 のレビューの節): search-growth 候補 3 件の approve / dismiss、ASP の台帳登録、事業イシューマップの 2 マスの書き込み、`[待ち:承認]` のカード 20 枚、開いている PR #1266 と本番への反映。
+- **EXP-006**: YouTube のチャンネルの所有の確認と、各動画の手動投稿。
 
 ## KDP公開ゲート
 
-- **判定**: `measure`（`data/products/kdp-weekly-publication.json`、2026-W46 で再生成）
+- **判定**: `observe`（`data/products/kdp-weekly-publication.json`、2026-W45 で再生成）
 - **候補**: なし
-- **需要証拠**: 判定不能。K-S1-02 の月次の販売が 4 週の窓をはみ出し、窓の中の需要か分からない
-- **停止条件**: 日次の販売記録で窓の中を確かめるか、判定の扱いをオーナーが決めるまで新規公開しない
+- **需要証拠**: 販売数・KENP は not-measured (KDP の日別の観測が 7 日中 1 日)。0 需要ではない
+- **停止条件**: 審査中のパイロット `K-S1-14` の live の read-back まで新規出版を止める
 - **承認境界**: この計画への記載は公開承認ではない。対象 ID の明示承認と `--commit` が別途必要
 
 ## NSM実験
 
-- running は EXP-006 (YouTube の通常動画 pilot) 1 件。EXP-007 (製造品出荷額の商品) は note で販売中なのに proposed のままで、Must 1 で running にする。EXP-013 (商品への送客の計測) は本番反映の後に始める。
-- `/nsm-experiment propose` は実行していない。11 月の打ち手は月次計画で決まっており、新しい候補を足さない。
+- running は EXP-006 (YouTube pilot)・EXP-007 (製造品出荷額の商品、判定日 12-16)・EXP-011 (KDP セレクト)。EXP-011 は月次計画の「今月やらないこと」と食い違っているので、月次計画の見直しで記述を直す。
+- `/nsm-experiment propose` は実行していない。active が 2 件以上あり、11 月の打ち手は月次計画で決まっているので新しい候補を足さない。
 
 ## 批判的レビュー
 
-> **技術的に楽しいだけでは？** Must 1 は台帳の更新だけだが、これが無いと 6 週の判定日が来ても判定できない。Must 2 は検索から来る読者が見る題と値の食い違いを直す作業で、11 月のサイト重点そのもの。
-> Must 3 のコード削除は収益に直結しないが、🔴 の 1 番目で、計測の鮮度 (ガードレール) を守る仕組みの片付けなので入れた。1 回目が通らなければ削除はしない。
+> **技術的に楽しいだけでは？** Must 1 は計測の不具合の是正で収益に直結しないが、ガードレールの計測の鮮度が下がっており、GSC の除外理由は落ちた週の分を後から取れないので重点より先に入れた。Must 2 は 11 月のサイト重点の W47 の段そのもので、W48 の一括反映の範囲を決める。Must 3 は 🔴 の 1 番目で、2 週進まなかったので 1 週で届く段に切った。
 
-> **先週と同じ失敗を繰り返していないか？** W45 は計画外の作業が多く、checkbox が更新されなかった。今週は Must を重点の「次の段」に合わせたので、重点を進めれば checkbox も進む。
-> Must 2 は 6 本・critic PASS まであり M の上限に近い。critic で REVISE が続いたら 4 本で止め、残りは W47 に回す。
+> **先週と同じ失敗を繰り返していないか？** 計測の Must は W45・W46 と残った。完了条件が「取得全体が 1 回通る」で、取得のどこか 1 か所が落ちると未達になっていたので、今週は原因の 1 件 (`WEEKLY-COLLECT-NODE20-FAIL-01`) に絞り、計測のカードは土曜の確認へ降格した。
+> 持ち越しが 6 件ある。Should・Could は落としてよい順に並べ、Must 2 は一覧と点検までで、本番反映を完了条件に入れていない。
 
-> **今週でなければ意味がないことは？** EXP-007 は販売開始から 5 日たっており、開始日が後ろにずれるほど 6 週の判定が遅れる。11-14 の取得は週次の計測の 2 回目で、手動の形が続けられるかの判断材料になる。
-> `ADSENSE-PLACEMENT-01` の判定は 11-13 以降。
+> **今週でなければ意味がないことは？** Must 1 は 11-21 の取得より前に直さないと、W46 の分に続いて W47 の除外理由も取れない。`RELATED-ARTICLES-EFFECT-01` (11-17) と `MUNI-PAGE-SEO-01` (11-21) の判定日が今週に来る。
+> 例外の扱い: Phase 0b の決まりでは backlog が目安を超えた週は削減を Must に入れるが、削減を受け持つカードが無く、Must を 3 件に保つため定常に置いた。
 
 ## 関連ドキュメント・施策
 
-- 前週レビュー: `data/reviews/weekly/2026-W44.md` (W45 のレビューは 11-14)
+- 前週レビュー: `data/reviews/weekly/2026-W45.md` (W46 のレビューは 11-21)
 - 11 月の重点: `.claude/todo/monthly.md`
-- 計測サイクル: `data/measurement-cycle/latest.json` (W44、11-08)
-- backlog: `MUNI-DATA-PRODUCT-PILOT-01` / `KAKEI-EXPANSION-02` / `CONTENT-KAKEI-EXPANSION-01` / `MEASUREMENT-MAC-DIRECT-01` / `MUNI-DATA-DEDUP-01` / `KAKEI-MULTIAXIS-01` / `KDP-LEDGER-AUTO-01` / `CF-CPU-SURGE-01`
-- 改善施策: `ADSENSE-PLACEMENT-01` / `MUNI-PREF-RANKING-OBS-01` / `RELATED-ARTICLES-EFFECT-01`
-- 打ち手の台帳: `data/business/experiments.json` (EXP-006・EXP-007・EXP-013)
+- 計測サイクル: `data/measurement-cycle/latest.json` (W45、11-14)
+- backlog: `WEEKLY-COLLECT-NODE20-FAIL-01` / `CONTENT-KAKEI-EXPANSION-01` / `KAKEI-MULTIAXIS-01` / `THEME-DASHBOARD-TEXT-TRIM-01` / `QUALITY-SUITE-WEEKLY-RED-01` / `KDP-LEDGER-AUTO-01` / `GSC-COVERAGE-TOTALS-DUP-ROW-01` / `UI-FIX-GEO-ANALYSIS-LAYER-20261114` / `UI-FIX-PREFECTURE-DETAIL-HOKKAIDO-20261114` / `ADSENSE-LATEST-PERIOD-01` / `CF-CPU-SURGE-01`
+- 年間計画: `MEASUREMENT-MAC-DIRECT-01` / `GSC-SOURCE-FRESHNESS-01` / `CI-LEAD-TIME-01` / `MINIMUM-WAGE-2026-01` / `MUNI-CITY-PAGE-SNIPPET-01` / `MUNI-TITLE-MAGNITUDE-01` / `THEME-CPI-503-01` / `UI-FOLLOWUP-01`
+- 改善施策: `ADSENSE-PLACEMENT-01` / `NOTE-FISCAL-PEER-SALES-01` / `RELATED-ARTICLES-EFFECT-01` / `MUNI-PAGE-SEO-01` / `MUNI-PREF-RANKING-OBS-01` / `CF-CPU-URL-01`
+- 打ち手の台帳: `data/business/experiments.json` (EXP-006・EXP-007・EXP-011)
 
 ## 次週への申し送り候補
 

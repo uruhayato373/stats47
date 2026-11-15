@@ -1268,6 +1268,51 @@ updated: 2026-11-01
 - **次**: 判断の後、前処理に取得失敗の許容を足し、2 テストに固定データの有無の判定を入れる (約 1 時間)。Build Check の R2 読み取り件数と所要の測定は未着手。
 - **完了条件**: 公開 R2 が不調でも、関係の無い PR の必須チェックが落ちない。
 
+### [QUALITY-SUITE-WEEKLY-RED-01] 週次フル品質検査 (main) が 3 週続けて失敗している
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-14] [領域:サイト]
+
+- **観測 (2026-11-14)**: `quality-suite-weekly.yml` の main の run が 10-30 (`41122877579`)・11-06 (`42295351706`)・11-13 (`43513853562`) の 3 回とも failure (Issue #1202)。11-13 の run で落ちた job は 4 つ。① Full unit tests and coverage: 2995 件中 2 件が `Test timed out in 10000ms` (`population-profile-ui.test.tsx` の「全47県・3男女・21年齢の県間in/out…」、`bridge-inspection-age-ui.test.tsx` の「全国→全47県→全国で7帯…」) ② Full web build and E2E: 10 件 (`blog-detail.spec.ts` 4 件・`blog-list.spec.ts` 3 件・`comparison.spec.ts:45`・`header-navigation.spec.ts:41`・`:95`) が `element(s) not found` / `toBeVisible() failed` ③ Theme quality audit: exit code 1 (落ちた検査の行は未特定) ④ OGP image audit: `Fatal: R2 fetch failed: …/app/blog/gloves-consumption-expenditure-prefecture-gap/article.md`。原因は未調査で、10-30・11-06 の run が同じ job・同じテストで落ちたかも未確認。
+- **再現**: `gh run view 43513853562 --log-failed`。手元では `npm run test --workspace apps/web -- population-profile-ui bridge-inspection-age-ui`。
+- **次**: ① 3 回の run の失敗 job とテスト名を並べ、毎回落ちるものと 1 回だけのものを分ける ② 毎回落ちるものから、job ごとに原因を実証して直す (公開 R2 の取得失敗が絡むものは `CI-LIVE-R2-TEST-FLAKE-01` と重なるかを先に確かめる) ③ 落ちた E2E の artifact でサーバーの例外が読めるかを確かめる (`E2E-FAILURE-EVIDENCE-01` の残り)。
+- **完了条件**: main の `quality-suite-weekly` が 1 回 success になり、Issue #1202 が自動で閉じる。
+
+### [WEEKLY-COLLECT-NODE20-FAIL-01] 週次の取得で GSC 画面の取得とサイト内リンク監査がスクリプトの例外で落ちる
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-14] [領域:管理]
+
+- **観測 (2026-11-14)**: `npm run weekly:collect` の 2 か所が、ログインと無関係の例外で落ちた。① 認証付き計測の GSC: `{"source":"gsc","status":"failed","step":"bootstrap","message":"Node.js v20.19.0"}` (12:31 と取り直しの 13:44 の 2 回とも。`~/Library/Logs/stats47/measurement-collect-local.log`)。message には例外の末尾の行しか残っておらず、例外の本体は読めない。② 週次監査の internal-links: `Error [ERR_REQUIRE_CYCLE_MODULE]: Cannot require() ES Module …/stats47-measurement/config/datasets.mjs in a cycle. (from …/.claude/scripts/lib/prefectures.cjs)` (`.local/weekly-audits/2026-11-14/internal-links.log`)。対話のシェルの Node は v22.23.3、取得の専用 clone で動いた Node は v20.19.0。同じ日の `npm run measurement:status` は gsc を「切れている (認証 cookie が無い)」と表示し、復旧に `node .claude/scripts/google-admin/cli.mjs login` を示している。GSC の失敗が例外なのかログイン切れなのかは、例外の本体が残っていないので切り分けられていない。
+- **[仮説]** 2 件とも、専用 clone が Node v20 で動き、CJS から `config/datasets.mjs` を require する経路が v20 で通らない。検証コマンド: `cd ~/stats47-measurement && node -v && node -e "require('./.claude/scripts/lib/prefectures.cjs')"` を v20 と v22 で実行して比べる。検証期日: 2026-11-21 (次の週次の取得の前)。v22 で通り v20 で落ちれば仮説を支持、両方で落ちれば循環 import そのものを直す。
+- **影響**: GSC の除外理由の内訳はその時点の書き出しなので、W46 の土曜の分は後から取り直せない。サイト内リンク監査は 132 ページを走査した時点の結果しか無い。
+- **次**: ① 上の検証 ② 取得の失敗時に例外の本体 (末尾の行でなく最初の行) を `message` に残す ③ 専用 clone の Node の版を対話のシェルと揃えるか、require の経路を直す。
+- **完了条件**: `npm run weekly:collect` で GSC の取得元が pass になり、internal-links が例外なしで走り切る。
+
+### [REVIEW-CADENCE-HANDOFF-PARSE-01] 週次レビューの申し送りの検査が、行き先の括弧の中の「、」で文を切る
+タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/management/__tests__/] [起票:2026-11-14] [領域:管理]
+
+- **観測 (2026-11-14)**: 2026-W45 のレビューを書いたとき、`check-review-cadence.mjs` が申し送り 3 件を「行き先不明」と判定した。「→ 振り分け: 見送り (理由…、…)」のように括弧の中に「、」があると、後半を別の行き先として読んで不正にする。レビュー側の書き方を変えて通したので、検査は直っていない。
+- **次**: 3 件の元の書き方を fixture にしたテストを足し (直す前に落ちることを確かめる)、括弧の中では区切らないようにする。
+- **完了条件**: 括弧の中に「、」を含む「見送り (理由)」が 1 つの行き先として通り、テストが固定している。
+
+### [EXP-011-MONTHLY-MISMATCH-01] KDP セレクトの実験 EXP-011 が running なのに、月次計画は「今月やらないこと」に挙げている
+タグ: [収益化] [種類:意思決定] [実行:対話] [待ち:判断] [起票:2026-11-14] [領域:商品]
+
+- **観測 (2026-11-14)**: 実験の台帳 (experiments.json) では EXP-011 が running (2026-11-04 開始)。`.claude/todo/monthly.md` 111 行は「KDP セレクト (EXP-011) と KDP の新規公開」を、販売数・KENP が台帳に入るまで判断できないものとして今月やらないことに挙げている (`KDP-LEDGER-AUTO-01`)。
+- **選択肢**: (a) 実験を続け、月次計画の行を「EXP-011 は観測だけ続ける」に直す / (b) 実験を止め、台帳を paused にする。
+- **完了条件**: 台帳と月次計画が同じ状態を指している。
+
+### [GSC-COVERAGE-TOTALS-DUP-ROW-01] GSC カバレッジ履歴の W45 行が W44 行と全列同じ
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-14] [領域:サイト]
+
+- **観測 (2026-11-14)**: `data/gsc/coverage-totals-history.csv` の `2026-W45,2026-11-08` の行が、`2026-W44,2026-10-31` の行と 10 列すべて同じ値 (404 が 12653、登録済み 7069 など)。11-08 の認証付き取得が新しい書き出しを読んだのか、前回の書き出しを別の週の名前で写したのかは未確認。同じ値のまま前週差を出すと「変化なし」と読める。
+- **次**: 11-08 の取得の入力 (`data/gsc/coverage-drilldown/` の当日の書き出しの日付と、履歴へ行を足すスクリプトの週の決め方) を読み、独立した観測かを確かめる。写しなら、書き出しの日付が前の行と同じときは行を足さないようにする。
+- **完了条件**: W45 の行が独立した観測と確認できるか、写しの行を足さない検査が入っている。
+
+### [ADSENSE-LATEST-PERIOD-01] AdSense の週次要約に確定 7 日の期間の日付が無い
+タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-11-14] [領域:サイト]
+
+- **観測 (2026-11-14)**: `data/adsense/LATEST.md` の確定 7 日の節に開始日・終了日が無く、週次 snapshot (`data/nsm/weekly-snapshots/`) の `ranges.adsense` も null。週次レビューが AdSense の金額をどの 7 日のものか示せない。
+- **次**: 取得スクリプトが使った期間を LATEST.md と snapshot の `ranges.adsense` に書く。
+- **完了条件**: 次の週次 snapshot で `ranges.adsense` に開始日と終了日が入っている。
+
 ### [BLOG-PUBLIC-REVIEW-MD-CLEANUP-01] 公開 R2 に残る過去記事の review.md (審査結果) を消す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-29] [領域:サイト]
 

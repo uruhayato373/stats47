@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "week": "2026-W45",
   "asOf": "2026-11-08",
-  "generatedAt": "2026-11-13T23:03:51.692Z",
+  "generatedAt": "2026-11-14T04:46:26.247Z",
   "sources": {
     "ga4": {
       "status": "ok",
@@ -176,9 +176,9 @@
         "source": "data/ranking/integrity-audit.json",
         "focus": false,
         "status": "ok",
-        "value": "100.0% (2596/2596)",
+        "value": "100.0% (2595/2596)",
         "previous": "99.1%",
-        "note": "監査 2026-11-07",
+        "note": "監査 2026-11-14・不合格 recipe.drift 1",
         "improvements": []
       },
       {
@@ -235,14 +235,15 @@
         "unit": "鮮度okの計測源 / 全計測源",
         "source": "data/measurement-cycle/latest.json",
         "focus": false,
-        "status": "ok",
-        "value": "11/11",
+        "status": "degraded",
+        "value": "10/11",
         "previous": null,
+        "note": "欠測・古い・認証切れ: gsc(runner_failed)",
         "improvements": []
       }
     ],
     "improvements": {
-      "active": 6,
+      "active": 4,
       "maxActive": 5,
       "unlinked": [],
       "noTarget": [
