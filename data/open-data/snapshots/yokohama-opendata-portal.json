@@ -1,0 +1,34 @@
+{
+  "datasetId": "yokohama-opendata-portal",
+  "versions": [
+    {
+      "schemaVersion": 1,
+      "datasetId": "yokohama-opendata-portal",
+      "version": "initial",
+      "sha256": "63e269535e55337debe3bcfd5c62f758661c182b6eea7bcfbb8240172eba9ba7",
+      "recipeSha256": "3097575fb356910c72be73d04d8ad543a9683d8279884c710a606d6fcac4b51f",
+      "retrievedAt": "2026-11-15T00:14:49.824Z",
+      "license": {
+        "name": "クリエイティブ・コモンズ 表示 4.0 (西区ページの記載。ポータル全体は未確認)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.city.yokohama.lg.jp/city-info/seisaku/torikumi/data/opendata/opendata.html"
+      },
+      "files": [
+        {
+          "key": "open-data/raw/yokohama-opendata-portal/initial/0001.bin",
+          "url": "https://data.city.yokohama.lg.jp/api/3/action/package_list",
+          "sha256": "ca766f3616a5b5ce76cb0fab41a29f2969955eb38e096cd9be525ad5a6914dd8",
+          "bytes": 13333,
+          "contentType": "application/json;charset=utf-8",
+          "retrievedAt": "2026-11-15T00:14:49.824Z"
+        }
+      ],
+      "manifestKey": "open-data/raw/yokohama-opendata-portal/initial/manifest.json",
+      "manifestSha256": "005f85e4ca223ea482750315caf7d4cdc7b46c4bc82d6596bce96aeba21ed82d",
+      "bytes": 13333,
+      "status": "archived"
+    }
+  ]
+}
