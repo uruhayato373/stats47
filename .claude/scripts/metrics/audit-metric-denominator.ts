@@ -1,3 +1,4 @@
+import { isPrefectureAreaCode } from "@stats47/area";
 import { statsR2Key } from '../lib/r2-keys.mjs';
 /**
  * audit-metric-denominator.ts — 人口当たりを名乗る指標が、実数のままになっていないかを値で確かめる。
@@ -24,7 +25,8 @@ const MAX_POPULATION_R = 0.93;
 const MIN_AREAS = 40;
 const CONCURRENCY = 6;
 const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
-const PREFECTURE = /^(?!00000)\d{2}000$/;
+// 旧実装は集計コード 48〜99 も受け入れていたので、その境界を保つ (載せ替えで挙動を変えないため).
+const PREFECTURE = { test: (code: string) => isPrefectureAreaCode(code) || /^(4[89]|[5-9]\d)000$/.test(code) };
 
 type Row = { areaCode: string; yearCode: string; value: number | null };
 

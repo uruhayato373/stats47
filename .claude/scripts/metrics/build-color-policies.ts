@@ -1,3 +1,4 @@
+import { isPrefectureAreaCode } from "@stats47/area";
 import { statsR2Key } from '../lib/r2-keys.mjs';
 /**
  * 配色の台帳。指標 × 粒度ごとに、連続か 5 段階か・一方向か発散かを R2 の値から決めて持つ。
@@ -27,7 +28,8 @@ const MIN_AREAS = 10;
 const PROGRESS_EVERY = 250;
 // More failures than this means R2 or the network is down, not that metrics are missing.
 const MAX_FAILURE_SHARE = 0.02;
-const PREFECTURE_CODE = /^(?!00000)\d{2}000$/;
+// 旧実装は集計コード 48〜99 も受け入れていたので、その境界を保つ (載せ替えで挙動を変えないため).
+const PREFECTURE_CODE = { test: (code: string) => isPrefectureAreaCode(code) || /^(4[89]|[5-9]\d)000$/.test(code) };
 
 type ValueRow = { areaCode: string; yearCode: string; value: number | null };
 

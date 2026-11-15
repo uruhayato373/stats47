@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { extractYearCode } from "../lib/year-code.mjs";
+// Compatibility: malformed time prefixes retain the previous slice result.
 import fs from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
@@ -117,8 +119,8 @@ if (process.argv.includes('--check')) {
     const year = '2023';
     const result = await request('getStatsData', { statsDataId, cdCat01, metaGetFlg: 'N', limit: 100000 }, `${statsDataId}-recycling.json`);
     if (result.STATISTICAL_DATA?.RESULT_INF?.NEXT_KEY != null) throw new Error('Unexpected pagination in registry comparison');
-    const rightRows = array(result.STATISTICAL_DATA?.DATA_INF?.VALUE).filter((row) => row['@time']?.slice(0, 4) === year);
-    const leftRows = report.responses.filter((row) => row.endpoint === 'getStatsData' && row.parameters.statsDataId === '0000010108').flatMap((row) => array(JSON.parse(fs.readFileSync(path.join(artifacts, row.artifactName), 'utf8')).GET_STATS_DATA.STATISTICAL_DATA.DATA_INF.VALUE)).filter((row) => row['@cat01'] === 'H5614' && row['@time']?.slice(0, 4) === year);
+    const rightRows = array(result.STATISTICAL_DATA?.DATA_INF?.VALUE).filter((row) => (row['@time'] == null ? undefined : (typeof row['@time'] === "string" && /^\d{4}/.test(row['@time']) ? extractYearCode(row['@time']) : row['@time'].slice(0, 4))) === year);
+    const leftRows = report.responses.filter((row) => row.endpoint === 'getStatsData' && row.parameters.statsDataId === '0000010108').flatMap((row) => array(JSON.parse(fs.readFileSync(path.join(artifacts, row.artifactName), 'utf8')).GET_STATS_DATA.STATISTICAL_DATA.DATA_INF.VALUE)).filter((row) => row['@cat01'] === 'H5614' && (row['@time'] == null ? undefined : (typeof row['@time'] === "string" && /^\d{4}/.test(row['@time']) ? extractYearCode(row['@time']) : row['@time'].slice(0, 4))) === year);
     const mismatches = PREFECTURES.filter((area) => {
       const left = leftRows.filter((row) => row['@area'] === area);
       const right = rightRows.filter((row) => row['@area'] === area && row['@cat01'] === cdCat01);

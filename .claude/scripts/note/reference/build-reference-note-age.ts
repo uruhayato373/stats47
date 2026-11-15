@@ -1,4 +1,6 @@
 #!/usr/bin/env tsx
+import { extractYearCode } from "@stats47/estat-api/api";
+// Compatibility: malformed time prefixes retain the previous slice result.
 import { rankingR2Key } from '../../lib/r2-keys.mjs';
 /**
  * 教材の分析企画のうち「世帯主の年齢によって家計がどう違うか」を問うもの (kakei-marketing a04-02) を、
@@ -55,7 +57,7 @@ async function latestYear() {
   const qs = new URLSearchParams({ appId: appId(), statsDataId: AMOUNT_TABLE, cdCat01: CONSUMPTION, cdCat02: TWO_PERSON, cdCat03: 'A00' });
   const json = await (await fetch(`${ESTAT_STATS_DATA_URL}?${qs}`)).json();
   return ([].concat(json?.GET_STATS_DATA?.STATISTICAL_DATA?.DATA_INF?.VALUE ?? []) as Record<string, string>[])
-    .map((v) => v['@time'].slice(0, 4)).sort().at(-1)!;
+    .map((v) => (typeof v['@time'] === "string" && /^\d{4}/.test(v['@time']) ? extractYearCode(v['@time']) : v['@time'].slice(0, 4))).sort().at(-1)!;
 }
 
 async function chart(dir: string, file: string, title: string, unit: string, values: number[], year: string) {

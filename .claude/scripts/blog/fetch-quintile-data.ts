@@ -1,4 +1,6 @@
 #!/usr/bin/env -S npx tsx
+import { extractYearCode } from "@stats47/estat-api/api";
+// Compatibility: malformed time prefixes retain the previous slice result.
 /**
  * fetch-quintile-data.ts
  * 家計調査「年間収入五分位階級別（全国）」を e-Stat から取得し、ブログ記事用の
@@ -141,7 +143,7 @@ async function runLine() {
   const series = seriesCodes.map((code) => {
     const pts = values
       .filter((v) => v["@cat03"] === code)
-      .map((v) => ({ year: Number(String(v["@time"]).slice(0, 4)), value: Number(v["$"]) }))
+      .map((v) => ({ year: Number((/^\d{4}/.test(String(v["@time"])) ? extractYearCode(String(v["@time"])) : String(v["@time"]).slice(0, 4))), value: Number(v["$"]) }))
       .filter((p) => p.year >= from && Number.isFinite(p.value))
       .sort((a, b) => a.year - b.year);
     return { label: QUINTILE_LABELS[code], data: pts };

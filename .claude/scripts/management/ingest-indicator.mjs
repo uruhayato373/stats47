@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { isPrefectureAreaCode } from "../lib/prefectures.cjs";
 // 1 つ以上の e-Stat candidate を recipe (query/prefSource) ベースで取得・登録する。
 // SKILL.md (.claude/skills/management/expand-indicators/SKILL.md) から呼ばれる。
 //
@@ -99,12 +100,11 @@ async function getAreaMap(statsDataId) {
 }
 
 // 47 都道府県のみマッチ (大海区 48000-74000 や複合コード「青森県(太平洋北区)」等を除外)
-const PREF_AREA_RE = /^(0[1-9]|[1-3]\d|4[0-7])000$/;
 
 function pickPrefByArea(values, areaMap) {
   const arr = [].concat(values || []);
   const out = arr
-    .filter((v) => PREF_AREA_RE.test(v["@area"]))
+    .filter((v) => isPrefectureAreaCode(v["@area"]))
     .map((v) => ({
       areaCode: v["@area"],
       areaName: areaMap.get(v["@area"]) || "",

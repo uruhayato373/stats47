@@ -1,3 +1,4 @@
+import { isPrefectureAreaCode } from "@stats47/area";
 import { STATS_R2_PREFIX } from "@stats47/r2-storage/keys";
 import { existsSync, mkdirSync, readdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
@@ -94,8 +95,7 @@ export async function exportMigrationFlow(year?: number): Promise<{
   // pref-net-{year}.json (47 県の net 昇順, 2-digit code)
   const prefNet: PrefNetEntry[] = prefs
     .filter((p) => {
-      const n = Number(p.code.slice(0, 2));
-      return n >= 1 && n <= 47;
+      return isPrefectureAreaCode(String(Number(p.code.slice(0, 2))).padStart(2, "0") + "000");
     })
     .map((p) => {
       const partners = byFocus.get(p.code) ?? [];

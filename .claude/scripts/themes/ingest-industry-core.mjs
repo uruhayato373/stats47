@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { extractYearCode } from "../lib/year-code.mjs";
+// Compatibility: malformed time prefixes retain the previous slice result.
 import { statsR2Key } from "../lib/r2-keys.mjs";
 /** Official sources -> canonical R2 payloads. No remote writes. All local R2 writes require --write-local. */
 import assert from 'node:assert/strict';
@@ -68,7 +70,7 @@ export function parseCensus(raw,source){
 }
 export function parseSsds(raw,source){
  const {d,c}=statsData(raw,source);assert.equal(c.cat01.get('C1122122')['@name'],'C1122122_県内総生産額（情報通信業）（平成27年基準）');assert.equal(c.cat01.get('C6201')['@name'],'C6201_純付加価値額（民営）');
- const values=new Map();for(const v of d.DATA_INF.VALUE){assert.ok(AREAS.includes(v['@area']),'SSDS geography');assert.equal(v['@tab'],'00001');assert.ok(['C6201','C1122122'].includes(v['@cat01']));assert.equal(v['@unit'],'百万円','SSDS unit');assert.match(v['@time'],/^20\d{2}100000$/,'annual time');assert.match(v.$,/^-?\d+$/,'missing SSDS');const k=[v['@area'],v['@cat01'],v['@time'].slice(0,4)].join('|');assert.ok(!values.has(k),'duplicate SSDS');values.set(k,Number(v.$));}
+ const values=new Map();for(const v of d.DATA_INF.VALUE){assert.ok(AREAS.includes(v['@area']),'SSDS geography');assert.equal(v['@tab'],'00001');assert.ok(['C6201','C1122122'].includes(v['@cat01']));assert.equal(v['@unit'],'百万円','SSDS unit');assert.match(v['@time'],/^20\d{2}100000$/,'annual time');assert.match(v.$,/^-?\d+$/,'missing SSDS');const k=[v['@area'],v['@cat01'],extractYearCode(v['@time'])].join('|');assert.ok(!values.has(k),'duplicate SSDS');values.set(k,Number(v.$));}
  const get=(a,c,y)=>{const n=values.get([a,c,String(y)].join('|'));assert.ok(Number.isFinite(n),'missing SSDS coordinate');return n;};
  const nationalDifferences=[];
  for(const code of ['C6201','C1122122'])for(const year of (code==='C6201'?[2011,2015,2020]:Array.from({length:11},(_,i)=>2011+i))){const diff=PREF_CODES.reduce((s,a)=>s+get(a,code,year),0)-get('00000',code,year);assert.ok(Math.abs(diff)<=(code==='C6201'?24:0),'SSDS national sum');nationalDifferences.push({code,year,difference:diff});}

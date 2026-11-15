@@ -1,3 +1,6 @@
+import { extractYearCode } from "@stats47/estat-api/api";
+// Compatibility: malformed time prefixes retain the previous slice result.
+import { isPrefectureAreaCode, isCityAreaCode } from "@stats47/area";
 import { statsR2Key } from "@stats47/r2-storage/keys";
 import { readSnapshot, sourceEvidence, assertLiveEstatAllowed, type SourceEvidence } from "./lib/estat-table-reader.js";
 import { conversionFactor } from "../src/unit/unit-semantics.js";
@@ -832,19 +835,10 @@ export async function fetchCityRowsAllYears(
 }
 
 /** 5 桁エリアコード判定 (都道府県集計行 NN000) */
-function isPrefCode5(code: string): boolean {
-  if (!/^\d{2}000$/.test(code)) return false;
-  const n = Number(code.slice(0, 2));
-  return n >= 1 && n <= 47;
-}
+
 
 /** 5 桁市区町村コード判定 (NNxyz, xyz≠000, 県 01-47) */
-function isCityCode5(code: string): boolean {
-  if (!/^\d{5}$/.test(code)) return false;
-  const pref = Number(code.slice(0, 2));
-  if (pref < 1 || pref > 47) return false;
-  return code.slice(2) !== "000";
-}
+
 
 /**
  * 市区町村として取り込むコードか。5 桁の形式に加えて、現行の市区町村マスタにあることを要求する。
@@ -853,7 +847,7 @@ function isCityCode5(code: string): boolean {
  * 旧 1,823、マスタとの重複 0。既存 cities.json 39 指標 816,460 行にマスタ外コードは 0)。
  */
 export function isIngestableCityCode(code: string, currentCities: ReadonlyMap<string, string>): boolean {
-  return isCityCode5(code) && currentCities.has(code);
+  return isCityAreaCode(code) && currentCities.has(code);
 }
 
 /**
@@ -908,10 +902,9 @@ function inYearRange(yearCode: string, config: MetricConfig): boolean {
   const spec = config.years;
   if (spec === "all" || spec == null) return true;
   // config.years が稀にフルタイムコード (例 2009100000) を含むため 4 桁年に正規化して比較
-  const to4 = (n: number): number => (n > 9999 ? Number(String(n).slice(0, 4)) : n);
-  if ("years" in spec) return spec.years.map(to4).includes(y);
+  if ("years" in spec) return spec.years.map((n) => (n > 9999 ? Number(/^\d{4}/.test(String(n)) ? extractYearCode(String(n)) : String(n).slice(0, 4)) : n)).includes(y);
   // { from, to }
-  return y >= to4(spec.from) && y <= to4(spec.to);
+  return y >= (spec.from > 9999 ? Number(/^\d{4}/.test(String(spec.from)) ? extractYearCode(String(spec.from)) : String(spec.from).slice(0, 4)) : spec.from) && y <= (spec.to > 9999 ? Number(/^\d{4}/.test(String(spec.to)) ? extractYearCode(String(spec.to)) : String(spec.to).slice(0, 4)) : spec.to);
 }
 
 interface ShapedRow {
@@ -1034,9 +1027,9 @@ export function shapeForPrefecture(
   const masters = loadAreaMasters();
   const scale = valueScaleOf(config);
   const shaped: ShapedRow[] = values
-    .filter((v) => isPrefCode5(v["@area"]) && inYearRange(v["@time"].slice(0, 4), config))
+    .filter((v) => isPrefectureAreaCode(v["@area"]) && inYearRange((typeof v["@time"] === "string" && /^\d{4}/.test(v["@time"]) ? extractYearCode(v["@time"]) : v["@time"].slice(0, 4)), config))
     .map((v) => {
-      const yearCode = v["@time"].slice(0, 4);
+      const yearCode = (typeof v["@time"] === "string" && /^\d{4}/.test(v["@time"]) ? extractYearCode(v["@time"]) : v["@time"].slice(0, 4));
       return {
         areaCode: v["@area"],
         areaName: masters.pref.get(v["@area"]) ?? "",
@@ -1067,9 +1060,9 @@ export function shapeForCity(config: MetricConfig, values: EstatValue[], actualS
   const masters = loadAreaMasters();
   const scale = actualSource.valueScale;
   const rawRows: ShapedRow[] = values
-    .filter((v) => isIngestableCityCode(v["@area"], masters.city) && inYearRange(v["@time"].slice(0, 4), config))
+    .filter((v) => isIngestableCityCode(v["@area"], masters.city) && inYearRange((typeof v["@time"] === "string" && /^\d{4}/.test(v["@time"]) ? extractYearCode(v["@time"]) : v["@time"].slice(0, 4)), config))
     .map((v) => {
-      const yearCode = v["@time"].slice(0, 4);
+      const yearCode = (typeof v["@time"] === "string" && /^\d{4}/.test(v["@time"]) ? extractYearCode(v["@time"]) : v["@time"].slice(0, 4));
       return {
         areaCode: v["@area"],
         areaName: masters.city.get(v["@area"]) ?? "",

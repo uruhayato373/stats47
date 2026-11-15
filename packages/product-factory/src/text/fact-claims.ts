@@ -1,3 +1,4 @@
+import { PREFECTURE_AREA_CODES, prefectureNameOf, prefectureShortName } from "@stats47/area";
 /**
  * 本文から「県 + 値」の主張を取り出し、SSOT と突合するための純関数。
  *
@@ -10,15 +11,7 @@
 import { conversionFactor } from "@stats47/data-configs/unit";
 
 /** 47 都道府県名 (「県」等を含む正式名と、本文でよく使う短縮形の両方を拾う)。 */
-export const PREFECTURES = [
-  "北海道", "青森", "岩手", "宮城", "秋田", "山形", "福島",
-  "茨城", "栃木", "群馬", "埼玉", "千葉", "東京", "神奈川",
-  "新潟", "富山", "石川", "福井", "山梨", "長野", "岐阜", "静岡", "愛知",
-  "三重", "滋賀", "京都", "大阪", "兵庫", "奈良", "和歌山",
-  "鳥取", "島根", "岡山", "広島", "山口",
-  "徳島", "香川", "愛媛", "高知",
-  "福岡", "佐賀", "長崎", "熊本", "大分", "宮崎", "鹿児島", "沖縄",
-] as const;
+export const PREFECTURES = PREFECTURE_AREA_CODES.map((code) => prefectureShortName(prefectureNameOf(code)!));
 
 /**
  * 「東京都」「東京」どちらでも同じ県として正規化する。

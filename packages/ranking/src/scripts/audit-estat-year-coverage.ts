@@ -1,3 +1,6 @@
+import { extractYearCode } from "@stats47/estat-api/api";
+// Compatibility: malformed time prefixes retain the previous slice result.
+import { isPrefectureAreaCode } from "@stats47/area";
 import { METRIC_DEFINITIONS_DIR } from '../../../../config/paths.mjs';
 /**
  * audit-estat-year-coverage — 単年設定 (`years.from === years.to` 等) の metric config が、
@@ -112,7 +115,7 @@ function readAppId(): string | null {
 /** 10桁の e-Stat time コードを4桁年へ (packages/estat-api の extractYearCode と同じ判定)。 */
 function toYearCode(timeCode: string): string | null {
   if (typeof timeCode !== "string" || timeCode.length < 4) return null;
-  const year = timeCode.slice(0, 4);
+  const year = extractYearCode(timeCode);
   return /^\d{4}$/.test(year) ? year : null;
 }
 
@@ -175,7 +178,6 @@ export function isObservedValue(value: unknown): boolean {
   return !["", "-", "…", "***", "x", "X"].includes(text);
 }
 
-const PREFECTURE_AREA = /^(0[1-9]|[1-3]\d|4[0-7])000$/;
 
 /** getStatsData の VALUE から、年ごとに実データがある都道府県の数を数える (全国・市区町村は数えない) */
 export function countPrefecturesByYear(values: Array<Record<string, unknown>>): Record<string, number> {
@@ -183,7 +185,7 @@ export function countPrefecturesByYear(values: Array<Record<string, unknown>>): 
   for (const v of values) {
     const area = v["@area"];
     const time = v["@time"];
-    if (typeof area !== "string" || !PREFECTURE_AREA.test(area)) continue;
+    if (typeof area !== "string" || !isPrefectureAreaCode(area)) continue;
     if (typeof time !== "string" || !isObservedValue(v["$"])) continue;
     const yearCode = toYearCode(time);
     if (!yearCode) continue;

@@ -1,3 +1,6 @@
+import { extractYearCode } from "@stats47/estat-api/api";
+// Compatibility: malformed time prefixes retain the previous slice result.
+import { isPrefectureAreaCode } from "@stats47/area";
 /**
  * 通勤フロー O-D 取り込み (DBレス・自己完結)。
  *
@@ -56,11 +59,7 @@ function loadPrefNames(): Map<string, string> {
   return new Map(raw.map((p) => [p.prefCode, p.prefName]));
 }
 
-function isPref5(code: string): boolean {
-  if (!/^\d{2}000$/.test(code)) return false;
-  const n = Number(code.slice(0, 2));
-  return n >= 1 && n <= 47;
-}
+
 
 async function fetchStatsData(appId: string): Promise<{
   classObjs: ClassObj[];
@@ -100,7 +99,7 @@ function resolveDimensions(classObjs: ClassObj[]): DimResolution {
   // @id → { name, items, prefLike }
   const dims = classObjs.map((c) => {
     const items = asArray(c.CLASS);
-    const prefCount = items.filter((i) => isPref5(i["@code"])).length;
+    const prefCount = items.filter((i) => isPrefectureAreaCode(i["@code"])).length;
     return {
       key: `@${c["@id"]}`,
       id: c["@id"],
@@ -183,7 +182,7 @@ async function main(): Promise<void> {
     if (r.sexDimKey && r.sexCode && v[r.sexDimKey] !== r.sexCode) return false;
     const o = v[r.originDimKey];
     const p = v[r.partnerDimKey];
-    return isPref5(o) && isPref5(p) && o !== p; // 県内通勤(自県)は除外
+    return isPrefectureAreaCode(o) && isPrefectureAreaCode(p) && o !== p; // 県内通勤(自県)は除外
   });
   console.log(`  filtered O-D rows (県間・通勤・総数): ${filtered.length}`);
 
@@ -195,7 +194,7 @@ async function main(): Promise<void> {
     const p = v[r.partnerDimKey];
     const val = Number(v["$"]);
     if (!Number.isFinite(val)) continue;
-    if (v["@time"]) year = Number(String(v["@time"]).slice(0, 4)) || year;
+    if (v["@time"]) year = Number((/^\d{4}/.test(String(v["@time"])) ? extractYearCode(String(v["@time"])) : String(v["@time"]).slice(0, 4))) || year;
     if (!od.has(o)) od.set(o, new Map());
     od.get(o)!.set(p, val);
   }

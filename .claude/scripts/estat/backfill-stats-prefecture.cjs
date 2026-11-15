@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const { isPrefectureAreaCode } = require("../lib/prefectures.cjs");
 /**
  * 既存 metric の D1 stats_prefecture を e-Stat から全年度バックフィル。
  *
@@ -46,7 +47,6 @@ const PRIORITY = [
   "total-overnight-guests-foreign",
 ];
 
-const PREF_AREA_RE = /^(0[1-9]|[1-3]\d|4[0-7])000$/;
 
 function parseArgs() {
   const args = process.argv.slice(2);
@@ -118,7 +118,7 @@ function pickValuesByYear(stat, areaMap, timeMap) {
   const byYear = new Map();
   for (const v of values) {
     const areaCode = v["@area"];
-    if (!PREF_AREA_RE.test(areaCode)) continue;
+    if (!isPrefectureAreaCode(areaCode)) continue;
     const yearCode = v["@time"];
     const num = Number(v.$);
     if (!isFinite(num)) continue;

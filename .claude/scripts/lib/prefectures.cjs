@@ -36,7 +36,21 @@ const PREFECTURES = JSON.parse(
 const PREF_AREA_CODES = PREFECTURES.map((p) => p.prefCode);
 const PREF_NAMES = PREFECTURES.map((p) => p.prefName);
 
+const prefectureCodes = new Set(PREF_AREA_CODES);
+
+/** @param {string} code */
+function isPrefectureAreaCode(code) {
+  return prefectureCodes.has(String(code));
+}
+
+/** @param {string} code */
+function isCityAreaCode(code) {
+  return /^\d{5}$/.test(code) && prefectureCodes.has(code.slice(0, 2) + '000') && !code.endsWith('000');
+}
+
 module.exports = {
+  isPrefectureAreaCode,
+  isCityAreaCode,
   PREFECTURES,
   PREF_AREA_CODES,
   PREF_NAMES,

@@ -1,3 +1,4 @@
+import { isPrefectureAreaCode } from "./prefectures.cjs";
 /**
  * internal-link-lint — 記事内部リンクの「リンク先が実在するか」を決定的に検査する
  *
@@ -258,7 +259,7 @@ export function lintInternalLinks(content, opts = {}) {
     if (type === 'geo') {
       checked++;
       const parts = link.segments.slice(1);
-      const validPref = (pref) => /^(0[1-9]|[1-3][0-9]|4[0-7])$/.test(pref ?? '');
+      const validPref = (pref) => isPrefectureAreaCode(`${pref ?? ''}000`);
       const valid = parts.length === 0 ||
         (parts.length === 1 && (['compare', 'method', 'data-catalog', '2050-population'].includes(key) || sets.geoSlugs.has(key))) ||
         (parts.length === 3 && key === 'data' && sets.geoSlugs.has(parts[1]) && validPref(parts[2])) ||

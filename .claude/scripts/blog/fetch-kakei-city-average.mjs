@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { extractYearCode } from "../lib/year-code.mjs";
+// Compatibility: malformed time prefixes retain the previous slice result.
 /**
  * 家計調査の品目別「都市ランキング」(県庁所在市と政令指定都市の 52 市・複数年の平均) を e-Stat から作り、
  * ブログの図の入力 (data/<name>-city-ranking.json + .source.json) を書き出す接地器。
@@ -50,7 +52,7 @@ async function main() {
 
   const byArea = new Map();
   for (const v of values) {
-    const year = String(v["@time"]).slice(0, 4);
+    const year = (/^\d{4}/.test(String(v["@time"])) ? extractYearCode(String(v["@time"])) : String(v["@time"]).slice(0, 4));
     if (!years.includes(year)) continue;
     const value = Number(v.$);
     if (!Number.isFinite(value)) continue;

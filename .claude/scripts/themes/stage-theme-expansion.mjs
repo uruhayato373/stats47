@@ -1,3 +1,5 @@
+import { extractYearCode } from "../lib/year-code.mjs";
+// Compatibility: malformed time prefixes retain the previous slice result.
 import { R2_PUBLIC_ORIGIN, rankingR2Key, statsR2Key } from "../lib/r2-keys.mjs";
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
@@ -199,7 +201,7 @@ for (const batch of batches) {
       .get(`${source.statsDataId}:${metric.indicatorCode}`)
       ?.filter(
         (row) =>
-          row['@time'].slice(0, 4) === metric.comparisonYear &&
+          (typeof row['@time'] === "string" && /^\d{4}/.test(row['@time']) ? extractYearCode(row['@time']) : row['@time'].slice(0, 4)) === metric.comparisonYear &&
           PREFECTURES.includes(row['@area'])
       );
     if (raw?.length !== 47) throw new Error(`Missing verified source: ${key}`);

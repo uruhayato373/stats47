@@ -1,3 +1,4 @@
+import { isPrefectureAreaCode } from "@stats47/area";
 import { statsR2Key } from '@stats47/r2-storage/keys';
 import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
@@ -24,8 +25,7 @@ export async function exportStationPassengers(): Promise<{
   }
 
   const prefs = loadPrefectures().filter((p) => {
-    const n = Number(p.code.slice(0, 2));
-    return n >= 1 && n <= 47;
+    return isPrefectureAreaCode(String(Number(p.code.slice(0, 2))).padStart(2, "0") + "000");
   });
 
   // payload.rows は全年 × 全 area。最新年を pref ごとに取り出す

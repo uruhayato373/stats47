@@ -1,4 +1,6 @@
 #!/usr/bin/env tsx
+import { extractYearCode } from "@stats47/estat-api/api";
+// Compatibility: malformed time prefixes retain the previous slice result.
 import { rankingR2Key } from '../../lib/r2-keys.mjs';
 /**
  * 教材の分析企画のうち「年収によって支出がどう違うか」を問うもの (geoScopes に japan) を、
@@ -71,7 +73,7 @@ async function estat(codes: string[], years: string[]) {
   const table = new Map<string, number>();
   for (const v of [].concat(values) as Record<string, string>[]) {
     const n = Number(v.$);
-    if (Number.isFinite(n)) table.set(`${v['@cat01']}|${v['@cat03']}|${v['@time'].slice(0, 4)}`, n);
+    if (Number.isFinite(n)) table.set(`${v['@cat01']}|${v['@cat03']}|${(typeof v['@time'] === "string" && /^\d{4}/.test(v['@time']) ? extractYearCode(v['@time']) : v['@time'].slice(0, 4))}`, n);
   }
   return table;
 }
@@ -80,7 +82,7 @@ async function latestYear() {
   const qs = new URLSearchParams({ appId: appId(), statsDataId: STATS_DATA_ID, cdCat01: CONSUMPTION, cdCat02: TWO_PERSON, cdCat03: '00' });
   const json = await (await fetch(`${ESTAT_STATS_DATA_URL}?${qs}`)).json();
   const values = [].concat(json?.GET_STATS_DATA?.STATISTICAL_DATA?.DATA_INF?.VALUE ?? []) as Record<string, string>[];
-  const year = values.map((v) => v['@time'].slice(0, 4)).sort().at(-1);
+  const year = values.map((v) => (typeof v['@time'] === "string" && /^\d{4}/.test(v['@time']) ? extractYearCode(v['@time']) : v['@time'].slice(0, 4))).sort().at(-1);
   if (!year) throw new Blocked('e-Stat: 最新年が取れない');
   return year;
 }

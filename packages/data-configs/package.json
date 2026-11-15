@@ -220,6 +220,7 @@
     "metrics:check": "tsx scripts/check-metric-contract.ts && tsx scripts/check-kakei-analysis-catalog.ts"
   },
   "dependencies": {
+    "@stats47/estat-api": "*",
     "@stats47/area": "*",
     "@stats47/types": "*",
     "@stats47/r2-storage": "*"

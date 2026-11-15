@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { extractYearCode } from "../lib/year-code.mjs";
+// Compatibility: malformed time prefixes retain the previous slice result.
 /**
  * fetch-kakei-monthly.mjs — 家計調査 (全国・二人以上の世帯) の月次品目データと消費者物価指数 (CPI) から
  * 型C (時系列変化) 記事の折れ線 data JSON を作る接地器。
@@ -116,7 +118,7 @@ async function fetchItem(src, code) {
       const t = String(v["@time"]);
       const mm = t.slice(-2);
       if (mm === "00") return null; // 年・年度の行は使わない (月次だけ)
-      return { ym: `${t.slice(0, 4)}-${mm}`, value: /^-?[0-9.]+$/.test(v["$"]) ? Number(v["$"]) : null, unit: v["@unit"] || "" };
+      return { ym: `${(typeof t === "string" && /^\d{4}/.test(t) ? extractYearCode(t) : t.slice(0, 4))}-${mm}`, value: /^-?[0-9.]+$/.test(v["$"]) ? Number(v["$"]) : null, unit: v["@unit"] || "" };
     })
     .filter(Boolean)
     .sort((a, b) => a.ym.localeCompare(b.ym));
