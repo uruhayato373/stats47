@@ -1,0 +1,778 @@
+{
+  "datasetId": "nier-gakuryoku-lifestyle",
+  "versions": [
+    {
+      "schemaVersion": 1,
+      "datasetId": "nier-gakuryoku-lifestyle",
+      "version": "2025",
+      "sha256": "fbcbf3d34f6127b92aa02a27bc24895868f507154d12a4039d8032c8f516c976",
+      "recipeSha256": "8a52a4852f3b8cdf56136ae2b3e6a5d9b4c13c1b47e48bd0bb66554782d7fc0d",
+      "retrievedAt": "2026-11-15T04:22:40.142Z",
+      "license": {
+        "name": "文部科学省ウェブサイト利用規約 (政府標準利用規約2.0・CC BY 4.0 互換。NIER著作権ページが同規約に従う旨明記)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.mext.go.jp/b_menu/1351168.htm"
+      },
+      "files": [
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0001.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/01_hokkaido/01m_25a.xlsx",
+          "sha256": "16ee158d85858a0d9e0f18bb4b73626567a9fec9fb94074fafe3a8bed352dfc4",
+          "bytes": 71722,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:07.491Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0002.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/01_hokkaido/01p_25a.xlsx",
+          "sha256": "35998204959a36c714a841899a0a0374c8678c052e64cca45686fc99ffa16137",
+          "bytes": 71689,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:07.816Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0003.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/02_aomori/02m_25a.xlsx",
+          "sha256": "7fd785c0ce58858bac40e321550a657807aeb9ac5bb095207b010e3f8566e1d5",
+          "bytes": 71411,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:08.985Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0004.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/02_aomori/02p_25a.xlsx",
+          "sha256": "9d2d0eaaf132a8e07c8d2a28136a8c15c7d353b0262a45d70436dcba57318599",
+          "bytes": 71348,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:09.984Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0005.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/03_iwate/03m_25a.xlsx",
+          "sha256": "90ff4887a42dc3a4e29be829bcb137f62afa709ad459b7d8ed4afd83779f372b",
+          "bytes": 71404,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:10.983Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0006.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/03_iwate/03p_25a.xlsx",
+          "sha256": "c4fdc3e518be2928710b84fbc44a3cafb6e3a6cc9fb1b906298f198ab0c9fa9b",
+          "bytes": 71369,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:11.985Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0007.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/04_miyagi/04m_25a.xlsx",
+          "sha256": "3706d2d6b44eb743b93f6068d4e360ea52151a2da2b1699b6ccefdbf3514ea37",
+          "bytes": 71571,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:12.983Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0008.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/04_miyagi/04p_25a.xlsx",
+          "sha256": "2a5358f452a22de87252cf30ca8918c429e934c2a9eeecf7ca04bddc41ed2609",
+          "bytes": 71623,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:13.983Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0009.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/05_akita/05m_25a.xlsx",
+          "sha256": "fd1d9a2eecf638b1ffff7b6ca7fe92b4a391f397c61e099d656853ba6f38fcc8",
+          "bytes": 71328,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:15.154Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0010.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/05_akita/05p_25a.xlsx",
+          "sha256": "300028087304a16fad9c958a9d5e5159d2e202e03d3745b735c5bf944b191196",
+          "bytes": 71318,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:15.986Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0011.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/06_yamagata/06m_25a.xlsx",
+          "sha256": "cbe1ab9dc96747aec018e34f81961805ed1116491699678c7d4f16abf6b34e70",
+          "bytes": 71401,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:16.986Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0012.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/06_yamagata/06p_25a.xlsx",
+          "sha256": "6914b57710e18a89ed20ab87a07470e0dcd0fdccf7f4e94dcd620416b702230b",
+          "bytes": 71342,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:17.988Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0013.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/07_fukushima/07m_25a.xlsx",
+          "sha256": "674ef8c92f2c87d2785e21fcf9d027b620f01e4239727be37c6385a1647e293f",
+          "bytes": 71501,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:19.155Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0014.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/07_fukushima/07p_25a.xlsx",
+          "sha256": "0b5ec66ba7f03b5c2931f59a2162f73cab4449c041ab1c5e460d24a377685e61",
+          "bytes": 71462,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:19.987Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0015.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/08_ibaraki/08m_25a.xlsx",
+          "sha256": "08c965f42397f325fb59c363b8fb8f8f908320e8393c76aeb6d3cca5106ee68d",
+          "bytes": 71628,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:20.986Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0016.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/08_ibaraki/08p_25a.xlsx",
+          "sha256": "4a4bcf200b561e8608906713252182af70e28e924cdcc86443c8d424d97edd80",
+          "bytes": 71655,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:21.987Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0017.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/09_tochigi/09m_25a.xlsx",
+          "sha256": "ba2449f180426e5b0cca1f7c012ef873a160055439a04d799b12fc4c22e42504",
+          "bytes": 71564,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:22.987Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0018.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/09_tochigi/09p_25a.xlsx",
+          "sha256": "c1bf383f312da9dd0e63895b84d146867d7caa49ac86bfe7b2e2a1372c187351",
+          "bytes": 71509,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:24.154Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0019.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/10_gunma/10m_25a.xlsx",
+          "sha256": "2e97361d16b64fdb06604c2f1acce5c426f764abbd5a42ae7458b76f560b3fd7",
+          "bytes": 71547,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:24.986Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0020.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/10_gunma/10p_25a.xlsx",
+          "sha256": "420ab703d13d9a1b8695c228cdc373990f363f5c2d7db860612e44fbade222e4",
+          "bytes": 71539,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:25.986Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0021.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/11_saitama/11m_25a.xlsx",
+          "sha256": "063456b7d6cc0dcb8eee21a81bc526f9707c60db1eff4f1fffea1c652513e083",
+          "bytes": 71835,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:26.986Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0022.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/11_saitama/11p_25a.xlsx",
+          "sha256": "d39cb1979b8677c5105b75ac93e6d10374ad09f6fbb159374ecca8cbbc2418fd",
+          "bytes": 71876,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:28.154Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0023.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/12_chiba/12m_25a.xlsx",
+          "sha256": "5b2f9858d893664456599b3b713a062fff35958c29d7f2a88d1c4c7cca948c6a",
+          "bytes": 71723,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:28.985Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0024.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/12_chiba/12p_25a.xlsx",
+          "sha256": "b56be05cdcc30de55fda769bc46a11ce25491ad3cb1c5b35273cc30813e474fa",
+          "bytes": 71853,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:29.985Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0025.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/13_tokyo/13m_25a.xlsx",
+          "sha256": "cccded70165172bd996c9938501bd803091009c2a1cfa7cad91c897b179f917f",
+          "bytes": 71932,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:30.986Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0026.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/13_tokyo/13p_25a.xlsx",
+          "sha256": "1c67232c57d6bd5b74421cabe1a88eef5213dcee806076adccdae8e8704c1b27",
+          "bytes": 72067,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:31.986Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0027.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/14_kanagawa/14m_25a.xlsx",
+          "sha256": "a9b9559da6bf9fcd9aa4029ed3f04a72da98edc2b5be81ee652a07e11e11d7d6",
+          "bytes": 71802,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:33.155Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0028.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/14_kanagawa/14p_25a.xlsx",
+          "sha256": "4d67f2f2718c7b16ba05baa6671d34852a9d1a511ea225832e308b4fcf8cbb1b",
+          "bytes": 71925,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:33.988Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0029.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/15_niigata/15m_25a.xlsx",
+          "sha256": "ba430ad716dd0321202d488ffba2d93237a851ebecd70b688241a405c0b54181",
+          "bytes": 71562,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:34.987Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0030.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/15_niigata/15p_25a.xlsx",
+          "sha256": "d8fd19bd14c13a56cd73e19be74615a8891e6e1eaeb59f5a789cbc934a52aa90",
+          "bytes": 71544,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:35.988Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0031.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/16_toyama/16m_25a.xlsx",
+          "sha256": "e2607c3912b1d403d8b8997bb1fbb624b02f47f63fa9d49403db3cc08cef7e2b",
+          "bytes": 71379,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:37.156Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0032.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/16_toyama/16p_25a.xlsx",
+          "sha256": "86737a70fe5135266fbf5349fdeda94509b08bddb22d83de0aeef0ae7344c282",
+          "bytes": 71400,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:37.988Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0033.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/17_ishikawa/17m_25a.xlsx",
+          "sha256": "d8aff25062c3294b88126b0207252ae80ddbc84b7736d028875afea05bb88d79",
+          "bytes": 71439,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:38.988Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0034.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/17_ishikawa/17p_25a.xlsx",
+          "sha256": "791f6818020cffd9be66443b27c09b303ce858aea4fdbd31b98bd0d72e36dccf",
+          "bytes": 71330,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:39.986Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0035.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/18_fukui/18m_25a.xlsx",
+          "sha256": "250ba5e555190963af022efa946f1e4fc85f39ee7152e1c4e572f506cd9034b4",
+          "bytes": 71324,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:41.155Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0036.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/18_fukui/18p_25a.xlsx",
+          "sha256": "ecbf20e281f94816606fd581df1cda2f7de16b2f5b9636d2dab83c1ee800317c",
+          "bytes": 71334,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:41.986Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0037.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/19_yamanashi/19m_25a.xlsx",
+          "sha256": "bd1948a842fc47ef93b2392c7e7504cbf658831a33e20ec53e6f3bb1dcda78b7",
+          "bytes": 71350,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:42.989Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0038.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/19_yamanashi/19p_25a.xlsx",
+          "sha256": "c5a526e239eafd005a16e94630bf09f2c53f2b59a3935f6536a4e460e8563dfc",
+          "bytes": 71290,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:43.988Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0039.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/20_nagano/20m_25a.xlsx",
+          "sha256": "621d6e0ef11939fdef2e4dbf17a249171b33b9c512e2d056a2ebdcb51915c464",
+          "bytes": 71556,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:45.157Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0040.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/20_nagano/20p_25a.xlsx",
+          "sha256": "4db6d2256be3a2a7fe850be42e9446e6d792d4f1fb7f9bf8641adf5b4fd38837",
+          "bytes": 71581,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:45.989Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0041.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/21_gifu/21m_25a.xlsx",
+          "sha256": "9a3dfa25eb5349bab091e5638c3fbf4d18e05c997f33991e7c0c7b66844bb6b4",
+          "bytes": 71553,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:46.989Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0042.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/21_gifu/21p_25a.xlsx",
+          "sha256": "b0293691e1eb563aa27caa6d471aed0cb7ebff28df3ffc42d703b85beed5add8",
+          "bytes": 71549,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:47.991Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0043.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/22_shizuoka/22m_25a.xlsx",
+          "sha256": "0d84a5224c4f2b33e2f4217301465eb245b513f4adefd1081220e1c0e42a1ad1",
+          "bytes": 71659,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:49.160Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0044.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/22_shizuoka/22p_25a.xlsx",
+          "sha256": "a9e794b662a2a0856129a91972bbb85a133c0621789fc68a12b644b706bedd22",
+          "bytes": 71680,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:49.990Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0045.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/23_aichi/23m_25a.xlsx",
+          "sha256": "cf3f0b61f47f9de1661b25696c979e6d0fff09e6a2551973680d74f08dcb6df4",
+          "bytes": 71845,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:50.992Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0046.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/23_aichi/23p_25a.xlsx",
+          "sha256": "31d81e69b9258d4943e0a5906888b6ab082bf31b0ed4bbace88587922360df17",
+          "bytes": 71877,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:51.991Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0047.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/24_mie/24m_25a.xlsx",
+          "sha256": "eee3a775b1bac763e723cd37f37092ca4fbc0d3eb3bace311d1c0efaaca350a7",
+          "bytes": 71552,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:53.161Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0048.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/24_mie/24p_25a.xlsx",
+          "sha256": "9905786997876f4a08b23acee027810b6366d9349d5b0084c26b30ddacce2584",
+          "bytes": 71500,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:53.992Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0049.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/25_shiga/25m_25a.xlsx",
+          "sha256": "e69a01a39420357f6bea1556ceb24232046810c3f99cc8cec88c4499b44c06e7",
+          "bytes": 71525,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:54.992Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0050.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/25_shiga/25p_25a.xlsx",
+          "sha256": "55ab5ac774a4bc6ca43d56ec9e38813ce75d775189080aeea52be810d04e31f1",
+          "bytes": 71408,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:55.991Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0051.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/26_kyoto/26m_25a.xlsx",
+          "sha256": "0f3efd6bb9c40d5ec511f6092bf9bdc8a37edb4d2c1dcac333be8ab4ddea0104",
+          "bytes": 71546,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:57.157Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0052.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/26_kyoto/26p_25a.xlsx",
+          "sha256": "5a6441bf6927df473cb6f1d7a3be076bd56f4e35935f106d19b21870821c556c",
+          "bytes": 71599,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:57.988Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0053.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/27_osaka/27m_25a.xlsx",
+          "sha256": "202f5077c15597d208151a7f3975ed98573f0112d93a73378ee02c58fa4052c5",
+          "bytes": 71836,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:58.990Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0054.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/27_osaka/27p_25a.xlsx",
+          "sha256": "5b3c954249c813605c715ab56c722c901371eba4a729073c032b0c3d99ca3151",
+          "bytes": 71920,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:21:59.988Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0055.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/28_hyougo/28m_25a.xlsx",
+          "sha256": "f7ec5b97565f6fe099f2ef61a0ea4cc6d98ad5b808d7566a0afb78ca2ff3a201",
+          "bytes": 71738,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:00.988Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0056.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/28_hyougo/28p_25a.xlsx",
+          "sha256": "e8356ce801d5b92dcd5ff7f7231707ba97b573cc17d94709a528166273482aa7",
+          "bytes": 71825,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:02.157Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0057.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/29_nara/29m_25a.xlsx",
+          "sha256": "3da85d92ceeb778088b27fc8152465119fa317bdc48528d9024a8882c7ab6859",
+          "bytes": 71455,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:02.988Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0058.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/29_nara/29p_25a.xlsx",
+          "sha256": "fe54f59904889a64c2264d22613ae557355d75eb15f8c80cea87252945f6bbbd",
+          "bytes": 71520,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:03.988Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0059.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/30_wakayama/30m_25a.xlsx",
+          "sha256": "ea9caaf7d3353bef7e7ed8c82dcea38a3254ddd776f8942c8517657aca6a6ea6",
+          "bytes": 71334,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:04.989Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0060.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/30_wakayama/30p_25a.xlsx",
+          "sha256": "40093b90f602a9cf86c78fb537ca7239034e00739efa2ce07146cc4a4fd8947a",
+          "bytes": 71394,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:06.156Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0061.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/31_tottori/31m_25a.xlsx",
+          "sha256": "162fc93d9bbd6dad05f8e685cdbb11b4f3d5e5f080f518f47ed1c4c7c44a69a9",
+          "bytes": 71286,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:06.988Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0062.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/31_tottori/31p_25a.xlsx",
+          "sha256": "60adaf20223f24a50ba24020dce83f1738c59994fe627c37d4bc1ca0a1101d5e",
+          "bytes": 71245,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:07.988Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0063.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/32_shimane/32m_25a.xlsx",
+          "sha256": "842ead310b646f91df56d25238ce3365e21c83f9e9caf94ad8e69b09a13bbf92",
+          "bytes": 71340,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:08.987Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0064.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/32_shimane/32p_25a.xlsx",
+          "sha256": "3b5affb3a18f3992f74125fcdedaad668ff711c57b1a4b165bfa10750eef9d9b",
+          "bytes": 71298,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:10.155Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0065.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/33_okayama/33m_25a.xlsx",
+          "sha256": "85a32513260b5cbaf6ed9d23a2d880e7da28967605e9105ff10b32eeaecedd14",
+          "bytes": 71586,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:10.986Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0066.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/33_okayama/33p_25a.xlsx",
+          "sha256": "f4e61e455f99053da97fde099d8a54917d8b11f4ade309639d6d52c80dbf03ba",
+          "bytes": 71624,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:11.984Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0067.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/34_hiroshima/34m_25a.xlsx",
+          "sha256": "2cae0eee753f41a1d24bf826af4e84fbf39f2c5cfc3639eaf00d9288b8b91b25",
+          "bytes": 71586,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:12.983Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0068.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/34_hiroshima/34p_25a.xlsx",
+          "sha256": "e1b02a6a79c7da46051479d953e20fa07b3431a015857ff72987c04e37208888",
+          "bytes": 71622,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:14.151Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0069.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/35_yamaguchi/35m_25a.xlsx",
+          "sha256": "d1cb4ce4950b16a69e0dd886c58cf36a0c6c0ab99c05a09a9a23bfa5745c3d8f",
+          "bytes": 71469,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:14.982Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0070.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/35_yamaguchi/35p_25a.xlsx",
+          "sha256": "7404728ced24e2dfcffdec283e26ab6580901073844bdc56fa39b5251b70331d",
+          "bytes": 71340,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:15.981Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0071.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/36_tokushima/36m_25a.xlsx",
+          "sha256": "8e75232d788d9037fdb7cfb6afc7974d6af9a6eb2f2ee7b193780eee02566fda",
+          "bytes": 71335,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:16.980Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0072.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/36_tokushima/36p_25a.xlsx",
+          "sha256": "12c26d27582b7f7ac44d91ba117783d3e75b42ff466b0d520eaf862ea855c30e",
+          "bytes": 71298,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:18.147Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0073.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/37_kagawa/37m_25a.xlsx",
+          "sha256": "7e15af2d9cd819e124fd8c3985cdffae13100e5d7047856415845a0711f125f6",
+          "bytes": 71357,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:18.979Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0074.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/37_kagawa/37p_25a.xlsx",
+          "sha256": "9ac43ec6b98dfe58108319399a75837d64b078adab94f221e0e47b51649031d7",
+          "bytes": 71403,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:20.147Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0075.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/38_ehime/38m_25a.xlsx",
+          "sha256": "4eab23eba4a9fd9c793e3b376357f422581848f556f78fd292bd75258946e362",
+          "bytes": 71481,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:20.978Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0076.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/38_ehime/38p_25a.xlsx",
+          "sha256": "66c5fec8492df1ff8c69b17293ed7aeaf49fe712c7f38bd9e0ab7b8407628202",
+          "bytes": 71321,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:22.147Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0077.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/39_kouchi/39m_25a.xlsx",
+          "sha256": "58b7b701dcdc192edb63958a9f8ddbf26476c8ff19b0070b49650079293d4c87",
+          "bytes": 71261,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:22.977Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0078.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/39_kouchi/39p_25a.xlsx",
+          "sha256": "ec050b3750cf4bcb7a31ba7a845c3e13dcae692f017eab9d60c6c89663444e3f",
+          "bytes": 71331,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:24.145Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0079.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/40_fukuoka/40m_25a.xlsx",
+          "sha256": "12a28c2658e1c971c9ee304e0ca2f7aeed67d0917af5f3ec0125a708b3cdec7d",
+          "bytes": 71806,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:24.976Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0080.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/40_fukuoka/40p_25a.xlsx",
+          "sha256": "0e6022b26a47266a12e99944271f19dad2b0954f4e9d33ea7293c104acaad4a3",
+          "bytes": 71778,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:26.143Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0081.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/41_saga/41m_25a.xlsx",
+          "sha256": "98f0581b3f53a4e6d0768f5f82e90c59e1b3c491015bc8d7286a55247086d657",
+          "bytes": 71419,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:26.975Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0082.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/41_saga/41p_25a.xlsx",
+          "sha256": "f5581788875e4fb972b331b045a0b8f245f80537edff7f6f758a1d3b39df5803",
+          "bytes": 71368,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:28.142Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0083.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/42_nagasaki/42m_25a.xlsx",
+          "sha256": "7a44d4cd54107bf321ad355f2f5f695f8441b5813443a0f7abce6827944b4bd2",
+          "bytes": 71458,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:28.975Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0084.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/42_nagasaki/42p_25a.xlsx",
+          "sha256": "cb049b35011ffdc225cd2fb04d400e8452420153197c80834c6c2c48f9d8d879",
+          "bytes": 71468,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:30.144Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0085.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/43_kumamoto/43m_25a.xlsx",
+          "sha256": "c1f958233b9fcdbe3e69c21fb01706e95552cf0fcfe46896974e7f7785450230",
+          "bytes": 71490,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:30.974Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0086.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/43_kumamoto/43p_25a.xlsx",
+          "sha256": "d49452d761d53744d2176b4ea6382120a4b1f6083fc89cc141b8c563c842cc17",
+          "bytes": 71527,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:32.141Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0087.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/44_ohita/44m_25a.xlsx",
+          "sha256": "79c3614d9076fb308f4ac960825590989a86206a5f4d3477bf5916114393d736",
+          "bytes": 71444,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:32.974Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0088.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/44_ohita/44p_25a.xlsx",
+          "sha256": "f55779c4b10883607e97c1b0afb65b31b8137bdc32ba44b0cc9dc18bc4274956",
+          "bytes": 71437,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:34.142Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0089.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/45_miyazaki/45m_25a.xlsx",
+          "sha256": "7e3da4ffa24d0c3df0729622563b1fb186ee3e1007b9ef0499c4a33b190bf8bc",
+          "bytes": 71483,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:34.975Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0090.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/45_miyazaki/45p_25a.xlsx",
+          "sha256": "7664cbec80d6eaeb467110960de05bf70f4606741269c1074b8a77355df995f7",
+          "bytes": 71431,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:36.142Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0091.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/46_kagoshima/46m_25a.xlsx",
+          "sha256": "8ea9cab2b293d1dcf9dc695152c8e2f0a66d7312c23ebf4b51a0c91e0738367b",
+          "bytes": 71558,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:36.974Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0092.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/46_kagoshima/46p_25a.xlsx",
+          "sha256": "1775bfcd3917cbd1cba325f8fb54a908afa2508d4b2aa6fc79126da840a6a4ff",
+          "bytes": 71423,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:38.142Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0093.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/47_okinawa/47m_25a.xlsx",
+          "sha256": "d8eadc68c560c22825478cee9d92f89eca6ae8e563e212e724a6d3bb03476219",
+          "bytes": 71536,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:38.974Z"
+        },
+        {
+          "key": "open-data/raw/nier-gakuryoku-lifestyle/2025/0094.xlsx",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/47_okinawa/47p_25a.xlsx",
+          "sha256": "2646f818f4950949d9a02f47bd05ccc4d47084212269d7de275ca7416a2e1d0b",
+          "bytes": 71654,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:22:40.142Z"
+        }
+      ],
+      "manifestKey": "open-data/raw/nier-gakuryoku-lifestyle/2025/manifest.json",
+      "manifestSha256": "1ba34a68b71258befd69be61547104b2c143570e793c3241669216c1150e908a",
+      "bytes": 6723811,
+      "status": "archived"
+    }
+  ]
+}
