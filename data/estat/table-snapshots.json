@@ -1902,30 +1902,6 @@
       "bucket": "stats47-private"
     },
     {
-      "statsDataId": "0004006330",
-      "title": "企業産業(中分類)、単一・複数(2区分)別企業等数、事業所数、従業者数、売上（収入）金額、費用総額、主な費用項目、粗付加価値額、純付加価値額、設備投資額、１企業当たり売上（収入）金額、１企業当たり粗付加価値額及び純付加価値額－全国、都道府県",
-      "statCode": "00200553",
-      "catalogVersion": "2026-09-30",
-      "catalogSha256": "e0eed5bcd3fb965648b53ce901c49398434361b50ee0982b7e253f30b8c624ed",
-      "fetchedAt": "2026-11-14T12:55:07.259Z",
-      "fileCount": 19,
-      "rowCount": 355680,
-      "maxRowsPerFile": 18720,
-      "gzipBytes": 2403746,
-      "uncompressedBytes": 40815955,
-      "catalogReportedRows": 355680,
-      "warnings": [],
-      "depth": 1,
-      "partitionAxes": [
-        "tab"
-      ],
-      "rowLimit": 50000,
-      "manifestKey": "estat-tables/0004006330/manifest.json",
-      "manifestSha256": "cf298544fa9f71d1f07f2af794e721e855b98cd261d45f66a59c359f33a343d9",
-      "status": "pushed",
-      "bucket": "stats47-private"
-    },
-    {
       "statsDataId": "0004008436",
       "title": "男女、産業、テレワーク実施の有無・頻度、テレワーク実施の場所、経営組織・従業上の地位・雇用形態別人口（有業者）－全国、都道府県、政令指定都市、県庁所在都市、人口30万以上の市",
       "statCode": "00200532",

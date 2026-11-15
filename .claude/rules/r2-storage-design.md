@@ -224,7 +224,8 @@ A33/A40の全体partial-licenseは変更せず、Geo原典SSOTのexact key/SHA�
 `isr-generations`、既定 `dry_run: true`)。任意 prefix を削除できる `delete-r2-prefix.ts` は緊急時のみで、
 通常運用では使わない。実行主体は `r2-publisher` agent。両ワークフローとも
 `RETENTION_TARGETS` / `PROTECTED_PREFIXES` (コード側 allowlist) 外の prefix は削除できない設計
-(誤入力で配信データを消せない)。
+(誤入力で配信データを消せない)。非公開 bucket の e-Stat の表の写しは `bucket: "private"` の target
+(`estat-tables/<id>/` だけ) で消し、台帳 `estat.table-snapshots` に行が残る表は消さない (2026-11-15)。
 
 `retention-prefixes` の実削除は必ず1つの `target` を指定し、空指定による全対象削除は拒否する。
 公開終了データはコードの301/410反映後に削除する。exact manifestは保全済み原本のmetadataだけを持ち、

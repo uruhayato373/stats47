@@ -36,6 +36,8 @@ interface RetentionTarget {
   prefix: string;
   /** なぜ削除してよいか (reader ゼロの根拠) */
   reason: string;
+  /** 非公開 bucket (stats47-private) の prefix。省略時は配信用 bucket */
+  bucket?: "private";
 }
 
 /** 公式ページで `non-commercial` と確認済みで、public mirrorを撤去するKSJ。 */
@@ -128,6 +130,13 @@ const RETENTION_TARGETS: RetentionTarget[] = [
     reason:
       "公式利用条件がnon-commercialのためpublic R2 source mirrorを撤去し、ローカル処理だけに限定する",
   })),
+  {
+    id: "retired-estat-table-0004006330",
+    prefix: "estat-tables/0004006330/",
+    bucket: "private",
+    reason:
+      "有効な指標から参照されない e-Stat の表の写し。2026-11-15 オーナー承認で削除。台帳 estat.table-snapshots から先に外す",
+  },
   {
     id: "retired-youtube-master-station-passengers",
     prefix: "video/station-passengers-47/",
@@ -246,6 +255,40 @@ async function deleteKeys(keys: string[]): Promise<{ deleted: number; errors: nu
   return { deleted, errors };
 }
 
+type PrivateStore = { list(prefix: string): Promise<{ key: string; size: number }[]>; delete(key: string): Promise<void> };
+
+/** 非公開 bucket の写しは、台帳 (estat.table-snapshots) に残っている表なら消さない。 */
+async function openPrivateStore(target: RetentionTarget): Promise<PrivateStore> {
+  const match = /^estat-tables\/(\d{10})\/$/.exec(target.prefix);
+  if (!match) throw new Error(`[unsafe target] private retention supports estat-tables/<id>/ only: ${target.prefix}`);
+  const { readFileSync } = await import("node:fs");
+  const { pathToFileURL } = await import("node:url");
+  const root = path.resolve(__dirname, "../../../..");
+  const { datasetPath } = (await import(pathToFileURL(path.join(root, "config/datasets.mjs")).href)) as { datasetPath: (id: string) => string };
+  const ledgerPath = path.resolve(root, datasetPath("estat.table-snapshots"));
+  const ledger = JSON.parse(readFileSync(ledgerPath, "utf8")) as { tables: { statsDataId: string }[] };
+  if (ledger.tables.some((table) => table.statsDataId === match[1])) {
+    throw new Error(`[unsafe target] ${match[1]} is still in the snapshot ledger; remove the ledger row first`);
+  }
+  const { createR2Store } = (await import(new URL("../lib/clients/private-r2-store.mjs", pathToFileURL(__filename)).href)) as {
+    createR2Store: (options: { bucket: string }) => PrivateStore;
+  };
+  const { R2_PRIVATE_BUCKET } = await import("./r2-key-classes");
+  return createR2Store({ bucket: R2_PRIVATE_BUCKET });
+}
+
+async function deletePrivateKeys(store: PrivateStore, prefix: string, keys: string[]): Promise<{ deleted: number; errors: number }> {
+  let deleted = 0;
+  let errors = 0;
+  for (const key of keys) {
+    try { await store.delete(key); deleted++; } catch (error) { errors++; console.error(`FAIL ${key}: ${error instanceof Error ? error.message : error}`); }
+  }
+  const remaining = await store.list(prefix);
+  if (remaining.length) { errors += remaining.length; console.error(`remaining after delete: ${remaining.length}`); }
+  console.log(`  private delete: deleted=${deleted}, errors=${errors}`);
+  return { deleted, errors };
+}
+
 async function main(): Promise<void> {
   assertTargetsAreSafe();
   const { apply, targetId } = parseArgs();
@@ -290,7 +333,10 @@ async function main(): Promise<void> {
   let totalErrors = 0;
 
   for (const target of targets) {
-    const files = await listFromR2WithSize(target.prefix);
+    const privateStore = target.bucket === "private" ? await openPrivateStore(target) : null;
+    const files = privateStore
+      ? (await privateStore.list(target.prefix)).map((o) => ({ key: o.key, size: o.size }))
+      : await listFromR2WithSize(target.prefix);
     const size = files.reduce((sum, f) => sum + f.size, 0);
     totalSize += size;
     totalCount += files.length;
@@ -311,7 +357,9 @@ async function main(): Promise<void> {
         const expected = LICENSE_RETENTION_TARGETS[0].objects.filter((object) => object.key.startsWith(target.prefix));
         assertUnchangedRetentionInventory(expected, await listLicenseRetentionObjects([target.prefix]));
       }
-      const result = await deleteKeys(files.map((f) => f.key));
+      const result = privateStore
+        ? await deletePrivateKeys(privateStore, target.prefix, files.map((f) => f.key))
+        : await deleteKeys(files.map((f) => f.key));
       totalDeleted += result.deleted;
       totalErrors += result.errors;
     }
