@@ -76,9 +76,9 @@ export const EXPECTED_SHAPE_ANOMALY: readonly ExpectedShapeAnomalyEntry[] = [
     key: "employment-insurance-daily-receipt-rate",
     check: "percent-out-of-range",
     disposition: "legitimate",
-    observedSeverity: 1545.5,
+    observedSeverity: 5025,
     reason:
-      "2026-08-26 e-Stat 0000010206 / #F07201 と計算式を直接確認。福島県1994年度は受給者実人員170人÷日雇労働被保険者11人×100=1545.5％で公式値と一致。期間内受給者を時点被保険者で割るため100％上限を適用できない正当値",
+      "2026-08-26 e-Stat 0000010206 / #F07201 と計算式を直接確認。福島県1994年度は受給者実人員170人÷日雇労働被保険者11人×100=1545.5％で公式値と一致。期間内受給者を時点被保険者で割るため100％上限を適用できない正当値。2026-11-15 表の写し (版 2026-06-30) で1975〜1989年を確認: 石川県は1978年1571.4％ (=110÷7×100)・1979年5025％ (=201÷4×100) で、前後の年は46〜138％。どちらも被保険者が数人の年の整数比で、福島県1994年と同じ形の公表値 (https://www.e-stat.go.jp/dbview?sid=0000010206)",
     issue: "RANKING-VALUES-PARTITION-INTEGRITY-01",
     until: "2027-08-31",
   },
