@@ -835,6 +835,7 @@ updated: 2026-11-01
 ### [CONVENIENCE-STORE-SALES-SCALE-CHECK-01] コンビニ販売額の値の桁 (東京都 155,869百万円) が年間か月間かを確かめる
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-03] [領域:データ]
 
+- **済み (2026-11-15・オーナー承認)**: main の `data-refresh.yml` を `metric=convenience-store-sales`・`dry_run=false` で実行し (run 43667621239)、R2 の値を年計に入れ替えた。東京都は 2024 年度 1,896,372 百万円 (旧値は 2025 年 1 月の月間値 155,869)、年は 2022〜2024 年度の 3 年・141 行。旧値のままだと sync-snapshots の `ranking-values` と `ranking-normalized-values` が「観測値が無い未登録キー」で止まっていた (11-15 の run 43662183177)。残りは下の表示単位の台帳・SEO 文字列の確認と百貨店・スーパーの確認。
 - **済み (2026-11-13・`3d5c87fd9`)**: e-Stat `0004032502` は年計・四半期・月次を 1 つの表に持ち、`timeScope` 未指定のため 2025 年 1 月の月間値 (東京都 155,869 百万円) を年の値として採っていた。単位と換算 0.01 は正しい。`source.timeScope` を `annual`、年を台帳の年計の範囲 2022〜2024 に直した。
 - **残り (R2 への書き込みが要る)**: main へ入った後に CI で再取り込みする。配信中の値はそれまで月間値のまま。再取り込み後に、表示単位の台帳 (`data/metrics/display-units/ledger.json`・週次生成) と、値を含む SEO 文字列を作り直す (`seo-meta-facts` のゲートは R2 の配信値と照合するので、それまで値を載せられない)。
 - **再観測 (2026-11-15)**: 表切片との一致検査で、公開2025年度の47県値が原表の `2025000101` (2025年1月) と全件一致。現在の `timeScope: annual` は2022〜2024年の141行を生成し、公開値との共通年がない。表更新日2026-01-15は公開値生成日2026-11-05より前なので、版更新ではなく既知の取り出し条件差として表 `0004032502` は `pushed` に保留。原表の年計名は「年」だが生成物は「年度」のため、再取り込み前に年名も確認する。再現: `node --import tsx packages/data-configs/scripts/verify-table-snapshot-equivalence.ts --table 0004032502 --mark-verified`。
@@ -2008,8 +2009,10 @@ updated: 2026-11-01
 - **完了条件**: 止めると決めたものが robots / 実装に入り、11-18 期限の 3 点の確認を記録し、効果観測が `improvements.md` の別 ID へ引き渡されている。
 
 ### [R2-VALUES-REUPLOAD-01] ランキングの values.json が生成のたびに全件送り直されるのを止める
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-11] [領域:データ] [待ち:承認]
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-11] [領域:データ]
 
+- **観測 (2026-11-15・sync-snapshots run 43671404197・オーナー承認)**: `[values] 時刻を引き継いだ=2728 中身が変わった・初回=0`、`[normalized] 時刻を引き継いだ=1823`。最後の R2 push はローカル 14,118 件のうち `R2 と中身が同じ（送らない）: 11414`・`送信する: 2704` (regenerable CHANGED=2703 と station-passengers/index.json)。全件の再送は止まった。ただし納豆の `app/ranking/natto-consumption-expenditure/values.json` の Last-Modified は 03:17:57 で、この run の push (03:54〜) ではなく Correlation Refresh (run 43671486374、03:17 に 2,653 件を push) の時刻と一致する。
+- **次**: ①送った 2,703 件が何か (前回の run が失敗して R2 が旧い時刻のままだった values.json か) を、もう 1 回の sync-snapshots のログで確かめる。2 回目でも同程度なら差分の出どころを 1 件の diff で特定する。②Correlation Refresh が values.json を毎回送り直しているかを run のログと `curl -sI` の Last-Modified で確かめ、送っているなら同じ引き継ぎを入れる。
 - **済み (2026-11-14・3b10a0410)**: `generate-ranking-values.ts` は前回配信した values.json を読み、中身が同じなら `generatedAt` を引き継いで同じバイト列にする。`diff-push-r2.ts` は manifest で絞った後に R2 の一覧の size と ETag を手元の size と MD5 に照合し、中身が同じファイルを送らない (一覧を取れないときは全件を送る)。values.json の `generatedAt` が「中身が最後に変わった時刻」になったので、監査の正規化 snapshot の相対鮮度は「values.json より 8 日を超えて古い」向きだけを違反にし、values.json を読むたびに出していた 90 日の古さの警告をやめた。単体テストと、手元の偽 S3 に対する実行で確認済み。
 - **残り**: この変更を main へ反映した後、sync-snapshots (全 task) を連続 2 回実行する。1 回目は values.json の `generatedAt` が前回配信と同じ値に固定されるが、R2 側は旧い時刻のままなので values.json の全件が再送される。2 回目のログで `[values] 時刻を引き継いだ=` の件数、`R2 と中身が同じ（送らない）:` と `送信する:` の件数を読み、`curl -sI https://storage.stats47.jp/app/ranking/<key>/values.json` の Last-Modified を 2 回目の前後で比べる。
 - **止まっている理由**: sync-snapshots の本番実行は R2 への書き込みなので、オーナーの承認が要る。develop から main への反映もオーナーの指示が要る。
@@ -2186,8 +2189,9 @@ updated: 2026-11-01
 - **完了条件**: 販売中の添付の SOURCES・LICENSE が今の生成と一致し、note の本文の許諾範囲が 1 法人と書かれ、全パックの Office 実機確認 (Windows と Mac) が記録されている。
 
 ### [SNS-SOURCE-METADATA-01] SNS素材の仕上げで確認した期間・分母・単位の差異を指標定義と配信snapshotへ反映する
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-12] [領域:管理] [待ち:承認] [待ち:判断]
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-12] [領域:管理] [待ち:判断]
 
+- **済み (2026-11-15)**: sync-snapshots (run 43671404197) の後、R2 の item.json で郵便局数・街区/近隣/運動/都市公園数の副題が「可住地面積100km²当たり」、クリーニングの題名が「クリーニング業数」になったことを確認した。本番の `https://stats47.jp/search-index.json` にも旧題名「クリーニング所数」は無い (git の `apps/web/public/search-index.json` は 10-10 の生成物のままで旧題名が 2 か所残るが、ビルド時に作り直される)。残りは単位を「施設」へ変えるかの判断だけ。
 - **済み (2026-11-14・381b947cc)**: 郵便局数と公園 4 指標の副題を「可住地面積100km²当たり」に、クリーニングの題名と seoTitle と県データブックの短い名前を原表どおり「業数」に直し、原表の項目名との照合を packages/data-configs の検査にした。コンビニ販売額の年計取り出しは 3d5c87fd9 で済んでいる。
 - **残り**: main へ入った後に、CI の sync-snapshots で配信 item と派生 snapshot を再生成し、配信中のランキング 6 件の題名・副題が新しい定義と一致することを確かめる。cleaning-shop-count-per-100k の単位を原表の「施設」へ変えるかは、他の SSDS 指標の「所」と揃えるかどうかを含めてオーナーが決める。
 - **完了条件**: 配信中の 6 ランキングの題名と副題が原表の項目名と一致し、apps/web/public/search-index.json に旧題名が残らない。
@@ -3422,8 +3426,9 @@ updated: 2026-11-01
 5. 完了した行は削除する。
 
 ### [METRIC-SUBTITLE-KAKEI-NOTE-01] 家計調査系 706 metric の subtitle が調査方法の定型文で、一覧・h1 直下に冗長表示される
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-09-16] [領域:サイト] [待ち:承認]
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-09-16] [領域:サイト]
 
+- **済み (2026-11-15)**: 本番反映 (#1275) の後に sync-snapshots (run 43662183177) が `ranking-items` を作り直し、R2 の納豆の item.json から subtitle が消えて note が annotation に入った。本番の `/category/economy` の一覧に定型文の括弧は 0 件、`/ranking/natto-consumption-expenditure` の詳細に注記が出ることを Googlebot UA で確認した (① ② 済み)。題の「｜県庁所在市の二人以上世帯」は seoTitle の意図した表記 (801 指標) で、このカードの対象外。残りは ③ と追補の 25 指標。
 - **済み (2026-11-14・58df1b88d)**: 家計調査の 825 指標の subtitle から調査方法の定型文を外し、note に「値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。」を置いた。括弧書きの区別子があった 14 件と情報通信関係費は中身だけを subtitle に残し、同名の title がある 11 件には短い区別子を付けた。lint `subtitle-survey-method` (`validate-metric-config.ts`) が再混入を止める。ブログの図の入力 (`type-chart-input.ts`) と X の静止画 (`quick-still.ts`) は、県庁所在市の値かどうかを出典の種類 (kakei-chousa) で判定する。
 - **残り**: ①main へのデプロイの後、オーナーの承認を得て `sync-snapshots` の `ranking-items` で R2 の item.json を作り直す (config の note が item.json の annotation になる)。②本番で `/category/economy`・家計調査の survey ハブ・`/ranking/natto-consumption-expenditure` を開き、一覧のタイトルに定型文の括弧書きが無いこと、詳細のチャート下に note が出ることを確かめる。③R2 が揃った後、`select-sidebar-items.ts` の `getSidebarDetail` の包含判定と `classifyRankingSubtitle` を縮めるかを決める。
 - **止まっている理由**: R2 への書き込みと本番デプロイはオーナーの承認が要る。
@@ -3442,6 +3447,7 @@ updated: 2026-11-01
 ### [ESTAT-TABLE-SNAPSHOTS-01] e-Stat の表の写しを全表へ広げ、旧経路と直書きの許可を消す
 タグ: [データ] [種類:改善] [実行:対話] [起票:2026-11-15] [領域:データ] [進行中]
 
+- **観測 (2026-11-15・別セッションの週次作業から)**: Develop Quality Gate が c85207fb8 (03:50) と da5ca7bf7 (04:00) で連続して落ちた。c243935dc (01:43) までは成功。落ちたのは `packages/data-configs/src/__tests__/agricultural-output-entity-source.test.ts` の 2 件で、1 件目は `ok: true, rows: 1` を期待して `ok: false, message: "R2 authentication unavailable (S3 or wrangler login required)"` を受け取り、2 件目は `result.rows` が undefined だった。間の差分には `224e1ae48` (写しの 18 表を verified に) が入る。[仮説] 農業産出額の表が verified になり、`processOne` が e-Stat の mock でなく R2 の写しを読みに行くようになった。再現 (CI のログで観測。ローカルでは未確認): `npx vitest run packages/data-configs/src/__tests__/agricultural-output-entity-source.test.ts`。次: テストで写しの読み込みを mock するか、写しの経路をテストの環境で切る。
 - **済み (2026-11-15・`596cd0ed1`)**: 表の写し 118 表 (verified 106・pushed 12) を非公開 R2 `estat-tables/` に置き、台帳 `data/estat/table-snapshots.json` で管理。`estat-table-snapshot.ts --check-updates` (カタログの更新日との比較)、指標の自動選択 (`estat-refresh-selection.ts`。`page-data-batch` で指標を指定しないとき)、e-Stat の共通の入口と直書きの検査 (`check-estat-entrypoint.mjs`)。
 - **残り**: ① 家計調査と市区町村の表を取り込み、一致を確かめて verified にする ② pushed の表を ⑧ のとおり解く ③ カタログに目録の無い 32 表を `meta_stat_codes` に足して取る ④ 全表が verified になったら旧経路 (指標ごとに絞った要求) を消し、`values.json` の `meta.source` を必須にする ⑤ `.claude/config/estat-entrypoint-baseline.json` の 69 ファイルを共通の入口へ移して縮める ⑥ 指標の自動選択を月次のカタログ更新の後に起動する配線 (いまは手動起動で指標を空にしたときだけ)。 ⑦ **済み (2026-11-15)**: 市区町村の社会・人口統計体系の表 11 件は、オーナー決定で地域でも要求を分けて取った (都道府県を割らない `cdAreaFrom`/`cdAreaTo` の範囲、キー `area=<from>-<to>`。計画は `planTablePartitions` の `areaRanges`)。取得中に e-Stat が STATUS 200・203 (「データベースにアクセス中にエラー…時間をおいてやり直して」) を何度か返し、数分おいて取り直すと通った。取得の共通部品 `ingest-client.ts` はこの STATUS を再試行しないので、まとめて取るときは失敗した表だけを数分後に再実行する。 ⑧ **pushed は 1 表 (2026-11-15)**: 公開中の値が古かった 640 指標を `data-refresh.yml` (run 43667554910、オーナー了承) で作り直し、13 表が一致して verified。補助の表 5 件も目録を取って写し、verified (台帳 167 表: verified 165)。残り: (c) 0000010206 の `employment-insurance-daily-receipt-rate`: 写しから作ると 1975〜1989 年が増え、石川県 1978 年 1,571.4% (=110÷7×100)・1979 年 5,025% (=201÷4×100) が出る。被保険者が数人の年の整数比で、福島県 1994 年 (170÷11) と同じ形の公表値と確かめ、2026-11-15 に形状検査の例外の観測値を 5,025 へ上げた。残り: 次の本番反映の後に `gh workflow run data-refresh.yml --ref main -f metric=employment-insurance-daily-receipt-rate -f dry_run=false` で作り直し (data-refresh は main のコードで動くので、例外の更新が main に入るまで同じ検査で止まる)、`verify-table-snapshot-equivalence.ts --table 0000010206 --mark-verified` で verified にする。 (d) 0004006330 (有効な指標から参照されない) はオーナー承認で削除 (2026-11-15)。台帳から外し、R2 は `r2-maintenance.yml` の `retired-estat-table-0004006330` で消す。
 - **完了条件**: 指標の値がすべて写しから作られ、e-Stat を叩くのが表の更新のときだけになり、許可リストが空になっている。
