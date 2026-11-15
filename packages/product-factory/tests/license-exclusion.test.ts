@@ -39,8 +39,10 @@ describe("権利要確認の指標を有料パックから除く", () => {
       expect(loaded.excluded?.length ?? 0, id).toBe(expected[id] ?? 0);
     }
     expect(loadPackSnapshotDatasets("P-06")!.datasets.length).toBe(261);
-    expect(loadPackSnapshotDatasets("P-08")!.datasets.length).toBe(74);
-    expect(loadPackSnapshotDatasets("P-12")!.datasets.length).toBe(2491);
+    // 2026-11-15: コンビニの販売額を年計に直し、同じ値の convenience-store-sales-monthly と 1 列にまとまった (74 → 73)
+    expect(loadPackSnapshotDatasets("P-08")!.datasets.length).toBe(73);
+    // 2026-11-15: 公開された 6 指標が加わった (2491 → 2496。オーナー了承)
+    expect(loadPackSnapshotDatasets("P-12")!.datasets.length).toBe(2496);
   });
 
   it("除外記録には指標キー・指標名・理由 (license 欄の「要確認」) が入る", () => {
