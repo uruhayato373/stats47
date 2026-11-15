@@ -1,0 +1,1634 @@
+{
+  "datasetId": "mlit-road-census-r3",
+  "versions": [
+    {
+      "schemaVersion": 1,
+      "datasetId": "mlit-road-census-r3",
+      "version": "2023-06-30",
+      "sha256": "a827e9887a2699ac5d12e1621ea4119e39c06c4ab1ad0c2d67ae5ef08e13f64e",
+      "recipeSha256": "32a71d1dc9fa120a6d8ed1d84736c86574f0dd470fd41c8003206af758149966",
+      "retrievedAt": "2026-11-15T05:30:55.409Z",
+      "license": {
+        "name": "公共データ利用規約 (第1.0版) (PDL1.0) (国土交通省サイト)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.mlit.go.jp/links/terms-of-use.html"
+      },
+      "files": [
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0001.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo01.csv",
+          "sha256": "6a9d5b94bb771b80b7b4c298c825577a3b61d67d6c937c6a69f6caf54ed2b2e5",
+          "bytes": 3130569,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:14.090Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0002.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo02.csv",
+          "sha256": "34648f24e795a5ff5dabf089e99b1b6b81f0e935c54aaea7566defc3029549c3",
+          "bytes": 1113338,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:15.085Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0003.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo03.csv",
+          "sha256": "a8af1ea2ca231b419007235b10ac4e02d9893b78d698009eda260376f98e1e0d",
+          "bytes": 1096484,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:16.070Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0004.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo04.csv",
+          "sha256": "1ae09c6ffcc65350ba2e0e7f9316ccae4d74a715ec53517747dc0b56ed2eed31",
+          "bytes": 1156089,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:17.072Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0005.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo05.csv",
+          "sha256": "e9a81513033bd21a55cb800273624b5933867d7caa0971c352e1d738f296dcd4",
+          "bytes": 795558,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:19.227Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0006.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo06.csv",
+          "sha256": "b418e6e2f8ecb52c0d5e130150a1d93e93f4c40f90d127617671220200a439eb",
+          "bytes": 1210890,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:19.240Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0007.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo07.csv",
+          "sha256": "ddbb26b9a20aaaf73dc4e5b0098c0db2b32fb06c123e5f16c81b077935cd2c92",
+          "bytes": 1825117,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:20.263Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0008.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo08.csv",
+          "sha256": "eaeeddbf9f47608e350f70a0dff9a3a0f0af0b1f15941b7bf99b56a9cd8cd933",
+          "bytes": 1826746,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:21.244Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0009.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo09.csv",
+          "sha256": "c33c2e85a38187567a4d0b4c82412a0ae065c12b670be48b74f3973991b970ee",
+          "bytes": 1370349,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:22.248Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0010.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo10.csv",
+          "sha256": "e128e858e784aceb31a33153f3e530ae0bed3584a78db0acaa098b0ca1083694",
+          "bytes": 1501342,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:24.412Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0011.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo11.csv",
+          "sha256": "691fd97182425bd4397a8d8743b2b8192bd53154b5847886fd3b7b7ebd952afd",
+          "bytes": 2031769,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:24.435Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0012.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo12.csv",
+          "sha256": "5e10ffbcd7bc029d5eece06d6caa951a10a0ec7354ac30be045f1e21c7d92fd5",
+          "bytes": 1644382,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:25.431Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0013.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo13.csv",
+          "sha256": "37c41661cf92ee0f9964138694f43c5764f237dc061262f6457bbb6dd3e30c85",
+          "bytes": 2276487,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:26.436Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0014.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo14.csv",
+          "sha256": "c50903ecd7daabca6cffa9a1f51905b8746d9e965dc8cc20704a6335664e638b",
+          "bytes": 1463998,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:28.595Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0015.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo15.csv",
+          "sha256": "b8a6cae5f22b6fa66d6833746de3d22b550222b829c9d547ff13120e8f855553",
+          "bytes": 2349443,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:28.686Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0016.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo16.csv",
+          "sha256": "051adcf16741663bf37662b1fa7e42241439e918246676df8af4d9465c091f29",
+          "bytes": 1412734,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:29.626Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0017.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo17.csv",
+          "sha256": "22f93c3b69acc981fff66a2ccfb988abfb34e521d507709cdbcd229d9f3be33d",
+          "bytes": 948212,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:30.618Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0018.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo18.csv",
+          "sha256": "a0a5553b4aaf92dbc7626d1d3f8689ace4c8bc004c4502d2f0ebdd429881edf9",
+          "bytes": 852513,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:31.619Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0019.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo19.csv",
+          "sha256": "b0887b492a6d75c469ed2c20d24a71f10ca220f601e669bd42e7aa1449322ab8",
+          "bytes": 761223,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:33.637Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0020.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo20.csv",
+          "sha256": "be5c7adcf5964c3053f8226dbd7c64f93954d5eae9923865262a80358a911c35",
+          "bytes": 1719652,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:33.691Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0021.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo21.csv",
+          "sha256": "2869136e5c1f24f5d73ccb6ddb1c86a2c1fdea81a00db174ec02214d3163a469",
+          "bytes": 1344791,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:34.650Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0022.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo22.csv",
+          "sha256": "b4f87df9772edd4f793fafc7c51aa268bb354dcb43099dddf368f56b1b3c9484",
+          "bytes": 1751614,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:36.968Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0023.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo23.csv",
+          "sha256": "bda9df38b1e471c384748516281834913ab561563a093914e2b71be6bd853440",
+          "bytes": 3220011,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:36.996Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0024.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo24.csv",
+          "sha256": "dae993f8104968bd04afff296856810d54ecddc05160e981392011c5787255be",
+          "bytes": 1443482,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:37.988Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0025.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo25.csv",
+          "sha256": "fa6503bed633792b533140cfdfb28780069af0f3a6760ec8360e9132a0b41fdc",
+          "bytes": 1070105,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:38.993Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0026.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo26.csv",
+          "sha256": "4ff1c0cd7ed26e767e17dfc071280640ee438961067cc30110071684cee3fd50",
+          "bytes": 1488052,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:41.171Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0027.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo27.csv",
+          "sha256": "e816251ff440c914ce5e094c4f4b6aa7ff900df6c429f3f66e1695ef79d4f516",
+          "bytes": 2297449,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:42.482Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0028.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo28.csv",
+          "sha256": "68c3e2ad78d6b89b92730ed24aad412e4342e9ae358f0436634683b2d5390ca2",
+          "bytes": 2535198,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:43.813Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0029.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo29.csv",
+          "sha256": "e2d031397e1c12e51c6df69be016a4a3758446d46fafd54cab28cfddcc99242d",
+          "bytes": 1024204,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:44.979Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0030.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo30.csv",
+          "sha256": "7efb22c1791f8e758b84b6983c8d932d7059c788784b7df806f1f885eba6e179",
+          "bytes": 956448,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:45.027Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0031.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo31.csv",
+          "sha256": "cd6674f4def23c5ca843ca4a9aecf5fdac9f191718e6afbe32050082e022e063",
+          "bytes": 776556,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:46.009Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0032.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo32.csv",
+          "sha256": "eae1a6df149d24b6fad2d7a9d736b1617176a90e48135f76686dbb5921a03af1",
+          "bytes": 929746,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:47.002Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0033.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo33.csv",
+          "sha256": "1fa1247266a59bec1323d7bb10f831c6082b8a06b10b09ce9e0366512ebfd21f",
+          "bytes": 1544676,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:49.275Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0034.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo34.csv",
+          "sha256": "e210955433a1b93f417b19ee451fb0ed114176273266057ecc510509e432fc8c",
+          "bytes": 1591498,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:49.295Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0035.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo35.csv",
+          "sha256": "c1285202d5a132ee69cd41e46c84a963d6e0878ca5da3657f0f5df2ce17308aa",
+          "bytes": 1050714,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:50.348Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0036.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo36.csv",
+          "sha256": "d74b160faca692fa9a6c622e241605c94d26935c1ecc1cc3efb7d2b9d68cb043",
+          "bytes": 833717,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:52.468Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0037.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo37.csv",
+          "sha256": "1ef5d30885c71db5999430aceadf60700c4150abe054edfe7f79dfc67ab8185d",
+          "bytes": 914288,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:52.489Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0038.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo38.csv",
+          "sha256": "013eef69ca21230cde0844d2dce03a18a3dda789655eb2722fc110c632caac94",
+          "bytes": 991421,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:54.670Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0039.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo39.csv",
+          "sha256": "06d1bc3c72f8408b64e4e9722efe88d196a798f3d6d3b9aa62050391c4a18831",
+          "bytes": 733029,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:54.693Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0040.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo40.csv",
+          "sha256": "b24d04c1b5e7807e5b76cc490214c68ec6cd93f03abc025ee46ee5fd47e6ab68",
+          "bytes": 2872796,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:55.693Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0041.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo41.csv",
+          "sha256": "7c1ff7ba6a02eea2aa79d32289ead1dbc511b28a1441f93abb95d99050c8e395",
+          "bytes": 810847,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:56.692Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0042.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo42.csv",
+          "sha256": "f01d8e1fc6ee08b9c48fcff643c320df0801e01cfe9bec37c1eaf8d721fea45b",
+          "bytes": 682950,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:57.716Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0043.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo43.csv",
+          "sha256": "b23be1b18127e79b807f2c8fba79f64ec85e2587bcab0ebec5e9b074be46af5f",
+          "bytes": 1248982,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:58.695Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0044.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo44.csv",
+          "sha256": "7e8d9a48755e689dc14d9a4ae0564f5a93cd7a164310277bd56688456317f68e",
+          "bytes": 966669,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:27:59.692Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0045.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo45.csv",
+          "sha256": "7adac7535f3aa7750584a2b1be59973eeba25cf009b601f7e6c71632020f0229",
+          "bytes": 803975,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:00.696Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0046.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo46.csv",
+          "sha256": "0cdeffb7e2a8078bb33608810df0ac4fc5e4671a47cdeafd62df16afacf1298b",
+          "bytes": 1116151,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:01.716Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0047.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/kasyo47.csv",
+          "sha256": "5f835319609e847b34ea30f9a826c95398ff1c47058a8d7c7d2033a71dd55c79",
+          "bytes": 754908,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:02.679Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0048.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/syuukei01.csv",
+          "sha256": "7a1e28b162cb6988ad04959be7894b44b7ecb843a3a1561d4e18c549ab6c323a",
+          "bytes": 61669,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:04.307Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0049.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/syuukei02.csv",
+          "sha256": "bf20ae9df22753d440c97e59768ca6f778d3f1b4bcfaa3813daa874a65bdb9f5",
+          "bytes": 92357,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:05.448Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0050.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/syuukei03.csv",
+          "sha256": "f3337e48431d4851bcc6f95ccaa0253fd0709f1920c0a9ed9446f5af3b2f5548",
+          "bytes": 169968,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:06.438Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0051.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/syuukei04.csv",
+          "sha256": "7758cdbed18e630cbb0a6e0b3660e27440baa1cc3653f8bbf78712aa690709ec",
+          "bytes": 1493719,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:06.695Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0052.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/syuukei05.csv",
+          "sha256": "1c65294bf84febd038a16d41538988be0bfa5d5ab3b3783d71a34081fa7866ac",
+          "bytes": 134485,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:08.459Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0053.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf01.csv",
+          "sha256": "315c526fa020bf6c206b742d63f1f1ea11071c66b3ea1f1de02dd2c5bdb12034",
+          "bytes": 1510487,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:08.683Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0054.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf02.csv",
+          "sha256": "9e8464eea4c930d9031af1ec549922bd146e5922f5e7183398952da1044fab9d",
+          "bytes": 382165,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:09.677Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0055.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf03.csv",
+          "sha256": "e03658a42f6a3d2496c7cff731b1f10f19a572d1fbad67c957a68834c62f6f4d",
+          "bytes": 460143,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:10.678Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0056.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf04.csv",
+          "sha256": "debcda45cedd0380a7ab7710aa5602e3c345a89268e6ab657f8008805dc20c0b",
+          "bytes": 543750,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:11.677Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0057.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf05.csv",
+          "sha256": "912dae8931596be842cf67383f3ddeb3ae29a714aaed234ce9be4eacf096cb40",
+          "bytes": 387391,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:12.681Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0058.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf06.csv",
+          "sha256": "52199744f513e433d5379b2794f0cf12f77e853324eef183c4732efb500d3f28",
+          "bytes": 484859,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:13.678Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0059.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf07.csv",
+          "sha256": "b6e7eb92891ac1cb54b0b2ba82f97e1951c5cadadfa88a226956d8850ce24e84",
+          "bytes": 616123,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:14.680Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0060.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf08.csv",
+          "sha256": "45c6ba61906d389ca71a84af2a0f739470adcaa65b9133721ee9e30ad85d6c7a",
+          "bytes": 628470,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:15.682Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0061.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf09.csv",
+          "sha256": "6d372593c8366969e7a8093f86022f8fbea66b65117d1d63d3803e88448469d5",
+          "bytes": 538334,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:16.687Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0062.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf10.csv",
+          "sha256": "079929cc72d8237fd7b3ac28ed8b3e39973a919928d5fe674a3b9f5c32a56402",
+          "bytes": 541393,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:17.682Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0063.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf11.csv",
+          "sha256": "7c8c5c7254559bf75a36f7fbbde8ef8d43773fe18ea8792fbafd16a13a3bedfa",
+          "bytes": 719290,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:18.683Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0064.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf12.csv",
+          "sha256": "33c380afdd53afcb04b723892b5f13b8edae1bbe10877ef2c6c791e022d45f50",
+          "bytes": 628466,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:19.684Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0065.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf13.csv",
+          "sha256": "e3ea70d997c307a190ee790ca7b5f2b52346c7917c40e3a3a5b663cfad5db5e3",
+          "bytes": 886326,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:20.692Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0066.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf14.csv",
+          "sha256": "987a2f90da743db842b46f43388d208a2c3c9fa476f160c8b707a071b03de25a",
+          "bytes": 696111,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:21.687Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0067.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf15.csv",
+          "sha256": "b44dad0a0a299d9175a81e28ded6033a23cd607eba8e2944c6fac5913d6a08d1",
+          "bytes": 938438,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:22.689Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0068.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf16.csv",
+          "sha256": "598a45bf2dfc6a7727be2849fc6f51199737592390e2bd797e5a73e44699abef",
+          "bytes": 465535,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:23.694Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0069.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf17.csv",
+          "sha256": "959faa4aabb97b9ba66f6bcab6e5ea82c052114392abc07dd10d76467f5de914",
+          "bytes": 341157,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:24.688Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0070.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf18.csv",
+          "sha256": "b373c900689795435d1d85510f2e408e36dd54223324087aa3020feb0e4d99e0",
+          "bytes": 349743,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:25.689Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0071.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf19.csv",
+          "sha256": "d8f2f660f1182186a4814b5fab4e9801aaf86939aea673269a45662e8af31ac9",
+          "bytes": 325974,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:26.689Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0072.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf20.csv",
+          "sha256": "906571ad8c46b81d7f3c5bad40e4b70d35075dd788335539d69e0033d0ae7592",
+          "bytes": 788923,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:27.704Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0073.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf21.csv",
+          "sha256": "75c9c9c19e28b72b92b9afc8dd8367f798b87a3f30b262c9b63054a1eaca55dd",
+          "bytes": 514109,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:28.700Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0074.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf22.csv",
+          "sha256": "bf05b395c87e856af439dbe450851efc09cda13b4344dd1e419747ca9272a6b2",
+          "bytes": 743729,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:29.690Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0075.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf23.csv",
+          "sha256": "3ba92f63e9dc4a63fc02f86b28d5bf637fbd386519ad11aa6add7a02843c2b06",
+          "bytes": 1125514,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:30.709Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0076.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf24.csv",
+          "sha256": "b9be86a88254c26f4a439c26b1811b7ac67f205ab0df61f123e6c032a86fcb25",
+          "bytes": 442728,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:31.690Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0077.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf25.csv",
+          "sha256": "d58bcd0a89feeb76379623956a8c9934cb6fef9f582acd336df08f94f415f2b0",
+          "bytes": 436191,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:32.692Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0078.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf26.csv",
+          "sha256": "4ad4e3b66711be7b359bab8a1ebbde0428f0390d791491780919453b255dc14e",
+          "bytes": 742385,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:33.694Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0079.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf27.csv",
+          "sha256": "2186065956be106cdee7768cf8e65ad6c695e7ee31cc599fdcaabd2bbf862a8f",
+          "bytes": 773413,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:34.700Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0080.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf28.csv",
+          "sha256": "b6bcdc30d450c46add02351ec8069198ea3f9eb58444b0219f2be9fd44d67324",
+          "bytes": 1061802,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:35.696Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0081.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf29.csv",
+          "sha256": "cd0b1de095e97ede53f091c1b779bbb47a2abb3b063bc4f057bf81cf5a77ed4b",
+          "bytes": 336355,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:36.695Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0082.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf30.csv",
+          "sha256": "c1dddc98f12155e501ef1463f2b5d8512d802f7a24299a426a65f24c32e44310",
+          "bytes": 483881,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:37.696Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0083.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf31.csv",
+          "sha256": "998cbf6fef63d078d9f3558b8e6acba06d6c8c5def2b0770348d2093d00963f5",
+          "bytes": 451603,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:39.735Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0084.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf32.csv",
+          "sha256": "58f51d9768d421d12ad4738de5c3f6bbfb65d4daa385658d83adb0d1dc22c8ff",
+          "bytes": 526377,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:39.773Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0085.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf33.csv",
+          "sha256": "301e5cdbdb89e32d1ef32de0ab884a8223b58ec14ca02b17378d343cb517fd70",
+          "bytes": 653163,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:40.745Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0086.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf34.csv",
+          "sha256": "00d144a3765ea1e90ad73c0a3c0bd6e7475f43c52d2e74beaf81ba4dc5ed8872",
+          "bytes": 784690,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:41.747Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0087.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf35.csv",
+          "sha256": "cf46a28067ce64bcce217993bba435cc6b83f3d0d765a7f8c2b6ffde35ae78c0",
+          "bytes": 569860,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:42.747Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0088.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf36.csv",
+          "sha256": "07afe9adfc6f53e9fac38f7e7d915f775150ca323bb207af70afc7bc60dfedc2",
+          "bytes": 373136,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:43.746Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0089.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf37.csv",
+          "sha256": "9b6b0f644eb19f90dc5fe862aa45cec0d7797ffff8e48d362afadeb99f1bef4a",
+          "bytes": 354818,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:44.746Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0090.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf38.csv",
+          "sha256": "f74b85a5d3db1c1a2c6a1be950febdfee519d0ecc04aa894aca898e830bc8a61",
+          "bytes": 423695,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:45.752Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0091.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf39.csv",
+          "sha256": "ffcc852c4b934356920d83594fc1adb37aaec830d31769e528b953187a91f7ff",
+          "bytes": 422203,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:46.748Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0092.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf40.csv",
+          "sha256": "d9e94f2167a6ef9444b9648ba20e34ceff7f202e2c93fb62256fc14ded008690",
+          "bytes": 1053126,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:47.750Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0093.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf41.csv",
+          "sha256": "eb1cc3051c0892547dce7e6954e58cb9baba62d05416dfe40f95f59460d6b01c",
+          "bytes": 315219,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:48.748Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0094.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf42.csv",
+          "sha256": "3086ef350aeb30e0b622f95b0a7bb3b7c9966f3ba0970dde58ab7cb79a1cf124",
+          "bytes": 306268,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:49.755Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0095.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf43.csv",
+          "sha256": "a4e5c1d673ff9efefa3db26f4e6c45e552943ba50a27d6a21ada6d97e198b1eb",
+          "bytes": 491192,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:50.751Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0096.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf44.csv",
+          "sha256": "5746f2b1b6ed5c5d21d22e007fe46fc74b77f0a7715ed94712a3899339a0c824",
+          "bytes": 420743,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:51.752Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0097.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf45.csv",
+          "sha256": "d1f65062e51d1dfb6fbaf46146953e85f3c470f65967b40d412317d6f5dcc425",
+          "bytes": 314480,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:52.751Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0098.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf46.csv",
+          "sha256": "54c4a191be317e3b5f8702b3111afe52573ff560fea2ae3e763884f5724da7ef",
+          "bytes": 453183,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:53.752Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0099.csv",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/csv/zkntrf47.csv",
+          "sha256": "cf5d192b2ae074cbfeeb2615ab9095edfdc0a287e34036efedba371dbe1b4982",
+          "bytes": 279163,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-11-15T05:28:54.756Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0100.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/KasyoFormat.xlsx",
+          "sha256": "89ce9357d4edd423c067f26f975a853f6fa5e995919b84a08d02573c2278610b",
+          "bytes": 29872,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:28:55.763Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0101.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo01.xlsx",
+          "sha256": "5dfa06393d76e9ec2d08bbf571d3d2b6c0e75d5ede1026529d4982a5f0d5e0fd",
+          "bytes": 3985342,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:28:58.188Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0102.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo02.xlsx",
+          "sha256": "feac2ff6f61ffac473dae2284c1f95c78d213f13249dfc99387a383cc42c8034",
+          "bytes": 1389695,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:28:59.369Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0103.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo03.xlsx",
+          "sha256": "732e84efb90c25b48ad2775b270a49fffe89af4e63718e681c93bed41cb4dae6",
+          "bytes": 1357285,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:00.600Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0104.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo04.xlsx",
+          "sha256": "4ad0086f823972b83badfda6ce200a6ce38105839d8576063bb744e90478b34c",
+          "bytes": 1442139,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:01.755Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0105.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo05.xlsx",
+          "sha256": "2c8dec1c410456d8dda7866084f5beb91f0535381abe1754c9e6e7e8374ecd52",
+          "bytes": 1020051,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:02.531Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0106.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo06.xlsx",
+          "sha256": "f4574cba6bca18b622be11c73bd19e176469ecf27be1eec010397cd4cd326191",
+          "bytes": 1519620,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:03.945Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0107.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo07.xlsx",
+          "sha256": "c4744f039b55fa3f8adc0053594caa8b9954b770c154854f75947def090cc5bc",
+          "bytes": 2231563,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:05.336Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0108.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo08.xlsx",
+          "sha256": "a5ed8cab143e19cc8439d63cf973a5491d86ac58dbf822ab41896469f6dc5407",
+          "bytes": 2253809,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:06.643Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0109.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo09.xlsx",
+          "sha256": "701f54e2c98fa5798137ddfdab4548adeb6955ea2713105e2c79c480eebdf804",
+          "bytes": 1692718,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:08.004Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0110.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo10.xlsx",
+          "sha256": "5a45ae9044b22e7ebb0a76bc313f3fd3461aa7c486540156f37f8d82e1efeed2",
+          "bytes": 1785825,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:09.342Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0111.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo11.xlsx",
+          "sha256": "5a89254634364b3d0cf7a3ebe75269e94937f86511f45e9d2b964d78c9ad03ee",
+          "bytes": 2450793,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:10.721Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0112.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo12.xlsx",
+          "sha256": "06302c01772cdf8781eaba85551b831195a7567bcb22b1bda79cef40d474488b",
+          "bytes": 2003954,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:12.101Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0113.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo13.xlsx",
+          "sha256": "c7d2c847450f1f93619f0e300546af9e6dc3a8977b17734271022bed794e2d78",
+          "bytes": 2750712,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:12.137Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0114.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo14.xlsx",
+          "sha256": "feacc26b3686db09453db19e38bf81190ab22f8cfb208c750b18129d3f7ed06f",
+          "bytes": 1762443,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:13.152Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0115.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo15.xlsx",
+          "sha256": "b85c6de512790b9bbbc3b4597192e2640444a02072dd9bb01d0541f6ff2d763c",
+          "bytes": 2800696,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:15.419Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0116.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo16.xlsx",
+          "sha256": "565d27a545ba54da30ef79064e61910e149d9525578de9b22446126e1e25ca37",
+          "bytes": 1685527,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:16.723Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0117.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo17.xlsx",
+          "sha256": "9eb37d7d74e4c9ec91834f4a45d623261e562b9a6b3f1d683952161ef07a2bf7",
+          "bytes": 1135190,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:17.936Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0118.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo18.xlsx",
+          "sha256": "6ec90f7b39086a4f01026e92fbdbf75f4924bab6d16276faf80e2c0d919ff5ad",
+          "bytes": 1067530,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:19.079Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0119.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo19.xlsx",
+          "sha256": "c92c5251b999bdbcc4b01af2d8b6f907cd01cdf7af64454feb1a3fe64533fc27",
+          "bytes": 931254,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:20.242Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0120.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo20.xlsx",
+          "sha256": "737454db57674952b371560ce902d954d7a78e18cbf6520128a73563f92a9315",
+          "bytes": 2114838,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:21.569Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0121.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo21.xlsx",
+          "sha256": "7f063297e7d812452539f01dfadaf819a397a5d7f030e2cb5837835174af5a3a",
+          "bytes": 1643428,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:22.895Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0122.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo22.xlsx",
+          "sha256": "bfa7007a204120da43334d2e0cc943374c8d0ddb2bd6a03da0af6df9addd1110",
+          "bytes": 2122410,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:24.199Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0123.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo23.xlsx",
+          "sha256": "aa04e3d9760ae53d2565cae329c930ce1ab43fd3217374917e8adf6f577aca4f",
+          "bytes": 3930138,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:25.660Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0124.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo24.xlsx",
+          "sha256": "46610702032fc4fba94026e69c7278c29626149623fd43043f13827f83c3071a",
+          "bytes": 1746667,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:26.996Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0125.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo25.xlsx",
+          "sha256": "d3cbaf3897167beec9cb8988f844a03d71f7a1f67eb3fad9bbabcd05f841157f",
+          "bytes": 1330758,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:28.340Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0126.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo26.xlsx",
+          "sha256": "a5174995fa6978fe42abb58b8cf8a737e7c23d3e80389638dbe2c936e48012e2",
+          "bytes": 1843301,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:29.634Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0127.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo27.xlsx",
+          "sha256": "0afc0f3320b521b7e25bf1a48a5271d8fd36e58c3e4bad0851dd71581222d8a5",
+          "bytes": 2739482,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:30.943Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0128.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo28.xlsx",
+          "sha256": "b8e55ec1abbf93dc25aa00cc16dba7d382ffe73524ef49cae5917239c8a8ef53",
+          "bytes": 3151558,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:32.276Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0129.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo29.xlsx",
+          "sha256": "0a973ddf7d62d3a72d224f64d456230a1a23eb36822464b3746d22e1d4acd3a7",
+          "bytes": 1262323,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:33.465Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0130.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo30.xlsx",
+          "sha256": "1e03498a0c5f75ebe61b6656abd19edc0f6c2bf4daf34dda4f973d05c20e2b41",
+          "bytes": 1208246,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:34.688Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0131.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo31.xlsx",
+          "sha256": "954505604939190996ef8d951a1cb7ffdd25e3fdd1ca87181b95918c931874e5",
+          "bytes": 998884,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:35.848Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0132.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo32.xlsx",
+          "sha256": "9f27fe9543516bf6b5aa76e4fc94b04a9036112663f005f4b1a4a072398d84d1",
+          "bytes": 1178062,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:36.990Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0133.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo33.xlsx",
+          "sha256": "601b05c3034978f6d426c026db10da32a5a695d85411316263d0025ba9d43de6",
+          "bytes": 1899124,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:38.287Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0134.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo34.xlsx",
+          "sha256": "873ab77d5fe5258ee86a7cf9e28de9865b3722ba660ba5b0b2691514502c234e",
+          "bytes": 2009003,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:39.637Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0135.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo35.xlsx",
+          "sha256": "19cf292dd8d6d159dca34f4be94eeb7b22b6fdd525b04ecd7b89d2795204f9e4",
+          "bytes": 1338036,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:40.834Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0136.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo36.xlsx",
+          "sha256": "e1a800351081f2a6eaf0357fb597c5b25a25b6ce28bf7456a27d867b9ada60b3",
+          "bytes": 1047188,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:42.023Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0137.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo37.xlsx",
+          "sha256": "595477f25735811070362f7b4671292a1f5bd5057ed91fa891a80ea17d5f5289",
+          "bytes": 1133871,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:43.233Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0138.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo38.xlsx",
+          "sha256": "89d3d227f426028e612dd46f5c5f480eedc124870037b5414d9ac4bc11c3447e",
+          "bytes": 1212822,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:44.414Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0139.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo39.xlsx",
+          "sha256": "bd6c880506fb8cefc23d971a2b7567577eb2596c0bf3d03a826da78a1f5b2805",
+          "bytes": 924875,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:45.604Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0140.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo40.xlsx",
+          "sha256": "1e34eb77ae1e5084c0fd18bdaec451677c8ae6660e3d86d20678ce6251008d5e",
+          "bytes": 3510055,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:47.005Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0141.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo41.xlsx",
+          "sha256": "bad2b9d2a4687e812813cb4721ffa81696d998c9ae116e53d7c83c8ef8300963",
+          "bytes": 992696,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:48.204Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0142.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo42.xlsx",
+          "sha256": "7821208a307a39b47339d4680b02120d955cd760405564321c2ce36669d00b70",
+          "bytes": 827285,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:49.365Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0143.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo43.xlsx",
+          "sha256": "61d4d221afe00b8b93a54cec8e277004a6afbc240d6a0468441ed81694f18b07",
+          "bytes": 1548689,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:50.253Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0144.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo44.xlsx",
+          "sha256": "ac0bfe02c8b0b1796d9f4f97c1e128ad3f92fc8e8e6139e5b097c872e62335d0",
+          "bytes": 1196355,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:51.577Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0145.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo45.xlsx",
+          "sha256": "dc2101998e4df7d26aabdd784340519d091a8662cc7b4730afbcedfa968f88a7",
+          "bytes": 970622,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:52.816Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0146.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo46.xlsx",
+          "sha256": "3247d36d640ebf7d3e72b97327cf2b4f976ef488de67fc6065833301569f2a5a",
+          "bytes": 1360424,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:54.157Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0147.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/kasyo47.xlsx",
+          "sha256": "65303bbd4117c267ea736d9ac57349a72823e8bb86ad9f8c2492288e05de3987",
+          "bytes": 873368,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:55.315Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0148.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/syuukei01.xlsx",
+          "sha256": "165cbd696077f0d425ddd995db3507473a69be23b064f9c8720a97e279ce6f6a",
+          "bytes": 78091,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:56.087Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0149.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/syuukei02.xlsx",
+          "sha256": "0dd2d966877337c2da48fbf071e72c58ec6a1c1340a03ba8cac4887075a18b53",
+          "bytes": 125259,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:57.104Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0150.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/syuukei03.xlsx",
+          "sha256": "d25b41a8a34357ecb09673bff8e4d760e0c21db0be35741a8c5078d2ca6dc55d",
+          "bytes": 230980,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:58.233Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0151.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/syuukei04.xlsx",
+          "sha256": "3ba3350bdf66a11979e9d195e9cb0354052b47b8526ee6e6387fe8c8566aac4b",
+          "bytes": 1915367,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:29:59.623Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0152.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/syuukei05.xlsx",
+          "sha256": "c3f8395b8b1e2b20a54b4e32f801d84ae9fc9fd23584f502467234a7b7190f82",
+          "bytes": 164777,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:00.382Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0153.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/syuukeiformat.xlsx",
+          "sha256": "f35d5c92f47216f27ace85b39138c2dd2ba2c7d2c881fdea340fc9d43c805550",
+          "bytes": 1176587,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:00.677Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0154.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf01.xlsx",
+          "sha256": "42c1cb3288da3f303b8273f4fea40dbafc2674ea9ec14a2041a7c8f3a0900190",
+          "bytes": 2640563,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:02.968Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0155.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf02.xlsx",
+          "sha256": "fd1818e24fab572659d92a6713ec953f5ee38278b1bc3683a550be3f48839ecd",
+          "bytes": 636525,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:04.030Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0156.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf03.xlsx",
+          "sha256": "d05070758689b8a987be43c22b737a845b9d92c706084370ec2f0ce30684b690",
+          "bytes": 794233,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:05.209Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0157.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf04.xlsx",
+          "sha256": "6b10e80399ccdef6f9edc926ff58c533f3ac3fe6078b56439d55990b5e2522f0",
+          "bytes": 902242,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:06.414Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0158.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf05.xlsx",
+          "sha256": "a17440e86202ba4df35992c84bb1ecdedae9d6a708fb2010550bf0d376472754",
+          "bytes": 651962,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:07.447Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0159.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf06.xlsx",
+          "sha256": "5c6cb95f125c57b0f31f55a5dc93dd68eb796e530c8f7be018b615e97a17e879",
+          "bytes": 801740,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:08.625Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0160.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf07.xlsx",
+          "sha256": "2f8d6ee5123ea5ed85dbdb972aa1221c84d832be9440c77e8aae2c34c2381160",
+          "bytes": 1025259,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:09.843Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0161.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf08.xlsx",
+          "sha256": "5e13b21fb390f8cafc408194144644910039647c86b25a0e6d75bd0527c34106",
+          "bytes": 1007142,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:11.040Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0162.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf09.xlsx",
+          "sha256": "cc6a1c51b9fe27601a1b165c16bb41eec0eded927c7e1bb4826eb8e5a5acf32a",
+          "bytes": 866150,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:12.207Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0163.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf10.xlsx",
+          "sha256": "71ebcdfbf511845091334857d41a6ceab8977c6be5e15bc4f27c70b7caac0f30",
+          "bytes": 895627,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:13.353Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0164.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf11.xlsx",
+          "sha256": "718c427368fe3d1fe813d31ace6c649ff38aeecc65789d1304b173875d20a5bb",
+          "bytes": 1174075,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:14.689Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0165.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf12.xlsx",
+          "sha256": "f32204c38658142fb5c31967d7c4f8dab3d7bd8821acf3c6c22085732708b87f",
+          "bytes": 1053128,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:15.937Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0166.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf13.xlsx",
+          "sha256": "e8e8bceab9c9800c4183912bab62d5bc576897b62947e24d42ffd0d05c457b6a",
+          "bytes": 1447806,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:17.124Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0167.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf14.xlsx",
+          "sha256": "a589027c90a3b0706bec21c045e9e5bc4caacc414c8d75b5a5436733857e4302",
+          "bytes": 1165337,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:18.335Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0168.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf15.xlsx",
+          "sha256": "b131128e248fb81b12088e2be1ff794ee4f4831a56a6cfc8f3bd63b1f5fc55d2",
+          "bytes": 1536695,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:19.522Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0169.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf16.xlsx",
+          "sha256": "7615e862650ec8e7dceaf5f7a04c488e85e88d0ad84dc2c80e3548cf207d60d4",
+          "bytes": 738603,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:20.569Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0170.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf17.xlsx",
+          "sha256": "37a02b7861dc07f0c11c6e7742d2621336bb76638629691f3bc9ca65d3926a88",
+          "bytes": 559225,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:21.610Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0171.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf18.xlsx",
+          "sha256": "0a884668a7253718ec6c200b4e2616cf8623d8d4975eaaacaac609f3d6225677",
+          "bytes": 578356,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:22.656Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0172.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf19.xlsx",
+          "sha256": "a5d905d56c538a704297bf908d5b3cb741de998d536ae09fad10452dedd53856",
+          "bytes": 541411,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:23.698Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0173.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf20.xlsx",
+          "sha256": "a2636387de0f8aa69cad0a55a5048b1328d86a89933f69f432068b77ea271cd0",
+          "bytes": 1323167,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:24.946Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0174.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf21.xlsx",
+          "sha256": "cf99ca69b26783caa61fc7253cae012824c26af7785e7c67e9dfca15b8967e2e",
+          "bytes": 852712,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:26.111Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0175.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf22.xlsx",
+          "sha256": "ccc1627286808b9a17f31755e932bc887ebc102ec6742bb8ede8a785180bd2bc",
+          "bytes": 1251877,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:27.259Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0176.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf23.xlsx",
+          "sha256": "2eaf012f668b328bca4843120c924b66aef92fe1b0a787cfc62974c4a761d755",
+          "bytes": 1830005,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:28.582Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0177.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf24.xlsx",
+          "sha256": "1be2261522180438cde7a8e0f24a94c221bd0c3cbf3968c1757f81123b011fb7",
+          "bytes": 752730,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:29.630Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0178.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf25.xlsx",
+          "sha256": "8199a2cf46c721269f9abaf692fa10b2879f6b37a718c85b418b4ba58c1c1372",
+          "bytes": 715897,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:30.695Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0179.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf26.xlsx",
+          "sha256": "ddb7ff5a67ce4bf6c61b4f87f40fbaadd6148feee61921e14a987a17e222e566",
+          "bytes": 1217502,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:31.897Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0180.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf27.xlsx",
+          "sha256": "592c510cc322860383a3d3fc06dc63b2d1ca07f9511bf6c1ba2f7013a23431ec",
+          "bytes": 1326678,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:33.075Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0181.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf28.xlsx",
+          "sha256": "aaa5d7313f8a5366d3251bcd964696feb552e5721fdb272e496df96ac4bff690",
+          "bytes": 1778943,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:34.389Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0182.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf29.xlsx",
+          "sha256": "4bd1ee8701d0197e8e5da12f5cd8e7ecec5577e2e8476a22f3999b2794dc39f9",
+          "bytes": 557961,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:35.460Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0183.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf30.xlsx",
+          "sha256": "700bd7f21325f3a0824ff21267e02d1c3192a430f2849499e90054868f23ad6c",
+          "bytes": 804535,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:36.645Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0184.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf31.xlsx",
+          "sha256": "f273725f7c3c34510ebf64060817a257bc9de5d3e7054b54e1afda24a17b0b30",
+          "bytes": 726875,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:37.704Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0185.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf32.xlsx",
+          "sha256": "51ff141cfa7c5c59e041619643ddfe582dbb418867013e6f3c0b3cb0581f66e9",
+          "bytes": 879089,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:38.840Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0186.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf33.xlsx",
+          "sha256": "b09ff036f4ee4b89221872804ce0f16bcba7cfc360835342d8e9981e4ab1780b",
+          "bytes": 1092196,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:40.017Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0187.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf34.xlsx",
+          "sha256": "21c5f4ad8e0868c57c7050541dd03b72b312a4d32cb37cd7cb92e4b0ab6eb711",
+          "bytes": 1346533,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:41.218Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0188.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf35.xlsx",
+          "sha256": "f16e07ffef21391acc384567cd62e2a3320da4eb601e8d5b080aca18fbf0d672",
+          "bytes": 973156,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:42.356Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0189.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf36.xlsx",
+          "sha256": "5cef05eec35b5dc02c5a0af1a00e4c7f9ae8f12fd1abf1efc0897eb93c5d7f1b",
+          "bytes": 601808,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:43.146Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0190.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf37.xlsx",
+          "sha256": "1a239ec88a145c38a72e4d2224e27616f25951dc700eeb12128271ee277dc812",
+          "bytes": 569231,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:44.410Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0191.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf38.xlsx",
+          "sha256": "cc14f21f89eeeab125e8ef25202443d6d5ef4418cce1a43d16fa8ab49daa42a4",
+          "bytes": 708990,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:45.419Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0192.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf39.xlsx",
+          "sha256": "50151f74d86672a2593354739a415c0308f6f556501a91ce194d17b7d332762a",
+          "bytes": 682698,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:46.500Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0193.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf40.xlsx",
+          "sha256": "a472d83e0a970cb61076023eb998f2649723e75e67052c479b1ace9aa4b6116b",
+          "bytes": 1709262,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:47.817Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0194.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf41.xlsx",
+          "sha256": "db7b8ffcd35585d78592d31ea649fd4340e82f91d4b4a6611e719bacccb439d2",
+          "bytes": 534412,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:48.877Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0195.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf42.xlsx",
+          "sha256": "34a74c19b4ebb363788c5fe844f58539a5e3d015bbf6731495c76efbd642d61f",
+          "bytes": 516099,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:49.951Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0196.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf43.xlsx",
+          "sha256": "13d0773242a81c776c16b2be01be5b5b30361408aeaddabd4be84872be603188",
+          "bytes": 834307,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:51.076Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0197.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf44.xlsx",
+          "sha256": "6a1f960e888a602c1d5f8bdad468f531bf301769b45bb6792aa1a0ff08b05c5c",
+          "bytes": 696511,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:52.156Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0198.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf45.xlsx",
+          "sha256": "d6cf63060b5c5f01b9d096c9351d7f744cf97b75c1d0bc770b3ec634ec6c3ddf",
+          "bytes": 534321,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:53.208Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0199.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf46.xlsx",
+          "sha256": "11ffbd15a20ce848e29d481795877c18515f366b4e08e211527b7f55bfce0498",
+          "bytes": 757989,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:54.305Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0200.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrf47.xlsx",
+          "sha256": "c8644db7f1fad9df344a7af1022a415b4bfe8acfe5b16f0029ed4eebe776b4ae",
+          "bytes": 475502,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:55.367Z"
+        },
+        {
+          "key": "open-data/raw/mlit-road-census-r3/2023-06-30/0201.xlsx",
+          "url": "https://www.mlit.go.jp/road/census/r3/data/xlsx/zkntrfFormat.xlsx",
+          "sha256": "13ff19d87e23e5f22e2fe98db667ee6ff93e0fdabe89e27fae8bfe1cb3f99fd1",
+          "bytes": 16801,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:30:55.409Z"
+        }
+      ],
+      "manifestKey": "open-data/raw/mlit-road-census-r3/2023-06-30/manifest.json",
+      "manifestSha256": "dae86bfb2bde608b503603d3d8752ffad8b9116b426945c51252039c94189355",
+      "bytes": 225464927,
+      "status": "archived"
+    }
+  ]
+}

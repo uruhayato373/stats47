@@ -1,0 +1,194 @@
+{
+  "datasetId": "mext-school-code-list",
+  "versions": [
+    {
+      "schemaVersion": 1,
+      "datasetId": "mext-school-code-list",
+      "version": "2026-05-29",
+      "sha256": "6b896bbc0cc3d160cda9bdc811297c35fb49a5f66c98adcb4aee167e77912cb2",
+      "recipeSha256": "0290b42e6715afd6eddb1f7bdde78641817922eb925a99894bbc0359b498210e",
+      "retrievedAt": "2026-11-15T04:43:13.046Z",
+      "license": {
+        "name": "学校コードの取り扱いについて (未取得)",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.mext.go.jp/b_menu/toukei/mext_01087.html"
+      },
+      "files": [
+        {
+          "key": "open-data/raw/mext-school-code-list/2026-05-29/0001.xlsx",
+          "url": "https://www.mext.go.jp/content/20210305-mxt_chousa01-000011635_01.xlsx",
+          "sha256": "9b6d132f4987670c7c68f8ba25de4de9c637322ea779ae61a64c2602e73d3135",
+          "bytes": 3047827,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:41:37.825Z"
+        },
+        {
+          "key": "open-data/raw/mext-school-code-list/2026-05-29/0002.xlsx",
+          "url": "https://www.mext.go.jp/content/20210305-mxt_chousa01-000011635_02.xlsx",
+          "sha256": "ce8aeeebb523973979733a838eaddf852e643edecd14174caeb0d7f68e15cb6a",
+          "bytes": 2082070,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:41:44.932Z"
+        },
+        {
+          "key": "open-data/raw/mext-school-code-list/2026-05-29/0003.xlsx",
+          "url": "https://www.mext.go.jp/content/20210305-mxt_chousa01-000011635_03.xlsx",
+          "sha256": "42b605edf03a33d4cb380e89ab752b1e0b9b50cde5f846fdec3bdb66d6b36b88",
+          "bytes": 126113,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:41:45.743Z"
+        },
+        {
+          "key": "open-data/raw/mext-school-code-list/2026-05-29/0004.xlsx",
+          "url": "https://www.mext.go.jp/content/20230731-mxt_chousa01-000011635_1.xlsx",
+          "sha256": "748ccd2a98732ba05fe52d60c4bc16ee81fb91a4bfaeb6a30384413c44556e0f",
+          "bytes": 2914364,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:41:53.360Z"
+        },
+        {
+          "key": "open-data/raw/mext-school-code-list/2026-05-29/0005.xlsx",
+          "url": "https://www.mext.go.jp/content/20230731-mxt_chousa01-000011635_3.xlsx",
+          "sha256": "de40cb123b92e1b6811fb8d473852d48c5a80f58c1dd9bb5090620be453a1d61",
+          "bytes": 2070470,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:41:59.326Z"
+        },
+        {
+          "key": "open-data/raw/mext-school-code-list/2026-05-29/0006.xlsx",
+          "url": "https://www.mext.go.jp/content/20230731-mxt_chousa01-000011635_5.xlsx",
+          "sha256": "d3d32e0b2b9c9017ffe759e79697f9de0b3f4c7e01108d66f242a6c06275aa3a",
+          "bytes": 130309,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:42:00.219Z"
+        },
+        {
+          "key": "open-data/raw/mext-school-code-list/2026-05-29/0007.xlsx",
+          "url": "https://www.mext.go.jp/content/20241226-mxt_chousa01-000011635_1.xlsx",
+          "sha256": "86b6dbee2c986e39557c3fe61573b9e4a0df6f61b9fe1fc94e87c3b1caa3f90a",
+          "bytes": 2945108,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:42:07.550Z"
+        },
+        {
+          "key": "open-data/raw/mext-school-code-list/2026-05-29/0008.xlsx",
+          "url": "https://www.mext.go.jp/content/20241226-mxt_chousa01-000011635_3.xlsx",
+          "sha256": "d352021b52dd082e582c7827359ed4f3b58839dc0da3a3e40d607c6142bd1ab6",
+          "bytes": 2103280,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:42:11.848Z"
+        },
+        {
+          "key": "open-data/raw/mext-school-code-list/2026-05-29/0009.xlsx",
+          "url": "https://www.mext.go.jp/content/20241226-mxt_chousa01-000011635_5.xlsx",
+          "sha256": "b0011319371d826df5e7064689a0b87e45fc1af58a6400a8bddc4e5e5dd65308",
+          "bytes": 133506,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:42:12.914Z"
+        },
+        {
+          "key": "open-data/raw/mext-school-code-list/2026-05-29/0010.xlsx",
+          "url": "https://www.mext.go.jp/content/20251226-mxt_chousa01-000011635_1.xlsx",
+          "sha256": "a07a6fc64817c64fe6d2fbc554a32635202ab30ff0522682be13ee037663e3c9",
+          "bytes": 3050363,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:42:18.728Z"
+        },
+        {
+          "key": "open-data/raw/mext-school-code-list/2026-05-29/0011.xlsx",
+          "url": "https://www.mext.go.jp/content/20251226-mxt_chousa01-000011635_3.xlsx",
+          "sha256": "bc76133e3029c639f7072bbfb7974ce8218e611994a9e818947371ed7e3c07c2",
+          "bytes": 2181675,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:42:23.335Z"
+        },
+        {
+          "key": "open-data/raw/mext-school-code-list/2026-05-29/0012.xlsx",
+          "url": "https://www.mext.go.jp/content/20251226-mxt_chousa01-000011635_5.xlsx",
+          "sha256": "a691683a9e2bc7f55e0bf781f7b9bd95e50fc85c680834889c8a175cf8193665",
+          "bytes": 134178,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:42:24.115Z"
+        },
+        {
+          "key": "open-data/raw/mext-school-code-list/2026-05-29/0013.xlsx",
+          "url": "https://www.mext.go.jp/content/20260529-mxt_chousa01-000011635_1.xlsx",
+          "sha256": "3b050afef9c8052fb6a60b1e44c584c9ac73dcb23c6be3a6bfa90e8649a5cd5d",
+          "bytes": 3082119,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:42:32.612Z"
+        },
+        {
+          "key": "open-data/raw/mext-school-code-list/2026-05-29/0014.xlsx",
+          "url": "https://www.mext.go.jp/content/20260529-mxt_chousa01-000011635_3.xlsx",
+          "sha256": "67a13d5dd49b43886baebe2f01527ce41e82ea99b12c01608d1d69932ee82170",
+          "bytes": 2207379,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:42:38.311Z"
+        },
+        {
+          "key": "open-data/raw/mext-school-code-list/2026-05-29/0015.xlsx",
+          "url": "https://www.mext.go.jp/content/20260529-mxt_chousa01-000011635_5.xlsx",
+          "sha256": "feb746055223ca569752c551e5e135e6c2d727c327f62e696ca401dc2761ffa8",
+          "bytes": 133068,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:42:39.374Z"
+        },
+        {
+          "key": "open-data/raw/mext-school-code-list/2026-05-29/0016.xlsx",
+          "url": "https://www.mext.go.jp/content/211222-mxt-mxt_chousa01-1000011635_1.xlsx",
+          "sha256": "5f4b038bf03099712e284d04b427fea4ba6bee05cdab42d920e0a008fe0c0b68",
+          "bytes": 3876923,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:42:47.558Z"
+        },
+        {
+          "key": "open-data/raw/mext-school-code-list/2026-05-29/0017.xlsx",
+          "url": "https://www.mext.go.jp/content/211222-mxt-mxt_chousa01-1000011635_7.xlsx",
+          "sha256": "9c0203d88c45e0cc9f6b6ad60f628dbd255725c3c80de207487e19bbf6b7af3a",
+          "bytes": 125396,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:42:48.272Z"
+        },
+        {
+          "key": "open-data/raw/mext-school-code-list/2026-05-29/0018.xlsx",
+          "url": "https://www.mext.go.jp/content/211223-mxt-mxt_chousa01-1000011635_4.xlsx",
+          "sha256": "93a9441813bd9a0751d23b84f09cd5e62b0a4fe66d9ce0b4b55e4af5082da970",
+          "bytes": 3289143,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:42:55.652Z"
+        },
+        {
+          "key": "open-data/raw/mext-school-code-list/2026-05-29/0019.xlsx",
+          "url": "https://www.mext.go.jp/content/221222-mxt-mxt_chousa01-1000011635_1.xlsx",
+          "sha256": "b5a2a250d65c39f84f6ee1c81dba1c2bcd6fec930394cbc5f21cf24677e8668e",
+          "bytes": 2881289,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:43:02.465Z"
+        },
+        {
+          "key": "open-data/raw/mext-school-code-list/2026-05-29/0020.xlsx",
+          "url": "https://www.mext.go.jp/content/221222-mxt-mxt_chousa01-1000011635_3.xlsx",
+          "sha256": "e78ad33bac0e2bf226b907b7d32345e7faf987adffa703b40b782d80e4455529",
+          "bytes": 2042646,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:43:11.980Z"
+        },
+        {
+          "key": "open-data/raw/mext-school-code-list/2026-05-29/0021.xlsx",
+          "url": "https://www.mext.go.jp/content/221222-mxt-mxt_chousa01-1000011635_5.xlsx",
+          "sha256": "40756a0fb098f738b395e636753cbd676a5cc7040a66ec43e1dccfcf708a2a09",
+          "bytes": 118950,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:43:13.046Z"
+        }
+      ],
+      "manifestKey": "open-data/raw/mext-school-code-list/2026-05-29/manifest.json",
+      "manifestSha256": "3c5ce28c03b10ee76ed4f7dd056920807e070caed2eb0b1b02cecb6766aeef83",
+      "bytes": 38676176,
+      "status": "archived"
+    }
+  ]
+}

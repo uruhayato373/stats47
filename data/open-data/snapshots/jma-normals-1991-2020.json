@@ -1,0 +1,146 @@
+{
+  "datasetId": "jma-normals-1991-2020",
+  "versions": [
+    {
+      "schemaVersion": 1,
+      "datasetId": "jma-normals-1991-2020",
+      "version": "1991-2020",
+      "sha256": "5a5318da5050bd6d0882eae988eac482abc172ccfdc3c2abb5222f1a5e3e5cfe",
+      "recipeSha256": "b9f5ced856ace580b4e4e4db71d0e66904794b9e73c06f3cefd6c8bcfd3f41cd",
+      "retrievedAt": "2026-11-15T04:50:10.243Z",
+      "license": {
+        "name": "公共データ利用規約 (第1.0版)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.jma.go.jp/jma/kishou/info/coment.html"
+      },
+      "files": [
+        {
+          "key": "open-data/raw/jma-normals-1991-2020/1991-2020/0001.zip",
+          "url": "https://www.data.jma.go.jp/stats/data/mdrr/normal/2020/data/normal_amedas_3month.zip",
+          "sha256": "0eea3e3c4ab5e75efb503af80981f4cc4fe84ced3b71b8041628b3cb7bb23a03",
+          "bytes": 1460853,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T04:49:55.565Z"
+        },
+        {
+          "key": "open-data/raw/jma-normals-1991-2020/1991-2020/0002.zip",
+          "url": "https://www.data.jma.go.jp/stats/data/mdrr/normal/2020/data/normal_amedas_5day.zip",
+          "sha256": "eb6a5dcacd81eded9f50e1a3e4f0f6aedfea2f04535da29760b714b5edbae95f",
+          "bytes": 1038824,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T04:49:56.435Z"
+        },
+        {
+          "key": "open-data/raw/jma-normals-1991-2020/1991-2020/0003.zip",
+          "url": "https://www.data.jma.go.jp/stats/data/mdrr/normal/2020/data/normal_amedas_daily.zip",
+          "sha256": "9f13e100a66a47c68216f4f5bdbdbcb69e83b59214780db4ddee0778143c2901",
+          "bytes": 26836835,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T04:49:57.721Z"
+        },
+        {
+          "key": "open-data/raw/jma-normals-1991-2020/1991-2020/0004.zip",
+          "url": "https://www.data.jma.go.jp/stats/data/mdrr/normal/2020/data/normal_amedas_daily_5day.zip",
+          "sha256": "db4987b674fc2dea2f50704b5fb57497c73df02274f5d9ddc911fc934b4ae699",
+          "bytes": 10694656,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T04:49:59.303Z"
+        },
+        {
+          "key": "open-data/raw/jma-normals-1991-2020/1991-2020/0005.zip",
+          "url": "https://www.data.jma.go.jp/stats/data/mdrr/normal/2020/data/normal_amedas_daily_7day.zip",
+          "sha256": "9ff8b2bb9e07b9f74e423b615ac9d277c4fec34ab45c52eb2c9e398ea4d2d587",
+          "bytes": 6163424,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T04:49:59.578Z"
+        },
+        {
+          "key": "open-data/raw/jma-normals-1991-2020/1991-2020/0006.zip",
+          "url": "https://www.data.jma.go.jp/stats/data/mdrr/normal/2020/data/normal_amedas_month_basis_10day.zip",
+          "sha256": "8c14aff109c67a96e94f07d9e78c16be1a064d904e821a22896a861caef1b8cb",
+          "bytes": 3878236,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T04:50:01.108Z"
+        },
+        {
+          "key": "open-data/raw/jma-normals-1991-2020/1991-2020/0007.zip",
+          "url": "https://www.data.jma.go.jp/stats/data/mdrr/normal/2020/data/normal_amedas_month_basis_5day.zip",
+          "sha256": "911c54b4329e968dc3ca06dc8eec5eec4a60070bc47153b8f7f08bea88e963c1",
+          "bytes": 1071293,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T04:50:01.491Z"
+        },
+        {
+          "key": "open-data/raw/jma-normals-1991-2020/1991-2020/0008.zip",
+          "url": "https://www.data.jma.go.jp/stats/data/mdrr/normal/2020/data/normal_amedas_monthly.zip",
+          "sha256": "0c9e10f7a04df02ff94c5bd57326b8b2f089464dd0d9c9e98d3d9f3b2233a776",
+          "bytes": 3131687,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T04:50:03.422Z"
+        },
+        {
+          "key": "open-data/raw/jma-normals-1991-2020/1991-2020/0009.zip",
+          "url": "https://www.data.jma.go.jp/stats/data/mdrr/normal/2020/data/normal_amedas_regional_average.zip",
+          "sha256": "1f784dd121dedbf294eab82e8fc4822db9ab8c13fee07163a750025f405140f7",
+          "bytes": 15897,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T04:50:03.581Z"
+        },
+        {
+          "key": "open-data/raw/jma-normals-1991-2020/1991-2020/0010.zip",
+          "url": "https://www.data.jma.go.jp/stats/data/mdrr/normal/2020/data/normal_baiu.zip",
+          "sha256": "1682f3e18e07a04564c9f3729f36cb863b2eb340c8db86c82bfc618cf09a0477",
+          "bytes": 935,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T04:50:04.636Z"
+        },
+        {
+          "key": "open-data/raw/jma-normals-1991-2020/1991-2020/0011.zip",
+          "url": "https://www.data.jma.go.jp/stats/data/mdrr/normal/2020/data/normal_phenology.zip",
+          "sha256": "911f55bda2fce4233707f394b6c0f253293b92e55c7f9f1b3c5cd8bc3dbdf2fb",
+          "bytes": 8481,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T04:50:05.576Z"
+        },
+        {
+          "key": "open-data/raw/jma-normals-1991-2020/1991-2020/0012.zip",
+          "url": "https://www.data.jma.go.jp/stats/data/mdrr/normal/2020/data/normal_radiation.zip",
+          "sha256": "0e07c82a7797f9abd554286b757e22c3babbd93368c12b8f7ba6659b1d80e414",
+          "bytes": 592524,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T04:50:07.325Z"
+        },
+        {
+          "key": "open-data/raw/jma-normals-1991-2020/1991-2020/0013.zip",
+          "url": "https://www.data.jma.go.jp/stats/data/mdrr/normal/2020/data/normal_surface.zip",
+          "sha256": "29bccfa59bd3d0c681dae51bbda54ee5b7beda82596bd924693decc14d939127",
+          "bytes": 21615988,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T04:50:08.610Z"
+        },
+        {
+          "key": "open-data/raw/jma-normals-1991-2020/1991-2020/0014.zip",
+          "url": "https://www.data.jma.go.jp/stats/data/mdrr/normal/2020/data/normal_typhoon.zip",
+          "sha256": "e74e508c3e3a82381cef8d5c2208efdf3bae2b1178ae3052fb9de8d789ff4559",
+          "bytes": 321630,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T04:50:08.767Z"
+        },
+        {
+          "key": "open-data/raw/jma-normals-1991-2020/1991-2020/0015.zip",
+          "url": "https://www.data.jma.go.jp/stats/data/mdrr/normal/2020/data/normal_upperair.zip",
+          "sha256": "4e7772ffd1675de79c52540587438a8dadacac664c60dda28d95c9a29aaf4775",
+          "bytes": 1286304,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T04:50:10.243Z"
+        }
+      ],
+      "manifestKey": "open-data/raw/jma-normals-1991-2020/1991-2020/manifest.json",
+      "manifestSha256": "8277ad393d737a12659ff335803bc6f89c23f79791cf768244ac81b121833869",
+      "bytes": 78117567,
+      "status": "archived"
+    }
+  ]
+}

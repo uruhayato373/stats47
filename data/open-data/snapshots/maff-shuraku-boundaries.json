@@ -1,0 +1,402 @@
+{
+  "datasetId": "maff-shuraku-boundaries",
+  "versions": [
+    {
+      "schemaVersion": 1,
+      "datasetId": "maff-shuraku-boundaries",
+      "version": "2025",
+      "sha256": "9faf4d8d245f437571f2f1258f151a5dbc4e50ca2edd5cd0ba953b7594b31d7c",
+      "recipeSha256": "1926606edb41511d6ada9fcef458307c84432ece761a895adda3f7bd456a92cf",
+      "retrievedAt": "2026-11-15T05:45:40.044Z",
+      "license": {
+        "name": "unknown",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.maff.go.jp/j/use/link.html"
+      },
+      "files": [
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0001.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_01.zip",
+          "sha256": "f2460e9ce14fe030d406d1c34487e609dcc46658521b6331f33a74bccc51c654",
+          "bytes": 22241267,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:44:30.639Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0002.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_02.zip",
+          "sha256": "e62d7581919e67de11474fa4bf14f9c54f566b77e152608af6d5e64f72189c07",
+          "bytes": 4922198,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:44:32.073Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0003.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_03.zip",
+          "sha256": "c70f251feb5de551d57372ddcdb72477501e2c00fa8ef93db6630133573f6840",
+          "bytes": 11463087,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:44:33.811Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0004.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_04.zip",
+          "sha256": "a0a8b0eec03951c8ac8d38f60a6cda94764cb214e7567c46fef0ddb17e95e8e8",
+          "bytes": 9278436,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:44:35.472Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0005.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_05.zip",
+          "sha256": "6810982df9aefe5b8ff2e3643a2095440f9a9cb5fa97490175744e122da4ebf7",
+          "bytes": 8148258,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:44:37.008Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0006.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_06.zip",
+          "sha256": "d8cdca0c3f56c28f6554265f535b4f79bbdd9ddbf3c6bf7be4c74a7e5e81c902",
+          "bytes": 3757371,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:44:38.530Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0007.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_07.zip",
+          "sha256": "a38101e4d0cc6739ce41d1bb4804b7308e23a13de23bebc26534eb84b55fe927",
+          "bytes": 9277486,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:44:40.148Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0008.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_08.zip",
+          "sha256": "1a7e848a5c0d76a81bf9a4143ce0dfcb3ccf6665fb1202747e0f2ab522cc86e4",
+          "bytes": 4108927,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:44:40.195Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0009.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_09.zip",
+          "sha256": "518322f2033b3477650e433e4efd99bc65e7facc1b726fad75761b9b629e8680",
+          "bytes": 3521822,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:44:42.594Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0010.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_10.zip",
+          "sha256": "09376b57ab41b6461e831da894e634439e2cc46b9e6d98e6721a4b7028bdeac7",
+          "bytes": 4678135,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:44:44.072Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0011.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_11.zip",
+          "sha256": "2b9a576a8c65260cd0db8db696e9069e0bd9375089d9ba81fa793216df5dd5ec",
+          "bytes": 5104200,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:44:45.584Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0012.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_12.zip",
+          "sha256": "26d61191dcc1e0c63946b91e2afadd55e96b87886174ad51dd8d20a18687bc67",
+          "bytes": 7064834,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:44:47.219Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0013.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_13.zip",
+          "sha256": "096dc72ba7ed532a84461ec36ae326b043aaf5a7b8c0c7f977a093eaec18669b",
+          "bytes": 4261687,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:44:48.694Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0014.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_14.zip",
+          "sha256": "49190b6eb4ec02ee1fccc09960c6af1bc6a761090d73c321ea335d1ce4043a84",
+          "bytes": 3467226,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:44:50.129Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0015.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_15.zip",
+          "sha256": "92d8c9e1fff0ee82cf5194b5bb016485cf3aa5a02f32218b74ab6a2b5fb74358",
+          "bytes": 7041081,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:44:51.693Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0016.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_16.zip",
+          "sha256": "4506849e6509c0f004e9e6f10ff2cd2c864ad733a4e38eadba8c813369d1fc68",
+          "bytes": 2991366,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:44:53.062Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0017.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_17.zip",
+          "sha256": "62e3120d09620eb0a22cf5a7df52c086be69dccf7b556053f12af6cfa40bd1d8",
+          "bytes": 3004824,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:44:54.426Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0018.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_18.zip",
+          "sha256": "58cf16beb89d5fd67dde9e4d4a71bc5eaf97870dd568ae241822c52e3828f8b1",
+          "bytes": 2999477,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:44:55.735Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0019.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_19.zip",
+          "sha256": "a6afb825319e590a16b35fb90fabdfa9fcecb63b8ba4f7b9b03050e25b8b7a81",
+          "bytes": 3176406,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:44:57.121Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0020.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_20.zip",
+          "sha256": "ba8367399e8e0df389c006779c69cbb954132c0ec2b5e9fe66643dfbe4e68d8c",
+          "bytes": 7871248,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:44:58.798Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0021.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_21.zip",
+          "sha256": "63786d22e6797e1d6f4feeea283326507f81895c43753905ce70904064e98eac",
+          "bytes": 5395806,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:45:00.436Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0022.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_22.zip",
+          "sha256": "db4312f0c7cf63376b860df4c78537bb4e47697cbaa57bf6c5752b54a8a44981",
+          "bytes": 7891739,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:45:02.126Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0023.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_23.zip",
+          "sha256": "db252237e7af0683ca0498f8b51d8b9dd40ce00d53bd1a485cc41c5f7e2b362b",
+          "bytes": 5809950,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:45:03.618Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0024.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_24.zip",
+          "sha256": "e7328e23a93efb0f509a8b343018eca6c22f699d163dac2fe374be7673af8adb",
+          "bytes": 7027480,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:45:05.268Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0025.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_25.zip",
+          "sha256": "ef40a7e16c29cecc35be4840179974bd12249b559003d605bec22ba579e8e248",
+          "bytes": 1835901,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:45:06.683Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0026.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_26.zip",
+          "sha256": "50706f9428328546d97e62ec7c2e7d6ed952447d5ad41578d5e668b0f4b02ce2",
+          "bytes": 4255086,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:45:08.108Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0027.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_27.zip",
+          "sha256": "82a04e01864d66db1fb4d974bcc1b57c6f4e684d9478f1be16bdeddac8f972ad",
+          "bytes": 2311897,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:45:09.424Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0028.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_28.zip",
+          "sha256": "8f13557b21795b8877d3d94ded07fd80773a7307374f3ce8a9b24b0c53c9d6bb",
+          "bytes": 9070234,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:45:11.002Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0029.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_29.zip",
+          "sha256": "6fb0a65c13d7b8b148ec7673200362463d65008a1d56135d5551524b04fb4247",
+          "bytes": 2645541,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:45:12.304Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0030.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_30.zip",
+          "sha256": "19bebfd1be52cb05e564bb87c6003e06672fc8c2cd76a995e77b19c4fca1b65b",
+          "bytes": 4974185,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:45:13.795Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0031.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_31.zip",
+          "sha256": "f04a512969cd891ba61d3ae5951fea0a740c4be679a77d17a8446a8f3879f32d",
+          "bytes": 2814203,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:45:15.180Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0032.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_32.zip",
+          "sha256": "0d5e755ac39f97b58b5e304f7a6c9f0b4e30ac63fe7c5bb65c84620f3eca11ac",
+          "bytes": 6094780,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:45:16.722Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0033.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_33.zip",
+          "sha256": "dbddb769c505ac1bd5be65aa3c9beb22dbc7cab7707fcfa61702daa996e560a4",
+          "bytes": 8319405,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:45:18.344Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0034.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_34.zip",
+          "sha256": "ee1e6d2090d4239ece4ac1e373cdc414276e505d936b922870bc1c5c77d3f4b5",
+          "bytes": 11098094,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:45:20.068Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0035.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_35.zip",
+          "sha256": "183f3dda68136855f0e2f7302b1cdf6af9b071519c0c06b652542bf88bb4aabe",
+          "bytes": 6087279,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:45:21.566Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0036.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_36.zip",
+          "sha256": "439383c616bd395306a2fe81f871dc9a240d83deffa5966e7dfed51d5da756d6",
+          "bytes": 2769503,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:45:22.910Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0037.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_37.zip",
+          "sha256": "bb6cc4e0d0d82d7ee32509e0927aa851ccb15fce91f304433ad892092121c2bc",
+          "bytes": 3098892,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:45:24.273Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0038.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_38.zip",
+          "sha256": "7cc65bc96a5279608b6950c1201669e3ce5a0e1d8def1a7fda2015d3feb00c0f",
+          "bytes": 9214641,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:45:25.850Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0039.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_39.zip",
+          "sha256": "b6d02bc2be3b85962053f19d38767c2f4dd0fc242f1805083a057aa702dd3cc2",
+          "bytes": 3921407,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:45:27.307Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0040.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_40.zip",
+          "sha256": "f417712630602e1d7cfaf92ce7f70a193c8cb0a2ba16fc9ce3b2821f3a7b37e0",
+          "bytes": 5351935,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:45:28.766Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0041.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_41.zip",
+          "sha256": "7dcdd97c3550f1f2af7b0cf6e3f57f9c64a1a58a20de369c13d75bd3c18c1d90",
+          "bytes": 3328704,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:45:30.277Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0042.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_42.zip",
+          "sha256": "8a98e9640b52b583cf1efd67c2a68fd02318eed724ff149eb7f8cc22a58c79d8",
+          "bytes": 14404735,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:45:32.166Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0043.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_43.zip",
+          "sha256": "59b7ac9f6863ca915804facf87115019c49a8d110547d6175963ddf0b2da0a34",
+          "bytes": 8285405,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:45:33.785Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0044.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_44.zip",
+          "sha256": "faab176bdb1c77d4f327654c491a7bb3bd56be5548a1d4f1ac2eb593b7833d0b",
+          "bytes": 5247369,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:45:35.234Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0045.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_45.zip",
+          "sha256": "11c8c26affae8744a2684aacf26ae1d9f54e0da2b32a42634f5f8ea1353b8366",
+          "bytes": 4942264,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:45:36.866Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0046.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_46.zip",
+          "sha256": "eb0e95f92ad19beee6c072582b2c2aec2a7ce7bdc6f6b9a8ce455006c99f0615",
+          "bytes": 13117694,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:45:38.582Z"
+        },
+        {
+          "key": "open-data/raw/maff-shuraku-boundaries/2025/0047.zip",
+          "url": "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/ma/MA0001_2025_2025_47.zip",
+          "sha256": "067ddfc2cc041af8fd9a5687666e013e773ac6acaf68a52f10f082e5c60da06d",
+          "bytes": 4050388,
+          "contentType": "application/zip",
+          "retrievedAt": "2026-11-15T05:45:40.044Z"
+        }
+      ],
+      "manifestKey": "open-data/raw/maff-shuraku-boundaries/2025/manifest.json",
+      "manifestSha256": "60a4eabb5cb78d295dd364d7d1e787baebc08d948d3add8e5b57bf30fefabfbc",
+      "bytes": 291743853,
+      "status": "archived"
+    }
+  ]
+}
