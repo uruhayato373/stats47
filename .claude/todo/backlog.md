@@ -631,10 +631,11 @@ updated: 2026-11-01
 - **完了の判定**: 新しい問いが、人の指示なしで下書きと審査まで進み、`published: false` で止まる。M01 の失敗を再現した入力で、書く前に止まる。
 
 ### [H01-VACANT-ARTICLE-PUBLISH-01] H01 と M01 の記事を公開し、図の台帳と X の下書きを進める
-タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run issues:figures] [起票:2026-11-06] [領域:サイト] [待ち:承認]
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run issues:figures] [起票:2026-11-06] [領域:サイト]
 
 - **起点**: 記事 `vacant-houses-population-decline` と `manufacturing-strength-factory-size` は `contents/blog` に `published: false` で入っている。背景画像は 2026-11-06 に Codex で生成して取り込み済み。M01 は既存記事 `manufacturing-productivity` の更新をやめて新しい記事にした (既存記事は図データの欠落など過去の負債を直さないと再公開できない)。
-- **次**: ① オーナーが下書き全文を確認する ② `published: true` にして develop へ push する ③ `npm run content:sync -- --from-r2` のあと、`figures.json` の `slug` を `page` へ置き換える ④ X の下書き 1195・1196 をオーナーの承認へ回す。
+- **済み (2026-11-15)**: 2 本は本番で公開済み (HTTP 200)。図の台帳 `data/content/figures.json` の 8 行の行き先を `slug` から公開ページ (`blog:<slug>`・published) へ置き換えた。
+- **次**: X の下書き 1195・1196 はオーナー承認済み (2026-11-15) だが、画像が未作成で管理画面の段階は「画像準備待ち」。図 `M01-gap-steps-bars`・`H01-vacancy-rate-trend` から X 用の画像を作り、`assets` に記録してから予約へ回す。`H01-vacancy-rate-trend` の行き先 `municipality-ranking:vacant-housing-ratio` (planned) は、ページに図を置くかを決める。
 - **完了条件**: 2 本が本番で公開され、`issues:figures` の記事の行が消え、X の投稿の状態が台帳と一致している。
 
 ### [NOTE-PLAYWRIGHT-DIALOG-CRASH-01] note 公開中の Playwright 起動スクリプトがダイアログ処理の競合でブラウザごと落ちる
