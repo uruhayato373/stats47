@@ -1265,6 +1265,7 @@ updated: 2026-11-01
 - **判断待ち (2026-11-14)**: 公開 R2 が不調のとき、固定データを読む 2 テスト (`license-exclusion`・`delivery-integrity`) をどう扱うかをオーナーが決める。(a) skip を許す (品質の例外台帳に test-skip 2 件を足す。定期監査は `PACK_SNAPSHOTS_STRICT=1` で従来どおり止める) / (b) skip を許さず、CI の固定データを `actions/cache` で持ち越す / (c) 2 テストを別ジョブへ分けて必須チェックから外す。
 - **なぜ手元で決められないか**: (a) は `quality-exceptions` の検査が例外の追加を禁じており、「固定データが取れなければ止まる」という現在の方針 (`0f754efda`) を緩める判断になる。固定データを fixture にする案は、テストが実データの件数 (P-12 は 2,491 指標など) を固定していて、13 パックで数千指標になるので採れない。
 - **観測 (2026-11-14)**: `R2_PUBLIC_FETCH_URL=http://127.0.0.1:9` で、Unit Tests の前処理が `packages/product-factory` の全 55 テストファイルを巻き込んで落ちることを再現した。
+- **再観測 (2026-11-15・別の原因)**: 公開 R2 の中身が変わっても同じ 2 テストが落ちる。develop の Unit Tests (packages) が run 43685432330 (ff44de49e) と 43690534376 (926faa6b2) で失敗: P-12 の指標数 2,496 (期待 2,491)・除外件数 73 (期待 74)。手元の固定データを消して作り直すと再現する (`packages/product-factory/src/data/pack-snapshots/` を退避して `npx vitest run --project @stats47/product-factory tests/delivery-integrity.test.ts tests/license-exclusion.test.ts`)。P-12 に公開された 6 指標 (annual-clear-days・annual-snow-days・bamboo-production・factory-industrial-park-rate・factory-location-area-annual・flood-damage-road) が加わり、convenience-store-sales の値が 11-15 の作り直しで変わった。テストが「公開中の R2 の件数」を固定しているので、指標の公開や作り直しのたびに落ちる。期待値を上げる前に、有料パックの中身が増えてよいか (商品の定義の変更) をオーナーが決める。
 - **次**: 判断の後、前処理に取得失敗の許容を足し、2 テストに固定データの有無の判定を入れる (約 1 時間)。Build Check の R2 読み取り件数と所要の測定は未着手。
 - **完了条件**: 公開 R2 が不調でも、関係の無い PR の必須チェックが落ちない。
 
