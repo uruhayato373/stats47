@@ -45,15 +45,27 @@ function unusableReason(source, asOf) {
   return null;
 }
 
-function a8Line(source, a8Results, asOf) {
+/**
+ * A8 の月累計 (構造化)。週次 Issue の行と、KPI ツリー・管理画面の内訳 (lib/weekly-revenue.mjs) が同じ値を使う。
+ * @returns {{status:"unmeasurable", reason:string} | {status:"ok", month:string, observedAt:string, conversions:number, approved:number, confirmedYen:number}}
+ */
+export function a8Result({ authLatest, a8Results, asOf }) {
+  if (!authLatest) return { status: "unmeasurable", reason: "認証付き収集の結果 latest.json が無い" };
+  const source = findSource(authLatest, "a8");
   const reason = unusableReason(source, asOf);
-  if (reason) return `- A8: **判定不能**（${reason}）`;
+  if (reason) return { status: "unmeasurable", reason };
   const records = Array.isArray(a8Results?.records) ? a8Results.records : null;
-  if (!records || records.length === 0) return "- A8: **判定不能**（a8-results.json に記録が無い）";
+  if (!records || records.length === 0) return { status: "unmeasurable", reason: "a8-results.json に記録が無い" };
   const month = records.map((r) => r.month).filter(Boolean).sort().at(-1);
   const rows = records.filter((r) => r.month === month);
   const sum = (key) => rows.reduce((total, r) => total + (Number(r[key]) || 0), 0);
-  return `- A8 (${month} 月累計・観測 ${source.observedAt.slice(0, 10)}): 発生 **${sum("conversions")} 件** / 確定 **${sum("approved")} 件・${yen(sum("revenueYen"))}**（A8 の記録は発生額を持たない）`;
+  return { status: "ok", month, observedAt: source.observedAt.slice(0, 10), conversions: sum("conversions"), approved: sum("approved"), confirmedYen: sum("revenueYen") };
+}
+
+function a8Line(authLatest, a8Results, asOf) {
+  const r = a8Result({ authLatest, a8Results, asOf });
+  if (r.status !== "ok") return `- A8: **判定不能**（${r.reason}）`;
+  return `- A8 (${r.month} 月累計・観測 ${r.observedAt}): 発生 **${r.conversions} 件** / 確定 **${r.approved} 件・${yen(r.confirmedYen)}**（A8 の記録は発生額を持たない）`;
 }
 
 /**
@@ -64,7 +76,7 @@ export function aspRevenueLines({ authLatest, a8Results, rakutenResults = null, 
   const rakuten = rakutenLine(rakutenResults, asOf);
   if (!authLatest) return ["- ASP の成果: **判定不能**（認証付き収集の結果 latest.json が無い）", rakuten];
   return [
-    a8Line(findSource(authLatest, "a8"), a8Results, asOf),
+    a8Line(authLatest, a8Results, asOf),
     rakuten,
   ];
 }
@@ -75,19 +87,36 @@ export function aspRevenueLines({ authLatest, a8Results, rakutenResults = null, 
  * 記録が無い・最後の記録が古いときは判定不能 (記録し忘れた週を 0 円にしない)。
  */
 export function rakutenLine(rakutenResults, asOf) {
+  const r = rakutenResult(rakutenResults, asOf);
+  if (r.status !== "ok") return `- 楽天: **判定不能**（${r.reason}）`;
+  const confirmed = r.confirmedYen == null ? "未確定" : yen(r.confirmedYen);
+  return `- 楽天 (${r.month} 月累計・記録 ${r.observedAt}・${r.how}): 発生 **${r.orders} 件・${yen(r.estimatedYen)}** / 確定 **${confirmed}**（確定はその月に確定した額）`;
+}
+
+/**
+ * 楽天の月累計 (構造化)。`rakutenLine` と lib/weekly-revenue.mjs が同じ値を使う。
+ * @returns {{status:"unmeasurable", reason:string} | {status:"ok", month:string, observedAt:string, how:string, orders:number, estimatedYen:number, confirmedYen:number|null}}
+ */
+export function rakutenResult(rakutenResults, asOf) {
   const records = Array.isArray(rakutenResults?.records) ? rakutenResults.records : [];
-  if (records.length === 0) return "- 楽天: **判定不能**（未記録。認証付き収集の rakuten が未成功。急ぐときは管理画面を見て npm run rakuten:record で記録する）";
+  if (records.length === 0) return { status: "unmeasurable", reason: "未記録。認証付き収集の rakuten が未成功。急ぐときは管理画面を見て npm run rakuten:record で記録する" };
   const latest = records.reduce((a, b) => (String(b.observedAt) > String(a.observedAt) ? b : a));
   const age = ageDays(latest.observedAt, asOf);
-  if (age == null) return "- 楽天: **判定不能**（記録日時が読めない）";
+  if (age == null) return { status: "unmeasurable", reason: "記録日時が読めない" };
   if (age > ASP_OBSERVATION_MAX_AGE_DAYS) {
-    return `- 楽天: **判定不能**（最終記録 ${latest.observedAt.slice(0, 10)} が ${age} 日前 (上限 ${ASP_OBSERVATION_MAX_AGE_DAYS} 日)。週次レビューで記録する）`;
+    return { status: "unmeasurable", reason: `最終記録 ${latest.observedAt.slice(0, 10)} が ${age} 日前 (上限 ${ASP_OBSERVATION_MAX_AGE_DAYS} 日)。週次レビューで記録する` };
   }
   const month = records.map((r) => r.month).sort().at(-1);
   const r = records.find((x) => x.month === month);
-  const confirmed = r.confirmedYen == null ? "未確定" : yen(r.confirmedYen);
-  const how = String(r.source ?? "").startsWith("collector:") ? "自動収集" : "管理画面の手入力";
-  return `- 楽天 (${month} 月累計・記録 ${String(r.observedAt).slice(0, 10)}・${how}): 発生 **${r.orders} 件・${yen(r.estimatedYen)}** / 確定 **${confirmed}**（確定はその月に確定した額）`;
+  return {
+    status: "ok",
+    month,
+    observedAt: String(r.observedAt).slice(0, 10),
+    how: String(r.source ?? "").startsWith("collector:") ? "自動収集" : "管理画面の手入力",
+    orders: r.orders,
+    estimatedYen: r.estimatedYen,
+    confirmedYen: r.confirmedYen ?? null,
+  };
 }
 
 /**
@@ -95,7 +124,7 @@ export function rakutenLine(rakutenResults, asOf) {
  * KDP の売上を自動で取り込む経路はまだ無い。よって台帳が空でも、販売中の商品があれば ¥0 ではなく未計測。
  * 以前は台帳が空なら「¥0」と書き、記録があっても存在しない `date` / `amountYen` を読んで常に ¥0 になっていた (2026-09-25)。
  *
- * @param {{ ledger: object|null, liveProductCount: number|null, weekStart: string, weekEnd: string }} input
+ * @param {{ ledger: any, liveProductCount: number|null, weekStart: string, weekEnd: string, revenueHistory?: object|null }} input
  *   liveProductCount … 販売中と分かっている商品の数 (KDP の `kdp-weekly-publication.json` の s1Live + pilotLive)。
  *                      S1 シリーズと試行分だけなので全体の数ではなく下限。読めなければ null
  *   weekStart / weekEnd … 週の月曜・日曜 (YYYY-MM-DD)

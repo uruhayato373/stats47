@@ -10,6 +10,7 @@ import { reconcileDimensions } from "../../google-admin/dimension-ledger.mjs";
 import { isoWeekOf, isoWeekRange } from "./periods.mjs";
 import { datasetDir } from "../../../../config/datasets.mjs";
 import { adYield28d } from "./adsense-revenue.mjs";
+import { weeklyRevenueNode } from "./weekly-revenue.mjs";
 
 /** 登録すれば値別の内訳を読める最低発火量 (28 日)。これ未満は登録しても判定の標本にならない。 */
 export const MIN_EVENTS_FOR_BREAKDOWN = 100;
@@ -422,6 +423,7 @@ export function summarizeIndexCoverage(rows, { week, asOf }) {
  * @param {Array<object>|null} input.gscHistory data/gsc/history.csv
  * @param {Array<object>|null} [input.ga4Finalized] data/ga4/history-finalized7d.csv (Japan-only の確定 7 日。4 行の和 = 28 日 PV)
  * @param {Array<object>|null} [input.adsenseHistory] data/adsense/history.csv (確定 7 日の AdSense 収益。週キーは GA4 確定 7 日と同じ)
+ * @param {object|null} [input.weeklyRevenue] weekly-revenue.mjs の summarizeWeeklyRevenue の結果 (NSM の内訳)
  * @param {Array<object>|null} [input.submittedHistory] data/gsc/coverage-submitted-history.csv (GSC 送信済みビュー。index-coverage-rate の入力)
  * @param {Array<object>|null} input.cycleHistory measurement-cycle/history.csv (今週の行を除く過去分)
  * @param {object|null} input.journey summarizeJourney の結果
@@ -435,7 +437,7 @@ export function summarizeIndexCoverage(rows, { week, asOf }) {
  * @param {string[]} input.focusKpis 今月の重点レーンの KPI id
  * @param {number} input.maxActive active 施策の上限
  */
-export function summarizeKpiTree({ nodes, week, asOf, gscHistory, ga4Finalized = null, adsenseHistory = null, submittedHistory = null, cycleHistory, journey, workContext, affiliateRows, operations, authenticated = null, dataQuality = null, paidPurchases = null, improvementRows, focusKpis, maxActive }) {
+export function summarizeKpiTree({ nodes, week, asOf, gscHistory, ga4Finalized = null, adsenseHistory = null, weeklyRevenue = null, submittedHistory = null, cycleHistory, journey, workContext, affiliateRows, operations, authenticated = null, dataQuality = null, paidPurchases = null, improvementRows, focusKpis, maxActive }) {
   if (!nodes) return null;
   const prevWeek = shiftIsoWeek(week, -KPI_COMPARE_WEEKS_BACK);
   const gscNow = gscHistory?.find((r) => r.week === week) ?? null;
@@ -471,7 +473,9 @@ export function summarizeKpiTree({ nodes, week, asOf, gscHistory, ga4Finalized =
   const valueOf = (id) => {
     switch (id) {
       case "weekly-revenue":
-        return { status: "see-nsm", value: null, previous: null, note: "内訳と判定不能の理由は週次 Issue の「週次収益 (NSM)」節" };
+        return weeklyRevenue
+          ? weeklyRevenueNode(weeklyRevenue)
+          : { status: "missing", value: null, previous: null, note: "週次収益の入力が渡されていない" };
       case "search-clicks":
         return gscNow
           ? { status: "ok", value: `${num(gscNow.clicks_rolling28d)}`, previous: gscPrev ? `${num(gscPrev.clicks_rolling28d)}` : null }

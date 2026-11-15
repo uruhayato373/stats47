@@ -23,7 +23,7 @@ paths:
 
 | 取得 | 周期 | 入口 |
 |---|---|---|
-| 認証付き計測 (A8・note・GSC 画面の除外理由・KDP・楽天) | 毎週土曜の週次レビューの最初 (手動) | 週次の取得 `npm run weekly:collect` (`scripts/scheduled/weekly-saturday.sh`) の 1 段目 `measurement-session-refresh.sh` がその場でログインし (切れていればキーチェーンの ID/PW で入り直す)、`measurement-collect-local.sh` が取得して develop へ記録する。ログインは Mac だけが持ち、CI へは渡さない (2026-10-20 に CI の取得を撤去。`MEASUREMENT-MAC-DIRECT-01`) |
+| 認証付き計測 (A8・note・GSC 画面の除外理由・KDP・楽天) | 毎週土曜 07:30 (この Mac のスケジュール済みタスク `stats47-weekly-review` が週次レビューの最初に起動する。2026-11-14。Mac が眠っていた週は週次レビューで手で回す) | 週次の取得 `npm run weekly:collect` (`scripts/scheduled/weekly-saturday.sh`) の 1 段目 `measurement-session-refresh.sh` がその場でログインし (切れていればキーチェーンの ID/PW で入り直す)、`measurement-collect-local.sh` が取得して develop へ記録する。ログインは Mac だけが持ち、CI へは渡さない (2026-10-20 に CI の取得を撤去。`MEASUREMENT-MAC-DIRECT-01`) |
 | 週次の計測→記録→改善サイクル | 毎週土曜 JST 02:00 (計測)。施策の記録は土曜の週次レビューの中 | `fetch-metrics-weekly.yml` (GSC・GA4 は API。ログイン不要)・`/weekly-review` Phase 0b |
 
 認証付き計測は土曜の週次レビューの最初に `npm run weekly:collect` で手で取り、同じレビューが計測 state を作り直して読む (2026-10-26 に木曜 17:30 から土曜 07:00 の自動実行へ移し、2026-11-08 に自動実行をやめてレビューの中へ移した。無人だとログイン切れ・時間切れで 2 週続けて落ち、誰も気づかなかったため。オーナーがいればその場で入り直せる。やっていない週は review-cadence-guard が Issue にする)。記録は次の取得まで 8 日間「今の値」として使う

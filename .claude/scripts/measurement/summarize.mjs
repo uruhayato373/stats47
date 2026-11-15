@@ -5,6 +5,7 @@ import { SOURCES } from './sources.mjs';
 import { mergeSalesCoverage, mergeSalesObservations } from '../../../packages/product-factory/src/sales/ledger-core.mjs';
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 import { assertDatasetShape } from "../lib/dataset-shape.mjs";
+import { dailyFileName, mergeDaily, partitionByMonth } from "../metrics/lib/revenue-rollup.mjs";
 
 const input = process.argv[2] || '.local/authenticated-ci-public';
 const output = `${datasetDir("revenue.authenticated")}/latest.json`;
@@ -81,7 +82,32 @@ if (kdpLedger) {
     salesLedger = { status: 'failed', month: kdpLedger.month ?? null, code: String(error.message).slice(0, 200) };
   }
 }
-const state = { schemaVersion: 1, generatedAt: new Date().toISOString(), runId: process.env.GITHUB_RUN_ID ?? null, sources, salesLedger,
+// 収益の明細 (日 × 商品 × 種類)。取得元が quality.daily に入れた 1 回分を、月ごとの台帳へ入れ替えで書く。
+// 行そのものは latest.json に残さず (件数だけ残す)、台帳 data/revenue/daily/<チャネル>-<年月>.json を正本にする。
+const revenueDaily = [];
+for (const s of sources) {
+  const batch = s.quality?.daily;
+  if (!s.quality || !('daily' in s.quality)) continue;
+  const { daily: _daily, ...rest } = s.quality;
+  s.quality = { ...rest, dailyRows: batch?.rows?.length ?? null };
+  if (!batch || s.status !== 'pass') continue;
+  try {
+    const parts = partitionByMonth({ channel: batch.channel, start: batch.start, end: batch.end, rows: batch.rows,
+      observedAt: s.observedAt, ...(/^[a-f0-9]{64}$/.test(s.evidence?.sha256 ?? '') ? { evidenceSha256: s.evidence.sha256 } : {}) });
+    const docs = parts.map(part => {
+      const path = `${datasetDir("revenue.daily")}/${dailyFileName(part.channel, part.month)}.json`;
+      const doc = mergeDaily(existsSync(path) ? JSON.parse(readFileSync(path, 'utf8')) : null, part);
+      assertDatasetShape("revenue.daily", doc);
+      return { path, doc };
+    });
+    // 全部の月が形に合ってから書く (途中の月だけ書かない)
+    for (const { path, doc } of docs) { mkdirSync(dirname(path), { recursive: true }); writeFileSync(path, JSON.stringify(doc, null, 2) + '\n'); }
+    revenueDaily.push({ channel: batch.channel, status: 'pass', start: batch.start, end: batch.end, rows: batch.rows.length });
+  } catch (error) {
+    revenueDaily.push({ channel: batch.channel, status: 'failed', code: String(error.message).slice(0, 200) });
+  }
+}
+const state = { schemaVersion: 1, generatedAt: new Date().toISOString(), runId: process.env.GITHUB_RUN_ID ?? null, sources, salesLedger, revenueDaily,
   status: sources.every(s => s.status === 'pass') && (salesLedger?.status ?? 'pass') === 'pass' ? 'pass' : 'action_required' };
 assertDatasetShape("revenue.authenticated", state); // 形が schema に合わなければ書かずに止める (RECORD-SCHEMA-CONTRACT-01)
 mkdirSync(dirname(output), { recursive: true });

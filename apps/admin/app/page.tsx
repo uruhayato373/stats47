@@ -1,6 +1,6 @@
 import { LinkCard } from "@/components/admin-ui";
+import { KpiHeadline } from "@/components/home/kpi-headline";
 import { KpiTree } from "@/components/home/kpi-tree";
-import { SummaryCards } from "@/components/home/summary-cards";
 import { Grid, Section } from "@/components/layout-primitives";
 import { PageHeading } from "@/components/ops/primitives";
 import { datasetDir } from "../../../config/datasets.mjs";
@@ -75,19 +75,19 @@ const SECTIONS = [
   },
 ] as const;
 
-/** トップ (型 A: 概況)。数値タイル → KPI ツリー → 各画面への入口の順。 */
+/** トップ (型 A: 概況)。KGI (週次収益) → 重点 KPI → KPI ツリー → 各画面への入口の順。 */
 export default function HomePage() {
   return (
     <>
       <PageHeading
         title="管理コンソール"
-        source={`${datasetDir("business.measurement-cycle")}/latest.json + /api/assets/summary`}
+        source={`${datasetDir("business.measurement-cycle")}/latest.json + 週次収益の入力 (AdSense・認証付き計測・ASP の記録)`}
         accessLabel="ローカル専用 (127.0.0.1)・完全読み取り専用"
       >
-        <p className="text-sm text-muted-foreground">制作・収益・品質・運用・Geo契約を横断確認し、実行は担当agent/skillだけが行う。</p>
+        <p className="text-sm text-muted-foreground">事業の成果 (KGI・KPI) を先に見て、各画面で原因と次の作業を確かめる。</p>
       </PageHeading>
 
-      <SummaryCards />
+      <KpiHeadline />
 
       <KpiTree />
 

@@ -25,6 +25,7 @@ import {
 import { judgeability } from "./lib/gsc-improvements-adapter.mjs";
 import { parseDimensionLedger } from "../google-admin/dimension-ledger.mjs";
 import { parseBacklog } from "../lib/scan-pending-improvements.mjs";
+import { summarizeWeeklyRevenue } from "./lib/weekly-revenue.mjs";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const strategyLanes = createRequire(import.meta.url)("../lib/strategy-lanes.cjs");
@@ -130,6 +131,13 @@ function readPreviousAdminAudit(week) {
   return { previous: JSON.parse(readFileSync(join(dir, `${previousWeek}.json`), "utf8")), previousWeek };
 }
 
+
+/** 収益の明細 (data/revenue/daily の全ファイル)。まだ 1 件も無ければ空 */
+function readDailyRevenue() {
+  const dir = join(PROJECT_ROOT, datasetDir("revenue.daily"));
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir).filter((f) => f.endsWith(".json")).map((f) => JSON.parse(readFileSync(join(dir, f), "utf-8")));
+}
 function main() {
   const week = arg("--week");
   if (!/^\d{4}-W\d{2}$/.test(week ?? "")) throw new Error("--week YYYY-Www が必要");
@@ -178,6 +186,19 @@ function main() {
   const journey = transitions.rows && pagesClean ? summarizeJourney({ transitions: transitions.rows, pagesClean }) : null;
   const workContext = landing.rows ? summarizeWorkContext(landing.rows) : null;
   const operations = buildOperations(week, asOf, pending);
+  const adsenseHistory = readCsvIfExists(join(PROJECT_ROOT, datasetDir("adsense.history"), "history.csv"));
+  const weeklyRevenue = summarizeWeeklyRevenue({
+    week,
+    weekStart: isoWeekToDateRange(week).startDate,
+    weekEnd: asOf,
+    asOf: new Date(`${asOf}T23:59:59Z`),
+    adsenseHistory,
+    revenueHistory: readJsonIfExists(`${datasetDir("revenue.authenticated")}/revenue-history.json`),
+    authLatest: readJsonIfExists(AUTHENTICATED_LATEST),
+    a8Results: readJsonIfExists(datasetPath("a8.results")),
+    rakutenResults: readJsonIfExists(datasetPath("rakuten.results")),
+    daily: readDailyRevenue(),
+  });
   const kpiTree = summarizeKpiTree({
     ...readKpiInputs(),
     week,
@@ -185,7 +206,8 @@ function main() {
     gscHistory: readCsvIfExists(join(PROJECT_ROOT, datasetPath("gsc.history"))),
     ga4Finalized: readCsvIfExists(join(PROJECT_ROOT, datasetPath("ga4.history-finalized"))),
     submittedHistory: readCsvIfExists(join(PROJECT_ROOT, datasetPath("gsc.coverage-submitted"))),
-    adsenseHistory: readCsvIfExists(join(PROJECT_ROOT, datasetDir("adsense.history"), "history.csv")),
+    adsenseHistory,
+    weeklyRevenue,
     cycleHistory: history,
     journey,
     workContext,
