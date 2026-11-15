@@ -232,7 +232,7 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
 
 - 一覧は `constants/generic-affiliate.ts` の `GENERIC_HIGH_VALUE_PROGRAM_REFS` (並び順 = 表示順)。在庫の対象ランキング指定の無い横長バナーを、
   A8 の EPC × 確定率 (A8 全体の実績・stats47 単独ではない) の順に並べ、特定の職種・業種・資産に限る案件と、出さないと決めた分野
-  (保険・FP 相談 = `AFF-HEAVY-FINANCE-STOP-01`) を除いた。在庫から消えると受け皿が空になるので、`generic-affiliate-contract.test.ts` が照合する。
+  (保険・FP 相談。2026-10-27 オーナー判断、2026-11-15 に 19 広告を配信停止) を除いた。在庫から消えると受け皿が空になるので、`generic-affiliate-contract.test.ts` が照合する。
 - 入口は `resolveGenericAffiliateBanners` / `resolveGenericAffiliateTextAds`。内容から解決する関数 (`*ForContent`・タグ・カテゴリ・意図軸指定) は、
   意図「無し」でも在庫ゼロでもここへ落ちる。A/B 実験の広告は意図軸があるページだけに出す。
 - 下の「値 `null` は広告を出さない」は、この日から「意図軸の広告を出さず、汎用の案件を出す」と読む。
