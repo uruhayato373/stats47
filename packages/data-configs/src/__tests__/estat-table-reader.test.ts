@@ -102,6 +102,34 @@ describe("verified table source selection (offline)", () => {
     expect(result.sources[0].sliceKeys).toEqual([]);
     expect(f.get).toHaveBeenCalledTimes(1);
   });
+  it("area-range slices are all read and rows outside a file's cdAreaFrom/To are rejected", async () => {
+    const ranges = [{ from: "01000", to: "01999", codeCount: 1 }, { from: "13000", to: "13999", codeCount: 1 }];
+    const build = (secondArea: string) => {
+      const bytes = new Map<string, Buffer>();
+      const files = ranges.map((range, i) => {
+        const key = `estat-tables/${table}/data/tab=08/area=${range.from}-${range.to}.json.gz`;
+        const values = [row("08", String(i + 1), { "@area": i === 0 ? "01000" : secondArea })];
+        const raw = Buffer.from(JSON.stringify({ cachedAt: "2026-11-15T00:00:00Z", apiVersion: "3.0",
+          params: { statsDataId: table, cdTab: "08", cdAreaFrom: range.from, cdAreaTo: range.to },
+          response: { GET_STATS_DATA: { RESULT: { STATUS: 0 }, STATISTICAL_DATA: { TABLE_INF: { "@id": table }, DATA_INF: { VALUE: values } } } } }));
+        const compressed = gzipSync(raw);
+        bytes.set(key, compressed);
+        return { key, rowCount: 1, bytes: compressed.length, uncompressedBytes: raw.length, sha256: hash(compressed) };
+      });
+      const manifest = { schemaVersion: 1, statsDataId: table, catalogVersion: "2024-11-27",
+        partition: { depth: 1, partitionAxes: ["tab"], fileCount: 2, areaRanges: ranges }, files, emptyPartitions: [], fileCount: 2, rowCount: 2 };
+      const manifestKey = `estat-tables/${table}/manifest.json`;
+      const manifestBytes = Buffer.from(JSON.stringify(manifest));
+      bytes.set(manifestKey, manifestBytes);
+      const entry: SnapshotEntry = { statsDataId: table, status: "verified", catalogVersion: "2024-11-27", manifestKey, manifestSha256: hash(manifestBytes),
+        depth: 1, partitionAxes: ["tab"], fileCount: 2, rowCount: 2, bucket: "stats47-private" };
+      return createSnapshotReader([entry], async (key) => bytes.get(key) ?? null);
+    };
+    const result = await withSnapshotReader(build("13000"), () => fetchEstatData("", source));
+    expect(result.values.map((v) => v["@area"])).toEqual(["01000", "13000"]);
+    expect(result.sources[0].sliceKeys).toHaveLength(2);
+    await expect(withSnapshotReader(build("27000"), () => fetchEstatData("", source))).rejects.toThrow(/mismatch/);
+  });
   it("annual income uses declared worker tabs, applies scaling once and excludes reference rows from ranks", async () => {
     const f = fixture([row("08", "300"), row("12", "500"), row("13", "0", { "@unit": "十人" }),
       row("40", "310", { "@time": "2023000000" }), row("44", "600", { "@time": "2023000000" }), row("45", "2", { "@time": "2023000000", "@unit": "十人" })], 2);

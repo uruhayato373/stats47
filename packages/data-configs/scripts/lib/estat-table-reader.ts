@@ -4,7 +4,7 @@ import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { gunzipSync } from "node:zlib";
 import { datasetPath } from "../../../../config/datasets.mjs";
-import { makeSliceKey, type Axis } from "../../../estat-api/src/stats-data/utils/table-partitions.js";
+import { makeSliceKey, type AreaRange, type Axis } from "../../../estat-api/src/stats-data/utils/table-partitions.js";
 import type { TableSnapshotManifest, SnapshotFile } from "../estat-table-snapshot.js";
 import type { SourceConfig } from "../../src/types.js";
 
@@ -65,7 +65,7 @@ export function createSnapshotReader(entries: readonly SnapshotEntry[], get: (ke
     })());
     return manifests.get(entry.statsDataId)!;
   }
-  async function slice(entry: SnapshotEntry, file: SnapshotFile, codes: Record<string, string>) {
+  async function slice(entry: SnapshotEntry, file: SnapshotFile, codes: Record<string, string>, areaRange: AreaRange | null) {
     if (!slices.has(file.key)) slices.set(file.key, (async () => {
       const bytes = await get(file.key);
       if (!bytes || bytes.length !== file.bytes || sha256(bytes) !== file.sha256) throw new Error(`Snapshot slice SHA/bytes mismatch/missing: ${file.key}`);
@@ -79,7 +79,9 @@ export function createSnapshotReader(entries: readonly SnapshotEntry[], get: (ke
       const values = array(object(stat.DATA_INF).VALUE);
       if (envelope.apiVersion !== "3.0" || !envelope.cachedAt || params.statsDataId !== entry.statsDataId ||
         object(stat.TABLE_INF)["@id"] !== entry.statsDataId || Number(object(root.RESULT).STATUS) !== 0 || values.length !== file.rowCount ||
-        Object.entries(codes).some(([axis, code]) => params[parameter(axis)] !== code || values.some((row) => object(row)[`@${axis}`] !== code))) {
+        Object.entries(codes).some(([axis, code]) => params[parameter(axis)] !== code || values.some((row) => object(row)[`@${axis}`] !== code)) ||
+        (areaRange && (params.cdAreaFrom !== areaRange.from || params.cdAreaTo !== areaRange.to ||
+          values.some((row) => { const area = String(object(row)["@area"]); return area < areaRange.from || area > areaRange.to; })))) {
         throw new Error(`Snapshot envelope/rows mismatch: ${file.key}`);
       }
       return stat;
@@ -92,12 +94,19 @@ export function createSnapshotReader(entries: readonly SnapshotEntry[], get: (ke
     const info = await manifest(entry);
     const selections = filters(source);
     const prefix = `estat-tables/${entry.statsDataId}/data/`;
+    const areaRanges: AreaRange[] | null = "areaRanges" in info.partition && info.partition.areaRanges ? info.partition.areaRanges : null;
     const records = [...info.files, ...info.emptyPartitions].map((file) => {
       if (!file.key.startsWith(prefix) || !file.key.endsWith(".json.gz")) throw new Error("Invalid slice key prefix");
       const parts = file.key.substring(prefix.length, file.key.length - ".json.gz".length).split("/");
-      if (entry.depth === 0) {
+      let areaRange: AreaRange | null = null;
+      if (areaRanges) {
+        const last = parts.pop() ?? "";
+        areaRange = areaRanges.find((range) => last === `area=${range.from}-${range.to}`) ?? null;
+        if (!areaRange) throw new Error("Invalid area range key");
+      }
+      if (entry.depth === 0 && !areaRanges) {
         if (parts.join("/") !== "all") throw new Error("Invalid depth zero key");
-        return { file, codes: {} as Record<string, string> };
+        return { file, codes: {} as Record<string, string>, areaRange };
       }
       if (parts.length !== entry.depth) throw new Error("Invalid slice depth");
       const codes: Record<string, string> = {};
@@ -106,20 +115,20 @@ export function createSnapshotReader(entries: readonly SnapshotEntry[], get: (ke
         if (!part.startsWith(`${axis}=`)) throw new Error("Invalid slice axis order");
         codes[axis] = part.substring(axis.length + 1);
       });
-      return { file, codes };
+      return { file, codes, areaRange };
     });
     const axes: Axis[] = entry.partitionAxes.map((id) => ({ id, name: null, codes: [...new Set(records.map((r) => r.codes[id]))] }));
     // Every recorded prefix must use the same exported key function as the writer.
-    for (const record of records) if (makeSliceKey(entry.statsDataId, axes, record.codes, entry.depth) !== record.file.key) throw new Error("Noncanonical slice key");
-    const expected = axes.reduce((n, axis) => n * axis.codes.length, 1);
+    for (const record of records) if (makeSliceKey(entry.statsDataId, axes, record.codes, entry.depth, null, record.areaRange) !== record.file.key) throw new Error("Noncanonical slice key");
+    const expected = axes.reduce((n, axis) => n * axis.codes.length, 1) * (areaRanges?.length ?? 1);
     if (records.length !== expected || records.length !== info.partition.fileCount) throw new Error("Incomplete snapshot partition grid");
     const selected = records.filter(({ codes }) => selections.every(([axis, wanted]) => !(axis in codes) || wanted.includes(codes[axis])));
     let first: ObjectValue | undefined;
     const values: ObjectValue[] = [];
     const keys: string[] = [];
-    for (const { file, codes } of selected) {
+    for (const { file, codes, areaRange } of selected) {
       if (!("sha256" in file)) continue; // Explicitly recorded empty API partition.
-      const stat = await slice(entry, file, codes);
+      const stat = await slice(entry, file, codes, areaRange);
       first ??= stat;
       keys.push(file.key);
       for (const row of array(object(stat.DATA_INF).VALUE)) {

@@ -39,7 +39,7 @@ function safeSum(values: readonly number[]): number {
   return result;
 }
 
-export { countSlices, makeSliceKey, readAxes, planTablePartitions } from "../../estat-api/src/stats-data/utils/table-partitions.js";
+export { countSlices, makeSliceKey, readAxes, planTablePartitions, packAreaRanges } from "../../estat-api/src/stats-data/utils/table-partitions.js";
 import { countSlices, makeSliceKey, readAxes, planTablePartitions, DEFAULT_TABLE_FILE_ROW_LIMIT } from "../../estat-api/src/stats-data/utils/table-partitions.js";
 export type { Axis } from "../../estat-api/src/stats-data/utils/table-partitions.js";
 
