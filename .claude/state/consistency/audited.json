@@ -1,12 +1,17 @@
 {
-  "hash": "9a0e8ba33d82234b74fc6be2def409198ec422228465fa3e61862d5d48a5f6e5",
-  "audited_at": "2026-11-13T13:24:03",
+  "hash": "dbfa7e98d537e1045580c0b69efd2e7def3651857e111f476e6ab6c5ef7d5f80",
+  "audited_at": "2026-11-13T23:47:14",
   "files": [
-    ".agents/skills/note/publish-note/SKILL.md",
-    ".claude/scripts/note/__tests__/navigation-footer.test.mjs",
-    ".claude/scripts/note/lib/navigation-footer.mjs",
-    ".claude/scripts/note/lib/note-session.mjs",
-    ".claude/scripts/note/update-published-navigation.mjs",
-    ".claude/skills/note/publish-note/SKILL.md"
+    ".agents/skills/analytics/cloudflare-cost-improvement/SKILL.md",
+    ".agents/skills/content/manage-issue-ledger/SKILL.md",
+    ".claude/rules/kindle-publishing-standards.md",
+    ".claude/scripts/kdp/kdp-listing-copy.mjs",
+    ".claude/scripts/kdp/lib/__tests__/kdp-listing-copy.test.mjs",
+    ".claude/scripts/kdp/lib/__tests__/kdp-status.test.mjs",
+    ".claude/scripts/kdp/lib/kdp-flow.mjs",
+    ".claude/scripts/kdp/lib/kdp-listing-copy.d.mts",
+    ".claude/scripts/kdp/lib/kdp-listing-copy.mjs",
+    ".claude/scripts/kdp/lib/kdp-status.mjs",
+    ".claude/skills/content/manage-issue-ledger/SKILL.md"
   ]
 }

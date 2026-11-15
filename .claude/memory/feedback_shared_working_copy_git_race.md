@@ -105,3 +105,7 @@ commit は index に関係なく指定パスの作業ツリー内容だけを co
 - **原因**: hook の中では `GIT_DIR` などが本物のリポジトリを指す。テストが `{ ...process.env }` で子の git に渡すと、`cwd` に関係なく本物が対象になる。
 - **対策**: `pre-push-tests.mjs` の `run()` がテストに `GIT_` で始まる変数を渡さない (テストで固定)。git を起動するテストも `GIT_` を除いた env を渡す (`workflow-commit-back.test.cjs` の形)。症状が出たら `git config --file .git/config core.bare false` と、テストが書いた `[user]` 節の削除 (`--remove-section user`) で戻す。
   同じ漏れで、本体の作業ツリーの HEAD と index だけが別のコミットへ動くこともある (reflog に「checkout: moving from develop to origin/develop」。ファイルは一時ディレクトリへ書かれ、本体のファイルは古いまま大量の差分に見える)。`git symbolic-ref HEAD refs/heads/develop && git reset -q develop` で、ファイルに触れずに戻す。
+
+**実行中の Workflow の実行役へ SendMessage しない (2026-11-14)**:
+- **問題**: backlog 掃除の第 5 波で、作業中の実行役 (REFERENCE-EXPANSION-SITE-01) にオーナー決定を SendMessage で送ると、workflow とは別に同じ agent が「再開」され、2 体が同じ worktree へ同時に書いた。`expansion.json` が 2 回巻き戻り、workflow 側は決定を知らずにコミットし、再開側が amend で上書きした。
+- **対策**: 実行中の実行役には送らない。まだ始まっていないカードなら見立てのファイルに書き、始まっているカードなら結果を受け取ってから次の書き直しかコミットで反映する。
