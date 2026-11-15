@@ -1,0 +1,3242 @@
+{
+  "datasetId": "ndb-open-data",
+  "versions": [
+    {
+      "schemaVersion": 1,
+      "datasetId": "ndb-open-data",
+      "version": "9th",
+      "sha256": "cc5d1e2f902bc1b3cd3fb5506792f4943ead5049663403fa39a300d5c0cd6bf4",
+      "recipeSha256": "4c896d03ad618f3ae23802cd59d70dc3892e78a81716fb03742d0b0d9620f551",
+      "retrievedAt": "2026-11-15T05:06:21.773Z",
+      "license": {
+        "name": "公共データ利用規約 (PDL1.0)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.mhlw.go.jp/chosakuken/index.html"
+      },
+      "files": [
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0001.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258244.xlsx",
+          "sha256": "68f8d037d93f4ba828f46e07002c7ef3996df8ab780f58b5003c155b21949bfe",
+          "bytes": 41763,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:59:40.748Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0002.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258246.xlsx",
+          "sha256": "fc6e392117cfc04a8b9a37a11e041d6cde2752c5bf4ebc890069d64be331263c",
+          "bytes": 39366,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:59:41.693Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0003.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258247.xlsx",
+          "sha256": "e11dadaaf1b44729662dc2c7915622994aeabe6545e6e3d6852bac6873502d99",
+          "bytes": 21489,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:59:42.692Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0004.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258248.xlsx",
+          "sha256": "4a43ffc17582737a5a85d9b082faccb53a1091840e0dd1d7aa86a435a746d184",
+          "bytes": 143908,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:59:43.690Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0005.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258250.xlsx",
+          "sha256": "60f61121a98dd1a4254dcb62983e6071e89ae2e8c659e06e4a069be09ef2fe57",
+          "bytes": 63136,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:59:44.753Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0006.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258251.xlsx",
+          "sha256": "6c5ce7617f0f079a0a532047c97629844f7f05dfbd0ca38f0a2b4927e9f7b4e8",
+          "bytes": 75293,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:59:45.671Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0007.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258252.xlsx",
+          "sha256": "94b8e7de9949a0c6a72a7c0e37fbd652e28197f7880bc027def857c6a2f87b19",
+          "bytes": 37722,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:59:46.657Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0008.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258253.xlsx",
+          "sha256": "b3901a9d25dbd05353ab0e23fc6f3742c38ec707b922f65320b1fd49315fd8ee",
+          "bytes": 347676,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:59:47.719Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0009.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258254.xlsx",
+          "sha256": "fcffe9294cea261d3853048858cba09675db81f4c38c53ee62d7040e65e11e4a",
+          "bytes": 21440,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:59:48.676Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0010.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258255.xlsx",
+          "sha256": "8150f5657d01ca1e7c55e7455e9b48f8a87b889eea271f4042c65b48eb5f4d01",
+          "bytes": 32124,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:59:49.647Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0011.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258256.xlsx",
+          "sha256": "bb6924c3cbdb3113b7f6523f1cbf6dc1fe36f855597119c55b626fd0c753b9f7",
+          "bytes": 36349,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:59:50.663Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0012.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258257.xlsx",
+          "sha256": "334d2e795c594afda480bbe003fd81ac0c33fe3a5e957379f8f42fd1bfddc4a2",
+          "bytes": 140721,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:59:51.688Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0013.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258268.xlsx",
+          "sha256": "73225afd63fa5ba94a6d9a3024ea9e3073ca6a48f64b4f33912528e3cfd5dd18",
+          "bytes": 191247,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:59:52.708Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0014.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258269.xlsx",
+          "sha256": "e173710d5b4b82bede838d116c7a4a6ed35ca062870a80cfc2dda128b21982bc",
+          "bytes": 214960,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:59:53.692Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0015.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258270.xlsx",
+          "sha256": "117ed6a287017239c2d2446c10910f52818202276b16a7b2614705dc59dd2146",
+          "bytes": 961697,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:59:54.686Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0016.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258271.xlsx",
+          "sha256": "9a5bc678357374df7764897c77e09e61abe8564a089fdf78d47ec40ca6af4395",
+          "bytes": 90197,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:59:55.667Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0017.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258272.xlsx",
+          "sha256": "5f6d0436bc944d64a6353abb3f748d04cc1eb96d1e5e20493f90a6c17bcc4120",
+          "bytes": 105147,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:59:56.657Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0018.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258274.xlsx",
+          "sha256": "b0827bbd9f1c613c124e949f247164d1a7ac6a7f6a0cb5eba2a63e07751a61f9",
+          "bytes": 49297,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:59:57.676Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0019.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258276.xlsx",
+          "sha256": "aec01338c0e4cd54e951e407b2f2de9df69614ba4515a661267e35bf984dc575",
+          "bytes": 467952,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:59:58.665Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0020.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258277.xlsx",
+          "sha256": "89bb2285958fde58241aeac860328fbe5017ab5675ba0cc90d7a3c3c26ba1955",
+          "bytes": 72681,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:59:59.689Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0021.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258278.xlsx",
+          "sha256": "55fa84cc7d9f156665bc58e92c5b0ea64ea62b95d3ede34f328296a37670e3b7",
+          "bytes": 85059,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:00.690Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0022.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258279.xlsx",
+          "sha256": "bb0752df01242b731299878587f52ccadaf5cda70abbd3523ba683484bcec146",
+          "bytes": 40017,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:01.646Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0023.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258281.xlsx",
+          "sha256": "7e25479093a7014c053d68f9ceead3389d7382487f577ba11acce9c265c3ddd1",
+          "bytes": 388087,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:02.677Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0024.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258284.xlsx",
+          "sha256": "0f0b6d45188361dd7f1560499fb4177977539d0eb65fddae8a9d8e74653a6cbc",
+          "bytes": 70455,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:03.695Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0025.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258285.xlsx",
+          "sha256": "7f842fe3c939394fed809a066d0676e37c4033fb20243ba67c0ea683f5b82126",
+          "bytes": 128850,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:04.720Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0026.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258286.xlsx",
+          "sha256": "787373a15195264001572f319afc7467c9154e9568782e66d616e63576949e17",
+          "bytes": 156390,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:05.688Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0027.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258287.xlsx",
+          "sha256": "29ab0ab66722336e02c12284c7135fc470c05d6306319be69a53221618f9bb60",
+          "bytes": 747812,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:06.802Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0028.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258288.xlsx",
+          "sha256": "5f09eaa280bd7eb3d042ebbe007a2f578145a3211ce8cfbcdb6687cc1c7cefd4",
+          "bytes": 125829,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:07.648Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0029.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258289.xlsx",
+          "sha256": "d60c70cec66f242358b89bd84be85c7c069622bdcb63aabb7d0ef927a40d4c27",
+          "bytes": 148059,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:08.644Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0030.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258290.xlsx",
+          "sha256": "ec1df0b09848c5dd3d1a10e10dbe8268fafe06187c9a171ef682948b0f45b1da",
+          "bytes": 66345,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:09.663Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0031.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258291.xlsx",
+          "sha256": "f506e1f539520d4cbeb9b5320f4fcd51ea8786841f1107ce88b5e02f0a15eac4",
+          "bytes": 701579,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:10.703Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0032.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258296.xlsx",
+          "sha256": "f61da70e2b900f6b6a847fe91646ab7062f04736155ceb1b080e27d55b99b789",
+          "bytes": 798077,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:11.750Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0033.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258315.xlsx",
+          "sha256": "accb262f560cd19171e791eb04c1b3a04bea25b50771661ca1d0264b30c783b5",
+          "bytes": 924379,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:12.656Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0034.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258316.xlsx",
+          "sha256": "c67ed7e1b2f51f070da6d770851115b4d7c883079bc883efe296665f4a48d3b9",
+          "bytes": 363341,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:13.672Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0035.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258317.xlsx",
+          "sha256": "7b857810c43417a64561df58d39c7daaaa9e6903f8662343a813754b79fa2d8f",
+          "bytes": 4809179,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:14.779Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0036.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258318.xlsx",
+          "sha256": "c12b625aa67f312fe4916e44a80c16967204678486faeb34e540cd91495ce761",
+          "bytes": 115170,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:15.688Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0037.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258319.xlsx",
+          "sha256": "42e16cd803d089175f6da098f0ac5bda14beee958dc00b1016a12f5df0edca75",
+          "bytes": 132711,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:16.706Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0038.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258320.xlsx",
+          "sha256": "134417cc9170c43a8fbd3bfe9dbc6d80e3e760262b2dd5a042f9ad71cb7e42e9",
+          "bytes": 60791,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:17.665Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0039.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258321.xlsx",
+          "sha256": "37791e81fea23e7425a29b63e225b33ae82f8bd341f4f07e223309c14bdd7257",
+          "bytes": 629450,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:18.695Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0040.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258322.xlsx",
+          "sha256": "84d2fa8676c8a6eb092a2752f47f3cd7f4af1846cf5f11278507fbe81b9b3e1e",
+          "bytes": 32740,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:19.657Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0041.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258323.xlsx",
+          "sha256": "aa06dc2a0b41a6bf4b240fcc886891ce0afc3826fe153661bddc31e9dcedc651",
+          "bytes": 36410,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:20.643Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0042.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258324.xlsx",
+          "sha256": "c83b665391825e120a1d2a573b5ead94a11de387875a0a1c2d34ba6dbacea86c",
+          "bytes": 22674,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:21.649Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0043.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258325.xlsx",
+          "sha256": "1ffe766f8a2b6f786328306c7ab537d8fbfe255ee0767670d4eee1128b765c3a",
+          "bytes": 141409,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:22.675Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0044.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258326.xlsx",
+          "sha256": "36a804516ec5b9ac9b19c2a57bb0ab01c299df60b27bcb96a2550bc905f56eb2",
+          "bytes": 44717,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:23.656Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0045.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258327.xlsx",
+          "sha256": "cf6ea4d4df6679c0d32cb8f995bf354c4dac905fc256c25097608066901559e6",
+          "bytes": 51882,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:24.640Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0046.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258328.xlsx",
+          "sha256": "e1863aae6527db97f00954d316866e1af49d4745bfa93259b012910e6a2076b2",
+          "bytes": 28653,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:25.640Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0047.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258329.xlsx",
+          "sha256": "53ad0442397402b56906eb30f1dfe3277e09d0deead2ccaa4d7a021d47c08f05",
+          "bytes": 216921,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:26.669Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0048.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258330.xlsx",
+          "sha256": "0ff28e7f7261efa24e57211a5d4847156d06d5145f1f81702d865edfa3976165",
+          "bytes": 53744,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:27.653Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0049.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258331.xlsx",
+          "sha256": "5a200f15b8481f02dd01a5772d94ff78abf95dd4140048a39155156be6cccb08",
+          "bytes": 62087,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:28.654Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0050.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258333.xlsx",
+          "sha256": "b1be75ea7be02f9aca29b331977086365b51e66bb00fe9f24e234e4135c5c5be",
+          "bytes": 37302,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:29.650Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0051.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258334.xlsx",
+          "sha256": "c1d4fdd04115f2e7657a7bbd8badf849d9c3625b5d26213930afc71f9f0d319b",
+          "bytes": 232290,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:30.657Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0052.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258336.xlsx",
+          "sha256": "05e9d731fd9bbf9d462093a60f6c3b2b8c5212a44859aaaf67dd6b44a6777118",
+          "bytes": 72270,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:31.655Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0053.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258338.xlsx",
+          "sha256": "e13cb11e30fde259a8ca64b1eb9aca3952c18a26a0f8ed55eb2f49e1decb8113",
+          "bytes": 81890,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:32.635Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0054.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258339.xlsx",
+          "sha256": "49793bd3e9a345afa0753825e7ba6f5cc171cbb9ec8f082aff4cac7e93626333",
+          "bytes": 41678,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:33.636Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0055.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258340.xlsx",
+          "sha256": "3804224604891353a4ea14c3bf4a26dab4ce9fa7d16c172c946a73595ea53775",
+          "bytes": 355454,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:34.686Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0056.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258341.xlsx",
+          "sha256": "72e6c8f1170d9f373364f5b83ece8b3e0839f7396a65b250aad7fb776fbb344e",
+          "bytes": 219293,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:35.675Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0057.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258342.xlsx",
+          "sha256": "0dcd09dc2e4379341169eef32c9b2461cc716646d2de17bb12598dd20e7adbd5",
+          "bytes": 257090,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:36.677Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0058.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258343.xlsx",
+          "sha256": "2e2f293a1b933733c6192e0857df01e4596159306249602da5020f5fec304f57",
+          "bytes": 110584,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:37.661Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0059.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258344.xlsx",
+          "sha256": "d6b4452ef89ab6930ffa17fce6b7190dc3fce965638b73f39e88093161309b24",
+          "bytes": 1278696,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:38.638Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0060.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258346.xlsx",
+          "sha256": "61ef7d87dedef97600a1d78fd0b10741510395453804555893e3e5d385f0ec98",
+          "bytes": 915027,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:39.646Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0061.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258347.xlsx",
+          "sha256": "8c6504f2e75fea4a4c0eaab4744fcd1b46eb4f65fa7946181ae035070636af49",
+          "bytes": 1084489,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:40.639Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0062.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258348.xlsx",
+          "sha256": "64719a085792ab4c7686e3417dd3684c645a0301801b827f08e3d2000647581b",
+          "bytes": 468368,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:41.634Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0063.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258349.xlsx",
+          "sha256": "1613307fe9af19a223929ccef348fd3e5f262ae4325175b9e5ab47ec8e54dda0",
+          "bytes": 5297573,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:42.674Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0064.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258350.xlsx",
+          "sha256": "577b0a41bde1cfad8084e2ba124a0bc7b3ee8c8179bd7257effd17aef9ada7f9",
+          "bytes": 36397,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:43.634Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0065.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258351.xlsx",
+          "sha256": "7d33f743541acb2acdc36aae426f92ceddc409f0b35292fd29f8d4edcf4e8c42",
+          "bytes": 40814,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:44.648Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0066.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258352.xlsx",
+          "sha256": "a77de805b48e0330dcc750d0c6e2d3e53cbdbb764729edf661d97e71b50705b9",
+          "bytes": 24835,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:45.653Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0067.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258353.xlsx",
+          "sha256": "b7489e4cc23e5522af9f2232fad0660569d250d28ea7518bd1a9b64c98495d58",
+          "bytes": 156099,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:46.650Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0068.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258354.xlsx",
+          "sha256": "e6bd185fabe1754d3c58229e02d47871ae87d0b454b10bbc55193164da5beecc",
+          "bytes": 82368,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:47.639Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0069.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258355.xlsx",
+          "sha256": "a2ccc2aa3fe35c31bf8507199ed1f4593e6d9cd50d6e6f8c951215f2563f457e",
+          "bytes": 94769,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:48.657Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0070.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258356.xlsx",
+          "sha256": "1c156a579a1c70c45738e467165c807b28a4cdd185c215b19d65ff0ef244ac1d",
+          "bytes": 45832,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:49.637Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0071.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258357.xlsx",
+          "sha256": "e2c47c0ceccacbe05bf4db6e1184cae127e4634e4bf5481a2152735e6d46664d",
+          "bytes": 436353,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:50.734Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0072.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258358.xlsx",
+          "sha256": "a041ac57f8f24ca5c77d38ac6040b5b9c09fb6a095da083535e1cbf0571da17d",
+          "bytes": 50837,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:51.635Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0073.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258359.xlsx",
+          "sha256": "6c1cc059717598e09118cfe3e64e8ba0e192d8cd0d210aa1f2cf522acccee6fb",
+          "bytes": 58914,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:52.634Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0074.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258360.xlsx",
+          "sha256": "1a6ad5a93f9d495588cf41241a75fd6f7fb21b89c37196e8076342afaf298454",
+          "bytes": 31883,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:53.642Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0075.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258361.xlsx",
+          "sha256": "d2409d6b5827964b2ef35c49f641f2d9698d7755f886f1116e00095a7230827c",
+          "bytes": 237521,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:54.638Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0076.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258362.xlsx",
+          "sha256": "fd08b80754eb43a71638e8f92e2f86a27d3be89ec394d2efa4e66fffd822aa1d",
+          "bytes": 37317,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:55.634Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0077.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258363.xlsx",
+          "sha256": "547886d35975d10d42bc532785f0a2b6cb8989e560b563e2e56d56b25393d1ba",
+          "bytes": 42278,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:56.633Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0078.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258364.xlsx",
+          "sha256": "eabead187197cd3a9b4246c99710364bdb8be40da941f8f075d35199b8ee3c67",
+          "bytes": 24793,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:57.640Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0079.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258365.xlsx",
+          "sha256": "0eef4bfcf652e011e74a942b5e322d25330e3e49a70e6767d1b3d11e8e350fa4",
+          "bytes": 166430,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:58.665Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0080.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258366.xlsx",
+          "sha256": "a8c723ce528f9d8bb3cf370fa8972b68d1406533653fa549d9d293dae0218f19",
+          "bytes": 36731,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:00:59.646Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0081.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258367.xlsx",
+          "sha256": "a49f3b5e283d0edfce0f16a0c5bfda7a0eade02b988bb335a74fd40ca8a8e61a",
+          "bytes": 32268,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:00.654Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0082.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258368.xlsx",
+          "sha256": "2b285f201a4fd10e414370d5f7cf493b0c88dfacb9b254811b9cca31965e476b",
+          "bytes": 31786,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:01.636Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0083.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258369.xlsx",
+          "sha256": "38accf15b366f133616471a9b6d0bc38dabb50a8657add49cc756a47769afc4f",
+          "bytes": 38093,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:02.680Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0084.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258370.xlsx",
+          "sha256": "c9a1393e92737f58f7407af7453034294543abb37dc8cc30d6535ec3ed3367a7",
+          "bytes": 37485,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:03.642Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0085.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258371.xlsx",
+          "sha256": "4c97cd49c4b8389fbd3a89e2f3b1a7871609746f64cb4f84945477273780a854",
+          "bytes": 24096,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:04.652Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0086.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258372.xlsx",
+          "sha256": "674ab06f2af99f8fa87771e91cb7a40b5d35cbb36ed768419eb44dab6bd66ba5",
+          "bytes": 37527,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:05.653Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0087.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258373.xlsx",
+          "sha256": "3dd5e784b3322e9b31d9a265cfc66ab4f25f96e611931b166ad03cb9b5593858",
+          "bytes": 31497,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:06.639Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0088.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258374.xlsx",
+          "sha256": "c9711997a624c45141eb5329e52fd458c6eb2cf88dfc895a4975157d51cd75c8",
+          "bytes": 60305,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:07.671Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0089.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258375.xlsx",
+          "sha256": "95aa5adaeadc50fa9fad92cb6054f98cd8b44d2903e69e57a48d93b0962398de",
+          "bytes": 62533,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:08.650Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0090.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258376.xlsx",
+          "sha256": "43efb41f99b42a4c1f300736e3b584cd6034cc85e516c4b6d6b43d063582d809",
+          "bytes": 74359,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:09.661Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0091.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258377.xlsx",
+          "sha256": "ac72c8d6cb0eda0ab1331ad8e8f32835361c9b0726481bfb46b870e3aef0ce28",
+          "bytes": 37506,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:10.653Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0092.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258378.xlsx",
+          "sha256": "41897eac2a4377f17d841cd0ef0519282e2333687fb055144ebbe0e5fce0a2bf",
+          "bytes": 342828,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:11.752Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0093.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258379.xlsx",
+          "sha256": "51cf885a5c65fab8403a114cd1557421a7b80cd44b9775476fcbdd1abd578b9b",
+          "bytes": 31959,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:12.651Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0094.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258380.xlsx",
+          "sha256": "56f71b02a609c37511f9ff9c0427f81dfc1dde7c3ecdd0bb211a15f8c0c17659",
+          "bytes": 36322,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:13.664Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0095.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258381.xlsx",
+          "sha256": "134602d3c260b34656dc42e8231ec5dbb583f8810d8c874f7e3c45c4e8754455",
+          "bytes": 21444,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:14.652Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0096.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258382.xlsx",
+          "sha256": "cdd5ff3eba723155b7ae527170177850d0ca1c4b9e296685a15494f57514032f",
+          "bytes": 140455,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:15.634Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0097.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258383.xlsx",
+          "sha256": "8d3de0006b0de027dfb0ab84c49ef366d45d5f30c0fa0bed4dfdd543d60d4e5a",
+          "bytes": 181586,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:16.673Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0098.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258384.xlsx",
+          "sha256": "31ef2ab70bf3e48df26b4ab2ac5ee88ba6306bc5c733fd4438c4b6a6ff26cdbc",
+          "bytes": 206467,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:17.642Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0099.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258385.xlsx",
+          "sha256": "32a523d3a944bd1c1f94d40dbf4aeea78f08c2a84298671a852745db5d9ac044",
+          "bytes": 94252,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:18.640Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0100.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258386.xlsx",
+          "sha256": "738f3c10982e1c6d793156d6eb2568f3a444d74edb5d12624106f442bfdff622",
+          "bytes": 947892,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:19.641Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0101.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258387.xlsx",
+          "sha256": "364ab0b7e24e0fd42019bf8607ec3f01dfdfd9de1b30046cf7c818e0bc94907d",
+          "bytes": 82353,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:20.657Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0102.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258388.xlsx",
+          "sha256": "70267054dc16c55f63c8c558a0539d09daafdc305a7d79ccce835d287b635bda",
+          "bytes": 95708,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:21.658Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0103.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258391.xlsx",
+          "sha256": "c336346d8a599ce82e90b4cbf0fce04fdf8225d65358c45f6f83d0c03b62c136",
+          "bytes": 45989,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:22.639Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0104.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258392.xlsx",
+          "sha256": "03c9dbfa51058849adfc55d03663e69c407346b260fcbf64b716eafa4ad424b4",
+          "bytes": 436470,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:23.673Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0105.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258393.xlsx",
+          "sha256": "eb7334d7be067633250e70b51728a1f528f00b176d453bf308d2c1633345c7af",
+          "bytes": 69058,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:24.659Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0106.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258394.xlsx",
+          "sha256": "1ffef46000ad61333d5d13db899f3504ca26b3dfc5787e73d8827df3af79ec14",
+          "bytes": 80213,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:25.659Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0107.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258395.xlsx",
+          "sha256": "76963c06a32016fb6cd11dfdd41e314f6dbac0784721dfdf6bde65a0c85b2c51",
+          "bytes": 38638,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:26.646Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0108.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258396.xlsx",
+          "sha256": "1253e6b3d87b5b6d2838cd9593cb80db4885041c6547efaabbdd8d849dbf8e59",
+          "bytes": 367737,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:27.671Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0109.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258397.xlsx",
+          "sha256": "8e5e50dc6cd24a24370cbdba519e8c9b37582df32211eb37200ec12575fade87",
+          "bytes": 38005,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:28.630Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0110.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258398.xlsx",
+          "sha256": "e9e2a78e7be304192af4fcc93cf574fbb2c7a1f84cf231d818661f04d98877cb",
+          "bytes": 37344,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:29.668Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0111.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258399.xlsx",
+          "sha256": "a8ba583f227cb05b25a81d51adcc0abfcab340eeca08b159062358d9c8fa059b",
+          "bytes": 20533,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:30.648Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0112.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258400.xlsx",
+          "sha256": "0f3e7f80a2a5373950627f501dd36db351e1e3c56e0d004da59696f3a7a11605",
+          "bytes": 141122,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:31.635Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0113.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258402.xlsx",
+          "sha256": "a4ad358c9ded09e5d221a704ec2b302e5c67994191341143b8ee52eaea600c41",
+          "bytes": 126649,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:32.630Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0114.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258403.xlsx",
+          "sha256": "982bb22d033b9501a1ff08165b4cb4fbccf52c955e1e8b77923f3800c512382c",
+          "bytes": 153527,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:33.630Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0115.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258404.xlsx",
+          "sha256": "da056dddd2953c336583570972a0de3569d8262b8d8a8fad9881eea558c9dd85",
+          "bytes": 70205,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:34.629Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0116.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258405.xlsx",
+          "sha256": "9b63eb4f3338f9266c529810eeba8c48e0f02084892a1986897a76d9584e5048",
+          "bytes": 734285,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:35.670Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0117.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258406.xlsx",
+          "sha256": "9a602faa06c83ddbfa5142389c6f055d75df082ccb6efcd9b8c4f85a05f81ad4",
+          "bytes": 120258,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:36.629Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0118.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258407.xlsx",
+          "sha256": "5d82038b23282e75dfcf70cc5e39c907a2485197008e508e97d512a2cdd02061",
+          "bytes": 141653,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:37.628Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0119.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258408.xlsx",
+          "sha256": "a15473348ad0f385e9807b8ec297850e19e5bb3d87081798607b01024d639124",
+          "bytes": 65717,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:38.628Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0120.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258409.xlsx",
+          "sha256": "7ff80b2eb0a91b6a40d1dcc6c760324c3b82e2de8b0428778437bca348871a3c",
+          "bytes": 670783,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:39.628Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0121.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258418.xlsx",
+          "sha256": "e247e4fb536ab33bb85a0d80a41dc20c525ef3aa9093f8a13b3da397e7a74b2a",
+          "bytes": 42677,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:40.648Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0122.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258419.xlsx",
+          "sha256": "439e87344fc5d8d3bc36bdc7f6586c3075a4e477591b06ca2cffba97751382a2",
+          "bytes": 49722,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:41.626Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0123.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258420.xlsx",
+          "sha256": "6dd2886cc86ff2325b02e3c3e319cefd96269650971a5eb579848aafaa070258",
+          "bytes": 27858,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:42.640Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0124.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258422.xlsx",
+          "sha256": "a39f078ede93bb8e9d94bfb0d6571efa814cd4d3c30453d845c66b8f2bb55029",
+          "bytes": 207744,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:44.554Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0125.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258423.xlsx",
+          "sha256": "0eb896f141d286f2a30ac1ac46e8521b2503a18d0ac384a282073fdd51965ad2",
+          "bytes": 68826,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:44.728Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0126.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258424.xlsx",
+          "sha256": "fc30c4acb027829f150fbca601b8aa751729d715ede58ca45c811f2fbe1b9291",
+          "bytes": 78463,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:45.727Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0127.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258425.xlsx",
+          "sha256": "17e5b7d5bcae80720dfc98b340bbac3b6261bbf9fd8eba6055d6d5c0a0599a21",
+          "bytes": 40934,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:46.737Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0128.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258426.xlsx",
+          "sha256": "1710f3ba835e5e62636bd5e6747cc5c8dd8687a6f25b40c6ba6678af68556fc4",
+          "bytes": 342318,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:47.732Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0129.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258428.xlsx",
+          "sha256": "7ed6fc9a64514cb41ac0efe616a8bfb9a4cc4fdef52b9ab19a12dcba5d43c3f3",
+          "bytes": 36125,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:48.722Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0130.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258429.xlsx",
+          "sha256": "5e002d7e525e7ea05bfb99bec70c5b0f1ce68ce3e0136e65d893dad7dc3b7a9d",
+          "bytes": 30941,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:49.725Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0131.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258430.xlsx",
+          "sha256": "ba89f62fd16c2742489fc3409f55963d988998d2a68e57e6a0909ca4f1781a3e",
+          "bytes": 30489,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:50.724Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0132.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258432.xlsx",
+          "sha256": "169e1c0686fbe0fb9ff930f820058b8b44c1d7e98ede75d847c4bdc6d275df28",
+          "bytes": 36669,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:51.747Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0133.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258433.xlsx",
+          "sha256": "0268735c3ebdc8d902d0e2168e0ea5b7e6f5a9f24ec16b3c8708af6ad2f00a07",
+          "bytes": 36668,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:52.723Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0134.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258434.xlsx",
+          "sha256": "a926873b748bee882a5d6a9f4029da3bab7c4e62f0d16816b80fb764a246f070",
+          "bytes": 23593,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:53.737Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0135.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258436.xlsx",
+          "sha256": "2aec6361307b616dded9fdbb9fa0c222ee73b1115668213aab990fe374f9bebc",
+          "bytes": 36614,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:54.721Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0136.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258437.xlsx",
+          "sha256": "d6dbb9cb4983f74514b9b22b49b63cebb69da921d2717c3b38dccd06547b043d",
+          "bytes": 31087,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:55.731Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0137.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258438.xlsx",
+          "sha256": "4a6c50f1b6ef273961b932adde9e819ab87d2bd8a7e32ea470f494bb13a30738",
+          "bytes": 59698,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:56.739Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0138.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258439.xlsx",
+          "sha256": "8b75faa229d0e17263e03e8f79a5af3e2ad7d495c8320d4267b0c05a45162bfa",
+          "bytes": 37980,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:57.730Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0139.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258440.xlsx",
+          "sha256": "e9327bfbc6ecd3d5dcd5fbd08d55a795c14356b536400e21e208971c75de1351",
+          "bytes": 42702,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:58.720Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0140.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258441.xlsx",
+          "sha256": "272ba05d30cc71570f9ae62910823139af33c2be5279316d2396dc6d82a36590",
+          "bytes": 25623,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:01:59.737Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0141.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258442.xlsx",
+          "sha256": "4901817eda38f5cdf36e9ffaa8e042711b4c15aee46f40ee127916186e026e35",
+          "bytes": 166567,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:00.723Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0142.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258443.xlsx",
+          "sha256": "ee012f0b20cb8e053831d03867508212d09e65690c26aa7be506cfb52a42d275",
+          "bytes": 17174,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:01.722Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0143.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258444.xlsx",
+          "sha256": "0346b381f675cd06c0d3fcf24d93fe810f38f34eb1bc592048d8c36a415e6c7b",
+          "bytes": 13813,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:02.748Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0144.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258445.xlsx",
+          "sha256": "1beeba2567cc0a5c3c3cefbcad5935b14423ddad30ee203ea542117a1e8732a9",
+          "bytes": 12843,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:03.722Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0145.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258446.xlsx",
+          "sha256": "5221804b785c78ee30e3533baa154175f5e78e781f05922ef8b676c8bd30d073",
+          "bytes": 18317,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:04.743Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0146.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258447.xlsx",
+          "sha256": "871902f95dcde57dfdf47c7ae545f5965469228ed6535f1361d720b12cb33bc4",
+          "bytes": 26013,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:05.722Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0147.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258448.xlsx",
+          "sha256": "e7c74d8ab85a940be80f06e693f1807d25181bad276ac750f741b071ee852d8c",
+          "bytes": 28600,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:06.743Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0148.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258449.xlsx",
+          "sha256": "78ac011c6497883e7db86aef9cbec4d47f28815c1f9e18b069ace00b40c41a5a",
+          "bytes": 19128,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:07.750Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0149.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258450.xlsx",
+          "sha256": "2659e4f6ff612a9d951be30fa9195bab4949f7d792a6722e3afab831cdf19e3c",
+          "bytes": 94626,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:08.721Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0150.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258451.xlsx",
+          "sha256": "19d1c060ec0d5906996b5cf7653faf0794d6374b89c559de46d7f1b5cb823379",
+          "bytes": 28370,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:09.740Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0151.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258452.xlsx",
+          "sha256": "3f9141a045d1d93c2f7beaa7c9eac37f1e01cf4dc693dc502ae00f3395a53649",
+          "bytes": 29974,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:10.723Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0152.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258453.xlsx",
+          "sha256": "a634d0b3f1ad1328b3ac276184d089f720069eb20e7fb538ce93f4ddf67feb65",
+          "bytes": 19989,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:11.719Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0153.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258454.xlsx",
+          "sha256": "7726d6006d8b7041644acf953ef8d32d37b9e62da4cef92eeba571a5e7eafe56",
+          "bytes": 100674,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:12.718Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0154.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258455.xlsx",
+          "sha256": "5744d8f26acdcd8210c527d638262a55f3f0f4ea5e7c5c6d5b225745625d7958",
+          "bytes": 52221,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:13.718Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0155.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258456.xlsx",
+          "sha256": "93ae336cd3345cf29b7bda8045c29a2ad3745c23903fd379d229ff9f0633093d",
+          "bytes": 57319,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:14.735Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0156.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258457.xlsx",
+          "sha256": "092857c3712e100c227bedb0c1004bb28657f27e465bcdc014d46ba2f98529de",
+          "bytes": 31513,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:15.737Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0157.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258459.xlsx",
+          "sha256": "034e908d73fbcc59a20574bb070c835dd81477922e50886a5e976ed7733fbc0a",
+          "bytes": 25942,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:16.735Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0158.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258460.xlsx",
+          "sha256": "b736a889b577d31ea4e443fb678def344d7f22349a3d4d41e8b3c8e6bfcca960",
+          "bytes": 25450,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:17.717Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0159.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258461.xlsx",
+          "sha256": "551fc705621429c929e5f09064531cc3e9ad08e7d53ed416c69d9d2ecbc32e45",
+          "bytes": 16169,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:18.732Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0160.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258462.xlsx",
+          "sha256": "8f56c135d84aaeab1bc94e84d28e9a1f80dbbbc38864d802c0b9128ebb241f68",
+          "bytes": 88677,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:19.744Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0161.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258464.xlsx",
+          "sha256": "750ba20bbdcf4e062937e79cd3230b74ddaa45b3bb724bf45e6cfb2902150dc3",
+          "bytes": 49811,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:20.716Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0162.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258465.xlsx",
+          "sha256": "35633141ca796321dbaf007c0fc350b453be0271719668d748c83e3931e6a758",
+          "bytes": 56137,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:21.731Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0163.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258466.xlsx",
+          "sha256": "082196119695debdbf516a79542fd8300a6c8ef19dbf4453fb64d098c98743fe",
+          "bytes": 31497,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:22.732Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0164.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258467.xlsx",
+          "sha256": "b96198bf2b7d02f44cfa565f3f8b1b85cb8b029027fc664daf5c2378a61f6cef",
+          "bytes": 234803,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:23.732Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0165.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258468.xlsx",
+          "sha256": "44ad93093dc8c66fc6307cd347aae2939c7101e9a8efe02a739d081fa9db8bb9",
+          "bytes": 31778,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:24.732Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0166.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258469.xlsx",
+          "sha256": "fc52901e1781b9673a706f5e52fd7c5d04b73f2ac8363e55af077da38415f1e1",
+          "bytes": 36053,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:25.714Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0167.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258470.xlsx",
+          "sha256": "d83ffa8a181aab1febd93be80896ac94f666fddab7a9506f51455be229eb9cec",
+          "bytes": 21440,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:26.716Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0168.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258471.xlsx",
+          "sha256": "0f0baa86d9d88bd14ad55c540def95309259e92cfa8b0346a99ef2ae13606fbb",
+          "bytes": 137986,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:27.725Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0169.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258472.xlsx",
+          "sha256": "6bb3330d4c38fac2417794d7633196993900d42a3b82ad5f6d0cff3eb08cbcf3",
+          "bytes": 296368,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:28.715Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0170.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258473.xlsx",
+          "sha256": "1e08366798cb7e246f5399b12fa1195201c7dd1ab447423a555a30edcb202ec0",
+          "bytes": 339422,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:29.716Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0171.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258474.xlsx",
+          "sha256": "2a132b22e3e82c58485228d79bb89a0454735f1f9229822816013162fd21e0c4",
+          "bytes": 148857,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:30.738Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0172.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258478.xlsx",
+          "sha256": "2d100bff140f87b428dd9b8475e4b26333563cc1bd5685fadab2069563f8603e",
+          "bytes": 1579057,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:31.770Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0173.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258479.xlsx",
+          "sha256": "8c773e0041aa26264c87de2df341b9c58a4ad4d132b3564d319d0e420db8c528",
+          "bytes": 78834,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:32.741Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0174.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258480.xlsx",
+          "sha256": "043bd92789e45d24f220f333feb914258dfc161704f7b156402b2f224c2b3f72",
+          "bytes": 89459,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:33.714Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0175.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258481.xlsx",
+          "sha256": "aff8275efcb06da019eb1bf2cdfb43f7c382e7b57bf32dd32737860df9d2972c",
+          "bytes": 44658,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:34.711Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0176.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258482.xlsx",
+          "sha256": "8dd3e509acc9beaf356ddb902bd94cf622ece63b5448e19d0972a99bb8d9dd3c",
+          "bytes": 397891,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:35.719Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0177.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258483.xlsx",
+          "sha256": "12cd4fe42c5d8489f9395ee32676b8d786630f1744ef4946cac5854099700063",
+          "bytes": 24067,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:36.709Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0178.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258484.xlsx",
+          "sha256": "6a3797fdd09436242f2a1feb94cdb0974660755a5ed6aa93a0092403de34e878",
+          "bytes": 26141,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:37.730Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0179.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258485.xlsx",
+          "sha256": "658b3221034b494425520111fb448a0eeb78a297f3858624ac2e07a992bec2bb",
+          "bytes": 18864,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:38.741Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0180.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258486.xlsx",
+          "sha256": "b869ebda6776309b85441d545967a6a5a8a58eed214243a5df4a1ea24708f39b",
+          "bytes": 81838,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:39.710Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0181.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258487.xlsx",
+          "sha256": "ac5d30fdec111c05de1ffbd40ff4165fad5b6caf6a7e19bd706bfdb3cbb69659",
+          "bytes": 25822,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:40.731Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0182.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258488.xlsx",
+          "sha256": "a31a2f6b8c2cfacfac0188a268badc4660f1352f66bd908eda79535f58879333",
+          "bytes": 28239,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:41.721Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0183.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258489.xlsx",
+          "sha256": "759810b1f435d34863c85ae8e9224e3dc82cb228105fc56d4276f6fc30c9ac0d",
+          "bytes": 20069,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:42.722Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0184.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258490.xlsx",
+          "sha256": "b30da4f312ff8bf015c52cd11cf5d1d594d5facbca853f1c25de81aaef43705f",
+          "bytes": 88923,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:43.730Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0185.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258491.xlsx",
+          "sha256": "253351e4cd8b1ddb740d45e9a98b589df2f73073c49a56ed05ae54235f14aa6d",
+          "bytes": 34324,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:44.721Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0186.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258492.xlsx",
+          "sha256": "992119e59b4eb36f56d0b5fb8d475ffb68921bd2173d9cd33a52cf784b49688a",
+          "bytes": 37062,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:45.728Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0187.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258493.xlsx",
+          "sha256": "ee22c4fa4a6f6153afa74b1e5f4fac2ae32a45ed282f0f42d9494ed244e1709b",
+          "bytes": 28041,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:46.707Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0188.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258494.xlsx",
+          "sha256": "8f2a169e67103fbecb6c1dd360c5a50cfc8f51767d4d857b4421d92be4316869",
+          "bytes": 101745,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:47.726Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0189.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258495.xlsx",
+          "sha256": "eb2cfe78210187ac178e4f4fd193f37704188ad27634c7c396f7cdaced546dd3",
+          "bytes": 78473,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:48.709Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0190.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258496.xlsx",
+          "sha256": "17ff97cb10e4cc8575dcb8121633cd44d47355a30183401e8fef88ac7e5c0e84",
+          "bytes": 90640,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:49.706Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0191.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258497.xlsx",
+          "sha256": "7d3479fa735b27141521dcf186a227c57347c4a85e0caecdc2fd11610de2f7f5",
+          "bytes": 44341,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:50.745Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0192.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258498.xlsx",
+          "sha256": "4a6d2419651d8af484bafdc121645f89d3da5f6001142ce064c329ff60363d66",
+          "bytes": 424116,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:51.708Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0193.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258507.xlsx",
+          "sha256": "921f0b8760dd4cfcaf8c35221b04e2a9a529455dfb169bd31060bd3d80d8c322",
+          "bytes": 41371,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:52.719Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0194.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258508.xlsx",
+          "sha256": "22ba8be367b910fba6d3a033fd4333c1b5b011914f7f50c78dcc261a74bc0a24",
+          "bytes": 46071,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:53.706Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0195.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258509.xlsx",
+          "sha256": "6ecb0428c16a55f371835d81419020524361ea2f56963298168fb7ab579fa06f",
+          "bytes": 27833,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:54.717Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0196.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258510.xlsx",
+          "sha256": "2462c00dd2ea77fecd1d2e52f303902e1a50b1819ad221c715dcc009fac980e0",
+          "bytes": 175496,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:55.745Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0197.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258511.xlsx",
+          "sha256": "9b2dbb081ce4a5ec159d8c92a4f04592949ed262c31ef258289ddedf071006b4",
+          "bytes": 24334,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:56.705Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0198.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258512.xlsx",
+          "sha256": "864f0f2645b8daaadac14bd3fdb7e420422852dd94fac0119f413855107bff14",
+          "bytes": 26393,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:57.738Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0199.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258513.xlsx",
+          "sha256": "5477c086b55c9ab5a965ece3061c49c8a0545f197e70c752bae39a4a454a5414",
+          "bytes": 19473,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:58.770Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0200.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258514.xlsx",
+          "sha256": "3a67919013e5c1b73e8f2b7af79ef1b9abb344132e90b3ebc5dcd4946bf6a462",
+          "bytes": 80466,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:02:59.703Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0201.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258515.xlsx",
+          "sha256": "fcf2605493d7b923b523889c5fac04198a5160aa0d4aaaa6bb4cf470d9cc3d3a",
+          "bytes": 150361,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:00.703Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0202.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258516.xlsx",
+          "sha256": "33d906d72e6ed31cbe684a3b5d59cd45d1b52ad460fb121802d2d1f0f1e7697e",
+          "bytes": 177106,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:01.769Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0203.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258517.xlsx",
+          "sha256": "ccd73f4c0a67781f47fd4b4b85a8a91dc76f5dec634b7cfe7e69c56db9ad43f0",
+          "bytes": 79137,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:02.730Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0204.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258518.xlsx",
+          "sha256": "96f8dcc110184d0944b029b5363fdb25c11b8e6518285f69be91d0aedbc6249e",
+          "bytes": 894392,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:03.753Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0205.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258519.xlsx",
+          "sha256": "60e263f6d05b5f85604586b5f687527793b653be056715eb0215ae4764df5566",
+          "bytes": 58458,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:04.699Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0206.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258520.xlsx",
+          "sha256": "3484896a79135074a83df33d5944386ecd5faaeb6ceb2674702d58c255acd895",
+          "bytes": 68548,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:05.725Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0207.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258521.xlsx",
+          "sha256": "7145343be6a639f27b890a56861c56e7326ba6c8034221ff1509b7de63d58ddc",
+          "bytes": 36233,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:06.726Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0208.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258522.xlsx",
+          "sha256": "22b28bb886cf9e0ef68d69efc184aa06b427feb3e12c0ff79c84d81ea9b86490",
+          "bytes": 288824,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:07.701Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0209.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258523.xlsx",
+          "sha256": "61ed669aac6ad49ce62f23a74f042e1ae007b1f98c2f4ed265b604713034489f",
+          "bytes": 31846,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:08.700Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0210.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258524.xlsx",
+          "sha256": "ff63fbdcef86748c2ecd81205b66722fc86ba69cd194d04aeafceaf71c7877d1",
+          "bytes": 34942,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:09.701Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0211.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258525.xlsx",
+          "sha256": "01384dcc77da8a129de237ff597d7b74a2c3661d1605d180ed85a2810c5a27c7",
+          "bytes": 22796,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:10.698Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0212.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258526.xlsx",
+          "sha256": "008934f1499924d65f6c56009cf768cebcd159c8d65c79d1317403c7eadee668",
+          "bytes": 122398,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:11.728Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0213.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258558.xlsx",
+          "sha256": "3781926bc6978004c1c58dfa7e2f34f34dc481dd2ad9378c11706a1f89a5c673",
+          "bytes": 37633,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:12.698Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0214.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258562.xlsx",
+          "sha256": "7fc877033987af86cfb140c4c1c11c7835c3d79975874c7a9a5f19b3a296952f",
+          "bytes": 42378,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:13.721Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0215.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258594.xlsx",
+          "sha256": "9e6d197f7ae8ea1f188f958793f92f0954cd03ee2f852d7b5c4ba0443db978c7",
+          "bytes": 25581,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:14.700Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0216.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258595.xlsx",
+          "sha256": "3ba4bc75f93822bfed2f45db28d73a2810018ca37b0385543f32f905fbb6d8c1",
+          "bytes": 165058,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:15.700Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0217.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258596.xlsx",
+          "sha256": "ef43b820e53e77773f3f91be6411a084016e34ad51b4e8c36f1c706f86994699",
+          "bytes": 17170,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:16.706Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0218.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258597.xlsx",
+          "sha256": "693aae4ba3c27eeb296068065752901bbcd1d97f03b0915ad39034668511ec0e",
+          "bytes": 13825,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:17.735Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0219.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258598.xlsx",
+          "sha256": "9d7af3fee5779e09b08c0175a9391207fc8ea019aa23bd2b9157b7666610aec7",
+          "bytes": 12838,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:18.703Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0220.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258599.xlsx",
+          "sha256": "73d5f53774a74ee786372921323dfd9513c93c13c3bfea029ea57a954a9415bb",
+          "bytes": 18315,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:19.718Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0221.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258600.xlsx",
+          "sha256": "c06c6e25c42b7c7c112060dfb3a4be87f595c72ee66764e575a2e63ea9cf9dd0",
+          "bytes": 25523,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:20.714Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0222.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258601.xlsx",
+          "sha256": "23a5ab7689dcbd047bae34bb7742d09186f39593d8804dd735421cf864d360d8",
+          "bytes": 28294,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:21.698Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0223.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258602.xlsx",
+          "sha256": "22b536e598e095b904e2081e18ce591e00d9b958c1b57945950c8c0ec506c06f",
+          "bytes": 18812,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:22.701Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0224.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258603.xlsx",
+          "sha256": "53daf2d0c1ba2990a75be689320dccd7c24abb7699f156eb4b619dbffff3c3b4",
+          "bytes": 94788,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:23.720Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0225.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258604.xlsx",
+          "sha256": "68ebca56afa8f23c3952413e08a91c4a2bb03826638f632d986412550f4f2732",
+          "bytes": 27458,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:24.713Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0226.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258605.xlsx",
+          "sha256": "1b9a853a3a12353ab8f714b68bd9014fc752478d4ac87239ca6b5b37e85c60e8",
+          "bytes": 29757,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:25.704Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0227.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258606.xlsx",
+          "sha256": "5f14dbc53c8af08b4fe51a9aa2ed1cf7ed448901c85ac9f2e25ed0131ca5e9b9",
+          "bytes": 19639,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:26.719Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0228.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258607.xlsx",
+          "sha256": "67e3ff775fc0da6a440184732d5285ba25070ea136ed358559f60f8975efdf44",
+          "bytes": 100578,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:27.757Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0229.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258608.xlsx",
+          "sha256": "7d783a808db618197b12044ab61910ee06800d0d885a2a49b573027e759a2d5e",
+          "bytes": 51088,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:28.785Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0230.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258609.xlsx",
+          "sha256": "cc1bf0f5bfe54d9a20ed6ea415e6347b76eda21b91e707646c8deadaa0707d99",
+          "bytes": 56293,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:29.695Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0231.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258610.xlsx",
+          "sha256": "14211d5d94c5f5c836517f4218e3de7c896b980b273160b236292063acd7084b",
+          "bytes": 31017,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:30.720Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0232.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258611.xlsx",
+          "sha256": "aa3af69e368626e9420ef57ee058eec8abbc4761f0a131b0af16b75b96a8e846",
+          "bytes": 221167,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:31.696Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0233.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258612.xlsx",
+          "sha256": "42f0e49543c1822f6ee07d0b1eaa1b8ca20f583302e93e852dc079e27893c48a",
+          "bytes": 24676,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:32.702Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0234.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258613.xlsx",
+          "sha256": "1c4434bc3e5097ca01160fe08ac90a422fa8dcbe1fb584d4f1c09e84d0354962",
+          "bytes": 25190,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:33.701Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0235.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258614.xlsx",
+          "sha256": "5c1080780a02d7fe9e55e5d65a2cedcf725f294e9c6d62c9b613366fa228dd8f",
+          "bytes": 15939,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:34.703Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0236.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258615.xlsx",
+          "sha256": "b00914840b4963ee355106f29b85e1662b7d3ce122c63d2634d4f3e287f88d0c",
+          "bytes": 88699,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:35.696Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0237.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258624.xlsx",
+          "sha256": "9c06a2f40b5cae20c036c413463ef2e2669de9eaf45ac77b711ec40c34c46f05",
+          "bytes": 49311,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:36.699Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0238.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258625.xlsx",
+          "sha256": "d5025a20cf2ef5928f4e514bd48c64b5ec909a3a34c67353746b7bc8685a99b3",
+          "bytes": 55505,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:37.716Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0239.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258626.xlsx",
+          "sha256": "09e99203936c539872d764715733830b78ce91000f1e7cca7f28d4a568a0bd52",
+          "bytes": 31476,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:38.747Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0240.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258627.xlsx",
+          "sha256": "7198f3d9ce91e2a320227651ac8131d88fd4e1303ceaaf4337de05887d244acf",
+          "bytes": 232118,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:39.701Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0241.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258628.xlsx",
+          "sha256": "720cb674894d4090daabd9fd18c0871557d322eb40c33ef77ce8ba6b65d62997",
+          "bytes": 30577,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:40.696Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0242.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258629.xlsx",
+          "sha256": "3ef9307b9916f71b4fdcc3b688fcbc28be113a298eeeec302b7e3981eeb322cb",
+          "bytes": 34739,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:41.696Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0243.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258630.xlsx",
+          "sha256": "08f0ed3b817dc9283c0e2f284c2b56d06a2230cbf2cf5f5cfcf51ff74cd02fea",
+          "bytes": 21271,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:42.719Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0244.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258631.xlsx",
+          "sha256": "5d0011e15ec6a9784724b7a1b41347eeceb0ac363e43dcb1db5f71cf1df530fb",
+          "bytes": 132691,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:43.700Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0245.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258632.xlsx",
+          "sha256": "cb00f1ae12fb736046d063a781296fcdb54ef1d54b8899923665fb5e028762d3",
+          "bytes": 26133,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:44.705Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0246.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258633.xlsx",
+          "sha256": "86e1c7e671a0abdf2b9526a5c11d12d2a4ea72d0f6e0cba53dd8cd074e62ca90",
+          "bytes": 28814,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:45.706Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0247.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258634.xlsx",
+          "sha256": "030c901e154372945469925ac4c404ba28e569ecc7eaeb6d50f263c84524d34f",
+          "bytes": 20078,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:46.717Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0248.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258635.xlsx",
+          "sha256": "852c21937db1729925f0941709de990db866c5d30052056ab5655fecba175443",
+          "bytes": 92534,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:47.743Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0249.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258638.xlsx",
+          "sha256": "42bde2773a5a5220d8674803e36928f2a4011b7f55579998e6675761cf805daf",
+          "bytes": 46910,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:48.731Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0250.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258639.xlsx",
+          "sha256": "180cdd79146e43778a8ccb4e157549154d666c5b15f2bf25359282f062b65906",
+          "bytes": 53474,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:49.724Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0251.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258640.xlsx",
+          "sha256": "74d883505f5874b80966e1826cf91065db1834aa95b098411ac92e64bd584b5a",
+          "bytes": 71724,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:50.704Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0252.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258641.xlsx",
+          "sha256": "90fd869eda820649446b3f1e008066898cd60c0f8855014049898c97dc4297aa",
+          "bytes": 83401,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:51.719Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0253.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258642.xlsx",
+          "sha256": "e7d31505db8d5af43df11c7b8cd0234959da576211dcf3b71a5fa260d064cc7f",
+          "bytes": 69491,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:52.732Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0254.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258643.xlsx",
+          "sha256": "a357023cdadcf1866acc97019cb27c762ee80166ad4fcc097246348337a322f3",
+          "bytes": 80707,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:53.741Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0255.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258655.xlsx",
+          "sha256": "b053345a90d16194eadc95b19388a333c86e5387c73b79de25268c6d92e52e1d",
+          "bytes": 3167429,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:54.725Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0256.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258659.xlsx",
+          "sha256": "325de950c8404b1700ad6896ee89611f0e53e5d54bc6f4186cd8e0d0410b4024",
+          "bytes": 3563452,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:55.731Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0257.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258660.xlsx",
+          "sha256": "b8e3b3d58bd245a5ffae4e5a6d5abbe0367150b163591d1bc233c6f6f2ade5bd",
+          "bytes": 2826614,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:56.732Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0258.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258661.xlsx",
+          "sha256": "8490b833c02a0f0831456adbcf092a1bf6b89891fca22f4dce16587c2710782e",
+          "bytes": 3114713,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:57.744Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0259.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258662.xlsx",
+          "sha256": "116d248b732102b01e6b0f5ff6e63b3c9f90da428afa2483527213232bfd8d42",
+          "bytes": 2407386,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:58.764Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0260.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258663.xlsx",
+          "sha256": "3f3d0bc9e177b9b8e8e6a3083907cafeb42b5fd4fcd0fbaafae9b3003878ab84",
+          "bytes": 2668478,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:03:59.768Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0261.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258712.xlsx",
+          "sha256": "8750ec4ff6091ca372f5d4be76e687c0f4ddb3a0f6ea2eb2b11a5b2d8b901a14",
+          "bytes": 2332850,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:00.737Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0262.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258713.xlsx",
+          "sha256": "7ed7316ee00956943d00c56b03a737e421e0936ad0c387a3db1d9b53d4786574",
+          "bytes": 2440249,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:01.724Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0263.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258715.xlsx",
+          "sha256": "860f5d654a1c78d4086e2c74682fb53183ee3f388543b13f3116898dfdb2e145",
+          "bytes": 2710107,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:02.727Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0264.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258716.xlsx",
+          "sha256": "7097e6f1a6e6fdabb1eb5e6cef4304eb3a2e5a3ba0dd8fd7ac534ff5d5dc0377",
+          "bytes": 2911860,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:03.778Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0265.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258717.xlsx",
+          "sha256": "727758c4b5c6c74be53f42dc0bd4600d096be6f994cda63170ceac507198afba",
+          "bytes": 40545,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:04.714Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0266.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258718.xlsx",
+          "sha256": "699035ee10147613e04929f2739a1279864d9edde093941467a4b2fe1d38ce53",
+          "bytes": 44882,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:05.743Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0267.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258719.xlsx",
+          "sha256": "243d47db0b1b8092099ef79208f577b61d72d2c7006b407e6bceb0b3c8071f4e",
+          "bytes": 34528,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:06.730Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0268.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258720.xlsx",
+          "sha256": "63c9d34baed68f89ddcae8eca1b4fc77a3cee8ccb03fbbd343c5d129d643d212",
+          "bytes": 37222,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:07.719Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0269.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258721.xlsx",
+          "sha256": "275727371a7c98108fb923fa4c6f955d44ab74e427cba8ddd8f80d2e2bb0d5b6",
+          "bytes": 33079,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:08.726Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0270.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258722.xlsx",
+          "sha256": "57108294f096da37052d0db1c87e35c17ae1f03ef5abc947eae633686c7b0792",
+          "bytes": 34750,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:09.755Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0271.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258723.xlsx",
+          "sha256": "5e6dbd657b25db932923b9779d77edd8d7f3fec78a46611f237319f293bb647f",
+          "bytes": 413960,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:10.750Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0272.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258724.xlsx",
+          "sha256": "7708f86d6741187192b0f07dd3a5efcec18db0c41d58b921714dc6f772c6c7d1",
+          "bytes": 478342,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:11.767Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0273.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258725.xlsx",
+          "sha256": "5ee834ea9785e2301e04089e6854d864853e797ddf0a0cc1722d393b23fde6cb",
+          "bytes": 48426,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:12.722Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0274.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258726.xlsx",
+          "sha256": "aadc1e35f58e9d949c8efb6a8e657202641962dc711f165176d7ca9e5feaf5b7",
+          "bytes": 287604,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:13.758Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0275.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258727.xlsx",
+          "sha256": "054925b412bdfbfe53778ac59e20cca42133fc6f620f438ef9613122dd42724a",
+          "bytes": 27039,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:14.734Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0276.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258728.xlsx",
+          "sha256": "e70eab5c3cbd993bbd7ec6788ab12996edb1abc1b7c09dc55b8752ed16bb007e",
+          "bytes": 136104,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:15.750Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0277.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258729.xlsx",
+          "sha256": "cd85917e306457a08311be2d07700554536b98093ff2c086ce97b6bbe47cb20a",
+          "bytes": 27363,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:16.726Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0278.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258730.xlsx",
+          "sha256": "38eb3e66e5752af1ee62572bbe8e844b2e68dfb74afbeb4265162960407d756f",
+          "bytes": 137783,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:17.727Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0279.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258731.xlsx",
+          "sha256": "a5b6eed5121918a144c61c783b70e02ab919c7d9fe6f8dc2ff2bfae1d6cce95c",
+          "bytes": 42933,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:18.742Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0280.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258732.xlsx",
+          "sha256": "e11b1870fc0f4123dded4cd8669c4742f045a158bbe15660c787dc7a24f94487",
+          "bytes": 248616,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:19.730Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0281.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258733.xlsx",
+          "sha256": "f7aec1e58a5ec0fd49cfaaa3930a54bbf7aa3e849b096e0045cee9ce7ad49808",
+          "bytes": 26346,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:20.723Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0282.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258734.xlsx",
+          "sha256": "40a28a57ecfe6af8f12a4f5fa37e70513a15c5ab5e2a172f3201e5f80fb0fbd7",
+          "bytes": 132194,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:21.727Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0283.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258735.xlsx",
+          "sha256": "c80778c10f11f3fb43511308362ceb8fa990c8bd07380b7029bf071a8791540c",
+          "bytes": 44320,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:22.728Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0284.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258736.xlsx",
+          "sha256": "90661f4d1418ca4d0bfa43d37d06997baf088391fba2aca1b627cf42a5bb0fab",
+          "bytes": 255795,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:23.757Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0285.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258737.xlsx",
+          "sha256": "29ef3f311b4e3d7c9eef0ed03c0dab56817158e1c0d954012963d5c3bd647446",
+          "bytes": 27300,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:24.724Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0286.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258738.xlsx",
+          "sha256": "d0c3445cd5c39bf90fa3d905c3b7994ef07f7c898e1442e81c3a6e541585fed4",
+          "bytes": 137583,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:25.721Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0287.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258739.xlsx",
+          "sha256": "099cfa1bcab206b5334de39b7ea3b5a6a404afcf3bf2ef3caa2bd28e7d3853a8",
+          "bytes": 25422,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:26.742Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0288.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258740.xlsx",
+          "sha256": "777739c004c3319456bdc75f11ca0ae6d60f25b920c0cea3c8122c10a7020828",
+          "bytes": 134473,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:27.781Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0289.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258741.xlsx",
+          "sha256": "f6bc6fdefb95476c862f07168cfed1159a17e47e296a60705975ab40f3794219",
+          "bytes": 200091,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:28.757Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0290.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258742.xlsx",
+          "sha256": "13c46faa1fe2aca58ae0a9988a747caf13d73f1cdf58c8364a28ef077f74bbcb",
+          "bytes": 1343416,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:29.759Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0291.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258743.xlsx",
+          "sha256": "25e7f8841f1532bc7e4dcea26821b5d76439139055f6164335b6fcb062b3545d",
+          "bytes": 43474,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:30.743Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0292.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258748.xlsx",
+          "sha256": "711cad27e337a0e36ace53fb9c3f51b43460e23398fd2e9a6f55be35bffabdcf",
+          "bytes": 251944,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:31.766Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0293.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258749.xlsx",
+          "sha256": "ce25601206551c7732f394af118a24944b4c79e848ec7c7aba5713c1b73b7043",
+          "bytes": 37429,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:32.744Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0294.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258750.xlsx",
+          "sha256": "a8e4cb1006ee45603350c0b9a8bd609d586d4e0f36402786e8b662f4dce82cff",
+          "bytes": 236465,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:33.767Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0295.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258751.xlsx",
+          "sha256": "43d0d88c95e30e921acc9bb962d6e95c447730047eb39eeb60c40edcbc63e6ac",
+          "bytes": 31766,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:34.742Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0296.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258752.xlsx",
+          "sha256": "769e944135c28a9accf7ba7b45418c9d14ae5e38c5b8d9f538026858ef961b95",
+          "bytes": 179148,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:35.782Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0297.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258753.xlsx",
+          "sha256": "165777ea5922138b80e47f9aba8db25112f8a972259b5a54fb167da3279a8405",
+          "bytes": 28147,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:36.750Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0298.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258754.xlsx",
+          "sha256": "00fd8727043ed837f547ec1404d302cb892df2ffef37e84d0133c793140e0352",
+          "bytes": 150271,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:37.732Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0299.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258755.xlsx",
+          "sha256": "49b2803c817eaeb62f2b84d028c34217b7202a48b22de676b9c82afee7d707f9",
+          "bytes": 28131,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:38.751Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0300.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258756.xlsx",
+          "sha256": "e0916a60336a282a509a9209be7dee72d8a841fdce6addb84d0b5f7c6a2a1c7a",
+          "bytes": 150405,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:39.770Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0301.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258757.xlsx",
+          "sha256": "c5edc287a44fadb53ab622daa6ab52d855802a163ec16c89bb973bbeed14c60f",
+          "bytes": 22723,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:40.736Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0302.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258758.xlsx",
+          "sha256": "d0d91954cdfc62c084d6c617f13616bf22dc03bd93894918564586622d18b2ab",
+          "bytes": 116694,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:41.737Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0303.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258759.xlsx",
+          "sha256": "ca89661149a03660175bfd5c7cc565d26d37a6cf4dea84acd463c49a373a1711",
+          "bytes": 23053,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:42.749Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0304.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258760.xlsx",
+          "sha256": "5fc2d0de87f44625834f8fcfbfcfc0e841814459a358b22e3bdb77314ffee9b8",
+          "bytes": 117197,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:43.738Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0305.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258761.xlsx",
+          "sha256": "5c311fcecc785bbd5647c97d2760e18c0260d87df383ef6dcfe2b44621417772",
+          "bytes": 32939,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:44.733Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0306.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258762.xlsx",
+          "sha256": "1c054b574748953bacb637bb8fd10f58e68787acf1b5ebb5b75efd7cd561a94a",
+          "bytes": 176938,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:45.783Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0307.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258763.xlsx",
+          "sha256": "48a50e9a38f1cec33e22083ac1d56dd2b0b39c30d801464c91275ce746e86c94",
+          "bytes": 29493,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:46.758Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0308.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258764.xlsx",
+          "sha256": "419d01bd5dcb0c02f55d6054e5623982ee8249f4609416e342c50d3d9713f8de",
+          "bytes": 151049,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:47.737Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0309.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258765.xlsx",
+          "sha256": "96ad90f598e4539b2e860ef07729764ffbc26e9bf9e1f7f3461eb225095b4e45",
+          "bytes": 43859,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:48.755Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0310.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258766.xlsx",
+          "sha256": "de2f20be83ca00836f7105494290644d6674df4d67d502cd9b9890f29e09383b",
+          "bytes": 254871,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:49.787Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0311.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258768.xlsx",
+          "sha256": "78be657b9b118226e7b67c56ffdaf7f67d857352d90573360ebb07d833d1a52b",
+          "bytes": 27223,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:50.754Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0312.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258772.xlsx",
+          "sha256": "cba735ce97fdf72fef3da2d087b4e61592db48be9e8f91b713357050524bd615",
+          "bytes": 137202,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:51.779Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0313.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258783.xlsx",
+          "sha256": "1e50c7855333739cd390682cf78b677fdb0d54f98586063bfd141d20809f17d0",
+          "bytes": 36290,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:52.754Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0314.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258784.xlsx",
+          "sha256": "6a5642d1c899ec4862017e1bbe5038845c5f5e383af5bfc9556c99037b759ffe",
+          "bytes": 201843,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:53.777Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0315.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258785.xlsx",
+          "sha256": "ffe232a63c93bf778a3ab932aa172ded9d41488c27d22fd833f4df4ea6af3123",
+          "bytes": 35842,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:54.737Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0316.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258788.xlsx",
+          "sha256": "a8fc238b8cb7b3094afeb84d07094bd2e55ec7254b2ffe10b92509a7b426282d",
+          "bytes": 198257,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:55.739Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0317.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258793.xlsx",
+          "sha256": "d6113ff580b0d668b347892aecfe6edde1882b9dff0060cffd7230b8f8a2ba26",
+          "bytes": 27668,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:56.764Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0318.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258794.xlsx",
+          "sha256": "fb7bd3fc5529985c14fb23ffc53ce141cbbdf7f0a0821909676025e60c30e280",
+          "bytes": 139945,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:57.774Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0319.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258795.xlsx",
+          "sha256": "aebedd4e1a9d857906ad0dab5e7ee5fb25a2a8e5ca585f66573e863c2b1a59f9",
+          "bytes": 30907,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:58.748Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0320.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258796.xlsx",
+          "sha256": "ea91581617bbab50b9e3ac697d1dbd5ab278f72d9435c92bbe78baeb7a1d9be7",
+          "bytes": 165789,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:04:59.770Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0321.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258797.xlsx",
+          "sha256": "283417640855f439a273488449b24ae8253c7423bce846a27b2786b1a935726d",
+          "bytes": 33452,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:00.753Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0322.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258798.xlsx",
+          "sha256": "2c8082914231dcd021ad2d7aad9274f68dd3f628d9ba7885734502addc2c0c0c",
+          "bytes": 180668,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:01.743Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0323.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258799.xlsx",
+          "sha256": "16171e615dbdfc4ec41cb420861a50fede57676ad1d4e72766c0f8bfa5704ab2",
+          "bytes": 19156,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:02.741Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0324.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258801.xlsx",
+          "sha256": "5020b29c8b4fbd766068a91dcb58520c1adc52b353d025d13865642d1fd5ad85",
+          "bytes": 82638,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:03.752Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0325.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258862.xlsx",
+          "sha256": "c0fb825effc7eb5ad8a15312e15b3557cf9cca155b2443b8c90b5363d5df6918",
+          "bytes": 23944,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:04.741Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0326.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258863.xlsx",
+          "sha256": "d25534e34bf68dd78b12593c9d9cb440477a1752e2df95ecc87975fab04000c9",
+          "bytes": 104980,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:05.738Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0327.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258864.xlsx",
+          "sha256": "80b60f64d52689938074d5f18b87418e59c97fda32d6cb7375fd30994b72440f",
+          "bytes": 23521,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:06.767Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0328.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258865.xlsx",
+          "sha256": "0ee9dd0ac490e2e9ddf28e7c22bfcacc8986898c14b1fb4055929243e9be2211",
+          "bytes": 103187,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:07.770Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0329.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258866.xlsx",
+          "sha256": "c12ca3fc8081c5fe653c6abec736bbef738dd601de35631656fd2f1b6d207ce9",
+          "bytes": 23787,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:08.758Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0330.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258867.xlsx",
+          "sha256": "68a23f19396d60edaeeb551c57bc22afa0c2b78780643213cdb9059947380648",
+          "bytes": 104580,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:09.743Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0331.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258868.xlsx",
+          "sha256": "94531421f0c65da32bce5666c845b58ca620b61c95cabd29924087abb6897a39",
+          "bytes": 23136,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:10.756Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0332.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258869.xlsx",
+          "sha256": "141e8d4cf374de63f7053f0037be2861079ba2adf72de752abd2a52b8fb31f40",
+          "bytes": 101461,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:11.777Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0333.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258870.xlsx",
+          "sha256": "a2b9146363d13eb53d4d9a50418866a5f1b3a5ee4dd24d76a55ffd8674521c3f",
+          "bytes": 23298,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:12.764Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0334.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258871.xlsx",
+          "sha256": "6c0995cb1db030f4927692d34df0c64519564ea2be157953edbca7100217e0c0",
+          "bytes": 102323,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:13.775Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0335.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258872.xlsx",
+          "sha256": "2ecf34884e9c05d4f9110a6e64292ea5b529bab435b0966ec91051fe53a92ceb",
+          "bytes": 22781,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:14.759Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0336.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258873.xlsx",
+          "sha256": "1feab0c85bc5b2a9a1300c85a88130c603a4f7e8f89e1feb43a73af998fc9568",
+          "bytes": 99578,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:15.754Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0337.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258874.xlsx",
+          "sha256": "4cfd80c09ae4ecb88d81a043bcf7c405ae6093364a5b5412b2d2abd6bbc3c4ab",
+          "bytes": 23320,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:16.760Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0338.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258875.xlsx",
+          "sha256": "8cd9a831ff3ee17018d7d2694856d190209114003f8050af8d7017223c743237",
+          "bytes": 102959,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:17.743Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0339.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258876.xlsx",
+          "sha256": "68490f57e2cb087f58d41384b8000eaabf853bc653d7ca59c8b117ead94bc8ad",
+          "bytes": 23811,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:18.931Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0340.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258877.xlsx",
+          "sha256": "74b2be9755fd3ace8d02ed54b0b9f140eba881c4aa52c2ebe898e09d6d833121",
+          "bytes": 104630,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:19.748Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0341.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258879.xlsx",
+          "sha256": "277058930cd8ff87183b9abb9b88d1e41af1279213eb755d6e1e451b3ce672e9",
+          "bytes": 23723,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:20.747Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0342.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258880.xlsx",
+          "sha256": "fc931d6089c307c6127e4a944faed843e5d1c0512b8ea8854fea7c6f709e8252",
+          "bytes": 104429,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:21.768Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0343.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258881.xlsx",
+          "sha256": "9d3b41db2cdc4a798129b40655dc4b6994a6bf925425b49bf60b99611d96480b",
+          "bytes": 23770,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:22.743Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0344.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258882.xlsx",
+          "sha256": "54c9df6987742e2e1c4f69df83533a9f1102e57d9bf382459d1db1d2c1c164e8",
+          "bytes": 104483,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:23.743Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0345.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258883.xlsx",
+          "sha256": "e0d0a9a79eb17cd84856e4ff2a40d10d5fe1fbb741327aaf7e38687e42edb717",
+          "bytes": 23701,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:24.744Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0346.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258884.xlsx",
+          "sha256": "e3649ce700bbfc450ef07c3dc21b334cc7cca0881a00273f3b153eb9e0a34292",
+          "bytes": 104387,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:25.745Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0347.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258885.xlsx",
+          "sha256": "b00d017915941f2cb9145f369efa628b2be4c0523607bc35d4900625e9379fc5",
+          "bytes": 23730,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:26.747Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0348.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258886.xlsx",
+          "sha256": "2c8a9d32abd556aec93cd46a4152737a885216ac986695ff30e691d71cf2438a",
+          "bytes": 104376,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:27.773Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0349.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258887.xlsx",
+          "sha256": "54ea817486e0494f1cf03207d9411ee06d393076e70ac38ae006b2831cd3fd1a",
+          "bytes": 29350,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:28.748Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0350.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258889.xlsx",
+          "sha256": "50bdd708d51f11d7b80106c1c37ac78aacf981504b153b667e529e4c9cd551ea",
+          "bytes": 143215,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:29.788Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0351.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258890.xlsx",
+          "sha256": "797e3948af2c69bbe3444f42d639cb4114a974e63b029ebfa1d01bc195c4cd44",
+          "bytes": 29718,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:30.753Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0352.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258891.xlsx",
+          "sha256": "7ccfca886c48b81fc501dbf11d1b501188c4b4f810acea29843abe389c752dd3",
+          "bytes": 146300,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:31.787Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0353.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258892.xlsx",
+          "sha256": "f207a47109929b30cb84d88453404c112bbca1559a0c0c2d9f79a53eb4b2062b",
+          "bytes": 23698,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:32.749Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0354.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258893.xlsx",
+          "sha256": "6640f7f964c9e6d3d83b2e714c3063ebe66c80d6f13c3a64a3f0d8a6f3b236bb",
+          "bytes": 104162,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:33.777Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0355.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258894.xlsx",
+          "sha256": "7764ab601b93c0dce4df6673e5ac87f2ded8b600e8f79a47173bd7ea0f844878",
+          "bytes": 30050,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:34.779Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0356.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258895.xlsx",
+          "sha256": "43eb7a970b55fcfdbc7c32697a978c139e2f011284a1af977f9bab770c31098f",
+          "bytes": 147785,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:35.751Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0357.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258896.xlsx",
+          "sha256": "a3082d10b9bab3584f5bf2a871f6cb5c746656e1f1c0c5001e5ac0c95f9489e0",
+          "bytes": 23607,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:36.748Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0358.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258897.xlsx",
+          "sha256": "fabb38f7b045bcf979c3a64171816813f48c42bdc7328bc32709610fd58237fe",
+          "bytes": 103799,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:37.752Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0359.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258899.xlsx",
+          "sha256": "5b62cb4a536ac1467f84e90b610208117ba83cdc085582331a0224bde04e440d",
+          "bytes": 30223,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:38.765Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0360.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258900.xlsx",
+          "sha256": "f8c0bec1fb65891d7adb7e492af4e34d170a7cc217e10b49fbb292a2f9b33eba",
+          "bytes": 148357,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:39.787Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0361.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258901.xlsx",
+          "sha256": "921e0f36ed5479fc272d37a0415c0548b8932f68a170958ef070b6f28bb96862",
+          "bytes": 35275,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:40.768Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0362.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258902.xlsx",
+          "sha256": "2e7c08cb196459c271c5430bd3d82c4b5327d12195f95abc47003966ac7d0049",
+          "bytes": 186074,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:41.786Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0363.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258903.xlsx",
+          "sha256": "383aab359bf8b184ba285fc79fac7bd5418c18ddadbe0f0ab17ec739bb488741",
+          "bytes": 23689,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:42.753Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0364.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258904.xlsx",
+          "sha256": "236a842fe473aaadac731ff99e583e83b7af91af9ecc09df09ed7ef3a02d49b6",
+          "bytes": 104179,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:43.779Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0365.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258905.xlsx",
+          "sha256": "704aa34afa19659881d7587ed0e1d7773334333ca27bd671918c684ef57f344c",
+          "bytes": 41294,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:44.778Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0366.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258906.xlsx",
+          "sha256": "66f46602a53b9b1dc805dbf4bad56bba8ca3383a547671070a81bd3d8964f50a",
+          "bytes": 224566,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:45.753Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0367.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258908.xlsx",
+          "sha256": "4ac98ab5022c7c62d6864096619ff7297fd51a8610a9115316e49f59f5b3fbe8",
+          "bytes": 23656,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:46.753Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0368.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001258909.xlsx",
+          "sha256": "ca7d1055c7349e840f1a201170c74efcdf6b4427da1ef712a24745b9e5542900",
+          "bytes": 103934,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:47.754Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0369.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260105.xlsx",
+          "sha256": "cda538c48f3d0c6e8567aa1b897ef3286442ee1146d77653abaf45aaf8c0d71c",
+          "bytes": 99840,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:48.759Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0370.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260106.xlsx",
+          "sha256": "788dc13798776bd951d1bf5beebc1fd4c598908fc48731a89c2a01a98face6e7",
+          "bytes": 222756,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:49.795Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0371.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260107.xlsx",
+          "sha256": "eecb1ef967a56c422d9ef533f8e28b416ac94d643a20c582eb0c3025cd3f1778",
+          "bytes": 151914,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:50.792Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0372.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260108.xlsx",
+          "sha256": "31046e49c2efe192c0716ecd96b5d93aaee728369f03fd84c3dcbd20c860f191",
+          "bytes": 175861,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:51.755Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0373.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260109.xlsx",
+          "sha256": "63194ad415445aa46685833e8b0edb5334d9b6a99b2f9906cf6eeb9a46a0a638",
+          "bytes": 83146,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:52.775Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0374.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260110.xlsx",
+          "sha256": "d58a2fbd8fef4a57ee93fc0f12f8910e8a75e38b51320f9245e40dc277ff075f",
+          "bytes": 815931,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:53.761Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0375.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260112.xlsx",
+          "sha256": "bbc928bca4c4a51489324eba2dc8493c5c135f9836e0a7d59d1f844b16c9d5a2",
+          "bytes": 24146,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:54.782Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0376.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260113.xlsx",
+          "sha256": "86e0201762596a272fc83663e7804f654bbb60431c74e2ebe7b299c692950e4f",
+          "bytes": 26211,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:55.771Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0377.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260114.xlsx",
+          "sha256": "8984c7154a6572b0470dba3ac2fbe8e63554a5f45b9a420b3cd327a927d4fef6",
+          "bytes": 19264,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:56.763Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0378.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260115.xlsx",
+          "sha256": "8e397f55015dbb8351e040ecac1aa906011a44f43f400f7fdce3ea782176d724",
+          "bytes": 80636,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:57.777Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0379.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260940.xlsx",
+          "sha256": "199505e1c97c48d961f2c62f3ce4993237f7dcb342fb25b774827d0d6f569e51",
+          "bytes": 28490,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:58.770Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0380.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260941.xlsx",
+          "sha256": "4392f91e4933a9d5752dfe9f88b0efe24ff3e173fd2ca6006eef4c3938468783",
+          "bytes": 158161,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:05:59.795Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0381.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260942.xlsx",
+          "sha256": "5704a6f8c94c7292a57f5900fe658e037208163652dc2460580691534c3d798e",
+          "bytes": 45713,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:06:00.758Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0382.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260943.xlsx",
+          "sha256": "481ce2eb3cd611d6265b0673c33c39fc4663a9e1cd742956fbdfaa5cc308a88e",
+          "bytes": 268323,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:06:01.800Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0383.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260944.xlsx",
+          "sha256": "6371c0ba5510b069e3487de1afe0ca080f261d16978800af09d65efdc32b14cb",
+          "bytes": 40178,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:06:02.757Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0384.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260945.xlsx",
+          "sha256": "16f8aff1438b0e1b5c09c7f1199a263ace436a73bffc6f51d6a5e49c781edcd0",
+          "bytes": 244425,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:06:03.765Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0385.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260946.xlsx",
+          "sha256": "ca4bfaf3fe9fd4b9a231c7c8ac14904b2112b3d647eef1d9ef011f39aca6f56c",
+          "bytes": 35625,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:06:04.760Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0386.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260948.xlsx",
+          "sha256": "99ca8b75a47c47e6d7ce56cc817d8887cf4271202606b47a0717b6108626c119",
+          "bytes": 201212,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:06:05.817Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0387.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260949.xlsx",
+          "sha256": "e1b34595d7fbc5b65cdc7fd02ba56bd841fc919e4b17ae40c57276322d79b567",
+          "bytes": 31799,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:06:06.772Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0388.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260950.xlsx",
+          "sha256": "bf32942c1740115bb4a73fd051744899926d180b64e9f846c8c7eeb23530d3e7",
+          "bytes": 169628,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:06:07.799Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0389.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260951.xlsx",
+          "sha256": "af056b06e97781ab771bb3c30896bf4b03a10b2f97c7afae4d863026435bd312",
+          "bytes": 31734,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:06:08.775Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0390.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260952.xlsx",
+          "sha256": "a900796c3f98e55c7ebf65e78cb29a075c74757b7db738e104de56571409698e",
+          "bytes": 170547,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:06:09.767Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0391.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260953.xlsx",
+          "sha256": "38fbc83922a9ebe50b206613c9a222bbcd558fd0d18e06aea9af4d7c77ef2fd5",
+          "bytes": 25195,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:06:10.782Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0392.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260954.xlsx",
+          "sha256": "5887f79f02782fed0377e3004a85de79a5dd00c60779c54891ffedbfb17f8dc3",
+          "bytes": 124945,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:06:11.763Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0393.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260956.xlsx",
+          "sha256": "cc62aba5e6b19172ff49bf63571b0da50cd33d0a17987efb6df4c49370c9b0fb",
+          "bytes": 24834,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:06:12.766Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0394.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260957.xlsx",
+          "sha256": "342327a1f8960f65c4b3836ff122e3693ae6c94b11b76759a02d2e957ff53c1a",
+          "bytes": 125852,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:06:13.788Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0395.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260958.xlsx",
+          "sha256": "722820fb95f7560ea2c9c2c676108c9f5614dc91da1778d8e721046f26aea607",
+          "bytes": 34047,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:06:14.781Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0396.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260959.xlsx",
+          "sha256": "b1d6d9db271cf676eb6fc52d6ed5609bcdb843b00a9dcbb8b59d0e650c274bb4",
+          "bytes": 182678,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:06:15.764Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0397.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260960.xlsx",
+          "sha256": "265a0c469f23e9a79af3c2a0d216a0b3dc1e5296b3bf83747c460c945f0b0ad3",
+          "bytes": 36512,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:06:16.769Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0398.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260961.xlsx",
+          "sha256": "dcbdaeb79871ed526c8f17d0b48d0ecfd3ccfb4d8a0d7c811b61ba46c7f3e2c1",
+          "bytes": 202067,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:06:17.769Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0399.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260962.xlsx",
+          "sha256": "0772213d9b638e5edf656ef72da16dcd32eb544bcfdc474ababb626859d831ff",
+          "bytes": 21395,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:06:18.764Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0400.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260963.xlsx",
+          "sha256": "4faa054a359e3e915425a3f75d4abd7e8e0be3a4d5971f048cbcf063fa63151e",
+          "bytes": 96256,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:06:19.764Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0401.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260964.xlsx",
+          "sha256": "d421295feab93f8f4e930e52b3c5421822787663737958aa95ad70b99d045916",
+          "bytes": 86214,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:06:20.789Z"
+        },
+        {
+          "key": "open-data/raw/ndb-open-data/9th/0402.xlsx",
+          "url": "https://www.mhlw.go.jp/content/12400000/001260965.xlsx",
+          "sha256": "3577fb08ce1ba772f5bed4c101f535e3b30ccc7444788067330eaa23545c2688",
+          "bytes": 511851,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T05:06:21.772Z"
+        }
+      ],
+      "manifestKey": "open-data/raw/ndb-open-data/9th/manifest.json",
+      "manifestSha256": "755651eba5ede6fd12d4426fd42b13bfec4fe29061d6d430bc1de26efd6fde4b",
+      "bytes": 87836420,
+      "status": "archived"
+    }
+  ]
+}
