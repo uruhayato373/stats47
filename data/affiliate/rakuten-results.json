@@ -18,17 +18,17 @@
       "amountYen": 0,
       "estimatedYen": 0,
       "confirmedYen": 0,
-      "observedAt": "2026-11-08T00:14:11.086Z",
+      "observedAt": "2026-11-14T04:44:42.708Z",
       "source": "collector:rakuten-affiliate-api"
     },
     {
       "month": "2026-11",
-      "clicks": 3,
+      "clicks": 10,
       "orders": 0,
       "amountYen": 0,
       "estimatedYen": 0,
       "confirmedYen": 0,
-      "observedAt": "2026-11-08T00:14:11.086Z",
+      "observedAt": "2026-11-14T04:44:42.708Z",
       "source": "collector:rakuten-affiliate-api"
     }
   ]
