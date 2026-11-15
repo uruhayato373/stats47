@@ -236,7 +236,8 @@ updated: 2026-11-01
 - **済み (2026-11-14・`99bd3ce5b` ブランチ `claude/open-data-archive`)**: 段 1 の基盤 (台帳 `open-data.fetch-recipes`・`open-data.snapshots`・`open-data.expansion`、取得の型 5 種の `.claude/scripts/open-data/fetch-source.mjs`、正規化 `normalize-source.mjs`、非公開 R2 の 2 区分、workflow `open-data-source-archive.yml`)。厚労省の病院 CSV で 47 県・1,428 市区町村の合計 7,715 施設の一致を実測。
 - **済み (2026-11-14・段 2)**: 136 件すべてに recipe があり、`--all --dry-run` で 33 件・約 4.3GB が取得可能 (失敗 0、商用可 23・不明 10)。skip 103 件の内訳は対象外 (タイル・巨大) 25、自治体標準オープンデータセットの定義書 20 (本体は自治体ごとに分散)、国交 DPF 34、その他 API・閲覧のみ 24。
 - **済み (2026-11-15・段 3〜4)**: 本番反映 (PR #1274) の後、`open-data-source-archive.yml` を提供元・データセット単位で 1 本ずつ起動し、31 件・1,231 ファイル・4,287MB を非公開 R2 の `open-data/raw/` へ保存した。全 run で SHA の読み戻し照合が成功し、記録は `data/open-data/snapshots/` (31 ファイル) にある。取得しなかったのは 2 件: J-FLEC (`jflec-financial-literacy-survey-prefecture`) は GitHub Actions からの取得に 403 を返す (Mac からは届く)。大阪市 (`osaka-odpo-catalog`) はオーナー判断 (2026-11-15) で外した。この判断で横浜市・東京都・大阪市の recipe を `skip` にした (横浜市・東京都の原本は判断の前に保存済み)。`target=all` の apply は 1 件でも届かないと upload 計画を作らないので、起動は提供元単位で行う。r2-write の待機枠は 1 本だけなので、ほかの r2-write の run が無いときだけ起動する。
-- **残り**: (段 2 の続き) 国交 DPF の 34 件は GraphQL API で鍵 `MLIT_API_KEY` が要る。取得の型に `graphql` を足すか、ファイル URL を解決して http-file にするかを決め、オーナーが GitHub secret に鍵を登録する。法人番号・大学ポートレート・CiNii など鍵の要る API も同じく secret の登録待ち。J-FLEC は CI から 403 なので、Mac から取るか `skip` (no-machine-access) にするかを決める。(段 5) 商用可かつ県・市区町村粒度の 40 件の正規化宣言。自治体単独のデータセットは対象にしない。(段 6) 正規化表から `expansion.json` へ展開候補を planned / rejected で記録。(段 7) 県ランキング 5 本の試行。
+- **済み (2026-11-15・段 5 の宣言)**: 12 件の正規化の宣言を `recipes.json` に書いた (Codex)。対象は医療施設 5 件・新型コロナ・熱中症・全国学力調査 2 件・交通事故・NDB・道路交通センサス。正規化は Excel・複数シート・複数行見出し・ファイル名からの地域・行の採否・fill-down・地域コードの対応表に対応した (`.claude/scripts/open-data/lib/normalize.mjs`)。原本は元の URL から SHA を照合して手元へ戻せる (`restore-source.mjs`)。手元で 12 件すべてが normalized になり、県と市区町村を両方持つ表は保存則を通った。交通事故は原本 287,023 行と県計が一致した。workflow に `mode=normalize` を足した (非公開 R2 の原本から正規化して `open-data/normalized/` へ上げる)。
+- **残り**: (段 2 の続き) 国交 DPF の 34 件は GraphQL API で鍵 `MLIT_API_KEY` が要る。取得の型に `graphql` を足すか、ファイル URL を解決して http-file にするかを決め、オーナーが GitHub secret に鍵を登録する。法人番号・大学ポートレート・CiNii など鍵の要る API も同じく secret の登録待ち。J-FLEC は CI から 403 なので、Mac から取るか `skip` (no-machine-access) にするかを決める。(段 5 の続き) `mode=normalize` は main のコードで動くので、次の本番反映の後に `gh workflow run open-data-source-archive.yml --ref main -f mode=normalize -f target=dataset:<id> -f dry_run=false` を 12 件それぞれ起動し、正規化表を非公開 R2 へ上げる (r2-write の待機枠は 1 本だけなので、ほかの r2-write の run が無いときに 1 本ずつ)。農業集落カード (1.1GB) は正規化の上限 256MB を超えるので見送った。ほかの商用可の残りは、地点・メッシュ・面だけで県・市区町村の粒度が無い。自治体単独のデータセットは対象にしない。(段 6) 正規化表から `expansion.json` へ展開候補を planned / rejected で記録。(段 7) 県ランキング 5 本の試行。
 - **停止条件**: main への反映はオーナーの指示があるまで行わない。新しい recipe の実取得は、1 件 5GB 超か合計 6GB 超ならオーナーに確認する。API 鍵の secret 登録はオーナーが行う。
 - **完了条件**: 取得できる全 recipe の原本が非公開 R2 にあり、`snapshots/` の SHA と読み戻しが一致する。展開の試行 5 本が本番で 200。
 - **計画**: `/Users/minamidaisuke/.claude/plans/virtual-gathering-hopper.md`
@@ -964,7 +965,7 @@ updated: 2026-11-01
   1. **再認証**: `auth_required` で止まっている取得元 (2026-W42 時点で gsc・kdp、10-19 にもしも) を `node .claude/scripts/measurement/refresh-session.mjs <source> --headed` で入れ直す。検証は `npm run measurement:status -- --check` と次の `data/measurement-cycle/latest.json` の kdp・gsc の freshness が pass であること。
   2. **パスワード経路の実証**: A8・もしも・楽天のパスワードでの自動ログインは未実証。セッション切れ時に `refresh-session.mjs <source> --headed` で確かめる。KDP は本棚が有効でも Reports 認証で止まることがあり、`latest.json` の `relogin` が `human_required` / `login_failed` なら人の再認証か Mac 側収集を検討する。
 - **完了条件**: Mac と Windows の両方で `/ops/auth` の「この PC」が全行「済」、CI 欄が「済」か「保管」。その後の authenticated-measurement で note・KDP の状態ファイルの `relogin` が `session_valid` か `relogged` になる (CI での再ログインは未実証)。
-- **追補 (2026-11-14・セッションの事前確認の初回の結果)**: Google の専用プロファイルに認証 cookie (SID / __Secure-1PSID) が無く「切れている」と出た (11-08 の GSC の取得は成功しているので、ログアウトかプロファイルの構造の違いかを次の週次の取得の前に確かめる)。`note.autologin-failed` の失敗印が残っている (11-08 の note の取得は成功しているので、古い印ならオーナーが消す)。楽天は SSO の認証 cookie を実機で確かめるまで期限を判定できない。日次の確認は launchd の登録がまだで、登録はオーナーが `cp scripts/scheduled/com.stats47.session-preflight.plist ~/Library/LaunchAgents/` と `launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.stats47.session-preflight.plist` を打つ。
+- **追補 (2026-11-14・セッションの事前確認の初回の結果)**: Google の専用プロファイルに認証 cookie (SID / __Secure-1PSID) が無く「切れている」と出た (11-08 の GSC の取得は成功しているので、ログアウトかプロファイルの構造の違いかを次の週次の取得の前に確かめる)。`note.autologin-failed` の失敗印が残っている (訂正 2026-11-15: これは古い印ではない。11-08 に成功したのは閲覧数だけで、売上は 10-22 17:31 のパスワード再確認の失敗から止まっている。`data/authenticated/revenue-history.json` の note 行は 09-30 と 10-17 の 2 件だけで、11-07・11-08・11-14 の取得は `revenueStatus: "verification_required"`。印がある間は `refresh-session.mjs` が再確認を飛ばすので、売上 API が答えない。オーナーの手順: ① `.local/authenticated-measurement/note-login-login_failed.png` で止まった画面を確かめる ② `.local/authenticated-measurement/note.autologin-failed` を消す ③ `node .claude/scripts/measurement/refresh-session.mjs note --wait-human` でパスワードを入れ直す。画面の文言が変わっていたら同スクリプトのセレクタを直す。止まっているのは認証付き計測の売上 API の経路だけで、note ダッシュボードの記事別の売上列 (`data/note/dashboard/latest.json` の `salesJpy`) は別経路で取れている (2026-09-11 取得の全期間の記録が 3 記事 ¥900 を出しているので列は機能しており、10-11〜11-07 と 10-17〜11-13 の 28 日の記録はどちらも合計 ¥0)。記事別の販売の判定はダッシュボードの記録で読める。週次収益 (NSM) の note 分はこの経路が戻るまで判定不能のまま)。楽天は SSO の認証 cookie を実機で確かめるまで期限を判定できない。日次の確認は launchd の登録がまだで、登録はオーナーが `cp scripts/scheduled/com.stats47.session-preflight.plist ~/Library/LaunchAgents/` と `launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.stats47.session-preflight.plist` を打つ。
 
 ### [NAV-CLICK-COVERAGE-01] サイト内リンクのクリックを既定で全件計測し、名前の無い導線を週次で減らす
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-25] [期日:2026-10-23] [領域:管理]
@@ -1283,6 +1284,8 @@ updated: 2026-11-01
 - **影響**: GSC の除外理由の内訳はその時点の書き出しなので、W46 の土曜の分は後から取り直せない。サイト内リンク監査は 132 ページを走査した時点の結果しか無い。
 - **次**: ① 上の検証 ② 取得の失敗時に例外の本体 (末尾の行でなく最初の行) を `message` に残す ③ 専用 clone の Node の版を対話のシェルと揃えるか、require の経路を直す。
 - **完了条件**: `npm run weekly:collect` で GSC の取得元が pass になり、internal-links が例外なしで走り切る。
+- **済み (2026-11-15・develop)**: 次の ② は済み (`collect-local.mjs` が bootstrap・collect の失敗時に stderr の末尾 20 行を `message` に残す。次に GSC が落ちれば例外の本体が `measurement-collect-local.log` で読める)。③ のうち `prefectures.cjs` は `config/datasets.mjs` を require せず、カタログの行の文字列から置き場を読む形に直した。ただし手元の Node は v22.23.3 で、v20.19.0 での元のエラーは再現できていない (require(esm) を無効にした起動で代わりに確かめた)。専用 clone の v20.19.0 は `package.json` の engines (>=22) を満たしていない。
+- **残り**: ① 2026-11-21 の `weekly:collect` で internal-links が走り切るかを読む ② GSC が再び落ちたら、記録された例外の本体から原因を決める ③ `.claude/scripts/lib` には `datasets.mjs` を require する cjs がほかに 4 本ある (`sns-posts-store.cjs`・`sns-metrics-store.cjs`・`x-catalog.cjs`・`strategy-lanes.cjs`)。同じ例外になるかは [仮説] で、専用 clone の Node を v22 に上げれば不要になる。先に Node の版を揃えるかをオーナーが決める。
 
 ### [REVIEW-CADENCE-HANDOFF-PARSE-01] 週次レビューの申し送りの検査が、行き先の括弧の中の「、」で文を切る
 タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/management/__tests__/] [起票:2026-11-14] [領域:管理]
@@ -1311,6 +1314,7 @@ updated: 2026-11-01
 - **観測 (2026-11-14)**: `data/adsense/LATEST.md` の確定 7 日の節に開始日・終了日が無く、週次 snapshot (`data/nsm/weekly-snapshots/`) の `ranges.adsense` も null。週次レビューが AdSense の金額をどの 7 日のものか示せない。
 - **次**: 取得スクリプトが使った期間を LATEST.md と snapshot の `ranges.adsense` に書く。
 - **完了条件**: 次の週次 snapshot で `ranges.adsense` に開始日と終了日が入っている。
+- **済み (2026-11-15・develop)**: `computeWeekRanges` (`.claude/scripts/lib/metrics-reader.mjs`) が `adsense` の期間を返し、`update-history-csv.mjs` が LATEST.md に期間の行を書く。記録は作り直していないので、次の週次 snapshot (2026-11-21) で完了条件を読んでこのカードを消す。
 
 ### [BLOG-PUBLIC-REVIEW-MD-CLEANUP-01] 公開 R2 に残る過去記事の review.md (審査結果) を消す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-29] [領域:サイト]
@@ -2162,6 +2166,7 @@ updated: 2026-11-01
 - **完了条件**: geo の 3 件の warning が消えるか、残す理由が台帳に書いてある。Worker 全体の Total Upload の実測値と上限の比較が、このカードに書いてある。
 - **追補 (2026-11-14)**: `.claude/scripts/page-quality/__tests__/ui-findings.test.mjs` は `node --test` だけでは `lib/ui-report` を解決できずに落ち、`node --import tsx --test` なら通る。どの入口で回す前提かをファイルの冒頭に書くか、tsx 無しで動く import に直す。`push-r2-wrangler.ts` には diff-push-r2 の止め (一覧失敗・正本の上書き・読み戻し) が無いのに、`.claude/scripts/blog/` の 4 スクリプト (backfill-source・resolve-scatter-axes・rerender-ranking-columns・restore-findings-from-svg) と `push-article-md-r2.ts` の冒頭がローカルからの反映の経路として案内している。案内を workflow に直すか、同じ止めを通す。
 - **追補 (2026-11-14)**: `apps/web` の `ranking-header-density-contract.test.ts` は `process.cwd()` に頼っていて、リポジトリのルートから vitest を走らせると ENOENT で落ちる (apps/web からなら 5 件通る)。
+- **追補 (2026-11-15)**: Codex のセッション (`OPENDATA-ARCHIVE-01`) は `agent:session` に cwd を本体 (`/Users/minamidaisuke/stats47`) として登録していたが、実際の編集は別 worktree `/Users/minamidaisuke/stats47-opendata` で行っていた。このため本体で登録する別セッションに毎回「重複の可能性」の警告が出て、実際に重なる場所は検知されない。登録時に `git rev-parse --show-toplevel` の値を cwd に使っているか (`.claude/hooks/session-guard.js`) を確かめる。
 
 ### [NOTE-BODY-RECOVERY-01] 本文が note.com にしか無い 73 本を R2 へ回収する
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run note:article -- status] [起票:2026-10-13] [領域:商品]
@@ -2626,6 +2631,8 @@ updated: 2026-11-01
 - **残り**:
   ① KDP の再ログイン (10-31 の取得は `auth_required`)。そのあと CI の KDP 月次取得で台帳に行が自動で増えることを確かめる。
   ② 既読ページ (2026-10-27 オーナー決定): 2026-08〜10 の分を KDP の月次レポートから一度だけ埋め、以降は自動記録に乗せる。`data/business/pilot-board.json` の KDP の「既読ページ」指標 (今は `unrecorded`) を台帳から読む形に変える (`KDP-EXPANSION-01` の pilot 判定がこれで判定不能になっている)。
+  ③ 月次の対象月が進まない (2026-11-15 観測): 11-08 と 11-14 の取得はどちらも `monthlyPeriod: "2026-09"` で、保管庫キー `kdp/monthly/month-8`・sha256 も同じだった (`data/authenticated/latest.json` の `sources[kdp].quality.salesLedger`)。10 月の月次が KDP 側にまだ無いのか、`.claude/scripts/measurement/kdp-monthly-reports.mjs` が古い月を選んでいるのかは確かめていない。次の土曜の取得の後に `monthlyPeriod` を読み、2026-10 になっていなければ月の選び方をコードで確かめる。
+  ④ conflict の原因は直した (2026-11-15・develop): 11-08 と 11-14 の取得が `action_required` になったのは、2026-09 の範囲 (22 冊) に 11-04 発売の `K-S1-13` が混ざって書籍の集合が食い違ったため。`kdp-monthly-reports.mjs` が期間末より後に発売した本を範囲から外すようにし、実台帳の 8 月・9 月の範囲 (各 22 冊) と一致することを確かめた。2026-11-21 の取得で `salesLedger` が conflict でなくなることを読む。`packages/product-factory/src/sales/cli.ts` の `recordKdpCoverage` (古いレポートの補完) は同じ絞り込みを持たないので、補完を使うときは新刊が過去の月に入らないかを確かめる。
 - **停止条件**: 生のレポート (全アカウントの行を含む) と個人情報を公開リポジトリに置かない。stats47 の ASIN 以外の行を台帳に入れない (`kdp-reports.mjs` の `kdpAsinMap` と同じ照合を使う)。
 - **完了条件**: マージ後の CI の KDP 月次取得のあとに、明細のある本の行が台帳へ自動で増え (明細の無い本は行を作らない)、`products:sales -- validate` が PASS し、週次の KPI ツリーで `paid-purchases` の KDP 分が判定不能でなくなる。
 

@@ -598,7 +598,8 @@
       "closed_at": null,
       "actions": [
         "2026-11-04 note 有料記事 (¥980) 公開 https://note.com/stats47/n/n5d86476e9c73",
-        "2026-11-04 市区町村ランキング (manufacturing-shipment-amount) に商品ページへの案内を設置 (e08614740f, PR #1219)"
+        "2026-11-04 市区町村ランキング (manufacturing-shipment-amount) に商品ページへの案内を設置 (e08614740f, PR #1219)",
+        "2026-11-10 価格実験 PRICE-MUNI-INDUSTRY-2026-11 (data/products/price-history.json) が価格を ¥980 から ¥1,980 に上げ、業種別の表・無料部分・題名を同時に変えた。6 週の窓 (11-04〜12-16) のうち ¥980 で売っていたのは 11-04〜11-09 の 6 日だけで、その間は閲覧 10・売上 ¥0。12-16 の判定は ¥1,980 の版の実測として読み、¥980 の仮説の検証とは書かない"
       ],
       "pending_user_actions": [],
       "next_check_date": "2026-12-16",
@@ -953,7 +954,9 @@
       "result": null,
       "learnings": null,
       "closed_at": null,
-      "actions": [],
+      "actions": [
+        "2026-11-15 群の外の記事 assembly-answer-chatgpt-5steps にも P-04 の案内 (blog_product) を足した (develop。本番反映日は反映時に追記する)。集計 (.claude/scripts/metrics/lib/journey-ga4-reports.mjs) は product_id × link_position で記事のパスを持たないので、反映日以降の blog_product × P-04 の表示とクリックには、workplace-blog-10 の 10 記事のほかにこの記事の分が加わる。判定のときは GA4 の pagePath で分けて読むか、この記事を群に含めたと明記する (どちらにするかはオーナーが決める)"
+      ],
       "pending_user_actions": [],
       "next_check_date": "2026-12-26",
       "history": [

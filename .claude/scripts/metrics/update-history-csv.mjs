@@ -22,6 +22,7 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { PROJECT_ROOT, parseWeekArg, toCsv } from "./lib/auth.mjs";
+import { resolvePeriods } from "./lib/periods.mjs";
 import {
   SUMMARY_FILE,
   buildGscSummary,
@@ -443,7 +444,7 @@ function writeAdsensePageTypeHistory(stateDir, snapDir, week) {
   return rows;
 }
 
-function markdownAdsense(history, latest, deviceHistory, stateDir = null, pageTypeHistory = null) {
+export function markdownAdsense(history, latest, deviceHistory, stateDir = null, pageTypeHistory = null) {
   const prev = history.length >= 2 ? history[history.length - 2] : null;
   const arrow = (cur, prv, betterLow) => {
     if (!prv) return "";
@@ -467,6 +468,11 @@ function markdownAdsense(history, latest, deviceHistory, stateDir = null, pageTy
   lines.push(`# AdSense Latest — ${latest.week}`);
   lines.push("");
   lines.push("## 確定7日 KPI (finalized7d・前週比は直前の重複しない7日)");
+  lines.push("");
+  // 金額がどの 7 日のものか。取得スクリプトと同じ期間契約 (periods.mjs の adsense) から導く。
+  // 保存済みの週を描くだけなので、未来週の拒否 (now) は避ける。
+  const period = resolvePeriods({ source: "adsense", week: latest.week, now: "2999-12-31T00:00:00Z" });
+  lines.push(`期間: ${period.finalized7d.periodStart} 〜 ${period.finalized7d.periodEnd} (前週比の相手: ${period.previous7d.periodStart} 〜 ${period.previous7d.periodEnd})`);
   lines.push("");
   lines.push("| Metric | 確定7日 | 前週比 |");
   lines.push("|---|---|---|");

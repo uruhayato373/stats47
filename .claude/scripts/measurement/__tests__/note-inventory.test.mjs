@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createHash } from 'node:crypto';
 import { buildCoverMetricsReport } from '../../note/lib/dashboard-metrics.mjs';
-import { acceptedNoteGap, noteInventoryAvailable, validateNoteInventory } from '../note-inventory.mjs';
+import { readFileSync } from 'node:fs';
+import { acceptedNoteGap, noteInventoryAvailable, noteMetricsExitCode, validateNoteInventory } from '../note-inventory.mjs';
 import { validateAttempt, validateEvidence, validateInventoryAttempt } from '../consumer-paths.mjs';
 import { SOURCES } from '../sources.mjs';
 import { measurementHealth } from '../health.mjs';
@@ -92,4 +93,26 @@ test('note: オーナーが許容した「1 記事だけ一覧に出ない」欠
   assert.equal(acceptedNoteGap({ ...snapshot, issues: [...snapshot.issues, { code: 'login_required' }] }, cover), null);
   // カバー側の別の失敗も許容しない
   assert.equal(acceptedNoteGap(snapshot, { status: 'failed', issues: ['cover_missing'] }), null);
+});
+
+test('単独の取得の終了コードは受け入れた欠けだけを失敗に数えない', () => {
+  const snapshot = { status: 'incomplete', issues: [{ code: 'catalog_article_missing', noteId: 'n0642ad7f7fdd' }],
+    coverage: { paginationComplete: true, totalsMatched: true, missingFromDashboard: ['n0642ad7f7fdd'] } };
+  const cover = { status: 'incomplete', issues: ['metrics_incomplete'] };
+  assert.equal(noteMetricsExitCode(snapshot, cover), 0);
+  assert.equal(noteMetricsExitCode({ status: 'pass' }, { status: 'pass' }), 0);
+  // 受け入れていない欠けは失敗のまま: 2 件欠け・合計不一致・別の問題の混在・カバー側の失敗・取得失敗
+  assert.equal(noteMetricsExitCode({ ...snapshot, coverage: { ...snapshot.coverage, missingFromDashboard: ['a', 'b'] } }, cover), 2);
+  assert.equal(noteMetricsExitCode({ ...snapshot, coverage: { ...snapshot.coverage, totalsMatched: false } }, cover), 2);
+  assert.equal(noteMetricsExitCode({ ...snapshot, issues: [...snapshot.issues, { code: 'collection_failed' }] }, cover), 2);
+  assert.equal(noteMetricsExitCode(snapshot, { status: 'incomplete', issues: ['cover_audit_unavailable:x'] }), 2);
+  assert.equal(noteMetricsExitCode({ status: 'incomplete', issues: [{ code: 'collection_failed' }], coverage: {} },
+    { status: 'incomplete', issues: ['metrics_unavailable'] }), 2);
+});
+
+test('単独の取得の終了コードは自前の条件でなく共有の関数で決める', () => {
+  const dir = new URL('../../note/', import.meta.url);
+  const script = readFileSync(new URL('fetch-note-metrics.mjs', dir), 'utf8');
+  assert.match(script, /process\.exitCode = noteMetricsExitCode\(snapshot, joined\)/);
+  assert.doesNotMatch(script, /snapshot\.status === "pass" && joined\.status === "pass" \? 0 : 2/);
 });

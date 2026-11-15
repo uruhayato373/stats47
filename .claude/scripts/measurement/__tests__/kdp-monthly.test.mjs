@@ -7,6 +7,7 @@ import { join, resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import ExcelJS from 'exceljs';
 import { expectedKdpRoyaltyMonth, kdpMonthlyVaultKey, archivedKdpMonthlyReport, parseKdpMonthlyReport, collectKdpMonthlyReport } from '../kdp-monthly-reports.mjs';
+import { kdpBookIdsPublishedBy } from '../kdp-reports.mjs';
 import { validateAttempt, consumerPath } from '../consumer-paths.mjs';
 import { measurementHealth } from '../health.mjs';
 import { SOURCES } from '../sources.mjs';
@@ -41,6 +42,29 @@ test('monthly report scopes prior editions, preserves KU precision, and separate
   assert.equal(report.period.end, '2026-08-31');
   assert.ok(report.records.every(r => r.id === 'K-S1-01'));
   assert.equal(Object.hasOwn(report, 'netRevenueYen'), false);
+});
+
+test('monthly coverage leaves out books published after the period end and keeps replaced editions', () => {
+  const edition = (asin, publishedAt) => ({ author: 'stats47', asin, publishedAt });
+  const coverageOf = (month, book) => {
+    const wb = fixture();
+    if (month !== '2026-08') for (const name of ['電子書籍のロイヤリティ', '既読 KENPC']) wb.getWorksheet(name).getCell('B1').value = '9月 2026';
+    return parseKdpMonthlyReport(wb, {
+      // 差し替え版: 現行版は 9 月発売でも、前の版が 8 月に売っているので 8 月の範囲に入る
+      'K-S1-01': { ...edition('B000000009', '2026-09-20'), previousEditions: [edition('B000000001', '2026-08-13')] },
+      // 発売日の無い書籍は従来どおり外さない
+      'K-S1-02': { author: 'stats47', asin: 'B000000003' },
+      // 台帳へ後から足された新刊
+      'K-S1-13': edition('B000000013', '2026-11-04'),
+      // ASIN の無い書籍は数えない
+      'K-S1-14': { author: 'stats47', asin: null, publishedAt: '2026-11-13' },
+    }, month).coverage.mappedBookIds;
+  };
+  assert.deepEqual(coverageOf('2026-08'), ['K-S1-01', 'K-S1-02']);
+  assert.deepEqual(coverageOf('2026-09'), ['K-S1-01', 'K-S1-02']);
+  assert.equal(coverageOf('2026-08').includes('K-S1-13'), false);
+  assert.deepEqual(kdpBookIdsPublishedBy({ 'K-S1-13': edition('B000000013', '2026-11-04') }, '2026-11-30'), ['K-S1-13']);
+  assert.deepEqual(kdpBookIdsPublishedBy({ 'K-S1-13': edition('B000000013', '2026-11-04') }, '2026-11-03'), []);
 });
 
 test('monthly report validates periods, shapes, ownership, duplicate rows, and money', () => {

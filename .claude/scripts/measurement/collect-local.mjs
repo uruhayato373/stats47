@@ -18,6 +18,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { config } from 'dotenv';
 import { SOURCES } from './sources.mjs';
+import { tailLines } from './tail-lines.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 const args = process.argv.slice(2);
@@ -54,13 +55,13 @@ for (const name of names) {
     // 取り出せなければ collect.mjs を動かさない。summarize.mjs が「結果なし」として失敗に数える。
     const boot = node('.claude/scripts/measurement/bootstrap-session.mjs', [name, '--root', MAIN_ROOT], 180000);
     if (boot.status !== 0) {
-      console.log(JSON.stringify({ source: name, status: 'failed', step: 'bootstrap', message: lastLine(boot.stderr) }));
+      console.log(JSON.stringify({ source: name, status: 'failed', step: 'bootstrap', exit: boot.status, message: tailLines(boot.stderr) || boot.error?.message }));
       continue;
     }
     collectArgs.push('--bootstrap', join(MAIN_ROOT, '.local/authenticated-measurement', `${name}.bootstrap`));
   }
   const collected = node('.claude/scripts/measurement/collect.mjs', collectArgs, 1800000);
-  console.log(lastLine(collected.stdout) || JSON.stringify({ source: name, status: 'failed', step: 'collect', exit: collected.status }));
+  console.log(lastLine(collected.stdout) || JSON.stringify({ source: name, status: 'failed', step: 'collect', exit: collected.status, message: tailLines(collected.stderr) || collected.error?.message }));
 }
 
 execFileSync(process.execPath, ['.claude/scripts/measurement/summarize.mjs'], { cwd: ROOT, env, stdio: 'inherit' });
