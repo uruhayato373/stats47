@@ -20,6 +20,23 @@ export function kdpAsinMap(listings) {
   return asins;
 }
 
+/**
+ * 期間末までに発売済みの書籍 ID。月次レポートが「数えた書籍の範囲」(coverage) を作るときに使い、
+ * 期間より後に出品台帳へ足された新刊を過去の月の範囲へ入れない。
+ * 版ごとの発売日 (publishedAt。無ければ salesStartedAt) の最も早いものを使う。差し替え版の現行 publishedAt は
+ * 新しい日付になるので、現行版だけでは過去の月から外れてしまう。日付がどの版にも無い書籍は外さない (従来どおり)。
+ */
+export function kdpBookIdsPublishedBy(listings, periodEnd) {
+  const ids = [];
+  for (const [id, listing] of Object.entries(listings)) {
+    const editions = [listing, ...(listing.previousEditions ?? [])].filter(edition => edition.asin);
+    if (!editions.length) continue;
+    const dates = editions.map(edition => edition.publishedAt ?? edition.salesStartedAt).filter(date => typeof date === 'string');
+    if (!dates.length || dates.sort()[0] <= periodEnd) ids.push(id);
+  }
+  return ids.sort();
+}
+
 /** All-account downloads stay private. Only exact authored ASINs become stats47 observations. */
 export function parseKdpReport(workbook, listings, date) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || new Date(date).toISOString().slice(0, 10) !== date) throw new Error('report_incomplete');
