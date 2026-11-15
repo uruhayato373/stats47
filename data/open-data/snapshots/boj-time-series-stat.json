@@ -1,0 +1,34 @@
+{
+  "datasetId": "boj-time-series-stat",
+  "versions": [
+    {
+      "schemaVersion": 1,
+      "datasetId": "boj-time-series-stat",
+      "version": "2026-03",
+      "sha256": "ea0dd43cb5c0cccc7e9ea4f2443b900b7de2a53361dceb57201bef7b5f1145d5",
+      "recipeSha256": "4f6d022df392be15afddf92cfcedc7de90595447ff8df98c659c75bcaf69a443",
+      "retrievedAt": "2026-11-15T00:10:26.698Z",
+      "license": {
+        "name": "日本銀行 時系列統計データ検索サイト 利用上の注意",
+        "commercialUse": "unknown",
+        "attributionRequired": true,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://www.stat-search.boj.or.jp/index.html"
+      },
+      "files": [
+        {
+          "key": "open-data/raw/boj-time-series-stat/2026-03/0001.xlsx",
+          "url": "https://www.boj.or.jp/statistics/dl/depo/pref/pre2603.xlsx",
+          "sha256": "445b4915a25bdf7c6fecb8b50400cc35bf979e8af383f4d42d5a12c8b7d85971",
+          "bytes": 20325,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T00:10:26.698Z"
+        }
+      ],
+      "manifestKey": "open-data/raw/boj-time-series-stat/2026-03/manifest.json",
+      "manifestSha256": "e41c62ee75135ec65af56d59c1b5664ed96880198e116de74578a4528cb893dc",
+      "bytes": 20325,
+      "status": "archived"
+    }
+  ]
+}
