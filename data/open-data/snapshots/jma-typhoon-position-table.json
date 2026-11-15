@@ -1,0 +1,34 @@
+{
+  "datasetId": "jma-typhoon-position-table",
+  "versions": [
+    {
+      "schemaVersion": 1,
+      "datasetId": "jma-typhoon-position-table",
+      "version": "initial",
+      "sha256": "43d7ec883569b3c14e44c2dd1af6bd92fcfe1992b535bd056f98be811b2bd927",
+      "recipeSha256": "d69000157608ee1f7fb1ecfd18cbc30a994c0dc50d792056757619a692211671",
+      "retrievedAt": "2026-11-15T00:30:47.374Z",
+      "license": {
+        "name": "公共データ利用規約 (第1.0版)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.jma.go.jp/jma/kishou/info/coment.html"
+      },
+      "files": [
+        {
+          "key": "open-data/raw/jma-typhoon-position-table/initial/0001.csv",
+          "url": "https://www.data.jma.go.jp/typhoon/position_table/table2026.csv",
+          "sha256": "e0c89b95560bfce7163e5fba99385d3e08449d7c74ba6c0dd027e96074e5f570",
+          "bytes": 34060,
+          "contentType": "text/csv",
+          "retrievedAt": "2026-11-15T00:30:47.374Z"
+        }
+      ],
+      "manifestKey": "open-data/raw/jma-typhoon-position-table/initial/manifest.json",
+      "manifestSha256": "fdedaf854f521f76253f4bdeb361482af2bb67d3f69909e25b5745b9b18789c7",
+      "bytes": 34060,
+      "status": "archived"
+    }
+  ]
+}
