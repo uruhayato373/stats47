@@ -1,6 +1,7 @@
 #!/usr/bin/env tsx
 
-import { ListObjectsV2Command, S3Client } from '@aws-sdk/client-s3';
+import { createR2S3Client } from "../lib/clients/r2-s3-client.mjs";
+import { ListObjectsV2Command, type S3Client } from '@aws-sdk/client-s3';
 import { config } from 'dotenv';
 import { resolve } from 'node:path';
 
@@ -70,11 +71,7 @@ async function main(): Promise<void> {
     throw new Error('R2_S3_ENDPOINT, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY が必要です');
   }
   const bucket = process.env.CLOUDFLARE_R2_BUCKET_NAME ?? SITE.r2Bucket;
-  const client = new S3Client({
-    region: 'auto',
-    endpoint,
-    credentials: { accessKeyId, secretAccessKey },
-  });
+  const client = createR2S3Client();
   const store = createS3ImageObjectStore(client, bucket);
   const keys = await listTopoJsonKeys(client, bucket, prefix);
   if (keys.length === 0) throw new Error(`TopoJSONが0件です: ${prefix}`);

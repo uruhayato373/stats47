@@ -15,12 +15,13 @@
  *   CLOUDFLARE_R2_BUCKET_NAME (default: stats47)
  */
 
+import { createR2S3Client } from "../lib/clients/r2-s3-client.mjs";
 import { config } from "dotenv";
 import * as fs from "fs";
 import * as os from "os";
 import * as path from "path";
 import {
-  S3Client,
+  type S3Client,
   GetObjectCommand,
   PutObjectCommand,
   CopyObjectCommand,
@@ -69,11 +70,7 @@ function createS3(): S3Client {
     );
     process.exit(1);
   }
-  return new S3Client({
-    region: "auto",
-    endpoint,
-    credentials: { accessKeyId, secretAccessKey },
-  });
+  return createR2S3Client();
 }
 
 async function getObjectBuffer(

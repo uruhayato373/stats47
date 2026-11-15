@@ -15,8 +15,9 @@
  * 必要な env: R2_S3_ENDPOINT / R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY
  */
 
+import { createR2S3Client } from "../../r2-storage/src/lib/clients/r2-s3-client.mjs";
 import {
-  S3Client,
+  type S3Client,
   ListObjectsV2Command,
   GetObjectCommand,
 } from "@aws-sdk/client-s3";
@@ -42,11 +43,7 @@ function createS3(): S3Client {
     );
     process.exit(1);
   }
-  return new S3Client({
-    region: "auto",
-    endpoint,
-    credentials: { accessKeyId, secretAccessKey },
-  });
+  return createR2S3Client();
 }
 
 /** app/blog/ 配下の全キーを 1 度のページネーションで取得 (delimiter なし) */

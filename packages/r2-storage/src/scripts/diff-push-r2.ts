@@ -23,11 +23,12 @@
  *   npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts  # 全体
  */
 
+import { createR2S3Client } from "../lib/clients/r2-s3-client.mjs";
 import { config } from "dotenv";
 import * as fs from "fs";
 import * as path from "path";
 import { createHash } from "crypto";
-import { ListObjectsV2Command, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { ListObjectsV2Command, PutObjectCommand, type S3Client } from "@aws-sdk/client-s3";
 
 import { assertR2WriteAllowed } from "./_assert-ci-write";
 import {
@@ -152,7 +153,7 @@ function createS3ClientFromEnv(): S3Client | null {
   const accessKeyId = process.env.R2_ACCESS_KEY_ID;
   const secretAccessKey = process.env.R2_SECRET_ACCESS_KEY;
   if (!endpoint || !accessKeyId || !secretAccessKey) return null;
-  return new S3Client({ region: "auto", endpoint, credentials: { accessKeyId, secretAccessKey } });
+  return createR2S3Client();
 }
 
 const md5OfFile = (f: LocalFile): string =>

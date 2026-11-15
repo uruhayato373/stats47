@@ -7,7 +7,8 @@
  * 使用方法: npx tsx packages/r2-storage/src/scripts/purge-cache-r2.ts
  */
 
-import { DeleteObjectsCommand, ListObjectsV2Command, S3Client } from "@aws-sdk/client-s3";
+import { createR2S3Client } from "../lib/clients/r2-s3-client.mjs";
+import { DeleteObjectsCommand, ListObjectsV2Command, type S3Client } from "@aws-sdk/client-s3";
 import { config } from "dotenv";
 import path from "path";
 
@@ -22,7 +23,7 @@ function getS3Client(): S3Client {
   if (!endpoint || !accessKeyId || !secretAccessKey) {
     throw new Error("環境変数が不足: R2_S3_ENDPOINT, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY");
   }
-  return new S3Client({ region: "auto", endpoint, credentials: { accessKeyId, secretAccessKey } });
+  return createR2S3Client();
 }
 
 async function listAllKeys(s3: S3Client): Promise<string[]> {

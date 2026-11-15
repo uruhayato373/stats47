@@ -36,6 +36,7 @@ describe("fetchFromR2 read tier priority", () => {
   });
 
   afterEach(() => {
+    vi.useRealTimers();
     process.env = { ...ORIGINAL_ENV };
     globalThis.fetch = ORIGINAL_FETCH;
   });
@@ -79,5 +80,53 @@ describe("fetchFromR2 read tier priority", () => {
     const body = await fetchFromR2("gis/mlit-ksj/A42/national/data.topojson");
 
     expect(body).toEqual(source);
+  });
+
+  describe("public URL retries", () => {
+    beforeEach(() => {
+      delete process.env.R2_ACCESS_KEY_ID;
+      delete process.env.R2_SECRET_ACCESS_KEY;
+      delete process.env.R2_S3_ENDPOINT;
+      vi.useFakeTimers();
+      vi.setSystemTime(new Date("2026-11-15T00:00:00Z"));
+    });
+
+    it.each([
+      [429, "2", 2000],
+      [503, "120", 30_000],
+      [503, "Sun, 15 Nov 2026 00:00:03 GMT", 3000],
+    ])("retries HTTP %i honoring Retry-After %s", async (status, header, delay) => {
+      vi.mocked(globalThis.fetch)
+        .mockResolvedValueOnce(new Response(null, { status, headers: { "Retry-After": header } }))
+        .mockResolvedValueOnce(new Response("recovered"));
+      const pending = fetchFromR2("retry.json");
+      await vi.advanceTimersByTimeAsync(delay - 1);
+      expect(globalThis.fetch).toHaveBeenCalledTimes(1);
+      await vi.advanceTimersByTimeAsync(1);
+      expect((await pending)?.toString()).toBe("recovered");
+      expect(globalThis.fetch).toHaveBeenCalledTimes(2);
+      expect(vi.mocked(globalThis.fetch).mock.calls[1]).toEqual(vi.mocked(globalThis.fetch).mock.calls[0]);
+      expect(mocks.bindingGet).not.toHaveBeenCalled();
+      expect(mocks.s3Send).not.toHaveBeenCalled();
+    });
+
+    it.each([429, 503])("stops after two retries on HTTP %i", async (status) => {
+      vi.mocked(globalThis.fetch).mockImplementation(async () => new Response(null, { status }));
+      const pending = expect(fetchFromR2("retry.json")).rejects.toThrow(`HTTP ${status}`);
+      await vi.advanceTimersByTimeAsync(299);
+      expect(globalThis.fetch).toHaveBeenCalledTimes(1);
+      await vi.advanceTimersByTimeAsync(1);
+      expect(globalThis.fetch).toHaveBeenCalledTimes(2);
+      await vi.advanceTimersByTimeAsync(600);
+      await pending;
+      expect(globalThis.fetch).toHaveBeenCalledTimes(3);
+    });
+
+    it("returns null for 404 without retrying", async () => {
+      vi.mocked(globalThis.fetch).mockResolvedValue(new Response(null, { status: 404 }));
+      expect(await fetchFromR2("missing.json")).toBeNull();
+      expect(globalThis.fetch).toHaveBeenCalledTimes(1);
+      expect(vi.getTimerCount()).toBe(0);
+    });
   });
 });

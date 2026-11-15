@@ -15,7 +15,7 @@ const ENTRY = new Set([
   "packages/r2-storage/src/keys.ts",
   ".claude/scripts/lib/r2-keys.mjs",
   "packages/r2-storage/src/scripts/r2-key-classes.ts",
-  "packages/r2-storage/src/lib/clients/private-r2-store.mjs",
+  "packages/r2-storage/src/lib/clients/private-r2-store.mjs", "packages/r2-storage/src/lib/clients/r2-s3-client.mjs",
   "packages/r2-storage/src/lib/clients/get-s3-client.ts",
 ]);
 const LITERALS = ["stats", "ranking", "origin", "s3Client"];

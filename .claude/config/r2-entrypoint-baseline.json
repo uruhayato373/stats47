@@ -191,13 +191,6 @@
       "s3Client": 0,
       "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
     },
-    ".claude/scripts/blog/push-article-md-r2.ts": {
-      "stats": 0,
-      "ranking": 0,
-      "origin": 0,
-      "s3Client": 1,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
     ".claude/scripts/blog/rebuild-scatter-data.mjs": {
       "stats": 1,
       "ranking": 0,
@@ -429,13 +422,6 @@
       "s3Client": 0,
       "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
     },
-    ".claude/scripts/lib/estat-catalog/s3.mjs": {
-      "stats": 0,
-      "ranking": 0,
-      "origin": 0,
-      "s3Client": 1,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
     ".claude/scripts/lib/gallery-collectors.mjs": {
       "stats": 0,
       "ranking": 2,
@@ -469,13 +455,6 @@
       "ranking": 0,
       "origin": 1,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/measurement/vault.mjs": {
-      "stats": 0,
-      "ranking": 0,
-      "origin": 0,
-      "s3Client": 1,
       "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
     },
     ".claude/scripts/media/__tests__/workspace.test.mjs": {
@@ -5700,13 +5679,6 @@
       "s3Client": 0,
       "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
     },
-    "packages/database/scripts/extract-articles-seed-from-r2.ts": {
-      "stats": 0,
-      "ranking": 0,
-      "origin": 0,
-      "s3Client": 1,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
     "packages/database/src/schema/index.ts": {
       "stats": 2,
       "ranking": 0,
@@ -5833,13 +5805,6 @@
       "s3Client": 0,
       "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
     },
-    "packages/r2-storage/src/image-pipeline.ts": {
-      "stats": 0,
-      "ranking": 0,
-      "origin": 0,
-      "s3Client": 1,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
     "packages/r2-storage/src/lib/operations/__tests__/fetch-priority.test.ts": {
       "stats": 3,
       "ranking": 0,
@@ -5910,32 +5875,11 @@
       "s3Client": 0,
       "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
     },
-    "packages/r2-storage/src/scripts/compress-r2-topojson.ts": {
-      "stats": 0,
-      "ranking": 0,
-      "origin": 0,
-      "s3Client": 1,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    "packages/r2-storage/src/scripts/db-r2-sync.ts": {
-      "stats": 0,
-      "ranking": 0,
-      "origin": 0,
-      "s3Client": 1,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
     "packages/r2-storage/src/scripts/delete-r2-per-household.ts": {
       "stats": 0,
       "ranking": 2,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    "packages/r2-storage/src/scripts/diff-push-r2.ts": {
-      "stats": 0,
-      "ranking": 0,
-      "origin": 0,
-      "s3Client": 1,
       "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
     },
     "packages/r2-storage/src/scripts/lib/__tests__/diff-push-remote-match.test.ts": {
@@ -5966,13 +5910,6 @@
       "s3Client": 0,
       "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
     },
-    "packages/r2-storage/src/scripts/purge-cache-r2.ts": {
-      "stats": 0,
-      "ranking": 0,
-      "origin": 0,
-      "s3Client": 1,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
     "packages/r2-storage/src/scripts/purge-cache.ts": {
       "stats": 0,
       "ranking": 0,
@@ -5992,13 +5929,6 @@
       "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    "packages/r2-storage/src/scripts/r2-cleanup-orphans.ts": {
-      "stats": 0,
-      "ranking": 0,
-      "origin": 0,
-      "s3Client": 1,
       "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
     },
     "packages/r2-storage/src/scripts/r2-retention.ts": {

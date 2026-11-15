@@ -12,6 +12,8 @@ import { promisify } from 'node:util';
 import { HttpsProxyAgent } from 'https-proxy-agent';
 import { S3Client, HeadObjectCommand, GetObjectCommand, PutObjectCommand, DeleteObjectCommand, ListObjectsV2Command } from '@aws-sdk/client-s3';
 import { fileURLToPath } from 'node:url';
+import { createR2S3Client } from './r2-s3-client.mjs';
+export { createR2S3Client };
 // new URL('<dir>/', import.meta.url) は Turbopack (管理画面のビルド) がファイルの読み込みとして解決しようとして落ちる。
 // cover-assets.mjs の COVER_ROOT と同じく path で求める (2026-11-14)
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../../..');
@@ -179,7 +181,7 @@ export function createR2Store({ bucket, writeOnce = false, maxBytes = LIMIT, min
   const accessKeyId = process.env.R2_ACCESS_KEY_ID;
   const secretAccessKey = process.env.R2_SECRET_ACCESS_KEY;
   if (endpoint && accessKeyId && secretAccessKey) {
-    const client = new S3Client({ region: 'auto', endpoint, credentials: { accessKeyId, secretAccessKey } });
+    const client = createR2S3Client({ bucket });
     return {
       bucket,
       transport: 's3',

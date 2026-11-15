@@ -1,10 +1,11 @@
 // R2 (S3 互換 API) から estat-catalog の既存 manifest / index を読む CI 専用ヘルパー。
 // 公開 URL (R2_PUBLIC_FETCH_URL) は CDN cache 越しで前回 push が見えないため使わない
 // (r2-storage-design.md 「CI は manifest / 既存 index を S3 GetObject で読む」)。
+import { createR2S3Client } from "../../../../packages/r2-storage/src/lib/clients/r2-s3-client.mjs";
 import { config } from "dotenv";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { GetObjectCommand } from "@aws-sdk/client-s3";
 import { R2_BUCKET } from "../site-config.cjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -14,14 +15,17 @@ config({ path: path.join(PROJECT_ROOT, ".env.local") });
 
 const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME || R2_BUCKET;
 
+let cachedClient;
 function client() {
+  if (cachedClient) return cachedClient;
   const endpoint = process.env.R2_S3_ENDPOINT;
   const accessKeyId = process.env.R2_ACCESS_KEY_ID;
   const secretAccessKey = process.env.R2_SECRET_ACCESS_KEY;
   if (!endpoint || !accessKeyId || !secretAccessKey) {
     throw new Error("R2_S3_ENDPOINT / R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY が未設定です");
   }
-  return new S3Client({ region: "auto", endpoint, credentials: { accessKeyId, secretAccessKey } });
+  cachedClient = createR2S3Client();
+  return cachedClient;
 }
 
 async function streamToString(body) {
