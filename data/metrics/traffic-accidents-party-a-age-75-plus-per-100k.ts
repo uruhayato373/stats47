@@ -63,5 +63,5 @@ export const trafficAccidentsPartyAAge75PlusPer100k: MetricConfig = {
     "isCalculated": false
   },
   "surveyId": "traffic-accident-statistics",
-  "isActive": false
+  "isActive": true
 };

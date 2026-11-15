@@ -64,5 +64,5 @@ export const heatstrokeEmergencyTransportsPer100k: MetricConfig = {
   },
   "surveyScope": "not-applicable",
   "surveyScopeReason": "消防機関の熱中症救急搬送実績を集計した行政業務報告",
-  "isActive": false
+  "isActive": true
 };

@@ -4,15 +4,15 @@
   "masterSurveyCount": 152,
   "ranking": {
     "metrics": 2755,
-    "activeMetrics": 2596,
+    "activeMetrics": 2601,
     "applicableMetrics": 2655,
-    "activeApplicableMetrics": 2508,
+    "activeApplicableMetrics": 2512,
     "notApplicable": 100,
-    "activeNotApplicable": 88,
+    "activeNotApplicable": 89,
     "resolved": 2655,
     "unresolved": 0,
     "coveragePct": 100,
-    "activeResolved": 2508,
+    "activeResolved": 2512,
     "activeUnresolved": 0,
     "activeCoveragePct": 100,
     "activeNotApplicableKeys": [
@@ -49,6 +49,7 @@
       "healthy-life-expectancy-female",
       "healthy-life-expectancy-male",
       "heatstroke-emergency-transports",
+      "heatstroke-emergency-transports-per-100k",
       "individual-evacuation-plan-coverage-rate",
       "individual-evacuation-plan-covered-persons",
       "individual-evacuation-plan-listed-persons",
@@ -107,7 +108,7 @@
     ],
     "activeUnresolvedKeys": [],
     "perSurveyActive": {
-      "academic-achievement-survey": 5,
+      "academic-achievement-survey": 8,
       "accommodation-survey": 4,
       "administrative-investment-report": 13,
       "age-adjusted-mortality-statistics": 1,
@@ -237,7 +238,7 @@
       "student-guidance-issues-survey": 7,
       "telecommunications-contract-share-quarterly": 2,
       "telecommunications-service-contract-report": 5,
-      "traffic-accident-statistics": 11,
+      "traffic-accident-statistics": 12,
       "travel-tourism-consumption-survey": 1,
       "truck-operator-statistics": 1,
       "urban-park-survey": 12,
@@ -2285,7 +2286,7 @@
   "surveys": [
     {
       "surveyId": "academic-achievement-survey",
-      "rankingCount": 5,
+      "rankingCount": 8,
       "themeKeys": [
         "education-culture"
       ],
@@ -4633,7 +4634,7 @@
     },
     {
       "surveyId": "traffic-accident-statistics",
-      "rankingCount": 11,
+      "rankingCount": 12,
       "themeKeys": [
         "roads",
         "safety"
