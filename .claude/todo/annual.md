@@ -23,7 +23,7 @@ updated: 2026-11-14
   3. 概要zipに「確認」列があれば `ingest-gsc-export.py` に足す。
   4. KPIの値が6,729 / 8,706と同じ桁で `data/measurement-cycle/LATEST.md` に出るかを確かめる。
   5. 送信済みビューの理由別ドリルダウンも週次の取得に足す。
-- **効果観測の登録 (improvementsの枠待ち)**: activeが5 / 5で空きが無い。枠が空いたら `improvement-triage` で `GSC-THEME-POST-EFFECT-01` (`[kpi: operating-cost]`・`[target: -262 requests]`・期日2026-11-18、基準は11-10〜11-11の24時間のテーマPOST 262件、観測は `data/cloudflare/snapshots/<日付>.json` の `googlebot`) と `GSC-SUBMITTED-INDEX-EFFECT-01` (`[kpi: index-coverage-rate]`・targetなし・期日2026-12-09、基準は登録6,729・未登録1,977) を足す。最短は11-14のnote取得の後に `NOTE-FISCAL-PEER-SALES-01` を判定して閉じること。詳細は `data/improvement/gsc-improvement/improvement-log.md`。
+- **効果観測の登録 (improvementsの枠待ち)**: activeが5 / 5で空きが無い。枠が空いたら `improvement-triage` で `GSC-THEME-POST-EFFECT-01` (`[kpi: operating-cost]`・`[target: -262 requests]`・期日2026-11-18、基準は11-10〜11-11の24時間のテーマPOST 262件、観測は `data/cloudflare/snapshots/<日付>.json` の `googlebot`) と `GSC-SUBMITTED-INDEX-EFFECT-01` (`[kpi: index-coverage-rate]`・targetなし・期日2026-12-09、基準は登録6,729・未登録1,977) を足す。`NOTE-FISCAL-PEER-SALES-01` は11-15に判定不能で、期日を12-07へ延ばしたため枠は空かない。最短は `RELATED-ARTICLES-EFFECT-01` など他の施策を判定して閉じること。詳細は `data/improvement/gsc-improvement/improvement-log.md`。
 - **元の順序の残り**: sourceごとに観測日・取得日・母集団・標本数・欠測を照合し、最新coverageを既存CSV/manifest gateで取り込むか部分UI監査 (`data/gsc/ui-audits/2026-10-16.json`) を補助証拠に留めるかを決める。HTTP/sitemap collectorの出力との接続を検証して既存キューを保持したまま再構築し、修正版のmain週次CIで新queueとsourceの取得範囲を照合する。集計期間はsearch-growthのObservationと元summaryで照合し、週フォルダ名から推定しない。owner は gsc-analyst。
 - **停止条件**: UI例示を全件データと扱わない。欠測を0で埋めない。認証情報を監査JSONへ保存しない。古い入力で新しい状態を巻き戻さない。pendingを母集団の違う旧件数と単純比較しない。
 - **完了条件**: 各sourceの鮮度・取得範囲・成功/部分成功/欠測が追跡でき、キュー更新の前後差分とgate結果が残る。source未取得を成功扱いしない。
