@@ -50,7 +50,47 @@
         "linkPattern": "/02-1_clinic_facility_info_20260601\\.csv\\.zip$",
         "maxFiles": 1
       },
-      "version": "latest-published-at"
+      "version": "latest-published-at",
+      "normalize": {
+        "tables": [
+          {
+            "table": "clinic-count-by-sunday-closure",
+            "filePattern": "(^|/)02-1_clinic_facility_info_20260601\\.csv$",
+            "encoding": "auto",
+            "areas": [
+              {
+                "column": "都道府県コード",
+                "level": "prefecture",
+                "width": 2
+              },
+              {
+                "level": "municipality",
+                "compose": [
+                  {
+                    "column": "都道府県コード",
+                    "width": 2
+                  },
+                  {
+                    "column": "市区町村コード",
+                    "width": 3
+                  }
+                ]
+              }
+            ],
+            "time": "2026-06-01",
+            "aggregation": "count",
+            "unit": "施設",
+            "dims": {
+              "sundayRegularClosure": "毎週決まった曜日に休診（日）",
+              "sundayWeek1Closure": "決まった週に休診（定期週）第1週（日）",
+              "sundayWeek2Closure": "決まった週に休診（定期週）第2週（日）",
+              "sundayWeek3Closure": "決まった週に休診（定期週）第3週（日）",
+              "sundayWeek4Closure": "決まった週に休診（定期週）第4週（日）",
+              "sundayWeek5Closure": "決まった週に休診（定期週）第5週（日）"
+            }
+          }
+        ]
+      }
     },
     {
       "datasetId": "reinfolib-transaction-prices",
@@ -69,7 +109,39 @@
           "https://www.mhlw.go.jp/content/11121000/03-1_dental_facility_info_20260601.csv.zip"
         ]
       },
-      "version": "latest-published-at"
+      "version": "latest-published-at",
+      "normalize": {
+        "tables": [
+          {
+            "table": "dental-clinic-count",
+            "filePattern": "(^|/)03-1_dental_facility_info_20260601\\.csv$",
+            "encoding": "auto",
+            "areas": [
+              {
+                "column": "都道府県コード",
+                "level": "prefecture",
+                "width": 2
+              },
+              {
+                "level": "municipality",
+                "compose": [
+                  {
+                    "column": "都道府県コード",
+                    "width": 2
+                  },
+                  {
+                    "column": "市区町村コード",
+                    "width": 3
+                  }
+                ]
+              }
+            ],
+            "time": "2026-06-01",
+            "aggregation": "count",
+            "unit": "施設"
+          }
+        ]
+      }
     },
     {
       "datasetId": "mhlw-medical-maternity-homes",
@@ -79,7 +151,39 @@
           "https://www.mhlw.go.jp/content/11121000/04_maternity_home_20260601.csv.zip"
         ]
       },
-      "version": "latest-published-at"
+      "version": "latest-published-at",
+      "normalize": {
+        "tables": [
+          {
+            "table": "maternity-home-count",
+            "filePattern": "(^|/)04_maternity_home_20260601\\.csv$",
+            "encoding": "auto",
+            "areas": [
+              {
+                "column": "都道府県コード",
+                "level": "prefecture",
+                "width": 2
+              },
+              {
+                "level": "municipality",
+                "compose": [
+                  {
+                    "column": "都道府県コード",
+                    "width": 2
+                  },
+                  {
+                    "column": "市区町村コード",
+                    "width": 3
+                  }
+                ]
+              }
+            ],
+            "time": "2026-06-01",
+            "aggregation": "count",
+            "unit": "施設"
+          }
+        ]
+      }
     },
     {
       "datasetId": "mhlw-medical-pharmacies",
@@ -89,7 +193,29 @@
           "https://www.mhlw.go.jp/content/11121000/05_pharmacy_20260601.csv.zip"
         ]
       },
-      "version": "latest-published-at"
+      "version": "latest-published-at",
+      "normalize": {
+        "tables": [
+          {
+            "table": "pharmacy-count-by-sunday-business",
+            "filePattern": "(^|/)05_pharmacy_20260601\\.csv$",
+            "encoding": "auto",
+            "areas": [
+              {
+                "column": "都道府県コード",
+                "level": "prefecture",
+                "width": 2
+              }
+            ],
+            "time": "2026-06-01",
+            "aggregation": "count",
+            "unit": "施設",
+            "dims": {
+              "sundayBusiness": "営業日（日）"
+            }
+          }
+        ]
+      }
     },
     {
       "datasetId": "reinfolib-municipality-list",
@@ -871,7 +997,111 @@
           "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/47_okinawa/47p_25q.xlsx"
         ]
       },
-      "version": "2025"
+      "version": "2025",
+      "normalize": {
+        "tables": [
+          {
+            "table": "primary-achievement",
+            "filePattern": "^[0-9]{2}p_25qs?\\.xlsx$",
+            "xlsx": {
+              "sheet": [
+                "国語",
+                "算数"
+              ],
+              "headerRow": 11,
+              "columns": {
+                "classification": 2,
+                "correctRate": 7
+              },
+              "dataStartRow": 13,
+              "dataEndRow": 13
+            },
+            "metadataColumns": {
+              "prefecture": {
+                "source": "filename",
+                "pattern": "^([0-9]{2})[pm]_"
+              },
+              "subject": {
+                "source": "sheet",
+                "pattern": "^(.+)$"
+              }
+            },
+            "where": [
+              {
+                "column": "classification",
+                "equals": "全体"
+              }
+            ],
+            "areas": [
+              {
+                "level": "prefecture",
+                "column": "prefecture"
+              }
+            ],
+            "time": "2025",
+            "dims": {
+              "grade": {
+                "value": "小学6年"
+              },
+              "subject": "subject"
+            },
+            "aggregation": "sum",
+            "valueColumn": "correctRate",
+            "unit": "％",
+            "nonNumeric": "skip"
+          },
+          {
+            "table": "junior-achievement",
+            "filePattern": "^[0-9]{2}m_25qs?\\.xlsx$",
+            "xlsx": {
+              "sheet": [
+                "国語",
+                "数学"
+              ],
+              "headerRow": 11,
+              "columns": {
+                "classification": 2,
+                "correctRate": 7
+              },
+              "dataStartRow": 13,
+              "dataEndRow": 13
+            },
+            "metadataColumns": {
+              "prefecture": {
+                "source": "filename",
+                "pattern": "^([0-9]{2})[pm]_"
+              },
+              "subject": {
+                "source": "sheet",
+                "pattern": "^(.+)$"
+              }
+            },
+            "where": [
+              {
+                "column": "classification",
+                "equals": "全体"
+              }
+            ],
+            "areas": [
+              {
+                "level": "prefecture",
+                "column": "prefecture"
+              }
+            ],
+            "time": "2025",
+            "dims": {
+              "grade": {
+                "value": "中学3年"
+              },
+              "subject": "subject"
+            },
+            "aggregation": "sum",
+            "valueColumn": "correctRate",
+            "unit": "％",
+            "nonNumeric": "skip"
+          }
+        ]
+      }
     },
     {
       "datasetId": "nier-gakuryoku-lifestyle",
@@ -974,7 +1204,141 @@
           "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/47_okinawa/47p_25a.xlsx"
         ]
       },
-      "version": "2025"
+      "version": "2025",
+      "normalize": {
+        "tables": [
+          {
+            "table": "primary-lifestyle-response-rates",
+            "filePattern": "^[0-9]{2}p_25a\\.xlsx$",
+            "xlsx": {
+              "sheet": 1,
+              "headerRow": [
+                10,
+                11
+              ],
+              "columns": {
+                "question": 3,
+                "answer1": 7,
+                "answer2": 8,
+                "answer3": 9,
+                "answer4": 10,
+                "other": 27,
+                "noAnswer": 28
+              },
+              "dataStartRow": 13,
+              "dataEndRow": 69,
+              "rowStep": 4
+            },
+            "metadataColumns": {
+              "prefecture": {
+                "source": "filename",
+                "pattern": "^([0-9]{2})[pm]_"
+              }
+            },
+            "where": [
+              {
+                "column": "question",
+                "matches": "^(自分には、よいところがあると思いますか|将来の夢や目標を持っていますか|学校に行くのは楽しいと思いますか|友達関係に満足していますか)$"
+              }
+            ],
+            "unpivot": {
+              "columns": {
+                "answer1": "1",
+                "answer2": "2",
+                "answer3": "3",
+                "answer4": "4",
+                "other": "その他",
+                "noAnswer": "無回答"
+              },
+              "areaColumn": "answer",
+              "valueColumn": "rate"
+            },
+            "areas": [
+              {
+                "level": "prefecture",
+                "column": "prefecture"
+              }
+            ],
+            "time": "2025",
+            "dims": {
+              "grade": {
+                "value": "小学6年"
+              },
+              "question": "question",
+              "answer": "answer"
+            },
+            "aggregation": "sum",
+            "valueColumn": "rate",
+            "unit": "％",
+            "nonNumeric": "skip"
+          },
+          {
+            "table": "junior-lifestyle-response-rates",
+            "filePattern": "^[0-9]{2}m_25a\\.xlsx$",
+            "xlsx": {
+              "sheet": 1,
+              "headerRow": [
+                10,
+                11
+              ],
+              "columns": {
+                "question": 3,
+                "answer1": 7,
+                "answer2": 8,
+                "answer3": 9,
+                "answer4": 10,
+                "other": 27,
+                "noAnswer": 28
+              },
+              "dataStartRow": 13,
+              "dataEndRow": 69,
+              "rowStep": 4
+            },
+            "metadataColumns": {
+              "prefecture": {
+                "source": "filename",
+                "pattern": "^([0-9]{2})[pm]_"
+              }
+            },
+            "where": [
+              {
+                "column": "question",
+                "matches": "^(自分には、よいところがあると思いますか|将来の夢や目標を持っていますか|学校に行くのは楽しいと思いますか|友達関係に満足していますか)$"
+              }
+            ],
+            "unpivot": {
+              "columns": {
+                "answer1": "1",
+                "answer2": "2",
+                "answer3": "3",
+                "answer4": "4",
+                "other": "その他",
+                "noAnswer": "無回答"
+              },
+              "areaColumn": "answer",
+              "valueColumn": "rate"
+            },
+            "areas": [
+              {
+                "level": "prefecture",
+                "column": "prefecture"
+              }
+            ],
+            "time": "2025",
+            "dims": {
+              "grade": {
+                "value": "中学3年"
+              },
+              "question": "question",
+              "answer": "answer"
+            },
+            "aggregation": "sum",
+            "valueColumn": "rate",
+            "unit": "％",
+            "nonNumeric": "skip"
+          }
+        ]
+      }
     },
     {
       "datasetId": "fdma-heatstroke-emergency-transports",
@@ -984,7 +1348,37 @@
           "https://www.fdma.go.jp/disaster/heatstroke/items/heatstroke003_data_r7.xlsx"
         ]
       },
-      "version": "latest-published-at"
+      "version": "latest-published-at",
+      "normalize": {
+        "tables": [
+          {
+            "table": "heatstroke-transports-daily",
+            "filePattern": "(^|/)heatstroke003_data_r7\\.xlsx$",
+            "xlsx": {
+              "sheet": [
+                "2025_05",
+                "2025_06",
+                "2025_07",
+                "2025_08",
+                "2025_09"
+              ],
+              "headerRow": 1,
+              "dataStartRow": 2
+            },
+            "areas": [
+              {
+                "level": "prefecture",
+                "column": "都道府県コード"
+              }
+            ],
+            "time": "2025",
+            "timeColumn": "日付",
+            "aggregation": "sum",
+            "valueColumn": "搬送人員（計）",
+            "unit": "人"
+          }
+        ]
+      }
     },
     {
       "datasetId": "jma-past-weather-observations",
@@ -1244,7 +1638,79 @@
           "https://covid19.mhlw.go.jp/public/opendata/newly_confirmed_cases_daily.csv"
         ]
       },
-      "version": "initial"
+      "version": "initial",
+      "normalize": {
+        "tables": [
+          {
+            "table": "newly-confirmed-cases-daily",
+            "filePattern": "(^|/)newly_confirmed_cases_daily\\.csv$",
+            "unpivot": {
+              "columns": {
+                "Hokkaido": "01000",
+                "Aomori": "02000",
+                "Iwate": "03000",
+                "Miyagi": "04000",
+                "Akita": "05000",
+                "Yamagata": "06000",
+                "Fukushima": "07000",
+                "Ibaraki": "08000",
+                "Tochigi": "09000",
+                "Gunma": "10000",
+                "Saitama": "11000",
+                "Chiba": "12000",
+                "Tokyo": "13000",
+                "Kanagawa": "14000",
+                "Niigata": "15000",
+                "Toyama": "16000",
+                "Ishikawa": "17000",
+                "Fukui": "18000",
+                "Yamanashi": "19000",
+                "Nagano": "20000",
+                "Gifu": "21000",
+                "Shizuoka": "22000",
+                "Aichi": "23000",
+                "Mie": "24000",
+                "Shiga": "25000",
+                "Kyoto": "26000",
+                "Osaka": "27000",
+                "Hyogo": "28000",
+                "Nara": "29000",
+                "Wakayama": "30000",
+                "Tottori": "31000",
+                "Shimane": "32000",
+                "Okayama": "33000",
+                "Hiroshima": "34000",
+                "Yamaguchi": "35000",
+                "Tokushima": "36000",
+                "Kagawa": "37000",
+                "Ehime": "38000",
+                "Kochi": "39000",
+                "Fukuoka": "40000",
+                "Saga": "41000",
+                "Nagasaki": "42000",
+                "Kumamoto": "43000",
+                "Oita": "44000",
+                "Miyazaki": "45000",
+                "Kagoshima": "46000",
+                "Okinawa": "47000"
+              },
+              "areaColumn": "prefectureCode",
+              "valueColumn": "cases"
+            },
+            "areas": [
+              {
+                "level": "prefecture",
+                "column": "prefectureCode"
+              }
+            ],
+            "time": "2020-01-16/2023-05-08",
+            "timeColumn": "Date",
+            "aggregation": "sum",
+            "valueColumn": "cases",
+            "unit": "人"
+          }
+        ]
+      }
     },
     {
       "datasetId": "mext-school-code-list",
@@ -1318,7 +1784,227 @@
         "linkPattern": "/content/12400000/[0-9]+\\.xlsx$",
         "maxFiles": 410
       },
-      "version": "9th"
+      "version": "9th",
+      "normalize": {
+        "tables": [
+          {
+            "table": "bmi-distribution",
+            "filePattern": "^001258725\\.xlsx$",
+            "xlsx": {
+              "sheet": 1,
+              "headerRow": [
+                2,
+                3,
+                4,
+                5
+              ],
+              "dataStartRow": 6
+            },
+            "fillDown": [
+              "都道府県名"
+            ],
+            "where": [
+              {
+                "column": "都道府県名",
+                "matches": "^(北海道|.+[都府県])$"
+              },
+              {
+                "column": "検査値階層\n(kg/㎡)",
+                "notEquals": ""
+              }
+            ],
+            "unpivot": {
+              "columns": {
+                "全体/男/中計/人数": "男",
+                "全体/女/中計/人数": "女"
+              },
+              "areaColumn": "sex",
+              "valueColumn": "people"
+            },
+            "areas": [
+              {
+                "level": "prefecture",
+                "column": "都道府県名",
+                "prefectureName": true
+              }
+            ],
+            "time": "2021",
+            "dims": {
+              "test": {
+                "value": "BMI"
+              },
+              "sex": "sex",
+              "category": "検査値階層\n(kg/㎡)"
+            },
+            "aggregation": "sum",
+            "valueColumn": "people",
+            "unit": "人",
+            "nonNumeric": "skip"
+          },
+          {
+            "table": "hba1c-distribution",
+            "filePattern": "^001258731\\.xlsx$",
+            "xlsx": {
+              "sheet": 1,
+              "headerRow": [
+                2,
+                3,
+                4,
+                5
+              ],
+              "dataStartRow": 6
+            },
+            "fillDown": [
+              "都道府県名"
+            ],
+            "where": [
+              {
+                "column": "都道府県名",
+                "matches": "^(北海道|.+[都府県])$"
+              },
+              {
+                "column": "検査値階層\n（％）※NGSP値",
+                "notEquals": ""
+              }
+            ],
+            "unpivot": {
+              "columns": {
+                "全体/男/中計/人数": "男",
+                "全体/女/中計/人数": "女"
+              },
+              "areaColumn": "sex",
+              "valueColumn": "people"
+            },
+            "areas": [
+              {
+                "level": "prefecture",
+                "column": "都道府県名",
+                "prefectureName": true
+              }
+            ],
+            "time": "2021",
+            "dims": {
+              "test": {
+                "value": "HbA1c"
+              },
+              "sex": "sex",
+              "category": "検査値階層\n（％）※NGSP値"
+            },
+            "aggregation": "sum",
+            "valueColumn": "people",
+            "unit": "人",
+            "nonNumeric": "skip"
+          },
+          {
+            "table": "glucose-medication-responses",
+            "filePattern": "^001258864\\.xlsx$",
+            "xlsx": {
+              "sheet": 1,
+              "headerRow": [
+                2,
+                3,
+                4,
+                5
+              ],
+              "dataStartRow": 6
+            },
+            "fillDown": [
+              "都道府県名"
+            ],
+            "where": [
+              {
+                "column": "都道府県名",
+                "matches": "^(北海道|.+[都府県])$"
+              },
+              {
+                "column": "回答",
+                "notEquals": ""
+              }
+            ],
+            "unpivot": {
+              "columns": {
+                "全体/男/中計/人数": "男",
+                "全体/女/中計/人数": "女"
+              },
+              "areaColumn": "sex",
+              "valueColumn": "people"
+            },
+            "areas": [
+              {
+                "level": "prefecture",
+                "column": "都道府県名",
+                "prefectureName": true
+              }
+            ],
+            "time": "2021",
+            "dims": {
+              "question": {
+                "value": "血糖を下げる薬又はインスリン注射の使用"
+              },
+              "sex": "sex",
+              "category": "回答"
+            },
+            "aggregation": "sum",
+            "valueColumn": "people",
+            "unit": "人",
+            "nonNumeric": "skip"
+          },
+          {
+            "table": "lipid-medication-responses",
+            "filePattern": "^001258866\\.xlsx$",
+            "xlsx": {
+              "sheet": 1,
+              "headerRow": [
+                2,
+                3,
+                4,
+                5
+              ],
+              "dataStartRow": 6
+            },
+            "fillDown": [
+              "都道府県名"
+            ],
+            "where": [
+              {
+                "column": "都道府県名",
+                "matches": "^(北海道|.+[都府県])$"
+              },
+              {
+                "column": "回答",
+                "notEquals": ""
+              }
+            ],
+            "unpivot": {
+              "columns": {
+                "全体/男/中計/人数": "男",
+                "全体/女/中計/人数": "女"
+              },
+              "areaColumn": "sex",
+              "valueColumn": "people"
+            },
+            "areas": [
+              {
+                "level": "prefecture",
+                "column": "都道府県名",
+                "prefectureName": true
+              }
+            ],
+            "time": "2021",
+            "dims": {
+              "question": {
+                "value": "コレステロールや中性脂肪を下げる薬の使用"
+              },
+              "sex": "sex",
+              "category": "回答"
+            },
+            "aggregation": "sum",
+            "valueColumn": "people",
+            "unit": "人",
+            "nonNumeric": "skip"
+          }
+        ]
+      }
     },
     {
       "datasetId": "niad-university-portrait-api",
@@ -1392,7 +2078,299 @@
         "linkPattern": "/honhyo_2025\\.csv$",
         "maxFiles": 1
       },
-      "version": "2025"
+      "version": "2025",
+      "normalize": {
+        "tables": [
+          {
+            "table": "accident-count-by-circumstances",
+            "filePattern": "(^|/)honhyo_2025\\.csv$",
+            "encoding": "shift_jis",
+            "areas": [
+              {
+                "level": "prefecture",
+                "column": "都道府県コード",
+                "mapping": {
+                  "values": {
+                    "10": "01",
+                    "11": "01",
+                    "12": "01",
+                    "13": "01",
+                    "14": "01",
+                    "20": "02",
+                    "21": "03",
+                    "22": "04",
+                    "23": "05",
+                    "24": "06",
+                    "25": "07",
+                    "30": "13",
+                    "40": "08",
+                    "41": "09",
+                    "42": "10",
+                    "43": "11",
+                    "44": "12",
+                    "45": "14",
+                    "46": "15",
+                    "47": "19",
+                    "48": "20",
+                    "49": "22",
+                    "50": "16",
+                    "51": "17",
+                    "52": "18",
+                    "53": "21",
+                    "54": "23",
+                    "55": "24",
+                    "60": "25",
+                    "61": "26",
+                    "62": "27",
+                    "63": "28",
+                    "64": "29",
+                    "65": "30",
+                    "70": "31",
+                    "71": "32",
+                    "72": "33",
+                    "73": "34",
+                    "74": "35",
+                    "80": "36",
+                    "81": "37",
+                    "82": "38",
+                    "83": "39",
+                    "90": "40",
+                    "91": "41",
+                    "92": "42",
+                    "93": "43",
+                    "94": "44",
+                    "95": "45",
+                    "96": "46",
+                    "97": "47"
+                  },
+                  "note": "警察庁 2025年交通事故統計オープンデータの都道府県コード（北海道10〜14は01へ統合）。コード表掲載元: https://www.npa.go.jp/publications/statistics/koutsuu/opendata/2025/opendata_2025.html 。今回のローカル原本は本票CSVのみで、コード表自体は未保存・ネットワーク再取得なし。"
+                }
+              },
+              {
+                "level": "municipality",
+                "compose": [
+                  {
+                    "column": "都道府県コード",
+                    "width": 2,
+                    "mapping": {
+                      "values": {
+                        "10": "01",
+                        "11": "01",
+                        "12": "01",
+                        "13": "01",
+                        "14": "01",
+                        "20": "02",
+                        "21": "03",
+                        "22": "04",
+                        "23": "05",
+                        "24": "06",
+                        "25": "07",
+                        "30": "13",
+                        "40": "08",
+                        "41": "09",
+                        "42": "10",
+                        "43": "11",
+                        "44": "12",
+                        "45": "14",
+                        "46": "15",
+                        "47": "19",
+                        "48": "20",
+                        "49": "22",
+                        "50": "16",
+                        "51": "17",
+                        "52": "18",
+                        "53": "21",
+                        "54": "23",
+                        "55": "24",
+                        "60": "25",
+                        "61": "26",
+                        "62": "27",
+                        "63": "28",
+                        "64": "29",
+                        "65": "30",
+                        "70": "31",
+                        "71": "32",
+                        "72": "33",
+                        "73": "34",
+                        "74": "35",
+                        "80": "36",
+                        "81": "37",
+                        "82": "38",
+                        "83": "39",
+                        "90": "40",
+                        "91": "41",
+                        "92": "42",
+                        "93": "43",
+                        "94": "44",
+                        "95": "45",
+                        "96": "46",
+                        "97": "47"
+                      },
+                      "note": "警察庁 2025年交通事故統計オープンデータの都道府県コード（北海道10〜14は01へ統合）。コード表掲載元: https://www.npa.go.jp/publications/statistics/koutsuu/opendata/2025/opendata_2025.html 。今回のローカル原本は本票CSVのみで、コード表自体は未保存・ネットワーク再取得なし。"
+                    }
+                  },
+                  {
+                    "column": "市区町村コード",
+                    "width": 3
+                  }
+                ]
+              }
+            ],
+            "time": "2025",
+            "dims": {
+              "daylight": "昼夜",
+              "weather": "天候",
+              "accidentType": "事故類型"
+            },
+            "aggregation": "count",
+            "unit": "件"
+          },
+          {
+            "table": "accident-count-by-participants",
+            "filePattern": "(^|/)honhyo_2025\\.csv$",
+            "encoding": "shift_jis",
+            "areas": [
+              {
+                "level": "prefecture",
+                "column": "都道府県コード",
+                "mapping": {
+                  "values": {
+                    "10": "01",
+                    "11": "01",
+                    "12": "01",
+                    "13": "01",
+                    "14": "01",
+                    "20": "02",
+                    "21": "03",
+                    "22": "04",
+                    "23": "05",
+                    "24": "06",
+                    "25": "07",
+                    "30": "13",
+                    "40": "08",
+                    "41": "09",
+                    "42": "10",
+                    "43": "11",
+                    "44": "12",
+                    "45": "14",
+                    "46": "15",
+                    "47": "19",
+                    "48": "20",
+                    "49": "22",
+                    "50": "16",
+                    "51": "17",
+                    "52": "18",
+                    "53": "21",
+                    "54": "23",
+                    "55": "24",
+                    "60": "25",
+                    "61": "26",
+                    "62": "27",
+                    "63": "28",
+                    "64": "29",
+                    "65": "30",
+                    "70": "31",
+                    "71": "32",
+                    "72": "33",
+                    "73": "34",
+                    "74": "35",
+                    "80": "36",
+                    "81": "37",
+                    "82": "38",
+                    "83": "39",
+                    "90": "40",
+                    "91": "41",
+                    "92": "42",
+                    "93": "43",
+                    "94": "44",
+                    "95": "45",
+                    "96": "46",
+                    "97": "47"
+                  },
+                  "note": "警察庁 2025年交通事故統計オープンデータの都道府県コード（北海道10〜14は01へ統合）。コード表掲載元: https://www.npa.go.jp/publications/statistics/koutsuu/opendata/2025/opendata_2025.html 。今回のローカル原本は本票CSVのみで、コード表自体は未保存・ネットワーク再取得なし。"
+                }
+              },
+              {
+                "level": "municipality",
+                "compose": [
+                  {
+                    "column": "都道府県コード",
+                    "width": 2,
+                    "mapping": {
+                      "values": {
+                        "10": "01",
+                        "11": "01",
+                        "12": "01",
+                        "13": "01",
+                        "14": "01",
+                        "20": "02",
+                        "21": "03",
+                        "22": "04",
+                        "23": "05",
+                        "24": "06",
+                        "25": "07",
+                        "30": "13",
+                        "40": "08",
+                        "41": "09",
+                        "42": "10",
+                        "43": "11",
+                        "44": "12",
+                        "45": "14",
+                        "46": "15",
+                        "47": "19",
+                        "48": "20",
+                        "49": "22",
+                        "50": "16",
+                        "51": "17",
+                        "52": "18",
+                        "53": "21",
+                        "54": "23",
+                        "55": "24",
+                        "60": "25",
+                        "61": "26",
+                        "62": "27",
+                        "63": "28",
+                        "64": "29",
+                        "65": "30",
+                        "70": "31",
+                        "71": "32",
+                        "72": "33",
+                        "73": "34",
+                        "74": "35",
+                        "80": "36",
+                        "81": "37",
+                        "82": "38",
+                        "83": "39",
+                        "90": "40",
+                        "91": "41",
+                        "92": "42",
+                        "93": "43",
+                        "94": "44",
+                        "95": "45",
+                        "96": "46",
+                        "97": "47"
+                      },
+                      "note": "警察庁 2025年交通事故統計オープンデータの都道府県コード（北海道10〜14は01へ統合）。コード表掲載元: https://www.npa.go.jp/publications/statistics/koutsuu/opendata/2025/opendata_2025.html 。今回のローカル原本は本票CSVのみで、コード表自体は未保存・ネットワーク再取得なし。"
+                    }
+                  },
+                  {
+                    "column": "市区町村コード",
+                    "width": 3
+                  }
+                ]
+              }
+            ],
+            "time": "2025",
+            "dims": {
+              "ageGroupA": "年齢（当事者A）",
+              "participantA": "当事者種別（当事者A）",
+              "participantB": "当事者種別（当事者B）"
+            },
+            "aggregation": "count",
+            "unit": "件"
+          }
+        ]
+      }
     },
     {
       "datasetId": "mlit-road-census-r3",
@@ -1402,7 +2380,136 @@
         "linkPattern": "\\.(?:csv|xlsx?)(?:[?#]|$)",
         "maxFiles": 300
       },
-      "version": "latest-published-at"
+      "version": "latest-published-at",
+      "normalize": {
+        "tables": [
+          {
+            "table": "road-congestion",
+            "filePattern": "^syuukei04\\.csv$",
+            "encoding": "shift_jis",
+            "fillDown": [
+              "都道府県",
+              "道路種別",
+              "交通量推定不能区間"
+            ],
+            "where": [
+              {
+                "column": "都道府県",
+                "matches": "^(北海道|.+[都府県])(全域)?$"
+              },
+              {
+                "column": "道路種別",
+                "equals": "一般道路計"
+              },
+              {
+                "column": "交通量推定不能区間",
+                "equals": "交通量推定不能区間を含まない"
+              },
+              {
+                "column": "沿道状況",
+                "equals": "合計"
+              }
+            ],
+            "areas": [
+              {
+                "level": "prefecture",
+                "column": "都道府県",
+                "capture": "^(.+?)(?:全域)?$",
+                "prefectureName": true
+              }
+            ],
+            "time": "2021",
+            "dims": {
+              "roadType": "道路種別",
+              "coverage": "交通量推定不能区間"
+            },
+            "aggregation": "sum",
+            "valueColumn": "混雑度",
+            "unit": "比",
+            "nonNumeric": "skip"
+          },
+          {
+            "table": "heavy-vehicle-share",
+            "filePattern": "^syuukei04\\.csv$",
+            "encoding": "shift_jis",
+            "fillDown": [
+              "都道府県",
+              "道路種別",
+              "交通量推定不能区間"
+            ],
+            "where": [
+              {
+                "column": "都道府県",
+                "matches": "^(北海道|.+[都府県])(全域)?$"
+              },
+              {
+                "column": "道路種別",
+                "equals": "一般道路計"
+              },
+              {
+                "column": "交通量推定不能区間",
+                "equals": "交通量推定不能区間を含まない"
+              },
+              {
+                "column": "沿道状況",
+                "equals": "合計"
+              }
+            ],
+            "areas": [
+              {
+                "level": "prefecture",
+                "column": "都道府県",
+                "capture": "^(.+?)(?:全域)?$",
+                "prefectureName": true
+              }
+            ],
+            "time": "2021",
+            "dims": {
+              "roadType": "道路種別",
+              "coverage": "交通量推定不能区間"
+            },
+            "aggregation": "sum",
+            "valueColumn": "１２時間大型車混入率（％）",
+            "unit": "％",
+            "nonNumeric": "skip"
+          },
+          {
+            "table": "peak-travel-speed",
+            "filePattern": "^syuukei05\\.csv$",
+            "encoding": "shift_jis",
+            "fillDown": [
+              "都道府県",
+              "道路種別"
+            ],
+            "where": [
+              {
+                "column": "都道府県",
+                "matches": "^(北海道|.+[都府県])(全域)?$"
+              },
+              {
+                "column": "道路種別",
+                "equals": "一般道路計"
+              }
+            ],
+            "areas": [
+              {
+                "level": "prefecture",
+                "column": "都道府県",
+                "capture": "^(.+?)(?:全域)?$",
+                "prefectureName": true
+              }
+            ],
+            "time": "2021",
+            "dims": {
+              "roadType": "道路種別"
+            },
+            "aggregation": "sum",
+            "valueColumn": "朝夕旅行速度（混雑時旅行速度）（ｋｍ／ｈ）／合計",
+            "unit": "km/h",
+            "nonNumeric": "skip"
+          }
+        ]
+      }
     },
     {
       "datasetId": "mlit-plateau-3d-city-model",

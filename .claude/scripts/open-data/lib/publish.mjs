@@ -74,19 +74,56 @@ export async function publishPlan({ root = ROOT, plan, store, publish }) {
   return { uploaded: candidates.length, verified: plan.files.length };
 }
 
-async function main() {
-  const plan = readJson(path.join(ROOT, REPORT_DIR, 'upload-plan.json'));
+export async function assertPrivateWriteAllowed(keys) {
   const guardModule = await import('../../../../packages/r2-storage/src/scripts/_assert-ci-write.ts');
   const { assertR2WriteAllowed } = guardModule.default ?? guardModule;
-  assertR2WriteAllowed({ op: 'open-data-source-archive', bucket: R2_PRIVATE_BUCKET, targets: plan.files.map((f) => f.key) });
+  assertR2WriteAllowed({ op: 'open-data-source-archive', bucket: R2_PRIVATE_BUCKET, targets: keys });
+}
+
+/** Shared private-bucket authentication and GET implementation for archive/normalize. */
+export async function createPrivateStore() {
   if (process.env.CLOUDFLARE_R2_BUCKET_NAME !== R2_PRIVATE_BUCKET) throw Error('Private bucket must be explicitly selected');
   const storeModule = await import('../../../../packages/r2-storage/src/image-pipeline.ts');
   const { createS3ImageObjectStoreFromEnv } = storeModule.default ?? storeModule;
-  const publisherModule = await import('../../../../packages/r2-storage/src/scripts/push-exact-r2-assets-core.ts');
-  const { publishExactR2Assets } = publisherModule.default ?? publisherModule;
   const store = createS3ImageObjectStoreFromEnv();
   if (!store) throw Error('R2 S3 authentication required');
-  console.log(JSON.stringify(await publishPlan({ plan, store, publish: publishExactR2Assets })));
+  return store;
+}
+
+export async function exactPublisher(options) {
+  const publisherModule = await import('../../../../packages/r2-storage/src/scripts/push-exact-r2-assets-core.ts');
+  const { publishExactR2Assets } = publisherModule.default ?? publisherModule;
+  return publishExactR2Assets(options);
+}
+
+export async function publishNormalizedOutputs({ root = ROOT, files, store, publish = exactPublisher, dryRun = true }) {
+  const seen = new Set();
+  const candidates = files.map((file) => {
+    if (!/^open-data\/normalized\/[^/]+\/[^/]+\/[^/]+\.json$/.test(file.key) || seen.has(file.key)) throw Error('Invalid normalized output key');
+    seen.add(file.key);
+    const absolutePath = localKey(root, file.key);
+    const body = fs.readFileSync(absolutePath);
+    assertSha(body, file.sha256);
+    if (body.length !== file.bytes) throw Error('Normalized output bytes mismatch');
+    return { key: file.key, absolutePath, body, sha256: file.sha256, size: file.bytes, contentType: 'application/json', contentEncoding: null };
+  });
+  // Do not even call a publisher on dry-run; injected publishers cannot accidentally PUT.
+  if (dryRun) return { planned: candidates.length, verified: 0, dryRun: true };
+  const privateStore = { ...store, put: (options) => store.put({ ...options, cacheControl: 'private, no-store' }) };
+  const result = candidates.length ? await publish({ candidates, store: privateStore, dryRun: false }) : { uploaded: 0 };
+  for (const file of files) {
+    const remote = await store.get(file.key);
+    if (!remote || remote.body.length !== file.bytes) throw Error('Remote read-back missing/bytes mismatch');
+    assertSha(remote.body, file.sha256);
+  }
+  return { ...result, verified: candidates.length, dryRun: false };
+}
+
+async function main() {
+  const plan = readJson(path.join(ROOT, REPORT_DIR, 'upload-plan.json'));
+  await assertPrivateWriteAllowed(plan.files.map((f) => f.key));
+  const store = await createPrivateStore();
+  console.log(JSON.stringify(await publishPlan({ plan, store, publish: exactPublisher })));
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
   main().catch((error) => { console.error(error.message); process.exitCode = 1; });
