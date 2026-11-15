@@ -834,26 +834,6 @@
       "tagIds": []
     },
     {
-      "id": "blog:beef-consumption-prefecture-gap",
-      "kind": "blog",
-      "key": "beef-consumption-prefecture-gap",
-      "title": "牛肉消費の西高東低は本当? 2025年の日本一は京都",
-      "href": "/blog/beef-consumption-prefecture-gap",
-      "published": false,
-      "rankingKeys": [
-        "beef-consumption-expenditure",
-        "beef-consumption-quantity",
-        "pork-consumption-quantity"
-      ],
-      "tagIds": [
-        "tag:t-dbae9736c59a",
-        "tag:food-culture",
-        "tag:t-91c255548698",
-        "tag:t-3dfcbdc38d3e",
-        "tag:t-ba8e4beb69bf"
-      ]
-    },
-    {
       "id": "blog:beef-consumption-quantity",
       "kind": "blog",
       "key": "beef-consumption-quantity",
@@ -5210,24 +5190,6 @@
       ]
     },
     {
-      "id": "blog:general-hospital-bed-occupancy-rate",
-      "kind": "blog",
-      "key": "general-hospital-bed-occupancy-rate",
-      "title": "なぜ佐賀の病床は満床に近いのか——一般病院病床利用率の逆説 (2023年度)",
-      "href": "/blog/general-hospital-bed-occupancy-rate",
-      "published": false,
-      "rankingKeys": [
-        "general-hospital-bed-occupancy-rate"
-      ],
-      "tagIds": [
-        "tag:t-640f62209d37",
-        "tag:medical-care",
-        "tag:social-security",
-        "tag:t-57b49d75a2e4",
-        "tag:t-c77b753eed86"
-      ]
-    },
-    {
       "id": "blog:general-households-prefecture-gap",
       "kind": "blog",
       "key": "general-households-prefecture-gap",
@@ -6778,23 +6740,6 @@
         "tag:engel-coefficient",
         "tag:communication-costs",
         "tag:cost-of-living"
-      ]
-    },
-    {
-      "id": "blog:inpatient-rate-aging-burden",
-      "kind": "blog",
-      "key": "inpatient-rate-aging-burden",
-      "title": "入院受療率は西日本で高い｜なぜ高知が東京の2.7倍?",
-      "href": "/blog/inpatient-rate-aging-burden",
-      "published": false,
-      "rankingKeys": [
-        "inpatient-rate-per-100k"
-      ],
-      "tagIds": [
-        "tag:t-e7ba968af9af",
-        "tag:t-b162c2d097a8",
-        "tag:aging-population",
-        "tag:medical-care"
       ]
     },
     {
@@ -9171,25 +9116,6 @@
         "tag:food-culture",
         "tag:t-ba8e4beb69bf",
         "tag:t-6783a59e0136"
-      ]
-    },
-    {
-      "id": "blog:natto-consumption-expenditure",
-      "kind": "blog",
-      "key": "natto-consumption-expenditure",
-      "title": "納豆を多く買うのは茨城より福島？｜家計調査2025",
-      "href": "/blog/natto-consumption-expenditure",
-      "published": false,
-      "rankingKeys": [
-        "mayonnaise-consumption-expenditure",
-        "natto-consumption-expenditure"
-      ],
-      "tagIds": [
-        "tag:t-398d632cb1eb",
-        "tag:food-culture",
-        "tag:consumption-expenditure",
-        "tag:t-6f414497615e",
-        "tag:t-ba8e4beb69bf"
       ]
     },
     {
@@ -12339,27 +12265,6 @@
       "tagIds": []
     },
     {
-      "id": "blog:software-engineer-income-gap",
-      "kind": "blog",
-      "key": "software-engineer-income-gap",
-      "title": "ソフトウェアエンジニアの年収、最も高い県は東京じゃない？京都608万 vs 沖縄402万、1.5倍差の真因 (2023)",
-      "href": "/blog/software-engineer-income-gap",
-      "published": false,
-      "rankingKeys": [
-        "avg-salary-all-prefecture",
-        "software-engineer-annual-income",
-        "system-consultant-annual-income"
-      ],
-      "tagIds": [
-        "tag:wages",
-        "tag:labor",
-        "tag:t-f415bf7b07a9",
-        "tag:t-4be518531d2b",
-        "tag:t-14fd9d310d3f",
-        "tag:t-89a80a8abda1"
-      ]
-    },
-    {
       "id": "blog:software-engineer-salary-prefecture-gap",
       "kind": "blog",
       "key": "software-engineer-salary-prefecture-gap",
@@ -13013,25 +12918,6 @@
       "tagIds": []
     },
     {
-      "id": "blog:telework-gap-tokyo-6x",
-      "kind": "blog",
-      "key": "telework-gap-tokyo-6x",
-      "title": "テレワーク率は東京40%・秋田6%",
-      "href": "/blog/telework-gap-tokyo-6x",
-      "published": false,
-      "rankingKeys": [
-        "job-change-rate",
-        "side-job-rate",
-        "telework-rate"
-      ],
-      "tagIds": [
-        "tag:t-cdc6b52f0341",
-        "tag:t-e22abecb4b95",
-        "tag:t-e277cf2130a3",
-        "tag:t-ee9ece17e2d2"
-      ]
-    },
-    {
       "id": "blog:telework-income-correlation",
       "kind": "blog",
       "key": "telework-income-correlation",
@@ -13371,24 +13257,6 @@
         "toothpaste-consumption-expenditure"
       ],
       "tagIds": []
-    },
-    {
-      "id": "blog:total-fertility-rate",
-      "kind": "blog",
-      "key": "total-fertility-rate",
-      "title": "東京の出生率がついに1.0を割った｜沖縄1.60 vs 東京0.99、「都市ほど子が生まれない」逆説の構造 (2023)",
-      "href": "/blog/total-fertility-rate",
-      "published": false,
-      "rankingKeys": [
-        "total-fertility-rate"
-      ],
-      "tagIds": [
-        "tag:birth-rate",
-        "tag:declining-birthrate",
-        "tag:population",
-        "tag:total-fertility-rate",
-        "tag:t-130016b2599b"
-      ]
     },
     {
       "id": "blog:tottori-food-culture",
@@ -14153,19 +14021,6 @@
       "tagIds": []
     },
     {
-      "id": "blog:vacant-housing-rate-vs-standard-price-change-rate-commercial",
-      "kind": "blog",
-      "key": "vacant-housing-rate-vs-standard-price-change-rate-commercial",
-      "title": "空き家が多い県ほど地価は下がる?",
-      "href": "/blog/vacant-housing-rate-vs-standard-price-change-rate-commercial",
-      "published": false,
-      "rankingKeys": [
-        "standard-price-change-rate-commercial",
-        "vacant-housing-rate"
-      ],
-      "tagIds": []
-    },
-    {
       "id": "blog:vacant-housing-vs-aging",
       "kind": "blog",
       "key": "vacant-housing-vs-aging",
@@ -14544,24 +14399,6 @@
         "western-food-dining-consumption-expenditure"
       ],
       "tagIds": []
-    },
-    {
-      "id": "blog:wheat-flour-consumption-food-culture-gap",
-      "kind": "blog",
-      "key": "wheat-flour-consumption-food-culture-gap",
-      "title": "小麦粉消費量、うどん県・香川を抑えて首位は長野｜食文化の地図 (2025)",
-      "href": "/blog/wheat-flour-consumption-food-culture-gap",
-      "published": false,
-      "rankingKeys": [
-        "wheat-flour-consumption-quantity"
-      ],
-      "tagIds": [
-        "tag:t-4ba92dfc20d6",
-        "tag:t-8c39f0203b51",
-        "tag:t-ba8e4beb69bf",
-        "tag:food-culture",
-        "tag:t-db83c3b2e6e6"
-      ]
     },
     {
       "id": "blog:wheat-flour-consumption-prefecture",

@@ -5583,10 +5583,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "blog:beef-consumption-prefecture-gap",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:chicken-consumption-prefecture-gap",
           "kind": "blog"
         },

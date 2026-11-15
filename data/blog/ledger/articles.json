@@ -866,7 +866,7 @@
     {
       "slug": "beef-consumption-prefecture-gap",
       "title": "牛肉消費の西高東低は本当? 2025年の日本一は京都",
-      "status": "published",
+      "status": "gone",
       "publishedAt": "2026-06-13",
       "updatedAt": "2026-11-09",
       "rankingKeys": [
@@ -881,7 +881,7 @@
         "tag:t-3dfcbdc38d3e",
         "tag:t-ba8e4beb69bf"
       ],
-      "r2Path": "blog/beef-consumption-prefecture-gap/article.md"
+      "r2Path": null
     },
     {
       "slug": "beef-consumption-quantity",
@@ -5302,7 +5302,7 @@
     {
       "slug": "general-hospital-bed-occupancy-rate",
       "title": "なぜ佐賀の病床は満床に近いのか——一般病院病床利用率の逆説 (2023年度)",
-      "status": "published",
+      "status": "gone",
       "publishedAt": "2026-06-14",
       "updatedAt": "2026-06-14",
       "rankingKeys": [
@@ -5315,7 +5315,7 @@
         "tag:t-57b49d75a2e4",
         "tag:t-c77b753eed86"
       ],
-      "r2Path": "blog/general-hospital-bed-occupancy-rate/article.md"
+      "r2Path": null
     },
     {
       "slug": "general-households-prefecture-gap",
@@ -6873,7 +6873,7 @@
     {
       "slug": "inpatient-rate-aging-burden",
       "title": "入院受療率は西日本で高い｜なぜ高知が東京の2.7倍?",
-      "status": "published",
+      "status": "gone",
       "publishedAt": "2026-03-29",
       "updatedAt": "2026-03-29",
       "rankingKeys": [
@@ -6885,7 +6885,7 @@
         "tag:aging-population",
         "tag:medical-care"
       ],
-      "r2Path": "blog/inpatient-rate-aging-burden/article.md"
+      "r2Path": null
     },
     {
       "slug": "inpatient-rate-prefecture-gap",
@@ -9296,7 +9296,7 @@
     {
       "slug": "natto-consumption-expenditure",
       "title": "納豆を多く買うのは茨城より福島？｜家計調査2025",
-      "status": "published",
+      "status": "gone",
       "publishedAt": "2026-06-14",
       "updatedAt": "2026-11-09",
       "rankingKeys": [
@@ -9310,7 +9310,7 @@
         "tag:t-6f414497615e",
         "tag:t-ba8e4beb69bf"
       ],
-      "r2Path": "blog/natto-consumption-expenditure/article.md"
+      "r2Path": null
     },
     {
       "slug": "natto-production-vs-consumption",
@@ -12511,7 +12511,7 @@
     {
       "slug": "software-engineer-income-gap",
       "title": "ソフトウェアエンジニアの年収、最も高い県は東京じゃない？京都608万 vs 沖縄402万、1.5倍差の真因 (2023)",
-      "status": "published",
+      "status": "gone",
       "publishedAt": "2026-06-02",
       "updatedAt": "2026-06-02",
       "rankingKeys": [
@@ -12527,7 +12527,7 @@
         "tag:t-14fd9d310d3f",
         "tag:t-89a80a8abda1"
       ],
-      "r2Path": "blog/software-engineer-income-gap/article.md"
+      "r2Path": null
     },
     {
       "slug": "software-engineer-salary-prefecture-gap",
@@ -13185,7 +13185,7 @@
     {
       "slug": "telework-gap-tokyo-6x",
       "title": "テレワーク率は東京40%・秋田6%",
-      "status": "published",
+      "status": "gone",
       "publishedAt": "2026-03-29",
       "updatedAt": "2026-05-28",
       "rankingKeys": [
@@ -13199,7 +13199,7 @@
         "tag:t-e277cf2130a3",
         "tag:t-ee9ece17e2d2"
       ],
-      "r2Path": "blog/telework-gap-tokyo-6x/article.md"
+      "r2Path": null
     },
     {
       "slug": "telework-income-correlation",
@@ -13545,7 +13545,7 @@
     {
       "slug": "total-fertility-rate",
       "title": "東京の出生率がついに1.0を割った｜沖縄1.60 vs 東京0.99、「都市ほど子が生まれない」逆説の構造 (2023)",
-      "status": "published",
+      "status": "gone",
       "publishedAt": "2026-06-08",
       "updatedAt": "2026-06-08",
       "rankingKeys": [
@@ -13558,7 +13558,7 @@
         "tag:total-fertility-rate",
         "tag:t-130016b2599b"
       ],
-      "r2Path": "blog/total-fertility-rate/article.md"
+      "r2Path": null
     },
     {
       "slug": "tottori-food-culture",
@@ -14325,7 +14325,7 @@
     {
       "slug": "vacant-housing-rate-vs-standard-price-change-rate-commercial",
       "title": "空き家が多い県ほど地価は下がる?",
-      "status": "published",
+      "status": "gone",
       "publishedAt": "2026-08-30",
       "updatedAt": null,
       "rankingKeys": [
@@ -14333,7 +14333,7 @@
         "vacant-housing-rate"
       ],
       "tagIds": [],
-      "r2Path": "blog/vacant-housing-rate-vs-standard-price-change-rate-commercial/article.md"
+      "r2Path": null
     },
     {
       "slug": "vacant-housing-vs-aging",
@@ -14728,7 +14728,7 @@
     {
       "slug": "wheat-flour-consumption-food-culture-gap",
       "title": "小麦粉消費量、うどん県・香川を抑えて首位は長野｜食文化の地図 (2025)",
-      "status": "published",
+      "status": "gone",
       "publishedAt": "2026-06-07",
       "updatedAt": "2026-11-09",
       "rankingKeys": [
@@ -14741,7 +14741,7 @@
         "tag:food-culture",
         "tag:t-db83c3b2e6e6"
       ],
-      "r2Path": "blog/wheat-flour-consumption-food-culture-gap/article.md"
+      "r2Path": null
     },
     {
       "slug": "wheat-flour-consumption-prefecture",

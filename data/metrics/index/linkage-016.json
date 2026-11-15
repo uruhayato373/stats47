@@ -656,10 +656,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:natto-consumption-expenditure",
-          "kind": "blog"
-        },
-        {
           "pageId": "ranking:mayonnaise-consumption-expenditure",
           "kind": "ranking"
         }
