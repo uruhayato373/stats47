@@ -539,10 +539,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:software-engineer-income-gap",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:software-engineer-salary-prefecture-gap",
           "kind": "blog"
         },
@@ -6657,10 +6653,6 @@
       "consumers": [
         {
           "pageId": "blog:commercial-land-price-trend",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:vacant-housing-rate-vs-standard-price-change-rate-commercial",
           "kind": "blog"
         },
         {

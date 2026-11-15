@@ -6289,10 +6289,6 @@
           "kind": "area-theme"
         },
         {
-          "pageId": "blog:general-hospital-bed-occupancy-rate",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:hospital-bed-utilization-map",
           "kind": "blog"
         },

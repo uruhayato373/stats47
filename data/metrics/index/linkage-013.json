@@ -6193,10 +6193,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:inpatient-rate-aging-burden",
-          "kind": "blog"
-        },
-        {
           "pageId": "blog:inpatient-rate-prefecture-gap",
           "kind": "blog"
         },
@@ -11018,10 +11014,6 @@
         {
           "pageId": "area-theme:47000:labor-mobility",
           "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:telework-gap-tokyo-6x",
-          "kind": "blog"
         },
         {
           "pageId": "blog:telework-rate-tokyo-gap",
