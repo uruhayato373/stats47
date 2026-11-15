@@ -1,7 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { createHash } from "node:crypto";
 import Ajv from "ajv";
 import { describe, expect, it } from "vitest";
 import ledger from "../../../../../data/open-data/expansion.json";
@@ -139,13 +138,5 @@ describe("reproducible 47-prefecture calculations", () => {
     expect(evaluateExpansionCandidate(ratio, { ...fixture, rows }, new Map(PREFECTURE_AREA_CODES.map((code) => [code, 1000]))).min).toBe(100);
     expect(() => evaluateExpansionCandidate(ratio, { ...fixture, rows }, new Map(PREFECTURE_AREA_CODES.map((code) => [code, 0])))).toThrow("分母");
   });
-
-  const normalizedRoot = path.join(root, ".local/r2/open-data/normalized");
-  it.skipIf(!fs.existsSync(normalizedRoot))("recomputes every planned value range from the exact local input bytes", () => {
-    for (const c of expansion.candidates.filter((c) => c.status === "planned")) {
-      const bytes = fs.readFileSync(path.join(normalizedRoot, c.datasetId, c.slice.version, `${c.table}.json`));
-      const table = JSON.parse(bytes.toString()) as OpenDataNormalizedTable;
-      expect({ tableSha256: createHash("sha256").update(bytes).digest("hex"), ...evaluateExpansionCandidate(c, table) }).toEqual(c.verification);
-    }
-  });
+  // 手元の正規化表から planned の値域を再計算する照合は validate-open-data-catalog.ts が行う (表が無いときは warn)。
 });
