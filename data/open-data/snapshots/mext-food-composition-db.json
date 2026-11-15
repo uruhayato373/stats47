@@ -1,0 +1,114 @@
+{
+  "datasetId": "mext-food-composition-db",
+  "versions": [
+    {
+      "schemaVersion": 1,
+      "datasetId": "mext-food-composition-db",
+      "version": "2026-03-27",
+      "sha256": "2176a786b7b818bcf5833f7887c45255127e39a7e45877ca6d8892584b6ec654",
+      "recipeSha256": "2eafdd3d6b86d407339838fdab0c52b448a1de4b31b8a03e3045545469e296fc",
+      "retrievedAt": "2026-11-15T04:31:42.307Z",
+      "license": {
+        "name": "未確認",
+        "commercialUse": "unknown",
+        "attributionRequired": false,
+        "modificationNoticeRequired": false,
+        "termsUrl": "https://fooddb.mext.go.jp/"
+      },
+      "files": [
+        {
+          "key": "open-data/raw/mext-food-composition-db/2026-03-27/0001.xlsx",
+          "url": "https://www.mext.go.jp/content/20260327-mxt_kagsei-mext-000029402_02.xlsx",
+          "sha256": "0d5a77077dd6cd91cbc2e6e317b8b218a38728c409eed452f1c10635a0d3099c",
+          "bytes": 1973402,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:31:31.832Z"
+        },
+        {
+          "key": "open-data/raw/mext-food-composition-db/2026-03-27/0002.xlsx",
+          "url": "https://www.mext.go.jp/content/20260327-mxt_kagsei-mext-000029402_04.xlsx",
+          "sha256": "8786e8581e03ae25e2ecd770c48a8d1060e61ae6f7464cf1607614dcde543bc4",
+          "bytes": 936856,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:31:32.869Z"
+        },
+        {
+          "key": "open-data/raw/mext-food-composition-db/2026-03-27/0003.xlsx",
+          "url": "https://www.mext.go.jp/content/20260327-mxt_kagsei-mext-000029402_05.xlsx",
+          "sha256": "51241d24839b61993e3bc94411d1a560e02a63e44fecbe449d35715fad7c6762",
+          "bytes": 372979,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:31:33.270Z"
+        },
+        {
+          "key": "open-data/raw/mext-food-composition-db/2026-03-27/0004.xlsx",
+          "url": "https://www.mext.go.jp/content/20260327-mxt_kagsei-mext-000029402_06.xlsx",
+          "sha256": "9e00b30606cfb6e5b63c5977164b4e4072fd1b72c8cfcd75e8fe2e9cf13b20b7",
+          "bytes": 344440,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:31:34.278Z"
+        },
+        {
+          "key": "open-data/raw/mext-food-composition-db/2026-03-27/0005.xlsx",
+          "url": "https://www.mext.go.jp/content/20260327-mxt_kagsei-mext-000029402_07.xlsx",
+          "sha256": "ee6f9c8d26aef4ecdb269b4f115df7c0f7139494b82364ac8860ba0e928a4259",
+          "bytes": 349190,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:31:35.288Z"
+        },
+        {
+          "key": "open-data/raw/mext-food-composition-db/2026-03-27/0006.xlsx",
+          "url": "https://www.mext.go.jp/content/20260327-mxt_kagsei-mext-000029402_09.xlsx",
+          "sha256": "435ab7125d3de26fba968de952b463b71d011c6b0f50e8966112293c521fd5fd",
+          "bytes": 1481333,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:31:37.942Z"
+        },
+        {
+          "key": "open-data/raw/mext-food-composition-db/2026-03-27/0007.xlsx",
+          "url": "https://www.mext.go.jp/content/20260327-mxt_kagsei-mext-000029402_10.xlsx",
+          "sha256": "b96bc69b9c6ffb0d87861a345f2672573285c05dae7f6cb8795131637d529e49",
+          "bytes": 911747,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:31:38.972Z"
+        },
+        {
+          "key": "open-data/raw/mext-food-composition-db/2026-03-27/0008.xlsx",
+          "url": "https://www.mext.go.jp/content/20260327-mxt_kagsei-mext-000029402_11.xlsx",
+          "sha256": "40e5d87ca97a24bfa331fc1aaf87c919be03a5ff668479b7a9997a6fb3818d1a",
+          "bytes": 901316,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:31:40.025Z"
+        },
+        {
+          "key": "open-data/raw/mext-food-composition-db/2026-03-27/0009.xlsx",
+          "url": "https://www.mext.go.jp/content/20260327-mxt_kagsei-mext-000029402_13.xlsx",
+          "sha256": "099bdadb4a980df503e7a3dd057e49a69b68315b67012a3358b9a6d06984e137",
+          "bytes": 318912,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:31:40.435Z"
+        },
+        {
+          "key": "open-data/raw/mext-food-composition-db/2026-03-27/0010.xlsx",
+          "url": "https://www.mext.go.jp/content/20260327-mxt_kagsei-mext-000029402_14.xlsx",
+          "sha256": "cde0c4d994cbca77fc1cc96aebdf5f5446ac18bbcdabb93b96c9ea36f5b2ba26",
+          "bytes": 298252,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:31:41.437Z"
+        },
+        {
+          "key": "open-data/raw/mext-food-composition-db/2026-03-27/0011.xlsx",
+          "url": "https://www.mext.go.jp/content/20260327-mxt_kagsei-mext-000029402_15.xlsx",
+          "sha256": "2106a7583dd54baba85ae3d000bfd0476090236f3c6018f90bc3e44df4f896c5",
+          "bytes": 179883,
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "retrievedAt": "2026-11-15T04:31:42.307Z"
+        }
+      ],
+      "manifestKey": "open-data/raw/mext-food-composition-db/2026-03-27/manifest.json",
+      "manifestSha256": "3385fe21e77e65b0409349401cd6b46bdf9d9f5b73e26ef7b17fb5f8c4983609",
+      "bytes": 8068310,
+      "status": "archived"
+    }
+  ]
+}
