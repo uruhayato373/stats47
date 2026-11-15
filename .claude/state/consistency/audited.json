@@ -1,9 +1,12 @@
 {
-  "hash": "678ae75c5b94de8e5b29a92ca4e30ee849e1cf6c3220c1072bed49d598539191",
-  "audited_at": "2026-11-12T21:44:54",
+  "hash": "9a0e8ba33d82234b74fc6be2def409198ec422228465fa3e61862d5d48a5f6e5",
+  "audited_at": "2026-11-13T13:24:03",
   "files": [
-    ".claude/rules/affiliate-ads-standards.md",
-    ".claude/scripts/ads/capture-ad-layout.ts",
-    ".claude/scripts/lib/check-ad-placement.cjs"
+    ".agents/skills/note/publish-note/SKILL.md",
+    ".claude/scripts/note/__tests__/navigation-footer.test.mjs",
+    ".claude/scripts/note/lib/navigation-footer.mjs",
+    ".claude/scripts/note/lib/note-session.mjs",
+    ".claude/scripts/note/update-published-navigation.mjs",
+    ".claude/skills/note/publish-note/SKILL.md"
   ]
 }
