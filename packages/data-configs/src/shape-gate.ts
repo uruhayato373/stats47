@@ -215,7 +215,7 @@ export function summarizeShape(rows: readonly ShapeRow[]): ShapeSummary {
   let valueMin: number | null = null;
 
   for (const row of rows) {
-    const pairKey = `${row.areaCode} ${row.yearCode}`;
+    const pairKey = `${row.areaCode}\u0000${row.yearCode}`;
     multiplicity.set(pairKey, (multiplicity.get(pairKey) ?? 0) + 1);
 
     let areas = areasByYear.get(row.yearCode);

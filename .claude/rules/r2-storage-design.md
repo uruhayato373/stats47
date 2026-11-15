@@ -35,6 +35,7 @@ prefix の区分・書き手・何のデータかの一覧は `npm run r2:classe
   それ以前は警告だけで通していた)。意図して通すときだけ `ALLOW_LOCAL_R2_WRITE=1` を付ける。
 - `.local/r2` は push の一時 staging で、常駐するローカル R2 ミラーは無い (`local:cleanup` が 7 日で回収する)。
 - 新しく R2 に書くスクリプトは、**先頭で `assertR2WriteAllowed()` を、書く key を渡して呼ぶ**。
+- **キーと接続は入口から作る (2026-11-15)**: `app/stats`・`app/ranking` のキーと公開 URL は `packages/r2-storage/src/keys.ts` (`statsR2Key`・`rankingR2Key`・`R2_PUBLIC_ORIGIN`。素の node は鏡 `.claude/scripts/lib/r2-keys.mjs`)、S3 クライアントは `createR2S3Client` (`lib/clients/r2-s3-client.mjs`) だけで作る。入口の外の直書きは `check-r2-entrypoint.mjs` が理由つきの例外 (縮小専用) の外で止める。
 
 ## 書き込みの承認 (2026-11-14 オーナー決定)
 

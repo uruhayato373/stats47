@@ -67,7 +67,7 @@ metric の title・subtitle・note やブログ本文で品目の範囲を書く
 ## 関連
 
 - **e-Statメタデータ完全カタログ** (全国/都道府県/市区町村のstatsDataId+分類コード+年次+エリア種別を月次でR2保有): 初回のみ`catalog.mjs pull`、以後`node --import tsx .claude/scripts/estat/catalog.mjs search <語>`。統計表の存在確認は生API呼び出しの前にこちらを先に引く。設計 `docs/02_実装計画/48_e-Statカタログ実装仕様.md`
-- e-Stat API クライアント: `packages/estat-api/`
+- e-Stat API クライアント: `packages/estat-api/` (呼び出しの入口は TS が `src/ingest.ts`、素の node が `.claude/scripts/lib/estat-catalog/api.mjs`。URL と app ID の直書きは `check-estat-entrypoint.mjs` が止める)
 - 正準ユーティリティ: `packages/estat-api/src/stats-data/utils/extract-year-code.ts`（`extractYearCode`）
 - year lint: `packages/data-configs/scripts/validate-metric-years.ts`（`npm run validate:years`）
 - **metric config 構造規約 (category 17 軸 / title・subtitle・note・description の役割)**: `.claude/rules/metric-config-standards.md`（lint: `npm run validate:config`）
