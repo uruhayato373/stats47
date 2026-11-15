@@ -60,6 +60,8 @@ function parseArgs(argv) {
   const magazine = magazineIndex >= 0 ? argv[magazineIndex + 1] : null;
   if (magazineIndex >= 0 && !magazine) throw new Error("--magazine <key> を指定してください");
   const check = argv.includes("--check");
+  const repairsOnly = argv.includes("--repairs-only");
+  if (repairsOnly && !slug) throw new Error("--repairs-only は --slug <key> と同時に指定してください");
   if (check && !products) throw new Error("--check は --products と同時に指定してください");
   const forceRegenerateCards = argv.includes("--force-regenerate-cards");
   if (forceRegenerateCards && !products) {
@@ -83,6 +85,7 @@ function parseArgs(argv) {
     magazine,
     check,
     forceRegenerateCards,
+    repairsOnly,
     commit: argv.includes("--commit"),
   };
 }
@@ -287,7 +290,7 @@ export function buildPlans(source, views, options) {
         || (options.repairRedirects && (liveRepair?.forceNormalizeLegacy || liveRepair?.repairs.length));
     })
     .map((article) => {
-      const includeFooter = !options.products && (
+      const includeFooter = !options.products && !options.repairsOnly && (
         (options.allFree || options.slug === article.key || options.magazine === article.magazine)
           && !article.isPaid || Boolean(article.nextBestArticle)
       );
