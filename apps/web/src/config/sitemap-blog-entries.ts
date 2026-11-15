@@ -6,8 +6,8 @@
  * ビルド時は R2 に到達できないため、sitemap.ts はこの git 定数を読む。
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
- * 最終生成日: 2026-11-14
- * 件数: blog 852 / tag 74 / survey 149
+ * 最終生成日: 2026-11-15
+ * 件数: blog 852 / tag 70 / survey 149
  */
 
 export interface SitemapBlogEntry {
@@ -880,14 +880,12 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
 export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "ClaudeCode", lastModified: "2026-06-14" },
   { tagKey: "D3", lastModified: "2026-06-14" },
-  { tagKey: "IT", lastModified: "2026-06-02" },
   { tagKey: "e-Stat", lastModified: "2026-06-14" },
   { tagKey: "まぐろ", lastModified: "2026-11-09" },
   { tagKey: "インバウンド", lastModified: "2026-05-29" },
   { tagKey: "インフラ", lastModified: "2026-06-14" },
   { tagKey: "エネルギー", lastModified: "2026-09-02" },
   { tagKey: "エンゲル係数", lastModified: "2026-11-09" },
-  { tagKey: "テレワーク", lastModified: "2026-06-02" },
   { tagKey: "世帯構造", lastModified: "2026-11-09" },
   { tagKey: "人口", lastModified: "2026-08-29" },
   { tagKey: "人口減少", lastModified: "2026-11-06" },
@@ -932,7 +930,6 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "相関", lastModified: "2026-10-09" },
   { tagKey: "社会保障", lastModified: "2026-08-11" },
   { tagKey: "空き家率", lastModified: "2026-11-06" },
-  { tagKey: "納豆", lastModified: "2026-07-19" },
   { tagKey: "経済", lastModified: "2026-06-21" },
   { tagKey: "製造業", lastModified: "2026-11-07" },
   { tagKey: "観光", lastModified: "2026-08-30" },
@@ -947,7 +944,6 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "都道府県ランキング", lastModified: "2026-11-09" },
   { tagKey: "都道府県別", lastModified: "2026-08-30" },
   { tagKey: "都道府県格差", lastModified: "2026-07-10" },
-  { tagKey: "食品消費", lastModified: "2026-11-09" },
   { tagKey: "食文化", lastModified: "2026-09-05" },
   { tagKey: "食生活", lastModified: "2026-11-09" },
   { tagKey: "食費", lastModified: "2026-11-09" },
