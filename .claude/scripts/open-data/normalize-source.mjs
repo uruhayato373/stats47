@@ -10,7 +10,10 @@ import { assertNormalizedTable, csvMembers, normalizeTable, NORMALIZE_LIMIT } fr
 export function writeNormalizedTables(pending, root = ROOT) {
   for (const { table, levels } of pending) assertNormalizedTable(table, levels);
   for (const { key, table } of pending) writeJson(localKey(root, key), table);
-  return pending.map(({ key, table }) => ({ key, rows: table.rows.length }));
+  return pending.map(({ key, table }) => {
+    const body = fs.readFileSync(localKey(root, key));
+    return { key, rows: table.rows.length, bytes: body.length, sha256: sha256(body) };
+  });
 }
 
 export async function normalizeRecipe(recipe, root = ROOT) {
@@ -20,13 +23,17 @@ export async function normalizeRecipe(recipe, root = ROOT) {
   const pending = [];
   for (const entry of snapshot.versions) {
     await verifyEntry(root, entry);
-    if (entry.bytes > NORMALIZE_LIMIT) throw Error('Normalization byte limit exceeded');
+    const patterns = recipe.normalize.tables.map((table) => table.filePattern);
+    const selected = patterns.map((pattern) => new RegExp(pattern));
+    const budget = { used: 0 };
     const members = [];
     for (const file of entry.files) {
       const name = decodeURIComponent(new URL(file.url).pathname.split('/').pop());
-      members.push(...await csvMembers(fs.readFileSync(localKey(root, file.key)), name));
+      // ZIP containers need their directory inspected; only matching members are inflated.
+      // SHA verification above still streams every raw file, including excluded files.
+      if (!/\.zip$/i.test(name) && !selected.some((pattern) => pattern.test(name))) continue;
+      members.push(...await csvMembers(fs.readFileSync(localKey(root, file.key)), name, NORMALIZE_LIMIT, patterns, budget));
     }
-    if (members.reduce((n, m) => n + m.bytes.length, 0) > NORMALIZE_LIMIT) throw Error('Normalization expansion limit exceeded');
     const tables = recipe.normalize.tables.map((table) => normalizeTable({
       datasetId: recipe.datasetId, version: entry.version, table, members,
       provenance: { manifestKey: entry.manifestKey, manifestSha256: entry.manifestSha256, recipeSha256: sha256(JSON.stringify(recipe)) },

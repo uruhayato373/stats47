@@ -29,6 +29,11 @@ export async function verifyFile(file, expected) {
   for await (const chunk of fs.createReadStream(file)) { hash.update(chunk); bytes += chunk.length; }
   if (bytes !== expected.bytes || hash.digest('hex') !== expected.sha256) throw Error('SHA-256/bytes mismatch');
 }
+export const serializeManifest = (manifest) => Buffer.from(`${JSON.stringify(manifest, null, 2)}\n`);
+export function entryManifest(entry) {
+  const { manifestKey, manifestSha256, bytes, status, ...manifest } = entry;
+  return manifest;
+}
 export function entryFiles(entry, root) {
   return [...entry.files.map(({ key, bytes, sha256: hash, contentType }) => ({ key, bytes, sha256: hash, contentType })), {
     key: entry.manifestKey, sha256: entry.manifestSha256,
@@ -39,9 +44,9 @@ export async function verifyEntry(root, entry) {
   const bytes = fs.readFileSync(localKey(root, entry.manifestKey));
   assertSha(bytes, entry.manifestSha256);
   const manifest = JSON.parse(bytes);
-  const { manifestKey, manifestSha256, bytes: totalBytes, status, ...expected } = entry;
+  const expected = entryManifest(entry);
   if (JSON.stringify(manifest) !== JSON.stringify(expected)) throw Error('Manifest/ledger mismatch');
-  if (entry.files.reduce((n, f) => n + f.bytes, 0) !== totalBytes) throw Error('Snapshot total bytes mismatch');
+  if (entry.files.reduce((n, f) => n + f.bytes, 0) !== entry.bytes) throw Error('Snapshot total bytes mismatch');
   for (const f of entry.files) await verifyFile(localKey(root, f.key), f);
   return manifest;
 }
@@ -92,7 +97,7 @@ export async function archiveRecipe({ recipe, dataset, client, apply = false, ro
       return { datasetId: id, version: duplicate.version, status: duplicate.status === 'archived' ? 'already-archived' : 'staged', files: duplicate.status === 'staged' ? entryFiles(duplicate, root) : [] };
     }
     const manifest = { schemaVersion: 1, datasetId: id, version, sha256: digest, recipeSha256, retrievedAt: now(), license: structuredClone(dataset.license), files };
-    const manifestBytes = Buffer.from(`${JSON.stringify(manifest, null, 2)}\n`);
+    const manifestBytes = serializeManifest(manifest);
     fs.writeFileSync(path.join(temp, 'manifest.json'), manifestBytes);
     const entry = { ...manifest, manifestKey: `${prefix}/manifest.json`, manifestSha256: sha256(manifestBytes), bytes, status: 'staged' };
     const updated = { ...snapshot, versions: [...snapshot.versions, entry] };

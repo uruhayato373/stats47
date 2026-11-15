@@ -3,13 +3,19 @@ name: Open data source archive (private R2)
 on:
   workflow_dispatch:
     inputs:
+      mode:
+        description: 'archive: 原本保存 / normalize: 原本から正規化'
+        required: false
+        default: archive
+        type: choice
+        options: ['archive', 'normalize']
       target:
         description: 'dataset:<id> / source:<sourceId> / all'
         required: true
         default: 'dataset:mhlw-medical-hospitals'
         type: string
       dry_run:
-        description: 'false のときだけ原本を取得して非公開 R2 に保存する'
+        description: 'false のときだけ非公開 R2 に書き込む (normalize は true でも原本を読む)'
         required: false
         default: 'true'
         type: choice
@@ -44,7 +50,7 @@ jobs:
         run: npm ci
 
       - name: Check release and read latest snapshot ledger
-        if: inputs.dry_run == 'false'
+        if: inputs.dry_run == 'false' || inputs.mode == 'normalize'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -54,6 +60,7 @@ jobs:
           git restore --source origin/develop --worktree -- data/open-data/snapshots/
 
       - name: Validate and fetch
+        if: inputs.mode != 'normalize'
         env:
           TARGET: ${{ inputs.target }}
           DRY_RUN: ${{ inputs.dry_run }}
@@ -70,7 +77,7 @@ jobs:
           node .claude/scripts/open-data/fetch-source.mjs "${args[@]}"
 
       - name: Push explicit keys to private bucket and verify every SHA by GET
-        if: inputs.dry_run == 'false'
+        if: inputs.dry_run == 'false' && inputs.mode != 'normalize'
         env:
           R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
           R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
@@ -80,8 +87,30 @@ jobs:
           export CLOUDFLARE_R2_BUCKET_NAME
           node --import tsx .claude/scripts/open-data/lib/publish.mjs
 
+      - name: Normalize verified raw keys and publish explicit normalized keys
+        if: inputs.mode == 'normalize'
+        env:
+          TARGET: ${{ inputs.target }}
+          DRY_RUN: ${{ inputs.dry_run }}
+          R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+          R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+        run: |
+          node --test .claude/scripts/open-data/__tests__/*.test.mjs
+          npm run validate:open-data-catalog --workspace packages/data-configs
+          case "$TARGET" in
+            all) args=(--all) ;;
+            dataset:*) args=(--dataset "${TARGET#dataset:}") ;;
+            source:*) args=(--source "${TARGET#source:}") ;;
+            *) echo 'Expected dataset:<id>, source:<id> or all'; exit 1 ;;
+          esac
+          if [ "$DRY_RUN" = false ]; then args+=(--apply); else args+=(--dry-run); fi
+          CLOUDFLARE_R2_BUCKET_NAME="$(node -p 'require("./packages/types/src/site.json").r2PrivateBucket')"
+          export CLOUDFLARE_R2_BUCKET_NAME
+          node --import tsx .claude/scripts/open-data/normalize-ci.mjs "${args[@]}"
+
       - name: Checkout develop for snapshot commit-back
-        if: inputs.dry_run == 'false'
+        if: inputs.dry_run == 'false' && inputs.mode != 'normalize'
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: develop
@@ -89,7 +118,7 @@ jobs:
           path: .local/verification/open-data/writeback
 
       - name: Record verified snapshots on develop
-        if: inputs.dry_run == 'false'
+        if: inputs.dry_run == 'false' && inputs.mode != 'normalize'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
