@@ -1779,9 +1779,12 @@ updated: 2026-11-01
 - **完了条件**: 12 本それぞれに開始日・面・位置・4 週の表示/クリック/成約 (または到達率)・続行/停止が記録され、絞った構成が `02_収益化戦略.md` §3 と `improvements.md` へ渡っている。12-31 の `PV-PLAN-REVIEW-2026Q4-01` で見直す。
 
 ### [NOTE-CIRCULATION-LINK-FIX-01] note 公開記事のリンク切れ 5 件と導線の欠けを直す
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-18] [領域:SNS] [待ち:承認]
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-18] [領域:SNS] [待ち:ログイン]
 
 - **事象**: note 回遊の週次監査 (`npm run weekly:audits -- --only note-circulation`) でリンク切れ (`broken_site_link`)・http リンク・リダイレクト・無料部分のマガジン導線の欠け (`missing_magazine_link_in_free_body`)・カード前後の余分な空段落 (47記事・175件、`data/note/card-visibility-latest.json`) が出ている。明細は `data/note/evidence/note-circulation-audit-2026-10-30.json`。
+- **済み (2026-11-15・オーナー承認)**: 置換表の切れたリンクは公開本文ですべて置換済み (11-15 の監査で broken_site_link 0 件、10-30 は 4 件)。`12-fiscal-peer-comparison` の http リンクを https へ直した。`update-published-navigation.mjs` にフッターを足さずリンクだけ直す `--repairs-only` を足した (テスト付き)。
+- **残り (note の 403 が解けてから)**: 次の 7 件を `node .claude/scripts/note/update-published-navigation.mjs --slug <key> --repair-redirects --repairs-only --commit` で直す: `d-kakei-spending-personality` (中華麺を外食のラーメン `ramen-dining-consumption-expenditure` へ。記事台帳に積み済み)・`13-fiscal-peer-no-code` (http)・`c-engel-food-gap`・`c-kita-kanto-fiscal`・`c-tokyo-vs-osaka-fiscal`・`d-education-income-gap`・`recovered-n03844512d58a`。後ろの 5 件はカード画像の検証ガード (`Verified source image bytes changed`) で PUT 前に止まった。[仮説] `ogp.inventory` の `link-card-rollout.json` の画像ハッシュが古い。検証: 同じコマンドをもう一度実行し、ガードの出力にある期待と実際の SHA を比べる。
+- **判断**: `d-kakei-spending-personality` の `frozen-gyoza` は置換先の `gyoza-frozen-consumption-expenditure` の定義が「冷凍品を除く」で意味が逆。冷凍ぎょうざの指標は無いので、リンクを外すか文を直すかを決める (リンクを外す機能はスクリプトに無い)。
 - **置換案 (2026-11-01・オーナー確認待ち。置換先は 11-01 に本番で HTTP 200 を確認)**:
   | 記事 | 切れたリンク → 置換案 | 注意 |
   |---|---|---|

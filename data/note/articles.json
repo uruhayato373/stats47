@@ -971,7 +971,14 @@
           "savedAt": "2026-10-12T22:03:44.722Z"
         },
         "verifiedAt": "2026-10-12T22:10:50.956Z"
-      }
+      },
+      "publishedLinkRepairs": [
+        {
+          "mode": "replace-url",
+          "fromUrl": "https://stats47.jp/ranking/chinese-noodles-consumption-expenditure",
+          "toUrl": "https://stats47.jp/ranking/ramen-dining-consumption-expenditure"
+        }
+      ]
     },
     {
       "key": "koumuin-shigoto-kouritsuka-ai",
