@@ -1,0 +1,34 @@
+{
+  "datasetId": "egov-data-portal-datasets",
+  "versions": [
+    {
+      "schemaVersion": 1,
+      "datasetId": "egov-data-portal-datasets",
+      "version": "initial",
+      "sha256": "1a4c8a344d792e1fcec7e44f7938d75d60b8396e1594fe36cc754662193edd6a",
+      "recipeSha256": "09ec230a195037ceb812343845e3a367ad6a516435dc0322ab39eb5893ee0b73",
+      "retrievedAt": "2026-11-15T00:26:45.108Z",
+      "license": {
+        "name": "公共データ利用規約 (PDL1.0)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://data.e-gov.go.jp/info/ja/terms"
+      },
+      "files": [
+        {
+          "key": "open-data/raw/egov-data-portal-datasets/initial/0001.bin",
+          "url": "https://data.e-gov.go.jp/data/api/3/action/package_list",
+          "sha256": "1a626d5f3085516612dd28a67dba256bb03a2a401e3faa3bf176feb168dcabb8",
+          "bytes": 422197,
+          "contentType": "application/json;charset=utf-8",
+          "retrievedAt": "2026-11-15T00:26:45.108Z"
+        }
+      ],
+      "manifestKey": "open-data/raw/egov-data-portal-datasets/initial/manifest.json",
+      "manifestSha256": "c6035d7a50818a409dbed7f9f5fd6e9db56348a89ccfe554e0a305796d156985",
+      "bytes": 422197,
+      "status": "archived"
+    }
+  ]
+}
