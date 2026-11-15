@@ -1,3 +1,5 @@
+import { mkdirSync, writeFileSync } from "node:fs";
+import { resolve } from "node:path";
 /**
  * 【一回限り】現行 cloud R2 の page_components / ranking page-cards を reverse-extract し、
  * git TS SSOT (apps/web/scripts/data/page-components/) に verbatim 保存する。
@@ -10,13 +12,13 @@
  *   R2_PUBLIC_FETCH_URL=https://storage.stats47.jp npx tsx apps/web/scripts/extract-page-components-from-r2.ts
  */
 
-import { mkdirSync, writeFileSync } from "node:fs";
-import { resolve } from "node:path";
+
+import { rankingR2Key } from "@stats47/r2-storage/keys";
+import { SITE } from "@stats47/types";
 
 import { CATEGORIES } from "../../../packages/data-configs/src/categories";
-import { THEME_INDICATOR_SETS } from "../../../packages/types/src/indicator-sets/registry";
 import { KNOWN_RANKING_KEYS } from "../../../packages/ranking/src/config/known-ranking-keys";
-import { SITE } from "@stats47/types";
+import { THEME_INDICATOR_SETS } from "../../../packages/types/src/indicator-sets/registry";
 
 const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 const DATA_ROOT = resolve(__dirname, "data/page-components");
@@ -32,7 +34,7 @@ function pageComponentsUrl(pageType: string, pageKey: string): string {
   return `${PUBLIC_URL}/app/page-components/${pageType}/${encodeURIComponent(pageKey)}.json`;
 }
 function rankingPageCardsUrl(rankingKey: string): string {
-  return `${PUBLIC_URL}/app/ranking/${encodeURIComponent(rankingKey)}/page-cards.json`;
+  return `${PUBLIC_URL}/${rankingR2Key(encodeURIComponent(rankingKey), 'page-cards')}`;
 }
 
 function buildCandidates(): Candidate[] {

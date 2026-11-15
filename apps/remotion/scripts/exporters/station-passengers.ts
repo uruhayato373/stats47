@@ -1,3 +1,4 @@
+import { statsR2Key } from '@stats47/r2-storage/keys';
 import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { loadPrefectures } from "./_shared/load-prefectures.js";
@@ -17,7 +18,7 @@ export async function exportStationPassengers(): Promise<{
   const payload = readLocalStatsValues(METRIC_KEY, "prefecture");
   if (!payload || payload.rows.length === 0) {
     skipped.push(
-      `R2 has no stats for ${METRIC_KEY} (app/stats/${METRIC_KEY}/values.json) — see TS-config TODO for source ID`,
+      `R2 has no stats for ${METRIC_KEY} (${statsR2Key(METRIC_KEY, 'prefecture')}) — see TS-config TODO for source ID`,
     );
     return { files: 0, skipped };
   }

@@ -3,10 +3,11 @@ import "server-only";
 import { cache } from "react";
 
 import { logger } from "@stats47/logger/server";
+import { rankingR2Key } from "@stats47/r2-storage/keys";
 import { createSnapshotReader } from "@stats47/r2-storage/server";
 
 export function rankingPageCardsKeyPath(rankingKey: string): string {
-  return `app/ranking/${encodeURIComponent(rankingKey)}/page-cards.json`;
+  return rankingR2Key(encodeURIComponent(rankingKey), 'page-cards');
 }
 
 /**

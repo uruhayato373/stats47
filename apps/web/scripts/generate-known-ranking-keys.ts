@@ -19,10 +19,12 @@
 
 import fs from "node:fs";
 import path from "node:path";
+
 import { listAllMetrics } from "@stats47/data-configs";
+import { rankingR2Key } from '@stats47/r2-storage/keys';
+import { SITE } from "@stats47/types";
 
 import { checkPresence, type Presence } from "./lib/r2-presence";
-import { SITE } from "@stats47/types";
 
 const R2_PUBLIC = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 const OUT_PATH = path.resolve(
@@ -48,7 +50,7 @@ const HEAD_ATTEMPTS = 3;
  * キーが落ちると middleware が 404 を返し sitemap からも消える = 生きているページの削除)。
  */
 async function checkExists(key: string): Promise<Presence> {
-  return checkPresence(`${R2_PUBLIC}/app/ranking/${key}/item.json`, {
+  return checkPresence(`${R2_PUBLIC}/${rankingR2Key(key, 'item')}`, {
     attempts: HEAD_ATTEMPTS,
   });
 }

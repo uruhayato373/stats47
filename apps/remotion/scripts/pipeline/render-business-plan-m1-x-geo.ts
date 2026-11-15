@@ -1,4 +1,5 @@
 #!/usr/bin/env tsx
+import { rankingR2Key } from '@stats47/r2-storage/keys';
 /**
  * Geo事業M1のX投稿15件を、分析snapshotと型付きGeo契約から一括生成する。
  * 数値計算・空間判定はここでは行わず、検証済みR2派生snapshotだけを描画する。
@@ -73,7 +74,8 @@ const queuePath = path.join(repoRoot, '.local/r2/sns/_queue/business-plan-m1-x.j
 const populationCandidates = [
   path.join(
     repoRoot,
-    '.local/r2/app/ranking/future-population-change-rate-2050/values.json'
+    '.local/r2',
+    rankingR2Key('future-population-change-rate-2050', 'values')
   ),
   path.join(
     repoRoot,

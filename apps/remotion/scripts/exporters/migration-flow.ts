@@ -1,3 +1,4 @@
+import { STATS_R2_PREFIX } from "@stats47/r2-storage/keys";
 import { existsSync, mkdirSync, readdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { buildMigrationFocusFile } from "@stats47/migration-flow/focus-file";
@@ -26,7 +27,7 @@ interface PrefNetEntry {
  * year を明示的に渡すこと。
  */
 function detectLatestYearFromLocalR2(metricKey: string): number | null {
-  const dir = resolve(LOCAL_R2_ROOT, "app/stats", metricKey);
+  const dir = resolve(LOCAL_R2_ROOT, STATS_R2_PREFIX, metricKey);
   if (!existsSync(dir)) return null;
   try {
     const files = readdirSync(dir);

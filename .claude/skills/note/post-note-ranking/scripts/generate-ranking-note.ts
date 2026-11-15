@@ -3,6 +3,7 @@
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { R2_PUBLIC_BASE_URL } from '../../../../scripts/lib/site-config.cjs';
+import { rankingR2Key, statsR2Key } from '../../../../scripts/lib/r2-keys.mjs';
 import { datasetPath } from "../../../../../config/datasets.mjs";
 import { NOTE_RANKING_IMAGES } from '../../../../scripts/note/lib/note-render-spec.mjs';
 
@@ -399,10 +400,10 @@ async function build(
   const [itemPayload, valuesPayload, rankingItemsPayload, blogPayload] =
     await Promise.all([
       fetchJson<{ item: RankingItem }>(
-        `${R2_BASE}/app/ranking/${rankingKey}/item.json`
+        `${R2_BASE}/${rankingR2Key(rankingKey, 'item')}`
       ),
       fetchJson<{ rows: ValueRow[] }>(
-        `${R2_BASE}/app/stats/${rankingKey}/values.json`
+        `${R2_BASE}/${statsR2Key(rankingKey, 'prefecture')}`
       ),
       fetchJson<{ items?: RankingItem[] }>(
         `${R2_BASE}/app/ranking-items/all.json`
@@ -753,8 +754,8 @@ https://stats47.jp
       'images/chart-x-1200x630.png',
       'images/boxplot-1200x630.png',
     ],
-    source: `r2:app/stats/${rankingKey}/values.json`,
-    restore: `curl -sf ${R2_BASE}/app/stats/${rankingKey}/values.json`,
+    source: `r2:${statsR2Key(rankingKey, 'prefecture')}`,
+    restore: `curl -sf ${R2_BASE}/${statsR2Key(rankingKey, 'prefecture')}`,
     generatedBy: 'post-note-ranking',
     note: 'データ本体は stats47 R2 が SSOT。本ファイルは復元マニフェスト（コピーではない）。',
   };
@@ -878,7 +879,7 @@ async function check(rankingKey: string, requireImages: boolean) {
     errors.push(`本文文字数範囲外: ${draft.length}`);
   if (tags.length > 99 || new Set(tags).size !== tags.length)
     errors.push('tags不備');
-  if (!provenance.source.includes(`app/stats/${rankingKey}/values.json`))
+  if (!provenance.source.includes(statsR2Key(rankingKey, 'prefecture')))
     errors.push('provenance source不一致');
 
   const expected = new Map(NOTE_RANKING_IMAGES.map((image) => [image.file, [image.width, image.height]]));
@@ -927,7 +928,7 @@ async function main() {
         await setBlocker(args.rankingKey, {
           code: error.code,
           message: error.message,
-          source: `r2:app/stats/${args.rankingKey}/values.json`,
+          source: `r2:${statsR2Key(args.rankingKey, 'prefecture')}`,
         });
       }
       throw error;

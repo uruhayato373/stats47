@@ -1,3 +1,4 @@
+import { statsR2Key } from '@stats47/r2-storage/keys';
 import { applyColorPolicy } from '../../../packages/types/src/color-policy';
 import { metricPresentation } from '../../../packages/data-configs/src/color-policy';
 import { maximumTemperature } from '../../../data/metrics/maximum-temperature';
@@ -19,7 +20,7 @@ export const RANKING_SAMPLE_METRIC = maximumTemperature;
 export const RANKING_SAMPLE_YEAR = '2024';
 export const RANKING_SAMPLE_SOURCE = {
   bucket: 'stats47',
-  key: 'app/stats/maximum-temperature/values.json',
+  key: statsR2Key('maximum-temperature', 'prefecture'),
   sha256: '1c5dfecf954d41eab0ef35904cf948717b60398e819d66539cf4eb70c5b94d82',
   bytes: 273844,
 } as const;

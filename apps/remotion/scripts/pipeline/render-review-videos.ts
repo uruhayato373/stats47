@@ -1,4 +1,5 @@
 #!/usr/bin/env tsx
+import { rankingR2Key, statsR2Key } from '@stats47/r2-storage/keys';
 /**
  * 型の最終確認の画面 (/ops/image-templates/review) で再生する動画の見本を作る。
  *
@@ -33,7 +34,7 @@ const json = async (key: string, optional = false): Promise<Json> => {
 };
 
 async function rankingProps(variant: string) {
-  const [data, stored, caption] = [await json(`sns/ranking/${RANKING_KEY}/data.json`), await json(`app/ranking/${RANKING_KEY}/item.json`), await json(`sns/ranking/${RANKING_KEY}/instagram/caption.json`, true)];
+  const [data, stored, caption] = [await json(`sns/ranking/${RANKING_KEY}/data.json`), await json(rankingR2Key(RANKING_KEY, 'item')), await json(`sns/ranking/${RANKING_KEY}/instagram/caption.json`, true)];
   const item = stored.item as Json;
   return {
     theme: 'dark', variant, showSafeAreas: false, gesBackground: false, hookText: caption.hookText ?? '', displayTitle: caption.displayTitle ?? '',
@@ -43,7 +44,7 @@ async function rankingProps(variant: string) {
 }
 
 async function raceProps(variant: string) {
-  const [config, stats] = [await json(`sns/bar-chart-race/${RACE_KEY}/config.json`), await json(`app/stats/${RACE_KEY}/values.json`)];
+  const [config, stats] = [await json(`sns/bar-chart-race/${RACE_KEY}/config.json`), await json(statsR2Key(RACE_KEY, 'prefecture'))];
   const years = new Map<string, { date: string; items: { name: string; value: number }[] }>();
   for (const row of stats.rows as { areaCode: string; areaName: string; yearCode: string; yearName: string; value: number | null }[]) {
     if (!/^\d{2}000$/.test(row.areaCode) || row.areaCode === '00000' || row.value === null) continue;
