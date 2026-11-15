@@ -510,6 +510,7 @@ updated: 2026-11-01
 - **確認の追加 (2026-11-13・消した `ADMIN-VITEST-TIMEOUT-01` から)**: `apps/admin/vitest.config.mts` の testTimeout と hookTimeout を 120 秒にした (`ce725a765`)。この PC で tsc や dev サーバーと並行して `npm run test --workspace apps/admin` を流し、タイムアウトが 0 件かを確かめる。
 - **確認の追加 (2026-11-13・消した `ROOT-TSX-NODE-PIN-01` から)**: この PC の Node は 22.14.0 で、`.mjs` が `.ts` を直接 import すると `ERR_UNKNOWN_FILE_EXTENSION` で落ちる (型の除去が既定で有効なのは 22.18 から)。`.claude/scripts` に約 10 本ある (`ads/build-placement-map.mjs`・`estat/gen-ssds-configs.mjs`・`lib/internal-link-lint.mjs` など)。22.14 を支えるなら tsx 経由にし、支えないなら Node を上げる (オーナーが決める)。ルートの devDependencies への tsx の追加は `7f6f18db0` で済み。
 - **観測 (2026-11-14・Mac)**: `attachment-dom.test.cjs` の 1 件は Mac でも落ちるので、Windows 固有ではない。原因は、添付の位置を決める部品 `.claude/scripts/note/attachment-dom.cjs` (prepare / verify) はできているのに、`.claude/scripts/note/editor-helpers.sh` の `ins_file` がまだ旧方式 (`startsWith` での前方一致・awk の `index($0,h)`) で探していること。テストは旧方式が残っていないことを確かめている。直すには `ins_file` を `attachment-dom.cjs` の `buildExpression("prepare"|"verify", ...)` を呼ぶ形に置き換え、note の下書きで 1 回添付して確かめる (note への外部操作なので下書きで行う)。再現: `node --test .claude/scripts/note/__tests__/attachment-dom.test.cjs`。
+- **再観測 (2026-11-15・R2 Stage 3 batch B)**: `node --import tsx --test .claude/scripts/note/__tests__/attachment-dom.test.cjs` の同じ 1 件が `ERR_ASSERTION` (`/keys Home|index\(\$0,h\)|startsWith/` に一致) で失敗。sandbox の listen 制限とは別。今回の R2 キー移行では添付処理を変更していない。
 
 ### [AFFILIATE-PUBLISH-PROFILE-TRIGGER-01] 案件の台帳だけを変えた push で、広告の R2 への反映が走らない
 タグ: [収益化] [種類:不具合] [実行:対話] [起票:2026-11-11] [領域:アフィリエイト] [待ち:判断]

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { statsR2Key } from '../lib/r2-keys.mjs';
 /**
  * build-kakei-quantity-price.mjs — 県庁所在市の食卓を「支出額 = 数量 × 価格」で分解する接地器。
  *
@@ -87,7 +88,7 @@ async function fetchValues(key) {
   if (fs.existsSync(cache) && Date.now() - fs.statSync(cache).mtimeMs < 24 * 3600 * 1000) {
     return JSON.parse(fs.readFileSync(cache, "utf8"));
   }
-  const url = `${R2_BASE}/app/stats/${key}/values.json`;
+  const url = `${R2_BASE}/${statsR2Key(key, "prefecture")}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`${key}: HTTP ${res.status} (${url})`);
   const json = await res.json();

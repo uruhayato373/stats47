@@ -1,3 +1,4 @@
+import { R2_PUBLIC_ORIGIN } from '../../lib/r2-keys.mjs';
 /** R2 objects for note covers and article bodies; transport is shared with other Node tools. */
 import { coverSha, coverAssetKey, coverInputKey } from './cover-assets.mjs';
 import { R2_PRIVATE_BUCKET, R2_PUBLIC_BASE_URL, SITE_ORIGIN } from '../../lib/site-config.cjs';
@@ -20,7 +21,7 @@ export async function fetchPublicMediaSource(url) {
 /** Fetch only allowed public sources. No credentials are sent to note or its image CDN. */
 export async function fetchCoverSource(url) {
   const u = new URL(url);
-  if (u.protocol !== 'https:' || !['assets.st-note.com', 'storage.stats47.jp'].includes(u.hostname))
+  if (u.protocol !== 'https:' || !['assets.st-note.com', new URL(R2_PUBLIC_ORIGIN).hostname].includes(u.hostname))
     throw Error('cover source host not allowed');
   const result = await request(u, { headers: { 'user-agent': 'stats47-cover-assets/1.0' } });
   if (result.status !== 200) throw Error(`cover source HTTP ${result.status}`);

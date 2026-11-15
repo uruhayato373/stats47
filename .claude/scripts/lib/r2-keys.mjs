@@ -17,6 +17,8 @@ const RANKING_KINDS = [
     "page-cards",
     "values-per-household",
     "thumbnail",
+    "ogp-image",
+    "ogp-generation",
 ];
 export function rankingR2Key(rankingKey, kind) {
     if (typeof rankingKey !== "string" || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(rankingKey)) {
@@ -26,7 +28,9 @@ export function rankingR2Key(rankingKey, kind) {
     if (!RANKING_KINDS.includes(kind)) {
         throw new Error(`Invalid ranking R2 kind: ${kind}`);
     }
-    return `${RANKING_R2_PREFIX}/${rankingKey}/${kind}.json`;
+    const filename = kind === "ogp-image" ? "ogp/ogp.png"
+        : kind === "ogp-generation" ? "ogp/generation.json" : `${kind}.json`;
+    return `${RANKING_R2_PREFIX}/${rankingKey}/${filename}`;
 }
 export function statsR2Key(metricKey, entityKind, year) {
     switch (entityKind) {

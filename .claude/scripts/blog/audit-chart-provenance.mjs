@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { rankingR2Key, statsR2Key, STATS_R2_PREFIX } from '../lib/r2-keys.mjs';
 /**
  * audit-chart-provenance.mjs — ブログチャートの出典 (source.json) が
  * 「本当に再取得できるか」を機械的に検査する。
@@ -198,7 +199,7 @@ async function rankingKeyExists(key) {
   if (!keyCache.has(key)) {
     keyCache.set(
       key,
-      await exists(`${R2}/app/ranking/${encodeURIComponent(key)}/values.json`)
+      await exists(`${R2}/${rankingR2Key(encodeURIComponent(key), "values")}`)
     );
   }
   return keyCache.get(key);
@@ -216,7 +217,7 @@ async function metricKeyExists(key) {
       key,
       STAGED && fs.existsSync(stagedPath)
         ? true
-        : await exists(`${R2}/app/stats/${encodeURIComponent(key)}/values.json`)
+        : await exists(`${R2}/${statsR2Key(encodeURIComponent(key), "prefecture")}`)
     );
   }
   return metricKeyCache.get(key);
@@ -305,7 +306,7 @@ const rows = await pool(targets, async (e) => {
     };
   }
   const metricPresent = await pool(metricKeys, async (metricKey) => {
-    const prefix = `app/stats/${metricKey}/`;
+    const prefix = `${STATS_R2_PREFIX}/${metricKey}/`;
     const exactIndexes = r2ObjectPaths.flatMap((objectPath, index) =>
       objectPath.startsWith(prefix) ? [index] : []
     );

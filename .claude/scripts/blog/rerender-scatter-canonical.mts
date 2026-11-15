@@ -1,4 +1,5 @@
 #!/usr/bin/env -S npx tsx
+import { rankingR2Key } from '../lib/r2-keys.mjs';
 /**
  * rerender-scatter-canonical.mts — scatter カタログの正方形・単色統一 (720×720)。
  *
@@ -203,7 +204,7 @@ async function rankingValueMap(
   rankingKey: string,
   yearCode: string
 ): Promise<Map<string, { areaName: string; value: number }>> {
-  const ranking = await fj(`${R2}/app/ranking/${rankingKey}/values.json`);
+  const ranking = await fj(`${R2}/${rankingR2Key(rankingKey, "values")}`);
   const partition = asArray<any>(ranking?.partitions).find(
     (item) => String(item?.yearCode) === yearCode
   );
@@ -385,7 +386,7 @@ async function repairChinaScatter(): Promise<Repair> {
 
 async function repairSemiconductorScatter(): Promise<Repair> {
   const ranking = await fj(
-    `${R2}/app/ranking/manufacturing-shipment-amount/values.json`
+    `${R2}/${rankingR2Key("manufacturing-shipment-amount", "values")}`
   );
   const partition = asArray<any>(ranking?.partitions).find(
     (item) => String(item?.yearCode) === '2023'
@@ -448,7 +449,7 @@ async function repairSemiconductorScatter(): Promise<Repair> {
       inputs: [
         {
           rankingKey: 'manufacturing-shipment-amount',
-          source: 'r2:app/ranking/manufacturing-shipment-amount/values.json',
+          source: `r2:${rankingR2Key("manufacturing-shipment-amount", "values")}`,
           year: '2023',
           label: '製造品出荷額等',
         },
@@ -553,7 +554,7 @@ async function rebuildNurseScatter(
         {
           rankingKey: 'avg-salary-all-prefecture',
           year: '2023',
-          source: 'r2:app/ranking/avg-salary-all-prefecture/values.json',
+          source: `r2:${rankingR2Key("avg-salary-all-prefecture", "values")}`,
         },
         {
           statsDataId: '0003445758',

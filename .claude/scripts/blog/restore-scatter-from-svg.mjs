@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { rankingR2Key } from '../lib/r2-keys.mjs';
 /**
  * restore-scatter-from-svg.mjs — neither(json/source.json 消失=絵だけ) の **scatter** SVG を
  * SSOT(R2 app/ranking) から再生成して 3点セット(json/source.json/svg)に戻す。
@@ -270,7 +271,7 @@ async function ssotLatest(key) {
   if (ssotCache.has(key)) return ssotCache.get(key);
   let res = null;
   try {
-    const v = await fj(`${R2}/app/ranking/${key}/values.json`);
+    const v = await fj(`${R2}/${rankingR2Key(key, "values")}`);
     const parts = (v.partitions || []).slice().sort((a, b) => (a.yearCode > b.yearCode ? 1 : -1));
     if (parts.length) {
       const p = parts[parts.length - 1];
@@ -424,8 +425,8 @@ async function buildScatterJson(slug, base, xRes, yRes, meta) {
     kind: "scatter",
     xKey: xRes.key, yKey: yRes.key,
     year: `x:${xs.year}/y:${ys.year}`,
-    xSource: `r2:app/ranking/${xRes.key}/values.json`,
-    ySource: `r2:app/ranking/${yRes.key}/values.json`,
+    xSource: `r2:${rankingR2Key(xRes.key, "values")}`,
+    ySource: `r2:${rankingR2Key(yRes.key, "values")}`,
     verifiedBy: "article-link+axis-range",
     // 点値照合をしていないため verifiedMatchRate は付けない。記事リンク key を軸目盛レンジで x/y 割当し確定。
     note: "記事 /ranking/ リンク key を SSOT値域で x/y 軸に割当 (著者由来=信頼)。x/y は元SVGの軸目盛レンジ適合で決定。点値照合不可のため verifiedMatchRate なし。",

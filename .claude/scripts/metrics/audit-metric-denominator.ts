@@ -1,3 +1,4 @@
+import { statsR2Key } from '../lib/r2-keys.mjs';
 /**
  * audit-metric-denominator.ts — 人口当たりを名乗る指標が、実数のままになっていないかを値で確かめる。
  *
@@ -42,7 +43,7 @@ export function pearson(a: number[], b: number[]) {
 const rowsOf = async (key: string): Promise<Row[] | null> => {
   for (let i = 0; i < 4; i++) {
     try {
-      const res = await fetch(`${R2}/app/stats/${key}/values.json`);
+      const res = await fetch(`${R2}/${statsR2Key(key, "prefecture")}`);
       if (res.status === 404) return null;
       if (res.ok) return (await res.json()).rows ?? null;
     } catch { /* 取り直す */ }

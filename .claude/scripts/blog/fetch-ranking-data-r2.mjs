@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { rankingR2Key } from '../lib/r2-keys.mjs';
 /**
  * fetch-ranking-data-r2.mjs (完全DBレス版データ接地)
  *
@@ -112,8 +113,8 @@ async function getJson(url) {
 //   チャート placeholder `<!-- chart:<slug>-prefecture-rankings -->` と確実に対応させる。
 //   追加参照 key は <key> 名で factual グラウンドトゥルースとしてのみ生成 (チャートなし)。
 async function buildForKey(key, outBaseName, fullName) {
-  const valuesUrl = `${R2_BASE}/app/ranking/${key}/values.json`;
-  const itemUrl = `${R2_BASE}/app/ranking/${key}/item.json`;
+  const valuesUrl = `${R2_BASE}/${rankingR2Key(key, "values")}`;
+  const itemUrl = `${R2_BASE}/${rankingR2Key(key, "item")}`;
   const values = await getJson(valuesUrl);
 
   // item.json (表示名/単位/出典) は best-effort
@@ -187,7 +188,7 @@ async function buildForKey(key, outBaseName, fullName) {
     label: title,
     readerLabel,
     transform: "all47 (svg-builder が上位5+下位5を抽出)",
-    source: `r2:app/ranking/${key}/values.json`,
+    source: `r2:${rankingR2Key(key, "values")}`,
     upstream: "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
     restore: `node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug ${SLUG} --keys ${key} --data-name ${baseName}`,
     fetchedAt: new Date().toISOString(),

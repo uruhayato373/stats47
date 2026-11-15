@@ -13,7 +13,7 @@ describe("R2 key mirror parity", () => {
 
   it("returns identical keys for all kinds and valid segment boundaries", () => {
     for (const key of ["population", "population-2025", "x", "2025", "a-1-b"]) {
-      for (const kind of ["item", "values", "values-per-population", "values-per-area", "national-trend", "ai-content", "page-cards", "values-per-household", "thumbnail"] as const) {
+      for (const kind of ["item", "values", "values-per-population", "values-per-area", "national-trend", "ai-content", "page-cards", "values-per-household", "thumbnail", "ogp-image", "ogp-generation"] as const) {
         expect(mirror.rankingR2Key(key, kind)).toBe(canonical.rankingR2Key(key, kind));
       }
     }

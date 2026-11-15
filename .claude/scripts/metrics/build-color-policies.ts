@@ -1,3 +1,4 @@
+import { statsR2Key } from '../lib/r2-keys.mjs';
 /**
  * 配色の台帳。指標 × 粒度ごとに、連続か 5 段階か・一方向か発散かを R2 の値から決めて持つ。
  * 指標定義は人が決める色相と基準値、この台帳は値が決める段階 (正規化。結合は metricPresentation)。
@@ -43,9 +44,9 @@ export function latestValues(rows: ValueRow[], inSet: (code: string) => boolean)
 
 const sortRows = (policies: ColorPolicyRow[]) => [...policies].sort((a, b) => a.metricKey.localeCompare(b.metricKey) || COLOR_GRAINS.indexOf(a.grain) - COLOR_GRAINS.indexOf(b.grain));
 
-async function fetchRows(key: string, file: string): Promise<ValueRow[] | 'missing' | 'failed'> {
+async function fetchRows(key: string, entity: 'prefecture' | 'city'): Promise<ValueRow[] | 'missing' | 'failed'> {
   try {
-    const res = await fetch(`${R2}/app/stats/${key}/${file}`, { signal: AbortSignal.timeout(FETCH_TIMEOUT_MS) });
+    const res = await fetch(`${R2}/${statsR2Key(key, entity)}`, { signal: AbortSignal.timeout(FETCH_TIMEOUT_MS) });
     if (res.status === 404) return 'missing';
     if (!res.ok) return 'failed';
     return ((await res.json()) as { rows?: ValueRow[] }).rows ?? 'missing';
@@ -73,9 +74,9 @@ async function build() {
       const add = (grain: ColorGrain, found: ReturnType<typeof latestValues>) => {
         if (found) rows.push(colorPolicyRow(metric.key, grain, metric.visualization, found.year, found.values));
       };
-      const prefecture = await fetchRows(metric.key, 'values.json');
+      const prefecture = await fetchRows(metric.key, 'prefecture');
       if (prefecture === 'failed') { failed = true; failures++; keep(metric.key, 'prefecture'); } else if (prefecture !== 'missing') hasValues = true, add('prefecture', latestValues(prefecture, (code) => PREFECTURE_CODE.test(code)));
-      const cities = await fetchRows(metric.key, 'cities.json');
+      const cities = await fetchRows(metric.key, 'city');
       if (cities === 'failed') { failed = true; failures++; keep(metric.key, 'municipality-merged'); keep(metric.key, 'municipality-split'); }
       else if (cities !== 'missing') {
         hasValues = true;

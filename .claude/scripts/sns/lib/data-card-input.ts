@@ -1,3 +1,4 @@
+import { rankingR2Key } from '../../lib/r2-keys.mjs';
 import { z } from 'zod';
 import { getMetricConfig } from '../../../../packages/data-configs/src/registry';
 import { buildRecipe } from '../../../../packages/data-configs/src/recipe';
@@ -84,8 +85,8 @@ export async function loadMetric(key: string, read: ReadJson) {
   if (!config || !config.isActive)
     throw new Error(`公開指標ではありません: ${key}`);
   const [rawItem, rawValues] = await Promise.all([
-    read(`app/ranking/${key}/item.json`),
-    read(`app/ranking/${key}/values.json`),
+    read(rankingR2Key(key, "item")),
+    read(rankingR2Key(key, "values")),
   ]);
   const { item } = itemSchema.parse(rawItem);
   const values = valuesSchema.parse(rawValues);

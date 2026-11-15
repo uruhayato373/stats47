@@ -1,3 +1,4 @@
+import { statsR2Key } from '../lib/r2-keys.mjs';
 /**
  * build-article-data-from-r2.mjs
  *
@@ -33,7 +34,7 @@ function metricTitle(metricKey) {
 }
 
 async function fetchValues(metricKey) {
-  const url = `${R2_PUBLIC_BASE}/app/stats/${metricKey}/values.json`;
+  const url = `${R2_PUBLIC_BASE}/${statsR2Key(metricKey, "prefecture")}`;
   const response = await fetch(url);
   if (!response.ok) throw new Error(`HTTP ${response.status}: ${url}`);
   return response.json();
@@ -102,7 +103,7 @@ async function buildForMetric(slug, metricKey) {
   const tsPath = path.join(dataDir, `${metricKey}-timeseries.json`);
   const rankSourcePath = path.join(dataDir, `${metricKey}-prefecture-rankings.source.json`);
   const tsSourcePath = path.join(dataDir, `${metricKey}-timeseries.source.json`);
-  const source = `r2:app/stats/${metricKey}/values.json`;
+  const source = `r2:${statsR2Key(metricKey, "prefecture")}`;
   const restore = `node .claude/scripts/blog/build-article-data-from-r2.mjs ${slug}:${metricKey}`;
   fs.writeFileSync(rankPath, JSON.stringify({ label, unit, year: displayYear, data: latest }, null, 2));
   fs.writeFileSync(tsPath, JSON.stringify(timeseries, null, 2));

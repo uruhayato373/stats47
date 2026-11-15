@@ -1,4 +1,5 @@
 #!/usr/bin/env tsx
+import { rankingR2Key } from '../lib/r2-keys.mjs';
 /**
  * build-ig-correlation-props.ts — Instagram「相関」カルーセル用の props JSON をデータ層だけで
  * 決定的に生成する (Remotion コンポーネントはこのスキルの担当外・別途選定される)。
@@ -248,8 +249,8 @@ async function loadPopulationByArea(): Promise<Map<string, number>> {
   if (populationCache) return populationCache;
   populationCache = (async () => {
     const [popItem, popValues] = await Promise.all([
-      fetchJson<RankingItemSnapshot>(`app/ranking/${TOTAL_POPULATION_KEY}/item.json`),
-      fetchJson<RankingValuesSnapshot>(`app/ranking/${TOTAL_POPULATION_KEY}/values.json`),
+      fetchJson<RankingItemSnapshot>(rankingR2Key(TOTAL_POPULATION_KEY, "item")),
+      fetchJson<RankingValuesSnapshot>(rankingR2Key(TOTAL_POPULATION_KEY, "values")),
     ]);
     const popYear = popItem.item.latestYear.yearCode;
     const popPartition = findPartition(popValues, popYear);
@@ -296,10 +297,10 @@ async function computeLiveCorrelation(xKey: string, yKey: string): Promise<LiveC
   if (!configX || !configY) return { ok: false, reason: "missing-config" };
 
   const [itemX, itemY, valuesX, valuesY] = await Promise.all([
-    fetchJsonOrNull<RankingItemSnapshot>(`app/ranking/${xKey}/item.json`),
-    fetchJsonOrNull<RankingItemSnapshot>(`app/ranking/${yKey}/item.json`),
-    fetchJsonOrNull<RankingValuesSnapshot>(`app/ranking/${xKey}/values.json`),
-    fetchJsonOrNull<RankingValuesSnapshot>(`app/ranking/${yKey}/values.json`),
+    fetchJsonOrNull<RankingItemSnapshot>(rankingR2Key(xKey, "item")),
+    fetchJsonOrNull<RankingItemSnapshot>(rankingR2Key(yKey, "item")),
+    fetchJsonOrNull<RankingValuesSnapshot>(rankingR2Key(xKey, "values")),
+    fetchJsonOrNull<RankingValuesSnapshot>(rankingR2Key(yKey, "values")),
   ]);
   if (!itemX || !itemY || !valuesX || !valuesY) return { ok: false, reason: "missing-item" };
 
@@ -514,12 +515,12 @@ async function buildProps(
   hookOverride?: string | null
 ): Promise<void> {
   const provenance: string[] = [
-    `${PUBLIC_URL}/app/ranking/${xKey}/item.json`,
-    `${PUBLIC_URL}/app/ranking/${yKey}/item.json`,
-    `${PUBLIC_URL}/app/ranking/${xKey}/values.json`,
-    `${PUBLIC_URL}/app/ranking/${yKey}/values.json`,
-    `${PUBLIC_URL}/app/ranking/${TOTAL_POPULATION_KEY}/item.json`,
-    `${PUBLIC_URL}/app/ranking/${TOTAL_POPULATION_KEY}/values.json`,
+    `${PUBLIC_URL}/${rankingR2Key(xKey, "item")}`,
+    `${PUBLIC_URL}/${rankingR2Key(yKey, "item")}`,
+    `${PUBLIC_URL}/${rankingR2Key(xKey, "values")}`,
+    `${PUBLIC_URL}/${rankingR2Key(yKey, "values")}`,
+    `${PUBLIC_URL}/${rankingR2Key(TOTAL_POPULATION_KEY, "item")}`,
+    `${PUBLIC_URL}/${rankingR2Key(TOTAL_POPULATION_KEY, "values")}`,
   ];
 
   const configX = getMetricConfig(xKey);

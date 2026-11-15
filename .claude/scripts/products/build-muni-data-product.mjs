@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { R2_PUBLIC_ORIGIN, statsR2Key } from '../lib/r2-keys.mjs';
 /**
  * 市区町村データ商品を作る: 最新境域の時系列 CSV + 結合用 GeoJSON + README + 検算表。
  * 入力は R2 の公開 URL (cities.json / values.json)・packages/area の自治体一覧・e-Stat 境界データ。
@@ -35,7 +36,7 @@ import {
 import { datasetPath } from '../../../config/datasets.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
-const R2_BASE = 'https://storage.stats47.jp/app/stats';
+const R2_BASE = R2_PUBLIC_ORIGIN;
 const ESTAT_API = 'https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData';
 const BOUNDARY_URL = (pref) =>
   `https://www.e-stat.go.jp/gis/statmap-search/data?dlserveyId=A002005212020&code=${pref}&coordSys=1&format=shape&downloadType=5&datum=2011`;
@@ -198,8 +199,8 @@ const areasAll = JSON.parse(readFileSync(join(ROOT, datasetPath('areas.cities'))
 const municipalities = areasAll.filter((a) => a.level === '2');
 const wards = areasAll.filter((a) => a.level === '3');
 const [cities, prefs] = await Promise.all([
-  fetchJson(`${R2_BASE}/${args.metric}/cities.json`),
-  fetchJson(`${R2_BASE}/${args.metric}/values.json`),
+  fetchJson(`${R2_BASE}/${statsR2Key(args.metric, "city")}`),
+  fetchJson(`${R2_BASE}/${statsR2Key(args.metric, "prefecture")}`),
 ]);
 
 const appId = process.env.ESTAT_APP_ID || process.env.NEXT_PUBLIC_ESTAT_APP_ID || '';

@@ -1,3 +1,4 @@
+import { R2_PUBLIC_ORIGIN, rankingR2Key } from '../../lib/r2-keys.mjs';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createHash } from 'node:crypto';
@@ -7,7 +8,7 @@ import { cardEntries, registerMissingCards } from '../lib/native-cards.mjs';
 
 const magazine='https://note.com/stats47/m/mabc';
 const site='https://stats47.jp/ranking/sunshine';
-const image='https://storage.stats47.jp/app/ranking/sunshine/ogp/ogp.png';
+const image=`${R2_PUBLIC_ORIGIN}/${rankingR2Key("sunshine", "ogp-image")}`;
 const cover='https://assets.st-note.com/production/uploads/images/123/new.png';
 const rollout={siteMetadataVerification:{failed:0,passed:1,version:'20261026-pop'},entries:[
   {kind:'magazine',pageUrl:magazine,status:'published',publication:{ogImage:{originalUrl:cover,sha256:'a'.repeat(64)}}},

@@ -1,4 +1,5 @@
 #!/usr/bin/env tsx
+import { rankingR2Key } from '../lib/r2-keys.mjs';
 /**
  * regenerate-tile-maps.ts
  *
@@ -41,7 +42,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 const R2_PUBLIC = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 const R2 = `${R2_PUBLIC}/app/blog`;
-const RANK = `${R2_PUBLIC}/app/ranking`;
 const STAGE_ARG_INDEX = process.argv.indexOf("--stage");
 const STAGE =
   STAGE_ARG_INDEX === -1
@@ -103,7 +103,7 @@ async function pMap<T, R>(items: T[], fn: (x: T) => Promise<R>, c: number): Prom
 
 /** SSOT: ranking values.json の各年 partition */
 async function ssotPartitions(key: string) {
-  const v = await fj(`${RANK}/${key}/values.json`);
+  const v = await fj(`${R2_PUBLIC}/${rankingR2Key(key, "values")}`);
   let item: {
     unit?: string;
     title?: string;
@@ -114,7 +114,7 @@ async function ssotPartitions(key: string) {
     latestYear?: { yearName?: string } | null;
   } = {};
   try {
-    const it = await fj(`${RANK}/${key}/item.json`);
+    const it = await fj(`${R2_PUBLIC}/${rankingR2Key(key, "item")}`);
     item = it.item || it || {};
   } catch {
     /* item は best-effort */
@@ -238,7 +238,7 @@ async function main() {
             rankingKey: best.key,
             year: best.year,
             unit: best.unit,
-            source: `r2:app/ranking/${best.key}/values.json`,
+            source: `r2:${rankingR2Key(best.key, "values")}`,
             verifiedMatchRate: Math.round(best.rate * 100),
             schemeSource: best.colorScheme ? "item.json" : "svg-builder default",
             ...(trusted

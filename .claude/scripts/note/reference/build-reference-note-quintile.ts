@@ -1,4 +1,5 @@
 #!/usr/bin/env tsx
+import { rankingR2Key } from '../../lib/r2-keys.mjs';
 /**
  * 教材の分析企画のうち「年収によって支出がどう違うか」を問うもの (geoScopes に japan) を、
  * 家計調査の年間収入五分位階級別 (全国・二人以上の世帯・e-Stat 0003348240) から note 記事の作業コピーにする。
@@ -171,7 +172,7 @@ async function build(a: Analysis) {
   const items: { key: string; code: string; label: string }[] = [];
   const skipped: { key: string; reason: string }[] = [];
   for (const k of a.metricKeys) {
-    const res = await fetch(`${R2}/app/ranking/${k}/item.json`);
+    const res = await fetch(`${R2}/${rankingR2Key(k, "item")}`);
     if (!res.ok) { skipped.push({ key: k, reason: `item.json HTTP ${res.status}` }); continue; }
     const { item } = await res.json();
     const recipe = item.sourceConfig?.recipe;

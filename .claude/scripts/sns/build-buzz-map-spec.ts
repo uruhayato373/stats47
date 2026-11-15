@@ -1,4 +1,5 @@
 #!/usr/bin/env tsx
+import { statsR2Key } from '../lib/r2-keys.mjs';
 /**
  * build-buzz-map-spec.ts — R2 観測値から buzz-map 型A (静止画・二値/少区分マップ) の
  * spec JSON を決定的に生成する。
@@ -87,8 +88,7 @@ interface StatsPayload {
 }
 
 async function fetchStats(key: string, level: "muni" | "pref"): Promise<StatsPayload> {
-  const file = level === "muni" ? "cities.json" : "values.json";
-  const url = `${PUBLIC_URL}/app/stats/${key}/${file}`;
+  const url = `${PUBLIC_URL}/${statsR2Key(key, level === "muni" ? "city" : "prefecture")}`;
   const res = await fetch(url);
   if (!res.ok) {
     console.error(`✗ R2 観測値が取得できません (${res.status}): ${url}`);

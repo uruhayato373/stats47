@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { rankingR2Key } from '../lib/r2-keys.mjs';
 /**
  * find-chart-metric.mjs — 元データを失ったチャートの metric を **指紋照合** で特定する。
  *
@@ -241,7 +242,7 @@ console.error(`[find-metric] 対象 ${targets.length} 枚 / 候補プール ${re
 const valuesCache = new Map();
 async function fetchValues(key) {
   if (!valuesCache.has(key)) {
-    valuesCache.set(key, await getJson(`${R2}/app/ranking/${encodeURIComponent(key)}/values.json`));
+    valuesCache.set(key, await getJson(`${R2}/${rankingR2Key(encodeURIComponent(key), "values")}`));
   }
   return valuesCache.get(key);
 }

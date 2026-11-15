@@ -14,7 +14,7 @@
       "ranking": 1,
       "origin": 4,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
     },
     ".claude/scripts/analysis/__tests__/analysis-draft.test.mjs": {
       "stats": 3,
@@ -30,425 +30,215 @@
       "s3Client": 0,
       "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
     },
-    ".claude/scripts/blog/audit-chart-axes.ts": {
-      "stats": 1,
-      "ranking": 0,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/blog/audit-chart-provenance.mjs": {
-      "stats": 2,
-      "ranking": 1,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
     ".claude/scripts/blog/audit-published-blog.mjs": {
       "stats": 0,
       "ranking": 0,
       "origin": 1,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/blog/backfill-source.mjs": {
-      "stats": 0,
-      "ranking": 4,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
     ".claude/scripts/blog/build-article-data-from-r2.mjs": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/scripts/blog/build-kakei-quantity-price.mjs": {
       "stats": 3,
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/blog/build-kakei-quantity-price.mjs": {
-      "stats": 4,
-      "ranking": 0,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
     ".claude/scripts/blog/build-svg-gallery.mjs": {
       "stats": 0,
       "ranking": 0,
       "origin": 1,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
     ".claude/scripts/blog/build-topic-queue.mjs": {
       "stats": 1,
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
     ".claude/scripts/blog/fetch-migration-flow.mjs": {
-      "stats": 4,
+      "stats": 2,
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/blog/fetch-ranking-data-r2.mjs": {
-      "stats": 0,
-      "ranking": 3,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
     ".claude/scripts/blog/find-chart-metric.mjs": {
       "stats": 0,
-      "ranking": 2,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/blog/find-kakei-stale-title-values.mjs": {
-      "stats": 0,
-      "ranking": 2,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/blog/generate-article-charts.ts": {
-      "stats": 2,
       "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
-    ".claude/scripts/blog/lib/__tests__/ranking-year-label.test.mjs": {
+    ".claude/scripts/blog/find-kakei-stale-title-values.mjs": {
       "stats": 0,
-      "ranking": 2,
+      "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
+    },
+    ".claude/scripts/blog/generate-article-charts.ts": {
+      "stats": 1,
+      "ranking": 0,
+      "origin": 0,
+      "s3Client": 0,
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
     ".claude/scripts/blog/prune-published-outbox.mjs": {
       "stats": 0,
       "ranking": 0,
       "origin": 1,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/blog/rebuild-scatter-data.mjs": {
-      "stats": 1,
-      "ranking": 0,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/blog/refresh-article-data-years.mjs": {
-      "stats": 0,
-      "ranking": 1,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
     ".claude/scripts/blog/regenerate-tile-maps.ts": {
       "stats": 0,
-      "ranking": 2,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/blog/repair-published-frontmatter.ts": {
-      "stats": 0,
-      "ranking": 0,
-      "origin": 1,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/blog/rerender-scatter-canonical.mts": {
-      "stats": 0,
-      "ranking": 4,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/blog/resolve-scatter-axes.mjs": {
-      "stats": 0,
-      "ranking": 6,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/blog/restore-ranking-from-svg.mjs": {
-      "stats": 0,
       "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/blog/restore-scatter-from-svg.mjs": {
-      "stats": 0,
-      "ranking": 3,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
     ".claude/scripts/gsc/__tests__/test_ingest_gsc_export.py": {
       "stats": 0,
       "ranking": 0,
       "origin": 1,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
     },
     ".claude/scripts/instagram/post-from-schedule.cjs": {
       "stats": 0,
       "ranking": 0,
       "origin": 1,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
     ".claude/scripts/lib/__tests__/chart-provenance.test.mjs": {
       "stats": 13,
       "ranking": 2,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
     },
     ".claude/scripts/lib/__tests__/check-maintenance-debt.test.cjs": {
       "stats": 0,
       "ranking": 0,
       "origin": 1,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
     },
     ".claude/scripts/lib/__tests__/data-refresh-scoped-workflow.test.mjs": {
       "stats": 10,
       "ranking": 7,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/lib/__tests__/ig-post-from-schedule.test.cjs": {
-      "stats": 0,
-      "ranking": 0,
-      "origin": 1,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
     },
     ".claude/scripts/lib/__tests__/metric-release-order.test.mjs": {
       "stats": 1,
       "ranking": 2,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
     },
     ".claude/scripts/lib/__tests__/r2-overlay-server.test.mjs": {
       "stats": 13,
       "ranking": 5,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
     },
     ".claude/scripts/lib/__tests__/ranking-scoped-workflow.test.mjs": {
       "stats": 0,
       "ranking": 4,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
     },
     ".claude/scripts/lib/__tests__/sync-snapshots-run-contract.test.mjs": {
       "stats": 0,
       "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
     },
     ".claude/scripts/lib/__tests__/threads-core.test.cjs": {
       "stats": 0,
       "ranking": 0,
-      "origin": 7,
+      "origin": 3,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
     },
     ".claude/scripts/lib/check-r2-route-ssg.cjs": {
       "stats": 0,
       "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
     ".claude/scripts/lib/gallery-collectors.mjs": {
       "stats": 0,
-      "ranking": 2,
+      "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
     ".claude/scripts/lib/latest-partition.mjs": {
       "stats": 0,
       "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
     ".claude/scripts/media/__tests__/workspace.test.mjs": {
       "stats": 0,
       "ranking": 0,
       "origin": 8,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/media/sync-web-image-inventory.mjs": {
-      "stats": 0,
-      "ranking": 1,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/metrics/audit-metric-denominator.ts": {
-      "stats": 1,
-      "ranking": 0,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/metrics/build-color-policies.ts": {
-      "stats": 1,
-      "ranking": 0,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
     },
     ".claude/scripts/municipalities/build-wp0-inventory.ts": {
-      "stats": 2,
+      "stats": 1,
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/note/__tests__/card-image-refresh.test.mjs": {
-      "stats": 0,
-      "ranking": 1,
-      "origin": 1,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/note/__tests__/cover-assets.test.mjs": {
-      "stats": 0,
-      "ranking": 0,
-      "origin": 1,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
     ".claude/scripts/note/__tests__/image-assets-audit.test.mjs": {
       "stats": 2,
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/note/__tests__/product-landing-evidence.test.mjs": {
-      "stats": 0,
-      "ranking": 1,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/note/audit-note-published.mjs": {
-      "stats": 1,
-      "ranking": 0,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/note/build-kakei-note-chart-data.mjs": {
-      "stats": 1,
-      "ranking": 0,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/note/build-kakei-note-evidence-data.mjs": {
-      "stats": 0,
-      "ranking": 2,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
     },
     ".claude/scripts/note/build-note-figure-ledger.mjs": {
-      "stats": 2,
-      "ranking": 1,
+      "stats": 1,
+      "ranking": 0,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
     ".claude/scripts/note/catalog/backfill-note-data-provenance.mjs": {
       "stats": 0,
-      "ranking": 6,
+      "ranking": 3,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/note/catalog/cover-designs.ts": {
-      "stats": 1,
-      "ranking": 0,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/note/generate-cover-refresh.ts": {
-      "stats": 2,
-      "ranking": 1,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/note/lib/cover-storage.mjs": {
-      "stats": 0,
-      "ranking": 0,
-      "origin": 1,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/note/lib/image-assets-audit.mjs": {
-      "stats": 1,
-      "ranking": 0,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/note/reference/build-reference-note-age.ts": {
-      "stats": 0,
-      "ranking": 1,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/note/reference/build-reference-note-quintile.ts": {
-      "stats": 0,
-      "ranking": 1,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/note/reference/build-reference-note-region.ts": {
-      "stats": 0,
-      "ranking": 1,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/note/reference/build-reference-note.ts": {
-      "stats": 2,
-      "ranking": 2,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
     ".claude/scripts/ogp/build-image-gallery.mjs": {
       "stats": 0,
       "ranking": 0,
       "origin": 1,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
     ".claude/scripts/page-quality/__tests__/templates.test.mjs": {
       "stats": 0,
@@ -464,61 +254,47 @@
       "s3Client": 0,
       "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
     },
-    ".claude/scripts/products/build-muni-data-product.mjs": {
-      "stats": 0,
-      "ranking": 0,
-      "origin": 1,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
     ".claude/scripts/ranking/check-active-r2-coverage.mjs": {
       "stats": 0,
-      "ranking": 2,
+      "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
     ".claude/scripts/sns/build-buzz-map-spec.ts": {
-      "stats": 3,
+      "stats": 2,
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
     ".claude/scripts/sns/build-ig-compare-props.ts": {
       "stats": 0,
-      "ranking": 5,
+      "ranking": 3,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
     ".claude/scripts/sns/build-ig-correlation-props.ts": {
       "stats": 0,
-      "ranking": 13,
+      "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
     ".claude/scripts/sns/build-ig-map-props.ts": {
-      "stats": 0,
-      "ranking": 4,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
-    },
-    ".claude/scripts/sns/lib/data-card-input.ts": {
       "stats": 0,
       "ranking": 2,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
     ".claude/scripts/sns/quick-still.ts": {
       "stats": 0,
-      "ranking": 4,
+      "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
     ".claude/scripts/themes/__tests__/verify-external-ingest.test.mjs": {
       "stats": 3,
@@ -532,14 +308,14 @@
       "ranking": 0,
       "origin": 1,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
     ".claude/scripts/web/build-yoy-timeseries.cjs": {
       "stats": 0,
-      "ranking": 3,
+      "ranking": 1,
       "origin": 0,
       "s3Client": 0,
-      "reason": "2026-11-15 現状 (段 3 で入口へ載せ替える)"
+      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
     ".claude/skills/db/sync-snapshots/run.sh": {
       "stats": 2,

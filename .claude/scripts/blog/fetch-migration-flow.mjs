@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { statsR2Key } from '../lib/r2-keys.mjs';
 /**
  * fetch-migration-flow.mjs — G型(移動フロー)記事のデータ接地。
  *
@@ -62,7 +63,7 @@ if (!SELF) {
 }
 
 async function loadYear(year) {
-  const url = `${R2_BASE}/app/stats/${METRIC_KEY}/migration-flow-${year}.json`;
+  const url = `${R2_BASE}/${statsR2Key(METRIC_KEY, "migration-flow", year)}`;
   const res = await fetch(url);
   if (!res.ok) return null;
   const json = await res.json();
@@ -175,7 +176,7 @@ async function main() {
     prefName: SELF,
     year: YEAR,
     unit: "人",
-    source: `r2:app/stats/${METRIC_KEY}/migration-flow-${YEAR}.json`,
+    source: `r2:${statsR2Key(METRIC_KEY, "migration-flow", YEAR)}`,
     upstream: "住民基本台帳人口移動報告 (e-Stat) → R2 app/stats",
     restore: restoreBase,
     generatedBy: "fetch-migration-flow.mjs",

@@ -1,3 +1,4 @@
+const { R2_PUBLIC_BASE_URL } = require("../site-config.cjs");
 const assert = require("node:assert/strict");
 const test = require("node:test");
 
@@ -50,7 +51,7 @@ test("文字数だけなら収まる本文も、絵文字のバイト数で 500 
 test("本文は空にできない (画像投稿でも本文で重複照合するため)", () => {
   assert.match(core.validateEntry(entry({ text: "  " })).errors.join("\n"), /text が空/);
   assert.match(
-    core.validateEntry(entry({ type: "image", text: "", image_url: "https://storage.stats47.jp/a.png" })).errors.join("\n"),
+    core.validateEntry(entry({ type: "image", text: "", image_url: `${R2_PUBLIC_BASE_URL}/a.png` })).errors.join("\n"),
     /text が空/,
   );
 });
@@ -87,7 +88,7 @@ test("画像は R2 公開 URL の png / jpg だけを許す", () => {
 });
 
 test("type=text に画像 URL が残っていれば止める (種別の書き間違い)", () => {
-  const errors = core.validateEntry(entry({ image_url: "https://storage.stats47.jp/a.png" })).errors;
+  const errors = core.validateEntry(entry({ image_url: `${R2_PUBLIC_BASE_URL}/a.png` })).errors;
   assert.match(errors.join("\n"), /type=text に image_url/);
   assert.match(core.validateEntry(entry({ type: "video" })).errors.join("\n"), /text \/ image のみ/);
 });
@@ -195,10 +196,10 @@ test("公開後の台帳: 新規は platform=threads で insert、予約行は�
 
   const image = core.decideLedgerAction({
     ...args,
-    entry: entry({ type: "image", image_url: "https://storage.stats47.jp/a.png" }),
+    entry: entry({ type: "image", image_url: `${R2_PUBLIC_BASE_URL}/a.png` }),
     existing: [],
   });
-  assert.equal(image.record.media_path, "https://storage.stats47.jp/a.png");
+  assert.equal(image.record.media_path, `${R2_PUBLIC_BASE_URL}/a.png`);
 });
 
 test("1 日上限は JST の日付で数える", () => {

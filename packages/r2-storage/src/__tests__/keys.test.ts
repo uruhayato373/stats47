@@ -10,6 +10,12 @@ describe("metric R2 keys", () => {
     },
   );
 
+  it.each([["ogp-image", "ogp/ogp.png"], ["ogp-generation", "ogp/generation.json"]] as const)(
+    "preserves the %s asset path", (kind, filename) => {
+      expect(rankingR2Key("population-2025", kind)).toBe(["app", "ranking", "population-2025", filename].join("/"));
+    },
+  );
+
   it.each(["", "Population", "under_score", "a/b", "../x", "a--b", "-a", "a-", "a.b", "a b", "a\n", "県", "a%2fb"])(
     "rejects invalid key segment %j", (key) => expect(() => rankingR2Key(key, "item")).toThrow("Invalid ranking key segment"),
   );

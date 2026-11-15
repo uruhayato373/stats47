@@ -1,4 +1,5 @@
 #!/usr/bin/env tsx
+import { rankingR2Key } from '../lib/r2-keys.mjs';
 /**
  * build-ig-map-props.ts — 1つの rankingKey から、Instagram「地図」カルーセル
  * (日枠。正典 .claude/rules/sns-content-standards.md §2-3c「地図カード / テーマ」) の
@@ -92,8 +93,8 @@ async function main() {
   const { rankingKey, minYear, out } = parseArgs();
   const sourceKeys = new Set<string>();
 
-  const itemUrl = `${PUBLIC_URL}/app/ranking/${rankingKey}/item.json`;
-  const valuesUrl = `${PUBLIC_URL}/app/ranking/${rankingKey}/values.json`;
+  const itemUrl = `${PUBLIC_URL}/${rankingR2Key(rankingKey, "item")}`;
+  const valuesUrl = `${PUBLIC_URL}/${rankingR2Key(rankingKey, "values")}`;
 
   const itemPayload = await fetchJson<RankingItemPayload>(itemUrl).catch((err) => {
     console.error(`✗ item.json 取得失敗: ${(err as Error).message}`);

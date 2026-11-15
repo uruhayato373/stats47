@@ -15,6 +15,8 @@ const RANKING_KINDS = [
   "page-cards",
   "values-per-household",
   "thumbnail",
+  "ogp-image",
+  "ogp-generation",
 ] as const;
 
 export type RankingR2Kind = (typeof RANKING_KINDS)[number];
@@ -27,7 +29,9 @@ export function rankingR2Key(rankingKey: string, kind: RankingR2Kind): string {
   if (!RANKING_KINDS.includes(kind)) {
     throw new Error(`Invalid ranking R2 kind: ${kind}`);
   }
-  return `${RANKING_R2_PREFIX}/${rankingKey}/${kind}.json`;
+  const filename = kind === "ogp-image" ? "ogp/ogp.png"
+    : kind === "ogp-generation" ? "ogp/generation.json" : `${kind}.json`;
+  return `${RANKING_R2_PREFIX}/${rankingKey}/${filename}`;
 }
 
 /** Observation entities; kept independent of data-configs for scripts and Workers. */

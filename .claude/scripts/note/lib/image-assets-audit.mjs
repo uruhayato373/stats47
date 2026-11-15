@@ -1,3 +1,4 @@
+import { statsR2Key } from '../../lib/r2-keys.mjs';
 /**
  * note 記事の画像・データ資産の契約を検査する純関数。
  *
@@ -65,7 +66,7 @@ export function validateRankingProvenance(slug, provenance, chartData) {
   if (provenance.slug !== slug) errors.push(`slug=${provenance.slug} が記事ディレクトリと不一致`);
   if (provenance.rankingKey !== rankingKey) errors.push(`rankingKey=${provenance.rankingKey} が不一致`);
   if (chartData?._meta && String(provenance.year) !== String(chartData._meta.year)) errors.push("year が chart-data.json と不一致");
-  if (!nonEmpty(provenance.source) || !provenance.source.includes(`app/stats/${rankingKey}/values.json`)) {
+  if (!nonEmpty(provenance.source) || !provenance.source.includes(statsR2Key(rankingKey, "prefecture"))) {
     errors.push("source が R2 の values.json を指していない");
   }
   if (!nonEmpty(provenance.restore)) errors.push("restore (復元コマンド) が無い");

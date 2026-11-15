@@ -1,4 +1,5 @@
 #!/usr/bin/env tsx
+import { rankingR2Key } from '../../lib/r2-keys.mjs';
 /**
  * 教材の分析企画のうち「世帯主の年齢によって家計がどう違うか」を問うもの (kakei-marketing a04-02) を、
  * 家計調査の世帯主の年齢階級別 (全国・二人以上の世帯・e-Stat 金額 0003348238 / 数量 0003348237) から
@@ -68,7 +69,7 @@ async function build(a: Analysis) {
   const year = await latestYear();
   const items: { key: string; code: string; label: string }[] = [];
   for (const k of a.metricKeys) {
-    const res = await fetch(`${R2}/app/ranking/${k}/item.json`);
+    const res = await fetch(`${R2}/${rankingR2Key(k, "item")}`);
     if (!res.ok) continue;
     const { item } = await res.json();
     const code = item.sourceConfig?.recipe?.kind === 'kakei-chousa' ? item.sourceConfig.recipe.estatParams?.cdCat01 : null;

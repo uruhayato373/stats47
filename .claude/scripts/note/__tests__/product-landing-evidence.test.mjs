@@ -1,3 +1,4 @@
+import { rankingR2Key } from '../../lib/r2-keys.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import JSZip from 'jszip';
@@ -8,7 +9,7 @@ const csv = (rows) => '\uFEFF' + rows.map((row) => row.map((cell) => `"${String(
 
 async function fixture(change = () => {}) {
   const rows = [['都道府県コード', '都道府県', '見本（人・2020）', '注記'], ...PREF_AREA_CODES.map((code, i) => [code, `地域${i + 1}`, String(47 - i), ''])];
-  const sources = [{ 調査名: '公的統計', 表名: '見本', 年: '2020', 単位: '人', URL: 'https://example.com/source', 加工式: 'app/ranking/sample/values.json' }];
+  const sources = [{ 調査名: '公的統計', 表名: '見本', 年: '2020', 単位: '人', URL: 'https://example.com/source', 加工式: rankingR2Key("sample", "values") }];
   change(rows, sources);
   const zip = new JSZip();
   zip.file('data.csv', csv(rows));

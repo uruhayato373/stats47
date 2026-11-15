@@ -1,4 +1,5 @@
 #!/usr/bin/env tsx
+import { rankingR2Key, statsR2Key } from '../lib/r2-keys.mjs';
 /**
  * generate-article-charts.ts
  *
@@ -541,7 +542,7 @@ function writeChartSourceIfMissing(
     manifest = {
       kind: 'ranking',
       rankingKey,
-      source: `r2:app/ranking/${rankingKey}/values.json`,
+      source: `r2:${rankingR2Key(rankingKey, "values")}`,
       upstream: 'metric config → e-Stat → R2 app/ranking',
       ...common,
     };
@@ -657,7 +658,7 @@ const valuesCache = new Map<string, { areaCode: string; yearCode: string; yearNa
 const valuesOf = (key: string) => {
   if (!valuesCache.has(key)) {
     const out = spawnSync(process.execPath, ['-e', 'fetch(process.argv[1]).then(async(r)=>{if(!r.ok)process.exit(1);process.stdout.write(await r.text())}).catch(()=>process.exit(1))',
-      `${R2_FETCH}/app/stats/${key}/values.json`], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+      `${R2_FETCH}/${statsR2Key(key, "prefecture")}`], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
     let rows = null;
     try { rows = out.status === 0 ? JSON.parse(out.stdout)?.rows ?? null : null; } catch { rows = null; }
     valuesCache.set(key, Array.isArray(rows) ? rows : null);

@@ -1,3 +1,4 @@
+import { rankingR2Key, statsR2Key } from '../lib/r2-keys.mjs';
 /** 公開カバーの棚卸し入力から、既存GIS+検証済みデータで派生画像を制作する。note書込なし。 */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -248,7 +249,7 @@ async function main() {
   }
   async function questionRanking(article: (typeof NOTE_ARTICLES)[number]) {
     const { rankingKey, year } = questionRankingIdentity(article);
-    const valuesSource = `${R2_PUBLIC_BASE_URL}/app/ranking/${rankingKey}/values.json`;
+    const valuesSource = `${R2_PUBLIC_BASE_URL}/${rankingR2Key(rankingKey, "values")}`;
     const sourceName = `ranking-${rankingKey}.json`;
     const source = await jsonSource(valuesSource, sourceName);
     const fixedChartUrl = `${R2_PUBLIC_BASE_URL}/${article.r2Path}/chart-data.json`;
@@ -355,7 +356,7 @@ async function main() {
       cached.set(
         metric,
         await jsonSource(
-          `${R2_PUBLIC_BASE_URL}/app/stats/${metric}/values.json`,
+          `${R2_PUBLIC_BASE_URL}/${statsR2Key(metric, "prefecture")}`,
           metric + '.json'
         )
       );
@@ -437,7 +438,7 @@ async function main() {
         mean,
         ratio,
         reference: '47都市の単純平均',
-        valuesSource: `${R2_PUBLIC_BASE_URL}/app/stats/${metric}/values.json`,
+        valuesSource: `${R2_PUBLIC_BASE_URL}/${statsR2Key(metric, "prefecture")}`,
         valuesSha256: sha(
           fs.readFileSync(path.join(OUT, 'sources', metric + '.json'))
         ),

@@ -1,4 +1,5 @@
 #!/usr/bin/env tsx
+import { rankingR2Key } from '../lib/r2-keys.mjs';
 /**
  * quick-still.ts
  *
@@ -139,8 +140,8 @@ function choosePalette(key: string): "red" | "blue" | "orange" {
 }
 
 async function main() {
-  const valuesUrl = `${R2_BASE}/app/ranking/${rankingKey}/values.json`;
-  const itemUrl = `${R2_BASE}/app/ranking/${rankingKey}/item.json`;
+  const valuesUrl = `${R2_BASE}/${rankingR2Key(rankingKey, "values")}`;
+  const itemUrl = `${R2_BASE}/${rankingR2Key(rankingKey, "item")}`;
 
   let values: RankingValuesPayload;
   try {
@@ -233,7 +234,7 @@ async function main() {
     readerLabel,
     layout: layoutArg,
     transform: storyLayout ? `全${sorted.length}県から${storyLayout}を描画 (IGは全47県)` : '全47県タイル地図。上位・下位5県の抽出なし',
-    source: `r2:app/ranking/${KEY}/values.json`,
+    source: `r2:${rankingR2Key(KEY, "values")}`,
     upstream: "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
     restore: `npx tsx .claude/scripts/sns/quick-still.ts --key ${KEY} --year ${year} --layout ${layoutArg}`,
     fetchedAt: new Date().toISOString(),

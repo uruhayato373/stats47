@@ -1,3 +1,4 @@
+import { rankingR2Key } from "../../../lib/r2-keys.mjs";
 /**
  * 年度の指標の図に「2021年」と書かないことを固定する (BLOG-FETCH-RANKING-FISCAL-01)。
  * 実行: node --test .claude/scripts/blog/lib/__tests__/ranking-year-label.test.mjs
@@ -71,8 +72,8 @@ for (const [label, item, expected] of [
 ]) {
   test(`fetch-ranking-data-r2: ${label}のランキングと地図の subtitle は「${expected}」`, async (t) => {
     const server = await serve({
-      "/app/ranking/sample-key/values.json": values,
-      "/app/ranking/sample-key/item.json": { item },
+      [`/${rankingR2Key("sample-key", "values")}`]: values,
+      [`/${rankingR2Key("sample-key", "item")}`]: { item },
     });
     const base = fs.mkdtempSync(path.join(os.tmpdir(), "fetch-ranking-year-"));
     t.after(() => {
