@@ -947,23 +947,24 @@
           ]
         }
       ],
-      "status": "proposed",
+      "status": "running",
       "created_at": "2026-11-03T05:00:00.000Z",
-      "started_at": null,
+      "started_at": "2026-11-14T10:36:29.000Z",
       "result": null,
       "learnings": null,
       "closed_at": null,
       "actions": [],
-      "pending_user_actions": [
-        "GA4 に custom dimension product_destination・product_id とキーイベント product_click を作る (承認付き API か管理画面)",
-        "KDP の再ログイン (refresh-session.mjs kdp --wait-human)",
-        "develop → main のマージと本番デプロイ。デプロイ日を started_at にし、6週後を next_check_date にする"
-      ],
-      "next_check_date": null,
+      "pending_user_actions": [],
+      "next_check_date": "2026-12-26",
       "history": [
         {
           "date": "2026-11-03T05:00:00.000Z",
           "action": "proposed"
+        },
+        {
+          "date": "2026-11-15T02:00:00.000Z",
+          "action": "started",
+          "summary": "本番反映 #1272 (2026-11-14) で計測コードが main に入り、GA4 の設定 (11-03)・KDP の再ログイン (11-14) と合わせて前提が揃った。オーナー承認 (2026-11-15)"
         }
       ],
       "card": "PRODUCT-REFERRAL-MEASURE-01",
