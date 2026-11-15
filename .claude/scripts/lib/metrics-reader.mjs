@@ -45,6 +45,9 @@ const GA4_JAPAN_FILTER = {
 export function computeWeekRanges({ week = null, asOf = null, now = Date.now() } = {}) {
   const ga4 = resolvePeriods({ source: "ga4", week, asOf, now });
   const gsc = resolvePeriods({ source: "gsc", week, asOf, now });
+  // AdSense は取得スクリプト (fetch-adsense-snapshot.mjs) と同じ期間契約 (periods.mjs・取得遅延 1 日)。
+  // 金額がどの 7 日のものかを週次 snapshot に残す。
+  const adsense = resolvePeriods({ source: "adsense", week, asOf, now });
   return {
     weekId: gsc.weekId,
     anchor: gsc.anchor,
@@ -60,6 +63,12 @@ export function computeWeekRanges({ week = null, asOf = null, now = Date.now() }
       prev: { start: gsc.previous7d.periodStart, end: gsc.previous7d.periodEnd },
       finalized7d: gsc.finalized7d,
       previous7d: gsc.previous7d,
+    },
+    adsense: {
+      this: { start: adsense.finalized7d.periodStart, end: adsense.finalized7d.periodEnd },
+      prev: { start: adsense.previous7d.periodStart, end: adsense.previous7d.periodEnd },
+      finalized7d: adsense.finalized7d,
+      previous7d: adsense.previous7d,
     },
   };
 }
