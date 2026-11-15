@@ -39,7 +39,7 @@ export const heatstrokeEmergencyTransportsPer100k: MetricConfig = {
         "restore": "node .claude/scripts/open-data/ingest-metric.mjs --metric heatstroke-emergency-transports-per-100k --write-local --out /tmp/heatstroke-emergency-transports-per-100k.json（CIは非公開R2から復元。手元の原本を使う場合は --local-source を追加）"
       }
     },
-    "displayName": "熱中症による救急搬送人員（都道府県別）",
+    "displayName": "消防庁「熱中症による救急搬送状況」",
     "url": "https://www.fdma.go.jp/disaster/heatstroke/post4.html"
   },
   "entities": [

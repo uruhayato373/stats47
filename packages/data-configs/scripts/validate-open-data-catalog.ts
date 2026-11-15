@@ -19,6 +19,7 @@ import type { OpenDataFetchRecipe, OpenDataSnapshot, OpenDataExpansion, OpenData
 import {
   validateOpenDataExpansion,
   findExpansionDuplicates,
+  stagedExpansionMetricKeys,
   evaluateExpansionCandidate,
   selectExpansionDenominator,
   OPEN_DATA_SOURCES,
@@ -250,15 +251,7 @@ if (expansion) {
   const existingMetricKeys = new Set([...Object.keys(METRICS_REGISTRY), ...fs.readdirSync(path.join(root, datasetDir("metrics.definitions"))).filter((f) => f.endsWith(".ts")).map((f) => f.slice(0, -3))]);
   // A planned candidate may already have its own inactive definition, before observations/publication.
   // Only an explicit, exact provenance binding exempts that key from collision checks.
-  const stagedKeys = new Set(metrics.filter((metric) => {
-    if (metric.isActive !== false || metric.source.kind !== "external") return false;
-    const provenance = metric.source.config.provenance as { openData?: { datasetId?: string; version?: string; table?: string; candidate?: { metricKey?: string; channel?: string } } } | undefined;
-    const ref = provenance?.openData;
-    if (ref?.candidate?.metricKey !== metric.key || ref.candidate.channel !== "prefecture-ranking") return false;
-    const matches = expansion.candidates.filter((c) => c.metricKey === metric.key && c.channel === ref.candidate?.channel);
-    return matches.length === 1 && matches[0].status === "planned" && matches[0].datasetId === ref.datasetId
-      && matches[0].table === ref.table && matches[0].slice.version === ref.version;
-  }).map((metric) => metric.key));
+  const stagedKeys = stagedExpansionMetricKeys(expansion, metrics);
   for (const candidate of expansion.candidates) {
     const otherStaged = metrics.filter((m) => stagedKeys.has(m.key) && m.key !== candidate.metricKey);
     const duplicates = findExpansionDuplicates(candidate, otherStaged);

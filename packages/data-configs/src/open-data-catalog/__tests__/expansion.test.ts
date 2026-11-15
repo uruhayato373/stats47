@@ -12,7 +12,7 @@ import { PREFECTURE_AREA_CODES } from "../../../../area/src/constants/prefecture
 import { normalizeOpenDataArea } from "../normalized-table";
 import type { OpenDataNormalizedTable } from "../normalized-table";
 import type { OpenDataFetchRecipe } from "../fetch-recipe";
-import { evaluateExpansionCandidate, findExpansionDuplicates, selectExpansionDenominator, validateOpenDataExpansion } from "../expansion";
+import { evaluateExpansionCandidate, findExpansionDuplicates, selectExpansionDenominator, stagedExpansionMetricKeys, validateOpenDataExpansion } from "../expansion";
 import type { OpenDataExpansion, OpenDataExpansionCandidate } from "../expansion";
 
 const root = fileURLToPath(new URL("../../../../../", import.meta.url));
@@ -21,10 +21,13 @@ const rawLedger: unknown = ledger;
 if (!validateSchema(rawLedger)) throw Error(JSON.stringify(validateSchema.errors));
 const expansion = rawLedger as OpenDataExpansion;
 const recipes = recipeLedger.recipes as OpenDataFetchRecipe[];
-const metrics = Object.values(METRICS_REGISTRY);
+const allMetrics = Object.values(METRICS_REGISTRY);
+// validator と同じく、候補に結び付いた公開前の定義は衝突の検査から外す。
+const stagedKeys = stagedExpansionMetricKeys(expansion, allMetrics);
+const metrics = allMetrics.filter((m) => !stagedKeys.has(m.key));
 const context = {
   recipes, metrics,
-  existingMetricKeys: new Set(Object.keys(METRICS_REGISTRY)),
+  existingMetricKeys: new Set(Object.keys(METRICS_REGISTRY).filter((k) => !stagedKeys.has(k))),
   themeIds: new Set(fs.readdirSync(path.join(root, "data/themes/catalogs")).filter((f) => f.endsWith(".json")).map((f) => f.slice(0, -5))),
   areaIds: new Set(areaTemplate.sections.map((s) => s.sectionKey)),
 };

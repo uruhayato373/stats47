@@ -86,6 +86,22 @@ export function findExpansionDuplicates(candidate: OpenDataExpansionCandidate, m
     .sort((a, b) => a.key.localeCompare(b.key));
 }
 
+/**
+ * planned の候補に、公開前 (isActive: false) の指標の定義がすでにあるときのキー。
+ * 定義の provenance.openData が候補 1 件とちょうど一致するときだけ、衝突の検査から外す。
+ */
+export function stagedExpansionMetricKeys(expansion: OpenDataExpansion, metrics: readonly MetricConfig[]): ReadonlySet<string> {
+  return new Set(metrics.filter((metric) => {
+    if (metric.isActive !== false || metric.source.kind !== "external") return false;
+    const provenance = metric.source.config.provenance as { openData?: { datasetId?: string; version?: string; table?: string; candidate?: { metricKey?: string; channel?: string } } } | undefined;
+    const ref = provenance?.openData;
+    if (ref?.candidate?.metricKey !== metric.key || ref.candidate.channel !== "prefecture-ranking") return false;
+    const matches = expansion.candidates.filter((c) => c.metricKey === metric.key && c.channel === ref.candidate?.channel);
+    return matches.length === 1 && matches[0].status === "planned" && matches[0].datasetId === ref.datasetId
+      && matches[0].table === ref.table && matches[0].slice.version === ref.version;
+  }).map((metric) => metric.key));
+}
+
 export function validateOpenDataExpansion(
   expansion: OpenDataExpansion,
   context: {
