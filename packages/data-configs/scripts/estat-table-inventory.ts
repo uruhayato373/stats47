@@ -345,7 +345,7 @@ async function main(outDir: string): Promise<void> {
       partitionAxes: table.partition?.partitionAxes ?? null, regionAxes: table.counts?.regionAxes ?? null,
       sliceKeyExample: table.sliceKeyExample, warnings: table.warnings })) };
   const f = (n: number) => n.toLocaleString("en-US", { maximumFractionDigits: 6 });
-  const md = (s: string | null) => (s ?? "不明").replace(/\|/g, "\\|").replace(/[\r\n]/g, " ");
+  const md = (s: string | null) => (s ?? "不明").replace(/\\/g, "\\\\").replace(/\|/g, "\\|").replace(/[\r\n]/g, " ");
   const report = [
     "# e-Stat 値の切片化: 段1の見積もり", "", `作成: ${generatedAt} / カタログ: ${String(manifest.generatedAt)}`, "",
     "## 合計（欠落表を除く見積もり）", "", "| 項目 | 内容 |", "| --- | --- |",
