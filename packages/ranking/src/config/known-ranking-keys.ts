@@ -16,7 +16,7 @@
  *                 必ず git commit してからデプロイ。
  *
  * 最終生成日: 2026-11-16
- * 件数: 2601
+ * 件数: 2611
  */
 export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "abandoned-cultivated-land-area",
@@ -946,10 +946,20 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "hat-consumption-expenditure",
   "hat-consumption-quantity",
   "health-center-expenses-prefecture",
+  "health-checkup-blood-pressure-medication-rate",
   "health-checkup-breakfast-skipping-rate",
   "health-checkup-consumption-expenditure",
+  "health-checkup-daily-activity-rate",
+  "health-checkup-daily-drinking-rate",
+  "health-checkup-daily-snacking-rate",
+  "health-checkup-exercise-habit-rate",
+  "health-checkup-fast-eating-rate",
+  "health-checkup-fast-walking-rate",
   "health-checkup-late-dinner-rate",
   "health-checkup-recipients",
+  "health-checkup-smoking-rate",
+  "health-checkup-sufficient-sleep-rate",
+  "health-checkup-weight-gain-10kg-rate",
   "health-consumables-consumption-expenditure",
   "health-insurance-premium-consumption-expenditure",
   "health-medical-expenditure-total",

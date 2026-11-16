@@ -4690,7 +4690,7 @@
     },
     {
       "metricKey": "health-checkup-blood-pressure-medication-rate",
-      "pageId": null,
+      "pageId": "ranking:health-checkup-blood-pressure-medication-rate",
       "title": "血圧を下げる薬を使っている人の割合",
       "sources": [],
       "recipe": {
@@ -4969,7 +4969,7 @@
     },
     {
       "metricKey": "health-checkup-daily-activity-rate",
-      "pageId": null,
+      "pageId": "ranking:health-checkup-daily-activity-rate",
       "title": "歩行などの身体活動を1日1時間以上している人の割合",
       "sources": [],
       "recipe": {
@@ -4993,7 +4993,7 @@
     },
     {
       "metricKey": "health-checkup-daily-drinking-rate",
-      "pageId": null,
+      "pageId": "ranking:health-checkup-daily-drinking-rate",
       "title": "お酒を毎日飲む人の割合",
       "sources": [],
       "recipe": {
@@ -5017,7 +5017,7 @@
     },
     {
       "metricKey": "health-checkup-daily-snacking-rate",
-      "pageId": null,
+      "pageId": "ranking:health-checkup-daily-snacking-rate",
       "title": "間食や甘い飲み物を毎日とる人の割合",
       "sources": [],
       "recipe": {
@@ -5041,7 +5041,7 @@
     },
     {
       "metricKey": "health-checkup-exercise-habit-rate",
-      "pageId": null,
+      "pageId": "ranking:health-checkup-exercise-habit-rate",
       "title": "1回30分以上の運動を週2日以上続けている人の割合",
       "sources": [],
       "recipe": {
@@ -5065,7 +5065,7 @@
     },
     {
       "metricKey": "health-checkup-fast-eating-rate",
-      "pageId": null,
+      "pageId": "ranking:health-checkup-fast-eating-rate",
       "title": "食べる速度が速い人の割合",
       "sources": [],
       "recipe": {
@@ -5089,7 +5089,7 @@
     },
     {
       "metricKey": "health-checkup-fast-walking-rate",
-      "pageId": null,
+      "pageId": "ranking:health-checkup-fast-walking-rate",
       "title": "同年代の同性より歩く速度が速い人の割合",
       "sources": [],
       "recipe": {
@@ -5591,7 +5591,7 @@
     },
     {
       "metricKey": "health-checkup-smoking-rate",
-      "pageId": null,
+      "pageId": "ranking:health-checkup-smoking-rate",
       "title": "習慣的に喫煙している人の割合",
       "sources": [],
       "recipe": {
@@ -5615,7 +5615,7 @@
     },
     {
       "metricKey": "health-checkup-sufficient-sleep-rate",
-      "pageId": null,
+      "pageId": "ranking:health-checkup-sufficient-sleep-rate",
       "title": "睡眠で休養が十分とれている人の割合",
       "sources": [],
       "recipe": {
@@ -5639,7 +5639,7 @@
     },
     {
       "metricKey": "health-checkup-weight-gain-10kg-rate",
-      "pageId": null,
+      "pageId": "ranking:health-checkup-weight-gain-10kg-rate",
       "title": "20歳の時から体重が10kg以上増えた人の割合",
       "sources": [],
       "recipe": {

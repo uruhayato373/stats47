@@ -53,5 +53,5 @@ export const healthCheckupFastEatingRate: MetricConfig = {
   },
   "surveyScope": "not-applicable",
   "surveyScopeReason": "保険者からNDBへ収載された特定健診の行政記録を集計した公開データであり、独立した標本調査ではない。",
-  "isActive": false
+  "isActive": true
 };

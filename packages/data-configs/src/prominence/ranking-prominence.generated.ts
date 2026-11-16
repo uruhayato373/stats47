@@ -634,7 +634,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "socialsecurity",
     "categoryName": "社会保障・衛生",
-    "count": 291,
+    "count": 301,
     "representatives": [
       {
         "rankingKey": "general-hospital-count",
