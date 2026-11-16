@@ -1,0 +1,3 @@
+{"key":"c998f9e332a9b5f9","date":"2026-11-16","slug":"konbu-consumption-prefecture-gap","mode":"expert","verdict":"PASS","severity":"MAJOR","type":"causal","summary":"「産地であることが購入量を下げるのなら、この2県も下位に並ぶ」(第2章) は、青森・岩手の昆布生産が北海道と同じ規模であるかのような前提に立つが、記事にも data/ にも生産量の出典が無い。"}
+{"key":"f73eb8b651ec0cae","date":"2026-11-16","slug":"konbu-consumption-prefecture-gap","mode":"expert","verdict":"PASS","severity":"MAJOR","type":"structure","summary":"D2 型の必須視点「関連品目との対比」が未達。"}
+{"key":"b3d7f335d6c101a4","date":"2026-11-16","slug":"konbu-consumption-prefecture-gap","mode":"expert","verdict":"PASS","severity":"MAJOR","type":"reader-value","summary":"「なぜその県か」の説明が薄い。"}
