@@ -231,7 +231,10 @@ function main(): void {
         ...KDP_AI_DISCLOSURE,
         text: b.kdpExclusive?.aiText ?? KDP_AI_DISCLOSURE.text,
         textTools: [...(b.kdpExclusive?.aiTextTools ?? KDP_AI_DISCLOSURE.textTools)],
-        imageTools: [...KDP_AI_DISCLOSURE.imageTools],
+        // 表紙が実データの地図なら AI の画像は無い。申告は事実を書く (kdp-publishing-policy.ts の KDP_AI_DISCLOSURE)
+        ...(b.coverDesign.backgroundSource === "data-map"
+          ? { images: "なし", imageTools: [] }
+          : { imageTools: [...KDP_AI_DISCLOSURE.imageTools] }),
       },
       ...(prev?.blockReason ? { blockReason: prev.blockReason } : {}), // 停止理由を保持
       priceYen: b.priceYen,

@@ -81,6 +81,13 @@ export interface KindleCoverDesign {
   readonly palette: KindleCoverPalette;
   /** 表紙の「この1冊でわかる」欄へ出す短い実テキスト。 */
   readonly dataLabels: readonly string[];
+  /** 表紙左上の帯に出す対象の範囲 (省略時「47都道府県」)。地方の本は「九州・沖縄8県」のように書く */
+  readonly scopeLabel?: string;
+  /**
+   * 背景の出どころ。省略時は生成 AI の画像として KDP に申告する。実際の県境データから描いた地図
+   * (build-cover-background.mts) は "data-map" とし、KDP の AI 使用の申告で画像を「なし」にする (申告は事実を書く)
+   */
+  readonly backgroundSource?: "ai" | "data-map";
   /** 文字なし背景に描く具体物。画像生成プロンプトの主題になる。 */
   readonly backgroundConcept: string;
   readonly reviewStatus: KindleCoverReviewStatus;

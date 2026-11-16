@@ -35,14 +35,14 @@
     },
     {
       "id": "kdp",
-      "title": "KDP (Kindle 自社本 S1 12冊)",
+      "title": "KDP の作り直し (型ごとに複数冊)",
       "route": "雑学の回収経路: コンテンツ販売",
       "card": "KDP-EXPANSION-01",
       "schedule": {
         "kind": "window",
-        "start": "2026-08-30",
-        "startEvidence": "KDP-EXPANSION-01 の 4 週窓の起点 (S1 12冊は 2026-08-13 から販売)",
-        "windowDays": 28
+        "start": null,
+        "startEvidence": "作り直した最初の本が未公開 (2026-11-14 に 8 週判定へ変更。旧: S1 12冊の 4 週窓 2026-08-30〜)",
+        "windowDays": 56
       },
       "metrics": [
         { "label": "販売数・売上", "kind": "sales-ledger", "channel": "kdp", "productIds": [] },

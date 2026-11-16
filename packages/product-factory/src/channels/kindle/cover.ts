@@ -211,7 +211,7 @@ async function buildPopCoverPng(
               letterSpacing: "0.02em",
               marginBottom: "42px",
             },
-            `47都道府県 × ${input.coverDesign.dataLabels.length}つの${THEME_BADGE[input.coverDesign.visualTheme]}データ`,
+            `${input.coverDesign.scopeLabel ?? "47都道府県"} × ${input.coverDesign.dataLabels.length}つの${THEME_BADGE[input.coverDesign.visualTheme]}データ`,
           ),
           node(
             "div",

@@ -223,7 +223,7 @@ function saveSpec(path, spec) {
  * エディタを開いて「公開に進む」→「更新する」を押し、公開 PUT の本文 / separator だけを差し替える。
  * 価格とタグは公開版から変わっていなければ送らない (変わっていたら止める)。無料記事は有料エリアの手順を飛ばす。
  */
-export async function publishEditedBody(ctx, noteKey, published, { freeBody, payBody, separator }) {
+export async function publishEditedBody(ctx, noteKey, published, { freeBody, payBody, separator, name }) {
   const page = await ctx.newPage();
   const state = { status: null };
   try {
@@ -239,6 +239,11 @@ export async function publishEditedBody(ctx, noteKey, published, { freeBody, pay
         payload.free_body = freeBody;
         payload.pay_body = payBody;
         payload.separator = separator;
+        // 題名は指定したときだけ差し替える (本文の誤りの是正で題名ごと誤っている記事。update-note-body-text.mjs --title)
+        if (name) {
+          if (typeof payload.name !== "string") throw new Error("update payload has no name field");
+          payload.name = name;
+        }
         state.sent = { freeLength: freeBody.length, payLength: payBody?.length ?? 0, separator, hashtags: payload.hashtags.length };
         await route.continue({ postData: JSON.stringify(payload), headers: { ...request.headers(), "content-type": "application/json" } });
       } catch (error) {

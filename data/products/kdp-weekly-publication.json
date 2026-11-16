@@ -1,34 +1,55 @@
 {
-  "schemaVersion": 1,
-  "generatedAt": "2026-11-14T03:17:20.627Z",
-  "week": "2026-W45",
-  "scheduledAction": "4週実測で需要が確認できた場合だけ第2パイロットを最大1冊出版",
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-16T12:03:07.262Z",
+  "week": "2026-W47",
   "portfolio": {
     "registeredCatalogCount": 38,
-    "activePublicationTargetCount": 15,
-    "maxNewPublicationsPerWeek": 1,
-    "cohortMeasurementWeeks": 4,
+    "cohortMeasurementWeeks": 8,
     "s1Live": 13,
-    "s1InReview": 0,
+    "s1InReview": 1,
     "pilotLive": 0,
-    "pilotInReview": 1
+    "pilotInReview": 0
   },
-  "nextPilot": {
-    "ordinal": 1,
-    "bookId": "K-S1-14",
-    "concept": "47都市の食卓は似てきたのか (県庁所在市の19年の変化)",
-    "format": "問いに答える読み物 + 47都市の事実票",
-    "plannedPreparationWeek": "2026-W40",
-    "earliestPublicationWeek": "2026-W41"
-  },
+  "formats": [
+    {
+      "id": "prefecture-guide",
+      "concept": "1県1章のガイド",
+      "liveBookIds": [],
+      "inReviewBookIds": [],
+      "verifiedBookIds": [],
+      "measuredBookIds": [],
+      "demandBookIds": [],
+      "readyForJudgement": false
+    },
+    {
+      "id": "surprising-first",
+      "concept": "意外な1位の県民性ストーリー",
+      "liveBookIds": [],
+      "inReviewBookIds": [],
+      "verifiedBookIds": [],
+      "measuredBookIds": [],
+      "demandBookIds": [],
+      "readyForJudgement": false
+    },
+    {
+      "id": "topic-reader",
+      "concept": "分野別の読み物",
+      "liveBookIds": [],
+      "inReviewBookIds": [],
+      "verifiedBookIds": [],
+      "measuredBookIds": [],
+      "demandBookIds": [],
+      "readyForJudgement": false
+    }
+  ],
   "eligibleCandidateIds": [],
   "cohortMeasurement": null,
   "approvalRequired": true,
-  "status": "observe",
+  "status": "prepare",
   "blockers": [
-    "K-S1-14:in_review"
+    "検証済み (verified) の本が0冊"
   ],
-  "nextAction": "審査中パイロットのlive read-backまで新規出版を止める",
+  "nextAction": "KDP-EXPANSION-01 の順で次の本を設計・生成・全章レビュー・Previewer確認する。まだ1冊も出ていない型: 1県1章のガイド・意外な1位の県民性ストーリー・分野別の読み物",
   "candidate": null,
   "publishCommand": null
 }

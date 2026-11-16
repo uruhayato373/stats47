@@ -19,7 +19,7 @@
 - [permission grant owner only](feedback_permission_grant_owner_only.md) — GA4/GCP の権限付与は最後をオーナーへ
 
 ## 事業・収益化
-- [monetization contract](project_monetization_contract.md) — AdSense の現行と口座・本線は行政実務向け商品。ほかは正本への参照
+- [monetization contract](project_monetization_contract.md) — AdSense の現行と口座。商品の需要は KDP を型ごとに出して 8 週の実売で確かめる (2026-11-14 に行政実務向け商品の本線をやめた)。ほかは正本への参照
 - [affiliate strategy](affiliate-strategy.md) — 広告の停止・文脈・重複・可視 1 秒の検証
 - [business plan adaptation](project_business_plan_adaptation_contract.md) — 外部事業計画は 25 章の適合差分で取り込む
 - [product ledger](project_product_ledger.md) — 商品の判断・価格実験の台帳。12-30 判定まで価格固定
