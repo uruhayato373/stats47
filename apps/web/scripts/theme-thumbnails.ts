@@ -3,12 +3,13 @@
  * config/image-generation-routes.json の theme-thumbnail。カタログは data/theme-thumbnail-catalog.ts)。
  *
  *   npx tsx apps/web/scripts/theme-thumbnails.ts prompt --key healthcare   # Codex に渡す依頼文と保存先
- *   npx tsx apps/web/scripts/theme-thumbnails.ts process --key healthcare  # 元PNG → 640×360 WebP
+ *   npx tsx apps/web/scripts/theme-thumbnails.ts ingest --key healthcare --from <Codex の PNG>  # → 元画像 JPEG
+ *   npx tsx apps/web/scripts/theme-thumbnails.ts process --key healthcare  # 元画像 → 640×360 WebP
  *   npx tsx apps/web/scripts/theme-thumbnails.ts process --all             # 元PNGがあるテーマをすべて
  *   npx tsx apps/web/scripts/theme-thumbnails.ts status                    # 元画像・配信画像の有無
  *
- * 流れ: prompt の依頼文で Codex の built-in imagegen が 3:2 (1536×1024) を 1 枚描く → 元画像を
- * `assets/themes/thumbnails/<key>.png` に保存 → process が中央で 16:9 に切り出して配信画像にする → 目視。
+ * 流れ: prompt の依頼文で Codex の built-in imagegen が 3:2 (1536×1024) を 1 枚描く → ingest で元画像
+ * `assets/themes/thumbnails/<key>.jpg` にする → process が中央で 16:9 に切り出して配信画像にする → 目視。
  */
 
 import { existsSync } from 'node:fs';
@@ -30,6 +31,8 @@ const PROJECT_ROOT = resolve(process.cwd());
 /** 配信画像の寸法 (ブログカード・利用意図カードと同じ 16:9) */
 const OUTPUT_WIDTH = 640;
 const OUTPUT_HEIGHT = 360;
+/** 元画像の JPEG 品質 (1536×1024 で 1MB の repo 上限に収まり、再加工に耐える値) */
+const SOURCE_JPEG_QUALITY = 88;
 
 const ALL_KEYS = Object.keys(THEME_THUMBNAIL_SUBJECTS) as ThemeThumbnailKey[];
 
@@ -62,6 +65,21 @@ async function processImage(key: ThemeThumbnailKey): Promise<void> {
   console.log(`${key}: ${getThemeThumbnailSource(key)} -> ${getThemeThumbnailOutput(key)}`);
 }
 
+/** Codex の PNG (2〜3MB) を 1MB 未満の JPEG の元画像にする (寸法は変えない) */
+async function ingestImage(key: ThemeThumbnailKey, from: string): Promise<void> {
+  const source = resolve(PROJECT_ROOT, getThemeThumbnailSource(key));
+  await mkdir(dirname(source), { recursive: true });
+  await sharp(resolve(from)).jpeg({ quality: SOURCE_JPEG_QUALITY, mozjpeg: true }).toFile(source);
+  console.log(`${key}: ${from} -> ${getThemeThumbnailSource(key)}`);
+}
+
+function parseFrom(): string {
+  const index = process.argv.indexOf('--from');
+  const from = index >= 0 ? process.argv[index + 1] : undefined;
+  if (from && existsSync(from)) return from;
+  throw new Error('--from <Codex が生成した PNG のパス> を指定してください');
+}
+
 async function processImages(keys: ThemeThumbnailKey[]): Promise<void> {
   const missing = keys.filter((key) => !existsSync(resolve(PROJECT_ROOT, getThemeThumbnailSource(key))));
   // 1 件指定で元画像が無いのは指定の誤りなので止める。--all は元画像のあるものだけを加工する
@@ -91,9 +109,14 @@ function printStatus(): void {
 async function main(): Promise<void> {
   const command = process.argv[2];
   if (command === 'prompt') return printPrompts(parseKeys());
+  if (command === 'ingest') {
+    const [key] = parseKeys();
+    if (process.argv.includes('--all')) throw new Error('ingest は --key で 1 件ずつ指定してください');
+    return ingestImage(key, parseFrom());
+  }
   if (command === 'process') return processImages(parseKeys());
   if (command === 'status') return printStatus();
-  throw new Error('usage: prompt|process (--key <key> | --all) / status');
+  throw new Error('usage: prompt|process (--key <key> | --all) / ingest --key <key> --from <png> / status');
 }
 
 main().catch((error: unknown) => {

@@ -32,7 +32,7 @@ describe('テーマのサムネイルのカタログ', () => {
   });
 
   it('元画像と配信画像の置き場はキーから決まる', () => {
-    expect(getThemeThumbnailSource('healthcare')).toBe('assets/themes/thumbnails/healthcare.png');
+    expect(getThemeThumbnailSource('healthcare')).toBe('assets/themes/thumbnails/healthcare.jpg');
     expect(getThemeThumbnailOutput('healthcare')).toBe('apps/web/public/images/themes/healthcare.webp');
   });
 });

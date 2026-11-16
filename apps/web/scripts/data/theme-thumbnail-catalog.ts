@@ -5,7 +5,7 @@
  * 空色・黄色・紫の差し色。ただし OGP と違い、中央の文字の面と文字は入れない (題名はカードの DOM の文字が持つ。
  * 2026-11-16 オーナー判断)。共通の指示 (画風・構図・禁止事項) はここだけに置き、テーマごとには描く小物 (scene) だけを持つ。
  *
- * 元画像は `assets/themes/thumbnails/<key>.png` (3:2・1536×1024)、配信画像は
+ * 元画像は `assets/themes/thumbnails/<key>.jpg` (3:2・1536×1024。Codex の PNG を ingest で JPEG にして 1MB 未満に収める)、配信画像は
  * `apps/web/public/images/themes/<key>.webp` (640×360・中央で 16:9 に切り出す)。
  * 生成は Codex (経路の正本は config/image-generation-routes.json の theme-thumbnail)。
  */
@@ -13,11 +13,13 @@
 const THEME_THUMBNAIL_STYLE =
   'Asset type: thumbnail illustration for a theme card on a Japanese prefectural-statistics website. ' +
   'Bright hand-painted miniature desk objects in a cheerful, polished educational illustration style, pop and bold, ' +
-  'with sky blue, sunny yellow and purple accents, soft daylight, and a light warm tabletop or pale sky backdrop. ';
+  'with sky blue, sunny yellow and deep blue-violet purple (#6637b8) accents, soft daylight, and a light warm tabletop or pale sky backdrop. ' +
+  'Use the deep blue-violet for every purple element; no pink, magenta, or pale lavender. ' +
+  'Objects look like simplified painted wooden toys with smooth surfaces; food and plants are toy-like and simplified, not photorealistic. ';
 
 const THEME_THUMBNAIL_COMPOSITION =
   ' Composition: 3:2 landscape, 1536×1024, full-bleed scene with no empty text panel. ' +
-  'Place the main objects inside the central 80% of the width and the central 70% of the height so the picture survives a center crop to 16:9 and still reads at 240px wide. ' +
+  'Place the main objects inside the central 80% of the width and the central 70% of the height so the picture survives a center crop to 16:9 and still reads at 240px wide; leave clear background above the tallest object and below the lowest one. ' +
   'Two to four large objects, few small details, clear silhouettes. ' +
   'Strictly no text, letters, numbers, kanji, words, logos, brand marks, watermarks, people, faces, hands, mascots, fake charts, fake statistics, maps, or invented geographic shapes. ' +
   'Do not draw an official Red Cross emblem.';
@@ -103,7 +105,7 @@ export function buildThemeThumbnailPrompt(key: ThemeThumbnailKey): string {
 }
 
 export function getThemeThumbnailSource(key: ThemeThumbnailKey): string {
-  return `assets/themes/thumbnails/${key}.png`;
+  return `assets/themes/thumbnails/${key}.jpg`;
 }
 
 export function getThemeThumbnailOutput(key: ThemeThumbnailKey): string {
