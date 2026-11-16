@@ -468,6 +468,21 @@ test("[mutation] 写しが参照先と違えば「写しの不一致」で落ち
   assert.match(result.errors[0], /^写しの不一致: t\.child data\/child\.json の title=古い題名 が t\.parent \(1\) の A と違う$/);
 });
 
+test("[mutation] 配列の写しは中身で比べ、同じ中身なら通り、1 語違えば「写しの不一致」で落ちる", () => {
+  const child = refRow("t.child", "data/child.json", [{ field: "rows[].parent", to: "t.parent", key: "items[].id", copies: ["kw"] }]);
+  const store = refsFixture();
+  store["data/parent.json"].items[0].kw = ["a", "b"];
+  store["data/parent.json"].items[1].kw = ["c"];
+  store["data/child.json"].rows[0].kw = ["a", "b"];
+  store["data/child.json"].rows[1].kw = ["c"];
+  assert.deepEqual(runRefs([parentRow, child], store).errors, [], "別の配列でも中身が同じなら一致");
+
+  store["data/child.json"].rows[0].kw = ["a", "x"];
+  const result = runRefs([parentRow, child], store);
+  assert.equal(result.errors.length, 1);
+  assert.match(result.errors[0], /^写しの不一致: t\.child data\/child\.json の kw=\["a","x"\] が t\.parent \(1\) の \["a","b"\] と違う$/);
+});
+
 test("refs の宣言の不備は error (参照先の取り違え・理由の無い warn・知らない項目・0 件の参照先)", () => {
   const cases = [
     [{ field: "rows[].parent", to: "t.nope", key: "items[].id" }, /台帳に無い参照先 t\.nope/],

@@ -54,8 +54,9 @@ const INTERNAL_MARKERS: ReadonlyArray<readonly [RegExp, string]> = [
 describe("kdp-listings — ★読者が読む文章に社内の言葉を出さない", () => {
   const rows = load();
 
-  it("32 冊すべてが読み込める", () => {
-    expect(rows.length).toBeGreaterThanOrEqual(32);
+  // 2026-11-14 に止めた 19 冊の行を消した。販売中の S1 13 冊が読めなければ読み込みの取り違え
+  it("販売中の S1 13 冊を含めて読み込める", () => {
+    expect(rows.length).toBeGreaterThanOrEqual(13);
   });
 
   for (const [re, label] of INTERNAL_MARKERS) {

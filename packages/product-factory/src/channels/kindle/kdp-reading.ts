@@ -176,33 +176,54 @@ export const KDP_READINGS: Readonly<Record<string, KdpReading>> = {
     titleKana: "ホッカイドウデータブック トウケイデヨムケンノヨコガオ",
     titleRomaji: "Hokkaido Databook - Tokei de Yomu Ken no Yokogao",
   },
+  // 2026-11-14 作り直し。読みは Claude の案で、出品前にオーナーが確かめる (KDP-EXPANSION-01)
   "K-S3-02": {
-    titleKana: "トウホクデータブック トウケイデヨムケンノヨコガオ",
-    titleRomaji: "Tohoku Databook - Tokei de Yomu Ken no Yokogao",
+    titleKana: "トウホク イジュウノケンエラビデータブック",
+    titleRomaji: "Tohoku Iju no Kenerabi Databook",
+    subtitleKana: "ブッカ シゴト スマイ コソダテ イリョウ アンゼンヲ ロッケンデ クラベル",
+    subtitleRomaji: "Bukka Shigoto Sumai Kosodate Iryo Anzen wo 6-ken de Kuraberu",
   },
+  // 2026-11-14 作り直し。読みは Claude の案で、出品前にオーナーが確かめる (KDP-EXPANSION-01)
   "K-S3-03": {
-    titleKana: "カントウデータブック トウケイデヨムケンノヨコガオ",
-    titleRomaji: "Kanto Databook - Tokei de Yomu Ken no Yokogao",
+    titleKana: "カントウ イジュウノケンエラビデータブック",
+    titleRomaji: "Kanto Iju no Kenerabi Databook",
+    subtitleKana: "ブッカ シゴト スマイ コソダテ イリョウ アンゼンヲ イットロッケンデ クラベル",
+    subtitleRomaji: "Bukka Shigoto Sumai Kosodate Iryo Anzen wo 1-to 6-ken de Kuraberu",
   },
+  // 2026-11-14 作り直し。読みは Claude の案で、出品前にオーナーが確かめる (KDP-EXPANSION-01)
   "K-S3-04": {
-    titleKana: "チュウブデータブック トウケイデヨムケンノヨコガオ",
-    titleRomaji: "Chubu Databook - Tokei de Yomu Ken no Yokogao",
+    titleKana: "チュウブ イジュウノケンエラビデータブック",
+    titleRomaji: "Chubu Iju no Kenerabi Databook",
+    subtitleKana: "ブッカ シゴト スマイ コソダテ イリョウ アンゼンヲ キュウケンデ クラベル",
+    subtitleRomaji: "Bukka Shigoto Sumai Kosodate Iryo Anzen wo 9-ken de Kuraberu",
   },
+  // 2026-11-14 作り直し。読みは Claude の案で、出品前にオーナーが確かめる (KDP-EXPANSION-01)
   "K-S3-05": {
-    titleKana: "キンキデータブック トウケイデヨムケンノヨコガオ",
-    titleRomaji: "Kinki Databook - Tokei de Yomu Ken no Yokogao",
+    titleKana: "キンキ イジュウノケンエラビデータブック",
+    titleRomaji: "Kinki Iju no Kenerabi Databook",
+    subtitleKana: "ブッカ シゴト スマイ コソダテ イリョウ アンゼンヲ ニフゴケンデ クラベル",
+    subtitleRomaji: "Bukka Shigoto Sumai Kosodate Iryo Anzen wo 2-fu 5-ken de Kuraberu",
   },
+  // 2026-11-14 作り直し。読みは Claude の案で、出品前にオーナーが確かめる (KDP-EXPANSION-01)
   "K-S3-06": {
-    titleKana: "チュウゴクデータブック トウケイデヨムケンノヨコガオ",
-    titleRomaji: "Chugoku Databook - Tokei de Yomu Ken no Yokogao",
+    titleKana: "チュウゴク イジュウノケンエラビデータブック",
+    titleRomaji: "Chugoku Iju no Kenerabi Databook",
+    subtitleKana: "ブッカ シゴト スマイ コソダテ イリョウ アンゼンヲ ゴケンデ クラベル",
+    subtitleRomaji: "Bukka Shigoto Sumai Kosodate Iryo Anzen wo 5-ken de Kuraberu",
   },
+  // 2026-11-14 作り直し。読みは Claude の案で、出品前にオーナーが確かめる (KDP-EXPANSION-01)
   "K-S3-07": {
-    titleKana: "シコクデータブック トウケイデヨムケンノヨコガオ",
-    titleRomaji: "Shikoku Databook - Tokei de Yomu Ken no Yokogao",
+    titleKana: "シコク イジュウノケンエラビデータブック",
+    titleRomaji: "Shikoku Iju no Kenerabi Databook",
+    subtitleKana: "ブッカ シゴト スマイ コソダテ イリョウ アンゼンヲ ヨンケンデ クラベル",
+    subtitleRomaji: "Bukka Shigoto Sumai Kosodate Iryo Anzen wo 4-ken de Kuraberu",
   },
+  // 2026-11-14 作り直し。読みは Claude の案で、出品前にオーナーが確かめる (KDP-EXPANSION-01)
   "K-S3-08": {
-    titleKana: "キュウシュウ オキナワデータブック トウケイデヨムケンノヨコガオ",
-    titleRomaji: "Kyushu Okinawa Databook - Tokei de Yomu Ken no Yokogao",
+    titleKana: "キュウシュウ オキナワ イジュウノケンエラビデータブック",
+    titleRomaji: "Kyushu Okinawa Iju no Kenerabi Databook",
+    subtitleKana: "ブッカ シゴト スマイ コソダテ イリョウ アンゼンヲ ハッケンデ クラベル",
+    subtitleRomaji: "Bukka Shigoto Sumai Kosodate Iryo Anzen wo 8-ken de Kuraberu",
   },
 
   // ── S4 横断 ───────────────────────────────────────────────────
@@ -250,12 +271,12 @@ export const KDP_READING_SOURCES: Readonly<Record<string, { readonly title: stri
   "K-S2-10": { title: "データで見る47都道府県 防災・インフラ" },
   "K-S2-11": { title: "データで見る47都道府県 家計・消費" },
   "K-S3-01": { title: "北海道データブック — 統計で読む県の横顔" },
-  "K-S3-02": { title: "東北データブック — 統計で読む県の横顔" },
-  "K-S3-03": { title: "関東データブック — 統計で読む県の横顔" },
-  "K-S3-04": { title: "中部データブック — 統計で読む県の横顔" },
-  "K-S3-05": { title: "近畿データブック — 統計で読む県の横顔" },
-  "K-S3-06": { title: "中国データブック — 統計で読む県の横顔" },
-  "K-S3-07": { title: "四国データブック — 統計で読む県の横顔" },
-  "K-S3-08": { title: "九州・沖縄データブック — 統計で読む県の横顔" },
+  "K-S3-02": { title: "東北 移住の県選びデータブック", subtitle: "物価・仕事・住まい・子育て・医療・安全を6県で比べる" },
+  "K-S3-03": { title: "関東 移住の県選びデータブック", subtitle: "物価・仕事・住まい・子育て・医療・安全を1都6県で比べる" },
+  "K-S3-04": { title: "中部 移住の県選びデータブック", subtitle: "物価・仕事・住まい・子育て・医療・安全を9県で比べる" },
+  "K-S3-05": { title: "近畿 移住の県選びデータブック", subtitle: "物価・仕事・住まい・子育て・医療・安全を2府5県で比べる" },
+  "K-S3-06": { title: "中国 移住の県選びデータブック", subtitle: "物価・仕事・住まい・子育て・医療・安全を5県で比べる" },
+  "K-S3-07": { title: "四国 移住の県選びデータブック", subtitle: "物価・仕事・住まい・子育て・医療・安全を4県で比べる" },
+  "K-S3-08": { title: "九州・沖縄 移住の県選びデータブック", subtitle: "物価・仕事・住まい・子育て・医療・安全を8県で比べる" },
   "K-S4-01": { title: "47都道府県ランキング大全 — 意外な1位・最下位" },
 };

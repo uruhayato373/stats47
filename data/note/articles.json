@@ -673,12 +673,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "9a0ed4469e9c8ae1544aadf5e769a835e3f51223508f14da4493bf67868ec62e",
+          "sha256": "357b1fdb90cb8434185a67b55e7d58f6f15a6cf14760ed6b2ddfd883373b1a3c",
           "files": 11,
-          "bytes": 434935,
-          "savedAt": "2026-10-12T22:03:28.980Z"
+          "bytes": 434949,
+          "savedAt": "2026-11-14T06:57:19.447Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-11-14T06:57:19.447Z"
       },
       "stats47Targets": [
         "/ranking/volunteer-activity-annual-participation-rate-10plus"
@@ -3121,7 +3121,7 @@
       "key": "recovered-n5158c5766a07",
       "vertical": "stats47-note",
       "series": "A",
-      "title": "生命保険格差1.6倍！鹿児島県が偏差値65でトップ、東京は最下位。あなたの地域の備えは？",
+      "title": "貯蓄に占める生命保険の割合、1位は鹿児島県29.9%・最下位は愛知県16.3%｜2019年都道府県ランキング",
       "magazine": "s47-health",
       "isPaid": false,
       "status": "published",
@@ -3131,12 +3131,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "b507021d9334566a42107e1313dad352845b552aae70a138a760f8f1bd3a60ea",
+          "sha256": "e8e1133ee8f54b40de206b2233b2d9d6cdd401bafcf1f3387380652f0dedc7f5",
           "files": 8,
-          "bytes": 4820142,
-          "savedAt": "2026-10-12T22:06:59.686Z"
+          "bytes": 576322,
+          "savedAt": "2026-11-14T07:12:29.148Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-11-14T07:12:29.148Z"
       }
     },
     {
@@ -3639,12 +3639,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "5bd478dcdb05ea4ee11d0d667869f8209c04a8e9a878b993446463e23dd3d1d2",
+          "sha256": "7a2052ea2a08ea28cf775aecfdda32344c5b0088a2927f15282bccefd6a11bd2",
           "files": 7,
           "bytes": 382432,
-          "savedAt": "2026-10-12T22:07:15.763Z"
+          "savedAt": "2026-11-14T06:58:27.079Z"
         },
-        "verifiedAt": "2026-10-12T22:10:50.956Z"
+        "verifiedAt": "2026-11-14T06:58:27.079Z"
       },
       "stats47Targets": [
         "/ranking/per-capita-prefectural-income-h27"
@@ -4747,12 +4747,12 @@
       "body": {
         "store": "r2-public",
         "manifest": {
-          "sha256": "f2239df5843403e8dba593562f612d8a4765560dab344456c61710c51b8de4c9",
+          "sha256": "1b64882b22914fc999aa467c66c9e6fec621c86cc9755a8c5540842ea4e5b482",
           "files": 6,
-          "bytes": 320125,
-          "savedAt": "2026-10-23T18:48:36.644Z"
+          "bytes": 320139,
+          "savedAt": "2026-11-14T06:57:41.216Z"
         },
-        "verifiedAt": "2026-10-23T18:48:36.644Z"
+        "verifiedAt": "2026-11-14T06:57:41.216Z"
       },
       "stats47Targets": [
         "/ranking/volunteer-activity-annual-participation-rate-10plus"

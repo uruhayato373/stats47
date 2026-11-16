@@ -186,6 +186,63 @@ export const KINDLE_COVER_BACKGROUND_BY_ID: Readonly<Record<string, KindleCoverB
     height: 2560,
     textBaked: { checkedText: ["47都市の食卓は似てきたのか", "家計調査で読む19年の変化", "stats47"], checkedAt: "2026-11-14" },
   },
+  // 2026-11-14 オーナー承認。実際の県境データの地図 (build-cover-background.mts --clip 122.9,132.3,24.0,34.3 --map-top 0.5)。R2 への反映は未承認
+  "K-S3-02": {
+    status: "staged-unpublished",
+    r2Key: "media/kindle-cover-assets/K-S3-02/23be012b08c1/background.jpg",
+    sha256: "23be012b08c1daae66873c9cc678f54c54c5b5e00dc976cd8b4307b2e3492e18",
+    bytes: 118519,
+    width: 1600,
+    height: 2560,
+  },
+  "K-S3-03": {
+    status: "staged-unpublished",
+    r2Key: "media/kindle-cover-assets/K-S3-03/149e904241e2/background.jpg",
+    sha256: "149e904241e2642017968836d2bdc0c6a962dcab18d46e769282e59db8a0be60",
+    bytes: 113685,
+    width: 1600,
+    height: 2560,
+  },
+  "K-S3-04": {
+    status: "staged-unpublished",
+    r2Key: "media/kindle-cover-assets/K-S3-04/59dd7157f5ae/background.jpg",
+    sha256: "59dd7157f5ae7fdca8674c0b250c3a2c20d069c658d4e4ac15d6d67918b53eab",
+    bytes: 160283,
+    width: 1600,
+    height: 2560,
+  },
+  "K-S3-05": {
+    status: "staged-unpublished",
+    r2Key: "media/kindle-cover-assets/K-S3-05/af53b1655bfd/background.jpg",
+    sha256: "af53b1655bfda83360f1258833daccfef33f791b6d76efe062a872e9bd84ad84",
+    bytes: 167263,
+    width: 1600,
+    height: 2560,
+  },
+  "K-S3-06": {
+    status: "staged-unpublished",
+    r2Key: "media/kindle-cover-assets/K-S3-06/d20c47925637/background.jpg",
+    sha256: "d20c47925637e7de705f218777ee14973b0c5e16aadda10d75ab7e0d93d27406",
+    bytes: 156508,
+    width: 1600,
+    height: 2560,
+  },
+  "K-S3-07": {
+    status: "staged-unpublished",
+    r2Key: "media/kindle-cover-assets/K-S3-07/36206a960498/background.jpg",
+    sha256: "36206a960498661b86bf40bbe5c58a669d18725e144b8073676883a054830d33",
+    bytes: 176699,
+    width: 1600,
+    height: 2560,
+  },
+  "K-S3-08": {
+    status: "staged-unpublished",
+    r2Key: "media/kindle-cover-assets/K-S3-08/93f038ffd150/background.jpg",
+    sha256: "93f038ffd1505e57b1c7131714a0167ce2554ce6be97377c4c3a3204885abdf6",
+    bytes: 103579,
+    width: 1600,
+    height: 2560,
+  },
 };
 
 const KINDLE_COVER_REVIEW_STATUS_BY_ID: Readonly<Partial<Record<string, KindleCoverReviewStatus>>> = {
@@ -203,6 +260,13 @@ const KINDLE_COVER_REVIEW_STATUS_BY_ID: Readonly<Partial<Record<string, KindleCo
   "K-S1-12": "approved",
   "K-S1-13": "approved",
   "K-S1-14": "approved",
+  "K-S3-02": "approved",
+  "K-S3-03": "approved",
+  "K-S3-04": "approved",
+  "K-S3-05": "approved",
+  "K-S3-06": "approved",
+  "K-S3-07": "approved",
+  "K-S3-08": "approved",
 };
 
 /**
@@ -241,13 +305,42 @@ export const KINDLE_COVER_DESIGN_BY_ID: Readonly<Record<string, KindleCoverDesig
   "K-S2-11": d("theme-databook-pop", "food-consumption", "coral-cream", ["収入", "支出", "食費", "光熱費", "貯蓄"], "家計簿、買い物かご、電気メーター、硬貨、貯金箱を日本地図の周囲に配置する"),
 
   "K-S3-01": d("region-pop", "regional-profile", "sky-coral", ["人口", "産業", "暮らし", "農業", "観光"], "北海道の輪郭を大きく見せ、雪原、農地、都市、観光を統計カードとして配置する"),
-  "K-S3-02": d("region-pop", "regional-profile", "teal-red", ["人口", "産業", "暮らし", "農林水産", "観光"], "東北6県の輪郭を強調し、農林水産、雪、都市、祭りを統計カードとして配置する"),
-  "K-S3-03": d("region-pop", "regional-profile", "navy-yellow", ["人口", "産業", "所得", "交通", "暮らし"], "関東7都県の輪郭を強調し、大都市、鉄道、住宅、産業を統計カードとして配置する"),
-  "K-S3-04": d("region-pop", "regional-profile", "green-gold", ["人口", "製造業", "農業", "山岳", "暮らし"], "中部9県の輪郭を強調し、山岳、工場、農業、都市を統計カードとして配置する"),
-  "K-S3-05": d("region-pop", "regional-profile", "purple-gold", ["人口", "産業", "文化", "観光", "暮らし"], "近畿7府県の輪郭を強調し、都市、文化施設、観光、産業を統計カードとして配置する"),
-  "K-S3-06": d("region-pop", "regional-profile", "blue-orange", ["人口", "産業", "交通", "観光", "暮らし"], "中国5県の輪郭を強調し、瀬戸内交通、産業、観光、暮らしを統計カードとして配置する"),
-  "K-S3-07": d("region-pop", "regional-profile", "orange-navy", ["人口", "産業", "交通", "農業", "暮らし"], "四国4県の輪郭を強調し、橋、農業、都市、暮らしを統計カードとして配置する"),
-  "K-S3-08": d("region-pop", "regional-profile", "coral-cream", ["人口", "産業", "観光", "農業", "暮らし"], "九州・沖縄8県の輪郭を強調し、火山、海、農業、都市、観光を統計カードとして配置する"),
+  // 2026-11-14 作り直し (移住・転勤で県を比べる人向け)。背景は実際の県境データでその地方を強調した地図 (build-cover-background.mts)
+  "K-S3-02": {
+    ...d("region-pop", "migration-living", "teal-red", ["物価", "仕事", "住まい", "子育て", "医療"], "東北6県の実際の輪郭を強調し、2050年の人口の増減率で塗り分けた地図。ほかの都道府県は沈める"),
+    scopeLabel: "東北6県",
+    backgroundSource: "data-map",
+  },
+  "K-S3-03": {
+    ...d("region-pop", "migration-living", "navy-yellow", ["物価", "仕事", "住まい", "子育て", "医療"], "関東7都県の実際の輪郭を強調し、2050年の人口の増減率で塗り分けた地図。ほかの都道府県は沈める"),
+    scopeLabel: "関東1都6県",
+    backgroundSource: "data-map",
+  },
+  "K-S3-04": {
+    ...d("region-pop", "migration-living", "green-gold", ["物価", "仕事", "住まい", "子育て", "医療"], "中部9県の実際の輪郭を強調し、2050年の人口の増減率で塗り分けた地図。ほかの都道府県は沈める"),
+    scopeLabel: "中部9県",
+    backgroundSource: "data-map",
+  },
+  "K-S3-05": {
+    ...d("region-pop", "migration-living", "purple-gold", ["物価", "仕事", "住まい", "子育て", "医療"], "近畿7府県の実際の輪郭を強調し、2050年の人口の増減率で塗り分けた地図。ほかの都道府県は沈める"),
+    scopeLabel: "近畿2府5県",
+    backgroundSource: "data-map",
+  },
+  "K-S3-06": {
+    ...d("region-pop", "migration-living", "blue-orange", ["物価", "仕事", "住まい", "子育て", "医療"], "中国5県の実際の輪郭を強調し、2050年の人口の増減率で塗り分けた地図。ほかの都道府県は沈める"),
+    scopeLabel: "中国5県",
+    backgroundSource: "data-map",
+  },
+  "K-S3-07": {
+    ...d("region-pop", "migration-living", "orange-navy", ["物価", "仕事", "住まい", "子育て", "医療"], "四国4県の実際の輪郭を強調し、2050年の人口の増減率で塗り分けた地図。ほかの都道府県は沈める"),
+    scopeLabel: "四国4県",
+    backgroundSource: "data-map",
+  },
+  "K-S3-08": {
+    ...d("region-pop", "migration-living", "coral-cream", ["物価", "仕事", "住まい", "子育て", "医療"], "九州・沖縄8県の実際の輪郭を強調し、2050年の人口の増減率で塗り分けた地図。ほかの都道府県は沈める"),
+    scopeLabel: "九州・沖縄8県",
+    backgroundSource: "data-map",
+  },
 
   "K-S4-02": d("ranking-pop", "ranking-discovery", "purple-gold", ["意外な1位", "県民性", "最下位", "定義", "47都道府県"], "表彰台の1位に意外な品物が載り、驚く吹き出しの形だけを周りに配置した構図"),
   "K-S4-01": d("ranking-pop", "ranking-discovery", "purple-gold", ["意外な1位", "最下位", "地域差", "全国平均", "分野横断"], "日本地図、金銀銅の表彰台、上昇下降グラフ、驚きを示す統計カードを華やかに配置する"),

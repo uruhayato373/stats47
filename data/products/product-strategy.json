@@ -185,8 +185,8 @@
   "agenda": [
     {
       "topic": "買う人の確認",
-      "question": "データ集の支払者は職員個人か組織か。聞き取りを増やす (ADMIN-STAT-PILOT-01 は 0/3 件)",
-      "evidenceNeeded": "聞き取りの記録"
+      "question": "どの型の商品にお金が払われるか。KDP を型ごとに出して 8 週の実売で確かめる (KDP-EXPANSION-01。2026-11-14 に行政資料の聞き取り ADMIN-STAT-PILOT-01 から切り替え)",
+      "evidenceNeeded": "販売台帳の 8 週の実売と既読ページ"
     },
     {
       "topic": "導線",

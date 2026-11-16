@@ -28,7 +28,7 @@ node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --update      # 既刊の�
 node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --update --commit # 修正版を再申請（要オーナー承認）
 node .claude/scripts/kdp/kdp-reports-probe.mjs                            # 売上ダッシュボードの読み取り専用 probe (アカウント合計。冊別は kdpreports.amazon.co.jp = 人間工程)
 
-# ── 週次レビュー/計画からの新規パイロット（最大1冊/週） ──
+# ── 週次レビュー/計画からの作り直しの本（承認は1冊ずつ・週の上限なし） ──
 npm run kdp:weekly -- --week 2026-W41 --write                    # listings + sales-ledger から公開ゲート生成（公開なし）
 npm run kdp:weekly-publish -- --week 2026-W41 --id <ID> --owner-approved <ID> --commit # 対象IDの明示承認後だけ
 ```
@@ -51,7 +51,7 @@ npm run kdp:weekly-publish -- --week 2026-W41 --id <ID> --owner-approved <ID> --
   (Amazon のアカウントは .com と .co.jp で別登録)。UI も `ja_JP` — フォームのセレクタが日本語ラベルのため。
 - **実公開 (`--commit`) はオーナー承認を要する** — outward-facing・取り下げに時間がかかる。既定の下書き検証まではエージェントが進めてよい。
 - **週次計画は承認ではない**。週次経路の新規パイロットは`kdp-weekly-publication.json`が
-  `ready-for-owner-approval`かつ候補1冊のときだけ進め、対象IDと同じ`--owner-approved <ID>`を
+  `ready-for-owner-approval`で対象IDが`eligibleCandidateIds`にあるときだけ進め、対象IDと同じ`--owner-approved <ID>`を
   ユーザーがその場で明示した場合だけ`kdp-weekly-publish --commit`を使う。
 - **KDP フォームは React SPA で DOM が変わりやすい**。日本語版の実仕様 (id 名指し / CKEditor /
   カテゴリの掲載場所チェック / AUI ボタンは実クリックのみ / 表紙は JPEG) は

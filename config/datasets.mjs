@@ -253,7 +253,13 @@ export const DATASETS = [
   d("config.datasets", "config/datasets.{name}", "config", "ops", "config", "この台帳"),
   d("kdp.listings", P.KDP_LISTINGS, "ledger", "product", "data", "KDP の出品内容と公開・審査状態", { schema: "config/schema/kdp.listings.schema.json" }),
   d("image.routes", "config/image-generation-routes.json", "config", "ops", "config", "AI 画像の生成経路の登録 (未登録の画像 API 呼び出しを止める)", { schema: "config/schema/image-generation-routes.schema.json" }),
-  d("kdp.listing-copy", P.KDP_LISTING_COPY, "ledger", "product", "data", "KDP の紹介文とキーワードの原稿 (台帳の description と keywords の正本)", { schema: "config/schema/kdp.listing-copy.schema.json" }),
+  d("kdp.listing-copy", P.KDP_LISTING_COPY, "ledger", "product", "data", "KDP の紹介文とキーワードの原稿 (台帳の description と keywords の正本)", {
+    schema: "config/schema/kdp.listing-copy.schema.json",
+    // 出品台帳の keywords はこの原稿の写し (export-kdp-listings.ts が書く)。出品台帳だけを手で直すとずれるので止める。
+    // 向きは原稿 → 出品台帳 (原稿の無い本が出品台帳に 20 冊あるため)。draft の原稿は出品台帳へ写さないので見ない。
+    // description は原稿から組み立てた文章で写しではないため、ここでは比べない
+    refs: [{ field: "books.$keys", unless: { status: "draft" }, to: "kdp.listings", key: "listings.$keys", copies: ["keywords"] }],
+  }),
   d("kdp.cover-thumbnail-checks", P.KDP_COVER_THUMBNAIL_CHECKS, "ledger", "product", "data", "KDP の表紙を検索結果の大きさに縮めて目で確かめた記録 (表紙の SHA ごと。公開の前提)", { schema: "config/schema/kdp.cover-thumbnail-checks.schema.json" }),
   d("kdp.account", P.KDP_ACCOUNT, "config", "product", "config", "KDP の期待アカウント (個人情報は .local 側)", { schema: "config/schema/kdp.account.schema.json" }),
   d("note.account", P.NOTE_ACCOUNT, "config", "product", "config", "note の期待アカウント", { schema: "config/schema/note.account.schema.json" }),

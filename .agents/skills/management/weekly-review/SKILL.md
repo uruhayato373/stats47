@@ -159,7 +159,7 @@ GSC/GA4は次の用途を混在させない。
 
 詳細なcommand、field、backlog/alert対応は`reference/runbook.md`のPhase 0〜2だけを参照する。
 
-Kindleの販売対象15冊（S1 12冊 + 実測ゲート付きパイロット3冊）は、週次レビューで次の順に判定する。
+Kindleは、販売中のS1と、型ごとに作り直して出す本（2026-11-14〜。各冊の公開日から8週で計測）を、週次レビューで次の順に判定する。
 
 ```bash
 # draft / in_review がある週はKDP本棚をread-backしてから判定する（書き込みは状態同期だけ、公開しない）
@@ -211,7 +211,7 @@ npm run kindle:quality -- --write
 - 来週への申し送り
 - 参照したsnapshot / backlog ID / file
 - 事業計画のready/in-progress、開始ゲート、計測欠損、Go/Pivot/Stop判断
-- KDP公開ゲート（S1 live数、4週販売/KENP計測、需要シグナル、当週候補、停止理由）
+- KDP公開ゲート（S1 live数、型ごとの公開・審査中・検証済みの冊数、8週販売/KENP計測、判定に進める型、承認候補、停止理由）
 - note画像資産 (docs/31 の追跡ファイル数・公開 R2 の欠落。違反があれば契約番号と該当記事を示す。正典 `.claude/rules/note-image-assets.md`)
 - 教材の展開 (展開先ごとの未着手数と前週差。増えた展開先の担当)
 - noteカード表示（検査記事数・ブラウザで確定した空白カード数・余分な空段落数・未確認カード数・影響記事数・取得/ブラウザ検証失敗数・新規/継続/解消。検証失敗があれば解消数は判定不能として扱う。詳細は `data/note/card-visibility-latest.json`）
