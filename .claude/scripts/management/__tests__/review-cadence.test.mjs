@@ -213,6 +213,10 @@ test("行き先は EXP・Issue・定常・見送りも受け付け、形の崩�
   const ids = new Set(["LIVE-CARD-01", "EXP-007"]);
   assert.deepEqual(parseRoutes("x → 振り分け: `LIVE-CARD-01` / EXP-007、#1058", "→ 振り分け:"), ["LIVE-CARD-01", "EXP-007", "#1058"]);
   assert.deepEqual(parseRoutes("x → 振り分け: 見送り（需要なし）", "→ 振り分け:"), ["見送り"]);
+  // 括弧の中の「、」や「/」では区切らない (2026-W45 のレビューで 3 件が行き先不明になった書き方)
+  assert.deepEqual(parseRoutes("x → 振り分け: 見送り (重点外、11-21 の監査で再び出たらログを読む)", "→ 振り分け:"), ["見送り"]);
+  assert.deepEqual(parseRoutes("x → 振り分け: 見送り（SNS の領域、Must 2 で一覧に入れる）/ #1064", "→ 振り分け:"), ["見送り", "#1064"]);
+  assert.deepEqual(parseRoutes("x → 振り分け: `LIVE-CARD-01` (A、B / C)、定常", "→ 振り分け:"), ["LIVE-CARD-01", "定常"]);
   assert.equal(parseRoutes("x", "→ 振り分け:"), null);
   assert.equal(classifyRoute("EXP-007", ids, true), "ok");
   assert.equal(classifyRoute("EXP-999", ids, true), "unknown-id");
