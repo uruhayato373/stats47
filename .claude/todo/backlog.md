@@ -122,11 +122,12 @@ updated: 2026-11-01
 - **次**: 理由を確かめてから、ロックの待ち方 (record-backlog-outcome.mjs) かテストの並列数のどちらを直すかを決める。テストを消したり並列数を 1 にしたりして通すのは禁止 (同時書き込みで欠けないことを守るテストのため)。
 - **完了条件**: 単独で 20 回続けて通り、push の前の検査でも落ちない。
 
-### [THEME-THUMBNAIL-ROLLOUT-01] テーマ 56 件のサムネイルを Codex で作り、テーマのカードに出す
-タグ: [UI・UX] [種類:制作] [実行:別環境] [検証:npx tsx apps/web/scripts/theme-thumbnails.ts status] [起票:2026-11-16] [領域:サイト]
+### [THEME-THUMBNAIL-ROLLOUT-01] テーマ 56 件のサムネイルをテーマのカードに出す
+タグ: [UI・UX] [種類:制作] [実行:対話] [検証:npx tsx apps/web/scripts/theme-thumbnails.ts status] [起票:2026-11-16] [領域:サイト]
 
-- **起点 (2026-11-16 オーナー決定)**: テーマのサムネイルを OGP の画風に寄せて全件作る。中央の文字の面は入れない (題名はカードの文字)。準備は済み: カタログ `apps/web/scripts/data/theme-thumbnail-catalog.ts` (56 テーマの描く小物)・スクリプト `apps/web/scripts/theme-thumbnails.ts` (prompt / process / status)・経路 `theme-thumbnail` (`config/image-generation-routes.json`)。
-- **次**: ① 試作 3 テーマ (例: healthcare・climate・household-food-spending) を `prompt --key` の依頼文で Codex に描かせ、`assets/themes/thumbnails/<key>.png` に置いて `process --all` → オーナーが画風を判断 ② 残り 53 件 ③ カード部品へ配線 (トップの「知りたいことから探す」6 枚の差し替え。`/themes` 一覧に画像を出すかは試作を見て決める)。
+- **起点 (2026-11-16 オーナー決定)**: テーマのサムネイルを OGP の画風 (青紫 #6637b8・おもちゃ風の小物) で全件作り、カードに出す。中央の文字の面は入れない (題名はカードの文字)。
+- **済み**: 56 件の元画像 `assets/themes/thumbnails/<key>.jpg` と配信画像 `apps/web/public/images/themes/<key>.webp` (ブランチ `feat/theme-thumbnails-pilot`、未マージ)。作り直すときの手順はスクリプト `apps/web/scripts/theme-thumbnails.ts` の冒頭。
+- **次**: カード部品へ配線する (トップの「知りたいことから探す」6 枚の差し替え。`/themes` 一覧に画像を出すかはオーナーが決める)。
 - **停止条件**: 社内ネットワークで Codex が 503 (i-FILTER の警告ページ) を返したら、プロキシを迂回せず別ネットワークで生成する。Codex が使えないときに別の画像モデルや手書きの描画で代用しない。
 - **完了条件**: `theme-thumbnails.ts status` が元画像・配信画像とも 56 / 56 で、テーマのカードに出ていることを localhost で確認済み。
 
