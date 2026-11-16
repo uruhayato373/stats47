@@ -150,7 +150,8 @@ staging・fingerprint・exact publisherは§5.0を共有し、ローカルプレ
 | OGP: cities | 1200×630 | 所属県の画像を共用 | `app/areas/<県code>/ogp/ogp.png` | `--type areas` | ranking-ui-manager |
 | OGP: products | 1200×630 | 共通外部カード・商品名と販売媒体 | `app/products/<slug>/ogp/ogp.png` | `--type products` | image-prompt-curator |
 | カード: blog (light/dark)      | 640×336 WebP (40:21、画像内テキストなし)                                     | `apps/web/scripts/generate-blog-thumbnails-cloud.ts` (Satori/Sharp、OGPとは別renderer)                                                                                                                                                                                                                                                                                                                                                                             | R2 `app/blog/<slug>/thumbnail-{light,dark}.webp`                   | `ThemeAwareImage` (blog-article-grid)           | blog-editor                                                      |
-| カード: theme / category       | —                                                                            | **なし (要否は §3 で判断)**                                                                                                                                                                                                                                                                                                                                                                                                                                       | —                                                                  | (共有 SVG タイルマップ or blog サムネ流用)      | —                                                                |
+| カード: theme                  | 640×360 WebP (16:9、画像内テキストなし)                                      | **準備中 (2026-11-16 オーナー決定で全件作る)**。OGP の画風・中央の文字の面なし。Codex で 3:2 を描き中央で切り出す (経路 `theme-thumbnail`) | `apps/web/public/images/themes/<key>.webp` (元画像 `assets/themes/thumbnails/<key>.png`) | `theme-thumbnails.ts` (カタログ `theme-thumbnail-catalog.ts`) | image-prompt-curator |
+| カード: category               | —                                                                            | **なし (要否は §3 で判断)**                                                                                                                                                                                                                                                                                                                                                                                                                                       | —                                                                  | (共有 SVG タイルマップ or blog サムネ流用)      | —                                                                |
 | note カバー | 1280×670 (≒1.91:1) | cover-policies.json + Codex imagegen（文字込み） | private R2のSHA付き版 + data/note/cover-assets.json | 共通画像台帳・GET proxy | note-manager |
 
 ### OGP コンポーネントの実体
@@ -209,7 +210,7 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
 1. **ranking カード WebP は生成を止めた (2026-11-14・RANKING-CARD-WEBP-UNUSED-01)**: `app/ranking/<key>/thumbnail-{light,dark}.webp` を読む表示面が無く、最後の読み手 (survey ページの `baseThumbnailUrl`) は 2026-07-12 (15248a33e1) に消えていた。home / category / survey / blog は共通 inline SVG と `/api/ranking-card/<key>`、外部共有は ranking OGP (`ogp/ogp.png`) を使う。生成 (`--type ranking-cards`)・週次の修復と監査・ギャラリーの ranking-card タブ・sync-snapshots のフックは外した。R2 に残る約 4,900 枚の実体の削除はオーナー判断で、そのままにしている (復活させるときは git の 2026-11-14 の変更を戻す)。
 2. **note カバーの旧課題（2026-10-14解消、以下は履歴）**: Remotion `NoteCover.tsx` (→ `sns/`) と `generate-note-covers.mjs` (→ `note/`) がドリフト。→ ギャラリーで目視比較し正系統を本 rules に確定、他方は deprecate 記載 (削除しない)。
 3. **専用OGPを持たないページ**: tag / survey等はrootの静的defaultを継承し、市区町村は所属県の静的OGPを共用する。専用画像を増やす場合は流入と必要性を確認する。
-4. **theme / category カード画像なし**: 一覧での視認性のため要否判断。既定は「作らない」(共有タイルマップ SVG or blog サムネ流用で代替)。
+4. **category カード画像なし**: 一覧での視認性のため要否判断。既定は「作らない」(共有タイルマップ SVG or blog サムネ流用で代替)。theme は 2026-11-16 のオーナー決定で全件作る (§1 の「カード: theme」)。3 テーマの試作で画風を確かめてから残りを作る。
 
 ---
 
@@ -501,12 +502,12 @@ homeの「知りたいことから探す」に使う、文字なしの装飾イ�
 | 設定 | `packages/data-configs/src/home-portal.ts`の`imageSrc` |
 | 生成仕様 | `apps/web/scripts/data/home-use-case-image-catalog.ts` |
 | 元画像 | `assets/page-heroes/home-use-case-<id>.png` (Codex built-in imagegen) |
-| 配信画像 | `apps/web/public/images/home/use-cases/<id>.webp` (透過・静的) |
+| 配信画像 | `apps/web/public/images/home/use-cases/<id>.webp` (640×360・明るい地を焼き込み、ダークでも暗くしない・静的) |
 | 後処理 | `npx tsx apps/web/scripts/process-home-use-case-images.ts --all` |
-| 描画 | `PortalNavCard`の右側に装飾画像として配置し、`alt=""`。文言はDOMテキスト |
+| 描画 | `PortalNavCard`の上部、ブログカードと同じ16:9の枠に装飾画像として配置し、`alt=""`。文言はDOMテキスト |
 
 再設計時は共通prompt builderを先に直し、同じIDの元PNGを再生成してから後処理する。
-カード側へ用途別の位置調整や色補正を追加せず、共通トリミング契約を維持する。
+カード側へ用途別の位置調整や色補正を追加せず、共通トリミング契約 (絵の範囲で切り出し、640×360 に高さ8%の余白で中央配置。2026-11-16) を維持する。
 
 ## 6. 関連
 

@@ -105,6 +105,14 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [THEME-THUMBNAIL-ROLLOUT-01] テーマ 56 件のサムネイルを Codex で作り、テーマのカードに出す
+タグ: [UI・UX] [種類:制作] [実行:別環境] [検証:npx tsx apps/web/scripts/theme-thumbnails.ts status] [起票:2026-11-16] [領域:サイト]
+
+- **起点 (2026-11-16 オーナー決定)**: テーマのサムネイルを OGP の画風に寄せて全件作る。中央の文字の面は入れない (題名はカードの文字)。準備は済み: カタログ `apps/web/scripts/data/theme-thumbnail-catalog.ts` (56 テーマの描く小物)・スクリプト `apps/web/scripts/theme-thumbnails.ts` (prompt / process / status)・経路 `theme-thumbnail` (`config/image-generation-routes.json`)。
+- **次**: ① 試作 3 テーマ (例: healthcare・climate・household-food-spending) を `prompt --key` の依頼文で Codex に描かせ、`assets/themes/thumbnails/<key>.png` に置いて `process --all` → オーナーが画風を判断 ② 残り 53 件 ③ カード部品へ配線 (トップの「知りたいことから探す」6 枚の差し替え。`/themes` 一覧に画像を出すかは試作を見て決める)。
+- **停止条件**: 社内ネットワークで Codex が 503 (i-FILTER の警告ページ) を返したら、プロキシを迂回せず別ネットワークで生成する。Codex が使えないときに別の画像モデルや手書きの描画で代用しない。
+- **完了条件**: `theme-thumbnails.ts status` が元画像・配信画像とも 56 / 56 で、テーマのカードに出ていることを localhost で確認済み。
+
 ### [NSM-REVENUE-INPUTS-01] 収益を日 × 商品の明細で持ち、土曜の週次レビューをスケジュール済みタスクで自動実行する
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/metrics/__tests__/revenue-rollup.test.mjs] [起票:2026-11-14] [領域:管理] [進行中]
 
