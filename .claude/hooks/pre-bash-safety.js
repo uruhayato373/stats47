@@ -38,6 +38,9 @@ const DANGEROUS_PATTERNS = [
   // 並行エージェント / branch-workflow (コマンド先頭のみ照合し、commit メッセージ中の言及では止めない)
   { pattern: /(?:^|[;&|(\n]\s*)git\s+add\s+(?:[^\s;&|()]+\s+)*(?:-A|--all|\.)(?=\s|$|[;&|)])/, reason: "git add -A / --all / . は禁止です (並行エージェントの WIP 混入防止)。対象ファイルを明示して add してください" },
   { pattern: /(?:^|[;&|(\n]\s*)git\s+push\b[^;&|\n]*\s(?:\S*:)?main(?=\s|$|[;&|)])/, reason: "main への直接 push は禁止です。develop→main は PR 経由のみ (.claude/rules/branch-workflow.md)" },
+  // git commit / push の出力をパイプに流すと、成否が最終段 (tail 等) の exit に化ける。pre-commit が止めたコミットを
+  // 成功と取り違えた事故がある (memory feedback-exit-code-not-via-pipe。記録だけでは守られなかったので 2026-11-16 に機械で止める)
+  { pattern: /(?:^|[;&|(\n]\s*)git\s+(?:-[Cc]\s+\S+\s+)*(?:commit|push)\b(?:[^;&|\n]|>&)*\|(?!\|)/, reason: "git commit / git push の出力をパイプ (| tail 等) に流さないでください。成否が最終段の exit に化けて隠れます。`git push ... > /tmp/x.log 2>&1; echo \"EXIT=$?\"` の形でファイルに書き、後から読んでください (コミットメッセージの中の | で止まった場合は -F でファイルから渡す)" },
   { pattern: /(?:^|[;&|(\n]\s*)gh\s+pr\s+(?:merge\b|create\b[^;&|\n]*--base[=\s]+main(?=\s|$|[;&|)]))/, reason: "main へのマージは本番反映の判断で、オーナーの明示の指示が要ります。npm run release:status で状況を報告して確認してください。指示があるときは OWNER_APPROVED_RELEASE=1 を先頭に付けて実行します (.claude/rules/branch-workflow.md)" },
 
   // シークレット漏洩

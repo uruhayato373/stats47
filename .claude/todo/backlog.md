@@ -105,6 +105,15 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [GIT-PUSH-SSH-TIMEOUT-01] 会社の Windows PC で、push の前の検査が通った後に git が exit 141 で止まり push が届かない
+タグ: [インフラ・計測] [種類:不具合] [実行:windows] [起票:2026-11-16] [領域:管理]
+
+- **起点 (2026-11-16 観測)**: `git push origin <branch>` が、push の前の検査 (`pre-push-tests.mjs`、約 10 分) がすべて通った直後に exit 141 で止まり、リモートは更新されなかった。出力はファイルに書いていて、パイプは無い。検査が失敗した回のログには `unable to write flush packet: Broken pipe` が出ている。`--no-verify` の push はすぐ届いた。
+- **[仮説]** git は検査を走らせる前に GitHub との SSH 接続を開き、約 10 分の検査の間に社内ネットワークか GitHub がその接続を切る。**検証**: ① 検査が短く済む push で 141 が出ないか ② `~/.ssh/config` の github.com に `ServerAliveInterval 30` を入れて (オーナーの了解の上) 検査ありの push が通るか。
+- **次**: 仮説が支持されたら ② の設定を入れるか、検査を先に別で走らせてから push する手順を決める。支持されなければ git の trace (`GIT_TRACE=1 GIT_SSH_COMMAND="ssh -v"`) で止まる位置を見る。
+- **禁止**: 検査を毎回 `--no-verify` で飛ばす運用にしない (飛ばすのはオーナーの許可のあるときだけ)。
+- **完了条件**: この PC で検査ありの push が 3 回続けて届く。
+
 ### [BACKLOG-LEDGER-PARALLEL-FLAKE-01] 台帳の並行記録のテストが Windows で 3 回に 1 回落ち、push を止める
 タグ: [インフラ・計測] [種類:不具合] [実行:windows] [検証:node --test .claude/scripts/backlog-loop/__tests__/record-backlog-outcome.test.cjs] [起票:2026-11-16] [領域:管理]
 
