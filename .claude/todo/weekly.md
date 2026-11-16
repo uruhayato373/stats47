@@ -150,7 +150,7 @@ KDP の販売台帳 (`KDP-LEDGER-AUTO-01`) は W45・W46 と Should で 2 週続
   ② 調査ハブ → テーマ → ランキング → ブログの代表 URL を 10 件選び、localhost (`npm run dev:web`) で対象世帯・地域・期間・単位・出典と次の導線があるかを確かめる。全国時系列・収入別の図 (`KAKEI-MULTIAXIS-01`) の載る面を含める
   ③ 有料 note のカードが無い家計調査の記事 (#1064 の `b-kakei-expense-*`) を一覧に加える。
   完了条件: カードに ①②③ の一覧と、代表 10 URL の確認結果 (合格・要修正) が書かれ、W48 に出す変更の範囲が決まっている。本番反映・R2 の正本の更新はこの Must に含めない (オーナー承認)。
-- [ ] **[分割] テーマページの表を上位・下位の数行に畳み、3 テーマで見える文字と高さを測る** [M] — `THEME-DASHBOARD-TEXT-TRIM-01`（🔴 1 番目・サイト領域・KPI `site-pageviews`）。
+- [x] **[分割] テーマページの表を上位・下位の数行に畳み、3 テーマで見える文字と高さを測る** [M] — `THEME-DASHBOARD-TEXT-TRIM-01`（🔴 1 番目・サイト領域・KPI `site-pageviews`）。
   W45・W46 と Must に入らず 2 週進まなかったので、カードの「次」の ① と ③ だけを切り出す。
   ① データの表を上位・下位の数行だけ見せ、残りは「全件を見る」で開く (HTML には残す)。共通の部品で直し、テーマごとの専用部品は作らない
   ③ `/themes/living-housing` ほか 2 テーマで、変更の前後の見える文字と高さを同じ測り方で測る。
@@ -158,13 +158,13 @@ KDP の販売台帳 (`KDP-LEDGER-AUTO-01`) は W45・W46 と Should で 2 週続
 
 ### Should（できればやる、3件）
 
-- [ ] **`quality-suite-weekly` の 3 回の失敗を、毎回落ちるものと 1 回だけのものに分ける** [S] — `QUALITY-SUITE-WEEKLY-RED-01`（サイト領域・不具合）。カードの「次」の ①。毎回落ちる job が分かれば、②の原因の実証に進む。`affiliate-ga4-weekly` (#1207) と同じ原因が見つかったときだけ併せて扱う。
-- [ ] **KDP の販売台帳の取り込みが conflict になる理由を確かめる** [S] — `KDP-LEDGER-AUTO-01`（管理領域）。W45・W46 と Should で残った。今週は `npm run products:sales --workspace=@stats47/product-factory -- validate` を実行し、conflict の判定に使われた行をカードに書くところまで。直せない理由がオーナーの判断 (既読ページの埋め方など) なら、判断の依頼を書いて閉じる。3 週目も進まなければ W48 の計画では 🟡 の扱いに下げる。
-- [ ] **GSC カバレッジ履歴の W45 行が W44 行と同値の件を確かめる** [S] — `GSC-COVERAGE-TOTALS-DUP-ROW-01`（サイト領域・不具合）。11-08 の取得の入力と、履歴に行を足すスクリプトの週の決め方を読み、独立した観測か写しかをカードに書く。
+- [x] **`quality-suite-weekly` の 3 回の失敗を、毎回落ちるものと 1 回だけのものに分ける** [S] — `QUALITY-SUITE-WEEKLY-RED-01`（サイト領域・不具合）。カードの「次」の ①。毎回落ちる job が分かれば、②の原因の実証に進む。`affiliate-ga4-weekly` (#1207) と同じ原因が見つかったときだけ併せて扱う。
+- [x] **KDP の販売台帳の取り込みが conflict になる理由を確かめる** [S] — `KDP-LEDGER-AUTO-01`（管理領域）。W45・W46 と Should で残った。今週は `npm run products:sales --workspace=@stats47/product-factory -- validate` を実行し、conflict の判定に使われた行をカードに書くところまで。直せない理由がオーナーの判断 (既読ページの埋め方など) なら、判断の依頼を書いて閉じる。3 週目も進まなければ W48 の計画では 🟡 の扱いに下げる。
+- [x] **GSC カバレッジ履歴の W45 行が W44 行と同値の件を確かめる** [S] — `GSC-COVERAGE-TOTALS-DUP-ROW-01`（サイト領域・不具合）。11-08 の取得の入力と、履歴に行を足すスクリプトの週の決め方を読み、独立した観測か写しかをカードに書く。
 
 ### Could（余力があれば、3件）
 
-- [ ] **ページ UI の high の指摘 2 件を直す** [S] — `UI-FIX-GEO-ANALYSIS-LAYER-20261114` / `UI-FIX-PREFECTURE-DETAIL-HOKKAIDO-20261114`（サイト領域・不具合）。外国語の広告が画面上部を覆う件と、北海道の表の「全国順位」列が切れる件。
+- [x] **ページ UI の high の指摘 2 件を直す** [S] — `UI-FIX-GEO-ANALYSIS-LAYER-20261114` / `UI-FIX-PREFECTURE-DETAIL-HOKKAIDO-20261114`（サイト領域・不具合）。外国語の広告が画面上部を覆う件と、北海道の表の「全国順位」列が切れる件。
 - [ ] **AdSense の確定 7 日の期間の日付を週次の要約に入れる** [S] — `ADSENSE-LATEST-PERIOD-01`（サイト領域）。`[実行:sweep]` なので backlog-loop に任せてもよい。
 - [ ] **Workers CPU の `_rsc` の割合を Observability で取り直す** [S] — `CF-CPU-SURGE-01`（管理領域・不具合）。W43 から 3 週持ち越し、期日 10-30 を過ぎている。11-21 のレビューまでに進まなければ、`CF-CPU-URL-01` の効果観測に寄せてカードを閉じるかをオーナーに諮る。
 

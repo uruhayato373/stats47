@@ -29,6 +29,7 @@ updated: 2026-11-01
 - **起点 (2026-10-31 オーナー指摘「文字が多すぎる。基本的には可視化、ダッシュボード」)**: 解説の章と白書の論点は開閉の部品で畳み、全 56 テーマを「読者の悩み → 問いの章 → 見せ方」で組み直し、47 都道府県の比較の図はテーマから外してランキングに任せた (オーナー決定)。それでも `/themes/living-housing` の見える文字は 6,930 → 4,180 字、高さは 10,278 → 10,124px でほぼ同じ (カードの数が多い)。残りの多くはデータの表とチャートの説明 (「指標の比較」31 行 約 1,650 字・「単身化と一人暮らし」約 760 字・「ひとり暮らし世帯の男女・年齢構成」約 590 字・「都道府県の分布」約 560 字・「空き家率の地図と表」約 480 字)。
 - **次**: ① 表は上位・下位の数行だけ見せ、残りは「全件を見る」で開く (HTML には残す) ② チャートごとの説明は出典の Sheet (SourcesSheet) へ寄せる ③ 全テーマで同じ測り方 (見える文字・高さ) をして、効果を比べる ④ 1 指標カードが 4 列の格子に 1 枚だけ並ぶ章 (空きが目立つ) の扱いを決める ⑤ 新しい構成比のチャートは page-components (R2) に入るまで本番に出ない。main へのマージ後の sync-snapshots (page-components) で反映する。
 - **完了条件**: 代表のテーマページで、見える文字と高さが半分程度になり、最初の画面からチャートが続く。
+- **①③ 済み (2026-11-16・未デプロイ)**: 共通の `ValueTable` に `fold` を足した (上 3 行と下 3 行を残し、残りは「全件を見る（残り N 件）」で開く。隠れる行が 3 未満なら畳まない。HTML には全行が残る)。テーマページの呼び出し 28 箇所に付けた。全国版 (cookie `preferred-prefecture=all`・1280px・同じスクリプト) で測った前後の値は次のとおり。living-housing は文字 2,821→2,595・高さ 5,890→5,487px、education-culture は 4,633→3,837・7,739→6,713px、aging-society は 3,316→3,252・6,043→5,920px。減り方は 2〜17% で、半減には届かない。ローカルでは page-components (R2) が出ないので、カードに書かれた「指標の比較 31 行」の表は測った範囲に入っていない。関連の vitest は 660 件が通った。**次**: ② 説明を SourcesSheet へ寄せる。④ 格子の扱い。本番で page-components 込みの値を測り直す。
 
 ### [CONTENT-KAKEI-EXPANSION-01] 家計調査の未展開候補を棚卸しし、note・サイトへ順次展開する
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-19] [領域:サイト]
@@ -192,6 +193,7 @@ updated: 2026-11-01
 - **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@data/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-HOKKAIDO-20261114.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
 - **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
 - **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+- **済み (2026-11-16・未デプロイ)**: 原因は `AreaHighlightList.tsx` の指標列の `min-w-40` (160px)。390px では表 335px が枠 308px からはみ出していた。指定を外して ValueTable の既定 (min-w-24) に任せ、回帰テストを足した。localhost の 390px・360px で、はみ出しが無いことを確かめた (scroll と枠の幅が同じ)。`ui-findings.ts --assert-handled` も通る。W48 の本番反映で閉じる。同じ `min-w-40` が `CityDatabookView.tsx:193` (4 列の表) にもあるが、390px ではまだ測っていない。
 
 ### [UI-FIX-GEO-ANALYSIS-LAYER-20261114] UI 是正: geo-analysis--layer の週次 UI 検査の指摘 1 件を直す
 
@@ -206,6 +208,7 @@ updated: 2026-11-01
 - **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-LAYER-20261114.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
 - **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
 - **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+- **判断待ち (2026-11-16)**: 自前のレイアウトの不具合ではない。上部の全幅バナーは AdSense の自動広告の上部アンカーで、`/geo/layers/population-mesh` には自前の広告枠が無い。同じページの 4 枚のスクショのうち tablet-768 の 1 枚にしか出ていない。指摘は `--mark-owner --card ADSENSE-OVERLAY-AB-01` で扱い済みにした。管理画面で上部アンカーを切るか、`AD_FREE_PATH_PREFIXES` に `/geo/layers` を足すか (どちらも収益の判断) を、`ADSENSE-OVERLAY-AB-01` でオーナーが決める。
 
 ### [UI-FIX-GEO-ANALYSIS-ANALYSIS-20261114] UI 是正: geo-analysis--analysis の週次 UI 検査の指摘 1 件を直す
 
