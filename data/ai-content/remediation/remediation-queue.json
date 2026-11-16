@@ -1,23 +1,24 @@
 {
-  "generatedAt": "2026-11-15T01:54:45.708Z",
+  "generatedAt": "2026-11-16T02:06:10.753Z",
   "gscSnapshot": "2026-W45",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通り (blocker 0)、解説の年が values.json の最新年と同じ",
   "summary": {
     "total": 2596,
-    "done": 1360,
-    "needsRegen": 1236,
+    "done": 1357,
+    "needsRegen": 1239,
     "needsByReason": {
       "stale-year": 805,
-      "missing": 430,
-      "incomplete": 1
+      "missing": 429,
+      "incomplete": 1,
+      "fetch-error:TypeError: fetch failed": 4
     },
     "notEligible": 0,
     "notEligibleByCode": {},
     "doneButUnhealthy": 0,
-    "doneImpressions": 135377,
-    "needsImpressions": 105853,
+    "doneImpressions": 135464,
+    "needsImpressions": 105766,
     "manualEscalationTier": 30,
     "geminiDailyLimit": 3
   },
@@ -5494,8 +5495,8 @@
       "impressions": 129,
       "clicks": 6,
       "position": 5.36,
-      "status": "needs-regen",
-      "reason": "stale-year",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
       "warns": [
         "causal-insights",
@@ -5503,10 +5504,7 @@
         "pref-len"
       ],
       "lastModified": "Sat, 05 Sep 2026 09:49:16 GMT",
-      "updatedAt": "2026-09-05T09:29:57.413Z",
-      "contentYear": "2024",
-      "dataYear": "2025",
-      "reviewTier": "gemini-auto"
+      "updatedAt": "2026-09-05T09:29:57.413Z"
     },
     {
       "rankingKey": "toothpaste-consumption-expenditure",
@@ -14298,15 +14296,10 @@
       "impressions": 23,
       "clicks": 0,
       "position": 7.48,
-      "status": "done",
-      "reason": "ok",
+      "status": "needs-regen",
+      "reason": "fetch-error:TypeError: fetch failed",
       "blockers": [],
-      "warns": [
-        "causal-insights",
-        "pref-len"
-      ],
-      "lastModified": "Wed, 02 Sep 2026 10:53:37 GMT",
-      "updatedAt": "2026-09-02T10:43:39.347Z"
+      "reviewTier": "gemini-auto"
     },
     {
       "rankingKey": "elementary-school-classes",
@@ -15117,15 +15110,18 @@
       "impressions": 19,
       "clicks": 1,
       "position": 7,
-      "status": "done",
-      "reason": "ok",
+      "status": "needs-regen",
+      "reason": "stale-year",
       "blockers": [],
       "warns": [
         "causal-insights",
         "pref-len"
       ],
       "lastModified": "Wed, 02 Sep 2026 03:30:40 GMT",
-      "updatedAt": "2026-09-02T03:22:26.276Z"
+      "updatedAt": "2026-09-02T03:22:26.276Z",
+      "contentYear": "2025",
+      "dataYear": "2024",
+      "reviewTier": "gemini-auto"
     },
     {
       "rankingKey": "craft-materials-consumption-expenditure",
@@ -27431,7 +27427,7 @@
       "clicks": 0,
       "position": 0,
       "status": "needs-regen",
-      "reason": "missing",
+      "reason": "fetch-error:TypeError: fetch failed",
       "blockers": [],
       "reviewTier": "gemini-auto"
     },
@@ -31793,12 +31789,10 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "done",
-      "reason": "ok",
+      "status": "needs-regen",
+      "reason": "fetch-error:TypeError: fetch failed",
       "blockers": [],
-      "warns": [],
-      "lastModified": "Sun, 06 Sep 2026 23:12:16 GMT",
-      "updatedAt": "2026-09-06T23:09:30.164Z"
+      "reviewTier": "gemini-auto"
     },
     {
       "rankingKey": "new-housing-construction-ratio",
@@ -31817,12 +31811,10 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "done",
-      "reason": "ok",
+      "status": "needs-regen",
+      "reason": "fetch-error:TypeError: fetch failed",
       "blockers": [],
-      "warns": [],
-      "lastModified": "Sun, 06 Sep 2026 23:12:16 GMT",
-      "updatedAt": "2026-09-06T23:09:30.220Z"
+      "reviewTier": "gemini-auto"
     },
     {
       "rankingKey": "new-rented-housing-ratio",
