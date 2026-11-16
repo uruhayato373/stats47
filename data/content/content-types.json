@@ -95,6 +95,11 @@
   },
   "assignments": [
     {
+      "id": "blog:academic-achievement-lifestyle-habits",
+      "type": "type:reference",
+      "reason": "問いの台帳に結びつかない。県の値・相関係数・図の年を引ける形で示し、因果は断定しない。問いを足したら論文型へ戻す"
+    },
+    {
       "id": "blog:2050-population-map-reading",
       "type": "type:textbook",
       "reason": "題名が統計の読み方を扱う"

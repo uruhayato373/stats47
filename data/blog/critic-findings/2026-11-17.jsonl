@@ -1,0 +1,4 @@
+{"key":"c0c63d58b75dd978","date":"2026-11-17","slug":"academic-achievement-lifestyle-habits","mode":"expert","verdict":"REVISE","severity":"BLOCK","type":"correlation","summary":"中学 3 年生の節の「生活習慣のうち通塾率だけが両方の学年で正の関係を示した」は事実と違う。"}
+{"key":"cf490bdb7180ca9f","date":"2026-11-17","slug":"academic-achievement-lifestyle-habits","mode":"expert","verdict":"REVISE","severity":"MAJOR","type":"correlation","summary":"通塾率の頑健性が片側の指標だけで書かれている。"}
+{"key":"a7c200cd88a64512","date":"2026-11-17","slug":"academic-achievement-lifestyle-habits","mode":"expert","verdict":"REVISE","severity":"MAJOR","type":"definition","summary":"朝食の指標名「毎日食べている」が定義と食い違う。"}
+{"key":"8b2d24175bc68305","date":"2026-11-17","slug":"academic-achievement-lifestyle-habits","mode":"expert","verdict":"REVISE","severity":"MAJOR","type":"correlation","summary":"家庭学習と通塾率の相関 -0.17 を「塾で学ぶ県と家で学ぶ県が分かれる傾向」と読んでいる。"}
