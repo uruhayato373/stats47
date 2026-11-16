@@ -46,6 +46,11 @@ updated: 2026-11-01
 - **小さな不整合**: `university-capacity-index.ts` の seoTitle 238.4 と R2 238.3、`d-kakei-category-dataset` の題「8.7倍」(5年平均は4.2倍)、P-14 snapshot の title、`data-refresh.yml` が `--ref` を無視する件、`taxonomy.json` のblog部分のずれ。`kakei-research/` の数値と民営家賃の母集団は原典未確認。
 - **停止条件**: 年次値と3年平均、県庁所在市と県全体、支出額と購入数量を混同する候補は公開しない。既存URLと同じ答えの別ページや、品目差し替えだけの薄い記事を作らない。Gemini Actions の定期公開は停止のまま。関連: `KAKEI-MULTIAXIS-01`・`SNS-KAKEI-EXPANSION-01`。
 - **完了条件**: 検証済みの既存指標が2025年値へ更新され、調査ハブ・テーマ・ブログから適切な粒度のページへ移動でき、対象URLの検索指標と2ページ目到達の観測開始日が記録される。
+- **W47 の点検 (2026-11-16・localhost)**: W48 に出す変更の範囲を決めるための一覧。
+  - 反映待ち 5 項目の反映手段 (いずれも R2 の書き込みか本番へのマージなので、オーナーの承認が要る): ① item.json の再生成 = `sync-snapshots.yml` の `only=ranking-items` (`dry_run=true` で先に生成だけ確認できる。R2 の `engel-coefficient/item.json` は 11-06 生成のまま) ② 相関 = `correlation-refresh.yml` (土曜 03:45 の定期と data-refresh 後に自動で走る。次回 11-21) ③ エンゲル係数のテーマ表示 = git 側は反映済みで、develop→main のマージ (`deploy-workers.yml`) で出る ④ ハブ名 = `sync-snapshots` の `only=master` ⑤ 「読み解く記事」の題 = `blog` task (`export-blog-snapshot.ts`) と `publish-blog.yml`。
+  - 代表 10 URL: 合格 8 (ハブ・household-food-spending (KAKEI-MULTIAXIS の図あり)・household-assets-debt・ランキング 3 本 (米支出・米数量・食料費)・ブログ 2 本)、反映待ち 1 (`/ranking/engel-coefficient` の注記に「2024年の47県平均」が残る。item.json の再生成後に残るなら文言を直す)、要修正 1 (`/themes/real-income` で実収入 2024 年と可処分所得 2025 年が混在。カードに既出の件)。
+  - #1064: `b-kakei-expense-*` 10 本 (food〜other) はすべて有料 note のカードもマガジンへのリンクも無い (`data/note/evidence/note-circulation-audit-2026-11-14.json` の `linkCounts.cards=0`)。#1064 の監査 (`audit-note-product-cards.mjs`) の対象に入るかは、`--live` (note.com の取得) をしていないので未確認。
+  - **オーナーの判断待ち**: W48 の一括反映に ①〜⑤ のどれを入れるか。
 
 ### [AI-CONTENT-GEMINI-KEY-01] 無料枠キーでランキング解説の1件審査を通し、日次量産を起動する
 タグ: [コンテンツ品質] [種類:改善] [実行:ユーザー] [検証:node --test .claude/scripts/ai-content/__tests__/gemini-workflow-contract.test.mjs] [起票:2026-11-01] [領域:サイト]
@@ -92,7 +97,7 @@ updated: 2026-11-01
 - **完了条件**: 13 本の添付が新しい中身に替わり、カタログ・無料部分の説明・`price-history.json` が同じ差分で直っている。売る地図の境界の出どころが README と `LICENSE-ja.txt` に書かれている。
 
 ### [KDP-LISTING-COPY-01] 販売中 13 冊の紹介文とキーワードの改善案を承認し、KDP へ反映して効果を測る
-タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-11-06] [期日:2026-11-09] [領域:商品]
+タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-11-06] [期日:2026-12-11] [領域:商品]
 
 - **事実 (2026-11-06)**: K-S1-01〜12 の紹介文は `export-kdp-listings.ts` の `buildDescription` が `concept` に同じ定型文を足したもの。カタログの `design.readerProblem` は紹介文に使っていない。機械の検査は社内語の混入・短すぎ・e-Stat の言及だけで、訴求は見ていない。K-S1-13 だけが `kdpExclusive.description` で読者の課題から書いてある。
 - **検索の実測 (2026-11-06・ブラウザ・電子書籍カテゴリ・1 回の観測)**: 30 語の 1 ページ目に出たのは 5 語 (家計調査 K-S1-02 8 位、都道府県 年収 K-S1-01 9 位、教育費 K-S1-05 9 位、地方財政と自治体 財政 K-S1-06 14 位)。「都道府県 統計」「47都道府県」「人口減少」「健康寿命」「インバウンド」「移住」には出ない。
@@ -1011,7 +1016,7 @@ updated: 2026-11-01
 - **追補 (2026-11-14・セッションの事前確認の初回の結果)**: Google の専用プロファイルに認証 cookie (SID / __Secure-1PSID) が無く「切れている」と出た (11-08 の GSC の取得は成功しているので、ログアウトかプロファイルの構造の違いかを次の週次の取得の前に確かめる)。`note.autologin-failed` の失敗印が残っている (訂正 2026-11-15: これは古い印ではない。11-08 に成功したのは閲覧数だけで、売上は 10-22 17:31 のパスワード再確認の失敗から止まっている。`data/authenticated/revenue-history.json` の note 行は 09-30 と 10-17 の 2 件だけで、11-07・11-08・11-14 の取得は `revenueStatus: "verification_required"`。印がある間は `refresh-session.mjs` が再確認を飛ばすので、売上 API が答えない。オーナーの手順: ① `.local/authenticated-measurement/note-login-login_failed.png` で止まった画面を確かめる ② `.local/authenticated-measurement/note.autologin-failed` を消す ③ `node .claude/scripts/measurement/refresh-session.mjs note --wait-human` でパスワードを入れ直す。画面の文言が変わっていたら同スクリプトのセレクタを直す。止まっているのは認証付き計測の売上 API の経路だけで、note ダッシュボードの記事別の売上列 (`data/note/dashboard/latest.json` の `salesJpy`) は別経路で取れている (2026-09-11 取得の全期間の記録が 3 記事 ¥900 を出しているので列は機能しており、10-11〜11-07 と 10-17〜11-13 の 28 日の記録はどちらも合計 ¥0)。記事別の販売の判定はダッシュボードの記録で読める。週次収益 (NSM) の note 分はこの経路が戻るまで判定不能のまま)。楽天は SSO の認証 cookie を実機で確かめるまで期限を判定できない。日次の確認は launchd の登録がまだで、登録はオーナーが `cp scripts/scheduled/com.stats47.session-preflight.plist ~/Library/LaunchAgents/` と `launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.stats47.session-preflight.plist` を打つ。
 
 ### [NAV-CLICK-COVERAGE-01] サイト内リンクのクリックを既定で全件計測し、名前の無い導線を週次で減らす
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-25] [期日:2026-10-23] [領域:管理]
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-25] [期日:2026-11-28] [領域:管理]
 
 - **済み (2026-11-14・a95fbbdbd、未デプロイ)**: Geo への導線に `geo_analysis_list` / `geo_pref_table` / `geo_evidence` / `geo_layer_list` / `geo_map_control` を付けた。開発サーバーの `/geo` 配下 19 ページで、`/geo` へのリンクのうち導線名の無いものは 639 本から 7 本になった。共通のクリック監視は、`href` が `#` で始まり導線名の無いリンク (Leaflet の地図の拡大・縮小 `<a href="#" role="button">`) を送らなくなった。値の意味と読み方は `.claude/rules/analytics-event-standards.md` の 2026-11-14 の 2 段落にある。それ以前の済み (P1・P2・P4・上位 7 部品への命名) は変わらない。
 - **残り (承認)**: この変更の本番デプロイは、まとめて 1 回、オーナーの承認の上で行う。デプロイ後に `nav_click` が 2 倍近く跳ねたら二重送信を疑い、先に原因を特定する。
@@ -1035,6 +1040,7 @@ updated: 2026-11-01
   - **完了条件**: 先読み停止後の実測で消えたことを確かめたか、レート制限を入れて同じ集計で件数が下がったことを確かめた。
 - **停止条件**: 本番 deploy はオーナー承認まで行わない。原因を実測で絞らないまま対策を足さない。
 - **完了条件**: CPU 増加の主因を route か仕組みで特定して対策を決め、10/15 の請求書の CPU 行を記録している (2026-10-16 に満たした)。対策の本番反映と効果観測の引き渡しまでをこのカードで持つ。
+- **11-16 の確認**: Observability の Query API を読むスクリプトは repo に無く、Cloudflare のトークンは CI 専任なので、手元のセッションからは `_rsc` の割合を取り直せない。11-21 のレビューでオーナーに次のどちらかを諮る: (a) Observability の Query Builder で 10-16 と同じ条件の 1 時間を手で取る (b) このカードを閉じ、効果観測を `CF-CPU-URL-01` (期日 11-27) に寄せる。
 
 ### [AFFILIATE-COMMON-PRODUCTS-01] アフィリエイトを共通的で収益性の高い商品に切り替え、本文の広告の段 (広い画面は横 3 枠) を試す
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-11-03] [領域:アフィリエイト] [待ち:判断]
@@ -1310,6 +1316,8 @@ updated: 2026-11-01
 - **再現**: `gh run view 43513853562 --log-failed`。手元では `npm run test --workspace apps/web -- population-profile-ui bridge-inspection-age-ui`。
 - **次**: ① 3 回の run の失敗 job とテスト名を並べ、毎回落ちるものと 1 回だけのものを分ける ② 毎回落ちるものから、job ごとに原因を実証して直す (公開 R2 の取得失敗が絡むものは `CI-LIVE-R2-TEST-FLAKE-01` と重なるかを先に確かめる) ③ 落ちた E2E の artifact でサーバーの例外が読めるかを確かめる (`E2E-FAILURE-EVIDENCE-01` の残り)。
 - **完了条件**: main の `quality-suite-weekly` が 1 回 success になり、Issue #1202 が自動で閉じる。
+- **① 済み (2026-11-16)**: 3 回の run (41122877579・42295351706・43513853562) を比べた。**毎回落ちるもの**: E2E の blog-detail.spec.ts (:24・:29・:40・:56。`toBeVisible` が要素を見つけられない)、blog-list.spec.ts (:21・:29・:98。h2 を持つ `main a[href^='/blog/']` が見つからない)、comparison.spec.ts :45 (`toHaveURL`)、header-navigation.spec.ts :41・:95、Theme quality audit (10-30・11-06 は `AssertionError [ERR_ASSERTION]`。どの assert かは未特定)、OGP image audit (原因は毎週違う。11-06 は data-muni-manufacturing の short-title の生成失敗、11-13 は gloves-… の article.md の R2 fetch 失敗)。**3 回中 2 回**: unit の bridge-inspection-age-ui と population-profile-ui の 10 秒タイムアウト。**1 回だけ**: header-navigation :34、public-route-contract :36 (10-30)、Page quality audit (11-06)。unit のログに「R2クライアントを取得できませんでした / getCloudflareContext」が繰り返し出ており、blog E2E と同じ原因か (`CI-LIVE-R2-TEST-FLAKE-01`) は未確認。`affiliate-ga4-weekly` (#1207) は計測ゲート (inventory-snapshot-stale・A8 の照合不足) で落ちており、別の原因。**次**: ② blog E2E から、失敗時のスクショ artifact で R2 の取得失敗かテストデータかを分ける。
+- **追記 (2026-11-16)**: ② に入るときは、Theme quality audit の assert が 3 回とも落ちている件 (どの assert かは未特定) と、OGP 監査で data-muni-manufacturing の short-title の生成が 11-06 に失敗した件も、このカードで扱う。
 
 ### [WEEKLY-COLLECT-NODE20-FAIL-01] 週次の取得で GSC 画面の取得とサイト内リンク監査がスクリプトの例外で落ちる
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-14] [領域:管理]
@@ -1321,6 +1329,7 @@ updated: 2026-11-01
 - **完了条件**: `npm run weekly:collect` で GSC の取得元が pass になり、internal-links が例外なしで走り切る。
 - **済み (2026-11-15・develop)**: 次の ② は済み (`collect-local.mjs` が bootstrap・collect の失敗時に stderr の末尾 20 行を `message` に残す。次に GSC が落ちれば例外の本体が `measurement-collect-local.log` で読める)。③ のうち `prefectures.cjs` は `config/datasets.mjs` を require せず、カタログの行の文字列から置き場を読む形に直した。ただし手元の Node は v22.23.3 で、v20.19.0 での元のエラーは再現できていない (require(esm) を無効にした起動で代わりに確かめた)。専用 clone の v20.19.0 は `package.json` の engines (>=22) を満たしていない。
 - **残り**: ① 2026-11-21 の `weekly:collect` で internal-links が走り切るかを読む ② GSC が再び落ちたら、記録された例外の本体から原因を決める ③ `.claude/scripts/lib` には `datasets.mjs` を require する cjs がほかに 4 本ある (`sns-posts-store.cjs`・`sns-metrics-store.cjs`・`x-catalog.cjs`・`strategy-lanes.cjs`)。同じ例外になるかは [仮説] で、専用 clone の Node を v22 に上げれば不要になる。先に Node の版を揃えるかをオーナーが決める。
+- **済み (2026-11-16・`e86342e35`)**: 原因を特定した。launchd・`weekly:collect` の共通設定 `scripts/scheduled/_common.sh` が PATH の先頭に `/opt/homebrew/opt/node@20/bin` (v20.19.0) を固定していた (engines は >=22)。v20.19.0 の失敗ログは最後の行がちょうど `Node.js v20.19.0` で、GSC の bootstrap の `message` と一致する。node@22 に直し、node@22 の PATH で internal-links を起動して 1,249 件中 200 件まで例外なしで進むことを確かめた (時間がかかるため途中で止めた)。cjs 4 本は v20・v22 とも単体の require は通るので触っていない。残りは 11-21 の `weekly:collect` で GSC と internal-links が走り切るかを読むことだけ。`post-instagram-w18.sh` にも node@20 の固定が残るが、IG は停止中なので触っていない。
 
 ### [REVIEW-CADENCE-HANDOFF-PARSE-01] 週次レビューの申し送りの検査が、行き先の括弧の中の「、」で文を切る
 タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/management/__tests__/] [起票:2026-11-14] [領域:管理]
@@ -1328,6 +1337,7 @@ updated: 2026-11-01
 - **観測 (2026-11-14)**: 2026-W45 のレビューを書いたとき、`check-review-cadence.mjs` が申し送り 3 件を「行き先不明」と判定した。「→ 振り分け: 見送り (理由…、…)」のように括弧の中に「、」があると、後半を別の行き先として読んで不正にする。レビュー側の書き方を変えて通したので、検査は直っていない。
 - **次**: 3 件の元の書き方を fixture にしたテストを足し (直す前に落ちることを確かめる)、括弧の中では区切らないようにする。
 - **完了条件**: 括弧の中に「、」を含む「見送り (理由)」が 1 つの行き先として通り、テストが固定している。
+- **済み (2026-11-16)**: `parseRoutes` (`lib/review-cadence.mjs`) が括弧の中 (半角・全角) を除いてから区切るように直し、括弧の中に「、」と「/」を含む 3 通りの fixture をテストに足した (直す前は 1 件 fail、直した後は 22 件 pass)。完了条件を満たしたので閉じてよい。
 
 ### [EXP-011-MONTHLY-MISMATCH-01] KDP セレクトの実験 EXP-011 が running なのに、月次計画は「今月やらないこと」に挙げている
 タグ: [収益化] [種類:意思決定] [実行:対話] [待ち:判断] [起票:2026-11-14] [領域:商品]
@@ -1342,6 +1352,7 @@ updated: 2026-11-01
 - **観測 (2026-11-14)**: `data/gsc/coverage-totals-history.csv` の `2026-W45,2026-11-08` の行が、`2026-W44,2026-10-31` の行と 10 列すべて同じ値 (404 が 12653、登録済み 7069 など)。11-08 の認証付き取得が新しい書き出しを読んだのか、前回の書き出しを別の週の名前で写したのかは未確認。同じ値のまま前週差を出すと「変化なし」と読める。
 - **次**: 11-08 の取得の入力 (`data/gsc/coverage-drilldown/` の当日の書き出しの日付と、履歴へ行を足すスクリプトの週の決め方) を読み、独立した観測かを確かめる。写しなら、書き出しの日付が前の行と同じときは行を足さないようにする。
 - **完了条件**: W45 の行が独立した観測と確認できるか、写しの行を足さない検査が入っている。
+- **済み (2026-11-16・`e86342e35`)**: 写しだった。W45 の drilldown CSV 5 本は W44 と md5 が同じで、`category-totals.json` の違いは week と date だけ (トレンドの最終データ日はどちらも 10-23)。`build-coverage-queue.mjs` は `${week},${date ?? TODAY}` で行を upsert するので、同じ書き出しを別の週の名前で足していた。直前の週と全件数が同じ行は足さない `upsertTotalsHistoryRow` (`lib/coverage-queue-state.mjs`) とテストを入れ (判定を外すとテストが落ちることも確認)、W45 の行を消した。完了条件を満たしたのでカードを閉じてよい。
 
 ### [ADSENSE-LATEST-PERIOD-01] AdSense の週次要約に確定 7 日の期間の日付が無い
 タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-11-14] [領域:サイト]
@@ -1645,7 +1656,7 @@ updated: 2026-11-01
 - **完了条件**: `[target:]` に根拠付きの想定値を置いて improvements.md に戻すか、置けないなら本カードを削除して観測を打ち切る。起点記事 n04d95ae14bc1 の view 低下 (616 → 107) との対応も記録する。
 
 ### [THEME-EXPANSION-D56-01] 55 テーマ拡充の d56 基本観測を記録する
-タグ: [UI・UX] [種類:改善] [実行:機械] [検証:npm run theme:portfolio:audit] [起票:2026-10-27] [期日:2026-11-06] [領域:管理]
+タグ: [UI・UX] [種類:改善] [実行:機械] [検証:npm run theme:portfolio:audit] [起票:2026-10-27] [期日:2026-11-21] [領域:管理]
 
 - **経緯**: 旧 `THEME-EXPANSION-EFFECT-01` (improvements.md) を 2026-10-27 に降格。d28 の公開後窓 (GA4 09-13〜10-10) でも 44 件が launch-provisional / insufficient-data で、効果は確定しない。証拠は `data/improvement/ga4-improvement/improvement-log.md` の同 ID の節と `data/themes/experiments.json` の `result.rechecks.d28`。
 - **次**: 2026-11-06 以降の週次 snapshot で `evaluate-theme-experiments` を実行して d56 を記録する。標本不足のままなら count のみ記録し、効果を主張しない。
@@ -1949,7 +1960,7 @@ updated: 2026-11-01
 - **完了条件**: 2 本が公開され (済み)、28 日の閲覧・note 内の表示・stats47 への送客を記録した。0 件なら 0 件と書く。QGIS の記事は note-critic が PASS してから、公開をオーナーが判断する。
 
 ### [GSC-DATASET-NESTED-SCHEMA-01] DatasetのGSC再検証結果を確認し、出典メタデータを是正する
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-16] [期日:2026-10-23] [進行中] [領域:サイト]
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-16] [期日:2026-11-28] [進行中] [領域:サイト]
 
 - **GSC案03 / P1（最優先・順序2）**: 入れ子Datasetの説明不足・欠落の修正をGoogle側で検証する。
 - **GSC案04 / P2（次に着手）**: 出典SSOTからcreator・license・対象年・地域・単位を正しく引き継ぐ。案03と同じ生成処理で扱う。
@@ -1961,7 +1972,7 @@ updated: 2026-11-01
 - **完了条件**: 親と入れ子の Dataset を辿る回帰テスト、対象の型検査、本番代表HTMLの必須項目検査が通り、再クロール後に該当エラーが解消したことを確認する。デプロイ前・再クロール前はそれぞれ区別して記録する。
 
 ### [GSC-ROBOTS-INDEXED-01] 公開ダウンロード・廃止OGPのGoogle再取得と除外を確認する
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-16] [期日:2026-10-23] [進行中] [領域:サイト]
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-16] [期日:2026-11-28] [進行中] [領域:サイト]
 
 - **GSC案24 / P2（本番HTTP確認済み・Google検証中）**: robotsブロック済み登録584件のうち576件は公開CSV/JSON、8件はOGP。公開ダウンロードに限定してcrawlを許可しX-Robots-Tag:noindexを読ませる。公開画像と廃止URLのHTTP応答も読めるようにする。
 - **owner / 入力**: gsc-analyst・site-ux-manager。対象・内容確認・ローカル検証は `data/gsc/ui-audits/2026-10-16-remediation.json`。変更はrobots.ts・download route・middleware、恒久方針はcoding-standards.md。
@@ -1972,7 +1983,7 @@ updated: 2026-11-01
 - **2026-11-11 実測 (GSC 最終更新 11-06・本番 HTTP・サイトマップ 11 本)**: 「robots.txt によりブロックされましたが、インデックスに登録しました」は 23 件 (検証は「失敗しました」表示)。一方、許可したダウンロード API がクロールされ、全既知の「クロール済み - 未登録」2,413 件は W44 記録 1,000 件中 959 件が `/api/ranking/*/download?format=…`、32 件が `storage.stats47.jp` の JSON。kml は 1 ファイル 2.5MB。**次**: 23 件が 0 になったらダウンロードの許可を Disallow に戻す案を `GSC-CRAWL-WASTE-01` で判断する (Dataset 構造化データの `contentUrl` が同じ URL を指すので、戻す前に Dataset の検証への影響を確かめる)。
 
 ### [GSC-SITEMAP-LASTMOD-01] サイトマップ掲載条件と実更新日時の整合を検査する
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-16] [期日:2026-10-30] [領域:サイト]
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-16] [期日:2026-12-12] [領域:サイト]
 
 - **済み**: `/geo/history/*` 166 件をサイトマップへ載せた (PR #1249、本番 `/sitemap/0.xml` で確認)。送信済みビューの 4 理由 80 件を全件読み、63 件は現在 200・index・掲載ありで、11-11 に GSC で 404・5xx・リダイレクトエラーの「修正を検証」を開始した。リダイレクト 17 件は意図どおりの 301 で処置不要。
 - **残り (GSC 案 17・18)**:
@@ -1987,7 +1998,7 @@ updated: 2026-11-01
 - **完了条件**: 意図しない 404・転送・noindex・別 canonical の掲載を検出でき、lastmod が実更新に一致するか未設定の理由を説明できる。既存検査との二重運用を残さない。
 
 ### [GSC-CANONICAL-REDIRECT-01] 正規URLを示す内部リンク・サイトマップ・転送先を揃える
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-16] [期日:2026-10-30] [領域:サイト]
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-16] [期日:2026-12-12] [領域:サイト]
 
 - **GSC案19 / P2（次に着手）**: canonical・内部リンク・sitemap・転送先の矛盾を対象URL単位で調べ、正規URLへ揃える。
 - **GSC案20 / P3（条件確認後）**: 301連鎖が残る箇所は移転の意味を保って最終URLへ直接転送し、内部リンクも更新する。
@@ -1998,7 +2009,7 @@ updated: 2026-11-01
 - **2026-11-01 実測・局所修正（未デプロイ）**: ブログ一覧の2・10・24・25ページの本番HTMLは全て canonical `/blog`。未完了ブログ32 URLはページ分割の一覧（1〜32ページ）から全件HTMLリンクで辿れたため、親一覧のcanonical矛盾を修正。1ページ目は`/blog`、2ページ目以降は各`?page=n`をcanonical/OG URLに使う。公式根拠: https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading 。**次**: デプロイ後に2・10・32ページのcanonicalと次ページの`<a href>`を本番で確認し、32 URLの再クロール・登録をURL Inspectionで観測する。Google側の登録改善は未判定。
 
 ### [GSC-404-VALUE-TRIAGE-01] 内部リンク・被リンク・過去流入のある404を優先分類する
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-16] [期日:2026-10-30] [領域:サイト]
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-16] [期日:2026-12-12] [領域:サイト]
 
 - **GSC案21 / P2（次に着手）**: 404例示を内部リンク・取得できる被リンク・過去GSC流入と照合し、救済価値があるURLを選ぶ。
 - **owner / 順序**: gsc-analyst・site-ux-manager。10-16監査の12,658件は総数、例示は1,000件という範囲を保持する。現sitemap・内部リンクあり→過去流入/被リンクあり→意図的廃止の順に分類する。
@@ -2279,7 +2290,7 @@ updated: 2026-11-01
 - **完了条件**: 残件を公開・配信照合するか、同題の既存公開記事へ統合し、未公開台帳を0件にする。作業コピーはR2照合後に削除する。
 
 ### [SIMPLIFY-FAILING-AUTOMATION-01] 1 週間で失敗が続く定期 workflow を、直すか止めるか 1 本ずつ決める
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-11] [期日:2026-10-25] [領域:管理]
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-11] [期日:2026-11-28] [領域:管理]
 
 - **経過 (2026-10-11)**: 失敗率 100% の 4 本と高失敗率の workflow を調べ、SEO keyword・ブログ是正日次・アフィリエイト週次を直し、Gemini 日次は schedule を外した (develop `88b6d5c90`)。Security Scan と Develop Quality Gate は回復済み。Health Check は計測の auth_required と A8 の成果ゲートが直るまで落ち続ける。
 - **次**: 直せないもの、`SIMPLIFY-PORTFOLIO-CUT-01` で止める系統のものは schedule を外して workflow を削除し、`docs/01_技術設計/06_自動化インベントリ.md` を同じ差分で更新する。定期実行は main の定義で動くので、修正の main マージ日から 7 日後に `gh run list --created ">=<マージ日>"` で失敗率を数え直す。
@@ -2618,7 +2629,7 @@ updated: 2026-11-01
 - **完了条件**: キーが増える keys PR で `generate-ranking-prominence.ts --check` が通る。
 
 ### [SEO-CTR-CANDIDATES-01] 取りこぼしクリックの大きい 7 ページを search-growth に渡し、食い合いの 2 組を先に確かめる
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-07] [期日:2026-10-25] [領域:サイト]
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-07] [期日:2026-12-05] [領域:サイト]
 
 - **GSC案07 / P2（次に着手）**: implementation-neededの8提案と既存7ページを照合し、担当・対象・完了gateを確定する。未実装を公開待ち・承認済みと扱わない。
 - **GSC案26 / P2（次に着手・CTR内優先1）**: 道の駅など表示実績のあるページのtitleをpage×queryと実SERPで検討し、1〜2ページから検証する。
@@ -2698,6 +2709,7 @@ updated: 2026-11-01
   ④ conflict の原因は直した (2026-11-15・develop): 11-08 と 11-14 の取得が `action_required` になったのは、2026-09 の範囲 (22 冊) に 11-04 発売の `K-S1-13` が混ざって書籍の集合が食い違ったため。`kdp-monthly-reports.mjs` が期間末より後に発売した本を範囲から外すようにし、実台帳の 8 月・9 月の範囲 (各 22 冊) と一致することを確かめた。2026-11-21 の取得で `salesLedger` が conflict でなくなることを読む。`packages/product-factory/src/sales/cli.ts` の `recordKdpCoverage` (古いレポートの補完) は同じ絞り込みを持たないので、補完を使うときは新刊が過去の月に入らないかを確かめる。
 - **停止条件**: 生のレポート (全アカウントの行を含む) と個人情報を公開リポジトリに置かない。stats47 の ASIN 以外の行を台帳に入れない (`kdp-reports.mjs` の `kdpAsinMap` と同じ照合を使う)。
 - **完了条件**: マージ後の CI の KDP 月次取得のあとに、明細のある本の行が台帳へ自動で増え (明細の無い本は行を作らない)、`products:sales -- validate` が PASS し、週次の KPI ツリーで `paid-purchases` の KDP 分が判定不能でなくなる。
+- **観測 (2026-11-16)**: `npm run products:sales --workspace=@stats47/product-factory -- validate` は PASS (2 observations, 2 coverage)。conflict は validate ではなく、11-08・11-14 の CI の KDP 記録段の `action_required` から来ていた (④ の K-S1-13 を 2026-09 の coverage に数えていた件。修正は develop にある)。残りは ③ (月次の対象月が 2026-09 から進まない) と ① の再ログイン。11-21 の取得の `salesLedger` で確かめる。
 
 ### [KNOWHOW-PRODUCT-PILOT-01] AI×公的統計の実務ノウハウ商品を1つ選び、note の販売面で4週の実売を確かめる
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-10-07] [領域:商品]
@@ -2786,7 +2798,7 @@ updated: 2026-11-01
 
 ### [GSC-COVERAGE-DEPLOY-01] カバレッジ是正後の再クロールと残存ソフト404を確認する
 
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --no-probe] [起票:2026-09-07] [期日:2026-10-23] [進行中] [領域:サイト]
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --no-probe] [起票:2026-09-07] [期日:2026-11-28] [進行中] [領域:サイト]
 
 - **GSC案08 / P2（次に着手・coverage内優先1）**: 現sitemap内soft404の15 URLを公開URLテストと修正後クロールで再評価する。
 - **GSC案09 / P2（次に着手）**: クロール済未登録146 URLをテンプレ別に分け、登録済み同種ページと本文・重複・検索意図を比較する。
@@ -2916,7 +2928,7 @@ updated: 2026-11-01
 - **完了条件**: 5記事すべてが本番で200 + OGP/thumbnail画像が正しく出る + SNS投稿(X/IG)まで実施されている。
 
 ### [STATE-R2-MIGRATION-01] 日次観測 state の残り 4 domain を R2 `state/` へ移す (psi → cloudflare → url-inspection → search-growth)
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:git log --since=4.weeks --name-only -- .claude/state/metrics | sort -u | wc -l が 230 未満、かつ curl -sI https://storage.stats47.jp/state/psi/index.json が 200] [起票:2026-09-14] [期日:2026-10-12] [領域:管理]
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:git log --since=4.weeks --name-only -- .claude/state/metrics | sort -u | wc -l が 230 未満、かつ curl -sI https://storage.stats47.jp/state/psi/index.json が 200] [起票:2026-09-14] [期日:2026-12-12] [領域:管理]
 
 - **済み (2026-11-14・eba441a8c)**: psi の生 JSON を R2 state/psi/ へ出す実装を入れた。共通部品 .claude/scripts/lib/state-publish.mjs は prepare (stage と index.json・latest.json の作成) と verify (公開 URL での読み直し) を持ち、残りの domain でも使える。psi は git 管理外の data/psi/live/ に置き、git には history.csv と LATEST.md だけを残す。
 - **残り (確認)**: develop から main へ反映した後に、fetch-metrics-weekly.yml の psi job (土曜 01:00 JST、または workflow_dispatch の only=psi) を 1 回動かす。そのうえで curl -sI https://storage.stats47.jp/state/psi/index.json が 200 を返し、npm run state:pull -- psi --latest で data/psi/live/latest.json が取れることを確かめる。反映は金曜の夜を避ける。develop だけが先に新しくなると、main の古い定義が prune --scope psi を呼んで step が落ちるためである。
@@ -2926,6 +2938,7 @@ updated: 2026-11-01
 - **残り (判断)**: カードの検証コマンドは .claude/state/metrics を数えているが、日次の記録は data/ へ移ったため今は常に通る。推奨は、検証を `git log --since=4.weeks --oneline -- data/cloudflare/snapshots data/gsc/url-inspection data/psi | grep -c 'daily'` が 0 になることに置き換える案である。根拠は、psi と url-inspection は 2026-10-26 から週次になり、日次の commit-back を出しているのは今は cloudflare-usage-daily.yml だけだからである。
 - **追補 (2026-11-14)**: `fetch-metrics-weekly.yml` の psi job は「📤 Publish to develop branch」が失敗すると後続の [PSI Alert] の起票 step が飛ばされる並びになっていて、commit-back の失敗が閾値アラートを止めうる。psi-alert ラベルの説明文が「PSI 日次計測の閾値違反」のままで、2026-10-26 からの週次化と食い違う。
 - **完了条件**: 4 domain とも生 snapshot の commit-back が消え、`npm run state:pull -- <domain>` が 4 domain で動き、各 domain の index.json が公開 URL で 200 を返す。
+- **追記 (2026-11-16)**: psi の週次 snapshot は `PSI_API_KEY` が未設定で取れていない (W45 のレビューの申し送りで、受け皿のカードが無かった)。psi の domain を閉じる前に、キーの登録先 (CI の secret) と取得が通ることを確かめる。
 
 ### [STATE-R2-LIFECYCLE-01] R2 `state/` prefix の object lifecycle rule (400 日) をオーナーが設定する
 
@@ -3450,7 +3463,7 @@ updated: 2026-11-01
 - **禁止**: SVG のピクセル座標から値を逆算して data json にしない (`blog-data-schema.md` §1.7)。一致率が足りないまま「だいたい合っている」で復元しない。復元できないなら記事から図を外す
 
 ### [GEO-SOURCE-PUBLISH-PERF-01] Geo原典の生成・公開時間を計測し、検証強度を保って待ち時間を減らす
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:cd apps/web && npx vitest run scripts/geo-source-publish.test.ts] [起票:2026-09-13] [期日:2026-09-20] [領域:データ]
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:cd apps/web && npx vitest run scripts/geo-source-publish.test.ts] [起票:2026-09-13] [期日:2026-12-05] [領域:データ]
 
 - **済み (2026-11-14・148517aa4)**: 4 件固定バッチを上限 4 の worker pool に変え、失敗の後は新しい投入を止めて実行中の全件の完了を待つことをテストで固定した。各コマンドは、HEAD・GET・PUT・LIST・公開 GET の回数、S3 と公開 HTTP の転送 bytes、最大同時数、フェーズ別の壁時間を `.local/verification/geo-source-publish/metrics-<mode>.json` に書き、既存の upload-artifact で CI に残る。
 - **残り (計測)**: Geo 原典の次の CI run (同じ scope と bytes) で metrics-prepare / metrics-publish-dry-run / metrics-publish-apply を取り、run 34726806521 (準備 42分29秒・dry-run 37分07秒・apply/readback 2時間41分53秒) と並べて記録する。lock 待ちは `gh run view <id> --json createdAt,jobs` で、run の作成時刻とジョブの開始時刻の差から求める。短縮が実測で確かめられるまでは高速化を完了としない。
