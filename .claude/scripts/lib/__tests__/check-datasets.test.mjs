@@ -660,9 +660,13 @@ test("[mutation] KDP の status・kdpStatus・publicationStage の組み合わ�
   const run = () => checkSchemas({ datasets: rows, files: [KDP_LISTINGS], readJson: (p) => store[p] ?? JSON.parse(readFileSync(resolve(ROOT, p), "utf8")), exists: (p) => existsSync(resolve(ROOT, p)) });
   assert.deepEqual(run(), []);
   const listings = store[KDP_LISTINGS].listings;
+  // 2026-11-14 に出版停止・作らない判断の行を台帳から消した。台帳に無いときは消した行の見本を足して同じ組み合わせを確かめる
+  const removedRows = JSON.parse(readFileSync(resolve(fileURLToPath(new URL(".", import.meta.url)), "fixtures/kdp-listings/removed-rows.json"), "utf8"));
+  const findOrAdd = (predicate, sample) => Object.values(listings).find(predicate) ?? (listings[sample.id] = structuredClone(sample));
   const live = Object.values(listings).find((l) => l.status === "listed" && l.kdpStatus === "live");
-  const withdrawn = Object.values(listings).find((l) => l.status === "withdrawn" && l.withdrawal?.unpublishedAt);
-  const blocked = Object.values(listings).find((l) => l.status === "blocked-design");
+  const withdrawn = findOrAdd((l) => l.status === "withdrawn" && l.withdrawal?.unpublishedAt, removedRows.withdrawn);
+  const blocked = findOrAdd((l) => l.status === "blocked-design", removedRows.blocked);
+  assert.deepEqual(run(), [], "見本の行を足しても台帳は schema に合う");
   const cases = [
     [live, "publicationStage", undefined], // 販売中なのに工程が無い
     [live, "asin", null], // 販売中なのに ASIN が無い
