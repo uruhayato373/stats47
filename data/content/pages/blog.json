@@ -73,6 +73,30 @@
       ]
     },
     {
+      "id": "blog:academic-achievement-lifestyle-habits",
+      "kind": "blog",
+      "key": "academic-achievement-lifestyle-habits",
+      "title": "学力が高い県の子は生活習慣が違う?",
+      "href": "/blog/academic-achievement-lifestyle-habits",
+      "published": true,
+      "rankingKeys": [
+        "national-assessment-elementary-breakfast-rate",
+        "national-assessment-elementary-mathematics-correct-rate",
+        "national-assessment-elementary-reading-like-rate",
+        "national-assessment-elementary-study-1h-plus-rate",
+        "national-assessment-elementary-tutoring-rate",
+        "national-assessment-junior-high-mathematics-correct-rate",
+        "national-assessment-junior-high-self-esteem-rate"
+      ],
+      "tagIds": [
+        "tag:t-d43daa70581f",
+        "tag:t-cd17971e155b",
+        "tag:t-4236b1c3bc1a",
+        "tag:t-5f7b5353da88",
+        "tag:t-5dd7af9d19a3"
+      ]
+    },
+    {
       "id": "blog:academic-achievement-test-prefecture-ranking",
       "kind": "blog",
       "key": "academic-achievement-test-prefecture-ranking",

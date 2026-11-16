@@ -7,7 +7,7 @@
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
  * 最終生成日: 2026-11-16
- * 件数: blog 852 / tag 70 / survey 149
+ * 件数: blog 853 / tag 70 / survey 149
  */
 
 export interface SitemapBlogEntry {
@@ -27,6 +27,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "2050-population-map-reading", lastModified: "2026-09-01" },
   { slug: "2050-station-access-population", lastModified: "2026-09-01" },
   { slug: "abortion-rate-prefecture-gap", lastModified: "2026-05-17" },
+  { slug: "academic-achievement-lifestyle-habits", lastModified: "2026-11-16" },
   { slug: "academic-achievement-test-prefecture-ranking", lastModified: "2026-09-05" },
   { slug: "accommodation-expenditure-ranking", lastModified: "2026-07-09" },
   { slug: "adult-sneakers-consumption-expenditure-prefecture-gap", lastModified: "2026-11-04" },
@@ -927,7 +928,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "生活コスト", lastModified: "2026-09-05" },
   { tagKey: "生活費", lastModified: "2026-11-09" },
   { tagKey: "産業構造", lastModified: "2026-06-02" },
-  { tagKey: "相関", lastModified: "2026-10-09" },
+  { tagKey: "相関", lastModified: "2026-11-16" },
   { tagKey: "社会保障", lastModified: "2026-08-11" },
   { tagKey: "空き家率", lastModified: "2026-11-06" },
   { tagKey: "経済", lastModified: "2026-06-21" },

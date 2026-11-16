@@ -4028,6 +4028,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:academic-achievement-lifestyle-habits",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:national-assessment-elementary-breakfast-rate",
           "kind": "ranking"
         },
@@ -4057,6 +4061,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:academic-achievement-lifestyle-habits",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:national-assessment-elementary-mathematics-correct-rate",
           "kind": "ranking"
@@ -4268,6 +4276,10 @@
         {
           "pageId": "area-theme:47000:education-culture",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:academic-achievement-lifestyle-habits",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:national-assessment-elementary-reading-like-rate",
@@ -4488,6 +4500,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:academic-achievement-lifestyle-habits",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:national-assessment-elementary-study-1h-plus-rate",
           "kind": "ranking"
         },
@@ -4706,6 +4722,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:academic-achievement-lifestyle-habits",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:food-self-sufficiency-rate-calorie-vs-national-assessment",
           "kind": "blog"
         },
@@ -4740,6 +4760,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:academic-achievement-lifestyle-habits",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:national-assessment-junior-high-mathematics-correct-rate",
           "kind": "ranking"
         }
@@ -4763,6 +4787,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "blog:academic-achievement-lifestyle-habits",
+          "kind": "blog"
+        },
         {
           "pageId": "ranking:national-assessment-junior-high-self-esteem-rate",
           "kind": "ranking"
