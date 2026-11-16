@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T11:57:34.454Z",
+  "generatedAt": "2026-11-16T21:52:53.758Z",
   "total": 38,
   "bySeries": {
     "S1-issues": 16,
@@ -8,8 +8,9 @@
     "S4-ranking-compendium": 2
   },
   "byStatus": {
-    "generated": 34,
-    "idea": 4
+    "generated": 22,
+    "idea": 4,
+    "planned": 12
   },
   "books": [
     {
@@ -144,7 +145,7 @@
       "id": "K-S2-01",
       "series": "S2-theme-databook",
       "title": "データで見る47都道府県 人口・世帯",
-      "status": "generated",
+      "status": "planned",
       "priceYen": 500,
       "chapters": 8
     },
@@ -152,7 +153,7 @@
       "id": "K-S2-02",
       "series": "S2-theme-databook",
       "title": "データで見る47都道府県 所得・賃金・採用",
-      "status": "generated",
+      "status": "planned",
       "priceYen": 500,
       "chapters": 8
     },
@@ -168,7 +169,7 @@
       "id": "K-S2-04",
       "series": "S2-theme-databook",
       "title": "データで見る47都道府県 自治体財政",
-      "status": "generated",
+      "status": "planned",
       "priceYen": 500,
       "chapters": 8
     },
@@ -176,7 +177,7 @@
       "id": "K-S2-05",
       "series": "S2-theme-databook",
       "title": "データで見る47都道府県 医療・介護",
-      "status": "generated",
+      "status": "planned",
       "priceYen": 500,
       "chapters": 8
     },
@@ -184,7 +185,7 @@
       "id": "K-S2-06",
       "series": "S2-theme-databook",
       "title": "データで見る47都道府県 教育・子育て",
-      "status": "generated",
+      "status": "planned",
       "priceYen": 500,
       "chapters": 8
     },
@@ -192,7 +193,7 @@
       "id": "K-S2-07",
       "series": "S2-theme-databook",
       "title": "データで見る47都道府県 移住・生活",
-      "status": "generated",
+      "status": "planned",
       "priceYen": 500,
       "chapters": 8
     },
@@ -200,7 +201,7 @@
       "id": "K-S2-08",
       "series": "S2-theme-databook",
       "title": "データで見る47都道府県 出店・商圏",
-      "status": "generated",
+      "status": "planned",
       "priceYen": 500,
       "chapters": 8
     },
@@ -208,7 +209,7 @@
       "id": "K-S2-09",
       "series": "S2-theme-databook",
       "title": "データで見る47都道府県 産業・経済",
-      "status": "generated",
+      "status": "planned",
       "priceYen": 500,
       "chapters": 8
     },
@@ -216,7 +217,7 @@
       "id": "K-S2-10",
       "series": "S2-theme-databook",
       "title": "データで見る47都道府県 防災・インフラ",
-      "status": "generated",
+      "status": "planned",
       "priceYen": 500,
       "chapters": 8
     },
@@ -224,7 +225,7 @@
       "id": "K-S2-11",
       "series": "S2-theme-databook",
       "title": "データで見る47都道府県 家計・消費",
-      "status": "generated",
+      "status": "planned",
       "priceYen": 500,
       "chapters": 8
     },
@@ -240,7 +241,7 @@
       "id": "K-S3-01",
       "series": "S3-region",
       "title": "北海道データブック — 統計で読む県の横顔",
-      "status": "generated",
+      "status": "planned",
       "priceYen": 500,
       "chapters": 8
     },
@@ -304,7 +305,7 @@
       "id": "K-S4-01",
       "series": "S4-ranking-compendium",
       "title": "47都道府県ランキング大全 — 意外な1位・最下位",
-      "status": "generated",
+      "status": "planned",
       "priceYen": 1000,
       "chapters": 8
     },

@@ -1441,7 +1441,7 @@
         "データブック",
         "統計"
       ],
-      "status": "generated"
+      "status": "planned"
     },
     "K-S2-02": {
       "series": "S2-theme-databook",
@@ -1502,7 +1502,7 @@
         "データブック",
         "統計"
       ],
-      "status": "generated"
+      "status": "planned"
     },
     "K-S2-03": {
       "series": "S2-theme-databook",
@@ -1624,7 +1624,7 @@
         "データブック",
         "統計"
       ],
-      "status": "generated"
+      "status": "planned"
     },
     "K-S2-05": {
       "series": "S2-theme-databook",
@@ -1685,7 +1685,7 @@
         "データブック",
         "統計"
       ],
-      "status": "generated"
+      "status": "planned"
     },
     "K-S2-06": {
       "series": "S2-theme-databook",
@@ -1746,7 +1746,7 @@
         "データブック",
         "統計"
       ],
-      "status": "generated"
+      "status": "planned"
     },
     "K-S2-07": {
       "series": "S2-theme-databook",
@@ -1807,7 +1807,7 @@
         "データブック",
         "統計"
       ],
-      "status": "generated"
+      "status": "planned"
     },
     "K-S2-08": {
       "series": "S2-theme-databook",
@@ -1868,7 +1868,7 @@
         "データブック",
         "統計"
       ],
-      "status": "generated"
+      "status": "planned"
     },
     "K-S2-09": {
       "series": "S2-theme-databook",
@@ -1929,7 +1929,7 @@
         "データブック",
         "統計"
       ],
-      "status": "generated"
+      "status": "planned"
     },
     "K-S2-10": {
       "series": "S2-theme-databook",
@@ -1990,7 +1990,7 @@
         "データブック",
         "統計"
       ],
-      "status": "generated"
+      "status": "planned"
     },
     "K-S2-11": {
       "series": "S2-theme-databook",
@@ -2051,7 +2051,7 @@
         "データブック",
         "統計"
       ],
-      "status": "generated"
+      "status": "planned"
     },
     "K-S2-12": {
       "series": "S2-theme-databook",
@@ -2173,7 +2173,7 @@
         "データブック",
         "統計"
       ],
-      "status": "generated"
+      "status": "planned"
     },
     "K-S3-02": {
       "series": "S3-region",
@@ -2996,7 +2996,7 @@
         "統計",
         "日本一"
       ],
-      "status": "generated"
+      "status": "planned"
     },
     "K-S4-02": {
       "series": "S4-ranking-compendium",
