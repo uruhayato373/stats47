@@ -47,7 +47,7 @@ export const CITY_DATABOOK_LAYOUT: CityDatabookLayout = {
     'elderly-population-ratio',
     'households',
     'moving-in-excess-rate',
-    'per-taxpayer-income',
+    'per-taxpayer-taxable-income',
     'fiscal-strength-index',
   ],
   sectionOrder: [

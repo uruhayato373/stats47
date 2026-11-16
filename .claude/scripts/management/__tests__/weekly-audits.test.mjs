@@ -106,10 +106,11 @@ test("ブログ是正キュー: 縮小専用ラチェット 3 種と散布図の
   assert.match(src, /exit 1; fi\s*$/, "ラチェットの失敗が終了コードに伝わらない");
 });
 
-test("土曜ランナー: 認証付き計測の後に週次監査を回し、各監査が書く記録をすべてコミットの対象にする", () => {
+test("土曜ランナー: GSC の入り直しと認証付き計測の後に週次監査を回し、各監査が書く記録をすべてコミットの対象にする", () => {
   const runnerSh = readFileSync(join(ROOT, "scripts/scheduled/weekly-saturday.sh"), "utf8");
   const steps = [...runnerSh.matchAll(/^step ([a-z-]+) /gm)].map((m) => m[1]);
-  assert.deepEqual(steps, ["measurement", "note-metrics", "scout-asp", "weekly-audits"]);
+  // gsc-login は認証付き計測より前 (GSC のセッションが切れていれば、取得の前に入り直す。2026-11-16)
+  assert.deepEqual(steps, ["gsc-login", "measurement", "note-metrics", "scout-asp", "weekly-audits"]);
   const records = runnerSh.match(/AUDIT_RECORDS=\(([\s\S]*?)\n\)/)[1].split(/\s+/).filter(Boolean);
   // 各台本の「出力:」に書いたパスが、どれかの記録パスの下にある (無いと監査の結果がコミットされず消える)
   for (const id of readdirSync(join(ROOT, DIR)).filter((f) => f.endsWith(".sh"))) {

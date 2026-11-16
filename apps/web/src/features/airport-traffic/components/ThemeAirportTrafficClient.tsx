@@ -63,7 +63,7 @@ export function ThemeAirportTrafficClient({
                 トン。ヘリポートを除き、複数県にまたがる空港も1回だけ集計しています。
               </p>
             )}
-            <ValueTable
+            <ValueTable fold
               ariaLabel={`${area}の空港別旅客取扱い`}
               className="min-w-96"
               scrollRegion
@@ -93,7 +93,7 @@ export function ThemeAirportTrafficClient({
                 ],
               }))}
             />
-            <ValueTable
+            <ValueTable fold
               ariaLabel={`${area}の空港別貨物取扱い`}
               className="min-w-96"
               scrollRegion

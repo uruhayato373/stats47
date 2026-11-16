@@ -2,6 +2,7 @@ import { ListObjectsV2Command } from '@aws-sdk/client-s3';
 
 import { getS3Client } from '../../lib/clients/get-s3-client';
 import inventory from '../../../../../data/geo/ksj/license-retention-20260905.json';
+import blogPublicPrivateFiles from '../../../../../data/blog/public-private-files-retention-20261116.json';
 import { SITE } from '@stats47/types';
 
 export interface RetentionObject {
@@ -10,8 +11,12 @@ export interface RetentionObject {
   etag: string;
 }
 
-/** Immutable approved objects, not a user-supplied prefix or manifest. */
-export const LICENSE_RETENTION_TARGETS = inventory;
+/**
+ * Immutable approved objects, not a user-supplied prefix or manifest.
+ * 先頭は KSJ の利用条件の撤去 (r2-retention.ts が [0] を KSJ として読む)。後ろはキー単位で消すほかの承認済みの一覧:
+ * blog-public-private-files-20261116 = 公開 R2 に残った記事の審査記録・prompt (2026-11-16 オーナー承認。控えは Google Drive の stats47/ブログ/公開R2から外した審査記録とprompt/2026-11-16)。
+ */
+export const LICENSE_RETENTION_TARGETS = [...inventory, ...blogPublicPrivateFiles];
 
 export function assertUnchangedRetentionInventory(
   expected: readonly RetentionObject[],

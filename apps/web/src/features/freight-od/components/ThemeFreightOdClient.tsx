@@ -91,7 +91,7 @@ export function ThemeFreightOdClient({
         </p>
         {/* 全国のページは合計だけ。県別の合計を 47 行並べない (2026-10-31。比較はランキング) */}
         {!selectedPrefectureCode && rows ? null : rows ? (
-          <ValueTable
+          <ValueTable fold
             ariaLabel={`${period} ${mode.label} ${area}の${direction === 'outbound' ? '発送先' : '到着元'}`}
             className="min-w-80"
             scrollRegion

@@ -134,7 +134,14 @@ export function validateOpenDataExpansion(
     if (c.verification && c.aggregation.type !== "identity" && (c.verification.denominatorTime !== c.aggregation.denominatorTime || !/^[a-f0-9]{64}$/.test(c.verification.denominatorSha256 ?? ""))) fail("率の検証記録に分母時点とsha256が必要です");
     if (c.channel === "theme" && (!c.target || !context.themeIds.has(c.target))) fail("未知の theme target");
     if (c.channel === "area" && (!c.target || !context.areaIds.has(c.target))) fail("未知の area target");
-    const duplicates = findExpansionDuplicates(c, context.metrics);
+    // 同じ正規化表から作った公開済みの指標は「実現済み」。テーマ・地域ページの候補はその指標を載せる予定として残せる。
+    const realized = c.metricKey ? context.metrics.find((m) => {
+      if (m.key !== c.metricKey || m.isActive === false || m.source.kind !== "external") return false;
+      const ref = (m.source.config.provenance as { openData?: { datasetId?: string; table?: string } } | undefined)?.openData;
+      return ref?.datasetId === c.datasetId && ref.table === c.table;
+    }) : undefined;
+    if (realized && c.channel === "prefecture-ranking") fail(`公開済みの県ランキングは台帳から外す (指標の定義 ${realized.key} が正本)`);
+    const duplicates = findExpansionDuplicates(c, context.metrics).filter((m) => m.key !== realized?.key);
     if (c.duplicateOf && !duplicates.some((m) => m.key === c.duplicateOf)) fail("duplicateOf が名前・単位・出典・地域粒度の機械照合と一致しません");
     if (duplicates.length && !c.duplicateOf) fail(`既存概念との重複を未記録: ${duplicates.map((m) => m.key).join(", ")}`);
     const definition = JSON.stringify([c.datasetId, c.table, c.slice, c.aggregation, c.denominator, c.unit]);
@@ -143,7 +150,7 @@ export function validateOpenDataExpansion(
     identities.add(identity);
     if (c.status !== "planned") continue;
     if (!c.metricKey) fail("planned に metricKey が必要です");
-    if (c.metricKey && context.existingMetricKeys.has(c.metricKey)) fail(`planned の metricKey が既存指標と衝突: ${c.metricKey}`);
+    if (c.metricKey && context.existingMetricKeys.has(c.metricKey) && !realized) fail(`planned の metricKey が既存指標と衝突: ${c.metricKey}`);
     if (c.duplicateOf || duplicates.length) fail("既存概念を planned にできません");
     if (c.aggregation.type !== "identity" && (!c.denominator || !c.aggregation.denominatorTime)) fail("分母とその時点が必要です");
     if (c.aggregation.type === "identity" && /^(人|件|施設|所)$/.test(c.unit) && /ranking$/.test(c.channel)) fail("件数そのものをランキングの planned にできません");

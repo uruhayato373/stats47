@@ -23,7 +23,7 @@ export function ThemeNutritionClient({ snapshot }: { snapshot: NutritionSnapshot
     <ChartPanel title="栄養摂取量と推計の幅" description={`2024年 · ${area} · 20歳以上、男女とも59歳に年齢調整`}
       contentClassName="min-w-0 space-y-4"
       footer={<ChartFooter source={NUTRITION_SOURCE.title} sourceLink={NUTRITION_SOURCE.url} />}>
-      <ValueTable
+      <ValueTable fold
         ariaLabel={`${area}の栄養摂取量と95%信頼区間`}
         caption="平均と95%信頼区間は1日当たりのグラム数です。集計人数は推計人口ではありません。"
         columns={[

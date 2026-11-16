@@ -15,8 +15,8 @@
  * 更新タイミング: ranking item 追加/有効化 + CI generate-ranking-items 実行後。
  *                 必ず git commit してからデプロイ。
  *
- * 最終生成日: 2026-11-15
- * 件数: 2596
+ * 最終生成日: 2026-11-16
+ * 件数: 2611
  */
 export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "abandoned-cultivated-land-area",
@@ -946,10 +946,20 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "hat-consumption-expenditure",
   "hat-consumption-quantity",
   "health-center-expenses-prefecture",
+  "health-checkup-blood-pressure-medication-rate",
   "health-checkup-breakfast-skipping-rate",
   "health-checkup-consumption-expenditure",
+  "health-checkup-daily-activity-rate",
+  "health-checkup-daily-drinking-rate",
+  "health-checkup-daily-snacking-rate",
+  "health-checkup-exercise-habit-rate",
+  "health-checkup-fast-eating-rate",
+  "health-checkup-fast-walking-rate",
   "health-checkup-late-dinner-rate",
   "health-checkup-recipients",
+  "health-checkup-smoking-rate",
+  "health-checkup-sufficient-sleep-rate",
+  "health-checkup-weight-gain-10kg-rate",
   "health-consumables-consumption-expenditure",
   "health-insurance-premium-consumption-expenditure",
   "health-medical-expenditure-total",
@@ -965,6 +975,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "heating-cooling-appliances-group-consumption-expenditure",
   "heatstroke-deaths",
   "heatstroke-emergency-transports",
+  "heatstroke-emergency-transports-per-100k",
   "high-school-advancement-rate",
   "high-school-club-per100-rugby-male",
   "high-school-count",
@@ -1423,9 +1434,12 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "music-lesson-consumption-expenditure",
   "musical-instrument-consumption-expenditure",
   "national-assessment-elementary-breakfast-rate",
+  "national-assessment-elementary-mathematics-correct-rate",
   "national-assessment-elementary-reading-like-rate",
   "national-assessment-elementary-study-1h-plus-rate",
   "national-assessment-elementary-tutoring-rate",
+  "national-assessment-junior-high-mathematics-correct-rate",
+  "national-assessment-junior-high-self-esteem-rate",
   "national-health-insurance-benefits",
   "national-health-insurance-enrollees-per-1000",
   "national-health-insurance-medical-expense-per-person",
@@ -2408,6 +2422,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "traffic-accident-deaths-per-100k",
   "traffic-accident-injuries",
   "traffic-accident-injuries-per-100k",
+  "traffic-accidents-party-a-age-75-plus-per-100k",
   "traffic-safety-special-grant-prefecture",
   "train-commuter-pass-consumption-expenditure",
   "train-fare-consumption-expenditure",

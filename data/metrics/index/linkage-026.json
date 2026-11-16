@@ -431,10 +431,6 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:retail-commerce",
-          "kind": "municipality-theme"
-        },
-        {
           "pageId": "ranking:retail-stores-per",
           "kind": "ranking"
         }

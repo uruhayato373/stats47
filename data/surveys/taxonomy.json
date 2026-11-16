@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-14T08:35:50.270Z",
+  "generatedAt": "2026-11-16T22:48:05.188Z",
   "masterSurveyCount": 152,
   "ranking": {
     "metrics": 2755,
-    "activeMetrics": 2596,
+    "activeMetrics": 2611,
     "applicableMetrics": 2655,
-    "activeApplicableMetrics": 2508,
+    "activeApplicableMetrics": 2512,
     "notApplicable": 100,
-    "activeNotApplicable": 88,
+    "activeNotApplicable": 99,
     "resolved": 2655,
     "unresolved": 0,
     "coveragePct": 100,
-    "activeResolved": 2508,
+    "activeResolved": 2512,
     "activeUnresolved": 0,
     "activeCoveragePct": 100,
     "activeNotApplicableKeys": [
@@ -44,11 +44,22 @@
       "furusato-tax-deduction-municipal-prefecture",
       "furusato-tax-deduction-prefectural-prefecture",
       "general-perinatal-center-count",
+      "health-checkup-blood-pressure-medication-rate",
       "health-checkup-breakfast-skipping-rate",
+      "health-checkup-daily-activity-rate",
+      "health-checkup-daily-drinking-rate",
+      "health-checkup-daily-snacking-rate",
+      "health-checkup-exercise-habit-rate",
+      "health-checkup-fast-eating-rate",
+      "health-checkup-fast-walking-rate",
       "health-checkup-late-dinner-rate",
+      "health-checkup-smoking-rate",
+      "health-checkup-sufficient-sleep-rate",
+      "health-checkup-weight-gain-10kg-rate",
       "healthy-life-expectancy-female",
       "healthy-life-expectancy-male",
       "heatstroke-emergency-transports",
+      "heatstroke-emergency-transports-per-100k",
       "individual-evacuation-plan-coverage-rate",
       "individual-evacuation-plan-covered-persons",
       "individual-evacuation-plan-listed-persons",
@@ -107,7 +118,7 @@
     ],
     "activeUnresolvedKeys": [],
     "perSurveyActive": {
-      "academic-achievement-survey": 5,
+      "academic-achievement-survey": 8,
       "accommodation-survey": 4,
       "administrative-investment-report": 13,
       "age-adjusted-mortality-statistics": 1,
@@ -237,7 +248,7 @@
       "student-guidance-issues-survey": 7,
       "telecommunications-contract-share-quarterly": 2,
       "telecommunications-service-contract-report": 5,
-      "traffic-accident-statistics": 11,
+      "traffic-accident-statistics": 12,
       "travel-tourism-consumption-survey": 1,
       "truck-operator-statistics": 1,
       "urban-park-survey": 12,
@@ -773,13 +784,13 @@
     }
   },
   "blog": {
-    "articles": 861,
-    "charts": 2280,
-    "applicableCharts": 2131,
+    "articles": 852,
+    "charts": 2265,
+    "applicableCharts": 2117,
     "byStatus": {
-      "resolved": 2131,
+      "resolved": 2117,
       "unresolved": 0,
-      "not-applicable": 149,
+      "not-applicable": 148,
       "missing-lineage": 0
     },
     "coveragePct": 100,
@@ -831,7 +842,6 @@
         "sports-facility-regional-divide",
         "sports-urban-paradox",
         "suicide-rate-aging-nexus",
-        "telework-gap-tokyo-6x",
         "tuition-expenditure-ranking",
         "unmarried-rate-40years-crisis",
         "waste-management-recycling-gap",
@@ -1116,7 +1126,6 @@
         "long-commute-telework-potential",
         "non-regular-employment-rate-prefecture-gap",
         "prefecture-salary-remote-gap",
-        "telework-gap-tokyo-6x",
         "telework-rate-tokyo-gap"
       ],
       "employment-trends-survey": [
@@ -1224,7 +1233,6 @@
         "vacant-houses-population-decline",
         "vacant-housing-aging-correlation",
         "vacant-housing-rate-vs-dependent-population-index",
-        "vacant-housing-rate-vs-standard-price-change-rate-commercial",
         "vacant-housing-vs-aging",
         "vacant-housing-vs-land-price",
         "vacant-housing-vs-welfare-commissioner",
@@ -1281,7 +1289,6 @@
         "bean-sprouts-consumption-quantity-prefecture-gap",
         "beans-consumption-expenditure-prefecture-gap",
         "bed-consumption-expenditure-prefecture-gap",
-        "beef-consumption-prefecture-gap",
         "beef-consumption-quantity",
         "beef-consumption-quantity-vs-municipal-road-paving-rate",
         "beef-consumption-quantity-vs-unmarried-ratio-male-45-49",
@@ -1494,7 +1501,6 @@
         "nara-food-culture",
         "natto-child-weight-correlation",
         "natto-consumption-east-west-divide",
-        "natto-consumption-expenditure",
         "natto-production-vs-consumption",
         "necktie-stockings-market-shrink",
         "niigata-food-culture",
@@ -1628,7 +1634,6 @@
         "watermelon-expenditure-ranking",
         "western-clothing-group-consumption-expenditure-prefecture",
         "western-food-dining-consumption-expenditure-prefecture-gap",
-        "wheat-flour-consumption-food-culture-gap",
         "wheat-flour-consumption-prefecture",
         "wheat-flour-expenditure-vs-quantity",
         "whisky-consumption-prefecture-gap",
@@ -1725,8 +1730,7 @@
         "avg-salary-police-prefecture-prefecture-gap",
         "avg-salary-police-prefecture-vs-community-sports-facility",
         "nurse-income-prefecture-gap",
-        "prefecture-salary-remote-gap",
-        "software-engineer-income-gap"
+        "prefecture-salary-remote-gap"
       ],
       "local-tax": [
         "deposit-securities-prefecture-personality",
@@ -1744,7 +1748,6 @@
         "delivery-hospital-count-prefecture-gap",
         "dental-clinic-count-prefecture-gap",
         "emergency-hospital-general-clinic-count-per-100k-prefecture",
-        "general-hospital-bed-occupancy-rate",
         "hospital-bed-utilization-map",
         "inpatient-rate-prefecture-gap",
         "livable-prefecture-composite-ranking",
@@ -1826,7 +1829,6 @@
       ],
       "patient-survey": [
         "hospital-bed-utilization-map",
-        "inpatient-rate-aging-burden",
         "inpatient-rate-prefecture-gap",
         "outpatient-rate-prefecture-gap",
         "treatment-rate-cerebrovascular-outpatient-prefecture-gap",
@@ -1953,7 +1955,6 @@
       ],
       "prefectural-land-price-survey": [
         "commercial-land-price-trend",
-        "vacant-housing-rate-vs-standard-price-change-rate-commercial",
         "vacant-housing-vs-land-price"
       ],
       "prefectural-settlement-survey": [
@@ -2197,7 +2198,6 @@
         "marriage-unmarried-crisis",
         "pneumonia-death-rate-prefecture-gap",
         "suicide-rate-aging-nexus",
-        "total-fertility-rate",
         "unmarried-rate-40years-crisis"
       ],
       "wage-structure-survey": [
@@ -2225,7 +2225,6 @@
         "public-health-nurse-annual-income-prefecture-gap",
         "regular-cash-salary-male-prefecture-gap",
         "school-teacher-annual-income",
-        "software-engineer-income-gap",
         "software-engineer-salary-prefecture-gap",
         "starting-salary-university-prefecture-gap",
         "system-consultant-income-prefecture-gap",
@@ -2285,7 +2284,7 @@
   "surveys": [
     {
       "surveyId": "academic-achievement-survey",
-      "rankingCount": 5,
+      "rankingCount": 8,
       "themeKeys": [
         "education-culture"
       ],
@@ -2799,7 +2798,6 @@
         "long-commute-telework-potential",
         "non-regular-employment-rate-prefecture-gap",
         "prefecture-salary-remote-gap",
-        "telework-gap-tokyo-6x",
         "telework-rate-tokyo-gap"
       ]
     },
@@ -3061,7 +3059,6 @@
         "vacant-houses-population-decline",
         "vacant-housing-aging-correlation",
         "vacant-housing-rate-vs-dependent-population-index",
-        "vacant-housing-rate-vs-standard-price-change-rate-commercial",
         "vacant-housing-vs-aging",
         "vacant-housing-vs-land-price",
         "vacant-housing-vs-welfare-commissioner",
@@ -3190,7 +3187,6 @@
         "bean-sprouts-consumption-quantity-prefecture-gap",
         "beans-consumption-expenditure-prefecture-gap",
         "bed-consumption-expenditure-prefecture-gap",
-        "beef-consumption-prefecture-gap",
         "beef-consumption-quantity",
         "beef-consumption-quantity-vs-municipal-road-paving-rate",
         "beef-consumption-quantity-vs-unmarried-ratio-male-45-49",
@@ -3403,7 +3399,6 @@
         "nara-food-culture",
         "natto-child-weight-correlation",
         "natto-consumption-east-west-divide",
-        "natto-consumption-expenditure",
         "natto-production-vs-consumption",
         "necktie-stockings-market-shrink",
         "niigata-food-culture",
@@ -3537,7 +3532,6 @@
         "watermelon-expenditure-ranking",
         "western-clothing-group-consumption-expenditure-prefecture",
         "western-food-dining-consumption-expenditure-prefecture-gap",
-        "wheat-flour-consumption-food-culture-gap",
         "wheat-flour-consumption-prefecture",
         "wheat-flour-expenditure-vs-quantity",
         "whisky-consumption-prefecture-gap",
@@ -3741,8 +3735,7 @@
         "avg-salary-police-prefecture-prefecture-gap",
         "avg-salary-police-prefecture-vs-community-sports-facility",
         "nurse-income-prefecture-gap",
-        "prefecture-salary-remote-gap",
-        "software-engineer-income-gap"
+        "prefecture-salary-remote-gap"
       ]
     },
     {
@@ -3791,7 +3784,6 @@
         "delivery-hospital-count-prefecture-gap",
         "dental-clinic-count-prefecture-gap",
         "emergency-hospital-general-clinic-count-per-100k-prefecture",
-        "general-hospital-bed-occupancy-rate",
         "hospital-bed-utilization-map",
         "inpatient-rate-prefecture-gap",
         "livable-prefecture-composite-ranking",
@@ -4030,7 +4022,6 @@
       ],
       "blogSlugs": [
         "hospital-bed-utilization-map",
-        "inpatient-rate-aging-burden",
         "inpatient-rate-prefecture-gap",
         "outpatient-rate-prefecture-gap",
         "treatment-rate-cerebrovascular-outpatient-prefecture-gap",
@@ -4253,7 +4244,6 @@
       ],
       "blogSlugs": [
         "commercial-land-price-trend",
-        "vacant-housing-rate-vs-standard-price-change-rate-commercial",
         "vacant-housing-vs-land-price"
       ]
     },
@@ -4633,7 +4623,7 @@
     },
     {
       "surveyId": "traffic-accident-statistics",
-      "rankingCount": 11,
+      "rankingCount": 12,
       "themeKeys": [
         "roads",
         "safety"
@@ -4716,7 +4706,6 @@
         "marriage-unmarried-crisis",
         "pneumonia-death-rate-prefecture-gap",
         "suicide-rate-aging-nexus",
-        "total-fertility-rate",
         "unmarried-rate-40years-crisis"
       ]
     },
@@ -4767,7 +4756,6 @@
         "public-health-nurse-annual-income-prefecture-gap",
         "regular-cash-salary-male-prefecture-gap",
         "school-teacher-annual-income",
-        "software-engineer-income-gap",
         "software-engineer-salary-prefecture-gap",
         "starting-salary-university-prefecture-gap",
         "system-consultant-income-prefecture-gap",

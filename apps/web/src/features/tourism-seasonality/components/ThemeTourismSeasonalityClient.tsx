@@ -99,7 +99,7 @@ export function ThemeTourismSeasonalityClient({ snapshot, notes }: Props) {
           </p>
         )}
         {rows && (
-          <ValueTable
+          <ValueTable fold
             ariaLabel={`${areaLabel}の月別延べ宿泊者数`}
             caption={`${snapshot.year}年の確定値。0は観測された0人泊、欠測は「欠測」と表示します。`}
             columns={[

@@ -331,7 +331,7 @@ export default async function CategoryPage({ params }: PageProps) {
 
   return (
     <PageShell rightRail={rightRail} header={header}>
-      {/* 節はカード同士を点線の帯で接ぐ (テンプレートの lyra のダッシュボード。home / ranking 一覧と同じ) */}
+      {/* 節はカード同士を線の格子で接ぐ (テンプレートの lyra のダッシュボード。home / ranking 一覧と同じ) */}
       <PageSections>
         {/* 注目ランキング */}
         {featuredItems.length > 0 && (

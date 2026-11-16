@@ -183,3 +183,20 @@ export function findUnhandledBatchUrls(queue, urls) {
     return !(entry.note ?? "").trim();
   });
 }
+
+/**
+ * カテゴリ別総件数の履歴 (coverage-totals-history.csv) の行を upsert する。
+ * 直前の週の行と件数が全列同じなら、前回の書き出しの写しとみなして行を足さない
+ * (2026-11-14 観測: W45 の行が W44 の書き出しと byte 同一の drilldown から作られていた)。
+ * @param {string[]} rows  見出しを除いた既存行 ("week,date,..." の CSV)
+ * @param {string} line   今回の行
+ * @returns {{ rows: string[], skipped: boolean }}
+ */
+export function upsertTotalsHistoryRow(rows, line) {
+  const week = line.split(",")[0];
+  const others = rows.filter((l) => !l.startsWith(`${week},`)).sort();
+  const prev = others.filter((l) => l.split(",")[0] < week).at(-1);
+  const counts = (l) => l.split(",").slice(2).join(",");
+  if (prev && counts(prev) === counts(line)) return { rows: others, skipped: true };
+  return { rows: [...others, line].sort(), skipped: false };
+}

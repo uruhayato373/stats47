@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "旧 市区町村ランキング key の転送",
+  "description": "data/site/url-history/municipality-ranking-redirects.json の形の契約。市区町村ランキング (/municipalities/ranking/<key> と県別の /<県コード>) だけに効く 301。都道府県ランキング (/ranking/<key>) の転送は site.ranking-redirects が持つ (from の都道府県ページが公開中のことがあるので混ぜない)。from は公開をやめた市区町村ランキングの key、to は公開中の市区町村ランキングの key。to が公開中で from が非公開であることを apps/web の municipality-ranking-redirects テストが固定する。",
+  "type": "object",
+  "required": ["redirects"],
+  "additionalProperties": false,
+  "properties": {
+    "redirects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to", "since", "reason"],
+        "additionalProperties": false,
+        "properties": {
+          "from": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+          "to": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+          "since": { "$ref": "common.schema.json#/$defs/date" },
+          "reason": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

@@ -31,7 +31,6 @@ describe('validateHomePortal', () => {
         label: 'invalid',
         description: 'invalid',
         themeKey: 'no-such-theme',
-        imageSrc: '/images/home/use-cases/invalid.webp',
         order: 1,
         isActive: true,
       },
@@ -51,7 +50,6 @@ describe('validateHomePortal', () => {
         label: 'a',
         description: 'a',
         themeKey: 'healthcare',
-        imageSrc: '/images/home/use-cases/duplicate.webp',
         order: 1,
         isActive: true,
       },
@@ -60,7 +58,6 @@ describe('validateHomePortal', () => {
         label: 'b',
         description: 'b',
         themeKey: 'healthcare',
-        imageSrc: '/images/home/use-cases/duplicate.webp',
         order: 1,
         isActive: true,
       },
@@ -72,18 +69,12 @@ describe('validateHomePortal', () => {
       true
     );
     expect(errors).toContain('use case order 重複: 1');
-    expect(errors).toContain(
-      'use case imageSrc 重複: /images/home/use-cases/duplicate.webp'
-    );
   });
 
-  it('画像パスはuse case idから導出できる規約を守る', () => {
+  it('カードの絵になる遷移先テーマのサムネイルが配信画像として存在する', () => {
     for (const useCase of HOME_PORTAL_USE_CASES) {
-      expect(useCase.imageSrc).toBe(
-        `/images/home/use-cases/${useCase.id}.webp`
-      );
       expect(
-        existsSync(resolve(process.cwd(), 'public', useCase.imageSrc.slice(1)))
+        existsSync(resolve(process.cwd(), 'public', 'images', 'themes', `${useCase.themeKey}.webp`))
       ).toBe(true);
     }
   });

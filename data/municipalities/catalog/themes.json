@@ -115,7 +115,6 @@
         "standard-fiscal-demand-municipality",
         "standard-fiscal-revenue-municipality",
         "per-taxpayer-taxable-income",
-        "per-taxpayer-income",
         "taxpayer-count-equal",
         "taxpayer-count-income",
         "municipal-general-administration-staff",
@@ -139,7 +138,6 @@
         "sales-amount-private",
         "retail-store-count",
         "retail-store-count-per-1000",
-        "retail-stores-per",
         "department-supermarket-count",
         "department-supermarket-count-per-100k",
         "department-store-count-per-100k",
@@ -178,7 +176,6 @@
       "title": "市区町村の製造業",
       "metricKeys": [
         "manufacturing-shipment-amount",
-        "manufacturing-shipment",
         "manufacturing-establishments",
         "manufacturing-employees",
         "manufacturing-sales-private",

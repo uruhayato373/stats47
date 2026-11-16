@@ -38,6 +38,7 @@ import { existsSync, readFileSync } from "node:fs";
 import Ajv from "ajv";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { isDeepStrictEqual } from "node:util";
 
 import {
   AGENT_STATE, CONFIG_MOVE_PENDING, DATA_README_PENDING, DATASETS, GOVERNED, IGNORED_NAMES, IMAGE_EXT, IMAGE_ROOTS, KINDS, OUTSIDE_DATA,
@@ -320,7 +321,8 @@ export function checkRefs({ datasets, files, readJson, readText, registries = {}
             }
             for (const field of ref.copies ?? []) {
               const expected = target.get(id)?.[field];
-              if (parent?.[field] !== expected) {
+              // 配列・オブジェクトの写し (KDP のキーワード 7 枠など) も中身で比べる
+              if (!isDeepStrictEqual(parent?.[field], expected)) {
                 sink.push(`写しの不一致: ${ds.id} ${file} の ${field}=${show(parent?.[field])} が ${ref.to} (${show(id)}) の ${show(expected)} と違う`);
               }
             }

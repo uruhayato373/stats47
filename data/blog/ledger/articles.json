@@ -83,6 +83,30 @@
       "r2Path": "blog/abortion-rate-prefecture-gap/article.md"
     },
     {
+      "slug": "academic-achievement-lifestyle-habits",
+      "title": "学力が高い県の子は生活習慣が違う?",
+      "status": "published",
+      "publishedAt": "2026-11-16",
+      "updatedAt": "2026-11-17",
+      "rankingKeys": [
+        "national-assessment-elementary-breakfast-rate",
+        "national-assessment-elementary-mathematics-correct-rate",
+        "national-assessment-elementary-reading-like-rate",
+        "national-assessment-elementary-study-1h-plus-rate",
+        "national-assessment-elementary-tutoring-rate",
+        "national-assessment-junior-high-mathematics-correct-rate",
+        "national-assessment-junior-high-self-esteem-rate"
+      ],
+      "tagIds": [
+        "tag:t-d43daa70581f",
+        "tag:t-cd17971e155b",
+        "tag:t-4236b1c3bc1a",
+        "tag:t-5f7b5353da88",
+        "tag:t-5dd7af9d19a3"
+      ],
+      "r2Path": "blog/academic-achievement-lifestyle-habits/article.md"
+    },
+    {
       "slug": "academic-achievement-test-prefecture-ranking",
       "title": "学力トップは東京｜なぜ都市部と北陸が並ぶ?",
       "status": "published",
@@ -7569,19 +7593,21 @@
     },
     {
       "slug": "konbu-consumption-prefecture-gap",
-      "title": "昆布の産地・北海道が消費最下位圏──岩手が首位になった北前船と「産地で食べない」構造",
+      "title": "昆布の産地・北海道が消費44位の逆説",
       "status": "published",
       "publishedAt": "2026-05-17",
-      "updatedAt": "2026-06-04",
+      "updatedAt": "2026-11-14",
       "rankingKeys": [
-        "konbu-consumption-quantity"
+        "konbu-consumption-expenditure",
+        "konbu-consumption-quantity",
+        "konbu-tsukudani-consumption-quantity"
       ],
       "tagIds": [
         "tag:t-266fb15bfc70",
-        "tag:t-8d8741ce11ff",
+        "tag:t-8b3772aa929f",
+        "tag:hokkaido",
         "tag:t-0b42c166d9bf",
-        "tag:t-ba8e4beb69bf",
-        "tag:t-71e69a814d46"
+        "tag:t-ba8e4beb69bf"
       ],
       "r2Path": "blog/konbu-consumption-prefecture-gap/article.md"
     },

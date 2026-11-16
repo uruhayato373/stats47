@@ -3,7 +3,7 @@
     "manufacturing-shipment-amount",
     "annual-sales-amount",
     "fiscal-strength-index",
-    "per-taxpayer-income",
+    "per-taxpayer-taxable-income",
     "real-public-debt-service-ratio-city",
     "births",
     "young-population-ratio",
@@ -39,7 +39,7 @@
     "elderly-population-ratio": [
       "子育て系。"
     ],
-    "per-taxpayer-income": [
+    "per-taxpayer-taxable-income": [
       "所得。"
     ]
   },

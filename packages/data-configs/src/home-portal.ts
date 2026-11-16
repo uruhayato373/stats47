@@ -6,6 +6,7 @@
  * - themeの分類SSOTは変更せず、homeで見せる利用意図と順番だけを型付きgit TSで管理する。
  * - `themeKey`は`ALL_THEMES`に実在することを`validateHomePortal`で検証する。
  * - JSON / D1 / runtime LLMの新しいSSOTを作らない。
+ * - カードの絵はテーマのサムネイル (`/images/themes/<themeKey>.webp`) を使う。use case 専用の画像は持たない。
  */
 
 /** themeを人間向けの利用意図へ翻訳したhome用項目。 */
@@ -18,8 +19,6 @@ export interface HomePortalUseCase {
   description: string;
   /** ALL_THEMESに実在するthemeKey。hrefは`/themes/<themeKey>`を導出する。 */
   themeKey: string;
-  /** public配下の文字なし・透過WebP。生成仕様はweb側の画像カタログで管理する。 */
-  imageSrc: string;
   /** 表示順（1始まりの連番）。 */
   order: number;
   /** 掲載可否。 */
@@ -32,7 +31,6 @@ export const HOME_PORTAL_USE_CASES: readonly HomePortalUseCase[] = [
     label: '移住先を比較したい',
     description: '人口移動・転入超過から住みやすい地域を探す',
     themeKey: 'population-dynamics',
-    imageSrc: '/images/home/use-cases/migration.webp',
     order: 1,
     isActive: true,
   },
@@ -41,7 +39,6 @@ export const HOME_PORTAL_USE_CASES: readonly HomePortalUseCase[] = [
     label: '子育て・教育で選びたい',
     description: '教育環境や文化資源を都道府県で比較する',
     themeKey: 'education-culture',
-    imageSrc: '/images/home/use-cases/childcare-education.webp',
     order: 2,
     isActive: true,
   },
@@ -50,7 +47,6 @@ export const HOME_PORTAL_USE_CASES: readonly HomePortalUseCase[] = [
     label: '年収と物価を比べたい',
     description: '名目と実質の所得・購買力の地域差を見る',
     themeKey: 'real-income',
-    imageSrc: '/images/home/use-cases/income-cost.webp',
     order: 3,
     isActive: true,
   },
@@ -59,7 +55,6 @@ export const HOME_PORTAL_USE_CASES: readonly HomePortalUseCase[] = [
     label: '高齢化の実態を知りたい',
     description: '高齢化率と社会構造の変化を地域で確かめる',
     themeKey: 'aging-society',
-    imageSrc: '/images/home/use-cases/aging.webp',
     order: 4,
     isActive: true,
   },
@@ -68,7 +63,6 @@ export const HOME_PORTAL_USE_CASES: readonly HomePortalUseCase[] = [
     label: '医療環境を確かめたい',
     description: '医療提供体制や健康指標を都道府県で比較する',
     themeKey: 'healthcare',
-    imageSrc: '/images/home/use-cases/healthcare.webp',
     order: 5,
     isActive: true,
   },
@@ -77,7 +71,6 @@ export const HOME_PORTAL_USE_CASES: readonly HomePortalUseCase[] = [
     label: '地域経済を比較したい',
     description: '産業構造や経済活動の地域差を読み解く',
     themeKey: 'local-economy',
-    imageSrc: '/images/home/use-cases/local-economy.webp',
     order: 6,
     isActive: true,
   },
@@ -107,7 +100,6 @@ export function validateHomePortal(
 
   const seenIds = new Set<string>();
   const seenHrefs = new Set<string>();
-  const seenImageSources = new Set<string>();
   const seenOrders = new Set<number>();
 
   for (const item of useCases) {
@@ -123,17 +115,6 @@ export function validateHomePortal(
     const href = `/themes/${item.themeKey}`;
     if (seenHrefs.has(href)) errors.push(`use case href 重複: ${href}`);
     seenHrefs.add(href);
-
-    const expectedImageSrc = `/images/home/use-cases/${item.id}.webp`;
-    if (item.imageSrc !== expectedImageSrc) {
-      errors.push(
-        `use case imageSrc がID規約と不一致: ${item.id} (${item.imageSrc})`
-      );
-    }
-    if (seenImageSources.has(item.imageSrc)) {
-      errors.push(`use case imageSrc 重複: ${item.imageSrc}`);
-    }
-    seenImageSources.add(item.imageSrc);
 
     if (seenOrders.has(item.order)) {
       errors.push(`use case order 重複: ${item.order}`);

@@ -82,7 +82,7 @@ export function ThemeDepopulatedSettlementsClient({
           %）。このうち全員が65歳以上の集落は{format(view.age65Share100)}
           集落です。いずれも下表の内数です。
         </p>
-        <ValueTable
+        <ValueTable fold
           ariaLabel={`${region}の集落高齢化プロフィール`}
           className="min-w-96"
           scrollRegion
@@ -119,7 +119,7 @@ export function ThemeDepopulatedSettlementsClient({
           ]}
         />
         {view.geography === 'national' && (
-          <ValueTable
+          <ValueTable fold
             ariaLabel="10地方ブロックの対象集落と高齢化"
             className="min-w-96"
             scrollRegion

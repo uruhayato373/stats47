@@ -84,7 +84,7 @@ export function ThemeWaterQualityClient({
           水域が達成（{f((national.compliant / national.total) * 100)}%）
         </p>
         {prefs.length > 0 && (
-        <ValueTable
+        <ValueTable fold
           ariaLabel={`${WATER_QUALITY_SOURCE.kinds[kind]}の県別掲載行と達成割合`}
           caption="県別の分母は各県欄の掲載行です。全国の公式水域数とは集計範囲が異なります。"
           columns={[
@@ -111,7 +111,7 @@ export function ThemeWaterQualityClient({
         )}
         {selectedPrefectureCode ? (
           rows.length ? (
-            <ValueTable
+            <ValueTable fold
               ariaLabel={`${selectedAreaName}の${WATER_QUALITY_SOURCE.kinds[kind]}原表一覧`}
               caption="濃度の単位はmg/Lです。原表の平均値と75%値の最大値を分けて示します。"
               columns={[

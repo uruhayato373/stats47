@@ -17,10 +17,11 @@
  *   npx tsx packages/product-factory/scripts/build-fresh-briefs.mts --all --out .local/fresh-briefs
  */
 import { mkdirSync, writeFileSync } from "node:fs";
-import { join, resolve, dirname } from "node:path";
+import { join, resolve, dirname, posix } from "node:path";
 import { fileURLToPath } from "node:url";
 import { KINDLE_BOOKS } from "../src/channels/kindle/book-catalog";
 import { BOOK_RANKING_KEYS } from "../src/channels/kindle/book-ranking-keys";
+import { isPrefectureGuide, prefectureGuideChapterSpec } from "../src/channels/kindle/prefecture-guide";
 import { fetchRankingValues } from "../src/data/load-ranking-values";
 import { PREFECTURE_BY_CODE5 } from "../src/data/prefectures";
 import { METRICS_REGISTRY } from "@stats47/data-configs";
@@ -40,12 +41,30 @@ function arg(name: string): string | undefined {
   return i >= 0 ? process.argv[i + 1] : undefined;
 }
 
+// 1,000 未満は小数を残す。100 以上を整数に丸めていた頃は、物価指数 99.6・100.4 がどちらも「100」になり、
+// 順位の違う県を「同じ値」と書いた原稿が出た (2026-11-14 K-S3-02 のレビュー)
 const fmt = (n: number): string =>
-  Math.abs(n) >= 100 ? Math.round(n).toLocaleString("ja-JP") : n.toLocaleString("ja-JP", { maximumFractionDigits: 2 });
+  Math.abs(n) >= 1000 ? Math.round(n).toLocaleString("ja-JP") : n.toLocaleString("ja-JP", { maximumFractionDigits: 2 });
 
-/** 1 指標の「本文で使ってよい事実」を実データから組む。 */
-async function factLine(key: string): Promise<string | null> {
-  const cfg = (METRICS_REGISTRY as Record<string, { title?: string; unit?: string; subtitle?: string } | undefined>)[key];
+interface RankedMetric {
+  readonly title: string;
+  readonly unit: string;
+  readonly year: string;
+  readonly avg: number;
+  /** 高い順。rank は同値同順位 */
+  readonly rows: readonly { code5: string; name: string; value: number; rank: number }[];
+  /** 指標定義が持つ読み方の注意 (note・県庁所在市の値か) */
+  readonly cautions: readonly string[];
+}
+
+/** 1 指標の値を高い順に並べ、同値同順位で順位を振る。 */
+async function rankedMetric(key: string): Promise<RankedMetric | null> {
+  const cfg = (
+    METRICS_REGISTRY as Record<
+      string,
+      { title?: string; unit?: string; subtitle?: string; note?: string; seoTitle?: string; description?: string; yearFormat?: string } | undefined
+    >
+  )[key];
   let f;
   try {
     f = await fetchRankingValues(key);
@@ -54,7 +73,7 @@ async function factLine(key: string): Promise<string | null> {
   }
   const rows = f.values
     .filter((v): v is { code5: string; value: number } => v.value !== null)
-    .map((v) => ({ name: PREFECTURE_BY_CODE5.get(v.code5)?.name ?? v.code5, value: v.value }))
+    .map((v) => ({ code5: v.code5, name: PREFECTURE_BY_CODE5.get(v.code5)?.name ?? v.code5, value: v.value }))
     .sort((a, b) => b.value - a.value);
   if (rows.length < 20) return null;
   const avg = rows.reduce((s, r) => s + r.value, 0) / rows.length;
@@ -68,12 +87,30 @@ async function factLine(key: string): Promise<string | null> {
   for (let i = 0; i < rows.length; i++) {
     ranks.push(i > 0 && rows[i].value === rows[i - 1].value ? ranks[i - 1] : i + 1);
   }
-  const top3 = rows.slice(0, 3).map((r, i) => `${ranks[i]}位 ${r.name} ${fmt(r.value)}${unit}`).join(" / ");
+  // 定義を渡さないと書き手が推測で補う (2026-11-14: 物価の指数を「買い物の値段」「住宅ローンではない」と書いた原稿が出た)
+  const cautions = [
+    ...(cfg?.description ? [`定義: ${cfg.description}`] : []),
+    ...([cfg?.seoTitle, cfg?.description].some((s) => s?.includes("県庁所在市")) ? ["県庁所在市の値 (県全域の値ではない)"] : []),
+    ...(cfg?.note ? [cfg.note] : []),
+  ];
+  // 年の書き方は書籍の全県表 (full-tables.ts) と同じく指標の定義で決める。サイトの R2 の yearName は
+  // 暦年の指標でも「年度」と出ることがある (2026-11-14 の K-S3-08 レビューで判明) ので使わない
+  const year = `${f.year}${cfg?.yearFormat === "fiscal" ? "年度" : "年"}`;
+  return { title, unit, year, avg, rows: rows.map((r, i) => ({ ...r, rank: ranks[i] })), cautions };
+}
+
+/** 1 指標の「本文で使ってよい事実」を実データから組む。 */
+async function factLine(key: string): Promise<string | null> {
+  const m = await rankedMetric(key);
+  if (!m) return null;
+  const { title, unit, avg, rows } = m;
+  const ranks = rows.map((r) => r.rank);
+  const top3 =rows.slice(0, 3).map((r, i) => `${ranks[i]}位 ${r.name} ${fmt(r.value)}${unit}`).join(" / ");
   const bot3 = rows
     .slice(-3)
     .map((r, i) => `${ranks[rows.length - 3 + i]}位 ${r.name} ${fmt(r.value)}${unit}`)
     .join(" / ");
-  return `- **${title}**（${f.year}年）: ${top3} … ${bot3} / 全国平均 ${fmt(avg)}${unit}`;
+  return `- **${title}**（${m.year}）: ${top3} … ${bot3} / 47都道府県の単純平均 ${fmt(avg)}${unit}`;
 }
 
 /** 書籍 1 冊のブリーフ本文を組む。 */
@@ -87,6 +124,8 @@ async function buildBrief(bookId: string, concurrency: number): Promise<string> 
     const batch = keys.slice(i, i + concurrency);
     for (const line of await Promise.all(batch.map(factLine))) if (line) facts.push(line);
   }
+
+  if (isPrefectureGuide(book)) return buildPrefectureGuideBrief(book, keys, facts, concurrency);
 
   const isRegion = bookId.startsWith("K-S3-");
   const chapters = isRegion
@@ -149,6 +188,94 @@ ${facts.join("\n")}
 - 上のリストに無い数値を書かない (全国平均・順位・値のいずれも)
 - 「約」を付けて範囲を曖昧にして未確認の数字を出さない
 - 出典を「政府統計」以上に特定しない (個別の調査名は metric config が持つ)
+`;
+}
+
+/**
+ * 型「1県1章のガイド」のブリーフ。章立てはカタログの fresh 章から作り、
+ * 地方の県ごとの値と全国順位 (同値同順位・高い順) を指標ごとに焼き込む。
+ */
+async function buildPrefectureGuideBrief(
+  book: (typeof KINDLE_BOOKS)[number],
+  keys: readonly string[],
+  facts: readonly string[],
+  concurrency: number,
+): Promise<string> {
+  const codes = book.chapters.find((c) => c.source === "ranking")?.highlightCodes ?? [];
+  if (codes.length === 0) throw new Error(`${book.id}: ranking 章に地方の県コードが無い`);
+  const regionLines: string[] = [];
+  for (let i = 0; i < keys.length; i += concurrency) {
+    const batch = keys.slice(i, i + concurrency);
+    for (const m of await Promise.all(batch.map(rankedMetric))) {
+      if (!m) continue;
+      const inRegion = codes
+        .map((code) => m.rows.find((r) => r.code5 === code))
+        .filter((r): r is RankedMetric["rows"][number] => r !== undefined)
+        .map((r) => `${r.name} ${fmt(r.value)}${m.unit}（全国${r.rank}位）`);
+      // 「全国平均」と書くと全国の値と取り違える (物価の指数は全国=100 なのに平均は 98.99) ので、単純平均と名乗る
+      const caution = m.cautions.length > 0 ? ` ／ ⚠ ${m.cautions.map((c) => c.replace(/。$/, "")).join("。")}` : "";
+      regionLines.push(`- **${m.title}**（${m.year}）: ${inRegion.join(" / ")} ／ 47都道府県の単純平均 ${fmt(m.avg)}${m.unit}${caution}`);
+    }
+  }
+  const files = book.chapters
+    .filter((c) => c.source === "fresh" && c.freshFile)
+    .map((c) => ({ file: posix.basename(c.freshFile as string), title: c.title }))
+    .map((c) => ({ ...c, spec: prefectureGuideChapterSpec(c.file) }));
+  const unknown = files.filter((c) => !c.spec).map((c) => c.file);
+  if (unknown.length > 0) throw new Error(`${book.id}: 目安の無い書き下ろし章 ${unknown.join(", ")} (prefecture-guide.ts に足す)`);
+  const total = files.reduce((s, c) => s + (c.spec?.target ?? 0), 0);
+  const d = book.design;
+
+  return `# 執筆ブリーフ: ${book.id} ${book.title}
+
+> このファイルは \`build-fresh-briefs.mts\` が実データから機械生成したものです。
+> **本文に書いてよい数値は下の「地方の県の値」と「全国の上位・下位」だけ**です。ここに無い数値を書くと
+> \`verify-fresh\` / \`audit-book-facts\` が SSOT と突合して弾きます (捏造防止)。
+
+## 書籍の性格
+
+- **書名**: ${book.title}${book.subtitle ? ` — ${book.subtitle}` : ""}
+- **読者の悩み**: ${d?.readerProblem ?? "(design 未設定)"}
+- **支払う理由**: ${d?.valueAndPayReason ?? "(design 未設定)"}
+- **本文の型**: ${d?.bodyPatterns.join("・") ?? "-"}
+- **価格**: ${book.priceYen}円
+
+## 書くファイル (${files.length} 本 / 合計 約${total.toLocaleString()}字)
+
+配置先: \`packages/product-factory/src/channels/kindle/manuscripts/${book.id}/\`
+
+| ファイル | 目安字数 | 章タイトル | 内容 |
+|---|---|---|---|
+${files.map((c) => `| \`${c.file}\` | ${c.spec?.target.toLocaleString()}字 | ${c.title} | ${c.spec?.brief} |`).join("\n")}
+
+## 文体 (K-S1 系列に合わせる)
+
+- **ですます調**。断定を避けず、しかし推測は推測と明示する
+- 読者に語りかける。「転勤の辞令を受けて、まず家賃を調べた人も多いはずです」のような具体から入る
+- **漢数字を使わない** (算用数字に統一。「一位」ではなく「1位」)
+- 見出しは \`#\` (章題) と \`##\` (節) のみ。\`###\` 以下は使わない
+- 「ワースト」「衝撃」「激減」などの煽り語を使わない
+- 相関を因果と書かない。「〜が原因で」ではなく「〜と関係している可能性があります」
+- 順位は「高い順」の全国順位。数値が高いことを良い・悪いと決めつけない (物価・犯罪は低い方が暮らしやすいと読む人が多い、という書き方にとどめる)
+- 数値には年を添える。年が違う指標を同じ年の姿として並べない
+- 「47都道府県の単純平均」を「全国平均」「全国の値」と書かない。比べるなら「47都道府県の平均」と書く
+- ⚠ の付いた指標は、その注意を本文にも書く (県庁所在市の値を県全体の暮らしとして書かない)
+- 1つの県を勧める・けなす書き方をしない。「〜を重視する人には」の形で書く
+
+## 地方の県の値 (${book.chapters.find((c) => c.source === "ranking")?.highlightRegionLabel ?? ""}・R2 の実データ・${regionLines.length} 指標)
+
+${regionLines.join("\n")}
+
+## 全国の上位・下位 (${facts.length} 指標)
+
+${facts.join("\n")}
+
+## 禁止
+
+- 上のリストに無い数値を書かない (値・順位・全国平均のいずれも)。県の人口・面積・観光の数字なども書かない
+- 「約」を付けて範囲を曖昧にして未確認の数字を出さない
+- 出典を「政府統計」以上に特定しない (個別の調査名は metric config が持つ)
+- 県民性・方言・食べ物など、統計に無い事柄を事実として書かない
 `;
 }
 

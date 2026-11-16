@@ -115,6 +115,21 @@ describe("ranking slug redirect の整合性", () => {
   });
 });
 
+describe("市区町村ランキングの slug redirect の整合性", () => {
+  it("転送先が公開中の市区町村ランキングで、転送元は非公開 (公開中のページを転送で隠さない)", async () => {
+    const { MUNICIPALITY_RANKING_SLUG_REDIRECTS } = await import("@/config/municipality-ranking-redirects");
+    const { KNOWN_MUNICIPALITY_RANKING_KEYS } = await import("@stats47/data-configs/geo-scope");
+    const invalid = Object.entries(MUNICIPALITY_RANKING_SLUG_REDIRECTS).filter(
+      ([source, destination]) =>
+        source === destination ||
+        !KNOWN_MUNICIPALITY_RANKING_KEYS.has(destination) ||
+        KNOWN_MUNICIPALITY_RANKING_KEYS.has(source),
+    );
+
+    expect(invalid).toEqual([]);
+  });
+});
+
 describe("tag キーリスト集合整合性 (ranking と同型のドリフト防御)", () => {
   it("GONE_TAG ∩ KNOWN_TAG = ∅（410 対象タグが配信中リストに存在しない）", () => {
     const conflict = intersection(GONE_TAG_KEYS, KNOWN_TAG_KEYS);

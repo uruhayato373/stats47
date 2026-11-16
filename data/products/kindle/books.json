@@ -1441,7 +1441,7 @@
         "データブック",
         "統計"
       ],
-      "status": "generated"
+      "status": "planned"
     },
     "K-S2-02": {
       "series": "S2-theme-databook",
@@ -1502,7 +1502,7 @@
         "データブック",
         "統計"
       ],
-      "status": "generated"
+      "status": "planned"
     },
     "K-S2-03": {
       "series": "S2-theme-databook",
@@ -1624,7 +1624,7 @@
         "データブック",
         "統計"
       ],
-      "status": "generated"
+      "status": "planned"
     },
     "K-S2-05": {
       "series": "S2-theme-databook",
@@ -1685,7 +1685,7 @@
         "データブック",
         "統計"
       ],
-      "status": "generated"
+      "status": "planned"
     },
     "K-S2-06": {
       "series": "S2-theme-databook",
@@ -1746,7 +1746,7 @@
         "データブック",
         "統計"
       ],
-      "status": "generated"
+      "status": "planned"
     },
     "K-S2-07": {
       "series": "S2-theme-databook",
@@ -1807,7 +1807,7 @@
         "データブック",
         "統計"
       ],
-      "status": "generated"
+      "status": "planned"
     },
     "K-S2-08": {
       "series": "S2-theme-databook",
@@ -1868,7 +1868,7 @@
         "データブック",
         "統計"
       ],
-      "status": "generated"
+      "status": "planned"
     },
     "K-S2-09": {
       "series": "S2-theme-databook",
@@ -1929,7 +1929,7 @@
         "データブック",
         "統計"
       ],
-      "status": "generated"
+      "status": "planned"
     },
     "K-S2-10": {
       "series": "S2-theme-databook",
@@ -1990,7 +1990,7 @@
         "データブック",
         "統計"
       ],
-      "status": "generated"
+      "status": "planned"
     },
     "K-S2-11": {
       "series": "S2-theme-databook",
@@ -2051,7 +2051,7 @@
         "データブック",
         "統計"
       ],
-      "status": "generated"
+      "status": "planned"
     },
     "K-S2-12": {
       "series": "S2-theme-databook",
@@ -2173,446 +2173,767 @@
         "データブック",
         "統計"
       ],
-      "status": "generated"
+      "status": "planned"
     },
     "K-S3-02": {
       "series": "S3-region",
-      "title": "東北データブック — 統計で読む県の横顔",
-      "concept": "東北の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。",
+      "title": "東北 移住の県選びデータブック",
+      "subtitle": "物価・仕事・住まい・子育て・医療・安全を6県で比べる",
+      "concept": "東北の6県を、移住・転勤で住む県を選ぶ人の判断軸 (暮らしの費用・仕事・住まい・子育てと医療・安全・将来の人口) の同じ14指標で並べ、1県1章で県ごとの暮らしの姿を読む。",
+      "design": {
+        "readerProblem": "転勤の辞令や移住の検討で東北のどこかに住むことになりそうだが、県ごとの物価・仕事の見つけやすさ・家の広さ・保育や病院の多さがどう違うのか分からず、イメージや評判だけで選んでしまいそうで不安だ。",
+        "harm": [
+          "M"
+        ],
+        "harmReason": "住む県の選択は家計 (物価・収入・住居費) の判断に直結する。子育て・医療は家計と暮らしの条件として扱い、転職の意思決定 (A) は扱わない",
+        "valueAndPayReason": "無料 (stats47.jp) では指標ごとのランキングと県ごとのデータブックを個別に見られる。本書は移住の判断に使う14指標を6県で同じ物差しにそろえ、県ごとの章で「この県に住むと何が楽で何が大変か」を、年・地域の範囲・分母の違いを混ぜずに読む。支払う理由は、6県×14指標を自分で突き合わせる時間と、県庁所在市の値と県全域の値の取り違えを避けられること。",
+        "demandEvidence": "未検証: サイトの検索では「住みやすい県ランキング」系の語が全国で28日に表示4,955回 (2026-W44、data/gsc/snapshots)、東北の県ページの検索クリックは28日で175 (同週) あるが、Kindle での購入需要は未計測。同じ型の1冊目 K-S3-08 (九州・沖縄) も未公開。次の検証 = 公開日から8週の販売数と KENP を products:sales へ記録し、収益化戦略 §3.4 で型の継続を判定する。",
+        "titleCandidates": [
+          {
+            "type": "検索・選択",
+            "title": "東北 移住の県選びデータブック"
+          },
+          {
+            "type": "問い・気づき",
+            "title": "東北、住むならどの県か — 6県を統計で比べる"
+          }
+        ],
+        "bodyPatterns": [
+          "悩み直撃型",
+          "比較型",
+          "ケーススタディ型"
+        ]
+      },
       "author": "stats47",
       "chapters": [
         {
           "title": "はじめに",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-02/00-intro.md",
-          "freshText": "# はじめに — 東北を、統計の地図で読む\n\n本書は、東北の各県が、人口・経済・暮らし・産業・余暇といったさまざまな分野で、全国のなかでどのような位置にあるのかを、統計から読み解く一冊です。\n\n私たちは、自分の住む県や隣の県について、なんとなくのイメージを持っています。「あの県は米どころだ」「この県は工業が盛んだ」といった具合です。そうしたイメージは、多くの場合それなりに当たっているものですが、数字で確かめてみると、思っていたのとは違う顔が見えてくることも少なくありません。イメージのなかでは目立たなかった県が、ある指標では全国上位に食い込んでいたり、逆に「豊かな県」と思っていたところが、暮らしのある側面では厳しい数字を抱えていたりします。\n\n本書のねらいは、そうした「なんとなくのイメージ」を、公的統計という共通の物差しで確かめ直すことにあります。各分野の主要な指標について、まず全国の上位五県・下位五県のランキングを示し、そのうえで東北の県のなかではどの県がもっとも上位にあるのかを添えました。全国という広い物差しと、東北という地域のなかでの相対的な位置。この二つの視点を重ねると、それぞれの県の横顔が、より立体的に浮かび上がってきます。\n\n## この本の読み方\n\n各項目には、上位五県と下位五県を並べた図と、1位・最下位の県名と数値、両者の格差、そして全国平均を添えています。まず図で全国の落差の大きさをつかみ、次に東北の県がそのなかでどのあたりに位置するかを確認する——この順番で読み進めると、地域の特徴がつかみやすくなります。\n\nなお、ある指標で上位だからといって、それが単純に「良い」ことを意味するとは限りませんし、下位だから「悪い」わけでもありません。統計の数字は、その県に暮らす人々の生活や、地理・歴史・産業構造といった背景が重なった結果として現れるものです。順位の上下だけを追うのではなく、その裏側にある事情を想像しながら読んでいただければ幸いです。\n\n数値はすべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて並べ直したものです。書籍のために数字を作ったり、独自に推計したりはしていません。それでは、東北の県々を、数字の地図とともにめぐっていきましょう。"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-02/00-intro.md"
         },
         {
-          "title": "第1章 地域データの読み方",
+          "title": "第1章 県を比べる前に知っておくこと",
           "source": "fresh",
           "freshFile": "src/channels/kindle/manuscripts/K-S3-02/10-how-to-read.md"
         },
         {
-          "title": "東北の県は全国でどこに位置するか",
+          "title": "第2章 6県を14の物差しで並べる",
           "source": "ranking",
           "highlightRegionLabel": "東北",
           "regionBlockLabel": "北海道・東北"
         },
         {
-          "title": "県別プロフィール（前半）",
+          "title": "第3章 青森県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-02/20-profile-a.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-02/21-aomori.md"
         },
         {
-          "title": "県別プロフィール（後半）",
+          "title": "第4章 岩手県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-02/30-profile-b.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-02/22-iwate.md"
         },
         {
-          "title": "地域内の落差を読む",
+          "title": "第5章 宮城県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-02/40-inside-gap.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-02/23-miyagi.md"
         },
         {
-          "title": "全国の中でのこの地域",
+          "title": "第6章 秋田県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-02/50-national-position.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-02/24-akita.md"
         },
         {
-          "title": "終章",
+          "title": "第7章 山形県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-02/90-synthesis.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-02/25-yamagata.md"
+        },
+        {
+          "title": "第8章 福島県に住む",
+          "source": "fresh",
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-02/26-fukushima.md"
+        },
+        {
+          "title": "第9章 目的別に県を選ぶ",
+          "source": "fresh",
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-02/80-by-purpose.md"
+        },
+        {
+          "title": "おわりに",
+          "source": "fresh",
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-02/90-closing.md"
         }
       ],
+      "fullTables": true,
       "priceYen": 500,
-      "newContentNote": "地域の概説・図表の見方・出典補章 (書き下ろし) + e-Stat 観測値から生成した幅広い分野のランキング (全国 上位5+下位5・格差・全国平均・地域内最上位県)。",
+      "newContentNote": "はじめに・比べ方の章・6県の県別章・目的別の選び方・おわりに (書き下ろし) + 移住の判断に使う14指標の全国ランキングと東北の6県の位置 (stats47.jp で公開済みの解説から、数値照合を通した段落だけを採用)。",
       "sourceIdeas": [
-        "kindle:region-databook"
+        "kindle:region-databook",
+        "kindle:prefecture-guide"
       ],
       "keywords": [
-        "都道府県",
-        "東北",
-        "地域",
-        "データブック",
-        "統計"
+        "東北 移住",
+        "県選び",
+        "住みやすさ",
+        "物価",
+        "子育て",
+        "転勤",
+        "都道府県 統計"
       ],
       "status": "generated"
     },
     "K-S3-03": {
       "series": "S3-region",
-      "title": "関東データブック — 統計で読む県の横顔",
-      "concept": "関東の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。",
+      "title": "関東 移住の県選びデータブック",
+      "subtitle": "物価・仕事・住まい・子育て・医療・安全を1都6県で比べる",
+      "concept": "関東の1都6県を、移住・転勤で住む県を選ぶ人の判断軸 (暮らしの費用・仕事・住まい・子育てと医療・安全・将来の人口) の同じ14指標で並べ、1県1章で県ごとの暮らしの姿を読む。",
+      "design": {
+        "readerProblem": "転勤の辞令や移住の検討で関東のどこかに住むことになりそうだが、県ごとの物価・仕事の見つけやすさ・家の広さ・保育や病院の多さがどう違うのか分からず、イメージや評判だけで選んでしまいそうで不安だ。",
+        "harm": [
+          "M"
+        ],
+        "harmReason": "住む県の選択は家計 (物価・収入・住居費) の判断に直結する。子育て・医療は家計と暮らしの条件として扱い、転職の意思決定 (A) は扱わない",
+        "valueAndPayReason": "無料 (stats47.jp) では指標ごとのランキングと県ごとのデータブックを個別に見られる。本書は移住の判断に使う14指標を1都6県で同じ物差しにそろえ、県ごとの章で「この県に住むと何が楽で何が大変か」を、年・地域の範囲・分母の違いを混ぜずに読む。支払う理由は、1都6県×14指標を自分で突き合わせる時間と、県庁所在市の値と県全域の値の取り違えを避けられること。",
+        "demandEvidence": "未検証: サイトの検索では「住みやすい県ランキング」系の語が全国で28日に表示4,955回 (2026-W44、data/gsc/snapshots)、関東の県ページの検索クリックは28日で264 (同週) あるが、Kindle での購入需要は未計測。同じ型の1冊目 K-S3-08 (九州・沖縄) も未公開。次の検証 = 公開日から8週の販売数と KENP を products:sales へ記録し、収益化戦略 §3.4 で型の継続を判定する。",
+        "titleCandidates": [
+          {
+            "type": "検索・選択",
+            "title": "関東 移住の県選びデータブック"
+          },
+          {
+            "type": "問い・気づき",
+            "title": "関東、住むならどの県か — 1都6県を統計で比べる"
+          }
+        ],
+        "bodyPatterns": [
+          "悩み直撃型",
+          "比較型",
+          "ケーススタディ型"
+        ]
+      },
       "author": "stats47",
       "chapters": [
         {
           "title": "はじめに",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-03/00-intro.md",
-          "freshText": "# はじめに — 関東を、統計の地図で読む\n\n本書は、関東の各県が、人口・経済・暮らし・産業・余暇といったさまざまな分野で、全国のなかでどのような位置にあるのかを、統計から読み解く一冊です。\n\n私たちは、自分の住む県や隣の県について、なんとなくのイメージを持っています。「あの県は米どころだ」「この県は工業が盛んだ」といった具合です。そうしたイメージは、多くの場合それなりに当たっているものですが、数字で確かめてみると、思っていたのとは違う顔が見えてくることも少なくありません。イメージのなかでは目立たなかった県が、ある指標では全国上位に食い込んでいたり、逆に「豊かな県」と思っていたところが、暮らしのある側面では厳しい数字を抱えていたりします。\n\n本書のねらいは、そうした「なんとなくのイメージ」を、公的統計という共通の物差しで確かめ直すことにあります。各分野の主要な指標について、まず全国の上位五県・下位五県のランキングを示し、そのうえで関東の県のなかではどの県がもっとも上位にあるのかを添えました。全国という広い物差しと、関東という地域のなかでの相対的な位置。この二つの視点を重ねると、それぞれの県の横顔が、より立体的に浮かび上がってきます。\n\n## この本の読み方\n\n各項目には、上位五県と下位五県を並べた図と、1位・最下位の県名と数値、両者の格差、そして全国平均を添えています。まず図で全国の落差の大きさをつかみ、次に関東の県がそのなかでどのあたりに位置するかを確認する——この順番で読み進めると、地域の特徴がつかみやすくなります。\n\nなお、ある指標で上位だからといって、それが単純に「良い」ことを意味するとは限りませんし、下位だから「悪い」わけでもありません。統計の数字は、その県に暮らす人々の生活や、地理・歴史・産業構造といった背景が重なった結果として現れるものです。順位の上下だけを追うのではなく、その裏側にある事情を想像しながら読んでいただければ幸いです。\n\n数値はすべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて並べ直したものです。書籍のために数字を作ったり、独自に推計したりはしていません。それでは、関東の県々を、数字の地図とともにめぐっていきましょう。"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-03/00-intro.md"
         },
         {
-          "title": "第1章 地域データの読み方",
+          "title": "第1章 県を比べる前に知っておくこと",
           "source": "fresh",
           "freshFile": "src/channels/kindle/manuscripts/K-S3-03/10-how-to-read.md"
         },
         {
-          "title": "関東の県は全国でどこに位置するか",
+          "title": "第2章 1都6県を14の物差しで並べる",
           "source": "ranking",
           "highlightRegionLabel": "関東",
           "regionBlockLabel": "関東"
         },
         {
-          "title": "県別プロフィール（前半）",
+          "title": "第3章 茨城県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-03/20-profile-a.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-03/21-ibaraki.md"
         },
         {
-          "title": "県別プロフィール（後半）",
+          "title": "第4章 栃木県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-03/30-profile-b.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-03/22-tochigi.md"
         },
         {
-          "title": "地域内の落差を読む",
+          "title": "第5章 群馬県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-03/40-inside-gap.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-03/23-gunma.md"
         },
         {
-          "title": "全国の中でのこの地域",
+          "title": "第6章 埼玉県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-03/50-national-position.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-03/24-saitama.md"
         },
         {
-          "title": "終章",
+          "title": "第7章 千葉県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-03/90-synthesis.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-03/25-chiba.md"
+        },
+        {
+          "title": "第8章 東京都に住む",
+          "source": "fresh",
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-03/26-tokyo.md"
+        },
+        {
+          "title": "第9章 神奈川県に住む",
+          "source": "fresh",
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-03/27-kanagawa.md"
+        },
+        {
+          "title": "第10章 目的別に県を選ぶ",
+          "source": "fresh",
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-03/80-by-purpose.md"
+        },
+        {
+          "title": "おわりに",
+          "source": "fresh",
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-03/90-closing.md"
         }
       ],
+      "fullTables": true,
       "priceYen": 500,
-      "newContentNote": "地域の概説・図表の見方・出典補章 (書き下ろし) + e-Stat 観測値から生成した幅広い分野のランキング (全国 上位5+下位5・格差・全国平均・地域内最上位県)。",
+      "newContentNote": "はじめに・比べ方の章・1都6県の県別章・目的別の選び方・おわりに (書き下ろし) + 移住の判断に使う14指標の全国ランキングと関東の1都6県の位置 (stats47.jp で公開済みの解説から、数値照合を通した段落だけを採用)。",
       "sourceIdeas": [
-        "kindle:region-databook"
+        "kindle:region-databook",
+        "kindle:prefecture-guide"
       ],
       "keywords": [
-        "都道府県",
-        "関東",
-        "地域",
-        "データブック",
-        "統計"
+        "関東 移住",
+        "県選び",
+        "住みやすさ",
+        "物価",
+        "子育て",
+        "転勤",
+        "都道府県 統計"
       ],
       "status": "generated"
     },
     "K-S3-04": {
       "series": "S3-region",
-      "title": "中部データブック — 統計で読む県の横顔",
-      "concept": "中部の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。",
+      "title": "中部 移住の県選びデータブック",
+      "subtitle": "物価・仕事・住まい・子育て・医療・安全を9県で比べる",
+      "concept": "中部の9県を、移住・転勤で住む県を選ぶ人の判断軸 (暮らしの費用・仕事・住まい・子育てと医療・安全・将来の人口) の同じ14指標で並べ、1県1章で県ごとの暮らしの姿を読む。",
+      "design": {
+        "readerProblem": "転勤の辞令や移住の検討で中部のどこかに住むことになりそうだが、県ごとの物価・仕事の見つけやすさ・家の広さ・保育や病院の多さがどう違うのか分からず、イメージや評判だけで選んでしまいそうで不安だ。",
+        "harm": [
+          "M"
+        ],
+        "harmReason": "住む県の選択は家計 (物価・収入・住居費) の判断に直結する。子育て・医療は家計と暮らしの条件として扱い、転職の意思決定 (A) は扱わない",
+        "valueAndPayReason": "無料 (stats47.jp) では指標ごとのランキングと県ごとのデータブックを個別に見られる。本書は移住の判断に使う14指標を9県で同じ物差しにそろえ、県ごとの章で「この県に住むと何が楽で何が大変か」を、年・地域の範囲・分母の違いを混ぜずに読む。支払う理由は、9県×14指標を自分で突き合わせる時間と、県庁所在市の値と県全域の値の取り違えを避けられること。",
+        "demandEvidence": "未検証: サイトの検索では「住みやすい県ランキング」系の語が全国で28日に表示4,955回 (2026-W44、data/gsc/snapshots)、中部の県ページの検索クリックは28日で266 (同週) あるが、Kindle での購入需要は未計測。同じ型の1冊目 K-S3-08 (九州・沖縄) も未公開。次の検証 = 公開日から8週の販売数と KENP を products:sales へ記録し、収益化戦略 §3.4 で型の継続を判定する。",
+        "titleCandidates": [
+          {
+            "type": "検索・選択",
+            "title": "中部 移住の県選びデータブック"
+          },
+          {
+            "type": "問い・気づき",
+            "title": "中部、住むならどの県か — 9県を統計で比べる"
+          }
+        ],
+        "bodyPatterns": [
+          "悩み直撃型",
+          "比較型",
+          "ケーススタディ型"
+        ]
+      },
       "author": "stats47",
       "chapters": [
         {
           "title": "はじめに",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-04/00-intro.md",
-          "freshText": "# はじめに — 中部を、統計の地図で読む\n\n本書は、中部の各県が、人口・経済・暮らし・産業・余暇といったさまざまな分野で、全国のなかでどのような位置にあるのかを、統計から読み解く一冊です。\n\n私たちは、自分の住む県や隣の県について、なんとなくのイメージを持っています。「あの県は米どころだ」「この県は工業が盛んだ」といった具合です。そうしたイメージは、多くの場合それなりに当たっているものですが、数字で確かめてみると、思っていたのとは違う顔が見えてくることも少なくありません。イメージのなかでは目立たなかった県が、ある指標では全国上位に食い込んでいたり、逆に「豊かな県」と思っていたところが、暮らしのある側面では厳しい数字を抱えていたりします。\n\n本書のねらいは、そうした「なんとなくのイメージ」を、公的統計という共通の物差しで確かめ直すことにあります。各分野の主要な指標について、まず全国の上位五県・下位五県のランキングを示し、そのうえで中部の県のなかではどの県がもっとも上位にあるのかを添えました。全国という広い物差しと、中部という地域のなかでの相対的な位置。この二つの視点を重ねると、それぞれの県の横顔が、より立体的に浮かび上がってきます。\n\n## この本の読み方\n\n各項目には、上位五県と下位五県を並べた図と、1位・最下位の県名と数値、両者の格差、そして全国平均を添えています。まず図で全国の落差の大きさをつかみ、次に中部の県がそのなかでどのあたりに位置するかを確認する——この順番で読み進めると、地域の特徴がつかみやすくなります。\n\nなお、ある指標で上位だからといって、それが単純に「良い」ことを意味するとは限りませんし、下位だから「悪い」わけでもありません。統計の数字は、その県に暮らす人々の生活や、地理・歴史・産業構造といった背景が重なった結果として現れるものです。順位の上下だけを追うのではなく、その裏側にある事情を想像しながら読んでいただければ幸いです。\n\n数値はすべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて並べ直したものです。書籍のために数字を作ったり、独自に推計したりはしていません。それでは、中部の県々を、数字の地図とともにめぐっていきましょう。"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-04/00-intro.md"
         },
         {
-          "title": "第1章 地域データの読み方",
+          "title": "第1章 県を比べる前に知っておくこと",
           "source": "fresh",
           "freshFile": "src/channels/kindle/manuscripts/K-S3-04/10-how-to-read.md"
         },
         {
-          "title": "中部の県は全国でどこに位置するか",
+          "title": "第2章 9県を14の物差しで並べる",
           "source": "ranking",
           "highlightRegionLabel": "中部",
           "regionBlockLabel": "中部"
         },
         {
-          "title": "県別プロフィール（前半）",
+          "title": "第3章 新潟県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-04/20-profile-a.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-04/21-niigata.md"
         },
         {
-          "title": "県別プロフィール（後半）",
+          "title": "第4章 富山県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-04/30-profile-b.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-04/22-toyama.md"
         },
         {
-          "title": "地域内の落差を読む",
+          "title": "第5章 石川県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-04/40-inside-gap.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-04/23-ishikawa.md"
         },
         {
-          "title": "全国の中でのこの地域",
+          "title": "第6章 福井県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-04/50-national-position.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-04/24-fukui.md"
         },
         {
-          "title": "終章",
+          "title": "第7章 山梨県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-04/90-synthesis.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-04/25-yamanashi.md"
+        },
+        {
+          "title": "第8章 長野県に住む",
+          "source": "fresh",
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-04/26-nagano.md"
+        },
+        {
+          "title": "第9章 岐阜県に住む",
+          "source": "fresh",
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-04/27-gifu.md"
+        },
+        {
+          "title": "第10章 静岡県に住む",
+          "source": "fresh",
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-04/28-shizuoka.md"
+        },
+        {
+          "title": "第11章 愛知県に住む",
+          "source": "fresh",
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-04/29-aichi.md"
+        },
+        {
+          "title": "第12章 目的別に県を選ぶ",
+          "source": "fresh",
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-04/80-by-purpose.md"
+        },
+        {
+          "title": "おわりに",
+          "source": "fresh",
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-04/90-closing.md"
         }
       ],
+      "fullTables": true,
       "priceYen": 500,
-      "newContentNote": "地域の概説・図表の見方・出典補章 (書き下ろし) + e-Stat 観測値から生成した幅広い分野のランキング (全国 上位5+下位5・格差・全国平均・地域内最上位県)。",
+      "newContentNote": "はじめに・比べ方の章・9県の県別章・目的別の選び方・おわりに (書き下ろし) + 移住の判断に使う14指標の全国ランキングと中部の9県の位置 (stats47.jp で公開済みの解説から、数値照合を通した段落だけを採用)。",
       "sourceIdeas": [
-        "kindle:region-databook"
+        "kindle:region-databook",
+        "kindle:prefecture-guide"
       ],
       "keywords": [
-        "都道府県",
-        "中部",
-        "地域",
-        "データブック",
-        "統計"
+        "中部 移住",
+        "県選び",
+        "住みやすさ",
+        "物価",
+        "子育て",
+        "転勤",
+        "都道府県 統計"
       ],
       "status": "generated"
     },
     "K-S3-05": {
       "series": "S3-region",
-      "title": "近畿データブック — 統計で読む県の横顔",
-      "concept": "近畿の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。",
+      "title": "近畿 移住の県選びデータブック",
+      "subtitle": "物価・仕事・住まい・子育て・医療・安全を2府5県で比べる",
+      "concept": "近畿の2府5県を、移住・転勤で住む県を選ぶ人の判断軸 (暮らしの費用・仕事・住まい・子育てと医療・安全・将来の人口) の同じ14指標で並べ、1県1章で県ごとの暮らしの姿を読む。",
+      "design": {
+        "readerProblem": "転勤の辞令や移住の検討で近畿のどこかに住むことになりそうだが、県ごとの物価・仕事の見つけやすさ・家の広さ・保育や病院の多さがどう違うのか分からず、イメージや評判だけで選んでしまいそうで不安だ。",
+        "harm": [
+          "M"
+        ],
+        "harmReason": "住む県の選択は家計 (物価・収入・住居費) の判断に直結する。子育て・医療は家計と暮らしの条件として扱い、転職の意思決定 (A) は扱わない",
+        "valueAndPayReason": "無料 (stats47.jp) では指標ごとのランキングと県ごとのデータブックを個別に見られる。本書は移住の判断に使う14指標を2府5県で同じ物差しにそろえ、県ごとの章で「この県に住むと何が楽で何が大変か」を、年・地域の範囲・分母の違いを混ぜずに読む。支払う理由は、2府5県×14指標を自分で突き合わせる時間と、県庁所在市の値と県全域の値の取り違えを避けられること。",
+        "demandEvidence": "未検証: サイトの検索では「住みやすい県ランキング」系の語が全国で28日に表示4,955回 (2026-W44、data/gsc/snapshots)、近畿の県ページの検索クリックは28日で219 (同週) あるが、Kindle での購入需要は未計測。同じ型の1冊目 K-S3-08 (九州・沖縄) も未公開。次の検証 = 公開日から8週の販売数と KENP を products:sales へ記録し、収益化戦略 §3.4 で型の継続を判定する。",
+        "titleCandidates": [
+          {
+            "type": "検索・選択",
+            "title": "近畿 移住の県選びデータブック"
+          },
+          {
+            "type": "問い・気づき",
+            "title": "近畿、住むならどの県か — 2府5県を統計で比べる"
+          }
+        ],
+        "bodyPatterns": [
+          "悩み直撃型",
+          "比較型",
+          "ケーススタディ型"
+        ]
+      },
       "author": "stats47",
       "chapters": [
         {
           "title": "はじめに",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-05/00-intro.md",
-          "freshText": "# はじめに — 近畿を、統計の地図で読む\n\n本書は、近畿の各県が、人口・経済・暮らし・産業・余暇といったさまざまな分野で、全国のなかでどのような位置にあるのかを、統計から読み解く一冊です。\n\n私たちは、自分の住む県や隣の県について、なんとなくのイメージを持っています。「あの県は米どころだ」「この県は工業が盛んだ」といった具合です。そうしたイメージは、多くの場合それなりに当たっているものですが、数字で確かめてみると、思っていたのとは違う顔が見えてくることも少なくありません。イメージのなかでは目立たなかった県が、ある指標では全国上位に食い込んでいたり、逆に「豊かな県」と思っていたところが、暮らしのある側面では厳しい数字を抱えていたりします。\n\n本書のねらいは、そうした「なんとなくのイメージ」を、公的統計という共通の物差しで確かめ直すことにあります。各分野の主要な指標について、まず全国の上位五県・下位五県のランキングを示し、そのうえで近畿の県のなかではどの県がもっとも上位にあるのかを添えました。全国という広い物差しと、近畿という地域のなかでの相対的な位置。この二つの視点を重ねると、それぞれの県の横顔が、より立体的に浮かび上がってきます。\n\n## この本の読み方\n\n各項目には、上位五県と下位五県を並べた図と、1位・最下位の県名と数値、両者の格差、そして全国平均を添えています。まず図で全国の落差の大きさをつかみ、次に近畿の県がそのなかでどのあたりに位置するかを確認する——この順番で読み進めると、地域の特徴がつかみやすくなります。\n\nなお、ある指標で上位だからといって、それが単純に「良い」ことを意味するとは限りませんし、下位だから「悪い」わけでもありません。統計の数字は、その県に暮らす人々の生活や、地理・歴史・産業構造といった背景が重なった結果として現れるものです。順位の上下だけを追うのではなく、その裏側にある事情を想像しながら読んでいただければ幸いです。\n\n数値はすべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて並べ直したものです。書籍のために数字を作ったり、独自に推計したりはしていません。それでは、近畿の県々を、数字の地図とともにめぐっていきましょう。"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-05/00-intro.md"
         },
         {
-          "title": "第1章 地域データの読み方",
+          "title": "第1章 県を比べる前に知っておくこと",
           "source": "fresh",
           "freshFile": "src/channels/kindle/manuscripts/K-S3-05/10-how-to-read.md"
         },
         {
-          "title": "近畿の県は全国でどこに位置するか",
+          "title": "第2章 2府5県を14の物差しで並べる",
           "source": "ranking",
           "highlightRegionLabel": "近畿",
           "regionBlockLabel": "近畿"
         },
         {
-          "title": "県別プロフィール（前半）",
+          "title": "第3章 三重県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-05/20-profile-a.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-05/21-mie.md"
         },
         {
-          "title": "県別プロフィール（後半）",
+          "title": "第4章 滋賀県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-05/30-profile-b.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-05/22-shiga.md"
         },
         {
-          "title": "地域内の落差を読む",
+          "title": "第5章 京都府に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-05/40-inside-gap.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-05/23-kyoto.md"
         },
         {
-          "title": "全国の中でのこの地域",
+          "title": "第6章 大阪府に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-05/50-national-position.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-05/24-osaka.md"
         },
         {
-          "title": "終章",
+          "title": "第7章 兵庫県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-05/90-synthesis.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-05/25-hyogo.md"
+        },
+        {
+          "title": "第8章 奈良県に住む",
+          "source": "fresh",
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-05/26-nara.md"
+        },
+        {
+          "title": "第9章 和歌山県に住む",
+          "source": "fresh",
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-05/27-wakayama.md"
+        },
+        {
+          "title": "第10章 目的別に県を選ぶ",
+          "source": "fresh",
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-05/80-by-purpose.md"
+        },
+        {
+          "title": "おわりに",
+          "source": "fresh",
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-05/90-closing.md"
         }
       ],
+      "fullTables": true,
       "priceYen": 500,
-      "newContentNote": "地域の概説・図表の見方・出典補章 (書き下ろし) + e-Stat 観測値から生成した幅広い分野のランキング (全国 上位5+下位5・格差・全国平均・地域内最上位県)。",
+      "newContentNote": "はじめに・比べ方の章・2府5県の県別章・目的別の選び方・おわりに (書き下ろし) + 移住の判断に使う14指標の全国ランキングと近畿の2府5県の位置 (stats47.jp で公開済みの解説から、数値照合を通した段落だけを採用)。",
       "sourceIdeas": [
-        "kindle:region-databook"
+        "kindle:region-databook",
+        "kindle:prefecture-guide"
       ],
       "keywords": [
-        "都道府県",
-        "近畿",
-        "地域",
-        "データブック",
-        "統計"
+        "近畿 移住",
+        "県選び",
+        "住みやすさ",
+        "物価",
+        "子育て",
+        "転勤",
+        "都道府県 統計"
       ],
       "status": "generated"
     },
     "K-S3-06": {
       "series": "S3-region",
-      "title": "中国データブック — 統計で読む県の横顔",
-      "concept": "中国の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。",
+      "title": "中国 移住の県選びデータブック",
+      "subtitle": "物価・仕事・住まい・子育て・医療・安全を5県で比べる",
+      "concept": "中国の5県を、移住・転勤で住む県を選ぶ人の判断軸 (暮らしの費用・仕事・住まい・子育てと医療・安全・将来の人口) の同じ14指標で並べ、1県1章で県ごとの暮らしの姿を読む。",
+      "design": {
+        "readerProblem": "転勤の辞令や移住の検討で中国のどこかに住むことになりそうだが、県ごとの物価・仕事の見つけやすさ・家の広さ・保育や病院の多さがどう違うのか分からず、イメージや評判だけで選んでしまいそうで不安だ。",
+        "harm": [
+          "M"
+        ],
+        "harmReason": "住む県の選択は家計 (物価・収入・住居費) の判断に直結する。子育て・医療は家計と暮らしの条件として扱い、転職の意思決定 (A) は扱わない",
+        "valueAndPayReason": "無料 (stats47.jp) では指標ごとのランキングと県ごとのデータブックを個別に見られる。本書は移住の判断に使う14指標を5県で同じ物差しにそろえ、県ごとの章で「この県に住むと何が楽で何が大変か」を、年・地域の範囲・分母の違いを混ぜずに読む。支払う理由は、5県×14指標を自分で突き合わせる時間と、県庁所在市の値と県全域の値の取り違えを避けられること。",
+        "demandEvidence": "未検証: サイトの検索では「住みやすい県ランキング」系の語が全国で28日に表示4,955回 (2026-W44、data/gsc/snapshots)、中国の県ページの検索クリックは28日で120 (同週) あるが、Kindle での購入需要は未計測。同じ型の1冊目 K-S3-08 (九州・沖縄) も未公開。次の検証 = 公開日から8週の販売数と KENP を products:sales へ記録し、収益化戦略 §3.4 で型の継続を判定する。",
+        "titleCandidates": [
+          {
+            "type": "検索・選択",
+            "title": "中国 移住の県選びデータブック"
+          },
+          {
+            "type": "問い・気づき",
+            "title": "中国、住むならどの県か — 5県を統計で比べる"
+          }
+        ],
+        "bodyPatterns": [
+          "悩み直撃型",
+          "比較型",
+          "ケーススタディ型"
+        ]
+      },
       "author": "stats47",
       "chapters": [
         {
           "title": "はじめに",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-06/00-intro.md",
-          "freshText": "# はじめに — 中国を、統計の地図で読む\n\n本書は、中国の各県が、人口・経済・暮らし・産業・余暇といったさまざまな分野で、全国のなかでどのような位置にあるのかを、統計から読み解く一冊です。\n\n私たちは、自分の住む県や隣の県について、なんとなくのイメージを持っています。「あの県は米どころだ」「この県は工業が盛んだ」といった具合です。そうしたイメージは、多くの場合それなりに当たっているものですが、数字で確かめてみると、思っていたのとは違う顔が見えてくることも少なくありません。イメージのなかでは目立たなかった県が、ある指標では全国上位に食い込んでいたり、逆に「豊かな県」と思っていたところが、暮らしのある側面では厳しい数字を抱えていたりします。\n\n本書のねらいは、そうした「なんとなくのイメージ」を、公的統計という共通の物差しで確かめ直すことにあります。各分野の主要な指標について、まず全国の上位五県・下位五県のランキングを示し、そのうえで中国の県のなかではどの県がもっとも上位にあるのかを添えました。全国という広い物差しと、中国という地域のなかでの相対的な位置。この二つの視点を重ねると、それぞれの県の横顔が、より立体的に浮かび上がってきます。\n\n## この本の読み方\n\n各項目には、上位五県と下位五県を並べた図と、1位・最下位の県名と数値、両者の格差、そして全国平均を添えています。まず図で全国の落差の大きさをつかみ、次に中国の県がそのなかでどのあたりに位置するかを確認する——この順番で読み進めると、地域の特徴がつかみやすくなります。\n\nなお、ある指標で上位だからといって、それが単純に「良い」ことを意味するとは限りませんし、下位だから「悪い」わけでもありません。統計の数字は、その県に暮らす人々の生活や、地理・歴史・産業構造といった背景が重なった結果として現れるものです。順位の上下だけを追うのではなく、その裏側にある事情を想像しながら読んでいただければ幸いです。\n\n数値はすべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて並べ直したものです。書籍のために数字を作ったり、独自に推計したりはしていません。それでは、中国の県々を、数字の地図とともにめぐっていきましょう。"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-06/00-intro.md"
         },
         {
-          "title": "第1章 地域データの読み方",
+          "title": "第1章 県を比べる前に知っておくこと",
           "source": "fresh",
           "freshFile": "src/channels/kindle/manuscripts/K-S3-06/10-how-to-read.md"
         },
         {
-          "title": "中国の県は全国でどこに位置するか",
+          "title": "第2章 5県を14の物差しで並べる",
           "source": "ranking",
           "highlightRegionLabel": "中国",
           "regionBlockLabel": "中国"
         },
         {
-          "title": "県別プロフィール（前半）",
+          "title": "第3章 鳥取県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-06/20-profile-a.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-06/21-tottori.md"
         },
         {
-          "title": "県別プロフィール（後半）",
+          "title": "第4章 島根県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-06/30-profile-b.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-06/22-shimane.md"
         },
         {
-          "title": "地域内の落差を読む",
+          "title": "第5章 岡山県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-06/40-inside-gap.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-06/23-okayama.md"
         },
         {
-          "title": "全国の中でのこの地域",
+          "title": "第6章 広島県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-06/50-national-position.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-06/24-hiroshima.md"
         },
         {
-          "title": "終章",
+          "title": "第7章 山口県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-06/90-synthesis.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-06/25-yamaguchi.md"
+        },
+        {
+          "title": "第8章 目的別に県を選ぶ",
+          "source": "fresh",
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-06/80-by-purpose.md"
+        },
+        {
+          "title": "おわりに",
+          "source": "fresh",
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-06/90-closing.md"
         }
       ],
+      "fullTables": true,
       "priceYen": 500,
-      "newContentNote": "地域の概説・図表の見方・出典補章 (書き下ろし) + e-Stat 観測値から生成した幅広い分野のランキング (全国 上位5+下位5・格差・全国平均・地域内最上位県)。",
+      "newContentNote": "はじめに・比べ方の章・5県の県別章・目的別の選び方・おわりに (書き下ろし) + 移住の判断に使う14指標の全国ランキングと中国の5県の位置 (stats47.jp で公開済みの解説から、数値照合を通した段落だけを採用)。",
       "sourceIdeas": [
-        "kindle:region-databook"
+        "kindle:region-databook",
+        "kindle:prefecture-guide"
       ],
       "keywords": [
-        "都道府県",
-        "中国",
-        "地域",
-        "データブック",
-        "統計"
+        "中国 移住",
+        "県選び",
+        "住みやすさ",
+        "物価",
+        "子育て",
+        "転勤",
+        "都道府県 統計"
       ],
       "status": "generated"
     },
     "K-S3-07": {
       "series": "S3-region",
-      "title": "四国データブック — 統計で読む県の横顔",
-      "concept": "四国の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。",
+      "title": "四国 移住の県選びデータブック",
+      "subtitle": "物価・仕事・住まい・子育て・医療・安全を4県で比べる",
+      "concept": "四国の4県を、移住・転勤で住む県を選ぶ人の判断軸 (暮らしの費用・仕事・住まい・子育てと医療・安全・将来の人口) の同じ14指標で並べ、1県1章で県ごとの暮らしの姿を読む。",
+      "design": {
+        "readerProblem": "転勤の辞令や移住の検討で四国のどこかに住むことになりそうだが、県ごとの物価・仕事の見つけやすさ・家の広さ・保育や病院の多さがどう違うのか分からず、イメージや評判だけで選んでしまいそうで不安だ。",
+        "harm": [
+          "M"
+        ],
+        "harmReason": "住む県の選択は家計 (物価・収入・住居費) の判断に直結する。子育て・医療は家計と暮らしの条件として扱い、転職の意思決定 (A) は扱わない",
+        "valueAndPayReason": "無料 (stats47.jp) では指標ごとのランキングと県ごとのデータブックを個別に見られる。本書は移住の判断に使う14指標を4県で同じ物差しにそろえ、県ごとの章で「この県に住むと何が楽で何が大変か」を、年・地域の範囲・分母の違いを混ぜずに読む。支払う理由は、4県×14指標を自分で突き合わせる時間と、県庁所在市の値と県全域の値の取り違えを避けられること。",
+        "demandEvidence": "未検証: サイトの検索では「住みやすい県ランキング」系の語が全国で28日に表示4,955回 (2026-W44、data/gsc/snapshots)、四国の県ページの検索クリックは28日で75 (同週) あるが、Kindle での購入需要は未計測。同じ型の1冊目 K-S3-08 (九州・沖縄) も未公開。次の検証 = 公開日から8週の販売数と KENP を products:sales へ記録し、収益化戦略 §3.4 で型の継続を判定する。",
+        "titleCandidates": [
+          {
+            "type": "検索・選択",
+            "title": "四国 移住の県選びデータブック"
+          },
+          {
+            "type": "問い・気づき",
+            "title": "四国、住むならどの県か — 4県を統計で比べる"
+          }
+        ],
+        "bodyPatterns": [
+          "悩み直撃型",
+          "比較型",
+          "ケーススタディ型"
+        ]
+      },
       "author": "stats47",
       "chapters": [
         {
           "title": "はじめに",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-07/00-intro.md",
-          "freshText": "# はじめに — 四国を、統計の地図で読む\n\n本書は、四国の各県が、人口・経済・暮らし・産業・余暇といったさまざまな分野で、全国のなかでどのような位置にあるのかを、統計から読み解く一冊です。\n\n私たちは、自分の住む県や隣の県について、なんとなくのイメージを持っています。「あの県は米どころだ」「この県は工業が盛んだ」といった具合です。そうしたイメージは、多くの場合それなりに当たっているものですが、数字で確かめてみると、思っていたのとは違う顔が見えてくることも少なくありません。イメージのなかでは目立たなかった県が、ある指標では全国上位に食い込んでいたり、逆に「豊かな県」と思っていたところが、暮らしのある側面では厳しい数字を抱えていたりします。\n\n本書のねらいは、そうした「なんとなくのイメージ」を、公的統計という共通の物差しで確かめ直すことにあります。各分野の主要な指標について、まず全国の上位五県・下位五県のランキングを示し、そのうえで四国の県のなかではどの県がもっとも上位にあるのかを添えました。全国という広い物差しと、四国という地域のなかでの相対的な位置。この二つの視点を重ねると、それぞれの県の横顔が、より立体的に浮かび上がってきます。\n\n## この本の読み方\n\n各項目には、上位五県と下位五県を並べた図と、1位・最下位の県名と数値、両者の格差、そして全国平均を添えています。まず図で全国の落差の大きさをつかみ、次に四国の県がそのなかでどのあたりに位置するかを確認する——この順番で読み進めると、地域の特徴がつかみやすくなります。\n\nなお、ある指標で上位だからといって、それが単純に「良い」ことを意味するとは限りませんし、下位だから「悪い」わけでもありません。統計の数字は、その県に暮らす人々の生活や、地理・歴史・産業構造といった背景が重なった結果として現れるものです。順位の上下だけを追うのではなく、その裏側にある事情を想像しながら読んでいただければ幸いです。\n\n数値はすべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて並べ直したものです。書籍のために数字を作ったり、独自に推計したりはしていません。それでは、四国の県々を、数字の地図とともにめぐっていきましょう。"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-07/00-intro.md"
         },
         {
-          "title": "第1章 地域データの読み方",
+          "title": "第1章 県を比べる前に知っておくこと",
           "source": "fresh",
           "freshFile": "src/channels/kindle/manuscripts/K-S3-07/10-how-to-read.md"
         },
         {
-          "title": "四国の県は全国でどこに位置するか",
+          "title": "第2章 4県を14の物差しで並べる",
           "source": "ranking",
           "highlightRegionLabel": "四国",
           "regionBlockLabel": "四国"
         },
         {
-          "title": "県別プロフィール（前半）",
+          "title": "第3章 徳島県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-07/20-profile-a.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-07/21-tokushima.md"
         },
         {
-          "title": "県別プロフィール（後半）",
+          "title": "第4章 香川県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-07/30-profile-b.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-07/22-kagawa.md"
         },
         {
-          "title": "地域内の落差を読む",
+          "title": "第5章 愛媛県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-07/40-inside-gap.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-07/23-ehime.md"
         },
         {
-          "title": "全国の中でのこの地域",
+          "title": "第6章 高知県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-07/50-national-position.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-07/24-kochi.md"
         },
         {
-          "title": "終章",
+          "title": "第7章 目的別に県を選ぶ",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-07/90-synthesis.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-07/80-by-purpose.md"
+        },
+        {
+          "title": "おわりに",
+          "source": "fresh",
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-07/90-closing.md"
         }
       ],
+      "fullTables": true,
       "priceYen": 500,
-      "newContentNote": "地域の概説・図表の見方・出典補章 (書き下ろし) + e-Stat 観測値から生成した幅広い分野のランキング (全国 上位5+下位5・格差・全国平均・地域内最上位県)。",
+      "newContentNote": "はじめに・比べ方の章・4県の県別章・目的別の選び方・おわりに (書き下ろし) + 移住の判断に使う14指標の全国ランキングと四国の4県の位置 (stats47.jp で公開済みの解説から、数値照合を通した段落だけを採用)。",
       "sourceIdeas": [
-        "kindle:region-databook"
+        "kindle:region-databook",
+        "kindle:prefecture-guide"
       ],
       "keywords": [
-        "都道府県",
-        "四国",
-        "地域",
-        "データブック",
-        "統計"
+        "四国 移住",
+        "県選び",
+        "住みやすさ",
+        "物価",
+        "子育て",
+        "転勤",
+        "都道府県 統計"
       ],
       "status": "generated"
     },
     "K-S3-08": {
       "series": "S3-region",
-      "title": "九州・沖縄データブック — 統計で読む県の横顔",
-      "concept": "九州・沖縄の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。",
+      "title": "九州・沖縄 移住の県選びデータブック",
+      "subtitle": "物価・仕事・住まい・子育て・医療・安全を8県で比べる",
+      "concept": "九州・沖縄の8県を、移住・転勤で住む県を選ぶ人の判断軸 (暮らしの費用・仕事・住まい・子育てと医療・安全・将来の人口) の同じ14指標で並べ、1県1章で県ごとの暮らしの姿を読む。",
+      "design": {
+        "readerProblem": "転勤の辞令や移住の検討で九州・沖縄のどこかに住むことになりそうだが、県ごとの物価・仕事の見つけやすさ・家の広さ・保育や病院の多さがどう違うのか分からず、イメージや観光の印象だけで選んでしまいそうで不安だ。",
+        "harm": [
+          "M"
+        ],
+        "harmReason": "住む県の選択は家計 (物価・収入・住居費) の判断に直結する。子育て・医療は家計と暮らしの条件として扱い、転職の意思決定 (A) は扱わない",
+        "valueAndPayReason": "無料 (stats47.jp) では指標ごとのランキングと県ごとのデータブックを個別に見られる。本書は移住の判断に使う14指標を8県で同じ物差しにそろえ、県ごとの章で「この県に住むと何が楽で何が大変か」を、年・地域の範囲・分母の違いを混ぜずに読む。支払う理由は、8県×14指標を自分で突き合わせる時間と、県庁所在市の値と県全域の値の取り違えを避けられること。",
+        "demandEvidence": "未検証: サイトの検索では「住みやすい県ランキング」系の語が全国で28日に表示4,955回 (2026-W44、data/gsc/snapshots)、九州の県名＋年収・物価の語は表示209回あるが、Kindle での購入需要は未計測。旧 S3 の地域データブックは出版停止前に販売実績が無く、観光・宿泊の分野本 (K-S2-03) が 2026-09 に1冊売れただけ。次の検証 = 公開日から8週の販売数と KENP を products:sales へ記録し、収益化戦略 §3.4 で型の継続を判定する。",
+        "titleCandidates": [
+          {
+            "type": "検索・選択",
+            "title": "九州・沖縄 移住の県選びデータブック"
+          },
+          {
+            "type": "問い・気づき",
+            "title": "九州・沖縄、住むならどの県か — 8県を統計で比べる"
+          }
+        ],
+        "bodyPatterns": [
+          "悩み直撃型",
+          "比較型",
+          "ケーススタディ型"
+        ]
+      },
       "author": "stats47",
       "chapters": [
         {
           "title": "はじめに",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-08/00-intro.md",
-          "freshText": "# はじめに — 九州・沖縄を、統計の地図で読む\n\n本書は、九州・沖縄の各県が、人口・経済・暮らし・産業・余暇といったさまざまな分野で、全国のなかでどのような位置にあるのかを、統計から読み解く一冊です。\n\n私たちは、自分の住む県や隣の県について、なんとなくのイメージを持っています。「あの県は米どころだ」「この県は工業が盛んだ」といった具合です。そうしたイメージは、多くの場合それなりに当たっているものですが、数字で確かめてみると、思っていたのとは違う顔が見えてくることも少なくありません。イメージのなかでは目立たなかった県が、ある指標では全国上位に食い込んでいたり、逆に「豊かな県」と思っていたところが、暮らしのある側面では厳しい数字を抱えていたりします。\n\n本書のねらいは、そうした「なんとなくのイメージ」を、公的統計という共通の物差しで確かめ直すことにあります。各分野の主要な指標について、まず全国の上位五県・下位五県のランキングを示し、そのうえで九州・沖縄の県のなかではどの県がもっとも上位にあるのかを添えました。全国という広い物差しと、九州・沖縄という地域のなかでの相対的な位置。この二つの視点を重ねると、それぞれの県の横顔が、より立体的に浮かび上がってきます。\n\n## この本の読み方\n\n各項目には、上位五県と下位五県を並べた図と、1位・最下位の県名と数値、両者の格差、そして全国平均を添えています。まず図で全国の落差の大きさをつかみ、次に九州・沖縄の県がそのなかでどのあたりに位置するかを確認する——この順番で読み進めると、地域の特徴がつかみやすくなります。\n\nなお、ある指標で上位だからといって、それが単純に「良い」ことを意味するとは限りませんし、下位だから「悪い」わけでもありません。統計の数字は、その県に暮らす人々の生活や、地理・歴史・産業構造といった背景が重なった結果として現れるものです。順位の上下だけを追うのではなく、その裏側にある事情を想像しながら読んでいただければ幸いです。\n\n数値はすべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて並べ直したものです。書籍のために数字を作ったり、独自に推計したりはしていません。それでは、九州・沖縄の県々を、数字の地図とともにめぐっていきましょう。"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-08/00-intro.md"
         },
         {
-          "title": "第1章 地域データの読み方",
+          "title": "第1章 県を比べる前に知っておくこと",
           "source": "fresh",
           "freshFile": "src/channels/kindle/manuscripts/K-S3-08/10-how-to-read.md"
         },
         {
-          "title": "九州・沖縄の県は全国でどこに位置するか",
+          "title": "第2章 8県を14の物差しで並べる",
           "source": "ranking",
           "highlightRegionLabel": "九州・沖縄",
           "regionBlockLabel": "九州"
         },
         {
-          "title": "県別プロフィール（前半）",
+          "title": "第3章 福岡県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-08/20-profile-a.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-08/21-fukuoka.md"
         },
         {
-          "title": "県別プロフィール（後半）",
+          "title": "第4章 佐賀県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-08/30-profile-b.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-08/22-saga.md"
         },
         {
-          "title": "地域内の落差を読む",
+          "title": "第5章 長崎県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-08/40-inside-gap.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-08/23-nagasaki.md"
         },
         {
-          "title": "全国の中でのこの地域",
+          "title": "第6章 熊本県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-08/50-national-position.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-08/24-kumamoto.md"
         },
         {
-          "title": "終章",
+          "title": "第7章 大分県に住む",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S3-08/90-synthesis.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-08/25-oita.md"
+        },
+        {
+          "title": "第8章 宮崎県に住む",
+          "source": "fresh",
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-08/26-miyazaki.md"
+        },
+        {
+          "title": "第9章 鹿児島県に住む",
+          "source": "fresh",
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-08/27-kagoshima.md"
+        },
+        {
+          "title": "第10章 沖縄県に住む",
+          "source": "fresh",
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-08/28-okinawa.md"
+        },
+        {
+          "title": "第11章 目的別に県を選ぶ",
+          "source": "fresh",
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-08/80-by-purpose.md"
+        },
+        {
+          "title": "おわりに",
+          "source": "fresh",
+          "freshFile": "src/channels/kindle/manuscripts/K-S3-08/90-closing.md"
         }
       ],
+      "fullTables": true,
       "priceYen": 500,
-      "newContentNote": "地域の概説・図表の見方・出典補章 (書き下ろし) + e-Stat 観測値から生成した幅広い分野のランキング (全国 上位5+下位5・格差・全国平均・地域内最上位県)。",
+      "newContentNote": "はじめに・比べ方の章・8県の県別章・目的別の選び方・おわりに (書き下ろし) + 移住の判断に使う14指標の全国ランキングと九州・沖縄8県の位置 (stats47.jp で公開済みの解説から、数値照合を通した段落だけを採用)。",
       "sourceIdeas": [
-        "kindle:region-databook"
+        "kindle:region-databook",
+        "kindle:prefecture-guide"
       ],
       "keywords": [
-        "都道府県",
-        "九州・沖縄",
-        "地域",
-        "データブック",
-        "統計"
+        "九州 移住",
+        "沖縄 移住",
+        "県選び",
+        "住みやすさ",
+        "物価",
+        "子育て",
+        "都道府県 統計"
       ],
       "status": "generated"
     },
@@ -2675,7 +2996,7 @@
         "統計",
         "日本一"
       ],
-      "status": "generated"
+      "status": "planned"
     },
     "K-S4-02": {
       "series": "S4-ranking-compendium",
@@ -2777,6 +3098,42 @@
     ],
     "K-S4-01": [
       "「意外な1位」— 1 位が人口規模の大きい県でない × 格差が大きいキーを選ぶ。"
+    ],
+    "K-S3-08": [
+      "2026-11-14 オーナー決定で作り直し (KDP-EXPANSION-01 ①・型「1県1章のガイド」の1冊目)。地方は九州・沖縄、読者は移住・転勤で県を比べる人。",
+      "旧版 (2026-09-19 出版停止) は 30 指標を地域特徴度で機械選定し主題外が混ざっていた。新版は移住の判断軸の14指標に絞り、8県すべてで同じ指標を使う。",
+      "県別章 (第3〜10章) は県データブック (R2 app/areas/<code>/databook.json) と14指標の値・順位から作る執筆ブリーフで書き下ろす。県庁所在市の値 (家計調査) を県全域と書かない。",
+      "使わなかった指標: 完全失業率・合計特殊出生率・気候 (年平均気温など) は定義・単位・観測地点の欠けが backlog METRIC-DEFINITION-GAPS-BOOK-01 にあるため、直るまで載せない。"
+    ],
+    "K-S3-02": [
+      "2026-11-14 オーナー決定で作り直し (KDP-EXPANSION-01 ①・型「1県1章のガイド」)。1冊目 K-S3-08 (九州・沖縄) と同じ設計・同じ14指標で、東北の6県を比べる。読者は移住・転勤で県を比べる人。",
+      "旧版 (2026-09-19 に出品前で停止) は 30 指標を地域特徴度で機械選定し主題外が混ざっていた。表紙は別工程 (オーナー指示で今回は作らない)。",
+      "使わなかった指標: 完全失業率・合計特殊出生率・気候は定義・単位・観測地点の欠けがあるため (METRIC-DEFINITION-GAPS-BOOK-01)、直るまで載せない。"
+    ],
+    "K-S3-03": [
+      "2026-11-14 オーナー決定で作り直し (KDP-EXPANSION-01 ①・型「1県1章のガイド」)。1冊目 K-S3-08 (九州・沖縄) と同じ設計・同じ14指標で、関東の1都6県を比べる。読者は移住・転勤で県を比べる人。",
+      "旧版 (2026-09-19 に出品前で停止) は 30 指標を地域特徴度で機械選定し主題外が混ざっていた。表紙は別工程 (オーナー指示で今回は作らない)。",
+      "使わなかった指標: 完全失業率・合計特殊出生率・気候は定義・単位・観測地点の欠けがあるため (METRIC-DEFINITION-GAPS-BOOK-01)、直るまで載せない。"
+    ],
+    "K-S3-04": [
+      "2026-11-14 オーナー決定で作り直し (KDP-EXPANSION-01 ①・型「1県1章のガイド」)。1冊目 K-S3-08 (九州・沖縄) と同じ設計・同じ14指標で、中部の9県を比べる。読者は移住・転勤で県を比べる人。",
+      "旧版 (2026-09-19 に出品前で停止) は 30 指標を地域特徴度で機械選定し主題外が混ざっていた。表紙は別工程 (オーナー指示で今回は作らない)。",
+      "使わなかった指標: 完全失業率・合計特殊出生率・気候は定義・単位・観測地点の欠けがあるため (METRIC-DEFINITION-GAPS-BOOK-01)、直るまで載せない。"
+    ],
+    "K-S3-05": [
+      "2026-11-14 オーナー決定で作り直し (KDP-EXPANSION-01 ①・型「1県1章のガイド」)。1冊目 K-S3-08 (九州・沖縄) と同じ設計・同じ14指標で、近畿の2府5県を比べる。読者は移住・転勤で県を比べる人。",
+      "旧版 (2026-09-19 に出品前で停止) は 30 指標を地域特徴度で機械選定し主題外が混ざっていた。表紙は別工程 (オーナー指示で今回は作らない)。",
+      "使わなかった指標: 完全失業率・合計特殊出生率・気候は定義・単位・観測地点の欠けがあるため (METRIC-DEFINITION-GAPS-BOOK-01)、直るまで載せない。"
+    ],
+    "K-S3-06": [
+      "2026-11-14 オーナー決定で作り直し (KDP-EXPANSION-01 ①・型「1県1章のガイド」)。1冊目 K-S3-08 (九州・沖縄) と同じ設計・同じ14指標で、中国の5県を比べる。読者は移住・転勤で県を比べる人。",
+      "旧版 (2026-09-19 に出品前で停止) は 30 指標を地域特徴度で機械選定し主題外が混ざっていた。表紙は別工程 (オーナー指示で今回は作らない)。",
+      "使わなかった指標: 完全失業率・合計特殊出生率・気候は定義・単位・観測地点の欠けがあるため (METRIC-DEFINITION-GAPS-BOOK-01)、直るまで載せない。"
+    ],
+    "K-S3-07": [
+      "2026-11-14 オーナー決定で作り直し (KDP-EXPANSION-01 ①・型「1県1章のガイド」)。1冊目 K-S3-08 (九州・沖縄) と同じ設計・同じ14指標で、四国の4県を比べる。読者は移住・転勤で県を比べる人。",
+      "旧版 (2026-09-19 に出品前で停止) は 30 指標を地域特徴度で機械選定し主題外が混ざっていた。表紙は別工程 (オーナー指示で今回は作らない)。",
+      "使わなかった指標: 完全失業率・合計特殊出生率・気候は定義・単位・観測地点の欠けがあるため (METRIC-DEFINITION-GAPS-BOOK-01)、直るまで載せない。"
     ]
   }
 }

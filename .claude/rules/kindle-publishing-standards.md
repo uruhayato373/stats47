@@ -221,7 +221,7 @@ R2 `app/ranking/<key>/ai-content.json` はサイトで公開済み・監査済�
 | 書き下ろし章を `freshText` でインライン持ちする | `manuscripts/<id>/*.md` を `freshFile` で参照 (S1 と同じ) |
 | ヘルパー定数を使用箇所より後ろに置く | 前に置く (`const` は巻き上げされず生成が落ちる) |
 
-- **需要ファースト**: 一括生成せず 1 冊ずつ manuscript へ昇格 → 生成 → 人間が KDP 公開 → 4 週実測（KENP/販売数）→ 良ければ横展開。パイロット = **K-S1-01『実質手取りの地図』**（血肉 = 家計・所得系ブログ 9 本 + 書き下ろし）。書き下ろしの最終仕上げは `article-writer` → `blog-critic` の既存品質ゲートを通す。
+- **需要は出して確かめる (2026-11-14 オーナー決定)**: 型ごとに複数冊を作って出し、公開日から 8 週の実測（KENP/販売数）で型ごとに続ける・増やす・止めるを決める。正典は収益化戦略 §3.4。1 冊ずつの公開承認と上の品質の決まりは変えない。書き下ろしの最終仕上げは `article-writer` → `blog-critic` の既存品質ゲートを通す。週次公開の機械契約は `KDP_PUBLICATION_PLAN` (`kdp-publishing-policy.ts`)。
 
 ## 2. KDP 出品自動化（2026-07-23）
 
@@ -238,10 +238,10 @@ R2 `app/ranking/<key>/ai-content.json` はサイトで公開済み・監査済�
 - **draft-first + `--commit` gate + オーナー承認**: 既定は「下書き保存」。**実公開（`--commit`）は outward-facing・取り下げに時間がかかるため、オーナー明示承認時のみ**。未充填フィールド・公開未確定時は「公開した」と報告しない。
 - **週次レビュー→週次計画→公開の接続**: weekly-reviewはKDP本棚状態と`products:sales`の販売数/KENPを同期し、
   `npm run kdp:weekly -- --week YYYY-Www --write`で`data/products/kdp-weekly-publication.json`を再生成する。
-  weekly-planは`prepare-one`なら1冊だけ準備し、`ready-for-owner-approval`ならその1冊だけを候補にできる。
+  weekly-planは`prepare`なら型ごとに次の本を準備し、`ready-for-owner-approval`なら`eligibleCandidateIds`の本を候補にできる (2026-11-14 から週の冊数上限なし)。
   計画への記載・checkbox・過去の包括承認は公開承認ではない。対象IDの新しい明示承認がある場合だけ
   `npm run kdp:weekly-publish -- --week YYYY-Www --id <ID> --owner-approved <ID> --commit`を実行する。
-  専用入口は実行直前に4週実測・需要シグナル・週1冊上限・候補IDを再計算し、既存preflightへ渡す。
+  専用入口は実行直前にゲートを再計算し、対象IDが検証済みの候補にあることを確かめてから既存preflightへ渡す。
 - **★実公開を cron / launchd で無人実行しない（2026-08-16 オーナー判断で確定）**。
   2026-08-13 に `com.stats47.kdp-resume-daily`（毎日 8:30/14:30）が `--phase draft` に続けて
   `--phase publish --commit` を回し、残り 22 冊を無人で公開まで進める構成になっていた。

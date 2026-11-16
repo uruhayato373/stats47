@@ -7,7 +7,7 @@
  *
  * CLI:
  *   npm run products:kindle:kdp-promote --workspace=@stats47/product-factory -- \
- *     --id K-S1-01 --version v4-... --mode new-edition [--apply]
+ *     --id K-S1-01 --version v4-... --mode new-edition|update|first [--apply]
  */
 import { existsSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
@@ -121,6 +121,26 @@ export function prepareUpdate(current: JsonRecord, candidate: JsonRecord, now = 
   };
 }
 
+/**
+ * 出品台帳に行が無い本の最初の行 (2026-11-14 追加。作り直した K-S3-08 のように、旧版の行を消した本と新刊に使う)。
+ * KDP にはまだ何も無い前提なので、運用の項目を落として下書きの準備段階から始める。
+ */
+export function prepareFirst(current: JsonRecord | undefined, candidate: JsonRecord, now: string): JsonRecord {
+  if (current) throw new Error("first requires no ledger row (use update or new-edition)");
+  return {
+    ...omitOperational(candidate),
+    status: "draft",
+    asin: null,
+    publishedAt: null,
+    kdpStatus: "draft",
+    kdpStatusLabel: "新刊下書き準備",
+    kdpStatusCheckedAt: now,
+    publicationStage: "prepared",
+    publicationStageUpdatedAt: now,
+    publicationStageEvidence: { prepared: { at: now, mode: "first" } },
+  };
+}
+
 function arg(name: string): string {
   const index = process.argv.indexOf(`--${name}`);
   const value = index >= 0 ? process.argv[index + 1] : "";
@@ -135,7 +155,7 @@ function main(): void {
   const apply = process.argv.includes("--apply");
   if (!BOOK_ID.test(id)) throw new Error(`invalid book id: ${id}`);
   if (!VERSION.test(version)) throw new Error(`invalid version: ${version}`);
-  if (mode !== "update" && mode !== "new-edition") throw new Error(`invalid mode: ${mode}`);
+  if (mode !== "update" && mode !== "new-edition" && mode !== "first") throw new Error(`invalid mode: ${mode}`);
 
   const proposalPath = join(PROPOSALS_ROOT, `${version}.${id}.json`);
   if (!existsSync(proposalPath)) throw new Error(`proposal not found: ${proposalPath}`);
@@ -146,15 +166,21 @@ function main(): void {
     throw new Error("proposal safety markers or version do not match");
   }
   const candidate = record(record(proposal.listings, "proposal listings")[id], "candidate listing");
-  const current = record(listings[id], "current listing");
+  const current = listings[id] === undefined ? undefined : record(listings[id], "current listing");
   const expectedEpub = `.local/kindle-books/${id}/${version}/book.epub`;
   const expectedCover = `.local/kindle-books/${id}/${version}/cover.jpg`;
   if (candidate.epubPath !== expectedEpub || candidate.coverPath !== expectedCover) {
     throw new Error("proposal assets do not match the requested edition");
   }
   const now = new Date().toISOString();
-  const next = mode === "new-edition" ? prepareNewEdition(current, candidate, now) : prepareUpdate(current, candidate, now);
-  console.log(`[kdp-promote] ${id} mode=${mode} ${string(current.title)} -> ${string(next.title)}`);
+  if (mode !== "first" && !current) throw new Error(`${mode} requires a ledger row (use first for a book without one)`);
+  const next =
+    mode === "first"
+      ? prepareFirst(current, candidate, now)
+      : mode === "new-edition"
+        ? prepareNewEdition(current as JsonRecord, candidate, now)
+        : prepareUpdate(current as JsonRecord, candidate, now);
+  console.log(`[kdp-promote] ${id} mode=${mode} ${string(current?.title)} -> ${string(next.title)}`);
   if (!apply) {
     console.log("[kdp-promote] dry-run: publication ledger was not changed");
     return;

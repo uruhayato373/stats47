@@ -72,7 +72,7 @@ export function ThemeGeoStationAccessClient({
         />
         {/* 県の行だけを出す。全国のページに 47 県の表は置かない (2026-10-31。表は Geo の分析ページ) */}
         {selectedRow ? (
-        <ValueTable
+        <ValueTable fold
           className="whitespace-nowrap"
           scrollRegion
           ariaLabel="駅800m圏人口の都道府県別集計"

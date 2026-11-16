@@ -3,7 +3,7 @@ import { readFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
-import { prepareNewEdition, prepareUpdate } from "../src/channels/kindle/promote-kdp-listing";
+import { prepareFirst, prepareNewEdition, prepareUpdate } from "../src/channels/kindle/promote-kdp-listing";
 import { KDP_LISTINGS } from "../../../config/paths.mjs";
 
 const root = fileURLToPath(new URL("../../../", import.meta.url));
@@ -86,5 +86,14 @@ describe("KDP revision promotion", () => {
     expect(out.description).toBe("Previously published as 旧版の題 by stats47.\n\n本文の説明");
     const again = prepareUpdate(edition, { ...candidate, title: "新題", subtitle: "新副題", description: out.description });
     expect(again.description).toBe(out.description);
+  });
+
+  it("first は台帳に行が無い本だけに使え、運用の項目を落として下書きの準備から始める", () => {
+    const out = prepareFirst(undefined, candidate, "2026-11-14T00:00:00.000Z");
+    expect(out).toMatchObject({ title: "新題", status: "draft", kdpStatus: "draft", asin: null, publishedAt: null, publicationStage: "prepared" });
+    expect(out).not.toHaveProperty("draftId");
+    expect(out.publicationStageEvidence).toEqual({ prepared: { at: "2026-11-14T00:00:00.000Z", mode: "first" } });
+    // [mutation] 行がある本に first を使うと、販売中の記録を上書きしてしまうので止める
+    expect(() => prepareFirst(live, candidate, "2026-11-14T00:00:00.000Z")).toThrow(/no ledger row/);
   });
 });

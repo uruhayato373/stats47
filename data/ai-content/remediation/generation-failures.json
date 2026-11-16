@@ -110,10 +110,22 @@
       "firstFailedAt": "2026-11-13"
     },
     "total-population": {
-      "failCount": 2,
+      "failCount": 3,
       "lastReason": "gemini-daily",
-      "lastFailedAt": "2026-11-15",
+      "lastFailedAt": "2026-11-16",
       "firstFailedAt": "2026-11-14"
+    },
+    "manufacturing-establishments": {
+      "failCount": 1,
+      "lastReason": "gemini-daily",
+      "lastFailedAt": "2026-11-16",
+      "firstFailedAt": "2026-11-16"
+    },
+    "food-manufacturing-establishments": {
+      "failCount": 1,
+      "lastReason": "gemini-daily",
+      "lastFailedAt": "2026-11-16",
+      "firstFailedAt": "2026-11-16"
     }
   }
 }

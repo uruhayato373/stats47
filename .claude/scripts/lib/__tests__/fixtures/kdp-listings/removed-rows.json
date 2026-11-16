@@ -1,0 +1,144 @@
+{
+  "note": "2026-11-14 に出品台帳から消した行の見本 (develop a87165b65 時点の K-S2-01 と K-S2-04)。台帳に出版停止・作らない判断の行が無いときに check-datasets のテストが使う",
+  "withdrawn": {
+    "id": "K-S2-01",
+    "title": "データで見る47都道府県 人口・世帯",
+    "subtitle": null,
+    "author": "stats47",
+    "authorLastName": "stats47",
+    "authorFirstName": "",
+    "authorKana": "スタッツヨンジュウナナ",
+    "authorRomaji": "stats47",
+    "titleKana": "データデミルヨンジュウナナトドウフケン ジンコウ セタイ",
+    "titleRomaji": "Data de Miru 47 Todofuken - Jinko Setai",
+    "subtitleKana": null,
+    "subtitleRomaji": null,
+    "language": "ja",
+    "description": "人口・世帯に関わる主要な統計を、県ごとの上位・下位が一目で分かる図とともに読み解くデータブック。指標ごとに「なぜその分布になるのか」を産業構造や地理から解説します。\n\n【本書の構成】\n指標ごとに、上位5県と下位5県を左右に並べた図を添えています。両端を並べることで、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わります。図のあとには、なぜその分布になるのかを産業構造・地理・人口規模から読み解く解説を置きました。\n\n【データについて】\n本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。統計の定義や調査年によって数値の解釈が変わる場合があります。\n\nデータは基準年を固定した買い切りの内容です。最新の数値や、本書で扱いきれなかった指標は、姉妹サイト stats47.jp（統計で見る都道府県）で無料でご覧いただけます。",
+    "keywords": [
+      "都道府県",
+      "人口・世帯",
+      "ランキング",
+      "データブック",
+      "統計"
+    ],
+    "categoryPaths": [
+      {
+        "top": "社会・政治",
+        "sub": "社会学",
+        "place": "参考図書・白書"
+      },
+      {
+        "top": "歴史・地理",
+        "sub": "地理・地域研究",
+        "place": "地域研究"
+      },
+      {
+        "top": "ビジネス・経済",
+        "sub": "経済学",
+        "place": "都市・地域"
+      }
+    ],
+    "applyDrm": true,
+    "aiDisclosure": {
+      "used": true,
+      "text": "作品全体 (広範な編集あり)",
+      "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+      "translations": "なし",
+      "textTools": [
+        "Claude",
+        "Gemini"
+      ],
+      "imageTools": [
+        "gpt-image-2"
+      ]
+    },
+    "priceYen": 500,
+    "royaltyPlan": 70,
+    "kuEnrolled": false,
+    "epubPath": ".local/kindle-books/K-S2-01/v1/book.epub",
+    "coverPath": ".local/kindle-books/K-S2-01/v1/cover.jpg",
+    "draftId": "A2UWQYBWVB2439",
+    "status": "withdrawn",
+    "asin": "B0HG543VG9",
+    "publishedAt": "2026-08-22",
+    "salesStartedAt": "2026-08-30",
+    "kdpStatus": "draft",
+    "kdpStatusLabel": "下書き",
+    "kdpStatusCheckedAt": "2026-09-19T08:39:58.744Z",
+    "withdrawal": {
+      "requestedAt": "2026-09-19",
+      "reason": "2026-09-19 全冊監査: ランキング章はサイトで無料公開中の AI 解説の転載で、主題外指標・冊間重複 (同一段落 532 件) を含む。読者に売る価値が現行設計では説明できないため販売停止を求める。再設計後に新版で再出品 (backlog KDP-EXPANSION-01)。KDP の販売停止は kdp-operator がオーナー承認の上で行う。",
+      "unpublishedAt": "2026-09-19T08:46:56.111Z",
+      "unpublishedVia": ".claude/scripts/kdp/kdp-unpublish.mjs --all-withdrawn --commit",
+      "readBack": "本棚 status 下書き (出版停止を受理)",
+      "evidence": ".local/kdp-debug/unpublish-2026-09-19T08-38-48-032Z/results.json"
+    }
+  },
+  "blocked": {
+    "id": "K-S2-04",
+    "title": "データで見る47都道府県 自治体財政",
+    "subtitle": null,
+    "author": "stats47",
+    "authorLastName": "stats47",
+    "authorFirstName": "",
+    "authorKana": "スタッツヨンジュウナナ",
+    "authorRomaji": "stats47",
+    "titleKana": "データデミルヨンジュウナナトドウフケン ジチタイザイセイ",
+    "titleRomaji": "Data de Miru 47 Todofuken - Jichitai Zaisei",
+    "subtitleKana": null,
+    "subtitleRomaji": null,
+    "language": "ja",
+    "description": "自治体財政に関わる主要な統計を、県ごとの上位・下位が一目で分かる図とともに読み解くデータブック。指標ごとに「なぜその分布になるのか」を産業構造や地理から解説します。\n\n【本書の構成】\n指標ごとに、上位5県と下位5県を左右に並べた図を添えています。両端を並べることで、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わります。図のあとには、なぜその分布になるのかを産業構造・地理・人口規模から読み解く解説を置きました。\n\n【データについて】\n本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。統計の定義や調査年によって数値の解釈が変わる場合があります。\n\nデータは基準年を固定した買い切りの内容です。最新の数値や、本書で扱いきれなかった指標は、姉妹サイト stats47.jp（統計で見る都道府県）で無料でご覧いただけます。",
+    "keywords": [
+      "都道府県",
+      "自治体財政",
+      "ランキング",
+      "データブック",
+      "統計"
+    ],
+    "categoryPaths": [
+      {
+        "top": "社会・政治",
+        "sub": "社会学",
+        "place": "参考図書・白書"
+      },
+      {
+        "top": "歴史・地理",
+        "sub": "地理・地域研究",
+        "place": "地域研究"
+      },
+      {
+        "top": "ビジネス・経済",
+        "sub": "経済学",
+        "place": "財政学"
+      }
+    ],
+    "applyDrm": true,
+    "aiDisclosure": {
+      "used": true,
+      "text": "作品全体 (広範な編集あり)",
+      "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+      "translations": "なし",
+      "textTools": [
+        "Claude",
+        "Gemini"
+      ],
+      "imageTools": [
+        "gpt-image-2"
+      ]
+    },
+    "priceYen": 500,
+    "royaltyPlan": 70,
+    "kuEnrolled": false,
+    "epubPath": ".local/kindle-books/K-S2-04/v1/book.epub",
+    "coverPath": ".local/kindle-books/K-S2-04/v1/cover.jpg",
+    "status": "blocked-design",
+    "asin": null,
+    "publishedAt": null,
+    "kdpStatus": "draft",
+    "kdpStatusLabel": "未作成",
+    "kdpStatusCheckedAt": "2026-09-19T02:01:18.283Z",
+    "blockReason": "2026-09-19 全冊監査: 編集設計 (design) が無く、指標が機械選定 (S2=本文の長い順・S3=地域の極端順位) で主題外・冊間重複 (ランキング章 481 のうち 177 が他冊と同一指標)。現行設計のまま KDP に作らない。再設計は backlog KDP-EXPANSION-01 (S3=1県1章型・S4=県民性ストーリー型)。"
+  }
+}

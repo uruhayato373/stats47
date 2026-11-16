@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T23:33:27.381Z",
+  "generatedAt": "2026-11-16T10:24:21.424Z",
   "auditAt": "2026-11-13T22:02:29.493Z",
   "findings": [
     {
@@ -78,14 +78,14 @@
       "metric_key": null,
       "severity": "high",
       "detail": "[tablet-768/high] タブレット1枚目の最上部、ページ上端を全幅で覆う広告バナー(トルコ語「STM Savunma Teknolojileri / Bilgi Edinin」): 外国語の大型広告が最初の画面の上部を覆っている。ページの見出しやパンくずが見えず、何のページか分からない。直下の「人口メッシュ」ヘッダーも広告に重なって途切れている。 → 広告枠の高さと位置を固定し、見出しに重ならないようにする。ページ上端への全幅オーバーレイ表示は避ける。",
-      "status": "pending",
+      "status": "owner",
       "first_seen": "2026-11-14",
       "last_seen": "2026-11-14",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
-      "card": null,
-      "note": ""
+      "resolved_at": "2026-11-16",
+      "resolved_by": "owner",
+      "card": "ADSENSE-OVERLAY-AB-01",
+      "note": "ページ上端の全幅広告は AdSense 自動広告の上部アンカー (Google が <html> 直下へ fixed で差し込む)。自前の枠は無く、同ページの 390/640/992px には出ていない。コードで直せるのは /geo/layers を広告なし (ad-free-paths.ts) にすることだけで収益判断。続けるか・上部アンカーを管理画面でオフにするかをオーナー決定 (スマホ上部アンカーが画面約半分を占める件と同根)"
     },
     {
       "key": "agent|home",
@@ -197,14 +197,14 @@
       "metric_key": null,
       "severity": "high",
       "detail": "[mobile-390/high] スマホ1枚目の下部、「北海道が全国上位」の表の右端(「全国順位」列): 表が画面幅からはみ出し、右端の「全国順位」列が見出しも順位の数字も「1…」「3…」のように途中で切れている。順位は北海道の特徴を示す中心情報なのに読み取れない。 → スマホでは指標・値・順位を縦積みのカード表示にするか、列を詰めて順位列を画面内に収める。",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-11-14",
       "last_seen": "2026-11-14",
-      "fixed_at": null,
+      "fixed_at": "2026-11-16T10:24:20.889Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "AreaHighlightList の指標名の列から min-w-40 を外し ValueTable 既定 (min-w-24) に。390px で表 308px に収まり全国順位の列が見出し・数字とも読める (360px も収まる)。未デプロイ"
     },
     {
       "key": "agent|prefecture-detail--theme-geo",

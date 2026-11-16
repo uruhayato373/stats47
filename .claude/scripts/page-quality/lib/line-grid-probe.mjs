@@ -43,7 +43,7 @@ export function collectLineGridIssues() {
   // (2) パネルを含むセルが、パネル以外の要素も直に持つ
   for (const grid of outer.querySelectorAll("[data-slot=panel-grid]")) {
     for (const cell of grid.children) {
-      if (!visible(cell) || cell.matches("[data-slot=card],[data-slot=panel-grid],[data-slot=section-divider],[data-slot=rail-stack]")) continue;
+      if (!visible(cell) || cell.matches("[data-slot=card],[data-slot=panel-grid],[data-slot=rail-stack]")) continue;
       if (!cell.querySelector("[data-slot=card]")) continue;
       // 子が 1 つだけの包みは中へ辿る
       let box = cell;

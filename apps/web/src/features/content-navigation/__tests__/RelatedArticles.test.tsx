@@ -20,7 +20,7 @@ describe('本文の関連記事を共通化する契約', () => {
   it('県・ランキング・テーマは選び方を保ち、同じ表示部品へ渡す', async () => {
     recommend.mockResolvedValue(items);
     const area = await AreaRelatedBlogArticles({ areaCode: '39000', highlights: { top: [], bottom: [] } });
-    const ranking = await RelatedArticlesCard({ rankingKey: 'annual-sunshine-duration', areaType: 'prefecture' });
+    const ranking = await RelatedArticlesCard({ rankingKey: 'annual-sunshine-duration', areaType: 'prefecture', placement: 'body' });
     const theme = await ThemeRelatedArticles({ themeKey: 'climate', tagKeys: [] });
     for (const tree of [area, ranking, theme]) {
       expect(tree?.type).toBe(RelatedArticles);
@@ -29,6 +29,14 @@ describe('本文の関連記事を共通化する契約', () => {
     expect(recommend).toHaveBeenCalledWith(expect.objectContaining({ sourceId: 'area:39000', rankingKeys: [], kinds: ['blog'] }));
     expect(recommend).toHaveBeenCalledWith(expect.objectContaining({ sourceId: 'ranking:annual-sunshine-duration', kinds: ['blog'] }));
     expect(recommend).toHaveBeenCalledWith(expect.objectContaining({ sourceId: 'theme:climate', kinds: ['blog'] }));
+  });
+
+  it('ランキングの広い画面は右レールのリンク行で描く (本文の最後へ移して遷移率が 3.94% → 2.17% に落ちたため戻した)', async () => {
+    recommend.mockResolvedValue(items);
+    const rail = await RelatedArticlesCard({ rankingKey: 'annual-sunshine-duration', areaType: 'prefecture', placement: 'rail' });
+    const nav = rail?.props.children[0];
+    expect(nav.type.name).toBe('ContentNavigation');
+    expect(nav.props).toMatchObject({ title: 'このランキングを読み解く', surface: 'ranking_blog', items });
   });
 
   it('記事がなければ空の見出しや枠を出さない', () => {

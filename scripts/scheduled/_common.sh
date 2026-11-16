@@ -4,7 +4,7 @@
 
 set -euo pipefail
 
-export PATH="/opt/homebrew/opt/node@20/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="/opt/homebrew/opt/node@22/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export LANG="ja_JP.UTF-8"
 export LC_ALL="ja_JP.UTF-8"
 

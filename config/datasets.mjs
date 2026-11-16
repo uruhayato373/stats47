@@ -253,7 +253,13 @@ export const DATASETS = [
   d("config.datasets", "config/datasets.{name}", "config", "ops", "config", "この台帳"),
   d("kdp.listings", P.KDP_LISTINGS, "ledger", "product", "data", "KDP の出品内容と公開・審査状態", { schema: "config/schema/kdp.listings.schema.json" }),
   d("image.routes", "config/image-generation-routes.json", "config", "ops", "config", "AI 画像の生成経路の登録 (未登録の画像 API 呼び出しを止める)", { schema: "config/schema/image-generation-routes.schema.json" }),
-  d("kdp.listing-copy", P.KDP_LISTING_COPY, "ledger", "product", "data", "KDP の紹介文とキーワードの原稿 (台帳の description と keywords の正本)", { schema: "config/schema/kdp.listing-copy.schema.json" }),
+  d("kdp.listing-copy", P.KDP_LISTING_COPY, "ledger", "product", "data", "KDP の紹介文とキーワードの原稿 (台帳の description と keywords の正本)", {
+    schema: "config/schema/kdp.listing-copy.schema.json",
+    // 出品台帳の keywords はこの原稿の写し (export-kdp-listings.ts が書く)。出品台帳だけを手で直すとずれるので止める。
+    // 向きは原稿 → 出品台帳 (原稿の無い本が出品台帳に 20 冊あるため)。draft の原稿は出品台帳へ写さないので見ない。
+    // description は原稿から組み立てた文章で写しではないため、ここでは比べない
+    refs: [{ field: "books.$keys", unless: { status: "draft" }, to: "kdp.listings", key: "listings.$keys", copies: ["keywords"] }],
+  }),
   d("kdp.cover-thumbnail-checks", P.KDP_COVER_THUMBNAIL_CHECKS, "ledger", "product", "data", "KDP の表紙を検索結果の大きさに縮めて目で確かめた記録 (表紙の SHA ごと。公開の前提)", { schema: "config/schema/kdp.cover-thumbnail-checks.schema.json" }),
   d("kdp.account", P.KDP_ACCOUNT, "config", "product", "config", "KDP の期待アカウント (個人情報は .local 側)", { schema: "config/schema/kdp.account.schema.json" }),
   d("note.account", P.NOTE_ACCOUNT, "config", "product", "config", "note の期待アカウント", { schema: "config/schema/note.account.schema.json" }),
@@ -1069,6 +1075,10 @@ export const DATASETS = [
     schema: "config/schema/site.ranking-redirects.schema.json",
     refs: [{ field: "redirects[].to", to: "registry:metrics" }],
   }),
+  d("site.municipality-ranking-redirects", "data/site/url-history/municipality-ranking-redirects.json", "ledger", "site", "data", "公開をやめた市区町村ランキング key の 301 転送 (/municipalities/ranking/<key> と県別ページだけに効く。都道府県ランキングの転送は site.ranking-redirects)。middleware が読む", {
+    schema: "config/schema/site.municipality-ranking-redirects.schema.json",
+    refs: [{ field: "redirects[].to", to: "registry:metrics" }, { field: "redirects[].from", to: "registry:metrics" }],
+  }),
   d("site.blog-redirects", "data/site/url-history/blog-redirects.json", "ledger", "site", "data", "slug を変えたブログ記事の旧 slug → 新 slug の 301 転送 (middleware が読む)", {
     schema: "config/schema/site.blog-redirects.schema.json",
     refs: [{ field: "redirects[].to", to: "blog.articles", key: "articles[].slug" }],
@@ -1222,6 +1232,7 @@ export const DATASETS = [
   d("blog.codex-backgrounds", "assets/blog/codex-backgrounds/{**}", "asset", "site", "assets", "Codex で生成したブログ背景の原本と採用状態"),
   d("ogp.backgrounds", "assets/ogp/{**}", "asset", "site", "assets", "OGP・サムネイルのブランド背景と、その元画像"),
   d("area.specialty-illustrations", "assets/area-specialty/{**}", "asset", "site", "assets", "県ページの特産品イラストの原本 (sync-snapshots が R2 へ反映)"),
+  d("themes.thumbnails", "assets/themes/thumbnails/{name}", "asset", "site", "assets", "テーマのサムネイルの原本 (Codex で生成した 3:2 の JPEG。theme-thumbnails.ts process が apps/web/public/images/themes へ webp にする)"),
   d("site.page-heroes", "assets/page-heroes/{name}", "asset", "site", "assets", "カテゴリ・ホーム・テーマのヒーロー画像の原本 (webp にして apps/web/public へ)"),
   d("design.proposals", "assets/design-proposals/{name}", "asset", "site", "assets", "デザイン提案の画像"),
   d("design.reference", "assets/design-reference/{**}", "asset", "site", "assets", "参考サイト (shadcndashboard・Flowly など) の撮影と部品ごとの実測値。どれを参考にするかは台帳 design.references"),

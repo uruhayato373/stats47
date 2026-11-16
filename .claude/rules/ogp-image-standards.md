@@ -6,7 +6,7 @@ paths:
   - "apps/web/src/features/geo-analysis/**/*Thumbnail*"
   - "apps/web/scripts/*geo-source-thumbnails.ts"
   - "apps/web/scripts/lib/geo-source-thumbnail-render.ts"
-  - "apps/web/scripts/{generate-ogp-images,generate-blog-thumbnails*,refresh-blog-ogp,manage-blog-codex-backgrounds,process-home-use-case-images}.ts"
+  - "apps/web/scripts/{generate-ogp-images,generate-blog-thumbnails*,refresh-blog-ogp,manage-blog-codex-backgrounds,theme-thumbnails}.ts"
   - ".claude/{scripts/ogp,skills/ui/audit-ogp-images,skills/image-prompt,skills/blog/generate-blog-images}/**"
   - "data/ogp/**"
   - ".claude/agents/{image-prompt-curator,blog-editor,site-ux-manager,r2-publisher}.md"
@@ -150,7 +150,8 @@ staging・fingerprint・exact publisherは§5.0を共有し、ローカルプレ
 | OGP: cities | 1200×630 | 所属県の画像を共用 | `app/areas/<県code>/ogp/ogp.png` | `--type areas` | ranking-ui-manager |
 | OGP: products | 1200×630 | 共通外部カード・商品名と販売媒体 | `app/products/<slug>/ogp/ogp.png` | `--type products` | image-prompt-curator |
 | カード: blog (light/dark)      | 640×336 WebP (40:21、画像内テキストなし)                                     | `apps/web/scripts/generate-blog-thumbnails-cloud.ts` (Satori/Sharp、OGPとは別renderer)                                                                                                                                                                                                                                                                                                                                                                             | R2 `app/blog/<slug>/thumbnail-{light,dark}.webp`                   | `ThemeAwareImage` (blog-article-grid)           | blog-editor                                                      |
-| カード: theme / category       | —                                                                            | **なし (要否は §3 で判断)**                                                                                                                                                                                                                                                                                                                                                                                                                                       | —                                                                  | (共有 SVG タイルマップ or blog サムネ流用)      | —                                                                |
+| カード: theme                  | 640×360 WebP (16:9、画像内テキストなし)                                      | **準備中 (2026-11-16 オーナー決定で全件作る)**。OGP の画風・中央の文字の面なし。Codex で 3:2 を描き中央で切り出す (経路 `theme-thumbnail`) | `apps/web/public/images/themes/<key>.webp` (元画像 `assets/themes/thumbnails/<key>.jpg`。Codex の PNG は `ingest` で JPEG にする) | `theme-thumbnails.ts` (カタログ `theme-thumbnail-catalog.ts`) | image-prompt-curator |
+| カード: category               | —                                                                            | **なし (要否は §3 で判断)**                                                                                                                                                                                                                                                                                                                                                                                                                                       | —                                                                  | (共有 SVG タイルマップ or blog サムネ流用)      | —                                                                |
 | note カバー | 1280×670 (≒1.91:1) | cover-policies.json + Codex imagegen（文字込み） | private R2のSHA付き版 + data/note/cover-assets.json | 共通画像台帳・GET proxy | note-manager |
 
 ### OGP コンポーネントの実体
@@ -209,7 +210,7 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
 1. **ranking カード WebP は生成を止めた (2026-11-14・RANKING-CARD-WEBP-UNUSED-01)**: `app/ranking/<key>/thumbnail-{light,dark}.webp` を読む表示面が無く、最後の読み手 (survey ページの `baseThumbnailUrl`) は 2026-07-12 (15248a33e1) に消えていた。home / category / survey / blog は共通 inline SVG と `/api/ranking-card/<key>`、外部共有は ranking OGP (`ogp/ogp.png`) を使う。生成 (`--type ranking-cards`)・週次の修復と監査・ギャラリーの ranking-card タブ・sync-snapshots のフックは外した。R2 に残る約 4,900 枚の実体の削除はオーナー判断で、そのままにしている (復活させるときは git の 2026-11-14 の変更を戻す)。
 2. **note カバーの旧課題（2026-10-14解消、以下は履歴）**: Remotion `NoteCover.tsx` (→ `sns/`) と `generate-note-covers.mjs` (→ `note/`) がドリフト。→ ギャラリーで目視比較し正系統を本 rules に確定、他方は deprecate 記載 (削除しない)。
 3. **専用OGPを持たないページ**: tag / survey等はrootの静的defaultを継承し、市区町村は所属県の静的OGPを共用する。専用画像を増やす場合は流入と必要性を確認する。
-4. **theme / category カード画像なし**: 一覧での視認性のため要否判断。既定は「作らない」(共有タイルマップ SVG or blog サムネ流用で代替)。
+4. **category カード画像なし**: 一覧での視認性のため要否判断。既定は「作らない」(共有タイルマップ SVG or blog サムネ流用で代替)。theme は 2026-11-16 のオーナー決定で全件作る (§1 の「カード: theme」)。3 テーマの試作で画風を確かめてから残りを作る。
 
 ---
 
@@ -491,22 +492,12 @@ hero が数枚に増えたら: (a) admin `/ops/image-library` に「ページ he
 | 生成・push        | `generate-ogp-images.ts --type pref-silhouette` (SNS素材470枚、areas外部OGPとは別管理)。週次 self-heal (`quality-suite-weekly.yml` の ogp-images job) とギャラリー `pref-silhouette` タブに配線済                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | 旧コンポーネントとの境界 | areasの生成はLinkCardOgpを使用。旧AreaOgpと実在しない旧画像routeを新しい呼び出し元へ追加しない。市区町村はgenerate-area-metadata / city metadataの静的R2県画像を共用する。 |
 
-## 5.8 home 利用意図カード画像 — 静的UI素材
+## 5.8 home 利用意図カード画像 — テーマのサムネイルを使う
 
-homeの「知りたいことから探す」に使う、文字なしの装飾イラスト。記事画像のように独立更新・
-大量追加されるコンテンツではなく、6件のUI設定と同時に変更するためR2ではなくGitで配信する。
-
-| 項目 | 内容 |
-| --- | --- |
-| 設定 | `packages/data-configs/src/home-portal.ts`の`imageSrc` |
-| 生成仕様 | `apps/web/scripts/data/home-use-case-image-catalog.ts` |
-| 元画像 | `assets/page-heroes/home-use-case-<id>.png` (Codex built-in imagegen) |
-| 配信画像 | `apps/web/public/images/home/use-cases/<id>.webp` (透過・静的) |
-| 後処理 | `npx tsx apps/web/scripts/process-home-use-case-images.ts --all` |
-| 描画 | `PortalNavCard`の右側に装飾画像として配置し、`alt=""`。文言はDOMテキスト |
-
-再設計時は共通prompt builderを先に直し、同じIDの元PNGを再生成してから後処理する。
-カード側へ用途別の位置調整や色補正を追加せず、共通トリミング契約を維持する。
+homeの「知りたいことから探す」のカードは、遷移先テーマのサムネイル (§1 の「カード: theme」) をそのまま使う
+(2026-11-16 オーナー決定。それまでの利用意図ごとの専用画像と生成経路は外した)。use case 専用の画像は持たない。
+画像のパスは `PortalUseCaseGrid` が `themeKey` から導き (`/images/themes/<themeKey>.webp`)、設定
+`packages/data-configs/src/home-portal.ts` には書かない。描画は `PortalNavCard` の上部の16:9の枠で、`alt=""`。文言はDOMテキスト。
 
 ## 6. 関連
 
@@ -524,8 +515,8 @@ homeの「知りたいことから探す」に使う、文字なしの装飾イ�
   `blog-ogp-visual-catalog.ts`・`gemini-image-client.ts` / 目視 `npm run admin` → /assets「ブログ OGP パイロット (local)」タブ
 - **ページ hero (§5.6)**: SSOT `apps/web/src/components/layout/page-heroes.ts` (`THEME_HEROES` / `CATEGORY_HEROES` + プロベナンス) /
   描画 `apps/web/src/components/layout/HeroBanner.tsx` / テーマ差し替え `features/theme-dashboard/components/ThemeHero.tsx`
-- **home 利用意図カード (§5.8)**: SSOT `packages/data-configs/src/home-portal.ts` / prompt catalog
-  `apps/web/scripts/data/home-use-case-image-catalog.ts` / 後処理 `apps/web/scripts/process-home-use-case-images.ts`
+- **テーマのサムネイル (§1・§5.8)**: カタログ `apps/web/scripts/data/theme-thumbnail-catalog.ts` / 手順
+  `apps/web/scripts/theme-thumbnails.ts` (home の利用意図カードも同じ画像を使う)
 - 画像プロンプト: `.claude/skills/image-prompt/SKILL.md` / `reference/catalog.md`
 - OGP コンポーネント: `apps/web/src/features/ogp/`
 - R2 キー設計: `.claude/rules/r2-storage-design.md`

@@ -4287,6 +4287,3781 @@
           "siteLinksWithUtm": 1
         }
       ]
+    },
+    {
+      "id": "K-S3-02",
+      "status": "measured",
+      "title": "東北 移住の県選びデータブック",
+      "epubPath": ".local/kindle-books/K-S3-02/v2-20261114-map/book.epub",
+      "epubSha256": "1b6bac7731d56a611bdfb502c3c151d68f3502024851cd597ee5e51ec85b493f",
+      "modified": "2026-11-14T08:06:10Z",
+      "chars": 46889,
+      "figures": 14,
+      "figuresPer10kChars": 3,
+      "figuresWithoutText": 0,
+      "fullTables": 14,
+      "siteLinks": 1,
+      "siteLinksWithUtm": 1,
+      "flags": [
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap001",
+          "chapterTitle": "はじめに",
+          "value": 2496
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap002",
+          "chapterTitle": "第1章 県を比べる前に知っておくこと",
+          "value": 3177
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap004",
+          "chapterTitle": "消費者物価地域差指数（総合）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap005",
+          "chapterTitle": "消費者物価地域差指数（住居）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap006",
+          "chapterTitle": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap007",
+          "chapterTitle": "年間収入（1世帯当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap008",
+          "chapterTitle": "有効求人倍率",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap009",
+          "chapterTitle": "地域別最低賃金",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap010",
+          "chapterTitle": "持ち家比率",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap011",
+          "chapterTitle": "持ち家住宅の延べ面積（1住宅当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap012",
+          "chapterTitle": "標準価格（対前年平均変動率）（住宅地）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap013",
+          "chapterTitle": "認定こども園数（0～5歳人口10万人当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap014",
+          "chapterTitle": "医療施設に従事する医師数（人口10万人当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap015",
+          "chapterTitle": "刑法犯認知件数（人口千人当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap016",
+          "chapterTitle": "災害被害額（人口1人当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap017",
+          "chapterTitle": "将来人口増減率（2020年→2050年）",
+          "value": 1
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap018",
+          "chapterTitle": "第3章 青森県に住む",
+          "value": 2479
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap019",
+          "chapterTitle": "第4章 岩手県に住む",
+          "value": 2301
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap020",
+          "chapterTitle": "第5章 宮城県に住む",
+          "value": 2782
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap021",
+          "chapterTitle": "第6章 秋田県に住む",
+          "value": 2643
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap022",
+          "chapterTitle": "第7章 山形県に住む",
+          "value": 2639
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap023",
+          "chapterTitle": "第8章 福島県に住む",
+          "value": 2341
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap024",
+          "chapterTitle": "第9章 目的別に県を選ぶ",
+          "value": 4358
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap025",
+          "chapterTitle": "おわりに",
+          "value": 1598
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "ranking-sources",
+          "chapterTitle": "指標別の出典・対象年",
+          "value": 5568
+        }
+      ],
+      "chapters": [
+        {
+          "id": "front",
+          "title": "東北 移住の県選びデータブック",
+          "chars": 256,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "figguide",
+          "title": "本書の図表の見方",
+          "chars": 377,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap001",
+          "title": "はじめに",
+          "chars": 2496,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap002",
+          "title": "第1章 県を比べる前に知っておくこと",
+          "chars": 3177,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap003",
+          "title": "第2章 6県を14の物差しで並べる",
+          "chars": 106,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap004",
+          "title": "消費者物価地域差指数（総合）",
+          "chars": 1002,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap005",
+          "title": "消費者物価地域差指数（住居）",
+          "chars": 966,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap006",
+          "title": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+          "chars": 978,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap007",
+          "title": "年間収入（1世帯当たり）",
+          "chars": 963,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap008",
+          "title": "有効求人倍率",
+          "chars": 873,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap009",
+          "title": "地域別最低賃金",
+          "chars": 864,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap010",
+          "title": "持ち家比率",
+          "chars": 860,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap011",
+          "title": "持ち家住宅の延べ面積（1住宅当たり）",
+          "chars": 958,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap012",
+          "title": "標準価格（対前年平均変動率）（住宅地）",
+          "chars": 860,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap013",
+          "title": "認定こども園数（0～5歳人口10万人当たり）",
+          "chars": 952,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap014",
+          "title": "医療施設に従事する医師数（人口10万人当たり）",
+          "chars": 962,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap015",
+          "title": "刑法犯認知件数（人口千人当たり）",
+          "chars": 890,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap016",
+          "title": "災害被害額（人口1人当たり）",
+          "chars": 936,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap017",
+          "title": "将来人口増減率（2020年→2050年）",
+          "chars": 984,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap018",
+          "title": "第3章 青森県に住む",
+          "chars": 2479,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap019",
+          "title": "第4章 岩手県に住む",
+          "chars": 2301,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap020",
+          "title": "第5章 宮城県に住む",
+          "chars": 2782,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap021",
+          "title": "第6章 秋田県に住む",
+          "chars": 2643,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap022",
+          "title": "第7章 山形県に住む",
+          "chars": 2639,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap023",
+          "title": "第8章 福島県に住む",
+          "chars": 2341,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap024",
+          "title": "第9章 目的別に県を選ぶ",
+          "chars": 4358,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 4,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap025",
+          "title": "おわりに",
+          "chars": 1598,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap026",
+          "title": "出典と再現について",
+          "chars": 440,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "sources",
+          "title": "出典と免責",
+          "chars": 280,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 1,
+          "siteLinksWithUtm": 1
+        },
+        {
+          "id": "ranking-sources",
+          "title": "指標別の出典・対象年",
+          "chars": 5568,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        }
+      ]
+    },
+    {
+      "id": "K-S3-03",
+      "status": "measured",
+      "title": "関東 移住の県選びデータブック",
+      "epubPath": ".local/kindle-books/K-S3-03/v2-20261114-map/book.epub",
+      "epubSha256": "50b2cd28d480431bef5ce4fd78702b8c4ae31a90724eac9b65aa77e2a747301c",
+      "modified": "2026-11-14T08:06:53Z",
+      "chars": 48534,
+      "figures": 14,
+      "figuresPer10kChars": 2.9,
+      "figuresWithoutText": 0,
+      "fullTables": 14,
+      "siteLinks": 1,
+      "siteLinksWithUtm": 1,
+      "flags": [
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap001",
+          "chapterTitle": "はじめに",
+          "value": 2509
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap002",
+          "chapterTitle": "第1章 県を比べる前に知っておくこと",
+          "value": 3154
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap004",
+          "chapterTitle": "消費者物価地域差指数（総合）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap005",
+          "chapterTitle": "消費者物価地域差指数（住居）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap006",
+          "chapterTitle": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap007",
+          "chapterTitle": "年間収入（1世帯当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap008",
+          "chapterTitle": "有効求人倍率",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap009",
+          "chapterTitle": "地域別最低賃金",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap010",
+          "chapterTitle": "持ち家比率",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap011",
+          "chapterTitle": "持ち家住宅の延べ面積（1住宅当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap012",
+          "chapterTitle": "標準価格（対前年平均変動率）（住宅地）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap013",
+          "chapterTitle": "認定こども園数（0～5歳人口10万人当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap014",
+          "chapterTitle": "医療施設に従事する医師数（人口10万人当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap015",
+          "chapterTitle": "刑法犯認知件数（人口千人当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap016",
+          "chapterTitle": "災害被害額（人口1人当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap017",
+          "chapterTitle": "将来人口増減率（2020年→2050年）",
+          "value": 1
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap018",
+          "chapterTitle": "第3章 茨城県に住む",
+          "value": 2301
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap019",
+          "chapterTitle": "第4章 栃木県に住む",
+          "value": 2315
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap020",
+          "chapterTitle": "第5章 群馬県に住む",
+          "value": 2451
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap021",
+          "chapterTitle": "第6章 埼玉県に住む",
+          "value": 2416
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap022",
+          "chapterTitle": "第7章 千葉県に住む",
+          "value": 2278
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap023",
+          "chapterTitle": "第8章 東京都に住む",
+          "value": 2258
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap024",
+          "chapterTitle": "第9章 神奈川県に住む",
+          "value": 2463
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap025",
+          "chapterTitle": "第10章 目的別に県を選ぶ",
+          "value": 4529
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap026",
+          "chapterTitle": "おわりに",
+          "value": 1540
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "ranking-sources",
+          "chapterTitle": "指標別の出典・対象年",
+          "value": 5568
+        }
+      ],
+      "chapters": [
+        {
+          "id": "front",
+          "title": "関東 移住の県選びデータブック",
+          "chars": 260,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "figguide",
+          "title": "本書の図表の見方",
+          "chars": 377,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap001",
+          "title": "はじめに",
+          "chars": 2509,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap002",
+          "title": "第1章 県を比べる前に知っておくこと",
+          "chars": 3154,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap003",
+          "title": "第2章 1都6県を14の物差しで並べる",
+          "chars": 110,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap004",
+          "title": "消費者物価地域差指数（総合）",
+          "chars": 1030,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap005",
+          "title": "消費者物価地域差指数（住居）",
+          "chars": 993,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap006",
+          "title": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+          "chars": 991,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap007",
+          "title": "年間収入（1世帯当たり）",
+          "chars": 979,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap008",
+          "title": "有効求人倍率",
+          "chars": 894,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap009",
+          "title": "地域別最低賃金",
+          "chars": 889,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap010",
+          "title": "持ち家比率",
+          "chars": 884,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap011",
+          "title": "持ち家住宅の延べ面積（1住宅当たり）",
+          "chars": 977,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap012",
+          "title": "標準価格（対前年平均変動率）（住宅地）",
+          "chars": 871,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap013",
+          "title": "認定こども園数（0～5歳人口10万人当たり）",
+          "chars": 969,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap014",
+          "title": "医療施設に従事する医師数（人口10万人当たり）",
+          "chars": 974,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap015",
+          "title": "刑法犯認知件数（人口千人当たり）",
+          "chars": 898,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap016",
+          "title": "災害被害額（人口1人当たり）",
+          "chars": 941,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap017",
+          "title": "将来人口増減率（2020年→2050年）",
+          "chars": 995,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap018",
+          "title": "第3章 茨城県に住む",
+          "chars": 2301,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap019",
+          "title": "第4章 栃木県に住む",
+          "chars": 2315,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap020",
+          "title": "第5章 群馬県に住む",
+          "chars": 2451,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap021",
+          "title": "第6章 埼玉県に住む",
+          "chars": 2416,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap022",
+          "title": "第7章 千葉県に住む",
+          "chars": 2278,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap023",
+          "title": "第8章 東京都に住む",
+          "chars": 2258,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap024",
+          "title": "第9章 神奈川県に住む",
+          "chars": 2463,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap025",
+          "title": "第10章 目的別に県を選ぶ",
+          "chars": 4529,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 4,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap026",
+          "title": "おわりに",
+          "chars": 1540,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap027",
+          "title": "出典と再現について",
+          "chars": 440,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "sources",
+          "title": "出典と免責",
+          "chars": 280,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 1,
+          "siteLinksWithUtm": 1
+        },
+        {
+          "id": "ranking-sources",
+          "title": "指標別の出典・対象年",
+          "chars": 5568,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        }
+      ]
+    },
+    {
+      "id": "K-S3-04",
+      "status": "measured",
+      "title": "中部 移住の県選びデータブック",
+      "epubPath": ".local/kindle-books/K-S3-04/v2-20261114-map/book.epub",
+      "epubSha256": "cb45364d8a21ba8c679f8574f80a2d5998057bafe1b05af9015a5ab1e2d0d36c",
+      "modified": "2026-11-14T08:07:36Z",
+      "chars": 56592,
+      "figures": 14,
+      "figuresPer10kChars": 2.5,
+      "figuresWithoutText": 0,
+      "fullTables": 14,
+      "siteLinks": 1,
+      "siteLinksWithUtm": 1,
+      "flags": [
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap001",
+          "chapterTitle": "はじめに",
+          "value": 2543
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap002",
+          "chapterTitle": "第1章 県を比べる前に知っておくこと",
+          "value": 3193
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap004",
+          "chapterTitle": "消費者物価地域差指数（総合）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap005",
+          "chapterTitle": "消費者物価地域差指数（住居）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap006",
+          "chapterTitle": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap007",
+          "chapterTitle": "年間収入（1世帯当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap008",
+          "chapterTitle": "有効求人倍率",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap009",
+          "chapterTitle": "地域別最低賃金",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap010",
+          "chapterTitle": "持ち家比率",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap011",
+          "chapterTitle": "持ち家住宅の延べ面積（1住宅当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap012",
+          "chapterTitle": "標準価格（対前年平均変動率）（住宅地）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap013",
+          "chapterTitle": "認定こども園数（0～5歳人口10万人当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap014",
+          "chapterTitle": "医療施設に従事する医師数（人口10万人当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap015",
+          "chapterTitle": "刑法犯認知件数（人口千人当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap016",
+          "chapterTitle": "災害被害額（人口1人当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap017",
+          "chapterTitle": "将来人口増減率（2020年→2050年）",
+          "value": 1
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap018",
+          "chapterTitle": "第3章 新潟県に住む",
+          "value": 2614
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap019",
+          "chapterTitle": "第4章 富山県に住む",
+          "value": 2716
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap020",
+          "chapterTitle": "第5章 石川県に住む",
+          "value": 2592
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap021",
+          "chapterTitle": "第6章 福井県に住む",
+          "value": 2634
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap022",
+          "chapterTitle": "第7章 山梨県に住む",
+          "value": 2549
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap023",
+          "chapterTitle": "第8章 長野県に住む",
+          "value": 2603
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap024",
+          "chapterTitle": "第9章 岐阜県に住む",
+          "value": 2542
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap025",
+          "chapterTitle": "第10章 静岡県に住む",
+          "value": 2674
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap026",
+          "chapterTitle": "第11章 愛知県に住む",
+          "value": 2786
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap027",
+          "chapterTitle": "第12章 目的別に県を選ぶ",
+          "value": 4708
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap028",
+          "chapterTitle": "おわりに",
+          "value": 1590
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "ranking-sources",
+          "chapterTitle": "指標別の出典・対象年",
+          "value": 5568
+        }
+      ],
+      "chapters": [
+        {
+          "id": "front",
+          "title": "中部 移住の県選びデータブック",
+          "chars": 256,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "figguide",
+          "title": "本書の図表の見方",
+          "chars": 377,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap001",
+          "title": "はじめに",
+          "chars": 2543,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap002",
+          "title": "第1章 県を比べる前に知っておくこと",
+          "chars": 3193,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap003",
+          "title": "第2章 9県を14の物差しで並べる",
+          "chars": 106,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap004",
+          "title": "消費者物価地域差指数（総合）",
+          "chars": 1075,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap005",
+          "title": "消費者物価地域差指数（住居）",
+          "chars": 1038,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap006",
+          "title": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+          "chars": 1031,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap007",
+          "title": "年間収入（1世帯当たり）",
+          "chars": 1016,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap008",
+          "title": "有効求人倍率",
+          "chars": 920,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap009",
+          "title": "地域別最低賃金",
+          "chars": 916,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap010",
+          "title": "持ち家比率",
+          "chars": 911,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap011",
+          "title": "持ち家住宅の延べ面積（1住宅当たり）",
+          "chars": 1014,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap012",
+          "title": "標準価格（対前年平均変動率）（住宅地）",
+          "chars": 911,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap013",
+          "title": "認定こども園数（0～5歳人口10万人当たり）",
+          "chars": 1003,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap014",
+          "title": "医療施設に従事する医師数（人口10万人当たり）",
+          "chars": 1016,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap015",
+          "title": "刑法犯認知件数（人口千人当たり）",
+          "chars": 941,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap016",
+          "title": "災害被害額（人口1人当たり）",
+          "chars": 989,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap017",
+          "title": "将来人口増減率（2020年→2050年）",
+          "chars": 1040,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap018",
+          "title": "第3章 新潟県に住む",
+          "chars": 2614,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap019",
+          "title": "第4章 富山県に住む",
+          "chars": 2716,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap020",
+          "title": "第5章 石川県に住む",
+          "chars": 2592,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap021",
+          "title": "第6章 福井県に住む",
+          "chars": 2634,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap022",
+          "title": "第7章 山梨県に住む",
+          "chars": 2549,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap023",
+          "title": "第8章 長野県に住む",
+          "chars": 2603,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap024",
+          "title": "第9章 岐阜県に住む",
+          "chars": 2542,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap025",
+          "title": "第10章 静岡県に住む",
+          "chars": 2674,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap026",
+          "title": "第11章 愛知県に住む",
+          "chars": 2786,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap027",
+          "title": "第12章 目的別に県を選ぶ",
+          "chars": 4708,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 4,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap028",
+          "title": "おわりに",
+          "chars": 1590,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap029",
+          "title": "出典と再現について",
+          "chars": 440,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "sources",
+          "title": "出典と免責",
+          "chars": 280,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 1,
+          "siteLinksWithUtm": 1
+        },
+        {
+          "id": "ranking-sources",
+          "title": "指標別の出典・対象年",
+          "chars": 5568,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        }
+      ]
+    },
+    {
+      "id": "K-S3-05",
+      "status": "measured",
+      "title": "近畿 移住の県選びデータブック",
+      "epubPath": ".local/kindle-books/K-S3-05/v2-20261114-map/book.epub",
+      "epubSha256": "88fb0c5b01648fa81aa6fbdca21e11e532da4456c7045786da702c93158da654",
+      "modified": "2026-11-14T08:08:20Z",
+      "chars": 47651,
+      "figures": 14,
+      "figuresPer10kChars": 2.9,
+      "figuresWithoutText": 0,
+      "fullTables": 14,
+      "siteLinks": 1,
+      "siteLinksWithUtm": 1,
+      "flags": [
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap001",
+          "chapterTitle": "はじめに",
+          "value": 2555
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap002",
+          "chapterTitle": "第1章 県を比べる前に知っておくこと",
+          "value": 3043
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap004",
+          "chapterTitle": "消費者物価地域差指数（総合）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap005",
+          "chapterTitle": "消費者物価地域差指数（住居）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap006",
+          "chapterTitle": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap007",
+          "chapterTitle": "年間収入（1世帯当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap008",
+          "chapterTitle": "有効求人倍率",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap009",
+          "chapterTitle": "地域別最低賃金",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap010",
+          "chapterTitle": "持ち家比率",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap011",
+          "chapterTitle": "持ち家住宅の延べ面積（1住宅当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap012",
+          "chapterTitle": "標準価格（対前年平均変動率）（住宅地）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap013",
+          "chapterTitle": "認定こども園数（0～5歳人口10万人当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap014",
+          "chapterTitle": "医療施設に従事する医師数（人口10万人当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap015",
+          "chapterTitle": "刑法犯認知件数（人口千人当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap016",
+          "chapterTitle": "災害被害額（人口1人当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap017",
+          "chapterTitle": "将来人口増減率（2020年→2050年）",
+          "value": 1
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap018",
+          "chapterTitle": "第3章 三重県に住む",
+          "value": 2571
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap019",
+          "chapterTitle": "第4章 滋賀県に住む",
+          "value": 2248
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap020",
+          "chapterTitle": "第5章 京都府に住む",
+          "value": 1927
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap021",
+          "chapterTitle": "第6章 大阪府に住む",
+          "value": 2235
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap022",
+          "chapterTitle": "第7章 兵庫県に住む",
+          "value": 2148
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap023",
+          "chapterTitle": "第8章 奈良県に住む",
+          "value": 2094
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap024",
+          "chapterTitle": "第9章 和歌山県に住む",
+          "value": 2155
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap025",
+          "chapterTitle": "第10章 目的別に県を選ぶ",
+          "value": 4620
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap026",
+          "chapterTitle": "おわりに",
+          "value": 1657
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "ranking-sources",
+          "chapterTitle": "指標別の出典・対象年",
+          "value": 5568
+        }
+      ],
+      "chapters": [
+        {
+          "id": "front",
+          "title": "近畿 移住の県選びデータブック",
+          "chars": 260,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "figguide",
+          "title": "本書の図表の見方",
+          "chars": 377,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap001",
+          "title": "はじめに",
+          "chars": 2555,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap002",
+          "title": "第1章 県を比べる前に知っておくこと",
+          "chars": 3043,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap003",
+          "title": "第2章 2府5県を14の物差しで並べる",
+          "chars": 110,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap004",
+          "title": "消費者物価地域差指数（総合）",
+          "chars": 1030,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap005",
+          "title": "消費者物価地域差指数（住居）",
+          "chars": 990,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap006",
+          "title": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+          "chars": 998,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap007",
+          "title": "年間収入（1世帯当たり）",
+          "chars": 982,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap008",
+          "title": "有効求人倍率",
+          "chars": 894,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap009",
+          "title": "地域別最低賃金",
+          "chars": 888,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap010",
+          "title": "持ち家比率",
+          "chars": 881,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap011",
+          "title": "持ち家住宅の延べ面積（1住宅当たり）",
+          "chars": 980,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap012",
+          "title": "標準価格（対前年平均変動率）（住宅地）",
+          "chars": 874,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap013",
+          "title": "認定こども園数（0～5歳人口10万人当たり）",
+          "chars": 972,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap014",
+          "title": "医療施設に従事する医師数（人口10万人当たり）",
+          "chars": 979,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap015",
+          "title": "刑法犯認知件数（人口千人当たり）",
+          "chars": 907,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap016",
+          "title": "災害被害額（人口1人当たり）",
+          "chars": 951,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap017",
+          "title": "将来人口増減率（2020年→2050年）",
+          "chars": 1001,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap018",
+          "title": "第3章 三重県に住む",
+          "chars": 2571,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap019",
+          "title": "第4章 滋賀県に住む",
+          "chars": 2248,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap020",
+          "title": "第5章 京都府に住む",
+          "chars": 1927,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap021",
+          "title": "第6章 大阪府に住む",
+          "chars": 2235,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap022",
+          "title": "第7章 兵庫県に住む",
+          "chars": 2148,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap023",
+          "title": "第8章 奈良県に住む",
+          "chars": 2094,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap024",
+          "title": "第9章 和歌山県に住む",
+          "chars": 2155,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap025",
+          "title": "第10章 目的別に県を選ぶ",
+          "chars": 4620,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 5,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap026",
+          "title": "おわりに",
+          "chars": 1657,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap027",
+          "title": "出典と再現について",
+          "chars": 476,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "sources",
+          "title": "出典と免責",
+          "chars": 280,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 1,
+          "siteLinksWithUtm": 1
+        },
+        {
+          "id": "ranking-sources",
+          "title": "指標別の出典・対象年",
+          "chars": 5568,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        }
+      ]
+    },
+    {
+      "id": "K-S3-06",
+      "status": "measured",
+      "title": "中国 移住の県選びデータブック",
+      "epubPath": ".local/kindle-books/K-S3-06/v2-20261114-map/book.epub",
+      "epubSha256": "15fb4f9b15afd11df6da7a0df43dad06c54edf27f4b45cdb46f9b5789b2835db",
+      "modified": "2026-11-14T08:09:02Z",
+      "chars": 41585,
+      "figures": 14,
+      "figuresPer10kChars": 3.4,
+      "figuresWithoutText": 0,
+      "fullTables": 14,
+      "siteLinks": 1,
+      "siteLinksWithUtm": 1,
+      "flags": [
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap001",
+          "chapterTitle": "はじめに",
+          "value": 2489
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap002",
+          "chapterTitle": "第1章 県を比べる前に知っておくこと",
+          "value": 3119
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap004",
+          "chapterTitle": "消費者物価地域差指数（総合）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap005",
+          "chapterTitle": "消費者物価地域差指数（住居）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap006",
+          "chapterTitle": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap007",
+          "chapterTitle": "年間収入（1世帯当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap008",
+          "chapterTitle": "有効求人倍率",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap009",
+          "chapterTitle": "地域別最低賃金",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap010",
+          "chapterTitle": "持ち家比率",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap011",
+          "chapterTitle": "持ち家住宅の延べ面積（1住宅当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap012",
+          "chapterTitle": "標準価格（対前年平均変動率）（住宅地）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap013",
+          "chapterTitle": "認定こども園数（0～5歳人口10万人当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap014",
+          "chapterTitle": "医療施設に従事する医師数（人口10万人当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap015",
+          "chapterTitle": "刑法犯認知件数（人口千人当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap016",
+          "chapterTitle": "災害被害額（人口1人当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap017",
+          "chapterTitle": "将来人口増減率（2020年→2050年）",
+          "value": 1
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap018",
+          "chapterTitle": "第3章 鳥取県に住む",
+          "value": 2347
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap019",
+          "chapterTitle": "第4章 島根県に住む",
+          "value": 2125
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap020",
+          "chapterTitle": "第5章 岡山県に住む",
+          "value": 2109
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap021",
+          "chapterTitle": "第6章 広島県に住む",
+          "value": 2044
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap022",
+          "chapterTitle": "第7章 山口県に住む",
+          "value": 2033
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap023",
+          "chapterTitle": "第8章 目的別に県を選ぶ",
+          "value": 3999
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap024",
+          "chapterTitle": "おわりに",
+          "value": 1502
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "ranking-sources",
+          "chapterTitle": "指標別の出典・対象年",
+          "value": 5568
+        }
+      ],
+      "chapters": [
+        {
+          "id": "front",
+          "title": "中国 移住の県選びデータブック",
+          "chars": 256,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "figguide",
+          "title": "本書の図表の見方",
+          "chars": 377,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap001",
+          "title": "はじめに",
+          "chars": 2489,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap002",
+          "title": "第1章 県を比べる前に知っておくこと",
+          "chars": 3119,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap003",
+          "title": "第2章 5県を14の物差しで並べる",
+          "chars": 106,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap004",
+          "title": "消費者物価地域差指数（総合）",
+          "chars": 981,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap005",
+          "title": "消費者物価地域差指数（住居）",
+          "chars": 942,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap006",
+          "title": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+          "chars": 956,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap007",
+          "title": "年間収入（1世帯当たり）",
+          "chars": 944,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap008",
+          "title": "有効求人倍率",
+          "chars": 855,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap009",
+          "title": "地域別最低賃金",
+          "chars": 850,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap010",
+          "title": "持ち家比率",
+          "chars": 847,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap011",
+          "title": "持ち家住宅の延べ面積（1住宅当たり）",
+          "chars": 940,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap012",
+          "title": "標準価格（対前年平均変動率）（住宅地）",
+          "chars": 842,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap013",
+          "title": "認定こども園数（0～5歳人口10万人当たり）",
+          "chars": 937,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap014",
+          "title": "医療施設に従事する医師数（人口10万人当たり）",
+          "chars": 940,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap015",
+          "title": "刑法犯認知件数（人口千人当たり）",
+          "chars": 871,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap016",
+          "title": "災害被害額（人口1人当たり）",
+          "chars": 920,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap017",
+          "title": "将来人口増減率（2020年→2050年）",
+          "chars": 966,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap018",
+          "title": "第3章 鳥取県に住む",
+          "chars": 2347,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap019",
+          "title": "第4章 島根県に住む",
+          "chars": 2125,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap020",
+          "title": "第5章 岡山県に住む",
+          "chars": 2109,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap021",
+          "title": "第6章 広島県に住む",
+          "chars": 2044,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap022",
+          "title": "第7章 山口県に住む",
+          "chars": 2033,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap023",
+          "title": "第8章 目的別に県を選ぶ",
+          "chars": 3999,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 4,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap024",
+          "title": "おわりに",
+          "chars": 1502,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap025",
+          "title": "出典と再現について",
+          "chars": 440,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "sources",
+          "title": "出典と免責",
+          "chars": 280,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 1,
+          "siteLinksWithUtm": 1
+        },
+        {
+          "id": "ranking-sources",
+          "title": "指標別の出典・対象年",
+          "chars": 5568,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        }
+      ]
+    },
+    {
+      "id": "K-S3-07",
+      "status": "measured",
+      "title": "四国 移住の県選びデータブック",
+      "epubPath": ".local/kindle-books/K-S3-07/v2-20261114-map/book.epub",
+      "epubSha256": "9a47dc85441d77604429e661a0a46c7287a918abc883fb8446e57460ba07634b",
+      "modified": "2026-11-14T08:09:45Z",
+      "chars": 39278,
+      "figures": 14,
+      "figuresPer10kChars": 3.6,
+      "figuresWithoutText": 0,
+      "fullTables": 14,
+      "siteLinks": 1,
+      "siteLinksWithUtm": 1,
+      "flags": [
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap001",
+          "chapterTitle": "はじめに",
+          "value": 2261
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap002",
+          "chapterTitle": "第1章 県を比べる前に知っておくこと",
+          "value": 2472
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap004",
+          "chapterTitle": "消費者物価地域差指数（総合）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap005",
+          "chapterTitle": "消費者物価地域差指数（住居）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap006",
+          "chapterTitle": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap007",
+          "chapterTitle": "年間収入（1世帯当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap008",
+          "chapterTitle": "有効求人倍率",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap009",
+          "chapterTitle": "地域別最低賃金",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap010",
+          "chapterTitle": "持ち家比率",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap011",
+          "chapterTitle": "持ち家住宅の延べ面積（1住宅当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap012",
+          "chapterTitle": "標準価格（対前年平均変動率）（住宅地）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap013",
+          "chapterTitle": "認定こども園数（0～5歳人口10万人当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap014",
+          "chapterTitle": "医療施設に従事する医師数（人口10万人当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap015",
+          "chapterTitle": "刑法犯認知件数（人口千人当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap016",
+          "chapterTitle": "災害被害額（人口1人当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap017",
+          "chapterTitle": "将来人口増減率（2020年→2050年）",
+          "value": 1
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap018",
+          "chapterTitle": "第3章 徳島県に住む",
+          "value": 2637
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap019",
+          "chapterTitle": "第4章 香川県に住む",
+          "value": 2390
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap020",
+          "chapterTitle": "第5章 愛媛県に住む",
+          "value": 2396
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap021",
+          "chapterTitle": "第6章 高知県に住む",
+          "value": 2485
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap022",
+          "chapterTitle": "第7章 目的別に県を選ぶ",
+          "value": 3497
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap023",
+          "chapterTitle": "おわりに",
+          "value": 1577
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "ranking-sources",
+          "chapterTitle": "指標別の出典・対象年",
+          "value": 5568
+        }
+      ],
+      "chapters": [
+        {
+          "id": "front",
+          "title": "四国 移住の県選びデータブック",
+          "chars": 256,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "figguide",
+          "title": "本書の図表の見方",
+          "chars": 377,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap001",
+          "title": "はじめに",
+          "chars": 2261,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap002",
+          "title": "第1章 県を比べる前に知っておくこと",
+          "chars": 2472,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap003",
+          "title": "第2章 4県を14の物差しで並べる",
+          "chars": 106,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap004",
+          "title": "消費者物価地域差指数（総合）",
+          "chars": 957,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap005",
+          "title": "消費者物価地域差指数（住居）",
+          "chars": 920,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap006",
+          "title": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+          "chars": 938,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap007",
+          "title": "年間収入（1世帯当たり）",
+          "chars": 925,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap008",
+          "title": "有効求人倍率",
+          "chars": 841,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap009",
+          "title": "地域別最低賃金",
+          "chars": 832,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap010",
+          "title": "持ち家比率",
+          "chars": 828,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap011",
+          "title": "持ち家住宅の延べ面積（1住宅当たり）",
+          "chars": 923,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap012",
+          "title": "標準価格（対前年平均変動率）（住宅地）",
+          "chars": 828,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap013",
+          "title": "認定こども園数（0～5歳人口10万人当たり）",
+          "chars": 919,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap014",
+          "title": "医療施設に従事する医師数（人口10万人当たり）",
+          "chars": 924,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap015",
+          "title": "刑法犯認知件数（人口千人当たり）",
+          "chars": 857,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap016",
+          "title": "災害被害額（人口1人当たり）",
+          "chars": 899,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap017",
+          "title": "将来人口増減率（2020年→2050年）",
+          "chars": 945,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap018",
+          "title": "第3章 徳島県に住む",
+          "chars": 2637,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap019",
+          "title": "第4章 香川県に住む",
+          "chars": 2390,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap020",
+          "title": "第5章 愛媛県に住む",
+          "chars": 2396,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap021",
+          "title": "第6章 高知県に住む",
+          "chars": 2485,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap022",
+          "title": "第7章 目的別に県を選ぶ",
+          "chars": 3497,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 4,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap023",
+          "title": "おわりに",
+          "chars": 1577,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap024",
+          "title": "出典と再現について",
+          "chars": 440,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "sources",
+          "title": "出典と免責",
+          "chars": 280,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 1,
+          "siteLinksWithUtm": 1
+        },
+        {
+          "id": "ranking-sources",
+          "title": "指標別の出典・対象年",
+          "chars": 5568,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        }
+      ]
+    },
+    {
+      "id": "K-S3-08",
+      "status": "measured",
+      "title": "九州・沖縄 移住の県選びデータブック",
+      "epubPath": ".local/kindle-books/K-S3-08/v7-20261114-first/book.epub",
+      "epubSha256": "f6174ec7997ace1671628407b15e326f065b0143f320edc893a89ea0b86395ed",
+      "modified": "2026-11-14T04:25:46Z",
+      "chars": 51080,
+      "figures": 14,
+      "figuresPer10kChars": 2.7,
+      "figuresWithoutText": 0,
+      "fullTables": 14,
+      "siteLinks": 1,
+      "siteLinksWithUtm": 1,
+      "flags": [
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap001",
+          "chapterTitle": "はじめに",
+          "value": 2481
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap002",
+          "chapterTitle": "第1章 県を比べる前に知っておくこと",
+          "value": 3121
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap004",
+          "chapterTitle": "消費者物価地域差指数（総合）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap005",
+          "chapterTitle": "消費者物価地域差指数（住居）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap006",
+          "chapterTitle": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap007",
+          "chapterTitle": "年間収入（1世帯当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap008",
+          "chapterTitle": "有効求人倍率",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap009",
+          "chapterTitle": "地域別最低賃金",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap010",
+          "chapterTitle": "持ち家比率",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap011",
+          "chapterTitle": "持ち家住宅の延べ面積（1住宅当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap012",
+          "chapterTitle": "標準価格（対前年平均変動率）（住宅地）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap013",
+          "chapterTitle": "認定こども園数（0～5歳人口10万人当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap014",
+          "chapterTitle": "医療施設に従事する医師数（人口10万人当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap015",
+          "chapterTitle": "刑法犯認知件数（人口千人当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap016",
+          "chapterTitle": "災害被害額（人口1人当たり）",
+          "value": 1
+        },
+        {
+          "code": "figure-outside-shared-template",
+          "chapterId": "chap017",
+          "chapterTitle": "将来人口増減率（2020年→2050年）",
+          "value": 1
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap018",
+          "chapterTitle": "第3章 福岡県に住む",
+          "value": 2299
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap019",
+          "chapterTitle": "第4章 佐賀県に住む",
+          "value": 2270
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap020",
+          "chapterTitle": "第5章 長崎県に住む",
+          "value": 2216
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap021",
+          "chapterTitle": "第6章 熊本県に住む",
+          "value": 2282
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap022",
+          "chapterTitle": "第7章 大分県に住む",
+          "value": 2405
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap023",
+          "chapterTitle": "第8章 宮崎県に住む",
+          "value": 2286
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap024",
+          "chapterTitle": "第9章 鹿児島県に住む",
+          "value": 2700
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap025",
+          "chapterTitle": "第10章 沖縄県に住む",
+          "value": 2380
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap026",
+          "chapterTitle": "第11章 目的別に県を選ぶ",
+          "value": 4435
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "chap027",
+          "chapterTitle": "おわりに",
+          "value": 1515
+        },
+        {
+          "code": "long-chapter-without-figure",
+          "chapterId": "ranking-sources",
+          "chapterTitle": "指標別の出典・対象年",
+          "value": 5568
+        }
+      ],
+      "chapters": [
+        {
+          "id": "front",
+          "title": "九州・沖縄 移住の県選びデータブック",
+          "chars": 262,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "figguide",
+          "title": "本書の図表の見方",
+          "chars": 377,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap001",
+          "title": "はじめに",
+          "chars": 2481,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap002",
+          "title": "第1章 県を比べる前に知っておくこと",
+          "chars": 3121,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap003",
+          "title": "第2章 8県を14の物差しで並べる",
+          "chars": 106,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap004",
+          "title": "消費者物価地域差指数（総合）",
+          "chars": 1055,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap005",
+          "title": "消費者物価地域差指数（住居）",
+          "chars": 1019,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap006",
+          "title": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+          "chars": 1019,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap007",
+          "title": "年間収入（1世帯当たり）",
+          "chars": 1005,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap008",
+          "title": "有効求人倍率",
+          "chars": 914,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap009",
+          "title": "地域別最低賃金",
+          "chars": 900,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap010",
+          "title": "持ち家比率",
+          "chars": 904,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap011",
+          "title": "持ち家住宅の延べ面積（1住宅当たり）",
+          "chars": 999,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap012",
+          "title": "標準価格（対前年平均変動率）（住宅地）",
+          "chars": 888,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap013",
+          "title": "認定こども園数（0～5歳人口10万人当たり）",
+          "chars": 988,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap014",
+          "title": "医療施設に従事する医師数（人口10万人当たり）",
+          "chars": 1000,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap015",
+          "title": "刑法犯認知件数（人口千人当たり）",
+          "chars": 928,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap016",
+          "title": "災害被害額（人口1人当たり）",
+          "chars": 980,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap017",
+          "title": "将来人口増減率（2020年→2050年）",
+          "chars": 1022,
+          "figures": 1,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 1,
+          "tables": 1,
+          "fullTables": 1,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap018",
+          "title": "第3章 福岡県に住む",
+          "chars": 2299,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap019",
+          "title": "第4章 佐賀県に住む",
+          "chars": 2270,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap020",
+          "title": "第5章 長崎県に住む",
+          "chars": 2216,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap021",
+          "title": "第6章 熊本県に住む",
+          "chars": 2282,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap022",
+          "title": "第7章 大分県に住む",
+          "chars": 2405,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap023",
+          "title": "第8章 宮崎県に住む",
+          "chars": 2286,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap024",
+          "title": "第9章 鹿児島県に住む",
+          "chars": 2700,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap025",
+          "title": "第10章 沖縄県に住む",
+          "chars": 2380,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap026",
+          "title": "第11章 目的別に県を選ぶ",
+          "chars": 4435,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 4,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap027",
+          "title": "おわりに",
+          "chars": 1515,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "chap028",
+          "title": "出典と再現について",
+          "chars": 476,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        },
+        {
+          "id": "sources",
+          "title": "出典と免責",
+          "chars": 280,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 1,
+          "siteLinksWithUtm": 1
+        },
+        {
+          "id": "ranking-sources",
+          "title": "指標別の出典・対象年",
+          "chars": 5568,
+          "figures": 0,
+          "figuresWithoutText": 0,
+          "rankingDatabookFigures": 0,
+          "tables": 0,
+          "fullTables": 0,
+          "siteLinks": 0,
+          "siteLinksWithUtm": 0
+        }
+      ]
     }
   ]
 }

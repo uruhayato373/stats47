@@ -9255,7 +9255,7 @@
       "key": "health-checkup-blood-pressure-medication-rate",
       "title": "血圧を下げる薬を使っている人の割合",
       "href": "/ranking/health-checkup-blood-pressure-medication-rate",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:health-checkup-breakfast-skipping-rate",
@@ -9279,7 +9279,7 @@
       "key": "health-checkup-daily-activity-rate",
       "title": "歩行などの身体活動を1日1時間以上している人の割合",
       "href": "/ranking/health-checkup-daily-activity-rate",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:health-checkup-daily-drinking-rate",
@@ -9287,7 +9287,7 @@
       "key": "health-checkup-daily-drinking-rate",
       "title": "お酒を毎日飲む人の割合",
       "href": "/ranking/health-checkup-daily-drinking-rate",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:health-checkup-daily-snacking-rate",
@@ -9295,7 +9295,7 @@
       "key": "health-checkup-daily-snacking-rate",
       "title": "間食や甘い飲み物を毎日とる人の割合",
       "href": "/ranking/health-checkup-daily-snacking-rate",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:health-checkup-exercise-habit-rate",
@@ -9303,7 +9303,7 @@
       "key": "health-checkup-exercise-habit-rate",
       "title": "1回30分以上の運動を週2日以上続けている人の割合",
       "href": "/ranking/health-checkup-exercise-habit-rate",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:health-checkup-fast-eating-rate",
@@ -9311,7 +9311,7 @@
       "key": "health-checkup-fast-eating-rate",
       "title": "食べる速度が速い人の割合",
       "href": "/ranking/health-checkup-fast-eating-rate",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:health-checkup-fast-walking-rate",
@@ -9319,7 +9319,7 @@
       "key": "health-checkup-fast-walking-rate",
       "title": "同年代の同性より歩く速度が速い人の割合",
       "href": "/ranking/health-checkup-fast-walking-rate",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:health-checkup-late-dinner-rate",
@@ -9351,7 +9351,7 @@
       "key": "health-checkup-smoking-rate",
       "title": "習慣的に喫煙している人の割合",
       "href": "/ranking/health-checkup-smoking-rate",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:health-checkup-sufficient-sleep-rate",
@@ -9359,7 +9359,7 @@
       "key": "health-checkup-sufficient-sleep-rate",
       "title": "睡眠で休養が十分とれている人の割合",
       "href": "/ranking/health-checkup-sufficient-sleep-rate",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:health-checkup-weight-gain-10kg-rate",
@@ -9367,7 +9367,7 @@
       "key": "health-checkup-weight-gain-10kg-rate",
       "title": "20歳の時から体重が10kg以上増えた人の割合",
       "href": "/ranking/health-checkup-weight-gain-10kg-rate",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:health-consumables-consumption-expenditure",
@@ -9503,7 +9503,7 @@
       "key": "heatstroke-emergency-transports-per-100k",
       "title": "熱中症救急搬送人員",
       "href": "/ranking/heatstroke-emergency-transports-per-100k",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:high-school-advancement-rate",
@@ -13879,7 +13879,7 @@
       "key": "national-assessment-elementary-mathematics-correct-rate",
       "title": "小学生の算数平均正答率",
       "href": "/ranking/national-assessment-elementary-mathematics-correct-rate",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:national-assessment-elementary-reading-like-rate",
@@ -13911,7 +13911,7 @@
       "key": "national-assessment-junior-high-mathematics-correct-rate",
       "title": "中学生の数学平均正答率",
       "href": "/ranking/national-assessment-junior-high-mathematics-correct-rate",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:national-assessment-junior-high-self-esteem-rate",
@@ -13919,7 +13919,7 @@
       "key": "national-assessment-junior-high-self-esteem-rate",
       "title": "自分によいところがあると思う中学生の割合",
       "href": "/ranking/national-assessment-junior-high-self-esteem-rate",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:national-health-insurance-benefits",
@@ -24615,7 +24615,7 @@
       "key": "traffic-accidents-party-a-age-75-plus-per-100k",
       "title": "第1当事者が75歳以上の交通事故発生件数",
       "href": "/ranking/traffic-accidents-party-a-age-75-plus-per-100k",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:traffic-safety-grant-municipal",

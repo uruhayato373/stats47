@@ -30,7 +30,7 @@ function LocationsTable({
   label: string;
 }) {
   return (
-    <ValueTable
+    <ValueTable fold
       ariaLabel={label}
       scrollRegion
       className="min-w-96"

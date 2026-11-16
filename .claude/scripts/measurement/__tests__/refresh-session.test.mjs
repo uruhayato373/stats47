@@ -15,7 +15,7 @@ test('failed automatic login stays paused; explicit human recovery saves only a 
   let opens = 0, checks = 0, validState = true;
   const page = {
     goto: async () => {}, url: () => LOGIN.note.checkUrl, waitForTimeout: async () => {},
-    evaluate: async () => ({ hasPassword: checks++ === 0, hasChallenge: checks < 2 }),
+    evaluate: async () => ({ hasPassword: checks++ === 0, hasChallenge: checks < 2, hasReady: true }),
   };
   const chromiumImpl = { launchPersistentContext: async () => {
     opens++;
@@ -130,4 +130,86 @@ test('X: ホームに着けば ok、ログイン画面や追加確認に残れ�
   assert.equal(classifyLoginOutcome('x', { url: 'https://x.com/account/access', hasPassword: false, hasChallenge: false }), 'human_required');
   assert.equal(LOGIN.x.bundledChromium, true, 'publish-x と同じ Chromium で開く (Chrome 本体で開くとプロファイルが壊れうる)');
   assert.equal(LOGIN.x.localOnly, true, 'X の state は CI へ渡さない');
+});
+
+// ---- note: 描画待ちと「判定できない」(2026-11-16。10-22 に読み込み中の画面で login_failed と判定され、失敗印で 3 週止まった) ----
+
+test('note: 画面の状態を読めない (描画中・遷移中) ときは失敗にせず undetermined', () => {
+  const url = LOGIN.note.checkUrl;
+  assert.equal(classifyLoginOutcome('note', { url, hasPassword: null, hasChallenge: false }), 'undetermined');
+  // 売上管理の URL でも、中身がまだ描かれていなければ通ったとは言えない
+  assert.equal(classifyLoginOutcome('note', { url, hasPassword: false, hasChallenge: false, hasReady: false }), 'undetermined');
+  assert.equal(classifyLoginOutcome('note', { url, hasPassword: false, hasChallenge: false, hasReady: true }), 'ok');
+  // パスワード欄が残っていれば、通らなかったと確認できたので login_failed
+  assert.equal(classifyLoginOutcome('note', { url, hasPassword: true, hasChallenge: false, hasReady: true }), 'login_failed');
+});
+
+/** キーチェーンの値で再確認を送る流れの偽ブラウザ。signals は pageSignals が返す順、api は売上 API の応答の error.code */
+function noteFlow(root, { signals, api = null }) {
+  const queue = [...signals];
+  const last = signals.at(-1);
+  const page = {
+    calls: [],
+    goto: async () => {}, url: () => LOGIN.note.checkUrl, waitForTimeout: async () => {},
+    waitForLoadState: async () => {}, waitForSelector: async () => {}, screenshot: async () => Buffer.from(''),
+    locator: (sel) => ({ first: () => ({ isVisible: async () => sel === LOGIN.note.password, check: async () => {} }) }),
+    fill: async (sel) => page.calls.push(['fill', sel]), click: async (sel) => page.calls.push(['click', sel]),
+    evaluate: async (fn) => {
+      const src = String(fn);
+      if (src.includes('stats/sales')) return api ? 'verification_required' : 'ok';
+      if (src.includes('role=alert')) return [];
+      return queue.length ? queue.shift() : last;
+    },
+  };
+  const chromiumImpl = { launchPersistentContext: async () => ({
+    pages: () => [page], addCookies: async () => {}, close: async () => {},
+    storageState: async () => ({ cookies: [{ name: 'fixture', value: 'test', domain: '.note.com', path: '/' }], origins: [] }),
+  }) };
+  return { page, opts: { root, chromiumImpl, readCredentialImpl: () => ({ user: 'u', password: 'p' }) } };
+}
+
+const NEEDS_CONFIRM = { hasPassword: true, hasChallenge: false, hasReady: true };
+const LOADING = { hasPassword: false, hasChallenge: false, hasReady: false };
+const CONFIRMED = { hasPassword: false, hasChallenge: false, hasReady: true };
+
+test('note: 再確認の送信後に描画が終わらなければ印を書かず、2 回続いたら印を書いて止める', async () => {
+  const root = mkdtempSync(join(tmpdir(), 'stats47-note-undetermined-'));
+  const marker = join(root, '.local/authenticated-measurement/note.autologin-failed');
+  try {
+    const first = noteFlow(root, { signals: [NEEDS_CONFIRM, LOADING] });
+    assert.equal((await refresh('note', first.opts)).status, 'undetermined');
+    assert.equal(first.page.calls.filter(([k]) => k === 'click').length, 1, 'パスワードの送信は 1 回の実行で 1 回');
+    assert.ok(!existsSync(marker), '1 回目は印を書かない (次の実行で試し直す)');
+    const second = noteFlow(root, { signals: [NEEDS_CONFIRM, LOADING] });
+    assert.equal((await refresh('note', second.opts)).status, 'undetermined');
+    assert.ok(existsSync(marker), '2 回続いたら印を書いて自動の試行を止める');
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+test('note: 描画を待って売上管理が出れば ok、連続の数え直しも消える', async () => {
+  const root = mkdtempSync(join(tmpdir(), 'stats47-note-ready-'));
+  const count = join(root, '.local/authenticated-measurement/note.undetermined-count');
+  try {
+    await refresh('note', noteFlow(root, { signals: [NEEDS_CONFIRM, LOADING] }).opts);
+    assert.ok(existsSync(count));
+    // 送信後しばらく描画中 (LOADING) でも、待つうちに売上管理が出れば ok
+    const result = await refresh('note', noteFlow(root, { signals: [NEEDS_CONFIRM, LOADING, LOADING, CONFIRMED] }).opts);
+    assert.equal(result.status, 'ok');
+    assert.equal(result.loggedInBy, 'credential-store');
+    assert.ok(!existsSync(count));
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+test('note: 画面は通って見えても売上 API が再確認を求めれば login_failed で印を書く', async () => {
+  const root = mkdtempSync(join(tmpdir(), 'stats47-note-api-'));
+  try {
+    const result = await refresh('note', noteFlow(root, { signals: [NEEDS_CONFIRM, CONFIRMED], api: 'user_verification_needed' }).opts);
+    assert.equal(result.status, 'login_failed');
+    assert.ok(existsSync(join(root, '.local/authenticated-measurement/note.autologin-failed')));
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+test('画面の状態を読めなかった (evaluate が失敗した) ときに、ログイン済みとして保存しない', () => {
+  // 以前は pageSignals の失敗を hasPassword: true に倒していた。null は「読めない」で、ok にも login_failed にもしない
+  assert.equal(classifyLoginOutcome('a8', { url: 'https://media-console.a8.net/home', hasPassword: null, hasChallenge: false }), 'undetermined');
 });

@@ -67,6 +67,15 @@ export const LOGIN = {
     submit: 'button:has-text("確認して続ける")',
     loggedIn: (url) => /note\.com\/dashboard\/salesmanage/.test(url),
     challengeUrl: /note\.com\/login/,
+    // 売上管理は描画が遅い。固定の待ち時間で読むと読み込み中の画面を「失敗」と判定した (2026-10-22。失敗印で 3 週止まった)。
+    // パスワード欄か本文 (main) が出るまで待ち、どちらも出なければ undetermined にする
+    waitReady: true,
+    // 画面が通って見えても、売上 API が再確認を求めるなら通っていない (取得側 note-sales.mjs と同じ API・同じ判定)
+    verifySession: (page) => page.evaluate(async () => {
+      const res = await fetch('/api/v1/stats/sales', { credentials: 'include' });
+      const body = await res.json().catch(() => null);
+      return body?.error?.code === 'user_verification_needed' ? 'verification_required' : 'ok';
+    }).catch(() => 'unknown'),
   },
   // 楽天アフィリエイト (2026-10-01 追加): 楽天 ID の SSO。ID → 次へ (#cta001) → パスワード → 次へ/ログイン の 2 段階。
   // ID 画面は 2026-10-01 に公開画面で確認。パスワード画面のボタンは ID を入れないと出ないため未確認で、
@@ -119,11 +128,33 @@ export const LOGIN = {
   },
 };
 
-/** ログイン試行後の画面を分類する。ok / human_required / login_failed の 3 値。 */
-export function classifyLoginOutcome(source, { url, hasPassword, hasChallenge }) {
-  if (LOGIN[source].loggedIn(url) && !hasPassword) return 'ok';
-  if (hasChallenge || LOGIN[source].challengeUrl?.test(url)) return 'human_required';
+/**
+ * ログイン試行後の画面を分類する。ok / human_required / login_failed / undetermined の 4 値。
+ * undetermined は「画面を読めなかった・描画が終わらなかった」で、通らなかったとは確認できていない。失敗印を書かない
+ * (続いたときだけ書く。UNDETERMINED_LIMIT)。hasPassword が null = 画面を読めなかった。
+ */
+export function classifyLoginOutcome(source, { url, hasPassword, hasChallenge, hasReady }) {
+  const conf = LOGIN[source];
+  if (hasPassword == null) return hasChallenge ? 'human_required' : 'undetermined';
+  if (conf.loggedIn(url) && !hasPassword) return conf.waitReady && !hasReady ? 'undetermined' : 'ok';
+  if (hasChallenge || conf.challengeUrl?.test(url)) return 'human_required';
   return 'login_failed';
+}
+
+/** undetermined が何回続いたら失敗印を書くか (パスワードの送信は 1 回の実行で 1 回なので、送信は最大この回数) */
+export const UNDETERMINED_LIMIT = 2;
+/** 描画を待つ回数 (1 秒ごと)。waitReady の取得元だけが使う */
+const READY_POLLS = 30;
+
+/** 画面を読む。waitReady の取得元は、パスワード欄・確認画面・本文のどれかが出るまで待つ。それ以外は従来どおり 3 秒待つ */
+async function waitForSignals(page, conf) {
+  if (!conf.waitReady) { await page.waitForTimeout(3000); return pageSignals(page); }
+  let signals = await pageSignals(page);
+  for (let i = 0; i < READY_POLLS && !(signals.hasPassword || signals.hasChallenge || signals.hasReady); i++) {
+    await page.waitForTimeout(1000);
+    signals = await pageSignals(page);
+  }
+  return signals;
 }
 
 /** macOS の通知 (Mac 以外は標準エラー)。session-preflight.mjs の日次確認も使う */
@@ -142,8 +173,10 @@ async function pageSignals(page) {
     const hasChallenge = [...document.querySelectorAll('iframe[src*="recaptcha"], iframe[src*="hcaptcha"], iframe[src*="turnstile"]')]
       .some((frame) => !/[?&]size=invisible\b/.test(frame.getAttribute('src') || ''))
       || /認証コード|ワンタイム|確認コード|私はロボットではありません|画像認証|2段階認証|文字を入力してください/.test(text);
-    return { hasPassword, hasChallenge };
-  }).catch(() => ({ hasPassword: true, hasChallenge: false }));
+    const main = document.querySelector('main');
+    const hasReady = !hasPassword && !!main && (main.innerText ?? '').trim().length > 0;
+    return { hasPassword, hasChallenge, hasReady };
+  }).catch(() => ({ hasPassword: null, hasChallenge: false, hasReady: false }));
 }
 
 /**
@@ -232,12 +265,13 @@ async function afterKdpLogin(page, cred, { waitHuman = false } = {}) {
   }
 }
 
-export async function refresh(source, { root, headed, waitHuman, chromiumImpl = null }) {
+export async function refresh(source, { root, headed, waitHuman, chromiumImpl = null, readCredentialImpl = readCredential }) {
   const chromium = chromiumImpl ?? (await import('playwright')).chromium;
   const conf = LOGIN[source];
   const privateDir = join(root, '.local/authenticated-measurement');
   mkdirSync(privateDir, { recursive: true, mode: 0o700 });
   const failMark = join(privateDir, `${source}.autologin-failed`);
+  const undeterminedCount = join(privateDir, `${source}.undetermined-count`);
   if (existsSync(failMark) && !waitHuman) return { source, status: 'blocked', reason: `前回の自動ログインが失敗したため停止中。確認後に ${failMark} を削除する` };
 
   const context = await chromium.launchPersistentContext(join(root, '.local', `playwright-${source}-profile`), {
@@ -255,10 +289,9 @@ export async function refresh(source, { root, headed, waitHuman, chromiumImpl = 
     }
     const page = context.pages()[0] ?? await context.newPage();
     await page.goto(conf.checkUrl, { waitUntil: 'domcontentloaded', timeout: 60000 }).catch(() => {});
-    await page.waitForTimeout(3000);
-    const before = await pageSignals(page);
-    if (!(conf.loggedIn(page.url()) && !before.hasPassword && !before.hasChallenge)) {
-      const cred = waitHuman ? null : readCredential(source);
+    const before = await waitForSignals(page, conf);
+    if (classifyLoginOutcome(source, { url: page.url(), ...before }) !== 'ok' || before.hasChallenge) {
+      const cred = waitHuman ? null : readCredentialImpl(source);
       if (!cred && waitHuman) {
         // 人がこのブラウザでログインするのを待つ (自動入力しない)。
         loggedInBy = 'human';
@@ -268,7 +301,7 @@ export async function refresh(source, { root, headed, waitHuman, chromiumImpl = 
         while (Date.now() < deadline && !ok) {
           await page.waitForTimeout(3000);
           const signals = await pageSignals(page);
-          ok = conf.loggedIn(page.url()) && !signals.hasPassword && !signals.hasChallenge;
+          ok = classifyLoginOutcome(source, { url: page.url(), ...signals }) === 'ok' && !signals.hasChallenge;
         }
         if (!ok) return { source, status: 'human_timeout', reason: '10 分以内にログインを検知できなかった' };
       }
@@ -287,9 +320,22 @@ export async function refresh(source, { root, headed, waitHuman, chromiumImpl = 
           .map((element) => /** @type {HTMLElement} */ (element).innerText?.trim()).filter(Boolean).slice(0, 5)).catch(() => []),
       };
       await settleOnCheckUrl(page, conf);
-      const signals = await pageSignals(page);
+      const signals = await waitForSignals(page, conf);
       if (conf.challengeSelector && await page.locator(conf.challengeSelector).first().isVisible().catch(() => false)) signals.hasChallenge = true;
-      const status = classifyLoginOutcome(source, { url: page.url(), ...signals });
+      let status = classifyLoginOutcome(source, { url: page.url(), ...signals });
+      if (status === 'ok' && conf.verifySession && (await conf.verifySession(page)) === 'verification_required') status = 'login_failed';
+      if (status === 'undetermined') {
+        const count = Number(existsSync(undeterminedCount) ? readFileSync(undeterminedCount, 'utf8') : 0) + 1;
+        const shot = join(privateDir, `${source}-login-undetermined.png`);
+        if (afterSubmit.shot) writeFileSync(shot, afterSubmit.shot);
+        if (count < UNDETERMINED_LIMIT) {
+          writeFileSync(undeterminedCount, String(count), { mode: 0o600 });
+          return { source, status, url: page.url().split('?')[0], screenshot: shot, reason: `送信後の画面を判定できなかった (${count} 回目)。印は書かず、次の実行で試し直す` };
+        }
+        rmSync(undeterminedCount, { force: true });
+        writeFileSync(failMark, `${new Date().toISOString()} undetermined x${count}\n`, { mode: 0o600 });
+        return { source, status, url: page.url().split('?')[0], screenshot: shot, reason: `送信後の画面を ${count} 回続けて判定できなかったので止めた (失敗印を書いた)` };
+      }
       if (status !== 'ok') {
         writeFileSync(failMark, `${new Date().toISOString()} ${status}\n`, { mode: 0o600 });
         // 止まった画面を残す (パスワード欄は伏せ字で写る)。原因の切り分けに使い、git には入らない (.local)
@@ -302,7 +348,7 @@ export async function refresh(source, { root, headed, waitHuman, chromiumImpl = 
     }
     if (source === 'kdp') {
       const page = context.pages()[0];
-      const after = await afterKdpLogin(page, waitHuman ? null : readCredential(source), { waitHuman });
+      const after = await afterKdpLogin(page, waitHuman ? null : readCredentialImpl(source), { waitHuman });
       if (after.status !== 'ok') {
         // 口座不一致・2FA・再ログイン失敗は自動で繰り返さない (アカウントロックと別口座の混入を避ける)
         if (after.status !== 'reports_auth_required') writeFileSync(failMark, `${new Date().toISOString()} ${after.status}\n`, { mode: 0o600 });
@@ -315,6 +361,7 @@ export async function refresh(source, { root, headed, waitHuman, chromiumImpl = 
     await context.close();
   }
   if (waitHuman) rmSync(failMark, { force: true });
+  rmSync(undeterminedCount, { force: true });
   return { source, status: 'ok', loggedInBy };
 }
 

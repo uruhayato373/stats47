@@ -28,7 +28,7 @@ import { cn } from "../lib/cn";
  * 見出しの下の gap-4 と本文の px-4 が消えず、カルーセルのセルが縁から 32px 内側に寄っていた)。
  * cn-card を付けなければ、外枠の地・線・角丸は CARD_SURFACE_CLASS のトークン、余白は下の値と呼び出し側の
  * className だけで決まる。線は ring ではなく border (CARD_SURFACE_CLASS) で引く。カード同士を接ぐ節
- * (PageSections) は間に点線の帯を挟むので、線が二重に重ならない。
+ * (PageSections) の中ではカードは自分の線を外し、格子の線を共有するので、線が二重に重ならない。
  *
  * 文字の大きさと行の高さは Card 部品 (.cn-card) と同じ text-sm/relaxed (見本の 14px / 22.75px。2026-10-28 に 12px から変更)。
  * <section> で描く SurfaceSection / RailCard / SectionCard は region の役割と aria-label を保つ。

@@ -3,6 +3,7 @@
 # (2026-11-08 オーナー決定。launchd の毎週土曜 07:00 の自動起動はやめた。無人だとログイン切れ・時間切れで 2 週続けて
 # 落ち、誰も気づかなかったため。レビューの場ならその場で入り直せる。やっていない週は review-cadence-guard が Issue にする)。
 # ログインが要る取得と週次監査を、この Mac で順に回す。
+#   0. GSC のログイン: Google の認証 cookie が切れていれば、専用プロファイルの Chrome を開いて人のログインを最大 10 分待つ
 #   1. 認証付き計測: measurement-session-refresh.sh (ログインを保ち、専用 clone で取得・記録して develop へ push)
 #   2. note の計測: fetch-note-metrics.sh (表紙監査 + note のダッシュボード。作業フォルダに書く。従来どおり)
 #   3. ASP の巡回: scout-asp-weekly.sh (A8 の審査確認・精選・コード取得。作業フォルダに書く。従来どおり)
@@ -84,6 +85,9 @@ weekly_audits() (
   echo ""
   echo "=== $(date -Iseconds) [weekly-saturday] start ==="
 } >> "$LOG_DIR/weekly-saturday.log"
+# GSC の画面の取得は Google のログインが要る。切れていれば最初に専用プロファイルの Chrome を開いて通知し、
+# 人がログインして閉じるのを最大 10 分待つ (パスワード・2 段階認証は自動入力しない)。有効なら何も開かない
+step gsc-login node .claude/scripts/google-admin/cli.mjs login --if-expired --wait
 step measurement bash "$SCRIPTS/measurement-session-refresh.sh"
 step note-metrics bash "$SCRIPTS/fetch-note-metrics.sh"
 step scout-asp bash "$SCRIPTS/scout-asp-weekly.sh"

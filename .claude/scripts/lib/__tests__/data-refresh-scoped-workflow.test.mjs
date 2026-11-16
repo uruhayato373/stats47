@@ -280,7 +280,7 @@ test('develop への push で起動したときだけ、派生 snapshot から p
   assert.equal(argsOf('workflow_dispatch'), '');
 });
 
-const cityKeys = 'fiscal-strength-index,per-taxpayer-income';
+const cityKeys = 'fiscal-strength-index,taxable-income-total';
 const citySequence = [validate, batch, observations, municipality].map(entry => entry.run).join('\n');
 const cityEnv = { SNAPSHOT_SCOPE: 'municipality', REFRESH_METRIC: cityKeys };
 
@@ -289,7 +289,7 @@ test('municipality scope fetches city observations, then publishes only those ra
   assert.equal(result.status, 0, result.stderr);
   assert.deepEqual(puts(result).map(args => args.slice(-2)), [
     ['--prefix', 'app/stats/fiscal-strength-index/'],
-    ['--prefix', 'app/stats/per-taxpayer-income/'],
+    ['--prefix', 'app/stats/taxable-income-total/'],
     ['--prefix', 'app/municipalities/'],
     ['--prefix', 'app/areas/'],
   ]);

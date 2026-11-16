@@ -44,7 +44,7 @@ export function ThemeIndustrySpecializationClient({
           人。このうち、大分類内訳に分かれない
           {format(area.unclassifiedEmployees)}人も構成割合の分母に含めています。
         </p>
-        <ValueTable
+        <ValueTable fold
           ariaLabel={`${area.areaName}の18業種の雇用構成と特化係数`}
           caption="特化係数1は全国と同じ構成割合です。1を超える業種は全国より割合が高く、生産性や成長性の評価を表すものではありません。"
           columns={[

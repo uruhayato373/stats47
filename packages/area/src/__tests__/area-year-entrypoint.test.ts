@@ -19,7 +19,7 @@ describe('area entrypoints', () => {
       expect(nodeArea.isPrefectureAreaCode(code)).toBe(isPrefectureAreaCode(code));
       expect(nodeArea.isCityAreaCode(code)).toBe(isCityAreaCode(code));
     }
-  });
+  }, 30_000); // 10 万件の総当たり。CI では既定の 5 秒を超えることがある (2026-11-17 に 5,158ms で落ちた)
   it('rejects malformed lengths, nondigits, national and out-of-range prefixes', () => {
     for (const code of ['', '01', '1000', '010000', '0100x', '00000', '00999', '48000', '48999']) {
       expect(isPrefectureAreaCode(code)).toBe(false);

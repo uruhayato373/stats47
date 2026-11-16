@@ -49,3 +49,14 @@ describe("県の特徴の表の値", () => {
     expect(html).toContain("1,234,567");
   });
 });
+
+// 2026-11-14 の週次 UI 検査: スマホ幅 (390px) で指標名の列に min-w-40 (160px) を足していて、
+// 「値」「全国順位」の折り返さない列と合わせて表の内側を超え、順位の列が見出しも数字も切れた
+describe("県の特徴の表の列幅", () => {
+  it("指標名の列に固定の最小幅 (min-w-40) を足さず、狭い画面でも順位の列が収まるようにする", () => {
+    const html = renderToStaticMarkup(
+      <AreaHighlightList items={[toHighlightListItem(highlight({}))]} rankScope="全国順位" />,
+    );
+    expect(html).not.toContain("min-w-40");
+  });
+});

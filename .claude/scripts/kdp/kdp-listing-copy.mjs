@@ -42,8 +42,13 @@ async function epubText(listing) {
   return texts.join("\n").replace(/<[^>]+>/g, " ");
 }
 
+// 販売中・審査中の本と、出品台帳で準備に入った新刊の下書き (promote の first。原稿があるもの) を扱う (2026-11-14)
 const liveIds = Object.entries(ledger.listings)
-  .filter(([, listing]) => listing.status === "listed" && ["live", "in_review"].includes(listing.kdpStatus))
+  .filter(
+    ([id, listing]) =>
+      (listing.status === "listed" && ["live", "in_review"].includes(listing.kdpStatus)) ||
+      (listing.status === "draft" && listing.publicationStage && copies[id]),
+  )
   .map(([id]) => id);
 
 if (command === "check") {

@@ -686,7 +686,6 @@
         "standard-fiscal-demand-municipality",
         "standard-fiscal-revenue-municipality",
         "per-taxpayer-taxable-income",
-        "per-taxpayer-income",
         "taxpayer-count-equal",
         "taxpayer-count-income",
         "municipal-general-administration-staff",
@@ -805,7 +804,6 @@
       "href": "/municipalities/themes/manufacturing",
       "rankingKeys": [
         "manufacturing-shipment-amount",
-        "manufacturing-shipment",
         "manufacturing-establishments",
         "manufacturing-employees",
         "manufacturing-sales-private",
@@ -1062,7 +1060,6 @@
         "sales-amount-private",
         "retail-store-count",
         "retail-store-count-per-1000",
-        "retail-stores-per",
         "department-supermarket-count",
         "department-supermarket-count-per-100k",
         "department-store-count-per-100k",

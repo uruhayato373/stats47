@@ -160,7 +160,7 @@ export default async function HomePage() {
   return (
     <div className="w-full">
       <PageShell rightRail={rightRail} header={header}>
-        {/* 節はカードの見出しに題名を置き、カード同士を点線の帯で接ぐ (テンプレートの lyra のダッシュボード)。
+        {/* 節はカードの見出しに題名を置き、カード同士を線の格子で接ぐ (テンプレートの lyra のダッシュボード。点線の帯は 2026-11-16 に廃止)。
             カード列は区切り線のセルにする (テンプレートの KPI 行) */}
         <PageSections>
           <HorizontalCardCarouselFrame

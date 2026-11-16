@@ -575,11 +575,11 @@ snapshot の `manifest.json` が `status: error` の週は本節の数値を書�
 | 項目 | 実測 |
 |---|---|
 | S1 | live N/12・in_review N |
-| パイロット | live N/3・in_review N |
-| 4週計測 | complete / window-open / not-measured（対象IDも記載） |
+| 作り直しの本 | 型ごとに live N・in_review N・verified N |
+| 8週計測 | complete / window-open / not-measured（対象IDも記載）。判定に進める型 |
 | 需要シグナル | measured-positive / measured-zero / not-measured |
-| 当週ゲート | hold / measure / prepare-one / ready-for-owner-approval / observe / stop-no-demand / complete |
-| 候補 | ID またはなし（最大1冊） |
+| 当週ゲート | hold / prepare / ready-for-owner-approval |
+| 候補 | eligibleCandidateIds またはなし（承認は1冊ずつ） |
 
 `ready-for-owner-approval`でもレビューは公開しない。来週への申し送りには候補ID、停止条件、
 `KDP-EXPANSION-01`、対象書籍の読者課題 / HARMと理由 / 支払う理由 / 需要証拠 / 次の検証を短く記す。

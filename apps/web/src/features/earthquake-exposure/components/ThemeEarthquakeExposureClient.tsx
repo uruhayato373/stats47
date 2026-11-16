@@ -70,7 +70,7 @@ export function ThemeEarthquakeExposureClient({
         <p className="text-sm leading-relaxed text-muted-foreground">
           各地点で30年間に3%の確率で超える地震動の水準ごとに、地域人口を集計しています。
         </p>
-        <ValueTable
+        <ValueTable fold
           ariaLabel={`${area}の震度帯別人口`}
           caption="各年の総人口を分母にした割合です。人口は小数第1位まで表示し、丸めにより合計が一致しない場合があります。"
           columns={[

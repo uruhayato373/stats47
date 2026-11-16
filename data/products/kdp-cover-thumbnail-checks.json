@@ -2,6 +2,90 @@
   "schemaVersion": 1,
   "dataNote": "表紙を検索結果の大きさに縮めて目で確かめた記録。表紙の SHA-256 ごとに 1 件。書き手は node .claude/scripts/kdp/kdp-cover-thumbnail.mjs record。kdp-publish --commit は今の表紙の readable の記録を要求する。",
   "books": {
+    "K-S3-08": {
+      "coverSha256": "b9d2140205caea076b38e85f22423d161203a5d93de82c4ace90b0cef7c86293",
+      "coverPath": ".local/kindle-books/K-S3-08/v7-20261114-first/cover.jpg",
+      "heightsPx": [
+        120,
+        220
+      ],
+      "verdict": "readable",
+      "note": "2026-11-14 会話で表紙の見本 (縮小 120px) を見て採用",
+      "checkedAt": "2026-11-14",
+      "checkedBy": "owner"
+    },
+    "K-S3-02": {
+      "coverSha256": "f99c98352aa0eacb4194439623ff3d36e0dcad23e26d5e89291cf0cdbead8816",
+      "coverPath": ".local/kindle-books/K-S3-02/v2-20261114-map/cover.jpg",
+      "heightsPx": [
+        120,
+        220
+      ],
+      "verdict": "readable",
+      "note": "2026-11-14 オーナーが 7 冊の見本と高さ 220px の縮小を見て「採用する」",
+      "checkedAt": "2026-11-14",
+      "checkedBy": "owner"
+    },
+    "K-S3-03": {
+      "coverSha256": "225171e2c1c73b688cef2d2ab81b3063035c50bdd8e5984da97cc91959e067b3",
+      "coverPath": ".local/kindle-books/K-S3-03/v2-20261114-map/cover.jpg",
+      "heightsPx": [
+        120,
+        220
+      ],
+      "verdict": "readable",
+      "note": "2026-11-14 オーナーが 7 冊の見本と高さ 220px の縮小を見て「採用する」",
+      "checkedAt": "2026-11-14",
+      "checkedBy": "owner"
+    },
+    "K-S3-04": {
+      "coverSha256": "5f77f3d800ae316bd06546f1f25720daa852af01fd6be893b4c35ec4183e2177",
+      "coverPath": ".local/kindle-books/K-S3-04/v2-20261114-map/cover.jpg",
+      "heightsPx": [
+        120,
+        220
+      ],
+      "verdict": "readable",
+      "note": "2026-11-14 オーナーが 7 冊の見本と高さ 220px の縮小を見て「採用する」",
+      "checkedAt": "2026-11-14",
+      "checkedBy": "owner"
+    },
+    "K-S3-05": {
+      "coverSha256": "7071be2c9bbc85358e2ada8af4cf660a85afd7122a970367d4f2284b40515f35",
+      "coverPath": ".local/kindle-books/K-S3-05/v2-20261114-map/cover.jpg",
+      "heightsPx": [
+        120,
+        220
+      ],
+      "verdict": "readable",
+      "note": "2026-11-14 オーナーが 7 冊の見本と高さ 220px の縮小を見て「採用する」",
+      "checkedAt": "2026-11-14",
+      "checkedBy": "owner"
+    },
+    "K-S3-06": {
+      "coverSha256": "e6750a2169e7c6cf9b2bb753e23e2b3255fe61efcb6810f7d1f77a92e5e7949c",
+      "coverPath": ".local/kindle-books/K-S3-06/v2-20261114-map/cover.jpg",
+      "heightsPx": [
+        120,
+        220
+      ],
+      "verdict": "readable",
+      "note": "2026-11-14 オーナーが 7 冊の見本と高さ 220px の縮小を見て「採用する」",
+      "checkedAt": "2026-11-14",
+      "checkedBy": "owner"
+    },
+    "K-S3-07": {
+      "coverSha256": "13f5c34867c1f0fa251c808e4796092bbaa6fb7683856bddcb5c0e2100cbf6d3",
+      "coverPath": ".local/kindle-books/K-S3-07/v2-20261114-map/cover.jpg",
+      "heightsPx": [
+        120,
+        220
+      ],
+      "verdict": "readable",
+      "note": "2026-11-14 オーナーが 7 冊の見本と高さ 220px の縮小を見て「採用する」",
+      "checkedAt": "2026-11-14",
+      "checkedBy": "owner"
+    },
     "K-S1-14": {
       "coverSha256": "a0962050bb9be4a628bd4e8c79711a3d93d5475f78f058c6f688ba954c841fc0",
       "coverPath": ".local/kindle-books/K-S1-14/v1-20261114-r2/cover.jpg",

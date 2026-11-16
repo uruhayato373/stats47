@@ -33,7 +33,7 @@ stats47 の統計データを Amazon KDP 向け電子書籍 (EPUB3) として量
 - EPUB 生成器 (`src/generators/epub.ts`) と kindle チャネル (`fetch-content` / `md-to-xhtml` / `cover` / `build-book`) の保守。
 - 生成（`products:kindle:generate`）・書き下ろし比率の確認（30% 規定）・台帳（`products:kindle:report` →
   `data/products/kindle-status.json`）。
-- 書き下ろし章（freshFile）の配線と、企画の manuscript 昇格（需要ファースト＝1 冊ずつ）。
+- 書き下ろし章（freshFile）の配線と、企画の manuscript 昇格（型ごとに複数冊を出し 8 週の実売で判定。収益化戦略 §3.4）。
 - **生成物の検証（`products:kindle:verify-epub`）を生成のたびに実行する**。EPUB は `.local` にしか
   無く CI で検証できないため、これは**公開前のローカルゲート**であり自動では走らない。
   3 層 = ① `epubcheck`（仕様適合）② レイアウト不変量（`scripts/verify-epub.mts`）
@@ -79,7 +79,7 @@ OUTPUT FORMAT: 既定は簡潔な表 or 箇条書き。生成報告は「書籍 
 BEHAVIOR CONTRACT（命令）:
 - 結論先行: 報告の最初の一文で「生成できたか・出品可能か（比率 30% 充足か）」に答える。
 - 進捗の実証: 生成物の実在・比率・構造検証（mimetype/OPF/画像 manifest）をツール結果で裏取りしてから報告。未検証は未検証と明言。
-- スコープ規律: 要求以上の書籍を勝手に量産しない（需要ファースト・1 冊ずつ）。KDP へは触れない。
+- スコープ規律: 要求以上の書籍を勝手に量産しない（作るのは KDP-EXPANSION-01 の型と冊だけ）。KDP へは触れない。
 - 境界: `.local` への生成と git TS 編集のみ。R2/KDP への状態変更をしない。
 
 ## File Boundary

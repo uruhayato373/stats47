@@ -1,0 +1,145 @@
+{
+  "title": "生活習慣と正答率の派生相関（都道府県・2025年度）",
+  "kind": "derived",
+  "method": "R2 app/stats/<key>/values.json の2025年度の値を県名で結合し、ピアソンの積率相関係数とスピアマンの順位相関係数（同順位は平均順位）を計算。criticalAbsR は両側5%で偶然と区別できる相関係数の絶対値の目安（自由度 n-2 の t 分布）。",
+  "correlations": [
+    {
+      "xMetric": "national-assessment-elementary-tutoring-rate",
+      "yMetric": "national-assessment-elementary-mathematics-correct-rate",
+      "year": "2025年度",
+      "excludedAreas": [],
+      "n": 47,
+      "pearson": 0.422,
+      "spearman": 0.461,
+      "criticalAbsR": 0.288
+    },
+    {
+      "xMetric": "national-assessment-elementary-tutoring-rate",
+      "yMetric": "national-assessment-elementary-mathematics-correct-rate",
+      "year": "2025年度",
+      "excludedAreas": [
+        "東京都"
+      ],
+      "n": 46,
+      "pearson": 0.319,
+      "spearman": 0.424,
+      "criticalAbsR": 0.291
+    },
+    {
+      "xMetric": "national-assessment-elementary-tutoring-rate",
+      "yMetric": "national-assessment-elementary-mathematics-correct-rate",
+      "year": "2025年度",
+      "excludedAreas": [
+        "東京都",
+        "神奈川県",
+        "奈良県",
+        "大阪府",
+        "兵庫県"
+      ],
+      "n": 42,
+      "pearson": 0.256,
+      "spearman": 0.387,
+      "criticalAbsR": 0.304
+    },
+    {
+      "xMetric": "national-assessment-elementary-breakfast-rate",
+      "yMetric": "national-assessment-elementary-mathematics-correct-rate",
+      "year": "2025年度",
+      "excludedAreas": [],
+      "n": 47,
+      "pearson": -0.036,
+      "spearman": -0.125,
+      "criticalAbsR": 0.288
+    },
+    {
+      "xMetric": "national-assessment-elementary-reading-like-rate",
+      "yMetric": "national-assessment-elementary-mathematics-correct-rate",
+      "year": "2025年度",
+      "excludedAreas": [],
+      "n": 47,
+      "pearson": -0.05,
+      "spearman": -0.094,
+      "criticalAbsR": 0.288
+    },
+    {
+      "xMetric": "national-assessment-elementary-study-1h-plus-rate",
+      "yMetric": "national-assessment-elementary-mathematics-correct-rate",
+      "year": "2025年度",
+      "excludedAreas": [],
+      "n": 47,
+      "pearson": 0.154,
+      "spearman": 0.112,
+      "criticalAbsR": 0.288
+    },
+    {
+      "xMetric": "national-assessment-elementary-tutoring-rate",
+      "yMetric": "national-assessment-elementary-study-1h-plus-rate",
+      "year": "2025年度",
+      "excludedAreas": [],
+      "n": 47,
+      "pearson": -0.166,
+      "spearman": -0.148,
+      "criticalAbsR": 0.288
+    },
+    {
+      "xMetric": "national-assessment-elementary-mathematics-correct-rate",
+      "yMetric": "national-assessment-junior-high-mathematics-correct-rate",
+      "year": "2025年度",
+      "excludedAreas": [],
+      "n": 47,
+      "pearson": 0.751,
+      "spearman": 0.659,
+      "criticalAbsR": 0.288
+    },
+    {
+      "xMetric": "national-assessment-elementary-tutoring-rate",
+      "yMetric": "national-assessment-junior-high-mathematics-correct-rate",
+      "year": "2025年度",
+      "excludedAreas": [],
+      "n": 47,
+      "pearson": 0.366,
+      "spearman": 0.442,
+      "criticalAbsR": 0.288
+    },
+    {
+      "xMetric": "national-assessment-elementary-breakfast-rate",
+      "yMetric": "national-assessment-junior-high-mathematics-correct-rate",
+      "year": "2025年度",
+      "excludedAreas": [],
+      "n": 47,
+      "pearson": 0.117,
+      "spearman": 0.052,
+      "criticalAbsR": 0.288
+    },
+    {
+      "xMetric": "national-assessment-elementary-reading-like-rate",
+      "yMetric": "national-assessment-junior-high-mathematics-correct-rate",
+      "year": "2025年度",
+      "excludedAreas": [],
+      "n": 47,
+      "pearson": -0.201,
+      "spearman": -0.216,
+      "criticalAbsR": 0.288
+    },
+    {
+      "xMetric": "national-assessment-elementary-study-1h-plus-rate",
+      "yMetric": "national-assessment-junior-high-mathematics-correct-rate",
+      "year": "2025年度",
+      "excludedAreas": [],
+      "n": 47,
+      "pearson": 0.033,
+      "spearman": 0.004,
+      "criticalAbsR": 0.288
+    },
+    {
+      "xMetric": "national-assessment-junior-high-self-esteem-rate",
+      "yMetric": "national-assessment-junior-high-mathematics-correct-rate",
+      "year": "2025年度",
+      "excludedAreas": [],
+      "n": 47,
+      "pearson": 0.052,
+      "spearman": 0.102,
+      "criticalAbsR": 0.288
+    }
+  ]
+}

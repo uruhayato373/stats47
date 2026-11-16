@@ -70,87 +70,45 @@ export const KDP_AI_DISCLOSURE: KdpAiDisclosure = {
 export const KDP_APPLY_DRM = true;
 
 /**
- * KDPポートフォリオの運用判断SSOT。
+ * KDPポートフォリオの運用判断SSOT (管理画面の /content が読む)。
  *
- * 12冊公開後は一括量産を止め、売上/KENPの実測前に残りを公開しない。
- * 「未公開が何冊か」はkdp-listingsから毎回計算し、ここへ固定値を持たない。
+ * 2026-11-14 オーナー決定: 需要は出して確かめる。型ごとに複数冊を作り直して出し、
+ * 公開日から 8 週の実売で型ごとに続ける・増やす・止めるを決める (収益化戦略 §3.4)。
  */
 export const KDP_PORTFOLIO_POLICY = {
-  mode: "paused" as const,
-  decisionStatus: "pending" as const,
-  title: "残りのKindleを継続出版するか判断",
-  reason: "公開済み書籍の売上・KENPを実測し、需要があるシリーズだけを1冊ずつ再開する",
-  resumeCondition: "オーナーの明示承認 + 売上またはKENPの需要証拠",
-  source: ".claude/rules/kindle-publishing-standards.md",
+  mode: "active" as const,
+  decisionStatus: "decided" as const,
+  title: "KDP を型ごとに作り直して出す",
+  reason: "型ごとに複数冊を出し、公開日から8週の販売数とKENPで型ごとに続ける・増やす・止めるを決める",
+  resumeCondition: "1冊ずつのオーナーの明示承認",
+  source: "docs/00_プロジェクト管理/02_収益化戦略.md §3.4",
 };
 
 /**
- * KDPの冊数と週次ペース。
+ * KDPの週次公開の機械契約 (weekly-review / weekly-plan / kdp-weekly-publish が読む)。
  *
- * 32冊は企画カタログであって一括出版目標ではない。現在の販売対象はS1 12冊と、
- * 4週実測後に1冊ずつ試す3パイロットの計15冊。S2/S3/S4の旧設計20冊は未承認。
+ * 2026-11-14 に「週1冊・4週実測・パイロットを1冊ずつ順番に」から改めた。
+ * - 前の本の売上を待たずに出してよい。週の冊数上限は置かない
+ *   (KDP の未公開約10冊の作成数制限は kdp-publish の preflight が止める)
+ * - 1冊ずつの明示承認と品質の決まり (編集設計・critic・Previewer・保全) は変えない
+ * - 計測は各冊の公開日から 8 週。型ごとの判定はオーナーが行い、このコードは材料だけを出す
  */
 export const KDP_PUBLICATION_PLAN = {
+  /** 企画カタログの冊数 (book-catalog.ts の KINDLE_BOOKS と一致)。出版目標ではない */
   registeredCatalogCount: 38,
+  /** 作り直しの前提として販売中であるべき S1 の冊数 */
   approvedS1Count: 12,
-  evidenceGatedPilotCount: 3,
-  activePublicationTargetCount: 15,
-  maxNewPublicationsPerWeek: 1,
-  cohortMeasurementWeeks: 4,
-  currentGate: {
-    status: "paused-until-measured",
-    decisionDate: "2026-09-27",
-    requirement: "S1 12冊の販売数またはKENPをproducts:salesへ記録し、オーナーが次の1冊を明示承認する",
-  },
-  weeklySequence: [
-    { week: "2026-W38", action: "S1 12冊の審査・販売開始・旧版停止を完了。新規出版なし" },
-    { week: "2026-W39", action: "S1の4週売上/KENPを取込み、継続・修正・停止を判断。新規出版なし" },
-    { week: "2026-W40", action: "需要証拠がある第1パイロットを1冊だけ設計・全章レビュー・Previewer確認" },
-    { week: "2026-W41", action: "全ゲートと個別承認を満たした場合だけ第1パイロットを最大1冊出版" },
-    { week: "2026-W42-W44", action: "第1パイロットを計測。新規出版なし" },
-    { week: "2026-W45", action: "4週実測で需要が確認できた場合だけ第2パイロットを最大1冊出版" },
-    { week: "2026-W49", action: "第2パイロットの4週実測で需要が確認できた場合だけ第3パイロットを最大1冊出版" },
-    { week: "2026-W50〜2027-W01", action: "第3パイロットを4週実測し、15冊ポートフォリオの継続・修正・停止を判断" },
-  ],
-  /**
-   * weekly-review / weekly-plan が読む機械契約。weeklySequence は人間向け表示で、
-   * 判定・上限・停止はこの値と sales-ledger / kdp-listings の実測から決める。
-   */
-  expansionProgramStartsAt: "2026-09-28",
-  baselineCohort: {
-    bookIds: Array.from({ length: 12 }, (_, index) => `K-S1-${String(index + 1).padStart(2, "0")}`),
-    measurementStartsAt: "2026-08-30",
-  },
-  pilots: [
-    {
-      ordinal: 1,
-      // 当初の企画は「47県庁所在市の食卓・家計ガイド (1県1章)」。県別の食卓はサイトと note で無料公開済みだったので、
-      // 問いを「47都市の食卓は似てきたのか」に変えて K-S1-14 として出した (2026-11-14 オーナー承認。週次の判定は判定不能のまま)。
-      bookId: "K-S1-14",
-      concept: "47都市の食卓は似てきたのか (県庁所在市の19年の変化)",
-      format: "問いに答える読み物 + 47都市の事実票",
-      plannedPreparationWeek: "2026-W40",
-      earliestPublicationWeek: "2026-W41",
-    },
-    {
-      ordinal: 2,
-      bookId: "K-S4-02",
-      concept: "意外な1位ストーリー集",
-      format: "見出し駆動の県民性ストーリー",
-      plannedPreparationWeek: "2026-W44",
-      earliestPublicationWeek: "2026-W45",
-    },
-    {
-      ordinal: 3,
-      bookId: "K-S2-12",
-      concept: "47都道府県 総合スコアブック",
-      format: "指標横断の合成スコア",
-      plannedPreparationWeek: "2026-W48",
-      earliestPublicationWeek: "2026-W49",
-    },
+  /** 各冊の計測窓 (公開日から) */
+  cohortMeasurementWeeks: 8,
+  /** この日以降に提出・販売開始した S1 以外の本を作り直しの本として数える (それ以前の旧版は対象外) */
+  expansionProgramStartsAt: "2026-11-14",
+  /** 作り直す型。書籍 ID の接頭辞で本を型に振り分ける (KDP-EXPANSION-01 の ①〜③) */
+  formats: [
+    { id: "prefecture-guide", concept: "1県1章のガイド", bookIdPrefix: "K-S3-", replaces: "旧 S3 地域データブック" },
+    { id: "surprising-first", concept: "意外な1位の県民性ストーリー", bookIdPrefix: "K-S4-", replaces: "旧 S4 ランキング大全" },
+    { id: "topic-reader", concept: "分野別の読み物", bookIdPrefix: "K-S2-", replaces: "旧 S2 テーマ別データブック" },
   ],
   stopConditions: [
-    "売上/KENP未計測",
     "編集設計または全章critic PASSなし",
     "Previewer・暗号化archive・KDP read-backのいずれか未完了",
     "オーナーの当該1冊への明示承認なし",

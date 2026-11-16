@@ -81,16 +81,17 @@ describe("行政向け商品の検証の進み具合", () => {
     }
   });
 
-  it("現物の収益化戦略 §5 の検証順序は 4 段階で、現物の台帳の件数と段階がゲート表の B2B基盤 の行に出る", () => {
+  // 行政向け商品の検証 (ADMIN-STAT-PILOT-01) は 2026-11-14 のオーナー決定で廃止し、収益化戦略 §5 の検証順序の表も消した。
+  // 現物の文書では段階を読めないので、段階は未記録になり、聞き取り台帳の件数だけがゲート表に出る。
+  it("現物の収益化戦略には検証順序の表が無く (2026-11-14 廃止)、ゲート表の B2B基盤 の行は段階を未記録にして件数を出す", () => {
     process.env.STATS47_PROJECT_ROOT = REPO;
     const board = strategyGateBoard();
     expect(board.error).toBeNull();
-    expect(board.pilotStages).toHaveLength(4);
-    expect(board.pilotStages[0]).toBe("1. 業務を選ぶ");
+    expect(board.pilotStages).toEqual([]);
     const row = board.rows.find((r) => r.name === "B2B基盤");
     expect(row?.source).toContain("聞き取り台帳");
     expect(row?.details.join("\n")).toMatch(/聞き取り: \d+\/\d+ 件/);
-    expect(row?.details.join("\n")).toMatch(/段階: (未記録|1\. 業務を選ぶ)/);
+    expect(row?.details.join("\n")).toMatch(/段階: 未記録/);
     expect(row?.details.join("\n")).not.toContain("gate.targetInterviewCount");
   });
 });

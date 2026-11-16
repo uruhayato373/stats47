@@ -111,7 +111,7 @@ describe('PageShell — rightRail', () => {
 });
 
 describe('PageSections', () => {
-  it('節 (カード) の間にだけ点線の帯を置き、空の子は数えない', () => {
+  it('節 (カード) を格子の線だけで区切り、点線の帯を挟まない', () => {
     const { container } = render(
       <PageSections>
         <section aria-label="a">a</section>
@@ -128,8 +128,7 @@ describe('PageSections', () => {
     expect(root.className).toContain('*:shadow-[0_0_0_1px_hsl(var(--border))]!');
     expect(root.className).not.toMatch(/\bbg-border/);
     const kinds = [...root.children].map((child) => child.getAttribute('data-slot') ?? child.tagName);
-    expect(kinds).toEqual(['SECTION', 'section-divider', 'SECTION', 'section-divider', 'SECTION']);
-    // 帯は読み上げない (装飾)
-    expect(root.querySelector('[data-slot="section-divider"]')).toHaveAttribute('aria-hidden', 'true');
+    // 2026-11-16 に点線の帯を廃止: 節は格子の直下に並び、間に区切りのセルを挟まない
+    expect(kinds).toEqual(['SECTION', 'SECTION', 'SECTION']);
   });
 });

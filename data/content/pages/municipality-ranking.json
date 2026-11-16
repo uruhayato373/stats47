@@ -2565,15 +2565,15 @@
       "id": "municipality-ranking:manufacturing-shipment",
       "kind": "municipality-ranking",
       "key": "manufacturing-shipment",
-      "title": "製造品出荷額等（総額（旧統計））の市区町村ランキング",
+      "title": "製造品出荷額等の市区町村ランキング",
       "href": "/municipalities/ranking/manufacturing-shipment",
-      "published": true
+      "published": false
     },
     {
       "id": "municipality-ranking:manufacturing-shipment-amount",
       "kind": "municipality-ranking",
       "key": "manufacturing-shipment-amount",
-      "title": "製造品出荷額等（総額）の市区町村ランキング",
+      "title": "製造品出荷額等の市区町村ランキング",
       "href": "/municipalities/ranking/manufacturing-shipment-amount",
       "published": true
     },
@@ -3591,7 +3591,7 @@
       "key": "per-taxpayer-income",
       "title": "納税義務者1人当たり課税所得の市区町村ランキング",
       "href": "/municipalities/ranking/per-taxpayer-income",
-      "published": true
+      "published": false
     },
     {
       "id": "municipality-ranking:per-taxpayer-taxable-income",
@@ -5037,9 +5037,9 @@
       "id": "municipality-ranking:retail-stores-per",
       "kind": "municipality-ranking",
       "key": "retail-stores-per",
-      "title": "小売店数（市区町村・人口当たり）の市区町村ランキング",
+      "title": "小売店数の市区町村ランキング",
       "href": "/municipalities/ranking/retail-stores-per",
-      "published": true
+      "published": false
     },
     {
       "id": "municipality-ranking:road-bridge-expense-municipal",

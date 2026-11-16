@@ -904,46 +904,6 @@
         "dimensionAggregation": "none",
         "timeAggregation": "none"
       },
-      "channel": "prefecture-ranking",
-      "status": "planned",
-      "title": "小学生の算数平均正答率",
-      "unit": "％",
-      "aggregation": {
-        "type": "identity"
-      },
-      "reason": "同年度・同学年・同教科の公立校47県を直接比較できる。既存 academic-achievement-test-average-rate は小中4教科の単純平均であり、教科別とは定義が異なる。",
-      "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
-      "metricKey": "national-assessment-elementary-mathematics-correct-rate",
-      "verification": {
-        "tableSha256": "face3941ad59346af66f56d05c7d6579430b8214dd0d5a8d7ae7b111a2c6effd",
-        "rowCount": 47,
-        "areaCount": 47,
-        "min": 51,
-        "max": 64
-      }
-    },
-    {
-      "datasetId": "nier-gakuryoku-achievement",
-      "table": "primary-achievement",
-      "slice": {
-        "version": "2025",
-        "areaLevel": "prefecture",
-        "dims": {
-          "grade": [
-            "小学6年"
-          ],
-          "subject": [
-            "算数"
-          ]
-        },
-        "time": {
-          "kind": "point",
-          "value": "2025"
-        },
-        "dimensionAggregation": "none",
-        "timeAggregation": "none"
-      },
       "channel": "theme",
       "status": "planned",
       "title": "小学生の算数平均正答率",
@@ -1002,46 +962,6 @@
         "areaCount": 47,
         "min": 49,
         "max": 57
-      }
-    },
-    {
-      "datasetId": "nier-gakuryoku-achievement",
-      "table": "junior-achievement",
-      "slice": {
-        "version": "2025",
-        "areaLevel": "prefecture",
-        "dims": {
-          "grade": [
-            "中学3年"
-          ],
-          "subject": [
-            "数学"
-          ]
-        },
-        "time": {
-          "kind": "point",
-          "value": "2025"
-        },
-        "dimensionAggregation": "none",
-        "timeAggregation": "none"
-      },
-      "channel": "prefecture-ranking",
-      "status": "planned",
-      "title": "中学生の数学平均正答率",
-      "unit": "％",
-      "aggregation": {
-        "type": "identity"
-      },
-      "reason": "同年度・同学年・同教科の公立校47県を直接比較できる。既存 academic-achievement-test-average-rate は小中4教科の単純平均であり、教科別とは定義が異なる。",
-      "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
-      "metricKey": "national-assessment-junior-high-mathematics-correct-rate",
-      "verification": {
-        "tableSha256": "2c7f76a8a1c372e37457a8370d1ef1a331005335594130caff124b0e49c5933e",
-        "rowCount": 47,
-        "areaCount": 47,
-        "min": 38,
-        "max": 54
       }
     },
     {
@@ -1305,50 +1225,6 @@
         "max": 94.30000000000001
       },
       "metricKey": "national-assessment-elementary-friendship-satisfaction-rate"
-    },
-    {
-      "datasetId": "nier-gakuryoku-lifestyle",
-      "table": "junior-lifestyle-response-rates",
-      "slice": {
-        "version": "2025",
-        "areaLevel": "prefecture",
-        "dims": {
-          "grade": [
-            "中学3年"
-          ],
-          "question": [
-            "自分には、よいところがあると思いますか"
-          ],
-          "answer": [
-            "1",
-            "2"
-          ]
-        },
-        "time": {
-          "kind": "point",
-          "value": "2025"
-        },
-        "dimensionAggregation": "sum",
-        "timeAggregation": "none"
-      },
-      "channel": "prefecture-ranking",
-      "status": "planned",
-      "title": "自分によいところがあると思う中学生の割合",
-      "unit": "％",
-      "aggregation": {
-        "type": "identity"
-      },
-      "reason": "令和7年度質問紙の設問(5)で1＝当てはまる、2＝どちらかといえば当てはまると確認（定義: https://www.nier.go.jp/25chousa/pdf/25shitsumonchousa_chuu_seito.pdf）。公表済み割合の1＋2を合計し47県・94行で82.6〜89.3％、人口を分母にしない肯定回答率としてplannedにする。",
-      "decidedAt": "2026-11-15",
-      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
-      "verification": {
-        "tableSha256": "d6e5af51eeb256a4b266e8f1db3b6edfa428eecc35967d5888266b03f6d07005",
-        "rowCount": 94,
-        "areaCount": 47,
-        "min": 82.6,
-        "max": 89.3
-      },
-      "metricKey": "national-assessment-junior-high-self-esteem-rate"
     },
     {
       "datasetId": "nier-gakuryoku-lifestyle",
@@ -1875,44 +1751,6 @@
       "decidedAt": "2026-11-15",
       "decidedBy": "codex / local normalized-table and metric-registry audit",
       "duplicateOf": "heatstroke-emergency-transports"
-    },
-    {
-      "datasetId": "fdma-heatstroke-emergency-transports",
-      "table": "heatstroke-transports-daily",
-      "slice": {
-        "version": "2025-10-29",
-        "areaLevel": "prefecture",
-        "dims": {},
-        "time": {
-          "kind": "range",
-          "start": "2025-05-01",
-          "end": "2025-09-30"
-        },
-        "dimensionAggregation": "none",
-        "timeAggregation": "sum"
-      },
-      "channel": "prefecture-ranking",
-      "status": "planned",
-      "title": "熱中症救急搬送人員（人口10万人当たり）",
-      "unit": "人/10万人",
-      "aggregation": {
-        "type": "per-100k",
-        "denominatorTime": "2025"
-      },
-      "reason": "2025年5〜9月の153日×47県の合計100510人は公開中の2025年搬送人員と47県すべて一致し、分母は最寄りの2025年総人口（分子2025年との差0年、47地域の分母欠落0）で54.079206〜128.396539人/10万人を検算した。搬送地ベースの救急搬送率としてplannedにし、住民の発症率とは呼ばない。",
-      "decidedAt": "2026-11-15",
-      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
-      "denominator": "total-population",
-      "verification": {
-        "tableSha256": "93f8055279f4436f5c47fc13fa5edbcef6c466ca3c1ee6cb7419fb541d3c1f14",
-        "rowCount": 7191,
-        "areaCount": 47,
-        "min": 54.07920580574862,
-        "max": 128.3965390536376,
-        "denominatorTime": "2025",
-        "denominatorSha256": "c2b7682fd0fd7f511d468ebe6a5a1e8e82fcf22101676ad84618cb101e4ad521"
-      },
-      "metricKey": "heatstroke-emergency-transports-per-100k"
     },
     {
       "datasetId": "fdma-heatstroke-emergency-transports",
@@ -3323,112 +3161,6 @@
         "denominatorSha256": "c2b7682fd0fd7f511d468ebe6a5a1e8e82fcf22101676ad84618cb101e4ad521"
       },
       "metricKey": "snow-weather-traffic-accidents-per-100k"
-    },
-    {
-      "datasetId": "npa-traffic-accident-opendata",
-      "table": "accident-count-by-participants",
-      "slice": {
-        "version": "2025",
-        "areaLevel": "prefecture",
-        "dims": {
-          "ageGroupA": [
-            "75"
-          ],
-          "participantA": [
-            "01",
-            "02",
-            "03",
-            "04",
-            "05",
-            "07",
-            "11",
-            "12",
-            "13",
-            "14",
-            "17",
-            "21",
-            "22",
-            "23",
-            "24",
-            "31",
-            "32",
-            "33",
-            "34",
-            "35",
-            "36",
-            "41",
-            "42",
-            "43",
-            "51",
-            "52",
-            "59",
-            "61",
-            "75",
-            "76"
-          ],
-          "participantB": [
-            "00",
-            "01",
-            "02",
-            "03",
-            "04",
-            "05",
-            "07",
-            "11",
-            "12",
-            "13",
-            "14",
-            "17",
-            "21",
-            "22",
-            "23",
-            "24",
-            "31",
-            "32",
-            "33",
-            "34",
-            "35",
-            "36",
-            "41",
-            "42",
-            "43",
-            "51",
-            "52",
-            "59",
-            "61",
-            "75",
-            "76"
-          ]
-        },
-        "time": {
-          "kind": "point",
-          "value": "2025"
-        },
-        "dimensionAggregation": "sum",
-        "timeAggregation": "none"
-      },
-      "channel": "prefecture-ranking",
-      "status": "planned",
-      "title": "当事者Aが75歳以上の交通事故発生件数（総人口10万人当たり）",
-      "unit": "件/10万人",
-      "aggregation": {
-        "type": "per-100k",
-        "denominatorTime": "2025"
-      },
-      "reason": "当事者Aの年齢75＝75歳以上、当事者種別には歩行者も含む（定義: https://www.npa.go.jp/publications/statistics/koutsuu/opendata/2025/codebook_2025.xlsx）。分母は最寄りの2025年総人口（分子2025年との差0年、47地域の分母欠落0）で47県14.310997〜51.287988件/10万人を検算し、75歳以上人口の事故率や高齢運転者の事故率と区別した総人口当たり件数としてplannedにする。",
-      "decidedAt": "2026-11-15",
-      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
-      "denominator": "total-population",
-      "verification": {
-        "tableSha256": "e8a15f080ed2c22ee868b45112b998e4679e2877070978f1cb5c81c1b276ea6f",
-        "rowCount": 2292,
-        "areaCount": 47,
-        "min": 14.310997047164276,
-        "max": 51.28798767802076,
-        "denominatorTime": "2025",
-        "denominatorSha256": "c2b7682fd0fd7f511d468ebe6a5a1e8e82fcf22101676ad84618cb101e4ad521"
-      },
-      "metricKey": "traffic-accidents-party-a-age-75-plus-per-100k"
     },
     {
       "datasetId": "fdma-heatstroke-emergency-transports",

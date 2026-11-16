@@ -847,13 +847,8 @@
       ]
     },
     "manufacturing-shipment": {
-      "status": "published",
-      "entityPolicyKey": "standard-municipality-v1",
-      "comparisonModes": [
-        "ranking",
-        "prefecture-filter",
-        "municipality-search"
-      ]
+      "status": "unsupported",
+      "reason": "manufacturing-shipment-amount と市区町村の観測値が完全一致の重複 (同じ市区町村表・同じ項目)。2026-11-16 オーナー判断で manufacturing-shipment-amount へ寄せ、旧 URL は site.municipality-ranking-redirects で 301"
     },
     "manufacturing-shipment-amount": {
       "status": "published",
@@ -1225,13 +1220,8 @@
       ]
     },
     "per-taxpayer-income": {
-      "status": "published",
-      "entityPolicyKey": "standard-municipality-v1",
-      "comparisonModes": [
-        "ranking",
-        "prefecture-filter",
-        "municipality-search"
-      ]
+      "status": "unsupported",
+      "reason": "per-taxpayer-taxable-income と市区町村の観測値が完全一致の重複 (同じ市区町村表・同じ項目)。2026-11-16 オーナー判断で per-taxpayer-taxable-income へ寄せ、旧 URL は site.municipality-ranking-redirects で 301"
     },
     "per-taxpayer-taxable-income": {
       "status": "published",
@@ -1360,13 +1350,8 @@
       ]
     },
     "retail-stores-per": {
-      "status": "published",
-      "entityPolicyKey": "standard-municipality-v1",
-      "comparisonModes": [
-        "ranking",
-        "prefecture-filter",
-        "municipality-search"
-      ]
+      "status": "unsupported",
+      "reason": "retail-store-count-per-1000 と市区町村の観測値が完全一致の重複 (同じ市区町村表・同じ項目)。2026-11-16 オーナー判断で retail-store-count-per-1000 へ寄せ、旧 URL は site.municipality-ranking-redirects で 301"
     },
     "sales-amount-private": {
       "status": "published",

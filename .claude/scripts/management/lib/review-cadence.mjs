@@ -203,6 +203,8 @@ export function parseRoutes(item, marker) {
   if (at < 0) return null;
   return item
     .slice(at + marker.length)
+    // 括弧の中 (行き先の理由) は区切らない。「見送り (重点外、…)」を 1 つの行き先として読む
+    .replace(/\([^()]*\)|（[^（）]*）/g, "")
     .split(/[/／、,]/)
     .map((t) => t.trim().replace(/^`|`$/g, ""))
     .map((t) => t.split(/[\s（(]/)[0])

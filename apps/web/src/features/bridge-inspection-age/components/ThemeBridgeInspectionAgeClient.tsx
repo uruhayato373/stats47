@@ -53,7 +53,7 @@ export function ThemeBridgeInspectionAgeClient({
           {selected.knownYearCount.toLocaleString('ja-JP')}橋、不明は
           {selected.unknownYearCount.toLocaleString('ja-JP')}橋です。
         </p>
-        <ValueTable
+        <ValueTable fold
           ariaLabel={`${area}の当年度点検橋の架設年度分布`}
           caption="年度差＝2025年度−架設年度。割合は架設年度不明を含む掲載橋数が分母です。"
           columns={[
