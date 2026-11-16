@@ -9,7 +9,7 @@
  * 更新方法: `cd apps/web && npx tsx scripts/generate-known-tag-keys.ts`
  * 更新タイミング: ブログ公開で R2 blog snapshot が変わった後。commit + デプロイで反映。
  *
- * 最終生成日: 2026-11-15
+ * 最終生成日: 2026-11-16
  * 件数: 907
  */
 export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([

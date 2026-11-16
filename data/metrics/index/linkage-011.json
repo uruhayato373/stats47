@@ -7775,7 +7775,7 @@
     },
     {
       "metricKey": "heatstroke-emergency-transports-per-100k",
-      "pageId": null,
+      "pageId": "ranking:heatstroke-emergency-transports-per-100k",
       "title": "熱中症救急搬送人員",
       "sources": [],
       "recipe": {
