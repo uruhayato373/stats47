@@ -9,7 +9,7 @@
 | -------------------- | --------------------------------------------------------------------- |
 | ページ構造・表示件数 | `apps/web/src/app/page.tsx`                                           |
 | 利用意図と表示順     | `packages/data-configs/src/home-portal.ts`                            |
-| 利用意図の画像生成仕様 | `apps/web/scripts/data/home-use-case-image-catalog.ts`               |
+| 利用意図の画像 | テーマのサムネイル (`apps/web/scripts/data/theme-thumbnail-catalog.ts`) |
 | UI・レイアウト       | `docs/01_技術設計/04_デザインシステム.md`                             |
 | 情報設計             | `docs/01_技術設計/03_情報設計.md`                                     |
 | GA4イベント          | `.claude/rules/analytics-event-standards.md`                          |
@@ -41,17 +41,11 @@
 - `id`、遷移先、`order`を重複させない
 - `order`は1始まりの連番
 - runtime LLM、JSON SSOT、D1を追加しない
-- `imageSrc`は`/images/home/use-cases/<id>.webp`と一致させる
 
 ## 利用意図カード画像
 
-- 配信用のWebP (明るい地を焼き込み、ダーク表示でも暗くしない) は`apps/web/public/images/home/use-cases/`に置く。UIと同じリリースで
-  変更する少数の静的素材なのでR2へ分離しない
-- imagegenの元PNGは`assets/page-heroes/home-use-case-<id>.png`に残す
-- 共通スタイル・主題・プロンプトは`home-use-case-image-catalog.ts`で管理する
-- 元PNGを差し替えた後は
-  `npx tsx apps/web/scripts/process-home-use-case-images.ts --only <id>`で、背景の除去・
-  絵の範囲での切り出し・16:9 (640×360、余白は高さの8%) への配置・地の焼き込み・WebP最適化を同じ条件で再実行する
+- 遷移先テーマのサムネイル `apps/web/public/images/themes/<themeKey>.webp` をそのまま使う。パスは `PortalUseCaseGrid` が `themeKey` から導く (設定に画像のパスを書かない)
+- 生成と作り直しは `apps/web/scripts/theme-thumbnails.ts` (規約は `.claude/rules/ogp-image-standards.md` §1 の「カード: theme」)
 - カードはブログカードと同じ全幅の16:9の画像枠 (`PORTAL_CARD_ASPECT_CLASS`) に画像を置く
 - 画像は装飾扱い (`alt=""`) とし、リンク名と説明は常にDOMテキストで提供する
 

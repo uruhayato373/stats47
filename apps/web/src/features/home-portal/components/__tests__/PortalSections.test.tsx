@@ -32,7 +32,7 @@ describe('PortalUseCaseGrid', () => {
     const images = [...container.querySelectorAll('img')];
     expect(images).toHaveLength(active.length);
     expect(images[0]?.getAttribute('src')).toContain(
-      '%2Fimages%2Fhome%2Fuse-cases%2Fmigration.webp'
+      `%2Fimages%2Fthemes%2F${active[0]?.themeKey}.webp`
     );
     expect(images.every((image) => image.getAttribute('alt') === '')).toBe(
       true

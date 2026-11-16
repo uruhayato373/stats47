@@ -5,7 +5,7 @@
  * 空色・黄色・紫の差し色。ただし OGP と違い、中央の文字の面と文字は入れない (題名はカードの DOM の文字が持つ。
  * 2026-11-16 オーナー判断)。共通の指示 (画風・構図・禁止事項) はここだけに置き、テーマごとには描く小物 (scene) だけを持つ。
  *
- * 元画像は `assets/themes/thumbnails/<key>.png` (3:2・1536×1024)、配信画像は
+ * 元画像は `assets/themes/thumbnails/<key>.jpg` (3:2・1536×1024。Codex の PNG を ingest で JPEG にして 1MB 未満に収める)、配信画像は
  * `apps/web/public/images/themes/<key>.webp` (640×360・中央で 16:9 に切り出す)。
  * 生成は Codex (経路の正本は config/image-generation-routes.json の theme-thumbnail)。
  */
@@ -13,11 +13,13 @@
 const THEME_THUMBNAIL_STYLE =
   'Asset type: thumbnail illustration for a theme card on a Japanese prefectural-statistics website. ' +
   'Bright hand-painted miniature desk objects in a cheerful, polished educational illustration style, pop and bold, ' +
-  'with sky blue, sunny yellow and purple accents, soft daylight, and a light warm tabletop or pale sky backdrop. ';
+  'with sky blue, sunny yellow and deep blue-violet purple (#6637b8) accents, soft daylight, and a light warm tabletop or pale sky backdrop. ' +
+  'Use the deep blue-violet for every purple element; no pink, magenta, or pale lavender. ' +
+  'Objects look like simplified painted wooden toys with smooth surfaces; food and plants are toy-like and simplified, not photorealistic. ';
 
 const THEME_THUMBNAIL_COMPOSITION =
   ' Composition: 3:2 landscape, 1536×1024, full-bleed scene with no empty text panel. ' +
-  'Place the main objects inside the central 80% of the width and the central 70% of the height so the picture survives a center crop to 16:9 and still reads at 240px wide. ' +
+  'Place the main objects inside the central 80% of the width and the central 70% of the height so the picture survives a center crop to 16:9 and still reads at 240px wide; leave clear background above the tallest object and below the lowest one. ' +
   'Two to four large objects, few small details, clear silhouettes. ' +
   'Strictly no text, letters, numbers, kanji, words, logos, brand marks, watermarks, people, faces, hands, mascots, fake charts, fake statistics, maps, or invented geographic shapes. ' +
   'Do not draw an official Red Cross emblem.';
@@ -41,7 +43,7 @@ export const THEME_THUMBNAIL_SUBJECTS = {
   'education-culture': { name: '教育・文化', scene: 'an open textbook without readable writing, a graduation cap, colored pencils, and a small school building model' },
   tourism: { name: '観光', scene: 'a suitcase, a camera, a hot-spring towel bundle, and a small bullet-train toy' },
   'consumer-prices': { name: '物価・消費', scene: 'a shopping basket of vegetables and bread, a blank price tag, a coin purse, and a small scale' },
-  'foreign-residents': { name: '外国人', scene: 'a passport-like booklet without marks, a globe, a suitcase, and a small house model' },
+  'foreign-residents': { name: '外国人', scene: 'a passport-like booklet without marks, a paper airplane, a suitcase, and a small house model' },
   'occupation-salary': { name: '職業別年収', scene: 'a row of work tools — a stethoscope, a laptop, a hard hat, and a chef hat — beside a stack of coins' },
   'real-income': { name: '実質収入・購買力', scene: 'an open wallet, a shopping bag, a balance scale weighing coins against groceries, and a magnifying glass' },
   'labor-mobility': { name: '人材流動性・雇用環境', scene: 'a briefcase, a pair of shoes stepping between two small office building models, and a wall calendar without numbers' },
@@ -81,7 +83,7 @@ export const THEME_THUMBNAIL_SUBJECTS = {
   'landslide-exposure': { name: '土砂災害', scene: 'a small hillside model with a retaining wall, a rain cloud, and a safety helmet' },
   'tsunami-exposure': { name: '津波と沿岸防災', scene: 'a coastal seawall model, a tall evacuation tower model, and a stylized wave' },
   'cultural-participation': { name: '文化芸術への参加', scene: 'a theater curtain model, a painting easel, an open book without readable writing, and a violin' },
-  'sports-participation': { name: 'スポーツ施設と利用', scene: 'a soccer ball, a baseball glove, running shoes, and a small stadium model' },
+  'sports-participation': { name: 'スポーツ施設と利用', scene: 'a soccer ball, a baseball glove, plain running shoes with no logos, swooshes, or stripes, and a small stadium model' },
   'local-government-digital': { name: '自治体DX', scene: 'a small town hall model, a tablet with a blank screen, an envelope, and a cloud icon shape' },
   'gender-participation': { name: '地域の男女共同参画', scene: 'two matching briefcases side by side, a balance scale in equilibrium, and a cooking pot' },
   'community-participation': { name: '市民参加と地域活動', scene: 'a ballot box without marks, a volunteer armband without lettering, a broom, and a small community hall' },
@@ -103,7 +105,7 @@ export function buildThemeThumbnailPrompt(key: ThemeThumbnailKey): string {
 }
 
 export function getThemeThumbnailSource(key: ThemeThumbnailKey): string {
-  return `assets/themes/thumbnails/${key}.png`;
+  return `assets/themes/thumbnails/${key}.jpg`;
 }
 
 export function getThemeThumbnailOutput(key: ThemeThumbnailKey): string {

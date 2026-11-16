@@ -1232,6 +1232,7 @@ export const DATASETS = [
   d("blog.codex-backgrounds", "assets/blog/codex-backgrounds/{**}", "asset", "site", "assets", "Codex で生成したブログ背景の原本と採用状態"),
   d("ogp.backgrounds", "assets/ogp/{**}", "asset", "site", "assets", "OGP・サムネイルのブランド背景と、その元画像"),
   d("area.specialty-illustrations", "assets/area-specialty/{**}", "asset", "site", "assets", "県ページの特産品イラストの原本 (sync-snapshots が R2 へ反映)"),
+  d("themes.thumbnails", "assets/themes/thumbnails/{name}", "asset", "site", "assets", "テーマのサムネイルの原本 (Codex で生成した 3:2 の JPEG。theme-thumbnails.ts process が apps/web/public/images/themes へ webp にする)"),
   d("site.page-heroes", "assets/page-heroes/{name}", "asset", "site", "assets", "カテゴリ・ホーム・テーマのヒーロー画像の原本 (webp にして apps/web/public へ)"),
   d("design.proposals", "assets/design-proposals/{name}", "asset", "site", "assets", "デザイン提案の画像"),
   d("design.reference", "assets/design-reference/{**}", "asset", "site", "assets", "参考サイト (shadcndashboard・Flowly など) の撮影と部品ごとの実測値。どれを参考にするかは台帳 design.references"),

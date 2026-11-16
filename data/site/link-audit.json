@@ -1,17 +1,244 @@
 {
-  "generatedAt": "2026-11-14T04:00:58.803Z",
+  "generatedAt": "2026-11-16T10:42:58.663Z",
   "origin": "https://stats47.jp",
   "mode": "per-route:10",
   "pagesCrawled": 132,
-  "pagesKnown": 10374,
-  "uniqueTargets": 5316,
+  "pagesKnown": 10363,
+  "uniqueTargets": 5053,
   "statusCount": {
-    "200": 5289,
-    "301": 27
+    "200": 5004,
+    "301": 27,
+    "307": 1,
+    "410": 1,
+    "503": 20
   },
-  "brokenCount": 0,
-  "brokenByRoute": {},
-  "broken": [],
+  "brokenCount": 21,
+  "brokenByRoute": {
+    "/ranking/[k]": 17,
+    "/areas/[c]/[theme]": 4
+  },
+  "broken": [
+    {
+      "target": "/ranking/accommodation-consumption-expenditure",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 6,
+      "from": [
+        "/ranking/sauce-consumption-quantity",
+        "/ranking/household-utensils-group-consumption-expenditure",
+        "/ranking/other-car-service-consumption-expenditure",
+        "/ranking/potato-consumption-quantity",
+        "/ranking/textbooks-consumption-expenditure"
+      ]
+    },
+    {
+      "target": "/ranking/hobby-participation-rate-tea-ceremony",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 4,
+      "from": [
+        "/themes/cultural-participation",
+        "/areas/33000/cultural-participation",
+        "/category/educationsports",
+        "/survey/social-life-basic-survey"
+      ]
+    },
+    {
+      "target": "/ranking/hobby-participation-rate-pottery",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 2,
+      "from": [
+        "/category/educationsports",
+        "/survey/social-life-basic-survey"
+      ]
+    },
+    {
+      "target": "/ranking/port-count",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 2,
+      "from": [
+        "/themes/freight-logistics",
+        "/category/infrastructure"
+      ]
+    },
+    {
+      "target": "/ranking/tea-drink-consumption-expenditure",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 2,
+      "from": [
+        "/areas/10000",
+        "/category/economy"
+      ]
+    },
+    {
+      "target": "/areas/05000/forestry-timber",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/05000"
+      ]
+    },
+    {
+      "target": "/areas/10000/labor-mobility",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/10000"
+      ]
+    },
+    {
+      "target": "/areas/15000/tourism",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/15000"
+      ]
+    },
+    {
+      "target": "/areas/24000/local-economy",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/24000"
+      ]
+    },
+    {
+      "target": "/ranking/final-education-university-graduate-school-ratio",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/category/educationsports"
+      ]
+    },
+    {
+      "target": "/ranking/fish-canned-consumption-expenditure",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/category/economy"
+      ]
+    },
+    {
+      "target": "/ranking/flounder-consumption-quantity",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/category/economy"
+      ]
+    },
+    {
+      "target": "/ranking/health-checkup-late-dinner-rate",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/category/socialsecurity"
+      ]
+    },
+    {
+      "target": "/ranking/japan-health-insurance-society-enrollees-per-1000",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/category/socialsecurity"
+      ]
+    },
+    {
+      "target": "/ranking/land-productivity-per-ha",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/category/landweather"
+      ]
+    },
+    {
+      "target": "/ranking/mens-jacket-consumption-expenditure",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/category/economy"
+      ]
+    },
+    {
+      "target": "/ranking/microwave-consumption-expenditure",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/category/economy"
+      ]
+    },
+    {
+      "target": "/ranking/number-of-establishments-medical-welfare",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/category/commercial"
+      ]
+    },
+    {
+      "target": "/ranking/private-rental-housing-rent-per-3-3m%C2%B2",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/blog/home-ownership-rate-ranking"
+      ]
+    },
+    {
+      "target": "/ranking/resident-foreigner-north-america",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/themes/foreign-residents"
+      ]
+    },
+    {
+      "target": "/ranking/skirt-consumption-quantity",
+      "status": 503,
+      "kind": "http-503",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/category/economy"
+      ]
+    }
+  ],
   "redirectToBroken": [],
   "unreachablePages": []
 }

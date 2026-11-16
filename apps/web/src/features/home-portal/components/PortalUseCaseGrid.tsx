@@ -9,6 +9,7 @@ import { PortalNavCard } from './PortalNavCard';
 /**
  * 「知りたいことから探す」= theme を利用意図へ翻訳した curated use case。
  * 共通carouselで mobile 1枚+peek / sm 2枚 / lg 3枚 / xl 4枚。
+ * 絵は遷移先テーマのサムネイル (生成は apps/web/scripts/theme-thumbnails.ts)。
  */
 export function PortalUseCaseGrid() {
   const items = HOME_PORTAL_USE_CASES.filter((u) => u.isActive).sort(
@@ -22,7 +23,7 @@ export function PortalUseCaseGrid() {
           href={themeHref(u.themeKey)}
           label={u.label}
           description={u.description}
-          imageSrc={u.imageSrc}
+          imageSrc={`/images/themes/${u.themeKey}.webp`}
         />
       ))}
     </HorizontalCardCarousel>
