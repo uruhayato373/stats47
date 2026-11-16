@@ -1,10 +1,12 @@
 import { Fragment } from 'react';
 
+import Image from 'next/image';
+
 import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
 import { StatisticsScopeNav } from '@/components/navigation';
 import { LinkRowNav } from '@/components/navigation/StatisticsScopeNav';
 import { SectionHeader } from '@/components/section';
-import { SurfaceLinkCard } from '@/components/surface';
+import { PORTAL_CARD_ASPECT_CLASS, SurfaceLinkCard } from '@/components/surface';
 
 import { AdRow, composeAdRows, InFeedAdSlot } from '@/features/ads';
 import { themeHref } from '@/features/theme-dashboard/config/theme-urls';
@@ -82,6 +84,20 @@ export default async function ThemesPage() {
                 href={themeHref(theme.themeKey)}
                 className="block"
               >
+                {/* テーマのサムネイル (トップの「知りたいことから探す」と同じ画像・同じ 16:9 の枠。生成は scripts/theme-thumbnails.ts)。
+                    装飾なので alt は空にし、題名は DOM の文字が持つ */}
+                <span
+                  aria-hidden="true"
+                  className={`pointer-events-none relative mb-3 block ${PORTAL_CARD_ASPECT_CLASS} w-full overflow-hidden rounded-sm bg-muted`}
+                >
+                  <Image
+                    src={`/images/themes/${theme.themeKey}.webp`}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
+                    className="object-cover"
+                  />
+                </span>
                 <h3 className="text-base font-semibold text-foreground">
                   {theme.title}
                 </h3>
