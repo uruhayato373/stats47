@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T23:32:53.500Z",
+  "generatedAt": "2026-11-16T11:57:34.454Z",
   "total": 38,
   "bySeries": {
     "S1-issues": 16,
@@ -247,58 +247,58 @@
     {
       "id": "K-S3-02",
       "series": "S3-region",
-      "title": "東北データブック — 統計で読む県の横顔",
+      "title": "東北 移住の県選びデータブック",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8
+      "chapters": 11
     },
     {
       "id": "K-S3-03",
       "series": "S3-region",
-      "title": "関東データブック — 統計で読む県の横顔",
+      "title": "関東 移住の県選びデータブック",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8
+      "chapters": 12
     },
     {
       "id": "K-S3-04",
       "series": "S3-region",
-      "title": "中部データブック — 統計で読む県の横顔",
+      "title": "中部 移住の県選びデータブック",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8
+      "chapters": 14
     },
     {
       "id": "K-S3-05",
       "series": "S3-region",
-      "title": "近畿データブック — 統計で読む県の横顔",
+      "title": "近畿 移住の県選びデータブック",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8
+      "chapters": 12
     },
     {
       "id": "K-S3-06",
       "series": "S3-region",
-      "title": "中国データブック — 統計で読む県の横顔",
+      "title": "中国 移住の県選びデータブック",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8
+      "chapters": 10
     },
     {
       "id": "K-S3-07",
       "series": "S3-region",
-      "title": "四国データブック — 統計で読む県の横顔",
+      "title": "四国 移住の県選びデータブック",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8
+      "chapters": 9
     },
     {
       "id": "K-S3-08",
       "series": "S3-region",
-      "title": "九州・沖縄データブック — 統計で読む県の横顔",
+      "title": "九州・沖縄 移住の県選びデータブック",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8
+      "chapters": 13
     },
     {
       "id": "K-S4-01",

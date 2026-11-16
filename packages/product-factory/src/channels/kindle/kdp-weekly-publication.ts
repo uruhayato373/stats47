@@ -1,4 +1,3 @@
-import { isoWeekOf, jstDateOf } from "../../../../../.claude/scripts/metrics/lib/periods.mjs";
 import type { SalesCoverage, SalesObservation } from "../../sales/types";
 import { KDP_PUBLICATION_PLAN } from "./kdp-publishing-policy";
 
@@ -16,47 +15,59 @@ export interface KdpWeeklyListing {
   readonly withdrawal?: unknown;
 }
 
-export type KdpWeeklyGateStatus =
-  | "hold"
-  | "measure"
-  | "prepare-one"
-  | "ready-for-owner-approval"
-  | "observe"
-  | "stop-no-demand"
-  | "complete";
+/**
+ * 2026-11-14 の方針 (型ごとに複数冊を出し、8 週の実売で型を判定) での週次の状態。
+ * - hold: S1 が販売中に揃っていない
+ * - prepare: 公開を待つ検証済みの本が無い。型ごとに次の本を作る
+ * - ready-for-owner-approval: 検証済みの本がある。1 冊ずつオーナーの明示承認で出す
+ */
+export type KdpWeeklyGateStatus = "hold" | "prepare" | "ready-for-owner-approval";
 
 export interface KdpCohortMeasurement {
-  readonly cohort: "s1-baseline" | "latest-pilot";
+  readonly cohort: "expansion";
   readonly requiredBookIds: readonly string[];
   readonly requiredPeriodByBook: Readonly<Record<string, { start: string; end: string }>>;
   readonly measuredBookIds: readonly string[];
   readonly missingBookIds: readonly string[];
   readonly windowStillOpenBookIds: readonly string[];
   readonly positiveEvidenceBookIds: readonly string[];
-  /** 販売のある明細の期間が 4 週窓をはみ出し、窓の中の販売かを判定できない書籍 (月次レポートは日付を持たない) */
+  /** 販売のある明細の期間が計測窓をはみ出し、窓の中の販売かを判定できない書籍 (月次レポートは日付を持たない) */
   readonly ambiguousEvidenceBookIds: readonly string[];
   readonly complete: boolean;
   readonly hasDemandSignal: boolean;
 }
 
+/** 型ごとの進み具合。続ける・増やす・止めるはオーナーが決める (ここは材料だけ) */
+export interface KdpFormatProgress {
+  readonly id: string;
+  readonly concept: string;
+  readonly liveBookIds: readonly string[];
+  readonly inReviewBookIds: readonly string[];
+  readonly verifiedBookIds: readonly string[];
+  /** 8 週の窓が閉じて計測済みの本 */
+  readonly measuredBookIds: readonly string[];
+  /** 8 週の窓の中で販売・KENP があった本 */
+  readonly demandBookIds: readonly string[];
+  /** 公開中の本がすべて計測済みで、型の判定に進める */
+  readonly readyForJudgement: boolean;
+}
+
 export interface KdpWeeklyDecision {
-  readonly schemaVersion: 1;
+  readonly schemaVersion: 2;
   readonly generatedAt: string;
   readonly week: string;
   readonly status: KdpWeeklyGateStatus;
-  readonly scheduledAction: string;
   readonly portfolio: {
     readonly registeredCatalogCount: number;
-    readonly activePublicationTargetCount: number;
-    readonly maxNewPublicationsPerWeek: number;
     readonly cohortMeasurementWeeks: number;
     readonly s1Live: number;
     readonly s1InReview: number;
     readonly pilotLive: number;
     readonly pilotInReview: number;
   };
-  readonly nextPilot: (typeof KDP_PUBLICATION_PLAN.pilots)[number] | null;
+  readonly formats: readonly KdpFormatProgress[];
   readonly candidate: { readonly id: string; readonly title: string } | null;
+  /** 承認を受け付ける本 (検証済みの全冊)。kdp-weekly-publish はこの中の ID だけを通す */
   readonly eligibleCandidateIds: readonly string[];
   readonly cohortMeasurement: KdpCohortMeasurement | null;
   readonly blockers: readonly string[];
@@ -99,7 +110,6 @@ function isPositive(row: SalesObservation): boolean {
 }
 
 function analyzeCohort(
-  cohort: KdpCohortMeasurement["cohort"],
   bookIds: readonly string[],
   starts: Readonly<Record<string, string>>,
   observations: readonly SalesObservation[],
@@ -145,7 +155,7 @@ function analyzeCohort(
   }
 
   return {
-    cohort,
+    cohort: "expansion",
     requiredBookIds: [...bookIds],
     requiredPeriodByBook,
     measuredBookIds,
@@ -164,36 +174,8 @@ function weekNumber(week: string): number {
   return Number(year) * 100 + Number(value);
 }
 
-function scheduledAction(week: string): string {
-  const number = weekNumber(week);
-  if (number <= 202638) return KDP_PUBLICATION_PLAN.weeklySequence[0].action;
-  if (number === 202639) return KDP_PUBLICATION_PLAN.weeklySequence[1].action;
-  if (number === 202640) return KDP_PUBLICATION_PLAN.weeklySequence[2].action;
-  if (number === 202641) return KDP_PUBLICATION_PLAN.weeklySequence[3].action;
-  if (number >= 202642 && number <= 202644) return KDP_PUBLICATION_PLAN.weeklySequence[4].action;
-  if (number >= 202645 && number <= 202648) return KDP_PUBLICATION_PLAN.weeklySequence[5].action;
-  if (number === 202649) return KDP_PUBLICATION_PLAN.weeklySequence[6].action;
-  return KDP_PUBLICATION_PLAN.weeklySequence[7].action;
-}
-
-function isSameIsoWeek(timestamp: string | null | undefined, week: string): boolean {
-  if (!timestamp) return false;
-  const ms = Date.parse(timestamp);
-  return !Number.isNaN(ms) && isoWeekOf(jstDateOf(ms)) === week; // 正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
-}
-
-function result(
-  base: Omit<KdpWeeklyDecision, "status" | "blockers" | "nextAction" | "candidate" | "publishCommand">,
-  status: KdpWeeklyGateStatus,
-  blockers: readonly string[],
-  nextAction: string,
-  candidate: KdpWeeklyDecision["candidate"] = null,
-): KdpWeeklyDecision {
-  const publishCommand =
-    status === "ready-for-owner-approval" && candidate
-      ? `node .claude/scripts/kdp/kdp-weekly-publish.mjs --week ${base.week} --id ${candidate.id} --owner-approved ${candidate.id} --commit`
-      : null;
-  return { ...base, status, blockers, nextAction, candidate, publishCommand };
+function isOnOrAfterProgramStart(value: string | null | undefined): boolean {
+  return Boolean(value) && dateOnly(value as string) >= KDP_PUBLICATION_PLAN.expansionProgramStartsAt;
 }
 
 export function buildKdpWeeklyDecision(input: {
@@ -206,105 +188,101 @@ export function buildKdpWeeklyDecision(input: {
   weekNumber(input.week);
   const asOfDate = dateOnly(input.generatedAt);
   const rows = Object.entries(input.listings).map(([id, listing]) => ({ ...listing, id }));
-  // パイロットは公開計画が本の ID で名指しした本。S1 の ID でもパイロットとして数える (K-S1-14)
-  const pilotIds: ReadonlySet<string> = new Set(KDP_PUBLICATION_PLAN.pilots.map((pilot) => pilot.bookId));
-  const s1 = rows.filter((row) => row.id.startsWith("K-S1-") && !pilotIds.has(row.id));
-  const pilotRows = rows.filter(
+  const s1 = rows.filter((row) => row.id.startsWith("K-S1-"));
+  // 作り直しの本: S1 以外で、出版停止の記録が無く、方針の開始日以降に提出・販売開始したか、検証済みの下書き
+  const expansion = rows.filter(
     (row) =>
-      (pilotIds.has(row.id) || !row.id.startsWith("K-S1-")) &&
-      ((row.salesStartedAt && row.salesStartedAt >= KDP_PUBLICATION_PLAN.expansionProgramStartsAt) ||
-        (row.lastSubmittedAt && dateOnly(row.lastSubmittedAt) >= KDP_PUBLICATION_PLAN.expansionProgramStartsAt) ||
+      !row.id.startsWith("K-S1-") &&
+      !row.withdrawal &&
+      (isOnOrAfterProgramStart(row.salesStartedAt) ||
+        isOnOrAfterProgramStart(row.lastSubmittedAt) ||
         (row.status === "draft" && row.publicationStage === "verified")),
   );
-  const pilotLive = pilotRows
-    .filter((row) => row.status === "listed" && row.kdpStatus === "live")
-    .sort((a, b) => String(a.salesStartedAt).localeCompare(String(b.salesStartedAt)) || a.id.localeCompare(b.id));
-  const pilotInReview = pilotRows.filter((row) => row.kdpStatus === "in_review");
-  const eligible = rows
-    .filter(
-      (row) =>
-        (pilotIds.has(row.id) || !row.id.startsWith("K-S1-")) &&
-        row.status === "draft" &&
-        row.kdpStatus === "draft" &&
-        row.publicationStage === "verified" &&
-        !row.withdrawal,
-    )
+  const live = expansion.filter((row) => row.status === "listed" && row.kdpStatus === "live");
+  const inReview = expansion.filter((row) => row.kdpStatus === "in_review");
+  const eligible = expansion
+    .filter((row) => row.status === "draft" && row.kdpStatus === "draft" && row.publicationStage === "verified")
     .sort((a, b) => a.id.localeCompare(b.id));
-  const nextPilot = KDP_PUBLICATION_PLAN.pilots[pilotLive.length] ?? null;
-  const portfolio = {
-    registeredCatalogCount: KDP_PUBLICATION_PLAN.registeredCatalogCount,
-    activePublicationTargetCount: KDP_PUBLICATION_PLAN.activePublicationTargetCount,
-    maxNewPublicationsPerWeek: KDP_PUBLICATION_PLAN.maxNewPublicationsPerWeek,
-    cohortMeasurementWeeks: KDP_PUBLICATION_PLAN.cohortMeasurementWeeks,
-    s1Live: s1.filter((row) => row.kdpStatus === "live").length,
-    s1InReview: s1.filter((row) => row.kdpStatus === "in_review").length,
-    pilotLive: pilotLive.length,
-    pilotInReview: pilotInReview.length,
-  };
-  const common = {
-    schemaVersion: 1 as const,
+
+  const measurement =
+    live.length > 0
+      ? analyzeCohort(
+          live.map((row) => row.id),
+          Object.fromEntries(live.filter((row) => row.salesStartedAt).map((row) => [row.id, dateOnly(row.salesStartedAt as string)])),
+          input.observations,
+          input.coverage ?? [],
+          asOfDate,
+        )
+      : null;
+
+  const formats: KdpFormatProgress[] = KDP_PUBLICATION_PLAN.formats.map((format) => {
+    const inFormat = (ids: readonly string[]) => ids.filter((id) => id.startsWith(format.bookIdPrefix));
+    const liveIds = inFormat(live.map((row) => row.id));
+    const measuredIds = inFormat(measurement?.measuredBookIds ?? []);
+    return {
+      id: format.id,
+      concept: format.concept,
+      liveBookIds: liveIds,
+      inReviewBookIds: inFormat(inReview.map((row) => row.id)),
+      verifiedBookIds: inFormat(eligible.map((row) => row.id)),
+      measuredBookIds: measuredIds,
+      demandBookIds: inFormat(measurement?.positiveEvidenceBookIds ?? []),
+      readyForJudgement: liveIds.length > 0 && measuredIds.length === liveIds.length,
+    };
+  });
+
+  const base = {
+    schemaVersion: 2 as const,
     generatedAt: input.generatedAt,
     week: input.week,
-    scheduledAction: scheduledAction(input.week),
-    portfolio,
-    nextPilot,
+    portfolio: {
+      registeredCatalogCount: KDP_PUBLICATION_PLAN.registeredCatalogCount,
+      cohortMeasurementWeeks: KDP_PUBLICATION_PLAN.cohortMeasurementWeeks,
+      s1Live: s1.filter((row) => row.kdpStatus === "live").length,
+      s1InReview: s1.filter((row) => row.kdpStatus === "in_review").length,
+      pilotLive: live.length,
+      pilotInReview: inReview.length,
+    },
+    formats,
     eligibleCandidateIds: eligible.map((row) => row.id),
-    cohortMeasurement: null as KdpCohortMeasurement | null,
+    cohortMeasurement: measurement,
     approvalRequired: true as const,
   };
 
-  if (portfolio.s1Live < KDP_PUBLICATION_PLAN.approvedS1Count) {
+  if (base.portfolio.s1Live < KDP_PUBLICATION_PLAN.approvedS1Count) {
     const missing = s1.filter((row) => row.kdpStatus !== "live").map((row) => `${row.id}:${row.kdpStatus ?? "unknown"}`);
-    return result(common, "hold", [`S1販売中 ${portfolio.s1Live}/${KDP_PUBLICATION_PLAN.approvedS1Count}`, ...missing], "S1の審査状態を同期し、12冊すべてのlive read-backを完了する");
+    return {
+      ...base,
+      status: "hold",
+      blockers: [`S1販売中 ${base.portfolio.s1Live}/${KDP_PUBLICATION_PLAN.approvedS1Count}`, ...missing],
+      nextAction: "S1の審査状態を同期し、live read-backを完了する",
+      candidate: null,
+      publishCommand: null,
+    };
   }
 
-  if (pilotInReview.length > 0) {
-    return result(common, "observe", pilotInReview.map((row) => `${row.id}:in_review`), "審査中パイロットのlive read-backまで新規出版を止める");
-  }
+  const judgeable = formats.filter((format) => format.readyForJudgement).map((format) => format.id);
+  const judgeNote = judgeable.length > 0 ? `。8週の計測が揃った型 (${judgeable.join(", ")}) は続ける・増やす・止めるをオーナーが決める` : "";
 
-  if (pilotLive.length >= KDP_PUBLICATION_PLAN.evidenceGatedPilotCount) {
-    return result(common, "complete", [], "15冊の販売対象を維持し、各冊の4週実測を継続する");
-  }
-
-  let measurement: KdpCohortMeasurement;
-  if (pilotLive.length === 0) {
-    const starts = Object.fromEntries(KDP_PUBLICATION_PLAN.baselineCohort.bookIds.map((id) => [id, KDP_PUBLICATION_PLAN.baselineCohort.measurementStartsAt]));
-    measurement = analyzeCohort("s1-baseline", KDP_PUBLICATION_PLAN.baselineCohort.bookIds, starts, input.observations, input.coverage ?? [], asOfDate);
-  } else {
-    const latest = pilotLive[pilotLive.length - 1];
-    measurement = analyzeCohort("latest-pilot", [latest.id], { [latest.id]: latest.salesStartedAt as string }, input.observations, input.coverage ?? [], asOfDate);
-  }
-  const withMeasurement = { ...common, cohortMeasurement: measurement };
-
-  if (measurement.windowStillOpenBookIds.length > 0) {
-    return result(withMeasurement, "observe", [`4週窓が未成熟: ${measurement.windowStillOpenBookIds.join(", ")}`], "4週窓が閉じた後にKDP販売数/KENPを記録する");
-  }
-  if (!measurement.complete) {
-    return result(withMeasurement, "measure", [`販売数/KENP未計測: ${measurement.missingBookIds.join(", ")}`], "KDPレポートをproducts:salesへ証拠付きで記録する");
-  }
-  if (!measurement.hasDemandSignal && measurement.ambiguousEvidenceBookIds.length > 0) {
-    return result(
-      withMeasurement,
-      "measure",
-      [`4週窓をはみ出す月次の販売があり、窓の中の需要か判定不能: ${measurement.ambiguousEvidenceBookIds.join(", ")}`],
-      "需要あり・需要なしのどちらとも判定しない。日次の販売記録で窓の中を確かめるか、判定の扱いをオーナーが決める",
-    );
-  }
-  if (!measurement.hasDemandSignal) {
-    return result(withMeasurement, "stop-no-demand", ["4週実測は完了したが、販売・売上・KENPの需要シグナルが0"], "新規出版を止め、既刊の価値・価格・導線を見直す");
-  }
-
-  const submittedThisWeek = pilotRows.filter((row) => isSameIsoWeek(row.lastSubmittedAt, input.week));
-  if (submittedThisWeek.length >= KDP_PUBLICATION_PLAN.maxNewPublicationsPerWeek) {
-    return result(withMeasurement, "observe", [`当週提出済み: ${submittedThisWeek.map((row) => row.id).join(", ")}`], "当週は追加出版せず、審査と販売開始を確認する");
-  }
-  if (eligible.length > 1) {
-    return result(withMeasurement, "hold", [`verified候補が複数: ${eligible.map((row) => row.id).join(", ")}`], "週次計画で候補を1冊に絞り、残りをdraft前へ戻す");
-  }
   if (eligible.length === 0) {
-    return result(withMeasurement, "prepare-one", ["verified状態の新規パイロットが0冊"], `第${nextPilot?.ordinal ?? "-"}パイロット「${nextPilot?.concept ?? "未定"}」を1冊だけ設計・生成・レビュー・Previewer確認する`);
+    const empty = formats.filter((format) => format.liveBookIds.length + format.inReviewBookIds.length === 0).map((format) => format.concept);
+    return {
+      ...base,
+      status: "prepare",
+      blockers: ["検証済み (verified) の本が0冊"],
+      nextAction: `KDP-EXPANSION-01 の順で次の本を設計・生成・全章レビュー・Previewer確認する${empty.length > 0 ? `。まだ1冊も出ていない型: ${empty.join("・")}` : ""}${judgeNote}`,
+      candidate: null,
+      publishCommand: null,
+    };
   }
 
   const candidate = { id: eligible[0].id, title: eligible[0].title ?? eligible[0].id };
-  return result(withMeasurement, "ready-for-owner-approval", [], `${candidate.id}の書誌・表紙・価格をオーナーが確認し、当該IDを明示承認した場合だけ送信する`, candidate);
+  return {
+    ...base,
+    status: "ready-for-owner-approval",
+    blockers: [],
+    nextAction: `検証済みの本 (${base.eligibleCandidateIds.join(", ")}) の書誌・表紙・価格をオーナーが確認し、1冊ずつIDを明示承認した本だけ送信する${judgeNote}`,
+    candidate,
+    publishCommand: `node .claude/scripts/kdp/kdp-weekly-publish.mjs --week ${input.week} --id ${candidate.id} --owner-approved ${candidate.id} --commit`,
+  };
 }

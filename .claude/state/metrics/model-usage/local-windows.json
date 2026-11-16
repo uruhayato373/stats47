@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-05T22:23:51.042Z",
+  "generatedAt": "2026-11-13T00:06:07.934Z",
   "platform": "windows",
   "pricing": {
     "source": "https://platform.claude.com/docs/en/about-claude/pricing",
@@ -8,11 +8,10 @@
   },
   "scan": {
     "dirs": 1,
-    "transcripts": 16,
+    "transcripts": 2,
     "skipped": 0,
     "weeks": [
-      "2026-W44",
-      "2026-W45"
+      "2026-W44"
     ]
   },
   "rows": [

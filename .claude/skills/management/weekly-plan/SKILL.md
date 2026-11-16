@@ -137,11 +137,12 @@ primary_agent: strategy-advisor
 - **KDP週次公開ゲート**: APIやブラウザは呼ばず、weekly-reviewが同期した状態から決定的stateを再生成して読む。
   ```bash
   npm run kdp:weekly -- --week [YYYY-Www] --write
-  jq '{status,portfolio,nextPilot,candidate,cohortMeasurement,blockers,nextAction}' data/products/kdp-weekly-publication.json
+  jq '{status,portfolio,formats,eligibleCandidateIds,cohortMeasurement,blockers,nextAction}' data/products/kdp-weekly-publication.json
   ```
-  → `hold|measure|observe|stop-no-demand`は出版タスクを作らず、計測・審査待ち・停止理由だけを計画へ反映する。
-  → `prepare-one`は`KDP-EXPANSION-01`を参照し、候補を**1冊だけ**設計・生成・全章review・Previewer確認へ進める。
-  → `ready-for-owner-approval`だけを当週の出版候補にできる。候補はstateの1冊と完全一致させる。
+  → `hold`は出版タスクを作らず、S1の審査状態の同期だけを計画へ反映する。
+  → `prepare`は`KDP-EXPANSION-01`の順で、まだ出ていない型から次の本の設計・生成・全章review・Previewer確認を計画する (型ごとに複数冊を並行してよい。2026-11-14 オーナー決定)。
+  → `ready-for-owner-approval`は`eligibleCandidateIds`の本を当週の出版候補にできる。候補はstateのIDと完全一致させる。
+  → `formats[].readyForJudgement`がtrueの型は、8週の実測で続ける・増やす・止めるをオーナーに判断してもらう項目として計画に入れる。
 - docs/02_実装計画/00_INDEX.md の現在地と、`.claude/todo/04`〜`06` の未完了タスク
 - 未着手の Issue 一覧（`gh issue list --state open --label enhancement`、PR で close される機能改修）+ .claude/todo/backlog.md の tier 見出し (🔴🟡🟢🟣) で優先度判定
 
@@ -394,7 +395,7 @@ tags: []
 | SNS 投稿済み | N 件 | — |
 | 直近14日 imp (X) | N | — |
 | GSC運用サイクル | PASS/WARN/FAIL | FAIL 0 |
-| KDP公開ゲート | hold/measure/prepare-one/ready-for-owner-approval/observe/stop-no-demand/complete | 最大1冊/週・各コホート4週実測 |
+| KDP公開ゲート | hold/prepare/ready-for-owner-approval | 型ごとに複数冊・各冊の公開日から8週実測・1冊ずつ承認 |
 
 ## トレンド機会
 
@@ -430,8 +431,8 @@ tags: []
 ## KDP公開ゲート
 
 - **判定**: `<status>`（`data/products/kdp-weekly-publication.json`）
-- **候補**: `<ID またはなし>`（最大1冊）
-- **需要証拠**: `<販売数/KENPの4週実測、未計測、または計測済み0>`
+- **候補**: `<eligibleCandidateIds またはなし>`（承認は1冊ずつ）
+- **需要証拠**: `<型ごとの8週の販売数/KENP、未計測、または計測済み0>`
 - **停止条件**: `<blockers>`
 - **承認境界**: この計画への記載は公開承認ではない。対象IDの明示承認 + `--commit` が別途必要。
 
@@ -470,7 +471,7 @@ tags: []
 npm run kdp:weekly-publish -- --week [YYYY-Www] --id <KINDLE_ID> --owner-approved <KINDLE_ID> --commit
 ```
 
-専用入口は実行直前に週次ゲートを再生成し、候補ID・4週実測・週1冊上限・対象IDの承認を再照合してから、
+専用入口は実行直前に週次ゲートを再生成し、対象IDが検証済みの候補にあることと対象IDの承認を再照合してから、
 既存のKDP preflight / release archive / verify / 本棚read-backへ渡す。`submitted`は販売開始と報告せず、`live`確認を待つ。
 
 ## 保存先

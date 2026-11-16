@@ -500,7 +500,8 @@ export async function uploadKdpContent(
           { textTools: ai.textTools, imageTools: ai.imageTools },
         );
         await sleep(2500);
-        if (!filledTools.text || !filledTools.images) {
+        // 画像の申告が「なし」の本 (表紙が実データの地図) はツール名の欄が無いので、画像の欄は数えない
+        if (!filledTools.text || (!filledTools.images && (ai.imageTools?.length ?? 0) > 0)) {
           warnings.push(`AI ツール名の記入欄を埋められず (text ${filledTools.text} / image ${filledTools.images})`);
         }
       }

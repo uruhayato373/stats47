@@ -19,10 +19,11 @@
  *   npx tsx packages/product-factory/scripts/verify-fresh.mts --book K-S2-02
  */
 import { existsSync, readdirSync, readFileSync } from "node:fs";
-import { join, resolve, dirname } from "node:path";
+import { join, resolve, dirname, posix } from "node:path";
 import { fileURLToPath } from "node:url";
 import { KINDLE_BOOKS } from "../src/channels/kindle/book-catalog";
 import { BOOK_RANKING_KEYS } from "../src/channels/kindle/book-ranking-keys";
+import { isPrefectureGuide, prefectureGuideChapterSpec } from "../src/channels/kindle/prefecture-guide";
 import { fetchRankingValues } from "../src/data/load-ranking-values";
 import { PREFECTURE_BY_CODE5 } from "../src/data/prefectures";
 import { extractKanjiClaims } from "../src/text/kanji-numeral";
@@ -124,9 +125,17 @@ async function verifyBook(bookId: string): Promise<Finding[]> {
   }
   const files = readdirSync(dir).filter((f) => f.endsWith(".md")).sort();
   const isRegion = bookId.startsWith("K-S3-");
-  const expected = isRegion ? 7 : 7;
-  if (files.length < expected) {
-    out.push({ file: bookId, level: "error", msg: `ファイル ${files.length}/${expected} 本 (不足)` });
+  const book = KINDLE_BOOKS.find((b) => b.id === bookId);
+  const guide = book ? isPrefectureGuide(book) : false;
+  if (guide && book) {
+    // 1県1章の本は、カタログの書き下ろし章がすべて揃っているかを見る (2026-11-14)
+    const missing = book.chapters
+      .filter((c) => c.source === "fresh" && c.freshFile)
+      .map((c) => posix.basename(c.freshFile as string))
+      .filter((f) => !files.includes(f));
+    if (missing.length > 0) out.push({ file: bookId, level: "error", msg: `書き下ろし章が無い: ${missing.join(", ")}` });
+  } else if (files.length < 7) {
+    out.push({ file: bookId, level: "error", msg: `ファイル ${files.length}/7 本 (不足)` });
   }
 
   const gate = await buildGate(bookId);
@@ -134,7 +143,11 @@ async function verifyBook(bookId: string): Promise<Finding[]> {
   for (const f of files) {
     const raw = readFileSync(join(dir, f), "utf8");
     const chars = raw.replace(/\s/g, "").length;
-    const target = f === "90-synthesis.md" && isRegion ? S3_SYNTHESIS : TARGETS[f];
+    const target = guide
+      ? prefectureGuideChapterSpec(f)?.target
+      : f === "90-synthesis.md" && isRegion
+        ? S3_SYNTHESIS
+        : TARGETS[f];
     // ★字数の判定はここでは「スタブでないこと」だけを見る (2026-08-12 に設計を直した)。
     //
     //   当初は「目安の 80% 未満は error」にしていたが、目安そのものが**書き下ろし比率 30% を

@@ -25,8 +25,8 @@
       "domain": "product",
       "order": 2,
       "stance": "攻める",
-      "aim": "2026-11 の重点（オーナー決定 2026-10-28）。市区町村の加工済みデータを1商品売る（`MUNI-DATA-PRODUCT-PILOT-01`・打ち手台帳 EXP-007）。`ADMIN-STAT-PILOT-01` の1業務の採否、ノウハウ商品（`KNOWHOW-PRODUCT-PILOT-01`）は並行してよい",
-      "gate": "行政資料 pilot が Stop なら維持。Go で実売2件なら横展開と販売面（note 等）を再審議する",
+      "aim": "KDP を型ごとに作り直して出し、8 週の実売で需要を確かめる（`KDP-EXPANSION-01`。オーナー決定 2026-11-14）。市区町村の加工済みデータ（`MUNI-DATA-PRODUCT-PILOT-01`・打ち手台帳 EXP-007）とノウハウ商品（`KNOWHOW-PRODUCT-PILOT-01`）は並行してよい",
+      "gate": "すべての型が 8 週の判定で売れなければ維持へ。売れた型があれば横展開を月次で決める",
       "improvementMetrics": [
         "note"
       ],

@@ -2095,6 +2095,606 @@
       "lastSubmittedAt": "2026-11-04",
       "salesStartedAt": "2026-11-05"
     },
+    "K-S2-03": {
+      "id": "K-S2-03",
+      "title": "データで見る47都道府県 観光・宿泊",
+      "subtitle": null,
+      "author": "stats47",
+      "authorLastName": "stats47",
+      "authorFirstName": "",
+      "authorKana": "スタッツヨンジュウナナ",
+      "authorRomaji": "stats47",
+      "titleKana": "データデミルヨンジュウナナトドウフケン カンコウ シュクハク",
+      "titleRomaji": "Data de Miru 47 Todofuken - Kanko Shukuhaku",
+      "subtitleKana": null,
+      "subtitleRomaji": null,
+      "language": "ja",
+      "description": "観光・宿泊に関わる主要な統計を、県ごとの上位・下位が一目で分かる図とともに読み解くデータブック。指標ごとに「なぜその分布になるのか」を産業構造や地理から解説します。\n\n【本書の構成】\n指標ごとに、上位5県と下位5県を左右に並べた図を添えています。両端を並べることで、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わります。図のあとには、なぜその分布になるのかを産業構造・地理・人口規模から読み解く解説を置きました。\n\n【データについて】\n本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。統計の定義や調査年によって数値の解釈が変わる場合があります。\n\nデータは基準年を固定した買い切りの内容です。最新の数値や、本書で扱いきれなかった指標は、姉妹サイト stats47.jp（統計で見る都道府県）で無料でご覧いただけます。",
+      "keywords": [
+        "都道府県",
+        "観光・宿泊",
+        "ランキング",
+        "データブック",
+        "統計"
+      ],
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "産業研究",
+          "place": "ホテル"
+        }
+      ],
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
+      "priceYen": 500,
+      "royaltyPlan": 70,
+      "kuEnrolled": false,
+      "epubPath": ".local/kindle-books/K-S2-03/v1/book.epub",
+      "coverPath": ".local/kindle-books/K-S2-03/v1/cover.jpg",
+      "draftId": "A1MRJ4KS2QZ4PR",
+      "status": "withdrawn",
+      "asin": "B0HH8G8JGV",
+      "publishedAt": "2026-08-30",
+      "kdpStatus": "draft",
+      "kdpStatusLabel": "下書き",
+      "kdpStatusCheckedAt": "2026-09-19T08:41:24.211Z",
+      "salesStartedAt": "2026-09-06",
+      "withdrawal": {
+        "requestedAt": "2026-09-19",
+        "reason": "2026-09-19 全冊監査: ランキング章はサイトで無料公開中の AI 解説の転載で、主題外指標・冊間重複 (同一段落 532 件) を含む。読者に売る価値が現行設計では説明できないため販売停止を求める。再設計後に新版で再出品 (backlog KDP-EXPANSION-01)。KDP の販売停止は kdp-operator がオーナー承認の上で行う。",
+        "unpublishedAt": "2026-09-19T08:46:56.111Z",
+        "unpublishedVia": ".claude/scripts/kdp/kdp-unpublish.mjs --all-withdrawn --commit",
+        "readBack": "本棚 status 下書き (出版停止を受理)",
+        "evidence": ".local/kdp-debug/unpublish-2026-09-19T08-38-48-032Z/results.json"
+      }
+    },
+    "K-S3-08": {
+      "id": "K-S3-08",
+      "title": "九州・沖縄 移住の県選びデータブック",
+      "subtitle": "物価・仕事・住まい・子育て・医療・安全を8県で比べる",
+      "author": "stats47",
+      "authorLastName": "stats47",
+      "authorFirstName": "",
+      "authorKana": "スタッツヨンジュウナナ",
+      "authorRomaji": "stats47",
+      "titleKana": "キュウシュウ オキナワ イジュウノケンエラビデータブック",
+      "titleRomaji": "Kyushu Okinawa Iju no Kenerabi Databook",
+      "subtitleKana": "ブッカ シゴト スマイ コソダテ イリョウ アンゼンヲ ハッケンデ クラベル",
+      "subtitleRomaji": "Bukka Shigoto Sumai Kosodate Iryo Anzen wo 8-ken de Kuraberu",
+      "readingSourceTitle": "九州・沖縄 移住の県選びデータブック",
+      "readingSourceSubtitle": "物価・仕事・住まい・子育て・医療・安全を8県で比べる",
+      "language": "ja",
+      "description": "転勤の辞令や移住の検討で、九州・沖縄のどこかに住むことになりそう。でも県ごとに物価や仕事の見つけやすさ、家の広さ、認定こども園や医師の数がどう違うのかは、観光の印象だけでは分かりません。8県を同じ物差しで比べたい方のための本です。\n\n【この本で分かること】\n・九州・沖縄8県の物価・収入・仕事・住まい・子育て・医療・安全を、14の指標と全国順位で比べられる\n・県ごとの章で、その県に住むと何が楽で何が大変か、どんな人に向いているかが分かる\n・家計を抑えたい・子育てを優先したい・仕事を見つけやすくしたい・家を広くしたい、の目的別に見るべき指標と8県の並びが分かる\n・年のそろわない統計や、県庁所在市の値と県全域の値の違いを取り違えずに読める\n\n【こんな方に】\n・転勤や移住で九州・沖縄の県を比べている方\n・観光の印象ではなく統計で暮らしの違いを確かめたい方\n\n【収録内容】\n図 14 点、47 都道府県の全県表 14 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
+      "keywords": [
+        "転勤",
+        "家計",
+        "家賃",
+        "持ち家",
+        "有効求人倍率",
+        "最低賃金",
+        "認定こども園"
+      ],
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "参考図書・白書",
+          "place": "一般"
+        }
+      ],
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "なし",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": []
+      },
+      "priceYen": 500,
+      "royaltyPlan": 70,
+      "kuEnrolled": false,
+      "epubPath": ".local/kindle-books/K-S3-08/v7-20261114-first/book.epub",
+      "coverPath": ".local/kindle-books/K-S3-08/v7-20261114-first/cover.jpg",
+      "status": "draft",
+      "asin": null,
+      "publishedAt": null,
+      "kdpStatus": "draft",
+      "kdpStatusLabel": "新刊下書き準備",
+      "kdpStatusCheckedAt": "2026-11-14T04:26:40.866Z",
+      "publicationStage": "prepared",
+      "publicationStageUpdatedAt": "2026-11-14T04:26:40.866Z",
+      "publicationStageEvidence": {
+        "prepared": {
+          "at": "2026-11-14T04:26:40.866Z",
+          "mode": "first"
+        }
+      }
+    },
+    "K-S3-02": {
+      "id": "K-S3-02",
+      "title": "東北 移住の県選びデータブック",
+      "subtitle": "物価・仕事・住まい・子育て・医療・安全を6県で比べる",
+      "author": "stats47",
+      "authorLastName": "stats47",
+      "authorFirstName": "",
+      "authorKana": "スタッツヨンジュウナナ",
+      "authorRomaji": "stats47",
+      "titleKana": "トウホク イジュウノケンエラビデータブック",
+      "titleRomaji": "Tohoku Iju no Kenerabi Databook",
+      "subtitleKana": "ブッカ シゴト スマイ コソダテ イリョウ アンゼンヲ ロッケンデ クラベル",
+      "subtitleRomaji": "Bukka Shigoto Sumai Kosodate Iryo Anzen wo 6-ken de Kuraberu",
+      "readingSourceTitle": "東北 移住の県選びデータブック",
+      "readingSourceSubtitle": "物価・仕事・住まい・子育て・医療・安全を6県で比べる",
+      "language": "ja",
+      "description": "転勤の辞令や移住の検討で、東北のどこかに住むことになりそう。でも県ごとに物価や仕事の見つけやすさ、家の広さ、認定こども園や医師の数がどう違うのかは、評判やイメージだけでは分かりません。6県を同じ物差しで比べたい方のための本です。\n\n【この本で分かること】\n・東北の6県の物価・収入・仕事・住まい・子育て・医療・安全を、14の指標と全国順位で比べられる\n・東北の県ごとの章で、その県に住むと何が楽で何に注意が要るか、どんな人に向いているかが分かる\n・家計を抑えたい・子育てを優先したい・仕事を見つけやすくしたい・家を広くしたい、の目的別に見るべき指標と6県の並びが分かる\n・青森県の認定こども園数が全国1位、秋田県の最低賃金が全国47位のように、同じ東北でも大きく違う数字を年と範囲に気をつけて読める\n\n【こんな方に】\n・転勤や移住で東北の県を比べている方\n・評判やイメージではなく統計で東北の暮らしの違いを確かめたい方\n\n【収録内容】\n図 14 点、47 都道府県の全県表 14 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
+      "keywords": [
+        "転勤",
+        "家計",
+        "地価",
+        "持ち家",
+        "有効求人倍率",
+        "最低賃金",
+        "認定こども園"
+      ],
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "参考図書・白書",
+          "place": "一般"
+        }
+      ],
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "なし",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": []
+      },
+      "priceYen": 500,
+      "royaltyPlan": 70,
+      "kuEnrolled": false,
+      "epubPath": ".local/kindle-books/K-S3-02/v2-20261114-map/book.epub",
+      "coverPath": ".local/kindle-books/K-S3-02/v2-20261114-map/cover.jpg",
+      "status": "draft",
+      "asin": null,
+      "publishedAt": null,
+      "kdpStatus": "draft",
+      "kdpStatusLabel": "新刊下書き準備",
+      "kdpStatusCheckedAt": "2026-11-14T08:21:36.422Z",
+      "publicationStage": "prepared",
+      "publicationStageUpdatedAt": "2026-11-14T08:21:36.422Z",
+      "publicationStageEvidence": {
+        "prepared": {
+          "at": "2026-11-14T08:21:36.422Z",
+          "mode": "first"
+        }
+      }
+    },
+    "K-S3-03": {
+      "id": "K-S3-03",
+      "title": "関東 移住の県選びデータブック",
+      "subtitle": "物価・仕事・住まい・子育て・医療・安全を1都6県で比べる",
+      "author": "stats47",
+      "authorLastName": "stats47",
+      "authorFirstName": "",
+      "authorKana": "スタッツヨンジュウナナ",
+      "authorRomaji": "stats47",
+      "titleKana": "カントウ イジュウノケンエラビデータブック",
+      "titleRomaji": "Kanto Iju no Kenerabi Databook",
+      "subtitleKana": "ブッカ シゴト スマイ コソダテ イリョウ アンゼンヲ イットロッケンデ クラベル",
+      "subtitleRomaji": "Bukka Shigoto Sumai Kosodate Iryo Anzen wo 1-to 6-ken de Kuraberu",
+      "readingSourceTitle": "関東 移住の県選びデータブック",
+      "readingSourceSubtitle": "物価・仕事・住まい・子育て・医療・安全を1都6県で比べる",
+      "language": "ja",
+      "description": "転勤の辞令や移住の検討で、関東のどこかに住むことになりそう。でも都県ごとに物価や仕事の見つけやすさ、家の広さ、認定こども園や医師の数がどう違うのかは、評判やイメージだけでは分かりません。1都6県を同じ物差しで比べたい方のための本です。\n\n【この本で分かること】\n・関東の1都6県の物価・収入・仕事・住まい・子育て・医療・安全を、14の指標と全国順位で比べられる\n・関東の都県ごとの章で、その都県に住むと何が楽で何に注意が要るか、どんな人に向いているかが分かる\n・家計を抑えたい・子育てを優先したい・仕事を見つけやすくしたい・家を広くしたい、の目的別に見るべき指標と1都6県の並びが分かる\n・年間収入は神奈川県と東京都が全国1・2位、認定こども園数は埼玉県と東京都が全国46・47位のように、1都6県の違いを年と範囲に気をつけて読める\n\n【こんな方に】\n・転勤や移住で関東の都県を比べている方\n・評判やイメージではなく統計で関東の暮らしの違いを確かめたい方\n\n【収録内容】\n図 14 点、47 都道府県の全県表 14 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
+      "keywords": [
+        "転勤",
+        "家計",
+        "地価",
+        "持ち家",
+        "有効求人倍率",
+        "最低賃金",
+        "認定こども園"
+      ],
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "参考図書・白書",
+          "place": "一般"
+        }
+      ],
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "なし",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": []
+      },
+      "priceYen": 500,
+      "royaltyPlan": 70,
+      "kuEnrolled": false,
+      "epubPath": ".local/kindle-books/K-S3-03/v2-20261114-map/book.epub",
+      "coverPath": ".local/kindle-books/K-S3-03/v2-20261114-map/cover.jpg",
+      "status": "draft",
+      "asin": null,
+      "publishedAt": null,
+      "kdpStatus": "draft",
+      "kdpStatusLabel": "新刊下書き準備",
+      "kdpStatusCheckedAt": "2026-11-14T08:21:38.289Z",
+      "publicationStage": "prepared",
+      "publicationStageUpdatedAt": "2026-11-14T08:21:38.289Z",
+      "publicationStageEvidence": {
+        "prepared": {
+          "at": "2026-11-14T08:21:38.289Z",
+          "mode": "first"
+        }
+      }
+    },
+    "K-S3-04": {
+      "id": "K-S3-04",
+      "title": "中部 移住の県選びデータブック",
+      "subtitle": "物価・仕事・住まい・子育て・医療・安全を9県で比べる",
+      "author": "stats47",
+      "authorLastName": "stats47",
+      "authorFirstName": "",
+      "authorKana": "スタッツヨンジュウナナ",
+      "authorRomaji": "stats47",
+      "titleKana": "チュウブ イジュウノケンエラビデータブック",
+      "titleRomaji": "Chubu Iju no Kenerabi Databook",
+      "subtitleKana": "ブッカ シゴト スマイ コソダテ イリョウ アンゼンヲ キュウケンデ クラベル",
+      "subtitleRomaji": "Bukka Shigoto Sumai Kosodate Iryo Anzen wo 9-ken de Kuraberu",
+      "readingSourceTitle": "中部 移住の県選びデータブック",
+      "readingSourceSubtitle": "物価・仕事・住まい・子育て・医療・安全を9県で比べる",
+      "language": "ja",
+      "description": "転勤の辞令や移住の検討で、中部のどこかに住むことになりそう。でも県ごとに物価や仕事の見つけやすさ、家の広さ、認定こども園や医師の数がどう違うのかは、評判やイメージだけでは分かりません。9県を同じ物差しで比べたい方のための本です。\n\n【この本で分かること】\n・中部の9県の物価・収入・仕事・住まい・子育て・医療・安全を、14の指標と全国順位で比べられる\n・中部の県ごとの章で、その県に住むと何が楽で何に注意が要るか、どんな人に向いているかが分かる\n・家計を抑えたい・子育てを優先したい・仕事を見つけやすくしたい・家を広くしたい、の目的別に見るべき指標と9県の並びが分かる\n・有効求人倍率は福井県が全国1位、認定こども園数は石川県が全国2位のように、中部9県の違いを年と範囲に気をつけて読める\n\n【こんな方に】\n・転勤や移住で中部の県を比べている方\n・評判やイメージではなく統計で中部の暮らしの違いを確かめたい方\n\n【収録内容】\n図 14 点、47 都道府県の全県表 14 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
+      "keywords": [
+        "転勤",
+        "家計",
+        "地価",
+        "持ち家",
+        "有効求人倍率",
+        "最低賃金",
+        "認定こども園"
+      ],
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "参考図書・白書",
+          "place": "一般"
+        }
+      ],
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "なし",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": []
+      },
+      "priceYen": 500,
+      "royaltyPlan": 70,
+      "kuEnrolled": false,
+      "epubPath": ".local/kindle-books/K-S3-04/v2-20261114-map/book.epub",
+      "coverPath": ".local/kindle-books/K-S3-04/v2-20261114-map/cover.jpg",
+      "status": "draft",
+      "asin": null,
+      "publishedAt": null,
+      "kdpStatus": "draft",
+      "kdpStatusLabel": "新刊下書き準備",
+      "kdpStatusCheckedAt": "2026-11-14T08:21:40.221Z",
+      "publicationStage": "prepared",
+      "publicationStageUpdatedAt": "2026-11-14T08:21:40.221Z",
+      "publicationStageEvidence": {
+        "prepared": {
+          "at": "2026-11-14T08:21:40.221Z",
+          "mode": "first"
+        }
+      }
+    },
+    "K-S3-05": {
+      "id": "K-S3-05",
+      "title": "近畿 移住の県選びデータブック",
+      "subtitle": "物価・仕事・住まい・子育て・医療・安全を2府5県で比べる",
+      "author": "stats47",
+      "authorLastName": "stats47",
+      "authorFirstName": "",
+      "authorKana": "スタッツヨンジュウナナ",
+      "authorRomaji": "stats47",
+      "titleKana": "キンキ イジュウノケンエラビデータブック",
+      "titleRomaji": "Kinki Iju no Kenerabi Databook",
+      "subtitleKana": "ブッカ シゴト スマイ コソダテ イリョウ アンゼンヲ ニフゴケンデ クラベル",
+      "subtitleRomaji": "Bukka Shigoto Sumai Kosodate Iryo Anzen wo 2-fu 5-ken de Kuraberu",
+      "readingSourceTitle": "近畿 移住の県選びデータブック",
+      "readingSourceSubtitle": "物価・仕事・住まい・子育て・医療・安全を2府5県で比べる",
+      "language": "ja",
+      "description": "転勤の辞令や移住の検討で、近畿のどこかに住むことになりそう。でも府県ごとに物価や仕事の見つけやすさ、家の広さ、認定こども園や医師の数がどう違うのかは、評判やイメージだけでは分かりません。2府5県を同じ物差しで比べたい方のための本です。\n\n【この本で分かること】\n・近畿の2府5県の物価・収入・仕事・住まい・子育て・医療・安全を、14の指標と全国順位で比べられる\n・近畿の府県ごとの章で、その府県に住むと何が楽で何に注意が要るか、どんな人に向いているかが分かる\n・家計を抑えたい・子育てを優先したい・仕事を見つけやすくしたい・家を広くしたい、の目的別に見るべき指標と2府5県の並びが分かる\n・大阪府の地域別最低賃金は全国3位、京都府の医師数は全国3位のように、近畿の2府5県の違いを年と範囲に気をつけて読める\n\n【こんな方に】\n・転勤や移住で近畿の府県を比べている方\n・評判やイメージではなく統計で近畿の暮らしの違いを確かめたい方\n\n【収録内容】\n図 14 点、47 都道府県の全県表 14 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
+      "keywords": [
+        "転勤",
+        "家計",
+        "地価",
+        "持ち家",
+        "有効求人倍率",
+        "最低賃金",
+        "認定こども園"
+      ],
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "参考図書・白書",
+          "place": "一般"
+        }
+      ],
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "なし",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": []
+      },
+      "priceYen": 500,
+      "royaltyPlan": 70,
+      "kuEnrolled": false,
+      "epubPath": ".local/kindle-books/K-S3-05/v2-20261114-map/book.epub",
+      "coverPath": ".local/kindle-books/K-S3-05/v2-20261114-map/cover.jpg",
+      "status": "draft",
+      "asin": null,
+      "publishedAt": null,
+      "kdpStatus": "draft",
+      "kdpStatusLabel": "新刊下書き準備",
+      "kdpStatusCheckedAt": "2026-11-14T08:21:43.079Z",
+      "publicationStage": "prepared",
+      "publicationStageUpdatedAt": "2026-11-14T08:21:43.079Z",
+      "publicationStageEvidence": {
+        "prepared": {
+          "at": "2026-11-14T08:21:43.079Z",
+          "mode": "first"
+        }
+      }
+    },
+    "K-S3-06": {
+      "id": "K-S3-06",
+      "title": "中国 移住の県選びデータブック",
+      "subtitle": "物価・仕事・住まい・子育て・医療・安全を5県で比べる",
+      "author": "stats47",
+      "authorLastName": "stats47",
+      "authorFirstName": "",
+      "authorKana": "スタッツヨンジュウナナ",
+      "authorRomaji": "stats47",
+      "titleKana": "チュウゴク イジュウノケンエラビデータブック",
+      "titleRomaji": "Chugoku Iju no Kenerabi Databook",
+      "subtitleKana": "ブッカ シゴト スマイ コソダテ イリョウ アンゼンヲ ゴケンデ クラベル",
+      "subtitleRomaji": "Bukka Shigoto Sumai Kosodate Iryo Anzen wo 5-ken de Kuraberu",
+      "readingSourceTitle": "中国 移住の県選びデータブック",
+      "readingSourceSubtitle": "物価・仕事・住まい・子育て・医療・安全を5県で比べる",
+      "language": "ja",
+      "description": "転勤の辞令や移住の検討で、中国のどこかに住むことになりそう。でも県ごとに物価や仕事の見つけやすさ、家の広さ、認定こども園や医師の数がどう違うのかは、評判やイメージだけでは分かりません。5県を同じ物差しで比べたい方のための本です。\n\n【この本で分かること】\n・中国の5県の物価・収入・仕事・住まい・子育て・医療・安全を、14の指標と全国順位で比べられる\n・中国の県ごとの章で、その県に住むと何が楽で何に注意が要るか、どんな人に向いているかが分かる\n・家計を抑えたい・子育てを優先したい・仕事を見つけやすくしたい・家を広くしたい、の目的別に見るべき指標と5県の並びが分かる\n・島根県の有効求人倍率は全国2位、鳥取県の災害被害額は全国1位のように、中国地方の5県の違いを年と範囲に気をつけて読める\n\n【こんな方に】\n・転勤や移住で中国の県を比べている方\n・評判やイメージではなく統計で中国の暮らしの違いを確かめたい方\n\n【収録内容】\n図 14 点、47 都道府県の全県表 14 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
+      "keywords": [
+        "転勤",
+        "家計",
+        "地価",
+        "持ち家",
+        "有効求人倍率",
+        "最低賃金",
+        "認定こども園"
+      ],
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "参考図書・白書",
+          "place": "一般"
+        }
+      ],
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "なし",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": []
+      },
+      "priceYen": 500,
+      "royaltyPlan": 70,
+      "kuEnrolled": false,
+      "epubPath": ".local/kindle-books/K-S3-06/v2-20261114-map/book.epub",
+      "coverPath": ".local/kindle-books/K-S3-06/v2-20261114-map/cover.jpg",
+      "status": "draft",
+      "asin": null,
+      "publishedAt": null,
+      "kdpStatus": "draft",
+      "kdpStatusLabel": "新刊下書き準備",
+      "kdpStatusCheckedAt": "2026-11-14T08:21:45.028Z",
+      "publicationStage": "prepared",
+      "publicationStageUpdatedAt": "2026-11-14T08:21:45.028Z",
+      "publicationStageEvidence": {
+        "prepared": {
+          "at": "2026-11-14T08:21:45.028Z",
+          "mode": "first"
+        }
+      }
+    },
+    "K-S3-07": {
+      "id": "K-S3-07",
+      "title": "四国 移住の県選びデータブック",
+      "subtitle": "物価・仕事・住まい・子育て・医療・安全を4県で比べる",
+      "author": "stats47",
+      "authorLastName": "stats47",
+      "authorFirstName": "",
+      "authorKana": "スタッツヨンジュウナナ",
+      "authorRomaji": "stats47",
+      "titleKana": "シコク イジュウノケンエラビデータブック",
+      "titleRomaji": "Shikoku Iju no Kenerabi Databook",
+      "subtitleKana": "ブッカ シゴト スマイ コソダテ イリョウ アンゼンヲ ヨンケンデ クラベル",
+      "subtitleRomaji": "Bukka Shigoto Sumai Kosodate Iryo Anzen wo 4-ken de Kuraberu",
+      "readingSourceTitle": "四国 移住の県選びデータブック",
+      "readingSourceSubtitle": "物価・仕事・住まい・子育て・医療・安全を4県で比べる",
+      "language": "ja",
+      "description": "転勤の辞令や移住の検討で、四国のどこかに住むことになりそう。でも県ごとに物価や仕事の見つけやすさ、家の広さ、認定こども園や医師の数がどう違うのかは、評判やイメージだけでは分かりません。4県を同じ物差しで比べたい方のための本です。\n\n【この本で分かること】\n・四国の4県の物価・収入・仕事・住まい・子育て・医療・安全を、14の指標と全国順位で比べられる\n・四国の県ごとの章で、その県に住むと何が楽で何に注意が要るか、どんな人に向いているかが分かる\n・家計を抑えたい・子育てを優先したい・仕事を見つけやすくしたい・家を広くしたい、の目的別に見るべき指標と4県の並びが分かる\n・医師数は徳島県と高知県が全国1・2位、愛媛県の地価変動率は全国47位のように、四国4県の違いを年と範囲に気をつけて読める\n\n【こんな方に】\n・転勤や移住で四国の県を比べている方\n・評判やイメージではなく統計で四国の暮らしの違いを確かめたい方\n\n【収録内容】\n図 14 点、47 都道府県の全県表 14 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
+      "keywords": [
+        "転勤",
+        "家計",
+        "地価",
+        "持ち家",
+        "有効求人倍率",
+        "最低賃金",
+        "認定こども園"
+      ],
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "参考図書・白書",
+          "place": "一般"
+        }
+      ],
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "なし",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": []
+      },
+      "priceYen": 500,
+      "royaltyPlan": 70,
+      "kuEnrolled": false,
+      "epubPath": ".local/kindle-books/K-S3-07/v2-20261114-map/book.epub",
+      "coverPath": ".local/kindle-books/K-S3-07/v2-20261114-map/cover.jpg",
+      "status": "draft",
+      "asin": null,
+      "publishedAt": null,
+      "kdpStatus": "draft",
+      "kdpStatusLabel": "新刊下書き準備",
+      "kdpStatusCheckedAt": "2026-11-14T08:21:46.950Z",
+      "publicationStage": "prepared",
+      "publicationStageUpdatedAt": "2026-11-14T08:21:46.950Z",
+      "publicationStageEvidence": {
+        "prepared": {
+          "at": "2026-11-14T08:21:46.950Z",
+          "mode": "first"
+        }
+      }
+    },
     "K-S1-14": {
       "id": "K-S1-14",
       "title": "47都市の食卓は似てきたのか — 家計調査で読む19年の変化",
@@ -2194,1416 +2794,6 @@
       "kdpStatusLabel": "レビュー中",
       "kdpStatusCheckedAt": "2026-11-13T23:07:16.409Z",
       "lastSubmittedAt": "2026-11-13"
-    },
-    "K-S2-01": {
-      "id": "K-S2-01",
-      "title": "データで見る47都道府県 人口・世帯",
-      "subtitle": null,
-      "author": "stats47",
-      "authorLastName": "stats47",
-      "authorFirstName": "",
-      "authorKana": "スタッツヨンジュウナナ",
-      "authorRomaji": "stats47",
-      "titleKana": "データデミルヨンジュウナナトドウフケン ジンコウ セタイ",
-      "titleRomaji": "Data de Miru 47 Todofuken - Jinko Setai",
-      "subtitleKana": null,
-      "subtitleRomaji": null,
-      "language": "ja",
-      "description": "人口・世帯に関わる主要な統計を、県ごとの上位・下位が一目で分かる図とともに読み解くデータブック。指標ごとに「なぜその分布になるのか」を産業構造や地理から解説します。\n\n【本書の構成】\n指標ごとに、上位5県と下位5県を左右に並べた図を添えています。両端を並べることで、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わります。図のあとには、なぜその分布になるのかを産業構造・地理・人口規模から読み解く解説を置きました。\n\n【データについて】\n本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。統計の定義や調査年によって数値の解釈が変わる場合があります。\n\nデータは基準年を固定した買い切りの内容です。最新の数値や、本書で扱いきれなかった指標は、姉妹サイト stats47.jp（統計で見る都道府県）で無料でご覧いただけます。",
-      "keywords": [
-        "都道府県",
-        "人口・世帯",
-        "ランキング",
-        "データブック",
-        "統計"
-      ],
-      "categoryPaths": [
-        {
-          "top": "社会・政治",
-          "sub": "社会学",
-          "place": "参考図書・白書"
-        },
-        {
-          "top": "歴史・地理",
-          "sub": "地理・地域研究",
-          "place": "地域研究"
-        },
-        {
-          "top": "ビジネス・経済",
-          "sub": "経済学",
-          "place": "都市・地域"
-        }
-      ],
-      "applyDrm": true,
-      "aiDisclosure": {
-        "used": true,
-        "text": "作品全体 (広範な編集あり)",
-        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
-        "translations": "なし",
-        "textTools": [
-          "Claude",
-          "Gemini"
-        ],
-        "imageTools": [
-          "gpt-image-2"
-        ]
-      },
-      "priceYen": 500,
-      "royaltyPlan": 70,
-      "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S2-01/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S2-01/v1/cover.jpg",
-      "draftId": "A2UWQYBWVB2439",
-      "status": "withdrawn",
-      "asin": "B0HG543VG9",
-      "publishedAt": "2026-08-22",
-      "salesStartedAt": "2026-08-30",
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "下書き",
-      "kdpStatusCheckedAt": "2026-09-19T08:39:58.744Z",
-      "withdrawal": {
-        "requestedAt": "2026-09-19",
-        "reason": "2026-09-19 全冊監査: ランキング章はサイトで無料公開中の AI 解説の転載で、主題外指標・冊間重複 (同一段落 532 件) を含む。読者に売る価値が現行設計では説明できないため販売停止を求める。再設計後に新版で再出品 (backlog KDP-EXPANSION-01)。KDP の販売停止は kdp-operator がオーナー承認の上で行う。",
-        "unpublishedAt": "2026-09-19T08:46:56.111Z",
-        "unpublishedVia": ".claude/scripts/kdp/kdp-unpublish.mjs --all-withdrawn --commit",
-        "readBack": "本棚 status 下書き (出版停止を受理)",
-        "evidence": ".local/kdp-debug/unpublish-2026-09-19T08-38-48-032Z/results.json"
-      }
-    },
-    "K-S2-02": {
-      "id": "K-S2-02",
-      "title": "データで見る47都道府県 所得・賃金・採用",
-      "subtitle": null,
-      "author": "stats47",
-      "authorLastName": "stats47",
-      "authorFirstName": "",
-      "authorKana": "スタッツヨンジュウナナ",
-      "authorRomaji": "stats47",
-      "titleKana": "データデミルヨンジュウナナトドウフケン ショトク チンギン サイヨウ",
-      "titleRomaji": "Data de Miru 47 Todofuken - Shotoku Chingin Saiyo",
-      "subtitleKana": null,
-      "subtitleRomaji": null,
-      "language": "ja",
-      "description": "所得・賃金・採用に関わる主要な統計を、県ごとの上位・下位が一目で分かる図とともに読み解くデータブック。指標ごとに「なぜその分布になるのか」を産業構造や地理から解説します。\n\n【本書の構成】\n指標ごとに、上位5県と下位5県を左右に並べた図を添えています。両端を並べることで、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わります。図のあとには、なぜその分布になるのかを産業構造・地理・人口規模から読み解く解説を置きました。\n\n【データについて】\n本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。統計の定義や調査年によって数値の解釈が変わる場合があります。\n\nデータは基準年を固定した買い切りの内容です。最新の数値や、本書で扱いきれなかった指標は、姉妹サイト stats47.jp（統計で見る都道府県）で無料でご覧いただけます。",
-      "keywords": [
-        "都道府県",
-        "所得・賃金・採用",
-        "ランキング",
-        "データブック",
-        "統計"
-      ],
-      "categoryPaths": [
-        {
-          "top": "社会・政治",
-          "sub": "社会学",
-          "place": "参考図書・白書"
-        },
-        {
-          "top": "歴史・地理",
-          "sub": "地理・地域研究",
-          "place": "地域研究"
-        },
-        {
-          "top": "ビジネス・経済",
-          "sub": "キャリア",
-          "place": "一般"
-        }
-      ],
-      "applyDrm": true,
-      "aiDisclosure": {
-        "used": true,
-        "text": "作品全体 (広範な編集あり)",
-        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
-        "translations": "なし",
-        "textTools": [
-          "Claude",
-          "Gemini"
-        ],
-        "imageTools": [
-          "gpt-image-2"
-        ]
-      },
-      "priceYen": 500,
-      "royaltyPlan": 70,
-      "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S2-02/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S2-02/v1/cover.jpg",
-      "draftId": "A32HMMPXLT6UJ3",
-      "status": "withdrawn",
-      "asin": "B0HH8D631S",
-      "publishedAt": "2026-08-30",
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "下書き",
-      "kdpStatusCheckedAt": "2026-09-19T08:40:41.401Z",
-      "salesStartedAt": "2026-09-06",
-      "withdrawal": {
-        "requestedAt": "2026-09-19",
-        "reason": "2026-09-19 全冊監査: ランキング章はサイトで無料公開中の AI 解説の転載で、主題外指標・冊間重複 (同一段落 532 件) を含む。読者に売る価値が現行設計では説明できないため販売停止を求める。再設計後に新版で再出品 (backlog KDP-EXPANSION-01)。KDP の販売停止は kdp-operator がオーナー承認の上で行う。",
-        "unpublishedAt": "2026-09-19T08:46:56.111Z",
-        "unpublishedVia": ".claude/scripts/kdp/kdp-unpublish.mjs --all-withdrawn --commit",
-        "readBack": "本棚 status 下書き (出版停止を受理)",
-        "evidence": ".local/kdp-debug/unpublish-2026-09-19T08-38-48-032Z/results.json"
-      }
-    },
-    "K-S2-03": {
-      "id": "K-S2-03",
-      "title": "データで見る47都道府県 観光・宿泊",
-      "subtitle": null,
-      "author": "stats47",
-      "authorLastName": "stats47",
-      "authorFirstName": "",
-      "authorKana": "スタッツヨンジュウナナ",
-      "authorRomaji": "stats47",
-      "titleKana": "データデミルヨンジュウナナトドウフケン カンコウ シュクハク",
-      "titleRomaji": "Data de Miru 47 Todofuken - Kanko Shukuhaku",
-      "subtitleKana": null,
-      "subtitleRomaji": null,
-      "language": "ja",
-      "description": "観光・宿泊に関わる主要な統計を、県ごとの上位・下位が一目で分かる図とともに読み解くデータブック。指標ごとに「なぜその分布になるのか」を産業構造や地理から解説します。\n\n【本書の構成】\n指標ごとに、上位5県と下位5県を左右に並べた図を添えています。両端を並べることで、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わります。図のあとには、なぜその分布になるのかを産業構造・地理・人口規模から読み解く解説を置きました。\n\n【データについて】\n本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。統計の定義や調査年によって数値の解釈が変わる場合があります。\n\nデータは基準年を固定した買い切りの内容です。最新の数値や、本書で扱いきれなかった指標は、姉妹サイト stats47.jp（統計で見る都道府県）で無料でご覧いただけます。",
-      "keywords": [
-        "都道府県",
-        "観光・宿泊",
-        "ランキング",
-        "データブック",
-        "統計"
-      ],
-      "categoryPaths": [
-        {
-          "top": "社会・政治",
-          "sub": "社会学",
-          "place": "参考図書・白書"
-        },
-        {
-          "top": "歴史・地理",
-          "sub": "地理・地域研究",
-          "place": "地域研究"
-        },
-        {
-          "top": "ビジネス・経済",
-          "sub": "産業研究",
-          "place": "ホテル"
-        }
-      ],
-      "applyDrm": true,
-      "aiDisclosure": {
-        "used": true,
-        "text": "作品全体 (広範な編集あり)",
-        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
-        "translations": "なし",
-        "textTools": [
-          "Claude",
-          "Gemini"
-        ],
-        "imageTools": [
-          "gpt-image-2"
-        ]
-      },
-      "priceYen": 500,
-      "royaltyPlan": 70,
-      "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S2-03/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S2-03/v1/cover.jpg",
-      "draftId": "A1MRJ4KS2QZ4PR",
-      "status": "withdrawn",
-      "asin": "B0HH8G8JGV",
-      "publishedAt": "2026-08-30",
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "下書き",
-      "kdpStatusCheckedAt": "2026-09-19T08:41:24.211Z",
-      "salesStartedAt": "2026-09-06",
-      "withdrawal": {
-        "requestedAt": "2026-09-19",
-        "reason": "2026-09-19 全冊監査: ランキング章はサイトで無料公開中の AI 解説の転載で、主題外指標・冊間重複 (同一段落 532 件) を含む。読者に売る価値が現行設計では説明できないため販売停止を求める。再設計後に新版で再出品 (backlog KDP-EXPANSION-01)。KDP の販売停止は kdp-operator がオーナー承認の上で行う。",
-        "unpublishedAt": "2026-09-19T08:46:56.111Z",
-        "unpublishedVia": ".claude/scripts/kdp/kdp-unpublish.mjs --all-withdrawn --commit",
-        "readBack": "本棚 status 下書き (出版停止を受理)",
-        "evidence": ".local/kdp-debug/unpublish-2026-09-19T08-38-48-032Z/results.json"
-      }
-    },
-    "K-S2-04": {
-      "id": "K-S2-04",
-      "title": "データで見る47都道府県 自治体財政",
-      "subtitle": null,
-      "author": "stats47",
-      "authorLastName": "stats47",
-      "authorFirstName": "",
-      "authorKana": "スタッツヨンジュウナナ",
-      "authorRomaji": "stats47",
-      "titleKana": "データデミルヨンジュウナナトドウフケン ジチタイザイセイ",
-      "titleRomaji": "Data de Miru 47 Todofuken - Jichitai Zaisei",
-      "subtitleKana": null,
-      "subtitleRomaji": null,
-      "language": "ja",
-      "description": "自治体財政に関わる主要な統計を、県ごとの上位・下位が一目で分かる図とともに読み解くデータブック。指標ごとに「なぜその分布になるのか」を産業構造や地理から解説します。\n\n【本書の構成】\n指標ごとに、上位5県と下位5県を左右に並べた図を添えています。両端を並べることで、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わります。図のあとには、なぜその分布になるのかを産業構造・地理・人口規模から読み解く解説を置きました。\n\n【データについて】\n本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。統計の定義や調査年によって数値の解釈が変わる場合があります。\n\nデータは基準年を固定した買い切りの内容です。最新の数値や、本書で扱いきれなかった指標は、姉妹サイト stats47.jp（統計で見る都道府県）で無料でご覧いただけます。",
-      "keywords": [
-        "都道府県",
-        "自治体財政",
-        "ランキング",
-        "データブック",
-        "統計"
-      ],
-      "categoryPaths": [
-        {
-          "top": "社会・政治",
-          "sub": "社会学",
-          "place": "参考図書・白書"
-        },
-        {
-          "top": "歴史・地理",
-          "sub": "地理・地域研究",
-          "place": "地域研究"
-        },
-        {
-          "top": "ビジネス・経済",
-          "sub": "経済学",
-          "place": "財政学"
-        }
-      ],
-      "applyDrm": true,
-      "aiDisclosure": {
-        "used": true,
-        "text": "作品全体 (広範な編集あり)",
-        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
-        "translations": "なし",
-        "textTools": [
-          "Claude",
-          "Gemini"
-        ],
-        "imageTools": [
-          "gpt-image-2"
-        ]
-      },
-      "priceYen": 500,
-      "royaltyPlan": 70,
-      "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S2-04/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S2-04/v1/cover.jpg",
-      "status": "blocked-design",
-      "asin": null,
-      "publishedAt": null,
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "未作成",
-      "kdpStatusCheckedAt": "2026-09-19T02:01:18.283Z",
-      "blockReason": "2026-09-19 全冊監査: 編集設計 (design) が無く、指標が機械選定 (S2=本文の長い順・S3=地域の極端順位) で主題外・冊間重複 (ランキング章 481 のうち 177 が他冊と同一指標)。現行設計のまま KDP に作らない。再設計は backlog KDP-EXPANSION-01 (S3=1県1章型・S4=県民性ストーリー型)。"
-    },
-    "K-S2-05": {
-      "id": "K-S2-05",
-      "title": "データで見る47都道府県 医療・介護",
-      "subtitle": null,
-      "author": "stats47",
-      "authorLastName": "stats47",
-      "authorFirstName": "",
-      "authorKana": "スタッツヨンジュウナナ",
-      "authorRomaji": "stats47",
-      "titleKana": "データデミルヨンジュウナナトドウフケン イリョウ カイゴ",
-      "titleRomaji": "Data de Miru 47 Todofuken - Iryo Kaigo",
-      "subtitleKana": null,
-      "subtitleRomaji": null,
-      "language": "ja",
-      "description": "医療・介護に関わる主要な統計を、県ごとの上位・下位が一目で分かる図とともに読み解くデータブック。指標ごとに「なぜその分布になるのか」を産業構造や地理から解説します。\n\n【本書の構成】\n指標ごとに、上位5県と下位5県を左右に並べた図を添えています。両端を並べることで、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わります。図のあとには、なぜその分布になるのかを産業構造・地理・人口規模から読み解く解説を置きました。\n\n【データについて】\n本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。統計の定義や調査年によって数値の解釈が変わる場合があります。\n\nデータは基準年を固定した買い切りの内容です。最新の数値や、本書で扱いきれなかった指標は、姉妹サイト stats47.jp（統計で見る都道府県）で無料でご覧いただけます。",
-      "keywords": [
-        "都道府県",
-        "医療・介護",
-        "ランキング",
-        "データブック",
-        "統計"
-      ],
-      "categoryPaths": [
-        {
-          "top": "社会・政治",
-          "sub": "社会学",
-          "place": "参考図書・白書"
-        },
-        {
-          "top": "歴史・地理",
-          "sub": "地理・地域研究",
-          "place": "地域研究"
-        },
-        {
-          "top": "医学・薬学",
-          "sub": "医学一般",
-          "place": "衛生・公衆衛生学"
-        }
-      ],
-      "applyDrm": true,
-      "aiDisclosure": {
-        "used": true,
-        "text": "作品全体 (広範な編集あり)",
-        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
-        "translations": "なし",
-        "textTools": [
-          "Claude",
-          "Gemini"
-        ],
-        "imageTools": [
-          "gpt-image-2"
-        ]
-      },
-      "priceYen": 500,
-      "royaltyPlan": 70,
-      "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S2-05/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S2-05/v1/cover.jpg",
-      "draftId": "AZ5VNVHXHI6NY",
-      "status": "withdrawn",
-      "asin": "B0HH8JHDSZ",
-      "publishedAt": "2026-08-30",
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "下書き",
-      "kdpStatusCheckedAt": "2026-09-19T08:42:07.581Z",
-      "salesStartedAt": "2026-09-06",
-      "withdrawal": {
-        "requestedAt": "2026-09-19",
-        "reason": "2026-09-19 全冊監査: ランキング章はサイトで無料公開中の AI 解説の転載で、主題外指標・冊間重複 (同一段落 532 件) を含む。読者に売る価値が現行設計では説明できないため販売停止を求める。再設計後に新版で再出品 (backlog KDP-EXPANSION-01)。KDP の販売停止は kdp-operator がオーナー承認の上で行う。",
-        "unpublishedAt": "2026-09-19T08:46:56.111Z",
-        "unpublishedVia": ".claude/scripts/kdp/kdp-unpublish.mjs --all-withdrawn --commit",
-        "readBack": "本棚 status 下書き (出版停止を受理)",
-        "evidence": ".local/kdp-debug/unpublish-2026-09-19T08-38-48-032Z/results.json"
-      }
-    },
-    "K-S2-06": {
-      "id": "K-S2-06",
-      "title": "データで見る47都道府県 教育・子育て",
-      "subtitle": null,
-      "author": "stats47",
-      "authorLastName": "stats47",
-      "authorFirstName": "",
-      "authorKana": "スタッツヨンジュウナナ",
-      "authorRomaji": "stats47",
-      "titleKana": "データデミルヨンジュウナナトドウフケン キョウイク コソダテ",
-      "titleRomaji": "Data de Miru 47 Todofuken - Kyoiku Kosodate",
-      "subtitleKana": null,
-      "subtitleRomaji": null,
-      "language": "ja",
-      "description": "教育・子育てに関わる主要な統計を、県ごとの上位・下位が一目で分かる図とともに読み解くデータブック。指標ごとに「なぜその分布になるのか」を産業構造や地理から解説します。\n\n【本書の構成】\n指標ごとに、上位5県と下位5県を左右に並べた図を添えています。両端を並べることで、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わります。図のあとには、なぜその分布になるのかを産業構造・地理・人口規模から読み解く解説を置きました。\n\n【データについて】\n本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。統計の定義や調査年によって数値の解釈が変わる場合があります。\n\nデータは基準年を固定した買い切りの内容です。最新の数値や、本書で扱いきれなかった指標は、姉妹サイト stats47.jp（統計で見る都道府県）で無料でご覧いただけます。",
-      "keywords": [
-        "都道府県",
-        "教育・子育て",
-        "ランキング",
-        "データブック",
-        "統計"
-      ],
-      "categoryPaths": [
-        {
-          "top": "社会・政治",
-          "sub": "社会学",
-          "place": "参考図書・白書"
-        },
-        {
-          "top": "歴史・地理",
-          "sub": "地理・地域研究",
-          "place": "地域研究"
-        },
-        {
-          "top": "人文・思想",
-          "sub": "教育学",
-          "place": "参考図書・白書"
-        }
-      ],
-      "applyDrm": true,
-      "aiDisclosure": {
-        "used": true,
-        "text": "作品全体 (広範な編集あり)",
-        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
-        "translations": "なし",
-        "textTools": [
-          "Claude",
-          "Gemini"
-        ],
-        "imageTools": [
-          "gpt-image-2"
-        ]
-      },
-      "priceYen": 500,
-      "royaltyPlan": 70,
-      "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S2-06/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S2-06/v1/cover.jpg",
-      "draftId": "A21I2G6CBLF42N",
-      "status": "withdrawn",
-      "asin": "B0HH91VJZD",
-      "publishedAt": "2026-08-30",
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "下書き",
-      "kdpStatusCheckedAt": "2026-09-19T08:42:49.950Z",
-      "salesStartedAt": "2026-09-06",
-      "withdrawal": {
-        "requestedAt": "2026-09-19",
-        "reason": "2026-09-19 全冊監査: ランキング章はサイトで無料公開中の AI 解説の転載で、主題外指標・冊間重複 (同一段落 532 件) を含む。読者に売る価値が現行設計では説明できないため販売停止を求める。再設計後に新版で再出品 (backlog KDP-EXPANSION-01)。KDP の販売停止は kdp-operator がオーナー承認の上で行う。",
-        "unpublishedAt": "2026-09-19T08:46:56.111Z",
-        "unpublishedVia": ".claude/scripts/kdp/kdp-unpublish.mjs --all-withdrawn --commit",
-        "readBack": "本棚 status 下書き (出版停止を受理)",
-        "evidence": ".local/kdp-debug/unpublish-2026-09-19T08-38-48-032Z/results.json"
-      }
-    },
-    "K-S2-07": {
-      "id": "K-S2-07",
-      "title": "データで見る47都道府県 移住・生活",
-      "subtitle": null,
-      "author": "stats47",
-      "authorLastName": "stats47",
-      "authorFirstName": "",
-      "authorKana": "スタッツヨンジュウナナ",
-      "authorRomaji": "stats47",
-      "titleKana": "データデミルヨンジュウナナトドウフケン イジュウ セイカツ",
-      "titleRomaji": "Data de Miru 47 Todofuken - Iju Seikatsu",
-      "subtitleKana": null,
-      "subtitleRomaji": null,
-      "language": "ja",
-      "description": "移住・生活に関わる主要な統計を、県ごとの上位・下位が一目で分かる図とともに読み解くデータブック。指標ごとに「なぜその分布になるのか」を産業構造や地理から解説します。\n\n【本書の構成】\n指標ごとに、上位5県と下位5県を左右に並べた図を添えています。両端を並べることで、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わります。図のあとには、なぜその分布になるのかを産業構造・地理・人口規模から読み解く解説を置きました。\n\n【データについて】\n本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。統計の定義や調査年によって数値の解釈が変わる場合があります。\n\nデータは基準年を固定した買い切りの内容です。最新の数値や、本書で扱いきれなかった指標は、姉妹サイト stats47.jp（統計で見る都道府県）で無料でご覧いただけます。",
-      "keywords": [
-        "都道府県",
-        "移住・生活",
-        "ランキング",
-        "データブック",
-        "統計"
-      ],
-      "categoryPaths": [
-        {
-          "top": "社会・政治",
-          "sub": "社会学",
-          "place": "参考図書・白書"
-        },
-        {
-          "top": "歴史・地理",
-          "sub": "地理・地域研究",
-          "place": "地域研究"
-        },
-        {
-          "top": "暮らし・健康・子育て",
-          "sub": "家事・生活の知識",
-          "place": "生活の知恵"
-        }
-      ],
-      "applyDrm": true,
-      "aiDisclosure": {
-        "used": true,
-        "text": "作品全体 (広範な編集あり)",
-        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
-        "translations": "なし",
-        "textTools": [
-          "Claude",
-          "Gemini"
-        ],
-        "imageTools": [
-          "gpt-image-2"
-        ]
-      },
-      "priceYen": 500,
-      "royaltyPlan": 70,
-      "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S2-07/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S2-07/v1/cover.jpg",
-      "status": "blocked-design",
-      "asin": null,
-      "publishedAt": null,
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "未作成",
-      "kdpStatusCheckedAt": "2026-09-19T02:02:06.670Z",
-      "blockReason": "2026-09-19 全冊監査: 編集設計 (design) が無く、指標が機械選定 (S2=本文の長い順・S3=地域の極端順位) で主題外・冊間重複 (ランキング章 481 のうち 177 が他冊と同一指標)。現行設計のまま KDP に作らない。再設計は backlog KDP-EXPANSION-01 (S3=1県1章型・S4=県民性ストーリー型)。"
-    },
-    "K-S2-08": {
-      "id": "K-S2-08",
-      "title": "データで見る47都道府県 出店・商圏",
-      "subtitle": null,
-      "author": "stats47",
-      "authorLastName": "stats47",
-      "authorFirstName": "",
-      "authorKana": "スタッツヨンジュウナナ",
-      "authorRomaji": "stats47",
-      "titleKana": "データデミルヨンジュウナナトドウフケン シュッテン ショウケン",
-      "titleRomaji": "Data de Miru 47 Todofuken - Shutten Shoken",
-      "subtitleKana": null,
-      "subtitleRomaji": null,
-      "language": "ja",
-      "description": "出店・商圏に関わる主要な統計を、県ごとの上位・下位が一目で分かる図とともに読み解くデータブック。指標ごとに「なぜその分布になるのか」を産業構造や地理から解説します。\n\n【本書の構成】\n指標ごとに、上位5県と下位5県を左右に並べた図を添えています。両端を並べることで、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わります。図のあとには、なぜその分布になるのかを産業構造・地理・人口規模から読み解く解説を置きました。\n\n【データについて】\n本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。統計の定義や調査年によって数値の解釈が変わる場合があります。\n\nデータは基準年を固定した買い切りの内容です。最新の数値や、本書で扱いきれなかった指標は、姉妹サイト stats47.jp（統計で見る都道府県）で無料でご覧いただけます。",
-      "keywords": [
-        "都道府県",
-        "出店・商圏",
-        "ランキング",
-        "データブック",
-        "統計"
-      ],
-      "categoryPaths": [
-        {
-          "top": "社会・政治",
-          "sub": "社会学",
-          "place": "参考図書・白書"
-        },
-        {
-          "top": "歴史・地理",
-          "sub": "地理・地域研究",
-          "place": "地域研究"
-        },
-        {
-          "top": "ビジネス・経済",
-          "sub": "産業研究",
-          "place": "小売"
-        }
-      ],
-      "applyDrm": true,
-      "aiDisclosure": {
-        "used": true,
-        "text": "作品全体 (広範な編集あり)",
-        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
-        "translations": "なし",
-        "textTools": [
-          "Claude",
-          "Gemini"
-        ],
-        "imageTools": [
-          "gpt-image-2"
-        ]
-      },
-      "priceYen": 500,
-      "royaltyPlan": 70,
-      "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S2-08/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S2-08/v1/cover.jpg",
-      "status": "blocked-design",
-      "asin": null,
-      "publishedAt": null,
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "未作成",
-      "kdpStatusCheckedAt": "2026-09-19T02:02:06.686Z",
-      "blockReason": "2026-09-19 全冊監査: 編集設計 (design) が無く、指標が機械選定 (S2=本文の長い順・S3=地域の極端順位) で主題外・冊間重複 (ランキング章 481 のうち 177 が他冊と同一指標)。現行設計のまま KDP に作らない。再設計は backlog KDP-EXPANSION-01 (S3=1県1章型・S4=県民性ストーリー型)。"
-    },
-    "K-S2-09": {
-      "id": "K-S2-09",
-      "title": "データで見る47都道府県 産業・経済",
-      "subtitle": null,
-      "author": "stats47",
-      "authorLastName": "stats47",
-      "authorFirstName": "",
-      "authorKana": "スタッツヨンジュウナナ",
-      "authorRomaji": "stats47",
-      "titleKana": "データデミルヨンジュウナナトドウフケン サンギョウ ケイザイ",
-      "titleRomaji": "Data de Miru 47 Todofuken - Sangyo Keizai",
-      "subtitleKana": null,
-      "subtitleRomaji": null,
-      "language": "ja",
-      "description": "産業・経済に関わる主要な統計を、県ごとの上位・下位が一目で分かる図とともに読み解くデータブック。指標ごとに「なぜその分布になるのか」を産業構造や地理から解説します。\n\n【本書の構成】\n指標ごとに、上位5県と下位5県を左右に並べた図を添えています。両端を並べることで、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わります。図のあとには、なぜその分布になるのかを産業構造・地理・人口規模から読み解く解説を置きました。\n\n【データについて】\n本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。統計の定義や調査年によって数値の解釈が変わる場合があります。\n\nデータは基準年を固定した買い切りの内容です。最新の数値や、本書で扱いきれなかった指標は、姉妹サイト stats47.jp（統計で見る都道府県）で無料でご覧いただけます。",
-      "keywords": [
-        "都道府県",
-        "産業・経済",
-        "ランキング",
-        "データブック",
-        "統計"
-      ],
-      "categoryPaths": [
-        {
-          "top": "社会・政治",
-          "sub": "社会学",
-          "place": "参考図書・白書"
-        },
-        {
-          "top": "歴史・地理",
-          "sub": "地理・地域研究",
-          "place": "地域研究"
-        },
-        {
-          "top": "ビジネス・経済",
-          "sub": "産業研究",
-          "place": "一般"
-        }
-      ],
-      "applyDrm": true,
-      "aiDisclosure": {
-        "used": true,
-        "text": "作品全体 (広範な編集あり)",
-        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
-        "translations": "なし",
-        "textTools": [
-          "Claude",
-          "Gemini"
-        ],
-        "imageTools": [
-          "gpt-image-2"
-        ]
-      },
-      "priceYen": 500,
-      "royaltyPlan": 70,
-      "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S2-09/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S2-09/v1/cover.jpg",
-      "status": "blocked-design",
-      "asin": null,
-      "publishedAt": null,
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "未作成",
-      "kdpStatusCheckedAt": "2026-09-19T02:02:06.688Z",
-      "blockReason": "2026-09-19 全冊監査: 編集設計 (design) が無く、指標が機械選定 (S2=本文の長い順・S3=地域の極端順位) で主題外・冊間重複 (ランキング章 481 のうち 177 が他冊と同一指標)。現行設計のまま KDP に作らない。再設計は backlog KDP-EXPANSION-01 (S3=1県1章型・S4=県民性ストーリー型)。"
-    },
-    "K-S2-10": {
-      "id": "K-S2-10",
-      "title": "データで見る47都道府県 防災・インフラ",
-      "subtitle": null,
-      "author": "stats47",
-      "authorLastName": "stats47",
-      "authorFirstName": "",
-      "authorKana": "スタッツヨンジュウナナ",
-      "authorRomaji": "stats47",
-      "titleKana": "データデミルヨンジュウナナトドウフケン ボウサイ インフラ",
-      "titleRomaji": "Data de Miru 47 Todofuken - Bosai Infra",
-      "subtitleKana": null,
-      "subtitleRomaji": null,
-      "language": "ja",
-      "description": "防災・インフラに関わる主要な統計を、県ごとの上位・下位が一目で分かる図とともに読み解くデータブック。指標ごとに「なぜその分布になるのか」を産業構造や地理から解説します。\n\n【本書の構成】\n指標ごとに、上位5県と下位5県を左右に並べた図を添えています。両端を並べることで、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わります。図のあとには、なぜその分布になるのかを産業構造・地理・人口規模から読み解く解説を置きました。\n\n【データについて】\n本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。統計の定義や調査年によって数値の解釈が変わる場合があります。\n\nデータは基準年を固定した買い切りの内容です。最新の数値や、本書で扱いきれなかった指標は、姉妹サイト stats47.jp（統計で見る都道府県）で無料でご覧いただけます。",
-      "keywords": [
-        "都道府県",
-        "防災・インフラ",
-        "ランキング",
-        "データブック",
-        "統計"
-      ],
-      "categoryPaths": [
-        {
-          "top": "社会・政治",
-          "sub": "社会学",
-          "place": "参考図書・白書"
-        },
-        {
-          "top": "歴史・地理",
-          "sub": "地理・地域研究",
-          "place": "地域研究"
-        },
-        {
-          "top": "社会・政治",
-          "sub": "社会学",
-          "place": "災害"
-        }
-      ],
-      "applyDrm": true,
-      "aiDisclosure": {
-        "used": true,
-        "text": "作品全体 (広範な編集あり)",
-        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
-        "translations": "なし",
-        "textTools": [
-          "Claude",
-          "Gemini"
-        ],
-        "imageTools": [
-          "gpt-image-2"
-        ]
-      },
-      "priceYen": 500,
-      "royaltyPlan": 70,
-      "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S2-10/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S2-10/v1/cover.jpg",
-      "status": "blocked-design",
-      "asin": null,
-      "publishedAt": null,
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "未作成",
-      "kdpStatusCheckedAt": "2026-09-19T02:02:06.702Z",
-      "blockReason": "2026-09-19 全冊監査: 編集設計 (design) が無く、指標が機械選定 (S2=本文の長い順・S3=地域の極端順位) で主題外・冊間重複 (ランキング章 481 のうち 177 が他冊と同一指標)。現行設計のまま KDP に作らない。再設計は backlog KDP-EXPANSION-01 (S3=1県1章型・S4=県民性ストーリー型)。"
-    },
-    "K-S2-11": {
-      "id": "K-S2-11",
-      "title": "データで見る47都道府県 家計・消費",
-      "subtitle": null,
-      "author": "stats47",
-      "authorLastName": "stats47",
-      "authorFirstName": "",
-      "authorKana": "スタッツヨンジュウナナ",
-      "authorRomaji": "stats47",
-      "titleKana": "データデミルヨンジュウナナトドウフケン カケイ ショウヒ",
-      "titleRomaji": "Data de Miru 47 Todofuken - Kakei Shohi",
-      "subtitleKana": null,
-      "subtitleRomaji": null,
-      "language": "ja",
-      "description": "家計・消費に関わる主要な統計を、県ごとの上位・下位が一目で分かる図とともに読み解くデータブック。指標ごとに「なぜその分布になるのか」を産業構造や地理から解説します。\n\n【本書の構成】\n指標ごとに、上位5県と下位5県を左右に並べた図を添えています。両端を並べることで、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わります。図のあとには、なぜその分布になるのかを産業構造・地理・人口規模から読み解く解説を置きました。\n\n【データについて】\n本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。統計の定義や調査年によって数値の解釈が変わる場合があります。\n\nデータは基準年を固定した買い切りの内容です。最新の数値や、本書で扱いきれなかった指標は、姉妹サイト stats47.jp（統計で見る都道府県）で無料でご覧いただけます。",
-      "keywords": [
-        "都道府県",
-        "家計・消費",
-        "ランキング",
-        "データブック",
-        "統計"
-      ],
-      "categoryPaths": [
-        {
-          "top": "社会・政治",
-          "sub": "社会学",
-          "place": "参考図書・白書"
-        },
-        {
-          "top": "歴史・地理",
-          "sub": "地理・地域研究",
-          "place": "地域研究"
-        },
-        {
-          "top": "ビジネス・経済",
-          "sub": "個人ファイナンス",
-          "place": "家計管理"
-        }
-      ],
-      "applyDrm": true,
-      "aiDisclosure": {
-        "used": true,
-        "text": "作品全体 (広範な編集あり)",
-        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
-        "translations": "なし",
-        "textTools": [
-          "Claude",
-          "Gemini"
-        ],
-        "imageTools": [
-          "gpt-image-2"
-        ]
-      },
-      "priceYen": 500,
-      "royaltyPlan": 70,
-      "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S2-11/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S2-11/v1/cover.jpg",
-      "draftId": "A126L0E2Y812CH",
-      "status": "withdrawn",
-      "asin": "B0HH8H3WXV",
-      "publishedAt": "2026-08-30",
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "下書き",
-      "kdpStatusCheckedAt": "2026-09-19T08:43:32.077Z",
-      "salesStartedAt": "2026-09-06",
-      "withdrawal": {
-        "requestedAt": "2026-09-19",
-        "reason": "2026-09-19 全冊監査: ランキング章はサイトで無料公開中の AI 解説の転載で、主題外指標・冊間重複 (同一段落 532 件) を含む。読者に売る価値が現行設計では説明できないため販売停止を求める。再設計後に新版で再出品 (backlog KDP-EXPANSION-01)。KDP の販売停止は kdp-operator がオーナー承認の上で行う。",
-        "unpublishedAt": "2026-09-19T08:46:56.111Z",
-        "unpublishedVia": ".claude/scripts/kdp/kdp-unpublish.mjs --all-withdrawn --commit",
-        "readBack": "本棚 status 下書き (出版停止を受理)",
-        "evidence": ".local/kdp-debug/unpublish-2026-09-19T08-38-48-032Z/results.json"
-      }
-    },
-    "K-S3-01": {
-      "id": "K-S3-01",
-      "title": "北海道データブック — 統計で読む県の横顔",
-      "subtitle": null,
-      "author": "stats47",
-      "authorLastName": "stats47",
-      "authorFirstName": "",
-      "authorKana": "スタッツヨンジュウナナ",
-      "authorRomaji": "stats47",
-      "titleKana": "ホッカイドウデータブック トウケイデヨムケンノヨコガオ",
-      "titleRomaji": "Hokkaido Databook - Tokei de Yomu Ken no Yokogao",
-      "subtitleKana": null,
-      "subtitleRomaji": null,
-      "language": "ja",
-      "description": "北海道の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。\n\n【本書の構成】\n指標ごとに、上位5県と下位5県を左右に並べた図を添えています。両端を並べることで、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わります。図のあとには、なぜその分布になるのかを産業構造・地理・人口規模から読み解く解説を置きました。\n\n【データについて】\n本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。統計の定義や調査年によって数値の解釈が変わる場合があります。\n\nデータは基準年を固定した買い切りの内容です。最新の数値や、本書で扱いきれなかった指標は、姉妹サイト stats47.jp（統計で見る都道府県）で無料でご覧いただけます。",
-      "keywords": [
-        "都道府県",
-        "北海道",
-        "地域",
-        "データブック",
-        "統計"
-      ],
-      "categoryPaths": [
-        {
-          "top": "社会・政治",
-          "sub": "社会学",
-          "place": "参考図書・白書"
-        },
-        {
-          "top": "歴史・地理",
-          "sub": "地理・地域研究",
-          "place": "地域研究"
-        },
-        {
-          "top": "ビジネス・経済",
-          "sub": "参考図書・白書",
-          "place": "一般"
-        }
-      ],
-      "applyDrm": true,
-      "aiDisclosure": {
-        "used": true,
-        "text": "作品全体 (広範な編集あり)",
-        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
-        "translations": "なし",
-        "textTools": [
-          "Claude",
-          "Gemini"
-        ],
-        "imageTools": [
-          "gpt-image-2"
-        ]
-      },
-      "priceYen": 500,
-      "royaltyPlan": 70,
-      "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S3-01/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S3-01/v1/cover.jpg",
-      "draftId": "AL56V7HCNM0QT",
-      "status": "withdrawn",
-      "asin": "B0HH89XZKS",
-      "publishedAt": "2026-08-30",
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "下書き",
-      "kdpStatusCheckedAt": "2026-09-19T08:44:14.235Z",
-      "salesStartedAt": "2026-09-06",
-      "withdrawal": {
-        "requestedAt": "2026-09-19",
-        "reason": "2026-09-19 全冊監査: ランキング章はサイトで無料公開中の AI 解説の転載で、主題外指標・冊間重複 (同一段落 532 件) を含む。読者に売る価値が現行設計では説明できないため販売停止を求める。再設計後に新版で再出品 (backlog KDP-EXPANSION-01)。KDP の販売停止は kdp-operator がオーナー承認の上で行う。",
-        "unpublishedAt": "2026-09-19T08:46:56.111Z",
-        "unpublishedVia": ".claude/scripts/kdp/kdp-unpublish.mjs --all-withdrawn --commit",
-        "readBack": "本棚 status 下書き (出版停止を受理)",
-        "evidence": ".local/kdp-debug/unpublish-2026-09-19T08-38-48-032Z/results.json"
-      }
-    },
-    "K-S3-02": {
-      "id": "K-S3-02",
-      "title": "東北データブック — 統計で読む県の横顔",
-      "subtitle": null,
-      "author": "stats47",
-      "authorLastName": "stats47",
-      "authorFirstName": "",
-      "authorKana": "スタッツヨンジュウナナ",
-      "authorRomaji": "stats47",
-      "titleKana": "トウホクデータブック トウケイデヨムケンノヨコガオ",
-      "titleRomaji": "Tohoku Databook - Tokei de Yomu Ken no Yokogao",
-      "subtitleKana": null,
-      "subtitleRomaji": null,
-      "language": "ja",
-      "description": "東北の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。\n\n【本書の構成】\n指標ごとに、上位5県と下位5県を左右に並べた図を添えています。両端を並べることで、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わります。図のあとには、なぜその分布になるのかを産業構造・地理・人口規模から読み解く解説を置きました。\n\n【データについて】\n本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。統計の定義や調査年によって数値の解釈が変わる場合があります。\n\nデータは基準年を固定した買い切りの内容です。最新の数値や、本書で扱いきれなかった指標は、姉妹サイト stats47.jp（統計で見る都道府県）で無料でご覧いただけます。",
-      "keywords": [
-        "都道府県",
-        "東北",
-        "地域",
-        "データブック",
-        "統計"
-      ],
-      "categoryPaths": [
-        {
-          "top": "社会・政治",
-          "sub": "社会学",
-          "place": "参考図書・白書"
-        },
-        {
-          "top": "歴史・地理",
-          "sub": "地理・地域研究",
-          "place": "地域研究"
-        },
-        {
-          "top": "ビジネス・経済",
-          "sub": "参考図書・白書",
-          "place": "一般"
-        }
-      ],
-      "applyDrm": true,
-      "aiDisclosure": {
-        "used": true,
-        "text": "作品全体 (広範な編集あり)",
-        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
-        "translations": "なし",
-        "textTools": [
-          "Claude",
-          "Gemini"
-        ],
-        "imageTools": [
-          "gpt-image-2"
-        ]
-      },
-      "priceYen": 500,
-      "royaltyPlan": 70,
-      "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S3-02/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S3-02/v1/cover.jpg",
-      "status": "blocked-design",
-      "asin": null,
-      "publishedAt": null,
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "未作成",
-      "kdpStatusCheckedAt": "2026-09-19T02:02:34.429Z",
-      "blockReason": "2026-09-19 全冊監査: 編集設計 (design) が無く、指標が機械選定 (S2=本文の長い順・S3=地域の極端順位) で主題外・冊間重複 (ランキング章 481 のうち 177 が他冊と同一指標)。現行設計のまま KDP に作らない。再設計は backlog KDP-EXPANSION-01 (S3=1県1章型・S4=県民性ストーリー型)。"
-    },
-    "K-S3-03": {
-      "id": "K-S3-03",
-      "title": "関東データブック — 統計で読む県の横顔",
-      "subtitle": null,
-      "author": "stats47",
-      "authorLastName": "stats47",
-      "authorFirstName": "",
-      "authorKana": "スタッツヨンジュウナナ",
-      "authorRomaji": "stats47",
-      "titleKana": "カントウデータブック トウケイデヨムケンノヨコガオ",
-      "titleRomaji": "Kanto Databook - Tokei de Yomu Ken no Yokogao",
-      "subtitleKana": null,
-      "subtitleRomaji": null,
-      "language": "ja",
-      "description": "関東の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。\n\n【本書の構成】\n指標ごとに、上位5県と下位5県を左右に並べた図を添えています。両端を並べることで、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わります。図のあとには、なぜその分布になるのかを産業構造・地理・人口規模から読み解く解説を置きました。\n\n【データについて】\n本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。統計の定義や調査年によって数値の解釈が変わる場合があります。\n\nデータは基準年を固定した買い切りの内容です。最新の数値や、本書で扱いきれなかった指標は、姉妹サイト stats47.jp（統計で見る都道府県）で無料でご覧いただけます。",
-      "keywords": [
-        "都道府県",
-        "関東",
-        "地域",
-        "データブック",
-        "統計"
-      ],
-      "categoryPaths": [
-        {
-          "top": "社会・政治",
-          "sub": "社会学",
-          "place": "参考図書・白書"
-        },
-        {
-          "top": "歴史・地理",
-          "sub": "地理・地域研究",
-          "place": "地域研究"
-        },
-        {
-          "top": "ビジネス・経済",
-          "sub": "参考図書・白書",
-          "place": "一般"
-        }
-      ],
-      "applyDrm": true,
-      "aiDisclosure": {
-        "used": true,
-        "text": "作品全体 (広範な編集あり)",
-        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
-        "translations": "なし",
-        "textTools": [
-          "Claude",
-          "Gemini"
-        ],
-        "imageTools": [
-          "gpt-image-2"
-        ]
-      },
-      "priceYen": 500,
-      "royaltyPlan": 70,
-      "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S3-03/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S3-03/v1/cover.jpg",
-      "draftId": "A3HPQ5HZOZJX78",
-      "status": "withdrawn",
-      "asin": "B0HH8JF9PC",
-      "publishedAt": "2026-08-30",
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "下書き",
-      "kdpStatusCheckedAt": "2026-09-19T08:44:56.048Z",
-      "salesStartedAt": "2026-09-06",
-      "withdrawal": {
-        "requestedAt": "2026-09-19",
-        "reason": "2026-09-19 全冊監査: ランキング章はサイトで無料公開中の AI 解説の転載で、主題外指標・冊間重複 (同一段落 532 件) を含む。読者に売る価値が現行設計では説明できないため販売停止を求める。再設計後に新版で再出品 (backlog KDP-EXPANSION-01)。KDP の販売停止は kdp-operator がオーナー承認の上で行う。",
-        "unpublishedAt": "2026-09-19T08:46:56.111Z",
-        "unpublishedVia": ".claude/scripts/kdp/kdp-unpublish.mjs --all-withdrawn --commit",
-        "readBack": "本棚 status 下書き (出版停止を受理)",
-        "evidence": ".local/kdp-debug/unpublish-2026-09-19T08-38-48-032Z/results.json"
-      }
-    },
-    "K-S3-04": {
-      "id": "K-S3-04",
-      "title": "中部データブック — 統計で読む県の横顔",
-      "subtitle": null,
-      "author": "stats47",
-      "authorLastName": "stats47",
-      "authorFirstName": "",
-      "authorKana": "スタッツヨンジュウナナ",
-      "authorRomaji": "stats47",
-      "titleKana": "チュウブデータブック トウケイデヨムケンノヨコガオ",
-      "titleRomaji": "Chubu Databook - Tokei de Yomu Ken no Yokogao",
-      "subtitleKana": null,
-      "subtitleRomaji": null,
-      "language": "ja",
-      "description": "中部の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。\n\n【本書の構成】\n指標ごとに、上位5県と下位5県を左右に並べた図を添えています。両端を並べることで、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わります。図のあとには、なぜその分布になるのかを産業構造・地理・人口規模から読み解く解説を置きました。\n\n【データについて】\n本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。統計の定義や調査年によって数値の解釈が変わる場合があります。\n\nデータは基準年を固定した買い切りの内容です。最新の数値や、本書で扱いきれなかった指標は、姉妹サイト stats47.jp（統計で見る都道府県）で無料でご覧いただけます。",
-      "keywords": [
-        "都道府県",
-        "中部",
-        "地域",
-        "データブック",
-        "統計"
-      ],
-      "categoryPaths": [
-        {
-          "top": "社会・政治",
-          "sub": "社会学",
-          "place": "参考図書・白書"
-        },
-        {
-          "top": "歴史・地理",
-          "sub": "地理・地域研究",
-          "place": "地域研究"
-        },
-        {
-          "top": "ビジネス・経済",
-          "sub": "参考図書・白書",
-          "place": "一般"
-        }
-      ],
-      "applyDrm": true,
-      "aiDisclosure": {
-        "used": true,
-        "text": "作品全体 (広範な編集あり)",
-        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
-        "translations": "なし",
-        "textTools": [
-          "Claude",
-          "Gemini"
-        ],
-        "imageTools": [
-          "gpt-image-2"
-        ]
-      },
-      "priceYen": 500,
-      "royaltyPlan": 70,
-      "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S3-04/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S3-04/v1/cover.jpg",
-      "status": "blocked-design",
-      "asin": null,
-      "publishedAt": null,
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "未作成",
-      "kdpStatusCheckedAt": "2026-09-19T02:02:50.631Z",
-      "blockReason": "2026-09-19 全冊監査: 編集設計 (design) が無く、指標が機械選定 (S2=本文の長い順・S3=地域の極端順位) で主題外・冊間重複 (ランキング章 481 のうち 177 が他冊と同一指標)。現行設計のまま KDP に作らない。再設計は backlog KDP-EXPANSION-01 (S3=1県1章型・S4=県民性ストーリー型)。"
-    },
-    "K-S3-05": {
-      "id": "K-S3-05",
-      "title": "近畿データブック — 統計で読む県の横顔",
-      "subtitle": null,
-      "author": "stats47",
-      "authorLastName": "stats47",
-      "authorFirstName": "",
-      "authorKana": "スタッツヨンジュウナナ",
-      "authorRomaji": "stats47",
-      "titleKana": "キンキデータブック トウケイデヨムケンノヨコガオ",
-      "titleRomaji": "Kinki Databook - Tokei de Yomu Ken no Yokogao",
-      "subtitleKana": null,
-      "subtitleRomaji": null,
-      "language": "ja",
-      "description": "近畿の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。\n\n【本書の構成】\n指標ごとに、上位5県と下位5県を左右に並べた図を添えています。両端を並べることで、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わります。図のあとには、なぜその分布になるのかを産業構造・地理・人口規模から読み解く解説を置きました。\n\n【データについて】\n本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。統計の定義や調査年によって数値の解釈が変わる場合があります。\n\nデータは基準年を固定した買い切りの内容です。最新の数値や、本書で扱いきれなかった指標は、姉妹サイト stats47.jp（統計で見る都道府県）で無料でご覧いただけます。",
-      "keywords": [
-        "都道府県",
-        "近畿",
-        "地域",
-        "データブック",
-        "統計"
-      ],
-      "categoryPaths": [
-        {
-          "top": "社会・政治",
-          "sub": "社会学",
-          "place": "参考図書・白書"
-        },
-        {
-          "top": "歴史・地理",
-          "sub": "地理・地域研究",
-          "place": "地域研究"
-        },
-        {
-          "top": "ビジネス・経済",
-          "sub": "参考図書・白書",
-          "place": "一般"
-        }
-      ],
-      "applyDrm": true,
-      "aiDisclosure": {
-        "used": true,
-        "text": "作品全体 (広範な編集あり)",
-        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
-        "translations": "なし",
-        "textTools": [
-          "Claude",
-          "Gemini"
-        ],
-        "imageTools": [
-          "gpt-image-2"
-        ]
-      },
-      "priceYen": 500,
-      "royaltyPlan": 70,
-      "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S3-05/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S3-05/v1/cover.jpg",
-      "status": "blocked-design",
-      "asin": null,
-      "publishedAt": null,
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "未作成",
-      "kdpStatusCheckedAt": "2026-09-19T02:02:50.643Z",
-      "blockReason": "2026-09-19 全冊監査: 編集設計 (design) が無く、指標が機械選定 (S2=本文の長い順・S3=地域の極端順位) で主題外・冊間重複 (ランキング章 481 のうち 177 が他冊と同一指標)。現行設計のまま KDP に作らない。再設計は backlog KDP-EXPANSION-01 (S3=1県1章型・S4=県民性ストーリー型)。"
-    },
-    "K-S3-06": {
-      "id": "K-S3-06",
-      "title": "中国データブック — 統計で読む県の横顔",
-      "subtitle": null,
-      "author": "stats47",
-      "authorLastName": "stats47",
-      "authorFirstName": "",
-      "authorKana": "スタッツヨンジュウナナ",
-      "authorRomaji": "stats47",
-      "titleKana": "チュウゴクデータブック トウケイデヨムケンノヨコガオ",
-      "titleRomaji": "Chugoku Databook - Tokei de Yomu Ken no Yokogao",
-      "subtitleKana": null,
-      "subtitleRomaji": null,
-      "language": "ja",
-      "description": "中国の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。\n\n【本書の構成】\n指標ごとに、上位5県と下位5県を左右に並べた図を添えています。両端を並べることで、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わります。図のあとには、なぜその分布になるのかを産業構造・地理・人口規模から読み解く解説を置きました。\n\n【データについて】\n本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。統計の定義や調査年によって数値の解釈が変わる場合があります。\n\nデータは基準年を固定した買い切りの内容です。最新の数値や、本書で扱いきれなかった指標は、姉妹サイト stats47.jp（統計で見る都道府県）で無料でご覧いただけます。",
-      "keywords": [
-        "都道府県",
-        "中国",
-        "地域",
-        "データブック",
-        "統計"
-      ],
-      "categoryPaths": [
-        {
-          "top": "社会・政治",
-          "sub": "社会学",
-          "place": "参考図書・白書"
-        },
-        {
-          "top": "歴史・地理",
-          "sub": "地理・地域研究",
-          "place": "地域研究"
-        },
-        {
-          "top": "ビジネス・経済",
-          "sub": "参考図書・白書",
-          "place": "一般"
-        }
-      ],
-      "applyDrm": true,
-      "aiDisclosure": {
-        "used": true,
-        "text": "作品全体 (広範な編集あり)",
-        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
-        "translations": "なし",
-        "textTools": [
-          "Claude",
-          "Gemini"
-        ],
-        "imageTools": [
-          "gpt-image-2"
-        ]
-      },
-      "priceYen": 500,
-      "royaltyPlan": 70,
-      "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S3-06/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S3-06/v1/cover.jpg",
-      "status": "blocked-design",
-      "asin": null,
-      "publishedAt": null,
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "未作成",
-      "kdpStatusCheckedAt": "2026-09-19T02:02:50.659Z",
-      "blockReason": "2026-09-19 全冊監査: 編集設計 (design) が無く、指標が機械選定 (S2=本文の長い順・S3=地域の極端順位) で主題外・冊間重複 (ランキング章 481 のうち 177 が他冊と同一指標)。現行設計のまま KDP に作らない。再設計は backlog KDP-EXPANSION-01 (S3=1県1章型・S4=県民性ストーリー型)。"
-    },
-    "K-S3-07": {
-      "id": "K-S3-07",
-      "title": "四国データブック — 統計で読む県の横顔",
-      "subtitle": null,
-      "author": "stats47",
-      "authorLastName": "stats47",
-      "authorFirstName": "",
-      "authorKana": "スタッツヨンジュウナナ",
-      "authorRomaji": "stats47",
-      "titleKana": "シコクデータブック トウケイデヨムケンノヨコガオ",
-      "titleRomaji": "Shikoku Databook - Tokei de Yomu Ken no Yokogao",
-      "subtitleKana": null,
-      "subtitleRomaji": null,
-      "language": "ja",
-      "description": "四国の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。\n\n【本書の構成】\n指標ごとに、上位5県と下位5県を左右に並べた図を添えています。両端を並べることで、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わります。図のあとには、なぜその分布になるのかを産業構造・地理・人口規模から読み解く解説を置きました。\n\n【データについて】\n本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。統計の定義や調査年によって数値の解釈が変わる場合があります。\n\nデータは基準年を固定した買い切りの内容です。最新の数値や、本書で扱いきれなかった指標は、姉妹サイト stats47.jp（統計で見る都道府県）で無料でご覧いただけます。",
-      "keywords": [
-        "都道府県",
-        "四国",
-        "地域",
-        "データブック",
-        "統計"
-      ],
-      "categoryPaths": [
-        {
-          "top": "社会・政治",
-          "sub": "社会学",
-          "place": "参考図書・白書"
-        },
-        {
-          "top": "歴史・地理",
-          "sub": "地理・地域研究",
-          "place": "地域研究"
-        },
-        {
-          "top": "ビジネス・経済",
-          "sub": "参考図書・白書",
-          "place": "一般"
-        }
-      ],
-      "applyDrm": true,
-      "aiDisclosure": {
-        "used": true,
-        "text": "作品全体 (広範な編集あり)",
-        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
-        "translations": "なし",
-        "textTools": [
-          "Claude",
-          "Gemini"
-        ],
-        "imageTools": [
-          "gpt-image-2"
-        ]
-      },
-      "priceYen": 500,
-      "royaltyPlan": 70,
-      "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S3-07/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S3-07/v1/cover.jpg",
-      "status": "blocked-design",
-      "asin": null,
-      "publishedAt": null,
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "未作成",
-      "kdpStatusCheckedAt": "2026-09-19T02:02:50.679Z",
-      "blockReason": "2026-09-19 全冊監査: 編集設計 (design) が無く、指標が機械選定 (S2=本文の長い順・S3=地域の極端順位) で主題外・冊間重複 (ランキング章 481 のうち 177 が他冊と同一指標)。現行設計のまま KDP に作らない。再設計は backlog KDP-EXPANSION-01 (S3=1県1章型・S4=県民性ストーリー型)。"
-    },
-    "K-S3-08": {
-      "id": "K-S3-08",
-      "title": "九州・沖縄データブック — 統計で読む県の横顔",
-      "subtitle": null,
-      "author": "stats47",
-      "authorLastName": "stats47",
-      "authorFirstName": "",
-      "authorKana": "スタッツヨンジュウナナ",
-      "authorRomaji": "stats47",
-      "titleKana": "キュウシュウ オキナワデータブック トウケイデヨムケンノヨコガオ",
-      "titleRomaji": "Kyushu Okinawa Databook - Tokei de Yomu Ken no Yokogao",
-      "subtitleKana": null,
-      "subtitleRomaji": null,
-      "language": "ja",
-      "description": "九州・沖縄の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。\n\n【本書の構成】\n指標ごとに、上位5県と下位5県を左右に並べた図を添えています。両端を並べることで、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わります。図のあとには、なぜその分布になるのかを産業構造・地理・人口規模から読み解く解説を置きました。\n\n【データについて】\n本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。統計の定義や調査年によって数値の解釈が変わる場合があります。\n\nデータは基準年を固定した買い切りの内容です。最新の数値や、本書で扱いきれなかった指標は、姉妹サイト stats47.jp（統計で見る都道府県）で無料でご覧いただけます。",
-      "keywords": [
-        "都道府県",
-        "九州・沖縄",
-        "地域",
-        "データブック",
-        "統計"
-      ],
-      "categoryPaths": [
-        {
-          "top": "社会・政治",
-          "sub": "社会学",
-          "place": "参考図書・白書"
-        },
-        {
-          "top": "歴史・地理",
-          "sub": "地理・地域研究",
-          "place": "地域研究"
-        },
-        {
-          "top": "ビジネス・経済",
-          "sub": "参考図書・白書",
-          "place": "一般"
-        }
-      ],
-      "applyDrm": true,
-      "aiDisclosure": {
-        "used": true,
-        "text": "作品全体 (広範な編集あり)",
-        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
-        "translations": "なし",
-        "textTools": [
-          "Claude",
-          "Gemini"
-        ],
-        "imageTools": [
-          "gpt-image-2"
-        ]
-      },
-      "priceYen": 500,
-      "royaltyPlan": 70,
-      "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S3-08/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S3-08/v1/cover.jpg",
-      "draftId": "A2I733T9F57QIE",
-      "status": "withdrawn",
-      "asin": "B0HH8FWJVV",
-      "publishedAt": "2026-08-30",
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "下書き",
-      "kdpStatusCheckedAt": "2026-09-19T08:45:38.019Z",
-      "salesStartedAt": "2026-09-06",
-      "withdrawal": {
-        "requestedAt": "2026-09-19",
-        "reason": "2026-09-19 全冊監査: ランキング章はサイトで無料公開中の AI 解説の転載で、主題外指標・冊間重複 (同一段落 532 件) を含む。読者に売る価値が現行設計では説明できないため販売停止を求める。再設計後に新版で再出品 (backlog KDP-EXPANSION-01)。KDP の販売停止は kdp-operator がオーナー承認の上で行う。",
-        "unpublishedAt": "2026-09-19T08:46:56.111Z",
-        "unpublishedVia": ".claude/scripts/kdp/kdp-unpublish.mjs --all-withdrawn --commit",
-        "readBack": "本棚 status 下書き (出版停止を受理)",
-        "evidence": ".local/kdp-debug/unpublish-2026-09-19T08-38-48-032Z/results.json"
-      }
-    },
-    "K-S4-01": {
-      "id": "K-S4-01",
-      "title": "47都道府県ランキング大全 — 意外な1位・最下位",
-      "subtitle": null,
-      "author": "stats47",
-      "authorLastName": "stats47",
-      "authorFirstName": "",
-      "authorKana": "スタッツヨンジュウナナ",
-      "authorRomaji": "stats47",
-      "titleKana": "ヨンジュウナナトドウフケンランキングタイゼン イガイナイチイ サイカイ",
-      "titleRomaji": "47 Todofuken Ranking Taizen - Igaina 1-i Saikai",
-      "subtitleKana": null,
-      "subtitleRomaji": null,
-      "language": "ja",
-      "description": "分野をまたいで集めた統計のなかから、思わず人に話したくなる「意外な1位・最下位」を選び抜いた一冊。人口の多い県が上位に来るとはかぎらない指標を並べ、その理由を産業や地理から読み解きます。\n\n【本書の構成】\n指標ごとに、上位5県と下位5県を左右に並べた図を添えています。両端を並べることで、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わります。図のあとには、なぜその分布になるのかを産業構造・地理・人口規模から読み解く解説を置きました。\n\n【データについて】\n本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。統計の定義や調査年によって数値の解釈が変わる場合があります。\n\nデータは基準年を固定した買い切りの内容です。最新の数値や、本書で扱いきれなかった指標は、姉妹サイト stats47.jp（統計で見る都道府県）で無料でご覧いただけます。",
-      "keywords": [
-        "都道府県",
-        "ランキング",
-        "雑学",
-        "統計",
-        "日本一"
-      ],
-      "categoryPaths": [
-        {
-          "top": "社会・政治",
-          "sub": "社会学",
-          "place": "参考図書・白書"
-        },
-        {
-          "top": "歴史・地理",
-          "sub": "地理・地域研究",
-          "place": "地域研究"
-        },
-        {
-          "top": "ビジネス・経済",
-          "sub": "経済学",
-          "place": "統計"
-        }
-      ],
-      "applyDrm": true,
-      "aiDisclosure": {
-        "used": true,
-        "text": "作品全体 (広範な編集あり)",
-        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
-        "translations": "なし",
-        "textTools": [
-          "Claude",
-          "Gemini"
-        ],
-        "imageTools": [
-          "gpt-image-2"
-        ]
-      },
-      "priceYen": 1000,
-      "royaltyPlan": 70,
-      "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S4-01/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S4-01/v1/cover.jpg",
-      "draftId": "A2MYHW5B5W7BDK",
-      "status": "withdrawn",
-      "asin": "B0HH8667TM",
-      "publishedAt": "2026-08-30",
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "下書き",
-      "kdpStatusCheckedAt": "2026-09-19T08:46:20.705Z",
-      "salesStartedAt": "2026-09-06",
-      "withdrawal": {
-        "requestedAt": "2026-09-19",
-        "reason": "2026-09-19 全冊監査: ランキング章はサイトで無料公開中の AI 解説の転載で、主題外指標・冊間重複 (同一段落 532 件) を含む。読者に売る価値が現行設計では説明できないため販売停止を求める。再設計後に新版で再出品 (backlog KDP-EXPANSION-01)。KDP の販売停止は kdp-operator がオーナー承認の上で行う。",
-        "unpublishedAt": "2026-09-19T08:46:56.111Z",
-        "unpublishedVia": ".claude/scripts/kdp/kdp-unpublish.mjs --all-withdrawn --commit",
-        "readBack": "本棚 status 下書き (出版停止を受理)",
-        "evidence": ".local/kdp-debug/unpublish-2026-09-19T08-38-48-032Z/results.json"
-      }
     }
   }
 }

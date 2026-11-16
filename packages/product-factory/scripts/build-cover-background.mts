@@ -15,6 +15,7 @@ import { rankingR2Key } from "@stats47/r2-storage/keys";
  * Usage:
  *   npx tsx packages/product-factory/scripts/build-cover-background.mts \
  *     --book K-S1-01 --metric disposable-income-after-rent [--year 2024] [--out <path>]
+ *     地方の本: --highlight <県コード,…> --clip lonMin,lonMax,latMin,latMax --map-top 0.5 [--domain highlight]
  */
 import { writeFileSync, mkdirSync } from "node:fs";
 import { dirname, resolve } from "node:path";
@@ -59,6 +60,14 @@ const RAMP = [
   { t: 0.7, c: [58, 176, 226] },
   { t: 1.0, c: [186, 240, 255] },
 ] as const;
+
+function parseClip(value: string): typeof JAPAN_CLIP {
+  const [lonMin, lonMax, latMin, latMax] = value.split(",").map(Number);
+  if (![lonMin, lonMax, latMin, latMax].every(Number.isFinite) || lonMin >= lonMax || latMin >= latMax) {
+    throw new Error(`--clip は lonMin,lonMax,latMin,latMax: ${value}`);
+  }
+  return { lonMin, lonMax, latMin, latMax };
+}
 
 function arg(name: string): string | undefined {
   const i = process.argv.indexOf(`--${name}`);
@@ -162,25 +171,34 @@ async function main(): Promise<void> {
   const ramp = resolveRamp(scheme, tMin);
   const { rows, year, unit } = await fetchValues(metric, arg("year"));
   const byCode = new Map(rows.map((r) => [r.areaCode.slice(0, 2), r.value]));
-  const values = rows.map((r) => r.value);
+  // --domain highlight: 色の範囲を強調する県の値だけで決める。人口が大きく減る地方 (東北・四国) は 47 県の範囲だと
+  // 暗い端に寄り、紺の地に沈んで地方の形が読めなかった (2026-11-14)
+  const domainRows = arg("domain") === "highlight" && highlight ? rows.filter((r) => highlight.has(r.areaCode.slice(0, 2))) : rows;
+  const values = domainRows.map((r) => r.value);
   const min = Math.min(...values);
   const max = Math.max(...values);
 
-  // 地図は本土 + 沖縄のみ (南鳥島等の外れ島で bbox が伸びるのを防ぐ)
-  const geo = loadPrefectureGeometry(1000, JAPAN_CLIP);
-  const mapBandH = H * (1 - MAP_TOP_RATIO);
+  // 地図は本土 + 沖縄のみ (南鳥島等の外れ島で bbox が伸びるのを防ぐ)。
+  // --clip lonMin,lonMax,latMin,latMax で地方に寄せる (2026-11-14: 日本全体だと九州・沖縄が縮小表示で読めなかった)
+  const clipArg = arg("clip");
+  const clip = clipArg ? parseClip(clipArg) : JAPAN_CLIP;
+  const geo = loadPrefectureGeometry(1000, clip);
+  // --map-top: 地図の帯の上端 (高さに対する比)。地域地図型 (region-pop) は書名の帯と弧が上半分を覆うので下へ寄せる
+  const mapTop = Number(arg("map-top") ?? MAP_TOP_RATIO);
+  if (!(mapTop >= 0 && mapTop < 0.9)) throw new Error(`--map-top は 0〜0.9: ${mapTop}`);
+  const mapBandH = H * (1 - mapTop);
   // 日本列島は右上がりに伸びるので、幅いっぱいに使いつつ帯の高さに収める
   const scale = Math.min((W * 1.02) / geo.width, mapBandH / geo.height);
   const drawW = geo.width * scale;
   const drawH = geo.height * scale;
   const ox = (W - drawW) / 2;
-  const oy = H * MAP_TOP_RATIO + (mapBandH - drawH) / 2;
+  const oy = H * mapTop + (mapBandH - drawH) / 2;
 
   const paths = geo.shapes
     .map((s) => {
       const pref2 = s.code5.slice(0, 2);
       const v = byCode.get(pref2);
-      const t = v === undefined ? null : (v - min) / (max - min || 1);
+      const t = v === undefined ? null : Math.min(1, Math.max(0, (v - min) / (max - min || 1)));
       const fill = t === null ? "#12233c" : ramp(t);
       const d = ringsToPath(s, scale, scale, ox, oy);
       if (!d) return "";
