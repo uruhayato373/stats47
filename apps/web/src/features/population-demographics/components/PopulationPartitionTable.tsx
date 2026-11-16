@@ -18,7 +18,7 @@ export function PopulationPartitionTable({
   total: number;
 }) {
   return (
-    <ValueTable
+    <ValueTable fold
       ariaLabel={`${areaName}の${category}別内訳`}
       className="min-w-96"
       scrollRegion

@@ -11,6 +11,8 @@ import {
   TableRow,
 } from '@stats47/components/atoms/ui/table';
 
+import { ValueTableFold } from './ValueTableFold';
+
 export interface ValueTableColumn {
   key: string;
   header: ReactNode;
@@ -40,6 +42,28 @@ export interface ValueTableRow {
   total?: boolean;
 }
 
+/** 畳む表の見せ方。合計の行 (total) は数えず、いつも見せる */
+export interface ValueTableFoldOptions {
+  /** 上から見せる行数 (既定 3) */
+  head?: number;
+  /** 下から見せる行数 (既定 3) */
+  tail?: number;
+}
+
+const FOLD_HEAD = 3;
+const FOLD_TAIL = 3;
+/** 畳んで隠れる行がこれより少ない表は畳まない (開閉の操作のほうが行より重い) */
+const FOLD_MIN_HIDDEN = 3;
+
+/** 畳む行の key の集合。畳む必要が無い (隠れる行が少ない) 表は null */
+function planFold(rows: readonly ValueTableRow[], fold: boolean | ValueTableFoldOptions | undefined): Set<string> | null {
+  if (!fold) return null;
+  const { head = FOLD_HEAD, tail = FOLD_TAIL } = fold === true ? {} : fold;
+  const body = rows.filter((row) => !row.total);
+  const hidden = body.slice(head, Math.max(head, body.length - tail));
+  return hidden.length >= FOLD_MIN_HIDDEN ? new Set(hidden.map((row) => row.key)) : null;
+}
+
 interface ValueTableProps {
   columns: readonly ValueTableColumn[];
   rows: readonly ValueTableRow[];
@@ -54,6 +78,8 @@ interface ValueTableProps {
   /** 横・縦スクロールを担う外側の箱に足す class (長い一覧の高さを抑える max-h-96 など) */
   containerClassName?: string;
   className?: string;
+  /** 上位・下位の数行だけ見せ、残りは「全件を見る」で開く (全行は HTML に残す。テーマのページの長い表向け) */
+  fold?: boolean | ValueTableFoldOptions;
 }
 
 /**
@@ -78,9 +104,10 @@ function isCellObject(cell: ValueTableCell): cell is ValueTableCellObject {
  * 1 列目以外は右寄せ・桁そろえ (文字の列だけ align: 'left')、行の見出しは th scope="row"。枠は持たず、置く場所 (章の格子・ChartPanel など) が決める。
  * 正典: 部品の台帳 data/design/components.json の value-table。
  */
-export function ValueTable({ columns, rows, ariaLabel, caption, scrollRegion = false, hideHeader = false, containerClassName, className }: ValueTableProps) {
+export function ValueTable({ columns, rows, ariaLabel, caption, scrollRegion = false, hideHeader = false, containerClassName, className, fold }: ValueTableProps) {
   if (rows.length === 0) return null;
-  return (
+  const folded = planFold(rows, fold);
+  const table = (
     <Table
       aria-label={ariaLabel}
       scrollRegion={scrollRegion}
@@ -103,7 +130,12 @@ export function ValueTable({ columns, rows, ariaLabel, caption, scrollRegion = f
       </TableHeader>
       <TableBody>
         {rows.map((row) => (
-          <TableRow key={row.key} className={cn(row.total && 'border-t-2 font-medium')} {...row.attrs}>
+          <TableRow
+            key={row.key}
+            className={cn(row.total && 'border-t-2 font-medium')}
+            {...(folded?.has(row.key) ? { 'data-fold': true } : undefined)}
+            {...row.attrs}
+          >
             {columns.map((column, index) => {
               const cell = row.cells[index];
               const content: ReactNode = isCellObject(cell) ? cell.content : (cell as ReactNode);
@@ -127,4 +159,5 @@ export function ValueTable({ columns, rows, ariaLabel, caption, scrollRegion = f
       </TableBody>
     </Table>
   );
+  return folded ? <ValueTableFold hiddenCount={folded.size}>{table}</ValueTableFold> : table;
 }

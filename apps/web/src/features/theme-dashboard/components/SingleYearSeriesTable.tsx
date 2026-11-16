@@ -47,7 +47,7 @@ export function SingleYearSeriesTable({
 }) {
   if (series.length === 0) return null;
   return (
-    <ValueTable
+    <ValueTable fold
       ariaLabel={ariaLabel}
       columns={[
         { key: 'name', header: nameColumnLabel, rowHeader: true },

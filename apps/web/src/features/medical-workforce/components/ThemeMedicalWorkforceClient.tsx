@@ -29,7 +29,7 @@ function WorkforceTable({
   total: number;
 }) {
   return (
-    <ValueTable
+    <ValueTable fold
       ariaLabel={`${areaName}の医師の${kind}別人数と構成割合`}
       className="min-w-96"
       scrollRegion

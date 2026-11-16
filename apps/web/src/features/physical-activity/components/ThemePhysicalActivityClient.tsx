@@ -41,7 +41,7 @@ export function ThemePhysicalActivityClient({
           />
         }
       >
-        <ValueTable
+        <ValueTable fold
           ariaLabel={`${area}の歩数と95%信頼区間`}
           caption="平均と95%信頼区間は1日当たりの歩数です。集計人数は推計人口ではありません。"
           columns={[

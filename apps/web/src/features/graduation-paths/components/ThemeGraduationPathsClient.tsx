@@ -53,7 +53,7 @@ export function ThemeGraduationPathsClient({
         <p className="text-sm text-muted-foreground">
           卒業した学校の所在地で集計しています。通信制高校・中等教育学校・特別支援学校は含みません。表示する県は、ページ共通の地域選択で切り替えられます。
         </p>
-        <ValueTable
+        <ValueTable fold
           ariaLabel={`${areaLabel}の高校卒業後の進路`}
           className="min-w-96"
           scrollRegion

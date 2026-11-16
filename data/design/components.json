@@ -376,6 +376,11 @@
           "prop": "containerClassName",
           "required": false,
           "what": "スクロールを担う外側の箱の class (長い一覧の高さを抑える max-h-96 など)"
+        },
+        {
+          "prop": "fold",
+          "required": false,
+          "what": "上位・下位の数行だけ見せ、残りは「全件を見る」で開く (全行は HTML に残す。隠れる行が 3 未満なら畳まない。テーマのページの長い表向け)"
         }
       ],
       "spec": {

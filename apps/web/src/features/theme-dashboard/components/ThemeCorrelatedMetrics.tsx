@@ -33,7 +33,7 @@ export async function ThemeCorrelatedMetrics({ themeKey }: ThemeCorrelatedMetric
         description="テーマ内の指標と、人口規模の影響を除いた順位相関が高いテーマ外の指標"
         hideRule
       />
-      <ValueTable
+      <ValueTable fold
         ariaLabel="このテーマと関連の深い指標"
         columns={[
           // スマホ幅では 2 列とも折り返す。相手の列を 1 行に保つと、指標の列が 2〜3 文字ごとに折り返して読めない

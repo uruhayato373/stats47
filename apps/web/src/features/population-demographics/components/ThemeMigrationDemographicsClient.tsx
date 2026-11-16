@@ -122,7 +122,7 @@ export function ThemeMigrationDemographicsClient({
             : `${view.area.areaName}への移動が転入、${view.area.areaName}からの移動が転出です。`}
           転入超過が負数の場合は転出超過です。進学・就職などの転居理由は区別していません。
         </p>
-        <ValueTable
+        <ValueTable fold
           ariaLabel={`${areaLabel}の県間移動・${SEX_LABELS[sex]}・${view.ageLabel}`}
           className="min-w-96"
           scrollRegion

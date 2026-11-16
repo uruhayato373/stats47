@@ -50,7 +50,7 @@ export function ThemeFactoryInvestmentClient({
           </span>{' '}
           百万円
         </p>
-        <ValueTable
+        <ValueTable fold
           ariaLabel={`${area}の設備投資計画額`}
           caption="県内全企業の年間投資実績とは異なります。非公表の3県には順位を付けません。"
           columns={[

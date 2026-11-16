@@ -104,7 +104,7 @@ export function ThemeTsunamiExposureClient({
                 ? 'このKSJ固定版は歴史的な想定を含み、現在の最新想定とは限りません。'
                 : ''}
             </p>
-            <ValueTable
+            <ValueTable fold
               ariaLabel={`${row.areaName}の津波浸水深別人口と公共施設`}
               caption="人口は250mメッシュ中心で判定した近似です。施設は2022年4月の所在地を使用しています。人口は小数第1位に丸めています。"
               columns={[

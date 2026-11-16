@@ -66,7 +66,7 @@ export function ThemePropertyPriceDistributionClient({
           />
         }
       >
-        <ValueTable
+        <ValueTable fold
           ariaLabel={`${area}の住宅地価格分布`}
           caption="価格は円/㎡。対象条件に合う公表標本の分布で、県内すべての住宅地の価格ではありません。"
           columns={[

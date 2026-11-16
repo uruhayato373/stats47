@@ -375,7 +375,7 @@ export function ThemeMetricsDashboard({
     // 章の中の表は枠の見出しの帯を置かない (章の見出し・答えの文と見出しが 3 段に重なるため。2026-11-03)。
     // グループ名は表の 1 列目の見出し、年は行ごと、出典は章の見出しの帯のシートにまとめる
     if (inChapter) {
-      return <ValueTable key={panel.key} ariaLabel={panel.title ?? sectionTitle} columns={columns} rows={rows} />;
+      return <ValueTable fold key={panel.key} ariaLabel={panel.title ?? sectionTitle} columns={columns} rows={rows} />;
     }
     return (
       <ChartPanel
@@ -385,7 +385,7 @@ export function ThemeMetricsDashboard({
         action={<SourcesSheet trigger="icon" groups={metricSourceGroups(panel.metrics, tabLabels)} />}
         contentClassName="p-0!"
       >
-        <ValueTable columns={columns} rows={rows} />
+        <ValueTable fold columns={columns} rows={rows} />
       </ChartPanel>
     );
   };

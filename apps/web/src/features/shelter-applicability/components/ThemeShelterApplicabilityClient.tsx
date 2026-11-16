@@ -48,7 +48,7 @@ export function ThemeShelterApplicabilityClient({
               この地域の最新DB更新日は{row.latestDatabaseUpdate}
               です。指定日・開設日ではありません。
             </p>
-            <ValueTable
+            <ValueTable fold
               ariaLabel={`${row.areaName}の指定緊急避難場所と災害種別`}
               className="min-w-96"
               scrollRegion
@@ -79,7 +79,7 @@ export function ThemeShelterApplicabilityClient({
               原典の「1」を該当、空欄を非該当として集計しています。本取得分に不明の記号はありません。
               非該当は、安全・危険の判定を意味しません。
             </p>
-            <ValueTable
+            <ValueTable fold
               ariaLabel={`${row.areaName}の指定避難所の掲載件数`}
               className="min-w-96"
               scrollRegion
