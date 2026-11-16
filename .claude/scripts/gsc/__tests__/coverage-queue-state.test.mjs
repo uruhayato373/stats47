@@ -175,3 +175,18 @@ test("カードで対応不要と判断した 200 の URL は、同じ分類の�
   assert.equal(keepsDesignJudgment(entry({ action: "sitemap-gap", status: "pending" }), "sitemap-gap", 200), false);
   assert.equal(keepsDesignJudgment(undefined, "sitemap-gap", 200), false);
 });
+
+test("upsertTotalsHistoryRow: 直前の週と全件数が同じ行は写しとして足さない", async () => {
+  const { upsertTotalsHistoryRow } = await import("../lib/coverage-queue-state.mjs");
+  const w44 = "2026-W44,2026-10-31,12653,413,17,1148,2068,834,2414,4837,1226,7069";
+  const copy = "2026-W45,2026-11-08,12653,413,17,1148,2068,834,2414,4837,1226,7069";
+  const fresh = "2026-W45,2026-11-08,12600,413,17,1148,2068,834,2414,4837,1226,7100";
+  assert.deepEqual(upsertTotalsHistoryRow([w44], copy), { rows: [w44], skipped: true });
+  // 写しの行が既にあっても、再実行で取り除かれる
+  assert.deepEqual(upsertTotalsHistoryRow([w44, copy], copy), { rows: [w44], skipped: true });
+  assert.deepEqual(upsertTotalsHistoryRow([w44], fresh), { rows: [w44, fresh], skipped: false });
+  // 同じ週の行は置き換える
+  assert.deepEqual(upsertTotalsHistoryRow([w44, fresh], fresh.replace("12600", "12500")).rows.length, 2);
+  // 前の週が無ければ足す
+  assert.deepEqual(upsertTotalsHistoryRow([], w44), { rows: [w44], skipped: false });
+});

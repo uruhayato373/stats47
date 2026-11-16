@@ -63,6 +63,7 @@ import {
   refineBySitemap,
   sitemapKey,
   summarizeCoverageQueue,
+  upsertTotalsHistoryRow,
 } from "./lib/coverage-queue-state.mjs";
 import { SITE_ORIGIN } from "../lib/site-config.cjs";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
@@ -812,10 +813,10 @@ async function build() {
         .split("\n")
         .filter((l) => l.trim() && !l.startsWith("week,"));
     }
-    // 同週行は置換 (upsert)
-    rows = rows.filter((l) => !l.startsWith(`${week},`));
-    rows.push(line);
-    rows.sort();
+    // 同週行は置換 (upsert)。直前の週と全件数が同じなら写しとみなして足さない
+    const upserted = upsertTotalsHistoryRow(rows, line);
+    if (upserted.skipped) console.warn(`  totals-history: ${week} は直前の週と件数が全列同じ (前回の書き出しの写し) なので行を足さない`);
+    rows = upserted.rows;
     fs.writeFileSync(TOTALS_HISTORY, header + "\n" + rows.join("\n") + "\n");
   }
 
