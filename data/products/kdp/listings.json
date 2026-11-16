@@ -2235,15 +2235,7 @@
       "publishedAt": null,
       "kdpStatus": "draft",
       "kdpStatusLabel": "新刊下書き準備",
-      "kdpStatusCheckedAt": "2026-11-14T04:26:40.866Z",
-      "publicationStage": "prepared",
-      "publicationStageUpdatedAt": "2026-11-14T04:26:40.866Z",
-      "publicationStageEvidence": {
-        "prepared": {
-          "at": "2026-11-14T04:26:40.866Z",
-          "mode": "first"
-        }
-      }
+      "kdpStatusCheckedAt": "2026-11-14T04:26:40.866Z"
     },
     "K-S3-02": {
       "id": "K-S3-02",
@@ -2310,15 +2302,7 @@
       "publishedAt": null,
       "kdpStatus": "draft",
       "kdpStatusLabel": "新刊下書き準備",
-      "kdpStatusCheckedAt": "2026-11-14T08:21:36.422Z",
-      "publicationStage": "prepared",
-      "publicationStageUpdatedAt": "2026-11-14T08:21:36.422Z",
-      "publicationStageEvidence": {
-        "prepared": {
-          "at": "2026-11-14T08:21:36.422Z",
-          "mode": "first"
-        }
-      }
+      "kdpStatusCheckedAt": "2026-11-14T08:21:36.422Z"
     },
     "K-S3-03": {
       "id": "K-S3-03",
@@ -2385,15 +2369,7 @@
       "publishedAt": null,
       "kdpStatus": "draft",
       "kdpStatusLabel": "新刊下書き準備",
-      "kdpStatusCheckedAt": "2026-11-14T08:21:38.289Z",
-      "publicationStage": "prepared",
-      "publicationStageUpdatedAt": "2026-11-14T08:21:38.289Z",
-      "publicationStageEvidence": {
-        "prepared": {
-          "at": "2026-11-14T08:21:38.289Z",
-          "mode": "first"
-        }
-      }
+      "kdpStatusCheckedAt": "2026-11-14T08:21:38.289Z"
     },
     "K-S3-04": {
       "id": "K-S3-04",
@@ -2460,15 +2436,7 @@
       "publishedAt": null,
       "kdpStatus": "draft",
       "kdpStatusLabel": "新刊下書き準備",
-      "kdpStatusCheckedAt": "2026-11-14T08:21:40.221Z",
-      "publicationStage": "prepared",
-      "publicationStageUpdatedAt": "2026-11-14T08:21:40.221Z",
-      "publicationStageEvidence": {
-        "prepared": {
-          "at": "2026-11-14T08:21:40.221Z",
-          "mode": "first"
-        }
-      }
+      "kdpStatusCheckedAt": "2026-11-14T08:21:40.221Z"
     },
     "K-S3-05": {
       "id": "K-S3-05",
@@ -2535,15 +2503,7 @@
       "publishedAt": null,
       "kdpStatus": "draft",
       "kdpStatusLabel": "新刊下書き準備",
-      "kdpStatusCheckedAt": "2026-11-14T08:21:43.079Z",
-      "publicationStage": "prepared",
-      "publicationStageUpdatedAt": "2026-11-14T08:21:43.079Z",
-      "publicationStageEvidence": {
-        "prepared": {
-          "at": "2026-11-14T08:21:43.079Z",
-          "mode": "first"
-        }
-      }
+      "kdpStatusCheckedAt": "2026-11-14T08:21:43.079Z"
     },
     "K-S3-06": {
       "id": "K-S3-06",
@@ -2610,15 +2570,7 @@
       "publishedAt": null,
       "kdpStatus": "draft",
       "kdpStatusLabel": "新刊下書き準備",
-      "kdpStatusCheckedAt": "2026-11-14T08:21:45.028Z",
-      "publicationStage": "prepared",
-      "publicationStageUpdatedAt": "2026-11-14T08:21:45.028Z",
-      "publicationStageEvidence": {
-        "prepared": {
-          "at": "2026-11-14T08:21:45.028Z",
-          "mode": "first"
-        }
-      }
+      "kdpStatusCheckedAt": "2026-11-14T08:21:45.028Z"
     },
     "K-S3-07": {
       "id": "K-S3-07",
@@ -2685,15 +2637,7 @@
       "publishedAt": null,
       "kdpStatus": "draft",
       "kdpStatusLabel": "新刊下書き準備",
-      "kdpStatusCheckedAt": "2026-11-14T08:21:46.950Z",
-      "publicationStage": "prepared",
-      "publicationStageUpdatedAt": "2026-11-14T08:21:46.950Z",
-      "publicationStageEvidence": {
-        "prepared": {
-          "at": "2026-11-14T08:21:46.950Z",
-          "mode": "first"
-        }
-      }
+      "kdpStatusCheckedAt": "2026-11-14T08:21:46.950Z"
     },
     "K-S1-14": {
       "id": "K-S1-14",
