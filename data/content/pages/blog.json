@@ -7416,18 +7416,20 @@
       "id": "blog:konbu-consumption-prefecture-gap",
       "kind": "blog",
       "key": "konbu-consumption-prefecture-gap",
-      "title": "昆布の産地・北海道が消費最下位圏──岩手が首位になった北前船と「産地で食べない」構造",
+      "title": "昆布の産地・北海道が消費44位の逆説",
       "href": "/blog/konbu-consumption-prefecture-gap",
       "published": true,
       "rankingKeys": [
-        "konbu-consumption-quantity"
+        "konbu-consumption-expenditure",
+        "konbu-consumption-quantity",
+        "konbu-tsukudani-consumption-quantity"
       ],
       "tagIds": [
         "tag:t-266fb15bfc70",
-        "tag:t-8d8741ce11ff",
+        "tag:t-8b3772aa929f",
+        "tag:hokkaido",
         "tag:t-0b42c166d9bf",
-        "tag:t-ba8e4beb69bf",
-        "tag:t-71e69a814d46"
+        "tag:t-ba8e4beb69bf"
       ]
     },
     {

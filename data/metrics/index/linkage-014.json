@@ -7023,6 +7023,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:konbu-consumption-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:kyoto-food-culture",
           "kind": "blog"
         },
@@ -7427,6 +7431,10 @@
         },
         {
           "pageId": "blog:kagoshima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:konbu-consumption-prefecture-gap",
           "kind": "blog"
         },
         {
