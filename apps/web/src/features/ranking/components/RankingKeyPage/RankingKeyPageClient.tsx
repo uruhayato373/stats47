@@ -267,6 +267,8 @@ export function RankingKeyPageClient({
                     />
                 </PanelGrid>
 
+                {/* 関連記事は広い画面では右レールの先頭 (RankingPageSidebarSection)。同じシェル幅基準で出し分け、二重に出さない */}
+                <div className="order-5 rail:hidden">{sections.relatedArticles}</div>
                 <PanelGrid className="order-6">
                     <RankingPageContentSections
                         rankingKey={rankingKey}

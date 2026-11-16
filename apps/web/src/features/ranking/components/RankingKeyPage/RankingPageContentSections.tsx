@@ -100,10 +100,9 @@ export function RankingPageContentSections({
 
             {sections.adRowFooter}
 
-            {/* 関連ランキングと記事を出典の後の広告の段とページの最後の広告の段の間に置き、広告の枠を隣り合わせにしない
+            {/* 関連ランキングを出典の後の広告の段とページの最後の広告の段の間に置き、広告の枠を隣り合わせにしない
                 (広告の枠の台帳 ads.placements) */}
             {sections.relatedRankings}
-            {sections.relatedArticles}
             {sections.adRowEnd}
         </>
     );

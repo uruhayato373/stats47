@@ -93,7 +93,7 @@ export function RankingPageClientShell({
         />
       }
       sections={{
-        relatedArticles: <RelatedArticlesCard rankingKey={rankingKey} areaType={model.areaType} />,
+        relatedArticles: <RelatedArticlesCard rankingKey={rankingKey} areaType={model.areaType} placement="body" />,
         sidebar: (
           <RankingPageSidebarSection
             key="sidebar"

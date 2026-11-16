@@ -14,6 +14,7 @@ import {
 
 import { RankingItemsSidebar } from "../RankingSidebar";
 import { PortStatisticsMapCard } from "../RankingSidebar/PortStatisticsMapCard";
+import { RelatedArticlesCard } from "../RankingSidebar/RelatedArticlesCard";
 import { SurveyCard } from "../RankingSidebar/SurveyCard";
 
 import type { RankingItem } from "@stats47/ranking";
@@ -47,6 +48,11 @@ export function RankingPageSidebarSection({
 }: RankingPageSidebarSectionProps) {
   return (
     <Suspense fallback={<RankingPageSidebarSkeleton />}>
+      {/* 本文の order-5 枠 (rail:hidden) と同じシェル幅基準で出し分け、二重に出さない。
+          contents にして、記事が無いときに空の枠がレールの先頭に gap の分の段差を作らないようにする */}
+      <div className="hidden rail:contents">
+        <RelatedArticlesCard rankingKey={rankingKey} areaType={areaType} placement="rail" />
+      </div>
       {areaType === "prefecture" && (
         <RelatedContentNavigation
           title="この指標を使うテーマ"
