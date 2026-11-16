@@ -42,5 +42,16 @@ metadata:
 - 引数ミス (`--no-verify=false` → exit 129) もこの形なら即座に見える。実際 2026-08-20 に
   この追補を書いた直後、同じコマンドで exit 129 を捕まえられた。
 
+## ★2026-11-16: 記録があるのに git push をパイプに流した → フックで止めるようにした
+
+上の「git push は必ずファイルに書く形」を読んでいても `git push ... 2>&1 | tail -4` と書いた。記録だけでは
+守られないので、`.claude/hooks/pre-bash-safety.js` が `git commit` / `git push` の出力をパイプに流す形を deny する
+(テスト `.claude/scripts/lib/__tests__/pre-bash-safety-git-pipe.test.cjs`)。
+
+**誤診の記録**: このとき push が exit 141 で届かなかったのを「パイプが git を止めた」と説明したが誤りだった。
+ファイルに書く形でも同じく 141 で止まった。本当の原因は pre-push の検査 (約 10 分) の間に GitHub との SSH 接続が
+切れること [仮説・BACKLOG `GIT-PUSH-SSH-TIMEOUT-01`]。**exit 141 を見たら、パイプより先に「長いフックの後の
+ネットワーク書き込み」を疑う**。原因をひとつ見つけて止まらず、その原因を外した条件で再現するかを確かめてから記録する。
+
 関連: [[feedback-shared-working-copy-git-race]] (同セッションで並行作業と交錯した際、
 「green なのに何もしない」silent no-op と組み合わさると誤診が連鎖する)

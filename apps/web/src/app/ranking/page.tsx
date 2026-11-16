@@ -109,7 +109,7 @@ export default async function RankingIndexPage() {
   const [indexRow] = composeAdRows([['adsense']], [CONTENT_FOOTER], []);
   return (
     <PageShell rightRail={rightRail} header={header}>
-      {/* 節はカード同士を点線の帯で接ぐ (テンプレートの lyra のダッシュボード。home / category と同じ) */}
+      {/* 節はカード同士を線の格子で接ぐ (テンプレートの lyra のダッシュボード。home / category と同じ) */}
       <PageSections>
         <HorizontalCardCarouselFrame
           title="注目のランキング"

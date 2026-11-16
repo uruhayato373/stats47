@@ -104,7 +104,7 @@ describe('category page featured ranking cards', () => {
     );
   });
 
-  it('節のカードを点線の帯で接ぎ (PageSections)、広告はカードの格子の外に置く', () => {
+  it('節のカードを線の格子で接ぎ (PageSections)、広告はカードの格子の外に置く', () => {
     expect(PAGE).toContain('<PageSections>');
     const grids = Array.from(PAGE.matchAll(/<PageSections\b[\s\S]*?<\/PageSections>/g), (m) => m[0]);
     expect(grids.length).toBeGreaterThan(0);

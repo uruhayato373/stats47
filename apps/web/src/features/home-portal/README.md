@@ -45,13 +45,14 @@
 
 ## 利用意図カード画像
 
-- 配信用の透過WebPは`apps/web/public/images/home/use-cases/`に置く。UIと同じリリースで
+- 配信用のWebP (明るい地を焼き込み、ダーク表示でも暗くしない) は`apps/web/public/images/home/use-cases/`に置く。UIと同じリリースで
   変更する少数の静的素材なのでR2へ分離しない
 - imagegenの元PNGは`assets/page-heroes/home-use-case-<id>.png`に残す
 - 共通スタイル・主題・プロンプトは`home-use-case-image-catalog.ts`で管理する
 - 元PNGを差し替えた後は
-  `npx tsx apps/web/scripts/process-home-use-case-images.ts --only <id>`で、右側トリミング・
-  背景透過・WebP最適化を同じ条件で再実行する
+  `npx tsx apps/web/scripts/process-home-use-case-images.ts --only <id>`で、背景の除去・
+  絵の範囲での切り出し・16:9 (640×360、余白は高さの8%) への配置・地の焼き込み・WebP最適化を同じ条件で再実行する
+- カードはブログカードと同じ全幅の16:9の画像枠 (`PORTAL_CARD_ASPECT_CLASS`) に画像を置く
 - 画像は装飾扱い (`alt=""`) とし、リンク名と説明は常にDOMテキストで提供する
 
 カテゴリは17軸の正典から、ブログはsnapshotから直接導出する。home専用のカテゴリ複製や

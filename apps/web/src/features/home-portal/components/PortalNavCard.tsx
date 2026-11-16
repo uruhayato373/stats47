@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 
-import { PORTAL_CARD_DESCRIPTION_CLASS, PORTAL_CARD_PADDING_CLASS, PORTAL_CARD_TITLE_CLASS, SurfaceLinkCard, PORTAL_CARD_CELL_CLASS } from '@/components/surface';
+import { PORTAL_CARD_ASPECT_CLASS, PORTAL_CARD_DESCRIPTION_CLASS, PORTAL_CARD_PADDING_CLASS, PORTAL_CARD_TITLE_CLASS, SurfaceLinkCard, PORTAL_CARD_CELL_CLASS } from '@/components/surface';
 
 import { trackNavClick } from '@/lib/analytics/events';
 
@@ -34,19 +34,20 @@ export function PortalNavCard({
           // analytics 失敗で遷移を止めない
         }
       }}
-      className={`${PORTAL_CARD_PADDING_CLASS} ${PORTAL_CARD_CELL_CLASS} group flex h-full flex-col gap-3`}
+      className={`${PORTAL_CARD_PADDING_CLASS} ${PORTAL_CARD_CELL_CLASS} group flex h-full flex-col gap-2 overflow-hidden`}
     >
-      {/* 挿絵は題名の上の固定の枠 (size-12) に置く。題名の横に並べると狭い幅で題名の列が潰れていた */}
+      {/* 挿絵はブログカード (PortalBlogCard) と同じ全幅の 16:9 の枠に置く (2026-11-16。旧: 題名の上の 48px 角で、
+          絵の中身が読めずアイコンにしか見えなかった)。画像は 640×360 の WebP で、余白と明るい地は加工の段で焼き込んである */}
       <span
         aria-hidden="true"
-        className="pointer-events-none relative block size-12 shrink-0"
+        className={`pointer-events-none relative block ${PORTAL_CARD_ASPECT_CLASS} w-full overflow-hidden rounded-sm bg-muted`}
       >
         <Image
           src={imageSrc}
           alt=""
           fill
-          sizes="48px"
-          className="object-contain"
+          sizes="(min-width: 1280px) 18vw, (min-width: 1024px) 22vw, (min-width: 640px) 50vw, 85vw"
+          className="object-contain transition-transform duration-200 group-hover:scale-[1.01]"
         />
       </span>
       <span className="block min-w-0">

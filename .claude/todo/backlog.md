@@ -105,6 +105,31 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [GIT-PUSH-SSH-TIMEOUT-01] 会社の Windows PC で、push の前の検査が通った後に git が exit 141 で止まり push が届かない
+タグ: [インフラ・計測] [種類:不具合] [実行:windows] [起票:2026-11-16] [領域:管理]
+
+- **起点 (2026-11-16 観測)**: `git push origin <branch>` が、push の前の検査 (`pre-push-tests.mjs`、約 10 分) がすべて通った直後に exit 141 で止まり、リモートは更新されなかった。出力はファイルに書いていて、パイプは無い。検査が失敗した回のログには `unable to write flush packet: Broken pipe` が出ている。`--no-verify` の push はすぐ届いた。
+- **[仮説]** git は検査を走らせる前に GitHub との SSH 接続を開き、約 10 分の検査の間に社内ネットワークか GitHub がその接続を切る。**検証**: ① 検査が短く済む push で 141 が出ないか ② `~/.ssh/config` の github.com に `ServerAliveInterval 30` を入れて (オーナーの了解の上) 検査ありの push が通るか。
+- **次**: 仮説が支持されたら ② の設定を入れるか、検査を先に別で走らせてから push する手順を決める。支持されなければ git の trace (`GIT_TRACE=1 GIT_SSH_COMMAND="ssh -v"`) で止まる位置を見る。
+- **禁止**: 検査を毎回 `--no-verify` で飛ばす運用にしない (飛ばすのはオーナーの許可のあるときだけ)。
+- **完了条件**: この PC で検査ありの push が 3 回続けて届く。
+
+### [BACKLOG-LEDGER-PARALLEL-FLAKE-01] 台帳の並行記録のテストが Windows で 3 回に 1 回落ち、push を止める
+タグ: [インフラ・計測] [種類:不具合] [実行:windows] [検証:node --test .claude/scripts/backlog-loop/__tests__/record-backlog-outcome.test.cjs] [起票:2026-11-16] [領域:管理]
+
+- **起点 (2026-11-16 観測)**: この会社の Windows PC で、`record-backlog-outcome.test.cjs` の「並行して記録しても 1 件も欠けない」が単独で 3 回中 1 回落ち、push の前の検査 (`pre-push-tests.mjs`) では 2 回続けて落ちて push が止まった。落ち方は終了コードの照合 (`codes`) で、24 本の子プロセスのうち 4 本が 1 で終わった。台帳の中身の照合までは進んでいない。
+- **[仮説]** 同時に 24 本がロックを取り合い、待ちの上限で諦めたプロセスが 1 で終わる。負荷の高い push 前の検査で落ちやすい。**検証**: 失敗したプロセスの stderr を残すよう `stdio` を変えて再現し、理由を読む。
+- **次**: 理由を確かめてから、ロックの待ち方 (record-backlog-outcome.mjs) かテストの並列数のどちらを直すかを決める。テストを消したり並列数を 1 にしたりして通すのは禁止 (同時書き込みで欠けないことを守るテストのため)。
+- **完了条件**: 単独で 20 回続けて通り、push の前の検査でも落ちない。
+
+### [THEME-THUMBNAIL-ROLLOUT-01] テーマ 56 件のサムネイルを Codex で作り、テーマのカードに出す
+タグ: [UI・UX] [種類:制作] [実行:別環境] [検証:npx tsx apps/web/scripts/theme-thumbnails.ts status] [起票:2026-11-16] [領域:サイト]
+
+- **起点 (2026-11-16 オーナー決定)**: テーマのサムネイルを OGP の画風に寄せて全件作る。中央の文字の面は入れない (題名はカードの文字)。準備は済み: カタログ `apps/web/scripts/data/theme-thumbnail-catalog.ts` (56 テーマの描く小物)・スクリプト `apps/web/scripts/theme-thumbnails.ts` (prompt / process / status)・経路 `theme-thumbnail` (`config/image-generation-routes.json`)。
+- **次**: ① 試作 3 テーマ (例: healthcare・climate・household-food-spending) を `prompt --key` の依頼文で Codex に描かせ、`assets/themes/thumbnails/<key>.png` に置いて `process --all` → オーナーが画風を判断 ② 残り 53 件 ③ カード部品へ配線 (トップの「知りたいことから探す」6 枚の差し替え。`/themes` 一覧に画像を出すかは試作を見て決める)。
+- **停止条件**: 社内ネットワークで Codex が 503 (i-FILTER の警告ページ) を返したら、プロキシを迂回せず別ネットワークで生成する。Codex が使えないときに別の画像モデルや手書きの描画で代用しない。
+- **完了条件**: `theme-thumbnails.ts status` が元画像・配信画像とも 56 / 56 で、テーマのカードに出ていることを localhost で確認済み。
+
 ### [NSM-REVENUE-INPUTS-01] 収益を日 × 商品の明細で持ち、土曜の週次レビューをスケジュール済みタスクで自動実行する
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/metrics/__tests__/revenue-rollup.test.mjs] [起票:2026-11-14] [領域:管理] [進行中]
 

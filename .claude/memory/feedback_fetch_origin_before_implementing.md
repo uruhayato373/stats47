@@ -20,3 +20,5 @@ metadata:
 **Why**: stale ローカル + 並行セッションの組合せで「既デプロイ済みの作業を重複実装→破棄」が起きる。fetch + diff を 1 分かけるだけで丸ごと回避できる。関連: [[feedback_shared_working_copy_git_race]]（2 セッションが同一 working copy を共有する別ケース）。
 
 **2026-09-20 再発 (別形)**: 共有作業ツリーが origin/develop より 38 コミット遅れのまま note の footer を直し、cherry-pick で push した。前日の `ab20af08b` が同じ `navigation-footer.mjs` のサイトカード判定を `hasStats47Url`→`hasUrl(siteUrl)` に変えていたため、ローカル検証 (旧ルール) では 0 本、CI (新ルール) では 22 本 pending になり、原因特定に CI 5 往復かかった。**触るファイルは `git diff origin/develop -- <path>` で上流差分を先に読む**。ローカルで再現できない CI 差は「同じコードか」を最初に疑う。
+
+**2026-11-16 再発 (別形)**: 作業ツリーが別作業のブランチ (develop より 524 コミット遅れ・別セッションの未コミット変更が 160 件超) のまま UI の変更を始め、コミットの段になって初めて気づいた。最新 develop から別フォルダ (worktree) を作って差分を移し直すことになり、その途中で develop 側のスクリプトの移動と規約の衝突を手で直した。**編集を始める前に `git rev-list --count HEAD..origin/develop` と `git status --short | wc -l` を見て、古いか別作業が残っていれば、最初から最新 develop の worktree で作業する** (node_modules のつなぎ方と片付けは [[feedback_worktree_symlinked_node_modules_resolve_main]] と [[feedback_worktree_junction_deletes_target]])。
