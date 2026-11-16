@@ -341,9 +341,26 @@ async function runApplyUi(argv) {
   }
 }
 
+/**
+ * login [--if-expired] [--wait]
+ *   --if-expired: 専用プロファイルの認証 cookie が有効なら開かずに終わる (土曜の取得の最初に呼ぶ)
+ *   --wait      : 開いた Chrome が閉じられるまで最大 10 分待ち、閉じたあとに認証 cookie を確かめて exit code で返す
+ * パスワード・2 段階認証は人が通す (自動入力しない)。cookie は名前と期限だけを読む。
+ */
 async function runLogin() {
   const { spawn } = await import("node:child_process");
   const { PROFILE_DIR } = await import("./browser-context.mjs");
+  const { runPreflight } = await import("../measurement/session-preflight.mjs");
+  const { gscSession, profileOpen, waitForProfileClosed } = await import("./login-wait.mjs");
+  const argv = process.argv.slice(3);
+  const check = () => gscSession(runPreflight({ root: PROJECT_ROOT }));
+  if (argv.includes("--if-expired")) {
+    const before = check();
+    if (before.usable) { console.log(JSON.stringify({ source: "gsc", status: "ok", state: before.state, opened: false })); return; }
+    if (profileOpen(PROFILE_DIR)) { console.log(JSON.stringify({ source: "gsc", status: "profile_open", reason: "専用プロファイルの Chrome が開いたまま。閉じてから取り直す" })); process.exit(1); }
+    const { notify } = await import("../measurement/refresh-session.mjs");
+    notify("Google (GSC) のログインが切れています。開いた Chrome でログインし、Cmd+Q で閉じてください (10 分待ちます)");
+  }
   fs.mkdirSync(PROFILE_DIR, { recursive: true });
   console.log("素の Chrome (automation 非接続) を専用プロファイルで開きます。");
   console.log("1. 開いたウィンドウで Google にログイン (stats47 のアカウント)");
@@ -355,6 +372,11 @@ async function runLogin() {
     ["-na", "Google Chrome", "--args", `--user-data-dir=${PROFILE_DIR}`, "--no-first-run", "--no-default-browser-check", "https://accounts.google.com/"],
     { detached: true, stdio: "ignore" },
   ).unref();
+  if (!argv.includes("--wait")) return;
+  const waited = await waitForProfileClosed(PROFILE_DIR);
+  const after = check();
+  console.log(JSON.stringify({ source: "gsc", status: after.usable ? "ok" : waited === "closed" ? "not_logged_in" : waited, state: after.state, opened: true }));
+  if (!after.usable) process.exit(1);
 }
 
 async function main() {
