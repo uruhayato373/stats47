@@ -20,10 +20,19 @@ describe('approved license remediation deletion boundary', () => {
   ])('rejects missing, added, changed or duplicate objects before any deletion', (...objects) => {
     expect(() => assertUnchangedRetentionInventory(expected, objects)).toThrow();
   });
+  it('ブログの撤去は、公開 R2 の記事フォルダの審査記録と prompt だけ (記事本文・図・データを含めない)', () => {
+    const blog = LICENSE_RETENTION_TARGETS.find((target) => target.id === 'blog-public-private-files-20261116');
+    expect(blog).toBeDefined();
+    for (const object of blog!.objects) {
+      expect(object.key).toMatch(/^app\/blog\/[a-z0-9][a-z0-9-]*\/(review\.md|article\.prompt\.txt)$/);
+    }
+    expect(blog!.prefixes).toEqual(blog!.objects.map((object) => object.key));
+  });
+
   it('pins the approved raw, retired rankings, obsolete sidecars and three blogs only', () => {
-    expect(LICENSE_RETENTION_TARGETS.map((target) => target.objects.length)).toEqual([435, 125, 2, 53, 1, 3, 1, 1399, 19]);
+    expect(LICENSE_RETENTION_TARGETS.map((target) => target.objects.length)).toEqual([435, 125, 2, 53, 1, 3, 1, 1399, 19, 718]);
     expect(LICENSE_RETENTION_TARGETS.map((target) => target.objects.reduce((sum, object) => sum + object.bytes, 0)))
-      .toEqual([48973241, 2111153, 19632, 2408761, 9100, 21052, 15317, 1044374, 36317]);
+      .toEqual([48973241, 2111153, 19632, 2408761, 9100, 21052, 15317, 1044374, 36317, 2842515]);
     const rawIds = new Set(LICENSE_RETENTION_TARGETS[0].objects.map((object) => object.key.split('/')[2]));
     expect([...rawIds].sort()).toEqual(['C02', 'C09', 'C23', 'P03', 'P12', 'P13', 'P17', 'P18', 'P35', 'W01', 'W05']);
     const retired = ['dam-count', 'hydroelectric-power-plant-count', 'thermal-power-plant-count',

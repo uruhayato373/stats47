@@ -1374,6 +1374,7 @@ updated: 2026-11-01
 - **証拠 (2026-10-28)**: 公開の CI は記事フォルダを丸ごと公開 R2 へ写していたので、`app/blog/<slug>/review.md` が公開 URL から読める (`livable-prefecture-composite-ranking`・`municipality-population-change-census-2025` で HTTP 200)。`380042ccd` でこれからの公開はステージから外したが、既に上がった分は残っている。指摘は台帳 `data/blog/critic-findings/` に残っているので消しても情報は失われない。
 - **次**: ① 公開 R2 の `app/blog/*/review.md` (と `research.md`・`*.prompt.txt`) を列挙する ② `r2-retention.ts` に exact key の target を足し、`r2-maintenance.yml` の dry-run → 承認 → 削除で消す (削除の唯一の入口)。
 - **完了条件**: 公開 R2 に review.md・research.md・prompt が 0 件。
+- **進捗 (2026-11-16・オーナー承認「review.md の残りも消して」)**: ① 公開中の 862 本で `review.md`・`research.md`・`article.prompt.txt` を公開 URL で確かめ、718 件 (review.md 585・prompt 133・research.md 0) を見つけた。718 件の中身を取り、MD5 が R2 の ETag と全件一致することを確かめてから Google Drive `stats47/ブログ/公開R2から外した審査記録とprompt/2026-11-16` に保全した (読み戻しで照合済み)。② キー単位の撤去の一覧 `data/blog/public-private-files-retention-20261116.json` (target `blog-public-private-files-20261116`) を `license-retention.ts` に足し、記事フォルダの審査記録と prompt だけであることをテストで固定した。③ `r2-maintenance.yml` の dry-run → 実削除で消す。
 
 ### [BLOG-ALLJSON-MISSING-BODY-01] 記事一覧 all.json に載っているのに R2 に本文が無い 6 記事を調べる
 タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-10-29] [領域:サイト]
