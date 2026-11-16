@@ -8760,7 +8760,7 @@
     },
     {
       "metricKey": "traffic-accidents-party-a-age-75-plus-per-100k",
-      "pageId": null,
+      "pageId": "ranking:traffic-accidents-party-a-age-75-plus-per-100k",
       "title": "第1当事者が75歳以上の交通事故発生件数",
       "sources": [],
       "recipe": {

@@ -493,7 +493,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "educationsports",
     "categoryName": "教育・文化・スポーツ",
-    "count": 277,
+    "count": 280,
     "representatives": [
       {
         "rankingKey": "avg-height-high-school-2nd-male",
@@ -590,7 +590,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "safetyenvironment",
     "categoryName": "司法・安全・環境",
-    "count": 146,
+    "count": 148,
     "representatives": [
       {
         "rankingKey": "garbage-total-output",

@@ -4042,7 +4042,7 @@
     },
     {
       "metricKey": "national-assessment-elementary-mathematics-correct-rate",
-      "pageId": null,
+      "pageId": "ranking:national-assessment-elementary-mathematics-correct-rate",
       "title": "小学生の算数平均正答率",
       "sources": [],
       "recipe": {
@@ -4724,7 +4724,7 @@
     },
     {
       "metricKey": "national-assessment-junior-high-mathematics-correct-rate",
-      "pageId": null,
+      "pageId": "ranking:national-assessment-junior-high-mathematics-correct-rate",
       "title": "中学生の数学平均正答率",
       "sources": [],
       "recipe": {
@@ -4748,7 +4748,7 @@
     },
     {
       "metricKey": "national-assessment-junior-high-self-esteem-rate",
-      "pageId": null,
+      "pageId": "ranking:national-assessment-junior-high-self-esteem-rate",
       "title": "自分によいところがあると思う中学生の割合",
       "sources": [],
       "recipe": {
