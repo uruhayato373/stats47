@@ -51,7 +51,9 @@ export function AreaHighlightList({ items, rankScope }: AreaHighlightListProps) 
       <ValueTable
         ariaLabel={rankScope}
         columns={[
-          { key: 'metric', header: '指標', rowHeader: true, className: 'min-w-40' },
+          // 指標名の列の幅は ValueTable の既定 (min-w-24) に任せる。min-w-40 (160px) を足すと、スマホ幅 (390px) で
+          // 「値」「全国順位」の折り返さない列と合わせて表の内側 (308px) を超え、順位の列が見出しも数字も切れた (2026-11-14 の週次 UI 検査)
+          { key: 'metric', header: '指標', rowHeader: true },
           { key: 'value', header: '値' },
           { key: 'rank', header: rankScope },
           ...(hasNational ? [{ key: 'national', header: '全国' }] : []),
