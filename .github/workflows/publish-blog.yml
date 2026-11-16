@@ -83,8 +83,7 @@ jobs:
           [ -z "$PD" ] && PD="$(date -u +%Y-%m-%d)"
           mkdir -p ".local/r2/app/blog/$SLUG"
           cp -R "contents/blog/$SLUG/." ".local/r2/app/blog/$SLUG/"
-          # 公開しない作業ファイル (調査材料・審査結果・prompt) を公開 R2 へ上げない (blog-auto-publish.yml と同じ)
-          rm -f ".local/r2/app/blog/$SLUG/research.md" ".local/r2/app/blog/$SLUG/review.md" ".local/r2/app/blog/$SLUG/"*.prompt.txt
+          # 作業ファイル (調査材料・審査結果・prompt) は、次の品質ゲートが review.md を読んだ後に消す
           # 公開フォルダ側の publishedAt + published を設定 (git のドラフトは触らない)
           A=".local/r2/app/blog/$SLUG/article.md"
           perl -i -pe "s/^publishedAt:.*/publishedAt: $PD/" "$A"
@@ -101,7 +100,13 @@ jobs:
       # 薄い記事 (charCount<3000 / internalLinks<3 / H2<4 / 手書きの出典節 / NG word) が
       # 素通りしていた (GSC高インプレ10記事の再発防止)。push 前に R2 公開をブロックする。
       - name: 🧱 Quality gate (構造・薄さ — 公開ブロック)
-        run: node .claude/scripts/blog/quality-gate.mjs "${{ github.event.inputs.slug }}"
+        run: |
+          SLUG="${{ github.event.inputs.slug }}"
+          # ゲートは写した先の記事の隣の review.md (blog-critic の PASS) を読む。消すのはゲートの後
+          # (2026-11-14 に消す処理を写しの直後へ置き、審査済みの記事も必ず止まった。run 43857204363・43860072376)
+          node .claude/scripts/blog/quality-gate.mjs "$SLUG"
+          # 公開しない作業ファイル (調査材料・審査結果・prompt) を公開 R2 へ上げない (blog-auto-publish.yml と同じ)
+          rm -f ".local/r2/app/blog/$SLUG/research.md" ".local/r2/app/blog/$SLUG/review.md" ".local/r2/app/blog/$SLUG/"*.prompt.txt
 
       - name: 🖼️ Generate changed blog thumbnails (isolated staging)
         run: |
