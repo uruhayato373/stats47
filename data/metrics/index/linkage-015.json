@@ -10181,10 +10181,6 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:manufacturing",
-          "kind": "municipality-theme"
-        },
-        {
           "pageId": "ranking:manufacturing-shipment",
           "kind": "ranking"
         }

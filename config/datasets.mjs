@@ -1069,6 +1069,10 @@ export const DATASETS = [
     schema: "config/schema/site.ranking-redirects.schema.json",
     refs: [{ field: "redirects[].to", to: "registry:metrics" }],
   }),
+  d("site.municipality-ranking-redirects", "data/site/url-history/municipality-ranking-redirects.json", "ledger", "site", "data", "公開をやめた市区町村ランキング key の 301 転送 (/municipalities/ranking/<key> と県別ページだけに効く。都道府県ランキングの転送は site.ranking-redirects)。middleware が読む", {
+    schema: "config/schema/site.municipality-ranking-redirects.schema.json",
+    refs: [{ field: "redirects[].to", to: "registry:metrics" }, { field: "redirects[].from", to: "registry:metrics" }],
+  }),
   d("site.blog-redirects", "data/site/url-history/blog-redirects.json", "ledger", "site", "data", "slug を変えたブログ記事の旧 slug → 新 slug の 301 転送 (middleware が読む)", {
     schema: "config/schema/site.blog-redirects.schema.json",
     refs: [{ field: "redirects[].to", to: "blog.articles", key: "articles[].slug" }],

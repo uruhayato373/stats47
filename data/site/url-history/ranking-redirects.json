@@ -37,6 +37,12 @@
       "from": "daytime-population-ratio",
       "to": "day-time-population-ratio",
       "reason": "国勢調査 2020 単年の重複キー。2020 年の 47 県の値は社会・人口統計体系の系列と一致し、そちらは 2000〜2020 年と市区町村の値を持つ (METRIC-DAYTIME-RATIO-DUP-01)"
+    },
+    {
+      "from": "population-density-habitable",
+      "to": "population-density-per-km2-inhabitable-area",
+      "since": "2026-11-16",
+      "reason": "観測値が完全一致の重複として 2026-11-14 に外し 410 になっていた都道府県ページを、公開中の同じ指標へ 301 にした (2026 年 6〜9 月に毎週 2〜23 回表示されていた。MUNI-DATA-DEDUP-01)"
     }
   ]
 }

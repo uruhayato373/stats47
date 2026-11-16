@@ -368,6 +368,33 @@ describe('市区町村URLのknown集合と旧query移行', () => {
     expect(middleware(request(pathname)).status).toBe(410);
   });
 
+  describe('公開をやめた重複の市区町村ランキングは、同じ値の公開中の key へ 301 (2026-11-16 MUNI-DATA-DEDUP-01)', () => {
+    test.each([
+      ['/municipalities/ranking/manufacturing-shipment', '/municipalities/ranking/manufacturing-shipment-amount'],
+      ['/municipalities/ranking/per-taxpayer-income', '/municipalities/ranking/per-taxpayer-taxable-income'],
+      ['/municipalities/ranking/population-density-habitable', '/municipalities/ranking/population-density-per-km2-inhabitable-area'],
+      // 転送先に県別ページがあり県コードが正しいときは、県別ページへ一段で送る
+      ['/municipalities/ranking/manufacturing-shipment/23000', '/municipalities/ranking/manufacturing-shipment-amount/23000'],
+    ])('%s → %s', (from, to) => {
+      const response = middleware(request(from));
+      expect(response.status).toBe(301);
+      expect(response.headers.get('location')).toBe(`https://stats47.jp${to}`);
+    });
+
+    test.each([
+      '/municipalities/ranking/manufacturing-shipment/99000', // 不正な県コード
+      '/municipalities/ranking/manufacturing-shipment/23000/extra',
+    ])('%s は 410 (転送しない)', (pathname) => {
+      expect(middleware(request(pathname)).status).toBe(410);
+    });
+
+    test('転送元の都道府県ページは公開中なら転送しない (市区町村の転送は都道府県ランキングに効かせない)', () => {
+      const response = middleware(request('/ranking/ratio-65-plus'));
+      expect(response.status).not.toBe(301);
+      expect(response.status).not.toBe(410);
+    });
+  });
+
   describe('旧クエリ (pref / q / page) は必ず 301 で畳む (2026-11-13 URL 原則)', () => {
     const base = 'https://stats47.jp/municipalities/ranking';
     // 県別ページあり: manufacturing-shipment-amount / 県別ページなし: future-burden-ratio-city

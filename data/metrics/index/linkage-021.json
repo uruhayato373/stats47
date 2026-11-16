@@ -3345,10 +3345,6 @@
           "kind": "municipality-ranking"
         },
         {
-          "pageId": "municipality-theme:local-finance",
-          "kind": "municipality-theme"
-        },
-        {
           "pageId": "ranking:per-taxpayer-income",
           "kind": "ranking"
         }

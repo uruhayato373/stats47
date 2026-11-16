@@ -18,6 +18,7 @@ import { BLOG_SLUG_REDIRECTS } from '@/config/blog-redirects';
 import { GEO_BASELINE_REDIRECTS } from '@/config/geo-redirects';
 import { LEGACY_CATEGORY_KEYS_SET } from '@/config/legacy-category-keys';
 import { AREA_CATEGORY_TO_THEME, resolveLegacyThemePathRedirect } from '@/config/legacy-theme-redirects';
+import { MUNICIPALITY_RANKING_SLUG_REDIRECTS } from '@/config/municipality-ranking-redirects';
 import { RANKING_SLUG_REDIRECTS } from '@/config/ranking-redirects';
 import { REDIRECT_TAG_KEYS } from '@/config/redirect-tag-keys';
 
@@ -318,6 +319,16 @@ function checkContentTypePolicy(
 
   if (pathname.startsWith('/municipalities/ranking/')) {
     const [key, prefCode, ...rest] = pathname.slice('/municipalities/ranking/'.length).split('/');
+    // 公開をやめた重複の key は、同じ値の公開中の key へ 301 (県別ページは転送先に県別があり県コードが正しいときだけ県別へ)
+    const redirectTo = key ? MUNICIPALITY_RANKING_SLUG_REDIRECTS[key] : undefined;
+    if (redirectTo && rest.length === 0) {
+      const toPref = prefCode && UrlPolicy.municipality.hasPrefectureRanking(redirectTo) && UrlPolicy.area.isValidPrefCode(prefCode);
+      if (prefCode && !toPref) return gone();
+      const target = toPref
+        ? hrefFor('municipality-pref-ranking', { rankingKey: redirectTo, prefCode })
+        : `/municipalities/ranking/${redirectTo}`;
+      return NextResponse.redirect(new URL(target, baseUrl), 301);
+    }
     if (key && !UrlPolicy.municipality.isKnownRanking(key)) return gone();
     // 県別ページは対象の指標 × 正しい県コードだけ。それ以外を page の notFound() に渡すと 200 の soft-404 になりうる
     if (

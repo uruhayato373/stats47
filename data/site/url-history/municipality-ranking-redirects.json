@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    { "from": "manufacturing-shipment", "to": "manufacturing-shipment-amount", "since": "2026-11-16", "reason": "同じ市区町村表・同じ項目で観測値が全行一致した重複。都道府県と市区町村の両方を持つ側へ寄せた (MUNI-DATA-DEDUP-01)" },
+    { "from": "per-taxpayer-income", "to": "per-taxpayer-taxable-income", "since": "2026-11-16", "reason": "同じ市区町村表・同じ項目で観測値が全行一致した重複。都道府県と市区町村の両方を持つ側へ寄せた (MUNI-DATA-DEDUP-01)" },
+    { "from": "retail-stores-per", "to": "retail-store-count-per-1000", "since": "2026-11-16", "reason": "2006 年だけの系列で、1981〜2006 年を持つ側と重なる 1,913 行が全行一致した重複 (MUNI-DATA-DEDUP-01)" },
+    { "from": "penal-code-offenses-recognized-per-1000", "to": "crime-rate-per-1k", "since": "2026-11-16", "reason": "市区町村の観測値が全行一致した重複。2026-11-14 に市区町村ページを外し 410 にしていたものを、公開中の側へ 301 にした。都道府県ページは公開中なので転送しない" },
+    { "from": "foreign-resident-count-per-100k", "to": "foreign-population-per-100k", "since": "2026-11-16", "reason": "市区町村の観測値が全行一致した重複。2026-11-14 に外した市区町村ページを公開中の側へ 301 にした。都道府県ページは公開中なので転送しない" },
+    { "from": "general-hospital-count-per-100k", "to": "general-hospital-per-100k", "since": "2026-11-16", "reason": "市区町村の観測値が全行一致した重複。2026-11-14 に外した市区町村ページを公開中の側へ 301 にした。都道府県ページは公開中なので転送しない" },
+    { "from": "population-density-habitable", "to": "population-density-per-km2-inhabitable-area", "since": "2026-11-16", "reason": "市区町村の観測値が全行一致した重複。2026-11-14 に外した市区町村ページを公開中の側へ 301 にした" },
+    { "from": "retail-store-count-alt", "to": "retail-store-count", "since": "2026-11-16", "reason": "市区町村の観測値が全行一致した重複 (alt)。2026-11-14 に外した市区町村ページを公開中の側へ 301 にした。都道府県ページは公開中なので転送しない" },
+    { "from": "traffic-accident-count-per-population", "to": "traffic-accident-per-100k", "since": "2026-11-16", "reason": "市区町村の観測値が全行一致した重複。2026-11-14 に外した市区町村ページを公開中の側へ 301 にした。都道府県ページは公開中なので転送しない" },
+    { "from": "ratio-65-plus", "to": "elderly-population-ratio", "since": "2026-11-16", "reason": "同一指標の二重公開。2026-11-14 に外した市区町村ページを公開中の側へ 301 にした。都道府県ページは公開中なので転送しない" }
+  ]
+}

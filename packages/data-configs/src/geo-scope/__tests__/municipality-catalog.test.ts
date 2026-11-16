@@ -101,7 +101,8 @@ describe('municipality geo scope and catalog', () => {
     // 判定の記録と件数の内訳は municipality-ssds-expansion.ts。
     // 2026-11-01: 住宅・土地統計調査の 13 指標と待機児童率を R2 に取り込んで公開 (716 → 730)。家計の費目 4 件は
     // 市区町村の表が無いと確かめて unknown → unsupported。
-    expect(KNOWN_MUNICIPALITY_RANKING_KEYS.size).toBe(730);
+    // 2026-11-16: 値が全行一致した重複 3 件 (manufacturing-shipment・per-taxpayer-income・retail-stores-per) を外して寄せた (730 → 727)。
+    expect(KNOWN_MUNICIPALITY_RANKING_KEYS.size).toBe(727);
     for (const key of [
       'total-population',
       'fiscal-strength-index',
