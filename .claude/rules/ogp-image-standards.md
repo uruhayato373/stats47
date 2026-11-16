@@ -6,7 +6,7 @@ paths:
   - "apps/web/src/features/geo-analysis/**/*Thumbnail*"
   - "apps/web/scripts/*geo-source-thumbnails.ts"
   - "apps/web/scripts/lib/geo-source-thumbnail-render.ts"
-  - "apps/web/scripts/{generate-ogp-images,generate-blog-thumbnails*,refresh-blog-ogp,manage-blog-codex-backgrounds,process-home-use-case-images}.ts"
+  - "apps/web/scripts/{generate-ogp-images,generate-blog-thumbnails*,refresh-blog-ogp,manage-blog-codex-backgrounds,theme-thumbnails}.ts"
   - ".claude/{scripts/ogp,skills/ui/audit-ogp-images,skills/image-prompt,skills/blog/generate-blog-images}/**"
   - "data/ogp/**"
   - ".claude/agents/{image-prompt-curator,blog-editor,site-ux-manager,r2-publisher}.md"
@@ -492,22 +492,12 @@ hero が数枚に増えたら: (a) admin `/ops/image-library` に「ページ he
 | 生成・push        | `generate-ogp-images.ts --type pref-silhouette` (SNS素材470枚、areas外部OGPとは別管理)。週次 self-heal (`quality-suite-weekly.yml` の ogp-images job) とギャラリー `pref-silhouette` タブに配線済                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | 旧コンポーネントとの境界 | areasの生成はLinkCardOgpを使用。旧AreaOgpと実在しない旧画像routeを新しい呼び出し元へ追加しない。市区町村はgenerate-area-metadata / city metadataの静的R2県画像を共用する。 |
 
-## 5.8 home 利用意図カード画像 — 静的UI素材
+## 5.8 home 利用意図カード画像 — テーマのサムネイルを使う
 
-homeの「知りたいことから探す」に使う、文字なしの装飾イラスト。記事画像のように独立更新・
-大量追加されるコンテンツではなく、6件のUI設定と同時に変更するためR2ではなくGitで配信する。
-
-| 項目 | 内容 |
-| --- | --- |
-| 設定 | `packages/data-configs/src/home-portal.ts`の`imageSrc` |
-| 生成仕様 | `apps/web/scripts/data/home-use-case-image-catalog.ts` |
-| 元画像 | `assets/page-heroes/home-use-case-<id>.png` (Codex built-in imagegen) |
-| 配信画像 | `apps/web/public/images/home/use-cases/<id>.webp` (640×360・明るい地を焼き込み、ダークでも暗くしない・静的) |
-| 後処理 | `npx tsx apps/web/scripts/process-home-use-case-images.ts --all` |
-| 描画 | `PortalNavCard`の上部、ブログカードと同じ16:9の枠に装飾画像として配置し、`alt=""`。文言はDOMテキスト |
-
-再設計時は共通prompt builderを先に直し、同じIDの元PNGを再生成してから後処理する。
-カード側へ用途別の位置調整や色補正を追加せず、共通トリミング契約 (絵の範囲で切り出し、640×360 に高さ8%の余白で中央配置。2026-11-16) を維持する。
+homeの「知りたいことから探す」のカードは、遷移先テーマのサムネイル (§1 の「カード: theme」) をそのまま使う
+(2026-11-16 オーナー決定。それまでの利用意図ごとの専用画像と生成経路は外した)。use case 専用の画像は持たない。
+画像のパスは `PortalUseCaseGrid` が `themeKey` から導き (`/images/themes/<themeKey>.webp`)、設定
+`packages/data-configs/src/home-portal.ts` には書かない。描画は `PortalNavCard` の上部の16:9の枠で、`alt=""`。文言はDOMテキスト。
 
 ## 6. 関連
 
@@ -525,8 +515,8 @@ homeの「知りたいことから探す」に使う、文字なしの装飾イ�
   `blog-ogp-visual-catalog.ts`・`gemini-image-client.ts` / 目視 `npm run admin` → /assets「ブログ OGP パイロット (local)」タブ
 - **ページ hero (§5.6)**: SSOT `apps/web/src/components/layout/page-heroes.ts` (`THEME_HEROES` / `CATEGORY_HEROES` + プロベナンス) /
   描画 `apps/web/src/components/layout/HeroBanner.tsx` / テーマ差し替え `features/theme-dashboard/components/ThemeHero.tsx`
-- **home 利用意図カード (§5.8)**: SSOT `packages/data-configs/src/home-portal.ts` / prompt catalog
-  `apps/web/scripts/data/home-use-case-image-catalog.ts` / 後処理 `apps/web/scripts/process-home-use-case-images.ts`
+- **テーマのサムネイル (§1・§5.8)**: カタログ `apps/web/scripts/data/theme-thumbnail-catalog.ts` / 手順
+  `apps/web/scripts/theme-thumbnails.ts` (home の利用意図カードも同じ画像を使う)
 - 画像プロンプト: `.claude/skills/image-prompt/SKILL.md` / `reference/catalog.md`
 - OGP コンポーネント: `apps/web/src/features/ogp/`
 - R2 キー設計: `.claude/rules/r2-storage-design.md`
