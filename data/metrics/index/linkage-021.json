@@ -2,6 +2,945 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "part-time-employment-rate-regular",
+      "pageId": "ranking:part-time-employment-rate-regular",
+      "title": "パートタイム就職率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010206",
+          "filters": {
+            "cdCat01": "#F0320101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010206",
+          "cdCat01": "#F0320101"
+        },
+        "derived": false,
+        "configHash": "c368d456ea0c8391"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:part-time-employment-rate-regular",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "part-time-workers",
+      "pageId": null,
+      "title": "雇用者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020206",
+          "filters": {
+            "cdCat01": "F2411"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020206",
+          "cdCat01": "F2411"
+        },
+        "derived": false,
+        "configHash": "e375d54782742454"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:part-time-workers",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:labor-wages",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:part-time-workers",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "passenger-ship-transport",
+      "pageId": "ranking:passenger-ship-transport",
+      "title": "旅客船輸送人員",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010103",
+          "filters": {
+            "cdCat01": "C3707"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010103",
+          "cdCat01": "C3707"
+        },
+        "derived": false,
+        "configHash": "75b1baf03af04c5b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:passenger-ship-transport",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:ports",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "ports"
+      ]
+    },
+    {
+      "metricKey": "passport-issuance-count-per-thousand",
+      "pageId": "ranking:passport-issuance-count-per-thousand",
+      "title": "一般旅券発行件数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010207",
+          "filters": {
+            "cdCat01": "#G0430501"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010207",
+          "cdCat01": "#G0430501"
+        },
+        "derived": false,
+        "configHash": "5461dcaee18c0e95"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:food-self-sufficiency-rate-calorie-vs-passport-issuance",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:passport-issuance-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:travel-behavior-gender-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:passport-issuance-count-per-thousand",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "pasta-consumption-expenditure",
+      "pageId": "ranking:pasta-consumption-expenditure",
+      "title": "パスタ消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "010130030",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "010130030",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "9ae3578cb6edae4f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:ehime-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokyo-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:pasta-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "pasta-consumption-quantity",
+      "pageId": "ranking:pasta-consumption-quantity",
+      "title": "パスタ消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023606",
+          "filters": {
+            "cdCat01": "010130030",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023606",
+          "cdCat01": "010130030",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "c3eb31ad6e073ece"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:ehime-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:other-bread-consumption-quantity",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:pasta-consumption-quantity",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:pasta-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "patent-application-count",
+      "pageId": "ranking:patent-application-count",
+      "title": "特許出願件数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003398336",
+          "filters": {
+            "cdCat01": "100",
+            "cdCat02": "100"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003398336",
+          "cdCat01": "100",
+          "cdCat02": "100"
+        },
+        "derived": false,
+        "configHash": "98c9b779d2190922"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:patent-application-count",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:innovation-patents",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "innovation-patents"
+      ]
+    },
+    {
+      "metricKey": "patent-inventor-count",
+      "pageId": "ranking:patent-inventor-count",
+      "title": "特許出願の延べ発明者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003398338",
+          "filters": {
+            "cdCat01": "100"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003398338",
+          "cdCat01": "100"
+        },
+        "derived": false,
+        "configHash": "3abd9db92bdab7fa"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:patent-inventor-count",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:innovation-patents",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "innovation-patents"
+      ]
+    },
+    {
+      "metricKey": "patent-registration-count",
+      "pageId": "ranking:patent-registration-count",
+      "title": "特許登録件数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003398337",
+          "filters": {
+            "cdCat01": "100"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003398337",
+          "cdCat01": "100"
+        },
+        "derived": false,
+        "configHash": "99c624e87fd8c31b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:patent-registration-count",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:innovation-patents",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "innovation-patents"
+      ]
+    },
+    {
       "metricKey": "patient-receiving-rate-by-age",
       "pageId": null,
       "title": "受療率（性年齢別総数・入院総数）（患者調査）",
@@ -8069,1329 +9008,6 @@
         }
       ],
       "themes": []
-    },
-    {
-      "metricKey": "pickled-plum-consumption-expenditure",
-      "pageId": "ranking:pickled-plum-consumption-expenditure",
-      "title": "梅干し消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "010540020",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "010540020",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "217079f4bca7c9ff"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:akita-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:aomori-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kanagawa-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:pickled-plum-consumption-expenditure-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:wakayama-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:pickled-plum-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "pickled-plum-consumption-quantity",
-      "pageId": "ranking:pickled-plum-consumption-quantity",
-      "title": "梅干し消費量",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023606",
-          "filters": {
-            "cdCat01": "010540020",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023606",
-          "cdCat01": "010540020",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "26fdcdb5e2f00bae"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:akita-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:aomori-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kanagawa-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:pickled-plum-consumption-quantity-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:wakayama-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:pickled-plum-consumption-quantity",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "pig-count",
-      "pageId": "ranking:pig-count",
-      "title": "豚飼養頭数",
-      "sources": [],
-      "recipe": {
-        "kind": "external",
-        "derived": false,
-        "refetch": {
-          "sourceUrl": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040226135&fileKind=0"
-        },
-        "fetcherKey": "manual",
-        "configHash": "c2e88d4d13fb52e0"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:agriculture-production",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area:01000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:02000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:03000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:04000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:05000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:06000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:07000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:08000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:09000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:10000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:11000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:12000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:13000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:14000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:15000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:16000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:17000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:18000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:19000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:20000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:21000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:22000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:23000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:24000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:25000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:26000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:27000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:28000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:29000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:30000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:31000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:32000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:33000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:34000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:35000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:36000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:37000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:38000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:39000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:40000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:41000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:42000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:43000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:44000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:45000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:46000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:47000",
-          "kind": "area"
-        },
-        {
-          "pageId": "blog:dairy-cattle-hokkaido-monopoly",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:pig-count",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:agriculture-production",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "agriculture-production"
-      ]
-    },
-    {
-      "metricKey": "pilot-annual-income",
-      "pageId": "ranking:pilot-annual-income",
-      "title": "航空機操縦士の平均年収",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003445758",
-          "filters": {
-            "cdCat01": "01",
-            "cdCat02": "1624"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003445758",
-          "cdCat01": "01",
-          "cdCat02": "1624"
-        },
-        "ops": {
-          "tabCombination": [
-            {
-              "cdTab": "08,40",
-              "factor": 12
-            },
-            {
-              "cdTab": "12,44",
-              "factor": 1
-            }
-          ],
-          "valueScale": 0.1,
-          "sampleCount": {
-            "cdTab": "13,45",
-            "factor": 10,
-            "minimum": 10
-          }
-        },
-        "derived": true,
-        "configHash": "56d7647f2824ef6e"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:occupation-income-gap-pilot-vs-careworker",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:pilot-annual-income",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:occupation-salary",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "occupation-salary"
-      ]
-    },
-    {
-      "metricKey": "planned-construction-cost-per-m2",
-      "pageId": "ranking:planned-construction-cost-per-m2",
-      "title": "着工居住用建築物工事費予定額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010208",
-          "filters": {
-            "cdCat01": "#H04301"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010208",
-          "cdCat01": "#H04301"
-        },
-        "derived": false,
-        "configHash": "c508110f81177980"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:planned-construction-cost-per-m2",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "plastic-bags-wrap-consumption-expenditure",
-      "pageId": "ranking:plastic-bags-wrap-consumption-expenditure",
-      "title": "ポリ袋・ラップ消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "040503010",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "040503010",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "2afbb0fd7c4dd7de"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:plastic-bags-wrap-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "plumbing-construction-consumption-expenditure",
-      "pageId": "ranking:plumbing-construction-consumption-expenditure",
-      "title": "給排水関係工事費消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "020220020",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "020220020",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "f740a9662328ed31"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:plumbing-construction-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "pm25-compliant-general-station-count",
-      "pageId": "ranking:pm25-compliant-general-station-count",
-      "title": "PM2.5の環境基準達成局数",
-      "sources": [],
-      "recipe": {
-        "kind": "external",
-        "derived": false,
-        "refetch": {
-          "sourceUrl": "https://www.env.go.jp/content/000406532.pdf"
-        },
-        "fetcherKey": "manual",
-        "configHash": "2f717c4b81fc6e7c"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:pm25-compliant-general-station-count",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:environmental-quality",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "environmental-quality"
-      ]
-    },
-    {
-      "metricKey": "pm25-general-station-compliance-rate",
-      "pageId": "ranking:pm25-general-station-compliance-rate",
-      "title": "PM2.5の環境基準達成率",
-      "sources": [],
-      "recipe": {
-        "kind": "external",
-        "derived": false,
-        "refetch": {
-          "sourceUrl": "https://www.env.go.jp/content/000406532.pdf"
-        },
-        "fetcherKey": "manual",
-        "configHash": "2f717c4b81fc6e7c"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:environmental-quality",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:pm25-general-station-compliance-rate-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:pm25-general-station-compliance-rate",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:environmental-quality",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "environmental-quality"
-      ]
     }
   ]
 }

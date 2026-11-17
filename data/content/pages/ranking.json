@@ -13874,6 +13874,30 @@
       "published": true
     },
     {
+      "id": "ranking:national-assessment-elementary-friendship-satisfaction-rate",
+      "kind": "ranking",
+      "key": "national-assessment-elementary-friendship-satisfaction-rate",
+      "title": "友達関係に満足する小学生の割合",
+      "href": "/ranking/national-assessment-elementary-friendship-satisfaction-rate",
+      "published": false
+    },
+    {
+      "id": "ranking:national-assessment-elementary-future-goal-rate",
+      "kind": "ranking",
+      "key": "national-assessment-elementary-future-goal-rate",
+      "title": "将来の夢や目標を持つ小学生の割合",
+      "href": "/ranking/national-assessment-elementary-future-goal-rate",
+      "published": false
+    },
+    {
+      "id": "ranking:national-assessment-elementary-japanese-correct-rate",
+      "kind": "ranking",
+      "key": "national-assessment-elementary-japanese-correct-rate",
+      "title": "小学生の国語平均正答率",
+      "href": "/ranking/national-assessment-elementary-japanese-correct-rate",
+      "published": false
+    },
+    {
       "id": "ranking:national-assessment-elementary-mathematics-correct-rate",
       "kind": "ranking",
       "key": "national-assessment-elementary-mathematics-correct-rate",
@@ -13888,6 +13912,22 @@
       "title": "読書が好きな小学生の割合",
       "href": "/ranking/national-assessment-elementary-reading-like-rate",
       "published": true
+    },
+    {
+      "id": "ranking:national-assessment-elementary-school-enjoyment-rate",
+      "kind": "ranking",
+      "key": "national-assessment-elementary-school-enjoyment-rate",
+      "title": "学校に行くのが楽しいと思う小学生の割合",
+      "href": "/ranking/national-assessment-elementary-school-enjoyment-rate",
+      "published": false
+    },
+    {
+      "id": "ranking:national-assessment-elementary-self-esteem-rate",
+      "kind": "ranking",
+      "key": "national-assessment-elementary-self-esteem-rate",
+      "title": "自分によいところがあると思う小学生の割合",
+      "href": "/ranking/national-assessment-elementary-self-esteem-rate",
+      "published": false
     },
     {
       "id": "ranking:national-assessment-elementary-study-1h-plus-rate",
@@ -13906,12 +13946,44 @@
       "published": true
     },
     {
+      "id": "ranking:national-assessment-junior-high-friendship-satisfaction-rate",
+      "kind": "ranking",
+      "key": "national-assessment-junior-high-friendship-satisfaction-rate",
+      "title": "友達関係に満足する中学生の割合",
+      "href": "/ranking/national-assessment-junior-high-friendship-satisfaction-rate",
+      "published": false
+    },
+    {
+      "id": "ranking:national-assessment-junior-high-future-goal-rate",
+      "kind": "ranking",
+      "key": "national-assessment-junior-high-future-goal-rate",
+      "title": "将来の夢や目標を持つ中学生の割合",
+      "href": "/ranking/national-assessment-junior-high-future-goal-rate",
+      "published": false
+    },
+    {
+      "id": "ranking:national-assessment-junior-high-japanese-correct-rate",
+      "kind": "ranking",
+      "key": "national-assessment-junior-high-japanese-correct-rate",
+      "title": "中学生の国語平均正答率",
+      "href": "/ranking/national-assessment-junior-high-japanese-correct-rate",
+      "published": false
+    },
+    {
       "id": "ranking:national-assessment-junior-high-mathematics-correct-rate",
       "kind": "ranking",
       "key": "national-assessment-junior-high-mathematics-correct-rate",
       "title": "中学生の数学平均正答率",
       "href": "/ranking/national-assessment-junior-high-mathematics-correct-rate",
       "published": true
+    },
+    {
+      "id": "ranking:national-assessment-junior-high-school-enjoyment-rate",
+      "kind": "ranking",
+      "key": "national-assessment-junior-high-school-enjoyment-rate",
+      "title": "学校に行くのが楽しいと思う中学生の割合",
+      "href": "/ranking/national-assessment-junior-high-school-enjoyment-rate",
+      "published": false
     },
     {
       "id": "ranking:national-assessment-junior-high-self-esteem-rate",
@@ -20970,6 +21042,14 @@
       "published": true
     },
     {
+      "id": "ranking:road-heavy-vehicle-share",
+      "kind": "ranking",
+      "key": "road-heavy-vehicle-share",
+      "title": "一般道路の12時間大型車混入率",
+      "href": "/ranking/road-heavy-vehicle-share",
+      "published": false
+    },
+    {
       "id": "ranking:road-length-per-km2",
       "kind": "ranking",
       "key": "road-length-per-km2",
@@ -20994,6 +21074,14 @@
       "published": true
     },
     {
+      "id": "ranking:road-peak-travel-speed",
+      "kind": "ranking",
+      "key": "road-peak-travel-speed",
+      "title": "一般道路の混雑時旅行速度",
+      "href": "/ranking/road-peak-travel-speed",
+      "published": false
+    },
+    {
       "id": "ranking:road-prefectural-route-length",
       "kind": "ranking",
       "key": "road-prefectural-route-length",
@@ -21016,6 +21104,14 @@
       "title": "道路実延長（高速道路を含む）",
       "href": "/ranking/road-total-length-with-expressway",
       "published": true
+    },
+    {
+      "id": "ranking:road-traffic-congestion",
+      "kind": "ranking",
+      "key": "road-traffic-congestion",
+      "title": "一般道路の混雑度",
+      "href": "/ranking/road-traffic-congestion",
+      "published": false
     },
     {
       "id": "ranking:road-traffic-law-violation-arrest-count-per-population",
@@ -22360,6 +22456,14 @@
       "title": "スナック菓子消費支出額",
       "href": "/ranking/snack-consumption-expenditure",
       "published": true
+    },
+    {
+      "id": "ranking:snow-weather-traffic-accidents-per-100k",
+      "kind": "ranking",
+      "key": "snow-weather-traffic-accidents-per-100k",
+      "title": "降雪時（雪・みぞれ・ひょう）の交通事故発生件数",
+      "href": "/ranking/snow-weather-traffic-accidents-per-100k",
+      "published": false
     },
     {
       "id": "ranking:soap-cosmetics-group-consumption-expenditure",

@@ -2,6 +2,893 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "transport-postal-private-employees",
+      "pageId": null,
+      "title": "従業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020203",
+          "filters": {
+            "cdCat01": "C220840"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020203",
+          "cdCat01": "C220840"
+        },
+        "derived": false,
+        "configHash": "96286205e677400e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:transport-postal-private-employees",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:transport-postal-private-employees",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "transport-postal-private-establishments",
+      "pageId": null,
+      "title": "事業所数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020203",
+          "filters": {
+            "cdCat01": "C210840"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020203",
+          "cdCat01": "C210840"
+        },
+        "derived": false,
+        "configHash": "ddc9327a8ce1d8c9"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:transport-postal-private-establishments",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:business-demography",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:transport-postal-private-establishments",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "transport-postal-private-net-value-added",
+      "pageId": null,
+      "title": "業種別の純付加価値額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020203",
+          "filters": {
+            "cdCat01": "C620110"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020203",
+          "cdCat01": "C620110"
+        },
+        "derived": false,
+        "configHash": "a1bfb59b3e37d658"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:transport-postal-private-net-value-added",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:transport-postal-private-net-value-added",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "transport-postal-private-sales",
+      "pageId": null,
+      "title": "売上金額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020203",
+          "filters": {
+            "cdCat01": "C610110"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020203",
+          "cdCat01": "C610110"
+        },
+        "derived": false,
+        "configHash": "4317452cd2c3d897"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:transport-postal-private-sales",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:transport-postal-private-sales",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "transportation-group-consumption-expenditure",
+      "pageId": "ranking:transportation-group-consumption-expenditure",
+      "title": "交通消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "070100000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "070100000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "fa3f0bb0665c44cb"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:transportation-group-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:transportation-group-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "travel-bag-consumption-expenditure",
+      "pageId": "ranking:travel-bag-consumption-expenditure",
+      "title": "旅行用かばん消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "100132030",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "100132030",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "dfae1324e630e95f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:travel-bag-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "travel-bag-consumption-quantity",
+      "pageId": "ranking:travel-bag-consumption-quantity",
+      "title": "旅行用かばん購入数量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023606",
+          "filters": {
+            "cdCat01": "100132030",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023606",
+          "cdCat01": "100132030",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "6727036585012aba"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:travel-bag-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "travel-leisure-annual-participation-rate-10plus",
+      "pageId": "ranking:travel-leisure-annual-participation-rate-10plus",
+      "title": "旅行・行楽の年間行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010207",
+          "filters": {
+            "cdCat01": "#G043061"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010207",
+          "cdCat01": "#G043061"
+        },
+        "derived": false,
+        "configHash": "714e140bd3bcb14e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:travel-leisure-annual-participation-rate-10plus",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "travel-leisure-annual-participation-rate-15plus",
+      "pageId": "ranking:travel-leisure-annual-participation-rate-15plus",
+      "title": "旅行・行楽の年間行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010207",
+          "filters": {
+            "cdCat01": "#G04306"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010207",
+          "cdCat01": "#G04306"
+        },
+        "derived": false,
+        "configHash": "230f7b58dda1074b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:travel-leisure-annual-participation-rate-15plus",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "travel-participation-rate-day-trip",
+      "pageId": "ranking:travel-participation-rate-day-trip",
+      "title": "行楽（日帰り）の行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456093",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "0",
+            "cdCat03": "1"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456093",
+          "cdCat01": "0",
+          "cdCat02": "0",
+          "cdCat03": "1"
+        },
+        "derived": false,
+        "configHash": "770f441fcf6cbfdc"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:travel-participation-rate-day-trip",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:tourism",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "tourism"
+      ]
+    },
+    {
+      "metricKey": "travel-participation-rate-domestic",
+      "pageId": "ranking:travel-participation-rate-domestic",
+      "title": "国内旅行の行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456093",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "0",
+            "cdCat03": "21"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456093",
+          "cdCat01": "0",
+          "cdCat02": "0",
+          "cdCat03": "21"
+        },
+        "derived": false,
+        "configHash": "00918fbfca89ee5a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:overseas-travel-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:travel-behavior-gender-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:travel-participation-rate-domestic",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "travel-participation-rate-domestic-tourism",
+      "pageId": "ranking:travel-participation-rate-domestic-tourism",
+      "title": "国内観光旅行の行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456093",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "0",
+            "cdCat03": "211"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456093",
+          "cdCat01": "0",
+          "cdCat02": "0",
+          "cdCat03": "211"
+        },
+        "derived": false,
+        "configHash": "1f4356f6aba783d9"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:tourism",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:travel-participation-rate-domestic-tourism",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:tourism",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "tourism"
+      ]
+    },
+    {
+      "metricKey": "travel-participation-rate-homecoming",
+      "pageId": "ranking:travel-participation-rate-homecoming",
+      "title": "帰省・訪問などの旅行の行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456093",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "0",
+            "cdCat03": "212"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456093",
+          "cdCat01": "0",
+          "cdCat02": "0",
+          "cdCat03": "212"
+        },
+        "derived": false,
+        "configHash": "a131997588f88b12"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:travel-participation-rate-homecoming-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:travel-participation-rate-homecoming",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "travel-participation-rate-overnight",
       "pageId": "ranking:travel-participation-rate-overnight",
       "title": "旅行（1泊2日以上）の行動者率",
@@ -9389,2494 +10276,6 @@
       ],
       "themes": [
         "living-housing"
-      ]
-    },
-    {
-      "metricKey": "vacant-housing-for-rent",
-      "pageId": "ranking:vacant-housing-for-rent",
-      "title": "賃貸用の空き家",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004021660",
-          "filters": {
-            "cdTab": "03-2023",
-            "cdCat01": "0",
-            "cdCat02": "0",
-            "cdCat03": "0",
-            "cdCat04": "2"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004021660",
-          "cdCat01": "0",
-          "cdCat02": "0",
-          "cdCat03": "0",
-          "cdCat04": "2",
-          "cdTab": "03-2023"
-        },
-        "derived": false,
-        "configHash": "57d4e3f5f31e97f2"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:vacant-housing-for-rent",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:living-housing",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "living-housing"
-      ]
-    },
-    {
-      "metricKey": "vacant-housing-for-sale",
-      "pageId": "ranking:vacant-housing-for-sale",
-      "title": "売却用の空き家",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004021660",
-          "filters": {
-            "cdTab": "03-2023",
-            "cdCat01": "0",
-            "cdCat02": "0",
-            "cdCat03": "0",
-            "cdCat04": "3"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004021660",
-          "cdCat01": "0",
-          "cdCat02": "0",
-          "cdCat03": "0",
-          "cdCat04": "3",
-          "cdTab": "03-2023"
-        },
-        "derived": false,
-        "configHash": "966e261c248d8a8f"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:vacant-housing-for-sale",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:living-housing",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "living-housing"
-      ]
-    },
-    {
-      "metricKey": "vacant-housing-rate",
-      "pageId": "ranking:vacant-housing-rate",
-      "title": "空き家率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004021440",
-          "filters": {}
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004021440"
-        },
-        "ops": {
-          "axisRatio": {
-            "axis": "cat01",
-            "numeratorCodes": [
-              "22"
-            ],
-            "denominatorCodes": [
-              "0"
-            ]
-          }
-        },
-        "derived": true,
-        "configHash": "b701e096807e32c5"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:vacant-housing-aging-correlation",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:vacant-housing-rate-vs-dependent-population-index",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:vacant-housing-vs-aging",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:vacant-housing-vs-land-price",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:vacant-housing-vs-welfare-commissioner",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:vacant-housing-rate",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:living-housing",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "living-housing"
-      ]
-    },
-    {
-      "metricKey": "vacant-housing-rate-excluding-rental-sale-secondary",
-      "pageId": null,
-      "title": "賃貸・売却用及び二次的住宅を除く空き家率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004021421",
-          "filters": {
-            "cdTab": "01-2023"
-          }
-        },
-        {
-          "role": "city",
-          "statsDataId": "0004021421",
-          "filters": {
-            "cdTab": "01-2023"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004021421",
-          "cdTab": "01-2023"
-        },
-        "ops": {
-          "axisRatio": {
-            "axis": "cat01",
-            "numeratorCodes": [
-              "221"
-            ],
-            "denominatorCodes": [
-              "0"
-            ]
-          }
-        },
-        "derived": true,
-        "configHash": "ac7df73fa2bbcdb0"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:vacant-houses-population-decline",
-          "kind": "blog"
-        },
-        {
-          "pageId": "municipality-ranking:vacant-housing-rate-excluding-rental-sale-secondary",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:living-housing",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:vacant-housing-rate-excluding-rental-sale-secondary",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "vacant-housing-rate-for-rent",
-      "pageId": null,
-      "title": "賃貸用の空き家率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004021421",
-          "filters": {
-            "cdTab": "01-2023"
-          }
-        },
-        {
-          "role": "city",
-          "statsDataId": "0004021421",
-          "filters": {
-            "cdTab": "01-2023"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004021421",
-          "cdTab": "01-2023"
-        },
-        "ops": {
-          "axisRatio": {
-            "axis": "cat01",
-            "numeratorCodes": [
-              "222"
-            ],
-            "denominatorCodes": [
-              "0"
-            ]
-          }
-        },
-        "derived": true,
-        "configHash": "281474180d924bfb"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:vacant-houses-population-decline",
-          "kind": "blog"
-        },
-        {
-          "pageId": "municipality-ranking:vacant-housing-rate-for-rent",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:living-housing",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:vacant-housing-rate-for-rent",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "vacant-housing-ratio",
-      "pageId": "ranking:vacant-housing-ratio",
-      "title": "空き家比率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010208",
-          "filters": {
-            "cdCat01": "#H01405"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010208",
-          "cdCat01": "#H01405"
-        },
-        "derived": false,
-        "configHash": "bf75e5eb28c6223c"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:homeownership-vacancy-four-types",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:housing-cost-livability-trend",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:vacant-house-crisis",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:vacant-houses-population-decline",
-          "kind": "blog"
-        },
-        {
-          "pageId": "municipality-ranking:vacant-housing-ratio",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:living-housing",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:vacant-housing-ratio",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:living-housing",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "living-housing"
-      ]
-    },
-    {
-      "metricKey": "vacant-housing-secondary-residences",
-      "pageId": "ranking:vacant-housing-secondary-residences",
-      "title": "二次的住宅",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004021660",
-          "filters": {
-            "cdTab": "03-2023",
-            "cdCat01": "0",
-            "cdCat02": "0",
-            "cdCat03": "0",
-            "cdCat04": "4"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004021660",
-          "cdCat01": "0",
-          "cdCat02": "0",
-          "cdCat03": "0",
-          "cdCat04": "4",
-          "cdTab": "03-2023"
-        },
-        "derived": false,
-        "configHash": "1f22656f1c328908"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:living-housing",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:vacant-housing-secondary-residences",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:living-housing",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "living-housing"
-      ]
-    },
-    {
-      "metricKey": "vaccination-recipients-disease",
-      "pageId": "ranking:vaccination-recipients-disease",
-      "title": "ＨＰＶワクチン定期予防接種者数（都道府県別）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004027806",
-          "filters": {
-            "cdCat01": "120",
-            "cdCat02": "380",
-            "cdCat03": "000000"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004027806",
-          "cdCat01": "120",
-          "cdCat02": "380",
-          "cdCat03": "000000"
-        },
-        "derived": false,
-        "configHash": "25f0ad773ef384ea"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:vaccination-recipients-disease-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:vaccination-recipients-disease",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "vacuum-cleaner-consumption-expenditure",
-      "pageId": "ranking:vacuum-cleaner-consumption-expenditure",
-      "title": "電気掃除機消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "040110050",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "040110050",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "e20ba92d59006b8a"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:vacuum-cleaner-consumption-expenditure",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:household-food-spending",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "household-food-spending"
-      ]
-    },
-    {
-      "metricKey": "vacuum-cleaner-consumption-quantity",
-      "pageId": "ranking:vacuum-cleaner-consumption-quantity",
-      "title": "電気掃除機購入数量",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023606",
-          "filters": {
-            "cdCat01": "040110050",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023606",
-          "cdCat01": "040110050",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "b903cf0c36a13da7"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:vacuum-cleaner-consumption-quantity-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:vacuum-cleaner-consumption-quantity",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "vegetable-cultivation-area",
-      "pageId": "ranking:vegetable-cultivation-area",
-      "title": "野菜作付面積 都道府県別合計（だいこん）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003423836",
-          "filters": {
-            "cdTab": "01",
-            "cdCat01": "001"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003423836",
-          "cdCat01": "001",
-          "cdTab": "01"
-        },
-        "derived": false,
-        "configHash": "838fa82c8f35d47f"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:vegetable-cultivation-area",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "vegetable-intake-female-age-adjusted",
-      "pageId": "ranking:vegetable-intake-female-age-adjusted",
-      "title": "女性の野菜摂取量（年齢調整値）",
-      "sources": [],
-      "recipe": {
-        "kind": "external",
-        "derived": false,
-        "refetch": {
-          "sourceUrl": "https://www.mhlw.go.jp/content/001675215.pdf"
-        },
-        "fetcherKey": "manual",
-        "configHash": "d3ef74d31d7ce0d6"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area:01000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:02000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:03000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:04000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:05000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:06000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:07000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:08000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:09000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:10000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:11000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:12000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:13000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:14000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:15000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:16000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:17000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:18000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:19000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:20000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:21000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:22000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:23000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:24000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:25000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:26000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:27000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:28000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:29000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:30000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:31000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:32000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:33000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:34000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:35000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:36000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:37000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:38000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:39000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:40000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:41000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:42000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:43000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:44000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:45000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:46000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:47000",
-          "kind": "area"
-        },
-        {
-          "pageId": "ranking:vegetable-intake-female-age-adjusted",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:health-checkups",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "health-checkups"
-      ]
-    },
-    {
-      "metricKey": "vegetable-intake-male-age-adjusted",
-      "pageId": "ranking:vegetable-intake-male-age-adjusted",
-      "title": "男性の野菜摂取量（年齢調整値）",
-      "sources": [],
-      "recipe": {
-        "kind": "external",
-        "derived": false,
-        "refetch": {
-          "sourceUrl": "https://www.mhlw.go.jp/content/001675215.pdf"
-        },
-        "fetcherKey": "manual",
-        "configHash": "d3ef74d31d7ce0d6"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:health-checkups",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area:01000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:02000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:03000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:04000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:05000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:06000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:07000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:08000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:09000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:10000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:11000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:12000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:13000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:14000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:15000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:16000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:17000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:18000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:19000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:20000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:21000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:22000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:23000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:24000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:25000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:26000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:27000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:28000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:29000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:30000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:31000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:32000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:33000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:34000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:35000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:36000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:37000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:38000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:39000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:40000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:41000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:42000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:43000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:44000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:45000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:46000",
-          "kind": "area"
-        },
-        {
-          "pageId": "area:47000",
-          "kind": "area"
-        },
-        {
-          "pageId": "ranking:vegetable-intake-male-age-adjusted",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:health-checkups",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "health-checkups"
       ]
     }
   ]

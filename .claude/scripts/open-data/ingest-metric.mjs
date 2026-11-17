@@ -27,6 +27,19 @@ export const METRIC_KEYS = [
   'heatstroke-emergency-transports-per-100k',
   'national-assessment-junior-high-self-esteem-rate',
   'traffic-accidents-party-a-age-75-plus-per-100k',
+  'national-assessment-elementary-japanese-correct-rate',
+  'national-assessment-junior-high-japanese-correct-rate',
+  'national-assessment-elementary-self-esteem-rate',
+  'national-assessment-elementary-future-goal-rate',
+  'national-assessment-junior-high-future-goal-rate',
+  'national-assessment-elementary-school-enjoyment-rate',
+  'national-assessment-junior-high-school-enjoyment-rate',
+  'national-assessment-elementary-friendship-satisfaction-rate',
+  'national-assessment-junior-high-friendship-satisfaction-rate',
+  'road-traffic-congestion',
+  'road-heavy-vehicle-share',
+  'road-peak-travel-speed',
+  'snow-weather-traffic-accidents-per-100k',
 ];
 
 export function selectCandidate(config, expansion) {

@@ -508,6 +508,22 @@ export const METRIC_POLARITY: Readonly<Record<string, PolarityEntry>> = {
   "national-assessment-elementary-mathematics-correct-rate": { polarity: "higher-is-better", evidence: "学力調査の教科別の平均正答率は到達度そのもので、高いほど良い (争いのない事象)" },
   "national-assessment-junior-high-mathematics-correct-rate": { polarity: "higher-is-better", evidence: "学力調査の教科別の平均正答率は到達度そのもので、高いほど良い (争いのない事象)" },
   "national-assessment-junior-high-self-esteem-rate": { polarity: "higher-is-better", evidence: "国の学力・学習状況調査が自己肯定感の肯定的回答として集計する設問 (「自分には、よいところがあると思う」に当てはまる・どちらかといえば当てはまる) で、高いほど良い。" },
+  // 2026-11-17 オープンデータ展開 (県ランキング 13 本・非公開定義)。質問紙の回答割合は意識の自己申告なので、既存の読書好き・通塾の扱いに揃えて中立にする
+  "national-assessment-elementary-japanese-correct-rate": { polarity: "higher-is-better", evidence: "学力調査の教科別の平均正答率は到達度そのもので、高いほど良い (争いのない事象)" },
+  "national-assessment-junior-high-japanese-correct-rate": { polarity: "higher-is-better", evidence: "学力調査の教科別の平均正答率は到達度そのもので、高いほど良い (争いのない事象)" },
+  "national-assessment-elementary-self-esteem-rate": { polarity: "higher-is-better", evidence: "国の学力・学習状況調査が自己肯定感の肯定的回答として集計する設問 (「自分には、よいところがあると思う」に当てはまる・どちらかといえば当てはまる) で、高いほど良い。中学生の同設問と同じ扱い。" },
+  "national-assessment-elementary-future-goal-rate": { polarity: "neutral", evidence: "将来の夢や目標を持つかという意識の回答割合（「当てはまる」「どちらかといえば当てはまる」の合計）で、割合の高低を学校や地域の良否と結び付けない。" },
+  "national-assessment-junior-high-future-goal-rate": { polarity: "neutral", evidence: "将来の夢や目標を持つかという意識の回答割合（「当てはまる」「どちらかといえば当てはまる」の合計）で、割合の高低を学校や地域の良否と結び付けない。" },
+  "national-assessment-elementary-school-enjoyment-rate": { polarity: "neutral", evidence: "学校に行くのが楽しいかという意識の回答割合（「当てはまる」「どちらかといえば当てはまる」の合計）で、割合の高低を学校や地域の良否と結び付けない。" },
+  "national-assessment-junior-high-school-enjoyment-rate": { polarity: "neutral", evidence: "学校に行くのが楽しいかという意識の回答割合（「当てはまる」「どちらかといえば当てはまる」の合計）で、割合の高低を学校や地域の良否と結び付けない。" },
+  "national-assessment-elementary-friendship-satisfaction-rate": { polarity: "neutral", evidence: "友達関係に満足しているかという意識の回答割合（「当てはまる」「どちらかといえば当てはまる」の合計）で、割合の高低を学校や地域の良否と結び付けない。" },
+  "national-assessment-junior-high-friendship-satisfaction-rate": { polarity: "neutral", evidence: "友達関係に満足しているかという意識の回答割合（「当てはまる」「どちらかといえば当てはまる」の合計）で、割合の高低を学校や地域の良否と結び付けない。" },
+  // 道路交通センサス (令和3年度・一般道路計)。都市と地方で道路の使われ方が違い、値の高低を道路や地域の良否と結び付けない
+  "road-traffic-congestion": { polarity: "neutral", evidence: "混雑度は交通量と交通容量の比で、都市部の活動量にも左右されるため、高低を道路整備や地域の良否と結び付けない。" },
+  "road-heavy-vehicle-share": { polarity: "neutral", evidence: "大型車混入率は物流や産業の立地を反映する構造の指標で、高低を良否と結び付けない。" },
+  "road-peak-travel-speed": { polarity: "neutral", evidence: "混雑時旅行速度は都市の規模や道路の種別構成にも左右されるため、高低を道路の良否と結び付けない。" },
+  // 降雪時の交通事故 (警察庁オープンデータ 2025)
+  "snow-weather-traffic-accidents-per-100k": { polarity: "higher-is-worse", evidence: "交通事故の発生・死傷は多いほど悪い (争いのない事象)" },
   // 救急搬送 病院収容所要時間
   "ambulance-hospital-arrival-time": { polarity: "higher-is-worse", evidence: "救急搬送の所要時間は長いほど悪い (争いのない事象)" },
   // BOD汚濁負荷量 / 生化学的酸素要求量（BOD）の汚濁負荷量

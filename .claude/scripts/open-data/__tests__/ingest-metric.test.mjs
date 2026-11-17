@@ -165,9 +165,9 @@ for (const commercialUse of ['prohibited', undefined]) test(`commercialUse=${com
   assert.throws(() => buildMetricPayload(f), /commercialUse must be allowed/);
 });
 
-test('workflow registers the five-metric batch with the existing explicit-key publisher', () => {
+test('workflow registers the eighteen-metric batch with the existing explicit-key publisher', () => {
   const workflow = YAML.parse(fs.readFileSync(path.join(ROOT, '.github/workflows/external-metric-ingest.yml'), 'utf8'));
   assert.ok(workflow.on.workflow_dispatch.inputs.ingest.options.includes('open-data-rankings'));
   assert.match(workflow.jobs.ingest.steps.find((s) => s.run?.includes('case "$INGEST"')).run, /open-data-rankings\) script=\.claude\/scripts\/open-data\/ingest-metric\.mjs;/);
-  assert.equal(METRIC_KEYS.length, 5);
+  assert.equal(METRIC_KEYS.length, 18);
 });

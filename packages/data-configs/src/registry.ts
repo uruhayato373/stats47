@@ -1739,11 +1739,20 @@ import { museumLikeFacilityVisitors } from "../../../data/metrics/museum-like-fa
 import { musicLessonConsumptionExpenditure } from "../../../data/metrics/music-lesson-consumption-expenditure";
 import { musicalInstrumentConsumptionExpenditure } from "../../../data/metrics/musical-instrument-consumption-expenditure";
 import { nationalAssessmentElementaryBreakfastRate } from "../../../data/metrics/national-assessment-elementary-breakfast-rate";
+import { nationalAssessmentElementaryFriendshipSatisfactionRate } from "../../../data/metrics/national-assessment-elementary-friendship-satisfaction-rate";
+import { nationalAssessmentElementaryFutureGoalRate } from "../../../data/metrics/national-assessment-elementary-future-goal-rate";
+import { nationalAssessmentElementaryJapaneseCorrectRate } from "../../../data/metrics/national-assessment-elementary-japanese-correct-rate";
 import { nationalAssessmentElementaryMathematicsCorrectRate } from "../../../data/metrics/national-assessment-elementary-mathematics-correct-rate";
 import { nationalAssessmentElementaryReadingLikeRate } from "../../../data/metrics/national-assessment-elementary-reading-like-rate";
+import { nationalAssessmentElementarySchoolEnjoymentRate } from "../../../data/metrics/national-assessment-elementary-school-enjoyment-rate";
+import { nationalAssessmentElementarySelfEsteemRate } from "../../../data/metrics/national-assessment-elementary-self-esteem-rate";
 import { nationalAssessmentElementaryStudy1hPlusRate } from "../../../data/metrics/national-assessment-elementary-study-1h-plus-rate";
 import { nationalAssessmentElementaryTutoringRate } from "../../../data/metrics/national-assessment-elementary-tutoring-rate";
+import { nationalAssessmentJuniorHighFriendshipSatisfactionRate } from "../../../data/metrics/national-assessment-junior-high-friendship-satisfaction-rate";
+import { nationalAssessmentJuniorHighFutureGoalRate } from "../../../data/metrics/national-assessment-junior-high-future-goal-rate";
+import { nationalAssessmentJuniorHighJapaneseCorrectRate } from "../../../data/metrics/national-assessment-junior-high-japanese-correct-rate";
 import { nationalAssessmentJuniorHighMathematicsCorrectRate } from "../../../data/metrics/national-assessment-junior-high-mathematics-correct-rate";
+import { nationalAssessmentJuniorHighSchoolEnjoymentRate } from "../../../data/metrics/national-assessment-junior-high-school-enjoyment-rate";
 import { nationalAssessmentJuniorHighSelfEsteemRate } from "../../../data/metrics/national-assessment-junior-high-self-esteem-rate";
 import { nationalHealthInsuranceBenefits } from "../../../data/metrics/national-health-insurance-benefits";
 import { nationalHealthInsuranceEnrolleesPer1000 } from "../../../data/metrics/national-health-insurance-enrollees-per-1000";
@@ -2626,12 +2635,15 @@ import { roadBridgeExpenseMunicipal } from "../../../data/metrics/road-bridge-ex
 import { roadBridgeExpensesPrefecture } from "../../../data/metrics/road-bridge-expenses-prefecture";
 import { roadExpresswayLength } from "../../../data/metrics/road-expressway-length";
 import { roadGeneralPrefecturalLength } from "../../../data/metrics/road-general-prefectural-length";
+import { roadHeavyVehicleShare } from "../../../data/metrics/road-heavy-vehicle-share";
 import { roadLengthPerKm2 } from "../../../data/metrics/road-length-per-km2";
 import { roadMunicipalLength } from "../../../data/metrics/road-municipal-length";
 import { roadNationalRouteLength } from "../../../data/metrics/road-national-route-length";
+import { roadPeakTravelSpeed } from "../../../data/metrics/road-peak-travel-speed";
 import { roadPrefecturalRouteLength } from "../../../data/metrics/road-prefectural-route-length";
 import { roadTotalLengthWithExpressway } from "../../../data/metrics/road-total-length-with-expressway";
 import { roadTotalLength } from "../../../data/metrics/road-total-length";
+import { roadTrafficCongestion } from "../../../data/metrics/road-traffic-congestion";
 import { roadTrafficLawViolationArrestCountPerPopulation } from "../../../data/metrics/road-traffic-law-violation-arrest-count-per-population";
 import { roadTunnelConditionIiiCount } from "../../../data/metrics/road-tunnel-condition-iii-count";
 import { roadTunnelConditionIvCount } from "../../../data/metrics/road-tunnel-condition-iv-count";
@@ -2800,6 +2812,7 @@ import { smartphoneUsageTimeByAge } from "../../../data/metrics/smartphone-usage
 import { smokeEmissionFacilityCount } from "../../../data/metrics/smoke-emission-facility-count";
 import { smokingRateMaleAgeAdjusted } from "../../../data/metrics/smoking-rate-male-age-adjusted";
 import { snackConsumptionExpenditure } from "../../../data/metrics/snack-consumption-expenditure";
+import { snowWeatherTrafficAccidentsPer100k } from "../../../data/metrics/snow-weather-traffic-accidents-per-100k";
 import { soapCosmeticsGroupConsumptionExpenditure } from "../../../data/metrics/soap-cosmetics-group-consumption-expenditure";
 import { sobaUdonDiningConsumptionExpenditure } from "../../../data/metrics/soba-udon-dining-consumption-expenditure";
 import { socialEducationExpenseMunicipal } from "../../../data/metrics/social-education-expense-municipal";
@@ -5082,11 +5095,20 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "music-lesson-consumption-expenditure": musicLessonConsumptionExpenditure,
   "musical-instrument-consumption-expenditure": musicalInstrumentConsumptionExpenditure,
   "national-assessment-elementary-breakfast-rate": nationalAssessmentElementaryBreakfastRate,
+  "national-assessment-elementary-friendship-satisfaction-rate": nationalAssessmentElementaryFriendshipSatisfactionRate,
+  "national-assessment-elementary-future-goal-rate": nationalAssessmentElementaryFutureGoalRate,
+  "national-assessment-elementary-japanese-correct-rate": nationalAssessmentElementaryJapaneseCorrectRate,
   "national-assessment-elementary-mathematics-correct-rate": nationalAssessmentElementaryMathematicsCorrectRate,
   "national-assessment-elementary-reading-like-rate": nationalAssessmentElementaryReadingLikeRate,
+  "national-assessment-elementary-school-enjoyment-rate": nationalAssessmentElementarySchoolEnjoymentRate,
+  "national-assessment-elementary-self-esteem-rate": nationalAssessmentElementarySelfEsteemRate,
   "national-assessment-elementary-study-1h-plus-rate": nationalAssessmentElementaryStudy1hPlusRate,
   "national-assessment-elementary-tutoring-rate": nationalAssessmentElementaryTutoringRate,
+  "national-assessment-junior-high-friendship-satisfaction-rate": nationalAssessmentJuniorHighFriendshipSatisfactionRate,
+  "national-assessment-junior-high-future-goal-rate": nationalAssessmentJuniorHighFutureGoalRate,
+  "national-assessment-junior-high-japanese-correct-rate": nationalAssessmentJuniorHighJapaneseCorrectRate,
   "national-assessment-junior-high-mathematics-correct-rate": nationalAssessmentJuniorHighMathematicsCorrectRate,
+  "national-assessment-junior-high-school-enjoyment-rate": nationalAssessmentJuniorHighSchoolEnjoymentRate,
   "national-assessment-junior-high-self-esteem-rate": nationalAssessmentJuniorHighSelfEsteemRate,
   "national-health-insurance-benefits": nationalHealthInsuranceBenefits,
   "national-health-insurance-enrollees-per-1000": nationalHealthInsuranceEnrolleesPer1000,
@@ -5969,12 +5991,15 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "road-bridge-expenses-prefecture": roadBridgeExpensesPrefecture,
   "road-expressway-length": roadExpresswayLength,
   "road-general-prefectural-length": roadGeneralPrefecturalLength,
+  "road-heavy-vehicle-share": roadHeavyVehicleShare,
   "road-length-per-km2": roadLengthPerKm2,
   "road-municipal-length": roadMunicipalLength,
   "road-national-route-length": roadNationalRouteLength,
+  "road-peak-travel-speed": roadPeakTravelSpeed,
   "road-prefectural-route-length": roadPrefecturalRouteLength,
   "road-total-length-with-expressway": roadTotalLengthWithExpressway,
   "road-total-length": roadTotalLength,
+  "road-traffic-congestion": roadTrafficCongestion,
   "road-traffic-law-violation-arrest-count-per-population": roadTrafficLawViolationArrestCountPerPopulation,
   "road-tunnel-condition-iii-count": roadTunnelConditionIiiCount,
   "road-tunnel-condition-iv-count": roadTunnelConditionIvCount,
@@ -6143,6 +6168,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "smoke-emission-facility-count": smokeEmissionFacilityCount,
   "smoking-rate-male-age-adjusted": smokingRateMaleAgeAdjusted,
   "snack-consumption-expenditure": snackConsumptionExpenditure,
+  "snow-weather-traffic-accidents-per-100k": snowWeatherTrafficAccidentsPer100k,
   "soap-cosmetics-group-consumption-expenditure": soapCosmeticsGroupConsumptionExpenditure,
   "soba-udon-dining-consumption-expenditure": sobaUdonDiningConsumptionExpenditure,
   "social-education-expense-municipal": socialEducationExpenseMunicipal,

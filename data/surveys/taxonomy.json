@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-16T22:48:05.188Z",
+  "generatedAt": "2026-11-17T01:00:25.625Z",
   "masterSurveyCount": 152,
   "ranking": {
-    "metrics": 2755,
+    "metrics": 2768,
     "activeMetrics": 2611,
-    "applicableMetrics": 2655,
+    "applicableMetrics": 2668,
     "activeApplicableMetrics": 2512,
     "notApplicable": 100,
     "activeNotApplicable": 99,
-    "resolved": 2655,
+    "resolved": 2668,
     "unresolved": 0,
     "coveragePct": 100,
     "activeResolved": 2512,
@@ -784,11 +784,11 @@
     }
   },
   "blog": {
-    "articles": 852,
-    "charts": 2265,
-    "applicableCharts": 2117,
+    "articles": 853,
+    "charts": 2269,
+    "applicableCharts": 2121,
     "byStatus": {
-      "resolved": 2117,
+      "resolved": 2121,
       "unresolved": 0,
       "not-applicable": 148,
       "missing-lineage": 0
@@ -854,6 +854,7 @@
     "snapshotIndexMissingArticles": [],
     "perSurveyBlogs": {
       "academic-achievement-survey": [
+        "academic-achievement-lifestyle-habits",
         "academic-achievement-test-prefecture-ranking",
         "advancement-plus-employment-rate-prefecture",
         "food-self-sufficiency-rate-calorie-vs-national-assessment",
@@ -2289,6 +2290,7 @@
         "education-culture"
       ],
       "blogSlugs": [
+        "academic-achievement-lifestyle-habits",
         "academic-achievement-test-prefecture-ranking",
         "advancement-plus-employment-rate-prefecture",
         "food-self-sufficiency-rate-calorie-vs-national-assessment",
