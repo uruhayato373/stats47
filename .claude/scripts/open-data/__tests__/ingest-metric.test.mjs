@@ -7,7 +7,7 @@ import { datasetPath } from '../../../../config/datasets.mjs';
 import { PREFECTURES } from '../../lib/prefectures.cjs';
 import { statsR2Key } from '../../lib/r2-keys.mjs';
 import { verifyIngestReport } from '../../themes/verify-external-ingest.mjs';
-import { buildMetricPayload, ingestMetrics, selectCandidate, METRIC_KEYS } from '../ingest-metric.mjs';
+import { buildMetricPayload, ingestMetrics, pendingMetricKeys, selectCandidate, METRIC_KEYS } from '../ingest-metric.mjs';
 import { ROOT, loadCatalog, sha256, writeJson } from '../lib/contracts.mjs';
 import { archiveRecipe, loadSnapshot } from '../lib/archive.mjs';
 import { normalizeRecipe } from '../normalize-source.mjs';
@@ -170,4 +170,22 @@ test('workflow registers the eighteen-metric batch with the existing explicit-ke
   assert.ok(workflow.on.workflow_dispatch.inputs.ingest.options.includes('open-data-rankings'));
   assert.match(workflow.jobs.ingest.steps.find((s) => s.run?.includes('case "$INGEST"')).run, /open-data-rankings\) script=\.claude\/scripts\/open-data\/ingest-metric\.mjs;/);
   assert.equal(METRIC_KEYS.length, 18);
+});
+
+test('default batch skips metrics whose candidate left the expansion ledger at publication', () => {
+  const [published, pending] = METRIC_KEYS;
+  const expansion = { candidates: [
+    { metricKey: pending, channel: 'prefecture-ranking' },
+    { metricKey: published, channel: 'theme' },
+  ] };
+  assert.deepEqual(pendingMetricKeys(expansion), [pending]);
+});
+
+test('default batch on the current ledger resolves exactly one candidate per metric', () => {
+  const expansion = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/open-data/expansion.json'), 'utf8'));
+  const keys = pendingMetricKeys(expansion);
+  assert.ok(keys.length > 0);
+  for (const key of keys) {
+    assert.equal(expansion.candidates.filter((c) => c.metricKey === key && c.channel === 'prefecture-ranking').length, 1, key);
+  }
 });
