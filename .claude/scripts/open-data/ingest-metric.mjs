@@ -42,6 +42,11 @@ export const METRIC_KEYS = [
   'snow-weather-traffic-accidents-per-100k',
 ];
 
+/** 一括の取り込みの対象: 登録済みの指標のうち、展開の台帳に県ランキングの候補が残っているもの。 */
+export function pendingMetricKeys(expansion) {
+  return METRIC_KEYS.filter((key) => expansion.candidates.some((c) => c.metricKey === key && c.channel === 'prefecture-ranking'));
+}
+
 export function selectCandidate(config, expansion) {
   assert.equal(config?.source.kind, 'external');
   assert.match(config.key, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
@@ -198,7 +203,8 @@ export async function main(args = process.argv.slice(2)) {
     metric: { type: 'string' }, 'write-local': { type: 'boolean', default: false },
     'local-source': { type: 'boolean', default: false }, out: { type: 'string' },
   } });
-  const keys = options.metric ? [options.metric] : METRIC_KEYS;
+  // 既定の一括は、展開の台帳に候補が残っている指標だけ。公開済みの指標は公開時に候補を台帳から外すので、一括に含めると最初の 1 本で止まる。
+  const keys = options.metric ? [options.metric] : pendingMetricKeys(readJson(path.join(ROOT, datasetPath('open-data.expansion'))));
   assert.ok(keys.length && keys.every((key) => METRIC_KEYS.includes(key)), '--metric <registered key> required');
   const { METRICS_REGISTRY } = requireTs('../../../packages/data-configs/src/registry.ts', import.meta.url);
   const report = await ingestMetrics({ configs: keys.map((key) => METRICS_REGISTRY[key]),
