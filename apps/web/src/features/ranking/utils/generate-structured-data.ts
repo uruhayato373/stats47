@@ -13,7 +13,7 @@ import { getRequiredBaseUrl } from "@/lib/env";
 import { buildPersonAsAuthor } from "@/lib/structured-data/person";
 import { buildPublisherOrganization } from "@/lib/structured-data/scripts";
 
-import { buildRankingSummary } from "./build-ranking-summary";
+import { buildRankingSummary, createSummaryValueFormatter } from "./build-ranking-summary";
 
 /**
  * 本文に書く年ラベル (「2023年」/「2023年度」)。item.json の availableYears の yearName は metric の
@@ -126,6 +126,9 @@ export function generateRankingFAQStructuredData({
   const sorted = [...prefValues].sort((a, b) => (a.rank ?? 99) - (b.rank ?? 99));
   const top = sorted[0];
   const bottom = sorted[sorted.length - 1];
+  const formatValue = createSummaryValueFormatter(prefValues);
+  const topValue = top.value != null ? formatValue(top.value) : null;
+  const bottomValue = bottom.value != null ? formatValue(bottom.value) : null;
 
   const national = resolveNationalFigure(rankingValues);
   const nationalText = national
@@ -145,23 +148,23 @@ export function generateRankingFAQStructuredData({
   const faqs: { q: string; a: string }[] = [
     {
       q: `都道府県別${itemName}ランキングで1位はどこですか？`,
-      a: `${yearSuffix ? yearLabel + "の" : ""}${itemName}ランキング1位は${top.areaName}です。${top.value != null ? `値は${top.value}${unit}` : ""}${yearSuffix}。`,
+      a: `${yearSuffix ? yearLabel + "の" : ""}${itemName}ランキング1位は${top.areaName}です。${topValue != null ? `値は${topValue}${unit}` : ""}${yearSuffix}。`,
     },
     {
       q: `${itemName}が最も低い（少ない）都道府県はどこですか？`,
-      a: `${bottom.areaName}が最下位です。${bottom.value != null ? `値は${bottom.value}${unit}` : ""}${yearSuffix}。1位の${top.areaName}と比べると${ratio ? `約${ratio}倍の差があります。` : "大きな差があります。"}`,
+      a: `${bottom.areaName}が最下位です。${bottomValue != null ? `値は${bottomValue}${unit}` : ""}${yearSuffix}。1位の${top.areaName}と比べると${ratio ? `約${ratio}倍の差があります。` : "大きな差があります。"}`,
     },
     ...(national
       ? [
           {
             q: nationalQuestion,
-            a: `${yearSuffix ? yearLabel + "の" : ""}${national.label}は約${nationalText}です。最多は${top.areaName}（${top.value}${unit}）、最少は${bottom.areaName}（${bottom.value}${unit}）です。`,
+            a: `${yearSuffix ? yearLabel + "の" : ""}${national.label}は約${nationalText}です。最多は${top.areaName}（${topValue}${unit}）、最少は${bottom.areaName}（${bottomValue}${unit}）です。`,
           },
         ]
       : []),
     {
       q: `${itemName}の都道府県格差はどのくらいですか？`,
-      a: `最も多い${top.areaName}（${top.value}${unit}）と最も少ない${bottom.areaName}（${bottom.value}${unit}）の差は${ratio ? `約${ratio}倍` : "大きい"}です${yearSuffix}。`,
+      a: `最も多い${top.areaName}（${topValue}${unit}）と最も少ない${bottom.areaName}（${bottomValue}${unit}）の差は${ratio ? `約${ratio}倍` : "大きい"}です${yearSuffix}。`,
     },
   ];
 

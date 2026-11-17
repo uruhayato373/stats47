@@ -116,16 +116,22 @@
       "firstFailedAt": "2026-11-14"
     },
     "manufacturing-establishments": {
-      "failCount": 1,
+      "failCount": 2,
       "lastReason": "gemini-daily",
-      "lastFailedAt": "2026-11-16",
+      "lastFailedAt": "2026-11-17",
       "firstFailedAt": "2026-11-16"
     },
     "food-manufacturing-establishments": {
+      "failCount": 2,
+      "lastReason": "gemini-daily",
+      "lastFailedAt": "2026-11-17",
+      "firstFailedAt": "2026-11-16"
+    },
+    "fishery-species-catch-mackerel": {
       "failCount": 1,
       "lastReason": "gemini-daily",
-      "lastFailedAt": "2026-11-16",
-      "firstFailedAt": "2026-11-16"
+      "lastFailedAt": "2026-11-17",
+      "firstFailedAt": "2026-11-17"
     }
   }
 }

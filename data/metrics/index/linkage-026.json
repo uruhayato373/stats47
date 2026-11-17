@@ -2,6 +2,942 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "restaurants-per",
+      "pageId": null,
+      "title": "飲食店数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020308",
+          "filters": {
+            "cdCat01": "#H06107"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020308",
+          "cdCat01": "#H06107"
+        },
+        "derived": false,
+        "configHash": "9b661d273fbfeb88"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:restaurants-per",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "ranking:restaurants-per",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "retail-annual-sales",
+      "pageId": null,
+      "title": "年間商品販売額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020203",
+          "filters": {
+            "cdCat01": "C350102"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020203",
+          "cdCat01": "C350102"
+        },
+        "derived": false,
+        "configHash": "19429dc632198b51"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:retail-annual-sales",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:retail-commerce",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:retail-annual-sales",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "retail-employees",
+      "pageId": "ranking:retail-employees",
+      "title": "小売業従業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010103",
+          "filters": {
+            "cdTab": "00001",
+            "cdCat01": "C350302"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010103",
+          "cdCat01": "C350302",
+          "cdTab": "00001"
+        },
+        "derived": false,
+        "configHash": "cc2827e9a9760e9a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:retail-employees",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:retail-commerce",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "retail-commerce"
+      ]
+    },
+    {
+      "metricKey": "retail-establishments-by-prefecture",
+      "pageId": "ranking:retail-establishments-by-prefecture",
+      "title": "小売業事業所数（経済センサス活動調査）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004003256",
+          "filters": {
+            "cdTab": "701-2021",
+            "cdCat01": "9",
+            "cdCat02": "I2"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004003256",
+          "cdCat01": "9",
+          "cdCat02": "I2",
+          "cdTab": "701-2021"
+        },
+        "derived": false,
+        "configHash": "e33081d2d5046d1d"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:retail-establishments-by-prefecture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:retail-establishments-by-prefecture",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:retail-commerce",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "retail-commerce"
+      ]
+    },
+    {
+      "metricKey": "retail-floor-space",
+      "pageId": null,
+      "title": "売場面積",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020208",
+          "filters": {
+            "cdCat01": "H6201"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020208",
+          "cdCat01": "H6201"
+        },
+        "derived": false,
+        "configHash": "a3bdf51a7fdd156d"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:retail-floor-space",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:retail-commerce",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:retail-floor-space",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "retail-goods-inventory-amount",
+      "pageId": "ranking:retail-goods-inventory-amount",
+      "title": "小売業商品手持額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010103",
+          "filters": {
+            "cdCat01": "C350502"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010103",
+          "cdCat01": "C350502"
+        },
+        "derived": false,
+        "configHash": "b7e3d2fa88ad40f5"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:retail-goods-inventory-amount",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "retail-private-employees",
+      "pageId": null,
+      "title": "従業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020203",
+          "filters": {
+            "cdCat01": "C220843"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020203",
+          "cdCat01": "C220843"
+        },
+        "derived": false,
+        "configHash": "74bc8aba9fc925b1"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:retail-private-employees",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:retail-private-employees",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "retail-private-establishments",
+      "pageId": null,
+      "title": "事業所数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020203",
+          "filters": {
+            "cdCat01": "C210843"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020203",
+          "cdCat01": "C210843"
+        },
+        "derived": false,
+        "configHash": "33cf20c5789551f6"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:retail-private-establishments",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:business-demography",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "municipality-theme:local-economy",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:retail-private-establishments",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "retail-sales-amount-by-prefecture",
+      "pageId": "ranking:retail-sales-amount-by-prefecture",
+      "title": "小売業年間商品販売額（経済センサス活動調査）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004003259",
+          "filters": {
+            "cdTab": "703-2021",
+            "cdCat01": "I2",
+            "cdCat02": "0",
+            "cdCat03": "0"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004003259",
+          "cdCat01": "I2",
+          "cdCat02": "0",
+          "cdCat03": "0",
+          "cdTab": "703-2021"
+        },
+        "derived": false,
+        "configHash": "01e86ef86783e863"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:retail-commerce",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:retail-establishments-by-prefecture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:retail-sales-amount-by-prefecture-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:retail-sales-amount-by-prefecture",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:retail-commerce",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "retail-commerce"
+      ]
+    },
+    {
       "metricKey": "retail-sales-area-by-class",
       "pageId": "ranking:retail-sales-area-by-class",
       "title": "小売業売場面積（経済センサス活動調査・小売計）",
@@ -1628,6 +2564,30 @@
       "themes": []
     },
     {
+      "metricKey": "road-heavy-vehicle-share",
+      "pageId": null,
+      "title": "一般道路の12時間大型車混入率",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.mlit.go.jp/road/census/r3/data/csv/syuukei04.csv"
+        },
+        "fetcherKey": "manual",
+        "configHash": "bfeda16af35806bd"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:road-heavy-vehicle-share",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "road-length-per-km2",
       "pageId": "ranking:road-length-per-km2",
       "title": "道路実延長",
@@ -1772,6 +2732,30 @@
       ]
     },
     {
+      "metricKey": "road-peak-travel-speed",
+      "pageId": null,
+      "title": "一般道路の混雑時旅行速度",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.mlit.go.jp/road/census/r3/data/csv/syuukei05.csv"
+        },
+        "fetcherKey": "manual",
+        "configHash": "a8a3ff87e8a77a6e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:road-peak-travel-speed",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "road-prefectural-route-length",
       "pageId": "ranking:road-prefectural-route-length",
       "title": "道路実延長（主要地方道）",
@@ -1901,6 +2885,30 @@
       "themes": [
         "roads"
       ]
+    },
+    {
+      "metricKey": "road-traffic-congestion",
+      "pageId": null,
+      "title": "一般道路の混雑度",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.mlit.go.jp/road/census/r3/data/csv/syuukei04.csv"
+        },
+        "fetcherKey": "manual",
+        "configHash": "bfeda16af35806bd"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:road-traffic-congestion",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
     },
     {
       "metricKey": "road-traffic-law-violation-arrest-count-per-population",
@@ -8709,1356 +9717,6 @@
       "consumers": [
         {
           "pageId": "ranking:school-bag-consumption-quantity",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "school-lunch-consumption-expenditure",
-      "pageId": "ranking:school-lunch-consumption-expenditure",
-      "title": "学校給食消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "011220001",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "011220001",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "3b08dff76492d414"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:school-lunch-expenditure-ranking",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:school-lunch-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "school-teacher-annual-income",
-      "pageId": "ranking:school-teacher-annual-income",
-      "title": "小中学校教員の平均年収",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003445758",
-          "filters": {
-            "cdCat01": "01",
-            "cdCat02": "1192"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003445758",
-          "cdCat01": "01",
-          "cdCat02": "1192"
-        },
-        "ops": {
-          "tabCombination": [
-            {
-              "cdTab": "08,40",
-              "factor": 12
-            },
-            {
-              "cdTab": "12,44",
-              "factor": 1
-            }
-          ],
-          "valueScale": 0.1,
-          "sampleCount": {
-            "cdTab": "13,45",
-            "factor": 10,
-            "minimum": 10
-          }
-        },
-        "derived": true,
-        "configHash": "53f15683b16debee"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:occupation-salary",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:high-school-teacher-salary-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:school-teacher-annual-income",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:school-teacher-annual-income",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:occupation-salary",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "occupation-salary"
-      ]
-    },
-    {
-      "metricKey": "science-museum-count",
-      "pageId": "ranking:science-museum-count",
-      "title": "科学博物館数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003348770",
-          "filters": {
-            "cdCat01": "00000300",
-            "cdCat02": "182"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0003348770",
-          "cdCat01": "00000300",
-          "cdCat02": "182"
-        },
-        "derived": false,
-        "configHash": "f88c7cd09a63860b"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:science-museum-count",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "sea-bream-consumption-expenditure",
-      "pageId": "ranking:sea-bream-consumption-expenditure",
-      "title": "たい消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "010211090",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "010211090",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "b7f582fa78833641"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:ehime-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:fresh-seafood-east-west-boundary",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:fukuoka-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:hiroshima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:hyogo-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:iwate-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kagoshima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kochi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kumamoto-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:nara-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:oita-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:okayama-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:saga-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:sea-bream-expenditure-ranking",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:wakayama-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:yamaguchi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:sea-bream-consumption-expenditure",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:household-food-spending",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "household-food-spending"
-      ]
-    },
-    {
-      "metricKey": "sea-bream-consumption-quantity",
-      "pageId": "ranking:sea-bream-consumption-quantity",
-      "title": "たい消費量",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023606",
-          "filters": {
-            "cdCat01": "010211090",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023606",
-          "cdCat01": "010211090",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "47bbd2c7eab85c14"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:ehime-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:fukuoka-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:hiroshima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:hyogo-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:iwate-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kagoshima-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kochi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:kumamoto-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:nara-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:oita-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:okayama-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:saga-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:wakayama-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:yamaguchi-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:sea-bream-consumption-quantity",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:household-food-spending",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "household-food-spending"
-      ]
-    },
-    {
-      "metricKey": "seafood-consumption-expenditure",
-      "pageId": "ranking:seafood-consumption-expenditure",
-      "title": "魚介類消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "010200000",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "010200000",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "d69337dd787c3d3e"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:household-food-spending",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:nagasaki-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:seafood-consumption-expenditure",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:household-food-spending",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "household-food-spending"
-      ]
-    },
-    {
-      "metricKey": "seasonings-group-consumption-expenditure",
-      "pageId": "ranking:seasonings-group-consumption-expenditure",
-      "title": "調味料消費支出額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "010720000",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "010720000",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "ab93f28200c30ccd"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:seasonings-group-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "secondary-activity-avg-time-employed-female",
-      "pageId": "ranking:secondary-activity-avg-time-employed-female",
-      "title": "2次活動の平均時間",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010213",
-          "filters": {
-            "cdCat01": "#M0120206"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010213",
-          "cdCat01": "#M0120206"
-        },
-        "derived": false,
-        "configHash": "ada49b33d1a4f0d0"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:secondary-activity-avg-time-employed-female",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "secondary-activity-avg-time-employed-male",
-      "pageId": "ranking:secondary-activity-avg-time-employed-male",
-      "title": "2次活動の平均時間",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010213",
-          "filters": {
-            "cdCat01": "#M0120106"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010213",
-          "cdCat01": "#M0120106"
-        },
-        "derived": false,
-        "configHash": "3a5632e856d56d03"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:secondary-activity-avg-time-employed-male",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "secondary-activity-avg-time-unemployed-female",
-      "pageId": "ranking:secondary-activity-avg-time-unemployed-female",
-      "title": "2次活動の平均時間",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010213",
-          "filters": {
-            "cdCat01": "#M0120207"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010213",
-          "cdCat01": "#M0120207"
-        },
-        "derived": false,
-        "configHash": "f0a5ac76686ba4c1"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:cup-noodles-consumption-expenditure-vs-secondary-activity",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:secondary-activity-avg-time-unemployed-female",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "secondary-activity-avg-time-unemployed-male",
-      "pageId": "ranking:secondary-activity-avg-time-unemployed-male",
-      "title": "2次活動の平均時間",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010213",
-          "filters": {
-            "cdCat01": "#M0120107"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010213",
-          "cdCat01": "#M0120107"
-        },
-        "derived": false,
-        "configHash": "c7c102c5bc60d9aa"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:secondary-activity-avg-time-unemployed-male",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "secondary-education-school-count-per-100k-12-17",
-      "pageId": "ranking:secondary-education-school-count-per-100k-12-17",
-      "title": "中等教育学校数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010205",
-          "filters": {
-            "cdCat01": "#E0110108"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010205",
-          "cdCat01": "#E0110108"
-        },
-        "derived": false,
-        "configHash": "8c21e4b694b23fb9"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:secondary-education-school-count-per-100k-12-17",
           "kind": "ranking"
         }
       ],

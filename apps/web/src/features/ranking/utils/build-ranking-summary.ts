@@ -1,5 +1,19 @@
 import { computeTopRankings, resolveNationalFigure, type RankingValue } from "@stats47/ranking";
 
+import { resolveRankingPrecision } from "./compute-ranking-header-stats";
+
+/**
+ * 文中 (meta description・構造化データ) に書く値の丸め方を、データ全体から 1 度だけ決める。
+ * 桁数は表と同じ `resolveRankingPrecision` で決め、3 桁区切りは付けない (既存の文の書き方を変えない)。
+ * 観測値が 27.840522873303406 のような計算値のとき、FAQ の答えに丸めていない値が出ていた (2026-11-17)。
+ */
+export function createSummaryValueFormatter(rankingValues: readonly RankingValue[]): (value: number) => string {
+  const precision = resolveRankingPrecision(
+    rankingValues.map((v) => v.value).filter((v): v is number => v != null && Number.isFinite(v)),
+  );
+  return (value) => String(Number(value.toFixed(precision)));
+}
+
 /**
  * ランキングデータの要約情報（meta description / JSON-LD description 共通）
  */
@@ -28,7 +42,8 @@ export function buildRankingSummary(
   if (topRankings.length === 0) return null;
 
   const top1 = topRankings[0];
-  const top1ValueText = top1.value != null ? `${top1.value}${unit}` : "";
+  const formatValue = createSummaryValueFormatter(rankingValues);
+  const top1ValueText = top1.value != null ? `${formatValue(top1.value)}${unit}` : "";
   const top3Names = topRankings
     .slice(0, 3)
     .map((d) => d.areaName)

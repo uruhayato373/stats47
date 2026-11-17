@@ -327,7 +327,8 @@
     "(公財)日本中学校体育連盟": "junior-high-athletics-membership-survey",
     "金融広報中央委員会(知るぽると)": "financial-literacy-survey",
     "県民経済計算年報（内閣府）": "prefectural-accounts",
-    "日本の地域別将来推計人口（令和5年推計）": "population-projection"
+    "日本の地域別将来推計人口（令和5年推計）": "population-projection",
+    "令和3年度 全国道路・街路交通情勢調査 一般交通量調査 集計表": "road-statistics"
   },
   "statsDataIdToSurveyOverride": {
     "0004008606": {

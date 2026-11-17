@@ -1,24 +1,23 @@
 {
-  "generatedAt": "2026-11-16T02:06:10.753Z",
+  "generatedAt": "2026-11-17T04:32:08.544Z",
   "gscSnapshot": "2026-W45",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通り (blocker 0)、解説の年が values.json の最新年と同じ",
   "summary": {
-    "total": 2596,
-    "done": 1357,
-    "needsRegen": 1239,
+    "total": 2611,
+    "done": 1359,
+    "needsRegen": 1252,
     "needsByReason": {
-      "stale-year": 805,
-      "missing": 429,
-      "incomplete": 1,
-      "fetch-error:TypeError: fetch failed": 4
+      "stale-year": 806,
+      "missing": 445,
+      "incomplete": 1
     },
     "notEligible": 0,
     "notEligibleByCode": {},
     "doneButUnhealthy": 0,
-    "doneImpressions": 135464,
-    "needsImpressions": 105766,
+    "doneImpressions": 135358,
+    "needsImpressions": 105872,
     "manualEscalationTier": 30,
     "geminiDailyLimit": 3
   },
@@ -5495,8 +5494,8 @@
       "impressions": 129,
       "clicks": 6,
       "position": 5.36,
-      "status": "done",
-      "reason": "ok",
+      "status": "needs-regen",
+      "reason": "stale-year",
       "blockers": [],
       "warns": [
         "causal-insights",
@@ -5504,7 +5503,10 @@
         "pref-len"
       ],
       "lastModified": "Sat, 05 Sep 2026 09:49:16 GMT",
-      "updatedAt": "2026-09-05T09:29:57.413Z"
+      "updatedAt": "2026-09-05T09:29:57.413Z",
+      "contentYear": "2024",
+      "dataYear": "2025",
+      "reviewTier": "gemini-auto"
     },
     {
       "rankingKey": "toothpaste-consumption-expenditure",
@@ -14296,10 +14298,15 @@
       "impressions": 23,
       "clicks": 0,
       "position": 7.48,
-      "status": "needs-regen",
-      "reason": "fetch-error:TypeError: fetch failed",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "gemini-auto"
+      "warns": [
+        "causal-insights",
+        "pref-len"
+      ],
+      "lastModified": "Wed, 02 Sep 2026 10:53:37 GMT",
+      "updatedAt": "2026-09-02T10:43:39.347Z"
     },
     {
       "rankingKey": "elementary-school-classes",
@@ -27427,7 +27434,7 @@
       "clicks": 0,
       "position": 0,
       "status": "needs-regen",
-      "reason": "fetch-error:TypeError: fetch failed",
+      "reason": "missing",
       "blockers": [],
       "reviewTier": "gemini-auto"
     },
@@ -30039,6 +30046,106 @@
       "reviewTier": "gemini-auto"
     },
     {
+      "rankingKey": "health-checkup-blood-pressure-medication-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "health-checkup-daily-activity-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "health-checkup-daily-drinking-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "health-checkup-daily-snacking-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "health-checkup-exercise-habit-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "health-checkup-fast-eating-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "health-checkup-fast-walking-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "health-checkup-smoking-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "health-checkup-sufficient-sleep-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "health-checkup-weight-gain-10kg-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
       "rankingKey": "health-consumables-consumption-expenditure",
       "impressions": 0,
       "clicks": 0,
@@ -30100,6 +30207,16 @@
     },
     {
       "rankingKey": "heatstroke-deaths",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "heatstroke-emergency-transports-per-100k",
       "impressions": 0,
       "clicks": 0,
       "position": 0,
@@ -31527,6 +31644,36 @@
       "reviewTier": "gemini-auto"
     },
     {
+      "rankingKey": "national-assessment-elementary-mathematics-correct-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "national-assessment-junior-high-mathematics-correct-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "national-assessment-junior-high-self-esteem-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
       "rankingKey": "national-medical-expense-per-person",
       "impressions": 0,
       "clicks": 0,
@@ -31789,10 +31936,12 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "needs-regen",
-      "reason": "fetch-error:TypeError: fetch failed",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "gemini-auto"
+      "warns": [],
+      "lastModified": "Sun, 06 Sep 2026 23:12:16 GMT",
+      "updatedAt": "2026-09-06T23:09:30.164Z"
     },
     {
       "rankingKey": "new-housing-construction-ratio",
@@ -31811,10 +31960,12 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "needs-regen",
-      "reason": "fetch-error:TypeError: fetch failed",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "gemini-auto"
+      "warns": [],
+      "lastModified": "Sun, 06 Sep 2026 23:12:16 GMT",
+      "updatedAt": "2026-09-06T23:09:30.220Z"
     },
     {
       "rankingKey": "new-rented-housing-ratio",
@@ -34983,6 +35134,16 @@
       "warns": [],
       "lastModified": "Sun, 06 Sep 2026 23:12:34 GMT",
       "updatedAt": "2026-09-06T23:09:34.390Z"
+    },
+    {
+      "rankingKey": "traffic-accidents-party-a-age-75-plus-per-100k",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
     },
     {
       "rankingKey": "transport-communication-budget-share-kakei",

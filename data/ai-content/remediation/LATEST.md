@@ -1,18 +1,18 @@
 # ranking ai-content 是正キュー (LATEST)
 
-- 生成: 2026-11-16T02:06:10.753Z
+- 生成: 2026-11-17T04:32:08.544Z
 - GSC snapshot: 2026-W45 / スコープ: R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)
 - done 判定: R2 の ai-content が auditRow を通り (blocker 0)、解説の年が values.json の最新年と同じ
-- スコープ境界: このキューは**都道府県ランキング (app/ranking) 専用**。市区町村 (公開 730 key・app/municipalities) と全国 (/japan) は対象外 — 別契約 (backlog MUNI-AI-CONTENT-01 / JAPAN-COMMENTARY-01、正典 ranking-content-standards.md §スコープ境界)
+- スコープ境界: このキューは**都道府県ランキング (app/ranking) 専用**。市区町村 (公開 727 key・app/municipalities) と全国 (/japan) は対象外 — 別契約 (backlog MUNI-AI-CONTENT-01 / JAPAN-COMMENTARY-01、正典 ranking-content-standards.md §スコープ境界)
 
-## サマリ (active ranking 全件 2596 件)
+## サマリ (active ranking 全件 2611 件)
 
-- ✅ done: 1357 件 (52.3% / impressions 計 135464)
-- ⏳ needs-regen: 1239 件 (impressions 計 105766)
-  - 内訳: stale-year 805 / missing 429 / incomplete 1 / fetch-error:TypeError: fetch failed 4
+- ✅ done: 1359 件 (52.0% / impressions 計 135358)
+- ⏳ needs-regen: 1252 件 (impressions 計 105872)
+  - 内訳: stale-year 806 / missing 445 / incomplete 1
 - 🚫 not-eligible: 0 件 — 観測値が順位として成立しないので生成しない
 
-## 🚧 quarantine — critic 常習不合格で自動生成を停止中 (7 件)
+## 🚧 quarantine — critic 常習不合格で自動生成を停止中 (8 件)
 
 `--next` から除外している。生成しても critic を通らないため。手動 agent での再是正か、
 プロンプト/データ側の是正が要る (直って PASS すれば自動で解除)。
@@ -26,11 +26,12 @@
 | raw-milk-production | 3 | gemini-daily | 2026-11-14 |
 | convenience-store-count-commercial | 3 | gemini-daily | 2026-11-15 |
 | rice-consumption-quantity | 3 | gemini-daily | 2026-11-15 |
+| total-population | 3 | gemini-daily | 2026-11-16 |
 
 ## 進捗 (progress-history.csv より)
 
-- 消化ペース: **10.7 件/日** (2026-07-30 からの平均)
-- 残り 1239 件 → **完了見込み 約 117 日**
+- 消化ペース: **10.6 件/日** (2026-07-30 からの平均)
+- 残り 1252 件 → **完了見込み 約 119 日**
 
 ## いつ修正したか (done を R2 last-modified 降順・上位15)
 

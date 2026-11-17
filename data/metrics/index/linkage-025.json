@@ -2,6 +2,1112 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "public-water-pipe-length",
+      "pageId": "ranking:public-water-pipe-length",
+      "title": "水道管路の総延長",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/9112b58e-556c-429e-906f-45be48b63fd9/db7e75fb/20260703_resources_govdashboard_watersupply_table_02.zip"
+        },
+        "fetcherKey": "manual",
+        "configHash": "a5799e2c5b6d49ff"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:public-water-pipe-length",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:water-services",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "water-services"
+      ]
+    },
+    {
+      "metricKey": "public-water-pipe-renewal-rate",
+      "pageId": "ranking:public-water-pipe-renewal-rate",
+      "title": "水道管路の更新率",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/9112b58e-556c-429e-906f-45be48b63fd9/db7e75fb/20260703_resources_govdashboard_watersupply_table_02.zip"
+        },
+        "fetcherKey": "manual",
+        "configHash": "a5799e2c5b6d49ff"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:public-water-pipe-renewal-rate",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:water-services",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "water-services"
+      ]
+    },
+    {
+      "metricKey": "public-water-renewed-pipe-length",
+      "pageId": "ranking:public-water-renewed-pipe-length",
+      "title": "年度内に更新した水道管路延長",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/9112b58e-556c-429e-906f-45be48b63fd9/db7e75fb/20260703_resources_govdashboard_watersupply_table_02.zip"
+        },
+        "fetcherKey": "manual",
+        "configHash": "a5799e2c5b6d49ff"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:water-services",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:public-water-renewed-pipe-length",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:water-services",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "water-services"
+      ]
+    },
+    {
+      "metricKey": "public-works-expenditure-ratio-pref-finance",
+      "pageId": "ranking:public-works-expenditure-ratio-pref-finance",
+      "title": "土木費割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010204",
+          "filters": {
+            "cdCat01": "#D0311201"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010204",
+          "cdCat01": "#D0311201"
+        },
+        "derived": false,
+        "configHash": "17aca9e52cda991e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:expenditure-structure-comparison",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:public-works-expenditure-ratio-pref-finance",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:local-finance",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "local-finance"
+      ]
+    },
+    {
+      "metricKey": "public-works-expenses-prefecture",
+      "pageId": "ranking:public-works-expenses-prefecture",
+      "title": "土木費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D310308"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D310308"
+        },
+        "derived": false,
+        "configHash": "395d29446990b9a7"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:welfare-expenses-squeeze",
+          "kind": "blog"
+        },
+        {
+          "pageId": "product:data-p-04",
+          "kind": "product-analysis"
+        },
+        {
+          "pageId": "ranking:public-works-expenses-prefecture",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "pudding-consumption-expenditure",
+      "pageId": "ranking:pudding-consumption-expenditure",
+      "title": "プリン消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "010800070",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "010800070",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "bab630f8919cc6a3"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:chiba-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:pudding-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "pumpkin-consumption-expenditure",
+      "pageId": "ranking:pumpkin-consumption-expenditure",
+      "title": "かぼちゃ消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023605",
+          "filters": {
+            "cdCat01": "010513020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023605",
+          "cdCat01": "010513020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "a1f779949c0ab707"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:aichi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:chiba-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:pumpkin-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:pumpkin-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "pumpkin-consumption-quantity",
+      "pageId": "ranking:pumpkin-consumption-quantity",
+      "title": "かぼちゃ消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023606",
+          "filters": {
+            "cdCat01": "010513020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023606",
+          "cdCat01": "010513020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "31a59dd5a563c792"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:aichi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:chiba-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:pumpkin-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:pumpkin-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "quasi-household-members",
+      "pageId": null,
+      "title": "準世帯人員",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020208",
+          "filters": {
+            "cdCat01": "H3320"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020208",
+          "cdCat01": "H3320"
+        },
+        "derived": false,
+        "configHash": "0afb4c4bd6b9cf78"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:quasi-household-members",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:living-housing",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:quasi-household-members",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "quasi-households",
       "pageId": null,
       "title": "準世帯数",
@@ -11672,942 +12778,6 @@
         }
       ],
       "themes": []
-    },
-    {
-      "metricKey": "restaurants-per",
-      "pageId": null,
-      "title": "飲食店数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020308",
-          "filters": {
-            "cdCat01": "#H06107"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020308",
-          "cdCat01": "#H06107"
-        },
-        "derived": false,
-        "configHash": "9b661d273fbfeb88"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:restaurants-per",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "ranking:restaurants-per",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "retail-annual-sales",
-      "pageId": null,
-      "title": "年間商品販売額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020203",
-          "filters": {
-            "cdCat01": "C350102"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020203",
-          "cdCat01": "C350102"
-        },
-        "derived": false,
-        "configHash": "19429dc632198b51"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:retail-annual-sales",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:retail-commerce",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:retail-annual-sales",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "retail-employees",
-      "pageId": "ranking:retail-employees",
-      "title": "小売業従業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010103",
-          "filters": {
-            "cdTab": "00001",
-            "cdCat01": "C350302"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010103",
-          "cdCat01": "C350302",
-          "cdTab": "00001"
-        },
-        "derived": false,
-        "configHash": "cc2827e9a9760e9a"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:retail-employees",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:retail-commerce",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "retail-commerce"
-      ]
-    },
-    {
-      "metricKey": "retail-establishments-by-prefecture",
-      "pageId": "ranking:retail-establishments-by-prefecture",
-      "title": "小売業事業所数（経済センサス活動調査）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004003256",
-          "filters": {
-            "cdTab": "701-2021",
-            "cdCat01": "9",
-            "cdCat02": "I2"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004003256",
-          "cdCat01": "9",
-          "cdCat02": "I2",
-          "cdTab": "701-2021"
-        },
-        "derived": false,
-        "configHash": "e33081d2d5046d1d"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:retail-establishments-by-prefecture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:retail-establishments-by-prefecture",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:retail-commerce",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "retail-commerce"
-      ]
-    },
-    {
-      "metricKey": "retail-floor-space",
-      "pageId": null,
-      "title": "売場面積",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020208",
-          "filters": {
-            "cdCat01": "H6201"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020208",
-          "cdCat01": "H6201"
-        },
-        "derived": false,
-        "configHash": "a3bdf51a7fdd156d"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:retail-floor-space",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:retail-commerce",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:retail-floor-space",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "retail-goods-inventory-amount",
-      "pageId": "ranking:retail-goods-inventory-amount",
-      "title": "小売業商品手持額",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010103",
-          "filters": {
-            "cdCat01": "C350502"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010103",
-          "cdCat01": "C350502"
-        },
-        "derived": false,
-        "configHash": "b7e3d2fa88ad40f5"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:retail-goods-inventory-amount",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "retail-private-employees",
-      "pageId": null,
-      "title": "従業者数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020203",
-          "filters": {
-            "cdCat01": "C220843"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020203",
-          "cdCat01": "C220843"
-        },
-        "derived": false,
-        "configHash": "74bc8aba9fc925b1"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:retail-private-employees",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:local-economy",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:retail-private-employees",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "retail-private-establishments",
-      "pageId": null,
-      "title": "事業所数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020203",
-          "filters": {
-            "cdCat01": "C210843"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020203",
-          "cdCat01": "C210843"
-        },
-        "derived": false,
-        "configHash": "33cf20c5789551f6"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:retail-private-establishments",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "municipality-theme:business-demography",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "municipality-theme:local-economy",
-          "kind": "municipality-theme"
-        },
-        {
-          "pageId": "ranking:retail-private-establishments",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "retail-sales-amount-by-prefecture",
-      "pageId": "ranking:retail-sales-amount-by-prefecture",
-      "title": "小売業年間商品販売額（経済センサス活動調査）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004003259",
-          "filters": {
-            "cdTab": "703-2021",
-            "cdCat01": "I2",
-            "cdCat02": "0",
-            "cdCat03": "0"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004003259",
-          "cdCat01": "I2",
-          "cdCat02": "0",
-          "cdCat03": "0",
-          "cdTab": "703-2021"
-        },
-        "derived": false,
-        "configHash": "01e86ef86783e863"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:retail-commerce",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "blog:retail-establishments-by-prefecture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:retail-sales-amount-by-prefecture-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:retail-sales-amount-by-prefecture",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:retail-commerce",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "retail-commerce"
-      ]
     }
   ]
 }

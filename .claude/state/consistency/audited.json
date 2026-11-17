@@ -1,17 +1,8 @@
 {
-  "hash": "dbfa7e98d537e1045580c0b69efd2e7def3651857e111f476e6ab6c5ef7d5f80",
-  "audited_at": "2026-11-13T23:47:14",
+  "hash": "e6a2bb7011fa6dba401677c95a3cc59ababc484970d6aed70cc2b38c9097a7c6",
+  "audited_at": "2026-11-17T01:04:06",
   "files": [
-    ".agents/skills/analytics/cloudflare-cost-improvement/SKILL.md",
-    ".agents/skills/content/manage-issue-ledger/SKILL.md",
-    ".claude/rules/kindle-publishing-standards.md",
-    ".claude/scripts/kdp/kdp-listing-copy.mjs",
-    ".claude/scripts/kdp/lib/__tests__/kdp-listing-copy.test.mjs",
-    ".claude/scripts/kdp/lib/__tests__/kdp-status.test.mjs",
-    ".claude/scripts/kdp/lib/kdp-flow.mjs",
-    ".claude/scripts/kdp/lib/kdp-listing-copy.d.mts",
-    ".claude/scripts/kdp/lib/kdp-listing-copy.mjs",
-    ".claude/scripts/kdp/lib/kdp-status.mjs",
-    ".claude/skills/content/manage-issue-ledger/SKILL.md"
+    ".claude/scripts/open-data/__tests__/ingest-metric.test.mjs",
+    ".claude/scripts/open-data/ingest-metric.mjs"
   ]
 }
