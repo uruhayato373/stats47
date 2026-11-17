@@ -74,4 +74,16 @@ describe("buildRankingSummary", () => {
 
     expect(result).toBeNull();
   });
+
+  it("計算値の観測値は、表と同じ桁数に丸めて文に書く (FAQ・meta に 27.840522873303406％ が出ていた)", () => {
+    const values = [
+      makeRankingValue("01000", "北海道", 27.840522873303406, 1),
+      makeRankingValue("02000", "青森県", 26.11, 2),
+      makeRankingValue("47000", "沖縄県", 18.410770622740166, 47),
+    ];
+
+    const result = buildRankingSummary(values, "％");
+
+    expect(result!.top1ValueText).toBe("27.84％");
+  });
 });
