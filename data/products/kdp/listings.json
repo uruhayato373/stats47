@@ -2336,14 +2336,24 @@
       "kdpStatus": "draft",
       "kdpStatusLabel": "新刊下書き準備",
       "kdpStatusCheckedAt": "2026-11-18T08:32:03.916Z",
-      "publicationStage": "prepared",
-      "publicationStageUpdatedAt": "2026-11-18T08:32:03.916Z",
+      "publicationStage": "verified",
+      "publicationStageUpdatedAt": "2026-11-18T09:34:05.703Z",
       "publicationStageEvidence": {
         "prepared": {
           "at": "2026-11-18T08:32:03.916Z",
           "mode": "first"
+        },
+        "details_filled": {
+          "at": "2026-11-18T09:21:38.993Z",
+          "title": "東北 移住の県選びデータブック",
+          "editionNumber": 1
+        },
+        "verified": {
+          "at": "2026-11-18T09:34:05.703Z",
+          "draftId": "A240U1NAPZJACY"
         }
-      }
+      },
+      "draftId": "A240U1NAPZJACY"
     },
     "K-S3-03": {
       "id": "K-S3-03",
@@ -2411,14 +2421,24 @@
       "kdpStatus": "draft",
       "kdpStatusLabel": "新刊下書き準備",
       "kdpStatusCheckedAt": "2026-11-18T08:32:29.378Z",
-      "publicationStage": "prepared",
-      "publicationStageUpdatedAt": "2026-11-18T08:32:29.378Z",
+      "publicationStage": "verified",
+      "publicationStageUpdatedAt": "2026-11-18T09:49:58.067Z",
       "publicationStageEvidence": {
         "prepared": {
           "at": "2026-11-18T08:32:29.378Z",
           "mode": "first"
+        },
+        "details_filled": {
+          "at": "2026-11-18T09:37:13.988Z",
+          "title": "関東 移住の県選びデータブック",
+          "editionNumber": 1
+        },
+        "verified": {
+          "at": "2026-11-18T09:49:58.067Z",
+          "draftId": "A1QHODJDJVAYGL"
         }
-      }
+      },
+      "draftId": "A1QHODJDJVAYGL"
     },
     "K-S3-04": {
       "id": "K-S3-04",

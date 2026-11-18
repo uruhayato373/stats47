@@ -28,6 +28,7 @@
 - [note product rollout](project_note_product_rollout.md) — note 商品は固定 SHA の納品版から作る
 - [kindle publishing factory](project_kindle_publishing_factory.md) — EPUB3 生成・30% 書き下ろし必須・KDP は人手
 - [kdp bookshelf archived view](reference_kdp_bookshelf_archived_view.md) — 本棚の既定表示と検索はアーカイブ済みを出さない。口座に台帳外の本もある
+- [kdp weekly title limit](reference_kdp_weekly_title_limit.md) — KDP の新規タイトルは週の作成数に上限。日曜 9:00 (JST) に戻る
 - [asp site attribution](project_asp_site_attribution.md) — 共用 ASP 口座のサイト帰属を assert
 - [affiliate banner text asymmetry](project_affiliate_banner_text_asymmetry.md) — text 広告は locationCode で弾かれる
 - [competitor indicator benchmark](project_competitor_indicator_benchmark.md) — 指標数は競合超え。課題は需要と CTR
