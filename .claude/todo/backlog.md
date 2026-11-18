@@ -118,6 +118,16 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [SCRIPTS-TO-PACKAGES-01] 本番コードが読む `.claude/scripts` の部品を `packages/` へ移す
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-11-19] [領域:サイト]
+
+- **起点 (2026-11-19 オーナー指摘「.claude/scripts のうち、他にも packages/ に移すべきものがあるのでは」)**: 地域コードの集約の計画中に数えた。apps・packages・config から `.claude/scripts` への import は 207 行、テストを除くと約 120 行ある (管理画面 `apps/admin` 94・`apps/web/scripts` 11・`packages/data-configs/scripts` 7・`packages/product-factory/src` 4・ほか 3)。アプリと packages が、エージェントの道具の置き場 (`skill-code-placement.md`) のコードに頼っている。
+- **読まれている部品**: `media/lib/` (workspace・image-copy・taxonomy・storage など約 60 回)、`note/lib/` と `note/catalog` (約 40 回)、`blog/lib/type-chart-input`・`lib/svg-lint.mjs` (16)、`metrics/lib/periods.mjs` ほか (8)、`issues/`・`content-types/` (9)、`lib/dataset-shape.mjs`・`lib/prefectures.cjs` (10)。数え直し: `grep -rnE "['\"][./]*(\.\./)+\.claude/scripts/" apps packages config --include="*.ts" --include="*.tsx" --include="*.mjs" --include="*.cjs" | grep -v node_modules`
+- **次**: ① 領域ごとの移す先と順を決める (画像の制作・note・図の検査・期間の計算)。② 新しい逆向きの依存を止める検査を先に入れる (今の件数を縮小専用の基準に載せる)。③ 領域ごとに移し、スクリプト側は package から読む。
+- **停止条件**: 管理画面 (`npm run admin`) の全画面と、移した部品を使う週次の workflow を、移すたびに動かして確かめる。workflow は main の定義で動くので、置き場を変える回は `data-storage.md`「置き場を移す手順」の 4 と同じく develop と main の差を短くする。
+- **完了条件**: apps と packages の src から `.claude/scripts` への import が 0 (テストと、理由つきの例外を除く) で、検査が新しい import を注入したテストで止まる。
+
+
 ### [MAP-RULES-DEDUP-01] 地図の画像の作り方に残る重複 (配色の解決・使われていない地図・県コードの検査の穴) をまとめる
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-11-19] [領域:サイト]
 
@@ -2299,6 +2309,7 @@ updated: 2026-11-01
 - **完了条件**: geo の 3 件の warning が消えるか、残す理由が台帳に書いてある。Worker 全体の Total Upload の実測値と上限の比較が、このカードに書いてある。
 - **追補 (2026-11-14)**: `.claude/scripts/page-quality/__tests__/ui-findings.test.mjs` は `node --test` だけでは `lib/ui-report` を解決できずに落ち、`node --import tsx --test` なら通る。どの入口で回す前提かをファイルの冒頭に書くか、tsx 無しで動く import に直す。`push-r2-wrangler.ts` には diff-push-r2 の止め (一覧失敗・正本の上書き・読み戻し) が無いのに、`.claude/scripts/blog/` の 4 スクリプト (backfill-source・resolve-scatter-axes・rerender-ranking-columns・restore-findings-from-svg) と `push-article-md-r2.ts` の冒頭がローカルからの反映の経路として案内している。案内を workflow に直すか、同じ止めを通す。
 - **追補 (2026-11-14)**: `apps/web` の `ranking-header-density-contract.test.ts` は `process.cwd()` に頼っていて、リポジトリのルートから vitest を走らせると ENOENT で落ちる (apps/web からなら 5 件通る)。
+- **追補 (2026-11-19)**: 地域コードの直書きの検査 (`packages/area/scripts/check-area-year-entrypoint.mjs`) の基準に、`.claude/scripts` の既存の直書きが載っている (apps と packages は 2026-11-19 に正本へ置き換え済み)。スクリプトを触ったときに `@stats47/area` か鏡 `lib/prefectures.cjs` の関数へ替え、基準を減らす。
 - **追補 (2026-11-15)**: Codex のセッション (`OPENDATA-ARCHIVE-01`) は `agent:session` に cwd を本体 (`/Users/minamidaisuke/stats47`) として登録していたが、実際の編集は別 worktree `/Users/minamidaisuke/stats47-opendata` で行っていた。このため本体で登録する別セッションに毎回「重複の可能性」の警告が出て、実際に重なる場所は検知されない。登録時に `git rev-parse --show-toplevel` の値を cwd に使っているか (`.claude/hooks/session-guard.js`) を確かめる。
 
 ### [NOTE-BODY-RECOVERY-01] 本文が note.com にしか無い 73 本を R2 へ回収する

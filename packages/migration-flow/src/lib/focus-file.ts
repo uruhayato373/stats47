@@ -10,6 +10,7 @@
  * (MigrationFlowReel・MigrationFlowCover・Web の Sankey) は自前で並べ替えるか Map で引くので、
  * 並びは描画に影響せず、JSON を読む人が上位の相手県を先に見られる方を採った。
  */
+import { to2DigitPrefCode } from "@stats47/area/area-code";
 import type { MigrationFlowData, MigrationPartner } from "../types";
 
 /** 出典表記 (両 exporter 共通) */
@@ -35,7 +36,7 @@ export interface BuildFocusFileInput {
 
 /** 5 桁コード → ファイル名・focusCode に使う 2 桁コード */
 export function toPrefCode2(code5: string): string {
-  return code5.slice(0, 2);
+  return to2DigitPrefCode(code5);
 }
 
 export function buildMigrationFocusFile({ focusCode5, year, rows, prefNames }: BuildFocusFileInput): MigrationFlowData {
