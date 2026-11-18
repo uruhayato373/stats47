@@ -183,7 +183,7 @@ export default async function MunicipalityPrefectureRankingPage({
       </section>
 
       {dataProduct && (
-        <section aria-label="この指標のデータ集" className="mt-5 border border-border p-4">
+        <section aria-label="この指標のデータ集">
           <p className="text-sm text-foreground">この指標の長期の時系列と、地図に結合できる境界データを配布しています。</p>
           <ProductItem product={dataProduct} layout="row" surface="ranking_product" placement="municipality_ranking_pref_product" />
         </section>

@@ -252,7 +252,7 @@ export default async function MunicipalityRankingPage({
           「-34.57%」「2,765人」のような値も入らなかった (MUNI-RANKING-STAT-OVERFLOW-01) */}
       <section
         aria-label="分布の要点"
-        className="grid grid-cols-1 border border-border @sm:grid-cols-3"
+        className="grid grid-cols-1 @sm:grid-cols-3"
       >
         {[
           ['最小', minimum],
@@ -275,7 +275,7 @@ export default async function MunicipalityRankingPage({
       </section>
 
       {dataProduct && (
-        <section aria-label="この指標のデータ集" className="mt-5 border border-border p-4">
+        <section aria-label="この指標のデータ集">
           <p className="text-sm text-foreground">この指標の長期の時系列と、地図に結合できる境界データを配布しています。</p>
           <ProductItem product={dataProduct} layout="row" surface="ranking_product" placement="municipality_ranking_product" />
         </section>
