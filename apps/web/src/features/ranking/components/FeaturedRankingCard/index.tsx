@@ -32,6 +32,18 @@ export interface FeaturedRankingCardProps {
  * 値と地図は別の領域に置く (値の背後に地図を敷くと数字が地図に重なって読みにくい)。
  * カルーセルのカード見出しの下では枠を外したセルになる (PORTAL_CARD_CELL_CLASS)。
  */
+/** 並べた値の小数の桁をそろえる (「171」と「170.9」を「171.0」と「170.9」にする。焼き込みの値は末尾の 0 を落としている) */
+export function alignFractionDigits(values: readonly string[]): string[] {
+  const digits = (value: string) => (/^-?[\d,]+\.(\d+)$/.exec(value)?.[1].length ?? 0);
+  const max = Math.max(0, ...values.map(digits));
+  return values.map((value) => {
+    if (!/^-?[\d,]+(\.\d+)?$/.test(value)) return value;
+    const pad = max - digits(value);
+    if (pad === 0) return value;
+    return `${value}${digits(value) === 0 ? "." : ""}${"0".repeat(pad)}`;
+  });
+}
+
 export function FeaturedRankingCard({
   rankingKey,
   year,
@@ -39,6 +51,8 @@ export function FeaturedRankingCard({
   valueDisplay,
   model,
 }: FeaturedRankingCardProps) {
+  const formatted = model.tops.map((top) => formatFeaturedValueDisplay({ unit, valueDisplay }, top.value));
+  const values = alignFractionDigits(formatted.map((entry) => entry.value));
   return (
     <SurfaceLinkCard
       href={hrefFor("ranking", { rankingKey: rankingKey })}
@@ -54,8 +68,9 @@ export function FeaturedRankingCard({
       />
       <span className={PORTAL_CARD_TITLE_CLASS}>{model.hook}</span>
       <ol className="flex flex-col gap-1 text-sm">
-        {model.tops.map((top) => {
-          const { value, unit: valueUnit } = formatFeaturedValueDisplay({ unit, valueDisplay }, top.value);
+        {model.tops.map((top, index) => {
+          const value = values[index];
+          const valueUnit = formatted[index].unit;
           return (
             <li key={`${top.rank}-${top.areaName}`} className="flex items-baseline gap-2">
               <span className="w-8 shrink-0 text-xs text-muted-foreground tabular-nums">{top.rank ?? 1}位</span>

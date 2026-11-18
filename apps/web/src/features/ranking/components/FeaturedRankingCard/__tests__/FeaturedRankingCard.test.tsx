@@ -47,7 +47,7 @@ describe("FeaturedRankingCard", () => {
     expect(getByText("2024年")).toBeInTheDocument();
   });
 
-  it("同率 1 位は同じ順位で並べる (片方の県だけを書かない)", () => {
+  it("同率 1 位は同じ順位で並べ (片方の県だけを書かない)、小数の桁をそろえる", () => {
     const { container } = render(
       <FeaturedRankingCard
         {...PROPS}
@@ -55,8 +55,8 @@ describe("FeaturedRankingCard", () => {
         model={{
           ...PROPS.model,
           tops: [
-            { rank: 1, areaName: "新潟県", value: "171.0" },
-            { rank: 1, areaName: "福井県", value: "171.0" },
+            { rank: 1, areaName: "新潟県", value: "171" },
+            { rank: 1, areaName: "福井県", value: "171" },
             { rank: 3, areaName: "青森県", value: "170.9" },
           ],
         }}
