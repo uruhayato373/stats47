@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import { NATIONAL_AREA_CODE } from '@stats47/area/area-code';
 import { ChartPanel } from '@stats47/components';
 import { FREIGHT_OD_SOURCE } from '@stats47/data-configs/theme-catalog';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
@@ -50,7 +51,7 @@ export function ThemeFreightOdClient({
       className="min-w-0"
       data-theme-component-key="freight-od"
       data-data-state={rows ? 'ready' : 'unavailable'}
-      data-area-code={selectedPrefectureCode ?? '00000'}
+      data-area-code={selectedPrefectureCode ?? NATIONAL_AREA_CODE}
       data-transport-mode={modeKey}
       data-flow-direction={direction}
     >

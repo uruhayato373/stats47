@@ -2,6 +2,7 @@ import prefectures from '../../../data/areas/master/prefectures.json';
 import { buildMunicipalityEntityPolicy, resolveWardModeAreas, type WardMode } from '../../../packages/area/src/municipalities';
 import type { MetricPresentation } from '../../../packages/types/src/metric-presentation';
 import { chartValueLabels, type RankingChart } from './template-ranking-data';
+import { PREFECTURE_COUNT, to5DigitPrefCode } from '@stats47/area';
 
 /**
  * Which areas a chart compares. Grain and range are separate axes, and every value, rank and shape follows
@@ -33,7 +34,6 @@ export interface AreaChart extends RankingChart {
   missing: string[];
 }
 
-const PREFECTURE_COUNT = 47;
 const policy = (() => {
   let built: ReturnType<typeof buildMunicipalityEntityPolicy> | undefined;
   return () => (built ??= buildMunicipalityEntityPolicy());
@@ -51,7 +51,7 @@ export function areasOf(scope: AreaScope): Map<string, string> {
   if (scope.level === 'prefecture') return new Map(prefectures.map((p) => [p.prefCode, p.prefName]));
   const { codes } = resolveWardModeAreas(policy(), scope.wardMode);
   const { within } = scope;
-  if (within.kind === 'prefecture' && !prefectures.some((p) => p.prefCode === `${within.prefCode}000`))
+  if (within.kind === 'prefecture' && !prefectures.some((p) => p.prefCode === to5DigitPrefCode(within.prefCode)))
     throw Error(`都道府県コードが実在しない: ${within.prefCode}`);
   const areas = new Map<string, string>();
   for (const entity of policy().entities) {

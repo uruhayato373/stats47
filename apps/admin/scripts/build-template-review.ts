@@ -43,6 +43,7 @@ import { parseStatsValuesPayload } from '../../../packages/stats-r2/src/schemas'
 import { MANUFACTURING_SHIPMENT_AMOUNT_2023 } from '../../../packages/product-factory/src/data/datasets/manufacturing-shipment-amount';
 import { serializeDatasetCsv } from '../../../packages/product-factory/src/generators/csv';
 import type { Topology } from 'topojson-specification';
+import { to2DigitPrefCode } from '@stats47/area';
 
 const ROOT = path.resolve(__dirname, '../../..');
 const OUT = path.join(ROOT, '.local/template-review');
@@ -139,7 +140,7 @@ function datasetCsvPreview(): FilePreview {
 async function baseTileSample(id: string, label: string, slug: string, base: string) {
   const names = PREF_NAMES as string[];
   const chart = rankingChartFromArticleData(await json(blog(slug, base)), {
-    allowBaseArea: true, prefCodeOf: (name) => String(names.indexOf(name) + 1).padStart(2, '0'), prefNameOf: (code) => names[Number(code) - 1],
+    allowBaseArea: true, prefCodeOf: (name) => to2DigitPrefCode(names.indexOf(name) + 1), prefNameOf: (code) => names[Number(code) - 1],
   });
   if ('skip' in chart) throw Error(`${base}: ${chart.skip}`);
   return both(id, label, (theme) => renderTileMapChart(chart, theme));

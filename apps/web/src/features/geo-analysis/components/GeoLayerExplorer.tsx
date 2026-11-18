@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 
 
 import { PREFECTURE_LIST_2DIGIT } from '@stats47/area';
+import { to5DigitPrefCode } from '@stats47/area/area-code';
 import { Button } from '@stats47/components/atoms/ui/button';
 import {
   Select,
@@ -71,7 +72,7 @@ export function GeoLayerExplorer({
     let active = true;
     const artifact = manifest.stages
       .find((stage) => stage.id === 'population-mesh')
-      ?.outputs.find((output) => output.areaCode === `${pref}000`);
+      ?.outputs.find((output) => output.areaCode === to5DigitPrefCode(pref));
     void (
       artifact
         ? fetchGeoLayerAction(layer.slug, pref, {

@@ -1,4 +1,5 @@
 import { to5DigitPrefCode } from "@stats47/area";
+import { PREFECTURE_COUNT } from '@stats47/area/area-code';
 
 import type {
   GeoAnalysisEvidenceManifest,
@@ -149,9 +150,9 @@ export function parseGeoAnalysisEvidenceManifest(
     value.stages.length < 5 ||
     !isRecord(value.aggregate) ||
     !isRecord(value.quality) ||
-    value.quality.expectedAreas !== 47 ||
-    value.quality.detailAreas !== 47 ||
-    value.quality.conservationChecks !== 47
+    value.quality.expectedAreas !== PREFECTURE_COUNT ||
+    value.quality.detailAreas !== PREFECTURE_COUNT ||
+    value.quality.conservationChecks !== PREFECTURE_COUNT
   ) {
     return null;
   }

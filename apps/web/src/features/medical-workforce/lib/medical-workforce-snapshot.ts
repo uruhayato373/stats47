@@ -1,4 +1,5 @@
 import { lookupArea, NATIONAL_OR_PREFECTURE_AREA_CODE_RE } from '@stats47/area';
+import { PREFECTURE_COUNT, isNationalAreaCode } from '@stats47/area/area-code';
 import { MEDICAL_WORKFORCE_SOURCE } from '@stats47/data-configs/theme-catalog';
 import { z } from 'zod';
 
@@ -61,16 +62,16 @@ export const medicalWorkforceSnapshotSchema = z
         reject('原表のURL・SHAを固定する');
     }
     if (
-      snapshot.national.areaCode !== '00000' ||
-      snapshot.areas.some((row) => row.areaCode === '00000') ||
-      new Set(snapshot.areas.map((row) => row.areaCode)).size !== 47
+      !isNationalAreaCode(snapshot.national.areaCode) ||
+      snapshot.areas.some((row) => isNationalAreaCode(row.areaCode)) ||
+      new Set(snapshot.areas.map((row) => row.areaCode)).size !== PREFECTURE_COUNT
     )
       reject('全国と47県の一意な構成を確認する');
     if (snapshot.national.totalPhysicians !== source.nationalPhysicians)
       reject('2024年末の公式医療施設従事医師総数と一致しない');
     for (const row of [...snapshot.areas, snapshot.national]) {
       const expectedName =
-        row.areaCode === '00000' ? '全国' : lookupArea(row.areaCode)?.areaName;
+        isNationalAreaCode(row.areaCode) ? '全国' : lookupArea(row.areaCode)?.areaName;
       if (row.areaName !== expectedName) reject('地域コードと県名の不一致');
       if (
         row.ages.some(

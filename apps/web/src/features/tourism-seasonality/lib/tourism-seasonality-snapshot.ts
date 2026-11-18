@@ -1,4 +1,5 @@
 import { lookupArea, PREFECTURE_AREA_CODE_RE } from '@stats47/area';
+import { PREFECTURE_COUNT } from '@stats47/area/area-code';
 import { TOURISM_SEASONALITY_SOURCE } from '@stats47/data-configs/theme-catalog';
 import { z } from 'zod';
 
@@ -8,7 +9,6 @@ export const TOURISM_SEASONALITY_SNAPSHOT_KEY =
   TOURISM_SEASONALITY_SOURCE.r2Key;
 
 const MONTHS_PER_YEAR = 12;
-const PREFECTURE_COUNT = 47;
 const MONTH_PERIOD = /^\d{4}-(0[1-9]|1[0-2])$/;
 
 const monthlyPointShape = {

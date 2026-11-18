@@ -3,12 +3,13 @@ import { renderAll47TileSvg } from "../data-cards/all47-svg";
 import { resolveTileScale } from "../data-cards/tile-scale";
 import { useBuzzMapFonts } from "../buzz-map/useBuzzMapFonts";
 import type { MapCarouselData } from "./types";
+import { to5DigitPrefCode } from "@stats47/area/area-code";
 
 /** 旧 topbottom スライド名を保ち、今後は全47地域を描く。公開済みの画像には触れない。 */
 export const MapTopBottomSlide: React.FC<{ data: MapCarouselData }> = ({ data }) => {
   useBuzzMapFonts();
   const entries = data.tiles.map(r => ({
-    areaCode: `${r.prefCode2}000`, areaName: r.areaName, value: r.value,
+    areaCode: to5DigitPrefCode(r.prefCode2), areaName: r.areaName, value: r.value,
   }));
   // Same colours as the ranking page when props carry the item's encoding; otherwise brand blue.
   const scale = data.visualization

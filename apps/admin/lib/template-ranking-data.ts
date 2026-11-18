@@ -14,6 +14,7 @@ import { formatValueWithPrecision, resolveValuePrecision } from '@stats47/utils'
 import type { TileValueDisplay } from '../../remotion/src/features/data-cards/tile-scale';
 import { formatChartValue, resolveChartDisplayScale } from '../../../packages/data-configs/src/unit/chart-display-scale';
 import { formatUnitForDisplay } from '../../../packages/data-configs/src/unit/unit-display';
+import { PREFECTURE_COUNT, isPrefectureAreaCode } from '@stats47/area';
 
 /** A fixed real-data example; article associations are managed as usage, not input. */
 export const RANKING_SAMPLE_METRIC = maximumTemperature;
@@ -107,8 +108,8 @@ export interface ItemBarChart extends Omit<RankingChart, 'rows' | 'baseAreaCode'
 export function assertRankingRows(rows: RankingChartRow[]) {
   const sorted = [...rows].sort((a, b) => a.rank - b.rank || b.value - a.value);
   const codes = new Set(rows.map((r) => r.area_code));
-  if (rows.length !== 47 || codes.size !== 47 ||
-      rows.some((r) => !/^\d{2}000$/.test(r.area_code) || Number(r.area_code.slice(0, 2)) < 1 || Number(r.area_code.slice(0, 2)) > 47 || !Number.isFinite(r.value)) ||
+  if (rows.length !== PREFECTURE_COUNT || codes.size !== PREFECTURE_COUNT ||
+      rows.some((r) => !isPrefectureAreaCode(r.area_code) || !Number.isFinite(r.value)) ||
       sorted.some((r, i) => r.rank !== sorted.findIndex((other) => other.value === r.value) + 1 || (i > 0 && r.value > sorted[i - 1].value)))
     throw new Error('47都道府県の順位と値の順序を確認してください。');
   return sorted;

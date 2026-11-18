@@ -1,5 +1,6 @@
 'use client';
 
+import { NATIONAL_AREA_CODE } from '@stats47/area/area-code';
 import { ChartPanel } from '@stats47/components';
 import { PROPERTY_PRICE_DISTRIBUTION_SOURCE } from '@stats47/data-configs/theme-catalog';
 
@@ -53,7 +54,7 @@ export function ThemePropertyPriceDistributionClient({
     <div
       data-theme-component-key="property-prices"
       data-data-state="ready"
-      data-area-code={selectedPrefectureCode ?? '00000'}
+      data-area-code={selectedPrefectureCode ?? NATIONAL_AREA_CODE}
     >
       <ChartPanel
         title="住宅地の価格分布"

@@ -1,4 +1,5 @@
 import { lookupArea, PREFECTURE_AREA_CODE_RE } from '@stats47/area';
+import { NATIONAL_AREA_CODE, isNationalAreaCode } from '@stats47/area/area-code';
 import { CULTURAL_HERITAGE_SOURCE as definition } from '@stats47/data-configs/theme-catalog';
 
 import type {
@@ -11,7 +12,7 @@ export function selectCulturalHeritageView(
   areaCode: string | null,
   kind: CulturalHeritageKind | 'all' = 'all'
 ) {
-  const national = areaCode === null || areaCode === '00000';
+  const national = areaCode === null || isNationalAreaCode(areaCode);
   if (
     !national &&
     (!PREFECTURE_AREA_CODE_RE.test(areaCode) || !lookupArea(areaCode))
@@ -22,7 +23,7 @@ export function selectCulturalHeritageView(
     : snapshot.records.filter((row) => row.prefectureCodes.includes(areaCode));
   return {
     areaName: national ? '全国' : lookupArea(areaCode)!.areaName,
-    areaCode: national ? '00000' : areaCode,
+    areaCode: national ? NATIONAL_AREA_CODE : areaCode,
     total: areaRows.length,
     records:
       kind === 'all'

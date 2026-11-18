@@ -2,6 +2,7 @@ import { Suspense, type ReactNode } from 'react';
 
 
 
+import { isNationalAreaCode } from '@stats47/area/area-code';
 import { METRICS_REGISTRY } from '@stats47/data-configs';
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { scopeHrefsForPrefectureTheme } from '@stats47/data-configs/geo-scope';
@@ -124,7 +125,7 @@ export async function ThemePageLayout({
     ? buildAreaThemeFaqItems(
         areaContext.areaName,
         leadData.flatMap((d) => {
-          const finite = d.rankingValues.filter((v) => v.areaCode !== '00000' && typeof v.value === 'number' && Number.isFinite(v.value));
+          const finite = d.rankingValues.filter((v) => !isNationalAreaCode(v.areaCode) && typeof v.value === 'number' && Number.isFinite(v.value));
           const row = finite.find((v) => v.areaCode === areaContext.areaCode);
           if (!row || typeof row.value !== 'number' || row.rank == null) return [];
           return [{

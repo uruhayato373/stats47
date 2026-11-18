@@ -1,5 +1,6 @@
 import { cache } from 'react';
 
+import { NATIONAL_AREA_CODE, isNationalAreaCode } from '@stats47/area/area-code';
 import { buildRecipe, METRICS_REGISTRY } from '@stats47/data-configs';
 import { logger } from '@stats47/logger';
 import { readJapanSeries, readStatsValues } from '@stats47/stats-r2/readers';
@@ -97,7 +98,7 @@ async function readCompatibleRows(
   const candidates = candidateMetricKeys(params);
   // 全国 (00000) を求められたときも全国の系列を読む。旧: 地域を指定しないときだけ読み、全国を指定すると
   // 都道府県の値の中から全国を探して 0 件になり、ランキングの「〇〇の推移」(全国の値と推移のカード) が空だった (2026-10-30)
-  const includeJapan = areaCode === null || areaCode === '00000';
+  const includeJapan = areaCode === null || isNationalAreaCode(areaCode);
   for (const metricKey of candidates) {
     const config = METRICS_REGISTRY[metricKey];
     const { prefecture, japan } = await cachedReadMetric(
@@ -112,7 +113,7 @@ async function readCompatibleRows(
         unit: row.unit ?? config.unit,
       })),
       ...(japan?.rows ?? []).map((row) => ({
-        areaCode: '00000',
+        areaCode: NATIONAL_AREA_CODE,
         areaName: '全国',
         yearCode: row.yearCode,
         yearName: row.yearName,

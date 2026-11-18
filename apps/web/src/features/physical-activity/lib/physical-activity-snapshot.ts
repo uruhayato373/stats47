@@ -1,4 +1,5 @@
 import { lookupArea, NATIONAL_OR_PREFECTURE_AREA_CODE_RE } from '@stats47/area';
+import { PREFECTURE_COUNT, isNationalAreaCode } from '@stats47/area/area-code';
 import { PHYSICAL_ACTIVITY_SOURCE } from '@stats47/data-configs/theme-catalog';
 import { z } from 'zod';
 
@@ -39,14 +40,14 @@ const point = z
       });
     }
     const expectedName =
-      row.areaCode === '00000' ? '全国' : lookupArea(row.areaCode)?.areaName;
+      isNationalAreaCode(row.areaCode) ? '全国' : lookupArea(row.areaCode)?.areaName;
     if (row.areaName !== expectedName) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: '地域コードと県名を照合する',
       });
     }
-    if (row.areaCode === '00000' && metric) {
+    if (isNationalAreaCode(row.areaCode) && metric) {
       const n = metric.national;
       if (
         row.mean !== n.mean ||
@@ -92,8 +93,8 @@ export const physicalActivitySnapshotSchema = z
       keys.add(key);
     }
     if (
-      snapshot.rows.some((row) => row.areaCode === '00000') ||
-      snapshot.national.some((row) => row.areaCode !== '00000')
+      snapshot.rows.some((row) => isNationalAreaCode(row.areaCode)) ||
+      snapshot.national.some((row) => !isNationalAreaCode(row.areaCode))
     ) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
@@ -106,7 +107,7 @@ export const physicalActivitySnapshotSchema = z
         (row) => row.metricKey === metric.key
       );
       if (
-        rows.length !== 47 ||
+        rows.length !== PREFECTURE_COUNT ||
         national.length !== 1 ||
         rows.reduce((sum, row) => sum + row.sampleSize, 0) !==
           metric.national.sampleSize

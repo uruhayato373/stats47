@@ -4,7 +4,7 @@ import * as chromatic from "d3-scale-chromatic";
 import type { Feature, FeatureCollection } from "geojson";
 import type { Topology } from "topojson-specification";
 import { DEFAULT_PREFECTURE_MAP_PROPS } from "@stats47/visualization";
-import { to5DigitPrefCode } from "@stats47/area";
+import { NATIONAL_AREA_CODE, prefCodeFromTopoProperties, to5DigitPrefCode } from "@stats47/area/area-code";
 import { topologyFeatures, fittedMercator } from '../../../../../packages/gis/src/map/geometry.mjs';
 
 // ---------------------------------------------------------
@@ -50,15 +50,6 @@ export interface ChoroplethOptions {
 // ---------------------------------------------------------
 // ヘルパー
 // ---------------------------------------------------------
-
-/**
- * 都道府県コードを5桁に正規化 (`@stats47/area` の単一実装。未指定は全国 "00000")
- * "01" → "01000", "13" → "13000", "13000" → "13000"
- */
-function normalizePrefCode(code: string | number | undefined): string {
-  if (code === undefined || code === "") return "00000";
-  return to5DigitPrefCode(code);
-}
 
 /**
  * D3 の interpolator 関数名から関数を取得
@@ -139,11 +130,11 @@ export function computePrefectureSilhouette(
 
   const geojson = topologyFeatures(topology);
 
-  const normalizedCode = normalizePrefCode(areaCode);
+  const normalizedCode = areaCode ? to5DigitPrefCode(areaCode) : NATIONAL_AREA_CODE;
   const target = geojson.features.find((feat: Feature) => {
     const props = feat.properties || {};
-    const rawCode = props.N03_007 || props.prefCode || props.code;
-    return normalizePrefCode(rawCode) === normalizedCode;
+    const featureCode = prefCodeFromTopoProperties(props);
+    return (featureCode ? to5DigitPrefCode(featureCode) : NATIONAL_AREA_CODE) === normalizedCode;
   });
 
   if (!target) return null;
@@ -212,7 +203,7 @@ export function computeChoroplethPaths(
   // データマップ構築 (5桁正規化コード → 値)
   const valueMap = new Map<string, number>();
   for (const item of data) {
-    valueMap.set(normalizePrefCode(item.areaCode), item.value);
+    valueMap.set(item.areaCode ? to5DigitPrefCode(item.areaCode) : NATIONAL_AREA_CODE, item.value);
   }
 
   // カラースケール
@@ -234,8 +225,8 @@ export function computeChoroplethPaths(
   // パス生成
   return geojson.features.map((feat: Feature) => {
     const props = feat.properties || {};
-    const rawCode = props.N03_007 || props.prefCode || props.code;
-    const prefCode = normalizePrefCode(rawCode);
+    const featureCode = prefCodeFromTopoProperties(props);
+    const prefCode = featureCode ? to5DigitPrefCode(featureCode) : NATIONAL_AREA_CODE;
     const prefName = props.N03_001 || props.prefName || props.name || "";
     const value = valueMap.get(prefCode);
     const fill = value !== undefined ? colorScale(value) : noDataColor;

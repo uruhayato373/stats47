@@ -1,4 +1,5 @@
 import { PREFECTURE_AREA_CODES, to2DigitPrefCode } from '@stats47/area';
+import { PREFECTURE_COUNT } from '@stats47/area/area-code';
 import {
   assertFloodArchiveKeys,
   parseGeoSnowManifest,
@@ -125,9 +126,9 @@ export function validateGeoManifest(
     return null;
   const quality = value.quality;
   if (
-    quality.expectedAreas !== 47 ||
-    quality.detailAreas !== 47 ||
-    quality.conservationChecks !== 47 ||
+    quality.expectedAreas !== PREFECTURE_COUNT ||
+    quality.detailAreas !== PREFECTURE_COUNT ||
+    quality.conservationChecks !== PREFECTURE_COUNT ||
     ![
       'sourceRecords',
       'derivedRecords',
@@ -285,7 +286,7 @@ export function validateGeoManifest(
         outputs.length !== 1 ||
         JSON.stringify(outputs[0]) !== JSON.stringify(value.aggregate) ||
         value.aggregate.key !== `app/geo/${slug}/item.json` ||
-        value.aggregate.recordCount !== 47
+        value.aggregate.recordCount !== PREFECTURE_COUNT
       )
         return null;
     } else if (id === 'flood-maximum-polygons') {
@@ -296,7 +297,7 @@ export function validateGeoManifest(
       }
     } else {
       if (
-        outputs.length !== 47 ||
+        outputs.length !== PREFECTURE_COUNT ||
         !unique(outputs.map((output) => output.areaCode)) ||
         GEO_AREA_CODES.some(
           (code) => !outputs.some((output) => output.areaCode === code)
@@ -304,12 +305,13 @@ export function validateGeoManifest(
       )
         return null;
       for (const output of outputs) {
+        const pref2 = output.areaCode === undefined ? undefined : to2DigitPrefCode(output.areaCode);
         const key =
           id === 'public-facility-points'
-            ? `app/geo/${slug}/source/${output.areaCode?.slice(0, 2)}.json`
+            ? `app/geo/${slug}/source/${pref2}.json`
             : kind === 'context'
-              ? `app/station-passengers/${output.areaCode?.slice(0, 2)}/stations.json`
-              : `app/geo/${slug}/pref/${output.areaCode?.slice(0, 2)}.json`;
+              ? `app/station-passengers/${pref2}/stations.json`
+              : `app/geo/${slug}/pref/${pref2}.json`;
         if (
           output.key !== key ||
           (kind !== 'context' && output.bytes > GEO_DETAIL_MAX_BYTES)

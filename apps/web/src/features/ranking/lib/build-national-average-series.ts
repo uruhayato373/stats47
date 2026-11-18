@@ -1,4 +1,5 @@
 import { PREFECTURE_AREA_CODE_RE, PREFECTURE_CODE_2DIGIT_RE } from "@stats47/area";
+import { to2DigitPrefCode } from "@stats47/area/area-code";
 import {
   PREFECTURE_COUNT,
   resolveNationalFigure,
@@ -60,7 +61,7 @@ export function buildNationalAverageSeries(
     const count = prefectures.length;
     const sum = prefectures.reduce((total, row) => total + row.value, 0);
     const hasAllPrefectures = count === PREFECTURE_COUNT &&
-      new Set(prefectures.map((row) => row.areaCode.slice(0, 2))).size === PREFECTURE_COUNT;
+      new Set(prefectures.map((row) => to2DigitPrefCode(row.areaCode))).size === PREFECTURE_COUNT;
     points.push({
       year,
       yearCode: b.yearCode,

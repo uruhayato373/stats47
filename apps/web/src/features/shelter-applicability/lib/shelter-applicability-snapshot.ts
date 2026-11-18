@@ -1,4 +1,5 @@
 import { lookupArea, PREFECTURE_AREA_CODES } from '@stats47/area';
+import { isNationalAreaCode } from '@stats47/area/area-code';
 import { SHELTER_APPLICABILITY_SOURCE as source } from '@stats47/data-configs/theme-catalog';
 import { z } from 'zod';
 const count = z.number().int().min(0).max(Number.MAX_SAFE_INTEGER);
@@ -105,7 +106,7 @@ export const shelterApplicabilitySnapshotSchema = z
     if (JSON.stringify(v.sourcePins) !== JSON.stringify(pins))
       fail('official source pins');
     if (
-      v.national.areaCode !== '00000' ||
+      !isNationalAreaCode(v.national.areaCode) ||
       v.national.areaName !== '全国' ||
       v.national.latestDatabaseUpdate !== source.latestDatabaseUpdate
     )

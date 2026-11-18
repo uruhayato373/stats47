@@ -13,6 +13,7 @@ import {
 } from "@/shared";
 import { PREFECTURE_TOPOJSON_FILE } from "../../shared/utils/static-files";
 import { prefectureShortName } from "@stats47/area/short-name";
+import { PREFECTURE_COUNT } from "@stats47/area/area-code";
 
 /**
  * note ランキング記事の画像 4 枚 (cover / map / chart / boxplot) が共有する定義。
@@ -62,7 +63,7 @@ export function formatNoteValue(value: number, precision: number): string {
  * note 画像では欠落を例外にして、他記事のデータで画像が焼かれる事故を防ぐ。
  */
 export function resolveNoteData(props: NoteImageProps) {
-  if (!props.meta || !props.allEntries || props.allEntries.length !== 47) {
+  if (!props.meta || !props.allEntries || props.allEntries.length !== PREFECTURE_COUNT) {
     throw new Error(
       `note 画像には meta と 47 件の allEntries が必要です (受信: ${props.allEntries?.length ?? "none"} 件)。` +
         " render-ranking-images.mjs 経由で chart-data.json から props を作ってください。"

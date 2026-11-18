@@ -1,4 +1,5 @@
 import { fetchPrefectures, PREFECTURE_AREA_CODE_RE } from '@stats47/area';
+import { PREFECTURE_COUNT } from '@stats47/area/area-code';
 import { BRIDGE_INSPECTION_AGE_SOURCE as SOURCE } from '@stats47/data-configs/theme-catalog';
 import { z } from 'zod';
 
@@ -79,7 +80,7 @@ const schema = z
   .superRefine((data, ctx) => {
     const issue = (message: string) =>
       ctx.addIssue({ code: z.ZodIssueCode.custom, message });
-    if (new Set(data.areas.map((a) => a.areaCode)).size !== 47)
+    if (new Set(data.areas.map((a) => a.areaCode)).size !== PREFECTURE_COUNT)
       issue('Duplicate prefecture');
     for (const area of data.areas)
       if (names.get(area.areaCode) !== area.areaName)

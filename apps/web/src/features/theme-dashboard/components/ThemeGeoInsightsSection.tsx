@@ -1,3 +1,4 @@
+import { to2DigitPrefCode } from '@stats47/area/area-code';
 import {
   BUSINESS_PLAN_GEO_CONTENT_LIFECYCLE,
   BUSINESS_PLAN_M1_GEO_ANALYSES,
@@ -34,7 +35,7 @@ export function ThemeGeoInsightsSection({ themeKey, areaCode, areaName }: Props)
   if (content.length === 0) return null;
 
   const label = areaName ? `${areaName}の空間分析` : '関連する空間分析';
-  const prefCode2 = areaCode?.slice(0, 2);
+  const prefCode2 = areaCode ? to2DigitPrefCode(areaCode) : undefined;
   return (
     <div className="mt-8 flex flex-col gap-1" {...navSurfaceProps('geo_analysis_list')}>
       <p className="text-sm font-medium text-foreground">{label}</p>

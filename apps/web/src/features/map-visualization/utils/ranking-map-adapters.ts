@@ -1,3 +1,5 @@
+import { isNationalAreaCode } from '@stats47/area/area-code';
+
 import type { RankingItem } from '@stats47/ranking';
 import type {
   MapDataPoint,
@@ -44,6 +46,6 @@ export function filterMapDataPoints<T extends NullableMapValue>(
 ): MapDataPoint[] {
   return values.filter(
     (item): item is T & { value: number } =>
-      item.areaCode !== '00000' && item.value !== null
+      !isNationalAreaCode(item.areaCode) && item.value !== null
   );
 }

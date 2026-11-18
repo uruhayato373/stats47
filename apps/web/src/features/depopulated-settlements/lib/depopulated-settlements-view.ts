@@ -1,4 +1,5 @@
 import { lookupArea } from '@stats47/area';
+import { isNationalAreaCode } from '@stats47/area/area-code';
 import { DEPOPULATED_SETTLEMENTS_SOURCE } from '@stats47/data-configs/theme-catalog';
 
 import type { DepopulatedSettlementsSnapshot } from './depopulated-settlements-snapshot';
@@ -8,7 +9,7 @@ export function selectDepopulatedSettlementsView(
   snapshot: DepopulatedSettlementsSnapshot,
   prefectureCode: string | null
 ) {
-  const national = prefectureCode === null || prefectureCode === '00000';
+  const national = prefectureCode === null || isNationalAreaCode(prefectureCode);
   const block = national
     ? undefined
     : DEPOPULATED_SETTLEMENTS_SOURCE.blocks.find((block) =>

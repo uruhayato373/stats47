@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { PREFECTURE_AREA_CODE_RE } from '@stats47/area/area-code';
 
 export const CARD_KINDS = [
   'household-receipt',
@@ -39,7 +40,7 @@ export const dataCardSchema = z.discriminatedUnion('kind', [
     afterYear: text,
     summary: text,
     rows: z.array(z.object({
-      code: z.string().regex(/^\d{2}000$/),
+      code: z.string().regex(PREFECTURE_AREA_CODE_RE),
       name: text,
       before: amount.positive(),
       after: amount.nonnegative(),

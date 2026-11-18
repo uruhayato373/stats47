@@ -1,4 +1,5 @@
 import { isOkinawaAreaCode } from "@stats47/area";
+import { to2DigitPrefCode, to5DigitPrefCode } from "@stats47/area/area-code";
 import { geoCentroid, geoMercator, geoPath } from "d3-geo";
 
 import { fitGeoSvgMercator, topologyFeatures } from "@/components/charts/geo-topology";
@@ -27,13 +28,12 @@ const INSET = { x: 22, y: 76, width: 92, height: 92 };
 const INSET_LINE = { x1: 192, y1: 76, x2: 56, y2: 212 };
 
 const prefectureOf = (properties: AreaProperties) => {
-  const raw = String(properties.N03_007 ?? "");
-  return raw.length <= 2 ? raw.padStart(2, "0") : raw.padStart(5, "0").slice(0, 2);
+  return to2DigitPrefCode(String(properties.N03_007 ?? ""));
 };
 
 const areaOf = (properties: AreaProperties, level: "prefecture" | "city") =>
   level === "prefecture"
-    ? { code: `${prefectureOf(properties)}000`, name: String(properties.N03_001 ?? "") }
+    ? { code: to5DigitPrefCode(String(properties.N03_007 ?? "")), name: String(properties.N03_001 ?? "") }
     : {
         code: String(properties.N03_007 ?? properties.cityCode ?? properties.areaCode ?? ""),
         name: String(properties.cityName ?? properties.N03_004 ?? properties.N03_003 ?? properties.name ?? ""),

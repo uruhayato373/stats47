@@ -1,4 +1,5 @@
 import { lookupArea, NATIONAL_OR_PREFECTURE_AREA_CODE_RE } from '@stats47/area';
+import { PREFECTURE_COUNT, isNationalAreaCode } from '@stats47/area/area-code';
 import { INDUSTRY_SPECIALIZATION_SOURCE } from '@stats47/data-configs/theme-catalog';
 import { z } from 'zod';
 
@@ -43,9 +44,9 @@ export const industrySpecializationSnapshotSchema = z
       ctx.addIssue({ code: z.ZodIssueCode.custom, message });
     const equal = (a: number, b: number) => Math.abs(a - b) <= 1e-9;
     if (
-      snapshot.national.areaCode !== '00000' ||
-      snapshot.areas.some((row) => row.areaCode === '00000') ||
-      new Set(snapshot.areas.map((row) => row.areaCode)).size !== 47
+      !isNationalAreaCode(snapshot.national.areaCode) ||
+      snapshot.areas.some((row) => isNationalAreaCode(row.areaCode)) ||
+      new Set(snapshot.areas.map((row) => row.areaCode)).size !== PREFECTURE_COUNT
     )
       reject('全国と47県の一意な構成を確認する');
     const national = new Map(
@@ -54,7 +55,7 @@ export const industrySpecializationSnapshotSchema = z
     for (const row of [...snapshot.areas, snapshot.national]) {
       if (
         row.areaName !==
-        (row.areaCode === '00000' ? '全国' : lookupArea(row.areaCode)?.areaName)
+        (isNationalAreaCode(row.areaCode) ? '全国' : lookupArea(row.areaCode)?.areaName)
       )
         reject('地域コードと県名の不一致');
       if (

@@ -12,7 +12,8 @@ import {
 } from "@/features/ig-series";
 import type { RankingMeta } from "@/shared";
 
-import { toPrefCode, type RankingQuizSpec, type ResolvedRankingQuiz } from "./quiz";
+import { type RankingQuizSpec, type ResolvedRankingQuiz } from "./quiz";
+import { to2DigitPrefCode } from "@stats47/area/area-code";
 
 interface QuizAnswerSlideProps {
   spec: RankingQuizSpec;
@@ -50,7 +51,7 @@ export const QuizAnswerSlide: React.FC<QuizAnswerSlideProps> = ({ spec, quiz, me
         <div style={{ marginTop: 26, display: "flex", flexDirection: "column", gap: 14 }}>
           {quiz.top.map((entry) => {
             const isFirst = entry.rank === 1;
-            const revealed = quiz.revealedRanks.has(toPrefCode(entry.areaCode));
+            const revealed = quiz.revealedRanks.has(to2DigitPrefCode(entry.areaCode));
             const width = Math.min(Math.max(entry.value / first.value, 0), 1) * 100;
             return (
               <div key={entry.areaCode} style={{ display: "flex", alignItems: "center", gap: 18 }}>

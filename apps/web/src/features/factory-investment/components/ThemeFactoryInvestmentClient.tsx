@@ -1,5 +1,6 @@
 'use client';
 
+import { NATIONAL_AREA_CODE } from '@stats47/area/area-code';
 import { ChartPanel } from '@stats47/components';
 import { FACTORY_INVESTMENT_SOURCE } from '@stats47/data-configs/theme-catalog';
 
@@ -27,7 +28,7 @@ export function ThemeFactoryInvestmentClient({
     <div
       data-theme-component-key="factory-investment"
       data-data-state="ready"
-      data-area-code={selectedPrefectureCode ?? '00000'}
+      data-area-code={selectedPrefectureCode ?? NATIONAL_AREA_CODE}
     >
       <ChartPanel
         title="工場立地に伴う設備投資"

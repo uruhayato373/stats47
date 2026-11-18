@@ -1,3 +1,5 @@
+import { isNationalAreaCode } from '@stats47/area/area-code';
+
 import type { RankingValue } from '@stats47/ranking';
 
 export interface PopulationAnalysisRow {
@@ -33,7 +35,7 @@ export function buildPopulationAnalysis(
   const rows = values
     .filter(
       (value): value is RankingValue & { value: number } =>
-        value.value !== null && value.areaCode !== '00000'
+        value.value !== null && !isNationalAreaCode(value.areaCode)
     )
     .map((value) => ({
       areaCode: value.areaCode,

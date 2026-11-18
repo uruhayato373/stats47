@@ -1,5 +1,6 @@
 'use client';
 import { to2DigitPrefCode } from '@stats47/area';
+import { NATIONAL_AREA_CODE } from '@stats47/area/area-code';
 
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
@@ -25,7 +26,7 @@ export function ThemeGeoSnowDesignationClient({
       className="space-y-4"
       data-theme-component-key="snow-designation-population"
       data-data-state="ready"
-      data-area-code={selectedPrefectureCode ?? '00000'}
+      data-area-code={selectedPrefectureCode ?? NATIONAL_AREA_CODE}
     >
       {selectedPrefectureCode ? (
         <GeoSpatialEvidenceExplorer

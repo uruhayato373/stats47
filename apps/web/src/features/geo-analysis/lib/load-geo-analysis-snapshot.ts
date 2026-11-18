@@ -1,6 +1,7 @@
 import 'server-only';
 
 import { PREFECTURE_AREA_CODE_RE } from '@stats47/area';
+import { PREFECTURE_COUNT } from '@stats47/area/area-code';
 import { SNOW_DESIGNATION_SOURCE } from '@stats47/data-configs/theme-catalog';
 import {
   FLOOD_ARCHIVES,
@@ -51,7 +52,7 @@ export function parseGeoAnalysisSnapshot(
     typeof value.primaryMetricKey !== 'string' ||
     !Array.isArray(value.metrics) ||
     !Array.isArray(value.rows) ||
-    value.rows.length !== 47 ||
+    value.rows.length !== PREFECTURE_COUNT ||
     !isStringArray(value.method) ||
     value.method.length === 0 ||
     !Array.isArray(value.sources) ||
@@ -130,9 +131,9 @@ export function parseGeoAnalysisSnapshot(
     !metricKeys.has(value.primaryMetricKey) ||
     !rowsValid ||
     !sourcesValid ||
-    value.summary.observationCount !== 47 ||
-    value.dataQuality.expectedAreas !== 47 ||
-    value.dataQuality.actualAreas !== 47 ||
+    value.summary.observationCount !== PREFECTURE_COUNT ||
+    value.dataQuality.expectedAreas !== PREFECTURE_COUNT ||
+    value.dataQuality.actualAreas !== PREFECTURE_COUNT ||
     !Array.isArray(value.dataQuality.missingAreaCodes) ||
     value.dataQuality.missingAreaCodes.length !== 0
   ) {

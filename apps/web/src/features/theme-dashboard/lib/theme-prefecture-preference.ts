@@ -1,4 +1,5 @@
 import { lookupArea } from "@stats47/area";
+import { isPrefectureAreaCode } from "@stats47/area/area-code";
 
 export const THEME_PREFECTURE_COOKIE_NAME = "preferred-prefecture";
 export const THEME_PREFECTURE_SET_VALUE = "all";
@@ -17,7 +18,7 @@ export interface ThemePrefectureSelection {
 export function resolveThemePrefectureCode(
   value: string | undefined
 ): ThemePrefectureSelection | null {
-  if (!value || value === "00000" || !/^\d{2}000$/.test(value)) return null;
+  if (!value || !isPrefectureAreaCode(value)) return null;
   const area = lookupArea(value);
   if (!area) return null;
   return { areaCode: value, areaName: area.areaName };

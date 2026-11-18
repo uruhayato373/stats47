@@ -1,3 +1,5 @@
+import { PREFECTURE_COUNT } from '@stats47/area/area-code';
+
 import type { GeoAnalysisSnapshot } from './geo-cross-analysis';
 
 export interface GeoDecisionRow {
@@ -15,7 +17,6 @@ export interface GeoDecisionRow {
   readonly stationAccessShare: number;
 }
 
-const EXPECTED_PREFECTURES = 47;
 
 function numberValue(
   values: Readonly<Record<string, number | null>>,
@@ -104,7 +105,7 @@ export function buildGeoDecisionRows(
     ];
   });
 
-  if (rows.length !== EXPECTED_PREFECTURES) return [];
+  if (rows.length !== PREFECTURE_COUNT) return [];
   return [...rows].sort((left, right) =>
     left.areaCode.localeCompare(right.areaCode),
   );

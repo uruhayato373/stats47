@@ -1,4 +1,5 @@
 import { lookupArea, NATIONAL_OR_PREFECTURE_AREA_CODE_RE } from '@stats47/area';
+import { PREFECTURE_COUNT, isNationalAreaCode } from '@stats47/area/area-code';
 import { GRADUATION_PATHS_SOURCE } from '@stats47/data-configs/theme-catalog';
 import { z } from 'zod';
 
@@ -19,7 +20,7 @@ const row = z
     const issue = (message: string) =>
       ctx.addIssue({ code: z.ZodIssueCode.custom, message });
     const name =
-      value.areaCode === '00000'
+      isNationalAreaCode(value.areaCode)
         ? '全国'
         : lookupArea(value.areaCode)?.areaName;
     if (value.areaName !== name)
@@ -68,11 +69,11 @@ export const graduationPathsSnapshotSchema = z
     const issue = (message: string) =>
       ctx.addIssue({ code: z.ZodIssueCode.custom, message });
     if (
-      new Set(snapshot.rows.map((row) => row.areaCode)).size !== 47 ||
-      snapshot.rows.some((row) => row.areaCode === '00000')
+      new Set(snapshot.rows.map((row) => row.areaCode)).size !== PREFECTURE_COUNT ||
+      snapshot.rows.some((row) => isNationalAreaCode(row.areaCode))
     )
       issue('47県を一意に保持する');
-    if (snapshot.national.areaCode !== '00000')
+    if (!isNationalAreaCode(snapshot.national.areaCode))
       issue('全国公式行と県別行を分離する');
     for (const key of [
       'total',

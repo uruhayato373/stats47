@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { PREFECTURE_COUNT } from '@stats47/area/area-code';
 
 /**
  * Instagram「相関」カルーセル（水枠。正典 .claude/rules/sns-content-standards.md §2-3c）の
@@ -61,7 +62,7 @@ export const CorrelationHighlightsSchema = z.object({
 });
 export type CorrelationHighlights = z.infer<typeof CorrelationHighlightsSchema>;
 
-export const REQUIRED_PREFECTURE_COUNT = 47;
+export const REQUIRED_PREFECTURE_COUNT = PREFECTURE_COUNT;
 
 export const CorrelationCarouselSpecSchema = z.object({
   generatedAt: z.string(),

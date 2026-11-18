@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 
 
 import { PREFECTURE_LIST_2DIGIT } from '@stats47/area';
+import { to5DigitPrefCode } from '@stats47/area/area-code';
 import { Button } from '@stats47/components/atoms/ui/button';
 import {
   Select,
@@ -163,7 +164,7 @@ function GeoSpatialEvidenceExplorerState({
     }, 30_000);
     const artifact = manifest.stages
       .find((stage) => stage.id === 'population-mesh')
-      ?.outputs.find((output) => output.areaCode === `${prefCode}000`);
+      ?.outputs.find((output) => output.areaCode === to5DigitPrefCode(prefCode));
     const key = `${slug}:${prefCode}:${manifest.generatedAt}:${artifact?.sha256 ?? 'missing'}`;
     const cached = cache.current.get(key);
     void (
@@ -214,7 +215,7 @@ function GeoSpatialEvidenceExplorerState({
     setDetail(null);
     setPrefCode(value);
     updateUrl(value, view);
-    trackGeoRegionSelect({ ...common, areaCode: `${value}000` });
+    trackGeoRegionSelect({ ...common, areaCode: to5DigitPrefCode(value) });
   };
   const changeView = (value: string) => {
     if (!isGeoSpatialView(value, slug)) return;
@@ -222,7 +223,7 @@ function GeoSpatialEvidenceExplorerState({
     updateUrl(prefCode, value);
     trackGeoMapInteraction({
       ...common,
-      areaCode: `${prefCode}000`,
+      areaCode: to5DigitPrefCode(prefCode),
       interactionType: `stage-${value}`,
     });
   };
