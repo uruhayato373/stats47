@@ -2330,14 +2330,14 @@
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S3-02/v3-20261118-review/book.epub",
       "coverPath": ".local/kindle-books/K-S3-02/v3-20261118-review/cover.jpg",
-      "status": "draft",
+      "status": "listed",
       "asin": null,
-      "publishedAt": null,
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "新刊下書き準備",
-      "kdpStatusCheckedAt": "2026-11-18T08:32:03.916Z",
-      "publicationStage": "verified",
-      "publicationStageUpdatedAt": "2026-11-18T09:34:05.703Z",
+      "publishedAt": "2026-11-18",
+      "kdpStatus": "in_review",
+      "kdpStatusLabel": "レビュー中",
+      "kdpStatusCheckedAt": "2026-11-18T10:43:24.674Z",
+      "publicationStage": "submitted",
+      "publicationStageUpdatedAt": "2026-11-18T10:43:24.674Z",
       "publicationStageEvidence": {
         "prepared": {
           "at": "2026-11-18T08:32:03.916Z",
@@ -2349,11 +2349,24 @@
           "editionNumber": 1
         },
         "verified": {
-          "at": "2026-11-18T09:34:05.703Z",
+          "at": "2026-11-18T10:42:31.958Z",
           "draftId": "A240U1NAPZJACY"
+        },
+        "submitted": {
+          "at": "2026-11-18T10:43:24.674Z",
+          "statusLabel": "レビュー中",
+          "asin": null
         }
       },
-      "draftId": "A240U1NAPZJACY"
+      "draftId": "A240U1NAPZJACY",
+      "publicationStageLastAttempt": {
+        "at": "2026-11-18T10:41:47.573Z",
+        "attemptedStage": "files_processed",
+        "retainedStage": "verified",
+        "manuscriptUploaded": true,
+        "coverUploaded": true
+      },
+      "lastSubmittedAt": "2026-11-18"
     },
     "K-S3-03": {
       "id": "K-S3-03",
@@ -2415,14 +2428,14 @@
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S3-03/v3-20261118-review/book.epub",
       "coverPath": ".local/kindle-books/K-S3-03/v3-20261118-review/cover.jpg",
-      "status": "draft",
+      "status": "listed",
       "asin": null,
-      "publishedAt": null,
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "新刊下書き準備",
-      "kdpStatusCheckedAt": "2026-11-18T08:32:29.378Z",
-      "publicationStage": "verified",
-      "publicationStageUpdatedAt": "2026-11-18T09:49:58.067Z",
+      "publishedAt": "2026-11-18",
+      "kdpStatus": "in_review",
+      "kdpStatusLabel": "レビュー中",
+      "kdpStatusCheckedAt": "2026-11-18T10:53:38.077Z",
+      "publicationStage": "submitted",
+      "publicationStageUpdatedAt": "2026-11-18T10:53:38.077Z",
       "publicationStageEvidence": {
         "prepared": {
           "at": "2026-11-18T08:32:29.378Z",
@@ -2434,11 +2447,24 @@
           "editionNumber": 1
         },
         "verified": {
-          "at": "2026-11-18T09:49:58.067Z",
+          "at": "2026-11-18T10:52:46.302Z",
           "draftId": "A1QHODJDJVAYGL"
+        },
+        "submitted": {
+          "at": "2026-11-18T10:53:38.077Z",
+          "statusLabel": "レビュー中",
+          "asin": null
         }
       },
-      "draftId": "A1QHODJDJVAYGL"
+      "draftId": "A1QHODJDJVAYGL",
+      "publicationStageLastAttempt": {
+        "at": "2026-11-18T10:52:03.005Z",
+        "attemptedStage": "files_processed",
+        "retainedStage": "verified",
+        "manuscriptUploaded": true,
+        "coverUploaded": true
+      },
+      "lastSubmittedAt": "2026-11-18"
     },
     "K-S3-04": {
       "id": "K-S3-04",

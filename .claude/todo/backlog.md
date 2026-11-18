@@ -4031,7 +4031,7 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **次 (実行順)**:
   ⓪ 既刊 K-S1-01 の `scopeNote` の物価地域差指数の誤り (県庁所在市の値と書いている) を直すかはオーナーの判断。
   ⑤ KDP の下書き: K-S3-02・03 は 2026-11-18 に作成・読み戻し検証済み (verified)。K-S3-04〜08 の 5 冊は KDP の週間タイトル作成数の上限 (「本の作成数上限に達しました」、リセットは日曜 00:00 UTC) で作れなかったので、2026-11-22 (日) 9:00 JST 以降に `kdp-publish --id <ID>` で作る (失敗の回は下書きを残していない。表紙・価格が 1 回目で入らないことがあるので、verified にならなければ 1 回だけ再実行する)。
-  ⑥ 1 冊ずつオーナーの公開承認を得て出す (`kdp-weekly-publish -- --week <週> --id <ID> --owner-approved <ID> --commit`)。KDP の未公開は約 10 冊までなので、7 冊を一度に下書きにしない。
+  ⑥ K-S3-02・03 は 2026-11-18 にオーナーの指示「全部公開」で `kdp-weekly-publish --week 2026-W47 --id <ID> --owner-approved <ID> --commit` を実行し、審査に提出した (本棚 status レビュー中・ASIN 割当待ち)。KDP の審査後に本棚の状態を取り直し (`kdp-batch --phase status`)、販売中と ASIN を台帳に記録する。K-S3-04〜08 は ⑤ の下書きのあと、1 冊ずつオーナーの公開承認を得て出す (11-18 の「全部公開」はその時点で下書きのあった 2 冊への承認として扱った) (`kdp-weekly-publish -- --week <週> --id <ID> --owner-approved <ID> --commit`)。KDP の未公開は約 10 冊までなので、7 冊を一度に下書きにしない。
 - **完了条件**: 7 冊が KDP で販売中になり、出品台帳の `kdpStatus` が live。
 ### [KDP-PROMOTE-STALE-PROPOSAL-01] 出品台帳へ写す道具が、書籍の台帳とずれた古い提案を写さないようにする
 タグ: [収益化] [種類:不具合] [実行:sweep] [検証:npx vitest run packages/product-factory/tests/kindle-listing-revision.test.ts] [起票:2026-11-14] [領域:商品]
