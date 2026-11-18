@@ -63,5 +63,5 @@ export const snowWeatherTrafficAccidentsPer100k: MetricConfig = {
     "isCalculated": false
   },
   "surveyId": "traffic-accident-statistics",
-  "isActive": false
+  "isActive": true
 };

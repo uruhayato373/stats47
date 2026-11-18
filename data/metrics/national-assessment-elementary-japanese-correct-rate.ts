@@ -63,5 +63,5 @@ export const nationalAssessmentElementaryJapaneseCorrectRate: MetricConfig = {
     "isCalculated": false
   },
   "surveyId": "academic-achievement-survey",
-  "isActive": false
+  "isActive": true
 };

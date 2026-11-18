@@ -63,5 +63,5 @@ export const roadTrafficCongestion: MetricConfig = {
     "isCalculated": false
   },
   "surveyId": "road-statistics",
-  "isActive": false
+  "isActive": true
 };

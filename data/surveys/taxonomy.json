@@ -4,15 +4,15 @@
   "masterSurveyCount": 152,
   "ranking": {
     "metrics": 2768,
-    "activeMetrics": 2611,
+    "activeMetrics": 2624,
     "applicableMetrics": 2668,
-    "activeApplicableMetrics": 2512,
+    "activeApplicableMetrics": 2525,
     "notApplicable": 100,
     "activeNotApplicable": 99,
     "resolved": 2668,
     "unresolved": 0,
     "coveragePct": 100,
-    "activeResolved": 2512,
+    "activeResolved": 2525,
     "activeUnresolved": 0,
     "activeCoveragePct": 100,
     "activeNotApplicableKeys": [
@@ -118,7 +118,7 @@
     ],
     "activeUnresolvedKeys": [],
     "perSurveyActive": {
-      "academic-achievement-survey": 8,
+      "academic-achievement-survey": 17,
       "accommodation-survey": 4,
       "administrative-investment-report": 13,
       "age-adjusted-mortality-statistics": 1,
@@ -234,7 +234,7 @@
       "resident-registry-migration-report": 12,
       "resident-registry-population-survey": 1,
       "retail-price-survey": 14,
-      "road-statistics": 18,
+      "road-statistics": 21,
       "school-basic-survey": 63,
       "school-health-survey": 12,
       "sewerage-statistics": 5,
@@ -248,7 +248,7 @@
       "student-guidance-issues-survey": 7,
       "telecommunications-contract-share-quarterly": 2,
       "telecommunications-service-contract-report": 5,
-      "traffic-accident-statistics": 12,
+      "traffic-accident-statistics": 13,
       "travel-tourism-consumption-survey": 1,
       "truck-operator-statistics": 1,
       "urban-park-survey": 12,
@@ -2285,7 +2285,7 @@
   "surveys": [
     {
       "surveyId": "academic-achievement-survey",
-      "rankingCount": 8,
+      "rankingCount": 17,
       "themeKeys": [
         "education-culture"
       ],
@@ -4392,7 +4392,7 @@
     },
     {
       "surveyId": "road-statistics",
-      "rankingCount": 18,
+      "rankingCount": 21,
       "themeKeys": [
         "freight-logistics",
         "roads"
@@ -4625,7 +4625,7 @@
     },
     {
       "surveyId": "traffic-accident-statistics",
-      "rankingCount": 12,
+      "rankingCount": 13,
       "themeKeys": [
         "roads",
         "safety"
