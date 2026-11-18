@@ -3756,6 +3756,7 @@ updated: 2026-11-01
   仕組みは `.claude/rules/branch-workflow.md` に書かれているが、対策は手作業のまま。
 - **次**: ① commit-back が先頭になったら同じ head で必須検査を起動し直す workflow ② 必須検査を直前の非 skip-ci コミットの結果で満たす判定
   ③ commit-back を別ブランチへ集める、のどれを採るかを決める。
+- **観測 (2026-11-18・PR #1285)**: 実コミット ac934b6b9 の PR 検査は全件 pass したが、AI 解説の日次出力 236540d33 (github-actions[bot] が GITHUB_TOKEN で push、skip-ci 指定) が先頭を取って BLOCKED。ガード `pr-skip-ci-head-guard.yml` の run はこの SHA で 0 本 (作られたのは CodeQL だけ)。GitHub の文書では GITHUB_TOKEN が起こしたイベントは新しい run を作らない (https://docs.github.com/en/actions/concepts/security/github_token、2026-11-18 参照) ので、ガードの 1 つ目の経路 (pull_request_target の synchronize) は CI の書き戻しを受け取れない。前回 PR #1282 (11-17) も同じ。対策の候補に ④ commit-back の workflow の最後で、開いている develop→main PR があれば pr-quality-check.yml を workflow_dispatch する、を足す。
 - **完了条件**: commit-back が先頭に積まれても、手で push し直さずに develop→main の PR をマージできる。
 
 ### [JAPAN-SERIES-KAKEI-01] /japan の全国時系列の生成器を家計調査に対応させ、止めている 55 指標を載せる
