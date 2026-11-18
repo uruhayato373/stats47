@@ -45,7 +45,7 @@ import {
   readMunicipalityRanking,
   readMunicipalityRankingCommentary,
 } from '@/features/municipalities/server';
-import { findDataProductForMunicipalityRanking, TrackedProductLink } from '@/features/products';
+import { findDataProductForMunicipalityRanking, ProductItem } from '@/features/products';
 
 import {
   MUNICIPALITY_AFTER_MAP,
@@ -261,6 +261,13 @@ export default async function MunicipalityRankingPage({
         ))}
       </section>
 
+      {dataProduct && (
+        <section aria-label="この指標のデータ集" className="mt-5 border border-border p-4">
+          <p className="text-sm text-foreground">この指標の長期の時系列と、地図に結合できる境界データを配布しています。</p>
+          <ProductItem product={dataProduct} layout="row" surface="ranking_product" placement="municipality_ranking_product" />
+        </section>
+      )}
+
       {distribution && (
         <section aria-label="全国分布" className="mt-5">
           <SectionHeader title="全国分布" hideRule className="mb-0" />
@@ -288,23 +295,6 @@ export default async function MunicipalityRankingPage({
         <div className="mt-8">
           <AdRow cells={rowAfterMap} position="municipality-row-1" trackingCategory={`municipality-${item.rankingKey}`} wide />
         </div>
-      )}
-
-      {dataProduct && (
-        <p className="mt-5 text-sm text-muted-foreground">
-          この指標の長期の時系列と地図に結合できる境界データは、{dataProduct.channelLabel}（
-          {formatValueWithPrecision(dataProduct.priceYen, 0)}円）で配布しています。{' '}
-          <TrackedProductLink
-            href={hrefFor('product', { slug: dataProduct.slug })}
-            label={`${dataProduct.id}:${dataProduct.title}`}
-            surface="ranking_product"
-            product={dataProduct}
-            placement="municipality_ranking_product"
-            className="text-primary underline underline-offset-2"
-          >
-            内容を見る
-          </TrackedProductLink>
-        </p>
       )}
 
       <MunicipalityRankingExplorer
