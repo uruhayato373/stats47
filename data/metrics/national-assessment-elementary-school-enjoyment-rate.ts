@@ -63,5 +63,5 @@ export const nationalAssessmentElementarySchoolEnjoymentRate: MetricConfig = {
     "isCalculated": false
   },
   "surveyId": "academic-achievement-survey",
-  "isActive": false
+  "isActive": true
 };

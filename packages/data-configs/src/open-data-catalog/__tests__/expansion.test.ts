@@ -7,6 +7,7 @@ import ledger from "../../../../../data/open-data/expansion.json";
 import schema from "../../../../../config/schema/open-data.expansion.schema.json";
 import recipeLedger from "../../../../../data/open-data/fetch/recipes.json";
 import areaTemplate from "../../../../../data/areas/databook/template.json";
+import plannedFixture from "./fixtures/planned-prefecture-ranking.json";
 import { METRICS_REGISTRY } from "../../registry";
 import { PREFECTURE_AREA_CODES } from "../../../../area/src/constants/prefecture-codes";
 import { normalizeOpenDataArea } from "../normalized-table";
@@ -23,7 +24,10 @@ const expansion = rawLedger as OpenDataExpansion;
 const recipes = recipeLedger.recipes as OpenDataFetchRecipe[];
 const allMetrics = Object.values(METRICS_REGISTRY);
 // validator と同じく、候補に結び付いた公開前の定義は衝突の検査から外す。
-const stagedKeys = stagedExpansionMetricKeys(expansion, allMetrics);
+// 手本の planned は、公開前の県ランキングの候補を固定データで持つ。台帳の県ランキングの候補は公開すると外すので、
+// 台帳から引くと公開のたびにテストの前提が消える (2026-11-18 に 13 本を公開して落ちた)。手本の指標は公開前として扱う。
+const planned = plannedFixture as OpenDataExpansionCandidate;
+const stagedKeys = new Set([...stagedExpansionMetricKeys(expansion, allMetrics), planned.metricKey!]);
 const metrics = allMetrics.filter((m) => !stagedKeys.has(m.key));
 const context = {
   recipes, metrics,
@@ -31,7 +35,6 @@ const context = {
   themeIds: new Set(fs.readdirSync(path.join(root, "data/themes/catalogs")).filter((f) => f.endsWith(".json")).map((f) => f.slice(0, -5))),
   areaIds: new Set(areaTemplate.sections.map((s) => s.sectionKey)),
 };
-const planned = expansion.candidates.find((c) => c.metricKey === "national-assessment-elementary-japanese-correct-rate")!;
 const validate = (candidate: OpenDataExpansionCandidate) => validateOpenDataExpansion({ schemaVersion: 1, candidates: [candidate] }, context);
 const fixture: OpenDataNormalizedTable = {
   datasetId: planned.datasetId, table: planned.table, version: planned.slice.version,

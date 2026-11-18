@@ -854,46 +854,6 @@
             "小学6年"
           ],
           "subject": [
-            "国語"
-          ]
-        },
-        "time": {
-          "kind": "point",
-          "value": "2025"
-        },
-        "dimensionAggregation": "none",
-        "timeAggregation": "none"
-      },
-      "channel": "prefecture-ranking",
-      "status": "planned",
-      "title": "小学生の国語平均正答率",
-      "unit": "％",
-      "aggregation": {
-        "type": "identity"
-      },
-      "reason": "同年度・同学年・同教科の公立校47県を直接比較できる。既存 academic-achievement-test-average-rate は小中4教科の単純平均であり、教科別とは定義が異なる。",
-      "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
-      "metricKey": "national-assessment-elementary-japanese-correct-rate",
-      "verification": {
-        "tableSha256": "face3941ad59346af66f56d05c7d6579430b8214dd0d5a8d7ae7b111a2c6effd",
-        "rowCount": 47,
-        "areaCount": 47,
-        "min": 64,
-        "max": 71
-      }
-    },
-    {
-      "datasetId": "nier-gakuryoku-achievement",
-      "table": "primary-achievement",
-      "slice": {
-        "version": "2025",
-        "areaLevel": "prefecture",
-        "dims": {
-          "grade": [
-            "小学6年"
-          ],
-          "subject": [
             "算数"
           ]
         },
@@ -923,46 +883,6 @@
         "max": 64
       },
       "target": "education-culture"
-    },
-    {
-      "datasetId": "nier-gakuryoku-achievement",
-      "table": "junior-achievement",
-      "slice": {
-        "version": "2025",
-        "areaLevel": "prefecture",
-        "dims": {
-          "grade": [
-            "中学3年"
-          ],
-          "subject": [
-            "国語"
-          ]
-        },
-        "time": {
-          "kind": "point",
-          "value": "2025"
-        },
-        "dimensionAggregation": "none",
-        "timeAggregation": "none"
-      },
-      "channel": "prefecture-ranking",
-      "status": "planned",
-      "title": "中学生の国語平均正答率",
-      "unit": "％",
-      "aggregation": {
-        "type": "identity"
-      },
-      "reason": "同年度・同学年・同教科の公立校47県を直接比較できる。既存 academic-achievement-test-average-rate は小中4教科の単純平均であり、教科別とは定義が異なる。",
-      "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
-      "metricKey": "national-assessment-junior-high-japanese-correct-rate",
-      "verification": {
-        "tableSha256": "2c7f76a8a1c372e37457a8370d1ef1a331005335594130caff124b0e49c5933e",
-        "rowCount": 47,
-        "areaCount": 47,
-        "min": 49,
-        "max": 57
-      }
     },
     {
       "datasetId": "nier-gakuryoku-achievement",
@@ -1030,50 +950,6 @@
         "dimensionAggregation": "sum",
         "timeAggregation": "none"
       },
-      "channel": "prefecture-ranking",
-      "status": "planned",
-      "title": "自分によいところがあると思う小学生の割合",
-      "unit": "％",
-      "aggregation": {
-        "type": "identity"
-      },
-      "reason": "令和7年度質問紙の設問(5)で1＝当てはまる、2＝どちらかといえば当てはまると確認（定義: https://www.nier.go.jp/25chousa/pdf/25shitsumonchousa_shou_jidou.pdf）。公表済み割合の1＋2を合計し47県・94行で85.0〜89.7％、人口を分母にしない肯定回答率としてplannedにする。",
-      "decidedAt": "2026-11-15",
-      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
-      "verification": {
-        "tableSha256": "fcfd12a73be86e6edea1a2c5525460cfbaaa3e19bc86774432ffa55447b40686",
-        "rowCount": 94,
-        "areaCount": 47,
-        "min": 85,
-        "max": 89.7
-      },
-      "metricKey": "national-assessment-elementary-self-esteem-rate"
-    },
-    {
-      "datasetId": "nier-gakuryoku-lifestyle",
-      "table": "primary-lifestyle-response-rates",
-      "slice": {
-        "version": "2025",
-        "areaLevel": "prefecture",
-        "dims": {
-          "grade": [
-            "小学6年"
-          ],
-          "question": [
-            "自分には、よいところがあると思いますか"
-          ],
-          "answer": [
-            "1",
-            "2"
-          ]
-        },
-        "time": {
-          "kind": "point",
-          "value": "2025"
-        },
-        "dimensionAggregation": "sum",
-        "timeAggregation": "none"
-      },
       "channel": "theme",
       "status": "planned",
       "title": "自分によいところがあると思う小学生の割合",
@@ -1093,138 +969,6 @@
         "max": 89.7
       },
       "metricKey": "national-assessment-elementary-self-esteem-rate"
-    },
-    {
-      "datasetId": "nier-gakuryoku-lifestyle",
-      "table": "primary-lifestyle-response-rates",
-      "slice": {
-        "version": "2025",
-        "areaLevel": "prefecture",
-        "dims": {
-          "grade": [
-            "小学6年"
-          ],
-          "question": [
-            "将来の夢や目標を持っていますか"
-          ],
-          "answer": [
-            "1",
-            "2"
-          ]
-        },
-        "time": {
-          "kind": "point",
-          "value": "2025"
-        },
-        "dimensionAggregation": "sum",
-        "timeAggregation": "none"
-      },
-      "channel": "prefecture-ranking",
-      "status": "planned",
-      "title": "将来の夢や目標を持つ小学生の割合",
-      "unit": "％",
-      "aggregation": {
-        "type": "identity"
-      },
-      "reason": "令和7年度質問紙の設問(7)で1＝当てはまる、2＝どちらかといえば当てはまると確認（定義: https://www.nier.go.jp/25chousa/pdf/25shitsumonchousa_shou_jidou.pdf）。公表済み割合の1＋2を合計し47県・94行で80.6〜88.5％、人口を分母にしない肯定回答率としてplannedにする。",
-      "decidedAt": "2026-11-15",
-      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
-      "verification": {
-        "tableSha256": "fcfd12a73be86e6edea1a2c5525460cfbaaa3e19bc86774432ffa55447b40686",
-        "rowCount": 94,
-        "areaCount": 47,
-        "min": 80.6,
-        "max": 88.5
-      },
-      "metricKey": "national-assessment-elementary-future-goal-rate"
-    },
-    {
-      "datasetId": "nier-gakuryoku-lifestyle",
-      "table": "primary-lifestyle-response-rates",
-      "slice": {
-        "version": "2025",
-        "areaLevel": "prefecture",
-        "dims": {
-          "grade": [
-            "小学6年"
-          ],
-          "question": [
-            "学校に行くのは楽しいと思いますか"
-          ],
-          "answer": [
-            "1",
-            "2"
-          ]
-        },
-        "time": {
-          "kind": "point",
-          "value": "2025"
-        },
-        "dimensionAggregation": "sum",
-        "timeAggregation": "none"
-      },
-      "channel": "prefecture-ranking",
-      "status": "planned",
-      "title": "学校に行くのが楽しいと思う小学生の割合",
-      "unit": "％",
-      "aggregation": {
-        "type": "identity"
-      },
-      "reason": "令和7年度質問紙の設問(12)で1＝当てはまる、2＝どちらかといえば当てはまると確認（定義: https://www.nier.go.jp/25chousa/pdf/25shitsumonchousa_shou_jidou.pdf）。公表済み割合の1＋2を合計し47県・94行で83.6〜91.5％、人口を分母にしない肯定回答率としてplannedにする。",
-      "decidedAt": "2026-11-15",
-      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
-      "verification": {
-        "tableSha256": "fcfd12a73be86e6edea1a2c5525460cfbaaa3e19bc86774432ffa55447b40686",
-        "rowCount": 94,
-        "areaCount": 47,
-        "min": 83.6,
-        "max": 91.5
-      },
-      "metricKey": "national-assessment-elementary-school-enjoyment-rate"
-    },
-    {
-      "datasetId": "nier-gakuryoku-lifestyle",
-      "table": "primary-lifestyle-response-rates",
-      "slice": {
-        "version": "2025",
-        "areaLevel": "prefecture",
-        "dims": {
-          "grade": [
-            "小学6年"
-          ],
-          "question": [
-            "友達関係に満足していますか"
-          ],
-          "answer": [
-            "1",
-            "2"
-          ]
-        },
-        "time": {
-          "kind": "point",
-          "value": "2025"
-        },
-        "dimensionAggregation": "sum",
-        "timeAggregation": "none"
-      },
-      "channel": "prefecture-ranking",
-      "status": "planned",
-      "title": "友達関係に満足する小学生の割合",
-      "unit": "％",
-      "aggregation": {
-        "type": "identity"
-      },
-      "reason": "令和7年度質問紙の設問(14)で1＝当てはまる、2＝どちらかといえば当てはまると確認（定義: https://www.nier.go.jp/25chousa/pdf/25shitsumonchousa_shou_jidou.pdf）。公表済み割合の1＋2を合計し47県・94行で90.1〜94.3％、人口を分母にしない肯定回答率としてplannedにする。",
-      "decidedAt": "2026-11-15",
-      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
-      "verification": {
-        "tableSha256": "fcfd12a73be86e6edea1a2c5525460cfbaaa3e19bc86774432ffa55447b40686",
-        "rowCount": 94,
-        "areaCount": 47,
-        "min": 90.1,
-        "max": 94.30000000000001
-      },
-      "metricKey": "national-assessment-elementary-friendship-satisfaction-rate"
     },
     {
       "datasetId": "nier-gakuryoku-lifestyle",
@@ -1273,138 +1017,6 @@
     },
     {
       "datasetId": "nier-gakuryoku-lifestyle",
-      "table": "junior-lifestyle-response-rates",
-      "slice": {
-        "version": "2025",
-        "areaLevel": "prefecture",
-        "dims": {
-          "grade": [
-            "中学3年"
-          ],
-          "question": [
-            "将来の夢や目標を持っていますか"
-          ],
-          "answer": [
-            "1",
-            "2"
-          ]
-        },
-        "time": {
-          "kind": "point",
-          "value": "2025"
-        },
-        "dimensionAggregation": "sum",
-        "timeAggregation": "none"
-      },
-      "channel": "prefecture-ranking",
-      "status": "planned",
-      "title": "将来の夢や目標を持つ中学生の割合",
-      "unit": "％",
-      "aggregation": {
-        "type": "identity"
-      },
-      "reason": "令和7年度質問紙の設問(7)で1＝当てはまる、2＝どちらかといえば当てはまると確認（定義: https://www.nier.go.jp/25chousa/pdf/25shitsumonchousa_chuu_seito.pdf）。公表済み割合の1＋2を合計し47県・94行で64.2〜74.8％、人口を分母にしない肯定回答率としてplannedにする。",
-      "decidedAt": "2026-11-15",
-      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
-      "verification": {
-        "tableSha256": "d6e5af51eeb256a4b266e8f1db3b6edfa428eecc35967d5888266b03f6d07005",
-        "rowCount": 94,
-        "areaCount": 47,
-        "min": 64.19999999999999,
-        "max": 74.8
-      },
-      "metricKey": "national-assessment-junior-high-future-goal-rate"
-    },
-    {
-      "datasetId": "nier-gakuryoku-lifestyle",
-      "table": "junior-lifestyle-response-rates",
-      "slice": {
-        "version": "2025",
-        "areaLevel": "prefecture",
-        "dims": {
-          "grade": [
-            "中学3年"
-          ],
-          "question": [
-            "学校に行くのは楽しいと思いますか"
-          ],
-          "answer": [
-            "1",
-            "2"
-          ]
-        },
-        "time": {
-          "kind": "point",
-          "value": "2025"
-        },
-        "dimensionAggregation": "sum",
-        "timeAggregation": "none"
-      },
-      "channel": "prefecture-ranking",
-      "status": "planned",
-      "title": "学校に行くのが楽しいと思う中学生の割合",
-      "unit": "％",
-      "aggregation": {
-        "type": "identity"
-      },
-      "reason": "令和7年度質問紙の設問(12)で1＝当てはまる、2＝どちらかといえば当てはまると確認（定義: https://www.nier.go.jp/25chousa/pdf/25shitsumonchousa_chuu_seito.pdf）。公表済み割合の1＋2を合計し47県・94行で82.3〜89.6％、人口を分母にしない肯定回答率としてplannedにする。",
-      "decidedAt": "2026-11-15",
-      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
-      "verification": {
-        "tableSha256": "d6e5af51eeb256a4b266e8f1db3b6edfa428eecc35967d5888266b03f6d07005",
-        "rowCount": 94,
-        "areaCount": 47,
-        "min": 82.3,
-        "max": 89.6
-      },
-      "metricKey": "national-assessment-junior-high-school-enjoyment-rate"
-    },
-    {
-      "datasetId": "nier-gakuryoku-lifestyle",
-      "table": "junior-lifestyle-response-rates",
-      "slice": {
-        "version": "2025",
-        "areaLevel": "prefecture",
-        "dims": {
-          "grade": [
-            "中学3年"
-          ],
-          "question": [
-            "友達関係に満足していますか"
-          ],
-          "answer": [
-            "1",
-            "2"
-          ]
-        },
-        "time": {
-          "kind": "point",
-          "value": "2025"
-        },
-        "dimensionAggregation": "sum",
-        "timeAggregation": "none"
-      },
-      "channel": "prefecture-ranking",
-      "status": "planned",
-      "title": "友達関係に満足する中学生の割合",
-      "unit": "％",
-      "aggregation": {
-        "type": "identity"
-      },
-      "reason": "令和7年度質問紙の設問(14)で1＝当てはまる、2＝どちらかといえば当てはまると確認（定義: https://www.nier.go.jp/25chousa/pdf/25shitsumonchousa_chuu_seito.pdf）。公表済み割合の1＋2を合計し47県・94行で89.6〜93.0％、人口を分母にしない肯定回答率としてplannedにする。",
-      "decidedAt": "2026-11-15",
-      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
-      "verification": {
-        "tableSha256": "d6e5af51eeb256a4b266e8f1db3b6edfa428eecc35967d5888266b03f6d07005",
-        "rowCount": 94,
-        "areaCount": 47,
-        "min": 89.6,
-        "max": 93
-      },
-      "metricKey": "national-assessment-junior-high-friendship-satisfaction-rate"
-    },
-    {
-      "datasetId": "nier-gakuryoku-lifestyle",
       "table": "primary-lifestyle-response-rates",
       "slice": {
         "version": "2025",
@@ -1446,46 +1058,6 @@
       "decidedAt": "2026-11-15",
       "decidedBy": "codex / local normalized-table and metric-registry audit",
       "target": "education-facility"
-    },
-    {
-      "datasetId": "mlit-road-census-r3",
-      "table": "road-congestion",
-      "slice": {
-        "version": "2023-06-30",
-        "areaLevel": "prefecture",
-        "dims": {
-          "coverage": [
-            "交通量推定不能区間を含まない"
-          ],
-          "roadType": [
-            "一般道路計"
-          ]
-        },
-        "time": {
-          "kind": "point",
-          "value": "2021"
-        },
-        "dimensionAggregation": "none",
-        "timeAggregation": "none"
-      },
-      "channel": "prefecture-ranking",
-      "status": "planned",
-      "title": "一般道路の混雑度",
-      "unit": "比",
-      "aggregation": {
-        "type": "identity"
-      },
-      "reason": "令和3年度道路交通センサスの一般道路計で47県・同時点が揃う。交通量の単純件数ではなく道路の利用状況を比較できる。2021年の構造比較に限定し現在値と表現しない。",
-      "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
-      "metricKey": "road-traffic-congestion",
-      "verification": {
-        "tableSha256": "c47acc58c77629f5647dd40cf2d9bd8207cfb00379f7cd54ab620d304d42d230",
-        "rowCount": 47,
-        "areaCount": 47,
-        "min": 0.39,
-        "max": 0.91
-      }
     },
     {
       "datasetId": "mlit-road-census-r3",
@@ -1590,46 +1162,6 @@
         "dimensionAggregation": "none",
         "timeAggregation": "none"
       },
-      "channel": "prefecture-ranking",
-      "status": "planned",
-      "title": "一般道路の12時間大型車混入率",
-      "unit": "％",
-      "aggregation": {
-        "type": "identity"
-      },
-      "reason": "令和3年度道路交通センサスの一般道路計で47県・同時点が揃う。交通量の単純件数ではなく道路の利用状況を比較できる。2021年の構造比較に限定し現在値と表現しない。",
-      "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
-      "metricKey": "road-heavy-vehicle-share",
-      "verification": {
-        "tableSha256": "cd3a8a3b2079397ee2a64782f5317a1523dfa69ebfd7b317a2986cf3eed735e7",
-        "rowCount": 47,
-        "areaCount": 47,
-        "min": 7.4,
-        "max": 19.6
-      }
-    },
-    {
-      "datasetId": "mlit-road-census-r3",
-      "table": "heavy-vehicle-share",
-      "slice": {
-        "version": "2023-06-30",
-        "areaLevel": "prefecture",
-        "dims": {
-          "coverage": [
-            "交通量推定不能区間を含まない"
-          ],
-          "roadType": [
-            "一般道路計"
-          ]
-        },
-        "time": {
-          "kind": "point",
-          "value": "2021"
-        },
-        "dimensionAggregation": "none",
-        "timeAggregation": "none"
-      },
       "channel": "theme",
       "status": "planned",
       "title": "一般道路の12時間大型車混入率",
@@ -1649,43 +1181,6 @@
         "max": 19.6
       },
       "target": "freight-logistics"
-    },
-    {
-      "datasetId": "mlit-road-census-r3",
-      "table": "peak-travel-speed",
-      "slice": {
-        "version": "2023-06-30",
-        "areaLevel": "prefecture",
-        "dims": {
-          "roadType": [
-            "一般道路計"
-          ]
-        },
-        "time": {
-          "kind": "point",
-          "value": "2021"
-        },
-        "dimensionAggregation": "none",
-        "timeAggregation": "none"
-      },
-      "channel": "prefecture-ranking",
-      "status": "planned",
-      "title": "一般道路の混雑時旅行速度",
-      "unit": "km/h",
-      "aggregation": {
-        "type": "identity"
-      },
-      "reason": "令和3年度道路交通センサスの一般道路計で47県・同時点が揃う。交通量の単純件数ではなく道路の利用状況を比較できる。2021年の構造比較に限定し現在値と表現しない。",
-      "decidedAt": "2026-11-15",
-      "decidedBy": "codex / local normalized-table and metric-registry audit",
-      "metricKey": "road-peak-travel-speed",
-      "verification": {
-        "tableSha256": "177ca25f3c35ec911deada7c3a3b5f9fc9a31bc88d20c0c091763c60554c64dc",
-        "rowCount": 47,
-        "areaCount": 47,
-        "min": 15.5,
-        "max": 46.1
-      }
     },
     {
       "datasetId": "mlit-road-census-r3",
@@ -3103,64 +2598,6 @@
         "denominatorTime": "2025",
         "denominatorSha256": "0992fc382a017f0730be86a745bc3493a9bce0b39ca4a7192f9aaae48491b6e4"
       }
-    },
-    {
-      "datasetId": "npa-traffic-accident-opendata",
-      "table": "accident-count-by-circumstances",
-      "slice": {
-        "version": "2025",
-        "areaLevel": "prefecture",
-        "dims": {
-          "weather": [
-            "5"
-          ],
-          "daylight": [
-            "11",
-            "12",
-            "13",
-            "21",
-            "22",
-            "23"
-          ],
-          "accidentType": [
-            "01",
-            "21",
-            "41",
-            "61"
-          ]
-        },
-        "time": {
-          "kind": "point",
-          "value": "2025"
-        },
-        "dimensionAggregation": "sum",
-        "timeAggregation": "none",
-        "zeroAreaCodes": [
-          "47000"
-        ]
-      },
-      "channel": "prefecture-ranking",
-      "status": "planned",
-      "title": "降雪時（雪・みぞれ・ひょう）の交通事故発生件数（人口10万人当たり）",
-      "unit": "件/10万人",
-      "aggregation": {
-        "type": "per-100k",
-        "denominatorTime": "2025"
-      },
-      "reason": "天候5＝雪・みぞれ・ひょう（定義: https://www.npa.go.jp/publications/statistics/koutsuu/opendata/2025/codebook_2025.xlsx）で、原本287023件と2集計の総数が一致し、沖縄2709件の天候1〜4に対し5は0件なので47000のみ明示ゼロとする。分母は最寄りの2025年総人口（分子2025年との差0年、47地域の分母欠落0）で47県0〜26.907267件/10万人（選択393行・3495事故）を検算しplannedにする。",
-      "decidedAt": "2026-11-15",
-      "decidedBy": "codex / offline normalized tables, published observations and definition documents reassessment",
-      "denominator": "total-population",
-      "verification": {
-        "tableSha256": "9de6f73a80843601847f588db2dcd9d5a5cac2bce86a35275bccab617974c8e2",
-        "rowCount": 393,
-        "areaCount": 47,
-        "min": 0,
-        "max": 26.907266675199057,
-        "denominatorTime": "2025",
-        "denominatorSha256": "c2b7682fd0fd7f511d468ebe6a5a1e8e82fcf22101676ad84618cb101e4ad521"
-      },
-      "metricKey": "snow-weather-traffic-accidents-per-100k"
     },
     {
       "datasetId": "fdma-heatstroke-emergency-transports",

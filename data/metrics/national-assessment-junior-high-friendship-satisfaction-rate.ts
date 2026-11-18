@@ -63,5 +63,5 @@ export const nationalAssessmentJuniorHighFriendshipSatisfactionRate: MetricConfi
     "isCalculated": false
   },
   "surveyId": "academic-achievement-survey",
-  "isActive": false
+  "isActive": true
 };

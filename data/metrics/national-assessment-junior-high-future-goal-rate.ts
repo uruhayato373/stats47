@@ -63,5 +63,5 @@ export const nationalAssessmentJuniorHighFutureGoalRate: MetricConfig = {
     "isCalculated": false
   },
   "surveyId": "academic-achievement-survey",
-  "isActive": false
+  "isActive": true
 };
