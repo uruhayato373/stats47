@@ -14,7 +14,7 @@ import {
 } from "./normalize-title";
 
 /** 問いかけの述語。指標の量的性質で決まる。 */
-export type HookAdjective = "長い" | "多い" | "高い" | "広い";
+export type HookAdjective = "長い" | "多い" | "高い" | "広い" | "重い";
 
 export interface RankingHookInput {
   readonly title: string;
@@ -123,6 +123,9 @@ const TITLE_SUFFIX_ADJECTIVES: ReadonlyArray<readonly [string, HookAdjective]> =
   ["距離", "長い"],
   // ── 広い ──
   ["面積", "広い"],
+  // ── 高い・重い ── (体の大きさ。「平均身長が最も多い」になっていた。2026-11-19)
+  ["身長", "高い"],
+  ["体重", "重い"],
   // ── 高い ── (率・指数・水準の類)
   ["倍率", "高い"],
   ["比率", "高い"],
@@ -179,6 +182,7 @@ const ADJECTIVE_DIMENSIONS: Readonly<Record<HookAdjective, "extent" | "magnitude
   広い: "extent",
   多い: "magnitude",
   高い: "magnitude",
+  重い: "magnitude",
 };
 
 /** 2 つの述語が「次元をまたぐ食い違い」か。同次元の揺れは false。 */

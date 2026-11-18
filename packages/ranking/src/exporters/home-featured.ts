@@ -43,6 +43,9 @@ export function deriveFeaturedTop(
   return deriveFeaturedTopList(values, 1)[0] ?? null;
 }
 
+/** 注目のランキングのカードに並べる上位の件数 (同率 1 位が 2 県でも 3 位まで見える) */
+export const FEATURED_CARD_TOP_COUNT = 3;
+
 /**
  * 上位 N 件を rank 昇順で導出する (ブログ本文のランキングカードが上位3県に使う)。
  * 除外・並び・整形の規則は deriveFeaturedTop と同一。
@@ -110,6 +113,7 @@ export function bakeHomeFeaturedItem(input: {
 }): FeaturedRankingItem {
   const { item, definition, values } = input;
   const featuredTop = deriveFeaturedTop(values);
+  const featuredTopList = deriveFeaturedTopList(values, FEATURED_CARD_TOP_COUNT);
 
   let tileMapSvg: string | null = null;
   try {
@@ -127,6 +131,7 @@ export function bakeHomeFeaturedItem(input: {
   return {
     ...item,
     featuredTop,
+    featuredTopList,
     tileMapSvg,
     homeFeatured: {
       order: definition.order,

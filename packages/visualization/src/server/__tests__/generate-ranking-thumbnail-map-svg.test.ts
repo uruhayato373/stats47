@@ -122,7 +122,7 @@ describe('generateRankingThumbnailMapSvg', () => {
     expect(second).toBe(first);
   });
 
-  it('1位リングと配色は順位に追従し、reversed で逆転する', () => {
+  it('配色は順位に追従し、reversed で逆転する。1 位を線で囲まない', () => {
     // 沖縄(47)は地図から除外されるため、両端が本土に来る01-46で検証する。
     const mainlandRows = rows
       .filter((row) => row.areaCode !== '47000')
@@ -139,13 +139,12 @@ describe('generateRankingThumbnailMapSvg', () => {
       colorScheme: 'interpolateGreens',
     });
 
-    // 1位だけが強調リングを持つ。
-    expect(ascending.match(/stroke="#f59e0b"/g)).toHaveLength(1);
-    expect(reversed.match(/stroke="#f59e0b"/g)).toHaveLength(1);
-    // reversed は最下位が1位になるため、リングの付く path が入れ替わる。
-    const ringIndex = (svg: string) =>
-      svg.split('<path ').findIndex((part) => part.includes('#f59e0b'));
-    expect(ringIndex(reversed)).not.toBe(ringIndex(ascending));
+    // 1 位の県を線で囲まない (全県が同じ白の線)。
+    expect(ascending).not.toContain('#f59e0b');
+    expect(reversed).not.toContain('#f59e0b');
+    // reversed は配色が逆転する (同じ path の fill が入れ替わる)。
+    const fills = (svg: string) => [...svg.matchAll(/fill="([^"]+)"/g)].map((m) => m[1]);
+    expect(fills(reversed)).not.toEqual(fills(ascending));
     // colorScheme は fill だけを変え、地理形状は共有する。
     expect(greens).not.toBe(ascending);
     expect(greens.match(/<path /g)).toHaveLength(46);

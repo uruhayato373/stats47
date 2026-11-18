@@ -8,6 +8,7 @@ export interface HomeFeaturedSnapshotFields {
     hook: string;
   } | null;
   featuredTop?: FeaturedValue | null;
+  featuredTopList?: FeaturedValue[] | null;
   tileMapSvg?: string | null;
 }
 
@@ -18,18 +19,27 @@ export interface FeaturedRankingCardDefinition {
 export interface FeaturedRankingCardFields {
   definition?: FeaturedRankingCardDefinition | null;
   featuredTop?: FeaturedValue | null;
+  /** 上位 3 件。無い (旧 snapshot) ときは featuredTop の 1 件だけを出す */
+  featuredTopList?: FeaturedValue[] | null;
   tileMapSvg?: string | null;
+}
+
+export interface FeaturedRankingCardTop {
+  rank?: number;
+  areaName: string;
+  value: string;
 }
 
 /** home / category / survey が共用する唯一のカードmodel。 */
 export interface FeaturedRankingCardModel {
   hook: string;
-  top: {
-    rank?: number;
-    areaName: string;
-    value: string;
-  };
+  /** 上位 (最大 3 件、rank 昇順。同率は同じ rank) */
+  tops: FeaturedRankingCardTop[];
   mapSvg: string;
+}
+
+function isShownTop(top: FeaturedValue | null | undefined): top is FeaturedValue & { value: string } {
+  return top != null && top.areaName.trim().length > 0 && top.value !== null;
 }
 
 const FEATURED_CARD_DEFINITION_BY_KEY = new Map(
@@ -54,24 +64,14 @@ export function resolveFeaturedRankingCardModel(
   item: FeaturedRankingCardFields,
   fallbackHook: string,
 ): FeaturedRankingCardModel | null {
-  const top = item.featuredTop ?? null;
   const mapSvg = item.tileMapSvg ?? null;
-  if (
-    top === null ||
-    top.areaName.trim().length === 0 ||
-    top.value === null ||
-    !mapSvg
-  ) {
-    return null;
-  }
+  const list = (item.featuredTopList ?? []).filter(isShownTop);
+  const tops = list.length > 0 ? list : [item.featuredTop].filter(isShownTop);
+  if (tops.length === 0 || !mapSvg) return null;
 
   return {
     hook: item.definition?.hook ?? fallbackHook,
-    top: {
-      rank: top.rank,
-      areaName: top.areaName,
-      value: top.value,
-    },
+    tops: tops.map(({ rank, areaName, value }) => ({ rank, areaName, value })),
     mapSvg,
   };
 }

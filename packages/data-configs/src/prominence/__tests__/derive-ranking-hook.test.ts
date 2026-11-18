@@ -66,6 +66,12 @@ describe("adjectiveFromTitle", () => {
     expect(adjectiveFromTitle("耕地放棄面積")).toBe("広い");
   });
 
+  it("身長は「高い」、体重は「重い」(単位 cm・kg で「多い」に落ちない)", () => {
+    expect(adjectiveFromTitle("平均身長")).toBe("高い");
+    expect(adjectiveFromTitle("平均体重")).toBe("重い");
+    expect(deriveRankingHook({ title: "平均身長", unit: "cm" })).toBe("平均身長が最も高い県は？");
+  });
+
   it("「時間数」が末尾の「数」に食われない", () => {
     // 実データ回帰: 月間平均実労働時間数 が「最も多い」になっていた
     expect(adjectiveFromTitle("月間平均実労働時間数")).toBe("長い");

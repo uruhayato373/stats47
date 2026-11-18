@@ -240,6 +240,8 @@ export interface FeaturedValue {
 export interface FeaturedRankingItem extends RankingItem {
   /** ビルド時に焼き込む「1 位」表示 (都道府県名 + ロケール整形済み値文字列)。null = 値なし */
   featuredTop?: FeaturedValue | null;
+  /** ビルド時に焼き込む上位 3 件 (同率は同じ順位で並ぶ)。旧 snapshot には無い */
+  featuredTopList?: FeaturedValue[] | null;
   /** ビルド時に焼き込む都道府県地図 SVG 文字列 */
   tileMapSvg?: string | null;
   /** ホーム専用編集設定 (git TS HOME_FEATURED_RANKINGS 由来) */

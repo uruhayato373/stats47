@@ -74,9 +74,9 @@ describe('PortalBlogCard', () => {
     const image = container.querySelector('img');
 
     expect(link).toHaveAttribute('href', '/blog/population-change');
-    // カード全体は固定比率を持たず、画像だけを aspect-video の枠に置く (狭い幅で画像が帯にならない)
+    // カード全体は固定比率を持たず、画像だけをサムネイルと同じ 40:21 の枠に置く (狭い幅で画像が帯にならない)
     expect(link.className).not.toMatch(/aspect-/);
-    expect(image?.parentElement).toHaveClass('aspect-video');
+    expect(image?.parentElement).toHaveClass('aspect-40/21');
     expect(image).toHaveAttribute(
       'src',
       'https://storage.stats47.jp/app/blog/population-change/thumbnail-light.webp?v=20260822-v3'

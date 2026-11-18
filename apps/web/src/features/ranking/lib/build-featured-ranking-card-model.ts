@@ -11,6 +11,8 @@ import { resolveRankingHook } from "@stats47/data-configs/prominence";
 import { RANKING_PROMINENCE_CATEGORIES } from "@stats47/data-configs/ranking-prominence";
 import {
   deriveFeaturedTop,
+  deriveFeaturedTopList,
+  FEATURED_CARD_TOP_COUNT,
   type HomeFeaturedValueRow,
 } from "@stats47/ranking";
 import { generateRankingThumbnailMapSvg } from "@stats47/visualization/server";
@@ -107,6 +109,7 @@ export function buildFeaturedRankingCardModel({
         ? { hook }
         : (getFeaturedRankingCardDefinition(rankingKey) ?? representativeDefinition),
       featuredTop: deriveFeaturedTop(topValues),
+      featuredTopList: deriveFeaturedTopList(topValues, FEATURED_CARD_TOP_COUNT),
       tileMapSvg,
     },
     title

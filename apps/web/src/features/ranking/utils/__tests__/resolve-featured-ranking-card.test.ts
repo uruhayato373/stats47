@@ -45,9 +45,29 @@ describe("resolveFeaturedRankingCardModel", () => {
       ),
     ).toEqual({
       hook: "人口が最も多い県は？",
-      top: TOP,
+      tops: [TOP],
       mapSvg: GEOGRAPHIC_SVG,
     });
+  });
+
+  it("上位 3 件があればそれを使い、旧 snapshot (1 位だけ) では 1 件に戻す", () => {
+    const list = [
+      { rank: 1, areaName: "新潟県", value: "171.0" },
+      { rank: 1, areaName: "福井県", value: "171.0" },
+      { rank: 3, areaName: "青森県", value: "170.9" },
+    ];
+    expect(
+      resolveFeaturedRankingCardModel(
+        { featuredTop: list[0], featuredTopList: list, tileMapSvg: GEOGRAPHIC_SVG },
+        "平均身長",
+      )?.tops,
+    ).toEqual(list);
+    expect(
+      resolveFeaturedRankingCardModel(
+        { featuredTop: TOP, featuredTopList: null, tileMapSvg: GEOGRAPHIC_SVG },
+        "人口",
+      )?.tops,
+    ).toEqual([TOP]);
   });
 
   it("未登録rankingは正式titleをhookに使う", () => {

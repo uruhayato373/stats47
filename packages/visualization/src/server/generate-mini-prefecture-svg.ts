@@ -52,7 +52,6 @@ export const MINI_PREFECTURE_MAP_FORMAT = 'compact-v1';
 const T_MIN = 0.18;
 const T_MAX = 0.95;
 const NO_DATA_COLOR = '#e5e7eb';
-const TOP_RING_COLOR = '#f59e0b';
 const OVERVIEW_REGION_OPACITY = [
   0.24, 0.3, 0.38, 0.46, 0.54, 0.42, 0.34, 0.5, 0.58,
 ] as const;
@@ -266,7 +265,7 @@ let miniMainlandGeometryCache: MiniMainlandShape[] | null = null;
  * mini thumbnail の本土形状を1回だけ投影・簡略化して保持する。
  *
  * projection と地理形状は引数 (順位・配色) に依存しないため、カードごとに
- * 再投影・再文字列化する必要がない。順位由来の fill と1位リングは呼び出しごとに
+ * 再投影・再文字列化する必要がない。順位由来の fill は呼び出しごとに
  * 計算するので、色を含む完成SVGはここで cache しない。
  */
 function readMiniMainlandGeometry(): MiniMainlandShape[] {
@@ -426,8 +425,8 @@ export function generateMiniPrefectureSvg(
       rank === undefined
         ? NO_DATA_COLOR
         : interpolator(T_MIN + rankT * (T_MAX - T_MIN));
-    const isTop = rank === 1;
-    return `<path d="${path}" fill="${fill}" stroke="${isTop ? TOP_RING_COLOR : '#fff'}" stroke-width="${isTop ? 2.2 : 0.75}" stroke-linejoin="round"/>`;
+    // 1 位の県を線で囲まない。凡例が無く意味が伝わらず、同率 1 位で 2 県に付くと誤読される (2026-11-19 オーナー判断)
+    return `<path d="${path}" fill="${fill}" stroke="#fff" stroke-width="0.75" stroke-linejoin="round"/>`;
   });
 
   return [

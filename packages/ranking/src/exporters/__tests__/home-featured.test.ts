@@ -106,7 +106,7 @@ describe("bakeHomeFeaturedItem", () => {
     row(2, "大阪府", 50, "27000"),
   ];
 
-  it("1位・地図・hookだけを焼き込む", () => {
+  it("1位・上位 3 件・地図・hookだけを焼き込む", () => {
     const baked = bakeHomeFeaturedItem({
       item: itemFixture(),
       definition: DEFINITION,
@@ -114,6 +114,7 @@ describe("bakeHomeFeaturedItem", () => {
       generateSvg: () => "<svg>ok</svg>",
     });
     expect(baked.featuredTop?.value).toBe("100");
+    expect(baked.featuredTopList?.map((top) => top.areaName)).toEqual(["東京都", "大阪府"]);
     expect(baked.tileMapSvg).toBe("<svg>ok</svg>");
     expect(baked.homeFeatured).toEqual({
       order: 1,

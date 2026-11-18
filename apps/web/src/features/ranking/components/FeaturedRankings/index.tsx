@@ -1,6 +1,6 @@
 
 import { HOME_FEATURED_PROMINENCE } from "@stats47/data-configs/ranking-prominence";
-import { buildRankingDisplayInfo, deriveFeaturedTop } from "@stats47/ranking";
+import { buildRankingDisplayInfo, deriveFeaturedTop, deriveFeaturedTopList, FEATURED_CARD_TOP_COUNT } from "@stats47/ranking";
 import { readRankingValuesFromR2 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 import { generateRankingThumbnailMapSvg } from "@stats47/visualization/server";
@@ -80,6 +80,7 @@ export async function FeaturedRankings({
                   ? { order: devDef.order, hook: devDef.hook }
                   : item.homeFeatured ?? null),
               featuredTop: item.featuredTop ?? null,
+              featuredTopList: item.featuredTopList ?? null,
               tileMapSvg,
             },
           ];
@@ -115,6 +116,8 @@ export async function FeaturedRankings({
           // 旧snapshotのin-memory補完。R2へは書かない。
           fields.featuredTop =
             fields.featuredTop ?? deriveFeaturedTop(valuesResult.data);
+          fields.featuredTopList =
+            fields.featuredTopList ?? deriveFeaturedTopList(valuesResult.data, FEATURED_CARD_TOP_COUNT);
           if (tileMapSvg == null) {
             tileMapSvg = generateRankingThumbnailMapSvg(
               valuesResult.data.flatMap((v) => v.value !== null ? [{ areaCode: v.areaCode, value: v.value, rank: v.rank ?? undefined }] : []),
@@ -132,6 +135,7 @@ export async function FeaturedRankings({
           {
             definition: fields.homeFeatured,
             featuredTop: fields.featuredTop,
+            featuredTopList: fields.featuredTopList,
             tileMapSvg: fields.tileMapSvg,
           },
           displayInfo.title,

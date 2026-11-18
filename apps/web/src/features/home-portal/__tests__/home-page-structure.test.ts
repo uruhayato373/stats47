@@ -163,7 +163,7 @@ describe('home page structure (portal)', () => {
     // カード全体の固定比率は 390px で地図・値を潰し、ブログ画像を帯にした (2026-10-28 に撤去)
     expect(SURFACE_CARD).not.toContain('aspect-[1.47/1]');
     expect(SURFACE_CARD).toContain(
-      'export const PORTAL_CARD_ASPECT_CLASS = "aspect-video"'
+      'export const PORTAL_CARD_ASPECT_CLASS = "aspect-40/21"'
     );
     expect(SURFACE_CARD).toContain('in-data-[carousel=cells]:border-0');
     expect(CARD_CAROUSEL).toContain("data-carousel={framed ? 'cells' : 'cards'}");

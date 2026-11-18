@@ -500,7 +500,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "title": "平均身長",
         "readerLabel": "平均身長",
         "subtitle": "高校2年・男子",
-        "hook": "平均身長が最も多い県は？"
+        "hook": "平均身長が最も高い県は？"
       },
       {
         "rankingKey": "elementary-school-children-count",
@@ -793,7 +793,7 @@ export const HOME_FEATURED_PROMINENCE: ReadonlyArray<HomeFeaturedProminence> =
     "title": "平均身長",
     "readerLabel": "平均身長",
     "subtitle": "高校2年・男子",
-    "hook": "平均身長が最も多い県は？",
+    "hook": "平均身長が最も高い県は？",
     "categoryKey": "educationsports",
     "order": 1
   },
