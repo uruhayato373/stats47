@@ -15,8 +15,8 @@
  * 更新タイミング: ranking item 追加/有効化 + CI generate-ranking-items 実行後。
  *                 必ず git commit してからデプロイ。
  *
- * 最終生成日: 2026-11-17
- * 件数: 2611
+ * 最終生成日: 2026-11-18
+ * 件数: 2624
  */
 export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "abandoned-cultivated-land-area",
@@ -1434,11 +1434,20 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "music-lesson-consumption-expenditure",
   "musical-instrument-consumption-expenditure",
   "national-assessment-elementary-breakfast-rate",
+  "national-assessment-elementary-friendship-satisfaction-rate",
+  "national-assessment-elementary-future-goal-rate",
+  "national-assessment-elementary-japanese-correct-rate",
   "national-assessment-elementary-mathematics-correct-rate",
   "national-assessment-elementary-reading-like-rate",
+  "national-assessment-elementary-school-enjoyment-rate",
+  "national-assessment-elementary-self-esteem-rate",
   "national-assessment-elementary-study-1h-plus-rate",
   "national-assessment-elementary-tutoring-rate",
+  "national-assessment-junior-high-friendship-satisfaction-rate",
+  "national-assessment-junior-high-future-goal-rate",
+  "national-assessment-junior-high-japanese-correct-rate",
   "national-assessment-junior-high-mathematics-correct-rate",
+  "national-assessment-junior-high-school-enjoyment-rate",
   "national-assessment-junior-high-self-esteem-rate",
   "national-health-insurance-benefits",
   "national-health-insurance-enrollees-per-1000",
@@ -2066,12 +2075,15 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "road-bridge-expenses-prefecture",
   "road-expressway-length",
   "road-general-prefectural-length",
+  "road-heavy-vehicle-share",
   "road-length-per-km2",
   "road-municipal-length",
   "road-national-route-length",
+  "road-peak-travel-speed",
   "road-prefectural-route-length",
   "road-total-length",
   "road-total-length-with-expressway",
+  "road-traffic-congestion",
   "road-traffic-law-violation-arrest-count-per-population",
   "road-tunnel-condition-iii-count",
   "road-tunnel-condition-iv-count",
@@ -2217,6 +2229,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "smoke-emission-facility-count",
   "smoking-rate-male-age-adjusted",
   "snack-consumption-expenditure",
+  "snow-weather-traffic-accidents-per-100k",
   "soap-cosmetics-group-consumption-expenditure",
   "soba-udon-dining-consumption-expenditure",
   "social-education-expenses-prefecture",

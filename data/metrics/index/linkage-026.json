@@ -2565,7 +2565,7 @@
     },
     {
       "metricKey": "road-heavy-vehicle-share",
-      "pageId": null,
+      "pageId": "ranking:road-heavy-vehicle-share",
       "title": "一般道路の12時間大型車混入率",
       "sources": [],
       "recipe": {
@@ -2733,7 +2733,7 @@
     },
     {
       "metricKey": "road-peak-travel-speed",
-      "pageId": null,
+      "pageId": "ranking:road-peak-travel-speed",
       "title": "一般道路の混雑時旅行速度",
       "sources": [],
       "recipe": {
@@ -2888,7 +2888,7 @@
     },
     {
       "metricKey": "road-traffic-congestion",
-      "pageId": null,
+      "pageId": "ranking:road-traffic-congestion",
       "title": "一般道路の混雑度",
       "sources": [],
       "recipe": {

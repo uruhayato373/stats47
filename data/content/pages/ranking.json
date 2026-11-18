@@ -13879,7 +13879,7 @@
       "key": "national-assessment-elementary-friendship-satisfaction-rate",
       "title": "友達関係に満足する小学生の割合",
       "href": "/ranking/national-assessment-elementary-friendship-satisfaction-rate",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:national-assessment-elementary-future-goal-rate",
@@ -13887,7 +13887,7 @@
       "key": "national-assessment-elementary-future-goal-rate",
       "title": "将来の夢や目標を持つ小学生の割合",
       "href": "/ranking/national-assessment-elementary-future-goal-rate",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:national-assessment-elementary-japanese-correct-rate",
@@ -13895,7 +13895,7 @@
       "key": "national-assessment-elementary-japanese-correct-rate",
       "title": "小学生の国語平均正答率",
       "href": "/ranking/national-assessment-elementary-japanese-correct-rate",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:national-assessment-elementary-mathematics-correct-rate",
@@ -13919,7 +13919,7 @@
       "key": "national-assessment-elementary-school-enjoyment-rate",
       "title": "学校に行くのが楽しいと思う小学生の割合",
       "href": "/ranking/national-assessment-elementary-school-enjoyment-rate",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:national-assessment-elementary-self-esteem-rate",
@@ -13927,7 +13927,7 @@
       "key": "national-assessment-elementary-self-esteem-rate",
       "title": "自分によいところがあると思う小学生の割合",
       "href": "/ranking/national-assessment-elementary-self-esteem-rate",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:national-assessment-elementary-study-1h-plus-rate",
@@ -13951,7 +13951,7 @@
       "key": "national-assessment-junior-high-friendship-satisfaction-rate",
       "title": "友達関係に満足する中学生の割合",
       "href": "/ranking/national-assessment-junior-high-friendship-satisfaction-rate",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:national-assessment-junior-high-future-goal-rate",
@@ -13959,7 +13959,7 @@
       "key": "national-assessment-junior-high-future-goal-rate",
       "title": "将来の夢や目標を持つ中学生の割合",
       "href": "/ranking/national-assessment-junior-high-future-goal-rate",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:national-assessment-junior-high-japanese-correct-rate",
@@ -13967,7 +13967,7 @@
       "key": "national-assessment-junior-high-japanese-correct-rate",
       "title": "中学生の国語平均正答率",
       "href": "/ranking/national-assessment-junior-high-japanese-correct-rate",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:national-assessment-junior-high-mathematics-correct-rate",
@@ -13983,7 +13983,7 @@
       "key": "national-assessment-junior-high-school-enjoyment-rate",
       "title": "学校に行くのが楽しいと思う中学生の割合",
       "href": "/ranking/national-assessment-junior-high-school-enjoyment-rate",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:national-assessment-junior-high-self-esteem-rate",
@@ -21047,7 +21047,7 @@
       "key": "road-heavy-vehicle-share",
       "title": "一般道路の12時間大型車混入率",
       "href": "/ranking/road-heavy-vehicle-share",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:road-length-per-km2",
@@ -21079,7 +21079,7 @@
       "key": "road-peak-travel-speed",
       "title": "一般道路の混雑時旅行速度",
       "href": "/ranking/road-peak-travel-speed",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:road-prefectural-route-length",
@@ -21111,7 +21111,7 @@
       "key": "road-traffic-congestion",
       "title": "一般道路の混雑度",
       "href": "/ranking/road-traffic-congestion",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:road-traffic-law-violation-arrest-count-per-population",
@@ -22463,7 +22463,7 @@
       "key": "snow-weather-traffic-accidents-per-100k",
       "title": "降雪時（雪・みぞれ・ひょう）の交通事故発生件数",
       "href": "/ranking/snow-weather-traffic-accidents-per-100k",
-      "published": false
+      "published": true
     },
     {
       "id": "ranking:soap-cosmetics-group-consumption-expenditure",

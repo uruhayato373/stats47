@@ -4046,7 +4046,7 @@
     },
     {
       "metricKey": "national-assessment-elementary-friendship-satisfaction-rate",
-      "pageId": null,
+      "pageId": "ranking:national-assessment-elementary-friendship-satisfaction-rate",
       "title": "友達関係に満足する小学生の割合",
       "sources": [],
       "recipe": {
@@ -4070,7 +4070,7 @@
     },
     {
       "metricKey": "national-assessment-elementary-future-goal-rate",
-      "pageId": null,
+      "pageId": "ranking:national-assessment-elementary-future-goal-rate",
       "title": "将来の夢や目標を持つ小学生の割合",
       "sources": [],
       "recipe": {
@@ -4094,7 +4094,7 @@
     },
     {
       "metricKey": "national-assessment-elementary-japanese-correct-rate",
-      "pageId": null,
+      "pageId": "ranking:national-assessment-elementary-japanese-correct-rate",
       "title": "小学生の国語平均正答率",
       "sources": [],
       "recipe": {
@@ -4368,7 +4368,7 @@
     },
     {
       "metricKey": "national-assessment-elementary-school-enjoyment-rate",
-      "pageId": null,
+      "pageId": "ranking:national-assessment-elementary-school-enjoyment-rate",
       "title": "学校に行くのが楽しいと思う小学生の割合",
       "sources": [],
       "recipe": {
@@ -4392,7 +4392,7 @@
     },
     {
       "metricKey": "national-assessment-elementary-self-esteem-rate",
-      "pageId": null,
+      "pageId": "ranking:national-assessment-elementary-self-esteem-rate",
       "title": "自分によいところがあると思う小学生の割合",
       "sources": [],
       "recipe": {
@@ -4864,7 +4864,7 @@
     },
     {
       "metricKey": "national-assessment-junior-high-friendship-satisfaction-rate",
-      "pageId": null,
+      "pageId": "ranking:national-assessment-junior-high-friendship-satisfaction-rate",
       "title": "友達関係に満足する中学生の割合",
       "sources": [],
       "recipe": {
@@ -4888,7 +4888,7 @@
     },
     {
       "metricKey": "national-assessment-junior-high-future-goal-rate",
-      "pageId": null,
+      "pageId": "ranking:national-assessment-junior-high-future-goal-rate",
       "title": "将来の夢や目標を持つ中学生の割合",
       "sources": [],
       "recipe": {
@@ -4912,7 +4912,7 @@
     },
     {
       "metricKey": "national-assessment-junior-high-japanese-correct-rate",
-      "pageId": null,
+      "pageId": "ranking:national-assessment-junior-high-japanese-correct-rate",
       "title": "中学生の国語平均正答率",
       "sources": [],
       "recipe": {
@@ -4964,7 +4964,7 @@
     },
     {
       "metricKey": "national-assessment-junior-high-school-enjoyment-rate",
-      "pageId": null,
+      "pageId": "ranking:national-assessment-junior-high-school-enjoyment-rate",
       "title": "学校に行くのが楽しいと思う中学生の割合",
       "sources": [],
       "recipe": {
