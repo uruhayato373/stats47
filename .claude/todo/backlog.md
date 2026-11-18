@@ -4014,32 +4014,18 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **停止条件・禁止**: 新しい本・シリーズを作らない。販売中の版の差し替えはオーナー承認と `KDP-K-S1-08-REUPLOAD-01` の手順を通す。評価済みの図・章をもう一度評価しない (sha256 で記録)。NotebookLM に入れるのは自分の本だけ (他人の本や参考文献の全文を入れない)。
 - **完了条件**: 機械の検査が全冊を毎週記録し、2 冊で 3 段の試行の結果 (指摘・トークン・直した箇所) が残り、残りの冊へ広げるかをオーナーが決めた。
 
-### [KDP-REGION-BOOKS-MAC-01] 地域データブック 7 冊 (K-S3-02〜08) の Mac でしかできない作業を済ませ、公開できる状態にする
-タグ: [収益化] [種類:制作] [実行:別環境] [検証:node .claude/scripts/kdp/kdp-listing-copy.mjs check] [起票:2026-11-14] [領域:商品]
+### [KDP-REGION-BOOKS-MAC-01] 地域データブック 7 冊 (K-S3-02〜08) を KDP で公開する
+タグ: [収益化] [種類:制作] [実行:ユーザー] [検証:node .claude/scripts/kdp/kdp-listing-copy.mjs check] [起票:2026-11-14] [領域:商品]
 
-- **背景 (2026-11-14)**: 7 冊は Windows の PC で原稿・生成・意味レビュー・紹介文 (オーナー承認・出品台帳へ apply 済み) まで済んだ (経緯は `KDP-EXPANSION-01`)。同日、同じ PC で表紙と epubcheck も済ませた。
-- **済み (2026-11-14・Windows)**: ① 6 冊 (K-S3-02〜07) の表紙を K-S3-08 と同じ県境データの地図にした (`build-cover-background.mts --clip … --map-top 0.5 --domain highlight`。人口が大きく減る地方が暗く沈むので、色の範囲を強調する県の値で決める `--domain highlight` を足した)。オーナーが見本と縮小を見て採用し、縮小確認を readable で記録。EPUB を `v2-20261114-map` で作り直し (旧版との差は cover.png と更新日時だけで本文は同一バイト)、出品台帳の行を消して `kdp-promote --mode first` で作り直し、AI 申告の画像は「なし」。紹介文の照合記録は本文同一を機械照合したうえで新しい SHA へ付け替え、実測 (`kindle-quality.json` は S3 の行だけ差し替え) 後に apply、`kdp-listing-copy check` は 20 冊すべて合格。④ epubcheck 5.1.0 (一時の Java 17 で実行) は 7 冊とも 0 fatal / 0 error / 0 warning、`verify-epub --skip-epubcheck` も 7 冊 error 0。
-- **持ち出すもの (Windows の PC → Mac。同じ置き場へ。git の管理外なので、Windows 側の `.local` を消す前に移す)**:
-  - 入稿版 EPUB 一式: `.local/kindle-books/K-S3-0{2..7}/v2-20261114-map/` と `.local/kindle-books/K-S3-08/v7-20261114-first/` (book.epub・cover.jpg・cover.png・metadata.json・READINESS.md)
-  - 表紙の背景 7 枚: `.local/r2/media/kindle-cover-assets/K-S3-0{2..8}/<revision>/background.jpg` (revision と SHA は `cover-design.ts` の `KINDLE_COVER_BACKGROUND_BY_ID`)
-  - **作り直さずに移す**: 紹介文の照合・実測・縮小確認は EPUB と表紙の SHA ごとの記録で、作り直すと SHA が変わり全部やり直しになる。移したら SHA が記録と一致することを確かめる。
-  - **Drive へ受け渡し済み (2026-11-17・Windows)**: この PC は Drive のマウントが無いので、Drive コネクタ (MCP。1 ファイル 10MB まで) で `stats47/KDP地域本受け渡し-20261114/` に上げた。中身は 1 冊 1 zip の `K-S3-0{2..8}.zip` (repo からの相対パスで EPUB 一式と背景を収録・計 42 ファイル) と `kdp-handoff-SHA256SUMS.txt`。作る前に 7 冊の EPUB (`kindle-quality.json` の `epubSha256`)・表紙 (`kdp-cover-thumbnail-checks.json`)・背景 (`cover-design.ts`) の SHA が記録と一致することを確かめた。**Mac**: 7 個を repo 直下で展開 → `shasum -a 256 -c kdp-handoff-SHA256SUMS.txt` が 42 件 OK を確かめてから ⓪・② へ進み、照合の一覧と Drive の受け渡しフォルダは消す。Mac で一致を確かめるまで Windows の `.local` と `C:\tmp\kdp-split\` は消さない。
+- **済み (2026-11-14・Windows)**: 原稿・意味レビュー・紹介文 (オーナー承認・出品台帳へ apply)、6 冊の表紙の県境の地図化と縮小確認 (readable)、EPUB の作り直し (K-S3-02〜07 は `v2-20261114-map`、K-S3-08 は `v7-20261114-first`)、epubcheck 5.1.0 で 7 冊とも 0 error / 0 warning。
+- **済み (2026-11-18・Mac)**: Drive で受け取った入稿版 42 ファイルの SHA が照合の一覧と一致し、EPUB・表紙・背景の SHA も git の記録 (`kindle-quality.json`・`kdp-cover-thumbnail-checks.json`・`cover-design.ts`) と一致。
+- **済み (2026-11-18・⓪)**: 出品台帳の 7 行に `publicationStage` を戻したうえで `npm run kindle:quality -- --write` を実行し (実測の対象は `publicationStage` のある下書きなので、戻す前に測ると 7 冊が漏れる)、`kindle-quality.json` は 7 冊の行だけを差し替えた。`kdp-listing-copy check` は 21 冊すべて合格 (b13e9a284)。
+- **済み (2026-11-18・②)**: 表紙の背景 7 枚を `push-exact-r2-assets.ts` で公開 R2 へ反映し (K-S3-02〜07 はオーナー承認 2026-11-18)、読み戻しの SHA が 7 枚とも記録と一致。`cover-design.ts` の status を published にした。
+- **済み (2026-11-18・③)**: 7 冊の入稿版を `kindle:archive --push` で暗号化保全し、`--audit --deep --record` が 7 冊とも PASS (`data/products/kindle-archives.json` の latestRevision を更新、旧版の記録は保持)。
 - **次 (実行順)**:
-  ⓪ **外したので今はリリースを止めていない。測り直したら戻して check を全冊合格にする (2026-11-17)**: `kdp-listing-copy check` が 7 冊とも「実測に指標の一覧が無い」で落ち PR #1281 の Contract Tests を止めていたため、オーナー指示「別 PC で測り直す」まで、出品台帳 `data/products/kdp/listings.json` の K-S3-02〜08 の 7 行から `publicationStage`・`publicationStageUpdatedAt`・`publicationStageEvidence` を外し、検査の対象 (`status: draft` かつ `publicationStage` あり) から一時的に外した (`status`・`kdpStatus` は draft のまま)。EPUB のある PC で `npm run kindle:quality -- --write` を実行したあと、**K-S3-02〜08 以外の行を git の版 (`git show HEAD:data/products/kindle-quality.json`) に戻し**、7 冊の行だけが変わった差分にする (その PC に無い本の行は「EPUB なし」で上書きされる)。その後、**測り直したあと、この値に戻す** (7 行へそのまま足す):
-    - K-S3-02: {"publicationStage": "prepared", "publicationStageUpdatedAt": "2026-11-14T08:21:36.422Z", "publicationStageEvidence": {"prepared": {"at": "2026-11-14T08:21:36.422Z", "mode": "first"}}}
-    - K-S3-03: {"publicationStage": "prepared", "publicationStageUpdatedAt": "2026-11-14T08:21:38.289Z", "publicationStageEvidence": {"prepared": {"at": "2026-11-14T08:21:38.289Z", "mode": "first"}}}
-    - K-S3-04: {"publicationStage": "prepared", "publicationStageUpdatedAt": "2026-11-14T08:21:40.221Z", "publicationStageEvidence": {"prepared": {"at": "2026-11-14T08:21:40.221Z", "mode": "first"}}}
-    - K-S3-05: {"publicationStage": "prepared", "publicationStageUpdatedAt": "2026-11-14T08:21:43.079Z", "publicationStageEvidence": {"prepared": {"at": "2026-11-14T08:21:43.079Z", "mode": "first"}}}
-    - K-S3-06: {"publicationStage": "prepared", "publicationStageUpdatedAt": "2026-11-14T08:21:45.028Z", "publicationStageEvidence": {"prepared": {"at": "2026-11-14T08:21:45.028Z", "mode": "first"}}}
-    - K-S3-07: {"publicationStage": "prepared", "publicationStageUpdatedAt": "2026-11-14T08:21:46.950Z", "publicationStageEvidence": {"prepared": {"at": "2026-11-14T08:21:46.950Z", "mode": "first"}}}
-    - K-S3-08: {"publicationStage": "prepared", "publicationStageUpdatedAt": "2026-11-14T04:26:40.866Z", "publicationStageEvidence": {"prepared": {"at": "2026-11-14T04:26:40.866Z", "mode": "first"}}}
-  戻したら `node .claude/scripts/kdp/kdp-listing-copy.mjs check` が 21 冊すべて合格になることを確かめてから develop へ push する。
-  ② 表紙の背景 7 枚を R2 へ反映する (`push-exact-r2-assets.ts --key media/kindle-cover-assets/<ID>/<revision>/background.jpg`)。公開 R2 から読み戻して SHA を照合し、`KINDLE_COVER_BACKGROUND_BY_ID[<ID>].status` を published にする。K-S3-08 は反映の承認済み、K-S3-02〜07 は反映の承認がまだ。
-  ③ 7 冊の入稿版を暗号化して R2 へ保全する (`npm run kindle:archive --workspace=@stats47/r2-storage -- --push`、`--audit` で確認)。鍵は Mac の R2 秘密鍵から作るので Mac で行う。
   ⑤ オーナーが Kindle Previewer で目視し、書名のフリガナ・ローマ字 (Claude の案。`kdp-reading.ts`) を確かめる。
   ⑥ 1 冊ずつオーナーの公開承認を得て出す (`kdp-weekly-publish -- --week <週> --id <ID> --owner-approved <ID> --commit`)。KDP の未公開は約 10 冊までなので、7 冊を一度に下書きにしない。
 - **完了条件**: 7 冊が KDP で販売中になり、出品台帳の `kdpStatus` が live。
-
 ### [KDP-PROMOTE-STALE-PROPOSAL-01] 出品台帳へ写す道具が、書籍の台帳とずれた古い提案を写さないようにする
 タグ: [収益化] [種類:不具合] [実行:sweep] [検証:npx vitest run packages/product-factory/tests/kindle-listing-revision.test.ts] [起票:2026-11-14] [領域:商品]
 

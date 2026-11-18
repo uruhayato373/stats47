@@ -186,9 +186,9 @@ export const KINDLE_COVER_BACKGROUND_BY_ID: Readonly<Record<string, KindleCoverB
     height: 2560,
     textBaked: { checkedText: ["47都市の食卓は似てきたのか", "家計調査で読む19年の変化", "stats47"], checkedAt: "2026-11-14" },
   },
-  // 2026-11-14 オーナー承認。実際の県境データの地図 (build-cover-background.mts --clip 122.9,132.3,24.0,34.3 --map-top 0.5)。R2 への反映は未承認
+  // 2026-11-14 オーナー承認。実際の県境データの地図 (build-cover-background.mts --clip 122.9,132.3,24.0,34.3 --map-top 0.5)。2026-11-18 に R2 へ反映し、読み戻しの SHA を照合済み
   "K-S3-02": {
-    status: "staged-unpublished",
+    status: "published",
     r2Key: "media/kindle-cover-assets/K-S3-02/23be012b08c1/background.jpg",
     sha256: "23be012b08c1daae66873c9cc678f54c54c5b5e00dc976cd8b4307b2e3492e18",
     bytes: 118519,
@@ -196,7 +196,7 @@ export const KINDLE_COVER_BACKGROUND_BY_ID: Readonly<Record<string, KindleCoverB
     height: 2560,
   },
   "K-S3-03": {
-    status: "staged-unpublished",
+    status: "published",
     r2Key: "media/kindle-cover-assets/K-S3-03/149e904241e2/background.jpg",
     sha256: "149e904241e2642017968836d2bdc0c6a962dcab18d46e769282e59db8a0be60",
     bytes: 113685,
@@ -204,7 +204,7 @@ export const KINDLE_COVER_BACKGROUND_BY_ID: Readonly<Record<string, KindleCoverB
     height: 2560,
   },
   "K-S3-04": {
-    status: "staged-unpublished",
+    status: "published",
     r2Key: "media/kindle-cover-assets/K-S3-04/59dd7157f5ae/background.jpg",
     sha256: "59dd7157f5ae7fdca8674c0b250c3a2c20d069c658d4e4ac15d6d67918b53eab",
     bytes: 160283,
@@ -212,7 +212,7 @@ export const KINDLE_COVER_BACKGROUND_BY_ID: Readonly<Record<string, KindleCoverB
     height: 2560,
   },
   "K-S3-05": {
-    status: "staged-unpublished",
+    status: "published",
     r2Key: "media/kindle-cover-assets/K-S3-05/af53b1655bfd/background.jpg",
     sha256: "af53b1655bfda83360f1258833daccfef33f791b6d76efe062a872e9bd84ad84",
     bytes: 167263,
@@ -220,7 +220,7 @@ export const KINDLE_COVER_BACKGROUND_BY_ID: Readonly<Record<string, KindleCoverB
     height: 2560,
   },
   "K-S3-06": {
-    status: "staged-unpublished",
+    status: "published",
     r2Key: "media/kindle-cover-assets/K-S3-06/d20c47925637/background.jpg",
     sha256: "d20c47925637e7de705f218777ee14973b0c5e16aadda10d75ab7e0d93d27406",
     bytes: 156508,
@@ -228,7 +228,7 @@ export const KINDLE_COVER_BACKGROUND_BY_ID: Readonly<Record<string, KindleCoverB
     height: 2560,
   },
   "K-S3-07": {
-    status: "staged-unpublished",
+    status: "published",
     r2Key: "media/kindle-cover-assets/K-S3-07/36206a960498/background.jpg",
     sha256: "36206a960498661b86bf40bbe5c58a669d18725e144b8073676883a054830d33",
     bytes: 176699,
@@ -236,7 +236,7 @@ export const KINDLE_COVER_BACKGROUND_BY_ID: Readonly<Record<string, KindleCoverB
     height: 2560,
   },
   "K-S3-08": {
-    status: "staged-unpublished",
+    status: "published",
     r2Key: "media/kindle-cover-assets/K-S3-08/93f038ffd150/background.jpg",
     sha256: "93f038ffd1505e57b1c7131714a0167ce2554ce6be97377c4c3a3204885abdf6",
     bytes: 103579,
