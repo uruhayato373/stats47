@@ -1,3 +1,4 @@
+import { PREFECTURE_AREA_CODE_RE } from '@stats47/area';
 import { z } from 'zod';
 import { assertMetricPresentation } from '@stats47/types';
 
@@ -66,7 +67,7 @@ export const MunicipalityRankingValuesSnapshotSchema = z.object({
     z.object({
       areaCode: z.string().regex(/^\d{5}$/),
       areaName: z.string().min(1),
-      prefectureCode: z.string().regex(/^\d{2}000$/),
+      prefectureCode: z.string().regex(PREFECTURE_AREA_CODE_RE),
       value: z.number().finite(),
       rank: z.number().int().positive(),
     })
@@ -136,7 +137,7 @@ export const CityDatabookSnapshotSchema = z
     schemaVersion: z.literal(1),
     areaCode: z.string().regex(/^\d{5}$/),
     areaName: z.string().min(1),
-    prefectureCode: z.string().regex(/^\d{2}000$/),
+    prefectureCode: z.string().regex(PREFECTURE_AREA_CODE_RE),
     headlineKeys: z.array(z.string().min(1)),
     previousPopulation: z
       .object({ value: z.number().finite(), yearCode: z.string().regex(/^\d{4}$/), yearName: z.string().min(1) })

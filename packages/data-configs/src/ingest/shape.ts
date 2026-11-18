@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { extractYearCode } from "@stats47/estat-api/api";
 // Compatibility: malformed time prefixes retain the previous slice result.
-import { isPrefectureAreaCode } from "@stats47/area";
+import { isPrefectureAreaCode, to2DigitPrefCode } from "@stats47/area";
 import { datasetPath } from "../../../../config/datasets.mjs";
 import type { SourceEvidence } from "../../scripts/lib/estat-table-reader.js";
 import { conversionFactor } from "../unit/unit-semantics.js";
@@ -221,7 +221,7 @@ export function shapeForCity(config: MetricConfig, values: EstatValue[], actualS
         value: applyValueScale(parseEstatValue(v.$), scale),
         unit: config.unit,
         rank: null as number | null,
-        prefectureCode: v["@area"].slice(0, 2),
+        prefectureCode: to2DigitPrefCode(v["@area"]),
       };
     })
     .sort((a, b) =>

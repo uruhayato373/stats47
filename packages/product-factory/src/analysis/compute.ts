@@ -1,6 +1,6 @@
 import type { AnalysisObservation } from './fetch-estat';
 import type { ProductThemeReference } from './theme-references';
-import { buildMunicipalityEntityPolicy, listPublishableMunicipalities } from '@stats47/area';
+import { buildMunicipalityEntityPolicy, listPublishableMunicipalities, PREFECTURE_CODE_2DIGIT_RE } from '@stats47/area';
 
 export interface ResearchReference {
   id: string; title: string; url: string; section: string; finding: string; checkedAt: string;
@@ -155,7 +155,7 @@ export function computeAnalyses(plan: AnalysisRevision, rows: AnalysisObservatio
       throw Error(`指定地域がないか重複しています: ${recipe.id}`);
     const prefCode = recipe.within?.kind === 'prefecture' ? recipe.within.prefCode : undefined;
     if (recipe.within && (source.grain !== 'municipality' || !['nation', 'prefecture'].includes(recipe.within.kind) ||
-        (recipe.within.kind === 'prefecture' && !/^(0[1-9]|[1-3][0-9]|4[0-7])$/.test(prefCode!))))
+        (recipe.within.kind === 'prefecture' && !PREFECTURE_CODE_2DIGIT_RE.test(prefCode!))))
       throw Error('県内の市区町村を選ぶ地域指定が不正です');
     const selectedAreas = selectedCodes.filter(code => !prefCode || code.startsWith(prefCode));
     const finish = (result: AnalysisResult[]) => { assertAnalysisFigureShape(recipe, result); return result; };

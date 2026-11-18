@@ -1,4 +1,4 @@
-import { REGIONS } from "@stats47/area";
+import { REGIONS, to2DigitPrefCode } from "@stats47/area";
 
 /**
  * 交通網の変遷の表示範囲の地方区分。
@@ -30,7 +30,7 @@ export interface InfraRegion {
 
 /** 範囲の切替に並べる 9 区分 (北海道・東北・関東・中部・近畿・中国・四国・九州・沖縄) */
 export const INFRA_SCOPE_REGIONS: readonly InfraRegion[] = REGIONS.flatMap((region) => {
-  const members = region.prefectures.map((code) => code.slice(0, 2));
+  const members = region.prefectures.map((code) => to2DigitPrefCode(code));
   const splits = SPLITS[region.regionCode];
   if (!splits) return [{ code: region.regionCode, name: region.regionName, prefCodes: members }];
   const taken = new Set(splits.flatMap((split) => split.prefCodes ?? []));

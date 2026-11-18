@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 
-import { fetchPrefectures, to5DigitPrefCode } from '@stats47/area';
+import { PREFECTURE_COUNT, fetchPrefectures, to2DigitPrefCode, to5DigitPrefCode } from '@stats47/area';
 import {
   FLOOD_ARCHIVES,
   assertFloodArchiveKeys,
@@ -118,9 +118,9 @@ function assertManifestBase(
   if (
     manifest.schemaVersion !== 1 ||
     manifest.slug !== expectedSlug ||
-    manifest.quality.expectedAreas !== 47 ||
-    manifest.quality.detailAreas !== 47 ||
-    manifest.quality.conservationChecks !== 47 ||
+    manifest.quality.expectedAreas !== PREFECTURE_COUNT ||
+    manifest.quality.detailAreas !== PREFECTURE_COUNT ||
+    manifest.quality.conservationChecks !== PREFECTURE_COUNT ||
     manifest.quality.sourceRecords <= 0 ||
     manifest.quality.derivedRecords <= 0
   ) {
@@ -144,7 +144,7 @@ function auditLandPrice(): void {
   const { value: aggregate, body: aggregateBody } =
     readArtifact<GeoAnalysisSnapshot>(manifest.aggregate.key);
   assertArtifactEvidence(manifest.aggregate, aggregateBody);
-  if (aggregate.rows.length !== 47) {
+  if (aggregate.rows.length !== PREFECTURE_COUNT) {
     throw new Error(
       `population-land-price: aggregate coverage ${aggregate.rows.length}/47`
     );
@@ -156,7 +156,7 @@ function auditLandPrice(): void {
   for (const prefecture of fetchPrefectures()) {
     const key = geoAnalysisPrefKey(
       'population-land-price',
-      prefecture.prefCode.slice(0, 2)
+      to2DigitPrefCode(prefecture.prefCode)
     );
     const { value: detail, body } = readArtifact<GeoLandPricePrefDetail>(key);
     if (
@@ -215,7 +215,7 @@ function auditFlood(): void {
   const { value: aggregate, body: aggregateBody } =
     readArtifact<GeoAnalysisSnapshot>(manifest.aggregate.key);
   assertArtifactEvidence(manifest.aggregate, aggregateBody);
-  if (aggregate.rows.length !== 47) {
+  if (aggregate.rows.length !== PREFECTURE_COUNT) {
     throw new Error(
       `population-flood-risk: aggregate coverage ${aggregate.rows.length}/47`
     );
@@ -250,7 +250,7 @@ function auditFlood(): void {
   for (const prefecture of fetchPrefectures()) {
     const key = geoAnalysisPrefKey(
       'population-flood-risk',
-      prefecture.prefCode.slice(0, 2)
+      to2DigitPrefCode(prefecture.prefCode)
     );
     const { value: detail, body } = readArtifact<GeoFloodPrefDetail>(key);
     if (
@@ -319,8 +319,8 @@ function auditPublicFacility(): void {
   );
   assertArtifactEvidence(manifest.aggregate, body);
   if (
-    aggregate.rows.length !== 47 ||
-    new Set(aggregate.rows.map((row) => row.areaCode)).size !== 47 ||
+    aggregate.rows.length !== PREFECTURE_COUNT ||
+    new Set(aggregate.rows.map((row) => row.areaCode)).size !== PREFECTURE_COUNT ||
     manifest.inputs.length !== 94
   )
     throw new Error('公共施設: 47県/94入力の契約違反');
@@ -397,7 +397,7 @@ function auditPublicFacility(): void {
   let meshes = 0,
     maxDetailBytes = 0;
   for (const pref of fetchPrefectures()) {
-    const key = `${prefix}/pref/${pref.prefCode.slice(0, 2)}.json`;
+    const key = `${prefix}/pref/${to2DigitPrefCode(pref.prefCode)}.json`;
     const { value: detail, body: detailBody } =
       readArtifact<GeoPublicFacilityPrefDetail>(key);
     if (detail.areaCode !== pref.prefCode)
@@ -486,7 +486,7 @@ function auditLowElevation(): void {
   )
     throw new Error(`${slug}: itemが正準JSON(2スペース)ではない`);
   if (
-    aggregate.rows.length !== 47 ||
+    aggregate.rows.length !== PREFECTURE_COUNT ||
     aggregate.primaryMetricKey !== LOW_ELEVATION_PRIMARY_METRIC_KEY ||
     aggregate.generatedAt !== manifest.generatedAt
   )
@@ -503,7 +503,7 @@ function auditLowElevation(): void {
   let meshes = 0;
   let maxDetailBytes = 0;
   for (const pref of fetchPrefectures()) {
-    const key = geoAnalysisPrefKey(slug, pref.prefCode.slice(0, 2));
+    const key = geoAnalysisPrefKey(slug, to2DigitPrefCode(pref.prefCode));
     const { value, body } = readArtifact<unknown>(key);
     if (JSON.stringify(value) + '\n' !== body.toString('utf8'))
       throw new Error(`${key}: 正準JSON(compact)ではない`);
@@ -561,14 +561,14 @@ function main(): void {
   const { value: aggregate, body: aggregateBody } =
     readArtifact<GeoAnalysisSnapshot>(manifest.aggregate.key);
   assertArtifactEvidence(manifest.aggregate, aggregateBody);
-  if (aggregate.rows.length !== 47) {
+  if (aggregate.rows.length !== PREFECTURE_COUNT) {
     throw new Error(`aggregate coverage不良: ${aggregate.rows.length}/47`);
   }
 
   let maxDetailBytes = 0;
   let accessibleMeshes = 0;
   for (const prefecture of fetchPrefectures()) {
-    const prefCode2 = prefecture.prefCode.slice(0, 2);
+    const prefCode2 = to2DigitPrefCode(prefecture.prefCode);
     const key = geoStationAccessPrefKey(prefCode2);
     const { value: detail, body } =
       readArtifact<GeoStationAccessPrefDetail>(key);
@@ -602,8 +602,8 @@ function main(): void {
   }
 
   if (
-    manifest.quality.detailAreas !== 47 ||
-    manifest.quality.conservationChecks !== 47 ||
+    manifest.quality.detailAreas !== PREFECTURE_COUNT ||
+    manifest.quality.conservationChecks !== PREFECTURE_COUNT ||
     manifest.quality.maxDetailBytes !== maxDetailBytes ||
     manifest.quality.accessibleMeshes !== accessibleMeshes
   ) {

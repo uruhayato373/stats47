@@ -29,14 +29,14 @@
  * 群馬県に化ける。実際は北海道)。
  */
 
-import { fetchPrefectures } from "@stats47/area";
+import { fetchPrefectures, to2DigitPrefCode } from "@stats47/area";
 import * as topojsonClient from "topojson-client";
 
 /** 2 桁県コード → 県名 (`@stats47/area` の 5 桁 SSOT から導出) */
 export const PREF_NAME_BY_CODE: Readonly<Record<string, string>> =
   Object.freeze(
     Object.fromEntries(
-      fetchPrefectures().map((p) => [p.prefCode.slice(0, 2), p.prefName]),
+      fetchPrefectures().map((p) => [to2DigitPrefCode(p.prefCode), p.prefName]),
     ),
   );
 
@@ -125,7 +125,7 @@ export function prefCodeFromNumericCode(
   // 数値型で先頭 0 が落ちた市区町村コード (1222 → 01222) を戻す
   const padded = /^\d+$/.test(s) ? s.padStart(digits, "0") : s;
   if (padded.length !== digits) return null;
-  const code = padded.slice(0, 2);
+  const code = to2DigitPrefCode(padded);
   return PREF_NAME_BY_CODE[code] ? code : null;
 }
 
@@ -236,7 +236,7 @@ export function createPrefectureLocator(
   const polygons: IndexedPolygon[] = [];
   for (const f of fc.features) {
     const rawCode = asTrimmedString(f.properties?.[prefCodeProperty]);
-    const prefCode = rawCode ? rawCode.padStart(2, "0").slice(0, 2) : null;
+    const prefCode = rawCode ? to2DigitPrefCode(rawCode) : null;
     if (!prefCode || !PREF_NAME_BY_CODE[prefCode]) continue;
     if (!f.geometry) continue;
     const { type, coordinates } = f.geometry;

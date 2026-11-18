@@ -1,10 +1,11 @@
+import { PREFECTURE_COUNT } from "@stats47/area";
 import {
   PREFECTURE_STATISTICS_CATALOG,
   PREFECTURE_STATISTICS_RESOURCE_TYPES,
   PREFECTURE_STATISTICS_TOPIC_KEYS,
 } from "../src/prefecture-statistics-catalog";
 
-const EXPECTED_PREFECTURE_COUNT = 47;
+const EXPECTED_PREFECTURE_COUNT = PREFECTURE_COUNT;
 const OFFICIAL_DOMAIN_PATTERN =
   /(?:^|\.)(?:pref\.[a-z-]+(?:\.lg)?\.jp|metro\.tokyo\.lg\.jp|pref\.shimane-toukei\.jp)$/;
 

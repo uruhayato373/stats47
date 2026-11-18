@@ -1,3 +1,4 @@
+import { isPrefectureAreaCode, to2DigitPrefCode } from '@stats47/area';
 import { mesh1000BoundsFromCode } from './geo-analysis-core';
 import type {
   GeoAnalysisSnapshotRow,
@@ -215,7 +216,7 @@ export function summarizePublicFacilityMeshes(
       band.meshCount++;
       band.population2020 += mesh[3];
       band.population2050 += mesh[4];
-      if (!point[2].startsWith(areaCode.slice(0, 2))) band.crossPrefNearest++;
+      if (!point[2].startsWith(to2DigitPrefCode(areaCode))) band.crossPrefNearest++;
     }
   return summary;
 }
@@ -236,7 +237,7 @@ export function publicFacilityAggregateValues(
   for (const group of PUBLIC_FACILITY_GROUPS) {
     values[`${group}FacilityCount`] = detail.facilities.filter(
       (p) =>
-        p[2].startsWith(detail.areaCode.slice(0, 2)) &&
+        p[2].startsWith(to2DigitPrefCode(detail.areaCode)) &&
         publicFacilityGroup(p) === group
     ).length;
     for (const year of [2020, 2050] as const) {
@@ -300,7 +301,7 @@ export function validatePublicFacilityDetail(
   );
   ensure(
     typeof detail.areaCode === 'string' &&
-      /^(0[1-9]|[1-3][0-9]|4[0-7])000$/.test(detail.areaCode) &&
+      isPrefectureAreaCode(detail.areaCode) &&
       typeof detail.areaName === 'string' &&
       detail.areaName.length > 0,
     'detail area'

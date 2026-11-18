@@ -47,6 +47,7 @@
     "db:push": "tsx src/scripts/db-r2-sync.ts push"
   },
   "dependencies": {
+    "@stats47/area": "*",
     "@stats47/logger": "*",
     "@stats47/types": "*",
     "server-only": "^0.0.1",

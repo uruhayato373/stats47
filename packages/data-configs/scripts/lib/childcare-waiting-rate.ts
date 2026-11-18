@@ -2,6 +2,8 @@
  * 保育所等利用待機児童率 (nursery-waiting-children-rate) の純粋関数。
  * 取り込みスクリプト ingest-childcare-waiting-rate.ts が IO を担い、ここは副作用を持たない(テスト対象)。
  */
+import { to2DigitPrefCode } from "@stats47/area";
+
 
 export type SheetRows = Map<number, Map<string, string>>;
 
@@ -165,7 +167,7 @@ export function buildCityRows(
       value: waitingRate(j.waiting, j.applicants),
       unit: opts.unit,
       rank: null as number | null,
-      prefectureCode: j.code.slice(0, 2),
+      prefectureCode: to2DigitPrefCode(j.code),
     }))
     .sort((a, b) => a.areaCode.localeCompare(b.areaCode));
   const ranked = rows.filter((r) => r.value !== null && r.value > 0).sort((a, b) => (b.value as number) - (a.value as number));

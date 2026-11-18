@@ -1,3 +1,4 @@
+import { NATIONAL_OR_PREFECTURE_AREA_CODE_RE, to2DigitPrefCode } from '@stats47/area';
 export type KsjArchiveFormat = 'geojson' | 'shp' | 'gml';
 
 export type KsjOfficialArchive = {
@@ -152,7 +153,7 @@ function parseA55(source: string): KsjOfficialArchive[] {
       (row) =>
         row.data.includes('GEOJSON') &&
         row.CS === '世界測地系' &&
-        /^\d{2}000$/.test(row.citycode)
+        NATIONAL_OR_PREFECTURE_AREA_CODE_RE.test(row.citycode)
     )
     .map((row) => ({
       dataId: 'A55',
@@ -162,7 +163,7 @@ function parseA55(source: string): KsjOfficialArchive[] {
       sizeBytes: parseSize(row.filecapacity),
       format: 'geojson' as const,
       datum: 'jgd' as const,
-      scope: row.citycode.slice(0, 2),
+      scope: to2DigitPrefCode(row.citycode),
       scopeLabel: row.city,
     }))
     .sort((a, b) => a.scope.localeCompare(b.scope));

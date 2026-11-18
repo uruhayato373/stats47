@@ -11,7 +11,7 @@ import type { TopoJSONTopology } from "@stats47/types";
 import type { Feature, FeatureCollection, MultiPolygon, Polygon } from "geojson";
 import * as iconv from "iconv-lite";
 import { JSDOM } from "jsdom";
-import { NATIONAL_AREA_CODE } from "@stats47/area";
+import { NATIONAL_AREA_CODE, to2DigitPrefCode } from "@stats47/area";
 /**
  * D3.jsカラースキーム型
  * @stats47/visualization から複製（JSX依存を避けるため）
@@ -179,7 +179,7 @@ export interface ExportSvgOptions {
  * 都道府県コードから地方名を取得
  */
 function getRegionName(areaCode: string): string {
-  const code = parseInt(areaCode.substring(0, 2), 10);
+  const code = parseInt(to2DigitPrefCode(areaCode), 10);
   const regions: Record<string, number[]> = {
     Hokkaido: [1],
     Tohoku: [2, 3, 4, 5, 6, 7],

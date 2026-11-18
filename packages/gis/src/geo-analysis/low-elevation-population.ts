@@ -1,3 +1,4 @@
+import { PREFECTURE_AREA_CODES, PREFECTURE_AREA_CODE_RE, PREFECTURE_COUNT, to2DigitPrefCode } from '@stats47/area';
 import { mesh1000BoundsFromCode } from './geo-analysis-core';
 import {
   LOW_ELEVATION_G04_BASE_URL,
@@ -129,7 +130,6 @@ const timestamp = (x: unknown): x is string =>
   typeof x === 'string' &&
   /^\d{4}-\d{2}-\d{2}T/.test(x) &&
   Number.isFinite(Date.parse(x));
-const AREA_CODE = /^(0[1-9]|[1-3][0-9]|4[0-7])000$/;
 
 /** 標準3次メッシュコード(8桁)の境界 [西, 南, 東, 北]。度。範囲外・不正コードはnull。 */
 export function lowElevationMeshBounds(
@@ -216,7 +216,7 @@ export function parseGeoLowElevationPrefDetail(
     ]) ||
     value.schemaVersion !== 1 ||
     value.slug !== LOW_ELEVATION_SLUG ||
-    !AREA_CODE.test(expectedAreaCode) ||
+    !PREFECTURE_AREA_CODE_RE.test(expectedAreaCode) ||
     value.areaCode !== expectedAreaCode ||
     !timestamp(value.generatedAt) ||
     typeof value.areaName !== 'string' ||
@@ -228,7 +228,7 @@ export function parseGeoLowElevationPrefDetail(
     !record(value.summary)
   )
     return null;
-  const pref = expectedAreaCode.slice(0, 2);
+  const pref = to2DigitPrefCode(expectedAreaCode);
   const identities = new Set<string>();
   for (const row of value.meshes) {
     if (!Array.isArray(row) || row.length !== 6) return null;
@@ -480,9 +480,9 @@ export function parseGeoLowElevationManifest(
     census.metricKey !== 'total-population' ||
     census.yearCode !== '2020' ||
     !record(census.populationByArea) ||
-    Object.keys(census.populationByArea).length !== 47 ||
+    Object.keys(census.populationByArea).length !== PREFECTURE_COUNT ||
     !Object.entries(census.populationByArea).every(
-      ([code, n]) => AREA_CODE.test(code) && count(n) && n > 0
+      ([code, n]) => PREFECTURE_AREA_CODE_RE.test(code) && count(n) && n > 0
     )
   )
     return null;
@@ -553,7 +553,7 @@ export function parseGeoLowElevationManifest(
     !artifact(aggregate) ||
     !exactKeys(aggregate, ['key', 'sha256', 'bytes', 'recordCount']) ||
     aggregate.key !== `${root}/item.json` ||
-    aggregate.recordCount !== 47 ||
+    aggregate.recordCount !== PREFECTURE_COUNT ||
     value.stages.length !== STAGE_GRAPH.length
   )
     return null;
@@ -590,16 +590,16 @@ export function parseGeoLowElevationManifest(
       if (!same(stage.outputs, [aggregate])) return null;
       continue;
     }
-    if (stage.outputs.length !== 47) return null;
+    if (stage.outputs.length !== PREFECTURE_COUNT) return null;
     let records = 0;
-    for (let n = 0; n < 47; n++) {
+    for (let n = 0; n < PREFECTURE_COUNT; n++) {
       const output = stage.outputs[n];
-      const code = `${String(n + 1).padStart(2, '0')}000`;
+      const code = PREFECTURE_AREA_CODES[n];
       if (
         !artifact(output) ||
         !exactKeys(output, ['key', 'sha256', 'bytes', 'recordCount', 'areaCode']) ||
         output.areaCode !== code ||
-        output.key !== `${root}/pref/${code.slice(0, 2)}.json` ||
+        output.key !== `${root}/pref/${to2DigitPrefCode(code)}.json` ||
         Number(output.bytes) > DETAIL_MAX_BYTES
       )
         return null;
@@ -625,9 +625,9 @@ export function parseGeoLowElevationManifest(
       'maxDetailBytes',
       'nationalConservation',
     ]) ||
-    q.expectedAreas !== 47 ||
-    q.detailAreas !== 47 ||
-    q.conservationChecks !== 47 ||
+    q.expectedAreas !== PREFECTURE_COUNT ||
+    q.detailAreas !== PREFECTURE_COUNT ||
+    q.conservationChecks !== PREFECTURE_COUNT ||
     !count(q.sourceRecords) ||
     !count(q.derivedRecords) ||
     !count(q.populatedMeshes) ||

@@ -2,6 +2,7 @@
  * Run from the repository root with --source-zip <A38-20_GML.zip>.
  * Writes only the local R2 mirror; does not upload anything.
  */
+import { PREFECTURE_COUNT } from '@stats47/area';
 import { createHash } from 'node:crypto';
 import { once } from 'node:events';
 import fs from 'node:fs';
@@ -126,7 +127,7 @@ async function main() {
       );
       if (
         sourceCounts[String(level)] !== EXPECTED_COUNTS[String(level)] ||
-        counts.size !== 47
+        counts.size !== PREFECTURE_COUNT
       )
         throw Error(
           `Source conservation / prefecture coverage failed for level ${level}`

@@ -11,7 +11,7 @@
  * R2 は公開 URL (R2_PUBLIC_FETCH_URL、既定は SITE.r2PublicBaseUrl) から読むだけで書かない。
  * 県全体の行 (`<県>000`。N03 の「所属未定地」) は地域ではないので数えない。
  */
-import { buildMunicipalityEntityPolicy, resolveWardModeAreas, type WardMode } from "@stats47/area";
+import { NATIONAL_OR_PREFECTURE_AREA_CODE_RE, PREFECTURE_AREA_CODES, type WardMode, buildMunicipalityEntityPolicy, resolveWardModeAreas, to2DigitPrefCode } from "@stats47/area";
 
 import { buildMlitR2Path } from "../utils/mlit-r2-path";
 import { deriveWardModeTopology } from "../utils/ward-mode-topology";
@@ -41,7 +41,7 @@ function shapeCodes(topology: TopoJSONTopology): Set<string> {
   for (const collection of Object.values(topology.objects)) {
     for (const geometry of collection.geometries) {
       const code = String(geometry.properties?.N03_007 ?? "");
-      if (/^\d{2}000$/.test(code) || code === "" || SHAPES_WITHOUT_STATISTICS.has(code)) continue;
+      if (NATIONAL_OR_PREFECTURE_AREA_CODE_RE.test(code) || code === "" || SHAPES_WITHOUT_STATISTICS.has(code)) continue;
       codes.add(code);
     }
   }
@@ -54,8 +54,8 @@ async function main(): Promise<void> {
   const areas = Object.fromEntries(MODES.map((mode) => [mode, resolveWardModeAreas(policy, mode)]));
   const mismatches: Mismatch[] = [];
 
-  for (let n = 1; n <= 47; n++) {
-    const pref2 = String(n).padStart(2, "0");
+  for (const prefAreaCode of PREFECTURE_AREA_CODES) {
+    const pref2 = to2DigitPrefCode(prefAreaCode);
     const url = `${BASE_URL}/${buildMlitR2Path({ type: "city", prefCode: pref2, wardMode: "split" })}`;
     const response = await fetch(url);
     if (!response.ok) throw new Error(`分割版の地図を読めない: ${url} (${response.status})`);

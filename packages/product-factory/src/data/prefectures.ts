@@ -8,6 +8,7 @@ import {
   PREFECTURE_TO_REGION_MAP,
   REGIONS as AREA_REGIONS,
   to2DigitPrefCode,
+  to5DigitPrefCode,
 } from "@stats47/area";
 
 export type RegionCode =
@@ -80,13 +81,12 @@ export function toCode5(input: string | number): string {
     if (!PREFECTURE_BY_CODE5.has(s)) throw new Error(`未知の都道府県コード: ${input}`);
     return s;
   }
-  const n = Number.parseInt(s, 10);
-  const code5 = Number.isFinite(n) && n >= 1 ? `${String(n).padStart(2, "0")}000` : "";
+  const code5 = to5DigitPrefCode(s);
   if (!PREFECTURE_BY_CODE5.has(code5)) throw new Error(`都道府県コードが不正: ${input}`);
   return code5;
 }
 
 /** 任意のコード表記を 2 桁 (topojson N03_007) へ正規化する。 */
 export function toCode2(input: string | number): string {
-  return toCode5(input).slice(0, 2);
+  return to2DigitPrefCode(toCode5(input));
 }

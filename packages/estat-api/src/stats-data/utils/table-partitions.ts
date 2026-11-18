@@ -1,4 +1,5 @@
 /** Catalog-order partition contract shared by inventory, writer and future readers. */
+import { to2DigitPrefCode } from '@stats47/area';
 const REQUEST_LIMIT = 100_000;
 /** Owner decision 2026-11-14: the single default for stored rows per file. */
 export const DEFAULT_TABLE_FILE_ROW_LIMIT = 50_000;
@@ -129,7 +130,10 @@ export function packAreaRanges(codes: readonly string[], rowsPerArea: number, ro
   const sorted = [...new Set(codes)].sort();
   if (sorted.some((code) => !/^\d{5}$/.test(code))) return null;
   const prefectures = new Map<string, string[]>();
-  for (const code of sorted) prefectures.set(code.slice(0, 2), [...prefectures.get(code.slice(0, 2)) ?? [], code]);
+  for (const code of sorted) {
+    const prefCode = to2DigitPrefCode(code);
+    prefectures.set(prefCode, [...prefectures.get(prefCode) ?? [], code]);
+  }
   const ranges: AreaRange[] = [];
   let current: string[] = [];
   for (const group of prefectures.values()) {

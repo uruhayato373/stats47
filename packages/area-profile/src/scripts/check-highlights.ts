@@ -13,6 +13,7 @@
 import { mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
+import { PREFECTURE_COUNT } from "@stats47/area/area-code";
 import { KNOWN_RANKING_KEYS } from "@stats47/ranking/config";
 
 import { buildAreaDatabookSnapshots } from "../exporters/area-databook-snapshot";
@@ -74,8 +75,8 @@ async function main() {
     console.log(`→ ${snapshots.length} 県の databook.json を ${outDir} に書き出しました (R2 には書いていません)`);
   }
 
-  if (rows.length !== 47) {
-    console.error(`✗ 県数が 47 ではありません: ${rows.length}`);
+  if (rows.length !== PREFECTURE_COUNT) {
+    console.error(`✗ 県数が ${PREFECTURE_COUNT} ではありません: ${rows.length}`);
     process.exit(1);
   }
   if (result.violations.length > 0) {

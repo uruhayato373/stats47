@@ -1,3 +1,4 @@
+import { PREFECTURE_COUNT } from '@stats47/area';
 import { INFRA_NETWORKS } from "./networks";
 import type { InfraHistorySummary, InfraLengthSeries, InfraNetworkKey } from "./types";
 
@@ -23,7 +24,7 @@ export function parseInfraHistorySummary(
   const prefectures = parseSeriesMap(value.prefectures, length, codes);
   const regions = parseSeriesMap(value.regions, length, codes);
   if (!national || !unassigned || !prefectures || !regions) return null;
-  if (Object.keys(prefectures).length !== 47) return null;
+  if (Object.keys(prefectures).length !== PREFECTURE_COUNT) return null;
 
   return {
     schemaVersion: 1,

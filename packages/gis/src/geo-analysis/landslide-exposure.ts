@@ -1,3 +1,4 @@
+import { PREFECTURE_COUNT, to2DigitPrefCode, to5DigitPrefCode } from '@stats47/area';
 import { LANDSLIDE_EXPOSURE_SOURCE as S } from '../../../data-configs/src/theme-catalog/landslide-exposure-source';
 import {
   LANDSLIDE_EXPOSURE_DEFINITION as D,
@@ -176,7 +177,7 @@ export function parseGeoLandslidePrefDetail(
     !x.meshes.length
   )
     return null;
-  const pref = areaCode.slice(0, 2),
+  const pref = to2DigitPrefCode(areaCode),
     ids = new Set<string>(),
     cells: [number, number, number, number][] = [];
   for (const row of x.meshes) {
@@ -289,8 +290,8 @@ export function landslideNationalValues(
   rows: readonly GeoAnalysisSnapshotRow[]
 ): Record<string, number> {
   if (
-    rows.length !== 47 ||
-    new Set(rows.map((r) => r.areaCode)).size !== 47 ||
+    rows.length !== PREFECTURE_COUNT ||
+    new Set(rows.map((r) => r.areaCode)).size !== PREFECTURE_COUNT ||
     !S.populationSources.every((p) =>
       rows.some((r) => r.areaCode === p.areaCode)
     ) ||
@@ -343,7 +344,7 @@ export function parseGeoLandslideSnapshot(
     !timestamp(x.generatedAt) ||
     !Object.entries(D).every(([k, v]) => same(x[k], v)) ||
     !Array.isArray(x.rows) ||
-    x.rows.length !== 47 ||
+    x.rows.length !== PREFECTURE_COUNT ||
     !rec(x.summary) ||
     !rec(x.dataQuality)
   )
@@ -373,7 +374,7 @@ export function parseGeoLandslideSnapshot(
     codes.add(r.areaCode);
     ranks.add(r.rank);
     if (r.areaCode === '26000') {
-      if (Object.values(r.values).some((v) => v !== null) || r.rank !== 47)
+      if (Object.values(r.values).some((v) => v !== null) || r.rank !== PREFECTURE_COUNT)
         return null;
       continue;
     }
@@ -426,8 +427,8 @@ export function parseGeoLandslideSnapshot(
   if (
     x.summary.observationCount !== 46 ||
     x.summary.medianValue !== (values[22]! + values[23]!) / 2 ||
-    q.expectedAreas !== 47 ||
-    q.actualAreas !== 47 ||
+    q.expectedAreas !== PREFECTURE_COUNT ||
+    q.actualAreas !== PREFECTURE_COUNT ||
     !same(q.missingAreaCodes, ['26000']) ||
     !text(q.coverageNote)
   )
@@ -442,7 +443,7 @@ export function expectedLandslideInputs() {
         layerId: 'ksj-a33-landslide-polygons',
         datasetId: 'A33',
         version: '25',
-        key: `gis/mlit-ksj/A33/25/${p.areaCode.slice(0, 2)}.zip`,
+        key: `gis/mlit-ksj/A33/25/${to2DigitPrefCode(p.areaCode)}.zip`,
         sha256: p.sha256,
         bytes: p.bytes,
         geometry: 'polygon',
@@ -454,7 +455,7 @@ export function expectedLandslideInputs() {
       layerId: 'ksj-population-mesh-250m',
       datasetId: 'm250r6',
       version: '24',
-      key: `gis/mlit-ksj/m250r6/24/${p.areaCode.slice(0, 2)}.zip`,
+      key: `gis/mlit-ksj/m250r6/24/${to2DigitPrefCode(p.areaCode)}.zip`,
       sha256: p.sha256,
       bytes: p.bytes,
       geometry: 'mesh',
@@ -538,15 +539,15 @@ export function parseGeoLandslideManifest(
     x.stages.length !== LANDSLIDE_STAGES.length ||
     !artifact(x.aggregate) ||
     x.aggregate.key !== `${S.r2Root}/item.json` ||
-    x.aggregate.recordCount !== 47 ||
+    x.aggregate.recordCount !== PREFECTURE_COUNT ||
     !rec(x.quality)
   )
     return null;
   const q = x.quality;
   if (
     !Object.values(q).every(integer) ||
-    q.expectedAreas !== 47 ||
-    q.detailAreas !== 47 ||
+    q.expectedAreas !== PREFECTURE_COUNT ||
+    q.detailAreas !== PREFECTURE_COUNT ||
     q.conservationChecks !== 46 ||
     !integer(q.maxDetailBytes) ||
     q.maxDetailBytes > 5000000
@@ -592,17 +593,17 @@ export function parseGeoLandslideManifest(
         /^\d\d\.json$/.test(String(o.key).split('/').slice(-1)[0]!)
       );
     if (
-      indexes.length !== 47 ||
+      indexes.length !== PREFECTURE_COUNT ||
       !S.populationSources.every((p) =>
         indexes.some(
           (o) =>
-            o.key === `${S.r2Root}/${dir}/${p.areaCode.slice(0, 2)}.json` &&
+            o.key === `${S.r2Root}/${dir}/${to2DigitPrefCode(p.areaCode)}.json` &&
             o.areaCode === p.areaCode
         )
       )
     )
       return null;
-    if (i !== 2 && s.outputs.length !== 47) return null;
+    if (i !== 2 && s.outputs.length !== PREFECTURE_COUNT) return null;
     for (const o of s.outputs)
       if (
         Number(o.bytes) > 5000000 ||
@@ -618,7 +619,7 @@ export function parseGeoLandslideManifest(
           !S.availableAreaCodes.some(
             (c) =>
               String(o.key).startsWith(
-                `${S.r2Root}/source/${c.slice(0, 2)}-`
+                `${S.r2Root}/source/${to2DigitPrefCode(c)}-`
               ) && o.areaCode === c
           )
       )
@@ -648,7 +649,7 @@ export function assertLandslideSourcePublication(
   sourceSha: string,
   permissionSha: string
 ): void {
-  const p = S.prefectures.find((p) => p.areaCode === pref + '000');
+  const p = S.prefectures.find((p) => p.areaCode === to5DigitPrefCode(pref));
   if (
     !p ||
     p.areaCode === '26000' ||

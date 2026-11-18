@@ -2,7 +2,7 @@
 import { resolveEstatAppId, ESTAT_API, ESTAT_ENDPOINTS } from "../../estat-api/src/ingest.js";
 import { extractYearCode } from "@stats47/estat-api/api";
 // Compatibility: malformed time prefixes retain the previous slice result.
-import { isPrefectureAreaCode } from "@stats47/area";
+import { isPrefectureAreaCode, PREFECTURE_AREA_CODES, to2DigitPrefCode } from "@stats47/area";
 /**
  * 通勤フロー O-D 取り込み (DBレス・自己完結)。
  *
@@ -216,14 +216,12 @@ async function main(): Promise<void> {
   const prefNames = loadPrefNames();
   mkdirSync(OUT_DIR, { recursive: true });
   let written = 0;
-  for (let i = 1; i <= 47; i++) {
-    const code = String(i).padStart(2, "0");
-    const area = `${code}000`;
+  for (const area of PREFECTURE_AREA_CODES) {
+    const code = to2DigitPrefCode(area);
     const partners: FocusFile["partners"] = [];
-    for (let j = 1; j <= 47; j++) {
-      if (j === i) continue;
-      const pCode = String(j).padStart(2, "0");
-      const pArea = `${pCode}000`;
+    for (const pArea of PREFECTURE_AREA_CODES) {
+      if (pArea === area) continue;
+      const pCode = to2DigitPrefCode(pArea);
       const inflow = od.get(pArea)?.get(area) ?? 0; // partner常住 → focus従業
       const outflow = od.get(area)?.get(pArea) ?? 0; // focus常住 → partner従業
       if (inflow === 0 && outflow === 0) continue;
