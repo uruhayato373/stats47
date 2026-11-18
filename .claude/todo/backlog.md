@@ -111,14 +111,6 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [MUNI-RANKING-STAT-OVERFLOW-01] 市区町村ランキングの「分布の要点」で、大きい値がスマホ幅で枠の外に切れる
-
-タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-11-18] [領域:サイト]
-
-- **観測 (2026-11-18・手元の dev、幅 375px)**: `/municipalities/ranking/manufacturing-shipment-amount` の「分布の要点」(最小・中央値・最大の 3 列) で、最大値「20,527,1…」(百万円) が列の幅を越えて切れる。ページ全体の横はみ出しは無い (scrollWidth 375)。描画は `apps/web/src/app/municipalities/ranking/[rankingKey]/page.tsx` の `STAT_VALUE_CLASS` の段。桁の多い指標で起きる。
-- **次**: 単位の寄せ方の正典 (`unit-semantics-standards.md` §2.7 の `resolveMetricDisplayScale` / `formatReadableMagnitude`) で表示を短くするか、狭い幅で 3 列をやめるかを決めて直す。ほかの桁の多い市区町村ランキングでも同じかを確かめる。
-- **完了条件**: 幅 375px で、桁の多い指標の最小・中央値・最大が切れずに読める。
-
 ### [GIT-PUSH-SSH-TIMEOUT-01] 会社の Windows PC で、push の前の検査が通った後に git が exit 141 で止まり push が届かない
 タグ: [インフラ・計測] [種類:不具合] [実行:windows] [起票:2026-11-16] [領域:管理]
 
