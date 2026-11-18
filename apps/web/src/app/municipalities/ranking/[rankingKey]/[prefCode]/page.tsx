@@ -41,6 +41,7 @@ import {
   getSpecialWardCodes,
   readMunicipalityRanking,
 } from '@/features/municipalities/server';
+import { findDataProductForMunicipalityRanking, ProductItem } from '@/features/products';
 
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
@@ -139,6 +140,7 @@ export default async function MunicipalityPrefectureRankingPage({
   const unit = formatUnitForDisplay(snapshot.unit);
   const listName = buildMunicipalityListNames(ranking.rows.map((row) => row.areaName));
   const nationalHref = hrefFor('municipality-ranking', { rankingKey: item.rankingKey });
+  const dataProduct = findDataProductForMunicipalityRanking(item.rankingKey);
 
   return (
     <PageShell>
@@ -179,6 +181,13 @@ export default async function MunicipalityPrefectureRankingPage({
           </Link>
         </p>
       </section>
+
+      {dataProduct && (
+        <section aria-label="この指標のデータ集" className="mt-5 border border-border p-4">
+          <p className="text-sm text-foreground">この指標の長期の時系列と、地図に結合できる境界データを配布しています。</p>
+          <ProductItem product={dataProduct} layout="row" surface="ranking_product" placement="municipality_ranking_pref_product" />
+        </section>
+      )}
 
       <Suspense fallback={<div className="mt-5 h-72 animate-pulse bg-muted/40" aria-hidden />}>
         <MunicipalityRankingMapSection

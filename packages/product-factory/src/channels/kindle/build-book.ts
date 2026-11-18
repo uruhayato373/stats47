@@ -356,12 +356,29 @@ export async function buildBook(book: KindleBook, opts: BuildBookOptions = {}): 
           missingSlugs.push(key);
         },
       });
-      // 導入 (章見出し + リード)
+      // 導入 (章見出し + リード)。S3 地域別は、地域の県が各指標でどこにいるかの全体像を表で先に出す
+      // (2026-11-18 K-S3 レビュー: はじめに・第1章が約束した「N県×14指標を同じ表に並べる」が本書に無かった)。
+      const regionLabel = ch.highlightRegionLabel;
+      const withRegion = sections.filter((sec) => sec.regionRows && sec.regionRows.length > 0);
+      const overview = regionLabel && withRegion.length > 0
+        ? [
+            `<p>この章では、${escapeText(regionLabel)}の県を${withRegion.length}の指標ごとに全国の47都道府県と比べます。次の表は、指標ごとに${escapeText(regionLabel)}の中で値が最も大きい県と最も小さい県を、全国順位とあわせて並べたものです。値の大小は良し悪しを表しません。指標ごとの全県の値と注記は、このあとの各節にあります。</p>`,
+            mdToXhtml(
+              "| 指標（年・単位） | 地域で最も大きい県 | 地域で最も小さい県 |\n| --- | --- | --- |\n" +
+                withRegion.map((sec) => {
+                  const rows = [...sec.regionRows!].sort((a, b) => a.rank - b.rank);
+                  const hi = rows[0], lo = rows[rows.length - 1];
+                  const cell = (r: typeof hi) => `${r.areaName} ${r.value.toLocaleString("ja-JP", { maximumFractionDigits: 20 })}（全国${r.rank}位）`;
+                  return `| ${sec.title}（${sec.source.yearLabel}・${sec.source.unit}） | ${cell(hi)} | ${cell(lo)} |`;
+                }).join("\n"),
+            ),
+          ].join("\n")
+        : `<p>${escapeText(ch.title)}に関する統計を、上位5地域・下位5地域のランキングで見ていきます。指標ごとに対象年と母集団が異なります。各章題と巻末の指標別出典を確認してください。</p>`;
       chapters.push({
         id,
         fileName,
         title: ch.title,
-        bodyXhtml: `${heading}\n<p>${escapeText(ch.title)}に関する統計を、上位5地域・下位5地域のランキングで見ていきます。指標ごとに対象年と母集団が異なります。各章題と巻末の指標別出典を確認してください。</p>`,
+        bodyXhtml: `${heading}\n${overview}`,
       });
       for (const sec of sections) {
         rankingSources.push(sec.source);
@@ -468,7 +485,7 @@ export async function buildBook(book: KindleBook, opts: BuildBookOptions = {}): 
     const entries = rankingSources
       .map(
         (s) =>
-          `<h2>${escapeText(s.title)}</h2><p>指標: ${escapeText(s.rankingKey)} / 年: ${escapeText(s.year)} / 単位: ${escapeText(s.unit)} / 値あり: ${s.observedAreas}地域 / 欠測: ${s.missingAreas}地域</p><p>一次出典メタ: ${escapeText(JSON.stringify(s.source))}</p><p>観測値: ${escapeText(s.rawUrl)}</p><p>解説: ${escapeText(s.canonicalUrl)}</p>`,
+          `<h2>${escapeText(s.title)}</h2><p>指標: ${escapeText(s.rankingKey)} / 年: ${escapeText(s.yearLabel)} / 単位: ${escapeText(s.unit)} / 値あり: ${s.observedAreas}地域 / 欠測: ${s.missingAreas}地域</p><p>出典: ${escapeText(s.sourceName)}</p><p>一次出典メタ: ${escapeText(JSON.stringify(s.source))}</p><p>観測値: ${escapeText(s.rawUrl)}</p><p>解説: ${escapeText(s.canonicalUrl)}</p>`,
       )
       .join("\n");
     chapters.push({

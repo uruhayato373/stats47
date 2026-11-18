@@ -186,7 +186,7 @@ export const KINDLE_COVER_BACKGROUND_BY_ID: Readonly<Record<string, KindleCoverB
     height: 2560,
     textBaked: { checkedText: ["47都市の食卓は似てきたのか", "家計調査で読む19年の変化", "stats47"], checkedAt: "2026-11-14" },
   },
-  // 2026-11-14 オーナー承認。実際の県境データの地図 (build-cover-background.mts --clip 122.9,132.3,24.0,34.3 --map-top 0.5)。R2 への反映は未承認
+  // 2026-11-14 オーナー承認。実際の県境データの地図 (build-cover-background.mts --clip 122.9,132.3,24.0,34.3 --map-top 0.5)。2026-11-18 に R2 へ反映済み (読み戻しの SHA 照合済み)。status は本の照合値 (authoredBookSha256) に入るので、入稿版を作り直すまで staged-unpublished のままにする
   "K-S3-02": {
     status: "staged-unpublished",
     r2Key: "media/kindle-cover-assets/K-S3-02/23be012b08c1/background.jpg",

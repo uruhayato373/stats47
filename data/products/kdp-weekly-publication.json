@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-16T12:03:07.262Z",
+  "generatedAt": "2026-11-18T10:43:37.545Z",
   "week": "2026-W47",
   "portfolio": {
     "registeredCatalogCount": 38,
@@ -8,15 +8,19 @@
     "s1Live": 13,
     "s1InReview": 1,
     "pilotLive": 0,
-    "pilotInReview": 0
+    "pilotInReview": 1
   },
   "formats": [
     {
       "id": "prefecture-guide",
       "concept": "1県1章のガイド",
       "liveBookIds": [],
-      "inReviewBookIds": [],
-      "verifiedBookIds": [],
+      "inReviewBookIds": [
+        "K-S3-02"
+      ],
+      "verifiedBookIds": [
+        "K-S3-03"
+      ],
       "measuredBookIds": [],
       "demandBookIds": [],
       "readyForJudgement": false
@@ -42,14 +46,17 @@
       "readyForJudgement": false
     }
   ],
-  "eligibleCandidateIds": [],
+  "eligibleCandidateIds": [
+    "K-S3-03"
+  ],
   "cohortMeasurement": null,
   "approvalRequired": true,
-  "status": "prepare",
-  "blockers": [
-    "検証済み (verified) の本が0冊"
-  ],
-  "nextAction": "KDP-EXPANSION-01 の順で次の本を設計・生成・全章レビュー・Previewer確認する。まだ1冊も出ていない型: 1県1章のガイド・意外な1位の県民性ストーリー・分野別の読み物",
-  "candidate": null,
-  "publishCommand": null
+  "status": "ready-for-owner-approval",
+  "blockers": [],
+  "nextAction": "検証済みの本 (K-S3-03) の書誌・表紙・価格をオーナーが確認し、1冊ずつIDを明示承認した本だけ送信する",
+  "candidate": {
+    "id": "K-S3-03",
+    "title": "関東 移住の県選びデータブック"
+  },
+  "publishCommand": "node .claude/scripts/kdp/kdp-weekly-publish.mjs --week 2026-W47 --id K-S3-03 --owner-approved K-S3-03 --commit"
 }

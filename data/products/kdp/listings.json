@@ -2170,475 +2170,6 @@
         "evidence": ".local/kdp-debug/unpublish-2026-09-19T08-38-48-032Z/results.json"
       }
     },
-    "K-S3-08": {
-      "id": "K-S3-08",
-      "title": "九州・沖縄 移住の県選びデータブック",
-      "subtitle": "物価・仕事・住まい・子育て・医療・安全を8県で比べる",
-      "author": "stats47",
-      "authorLastName": "stats47",
-      "authorFirstName": "",
-      "authorKana": "スタッツヨンジュウナナ",
-      "authorRomaji": "stats47",
-      "titleKana": "キュウシュウ オキナワ イジュウノケンエラビデータブック",
-      "titleRomaji": "Kyushu Okinawa Iju no Kenerabi Databook",
-      "subtitleKana": "ブッカ シゴト スマイ コソダテ イリョウ アンゼンヲ ハッケンデ クラベル",
-      "subtitleRomaji": "Bukka Shigoto Sumai Kosodate Iryo Anzen wo 8-ken de Kuraberu",
-      "readingSourceTitle": "九州・沖縄 移住の県選びデータブック",
-      "readingSourceSubtitle": "物価・仕事・住まい・子育て・医療・安全を8県で比べる",
-      "language": "ja",
-      "description": "転勤の辞令や移住の検討で、九州・沖縄のどこかに住むことになりそう。でも県ごとに物価や仕事の見つけやすさ、家の広さ、認定こども園や医師の数がどう違うのかは、観光の印象だけでは分かりません。8県を同じ物差しで比べたい方のための本です。\n\n【この本で分かること】\n・九州・沖縄8県の物価・収入・仕事・住まい・子育て・医療・安全を、14の指標と全国順位で比べられる\n・県ごとの章で、その県に住むと何が楽で何が大変か、どんな人に向いているかが分かる\n・家計を抑えたい・子育てを優先したい・仕事を見つけやすくしたい・家を広くしたい、の目的別に見るべき指標と8県の並びが分かる\n・年のそろわない統計や、県庁所在市の値と県全域の値の違いを取り違えずに読める\n\n【こんな方に】\n・転勤や移住で九州・沖縄の県を比べている方\n・観光の印象ではなく統計で暮らしの違いを確かめたい方\n\n【収録内容】\n図 14 点、47 都道府県の全県表 14 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
-      "keywords": [
-        "転勤",
-        "家計",
-        "家賃",
-        "持ち家",
-        "有効求人倍率",
-        "最低賃金",
-        "認定こども園"
-      ],
-      "categoryPaths": [
-        {
-          "top": "社会・政治",
-          "sub": "社会学",
-          "place": "参考図書・白書"
-        },
-        {
-          "top": "歴史・地理",
-          "sub": "地理・地域研究",
-          "place": "地域研究"
-        },
-        {
-          "top": "ビジネス・経済",
-          "sub": "参考図書・白書",
-          "place": "一般"
-        }
-      ],
-      "applyDrm": true,
-      "aiDisclosure": {
-        "used": true,
-        "text": "作品全体 (広範な編集あり)",
-        "images": "なし",
-        "translations": "なし",
-        "textTools": [
-          "Claude",
-          "Gemini"
-        ],
-        "imageTools": []
-      },
-      "priceYen": 500,
-      "royaltyPlan": 70,
-      "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S3-08/v7-20261114-first/book.epub",
-      "coverPath": ".local/kindle-books/K-S3-08/v7-20261114-first/cover.jpg",
-      "status": "draft",
-      "asin": null,
-      "publishedAt": null,
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "新刊下書き準備",
-      "kdpStatusCheckedAt": "2026-11-14T04:26:40.866Z"
-    },
-    "K-S3-02": {
-      "id": "K-S3-02",
-      "title": "東北 移住の県選びデータブック",
-      "subtitle": "物価・仕事・住まい・子育て・医療・安全を6県で比べる",
-      "author": "stats47",
-      "authorLastName": "stats47",
-      "authorFirstName": "",
-      "authorKana": "スタッツヨンジュウナナ",
-      "authorRomaji": "stats47",
-      "titleKana": "トウホク イジュウノケンエラビデータブック",
-      "titleRomaji": "Tohoku Iju no Kenerabi Databook",
-      "subtitleKana": "ブッカ シゴト スマイ コソダテ イリョウ アンゼンヲ ロッケンデ クラベル",
-      "subtitleRomaji": "Bukka Shigoto Sumai Kosodate Iryo Anzen wo 6-ken de Kuraberu",
-      "readingSourceTitle": "東北 移住の県選びデータブック",
-      "readingSourceSubtitle": "物価・仕事・住まい・子育て・医療・安全を6県で比べる",
-      "language": "ja",
-      "description": "転勤の辞令や移住の検討で、東北のどこかに住むことになりそう。でも県ごとに物価や仕事の見つけやすさ、家の広さ、認定こども園や医師の数がどう違うのかは、評判やイメージだけでは分かりません。6県を同じ物差しで比べたい方のための本です。\n\n【この本で分かること】\n・東北の6県の物価・収入・仕事・住まい・子育て・医療・安全を、14の指標と全国順位で比べられる\n・東北の県ごとの章で、その県に住むと何が楽で何に注意が要るか、どんな人に向いているかが分かる\n・家計を抑えたい・子育てを優先したい・仕事を見つけやすくしたい・家を広くしたい、の目的別に見るべき指標と6県の並びが分かる\n・青森県の認定こども園数が全国1位、秋田県の最低賃金が全国47位のように、同じ東北でも大きく違う数字を年と範囲に気をつけて読める\n\n【こんな方に】\n・転勤や移住で東北の県を比べている方\n・評判やイメージではなく統計で東北の暮らしの違いを確かめたい方\n\n【収録内容】\n図 14 点、47 都道府県の全県表 14 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
-      "keywords": [
-        "転勤",
-        "家計",
-        "地価",
-        "持ち家",
-        "有効求人倍率",
-        "最低賃金",
-        "認定こども園"
-      ],
-      "categoryPaths": [
-        {
-          "top": "社会・政治",
-          "sub": "社会学",
-          "place": "参考図書・白書"
-        },
-        {
-          "top": "歴史・地理",
-          "sub": "地理・地域研究",
-          "place": "地域研究"
-        },
-        {
-          "top": "ビジネス・経済",
-          "sub": "参考図書・白書",
-          "place": "一般"
-        }
-      ],
-      "applyDrm": true,
-      "aiDisclosure": {
-        "used": true,
-        "text": "作品全体 (広範な編集あり)",
-        "images": "なし",
-        "translations": "なし",
-        "textTools": [
-          "Claude",
-          "Gemini"
-        ],
-        "imageTools": []
-      },
-      "priceYen": 500,
-      "royaltyPlan": 70,
-      "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S3-02/v2-20261114-map/book.epub",
-      "coverPath": ".local/kindle-books/K-S3-02/v2-20261114-map/cover.jpg",
-      "status": "draft",
-      "asin": null,
-      "publishedAt": null,
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "新刊下書き準備",
-      "kdpStatusCheckedAt": "2026-11-14T08:21:36.422Z"
-    },
-    "K-S3-03": {
-      "id": "K-S3-03",
-      "title": "関東 移住の県選びデータブック",
-      "subtitle": "物価・仕事・住まい・子育て・医療・安全を1都6県で比べる",
-      "author": "stats47",
-      "authorLastName": "stats47",
-      "authorFirstName": "",
-      "authorKana": "スタッツヨンジュウナナ",
-      "authorRomaji": "stats47",
-      "titleKana": "カントウ イジュウノケンエラビデータブック",
-      "titleRomaji": "Kanto Iju no Kenerabi Databook",
-      "subtitleKana": "ブッカ シゴト スマイ コソダテ イリョウ アンゼンヲ イットロッケンデ クラベル",
-      "subtitleRomaji": "Bukka Shigoto Sumai Kosodate Iryo Anzen wo 1-to 6-ken de Kuraberu",
-      "readingSourceTitle": "関東 移住の県選びデータブック",
-      "readingSourceSubtitle": "物価・仕事・住まい・子育て・医療・安全を1都6県で比べる",
-      "language": "ja",
-      "description": "転勤の辞令や移住の検討で、関東のどこかに住むことになりそう。でも都県ごとに物価や仕事の見つけやすさ、家の広さ、認定こども園や医師の数がどう違うのかは、評判やイメージだけでは分かりません。1都6県を同じ物差しで比べたい方のための本です。\n\n【この本で分かること】\n・関東の1都6県の物価・収入・仕事・住まい・子育て・医療・安全を、14の指標と全国順位で比べられる\n・関東の都県ごとの章で、その都県に住むと何が楽で何に注意が要るか、どんな人に向いているかが分かる\n・家計を抑えたい・子育てを優先したい・仕事を見つけやすくしたい・家を広くしたい、の目的別に見るべき指標と1都6県の並びが分かる\n・年間収入は神奈川県と東京都が全国1・2位、認定こども園数は埼玉県と東京都が全国46・47位のように、1都6県の違いを年と範囲に気をつけて読める\n\n【こんな方に】\n・転勤や移住で関東の都県を比べている方\n・評判やイメージではなく統計で関東の暮らしの違いを確かめたい方\n\n【収録内容】\n図 14 点、47 都道府県の全県表 14 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
-      "keywords": [
-        "転勤",
-        "家計",
-        "地価",
-        "持ち家",
-        "有効求人倍率",
-        "最低賃金",
-        "認定こども園"
-      ],
-      "categoryPaths": [
-        {
-          "top": "社会・政治",
-          "sub": "社会学",
-          "place": "参考図書・白書"
-        },
-        {
-          "top": "歴史・地理",
-          "sub": "地理・地域研究",
-          "place": "地域研究"
-        },
-        {
-          "top": "ビジネス・経済",
-          "sub": "参考図書・白書",
-          "place": "一般"
-        }
-      ],
-      "applyDrm": true,
-      "aiDisclosure": {
-        "used": true,
-        "text": "作品全体 (広範な編集あり)",
-        "images": "なし",
-        "translations": "なし",
-        "textTools": [
-          "Claude",
-          "Gemini"
-        ],
-        "imageTools": []
-      },
-      "priceYen": 500,
-      "royaltyPlan": 70,
-      "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S3-03/v2-20261114-map/book.epub",
-      "coverPath": ".local/kindle-books/K-S3-03/v2-20261114-map/cover.jpg",
-      "status": "draft",
-      "asin": null,
-      "publishedAt": null,
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "新刊下書き準備",
-      "kdpStatusCheckedAt": "2026-11-14T08:21:38.289Z"
-    },
-    "K-S3-04": {
-      "id": "K-S3-04",
-      "title": "中部 移住の県選びデータブック",
-      "subtitle": "物価・仕事・住まい・子育て・医療・安全を9県で比べる",
-      "author": "stats47",
-      "authorLastName": "stats47",
-      "authorFirstName": "",
-      "authorKana": "スタッツヨンジュウナナ",
-      "authorRomaji": "stats47",
-      "titleKana": "チュウブ イジュウノケンエラビデータブック",
-      "titleRomaji": "Chubu Iju no Kenerabi Databook",
-      "subtitleKana": "ブッカ シゴト スマイ コソダテ イリョウ アンゼンヲ キュウケンデ クラベル",
-      "subtitleRomaji": "Bukka Shigoto Sumai Kosodate Iryo Anzen wo 9-ken de Kuraberu",
-      "readingSourceTitle": "中部 移住の県選びデータブック",
-      "readingSourceSubtitle": "物価・仕事・住まい・子育て・医療・安全を9県で比べる",
-      "language": "ja",
-      "description": "転勤の辞令や移住の検討で、中部のどこかに住むことになりそう。でも県ごとに物価や仕事の見つけやすさ、家の広さ、認定こども園や医師の数がどう違うのかは、評判やイメージだけでは分かりません。9県を同じ物差しで比べたい方のための本です。\n\n【この本で分かること】\n・中部の9県の物価・収入・仕事・住まい・子育て・医療・安全を、14の指標と全国順位で比べられる\n・中部の県ごとの章で、その県に住むと何が楽で何に注意が要るか、どんな人に向いているかが分かる\n・家計を抑えたい・子育てを優先したい・仕事を見つけやすくしたい・家を広くしたい、の目的別に見るべき指標と9県の並びが分かる\n・有効求人倍率は福井県が全国1位、認定こども園数は石川県が全国2位のように、中部9県の違いを年と範囲に気をつけて読める\n\n【こんな方に】\n・転勤や移住で中部の県を比べている方\n・評判やイメージではなく統計で中部の暮らしの違いを確かめたい方\n\n【収録内容】\n図 14 点、47 都道府県の全県表 14 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
-      "keywords": [
-        "転勤",
-        "家計",
-        "地価",
-        "持ち家",
-        "有効求人倍率",
-        "最低賃金",
-        "認定こども園"
-      ],
-      "categoryPaths": [
-        {
-          "top": "社会・政治",
-          "sub": "社会学",
-          "place": "参考図書・白書"
-        },
-        {
-          "top": "歴史・地理",
-          "sub": "地理・地域研究",
-          "place": "地域研究"
-        },
-        {
-          "top": "ビジネス・経済",
-          "sub": "参考図書・白書",
-          "place": "一般"
-        }
-      ],
-      "applyDrm": true,
-      "aiDisclosure": {
-        "used": true,
-        "text": "作品全体 (広範な編集あり)",
-        "images": "なし",
-        "translations": "なし",
-        "textTools": [
-          "Claude",
-          "Gemini"
-        ],
-        "imageTools": []
-      },
-      "priceYen": 500,
-      "royaltyPlan": 70,
-      "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S3-04/v2-20261114-map/book.epub",
-      "coverPath": ".local/kindle-books/K-S3-04/v2-20261114-map/cover.jpg",
-      "status": "draft",
-      "asin": null,
-      "publishedAt": null,
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "新刊下書き準備",
-      "kdpStatusCheckedAt": "2026-11-14T08:21:40.221Z"
-    },
-    "K-S3-05": {
-      "id": "K-S3-05",
-      "title": "近畿 移住の県選びデータブック",
-      "subtitle": "物価・仕事・住まい・子育て・医療・安全を2府5県で比べる",
-      "author": "stats47",
-      "authorLastName": "stats47",
-      "authorFirstName": "",
-      "authorKana": "スタッツヨンジュウナナ",
-      "authorRomaji": "stats47",
-      "titleKana": "キンキ イジュウノケンエラビデータブック",
-      "titleRomaji": "Kinki Iju no Kenerabi Databook",
-      "subtitleKana": "ブッカ シゴト スマイ コソダテ イリョウ アンゼンヲ ニフゴケンデ クラベル",
-      "subtitleRomaji": "Bukka Shigoto Sumai Kosodate Iryo Anzen wo 2-fu 5-ken de Kuraberu",
-      "readingSourceTitle": "近畿 移住の県選びデータブック",
-      "readingSourceSubtitle": "物価・仕事・住まい・子育て・医療・安全を2府5県で比べる",
-      "language": "ja",
-      "description": "転勤の辞令や移住の検討で、近畿のどこかに住むことになりそう。でも府県ごとに物価や仕事の見つけやすさ、家の広さ、認定こども園や医師の数がどう違うのかは、評判やイメージだけでは分かりません。2府5県を同じ物差しで比べたい方のための本です。\n\n【この本で分かること】\n・近畿の2府5県の物価・収入・仕事・住まい・子育て・医療・安全を、14の指標と全国順位で比べられる\n・近畿の府県ごとの章で、その府県に住むと何が楽で何に注意が要るか、どんな人に向いているかが分かる\n・家計を抑えたい・子育てを優先したい・仕事を見つけやすくしたい・家を広くしたい、の目的別に見るべき指標と2府5県の並びが分かる\n・大阪府の地域別最低賃金は全国3位、京都府の医師数は全国3位のように、近畿の2府5県の違いを年と範囲に気をつけて読める\n\n【こんな方に】\n・転勤や移住で近畿の府県を比べている方\n・評判やイメージではなく統計で近畿の暮らしの違いを確かめたい方\n\n【収録内容】\n図 14 点、47 都道府県の全県表 14 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
-      "keywords": [
-        "転勤",
-        "家計",
-        "地価",
-        "持ち家",
-        "有効求人倍率",
-        "最低賃金",
-        "認定こども園"
-      ],
-      "categoryPaths": [
-        {
-          "top": "社会・政治",
-          "sub": "社会学",
-          "place": "参考図書・白書"
-        },
-        {
-          "top": "歴史・地理",
-          "sub": "地理・地域研究",
-          "place": "地域研究"
-        },
-        {
-          "top": "ビジネス・経済",
-          "sub": "参考図書・白書",
-          "place": "一般"
-        }
-      ],
-      "applyDrm": true,
-      "aiDisclosure": {
-        "used": true,
-        "text": "作品全体 (広範な編集あり)",
-        "images": "なし",
-        "translations": "なし",
-        "textTools": [
-          "Claude",
-          "Gemini"
-        ],
-        "imageTools": []
-      },
-      "priceYen": 500,
-      "royaltyPlan": 70,
-      "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S3-05/v2-20261114-map/book.epub",
-      "coverPath": ".local/kindle-books/K-S3-05/v2-20261114-map/cover.jpg",
-      "status": "draft",
-      "asin": null,
-      "publishedAt": null,
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "新刊下書き準備",
-      "kdpStatusCheckedAt": "2026-11-14T08:21:43.079Z"
-    },
-    "K-S3-06": {
-      "id": "K-S3-06",
-      "title": "中国 移住の県選びデータブック",
-      "subtitle": "物価・仕事・住まい・子育て・医療・安全を5県で比べる",
-      "author": "stats47",
-      "authorLastName": "stats47",
-      "authorFirstName": "",
-      "authorKana": "スタッツヨンジュウナナ",
-      "authorRomaji": "stats47",
-      "titleKana": "チュウゴク イジュウノケンエラビデータブック",
-      "titleRomaji": "Chugoku Iju no Kenerabi Databook",
-      "subtitleKana": "ブッカ シゴト スマイ コソダテ イリョウ アンゼンヲ ゴケンデ クラベル",
-      "subtitleRomaji": "Bukka Shigoto Sumai Kosodate Iryo Anzen wo 5-ken de Kuraberu",
-      "readingSourceTitle": "中国 移住の県選びデータブック",
-      "readingSourceSubtitle": "物価・仕事・住まい・子育て・医療・安全を5県で比べる",
-      "language": "ja",
-      "description": "転勤の辞令や移住の検討で、中国のどこかに住むことになりそう。でも県ごとに物価や仕事の見つけやすさ、家の広さ、認定こども園や医師の数がどう違うのかは、評判やイメージだけでは分かりません。5県を同じ物差しで比べたい方のための本です。\n\n【この本で分かること】\n・中国の5県の物価・収入・仕事・住まい・子育て・医療・安全を、14の指標と全国順位で比べられる\n・中国の県ごとの章で、その県に住むと何が楽で何に注意が要るか、どんな人に向いているかが分かる\n・家計を抑えたい・子育てを優先したい・仕事を見つけやすくしたい・家を広くしたい、の目的別に見るべき指標と5県の並びが分かる\n・島根県の有効求人倍率は全国2位、鳥取県の災害被害額は全国1位のように、中国地方の5県の違いを年と範囲に気をつけて読める\n\n【こんな方に】\n・転勤や移住で中国の県を比べている方\n・評判やイメージではなく統計で中国の暮らしの違いを確かめたい方\n\n【収録内容】\n図 14 点、47 都道府県の全県表 14 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
-      "keywords": [
-        "転勤",
-        "家計",
-        "地価",
-        "持ち家",
-        "有効求人倍率",
-        "最低賃金",
-        "認定こども園"
-      ],
-      "categoryPaths": [
-        {
-          "top": "社会・政治",
-          "sub": "社会学",
-          "place": "参考図書・白書"
-        },
-        {
-          "top": "歴史・地理",
-          "sub": "地理・地域研究",
-          "place": "地域研究"
-        },
-        {
-          "top": "ビジネス・経済",
-          "sub": "参考図書・白書",
-          "place": "一般"
-        }
-      ],
-      "applyDrm": true,
-      "aiDisclosure": {
-        "used": true,
-        "text": "作品全体 (広範な編集あり)",
-        "images": "なし",
-        "translations": "なし",
-        "textTools": [
-          "Claude",
-          "Gemini"
-        ],
-        "imageTools": []
-      },
-      "priceYen": 500,
-      "royaltyPlan": 70,
-      "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S3-06/v2-20261114-map/book.epub",
-      "coverPath": ".local/kindle-books/K-S3-06/v2-20261114-map/cover.jpg",
-      "status": "draft",
-      "asin": null,
-      "publishedAt": null,
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "新刊下書き準備",
-      "kdpStatusCheckedAt": "2026-11-14T08:21:45.028Z"
-    },
-    "K-S3-07": {
-      "id": "K-S3-07",
-      "title": "四国 移住の県選びデータブック",
-      "subtitle": "物価・仕事・住まい・子育て・医療・安全を4県で比べる",
-      "author": "stats47",
-      "authorLastName": "stats47",
-      "authorFirstName": "",
-      "authorKana": "スタッツヨンジュウナナ",
-      "authorRomaji": "stats47",
-      "titleKana": "シコク イジュウノケンエラビデータブック",
-      "titleRomaji": "Shikoku Iju no Kenerabi Databook",
-      "subtitleKana": "ブッカ シゴト スマイ コソダテ イリョウ アンゼンヲ ヨンケンデ クラベル",
-      "subtitleRomaji": "Bukka Shigoto Sumai Kosodate Iryo Anzen wo 4-ken de Kuraberu",
-      "readingSourceTitle": "四国 移住の県選びデータブック",
-      "readingSourceSubtitle": "物価・仕事・住まい・子育て・医療・安全を4県で比べる",
-      "language": "ja",
-      "description": "転勤の辞令や移住の検討で、四国のどこかに住むことになりそう。でも県ごとに物価や仕事の見つけやすさ、家の広さ、認定こども園や医師の数がどう違うのかは、評判やイメージだけでは分かりません。4県を同じ物差しで比べたい方のための本です。\n\n【この本で分かること】\n・四国の4県の物価・収入・仕事・住まい・子育て・医療・安全を、14の指標と全国順位で比べられる\n・四国の県ごとの章で、その県に住むと何が楽で何に注意が要るか、どんな人に向いているかが分かる\n・家計を抑えたい・子育てを優先したい・仕事を見つけやすくしたい・家を広くしたい、の目的別に見るべき指標と4県の並びが分かる\n・医師数は徳島県と高知県が全国1・2位、愛媛県の地価変動率は全国47位のように、四国4県の違いを年と範囲に気をつけて読める\n\n【こんな方に】\n・転勤や移住で四国の県を比べている方\n・評判やイメージではなく統計で四国の暮らしの違いを確かめたい方\n\n【収録内容】\n図 14 点、47 都道府県の全県表 14 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
-      "keywords": [
-        "転勤",
-        "家計",
-        "地価",
-        "持ち家",
-        "有効求人倍率",
-        "最低賃金",
-        "認定こども園"
-      ],
-      "categoryPaths": [
-        {
-          "top": "社会・政治",
-          "sub": "社会学",
-          "place": "参考図書・白書"
-        },
-        {
-          "top": "歴史・地理",
-          "sub": "地理・地域研究",
-          "place": "地域研究"
-        },
-        {
-          "top": "ビジネス・経済",
-          "sub": "参考図書・白書",
-          "place": "一般"
-        }
-      ],
-      "applyDrm": true,
-      "aiDisclosure": {
-        "used": true,
-        "text": "作品全体 (広範な編集あり)",
-        "images": "なし",
-        "translations": "なし",
-        "textTools": [
-          "Claude",
-          "Gemini"
-        ],
-        "imageTools": []
-      },
-      "priceYen": 500,
-      "royaltyPlan": 70,
-      "kuEnrolled": false,
-      "epubPath": ".local/kindle-books/K-S3-07/v2-20261114-map/book.epub",
-      "coverPath": ".local/kindle-books/K-S3-07/v2-20261114-map/cover.jpg",
-      "status": "draft",
-      "asin": null,
-      "publishedAt": null,
-      "kdpStatus": "draft",
-      "kdpStatusLabel": "新刊下書き準備",
-      "kdpStatusCheckedAt": "2026-11-14T08:21:46.950Z"
-    },
     "K-S1-14": {
       "id": "K-S1-14",
       "title": "47都市の食卓は似てきたのか — 家計調査で読む19年の変化",
@@ -2738,6 +2269,577 @@
       "kdpStatusLabel": "レビュー中",
       "kdpStatusCheckedAt": "2026-11-13T23:07:16.409Z",
       "lastSubmittedAt": "2026-11-13"
+    },
+    "K-S3-02": {
+      "id": "K-S3-02",
+      "title": "東北 移住の県選びデータブック",
+      "subtitle": "物価・仕事・住まい・子育て・医療・安全を6県で比べる",
+      "author": "stats47",
+      "authorLastName": "stats47",
+      "authorFirstName": "",
+      "authorKana": "スタッツヨンジュウナナ",
+      "authorRomaji": "stats47",
+      "titleKana": "トウホク イジュウノケンエラビデータブック",
+      "titleRomaji": "Tohoku Iju no Kenerabi Databook",
+      "subtitleKana": "ブッカ シゴト スマイ コソダテ イリョウ アンゼンヲ ロッケンデ クラベル",
+      "subtitleRomaji": "Bukka Shigoto Sumai Kosodate Iryo Anzen wo 6-ken de Kuraberu",
+      "readingSourceTitle": "東北 移住の県選びデータブック",
+      "readingSourceSubtitle": "物価・仕事・住まい・子育て・医療・安全を6県で比べる",
+      "language": "ja",
+      "description": "転勤の辞令や移住の検討で、東北のどこかに住むことになりそう。でも県ごとに物価や仕事の見つけやすさ、家の広さ、認定こども園や医師の数がどう違うのかは、評判やイメージだけでは分かりません。6県を同じ物差しで比べたい方のための本です。\n\n【この本で分かること】\n・東北の6県の物価・収入・仕事・住まい・子育て・医療・安全を、14の指標と全国順位で比べられる\n・東北の県ごとの章で、その県の数字を全国順位とあわせて読める\n・家計を抑えたい・子育てを優先したい・仕事を見つけやすくしたい・家を広くしたい、の目的別に見るべき指標と6県の並びが分かる\n・青森県の認定こども園数が全国1位、秋田県の最低賃金が全国47位のように、同じ東北でも大きく違う数字を年と範囲に気をつけて読める\n\n【データの範囲】\n比較の単位は都道府県です。47都道府県を並べて比べます。市区町村ごとの順位や一覧は収録していません。家計調査の指標は、県全体ではなく、各県の県庁所在市（東京都は区部）の世帯を調べた値です。\n\n【全県の値を表で収録している指標】\n・消費者物価地域差指数（総合）（2025年・（全国=100））\n・消費者物価地域差指数（住居）（2025年・（全国=100））\n・消費支出（二人以上の世帯）（1世帯当たり1か月間）（2024年・千円）\n・年間収入（1世帯当たり）（2019年・千円）\n・有効求人倍率（2022年度・倍）\n・地域別最低賃金（2024年度・円）\n・持ち家比率（2023年・％）\n・持ち家住宅の延べ面積（1住宅当たり）（2023年・ｍ2）\n・標準価格（対前年平均変動率）（住宅地）（2024年・%）\n・認定こども園数（0～5歳人口10万人当たり）（2024年・園）\n・医療施設に従事する医師数（人口10万人当たり）（2022年・人）\n・刑法犯認知件数（人口千人当たり）（2023年・件）\n・災害被害額（人口1人当たり）（2023年・円）\n・将来人口増減率（2020年→2050年）（2050年・％）\n\n【こんな方に】\n・転勤や移住で東北の県を比べている方\n・評判やイメージではなく統計で東北の暮らしの違いを確かめたい方\n\n【収録内容】\n図 14 点、47 都道府県の全県表 14 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
+      "keywords": [
+        "転勤",
+        "家計",
+        "地価",
+        "持ち家",
+        "有効求人倍率",
+        "最低賃金",
+        "認定こども園"
+      ],
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "参考図書・白書",
+          "place": "一般"
+        }
+      ],
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "なし",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": []
+      },
+      "priceYen": 500,
+      "royaltyPlan": 70,
+      "kuEnrolled": false,
+      "epubPath": ".local/kindle-books/K-S3-02/v3-20261118-review/book.epub",
+      "coverPath": ".local/kindle-books/K-S3-02/v3-20261118-review/cover.jpg",
+      "status": "listed",
+      "asin": null,
+      "publishedAt": "2026-11-18",
+      "kdpStatus": "in_review",
+      "kdpStatusLabel": "レビュー中",
+      "kdpStatusCheckedAt": "2026-11-18T10:43:24.674Z",
+      "publicationStage": "submitted",
+      "publicationStageUpdatedAt": "2026-11-18T10:43:24.674Z",
+      "publicationStageEvidence": {
+        "prepared": {
+          "at": "2026-11-18T08:32:03.916Z",
+          "mode": "first"
+        },
+        "details_filled": {
+          "at": "2026-11-18T09:21:38.993Z",
+          "title": "東北 移住の県選びデータブック",
+          "editionNumber": 1
+        },
+        "verified": {
+          "at": "2026-11-18T10:42:31.958Z",
+          "draftId": "A240U1NAPZJACY"
+        },
+        "submitted": {
+          "at": "2026-11-18T10:43:24.674Z",
+          "statusLabel": "レビュー中",
+          "asin": null
+        }
+      },
+      "draftId": "A240U1NAPZJACY",
+      "publicationStageLastAttempt": {
+        "at": "2026-11-18T10:41:47.573Z",
+        "attemptedStage": "files_processed",
+        "retainedStage": "verified",
+        "manuscriptUploaded": true,
+        "coverUploaded": true
+      },
+      "lastSubmittedAt": "2026-11-18"
+    },
+    "K-S3-03": {
+      "id": "K-S3-03",
+      "title": "関東 移住の県選びデータブック",
+      "subtitle": "物価・仕事・住まい・子育て・医療・安全を1都6県で比べる",
+      "author": "stats47",
+      "authorLastName": "stats47",
+      "authorFirstName": "",
+      "authorKana": "スタッツヨンジュウナナ",
+      "authorRomaji": "stats47",
+      "titleKana": "カントウ イジュウノケンエラビデータブック",
+      "titleRomaji": "Kanto Iju no Kenerabi Databook",
+      "subtitleKana": "ブッカ シゴト スマイ コソダテ イリョウ アンゼンヲ イットロッケンデ クラベル",
+      "subtitleRomaji": "Bukka Shigoto Sumai Kosodate Iryo Anzen wo 1-to 6-ken de Kuraberu",
+      "readingSourceTitle": "関東 移住の県選びデータブック",
+      "readingSourceSubtitle": "物価・仕事・住まい・子育て・医療・安全を1都6県で比べる",
+      "language": "ja",
+      "description": "転勤の辞令や移住の検討で、関東のどこかに住むことになりそう。でも都県ごとに物価や仕事の見つけやすさ、家の広さ、認定こども園や医師の数がどう違うのかは、評判やイメージだけでは分かりません。1都6県を同じ物差しで比べたい方のための本です。\n\n【この本で分かること】\n・関東の1都6県の物価・収入・仕事・住まい・子育て・医療・安全を、14の指標と全国順位で比べられる\n・関東の都県ごとの章で、その都県の数字を全国順位とあわせて読める\n・家計を抑えたい・子育てを優先したい・仕事を見つけやすくしたい・家を広くしたい、の目的別に見るべき指標と1都6県の並びが分かる\n・年間収入は神奈川県と東京都が全国1・2位、認定こども園数は埼玉県と東京都が全国46・47位のように、1都6県の違いを年と範囲に気をつけて読める\n\n【データの範囲】\n比較の単位は都道府県です。47都道府県を並べて比べます。市区町村ごとの順位や一覧は収録していません。家計調査の指標は、県全体ではなく、各県の県庁所在市（東京都は区部）の世帯を調べた値です。\n\n【全県の値を表で収録している指標】\n・消費者物価地域差指数（総合）（2025年・（全国=100））\n・消費者物価地域差指数（住居）（2025年・（全国=100））\n・消費支出（二人以上の世帯）（1世帯当たり1か月間）（2024年・千円）\n・年間収入（1世帯当たり）（2019年・千円）\n・有効求人倍率（2022年度・倍）\n・地域別最低賃金（2024年度・円）\n・持ち家比率（2023年・％）\n・持ち家住宅の延べ面積（1住宅当たり）（2023年・ｍ2）\n・標準価格（対前年平均変動率）（住宅地）（2024年・%）\n・認定こども園数（0～5歳人口10万人当たり）（2024年・園）\n・医療施設に従事する医師数（人口10万人当たり）（2022年・人）\n・刑法犯認知件数（人口千人当たり）（2023年・件）\n・災害被害額（人口1人当たり）（2023年・円）\n・将来人口増減率（2020年→2050年）（2050年・％）\n\n【こんな方に】\n・転勤や移住で関東の都県を比べている方\n・評判やイメージではなく統計で関東の暮らしの違いを確かめたい方\n\n【収録内容】\n図 14 点、47 都道府県の全県表 14 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
+      "keywords": [
+        "転勤",
+        "家計",
+        "地価",
+        "持ち家",
+        "有効求人倍率",
+        "最低賃金",
+        "認定こども園"
+      ],
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "参考図書・白書",
+          "place": "一般"
+        }
+      ],
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "なし",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": []
+      },
+      "priceYen": 500,
+      "royaltyPlan": 70,
+      "kuEnrolled": false,
+      "epubPath": ".local/kindle-books/K-S3-03/v3-20261118-review/book.epub",
+      "coverPath": ".local/kindle-books/K-S3-03/v3-20261118-review/cover.jpg",
+      "status": "listed",
+      "asin": null,
+      "publishedAt": "2026-11-18",
+      "kdpStatus": "in_review",
+      "kdpStatusLabel": "レビュー中",
+      "kdpStatusCheckedAt": "2026-11-18T10:53:38.077Z",
+      "publicationStage": "submitted",
+      "publicationStageUpdatedAt": "2026-11-18T10:53:38.077Z",
+      "publicationStageEvidence": {
+        "prepared": {
+          "at": "2026-11-18T08:32:29.378Z",
+          "mode": "first"
+        },
+        "details_filled": {
+          "at": "2026-11-18T09:37:13.988Z",
+          "title": "関東 移住の県選びデータブック",
+          "editionNumber": 1
+        },
+        "verified": {
+          "at": "2026-11-18T10:52:46.302Z",
+          "draftId": "A1QHODJDJVAYGL"
+        },
+        "submitted": {
+          "at": "2026-11-18T10:53:38.077Z",
+          "statusLabel": "レビュー中",
+          "asin": null
+        }
+      },
+      "draftId": "A1QHODJDJVAYGL",
+      "publicationStageLastAttempt": {
+        "at": "2026-11-18T10:52:03.005Z",
+        "attemptedStage": "files_processed",
+        "retainedStage": "verified",
+        "manuscriptUploaded": true,
+        "coverUploaded": true
+      },
+      "lastSubmittedAt": "2026-11-18"
+    },
+    "K-S3-04": {
+      "id": "K-S3-04",
+      "title": "中部 移住の県選びデータブック",
+      "subtitle": "物価・仕事・住まい・子育て・医療・安全を9県で比べる",
+      "author": "stats47",
+      "authorLastName": "stats47",
+      "authorFirstName": "",
+      "authorKana": "スタッツヨンジュウナナ",
+      "authorRomaji": "stats47",
+      "titleKana": "チュウブ イジュウノケンエラビデータブック",
+      "titleRomaji": "Chubu Iju no Kenerabi Databook",
+      "subtitleKana": "ブッカ シゴト スマイ コソダテ イリョウ アンゼンヲ キュウケンデ クラベル",
+      "subtitleRomaji": "Bukka Shigoto Sumai Kosodate Iryo Anzen wo 9-ken de Kuraberu",
+      "readingSourceTitle": "中部 移住の県選びデータブック",
+      "readingSourceSubtitle": "物価・仕事・住まい・子育て・医療・安全を9県で比べる",
+      "language": "ja",
+      "description": "転勤の辞令や移住の検討で、中部のどこかに住むことになりそう。でも県ごとに物価や仕事の見つけやすさ、家の広さ、認定こども園や医師の数がどう違うのかは、評判やイメージだけでは分かりません。9県を同じ物差しで比べたい方のための本です。\n\n【この本で分かること】\n・中部の9県の物価・収入・仕事・住まい・子育て・医療・安全を、14の指標と全国順位で比べられる\n・中部の県ごとの章で、その県の数字を全国順位とあわせて読める\n・家計を抑えたい・子育てを優先したい・仕事を見つけやすくしたい・家を広くしたい、の目的別に見るべき指標と9県の並びが分かる\n・有効求人倍率は福井県が全国1位、認定こども園数は石川県が全国2位のように、中部9県の違いを年と範囲に気をつけて読める\n\n【データの範囲】\n比較の単位は都道府県です。47都道府県を並べて比べます。市区町村ごとの順位や一覧は収録していません。家計調査の指標は、県全体ではなく、各県の県庁所在市（東京都は区部）の世帯を調べた値です。\n\n【全県の値を表で収録している指標】\n・消費者物価地域差指数（総合）（2025年・（全国=100））\n・消費者物価地域差指数（住居）（2025年・（全国=100））\n・消費支出（二人以上の世帯）（1世帯当たり1か月間）（2024年・千円）\n・年間収入（1世帯当たり）（2019年・千円）\n・有効求人倍率（2022年度・倍）\n・地域別最低賃金（2024年度・円）\n・持ち家比率（2023年・％）\n・持ち家住宅の延べ面積（1住宅当たり）（2023年・ｍ2）\n・標準価格（対前年平均変動率）（住宅地）（2024年・%）\n・認定こども園数（0～5歳人口10万人当たり）（2024年・園）\n・医療施設に従事する医師数（人口10万人当たり）（2022年・人）\n・刑法犯認知件数（人口千人当たり）（2023年・件）\n・災害被害額（人口1人当たり）（2023年・円）\n・将来人口増減率（2020年→2050年）（2050年・％）\n\n【こんな方に】\n・転勤や移住で中部の県を比べている方\n・評判やイメージではなく統計で中部の暮らしの違いを確かめたい方\n\n【収録内容】\n図 14 点、47 都道府県の全県表 14 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
+      "keywords": [
+        "転勤",
+        "家計",
+        "地価",
+        "持ち家",
+        "有効求人倍率",
+        "最低賃金",
+        "認定こども園"
+      ],
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "参考図書・白書",
+          "place": "一般"
+        }
+      ],
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "なし",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": []
+      },
+      "priceYen": 500,
+      "royaltyPlan": 70,
+      "kuEnrolled": false,
+      "epubPath": ".local/kindle-books/K-S3-04/v3-20261118-review/book.epub",
+      "coverPath": ".local/kindle-books/K-S3-04/v3-20261118-review/cover.jpg",
+      "status": "draft",
+      "asin": null,
+      "publishedAt": null,
+      "kdpStatus": "draft",
+      "kdpStatusLabel": "新刊下書き準備",
+      "kdpStatusCheckedAt": "2026-11-18T08:32:30.879Z",
+      "publicationStage": "prepared",
+      "publicationStageUpdatedAt": "2026-11-18T08:32:30.879Z",
+      "publicationStageEvidence": {
+        "prepared": {
+          "at": "2026-11-18T08:32:30.879Z",
+          "mode": "first"
+        }
+      }
+    },
+    "K-S3-05": {
+      "id": "K-S3-05",
+      "title": "近畿 移住の県選びデータブック",
+      "subtitle": "物価・仕事・住まい・子育て・医療・安全を2府5県で比べる",
+      "author": "stats47",
+      "authorLastName": "stats47",
+      "authorFirstName": "",
+      "authorKana": "スタッツヨンジュウナナ",
+      "authorRomaji": "stats47",
+      "titleKana": "キンキ イジュウノケンエラビデータブック",
+      "titleRomaji": "Kinki Iju no Kenerabi Databook",
+      "subtitleKana": "ブッカ シゴト スマイ コソダテ イリョウ アンゼンヲ ニフゴケンデ クラベル",
+      "subtitleRomaji": "Bukka Shigoto Sumai Kosodate Iryo Anzen wo 2-fu 5-ken de Kuraberu",
+      "readingSourceTitle": "近畿 移住の県選びデータブック",
+      "readingSourceSubtitle": "物価・仕事・住まい・子育て・医療・安全を2府5県で比べる",
+      "language": "ja",
+      "description": "転勤の辞令や移住の検討で、近畿のどこかに住むことになりそう。でも府県ごとに物価や仕事の見つけやすさ、家の広さ、認定こども園や医師の数がどう違うのかは、評判やイメージだけでは分かりません。2府5県を同じ物差しで比べたい方のための本です。\n\n【この本で分かること】\n・近畿の2府5県の物価・収入・仕事・住まい・子育て・医療・安全を、14の指標と全国順位で比べられる\n・近畿の府県ごとの章で、その府県の数字を全国順位とあわせて読める\n・家計を抑えたい・子育てを優先したい・仕事を見つけやすくしたい・家を広くしたい、の目的別に見るべき指標と2府5県の並びが分かる\n・大阪府の地域別最低賃金は全国3位、京都府の医師数は全国3位のように、近畿の2府5県の違いを年と範囲に気をつけて読める\n\n【データの範囲】\n比較の単位は都道府県です。47都道府県を並べて比べます。市区町村ごとの順位や一覧は収録していません。家計調査の指標は、県全体ではなく、各県の県庁所在市（東京都は区部）の世帯を調べた値です。\n\n【全県の値を表で収録している指標】\n・消費者物価地域差指数（総合）（2025年・（全国=100））\n・消費者物価地域差指数（住居）（2025年・（全国=100））\n・消費支出（二人以上の世帯）（1世帯当たり1か月間）（2024年・千円）\n・年間収入（1世帯当たり）（2019年・千円）\n・有効求人倍率（2022年度・倍）\n・地域別最低賃金（2024年度・円）\n・持ち家比率（2023年・％）\n・持ち家住宅の延べ面積（1住宅当たり）（2023年・ｍ2）\n・標準価格（対前年平均変動率）（住宅地）（2024年・%）\n・認定こども園数（0～5歳人口10万人当たり）（2024年・園）\n・医療施設に従事する医師数（人口10万人当たり）（2022年・人）\n・刑法犯認知件数（人口千人当たり）（2023年・件）\n・災害被害額（人口1人当たり）（2023年・円）\n・将来人口増減率（2020年→2050年）（2050年・％）\n\n【こんな方に】\n・転勤や移住で近畿の府県を比べている方\n・評判やイメージではなく統計で近畿の暮らしの違いを確かめたい方\n\n【収録内容】\n図 14 点、47 都道府県の全県表 14 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
+      "keywords": [
+        "転勤",
+        "家計",
+        "地価",
+        "持ち家",
+        "有効求人倍率",
+        "最低賃金",
+        "認定こども園"
+      ],
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "参考図書・白書",
+          "place": "一般"
+        }
+      ],
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "なし",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": []
+      },
+      "priceYen": 500,
+      "royaltyPlan": 70,
+      "kuEnrolled": false,
+      "epubPath": ".local/kindle-books/K-S3-05/v3-20261118-review/book.epub",
+      "coverPath": ".local/kindle-books/K-S3-05/v3-20261118-review/cover.jpg",
+      "status": "draft",
+      "asin": null,
+      "publishedAt": null,
+      "kdpStatus": "draft",
+      "kdpStatusLabel": "新刊下書き準備",
+      "kdpStatusCheckedAt": "2026-11-18T08:32:32.380Z",
+      "publicationStage": "prepared",
+      "publicationStageUpdatedAt": "2026-11-18T08:32:32.380Z",
+      "publicationStageEvidence": {
+        "prepared": {
+          "at": "2026-11-18T08:32:32.380Z",
+          "mode": "first"
+        }
+      }
+    },
+    "K-S3-06": {
+      "id": "K-S3-06",
+      "title": "中国 移住の県選びデータブック",
+      "subtitle": "物価・仕事・住まい・子育て・医療・安全を5県で比べる",
+      "author": "stats47",
+      "authorLastName": "stats47",
+      "authorFirstName": "",
+      "authorKana": "スタッツヨンジュウナナ",
+      "authorRomaji": "stats47",
+      "titleKana": "チュウゴク イジュウノケンエラビデータブック",
+      "titleRomaji": "Chugoku Iju no Kenerabi Databook",
+      "subtitleKana": "ブッカ シゴト スマイ コソダテ イリョウ アンゼンヲ ゴケンデ クラベル",
+      "subtitleRomaji": "Bukka Shigoto Sumai Kosodate Iryo Anzen wo 5-ken de Kuraberu",
+      "readingSourceTitle": "中国 移住の県選びデータブック",
+      "readingSourceSubtitle": "物価・仕事・住まい・子育て・医療・安全を5県で比べる",
+      "language": "ja",
+      "description": "転勤の辞令や移住の検討で、中国のどこかに住むことになりそう。でも県ごとに物価や仕事の見つけやすさ、家の広さ、認定こども園や医師の数がどう違うのかは、評判やイメージだけでは分かりません。5県を同じ物差しで比べたい方のための本です。\n\n【この本で分かること】\n・中国の5県の物価・収入・仕事・住まい・子育て・医療・安全を、14の指標と全国順位で比べられる\n・中国の県ごとの章で、その県の数字を全国順位とあわせて読める\n・家計を抑えたい・子育てを優先したい・仕事を見つけやすくしたい・家を広くしたい、の目的別に見るべき指標と5県の並びが分かる\n・島根県の有効求人倍率は全国2位、鳥取県の災害被害額は全国1位のように、中国地方の5県の違いを年と範囲に気をつけて読める\n\n【データの範囲】\n比較の単位は都道府県です。47都道府県を並べて比べます。市区町村ごとの順位や一覧は収録していません。家計調査の指標は、県全体ではなく、各県の県庁所在市（東京都は区部）の世帯を調べた値です。\n\n【全県の値を表で収録している指標】\n・消費者物価地域差指数（総合）（2025年・（全国=100））\n・消費者物価地域差指数（住居）（2025年・（全国=100））\n・消費支出（二人以上の世帯）（1世帯当たり1か月間）（2024年・千円）\n・年間収入（1世帯当たり）（2019年・千円）\n・有効求人倍率（2022年度・倍）\n・地域別最低賃金（2024年度・円）\n・持ち家比率（2023年・％）\n・持ち家住宅の延べ面積（1住宅当たり）（2023年・ｍ2）\n・標準価格（対前年平均変動率）（住宅地）（2024年・%）\n・認定こども園数（0～5歳人口10万人当たり）（2024年・園）\n・医療施設に従事する医師数（人口10万人当たり）（2022年・人）\n・刑法犯認知件数（人口千人当たり）（2023年・件）\n・災害被害額（人口1人当たり）（2023年・円）\n・将来人口増減率（2020年→2050年）（2050年・％）\n\n【こんな方に】\n・転勤や移住で中国の県を比べている方\n・評判やイメージではなく統計で中国の暮らしの違いを確かめたい方\n\n【収録内容】\n図 14 点、47 都道府県の全県表 14 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
+      "keywords": [
+        "転勤",
+        "家計",
+        "地価",
+        "持ち家",
+        "有効求人倍率",
+        "最低賃金",
+        "認定こども園"
+      ],
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "参考図書・白書",
+          "place": "一般"
+        }
+      ],
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "なし",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": []
+      },
+      "priceYen": 500,
+      "royaltyPlan": 70,
+      "kuEnrolled": false,
+      "epubPath": ".local/kindle-books/K-S3-06/v3-20261118-review/book.epub",
+      "coverPath": ".local/kindle-books/K-S3-06/v3-20261118-review/cover.jpg",
+      "status": "draft",
+      "asin": null,
+      "publishedAt": null,
+      "kdpStatus": "draft",
+      "kdpStatusLabel": "新刊下書き準備",
+      "kdpStatusCheckedAt": "2026-11-18T08:32:33.878Z",
+      "publicationStage": "prepared",
+      "publicationStageUpdatedAt": "2026-11-18T08:32:33.878Z",
+      "publicationStageEvidence": {
+        "prepared": {
+          "at": "2026-11-18T08:32:33.878Z",
+          "mode": "first"
+        }
+      }
+    },
+    "K-S3-07": {
+      "id": "K-S3-07",
+      "title": "四国 移住の県選びデータブック",
+      "subtitle": "物価・仕事・住まい・子育て・医療・安全を4県で比べる",
+      "author": "stats47",
+      "authorLastName": "stats47",
+      "authorFirstName": "",
+      "authorKana": "スタッツヨンジュウナナ",
+      "authorRomaji": "stats47",
+      "titleKana": "シコク イジュウノケンエラビデータブック",
+      "titleRomaji": "Shikoku Iju no Kenerabi Databook",
+      "subtitleKana": "ブッカ シゴト スマイ コソダテ イリョウ アンゼンヲ ヨンケンデ クラベル",
+      "subtitleRomaji": "Bukka Shigoto Sumai Kosodate Iryo Anzen wo 4-ken de Kuraberu",
+      "readingSourceTitle": "四国 移住の県選びデータブック",
+      "readingSourceSubtitle": "物価・仕事・住まい・子育て・医療・安全を4県で比べる",
+      "language": "ja",
+      "description": "転勤の辞令や移住の検討で、四国のどこかに住むことになりそう。でも県ごとに物価や仕事の見つけやすさ、家の広さ、認定こども園や医師の数がどう違うのかは、評判やイメージだけでは分かりません。4県を同じ物差しで比べたい方のための本です。\n\n【この本で分かること】\n・四国の4県の物価・収入・仕事・住まい・子育て・医療・安全を、14の指標と全国順位で比べられる\n・四国の県ごとの章で、その県の数字を全国順位とあわせて読める\n・家計を抑えたい・子育てを優先したい・仕事を見つけやすくしたい・家を広くしたい、の目的別に見るべき指標と4県の並びが分かる\n・医師数は徳島県と高知県が全国1・2位、愛媛県の地価変動率は全国47位のように、四国4県の違いを年と範囲に気をつけて読める\n\n【データの範囲】\n比較の単位は都道府県です。47都道府県を並べて比べます。市区町村ごとの順位や一覧は収録していません。家計調査の指標は、県全体ではなく、各県の県庁所在市（東京都は区部）の世帯を調べた値です。\n\n【全県の値を表で収録している指標】\n・消費者物価地域差指数（総合）（2025年・（全国=100））\n・消費者物価地域差指数（住居）（2025年・（全国=100））\n・消費支出（二人以上の世帯）（1世帯当たり1か月間）（2024年・千円）\n・年間収入（1世帯当たり）（2019年・千円）\n・有効求人倍率（2022年度・倍）\n・地域別最低賃金（2024年度・円）\n・持ち家比率（2023年・％）\n・持ち家住宅の延べ面積（1住宅当たり）（2023年・ｍ2）\n・標準価格（対前年平均変動率）（住宅地）（2024年・%）\n・認定こども園数（0～5歳人口10万人当たり）（2024年・園）\n・医療施設に従事する医師数（人口10万人当たり）（2022年・人）\n・刑法犯認知件数（人口千人当たり）（2023年・件）\n・災害被害額（人口1人当たり）（2023年・円）\n・将来人口増減率（2020年→2050年）（2050年・％）\n\n【こんな方に】\n・転勤や移住で四国の県を比べている方\n・評判やイメージではなく統計で四国の暮らしの違いを確かめたい方\n\n【収録内容】\n図 14 点、47 都道府県の全県表 14 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
+      "keywords": [
+        "転勤",
+        "家計",
+        "地価",
+        "持ち家",
+        "有効求人倍率",
+        "最低賃金",
+        "認定こども園"
+      ],
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "参考図書・白書",
+          "place": "一般"
+        }
+      ],
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "なし",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": []
+      },
+      "priceYen": 500,
+      "royaltyPlan": 70,
+      "kuEnrolled": false,
+      "epubPath": ".local/kindle-books/K-S3-07/v4-20261118-tie/book.epub",
+      "coverPath": ".local/kindle-books/K-S3-07/v4-20261118-tie/cover.jpg",
+      "status": "draft",
+      "asin": null,
+      "publishedAt": null,
+      "kdpStatus": "draft",
+      "kdpStatusLabel": "新刊下書き準備",
+      "kdpStatusCheckedAt": "2026-11-18T08:35:28.784Z",
+      "publicationStage": "prepared",
+      "publicationStageUpdatedAt": "2026-11-18T08:35:28.784Z",
+      "publicationStageEvidence": {
+        "prepared": {
+          "at": "2026-11-18T08:35:28.784Z",
+          "mode": "first"
+        }
+      }
+    },
+    "K-S3-08": {
+      "id": "K-S3-08",
+      "title": "九州・沖縄 移住の県選びデータブック",
+      "subtitle": "物価・仕事・住まい・子育て・医療・安全を8県で比べる",
+      "author": "stats47",
+      "authorLastName": "stats47",
+      "authorFirstName": "",
+      "authorKana": "スタッツヨンジュウナナ",
+      "authorRomaji": "stats47",
+      "titleKana": "キュウシュウ オキナワ イジュウノケンエラビデータブック",
+      "titleRomaji": "Kyushu Okinawa Iju no Kenerabi Databook",
+      "subtitleKana": "ブッカ シゴト スマイ コソダテ イリョウ アンゼンヲ ハッケンデ クラベル",
+      "subtitleRomaji": "Bukka Shigoto Sumai Kosodate Iryo Anzen wo 8-ken de Kuraberu",
+      "readingSourceTitle": "九州・沖縄 移住の県選びデータブック",
+      "readingSourceSubtitle": "物価・仕事・住まい・子育て・医療・安全を8県で比べる",
+      "language": "ja",
+      "description": "転勤の辞令や移住の検討で、九州・沖縄のどこかに住むことになりそう。でも県ごとに物価や仕事の見つけやすさ、家の広さ、認定こども園や医師の数がどう違うのかは、観光の印象だけでは分かりません。8県を同じ物差しで比べたい方のための本です。\n\n【この本で分かること】\n・九州・沖縄8県の物価・収入・仕事・住まい・子育て・医療・安全を、14の指標と全国順位で比べられる\n・九州・沖縄の県ごとの章で、その県の数字を全国順位とあわせて読める\n・家計を抑えたい・子育てを優先したい・仕事を見つけやすくしたい・家を広くしたい、の目的別に見るべき指標と8県の並びが分かる\n・年のそろわない統計や、県庁所在市の値と県全域の値の違いを取り違えずに読める\n\n【データの範囲】\n比較の単位は都道府県です。47都道府県を並べて比べます。市区町村ごとの順位や一覧は収録していません。家計調査の指標は、県全体ではなく、各県の県庁所在市（東京都は区部）の世帯を調べた値です。\n\n【全県の値を表で収録している指標】\n・消費者物価地域差指数（総合）（2025年・（全国=100））\n・消費者物価地域差指数（住居）（2025年・（全国=100））\n・消費支出（二人以上の世帯）（1世帯当たり1か月間）（2024年・千円）\n・年間収入（1世帯当たり）（2019年・千円）\n・有効求人倍率（2022年度・倍）\n・地域別最低賃金（2024年度・円）\n・持ち家比率（2023年・％）\n・持ち家住宅の延べ面積（1住宅当たり）（2023年・ｍ2）\n・標準価格（対前年平均変動率）（住宅地）（2024年・%）\n・認定こども園数（0～5歳人口10万人当たり）（2024年・園）\n・医療施設に従事する医師数（人口10万人当たり）（2022年・人）\n・刑法犯認知件数（人口千人当たり）（2023年・件）\n・災害被害額（人口1人当たり）（2023年・円）\n・将来人口増減率（2020年→2050年）（2050年・％）\n\n【こんな方に】\n・転勤や移住で九州・沖縄の県を比べている方\n・観光の印象ではなく統計で暮らしの違いを確かめたい方\n\n【収録内容】\n図 14 点、47 都道府県の全県表 14 表を収録しています。\n\n【データについて】\ne-Stat（政府統計の総合窓口）などの公的統計をもとに編集しています。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。収録年と定義は指標ごとに異なり、巻末の出典にまとめています。",
+      "keywords": [
+        "転勤",
+        "家計",
+        "家賃",
+        "持ち家",
+        "有効求人倍率",
+        "最低賃金",
+        "認定こども園"
+      ],
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "参考図書・白書",
+          "place": "一般"
+        }
+      ],
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "なし",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": []
+      },
+      "priceYen": 500,
+      "royaltyPlan": 70,
+      "kuEnrolled": false,
+      "epubPath": ".local/kindle-books/K-S3-08/v9-20261118-tie/book.epub",
+      "coverPath": ".local/kindle-books/K-S3-08/v9-20261118-tie/cover.jpg",
+      "status": "draft",
+      "asin": null,
+      "publishedAt": null,
+      "kdpStatus": "draft",
+      "kdpStatusLabel": "新刊下書き準備",
+      "kdpStatusCheckedAt": "2026-11-18T08:39:44.542Z",
+      "publicationStage": "prepared",
+      "publicationStageUpdatedAt": "2026-11-18T08:39:44.542Z",
+      "publicationStageEvidence": {
+        "prepared": {
+          "at": "2026-11-18T08:39:44.542Z",
+          "mode": "first"
+        }
+      }
     }
   }
 }

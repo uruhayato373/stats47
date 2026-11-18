@@ -14,6 +14,7 @@ import {
   buildMunicipalityListNames,
   buildMunicipalityRankingMeta,
   isMunicipalityAiContentCurrent,
+  formatMunicipalityValueText,
   municipalityAbsenceNote,
   municipalityRankingDisplayTitle,
 } from '@stats47/ranking';
@@ -45,7 +46,7 @@ import {
   readMunicipalityRanking,
   readMunicipalityRankingCommentary,
 } from '@/features/municipalities/server';
-import { findDataProductForMunicipalityRanking, TrackedProductLink } from '@/features/products';
+import { findDataProductForMunicipalityRanking, ProductItem } from '@/features/products';
 
 import {
   MUNICIPALITY_AFTER_MAP,
@@ -143,6 +144,16 @@ export default async function MunicipalityRankingPage({
   const precision = distribution?.precision ?? 0;
   const formatValue = (value: number) =>
     formatValueWithPrecision(value, precision);
+  // 「分布の要点」の 3 つの値は 1 つずつ万・億・兆に寄せる (title と同じ書き方)。百万円のまま 8 桁で書くと、
+  // スマホ幅の 3 列 (1 列約 72px) から中央値・最大値がはみ出していた (MUNI-RANKING-STAT-OVERFLOW-01)。
+  // 寄せない値 (割合・10 万未満・指数) は表と同じ桁そろえで書く。
+  const displayUnit = formatUnitForDisplay(snapshot.unit);
+  const formatStat = (value: number): { value: string; unit: string } => {
+    const match = formatMunicipalityValueText(value, snapshot.unit).match(/^(-?[\d,]+(?:\.\d+)?)(.+)$/);
+    return match && match[2] !== displayUnit
+      ? { value: match[1], unit: match[2] }
+      : { value: formatValue(value), unit: displayUnit };
+  };
   // 同じ名前の自治体 (府中市・伊達市など) だけ県名を添える
   const listName = buildMunicipalityListNames(snapshot.values.map((row) => row.areaName));
   const structuredData = buildMunicipalityDatasetStructuredData({
@@ -237,9 +248,11 @@ export default async function MunicipalityRankingPage({
           __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
         }}
       />
+      {/* 本文が狭い幅 (480px 未満) では 3 列にせず、1 行に「名前…値」を並べる。3 列の 1 列は約 72px で、
+          「-34.57%」「2,765人」のような値も入らなかった (MUNI-RANKING-STAT-OVERFLOW-01) */}
       <section
         aria-label="分布の要点"
-        className="grid grid-cols-3 border border-border"
+        className="grid grid-cols-1 border border-border @sm:grid-cols-3"
       >
         {[
           ['最小', minimum],
@@ -248,18 +261,25 @@ export default async function MunicipalityRankingPage({
         ].map(([label, value]) => (
           <div
             key={String(label)}
-            className="border-r border-border p-3 last:border-r-0"
+            className="flex items-baseline justify-between gap-3 border-b border-border p-3 last:border-b-0 @sm:block @sm:border-b-0 @sm:border-r @sm:last:border-r-0"
           >
             <p className="text-xs text-muted-foreground">{label}</p>
-            <p className={cn(STAT_VALUE_CLASS, "mt-1")}>
-              {typeof value === 'number' ? formatValue(value) : '—'}
-              <span className="ml-0.5 text-xs font-normal text-muted-foreground">
-                {formatUnitForDisplay(snapshot.unit)}
+            <p className={cn(STAT_VALUE_CLASS, "@sm:mt-1")}>
+              {typeof value === 'number' ? formatStat(value).value : '—'}
+              <span className="ml-0.5 inline-block text-xs font-normal text-muted-foreground">
+                {typeof value === 'number' ? formatStat(value).unit : displayUnit}
               </span>
             </p>
           </div>
         ))}
       </section>
+
+      {dataProduct && (
+        <section aria-label="この指標のデータ集" className="mt-5 border border-border p-4">
+          <p className="text-sm text-foreground">この指標の長期の時系列と、地図に結合できる境界データを配布しています。</p>
+          <ProductItem product={dataProduct} layout="row" surface="ranking_product" placement="municipality_ranking_product" />
+        </section>
+      )}
 
       {distribution && (
         <section aria-label="全国分布" className="mt-5">
@@ -288,23 +308,6 @@ export default async function MunicipalityRankingPage({
         <div className="mt-8">
           <AdRow cells={rowAfterMap} position="municipality-row-1" trackingCategory={`municipality-${item.rankingKey}`} wide />
         </div>
-      )}
-
-      {dataProduct && (
-        <p className="mt-5 text-sm text-muted-foreground">
-          この指標の長期の時系列と地図に結合できる境界データは、{dataProduct.channelLabel}（
-          {formatValueWithPrecision(dataProduct.priceYen, 0)}円）で配布しています。{' '}
-          <TrackedProductLink
-            href={hrefFor('product', { slug: dataProduct.slug })}
-            label={`${dataProduct.id}:${dataProduct.title}`}
-            surface="ranking_product"
-            product={dataProduct}
-            placement="municipality_ranking_product"
-            className="text-primary underline underline-offset-2"
-          >
-            内容を見る
-          </TrackedProductLink>
-        </p>
       )}
 
       <MunicipalityRankingExplorer

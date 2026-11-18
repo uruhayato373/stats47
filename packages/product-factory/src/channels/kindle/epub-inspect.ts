@@ -99,6 +99,20 @@ export function fullTableIndicator(heading: string): FullTableIndicator | null {
 
 /** 全県表の下の注記 (full-tables.ts)。家計調査の値が県全体でなく県庁所在市のものであることを示す。 */
 const HOUSEHOLD_CITY_NOTE = "家計調査の値は、各県の県庁所在市";
+/** ランキング章 (ranking-databook.ts) の全県表の注記。指標の定義の note から入る (消費支出など)。 */
+const HOUSEHOLD_CITY_NOTE_RANKING = "家計調査の都道府県庁所在市の値";
+
+/**
+ * ランキング章 (ranking-databook.ts) の全県表から指標を読む。章の見出し (h1) が指標名で、
+ * 「全県の収録値」の見出しの直後の段落が「単位: <単位>。収録年次: <年>。…」(2026-11-18 地域の本で指標が 0 件だった)。
+ */
+export function rankingTableIndicator(body: string): FullTableIndicator | null {
+  if (!/<h[2-4]\b[^>]*>全県の収録値<\/h[2-4]>/.test(body)) return null;
+  const title = body.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/);
+  const caption = decodeEntities(stripTags(body)).match(/単位:\s*(.+?)。収録年次:\s*(\d{4}年度?)。/);
+  if (!title || !caption) return null;
+  return { label: decodeEntities(stripTags(title[1])).replace(/\s+/g, " ").trim(), period: caption[2], unit: caption[1].trim() };
+}
 
 /** 章 1 つ分の数字。図の直後の要素が段落でなければ「説明なし」と数える。 */
 export function chapterMetrics(body: string) {
@@ -117,10 +131,12 @@ export function chapterMetrics(body: string) {
       tables.filter((rows) => rows >= FULL_TABLE_ROWS).length,
       (body.match(/<h[2-4]\b[^>]*>全47都道府県の値/g) ?? []).length,
     ),
-    fullTableIndicators: [...body.matchAll(/<h[2-4]\b[^>]*>(全47都道府県の値[\s\S]*?)<\/h[2-4]>/g)]
-      .map((m) => fullTableIndicator(decodeEntities(stripTags(m[1])).replace(/\s+/g, " ").trim()))
-      .filter((indicator): indicator is FullTableIndicator => indicator !== null),
-    householdCityNotes: body.split(HOUSEHOLD_CITY_NOTE).length - 1,
+    fullTableIndicators: [
+      ...[...body.matchAll(/<h[2-4]\b[^>]*>(全47都道府県の値[\s\S]*?)<\/h[2-4]>/g)]
+        .map((m) => fullTableIndicator(decodeEntities(stripTags(m[1])).replace(/\s+/g, " ").trim())),
+      rankingTableIndicator(body),
+    ].filter((indicator): indicator is FullTableIndicator => indicator !== null),
+    householdCityNotes: body.split(HOUSEHOLD_CITY_NOTE).length - 1 + body.split(HOUSEHOLD_CITY_NOTE_RANKING).length - 1,
     siteLinks: links.length,
     siteLinksWithUtm: links.filter((href) => /[?&]utm_source=/.test(href)).length,
   };

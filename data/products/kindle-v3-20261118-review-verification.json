@@ -1,0 +1,1674 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-18T08:25:44.740Z",
+  "version": "v3-20261118-review",
+  "epubcheckExecuted": true,
+  "books": 38,
+  "totalErrors": 32,
+  "crossBook": [
+    {
+      "level": "warn",
+      "code": "cross-book-ranking-chapter",
+      "msg": "ランキング章 84 のうち 84 が他冊と同一指標 (14 指標)。例: 消費者物価地域差指数（総合）=K-S3-02,K-S3-03,K-S3-04,K-S3-05,K-S3-06,K-S3-07 / 消費者物価地域差指数（住居）=K-S3-02,K-S3-03,K-S3-04,K-S3-05,K-S3-06,K-S3-07 / 消費支出（二人以上の世帯）（1世帯当たり=K-S3-02,K-S3-03,K-S3-04,K-S3-05,K-S3-06,K-S3-07"
+    },
+    {
+      "level": "warn",
+      "code": "cross-book-paragraph",
+      "msg": "60 字以上の同一段落が 2 冊以上に 42 件"
+    }
+  ],
+  "report": [
+    {
+      "id": "K-S1-01",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-01/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S1-01/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S1-02",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-02/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S1-02/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S1-03",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-03/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S1-03/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S1-04",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-04/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S1-04/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S1-05",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-05/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S1-05/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S1-06",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-06/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S1-06/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S1-07",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-07/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S1-07/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S1-08",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-08/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S1-08/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S1-09",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-09/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S1-09/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S1-10",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-10/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S1-10/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S1-11",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-11/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S1-11/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S1-12",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-12/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S1-12/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S1-13",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-13/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S1-13/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S1-14",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-14/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S1-14/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S1-15",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-15/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S1-15/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S1-16",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S1-16/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S1-16/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S2-01",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S2-01/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S2-01/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S2-02",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S2-02/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S2-02/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S2-03",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S2-03/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S2-03/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S2-04",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S2-04/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S2-04/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S2-05",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S2-05/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S2-05/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S2-06",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S2-06/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S2-06/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S2-07",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S2-07/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S2-07/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S2-08",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S2-08/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S2-08/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S2-09",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S2-09/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S2-09/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S2-10",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S2-10/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S2-10/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S2-11",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S2-11/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S2-11/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S2-12",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S2-12/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S2-12/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S3-01",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S3-01/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S3-01/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S3-02",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S3-02/v3-20261118-review/book.epub",
+      "epubSha256": "0610ac04da00863bea521b7a887dd54c9aeae78ab33eef1e0585684460ed12fc",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "e65193f293a6efb0f70d0f1aa06341062994fc245d85f0439f240d8d1ff795f5"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "4f65769e157094cf1221e77f1464f0bd774c9a8736bea4ad3b2178b2eee7264e"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "dfe46f167fa70c77af2f3f7c218f7cd9d75fce2d8fe748d6105bd221ffde8b1a"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "9c5769990d317b0486609034b161345067aa922cc121810ead018713894d0134"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "bf29b22ab3f969e501eb15c418e07e5323e1872b1a9a382d1dad8b67bf81d5ea"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "cbfef1ad608a1c65a17a117d5935c6bd6b417a727dd517bf6d2de27140ce5043"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "b0b0580583a222ec7463fdfe304fefb1c7f712e1c22eac03c325697c49857f39"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "1fb7c0fe27541b3d0c7e39ed823dea1ba7c04249e27acbe2a3f91dbecfc2c337"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "c1201a35a9a899abc88d748a97f1e76106bc5bdb869120b29fa91db8a86efc14"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "9064e62e5f12fbd4f7f35397f884dead867123762b1e97df6b2516fcbb749897"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "5f26466af3f4b3558eb2d2cc94ea6b47e6b6a294644f245f2ad04b1044b382e1"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "88ebd70a4da182ddf4020fa85c701a4cb289f68df0c43e1e60b5e964dc90633c"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "2805f79e9368f36dace26027bb7a97a10f5685bc7a4095d55877b6e3c0e2260d"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "e80e4e12ab2ccca94db555699e514c4e5aea7b541d75cc8df71f8defd59d47f0"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "5a06ba039a21e32418b325a4860f827e28ac020ac5493d444a9bb7fe17fa4c83"
+        },
+        {
+          "fileName": "chap014.xhtml",
+          "sha256": "7e96759fadd7acaf1095e91539f72632d751cab73ef4762c10df0d3afd836742"
+        },
+        {
+          "fileName": "chap015.xhtml",
+          "sha256": "dc4539f41085a8bdfafdebee39476ee2baaa906ea75bee040ed5c714958aea81"
+        },
+        {
+          "fileName": "chap016.xhtml",
+          "sha256": "94a9b0ec8ece2149028b2a2c4e1dbcef5be58981385672b4e083a7dfc104a30a"
+        },
+        {
+          "fileName": "chap017.xhtml",
+          "sha256": "13bf13d947491bcacc5a36df858113cdee30d53cfbf366bac68bb1f0c6dd5c07"
+        },
+        {
+          "fileName": "chap018.xhtml",
+          "sha256": "9a8874565eccd6fc05da91da36650256369eea2ea0bfe5e9e5976b1595148cc5"
+        },
+        {
+          "fileName": "chap019.xhtml",
+          "sha256": "75a57b60d06524b32e34b2e04b2c709ed28d395d869b5ffa4ea5c0723624b73d"
+        },
+        {
+          "fileName": "chap020.xhtml",
+          "sha256": "98005762d6ee772bdaaf62d8310ed71feb2ba2656100fee5586471d66a9cc0b4"
+        },
+        {
+          "fileName": "chap021.xhtml",
+          "sha256": "8096c704701236983b51c5926360be67598d04199c004a4706bae26c1ce6d8ef"
+        },
+        {
+          "fileName": "chap022.xhtml",
+          "sha256": "b7a2f102280e82fc1e748bb98791a41abe8cd51aeae360c773a2e2d1f2869dd9"
+        },
+        {
+          "fileName": "chap023.xhtml",
+          "sha256": "a152e403a1994dcd464ad1391e88f06fdbdfd4a29594086e3e0b7a09dcd0df0a"
+        },
+        {
+          "fileName": "chap024.xhtml",
+          "sha256": "7d6253bf9f9f97d78f5e1ee80a2c35517deef758d4c920b84174145edb56b96d"
+        },
+        {
+          "fileName": "chap025.xhtml",
+          "sha256": "af0e9b094b96724f3c11a0a656fc558c679d14dbb115aa6631a79eb1f322d831"
+        },
+        {
+          "fileName": "chap026.xhtml",
+          "sha256": "2bfda0173fc5e03ebb5de8b3c767b1e014016565351f98c9de42c2ac6c6befd3"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "a29f26cdf4340cca00b0160e524aec1397340ee78d97307f0715851b1aff8aaf"
+        },
+        {
+          "fileName": "ranking-sources.xhtml",
+          "sha256": "6a0875afa0cb19033da2e92d1955e2c717ec08a3a94c3d36f71b168c838d8124"
+        }
+      ],
+      "errors": 0,
+      "warns": 11,
+      "findings": [
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap002.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap003.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap018.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap019.xhtml: 2022,2024 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap020.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap021.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap022.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap023.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap024.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap025.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "same-indicator-twice",
+          "msg": "同じ指標が 2 章: 消費者物価地域差指数（総合） / 消費者物価地域差指数（住居）"
+        }
+      ]
+    },
+    {
+      "id": "K-S3-03",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S3-03/v3-20261118-review/book.epub",
+      "epubSha256": "1fe679f69bd0c947217675a59ad0c05f542fcfd26d7045c9336caeff82a4383c",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "3fe86e738597b361823b09f2f2e57e4271eb8c53b291d0c14a2bd60516c988bb"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "4f65769e157094cf1221e77f1464f0bd774c9a8736bea4ad3b2178b2eee7264e"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "5c7e2559ea05787bfe95eb218ceabfd7fc4e88bbf770542a65ecf70a32f347c6"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "cfc8d8482a64e97ad20971293acc7e69cad948bcb8d9117bb0c24e674dcfb2e0"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "38634d74d10b7e562209f72ef75dd65c070511a9f508a0cc6bcf2aed5a61c841"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "6644a8eed7c44f705dbfb1659e0c3a215eca35e557ad4c1e3ffb61c78aa56e6b"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "020997b9dc714e4c833fb0d46240cdcb7bf713f025c6ecee7b553d5ca0fd234e"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "8b5d421f95e455f636f27e758db6a44c5bb87c531b8759181a61a118c262b646"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "e2d6ebbf0a08efc00ed66ea76e6e3f01226e59891d8abfd81b14f369a5bdaae0"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "0915afd43a8526784cc8fcc24bb8714084772c3ce58755cf6e1296f1f7a54a43"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "836abb8c5b58d7e9fc68411dcb6fdec6be54bc679e1c8b489dfeb741572f136c"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "1840409919f114cbd7add99244b0f08b5d5232811780badf6c0ae78e6cc000de"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "8f81701b9082b84582ae47a07396c8d207130e44c1a7e6247271c4a98bb62285"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "350a79d5d9b4aab7f6d06d3cd5ef90fd779864596aa12d2f56347ade32018644"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "0e9db2d5633acda8bc4a9e9e92920b6d3ce73ccfc102d1da5a41b9bdbaf42a0e"
+        },
+        {
+          "fileName": "chap014.xhtml",
+          "sha256": "a9a82be628550d973ada19aa96e5f51628de55d36c2298d5b3b69e76b14e867a"
+        },
+        {
+          "fileName": "chap015.xhtml",
+          "sha256": "fdfdf4ec96c1bbc23daaa345d12377d56b52f02038b87c74fbc62bf05abb70be"
+        },
+        {
+          "fileName": "chap016.xhtml",
+          "sha256": "a81fd3e0d95a3a7f3b3571825549bc8494d7804e30415b7aa51d02ebc59e089b"
+        },
+        {
+          "fileName": "chap017.xhtml",
+          "sha256": "5fd609b386d4118e260408c48277ad3595cf842cdfa51a18ee97b2780c66a2cf"
+        },
+        {
+          "fileName": "chap018.xhtml",
+          "sha256": "131bef5dcab0dfdf66437ef4ba9ca78136eccf43bf97e94cda9d347c0b362505"
+        },
+        {
+          "fileName": "chap019.xhtml",
+          "sha256": "e0b7e880a7a7adc699097b8c94665f4ef9576ab170fbf2a385e4d9785ab36706"
+        },
+        {
+          "fileName": "chap020.xhtml",
+          "sha256": "2ae0512ccd2f555e55b82b4042a16786a29a800e5a1d8e838f49d21ad2590548"
+        },
+        {
+          "fileName": "chap021.xhtml",
+          "sha256": "2c28e03ba2cef4a5426752f8e100da2f75dbc3eb21fb2583c7890a8fc24bf48b"
+        },
+        {
+          "fileName": "chap022.xhtml",
+          "sha256": "5c780f1b3285e8230f943c97cef429c0e72d591a9907b899205129aeaba85e55"
+        },
+        {
+          "fileName": "chap023.xhtml",
+          "sha256": "e05b73877e92323170fa140437c5a3d4e22e69c1a4bcfbd22f18788d09dd5eb7"
+        },
+        {
+          "fileName": "chap024.xhtml",
+          "sha256": "a1d0b4928e722ed13b4729c5bea2c10380388fcac8b4cd58cbd7237c4cbde73a"
+        },
+        {
+          "fileName": "chap025.xhtml",
+          "sha256": "129e38d5f4b56abc6fa9827cf08389788a79120a1c62ff91118e19785e50ded0"
+        },
+        {
+          "fileName": "chap026.xhtml",
+          "sha256": "ead58d90e3ee1499ff0a6a434e33c858e52f6545ce885a144cdcbab38210fad2"
+        },
+        {
+          "fileName": "chap027.xhtml",
+          "sha256": "2bfda0173fc5e03ebb5de8b3c767b1e014016565351f98c9de42c2ac6c6befd3"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "bde867d984810e05e6deede04a43719df75dbf819f97963ab416f75a67444384"
+        },
+        {
+          "fileName": "ranking-sources.xhtml",
+          "sha256": "6a0875afa0cb19033da2e92d1955e2c717ec08a3a94c3d36f71b168c838d8124"
+        }
+      ],
+      "errors": 0,
+      "warns": 11,
+      "findings": [
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap002.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap003.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap018.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap019.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap020.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap021.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap022.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap023.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap024.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap025.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "same-indicator-twice",
+          "msg": "同じ指標が 2 章: 消費者物価地域差指数（総合） / 消費者物価地域差指数（住居）"
+        }
+      ]
+    },
+    {
+      "id": "K-S3-04",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S3-04/v3-20261118-review/book.epub",
+      "epubSha256": "9667cc1e30d319d6724c0c192d6c89376ee4ad806792f8b52799fb002d6a886d",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "4bd31f0d842bc00ba8f55ae0fef1f7844c172abdcf6549ad6d98e12194eb7a59"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "4f65769e157094cf1221e77f1464f0bd774c9a8736bea4ad3b2178b2eee7264e"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "bef169fafac31c086edc7b98d69b5e49b259eebfb637cfc7748824e7c5345598"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "2b885eed181d8bba8919e1952124f9a5860e8a487ada710373d788227aa7c9cc"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "a8ed6653b8e140f0157f829af28cded91e05040d9454dd9d761c9a3c5389af30"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "fe405b16530d319ad98a6db957bbc4566f590507f6ae52ff2ffbbd61c3c15d9c"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "73b3ac4d8673b0d8b4db8dd5fc6e3de3747186143cc95ddf686f560af2bc0254"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "e751d0ee5e455d3419fe11f736db57009c764350615a0c2e0c1bba3123c42f3d"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "fb25817ad1b6d091911cb937200deedcb1e6950b0f6d40bf15b903d4084d3c70"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "a70e3356c19aa05e82e90befde1eb3499250ee27ee6b314f6db3f7df76b95056"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "0efec2b9567a8606692982682fbc47469e6bf8d521e8395d7735ccb4d1e42822"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "f8cbdcc22196c7c602fb7a67c32ac1657326002a17c5dc4e18ba7ec197541018"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "49808251eeaeb45a1be29f6b7a73d1db1725f37040de7e94512298fe329a3c59"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "a6ea15bd9300849d0225198d2f2c454d9a6c18c9ae02fd9775aeda3af67e9769"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "f5dfcca38fd1c3778cedf45ca8b6a0c41de6cbbc107ee46639771498623b940c"
+        },
+        {
+          "fileName": "chap014.xhtml",
+          "sha256": "4f7cb3c141f8f33a3ef20174091f94bd58da358ea32fb74aa5b059df01ed34e2"
+        },
+        {
+          "fileName": "chap015.xhtml",
+          "sha256": "5773009336983d15735593c8149cf95efee88727162ae226ddd22f966ad96bb8"
+        },
+        {
+          "fileName": "chap016.xhtml",
+          "sha256": "f5700caa4cce979a8210da0ad141ada3efed072541acc3e2c8fcba0aec900b0c"
+        },
+        {
+          "fileName": "chap017.xhtml",
+          "sha256": "1e6d6cda4e4f3b7ad3bfa079130455d812bd119ed5d648d16a749db45a1294f8"
+        },
+        {
+          "fileName": "chap018.xhtml",
+          "sha256": "ad33f163cfef6e8c90f994606b81a847009b25266dc3530ab1b63264060fc58c"
+        },
+        {
+          "fileName": "chap019.xhtml",
+          "sha256": "3334f7cef01b85a99d3810750347107b0dfd91ef34e64e93aca5e2b0abd392ae"
+        },
+        {
+          "fileName": "chap020.xhtml",
+          "sha256": "10ed447fe9f5174f4d1a75672f73182dce1ed7b21a15b5e7b8abfe6e0b7d80a2"
+        },
+        {
+          "fileName": "chap021.xhtml",
+          "sha256": "dd8fca5f7dd82a842c5c5c1ed7d31aa9aa985c79682dfbcd2a16dc8a3d14a12b"
+        },
+        {
+          "fileName": "chap022.xhtml",
+          "sha256": "d0ceefaa7987cfdf063386854dd3d6b3d6ba361f79fb93e6fce58ea70e8f76b3"
+        },
+        {
+          "fileName": "chap023.xhtml",
+          "sha256": "1c9f41ee7cd8e84ef6c7242d7bb9967ffb504bbd4acbbdaef101c3f6fe12fa51"
+        },
+        {
+          "fileName": "chap024.xhtml",
+          "sha256": "1ae62a61ef6f15ef2a5b709fe0ac9ccee74b09c7a9082f0b9810fc9b2039e22d"
+        },
+        {
+          "fileName": "chap025.xhtml",
+          "sha256": "6a606a7949a1cdcab330a421edaa983fe14d481796af26651fc58008b166df71"
+        },
+        {
+          "fileName": "chap026.xhtml",
+          "sha256": "2faf30c9d4120d0a370fc2171452789a4aba6b9f0f28abe8caf8a29b19e2f41a"
+        },
+        {
+          "fileName": "chap027.xhtml",
+          "sha256": "4015178bf4fe36c0cba1d9748116db610f15f81e78496a9b5e111a6c748fc41d"
+        },
+        {
+          "fileName": "chap028.xhtml",
+          "sha256": "4cf013797430edeedc78a8c101bcc24c2030b73396a67e1aaab533dacd2d1752"
+        },
+        {
+          "fileName": "chap029.xhtml",
+          "sha256": "2bfda0173fc5e03ebb5de8b3c767b1e014016565351f98c9de42c2ac6c6befd3"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "a9ba54e3422218303e453db20b4fd6cc9ee938da2fe1fcc8678687158f071d18"
+        },
+        {
+          "fileName": "ranking-sources.xhtml",
+          "sha256": "6a0875afa0cb19033da2e92d1955e2c717ec08a3a94c3d36f71b168c838d8124"
+        }
+      ],
+      "errors": 0,
+      "warns": 14,
+      "findings": [
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap002.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap003.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap018.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap019.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap020.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap021.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap022.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap023.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap024.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap025.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap026.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap027.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap028.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "same-indicator-twice",
+          "msg": "同じ指標が 2 章: 消費者物価地域差指数（総合） / 消費者物価地域差指数（住居）"
+        }
+      ]
+    },
+    {
+      "id": "K-S3-05",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S3-05/v3-20261118-review/book.epub",
+      "epubSha256": "e8fd1e9c1bbcf7454ac4872dd0ac731a0c26b3ad860f0c8d72b3c2ba38cbf4a6",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "8339a6bd24cbc3cde16a1f00c9cab75b7ddd8575a23421d255f88ec8e06a45f2"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "4f65769e157094cf1221e77f1464f0bd774c9a8736bea4ad3b2178b2eee7264e"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "8967f0087867ed24f853d003b6005f0590644f8da67136c9299c6e127a37025b"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "f5bf6928b7cb715410aff177b62f950e3c2e97637a91e85d218cc59e7bbf2bcd"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "74d74b8062012b0fe295ebc9f6a15e7abc92613486827ad1706c63b58f9c1eb7"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "feaa3a378f5eaa16a7590dfc6bbe158b2eeee6482d8240e56d6ca97197b3804a"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "31f93fb26a767599f492e48545fb88b2de9ac85ac28e7a8e39e778f4c853f02a"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "7cd94752a69991898f87a8fe39d7a237ade64c5febc6575f90f841ae332f68b4"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "cf29c42a6704f7bf428e933d81279e0faa5c60fbb37101ff527da68e207d5bb0"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "0babbb981d9b1b7b0c040fb4730ef5017ace9bc14c4b7f62be011114a7d5e19b"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "ba386e0cda3d90c298ee616f9c39c084fa6f763e7306daa9e893f9ce7e321fbe"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "9f76b5f919cfb8baa81b0ecf61809389c4a1ef3227c8bef8bae3e1211824df3e"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "88c58ff5c275eec4ebf735f56a04707c04882ef1109dd6c6c0bad8027aa8b517"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "e86a6f2b6da4e28bba7d2a48596a562a3c512356b6a7b7f9a744559b3b9c4765"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "3bddfe5356f5b8fe5446b108d69388ab2b03c4458e8f9a65c51ecf5ed7b2c961"
+        },
+        {
+          "fileName": "chap014.xhtml",
+          "sha256": "6c4f4b5c623d7112c6b7b77bab1012ea12e703fe863cc551d7a6020112034ff8"
+        },
+        {
+          "fileName": "chap015.xhtml",
+          "sha256": "85116a06cf4172749504457af623203722a6bcb439cb9dd7ba914aa4f8be0ac0"
+        },
+        {
+          "fileName": "chap016.xhtml",
+          "sha256": "fdf14e8d6ca556e55476c516eddb1e20c1269aa2332f59a5fcf29b25c1efe85c"
+        },
+        {
+          "fileName": "chap017.xhtml",
+          "sha256": "6a9e9043c3474d6056690f582bb5b07aefa66eb27cd8e6da464fe21365bdcb39"
+        },
+        {
+          "fileName": "chap018.xhtml",
+          "sha256": "d1ab6a76df9bb9a2c12e79d919cdfb306ad36cb09f1c5c14e0f1e35e252d033e"
+        },
+        {
+          "fileName": "chap019.xhtml",
+          "sha256": "6db29a0ebd6b51a733f2fdd221e2958188c14f007a5628407b101e054f90dc66"
+        },
+        {
+          "fileName": "chap020.xhtml",
+          "sha256": "250111258d492f824d5ae334aafd9681dc4fc9041f5116dbe9f55ad34f3863ae"
+        },
+        {
+          "fileName": "chap021.xhtml",
+          "sha256": "7203793e00a8096fea474bdb70b7b32e1231f0527cc26bcf3501ea3c44840170"
+        },
+        {
+          "fileName": "chap022.xhtml",
+          "sha256": "22d554b0a1fcdd7832f784ae1e629cb1a53b33d778801af06ff5015c140e5c77"
+        },
+        {
+          "fileName": "chap023.xhtml",
+          "sha256": "693dcbf01b0f98f54bc6f0fa87c3a21d685242f8c4a8efcea673461758abcdc1"
+        },
+        {
+          "fileName": "chap024.xhtml",
+          "sha256": "96f0975902c0327487a68bdf899c909a6c07c935743c5f6eb692a7bc47ccb8d9"
+        },
+        {
+          "fileName": "chap025.xhtml",
+          "sha256": "b5e31fd9d148909d103db8e896d655a04dc0e3c97739115ea8ae53f530c8789d"
+        },
+        {
+          "fileName": "chap026.xhtml",
+          "sha256": "b1f76e354b8fba839020254667b7b1c3e3782be1af6565b4730b36d81b0ef139"
+        },
+        {
+          "fileName": "chap027.xhtml",
+          "sha256": "2bfda0173fc5e03ebb5de8b3c767b1e014016565351f98c9de42c2ac6c6befd3"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "3d6380c538357d9a05065de093e30f5e2e7083b8b814bc7f2e2bb91ad52538df"
+        },
+        {
+          "fileName": "ranking-sources.xhtml",
+          "sha256": "6a0875afa0cb19033da2e92d1955e2c717ec08a3a94c3d36f71b168c838d8124"
+        }
+      ],
+      "errors": 0,
+      "warns": 12,
+      "findings": [
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap002.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap003.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap018.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap019.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap020.xhtml: 2022,2024 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap021.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap022.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap023.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap024.xhtml: 2022,2024 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap025.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap026.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "same-indicator-twice",
+          "msg": "同じ指標が 2 章: 消費者物価地域差指数（総合） / 消費者物価地域差指数（住居）"
+        }
+      ]
+    },
+    {
+      "id": "K-S3-06",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S3-06/v3-20261118-review/book.epub",
+      "epubSha256": "faa603cbdf971b7a4ca777f66c0c26615b3fbf5d53f6e036e64a370004a9acb6",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "305b7bad60c6abd68ce6d454cb7aca07fc08852381f1c98db8206b68a5cdd855"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "4f65769e157094cf1221e77f1464f0bd774c9a8736bea4ad3b2178b2eee7264e"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "39b1aa0aa9cd4c049b66e320a9c49403184425d968fb1bfbc2e70c49735616ef"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "c5afa3a9a7defebbbd0642cf0dc65f9c1f265d35618f83567b5ddec01a3605c1"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "3782ba537f7e36163218f0521aa99b1f53b53995fe8418f9df68176d0a3bc1b9"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "eae1e7085bcb1745e909871353945bbbb6410f0708ee7c3c351a5436193b5dc1"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "d4a006bf7132bb4d7665aaaf0875f1f8b819ea5c696ec1b7b9123059437d1395"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "e4fa74bacae320a9990d03a9ba5194ce2bec5e04b3700b04d45b338131bc4667"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "2905f007c5833d56ff9f037a5f6cde7ad86f33db18e5da626df657f310ce43de"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "5793e1c60ed5e99b8d2fcc659ce843860d236da8352f019c2d22d0c0afa9fae0"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "b993e0ca20843a4b4ace7caf7d1cbb2b1ecd489b94c4f9dbaf9b7ba30154bf45"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "7685700a245bfac5d2fc9385e6568e856ad308d85c0dc14e7a4725b605d210e2"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "6f3e4f8611aea78b5916204a9d51cc1da4aa36d2bc5ecca43a4d38d480e3e3d2"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "01f8dde0b6e41df50384944c13fed35fe738e65698db28958ab6656346f20495"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "606a075496555e0007cb67100c28d35986ff3385406ac4fe1b2438703e3c09f2"
+        },
+        {
+          "fileName": "chap014.xhtml",
+          "sha256": "9c4a08edbd9d2164cb624a6c7ec706de6e51d008f5652d29d770d0d23dc36bec"
+        },
+        {
+          "fileName": "chap015.xhtml",
+          "sha256": "bed85cc8fbfe5702bc52a9b8462bbc7f87ff3cb73291ec15e3e31176a613cad3"
+        },
+        {
+          "fileName": "chap016.xhtml",
+          "sha256": "cc07e24016ffe20cceb5b9c3c0a99a7f4eedb76850e97fc623f883fa700fa128"
+        },
+        {
+          "fileName": "chap017.xhtml",
+          "sha256": "4aeff3f3c5803ef5c581a238907caad332321b0972f1a83d98d0c31b5199d986"
+        },
+        {
+          "fileName": "chap018.xhtml",
+          "sha256": "62fd427b7795d28edea8639b4af6d3072a44d8f9612c0073ac0af5211e91a8c3"
+        },
+        {
+          "fileName": "chap019.xhtml",
+          "sha256": "5ce8a1c52ea899430a27884761f80972ddce4985a15a94e03ab58cd321c696df"
+        },
+        {
+          "fileName": "chap020.xhtml",
+          "sha256": "a37c927f41c547b371c26f1305b2ec0d6826114c064d8e4d92cc9e76400260a0"
+        },
+        {
+          "fileName": "chap021.xhtml",
+          "sha256": "f4e0a02162f1d4ac431867eebd39d93a0728be3171bb788ab9045564bcd9f60b"
+        },
+        {
+          "fileName": "chap022.xhtml",
+          "sha256": "fa29c199990bbc92063e7ec6ec0b00ed7375b9d50475c8b0a0deefad474784be"
+        },
+        {
+          "fileName": "chap023.xhtml",
+          "sha256": "61bd49ddfbb23e6f4c880bfed8c5d3233861cd308e0e88980416196558bfb1ca"
+        },
+        {
+          "fileName": "chap024.xhtml",
+          "sha256": "5e96fc8ee4bb4501560d7f0c03505c819be2038dc6d41aaa1f2f03c684a4cd8b"
+        },
+        {
+          "fileName": "chap025.xhtml",
+          "sha256": "2bfda0173fc5e03ebb5de8b3c767b1e014016565351f98c9de42c2ac6c6befd3"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "a17aa942612d571a9645e7edccbce17611362f0a13993cfc9566657241e81854"
+        },
+        {
+          "fileName": "ranking-sources.xhtml",
+          "sha256": "6a0875afa0cb19033da2e92d1955e2c717ec08a3a94c3d36f71b168c838d8124"
+        }
+      ],
+      "errors": 0,
+      "warns": 10,
+      "findings": [
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap002.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap003.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap018.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap019.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap020.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap021.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap022.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap023.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap024.xhtml: 2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "same-indicator-twice",
+          "msg": "同じ指標が 2 章: 消費者物価地域差指数（総合） / 消費者物価地域差指数（住居）"
+        }
+      ]
+    },
+    {
+      "id": "K-S3-07",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S3-07/v3-20261118-review/book.epub",
+      "epubSha256": "97a6b452e3efd84fbf12b0c918dff19f2f5d70819897b74138bd68086668934a",
+      "chapters": [
+        {
+          "fileName": "chap-000.xhtml",
+          "sha256": "8900da473823a3ccdfebdddac217400079a37f06a3778f791266857af0a5bca8"
+        },
+        {
+          "fileName": "chap-00a.xhtml",
+          "sha256": "4f65769e157094cf1221e77f1464f0bd774c9a8736bea4ad3b2178b2eee7264e"
+        },
+        {
+          "fileName": "chap001.xhtml",
+          "sha256": "824c1114b6da790ce76611a6fe7be98480f64fe2ff193af3e870e572208e40d5"
+        },
+        {
+          "fileName": "chap002.xhtml",
+          "sha256": "50686c6594a8c26fef6cb0f6ede5d079a95e12737455cf28217c075a5a915284"
+        },
+        {
+          "fileName": "chap003.xhtml",
+          "sha256": "479f77e882a7b8f1f2e0ccde13ef2d17636909b313cb18c6a125a898daa5d26a"
+        },
+        {
+          "fileName": "chap004.xhtml",
+          "sha256": "af894d7b0a5db24f1d608e86d9e5601735e912ebee91699258833231dc9460e4"
+        },
+        {
+          "fileName": "chap005.xhtml",
+          "sha256": "4649cb74685a69c932afb70c3ae1e3dde9f145d391b684b6b0aa3f9e502f4d31"
+        },
+        {
+          "fileName": "chap006.xhtml",
+          "sha256": "9e52a283e03ced5043646eece7657682cbef8143ce1af40e74c1804428e9491c"
+        },
+        {
+          "fileName": "chap007.xhtml",
+          "sha256": "c3442a4a1e2f14b7fadbfc6a4f6db48bbec0b55dd55950ec4ecdfdb95c0e4df3"
+        },
+        {
+          "fileName": "chap008.xhtml",
+          "sha256": "e07ecd923e5b4749c94f39e511c98ff57578026d355a7fd56956f613c2a2f13e"
+        },
+        {
+          "fileName": "chap009.xhtml",
+          "sha256": "79871a1fcebf69b318735263de3639195cf15f2f092453d4aa242a80417dd69a"
+        },
+        {
+          "fileName": "chap010.xhtml",
+          "sha256": "acac7d56ba4e808607f716ddc6cd51097ced9b0fb7b526511efa7eb49a012e80"
+        },
+        {
+          "fileName": "chap011.xhtml",
+          "sha256": "4f28d9b7d2af193f363d8b2084afebb2d7806b8616fbaa02bde912ae9dd738aa"
+        },
+        {
+          "fileName": "chap012.xhtml",
+          "sha256": "6251d4199bb64247e7ebed650dfd53d516e9c1947dfc7a7a03483f0afc3cbf6f"
+        },
+        {
+          "fileName": "chap013.xhtml",
+          "sha256": "b275ea08d81da72c3bbaac0b872f1a29aa3a9764de14e2aacec6290ea98d726b"
+        },
+        {
+          "fileName": "chap014.xhtml",
+          "sha256": "869587beae6309e4c40913680819ec769583ac27137db4c26d12bbb6f97b46c5"
+        },
+        {
+          "fileName": "chap015.xhtml",
+          "sha256": "3cad9a0eb0076ed006c8d4752f89b35492ac16fc4462db1793f2aa7ba74e6ee2"
+        },
+        {
+          "fileName": "chap016.xhtml",
+          "sha256": "e4381b19d3c9a466d54fcf40698f2672be0ee02baf75375910c375f379e6ac30"
+        },
+        {
+          "fileName": "chap017.xhtml",
+          "sha256": "b80812142f8873fc005995c16529dd395bfa85031a20731f9c5a783298430b69"
+        },
+        {
+          "fileName": "chap018.xhtml",
+          "sha256": "3aa3ae5b6d99dd9be2ed6ce6bbebf1ca9694453d3efb793665b5e1cb5c92cdbf"
+        },
+        {
+          "fileName": "chap019.xhtml",
+          "sha256": "8639f79e8c946677112c93e94d8b3226c1c4cba0f675fa4d286abeedc381224a"
+        },
+        {
+          "fileName": "chap020.xhtml",
+          "sha256": "091879ac8829cbe365d905d6c50c53ae4fafd7f06d858a600e2aa4380a822813"
+        },
+        {
+          "fileName": "chap021.xhtml",
+          "sha256": "c223ed4304d85bc14069ab0aa39aa42a6a48066e93cf1c604cb3cc3849587978"
+        },
+        {
+          "fileName": "chap022.xhtml",
+          "sha256": "a3fc45eee3c08b9f7cbe0113ffb8e4ceb7ddb1ef47321508d584454ef89a6c89"
+        },
+        {
+          "fileName": "chap023.xhtml",
+          "sha256": "467688172878a77a23d04b26714366ffe3382d813ab04f29606033a32eff68b3"
+        },
+        {
+          "fileName": "chap024.xhtml",
+          "sha256": "2bfda0173fc5e03ebb5de8b3c767b1e014016565351f98c9de42c2ac6c6befd3"
+        },
+        {
+          "fileName": "chap-999.xhtml",
+          "sha256": "0863192b6e99a7d462b5aad637dfbe63fd379fa0807c2363f24cdbccc3ba4784"
+        },
+        {
+          "fileName": "ranking-sources.xhtml",
+          "sha256": "6a0875afa0cb19033da2e92d1955e2c717ec08a3a94c3d36f71b168c838d8124"
+        }
+      ],
+      "errors": 0,
+      "warns": 10,
+      "findings": [
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap001.xhtml: 2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap002.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap003.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap018.xhtml: 2022,2024 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap019.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap020.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap021.xhtml: 2022,2024 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap022.xhtml: 2024,2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "year-nendo-mix",
+          "msg": "chap023.xhtml: 2022 が「年」と「年度」の両方で書かれている"
+        },
+        {
+          "level": "warn",
+          "code": "same-indicator-twice",
+          "msg": "同じ指標が 2 章: 消費者物価地域差指数（総合） / 消費者物価地域差指数（住居）"
+        }
+      ]
+    },
+    {
+      "id": "K-S3-08",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S3-08/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S3-08/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S4-01",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S4-01/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S4-01/v3-20261118-review/book.epub"
+        }
+      ]
+    },
+    {
+      "id": "K-S4-02",
+      "version": "v3-20261118-review",
+      "epubPath": "/Users/minamidaisuke/stats47/.local/kindle-books/K-S4-02/v3-20261118-review/book.epub",
+      "epubSha256": null,
+      "chapters": [],
+      "errors": 1,
+      "warns": 0,
+      "findings": [
+        {
+          "level": "error",
+          "code": "missing-epub",
+          "msg": "生成物が無い: K-S4-02/v3-20261118-review/book.epub"
+        }
+      ]
+    }
+  ]
+}
