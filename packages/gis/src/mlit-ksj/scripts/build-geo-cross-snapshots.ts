@@ -6,7 +6,7 @@ import * as path from "node:path";
 import { pipeline } from "node:stream/promises";
 import { Readable } from "node:stream";
 
-import { fetchPrefectures } from "@stats47/area";
+import { PREFECTURE_COUNT, fetchPrefectures, prefectureAreaCodeOf, to2DigitPrefCode } from "@stats47/area";
 import { BUSINESS_PLAN_M1_GEO_ANALYSES } from "@stats47/data-configs/business-plan";
 import { feature as topologyFeature } from "topojson-client";
 import type {
@@ -281,7 +281,7 @@ async function loadPopulationMeshes(): Promise<{
   const records: PopulationMeshPoint[] = [];
   const inputs: GeoAnalysisInputEvidence[] = [];
   for (const [index, prefecture] of fetchPrefectures().entries()) {
-    const prefCode = prefecture.prefCode.slice(0, 2);
+    const prefCode = to2DigitPrefCode(prefecture.prefCode);
     const key = `gis/mlit-ksj/mesh1000r6/${POPULATION_VERSION}/${prefCode}.topojson`;
     const url = `${R2_PUBLIC_BASE}/${key}`;
     const { value: topology, evidence } = await fetchJsonWithEvidence<Topology>(
@@ -366,13 +366,13 @@ function loadLandPricePoints(
     if (!current.geometry) continue;
     const center = geometryCenter(flattenPositions(current.geometry));
     if (!center) continue;
-    const accumulator = accumulators.get(`${municipalityCode.slice(0, 2)}000`);
+    const accumulator = accumulators.get(prefectureAreaCodeOf(municipalityCode));
     if (!accumulator) continue;
     accumulator.residentialPrices.push(price);
     if (priceChange !== null) accumulator.residentialPriceChanges.push(priceChange);
     points.push({
       id: `${municipalityCode}-${stringProperty(current.properties, "L01_003") ?? index + 1}`,
-      areaCode: `${municipalityCode.slice(0, 2)}000`,
+      areaCode: prefectureAreaCodeOf(municipalityCode),
       longitude: center[0],
       latitude: center[1],
       price,
@@ -654,7 +654,7 @@ function createSnapshot(input: {
   const missingAreaCodes = [...prefectureCodes].filter(
     (code) => !actualCodes.has(code),
   );
-  if (rankedRows.length !== 47 || missingAreaCodes.length > 0) {
+  if (rankedRows.length !== PREFECTURE_COUNT || missingAreaCodes.length > 0) {
     throw new Error(
       `${input.slug}: 都道府県coverage不良 actual=${rankedRows.length} missing=${missingAreaCodes.join(",")}`,
     );
@@ -832,7 +832,7 @@ function writeStationAccessDetails(
       throw new Error(`${prefecture.prefCode}: aggregate row欠落`);
     }
     assertStationAccessConservation(detail, aggregateRow);
-    const prefCode2 = prefecture.prefCode.slice(0, 2);
+    const prefCode2 = to2DigitPrefCode(prefecture.prefCode);
     const evidence = writeJsonArtifact(
       geoStationAccessPrefKey(prefCode2),
       detail,
@@ -853,7 +853,7 @@ async function loadPassengerContextEvidence(): Promise<PassengerContextEvidence>
   const inputs: GeoAnalysisInputEvidence[] = [];
   const outputs: GeoAnalysisArtifactEvidence[] = [];
   for (const prefecture of fetchPrefectures()) {
-    const prefCode2 = prefecture.prefCode.slice(0, 2);
+    const prefCode2 = to2DigitPrefCode(prefecture.prefCode);
     const key = `app/station-passengers/${prefCode2}/stations.json`;
     const { value, evidence } = await fetchJsonWithEvidence<unknown>(
       `${R2_PUBLIC_BASE}/${key}`,
@@ -1037,7 +1037,7 @@ function writeLandPriceDetails(input: {
     if (!aggregateRow) throw new Error(`${detail.areaCode}: aggregate row欠落`);
     assertLandPriceConservation(detail, aggregateRow);
     const evidence = writeJsonArtifact(
-      geoAnalysisPrefKey("population-land-price", detail.areaCode.slice(0, 2)),
+      geoAnalysisPrefKey("population-land-price", to2DigitPrefCode(detail.areaCode)),
       detail,
       detail.meshes.length + detail.landPricePoints.length,
       false,
@@ -1166,7 +1166,7 @@ function writeFloodDetails(input: {
     if (!aggregateRow) throw new Error(`${prefecture.prefCode}: aggregate row欠落`);
     assertFloodConservation(detail, aggregateRow);
     const evidence = writeJsonArtifact(
-      geoAnalysisPrefKey("population-flood-risk", prefecture.prefCode.slice(0, 2)),
+      geoAnalysisPrefKey("population-flood-risk", to2DigitPrefCode(prefecture.prefCode)),
       detail,
       detail.meshes.length,
       false,

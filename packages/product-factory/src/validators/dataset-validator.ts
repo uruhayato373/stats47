@@ -3,6 +3,7 @@
  * 仕様 §検証「47 都道府県の件数・コード・順位・欠損」「出典・年・単位」を機械検査する。
  */
 import type { Dataset } from "../data/dataset";
+import { PREFECTURE_COUNT } from "@stats47/area";
 import { PREFECTURE_CODES5 } from "../data/prefectures";
 
 export interface DatasetIssue {
@@ -21,8 +22,8 @@ export function validateDataset(ds: Dataset): DatasetValidation {
   const errors: DatasetIssue[] = [];
 
   // 件数
-  if (ds.values.length !== 47) {
-    errors.push({ code: "count", message: `values が 47 件でない: ${ds.values.length}` });
+  if (ds.values.length !== PREFECTURE_COUNT) {
+    errors.push({ code: "count", message: `values が ${PREFECTURE_COUNT} 件でない: ${ds.values.length}` });
   }
 
   // コード集合 (欠落・余剰・重複)

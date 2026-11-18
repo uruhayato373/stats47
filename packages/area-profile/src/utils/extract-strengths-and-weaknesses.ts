@@ -1,6 +1,7 @@
+import { PREFECTURE_COUNT } from "@stats47/area/area-code";
+
 const STRENGTH_RANK_THRESHOLD = 5;
 const WEAKNESS_RANK_THRESHOLD = 43;
-const MAX_PREFECTURE_RANK = 47;
 
 export interface ExtractOptions {
   /** 強みとみなす rank の上限 (デフォルト 5 = top 5) */
@@ -33,7 +34,7 @@ export function extractStrengthsAndWeaknesses<T extends { rank: number }>(
 } {
   const strengthMax = options.strengthMax ?? STRENGTH_RANK_THRESHOLD;
   const weaknessMin = options.weaknessMin ?? WEAKNESS_RANK_THRESHOLD;
-  const maxRank = options.maxRank ?? MAX_PREFECTURE_RANK;
+  const maxRank = options.maxRank ?? PREFECTURE_COUNT;
 
   const strengths = dataList
     .filter((d) => d.rank >= 1 && d.rank <= strengthMax)

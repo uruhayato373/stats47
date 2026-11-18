@@ -1,7 +1,6 @@
-import { extractStrengthsAndWeaknesses } from "./extract-strengths-and-weaknesses";
+import { PREFECTURE_COUNT } from "@stats47/area/area-code";
 
-/** 都道府県数 */
-const NUM_PREFECTURES = 47;
+import { extractStrengthsAndWeaknesses } from "./extract-strengths-and-weaknesses";
 
 /** バッチ集約時の地域データ */
 export interface AreaRankingData {
@@ -33,7 +32,7 @@ export interface AreaProfileRow {
  * 順位からパーセンタイルを計算する（純粋関数）
  */
 export function computePercentile(rank: number): number {
-  return ((NUM_PREFECTURES - rank) / (NUM_PREFECTURES - 1)) * 100;
+  return ((PREFECTURE_COUNT - rank) / (PREFECTURE_COUNT - 1)) * 100;
 }
 
 /**

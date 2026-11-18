@@ -1,3 +1,4 @@
+import { PREFECTURE_LIST_2DIGIT, isNationalAreaCode, to2DigitPrefCode } from '@stats47/area';
 import { statsR2Key } from "@stats47/r2-storage/keys";
 /**
  * 問いのページ (試作) の計算。4 つの問いについて、空間演算で市区町村・県を組に分け、組ごとの推移を出す。
@@ -34,7 +35,7 @@ import type { GeometryCollection, Topology } from "topojson-specification";
 const ROOT = path.resolve(__dirname, "../../../../..");
 const OUT_DIR = path.join(ROOT, ".local/r2/app/geo/questions");
 const R2_PUBLIC = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
-const PREF_CODES = Array.from({ length: 47 }, (_, i) => String(i + 1).padStart(2, "0"));
+const PREF_CODES = PREFECTURE_LIST_2DIGIT.map((p) => p.code);
 
 type GroupDef = { code: string; label: string; color: string };
 interface QuestionOutput {
@@ -330,8 +331,8 @@ async function main(): Promise<void> {
   const guestSeries = new Map<string, Map<number, number>>();
   const prefNames = new Map<string, string>();
   for (const row of guests.rows) {
-    if (typeof row.value !== "number" || row.areaCode === "00000") continue;
-    const pref = row.areaCode.slice(0, 2);
+    if (typeof row.value !== "number" || isNationalAreaCode(row.areaCode)) continue;
+    const pref = to2DigitPrefCode(row.areaCode);
     const s = guestSeries.get(pref) ?? new Map<number, number>();
     s.set(Number(row.yearCode.slice(0, 4)), row.value);
     guestSeries.set(pref, s);

@@ -1,4 +1,5 @@
 import { statsR2Key } from "@stats47/r2-storage/keys";
+import { PREFECTURE_COUNT, to2DigitPrefCode } from "@stats47/area";
 /**
  * 全国学力・学習状況調査 (国立教育政策研究所 NIER) の都道府県別 factsheet xlsx から
  * 「小学校 国語・算数 / 中学校 国語・数学 の平均正答率の単純平均」を作り
@@ -92,7 +93,7 @@ async function main() {
   const nationalBySubject = new Map<string, Set<number>>();
   const rows: Array<{ areaCode: string; areaName: string; yearCode: string; yearName: string; value: number | null; unit: string; rank: number | null; subjects: number[] }> = [];
   for (const pref of PREFECTURES) {
-    const nn = pref.code.slice(0, 2);
+    const nn = to2DigitPrefCode(pref.code);
     const slug = `${nn}_${SLUGS[nn]}`;
     const subjectValues: number[] = [];
     for (const s of SUBJECTS) {
@@ -114,7 +115,7 @@ async function main() {
   }
   const nationalMean = Array.from(nationalBySubject.values()).map((s) => Array.from(s)[0]).reduce((a, b) => a + b, 0) / nationalBySubject.size;
   console.log(`全国（公立）: ${Array.from(nationalBySubject.entries()).map(([k, v]) => `${k}=${Array.from(v)[0]}`).join(", ")} → 単純平均 ${nationalMean.toFixed(2)}`);
-  if (rows.length !== 47) throw new Error(`47 県そろわない: ${rows.length}`);
+  if (rows.length !== PREFECTURE_COUNT) throw new Error(`${PREFECTURE_COUNT} 県そろわない: ${rows.length}`);
   // rank: value 降順・同値同順位 (page-data-batch の assignRanks と同じ規則)
   const ranked = [...rows].sort((a, b) => (b.value as number) - (a.value as number));
   let prevValue: number | null = null; let prevRank = 0;

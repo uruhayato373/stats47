@@ -137,8 +137,7 @@ export async function mergeTopoJson(
         areaCode = String(existingProperties.areaCode);
       } else {
         // TopoJSONのgeometry順序からareaCodeを生成（1-47を2桁の文字列に変換して"000"を追加）
-        const prefCode = String(index + 1).padStart(2, "0");
-        areaCode = to5DigitPrefCode(prefCode);
+        areaCode = to5DigitPrefCode(String(index + 1));
       }
 
       // データを取得
@@ -202,7 +201,7 @@ export async function mergeTopoJson(
     const topoAreaCodes = new Set(
       geometries.map((g: any, i: number) => {
         const props = g.properties || {};
-        return props.areaCode || `${String(i + 1).padStart(2, "0")}000`;
+        return props.areaCode || to5DigitPrefCode(String(i + 1));
       })
     );
 

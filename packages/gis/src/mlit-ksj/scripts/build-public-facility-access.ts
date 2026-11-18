@@ -2,7 +2,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 import { createHash } from 'node:crypto';
 import { parseArgs } from 'node:util';
-import { fetchPrefectures, to5DigitPrefCode } from '@stats47/area';
+import { PREFECTURE_COUNT, fetchPrefectures, to5DigitPrefCode } from '@stats47/area';
 import { GEO_ANALYSES } from '@stats47/data-configs/business-plan';
 import { feature } from 'topojson-client';
 import type { Topology, GeometryObject } from 'topojson-specification';
@@ -380,7 +380,7 @@ async function main() {
     );
   }
   ensure(
-    details.length === 47 &&
+    details.length === PREFECTURE_COUNT &&
       details.reduce((sum, d) => sum + d.meshes.length, 0) === 177791,
     'Population cohort changed'
   );

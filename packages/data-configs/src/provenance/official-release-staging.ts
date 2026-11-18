@@ -1,6 +1,6 @@
 import { extractYearCode } from "@stats47/estat-api/api";
 // Compatibility: malformed time prefixes retain the previous slice result.
-import { fetchPrefectures } from "@stats47/area";
+import { fetchPrefectures, isNationalAreaCode } from "@stats47/area";
 import type { SingleEntityRow } from "../../../stats-r2/src/types";
 import { classifyShape, PREFECTURE_COUNT, summarizeShape } from "../shape-gate";
 import { AGRICULTURAL_OUTPUT_RELEASE } from "../../../../data/metric-sources/official-theme-releases";
@@ -77,7 +77,7 @@ export function parseAgriculturalHistory(raw: unknown): SingleEntityRow[] {
     if (value["@cat01"] !== spec.cdCat01 || value["@unit"] !== spec.unit) throw new Error("Agricultural history: wrong series/unit");
     const areaName = prefectureByCode.get(value["@area"]);
     if (!areaName) {
-      if (value["@area"] === "00000") continue;
+      if (isNationalAreaCode(value["@area"])) continue;
       throw new Error("Agricultural history: unexpected geographic scope");
     }
     if (!/^\d{4}100000$/.test(value["@time"])) throw new Error("Agricultural history: expected calendar-year observations");

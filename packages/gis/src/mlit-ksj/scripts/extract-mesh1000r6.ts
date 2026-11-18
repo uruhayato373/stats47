@@ -163,7 +163,7 @@ async function main() {
   console.log(`  エントリ数: ${outerDir.files.length}`);
 
   const prefs = singlePref
-    ? [singlePref.padStart(2, "0")]
+    ? [to2DigitPrefCode(singlePref)]
     : PREFECTURE_AREA_CODES.map(to2DigitPrefCode);
 
   const results: Array<{

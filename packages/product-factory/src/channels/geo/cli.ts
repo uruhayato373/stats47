@@ -6,6 +6,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import JSZip from 'jszip';
 import { SITE } from '@stats47/data-configs';
+import { PREFECTURE_COUNT } from '@stats47/area';
 
 interface PipelineItem {
   contentId: string;
@@ -152,8 +153,8 @@ function stationStageSummary(aggregate: Record<string, unknown>): StationStageSu
 
   const detailDir = path.join(repoRoot, '.local/r2/app/geo/population-station-access/pref');
   const detailFiles = fs.readdirSync(detailDir).filter((name) => /^\d{2}\.json$/.test(name)).sort();
-  if (detailFiles.length !== 47) {
-    throw new Error(`station detail count must be 47: ${detailFiles.length}`);
+  if (detailFiles.length !== PREFECTURE_COUNT) {
+    throw new Error(`station detail count must be ${PREFECTURE_COUNT}: ${detailFiles.length}`);
   }
   const stationIds: string[] = [];
   for (const name of detailFiles) {
@@ -365,7 +366,7 @@ async function generate(item: PipelineItem): Promise<ProductManifest> {
   if (!item.publicationReady) throw new Error(`publication gate not ready: ${item.analysisSlug}`);
   const aggregate = await loadAggregate(item);
   const rows = rowsOf(aggregate.value);
-  if (rows.length !== 47) throw new Error(`row count must be 47: ${item.analysisSlug}=${rows.length}`);
+  if (rows.length !== PREFECTURE_COUNT) throw new Error(`row count must be ${PREFECTURE_COUNT}: ${item.analysisSlug}=${rows.length}`);
   const aggregateMeta = aggregate.value.meta;
   const generatedAt = typeof aggregate.value.generatedAt === 'string'
     ? aggregate.value.generatedAt
@@ -441,7 +442,7 @@ async function validate(items: PipelineItem[]): Promise<void> {
     if (item.analysisKind === 'spatial-cross' && (manifest.uncommittedCode !== false || !manifest.codeRevision)) {
       failures.push(`${item.paid.articleKey}: uncommitted/unrecorded reproduction code; regenerate after commit before distribution`);
     }
-    if (manifest.rowCount !== 47 || manifest.canonicalPath !== item.free.canonicalPath) {
+    if (manifest.rowCount !== PREFECTURE_COUNT || manifest.canonicalPath !== item.free.canonicalPath) {
       failures.push(`${item.paid.articleKey}: row/canonical mismatch`);
     }
     for (const file of manifest.files) {

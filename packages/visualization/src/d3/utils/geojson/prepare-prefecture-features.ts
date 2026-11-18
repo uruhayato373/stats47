@@ -4,6 +4,11 @@
  * TopoJSONからGeoJSONへの変換と都道府県情報の正規化を一括で行います。
  */
 
+import {
+  NATIONAL_AREA_CODE,
+  prefCodeFromTopoProperties,
+  to5DigitPrefCode,
+} from "@stats47/area/area-code";
 import type { TopoJSONTopology } from "@stats47/types";
 import type { Feature, FeatureCollection } from "geojson";
 import type { TopojsonModule } from "../../types/d3";
@@ -35,8 +40,8 @@ export function preparePrefectureFeatures(
   return featureCollection.features.map((feature: Feature) => {
     const properties = feature.properties || {};
 
-    const code = properties.N03_007 || properties.prefCode || properties.code;
-    const prefCode = code ? `${String(code).padStart(2, "0")}000` : "00000";
+    const prefCode2 = prefCodeFromTopoProperties(properties);
+    const prefCode = prefCode2 ? to5DigitPrefCode(prefCode2) : NATIONAL_AREA_CODE;
 
     const prefName =
       properties.N03_001 ||

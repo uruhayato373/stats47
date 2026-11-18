@@ -6,6 +6,7 @@
  * 日本語は購入者環境のフォントで表示される (Office 実機検証は Phase 4)。
  */
 import PptxGenJS from "pptxgenjs";
+import { to2DigitPrefCode } from "@stats47/area";
 import type { Dataset } from "../data/dataset";
 import type { PrefectureGeometry } from "../maps/prefecture-geometry";
 import { classifyChoropleth, rankingBarSpec, rankItems } from "../charts/chart-spec";
@@ -141,7 +142,7 @@ function addScatterSlide(pptx: PptxGenJS, ds: Dataset, title: string, subtitle: 
   addTitle(slide, title, subtitle);
   const pts = ds.values.filter((d): d is typeof d & { value: number } => d.value !== null);
   const xs = pts.map((d) => d.value);
-  const ys = pts.map((d) => (d.value * 1.3 + (Number(d.code5.slice(0, 2)) % 7) * 2)); // 派生の第2指標 (サンプル)
+  const ys = pts.map((d) => (d.value * 1.3 + (Number(to2DigitPrefCode(d.code5)) % 7) * 2)); // 派生の第2指標 (サンプル)
   slide.addChart("scatter", [
     { name: "X: サンプル指標", values: xs },
     { name: "Y: 関連サンプル指標", values: ys },

@@ -21,7 +21,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { buildMunicipalityEntityPolicy, fetchPrefectures, listPublishableMunicipalities } from "@stats47/area";
+import { buildMunicipalityEntityPolicy, fetchPrefectures, listPublishableMunicipalities, to2DigitPrefCode } from "@stats47/area";
 
 import { buildRecipe } from "../src/recipe.js";
 import { METRICS_REGISTRY } from "../src/registry.js";
@@ -76,11 +76,11 @@ async function main() {
   if (declared && declared !== sha) console.warn(`警告: config の sourceSha256 (${declared}) と異なる。新しい版なら config を更新すること`);
 
   const parsed = parseWaitingRows(await readXlsxSheet(buf, SHEET));
-  const prefNameByCode = new Map(fetchPrefectures().map((p) => [p.prefCode.slice(0, 2), p.prefName]));
+  const prefNameByCode = new Map(fetchPrefectures().map((p) => [to2DigitPrefCode(p.prefCode), p.prefName]));
   const refs: MunicipalityRef[] = listPublishableMunicipalities(buildMunicipalityEntityPolicy()).map((e) => ({
     code: e.code,
     name: e.name,
-    prefectureName: prefNameByCode.get(e.code.slice(0, 2)) ?? "",
+    prefectureName: prefNameByCode.get(to2DigitPrefCode(e.code)) ?? "",
   }));
   const { joined } = joinToMunicipalities(parsed, refs);
   const t = tally(joined);

@@ -1,3 +1,4 @@
+import { PREFECTURE_CODE_2DIGIT_RE, PREFECTURE_COUNT, to2DigitPrefCode } from '@stats47/area';
 import { summarizeNumericValues } from '@stats47/types';
 /** Opt-in article prototypes. Fixed values; separate from the canonical Web/SNS renderers. */
 import { FONT_FAMILY, SCATTER_COLORS } from '../shared/color';
@@ -32,8 +33,8 @@ ${content}
 </svg>`;
 }
 function assertPrefectures(rows: { code: string }[]) {
-  const codes = rows.map(r => r.code.slice(0, 2));
-  if (rows.length !== 47 || new Set(codes).size !== 47 || codes.some(c => !/^(0[1-9]|[1-3][0-9]|4[0-7])$/.test(c)))
+  const codes = rows.map(r => to2DigitPrefCode(r.code));
+  if (rows.length !== PREFECTURE_COUNT || new Set(codes).size !== PREFECTURE_COUNT || codes.some(c => !PREFECTURE_CODE_2DIGIT_RE.test(c)))
     throw Error('The mobile prototype requires all 47 unique prefectures.');
 }
 

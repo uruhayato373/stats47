@@ -14,7 +14,13 @@
  * 00000 行を持つものは 0 件だった。現状は全ページが単純平均の分岐になる。
  */
 
-import { NATIONAL_AREA_CODE } from "@stats47/area";
+import {
+  isPrefectureAreaCode as isPrefectureAreaCode5,
+  NATIONAL_AREA_CODE,
+  PREFECTURE_COUNT,
+} from "@stats47/area";
+
+export { PREFECTURE_COUNT };
 
 /** 全国の基準値の種類 */
 export type NationalFigureKind = "national-total" | "national-value" | "simple-mean";
@@ -33,9 +39,6 @@ interface AreaValue {
   value: number | null;
 }
 
-/** 都道府県の総数 */
-export const PREFECTURE_COUNT = 47;
-
 /** 合計と全国値の一致を判定する相対許容幅 (推計の丸め・非公表県の差を吸収) */
 const TOTAL_MATCH_TOLERANCE = 0.005;
 
@@ -47,8 +50,7 @@ export function isNationalAreaCode(code: string): boolean {
 /** 都道府県行か (2 桁 01-47 または XX000) */
 function isPrefectureAreaCode(code: string): boolean {
   if (/^\d{2}$/.test(code)) return code !== "00";
-  if (/^\d{2}000$/.test(code)) return code !== NATIONAL_AREA_CODE;
-  return false;
+  return isPrefectureAreaCode5(code);
 }
 
 function isFiniteNumber(v: unknown): v is number {

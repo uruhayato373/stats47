@@ -1,4 +1,9 @@
-import { isOkinawaAreaCode, to2DigitPrefCode } from '@stats47/area';
+import {
+  extractPrefectureCode,
+  isOkinawaAreaCode,
+  prefCodeFromTopoProperties,
+  to2DigitPrefCode,
+} from '@stats47/area/area-code';
 import { DEFAULT_SEQUENTIAL_SCHEME, d3KeyOfColorScheme } from '@stats47/types';
 import { geoPath, type GeoProjection } from 'd3-geo';
 import * as d3chromatic from 'd3-scale-chromatic';
@@ -99,11 +104,9 @@ type ScreenPoint = readonly [number, number];
 
 let prefectureFeaturesCache: Feature[] | null = null;
 
-/** 地域コード (2 桁・5 桁・数値) を都道府県コードの数値にする。取れなければ null。 */
-function normalizePrefCode(value: unknown): number | null {
-  if (value === null || value === undefined || value === '') return null;
-  const code = Number(to2DigitPrefCode(value as string | number));
-  return Number.isFinite(code) ? code : null;
+/** 2 桁の都道府県コード (正本の関数が返す) を数値にする。取れなければ null。 */
+function toPrefNumber(code: string | null): number | null {
+  return code === null ? null : Number(code);
 }
 
 export function readPrefectureFeatures(): Feature[] {
@@ -350,9 +353,7 @@ function readMiniMainlandGeometry(): MiniMainlandShape[] {
   miniMainlandGeometryCache = mainlandFeatures.map((prefecture) => {
     const properties = prefecture.properties ?? {};
     return {
-      prefCode: normalizePrefCode(
-        properties.N03_007 ?? properties.prefCode ?? properties.code
-      ),
+      prefCode: toPrefNumber(prefCodeFromTopoProperties(properties)),
       path: compactProjectedPath(prefecture, mainlandProjection),
     };
   });
@@ -416,7 +417,7 @@ export function generatePrefectureOverviewSvg(): string {
     : null;
 
   const renderShape = (prefecture: Feature, pathValue: string) => {
-    const prefCode = normalizePrefCode(prefecture.properties?.N03_007);
+    const prefCode = toPrefNumber(prefCodeFromTopoProperties(prefecture.properties));
     if (prefCode === null) return '';
     return `<path data-pref-code="${String(prefCode).padStart(2, '0')}" d="${pathValue}" fill="${overviewFill(prefCode)}" fill-rule="evenodd" stroke="hsl(var(--background))" stroke-width="0.85" stroke-linejoin="round"/>`;
   };
@@ -458,16 +459,16 @@ export function generateMiniPrefectureSvg(
     isReversed ? a.value - b.value : b.value - a.value
   );
   const derivedRank = new Map(
-    sorted.map((row, index) => [row.areaCode.slice(0, 2), index + 1])
+    sorted.map((row, index) => [to2DigitPrefCode(row.areaCode), index + 1])
   );
   const rankByCode = new Map<number, number>();
 
   for (const row of data) {
-    const prefCode = normalizePrefCode(row.areaCode);
+    const prefCode = toPrefNumber(extractPrefectureCode(row.areaCode));
     if (prefCode === null) continue;
     rankByCode.set(
       prefCode,
-      row.rank ?? derivedRank.get(row.areaCode.slice(0, 2)) ?? data.length
+      row.rank ?? derivedRank.get(to2DigitPrefCode(row.areaCode)) ?? data.length
     );
   }
 

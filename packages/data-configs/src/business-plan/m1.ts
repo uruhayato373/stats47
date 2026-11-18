@@ -1,4 +1,5 @@
 import data from '../../../../data/business-plan/plan/m1.json';
+import { to2DigitPrefCode } from '@stats47/area';
 import { BUSINESS_PLAN_NOTE_PRODUCTS } from './content-opportunities';
 import { getGeoAnalysis, type GeoAnalysisSlug } from './geo-analyses';
 import type {
@@ -31,7 +32,7 @@ export function buildM1XCanonicalUrl(input: {
     }
     return `/ranking/${input.rankingKey}`;
   }
-  const prefCode2 = (input.highlightAreaCodes[0] ?? '13000').slice(0, 2);
+  const prefCode2 = to2DigitPrefCode(input.highlightAreaCodes[0] ?? '13000');
   return `/geo/${input.analysisSlug}/${prefCode2}/overlap`;
 }
 

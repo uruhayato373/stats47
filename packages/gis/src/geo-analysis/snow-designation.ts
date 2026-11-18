@@ -1,3 +1,4 @@
+import { PREFECTURE_AREA_CODES, PREFECTURE_AREA_CODE_RE, PREFECTURE_COUNT, to2DigitPrefCode } from '@stats47/area';
 import { SNOW_DESIGNATION_DEFINITION_SHA256 } from './snow-designation-definition';
 import { SNOW_DESIGNATION_SOURCE as SOURCE } from '../../../data-configs/src/theme-catalog/snow-designation-source';
 
@@ -104,7 +105,7 @@ export function parseGeoSnowPrefDetail(
     value.slug !== SOURCE.slug ||
     value.dataVersion !== SOURCE.dataVersion ||
     value.areaCode !== expectedAreaCode ||
-    !/^(0[1-9]|[1-3][0-9]|4[0-7])000$/.test(expectedAreaCode) ||
+    !PREFECTURE_AREA_CODE_RE.test(expectedAreaCode) ||
     typeof value.generatedAt !== 'string' ||
     !Number.isFinite(Date.parse(value.generatedAt)) ||
     typeof value.areaName !== 'string' ||
@@ -135,7 +136,7 @@ export function parseGeoSnowPrefDetail(
     !record(value.summary)
   )
     return null;
-  const pref = expectedAreaCode.slice(0, 2);
+  const pref = to2DigitPrefCode(expectedAreaCode);
   const expectedName = SOURCE.populationSources.find(
     (p) => p.areaCode === expectedAreaCode
   )?.areaName;
@@ -283,7 +284,7 @@ export function parseGeoSnowManifest(
       layerId: 'ksj-population-mesh-250m',
       datasetId: 'm250r6',
       version: '24',
-      key: `gis/mlit-ksj/m250r6/24/${p.areaCode.slice(0, 2)}.zip`,
+      key: `gis/mlit-ksj/m250r6/24/${to2DigitPrefCode(p.areaCode)}.zip`,
       sha256: p.sha256,
       bytes: p.bytes,
       geometry: 'mesh',
@@ -294,7 +295,7 @@ export function parseGeoSnowManifest(
       layerId: 'ksj-a22-snow-designation',
       datasetId: 'A22',
       version: '16',
-      key: `gis/mlit-ksj/A22/16/${p.areaCode.slice(0, 2)}.zip`,
+      key: `gis/mlit-ksj/A22/16/${to2DigitPrefCode(p.areaCode)}.zip`,
       sha256: p.sha256,
       bytes: p.bytes,
       geometry: 'polygon',
@@ -316,9 +317,9 @@ export function parseGeoSnowManifest(
       'maxDetailBytes',
     ]) ||
     !Object.values(q).every(integer) ||
-    q.expectedAreas !== 47 ||
-    q.detailAreas !== 47 ||
-    q.conservationChecks !== 47 ||
+    q.expectedAreas !== PREFECTURE_COUNT ||
+    q.detailAreas !== PREFECTURE_COUNT ||
+    q.conservationChecks !== PREFECTURE_COUNT ||
     Number(q.maxDetailBytes) > 5_000_000 ||
     Number(q.maxDetailBytes) <= 0 ||
     Number(q.populatedMeshes) <= 0 ||
@@ -365,7 +366,7 @@ export function parseGeoSnowManifest(
     !artifact(value.aggregate) ||
     !exactKeys(value.aggregate, ['key', 'sha256', 'bytes', 'recordCount']) ||
     value.aggregate.key !== `${root}/item.json` ||
-    value.aggregate.recordCount !== 47 ||
+    value.aggregate.recordCount !== PREFECTURE_COUNT ||
     value.stages.length !== 4
   )
     return null;
@@ -409,14 +410,14 @@ export function parseGeoSnowManifest(
     }
     const dir = i === 1 ? 'source' : 'pref';
     if (
-      s.outputs.length !== 47 ||
+      s.outputs.length !== PREFECTURE_COUNT ||
       s.outputKeyPattern !== `${root}/${dir}/{NN}.json`
     )
       return null;
-    for (let n = 0; n < 47; n++) {
+    for (let n = 0; n < PREFECTURE_COUNT; n++) {
       const o = s.outputs[n],
-        code = String(n + 1).padStart(2, '0') + '000',
-        key = `${root}/${dir}/${code.slice(0, 2)}.json`;
+        code = PREFECTURE_AREA_CODES[n],
+        key = `${root}/${dir}/${to2DigitPrefCode(code)}.json`;
       if (
         !artifact(o) ||
         !exactKeys(o, ['key', 'sha256', 'bytes', 'recordCount', 'areaCode']) ||
