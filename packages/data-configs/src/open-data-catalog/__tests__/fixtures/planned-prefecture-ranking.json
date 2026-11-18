@@ -1,0 +1,40 @@
+{
+  "datasetId": "nier-gakuryoku-achievement",
+  "table": "primary-achievement",
+  "slice": {
+    "version": "2025",
+    "areaLevel": "prefecture",
+    "dims": {
+      "grade": [
+        "小学6年"
+      ],
+      "subject": [
+        "国語"
+      ]
+    },
+    "time": {
+      "kind": "point",
+      "value": "2025"
+    },
+    "dimensionAggregation": "none",
+    "timeAggregation": "none"
+  },
+  "channel": "prefecture-ranking",
+  "status": "planned",
+  "title": "小学生の国語平均正答率",
+  "unit": "％",
+  "aggregation": {
+    "type": "identity"
+  },
+  "reason": "同年度・同学年・同教科の公立校47県を直接比較できる。既存 academic-achievement-test-average-rate は小中4教科の単純平均であり、教科別とは定義が異なる。",
+  "decidedAt": "2026-11-15",
+  "decidedBy": "codex / local normalized-table and metric-registry audit",
+  "metricKey": "national-assessment-elementary-japanese-correct-rate",
+  "verification": {
+    "tableSha256": "face3941ad59346af66f56d05c7d6579430b8214dd0d5a8d7ae7b111a2c6effd",
+    "rowCount": 47,
+    "areaCount": 47,
+    "min": 64,
+    "max": 71
+  }
+}
