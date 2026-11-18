@@ -28,6 +28,7 @@ export {
   PREFECTURE_AREA_CODE_RE,
   PREFECTURE_AREA_CODES,
   PREFECTURE_CODE_2DIGIT_RE,
+  PREFECTURE_COUNT,
   PREFECTURE_SHORT_TO_REGION_MAP,
   PREFECTURE_TO_REGION_MAP,
   INLAND_PREFECTURE_CODES,
@@ -45,6 +46,11 @@ export {
   to2DigitPrefCode,
   to5DigitPrefCode,
   isOkinawaAreaCode,
+  isNationalAreaCode,
+  isPrefectureAreaCode,
+  isCityAreaCode,
+  prefectureAreaCodeOf,
+  prefCodeFromTopoProperties,
   PREFECTURE_LIST_2DIGIT,
 } from './utils';
 
@@ -61,15 +67,3 @@ export {
   resolveWardModeAreas,
 } from './municipalities';
 export type { WardMode, WardModeAreas } from './municipalities';
-
-import { PREFECTURE_AREA_CODE_RE, PREFECTURE_CODE_2DIGIT_RE } from './constants';
-
-/** Five-digit prefecture aggregate (01–47); excludes the national row. */
-export function isPrefectureAreaCode(code: string): boolean {
-  return PREFECTURE_AREA_CODE_RE.test(code);
-}
-
-/** Syntactic city code, not a check of current municipality membership. */
-export function isCityAreaCode(code: string): boolean {
-  return /^\d{5}$/.test(code) && PREFECTURE_CODE_2DIGIT_RE.test(code.slice(0, 2)) && !code.endsWith('000');
-}

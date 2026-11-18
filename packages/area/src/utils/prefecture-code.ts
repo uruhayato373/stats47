@@ -1,57 +1,8 @@
 import { fetchPrefectures } from "../repositories/fetch-prefectures";
+import { to2DigitPrefCode } from "./area-code";
 
-/**
- * 地域コードを 2 桁の都道府県コードに正規化する。**2⇄5 桁変換の単一実装**。
- *
- * 5 桁（`"13000"` / 市区町村 `"13113"`）でも 2 桁（`"13"`）でも、
- * 先頭 2 桁を都道府県コードとして返す。プロジェクト規約（estat-api.md）では
- * 地域コードは 5 桁統一だが、UI セレクタ等で 2 桁を要する箇所のための正準変換。
- *
- * 先頭のゼロが落ちた表記も受ける (数値 `1` / `"1"` → `"01"`、数値 `1000` / `"1000"` → `"01"`)。
- * JSON の数値や topojson の id から来るコードを各所で独自に正規化させないため。
- *
- * @example
- * to2DigitPrefCode("13000"); // "13"
- * to2DigitPrefCode("13113"); // "13"
- * to2DigitPrefCode("13");    // "13"
- * to2DigitPrefCode(1000);    // "01"
- */
-export function to2DigitPrefCode(code: string | number): string {
-  const s = String(code).trim();
-  if (s.length <= 2) return s.padStart(2, "0");
-  // 4 桁 = 5 桁の先頭ゼロ落ち ("1000" = 01000)
-  if (s.length === 4) return s.padStart(5, "0").slice(0, 2);
-  return s.slice(0, 2);
-}
-
-/**
- * 地域コードを 5 桁の都道府県コードに正規化する。
- *
- * 2 桁（`"13"`）でも 5 桁（`"13000"` / 市区町村 `"13113"`）でも、
- * 先頭 2 桁 + `"000"` の 5 桁都道府県コードを返す。
- *
- * @example
- * to5DigitPrefCode("13");    // "13000"
- * to5DigitPrefCode("13113"); // "13000"
- * to5DigitPrefCode("13000"); // "13000"
- * to5DigitPrefCode(1);       // "01000"
- */
-export function to5DigitPrefCode(code: string | number): string {
-  return `${to2DigitPrefCode(code)}000`;
-}
-
-/**
- * 地域コードが沖縄県 (都道府県コード 47、市区町村 `"47201"` を含む) かどうか。
- * 沖縄を本土と別枠で描く地図や、本土の地図から外す処理が共通で使う判定。
- *
- * @example
- * isOkinawaAreaCode("47000"); // true
- * isOkinawaAreaCode(47);      // true
- * isOkinawaAreaCode("46000"); // false
- */
-export function isOkinawaAreaCode(code: string | number): boolean {
-  return to2DigitPrefCode(code) === "47";
-}
+// 変換と判定の本体は台帳を読まない葉のモジュール area-code.ts にある (ブラウザ向けの部品が台帳を束に入れないため)
+export { isOkinawaAreaCode, to2DigitPrefCode, to5DigitPrefCode } from "./area-code";
 
 /**
  * 47 都道府県の「2 桁コード + 名称」一覧（UI セレクタ用）。

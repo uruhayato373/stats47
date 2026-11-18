@@ -8,6 +8,8 @@
  *   - PREFECTURES      JSON の全要素 (prefCode / prefName / romaji …)
  *   - PREF_AREA_CODES  5 桁コード 47 件 ("01000".."47000")
  *   - PREF_NAMES       正式名 47 件 ("北海道" "青森県" … "沖縄県")
+ *   - 変換と判定      to2DigitPrefCode / to5DigitPrefCode / prefectureAreaCodeOf / isNationalAreaCode /
+ *                     isOkinawaAreaCode / NATIONAL_AREA_CODE / PREFECTURE_COUNT (packages/area/src/utils/area-code.ts の鏡)
  * 短縮名 (「東京」等) や独自順序が必要な箇所はこの一覧を使わず、各スクリプト側で定義する。
  */
 const fs = require("node:fs");
@@ -51,6 +53,42 @@ const PREF_NAMES = PREFECTURES.map((p) => p.prefName);
 
 const prefectureCodes = new Set(PREF_AREA_CODES);
 
+/** e-Stat の全国行 areaCode (packages/area/src/utils/area-code.ts の鏡) */
+const NATIONAL_AREA_CODE = "00000";
+/** 都道府県の数 (台帳の件数と一致) */
+const PREFECTURE_COUNT = PREFECTURES.length;
+
+/**
+ * 地域コードを 2 桁の都道府県コードにする (packages/area の to2DigitPrefCode の鏡。同じ入力で一致することをテストで固定)
+ * @param {string | number} code
+ */
+function to2DigitPrefCode(code) {
+  const s = String(code).trim();
+  if (s.length <= 2) return s.padStart(2, "0");
+  if (s.length === 4) return s.padStart(5, "0").slice(0, 2);
+  return s.slice(0, 2);
+}
+
+/** @param {string | number} code 市区町村コードなら所属する県の 5 桁 */
+function to5DigitPrefCode(code) {
+  return `${to2DigitPrefCode(code)}000`;
+}
+
+/** @param {string | number} code */
+function prefectureAreaCodeOf(code) {
+  return to5DigitPrefCode(code);
+}
+
+/** @param {string | number} code */
+function isNationalAreaCode(code) {
+  return String(code).trim() === NATIONAL_AREA_CODE;
+}
+
+/** @param {string | number} code */
+function isOkinawaAreaCode(code) {
+  return to2DigitPrefCode(code) === "47";
+}
+
 /** @param {string} code */
 function isPrefectureAreaCode(code) {
   return prefectureCodes.has(String(code));
@@ -62,6 +100,13 @@ function isCityAreaCode(code) {
 }
 
 module.exports = {
+  NATIONAL_AREA_CODE,
+  PREFECTURE_COUNT,
+  to2DigitPrefCode,
+  to5DigitPrefCode,
+  prefectureAreaCodeOf,
+  isNationalAreaCode,
+  isOkinawaAreaCode,
   isPrefectureAreaCode,
   isCityAreaCode,
   PREFECTURES,
