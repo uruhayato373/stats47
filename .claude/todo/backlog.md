@@ -4020,10 +4020,13 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **済み (2026-11-14・Windows)**: 原稿・意味レビュー・紹介文 (オーナー承認・出品台帳へ apply)、6 冊の表紙の県境の地図化と縮小確認 (readable)、EPUB の作り直し (K-S3-02〜07 は `v2-20261114-map`、K-S3-08 は `v7-20261114-first`)、epubcheck 5.1.0 で 7 冊とも 0 error / 0 warning。
 - **済み (2026-11-18・Mac)**: Drive で受け取った入稿版 42 ファイルの SHA が照合の一覧と一致し、EPUB・表紙・背景の SHA も git の記録 (`kindle-quality.json`・`kdp-cover-thumbnail-checks.json`・`cover-design.ts`) と一致。
 - **済み (2026-11-18・⓪)**: 出品台帳の 7 行に `publicationStage` を戻したうえで `npm run kindle:quality -- --write` を実行し (実測の対象は `publicationStage` のある下書きなので、戻す前に測ると 7 冊が漏れる)、`kindle-quality.json` は 7 冊の行だけを差し替えた。`kdp-listing-copy check` は 21 冊すべて合格 (b13e9a284)。
-- **済み (2026-11-18・②)**: 表紙の背景 7 枚を `push-exact-r2-assets.ts` で公開 R2 へ反映し (K-S3-02〜07 はオーナー承認 2026-11-18)、読み戻しの SHA が 7 枚とも記録と一致。`cover-design.ts` の status を published にした。
+- **済み (2026-11-18・②)**: 表紙の背景 7 枚を `push-exact-r2-assets.ts` で公開 R2 へ反映し (K-S3-02〜07 はオーナー承認 2026-11-18)、読み戻しの SHA が 7 枚とも記録と一致。`cover-design.ts` の status は staged-unpublished のまま (published にすると本の照合値 `authoredBookSha256` が変わり、入稿版が「再生成が必要」で止まるため。次に入稿版を作り直すときに published にする)。
+- **済み (2026-11-18・⑤の機械側)**: `capture-pages.mjs --all` で 7 冊の全ページを撮り、はみ出す表 0。前付け・第 2 章・第 9 章・全県表を目視して崩れなし。書名・副題の読み (`kdp-reading.ts`) は県の数の読み (ロッケン・イットロッケン・ニフゴケン・ハッケン 等) を含め誤りなし。
 - **済み (2026-11-18・③)**: 7 冊の入稿版を `kindle:archive --push` で暗号化保全し、`--audit --deep --record` が 7 冊とも PASS (`data/products/kindle-archives.json` の latestRevision を更新、旧版の記録は保持)。
+- **止まっている (2026-11-18)**: `kdp-publish --id K-S3-08` (下書き) は入稿前の検査 `verify-publishable.mts --content-only` で止まる (KDP への書き込みなし)。7 冊とも欠けているのは 2 つ: ① epubcheck の記録 `data/products/kindle-<版>-verification.json` (`v2-20261114-map`・`v7-20261114-first`。全章ハッシュの照合もここから読む) が git に無い ② 全章の独立意味レビューの受領 `.local/kindle-books/<ID>/<版>/review.json` (`write-review-receipt.mts`) が受け渡しの zip に無い。Mac には Java が無く epubcheck を回せない。
 - **次 (実行順)**:
-  ⑤ オーナーが Kindle Previewer で目視し、書名のフリガナ・ローマ字 (Claude の案。`kdp-reading.ts`) を確かめる。
+  ⓪ Windows の PC にこの 2 種 (計 9 ファイル) があれば Drive で受け取り、無ければ Mac で作る (Java を入れて epubcheck の記録を作り、全章の独立意味レビューをやり直して受領を書く)。`verify-publishable.mts --version <版> --book <ID> --content-only` が 7 冊とも通ることを確かめる。
+  ⑤ `kdp-publish --id <ID>` で KDP に下書きを作り、`--verify` で読み戻して verified にする (本棚の未公開は 2026-11-18 に 0/10)。
   ⑥ 1 冊ずつオーナーの公開承認を得て出す (`kdp-weekly-publish -- --week <週> --id <ID> --owner-approved <ID> --commit`)。KDP の未公開は約 10 冊までなので、7 冊を一度に下書きにしない。
 - **完了条件**: 7 冊が KDP で販売中になり、出品台帳の `kdpStatus` が live。
 ### [KDP-PROMOTE-STALE-PROPOSAL-01] 出品台帳へ写す道具が、書籍の台帳とずれた古い提案を写さないようにする
