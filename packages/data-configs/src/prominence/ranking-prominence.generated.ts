@@ -493,7 +493,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "educationsports",
     "categoryName": "教育・文化・スポーツ",
-    "count": 280,
+    "count": 289,
     "representatives": [
       {
         "rankingKey": "avg-height-high-school-2nd-male",
@@ -590,7 +590,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "safetyenvironment",
     "categoryName": "司法・安全・環境",
-    "count": 148,
+    "count": 149,
     "representatives": [
       {
         "rankingKey": "garbage-total-output",
@@ -695,7 +695,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "infrastructure",
     "categoryName": "社会基盤施設",
-    "count": 57,
+    "count": 60,
     "representatives": [
       {
         "rankingKey": "port-container-count",

@@ -1,17 +1,18 @@
 {
-  "generatedAt": "2026-11-17T04:32:08.544Z",
+  "generatedAt": "2026-11-18T03:45:43.422Z",
   "gscSnapshot": "2026-W45",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通り (blocker 0)、解説の年が values.json の最新年と同じ",
   "summary": {
-    "total": 2611,
-    "done": 1359,
-    "needsRegen": 1252,
+    "total": 2624,
+    "done": 1360,
+    "needsRegen": 1264,
     "needsByReason": {
-      "stale-year": 806,
-      "missing": 445,
-      "incomplete": 1
+      "stale-year": 804,
+      "missing": 458,
+      "incomplete": 1,
+      "fetch-error:TypeError: fetch failed": 1
     },
     "notEligible": 0,
     "notEligibleByCode": {},
@@ -31335,12 +31336,10 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "done",
-      "reason": "ok",
+      "status": "needs-regen",
+      "reason": "fetch-error:TypeError: fetch failed",
       "blockers": [],
-      "warns": [],
-      "lastModified": "Sun, 27 Sep 2026 21:45:42 GMT",
-      "updatedAt": "2026-09-27T21:38:19.000Z"
+      "reviewTier": "gemini-auto"
     },
     {
       "rankingKey": "media-avg-time-unemployed-male",
@@ -31644,6 +31643,36 @@
       "reviewTier": "gemini-auto"
     },
     {
+      "rankingKey": "national-assessment-elementary-friendship-satisfaction-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "national-assessment-elementary-future-goal-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "national-assessment-elementary-japanese-correct-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
       "rankingKey": "national-assessment-elementary-mathematics-correct-rate",
       "impressions": 0,
       "clicks": 0,
@@ -31654,7 +31683,67 @@
       "reviewTier": "gemini-auto"
     },
     {
+      "rankingKey": "national-assessment-elementary-school-enjoyment-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "national-assessment-elementary-self-esteem-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "national-assessment-junior-high-friendship-satisfaction-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "national-assessment-junior-high-future-goal-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "national-assessment-junior-high-japanese-correct-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
       "rankingKey": "national-assessment-junior-high-mathematics-correct-rate",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "national-assessment-junior-high-school-enjoyment-rate",
       "impressions": 0,
       "clicks": 0,
       "position": 0,
@@ -32681,15 +32770,12 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "needs-regen",
-      "reason": "stale-year",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
       "warns": [],
       "lastModified": "Sun, 06 Sep 2026 23:12:20 GMT",
-      "updatedAt": "2026-09-06T23:09:31.052Z",
-      "contentYear": "2024",
-      "dataYear": "2025",
-      "reviewTier": "gemini-auto"
+      "updatedAt": "2026-09-06T23:09:31.052Z"
     },
     {
       "rankingKey": "other-utilities-consumption-expenditure",
@@ -33790,18 +33876,15 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "needs-regen",
-      "reason": "stale-year",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
       "warns": [
         "causal-insights",
         "length-short"
       ],
       "lastModified": "Sun, 06 Sep 2026 21:23:25 GMT",
-      "updatedAt": "2026-09-06T14:12:34.477Z",
-      "contentYear": "2024",
-      "dataYear": "2025",
-      "reviewTier": "gemini-auto"
+      "updatedAt": "2026-09-06T14:12:34.477Z"
     },
     {
       "rankingKey": "public-junior-high-school-gym-installation-rate",
@@ -34131,6 +34214,36 @@
       "updatedAt": "2026-09-06T23:09:32.748Z"
     },
     {
+      "rankingKey": "road-heavy-vehicle-share",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "road-peak-travel-speed",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "road-traffic-congestion",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
       "rankingKey": "road-traffic-law-violation-arrest-count-per-population",
       "impressions": 0,
       "clicks": 0,
@@ -34457,6 +34570,16 @@
       "updatedAt": "2026-09-06T23:09:33.443Z",
       "contentYear": "2024",
       "dataYear": "2025",
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "snow-weather-traffic-accidents-per-100k",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
       "reviewTier": "gemini-auto"
     },
     {

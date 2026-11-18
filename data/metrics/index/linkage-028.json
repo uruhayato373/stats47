@@ -461,7 +461,7 @@
     },
     {
       "metricKey": "snow-weather-traffic-accidents-per-100k",
-      "pageId": null,
+      "pageId": "ranking:snow-weather-traffic-accidents-per-100k",
       "title": "降雪時（雪・みぞれ・ひょう）の交通事故発生件数",
       "sources": [],
       "recipe": {

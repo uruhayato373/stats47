@@ -10,8 +10,8 @@
  *
  * 集計週: 2026-W17, 2026-W18, 2026-W19, 2026-W20, 2026-W21, 2026-W22, 2026-W23, 2026-W24, 2026-W25, 2026-W26, 2026-W27, 2026-W28, 2026-W29, 2026-W30, 2026-W31, 2026-W32, 2026-W33, 2026-W34, 2026-W35, 2026-W36, 2026-W37, 2026-W38, 2026-W39, 2026-W40, 2026-W41, 2026-W42, 2026-W43, 2026-W44, 2026-W45
  *   週別 impressions>=1 キー数: 2026-W17: 339 / 2026-W18: 621 / 2026-W19: 681 / 2026-W20: 798 / 2026-W21: 822 / 2026-W22: 842 / 2026-W23: 835 / 2026-W24: 924 / 2026-W25: 961 / 2026-W26: 1015 / 2026-W27: 1057 / 2026-W28: 1124 / 2026-W29: 1136 / 2026-W30: 1167 / 2026-W31: 1168 / 2026-W32: 1165 / 2026-W33: 1181 / 2026-W34: 1294 / 2026-W35: 1293 / 2026-W36: 1288 / 2026-W37: 1293 / 2026-W38: 1308 / 2026-W39: 1391 / 2026-W40: 1463 / 2026-W41: 1547 / 2026-W42: 1614 / 2026-W43: 1678 / 2026-W44: 1732 / 2026-W45: 1827
- * 和集合: 2611 キー (INDEXABLE +0 / KNOWN +643 / INDEXABLE 総数 335 / KNOWN 総数 2611)
- * 生成日: 2026-11-17
+ * 和集合: 2624 キー (INDEXABLE +0 / KNOWN +656 / INDEXABLE 総数 335 / KNOWN 総数 2624)
+ * 生成日: 2026-11-18
  *
  * 安全弁: url-policy.ts shouldIncludeInSitemap は本セットが空の場合 KNOWN 全件に
  *         フォールバックする (生成失敗時の大量削除を防ぐ)。
@@ -1432,11 +1432,20 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "music-lesson-consumption-expenditure",
   "musical-instrument-consumption-expenditure",
   "national-assessment-elementary-breakfast-rate",
+  "national-assessment-elementary-friendship-satisfaction-rate",
+  "national-assessment-elementary-future-goal-rate",
+  "national-assessment-elementary-japanese-correct-rate",
   "national-assessment-elementary-mathematics-correct-rate",
   "national-assessment-elementary-reading-like-rate",
+  "national-assessment-elementary-school-enjoyment-rate",
+  "national-assessment-elementary-self-esteem-rate",
   "national-assessment-elementary-study-1h-plus-rate",
   "national-assessment-elementary-tutoring-rate",
+  "national-assessment-junior-high-friendship-satisfaction-rate",
+  "national-assessment-junior-high-future-goal-rate",
+  "national-assessment-junior-high-japanese-correct-rate",
   "national-assessment-junior-high-mathematics-correct-rate",
+  "national-assessment-junior-high-school-enjoyment-rate",
   "national-assessment-junior-high-self-esteem-rate",
   "national-health-insurance-benefits",
   "national-health-insurance-enrollees-per-1000",
@@ -2064,12 +2073,15 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "road-bridge-expenses-prefecture",
   "road-expressway-length",
   "road-general-prefectural-length",
+  "road-heavy-vehicle-share",
   "road-length-per-km2",
   "road-municipal-length",
   "road-national-route-length",
+  "road-peak-travel-speed",
   "road-prefectural-route-length",
   "road-total-length",
   "road-total-length-with-expressway",
+  "road-traffic-congestion",
   "road-traffic-law-violation-arrest-count-per-population",
   "road-tunnel-condition-iii-count",
   "road-tunnel-condition-iv-count",
@@ -2215,6 +2227,7 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "smoke-emission-facility-count",
   "smoking-rate-male-age-adjusted",
   "snack-consumption-expenditure",
+  "snow-weather-traffic-accidents-per-100k",
   "soap-cosmetics-group-consumption-expenditure",
   "soba-udon-dining-consumption-expenditure",
   "social-education-expenses-prefecture",
