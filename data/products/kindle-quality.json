@@ -4300,8 +4300,79 @@
       "figuresPer10kChars": 2.9,
       "figuresWithoutText": 0,
       "fullTables": 14,
-      "fullTableIndicators": [],
-      "householdCityValues": false,
+      "fullTableIndicators": [
+        {
+          "label": "消費者物価地域差指数（総合）",
+          "period": "2025年",
+          "unit": "（全国=100）"
+        },
+        {
+          "label": "消費者物価地域差指数（住居）",
+          "period": "2025年",
+          "unit": "（全国=100）"
+        },
+        {
+          "label": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+          "period": "2024年",
+          "unit": "千円"
+        },
+        {
+          "label": "年間収入（1世帯当たり）",
+          "period": "2019年",
+          "unit": "千円"
+        },
+        {
+          "label": "有効求人倍率",
+          "period": "2022年度",
+          "unit": "倍"
+        },
+        {
+          "label": "地域別最低賃金",
+          "period": "2024年度",
+          "unit": "円"
+        },
+        {
+          "label": "持ち家比率",
+          "period": "2023年",
+          "unit": "％"
+        },
+        {
+          "label": "持ち家住宅の延べ面積（1住宅当たり）",
+          "period": "2023年",
+          "unit": "ｍ2"
+        },
+        {
+          "label": "標準価格（対前年平均変動率）（住宅地）",
+          "period": "2024年",
+          "unit": "%"
+        },
+        {
+          "label": "認定こども園数（0～5歳人口10万人当たり）",
+          "period": "2024年",
+          "unit": "園"
+        },
+        {
+          "label": "医療施設に従事する医師数（人口10万人当たり）",
+          "period": "2022年",
+          "unit": "人"
+        },
+        {
+          "label": "刑法犯認知件数（人口千人当たり）",
+          "period": "2023年",
+          "unit": "件"
+        },
+        {
+          "label": "災害被害額（人口1人当たり）",
+          "period": "2023年",
+          "unit": "円"
+        },
+        {
+          "label": "将来人口増減率（2020年→2050年）",
+          "period": "2050年",
+          "unit": "％"
+        }
+      ],
+      "householdCityValues": true,
       "siteLinks": 1,
       "siteLinksWithUtm": 1,
       "flags": [
@@ -4536,7 +4607,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "消費者物価地域差指数（総合）",
+              "period": "2025年",
+              "unit": "（全国=100）"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -4550,7 +4627,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "消費者物価地域差指数（住居）",
+              "period": "2025年",
+              "unit": "（全国=100）"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -4564,8 +4647,14 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
-          "householdCityNotes": 0,
+          "fullTableIndicators": [
+            {
+              "label": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+              "period": "2024年",
+              "unit": "千円"
+            }
+          ],
+          "householdCityNotes": 1,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -4578,7 +4667,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "年間収入（1世帯当たり）",
+              "period": "2019年",
+              "unit": "千円"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -4592,7 +4687,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "有効求人倍率",
+              "period": "2022年度",
+              "unit": "倍"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -4606,7 +4707,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "地域別最低賃金",
+              "period": "2024年度",
+              "unit": "円"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -4620,7 +4727,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "持ち家比率",
+              "period": "2023年",
+              "unit": "％"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -4634,7 +4747,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "持ち家住宅の延べ面積（1住宅当たり）",
+              "period": "2023年",
+              "unit": "ｍ2"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -4648,7 +4767,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "標準価格（対前年平均変動率）（住宅地）",
+              "period": "2024年",
+              "unit": "%"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -4662,7 +4787,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "認定こども園数（0～5歳人口10万人当たり）",
+              "period": "2024年",
+              "unit": "園"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -4676,7 +4807,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "医療施設に従事する医師数（人口10万人当たり）",
+              "period": "2022年",
+              "unit": "人"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -4690,7 +4827,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "刑法犯認知件数（人口千人当たり）",
+              "period": "2023年",
+              "unit": "件"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -4704,7 +4847,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "災害被害額（人口1人当たり）",
+              "period": "2023年",
+              "unit": "円"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -4718,7 +4867,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "将来人口増減率（2020年→2050年）",
+              "period": "2050年",
+              "unit": "％"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -4891,8 +5046,79 @@
       "figuresPer10kChars": 2.7,
       "figuresWithoutText": 0,
       "fullTables": 14,
-      "fullTableIndicators": [],
-      "householdCityValues": false,
+      "fullTableIndicators": [
+        {
+          "label": "消費者物価地域差指数（総合）",
+          "period": "2025年",
+          "unit": "（全国=100）"
+        },
+        {
+          "label": "消費者物価地域差指数（住居）",
+          "period": "2025年",
+          "unit": "（全国=100）"
+        },
+        {
+          "label": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+          "period": "2024年",
+          "unit": "千円"
+        },
+        {
+          "label": "年間収入（1世帯当たり）",
+          "period": "2019年",
+          "unit": "千円"
+        },
+        {
+          "label": "有効求人倍率",
+          "period": "2022年度",
+          "unit": "倍"
+        },
+        {
+          "label": "地域別最低賃金",
+          "period": "2024年度",
+          "unit": "円"
+        },
+        {
+          "label": "持ち家比率",
+          "period": "2023年",
+          "unit": "％"
+        },
+        {
+          "label": "持ち家住宅の延べ面積（1住宅当たり）",
+          "period": "2023年",
+          "unit": "ｍ2"
+        },
+        {
+          "label": "標準価格（対前年平均変動率）（住宅地）",
+          "period": "2024年",
+          "unit": "%"
+        },
+        {
+          "label": "認定こども園数（0～5歳人口10万人当たり）",
+          "period": "2024年",
+          "unit": "園"
+        },
+        {
+          "label": "医療施設に従事する医師数（人口10万人当たり）",
+          "period": "2022年",
+          "unit": "人"
+        },
+        {
+          "label": "刑法犯認知件数（人口千人当たり）",
+          "period": "2023年",
+          "unit": "件"
+        },
+        {
+          "label": "災害被害額（人口1人当たり）",
+          "period": "2023年",
+          "unit": "円"
+        },
+        {
+          "label": "将来人口増減率（2020年→2050年）",
+          "period": "2050年",
+          "unit": "％"
+        }
+      ],
+      "householdCityValues": true,
       "siteLinks": 1,
       "siteLinksWithUtm": 1,
       "flags": [
@@ -5133,7 +5359,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "消費者物価地域差指数（総合）",
+              "period": "2025年",
+              "unit": "（全国=100）"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -5147,7 +5379,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "消費者物価地域差指数（住居）",
+              "period": "2025年",
+              "unit": "（全国=100）"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -5161,8 +5399,14 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
-          "householdCityNotes": 0,
+          "fullTableIndicators": [
+            {
+              "label": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+              "period": "2024年",
+              "unit": "千円"
+            }
+          ],
+          "householdCityNotes": 1,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -5175,7 +5419,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "年間収入（1世帯当たり）",
+              "period": "2019年",
+              "unit": "千円"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -5189,7 +5439,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "有効求人倍率",
+              "period": "2022年度",
+              "unit": "倍"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -5203,7 +5459,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "地域別最低賃金",
+              "period": "2024年度",
+              "unit": "円"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -5217,7 +5479,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "持ち家比率",
+              "period": "2023年",
+              "unit": "％"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -5231,7 +5499,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "持ち家住宅の延べ面積（1住宅当たり）",
+              "period": "2023年",
+              "unit": "ｍ2"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -5245,7 +5519,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "標準価格（対前年平均変動率）（住宅地）",
+              "period": "2024年",
+              "unit": "%"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -5259,7 +5539,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "認定こども園数（0～5歳人口10万人当たり）",
+              "period": "2024年",
+              "unit": "園"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -5273,7 +5559,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "医療施設に従事する医師数（人口10万人当たり）",
+              "period": "2022年",
+              "unit": "人"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -5287,7 +5579,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "刑法犯認知件数（人口千人当たり）",
+              "period": "2023年",
+              "unit": "件"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -5301,7 +5599,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "災害被害額（人口1人当たり）",
+              "period": "2023年",
+              "unit": "円"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -5315,7 +5619,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "将来人口増減率（2020年→2050年）",
+              "period": "2050年",
+              "unit": "％"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -5502,8 +5812,79 @@
       "figuresPer10kChars": 2.4,
       "figuresWithoutText": 0,
       "fullTables": 14,
-      "fullTableIndicators": [],
-      "householdCityValues": false,
+      "fullTableIndicators": [
+        {
+          "label": "消費者物価地域差指数（総合）",
+          "period": "2025年",
+          "unit": "（全国=100）"
+        },
+        {
+          "label": "消費者物価地域差指数（住居）",
+          "period": "2025年",
+          "unit": "（全国=100）"
+        },
+        {
+          "label": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+          "period": "2024年",
+          "unit": "千円"
+        },
+        {
+          "label": "年間収入（1世帯当たり）",
+          "period": "2019年",
+          "unit": "千円"
+        },
+        {
+          "label": "有効求人倍率",
+          "period": "2022年度",
+          "unit": "倍"
+        },
+        {
+          "label": "地域別最低賃金",
+          "period": "2024年度",
+          "unit": "円"
+        },
+        {
+          "label": "持ち家比率",
+          "period": "2023年",
+          "unit": "％"
+        },
+        {
+          "label": "持ち家住宅の延べ面積（1住宅当たり）",
+          "period": "2023年",
+          "unit": "ｍ2"
+        },
+        {
+          "label": "標準価格（対前年平均変動率）（住宅地）",
+          "period": "2024年",
+          "unit": "%"
+        },
+        {
+          "label": "認定こども園数（0～5歳人口10万人当たり）",
+          "period": "2024年",
+          "unit": "園"
+        },
+        {
+          "label": "医療施設に従事する医師数（人口10万人当たり）",
+          "period": "2022年",
+          "unit": "人"
+        },
+        {
+          "label": "刑法犯認知件数（人口千人当たり）",
+          "period": "2023年",
+          "unit": "件"
+        },
+        {
+          "label": "災害被害額（人口1人当たり）",
+          "period": "2023年",
+          "unit": "円"
+        },
+        {
+          "label": "将来人口増減率（2020年→2050年）",
+          "period": "2050年",
+          "unit": "％"
+        }
+      ],
+      "householdCityValues": true,
       "siteLinks": 1,
       "siteLinksWithUtm": 1,
       "flags": [
@@ -5756,7 +6137,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "消費者物価地域差指数（総合）",
+              "period": "2025年",
+              "unit": "（全国=100）"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -5770,7 +6157,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "消費者物価地域差指数（住居）",
+              "period": "2025年",
+              "unit": "（全国=100）"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -5784,8 +6177,14 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
-          "householdCityNotes": 0,
+          "fullTableIndicators": [
+            {
+              "label": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+              "period": "2024年",
+              "unit": "千円"
+            }
+          ],
+          "householdCityNotes": 1,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -5798,7 +6197,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "年間収入（1世帯当たり）",
+              "period": "2019年",
+              "unit": "千円"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -5812,7 +6217,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "有効求人倍率",
+              "period": "2022年度",
+              "unit": "倍"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -5826,7 +6237,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "地域別最低賃金",
+              "period": "2024年度",
+              "unit": "円"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -5840,7 +6257,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "持ち家比率",
+              "period": "2023年",
+              "unit": "％"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -5854,7 +6277,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "持ち家住宅の延べ面積（1住宅当たり）",
+              "period": "2023年",
+              "unit": "ｍ2"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -5868,7 +6297,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "標準価格（対前年平均変動率）（住宅地）",
+              "period": "2024年",
+              "unit": "%"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -5882,7 +6317,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "認定こども園数（0～5歳人口10万人当たり）",
+              "period": "2024年",
+              "unit": "園"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -5896,7 +6337,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "医療施設に従事する医師数（人口10万人当たり）",
+              "period": "2022年",
+              "unit": "人"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -5910,7 +6357,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "刑法犯認知件数（人口千人当たり）",
+              "period": "2023年",
+              "unit": "件"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -5924,7 +6377,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "災害被害額（人口1人当たり）",
+              "period": "2023年",
+              "unit": "円"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -5938,7 +6397,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "将来人口増減率（2020年→2050年）",
+              "period": "2050年",
+              "unit": "％"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -6153,8 +6618,79 @@
       "figuresPer10kChars": 2.8,
       "figuresWithoutText": 0,
       "fullTables": 14,
-      "fullTableIndicators": [],
-      "householdCityValues": false,
+      "fullTableIndicators": [
+        {
+          "label": "消費者物価地域差指数（総合）",
+          "period": "2025年",
+          "unit": "（全国=100）"
+        },
+        {
+          "label": "消費者物価地域差指数（住居）",
+          "period": "2025年",
+          "unit": "（全国=100）"
+        },
+        {
+          "label": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+          "period": "2024年",
+          "unit": "千円"
+        },
+        {
+          "label": "年間収入（1世帯当たり）",
+          "period": "2019年",
+          "unit": "千円"
+        },
+        {
+          "label": "有効求人倍率",
+          "period": "2022年度",
+          "unit": "倍"
+        },
+        {
+          "label": "地域別最低賃金",
+          "period": "2024年度",
+          "unit": "円"
+        },
+        {
+          "label": "持ち家比率",
+          "period": "2023年",
+          "unit": "％"
+        },
+        {
+          "label": "持ち家住宅の延べ面積（1住宅当たり）",
+          "period": "2023年",
+          "unit": "ｍ2"
+        },
+        {
+          "label": "標準価格（対前年平均変動率）（住宅地）",
+          "period": "2024年",
+          "unit": "%"
+        },
+        {
+          "label": "認定こども園数（0～5歳人口10万人当たり）",
+          "period": "2024年",
+          "unit": "園"
+        },
+        {
+          "label": "医療施設に従事する医師数（人口10万人当たり）",
+          "period": "2022年",
+          "unit": "人"
+        },
+        {
+          "label": "刑法犯認知件数（人口千人当たり）",
+          "period": "2023年",
+          "unit": "件"
+        },
+        {
+          "label": "災害被害額（人口1人当たり）",
+          "period": "2023年",
+          "unit": "円"
+        },
+        {
+          "label": "将来人口増減率（2020年→2050年）",
+          "period": "2050年",
+          "unit": "％"
+        }
+      ],
+      "householdCityValues": true,
       "siteLinks": 1,
       "siteLinksWithUtm": 1,
       "flags": [
@@ -6395,7 +6931,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "消費者物価地域差指数（総合）",
+              "period": "2025年",
+              "unit": "（全国=100）"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -6409,7 +6951,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "消費者物価地域差指数（住居）",
+              "period": "2025年",
+              "unit": "（全国=100）"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -6423,8 +6971,14 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
-          "householdCityNotes": 0,
+          "fullTableIndicators": [
+            {
+              "label": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+              "period": "2024年",
+              "unit": "千円"
+            }
+          ],
+          "householdCityNotes": 1,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -6437,7 +6991,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "年間収入（1世帯当たり）",
+              "period": "2019年",
+              "unit": "千円"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -6451,7 +7011,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "有効求人倍率",
+              "period": "2022年度",
+              "unit": "倍"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -6465,7 +7031,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "地域別最低賃金",
+              "period": "2024年度",
+              "unit": "円"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -6479,7 +7051,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "持ち家比率",
+              "period": "2023年",
+              "unit": "％"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -6493,7 +7071,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "持ち家住宅の延べ面積（1住宅当たり）",
+              "period": "2023年",
+              "unit": "ｍ2"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -6507,7 +7091,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "標準価格（対前年平均変動率）（住宅地）",
+              "period": "2024年",
+              "unit": "%"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -6521,7 +7111,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "認定こども園数（0～5歳人口10万人当たり）",
+              "period": "2024年",
+              "unit": "園"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -6535,7 +7131,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "医療施設に従事する医師数（人口10万人当たり）",
+              "period": "2022年",
+              "unit": "人"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -6549,7 +7151,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "刑法犯認知件数（人口千人当たり）",
+              "period": "2023年",
+              "unit": "件"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -6563,7 +7171,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "災害被害額（人口1人当たり）",
+              "period": "2023年",
+              "unit": "円"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -6577,7 +7191,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "将来人口増減率（2020年→2050年）",
+              "period": "2050年",
+              "unit": "％"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -6764,8 +7384,79 @@
       "figuresPer10kChars": 3.2,
       "figuresWithoutText": 0,
       "fullTables": 14,
-      "fullTableIndicators": [],
-      "householdCityValues": false,
+      "fullTableIndicators": [
+        {
+          "label": "消費者物価地域差指数（総合）",
+          "period": "2025年",
+          "unit": "（全国=100）"
+        },
+        {
+          "label": "消費者物価地域差指数（住居）",
+          "period": "2025年",
+          "unit": "（全国=100）"
+        },
+        {
+          "label": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+          "period": "2024年",
+          "unit": "千円"
+        },
+        {
+          "label": "年間収入（1世帯当たり）",
+          "period": "2019年",
+          "unit": "千円"
+        },
+        {
+          "label": "有効求人倍率",
+          "period": "2022年度",
+          "unit": "倍"
+        },
+        {
+          "label": "地域別最低賃金",
+          "period": "2024年度",
+          "unit": "円"
+        },
+        {
+          "label": "持ち家比率",
+          "period": "2023年",
+          "unit": "％"
+        },
+        {
+          "label": "持ち家住宅の延べ面積（1住宅当たり）",
+          "period": "2023年",
+          "unit": "ｍ2"
+        },
+        {
+          "label": "標準価格（対前年平均変動率）（住宅地）",
+          "period": "2024年",
+          "unit": "%"
+        },
+        {
+          "label": "認定こども園数（0～5歳人口10万人当たり）",
+          "period": "2024年",
+          "unit": "園"
+        },
+        {
+          "label": "医療施設に従事する医師数（人口10万人当たり）",
+          "period": "2022年",
+          "unit": "人"
+        },
+        {
+          "label": "刑法犯認知件数（人口千人当たり）",
+          "period": "2023年",
+          "unit": "件"
+        },
+        {
+          "label": "災害被害額（人口1人当たり）",
+          "period": "2023年",
+          "unit": "円"
+        },
+        {
+          "label": "将来人口増減率（2020年→2050年）",
+          "period": "2050年",
+          "unit": "％"
+        }
+      ],
+      "householdCityValues": true,
       "siteLinks": 1,
       "siteLinksWithUtm": 1,
       "flags": [
@@ -6994,7 +7685,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "消費者物価地域差指数（総合）",
+              "period": "2025年",
+              "unit": "（全国=100）"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -7008,7 +7705,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "消費者物価地域差指数（住居）",
+              "period": "2025年",
+              "unit": "（全国=100）"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -7022,8 +7725,14 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
-          "householdCityNotes": 0,
+          "fullTableIndicators": [
+            {
+              "label": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+              "period": "2024年",
+              "unit": "千円"
+            }
+          ],
+          "householdCityNotes": 1,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -7036,7 +7745,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "年間収入（1世帯当たり）",
+              "period": "2019年",
+              "unit": "千円"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -7050,7 +7765,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "有効求人倍率",
+              "period": "2022年度",
+              "unit": "倍"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -7064,7 +7785,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "地域別最低賃金",
+              "period": "2024年度",
+              "unit": "円"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -7078,7 +7805,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "持ち家比率",
+              "period": "2023年",
+              "unit": "％"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -7092,7 +7825,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "持ち家住宅の延べ面積（1住宅当たり）",
+              "period": "2023年",
+              "unit": "ｍ2"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -7106,7 +7845,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "標準価格（対前年平均変動率）（住宅地）",
+              "period": "2024年",
+              "unit": "%"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -7120,7 +7865,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "認定こども園数（0～5歳人口10万人当たり）",
+              "period": "2024年",
+              "unit": "園"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -7134,7 +7885,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "医療施設に従事する医師数（人口10万人当たり）",
+              "period": "2022年",
+              "unit": "人"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -7148,7 +7905,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "刑法犯認知件数（人口千人当たり）",
+              "period": "2023年",
+              "unit": "件"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -7162,7 +7925,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "災害被害額（人口1人当たり）",
+              "period": "2023年",
+              "unit": "円"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -7176,7 +7945,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "将来人口増減率（2020年→2050年）",
+              "period": "2050年",
+              "unit": "％"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -7335,8 +8110,79 @@
       "figuresPer10kChars": 3.4,
       "figuresWithoutText": 0,
       "fullTables": 14,
-      "fullTableIndicators": [],
-      "householdCityValues": false,
+      "fullTableIndicators": [
+        {
+          "label": "消費者物価地域差指数（総合）",
+          "period": "2025年",
+          "unit": "（全国=100）"
+        },
+        {
+          "label": "消費者物価地域差指数（住居）",
+          "period": "2025年",
+          "unit": "（全国=100）"
+        },
+        {
+          "label": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+          "period": "2024年",
+          "unit": "千円"
+        },
+        {
+          "label": "年間収入（1世帯当たり）",
+          "period": "2019年",
+          "unit": "千円"
+        },
+        {
+          "label": "有効求人倍率",
+          "period": "2022年度",
+          "unit": "倍"
+        },
+        {
+          "label": "地域別最低賃金",
+          "period": "2024年度",
+          "unit": "円"
+        },
+        {
+          "label": "持ち家比率",
+          "period": "2023年",
+          "unit": "％"
+        },
+        {
+          "label": "持ち家住宅の延べ面積（1住宅当たり）",
+          "period": "2023年",
+          "unit": "ｍ2"
+        },
+        {
+          "label": "標準価格（対前年平均変動率）（住宅地）",
+          "period": "2024年",
+          "unit": "%"
+        },
+        {
+          "label": "認定こども園数（0～5歳人口10万人当たり）",
+          "period": "2024年",
+          "unit": "園"
+        },
+        {
+          "label": "医療施設に従事する医師数（人口10万人当たり）",
+          "period": "2022年",
+          "unit": "人"
+        },
+        {
+          "label": "刑法犯認知件数（人口千人当たり）",
+          "period": "2023年",
+          "unit": "件"
+        },
+        {
+          "label": "災害被害額（人口1人当たり）",
+          "period": "2023年",
+          "unit": "円"
+        },
+        {
+          "label": "将来人口増減率（2020年→2050年）",
+          "period": "2050年",
+          "unit": "％"
+        }
+      ],
+      "householdCityValues": true,
       "siteLinks": 1,
       "siteLinksWithUtm": 1,
       "flags": [
@@ -7559,7 +8405,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "消費者物価地域差指数（総合）",
+              "period": "2025年",
+              "unit": "（全国=100）"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -7573,7 +8425,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "消費者物価地域差指数（住居）",
+              "period": "2025年",
+              "unit": "（全国=100）"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -7587,8 +8445,14 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
-          "householdCityNotes": 0,
+          "fullTableIndicators": [
+            {
+              "label": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+              "period": "2024年",
+              "unit": "千円"
+            }
+          ],
+          "householdCityNotes": 1,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -7601,7 +8465,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "年間収入（1世帯当たり）",
+              "period": "2019年",
+              "unit": "千円"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -7615,7 +8485,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "有効求人倍率",
+              "period": "2022年度",
+              "unit": "倍"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -7629,7 +8505,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "地域別最低賃金",
+              "period": "2024年度",
+              "unit": "円"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -7643,7 +8525,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "持ち家比率",
+              "period": "2023年",
+              "unit": "％"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -7657,7 +8545,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "持ち家住宅の延べ面積（1住宅当たり）",
+              "period": "2023年",
+              "unit": "ｍ2"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -7671,7 +8565,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "標準価格（対前年平均変動率）（住宅地）",
+              "period": "2024年",
+              "unit": "%"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -7685,7 +8585,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "認定こども園数（0～5歳人口10万人当たり）",
+              "period": "2024年",
+              "unit": "園"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -7699,7 +8605,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "医療施設に従事する医師数（人口10万人当たり）",
+              "period": "2022年",
+              "unit": "人"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -7713,7 +8625,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "刑法犯認知件数（人口千人当たり）",
+              "period": "2023年",
+              "unit": "件"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -7727,7 +8645,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "災害被害額（人口1人当たり）",
+              "period": "2023年",
+              "unit": "円"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -7741,7 +8665,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "将来人口増減率（2020年→2050年）",
+              "period": "2050年",
+              "unit": "％"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -7886,8 +8816,79 @@
       "figuresPer10kChars": 2.6,
       "figuresWithoutText": 0,
       "fullTables": 14,
-      "fullTableIndicators": [],
-      "householdCityValues": false,
+      "fullTableIndicators": [
+        {
+          "label": "消費者物価地域差指数（総合）",
+          "period": "2025年",
+          "unit": "（全国=100）"
+        },
+        {
+          "label": "消費者物価地域差指数（住居）",
+          "period": "2025年",
+          "unit": "（全国=100）"
+        },
+        {
+          "label": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+          "period": "2024年",
+          "unit": "千円"
+        },
+        {
+          "label": "年間収入（1世帯当たり）",
+          "period": "2019年",
+          "unit": "千円"
+        },
+        {
+          "label": "有効求人倍率",
+          "period": "2022年度",
+          "unit": "倍"
+        },
+        {
+          "label": "地域別最低賃金",
+          "period": "2024年度",
+          "unit": "円"
+        },
+        {
+          "label": "持ち家比率",
+          "period": "2023年",
+          "unit": "％"
+        },
+        {
+          "label": "持ち家住宅の延べ面積（1住宅当たり）",
+          "period": "2023年",
+          "unit": "ｍ2"
+        },
+        {
+          "label": "標準価格（対前年平均変動率）（住宅地）",
+          "period": "2024年",
+          "unit": "%"
+        },
+        {
+          "label": "認定こども園数（0～5歳人口10万人当たり）",
+          "period": "2024年",
+          "unit": "園"
+        },
+        {
+          "label": "医療施設に従事する医師数（人口10万人当たり）",
+          "period": "2022年",
+          "unit": "人"
+        },
+        {
+          "label": "刑法犯認知件数（人口千人当たり）",
+          "period": "2023年",
+          "unit": "件"
+        },
+        {
+          "label": "災害被害額（人口1人当たり）",
+          "period": "2023年",
+          "unit": "円"
+        },
+        {
+          "label": "将来人口増減率（2020年→2050年）",
+          "period": "2050年",
+          "unit": "％"
+        }
+      ],
+      "householdCityValues": true,
       "siteLinks": 1,
       "siteLinksWithUtm": 1,
       "flags": [
@@ -8134,7 +9135,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "消費者物価地域差指数（総合）",
+              "period": "2025年",
+              "unit": "（全国=100）"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -8148,7 +9155,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "消費者物価地域差指数（住居）",
+              "period": "2025年",
+              "unit": "（全国=100）"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -8162,8 +9175,14 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
-          "householdCityNotes": 0,
+          "fullTableIndicators": [
+            {
+              "label": "消費支出（二人以上の世帯）（1世帯当たり1か月間）",
+              "period": "2024年",
+              "unit": "千円"
+            }
+          ],
+          "householdCityNotes": 1,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
         },
@@ -8176,7 +9195,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "年間収入（1世帯当たり）",
+              "period": "2019年",
+              "unit": "千円"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -8190,7 +9215,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "有効求人倍率",
+              "period": "2022年度",
+              "unit": "倍"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -8204,7 +9235,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "地域別最低賃金",
+              "period": "2024年度",
+              "unit": "円"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -8218,7 +9255,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "持ち家比率",
+              "period": "2023年",
+              "unit": "％"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -8232,7 +9275,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "持ち家住宅の延べ面積（1住宅当たり）",
+              "period": "2023年",
+              "unit": "ｍ2"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -8246,7 +9295,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "標準価格（対前年平均変動率）（住宅地）",
+              "period": "2024年",
+              "unit": "%"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -8260,7 +9315,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "認定こども園数（0～5歳人口10万人当たり）",
+              "period": "2024年",
+              "unit": "園"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -8274,7 +9335,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "医療施設に従事する医師数（人口10万人当たり）",
+              "period": "2022年",
+              "unit": "人"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -8288,7 +9355,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "刑法犯認知件数（人口千人当たり）",
+              "period": "2023年",
+              "unit": "件"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -8302,7 +9375,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "災害被害額（人口1人当たり）",
+              "period": "2023年",
+              "unit": "円"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0
@@ -8316,7 +9395,13 @@
           "rankingDatabookFigures": 1,
           "tables": 1,
           "fullTables": 1,
-          "fullTableIndicators": [],
+          "fullTableIndicators": [
+            {
+              "label": "将来人口増減率（2020年→2050年）",
+              "period": "2050年",
+              "unit": "％"
+            }
+          ],
           "householdCityNotes": 0,
           "siteLinks": 0,
           "siteLinksWithUtm": 0

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { chapterMetrics, figureSource, fullTableIndicator, type EpubChapter } from "../epub-inspect";
+import { chapterMetrics, figureSource, fullTableIndicator, rankingTableIndicator, type EpubChapter } from "../epub-inspect";
 import { bookQuality, chapterFlags, qualitySummary } from "../kindle-quality";
 
 function chapter(id: string, body: string): EpubChapter {
@@ -81,5 +81,28 @@ describe("kindle-quality (KINDLE-QUALITY-LOOP-01 の機械の検査)", () => {
       epubMissing: ["K-S1-03"],
       baseline: { id: "K-S1-02", figuresWithoutText: 0 },
     });
+  });
+});
+
+describe("ランキング章 (ranking-databook) の全県表の指標 (2026-11-18 地域の本で 0 件だった)", () => {
+  const RANKING_CHAPTER =
+    "<h1>消費支出（二人以上の世帯）（1世帯当たり1か月間）</h1>\n<p>本文</p>\n<h4>全県の収録値</h4>\n" +
+    "<p>単位: 千円。収録年次: 2024年。出典: 社会・人口統計体系。家計調査の都道府県庁所在市の値で、県全体の値ではありません。順位は観測値の降順です。</p>" +
+    FULL_TABLE;
+
+  it("章の見出しと「単位: …。収録年次: …。」から指標・年・単位を読む", () => {
+    expect(rankingTableIndicator(RANKING_CHAPTER)).toEqual({ label: "消費支出（二人以上の世帯）（1世帯当たり1か月間）", period: "2024年", unit: "千円" });
+    expect(rankingTableIndicator(RANKING_CHAPTER.replace("2024年。", "2022年度。"))?.period).toBe("2022年度");
+  });
+
+  it("「全県の収録値」の見出しが無い章は指標として数えない", () => {
+    expect(rankingTableIndicator(RANKING_CHAPTER.replace("全県の収録値", "表"))).toBeNull();
+  });
+
+  it("ランキング章の県庁所在市の注記も、家計調査の県庁所在市の値として数える", () => {
+    const metrics = chapterMetrics(RANKING_CHAPTER);
+    expect(metrics.fullTableIndicators).toHaveLength(1);
+    expect(metrics.householdCityNotes).toBe(1);
+    expect(chapterMetrics(RANKING_CHAPTER.replace("家計調査の都道府県庁所在市の値で、", "")).householdCityNotes).toBe(0);
   });
 });
