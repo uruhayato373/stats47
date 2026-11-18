@@ -12,13 +12,13 @@ import {
 
 const TOP = { unit: "人", rows: [{ rank: 1, areaName: "東京都", value: "1,064" }] };
 const GEOGRAPHIC_SVG =
-  '<svg data-map-rotation="clockwise-32" data-okinawa="excluded" data-map-format="compact-v1"/>';
+  '<svg data-map-rotation="clockwise-32" data-okinawa="excluded" data-map-format="compact-v2"/>';
 /** compact 化前の世代: 回転済みだが path が未簡略化で 1 枚 1.7MB あった。 */
 const LEGACY_UNCOMPACTED_SVG =
   '<svg data-map-rotation="clockwise-32" data-okinawa="excluded"/>';
 /** marker はあるが実サイズが予算超過 (将来の退行検知用)。 */
 const OVERSIZED_SVG =
-  '<svg data-map-rotation="clockwise-32" data-okinawa="excluded" data-map-format="compact-v1">' +
+  '<svg data-map-rotation="clockwise-32" data-okinawa="excluded" data-map-format="compact-v2">' +
   'x'.repeat(100_001) +
   '</svg>';
 

@@ -13,8 +13,10 @@ import { geoCentroid, geoPath } from "d3-geo";
 import type { Feature, FeatureCollection, MultiPolygon, Polygon } from "geojson";
 import type { Topology } from "topojson-specification";
 
+import { isOkinawaAreaCode } from "@stats47/area";
+
 import { BUZZ_MAP_RATIOS, MAINLAND_BBOX, type BuzzMapRatio } from "./tokens";
-import { topologyFeatures, fittedMercator } from "../../../../../packages/gis/src/map/geometry.mjs";
+import { fittedMercator, inMainlandBox, isMainlandFeature, topologyFeatures } from "../../../../../packages/gis/src/map/geometry.mjs";
 
 export interface BuzzMapPathInfo {
   code: string;
@@ -115,10 +117,6 @@ function nameOf(f: Feature): string {
   return String(p.N03_001 ?? p.prefName ?? p.name ?? "");
 }
 
-function isOkinawa(code: string): boolean {
-  return code === "47" || code.startsWith("47");
-}
-
 /**
  * 沖縄インセットの描画ドメイン（先島諸島〜沖縄本島の弧）。
  * 大東諸島（東に ~300km 離れた飛び地）を含めると fit が横に間延びして島が極小になるため
@@ -145,20 +143,6 @@ function keepPolygonsWithin(f: Feature, inside: (lon: number, lat: number) => bo
   const geometry: MultiPolygon = { type: "MultiPolygon", coordinates: kept };
   return { ...f, geometry };
 }
-const inMainlandBox = (lon: number, lat: number) =>
-  lon >= MAINLAND_BBOX.west && lon <= MAINLAND_BBOX.east && lat >= MAINLAND_BBOX.south && lat <= MAINLAND_BBOX.north;
-
-/** 本土 bbox 内に重心があるか（小笠原・大東諸島等を落とす） */
-function inMainland(f: Feature): boolean {
-  const [lon, lat] = geoCentroid(f);
-  return (
-    lon >= MAINLAND_BBOX.west &&
-    lon <= MAINLAND_BBOX.east &&
-    lat >= MAINLAND_BBOX.south &&
-    lat <= MAINLAND_BBOX.north
-  );
-}
-
 function bboxPolygon(): Feature<Polygon> {
   const { west, east, south, north } = MAINLAND_BBOX;
   // d3-geo の球面ポリゴンは巻き方向で内外が決まる。逆巻きだと「箱の補集合＝ほぼ全球」に
@@ -250,14 +234,14 @@ export function computeBuzzMapGeo(
   // 全自治体版は本土の東西端にある小島も本土側へ残し、南の離島だけを別位置へ移す。
   const inMainMap = opts.includeOffshore ? (_lon: number, lat: number) => lat >= MAINLAND_BBOX.south : inMainlandBox;
   const mainFeatures = features
-    .filter((f) => opts.includeOffshore || (!isOkinawa(codeOf(f)) && inMainland(f)))
+    .filter((f) => opts.includeOffshore || (!isOkinawaAreaCode(codeOf(f)) && isMainlandFeature(f)))
     .map((f) => keepPolygonsWithin(f, inMainMap))
     .filter((f): f is Feature => f !== null);
   const okinawaFeatures = opts.includeOffshore ? features
     .map((f) => keepPolygonsWithin(f, (lon, lat) => !inMainMap(lon, lat)))
     .filter((f): f is Feature => f !== null) : features
     .filter((f) => {
-      if (!isOkinawa(codeOf(f))) return false;
+      if (!isOkinawaAreaCode(codeOf(f))) return false;
       const [lon, lat] = geoCentroid(f);
       return inInsetDomain(lon, lat);
     })
@@ -271,7 +255,7 @@ export function computeBuzzMapGeo(
   let prefBorders: BuzzMapPathInfo[] | null = null;
   if (prefTopology) {
     const prefFeatures = toFeatures(prefTopology).filter(
-      (f) => !isOkinawa(codeOf(f))
+      (f) => !isOkinawaAreaCode(codeOf(f))
     );
     prefBorders = fitAndRender(prefFeatures, frame, region);
   }
@@ -324,12 +308,6 @@ export function computeBuzzMapGeo(
         okiFc
       );
     }
-    const inMainland2 = (lon: number, lat: number) =>
-      lon >= MAINLAND_BBOX.west &&
-      lon <= MAINLAND_BBOX.east &&
-      lat >= MAINLAND_BBOX.south &&
-      lat <= MAINLAND_BBOX.north;
-
     // 型C: 点を振り分け投影（本土 bbox → main / インセットドメイン → inset / どちらでもない
     // 飛び地=大東・小笠原等は非描画。inset が無い比率=16:9 は本土投影で枠外に流す）
     if (opts.points) {
@@ -337,7 +315,7 @@ export function computeBuzzMapGeo(
       for (const [key, coords] of Object.entries(opts.points)) {
         for (const [lon, lat] of coords) {
           let proj: ReturnType<typeof fittedMercator> | null = null;
-          if (inMainland2(lon, lat)) proj = mainProj;
+          if (inMainlandBox(lon, lat)) proj = mainProj;
           else if (inInsetDomain(lon, lat)) proj = insetProj ?? mainProj;
           if (!proj) continue;
           const xy = proj([lon, lat]);
@@ -357,7 +335,7 @@ export function computeBuzzMapGeo(
         const c = geoCentroid(f);
         if (!c) continue;
         let pathGen: ReturnType<typeof geoPath> | null = null;
-        if (inMainland2(c[0], c[1])) pathGen = mainPath;
+        if (inMainlandBox(c[0], c[1])) pathGen = mainPath;
         else if (inInsetDomain(c[0], c[1])) pathGen = insetPath ?? mainPath;
         if (!pathGen) continue;
         const d = pathGen(f);

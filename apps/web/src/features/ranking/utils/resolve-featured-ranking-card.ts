@@ -1,4 +1,5 @@
 import { HOME_FEATURED_PROMINENCE } from "@stats47/data-configs/ranking-prominence";
+import { MINI_PREFECTURE_MAP_FORMAT } from "@stats47/visualization/server";
 
 import type { FeaturedTopRows, FeaturedValue } from "@stats47/ranking";
 
@@ -88,7 +89,7 @@ export function isCurrentHomeFeaturedMapSvg(
 ): svg is string {
   if (!svg) return false;
   if (!svg.includes('data-map-rotation="clockwise-')) return false;
-  if (!svg.includes('data-map-format="compact-v1"')) return false;
+  if (!svg.includes(`data-map-format="${MINI_PREFECTURE_MAP_FORMAT}"`)) return false;
   return !exceedsTileMapSvgBudget(svg);
 }
 

@@ -44,6 +44,7 @@ export {
   prefectureShortName,
   to2DigitPrefCode,
   to5DigitPrefCode,
+  isOkinawaAreaCode,
   PREFECTURE_LIST_2DIGIT,
 } from './utils';
 

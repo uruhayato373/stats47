@@ -41,6 +41,19 @@ export function to5DigitPrefCode(code: string | number): string {
 }
 
 /**
+ * 地域コードが沖縄県 (都道府県コード 47、市区町村 `"47201"` を含む) かどうか。
+ * 沖縄を本土と別枠で描く地図や、本土の地図から外す処理が共通で使う判定。
+ *
+ * @example
+ * isOkinawaAreaCode("47000"); // true
+ * isOkinawaAreaCode(47);      // true
+ * isOkinawaAreaCode("46000"); // false
+ */
+export function isOkinawaAreaCode(code: string | number): boolean {
+  return to2DigitPrefCode(code) === "47";
+}
+
+/**
  * 47 都道府県の「2 桁コード + 名称」一覧（UI セレクタ用）。
  *
  * `@stats47/area` の prefectures.json（5 桁 SSOT）から派生する単一ソース。

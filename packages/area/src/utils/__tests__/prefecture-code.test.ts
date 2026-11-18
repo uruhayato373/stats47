@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { PREFECTURE_LIST_2DIGIT, to2DigitPrefCode, to5DigitPrefCode } from "../prefecture-code";
+import { PREFECTURE_LIST_2DIGIT, isOkinawaAreaCode, to2DigitPrefCode, to5DigitPrefCode } from "../prefecture-code";
 
 describe("to2DigitPrefCode", () => {
   it("都道府県・市区町村の 5 桁コードと 2 桁コードから先頭 2 桁を返す", () => {
@@ -48,5 +48,22 @@ describe("先頭ゼロ落ち・数値のコード (remotion 等の局所実装�
     expect(to5DigitPrefCode("1")).toBe("01000");
     expect(to5DigitPrefCode(1000)).toBe("01000");
     expect(to5DigitPrefCode(" 13 ")).toBe("13000");
+  });
+});
+
+describe("isOkinawaAreaCode", () => {
+  it("沖縄県の 2 桁・5 桁・市区町村・数値コードだけを真にする", () => {
+    expect(isOkinawaAreaCode("47")).toBe(true);
+    expect(isOkinawaAreaCode("47000")).toBe(true);
+    expect(isOkinawaAreaCode("47201")).toBe(true);
+    expect(isOkinawaAreaCode(47)).toBe(true);
+    expect(isOkinawaAreaCode("46000")).toBe(false);
+    expect(isOkinawaAreaCode("01000")).toBe(false);
+    expect(isOkinawaAreaCode(1)).toBe(false);
+    expect(isOkinawaAreaCode("")).toBe(false);
+  });
+
+  it("47 都道府県のうち沖縄だけが真になる", () => {
+    expect(PREFECTURE_LIST_2DIGIT.filter(({ code }) => isOkinawaAreaCode(code)).map(({ code }) => code)).toEqual(["47"]);
   });
 });
