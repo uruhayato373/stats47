@@ -8,6 +8,7 @@ import { resolveTileScale } from '../../remotion/src/features/data-cards/tile-sc
 import { rankingRows } from './template-ranking-bars';
 import { assertRankingRows, sampleRankingChart, type RankingChart } from './template-ranking-data';
 import { SAMPLE_FRAME, sampleFrame } from './template-sample-frame';
+import { to2DigitPrefCode, PREFECTURE_COUNT } from '@stats47/area';
 
 export const DISTRIBUTION_MAP_SAMPLE_ID = 'maximum-temperature-map';
 // Same prefecture boundaries the buzz-map cards draw from.
@@ -54,18 +55,18 @@ export async function renderDistributionMap(raw: unknown, theme: ChartTheme = LI
 
 export function renderDistributionMapChart(chart: RankingChart, theme: ChartTheme = LIGHT_THEME) {
   const rows = assertRankingRows(chart.rows);
-  const values = new Map(rows.map((row) => [row.area_code.slice(0, 2), row.value]));
+  const values = new Map(rows.map((row) => [to2DigitPrefCode(row.area_code), row.value]));
   const scale = resolveTileScale(chart.presentation, rows.map((row) => row.value), chart.display);
   if (!scale) throw Error('地図の配色を解決できません。');
   const topology = JSON.parse(fs.readFileSync(PREFECTURE_TOPOLOGY, 'utf8')) as Topology;
   const geo = computeBuzzMapGeo(topology, null, { level: 'pref', ratio: '45', type: 'A', insetBox: OKINAWA_BOX });
   const drawn = [...geo.mainland, ...(geo.inset ?? [])];
-  const codes = new Set(drawn.map((shape) => shape.code.slice(0, 2)));
-  if (codes.size !== 47 || rows.some((row) => !codes.has(row.area_code.slice(0, 2))))
+  const codes = new Set(drawn.map((shape) => to2DigitPrefCode(shape.code)));
+  if (codes.size !== PREFECTURE_COUNT || rows.some((row) => !codes.has(to2DigitPrefCode(row.area_code))))
     throw Error('県境データと47都道府県の値が対応しません。');
   const shape = (p: { code: string; d: string }) => {
-    const value = values.get(p.code.slice(0, 2))!;
-    return `<path data-pref="${p.code.slice(0, 2)}" data-value="${value}" d="${p.d}" fill="${scale.colorAt(value)}" stroke="${theme.mapBorder}" stroke-width="${theme.outline ? 1.6 : 1.2}" stroke-linejoin="round"/>`;
+    const value = values.get(to2DigitPrefCode(p.code))!;
+    return `<path data-pref="${to2DigitPrefCode(p.code)}" data-value="${value}" d="${p.d}" fill="${scale.colorAt(value)}" stroke="${theme.mapBorder}" stroke-width="${theme.outline ? 1.6 : 1.2}" stroke-linejoin="round"/>`;
   };
   const rule = okinawaRule(geo.inset ?? [], geo.mainland);
   const inset = `<line data-okinawa-rule="" x1="${rule.from.x}" y1="${rule.from.y}" x2="${rule.to.x}" y2="${rule.to.y}" stroke="${theme.line}" stroke-width="2"/>

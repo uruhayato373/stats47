@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useTransition } from 'react';
 
+import { isNationalAreaCode } from '@stats47/area/area-code';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { ChartLegendLeadProvider } from '@stats47/visualization/d3/chart-legend-lead';
 
@@ -136,7 +137,7 @@ export function ThemeDbChartRenderer({ chart, prefCode, prefName, headingLevel }
   // 全国のページで 47 県の平均しか描けない図は出さない (47 県の平均を全国として見せない。2026-11-01 オーナー決定)。
   // 包むカード (ChartPanel) はこの印を見て自分ごと隠れる
   if (
-    prefCode === '00000' &&
+    isNationalAreaCode(prefCode) &&
     'scopeLabel' in result.contract &&
     result.contract.scopeLabel === '47都道府県平均'
   ) {
@@ -146,7 +147,7 @@ export function ThemeDbChartRenderer({ chart, prefCode, prefName, headingLevel }
   const observationLabel = `${
     'geography' in result.contract && result.contract.geography
       ? result.contract.geography
-      : prefCode === '00000'
+      : isNationalAreaCode(prefCode)
         ? '全国'
         : prefName
   }${result.contract.year ? ` · ${observationPeriod(result)}` : ''}${

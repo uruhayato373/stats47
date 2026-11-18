@@ -1,4 +1,5 @@
 import { lookupArea, PREFECTURE_AREA_CODE_RE } from '@stats47/area';
+import { PREFECTURE_COUNT } from '@stats47/area/area-code';
 import { FACTORY_INVESTMENT_SOURCE } from '@stats47/data-configs/theme-catalog';
 import { z } from 'zod';
 
@@ -47,7 +48,7 @@ export const factoryInvestmentSnapshotSchema = z
   .strict()
   .superRefine((snapshot, ctx) => {
     if (
-      new Set(snapshot.rows.map((row) => row.areaCode)).size !== 47 ||
+      new Set(snapshot.rows.map((row) => row.areaCode)).size !== PREFECTURE_COUNT ||
       JSON.stringify(snapshot.notes) !== JSON.stringify(source.notes)
     ) {
       ctx.addIssue({

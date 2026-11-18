@@ -1,5 +1,7 @@
 import { notFound } from 'next/navigation';
 
+import { PREFECTURE_COUNT } from '@stats47/area/area-code';
+
 import Link from '@/components/atoms/SiteLink';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { PanelGrid } from '@/components/layout/PageShell';
@@ -39,7 +41,7 @@ export default async function GeoComparePage({ searchParams }: PageProps) {
     landPrice && floodRisk && stationAccess
       ? buildGeoDecisionRows(landPrice, floodRisk, stationAccess)
       : [];
-  if (rows.length !== 47) notFound();
+  if (rows.length !== PREFECTURE_COUNT) notFound();
 
   return (
     <PageShell>

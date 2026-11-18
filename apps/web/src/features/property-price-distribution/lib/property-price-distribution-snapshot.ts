@@ -1,4 +1,5 @@
 import { fetchPrefectures, PREFECTURE_AREA_CODE_RE } from '@stats47/area';
+import { PREFECTURE_COUNT } from '@stats47/area/area-code';
 import { PROPERTY_PRICE_DISTRIBUTION_SOURCE as SOURCE } from '@stats47/data-configs/theme-catalog';
 import { z } from 'zod';
 
@@ -45,7 +46,7 @@ const schema = z.object({
   }).strict()).length(47),
 }).strict().superRefine((data,ctx)=>{
   const issue=(message:string)=>ctx.addIssue({code:z.ZodIssueCode.custom,message});
-  if(new Set(data.areas.map(a=>a.areaCode)).size!==47)issue('Duplicate prefecture');
+  if(new Set(data.areas.map(a=>a.areaCode)).size!== PREFECTURE_COUNT)issue('Duplicate prefecture');
   for (const area of data.areas) if (prefectureNames.get(area.areaCode) !== area.areaName) issue('Prefecture code/name mismatch');
   for(const area of [data.national,...data.areas])for(const key of ['transactions','officialLandPrice'] as const){
     const d=area[key],q=[d.q1,d.median,d.q3];

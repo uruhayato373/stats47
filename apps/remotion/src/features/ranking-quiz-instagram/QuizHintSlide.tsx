@@ -7,7 +7,8 @@ import { prefectureEntries, renderTileMapBody } from "@/features/data-cards/all4
 
 import { IG_FONT, IG_HEADLINE_STYLE, IG_SERIES, IgSeriesCard, IgSeriesFrame } from "@/features/ig-series";
 
-import { toPrefCode, type RankingQuizSpec, type ResolvedRankingQuiz } from "./quiz";
+import { type RankingQuizSpec, type ResolvedRankingQuiz } from "./quiz";
+import { to2DigitPrefCode } from "@stats47/area/area-code";
 
 /** 地図下端と出典行 (IgSeriesFooter) の間隔（出典行は下端から約 76px を占める） */
 const FOOTER_CLEARANCE = 90;
@@ -21,11 +22,11 @@ const TILE_DEFAULT_FILL = "#F1F5F9"; // それ以外の県（淡いグレー）
 export const HINT_MAP = { width: IMAGE_TILE_LAYOUT.cols * 46, height: IMAGE_TILE_LAYOUT.rows * 46 };
 export function hintTiles(quiz: ResolvedRankingQuiz) {
   const entries = prefectureEntries();
-  const names = new Map(entries.map((e) => [e.areaCode.slice(0, 2), prefectureShortName(e.areaName)]));
+  const names = new Map(entries.map((e) => [to2DigitPrefCode(e.areaCode), prefectureShortName(e.areaName)]));
   return renderTileMapBody(entries, {
     ...HINT_MAP,
     tileOverride: (areaCode) => {
-      const code = toPrefCode(areaCode.slice(0, 2));
+      const code = to2DigitPrefCode(areaCode);
       if (quiz.maskedPrefCodes.has(code)) return { fill: TILE_MASKED_FILL, lines: ["?"], emphasis: true };
       const rank = quiz.revealedRanks.get(code);
       if (rank !== undefined) return { fill: TILE_REVEALED_FILL, lines: [names.get(code)!, `${rank}位`] };

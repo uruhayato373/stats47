@@ -4,6 +4,7 @@ import { useMemo, type ReactNode } from 'react';
 
 
 import { lookupArea } from '@stats47/area';
+import { NATIONAL_AREA_CODE } from '@stats47/area/area-code';
 import { ChartPanel } from '@stats47/components';
 import { hrefFor } from '@stats47/data-configs/content/href';
 import { readSourceConfigRef } from '@stats47/data-configs/data-source';
@@ -59,7 +60,7 @@ interface Props {
   pageCharts?: PageComponent[];
   /** componentKey ごとに survey taxonomy から解決した出典調査ハブ。 */
   chartSourceLinks?: Record<string, Array<{ label: string; url: string }>>;
-  /** 選択中の都道府県コード（null = 47都道府県・未選択。e-Stat の "00000" ではない） */
+  /** 選択中の都道府県コード（null = 47都道府県・未選択。e-Stat の NATIONAL_AREA_CODE ではない） */
   selectedPrefectureCode: string | null;
   /**
    * true のとき KPI スタットカードのみ描画し、時系列チャート・考察
@@ -135,8 +136,8 @@ function primaryRankingLabel(
  * - markdown-section: 考察テキストを末尾にフル幅で描画。
  *
  * ★page_components チャート (ThemeDbChartRenderer) は KPI パネルとは別経路。e-Stat の全国行
- * ("00000") を `selectNationalSeries` 経由で正しく優先し、無ければ「全国平均」と明示して
- * フォールバックする既存の健全な実装なので、未選択時も prefCode="00000" で描画を続ける
+ * (NATIONAL_AREA_CODE) を `selectNationalSeries` 経由で正しく優先し、無ければ「全国平均」と明示して
+ * フォールバックする既存の健全な実装なので、未選択時も prefCode=NATIONAL_AREA_CODE で描画を続ける
  * (WP2 が除去するのは KPI タイルの「平均を代表値として見せる」経路であり、この page_components
  * 経路の正しい official/average 出し分けではない)。
  */
@@ -330,8 +331,8 @@ export function ThemeMetricsDashboard({
 
   // page_components チャート専用の地域コード。KPI パネル (kpis) とは別経路で、
   // ThemeDbChartRenderer 側が selectNationalSeries 経由で official/average を正しく
-  // 出し分けるため、未選択時も "00000" を渡してよい (WP2 が除去する対象ではない)。
-  const pageComponentsAreaCode = selectedPrefectureCode ?? '00000';
+  // 出し分けるため、未選択時も NATIONAL_AREA_CODE を渡してよい (WP2 が除去する対象ではない)。
+  const pageComponentsAreaCode = selectedPrefectureCode ?? NATIONAL_AREA_CODE;
 
   // cardsOnly: KPI スタットカードのみ。チャート・考察は描画しない
   const chartComponents = cardsOnly

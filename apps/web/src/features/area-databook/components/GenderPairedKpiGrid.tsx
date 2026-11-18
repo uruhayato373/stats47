@@ -1,3 +1,4 @@
+import { PREFECTURE_COUNT } from "@stats47/area/area-code";
 import { hrefFor } from "@stats47/data-configs/content/href";
 
 import { rankToneByPosition } from "@/components/atoms/RankBadge";
@@ -14,7 +15,6 @@ interface Props {
 }
 
 /** 都道府県の数。全国順位のチップはこの範囲の順位にだけ付ける。 */
-const PREFECTURE_COUNT = 47;
 
 const GENDER_LABEL: Record<GenderTone, string> = { male: "男性", female: "女性" };
 

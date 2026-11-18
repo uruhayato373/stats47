@@ -1,4 +1,5 @@
 import { lookupArea, PREFECTURE_AREA_CODE_RE } from '@stats47/area';
+import { PREFECTURE_COUNT } from '@stats47/area/area-code';
 import { WATER_QUALITY_SOURCE } from '@stats47/data-configs/theme-catalog';
 import { z } from 'zod';
 const source = WATER_QUALITY_SOURCE;
@@ -97,7 +98,7 @@ export const waterQualitySnapshotSchema = z
           s.national[k].compliant === source.national[k].compliant
       ) &&
       new Set(s.rows.map((r) => r.id)).size === s.rows.length &&
-      new Set(s.prefectures.map((p) => p.areaCode)).size === 47 &&
+      new Set(s.prefectures.map((p) => p.areaCode)).size === PREFECTURE_COUNT &&
       s.prefectures.every(
         (p) =>
           lookupArea(p.areaCode)?.areaName === p.areaName &&

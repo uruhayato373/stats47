@@ -1,9 +1,10 @@
 import { PREF_CAPITAL_COORDS } from '../../../../../packages/migration-flow/src/lib/pref-capitals';
 import { IMAGE_TILE_LAYOUT } from './tile-layout';
 import { prefectureShortName } from '@stats47/area/short-name';
-import { prefectureNameOf } from '@stats47/area';
+import { prefectureNameOf, PREFECTURE_AREA_CODES } from '@stats47/area';
 import { formatValueWithPrecision, resolveValuePrecision } from '@stats47/utils';
 import { LIGHT_THEME, TEMPLATE_MIN_FONT_SIZE, outlineAttrs, type ChartTheme } from './chart-theme';
+import { to2DigitPrefCode, PREFECTURE_COUNT, isPrefectureAreaCode } from '@stats47/area/area-code';
 
 export interface All47Entry {
   areaCode: string;
@@ -94,7 +95,7 @@ const text = (
   `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" font-size="${Math.max(TEMPLATE_MIN_FONT_SIZE, Math.min(size, maxWidth / Math.max(1, widthOf(s)))).toFixed(1)}" font-weight="${weight}" fill="${color}"${anchor === 'start' ? '' : ` text-anchor="${anchor}"`}>${escape(s)}</text>`;
 /** The city whose value a capital-city metric (家計調査) gives for a prefecture. Shared with the bar type so both name the same city. */
 export const capitalCityName = (areaCode: string) =>
-  areaCode === '13000' ? '東京区部' : PREF_CAPITAL_COORDS[areaCode.slice(0, 2)].name;
+  areaCode === '13000' ? '東京区部' : PREF_CAPITAL_COORDS[to2DigitPrefCode(areaCode)].name;
 const nameOf = (r: All47Entry, capitalCities?: boolean) => capitalCities
   ? capitalCityName(r.areaCode)
   : prefectureShortName(r.areaName);
@@ -116,13 +117,13 @@ const tileNameOf = (r: All47Entry, columns: number, capitalCities?: boolean) => 
 const TILE_TEXT_PAD = 4;
 
 function assertAll47(entries: All47Entry[]) {
-  const rows = new Map(entries.map((r) => [Number(r.areaCode.slice(0, 2)), r]));
+  const rows = new Map(entries.map((r) => [Number(to2DigitPrefCode(r.areaCode)), r]));
   if (
-    entries.length !== 47 ||
-    rows.size !== 47 ||
+    entries.length !== PREFECTURE_COUNT ||
+    rows.size !== PREFECTURE_COUNT ||
     IMAGE_TILE_LAYOUT.cells.some(({ id }) => !rows.has(id)) ||
     entries.some(
-      (r) => !/^\d{2}000$/.test(r.areaCode) || !Number.isFinite(r.value)
+      (r) => !isPrefectureAreaCode(r.areaCode) || !Number.isFinite(r.value)
     )
   )
     throw new Error('全47県タイル図は47県の重複・欠測なし有限値が必要です');
@@ -131,9 +132,9 @@ function assertAll47(entries: All47Entry[]) {
 
 /** 47 entries with names only, for slides whose every tile is overridden (e.g. a quiz hint). */
 export function prefectureEntries(): All47Entry[] {
-  return Array.from({ length: 47 }, (_, i) => {
-    const code = String(i + 1).padStart(2, '0');
-    return { areaCode: code + '000', areaName: prefectureNameOf(code) ?? code, value: 0 };
+  return PREFECTURE_AREA_CODES.map((areaCode) => {
+    const code = to2DigitPrefCode(areaCode);
+    return { areaCode, areaName: prefectureNameOf(code) ?? code, value: 0 };
   });
 }
 

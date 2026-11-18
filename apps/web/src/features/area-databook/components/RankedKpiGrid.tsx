@@ -1,3 +1,4 @@
+import { PREFECTURE_COUNT } from "@stats47/area/area-code";
 import { getMetricConfig, type DatabookMetricRef } from "@stats47/data-configs";
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatChartValue, formatUnitForDisplay } from "@stats47/data-configs/unit";
@@ -15,7 +16,6 @@ interface Props {
 }
 
 /** 都道府県の数。全国順位のチップはこの範囲の順位にだけ付ける。 */
-const PREFECTURE_COUNT = 47;
 
 function formatAverage(value: number): string {
   if (Number.isInteger(value)) return value.toLocaleString("ja-JP");

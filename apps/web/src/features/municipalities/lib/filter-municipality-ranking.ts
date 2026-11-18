@@ -1,3 +1,5 @@
+import { isPrefectureAreaCode } from '@stats47/area/area-code';
+
 import type { MunicipalityRankingValue } from '@stats47/ranking/types';
 
 export interface MunicipalityRankingQuery {
@@ -16,7 +18,7 @@ export function matchMunicipalityRanking(
   options: Pick<MunicipalityRankingQuery, 'query' | 'prefectureCode'>
 ): MunicipalityRankingValue[] {
   const query = options.query?.trim().toLocaleLowerCase('ja-JP') ?? '';
-  const prefectureCode = /^\d{2}000$/.test(options.prefectureCode ?? '')
+  const prefectureCode = isPrefectureAreaCode(options.prefectureCode ?? '')
     ? options.prefectureCode
     : undefined;
   return values.filter((value) => {

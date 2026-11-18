@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import { isNationalAreaCode } from '@stats47/area/area-code';
 import { ChartPanel } from '@stats47/components';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
@@ -43,7 +44,7 @@ export function ThemePopulationPartitionClient({
       </ChartPanel>
     );
   const areaLabel =
-    view.area.areaCode === '00000' ? '全国（公式集計）' : view.area.areaName;
+    isNationalAreaCode(view.area.areaCode) ? '全国（公式集計）' : view.area.areaName;
   const sectionKey = isHousehold
     ? 'single-households-demographics'
     : 'five-year-residence';

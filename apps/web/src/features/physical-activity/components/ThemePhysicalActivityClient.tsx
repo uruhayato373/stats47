@@ -1,5 +1,6 @@
 'use client';
 
+import { NATIONAL_AREA_CODE } from '@stats47/area/area-code';
 import { ChartPanel } from '@stats47/components';
 import { PHYSICAL_ACTIVITY_SOURCE } from '@stats47/data-configs/theme-catalog';
 
@@ -28,7 +29,7 @@ export function ThemePhysicalActivityClient({
     <div
       data-theme-component-key="physical-activity"
       data-data-state="ready"
-      data-area-code={selectedPrefectureCode ?? '00000'}
+      data-area-code={selectedPrefectureCode ?? NATIONAL_AREA_CODE}
     >
       <ChartPanel
         title="歩数と推計の幅"

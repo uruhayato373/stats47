@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 
+import { NATIONAL_AREA_CODE } from '@stats47/area/area-code';
 import { ChartPanel } from '@stats47/components';
 import {
   Select,
@@ -43,7 +44,7 @@ export function ThemeWaterQualityClient({
     <div
       data-theme-component-key="water-quality"
       data-data-state="ready"
-      data-area-code={selectedPrefectureCode ?? '00000'}
+      data-area-code={selectedPrefectureCode ?? NATIONAL_AREA_CODE}
     >
       <ChartPanel
         title="水域ごとの水質と基準達成"

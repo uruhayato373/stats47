@@ -1,3 +1,4 @@
+import { prefCodeFromTopoProperties, to2DigitPrefCode } from "@stats47/area/area-code";
 import { formatValueWithPrecision, resolveValuePrecision } from "@stats47/utils";
 
 import type { RankingValue } from "@stats47/ranking";
@@ -33,10 +34,6 @@ export interface MapDownloadInput {
   readonly meta: MapDownloadMeta;
 }
 
-function prefCodeOf(value: unknown): string | null {
-  return String(value ?? "").match(/\d{2}/)?.[0] ?? null;
-}
-
 /** 系列のうち最新年の値だけを県コード (2 桁) で引けるようにする */
 function latestYearValues(values: readonly RankingValue[]): {
   yearName: string | null;
@@ -49,7 +46,7 @@ function latestYearValues(values: readonly RankingValue[]): {
   const byCode = new Map<string, RankingValue>();
   for (const v of values) {
     if (v.yearCode !== latestYear) continue;
-    const code = prefCodeOf(v.areaCode);
+    const code = to2DigitPrefCode(v.areaCode);
     if (code) byCode.set(code, v);
   }
   const sample = byCode.values().next().value as RankingValue | undefined;
@@ -121,7 +118,7 @@ export function buildMapGeoJson({ features, values, meta }: MapDownloadInput): F
   return {
     type: "FeatureCollection",
     features: features.map((f) => {
-      const code = prefCodeOf(f.properties?.N03_007);
+      const code = prefCodeFromTopoProperties(f.properties);
       const v = code ? byCode.get(code) : undefined;
       const cls = classify(v?.value);
       return {

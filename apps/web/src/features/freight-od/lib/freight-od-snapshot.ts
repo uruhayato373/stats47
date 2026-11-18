@@ -1,4 +1,5 @@
 import { lookupArea, PREFECTURE_AREA_CODE_RE } from '@stats47/area';
+import { PREFECTURE_COUNT } from '@stats47/area/area-code';
 import { FREIGHT_OD_SOURCE } from '@stats47/data-configs/theme-catalog';
 import { z } from 'zod';
 
@@ -70,7 +71,7 @@ export const freightOdSnapshotSchema = z
       fail('対象・単位・丸め注記が欠落');
     const codes = snapshot.prefectures.map((row) => row.areaCode);
     if (
-      new Set(codes).size !== 47 ||
+      new Set(codes).size !== PREFECTURE_COUNT ||
       snapshot.prefectures.some(
         (row) => lookupArea(row.areaCode)?.areaName !== row.areaName
       )
@@ -115,7 +116,7 @@ export const freightOdSnapshotSchema = z
         [mode.destinationTotals, destinations],
       ] as const) {
         if (
-          new Set(points.map((point) => point.areaCode)).size !== 47 ||
+          new Set(points.map((point) => point.areaCode)).size !== PREFECTURE_COUNT ||
           points.some((point) => computed.get(point.areaCode) !== point.value)
         )
           fail('OD行列と発着県別合計が一致しない');

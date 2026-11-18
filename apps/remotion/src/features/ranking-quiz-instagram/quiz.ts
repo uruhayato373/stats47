@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 import type { RankingEntry } from "../../shared/types/ranking";
-import { to2DigitPrefCode } from "@stats47/area";
+import { to2DigitPrefCode } from "@stats47/area/area-code";
 
 /**
  * 予想クイズ型カルーセル（Instagram 4:5・5枚）の編集入力と、ランキングデータからの導出。
@@ -65,11 +65,6 @@ export interface ResolvedRankingQuiz {
 
 const LETTERS = ["A", "B", "C", "D"];
 
-/** "45" / "45000" / 45 を "45" に揃える (`@stats47/area` の単一実装) */
-export function toPrefCode(code: string | number): string {
-  return to2DigitPrefCode(code);
-}
-
 function ratio(a: number, b: number): string | null {
   return a > 0 && b > 0 ? (a / b).toFixed(1) : null;
 }
@@ -79,15 +74,15 @@ export function resolveRankingQuiz(
   entries: RankingEntry[],
 ): ResolvedRankingQuiz {
   const sorted = [...entries].sort((a, b) => a.rank - b.rank);
-  const byCode = new Map(sorted.map((e) => [toPrefCode(e.areaCode), e]));
+  const byCode = new Map(sorted.map((e) => [to2DigitPrefCode(e.areaCode), e]));
   const leaders = sorted.filter((e) => e.rank === 1);
   if (leaders.length !== 1) {
     throw new Error(`1位が ${leaders.length} 件あるため正解を1つに決められません`);
   }
-  const answerCode = toPrefCode(leaders[0].areaCode);
+  const answerCode = to2DigitPrefCode(leaders[0].areaCode);
 
   const requireKnown = (codes: string[], field: string) => {
-    const normalized = codes.map(toPrefCode);
+    const normalized = codes.map(to2DigitPrefCode);
     for (const code of normalized) {
       if (!byCode.has(code)) throw new Error(`${field} の ${code} がランキングにありません`);
     }

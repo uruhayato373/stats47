@@ -1,5 +1,6 @@
 'use client';
 
+import { isNationalAreaCode } from '@stats47/area/area-code';
 import { ChartPanel } from '@stats47/components';
 import { MEDICAL_WORKFORCE_SOURCE } from '@stats47/data-configs/theme-catalog';
 
@@ -87,7 +88,7 @@ export function ThemeMedicalWorkforceClient({
       </ChartPanel>
     );
   const areaLabel =
-    area.areaCode === '00000' ? '全国（公式集計）' : area.areaName;
+    isNationalAreaCode(area.areaCode) ? '全国（公式集計）' : area.areaName;
   const source = MEDICAL_WORKFORCE_SOURCE;
   return (
     <PanelGrid

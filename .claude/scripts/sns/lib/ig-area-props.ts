@@ -21,6 +21,7 @@ export {
   familyKeyOf,
   type DatabookTemplateLike,
 } from "../../../../packages/area-profile/src/highlights/select-area-highlights.ts";
+import { to2DigitPrefCode, to5DigitPrefCode } from "@stats47/area/area-code";
 
 /** 対決カルーセル (ig-compare-props.ts) の多様性上限。地域カルーセルの選定には使わない。 */
 export const MAX_ITEMS_PER_SOURCE = 2;
@@ -79,13 +80,11 @@ export function extractYear(yearStr: string): number {
 export function normalizePrefCode(input: string): { pref2: string; pref5: string } {
   const digits = input.trim();
   if (!/^\d+$/.test(digits)) throw new Error(`都道府県コードは数字のみ: ${input}`);
-  let pref2: string;
-  if (digits.length === 2) pref2 = digits;
-  else if (digits.length === 5) pref2 = digits.slice(0, 2);
-  else throw new Error(`都道府県コードは2桁または5桁で指定: ${input}`);
+  if (digits.length !== 2 && digits.length !== 5) throw new Error(`都道府県コードは2桁または5桁で指定: ${input}`);
+  const pref2 = to2DigitPrefCode(digits);
   const n = Number(pref2);
   if (!Number.isInteger(n) || n < 1 || n > 47) throw new Error(`都道府県コードの範囲外 (01-47): ${input}`);
-  return { pref2, pref5: `${pref2}000` };
+  return { pref2, pref5: to5DigitPrefCode(pref2) };
 }
 
 export function buildCoverHook(areaName: string): string {

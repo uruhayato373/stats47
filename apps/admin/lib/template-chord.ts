@@ -4,6 +4,7 @@ import { REGIONS } from '../../../packages/area/src/constants/regions';
 import { prefectureShortName } from '../../../packages/area/src/utils/prefecture-short-name';
 import { LIGHT_THEME, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
 import { escapeXml, sampleFrame } from './template-sample-frame';
+import { to2DigitPrefCode, to5DigitPrefCode, PREFECTURE_COUNT } from '@stats47/area';
 
 /** One flow matrix: `matrix[from][to]` is the amount moving from node `from` to node `to`. */
 export interface ChordChart {
@@ -18,7 +19,6 @@ export interface ChordChart {
 /** A pair's movement as the R2 migration-flow file keeps it: `inflow` is the move from `fromPrefCode` to `toPrefCode`. */
 export interface MigrationPair { fromPrefCode: string; toPrefCode: string; inflow: number }
 
-const PREFECTURES = 47;
 const CENTER = { x: 540, y: 770 } as const;
 const RADIUS = { inner: 352, outer: 380, label: 402 } as const;
 const REGION_LABEL_SIZE = 34;
@@ -28,14 +28,14 @@ const RADIAL_FROM = 10;
 const MIN_LABEL_GAP = (3.4 * Math.PI) / 180;
 const SPREAD_PASSES = 60;
 
-const prefIndex = (code: string) => Number(code.slice(0, 2)) - 1;
-const regionIndex = (i: number) => REGIONS.findIndex((r) => r.prefectures.includes(`${String(i + 1).padStart(2, '0')}000`));
+const prefIndex = (code: string) => Number(to2DigitPrefCode(code)) - 1;
+const regionIndex = (i: number) => REGIONS.findIndex((r) => r.prefectures.includes(to5DigitPrefCode(i + 1)));
 
 function prefectureMatrix(pairs: MigrationPair[]) {
-  const matrix = Array.from({ length: PREFECTURES }, () => Array<number>(PREFECTURES).fill(0));
+  const matrix = Array.from({ length: PREFECTURE_COUNT }, () => Array<number>(PREFECTURE_COUNT).fill(0));
   for (const pair of pairs) {
     const from = prefIndex(pair.fromPrefCode), to = prefIndex(pair.toPrefCode);
-    if (!(from >= 0 && from < PREFECTURES && to >= 0 && to < PREFECTURES) || !Number.isFinite(pair.inflow) || pair.inflow < 0)
+    if (!(from >= 0 && from < PREFECTURE_COUNT && to >= 0 && to < PREFECTURE_COUNT) || !Number.isFinite(pair.inflow) || pair.inflow < 0)
       throw Error('県の組み合わせか移動の値を確認してください。');
     matrix[from][to] = pair.inflow;
   }

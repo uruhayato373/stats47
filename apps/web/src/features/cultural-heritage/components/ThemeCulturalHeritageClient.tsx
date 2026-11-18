@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 
 import { lookupArea } from '@stats47/area';
+import { isNationalAreaCode } from '@stats47/area/area-code';
 import { ChartPanel } from '@stats47/components';
 import { Button } from '@stats47/components/atoms/ui/button';
 import { CULTURAL_HERITAGE_SOURCE as source } from '@stats47/data-configs/theme-catalog';
@@ -205,7 +206,7 @@ function HeritageView({
             選択した地域・種類に該当するDB収録はありません。この3種類に限定した結果で、県内の文化財全体が0件という意味ではありません。
           </p>
         )}
-        {view.areaCode === '00000' ? (
+        {isNationalAreaCode(view.areaCode) ? (
           <div className="space-y-3">
             <h3 className="font-medium">地域を定めない文化財</h3>
             <p className="text-sm text-muted-foreground">

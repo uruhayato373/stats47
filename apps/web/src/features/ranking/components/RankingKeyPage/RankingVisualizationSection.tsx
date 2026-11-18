@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 
+import { PREFECTURE_CODE_2DIGIT_RE, to5DigitPrefCode, to2DigitPrefCode } from "@stats47/area/area-code";
 import { cn, ChartPanel } from "@stats47/components";
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 import {
@@ -31,13 +32,13 @@ type VisualizationTab = "map" | "table";
 const PREF_PARAM = "pref";
 
 function areaCodeFromPrefParam(value: string | null): string | null {
-    return value && /^(0[1-9]|[1-3]\d|4[0-7])$/.test(value) ? `${value}000` : null;
+    return value && PREFECTURE_CODE_2DIGIT_RE.test(value) ? to5DigitPrefCode(value) : null;
 }
 
 /** ページを移動させずに URL のクエリだけを書き換える (戻るボタンの履歴を増やさない) */
 function writePrefParam(areaCode: string | null) {
     const url = new URL(window.location.href);
-    if (areaCode) url.searchParams.set(PREF_PARAM, areaCode.slice(0, 2));
+    if (areaCode) url.searchParams.set(PREF_PARAM, to2DigitPrefCode(areaCode));
     else url.searchParams.delete(PREF_PARAM);
     window.history.replaceState(window.history.state, "", url);
 }

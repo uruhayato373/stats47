@@ -1,6 +1,7 @@
 'use client';
 
 import { to2DigitPrefCode } from '@stats47/area';
+import { NATIONAL_AREA_CODE, isNationalAreaCode } from '@stats47/area/area-code';
 import { ChartPanel } from '@stats47/components';
 import { Button } from '@stats47/components/atoms/ui/button';
 import { SNOW_DESIGNATION_SOURCE } from '@stats47/data-configs/theme-catalog';
@@ -49,7 +50,7 @@ export function GeoSnowDesignationSummary({
 }) {
   const selected = snapshot.rows.find((r) => r.areaCode === selectedAreaCode);
   const nationalRow = {
-    areaCode: '00000',
+    areaCode: NATIONAL_AREA_CODE,
     areaName: '全国（47都道府県計）',
     rank: 0,
     values: snowNationalValues(snapshot),
@@ -91,7 +92,7 @@ export function GeoSnowDesignationSummary({
           key: r.areaCode,
           attrs: { 'data-snow-area': r.areaCode },
           cells: [
-            onSelectArea && !selected && r.areaCode !== '00000' ? (
+            onSelectArea && !selected && !isNationalAreaCode(r.areaCode) ? (
               <Button
                 key="area"
                 variant="link"

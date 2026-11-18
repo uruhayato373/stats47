@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server';
 
+import { to5DigitPrefCode } from '@stats47/area/area-code';
 import { resolveGeoStageRoute } from '@stats47/data-configs/business-plan';
 import { hrefFor, SURVEY_HUB_ALIASES } from '@stats47/data-configs/content/href';
 import {
@@ -579,7 +580,7 @@ export default function middleware(req: NextRequest) {
   const themeMatch = pathname.match(/^\/themes\/([^/]+)$/);
   if (themeMatch && TYPE_A_THEME_SLUGS.has(themeMatch[1])) {
     const rawPref = req.nextUrl.searchParams.get('pref') ?? '';
-    const prefCode = /^\d{2}$/.test(rawPref) ? `${rawPref}000` : rawPref;
+    const prefCode = /^\d{2}$/.test(rawPref) ? to5DigitPrefCode(rawPref) : rawPref;
     if (UrlPolicy.area.isValidPrefCode(prefCode)) {
       const url = new URL(hrefFor('area-theme', { areaCode: prefCode, themeSlug: themeMatch[1] }), req.url);
       url.search = req.nextUrl.search;

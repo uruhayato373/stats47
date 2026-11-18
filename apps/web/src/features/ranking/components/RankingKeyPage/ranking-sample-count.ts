@@ -1,3 +1,5 @@
+import { isNationalAreaCode } from "@stats47/area/area-code";
+
 import type { RankingReferenceValue, RankingValue } from "@stats47/ranking";
 
 export interface RankingSampleCountSummary {
@@ -22,7 +24,7 @@ export function summarizeSampleCounts(
 ): RankingSampleCountSummary | null {
   const year = String(yearCode).slice(0, 4);
   const ranked = rankingValues.filter(
-    (v): v is RankingValue & { sampleCount: number } => v.areaCode !== "00000" && typeof v.sampleCount === "number",
+    (v): v is RankingValue & { sampleCount: number } => !isNationalAreaCode(v.areaCode) && typeof v.sampleCount === "number",
   );
   const references = referenceValues
     .filter((v) => String(v.yearCode).slice(0, 4) === year)
