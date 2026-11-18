@@ -65,6 +65,8 @@ describe("immutable Kindle revisions", () => {
       rankingKey: keys[0],
       title: "人数（人口千人当たり）",
       year: "2024",
+      yearLabel: "2024年",
+      sourceName: "社会・人口統計体系",
       unit: "人",
       rawUrl: "https://example.test/values.json",
       canonicalUrl: "https://example.test/ranking/test",

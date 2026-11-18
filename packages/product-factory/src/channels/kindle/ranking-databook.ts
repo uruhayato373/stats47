@@ -11,6 +11,7 @@ import { METRICS_REGISTRY, SITE } from "@stats47/data-configs";
 import { fetchRankingValues } from "../../data/load-ranking-values";
 import { productIndicatorLabel } from "../../data/product-indicator-label";
 import { PREFECTURE_BY_CODE5 } from "../../data/prefectures";
+import { yearSuffixOf } from "./full-tables";
 
 export interface RankingSection {
   readonly rankingKey: string;
@@ -23,12 +24,18 @@ export interface RankingSection {
   readonly aiUsed?: readonly string[];
   /** 数値照合で落とした ai-content フィールドと理由 (黙って捨てない)。 */
   readonly aiDropped?: readonly { field: string; reason: string }[];
+  /** S3 地域別: 地域内の県の全国順位 (第 2 章の扉で地域の全体像の表を組む)。 */
+  readonly regionRows?: readonly { readonly areaName: string; readonly value: number; readonly rank: number }[];
 }
 
 export interface RankingSource {
   readonly rankingKey: string;
   readonly title: string;
   readonly year: string;
+  /** 「2022年」「2024年度」。指標の定義 (yearFormat) で決める */
+  readonly yearLabel: string;
+  /** 収録年の値の出典名 (補助の出典で取った年はそちらの名前) */
+  readonly sourceName: string;
   readonly unit: string;
   readonly rawUrl: string;
   readonly canonicalUrl: string;
@@ -56,6 +63,23 @@ export interface RankingSectionOpts {
   /** 章に載せる FAQ の最大数 (既定 2)。 */
   readonly faqLimit?: number;
   readonly onMissing?: (rankingKey: string, reason: string) => void;
+}
+
+/** 出典の表示名。e-Stat は displayName、外部は config.source.name。 */
+function sourceDisplayName(src: Record<string, unknown> | undefined): string | null {
+  if (!src) return null;
+  if (typeof src.displayName === "string" && src.displayName) return src.displayName;
+  const nested = (src.config as { source?: { name?: unknown } } | undefined)?.source?.name;
+  if (typeof nested === "string" && nested) return nested;
+  if (typeof src.name === "string" && src.name) return src.name;
+  return null;
+}
+
+/** 収録年の値を取った出典。supplementalSources がその年を持てばそちら (例: 物価地域差指数の 2025 年 = 小売物価統計調査)。 */
+export function sourceForYear(cfg: Record<string, unknown>, year: string): Record<string, unknown> {
+  const supp = (cfg.supplementalSources as { years?: number[]; source?: Record<string, unknown> }[] | undefined) ?? [];
+  const hit = supp.find((s) => (s.years ?? []).map(String).includes(String(year)) && s.source);
+  return (hit?.source ?? (cfg.source as Record<string, unknown> | undefined) ?? {}) as Record<string, unknown>;
 }
 
 /**
@@ -108,10 +132,15 @@ export async function buildRankingSection(
       value: r.value,
     })),
   ];
+  // 年の数え方は指標の定義 (yearFormat) で決め、本文・全県表と図をそろえる (2026-11-18 K-S3 レビュー B1)。
+  const yearLabel = `${fetched.year}${yearSuffixOf(rankingKey)}`;
+  const yearSource = sourceForYear(cfg, String(fetched.year));
+  const sourceName = sourceDisplayName(yearSource) ?? "e-Stat（政府統計の総合窓口）";
+  const note = typeof cfg.note === "string" && cfg.note.trim() ? cfg.note.trim() : null;
   const svg = generateBarChartSvg(items, {
     title,
-    subtitle: `${fetched.year}年 / 単位: ${unit}`,
-    source: "e-Stat（政府統計の総合窓口）",
+    subtitle: `${yearLabel} / 単位: ${unit}`,
+    source: sourceName,
     // Unit is stated in the subtitle and full table; repeating it in each card overlaps long names.
     unit: "",
     layout: "columns",
@@ -135,7 +164,7 @@ export async function buildRankingSection(
         ? "この指標の最大値と最小値の比は1.1未満です。地域内の違いや実務上の重要性を判定するものではありません。"
         : `上位と下位の差は約${ratio.toFixed(1)}倍あります。`;
   let 考察 =
-    `${title}（収録年次: ${fetched.year}）の最大値は${fmt(top.value)}${unit}（${top.name}を含む${rows.filter(r => r.value === top.value).length}地域）、最小値は${fmt(bot.value)}${unit}（${bot.name}を含む${rows.filter(r => r.value === bot.value).length}地域）です。` +
+    `${title}（収録年次: ${yearLabel}）の最大値は${fmt(top.value)}${unit}（${top.name}を含む${rows.filter(r => r.value === top.value).length}地域）、最小値は${fmt(bot.value)}${unit}（${bot.name}を含む${rows.filter(r => r.value === bot.value).length}地域）です。` +
     `値のある${n}地域の単純平均は約${avg.toLocaleString("ja-JP", { maximumFractionDigits: 2 })}${unit}です（全国集計値・人口加重平均ではありません）。` +
     gapPhrase +
     "数値の大きい順で同値は同順位です。図は先頭・末尾の各5地域の数値カードで、長さを数値に対応させた棒グラフではありません。同順位の全地域を表示するものではありません。";
@@ -156,9 +185,11 @@ export async function buildRankingSection(
   //   旧実装は「地域内で最上位の 1 県」の 1 文だけで、8 冊の本文がほぼ同一になっていた。
   //   全県を並べれば、同じ指標でも地域ごとに別の本文になり、読者にとっても自分の県が見つかる。
   //   値は values.json から決定的に組むので AI も捏造も介在しない。
+  let regionRows: RankingSection["regionRows"];
   if (opts.highlightRegionLabel && opts.highlightCodes && opts.highlightCodes.length > 0) {
     const codeSet = new Set(opts.highlightCodes);
     const inRegion = ranked.filter((r) => codeSet.has(r.areaCode));
+    regionRows = inRegion.map((r) => ({ areaName: r.areaName, value: r.value, rank: r.rank }));
     if (inRegion.length > 0) {
       const list = inRegion.map((r) => `${r.areaName}が全国${r.rank}位（${fmt(r.value)}${unit}）`).join("、");
       考察 += `\n\n${opts.highlightRegionLabel}の内訳を見ると、${list}となっています。`;
@@ -169,7 +200,7 @@ export async function buildRankingSection(
   // Keep source observations usable without silently presenting that prose as reviewed editorial.
   const table = [
     "### 全県の収録値",
-    `単位: ${unit}。順位は観測値の降順であり、地域の良し悪しや施策の優先順位ではありません。収録年次の暦年・年度の区別や対象範囲は出典で確認してください。`,
+    `単位: ${unit}。収録年次: ${yearLabel}。出典: ${sourceName}。${note ? `${note}` : ""}順位は観測値の降順であり、地域の良し悪しや施策の優先順位ではありません。`,
     "| 順位 | 都道府県 | 収録値 |\n| --- | --- | ---: |\n" + ranked.map(r =>
       `| ${r.rank} | ${r.areaName} | ${r.value.toLocaleString("ja-JP", { maximumFractionDigits: 20 })} |`,
     ).join("\n"),
@@ -185,10 +216,12 @@ export async function buildRankingSection(
       rankingKey,
       title,
       year: fetched.year,
+      yearLabel,
+      sourceName,
       unit,
       rawUrl: `${process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl}/${rankingR2Key(rankingKey, "values")}`,
       canonicalUrl: `${SITE.origin}/ranking/${rankingKey}`,
-      source: (cfg.source ?? {}) as Record<string, unknown>,
+      source: yearSource,
       observedAreas: n,
       missingAreas: fetched.values.length - n,
     },
@@ -196,6 +229,7 @@ export async function buildRankingSection(
     image: { fileName, png },
     aiUsed: [],
     aiDropped: [{ field: "all", reason: "unreviewed-site-prose-excluded-from-book-edition" }],
+    regionRows,
   };
 }
 

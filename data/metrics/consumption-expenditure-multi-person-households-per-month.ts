@@ -34,6 +34,7 @@ export const consumptionExpenditureMultiPersonHouseholdsPerMonth: MetricConfig =
   "calculation": {
     "isCalculated": false
   },
+  "note": "家計調査の都道府県庁所在市の値で、県全体の値ではありません。",
   "seoTitle": "消費支出のランキング｜県庁所在市の二人以上世帯の1か月平均",
   "seoDescription": "家計調査の二人以上世帯について、県庁所在市ごとの 1 世帯当たり 1 か月の消費支出を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
