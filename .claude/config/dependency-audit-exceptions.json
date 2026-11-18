@@ -9,6 +9,15 @@
       "reason": "braces <=3.0.3 の深い入れ子パターンでスタックを使い切る DoS。修正版が無く (2026-10-10)、残る経路は Next.js の ESLint 設定 (開発時だけ動く lint) が fast-glob 3.3.1 を固定している dev 依存だけ。lint は自分たちのソースにしか掛けず、外部入力のパターンを受けない。npm audit fix --force の提案は @next/eslint-plugin-next 14.2.35 への後退で採らない",
       "decidedAt": "2026-10-10",
       "expiresAt": "2027-01-10"
+    },
+    {
+      "id": "GHSA-fc5q-39xc-vjpf",
+      "package": "picomatch",
+      "scope": "dev",
+      "path": "vitest / vite / tinyglobby / knip → fdir → picomatch 4.0.7、apps/admin の shadcn → fast-glob 3.3.3 → micromatch → picomatch 2.3.2",
+      "reason": "picomatch <=4.0.7 の extglob の繰り返しによる ReDoS。2026-11-18 時点で最新版が 4.0.7 で修正版が無い。経路はテスト・ビルド・未使用コードの検出・管理画面の部品の取得 (開発時だけ動く道具) だけで、npm audit --omit=dev に現れない。照合するパターンは自分たちの設定とソースのもので、外部入力を受けない。npm audit fix --force の提案は knip 3.13.2 への後退で採らない。2026-11-18 オーナー判断 (DEPS-PICOMATCH-REDOS-01)",
+      "decidedAt": "2026-11-18",
+      "expiresAt": "2026-12-18"
     }
   ]
 }

@@ -2120,12 +2120,14 @@ updated: 2026-11-01
 - **完了条件**: 2 回目の run で `送信する:` の件数が全件 (約 14,300 件) でなく、観測値が変わらなかった指標の values.json の Last-Modified が 1 回目の run の時刻から動かない。確認できたら `.claude/skills/db/sync-snapshots/SKILL.md` の push 時間の実測値を新しい値へ書き換える。
 
 ### [DEPS-PICOMATCH-REDOS-01] picomatch の ReDoS (GHSA-fc5q-39xc-vjpf) で Security Scan が全 PR で赤になっている
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-18] [領域:管理] [待ち:判断]
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-18] [領域:管理]
 
 - **観測 (2026-11-18)**: PR #1284 の Security Scan が `check-dependency-audit.mjs` の high で失敗した (run 44205673797)。lock は前回の成功 (11-17 10:25) から変わっておらず、advisory が新しく公表されたもの。大元は picomatch <=4.0.7 (最新版が 4.0.7 で修正版なし)。経路は vitest・vite・tinyglobby・knip → fdir → picomatch 4.0.7 と、apps/admin の shadcn → fast-glob 3.3.3 → micromatch → picomatch 2.3.2 で、`npm audit --omit=dev` には現れない (dev 依存だけ)。必須チェックは Code Quality Check だけなので、マージは止まらない。
 - **再現**: `node .claude/scripts/lib/check-dependency-audit.mjs` / `npm audit --json`
 - **選択肢**: (a) `.claude/config/dependency-audit-exceptions.json` に dev 依存の例外として理由と期限 (例 2026-12-18) 付きで載せる (2026-10-10 のオーナー判断の仕組み。Claude が足そうとしたら自動の安全判定が止めたので、オーナーの判断で入れる) (b) picomatch の修正版を待つ (その間 Security Scan は赤)。
-- **完了条件**: Security Scan が develop→main の PR で緑。例外を入れた場合は期限の日に上流の修正版を確かめる。
+- **済み (2026-11-18・オーナー判断)**: picomatch (GHSA-fc5q-39xc-vjpf) を `dependency-audit-exceptions.json` に dev 依存の例外として期限 2026-12-18 で載せた。
+- **残り (例外では通らない・修正版あり)**: 同じ依存の行に混ざる 2 件で、ゲートは「元の advisory がすべて例外のときだけ通す」ので picomatch の例外だけでは緑にならない。① @vitest/mocker の GHSA-qxg6-89mg-rqv8・GHSA-xp26-3454-mjgp は vitest 4.1.12 で修正 (全ワークスペースの指定は `^4.1.11` で範囲内)。`npm update vitest ... --workspaces` は package.json の overrides の `$vite` を解決できず失敗し、ルートの `npm update` では lock が 4.1.11 のまま動かなかった (2026-11-18)。各ワークスペースで `npm install -D vitest@4.1.12` 等を当てて lock を更新し、vitest 全件を回す。② minimatch の GHSA-g3hv-75wg-m249 は 11.0.1 で修正だが、@ts-morph/common・@typescript-eslint/typescript-estree・shadcn が 9・10 系を指定していてメジャー版を上げないと直らない。上流の対応を確かめ、無ければ例外に足すかをオーナーに判断してもらう。
+- **完了条件**: Security Scan が develop→main の PR で緑。例外は期限の日に上流の修正版を確かめる。
 
 ### [DEPS-RENOVATE-01] Renovate GitHub App をインストールし、最初の月曜の翌日に PR が出ることを確かめる
 タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [検証:gh pr list --state all --search "author:app/renovate"] [起票:2026-10-13] [待ち:承認]
