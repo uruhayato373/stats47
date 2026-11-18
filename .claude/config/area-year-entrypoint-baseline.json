@@ -1222,8 +1222,8 @@
       "cityCheck": 0,
       "yearCheck": 0,
       "prefectureNames": 0,
-      "prefSlice": 1,
-      "pref5Build": 1,
+      "prefSlice": 0,
+      "pref5Build": 0,
       "prefRegex": 0,
       "nationalLiteral": 0,
       "pref2Compare": 1,
@@ -2162,21 +2162,6 @@
       "topoPrefCode": 0,
       "reason": "既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    "apps/admin/components/strategy/business-plan-sections.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
     "apps/admin/lib/template-area-map.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
@@ -2190,112 +2175,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 1,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/admin/lib/template-area-scope.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 1,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/admin/lib/template-chord.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 1,
-      "pref5Build": 2,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/admin/lib/template-distribution-map.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 5,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/admin/lib/template-ranking-bars.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 2,
-      "pref5Build": 0,
-      "prefRegex": 1,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/admin/lib/template-ranking-data.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 2,
-      "pref5Build": 0,
-      "prefRegex": 1,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 2,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/admin/lib/template-relationship-scatter.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 3,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/admin/scripts/build-template-review.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 1,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/admin/tests/unit/blog-figure-redraw.test.ts": {
       "prefCheck": 0,
@@ -2310,7 +2190,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/admin/tests/unit/image-copy-policy.test.ts": {
       "prefCheck": 0,
@@ -2325,7 +2205,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/admin/tests/unit/template-area-map.test.ts": {
       "prefCheck": 0,
@@ -2340,7 +2220,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 3,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/admin/tests/unit/template-area-scope.test.ts": {
       "prefCheck": 0,
@@ -2355,7 +2235,7 @@
       "prefCount47": 0,
       "prefArrayGen": 2,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/admin/tests/unit/template-chord.test.ts": {
       "prefCheck": 0,
@@ -2370,7 +2250,7 @@
       "prefCount47": 0,
       "prefArrayGen": 2,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/admin/tests/unit/template-distribution-map.test.ts": {
       "prefCheck": 0,
@@ -2385,7 +2265,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/admin/tests/unit/template-minor-charts.test.ts": {
       "prefCheck": 0,
@@ -2400,7 +2280,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/admin/tests/unit/template-ranking-bars.test.ts": {
       "prefCheck": 0,
@@ -2415,7 +2295,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/admin/tests/unit/template-ranking-presentation.test.ts": {
       "prefCheck": 0,
@@ -2430,7 +2310,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 1,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/admin/tests/unit/template-ranking-table.test.ts": {
       "prefCheck": 0,
@@ -2445,7 +2325,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/admin/tests/unit/template-ranking-tile-map.test.ts": {
       "prefCheck": 0,
@@ -2475,7 +2355,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/admin/tests/unit/template-relationship-scatter.test.ts": {
       "prefCheck": 0,
@@ -2505,7 +2385,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/remotion/scripts/exporters/migration-flow.ts": {
       "prefCheck": 0,
@@ -2520,7 +2400,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/remotion/scripts/exporters/station-passengers.ts": {
       "prefCheck": 0,
@@ -2535,7 +2415,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/remotion/scripts/fetch-municipality-net.ts": {
       "prefCheck": 0,
@@ -2550,7 +2430,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/remotion/scripts/fetch-railway-lines.ts": {
       "prefCheck": 0,
@@ -2565,7 +2445,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 2,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/remotion/scripts/pipeline/render-business-plan-m1-x-geo.ts": {
       "prefCheck": 0,
@@ -2580,7 +2460,7 @@
       "prefCount47": 2,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/remotion/scripts/pipeline/render-review-videos.ts": {
       "prefCheck": 0,
@@ -2595,7 +2475,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/remotion/src/features/buzz-map/geo.ts": {
       "prefCheck": 0,
@@ -2610,97 +2490,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 1,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/remotion/src/features/correlation-instagram/correlation.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/remotion/src/features/data-cards/all47-svg.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 2,
-      "pref5Build": 2,
-      "prefRegex": 1,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 2,
-      "prefArrayGen": 1,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/remotion/src/features/data-cards/DataCard.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 1,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/remotion/src/features/data-cards/model.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 1,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/remotion/src/features/map-carousel-instagram/MapTopBottomSlide.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 1,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/remotion/src/features/ranking-note/note-common.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/remotion/src/features/ranking-quiz-instagram/__tests__/quiz.test.ts": {
       "prefCheck": 0,
@@ -2715,37 +2505,7 @@
       "prefCount47": 1,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/remotion/src/features/ranking-quiz-instagram/QuizHintSlide.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 2,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/remotion/src/shared/utils/choropleth.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 2,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/remotion/src/utils/preview-data-bar-chart-race.ts": {
       "prefCheck": 0,
@@ -2805,7 +2565,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/scripts/export-migration-flow-r2.ts": {
       "prefCheck": 0,
@@ -2820,7 +2580,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/scripts/export-station-passengers-snapshot.ts": {
       "prefCheck": 0,
@@ -2835,7 +2595,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/scripts/export-sunshine-map-raster.ts": {
       "prefCheck": 0,
@@ -2850,7 +2610,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/scripts/extract-page-components-from-r2.ts": {
       "prefCheck": 0,
@@ -2865,7 +2625,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/scripts/generate-finance-flow.ts": {
       "prefCheck": 0,
@@ -2880,7 +2640,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/scripts/generate-ogp-images.ts": {
       "prefCheck": 0,
@@ -2895,7 +2655,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/scripts/geo-source-publish-core.ts": {
       "prefCheck": 0,
@@ -2910,7 +2670,7 @@
       "prefCount47": 1,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/scripts/lib/pref-silhouette-render.ts": {
       "prefCheck": 0,
@@ -2925,7 +2685,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 6,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/scripts/sync-content-catalog.ts": {
       "prefCheck": 0,
@@ -2940,7 +2700,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/__tests__/middleware.test.ts": {
       "prefCheck": 0,
@@ -2955,7 +2715,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/app/api/ranking/[rankingKey]/download/__tests__/route.test.ts": {
       "prefCheck": 0,
@@ -2970,22 +2730,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 2,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/app/geo/compare/page.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/components/charts/__tests__/geo-topology.test.ts": {
       "prefCheck": 0,
@@ -3000,7 +2745,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 2,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/components/charts/__tests__/HubSankeyFlow.test.tsx": {
       "prefCheck": 0,
@@ -3015,22 +2760,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/components/stat-charts/components/charts/CompositionChart/CompositionChart.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 1,
-      "pref5Build": 2,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/components/stat-charts/services/__tests__/fetch-estat-data-r2-compat.test.ts": {
       "prefCheck": 0,
@@ -3045,67 +2775,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/components/stat-charts/services/fetchEstatData.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 2,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/airport-traffic/components/ThemeAirportTrafficClient.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/area-databook/components/GenderPairedKpiGrid.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/area-databook/components/RankedKpiGrid.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/area-profile/utils/__tests__/build-area-directory-data.test.ts": {
       "prefCheck": 0,
@@ -3120,7 +2790,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/bridge-inspection-age/__tests__/bridge-inspection-age-ui.test.tsx": {
       "prefCheck": 0,
@@ -3135,37 +2805,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/bridge-inspection-age/components/ThemeBridgeInspectionAgeClient.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/bridge-inspection-age/lib/bridge-inspection-age-snapshot.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/cultural-heritage/__tests__/cultural-heritage-snapshot.test.ts": {
       "prefCheck": 0,
@@ -3180,37 +2820,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/cultural-heritage/components/ThemeCulturalHeritageClient.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/cultural-heritage/lib/cultural-heritage-view.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 2,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/depopulated-settlements/__tests__/depopulated-settlements-snapshot.test.ts": {
       "prefCheck": 0,
@@ -3225,7 +2835,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/depopulated-settlements/__tests__/depopulated-settlements-ui.test.tsx": {
       "prefCheck": 0,
@@ -3240,67 +2850,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/depopulated-settlements/lib/depopulated-settlements-view.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/factory-investment/components/ThemeFactoryInvestmentClient.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/factory-investment/lib/factory-investment-snapshot.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/freight-od/components/ThemeFreightOdClient.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/freight-od/lib/__tests__/freight-od-fixture.ts": {
       "prefCheck": 0,
@@ -3315,22 +2865,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/freight-od/lib/freight-od-snapshot.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 2,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/geo-analysis/__tests__/landslide-source-action.test.tsx": {
       "prefCheck": 0,
@@ -3345,7 +2880,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/geo-analysis/components/__tests__/GeoSpatialEvidenceExplorer.test.tsx": {
       "prefCheck": 0,
@@ -3360,7 +2895,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/geo-analysis/components/__tests__/ThemeGeoSnowDesignationClient.test.tsx": {
       "prefCheck": 0,
@@ -3375,7 +2910,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/geo-analysis/components/__tests__/ThemeGeoStationAccessClient.test.tsx": {
       "prefCheck": 0,
@@ -3390,67 +2925,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/geo-analysis/components/GeoLayerExplorer.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 1,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/geo-analysis/components/GeoSnowDesignationSummary.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 2,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/geo-analysis/components/GeoSpatialEvidenceExplorer.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 3,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/geo-analysis/components/ThemeGeoSnowDesignationClient.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/geo-analysis/lib/__tests__/build-geo-decision-rows.test.ts": {
       "prefCheck": 0,
@@ -3465,7 +2940,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/geo-analysis/lib/__tests__/build-population-analysis.test.ts": {
       "prefCheck": 0,
@@ -3480,7 +2955,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/geo-analysis/lib/__tests__/geo-artifact-bundle-fixture.ts": {
       "prefCheck": 0,
@@ -3495,7 +2970,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/geo-analysis/lib/__tests__/geo-artifacts-local.integration.test.ts": {
       "prefCheck": 0,
@@ -3510,7 +2985,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/geo-analysis/lib/__tests__/geo-cross-analysis.test.ts": {
       "prefCheck": 0,
@@ -3525,7 +3000,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/geo-analysis/lib/__tests__/geo-low-elevation-fixture.ts": {
       "prefCheck": 0,
@@ -3540,7 +3015,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/geo-analysis/lib/__tests__/geo-low-elevation.integration.test.ts": {
       "prefCheck": 0,
@@ -3555,7 +3030,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/geo-analysis/lib/__tests__/geo-manifest-fixture.ts": {
       "prefCheck": 0,
@@ -3570,7 +3045,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/geo-analysis/lib/__tests__/geo-public-facility-evidence.test.ts": {
       "prefCheck": 0,
@@ -3585,7 +3060,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/geo-analysis/lib/__tests__/geo-public-facility-fixture.ts": {
       "prefCheck": 0,
@@ -3600,7 +3075,7 @@
       "prefCount47": 1,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/geo-analysis/lib/__tests__/geo-public-facility.integration.test.ts": {
       "prefCheck": 0,
@@ -3615,7 +3090,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/geo-analysis/lib/__tests__/load-geo-analysis-evidence.test.ts": {
       "prefCheck": 0,
@@ -3630,22 +3105,7 @@
       "prefCount47": 1,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/geo-analysis/lib/build-geo-decision-rows.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/geo-analysis/lib/build-geo-landslide-map-model.ts": {
       "prefCheck": 0,
@@ -3660,7 +3120,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/geo-analysis/lib/build-geo-snow-map-model.ts": {
       "prefCheck": 0,
@@ -3675,22 +3135,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/geo-analysis/lib/build-population-analysis.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/geo-analysis/lib/geo-card-geography.ts": {
       "prefCheck": 0,
@@ -3705,82 +3150,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 1,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/geo-analysis/lib/geo-default-prefecture.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 1,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/geo-analysis/lib/geo-public-facility-evidence.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 2,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/geo-analysis/lib/geo-runtime-contract.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 3,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 5,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/geo-analysis/lib/geo-station-access-evidence.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 3,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/geo-analysis/lib/load-geo-analysis-snapshot.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 4,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/geo-map/components/GeoSubjectMap.tsx": {
       "prefCheck": 0,
@@ -3795,14 +3165,14 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 1,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/geo-questions/components/QuestionMap.tsx": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
       "prefectureNames": 0,
-      "prefSlice": 1,
+      "prefSlice": 0,
       "pref5Build": 0,
       "prefRegex": 0,
       "nationalLiteral": 0,
@@ -3810,7 +3180,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 1,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/graduation-paths/__tests__/graduation-paths-fixture.ts": {
       "prefCheck": 0,
@@ -3825,7 +3195,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/graduation-paths/__tests__/graduation-paths-ui.test.tsx": {
       "prefCheck": 0,
@@ -3840,52 +3210,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/graduation-paths/components/ThemeGraduationPathsClient.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/graduation-paths/lib/graduation-paths-snapshot.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 3,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/graduation-paths/lib/graduation-paths-view.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/industry-specialization/lib/__tests__/industry-specialization-snapshot.test.ts": {
       "prefCheck": 0,
@@ -3900,22 +3225,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/industry-specialization/lib/industry-specialization-snapshot.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 3,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/infra-history/components/InfraHistoryExplorer.tsx": {
       "prefCheck": 0,
@@ -3927,55 +3237,10 @@
       "prefRegex": 0,
       "nationalLiteral": 0,
       "pref2Compare": 0,
-      "prefCount47": 1,
+      "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 1,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/local-finance-dashboard/components/FinanceCardsSectionClient.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 1,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/map-visualization/utils/ranking-map-adapters.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/medical-workforce/components/ThemeMedicalWorkforceClient.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/medical-workforce/lib/__tests__/medical-workforce-fixture.ts": {
       "prefCheck": 0,
@@ -3990,7 +3255,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/medical-workforce/lib/__tests__/medical-workforce-snapshot.test.ts": {
       "prefCheck": 0,
@@ -4005,22 +3270,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/medical-workforce/lib/medical-workforce-snapshot.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 3,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/municipalities/components/MunicipalityWardBreakdownSection.tsx": {
       "prefCheck": 0,
@@ -4035,37 +3285,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 1,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/municipalities/lib/filter-municipality-ranking.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 1,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/nutrition/components/ThemeNutritionClient.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/nutrition/lib/__tests__/nutrition-snapshot.test.ts": {
       "prefCheck": 0,
@@ -4080,22 +3300,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/nutrition/lib/nutrition-snapshot.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 3,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/ogp/AreaOgp.tsx": {
       "prefCheck": 0,
@@ -4110,37 +3315,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/physical-activity/components/ThemePhysicalActivityClient.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/physical-activity/lib/physical-activity-snapshot.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 4,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/population-demographics/__tests__/population-profile-fixtures.ts": {
       "prefCheck": 0,
@@ -4155,7 +3330,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/population-demographics/__tests__/population-profile-ui.test.tsx": {
       "prefCheck": 0,
@@ -4170,97 +3345,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/population-demographics/components/ThemePopulationPartitionClient.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/population-demographics/lib/population-profile-view.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 2,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/property-price-distribution/components/ThemePropertyPriceDistributionClient.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/property-price-distribution/lib/property-price-distribution-snapshot.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/ranking/components/RankingDataTable/index.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 1,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/ranking/components/RankingDataTable/ranking-rows.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/ranking/components/RankingKeyPage/__tests__/RankingAreaDetailSheet.test.tsx": {
       "prefCheck": 0,
@@ -4275,37 +3360,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/ranking/components/RankingKeyPage/ranking-sample-count.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/ranking/components/RankingKeyPage/RankingVisualizationSection.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 1,
-      "pref5Build": 0,
-      "prefRegex": 1,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/ranking/components/RankingMapChart/__tests__/map-shapes.test.ts": {
       "prefCheck": 0,
@@ -4320,7 +3375,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/ranking/components/RankingMapChart/map-shapes.ts": {
       "prefCheck": 0,
@@ -4328,29 +3383,14 @@
       "yearCheck": 0,
       "prefectureNames": 0,
       "prefSlice": 0,
-      "pref5Build": 1,
+      "pref5Build": 0,
       "prefRegex": 0,
       "nationalLiteral": 0,
       "pref2Compare": 0,
       "prefCount47": 0,
       "prefArrayGen": 0,
-      "topoPrefCode": 2,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/ranking/components/RankingPageCards/StatsLineChartCard.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 2,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "topoPrefCode": 1,
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/ranking/lib/__tests__/build-national-average-series.test.ts": {
       "prefCheck": 0,
@@ -4365,22 +3405,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/ranking/lib/build-national-average-series.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 1,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/ranking/utils/__tests__/build-ranking-summary.test.ts": {
       "prefCheck": 0,
@@ -4395,7 +3420,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/ranking/utils/__tests__/compute-ranking-header-stats.test.ts": {
       "prefCheck": 0,
@@ -4410,7 +3435,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/ranking/utils/__tests__/generate-structured-data.test.ts": {
       "prefCheck": 0,
@@ -4425,7 +3450,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/ranking/utils/__tests__/resolve-featured-ranking-card.test.ts": {
       "prefCheck": 0,
@@ -4440,7 +3465,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/region-comparison/__tests__/choropleth-data-repository.test.ts": {
       "prefCheck": 0,
@@ -4455,7 +3480,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/region-comparison/components/MunicipalityChoroplethSection.tsx": {
       "prefCheck": 0,
@@ -4470,22 +3495,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 1,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/shelter-applicability/components/ThemeShelterApplicabilityClient.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/shelter-applicability/lib/__tests__/shelter-applicability-fixture.ts": {
       "prefCheck": 0,
@@ -4500,7 +3510,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/shelter-applicability/lib/__tests__/shelter-applicability-snapshot.test.ts": {
       "prefCheck": 0,
@@ -4515,22 +3525,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/shelter-applicability/lib/shelter-applicability-snapshot.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/theme-dashboard/__tests__/prefecture-view.test.ts": {
       "prefCheck": 0,
@@ -4545,7 +3540,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/theme-dashboard/actions/__tests__/fetch-db-chart-data.test.ts": {
       "prefCheck": 0,
@@ -4560,7 +3555,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/theme-dashboard/actions/__tests__/fetch-metric-timeseries.test.ts": {
       "prefCheck": 0,
@@ -4575,7 +3570,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/theme-dashboard/components/__tests__/all-theme-panel-kinds.test.tsx": {
       "prefCheck": 0,
@@ -4590,7 +3585,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/theme-dashboard/components/__tests__/initial-theme-data.test.tsx": {
       "prefCheck": 0,
@@ -4605,7 +3600,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/theme-dashboard/components/__tests__/metrics-dashboard-switcher.test.tsx": {
       "prefCheck": 0,
@@ -4620,7 +3615,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/theme-dashboard/components/__tests__/MetricSwitcherPanel.test.tsx": {
       "prefCheck": 0,
@@ -4635,7 +3630,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/theme-dashboard/components/__tests__/SingleMetricCard.test.tsx": {
       "prefCheck": 0,
@@ -4650,7 +3645,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/theme-dashboard/components/__tests__/theme-reading-chapter.test.tsx": {
       "prefCheck": 0,
@@ -4665,7 +3660,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/theme-dashboard/components/__tests__/ThemeDbChartRenderer.test.tsx": {
       "prefCheck": 0,
@@ -4680,67 +3675,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/theme-dashboard/components/ThemeDbChartRenderer.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 2,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/theme-dashboard/components/ThemeGeoInsightsSection.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 1,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/theme-dashboard/components/ThemeMetricsDashboard.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/theme-dashboard/components/ThemePageLayout.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/theme-dashboard/lib/__tests__/aggregate-metric-timeseries.test.ts": {
       "prefCheck": 0,
@@ -4755,7 +3690,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/theme-dashboard/lib/__tests__/initial-theme-data.test.ts": {
       "prefCheck": 0,
@@ -4770,7 +3705,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/theme-dashboard/lib/__tests__/select-national-series.test.ts": {
       "prefCheck": 0,
@@ -4785,7 +3720,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/theme-dashboard/lib/__tests__/theme-chart-result.test.ts": {
       "prefCheck": 0,
@@ -4800,7 +3735,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/theme-dashboard/lib/__tests__/theme-overview.test.ts": {
       "prefCheck": 0,
@@ -4815,7 +3750,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/theme-dashboard/lib/__tests__/theme-prefecture-preference.test.ts": {
       "prefCheck": 0,
@@ -4830,7 +3765,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/theme-dashboard/lib/__tests__/theme-seo.test.ts": {
       "prefCheck": 0,
@@ -4845,22 +3780,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/theme-dashboard/lib/theme-prefecture-preference.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 1,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/tourism-seasonality/lib/__tests__/tourism-seasonality-snapshot.test.ts": {
       "prefCheck": 0,
@@ -4875,22 +3795,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/tourism-seasonality/lib/tourism-seasonality-snapshot.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/tsunami-exposure/components/__tests__/ThemeTsunamiExposureClient.test.tsx": {
       "prefCheck": 0,
@@ -4905,7 +3810,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/water-quality/__tests__/water-quality-fixture.ts": {
       "prefCheck": 0,
@@ -4920,7 +3825,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/features/water-quality/__tests__/water-quality-snapshot.test.ts": {
       "prefCheck": 0,
@@ -4935,37 +3840,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/water-quality/components/ThemeWaterQualityClient.tsx": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/features/water-quality/lib/water-quality-snapshot.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/lib/cookies/__tests__/area-code-cookie.test.ts": {
       "prefCheck": 0,
@@ -4980,7 +3855,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "apps/web/src/lib/download/__tests__/build-map-download.test.ts": {
       "prefCheck": 0,
@@ -4995,37 +3870,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 4,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/lib/download/build-map-download.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 1,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "apps/web/src/middleware.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 1,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "contents/blog/population-decline-land-price-divergence/generate-data.ts": {
       "prefCheck": 0,
@@ -5115,7 +3960,7 @@
       "prefCount47": 0,
       "prefArrayGen": 2,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/area-profile/src/highlights/__tests__/select-area-highlights.test.ts": {
       "prefCheck": 0,
@@ -5130,7 +3975,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/area-profile/src/highlights/select-area-highlights.ts": {
       "prefCheck": 0,
@@ -5145,22 +3990,7 @@
       "prefCount47": 1,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/area-profile/src/scripts/check-highlights.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/area-profile/src/utils/__tests__/build-area-profile-rows.test.ts": {
       "prefCheck": 0,
@@ -5175,37 +4005,7 @@
       "prefCount47": 1,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/area-profile/src/utils/build-area-profile-rows.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/area-profile/src/utils/extract-strengths-and-weaknesses.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/area/src/constants/__tests__/prefecture-codes.test.ts": {
       "prefCheck": 0,
@@ -5220,7 +4020,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/area/src/constants/__tests__/regions.test.ts": {
       "prefCheck": 0,
@@ -5235,7 +4035,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/area/src/constants/regions.ts": {
       "prefCheck": 0,
@@ -5250,7 +4050,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/area/src/data/__tests__/master.test.ts": {
       "prefCheck": 0,
@@ -5265,7 +4065,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/area/src/municipalities/entity-policy.ts": {
       "prefCheck": 0,
@@ -5280,7 +4080,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/area/src/utils/__tests__/area-code-script-mirror.test.ts": {
       "prefCheck": 0,
@@ -5295,7 +4095,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/area/src/utils/__tests__/area-code.test.ts": {
       "prefCheck": 0,
@@ -5310,7 +4110,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 5,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/area/src/utils/__tests__/lookup-area.test.ts": {
       "prefCheck": 0,
@@ -5325,7 +4125,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/area/src/utils/__tests__/prefecture-code.test.ts": {
       "prefCheck": 0,
@@ -5340,7 +4140,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/area/src/utils/__tests__/prefecture-name.test.ts": {
       "prefCheck": 0,
@@ -5355,7 +4155,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/area/src/utils/lookup-area.ts": {
       "prefCheck": 0,
@@ -5370,7 +4170,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/correlation/src/scripts/__tests__/build-correlation-snapshot.test.ts": {
       "prefCheck": 0,
@@ -5385,7 +4185,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/data-configs/scripts/__tests__/estat-table-inventory.test.ts": {
       "prefCheck": 0,
@@ -5400,112 +4200,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/data-configs/scripts/export-geo-content-pipeline.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 2,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/data-configs/scripts/generate-area-databook.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/data-configs/scripts/ingest-childcare-waiting-rate.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 2,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/data-configs/scripts/ingest-commute-flow.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 4,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/data-configs/scripts/ingest-nier-achievement.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 1,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/data-configs/scripts/lib/childcare-waiting-rate.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 1,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/data-configs/scripts/validate-prefecture-statistics-catalog.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/data-configs/src/__tests__/area-databook-records.test.ts": {
       "prefCheck": 0,
@@ -5520,7 +4215,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/data-configs/src/__tests__/childcare-waiting-rate.test.ts": {
       "prefCheck": 0,
@@ -5535,7 +4230,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/data-configs/src/__tests__/estat-table-reader.test.ts": {
       "prefCheck": 0,
@@ -5550,7 +4245,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/data-configs/src/__tests__/shape-gate.test.ts": {
       "prefCheck": 0,
@@ -5565,7 +4260,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/data-configs/src/__tests__/value-verification.test.ts": {
       "prefCheck": 0,
@@ -5580,22 +4275,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/data-configs/src/business-plan/m1.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 1,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/data-configs/src/geo-scope/__tests__/build-japan-series.test.ts": {
       "prefCheck": 0,
@@ -5610,7 +4290,7 @@
       "prefCount47": 1,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/data-configs/src/geo-scope/__tests__/resolve-japan-value.test.ts": {
       "prefCheck": 0,
@@ -5625,82 +4305,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/data-configs/src/geo-scope/resolve-japan-value.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/data-configs/src/ingest/shape.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 1,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/data-configs/src/provenance/official-release-staging.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/data-configs/src/theme-catalog/earthquake-exposure-schema.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 1,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 3,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/data-configs/src/theme-catalog/tsunami-exposure-schema.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 1,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/estat-api/src/meta-info/__tests__/fixtures/mock-responses.ts": {
       "prefCheck": 0,
@@ -5715,29 +4320,14 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/estat-api/src/stats-data/utils/table-partitions.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 2,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/gis/src/export/export-geojson-kml.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
       "prefectureNames": 0,
-      "prefSlice": 1,
+      "prefSlice": 0,
       "pref5Build": 0,
       "prefRegex": 0,
       "nationalLiteral": 0,
@@ -5745,7 +4335,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 3,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/gis/src/export/merge-topojson.ts": {
       "prefCheck": 0,
@@ -5753,89 +4343,59 @@
       "yearCheck": 0,
       "prefectureNames": 0,
       "prefSlice": 0,
-      "pref5Build": 3,
+      "pref5Build": 0,
       "prefRegex": 0,
       "nationalLiteral": 0,
       "pref2Compare": 0,
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 3,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/gis/src/geo-analysis/landslide-exposure.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
       "prefectureNames": 0,
-      "prefSlice": 4,
-      "pref5Build": 2,
+      "prefSlice": 0,
+      "pref5Build": 1,
       "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 11,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/gis/src/geo-analysis/low-elevation-population.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 2,
-      "pref5Build": 2,
-      "prefRegex": 1,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 6,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/gis/src/geo-analysis/public-facility-access.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 2,
-      "pref5Build": 0,
-      "prefRegex": 1,
       "nationalLiteral": 0,
       "pref2Compare": 0,
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/gis/src/geo-analysis/snow-designation.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
       "prefectureNames": 0,
-      "prefSlice": 4,
-      "pref5Build": 3,
-      "prefRegex": 1,
+      "prefSlice": 0,
+      "pref5Build": 1,
+      "prefRegex": 0,
       "nationalLiteral": 0,
       "pref2Compare": 0,
-      "prefCount47": 5,
+      "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/gis/src/geo-questions/scripts/build-geo-questions.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
       "prefectureNames": 0,
-      "prefSlice": 1,
-      "pref5Build": 1,
+      "prefSlice": 0,
+      "pref5Build": 0,
       "prefRegex": 0,
-      "nationalLiteral": 1,
+      "nationalLiteral": 0,
       "pref2Compare": 0,
       "prefCount47": 0,
-      "prefArrayGen": 1,
+      "prefArrayGen": 0,
       "topoPrefCode": 1,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/gis/src/infra-history/__tests__/core.test.ts": {
       "prefCheck": 0,
@@ -5850,37 +4410,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/gis/src/infra-history/parse.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/gis/src/infra-history/scopes.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 1,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/gis/src/mlit-ksj/__tests__/official-download-discovery.test.ts": {
       "prefCheck": 0,
@@ -5895,127 +4425,37 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/gis/src/mlit-ksj/ksj-stats-core.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 1,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/gis/src/mlit-ksj/official-download-discovery.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 1,
-      "pref5Build": 0,
-      "prefRegex": 1,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/gis/src/mlit-ksj/prefecture-assign.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
       "prefectureNames": 0,
-      "prefSlice": 3,
-      "pref5Build": 1,
+      "prefSlice": 0,
+      "pref5Build": 0,
       "prefRegex": 0,
       "nationalLiteral": 0,
       "pref2Compare": 0,
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 1,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/gis/src/mlit-ksj/scripts/audit-geo-analysis-artifacts.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 5,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 11,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/gis/src/mlit-ksj/scripts/build-geo-cross-snapshots.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
       "prefectureNames": 0,
-      "prefSlice": 7,
-      "pref5Build": 2,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/gis/src/mlit-ksj/scripts/build-public-facility-access.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
       "prefSlice": 0,
       "pref5Build": 0,
       "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/gis/src/mlit-ksj/scripts/extract-mesh1000r6.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 1,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
+      "nationalLiteral": 1,
       "pref2Compare": 0,
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/gis/src/mlit-ksj/scripts/rebuild-medical-areas.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/gis/src/mlit/scripts/audit-ward-mode-topology.ts": {
       "prefCheck": 0,
@@ -6023,14 +4463,14 @@
       "yearCheck": 0,
       "prefectureNames": 0,
       "prefSlice": 0,
-      "pref5Build": 1,
-      "prefRegex": 1,
+      "pref5Build": 0,
+      "prefRegex": 0,
       "nationalLiteral": 0,
       "pref2Compare": 0,
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 1,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/gis/src/mlit/utils/__tests__/ward-mode-topology.test.ts": {
       "prefCheck": 0,
@@ -6045,7 +4485,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 7,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/gis/src/mlit/utils/ward-mode-topology.ts": {
       "prefCheck": 0,
@@ -6060,7 +4500,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 1,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/gis/src/official-counts/__tests__/designated-ports.test.ts": {
       "prefCheck": 0,
@@ -6075,7 +4515,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/gis/src/official-counts/designated-ports.ts": {
       "prefCheck": 0,
@@ -6090,22 +4530,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/gis/src/official-counts/parse.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/migration-flow/src/lib/build-map.ts": {
       "prefCheck": 0,
@@ -6120,37 +4545,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 3,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/migration-flow/src/lib/focus-file.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 1,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/migration-flow/src/lib/regions.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 1,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/product-factory/scripts/build-cover-background.mts": {
       "prefCheck": 0,
@@ -6165,67 +4560,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/product-factory/src/analysis/catalog.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 1,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/product-factory/src/analysis/compute.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 1,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/product-factory/src/analysis/validate-catalog.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 1,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/product-factory/src/channels/geo/cli.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 3,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/product-factory/src/channels/kindle/__tests__/full-tables.test.ts": {
       "prefCheck": 0,
@@ -6240,37 +4575,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/product-factory/src/data/prefectures.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 1,
-      "pref5Build": 2,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/product-factory/src/generators/pptx.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 1,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/product-factory/src/maps/prefecture-geometry.ts": {
       "prefCheck": 0,
@@ -6285,22 +4590,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 3,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/product-factory/src/validators/dataset-validator.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/product-factory/tests/analysis-capital-city.test.ts": {
       "prefCheck": 0,
@@ -6315,7 +4605,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/product-factory/tests/analysis-choropleth.test.ts": {
       "prefCheck": 0,
@@ -6330,7 +4620,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/product-factory/tests/analysis-fetch.test.ts": {
       "prefCheck": 0,
@@ -6345,7 +4635,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/product-factory/tests/analysis-source-contract.test.ts": {
       "prefCheck": 0,
@@ -6360,7 +4650,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/product-factory/tests/delivery-integrity.test.ts": {
       "prefCheck": 0,
@@ -6375,7 +4665,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/product-factory/tests/kindle-ranking-label.test.ts": {
       "prefCheck": 0,
@@ -6390,7 +4680,7 @@
       "prefCount47": 0,
       "prefArrayGen": 2,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/product-factory/tests/load-ranking-values.test.ts": {
       "prefCheck": 0,
@@ -6405,7 +4695,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/product-factory/tests/note-revision.test.ts": {
       "prefCheck": 0,
@@ -6420,7 +4710,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/product-factory/tests/product-ledgers.test.ts": {
       "prefCheck": 0,
@@ -6435,7 +4725,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/r2-storage/src/scripts/lib/__tests__/ksj-publication-guard.test.ts": {
       "prefCheck": 0,
@@ -6450,7 +4740,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/r2-storage/src/scripts/lib/__tests__/scoped-geo-source-publication.test.ts": {
       "prefCheck": 0,
@@ -6465,82 +4755,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/r2-storage/src/scripts/lib/ksj-publication-guard.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 2,
-      "prefRegex": 1,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 1,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/r2-storage/src/scripts/lib/scoped-geo-source-publication.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 1,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/ranking/src/municipalities/municipality-prefecture-ranking.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 1,
-      "pref5Build": 1,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/ranking/src/repositories/ranking-value/read-ranking-values-from-r2.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 1,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/ranking/src/repositories/schemas/municipality-ranking.schemas.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 2,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/ranking/src/scripts/__tests__/audit-estat-year-coverage.test.ts": {
       "prefCheck": 0,
@@ -6555,7 +4770,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/ranking/src/scripts/lib/__tests__/calculated-stats-core.test.ts": {
       "prefCheck": 0,
@@ -6570,7 +4785,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/ranking/src/scripts/lib/__tests__/normalized-values-core.test.ts": {
       "prefCheck": 0,
@@ -6585,7 +4800,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/ranking/src/utils/__tests__/compute-bottom-ranking.test.ts": {
       "prefCheck": 0,
@@ -6600,7 +4815,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/ranking/src/utils/__tests__/compute-ranking-stats.test.ts": {
       "prefCheck": 0,
@@ -6615,7 +4830,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/ranking/src/utils/__tests__/compute-sorted-rankings.test.ts": {
       "prefCheck": 0,
@@ -6630,7 +4845,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/ranking/src/utils/__tests__/compute-top-rankings.test.ts": {
       "prefCheck": 0,
@@ -6645,7 +4860,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/ranking/src/utils/__tests__/filter-out-national-area.test.ts": {
       "prefCheck": 0,
@@ -6660,7 +4875,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/ranking/src/utils/__tests__/filter-to-national.test.ts": {
       "prefCheck": 0,
@@ -6675,7 +4890,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/ranking/src/utils/__tests__/filter-to-prefectures.test.ts": {
       "prefCheck": 0,
@@ -6690,7 +4905,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/ranking/src/utils/__tests__/resolve-national-figure.test.ts": {
       "prefCheck": 0,
@@ -6705,52 +4920,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/ranking/src/utils/filter-out-national-area.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 2,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/ranking/src/utils/filter-to-prefectures.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 2,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/ranking/src/utils/resolve-national-figure.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 1,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 1,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/station-passengers/src/StationPassengersReel.tsx": {
       "prefCheck": 0,
@@ -6765,7 +4935,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 1,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/stats-r2/src/__tests__/schemas.test.ts": {
       "prefCheck": 0,
@@ -6780,7 +4950,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/stats-r2/src/scripts/__tests__/kakei-axis-rows.test.ts": {
       "prefCheck": 0,
@@ -6795,22 +4965,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/stats-r2/src/scripts/generate-kakei-axis-charts.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 4,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/svg-builder/src/charts/__tests__/article-mobile.test.ts": {
       "prefCheck": 0,
@@ -6825,7 +4980,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/svg-builder/src/charts/__tests__/choropleth.gate.test.ts": {
       "prefCheck": 0,
@@ -6885,7 +5040,7 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/svg-builder/src/charts/__tests__/text-layout.gate.test.ts": {
       "prefCheck": 0,
@@ -6902,36 +5057,6 @@
       "topoPrefCode": 0,
       "reason": "テストfixtureの独立した期待値を維持 / 置き換え中 (2026-11-19)。取り込みの後に測り直す"
     },
-    "packages/svg-builder/src/charts/article-mobile.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 1,
-      "pref5Build": 0,
-      "prefRegex": 1,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 2,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
-    "packages/svg-builder/src/charts/choropleth.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 4,
-      "pref5Build": 4,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
     "packages/visualization/src/d3/__tests__/utils/geojson/prepare-prefecture-features.test.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
@@ -6945,7 +5070,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 3,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/visualization/src/d3/components/DivergingChoroplethMap/DivergingChoroplethMap.tsx": {
       "prefCheck": 0,
@@ -6960,7 +5085,7 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 1,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/visualization/src/d3/constants/tile-grid-layout.ts": {
       "prefCheck": 0,
@@ -6977,21 +5102,6 @@
       "topoPrefCode": 0,
       "reason": "ユーザー指定の除外対象: 地図の配置順を維持"
     },
-    "packages/visualization/src/d3/utils/geojson/prepare-prefecture-features.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 2,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 1,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
-    },
     "packages/visualization/src/server/__tests__/generate-ranking-thumbnail-map-svg.test.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
@@ -7005,22 +5115,22 @@
       "prefCount47": 0,
       "prefArrayGen": 1,
       "topoPrefCode": 0,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/visualization/src/server/generate-mini-prefecture-svg.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
       "prefectureNames": 0,
-      "prefSlice": 2,
+      "prefSlice": 0,
       "pref5Build": 1,
       "prefRegex": 0,
       "nationalLiteral": 0,
       "pref2Compare": 0,
       "prefCount47": 0,
       "prefArrayGen": 0,
-      "topoPrefCode": 5,
-      "reason": "置き換え中 (2026-11-19)。取り込みの後に測り直す"
+      "topoPrefCode": 3,
+      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     }
   }
 }

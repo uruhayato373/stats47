@@ -128,13 +128,13 @@ updated: 2026-11-01
 - **完了条件**: apps と packages の src から `.claude/scripts` への import が 0 (テストと、理由つきの例外を除く) で、検査が新しい import を注入したテストで止まる。
 
 
-### [MAP-RULES-DEDUP-01] 地図の画像の作り方に残る重複 (配色の解決・使われていない地図・県コードの検査の穴) をまとめる
+### [MAP-RULES-DEDUP-01] 地図の画像の作り方に残る重複 (配色の解決・使われていない地図) をまとめる
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-11-19] [領域:サイト]
 
-- **起点 (2026-11-19 オーナー指摘「サムネイルを生成するルールも冗長になっていないか」)**: 注目のランキングのカードの地図を直したとき、地図の画像の経路 12 本を棚卸しした。本土の範囲・沖縄の判定・枠の比率は同じ作業でまとめた。次の 3 つは残っている。
+- **起点 (2026-11-19 オーナー指摘「サムネイルを生成するルールも冗長になっていないか」)**: 注目のランキングのカードの地図を直したとき、地図の画像の経路 12 本を棚卸しした。本土の範囲・沖縄の判定・枠の比率は同じ作業でまとめた。次の 2 つは残っている (県コードの検査の穴は 2026-11-19 に `check-area-year-entrypoint.mjs` を広げて解消した)。
 - **次**: ① 配色の解決が 3 通りある。サムネイル (`packages/visualization/src/server/generate-mini-prefecture-svg.ts`) は順位で塗る。台帳の型 (`apps/remotion/src/features/data-cards/tile-scale.ts` の `resolveTileScale`) は値で塗る (`packages/types/src/color-policy.ts`)。Remotion のコロプレス (`apps/remotion/src/shared/utils/choropleth.ts` の `getInterpolator`) は配色の名前をカタログ (`d3KeyOfColorScheme`) と照らさず、知らない名前で黙って青に落ちる。どれに寄せるかを決めて 1 つにする (サムネイルを値で塗ると、外れ値の多い指標で色がつぶれるかを先に確かめる)。② `apps/web/src/features/ogp/JapanMapSvg.tsx` (手書きの多角形)・`RankingOgp`・`AreaOgp` の使い手を確かめ、無ければ消す。③ 地域コードの写しを止める検査 `packages/area/scripts/check-area-year-entrypoint.mjs` は決まった関数名と 47 県名の配列しか見ず、地図の部品が `"47"` を直書きしたり TopoJSON の `N03_007` を自前で正規化したりしても通る。止める形を足す (縮小専用の baseline で)。
 - **停止条件**: 配色を変えると全媒体の画像が変わる。① は見本の画像 (管理画面の型の見本) で前後を比べ、オーナーの確認を取ってから入れる。
-- **完了条件**: 配色の解決が 1 つの関数を通り、使われていない地図の部品が消え、検査が `"47"` の直書きを注入したテストで止まる。
+- **完了条件**: 配色の解決が 1 つの関数を通り、使われていない地図の部品が消える。
 
 
 ### [GIT-PUSH-SSH-TIMEOUT-01] 会社の Windows PC で、push の前の検査が通った後に git が exit 141 で止まり push が届かない
@@ -1357,7 +1357,7 @@ updated: 2026-11-01
 - **判断待ち (2026-11-14)**: 公開 R2 が不調のとき、固定データを読む 2 テスト (`license-exclusion`・`delivery-integrity`) をどう扱うかをオーナーが決める。(a) skip を許す (品質の例外台帳に test-skip 2 件を足す。定期監査は `PACK_SNAPSHOTS_STRICT=1` で従来どおり止める) / (b) skip を許さず、CI の固定データを `actions/cache` で持ち越す / (c) 2 テストを別ジョブへ分けて必須チェックから外す。
 - **なぜ手元で決められないか**: (a) は `quality-exceptions` の検査が例外の追加を禁じており、「固定データが取れなければ止まる」という現在の方針 (`0f754efda`) を緩める判断になる。固定データを fixture にする案は、テストが実データの件数 (P-12 は 2,491 指標など) を固定していて、13 パックで数千指標になるので採れない。
 - **観測 (2026-11-14)**: `R2_PUBLIC_FETCH_URL=http://127.0.0.1:9` で、Unit Tests の前処理が `packages/product-factory` の全 55 テストファイルを巻き込んで落ちることを再現した。
-- **再観測 (2026-11-15・別の原因)**: 公開 R2 の中身が変わっても同じ 2 テストが落ちる。develop の Unit Tests (packages) が run 43685432330 (ff44de49e) と 43690534376 (926faa6b2) で失敗: P-12 の指標数 2,496 (期待 2,491)・除外件数 73 (期待 74)。手元の固定データを消して作り直すと再現する (`packages/product-factory/src/data/pack-snapshots/` を退避して `npx vitest run --project @stats47/product-factory tests/delivery-integrity.test.ts tests/license-exclusion.test.ts`)。P-12 に公開された 6 指標 (annual-clear-days・annual-snow-days・bamboo-production・factory-industrial-park-rate・factory-location-area-annual・flood-damage-road) が加わり、convenience-store-sales の値が 11-15 の作り直しで変わった。テストが「公開中の R2 の件数」を固定しているので、指標の公開や作り直しのたびに落ちる。2026-11-15 にオーナー了承で期待値を更新した (P-12 2,491 → 2,496・P-08 74 → 73。P-08 の減少はコンビニの販売額を年計に直して `convenience-store-sales-monthly` と同じ値になり 1 列にまとまったため)。公開中の件数を固定する作りは残るので、次の公開でまた落ちる。 再観測 (2026-11-18・Mac): 手元の `vitest run packages/product-factory` で同じ 2 件が 2,491 (期待 2,496)・74 (期待 73) で落ちた。期待値は更新済みで、手元の固定データが 11-15 より古いまま (globalSetup が既存ファイルを作り直さない)。
+- **再観測 (2026-11-15・別の原因)**: 公開 R2 の中身が変わっても同じ 2 テストが落ちる。develop の Unit Tests (packages) が run 43685432330 (ff44de49e) と 43690534376 (926faa6b2) で失敗: P-12 の指標数 2,496 (期待 2,491)・除外件数 73 (期待 74)。手元の固定データを消して作り直すと再現する (`packages/product-factory/src/data/pack-snapshots/` を退避して `npx vitest run --project @stats47/product-factory tests/delivery-integrity.test.ts tests/license-exclusion.test.ts`)。P-12 に公開された 6 指標 (annual-clear-days・annual-snow-days・bamboo-production・factory-industrial-park-rate・factory-location-area-annual・flood-damage-road) が加わり、convenience-store-sales の値が 11-15 の作り直しで変わった。テストが「公開中の R2 の件数」を固定しているので、指標の公開や作り直しのたびに落ちる。2026-11-15 にオーナー了承で期待値を更新した (P-12 2,491 → 2,496・P-08 74 → 73。P-08 の減少はコンビニの販売額を年計に直して `convenience-store-sales-monthly` と同じ値になり 1 列にまとまったため)。公開中の件数を固定する作りは残るので、次の公開でまた落ちる。 再観測 (2026-11-18・Mac): 手元の `vitest run packages/product-factory` で同じ 2 件が 2,491 (期待 2,496)・74 (期待 73) で落ちた。期待値は更新済みで、手元の固定データが 11-15 より古いまま (globalSetup が既存ファイルを作り直さない)。 再観測 (2026-11-19・Mac): 地域コードの集約の取り込み後に同じ 2 件 (2,491・74) が落ち、取り込み前の中身に戻しても同じだった (今回の変更とは無関係)。
 - **次**: 判断の後、前処理に取得失敗の許容を足し、2 テストに固定データの有無の判定を入れる (約 1 時間)。Build Check の R2 読み取り件数と所要の測定は未着手。
 - **完了条件**: 公開 R2 が不調でも、関係の無い PR の必須チェックが落ちない。
 
@@ -2309,7 +2309,7 @@ updated: 2026-11-01
 - **完了条件**: geo の 3 件の warning が消えるか、残す理由が台帳に書いてある。Worker 全体の Total Upload の実測値と上限の比較が、このカードに書いてある。
 - **追補 (2026-11-14)**: `.claude/scripts/page-quality/__tests__/ui-findings.test.mjs` は `node --test` だけでは `lib/ui-report` を解決できずに落ち、`node --import tsx --test` なら通る。どの入口で回す前提かをファイルの冒頭に書くか、tsx 無しで動く import に直す。`push-r2-wrangler.ts` には diff-push-r2 の止め (一覧失敗・正本の上書き・読み戻し) が無いのに、`.claude/scripts/blog/` の 4 スクリプト (backfill-source・resolve-scatter-axes・rerender-ranking-columns・restore-findings-from-svg) と `push-article-md-r2.ts` の冒頭がローカルからの反映の経路として案内している。案内を workflow に直すか、同じ止めを通す。
 - **追補 (2026-11-14)**: `apps/web` の `ranking-header-density-contract.test.ts` は `process.cwd()` に頼っていて、リポジトリのルートから vitest を走らせると ENOENT で落ちる (apps/web からなら 5 件通る)。
-- **追補 (2026-11-19)**: 地域コードの直書きの検査 (`packages/area/scripts/check-area-year-entrypoint.mjs`) の基準に、`.claude/scripts` の既存の直書きが載っている (apps と packages は 2026-11-19 に正本へ置き換え済み)。スクリプトを触ったときに `@stats47/area` か鏡 `lib/prefectures.cjs` の関数へ替え、基準を減らす。
+- **追補 (2026-11-19)**: 地域コードの直書きの検査 (`packages/area/scripts/check-area-year-entrypoint.mjs`) の基準に、`.claude/scripts` の既存の直書きが載っている (apps と packages は 2026-11-19 に正本へ置き換え済み)。スクリプトを触ったときに `@stats47/area` か鏡 `lib/prefectures.cjs` の関数へ替え、基準を減らす。 ほかに 2 つの写しが残っている。`packages/area-profile/src/highlights/select-area-highlights.ts` の `PREFECTURE_COUNT = 47` は、SNS のスクリプトが相対パスで直接読む「パッケージの外を import しない」契約のため残した (契約を見直すか、`@stats47/area/area-code` だけは読んでよいことにする)。`packages/data-configs/src/open-data-catalog/normalized-table.ts` と `src/area-axis.ts` は `@stats47/area` ではなく `../../../area/src/constants/prefecture-codes` を相対パスで読んでいる (出口 `@stats47/area/area-code` に替えられるか確かめる)。
 - **追補 (2026-11-15)**: Codex のセッション (`OPENDATA-ARCHIVE-01`) は `agent:session` に cwd を本体 (`/Users/minamidaisuke/stats47`) として登録していたが、実際の編集は別 worktree `/Users/minamidaisuke/stats47-opendata` で行っていた。このため本体で登録する別セッションに毎回「重複の可能性」の警告が出て、実際に重なる場所は検知されない。登録時に `git rev-parse --show-toplevel` の値を cwd に使っているか (`.claude/hooks/session-guard.js`) を確かめる。
 
 ### [NOTE-BODY-RECOVERY-01] 本文が note.com にしか無い 73 本を R2 へ回収する
