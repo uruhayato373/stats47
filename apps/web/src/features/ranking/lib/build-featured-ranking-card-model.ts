@@ -1,6 +1,5 @@
 import "server-only";
 
-import { PREFECTURE_CAPITAL_CITY_NAMES } from "@stats47/area";
 import {
   getMetricConfig,
   isCapitalCityValueMetric,
@@ -10,9 +9,7 @@ import {
 import { resolveRankingHook } from "@stats47/data-configs/prominence";
 import { RANKING_PROMINENCE_CATEGORIES } from "@stats47/data-configs/ranking-prominence";
 import {
-  deriveFeaturedTop,
-  deriveFeaturedTopList,
-  FEATURED_CARD_TOP_COUNT,
+  buildFeaturedTopRows,
   type HomeFeaturedValueRow,
 } from "@stats47/ranking";
 import { generateRankingThumbnailMapSvg } from "@stats47/visualization/server";
@@ -40,6 +37,8 @@ const REPRESENTATIVE_HOOK_BY_KEY = new Map(
 interface BuildFeaturedRankingCardModelInput {
   rankingKey: string;
   title: string;
+  /** 指標の単位 (ranking item の unit) */
+  unit: string;
   values: readonly HomeFeaturedValueRow[];
   /** 表示面の編集で書いた問い (調査ハブの「読者の問い」)。あれば導出した問いより優先する */
   hook?: string;
@@ -52,6 +51,7 @@ interface BuildFeaturedRankingCardModelInput {
 export function buildFeaturedRankingCardModel({
   rankingKey,
   title,
+  unit,
   values,
   hook,
 }: BuildFeaturedRankingCardModelInput): FeaturedRankingCardModel | null {
@@ -91,16 +91,10 @@ export function buildFeaturedRankingCardModel({
     }
   );
 
-  // 家計調査の値は県庁所在市の値なので、1 位の名前も市で書く (問いが「都市は？」なのに「福島県」と答えていた。2026-11-02)
-  const isCapitalCityValue = metricConfig
+  // 家計調査の値は県庁所在市の値なので、上位の名前も市で書く (問いが「都市は？」なのに「福島県」と答えていた。2026-11-02)
+  const capitalCities = metricConfig
     ? isCapitalCityValueMetric(metricConfig, METRICS_REGISTRY)
     : false;
-  const topValues = isCapitalCityValue
-    ? values.map((value) => ({
-        ...value,
-        areaName: PREFECTURE_CAPITAL_CITY_NAMES[value.areaCode] ?? value.areaName,
-      }))
-    : values;
 
   return resolveFeaturedRankingCardModel(
     {
@@ -108,8 +102,12 @@ export function buildFeaturedRankingCardModel({
       definition: hook
         ? { hook }
         : (getFeaturedRankingCardDefinition(rankingKey) ?? representativeDefinition),
-      featuredTop: deriveFeaturedTop(topValues),
-      featuredTopList: deriveFeaturedTopList(topValues, FEATURED_CARD_TOP_COUNT),
+      // 上位の行はランキングのページの表と同じ単位・桁で書く (正本の関数 buildFeaturedTopRows)
+      featuredTopRows: buildFeaturedTopRows(
+        { unit, valueDisplay: metricConfig?.display },
+        values,
+        { capitalCities },
+      ),
       tileMapSvg,
     },
     title

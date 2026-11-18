@@ -1,6 +1,6 @@
 import { HOME_FEATURED_PROMINENCE } from "@stats47/data-configs/ranking-prominence";
 
-import type { FeaturedValue } from "@stats47/ranking";
+import type { FeaturedTopRows, FeaturedValue } from "@stats47/ranking";
 
 export interface HomeFeaturedSnapshotFields {
   homeFeatured?: {
@@ -8,7 +8,7 @@ export interface HomeFeaturedSnapshotFields {
     hook: string;
   } | null;
   featuredTop?: FeaturedValue | null;
-  featuredTopList?: FeaturedValue[] | null;
+  featuredTopRows?: FeaturedTopRows | null;
   tileMapSvg?: string | null;
 }
 
@@ -18,28 +18,17 @@ export interface FeaturedRankingCardDefinition {
 
 export interface FeaturedRankingCardFields {
   definition?: FeaturedRankingCardDefinition | null;
-  featuredTop?: FeaturedValue | null;
-  /** 上位 3 件。無い (旧 snapshot) ときは featuredTop の 1 件だけを出す */
-  featuredTopList?: FeaturedValue[] | null;
+  /** 上位の行 (`buildFeaturedTopRows`。ランキングの表と同じ単位・桁で書いた文字) */
+  featuredTopRows?: FeaturedTopRows | null;
   tileMapSvg?: string | null;
-}
-
-export interface FeaturedRankingCardTop {
-  rank?: number;
-  areaName: string;
-  value: string;
 }
 
 /** home / category / survey が共用する唯一のカードmodel。 */
 export interface FeaturedRankingCardModel {
   hook: string;
-  /** 上位 (最大 3 件、rank 昇順。同率は同じ rank) */
-  tops: FeaturedRankingCardTop[];
+  /** 上位の行と単位 (上位 3 位まで。同率は同じ順位で並ぶ) */
+  top: FeaturedTopRows;
   mapSvg: string;
-}
-
-function isShownTop(top: FeaturedValue | null | undefined): top is FeaturedValue & { value: string } {
-  return top != null && top.areaName.trim().length > 0 && top.value !== null;
 }
 
 const FEATURED_CARD_DEFINITION_BY_KEY = new Map(
@@ -65,13 +54,12 @@ export function resolveFeaturedRankingCardModel(
   fallbackHook: string,
 ): FeaturedRankingCardModel | null {
   const mapSvg = item.tileMapSvg ?? null;
-  const list = (item.featuredTopList ?? []).filter(isShownTop);
-  const tops = list.length > 0 ? list : [item.featuredTop].filter(isShownTop);
-  if (tops.length === 0 || !mapSvg) return null;
+  const top = item.featuredTopRows ?? null;
+  if (!top || top.rows.length === 0 || !mapSvg) return null;
 
   return {
     hook: item.definition?.hook ?? fallbackHook,
-    tops: tops.map(({ rank, areaName, value }) => ({ rank, areaName, value })),
+    top,
     mapSvg,
   };
 }
@@ -106,12 +94,11 @@ export function isCurrentHomeFeaturedMapSvg(
 
 /**
  * home snapshotの表示にvalues.jsonの追加fetchが必要か。
- * 地理地図または1位が不足している旧snapshotだけを補完する。
+ * 地理地図または上位の行が不足している旧snapshotだけを補完する。
  */
 export function needsHomeFeaturedValuesFetch(
   item: HomeFeaturedSnapshotFields,
 ): boolean {
   if (!isCurrentHomeFeaturedMapSvg(item.tileMapSvg)) return true;
-  const top = item.featuredTop;
-  return top == null || top.value == null || top.areaName.trim().length === 0;
+  return !item.featuredTopRows || item.featuredTopRows.rows.length === 0;
 }

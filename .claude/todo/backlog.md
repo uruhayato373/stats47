@@ -118,6 +118,15 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [MAP-RULES-DEDUP-01] 地図の画像の作り方に残る重複 (配色の解決・使われていない地図・県コードの検査の穴) をまとめる
+タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-11-19] [領域:サイト]
+
+- **起点 (2026-11-19 オーナー指摘「サムネイルを生成するルールも冗長になっていないか」)**: 注目のランキングのカードの地図を直したとき、地図の画像の経路 12 本を棚卸しした。本土の範囲・沖縄の判定・枠の比率は同じ作業でまとめた。次の 3 つは残っている。
+- **次**: ① 配色の解決が 3 通りある。サムネイル (`packages/visualization/src/server/generate-mini-prefecture-svg.ts`) は順位で塗る。台帳の型 (`apps/remotion/src/features/data-cards/tile-scale.ts` の `resolveTileScale`) は値で塗る (`packages/types/src/color-policy.ts`)。Remotion のコロプレス (`apps/remotion/src/shared/utils/choropleth.ts` の `getInterpolator`) は配色の名前をカタログ (`d3KeyOfColorScheme`) と照らさず、知らない名前で黙って青に落ちる。どれに寄せるかを決めて 1 つにする (サムネイルを値で塗ると、外れ値の多い指標で色がつぶれるかを先に確かめる)。② `apps/web/src/features/ogp/JapanMapSvg.tsx` (手書きの多角形)・`RankingOgp`・`AreaOgp` の使い手を確かめ、無ければ消す。③ 地域コードの写しを止める検査 `packages/area/scripts/check-area-year-entrypoint.mjs` は決まった関数名と 47 県名の配列しか見ず、地図の部品が `"47"` を直書きしたり TopoJSON の `N03_007` を自前で正規化したりしても通る。止める形を足す (縮小専用の baseline で)。
+- **停止条件**: 配色を変えると全媒体の画像が変わる。① は見本の画像 (管理画面の型の見本) で前後を比べ、オーナーの確認を取ってから入れる。
+- **完了条件**: 配色の解決が 1 つの関数を通り、使われていない地図の部品が消え、検査が `"47"` の直書きを注入したテストで止まる。
+
+
 ### [GIT-PUSH-SSH-TIMEOUT-01] 会社の Windows PC で、push の前の検査が通った後に git が exit 141 で止まり push が届かない
 タグ: [インフラ・計測] [種類:不具合] [実行:windows] [起票:2026-11-16] [領域:管理]
 

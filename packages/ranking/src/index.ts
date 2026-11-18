@@ -22,7 +22,6 @@ export {
   bakeHomeFeaturedItem,
   deriveFeaturedTop,
   deriveFeaturedTopList,
-  FEATURED_CARD_TOP_COUNT,
   resolveHomeFeaturedItems,
   type HomeFeaturedValueRow,
 } from "./exporters/home-featured";

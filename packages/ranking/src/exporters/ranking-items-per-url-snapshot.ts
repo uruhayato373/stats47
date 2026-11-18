@@ -4,6 +4,7 @@ import { logger } from '@stats47/logger/server';
 import { latestTimestamp, writeR2Staging } from '@stats47/r2-storage/server';
 import { generateRankingThumbnailMapSvg } from '@stats47/visualization/server';
 
+import { isCapitalCityValueMetric } from '@stats47/data-configs/provenance';
 import { METRICS_REGISTRY } from '@stats47/data-configs/registry';
 import {
   CATEGORY_TOPIC_CATALOGS,
@@ -227,6 +228,9 @@ export async function exportRankingItemsPerUrl(
           item,
           definition,
           values: valuesResult.data,
+          capitalCities: METRICS_REGISTRY[item.rankingKey]
+            ? isCapitalCityValueMetric(METRICS_REGISTRY[item.rankingKey], METRICS_REGISTRY)
+            : false,
           generateSvg: (rows) =>
             generateRankingThumbnailMapSvg(rows, {
               colorScheme: item.visualization?.colorScheme,

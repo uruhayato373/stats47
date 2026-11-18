@@ -17,6 +17,7 @@ import {
 } from "@stats47/data-configs/ranking-prominence";
 
 import type { FeaturedRankingItem, FeaturedValue, RankingItem } from "../types/ranking-item";
+import { buildFeaturedTopRows } from "../utils/ranking-value-display";
 
 /** 派生に必要な値行の最小形 (RankingValue の subset) */
 export interface HomeFeaturedValueRow {
@@ -42,9 +43,6 @@ export function deriveFeaturedTop(
 ): FeaturedValue | null {
   return deriveFeaturedTopList(values, 1)[0] ?? null;
 }
-
-/** 注目のランキングのカードに並べる上位の件数 (同率 1 位が 2 県でも 3 位まで見える) */
-export const FEATURED_CARD_TOP_COUNT = 3;
 
 /**
  * 上位 N 件を rank 昇順で導出する (ブログ本文のランキングカードが上位3県に使う)。
@@ -109,11 +107,13 @@ export function bakeHomeFeaturedItem(input: {
   item: RankingItem;
   definition: HomeFeaturedProminence;
   values: readonly HomeFeaturedValueRow[];
+  /** 県庁所在市の値の指標 (家計調査など) なら true。上位の行の名前を市の名前にする */
+  capitalCities?: boolean;
   generateSvg: (rows: { areaCode: string; value: number; rank?: number }[]) => string;
 }): FeaturedRankingItem {
   const { item, definition, values } = input;
   const featuredTop = deriveFeaturedTop(values);
-  const featuredTopList = deriveFeaturedTopList(values, FEATURED_CARD_TOP_COUNT);
+  const featuredTopRows = buildFeaturedTopRows(item, values, { capitalCities: input.capitalCities });
 
   let tileMapSvg: string | null = null;
   try {
@@ -131,7 +131,7 @@ export function bakeHomeFeaturedItem(input: {
   return {
     ...item,
     featuredTop,
-    featuredTopList,
+    featuredTopRows,
     tileMapSvg,
     homeFeatured: {
       order: definition.order,

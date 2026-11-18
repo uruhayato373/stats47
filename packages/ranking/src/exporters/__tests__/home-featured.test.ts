@@ -114,7 +114,7 @@ describe("bakeHomeFeaturedItem", () => {
       generateSvg: () => "<svg>ok</svg>",
     });
     expect(baked.featuredTop?.value).toBe("100");
-    expect(baked.featuredTopList?.map((top) => top.areaName)).toEqual(["東京都", "大阪府"]);
+    expect(baked.featuredTopRows?.rows.map((row) => row.areaName)).toEqual(["東京都", "大阪府"]);
     expect(baked.tileMapSvg).toBe("<svg>ok</svg>");
     expect(baked.homeFeatured).toEqual({
       order: 1,

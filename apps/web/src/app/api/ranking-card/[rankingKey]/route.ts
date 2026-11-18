@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { applyRankingValueDisplay, buildRankingDisplayInfo, deriveFeaturedTopList, resolveRankingValueDisplay } from "@stats47/ranking";
+import { isCapitalCityValueMetric } from "@stats47/data-configs/provenance";
+import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
+import { buildFeaturedTopRows } from "@stats47/ranking";
 import { readRankingItemFromR2, readRankingValuesFromR2 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 import { generateRankingThumbnailMapSvg } from "@stats47/visualization/server";
@@ -9,8 +11,6 @@ import type { RankingLinkCardData } from "@/features/blog";
 
 import { NO_STORE_CACHE_HEADERS, PUBLIC_DATA_CACHE_HEADERS } from "@/lib/cache-policy";
 import { getRankingRetirementResponse } from "@/lib/ranking-retirement-response";
-
-const TOP_AREA_COUNT = 3;
 
 /**
  * ブログ本文のランキングカード (`<source-link>`) 用データ。
@@ -40,10 +40,12 @@ export async function GET(
 
     const valuesResult = await readRankingValuesFromR2(rankingKey, "prefecture", yearCode);
     const values = isOk(valuesResult) ? valuesResult.data : [];
-    // ランキングのページと同じ表示単位 (万円・億円) で上位の値を書く。地図の色は元の値で決める
-    const valueDisplay = resolveRankingValueDisplay(item, values.map((v) => v.value));
-    const top = deriveFeaturedTopList(applyRankingValueDisplay(values, valueDisplay), TOP_AREA_COUNT);
-    if (top.length === 0) {
+    // 上位の行はランキングのページの表と同じ単位・桁で書く (注目のランキングのカードと同じ関数)。地図の色は元の値で決める
+    const metric = METRICS_REGISTRY[rankingKey];
+    const top = buildFeaturedTopRows(item, values, {
+      capitalCities: metric ? isCapitalCityValueMetric(metric, METRICS_REGISTRY) : false,
+    });
+    if (!top) {
       return NextResponse.json(null, { headers: NO_STORE_CACHE_HEADERS });
     }
 
@@ -59,9 +61,9 @@ export async function GET(
     );
 
     const body: RankingLinkCardData = {
-      unit: valueDisplay?.unit ?? buildRankingDisplayInfo(item).unit,
+      unit: top.unit,
       yearName: item.latestYear?.yearName ?? `${yearCode}年`,
-      top: top.map((t) => ({ rank: t.rank ?? 0, areaName: t.areaName, value: t.value ?? "" })),
+      top: top.rows,
       mapSvg,
     };
     return NextResponse.json(body, { headers: PUBLIC_DATA_CACHE_HEADERS });
