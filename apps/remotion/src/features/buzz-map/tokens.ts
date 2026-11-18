@@ -126,10 +126,8 @@ export const BUZZ_MAP_REEL_DEFAULTS = {
   holdSeconds: 2,
 } as const;
 
-/** 本土の投影に使う固定フレーム（経度・緯度）。小笠原・大東諸島等の外れ島は v1 では描画対象外 */
-export const MAINLAND_BBOX = {
-  west: 128.3,
-  east: 146.3,
-  south: 30.6,
-  north: 45.9,
-} as const;
+/**
+ * 本土の投影に使う固定フレーム（経度・緯度）。小笠原・大東諸島等の外れ島は v1 では描画対象外。
+ * 値の正本は GIS 共通部品 (packages/gis/src/map/geometry.mjs)。ランキングのサムネイルと同じ範囲を読む。
+ */
+export { MAINLAND_BBOX } from "../../../../../packages/gis/src/map/geometry.mjs";
