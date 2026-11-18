@@ -4015,7 +4015,7 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **完了条件**: 機械の検査が全冊を毎週記録し、2 冊で 3 段の試行の結果 (指摘・トークン・直した箇所) が残り、残りの冊へ広げるかをオーナーが決めた。
 
 ### [KDP-REGION-BOOKS-MAC-01] 地域データブック 7 冊 (K-S3-02〜08) を KDP で公開する
-タグ: [収益化] [種類:制作] [実行:ユーザー] [検証:node .claude/scripts/kdp/kdp-listing-copy.mjs check] [起票:2026-11-14] [領域:商品]
+タグ: [収益化] [種類:制作] [実行:対話] [検証:node .claude/scripts/kdp/kdp-listing-copy.mjs check] [起票:2026-11-14] [領域:商品]
 
 - **済み (2026-11-14・Windows)**: 原稿・意味レビュー・紹介文 (オーナー承認・出品台帳へ apply)、6 冊の表紙の県境の地図化と縮小確認 (readable)、EPUB の作り直し (K-S3-02〜07 は `v2-20261114-map`、K-S3-08 は `v7-20261114-first`)、epubcheck 5.1.0 で 7 冊とも 0 error / 0 warning。
 - **済み (2026-11-18・Mac)**: Drive で受け取った入稿版 42 ファイルの SHA が照合の一覧と一致し、EPUB・表紙・背景の SHA も git の記録 (`kindle-quality.json`・`kdp-cover-thumbnail-checks.json`・`cover-design.ts`) と一致。
@@ -4023,9 +4023,12 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **済み (2026-11-18・②)**: 表紙の背景 7 枚を `push-exact-r2-assets.ts` で公開 R2 へ反映し (K-S3-02〜07 はオーナー承認 2026-11-18)、読み戻しの SHA が 7 枚とも記録と一致。`cover-design.ts` の status は staged-unpublished のまま (published にすると本の照合値 `authoredBookSha256` が変わり、入稿版が「再生成が必要」で止まるため。次に入稿版を作り直すときに published にする)。
 - **済み (2026-11-18・⑤の機械側)**: `capture-pages.mjs --all` で 7 冊の全ページを撮り、はみ出す表 0。前付け・第 2 章・第 9 章・全県表を目視して崩れなし。書名・副題の読み (`kdp-reading.ts`) は県の数の読み (ロッケン・イットロッケン・ニフゴケン・ハッケン 等) を含め誤りなし。
 - **済み (2026-11-18・③)**: 7 冊の入稿版を `kindle:archive --push` で暗号化保全し、`--audit --deep --record` が 7 冊とも PASS (`data/products/kindle-archives.json` の latestRevision を更新、旧版の記録は保持)。
-- **止まっている (2026-11-18)**: `kdp-publish --id K-S3-08` (下書き) は入稿前の検査 `verify-publishable.mts --content-only` で止まる (KDP への書き込みなし)。7 冊とも欠けているのは 2 つ: ① epubcheck の記録 `data/products/kindle-<版>-verification.json` (`v2-20261114-map`・`v7-20261114-first`。全章ハッシュの照合もここから読む) が git に無い ② 全章の独立意味レビューの受領 `.local/kindle-books/<ID>/<版>/review.json` (`write-review-receipt.mts`) が受け渡しの zip に無い。Mac には Java が無く epubcheck を回せない。
+- **結果 (2026-11-18・Mac)**: epubcheck 5.4.0 の記録 `data/products/kindle-v2-20261114-map-verification.json`・`kindle-v7-20261114-first-verification.json` を作り、7 冊とも error 0・EPUB SHA は実測と一致。全章の独立意味レビュー (blog-critic) は K-S3-02・03・04 が REVISE (BLOCK 各 1、MAJOR 5・2・5。値・順位・県名の誤りは 3 冊とも 0)。BLOCK は 3 冊共通で、暦年の医師数・住宅地地価変動率を本文で「年度」と書き (定義 `yearFormat: calendar`)、図は年度の有効求人倍率・地域別最低賃金を「年」と書く。同じ本文の表記は K-S3-05〜08 にもある (grep で各 1〜7 か所) ので、この 4 冊はレビューを起動していない。受領 `review.json` は 1 冊も書いていない。暗号化保全の監査は 7 冊 PASS で取り直し不要。指摘の全文は `.local/kindle-books/K-S3-0{2,3,4}/v2-20261114-map/review.md`。
+- **作り直しで直すこと (生成側)**: ① 本文の年・年度の分類を手書きせず `yearFormat` から出し、図の副題も同じにする (`content-invariants.ts` の `year-nendo-mix` は warn 止まりで図と本文の食い違いを見ない) ② 物価地域差指数・消費支出の県庁所在市の注記を、指標章 (`ranking-databook.ts` の生成物) と全県表に指標定義の note から入れる。物価地域差指数の都道府県の値が県庁所在市等の価格から作られるかは統計局の定義で先に確かめる ③ `ranking-sources` に `supplementalSources` (物価 2 指標の 2025 年 = 小売物価統計調査 構造編) を出す ④ 将来人口の図の出典を社人研の推計にする ⑤ 第 2 章 (地域の全体像) が定型 2 文だけで、はじめに・第 1 章の約束 (N 県 × 14 指標を同じ表に並べる) を満たしていない ⑥ 最低賃金の図で同率の県が欠ける (K-S3-03 の N4)。MAJOR・MINOR の残りは各 review.md。
 - **次 (実行順)**:
-  ⓪ Windows の PC にこの 2 種 (計 9 ファイル) があれば Drive で受け取り、無ければ Mac で作る (Java を入れて epubcheck の記録を作り、全章の独立意味レビューをやり直して受領を書く)。`verify-publishable.mts --version <版> --book <ID> --content-only` が 7 冊とも通ることを確かめる。
+  ⓪ 上の ①〜⑥ を生成側で直し、7 冊の EPUB を新しい版で作り直す (EPUB と表紙の SHA が変わるので、紹介文の照合・`kindle:quality` の実測・縮小確認・R2 保全も取り直す)。
+  ⓪b 新しい版で `verify-epub.mts --report`、7 冊の全章の独立意味レビュー (PASS まで)、`write-review-receipt.mts`、`verify-publishable.mts --content-only` を通す。
+  ⓪c `cover-design.ts` の 7 冊の背景の status を published にする (作り直しで照合値に入るので、このときに合わせる)。
   ⑤ `kdp-publish --id <ID>` で KDP に下書きを作り、`--verify` で読み戻して verified にする (本棚の未公開は 2026-11-18 に 0/10)。
   ⑥ 1 冊ずつオーナーの公開承認を得て出す (`kdp-weekly-publish -- --week <週> --id <ID> --owner-approved <ID> --commit`)。KDP の未公開は約 10 冊までなので、7 冊を一度に下書きにしない。
 - **完了条件**: 7 冊が KDP で販売中になり、出品台帳の `kdpStatus` が live。
