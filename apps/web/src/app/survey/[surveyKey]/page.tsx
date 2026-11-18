@@ -482,15 +482,19 @@ export default async function SurveyPage({ params }: PageProps) {
         <AdRow cells={surveyRow2} position="survey-row-2" trackingCategory={`survey-${surveyKey}`} wide />
       )}
 
-      <section id="all-rankings" className="mb-4 scroll-mt-24">
-        <SectionHeader
-          title={`全${rankingItems.length}件のランキング`}
-        />
-        {isKakei && (
-          <p className="mb-3 text-sm leading-6 text-muted-foreground">
-            品目名または分類から探せます。各ランキングの年・単位と、対象都市を確認して比較してください。
-          </p>
-        )}
+      {/* 見出し・表・名前の一覧はそれぞれ格子の段に置く (1 つの section に包むと、パネルを含む段が見出しも持ち、
+          名前の一覧のカードも格子から外れて線が 2 重になる。2026-11-18 line_grid_issues) */}
+      <PanelGrid as="section" id="all-rankings" className="scroll-mt-24">
+        <div>
+          <SectionHeader
+            title={`全${rankingItems.length}件のランキング`}
+          />
+          {isKakei && (
+            <p className="mb-3 text-sm leading-6 text-muted-foreground">
+              品目名または分類から探せます。各ランキングの年・単位と、対象都市を確認して比較してください。
+            </p>
+          )}
+        </div>
         <CategoryRankingTable items={allItems} topicOptions={topicOptions} trackingSurface="survey_ranking" />
         {/* 表はページ送りなので、サーバーの HTML に出るリンクは先頭 20 件だけになる。全件のリンクを畳んだ一覧で
             出し、検索エンジンと JavaScript 無しの閲覧でも全ランキングへ辿れるようにする (GSC-INTERNAL-DISCOVERY-01) */}
@@ -503,7 +507,7 @@ export default async function SurveyPage({ params }: PageProps) {
             ))}
           </nav>
         </RailCard>
-      </section>
+      </PanelGrid>
 
       {relatedCategories.length > 0 && (
         <section id="related-categories" className="mb-4 scroll-mt-24">

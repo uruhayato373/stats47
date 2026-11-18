@@ -990,6 +990,20 @@ for (const file of scanRoots.flatMap((root) => listFiles(root))) {
       line: match[0],
     });
   }
+  // 本文の節 (<section>) は線の格子の段になり、格子が 1px の線を引く。節が自分でも四辺の枠 (border) を持つと
+  // 線が 2 重になる (2026-11-18 に市区町村ランキングの要点・商品カード・Geo の注意書きで 4 件)。
+  // 描いた結果は line-grid-probe の own-border が同じ違反を数える。片側の線 (border-t など) は対象外
+  for (const match of text.matchAll(/<section\b[^>]*?\bclassName="([^"]*)"/g)) {
+    if (!match[1].split(/\s+/).some((token) => /^(?:[\w-]+:)*border(?:-\d+)?$/.test(token))) continue;
+    violations.push({
+      ruleId: 'line-grid-section-no-own-border',
+      message:
+        'Do not give a <section> its own 4-side border: the body column (PanelGrid) already draws a 1px line around each cell, so the border doubles it. Remove border / p-N or put a bordered element inside the section.',
+      file,
+      lineNumber: lineOf(match.index),
+      line: match[0],
+    });
+  }
 }
 
 // --- 記事本文の見出しの太さと、静的ページのパネル内見出し ---

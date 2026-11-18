@@ -171,7 +171,7 @@ export default async function MunicipalityPrefectureRankingPage({
         stats={`${snapshot.yearName}・${ranking.rows.length.toLocaleString('ja-JP')}${areaLabel}`}
       />
 
-      <section aria-label="要点" className="border border-border p-4 text-sm leading-relaxed">
+      <section aria-label="要点" className="text-sm leading-relaxed">
         {summary.map((sentence) => (
           <p key={sentence}>{sentence}</p>
         ))}

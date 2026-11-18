@@ -20,9 +20,11 @@ export function renderKakeiTopItems(databook: AreaDatabookSnapshot | null) {
   const items = databook?.kakeiTopItems ?? [];
   if (items.length === 0) return null;
 
+  // 見出しとタイルは別の段に置く (1 つの div に包むと、パネルを含む段が見出しも持ち、線の格子の mixed-cell になる)
   return (
-    <div className="space-y-2">
-      <h4 className="text-sm font-semibold text-foreground">{KAKEI_TOP_ITEMS_HEADING}</h4>
+    <>
+      <h4 className="col-span-12 text-sm font-semibold text-foreground">{KAKEI_TOP_ITEMS_HEADING}</h4>
+      <div className="col-span-12">
       <RankedValueGrid
         navSurface="area_databook"
         items={items.map((item) => ({
@@ -37,6 +39,7 @@ export function renderKakeiTopItems(databook: AreaDatabookSnapshot | null) {
           },
         }))}
       />
-    </div>
+      </div>
+    </>
   );
 }

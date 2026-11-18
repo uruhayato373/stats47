@@ -224,9 +224,7 @@ export async function AreaDatabookSection({ areaCode, areaName, insertBefore }: 
                 </div>
               );
               })}
-              {section.sectionKey === KAKEI_TOP_ITEMS_SECTION_KEY && kakeiTopItems && (
-                <div className="col-span-12">{kakeiTopItems}</div>
-              )}
+              {section.sectionKey === KAKEI_TOP_ITEMS_SECTION_KEY && kakeiTopItems}
             </PanelGrid>
           </PanelGrid>
           </Fragment>

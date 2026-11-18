@@ -4,6 +4,8 @@
 // 本文の列 (div[data-slot=shell-main] を含む格子) の中で次を数える。
 // - outside-grid: パネルが格子の外にある (パネル自身の線が残り、隣と線を共有しない)
 // - mixed-cell: パネルを含むセルが文章・見出しも直に持つ (パネルを含むセルは余白を持たないので、文章が線に接する)
+// - own-border: 格子の段 (格子の直下の要素) が自分でも枠を持つ。格子の線のすぐ内側にもう 1 本の線が出て 2 重に見える
+//   (2026-11-18 市区町村ランキングの「分布の要点」と商品の案内の段)。段の内側に余白を空けて置いた枠付きの表は数えない
 // 静的な検査 (design-system:check の panels-in-line-grid) は書き方を止め、こちらは描いた結果を見る。
 
 /**
@@ -57,6 +59,17 @@ export function collectLineGridIssues() {
         (c) => visible(c) && !c.matches("[data-slot=card],[data-slot=panel-grid],[data-slot=rail-stack]") && (c.innerText ?? "").trim()
       );
       if (loose.length) issues.push(`mixed-cell    ${label(cell)} :: ${loose.map((c) => c.tagName.toLowerCase()).join(",")}`);
+    }
+  }
+  // (3) 格子の段が自分でも枠を持つ (パネル [data-slot=card] は格子が枠を消すので対象外)
+  for (const grid of outer.querySelectorAll("[data-slot=panel-grid]")) {
+    for (const cell of grid.children) {
+      if (!visible(cell) || cell.matches("[data-slot=card],[data-slot=panel-grid],[data-slot=rail-stack]")) continue;
+      const st = getComputedStyle(cell);
+      const sides = ["Top", "Right", "Bottom", "Left"].filter(
+        (side) => parseFloat(st[`border${side}Width`]) > 0 && st[`border${side}Style`] !== "none"
+      );
+      if (sides.length >= 2) issues.push(`own-border    ${label(cell)}`);
     }
   }
   return { issues };

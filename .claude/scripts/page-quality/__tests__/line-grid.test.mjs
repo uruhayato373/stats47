@@ -36,6 +36,18 @@ async function withPage(t, html, fn) {
   }
 }
 
+test("格子の段が自分でも枠を持つと own-border として数え、段の内側に余白を空けた枠付きの表は数えない", async (t) => {
+  // 2026-11-18 の実例: 「分布の要点」の section が border を持ち、格子の線と 2 重になっていた
+  const ownBorder = `<section aria-label="分布の要点" style="border:1px solid #e5e5e5"><p>最小</p></section>`;
+  const insetTable = `<section style="padding:16px"><div style="border:1px solid #e5e5e5"><table><tr><td>1位</td></tr></table></div></section>`;
+  const underline = `<div style="border-bottom:1px solid #e5e5e5"><p>下線だけの段</p></div>`;
+  await withPage(t, column(ownBorder + insetTable + underline), async (page) => {
+    const { issues } = await evaluateLineGridIssues(page);
+    assert.equal(issues.length, 1, JSON.stringify(issues));
+    assert.ok(issues[0].startsWith("own-border") && issues[0].includes("最小"), issues[0]);
+  });
+});
+
 test("格子の直下に並んだパネルは違反に数えない", async (t) => {
   await withPage(t, column(card("人口") + card("面積")), async (page) => {
     assert.deepEqual(await evaluateLineGridIssues(page), { issues: [] });
