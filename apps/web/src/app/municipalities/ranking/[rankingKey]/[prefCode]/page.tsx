@@ -204,6 +204,8 @@ export default async function MunicipalityPrefectureRankingPage({
         <SectionHeader title={`${prefecture.prefName}の順位`} hideRule className="mb-2" />
         <div className="overflow-x-auto border border-border">
           <ValueTable
+            // 上位 10 件だけ見せ、残りは「全件を見る」で開く (畳んだ行も HTML に残る)
+            fold={{ head: 10, tail: 0 }}
             columns={[
               { key: 'prefRank', header: '県内順位', className: 'w-20' },
               { key: 'area', header: areaLabel, rowHeader: true, align: 'left' },

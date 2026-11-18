@@ -320,6 +320,9 @@ export default async function MunicipalityRankingPage({
         prefectures={prefectures.map(({ prefCode, prefName }) => ({ prefCode, prefName }))}
       >
         <ValueTable
+          // 上位 10 件だけ見せ、残りは「全件を見る」で開く (畳んだ行も HTML に残る)。
+          // 50 件を全部見せるとスマホで表だけで画面 2.5 枚分あり、下の関連リンクが遠かった (2026-11-18)
+          fold={{ head: 10, tail: 0 }}
           columns={[
             { key: 'rank', header: '順位', className: 'w-20' },
             { key: 'area', header: '市区町村', rowHeader: true, align: 'left' },
