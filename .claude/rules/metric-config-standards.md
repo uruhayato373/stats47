@@ -232,7 +232,7 @@ npm run sync:estat-years --workspace=@stats47/data-configs
 
 - 根拠は「統計項目の定義」の「時点又は期間」と「指標計算式」の基礎項目。控えは
   `data/estat/ssds-year-format/definitions.json` (`npm run estat:ssds-year-format:build` で取り直す)。
-- 判定は `.claude/scripts/estat/lib/ssds-year-format.mjs`。年度の項目 (年度計・年度間・3月31日 など) を 1 つでも含めば
+- 判定は `packages/ops/src/estat/ssds-year-format.mjs`。年度の項目 (年度計・年度間・3月31日 など) を 1 つでも含めば
   fiscal、すべて暦年の項目 (暦年計・暦年平均・12月31日・10月1日、または年で呼ぶ調査) なら calendar、それ以外は決めない。
 - `gen-ssds-configs.mjs` はこの判定で `yearFormat` を書き、決まらない spec は書かずに止まる。
 - `npm run estat:ssds-year-format:check` (preflight・PR の CI) が全 SSDS 指標を突き合わせ、食い違いを error にする。

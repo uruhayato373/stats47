@@ -8,7 +8,7 @@ import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
-import { latestPartition } from "../latest-partition.mjs";
+import { latestPartition } from "../../../../packages/ops/src/ranking/latest-partition.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "..");
 const partition = (yearCode) => ({ yearCode, values: [{ areaCode: "13000", areaName: "東京都", value: Number(yearCode) }] });

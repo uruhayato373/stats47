@@ -30,7 +30,7 @@ type: feedback
 
 **対策**: パスはconfig/datasets.mjsから解決する。分割索引は全shardを読み、空・重複・不正IDを拒否する。設定と日付付き運用snapshotの区別は台帳のkindで判定する。件数の正典が別にあるテストは正本との集合/件数照合にし、配信fixtureは必須契約を満たす。監査はimportだけでなくCLIのJSON出力まで実行し、部分検査を成功へ変えないことを固定する。
 
-**証拠**: .claude/scripts/lib/estat-catalog/pulled.mjs・estat-catalog.test.mjs、prune-state-snapshots.test.mjs、audit/__tests__/theme-chart-live-audit.test.mjs、packages/data-configsのstat-series-ref.test.ts。PR #1116の最終必須CI 37908326854で検証。
+**証拠**: packages/ops/src/estat/catalog-pulled.mjs・estat-catalog.test.mjs、prune-state-snapshots.test.mjs、audit/__tests__/theme-chart-live-audit.test.mjs、packages/data-configsのstat-series-ref.test.ts。PR #1116の最終必須CI 37908326854で検証。
 
 ## 全件反映の完了を確認してから公開成功と判定する
 

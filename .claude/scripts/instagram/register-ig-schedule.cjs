@@ -19,7 +19,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const store = require("../../../packages/ops/src/sns/sns-posts-store.cjs");
-const { parsePostedLog } = require("../lib/ig-ledger-core.cjs");
+const { parsePostedLog } = require("../../../packages/ops/src/sns/ig-ledger-core.cjs");
 const { R2_PUBLIC_BASE_URL } = require("../../../packages/types/mirror/site-config.cjs");
 const { datasetDir, datasetPath } = require("../../../config/datasets.mjs");
 

@@ -5,7 +5,7 @@ name: 🧵 Threads scheduled post (hourly)
 # post-instagram-scheduled.yml と同じく cron で即時公開を発火して予約を代替する。
 # 投稿対象は data/sns/threads-schedule.json。各実行は「予定時刻 (JST) を過ぎ、遅れ 6 時間以内、
 # 台帳 posts.json に posted が無い」最早の 1 件だけを公開し、台帳へ platform=threads で記録する。
-# 該当なしなら exit 0 で何もしない。判定は .claude/scripts/lib/threads-core.cjs (テスト付き)。
+# 該当なしなら exit 0 で何もしない。判定は packages/ops/src/sns/threads-core.cjs (テスト付き)。
 
 on:
   # 定期実行は止めている (2026-09-23): Threads は Playwright で Threads Web の予約機能を使う運用にした
@@ -42,7 +42,7 @@ jobs:
 
       # 判定ロジック (due・二重投稿防止・文字数) が壊れた状態で公開しない
       - name: 🧪 Threads core tests
-        run: node --test .claude/scripts/lib/__tests__/threads-core.test.cjs
+        run: node --test packages/ops/src/sns/__tests__/threads-core.test.cjs
 
       - name: 🧵 Post to Threads (due entry only)
         id: post

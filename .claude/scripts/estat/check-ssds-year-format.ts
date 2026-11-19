@@ -1,6 +1,6 @@
 /**
  * 社会・人口統計体系 (SSDS) の全指標の yearFormat (暦年 calendar / 年度 fiscal) を、e-Stat の定義の控えから
- * 決めた区切りと突き合わせる。判定は lib/ssds-year-format.mjs。read-only で、食い違いがあれば exit 1。
+ * 決めた区切りと突き合わせる。判定は packages/ops/src/estat/ssds-year-format.mjs。read-only で、食い違いがあれば exit 1。
  *
  *   npx tsx .claude/scripts/estat/check-ssds-year-format.ts            食い違いを表示
  *   npx tsx .claude/scripts/estat/check-ssds-year-format.ts --json     結果を JSON で出力
@@ -21,7 +21,7 @@ import path from "node:path";
 import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
 
 import { datasetPath } from "../../../config/datasets.mjs";
-import { checkSsdsYearFormats, decideYearFormat, buildRules, indexDefinitions, ssdsTableKind } from "./lib/ssds-year-format.mjs";
+import { checkSsdsYearFormats, decideYearFormat, buildRules, indexDefinitions, ssdsTableKind } from "../../../packages/ops/src/estat/ssds-year-format.mjs";
 
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 

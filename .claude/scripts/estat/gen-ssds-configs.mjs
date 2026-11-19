@@ -8,7 +8,7 @@
  * 安全弁: 既存 title と重複する spec は自動スキップ (validate:config の dup-title 回避)。
  * seoTitle/seoDescription は投入後にデータから生成するため出さない。
  *
- * 年の区切り (yearFormat) は固定で書かず、e-Stat の定義の控えから決める (lib/ssds-year-format.mjs)。
+ * 年の区切り (yearFormat) は固定で書かず、e-Stat の定義の控えから決める (packages/ops/src/estat/ssds-year-format.mjs)。
  * 2026-10-21 まで全指標に "fiscal" を固定で書いていて、国勢調査・犯罪統計などが「2020年度」と表示されていた。
  * 定義から決まらない spec は書かずに exit 1 で止まる (年度か暦年のどちらかへ倒さない)。そのときは調査の年の呼び方を
  * 一次資料で確かめて data/estat/ssds-year-format/decisions.json の surveyNaming に足してから、もう一度実行する。
@@ -23,7 +23,7 @@ import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { isOfficialRate } from "../../../packages/data-configs/src/estat/ssds-rate-name.mjs";
-import { buildRules, decideYearFormat, indexDefinitions } from "./lib/ssds-year-format.mjs";
+import { buildRules, decideYearFormat, indexDefinitions } from "../../../packages/ops/src/estat/ssds-year-format.mjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const DIR = path.join(PROJECT_ROOT, datasetDir("metrics.definitions"));

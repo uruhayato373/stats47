@@ -25,7 +25,7 @@ import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { latestPartition } from "../lib/latest-partition.mjs";
+import { latestPartition } from "../../../packages/ops/src/ranking/latest-partition.mjs";
 import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 import { datasetPath } from "../../../config/datasets.mjs";
 

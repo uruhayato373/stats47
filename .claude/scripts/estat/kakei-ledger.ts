@@ -7,7 +7,7 @@
  * build の入力は pull 済みの e-Stat カタログ (npm run estat:catalog:pull → .local/estat-catalog/)。
  * R2 へ反映する前の staging を使うときは --catalog-dir .local/r2/estat-catalog。
  * 家計調査の表が無い・meta を取っていない表がある・品目表の分類が無いときは書かずに止める (fail-closed)。
- * 導出と検査の本体は .claude/scripts/lib/estat-catalog/kakei-ledger.mjs。
+ * 導出と検査の本体は packages/ops/src/estat/kakei-ledger.mjs。
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -24,7 +24,7 @@ import {
   kakeiMetricInput,
   type KakeiDecisions,
   type KakeiMetricInput,
-} from "../lib/estat-catalog/kakei-ledger.mjs";
+} from "../../../packages/ops/src/estat/kakei-ledger.mjs";
 
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 const DEFAULT_CATALOG_DIR = ".local/estat-catalog";

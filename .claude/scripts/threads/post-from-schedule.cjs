@@ -24,7 +24,7 @@
  *     ]
  *   }
  *
- * 検査の中身は lib/threads-core.cjs (純粋関数・node:test 付き)。
+ * 検査の中身は packages/ops/src/sns/threads-core.cjs (純粋関数・node:test 付き)。
  *
  * ## 二重投稿の防止 (2 段)
  *
@@ -46,7 +46,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const store = require("../../../packages/ops/src/sns/sns-posts-store.cjs");
-const core = require("../lib/threads-core.cjs");
+const core = require("../../../packages/ops/src/sns/threads-core.cjs");
 const { datasetPath } = require("../../../config/datasets.mjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");

@@ -16,7 +16,7 @@ primary_agent: x-strategist
 
 > **型・画像・頻度の値の正本は台帳 `sns.x-catalog`** (`data/sns/x-catalog.json` の quota / templates / affinity / imageKinds)。
 > 項目の意味と改訂の手順は `.claude/rules/sns-content-standards.md` (§1 / §2-0 / §2-8 / §2-9 / §2-10)。本スキルはテンプレ本文を
-> 持たず、台帳を `.claude/scripts/lib/x-catalog.cjs` 経由で読む (一覧は `node .claude/scripts/lib/x-catalog.cjs --json`)。
+> 持たず、台帳を `packages/ops/src/sns/x-catalog.cjs` 経由で読む (一覧は `node .claude/scripts/lib/x-catalog.cjs --json`)。
 
 ## 引数
 
@@ -160,7 +160,7 @@ npx tsx .claude/skills/sns/publish-x/publish-x.ts --from-queue             # 予
 ## 関連
 
 - 型・画像・頻度の値: 台帳 `sns.x-catalog` (意味と改訂の手順は `.claude/rules/sns-content-standards.md` §1/§2)
-- カタログ API: `.claude/scripts/lib/x-catalog.cjs`
+- カタログ API: `packages/ops/src/sns/x-catalog.cjs`
 - 画像最短経路: `.claude/scripts/sns/quick-still.ts`
 - 投稿 (ローカル): `.claude/skills/sns/publish-x/`
 - 勝ちパターン: `.claude/scripts/sns/analyze-x-winning-patterns.mjs` → `data/sns/x-winning-patterns.json`

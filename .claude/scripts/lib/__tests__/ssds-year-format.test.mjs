@@ -16,7 +16,7 @@ import {
   parseIndicatorFormulas,
   parseItemDefinitions,
   splitSurveys,
-} from "../../estat/lib/ssds-year-format.mjs";
+} from "../../../../packages/ops/src/estat/ssds-year-format.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "..");
 const readJson = (relative) => JSON.parse(fs.readFileSync(path.join(ROOT, relative), "utf8"));

@@ -5,7 +5,7 @@ import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { loadMetricLinkage, loadPulled } from '../estat-catalog/pulled.mjs';
+import { loadMetricLinkage, loadPulled } from '../../../../packages/ops/src/estat/catalog-pulled.mjs';
 
 test("getAppId は共通入口で CI の注入値を使う", () => {
   const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../..");
@@ -49,7 +49,7 @@ import {
   recordFetchFailure,
   recordFetchSuccess,
   upsertTableRow,
-} from "../estat-catalog/index.mjs";
+} from "../../../../packages/ops/src/estat/catalog-index.mjs";
 
 function classObj(id, name, items) {
   return { "@id": id, "@name": name, CLASS: items };

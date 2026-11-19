@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { monthlyLedgerErrors, summarizeMonthlyTables } from '../../estat/build-monthly-ledger.mjs';
+import { monthlyLedgerErrors, summarizeMonthlyTables } from '../build-monthly-ledger.mjs';
 
 const row = (over) => ({ statsDataId: '0001', statCode: '100', statName: '家計調査', govOrg: '総務省', title: '品目', cycle: '月次', updatedDate: '2026-01-01', collectAreas: ['0'], removedAt: null, ...over });
 

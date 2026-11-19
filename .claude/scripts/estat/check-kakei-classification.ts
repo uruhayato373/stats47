@@ -1,6 +1,6 @@
 /**
  * 家計調査の全 metric を、総務省の収支項目分類 (正本: data/estat/kakei-classification/<revision>.json) と突き合わせる。
- * 判定は lib/kakei-classification.mjs。read-only で、問題があれば exit 1。
+ * 判定は packages/ops/src/estat/kakei-classification.mjs。read-only で、問題があれば exit 1。
  *
  *   npx tsx .claude/scripts/estat/check-kakei-classification.ts
  *   npx tsx .claude/scripts/estat/check-kakei-classification.ts --json
@@ -13,7 +13,7 @@ import path from "node:path";
 import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
 
 import { datasetDir } from "../../../config/datasets.mjs";
-import { checkKakeiMetric } from "./lib/kakei-classification.mjs";
+import { checkKakeiMetric } from "../../../packages/ops/src/estat/kakei-classification.mjs";
 
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 

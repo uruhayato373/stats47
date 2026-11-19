@@ -28,7 +28,7 @@ import {
   SELECTION_STAT_CODE_RE,
 } from "../../../packages/data-configs/src/theme-catalog/types.ts";
 import { METRICS_REGISTRY } from "../../../packages/data-configs/src/registry.ts";
-import { loadPulled } from "../lib/estat-catalog/pulled.mjs";
+import { loadPulled } from "../../../packages/ops/src/estat/catalog-pulled.mjs";
 import { SITE_ORIGIN } from "../../../packages/types/mirror/site-config.cjs";
 
 const __filename = fileURLToPath(import.meta.url);

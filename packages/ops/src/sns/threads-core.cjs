@@ -1,6 +1,6 @@
 "use strict";
 
-const { R2_PUBLIC_BASE_URL } = require("../../../packages/types/mirror/site-config.cjs");
+const { R2_PUBLIC_BASE_URL } = require("../../../types/mirror/site-config.cjs");
 
 /**
  * Threads 予約投稿の判定ロジック (純粋関数)。IO は .claude/scripts/threads/post-from-schedule.cjs が持つ。
@@ -9,7 +9,7 @@ const { R2_PUBLIC_BASE_URL } = require("../../../packages/types/mirror/site-conf
  *
  * 予約投稿の事故は「二重投稿」「上限超過で API が途中まで進む」「古い予約が遅れて出る」の 3 つで、
  * どれも外部に出てから気づく。判定を IO から切り離し、node:test で固定する
- * (テスト: .claude/scripts/lib/__tests__/threads-core.test.cjs)。
+ * (テスト: packages/ops/src/sns/__tests__/threads-core.test.cjs)。
  *
  * ## Threads API の仕様値 (公式・アクセス日 2026-09-23)
  *

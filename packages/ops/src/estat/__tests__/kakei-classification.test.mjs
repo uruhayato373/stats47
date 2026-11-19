@@ -4,10 +4,10 @@ import path from "node:path";
 import { test } from "node:test";
 import { fileURLToPath } from "node:url";
 
-import { checkKakeiMetric, itemNumberFromCat01Name } from "../../estat/lib/kakei-classification.mjs";
-import { parseClassificationRows } from "../../estat/build-kakei-classification.mjs";
+import { checkKakeiMetric, itemNumberFromCat01Name } from "../kakei-classification.mjs";
+import { parseClassificationRows } from "../build-kakei-classification.mjs";
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "..");
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "..", "..");
 const classification = JSON.parse(fs.readFileSync(path.join(ROOT, "data/estat/kakei-classification/2020.json"), "utf8"));
 const names = new Map([
   ["010920070", "371 ぎょうざ"],

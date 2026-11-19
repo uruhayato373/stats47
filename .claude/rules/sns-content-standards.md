@@ -78,7 +78,7 @@ SNS 投稿を企画・生成・投稿・計測する agent / skill / 人間は�
 
 > **機械が読む値の正本は台帳 `sns.x-catalog`** (`data/sns/x-catalog.json` の `quota`)。上表の `X_DAILY_MAX` は `quota.dailyMax`、
 > `X_WEEKLY_TARGET_MIN` / `X_WEEKLY_TARGET_MAX` は `quota.weeklyTargetMin` / `quota.weeklyTargetMax` にあたり、
-> `.claude/scripts/lib/x-catalog.cjs` が読む。**値を変えるときは台帳を編集する** (guard / 候補選定数 / schedule 割付の全系に波及する)。
+> `packages/ops/src/sns/x-catalog.cjs` が読む。**値を変えるときは台帳を編集する** (guard / 候補選定数 / schedule 割付の全系に波及する)。
 > 上表は判断と理由の記録で、この文書の数字を書き換えても機械の挙動は変わらない。
 
 ---
@@ -93,12 +93,12 @@ SNS 投稿を企画・生成・投稿・計測する agent / skill / 人間は�
 
 X 投稿の「型」は台帳 `sns.x-catalog` (`data/sns/x-catalog.json`) の `templates` を単一ソースとする。各投稿は `template` id を
 1 つ持ち、posts.json の `template` 列に**必ず記録する** (勝ちパターン分析 `analyze-x-winning-patterns.mjs` の前提)。
-`.claude/scripts/lib/x-catalog.cjs` が台帳を読んで `getTemplates()` / `getImageKinds()` を返す。文言・画像割当を変えるときは
+`packages/ops/src/sns/x-catalog.cjs` が台帳を読んで `getTemplates()` / `getImageKinds()` を返す。文言・画像割当を変えるときは
 台帳だけを編集する。型の一覧は `node .claude/scripts/lib/x-catalog.cjs --json` で読む (この文書に写しを置かない)。
 
 - `structure` = キャプションの型 (LLM がこの枠で文章を書く)
 - `imageKind` = §2-9 の画像種 id (投稿添付画像)
-- `charMax` = URL・改行を除く本文の上限文字数。これとは別に、X の重み付き文字数 ≤ 280 (日本語 1 字 2・URL 23・絵文字 2。`.claude/scripts/lib/x-weighted-length.cjs`) を lint が検査する。charMax を満たしても日本語が多いと X に弾かれるため (2026-09-23 に重み 284 で実際に弾かれた)
+- `charMax` = URL・改行を除く本文の上限文字数。これとは別に、X の重み付き文字数 ≤ 280 (日本語 1 字 2・URL 23・絵文字 2。`packages/ops/src/sns/x-weighted-length.cjs`) を lint が検査する。charMax を満たしても日本語が多いと X に弾かれるため (2026-09-23 に重み 284 で実際に弾かれた)
 - `bestTime` = 推奨投稿時間帯 (scheduled_at 割付の既定。§2-8 の時間帯表と整合)
 
 - ハッシュタグは全 template 共通で **3-5 個**。URL は 1 本のみ (§4 の UTM 規則)。
@@ -275,7 +275,7 @@ node .claude/scripts/note/patch-note-paid-landing.mjs --all --commit          # 
 ### 2-8. 角度 × カテゴリ相性表 (SSOT・旧 post-x-6angles/reference から吸収)
 
 ランキングの categoryKey (17 軸) ごとに、どの切り口が効くかの早見表。正本は台帳 `sns.x-catalog` の `affinity`
-(キーはカテゴリマスタの key) で、`select-candidates.cjs` が `.claude/scripts/lib/x-catalog.cjs` の `getAffinity()` 経由で読み、
+(キーはカテゴリマスタの key) で、`select-candidates.cjs` が `packages/ops/src/sns/x-catalog.cjs` の `getAffinity()` 経由で読み、
 §2-0 の template を割り付ける。
 `◎`=高相性 (ファーストピック) / `○`=第二候補 / `△`=弱い / `—`=不適。6 切り口 (結論/理由/体験/反論/数字/ハウツー)
 は §2-0 の template と対応する (結論≈shock, 理由≈question, 反論≈paradox, 数字≈number, 体験≈angle-experience,
@@ -289,7 +289,7 @@ node .claude/scripts/note/patch-note-paid-landing.mjs --all --commit          # 
 ### 2-9. X 画像カタログ (SSOT・添付画像の種類)
 
 X 投稿に添付できる画像種の正本は台帳 `sns.x-catalog` の `imageKinds` (id・size・generator・outPath・note)。
-`.claude/scripts/lib/x-catalog.cjs` の `getImageKinds()` が読み、§2-0 の `imageKind` がこの id を指す。**出力パスは publish-x が読む
+`packages/ops/src/sns/x-catalog.cjs` の `getImageKinds()` が読み、§2-0 の `imageKind` がこの id を指す。**出力パスは publish-x が読む
 `.local/r2/sns/<domain>/<key>/x/stills/` に統一**する (旧 quick-still の `.local/sns-quick/` は使わない)。
 
 - **量産の既定は `ranking-card`** (quick-still.ts で決定的・数秒生成)。tile-map/scatter/compare は
@@ -548,7 +548,7 @@ localhost 専用・127.0.0.1 bind 固定。2026-07-16 に旧 node:http 実装か
 
 - 人間向け戦略: `docs/10_SNS戦略/01_SNSコンテンツ設計.md` / `05_SNSプロフィール.md`
 - 投稿台帳ストア: `packages/ops/src/sns/sns-posts-store.cjs`
-- **X 量産カタログ API**: `.claude/scripts/lib/x-catalog.cjs` (台帳 `sns.x-catalog` の quota / templates / affinity / imageKinds を読む)
+- **X 量産カタログ API**: `packages/ops/src/sns/x-catalog.cjs` (台帳 `sns.x-catalog` の quota / templates / affinity / imageKinds を読む)
 - **X 量産スキル**: `.claude/skills/sns/post-x-batch/` (候補選定 `select-candidates.cjs` / lint `lint-x-captions.cjs` / 登録 `register-drafts.cjs`)
 - **X 頻度ガード**: `.claude/scripts/sns/check-x-post-budget.cjs`
 - **X 勝ちパターン**: `.claude/scripts/sns/analyze-x-winning-patterns.mjs` → `data/sns/x-winning-patterns.json`

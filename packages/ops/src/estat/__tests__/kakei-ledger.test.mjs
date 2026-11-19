@@ -2,7 +2,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { buildKakeiLedger, checkKakeiLedger, classifyItemName, kakeiMetricInput } from "../estat-catalog/kakei-ledger.mjs";
+import { buildKakeiLedger, checkKakeiLedger, classifyItemName, kakeiMetricInput } from "../kakei-ledger.mjs";
 
 const AMOUNT = "0004023605";
 const QUANTITY = "0004023606";

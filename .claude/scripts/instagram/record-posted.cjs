@@ -18,7 +18,7 @@
  *   # ドリフト検知 (書き込まない。台帳に無い投稿があれば exit 1)
  *   node .claude/scripts/instagram/record-posted.cjs --check
  *
- * 判定は lib/ig-ledger-core.cjs (純粋関数・テスト付き)。既に posted の行は触らず、
+ * 判定は packages/ops/src/sns/ig-ledger-core.cjs (純粋関数・テスト付き)。既に posted の行は触らず、
  * scheduled / draft があれば新規行を足さずに昇格させる。
  */
 
@@ -26,7 +26,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const store = require("../../../packages/ops/src/sns/sns-posts-store.cjs");
-const { decideLedgerAction, parsePostedLog } = require("../lib/ig-ledger-core.cjs");
+const { decideLedgerAction, parsePostedLog } = require("../../../packages/ops/src/sns/ig-ledger-core.cjs");
 const { datasetPath } = require("../../../config/datasets.mjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");

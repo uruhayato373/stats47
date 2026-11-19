@@ -29,7 +29,7 @@ const path = require("node:path");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../../../..");
 const catalog = require(
-  path.join(PROJECT_ROOT, ".claude/scripts/lib/x-catalog.cjs"),
+  path.join(PROJECT_ROOT, "packages/ops/src/sns/x-catalog.cjs"),
 );
 const store = require(
   path.join(PROJECT_ROOT, "packages/ops/src/sns/sns-posts-store.cjs"),

@@ -170,7 +170,7 @@
       "s3Client": 0,
       "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
     },
-    ".claude/scripts/lib/__tests__/threads-core.test.cjs": {
+    "packages/ops/src/sns/__tests__/threads-core.test.cjs": {
       "stats": 0,
       "ranking": 0,
       "origin": 3,
@@ -191,7 +191,7 @@
       "s3Client": 0,
       "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
-    ".claude/scripts/lib/latest-partition.mjs": {
+    "packages/ops/src/ranking/latest-partition.mjs": {
       "stats": 0,
       "ranking": 1,
       "origin": 0,

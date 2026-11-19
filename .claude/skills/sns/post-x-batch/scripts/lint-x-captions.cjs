@@ -13,7 +13,7 @@
  *   - URL は本文に直書きせず `{{url}}` トークン 1 個 (register が UTM URL へ置換)
  *   - ハッシュタグ 3-5 個
  *   - URL・改行を除く本文が template.char_max 以下
- *   - X の重み付き文字数 ≤ 280 (日本語 1 字 2・URL 23。lib/x-weighted-length.cjs)
+ *   - X の重み付き文字数 ≤ 280 (日本語 1 字 2・URL 23。packages/ops/src/sns/x-weighted-length.cjs)
  *   - NG 語なし / 既存・同バッチとの類似度 < 0.8
  *
  * Usage:
@@ -26,13 +26,13 @@ const path = require("node:path");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../../../..");
 const catalog = require(
-  path.join(PROJECT_ROOT, ".claude/scripts/lib/x-catalog.cjs"),
+  path.join(PROJECT_ROOT, "packages/ops/src/sns/x-catalog.cjs"),
 );
 const store = require(
   path.join(PROJECT_ROOT, "packages/ops/src/sns/sns-posts-store.cjs"),
 );
 const { MAX_WEIGHTED_LENGTH, weightedLength } = require(
-  path.join(PROJECT_ROOT, ".claude/scripts/lib/x-weighted-length.cjs"),
+  path.join(PROJECT_ROOT, "packages/ops/src/sns/x-weighted-length.cjs"),
 );
 
 const NG_WORDS = [

@@ -1,5 +1,5 @@
 // 家計調査の台帳 (data/estat/kakei-ledger/ledger.json) を e-Stat カタログと metric config から導出する純粋関数。
-// ネットワーク・fs に触れない。CLI: .claude/scripts/estat/kakei-ledger.ts / テスト: lib/__tests__/kakei-ledger.test.mjs
+// ネットワーク・fs に触れない。CLI: .claude/scripts/estat/kakei-ledger.ts / テスト: packages/ops/src/estat/__tests__/kakei-ledger.test.mjs
 //
 // なぜ要るか (2026-11-02): 家計調査で取れる表・品目と、そのうちどれを指標にしたか・なぜ採らなかったかを
 // 機械で照合できる記録が無かった。e-Stat カタログが集計地域区分「該当なし」の表を取り込んでおらず、

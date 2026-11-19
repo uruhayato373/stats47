@@ -25,8 +25,8 @@ import {
   recordFetchFailure,
   recordFetchSuccess,
   upsertTableRow,
-} from "../lib/estat-catalog/index.mjs";
-import { loadMetricLinkage, loadPulled } from "../lib/estat-catalog/pulled.mjs";
+} from "../../../packages/ops/src/estat/catalog-index.mjs";
+import { loadMetricLinkage, loadPulled } from "../../../packages/ops/src/estat/catalog-pulled.mjs";
 import { getObjectJson } from "../lib/estat-catalog/s3.mjs";
 import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 

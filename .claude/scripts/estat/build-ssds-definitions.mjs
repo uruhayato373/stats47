@@ -4,7 +4,7 @@
  * 「時点又は期間」「調査名」と、指標コードごとの計算式の基礎項目を JSON に控える。
  *
  * なぜ要るか: SSDS の指標の年の区切り (yearFormat) を出典の期間から決める根拠が、リポジトリに無かった
- * (SSDS-YEARFORMAT-SOURCE-01)。判定は lib/ssds-year-format.mjs、突き合わせは check-ssds-year-format.ts。
+ * (SSDS-YEARFORMAT-SOURCE-01)。判定は packages/ops/src/estat/ssds-year-format.mjs、突き合わせは check-ssds-year-format.ts。
  *
  * 使い方 (e-Stat が定義を改めたとき・新しい項目が「定義ページに項目が無い」と出たとき):
  *   node .claude/scripts/estat/build-ssds-definitions.mjs
@@ -17,7 +17,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { datasetPath } from "../../../config/datasets.mjs";
-import { FIELDS, definitionUrl, formulaUrl, parseIndicatorFormulas, parseItemDefinitions } from "./lib/ssds-year-format.mjs";
+import { FIELDS, definitionUrl, formulaUrl, parseIndicatorFormulas, parseItemDefinitions } from "../../../packages/ops/src/estat/ssds-year-format.mjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const OUTPUT = path.join(PROJECT_ROOT, datasetPath("estat.ssds-definitions"));

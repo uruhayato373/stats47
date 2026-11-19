@@ -15,7 +15,20 @@
     "src/media/gallery-collectors.mjs",
     "src/media/svg-classify.mjs",
     "src/measurement/**/*.mjs",
-    "src/metrics/**/*.mjs"
+    "src/metrics/**/*.mjs",
+    "src/estat/build-monthly-ledger.mjs",
+    "src/estat/catalog-index.mjs",
+    "src/estat/catalog-pulled.mjs",
+    "src/estat/kakei-classification.mjs",
+    "src/estat/kakei-ledger.mjs",
+    "src/estat/ssds-year-format.mjs",
+    "src/ranking/**/*.mjs",
+    "src/surveys/**/*.mjs",
+    "src/sns/ig-ledger-core.cjs",
+    "src/sns/sns-posted-core.cjs",
+    "src/sns/threads-core.cjs",
+    "src/sns/x-catalog.cjs",
+    "src/sns/x-weighted-length.cjs"
   ],
   "exclude": ["node_modules", "**/__tests__/**"]
 }

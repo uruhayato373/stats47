@@ -11,7 +11,7 @@ const os = require("node:os");
 const path = require("node:path");
 const test = require("node:test");
 
-const catalog = require("../x-catalog.cjs");
+const catalog = require("../../../../packages/ops/src/sns/x-catalog.cjs");
 const { datasetPath } = require("../../../../config/datasets.mjs");
 
 const ROOT = path.resolve(__dirname, "../../../..");
