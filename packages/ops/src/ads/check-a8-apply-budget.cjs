@@ -15,16 +15,16 @@
  *   applyBudget(catalog, dateStr) → { ok, weekCount, remaining, max, weekStart }
  *
  * CLI:
- *   node .claude/scripts/ads/check-a8-apply-budget.cjs [--date YYYY-MM-DD]
+ *   node packages/ops/src/ads/check-a8-apply-budget.cjs [--date YYYY-MM-DD]
  *     → 今週の申請件数 + 残枠を表示。上限到達なら exit 1。
  */
 
 const fs = require("node:fs");
 const path = require("node:path");
-const { datasetPath } = require("../../../config/datasets.mjs");
-const { A8_CURATED } = require("../../../config/paths.mjs");
+const { datasetPath } = require("../../../../config/datasets.mjs");
+const { A8_CURATED } = require("../../../../config/paths.mjs");
 
-const PROJECT_ROOT = path.resolve(__dirname, "../../..");
+const PROJECT_ROOT = path.resolve(__dirname, "../../../..");
 const CATALOG_PATH = path.join(PROJECT_ROOT, datasetPath("a8.catalog"));
 const CURATED_PATH = path.join(PROJECT_ROOT, A8_CURATED);
 
@@ -65,7 +65,7 @@ function jstDate(raw) {
 /** dateStr を含む週の月曜 (JST)。 */
 function isoWeekStart(dateStr) {
   // dateStr は JST の日付。正本は packages/ops/src/metrics/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
-  const { isoWeekOf, isoWeekRange } = require("../../../packages/ops/src/metrics/periods.mjs");
+  const { isoWeekOf, isoWeekRange } = require("../metrics/periods.mjs");
   return isoWeekRange(isoWeekOf(dateStr)).monday;
 }
 

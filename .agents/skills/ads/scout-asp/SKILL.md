@@ -122,7 +122,7 @@ npx tsx .claude/skills/ads/scout-asp/scripts/a8-browser.ts check-approval [--dry
 npx tsx .claude/skills/ads/scout-asp/scripts/a8-browser.ts harvest [--dry-run]
 npx tsx .claude/skills/ads/scout-asp/scripts/a8-browser.ts inspect-offer --id s00000000000000
 npx tsx .claude/scripts/ads/append-affiliate-ads.ts [--apply]     # register (既定 dry-run)
-node .claude/scripts/ads/check-a8-apply-budget.cjs                # 今週の申請残枠
+node packages/ops/src/ads/check-a8-apply-budget.cjs                # 今週の申請残枠
 ```
 
 ## 制約 (必ず守る)

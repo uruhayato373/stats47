@@ -8,13 +8,13 @@ import { fileURLToPath } from "node:url";
 
 import { AFFILIATE_ADS } from "../../../apps/web/scripts/affiliate-ads-data";
 import { AFFILIATE_OFFER_PROFILES } from "../../../apps/web/scripts/affiliate-offer-profiles-data";
-import { evaluateA8OutcomeGate } from "./lib/a8-report-period-core.mjs";
+import { evaluateA8OutcomeGate } from "../../../packages/ops/src/ads/lib/a8-report-period-core.mjs";
 import {
   buildAffiliatePortfolioState,
   validateAffiliatePortfolioState,
-} from "./lib/affiliate-portfolio-core.mjs";
-import { evaluateMeasurementGate } from "./lib/affiliate-operations-core.mjs";
-import { evaluateMoshimoOutcomeGate } from "./lib/moshimo-report-core.mjs";
+} from "../../../packages/ops/src/ads/lib/affiliate-portfolio-core.mjs";
+import { evaluateMeasurementGate } from "../../../packages/ops/src/ads/lib/affiliate-operations-core.mjs";
+import { evaluateMoshimoOutcomeGate } from "../../../packages/ops/src/ads/lib/moshimo-report-core.mjs";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 import { A8_REPORT_AUTOMATION } from "../../../config/paths.mjs";
 

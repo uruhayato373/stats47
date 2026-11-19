@@ -24,7 +24,7 @@ import {
   findUnregisteredAffiliateTags,
   lintDirectPlacementSizes,
   validateDirectPlacementsStructure,
-} from "./lib/affiliate-compliance-core.mjs";
+} from "../../../packages/ops/src/ads/lib/affiliate-compliance-core.mjs";
 import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 

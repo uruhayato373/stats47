@@ -3,7 +3,7 @@
  *
  * 純粋関数のみ (I/O なし)。CLI (.claude/scripts/ads/audit-affiliate-compliance.ts) が
  * SSOT (台帳 affiliate.direct-placements) と記事本文 (R2) を渡す。
- * テスト: .claude/scripts/ads/__tests__/affiliate-compliance-core.test.mjs (node --test)。
+ * テスト: packages/ops/src/ads/__tests__/affiliate-compliance-core.test.mjs (node --test)。
  *
  * 検証対象 (.claude/rules/affiliate-ads-standards.md §7-8):
  *   - 構造: ID 重複 / URL scheme / 画像サイズ / placements 形式 / addedAt 形式

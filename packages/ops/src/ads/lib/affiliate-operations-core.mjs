@@ -3,7 +3,7 @@
  *
  * 純粋関数のみ (I/O なし)。CLI (.claude/scripts/ads/build-affiliate-operations-state.ts) が
  * snapshot 群 (inventory / GA4 / compliance / experiments registry / AFFILIATE_ADS) を渡す。
- * テスト: .claude/scripts/ads/__tests__/affiliate-operations-core.test.mjs (node --test)。
+ * テスト: packages/ops/src/ads/__tests__/affiliate-operations-core.test.mjs (node --test)。
  *
  * 正典: .claude/rules/affiliate-ads-standards.md §6 / §8、
  *       .claude/skills/analytics/affiliate-improvement/SKILL.md。

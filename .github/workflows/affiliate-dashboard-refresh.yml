@@ -28,7 +28,7 @@ on:
       - ".claude/scripts/ads/lib/placement-map-core.mjs"
       - ".claude/scripts/ads/audit-affiliate-compliance.ts"
       - ".claude/scripts/ads/audit-affiliate-relevance.ts"
-      - ".claude/scripts/ads/lib/affiliate-relevance-core.mjs"
+      - "packages/ops/src/ads/lib/affiliate-relevance-core.mjs"
       - "apps/web/src/features/ads/constants/blog-affiliate-policy.ts"
       - ".github/workflows/affiliate-dashboard-refresh.yml"
   schedule:

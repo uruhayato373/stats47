@@ -15,14 +15,14 @@
 import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { A8_CURATED } from "../../../../config/paths.mjs";
+import { A8_CURATED } from "../../../../../config/paths.mjs";
 
 const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /** curated data をロード (テストは curated を渡して差し替え可)。 */
 export function loadCurated() {
-  return require(path.resolve(__dirname, "../../../..", A8_CURATED));
+  return require(path.resolve(__dirname, "../../../../..", A8_CURATED));
 }
 
 // ---------- 表記ゆれ正規化 ----------

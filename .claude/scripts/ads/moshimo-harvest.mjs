@@ -22,7 +22,7 @@ import {
   SiteAttributionError,
   visibleText,
 } from './lib/asp-browser.mjs';
-import { parseMoshimoCode } from './lib/moshimo-code-core.mjs';
+import { parseMoshimoCode } from '../../../packages/ops/src/ads/lib/moshimo-code-core.mjs';
 import { datasetPath } from "../../../config/datasets.mjs";
 
 const CATALOG_PATH = join(

@@ -44,7 +44,7 @@ import {
   toResultsRecords,
   crossCheckAgainstSite,
   suggestMissingPrograms,
-} from "./lib/a8-report-csv.mjs";
+} from "../../../packages/ops/src/ads/lib/a8-report-csv.mjs";
 import { repoRoot } from "./lib/asp-browser-base.mjs";
 import { A8_REPORT_AUTOMATION } from "../../../config/paths.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";

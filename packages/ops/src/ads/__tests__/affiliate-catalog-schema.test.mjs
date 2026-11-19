@@ -1,7 +1,7 @@
 /**
  * **コミット済みの実カタログ** (data/affiliate/affiliate-catalog.json) を検証する。
  *
- * CI は `node --test .claude/scripts/ads/__tests__/` を直叩きする (pr-quality-check.yml)
+ * CI は `node --test .claude/scripts/ads/__tests__/*.test.mjs` と ops workspace のテストで走る (pr-quality-check.yml)
  * ので、このファイルを置くだけでカタログの構造破壊が PR で落ちる (配線変更は不要)。
  *
  * 方針:
@@ -17,7 +17,7 @@ import { dirname, join } from "node:path";
 
 import { validateCatalog } from "../lib/affiliate-status-core.mjs";
 
-const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), "../../../..");
+const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), "../../../../..");
 const CATALOG_PATH = join(REPO_ROOT, "data/affiliate/affiliate-catalog.json");
 
 /**

@@ -15,7 +15,7 @@
  *     直下にフラットに置く）。
  *   - パス解決は `process.cwd()` 相対ではなく `repoRoot()`（lib/a8-report-browser.mjs 経由で
  *     asp-browser-base.mjs から import）を使い、実行ディレクトリや OS に依存しないようにした。
- *   - CSV パーサは `./lib/a8-report-csv.mjs` に統合済みの `parseCsv` を使う（GSC 用の
+ *   - CSV パーサは `../../../packages/ops/src/ads/lib/a8-report-csv.mjs` に統合済みの `parseCsv` を使う（GSC 用の
  *     `google-console-csv.mjs` は stats47 に無い）。
  *   - トップレベルで無条件に main() を呼んでいた由来のコードは、このファイルが import された
  *     だけで実行されないよう `import.meta.url` ガードを追加した（直接実行時のみ走る）。
@@ -58,8 +58,8 @@ import {
   maskSecrets,
   repoRoot,
 } from "./lib/a8-report-browser.mjs";
-import { decodeCsvBuffer, parsePeriodFromFilename, parseCsv } from "./lib/a8-report-csv.mjs";
-import { buildA8PeriodContract, compareA8Period, currentJstDate } from "./lib/a8-report-period-core.mjs";
+import { decodeCsvBuffer, parsePeriodFromFilename, parseCsv } from "../../../packages/ops/src/ads/lib/a8-report-csv.mjs";
+import { buildA8PeriodContract, compareA8Period, currentJstDate } from "../../../packages/ops/src/ads/lib/a8-report-period-core.mjs";
 import { A8_REPORT_AUTOMATION } from "../../../config/paths.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 

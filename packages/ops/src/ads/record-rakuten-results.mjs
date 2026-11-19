@@ -18,10 +18,10 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { datasetPath } from "../../../config/datasets.mjs";
-import { assertDatasetShape } from "../../../packages/ops/src/datasets/dataset-shape.mjs";
+import { datasetPath } from "../../../../config/datasets.mjs";
+import { assertDatasetShape } from "../datasets/dataset-shape.mjs";
 
-const ROOT = fileURLToPath(new URL('../../../', import.meta.url));
+const ROOT = fileURLToPath(new URL('../../../../', import.meta.url));
 export const RAKUTEN_RESULTS_PATH = datasetPath("rakuten.results");
 
 /** 引数を検査して 1 か月分の記録にする。不正なら Error を投げる。 */

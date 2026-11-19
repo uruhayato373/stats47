@@ -13,7 +13,7 @@
  *   呼び出し側が守れるよう、append は fsync まで完了してから返る。途中で kill されても
  *   `sent` が残っていれば canAutoResend が false になり、二重申請にならない。
  *
- * テスト: .claude/scripts/ads/__tests__/asp-operation-store.test.mjs
+ * テスト: packages/ops/src/ads/__tests__/asp-operation-store.test.mjs
  */
 import {
   mkdirSync,
@@ -29,7 +29,7 @@ import {
 import { join, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../..");
+const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");
 
 /** 端末固有の運用ディレクトリ。テストは root を差し替える。 */
 export function opsDir(root = REPO_ROOT) {

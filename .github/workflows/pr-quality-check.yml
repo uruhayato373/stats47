@@ -528,7 +528,7 @@ jobs:
       - name: 🔑 Google API client contract
         # 認証とクライアント生成は google-client.cjs だけが持ち、読み取りの POST は再試行・書き込みは 1 回だけ送る契約を固定する
         # (SCRIPT-GOOGLE-CLIENT-UNIFY-01)。共通クライアントへ置き換えた計測スクリプトの単体テストも同じ step で回す。
-        run: node --test packages/ops/src/google/__tests__/google-client.test.cjs .claude/scripts/gsc/__tests__/url-inspection-daily.test.cjs .claude/scripts/ads/__tests__/fetch-affiliate-ga4.test.cjs
+        run: node --test packages/ops/src/google/__tests__/google-client.test.cjs .claude/scripts/gsc/__tests__/url-inspection-daily.test.cjs packages/ops/src/ads/__tests__/fetch-affiliate-ga4.test.cjs
         continue-on-error: false
 
       - name: 🔁 Workflow Commit-back Contract Gate
@@ -815,7 +815,7 @@ jobs:
           # 広告在庫の vertical・実験・offer profile の整合 (R2 反映時にしか走っていなかった。2026-10-26)。
           # --validate-only は R2 に書かない。repository が server-only を読むので react-server condition が要る
           NODE_OPTIONS="--conditions react-server" npx tsx apps/web/scripts/export-affiliate-ads-snapshot.ts --validate-only
-          node --test .claude/scripts/ads/__tests__/*.test.mjs
+          node --test .claude/scripts/ads/__tests__/*.test.mjs packages/ops/src/ads/__tests__/*.test.mjs packages/ops/src/ads/__tests__/*.test.cjs
         continue-on-error: false
 
       - name: 📋 Survey Portfolio State Guard

@@ -533,7 +533,7 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 
 切り替えずに読むと**他サイトのデータを自分のものと誤認する**。doboku-note では afb の走査で SID 不一致を
 「警告して続行」した結果、別サイトの一覧を読んで「該当 0 件」と誤報告した事故が起きた。
-判定は `.claude/scripts/ads/lib/asp-site-guard.mjs` に集約し、**不一致は例外で停止する**
+判定は `packages/ops/src/ads/lib/asp-site-guard.mjs` に集約し、**不一致は例外で停止する**
 (`--force` 相当の迂回手段を作らない。作れば必ず使われる)。
 
 | ASP | 分離方式 | 対象 ID (stats47) | 切替の実装 |
@@ -553,12 +553,12 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 | 役割 | 場所 |
 |---|---|
 | 接続設定 (URL / セレクタ / サイト ID / timeout) | `config/affiliate-asp.json` |
-| サイト帰属の判定 (純関数・例外) | `.claude/scripts/ads/lib/asp-site-guard.mjs` (+ `__tests__/`) |
+| サイト帰属の判定 (純関数・例外) | `packages/ops/src/ads/lib/asp-site-guard.mjs` (+ `__tests__/`) |
 | ブラウザ共通基盤 (永続 context / dump / mask) | `.claude/scripts/ads/lib/asp-browser-base.mjs` |
 | ASP 共通操作 (openAsp / ensureTargetSite) | `.claude/scripts/ads/lib/asp-browser.mjs` |
 | 提携状態の実機照合 (read-only / `--write`) | `.claude/scripts/ads/affiliate-status.mjs` |
 | 提携申請 (dry-run 既定 / `--commit`) | `.claude/scripts/ads/affiliate-apply.mjs` |
-| operation plan / journal の I/O | `.claude/scripts/ads/lib/asp-operation-store.mjs` (判定は `asp-operation-core.mjs`) |
+| operation plan / journal の I/O | `packages/ops/src/ads/lib/asp-operation-store.mjs` (判定は `asp-operation-core.mjs`) |
 | lock / health の I/O | `.claude/scripts/ads/affiliate-ops.mjs` |
 | afb 未提携案件の走査 | `.claude/scripts/ads/afb-scan.mjs` |
 | afb 承認済み案件の広告原稿取得 | `.claude/scripts/ads/afb-harvest.mjs --id <PID[,PID]>` |
@@ -574,7 +574,7 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 - `vertical` は広告意図の分類であり、掲載許可には使わない。掲載許可は catalog の program に置く
   `eligibility` だけで判定し、未設定は `pending` 相当として fail-closed にする。
 - 語彙の SSOT は `config/affiliate-eligibility-policy.json`、判定と指紋の正規化は
-  `.claude/scripts/ads/lib/affiliate-eligibility-core.mjs`。policy 外の status / risk / page type は拒否する。
+  `packages/ops/src/ads/lib/affiliate-eligibility-core.mjs`。policy 外の status / risk / page type は拒否する。
 - apply plan は `status=approved`、掲載対象が1件以上、risk が空の案件だけ生成できる。risk がある案件は
   `reviewedBy=owner`、有効な `reviewedAt`、案件単位の `evidence` がすべて揃った場合だけ許可する。
   `--force` 相当の迂回引数は作らない。eligibility 全項目は plan 指紋に含め、変更後の古い plan を失効させる。
@@ -763,7 +763,7 @@ banner 上位 1 + text 上位 2 で頭打ちだったため。
   ブラウザ `.claude/skills/ads/scout-asp/scripts/{a8-browser.ts,login.mjs}` /
   カタログ `data/affiliate/a8-catalog.json` / curated `config/a8-curated.json` /
   週次 `scripts/scheduled/scout-asp-weekly.sh` (週次の取得 `weekly-saturday.sh` から呼ぶ) /
-  追記ゲート `.claude/scripts/ads/append-affiliate-ads.ts` / 申請上限 `.claude/scripts/ads/check-a8-apply-budget.cjs`
+  追記ゲート `.claude/scripts/ads/append-affiliate-ads.ts` / 申請上限 `packages/ops/src/ads/check-a8-apply-budget.cjs`
 - 3 ASP 提携運用 (§11): skill `.claude/skills/ads/affiliate-operate/SKILL.md` / agent `.claude/agents/affiliate-operator.md` /
   設定 `config/affiliate-asp.json` / 台帳 `data/affiliate/affiliate-catalog.json` /
   コア `.claude/scripts/ads/lib/{asp-browser-base,asp-browser,asp-site-guard}.mjs` (+ `__tests__/`) /

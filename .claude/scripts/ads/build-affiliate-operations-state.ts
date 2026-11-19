@@ -28,7 +28,7 @@ import {
   evaluateExperiments,
   evaluateMeasurementGate,
   validateOperationsState,
-} from "./lib/affiliate-operations-core.mjs";
+} from "../../../packages/ops/src/ads/lib/affiliate-operations-core.mjs";
 
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 

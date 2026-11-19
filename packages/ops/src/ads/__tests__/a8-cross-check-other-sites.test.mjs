@@ -10,10 +10,10 @@ import { join } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
-import { A8_REPORT_AUTOMATION } from "../../../../config/paths.mjs";
+import { A8_REPORT_AUTOMATION } from "../../../../../config/paths.mjs";
 import { crossCheckAgainstSite, normalizeA8Csv, unexplainedOtherSiteClicks } from "../lib/a8-report-csv.mjs";
 
-const ROOT = fileURLToPath(new URL("../../../../", import.meta.url));
+const ROOT = fileURLToPath(new URL("../../../../../", import.meta.url));
 const SHARED = ["s00000024757004"];
 const site = (clicks, extra = {}) => ({ site: "統計で見る都道府県", clicks, conversions: 0, grossRevenueYen: 0, approved: 0, revenueYen: 0, ...extra });
 const program = (programId, clicks, extra = {}) => ({ programId, program: `af_${programId}`, clicks, conversions: 0, grossRevenueYen: 0, approved: 0, revenueYen: 0, ...extra });

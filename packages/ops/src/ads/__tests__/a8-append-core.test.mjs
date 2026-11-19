@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import test from "node:test";
 
-import { datasetPath } from "../../../../config/datasets.mjs";
+import { datasetPath } from "../../../../../config/datasets.mjs";
 import {
   validateAdsDoc,
   parseAdsDoc,
@@ -18,7 +18,7 @@ import {
   validateDecisionTargets,
 } from "../lib/a8-append-core.mjs";
 
-const ROOT = join(import.meta.dirname, "../../../..");
+const ROOT = join(import.meta.dirname, "../../../../..");
 
 const SRC = `{
   "ads": [

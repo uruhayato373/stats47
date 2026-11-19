@@ -11,7 +11,7 @@ co_agents: [blog-editor]
 
 - **明示policy SSOT**: `apps/web/src/features/ads/constants/blog-affiliate-policy.ts`
 - **自動解決 SSOT**: 台帳 `affiliate.vertical-map` (解決の関数は `apps/web/src/features/ads/constants/affiliate-category.ts`)
-- **判定コア**: `.claude/scripts/ads/lib/affiliate-relevance-core.mjs`
+- **判定コア**: `packages/ops/src/ads/lib/affiliate-relevance-core.mjs`
 - **state**: `data/affiliate/relevance-latest.json`（派生物・手編集禁止）
 
 ## 実行
@@ -42,6 +42,6 @@ npx tsx .claude/scripts/ads/audit-affiliate-relevance.ts --live
 ## 完了条件
 
 1. `--check` が成功する。
-2. 純粋関数テスト `node --test .claude/scripts/ads/__tests__/affiliate-relevance-core.test.mjs` が成功する。
+2. 純粋関数テスト `node --test packages/ops/src/ads/__tests__/affiliate-relevance-core.test.mjs` が成功する。
 3. `--live` の件数とstateの `articleCount` / `reviewFindingCount` が一致する。
 4. 採否判断した記事は明示policyに理由があり、未判断候補はstateに残る。

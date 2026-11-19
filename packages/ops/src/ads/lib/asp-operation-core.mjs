@@ -7,7 +7,7 @@
  * 呼び出し側 (CLI / cron / apply スクリプト) はファイル I/O だけを行い、
  * hash・期限・再送可否・lock 回収条件・run 集約をモデルや shell に判断させない。
  *
- * テスト: .claude/scripts/ads/__tests__/asp-operation-core.test.mjs
+ * テスト: packages/ops/src/ads/__tests__/asp-operation-core.test.mjs
  */
 import { createHash } from "node:crypto";
 

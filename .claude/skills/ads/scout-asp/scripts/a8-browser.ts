@@ -32,10 +32,10 @@ import { createRequire } from "module";
 import { datasetDir, datasetPath } from "../../../../../config/datasets.mjs";
 
 const require = createRequire(import.meta.url);
-const core = require("../../../../scripts/ads/lib/a8-scout-core.mjs");
-const codeCore = require("../../../../scripts/ads/lib/a8-code-core.mjs");
-const applyBudget = require("../../../../scripts/ads/check-a8-apply-budget.cjs");
-const appendCore = require("../../../../scripts/ads/lib/a8-append-core.mjs");
+const core = require("../../../../../packages/ops/src/ads/lib/a8-scout-core.mjs");
+const codeCore = require("../../../../../packages/ops/src/ads/lib/a8-code-core.mjs");
+const applyBudget = require("../../../../../packages/ops/src/ads/check-a8-apply-budget.cjs");
+const appendCore = require("../../../../../packages/ops/src/ads/lib/a8-append-core.mjs");
 const { buildAdDraft } = appendCore;
 
 // ─── 設定 ──────────────────────────────────────────

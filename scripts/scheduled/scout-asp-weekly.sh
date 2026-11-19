@@ -70,7 +70,7 @@ run_pipeline() {
 
   if [ "$APPLY_NEW" = "1" ]; then
     run_step scout npx tsx "$A8" scout
-    if node "$PROJECT_DIR/.claude/scripts/ads/check-a8-apply-budget.cjs"; then
+    if node "$PROJECT_DIR/packages/ops/src/ads/check-a8-apply-budget.cjs"; then
       run_step apply npx tsx "$A8" apply
     else
       add_step apply skipped "週次申請上限に到達"

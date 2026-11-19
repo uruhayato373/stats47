@@ -26,7 +26,7 @@ import {
   isOwnLock,
   buildHealth,
   exitCodeForStatus,
-} from "./lib/asp-operation-core.mjs";
+} from "../../../packages/ops/src/ads/lib/asp-operation-core.mjs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const OPS_DIR = join(REPO_ROOT, ".local/affiliate-ops");

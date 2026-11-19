@@ -18,7 +18,7 @@ import {
   installAdTrafficBlock,
   requiresAdTrafficBlock,
   summarizeAdTraffic,
-} from "../lib/ad-traffic-block.mjs";
+} from "../../../../packages/ops/src/ads/lib/ad-traffic-block.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 

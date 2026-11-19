@@ -2,7 +2,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
-import { evaluateAffiliatePortfolioFreshness } from "./lib/affiliate-portfolio-core.mjs";
+import { evaluateAffiliatePortfolioFreshness } from "../../../packages/ops/src/ads/lib/affiliate-portfolio-core.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const pathArgIndex = process.argv.indexOf("--path");

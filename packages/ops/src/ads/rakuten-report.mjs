@@ -19,7 +19,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { RAKUTEN_RESULTS_PATH, upsertRecord } from './record-rakuten-results.mjs';
 
-const ROOT = fileURLToPath(new URL('../../../', import.meta.url));
+const ROOT = fileURLToPath(new URL('../../../../', import.meta.url));
 const REPORT_URL = 'https://affiliate.rakuten.co.jp/report/summary';
 
 /** JST の当月と前月 (YYYY-MM)。 */

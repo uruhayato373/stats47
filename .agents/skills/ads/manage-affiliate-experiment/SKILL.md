@@ -114,7 +114,7 @@ co_agents: [improvement-triage, ga4-analyst]
 | `reference/creative-ab-testing.md` | 配分方式 (client 加重ランダム + sticky)・GA4 計測・停止ルールの現行仕様 |
 | `data/affiliate/experiments.json` | 実験 registry (SSOT) |
 | `.claude/scripts/ads/build-affiliate-operations-state.ts` | 決定的判定 + 集約 state 生成 |
-| `.claude/scripts/ads/lib/affiliate-operations-core.mjs` | 判定コア (純粋関数・`node --test` 対象) |
-| `.claude/scripts/ads/__tests__/affiliate-operations-core.test.mjs` | 判定コアの fixture テスト (gate/実験 status/state validate) |
+| `packages/ops/src/ads/lib/affiliate-operations-core.mjs` | 判定コア (純粋関数・`node --test` 対象) |
+| `packages/ops/src/ads/__tests__/affiliate-operations-core.test.mjs` | 判定コアの fixture テスト (gate/実験 status/state validate) |
 | 台帳 `affiliate.ads` | variant 実体 (experimentId/variantId/weight) |
 | `apps/web/src/features/ads/components/VariantAdSlot.tsx` | 出し分け実装 (client 加重ランダム + sticky) |

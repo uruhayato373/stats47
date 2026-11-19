@@ -3,10 +3,10 @@
  * policy の語彙以外、未設定、未承認はすべて fail-closed にする。
  */
 import { readFileSync } from "node:fs";
-import { AFFILIATE_ELIGIBILITY_POLICY } from "../../../../config/paths.mjs";
+import { AFFILIATE_ELIGIBILITY_POLICY } from "../../../../../config/paths.mjs";
 
 const POLICY = JSON.parse(
-  readFileSync(new URL(`../../../../${AFFILIATE_ELIGIBILITY_POLICY}`, import.meta.url), "utf8"),
+  readFileSync(new URL(`../../../../../${AFFILIATE_ELIGIBILITY_POLICY}`, import.meta.url), "utf8"),
 );
 
 export const AFFILIATE_ELIGIBILITY_POLICY_VERSION = POLICY.schemaVersion;

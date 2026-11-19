@@ -30,7 +30,7 @@ import {
   maskSecrets,
   startStatusTicker,
 } from "./asp-browser-base.mjs";
-import { assertSiteOrThrow, extractSiteId, SiteAttributionError } from "./asp-site-guard.mjs";
+import { assertSiteOrThrow, extractSiteId, SiteAttributionError } from "../../../../packages/ops/src/ads/lib/asp-site-guard.mjs";
 import { unattended } from '../../measurement/browser-session.mjs';
 import { AFFILIATE_ASP } from "../../../../config/paths.mjs";
 

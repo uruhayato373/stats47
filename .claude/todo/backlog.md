@@ -126,12 +126,12 @@ updated: 2026-11-01
 - **停止条件**: 移した部品を使う週次の workflow を、移すたびに動かして確かめる。
 - **完了条件**: 基準に残る行が恒久の例外 (品質のゲートの基準・パスを入力として持つだけ) だけになる。
 
-### [SCRIPTS-TO-PACKAGES-BRIDGE-01] 次の main へのリリースのあと、旧パスの橋渡し 3 ファイルを消す
+### [SCRIPTS-TO-PACKAGES-BRIDGE-01] 次の main へのリリースのあと、旧パスの橋渡し 4 ファイルを消す
 タグ: [エージェント・SSOT] [種類:改善] [実行:sweep] [検証:node .claude/scripts/lib/check-claude-scripts-tests.mjs] [起票:2026-11-19] [領域:サイト]
 
-- **起点 (2026-11-19)**: 定期実行の workflow は main の定義で動き、中で develop のコードを使う。SCRIPTS-TO-PACKAGES-02 で移したファイルのうち 3 つを main の workflow の定義が旧パスで名指ししていたので、旧パスに 1 行の橋渡しを置いた: `.claude/scripts/lib/__tests__/sns-posted-core.test.cjs` (`sns-verify-threads-posted.yml`・毎日 23:50 JST)、`.claude/scripts/lib/__tests__/threads-core.test.cjs` (`post-threads-scheduled.yml`)、`.claude/scripts/lib/chart-provenance.mjs` (`regenerate-blog-svgs.yml` のインラインの import)。
-- **次**: develop → main のリリースが済んだら、`git grep -n "<上の 3 つのパス>" origin/main -- .github/workflows` が 0 件であることを確かめ、3 ファイルと、基準 `.claude/config/claude-scripts-test-baseline.json` の `harness` の 2 行と、`package.json` の `test:claude-lib-contracts` の 2 つの名前を消す。
-- **完了条件**: 3 ファイルが無く、`node .claude/scripts/lib/check-claude-scripts-tests.mjs` と `lib-tests-wiring` が通る。
+- **起点 (2026-11-19)**: 定期実行の workflow は main の定義で動き、中で develop のコードを使う。SCRIPTS-TO-PACKAGES-02 で移したファイルのうち 3 つを main の workflow の定義が旧パスで名指ししていたので、旧パスに 1 行の橋渡しを置いた: `.claude/scripts/lib/__tests__/sns-posted-core.test.cjs` (`sns-verify-threads-posted.yml`・毎日 23:50 JST)、`.claude/scripts/lib/__tests__/threads-core.test.cjs` (`post-threads-scheduled.yml`)、`.claude/scripts/lib/chart-provenance.mjs` (`regenerate-blog-svgs.yml` のインラインの import)。2026-11-20 に `.claude/scripts/ads/lib/affiliate-relevance-core.mjs` (`affiliate-dashboard-refresh.yml` の push の `paths:`。実行はしないが移動の道具の止めに掛かるため置いた) を足した。
+- **次**: develop → main のリリースが済んだら、`git grep -n "<上の 4 つのパス>" origin/main -- .github/workflows` が 0 件であることを確かめ、4 ファイルと、基準 `.claude/config/claude-scripts-test-baseline.json` の `harness` の 2 行と、`package.json` の `test:claude-lib-contracts` の 2 つの名前を消す。
+- **完了条件**: 4 ファイルが無く、`node .claude/scripts/lib/check-claude-scripts-tests.mjs` と `lib-tests-wiring` が通る。
 - **関連の既存の壊れた参照 (同じ形の穴。今回の移動とは別)**: main と develop の `blog-data-source-migration.yml` が `.claude/scripts/blog/data/display-sources-backfill.js` を名指しするが、ファイルが無い (2026-11-19 確認)。workflow を消すか、パスを直す。
 
 ### [SCRIPTS-TO-PACKAGES-02] .claude/scripts に残るテスト 286 本を、対象のロジックごと packages へ移す
@@ -140,7 +140,7 @@ updated: 2026-11-01
 - **起点 (2026-11-19 オーナー判断「テストは基本的に .claude に置かない」)**: テストが要るロジックは packages に置く決まり (`.claude/rules/skill-code-placement.md`「テストは `.claude` に置かない」) と、領域ごとのテスト数の縮小専用の基準 `.claude/config/claude-scripts-test-baseline.json`。
 - **済み (2026-11-19・第 1 回と第 2 回)**: `lib` を 132 → 5 本にした。基盤のテスト 75 本は基準の `harness` に登録済み。SNS の台帳・e-Stat・記事の lint とブログの品質ゲート・Google 接続・state の同期・製品の品質ゲートの検査 10 本・Cloudflare・効果判定のエンジン・`strategy-lanes` を `packages/ops/src/` へ移した。CLI は元のパスに本体の `main` を呼ぶ薄い入口を残している。
 - **次 ① (`lib` の残り 5 本)**: `write-past-effects` と `effect-verdict-cli` (`cli.mjs`・`scan-pending-improvements`・`triage-matrix`・`write-past-effects` を起動する。`write-past-effects` が `search-growth/lib` の部品を読むので search-growth の領域と一緒に動かす)、`chart-recurrence-guards` (`blog` の 4 スクリプトと workflow の手順の順番を同時に確かめている。分けてから移す)、`revenue-guards` (本体が `metrics` にあり `.claude/config/revenue-guards.json` の実物を読む)、`quality-gate.q-numbers` (fixture に `.claude/scripts/blog/` のパスを使う 1 ケースだけ残した)。
-- **次 ②**: workflow からの参照が多い領域から進める (`ads` 37・`note` 36・`metrics` 22・`sns` 22・`blog` 17)。`themes` は 2026-11-19 に本体 47・テスト 42 を移し、基盤のテスト 2 本を `harness` に登録した (残りは `check-theme-review` の 1 本。証拠として認めるパスの一覧に `.claude` を持つ)。
+- **次 ②**: workflow からの参照が多い領域から進める (`note` 36・`metrics` 22・`sns` 22・`blog` 17)。`ads` は 2026-11-20 に 37 → 6 本にした (本体 29・テスト 30 を `packages/ops/src/ads/` へ。設定 JSON 2 つは `config/` へ。workflow の契約のテスト 1 本は `harness`)。残る 6 本は、計測用ブラウザの部品 `.claude/scripts/measurement/browser-session.mjs` を読む 3 本 (`a8-period-browser`・`affiliate-apply-args`・`asp-browser-base`)、アプリのデータを読む CLI を起動・import する 2 本 (`audit-affiliate-inventory-check-size`・`placement-map-core`)、Chromium を入れる CI の job でだけ通る `ad-traffic-block` (`packages/ops` のテストを走らせる job は Chromium を入れない)。前の 3 本は measurement の領域を移すときに一緒に扱う。`themes` は 2026-11-19 に本体 47・テスト 42 を移し、基盤のテスト 2 本を `harness` に登録した (残りは `check-theme-review` の 1 本。証拠として認めるパスの一覧に `.claude` を持つ)。
 - **次 ③ (themes の残り)**: `packages/ops/tsconfig.checkjs.json` に `src/themes/**/*.mjs` を足すと型エラーが 76 件 (28 ファイル。取り込みの CLI の大半・`selection-backfill-core`・`theme-quality-state`・`lib/tsunami-*`) 出る。移す前も型検査の範囲外だったので足していない。JSDoc の型注釈で直して範囲に入れる (挙動は変えない)。取り込みの CLI のうち `ingest-bridge-inspection-age.mjs:33` と `ingest-shelter-applicability.mjs:38` は ROOT を `process.cwd()` で決めていて、リポジトリ直下以外から起動すると読む場所がずれる (ほかの 4 本は移すときにファイルの位置から求める形に直した)。
 - **進め方 (2 回で固まった型)**:
   - 妨げは構文木で数える (`.claude` を含む文字列の数)。Explore で調べない。
@@ -149,7 +149,7 @@ updated: 2026-11-01
   - 確かめる対象そのものが `.claude` の中身のテスト (置き場の規則・スクリプトの契約・スキルの run.sh) は移さず `harness` に登録する。一部だけが `.claude` を確かめるテストは、その部分を小さな基盤のテストに分ける。
   - 合否は移す前後の出力の一致で決める (品質ゲートは記事 122 ケース、検査は品質ゲートの台帳の command)。
   - `node:test` のテストを vitest の project を持つパッケージへ移すときは、その vitest が拾わないことを確かめる (`packages/ops` には無い)。移す前から JS の型検査の外だったファイルは、型エラーを直すまで ops の `tsconfig.checkjs.json` に足さない。
-- **分業の実績 (Sonnet。トークン / 所要 / 移した本体とテスト)**: 第 1 回は道具なしで medium 15.1 万 / 3.2 分 / 14+8、high 16.1 万 / 8.0 分 / 14+13、medium 15.8 万 / 3.5 分 / 8+5、加えて調査の Explore 3 本で 35.4 万。第 2 回は道具ありで medium 20.5 万 / 10.5 分 / 15+19、medium 14.7 万 / 12.1 分 / 5+6 (記事 122 ケースの比較を含む)、high 15.7 万 / 4.5 分 / 6+テストの分割、調査は構文木のスクリプトだけ。判断が要るのは入口の切り分けとテストの分割で、型どおりの移動は medium で足りる。
+- **分業の実績 (Sonnet。トークン / 所要 / 移した本体とテスト)**: 第 1 回は道具なしで medium 15.1 万 / 3.2 分 / 14+8、high 16.1 万 / 8.0 分 / 14+13、medium 15.8 万 / 3.5 分 / 8+5、加えて調査の Explore 3 本で 35.4 万。第 2 回は道具ありで medium 20.5 万 / 10.5 分 / 15+19、medium 14.7 万 / 12.1 分 / 5+6 (記事 122 ケースの比較を含む)、high 15.7 万 / 4.5 分 / 6+テストの分割、調査は構文木のスクリプトだけ。第 4 回 (ads) は medium 14.1 万 / 4.1 分 / 29+30 (品質ゲートの 5 コマンドの比較を含む)。判断が要るのは入口の切り分けとテストの分割で、型どおりの移動は medium で足りる。
 - **停止条件**: 移した部品を使う workflow と npm script を、移すたびに動かして確かめる。依存を入れない CI の job は相対パスで読む決まりを守る。テストだけを packages へ移さない。
 - **完了条件**: 基準の `domains` が空になり、`.claude/scripts` に残るテストが `harness` の行だけになる。
 

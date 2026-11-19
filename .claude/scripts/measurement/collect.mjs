@@ -89,7 +89,7 @@ try {
     capture(`.local/a8-ui/${marker.lastRun}`);
     for (const file of ['a8-ui-last-run.json', 'a8-results.json', 'a8-report-log.json']) capture(`${datasetDir("affiliate.audits")}/${file}`);
   } else if (name === 'rakuten') {
-    await command('.claude/scripts/ads/rakuten-report.mjs');
+    await command('packages/ops/src/ads/rakuten-report.mjs');
     capture(datasetPath("rakuten.results"));
   } else if (name === 'note') {
     // 売上と販売履歴は、パスワードの再確認を通したセッションでだけ読める。再確認は約 30 分で切れるので、
