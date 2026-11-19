@@ -87,4 +87,5 @@ test("main の定義で動き develop を checkout する workflow の jobs だ�
   assert.doesNotMatch(text, /only-in-paths|pr-only|main-code/);
   // 読めない YAML は全文を見る (止める側に倒す)
   assert.match(mainDefinitionJobsText(["on: [\n broken .claude/scripts/x/y.mjs"]), /y\.mjs/);
+  assert.equal(mainDefinitionJobsText([""]), "");
 });

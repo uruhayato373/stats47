@@ -130,7 +130,7 @@ export function mainDefinitionJobsText(texts) {
     try { doc = yaml.load(text); } catch { return [text]; } // 読めない YAML は全文を見る (止める側に倒す)
     const on = doc?.on ?? doc?.true;
     const triggers = typeof on === "string" ? [on] : Array.isArray(on) ? on : Object.keys(on ?? {});
-    const jobs = yaml.dump(doc.jobs ?? {}, { lineWidth: -1 });
+    const jobs = yaml.dump(doc?.jobs ?? {}, { lineWidth: -1 });
     return triggers.some((name) => MAIN_DEFINITION_TRIGGERS.includes(name)) && /ref:\s*['"]?develop\b/.test(jobs) ? [jobs] : [];
   }).join("\n");
 }
