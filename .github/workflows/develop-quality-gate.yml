@@ -137,7 +137,7 @@ jobs:
         continue-on-error: false
 
       - name: 📢 Ad Placement Guard
-        run: node .claude/scripts/lib/check-ad-placement.cjs
+        run: node apps/web/scripts/lib/check-ad-placement.cjs
         continue-on-error: false
 
   # ★unit test を develop 着地点でも走らせる (CI-SPEED-UNIT-TESTS-EARLY-01、2026-09-18)。

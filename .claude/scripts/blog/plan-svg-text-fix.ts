@@ -24,7 +24,7 @@ import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync, existsSync
 import { tmpdir } from "node:os";
 import path from "node:path";
 
-import { findChartTextIssues } from "../lib/svg-lint.mjs";
+import { findChartTextIssues } from "../../../packages/svg-builder/src/lint/svg-lint.mjs";
 import { resolveDispatcher } from "../page-quality/lib/http-dispatcher";
 import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 

@@ -7,7 +7,7 @@ import { NOTE_ARTICLES } from '../../../packages/ops/src/note/catalog';
 import { NOTE_COVER_CATEGORIES, noteCoverCategory } from './catalog/cover-categories';
 import { COVER_ROOT, coverSha, readCoverLedger, updateCoverLedger, validateCoverLedger } from '../../../packages/ops/src/note/cover-assets.mjs';
 import { assertCoverPlan, buildCoverPlan, coverProductionView, readCoverPolicies, seedCoverProduction, validateCoverPolicies } from '../../../packages/ops/src/note/cover-production.mjs';
-import { renderPopCover } from './lib/pop-cover-render';
+import { renderPopCover } from '../../../packages/ops/src/note/pop-cover-render';
 import { prepareGeneratedCover } from '../../../packages/ops/src/note/generated-cover.mjs';
 import { renderCoverReference } from '../../../packages/ops/src/note/cover-geography.mjs';
 

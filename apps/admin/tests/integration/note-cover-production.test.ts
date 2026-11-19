@@ -9,7 +9,7 @@ const fixture = vi.hoisted(() => ({ root: '' }));
 const articles = vi.hoisted(() => [{ key: 'pinned-intro', title: '統計サイトの紹介', vertical: 'stats47-note', status: 'published', noteUrl: 'https://note.com/stats47/n/n123' }]);
 vi.mock('@/lib/server/project-root', () => ({ projectRoot: () => fixture.root }));
 vi.mock('@stats47/ops/note/catalog', () => ({ NOTE_ARTICLES: articles }));
-vi.mock('../../../../packages/ops/src/note/cover-storage.mjs', () => ({ readStoredCover: vi.fn(async () => Buffer.from('image')), readStoredCoverInput: vi.fn(async () => Buffer.from('input')) }));
+vi.mock('@stats47/ops/note/cover-storage.mjs', () => ({ readStoredCover: vi.fn(async () => Buffer.from('image')), readStoredCoverInput: vi.fn(async () => Buffer.from('input')) }));
 import { PATCH } from '@/app/api/note-covers/[key]/production/route';
 import { noteCoverManagement } from '@/lib/server/note-covers';
 import { readStoredCover } from '@stats47/ops/note/cover-storage.mjs';

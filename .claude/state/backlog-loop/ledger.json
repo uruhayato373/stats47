@@ -1120,7 +1120,7 @@
           "costUsd": null,
           "gate": {
             "commands": [
-              "node .claude/scripts/lib/check-ad-placement.cjs"
+              "node apps/web/scripts/lib/check-ad-placement.cjs"
             ],
             "pass": true
           },

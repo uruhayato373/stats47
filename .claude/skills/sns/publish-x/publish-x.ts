@@ -1000,7 +1000,7 @@ async function restoreArchivedMedia(post: PostConfig): Promise<void> {
   const row = store.loadAll().find((p: Record<string, unknown>) => p.id === post.recordId);
   if (!row) return;
   try {
-    const { ensureSnsImageLocal } = await import("../../../../packages/ops/src/media/storage.mjs");
+    const { ensureSnsImageLocal } = await import("@stats47/ops/media/storage.mjs");
     const restored = await ensureSnsImageLocal(row, PROJECT_ROOT);
     if (restored) {
       post.imagePaths = [restored];

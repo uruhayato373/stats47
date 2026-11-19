@@ -236,7 +236,7 @@ jobs:
       - name: 📢 Ad Placement Guard
         # 広告の隣接・rail 部品誤用・生 AdSenseAd・右レール独立scroll/テキストPR・死んだ slot 定数を弾く。
         # pre-commit と同一だが --no-verify 素通り対策で CI でも実行する。
-        run: node .claude/scripts/lib/check-ad-placement.cjs
+        run: node apps/web/scripts/lib/check-ad-placement.cjs
         continue-on-error: false
 
       - name: 🚧 R2 Route SSG Guard

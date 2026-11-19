@@ -21,13 +21,13 @@
  *
  * 正典: .claude/rules/ui-components.md / docs/01_技術設計/04_デザインシステム.md
  *
- * Usage: node .claude/scripts/lib/check-ad-placement.cjs
+ * Usage: node apps/web/scripts/lib/check-ad-placement.cjs
  * Exit: 違反があれば 1。
  */
 const fs = require("fs");
 const path = require("path");
 
-const PROJECT_ROOT = process.env.STATS47_SCAN_ROOT || path.resolve(__dirname, "../../..");
+const PROJECT_ROOT = process.env.STATS47_SCAN_ROOT || path.resolve(__dirname, "../../../..");
 const APP_DIR = path.join(PROJECT_ROOT, "apps/web/src/app");
 const SRC_DIR = path.join(PROJECT_ROOT, "apps/web/src");
 const CONSTANTS_FILE = path.join(SRC_DIR, "lib/google-adsense/constants.ts");

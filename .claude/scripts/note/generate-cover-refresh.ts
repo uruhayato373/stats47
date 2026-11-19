@@ -38,7 +38,7 @@ import { topologyFeatures, fittedMercator, heightFittedMercator, largestPolygon 
 async function main() {
   assertCoverGenerationType('note-covers');
   const { fetchCoverSource, createCoverStore } = await import('../../../packages/ops/src/note/cover-storage.mjs');
-  const { registerCoverCandidate } = await import('./lib/cover-ingest.mjs');
+  const { registerCoverCandidate } = await import('../../../packages/ops/src/note/cover-ingest.mjs');
   const ROOT = path.resolve(
     path.dirname(fileURLToPath(import.meta.url)),
     '../../..'

@@ -8,7 +8,7 @@ const fixture = vi.hoisted(() => ({ root: '', bytes: Buffer.from('remote cover')
 const articles = vi.hoisted(() => [{ key: 'pinned-intro', title: '自己紹介', vertical: 'stats47-note', noteUrl: 'https://note.com/stats47/n/n123' }]);
 vi.mock('@/lib/server/project-root', () => ({ projectRoot: () => fixture.root }));
 vi.mock('@stats47/ops/note/catalog', () => ({ NOTE_ARTICLES: articles, publishedArticles: () => articles }));
-vi.mock('../../../../packages/ops/src/note/cover-storage.mjs', () => ({ readStoredCover: vi.fn(async () => fixture.bytes) }));
+vi.mock('@stats47/ops/note/cover-storage.mjs', () => ({ readStoredCover: vi.fn(async () => fixture.bytes) }));
 import { noteCoverManagement } from '@/lib/server/note-covers';
 import { GET } from '@/app/note-cover/[key]/route';
 import { readStoredCover } from '@stats47/ops/note/cover-storage.mjs';

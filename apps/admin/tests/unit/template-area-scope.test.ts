@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { chartSourceShapeErrors } from '../../../../.claude/scripts/lib/chart-source-schema.mjs';
-import { lintImageTypeSvg } from '../../../../.claude/scripts/lib/svg-lint.mjs';
+import { chartSourceShapeErrors } from '@stats47/svg-builder/lint/chart-source-schema.mjs';
+import { lintImageTypeSvg } from '@stats47/svg-builder/lint/svg-lint.mjs';
 import { areaChartFromArticleData, chartSourceName, groupedBarChartFromArticleData, hasCyclicAxis, lineChartFromArticleData, stackedChartFromArticleData } from '../../lib/type-chart-input';
 import { assertMinimalChartCopy } from '@stats47/ops/media/image-copy.mjs';
 import { areasOf, resolveAreaChart, type AreaScope, type AreaValue } from '@/lib/template-area-scope';

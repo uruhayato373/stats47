@@ -2,18 +2,18 @@ import { beforeEach, expect, it, vi } from 'vitest';
 import sharp from 'sharp';
 import { coverSha, emptyCoverArticle, readCoverLedger, type CoverLedger } from '@stats47/ops/note/cover-assets.mjs';
 import { buildCoverPlan, readCoverPolicies, seedCoverProduction } from '@stats47/ops/note/cover-production.mjs';
-import { registerCoverCandidate } from '../../../../.claude/scripts/note/lib/cover-ingest.mjs';
+import { registerCoverCandidate } from '@stats47/ops/note/cover-ingest.mjs';
 import { readStoredCoverInput } from '@stats47/ops/note/cover-storage.mjs';
 import { prepareGeneratedCover, expectedCoverText, expectedCoverChecks } from '@stats47/ops/note/generated-cover.mjs';
 
 const state = vi.hoisted(() => ({ ledger: null as CoverLedger | null }));
 const article = { key: 'pinned-intro', title: '統計の案内', category: 'intro', noteUrl: 'https://note.com/stats47/n/n123' };
-vi.mock('../../../../packages/ops/src/note/cover-assets.mjs', async (original) => ({
+vi.mock('@stats47/ops/note/cover-assets.mjs', async (original) => ({
   ...await original<typeof import('@stats47/ops/note/cover-assets.mjs')>(),
   readCoverLedger: () => state.ledger,
   updateCoverLedger: async (update: (ledger: CoverLedger) => void) => { update(state.ledger!); },
 }));
-vi.mock('../../../../packages/ops/src/note/article-ledger.mjs', () => ({ readArticleLedger: () => ({ articles: [{ key: 'pinned-intro', title: '統計の案内', noteUrl: 'https://note.com/stats47/n/n123' }] }) }));
+vi.mock('@stats47/ops/note/article-ledger.mjs', () => ({ readArticleLedger: () => ({ articles: [{ key: 'pinned-intro', title: '統計の案内', noteUrl: 'https://note.com/stats47/n/n123' }] }) }));
 
 beforeEach(() => {
   state.ledger = { schemaVersion: 1, account: 'stats47', updatedAt: new Date().toISOString(), articles: [emptyCoverArticle(article)] };

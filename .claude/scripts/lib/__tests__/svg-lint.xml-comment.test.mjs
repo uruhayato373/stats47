@@ -15,7 +15,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import { lintSvgContent } from "../svg-lint.mjs";
+import { lintSvgContent } from "../../../../packages/svg-builder/src/lint/svg-lint.mjs";
 
 const BODY =
   '<svg viewBox="0 0 720 720" width="720" height="720" xmlns="http://www.w3.org/2000/svg">' +

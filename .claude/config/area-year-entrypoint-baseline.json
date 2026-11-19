@@ -692,7 +692,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/lib/internal-link-lint.mjs": {
+    "apps/web/scripts/lib/internal-link-lint.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -707,7 +707,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/lib/svg-lint.mjs": {
+    "packages/svg-builder/src/lint/svg-lint.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,

@@ -5,11 +5,11 @@ import { addCoverRevision, coverAssetKey, coverInputKey, coverSha, emptyCoverArt
 import { assertCoverPlan, buildCoverPlan, readCoverPolicies, seedCoverProduction } from '@stats47/ops/note/cover-production.mjs';
 
 const state = vi.hoisted(() => ({ ledger: null as CoverLedger | null, inputError: false }));
-vi.mock('../../../../packages/ops/src/note/cover-assets.mjs', async original => ({
+vi.mock('@stats47/ops/note/cover-assets.mjs', async original => ({
   ...await original<typeof import('@stats47/ops/note/cover-assets.mjs')>(), readCoverLedger: () => state.ledger,
 }));
-vi.mock('../../../../packages/ops/src/note/article-ledger.mjs', () => ({ readArticleLedger: () => ({ articles: [{ key: 'pinned-intro', title: 'サイト紹介', vertical: 'stats47-note' }] }) }));
-vi.mock('../../../../packages/ops/src/note/cover-storage.mjs', () => ({
+vi.mock('@stats47/ops/note/article-ledger.mjs', () => ({ readArticleLedger: () => ({ articles: [{ key: 'pinned-intro', title: 'サイト紹介', vertical: 'stats47-note' }] }) }));
+vi.mock('@stats47/ops/note/cover-storage.mjs', () => ({
   readStoredCover: vi.fn(async () => Buffer.from('checked-image')),
   readStoredCoverInput: vi.fn(async () => { if (state.inputError) throw Error('private cover production evidence mismatch'); return Buffer.from('checked-evidence'); }),
 }));

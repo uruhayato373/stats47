@@ -11,7 +11,7 @@ import {
   lintSvgContent,
   lintSvgSize,
   lintTileGridQuality,
-} from '../svg-lint.mjs';
+} from '../../../../packages/svg-builder/src/lint/svg-lint.mjs';
 
 // The shared 4:5 image types (bars / tile map) are marked on the root <svg> by their renderers.
 const typeSvg = (template, theme, size = '1080 1350') => {

@@ -7,7 +7,7 @@ const fixture = vi.hoisted(() => ({
   readOriginal: vi.fn(),
   broken: false,
 }));
-vi.mock('../../../../packages/ops/src/media/storage.mjs', () => ({
+vi.mock('@stats47/ops/media/storage.mjs', () => ({
   mediaStore: () => ({
     get: async (key: string) =>
       fixture.objects.has(key)
@@ -23,7 +23,7 @@ vi.mock('../../../../packages/ops/src/media/storage.mjs', () => ({
   readMediaObject: fixture.readOriginal,
 }));
 vi.mock(
-  '../../../../packages/ops/src/media/workspace.mjs',
+  '@stats47/ops/media/workspace.mjs',
   async (importOriginal) => {
     const actual = await importOriginal<Record<string, unknown>>();
     return {

@@ -10,7 +10,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const SCHEMA_PATH = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../config/schema/blog.chart-source.schema.json');
+const SCHEMA_PATH = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../../config/schema/blog.chart-source.schema.json');
 
 export const CHART_SOURCE_SCHEMA = JSON.parse(fs.readFileSync(SCHEMA_PATH, 'utf8'));
 

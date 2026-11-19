@@ -69,7 +69,7 @@ export async function readSnapshotVersions(): Promise<SnapshotVersion[]> {
   const { datasetPath } = await import(new URL("../../../config/datasets.mjs", import.meta.url).href) as {
     datasetPath: (id: string) => string;
   };
-  const { assertDatasetShape } = await import(new URL("../../../packages/ops/src/datasets/dataset-shape.mjs", import.meta.url).href) as {
+  const { assertDatasetShape } = await import("@stats47/ops/datasets/dataset-shape.mjs") as {
     assertDatasetShape: (id: string, value: unknown) => void;
   };
   const value: unknown = JSON.parse(await readFile(new URL(`../../../${datasetPath("estat.table-snapshots")}`, import.meta.url), "utf8"));

@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 // @ts-expect-error — .claude 配下の決定的ゲート (型定義を持たない .mjs)
-import { findChartTextIssues } from "../../../../../.claude/scripts/lib/svg-lint.mjs";
+import { findChartTextIssues } from "../../lint/svg-lint.mjs";
 import { generateStackedBarSvg, STACKED_MOBILE_WIDTH } from "../stacked-bar";
 import type { StatsSchema } from "../../shared/stats-schema";
 

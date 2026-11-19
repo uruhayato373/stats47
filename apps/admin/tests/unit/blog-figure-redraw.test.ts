@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { itemBarChartFromArticleData, rankingChartFromArticleData } from '../../lib/type-chart-input';
 import { fetchPrefectures } from '@stats47/area';
-import { TEMPLATE_MIN_FONT_SIZE as LINT_MIN_FONT_SIZE, findImageTypeCopyDefects, findTemplateFontFloorDefects } from '../../../../.claude/scripts/lib/svg-lint.mjs';
+import { TEMPLATE_MIN_FONT_SIZE as LINT_MIN_FONT_SIZE, findImageTypeCopyDefects, findTemplateFontFloorDefects } from '@stats47/svg-builder/lint/svg-lint.mjs';
 import { TEMPLATE_MIN_FONT_SIZE } from '../../../remotion/src/features/data-cards/chart-theme';
 import { renderDistributionMapChart } from '@/lib/template-distribution-map';
 import { renderRankingBarsChart } from '@/lib/template-ranking-bars';

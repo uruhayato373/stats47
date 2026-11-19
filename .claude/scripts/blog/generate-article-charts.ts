@@ -48,7 +48,7 @@ import {
   lintSvgContent,
   lintSvgSize,
   extractInlineSvgs,
-} from '../lib/svg-lint.mjs';
+} from '../../../packages/svg-builder/src/lint/svg-lint.mjs';
 import { inspectChartSourceManifest } from '../lib/chart-provenance.mjs';
 import { observedOnly } from '../lib/blog-observed-values.mjs';
 import { buildProvenanceLine } from '../lib/svg-provenance.mjs';
@@ -233,7 +233,7 @@ function genStubSvg(chartType, name) {
 }
 
 // ---------- SVG lint (共有ライブラリ) ----------
-// lint ロジックは .claude/scripts/lib/svg-lint.mjs に集約 (audit-chart-quality.mjs と共有)。
+// lint ロジックは packages/svg-builder/src/lint/svg-lint.mjs に集約 (audit-chart-quality.mjs と共有)。
 
 /** ファイルパスから SVG を読んで lint する */
 /** A statistical chart must come from a template in the ledger. Only the charts the ledger leaves out pass. */

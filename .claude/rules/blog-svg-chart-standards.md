@@ -319,7 +319,7 @@ provenance 付き 9 枚だけが恒久的に rerender 判定になっており�
 
 ## 6. 品質チェック（`svg-lint.mjs`）
 
-`packages/svg-builder` の全出力は `.claude/scripts/lib/svg-lint.mjs` で検査。
+`packages/svg-builder` の全出力は `packages/svg-builder/src/lint/svg-lint.mjs` で検査。
 
 **配線先 (2026-07-31 に公開前 gate へ拡張)**: `quality-gate.mjs`（pre-commit + publish-blog.yml で公開前
 blocker）+ `audit-chart-quality.mjs`（バッチ）+ `generate-article-charts.ts --validate`。

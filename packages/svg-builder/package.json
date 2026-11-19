@@ -25,7 +25,8 @@
       "import": "./src/shared/index.ts",
       "require": "./src/shared/index.ts"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./lint/*": "./src/lint/*"
   },
   "scripts": {
     "test": "vitest",

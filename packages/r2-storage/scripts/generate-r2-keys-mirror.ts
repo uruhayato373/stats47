@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 import ts from "typescript";
 
 const SRC = fileURLToPath(new URL("../src/keys.ts", import.meta.url));
-const OUT = fileURLToPath(new URL("../../../packages/r2-storage/mirror/r2-keys.mjs", import.meta.url));
+const OUT = fileURLToPath(new URL("../mirror/r2-keys.mjs", import.meta.url));
 const HEADER = `// generated, do not edit
 // Source: packages/r2-storage/src/keys.ts
 // Generate: npm run r2-keys:mirror

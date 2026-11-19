@@ -10,7 +10,7 @@ import { KNOWN_THEME_SLUGS } from "../known-theme-slugs";
 
  
 const { __loadKeySetsForTest } = await import(
-  "../../../../../.claude/scripts/lib/internal-link-lint.mjs"
+  "../../../scripts/lib/internal-link-lint.mjs"
 );
 
 /**

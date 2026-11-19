@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import sharp from 'sharp';
-import { renderPopCover } from '../../../../.claude/scripts/note/lib/pop-cover-render';
+import { renderPopCover } from '@stats47/ops/note/pop-cover-render';
 import { buildCoverPlan, readCoverPolicies, seedCoverProduction } from '@stats47/ops/note/cover-production.mjs';
 import { emptyCoverArticle, type CoverLedger } from '@stats47/ops/note/cover-assets.mjs';
 

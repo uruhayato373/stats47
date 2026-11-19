@@ -14,7 +14,7 @@ primary_agent: chart-author
 - **やること**: 検出 (lint) のみ。どの記事のチャートを直すべきかを優先度付きで定量化
 - **やらないこと**: 再生成。既存公開記事の元データ (`data/*.json`) は publish 後に削除されるため、決定的な一括再生成は不可。再生成は **brushup サイクル** (`/brushup-blog --target batch`、data 再取得を伴う) に委ねる
 
-設計根拠: CLAUDE.md 原則 5「決定的な判定はコードで処理」。lint は `.claude/scripts/lib/svg-lint.mjs` を `/generate-article-charts` と共有。
+設計根拠: CLAUDE.md 原則 5「決定的な判定はコードで処理」。lint は `packages/svg-builder/src/lint/svg-lint.mjs` を `/generate-article-charts` と共有。
 
 ## 検査内容 (記事ごと)
 
@@ -76,7 +76,7 @@ select-brushup-candidates   → chartIssues を candidate に付与       [既�
 
 ## 関連
 
-- lint 本体: `.claude/scripts/lib/svg-lint.mjs`
+- lint 本体: `packages/svg-builder/src/lint/svg-lint.mjs`
 - 監査スクリプト: `.claude/scripts/blog/audit-chart-quality.mjs`
 - 描画 (決定的): `packages/svg-builder/`
 - 単一記事検証: `/generate-article-charts --validate`

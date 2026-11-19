@@ -35,7 +35,7 @@ import {
   lintScatterData,
   lintScatterParity,
   lintScatterQuality,
-} from '../lib/svg-lint.mjs';
+} from '../../../packages/svg-builder/src/lint/svg-lint.mjs';
 
 const PROJECT_ROOT = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),

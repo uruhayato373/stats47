@@ -22,7 +22,7 @@ import fs from "node:fs";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { isOfficialRate } from "./lib/ssds-rate-name.mjs";
+import { isOfficialRate } from "../../../packages/data-configs/src/estat/ssds-rate-name.mjs";
 import { buildRules, decideYearFormat, indexDefinitions } from "./lib/ssds-year-format.mjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");

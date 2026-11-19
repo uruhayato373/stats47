@@ -154,7 +154,7 @@ find .local/r2/app/blog -name "*.json" -path "*/data/*" | \
 
 | ツール | 用途 |
 |---|---|
-| `.claude/scripts/lib/svg-lint.mjs` | viewBox/width/height/ダークモードの低レベル lint + **`lintSvgSize`（カタログ別正規サイズ／アスペクト比統一・2026-06-21）** |
+| `packages/svg-builder/src/lint/svg-lint.mjs` | viewBox/width/height/ダークモードの低レベル lint + **`lintSvgSize`（カタログ別正規サイズ／アスペクト比統一・2026-06-21）** |
 | `.claude/scripts/blog/audit-chart-quality.mjs` | 全記事バッチ監査（内容 lint + **サイズ lint**）。本スキルよりも広範・パブリック R2 対応 |
 
 > **★アスペクト比統一 gate（2026-06-21）**: `lintSvgSize(filename, content)` が filename→chartType→正規 viewBox 幅

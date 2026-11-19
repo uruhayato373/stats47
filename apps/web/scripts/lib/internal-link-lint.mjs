@@ -1,4 +1,4 @@
-import { isPrefectureAreaCode } from "../../../packages/area/mirror/prefectures.cjs";
+import { isPrefectureAreaCode } from "../../../../packages/area/mirror/prefectures.cjs";
 /**
  * internal-link-lint — 記事内部リンクの「リンク先が実在するか」を決定的に検査する
  *
@@ -27,12 +27,12 @@ import { isPrefectureAreaCode } from "../../../packages/area/mirror/prefectures.
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { PREF_AREA_CODES } from "../../../packages/area/mirror/prefectures.cjs";
-import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
+import { PREF_AREA_CODES } from "../../../../packages/area/mirror/prefectures.cjs";
+import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 
 /**
  * リポジトリルートを上方向に探索して決める。
- * 相対段数 ("../../..") 固定や cwd 依存にすると、vitest / pre-commit / CI で
+ * 相対段数 ("../../../..") 固定や cwd 依存にすると、vitest / pre-commit / CI で
  * 解決に失敗しても **例外にならず空集合になり、lint が黙って全通しする** (fail-open)。
  * それが一番危険なので、マーカーで確実に特定し、見つからなければ即座に落とす。
  */

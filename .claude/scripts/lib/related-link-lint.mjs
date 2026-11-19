@@ -26,7 +26,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { datasetPath } from '../../../config/datasets.mjs';
-import { extractInternalLinks } from './internal-link-lint.mjs';
+import { extractInternalLinks } from '../../../apps/web/scripts/lib/internal-link-lint.mjs';
 
 const PROJECT_ROOT = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),

@@ -169,7 +169,7 @@ async function main(outDir: string): Promise<void> {
   // Relative registry import uses this worktree, not a node_modules link to another checkout.
   const { METRICS_REGISTRY } = await import("../src/registry.js");
   // Typed boundary for existing untyped JS; do not duplicate prefDim detection logic.
-  const normalizeUrl = new URL("../../../packages/estat-api/src/catalog/normalize.mjs", import.meta.url);
+  const normalizeUrl = new URL("../../estat-api/src/catalog/normalize.mjs", import.meta.url);
   const { summarizeMeta } = await import(normalizeUrl.href) as { summarizeMeta: (value: unknown) => CatalogSummary };
   const metrics = Object.values(METRICS_REGISTRY);
   const references = collectReferences(metrics);

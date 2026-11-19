@@ -9,7 +9,7 @@
  *   - <base>/<slug>/data/*.svg      (生成物)
  *   - <base>/<slug>/article.md の インライン <svg>  (手書き — 品質バラつきの主因)
  *
- * lint は .claude/scripts/lib/svg-lint.mjs を共有 (CLAUDE.md 原則 5: 決定的判定はコード)。
+ * lint は packages/svg-builder/src/lint/svg-lint.mjs を共有 (CLAUDE.md 原則 5: 決定的判定はコード)。
  *
  * Usage:
  *   node .claude/scripts/blog/audit-chart-quality.mjs [--base <dir>] [--json] [--out <path>]
@@ -45,7 +45,7 @@ import {
   lintScatterQuality,
   lintTileGridQuality,
   lintDarkPair,
-} from '../lib/svg-lint.mjs';
+} from '../../../packages/svg-builder/src/lint/svg-lint.mjs';
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);

@@ -25,7 +25,7 @@ import path from 'node:path';
 import { datasetDir } from '../../../config/datasets.mjs';
 import { prefectureShortName } from '../../../packages/area/src/utils/prefecture-short-name';
 import { R2_PUBLIC_BASE_URL } from '../../../packages/types/mirror/site-config.cjs';
-import { chartSourceShapeErrors } from '../lib/chart-source-schema.mjs';
+import { chartSourceShapeErrors } from '../../../packages/svg-builder/src/lint/chart-source-schema.mjs';
 import { PREF_NAMES } from '../../../packages/area/mirror/prefectures.cjs';
 import { matchScatterAxis, type ChartAxisRecord } from '../../../apps/admin/lib/type-chart-input';
 

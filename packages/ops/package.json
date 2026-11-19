@@ -7,6 +7,7 @@
     "./ads/ad-layout-ledger": "./src/ads/ad-layout-ledger.ts",
     "./note/catalog": "./src/note/catalog/index.ts",
     "./note/catalog/types": "./src/note/catalog/types.ts",
+    "./note/pop-cover-render": "./src/note/pop-cover-render.ts",
     "./page-quality/lib/git-diff": "./src/page-quality/lib/git-diff.ts",
     "./page-quality/templates": "./src/page-quality/templates.ts",
     "./*": "./src/*"
