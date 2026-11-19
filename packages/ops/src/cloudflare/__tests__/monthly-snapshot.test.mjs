@@ -7,7 +7,7 @@ import {
   daysInRange,
   evaluateBudgets,
   resolvePreviousAggregate,
-} from "../../cloudflare/monthly-snapshot.mjs";
+} from "../monthly-snapshot.mjs";
 
 function daily(requests, cpuUs) {
   return {

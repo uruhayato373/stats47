@@ -16,9 +16,9 @@ import {
   parseIndicatorFormulas,
   parseItemDefinitions,
   splitSurveys,
-} from "../../../../packages/ops/src/estat/ssds-year-format.mjs";
+} from "../ssds-year-format.mjs";
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "..");
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "..", "..");
 const readJson = (relative) => JSON.parse(fs.readFileSync(path.join(ROOT, relative), "utf8"));
 const definitions = readJson("data/estat/ssds-year-format/definitions.json");
 const decisions = readJson("data/estat/ssds-year-format/decisions.json");
@@ -291,7 +291,7 @@ function runGenerator(specs) {
   const batch = path.join(dir, "batch.json");
   fs.writeFileSync(batch, JSON.stringify(specs));
   try {
-    return spawnSync(process.execPath, [path.join(ROOT, ".claude/scripts/estat/gen-ssds-configs.mjs"), batch, "--dry-run"], { cwd: ROOT, encoding: "utf8" });
+    return spawnSync(process.execPath, [path.join(ROOT, "packages/ops/src/estat/gen-ssds-configs.mjs"), batch, "--dry-run"], { cwd: ROOT, encoding: "utf8" });
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
   }

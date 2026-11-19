@@ -1,9 +1,9 @@
 const assert = require("node:assert/strict");
 const test = require("node:test");
 
-const { carouselUrlsFor, ledgerPostTypeFor } = require("../../instagram/post-from-schedule.cjs");
+const { carouselUrlsFor, ledgerPostTypeFor } = require("../instagram-post-from-schedule.cjs");
 
-const { R2_PUBLIC_BASE_URL: R2 } = require("../../../../packages/types/mirror/site-config.cjs");
+const { R2_PUBLIC_BASE_URL: R2 } = require("../../../../types/mirror/site-config.cjs");
 const slides = [
   "slide-1-question-1080x1350.png",
   "slide-2-hint-1080x1350.png",
@@ -54,7 +54,7 @@ test("台帳の post_type はカルーセルだけ carousel、既存の単枚・
   assert.equal(ledgerPostTypeFor({}), "original");
 });
 
-const { selectDueEntry, shiftDate } = require("../../instagram/post-from-schedule.cjs");
+const { selectDueEntry, shiftDate } = require("../instagram-post-from-schedule.cjs");
 
 const e = (date, time, content_key) => ({ date, time, content_key, type: "carousel", domain: "d" });
 const ctx = (nowTime, posted = []) => ({
@@ -99,7 +99,7 @@ test("日付の繰り下げは月・年をまたぐ", () => {
 });
 
 // ---- 承認ゲート (2026-10-09 オーナー決定: 新規投稿は承認必須) ----
-const { selectDueEntry: selectDue } = require("../../instagram/post-from-schedule.cjs");
+const { selectDueEntry: selectDue } = require("../instagram-post-from-schedule.cjs");
 
 test("承認されていないエントリは時刻が来ても投稿せず blocked に分け、承認済みの次のエントリを選ぶ", () => {
   const entries = [

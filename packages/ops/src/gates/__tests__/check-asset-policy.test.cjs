@@ -6,8 +6,8 @@ const path = require("node:path");
 const test = require("node:test");
 const sharp = require("sharp");
 
-const ROOT = path.resolve(__dirname, "..", "..", "..", "..");
-const CHECKER = path.join(ROOT, ".claude/scripts/lib/check-asset-policy.cjs");
+const ROOT = path.resolve(__dirname, "..", "..", "..", "..", "..");
+const CHECKER = path.join(ROOT, "packages/ops/src/gates/check-asset-policy.cjs");
 
 async function fixture() {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "stats47-asset-policy-"));
@@ -18,7 +18,7 @@ async function fixture() {
   return { root, checker };
 }
 function run(f, args = ["--json"]) {
-  return spawnSync(process.execPath, [f.checker, ...args], { cwd: f.root, encoding: "utf8", env: { ...process.env, STATS47_SCAN_ROOT: f.root } });
+  return spawnSync(process.execPath, [f.checker, ...args], { cwd: f.root, encoding: "utf8", env: { ...process.env, STATS47_SCAN_ROOT: f.root, ASSET_POLICY_BASELINE: path.join(f.root, "asset-baseline.json") } });
 }
 
 test("有効な本文画像参照を受理する", async (t) => {

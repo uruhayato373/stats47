@@ -1,11 +1,25 @@
 {
-  "hash": "6ee3dcd070b48c40447e23deed0939e9570e8d8ce8eeb22dd106961d6cd63ae8",
-  "audited_at": "2026-11-19T11:55:22",
+  "hash": "cf4c7594d00896f82522c5da007f00be84b1928acf3dfd2f3151b2a3e1bb8f7c",
+  "audited_at": "2026-11-19T12:08:51",
   "files": [
-    ".claude/rules/skill-code-placement.md",
-    ".claude/scripts/lib/__tests__/check-claude-scripts-tests.test.mjs",
-    ".claude/scripts/lib/__tests__/move-script.test.mjs",
-    ".claude/scripts/lib/check-claude-scripts-tests.mjs",
-    ".claude/scripts/lib/move-script.mjs"
+    ".claude/scripts/cloudflare/monthly-snapshot.mjs",
+    ".claude/scripts/cloudflare/threshold-check.mjs",
+    ".claude/scripts/estat/audit-time-coverage.cjs",
+    ".claude/scripts/estat/gen-ssds-configs.mjs",
+    ".claude/scripts/instagram/post-from-schedule.cjs",
+    ".claude/scripts/lib/__tests__/latest-partition-usage-contract.test.mjs",
+    ".claude/scripts/lib/__tests__/x-catalog-rule-contract.test.cjs",
+    ".claude/scripts/lib/check-accessibility-static.cjs",
+    ".claude/scripts/lib/check-asset-policy.cjs",
+    ".claude/scripts/lib/check-image-generation-routes.mjs",
+    ".claude/scripts/lib/check-money-unit-audit.cjs",
+    ".claude/scripts/lib/check-next-support-window.cjs",
+    ".claude/scripts/lib/check-r2-route-ssg.cjs",
+    ".claude/scripts/lib/check-route-contract.cjs",
+    ".claude/scripts/lib/check-static-assets.cjs",
+    ".claude/scripts/lib/check-value-format.cjs",
+    ".claude/scripts/lib/check-web-estat-imports.cjs",
+    ".claude/scripts/lib/move-script.mjs",
+    ".claude/scripts/metrics/build-measurement-cycle.mjs"
   ]
 }

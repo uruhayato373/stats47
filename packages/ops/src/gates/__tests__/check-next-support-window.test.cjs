@@ -7,8 +7,8 @@ const os = require("node:os");
 const path = require("node:path");
 const test = require("node:test");
 
-const ROOT = path.resolve(__dirname, "..", "..", "..", "..");
-const CHECKER = path.join(ROOT, ".claude/scripts/lib/check-next-support-window.cjs");
+const ROOT = path.resolve(__dirname, "..", "..", "..", "..", "..");
+const CHECKER = path.join(ROOT, "packages/ops/src/gates/check-next-support-window.cjs");
 const { parseReleaseDates, UNSUPPORTED_FLAG } = require(CHECKER);
 
 /** OpenNext の helper.js と同じ形の期限表・next の package.json・apps/web の package.json を一時ディレクトリに作って checker を走らせる。 */

@@ -114,7 +114,7 @@
       "s3Client": 0,
       "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
     },
-    ".claude/scripts/instagram/post-from-schedule.cjs": {
+    "packages/ops/src/sns/instagram-post-from-schedule.cjs": {
       "stats": 0,
       "ranking": 0,
       "origin": 1,
@@ -177,7 +177,7 @@
       "s3Client": 0,
       "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
     },
-    ".claude/scripts/lib/check-r2-route-ssg.cjs": {
+    "packages/ops/src/gates/check-r2-route-ssg.cjs": {
       "stats": 0,
       "ranking": 1,
       "origin": 0,

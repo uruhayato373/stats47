@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createRequire } from "node:module";
-import { fetchStatsListPage, fetchMetaInfo, fetchStatsData, listAllTables } from "../../../../packages/ops/src/estat/catalog-api.mjs";
+import { fetchStatsListPage, fetchMetaInfo, fetchStatsData, listAllTables } from "../catalog-api.mjs";
 const require = createRequire(import.meta.url);
-const { extractYears, main, TARGETS } = require("../../estat/audit-time-coverage.cjs");
+const { extractYears, main, TARGETS } = require("../audit-time-coverage.cjs");
 const respond = (body) => new Response(JSON.stringify(body));
 test("catalog adapters preserve query/output shapes and use the shared limit/redaction", async (t) => {
   const calls = [];

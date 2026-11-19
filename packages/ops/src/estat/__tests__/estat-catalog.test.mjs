@@ -5,10 +5,10 @@ import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { loadMetricLinkage, loadPulled } from '../../../../packages/ops/src/estat/catalog-pulled.mjs';
+import { loadMetricLinkage, loadPulled } from '../catalog-pulled.mjs';
 
 test("getAppId は共通入口で CI の注入値を使う", () => {
-  const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../..");
+  const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../../..");
   const env = { ...process.env };
   delete env.NEXT_PUBLIC_ESTAT_APP_ID;
   const probe = (environment, expression) => spawnSync(process.execPath, [
@@ -39,7 +39,7 @@ import {
   normalizeTableRow,
   PREFECTURE_CODES,
   summarizeMeta,
-} from "../../../../packages/estat-api/src/catalog/normalize.mjs";
+} from "../../../../estat-api/src/catalog/normalize.mjs";
 import {
   buildPlan,
   checkListCompleteness,
@@ -49,7 +49,7 @@ import {
   recordFetchFailure,
   recordFetchSuccess,
   upsertTableRow,
-} from "../../../../packages/ops/src/estat/catalog-index.mjs";
+} from "../catalog-index.mjs";
 
 function classObj(id, name, items) {
   return { "@id": id, "@name": name, CLASS: items };

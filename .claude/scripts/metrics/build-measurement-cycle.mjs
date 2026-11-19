@@ -15,7 +15,7 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 
 import { assertDatasetShape } from "../../../packages/ops/src/datasets/dataset-shape.mjs";
 import { createRequire } from "node:module";
 import { join } from "node:path";
-import { evaluateRules, flatten } from "../cloudflare/threshold-check.mjs";
+import { evaluateRules, flatten } from "../../../packages/ops/src/cloudflare/threshold-check.mjs";
 import { PROJECT_ROOT, isoWeekToDateRange, toCsv } from "./lib/auth.mjs";
 import {
   summarizeAdminAuditChanges,

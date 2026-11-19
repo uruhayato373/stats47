@@ -17,7 +17,7 @@
       "appId": 1,
       "reason": "利用者向けのapp ID設定案内・再現コマンド"
     },
-    ".claude/scripts/lib/__tests__/estat-catalog.test.mjs": {
+    "packages/ops/src/estat/__tests__/estat-catalog.test.mjs": {
       "url": 0,
       "appId": 2,
       "reason": "テストの環境注入・リテラル検証"

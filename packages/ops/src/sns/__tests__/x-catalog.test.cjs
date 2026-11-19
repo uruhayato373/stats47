@@ -11,11 +11,10 @@ const os = require("node:os");
 const path = require("node:path");
 const test = require("node:test");
 
-const catalog = require("../../../../packages/ops/src/sns/x-catalog.cjs");
-const { datasetPath } = require("../../../../config/datasets.mjs");
+const catalog = require("../x-catalog.cjs");
+const { datasetPath } = require("../../../../../config/datasets.mjs");
 
-const ROOT = path.resolve(__dirname, "../../../..");
-const RULE_PATH = path.join(ROOT, ".claude/rules/sns-content-standards.md");
+const ROOT = path.resolve(__dirname, "../../../../..");
 
 function readLedger() {
   return JSON.parse(fs.readFileSync(path.join(ROOT, datasetPath("sns.x-catalog")), "utf8"));
@@ -70,14 +69,6 @@ test("台帳を書き換えると、上限・テンプレ・相性・画像種�
       );
     },
   );
-});
-
-test("rule の Markdown には機械が読む表を置かず、台帳の id を指す", () => {
-  const rule = fs.readFileSync(RULE_PATH, "utf8");
-  // アンカーが残っていると、表を直せば挙動が変わると読めてしまう。読む口も rule のパスを持たない
-  assert.doesNotMatch(rule, /<!-- x-catalog:/);
-  assert.match(rule, /sns\.x-catalog/);
-  assert.equal("RULES_PATH" in catalog, false);
 });
 
 test("形の契約に合わない台帳は、既定値を返さず例外にする", () => {

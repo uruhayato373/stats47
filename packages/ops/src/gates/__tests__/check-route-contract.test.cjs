@@ -5,14 +5,12 @@ const os = require("node:os");
 const path = require("node:path");
 const test = require("node:test");
 
-const ROOT = path.resolve(__dirname, "..", "..", "..", "..");
-const CHECKER = path.join(ROOT, ".claude/scripts/lib/check-route-contract.cjs");
+const ROOT = path.resolve(__dirname, "..", "..", "..", "..", "..");
+const CHECKER = path.join(ROOT, "packages/ops/src/gates/check-route-contract.cjs");
+const env = (root) => ({ ...process.env, STATS47_SCAN_ROOT: root, ROUTE_CONTRACT_BASELINE: path.join(root, "route-baseline.json") });
 function fixture() {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "stats47-route-contract-"));
-  const checker = path.join(root, ".claude/scripts/lib/check-route-contract.cjs");
-  fs.mkdirSync(path.dirname(checker), { recursive: true });
-  fs.copyFileSync(CHECKER, checker);
-  return { root, checker };
+  return { root, checker: CHECKER };
 }
 function page(item, route, source) {
   const file = path.join(item.root, "apps/web/src/app", route, "page.tsx");
@@ -20,7 +18,7 @@ function page(item, route, source) {
   fs.writeFileSync(file, source);
 }
 function run(item, args = []) {
-  const result = spawnSync(process.execPath, [item.checker, "--json", ...args], { cwd: item.root, encoding: "utf8" });
+  const result = spawnSync(process.execPath, [item.checker, "--json", ...args], { cwd: item.root, encoding: "utf8", env: env(item.root) });
   return { ...result, output: JSON.parse(result.stdout) };
 }
 
@@ -60,7 +58,7 @@ test("noindexとliteral sitemapの矛盾を検出する", (t) => {
 test("baseline内の既存違反は許容する", (t) => {
   const item = fixture(); t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
   page(item, "legacy", `export default function Page(){}`);
-  execFileSync(process.execPath, [item.checker, "--write-baseline"], { cwd: item.root });
+  execFileSync(process.execPath, [item.checker, "--write-baseline"], { cwd: item.root, env: env(item.root) });
   const result = run(item, ["--baseline"]);
   assert.equal(result.status, 0, result.stderr);
 });

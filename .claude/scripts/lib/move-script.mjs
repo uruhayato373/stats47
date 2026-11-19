@@ -100,7 +100,7 @@ function trackedFiles(root) {
 export function main(args = process.argv.slice(2)) {
   const rootFlag = args.indexOf("--root");
   const root = rootFlag >= 0 ? path.resolve(args[rootFlag + 1]) : fileURLToPath(new URL("../../../", import.meta.url));
-  const mapFile = args.find((arg, index) => !arg.startsWith("--") && index !== rootFlag + 1);
+  const mapFile = args.find((arg, index) => !arg.startsWith("--") && (rootFlag < 0 || index !== rootFlag + 1));
   if (!mapFile) throw new Error("usage: move-script.mjs <map.json> [--apply] [--root <dir>]");
   const apply = args.includes("--apply");
   const { moves } = JSON.parse(readFileSync(mapFile, "utf8"));

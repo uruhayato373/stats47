@@ -2,10 +2,11 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 
-import { evaluateRules, flatten } from "../../cloudflare/threshold-check.mjs";
+import { evaluateRules, flatten } from "../threshold-check.mjs";
+import { datasetDir } from "../../../../../config/datasets.mjs";
 
 const budgets = JSON.parse(readFileSync(new URL(
-  "../../../config/budgets/cloudflare-cost-improvement/budgets-daily.json",
+  `../../../../../${datasetDir("improvement.budgets")}/cloudflare-cost-improvement/budgets-daily.json`,
   import.meta.url,
 ), "utf-8"));
 
@@ -83,7 +84,7 @@ import {
   cycleStartDate,
   estimateWorkersCostUsd,
   evaluateCyclePace,
-} from "../../cloudflare/threshold-check.mjs";
+} from "../threshold-check.mjs";
 
 test("flatten は CPU を ms で含み、null なら workers_cpu_ms キー自体を入れない", () => {
   const withCpu = createSnapshot(undefined);

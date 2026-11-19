@@ -41,7 +41,7 @@ test("出典カタログのランタイム描画は許可するがコメント�
 });
 
 test("実際の出典カタログもR2をビルド時に固定しないroute契約を維持する", () => {
-  const source = fs.readFileSync(path.resolve(__dirname, "../../../..", catalogRoute), "utf8");
+  const source = fs.readFileSync(path.resolve(__dirname, "../../../../..", catalogRoute), "utf8");
   assert.match(source, /export\s+const\s+dynamic\s*=\s*['"]force-dynamic['"]/);
   assert.equal(checkCatalog(source).exitCode, 0);
 });

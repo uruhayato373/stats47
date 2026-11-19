@@ -5,20 +5,20 @@ const os = require("node:os");
 const path = require("node:path");
 const test = require("node:test");
 
-const ROOT = path.resolve(__dirname, "..", "..", "..", "..");
-const CHECKER = path.join(ROOT, ".claude/scripts/lib/check-accessibility-static.cjs");
+const ROOT = path.resolve(__dirname, "..", "..", "..", "..", "..");
+const CHECKER = path.join(ROOT, "packages/ops/src/gates/check-accessibility-static.cjs");
+const env = (root) => ({ ...process.env, NODE_PATH: path.join(ROOT, "node_modules"), STATS47_SCAN_ROOT: root, ACCESSIBILITY_BASELINE: path.join(root, "a11y-baseline.json") });
 function fixture(source) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "stats47-a11y-static-"));
-  const checker = path.join(root, ".claude/scripts/lib/check-accessibility-static.cjs");
+  const checker = CHECKER;
   const component = path.join(root, "apps/web/src/Component.tsx");
-  fs.mkdirSync(path.dirname(checker), { recursive: true });
   fs.mkdirSync(path.dirname(component), { recursive: true });
-  fs.copyFileSync(CHECKER, checker); fs.writeFileSync(component, source);
+  fs.writeFileSync(component, source);
   return { root, checker };
 }
 function run(item, args = []) {
   const result = spawnSync(process.execPath, [item.checker, "--json", ...args], {
-    cwd: item.root, encoding: "utf8", env: { ...process.env, NODE_PATH: path.join(ROOT, "node_modules") },
+    cwd: item.root, encoding: "utf8", env: env(item.root),
   });
   return { ...result, output: JSON.parse(result.stdout) };
 }
@@ -66,6 +66,6 @@ test("click-only divと名前のないinputを検出する", (t) => {
 test("baseline内の既存違反は許容する", (t) => {
   const item = fixture(`export const C=()=> <img/>`);
   t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
-  execFileSync(process.execPath, [item.checker, "--write-baseline"], { cwd: item.root, env: { ...process.env, NODE_PATH: path.join(ROOT, "node_modules") } });
+  execFileSync(process.execPath, [item.checker, "--write-baseline"], { cwd: item.root, env: env(item.root) });
   const result = run(item,["--baseline"]); assert.equal(result.status,0,result.stderr);
 });

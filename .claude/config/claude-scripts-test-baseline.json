@@ -9,6 +9,8 @@
     "model-usage"
   ],
   "harness": {
+    ".claude/scripts/lib/__tests__/x-catalog-rule-contract.test.cjs": "規則の文言が台帳の id を指すことの検査のテスト",
+    ".claude/scripts/lib/__tests__/latest-partition-usage-contract.test.mjs": "agent の定義とスクリプトが最新年の選び方の部品を使うことの検査のテスト",
     ".claude/scripts/lib/__tests__/admin-ci-contract.test.cjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/alert-issue-lifecycle.test.cjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/audit-workflow-policy.test.cjs": "workflow の YAML の契約のテスト",
@@ -137,7 +139,7 @@
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     },
     "lib": {
-      "count": 28,
+      "count": 9,
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     },
     "management": {

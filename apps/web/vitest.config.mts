@@ -46,6 +46,7 @@ export default defineConfig({
       "**/tests/e2e/**", // E2E tests are handled by Playwright
       "**/tests/smoke/**", // Smoke tests are handled by Playwright
       "**/tests/visual/**", // Visual regression tests are handled by Playwright
+      "scripts/lib/__tests__/internal-link-geo.test.mjs", // node:test のテスト (npm run test:claude-lib-contracts)
     ],
     coverage: {
       provider: "v8",

@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { extractInternalLinks, lintInternalLinks } from '../../../../apps/web/scripts/lib/internal-link-lint.mjs';
+import { extractInternalLinks, lintInternalLinks } from '../internal-link-lint.mjs';
 
 test('Geo canonical・方法・県途中データの3リンクを数える', () => {
   const text = '[分析](/geo/population-land-price)\n[方法](https://stats47.jp/geo/method)\n<source-link href="/geo/data/population-land-price/13">検算</source-link>';

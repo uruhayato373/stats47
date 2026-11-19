@@ -5,8 +5,8 @@ const os = require("node:os");
 const path = require("node:path");
 const test = require("node:test");
 
-const ROOT = path.resolve(__dirname, "..", "..", "..", "..");
-const CHECKER = path.join(ROOT, ".claude/scripts/lib/check-static-assets.cjs");
+const ROOT = path.resolve(__dirname, "..", "..", "..", "..", "..");
+const CHECKER = path.join(ROOT, "packages/ops/src/gates/check-static-assets.cjs");
 
 function png(width, height) {
   const buffer = Buffer.alloc(24);
@@ -31,15 +31,13 @@ function ico(sizes) {
 
 function createFixture() {
   const fixtureRoot = fs.mkdtempSync(path.join(os.tmpdir(), "stats47-static-assets-"));
-  const checkerPath = path.join(fixtureRoot, ".claude/scripts/lib/check-static-assets.cjs");
+  const checkerPath = CHECKER;
   const manifestPath = path.join(fixtureRoot, "apps/web/src/app/manifest.ts");
   const metadataPath = path.join(fixtureRoot, "apps/web/src/lib/metadata/root-metadata.ts");
   const publicRoot = path.join(fixtureRoot, "apps/web/public");
-  fs.mkdirSync(path.dirname(checkerPath), { recursive: true });
   fs.mkdirSync(path.dirname(manifestPath), { recursive: true });
   fs.mkdirSync(path.dirname(metadataPath), { recursive: true });
   fs.mkdirSync(publicRoot, { recursive: true });
-  fs.copyFileSync(CHECKER, checkerPath);
   fs.writeFileSync(
     manifestPath,
     `icons: [
@@ -67,6 +65,7 @@ function run(fixture) {
   const result = spawnSync(process.execPath, [fixture.checkerPath, "--json"], {
     cwd: fixture.fixtureRoot,
     encoding: "utf8",
+    env: { ...process.env, STATS47_SCAN_ROOT: fixture.fixtureRoot },
   });
   return { ...result, output: JSON.parse(result.stdout) };
 }

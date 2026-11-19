@@ -168,6 +168,13 @@
       ]
     },
     {
+      "name": "ASSET_POLICY_EXTRA_DIRS",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "AUTH_SECRET",
       "visibility": "secret",
       "contexts": [
@@ -804,6 +811,13 @@
     },
     {
       "name": "MLIT_API_KEY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "MONEY_UNIT_AUDIT_BASELINE",
       "visibility": "server",
       "contexts": [
         "process"
